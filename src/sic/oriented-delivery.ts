@@ -1,9 +1,11 @@
 import { orientedCouplingInitial, orientedCouplingScene, orientedCouplingTile } from '../logos-engine/v6-oriented-coupling.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const orientedDeliveryId = 'sic_oriented_delivery';
+export const verifyOrientedDeliveryId = 'sic_verify_oriented_delivery';
 
 type Geometry = { pitch: number; phase: NativePoint; core: number; background: number; rest_shell: number;
   targets: NativePoint[]; initial_boxes: NativePoint[] };
@@ -88,11 +90,15 @@ function planDelivery(local: State, scene: Scene, rows: NativeRows, commands: Re
   return choices[0]?.step ?? null;
 }
 
-export function createSicOrientedDelivery(): NativeFamily<Proposal> {
+export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: orientedDeliveryId,
-    propose(observation, rows, _inputs, remaining, execution) {
+    id: verifyOrientedDeliveryId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !Object.keys(labels).every(input => observation.available_action_refs.includes(input))
         || !observation.available_action_refs.includes('ACTION5') || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -119,12 +125,12 @@ export function createSicOrientedDelivery(): NativeFamily<Proposal> {
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
       const known = step.intent === 'motion' ? (local.held ? local.loaded : local.free)[step.input] : null;
       const mode = execution?.reasoningMode ?? 'exploration';
-      const offer = { input: step.input, expected: known && step.prediction ? step.prediction.pose : null, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        access: known ? offer : null, probe: !known && (step.intent === 'motion' || !Object.keys(local.loaded).length) ? offer : null,
-        interaction: step.intent !== 'motion' && Object.keys(local.loaded).length ? offer : null });
-      if (!selected) return null;
-      const strategy = selected.id, label = navigationPrimitives[strategy], parent = 'G_official_completion';
+      const knownInteraction = step.intent !== 'motion' && Object.keys(local.loaded).length > 0;
+      const facts = { routeSupported: !!known, knownInteraction, eligibleProbe: !known && !knownInteraction, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = known ? 'P07' : knownInteraction ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const label = navigationPrimitives[strategy], parent = 'G_official_completion';
       const situation = step.intent === 'attach' ? 'Test whether the object in front attaches'
         : step.intent === 'release' ? 'Test whether the part stays in its receiving cell'
           : local.held ? 'Move while checking that the part keeps its offset' : 'Approach the next part and bring it in front of the carrier';
@@ -132,12 +138,16 @@ export function createSicOrientedDelivery(): NativeFamily<Proposal> {
         subjects: ['oriented_carrier', 'part_in_front', 'receiving_region'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_depositing_compatible_parts' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'oriented-delivery:' + need.id, action = { action_ref: selected.plan.input, data: {} }, actions = [action];
+      const id = 'oriented-delivery:' + need.id, action = { action_ref: step.input, data: {} }, actions = [action];
       const prediction = known ? step.prediction : null;
-      return { status: 'proposed', kind: orientedDeliveryId, actions, steps: [{ action, expected_after: prediction }],
+      return { status: 'proposed', kind: verifyOrientedDeliveryId, actions, steps: [{ action, expected_after: prediction }],
         local, scene, step, needId: need.id, attempt: unique(step),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Bring the framed parts into the receiving region', situation, evidence, agenda: entries, mode, triggerCard: card,
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Bring the framed parts into the receiving region', situation, evidence, agenda: [], mode,
+          triggerCard: decision.receipt.workflow,
           actor: tileBox(geometry, scene.pose), cargo: local.held ? tileBox(geometry, local.held) : invited ? tileBox(geometry, ahead) : null,
           target: step.target ? tileBox(geometry, step.target) : null },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,

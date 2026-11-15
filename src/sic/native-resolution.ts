@@ -5,7 +5,7 @@ import { readControlEffectTrigger } from './control-effect-trigger.ts';
 import { contactRecoveryStrategies, isContactStrategy, isRecoveryStop, rootedRecoveryStrategy,
   type ContactRecoveryNeed, type ContactStrategy } from './active-recovery.ts';
 import type { AgendaEntry } from './strategy-agenda.ts';
-import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts';
+import { orderedContactId, orderedContactStrategies, verifyContactOrderId } from './ordered-contact.ts';
 import { cavityAccessId, cavityStrategies } from './cavity-access.ts';
 import { publicInputExplorationId, publicInputStrategies } from './public-input-exploration.ts';
 import { recheckDirectionalControlsId, recheckDirectionalControlsStrategies } from './recheck-directional-controls.ts';
@@ -47,11 +47,11 @@ import { windowRelationId, windowRelationStrategies } from './window-relation.ts
 import { animationContactId, animationContactStrategies, learnAnimationContactId } from './animation-contact.ts';
 import { coordinateObservedMotionId, reflectedPlacementId, reflectedPlacementStrategies } from './reflected-placement.ts';
 import { learnMaterialAssemblyId, materialAssemblyId, materialAssemblyStrategies } from './material-assembly.ts';
-import { coupledMotionId, coupledMotionStrategies } from './coupled-motion.ts';
+import { coupledMotionId, coupledMotionStrategies, verifyCoupledRouteId } from './coupled-motion.ts';
 import { materialRouteId, materialRouteStrategies } from './material-route.ts';
 import { inventoryAccessId, inventoryAccessStrategies } from './inventory-access.ts';
 import { replayAccessId } from './replay-access.ts';
-import { orientedDeliveryId } from './oriented-delivery.ts';
+import { orientedDeliveryId, verifyOrientedDeliveryId } from './oriented-delivery.ts';
 import { indicatedJumpId, learnIndicatedJumpId } from './indicated-jump.ts';
 import { highlightedRouteId, learnHighlightedRouteId } from './highlighted-route.ts';
 import { learnPairedPassageId, pairedPassageId } from './paired-passage.ts';
@@ -486,7 +486,8 @@ export function readNativeResolution(agent: {
     : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId
       || family === verifySlotPermutationId || family === verifyPreviewPlacementId || family === verifyReferencePlacementId
       || family === verifyProfileTransferId || family === verifyCaptureRouteId || family === verifyMarkerPlacementId
-      || family === verifyFrameContactId) ? inventoryAccessStrategies
+      || family === verifyFrameContactId || family === verifyContactOrderId || family === verifyCoupledRouteId
+      || family === verifyOrientedDeliveryId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -968,7 +969,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === orientedDeliveryId) {
+  if (situationCard && (family === orientedDeliveryId || family === verifyOrientedDeliveryId)) {
     for (const [field, label] of [['actor', 'Oriented carrier'], ['cargo', 'Part at current contact'], ['target', 'Part or candidate receiving cell']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
@@ -997,7 +998,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === coupledMotionId) {
+  if (situationCard && (family === coupledMotionId || family === verifyCoupledRouteId)) {
     for (const [field, label] of [['members', 'Controlled piece'], ['nextMembers', 'Projected position']] as const) {
       if (Array.isArray(card?.[field])) for (const [index, current] of card[field].entries()) {
         const box = bounds(current);

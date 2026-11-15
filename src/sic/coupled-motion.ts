@@ -1,23 +1,16 @@
 import { matchCoupledPair, measureCoupledPairs, type CoupledPair, type CoupledPairBox, type CoupledPairDelta } from '../logos-engine/v6-coupled-pair-observation.ts';
 import { jointCoupledPairRoute, type CoupledPairRoute } from '../logos-engine/v6-coupled-pair-route.ts';
-import type { NativeBox, NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const coupledMotionId = 'sic_coupled_motion';
+export const verifyCoupledRouteId = 'sic_verify_coupled_route';
 export const coupledMotionStrategies = {
   measure_pair_displacement: 'Test a direction and compare the movement of both pieces',
   route_coupled_pieces: 'Move both pieces toward a possible meeting point',
 } as const;
 
-const graph = compileStrategyGraph({
-  id: 'bring_jointly_controlled_pieces_together', version: 1, order: 'FALLBACK',
-  priorities: ['route_coupled_pieces', 'measure_pair_displacement'],
-  strategies: {
-    measure_pair_displacement: [{ fact: 'probe', expected: true, label: 'Two matching pieces sit on the same grid and an untested direction may reveal how they move together' }],
-    route_coupled_pieces: [{ fact: 'route', expected: true, label: 'Both axes have consistent measured effects and the observed floor supports a candidate joint route' }],
-  },
-}, ['probe', 'route']);
 
 type Sample = { input: string; first: CoupledPairDelta; second: CoupledPairDelta };
 type State = { epoch: number; pair: CoupledPair; samples: Sample[]; floors: number[]; evidence: string[];
@@ -72,11 +65,15 @@ function routeFromSamples(state: State, rows: NativeRows, available: readonly st
   return jointCoupledPairRoute(rows, state.pair, controls, state.floors, signs.map(axis => [...axis][0]!), Math.min(40, remaining), state.evidence, true);
 }
 
-export function createSicCoupledMotion(): NativeFamily<Proposal> {
+export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: coupledMotionId,
-    propose(observation, rows, _inputs, remaining) {
+    id: verifyCoupledRouteId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       const available = keys.filter(input => observation.available_action_refs.includes(input));
       if (remaining < 1 || available.length < 3 || rows.length < 3) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -95,27 +92,31 @@ export function createSicCoupledMotion(): NativeFamily<Proposal> {
         : !untested ? routeFromSamples(local, rows, available, remaining) : null;
       const first = route?.actions[0];
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({
-        graph, mode: 'active',
-        facts: { route: { value: !!first, evidence }, probe: { value: !!untested, evidence } },
-        planners: {
-          route_coupled_pieces: (): Candidate | null => first && route ? { input: first, route: { actions: route.actions, expected: route.expected } } : null,
-          measure_pair_displacement: () => untested ? { input: untested, route: null } : null,
-        },
-      });
-      if (!selected) return null;
-      const candidate = selected.plan, strategy = selected.id, label = coupledMotionStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? (first ? 'solving' : 'exploration');
+      const facts = { routeSupported: !!first, eligibleProbe: !!untested, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
+      const candidate: Candidate | null = strategy === 'P07'
+        ? first && route ? { input: first, route: { actions: route.actions, expected: route.expected } } : null
+        : untested ? { input: untested, route: null } : null;
+      if (!candidate) return null;
+      const label = strategy === 'P07' ? coupledMotionStrategies.route_coupled_pieces : coupledMotionStrategies.measure_pair_displacement;
+      const parent = 'G_official_completion';
       const objective = { kind: 'bring_jointly_controlled_pieces_together', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['first_piece', 'second_piece', 'shared_controls'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_the_joint_meeting_test' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'coupled-motion:' + need.id;
       const action = { action_ref: candidate.input, data: {} }, actions = [action];
-      return { status: 'proposed', kind: coupledMotionId, candidate, local, actions, needId: need.id,
+      return { status: 'proposed', kind: verifyCoupledRouteId, candidate, local, actions, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: [{ action, expected_after: candidate.route?.expected[0] ?? null }],
-        sicSituationCard: { strategy, need: 'Find how to bring together pieces that share controls', situation: label, evidence, agenda: entries,
-          mode: candidate.route ? 'solving' : 'exploration', members: local.pair.boxes.map(displayBox),
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Find how to bring together pieces that share controls', situation: label, evidence, agenda: [],
+          mode, triggerCard: decision.receipt.workflow, members: local.pair.boxes.map(displayBox),
           nextMembers: candidate.route?.expected[0]?.map(displayBox) ?? [] },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],

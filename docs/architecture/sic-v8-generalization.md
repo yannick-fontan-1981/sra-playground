@@ -627,3 +627,13 @@ KATA `cce7cd4d173da4bd2f683c32d9d6ea147073a58eb1b7b202e6b64a483a8e7109`. VOIS `c
 Les trois jeux conservent leurs gains avec palette permutée et nom neutralisé. Désactiver P07 au premier trajet laisse RE86 et SWCH ouverts au budget de référence. Sur DAME, les cases d’arrivée offertes suffisent aux essais P05 pour reproduire le même gain. RE86 reproduit aussi les deux niveaux déjà acquis en 73 commandes, avec les mêmes retours.
 
 DAME `cc8a46aa966f6d1bcccf601d1d6eda435a22d2c802a9a6f8355a572e088dbb92`. RE86 `2e761f7e86ac527a3257dbdc72d5a86342d33c00ea1a92dce2bc7951bfbbfc61`. SWCH `c73007473fee951eb29663e83927e436f8c26b83c12e2fd88c90da2979355d07`.
+
+### Réviser un trajet quand un contact déplace plusieurs pièces
+
+**SK48** retrouve les 19 commandes de son niveau 1 après retrait de l’ancien sélecteur. La carte `sic.choose_contact_response.choose` choisit le fournisseur de mesure ou de trajet à partir des preuves disponibles. Après quatre essais P05, elle applique le trajet mesuré, puis demande sa révision quand le retour de la douzième commande montre que plusieurs pièces se déplacent ensemble. Les deux niveaux déjà acquis sont reproduits en 56 commandes, avec la même empreinte `421bc40521294b8860233d93ee249f7c1b5d87ffb623dfcf4326a455c5f65614`.
+
+Désactiver le premier trajet après les quatre essais laisse le niveau ouvert. Désactiver la révision après le retour contradictoire fait choisir P02 pour retester la composition de contact acquise. Ce deuxième essai reproduit le gain et la trajectoire en 19 commandes.
+
+**M0R0** retrouve ses 19 commandes. Après quatre essais, la même carte qui guide l’approche d’un cadre choisit le trajet qui tient compte des déplacements des deux pièces. **WA30** retrouve ses 26 commandes. La carte sépare les essais sur le porteur encore libre, le déplacement avec la pièce attachée et le test de dépôt. Désactiver P07 à sa première utilisation laisse les deux niveaux ouverts aux budgets de référence.
+
+SK48 `99b977093936446832060fad6f5abf416beaa1a2f13630c98f9a6e21046daa5a`. M0R0 `7a4a5f9132ebaf038bf0ec96697749301b7c1e1b65ac0388de0925b0cfb94e98`. WA30 `b8590d9cd1f336a57ab225ee2221c5dad1bb5bc156b281cd9fce79e6b4889dd0`.

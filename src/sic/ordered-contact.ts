@@ -3,20 +3,23 @@ import { rootedLineEffect, rootedLineModel } from '../logos-engine/v6-rooted-lin
 import { planCellPush, witnessedCellPush } from '../logos-engine/v6-rooted-line-revision.ts';
 import { pythonEqual as equal } from '../logos-engine/v6-operations.ts';
 import { searchPiercingPlans } from '../logos-engine/v5-piercing-plan.ts';
-import type { NativeCommand, NativeFamily, NativeObservation, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { digest } from '../logos-engine/canonical.ts';
+import type { CompiledModule } from '../logos-engine/ir.ts';
+import type { NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { RecoveryPack } from './active-recovery.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { situationChoiceWorkflow } from './situation-choice-workflow.ts';
 import { planOrderedLattice } from './contact-lattice.ts';
 
 export const orderedContactId = 'sic_ordered_contact';
+export const verifyContactOrderId = 'sic_verify_contact_order';
 type EvidenceRow = NonNullable<ReturnType<typeof rootedLineEffect>>;
 type Projection = ReturnType<typeof physicalRootedLine>;
 type Configuration = Parameters<typeof projectedRootedLine>[0];
 type Memory = { epoch: number; tried: string[]; effects: Record<string, EvidenceRow>;
   counterexample: readonly string[]; retained: Configuration | null; refused: boolean; transferableContact: readonly string[] };
 type Plan = { command: NativeCommand; prediction: Projection | null; distance: number | null; configuration: Configuration | null };
-type ContactProposal = NativeProposal & { contact: Plan; strategy: string; needId: string };
+type ContactProposal = NativeProposal & { contact: Plan; strategy: ContactPhase; needId: string };
 const empty: Memory = { epoch: 0, tried: [], effects: {}, counterexample: [], retained: null, refused: false, transferableContact: [] };
 const objective = 'G_official_completion';
 export const orderedContactStrategies = {
@@ -31,20 +34,30 @@ const situations = {
   revise_contact_chain: ['Exploration', 'The last model missed a displacement that affected several pieces.'],
   revalidate_contact_composition: ['Assimilation', 'An observed contact effect can be tested against the new board and reference order.'],
 } as const;
-const graph = compileStrategyGraph({
-  id: 'follow_reference_order', version: 1, order: 'FALLBACK',
-  priorities: ['learn_command_displacement', 'revise_contact_chain', 'revalidate_contact_composition', 'order_components_by_contact'],
-  strategies: {
-    learn_command_displacement: [{ fact: 'unmeasuredInput', expected: true, label: 'A current command effect needs measuring' }],
-    revise_contact_chain: [{ fact: 'contactChain', expected: true, label: 'The return shows a chain displaced through contact' }],
-    revalidate_contact_composition: [{ fact: 'transferableContact', expected: true, label: 'A preceding return showed the chain moving through contact' }],
-    order_components_by_contact: [{ fact: 'unmeasuredInput', expected: false, label: 'No remaining calibration command' },
-      { fact: 'contactChain', expected: false, label: 'No correction of the contact model has been observed' }],
-  },
-}, ['unmeasuredInput', 'contactChain', 'transferableContact']);
+const contactPrimitives = {
+  learn_command_displacement: 'P05',
+  revise_contact_chain: 'P07',
+  revalidate_contact_composition: 'P02',
+  order_components_by_contact: 'P07',
+} as const;
+type ContactPhase = keyof typeof contactPrimitives;
+const phases = Object.keys(contactPrimitives) as ContactPhase[];
+const moduleId = 'sic.choose_contact_response';
+export const chooseContactResponse = moduleId + '.choose';
 
-export function createSicOrderedContact(policy: Parameters<typeof rootedLineModel>[0], limits: RecoveryPack): NativeFamily<ContactProposal> {
+export async function contactChoiceModule(): Promise<CompiledModule> {
+  const workflows = [situationChoiceWorkflow(chooseContactResponse, phases.map(phase => ({ situation: phase, strategy: phase })))];
+  const hash = await digest(workflows);
+  return { module_id: moduleId, source_name: 'src/sic/ordered-contact.ts', source_hash: hash, semantic_hash: hash, imports: [], workflows };
+}
+
+function contactPhase(value: unknown): value is ContactPhase {
+  return typeof value === 'string' && Object.hasOwn(contactPrimitives, value);
+}
+
+export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLineModel>[0], limits: RecoveryPack): NativeFamily<ContactProposal> {
   let memory: Memory = structuredClone(empty);
+  let decide: NativeProgramHandle | undefined;
   function current(epoch: number): Memory {
     return memory.epoch === epoch ? memory : { ...structuredClone(empty), epoch, effects: memory.effects,
       transferableContact: memory.transferableContact };
@@ -53,8 +66,11 @@ export function createSicOrderedContact(policy: Parameters<typeof rootedLineMode
     return before.level_epoch !== after.level_epoch || before.levels_completed !== after.levels_completed || before.state !== after.state;
   }
   return {
-    id: orderedContactId,
-    propose(observation, rows, inputs, remaining, execution) {
+    id: verifyContactOrderId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseContactResponse, {}, await contactChoiceModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !policy) return null;
       const scene = measureRootedLine(rows);
       if (!scene) return null;
@@ -76,52 +92,67 @@ export function createSicOrderedContact(policy: Parameters<typeof rootedLineMode
         return command ? { command, prediction, distance, configuration } : null;
       };
       const depth = Math.min(limits.maxDepth, remaining, execution?.remainingLevelActions ?? remaining);
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active',
-        facts: {
-          unmeasuredInput: { value: !!unmeasured, evidence: [ref] },
-          contactChain: { value: !!counterexample.length, evidence: [ref, ...counterexample] },
-          transferableContact: { value: !!transferableContact.length, evidence: [ref, ...transferableContact] },
+      const facts = {
+        learn_command_displacement: !!unmeasured,
+        revise_contact_chain: !!counterexample.length,
+        revalidate_contact_composition: !!transferableContact.length,
+        order_components_by_contact: !unmeasured && !counterexample.length,
+        mode: execution?.reasoningMode ?? 'exploration',
+      };
+      const planners: Record<ContactPhase, () => Plan | null> = {
+        learn_command_displacement: () => unmeasured ? planFrom(unmeasured) : null,
+        revise_contact_chain: () => {
+          const revised = planCellPush(scene, currentEffects, depth, limits.maxNodes, shouldStop);
+          return revised ? planFrom(revised.command, revised.prediction, revised.predictedGoalDistance) : null;
         },
-        planners: {
-          learn_command_displacement: () => unmeasured ? planFrom(unmeasured) : null,
-          revise_contact_chain: () => {
-            const revised = planCellPush(scene, currentEffects, depth, limits.maxNodes, shouldStop);
-            return revised ? planFrom(revised.command, revised.prediction, revised.predictedGoalDistance) : null;
-          },
-          revalidate_contact_composition: () => {
-            const revised = planOrderedLattice(scene as Parameters<typeof planOrderedLattice>[0],
-              Object.values(currentEffects).map(effect => ({
-                action_ref: effect.action_ref, extent_delta: effect.extent_delta, root_translation: effect.root_translation,
-              })), depth, limits.maxNodes, shouldStop);
-            return revised ? planFrom(revised.command, revised.prediction, revised.distance) : null;
-          },
-          order_components_by_contact: () => {
-            if (shouldStop() || !Object.keys(currentEffects).length) return null;
-            const configuration = retained && equal(projectedRootedLine(retained), physicalRootedLine(scene))
-              ? { ...retained, frame_ref: ref } : rootedLineConfiguration(scene, ref, observation.level_epoch);
-            const result = searchPiercingPlans({ configuration, effects: Object.values(currentEffects), models: [rootedLineModel(policy)],
-              goal_requested_root_ref: 'current_root', goal_requested_type_order: [...scene.order], max_microsteps: policy.max_microsteps,
-              max_depth: depth, max_nodes: limits.maxNodes, max_plans: 1 }, { now, deadlineMs, shouldStop });
-            const plan = result.plans.find((offer: { effects: unknown[] }) => offer.effects.length > 0);
-            return plan ? planFrom(plan.effects[0].action_ref, projectedRootedLine(plan.steps[0].configuration),
-              plan.effects.length, plan.steps[0].configuration) : null;
-          },
+        revalidate_contact_composition: () => {
+          const revised = planOrderedLattice(scene as Parameters<typeof planOrderedLattice>[0],
+            Object.values(currentEffects).map(effect => ({
+              action_ref: effect.action_ref, extent_delta: effect.extent_delta, root_translation: effect.root_translation,
+            })), depth, limits.maxNodes, shouldStop);
+          return revised ? planFrom(revised.command, revised.prediction, revised.distance) : null;
         },
-      });
+        order_components_by_contact: () => {
+          if (shouldStop() || !Object.keys(currentEffects).length) return null;
+          const configuration = retained && equal(projectedRootedLine(retained), physicalRootedLine(scene))
+            ? { ...retained, frame_ref: ref } : rootedLineConfiguration(scene, ref, observation.level_epoch);
+          const result = searchPiercingPlans({ configuration, effects: Object.values(currentEffects), models: [rootedLineModel(policy)],
+            goal_requested_root_ref: 'current_root', goal_requested_type_order: [...scene.order], max_microsteps: policy.max_microsteps,
+            max_depth: depth, max_nodes: limits.maxNodes, max_plans: 1 }, { now, deadlineMs, shouldStop });
+          const plan = result.plans.find((offer: { effects: unknown[] }) => offer.effects.length > 0);
+          return plan ? planFrom(plan.effects[0].action_ref, projectedRootedLine(plan.steps[0].configuration),
+            plan.effects.length, plan.steps[0].configuration) : null;
+        },
+      };
+      const selectPlan = async () => {
+        while (!shouldStop()) {
+          const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+          const phase = decision?.result;
+          if (!decision || !contactPhase(phase) || !facts[phase]) return null;
+          const plan = planners[phase]();
+          if (plan) return { phase, plan, decision };
+          facts[phase] = false;
+        }
+        return null;
+      };
+      const selected = await selectPlan();
       if (!selected || shouldStop()) return null;
-      const { id: strategy, plan } = selected;
-      const goal = { kind: strategy === 'learn_command_displacement' ? 'measure_control_effect' : 'achieve_observed_reference_order',
+      const { phase, plan, decision } = selected;
+      const strategy = contactPrimitives[phase];
+      const goal = { kind: phase === 'learn_command_displacement' ? 'measure_control_effect' : 'achieve_observed_reference_order',
         scope: ref.split(':revision:', 1)[0]!, subjects: [scene.layout as string],
-        parentObjective: objective, satisfactionContract: strategy === 'learn_command_displacement'
+        parentObjective: objective, satisfactionContract: phase === 'learn_command_displacement'
           ? 'observe_displacement_in_public_return' : 'observe_game_advance_after_alignment' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
-      const id = `contact:${need.id}`, label = orderedContactStrategies[strategy], actions = [plan.command];
-      const [mode, situation] = situations[strategy];
-      return { status: 'proposed', kind: orderedContactId, strategy, contact: plan, needId: need.id, actions,
+      const id = `contact:${need.id}`, label = orderedContactStrategies[phase], actions = [plan.command];
+      const [mode, situation] = situations[phase];
+      return { status: 'proposed', kind: verifyContactOrderId, strategy: phase, contact: plan, needId: need.id, actions,
         rooted_line_plan: { scene: { root: scene.root, pieces: scene.pieces.slice(0, 8) } },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: { ...facts, phase } },
         sicSituationCard: { strategy, need: goal.kind === 'measure_control_effect' ? 'Understand a command' : 'Reproduce the visible reference order',
-          mode, situation, agenda: entries, evidence: strategy === 'revise_contact_chain' ? counterexample
-            : strategy === 'revalidate_contact_composition' ? transferableContact : [], distance: plan.distance },
+          mode, situation, agenda: [], triggerCard: decision.receipt.workflow, evidence: proof, distance: plan.distance },
         steps: [{ action: plan.command, expected_after: plan.prediction }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
