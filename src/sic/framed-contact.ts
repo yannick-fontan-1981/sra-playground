@@ -6,8 +6,8 @@ import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts
 import { measureInsetContact } from './inset-contact.ts';
 import { measureDirectionalMotion, type DirectionalMotion } from './observed-translation.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
-import { chooseManagedFramedPlan, framedResidual, observedFramedRotation, pixelsAt, pointKey, stripUnits,
-  type FramedRotation, type ManagedFramedPlan } from './managed-framed-access.ts';
+import { chooseManagedFramedPlan, chooseManagedTransitPlan, framedResidual, observedFramedRotation, observeFramedReserve,
+  pixelsAt, pointKey, reserveSteps, stripUnits, type FramedReserve, type FramedRotation, type FramedTransport, type ManagedFramedPlan } from './managed-framed-access.ts';
 import { chooseCycleStep, cycleSubject, learnCycleGauge, observeCycleStep, readCycleLayout, readCycleSymbol,
   type CycleGauge, type CycleKnowledge, type CycleState, type CycleStep } from './inset-cycle-route.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
@@ -35,7 +35,8 @@ type Body = { at: NativePoint; pitch: number; floor: number; colors: number[]; e
 type Inset = NonNullable<ReturnType<typeof measureInsetContact>>;
 type State = { epoch: number; body: Body | null; target: NativeBox | null; surface: NativeBox | null; inset: Inset | null; beneath: number[] | null;
   trials: Direction[]; blocked: string[]; tested: string[]; crossed: string[]; count: number;
-  score?: number; rotation?: FramedRotation; confirmedMoves?: Direction[]; lastPair?: MorphologyPair; reserveContradicted?: boolean };
+  score?: number; rotation?: FramedRotation; confirmedMoves?: Direction[]; lastPair?: MorphologyPair; reserveContradicted?: boolean;
+  transports?: FramedTransport[]; reserveBand?: FramedReserve };
 type Transfer = { epoch: number; rotation: FramedRotation; confirmedMoves: Direction[]; victory: string };
 type Plan = { command: Direction; landing: NativePoint; target: NativePoint; contact: boolean };
 type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target: NativeBox | null; surface: NativeBox | null;
@@ -53,6 +54,20 @@ function sameLanding(first: NativeRows, second: NativeRows, { at, pitch, floor, 
   if (endpoint.length !== prior.length) return false;
   if (endpoint.every((pixel, index) => pixel === prior[index]) && vacancy.some((pixel, index) => pixel !== prior[index])) return true;
   return vacancy.every((pixel, index) => pixel === (beneath?.[index] ?? floor)) && endpoint.some(pixel => colors.includes(pixel));
+}
+
+function observedTransport(first: NativeRows, second: NativeRows, { at, pitch }: Body, ordinary: NativePoint): NativePoint | null {
+  const body = pixelsAt(first, at, pitch), vacancy = pixelsAt(second, at, pitch);
+  if (body.length !== pitch * pitch || body.every((pixel, index) => pixel === vacancy[index])) return null;
+  const candidates: NativePoint[] = [];
+  for (let y = at[1] % pitch; y + pitch <= second.length; y += pitch) {
+    for (let x = at[0] % pitch; x + pitch <= second[y]!.length; x += pitch) {
+      if ((x === at[0] && y === at[1]) || (x === ordinary[0] && y === ordinary[1])) continue;
+      if (pixelsAt(second, [x, y], pitch).every((pixel, index) => pixel === body[index])) candidates.push([x, y]);
+      if (candidates.length > 1) return null;
+    }
+  }
+  return candidates[0] ?? null;
 }
 
 function bindTranslation({ command, translations, afterRef }: DirectionalMotion, rows: NativeRows): Body | null {
@@ -92,12 +107,13 @@ function route(rows: NativeRows, body: Body, surface: NativeBox, directions: rea
     if (current.depth >= remaining || queue.length > 256) break;
     for (const command of directions) {
       const [dx, dy] = directionVectors[command];
-      const at: NativePoint = [current.at[0] + dx * pitch, current.at[1] + dy * pitch], key = pointKey(at);
+      const transport = local.transports?.find(edge => edge.action === command && pointKey(edge.from) === pointKey(current.at));
+      const at: NativePoint = transport?.landing ?? [current.at[0] + dx * pitch, current.at[1] + dy * pitch], key = pointKey(at);
       if (seen.has(key) || local.blocked.includes(key) || at[0] < left || at[0] + pitch - 1 > right || at[1] < 0
         || at[1] + pitch > rows.length || ((inset || !aligned) && (at[1] < top || at[1] + pitch - 1 > bottom))) continue;
       const patch = pixelsAt(rows, at, pitch), clean = patch.filter(pixel => pixel === floor).length;
       const first = current.first ?? { command, landing: at };
-      if (clean === patch.length || (inset && local.crossed.includes(key) && clean * 2 > patch.length)) {
+      if (transport || clean === patch.length || (inset && local.crossed.includes(key) && clean * 2 > patch.length)) {
         seen.add(key);
         queue.push({ at, depth: current.depth + 1, first });
         continue;
@@ -216,15 +232,20 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       const rotation = local.rotation ?? recalled?.rotation;
       const directions = recalled ? Object.fromEntries(available.filter(command => recalled.confirmedMoves.includes(command))
         .map(command => [command, directionVectors[command]])) : {};
-      const managed = forecast && body && pair && rotation ? chooseManagedFramedPlan(rows, parts, pair, body, local.beneath,
-        rotation, forecast, directions, local.blocked, execution?.remainingLevelActions ?? remaining) : null;
+      const transit = rotation && body && pair && surface && local.reserveBand && local.transports?.length
+        ? chooseManagedTransitPlan(rows, parts, pair, { body, surface, beneath: local.beneath, blocked: local.blocked,
+          transports: local.transports, directions }, rotation, local.reserveBand, observation, execution?.remainingLevelActions ?? remaining)
+        : null;
+      const managed = transit ?? (forecast && body && pair && rotation ? chooseManagedFramedPlan(rows, parts, pair, body, local.beneath,
+        rotation, forecast, directions, local.blocked, execution?.remainingLevelActions ?? remaining) : null);
       const plan: Plan | null = managed ? { ...managed, command: managed.command as Direction } : body && surface
         ? route(rows, body, surface, available, target, !!inset || (pair?.quarter_turns === 0 && !!target), local, remaining, !!inset) : null;
       const trial = !body && available.find(key => !local.trials.includes(key));
       const command = inputs.find(input => input.action_ref === (plan?.command ?? trial));
       if (!command) return null;
       const action = command.action_ref as Direction;
-      const proof = [body?.evidence, motion?.beforeRef, ...(managed ? [rotation?.evidence, recalled?.victory] : [])];
+      const transport = plan && body && local.transports?.find(edge => edge.action === action && pointKey(edge.from) === pointKey(body.at));
+      const proof = [body?.evidence, motion?.beforeRef, transport ? transport.evidence : null, ...(managed ? [rotation?.evidence, recalled?.victory] : [])];
       const evidence: [string, ...string[]] = [ref, ...new Set(proof.filter((value): value is string => !!value && value !== ref))];
       const native = resolveStrategyGraph({ graph, mode: 'active', facts: {
         canReachPeer: { value: plan?.contact === true && !inset, evidence },
@@ -245,6 +266,8 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         recharge: 'Reach the candidate recharge before the measured reserve runs out',
         rotation: 'Reach the observed rotator within the measured reserve',
         exit: 'Reach the exit with the matching orientation and enough reserve',
+        color: 'Test the marked contact that may match the target color',
+        transport: 'Use the candidate transport and check its actual landing',
       }[managed.obligation] : framedContactStrategies[native.selected.id];
       const moves = (count: number) => `${count} ${count === 1 ? 'move' : 'moves'}`;
       const plannedRefills = managed?.recharges ? ` with ${managed.recharges} planned ${managed.recharges === 1 ? 'recharge' : 'recharges'}` : '';
@@ -260,7 +283,8 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         ...(body && plan && (inset || managed) ? { beneath: pixelsAt(rows, plan.landing, body.pitch) } : {}),
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, mode: managed ? mode : plan?.contact ? 'solving' : 'exploration',
-          need: managed ? 'Match the orientation and reach the exit within the reserve'
+          need: managed ? transit ? 'Match the color and orientation and reach the exit within the reserve'
+            : 'Match the orientation and reach the exit within the reserve'
             : inset ? 'Test what happens on reaching the inlaid motif' : 'Find how to reach the matching motif',
           situation, evidence, agenda: primitive?.entries ?? native.entries, motifs: sites,
           ...(managed ? { routeObligation: managed.obligation, exit: managed.targetBox } : {}),
@@ -292,7 +316,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         : effect?.reason ?? (matched === false ? 'predicted_piece_did_not_leave' : 'observe_the_contact_or_displacement'),
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
-    async record(before, after, _command, first, second, proposal) {
+    async record(before, after, _command, first, second, proposal, _index, frames) {
       if (after.levels_completed > before.levels_completed) {
         if (proposal.inset && state.body && gauge?.epoch === before.level_epoch && gauge.reading.observations >= 2) {
           cycleModel = { epoch: before.level_epoch, gauge: gauge.reading, pitch: state.body.pitch,
@@ -327,6 +351,10 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       state.target = proposal.target;
       state.surface = proposal.surface;
       state.inset = proposal.inset;
+      if (proposal.surface && proposal.pair && (state.reserveBand || proposal.pair.palette_values[0] !== proposal.pair.palette_values[1])) {
+        const reserve = observeFramedReserve(first, second, proposal.surface, state.reserveBand);
+        if (reserve) state.reserveBand = reserve;
+      }
       if (!state.body) {
         state.trials.push(proposal.action);
         state.body = bindTranslation(measureDirectionalMotion(first, second, { command: proposal.action, family,
@@ -347,8 +375,16 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
             if (proposal.pair) state.lastPair = proposal.pair;
             const effect = await managedEffect(proposal, second);
             if (effect && !effect.matched) state.reserveContradicted = true;
-            if (effect?.matched) return { events: [], reviewEvidence: proposal.managed.effect === 'recharge'
-              ? 'Contact restored the visible reserve.' : 'Contact applied the predicted rotation.' };
+            if (effect?.matched && proposal.managed.effect) {
+              const evidence = {
+                recharge: 'Contact restored the visible reserve.',
+                rotation: 'Contact applied the predicted rotation.',
+                color: 'Contact changed the mobile glyph to the target color.',
+                transport: 'The animated response reached the projected landing.',
+                exit: 'Contact advanced the level.',
+              };
+              return { events: [], reviewEvidence: evidence[proposal.managed.effect] };
+            }
           } else if (!state.rotation && proposal.pair && !plan.contact && key === pointKey(plan.target)) {
             const [next] = await morphologyPairs(second);
             const rotation = next.length === 1 && observedFramedRotation(proposal.pair, next[0]!,
@@ -356,6 +392,15 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
             if (rotation) state.rotation = rotation;
           }
         } else {
+          const displaced = frames.length > 1 ? observedTransport(first, second, state.body, plan.landing) : null;
+          if (displaced) {
+            const edge = { from: at, action: proposal.action, landing: displaced, evidence: after.observation_ref };
+            const previous = (state.transports ?? []).filter(item => item.action !== edge.action || pointKey(item.from) !== pointKey(at));
+            state.transports = [...previous, edge];
+            state.body = { ...state.body, at: displaced, evidence: edge.evidence };
+            state.beneath = pixelsAt(first, displaced, pitch);
+            return { events: [], reviewEvidence: 'The animated response transported the same piece to a different verified landing.' };
+          }
           state.blocked.push(key);
           if (vacancy.some((pixel, index) => pixel !== prior[index])) state.body = null;
         }
@@ -379,8 +424,18 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
 async function managedEffect(proposal: Proposal, rows: NativeRows) {
   const planned = proposal.managed;
   if (planned?.effect === 'recharge') {
-    const matched = stripUnits(rows, planned.meter) > planned.meter.current_units;
+    const matched = planned.reserveBand ? reserveSteps(rows, planned.reserveBand) > planned.reserve
+      : stripUnits(rows, planned.meter) > planned.meter.current_units;
     return { matched, reason: matched ? 'reserve_restored_by_contact' : 'predicted_recharge_absent' };
+  }
+  if (planned?.effect === 'color' && planned.mobileIndex !== undefined) {
+    const [next] = await morphologyPairs(rows);
+    const matched = next.length === 1 && next[0]!.palette_values[planned.mobileIndex] === planned.colorAfter;
+    return { matched, reason: matched ? 'selective_color_confirmed' : 'predicted_color_absent' };
+  }
+  if (planned?.effect === 'transport' && planned.reserveBand) {
+    const matched = reserveSteps(rows, planned.reserveBand) === planned.reserve - 1;
+    return { matched, reason: matched ? 'observed_transport_landing_and_reserve' : 'transport_reserve_contradicted' };
   }
   if (planned?.effect === 'rotation' && proposal.rotation) {
     const [next] = await morphologyPairs(rows);

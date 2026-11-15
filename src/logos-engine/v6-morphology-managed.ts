@@ -216,6 +216,14 @@ export function searchManagedAccess(layout: R, meter: R | null, orientation: R |
   if (usable.size > 12) return abstain('charge_occurrence_inventory_too_large');
   const excluded = new Set((layout.edge_exclusions ?? []).map((edge: R) => key([point(edge.from), point(edge.to)])));
   const uncertain = new Map<string, R>((layout.uncertain_edges ?? []).map((edge: R) => [key([point(edge.from), point(edge.to)]), edge]));
+  const landings = new Map<string, { to: NativePoint; evidence: string[] }>();
+  for (const landing of layout.forced_landings ?? []) {
+    const entry = key(point(landing.entry)), to = point(landing.to);
+    if (!cells.has(entry) || !cells.has(key(to)) || entry === key(to) || landings.has(entry) || !truth(landing.evidence)) {
+      return abstain('unbound_or_ambiguous_transport');
+    }
+    landings.set(entry, { to, evidence: landing.evidence });
+  }
   type Move = [string | null, NativePoint, R | null];
   const known: Move[] = Object.entries(layout.moves as R).sort(([a], [b]) => compareUnicode(a, b)).map(([cmd, delta]) => [cmd, point(delta), null]);
   if (!known.length || known.some(([, vector]) => same(vector, [0, 0]))) return abstain('no_bound_translation');
@@ -234,8 +242,12 @@ export function searchManagedAccess(layout: R, meter: R | null, orientation: R |
     for (const p of [...cells.values()].sort(lex)) {
       const outgoing: Edge[] = []; edges.set(key(p), outgoing);
       for (const [cmd, vector, hypothesis] of mode) {
-        const dest: NativePoint = [p[0] + vector[0], p[1] + vector[1]], edgeKey = key([p, dest]);
-        if (cells.has(key(dest)) && !excluded.has(edgeKey)) outgoing.push([cmd, dest, hypothesis, uncertain.get(edgeKey) ?? null]);
+        const entry: NativePoint = [p[0] + vector[0], p[1] + vector[1]];
+        if (!cells.has(key(entry)) || excluded.has(key([p, entry]))) continue;
+        const transport = landings.get(key(entry)), dest = transport?.to ?? entry, edgeKey = key([p, dest]);
+        if (same(p, dest) || excluded.has(edgeKey)) continue;
+        const crossing = transport ? { kind: 'transport', entry, landing: dest, evidence: transport.evidence } : uncertain.get(edgeKey) ?? null;
+        outgoing.push([cmd, dest, hypothesis, crossing]);
       }
     }
     const initial: State = [start, residual, fuel, [], initialColor];

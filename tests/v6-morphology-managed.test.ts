@@ -99,3 +99,32 @@ test('palette recovery requires a later actual charge or peer and keeps its full
     assert.equal(option.remaining_at_peer, null);
   }
 });
+
+test('an observed transport applies the effect at its landing for the cost of one command', () => {
+  const context = { observation_ref: 'test:transport', level_epoch: 1 }, evidence = [context.observation_ref];
+  const layout = {
+    ...context,
+    start: [0, 0],
+    cells: [[0, 0], [1, 0], [3, 0], [4, 0], [3, 1]],
+    moves: { ACTION4: [1, 0] },
+    modifiers: [{ id: 'rotate', sites: [[3, 1]], evidence }],
+    peers: [{ id: 'exit', sites: [[4, 0]], evidence }],
+    color_state: {
+      initial: 12, wanted: 9, mobile_site: [2, 3, 4, 5],
+      features: [{ id: 'color', sites: [[3, 0]], uncertain_sources: [],
+        effects: [{ from_color: 12, to_color: 9, mobile_site: [2, 3, 4, 5] }] }],
+    },
+  };
+  const meter = { ...context, steps_before_empty: 2, capacity_steps: 2 };
+  const orientation = { ...context, modulus: 4, residual: 0, entry_delta: 1, status: 'current_witness', evidence };
+  const budget = { actionBudget: 2 };
+  assert.equal(searchManagedAccess(layout, meter, orientation, budget).options.length, 0);
+
+  const transport = { entry: [1, 0], to: [3, 0], evidence };
+  const result = searchManagedAccess({ ...layout, forced_landings: [transport] }, meter, orientation, budget);
+  const route = result.options[0].conditional_path;
+  assert.deepEqual(route.map((step: R) => step.to), [[3, 0], [4, 0]]);
+  assert.equal(route[0].feature, 'color');
+  assert.equal(route[0].remaining_after, 1);
+  assert.equal(route[0].conditional_crossing.kind, 'transport');
+});
