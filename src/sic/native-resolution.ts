@@ -23,6 +23,7 @@ import { markedCollectionId, markedCollectionStrategies } from './marked-collect
 import { visibleConfigurationCoverageId, visibleConfigurationStrategies } from './visible-configuration-coverage.ts';
 import { markedCompartmentFlowId, markedCompartmentStrategies } from './marked-compartment-flow.ts';
 import { observedRelayRouteId, observedRelayStrategies } from './observed-relay-route.ts';
+import { observedPrefixQuotasId, observedPrefixQuotaStrategies } from './observed-prefix-quotas.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -502,6 +503,7 @@ export function readNativeResolution(agent: {
     : family === visibleConfigurationCoverageId ? visibleConfigurationStrategies
     : family === markedCompartmentFlowId ? markedCompartmentStrategies
     : family === observedRelayRouteId ? observedRelayStrategies
+    : family === observedPrefixQuotasId ? observedPrefixQuotaStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -642,6 +644,10 @@ export function readNativeResolution(agent: {
       const box = bounds(receiver);
       if (box) subjects.push({ label: 'Receiver in the projected route', box });
     }
+  }
+  if (situationCard && family === observedPrefixQuotasId) {
+    const target = bounds(card?.target);
+    if (target) subjects.push({ label: 'Cell selected to satisfy the visible quota', box: target });
   }
   if (situationCard && family === slotTransferId) {
     const source = bounds(card?.source), destination = bounds(card?.destination);
