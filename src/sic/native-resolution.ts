@@ -607,6 +607,12 @@ export function readNativeResolution(agent: {
   if (situationCard && family === markedCollectionId) {
     const edited = bounds(card?.addressedRegion);
     if (edited) subjects.push({ label: 'Marked card or control tested', box: edited });
+    const actor = bounds(card?.actor);
+    if (actor) subjects.push({ label: 'Piece carrying the current program', box: actor });
+    if (Array.isArray(card?.affected)) for (const target of card.affected) {
+      const box = bounds(target);
+      if (box) subjects.push({ label: 'Piece in the projected interaction', box });
+    }
     if (Array.isArray(card?.members)) for (const member of card.members) {
       const box = bounds(member);
       if (box) subjects.push({ label: 'Member in the visible collection', box });
