@@ -5,6 +5,8 @@ import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, N
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
+import { advanceSymbolTransaction, consolidateSymbolWorkspace, nextSymbolStep, rebindSymbolWorkspace, rememberSymbolExample,
+  verifySymbolStep, type SymbolExamples, type SymbolStep, type SymbolTransaction, type SymbolWorkspaceEvidence } from './observed-symbol-transactions.ts';
 import { chooseVisibleInstruction, visibleInstructionModule, visibleInstructionRules, type VisibleInstruction } from './visible-instruction-card.ts';
 
 export const symbolContributionId = 'sic_follow_and_verify_visible_instruction';
@@ -16,12 +18,24 @@ export const symbolContributionStrategies = {
   apply_indicated_transformation: 'Test the indicated operation on the loaded operands',
   deliver_matching_symbol: 'Test delivering the selected symbol to the matching request',
 } as const;
-type State = { epoch: number; count: number; evidence: string[]; appearance: number | null; stopped: boolean; confirmed?: VisibleInstruction[] };
-type Proposal = NativeProposal & { strategy: VisibleInstruction; guide: NativeBox; appearance: number; needId: string };
+type State = { epoch: number; count: number; evidence: string[]; appearance: number | null; stopped: boolean; confirmed?: VisibleInstruction[];
+  examples?: SymbolExamples; learned?: SymbolWorkspaceEvidence; transaction?: SymbolTransaction };
+type Transfer = { step: SymbolStep; transaction: SymbolTransaction; learned: SymbolWorkspaceEvidence };
+type Proposal = NativeProposal & { strategy: VisibleInstruction; guide: NativeBox; appearance: number; needId: string; transfer?: Transfer };
 const empty = (epoch = 0): State => ({ epoch, count: 0, evidence: [], appearance: null, stopped: false });
+const freshLevel = (epoch: number, learned?: SymbolWorkspaceEvidence): State => ({ ...empty(epoch), ...(learned ? { learned } : {}) });
 const frameBox = ({ left, top, right, bottom }: ConcentricFrame): NativeBox => [left, top, right, bottom];
 const area = ({ left, top, right, bottom }: ConcentricFrame) => (right - left + 1) * (bottom - top + 1);
 const atCenter = (frame: ConcentricFrame, x: number, y: number) => frame.center[0] === y && frame.center[1] === x;
+const transferredInstructions: Record<SymbolStep['kind'], VisibleInstruction> = {
+  select: 'select_indicated_symbol', load: 'load_indicated_operand', deliver: 'deliver_matching_symbol', transform: 'apply_indicated_transformation',
+};
+const transferLabels: Record<SymbolStep['kind'], string> = {
+  select: 'Select a stocked symbol needed for the planned delivery',
+  load: 'Place a reserved input in the verified operand slot',
+  deliver: 'Fill the open request with the matching symbol',
+  transform: 'Test the displayed recipe that supplies a missing symbol',
+};
 
 function guideAt(frame: FrameGrid, observation: NativeObservation, appearance: number | null) {
   const diagrams = measureDiagramRows(frame);
@@ -58,38 +72,52 @@ export function createSicSymbolContribution(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
-      const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
+      const local = state.epoch === observation.level_epoch ? state : freshLevel(observation.level_epoch, state.learned);
       if (local.stopped || local.count >= 32) return null;
-      const frame = new FrameGrid(rows), guide = guideAt(frame, observation, local.appearance);
-      if (!guide) return null;
-      const [y, x] = guide.center;
-      const facts = measureDiagramCandidate(frame, { point: guide.center }, guide.outer_value);
+      const frame = new FrameGrid(rows), guide = local.transaction ? null : guideAt(frame, observation, local.appearance);
+      const learned = local.learned;
+      const transaction = guide || !learned ? null : local.transaction ?? rebindSymbolWorkspace(frame, learned);
+      const step = transaction ? nextSymbolStep(frame, transaction) : null;
+      const transfer = transaction && learned && step ? { transaction, learned, step } : null;
+      if (!guide && !transfer) return null;
+      const [x, y] = guide ? [guide.center[1], guide.center[0]] : transfer!.step.point;
+      const focus = guide ? frameBox(guide) : transfer!.step.target;
+      const appearance = guide?.outer_value ?? transfer!.learned.selectionOutline;
+      const facts = guide ? measureDiagramCandidate(frame, { point: guide.center }, guide.outer_value) : null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(transfer?.learned.proof ?? [])].filter(item => item !== ref))];
       const command = { action_ref: 'ACTION6', data: { x, y } };
-      const situation = {
+      const transferred = transfer ? transferredInstructions[transfer.step.kind] : null;
+      const situation = facts ? {
         selectable: facts.diagram_point_full_symbol_count === 1 && facts.diagram_tight_white_center_count === 0,
         operand: facts.diagram_point_equal_pair_center_count === 1 && facts.diagram_tight_white_center_count === 1,
         operation: facts.diagram_point_branch_value_square_count === 1 && facts.diagram_equal_pair_matches_left_group_count === 1,
         request: facts.diagram_point_hollow_matches_tight_value_count === 1,
+      } : {
+        selectable: transferred === 'select_indicated_symbol',
+        operand: transferred === 'load_indicated_operand',
+        operation: transferred === 'apply_indicated_transformation',
+        request: transferred === 'deliver_matching_symbol',
       };
       const mode = execution?.reasoningMode ?? 'exploration';
       const instruction = await chooseInstruction?.run({ situation }, { signal: execution?.signal });
       const strategy = instruction?.result;
       if (!isInstruction(strategy) || !situation[visibleInstructionRules[strategy]]) return null;
-      const repeated = local.confirmed?.includes(strategy) ?? false;
+      const repeated = transfer ? transfer.step.kind !== 'transform' : local.confirmed?.includes(strategy) ?? false;
       const primitiveSituation = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
       const primitive = repeated ? 'P02' : 'P05';
       const decision = await choosePrimitive?.run({ situation: primitiveSituation }, { signal: execution?.signal });
       if (!instruction || decision?.result !== primitive) return null;
-      const label = symbolContributionStrategies[strategy], parent = 'G_official_completion';
+      const label = transfer ? transferLabels[transfer.step.kind] : symbolContributionStrategies[strategy];
+      const parent = 'G_official_completion';
       const goal = { kind: 'satisfy_visible_symbol_requests', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['visible_symbol_diagram_and_request'], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_symbol_delivery' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `symbol-contribution:${need.id}`, actions = [command];
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
       if (!binding) return null;
-      return { status: 'proposed', kind: symbolContributionId, strategy, guide: frameBox(guide), appearance: guide.outer_value,
+      return { status: 'proposed', kind: symbolContributionId, strategy, guide: focus, appearance,
+        ...(transfer ? { transfer } : {}),
         actions, needId: need.id, steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -97,7 +125,8 @@ export function createSicSymbolContribution(): NativeFamily<Proposal> {
           situation: { ...primitiveSituation, instruction: strategy, instructionWorkflow: instruction.receipt.workflow,
             instructionHash: instruction.receipt.src_hash, instructionEdited: 'edited' in instruction.receipt && instruction.receipt.edited === true } },
         sicSituationCard: { strategy: primitive, need: 'Use the visible diagram to fill the symbol requests',
-          mode, situation: label, agenda: [], evidence, guide: frameBox(guide), triggerCard: instruction.receipt.workflow },
+          mode, situation: label, agenda: [], evidence, guide: focus, triggerCard: instruction.receipt.workflow,
+          ...(transfer ? { contributionTarget: transfer.step.intent } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy: primitive, objective: { id, label, parent }, need },
@@ -111,21 +140,42 @@ export function createSicSymbolContribution(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = observed(proposal, first, second);
-      return { matched, seal_prefix: true, reason: matched ? 'symbol_contribution_observed' : 'symbol_contribution_contradicted' };
+      const confirmation = confirmedEffect(proposal, first, second);
+      return { matched: confirmation !== null, seal_prefix: true, reason: confirmation ?? 'symbol_contribution_contradicted' };
     },
     record(before, after, _command, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const local = state.epoch === before.level_epoch ? state : empty(before.level_epoch);
-      const matched = observed(proposal, first, second);
+      const won = after.levels_completed > before.levels_completed;
+      if (!won && (before.level_epoch !== after.level_epoch || before.state !== after.state)) return { events: [] };
+      const local = state.epoch === before.level_epoch ? state : freshLevel(before.level_epoch, state.learned);
+      const confirmation = won ? 'official_boundary' : confirmedEffect(proposal, first, second);
+      const matched = confirmation !== null;
+      if (proposal.transfer) {
+        if (won) state = freshLevel(after.level_epoch, local.learned);
+        else state = { ...local, count: local.count + 1, stopped: !matched, evidence: [...local.evidence.slice(-4), after.observation_ref],
+          ...(matched ? { transaction: advanceSymbolTransaction(proposal.transfer.transaction, proposal.transfer.step) } : {}) };
+        return { events: [] };
+      }
+      const { x, y } = proposal.actions[0]!.data;
+      const examples = matched ? rememberSymbolExample(local.examples ?? {}, proposal.strategy, [x!, y!], first, after.observation_ref) : local.examples;
+      if (won) {
+        const learned = consolidateSymbolWorkspace(examples ?? {}, proposal.appearance);
+        state = freshLevel(after.level_epoch, learned ?? local.learned);
+        return { events: [] };
+      }
       const confirmed = matched ? [...new Set([...(local.confirmed ?? []), proposal.strategy])] : local.confirmed;
       state = { ...local, count: local.count + 1, stopped: !matched, ...(confirmed ? { confirmed } : {}),
-        appearance: proposal.appearance, evidence: [...local.evidence.slice(-4), after.observation_ref] };
+        appearance: proposal.appearance, evidence: [...local.evidence.slice(-4), after.observation_ref], ...(examples ? { examples } : {}) };
       return { events: [] };
     },
     state: () => ({ ...state }),
     restore(value: NativeRecord) { state = structuredClone(value as State); },
   };
+}
+
+function confirmedEffect(proposal: Proposal, first: NativeRows, second: NativeRows): string | null {
+  const { transfer } = proposal;
+  if (transfer) return verifySymbolStep(transfer.step, transfer.transaction.workspace, first, second, transfer.learned.selectionOutline);
+  return observed(proposal, first, second) ? 'symbol_contribution_observed' : null;
 }
 
 function observed({ strategy, actions, appearance, guide }: Proposal, first: NativeRows, second: NativeRows): boolean {

@@ -675,7 +675,9 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === symbolContributionId) {
     const guide = bounds(card?.guide);
-    if (guide) subjects.push({ label: 'Indicated symbol or operand', box: guide });
+    const target = bounds(card?.contributionTarget);
+    if (guide) subjects.push({ label: target ? 'Current symbol or control' : 'Indicated symbol or operand', box: guide });
+    if (target) subjects.push({ label: 'Request served by the action', box: target });
   }
   if (situationCard && (family === markedLatticeId || family === verifyMarkedLatticeId)) {
     const cursor = bounds(card?.cursor), target = bounds(card?.target);
