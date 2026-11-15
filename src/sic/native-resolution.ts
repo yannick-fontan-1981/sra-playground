@@ -1288,7 +1288,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === animationContactId || family === learnAnimationContactId)) {
-    for (const [field, label] of [['point', 'Aim point'], ['source', 'Observed source'], ['peer', 'Candidate contact'], ['meter', 'Magnitude display']] as const) {
+    for (const [field, label] of [['point', 'Aim point'], ['source', card?.sourceCandidate ? 'Candidate source' : 'Observed source'],
+      ['peer', 'Candidate contact'], ['obstacle', 'Obstacle touched in the animation'], ['meter', 'Magnitude display']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
