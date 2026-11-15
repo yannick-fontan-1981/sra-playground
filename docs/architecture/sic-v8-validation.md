@@ -417,6 +417,10 @@ Sur **R11L**, SIC rattache cinq ancres à deux corps par une partition unique co
 
 Le bilan atteint **49/100 niveaux 2** et **166/636 niveaux attestés sous SIC seul** (26,1 %).
 
+Sur **SU15**, SIC distingue les exemples du bandeau, la pièce demandée, le récepteur et le stock manipulable. Il mesure trois transformations successives. Chaque preuve associe la disparition des deux pièces choisies à l'apparition d'un produit. La portée du déplacement est vérifiée pour chaque type. Le niveau 2 gagne en **15 clics**, avec quatre sondes P05, trois reprises de fusion P02 et huit déplacements P07. Le niveau 1 reproduit ses sept commandes et leurs retours. Les 22 commandes sont sous autorité SIC, avec l'empreinte `c7313afb93fc1c0a0ab6714ac133652bcdddea3912a717ca079e44b5e12c0a50`, également reproduite dans la variante historique où `sic_point_reach` est déjà absente. Retirer `sic_verify_measured_point_access`, la famille utilisée au niveau 1, laisse le repli à zéro niveau après 40 clics.
+
+Le bilan atteint **50/100 niveaux 2** et **167/636 niveaux attestés sous SIC seul** (26,3 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.

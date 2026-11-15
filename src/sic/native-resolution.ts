@@ -60,6 +60,7 @@ import { seatedContactId, verifyFrameContactId } from './seated-contact.ts';
 import { learnSwitchedSurfaceId, switchedSurfaceId } from './switched-surface.ts';
 import { markedGaugeId, verifyGaugeEffectId } from './marked-gauge.ts';
 import { coupledGaugeRouteId } from './coupled-gauge-route.ts';
+import { mergeForDemandId } from './merge-for-demand.ts';
 import { reactiveTargetId, verifyReactiveMotionId } from './reactive-target.ts';
 import { pairedChannelsId, verifyChannelAccessId } from './paired-channels.ts';
 import { pointReachId, verifyPointAccessId } from './point-reach.ts';
@@ -486,7 +487,7 @@ export function readNativeResolution(agent: {
     : (family === verifySharedArrivalId || family === verifyPanelConfigurationId || family === verifyProgramConfigurationId
       || family === verifyCombinedMarksId) ? preparedConfigurationStrategies
     : (family === verifyOccurrenceChoiceId || family === verifyOrderedFeedbackId || family === verifyPatternChoiceId) ? feedbackChoiceStrategies
-    : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId || family === linkedGroupRouteId
+    : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId || family === linkedGroupRouteId || family === mergeForDemandId
       || family === verifySlotPermutationId || family === verifyPreviewPlacementId || family === verifyReferencePlacementId
       || family === verifyProfileTransferId || family === verifyCaptureRouteId || family === verifyMarkerPlacementId
       || family === verifyFrameContactId || family === verifyContactOrderId || family === verifyCoupledRouteId
@@ -941,6 +942,13 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === pointReachId || family === verifyPointAccessId)) {
     for (const [field, label] of [['actor', 'Controlled sprite'], ['focus', 'Predicted landing'], ['goal', 'Framed receptor'], ['reserve', 'Visible reserve']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === mergeForDemandId) {
+    for (const [field, label] of [['actor', 'Material moved'], ['partner', 'Other merge input'], ['focus', 'Click target'],
+      ['demand', 'Product requested'], ['receptor', 'Delivery receiver']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
