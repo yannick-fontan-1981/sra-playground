@@ -426,6 +426,8 @@ Avec `sic_switched_surface` retirée, **ETAG gagne en sept commandes SIC seul**.
 
 Les commandes et retours reproduisent la référence, empreinte `fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf`. Le nom neutre et la palette permutée conservent le gain. Désactiver P07 après le changement de surface laisse le niveau ouvert à la septième commande.
 
+La campagne ETAG porte le total à **43/100** victoires après retrait, en 485 commandes SIC seul, dont 141 choisies par le SRC. Les 100 niveaux 1 en usage normal, les 42 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours.
+
 ### Écarter des hypothèses à partir d’un contrôle sans effet sur l’outil
 
 Avec `sic_surface_copy` retirée, **CD82 gagne en neuf commandes SIC seul**. La première commande de l’exploration publique laisse l’outil et la surface de travail inchangés. SIC compare ces deux observations et élimine les modèles qui prévoyaient un changement. La carte SRC `sic.verify_observed_interaction.choose` choisit cinq essais P05 et trois réutilisations P02 au fil de la copie. Le modèle TypeScript partagé conserve les hypothèses compatibles avec chaque retour et calcule les étapes qui rapprochent la surface de la référence.
@@ -437,3 +439,9 @@ Les commandes et retours reproduisent la référence, empreinte `10cfd4ca1bd7a8f
 Avec `sic_framed_reception` retirée, **GARE gagne en 11 commandes SIC seul**. Le premier clic de l’exploration publique déplace une pièce et fournit une relation entre le point cliqué et le déplacement. La carte SRC `sic.verify_observed_interaction.choose` choisit quatre réutilisations P02 lorsqu’un nouveau contrôle admet un déplacement compatible et six essais P05 pour vérifier les autres réceptions. Le fournisseur partagé apparie les bandes et mesure les translations et les remplacements après chaque clic.
 
 L’empreinte du parcours après retrait est `28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09`. Le parcours de référence gagne en sept commandes. Le nom neutre et la palette permutée conservent le gain en 11 commandes. Désactiver P02 après le premier clic laisse le niveau ouvert au même budget.
+
+### Relier le déplacement d’un contour à un cadre et à un repère
+
+Avec `sic_outline_service` retirée, **ESCT gagne en 16 commandes SIC seul**. Une commande de la famille d’accès déplace le contour d’une maille. Le fournisseur confirme sa position d’origine, son arrivée et la préservation du cadre. La carte SRC `sic.follow_observed_landings.choose` choisit 12 déplacements P07 et trois essais P05 pour vérifier successivement l’ouverture du cadre, le changement de direction du repère et le contact final.
+
+Les commandes et retours reproduisent la référence, empreinte `9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e`. Le nom neutre et la palette permutée conservent le gain. Désactiver P07 après le premier déplacement laisse le niveau ouvert. La famille d’accès choisit les 16 commandes.

@@ -13,7 +13,7 @@ import { framedContactId, framedContactStrategies, learnPatternAccessId } from '
 import { learnTransportAccessId, transportContactId, transportContactStrategies } from './transport-contact.ts';
 import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
 import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
-import { outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
+import { learnOutlineServiceId, outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
 import { labeledSequenceId, labeledSequenceStrategies } from './labeled-sequence.ts';
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
 import { learnSlotTransferId, slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
@@ -477,7 +477,7 @@ export function readNativeResolution(agent: {
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
-        : family === sharedArrivalId ? sharedArrivalStrategies : family === outlineServiceId ? outlineServiceStrategies
+        : family === sharedArrivalId ? sharedArrivalStrategies : (family === outlineServiceId || family === learnOutlineServiceId) ? outlineServiceStrategies
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
             : (family === slotTransferId || family === learnSlotTransferId) ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
@@ -556,7 +556,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: ['First piece', 'Second piece', 'Common receiver', 'Cell to test'][index] ?? 'Observed region', box });
     }
   }
-  if (situationCard && family === outlineServiceId) {
+  if (situationCard && (family === outlineServiceId || family === learnOutlineServiceId)) {
     for (const [field, label] of [['controlledPiece', 'Controlled outline'], ['addressedRegion', 'Frame or matching outline'],
       ['markedBody', 'Nearby body'], ['marker', 'Direction marker']] as const) {
       const box = bounds(card?.[field]);

@@ -1,11 +1,16 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import { outlineBoxes, outlineSameBox, type OutlineBox } from '../logos-engine/v6-outline-geometry.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const outlineServiceId = 'sic_outline_service';
+export const learnOutlineServiceId = 'sic_follow_observed_outline';
 export const outlineServiceStrategies = {
+  P05: navigationPrimitives.P05,
+  P07: navigationPrimitives.P07,
   test_outline_motion: 'Identify the outline moved by a direction',
   approach_framed_locus: 'Bring the controlled outline into the fitting frame',
   test_framed_operator: 'Test the local command at the exact fit',
@@ -25,7 +30,7 @@ const graph = compileStrategyGraph({ id: 'bring_marked_body_to_matching_outline'
   },
 }, ['trial', 'approach', 'fit', 'accompany', 'turn', 'contact']);
 
-type Strategy = keyof typeof outlineServiceStrategies;
+type Strategy = Exclude<keyof typeof outlineServiceStrategies, 'P05' | 'P07'>;
 type Pose = { box: NativeBox; color: number };
 type State = { epoch: number; actor: Pose; target: Pose; frame: Pose; locus: NativeBox; count: number;
   bound: boolean; opened: boolean; turned: boolean; lastDirection: string | null; evidence: string[] };
@@ -83,6 +88,21 @@ function measuredTranslation(first: NativeRows, second: NativeRows, { box, color
     && perimeterMatch(second, box, color) < 0.5;
 }
 
+function acquireMotion(rows: NativeRows, scene: State, ref: string, execution: NativeExecution | undefined): State | null {
+  const { actor, frame } = scene, [width, height] = size(actor.box);
+  const receipt = execution?.readPriorDirectionalScene?.(first => {
+    if (!outlineSameBox(first, frame.box, frame.color)) return null;
+    return directions.flatMap(([command, dx, dy]) => {
+      const origin = shift(actor.box, -dx * width, -dy * height);
+      return outlineSameBox(first, origin, actor.color) &&
+        measuredTranslation(first, rows, { box: origin, color: actor.color }, actor.box) ? [command] : [];
+    });
+  });
+  if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== scene.epoch ||
+    receipt.scene.length !== 1 || receipt.scene[0] !== receipt.command) return null;
+  return { ...scene, bound: true, count: 1, lastDirection: receipt.command, evidence: [receipt.beforeRef] };
+}
+
 function inspectCompanion(rows: NativeRows, local: State) {
   const [width, height] = size(local.actor.box), parts = geometricComponents(rows);
   const peers = parts.filter(part => part.color === local.target.color);
@@ -118,15 +138,24 @@ function stepTowards(rows: NativeRows, inputs: readonly NativeCommand[], at: Nat
     })[0] ?? null;
 }
 
-export function createSicOutlineService(): NativeFamily<Proposal> {
+export function createSicOutlineService(family = outlineServiceId): NativeFamily<Proposal> {
+  const learns = family === learnOutlineServiceId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: outlineServiceId,
-    async propose(observation, rows, inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !inputs.some(input => input.action_ref === 'ACTION5')) return null;
-      const local = state?.epoch === observation.level_epoch ? state : await findLocus(rows, observation.level_epoch);
-      if (!local || local.count >= 32) return null;
       const ref = observation.observation_ref;
+      const prior = state?.epoch === observation.level_epoch ? state : null;
+      if (learns && !prior && !execution?.readPriorDirectionalScene) return null;
+      const detected = prior ?? await findLocus(rows, observation.level_epoch);
+      if (!detected) return null;
+      const local = learns && !prior ? acquireMotion(rows, detected, ref, execution) : detected;
+      if (!local || local.count >= 32) return null;
       const evidence: [string, ...string[]] = [ref, ...local.evidence];
       const actor = local.actor.box;
       if (perimeterMatch(rows, actor, local.actor.color) < 0.5) return null;
@@ -150,21 +179,31 @@ export function createSicOutlineService(): NativeFamily<Proposal> {
         verify_outline_contact: () => operator } });
       if (!selected) return null;
       const strategy = selected.id, move = selected.plan, label = outlineServiceStrategies[strategy];
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const routeSupported = !!move.landing && local.bound;
+      const facts = { routeSupported, eligibleProbe: !routeSupported, knownInteraction: false, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = routeSupported ? 'P07' : 'P05';
+      if (learns && decision?.result !== primitive) return null;
+      const selectedStrategy = learns ? primitive : strategy;
       const parent = 'G_official_completion';
       const goal = { kind: 'verify_marked_body_and_matching_outline', scope: ref.split(':revision:', 1)[0]!,
         subjects: [local.target.box.join(',')], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_marked_contact' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `outline-service:${need.id}`, actions = [move.command];
-      return { status: 'proposed', kind: outlineServiceId, actions, strategy, local, move, needId: need.id,
+      return { status: 'proposed', kind: family, actions, strategy, local, move, needId: need.id,
         turnMarker: strategy === 'test_marker_turn' ? companion?.marker ?? null : null,
         steps: [{ action: move.command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Find how the marked body can reach its matching outline',
-          mode: move.landing && local.bound ? 'solving' : 'exploration', situation: label, agenda: entries, evidence,
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy: selectedStrategy, need: 'Find how the marked body can reach its matching outline',
+          mode: learns ? mode : routeSupported ? 'solving' : 'exploration', situation: label, agenda: entries, evidence,
+          ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
           controlledPiece: actor, addressedRegion: local.opened ? local.target.box : local.locus,
           markedBody: companion?.body ?? null, marker: companion?.marker ?? null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
-        sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+        sicLocalDecision: { strategy: selectedStrategy, objective: { id, label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },

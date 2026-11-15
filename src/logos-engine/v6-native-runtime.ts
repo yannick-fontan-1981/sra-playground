@@ -50,7 +50,7 @@ import { measureDirectionalMotion, type DirectionalMotion } from '../sic/observe
 import { createSicTransportContact, learnTransportAccessId } from '../sic/transport-contact.ts';
 import { createSicBandAlignment } from '../sic/band-alignment.ts';
 import { createSicSharedArrival } from '../sic/shared-arrival.ts';
-import { createSicOutlineService } from '../sic/outline-service.ts';
+import { createSicOutlineService, learnOutlineServiceId } from '../sic/outline-service.ts';
 import { createSicLabeledSequence } from '../sic/labeled-sequence.ts';
 import { createSicMarkedCollection } from '../sic/marked-collection.ts';
 import { createSicSlotTransfer, learnSlotTransferId } from '../sic/slot-transfer.ts';
@@ -2613,14 +2613,14 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 140, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 141, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicOrderedContact(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicStagedMarks(), createSicTransportContact(), createSicBandAlignment(),
-      createSicSharedArrival(), createSicOutlineService(), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
+      createSicSharedArrival(), createSicOutlineService(), createSicOutlineService(learnOutlineServiceId), createSicLabeledSequence(sequence, options.now ?? (() => performance.now())),
       createSicMarkedCollection(), createSicSlotTransfer(), createSicSlotTransfer(learnSlotTransferId), createSicRemoteSupportRoute(), createSicRemoteSupportRoute(learnRemoteAccessId), createSicOccurrenceRecall(),
       createSicSlotPermutation(), createSicSurfaceCopy(), createSicSurfaceCopy(learnSurfaceCopyId), createSicCodeRoute(), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicProfileTransfer(),
       createSicOrderedReplenishment(), createSicOrderedReplenishment(learnOrderedReplenishmentId), createSicPreviewPlacement(), createSicSymbolContribution(), createSicMarkedLattice(),
