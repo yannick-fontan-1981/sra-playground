@@ -192,7 +192,8 @@ async function fieldProposal(observation: Parameters<NativeFamily['propose']>[0]
   const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
   const strategy = routeSupported ? 'P07' : 'P05';
   if (decision?.result !== strategy) return null;
-  const label = target.kind === 'calibration' ? 'Test the distinct control while the counter is still empty'
+  const label = field.prepared ? 'Keep the cursor on the prepared marker and test the next activation'
+    : target.kind === 'calibration' ? 'Test the distinct control while the counter is still empty'
     : target.kind === 'mode' ? 'Check whether the remaining acquisitions require a different visible group'
       : 'Approach the visible candidate and verify whether it fills the counter';
   const parent = 'G_official_completion';
@@ -208,7 +209,7 @@ async function fieldProposal(observation: Parameters<NativeFamily['propose']>[0]
     sicSituationCard: { strategy, need: 'Fill the remaining acquisition slots', mode, situation: label,
       agenda: [], evidence, triggerCard: decision.receipt.workflow, cursor: [at[0], at[1], at[0] + size, at[1] + size],
       target: target.kind === 'calibration' ? scene.calibrator : target.kind === 'mode' ? scene.control : [x, y, x + size, y + size],
-      counter: scene.counter },
+      counter: scene.counter, ...(field.prepared && scene.preparation ? { preparation: scene.preparation } : {}) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
     sicLocalDecision: { strategy, objective: { id, label, parent }, need },

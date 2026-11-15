@@ -827,6 +827,10 @@ export function readNativeResolution(agent: {
     const cursor = bounds(card?.cursor), target = bounds(card?.target);
     if (cursor) subjects.push({ label: 'Current cursor', box: cursor });
     if (target) subjects.push({ label: Array.isArray(card?.counter) ? 'Current marker or control' : 'Unvisited marker', box: target });
+    if (Array.isArray(card?.preparation)) for (const slot of card.preparation) {
+      const box = bounds(slot);
+      if (box) subjects.push({ label: 'Preparation indicator', box });
+    }
     if (Array.isArray(card?.counter)) for (const slot of card.counter) {
       const box = bounds(slot);
       if (box) subjects.push({ label: 'Acquisition slot', box });
