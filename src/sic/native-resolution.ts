@@ -22,6 +22,7 @@ import { labeledSequenceId, labeledSequenceStrategies, learnLabeledSequenceId } 
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
 import { visibleConfigurationCoverageId, visibleConfigurationStrategies } from './visible-configuration-coverage.ts';
 import { markedCompartmentFlowId, markedCompartmentStrategies } from './marked-compartment-flow.ts';
+import { observedRelayRouteId, observedRelayStrategies } from './observed-relay-route.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -500,6 +501,7 @@ export function readNativeResolution(agent: {
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === visibleConfigurationCoverageId ? visibleConfigurationStrategies
     : family === markedCompartmentFlowId ? markedCompartmentStrategies
+    : family === observedRelayRouteId ? observedRelayStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -631,6 +633,15 @@ export function readNativeResolution(agent: {
     const chamber = bounds(card?.chamber), outlet = bounds(card?.outlet);
     if (chamber) subjects.push({ label: 'Current marked compartment', box: chamber });
     if (outlet) subjects.push({ label: 'Previously confirmed outlet', box: outlet });
+  }
+  if (situationCard && family === observedRelayRouteId) {
+    const source = bounds(card?.source), control = bounds(card?.control);
+    if (source) subjects.push({ label: 'Measured emitter', box: source });
+    if (control) subjects.push({ label: 'Relay controller under test', box: control });
+    if (Array.isArray(card?.receivers)) for (const receiver of card.receivers) {
+      const box = bounds(receiver);
+      if (box) subjects.push({ label: 'Receiver in the projected route', box });
+    }
   }
   if (situationCard && family === slotTransferId) {
     const source = bounds(card?.source), destination = bounds(card?.destination);
