@@ -14,6 +14,7 @@ type Scene = { pitch: number; start: NativePoint; heading: number; exit: NativeB
 type Layout = NativePoint[];
 type Choice = { action: NativeCommand; kind: 'observe' | 'select' | 'place' | 'launch'; index?: number; point?: NativePoint; layout?: Layout };
 type State = { epoch: number; scene: Scene; refs: string[]; observedLaunch: boolean; selected: number | null; layout: Layout | null; rejected: string[] };
+type LaunchModel = { completed: number; pitch: number; actorMask: NativePoint[]; ref: string };
 type Proposal = NativeProposal & { local: State; choice: Choice; needId: string };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -85,11 +86,11 @@ function collides(scene: Scene, rows: NativeRows, x: number, y: number, angle: n
 }
 
 type Aim = { point: NativePoint; heading: number };
-function turn(scene: Scene, rows: NativeRows, from: Aim, post: Post, point: NativePoint): Aim | null {
+function turn(scene: Scene, rows: NativeRows, from: Aim, post: Post, point: NativePoint, afterTurn: boolean): Aim | null {
   const radius = scene.pitch, [dx,dy] = directions[from.heading]!;
   const ox = point[0] - from.point[0], oy = point[1] - from.point[1];
   const along = ox * dx + oy * dy, across = dx * oy - dy * ox;
-  if (along < 0 || Math.abs(across) !== radius) return null;
+  if (along < 0 || (afterTurn && along === 0) || Math.abs(across) !== radius) return null;
   const sign = Math.sign(across), angle = from.heading * Math.PI / 2;
   for (let k = 0; k <= along; k += 0.5) {
     if (collides(scene, rows, from.point[0] + dx * k, from.point[1] + dy * k, angle)) return null;
@@ -142,7 +143,7 @@ function plan(scene: Scene, rows: NativeRows, posts: Post[], rejected: string[])
     for (const [i,post] of posts.entries()) {
       if (used.includes(i)) continue;
       for (const point of targets[i]!) {
-        const next = turn(scene, rows, aim, post, point);
+        const next = turn(scene, rows, aim, post, point, used.length > 0);
         if (!next) continue;
         visit(next, layout.map((old,j) => i === j ? point : old), [...used,i]);
       }
@@ -171,6 +172,7 @@ function box(point: NativePoint, radius: number): NativeBox {
 export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFamily<Proposal> {
   const learns = family === learnTurnPostsId;
   let state: State | null = null;
+  let known: LaunchModel | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -180,18 +182,21 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5','ACTION6'].every(id => observation.available_action_refs.includes(id))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      if (learns && !prior && !execution?.readAnimatedCells) return null;
+      if (learns && !prior && !known && !execution?.readAnimatedCells) return null;
       const parts = geometricComponents(rows);
       const scene = prior?.scene ?? measure(parts, rows);
       if (!scene || prior && !prior.observedLaunch) return null;
       const posts = readPosts(parts, scene);
       if (!posts) return null;
       const ref = observation.observation_ref;
-      const receipt = learns && !prior ? execution?.readAnimatedCells?.([scene.start]) : null;
-      const observedLaunch = receipt?.afterRef === ref && receipt.levelEpoch === observation.level_epoch &&
-        receipt.action === activation.action_ref && receipt.cells.includes(0);
+      const reusable = known?.completed === observation.levels_completed && known.pitch === scene.pitch
+        && known.actorMask.length === scene.actorMask.length && known.actorMask.every(pixel => scene.actorMask.some(point => same(point, pixel)))
+        ? known : null;
+      const receipt = learns && !prior && !reusable ? execution?.readAnimatedCells?.([scene.start]) : null;
+      const observedLaunch = !!reusable || (receipt?.afterRef === ref && receipt.levelEpoch === observation.level_epoch &&
+        receipt.action === activation.action_ref && receipt.cells.includes(0));
       if (learns && !prior && !observedLaunch) return null;
-      const local = prior ?? { epoch: observation.level_epoch, scene, refs: observedLaunch && receipt ? [receipt.beforeRef, ref] : [],
+      const local = prior ?? { epoch: observation.level_epoch, scene, refs: reusable ? [reusable.ref] : observedLaunch && receipt ? [receipt.beforeRef, ref] : [],
         observedLaunch, selected: null, layout: null, rejected: [] };
       const choice = choose(local, rows, posts);
       if (!choice) return null;
@@ -246,6 +251,10 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
       return { matched: confirmed, seal_prefix: true, reason: confirmed ? 'turn_post_return_observed' : 'turn_post_projection_contradicted' };
     },
     record(before, after, _action, first, second, proposal, _index, frames) {
+      if (after.levels_completed > before.levels_completed && proposal.choice.kind === 'launch') {
+        known = { completed: after.levels_completed, pitch: proposal.local.scene.pitch,
+          actorMask: proposal.local.scene.actorMask, ref: after.observation_ref };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, choice } = proposal, confirmed = checked(proposal, first, second);
       const observedLaunch = local.observedLaunch || choice.kind === 'observe' && frames.length > 2
@@ -257,8 +266,11 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
         rejected: failed ? [...local.rejected, JSON.stringify(failed)] : local.rejected };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, known }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      known = structuredClone((value.known as LaunchModel | undefined) ?? null);
+    },
   };
 }
 
@@ -270,6 +282,11 @@ function checked({ local, choice }: Proposal, first: NativeRows, second: NativeR
   }
   const [x,y] = choice.point, reach = local.scene.pitch - 1;
   const markers = [-reach,reach].flatMap(dx => [-reach,reach].map(dy => [x+dx,y+dy] as const));
-  return markers.every(([a,b]) => second[b]?.[a] === local.scene.marker)
-    && markers.some(([a,b]) => first[b]?.[a] !== second[b]?.[a]);
+  const visible = markers.filter(([a,b]) => second[b]?.[a] === local.scene.marker);
+  if (visible.length < 3 || !visible.some(([a,b]) => first[b]?.[a] !== second[b]?.[a])) return false;
+  if (visible.length === markers.length) return true;
+  const [a,b] = markers.find(marker => !visible.includes(marker))!;
+  const posts = readPosts(geometricComponents(first), local.scene);
+  return first[b]?.[a] === second[b]?.[a] && !!posts?.some((post, index) => index !== choice.index
+    && post.mask.some(([dx,dy]) => post.point[0] + dx === a && post.point[1] + dy === b));
 }

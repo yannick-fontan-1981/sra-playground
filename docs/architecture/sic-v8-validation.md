@@ -501,7 +501,9 @@ Sur **PORT**, SIC réutilise le déplacement et les sorties de portail vérifié
 
 Sur **CAVA**, SIC réutilise la géométrie des sauts et relit le nouveau quadrillage. Il cherche un trajet qui passe par les deux sceaux avant d’atteindre la sortie. L’atterrissage déclenche une hypothèse de collecte. Après chaque départ, l’absence persistante du sceau confirme que la collecte est acquise. Le niveau 2 gagne en **12 sauts** et **28,66 s**. Les sept commandes et retours du niveau 1 sont reproduits exactement. Les 19 commandes relèvent de SIC, et la permutation de palette conserve les clics. Le même algorithme de couverture est utilisé sur PORT, dont les 34 commandes et retours restent identiques. Empreinte de CAVA `4db7141d669a0803da7758147d02f3c077acab4c9f781da501d00b431d2426bf`.
 
-Le bilan atteint **74/100 niveaux 2** et **191/636 niveaux attestés sous SIC seul** (30,0 %).
+Sur **MOTO**, SIC réutilise le lancement vérifié au niveau 1 et recalcule les placements pour la nouvelle piste. Un essai hors agent a isolé l’effet d’un déplacement d’un plot. Le tracé sans portion droite entre deux virages échoue, tandis que la variante avec une séparation gagne. SIC vérifie aussi les trois coins visibles du repère de sélection lorsque le quatrième est masqué par un autre plot. Le niveau 2 gagne en **7 commandes** et **18,01 s**. Les six commandes et retours du niveau 1 sont reproduits exactement. Les 13 commandes relèvent de SIC, et la permutation de palette conserve le trajet. Empreinte `5789d17b2dffbd1ba7f787e0e4ce7a4f59cbf675221328a99db4de1c42e53730`.
+
+Le bilan atteint **75/100 niveaux 2** et **192/636 niveaux attestés sous SIC seul** (30,2 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
