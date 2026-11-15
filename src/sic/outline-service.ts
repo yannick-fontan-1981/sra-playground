@@ -4,6 +4,7 @@ import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativePoi
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import type { RouteInterventionWitness } from './observed-route-intervention.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const outlineServiceId = 'sic_outline_service';
@@ -33,7 +34,7 @@ const graph = compileStrategyGraph({ id: 'bring_marked_body_to_matching_outline'
 type Strategy = Exclude<keyof typeof outlineServiceStrategies, 'P05' | 'P07'>;
 type Pose = { box: NativeBox; color: number };
 type State = { epoch: number; actor: Pose; target: Pose; frame: Pose; locus: NativeBox; count: number;
-  bound: boolean; opened: boolean; turned: boolean; lastDirection: string | null; evidence: string[] };
+  bound: boolean; opened: boolean; turned: boolean; lastDirection: string | null; evidence: string[]; wall?: number };
 type Move = { command: NativeCommand; landing: NativeBox | null };
 type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string; turnMarker: NativeBox | null };
 const directions = [
@@ -138,7 +139,8 @@ function stepTowards(rows: NativeRows, inputs: readonly NativeCommand[], at: Nat
     })[0] ?? null;
 }
 
-export function createSicOutlineService(family = outlineServiceId): NativeFamily<Proposal> {
+export function createSicOutlineService(family = outlineServiceId,
+  learnRoute?: (witness: RouteInterventionWitness) => void): NativeFamily<Proposal> {
   const learns = family === learnOutlineServiceId;
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
@@ -231,8 +233,13 @@ export function createSicOutlineService(family = outlineServiceId): NativeFamily
       return { matched: null, seal_prefix: true, reason: 'merged_outline_did_not_score' };
     },
     record(before, after, command, first, second, proposal) {
+      const { local, move, strategy } = proposal, [pitch] = size(local.actor.box);
+      if (after.levels_completed > before.levels_completed && local.opened && local.turned && local.wall !== undefined) {
+        learnRoute?.({ epoch: after.level_epoch, score: after.levels_completed, actor: local.actor.color, carrier: local.target.color,
+          wall: local.wall, pitch, refs: [...local.evidence, after.observation_ref] });
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const local = proposal.local, landing = proposal.move.landing;
+      const landing = move.landing;
       const moved = landing && measuredTranslation(first, second, local.actor, landing);
       const opened = local.opened || (proposal.strategy === 'test_framed_operator'
         && frameOpened(second, local));
@@ -241,9 +248,16 @@ export function createSicOutlineService(family = outlineServiceId): NativeFamily
       const failed = (landing && !moved) || (proposal.strategy === 'test_framed_operator' && !opened)
         || (turnMarker && !turned)
         || proposal.strategy === 'verify_outline_contact';
+      let wall = local.wall;
+      if (learnRoute && opened && strategy === 'test_framed_operator') {
+        const [l, t, r, b] = local.locus;
+        const interior = (rows: NativeRows) => rows.slice(t + 1, b).flatMap(row => row.slice(l + 1, r));
+        const pixels = interior(first), fill = pixels[0];
+        if (fill !== undefined && pixels.every(value => value === fill) && !interior(second).includes(fill)) wall = fill;
+      }
       state = { ...local, opened, count: failed ? 32 : local.count + 1,
         actor: moved ? { ...local.actor, box: landing } : local.actor, bound: local.bound || !!moved,
-        turned,
+        turned, ...(wall === undefined ? {} : { wall }),
         lastDirection: moved ? command.action_ref : local.lastDirection,
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };

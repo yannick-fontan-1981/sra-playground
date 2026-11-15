@@ -30,6 +30,7 @@ import { observedPolePairId, observedPolePairStrategies } from './observed-pole-
 import { observedSharedRelationsId, observedSharedRelationsStrategies } from './observed-shared-relations.ts';
 import { observedPatternLayoutId, observedPatternLayoutStrategies } from './observed-pattern-layout.ts';
 import { observedActuatorArrangementId } from './observed-actuator-arrangement.ts';
+import { observedRouteInterventionId } from './observed-route-intervention.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -609,6 +610,14 @@ export function readNativeResolution(agent: {
   if (situationCard && (family === outlineServiceId || family === learnOutlineServiceId)) {
     for (const [field, label] of [['controlledPiece', 'Controlled outline'], ['addressedRegion', 'Frame or matching outline'],
       ['markedBody', 'Nearby body'], ['marker', 'Direction marker']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === observedRouteInterventionId) {
+    for (const [field, label] of [['controlledPiece', 'Controlled outline'], ['markedBody', 'Autonomous body'],
+      ['marker', 'Announced movement'], ['rival', 'Interfering mobile'], ['addressedRegion', 'Intervention cell'],
+      ['destination', 'Matching outline']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }

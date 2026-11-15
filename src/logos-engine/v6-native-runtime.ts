@@ -53,7 +53,8 @@ import { measureDirectionalMotion, type DirectionalMotion } from '../sic/observe
 import { createSicTransportContact, learnTransportAccessId } from '../sic/transport-contact.ts';
 import { createSicVerifyBandTransfer } from '../sic/band-alignment.ts';
 import { createSicVerifySharedArrival } from '../sic/shared-arrival.ts';
-import { createSicOutlineService, learnOutlineServiceId } from '../sic/outline-service.ts';
+import { createSicOutlineService, learnOutlineServiceId, outlineServiceId } from '../sic/outline-service.ts';
+import { createSicObservedRouteIntervention } from '../sic/observed-route-intervention.ts';
 import { createSicLabeledSequence, learnLabeledSequenceId } from '../sic/labeled-sequence.ts';
 import { createSicMarkedCollection } from '../sic/marked-collection.ts';
 import { createSicVisibleConfigurationCoverage } from '../sic/visible-configuration-coverage.ts';
@@ -2675,6 +2676,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const now = options.now ?? (() => performance.now());
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
+    const routeIntervention = createSicObservedRouteIntervention();
     const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 176, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
@@ -2683,7 +2685,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicVerifyParallelSymbolPrefixes(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
-      createSicVerifySharedArrival(), createSicOutlineService(), createSicOutlineService(learnOutlineServiceId),
+      createSicVerifySharedArrival(), createSicOutlineService(outlineServiceId, routeIntervention.learn),
+      createSicOutlineService(learnOutlineServiceId, routeIntervention.learn), routeIntervention,
       createSicLabeledSequence(sequence, now), createSicLabeledSequence(sequence, now, learnLabeledSequenceId),
       createSicMarkedCollection(), createSicVisibleConfigurationCoverage(), createSicMarkedCompartmentFlow(), createSicObservedRelayRoute(), createSicObservedPrefixQuotas(),
       createSicObservedCarrierReduction(), createSicObservedLinePlacement(), createSicObservedPolePair(), createSicObservedSharedRelations(),
