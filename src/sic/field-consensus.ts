@@ -4,11 +4,22 @@ import type { NativePoint } from '../logos-engine/v6-native-types.ts';
 type Fit = { table: ConstraintTable; unchanged: number };
 type FieldConsensus = Fit & { relation: string };
 
-function repeatedValues(field: RegularField, groups: Iterable<string[]>): Fit | null {
+function repeatedValues(field: RegularField, groups: Iterable<string[]>, useIndependentGroups = false): Fit | null {
   const table: ConstraintTable = new Map();
   const targetValues = new Set<number>();
   let unchanged = 0;
-  for (const cells of groups) {
+  const partition = useIndependentGroups ? [...groups] : groups;
+  const witnesses = new Map<number, string[][]>();
+  if (useIndependentGroups) {
+    for (const cells of partition) {
+      const value = field.values.get(cells[0]!)!;
+      if (cells.length < 2 || !cells.every(cell => field.values.get(cell) === value)) continue;
+      const intact = witnesses.get(value) ?? [];
+      if (intact.length < 2) intact.push(cells);
+      witnesses.set(value, intact);
+    }
+  }
+  for (const cells of partition) {
     const values = new Map<number, string[]>();
     for (const cell of cells) {
       const value = field.values.get(cell)!;
@@ -17,13 +28,17 @@ function repeatedValues(field: RegularField, groups: Iterable<string[]>): Fit | 
       values.set(value, matching);
     }
     const majority = [...values].find(([, sites]) => sites.length >= 2 && sites.length * 2 > cells.length);
-    if (!majority) return null;
-    const [expected, sites] = majority;
+    const supported = majority || !useIndependentGroups ? [] : [...values].filter(([value]) => witnesses.has(value));
+    const [prediction] = supported;
+    const choice = majority ?? (supported.length === 1 && witnesses.get(prediction![0])!.length >= 2 ? prediction : undefined);
+    if (!choice) return null;
+    const [expected, sites] = choice;
+    const unchangedSites = majority ? sites : [...sites, ...witnesses.get(expected)!.flat()];
     unchanged += sites.length;
     targetValues.add(expected);
     for (const cell of cells) {
       const actual = field.values.get(cell)!;
-      if (actual !== expected) table.set(cell, { actual, eq: new Set([expected]), ne: new Set(), sources: new Set(sites) });
+      if (actual !== expected) table.set(cell, { actual, eq: new Set([expected]), ne: new Set(), sources: new Set(unchangedSites) });
     }
   }
   return table.size > 0 && targetValues.size > 1 && table.size * 3 < unchanged ? { table, unchanged } : null;
@@ -74,4 +89,15 @@ function reflectionConsensus(field: RegularField, isometries: readonly string[])
 }
 export function fieldConsensus(field: RegularField, isometries: readonly string[]): FieldConsensus[] {
   return [...periodicConsensus(field), ...reflectionConsensus(field, isometries)];
+}
+
+/** Resolve a two-cell disagreement only when one value recurs in intact pairs. */
+export function pairedReflectionConsensus(field: RegularField, isometries: readonly string[]): FieldConsensus[] {
+  const { xs, ys } = field;
+  const address = ([x, y]: NativePoint) => [xs[x], ys[y]].join(',');
+  return isometries.flatMap(name => {
+    const pairs = correspondences(xs.length, ys.length, name).map(pair => pair.map(address));
+    const fit = repeatedValues(field, pairs, true);
+    return fit ? [{ ...fit, relation: 'reflection-pairs:' + name }] : [];
+  });
 }

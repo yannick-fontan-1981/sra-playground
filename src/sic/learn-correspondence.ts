@@ -2,7 +2,7 @@ import { correspondences, measuredFields, periodicHypotheses, symmetryEvidence, 
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
-import { fieldConsensus } from './field-consensus.ts';
+import { fieldConsensus, pairedReflectionConsensus } from './field-consensus.ts';
 import { sicNeedId } from './need-identity.ts';
 import { independentPredictionSupport, type PredictionTrial } from './independent-prediction.ts';
 import { observeRepeatedCells } from './observed-repeated-cells.ts';
@@ -98,7 +98,10 @@ function corroboratedDisagreements(field: RegularField, prior: State | null, fro
   const previousConsensus = prior?.hypotheses.some(name => name.includes('-majority:')) ?? false;
   const basic = [...symmetry, ...periodic];
   const useConsensus = fromRepeatedCells || previousConsensus || !prior && basic.length === 0;
-  const consensus = useConsensus ? fieldConsensus(field, transforms) : [];
+  const majority = useConsensus ? fieldConsensus(field, transforms) : [];
+  const usePairedWitnesses = fromRepeatedCells && (prior
+    ? prior.hypotheses.some(name => name.startsWith('reflection-pairs:')) : !majority.length);
+  const consensus = usePairedWitnesses ? pairedReflectionConsensus(field, transforms) : majority;
   const minimum = Math.min(...consensus.map(fit => fit.table.size));
   const selectedConsensus = consensus.filter(fit => prior ? prior.hypotheses.includes(fit.relation) : fit.table.size === minimum);
   const options = useConsensus ? selectedConsensus.map(({ relation, table }) => [relation, table] as const) : basic;
