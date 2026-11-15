@@ -4,6 +4,8 @@ import type { NativeBox, NativeCommand, NativeEntity, NativeFamily, NativeObserv
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { chooseTransport, transportModule } from './transport-motion-card.ts';
+import { assessDelivery, nextDeliveryStep, startRecoveredDelivery, type Crossing, type DeliveryModel,
+  type DeliveryState, type DeliveryStep } from './sequential-ferry.ts';
 
 export const carryToFrameId = 'sic_carry_to_frame';
 export const learnCarryToFrameId = 'sic_learn_transport_from_motion';
@@ -13,9 +15,17 @@ export const carryToFrameStrategies = {
   test_transport_interaction: 'Test the interaction at the object',
   carry_toward_frame: 'Move the carried object toward its matching frame',
   test_delivery_at_frame: 'Test the same interaction when the object reaches the frame',
+  move_to_next_pickup: 'Approach the next matched object on the departure side',
+  verify_pickup: 'Take the object and verify its new position relative to the carrier',
+  align_for_next_pickup: 'Position the carrier while preserving its hold',
+  cross_with_cargo: 'Cross the previously observed gap while carrying the object',
+  deposit_in_receiver: 'Place the object in its own receiver',
+  return_without_cargo: 'Return for the remaining object after verifying the deposit',
 } as const;
+const soloStrategies = ['test_delivery_at_frame', 'test_transport_interaction', 'carry_toward_frame',
+  'approach_matching_object', 'measure_transport_control'] as const;
 const graph = compileStrategyGraph({ id: 'move_an_object_into_matching_frame', version: 1, order: 'FALLBACK',
-  priorities: ['test_delivery_at_frame', 'test_transport_interaction', 'carry_toward_frame', 'approach_matching_object', 'measure_transport_control'],
+  priorities: soloStrategies,
   strategies: {
     measure_transport_control: [{ fact: 'probe', expected: true, label: 'A command may reveal a displacement toward the target' }],
     approach_matching_object: [{ fact: 'approach', expected: true, label: 'A measured move brings the body closer to the object' }],
@@ -24,11 +34,14 @@ const graph = compileStrategyGraph({ id: 'move_an_object_into_matching_frame', v
     test_delivery_at_frame: [{ fact: 'release', expected: true, label: 'A region moving with the body now touches the matching frame' }],
   },
 }, ['probe', 'approach', 'pickup', 'carry', 'release']);
-type Strategy = keyof typeof carryToFrameStrategies;
+type Strategy = typeof soloStrategies[number];
 type Pair = { object: { bbox: NativeBox; palette_value: number; area: number }; frame: { bbox: NativeBox; interior_bbox: NativeBox } };
 type State = { epoch: number; pair: Pair; actor: string | null; controls: Record<string, NativePoint>; held: NativeBox | null;
   movedTogether: boolean; interaction: string | null; tried: string[]; evidence: string[]; frame: string; stopped: boolean };
-type Proposal = NativeProposal & { local: State; actor: NativeBox | null; subject: NativeBox; strategy: Strategy; needId: string; attempt: string };
+type SingleProposal = NativeProposal & { local: State; actor: NativeBox | null; subject: NativeBox; strategy: Strategy; needId: string; attempt: string };
+type MultiProposal = NativeProposal & { deliveries: DeliveryState; actor: NativeBox; transfer: DeliveryStep; needId: string };
+type Proposal = SingleProposal | MultiProposal;
+const isMulti = (proposal: Proposal): proposal is MultiProposal => 'deliveries' in proposal;
 const unit: Readonly<Record<string, NativePoint>> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const span = (box: NativeBox) => Math.max(box[2] - box[0] + 1, box[3] - box[1] + 1);
@@ -36,7 +49,7 @@ const overlaps = (a: NativeBox, b: NativeBox) => intersects(a, b);
 const objectCandidates = (obs: NativeObservation, pair: Pair) => obs.entities.filter(e => e.palette_value === pair.object.palette_value
   && e.area >= Math.max(4, Math.ceil(pair.object.area / 2)) && e.bbox[0] !== e.bbox[2] && e.bbox[1] !== e.bbox[3]);
 
-function actorMotion(proposal: Proposal, before: NativeObservation, after: NativeObservation) {
+function actorMotion(proposal: SingleProposal, before: NativeObservation, after: NativeObservation) {
   if (!proposal.local.actor) return moved_core(before, after);
   const actor = find_body(after, proposal.local.actor) as NativeEntity | null;
   if (!actor || !proposal.actor) return null;
@@ -44,7 +57,7 @@ function actorMotion(proposal: Proposal, before: NativeObservation, after: Nativ
     delta: [actor.bbox[0] - proposal.actor[0], actor.bbox[1] - proposal.actor[1]] as NativePoint };
 }
 
-function returnedObject(proposal: Proposal, after: NativeObservation, delta: NativePoint) {
+function returnedObject(proposal: SingleProposal, after: NativeObservation, delta: NativePoint) {
   const candidates = objectCandidates(after, proposal.local.pair), held = proposal.local.held;
   if (!held) return null;
   const projected = shift(held, delta);
@@ -56,9 +69,41 @@ function returnedObject(proposal: Proposal, after: NativeObservation, delta: Nat
   return touching.length === 1 && !candidates.some(item => equal(item.bbox, held)) ? touching[0]!.bbox : null;
 }
 
+function multipleProposal(family: string, observation: NativeObservation, deliveries: DeliveryState): MultiProposal | null {
+  const actor = (find_body(observation, deliveries.model.actor) as NativeEntity | null)?.bbox;
+  const transfer = actor && nextDeliveryStep(deliveries, actor);
+  if (!actor || !transfer || !observation.available_action_refs.includes(transfer.command)) return null;
+  const strategies = { approach: 'move_to_next_pickup', take: 'verify_pickup', align: 'align_for_next_pickup',
+    cross: 'cross_with_cargo', release: 'deposit_in_receiver', return: 'return_without_cargo' } as const;
+  const strategy = strategies[transfer.phase], label = carryToFrameStrategies[strategy], parent = 'G_official_completion';
+  const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...deliveries.refs.filter(item => item !== ref)];
+  const active = deliveries.cargo[deliveries.delivered]!;
+  const next = deliveries.cargo[deliveries.delivered + 1];
+  const reason = transfer.phase === 'align' && next && transfer.target === next.object.bbox
+    ? 'Choose a crossing height that leaves the next object within reach after returning' : label;
+  const goal = { kind: 'deliver_matching_objects_across_a_shared_passage', scope: ref.split(':revision:', 1)[0]!,
+    subjects: deliveries.cargo.map(item => item.frame.bbox.join(',')), parentObjective: parent,
+    satisfactionContract: 'confirm_each_delivery_and_official_progress' };
+  const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id;
+  const action = { action_ref: transfer.command, data: {} };
+  return { status: 'proposed', kind: family, deliveries, actor, transfer, needId: need.id, actions: [action],
+    steps: [{ action, expected_after: transfer.expect }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    sicSituationCard: { strategy, need: 'Deliver each object while preserving completed deliveries', situation: reason, mode: 'solving',
+      evidence, agenda: [], actor, object: deliveries.held ?? active.object.bbox, frame: active.frame.bbox, target: transfer.target,
+      ...(next ? { pendingObject: next.object.bbox } : {}) },
+    question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
+    sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+      preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Proposal> {
   const learns = family === learnCarryToFrameId;
   let state: State | null = null;
+  let measuredCrossing: { epoch: number; crossing: Crossing; ref: string } | null = null;
+  let previousDelivery: DeliveryModel | null = null;
+  let multiple: { epoch: number; deliveries: DeliveryState } | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -69,6 +114,14 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION5')) return null;
       const prior = state?.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
       if (prior?.stopped || (prior?.tried.length ?? 0) >= 36) return null;
+      if (previousDelivery?.completed === observation.levels_completed) {
+        const deliveries = multiple?.epoch === observation.level_epoch ? multiple.deliveries
+          : startRecoveredDelivery(observation, rows, previousDelivery);
+        if (deliveries) {
+          const chosen = multipleProposal(family, observation, deliveries);
+          if (chosen) return chosen;
+        }
+      }
       const receipt = learns && !prior ? execution?.readDirectionalMotion?.() : null;
       const motion = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch ? receipt : null;
       const translated = motion?.translations.length === 1 ? motion.translations[0] : null;
@@ -139,14 +192,30 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'transport_context_bound' : 'transport_context_changed' };
     },
-    after(proposal, _index, before, after) {
+    after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isMulti(proposal)) {
+        const proof = assessDelivery(proposal.deliveries, proposal.transfer, after, first, second, proposal.actor);
+        return { matched: proof !== null, seal_prefix: true, reason: proof?.reason ?? 'delivery_return_contradicted' };
+      }
       return { matched: null, seal_prefix: true, reason: 'observe_completed_motion_or_transport_interaction' };
     },
-    record(before, after, command, _first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+    record(before, after, command, first, second, proposal) {
+      if (isMulti(proposal)) {
+        if (before.level_epoch === after.level_epoch && before.state === after.state) {
+          const proof = assessDelivery(proposal.deliveries, proposal.transfer, after, first, second, proposal.actor);
+          multiple = { epoch: before.level_epoch, deliveries: proof?.state ?? { ...proposal.deliveries, stopped: true } };
+        }
+        return { events: [] };
+      }
       const { local, strategy } = proposal;
+      if (after.levels_completed > before.levels_completed && strategy === 'test_delivery_at_frame'
+        && local.actor && local.interaction && measuredCrossing?.epoch === before.level_epoch) {
+        previousDelivery = { actor: local.actor, crossing: measuredCrossing.crossing, motion: local.controls, interaction: local.interaction,
+          completed: after.levels_completed, evidence: [measuredCrossing.ref, before.observation_ref, after.observation_ref] };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const motion = actorMotion(proposal, before, after), delta = motion?.delta as NativePoint | undefined;
       const controls = { ...local.controls };
       let held = local.held, interaction = local.interaction, stopped = false, movedTogether = local.movedTogether;
@@ -159,7 +228,16 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       } else if (unit[command.action_ref] && motion && delta?.some(Boolean)) {
         if (local.held) {
           const next = returnedObject(proposal, after, delta);
-          if (next) { held = next; movedTogether = true; } else { stopped = true; }
+          if (next) {
+            held = next;
+            movedTogether = true;
+            const forward = controls[command.action_ref];
+            if (proposal.actor && forward?.[0] && !delta[1] && Math.abs(delta[0]) > span(proposal.actor)) {
+              const inverse = Object.entries(controls).find(([, point]) => point[0] === -forward[0] && point[1] === 0);
+              if (inverse) measuredCrossing = { epoch: before.level_epoch, ref: after.observation_ref,
+                crossing: { from: proposal.actor[0], to: motion.bbox[0], forward: command.action_ref, back: inverse[0] } };
+            }
+          } else { stopped = true; }
         }
         if (Math.abs(delta[0]) + Math.abs(delta[1]) <= span(motion.bbox)) controls[command.action_ref] = delta;
       }
@@ -170,7 +248,12 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
         frame: after.frame_hash, tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, measuredCrossing, previousDelivery, multiple }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      measuredCrossing = structuredClone((value.measuredCrossing as typeof measuredCrossing | undefined) ?? null);
+      previousDelivery = structuredClone((value.previousDelivery as DeliveryModel | undefined) ?? null);
+      multiple = structuredClone((value.multiple as typeof multiple | undefined) ?? null);
+    },
   };
 }

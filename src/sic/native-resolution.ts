@@ -1156,7 +1156,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === carryToFrameId || family === learnCarryToFrameId)) {
-    for (const [field, label] of [['actor', 'Controlled body'], ['object', 'Object to transport'], ['frame', 'Matching frame']] as const) {
+    for (const [field, label] of [['actor', 'Controlled body'], ['object', 'Object to transport'],
+      ['frame', 'Matching frame'], ['pendingObject', 'Next object to collect']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
