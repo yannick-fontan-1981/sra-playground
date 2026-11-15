@@ -614,7 +614,7 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === remoteSupportRouteId || family === learnRemoteAccessId)) {
     for (const [field, label] of [['actor', 'Moving piece'], ['target', 'Target piece'], ['control', 'Remote control'],
-      ['landing', 'Proposed next cell'], ['affectedSupport', 'Support that may change']] as const) {
+      ['landing', 'Proposed next cell'], ['affectedSupport', 'Support that may change'], ['acquisition', 'Marker to test for the missing control']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }

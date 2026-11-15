@@ -401,6 +401,10 @@ Sur **LP85**, le moteur reconnaît 42 emplacements, deux destinations et six com
 
 Le bilan atteint **45/100 niveaux 2** et **162/636 niveaux attestés sous SIC seul** (25,5 %).
 
+Sur **DC22**, SIC retrouve les deux pièces et remesure les effets des commandes disponibles. L'une réoriente un pont dont les pixels ont une autre couleur que son bouton. La cible demeure inaccessible avec ces premiers effets. Le trajet se déplace vers un marqueur associé à une commande déjà observée au niveau 1 et absente du panneau courant. Le contact à la vingtième commande fait apparaître le bouton. SIC teste ce nouvel effet, puis franchit les supports jusqu'à la cible. Le niveau 1 conserve ses 22 commandes et les effets mesurés. Le niveau 2 gagne en **47 commandes SIC seul**, y compris avec `sic_remote_support_route` retirée. Empreinte de la partie normale `607b0572ba5766c2480aba8e1bd77d665d172180d406c5ef5e7baa7b1c978b25`.
+
+Le bilan atteint **46/100 niveaux 2** et **163/636 niveaux attestés sous SIC seul** (25,6 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
