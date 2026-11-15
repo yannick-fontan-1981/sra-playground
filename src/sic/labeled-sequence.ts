@@ -1,12 +1,18 @@
 import { inferLabeledSequence } from '../logos-engine/v6-labeled-sequence-mechanics.ts';
 import { measureLabeledSequence } from '../logos-engine/v6-labeled-sequence-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { symbolicDigest } from '../logos-engine/v6-hash.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const labeledSequenceId = 'sic_labeled_sequence';
+export const learnLabeledSequenceId = 'sic_apply_consensus_after_observed_submission';
 export const labeledSequenceStrategies = {
+  P02: navigationPrimitives.P02,
+  P05: navigationPrimitives.P05,
   compare_labeled_examples: 'Compare the sequence with both groups of examples',
   reuse_labeled_examples: 'Classify the new sequence using the same visible examples',
 } as const;
@@ -24,14 +30,20 @@ const graph = compileStrategyGraph({ id: 'classify_with_consistent_examples', ve
 type Bounds = { bbox: NativeBox };
 type Button = Bounds & { label: number; point: NativePoint };
 type TrainingCache = NativeRecord & { epoch: number; context_ref: string; controls: Button[] };
-type State = { cache: TrainingCache; ref: string; attempted: string[] };
-type Proposal = NativeProposal & { cache: TrainingCache; attempt: string; needId: string };
+type Submission = { query: string; beforeRef: string; afterRef: string };
+type State = { cache: TrainingCache; ref: string; attempted: string[]; submission?: Submission };
+type Proposal = NativeProposal & { cache: TrainingCache; attempt: string; needId: string; query?: string };
 
-export function createSicLabeledSequence(config: NativeRecord, now: () => number): NativeFamily<Proposal> {
+export function createSicLabeledSequence(config: NativeRecord, now: () => number, family = labeledSequenceId): NativeFamily<Proposal> {
+  const learns = family === learnLabeledSequenceId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: labeledSequenceId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.cache.epoch === observation.level_epoch ? state : null;
       const scene = measureLabeledSequence(rows, prior?.cache.controls ?? null);
@@ -49,24 +61,41 @@ export function createSicLabeledSequence(config: NativeRecord, now: () => number
       const attempt = `${observation.frame_hash}:${x},${y}`;
       if (prior?.attempted.includes(attempt)) return null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...(result.training_reused && prior ? [prior.ref] : [])];
       const command: NativeCommand = { action_ref: 'ACTION6', data: { x, y } };
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const query = learns ? symbolicDigest(scene.query) : null;
+      const submission = prior?.submission;
+      const repeated = submission?.afterRef === ref && result.training_reused && submission.query !== query;
+      const evidence: [string, ...string[]] = [ref, ...new Set([
+        ...(result.training_reused && prior ? [prior.ref] : []), ...(repeated ? [submission.beforeRef] : []),
+      ])];
+      const facts = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = repeated ? 'P02' : 'P05';
+      if (learns && decision?.result !== primitive) return null;
+      const agenda = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
         consensus: { value: true, evidence }, reusedExamples: { value: result.training_reused, evidence },
       }, planners: { compare_labeled_examples: () => command, reuse_labeled_examples: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = labeledSequenceStrategies[strategy], parent = 'G_official_completion';
+      const strategy = learns ? primitive : agenda?.selected?.id;
+      if (!strategy) return null;
+      const label = labeledSequenceStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'classify_visible_sequence', scope: ref.split(':revision:', 1)[0]!, subjects: [scene.context_ref],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_from_agreed_submissions' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `labeled-sequence:${need.id}`, actions = [selected.plan];
+      const id = `labeled-sequence:${need.id}`, actions = [command];
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, control.point, { reason: label, evidence });
-      return { status: 'proposed', kind: labeledSequenceId, actions, attempt, cache: result.training_cache, needId: need.id,
+      if (learns && !pointBinding) return null;
+      return { status: 'proposed', kind: family, actions, attempt, cache: result.training_cache, needId: need.id,
+        ...(query ? { query } : {}),
         steps: [{ action: command, expected_after: null, point_binding: pointBinding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Choose a label supported by the visible examples', mode: result.training_reused ? 'assimilation' : 'solving',
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Choose a label supported by the visible examples',
+          mode: learns ? mode : result.training_reused ? 'assimilation' : 'solving',
           situation: `${models} compatible rules agree on this label. The result of the submission is still open.`,
-          agenda: entries, evidence, examples: (scene.panels as Bounds[]).map(panel => panel.bbox),
+          agenda: agenda?.entries ?? [], evidence, examples: (scene.panels as Bounds[]).map(panel => panel.bbox),
+          ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
           query: (scene.query as Bounds).bbox, addressedRegion: control.bbox },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -89,7 +118,9 @@ export function createSicLabeledSequence(config: NativeRecord, now: () => number
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const prior = state?.cache.epoch === before.level_epoch ? state : null;
       state = { cache: proposal.cache, ref: prior && prior.cache.context_ref === proposal.cache.context_ref ? prior.ref : before.observation_ref,
-        attempted: [...(prior?.attempted.slice(-63) ?? []), proposal.attempt] };
+        attempted: [...(prior?.attempted.slice(-63) ?? []), proposal.attempt],
+        ...(proposal.query && before.frame_hash !== after.frame_hash
+          ? { submission: { query: proposal.query, beforeRef: before.observation_ref, afterRef: after.observation_ref } } : {}) };
       return { events: [] };
     },
     state: () => ({ state }),

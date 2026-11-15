@@ -14,7 +14,7 @@ import { learnTransportAccessId, transportContactId, transportContactStrategies 
 import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
 import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
 import { learnOutlineServiceId, outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
-import { labeledSequenceId, labeledSequenceStrategies } from './labeled-sequence.ts';
+import { labeledSequenceId, labeledSequenceStrategies, learnLabeledSequenceId } from './labeled-sequence.ts';
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
@@ -478,7 +478,7 @@ export function readNativeResolution(agent: {
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : (family === outlineServiceId || family === learnOutlineServiceId) ? outlineServiceStrategies
-          : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
+          : (family === labeledSequenceId || family === learnLabeledSequenceId) ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
             : family === slotTransferId ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
                 : (family === surfaceCopyId || family === learnSurfaceCopyId) ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
@@ -563,7 +563,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === labeledSequenceId) {
+  if (situationCard && (family === labeledSequenceId || family === learnLabeledSequenceId)) {
     const panels = Array.isArray(card?.examples) ? card.examples : [];
     for (const panel of panels) {
       const box = bounds(panel);

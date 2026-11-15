@@ -493,3 +493,9 @@ Après l’essai bloqué, les 16 commandes et les résumés des retours correspo
 Le runtime retire `sic_symbol_contribution` et `sic_window_relation` de ses groupes. Sur CRAF, les cartes SRC choisissent le rôle de la commande et la primitive à chaque retour. Sur FT09, la carte choisit la case à tester ou la réécriture à réutiliser. Les deux niveaux conservent leurs commandes et retours de référence, en neuf commandes pour CRAF et quatre pour FT09. Le comparateur vérifie l’absence des deux anciens sélecteurs et la présence des fournisseurs de mesure actifs.
 
 En configuration normale, désactiver la règle de sélection à la troisième décision sur CRAF ou désactiver P02 après les deux premiers clics sur FT09 redonne la main à l’exploration. Les niveaux restent ouverts après neuf commandes chacun. Les diagrammes, les fenêtres et les effets des clics restent mesurés par les fournisseurs TypeScript.
+
+### Réutiliser les exemples lorsqu’une nouvelle question apparaît
+
+Avec `sic_labeled_sequence` retirée, **CATL gagne en huit commandes SIC seul**. SIC soumet une première réponse P05 lorsque les hypothèses compatibles avec les exemples désignent le même contrôle. Si la question visible change après la commande et que les exemples restent valides, la carte SRC `sic.verify_observed_interaction.choose` autorise P02. Le fournisseur recalcule la réponse pour chaque question. La victoire officielle est observée après sept nouvelles soumissions.
+
+Les commandes et retours reproduisent la référence, empreinte `7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996`. Le nom neutre et la palette permutée conservent le gain en huit commandes. Désactiver P02 après la première soumission rend certains choix à l’exploration. Le niveau reste ouvert au même budget.
