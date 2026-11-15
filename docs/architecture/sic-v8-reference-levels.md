@@ -14,15 +14,15 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | BP35 | 9 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/BP35/LVL1/good_run_pseudocode.md) | 0 (archive locale) | — | 1 | 2 | 2 |
 | CASC | 6 | [0](../../docs/migration/native-campaigns-v55/baseline-casc/casc-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CASC/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | CATL | 6 | [6](../../docs/migration/native-campaigns-v45/before-continuation-coordination/catl-six-levels.json) | — | — | — | 6 | 6 | 3 |
-| CATR | 6 | [0](../../docs/migration/lot2b-evidence/final/catr-control-attention/catr-campaign.json.gz) | — | — | — | 0 | 1 | 2 |
+| CATR | 6 | [0](../../docs/migration/lot2b-evidence/final/catr-control-attention/catr-campaign.json.gz) | — | — | — | 0 | 1 | 3 |
 | CAVA | 6 | — | — | — | — | — | — | 2 |
 | CD82 | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CD82/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
 | CGWL | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CGWL/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | CLRS | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CLRS/LVL2/good_run_pseudocode.md) | 0 (archive locale) | — | 2 | 3 | 2 |
-| CN04 | 6 | [3](../../docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CN04/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
-| COLM | 6 | [3](../../docs/migration/native-campaigns-v48/colm-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/COLM/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
-| COMB | 6 | [6](../../docs/migration/native-campaigns-v43/comb-six-levels.json) | — | — | — | 6 | 6 | 2 |
-| CONN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CONN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
+| CN04 | 6 | [3](../../docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CN04/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 3 |
+| COLM | 6 | [3](../../docs/migration/native-campaigns-v48/colm-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/COLM/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 3 |
+| COMB | 6 | [6](../../docs/migration/native-campaigns-v43/comb-six-levels.json) | — | — | — | 6 | 6 | 3 |
+| CONN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CONN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 3 |
 | CRAF | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CRAF/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | CWSE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
 | DAME | 6 | 1 (rejeu local 0.68) | — | 3 (archive locale) | — | 3 | 4 | 2 |
@@ -34,11 +34,11 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | ETAG | 6 | — | — | 2 (archive locale) | — | 2 | 3 | 2 |
 | EVAS | 6 | — | — | 2 (archive locale) | — | 2 | 3 | 2 |
 | FITE | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/FITE/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
-| FOGW | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/FOGW/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
-| FT09 | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 2 |
+| FOGW | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/FOGW/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 3 |
+| FT09 | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 3 |
 | FUIT | 6 | — | — | — | — | — | — | 2 |
 | G50T | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/G50T/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
-| GABA | 6 | — | — | — | — | — | — | 2 |
+| GABA | 6 | — | — | — | — | — | — | 3 |
 | GARE | 6 | [3](../../docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/GARE/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
 | GIGO | 6 | — | — | 2 (archive locale) | — | 2 | 3 | 2 |
 | GLOB | 6 | [3](../../docs/migration/native-campaigns-v56/baseline-glob/glob-campaign.json.gz) | — | 3 (archive locale) | — | 3 | 4 | 2 |
