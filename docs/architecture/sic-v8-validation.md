@@ -483,6 +483,10 @@ Sur **RSWP**, SIC réutilise les formes des activités observées au niveau 1 et
 
 Le bilan atteint **65/100 niveaux 2** et **182/636 niveaux attestés sous SIC seul** (28,6 %).
 
+Sur **PRTL**, SIC réutilise les symboles de sélection et les preuves de déplacement du niveau 1. Au niveau 2, un premier lien donne accès à la plateforme intermédiaire. SIC vérifie le passage et l’arrivée en appui, puis remplace le lien pour accéder au compartiment final. Le niveau 2 gagne en **17 commandes** et **27,57 s**. Les six commandes et retours du niveau 1 sont reproduits. Les 23 commandes relèvent de SIC, avec l’empreinte `6cbbf9d3fc58e9c5ef3882657362bde977f65a8ee23903251daea3b1c0ff359d`. La permutation de palette conserve les commandes. Avec `sic_link_openings` retiré, `sic_test_visible_opening_controls` reproduit le même parcours complet.
+
+Le bilan atteint **66/100 niveaux 2** et **183/636 niveaux attestés sous SIC seul** (28,8 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
