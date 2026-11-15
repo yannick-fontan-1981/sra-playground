@@ -9,7 +9,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | Jeu | Total | Natif | V5 | V6 | V7 | Maximum attesté | Prochain jalon | SIC seul |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | AMZE | 6 | — | — | — | — | — | — | 2 |
-| AR25 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 1 |
+| AR25 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
 | AS66 | 9 | [3](../../docs/migration/native-campaigns-v55/baseline-as66/as66-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AS66/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 5 |
 | BP35 | 9 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/BP35/LVL1/good_run_pseudocode.md) | 0 (archive locale) | — | 1 | 2 | 2 |
 | CASC | 6 | [0](../../docs/migration/native-campaigns-v55/baseline-casc/casc-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CASC/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
@@ -35,7 +35,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | EVAS | 6 | — | — | 2 (archive locale) | — | 2 | 3 | 2 |
 | FITE | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/FITE/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | FOGW | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/FOGW/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
-| FT09 | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 1 |
+| FT09 | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 2 |
 | FUIT | 6 | — | — | — | — | — | — | 1 |
 | G50T | 7 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 1 |
 | GABA | 6 | — | — | — | — | — | — | 1 |

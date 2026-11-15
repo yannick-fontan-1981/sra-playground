@@ -1022,7 +1022,10 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === reflectedPlacementId || family === coordinateObservedMotionId)) {
-    for (const [field, label] of [['body', 'Controlled piece'], ['reflection', 'Reflected piece'], ['target', 'Marked cells']] as const) {
+    const axis = bounds(card?.axis);
+    if (axis) subjects.push({ label: 'Controlled axis', box: axis });
+    for (const [field, label] of [['body', axis ? 'Piece that stays in place' : 'Controlled piece'],
+      ['reflection', 'Reflected piece'], ['target', 'Marked cells']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }

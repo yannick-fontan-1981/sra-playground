@@ -15,7 +15,8 @@ export const windowRelationStrategies = {
 
 type Rule = Parameters<typeof fieldConstraints>[1];
 type State = { epoch: number; rule: Rule; size: NativePoint; pitch: NativePoint; rejected: string[];
-  effects: { address: string; from: number; to: number }[]; firstRef: string; evidence: string[]; count: number };
+  effects: { address: string; from: number; to: number }[]; firstRef: string; evidence: string[]; count: number; recalled?: boolean };
+type Transfer = { epoch: number; rule: Rule; evidence: string[] };
 type Cell = { box: NativeBox; address: string; actual: number; expected: number | null; sourcePoints: NativePoint[] };
 type Proposal = NativeProposal & { local: State; cell: Cell; field: NativeBox; needId: string };
 const point = (key: string): NativePoint => { const [x, y] = key.split(',').map(Number); return [x!, y!]; };
@@ -33,6 +34,7 @@ function constraintSignature(table: ReadonlyMap<string, Constraint>): string {
 
 export function createSicWindowRelation(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let transfer: Transfer | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: windowRelationId,
@@ -44,9 +46,11 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior && prior.count >= 24) return null;
       const fields = extractFields(observation, rows);
+      const induced = prior ? [] : induceFields(fields);
+      const recalled = !prior && !induced.length && transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
       const options = prior
         ? fields.filter(field => equalPoint(field.size, prior.size) && equalPoint(field.pitch, prior.pitch)).map(field => ({ field, rule: prior.rule }))
-        : induceFields(fields);
+        : recalled ? fields.map(field => ({ field, rule: recalled.rule })) : induced;
       const candidates = options.flatMap(({ field, rule }) => {
         const table = fieldConstraints(field, rule);
         return table?.size ? [{ field, rule, table }] : [];
@@ -55,7 +59,8 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
       if (!current || candidates.some(({ table }) => constraintSignature(table) !== constraintSignature(current.table))) return null;
       const { table, rule, field } = current;
       const local: State = prior ?? { epoch: observation.level_epoch, rule, size: field.size, pitch: field.pitch, rejected: [],
-        effects: [], firstRef: observation.observation_ref, evidence: [], count: 0 };
+        effects: [], firstRef: observation.observation_ref, evidence: recalled?.evidence ?? [], count: 0,
+        ...(recalled ? { recalled: true } : {}) };
       const [w, h] = field.size, places = field.groups.flatMap(group => [...group.keys()].map(point));
       const xs = places.map(p => p[0]), ys = places.map(p => p[1]);
       const fieldBox: NativeBox = [Math.min(...xs) - 1, Math.min(...ys) - 1, Math.max(...xs) + w, Math.max(...ys) + h];
@@ -70,7 +75,8 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
       const learned = cells.find(cell => cell.expected !== null);
       const probe = cells.find(cell => cell.expected === null);
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set([local.firstRef, ...local.evidence].filter(value => value !== ref))];
+      const proof = [local.firstRef, ...local.evidence, ...(local.recalled ? transfer?.evidence ?? [] : [])];
+      const evidence: [string, ...string[]] = [ref, ...new Set(proof.filter(value => value !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const facts = { repeatSupportedInteraction: !!learned, probeNeededInteraction: !!probe, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
@@ -79,6 +85,8 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
       const cell = strategy === 'P02' ? learned : probe;
       if (!cell) return null;
       const label = strategy === 'P02' ? windowRelationStrategies.apply_observed_cell_rewrite : windowRelationStrategies.test_inconsistent_cell;
+      const situation = local.recalled && cell.sourcePoints.length > 1
+        ? 'Reconcile the agreeing window constraints on this shared cell' : label;
       const parent = 'G_official_completion';
       const [left, top] = cell.box;
       const x = left + Math.floor(w / 2), y = top + Math.floor(h / 2);
@@ -94,7 +102,7 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, point_binding: pointBinding, expected_after: cell.expected }],
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
-        sicSituationCard: { strategy, need: 'Make the field agree with its repeated examples', situation: label, evidence, agenda: [],
+        sicSituationCard: { strategy, need: 'Make the field agree with its repeated examples', situation, evidence, agenda: [],
           mode, cell: cell.box, triggerCard: decision.receipt.workflow,
           references: cell.sourcePoints.map(position => cellBox(position, field.size)) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -116,8 +124,12 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: 'compare_local_cell_return' };
     },
     record(before, after, _command, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, cell, field } = proposal;
+      if (after.levels_completed > before.levels_completed) {
+        transfer = { epoch: before.level_epoch, rule: local.rule, evidence: [local.firstRef, before.observation_ref, after.observation_ref] };
+        return { events: [], reviewEvidence: 'The field matched the window constraints and advanced the level.' };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const value = uniformValue(second, cell.box);
       const [left, top, right, bottom] = field;
       let outsideChanged = false;
@@ -132,7 +144,10 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
         effects: localRewrite ? [...local.effects, { address: cell.address, from: cell.actual, to: value }] : local.effects };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, transfer }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      transfer = structuredClone(value.transfer as Transfer | null) ?? null;
+    },
   };
 }

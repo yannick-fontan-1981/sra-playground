@@ -3,7 +3,7 @@ import {
   decodeReflectedWorld, encodeReflectedWorld, initializeReflectedWorld, matchesReflectedWorld,
   measureReflectedLattice, reflectCoverPoints, reflectedFocus, shiftReflectionPoints, solveReflectedPlacement,
 } from '../logos-engine/v6-reflected-cover.ts';
-import { sortedPoints, supportKey } from '../logos-engine/v6-support-measurements.ts';
+import { sortedPoints, supportKey, supportPoint } from '../logos-engine/v6-support-measurements.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -37,8 +37,9 @@ type World = {
 type Scene = { axis: number; cells: Map<string, number>; families: Map<number, Set<string>> };
 type Control = { action: string; role: 'axis' | 'piece'; delta: NativePoint };
 type Strategy = keyof typeof reflectedPlacementStrategies;
-type State = { epoch: number; world: NativeRecord; controls: Control[]; tested: string[]; evidence: string[]; stopped: boolean };
-type Plan = { action: NativeCommand; after: NativeRecord | null; attempt: string };
+type State = { epoch: number; world: NativeRecord; controls: Control[]; tested: string[]; evidence: string[]; stopped: boolean; recalled?: boolean };
+type Transfer = { epoch: number; direct: number; image: number; marker: number; pitch: number; controls: Control[]; evidence: string[] };
+type Plan = { action: NativeCommand; after: NativeRecord | null; attempt: string; selection?: Exclude<Owner, null> };
 type Proposal = NativeProposal & { local: State; plan: Plan; needId: string };
 const plain = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 const role = (owner: Owner) => owner === 'axis' ? 'axis' : 'piece';
@@ -64,7 +65,7 @@ function moveWorld(world: World, owner: Owner, delta: NativePoint): World {
 
 function measureChange(world: World, scene: Scene): { world: World; delta: NativePoint } | null {
   const owner = world.focus;
-  const offsets = new Map<string, NativePoint>([['[0,0]', [0, 0]]]);
+  const offsets = new Map<string, NativePoint>([[supportKey([0, 0]), [0, 0]]]);
   if (owner === 'axis') {
     const amount = scene.axis - world.axis;
     const d: NativePoint = world.dim === 0 ? [amount, 0] : [0, amount];
@@ -104,34 +105,42 @@ function acquireControl(world: World, motion: DirectionalMotion | null): Control
   return { action: motion.command, role: 'piece', delta: [displacement[0] / world.pitch, displacement[1] / world.pitch] };
 }
 
-function coveragePlan(world: World, scene: Scene, controls: readonly Control[], keys: readonly string[], canPoint: boolean): { move: Plan | null; select: Plan | null } {
-  const solution = solveReflectedPlacement(world, controls.some(control => control.role === 'axis'));
+function coveragePlan(world: World, scene: Scene, local: State, keys: readonly string[], available: readonly string[],
+  attempt: (action: string) => string): { move: Plan | null; select: Plan | null } {
+  const { controls, recalled, tested } = local;
+  const solution = solveReflectedPlacement(world, controls.some(control => control.role === 'axis') || !!recalled && world.focus === 'axis');
   if (!solution) return { move: null, select: null };
   const [, axis, deltas] = solution as [unknown, number, NativePoint[]];
   const unfinished = deltas.flatMap((delta, i) => delta.some(Boolean) ? [i] : []);
   const desired = axis !== world.axis ? 'axis' : typeof world.focus === 'number' && unfinished.includes(world.focus) ? world.focus : unfinished[0];
   if (desired === undefined) return { move: null, select: null };
   if (world.focus !== desired) {
+    const pulse = JSON.stringify([world.focus, desired, 'ACTION5']);
+    if (recalled && available.includes('ACTION5') && !tested.includes(pulse)) {
+      return { move: null, select: { action: plain('ACTION5'), after: null, attempt: pulse, selection: desired } };
+    }
     const cells = desired === 'axis'
-      ? new Set([...scene.cells].flatMap(([key, value]) => value === world.axis_color && JSON.parse(key)[world.dim] === world.axis ? [key] : []))
+      ? new Set([...scene.cells].flatMap(([key, value]) => value === world.axis_color && supportPoint(key)[world.dim] === world.axis ? [key] : []))
       : new Set([...world.bodies[desired]!].filter(key => scene.cells.get(key) === world.direct));
     const locus = sortedPoints(cells)[0];
-    if (!canPoint || !locus) return { move: null, select: null };
+    if (!available.includes('ACTION6') || !locus) return { move: null, select: null };
     const [x, y] = at(world, point(locus));
     return { move: null, select: { action: { action_ref: 'ACTION6', data: { x, y } }, after: null, attempt: JSON.stringify([world.focus, x, y]) } };
   }
   const delta = desired === 'axis' ? (world.dim === 0 ? [axis - world.axis, 0] : [0, axis - world.axis]) : deltas[desired]!;
   const dim = delta[0] ? 0 : 1, kind = role(desired), amount = delta[dim]!;
   const control = controls.filter(c => keys.includes(c.action) && (c.role === kind || c.role === 'piece')
+    && (!recalled || !tested.includes(attempt(c.action)))
     && c.delta[1 - dim] === 0 && c.delta[dim]! * amount > 0 && Math.abs(c.delta[dim]!) <= Math.abs(amount))
     .sort((a, b) => Number(a.role !== kind) - Number(b.role !== kind) || compareUnicode(a.action, b.action))[0];
   return { select: null, move: control ? { action: plain(control.action), after: encodeReflectedWorld(moveWorld(world, desired, control.delta)),
-    attempt: JSON.stringify([world.focus, control.action]) } : null };
+    attempt: recalled ? attempt(control.action) : JSON.stringify([world.focus, control.action]) } : null };
 }
 
 export function createSicReflectedPlacement(family = reflectedPlacementId): NativeFamily<Proposal> {
   const declarative = family === coordinateObservedMotionId;
   let state: State | null = null;
+  let transfer: Transfer | null = null;
   let choose: NativeProgramHandle | undefined;
   let verify: NativeProgramHandle | undefined;
   return {
@@ -146,32 +155,36 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
       const keys = observation.available_action_refs.filter(action => ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'].includes(action));
       if (remaining < 1 || keys.length < 2 || !rows.length) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      if (declarative && (!choose || (!prior && !execution?.readDirectionalMotion))) return null;
+      const recalled = transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
+      if (declarative && (!choose || (!prior && !recalled && !execution?.readDirectionalMotion))) return null;
       if (prior?.stopped || (prior?.tested.length ?? 0) >= 72) return null;
       const retained = prior ? decodeReflectedWorld(prior.world) as World : null;
       const scene = measureReflectedLattice(rows, retained) as Scene | null;
       if (!scene) return null;
-      const world = retained ?? initializeReflectedWorld(scene) as World | null;
+      const world = retained ?? initializeReflectedWorld(scene, recalled?.direct, recalled?.marker, recalled?.image) as World | null;
       if (!world || world.bodies.length > 5 || world.targets.size > 40 || !matchesReflectedWorld(world, scene)) return null;
       world.focus = reflectedFocus(world, scene, true) as Owner;
+      const revalidated = recalled && world.pitch === recalled.pitch && world.direct === recalled.direct && world.image === recalled.image
+        && world.marker_value === recalled.marker && world.focus !== null ? recalled : null;
       const motion = declarative && !prior ? execution?.readDirectionalMotion?.() ?? null : null;
       const acquired = motion?.afterRef === observation.observation_ref && motion.levelEpoch === observation.level_epoch
         ? acquireControl(world, motion) : null;
-      if (declarative && !prior && !acquired) return null;
+      if (declarative && !prior && !acquired && !revalidated) return null;
       const local: State = prior ? { ...prior, world: encodeReflectedWorld(world) } : {
-        epoch: observation.level_epoch, world: encodeReflectedWorld(world), controls: acquired ? [acquired] : [],
-        tested: [], evidence: acquired && motion ? [motion.beforeRef] : [], stopped: false,
+        epoch: observation.level_epoch, world: encodeReflectedWorld(world), controls: revalidated?.controls ?? (acquired ? [acquired] : []),
+        tested: [], evidence: revalidated?.evidence ?? (acquired && motion ? [motion.beforeRef] : []), stopped: false,
+        ...(revalidated ? { recalled: true } : {}),
       };
       const ref = observation.observation_ref;
       const known = local.controls.filter(control => control.role === 'piece');
       const spansAxes = known.some(c => c.delta[0] !== 0) && known.some(c => c.delta[1] !== 0);
-      const { move, select } = spansAxes ? coveragePlan(world, scene, local.controls, keys, observation.available_action_refs.includes('ACTION6')) : { move: null, select: null };
       const attempt = (key: string) => JSON.stringify([world.focus, observation.frame_hash, key]);
+      const { move, select } = spansAxes ? coveragePlan(world, scene, local, keys, observation.available_action_refs, attempt) : { move: null, select: null };
       const probe = world.focus === null ? null : keys.find(key => !local.tested.includes(attempt(key))
         && !local.controls.some(control => control.role === role(world.focus) && control.action === key));
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const eligibleSelection = select && !local.tested.includes(select.attempt) ? select : null;
-      const choices = { place_reflected_contributor: move, select_reflected_contributor: eligibleSelection,
+      const choices: Record<Strategy, Plan | null> = { place_reflected_contributor: move, select_reflected_contributor: eligibleSelection,
         test_reflected_displacement: probe ? { action: plain(probe), after: null, attempt: attempt(probe) } : null };
       const situation = { move: !!move, select: !!eligibleSelection, test: !!probe, measuredDirections: known.length,
         mode: execution?.reasoningMode ?? 'exploration' };
@@ -186,7 +199,12 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
       if (typeof requested !== 'string' || !Object.hasOwn(choices, requested)) return null;
       const strategy = requested as Strategy, plan = choices[strategy];
       if (!plan) return null;
-      const label = reflectedPlacementStrategies[strategy], parent = 'G_official_completion';
+      const label = plan.selection !== undefined ? 'Test whether the pulse transfers control while the pieces stay in place'
+        : plan.after && local.recalled ? world.focus === 'axis'
+          ? 'Move the axis and check that the reflected piece approaches the target'
+          : 'Move the selected piece while preserving the axis setting'
+          : reflectedPlacementStrategies[strategy];
+      const parent = 'G_official_completion';
       const objective = { kind: 'cover_targets_with_correlated_reflections', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_piece', 'reflected_piece', 'target_cells'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_observed_reflected_coverage' };
@@ -195,7 +213,10 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
       const { x, y } = plan.action.data;
       const binding = x !== undefined && y !== undefined ? await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence }) : null;
       if (plan.action.action_ref === 'ACTION6' && !binding) return null;
-      const body = typeof world.focus === 'number' ? world.bodies[world.focus]! : null;
+      const body = typeof world.focus === 'number' ? world.bodies[world.focus]!
+        : local.recalled && world.focus === 'axis' && world.bodies.length === 1 ? world.bodies[0]! : null;
+      const activeAxis = local.recalled && world.focus === 'axis'
+        ? box(world, new Set([...scene.cells].filter(([, value]) => value === world.axis_color).map(([cell]) => cell))) : null;
       return { status: 'proposed', kind: family, actions, local, plan, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: [{ action: plan.action, expected_after: plan.after, ...(binding ? { point_binding: binding } : {}) }],
@@ -203,7 +224,7 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Cover the marked cells with pieces and their reflected copies', situation: label, evidence,
           agenda: evaluated?.entries ?? [],
-          mode: plan.after ? 'solving' : 'exploration', body: body ? box(world, body) : null,
+          mode: plan.after ? 'solving' : 'exploration', body: body ? box(world, body) : null, axis: activeAxis,
           reflection: body ? box(world, reflectCoverPoints(body, world.axis, world.dim)) : null, target: box(world, world.targets) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
@@ -218,20 +239,28 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
     async after(proposal, _index, before, after, _first, rows) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const expected = proposal.plan.after && decodeReflectedWorld(proposal.plan.after) as World | null;
+      const selection = proposal.plan.selection;
+      const expected = selection === undefined ? proposal.plan.after && decodeReflectedWorld(proposal.plan.after) as World | null
+        : { ...decodeReflectedWorld(proposal.local.world), focus: selection } as World;
       const scene = expected ? measureReflectedLattice(rows, expected) : null;
-      const matched = expected ? matchesReflectedWorld(expected, scene) && reflectedFocus(expected, scene!, true) === expected.focus : null;
+      const matched = expected ? matchesReflectedWorld(expected, scene) && reflectedFocus(expected, scene!, selection === undefined) === expected.focus : null;
       if (verify) {
         const checked = await verify.run({ outcome: { matched } });
         return { matched: typeof checked.result === 'boolean' ? checked.result : null, seal_prefix: true,
-          reason: 'compare_reflected_placement_return',
+          reason: selection === undefined ? 'compare_reflected_placement_return' : 'compare_focus_without_displacement',
           src_check: { workflow: checked.receipt.workflow, hash: checked.receipt.src_hash, matched } };
       }
-      return { matched, seal_prefix: true, reason: 'compare_reflected_placement_return' };
+      return { matched, seal_prefix: true, reason: selection === undefined ? 'compare_reflected_placement_return' : 'compare_focus_without_displacement' };
     },
     record(before, after, command, _first, rows, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, plan } = proposal, world = decodeReflectedWorld(local.world) as World;
+      if (after.levels_completed > before.levels_completed) {
+        transfer = { epoch: before.level_epoch, direct: world.direct, image: world.image, marker: world.marker_value,
+          pitch: world.pitch, controls: local.controls.filter(control => control.role === 'piece'),
+          evidence: [before.observation_ref, after.observation_ref] };
+        return { events: [], reviewEvidence: 'The reflected pieces covered the target and advanced the level.' };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const scene = measureReflectedLattice(rows, world) as Scene | null;
       const change = scene && measureChange(world, scene);
       const controls = [...local.controls];
@@ -241,10 +270,14 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
         controls.splice(index < 0 ? controls.length : index, index < 0 ? 0 : 1, { action: command.action_ref, role: owner, delta: change.delta });
       }
       state = { ...local, world: change ? encodeReflectedWorld(change.world) : local.world, controls,
-        evidence: [...local.evidence.slice(-4), after.observation_ref], tested: [...local.tested, plan.attempt], stopped: !change };
+        evidence: [...new Set([...local.evidence.slice(-4), ...(local.recalled ? transfer?.evidence ?? [] : []), after.observation_ref])],
+        tested: [...local.tested, plan.attempt], stopped: !change };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, transfer }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      transfer = structuredClone(value.transfer as Transfer | null) ?? null;
+    },
   };
 }
