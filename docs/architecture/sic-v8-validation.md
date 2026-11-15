@@ -631,4 +631,8 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 
 - **TN36** gagne le niveau 3 en **13 commandes** et **46,60 s** avec la vérification de la configuration du programme. Les 32 commandes du parcours continu relèvent de SIC. Empreinte `207b4f9af8ec1606b65cd8ddb28bb855424c032ee24912654a58e53b011937d3`.
 
-**40/100 niveaux 3** et **252/636 niveaux** sont attestés sous SIC seul, soit **39,6 %**.
+- **SK48** gagne le niveau 3 en **33 commandes** et **88,59 s** pendant les rejeux parallèles. La carte SRC sélectionne la planification par contact quand une tige fixe est visible entre les cases. SIC réemploie les effets mesurés des commandes et vérifie après chaque retour quels cubes glissent, restent sur la tige ou peuvent la quitter par son extrémité. La carte montre la tige et les pièces concernées. Les 56 commandes et retours des niveaux 1 et 2 sont identiques à la référence. Les 89 commandes relèvent de SIC, et la permutation de palette conserve le parcours. Empreinte `231ef4d931f3424d52386faa4cdbcdabeaf3d5aa3f6389037e11edba1fce97b2`.
+
+Sur le socle figé `23e71270`, **35 niveaux 3** sont gagnés sans changement du code parmi **99 résultats recueillis**. Les six autres victoires attestées ont suivi une évolution du runtime sur AR25, ESCT, FITE, LS20, SK48 et VC33. Les résultats sans victoire comprennent des essais bornés, et la nécessité d'une modification reste à établir pour chacun.
+
+**41/100 niveaux 3** et **253/636 niveaux** sont attestés sous SIC seul, soit **39,8 %**.

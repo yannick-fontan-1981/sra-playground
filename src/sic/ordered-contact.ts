@@ -9,7 +9,7 @@ import type { NativeCommand, NativeFamily, NativeObservation, NativeProgramHandl
 import type { RecoveryPack } from './active-recovery.ts';
 import { sicNeedId } from './need-identity.ts';
 import { situationChoiceWorkflow } from './situation-choice-workflow.ts';
-import { planOrderedLattice } from './contact-lattice.ts';
+import { measureFixedGuides, planOrderedLattice } from './contact-lattice.ts';
 
 export const orderedContactId = 'sic_ordered_contact';
 export const verifyContactOrderId = 'sic_verify_contact_order';
@@ -17,25 +17,29 @@ type EvidenceRow = NonNullable<ReturnType<typeof rootedLineEffect>>;
 type Projection = ReturnType<typeof physicalRootedLine>;
 type Configuration = Parameters<typeof projectedRootedLine>[0];
 type Memory = { epoch: number; tried: string[]; effects: Record<string, EvidenceRow>;
-  counterexample: readonly string[]; retained: Configuration | null; refused: boolean; transferableContact: readonly string[] };
+  counterexample: readonly string[]; retained: Configuration | null; refused: boolean; guideRefused?: boolean;
+  transferableContact: readonly string[] };
 type Plan = { command: NativeCommand; prediction: Projection | null; distance: number | null; configuration: Configuration | null };
 type ContactProposal = NativeProposal & { contact: Plan; strategy: ContactPhase; needId: string };
 const empty: Memory = { epoch: 0, tried: [], effects: {}, counterexample: [], retained: null, refused: false, transferableContact: [] };
 const objective = 'G_official_completion';
 export const orderedContactStrategies = {
   learn_command_displacement: 'Measure which part moves when this command is applied',
+  compose_axial_guide_release: 'Make the reference order by sliding pieces along a fixed guide',
   order_components_by_contact: 'Test a route that aligns the components with the visible reference order',
   revise_contact_chain: 'Replan using the observed displacement of the contact chain',
   revalidate_contact_composition: 'Test whether the observed contact can construct the current reference order',
 };
 const situations = {
   learn_command_displacement: ['Exploration', 'An available command has no measured effect on the support.'],
+  compose_axial_guide_release: ['Solving', 'A fixed guide crosses the playfield. Pieces on it can slide along the guide and leave it at the end.'],
   order_components_by_contact: ['Solving', 'The controls are measured and the visible reference gives an order to reproduce.'],
   revise_contact_chain: ['Exploration', 'The last model missed a displacement that affected several pieces.'],
   revalidate_contact_composition: ['Assimilation', 'An observed contact effect can be tested against the new board and reference order.'],
 } as const;
 const contactPrimitives = {
   learn_command_displacement: 'P05',
+  compose_axial_guide_release: 'P07',
   revise_contact_chain: 'P07',
   revalidate_contact_composition: 'P02',
   order_components_by_contact: 'P07',
@@ -84,13 +88,18 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       if (remaining < 1 || !policy) return null;
       const scene = measureContactScene(rows);
       if (!scene) return null;
-      const { tried, effects, counterexample, retained, refused, transferableContact } = current(observation.level_epoch);
+      const { tried, effects, counterexample, retained, refused, guideRefused, transferableContact } = current(observation.level_epoch);
       if (refused) return null;
       const available = new Map(inputs.filter(input => !Object.keys(input.data).length).map(input => [input.action_ref, input]));
       const ref = observation.observation_ref;
       const unmeasured = (policy.probe_order as string[]).find(action =>
         available.has(action) && !tried.includes(action) && !Object.hasOwn(effects, action));
       const currentEffects = Object.fromEntries(Object.entries(effects).filter(([action]) => available.has(action)));
+      const latticeEffects = Object.values(currentEffects).map(effect => ({
+        action_ref: effect.action_ref, extent_delta: effect.extent_delta, root_translation: effect.root_translation,
+      }));
+      const lattice = scene as Parameters<typeof planOrderedLattice>[0] & { background: number };
+      const guides = guideRefused ? [] : measureFixedGuides(rows, lattice);
       const effectEvidence = Object.values(currentEffects).flatMap(effect => effect.evidence_refs as string[]);
       const proof: [string, ...string[]] = [ref, ...new Set([...effectEvidence, ...counterexample, ...transferableContact])];
       const now = execution?.now ?? (() => performance.now());
@@ -104,6 +113,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       const depth = Math.min(limits.maxDepth, remaining, execution?.remainingLevelActions ?? remaining);
       const facts = {
         learn_command_displacement: !!unmeasured,
+        compose_axial_guide_release: guides.length > 0 && latticeEffects.length > 0,
         revise_contact_chain: !!counterexample.length,
         revalidate_contact_composition: !!transferableContact.length,
         order_components_by_contact: !unmeasured && !counterexample.length,
@@ -111,15 +121,16 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       };
       const planners: Record<ContactPhase, () => Plan | null> = {
         learn_command_displacement: () => unmeasured ? planFrom(unmeasured) : null,
+        compose_axial_guide_release: () => {
+          const plan = planOrderedLattice(lattice, latticeEffects, depth, limits.maxNodes, shouldStop, guides);
+          return plan ? planFrom(plan.command, plan.prediction, plan.distance) : null;
+        },
         revise_contact_chain: () => {
           const revised = planCellPush(scene, currentEffects, depth, limits.maxNodes, shouldStop);
           return revised ? planFrom(revised.command, revised.prediction, revised.predictedGoalDistance) : null;
         },
         revalidate_contact_composition: () => {
-          const revised = planOrderedLattice(scene as Parameters<typeof planOrderedLattice>[0],
-            Object.values(currentEffects).map(effect => ({
-              action_ref: effect.action_ref, extent_delta: effect.extent_delta, root_translation: effect.root_translation,
-            })), depth, limits.maxNodes, shouldStop);
+          const revised = planOrderedLattice(lattice, latticeEffects, depth, limits.maxNodes, shouldStop);
           return revised ? planFrom(revised.command, revised.prediction, revised.distance) : null;
         },
         order_components_by_contact: () => {
@@ -157,7 +168,8 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       const id = `contact:${need.id}`, label = orderedContactStrategies[phase], actions = [plan.command];
       const [mode, situation] = situations[phase];
       return { status: 'proposed', kind: verifyContactOrderId, strategy: phase, contact: plan, needId: need.id, actions,
-        rooted_line_plan: { scene: { root: scene.root, pieces: scene.pieces.slice(0, 8) } },
+        rooted_line_plan: { scene: { root: scene.root, pieces: scene.pieces.slice(0, 8),
+          guides: phase === 'compose_axial_guide_release' ? guides : [] } },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: { ...facts, phase } },
@@ -197,6 +209,9 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         if (effect) memory.effects[action] = effect;
       } else if (equal(physicalRootedLine(second), proposal.contact.prediction)) {
         memory.retained = proposal.contact.configuration;
+      } else if (proposal.strategy === 'compose_axial_guide_release') {
+        memory.guideRefused = true;
+        memory.retained = null;
       } else if (!memory.counterexample.length && proposal.contact.prediction && previousEffect
         && witnessedCellPush(first, second, proposal.contact.prediction, previousEffect)) {
         memory.counterexample = refs;

@@ -1,4 +1,4 @@
-import type { NativePoint } from '../logos-engine/v6-native-types.ts';
+import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Box = readonly [number, number, number, number];
 type Piece = { id: string; type: string; bbox: Box };
@@ -8,9 +8,46 @@ type Move = { command: string; dy: number; dx: number };
 type Position = { row: number; tip: number; pieces: readonly NativePoint[] };
 type Node = { state: Position; depth: number; first: { move: Move; result: Position } | null };
 
+export function measureFixedGuides(rows: NativeRows, scene: Scene & { background: number }): Box[] {
+  const { unit, root, field, tip, background } = scene;
+  if (unit < 4) return [];
+  const stride = unit + 2, offset = Math.floor((unit - 2) / 2);
+  const x = tip - unit, y = root[1] + (root[3] - root[1] + 1 - unit) / 2;
+  const left = x - Math.floor((x - field[0]) / stride) * stride;
+  const top = y - Math.floor((y - field[1]) / stride) * stride;
+  const guides: Box[] = [];
+  for (let col = left; col + unit - 1 <= field[2]; col += stride) {
+    const center = col + offset;
+    const band = (row: number) => {
+      const line = rows[row];
+      if (!line || line[center - 1] !== background || line[center + 2] !== background) return null;
+      const [a, b] = [line[center]!, line[center + 1]!];
+      return a !== b && a !== background && b !== background ? [a, b] : null;
+    };
+    let start: number | null = null, end = 0;
+    let signature: number[] | null = null;
+    for (let row = top; row + unit - 1 <= field[3]; row += stride) {
+      const entry = band(row - 1), exit = band(row + unit);
+      // The guide stays visible between cells even when a piece covers its center.
+      const striped = entry && exit && entry[0] === exit[1] && entry[1] === exit[0] ? entry : null;
+      if (signature && (!striped || signature[0] !== striped[0] || signature[1] !== striped[1])) {
+        if (start !== null && end > start) guides.push([center, start - 1, center + 1, end + unit]);
+        start = null;
+      }
+      signature = striped;
+      if (!striped) continue;
+      start ??= row;
+      end = row;
+    }
+    if (start !== null && end > start) guides.push([center, start - 1, center + 1, end + unit]);
+  }
+  return guides;
+}
+
 /** Test a conditional model in which displacement on the support is
  * reversible, and contact on a developing span can push a chain. */
-export function planOrderedLattice(scene: Scene, effects: readonly Effect[], depthLimit: number, nodeLimit: number, shouldStop: () => boolean) {
+export function planOrderedLattice(scene: Scene, effects: readonly Effect[], depthLimit: number, nodeLimit: number, shouldStop: () => boolean,
+  guides: readonly Box[] = []) {
   const { unit, root, field } = scene, stride = unit + 2;
   const startX = scene.tip - unit, startY = root[1] + (root[3] - root[1] + 1 - unit) / 2;
   const left = startX - Math.floor((startX - field[0]) / stride) * stride;
@@ -29,17 +66,24 @@ export function planOrderedLattice(scene: Scene, effects: readonly Effect[], dep
     return effect.root_translation[1] === 0 && Number.isInteger(dx) && Number.isInteger(dy) && Math.abs(dx) + Math.abs(dy) === 1
       ? [{ command: effect.action_ref, dy, dx }] : [];
   });
+  const guideCells = new Set<string>();
+  for (const [l, t, , b] of guides) {
+    const col = (l - left - Math.floor((unit - 2) / 2)) / stride;
+    for (let y = t + 1; y + unit <= b; y += stride) guideCells.add(`${col},${(y - top) / stride}`);
+  }
 
   function predict(state: Position, { dy, dx }: Move): Position | null {
     const row = state.row + dy, tip = state.tip + dx;
     if (row < 0 || row >= rows || tip < -1 || tip >= columns) return null;
     const moving = new Set<number>();
     for (const [index, [x, y]] of state.pieces.entries()) {
+      if (dx && guideCells.has(`${x},${y}`)) continue;
       if ((y === state.row || y === row) && x <= state.tip || dx === 1 && y === row && x === tip) moving.add(index);
     }
     // Iteration also visits pieces added through contiguous contact.
     for (const index of moving) {
       const [x, y] = state.pieces[index]!;
+      if (dx && guideCells.has(`${x},${y}`)) return { row, tip, pieces: state.pieces };
       if (!inside(x + dx, y + dy)) return dx ? { row, tip, pieces: state.pieces } : null;
       const blocking = state.pieces.findIndex(([u, v]) => u === x + dx && v === y + dy);
       if (blocking >= 0) moving.add(blocking);

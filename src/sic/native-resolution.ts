@@ -1397,6 +1397,10 @@ export function readNativeResolution(agent: {
     const material = record(piece), box = bounds(previousPieces.get(material?.id) ?? material?.bbox);
     if (box) subjects.push({ label: `Material ${label(material?.type) ?? ''}`.trim(), box });
   }
+  if (Array.isArray(rootedScene?.guides)) for (const guide of rootedScene.guides.slice(0, 4)) {
+    const box = bounds(guide);
+    if (box) subjects.push({ label: 'Fixed guide', box });
+  }
   const route: NativePoint[] = [];
   if (routeIndex === 0 && openingEvidence) {
     const target = bounds(openingEvidence.box);
