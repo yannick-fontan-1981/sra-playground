@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { measureComponentTranslations } from './observed-translation.ts';
-import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGraph } from './observed-command-frontier.ts';
+import { observedCommandFrontier, observedCommandState as interfaceKey, oppositeDirection, rememberCommandReturn,
+  stationaryDirectionalEvidence, type ObservedCommandGraph } from './observed-command-frontier.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
 import { repeatedInputTargets } from './repeated-input-targets.ts';
@@ -12,6 +14,7 @@ import { countChangesInside, workspaceClickCandidate } from './workspace-click.t
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
   P05: 'Test a direction on the visibly changed piece',
+  P07: 'Follow an observed return to an untested control',
   test_marked_edit: 'Test the edit suggested by the visible marks',
   test_edited_collection: 'Test the effect of the verified edit',
   test_repeated_target: 'Test a target from a repeated group',
@@ -53,9 +56,6 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
   clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string };
 const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null, recheck: null });
-const interfaceKey = (observation: NativeObservation) =>
-  `${observation.frame_hash}:${[...observation.available_action_refs].sort().join(',')}`;
-
 export function currentControlledMotion(state: NativeRecord, observation: NativeObservation): ControlledMotion | undefined {
   const exploration = state as State;
   const motion = exploration.controlledPiece;
@@ -64,9 +64,6 @@ export function currentControlledMotion(state: NativeRecord, observation: Native
 }
 const commandKey = (command: NativeCommand) => command.action_ref === 'ACTION6'
   ? `ACTION6:${command.data.x},${command.data.y}` : command.action_ref;
-const opposite: Readonly<Record<string, string>> = {
-  ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3',
-};
 
 function changedWithin(before: NativeRows, after: NativeRows, [l, t, r, b]: NativeBox) {
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) if (before[y]?.[x] !== after[y]?.[x]) return true;
@@ -146,9 +143,13 @@ function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs:
 
 export function createSicPublicInputExploration(): NativeFamily<Proposal> {
   let state = initial();
+  let decide: NativeProgramHandle | undefined;
   return {
     id: publicInputExplorationId,
-    async propose(observation, rows, inputs, remaining) {
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       const local = state.epoch === observation.level_epoch ? state : initial(observation.level_epoch);
       const budget = Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
@@ -178,7 +179,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const canDiversifyDirection = keys.includes('ACTION5')
         || (keys.some(key => key === 'ACTION1' || key === 'ACTION2') && keys.some(key => key === 'ACTION3' || key === 'ACTION4'));
       const lastChange = local.lastChange?.destination === source && canDiversifyDirection ? local.lastChange : null;
-      const deferred = lastChange ? opposite[lastChange.action] : undefined;
+      const deferred = lastChange ? oppositeDirection[lastChange.action] : undefined;
       const recheck = local.recheck && local.experiments < local.recheck.until ? local.recheck : null;
       const measuredControls = recheck && keys.length > named.length
         ? observedCommandFrontier(local.transitions, source, named, 1, () => named, deferred) : null;
@@ -193,13 +194,15 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       if (!offer) return null;
       const collectionTrial = frontier === preferred ? trial : null;
       const workspaceTrial = frontier === workspaceProbe ? workspace : null;
+      const verifiedContextChange = recheck && !probe && !collectionTrial && !workspaceTrial && named.includes(frontier.action)
+        ? recheck.evidence : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
         ...(repeatedTarget && stationaryCommand ? [stationaryCommand.evidence, ...stationaryClicks.slice(-4).map(edge => edge.evidence)] : []),
         ...(clickedControl && probe ? [clickedControl.evidence] : []),
         ...(collectionTrial && verifiedEdit ? [verifiedEdit[0]] : []),
         ...(controlledPiece ? controlledPiece.evidence.filter(item => item !== ref) : []),
-        ...(deferred && lastChange ? [lastChange.evidence] : []), ...(measuredControls && recheck ? recheck.evidence : [])];
+        ...(deferred && lastChange ? [lastChange.evidence] : []), ...(verifiedContextChange ?? [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
         clickedControl: { value: !!probe, evidence: proof },
         changedControlContext: { value: !!measuredControls, evidence: proof },
@@ -214,9 +217,17 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         test_edited_collection: () => offer, test_workspace_target: () => offer, test_repeated_marker: () => offer, test_repeated_target: () => offer,
         compare_public_input: () => offer, revisit_input_frontier: () => offer } });
       if (!selected) return null;
-      const strategy = selected.id;
       const { command, box } = selected.plan;
-      const label = publicInputStrategies[strategy];
+      const mode = verifiedContextChange ? execution?.reasoningMode ?? 'exploration' : 'exploration';
+      const routeSupported = !!frontier.first;
+      const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
+      const decision = verifiedContextChange
+        ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : undefined;
+      if (verifiedContextChange && decision?.result !== (routeSupported ? 'P07' : 'P05')) return null;
+      const strategy = decision ? (routeSupported ? 'P07' : 'P05') : selected.id;
+      const label = decision
+        ? (routeSupported ? publicInputStrategies.P07 : 'Recheck an available control after the visible interface changes')
+        : publicInputStrategies[selected.id];
       const goal = { kind: 'learn_public_command_effect', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_public_interface'], parentObjective: completion, satisfactionContract: 'observe_public_return_to_available_input' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
@@ -232,10 +243,14 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(frontier.first?.destination ? { expected: frontier.first.destination } : {}),
         steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Learn how to act on the current board', mode: 'exploration',
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: { ...facts, stage: 'recheck' } } } : {}),
+        sicSituationCard: { strategy, need: 'Learn how to act on the current board', mode,
           situation: deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
-            : label, agenda: entries, evidence: proof, ...(box ? { addressedRegion: box } : {}),
+            : label, agenda: decision ? [] : entries, evidence: proof, ...(box ? { addressedRegion: box } : {}),
+          ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
           ...(clickedControl && probe ? { focus: clickedControl.box } : {}),
           ...(workspaceTrial ? { workspace: workspaceTrial.workspace, example: workspaceTrial.example } : {}),
           ...(controlledPiece ? { lastControlledMotion: controlledPiece } : {}) },
@@ -297,10 +312,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       }
       if (!state.recheck && action === 'ACTION5' && destination !== proposal.source) {
         const directions = proposal.candidates.filter(key => /^ACTION[1-4]$/.test(key));
-        const receipts = (state.transitions[proposal.source] ?? []).filter(edge =>
-          directions.includes(edge.action) && edge.destination === proposal.source);
-        if (directions.length >= 2 && receipts.length === directions.length) state.recheck = {
-          until: state.experiments + directions.length * 3, evidence: [...receipts.map(edge => edge.evidence), after.observation_ref],
+        const evidence = stationaryDirectionalEvidence(state.transitions, proposal.source, directions);
+        if (evidence) state.recheck = {
+          until: state.experiments + directions.length * 3, evidence: [...evidence, after.observation_ref],
         };
       }
       rememberCommandReturn(state.transitions, proposal.source, destination, action, after.observation_ref);

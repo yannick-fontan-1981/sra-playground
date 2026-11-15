@@ -1,5 +1,19 @@
+import type { NativeObservation } from '../logos-engine/v6-native-types.ts';
+
 type Transition = { action: string; destination: string | null; evidence: string };
 export type ObservedCommandGraph = Record<string, Transition[]>;
+
+export const observedCommandState = (observation: NativeObservation) =>
+  `${observation.frame_hash}:${[...observation.available_action_refs].sort().join(',')}`;
+
+export const oppositeDirection: Readonly<Record<string, string>> = {
+  ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3',
+};
+
+export function stationaryDirectionalEvidence(graph: ObservedCommandGraph, source: string, directions: readonly string[]) {
+  const receipts = (graph[source] ?? []).filter(edge => directions.includes(edge.action) && edge.destination === source);
+  return directions.length >= 2 && receipts.length === directions.length ? receipts.map(edge => edge.evidence) : null;
+}
 
 export function rememberCommandReturn(graph: ObservedCommandGraph, source: string, destination: string,
   action: string, evidence: string): void {

@@ -515,3 +515,11 @@ Un rejeu parallèle de KLOT avec la famille habituelle retirée reproduit les 16
 Sur la même observation, une horloge simulée de 0,25 ou 0,5 ms par lecture interrompt l’ancienne recherche avant qu’elle propose la première commande. Avec la borne de 18 s du planificateur source, la recherche retrouve la commande attendue après 24 510 lectures dans les deux essais. Cette borne s’applique au fournisseur qui a déjà acquis un déplacement. La limite de temps du niveau et les limites de recherche continuent de s’appliquer. Le rejeu complet corrigé gagne en 30 commandes, empreinte `5a2f20e21f5f1254102872d5ca30d278252701bb4eb8aec5a442f82f22dcea8f`.
 
 La campagne PORT, CATL et LIFE sur `3a76dd93` porte le total à **53/100** victoires après retrait, en 644 commandes SIC seul, dont 276 choisies par le SRC. Les 100 niveaux 1 en usage normal, les 50 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours de référence.
+
+### Vérifier à nouveau une commande après un changement d’interface
+
+**POLA gagne en sept commandes et ELAS en seize** avec l’exploration publique retirée. Le fournisseur commence par mesurer les directions disponibles. Il n’établit la situation que si elles laissent toutes le plateau inchangé et si la commande alternative change ensuite l’interface. Les tentatives sont mémorisées par état du plateau et commandes disponibles. La carte SRC `sic.follow_observed_landings.choose` autorise P05 pour un essai inédit ou P07 vers un état atteint lors d’un retour précédent. Sur ces deux parcours, elle choisit uniquement P05.
+
+En configuration normale, l’exploration publique mesure les trois ou cinq premières commandes. Dès le changement d’interface, la même carte autorise les quatre ou onze commandes suivantes. Les commandes et leurs retours gardent les mêmes empreintes avec ou sans retrait. Les deux jeux gagnent aussi après permutation de palette et neutralisation du nom dans l’essai avec retrait. Désactiver P05 après le changement d’interface fait cesser les deux parcours à la décision suivante, avec ou sans exploration publique.
+
+POLA `af28e8ed77e7f8213749f03f8665c9e86a7742aa1111586dd84eac30f19dfcd1`. ELAS `2119845733a0ef81f69633356411c9bfd91b3e746540095b50cd993b1aa673e6`.
