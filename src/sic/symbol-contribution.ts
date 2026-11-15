@@ -108,7 +108,8 @@ export function createSicSymbolContribution(): NativeFamily<Proposal> {
       const primitive = repeated ? 'P02' : 'P05';
       const decision = await choosePrimitive?.run({ situation: primitiveSituation }, { signal: execution?.signal });
       if (!instruction || decision?.result !== primitive) return null;
-      const label = transfer ? transferLabels[transfer.step.kind] : symbolContributionStrategies[strategy];
+      const label = transfer?.step.intermediate ? 'Test the recipe that supplies an intermediate input for the remaining requests'
+        : transfer ? transferLabels[transfer.step.kind] : symbolContributionStrategies[strategy];
       const parent = 'G_official_completion';
       const goal = { kind: 'satisfy_visible_symbol_requests', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['visible_symbol_diagram_and_request'], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_symbol_delivery' };

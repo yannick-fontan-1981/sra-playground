@@ -56,15 +56,17 @@ export function threeBranchToLeft(component: V5Component): boolean {
   const actual = new Set<string>(component.relative_pixels.map(([r, c]: RC) => `${r},${c}`));
   return expected.size === actual.size && [...expected].every(p => actual.has(p));
 }
-export function measureDiagramRows(frame: FrameGrid): readonly DiagramRow[] {
-  const prior = cached(rowsCache, frame); if (prior) return prior;
-  const components = diagramComponents(frame);
-  const borders = components.filter(c => {
+function diagramBorders(frame: FrameGrid) {
+  return diagramComponents(frame).filter(c => {
     const b = c.bbox; if (Math.min(b.height, b.width) < 3) return false;
     for (let r = b.top; r <= b.bottom; r++) for (let col = b.left; col <= b.right; col++)
       if ((r === b.top || r === b.bottom || col === b.left || col === b.right) && frame.rows[r]![col] !== c.value) return false;
     return true;
   });
+}
+export function measureDiagramRows(frame: FrameGrid): readonly DiagramRow[] {
+  const prior = cached(rowsCache, frame); if (prior) return prior;
+  const borders = diagramBorders(frame);
   const result: DiagramRow[] = [];
   for (const border of borders) {
     const box = border.bbox;
@@ -89,6 +91,34 @@ export function measureDiagramRows(frame: FrameGrid): readonly DiagramRow[] {
   }
   return retain(rowsCache, frame, Object.freeze(result), 8);
 }
+
+export function measureStackedDiagramRows(frame: FrameGrid): readonly DiagramRow[] {
+  const rows = [...measureDiagramRows(frame)];
+  const known = new Set(rows.map(row => JSON.stringify(row)));
+  for (const { bbox: { left, top, right, bottom }, value } of diagramBorders(frame)) {
+    const bars: { first: number; last: number }[] = [];
+    for (let y = top; y <= bottom; y++) {
+      if (!frame.rows[y]!.slice(left, right + 1).every(color => color === value)) continue;
+      const previous = bars.at(-1);
+      if (previous && previous.last === y - 1) previous.last = y;
+      else bars.push({ first: y, last: y });
+    }
+    if (bars.length < 3) continue;
+    for (let i = 1; i < bars.length && rows.length < MAX_ROWS; i++) {
+      const from = bars[i - 1]!.last, through = bars[i]!.first;
+      if (through - from < 4) continue;
+      const crop = new FrameGrid(frame.rows.slice(from, through + 1).map(row => row.slice(left, right + 1)));
+      for (const row of measureDiagramRows(crop)) {
+        const key = JSON.stringify(row);
+        if (known.has(key)) continue;
+        known.add(key);
+        rows.push(row);
+      }
+    }
+  }
+  return rows;
+}
+
 export function measureEqualRowPairs(frame: FrameGrid): readonly EqualRowPair[] {
   const prior = cached(pairsCache, frame); if (prior) return prior;
   const groups = new Map<string, { key: number[]; frames: ConcentricFrame[] }>();
