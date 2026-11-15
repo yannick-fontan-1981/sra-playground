@@ -578,3 +578,13 @@ Le cumul atteint **9/100 niveaux 2** et **126/636 niveaux attestés**.
 **VC33** gagne le niveau 2 en **9 commandes** et **7,68 s**, soit 14 commandes sur la partie continue. L’alignement de bandes fournit toutes les commandes, autorisées sous OP18. Empreinte `16fbe8032c602c6373998bc509f6f5e4386dfb0311bace94578e0c164d95885d`. Le cumul atteint **11/100 niveaux 2** et **128/636 niveaux attestés**.
 
 Sur **BP35** niveau 2, le premier clic d’excavation déplace le décor de six pixels. Le sprite revient à la même position à l’écran avec un nouveau support. Un second clic dans la même colonne ouvre une chute dont l’animation atteint le motif de danger déjà visible. Un trajet de contrôle, construit hors agent à partir de la disposition du niveau, puis rejoué avec les commandes ordinaires du jeu, atteint le niveau 3 en 40 commandes depuis l’entrée du niveau 2. La recherche SIC doit encore choisir des détours à partir des seules zones visibles et reconnaître la continuité du terrain pendant les mouvements de caméra.
+
+## Campagne des niveaux 3
+
+Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous autorité exclusive SIC. Les empreintes des 96 parcours déjà vérifiés en commun sur `1648d9f4` sont identiques. Les premiers essais de niveau 3 commencent après cette vérification.
+
+- **AMZE** gagne le niveau 3 en **5 commandes** et **3,10 s**. SIC teste un saut indiqué par une flèche, puis réutilise l'effet mesuré avec les flèches courantes. Les 12 commandes du parcours continu relèvent de SIC. Empreinte `c19f359753340e6108d635cc0871a55d86f36bca08cac884707be74c726fe393`.
+- **CATL** gagne le niveau 3 en **8 commandes** et **11,18 s**. SIC compare les exemples étiquetés et soumet les choix compatibles avec la règle déduite. Les 24 commandes du parcours continu relèvent de SIC. Empreinte `de6613db2740f583ea6ff7af31e1c6213404a6162deb33c8c54835a29602c236`.
+- **VC33** gagne le niveau 3 en **23 commandes** et **24,22 s** mesurées pendant les rejeux parallèles. SIC mesure cinq compartiments et un quantum de deux pixels, réutilise le sens de transfert confirmé au niveau précédent, puis vérifie les quantités après chaque changement. Les 14 commandes et retours des niveaux 1 et 2 sont identiques à l'audit de référence. Les 37 commandes sont décidées par SIC. La permutation de palette conserve les commandes et les scores. Empreinte `84dc8b0cfcdf713cf65db08c98f35fdbf254d0135e86ede20a22c99de202c7a8`.
+
+**8/100 niveaux 3** et **220/636 niveaux** sont attestés sous SIC seul, soit **34,6 %**.
