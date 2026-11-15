@@ -14,7 +14,7 @@ export const coupledMotionStrategies = {
 
 type Sample = { input: string; first: CoupledPairDelta; second: CoupledPairDelta };
 type State = { epoch: number; pair: CoupledPair; samples: Sample[]; floors: number[]; evidence: string[];
-  remainingRoute: { actions: string[]; expected: CoupledPairBox[][] } | null; count: number; stopped: boolean };
+  remainingRoute: { actions: string[]; expected: CoupledPairBox[][] } | null; count: number; stopped: boolean; frame?: string };
 type Candidate = { input: string; route: State['remainingRoute'] };
 type Proposal = NativeProposal & { local: State; candidate: Candidate; needId: string };
 const displayBox = ([t, l, b, r]: CoupledPairBox): NativeBox => [l, t, r, b];
@@ -24,10 +24,15 @@ const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b)
 function inBox([t, l, b, r]: CoupledPairBox, y: number, x: number): boolean {
   return t <= y && y <= b && l <= x && x <= r;
 }
-function matchProjection(rows: NativeRows, later: NativeRows, pair: CoupledPair, next: readonly CoupledPairBox[]): boolean {
-  for (const [top, left, bottom, right] of next) for (let y = top; y <= bottom; y++) {
-    for (let x = left; x <= right; x++) if (later[y]?.[x] !== pair.value) return false;
+function pairVisible(rows: NativeRows, value: number, boxes: readonly CoupledPairBox[]): boolean {
+  for (const [top, left, bottom, right] of boxes) for (let y = top; y <= bottom; y++) {
+    for (let x = left; x <= right; x++) if (rows[y]?.[x] !== value) return false;
   }
+  return true;
+}
+
+function matchProjection(rows: NativeRows, later: NativeRows, pair: CoupledPair, next: readonly CoupledPairBox[]): boolean {
+  if (!pairVisible(later, pair.value, next)) return false;
   const affected = [...pair.boxes, ...next];
   for (let y = 1; y < rows.length - 1; y++) for (let x = 1; x < rows[y]!.length - 1; x++) {
     if (rows[y]![x] !== later[y]?.[x] && !affected.some(box => inBox(box, y, x))) return false;
@@ -79,8 +84,10 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 60) return null;
       const measured = measureCoupledPairs(rows);
-      const pair = prior ? measured.find(pair => pair.value === prior.pair.value && pair.size === prior.pair.size
+      const separate = prior ? measured.find(pair => pair.value === prior.pair.value && pair.size === prior.pair.size
         && pair.boxes.every(box => prior.pair.boxes.some(bound => same(box, bound)))) : measured.length === 1 ? measured[0] : null;
+      const retained = prior?.frame === observation.frame_hash && pairVisible(rows, prior.pair.value, prior.pair.boxes) ? prior.pair : null;
+      const pair = separate ?? retained;
       if (!pair || Math.floor(rows.length / pair.size) * Math.floor(rows[0]!.length / pair.size) > 4096) return null;
       const [a, b] = pair.boxes;
       if (!a || !b || (a[0] - b[0]) % pair.size || (a[1] - b[1]) % pair.size) return null;
@@ -144,7 +151,7 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       const boxes = projected ?? match?.boxes ?? previous.boxes;
       const sample: Sample | null = !route ? { input: command.action_ref, first: match?.deltas[0] ?? [0, 0],
         second: match?.deltas[1] ?? [0, 0] } : null;
-      state = { ...local, pair: { ...previous, boxes }, count: local.count + 1,
+      state = { ...local, pair: { ...previous, boxes }, count: local.count + 1, frame: after.frame_hash,
         samples: sample ? [...local.samples, sample] : local.samples, floors: [...new Set([...local.floors, ...revealedFloor(previous, boxes, second)])],
         evidence: [...local.evidence.slice(-7), after.observation_ref], stopped: route ? !projected : !match,
         remainingRoute: projected && route && route.actions.length > 1 ? { actions: route.actions.slice(1), expected: route.expected.slice(1) } : null };
