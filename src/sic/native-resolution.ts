@@ -900,7 +900,9 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === gatedCascadeId || family === learnCascadeId)) {
-    for (const [field, label] of [['actor', 'Controlled cursor'], ['gate', 'Branch to block'], ['junction', 'Shared junction'], ['target', 'Target piece']] as const) {
+    const gate = card?.channel === true ? ['coveredLink', 'Covered link'] as const : ['gate', 'Branch to block'] as const;
+    const junction = card?.channel === true ? 'Link to target' : 'Shared junction';
+    for (const [field, label] of [['actor', 'Controlled cursor'], gate, ['junction', junction], ['target', 'Target piece']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }

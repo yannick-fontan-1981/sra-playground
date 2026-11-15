@@ -8,8 +8,11 @@ export const gatedCascadeId = 'sic_gated_cascade';
 export const learnCascadeId = 'sic_reuse_propagation';
 const moves = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Domino = { point: NativePoint; dx: number; dy: number; color: number };
+type CascadeRoles = { focus: number; source: number; target: number; tip: number };
+type CascadeMemory = { roles: CascadeRoles; epoch: number; evidence: string[] };
+type Channel = { path: NativePoint[]; covered: NativePoint | null };
 type Layout = { pitch: number; cells: NativePoint[]; cursorColor: number; gate: NativePoint; junction: NativePoint;
-  target: NativePoint; branch: NativePoint[] };
+  target: NativePoint; branch: NativePoint[]; roles?: CascadeRoles; channel?: { covered: NativePoint | null; floorColor: number } };
 type Scene = { layout: Layout; cursor: NativePoint };
 type Memory = { epoch: number; layout: Layout; routeRef: string | null; burstRef: string | null; failed: boolean };
 type Proposal = NativeProposal & { local: Memory; scene: Scene; next: NativePoint; launch: boolean; needId: string };
@@ -19,6 +22,7 @@ const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
 const square = ([x, y]: NativePoint): NativeBox => [x, y, x + 2, y + 2];
 const patch = (rows: NativeRows, [x, y]: NativePoint) => rows.slice(y, y + 3).flatMap(row => row.slice(x, x + 3));
+const isCursor = (c: number[]) => c[0] !== c[4] && [1, 2, 3, 5, 6, 7, 8].every(i => c[i] === c[0]);
 
 function domino(point: NativePoint, colors: number[], ink: number): Domino | null {
   const tip = colors.indexOf(ink);
@@ -43,7 +47,7 @@ function walk(first: Domino, end: NativePoint, pitch: number, pieces: Domino[], 
   return null;
 }
 
-function measure(rows: NativeRows): Scene | null {
+function measureCells(rows: NativeRows) {
   const parts = geometricComponents(rows);
   const repeats = new Map<number, NativeBox[]>();
   for (const p of parts) {
@@ -61,9 +65,16 @@ function measure(rows: NativeRows): Scene | null {
   for (let y = Math.max(origin[1], firstRow - pitch); y <= lastRow; y += pitch) {
     for (let x = origin[0]; x + 2 < rows[y]!.length; x += pitch) entries.push({ point: [x, y], colors: patch(rows, [x, y]) });
   }
+  return { floorColor, pitch, entries };
+}
+
+function measure(rows: NativeRows): Scene | null {
+  const grid = measureCells(rows);
+  if (!grid) return null;
+  const { floorColor, pitch, entries } = grid;
   const junctions = entries.filter(({ colors: c }) => [1, 3, 5, 7].every(i => c[i] === c[4])
     && c[0] !== c[4] && [2, 6, 8].every(i => c[i] === c[0]));
-  const cursor = entries.filter(({ colors: c }) => c[0] !== c[4] && [1, 2, 3, 5, 6, 7, 8].every(i => c[i] === c[0]));
+  const cursor = entries.filter(({ colors }) => isCursor(colors));
   if (junctions.length !== 1 || cursor.length !== 1) return null;
   const junction = junctions[0]!, active = cursor[0]!;
   const pieces = entries.flatMap(e => { const p = domino(e.point, e.colors, junction.colors[4]!); return p ? [p] : []; });
@@ -84,8 +95,57 @@ function measure(rows: NativeRows): Scene | null {
   if (targets.length !== 1) return null;
   const cells = entries.filter(e => e.colors.every(c => c === floorColor) || e === junction || e === active
     || pieces.some(p => same(p.point, e.point))).map(e => e.point);
-  return { cursor: active.point, layout: { pitch, cells, cursorColor: active.colors[0]!, gate: roots[0]!.path.at(-1)!,
-    junction: junction.point, target: targets[0]!.point, branch: incoming } };
+  const roles = { focus: active.colors[0]!, source: roots[1]!.piece.color, target: targets[0]!.color, tip: junction.colors[4]! };
+  return { cursor: active.point, layout: { pitch, cells, cursorColor: roles.focus, gate: roots[0]!.path.at(-1)!,
+    junction: junction.point, target: targets[0]!.point, branch: incoming, roles } };
+}
+
+function targetChannel(pieces: Domino[], peers: NativePoint[], pitch: number, roles: CascadeRoles, target: NativePoint): Channel | null {
+  const byCell = new Map(pieces.map(piece => [key(piece.point), piece]));
+  const coveredCells = new Set(peers.map(key));
+  const queue: Channel[] = pieces.filter(piece => piece.color === roles.source).map(piece => ({ path: [piece.point], covered: null }));
+  let hypothetical: Channel | null = null;
+  for (const channel of queue) {
+    const at = channel.path.at(-1)!;
+    if (same(at, target)) {
+      if (!channel.covered) return channel;
+      hypothetical ??= channel;
+      continue;
+    }
+    const piece = byCell.get(key(at));
+    // A peer can hide an oriented link. Confirm its direction after moving the peer.
+    const directions: NativePoint[] = piece ? [[piece.dx, piece.dy]]
+      : !channel.covered && coveredCells.has(key(at)) ? moves.map(([, dx, dy]) => [dx, dy]) : [];
+    for (const [dx, dy] of directions) {
+      const next: NativePoint = [at[0] + dx * pitch, at[1] + dy * pitch];
+      if (channel.path.some(point => same(point, next))) continue;
+      queue.push({ path: [...channel.path, next], covered: piece ? channel.covered : at });
+    }
+  }
+  return hypothetical;
+}
+
+function measureChannel(rows: NativeRows, roles: CascadeRoles): Scene | null {
+  const grid = measureCells(rows);
+  if (!grid) return null;
+  const { entries, pitch, floorColor } = grid;
+  const cursors = entries.filter(({ colors }) => isCursor(colors));
+  const focus = cursors.filter(({ colors }) => colors[0] === roles.focus);
+  if (focus.length !== 1) return null;
+  const pieces = entries.flatMap(entry => {
+    const piece = domino(entry.point, entry.colors, roles.tip);
+    return piece ? [piece] : [];
+  });
+  const targets = pieces.filter(piece => piece.color === roles.target);
+  if (targets.length !== 1) return null;
+  const target = targets[0]!.point;
+  const channel = targetChannel(pieces, cursors.map(cursor => cursor.point), pitch, roles, target);
+  if (!channel) return null;
+  const floor = entries.filter(({ colors }) => colors.every(color => color === floorColor)).map(entry => entry.point);
+  const cells = [...floor, ...pieces.map(piece => piece.point), ...cursors.map(cursor => cursor.point)];
+  const junction = channel.path.at(-2) ?? target;
+  return { cursor: focus[0]!.point, layout: { pitch, cells, cursorColor: roles.focus, roles,
+    channel: { covered: channel.covered, floorColor }, gate: channel.covered ?? junction, junction, target, branch: channel.path } };
 }
 
 function retained(rows: NativeRows, layout: Layout): Scene | null {
@@ -110,9 +170,20 @@ function nextMove(scene: Scene) {
   return null;
 }
 
+function parkCursor(scene: Scene, rows: NativeRows) {
+  const { pitch, cells, branch, channel } = scene.layout;
+  for (const [ref, dx, dy] of moves) {
+    const at: NativePoint = [scene.cursor[0] + dx * pitch, scene.cursor[1] + dy * pitch];
+    if (cells.some(cell => same(cell, at)) && !branch.some(cell => same(cell, at))
+      && patch(rows, at).every(color => color === channel?.floorColor)) return { ref, at };
+  }
+  return null;
+}
+
 export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Proposal> {
   const learns = family === learnCascadeId;
   let state: Memory | null = null;
+  let knowledge: CascadeMemory | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -123,16 +194,21 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
       if (remaining < 1 || ![...moves.map(([ref]) => ref), 'ACTION5'].every(ref => observation.available_action_refs.includes(ref))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.failed) return null;
-      const scene = prior ? retained(rows, prior.layout) : measure(rows);
+      const preceding = knowledge?.epoch === observation.level_epoch - 1 ? knowledge : null;
+      const activeLayout = prior && (!prior.layout.channel || prior.burstRef);
+      const scene = activeLayout ? retained(rows, prior.layout)
+        : (prior ? null : measure(rows)) ?? (preceding ? measureChannel(rows, preceding.roles) : null);
       if (!scene) return null;
       const { layout } = scene;
-      const local = prior ?? { epoch: observation.level_epoch, layout, routeRef: null, burstRef: null, failed: false };
-      const launch = same(scene.cursor, layout.gate);
-      const step = launch ? { ref: 'ACTION5', at: scene.cursor } : nextMove(scene);
+      const local = { epoch: observation.level_epoch, layout, routeRef: prior?.routeRef ?? null, burstRef: prior?.burstRef ?? null, failed: false };
+      const launch = layout.channel ? !layout.channel.covered : same(scene.cursor, layout.gate);
+      const clearsChannel = !!layout.channel?.covered && same(scene.cursor, layout.gate);
+      const step = launch ? { ref: 'ACTION5', at: scene.cursor } : clearsChannel ? parkCursor(scene, rows) : nextMove(scene);
       if (!step) return null;
 
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...[local.routeRef, local.burstRef].filter((v): v is string => !!v && v !== ref)];
+      const refs = [local.routeRef, local.burstRef, ...(layout.channel ? preceding?.evidence ?? [] : [])];
+      const evidence: [string, ...string[]] = [ref, ...new Set(refs.filter((v): v is string => !!v && v !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: step.ref, expected: step.at, evidence };
       const known = launch ? local.burstRef : local.routeRef;
@@ -147,7 +223,10 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
         subjects: [key(layout.junction), key(layout.target)], parentObjective: parent, satisfactionContract: 'official_progress_after_directional_cascade' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = gatedCascadeId + ':' + need.id;
-      const situation = launch ? 'Test the cascade with the earlier branch blocked and check the target branch'
+      const situation = layout.channel ? launch ? 'Advance the visible cascade route toward the target and measure which links respond'
+        : clearsChannel ? 'Move the focused cursor aside to verify the covered link to the target'
+          : 'Approach the cursor covering a possible link and verify where control moves'
+        : launch ? 'Test the cascade with the earlier branch blocked and check the target branch'
         : 'Move the cursor to block the shorter path into the shared junction';
       const action = { action_ref: step.ref, data: {} };
       return {
@@ -158,7 +237,9 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Keep the cascade going toward the target', situation, evidence, agenda: navigation?.entries ?? [],
           mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
-          actor: square(scene.cursor), gate: square(layout.gate), junction: square(layout.junction), target: square(layout.target) },
+          actor: square(scene.cursor), gate: layout.channel ? null : square(layout.gate),
+          coveredLink: layout.channel?.covered ? square(layout.channel.covered) : null, channel: !!layout.channel,
+          junction: square(layout.junction), target: square(layout.target) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -174,27 +255,49 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const next = retained(second, proposal.local.layout);
-      const matched = !!next && same(next.cursor, proposal.next) && (!proposal.launch || burstChanged(first, second, proposal.local.layout));
-      return { matched, seal_prefix: true, reason: matched ? proposal.launch ? 'cascade_propagation_observed' : 'cursor_landing_confirmed'
+      const matched = stepConfirmed(first, second, proposal, next);
+      const transfer = matched && !proposal.launch && !!proposal.scene.layout.channel && isCursor(patch(first, proposal.next));
+      return { matched, seal_prefix: true, reason: matched ? proposal.launch ? 'cascade_propagation_observed'
+        : transfer ? 'cursor_focus_transferred' : 'cursor_landing_confirmed'
         : proposal.launch ? 'cascade_stalled_or_reset' : 'cursor_did_not_reach_predicted_cell' };
     },
     record(before, after, _action, first, second, proposal) {
+      if (after.levels_completed > before.levels_completed && proposal.local.layout.roles) {
+        knowledge = { roles: proposal.local.layout.roles, epoch: before.level_epoch, evidence: [before.observation_ref, after.observation_ref] };
+        return { events: [], reviewEvidence: 'The observed cascade reached the target and advanced the level.' };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, launch } = proposal;
       const next = retained(second, local.layout);
-      const matched = !!next && same(next.cursor, proposal.next) && (!launch || burstChanged(first, second, local.layout));
+      const matched = stepConfirmed(first, second, proposal, next);
       state = { ...local, failed: !matched, routeRef: matched && !launch ? after.observation_ref : local.routeRef,
         burstRef: matched && launch ? after.observation_ref : local.burstRef };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as Memory | null); },
+    state: () => ({ state, knowledge }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as Memory | null);
+      knowledge = structuredClone(value.knowledge as CascadeMemory | null) ?? null;
+    },
   };
 }
 
-function burstChanged(first: NativeRows, second: NativeRows, layout: Layout) {
-  return [...layout.branch, layout.junction, layout.target].some(point => {
+function stepConfirmed(first: NativeRows, second: NativeRows, proposal: Proposal, next: Scene | null) {
+  if (!next) return false;
+  if (!proposal.launch) return same(next.cursor, proposal.next);
+  const { layout } = proposal.local;
+  if (layout.channel) return channelChanged(first, second, layout.branch);
+  return same(next.cursor, proposal.next) && burstChanged(first, second, layout);
+}
+
+function channelChanged(first: NativeRows, second: NativeRows, points: NativePoint[]) {
+  return points.some(point => {
     const before = patch(first, point), after = patch(second, point);
     return before.some((color, index) => color !== after[index]);
-  }) || layout.cells.some(point => patch(first, point)[4] !== patch(second, point)[4]);
+  });
+}
+
+function burstChanged(first: NativeRows, second: NativeRows, layout: Layout) {
+  return channelChanged(first, second, [...layout.branch, layout.junction, layout.target])
+    || layout.cells.some(point => patch(first, point)[4] !== patch(second, point)[4]);
 }
