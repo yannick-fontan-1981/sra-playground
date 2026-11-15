@@ -6,6 +6,10 @@ import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, N
 import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { planInventoryRoute, type InventoryPosition, type InventoryRouteStep } from './inventory-route-plan.ts';
+import { inventoryPositionMatches, readInventoryReserve, readInventoryRoute, verifyInventoryReturn,
+  type InventoryEvidence, type InventoryRouteScene } from './inventory-route-observation.ts';
 
 export const inventoryAccessId = 'sic_inventory_access';
 export const verifyInventoryTransferId = 'sic_verify_inventory_transfer';
@@ -26,17 +30,19 @@ type Meter = { x: number; y: number; value: number; length: number };
 type Link = { source: NativePoint; gate: NativePoint; color: number };
 type Scene = { grid: Cell[]; signature: string; travel: number[]; start: NativePoint; link: Link; goal: NativePoint };
 type EmptySlot = { bounds: NativeBox; pixels: NativeRows; evidence: string };
-type Boundary = {
-  epoch: number; actor: string; slot: EmptySlot; receipt: NativeRecord; pitch: number; travel: number[];
-  scoredPattern: number[]; controls: State['controls']; meter: Meter; before: string; after: string;
-};
+type Boundary = InventoryEvidence & { epoch: number; receipt: NativeRecord; meter: Meter };
 type Need = 'source' | 'passage' | 'reserve' | 'reuse' | 'goal';
 type State = { epoch: number; scene: Scene; passageObserved: boolean; reserveRestored: boolean; anotherTransferObserved: boolean;
   controls: Record<string, NativePoint>; tested: string[];
   visited: string[]; receipt: NativeRecord | null; meter: Meter | null; transfer: string | null; evidence: string[];
-  count: number; stopped: boolean; emptySlot?: EmptySlot; recalled?: Boundary };
+  count: number; stopped: boolean; emptySlot?: EmptySlot; recalled?: Boundary; recharge?: number };
 type Choice = { input: string; target: Cell; expected: NativePoint | null; interaction: boolean; need: Need };
-type Proposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; here: NativePoint; needId: string };
+type LegacyProposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; here: NativePoint; needId: string };
+type RouteState = { epoch: number; scene: InventoryRouteScene; position: InventoryPosition; route: InventoryRouteStep[];
+  evidence: string[]; depositProven: boolean; stopped: boolean };
+type RouteProposal = NativeProposal & { routeState: RouteState; next: InventoryRouteStep; needId: string };
+type Proposal = LegacyProposal | RouteProposal;
+const isRoute = (proposal: Proposal): proposal is RouteProposal => 'routeState' in proposal;
 const directions: Record<string, NativePoint> = { ACTION1: [-1, 0], ACTION2: [1, 0], ACTION3: [0, -1], ACTION4: [0, 1] };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const key = (p: NativePoint) => p.join(',');
@@ -141,11 +147,7 @@ function recalledScene(memory: Boundary, observation: NativeObservation, rows: N
 }
 
 function capturedMeter(first: NativeRows, second: NativeRows, original: Meter | null, actor: NativeBox, moved: NativeBox): Meter | null {
-  const count = (rows: NativeRows, x: number, y: number, value: number) => {
-    let end = x;
-    while (rows[y]?.[end] === value) end++;
-    return end - x;
-  };
+  const count = (rows: NativeRows, x: number, y: number, value: number) => readInventoryReserve(rows, { x, y, value });
   if (original) return { ...original, length: count(second, original.x, original.y, original.value) };
   const candidates: Meter[] = [];
   for (let y = 0; y < first.length; y++) {
@@ -170,13 +172,74 @@ function commandFor(wanted: NativePoint, state: State, available: readonly strin
 export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
   let state: State | null = null;
   let boundary: Boundary | null = null;
+  let inventoryRoute: RouteState | null = null;
   let decide: NativeProgramHandle | undefined;
+  async function offerRoute(observation: NativeObservation, rows: NativeRows, remaining: number,
+    execution: Parameters<NativeFamily['propose']>[4]): Promise<RouteProposal | null> {
+    if (remaining < 1 || observation.available_action_refs.includes('ACTION6')) return null;
+    const previous = inventoryRoute?.epoch === observation.level_epoch ? inventoryRoute : null;
+    if (previous?.stopped) return null;
+    const measured = !previous && boundary?.epoch === observation.level_epoch ? readInventoryRoute(rows, observation, boundary) : null;
+    const local: RouteState | null = previous ?? (measured && boundary ? { ...measured, epoch: observation.level_epoch, route: [],
+      evidence: [boundary.slot.evidence, boundary.before, boundary.after], depositProven: false, stopped: false } : null);
+    if (!local) return null;
+    const { scene, position } = local;
+    const actor = inventoryPositionMatches(scene, position, observation, rows);
+    if (!actor || readInventoryReserve(rows, scene.meter) !== position.energy) return null;
+    const route = local.route.length ? local.route : planInventoryRoute(scene.map, position, scene.moves, scene.interaction, remaining);
+    const next = route?.[0];
+    if (!next || !observation.available_action_refs.includes(next.input)) return null;
+    const task = route!.find(step => step.kind !== 'walk') ?? next;
+    const target = scene.boxes[task.position.at]!;
+    const interaction = next.kind === 'pick' || next.kind === 'deposit';
+    const knownInteraction = interaction && (next.kind === 'pick' || local.depositProven);
+    const mode = execution?.reasoningMode ?? (knownInteraction || !interaction ? 'solving' : 'exploration');
+    const facts = { routeSupported: !interaction, knownInteraction, eligibleProbe: interaction && !knownInteraction, mode };
+    const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+    const strategy = interaction ? knownInteraction ? 'P02' : 'P05' : 'P07';
+    if (decision?.result !== strategy) return null;
+    const label = {
+      walk: 'Continue toward the marked exit',
+      pick: 'Collect the object needed for the remaining route',
+      deposit: 'Reserve the carried object here so the slot can serve the earlier gate',
+      unlock: 'Use the object whose shape completes this gate',
+      charge: 'Replenish the reserve before the remaining transfers',
+      finish: 'Reach the exit through the opened route',
+    }[task.kind];
+    const ref = observation.observation_ref, parent = 'G_official_completion';
+    const evidence: [string, ...string[]] = [ref, ...new Set(local.evidence.filter(item => item !== ref))];
+    const objective = { kind: 'arrange_access_with_one_inventory_slot', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['carrier', 'temporary_storage', 'complementary_passages', 'reserve'],
+      parentObjective: parent, satisfactionContract: 'observe_official_progress_after_bounded_inventory_transfers' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+    const id = 'inventory-access:' + need.id, action = { action_ref: next.input, data: {} }, actions = [action];
+    const meter = scene.meter;
+    return { status: 'proposed', kind: verifyInventoryTransferId, actions, routeState: { ...local, route: route! }, next, needId: need.id,
+      binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+      steps: [{ action, expected_after: scene.map.nodes[next.position.at]!.at }],
+      sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+        instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+      sicSituationCard: { strategy, need: 'Open the gates in order with one inventory slot', evidence, agenda: [], mode,
+        triggerCard: chooseLanding, situation: label, actor, target, display: scene.slot.bounds,
+        reserve: position.energy > 0 ? [meter.x, meter.y, meter.x + position.energy - 1, meter.y] : null },
+      question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
   return {
     id: verifyInventoryTransferId,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      return group === observedMechanicsGroup ? offerRoute(observation, rows, remaining, execution)
+        : this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
+      const ordered = await offerRoute(observation, rows, remaining, execution);
+      if (ordered) return ordered;
       const available = Object.keys(directions).filter(input => observation.available_action_refs.includes(input));
       if (remaining < 1 || available.length !== 4 || !observation.available_action_refs.includes('ACTION5') || observation.available_action_refs.includes('ACTION6')) return null;
       const previous = state?.epoch === observation.level_epoch ? state : null;
@@ -274,9 +337,14 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_carrier_and_destination_bound' : 'carrier_or_destination_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isRoute(proposal)) {
+        const { scene, position } = proposal.routeState;
+        const matched = verifyInventoryReturn(scene, position, proposal.next, before, after, first, second) !== null;
+        return { matched, seal_prefix: true, reason: matched ? 'inventory_route_return_observed' : 'inventory_route_return_contradicted' };
+      }
       const actor = after.entities.find(entity => entity.signature === proposal.local.scene.signature)?.bbox;
       const current = actor && cellAt(proposal.local.scene, actor);
       const matched = proposal.choice.expected ? !!current && same(proposal.choice.expected, current.at) : null;
@@ -288,6 +356,15 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: 'compare_carrier_and_inventory_return' };
     },
     record(before, after, action, first, second, proposal) {
+      if (isRoute(proposal)) {
+        const { routeState: local, next } = proposal;
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const energy = verifyInventoryReturn(local.scene, local.position, next, before, after, first, second);
+        inventoryRoute = energy === null ? { ...local, stopped: true } : { ...local, position: { ...next.position, energy },
+          route: energy === next.position.energy ? local.route.slice(1) : [], depositProven: local.depositProven || next.kind === 'deposit',
+          evidence: [...local.evidence.slice(-5), after.observation_ref] };
+        return { events: [] };
+      }
       const { local, choice, actor, here } = proposal, scene = local.scene;
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) {
         const { receipt, emptySlot, meter } = local;
@@ -295,7 +372,11 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
           && display_matches(receipt, first) && same(choice.expected, scene.goal)) {
           const pitch = choice.target.box[2] - choice.target.box[0] + 1;
           boundary = { epoch: after.level_epoch, actor: scene.signature, slot: emptySlot, receipt, pitch, travel: scene.travel,
-            scoredPattern: choice.target.original.flat(), controls: local.controls, meter, before: before.observation_ref, after: after.observation_ref };
+            scoredPattern: choice.target.original.flat(), controls: local.controls, meter, before: before.observation_ref, after: after.observation_ref,
+            ...(local.recharge ? { recharge: local.recharge } : {}), ...(local.transfer ? { interaction: local.transfer } : {}) };
+        } else if (after.levels_completed > before.levels_completed && choice.need === 'goal' && local.recalled
+          && local.passageObserved && same(choice.expected, scene.goal)) {
+          boundary = { ...local.recalled, epoch: after.level_epoch, controls: local.controls, before: before.observation_ref, after: after.observation_ref };
         }
         return { events: [] };
       }
@@ -331,16 +412,18 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
       } else if (arrived && choice.need === 'reserve') {
         next.visited = [...local.visited, key(current.at)];
         next.reserveRestored = !!meter && !!local.meter && meter.length > local.meter.length;
+        if (next.reserveRestored) next.recharge = meter!.length - local.meter!.length + 1;
       } else if (arrived && choice.need === 'goal') {
         next.stopped = true;
       }
       state = next;
       return { events: [] };
     },
-    state: () => ({ state, ...(boundary ? { boundary } : {}) }),
+    state: () => ({ state, ...(boundary ? { boundary } : {}), ...(inventoryRoute ? { inventoryRoute } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       boundary = structuredClone((value.boundary as Boundary | undefined) ?? null);
+      inventoryRoute = structuredClone((value.inventoryRoute as RouteState | undefined) ?? null);
     },
   };
 }
