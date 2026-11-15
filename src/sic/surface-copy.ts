@@ -1,12 +1,17 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { advanceSurfacePose, makeSurfaceMasks, measureSurfaceLayout, observeSurface, paintSurface, surfaceCrop, surfaceProgram,
   type SurfaceMeaning, type SurfaceMotion, type SurfaceState } from '../logos-engine/v6-surface-program.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const surfaceCopyId = 'sic_surface_copy';
+export const learnSurfaceCopyId = 'sic_copy_surface_after_observed_tool_effect';
 export const surfaceCopyStrategies = {
+  P02: navigationPrimitives.P02,
+  P05: navigationPrimitives.P05,
   choose_reference_color: 'Select the color needed for the next part of the reference',
   measure_surface_input: 'Test a command that may orient or apply the tool',
   apply_measured_surface_input: 'Use the measured command to copy the reference',
@@ -44,16 +49,26 @@ function predict(current: SurfaceState, model: Model, input: number, masks: read
     : [advanceSurfacePose(pose, meaning, model.motion), hue, grid];
 }
 
-export function createSicSurfaceCopy(): NativeFamily<Proposal> {
+function compatibleModels(models: Model[], before: SurfaceState, after: SurfaceState | null, input: number, masks: readonly (readonly bigint[])[]) {
+  return models.filter(model => equal(after, predict(before, model, input, masks[Number(model.inclusive)]!)));
+}
+
+export function createSicSurfaceCopy(family = surfaceCopyId): NativeFamily<Proposal> {
+  const learns = family === learnSurfaceCopyId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: surfaceCopyId,
-    async propose(observation, rows, inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const named = inputs.filter(input => /^ACTION[1-5]$/.test(input.action_ref)).map(input => input.action_ref).sort();
       if (named.length !== 5) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.tried.length ?? 0) >= 32) return null;
+      if (learns && !prior && !execution?.readPriorDirectionalScene) return null;
       const clicks = prior ? [] : observation.entities.filter(part => part.rectangular).map(part => {
         const [x, y] = center(part.bbox);
         return { action_ref: 'ACTION6', data: { x, y } };
@@ -61,15 +76,26 @@ export function createSicSurfaceCopy(): NativeFamily<Proposal> {
       const scene = prior?.scene ?? (measureSurfaceLayout(observation, rows, clicks) as Scene | null);
       if (!scene || boxWidth(scene.work) * boxHeight(scene.work) > 256) return null;
       const goal = prior?.goal ?? surfaceCrop(rows, scene.ref).flat();
-      const models: Model[] = prior?.models ?? assignments([0, 2, 4, 6, 'write']).flatMap(labels =>
+      const hypotheses: Model[] = prior?.models ?? assignments([0, 2, 4, 6, 'write']).flatMap(labels =>
         (['bounded_axis', 'angular_attraction'] as const).flatMap(motion =>
           [false, true].map(inclusive => ({ labels, motion, inclusive }))));
-      const local = prior ?? { epoch: observation.level_epoch, scene, goal, keys: named, models,
-        tried: [], evidence: [], stopped: false };
       const current = observeSurface(rows, scene);
-      if (!current || !equal(local.keys, named) || equal(current[2], goal) || !models.length) return null;
+      if (!current || (prior && !equal(prior.keys, named)) || equal(current[2], goal) || !hypotheses.length) return null;
       const [pose, hue, grid] = current;
       const masks = [false, true].map(inclusive => makeSurfaceMasks(boxWidth(scene.work), boxHeight(scene.work), inclusive));
+      const ref = observation.observation_ref;
+      const receipt = learns && !prior ? execution?.readPriorDirectionalScene?.(first =>
+        equal(surfaceCrop(first, scene.ref).flat(), goal) ? observeSurface(first, scene) : null) : null;
+      let models = hypotheses;
+      if (learns && !prior) {
+        if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== observation.level_epoch) return null;
+        const input = named.indexOf(receipt.command);
+        if (input < 0) return null;
+        models = compatibleModels(hypotheses, receipt.scene, current, input, masks);
+        if (!models.length || models.length === hypotheses.length) return null;
+      }
+      const local: State = prior ?? { epoch: observation.level_epoch, scene, goal, keys: named, models,
+        tried: receipt ? [key([receipt.scene, receipt.command])] : [], evidence: receipt ? [receipt.beforeRef, ref] : [], stopped: false };
       const paths = [...new Set(models.map(model => Number(model.inclusive)))].flatMap(index => {
         const path = surfaceProgram(grid, goal, pose, hue, masks[index]!);
         if (!path?.length) return [];
@@ -102,7 +128,6 @@ export function createSicSurfaceCopy(): NativeFamily<Proposal> {
       if (swatch && local.tried.includes(swatchAttempt)) return null;
       const offer = swatch ? { command: swatch, expected: [pose, color, grid] as SurfaceState, attempt: swatchAttempt } : best;
       if (!offer) return null;
-      const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
         swatch: { value: !!swatch, evidence }, agreed: { value: !!best?.expected && !swatch, evidence },
@@ -110,6 +135,13 @@ export function createSicSurfaceCopy(): NativeFamily<Proposal> {
       }, planners: { choose_reference_color: () => offer, apply_measured_surface_input: () => offer, measure_surface_input: () => offer } });
       if (!selected) return null;
       const strategy = selected.id, label = surfaceCopyStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const repeated = strategy === 'apply_measured_surface_input';
+      const facts = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = repeated ? 'P02' : 'P05';
+      if (learns && decision?.result !== primitive) return null;
+      const selectedStrategy = learns ? primitive : strategy;
       const purpose = { kind: 'copy_visible_reference_surface', scope: ref.split(':revision:', 1)[0]!, subjects: ['reference_and_work_surface'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_matching_the_reference' };
       const need = { ...purpose, id: sicNeedId(purpose), status: 'assigned', evidence };
@@ -118,14 +150,19 @@ export function createSicSurfaceCopy(): NativeFamily<Proposal> {
       const swatchBox = swatch ? scene.swatches[color]! : null;
       const pointBinding = swatchBox ? await ObservedInputDomain.makeLocusWitness(observation, rows,
         [command.data.x!, command.data.y!], { reason: label, evidence }) : null;
-      return { status: 'proposed', kind: surfaceCopyId, actions, local, current, command, expected, attempt, needId: need.id,
+      if (learns && swatchBox && !pointBinding) return null;
+      return { status: 'proposed', kind: family, actions, local, current, command, expected, attempt, needId: need.id,
         steps: [{ action: command, expected_after: null, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Make the working surface match the displayed reference', mode: expected ? 'solving' : 'exploration',
-          situation: label, agenda: entries, evidence, reference: scene.ref, surface: scene.work, swatch: swatchBox },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy: selectedStrategy, need: 'Make the working surface match the displayed reference',
+          mode: learns ? mode : expected ? 'solving' : 'exploration',
+          situation: label, agenda: entries, evidence, reference: scene.ref, surface: scene.work, swatch: swatchBox,
+          ...(decision ? { triggerCard: decision.receipt.workflow } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
-        sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+        sicLocalDecision: { strategy: selectedStrategy, objective: { id, label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
@@ -145,8 +182,7 @@ export function createSicSurfaceCopy(): NativeFamily<Proposal> {
       const { local, current, expected, attempt } = proposal, next = observeSurface(second, local.scene);
       const input = local.keys.indexOf(command.action_ref);
       const masks = [false, true].map(inclusive => makeSurfaceMasks(boxWidth(local.scene.work), boxHeight(local.scene.work), inclusive));
-      const models = input < 0 ? local.models : local.models.filter(model =>
-        equal(next, predict(current, model, input, masks[Number(model.inclusive)]!)));
+      const models = input < 0 ? local.models : compatibleModels(local.models, current, next, input, masks);
       state = { ...local, models, stopped: !next || (input < 0 && !equal(expected, next)),
         tried: [...local.tried, attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };

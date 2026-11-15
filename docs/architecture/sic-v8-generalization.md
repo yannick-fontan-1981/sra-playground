@@ -421,3 +421,9 @@ Le nom neutre et la palette permutée conservent le gain. Désactiver P02 après
 Avec `sic_switched_surface` retirée, **ETAG gagne en sept commandes SIC seul**. Une commande de la famille d’accès déplace la pièce d’un pas dans une ouverture et la cible cesse d’être visible. SIC reconstitue l’entrée en comparant les deux observations et conserve la dernière position mesurée de la cible. La carte SRC `sic.follow_observed_landings.choose` choisit quatre déplacements P07 vers l’ouverture de sortie, puis deux essais P05 pour vérifier la sortie et le contact. La mesure des ouvertures et la recherche du trajet restent dans le fournisseur TypeScript partagé.
 
 Les commandes et retours reproduisent la référence, empreinte `fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf`. Le nom neutre et la palette permutée conservent le gain. Désactiver P07 après le changement de surface laisse le niveau ouvert à la septième commande.
+
+### Écarter des hypothèses à partir d’un contrôle sans effet sur l’outil
+
+Avec `sic_surface_copy` retirée, **CD82 gagne en neuf commandes SIC seul**. La première commande de l’exploration publique laisse l’outil et la surface de travail inchangés. SIC compare ces deux observations et élimine les modèles qui prévoyaient un changement. La carte SRC `sic.verify_observed_interaction.choose` choisit cinq essais P05 et trois réutilisations P02 au fil de la copie. Le modèle TypeScript partagé conserve les hypothèses compatibles avec chaque retour et calcule les étapes qui rapprochent la surface de la référence.
+
+Les commandes et retours reproduisent la référence, empreinte `10cfd4ca1bd7a8fbd1ef29cd82b4c79f7724ef3a742cf0e0a40666657de739cd`. Le nom neutre et la palette permutée conservent le gain. Désactiver P02 avant sa première utilisation rend les quatre dernières commandes à l’exploration et laisse le niveau ouvert au budget de neuf commandes.

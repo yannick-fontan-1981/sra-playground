@@ -20,7 +20,7 @@ import { learnSlotTransferId, slotTransferId, slotTransferStrategies } from './s
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies } from './occurrence-recall.ts';
 import { slotPermutationId, slotPermutationStrategies } from './slot-permutation.ts';
-import { surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
+import { learnSurfaceCopyId, surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
 import { codeRouteId, codeRouteStrategies } from './code-route.ts';
 import { profileTransferId, profileTransferStrategies } from './profile-transfer.ts';
 import { learnOrderedReplenishmentId, orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
@@ -481,7 +481,7 @@ export function readNativeResolution(agent: {
           : family === labeledSequenceId ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
             : (family === slotTransferId || family === learnSlotTransferId) ? slotTransferStrategies : family === remoteSupportRouteId ? remoteSupportRouteStrategies
               : family === occurrenceRecallId ? occurrenceRecallStrategies : family === slotPermutationId ? slotPermutationStrategies
-                : family === surfaceCopyId ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
+                : (family === surfaceCopyId || family === learnSurfaceCopyId) ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
                   : family === profileTransferId ? profileTransferStrategies : (family === orderedReplenishmentId || family === learnOrderedReplenishmentId) ? orderedReplenishmentStrategies
                     : (family === programOriginId || family === learnProgramOriginId) ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
                       : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
@@ -609,7 +609,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Marked target slot', box });
     }
   }
-  if (situationCard && family === surfaceCopyId) {
+  if (situationCard && (family === surfaceCopyId || family === learnSurfaceCopyId)) {
     for (const [field, label] of [['reference', 'Reference pattern'], ['surface', 'Working surface'], ['swatch', 'Color selector']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
