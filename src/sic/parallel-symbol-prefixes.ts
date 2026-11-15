@@ -61,13 +61,22 @@ function readStrip(rows: NativeRows, panel: NativeBox, layout: Layout, clear: nu
   for (let y = t + 1; y < b; y++) if (rows[y]?.[l] !== border || rows[y]?.[r] !== border) return null;
   const active = focus(rows, panel), cells: SymbolCell[] = [], y = t + inset;
   if (active && (active.extent !== extent || active.y !== y)) return null;
+  let padding = false;
   for (let x = l + offset; x + extent - 1 < r - 1; x += extent + 1) {
     const backing = rows[y]?.[x], glyph: string[] = [];
     if (backing === undefined || y + extent >= b) return null;
     for (let dy = 1; dy < extent - 1; dy++) for (let dx = 1; dx < extent - 1; dx++) {
       if (rows[y + dy]?.[x + dx] !== backing) glyph.push(dx + ',' + dy);
     }
-    if (!glyph.length) return null;
+    if (!glyph.length) {
+      // Aligned strips can share a frame width even when their words differ in length.
+      const blank = backing === clear && rows.slice(y, y + extent).every(row =>
+        row.slice(x, x + extent).every(pixel => pixel === clear));
+      if (!blank) return null;
+      padding = true;
+      continue;
+    }
+    if (padding) return null;
     cells.push({ box: [x, y, x + extent - 1, y + extent - 1], value: glyph.join('/'), backing });
   }
   const rank = active ? cells.findIndex(cell => cell.box[0] === active.x) : cells.length;
