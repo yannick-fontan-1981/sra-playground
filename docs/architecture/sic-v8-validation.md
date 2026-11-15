@@ -395,6 +395,12 @@ Sur **FT09**, le niveau 1 établit la lecture d'une fenêtre. Le niveau 2 contie
 
 Ces deux gains portent le bilan à **43/100 niveaux 2** et **160/636 niveaux attestés sous SIC seul** (25,2 %).
 
+Sur **MEMO**, SIC conserve les correspondances soutenues par les retours du niveau 1. Il remesure les indicateurs et les occurrences du niveau 2, où le contour de sélection a disparu. Le premier clic teste la seule occurrence visible et son effet sur l'indicateur. Les neuf choix suivants réutilisent les correspondances qui désignent toutes la même occurrence. Le niveau 1 conserve ses dix commandes et les effets mesurés. Le niveau 2 gagne en **dix clics SIC seul**. Empreinte `76ea20ee9fb6d89220f8fd189937a43fc1f4cad19c9269a2a8a8aef1a03b3b8d`.
+
+Sur **LP85**, le moteur reconnaît 42 emplacements, deux destinations et six commandes visibles au niveau 2. La recherche inverse suit les deux destinations et borne l'espace qu'elle explore. Après sept essais, SIC compose les permutations compatibles et vérifie les effets des commandes sur le plateau. Le niveau 1 conserve ses cinq commandes et les effets mesurés. Le niveau 2 gagne en **20 clics SIC seul**. Empreinte `bea227afb52808b7f792bf0fd5d7ed290a69dc4e0ad48420f290cb4842cc2de8`.
+
+Le bilan atteint **45/100 niveaux 2** et **162/636 niveaux attestés sous SIC seul** (25,5 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.

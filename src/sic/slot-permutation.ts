@@ -19,6 +19,7 @@ type Proposal = NativeProposal & { local: State; control: NativePoint; board: Bo
 const key = (value: unknown) => JSON.stringify(value);
 const sortedControls = (scene: OrbitField) => [...scene.controls.values()].sort((a, b) => a.key[0] - b.key[0] || a.key[1] - b.key[1]);
 const predict = (permutation: readonly number[], values: readonly number[]) => permutation.map(i => values[i]!);
+const maxProjectedStates = 32 ** 3;
 
 function visibleControlInputs(observation: NativeObservation): NativeCommand[] {
   return observation.entities.flatMap(entity => {
@@ -33,6 +34,7 @@ function visibleControlInputs(observation: NativeObservation): NativeCommand[] {
 export function createSicVerifySlotPermutation(): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
+  let contours: { layout: string; rings: number[][] } | null = null;
   return {
     id: verifySlotPermutationId,
     async attachPrograms(registry) {
@@ -41,7 +43,8 @@ export function createSicVerifySlotPermutation(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const scene = measureOrbitField(observation, visibleControlInputs(observation));
-      if (!scene || scene.positions.length > 32 || scene.controls.size > 8 || scene.targets.size > 3) return null;
+      if (!scene || scene.positions.length > 64 || scene.controls.size > 8 || scene.targets.size > 3) return null;
+      if (scene.positions.length ** scene.targets.size > maxProjectedStates) return null;
       const { positions, size, targets } = scene, controls = sortedControls(scene);
       const layout = key([observation.level_epoch, positions, size, [...targets], controls.map(control => control.key)]);
       const local = state?.layout === layout ? state : { layout, models: {}, count: 0 };
@@ -115,8 +118,14 @@ export function createSicVerifySlotPermutation(): NativeFamily<Proposal> {
       const { local, control, board: { values, positions, size } } = proposal;
       const actual = orbitValues(second, positions, size);
       const prior = local.models[key(control)];
-      const possible = actual.length ? fitOrbit(values, actual, orbitCycles(positions)) : [];
-      const permutations = prior ? possible.filter(option => prior.permutations.some(previous => key(previous) === key(option))) : possible;
+      let permutations: number[][] = [];
+      if (proposal.prediction && key(proposal.prediction) === key(actual) && key(values) !== key(actual)) {
+        permutations = prior?.permutations ?? [];
+      } else if (actual.length) {
+        if (contours?.layout !== local.layout) contours = { layout: local.layout, rings: orbitCycles(positions) };
+        const possible = fitOrbit(values, actual, contours.rings);
+        permutations = prior ? possible.filter(option => prior.permutations.some(previous => key(previous) === key(option))) : possible;
+      }
       const model = { key: control, permutations, evidence: after.observation_ref, tried: [...(prior?.tried ?? []), key(values)] };
       state = { ...local, models: { ...local.models, [key(control)]: model }, count: local.count + 1 };
       return { events: [] };

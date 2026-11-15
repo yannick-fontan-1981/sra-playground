@@ -18,7 +18,8 @@ type Scene = { occurrences: Occurrence[]; indicators: Indicator[]; calibration: 
 type Rule = { supports: string[]; contradicted: boolean };
 type Context = { chosen: Occurrence; peers: Occurrence[] };
 type State = { epoch: number; context: Context | null; seen: Appearance[]; rules: Record<string, Rule>;
-  calibration: NativeRecord | null; visited: string[]; stopped: boolean };
+  calibration: NativeRecord | null; visited: string[]; stopped: boolean; singletonStart?: string };
+type Transfer = { epoch: number; calibration: NativeRecord; rules: Record<string, Rule>; start: string; victory: string };
 type Prediction = { key: string; candidates: string[]; minimum: number };
 type Proposal = NativeProposal & { local: State; scene: Scene; chosen: Occurrence; predictions: Prediction[]; needId: string };
 const empty = (epoch = 0): State => ({ epoch, context: null, seen: [], rules: {}, calibration: null, visited: [], stopped: false });
@@ -63,6 +64,7 @@ function progress(before: Scene, after: Scene | null) {
 
 export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
   let state = empty();
+  let transfer: Transfer | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyOccurrenceChoiceId,
@@ -72,7 +74,9 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
-      const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
+      const prior = state.epoch === observation.level_epoch ? state : null;
+      const recalled = transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
+      const local = prior ?? { ...empty(observation.level_epoch), calibration: recalled?.calibration ?? null, rules: recalled?.rules ?? {} };
       if (local.stopped || local.visited.length >= 48) return null;
       const scene = measureOccurrenceScene(rows, observation, local.calibration) as Scene | null;
       if (!scene || !hasMeter(scene) || scene.occurrences.length > 16 || local.visited.includes(scene.key)) return null;
@@ -83,17 +87,22 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
       const votes = new Set(supported.map(prediction => prediction.candidates[0]));
       const inferred = !marked.length && votes.size === 1 ? scene.occurrences.find(part => votes.has(part.id)) : null;
       const visible = marked.length === 1 ? marked[0]! : null;
+      const start = recalled && !local.context && !marked.length && scene.occurrences.length === 1 ? scene.occurrences[0]! : null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set(supported.flatMap(({ key }) => local.rules[key]!.supports))];
-      if (!visible && !inferred) return null;
+      const proof = supported.flatMap(({ key }) => local.rules[key]!.supports);
+      if (start && recalled) proof.push(recalled.start, recalled.victory);
+      const evidence: [string, ...string[]] = [ref, ...new Set(proof.filter(value => value !== ref))];
+      if (!visible && !inferred && !start) return null;
       const mode = execution?.reasoningMode ?? (inferred ? 'assimilation' : 'exploration');
-      const facts = feedbackChoiceFacts(mode, { pointedCueNeedsTest: !!visible, feedbackSupportsOneChoice: !!inferred });
+      const facts = feedbackChoiceFacts(mode, { pointedCueNeedsTest: !!visible,
+        modelMatchNeedsTest: !!start, feedbackSupportsOneChoice: !!inferred });
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = decision?.result;
       if (!decision || (strategy !== 'P02' && strategy !== 'P05')) return null;
-      const chosen = strategy === 'P02' ? inferred : visible;
+      const chosen = strategy === 'P02' ? inferred : visible ?? start;
       if (!chosen) return null;
-      const label = strategy === 'P02' ? occurrenceRecallStrategies.reuse_observed_occurrence_rule : occurrenceRecallStrategies.test_emphasized_occurrence;
+      const label = strategy === 'P02' ? occurrenceRecallStrategies.reuse_observed_occurrence_rule
+        : start ? 'Test the only visible occurrence using the earlier start as evidence' : occurrenceRecallStrategies.test_emphasized_occurrence;
       const parent = 'G_official_completion';
       const goal = { kind: 'find_repeated_occurrence', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_occurrences'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_a_confirmed_occurrence' };
@@ -130,8 +139,13 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: matched ? 'one_visible_indicator_changed' : 'occurrence_progress_not_confirmed' };
     },
     record(before, after, _command, _first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, scene, chosen, predictions } = proposal;
+      if (after.levels_completed > before.levels_completed && local.singletonStart) {
+        const { indicator_boxes: _previousPositions, ...calibration } = scene.calibration;
+        transfer = { epoch: before.level_epoch, calibration, rules: local.rules, start: local.singletonStart, victory: after.observation_ref };
+        return { events: [], reviewEvidence: 'The occurrence matches advanced the sequence through the end of the level.' };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const next = measureOccurrenceScene(second, after, scene.calibration) as Scene | null;
       if (!next || !progress(scene, next) || local.visited.includes(next.key)) {
         state = { ...local, stopped: true };
@@ -145,11 +159,16 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
           contradicted: previous.contradicted || !included };
       }
       const seen = new Map([...local.seen, ...scene.occurrences].map(({ shape, color }) => [`${shape}:${color}`, { shape, color }]));
+      const singletonStart = local.singletonStart ?? (!local.context && scene.occurrences.length === 1 ? after.observation_ref : undefined);
       state = { ...local, rules, context: { chosen, peers: scene.occurrences }, seen: [...seen.values()],
-        calibration: scene.calibration, visited: [...local.visited, scene.key] };
+        calibration: scene.calibration, visited: [...local.visited, scene.key], ...(singletonStart ? { singletonStart } : {}) };
       return { events: [] };
     },
-    state: () => ({ ...state }),
-    restore(value: NativeRecord) { state = structuredClone(value as State); },
+    state: () => ({ ...state, transfer }),
+    restore(value: NativeRecord) {
+      const { transfer: saved, ...episode } = structuredClone(value);
+      state = episode as State;
+      transfer = (saved ?? null) as Transfer | null;
+    },
   };
 }
