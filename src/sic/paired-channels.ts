@@ -1,5 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -8,11 +8,11 @@ export const pairedChannelsId = 'sic_paired_channels';
 export const verifyChannelAccessId = 'sic_verify_channel_access';
 type Tile = { point: NativePoint; box: NativeBox; color: number; count: number; accents: number[] };
 type Part = ReturnType<typeof geometricComponents>[number];
-type Pair = { color: number; from: Tile; to: Tile };
+type Pair = { color: number; from: Tile; to: Tile; other?: Tile };
 type Layout = { pitch: number; tiles: Tile[]; pairs: Pair[]; closed: number; open: number; reserve: number };
-type Thread = { pair: Pair; clicks: Tile[] };
-type State = { epoch: number; layout: Layout; threads: Thread[]; rejected: string[]; refs: string[]; count: number };
-type Proposal = NativeProposal & { state: State; tile: Tile; pair: Pair; completes: boolean; needId: string };
+type Thread = { pair: Pair; clicks: Tile[]; mergeAt?: Tile };
+type State = { epoch: number; layout: Layout; threads: Thread[]; rejected: string[]; refs: string[]; count: number; stopped?: true };
+type Proposal = NativeProposal & { state: State; tile: Tile; pair: Pair; completes: boolean; needId: string; merging?: true };
 const key = (p: NativePoint) => p.join(',');
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -36,11 +36,11 @@ function endpointReached(rows: NativeRows, pair: Pair, pitch: number): boolean {
 function layoutFor(rows: NativeRows): Layout | null {
   const parts = geometricComponents(rows);
   const candidates: Layout[] = [];
-  for (const field of parts.filter(p => width(p.bbox) === height(p.bbox) && width(p.bbox) >= 24 && p.area > 100
+  for (const field of parts.filter(p => Math.min(width(p.bbox), height(p.bbox)) >= 24 && p.area > 100
     && p.bbox[0] > 0 && p.bbox[1] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[3] < rows.length - 1)) {
     for (const pitch of [3, 4, 5]) {
-      const side = width(field.bbox) / pitch;
-      if (!Number.isInteger(side) || side > 14 || side < 6) continue;
+      const dimensions = [width(field.bbox) / pitch, height(field.bbox) / pitch];
+      if (!dimensions.every(side => Number.isInteger(side) && side >= 6 && side <= 14)) continue;
       const tiles: Tile[] = [];
       const [l, t, r, b] = field.bbox;
       for (let y = t; y <= b; y += pitch) for (let x = l; x <= r; x += pitch) tiles.push(measureTile(rows, x, y, pitch));
@@ -53,13 +53,21 @@ function layoutFor(rows: NativeRows): Layout | null {
       const open = openColors[0]!, closed = closedColors[0]!;
       const marks = surface.filter(tile => tile.count === pitch ** 2 - pitch && tile.accents.length === 1);
       const sources = marks.filter(tile => tile.color !== open && tile.color !== closed);
-      if (sources.length < 2 || sources.length > 4 || marks.length !== 2 * sources.length) continue;
+      const sinks = marks.filter(tile => tile.color === open);
+      if (sources.length < 2 || sources.length > 4 || sinks.length < 2 || marks.length !== sinks.length + sources.length) continue;
       const pairs: Pair[] = [];
       for (const from of sources) {
-        const matches = marks.filter(tile => tile.color === open && tile.accents[0] === from.color);
+        const matches = sinks.filter(tile => tile.accents[0] === from.color);
         if (matches.length === 1) pairs.push({ color: from.color, from, to: matches[0]! });
       }
-      if (pairs.length !== sources.length || new Set(pairs.map(pair => pair.color)).size !== pairs.length) continue;
+      if (new Set(pairs.map(pair => pair.color)).size !== pairs.length) continue;
+      const spare = sources.filter(source => !pairs.some(pair => pair.from === source));
+      const unmatched = sinks.filter(sink => !pairs.some(pair => pair.to === sink));
+      if (spare.length === 2 && unmatched.length === 1 && spare[0]!.color !== spare[1]!.color) {
+        const to = unmatched[0]!;
+        if (sources.some(source => source.color === to.accents[0])) continue;
+        pairs.push({ color: to.accents[0]!, from: spare[0]!, other: spare[1]!, to });
+      } else if (spare.length || unmatched.length) continue;
       const indicators = parts.filter(p => p.bbox[3] < t && height(p.bbox) === 2 && width(p.bbox) >= 6 && p.area === 2 * width(p.bbox));
       if (indicators.length !== 1) continue;
       candidates.push({ pitch, tiles: surface, pairs, closed, open, reserve: width(indicators[0]!.bbox) });
@@ -118,6 +126,120 @@ function plan(layout: Layout, rejected: readonly string[]): Thread[] | null {
   return best;
 }
 
+async function planSeparated(layout: Layout, budget: number, execution?: NativeExecution): Promise<Thread[] | null> {
+  const { pitch, pairs, closed, open } = layout;
+  const tiles = layout.tiles.filter(tile => tile.color === closed || tile.color === open
+    || pairs.some(pair => tile === pair.from || tile === pair.other || tile === pair.to));
+  const indexes = new Map(tiles.map((tile, i) => [tile, i]));
+  const at = new Map(tiles.map((tile, i) => [key(tile.point), i]));
+  const adjacent = tiles.map(({ point: [x, y] }) => offsets.flatMap(([dx, dy]) => {
+    const i = at.get(key([x + dx * pitch, y + dy * pitch]));
+    return i === undefined ? [] : [i];
+  }));
+  const spread = (seeds: Iterable<number>, excavated: ReadonlySet<number>) => {
+    const queue = [...seeds], connected = new Set(queue);
+    for (const i of queue) for (const near of adjacent[i]!) {
+      if (connected.has(near) || tiles[near]!.color === closed && !excavated.has(near)) continue;
+      connected.add(near);
+      queue.push(near);
+    }
+    return connected;
+  };
+  const terminals = new Map(pairs.map(pair => [pair, [pair.from, ...(pair.other ? [pair.other] : []), pair.to].map(tile => indexes.get(tile)!)]));
+  const initial = new Map(pairs.map(pair => [pair, spread(terminals.get(pair)!, new Set())]));
+
+  function reach(from: ReadonlySet<number>, end: number, blocked: ReadonlySet<number>, excavated: ReadonlySet<number>, seed: number) {
+    const distance = tiles.map(() => Infinity), previous = tiles.map(() => -1), visited = new Set<number>();
+    for (const start of from) distance[start] = 0;
+    while (!visited.has(end)) {
+      let site = -1;
+      for (let i = 0; i < tiles.length; i++) {
+        if (!visited.has(i) && distance[i]! < (site < 0 ? Infinity : distance[site]!)) site = i;
+      }
+      if (site < 0) return null;
+      visited.add(site);
+      for (const near of adjacent[site]!) {
+        if (visited.has(near) || blocked.has(near)) continue;
+        const noise = seed ? (((near + 1) * 2654435761) ^ (seed * 19435127) ^ (near * seed * 15485863)) >>> 0 : 0;
+        const next = distance[site]! + (tiles[near]!.color === closed && !excavated.has(near) ? 17 : 1) + noise % 23;
+        if (next >= distance[near]!) continue;
+        distance[near] = next;
+        previous[near] = site;
+      }
+    }
+    const path: number[] = [];
+    for (let i = end; previous[i] !== -1; i = previous[i]!) path.push(i);
+    return path.reverse();
+  }
+
+  function route(order: Pair[], seed: number, limit: number): Thread[] | null {
+    const occupied = new Map(initial), threads: Thread[] = [];
+    let used = 0;
+    for (const pair of order) {
+      const blocked = new Set<number>();
+      for (const [other, region] of occupied) if (other !== pair) for (const i of region) {
+        blocked.add(i);
+        for (const near of adjacent[i]!) blocked.add(near);
+      }
+      const ids = terminals.get(pair)!;
+      const excavated = new Set<number>(), clicks: Tile[] = [];
+      let region = spread([ids[0]!], excavated), mergeAt: Tile | undefined;
+      if (ids.some(i => blocked.has(i))) return null;
+      for (const [index, target] of ids.slice(1).entries()) {
+        if (region.has(target)) continue;
+        const path = reach(region, target, blocked, excavated, seed);
+        if (!path) return null;
+        for (const i of path) {
+          const tile = tiles[i]!;
+          if (tile.color !== closed || excavated.has(i)) continue;
+          excavated.add(i);
+          clicks.push(tile);
+          if (++used >= limit) return null;
+        }
+        region = spread(region, excavated);
+        if ([...region].some(i => blocked.has(i))) return null;
+        if (pair.other && index === 0) mergeAt = clicks.at(-1);
+      }
+      occupied.set(pair, region);
+      threads.push({ pair, clicks, ...(mergeAt ? { mergeAt } : {}) });
+    }
+    return threads;
+  }
+
+  const orderings = permutations(pairs);
+  let best: Thread[] | null = null, limit = Math.min(budget, layout.reserve) + 1;
+  for (let seed = 0; seed < 120; seed++) {
+    if (execution && seed % 8 === 0) {
+      execution.signal?.throwIfAborted();
+      if (execution.deadlineMs !== undefined && (execution.now?.() ?? performance.now()) >= execution.deadlineMs) break;
+      await execution.yieldControl();
+    }
+    for (const ordering of orderings) {
+      const candidate = route(ordering, seed, limit);
+      if (!candidate) continue;
+      best = candidate;
+      limit = candidate.reduce((sum, thread) => sum + thread.clicks.length, 0);
+    }
+  }
+  return best;
+}
+
+function mixConfirmed(pair: Pair, rows: NativeRows, pitch: number): boolean {
+  return !!pair.other && [pair.from, pair.other].every(source => measureTile(rows, ...source.point, pitch).color === pair.color);
+}
+
+function separatedReturn(proposal: Proposal, before: NativeRows, after: NativeRows): boolean {
+  const { layout } = proposal.state;
+  if (!layout.pairs.some(pair => pair.other)) return true;
+  const { from, other, color } = proposal.pair, pitch = layout.pitch;
+  const allowed = new Set([from.color, color, ...(other ? [other.color] : [])]);
+  if (!allowed.has(measureTile(after, ...proposal.tile.point, pitch).color)
+    || proposal.merging && !mixConfirmed(proposal.pair, after, pitch)) return false;
+  return layout.pairs.filter(pair => key(pair.to.point) !== key(proposal.pair.to.point)).every(pair =>
+    [pair.from, ...(pair.other ? [pair.other] : []), pair.to].every(tile =>
+      measureTile(before, ...tile.point, pitch).color === measureTile(after, ...tile.point, pitch).color));
+}
+
 export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
   let memory: State | null = null;
   let decide: NativeProgramHandle | undefined;
@@ -131,8 +253,8 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const prior = memory?.epoch === observation.level_epoch ? memory : null;
       const layout = prior?.layout ?? layoutFor(rows);
-      if (!layout || (prior?.count ?? 0) >= layout.reserve) return null;
-      const threads = prior?.threads ?? plan(layout, []);
+      if (!layout || prior?.stopped || (prior?.count ?? 0) >= layout.reserve) return null;
+      const threads = prior?.threads ?? (layout.pairs.some(pair => pair.other) ? await planSeparated(layout, remaining, execution) : plan(layout, []));
       if (!threads) return null;
       const state = prior ?? { epoch: observation.level_epoch, layout, threads, rejected: [], refs: [], count: 0 };
       const nextTile = (thread: Thread) => thread.clicks.find(tile => measureTile(rows, ...tile.point, layout.pitch).color === layout.closed);
@@ -142,6 +264,7 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
       if (threads.some(t => !nextTile(t) && !endpointReached(rows, t.pair, layout.pitch))) return null;
       const { pair } = thread, ref = observation.observation_ref;
       const completes = thread.clicks.filter(t => measureTile(rows, ...t.point, layout.pitch).color === layout.closed).length === 1;
+      const merging = thread.mergeAt && key(thread.mergeAt.point) === key(tile.point);
       const evidence: [string, ...string[]] = [ref, ...state.refs.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offset = Math.floor(layout.pitch / 2), [x, y] = tile.point;
@@ -155,21 +278,25 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: 'One closed tile on a candidate channel', evidence });
       if (!witness) return null;
       const parent = 'G_official_completion';
-      const objective = { kind: 'connect_matching_endpoints', scope: ref.split(':revision:', 1)[0]!,
-        subjects: [key(pair.from.point), key(pair.to.point)], parentObjective: parent, satisfactionContract: 'paired_endpoints_in_the_same_open_channel' };
+      const objective = { kind: pair.other ? 'combine_sources_without_joining_other_channels' : 'connect_matching_endpoints', scope: ref.split(':revision:', 1)[0]!,
+        subjects: [key(pair.from.point), ...(pair.other ? [key(pair.other.point)] : []), key(pair.to.point)], parentObjective: parent,
+        satisfactionContract: 'paired_endpoints_in_the_same_open_channel' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = verifyChannelAccessId + ':' + need.id;
-      const situation = routeSupported ? 'Open the next tile and compare the change with the two paired endpoints' : 'Test whether one closed tile can be opened';
+      const situation = merging ? 'Join the two sources and verify their new color before using the mixture'
+        : pair.other ? 'Open a cell for the mixture while keeping neighboring channels separate'
+          : routeSupported ? 'Open the next tile and compare the change with the two paired endpoints' : 'Test whether one closed tile can be opened';
       const action = { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } };
       return {
-        status: 'proposed', kind: verifyChannelAccessId, tile, pair, state, completes, needId: need.id,
+        status: 'proposed', kind: verifyChannelAccessId, tile, pair, state, completes, needId: need.id, ...(merging ? { merging: true } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, point_binding: witness, expected_after: null }],
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Connect matching endpoints within the visible reserve', situation, evidence, agenda: [],
-          mode, triggerCard: chooseLanding, target: tile.box, source: pair.from.box, sink: pair.to.box },
+          mode, triggerCard: chooseLanding, target: tile.box, source: pair.from.box, sink: pair.to.box,
+          ...(pair.other ? { otherSource: pair.other.box } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -189,17 +316,19 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
       const reached = endpointReached(second, proposal.pair, layout.pitch);
       const changed = layout.tiles.some(t => key(t.point) !== key(proposal.tile.point)
         && measureTile(first, ...t.point, layout.pitch).color !== measureTile(second, ...t.point, layout.pitch).color);
+      if (!separatedReturn(proposal, first, second)) return { matched: false, seal_prefix: true, reason: 'channel_separation_or_mix_contradicted' };
       const matched = tile.color !== layout.closed && (!proposal.completes || reached);
-      return { matched, seal_prefix: true, reason: reached ? 'paired_endpoint_recolored' : proposal.completes && !reached
+      return { matched, seal_prefix: true, reason: proposal.merging && matched ? 'source_mixture_observed' : reached ? 'paired_endpoint_recolored' : proposal.completes && !reached
         ? 'paired_endpoint_did_not_recolor' : matched && changed
         ? 'tile_opened_and_remote_tiles_changed' : matched ? 'tile_opened' : 'tile_did_not_open',
         ...(reached ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { state, tile } = proposal;
       const opened = measureTile(second, ...tile.point, state.layout.pitch).color !== state.layout.closed;
       memory = { ...state, count: state.count + 1, refs: [...state.refs.slice(-4), after.observation_ref],
+        ...(!separatedReturn(proposal, first, second) ? { stopped: true as const } : {}),
         rejected: opened ? state.rejected : [...state.rejected, key(tile.point)] };
       return { events: [] };
     },

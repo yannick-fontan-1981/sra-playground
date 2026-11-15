@@ -485,7 +485,9 @@ Le bilan atteint **65/100 niveaux 2** et **182/636 niveaux attestés sous SIC se
 
 Sur **PRTL**, SIC réutilise les symboles de sélection et les preuves de déplacement du niveau 1. Au niveau 2, un premier lien donne accès à la plateforme intermédiaire. SIC vérifie le passage et l’arrivée en appui, puis remplace le lien pour accéder au compartiment final. Le niveau 2 gagne en **17 commandes** et **27,57 s**. Les six commandes et retours du niveau 1 sont reproduits. Les 23 commandes relèvent de SIC, avec l’empreinte `6cbbf9d3fc58e9c5ef3882657362bde977f65a8ee23903251daea3b1c0ff359d`. La permutation de palette conserve les commandes. Avec `sic_link_openings` retiré, `sic_test_visible_opening_controls` reproduit le même parcours complet.
 
-Le bilan atteint **66/100 niveaux 2** et **183/636 niveaux attestés sous SIC seul** (28,8 %).
+Sur **TRCP**, SIC retrouve les 24 clics et retours du niveau 1. Au niveau 2, il isole les chemins des deux couleurs pures et relie les deux sources qui restent au repère du mélange. Au treizième clic du niveau, le retour confirme la recoloration des deux sources et des cases déjà creusées entre elles. SIC vérifie aussi que les sources des autres chemins conservent leur couleur. Le niveau 2 gagne en **30 clics sur 35** et **103,42 s**, avec 54 commandes sous autorité SIC depuis le début de la partie. La permutation de palette conserve les 54 clics. Empreinte de la partie `66e4ed7bcef3b7c1b40e2f7ad39ba2290dcb7909bcfa415f97485749249f3635`.
+
+Le bilan atteint **67/100 niveaux 2** et **184/636 niveaux attestés sous SIC seul** (28,9 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 

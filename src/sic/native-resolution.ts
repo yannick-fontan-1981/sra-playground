@@ -977,7 +977,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === pairedChannelsId || family === verifyChannelAccessId)) {
-    for (const [field, label] of [['target', 'Tile to open'], ['source', 'Source marker'], ['sink', 'Receiving marker']] as const) {
+    for (const [field, label] of [['target', 'Tile to open'], ['source', 'Source marker'],
+      ['otherSource', 'Second source of the mixture'], ['sink', 'Receiving marker']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
