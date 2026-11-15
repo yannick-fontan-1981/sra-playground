@@ -740,9 +740,10 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === programOriginId || family === learnProgramOriginId)) {
-    const origin = bounds(card?.origin), target = bounds(card?.target);
+    const origin = bounds(card?.origin), target = bounds(card?.target), instruction = bounds(card?.instruction);
     if (origin) subjects.push({ label: 'Program starting node', box: origin });
     if (target) subjects.push({ label: 'Marked destination', box: target });
+    if (instruction) subjects.push({ label: 'Instruction under test', box: instruction });
   }
   if (situationCard && (family === previewPlacementId || family === verifyPreviewPlacementId)) {
     const piece = bounds(card?.currentPiece), target = bounds(card?.target);
