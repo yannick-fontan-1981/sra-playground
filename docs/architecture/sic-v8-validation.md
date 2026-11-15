@@ -365,6 +365,10 @@ La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
 
+Le premier bilan SIC est enregistré avec le retour qui augmente le score. Il reprend le besoin satisfait comme hypothèse et sélectionne les retours vérifiés ou contredits pour ce même besoin. Les effets établis par l'animation sont signalés même lorsque la commande ne portait pas de prédiction. Objectifs › Passé présente le bilan et les sprites avant l'action gagnante. Objectifs › Présent expose l'hypothèse à vérifier au niveau suivant. La sélection des commandes suit encore les règles existantes.
+
+Sur HANO, le bilan de l'action 6 est disponible avant le premier choix du niveau 2. Le rejeu gagne ensuite à l'action 16. Sur DICO, le premier bilan est enregistré à l'action 5 et contient les quatre retours précédents. Ils distinguent le changement de groupe des animations qui réduisent les candidats.
+
 Chaque rejeu relève les acquis réutilisés, les nouvelles configurations reconnues, le premier retour de confirmation ou de contradiction et le nombre de commandes nécessaires pour décider. Le plan s'adapte aux positions et aux contraintes mesurées au niveau 2.
 
 **CD82** gagne le niveau 2 en **12 commandes** et **17,18 s** dans le rejeu navigateur. La partie atteint deux niveaux en 21 commandes, toutes sous OP18 et fournies par la copie de surface. Le fournisseur mesure la nouvelle référence visuelle et vérifie les effets de pose, de couleur et de marquage. Empreinte de la partie continue `75e7d3a60fa6813257abc9559701b35157048929e8af725a315f62f1df4e703a`. Ce gain porte le niveau 2 à **7/100** et le cumul à **124/636**.

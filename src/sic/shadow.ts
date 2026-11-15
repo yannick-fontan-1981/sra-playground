@@ -10,7 +10,7 @@ import { readFrontierRefusal, readNativeResolution, readOpenNeed, readRecoveryRe
 type ShadowBoard = Pick<GameObservation, 'gameCode' | 'level' | 'state' | 'availableActionIds'>;
 type ShadowAgent = Pick<V6AgentSnapshot, 'sessionId' | 'sequence' | 'status' | 'busy' | 'trace' | 'pendingAction'
   | 'level' | 'lastClickReturn' | 'clickReturns' | 'omittedClickReturns'>
-  & Partial<Pick<V6AgentSnapshot, 'lastDecision' | 'proposal' | 'phase'>>;
+  & Partial<Pick<V6AgentSnapshot, 'lastDecision' | 'proposal' | 'phase' | 'victoryReviews'>>;
 
 export interface ShadowView {
   readonly gameCode: string;
@@ -25,6 +25,7 @@ export interface ShadowView {
   readonly recoveryRefusal?: ReturnType<typeof readRecoveryRefusal>;
   readonly frontierRefusal?: ReturnType<typeof readFrontierRefusal>;
   readonly openNeed?: ReturnType<typeof readOpenNeed>;
+  readonly victoryReviews?: V6AgentSnapshot['victoryReviews'];
 }
 
 function findReturn(agent: ShadowAgent, board: ShadowBoard): ShadowView['returnCheck'] {
@@ -89,6 +90,7 @@ export function readControlEffectShadow(board: ShadowBoard, agent: ShadowAgent |
     recoveryRefusal: current?.status === 'stopped' ? readRecoveryRefusal(current) : null,
     frontierRefusal: current?.status === 'stopped' ? readFrontierRefusal(current) : undefined,
     openNeed: current?.status === 'stopped' ? readOpenNeed(current) : undefined,
+    ...(current?.victoryReviews?.length ? { victoryReviews: current.victoryReviews } : {}),
     native: current && current.status !== 'error' ? readNativeResolution({
       ...current, lastDecision: current.lastDecision ?? null, proposal: current.proposal ?? null, phase: current.phase ?? null,
     }) : null,

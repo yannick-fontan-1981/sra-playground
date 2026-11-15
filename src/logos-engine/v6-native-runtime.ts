@@ -33,6 +33,7 @@ import { OrderedRecruitment } from './v6-ordered-recruitment.ts';
 import { RankedWorkshop } from './v6-ranked-workshop.ts';
 import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
+import { buildVictoryReview, victoryReviewNodeId, type SicVictoryReview } from '../sic/victory-review.ts';
 import { createSicFieldRepair } from '../sic/field-repair.ts';
 import { createSicVerifyContactOrder } from '../sic/ordered-contact.ts';
 import { createSicSupportTransfer } from '../sic/support-transfer.ts';
@@ -1610,6 +1611,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     const acquisitionExecution: NativeExecution = { ...execution, now: this.now,
       deadlineMs: acquisitionNow + Math.min(remainingActiveMs, callerRemainingMs) };
     const compositionReturns: R[] = [];
+    const recordedEffects = new Map<string, string>();
     const nativeAcquisitionsIncomplete: R[] = [];
     let observedInformation = false;
     let observedView = false;
@@ -1638,6 +1640,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       // Preserve the former detached-record validation, but release that copy
       // immediately: this collection was read only for its cumulative count.
       freeze(structuredClone(record));
+      if (prefix.sicPlan?.authority === 'sicOnly' && typeof record?.reviewEvidence === 'string') {
+        recordedEffects.set(transition.after.observation_ref, record.reviewEvidence);
+      }
       this.acquiredRecordCount += 1;
       const selectedIncomplete = record?.native_acquisition_incomplete === true;
       if (selectedIncomplete && selectedFamily.id === 'branch_routing' && !branchAcquisitionBarrier) {
@@ -1715,6 +1720,27 @@ export class NativeV6Runtime implements NativeV6Backend {
     const evidenceId = `prefix_evidence:${prefix.revision}`;
     const needWrites: NativeStoreWrite[] = [];
     const plan = prefix.sicPlan, need = plan?.need, lastReturn = prefix.witnessed.at(-1);
+    const victoryWrites: NativeStoreWrite[] = [];
+    if (plan?.authority === 'sicOnly' && this.knowledge && lastReturn
+      && lastReturn.after.levels_completed > lastReturn.before.levels_completed) {
+      const related = need ? Object.values(this.knowledge.memory.nodes)
+        .filter(node => node.kind === 'prefix_evidence' && Array.isArray(node.relations)
+          && node.relations.some(relation => relation?.relation === 'addresses' && relation.target === need.id))
+        .flatMap(node => (this.knowledge!.value(node.id) as R).transitions as unknown[] ?? []) : [];
+      const card = prefix.proposal.sicSituationCard as R | undefined;
+      const outcome = lastReturn.outcome as R;
+      const review = buildVictoryReview({
+        level: lastReturn.before.level_epoch, score: lastReturn.after.levels_completed, winningAction: this.actions,
+        command: lastReturn.command.action_ref, beforeRef: lastReturn.before.observation_ref, afterRef: lastReturn.after.observation_ref,
+        need, label: typeof card?.need === 'string' ? card.need : need?.kind ?? null,
+        satisfied: !!need && outcome.sic_need?.id === need.id && outcome.sic_need.status === 'satisfied',
+        returns: [...related, ...prefix.witnessed.slice(0, -1).map(item => ({ after: item.after.observation_ref, outcome: item.outcome,
+          observedEffect: recordedEffects.get(item.after.observation_ref) }))],
+      });
+      victoryWrites.push({ id: victoryReviewNodeId, kind: 'component_state', component: 'sic_victory_review',
+        status: 'observed', evidence: [review.beforeRef, review.afterRef],
+        value: { reviews: [...this.victoryReviews(), review] }, relations: [{ relation: 'derived_from', target: evidenceId }] });
+    }
     if (plan && need && lastReturn && this.knowledge) {
       const outcome = lastReturn.outcome as R;
       const boundary = lastReturn.before.level_epoch !== lastReturn.after.level_epoch || lastReturn.before.levels_completed !== lastReturn.after.levels_completed;
@@ -1761,11 +1787,13 @@ export class NativeV6Runtime implements NativeV6Backend {
         ...(nativeAcquisitionsIncomplete.length ? { native_acquisitions_incomplete: nativeAcquisitionsIncomplete } : {}),
         composed_reconciliation: composed, caller_transfer: transfer,
         transitions: prefix.witnessed.map(transition => ({ command: transition.command,
-          before: transition.before.observation_ref, after: transition.after.observation_ref, outcome: transition.outcome })) },
+          before: transition.before.observation_ref, after: transition.after.observation_ref, outcome: transition.outcome,
+          ...(recordedEffects.has(transition.after.observation_ref)
+            ? { observedEffect: recordedEffects.get(transition.after.observation_ref)! } : {}) })) },
       relations: [{ relation: 'records', target: `family_state:${prefix.family.id}` },
         ...(this.selectionReceipt ? [{ relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }] : []),
         ...needWrites.map(write => ({ relation: 'addresses', target: write.id }))],
-    }, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
+    }, ...victoryWrites, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
     this.restoreFamilies();
     this.kind = 'boundary'; this.reason = null;
     const reason = stopReason ?? this.budgetReason(); if (reason) this.stop(reason);
@@ -2197,7 +2225,13 @@ export class NativeV6Runtime implements NativeV6Backend {
     return Object.freeze({ graphChain, nativeExecutionDigest: this.executionDigest });
   }
 
+  private victoryReviews(): readonly SicVictoryReview[] {
+    const store = this.knowledge;
+    return store?.memory.nodes[victoryReviewNodeId] ? (store.value(victoryReviewNodeId) as R).reviews as SicVictoryReview[] : [];
+  }
+
   snapshot(): NativeRuntimeSnapshot {
+    const reviews = this.victoryReviews();
     return freeze({
       actions: this.actions, cycles: this.cycles, nodeCount: this.knowledge?.nodeCount ?? null, hypothesisCount: null, compositionCount: this.compositionIds.size,
       sicActionCoverage: { ...this.sicActionCoverage },
@@ -2208,6 +2242,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       activeSeconds: (this.elapsedMs + this.runningMs()) / 1000, lastDecision: this.lastFamily, trace: this.trace.slice(), reason: this.reason,
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       ...(this.lastClickReturn ? { lastClickReturn: this.lastClickReturn } : {}),
+      ...(reviews.length ? { victoryReviews: reviews } : {}),
       ...(this.clickReturns.length ? { clickReturns: this.clickReturns, omittedClickReturns: this.omittedClickReturns } : {}),
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
@@ -2616,7 +2651,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const now = options.now ?? (() => performance.now());
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 174, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 176, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [

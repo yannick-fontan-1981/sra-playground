@@ -16,13 +16,22 @@ const contained = ([l, t, r, b]: NativeBox, x: number, y: number) => l <= x && x
 const separated = ([l, t, r, b]: NativeBox, [a, d, e, f]: NativeBox) => r < a || e < l || b < d || f < t;
 const extent = ([l, t, r, b]: NativeBox) => (r - l + 1) * (b - t + 1);
 
+function nearerEdge([l, t, r, b]: NativeBox, [a, d, e, f]: NativeBox) {
+  const gaps = [a - r, d - b, l - e, t - f];
+  const visible = gaps.flatMap((gap, edge) => gap > 0 ? [{ gap, edge }] : []).sort((x, y) => x.gap - y.gap);
+  return visible[0] && visible[0].gap !== visible[1]?.gap ? visible[0].edge : null;
+}
+
 /** The shared appearance of a control and a marked region suggests a scope to test. */
 export function observeVisibleScope(rows: NativeRows): VisibleScope | null {
   const parts = geometricComponents(rows);
-  const offers = observeRepeatedCells(rows, { minimumSide: 2, includeUnitCells: true, separateValues: true }).flatMap(field => {
+  const variable = observeRepeatedCells(rows, { components: parts }).filter(field => new Set(field.values.values()).size > 1);
+  const offers = observeRepeatedCells(rows, { minimumSide: 2, includeUnitCells: true, separateValues: true, components: parts }).flatMap(field => {
     const { xs, ys, size: [w, h], values } = field;
     const colors = new Set(values.values());
     if (colors.size !== 1) return [];
+    if (variable.some(other => other.size[0] === w && other.size[1] === h && other.values.size > values.size
+      && [...values.keys()].every(address => other.values.has(address)))) return [];
     const [siteColor] = colors;
     const boxes = ys.flatMap(top => xs.map((left): NativeBox => [left, top, left + w - 1, top + h - 1]));
     const marginX = Math.floor((xs[1]! - xs[0]!) / 2), marginY = Math.floor((ys[1]! - ys[0]!) / 2);
@@ -48,10 +57,17 @@ export function observeVisibleScope(rows: NativeRows): VisibleScope | null {
       if (members.length && members.length < boxes.length) scopes.set(String(color), members);
     }
     if (new Set([...scopes.values()].map(set => set.join(','))).size < 2) return [];
-    const controls = outside.filter(part => scopes.has(String(part.color))).map(part => ({
+    const candidates = outside.filter(part => scopes.has(String(part.color)));
+    const controlEdges = new Set(candidates.filter(part => part.area > 1)
+      .flatMap(part => { const edge = nearerEdge(part.bbox, domain); return edge === null ? [] : [edge]; }));
+    const controls = candidates.filter(part => {
+      const edge = nearerEdge(part.bbox, domain);
+      return part.area > 1 || edge !== null && controlEdges.has(edge);
+    }).map(part => ({
       color: String(part.color), bbox: part.bbox, area: part.area,
       shape: [part.bbox[2] - part.bbox[0] + 1, part.bbox[3] - part.bbox[1] + 1, part.mask] as const,
     }));
+    if (!controls.length) return [];
     return [{ boxes, controls, scope_members: Object.fromEntries(scopes),
       universe_ref: symbolicDigest(boxes), focus: [...new Set([...scopes.values()].flat())].sort((a, b) => a - b), extent: extent(domain) }];
   }).sort((a, b) => b.extent - a.extent);

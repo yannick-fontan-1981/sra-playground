@@ -71,6 +71,7 @@ export function createSicLearnScopeEffects(family = learnScopeEffectsId): Native
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (fromVisibleGroups && observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action))) return null;
       const scene = readScene(rows);
       if (!scene) return null;
       const local: State = memory?.epoch === observation.level_epoch && memory.universe === scene.universe_ref ? memory : {
@@ -143,13 +144,15 @@ export function createSicLearnScopeEffects(family = learnScopeEffectsId): Native
         const effects = choice.shape ? { ...local.effects, [choice.shape]: { mode: 'test' as const, ref: after.observation_ref } } : local.effects;
         memory = { ...local, possible, tried, refs, effects, hypothesisRefuted: !possible.length };
         return { events: [{ kind: 'sic_observed_scope_feedback', result, tested: tested.size,
-          candidates: possible.length, modelRefuted: !possible.length, observation: after.observation_ref }] };
+          candidates: possible.length, modelRefuted: !possible.length, observation: after.observation_ref }],
+          reviewEvidence: `${tested.size} sites reacted first. The effect ${feedback.reachesEverySite ? 'spread to the whole grid' : 'stayed inside the tested group'}. ${possible.length} candidates remained.` };
       }
       const next = readScene(returned);
       const changed = next?.universe_ref === scene.universe_ref && JSON.stringify(next?.focus) !== JSON.stringify(scene.focus);
       const effects = choice.shape && changed ? { ...local.effects, [choice.shape]: { mode: 'navigate' as const, ref: after.observation_ref } } : local.effects;
       memory = { ...local, tried, effects, refs: changed ? refs : local.refs };
-      return { events: changed ? [{ kind: 'sic_observed_scope_navigation', candidates: local.possible.length, observation: after.observation_ref }] : [] };
+      return changed ? { events: [{ kind: 'sic_observed_scope_navigation', candidates: local.possible.length, observation: after.observation_ref }],
+        reviewEvidence: `The visible group changed. ${local.possible.length} candidates remained.` } : { events: [] };
     },
     state: () => ({ memory }),
     restore(value: NativeRecord) { memory = structuredClone(value.memory as State | null); },

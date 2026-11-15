@@ -125,6 +125,7 @@ async function run() {
   const target = scope === 'complete' ? board.levelCount : 1;
   const usage = new Map(), primitives = new Map();
   const levels = [];
+  const entryReviews = new Map();
   const commands = createHash('sha256'), trajectory = createHash('sha256');
   let verifiedReuse = 0;
   const agent = new BrowserV6Agent({
@@ -136,6 +137,11 @@ async function run() {
     canDispatch: () => true,
     onState() {},
     dispatch: async action => {
+      if (board.levelsCompleted > 0 && !entryReviews.has(board.level)) {
+        const prior = agent.snapshot.victoryReviews?.find(review => review.level === board.level - 1
+          && review.score === board.levelsCompleted);
+        entryReviews.set(board.level, { level: board.level, reviewedLevel: prior?.level ?? null, goal: prior?.hypothesis?.label ?? null });
+      }
       const plan = agent.snapshot.trace.findLast(event => event.kind === 'sic_native_plan');
       assert.ok(plan?.authority === 'sicOnly' && plan.strategy && !disabled.has(plan.family), 'Expected an exclusive SIC decision');
       usage.set(plan.family, (usage.get(plan.family) ?? 0) + 1);
@@ -166,6 +172,9 @@ async function run() {
     return { code, mode, projection, target, completed: board.levelsCompleted, disabled: [...disabled], installedGuards, guardHits,
       actions: snapshot.actionCount, reason: snapshot.reason ?? snapshot.status, levels,
       providers: Object.fromEntries(usage), primitives: Object.fromEntries(primitives), verifiedReuse,
+      victoryReviews: snapshot.victoryReviews?.map(review => ({ level: review.level, action: review.winningAction,
+        goal: review.hypothesis?.label ?? null, checks: review.checks.length })) ?? [],
+      entryReviews: [...entryReviews.values()],
       commands: commands.digest('hex'), trajectory: trajectory.digest('hex') };
   } finally {
     agent.dispose();

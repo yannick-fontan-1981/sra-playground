@@ -68,7 +68,11 @@ Avec les deux fournisseurs habituels retirés et les deux anciennes fonctions ne
 
 Sur **LF52**, qui n'a pas servi à mettre cette mesure au point, le fournisseur s'abstient après le même retrait. L'exploration publique gagne en 28 commandes.
 
-Le premier rejeu intégral sous double retrait gagne deux niveaux de **DICO**. Au niveau 3, les candidats sont réduits à des points de même taille que les marques voisines. La mesure sépare désormais les séries de même taille selon leur valeur visible avant d'inférer les espacements. Cette lecture retrouve les sites de la trajectoire de référence aux 71 commandes. Le rejeu autonome de la version corrigée est en cours.
+Le premier rejeu intégral sous double retrait gagne deux niveaux de **DICO**. Au niveau 3, les candidats sont réduits à des points de même taille que les marques voisines. La mesure sépare désormais les séries de même taille selon leur valeur visible avant d'inférer les espacements. Cette lecture retrouve les sites de la trajectoire de référence aux 71 commandes.
+
+Au niveau 6, des repères isolés le long de la grille étaient proposés comme contrôles. Des points isolés deviennent candidats uniquement sur un bord où la mesure trouve aussi des contrôles plus étendus. Avec cette correction, le rejeu autonome termine les six niveaux en **116 commandes**, contre 71 avec le modèle partagé. Les deux fonctions neutralisées restent inutilisées. Chaque bilan de victoire est disponible avant la première commande du niveau suivant.
+
+Les rejeux de DNOI et GLOB ont également montré deux confusions possibles. Un groupe homogène dans une grille plus grande de valeurs variables est écarté, et la règle de groupe s'applique aux interfaces observées où le clic est la seule commande de jeu parmi les commandes étudiées. Après cette correction, GLOB reproduit les neuf commandes et retours du premier retrait. Le rejeu intégral de DNOI vérifie la correction de la lecture de grille.
 
 ### Vérifier les appuis d'un transfert
 

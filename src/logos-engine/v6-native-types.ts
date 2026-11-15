@@ -271,6 +271,7 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly sicActionCoverage?: SicActionCoverage;
   readonly sicFamilySelection?: FamilyAgendaReceipt;
   readonly sicFamilyActions?: number;
+  readonly victoryReviews?: readonly import('../sic/victory-review.ts').SicVictoryReview[];
 }
 
 export interface NativeAuthorization {

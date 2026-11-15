@@ -1007,7 +1007,8 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
     strategies.append(line);
   }
   const progress = board ? `Public progress: ${board.levelsCompleted} completed · current level ${board.level} of ${board.levelCount}.` : 'Waiting for the board.';
-  renderObjectives(panel, progress, board, native?.pending ? native : lastPlan, objectives, timeline, view?.openNeed);
+  renderObjectives(panel, progress, board, native?.pending ? native : lastPlan, objectives, timeline, view?.openNeed,
+    { reviews: view?.victoryReviews ?? [], returns, palette });
   const objectiveTimeline = panel.querySelector('#sic-objective-evidence')!;
   const expanded = new Map([...objectiveTimeline.querySelectorAll<HTMLDetailsElement>('details[data-strategy-choice]')]
     .map(details => [details.dataset.strategyChoice, details.open] as const));
@@ -1144,7 +1145,8 @@ function renderDiscoveryPerspectives(panel: HTMLElement, view: ShadowView | null
 function renderObjectives(panel: HTMLElement, progress: string, board: GameObservation | null,
   current: Pick<NativeResolution, 'objective' | 'objectiveSource' | 'question' | 'recoveryDecision' | 'frontierStrategy' | 'viewStrategy' | 'informationStrategy'>
     & Partial<Pick<NativeResolution, 'context' | 'strategyObjective'>> | null | undefined,
-  entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>, openNeed?: ShadowView['openNeed']): void {
+  entries: readonly PursuedObjective[], timeline: ReturnType<typeof strategyTimeline>, openNeed: ShadowView['openNeed'],
+  evidence: { reviews: NonNullable<ShadowView['victoryReviews']>; returns: readonly DirectionalReturn[]; palette: readonly string[] }): void {
   const paragraph = (value: string) => { const p = document.createElement('p'); p.textContent = value; return p; };
   panel.querySelector('[data-sic-objective-progress]')!.textContent = progress;
   const active = panel.querySelector('#sic-present')!;
@@ -1164,10 +1166,17 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       ?? current.viewStrategy?.title ?? current.informationStrategy?.title ?? current.strategyObjective.strategy)}.`));
   }
   if (current && !openNeed) renderDecisionConfigurations(active, current, 'objective');
+  const previous = evidence.reviews.at(-1);
+  if (board && previous?.hypothesis && board.level === previous.level + 1 && board.levelsCompleted === previous.score) {
+    active.append(paragraph(`Goal to recheck from level ${previous.level} · ${nativeLabel(previous.hypothesis.label)}`));
+  }
   const past = panel.querySelector('#sic-past')!;
+  const openReviews = new Map([...past.querySelectorAll<HTMLDetailsElement>('details[data-sic-victory-review]')]
+    .map(detail => [detail.dataset.sicVictoryReview, detail.open]));
   past.replaceChildren();
-  if (!entries.length) past.append(paragraph('No objective has been recorded in this session.'));
-  else {
+  if (evidence.reviews.length) past.append(renderVictoryReviews(evidence.reviews, evidence.returns, evidence.palette, openReviews));
+  if (!entries.length && !evidence.reviews.length) past.append(paragraph('No objective has been recorded in this session.'));
+  else if (entries.length) {
     const list = document.createElement('ol');
     list.className = 'sic-objective-history';
     for (const entry of [...entries].reverse()) {
@@ -1200,6 +1209,44 @@ function renderObjectives(panel: HTMLElement, progress: string, board: GameObser
       paragraph('Suggested by public progression; the native engine has not selected it.'));
     if (board.level + 1 < board.levelCount) future.append(paragraph('Later possibility: finish the remaining levels after that.'));
   } else future.append(paragraph('No further objective supported by the current observations.'));
+}
+
+function renderVictoryReviews(reviews: NonNullable<ShadowView['victoryReviews']>, returns: readonly DirectionalReturn[],
+  palette: readonly string[], openReviews: ReadonlyMap<string | undefined, boolean>): HTMLElement {
+  const section = document.createElement('section');
+  section.className = 'sic-observations';
+  const title = document.createElement('h4');
+  title.textContent = 'Victory reviews';
+  section.append(title);
+  for (const [index, review] of [...reviews].reverse().entries()) {
+    const detail = document.createElement('details'), summary = document.createElement('summary'), hypothesis = document.createElement('p');
+    detail.dataset.sicVictoryReview = `${review.level}:${review.winningAction}`;
+    detail.open = openReviews.get(detail.dataset.sicVictoryReview) ?? index === 0;
+    summary.textContent = `Level ${review.level} · score advanced on action ${review.winningAction}`;
+    hypothesis.textContent = review.hypothesis ? `Goal hypothesis · ${nativeLabel(review.hypothesis.label)}`
+      : 'The winning condition is still open.';
+    detail.append(summary, hypothesis);
+    if (review.checks.length) {
+      const list = document.createElement('ul');
+      for (const check of review.checks) {
+        const row = document.createElement('li');
+        row.textContent = `Action ${check.action} · ${check.matched === null ? 'Observed effect' : check.matched ? 'Prediction matched' : 'Prediction contradicted'}`
+          + (check.reason ? ` · ${nativeLabel(check.reason)}` : '');
+        list.append(row);
+      }
+      detail.append(list);
+    }
+    if (review.hypothesis) {
+      const open = document.createElement('p');
+      open.textContent = 'Which conditions are required remains open.';
+      detail.append(open);
+    }
+    const winner = returns.find(item => item.sequence === review.winningAction && item.fromLevel === review.level);
+    const sprites = winner?.decision?.sprites.filter(sprite => sprite.before).slice(0, 3) ?? [];
+    if (sprites.length) detail.append(renderFrames(sprites.map(sprite => [`${sprite.label} before the win`, sprite.before] as const), palette));
+    section.append(detail);
+  }
+  return section;
 }
 
 function renderRecovery(container: Element, returns: readonly DirectionalReturn[], currentLevel: number | undefined,
