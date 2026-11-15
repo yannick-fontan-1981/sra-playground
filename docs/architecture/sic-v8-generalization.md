@@ -459,3 +459,9 @@ Le parcours de référence gagne en 47 commandes. Le nom neutre et la palette pe
 Le runtime SIC retire le sélecteur historique `sic_slot_transfer` de son agenda. Le fournisseur de mesure `sic_verify_matching_slot_transfers` utilise la carte SRC pour chaque commande. SB26 conserve les neuf commandes du niveau 1 et les 15 du niveau 2 en partie continue. Les 24 commandes et retours reproduisent la référence, empreinte `6936f8d27b9ebbb066c67bb5c333ae4f66f7fca624596128466c68789916cbb6`. Le comparateur vérifie que l’identifiant retiré ne figure dans aucune famille ni dans aucun groupe du runtime.
 
 Dans cette configuration normale, désactiver P02 après le premier dépôt rend la main à l’exploration publique et laisse le niveau 1 ouvert après neuf commandes. Les contours, la lecture de la séquence et la validation du dépôt restent mesurés par le fournisseur TypeScript.
+
+### Suivre le rôle indiqué par un repère visible
+
+Avec `sic_symbol_contribution` retirée, **CRAF gagne en neuf commandes SIC seul**. La carte SRC `sic.follow_visible_instruction.choose` compare quatre rôles à l’observation courante. Elle peut retenir une sélection, le dépôt d’un opérande, l’application d’une transformation ou la livraison du symbole demandé. La carte commune `sic.verify_observed_interaction.choose` choisit quatre essais P05 et cinq réutilisations P02 après confirmation sur des retours distincts. La mesure des diagrammes, des repères et des effets reste dans le fournisseur TypeScript.
+
+Les commandes et retours reproduisent la référence, empreinte `7c16581499aadaa9539c60d2d6a687e5fd72adc937576a4011ef7380c991a331`. Le nom neutre et la palette permutée conservent le gain. Désactiver la règle de sélection à la troisième décision rend la main à l’exploration publique. Le niveau reste ouvert au budget de neuf commandes.
