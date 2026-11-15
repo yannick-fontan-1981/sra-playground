@@ -64,6 +64,7 @@ import { reactiveTargetId, verifyReactiveMotionId } from './reactive-target.ts';
 import { pairedChannelsId, verifyChannelAccessId } from './paired-channels.ts';
 import { pointReachId, verifyPointAccessId } from './point-reach.ts';
 import { linkedMidpointId, verifyLinkedMotionId } from './linked-midpoint.ts';
+import { linkedGroupRouteId } from './linked-group-route.ts';
 import { excavateDescentId, verifyRemovableSupportId } from './excavate-descent.ts';
 import { gatedCascadeId, learnCascadeId } from './gated-cascade.ts';
 import { layeredFitId, learnLayeredFitId } from './layered-fit.ts';
@@ -485,7 +486,7 @@ export function readNativeResolution(agent: {
     : (family === verifySharedArrivalId || family === verifyPanelConfigurationId || family === verifyProgramConfigurationId
       || family === verifyCombinedMarksId) ? preparedConfigurationStrategies
     : (family === verifyOccurrenceChoiceId || family === verifyOrderedFeedbackId || family === verifyPatternChoiceId) ? feedbackChoiceStrategies
-    : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId
+    : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId || family === linkedGroupRouteId
       || family === verifySlotPermutationId || family === verifyPreviewPlacementId || family === verifyReferencePlacementId
       || family === verifyProfileTransferId || family === verifyCaptureRouteId || family === verifyMarkerPlacementId
       || family === verifyFrameContactId || family === verifyContactOrderId || family === verifyCoupledRouteId
@@ -923,6 +924,19 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['actor', 'Linked piece'], ['active', 'Active marker'], ['passive', 'Other marker'], ['focus', 'Click target'], ['goal', 'Destination']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === linkedGroupRouteId) {
+    for (const [field, label] of [['actor', 'Derived body'], ['active', 'Selected anchor'], ['focus', 'Click target'],
+      ['goal', 'Destination'], ['landing', 'Predicted body position']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+    for (const [field, label] of [['related', 'Linked anchor'], ['preserved', 'Contact to preserve']] as const) {
+      if (Array.isArray(card?.[field])) for (const item of card[field]) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
     }
   }
   if (situationCard && (family === pointReachId || family === verifyPointAccessId)) {

@@ -24,7 +24,8 @@ const key = (p: NativePoint) => p.join(',');
 const mark = (p: Part): Mark => ({ point: center(p.bbox), box: p.bbox, color: p.color });
 const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 
-function findGoal(parts: Part[], actor: Part): { point: NativePoint; box: NativeBox } | null {
+export function findLinkedGoal(parts: readonly Pick<Part, 'color' | 'area' | 'bbox'>[],
+  actor: Pick<Part, 'color' | 'bbox'>): { point: NativePoint; box: NativeBox } | null {
   const pins = parts.filter(p => p.color === actor.color && p.area === 1).map(p => center(p.bbox));
   if (pins.length < 8 || pins.length > 48) return null;
   const pinKeys = new Set(pins.map(key));
@@ -60,7 +61,7 @@ function initial(parts: Part[], rows: NativeRows): Layout | null {
   for (const actor of parts) {
     const side = width(actor.bbox);
     if (side < 3 || side > 7 || side % 2 === 0 || side !== height(actor.bbox) || actor.area < side * (side - 1)) continue;
-    const goal = findGoal(parts, actor);
+    const goal = findLinkedGoal(parts, actor);
     if (!goal) continue;
     const m = parts.filter(p => width(p.bbox) === side && height(p.bbox) === side && p.area === 4 * (side - 2));
     if (m.length !== 2 || m[0]!.color === m[1]!.color || JSON.stringify(m[0]!.mask) !== JSON.stringify(m[1]!.mask)
