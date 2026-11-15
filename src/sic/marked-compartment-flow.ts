@@ -12,9 +12,9 @@ export const markedCompartmentStrategies = {
 
 type Chamber = { box: NativeBox; point: NativePoint; filled: number };
 type Scene = { frames: Chamber[]; marked: Chamber[]; mark: number; normal: number; background: number; key: string };
-type Witness = { epoch: number; mark: number; normal: number; background: number; chambers: NativeBox[];
+type Witness = { epoch: number; mark: number; normal: number; background: number; chambers: NativeBox[]; wins?: number;
   outlet: NativeBox; refs: [string, string] };
-type Proposal = NativeProposal & { changedRegion: NativeBox; attempt: string; needId: string };
+type Proposal = NativeProposal & { changedRegion: NativeBox; concurrentRegion?: NativeBox; attempt: string; needId: string };
 
 const boxKey = (box: NativeBox) => box.join(',');
 const contains = ([left, top, right, bottom]: NativeBox, [x, y]: NativePoint) => x >= left && x <= right && y >= top && y <= bottom;
@@ -39,6 +39,21 @@ function continuationOf(scene: Scene, memory: Witness): boolean {
     if (matches.length === 1) matched.add(matches[0]!);
   }
   return matched.size * 3 >= memory.chambers.length * 2;
+}
+
+function orderTowardOutlet(memory: Witness) {
+  if ((memory.wins ?? 0) < 2) return null;
+  const center = (box: NativeBox, axis: 0 | 1) => (box[axis] + box[axis + 2]!) / 2;
+  const extent = ([0, 1] as const).map(axis => {
+    const first = Math.min(...memory.chambers.map(box => box[axis]));
+    const last = Math.max(...memory.chambers.map(box => box[axis + 2]!));
+    const end = center(memory.outlet, axis);
+    return { axis, offset: end - (first + last) / 2, span: last - first };
+  }).sort((a, b) => Math.abs(b.offset) - Math.abs(a.offset));
+  const strongest = extent[0]!;
+  if (!strongest.span || Math.abs(strongest.offset) * 3 < strongest.span
+    || Math.abs(strongest.offset) < 2 * Math.abs(extent[1]!.offset)) return null;
+  return (chamber: Chamber) => Math.sign(strongest.offset) * center(chamber.box, strongest.axis);
 }
 
 function localRegion(chamber: NativeBox, rows: NativeRows): NativeBox {
@@ -67,8 +82,10 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
       if (!scene || scene.marked.length !== 1) return;
       const outlet = scene.marked[0]!;
       if (!outlet.filled || !contains(outlet.box, [x, y])) return;
+      const repeated = witness?.epoch === before.level_epoch && continuationOf(scene, witness) && sameChamberSite(witness.outlet, outlet.box);
       witness = { epoch: after.level_epoch, mark: scene.mark, normal: scene.normal, background: scene.background,
-        chambers: scene.frames.map(chamber => chamber.box), outlet: outlet.box, refs: [before.observation_ref, after.observation_ref] };
+        chambers: scene.frames.map(chamber => chamber.box), outlet: outlet.box, wins: repeated ? (witness?.wins ?? 1) + 1 : 1,
+        refs: [before.observation_ref, after.observation_ref] };
       attempted = [];
     },
     async propose(observation, rows, _inputs, remaining) {
@@ -78,13 +95,17 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
       if (!scene || !continuationOf(scene, memory)) return null;
       const attemptFor = (chamber: Chamber) => scene.key + ':' + boxKey(chamber.box);
       const isOutlet = (chamber: Chamber) => sameChamberSite(chamber.box, memory.outlet) && chamber.filled > 0;
+      const downstream = orderTowardOutlet(memory);
       const choice = scene.marked.filter(chamber => !attempted.includes(attemptFor(chamber)))
         .sort((a, b) => Number(isOutlet(b)) - Number(isOutlet(a)) || Number(b.filled > 0) - Number(a.filled > 0)
+          || (downstream ? downstream(b) - downstream(a) : 0)
           || a.box[0] - b.box[0] || a.box[1] - b.box[1])[0];
       if (!choice) return null;
+      const concurrent = downstream && choice.filled ? scene.marked.find(chamber => !chamber.filled && downstream(chamber) > downstream(choice)) : null;
       const strategy = isOutlet(choice) ? 'deliver_from_confirmed_outlet'
         : choice.filled ? 'use_marked_compartment' : 'advance_marked_process';
       const label = markedCompartmentStrategies[strategy];
+      const situation = concurrent ? 'Use an available input this turn and check the downstream compartment at the same time.' : label;
       const ref = observation.observation_ref, parent = 'G_official_completion';
       const evidence: [string, ...string[]] = [ref, ...memory.refs.filter(value => value !== ref)];
       const [x, y] = choice.point, action = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
@@ -95,13 +116,14 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `marked-compartment:${need.id}`;
       return { status: 'proposed', kind: markedCompartmentFlowId, actions, changedRegion: localRegion(choice.box, rows),
+        ...(concurrent ? { concurrentRegion: concurrent.box } : {}),
         attempt: attemptFor(choice), needId: need.id,
         steps: [{ action, point_binding: pointBinding, expected_after: null }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Advance material toward the outlet that led to progress',
-          situation: label, mode: strategy === 'deliver_from_confirmed_outlet' ? 'solving' : 'assimilation',
-          agenda: [], evidence, chamber: choice.box, outlet: memory.outlet },
-        question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+          situation, mode: strategy === 'deliver_from_confirmed_outlet' ? 'solving' : 'assimilation',
+          agenda: [], evidence, chamber: choice.box, outlet: memory.outlet, ...(concurrent ? { concurrent: concurrent.box } : {}) },
+        question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label, preconditions: {},
@@ -116,7 +138,9 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
         return { matched: true, seal_prefix: true, reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       }
       const matched = before.level_epoch === after.level_epoch && changed(first, second, proposal.changedRegion);
-      return { matched, seal_prefix: true, reason: matched ? 'local_compartment_change_observed' : 'no_local_compartment_change' };
+      const concurrent = matched && proposal.concurrentRegion && changed(first, second, proposal.concurrentRegion);
+      return { matched, seal_prefix: true, reason: concurrent ? 'input_and_downstream_change_observed'
+        : matched ? 'local_compartment_change_observed' : 'no_local_compartment_change' };
     },
     async record(before, after, command, first, second, proposal) {
       if (after.levels_completed > before.levels_completed) await this.observePublicOutcome!(before, after, command, first, second);

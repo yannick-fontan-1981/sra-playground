@@ -661,8 +661,10 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === markedCompartmentFlowId) {
     const chamber = bounds(card?.chamber), outlet = bounds(card?.outlet);
+    const concurrent = bounds(card?.concurrent);
     if (chamber) subjects.push({ label: 'Current marked compartment', box: chamber });
     if (outlet) subjects.push({ label: 'Previously confirmed outlet', box: outlet });
+    if (concurrent) subjects.push({ label: 'Downstream compartment checked in the same turn', box: concurrent });
   }
   if (situationCard && family === observedRelayRouteId) {
     const source = bounds(card?.source), control = bounds(card?.control);
