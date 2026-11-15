@@ -645,3 +645,5 @@ SK48 `99b977093936446832060fad6f5abf416beaa1a2f13630c98f9a6e21046daa5a`. M0R0 `7
 Sur SK48, la neutralisation du nom reproduit les 19 commandes et retours du niveau 1. Avec la palette permutée, les quatre premiers retours mesurent les mêmes déplacements. Le planificateur atteint ensuite sa borne de 1 000 nœuds. L’exploration reprend la main et le premier niveau reste ouvert à la limite de temps.
 
 Les identifiants de pièces dérivés des couleurs modifiaient l’ordre de recherche. La projection SIC identifie désormais chaque pièce par sa position dans la référence visible. Sur les observations des quatre premiers essais, la recherche retrouve le même trajet de onze commandes dans les deux palettes, avec la même borne. Ce trajet reste une projection. Le retour observé après le premier contact continue de guider la révision.
+
+Sur `d22e317f`, le rejeu des deux niveaux de SK48 reproduit exactement les 56 commandes et retours de référence. Avec palette permutée et nom neutralisé, il gagne aussi les deux niveaux en 56 commandes, avec les mêmes commandes et les mêmes résumés de changements visibles. Les 112 commandes des deux rejeux relèvent du SIC.
