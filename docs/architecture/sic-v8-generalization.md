@@ -620,6 +620,8 @@ Les trois parcours reproduisent leurs commandes et retours de référence. La ne
 
 KATA `cce7cd4d173da4bd2f683c32d9d6ea147073a58eb1b7b202e6b64a483a8e7109`. VOIS `cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186`. LKEY `45eacf89a9b32e59f2a3d45d51b33f1ff42d3128a6bff46fd7646f7304294c2b`.
 
+Sur `48f7d1dd`, les **82/100 retraits gagnants** totalisent 908 commandes SIC seul. Le rejeu confirme les 79 trajectoires précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait.
+
 ### Vérifier un déplacement avant de réutiliser le trajet ou le contact
 
 **DAME, RE86 et SWCH** gagnent en sept, 26 et 25 commandes lorsque les anciens sélecteurs sont retirés. La même carte SRC choisit l’essai P05, le trajet P07 fondé sur les déplacements observés ou la réutilisation P02 d’un contrôle confirmé. DAME vérifie la case d’arrivée et la disparition de la pièce franchie. RE86 relève le déplacement des pièces et le changement de sélection. SWCH conserve les refus de mouvement et recalcule l’approche avant de retester le contact avec le cadre.
@@ -637,3 +639,9 @@ Désactiver le premier trajet après les quatre essais laisse le niveau ouvert. 
 **M0R0** retrouve ses 19 commandes. Après quatre essais, la même carte qui guide l’approche d’un cadre choisit le trajet qui tient compte des déplacements des deux pièces. **WA30** retrouve ses 26 commandes. La carte sépare les essais sur le porteur encore libre, le déplacement avec la pièce attachée et le test de dépôt. Désactiver P07 à sa première utilisation laisse les deux niveaux ouverts aux budgets de référence.
 
 SK48 `99b977093936446832060fad6f5abf416beaa1a2f13630c98f9a6e21046daa5a`. M0R0 `7a4a5f9132ebaf038bf0ec96697749301b7c1e1b65ac0388de0925b0cfb94e98`. WA30 `b8590d9cd1f336a57ab225ee2221c5dad1bb5bc156b281cd9fce79e6b4889dd0`.
+
+### Stabiliser les identifiants du modèle de contact
+
+Sur SK48, la neutralisation du nom reproduit les 19 commandes et retours du niveau 1. Avec la palette permutée, les quatre premiers retours mesurent les mêmes déplacements. Le planificateur atteint ensuite sa borne de 1 000 nœuds. L’exploration reprend la main et le premier niveau reste ouvert à la limite de temps.
+
+Les identifiants de pièces dérivés des couleurs modifiaient l’ordre de recherche. La projection SIC identifie désormais chaque pièce par sa position dans la référence visible. Sur les observations des quatre premiers essais, la recherche retrouve le même trajet de onze commandes dans les deux palettes, avec la même borne. Ce trajet reste une projection. Le retour observé après le premier contact continue de guider la révision.

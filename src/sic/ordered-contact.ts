@@ -55,6 +55,16 @@ function contactPhase(value: unknown): value is ContactPhase {
   return typeof value === 'string' && Object.hasOwn(contactPrimitives, value);
 }
 
+function measureContactScene(rows: NativeRows): ReturnType<typeof measureRootedLine> {
+  const scene = measureRootedLine(rows);
+  if (!scene) return null;
+  // Use the visible reference order so palette values cannot affect search ordering.
+  const kinds = new Map((scene.order as string[]).map((type, index) => [type, String(index).padStart(2, '0')]));
+  const pieces = new Map((scene.pieces as NativeRecord[]).map(piece => [String(piece.type), piece]));
+  return { ...scene, order: [...kinds.values()], pieces: [...kinds].map(([type, rank]) =>
+    ({ ...pieces.get(type), id: 'material:' + rank, type: rank })) };
+}
+
 export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLineModel>[0], limits: RecoveryPack): NativeFamily<ContactProposal> {
   let memory: Memory = structuredClone(empty);
   let decide: NativeProgramHandle | undefined;
@@ -72,7 +82,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !policy) return null;
-      const scene = measureRootedLine(rows);
+      const scene = measureContactScene(rows);
       if (!scene) return null;
       const { tried, effects, counterexample, retained, refused, transferableContact } = current(observation.level_epoch);
       if (refused) return null;
@@ -167,7 +177,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     },
     after(proposal, _index, before, after, _oldRows, newRows) {
       const boundary = changedLevel(before, after);
-      const scene = boundary ? null : measureRootedLine(newRows);
+      const scene = boundary ? null : measureContactScene(newRows);
       const matched = scene && proposal.contact.prediction ? equal(physicalRootedLine(scene), proposal.contact.prediction) : null;
       const advanced = after.levels_completed > before.levels_completed;
       return { matched, seal_prefix: true, reason: boundary ? 'official_boundary'
@@ -176,7 +186,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     },
     record(before, after, command, oldRows, newRows, proposal) {
       memory = structuredClone(current(before.level_epoch));
-      const first = measureRootedLine(oldRows), second = measureRootedLine(newRows);
+      const first = measureContactScene(oldRows), second = measureContactScene(newRows);
       if (changedLevel(before, after) || !first || !second) return { events: [] };
       const refs = [before.observation_ref, after.observation_ref] as const;
       const action = command.action_ref;
