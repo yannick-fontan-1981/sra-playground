@@ -9,6 +9,7 @@ import { orderedContactId, orderedContactStrategies } from './ordered-contact.ts
 import { cavityAccessId, cavityStrategies } from './cavity-access.ts';
 import { publicInputExplorationId, publicInputStrategies } from './public-input-exploration.ts';
 import { recheckDirectionalControlsId, recheckDirectionalControlsStrategies } from './recheck-directional-controls.ts';
+import { trialRepeatedLinearControlsId, trialRepeatedLinearControlsStrategies } from './trial-repeated-linear-controls.ts';
 import { compareAvailableControlsId, compareAvailableControlsStrategies } from './compare-available-controls.ts';
 import { framedContactId, framedContactStrategies, learnPatternAccessId } from './framed-contact.ts';
 import { learnTransportAccessId, transportContactId, transportContactStrategies } from './transport-contact.ts';
@@ -475,6 +476,7 @@ export function readNativeResolution(agent: {
   const labels = family === orderedContactId ? orderedContactStrategies : family === cavityAccessId ? cavityStrategies
     : family === publicInputExplorationId ? publicInputStrategies
     : family === recheckDirectionalControlsId ? recheckDirectionalControlsStrategies
+    : family === trialRepeatedLinearControlsId ? trialRepeatedLinearControlsStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -528,6 +530,10 @@ export function readNativeResolution(agent: {
     const focus = bounds(card?.focus), moved = bounds(record(card?.lastControlledMotion)?.to);
     if (focus) subjects.push({ label: 'Piece whose control is being tested', box: focus });
     if (moved) subjects.push({ label: 'Piece moved by the tested direction', box: moved });
+  }
+  if (situationCard && family === trialRepeatedLinearControlsId) {
+    const target = bounds(card?.addressedRegion);
+    if (target) subjects.push({ label: 'Repeated element tested by the click', box: target });
   }
   if (situationCard && (family === framedContactId || family === learnPatternAccessId)) {
     const region = bounds(card?.addressedRegion), actor = bounds(card?.controlledPiece);

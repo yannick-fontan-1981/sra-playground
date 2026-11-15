@@ -7,6 +7,7 @@ import { learnScopeEffectsId } from './learn-scope-effects.ts';
 import { cavityAccessId } from './cavity-access.ts';
 import { publicInputExplorationId } from './public-input-exploration.ts';
 import { recheckDirectionalControlsId } from './recheck-directional-controls.ts';
+import { trialRepeatedLinearControlsId } from './trial-repeated-linear-controls.ts';
 import { compareAvailableControlsId } from './compare-available-controls.ts';
 import { framedContactId, learnPatternAccessId } from './framed-contact.ts';
 import { animationContactId, learnAnimationContactId } from './animation-contact.ts';
@@ -101,7 +102,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, publicInputExplorationId, recheckDirectionalControlsId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, markedGaugeId, pairedChannelsId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));

@@ -523,3 +523,11 @@ La campagne PORT, CATL et LIFE sur `3a76dd93` porte le total à **53/100** victo
 En configuration normale, l’exploration publique mesure les trois ou cinq premières commandes. Dès le changement d’interface, la même carte autorise les quatre ou onze commandes suivantes. Les commandes et leurs retours gardent les mêmes empreintes avec ou sans retrait. Les deux jeux gagnent aussi après permutation de palette et neutralisation du nom dans l’essai avec retrait. Désactiver P05 après le changement d’interface fait cesser les deux parcours à la décision suivante, avec ou sans exploration publique.
 
 POLA `af28e8ed77e7f8213749f03f8665c9e86a7742aa1111586dd84eac30f19dfcd1`. ELAS `2119845733a0ef81f69633356411c9bfd91b3e746540095b50cd993b1aa673e6`.
+
+### Tester les éléments linéaires répétés
+
+Avec l’exploration publique retirée, **CATR gagne en trois clics, CONN en 23 et UPST en 12**. Quand le clic est la seule commande de jeu disponible et que des éléments linéaires de même longueur se répètent, le fournisseur compare leurs centres. Il mémorise les clics sans effet dans chaque état. La carte SRC choisit P05 pour chaque clic de ces trois parcours. Le panneau reçoit les limites de l’élément visé pour afficher son sprite. Lorsqu’un clic fait réagir un élément, les autres restent à vérifier dans leur contexte.
+
+La palette permutée et le nom neutralisé conservent ces trois gains. Désactiver P05 après le premier clic interrompt les essais dès la décision suivante. L’exploration publique garde sa priorité en configuration normale. L’essai hors agent montre que classer uniquement par taille fait échouer CONN et UPST à 40 clics, même quand les clics produisent des effets visibles.
+
+CATR `cc5a59b1ed6864bd002cdd0c32c24e3fcf405e27cc02b79ab06baaf6d91c3fed`. CONN `3b762dc9ae12072003f117e92150edf379a983f187b94d41faab32fe6044eb33`. UPST `cc8c0a6a86de9cacfffbf225243b69a10b29fc842d8d917c5180d1a939bf7068`.
