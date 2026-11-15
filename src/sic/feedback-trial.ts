@@ -19,6 +19,8 @@ const configuration: FeedbackConfiguration = { stages: [], allocation_orders: ['
   question: 'Separate the possible ordered answers' };
 type State = { layout: FeedbackLayout; active: FeedbackSlotRow | null; repeatable: boolean | null; submission: string | null;
   history: FeedbackHistoryRow[]; blocked: string[]; evidence: string[]; stopped: boolean };
+type EntryEvidence = { completed: number; size: FeedbackLayout['size']; pitch: number; rowOffsets: number[];
+  activeOffset: number; submit: string; proof: string[] };
 type Choice = { action: NativeCommand; value: number | null; prefix: number[]; candidates: number | null; trial: number[] | null };
 type Proposal = NativeProposal & { local: State; choice: Choice; palette: [number, number][]; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -33,6 +35,7 @@ function activePrefix(rows: NativeRows, layout: FeedbackLayout, active: Feedback
 
 export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let retained: EntryEvidence | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyOrderedFeedbackId,
@@ -46,7 +49,13 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
       if (!layout || prior?.stopped || (prior?.history.length ?? 0) >= 12) return null;
       const palette = feedbackPalette(observation, layout);
       if (!palette) return null;
-      const local: State = prior ?? { layout, active: null, repeatable: null, submission: null, history: [], blocked: [], evidence: [], stopped: false };
+      const offsets = layout.slot_rows.map(row => row.y - layout.palette_y).sort((a, b) => a - b);
+      const comparable = !prior && retained?.completed === observation.levels_completed && retained.pitch === layout.pitch
+        && equal(retained.size, layout.size) && equal(retained.rowOffsets, offsets);
+      const restoredRow = comparable ? layout.slot_rows.find(row => row.y - layout.palette_y === retained!.activeOffset) ?? null : null;
+      const submission = restoredRow && retained && observation.available_action_refs.includes(retained.submit) ? retained.submit : null;
+      const local: State = prior ?? { layout, active: restoredRow, repeatable: null, submission, history: [], blocked: [],
+        evidence: restoredRow ? retained!.proof : [], stopped: false };
       const prefix = local.active ? activePrefix(rows, layout, local.active) : [];
       if (!prefix) return null;
       const [w, h] = layout.size;
@@ -123,13 +132,20 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const { local, choice } = proposal;
-      const matched = choice.value !== null ? local.layout.slot_rows.filter(row => (!local.active || local.active.y === row.y) &&
+      const matched = choice.value !== null ? local.layout.slot_rows.filter(row => (!local.active || local.repeatable === null || local.active.y === row.y) &&
         equal(activePrefix(second, local.layout, row), [...choice.prefix, choice.value])).length === 1 : null;
       return { matched, seal_prefix: true, reason: matched ? 'ordered_tile_appended' : 'measure_entry_or_feedback_return' };
     },
     async record(before, after, issued, _first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, choice, palette } = proposal, { layout } = local;
+      if (after.levels_completed > before.levels_completed && choice.value === null && local.active) {
+        retained = { completed: after.levels_completed, size: layout.size, pitch: layout.pitch,
+          rowOffsets: layout.slot_rows.map(row => row.y - layout.palette_y).sort((a, b) => a - b),
+          activeOffset: local.active.y - layout.palette_y, submit: issued.action_ref,
+          proof: [...local.evidence.slice(-4), after.observation_ref] };
+        return { events: [] };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const next = { ...local, evidence: [...local.evidence.slice(-5), after.observation_ref] };
       if (choice.value === null) {
         const matches = await feedbackMatches(second, after, layout, choice.prefix);
@@ -139,7 +155,7 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
           next.submission = issued.action_ref;
         } else next.stopped = true;
       } else {
-        const active = layout.slot_rows.filter(row => (!local.active || local.active.y === row.y) &&
+        const active = layout.slot_rows.filter(row => (!local.active || local.repeatable === null || local.active.y === row.y) &&
           equal(activePrefix(second, layout, row), [...choice.prefix, choice.value]));
         const afterPalette = feedbackPalette(after, layout)?.map(([, color]) => color), beforePalette = palette.map(([, color]) => color);
         const mode = equal(afterPalette, beforePalette) ? true : equal(afterPalette, beforePalette.filter(color => color !== choice.value)) ? false : null;
@@ -151,7 +167,10 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
       state = next;
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, retained }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      retained = structuredClone((value.retained as EntryEvidence | undefined) ?? null);
+    },
   };
 }

@@ -461,6 +461,10 @@ Sur **SIGN**, SIC transfère les commandes de déplacement vérifiées au niveau
 
 Le bilan atteint **60/100 niveaux 2** et **177/636 niveaux attestés sous SIC seul** (27,8 %).
 
+Sur **MIND**, l’indice de départ disparaît au niveau 2. SIC rattache la rangée de saisie et la commande de soumission à leurs preuves du niveau 1. Il relit quatre couleurs pour trois places et vérifie au premier clic quelle rangée se remplit et si la palette se compacte. Il soumet dès que les trois places sont pleines. Le niveau 2 gagne en **4 commandes** et **1,38 s**. Les 12 commandes de la partie continue relèvent de SIC. Les huit commandes et retours du niveau 1 sont reproduits. Empreinte `773b46ba6ddb96a58ffeabb712f1532a7deae0707bda588577b2422b6ff27f1f`. Dans une copie locale du niveau avec un autre code secret et le même plateau initial, le premier essai échoue. Le retour réduit les codes compatibles de 64 à 5 et le deuxième essai gagne, en huit commandes au total.
+
+Le bilan atteint **61/100 niveaux 2** et **178/636 niveaux attestés sous SIC seul** (28,0 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
