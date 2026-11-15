@@ -56,6 +56,7 @@ import { createSicVerifySharedArrival } from '../sic/shared-arrival.ts';
 import { createSicOutlineService, learnOutlineServiceId, outlineServiceId } from '../sic/outline-service.ts';
 import { createSicObservedRouteIntervention } from '../sic/observed-route-intervention.ts';
 import { createSicObservedSurvival } from '../sic/observed-survival.ts';
+import { createSicObservedRailTransfers } from '../sic/observed-rail-transfers.ts';
 import { createSicLabeledSequence, learnLabeledSequenceId } from '../sic/labeled-sequence.ts';
 import { createSicMarkedCollection } from '../sic/marked-collection.ts';
 import { createSicVisibleConfigurationCoverage } from '../sic/visible-configuration-coverage.ts';
@@ -2687,7 +2688,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
       createSicVerifySharedArrival(), createSicOutlineService(outlineServiceId, routeIntervention.learn),
-      createSicOutlineService(learnOutlineServiceId, routeIntervention.learn), routeIntervention, createSicObservedSurvival(),
+      createSicOutlineService(learnOutlineServiceId, routeIntervention.learn), routeIntervention, createSicObservedSurvival(), createSicObservedRailTransfers(),
       createSicLabeledSequence(sequence, now), createSicLabeledSequence(sequence, now, learnLabeledSequenceId),
       createSicMarkedCollection(), createSicVisibleConfigurationCoverage(), createSicMarkedCompartmentFlow(), createSicObservedRelayRoute(), createSicObservedPrefixQuotas(),
       createSicObservedCarrierReduction(), createSicObservedLinePlacement(), createSicObservedPolePair(), createSicObservedSharedRelations(),

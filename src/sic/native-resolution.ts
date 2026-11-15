@@ -32,6 +32,7 @@ import { observedPatternLayoutId, observedPatternLayoutStrategies } from './obse
 import { observedActuatorArrangementId } from './observed-actuator-arrangement.ts';
 import { observedRouteInterventionId } from './observed-route-intervention.ts';
 import { observedSurvivalId } from './observed-survival.ts';
+import { observedRailTransfersId } from './observed-rail-transfers.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -621,6 +622,15 @@ export function readNativeResolution(agent: {
       ['destination', 'Matching outline']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === observedRailTransfersId) {
+    const train = bounds(card?.train), rail = bounds(card?.target);
+    if (train) subjects.push({ label: 'Train selected for the transfer', box: train });
+    if (rail) subjects.push({ label: 'Rail cell for the new position', box: rail });
+    if (Array.isArray(card?.arms)) for (const item of card.arms.slice(0, 6)) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Arm in the predicted transfer sequence', box });
     }
   }
   if (situationCard && family === observedSurvivalId) {
