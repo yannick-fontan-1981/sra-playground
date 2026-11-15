@@ -548,6 +548,8 @@ Sur **REWI**, le registre et l’agenda remplacent l’ancien sélecteur `sic_fr
 
 Le jeu gagne en trois commandes et reproduit l’empreinte `9a758416241620fd41236df69fbde31454b3b418d370b8159e8f6a1ce34b2c52`. Le nom neutralisé et la palette permutée conservent le gain. Désactiver P02 après le premier retour transfère la deuxième commande à la famille d’accès par glissement. Cette famille choisit la même direction dans cet essai et le parcours reste gagnant.
 
+Sur `32f914b4`, les **64/100 retraits gagnants** totalisent 742 commandes SIC seul. Le rejeu confirme les 58 trajectoires gagnantes précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait.
+
 ### Appliquer une configuration vérifiée
 
 Les anciens sélecteurs de **SMLP** et **RSWP** sont retirés du registre. Les deux jeux gagnent en trois commandes SIC seul avec la carte `sic.apply_verified_configuration.choose`. Les fournisseurs TypeScript continuent de mesurer les trajectoires et les sélections visibles.
@@ -557,3 +559,5 @@ Sur SMLP, deux retours P05 mesurent les approches puis vérifient la modificatio
 Les deux trajectoires reproduisent leurs empreintes de référence. Le nom neutralisé et la palette permutée conservent les gains. Désactiver la réutilisation de la sélection sur RSWP après le premier clic rend les deux commandes suivantes à l’exploration et laisse le niveau ouvert. Désactiver la réutilisation du lancement sur SMLP rend la dernière commande à l’exploration, qui choisit le même lancement lors de cet essai.
 
 SMLP `98b11e4a22d936380c77194c26216bd0de53cc574f53053b0cce682508625582`. RSWP `53e34526abf02d4311004a9ad726c131b277a7e995f552afc95913845d7fbecf`.
+
+Sur `08e4596b`, les **66/100 retraits gagnants** totalisent 748 commandes SIC seul. Les 64 trajectoires gagnantes précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait conservent leurs commandes et retours de référence.
