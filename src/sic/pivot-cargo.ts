@@ -3,6 +3,7 @@ import type { NativeBox, NativeExecution, NativeFamily, NativePoint, NativeProgr
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const pivotCargoId = 'sic_pivot_cargo';
 export const learnPivotCargoId = 'sic_deliver_cargo_after_observed_motion';
@@ -15,6 +16,9 @@ type Intent = 'move' | 'attach' | 'turn' | 'drop';
 type Move = { input: string; intent: Intent; next: Position; subject: number };
 type Memory = { epoch: number; layout: Layout; at: Position; steps: Move[]; refs: string[]; moves: boolean; interactions: Intent[]; failed: boolean };
 type Proposal = NativeProposal & { local: Memory; move: Move; needId: string };
+type CargoWitness = { epoch: number; score: number; pitch: number; actorColor: number; core: number; interactions: Intent[]; refs: string[] };
+type Component = ReturnType<typeof geometricComponents>[number];
+type Field = Pick<Component, 'bbox' | 'color' | 'area'>;
 
 const key = (p: NativePoint) => p.join(',');
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
@@ -43,10 +47,35 @@ function groups(points: NativePoint[]): NativePoint[][] {
   return clusters;
 }
 
-function measure(rows: NativeRows): Layout[] {
+function splitFields(parts: Component[], rows: NativeRows): Field[] {
+  const found = new Map<string, Field>();
+  for (const pitch of [4, 5, 6]) {
+    const lattice = new Map<string, Component[]>();
+    for (const part of parts) {
+      const [left, top, right, bottom] = part.bbox;
+      if (left <= 0 || top <= 0 || right >= rows[0]!.length - 1 || bottom >= rows.length - 2
+        || width(part.bbox) % pitch || height(part.bbox) % pitch || part.area < pitch ** 2) continue;
+      const group = [part.color, left % pitch, top % pitch].join(',');
+      lattice.set(group, [...(lattice.get(group) ?? []), part]);
+    }
+    for (const domains of lattice.values()) {
+      if (domains.length < 2) continue;
+      const bbox: NativeBox = [Math.min(...domains.map(p => p.bbox[0])), Math.min(...domains.map(p => p.bbox[1])),
+        Math.max(...domains.map(p => p.bbox[2])), Math.max(...domains.map(p => p.bbox[3]))];
+      if (width(bbox) < 30 || width(bbox) !== height(bbox)) continue;
+      const area = domains.reduce((sum, part) => sum + part.area, 0), color = domains[0]!.color;
+      if (area > width(bbox) * 4) found.set([color, ...bbox].join(','), { bbox, color, area });
+    }
+  }
+  return [...found.values()];
+}
+
+function measure(rows: NativeRows, reassemble = false): Layout[] {
   const parts = geometricComponents(rows);
   const results: Layout[] = [];
-  for (const field of parts.filter(p => width(p.bbox) === height(p.bbox) && width(p.bbox) >= 30 && p.area > width(p.bbox) * 4)) {
+  const fields = reassemble ? splitFields(parts, rows)
+    : parts.filter(p => width(p.bbox) === height(p.bbox) && width(p.bbox) >= 30 && p.area > width(p.bbox) * 4);
+  for (const field of fields) {
     for (const pitch of [4, 5, 6]) {
       const side = width(field.bbox) / pitch;
       if (!Number.isInteger(side) || side > 12 || side < 6) continue;
@@ -158,14 +187,18 @@ function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): 
   });
 }
 
-function initial(rows: NativeRows, epoch: number): Memory | null {
-  const options = measure(rows).flatMap(layout => {
+function initial(rows: NativeRows, epoch: number, witness: CargoWitness | null): Memory | null {
+  const ordinary = measure(rows);
+  const layouts = !ordinary.length && witness ? measure(rows, true) : ordinary;
+  const options = layouts.flatMap(layout => {
     const steps = search(layout, layout.initial);
     return steps?.length ? [{ layout, steps }] : [];
   });
   if (options.length !== 1) return null;
   const { layout, steps } = options[0]!;
-  return { epoch, layout, steps, at: layout.initial, refs: [], moves: false, interactions: [], failed: false };
+  const prior = witness?.pitch === layout.pitch && witness.actorColor === layout.actorColor && witness.core === layout.core ? witness : null;
+  if (!ordinary.length && !prior) return null;
+  return { epoch, layout, steps, at: layout.initial, refs: prior?.refs ?? [], moves: !!prior, interactions: prior?.interactions ?? [], failed: false };
 }
 
 function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined): Memory | null {
@@ -189,18 +222,24 @@ function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: 
 export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposal> {
   const learns = family === learnPivotCargoId;
   let state: Memory | null = null;
+  let witness: CargoWitness | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: family,
     async attachPrograms(registry) {
       if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group === observedMechanicsGroup && (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed)) return null;
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5'].every(ref => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
       const ref = observation.observation_ref;
+      const trained = witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed ? witness : null;
       const local = state?.epoch === observation.level_epoch ? state
-        : learns ? acquireMotion(rows, ref, observation.level_epoch, execution) : initial(rows, observation.level_epoch);
+        : learns ? acquireMotion(rows, ref, observation.level_epoch, execution) : initial(rows, observation.level_epoch, trained);
       const move = local?.steps[0];
       if (!local || local.failed || !move) return null;
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(r => r !== ref)];
@@ -252,15 +291,25 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
         turn: 'cargo_rotation_confirmed', drop: 'cargo_delivery_confirmed' }[proposal.move.intent] : 'cargo_projection_contradicted' };
     },
     record(before, after, _action, _first, second, proposal) {
+      const { local, move } = proposal;
+      if (!learns && after.levels_completed > before.levels_completed && local.moves && move.intent === 'drop'
+        && move.next.delivered === (1 << local.at.cargo.length) - 1 && local.interactions.includes('attach')) {
+        const { actorColor, core, pitch } = local.layout;
+        witness = { epoch: after.level_epoch, score: after.levels_completed, actorColor, core, pitch,
+          interactions: [...new Set([...local.interactions, move.intent])], refs: [...local.refs.slice(-4), before.observation_ref, after.observation_ref] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, move } = proposal, matched = witnessed(second, local.layout, local.at, move);
+      const matched = witnessed(second, local.layout, local.at, move);
       state = { ...local, failed: !matched, at: matched ? move.next : local.at, steps: matched ? local.steps.slice(1) : local.steps,
         moves: local.moves || matched && move.intent === 'move',
         interactions: matched && !local.interactions.includes(move.intent) ? [...local.interactions, move.intent] : local.interactions,
         refs: matched ? [...local.refs.slice(-5), after.observation_ref] : local.refs };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as Memory | null); },
+    state: () => ({ state, witness }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as Memory | null);
+      witness = structuredClone((value.witness as CargoWitness | null | undefined) ?? null);
+    },
   };
 }
