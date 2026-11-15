@@ -1,11 +1,12 @@
 import { measureTypedCarriers, typedReplacementCandidate, typedMaterialDescendants, typedMaterialRequests,
-  typedChildPresent, typedLocalChildMark } from '../logos-engine/v6-typed-material-observation.ts';
+  typedChildPresent, typedLocalChildMark, typedMaterialDigest } from '../logos-engine/v6-typed-material-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { pythonEqual } from '../logos-engine/v6-operations.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const materialAssemblyId = 'sic_material_assembly';
 export const learnMaterialAssemblyId = 'sic_assemble_after_observed_mark';
@@ -33,15 +34,18 @@ const graph = compileStrategyGraph({
 
 type Piece = { id: string; bbox: NativeBox; center: NativePoint; point: NativePoint; signature: string;
   body_palette: number; fringe: number[][]; support_source?: string };
-type Child = Piece & { core_signature: string; source_ref: string };
+type Child = Piece & { core_signature: string; marks: number[][]; source_ref: string };
 type AssemblyStrategy = Exclude<keyof typeof materialAssemblyStrategies, 'P02' | 'P05'>;
 type Request = { bbox: NativeBox; point: NativePoint; descriptor: { palette: number } };
+type Delivery = { core: string; destination: Request['descriptor']; evidence: string[] };
+type CompletedAssembly = { nextEpoch: number; score: number; deliveries: Delivery[] };
 type Scene = { carriers: Piece[]; source_ref: string };
 type Replacement = { selected: Piece; removed: Piece[]; evidence: string[] };
 type State = { epoch: number; frameHash: string; steps: number; marked: Piece | null; replacement: Replacement | null; children: Child[];
   selected: Child | null; filled: NativeBox[]; associations: Record<string, Request['descriptor']>;
-  calibrations: { size: NativePoint; evidence: string[] }[]; evidence: string[]; stopped: boolean; confirmed?: AssemblyStrategy[] };
-type Choice = { piece: Piece | Request; child?: Child; request?: Request };
+  calibrations: { size: NativePoint; evidence: string[] }[]; evidence: string[]; stopped: boolean;
+  deliveries?: Delivery[]; confirmed?: AssemblyStrategy[] };
+type Choice = { piece: Piece | Request; child?: Child; request?: Request; recalled?: Delivery | null };
 type Proposal = NativeProposal & { local: State; scene: Scene | null; choice: Choice; strategy: AssemblyStrategy; needId: string };
 
 const config = { minimum_body_fill: 0.75, minimum_distinct_internal_marks: 2, maximum_pixels_per_mark: 1, minimum_repeated_carriers: 2 };
@@ -64,6 +68,13 @@ function externalMark(box: NativeBox, before: NativeRows, after: NativeRows): bo
   return changed;
 }
 const patch = (rows: NativeRows, [l, t, r, b]: NativeBox) => rows.slice(t, b + 1).map(row => row.slice(l, r + 1));
+const visibleCore = (child: Child) => typedMaterialDigest(child.marks);
+
+function deliveryReceipt(choice: Choice, before: NativeObservation, after: NativeObservation): Delivery | null {
+  if (!choice.child || !choice.request) return null;
+  return { core: visibleCore(choice.child), destination: choice.request.descriptor,
+    evidence: [choice.child.source_ref, before.observation_ref, after.observation_ref] };
+}
 
 function confirmsMark(piece: Piece, scene: Scene, first: NativeRows, second: NativeRows, after: NativeObservation, calibrations: State['calibrations']) {
   if (!externalMark(piece.bbox, first, second)) return false;
@@ -93,9 +104,17 @@ async function acquireMark(rows: NativeRows, observation: NativeObservation, exe
 export function createSicMaterialAssembly(family = materialAssemblyId): NativeFamily<Proposal> {
   const learns = family === learnMaterialAssemblyId;
   let state: State | null = null;
+  let completed: CompletedAssembly | null = null;
   let decide: NativeProgramHandle | undefined;
+  const currentMemory = (observation: NativeObservation) => completed?.nextEpoch === observation.level_epoch
+    && completed.score === observation.levels_completed ? completed.deliveries : [];
   return {
     id: family,
+    proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      const reusing = !learns && currentMemory(observation).length > 0;
+      if ((group === observedMechanicsGroup) !== reusing) return null;
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async attachPrograms(registry) {
       if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
     },
@@ -113,16 +132,22 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       const carriers = scene?.carriers ?? [];
       let select: Choice | null = null, deliver: Choice | null = null, pair: Choice | null = null;
       if (local.children.length) {
+        const transferred = currentMemory(observation);
         const requests = (typedMaterialRequests(rows, observation, local.filled.map(shape)) as Request[])
           .filter(request => !local.filled.some(box => same(request.bbox, box)));
         for (const child of (local.selected ? [local.selected] : [...local.children].sort(byPosition))) {
           if (!typedChildPresent(child, rows)) continue;
-          const prior = local.associations[child.core_signature];
-          const candidates = requests.filter(request => prior ? same(request.descriptor, prior) : request.descriptor.palette === child.body_palette);
+          const core = visibleCore(child);
+          const remembered = transferred.filter(delivery => delivery.core === core);
+          const localDestination = local.associations[child.core_signature];
+          const recalled = localDestination ? null : remembered[0] ?? null;
+          if (recalled && remembered.some(delivery => !pythonEqual(delivery.destination, recalled.destination))) continue;
+          const prior = localDestination ?? recalled?.destination;
+          const candidates = requests.filter(request => prior ? pythonEqual(request.descriptor, prior) : request.descriptor.palette === child.body_palette);
           if (candidates.length !== 1) continue;
           const request = candidates[0]!;
-          if (local.selected) deliver = { piece: request, child, request };
-          else select = { piece: child, child, request };
+          if (local.selected) deliver = { piece: request, child, request, recalled };
+          else select = { piece: child, child, request, recalled };
           break;
         }
       } else if (local.marked && !local.replacement) {
@@ -133,7 +158,8 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       const open: Choice | null = local.replacement ? { piece: local.replacement.selected } : null;
       const first = !local.children.length && !local.replacement && !local.marked ? [...carriers].sort(byPosition)[0] : null;
       const probe: Choice | null = first ? { piece: first } : null;
-      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence,
+        ...(deliver?.recalled?.evidence ?? select?.recalled?.evidence ?? [])].filter(value => value !== ref))];
       const { selected, entries } = resolveStrategyGraph({
         graph, mode: 'active',
         facts: { probe: { value: !!probe, evidence }, pair: { value: !!pair, evidence }, open: { value: !!open, evidence },
@@ -142,7 +168,11 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
           select_produced_piece: () => select, deliver_produced_piece: () => deliver },
       });
       if (!selected) return null;
-      const choice: Choice = selected.plan, strategy = selected.id, label = materialAssemblyStrategies[strategy], parent = 'G_official_completion';
+      const choice: Choice = selected.plan, strategy = selected.id, parent = 'G_official_completion';
+      const label = choice.recalled
+        ? strategy === 'deliver_produced_piece' ? 'Deliver the selected piece to the frame previously verified for its core'
+          : 'Select the piece whose internal marks identify a previously verified frame'
+        : materialAssemblyStrategies[strategy];
       const mode = execution?.reasoningMode ?? 'exploration';
       const repeated = local.confirmed?.includes(strategy) ?? false;
       const facts = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
@@ -182,8 +212,16 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       return { matched: null, seal_prefix: true, reason: 'compare_material_and_frame_return' };
     },
     record(before, after, _command, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, strategy, choice, scene } = proposal;
+      if (after.levels_completed > before.levels_completed) {
+        const finalDelivery = strategy === 'deliver_produced_piece' && deliveryReceipt(choice, before, after);
+        const deliveries = local.deliveries ?? [];
+        if (finalDelivery && new Set(deliveries.map(delivery => delivery.core)).size >= 2) {
+          completed = { nextEpoch: after.level_epoch, score: after.levels_completed, deliveries: [...deliveries, finalDelivery] };
+        }
+        return { events: [] };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const next: State = { ...local, steps: local.steps + 1, frameHash: after.frame_hash,
         evidence: [...local.evidence.slice(-4), after.observation_ref], stopped: true };
       const measurement = { ...config, observed_body_shapes: local.calibrations };
@@ -212,13 +250,18 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
         next.selected = null;
         next.filled = [...local.filled, request.bbox];
         next.associations = { ...local.associations, [child.core_signature]: request.descriptor };
+        const receipt = deliveryReceipt(choice, before, after);
+        if (receipt) next.deliveries = [...(local.deliveries ?? []), receipt];
         next.stopped = false;
       }
       if (learns && !next.stopped && !next.confirmed?.includes(strategy)) next.confirmed = [...(next.confirmed ?? []), strategy];
       state = next;
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, completed }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      completed = structuredClone((value.completed as CompletedAssembly | null | undefined) ?? null);
+    },
   };
 }
