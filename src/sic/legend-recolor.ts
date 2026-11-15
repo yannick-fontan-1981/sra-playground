@@ -16,12 +16,13 @@ const graph = compileStrategyGraph({ id: 'match_region_topology_to_visible_legen
   priorities: ['apply_legend_pigment', 'acquire_legend_pigment'],
   strategies: {
     acquire_legend_pigment: [{ fact: 'needsColor', expected: true, label: 'The region has a matching example and its color is not selected yet' }],
-    apply_legend_pigment: [{ fact: 'ready', expected: true, label: 'The selected color matches the example with the same number of enclosed pockets' }],
+    apply_legend_pigment: [{ fact: 'ready', expected: true, label: 'The selected color matches the example for this region' }],
   },
 }, ['needsColor', 'ready']);
 
 type Region = { bbox: NativeBox; cells: NativePoint[]; value: number };
-type Body = Region & { target: number; partial_topology: boolean; relation_kind: string; pocket_count: number };
+type Body = Region & { target: number; partial_topology: boolean; relation_kind: 'shell' | 'surround';
+  pocket_count: number | null; example?: NativeBox };
 type Scene = { field: NativeBox; legend: NativeBox; wells: Region[]; bodies: Body[] };
 type State = { epoch: number; scene: Scene; active: number | null; count: number; stopped: boolean; evidence: string[] };
 type Proposal = NativeProposal & { local: State; body: Body; selecting: boolean; needId: string };
@@ -63,12 +64,13 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 32) return null;
-      const scene = prior?.scene ?? (measure(rows, observation) as Scene | null);
-      if (!scene || scene.bodies.length > 12 || scene.bodies.some(body => body.partial_topology || body.relation_kind !== 'shell')) return null;
+      const scene = prior?.scene ?? (measure(rows, observation, [], { examples: true }) as Scene | null);
+      if (!scene || scene.bodies.length > 12) return null;
       const local = prior ?? { epoch: observation.level_epoch, scene, active: null, count: 0, stopped: false, evidence: [] };
       const active = activePigment(rows, scene.wells);
-      const pending = scene.bodies.filter(body => !body.cells.every(point => at(rows, point) === body.target));
-      if (pending.some(body => visibleColors(rows, body).size !== 1)) return null;
+      const unfinished = scene.bodies.filter(body => !body.cells.every(point => at(rows, point) === body.target));
+      if (unfinished.some(body => visibleColors(rows, body).size !== 1)) return null;
+      const shells = unfinished.filter(body => body.relation_kind === 'shell'), pending = shells.length ? shells : unfinished;
       let body: Body | undefined;
       let strategy: keyof typeof legendRecolorStrategies;
       let srcDecision: NativeRecord | undefined;
@@ -104,6 +106,9 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
         needsColor: { value: selecting, evidence }, ready: { value: !selecting, evidence },
       }, planners: { acquire_legend_pigment: () => command, apply_legend_pigment: () => command } }).entries;
       const label = legendRecolorStrategies[strategy], parent = 'G_official_completion';
+      const topology = body.relation_kind === 'surround' ? 'The surrounding regions of the example and the field correspond.'
+        : body.partial_topology ? `${body.pocket_count} closed pockets are visible. The contour meets the field edge.`
+          : `The region has ${body.pocket_count} enclosed pockets.`;
       const goal = { kind: 'match_visible_legend_colors', scope: ref.split(':revision:', 1)[0]!, subjects: ['legend_and_regions'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_matching_regions' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
@@ -113,9 +118,10 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(srcDecision ? { sicSrcDecision: srcDecision } : {}),
-        sicSituationCard: { strategy, need: 'Give each region the color of its matching example', mode: selecting ? 'exploration' : 'solving',
-          situation: `The region has ${body.pocket_count} enclosed pockets. ${label}.`, agenda: entries, evidence,
-          region: body.bbox, legend: scene.legend, swatch: selecting ? site.bbox : null },
+        sicSituationCard: { strategy, need: 'Give each region the color of its matching example',
+          mode: selecting || body.partial_topology || body.relation_kind === 'surround' ? 'exploration' : 'solving',
+          situation: `${topology} ${label}.`, agenda: entries, evidence,
+          region: body.bbox, legend: scene.legend, example: body.example ?? null, swatch: selecting ? site.bbox : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

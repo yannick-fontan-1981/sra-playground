@@ -1356,7 +1356,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === legendRecolorId || family === matchExampleId)) {
-    for (const [field, label] of [['region', 'Region to recolor'], ['legend', 'Visible color legend'], ['swatch', 'Color selector']] as const) {
+    for (const [field, label] of [['region', 'Region to recolor'], ['legend', 'Visible color legend'],
+      ['example', 'Matching example'], ['swatch', 'Color selector']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }

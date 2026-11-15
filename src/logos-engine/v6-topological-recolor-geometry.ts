@@ -125,7 +125,7 @@ function containsCorners(c: R, box: readonly number[]): boolean {
   return [[box[0]!, box[1]!], [box[0]!, box[3]!], [box[2]!, box[1]!], [box[2]!, box[3]!]].every(p => cells.has(key(p)));
 }
 
-export function measure(rows: NativeRows, obs: R, writes: readonly R[] = []): R | null {
+export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], options?: { examples?: boolean }): R | null {
   if (!rows.length || !rows[0]?.length) return null;
   const height = rows.length, width = rows[0].length, cc = components(rows), groups = new Map<string, R[]>();
   for (const c of cc) {
@@ -150,11 +150,12 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = []): R 
           const palette = new Set(wells.map(c => c.value)), legendParts = components(rows, lb),
             samples = legendParts.filter(c => palette.has(c.value) && !onBoundary(c, lb));
           if (samples.length < 2) continue;
-          const mapping: R = {}; let valid = true;
+          const mapping: R = {}, examples: R = {}; let valid = true;
           for (const c of samples) {
             const pk = pockets(c, obs.observation_ref), n = String(pk.pocket_count);
             if (Object.hasOwn(mapping, n) && mapping[n] !== c.value) { valid = false; break; }
             mapping[n] = c.value;
+            if (options?.examples) examples[n] ??= c.bbox;
           }
           if (!valid) continue;
           const bodies: R[] = [], parts = components(rows, fb), boundary = parts.filter(c => containsCorners(c, fb)), holes = new Set<string>();
@@ -167,14 +168,15 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = []): R 
             if (boundary.includes(c) || c.cells.every((p: number[]) => holes.has(key(p)))) continue;
             const pk = pockets(c, obs.observation_ref, fb), n = String(pk.pocket_count);
             if (!Object.hasOwn(mapping, n)) continue;
-            bodies.push({ ...c, pocket_count: pk.pocket_count, target: mapping[n], evidence: pk,
+            bodies.push({ ...c, pocket_count: pk.pocket_count, target: mapping[n], ...(options?.examples ? { example: examples[n] } : {}), evidence: pk,
               relation_kind: 'shell', partial_topology: pk.complete_object_topology === false });
           }
           if (!bodies.length) continue;
           const legendOuter = legendParts.filter(c => containsCorners(c, lb)), shellsMatch = bodies.every(c => c.value === c.target);
           if (boundary.length === 1 && legendOuter.length === 1 && palette.has(legendOuter[0]!.value)
             && !Object.values(mapping).includes(legendOuter[0]!.value)) {
-            bodies.push({ ...boundary[0], target: legendOuter[0]!.value, pocket_count: null, relation_kind: 'surround',
+            bodies.push({ ...boundary[0], target: legendOuter[0]!.value,
+              ...(options?.examples ? { example: legendOuter[0]!.bbox } : {}), pocket_count: null, relation_kind: 'surround',
               partial_topology: false, shells_currently_match: shellsMatch, evidence: { source_sample: legendOuter[0],
                 observation_ref: obs.observation_ref, scope: 'current_surround_correspondence_hypothesis' } });
           }
