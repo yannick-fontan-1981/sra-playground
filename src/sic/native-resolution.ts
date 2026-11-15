@@ -816,6 +816,12 @@ export function readNativeResolution(agent: {
     const piece = bounds(card?.currentPiece), target = bounds(card?.target);
     if (piece) subjects.push({ label: 'Movable piece', box: piece });
     if (target) subjects.push({ label: 'Place in the partition', box: target });
+    if (Array.isArray(card?.remaining)) for (const entry of card.remaining) {
+      const contribution = record(entry);
+      const other = bounds(contribution?.piece), destination = bounds(contribution?.destination);
+      if (other) subjects.push({ label: 'Complementary piece', box: other });
+      if (destination) subjects.push({ label: 'Place reserved for it', box: destination });
+    }
   }
   if (situationCard && family === symbolContributionId) {
     const guide = bounds(card?.guide);
