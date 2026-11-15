@@ -4,18 +4,20 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { searchCoverageRoute } from './coverage-route.ts';
+import { chooseSwitchingJump, observeSwitchingJump, readSwitchingLayout, readSwitchingScene, switchingAttempt,
+  type JumpMemory, type JumpTile, type SwitchingLayout, type SwitchingScene, type SwitchingStep } from './switching-jump-route.ts';
 
 export const highlightedRouteId = 'sic_highlighted_route';
 export const learnHighlightedRouteId = 'sic_learn_highlighted_route';
 
 type Part = ReturnType<typeof geometricComponents>[number];
-type Tile = { box: NativeBox; point: NativePoint; color: number };
+type Tile = JumpTile;
 type Scene = { actor: Tile; goal: Tile; tiles: Tile[]; moves: Tile[]; offsets: NativePoint; seals?: Tile[] };
-type JumpModel = { completed: number; side: number; actorArea: number; goalArea: number; ground: number; highlight: number;
-  offsets: NativePoint; ref: string };
 type Collection = { goals: NativePoint[]; verified: string[]; provisional: string | null };
-type Memory = { epoch: number; ground: number; highlight: number; evidence: string[]; blocked: string[]; collection?: Collection };
-type Proposal = NativeProposal & { scene: Scene; target: Tile; memory: Memory; attempt: string; needId: string };
+type Memory = { epoch: number; ground: number; highlight: number; evidence: string[]; blocked: string[];
+  collection?: Collection; switching?: SwitchingLayout };
+type Proposal = NativeProposal & { scene: Scene; target: Tile; memory: Memory; attempt: string; needId: string;
+  switching?: { previous: SwitchingScene; step: SwitchingStep } };
 
 const boxWidth = ([left, , right]: NativeBox) => right - left + 1;
 const boxHeight = ([, top, , bottom]: NativeBox) => bottom - top + 1;
@@ -71,7 +73,7 @@ function measure(rows: NativeRows, memory: Memory | null): { scene: Scene; groun
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
-function measureCollection(rows: NativeRows, model: JumpModel, collection?: Collection): Scene | null {
+function measureCollection(rows: NativeRows, model: JumpMemory, collection?: Collection): Scene | null {
   const { side, ground, highlight, actorArea, goalArea, offsets } = model;
   const parts = geometricComponents(rows), pitch = side + 1;
   const tiles = parts.filter(p => (p.color === ground || p.color === highlight) && boxWidth(p.bbox) === side && boxHeight(p.bbox) === side);
@@ -155,7 +157,7 @@ function distances(scene: Scene): Map<Tile, number> {
 export function createSicHighlightedRoute(family = highlightedRouteId): NativeFamily<Proposal> {
   const learns = family === learnHighlightedRouteId;
   let state: Memory | null = null;
-  let known: JumpModel | null = null;
+  let known: JumpMemory | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -167,8 +169,14 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
         || observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const reusable = known?.completed === observation.levels_completed ? known : null;
-      const collectionScene = reusable ? measureCollection(rows, reusable, prior?.collection) : null;
-      const measured = collectionScene && reusable ? { scene: collectionScene, ground: reusable.ground, highlight: reusable.highlight }
+      const collectionScene = reusable && !prior?.switching ? measureCollection(rows, reusable, prior?.collection) : null;
+      const switching = prior?.switching ?? (reusable && !prior && !collectionScene ? readSwitchingLayout(rows, reusable) : null);
+      const phased = switching && readSwitchingScene(rows, switching);
+      const phasedScene: Scene | null = phased ? { actor: phased.actor, goal: phased.layout.goal, tiles: phased.layout.cells,
+        moves: phased.moves, offsets: phased.layout.memory.offsets, seals: phased.collection === 'remaining' ? [phased.layout.marker] : [] } : null;
+      const recalled = phasedScene ?? collectionScene;
+      const measured = recalled && reusable ? { scene: recalled, ground: reusable.ground, highlight: reusable.highlight }
+        : switching ? null
         : prior?.collection ? null : measure(rows, prior);
       if (!measured) return null;
       const { scene, ground, highlight } = measured;
@@ -178,13 +186,15 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
         arrival.changed[0] && !arrival.predictionContradicted &&
         arrival.point[0] >= left && arrival.point[0] <= right && arrival.point[1] >= top && arrival.point[1] <= bottom;
       const memory = prior ?? { epoch: observation.level_epoch, ground, highlight,
-        evidence: witnessedArrival ? [arrival.beforeRef, arrival.afterRef] : collectionScene && reusable ? [reusable.ref] : [], blocked: [],
+        evidence: witnessedArrival ? [arrival.beforeRef, arrival.afterRef] : recalled && reusable ? [reusable.ref] : [], blocked: [],
+        ...(switching ? { switching } : {}),
         ...(collectionScene?.seals ? { collection: { goals: collectionScene.seals.map(seal => seal.point), verified: [], provisional: null } } : {}) };
-      const attemptFor = (tile: Tile) => [key(scene.actor.point), key(tile.point), key(scene.offsets)].join('/');
-      const distance = memory.collection ? null : distances(scene);
+      const attemptFor = (tile: Tile) => phased ? switchingAttempt(phased, tile) : [key(scene.actor.point), key(tile.point), key(scene.offsets)].join('/');
+      const distance = memory.collection || phased ? null : distances(scene);
       const options = distance ? scene.moves.filter(p => distance.has(p) && !memory.blocked.includes(attemptFor(p)))
         .sort((a, b) => distance.get(a)! - distance.get(b)!) : scene.moves;
-      const target = memory.collection ? routeToSeals(scene, memory.collection, memory) : options[0];
+      const step = phased ? chooseSwitchingJump(phased, remaining, memory.blocked) : null;
+      const target = phased ? step?.target : memory.collection ? routeToSeals(scene, memory.collection, memory) : options[0];
       if (!target) return null;
 
       const ref = observation.observation_ref;
@@ -203,25 +213,29 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, target.point, { reason: 'Currently highlighted landing', evidence });
       if (!pointBinding) return null;
       const parent = 'G_official_completion';
-      const objective = { kind: memory.collection ? 'collect_visible_markers_before_exit' : 'reach_framed_marker_by_highlighted_jumps',
+      const objective = { kind: memory.collection || phased ? 'collect_visible_markers_before_exit' : 'reach_framed_marker_by_highlighted_jumps',
         scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_piece', 'highlighted_landing', 'framed_marker'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_highlighted_jump' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = family + ':' + need.id;
       const action = { action_ref: 'ACTION6', data: { x: target.point[0], y: target.point[1] } };
-      const situation = memory.collection ? scene.seals?.length
+      const situation = step ? step.switches
+        ? 'Land on the marked switch and check which highlighted jumps become available'
+        : `Choose a highlighted jump on the ${step.distance}-jump route through the current and projected door states`
+        : memory.collection ? scene.seals?.length
         ? 'Choose a highlighted jump on a route through the remaining seals'
         : 'Reach the exit while checking that the collected seals stay absent' : strategy === 'P05'
         ? 'Check whether clicking a highlighted square moves the piece there'
         : 'Choose a highlighted square on a shortest candidate route, then verify the landing and the new highlights';
       return {
         status: 'proposed', kind: family, scene, target, memory, attempt: attemptFor(target), needId: need.id,
+        ...(phased && step ? { switching: { previous: phased, step } } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: target.point, point_binding: pointBinding }],
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
-        sicSituationCard: { strategy, need: memory.collection ? 'Collect the seals and reach the exit' : 'Reach the framed marker',
+        sicSituationCard: { strategy, need: memory.collection || phased ? 'Collect the seals and reach the exit' : 'Reach the framed marker',
           situation, evidence, agenda: navigation?.entries ?? [], mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
           actor: scene.actor.box, focus: target.box, destination: scene.goal.box, ...(scene.seals ? { seals: scene.seals.map(seal => seal.box) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
@@ -238,6 +252,11 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.switching) {
+        const { previous, step } = proposal.switching;
+        const reason = observeSwitchingJump(second, previous, step);
+        return { matched: !!reason, seal_prefix: true, reason: reason ?? 'landing_door_group_or_seal_contradicted' };
+      }
       const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection)
         : measure(second, proposal.memory)?.scene;
       const matched = !!next && same(next.actor.point, proposal.target.point) && same(next.offsets, proposal.scene.offsets);
@@ -250,6 +269,10 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
     },
     record(before, after, _action, first, second, proposal) {
       if (after.levels_completed > before.levels_completed) {
+        if (proposal.switching && known) {
+          known = { ...known, completed: after.levels_completed, ref: after.observation_ref };
+          return { events: [] };
+        }
         const { scene, memory } = proposal, parts = geometricComponents(first);
         const actor = parts.find(part => part.color === memory.ground && same(center(part.bbox), scene.actor.point)
           && boxWidth(part.bbox) === boxWidth(scene.actor.box));
@@ -259,6 +282,13 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
           goalArea: goal.area, ground: memory.ground, highlight: memory.highlight, offsets: scene.offsets, ref: after.observation_ref };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (proposal.switching) {
+        const { memory, switching: { previous, step } } = proposal;
+        const reason = observeSwitchingJump(second, previous, step);
+        state = { ...memory, evidence: [...memory.evidence.slice(-5), after.observation_ref],
+          blocked: reason ? memory.blocked : [...memory.blocked, proposal.attempt] };
+        return { events: [] };
+      }
       const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection)
         : measure(second, proposal.memory)?.scene;
       const confirmed = !!next && same(next.actor.point, proposal.target.point) && same(next.offsets, proposal.scene.offsets);
@@ -273,7 +303,7 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
     state: () => ({ state, known }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as Memory | null);
-      known = structuredClone((value.known as JumpModel | undefined) ?? null);
+      known = structuredClone((value.known as JumpMemory | undefined) ?? null);
     },
   };
 }
