@@ -48,6 +48,7 @@ import { directionalReceptionId, learnDirectionalReceptionId } from './direction
 import { learnWindowCoverageId, windowCoverageId } from './window-coverage.ts';
 import { verifyPanelConfigurationId } from './panel-matching.ts';
 import { verifyCrossingRowsId } from './crossing-rows.ts';
+import { parallelSymbolPrefixesId } from './parallel-symbol-prefixes.ts';
 import { verifyTraceCoverageId } from './trace-coverage.ts';
 import { learnRadialConnectionId, radialConnectionId } from './radial-connection.ts';
 import { verifyCaptureRouteId } from './invited-capture.ts';
@@ -98,7 +99,7 @@ export const standalonePlanningGroups = [
   { id: 'coordinate_visible_motion', families: [coupledGaugeRouteId, mergeForDemandId, verifyBandTransferId, verifySharedArrivalId, outlineServiceId, learnOutlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, verifyBranchAlignmentId, receptionAccessId, learnReceptionAccessId, verifyMarkerPlacementId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, learnPivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyConnectedRouteId, verifyInventoryTransferId, verifyRemoteReplayId, verifyOrientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, learnPairedPassageId, verifyFrameContactId, switchedSurfaceId, learnSwitchedSurfaceId, verifyReactiveMotionId, verifyPointAccessId, verifyLinkedMotionId, linkedGroupRouteId, verifyRemovableSupportId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, learnLinkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId, learnTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, learnLabeledSequenceId, markedCollectionId, slotTransferId, verifyPatternChoiceId, stableReferenceId, verifyOrderedFeedbackId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, verifyOccurrenceChoiceId, verifySlotPermutationId, surfaceCopyId, learnSurfaceCopyId, chartRouteId, learnChartRouteId] },
-  { id: 'construct_executable_program', families: [verifyProgramConfigurationId, programOriginId, learnProgramOriginId, verifySequenceEditsId, windowCoverageId, learnWindowCoverageId, verifyPanelConfigurationId] },
+  { id: 'construct_executable_program', families: [verifyProgramConfigurationId, programOriginId, learnProgramOriginId, parallelSymbolPrefixesId, verifySequenceEditsId, windowCoverageId, learnWindowCoverageId, verifyPanelConfigurationId] },
   { id: 'fit_profiles_into_receivers', families: [verifyProfileTransferId, portPairingId, learnPortPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId, learnFramedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId, learnOrderedReplenishmentId] },
   { id: 'fill_visible_partition', families: [verifyPreviewPlacementId, verifyReferencePlacementId] },

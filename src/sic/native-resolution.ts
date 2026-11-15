@@ -89,6 +89,7 @@ import { directionalReceptionId, directionalReceptionStrategies, learnDirectiona
 import { learnWindowCoverageId, windowCoverageId, windowCoverageStrategies } from './window-coverage.ts';
 import { panelMatchingId, panelMatchingStrategies, verifyPanelConfigurationId } from './panel-matching.ts';
 import { crossingRowsId, crossingRowsStrategies, verifyCrossingRowsId } from './crossing-rows.ts';
+import { parallelSymbolPrefixesId } from './parallel-symbol-prefixes.ts';
 import { traceCoverageId, traceCoverageStrategies, verifyTraceCoverageId } from './trace-coverage.ts';
 import { learnRadialConnectionId, radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
 import { invitedCaptureId, invitedCaptureStrategies, verifyCaptureRouteId } from './invited-capture.ts';
@@ -800,6 +801,15 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['source', 'Source symbols'], ['editable', 'Editable symbols'], ['active', 'Focused symbol']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === parallelSymbolPrefixesId) {
+    for (const [field, label] of [['targets', 'Symbol advanced by this command'], ['panels', 'Symbol group']] as const) {
+      const items = card?.[field];
+      if (Array.isArray(items)) for (const item of items) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
     }
   }
   if (situationCard && (family === learnScopeEffectsId || family === learnVisibleGroupEffectsId)) {

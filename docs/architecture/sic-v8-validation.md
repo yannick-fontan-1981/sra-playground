@@ -465,6 +465,10 @@ Sur **MIND**, l’indice de départ disparaît au niveau 2. SIC rattache la rang
 
 Le bilan atteint **61/100 niveaux 2** et **178/636 niveaux attestés sous SIC seul** (28,0 %).
 
+Sur **SEQN**, SIC apprend les quatre associations touche–glyphe en observant les commandes effectivement exécutées pendant le niveau 1. Au niveau 2, il retrouve les glyphes dans deux suites et compare les progressions possibles des deux groupes. La quatrième commande termine le groupe inférieur et avance simultanément le groupe supérieur. Les retours suivants confirment que le premier reste acquis. Le niveau 2 gagne en **7 commandes** et **9,12 s**. Les quatre commandes et retours du niveau 1 sont reproduits. Les 11 commandes relèvent de SIC, avec l’empreinte `3d698c53387a269f042dfc74196892406c598d9e2e56a12ee0813f5acd78bc8f`. Le parcours gagne aussi avec une palette permutée. Le retrait de `sic_verify_parallel_symbol_prefixes` préserve le niveau 1 et laisse le niveau 2 non résolu après 45 commandes.
+
+Le bilan atteint **62/100 niveaux 2** et **179/636 niveaux attestés sous SIC seul** (28,1 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.

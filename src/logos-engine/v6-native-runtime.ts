@@ -127,6 +127,7 @@ import { createSicDirectionalReception, learnDirectionalReceptionId } from '../s
 import { createSicWindowCoverage, learnWindowCoverageId } from '../sic/window-coverage.ts';
 import { createSicVerifyPanelConfiguration } from '../sic/panel-matching.ts';
 import { createSicVerifyCrossingRows } from '../sic/crossing-rows.ts';
+import { createSicVerifyParallelSymbolPrefixes } from '../sic/parallel-symbol-prefixes.ts';
 import { createSicVerifyTraceCoverage } from '../sic/trace-coverage.ts';
 import { createSicRadialConnection, learnRadialConnectionId } from '../sic/radial-connection.ts';
 import { createSicVerifyCaptureRoute } from '../sic/invited-capture.ts';
@@ -1666,7 +1667,16 @@ export class NativeV6Runtime implements NativeV6Backend {
     // Source ordering is per acquired transition, after physical prefix sealing:
     // Attention/View -> selected family -> Goal/Point/Control -> assessment -> Frontier.
     // A selected-family record must never be applied in an earlier separate pass.
-    if (!this.caller) for (const transition of prefix.witnessed) await recordSelected(transition);
+    if (!this.caller) for (const transition of prefix.witnessed) {
+      await recordSelected(transition);
+      if (prefix.sicPlan?.authority !== 'sicOnly') continue;
+      for (const observer of this.families) {
+        if (!observer.observePublicOutcome || observer.id === prefix.family.id
+          || objectValue(this.knowledge?.value(`family_activation:${observer.id}`)).enabled !== true) continue;
+        observer.observePublicOutcome(transition.before, transition.after, transition.command,
+          transition.first.frame_rows, transition.second.frame_rows);
+      }
+    }
     const composed = this.authority ? await this.authority.acquire(prefix.proposal, prefix.revision, prefix.witnessed, prefix.interruption, execution,
       this.caller ? {
         beforeAssessment: async transition => {
@@ -2659,6 +2669,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
+      createSicVerifyParallelSymbolPrefixes(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
       createSicVerifySharedArrival(), createSicOutlineService(), createSicOutlineService(learnOutlineServiceId),
