@@ -23,7 +23,7 @@ Un échec de repli conduit d’abord à retrouver la première preuve qui manque
 
 Le passage au composant commun demande un rejeu avec retrait de la famille ciblée, les 100 niveaux 1 et les quatre parcours intégraux sous SIC seul. Comparer les gains, les commandes, les contradictions, l’autorité de décision et la durée par niveau. Une modification des commandes est acceptable lorsque les preuves et les résultats restent vérifiables. Garder la première divergence et le nombre de jeux où la primitive contribue réellement.
 
-Les niveaux 1 restent prioritaires. Sur `341b6cb1`, le rejeu gagne les 100 niveaux 1 sous SIC seul après retrait de leur famille habituelle. Ce résultat ouvre le chantier de généralisation avec les niveaux 1 et les quatre jeux terminés. La référence du premier retrait reste figée sur le rejeu normal du runtime `07e5e687`. La campagne systématique des niveaux 2 reprend après le chantier de généralisation, puis la campagne des niveaux 3.
+Sur `341b6cb1`, le rejeu gagne les 100 niveaux 1 sous SIC seul après retrait de leur famille habituelle. La référence du premier retrait reste figée sur le rejeu normal du runtime `07e5e687`. Les 100 niveaux 2 deviennent prioritaires. Le chantier de généralisation utilise les niveaux 1 et les quatre jeux terminés pour éclairer les blocages de cette campagne. La campagne systématique des niveaux 3 suit celle des niveaux 2.
 
 ## Mesurer la généralité
 

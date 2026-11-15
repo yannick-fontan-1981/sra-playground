@@ -361,6 +361,14 @@ Avec la réparation de champ retirée sur SYME et DNOI, une autre famille formul
 
 Le premier tour part de parties neuves. Le navigateur vérifie l’autorité SIC de chaque commande. Les passages du niveau 1 au niveau 2 se font dans la même partie.
 
+La campagne prioritaire repart des 100 jeux sur `f20e48b0`. Le lot de diagnostic rejoue les deux premiers niveaux dans une partie continue et enregistre le nombre de commandes, le résultat officiel, le fournisseur des décisions et une durée par niveau. Les niveaux encore ouverts sont classés d'après le premier blocage observé au niveau 2.
+
+Les premiers résultats ajoutent **AMZE** et **CATL** aux niveaux 2 validés. AMZE gagne son niveau 2 en quatre commandes après trois au niveau 1. CATL en prend huit sur chacun des deux niveaux. Les 23 commandes de ces deux parties relèvent du SIC. Le cumul atteint **13 niveaux 2 validés sur 100** et **130 niveaux attestés sur 636**.
+
+Sur **BP35**, le niveau 1 gagne en 16 commandes et les deux premiers clics du niveau 2 visent la même colonne. Le deuxième retour termine la partie. Sur **LS20**, le niveau 2 reste ouvert après 98 commandes et se termine sur une défaite. Sur **CASC**, l'exploration s'arrête après 80 commandes au niveau 2. Ces trois cas servent à isoler les contraintes visibles qui diffèrent de celles du niveau 1.
+
+Un rejeu isolé de BP35 reprend la partie juste avant le clic fatal. Le même clic reproduit la défaite. Les deux directions horizontales gardent la partie ouverte au retour suivant et le déplacement reste à mesurer. À ce point de la campagne, 18 rejeux sont terminés et les 13 niveaux 2 déjà attestés sont tous reproduits sur la même version.
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
