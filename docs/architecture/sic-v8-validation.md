@@ -487,7 +487,9 @@ Sur **PRTL**, SIC réutilise les symboles de sélection et les preuves de dépla
 
 Sur **TRCP**, SIC retrouve les 24 clics et retours du niveau 1. Au niveau 2, il isole les chemins des deux couleurs pures et relie les deux sources qui restent au repère du mélange. Au treizième clic du niveau, le retour confirme la recoloration des deux sources et des cases déjà creusées entre elles. SIC vérifie aussi que les sources des autres chemins conservent leur couleur. Le niveau 2 gagne en **30 clics sur 35** et **103,42 s**, avec 54 commandes sous autorité SIC depuis le début de la partie. La permutation de palette conserve les 54 clics. Empreinte de la partie `66e4ed7bcef3b7c1b40e2f7ad39ba2290dcb7909bcfa415f97485749249f3635`.
 
-Le bilan atteint **67/100 niveaux 2** et **184/636 niveaux attestés sous SIC seul** (28,9 %).
+Sur **UPST**, les retours SIC du niveau 1 relient l’ouverture d’une porte à la disparition de ressources et associent une rencontre entre sprites de même aire à la sortie. Au niveau 2, SIC relit les compartiments, nourrit le groupe accessible, puis ouvre une porte distante sans modifier la connexion entre les deux candidats à la croissance. Le retour montre qu’un candidat seul subsiste dans ce groupe et atteint l’aire du grand sprite isolé. SIC ouvre alors l’accès. Le niveau 2 gagne en **4 clics** et **5,07 s**. Le rejeu reproduit exactement les 30 commandes et retours du niveau 1, et les 34 commandes de la partie relèvent de SIC. La permutation de palette conserve les 34 clics. Empreinte `8dfb2816f368d7b8d6ef75c3874267c4a88dce34ed421258b349a7ca7fff6d21`.
+
+Le bilan atteint **68/100 niveaux 2** et **185/636 niveaux attestés sous SIC seul** (29,1 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
