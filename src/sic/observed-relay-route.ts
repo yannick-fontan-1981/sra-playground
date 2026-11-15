@@ -1,6 +1,6 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { currentRelayControl, planRelayRoute, readRelayScene, recordRelayCalibration, relayPhase, relaySelection, sameRelayLayout,
+import { currentRelayControl, planRelayRoute, readRelayScene, recordRelayCalibration, relayPhase, relaySelection, retainScoredRelay, sameRelayLayout,
   type RelayCalibration, type RelayRoute, type RelayScene, type RelayWitness } from './relay-configuration.ts';
 import { sicNeedId } from './need-identity.ts';
 
@@ -14,7 +14,8 @@ export const observedRelayStrategies = {
 
 type Strategy = keyof typeof observedRelayStrategies;
 type Local = { epoch: number; scene: RelayScene; route: RelayRoute; bindings: Record<number, string>; selected: number | null;
-  directions: Record<number, number>; seen: Record<number, string[]>; facts: string[]; stopped: boolean };
+  directions: Record<number, number>; seen: Record<number, string[]>; facts: string[]; stopped: boolean;
+  phaseDirections?: Record<string, number | null>; pendingPhases?: Record<number, string[]> };
 type Decision = { strategy: Strategy; command: NativeCommand; slot: number | null; phase: string | null; direction: number | null };
 type Proposal = NativeProposal & { decision: Decision; local: Local; needId: string };
 type Result = { valid: boolean; body?: string; direction?: number | null; phase?: string };
@@ -37,7 +38,7 @@ function chooseRelay(local: Local, view: RelayScene, rows: NativeRows, witness: 
   if (local.selected !== slot) {
     return { strategy: 'identify_relay_control', command: point(control.point), slot, phase: null, direction: null };
   }
-  const { direction: measured, phase } = relayPhase(rows, control, witness);
+  const { direction: measured, phase } = relayPhase(rows, control, witness, witness.sourceMark ? local.phaseDirections : undefined);
   const current = measured ?? local.directions[slot];
   if (current === undefined) {
     if (local.seen[slot]?.includes(phase)) return null;
@@ -52,11 +53,11 @@ function chooseRelay(local: Local, view: RelayScene, rows: NativeRows, witness: 
 
 function inspectRelayReturn(proposal: Proposal, witness: RelayWitness, first: NativeRows, second: NativeRows): Result {
   const { decision, local } = proposal, slot = decision.slot;
-  const view = readRelayScene(second);
+  const view = readRelayScene(second, local.scene);
   if (slot === null || !view || !sameRelayLayout(local.scene, view)) return { valid: false };
   const control = currentRelayControl(view, local.scene.controls[slot]!);
   if (!control) return { valid: false };
-  const { phase, direction } = relayPhase(second, control, witness);
+  const { phase, direction } = relayPhase(second, control, witness, witness.sourceMark ? local.phaseDirections : undefined);
   if (decision.strategy === 'identify_relay_control') {
     const selected = local.selected === null ? null : local.scene.objects.find(body => body.ref === local.bindings[local.selected!]) ?? null;
     const body = relaySelection(local.scene, first, second, selected);
@@ -67,6 +68,20 @@ function inspectRelayReturn(proposal: Proposal, witness: RelayWitness, first: Na
   }
   return { valid: phase !== decision.phase && (direction === null || decision.direction === null || direction === decision.direction),
     direction: direction ?? decision.direction, phase };
+}
+
+function rememberRelayPhases(state: Local, decision: Decision, returned: Result, slot: number, count: number) {
+  if (!returned.phase) return {};
+  const measuring = decision.strategy === 'find_observed_relay_phase' && decision.phase;
+  const pending = measuring ? [...(state.pendingPhases?.[slot] ?? []), decision.phase!] : [];
+  if (returned.direction == null) return { pendingPhases: { ...state.pendingPhases, [slot]: pending } };
+  const phaseDirections = { ...state.phaseDirections };
+  const observed = [...pending, returned.phase];
+  for (const [index, phase] of observed.entries()) {
+    const direction = mod(returned.direction + pending.length - index, count);
+    phaseDirections[phase] = !Object.hasOwn(phaseDirections, phase) || phaseDirections[phase] === direction ? direction : null;
+  }
+  return { phaseDirections, pendingPhases: { ...state.pendingPhases, [slot]: [] } };
 }
 
 export function createSicObservedRelayRoute(): NativeFamily<Proposal> {
@@ -85,14 +100,15 @@ export function createSicObservedRelayRoute(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining) {
       const memory = witness;
       if (remaining < 1 || memory?.epoch !== observation.level_epoch) return null;
-      const view = readRelayScene(rows);
-      if (!view) return null;
       const previous = local?.epoch === observation.level_epoch ? local : null;
+      const view = readRelayScene(rows, previous?.scene);
+      if (!view) return null;
       if (previous?.stopped || previous && !sameRelayLayout(previous.scene, view)) return null;
       const route = previous?.route ?? planRelayRoute(view, rows, memory);
       if (!route) return null;
       const state: Local = previous ?? { epoch: observation.level_epoch, scene: view, route, bindings: {},
-        selected: null, directions: {}, seen: {}, facts: [], stopped: false };
+        selected: null, directions: {}, seen: {}, facts: [], stopped: false,
+        ...(memory.phaseDirections ? { phaseDirections: memory.phaseDirections } : {}) };
       const decision = chooseRelay(state, view, rows, memory);
       if (!decision || !observation.available_action_refs.includes(decision.command.action_ref)) return null;
       const ref = observation.observation_ref, parent = 'G_official_completion';
@@ -130,7 +146,10 @@ export function createSicObservedRelayRoute(): NativeFamily<Proposal> {
       const matched = !!witness && inspectRelayReturn(proposal, witness, first, second).valid;
       return { matched, seal_prefix: true, reason: matched ? 'relay_selection_or_phase_confirmed' : 'relay_prediction_unconfirmed' };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, _index, frames) {
+      if (witness && after.levels_completed > before.levels_completed && proposal.decision.strategy === 'launch_configured_relay_route') {
+        witness = retainScoredRelay(witness, proposal.local.route, before, after, first, frames, proposal.local.phaseDirections) ?? witness;
+      }
       if (!witness || before.level_epoch !== after.level_epoch) return { events: [] };
       const state = proposal.local, decision = proposal.decision, slot = decision.slot;
       const returned = inspectRelayReturn(proposal, witness, first, second);
@@ -140,6 +159,7 @@ export function createSicObservedRelayRoute(): NativeFamily<Proposal> {
       if (returned.body) local.bindings = { ...state.bindings, [slot]: returned.body };
       if (returned.direction !== undefined && returned.direction !== null) local.directions = { ...state.directions, [slot]: returned.direction };
       if (decision.phase) local.seen = { ...state.seen, [slot]: [...(state.seen[slot] ?? []), decision.phase] };
+      Object.assign(local, rememberRelayPhases(state, decision, returned, slot, witness.count));
       return { events: [] };
     },
     state: () => ({ calibration, witness, local }),
