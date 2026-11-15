@@ -20,6 +20,7 @@ import { preparedConfigurationStrategies } from './prepared-configuration-card.t
 import { learnOutlineServiceId, outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
 import { labeledSequenceId, labeledSequenceStrategies, learnLabeledSequenceId } from './labeled-sequence.ts';
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
+import { visibleConfigurationCoverageId, visibleConfigurationStrategies } from './visible-configuration-coverage.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -496,6 +497,7 @@ export function readNativeResolution(agent: {
       || family === verifyOrientedDeliveryId || family === verifyTraceCoverageId || family === verifyCrossingRowsId
       || family === verifyBranchAlignmentId || family === verifyMarkedLatticeId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
+    : family === visibleConfigurationCoverageId ? visibleConfigurationStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -617,6 +619,11 @@ export function readNativeResolution(agent: {
       const box = bounds(member);
       if (box) subjects.push({ label: 'Member in the visible collection', box });
     }
+  }
+  if (situationCard && family === visibleConfigurationCoverageId) {
+    const factor = bounds(card?.factor), target = bounds(card?.target);
+    if (factor) subjects.push({ label: 'Factor being changed', box: factor });
+    if (target) subjects.push({ label: 'Unvisited configuration', box: target });
   }
   if (situationCard && family === slotTransferId) {
     const source = bounds(card?.source), destination = bounds(card?.destination);
