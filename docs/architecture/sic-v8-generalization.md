@@ -46,6 +46,12 @@ Le premier essai sur `341b6cb1` retrouve le niveau 1 de **DICO** en cinq command
 
 Sans le modèle de supports ordonnés, **HANO** reste ouvert après 40 commandes. Un fournisseur de réception encadrée en choisit trois et l'exploration publique 37. Ce cas permet de vérifier si une première mesure de sélection donne ensuite un transfert réutilisable dans un autre contexte.
 
+### Acquérir des correspondances par les retours publics
+
+SIC mesure les espacements répétés entre des composants visibles. Une grille candidate doit être cohérente sur les deux axes. Cette lecture des pixels fonctionne sans les trois fonctions de mesure et d'inférence neutralisées dans l'essai. Les correspondances spatiales prédisent une valeur à partir de cellules sources visibles. La carte SRC `sic.verify_observed_interaction.choose` choisit P05 pour obtenir une confirmation indépendante. Après deux retours concordants à des adresses distinctes, elle peut choisir P02 pour réutiliser la relation. Un retour contradictoire retire les hypothèses qu'il infirme.
+
+Avec les deux fournisseurs initiaux retirés et leurs trois fonctions neutralisées, **DNOI** gagne son niveau 1 en trois commandes et **SYME** en neuf. Le fournisseur de cellules répétées décide de toutes les commandes. Chaque partie commence par deux P05. DNOI réutilise la relation une fois et SYME sept fois. Les fonctions bloquées n'ont reçu aucun appel. Les deux jeux conservent les mêmes commandes avec un nom neutre et une palette permutée.
+
 `sic_public_input_exploration` conserve le choix final d’une expérience disponible, le budget et la mémoire des tentatives. Les mesures et producteurs d’offres ont vocation à être réutilisables indépendamment. Le graphe des commandes observées est déjà un module commun. La reconnaissance de marqueurs répétés et la recherche de mouvement après un clic sont encore dans la famille d’exploration. La présence de carrés de marqueurs, l’ordre initial des commandes et l’absence de changement avant un clic portent chacun une hypothèse qui doit être testée sur plusieurs jeux. Une famille distincte est utile lorsqu’elle conserve un modèle vérifiable entre plusieurs décisions, comme des cases découvertes ou une relation entre une commande et un mobile.
 
 La factorisation commence par les contrats récurrents effectivement observés, notamment mesurer un déplacement, vérifier l’objet contrôlé, apprendre un effet de contact, chercher un accès ou distinguer des candidats par un test. Les familles fournissent les observations et les opérations adaptées à leur scène. Les cartes choisissent une primitive selon le besoin, la situation et le mode de réflexion. Une preuve commune doit pouvoir être publiée par plusieurs familles et consommée dans le même format. Le runtime peut ensuite réévaluer la prochaine carte dans l’agenda ou via un workflow SRC. La première extraction utile porte sur la mesure du mouvement avant et après une commande et sa publication sous un format commun, à vérifier sur les retraits KLOT, KA59, LS19 et LS20.
@@ -674,6 +680,8 @@ Sur `d1ccd630`, les **88/100 retraits gagnants** totalisent 1 030 commandes SIC 
 Dans les essais ciblés après retrait, **ZIPP** retrouve ses huit commandes pour couvrir la trace, **WEAV** ses 27 commandes pour traverser les rangées, **SP80** ses huit commandes pour vérifier la sélection puis l'alignement et **SIGN** ses quinze commandes pour visiter et activer les repères. Les quatre jeux reproduisent les commandes et retours de référence. Avec palette permutée et nom neutralisé, ils conservent leurs commandes et leurs résumés de changements visibles.
 
 Une modification de la carte désactive P07 au premier trajet confirmé. Dans les quatre cas, une autre famille reprend une partie des essais. ZIPP, WEAV et SIGN restent ouverts après 45 commandes. SP80 s'arrête au bout de 30 commandes avec le niveau ouvert. Ces essais portent sur le choix de la primitive. Ils gardent les planificateurs de géométrie et les projections TypeScript.
+
+Sur `850b3b8c`, les **92/100 retraits gagnants** totalisent 1 088 commandes SIC seul. Les 100 premiers niveaux en configuration normale, les 88 retraits précédents et les quatre jeux complets avec et sans retrait reproduisent les commandes et retours de référence.
 
 ### Vérifier une modification avant de poursuivre ou de la répéter
 

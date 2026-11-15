@@ -1,15 +1,22 @@
 import { correspondences, measuredFields, periodicHypotheses, symmetryEvidence, type RegularField } from '../logos-engine/v6-field-constraints.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { fieldConsensus } from './field-consensus.ts';
 import { sicNeedId } from './need-identity.ts';
 import { independentPredictionSupport, type PredictionTrial } from './independent-prediction.ts';
+import { observeRepeatedCells } from './observed-repeated-cells.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 
 export const learnCorrespondenceId = 'sic_learn_correspondence';
+export const learnRepeatedCellsId = 'sic_learn_repeated_cells';
+const testPrediction = 'Test a prediction at an independent cell';
+const reusePrediction = 'Use a correspondence supported by separate returns';
 export const learnCorrespondenceStrategies = {
-  test_correspondence: 'Test a prediction at an independent cell',
-  reuse_verified_correspondence: 'Use a correspondence supported by separate returns',
+  test_correspondence: testPrediction,
+  reuse_verified_correspondence: reusePrediction,
+  P05: testPrediction,
+  P02: reusePrediction,
 } as const;
 const graph = compileStrategyGraph({ id: 'acquire_field_correspondence_from_returns', version: 1, order: 'FALLBACK',
   priorities: ['reuse_verified_correspondence', 'test_correspondence'],
@@ -77,12 +84,12 @@ function hypotheses(field: RegularField, marker: number) {
   return inferred;
 }
 
-function corroboratedDisagreements(field: RegularField, prior: State | null): Map<string, Candidate[]> {
-  const symmetry = transforms.flatMap(name => {
+function corroboratedDisagreements(field: RegularField, prior: State | null, fromRepeatedCells: boolean): Map<string, Candidate[]> {
+  const symmetry = fromRepeatedCells ? [] : transforms.flatMap(name => {
     const model = symmetryEvidence(field, name);
     return model ? [[name, model[0]] as const] : [];
   });
-  const periodic = [...periodicHypotheses(field, 2)].map(([name, table]) => [name, table] as const);
+  const periodic = fromRepeatedCells ? [] : [...periodicHypotheses(field, 2)].map(([name, table]) => [name, table] as const);
   const models = new Map<string, Candidate[]>();
   const point = (address: string): NativePoint => {
     const [x, y] = address.split(',').map(Number);
@@ -90,7 +97,7 @@ function corroboratedDisagreements(field: RegularField, prior: State | null): Ma
   };
   const previousConsensus = prior?.hypotheses.some(name => name.includes('-majority:')) ?? false;
   const basic = [...symmetry, ...periodic];
-  const useConsensus = previousConsensus || !prior && basic.length === 0;
+  const useConsensus = fromRepeatedCells || previousConsensus || !prior && basic.length === 0;
   const consensus = useConsensus ? fieldConsensus(field, transforms) : [];
   const minimum = Math.min(...consensus.map(fit => fit.table.size));
   const selectedConsensus = consensus.filter(fit => prior ? prior.hypotheses.includes(fit.relation) : fit.table.size === minimum);
@@ -106,7 +113,7 @@ function corroboratedDisagreements(field: RegularField, prior: State | null): Ma
   return models;
 }
 
-function nominate(field: RegularField, prior: State | null, epoch: number) {
+function nominate(field: RegularField, prior: State | null, epoch: number, fromRepeatedCells: boolean) {
   const identity = JSON.stringify([field.xs, field.ys, field.size]);
   if (prior && prior.field !== identity) return null;
   const counts = new Map<number, number>();
@@ -114,10 +121,10 @@ function nominate(field: RegularField, prior: State | null, epoch: number) {
   const ordered = [...counts].sort((a, b) => a[1] - b[1]);
   const rare = ordered[0];
   let marker = prior ? prior.marker : ordered.length >= 3 && rare && rare[1] * 2 < ordered[1]![1] ? rare[0] : null;
-  let models = marker === null ? corroboratedDisagreements(field, prior) : hypotheses(field, marker);
+  let models = marker === null ? corroboratedDisagreements(field, prior, fromRepeatedCells) : hypotheses(field, marker);
   if (!prior && marker !== null && !models.size) {
     marker = null;
-    models = corroboratedDisagreements(field, prior);
+    models = corroboratedDisagreements(field, prior, fromRepeatedCells);
   }
   const admissible = [...models.keys()].filter(name => !prior || prior.hypotheses.includes(name));
   if (!admissible.length) return null;
@@ -138,29 +145,45 @@ function nominate(field: RegularField, prior: State | null, epoch: number) {
   return opportunities[0] ? { local, candidate: opportunities[0] } : null;
 }
 
-export function createSicLearnCorrespondence(): NativeFamily<Proposal> {
+export function createSicLearnCorrespondence(id = learnCorrespondenceId): NativeFamily<Proposal> {
+  const fromRepeatedCells = id === learnRepeatedCellsId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: learnCorrespondenceId,
-    async propose(observation, rows, _inputs, remaining) {
+    id,
+    async attachPrograms(registry) {
+      if (fromRepeatedCells) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const offers = measuredFields(observation).filter(field => field.values.size >= 18 && field.values.size <= 256)
-        .flatMap(field => { const proposal = nominate(field, prior, observation.level_epoch); return proposal ? [{ field, ...proposal }] : []; });
+      const measured = fromRepeatedCells ? observeRepeatedCells(rows) : measuredFields(observation);
+      const offers = measured.filter(field => field.values.size >= 18 && field.values.size <= 256)
+        .flatMap(field => {
+          const proposal = nominate(field, prior, observation.level_epoch, fromRepeatedCells);
+          return proposal ? [{ field, ...proposal }] : [];
+        });
       if (offers.length !== 1) return null;
       const { field, local, candidate } = offers[0]!;
       const ref = observation.observation_ref;
       const support = independentPredictionSupport(candidate.hypotheses, local.samples);
       const matches = support[0]?.matches ?? [];
       const evidence: [string, ...string[]] = [ref, ...matches.map(sample => sample.ref)];
-      const { selected, entries } = resolveStrategyGraph({
+      const replicated = matches.length >= 2;
+      const mode = execution?.reasoningMode ?? (replicated ? 'assimilation' : 'exploration');
+      const facts = { repeatSupportedInteraction: replicated, probeNeededInteraction: !replicated, mode };
+      const decision = fromRepeatedCells ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : undefined;
+      const legacy = fromRepeatedCells ? null : resolveStrategyGraph({
         graph, mode: 'active',
-        facts: { prediction: { value: true, evidence }, replicated: { value: matches.length >= 2, evidence } },
+        facts: { prediction: { value: true, evidence }, replicated: { value: replicated, evidence } },
         planners: { test_correspondence: () => candidate, reuse_verified_correspondence: () => candidate },
       });
-      if (!selected) return null;
-      const strategy = selected.id, label = learnCorrespondenceStrategies[strategy], parent = 'G_official_completion';
+      const primitive = replicated ? 'P02' : 'P05';
+      if (fromRepeatedCells && decision?.result !== primitive) return null;
+      const strategy = fromRepeatedCells ? primitive : legacy?.selected?.id;
+      if (!strategy) return null;
+      const label = learnCorrespondenceStrategies[strategy], parent = 'G_official_completion';
       const target = box(candidate.point, field.size), source = box(candidate.source, field.size);
       const area: NativeBox = [field.xs[0]!, field.ys[0]!, field.xs.at(-1)! + field.size[0] - 1, field.ys.at(-1)! + field.size[1] - 1];
       const [x, y] = [target[0] + Math.floor(field.size[0] / 2), target[1] + Math.floor(field.size[1] / 2)];
@@ -170,20 +193,23 @@ export function createSicLearnCorrespondence(): NativeFamily<Proposal> {
       const objective = { kind: 'acquire_field_correspondence_from_returns', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['paired_cells'], parentObjective: parent, satisfactionContract: 'official_progress_after_independent_field_predictions' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'learn-correspondence:' + need.id;
-      return { status: 'proposed', kind: learnCorrespondenceId, local, candidate, box: target, field: area, needId: need.id,
+      const composition = 'learn-correspondence:' + need.id;
+      return { status: 'proposed', kind: id, local, candidate, box: target, field: area, needId: need.id,
         actions, steps: [{ action, point_binding: witness, expected_after: { value: candidate.expected } }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Find the relationship that predicts what a marked cell should become',
-          situation: label, evidence, agenda: entries, mode: matches.length >= 2 ? 'assimilation' : 'exploration',
-          target, source, triggerCard: graph.id,
+          situation: label, evidence, agenda: legacy?.entries ?? [], mode: fromRepeatedCells ? mode : replicated ? 'assimilation' : 'exploration',
+          target, source, triggerCard: fromRepeatedCells ? chooseInteraction : graph.id,
           predictionSupport: matches.map(sample => sample.ref),
           compatibleRelations: candidate.hypotheses.length },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
-        compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy, objective: { id, label, parent }, need },
-        bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
-          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+        compositions: [{ id: composition, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
+        sicLocalDecision: { strategy, objective: { id: composition, label, parent }, need },
+        bundle_template: { operation_key: 'OP18', composition_ref: composition, objective_ref: parent, purpose: label,
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: composition } } };
     },
     before(proposal, index, packet, observation) {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref

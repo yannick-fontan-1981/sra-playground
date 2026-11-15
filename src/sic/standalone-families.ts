@@ -86,7 +86,7 @@ import { learnAnimatedCueId, reproduceCueId } from './reproduce-cue.ts';
 import { navigateRevealedGridId } from './navigate-revealed-grid.ts';
 import { learnGridAccessId } from './learn-grid-access.ts';
 import { arrangeTurnPostsId, learnTurnPostsId } from './arrange-turn-posts.ts';
-import { learnCorrespondenceId } from './learn-correspondence.ts';
+import { learnCorrespondenceId, learnRepeatedCellsId } from './learn-correspondence.ts';
 import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
@@ -102,7 +102,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [verifyTraceCoverageId, verifyMarkedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, verifyChannelAccessId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, verifyChannelAccessId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, learnRepeatedCellsId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));

@@ -22,6 +22,7 @@ const cases = {
   },
   DNOI: field,
   SYME: field,
+  TRIA: field,
   HANO: {
     original: 'sic_ordered_support_transfer', shared: 'sic_learn_support_moves',
     module: 'src/logos-engine/v6-ordered-support.ts',
@@ -38,12 +39,12 @@ const cases = {
     guards: { measureInsetContact: 'null' },
   },
 };
-const [code, mode, scope = 'first', budgetText = '80'] = process.argv.slice(2);
+const [code, mode, scope = 'first', budgetText = '80', projection = 'standard'] = process.argv.slice(2);
 const entry = Object.hasOwn(cases, code) ? cases[code] : null;
 const budget = Number(budgetText);
 assert.ok(entry && ['original', 'family', 'planner'].includes(mode) && ['first', 'complete'].includes(scope)
-  && Number.isSafeInteger(budget) && budget > 0,
-  'Usage: node scripts/check-sic-planner-dependency.mjs DICO|DNOI|HANO|SYME|KLOT|LS20 original|family|planner [first|complete] [actions per level]');
+  && Number.isSafeInteger(budget) && budget > 0 && ['standard', 'neutral'].includes(projection),
+  'Usage: node scripts/check-sic-planner-dependency.mjs DICO|DNOI|HANO|SYME|TRIA|KLOT|LS20 original|family|planner [first|complete] [actions per level] [standard|neutral]');
 
 const disabled = new Set(mode === 'original' ? [] : [entry.original]);
 if (mode === 'planner') disabled.add(entry.shared);
@@ -110,17 +111,20 @@ async function run() {
     py.FS.writeFile('/games/' + name, await readFile(new URL(name, assets), 'utf8'));
   }
   py.runPython("import sys\nsys.path.insert(0, '/games')\nfrom game_bridge import dispatch");
+  const remap = rows => rows.map(row => row.map(value => (value * 5 + 3) % 16));
   function play(request) {
     py.globals.set('_sic_request', JSON.stringify(request));
     const packet = JSON.parse(py.runPython('dispatch(_sic_request)'));
     assert.ok(!packet.error, 'Official game bridge rejected the request');
+    if (projection === 'neutral') return { ...packet, gameCode: 'UNKNOWN', frame: remap(packet.frame), frames: packet.frames.map(remap) };
     return { ...packet, gameCode: packet.code ?? packet.gameCode };
   }
   let board = play({ type: 'load', code, level: 1 });
   const target = scope === 'complete' ? board.levelCount : 1;
   const usage = new Map(), primitives = new Map();
   const levels = [];
-  const trajectory = createHash('sha256');
+  const commands = createHash('sha256'), trajectory = createHash('sha256');
+  let verifiedReuse = 0;
   const agent = new BrowserV6Agent({
     transport: { request: operation => service.handle(operation), reset() {}, dispose() {} },
     targetLevels: target,
@@ -134,9 +138,12 @@ async function run() {
       assert.ok(plan?.authority === 'sicOnly' && plan.strategy && !disabled.has(plan.family), 'Expected an exclusive SIC decision');
       usage.set(plan.family, (usage.get(plan.family) ?? 0) + 1);
       primitives.set(plan.strategy, (primitives.get(plan.strategy) ?? 0) + 1);
+      const samples = agent.snapshot.proposal?.sicSituationCard?.predictionSupport;
+      if (plan.strategy === 'P02' && Array.isArray(samples) && new Set(samples).size >= 2) verifiedReuse++;
       const start = performance.now();
       board = play({ type: 'action', actionId: action.id, ...(action.id === 6 ? { data: action.data } : {}) });
       const executionMs = performance.now() - start;
+      commands.update(JSON.stringify(action));
       trajectory.update(JSON.stringify([action, board.frame, board.frames, board.level, board.levelsCompleted, board.state]));
       return { observation: board, executionMs };
     },
@@ -154,9 +161,10 @@ async function run() {
     assert.equal(snapshot.sicActionCoverage?.sicOnly ?? 0, snapshot.actionCount);
     const retained = snapshot.coverage?.registeredFamilies ?? [];
     assert.ok([...disabled].every(id => !retained.includes(id)), 'A forbidden provider remained in the runtime');
-    return { code, mode, target, completed: board.levelsCompleted, disabled: [...disabled], installedGuards, guardHits,
+    return { code, mode, projection, target, completed: board.levelsCompleted, disabled: [...disabled], installedGuards, guardHits,
       actions: snapshot.actionCount, reason: snapshot.reason ?? snapshot.status, levels,
-      providers: Object.fromEntries(usage), primitives: Object.fromEntries(primitives), trajectory: trajectory.digest('hex') };
+      providers: Object.fromEntries(usage), primitives: Object.fromEntries(primitives), verifiedReuse,
+      commands: commands.digest('hex'), trajectory: trajectory.digest('hex') };
   } finally {
     agent.dispose();
   }
