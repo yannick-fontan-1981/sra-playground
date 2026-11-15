@@ -26,7 +26,7 @@ import { profileTransferId, profileTransferStrategies } from './profile-transfer
 import { learnOrderedReplenishmentId, orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
 import { learnProgramOriginId, programOriginId, programOriginStrategies } from './program-origin.ts';
 import { previewPlacementId, previewPlacementStrategies } from './preview-placement.ts';
-import { learnSymbolContributionId, symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
+import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
 import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
 import { learnQueuedPlacementId, queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
 import { legendRecolorId, legendRecolorStrategies, matchExampleId } from './legend-recolor.ts';
@@ -40,7 +40,7 @@ import { contrastControlsId, contrastControlsStrategies, contrastProbeId } from 
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
 import { framedSearchId, framedSearchStrategies } from './framed-search.ts';
 import { framedReceptionId, framedReceptionStrategies, learnFramedReceptionId } from './framed-reception.ts';
-import { learnWindowRelationId, windowRelationId, windowRelationStrategies } from './window-relation.ts';
+import { windowRelationId, windowRelationStrategies } from './window-relation.ts';
 import { animationContactId, animationContactStrategies, learnAnimationContactId } from './animation-contact.ts';
 import { coordinateObservedMotionId, reflectedPlacementId, reflectedPlacementStrategies } from './reflected-placement.ts';
 import { materialAssemblyId, materialAssemblyStrategies } from './material-assembly.ts';
@@ -484,7 +484,7 @@ export function readNativeResolution(agent: {
                 : (family === surfaceCopyId || family === learnSurfaceCopyId) ? surfaceCopyStrategies : family === codeRouteId ? codeRouteStrategies
                   : family === profileTransferId ? profileTransferStrategies : (family === orderedReplenishmentId || family === learnOrderedReplenishmentId) ? orderedReplenishmentStrategies
                     : (family === programOriginId || family === learnProgramOriginId) ? programOriginStrategies : family === previewPlacementId ? previewPlacementStrategies
-                      : (family === symbolContributionId || family === learnSymbolContributionId) ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
+                      : family === symbolContributionId ? symbolContributionStrategies : family === markedLatticeId ? markedLatticeStrategies
                         : (family === queuedPlacementId || family === learnQueuedPlacementId) ? queuedPlacementStrategies : (family === legendRecolorId || family === matchExampleId) ? legendRecolorStrategies
                           : family === visualPatternId ? visualPatternStrategies : (family === facetGrowthId || family === learnFacetGrowthId) ? facetGrowthStrategies
                             : (family === chartRouteId || family === learnChartRouteId) ? chartRouteStrategies : family === populationPlacementId ? populationPlacementStrategies
@@ -497,7 +497,7 @@ export function readNativeResolution(agent: {
                                           : family === invitedCaptureId ? invitedCaptureStrategies : family === branchAlignmentId ? branchAlignmentStrategies
                                             : family === feedbackTrialId ? feedbackTrialStrategies
                                             : family === catalogueComparisonId || family === revealedExampleId ? catalogueComparisonStrategies
-                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : (family === framedReceptionId || family === learnFramedReceptionId) ? framedReceptionStrategies : (family === windowRelationId || family === learnWindowRelationId) ? windowRelationStrategies : (family === animationContactId || family === learnAnimationContactId) ? animationContactStrategies : (family === reflectedPlacementId || family === coordinateObservedMotionId) ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId || family === orientedDeliveryId || family === indicatedJumpId || family === highlightedRouteId || family === pairedPassageId || family === learnPairedPassageId || family === seatedContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId || family === markedGaugeId || family === reactiveTargetId || family === pairedChannelsId || family === pointReachId || family === linkedMidpointId || family === excavateDescentId || family === gatedCascadeId || family === learnCascadeId || family === layeredFitId || family === learnLayeredFitId || family === litRouteId || family === pivotCargoId || family === learnPivotCargoId || family === nestedPassageId || family === learnNestedPassageId || family === translateCoupledPiecesId || family === stagedMarksId || family === moveMaskedPiecesId || family === linkOpeningsId || family === learnLinkOpeningsId || family === reproduceCueId || family === learnAnimatedCueId || family === navigateRevealedGridId || family === arrangeTurnPostsId || family === learnTurnPostsId || family === learnSupportMovesId || family === learnScopeEffectsId ? inventoryAccessStrategies : family === learnCorrespondenceId ? learnCorrespondenceStrategies : null;
+                                              : family === receptionAccessId ? receptionAccessStrategies : family === markerCoverageId ? markerCoverageStrategies : (family === framedReceptionId || family === learnFramedReceptionId) ? framedReceptionStrategies : family === windowRelationId ? windowRelationStrategies : (family === animationContactId || family === learnAnimationContactId) ? animationContactStrategies : (family === reflectedPlacementId || family === coordinateObservedMotionId) ? reflectedPlacementStrategies : family === materialAssemblyId ? materialAssemblyStrategies : family === coupledMotionId ? coupledMotionStrategies : family === materialRouteId ? materialRouteStrategies : family === inventoryAccessId || family === replayAccessId || family === orientedDeliveryId || family === indicatedJumpId || family === highlightedRouteId || family === pairedPassageId || family === learnPairedPassageId || family === seatedContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId || family === markedGaugeId || family === reactiveTargetId || family === pairedChannelsId || family === pointReachId || family === linkedMidpointId || family === excavateDescentId || family === gatedCascadeId || family === learnCascadeId || family === layeredFitId || family === learnLayeredFitId || family === litRouteId || family === pivotCargoId || family === learnPivotCargoId || family === nestedPassageId || family === learnNestedPassageId || family === translateCoupledPiecesId || family === stagedMarksId || family === moveMaskedPiecesId || family === linkOpeningsId || family === learnLinkOpeningsId || family === reproduceCueId || family === learnAnimatedCueId || family === navigateRevealedGridId || family === arrangeTurnPostsId || family === learnTurnPostsId || family === learnSupportMovesId || family === learnScopeEffectsId ? inventoryAccessStrategies : family === learnCorrespondenceId ? learnCorrespondenceStrategies : null;
   const card = planReceipt?.authority === 'sicOnly' && labels ? record(proposal?.sicSituationCard) : null;
   const isSituationStrategy = (id: unknown): id is keyof typeof situationStrategies =>
     typeof id === 'string' && !!labels && Object.hasOwn(labels, id);
@@ -643,7 +643,7 @@ export function readNativeResolution(agent: {
     if (piece) subjects.push({ label: 'Movable piece', box: piece });
     if (target) subjects.push({ label: 'Place in the partition', box: target });
   }
-  if (situationCard && (family === symbolContributionId || family === learnSymbolContributionId)) {
+  if (situationCard && family === symbolContributionId) {
     const guide = bounds(card?.guide);
     if (guide) subjects.push({ label: 'Indicated symbol or operand', box: guide });
   }
@@ -1005,7 +1005,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && (family === windowRelationId || family === learnWindowRelationId)) {
+  if (situationCard && family === windowRelationId) {
     const cell = bounds(card?.cell);
     if (cell) subjects.push({ label: 'Cell that disagrees with the examples', box: cell });
     if (Array.isArray(card?.references)) for (const reference of card.references) {

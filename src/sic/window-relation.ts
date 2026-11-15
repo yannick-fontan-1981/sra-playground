@@ -4,25 +4,14 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
-export const windowRelationId = 'sic_window_relation';
-export const learnWindowRelationId = 'sic_reconcile_observed_fields';
+export const windowRelationId = 'sic_reconcile_observed_fields';
 export const windowRelationStrategies = {
   P02: navigationPrimitives.P02,
   P05: navigationPrimitives.P05,
   test_inconsistent_cell: 'Test a cell that disagrees with the examples',
   apply_observed_cell_rewrite: 'Apply a change already seen on comparable cells',
 } as const;
-
-const graph = compileStrategyGraph({
-  id: 'reconcile_repeated_window_examples', version: 1, order: 'FALLBACK',
-  priorities: ['apply_observed_cell_rewrite', 'test_inconsistent_cell'],
-  strategies: {
-    apply_observed_cell_rewrite: [{ fact: 'learned', expected: true, label: 'At least two cells show the same change, which would make this cell agree with the examples' }],
-    test_inconsistent_cell: [{ fact: 'probe', expected: true, label: 'Repeated windows imply the same constraint at a visible cell, whose response is still uncertain' }],
-  },
-}, ['learned', 'probe']);
 
 type Rule = Parameters<typeof fieldConstraints>[1];
 type State = { epoch: number; rule: Rule; size: NativePoint; pitch: NativePoint; rejected: string[];
@@ -42,14 +31,13 @@ function constraintSignature(table: ReadonlyMap<string, Constraint>): string {
   return JSON.stringify([...table].sort(([a], [b]) => pointOrder(point(a), point(b))).map(([p, c]) => [p, [...c.eq].sort(), [...c.ne].sort()]));
 }
 
-export function createSicWindowRelation(family = windowRelationId): NativeFamily<Proposal> {
-  const learns = family === learnWindowRelationId;
+export function createSicWindowRelation(): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: family,
+    id: windowRelationId,
     async attachPrograms(registry) {
-      if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+      decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
@@ -85,18 +73,12 @@ export function createSicWindowRelation(family = windowRelationId): NativeFamily
       const evidence: [string, ...string[]] = [ref, ...new Set([local.firstRef, ...local.evidence].filter(value => value !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const facts = { repeatSupportedInteraction: !!learned, probeNeededInteraction: !!probe, mode };
-      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
-      const agenda = learns ? null : resolveStrategyGraph({
-        graph, mode: 'active',
-        facts: { learned: { value: !!learned, evidence }, probe: { value: !!probe, evidence } },
-        planners: { apply_observed_cell_rewrite: () => learned ?? null, test_inconsistent_cell: () => probe ?? null },
-      });
-      const choice = decision?.result;
-      const cell = learns ? choice === 'P02' ? learned : choice === 'P05' ? probe : null : agenda?.selected?.plan;
-      const strategy = learns ? choice === 'P02' || choice === 'P05' ? choice : null : agenda?.selected?.id;
-      if (!cell || !strategy) return null;
-      const measured = cell.expected !== null;
-      const label = measured ? windowRelationStrategies.apply_observed_cell_rewrite : windowRelationStrategies.test_inconsistent_cell;
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      if (decision?.result !== 'P02' && decision?.result !== 'P05') return null;
+      const strategy = decision.result;
+      const cell = strategy === 'P02' ? learned : probe;
+      if (!cell) return null;
+      const label = strategy === 'P02' ? windowRelationStrategies.apply_observed_cell_rewrite : windowRelationStrategies.test_inconsistent_cell;
       const parent = 'G_official_completion';
       const [left, top] = cell.box;
       const x = left + Math.floor(w / 2), y = top + Math.floor(h / 2);
@@ -108,13 +90,12 @@ export function createSicWindowRelation(family = windowRelationId): NativeFamily
         satisfactionContract: 'official_progress_after_reconciling_local_constraints' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'window-relation:' + need.id;
-      return { status: 'proposed', kind: family, actions, local, cell, field: fieldBox, needId: need.id,
+      return { status: 'proposed', kind: windowRelationId, actions, local, cell, field: fieldBox, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, point_binding: pointBinding, expected_after: cell.expected }],
-        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
-          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
-        sicSituationCard: { strategy, need: 'Make the field agree with its repeated examples', situation: label, evidence, agenda: agenda?.entries ?? [],
-          mode: learns ? mode : measured ? 'assimilation' : 'exploration', cell: cell.box,
-          ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+        sicSituationCard: { strategy, need: 'Make the field agree with its repeated examples', situation: label, evidence, agenda: [],
+          mode, cell: cell.box, triggerCard: decision.receipt.workflow,
           references: cell.sourcePoints.map(position => cellBox(position, field.size)) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],

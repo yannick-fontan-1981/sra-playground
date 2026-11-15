@@ -5,11 +5,9 @@ import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, N
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { chooseVisibleInstruction, visibleInstructionModule, visibleInstructionRules, type VisibleInstruction } from './visible-instruction-card.ts';
 
-export const symbolContributionId = 'sic_symbol_contribution';
-export const learnSymbolContributionId = 'sic_follow_and_verify_visible_instruction';
+export const symbolContributionId = 'sic_follow_and_verify_visible_instruction';
 export const symbolContributionStrategies = {
   P02: navigationPrimitives.P02,
   P05: navigationPrimitives.P05,
@@ -18,16 +16,6 @@ export const symbolContributionStrategies = {
   apply_indicated_transformation: 'Test the indicated operation on the loaded operands',
   deliver_matching_symbol: 'Test delivering the selected symbol to the matching request',
 } as const;
-const graph = compileStrategyGraph({ id: 'fill_displayed_symbol_requests', version: 1, order: 'FALLBACK',
-  priorities: ['deliver_matching_symbol', 'apply_indicated_transformation', 'load_indicated_operand', 'select_indicated_symbol'],
-  strategies: {
-    select_indicated_symbol: [{ fact: 'selectable', expected: true, label: 'The guide surrounds one solid symbol of the size shown in the diagrams' }],
-    load_indicated_operand: [{ fact: 'operand', expected: true, label: 'A selected symbol and an indicated operand position are both visible' }],
-    apply_indicated_transformation: [{ fact: 'operation', expected: true, label: 'The operand pair matches a displayed diagram and the guide points to its operation' }],
-    deliver_matching_symbol: [{ fact: 'request', expected: true, label: 'The outlined request has the same appearance as the selected symbol' }],
-  },
-}, ['selectable', 'operand', 'operation', 'request']);
-
 type State = { epoch: number; count: number; evidence: string[]; appearance: number | null; stopped: boolean; confirmed?: VisibleInstruction[] };
 type Proposal = NativeProposal & { strategy: VisibleInstruction; guide: NativeBox; appearance: number; needId: string };
 const empty = (epoch = 0): State => ({ epoch, count: 0, evidence: [], appearance: null, stopped: false });
@@ -57,15 +45,13 @@ function isInstruction(value: unknown): value is VisibleInstruction {
   return typeof value === 'string' && Object.hasOwn(visibleInstructionRules, value);
 }
 
-export function createSicSymbolContribution(family = symbolContributionId): NativeFamily<Proposal> {
-  const learns = family === learnSymbolContributionId;
+export function createSicSymbolContribution(): NativeFamily<Proposal> {
   let state = empty();
   let chooseInstruction: NativeProgramHandle | undefined;
   let choosePrimitive: NativeProgramHandle | undefined;
   return {
-    id: family,
+    id: symbolContributionId,
     async attachPrograms(registry) {
-      if (!learns) return;
       chooseInstruction = await registry.registerProgram(chooseVisibleInstruction, {}, await visibleInstructionModule());
       choosePrimitive = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
     },
@@ -87,41 +73,34 @@ export function createSicSymbolContribution(family = symbolContributionId): Nati
         operation: facts.diagram_point_branch_value_square_count === 1 && facts.diagram_equal_pair_matches_left_group_count === 1,
         request: facts.diagram_point_hollow_matches_tight_value_count === 1,
       };
-      const agenda = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
-        selectable: { value: situation.selectable, evidence }, operand: { value: situation.operand, evidence },
-        operation: { value: situation.operation, evidence }, request: { value: situation.request, evidence },
-      }, planners: { select_indicated_symbol: () => command, load_indicated_operand: () => command,
-        apply_indicated_transformation: () => command, deliver_matching_symbol: () => command } });
       const mode = execution?.reasoningMode ?? 'exploration';
-      const instruction = learns ? await chooseInstruction?.run({ situation }, { signal: execution?.signal }) : null;
-      const strategy = learns ? instruction?.result : agenda?.selected?.id;
+      const instruction = await chooseInstruction?.run({ situation }, { signal: execution?.signal });
+      const strategy = instruction?.result;
       if (!isInstruction(strategy) || !situation[visibleInstructionRules[strategy]]) return null;
       const repeated = local.confirmed?.includes(strategy) ?? false;
       const primitiveSituation = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
       const primitive = repeated ? 'P02' : 'P05';
-      const decision = learns ? await choosePrimitive?.run({ situation: primitiveSituation }, { signal: execution?.signal }) : null;
-      if (learns && decision?.result !== primitive) return null;
-      const selectedStrategy = learns ? primitive : strategy;
+      const decision = await choosePrimitive?.run({ situation: primitiveSituation }, { signal: execution?.signal });
+      if (!instruction || decision?.result !== primitive) return null;
       const label = symbolContributionStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'satisfy_visible_symbol_requests', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['visible_symbol_diagram_and_request'], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_symbol_delivery' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `symbol-contribution:${need.id}`, actions = [command];
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
-      if (learns && !binding) return null;
-      return { status: 'proposed', kind: family, strategy, guide: frameBox(guide), appearance: guide.outer_value,
+      if (!binding) return null;
+      return { status: 'proposed', kind: symbolContributionId, strategy, guide: frameBox(guide), appearance: guide.outer_value,
         actions, needId: need.id, steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        ...(decision && instruction ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: { ...primitiveSituation, instruction: strategy, instructionWorkflow: instruction.receipt.workflow,
-            instructionHash: instruction.receipt.src_hash, instructionEdited: 'edited' in instruction.receipt && instruction.receipt.edited === true } } } : {}),
-        sicSituationCard: { strategy: selectedStrategy, need: 'Use the visible diagram to fill the symbol requests',
-          mode: learns ? mode : 'exploration', situation: label, agenda: agenda?.entries ?? [], evidence, guide: frameBox(guide),
-          ...(instruction ? { triggerCard: instruction.receipt.workflow } : {}) },
+            instructionHash: instruction.receipt.src_hash, instructionEdited: 'edited' in instruction.receipt && instruction.receipt.edited === true } },
+        sicSituationCard: { strategy: primitive, need: 'Use the visible diagram to fill the symbol requests',
+          mode, situation: label, agenda: [], evidence, guide: frameBox(guide), triggerCard: instruction.receipt.workflow },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
-        sicLocalDecision: { strategy: selectedStrategy, objective: { id, label, parent }, need },
+        sicLocalDecision: { strategy: primitive, objective: { id, label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
@@ -139,7 +118,7 @@ export function createSicSymbolContribution(family = symbolContributionId): Nati
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = state.epoch === before.level_epoch ? state : empty(before.level_epoch);
       const matched = observed(proposal, first, second);
-      const confirmed = learns && matched ? [...new Set([...(local.confirmed ?? []), proposal.strategy])] : local.confirmed;
+      const confirmed = matched ? [...new Set([...(local.confirmed ?? []), proposal.strategy])] : local.confirmed;
       state = { ...local, count: local.count + 1, stopped: !matched, ...(confirmed ? { confirmed } : {}),
         appearance: proposal.appearance, evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };

@@ -485,3 +485,9 @@ Chacune des animations des cinq premiers clics exploratoires modifie temporairem
 Avec `sic_paired_passage` retirée, **PORT gagne en 17 commandes SIC seul**. Le premier essai de la famille d’accès est bloqué. Le deuxième déplace la pièce d’une maille. Le fournisseur vérifie le départ, la nouvelle position et la direction utilisée. La carte SRC choisit 13 déplacements P07, un premier franchissement P05 et un second sous P02. Les positions d’arrivée et les repères éloignés permettent de vérifier les passages.
 
 Après l’essai bloqué, les 16 commandes et les résumés des retours correspondent au rejeu de référence. Le nom neutre et la palette permutée conservent le gain. Désactiver P07 après le premier déplacement confirmé laisse le niveau ouvert après 17 commandes. Empreinte après retrait `7f00821450d8c56c8a8a80fa6cccfada84814c3347fe8cb6e732a05b41427978`.
+
+### Utiliser les cartes en configuration normale sur CRAF et FT09
+
+Le runtime retire `sic_symbol_contribution` et `sic_window_relation` de ses groupes. Sur CRAF, les cartes SRC choisissent le rôle de la commande et la primitive à chaque retour. Sur FT09, la carte choisit la case à tester ou la réécriture à réutiliser. Les deux niveaux conservent leurs commandes et retours de référence, en neuf commandes pour CRAF et quatre pour FT09. Le comparateur vérifie l’absence des deux anciens sélecteurs et la présence des fournisseurs de mesure actifs.
+
+En configuration normale, désactiver la règle de sélection à la troisième décision sur CRAF ou désactiver P02 après les deux premiers clics sur FT09 redonne la main à l’exploration. Les niveaux restent ouverts après neuf commandes chacun. Les diagrammes, les fenêtres et les effets des clics restent mesurés par les fournisseurs TypeScript.
