@@ -1023,9 +1023,12 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
-    if (Array.isArray(card?.slots)) for (const candidate of card.slots) {
-      const box = bounds(candidate);
-      if (box) subjects.push({ label: 'Replay slot', box });
+    for (const [field, label] of [['slots', 'Replay slot'], ['replayActors', 'Piece replaying a recorded route'],
+      ['replaySupports', 'Region linked to a recorded contact']] as const) {
+      if (Array.isArray(card?.[field])) for (const candidate of card[field]) {
+        const box = bounds(candidate);
+        if (box) subjects.push({ label, box });
+      }
     }
   }
   if (situationCard && (family === inventoryAccessId || family === verifyInventoryTransferId)) {

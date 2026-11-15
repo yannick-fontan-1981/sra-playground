@@ -1,8 +1,10 @@
 import { linkedNodes, linkedOpenEnclosures, linkedPhaseSlots } from '../logos-engine/v6-linked-temporal-contact.ts';
 import { temporalPatch } from '../logos-engine/v6-linked-temporal-common.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { beginRecording, chooseRecording, observeRecording, openSupports, recordingActor, replaySprites,
+  type Recording, type RecordingChoice } from './recorded-replay-access.ts';
 
 export const replayAccessId = 'sic_replay_access';
 export const verifyRemoteReplayId = 'sic_verify_remote_replay';
@@ -14,8 +16,11 @@ type Scene = { body: Body; goal: NativePoint; nodes: Node[]; slots: NativeBox[] 
 type Changed = { pixel: NativePoint; before: number; after: number };
 type State = { epoch: number; scene: Scene; controls: Record<string, NativePoint>; tried: string[]; samples: NativePoint[];
   node: Node | null; entered: Changed[]; restored: boolean; reversible: boolean; replay: string | null; ticks: number;
-  evidence: string[]; count: number; stopped: boolean };
+  evidence: string[]; count: number; stopped: boolean; phaseEvidence?: string; controlEvidence?: Record<string, string> };
 type Proposal = NativeProposal & { local: State; from: NativePoint; to: NativePoint | null; intention: 'move' | 'probe' | 'replay'; needId: string };
+type RecordedProposal = NativeProposal & { recordingChoice: RecordingChoice; needId: string };
+type ReplayProposal = Proposal | RecordedProposal;
+const isRecorded = (proposal: ReplayProposal): proposal is RecordedProposal => Object.hasOwn(proposal, 'recordingChoice');
 const controls = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5'];
 const equal = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const add = ([x, y]: NativePoint, [dx, dy]: NativePoint): NativePoint => [x + dx, y + dy];
@@ -40,10 +45,12 @@ function sceneAtStart(observation: NativeObservation, rows: NativeRows): Scene |
       const nodes = linkedNodes(observation, body, quantum) as Node[];
       if (!nodes.length) continue;
       const slots = linkedPhaseSlots(observation, body, true) as NativeBox[] | null;
-      if (slots && slots.length === 2) scenes.push({ body, goal: goals[0]!, nodes, slots });
+      if (slots && slots.length >= 2 && slots.length <= 4) scenes.push({ body, goal: goals[0]!, nodes, slots });
     }
   }
-  return scenes.length === 1 ? scenes[0]! : null;
+  const single = scenes.filter(scene => scene.slots.length === 2);
+  const candidates = single.length ? single : scenes;
+  return candidates.length === 1 ? candidates[0]! : null;
 }
 
 function actorPosition(observation: NativeObservation, scene: Scene): NativePoint | null {
@@ -74,20 +81,75 @@ function peerBounds(points: readonly NativePoint[]): NativeBox | null {
   return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
 }
 
-export function createSicVerifyRemoteReplay(): NativeFamily<Proposal> {
+async function proposeRecording(observation: NativeObservation, rows: NativeRows, current: Recording,
+  decide: NativeProgramHandle, execution: NativeExecution | undefined): Promise<RecordedProposal | null> {
+  const choice = chooseRecording(observation, rows, current);
+  const from = recordingActor(observation, current.scene);
+  if (!choice || !from || !observation.available_action_refs.includes(choice.command.action_ref)) return null;
+  const { recording, destination } = choice, { scene } = recording;
+  const ref = observation.observation_ref, mode = execution?.reasoningMode ?? 'exploration';
+  const knownInteraction = choice.intent === 'commit';
+  const facts = { routeSupported: !knownInteraction, eligibleProbe: false, knownInteraction, mode };
+  const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
+  const strategy = knownInteraction ? 'P02' : 'P07';
+  if (decision.result !== strategy) return null;
+  const situation = knownInteraction ? 'Record the measured route that opened the passage'
+    : recording.node ? 'Reach another contact while checking the replayed paths'
+      : 'Reach the receiver while the recorded contacts keep the passages open';
+  const evidence: [string, ...string[]] = [ref, ...new Set([...recording.paths.flatMap(item => item.evidence), ...recording.evidence]
+    .filter(item => item !== ref))];
+  const parent = 'G_official_completion';
+  const objective = { kind: 'coordinate_recorded_contributions_to_access_receiver', scope: ref.split(':revision:', 1)[0]!,
+    subjects: ['carrier', 'recorded_contributions', 'open_receiver'], parentObjective: parent,
+    satisfactionContract: 'official_progress_after_coordinated_replayed_contacts' };
+  const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+  const id = 'recorded-replay:' + need.id, actions = [choice.command];
+  return {
+    status: 'proposed', kind: verifyRemoteReplayId, actions, needId: need.id, recordingChoice: choice,
+    binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action: choice.command, expected_after: choice.expected }],
+    sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
+      edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+    sicSituationCard: { strategy, need: 'Keep the recorded contacts active while reaching the receiver', situation, evidence, agenda: [],
+      mode, triggerCard: chooseLanding, actor: box(from, scene.body.size), target: box(destination, scene.body.size),
+      remote: peerBounds(recording.node?.peer_support ?? []), slots: scene.slots,
+      replayActors: replaySprites(observation, recording), replaySupports: openSupports(recording) },
+    question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+    sicLocalDecision: { strategy, objective: { id, label: situation, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation, preconditions: {},
+      preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
+  };
+}
+
+export function createSicVerifyRemoteReplay(): NativeFamily<ReplayProposal> {
   let state: State | null = null;
+  let recording: Recording | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyRemoteReplayId,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
-    async propose(observation, rows, _inputs, remaining, execution) {
+    async propose(observation, rows, _inputs, remaining, execution): Promise<ReplayProposal | null> {
       if (remaining < 1 || !controls.every(control => observation.available_action_refs.includes(control)) || observation.available_action_refs.includes('ACTION6')) return null;
-      const previous = state?.epoch === observation.level_epoch ? state : null;
+      const epoch = observation.level_epoch;
+      const previous = state?.epoch === epoch ? state : null;
       if (previous?.stopped || (previous?.count ?? 0) >= 72) return null;
+      const running = recording?.epoch === epoch ? recording : null;
+      if (running) return decide ? proposeRecording(observation, rows, running, decide, execution) : null;
       const scene = previous?.scene ?? sceneAtStart(observation, rows);
       if (!scene) return null;
+      if (scene.slots.length > 2) {
+        let current: Recording | null = null;
+        if (recording?.epoch === epoch - 1 && !recording.stopped) {
+          current = beginRecording(scene, epoch, recording.vectors, recording.phase, recording.evidence);
+        } else if (state?.epoch === epoch - 1 && state.replay && !state.stopped && state.scene.body.quantum === scene.body.quantum) {
+          const evidence = [state.phaseEvidence, ...Object.values(state.controlEvidence ?? {}), ...state.evidence]
+            .filter((ref): ref is string => !!ref);
+          current = beginRecording(scene, epoch, state.controls, state.replay, [...new Set(evidence)]);
+        }
+        return current && decide ? proposeRecording(observation, rows, current, decide, execution) : null;
+      }
       const from = actorPosition(observation, scene);
       if (!from) return null;
       const local: State = previous ?? { epoch: observation.level_epoch, scene, controls: {}, tried: [], samples: [from],
@@ -179,6 +241,10 @@ export function createSicVerifyRemoteReplay(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isRecorded(proposal)) {
+        const confirmed = !!observeRecording(proposal.recordingChoice, after, _first, second);
+        return { matched: confirmed, seal_prefix: true, reason: confirmed ? 'recorded_contribution_reconciled' : 'recorded_replay_prediction_changed' };
+      }
       const { scene, node } = proposal.local, position = actorPosition(after, scene);
       const openFloor = proposal.to && temporalPatch(second, proposal.from, scene.body.size).every(row => row.every(pixel => pixel === scene.body.floor));
       const matched = proposal.to && (!node || !equal(proposal.to, node.position)) && openFloor ? !!position && equal(position, proposal.to) : null;
@@ -186,6 +252,11 @@ export function createSicVerifyRemoteReplay(): NativeFamily<Proposal> {
     },
     record(before, after, command, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (isRecorded(proposal)) {
+        recording = observeRecording(proposal.recordingChoice, after, first, second) ??
+          { ...proposal.recordingChoice.recording, stopped: true };
+        return { events: [] };
+      }
       const { local, from, intention } = proposal, scene = local.scene;
       const position = actorPosition(after, scene);
       const next: State = { ...local, count: local.count + 1, stopped: !position, tried: [...local.tried, positionKey(from) + ':' + command.action_ref],
@@ -194,10 +265,12 @@ export function createSicVerifyRemoteReplay(): NativeFamily<Proposal> {
       if (intention === 'replay') {
         next.replay = command.action_ref;
         next.stopped = !equal(position, scene.body.start) || equal(position, from);
+        if (!next.stopped) next.phaseEvidence = after.observation_ref;
       } else {
         const delta = minus(position, from), moved = delta.some(Boolean);
         if (Math.abs(delta[0]) + Math.abs(delta[1]) === scene.body.quantum && (!delta[0] || !delta[1])) {
           next.controls = { ...local.controls, [command.action_ref]: delta };
+          next.controlEvidence = { ...local.controlEvidence, [command.action_ref]: after.observation_ref };
         }
         if (local.replay) {
           next.ticks = local.ticks + Number(moved);
@@ -227,7 +300,10 @@ export function createSicVerifyRemoteReplay(): NativeFamily<Proposal> {
       state = next;
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, ...(recording ? { recording } : {}) }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      recording = structuredClone(value.recording as Recording | undefined) ?? null;
+    },
   };
 }
