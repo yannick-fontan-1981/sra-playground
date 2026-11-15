@@ -873,6 +873,12 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box && !subjects.some(subject => subject.box.every((value, i) => value === box[i]))) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.rayPieces)) for (const item of card.rayPieces) {
+      const box = bounds(item);
+      if (box && !subjects.some(subject => subject.box.every((value, i) => value === box[i]))) {
+        subjects.push({ label: 'Distinct rank used in the route', box });
+      }
+    }
   }
   if (situationCard && (family === radialConnectionId || family === learnRadialConnectionId)) {
     const tile = bounds(card?.tile);
