@@ -13,8 +13,12 @@ export const crossingRowsStrategies = {
   extend_measured_prefix: 'Extend the selected row or column with a measured command',
 } as const;
 type State = { epoch: number; layout: CrossedPrefixLayout; progress: Record<string, number>; selected: string | null;
-  commands: Record<string, string>; axisCommands: [string[], string[]]; crossed: boolean; tried: string[]; stopped: boolean; evidence: string[] };
-type Choice = { controller: CrossedPrefixController; action: NativeCommand; cell: NativePoint; selecting: boolean; crossing: boolean };
+  commands: Record<string, string>; axisCommands: [string[], string[]]; crossed: boolean; tried: string[]; stopped: boolean; evidence: string[];
+  pairs?: CrossingPair[]; transferred?: boolean };
+type CrossingPair = { commands: [string, string]; owner: 0 | 1; proof: string };
+type Acquired = { axes: [string[], string[]]; pairs: CrossingPair[]; layout: CrossedPrefixLayout };
+type Choice = { controller: CrossedPrefixController; action: NativeCommand; cell: NativePoint; selecting: boolean; crossing: boolean;
+  interaction?: { peer: CrossedPrefixController; input: string; expected: number } };
 type Proposal = NativeProposal & { local: State; choice: Choice; attempt: string; needId: string };
 const key = (value: unknown) => JSON.stringify(value);
 const equal = (a: unknown, b: unknown) => key(a) === key(b);
@@ -23,14 +27,18 @@ const painted = (rows: NativeRows, layout: CrossedPrefixLayout, cell: NativePoin
   return pixels[Math.floor(pixels.length / 2)]?.[Math.floor((pixels[0]?.length ?? 0) / 2)];
 };
 
-function initial(epoch: number, rows: NativeRows): State | null {
+function initial(epoch: number, rows: NativeRows, acquired: Acquired | null): State | null {
   const layout = crossedPrefixGeometry(rows);
   if (!layout || layout.controllers.length > 16 || layout.shape[0] * layout.shape[1] > 64) return null;
   const palette = new Set(layout.reference.palette);
   if (layout.reference.values.some((row, y) => row.some((_, x) => crossedPrefixSlot(rows, layout, [x, y])
     .some(line => line.some(color => palette.has(color)))))) return null;
+  const analogous = acquired && equal(layout.reference.scale, acquired.layout.reference.scale)
+    && equal(layout.size, acquired.layout.size) && equal(layout.pitch, acquired.layout.pitch)
+    && layout.controllers.every(control => acquired.layout.controllers.some(previous => previous.axis === control.axis && previous.side === control.side));
   return { epoch, layout, progress: Object.fromEntries(layout.controllers.map(control => [control.key, 0])), selected: null,
-    commands: {}, axisCommands: [[], []], crossed: false, tried: [], stopped: false, evidence: [] };
+    commands: {}, axisCommands: analogous ? acquired.axes : [[], []], crossed: false, tried: [], stopped: false, evidence: [],
+    ...(analogous ? { pairs: acquired.pairs, transferred: true } : {}) };
 }
 
 function returnAssessment(proposal: Proposal, first: NativeRows, second: NativeRows) {
@@ -40,11 +48,19 @@ function returnAssessment(proposal: Proposal, first: NativeRows, second: NativeR
   const before = crossedPrefixSlot(first, layout, choice.cell), after = crossedPrefixSlot(second, layout, choice.cell);
   if (equal(before, after)) return equal(first, second) ? 'unchanged' : 'refuted';
   const [x, y] = choice.cell, expected = choice.crossing ? layout.reference.values[y]![x] : choice.controller.color;
+  if (local.transferred && painted(second, layout, choice.cell) === painted(first, layout, choice.cell)) {
+    const nextIndex = (local.progress[choice.controller.key] ?? 0) + 1;
+    const next = nextIndex < choice.controller.length ? crossedPrefixCell(choice.controller, nextIndex) : null;
+    // The control can change a border while the cursor stays on the same cell.
+    if ((!next || equal(crossedPrefixSlot(first, layout, next), crossedPrefixSlot(second, layout, next)))
+      && !layout.reference.palette.includes(painted(second, layout, choice.cell)!)) return 'unchanged';
+  }
   return painted(second, layout, choice.cell) === expected ? 'advanced' : 'refuted';
 }
 
 export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let acquired: Acquired | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyCrossingRowsId,
@@ -53,7 +69,7 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const local = state?.epoch === observation.level_epoch ? state : initial(observation.level_epoch, rows);
+      const local = state?.epoch === observation.level_epoch ? state : initial(observation.level_epoch, rows, acquired);
       if (!local || local.stopped || local.tried.length >= 80 || !crossedPrefixReferencePresent(rows, local.layout)) return null;
       const { layout } = local, controls = crossedPrefixMeasureControls(rows, layout);
       if (!controls) return null;
@@ -63,7 +79,7 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
         value !== byLane(horizontal, y)?.color && value !== byLane(vertical, x)?.color))) return null;
       const progress = (controller: CrossedPrefixController) => local.progress[controller.key] ?? 0;
       let controller: CrossedPrefixController | undefined;
-      if (!local.crossed) {
+      if (!local.crossed && !local.transferred) {
         const anchors = layout.reference.values.flatMap((row, y) => row.flatMap((_, x) => {
           const h = byLane(horizontal, y), v = byLane(vertical, x);
           return h.color !== v.color ? [{ x, y, h, v }] : [];
@@ -86,14 +102,27 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
       const tested = (action: NativeCommand) => local.tried.includes(key([controller.key, index, priorCommand ?? null, action]));
       const learned = local.axisCommands[controller.axis], opposite = local.axisCommands[1 - controller.axis]!;
       const available = observation.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action));
-      const ordered = [...new Set([...learned, ...available.filter(action => !opposite.includes(action)), ...available])];
+      const expected = layout.reference.values[y]![x]!;
+      const pairMatches = (pair: CrossingPair) => priorCommand === undefined || pair.commands[1 - controller.axis] === priorCommand;
+      const matchingOwner = (pair: CrossingPair) => (pair.owner === controller.axis ? controller.color : peer.color) === expected;
+      const applicable = local.transferred ? (local.pairs ?? []).filter(pairMatches) : [];
+      const preferred = applicable.filter(matchingOwner).map(pair => pair.commands[controller.axis]);
+      const contrary = new Set(applicable.filter(pair => !matchingOwner(pair)).map(pair => pair.commands[controller.axis]));
+      const newCommands = available.filter(action => !opposite.includes(action)
+        && (!local.transferred || !learned.includes(action)));
+      const ordered = [...new Set(local.transferred
+        ? [...preferred, ...newCommands, ...learned.filter(action => !contrary.has(action)), ...available.filter(action => !contrary.has(action))]
+        : [...learned, ...newCommands, ...available])];
       const plain = ordered.filter(action => available.includes(action)).map(action_ref => ({ action_ref, data: {} }))
         .find(action => !tested(action));
       const point = controller.point;
       const action = selecting ? { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } } : plain;
       if (!action || tested(action)) return null;
-      const measured = !selecting && learned.includes(action.action_ref) && (!crossing || local.crossed);
-      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+      const measured = !selecting && learned.includes(action.action_ref)
+        && (local.transferred ? preferred.includes(action.action_ref) : !crossing || local.crossed);
+      const selectedPair = applicable.find(pair => matchingOwner(pair) && pair.commands[controller.axis] === action.action_ref);
+      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref,
+        ...new Set([...local.evidence, ...(selectedPair ? [selectedPair.proof] : [])].filter(value => value !== ref))];
       const mode = execution?.reasoningMode ?? (measured ? 'solving' : 'exploration');
       const facts = { routeSupported: measured, eligibleProbe: !measured, knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
@@ -110,7 +139,8 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
       const target: NativeBox = [left, top, left + layout.size[0] - 1, top + layout.size[1] - 1];
       const { origin: [rx, ry], scale: [sx, sy] } = layout.reference;
       const reference: NativeBox = [rx, ry, rx + sx * layout.shape[0] - 1, ry + sy * layout.shape[1] - 1];
-      return { status: 'proposed', kind: verifyCrossingRowsId, actions, local, choice: { controller, action, cell, selecting, crossing },
+      return { status: 'proposed', kind: verifyCrossingRowsId, actions, local, choice: { controller, action, cell, selecting, crossing,
+        ...(priorCommand === undefined ? {} : { interaction: { peer, input: priorCommand, expected } }) },
         attempt: key([controller.key, index, priorCommand ?? null, action]), needId: need.id,
         steps: [{ action, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
@@ -137,22 +167,36 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
       return { matched: result === 'selection' ? null : result === 'advanced', seal_prefix: true, reason: `prefix_${result}` };
     },
     record(before, after, issued, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, choice } = proposal, { controller } = choice;
+      if (after.levels_completed > before.levels_completed) {
+        if (local.pairs?.length) acquired = { axes: local.axisCommands, pairs: local.pairs, layout: local.layout };
+        return { events: [] };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const result = returnAssessment(proposal, first, second), progress = { ...local.progress }, commands = { ...local.commands };
       const axisCommands: [string[], string[]] = [[...local.axisCommands[0]], [...local.axisCommands[1]]];
+      let pairs = local.pairs ?? [];
       if (result === 'advanced') {
         const index = progress[controller.key]!;
         progress[controller.key] = index + 1;
         commands[`${controller.key}:${index}`] = issued.action_ref;
         if (!axisCommands[controller.axis].includes(issued.action_ref)) axisCommands[controller.axis].push(issued.action_ref);
+        const interaction = choice.interaction;
+        if (interaction && controller.color !== interaction.peer.color) {
+          const pair: CrossingPair = { commands: controller.axis === 0 ? [issued.action_ref, interaction.input] : [interaction.input, issued.action_ref],
+            owner: controller.color === interaction.expected ? controller.axis : interaction.peer.axis, proof: after.observation_ref };
+          if (!pairs.some(known => known.owner === pair.owner && equal(known.commands, pair.commands))) pairs = [...pairs, pair];
+        }
       }
       state = { ...local, commands, axisCommands, progress, selected: controller.key, stopped: result === 'refuted',
         crossed: local.crossed || result === 'advanced' && choice.crossing, tried: [...local.tried, proposal.attempt],
-        evidence: [...local.evidence.slice(-4), after.observation_ref] };
+        evidence: [...local.evidence.slice(-4), after.observation_ref], pairs };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, acquired }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      acquired = structuredClone((value.acquired as Acquired | undefined) ?? null);
+    },
   };
 }

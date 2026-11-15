@@ -453,6 +453,10 @@ Sur **CRAF**, SIC apprend les rôles du stock, de l’atelier et du coffre à pa
 
 Le bilan atteint **58/100 niveaux 2** et **175/636 niveaux attestés sous SIC seul** (27,5 %).
 
+Sur **WEAV**, SIC transfère du niveau 1 la première paire de commandes qui donne la priorité à une contribution au croisement. Le niveau 2 demande la couleur de l’autre contribution sur certaines cases. SIC les repère dans le modèle visible, écarte la paire déjà observée pour ces cases et teste les commandes restantes. Il observe la seconde paire, puis réutilise les deux selon le résultat demandé. Le niveau 2 gagne en **28 commandes** et **25,13 s**. Les 27 commandes et retours du niveau 1 sont reproduits. Les 55 commandes relèvent de SIC, avec l’empreinte `f0916bb06a0a2906be540050eba5010aaa768272e0799a36ebb1111c9933bd17`. Le retrait de `sic_verify_crossing_rows` laisse le niveau 1 non résolu après 38 commandes.
+
+Le bilan atteint **59/100 niveaux 2** et **176/636 niveaux attestés sous SIC seul** (27,7 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
