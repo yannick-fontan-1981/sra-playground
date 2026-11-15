@@ -44,6 +44,8 @@ Chaque conclusion porte sur les fonctions explicitement neutralisées. Pour qual
 
 Le premier essai sur `341b6cb1` retrouve le niveau 1 de **DICO** en cinq commandes dans les modes `original` et `family`, avec la même empreinte des commandes et retours. Le mode `planner` laisse le niveau ouvert après 60 commandes. L'exploration publique en fournit 40 et les essais de contrôles linéaires 20. Le niveau 1 de **DNOI** reste également ouvert après 40 commandes, toutes fournies par l'exploration publique. Les fonctions prévues sont neutralisées dans les deux essais. Aucun fournisseur actif n'a tenté de les appeler. Ces deux parcours donnent les premières situations de comparaison pour l'apprentissage des groupes de candidats et des correspondances spatiales.
 
+Sans le modèle de supports ordonnés, **HANO** reste ouvert après 40 commandes. Un fournisseur de réception encadrée en choisit trois et l'exploration publique 37. Ce cas permet de vérifier si une première mesure de sélection donne ensuite un transfert réutilisable dans un autre contexte.
+
 `sic_public_input_exploration` conserve le choix final d’une expérience disponible, le budget et la mémoire des tentatives. Les mesures et producteurs d’offres ont vocation à être réutilisables indépendamment. Le graphe des commandes observées est déjà un module commun. La reconnaissance de marqueurs répétés et la recherche de mouvement après un clic sont encore dans la famille d’exploration. La présence de carrés de marqueurs, l’ordre initial des commandes et l’absence de changement avant un clic portent chacun une hypothèse qui doit être testée sur plusieurs jeux. Une famille distincte est utile lorsqu’elle conserve un modèle vérifiable entre plusieurs décisions, comme des cases découvertes ou une relation entre une commande et un mobile.
 
 La factorisation commence par les contrats récurrents effectivement observés, notamment mesurer un déplacement, vérifier l’objet contrôlé, apprendre un effet de contact, chercher un accès ou distinguer des candidats par un test. Les familles fournissent les observations et les opérations adaptées à leur scène. Les cartes choisissent une primitive selon le besoin, la situation et le mode de réflexion. Une preuve commune doit pouvoir être publiée par plusieurs familles et consommée dans le même format. Le runtime peut ensuite réévaluer la prochaine carte dans l’agenda ou via un workflow SRC. La première extraction utile porte sur la mesure du mouvement avant et après une commande et sa publication sous un format commun, à vérifier sur les retraits KLOT, KA59, LS19 et LS20.
@@ -663,6 +665,8 @@ Les identifiants de pièces dérivés des couleurs modifiaient l’ordre de rech
 
 Sur `d22e317f`, le rejeu des deux niveaux de SK48 reproduit exactement les 56 commandes et retours de référence. Avec palette permutée et nom neutralisé, il gagne aussi les deux niveaux en 56 commandes, avec les mêmes commandes et les mêmes résumés de changements visibles. Les 112 commandes des deux rejeux relèvent du SIC.
 
+Sur `d1ccd630`, les **88/100 retraits gagnants** totalisent 1 030 commandes SIC seul. Les 100 premiers niveaux en configuration normale, les 85 retraits précédents et les quatre jeux complets avec et sans retrait reproduisent les commandes et retours de référence.
+
 ### Couvrir une zone à partir de déplacements confirmés
 
 `sic.follow_observed_landings.choose` choisit P05 pour mesurer une commande encore inconnue, P07 pour poursuivre un trajet soutenu par un déplacement observé et P02 pour répéter une interaction déjà confirmée dans la situation. Les fournisseurs de mesure continuent à comparer l'arrivée visible, la couverture ou l'effet sur le repère après chaque commande. Ils conservent leur calcul de géométrie et de trajet.
@@ -688,3 +692,5 @@ La carte de trajet distingue trois situations. P05 mesure un effet encore incert
 Les quatre essais gagnent le niveau 1 sous SIC seul avec les commandes et retours de référence. La permutation de palette et la neutralisation du nom conservent les mêmes commandes et les résumés des changements visibles. Ces essais isolés complètent les 85 retraits déjà qualifiés et les onze autres cas rejoués sur les versions intermédiaires. La campagne du catalogue entier doit confirmer les résultats sur la même version.
 
 Sur BP35, G50T et TU93, désactiver P07 au premier trajet confirme que la carte change la suite du parcours. Les trois niveaux restent ouverts aux bornes de l'essai. BP35 et TU93 se terminent sur un échec du jeu après 54 et 50 commandes, et G50T atteint le plafond de 55 commandes.
+
+Sur FUIT, désactiver P05 après la première commande rend la main à d'autres fournisseurs. Le niveau reste ouvert après 39 commandes.
