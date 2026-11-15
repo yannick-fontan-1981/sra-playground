@@ -437,6 +437,10 @@ Sur **TN36**, SIC identifie les contrôles du démonstrateur séparé et vérifi
 
 Le bilan atteint **54/100 niveaux 2** et **171/636 niveaux attestés sous SIC seul** (26,9 %).
 
+Sur **TU93**, SIC conserve le gabarit du mobile et les translations mesurées lors de la première victoire. À l'entrée du niveau 2, une seule des deux pièces de même taille possède la signature conservée. Cette correspondance permet de remesurer les connexions sur le plateau courant et de vérifier le déplacement du mobile sélectionné. Le niveau 2 gagne en **14 commandes**, dont quatre sondes de `sic_verify_coupled_route` et dix commandes de `sic_verify_connected_route`. Les 30 commandes et retours du niveau 1 restent identiques. Les 44 commandes sont sous autorité SIC, avec l'empreinte `80a47ed172333c20993b3614c0431518e75ba490c01eaae88593c749090ef433`, également reproduite dans la variante historique où `sic_material_route` est déjà absente. Le retrait de `sic_verify_connected_route` laisse le niveau 1 non résolu.
+
+Le bilan atteint **55/100 niveaux 2** et **172/636 niveaux attestés sous SIC seul** (27,0 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.

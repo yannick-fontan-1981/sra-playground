@@ -15,7 +15,8 @@ export const materialRouteStrategies = {
 type Move = { input: string; delta: AlternatingPosition };
 type Edge = { input: string; from: string; to: string };
 type State = { epoch: number; size: number; histogram: number[][]; samples: Move[]; edges: Edge[];
-  evidence: string[]; lastMoved: string | null; repeat: string | null; count: number; stopped: boolean };
+  evidence: string[]; lastMoved: string | null; repeat: string | null; count: number; stopped: boolean;
+  completed?: { readonly nextEpoch: number; readonly score: number; readonly evidence: string } };
 type Choice = { input: string; to: AlternatingBox | null; ordinary: boolean; floor: number | null };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: AlternatingActor; needId: string };
 const order = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
@@ -71,12 +72,18 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 80) return null;
       const actors = alternatingOverlays(rows);
-      const eligible = prior ? actors.filter(actor => actor.size === prior.size && same(actor.histogram, prior.histogram)) : actors;
+      const matches = (known: State) => actors.filter(actor => actor.size === known.size && same(actor.histogram, known.histogram));
+      const completed = state?.completed;
+      const remembered = state && completed?.nextEpoch === observation.level_epoch && completed.score === observation.levels_completed &&
+        matches(state).length === 1 ? state : null;
+      const known = prior ?? remembered;
+      const eligible = known ? matches(known) : actors;
       if (eligible.length !== 1) return null;
       const actor = eligible[0]!;
-      if (!prior && !hasRepeatedTiles(rows, actor.size)) return null;
+      if (!known && !hasRepeatedTiles(rows, actor.size)) return null;
       const local: State = prior ?? { epoch: observation.level_epoch, size: actor.size, histogram: actor.histogram,
-        samples: [], edges: [], evidence: [], lastMoved: null, repeat: null, count: 0, stopped: false };
+        samples: remembered?.samples ?? [], edges: [], evidence: remembered ? [...remembered.evidence, remembered.completed!.evidence] : [],
+        lastMoved: null, repeat: null, count: 0, stopped: false };
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
       const supported = new Map<string, Map<string, AlternatingPosition>>();
@@ -145,6 +152,10 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: matched === true ? 'observed_tile_displacement' : 'compare_piece_displacement_and_contact' };
     },
     record(before, after, command, first, second, proposal) {
+      if (after.levels_completed > before.levels_completed) {
+        state = { ...proposal.local, completed: { nextEpoch: after.level_epoch, score: after.levels_completed, evidence: after.observation_ref } };
+        return { events: [] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, actor, choice } = proposal;
       const matches = alternatingOverlays(second).filter(next => next.size === actor.size && same(next.histogram, actor.histogram));
