@@ -25,6 +25,7 @@ import { markedCompartmentFlowId, markedCompartmentStrategies } from './marked-c
 import { observedRelayRouteId, observedRelayStrategies } from './observed-relay-route.ts';
 import { observedPrefixQuotasId, observedPrefixQuotaStrategies } from './observed-prefix-quotas.ts';
 import { observedCarrierReductionId, observedCarrierStrategies } from './observed-carrier-reduction.ts';
+import { observedLinePlacementId, observedLineStrategies } from './observed-line-placement.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -506,6 +507,7 @@ export function readNativeResolution(agent: {
     : family === observedRelayRouteId ? observedRelayStrategies
     : family === observedPrefixQuotasId ? observedPrefixQuotaStrategies
     : family === observedCarrierReductionId ? observedCarrierStrategies
+    : family === observedLinePlacementId ? observedLineStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -656,6 +658,10 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+  }
+  if (situationCard && family === observedLinePlacementId) {
+    const target = bounds(card?.target);
+    if (target) subjects.push({ label: 'Cell selected for the next mark', box: target });
   }
   if (situationCard && family === slotTransferId) {
     const source = bounds(card?.source), destination = bounds(card?.destination);
