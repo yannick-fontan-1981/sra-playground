@@ -1,8 +1,11 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeEntity, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeEntity, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { chooseClearanceRoute, clearanceEdge, clearanceMoved, clearanceObserved, clearanceProject, extensionButtonMask,
+  readClearanceLayout, type ClearanceLayout, type ClearanceMove, type ClearanceProjection, type ExtensionWitness } from './extension-clearance.ts';
 
 export const coupledGaugeRouteId = 'sic_route_by_measured_extensions';
 
@@ -47,6 +50,10 @@ type Step = {
   readonly expected: Layout | null;
 };
 type Proposal = NativeProposal & { readonly memory: Memory; readonly step: Step; readonly needId: string };
+type ClearanceMemory = { epoch: number; layout: ClearanceLayout; lengths: number[]; route: ClearanceMove[];
+  blocked: string[]; refs: string[]; lastRef: string; stopped: boolean };
+type ClearanceProposal = NativeProposal & { clearance: ClearanceMemory; expected: ClearanceProjection; move: ClearanceMove; needId: string };
+const isClearance = (proposal: Proposal | ClearanceProposal): proposal is ClearanceProposal => 'clearance' in proposal;
 
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 const sameLayout = (a: Layout, b: Layout) => same(a.marker, b.marker) && a.bodies.length === b.bodies.length &&
@@ -201,17 +208,73 @@ function planStep(memory: Memory): Step | null {
     expected: project(memory.scene.base, memory.measured, movedBy(memory.lengths, move)) };
 }
 
-export function createSicCoupledGaugeRoute(): NativeFamily<Proposal> {
+export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceProposal> {
   let state: Memory | null = null;
+  let clearance: ClearanceMemory | null = null;
+  let witnessed: ExtensionWitness | null = null;
   let decide: NativeProgramHandle | undefined;
+  async function offerClearance(observation: NativeObservation, rows: NativeRows, remaining: number,
+    execution?: NativeExecution): Promise<ClearanceProposal | null> {
+    const { level_epoch: epoch, observation_ref: ref, available_action_refs: actionsAvailable } = observation;
+    if (!decide || witnessed?.epoch !== epoch || remaining < 1 || actionsAvailable.length !== 1 || actionsAvailable[0] !== 'ACTION6') return null;
+    const prior = clearance?.epoch === epoch ? clearance : null;
+    if (prior && (prior.stopped || prior.lastRef !== ref)) return null;
+    const layout = prior?.layout ?? readClearanceLayout(rows, observation.entities, witnessed);
+    if (!layout) return null;
+    const current: ClearanceMemory = prior ?? { epoch, layout, lengths: layout.bodies.map(() => 0), route: [],
+      blocked: [], refs: [], lastRef: ref, stopped: false };
+    const geometry = clearanceProject(layout, current.lengths);
+    if (!clearanceObserved(rows, layout, geometry)) return null;
+    const route = current.route.length ? current.route : await chooseClearanceRoute(layout, current.lengths, current.blocked, remaining, execution);
+    const move = route[0];
+    if (!move) return null;
+    const button = layout.bodies[move.body]!.buttons?.[move.delta === 1 ? 0 : 1];
+    if (!button) return null;
+    const mode = execution?.reasoningMode ?? 'solving', strategy = 'P02';
+    const facts = { repeatSupportedInteraction: true, probeNeededInteraction: false, mode };
+    const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
+    if (decision.result !== strategy) return null;
+    const evidence: [string, ...string[]] = [ref, ...new Set([...witnessed.evidence, ...current.refs].filter(value => value !== ref))];
+    const target = layout.targets.find(target => target.body === move.body);
+    const situation = target ? 'Extend the marked bar along the cleared corridor toward its target'
+      : 'Move the obstructing group so both marked bars can reach their targets';
+    const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, button.point, { reason: situation, evidence });
+    if (!witness) return null;
+    const parent = 'G_official_completion';
+    const objective = { kind: 'clear_corridors_for_marked_extensions', scope: ref.split(':revision:', 1)[0]!,
+      subjects: layout.targets.map(goal => goal.at.join(',')), parentObjective: parent, satisfactionContract: 'official_progress_after_all_markers_align' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = coupledGaugeRouteId + ':' + need.id;
+    const [x, y] = button.point, action = { action_ref: 'ACTION6', data: { x, y } };
+    const expected = clearanceProject(layout, clearanceMoved(current.lengths, move));
+    return { status: 'proposed', kind: coupledGaugeRouteId, clearance: { ...current, route }, expected, move, needId: need.id, actions: [action],
+      binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action, point_binding: witness, expected_after: expected }],
+      sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
+        edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+      sicSituationCard: { strategy, need: 'Free the paths to both visible targets', situation, mode, evidence, agenda: [],
+        triggerCard: chooseInteraction, focus: button.box, gauge: geometry.boxes[move.body],
+        carried: geometry.boxes.filter((box, index) => index !== move.body && !same(box, expected.boxes[index]!)),
+        ...(target ? { actor: dot(geometry.markers[move.body]!), target: dot(target.at), landing: dot(expected.markers[move.body]!) } : {}) },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+  }
   return {
     id: coupledGaugeRouteId,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
     },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      return group === observedMechanicsGroup ? offerClearance(observation, rows, remaining, execution)
+        : this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !decide || observation.available_action_refs.length !== 1 ||
         observation.available_action_refs[0] !== 'ACTION6') return null;
+      const clearing = await offerClearance(observation, rows, remaining, execution);
+      if (clearing) return clearing;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped) return null;
       const scene = prior?.scene ?? readScene(observation.entities, rows[0]!.length, rows.length);
@@ -272,15 +335,46 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'coupled_button_bound' : 'coupled_button_context_changed' };
     },
-    after(proposal, _index, before, after) {
+    after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isClearance(proposal)) {
+        const matched = clearanceObserved(second, proposal.clearance.layout, proposal.expected);
+        return { matched, seal_prefix: true, reason: matched ? 'extension_marker_and_attached_bodies_confirmed'
+          : 'extension_or_attachment_prediction_contradicted' };
+      }
       const { step, memory } = proposal;
       const layout = readLayout(after.entities, memory.scene);
       const matched = step.expected ? !!layout && sameLayout(layout, step.expected) : null;
       return { matched, seal_prefix: true, reason: 'compare_marker_and_linked_piece_positions' };
     },
-    record(before, after, _action, _first, _second, proposal) {
+    record(before, after, _action, first, second, proposal) {
+      if (isClearance(proposal)) {
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const { clearance: current, expected, move } = proposal, { layout, lengths } = current;
+        const matched = clearanceObserved(second, layout, expected);
+        const remained = !matched && clearanceObserved(second, layout, clearanceProject(layout, lengths));
+        clearance = { ...current, lastRef: after.observation_ref, stopped: !matched && !remained,
+          lengths: matched ? clearanceMoved(lengths, move) : lengths, route: matched ? current.route.slice(1) : [],
+          blocked: remained ? [...current.blocked, clearanceEdge(lengths, move)] : current.blocked,
+          refs: [...current.refs.slice(-4), after.observation_ref] };
+        return { events: [] };
+      }
+      if (after.levels_completed > before.levels_completed && proposal.memory.measured.length) {
+        const { measured, scene } = proposal.memory;
+        const scales = new Set(measured.map(effect => Math.abs(effect.shift[0]) + Math.abs(effect.shift[1])));
+        const maskFor = (reverse: boolean) => new Set(measured.map((effect, index) => {
+          const control = scene.controls[index]!;
+          const button = control.buttons[reverse ? otherButton(effect.expand) : effect.expand];
+          return extensionButtonMask(first, button.box, control.color);
+        }));
+        const extendsMasks = maskFor(false), retractMasks = maskFor(true);
+        if (scales.size === 1 && extendsMasks.size === 1 && retractMasks.size === 1) {
+          const extend = [...extendsMasks][0]!, retract = [...retractMasks][0]!;
+          if (extend !== retract) witnessed = { epoch: after.level_epoch, quantum: [...scales][0]!, extend, retract,
+            evidence: [...measured.flatMap(effect => effect.evidence), after.observation_ref] };
+        }
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { memory, step } = proposal;
       const { scene } = memory;
@@ -301,7 +395,11 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal> {
       }
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as Memory | null); },
+    state: () => ({ state, witnessed, clearance }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as Memory | null);
+      witnessed = structuredClone((value.witnessed ?? null) as ExtensionWitness | null);
+      clearance = structuredClone((value.clearance ?? null) as ClearanceMemory | null);
+    },
   };
 }
