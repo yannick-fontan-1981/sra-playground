@@ -3,7 +3,7 @@
  * 786dcf51ca57773d8e3a8948ce9ea3655e7baf8e. The shared series owner dispatches
  * ancestors, applies their records first, and owns the single common journal.
  */
-import { measurePanelService, panelServiceProjection as projection } from './v6-panel-service-observation.ts';
+import { measurePanelService, panelServiceProjection as projection, remotePanelServiceChoices } from './v6-panel-service-observation.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { compareUnicode } from './canonical.ts';
@@ -75,8 +75,6 @@ export class PanelServiceMemory {
     for (const panel of scene.panels) for (const service of panel.services) {
       if (!memory.symbols.some((symbol: unknown) => equal(symbol, service.symbol))) memory.symbols.push(service.symbol);
     }
-    const receivers = scene.panels.flatMap((panel: R) => panel.services.filter((service: R) => service.kind === 'displayed_receiver')
-      .map((service: R) => [panel, service]));
     for (const panel of scene.panels) {
       const direct = panel.operators.filter((service: R) => service.kind === 'displayed_receiver' && service.input === panel.material);
       const rewrite = panel.operators.filter((service: R) => service.kind === 'displayed_rewrite' && service.input === panel.material
@@ -85,14 +83,11 @@ export class PanelServiceMemory {
       if (direct.length === 1) { operator = direct[0].control; reason = 'current_material_matches_local_receiver'; }
       else if (rewrite.length === 1) { operator = rewrite[0].control; reason = 'displayed_rewrite_prepares_local_receiver'; }
       else {
-        const destinations = receivers.filter(([peer, service]: [R, R]) => service.input === panel.material && peer.room_marker !== panel.room_marker)
-          .map(([peer]: [R, R]) => peer);
-        const choices: [R, R][] = [];
-        if (destinations.length === 1) for (const control of panel.activity_controls) {
-          const parameters = panel.cells.filter((cell: R) => cell.row === control.row && cell.col >= 2 && cell.solid && cell.color === destinations[0].room_marker);
-          if (parameters.length === 1) choices.push([control, parameters[0]]);
+        const choices = remotePanelServiceChoices(scene.panels, panel);
+        if (choices.length === 1) {
+          ({ operator, parameter } = choices[0]!);
+          reason = 'test_room_parameter_to_prepare_matching_receiver';
         }
-        if (choices.length === 1) { [operator, parameter] = choices[0]!; reason = 'test_room_parameter_to_prepare_matching_receiver'; }
       }
       if (operator === null) { unresolved.push(panel.id); continue; }
       contributions.push({ panel: panel.id, reason, material: panel.material, operator_symbol: operator.pattern, parameter });

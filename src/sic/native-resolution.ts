@@ -904,6 +904,12 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === panelMatchingId || family === verifyPanelConfigurationId) && Array.isArray(card?.panels)) {
+    if (Array.isArray(card.destinations)) for (const destination of card.destinations) {
+      const target = record(destination);
+      const choice = bounds(target?.choice), receiver = bounds(target?.receiver);
+      if (choice) subjects.push({ label: 'Room selector', box: choice });
+      if (receiver) subjects.push({ label: 'Matching receiver', box: receiver });
+    }
     for (const panel of card.panels) {
       const box = bounds(panel);
       if (box) subjects.push({ label: 'Activity and material', box });

@@ -7,12 +7,16 @@ import { geometricComponents } from './v6-native-observer.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal } from './v6-operations.ts';
 import { NestedIntegerTupleSet } from './v6-panel-service-pattern-set.ts';
-import type { NativeRows } from './v6-native-types.ts';
+import type { NativeBox, NativePoint, NativeRows } from './v6-native-types.ts';
 import type { IntegerTuple } from './v6-panel-service-pattern-set.ts';
 
 type R = Record<string, any>;
 type Box = readonly [number, number, number, number];
 type Pattern = readonly (readonly [number, number])[];
+export type PanelParameter = { point: NativePoint; bbox: NativeBox; row: number; col: number; outline: number | null };
+export type RemotePanelServiceChoice = {
+  operator: PanelParameter; parameter: PanelParameter; roomMarker: number; receiverSite: NativePoint;
+};
 
 function counts(values: Iterable<number>): Map<number, number> {
   const result = new Map<number, number>();
@@ -133,6 +137,21 @@ export function panelServiceProjection(scene: R): R[] {
   return scene.panels.map((panel: R) => ({ id: panel.id, material: panel.material, room_marker: panel.room_marker,
     activity: panel.activity_controls.filter((cell: R) => cell.outline === panel.selection_color).map((cell: R) => cell.row),
     parameters: panel.cells.filter((cell: R) => cell.col >= 2 && cell.outline !== null).map((cell: R) => [cell.row, cell.col]) }));
+}
+
+/** Match a material to a remote receiver whose room marker is offered as a parameter. */
+export function remotePanelServiceChoices(panels: readonly R[], panel: R): RemotePanelServiceChoice[] {
+  const receivers = panels.flatMap(peer => peer.room_marker === panel.room_marker ? [] : peer.services
+    .filter((service: R) => service.kind === 'displayed_receiver' && service.input === panel.material)
+    .map((service: R) => ({ peer, service })));
+  if (receivers.length !== 1) return [];
+  const { peer, service } = receivers[0]!;
+  return panel.activity_controls.flatMap((operator: PanelParameter) => {
+    const parameters = panel.cells.filter((cell: R) => cell.row === operator.row && cell.col >= 2 && cell.solid
+      && cell.color === peer.room_marker);
+    return parameters.length === 1 ? [{ operator, parameter: parameters[0], roomMarker: peer.room_marker,
+      receiverSite: service.observed_site }] : [];
+  });
 }
 
 /** Own source layer: append measured points to inherited candidates, then deduplicate. */
