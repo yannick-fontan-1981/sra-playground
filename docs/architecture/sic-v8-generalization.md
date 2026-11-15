@@ -547,3 +547,13 @@ Les mêmes cinq jeux gagnent avec palette permutée et nom neutralisé. Désacti
 Sur **REWI**, le registre et l’agenda remplacent l’ancien sélecteur `sic_framed_search` par `sic_follow_stable_reference`. Le fournisseur TypeScript mesure la grande vue, le petit échantillon et les correspondances exactes. Après un premier essai P05, le retour établit que la vue a changé et que l’échantillon est resté identique. La carte SRC autorise P02 pour répéter la direction et vérifie ces deux effets au retour. Une unique correspondance devient ensuite une cible P05.
 
 Le jeu gagne en trois commandes et reproduit l’empreinte `9a758416241620fd41236df69fbde31454b3b418d370b8159e8f6a1ce34b2c52`. Le nom neutralisé et la palette permutée conservent le gain. Désactiver P02 après le premier retour transfère la deuxième commande à la famille d’accès par glissement. Cette famille choisit la même direction dans cet essai et le parcours reste gagnant.
+
+### Appliquer une configuration vérifiée
+
+Les anciens sélecteurs de **SMLP** et **RSWP** sont retirés du registre. Les deux jeux gagnent en trois commandes SIC seul avec la carte `sic.apply_verified_configuration.choose`. Les fournisseurs TypeScript continuent de mesurer les trajectoires et les sélections visibles.
+
+Sur SMLP, deux retours P05 mesurent les approches puis vérifient la modification du trajet. Les longueurs projetées passent de 13 et 17 à 17 et 17. P02 réutilise alors la commande de lancement. Sur RSWP, un premier clic P05 confirme la sélection tout en préservant les autres panneaux. P02 autorise la même démarche sur le panneau suivant. Le lancement conjoint reste un premier essai P05.
+
+Les deux trajectoires reproduisent leurs empreintes de référence. Le nom neutralisé et la palette permutée conservent les gains. Désactiver la réutilisation de la sélection sur RSWP après le premier clic rend les deux commandes suivantes à l’exploration et laisse le niveau ouvert. Désactiver la réutilisation du lancement sur SMLP rend la dernière commande à l’exploration, qui choisit le même lancement lors de cet essai.
+
+SMLP `98b11e4a22d936380c77194c26216bd0de53cc574f53053b0cce682508625582`. RSWP `53e34526abf02d4311004a9ad726c131b277a7e995f552afc95913845d7fbecf`.

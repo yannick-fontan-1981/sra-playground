@@ -1,27 +1,21 @@
 import { measurePanelService, panelServiceProjection } from '../logos-engine/v6-panel-service-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const panelMatchingId = 'sic_panel_matching';
+export const verifyPanelConfigurationId = 'sic_verify_matching_panel_configuration';
 export const panelMatchingStrategies = {
   select_matching_activity: 'Select the activity whose receiver matches the material',
   test_shared_application: 'Run the prepared activities together',
 } as const;
-const graph = compileStrategyGraph({ id: 'prepare_material_matching_activities', version: 1, order: 'FALLBACK',
-  priorities: ['test_shared_application', 'select_matching_activity'],
-  strategies: {
-    select_matching_activity: [{ fact: 'pending', expected: true, label: 'Each panel has a current material match, with one or more activities unselected' }],
-    test_shared_application: [{ fact: 'ready', expected: true, label: 'The matching activity is selected in every panel' }],
-  },
-}, ['pending', 'ready']);
 type Pattern = readonly NativePoint[];
 type Control = { point: NativePoint; row: number; outline: number | null };
 type Service = { kind: string; input: number; output?: number; symbol: Pattern; control: Control | null };
 type Panel = { id: string; bbox: NativeBox; material: number; selection_color: number; operators: Service[]; services: Service[] };
 type Scene = { panels: Panel[]; layout: unknown };
-type State = { epoch: number; symbols: Pattern[]; attempts: string[]; stopped: boolean; evidence: string[] };
+type State = { epoch: number; symbols: Pattern[]; attempts: string[]; stopped: boolean; evidence: string[]; verifiedEditRef?: string };
 type Proposal = NativeProposal & { local: State; symbols: Pattern[]; expected: NativeRecord[] | null; attempt: string; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
@@ -39,11 +33,15 @@ function measuredMatch(proposal: Proposal, rows: NativeRows) {
   return !!returned && equal(panelServiceProjection(returned), proposal.expected);
 }
 
-export function createSicPanelMatching(): NativeFamily<Proposal> {
+export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: panelMatchingId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifyPanelConfigurationId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(choosePreparedConfiguration, {}, await preparedConfigurationModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || !observation.available_action_refs.includes('ACTION5')) return null;
       const local: State = state?.epoch === observation.level_epoch ? state :
         { epoch: observation.level_epoch, symbols: [], attempts: [], stopped: false, evidence: [] };
@@ -62,25 +60,34 @@ export function createSicPanelMatching(): NativeFamily<Proposal> {
       const symbols = [...new Map([...local.symbols, ...scene.panels.flatMap(panel => panel.services.map(service => service.symbol))]
         .map(symbol => [JSON.stringify(symbol), symbol])).values()];
       const expected = proposed ? projection.map(panel => panel.id === proposed.panel.id ? { ...panel, activity: [proposed.control!.row] } : panel) : null;
-      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(ref => ref !== observation.observation_ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        pending: { value: !!proposed, evidence }, ready: { value: !proposed, evidence },
-      }, planners: { select_matching_activity: () => command, test_shared_application: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = panelMatchingStrategies[strategy], parent = 'G_official_completion';
+      const ref = observation.observation_ref;
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.verifiedEditRef ? [local.verifiedEditRef] : [])]
+        .filter(item => item !== ref))];
+      const mode = execution?.reasoningMode ?? (proposed ? 'assimilation' : 'solving');
+      const reuseEdit = !!proposed && !!local.verifiedEditRef;
+      const facts = preparedConfigurationFacts(mode, { pendingWithKnownEdit: reuseEdit, pendingWithUntestedEdit: !!proposed && !reuseEdit,
+        readyForFirstApplication: !proposed });
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = reuseEdit ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const phase = proposed ? 'select_matching_activity' : 'test_shared_application';
+      const label = panelMatchingStrategies[phase], parent = 'G_official_completion';
       const objective = { kind: 'apply_matching_material_activities', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_materials', 'displayed_receivers'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_applying_the_matching_panel_settings' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `panel-matching:${need.id}`;
       const actions = [command];
       const binding = point && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
-      return { status: 'proposed', kind: panelMatchingId, actions, local, symbols, expected, attempt, needId: need.id,
+      return { status: 'proposed', kind: verifyPanelConfigurationId, actions, local, symbols, expected, attempt, needId: need.id,
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Prepare an activity for the material in each panel', mode: proposed ? 'assimilation' : 'solving',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Prepare an activity for the material in each panel', mode,
           situation: proposed ? 'The shown material matches a proposed activity. Verify the selection and the other panels.' :
             'The observed selections match the displayed material requirements. Their joint effect still needs a return.',
-          agenda: entries, evidence, panels: scene.panels.map(panel => panel.bbox) },
+          agenda: [], evidence, triggerCard: decision.receipt.workflow, panels: scene.panels.map(panel => panel.bbox) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -100,8 +107,10 @@ export function createSicPanelMatching(): NativeFamily<Proposal> {
     record(before, after, _command, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, symbols } = proposal;
+      const verifiedEdit = !!proposal.expected && measuredMatch(proposal, second);
       state = { ...local, symbols, attempts: [...local.attempts, proposal.attempt],
-        stopped: proposal.expected ? !measuredMatch(proposal, second) : before.frame_hash === after.frame_hash,
+        ...(verifiedEdit ? { verifiedEditRef: after.observation_ref } : {}),
+        stopped: proposal.expected ? !verifiedEdit : before.frame_hash === after.frame_hash,
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },

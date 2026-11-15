@@ -14,7 +14,8 @@ import { compareAvailableControlsId, compareAvailableControlsStrategies } from '
 import { framedContactId, framedContactStrategies, learnPatternAccessId } from './framed-contact.ts';
 import { learnTransportAccessId, transportContactId, transportContactStrategies } from './transport-contact.ts';
 import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
-import { sharedArrivalId, sharedArrivalStrategies } from './shared-arrival.ts';
+import { sharedArrivalId, sharedArrivalStrategies, verifySharedArrivalId } from './shared-arrival.ts';
+import { preparedConfigurationStrategies } from './prepared-configuration-card.ts';
 import { learnOutlineServiceId, outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
 import { labeledSequenceId, labeledSequenceStrategies, learnLabeledSequenceId } from './labeled-sequence.ts';
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
@@ -82,7 +83,7 @@ import { glyphEditingId, glyphEditingStrategies } from './glyph-editing.ts';
 import { fieldIsolationId, learnFieldIsolationId, fieldIsolationStrategies } from './field-isolation.ts';
 import { directionalReceptionId, directionalReceptionStrategies, learnDirectionalReceptionId } from './directional-reception.ts';
 import { learnWindowCoverageId, windowCoverageId, windowCoverageStrategies } from './window-coverage.ts';
-import { panelMatchingId, panelMatchingStrategies } from './panel-matching.ts';
+import { panelMatchingId, panelMatchingStrategies, verifyPanelConfigurationId } from './panel-matching.ts';
 import { crossingRowsId, crossingRowsStrategies } from './crossing-rows.ts';
 import { traceCoverageId, traceCoverageStrategies } from './trace-coverage.ts';
 import { learnRadialConnectionId, radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
@@ -478,6 +479,7 @@ export function readNativeResolution(agent: {
     : family === recheckDirectionalControlsId ? recheckDirectionalControlsStrategies
     : family === trialRepeatedLinearControlsId ? trialRepeatedLinearControlsStrategies
     : family === stableReferenceId ? stableReferenceStrategies
+    : (family === verifySharedArrivalId || family === verifyPanelConfigurationId) ? preparedConfigurationStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -559,7 +561,7 @@ export function readNativeResolution(agent: {
       if (marker) subjects.push({ label: 'Marker compared by SIC', box: marker });
     }
   }
-  if (situationCard && family === sharedArrivalId && Array.isArray(card?.subjects)) {
+  if (situationCard && (family === sharedArrivalId || family === verifySharedArrivalId) && Array.isArray(card?.subjects)) {
     for (const [index, element] of card.subjects.entries()) {
       const box = bounds(element);
       if (box) subjects.push({ label: ['First piece', 'Second piece', 'Common receiver', 'Cell to test'][index] ?? 'Observed region', box });
@@ -734,7 +736,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === panelMatchingId && Array.isArray(card?.panels)) {
+  if (situationCard && (family === panelMatchingId || family === verifyPanelConfigurationId) && Array.isArray(card?.panels)) {
     for (const panel of card.panels) {
       const box = bounds(panel);
       if (box) subjects.push({ label: 'Activity and material', box });

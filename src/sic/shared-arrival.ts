@@ -1,23 +1,16 @@
 import { configuredCrosses, configuredRoute, configuredScene, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const sharedArrivalId = 'sic_shared_arrival';
+export const verifySharedArrivalId = 'sic_verify_shared_arrival_configuration';
 export const sharedArrivalStrategies = {
   observe_launch: 'Observe how the pieces travel after launch',
   test_route_edit: 'Test a route edit that could bring arrival times together',
   launch_after_route_edit: 'Test the edited route with equal projected lengths',
 } as const;
-const graph = compileStrategyGraph({ id: 'compare_arrivals_at_common_receiver', version: 1, order: 'FALLBACK',
-  priorities: ['launch_after_route_edit', 'test_route_edit', 'observe_launch'],
-  strategies: {
-    launch_after_route_edit: [{ fact: 'equalRoutes', expected: true, label: 'The tested edit leaves equally long routes to the receiver' }],
-    test_route_edit: [{ fact: 'routeEdit', expected: true, label: 'Removing one visited marked cell would equalize route lengths' }],
-    observe_launch: [{ fact: 'launchTrial', expected: true, label: 'Two visible pieces can approach a common receiver' }],
-  },
-}, ['equalRoutes', 'routeEdit', 'launchTrial']);
 
 type Point = [number, number];
 type Arrival = { interval: number; visited: string[] };
@@ -58,11 +51,15 @@ function observeApproaches(proposal: Proposal, frames: readonly NativeRows[]): A
   });
 }
 
-export function createSicSharedArrival(): NativeFamily<Proposal> {
+export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
   let state = empty();
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: sharedArrivalId,
-    async propose(observation, rows, inputs, remaining) {
+    id: verifySharedArrivalId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(choosePreparedConfiguration, {}, await preparedConfigurationModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       const launch = inputs.find(input => input.action_ref === 'ACTION5');
       if (!launch || remaining < 1 || local.replayed || !observation.available_action_refs.includes('ACTION6')) return null;
@@ -78,26 +75,32 @@ export function createSicSharedArrival(): NativeFamily<Proposal> {
       const command: NativeCommand = edit ? { action_ref: 'ACTION6', data: { x: edit[0], y: edit[1] } } : launch;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...(local.launchRef ? [local.launchRef] : []), ...(local.editRef ? [local.editRef] : [])];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        equalRoutes: { value: !!local.editRef && equal(lengths), evidence },
-        routeEdit: { value: !!edit, evidence },
-        launchTrial: { value: !local.launched, evidence },
-      }, planners: { observe_launch: () => command, test_route_edit: () => command, launch_after_route_edit: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = sharedArrivalStrategies[strategy], objective = 'G_official_completion';
+      const ready = !!local.editRef && equal(lengths);
+      const phase = ready ? 'launch_after_route_edit' : edit ? 'test_route_edit' : !local.launched ? 'observe_launch' : null;
+      if (!phase) return null;
+      const mode = execution?.reasoningMode ?? (ready ? 'solving' : 'exploration');
+      const facts = preparedConfigurationFacts(mode, { readyWithKnownApplication: ready, pendingWithUntestedEdit: !!edit,
+        needsApplicationObservation: !local.launched });
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = ready ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const label = sharedArrivalStrategies[phase], objective = 'G_official_completion';
       const goal = { kind: 'test_shared_receiver_arrival', scope: ref.split(':revision:', 1)[0]!, subjects: [key(scene.target)],
         parentObjective: objective, satisfactionContract: 'observe_official_progress_at_shared_receiver' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `shared-arrival:${need.id}`, actions = [command];
       const binding = edit ? await ObservedInputDomain.makeLocusWitness(observation, rows, edit, { reason: label, evidence }) : null;
-      return { status: 'proposed', kind: sharedArrivalId, actions, strategy, grid: scene.grid, actors: scene.actors,
+      return { status: 'proposed', kind: verifySharedArrivalId, actions, strategy: phase, grid: scene.grid, actors: scene.actors,
         receiver: scene.target, edit, needId: need.id,
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Find how both pieces can reach the common receiver',
-          mode: strategy === 'launch_after_route_edit' ? 'solving' : 'exploration',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Find how both pieces can reach the common receiver', mode,
           situation: edit ? `Current route lengths are ${lengths.join(' and ')}. Test the marked cell that could make them equal.` : label,
-          agenda: entries, evidence, subjects: [...scene.actors.map(([, x, y]) => neighborhood([x, y])), neighborhood(scene.target),
+          agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          subjects: [...scene.actors.map(([, x, y]) => neighborhood([x, y])), neighborhood(scene.target),
             ...(edit ? [neighborhood(edit)] : [])] },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
