@@ -561,3 +561,17 @@ Les deux trajectoires reproduisent leurs empreintes de référence. Le nom neutr
 SMLP `98b11e4a22d936380c77194c26216bd0de53cc574f53053b0cce682508625582`. RSWP `53e34526abf02d4311004a9ad726c131b277a7e995f552afc95913845d7fbecf`.
 
 Sur `08e4596b`, les **66/100 retraits gagnants** totalisent 748 commandes SIC seul. Les 64 trajectoires gagnantes précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait conservent leurs commandes et retours de référence.
+
+### Choisir entre tester un déplacement et réutiliser le modèle mesuré
+
+Les anciens sélecteurs de **R11L, SU15 et VC33** sont retirés du registre. La carte `sic.follow_observed_landings.choose` choisit P05 pour mesurer un effet, P07 lorsqu’un déplacement repose sur les retours, et P02 pour tester un contact avec un contrôle connu. Les mesures de géométrie et les projections restent dans les fournisseurs TypeScript.
+
+R11L gagne en trois clics. Les deux premiers vérifient le lien entre les repères et la pièce, puis le changement de sélection. Le dernier place le milieu à la destination. SU15 gagne en sept clics en vérifiant la portée et le coût de réserve avant de tester le contact. VC33 gagne son niveau 1 en cinq clics et conserve deux niveaux en quatorze commandes. La carte choisit réellement entre le prochain transfert prévu et un contrôle encore ouvert aux essais. Sur les trois jeux, la permutation de palette et la neutralisation du nom conservent le gain du niveau 1. Désactiver P07 change la suite et laisse chaque premier niveau ouvert à douze commandes.
+
+### Tester les formes intérieures quand les touches ne suffisent pas
+
+**SPOR gagne en dix commandes et SELE en dix-huit** avec l’exploration publique retirée. La recherche considère les cibles à l’intérieur du plateau qui ne remplissent pas leur rectangle englobant. Sur SPOR, la seule touche disponible coexiste avec le clic. Sur SELE, la comparaison s’élargit aux clics après des retours établissant que les touches testées laissent le premier plateau inchangé. La carte réévalue les touches et les cibles après chaque retour. Elle garde l’empreinte de l’état où chaque entrée a été testée.
+
+La palette permutée et le nom neutralisé conservent les gains. Désactiver P05 après la première touche sur SPOR et après les trois touches initiales sur SELE arrête la recherche à la décision suivante. POLA et ELAS conservent leurs trajectoires avec le même fournisseur élargi.
+
+SPOR `079729fb629eb587dbef6b04df1e58c37a661169b8cfd10a34bf537a0faa2c12`. SELE `9a503869250e719e48223a979ec297615f68b4d3b80d167347cd69651581e30e`.

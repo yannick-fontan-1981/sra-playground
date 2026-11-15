@@ -1,4 +1,4 @@
-import type { NativeObservation } from '../logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeObservation } from '../logos-engine/v6-native-types.ts';
 
 type Transition = { action: string; destination: string | null; evidence: string };
 export type ObservedCommandGraph = Record<string, Transition[]>;
@@ -6,13 +6,16 @@ export type ObservedCommandGraph = Record<string, Transition[]>;
 export const observedCommandState = (observation: NativeObservation) =>
   `${observation.frame_hash}:${[...observation.available_action_refs].sort().join(',')}`;
 
+export const observedCommandKey = (command: NativeCommand) => command.action_ref === 'ACTION6'
+  ? `ACTION6:${command.data.x},${command.data.y}` : command.action_ref;
+
 export const oppositeDirection: Readonly<Record<string, string>> = {
   ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3',
 };
 
-export function stationaryDirectionalEvidence(graph: ObservedCommandGraph, source: string, directions: readonly string[]) {
-  const receipts = (graph[source] ?? []).filter(edge => directions.includes(edge.action) && edge.destination === source);
-  return directions.length >= 2 && receipts.length === directions.length ? receipts.map(edge => edge.evidence) : null;
+export function stationaryCommandEvidence(graph: ObservedCommandGraph, source: string, commands: readonly string[]) {
+  const receipts = (graph[source] ?? []).filter(edge => commands.includes(edge.action) && edge.destination === source);
+  return commands.length >= 2 && receipts.length === commands.length ? receipts.map(edge => edge.evidence) : null;
 }
 
 export function rememberCommandReturn(graph: ObservedCommandGraph, source: string, destination: string,

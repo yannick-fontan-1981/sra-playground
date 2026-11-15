@@ -13,7 +13,7 @@ import { trialRepeatedLinearControlsId, trialRepeatedLinearControlsStrategies } 
 import { compareAvailableControlsId, compareAvailableControlsStrategies } from './compare-available-controls.ts';
 import { framedContactId, framedContactStrategies, learnPatternAccessId } from './framed-contact.ts';
 import { learnTransportAccessId, transportContactId, transportContactStrategies } from './transport-contact.ts';
-import { bandAlignmentId, bandAlignmentStrategies } from './band-alignment.ts';
+import { bandAlignmentId, bandAlignmentStrategies, verifyBandTransferId } from './band-alignment.ts';
 import { sharedArrivalId, sharedArrivalStrategies, verifySharedArrivalId } from './shared-arrival.ts';
 import { preparedConfigurationStrategies } from './prepared-configuration-card.ts';
 import { learnOutlineServiceId, outlineServiceId, outlineServiceStrategies } from './outline-service.ts';
@@ -60,8 +60,8 @@ import { learnSwitchedSurfaceId, switchedSurfaceId } from './switched-surface.ts
 import { markedGaugeId } from './marked-gauge.ts';
 import { reactiveTargetId } from './reactive-target.ts';
 import { pairedChannelsId } from './paired-channels.ts';
-import { pointReachId } from './point-reach.ts';
-import { linkedMidpointId } from './linked-midpoint.ts';
+import { pointReachId, verifyPointAccessId } from './point-reach.ts';
+import { linkedMidpointId, verifyLinkedMotionId } from './linked-midpoint.ts';
 import { excavateDescentId } from './excavate-descent.ts';
 import { gatedCascadeId, learnCascadeId } from './gated-cascade.ts';
 import { layeredFitId, learnLayeredFitId } from './layered-fit.ts';
@@ -480,6 +480,7 @@ export function readNativeResolution(agent: {
     : family === trialRepeatedLinearControlsId ? trialRepeatedLinearControlsStrategies
     : family === stableReferenceId ? stableReferenceStrategies
     : (family === verifySharedArrivalId || family === verifyPanelConfigurationId) ? preparedConfigurationStrategies
+    : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -534,9 +535,10 @@ export function readNativeResolution(agent: {
     if (focus) subjects.push({ label: 'Piece whose control is being tested', box: focus });
     if (moved) subjects.push({ label: 'Piece moved by the tested direction', box: moved });
   }
-  if (situationCard && family === trialRepeatedLinearControlsId) {
+  if (situationCard && (family === trialRepeatedLinearControlsId || family === recheckDirectionalControlsId)) {
     const target = bounds(card?.addressedRegion);
-    if (target) subjects.push({ label: 'Repeated element tested by the click', box: target });
+    if (target) subjects.push({ label: family === trialRepeatedLinearControlsId
+      ? 'Repeated element tested by the click' : 'Interior shape tested by the click', box: target });
   }
   if (situationCard && (family === framedContactId || family === learnPatternAccessId)) {
     const region = bounds(card?.addressedRegion), actor = bounds(card?.controlledPiece);
@@ -553,7 +555,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: i ? 'Body or target on the transport route' : 'Controlled piece', box });
     }
   }
-  if (situationCard && family === bandAlignmentId) {
+  if (situationCard && (family === bandAlignmentId || family === verifyBandTransferId)) {
     const button = bounds(card?.addressedRegion);
     if (button) subjects.push({ label: 'Transfer control tested', box: button });
     if (Array.isArray(card?.subjects)) for (const subject of card.subjects) {
@@ -901,13 +903,13 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === linkedMidpointId) {
+  if (situationCard && (family === linkedMidpointId || family === verifyLinkedMotionId)) {
     for (const [field, label] of [['actor', 'Linked piece'], ['active', 'Active marker'], ['passive', 'Other marker'], ['focus', 'Click target'], ['goal', 'Destination']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === pointReachId) {
+  if (situationCard && (family === pointReachId || family === verifyPointAccessId)) {
     for (const [field, label] of [['actor', 'Controlled sprite'], ['focus', 'Predicted landing'], ['goal', 'Framed receptor'], ['reserve', 'Visible reserve']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

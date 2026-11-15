@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const linkedMidpointId = 'sic_linked_midpoint';
+export const verifyLinkedMotionId = 'sic_verify_linked_motion';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Mark = { point: NativePoint; box: NativeBox; color: number };
@@ -98,10 +100,14 @@ function proposalPoint(rows: NativeRows, scene: Scene, local: Memory): { target:
   return target ? { target, intent: local.coupling ? 'align' : 'measure' } : null;
 }
 
-export function createSicLinkedMidpoint(): NativeFamily<Proposal> {
+export function createSicVerifyLinkedMotion(): NativeFamily<Proposal> {
   let memory: Memory | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: linkedMidpointId,
+    id: verifyLinkedMotionId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
@@ -118,30 +124,33 @@ export function createSicLinkedMidpoint(): NativeFamily<Proposal> {
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...[local.coupling, ...local.switches].filter((value): value is string => !!value && value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
-      const offer = { input: 'ACTION6', expected: prediction, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        probe: intent !== 'align' ? offer : null, access: intent === 'align' ? offer : null, interaction: null });
-      if (!selected) return null;
+      const facts = { eligibleProbe: intent !== 'align', routeSupported: intent === 'align', knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = intent === 'align' ? 'P07' : 'P05';
+      if (decision?.result !== strategy) return null;
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, target, { reason: 'Link the movable markers to the carrier position', evidence });
       if (!witness) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'align_carrier_by_linked_markers', scope: ref.split(':revision:', 1)[0]!,
         subjects: [key(layout.goal)], parentObjective: parent, satisfactionContract: 'official_progress_after_carrier_alignment' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = linkedMidpointId + ':' + need.id, action = { action_ref: 'ACTION6', data: { x: target[0], y: target[1] } };
+      const id = verifyLinkedMotionId + ':' + need.id, action = { action_ref: 'ACTION6', data: { x: target[0], y: target[1] } };
       const [x, y] = target, h = Math.floor(layout.side / 2);
       const situation = intent === 'measure' ? 'Test whether moving the active marker also moves the carrier to the midpoint'
         : intent === 'select' ? 'Test switching the active marker while keeping both positions'
           : 'Position the active marker so the measured midpoint reaches the destination';
       return {
-        status: 'proposed', kind: linkedMidpointId, local, scene, intent, target, prediction, needId: need.id,
+        status: 'proposed', kind: verifyLinkedMotionId, local, scene, intent, target, prediction, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: prediction, point_binding: witness }],
-        sicSituationCard: { strategy: selected.id, need: 'Align the linked carrier with the visible destination', situation, evidence, agenda: entries,
-          mode, triggerCard: card, actor: scene.actor.box, active: scene.active.box, passive: scene.passive.box, goal: layout.goalBox,
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Align the linked carrier with the visible destination', situation, evidence, agenda: [],
+          mode, triggerCard: decision.receipt.workflow, actor: scene.actor.box, active: scene.active.box, passive: scene.passive.box, goal: layout.goalBox,
           focus: [x - h, y - h, x + h, y + h] },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

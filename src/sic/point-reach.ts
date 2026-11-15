@@ -1,10 +1,12 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const pointReachId = 'sic_point_reach';
+export const verifyPointAccessId = 'sic_verify_measured_point_access';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Layout = { color: number; field: NativeBox; goal: NativeBox; inset: NativeBox; side: number; reserve: NativeBox; reserveColor: number };
@@ -64,10 +66,14 @@ function nextPoint(actor: NativePoint, local: Memory): NativePoint | null {
   return steps[0] ?? null;
 }
 
-export function createSicPointReach(): NativeFamily<Proposal> {
+export function createSicVerifyPointAccess(): NativeFamily<Proposal> {
   let memory: Memory | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: pointReachId,
+    id: verifyPointAccessId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
@@ -83,29 +89,32 @@ export function createSicPointReach(): NativeFamily<Proposal> {
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration', contact = inside(layout.goal, target);
-      const offer = { input: 'ACTION6', expected: target, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: local.radius ? null : offer,
-        access: local.radius && !contact ? offer : null, interaction: local.radius && contact ? offer : null });
-      if (!selected) return null;
+      const facts = { eligibleProbe: !local.radius, routeSupported: !!local.radius && !contact, knownInteraction: !!local.radius && contact, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = !local.radius ? 'P05' : contact ? 'P02' : 'P07';
+      if (decision?.result !== strategy) return null;
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, target, { reason: 'Point within the candidate control range', evidence });
       if (!witness) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'reach_receptor_with_measured_point_control', scope: ref.split(':revision:', 1)[0]!,
         subjects: [layout.goal.join(',')], parentObjective: parent, satisfactionContract: 'official_progress_after_receptor_contact' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = pointReachId + ':' + need.id, action = { action_ref: 'ACTION6', data: { x: target[0], y: target[1] } };
+      const id = verifyPointAccessId + ':' + need.id, action = { action_ref: 'ACTION6', data: { x: target[0], y: target[1] } };
       const half = Math.floor(layout.side / 2);
       const sprite = ([x, y]: NativePoint): NativeBox => [x - half, y - half, x - half + layout.side - 1, y - half + layout.side - 1];
-      const situation = selected.id === 'P05' ? 'Test whether the sprite can move to a nearby point and measure the cost'
+      const situation = strategy === 'P05' ? 'Test whether the sprite can move to a nearby point and measure the cost'
         : contact ? 'Test contact with the framed receptor using the measured range' : 'Move toward the receptor in steps supported by the measured range';
       return {
-        status: 'proposed', kind: pointReachId, local, actor, target, reserve, needId: need.id,
+        status: 'proposed', kind: verifyPointAccessId, local, actor, target, reserve, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: target, point_binding: witness }],
-        sicSituationCard: { strategy: selected.id, need: 'Reach the receptor within the visible reserve', situation, evidence, agenda: entries,
-          mode, triggerCard: card, actor: sprite(actor), focus: sprite(target), goal: layout.goal, reserve: layout.reserve },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Reach the receptor within the visible reserve', situation, evidence, agenda: [],
+          mode, triggerCard: decision.receipt.workflow, actor: sprite(actor), focus: sprite(target), goal: layout.goal, reserve: layout.reserve },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

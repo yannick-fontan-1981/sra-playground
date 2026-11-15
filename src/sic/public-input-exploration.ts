@@ -4,8 +4,9 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { measureComponentTranslations } from './observed-translation.ts';
-import { observedCommandFrontier, observedCommandState as interfaceKey, oppositeDirection, rememberCommandReturn,
-  stationaryDirectionalEvidence, type ObservedCommandGraph } from './observed-command-frontier.ts';
+import { componentCenterPoint } from './interior-shape-targets.ts';
+import { observedCommandFrontier, observedCommandKey as commandKey, observedCommandState as interfaceKey, oppositeDirection, rememberCommandReturn,
+  stationaryCommandEvidence, type ObservedCommandGraph } from './observed-command-frontier.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
 import { repeatedInputTargets } from './repeated-input-targets.ts';
@@ -62,8 +63,6 @@ export function currentControlledMotion(state: NativeRecord, observation: Native
   return exploration.epoch === observation.level_epoch && motion?.evidence[1] === observation.observation_ref
     && motion.destination === interfaceKey(observation) ? motion : undefined;
 }
-const commandKey = (command: NativeCommand) => command.action_ref === 'ACTION6'
-  ? `ACTION6:${command.data.x},${command.data.y}` : command.action_ref;
 
 function changedWithin(before: NativeRows, after: NativeRows, [l, t, r, b]: NativeBox) {
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) if (before[y]?.[x] !== after[y]?.[x]) return true;
@@ -131,11 +130,9 @@ function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs:
   const usual = new Set(parts.slice(0, clickLimit));
   const repeated = new Set(includeRepeated ? repeatedInputTargets(parts, usual, 6) : []);
   for (const part of new Set([...parts.filter(isMarker).slice(0, clickLimit), ...repeated, ...usual])) {
-    const { bbox, mask } = part;
-    const [left, top, right, bottom] = bbox;
-    const distance = ([x, y]: NativePoint) => Math.abs(2 * x + left - right) + Math.abs(2 * y + top - bottom);
-    const [x, y] = mask.reduce((best, point) => distance(point) < distance(best) ? point : best);
-    const command = { action_ref: 'ACTION6', data: { x: x + left, y: y + top } };
+    const { bbox } = part;
+    const [x, y] = componentCenterPoint(part);
+    const command = { action_ref: 'ACTION6', data: { x, y } };
     candidates.set(commandKey(command), { command, box: bbox, marker: isMarker(part), repeated: repeated.has(part) });
   }
   return candidates;
@@ -312,7 +309,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       }
       if (!state.recheck && action === 'ACTION5' && destination !== proposal.source) {
         const directions = proposal.candidates.filter(key => /^ACTION[1-4]$/.test(key));
-        const evidence = stationaryDirectionalEvidence(state.transitions, proposal.source, directions);
+        const evidence = stationaryCommandEvidence(state.transitions, proposal.source, directions);
         if (evidence) state.recheck = {
           until: state.experiments + directions.length * 3, evidence: [...evidence, after.observation_ref],
         };
