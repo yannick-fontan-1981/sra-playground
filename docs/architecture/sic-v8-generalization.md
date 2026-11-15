@@ -589,3 +589,11 @@ Le nom neutralisé et la palette permutée conservent les deux victoires. Désac
 THER `4a30b3d9ed344cc3e67c989728a733fd88729729c63f4ea7b9ee46587d14eb49`. LF52 `143c844406ae4210b054f2fd5f34493081cb822b0f1b7a222a8d232bf9d85852`.
 
 Sur `5f1b16ee`, les **73/100 retraits gagnants** totalisent 835 commandes SIC seul. Le rejeu vérifie les 71 trajectoires précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait.
+
+### Choisir une réponse à partir des retours observés
+
+**MEMO, MIND et SERI** gagnent en dix, huit et quatre commandes SIC seul avec les anciens sélecteurs retirés. La carte SRC `sic.choose_from_observed_feedback.choose` permet d’avancer entre essais P05 et réutilisations P02 selon les retours. MEMO teste six occurrences mises en évidence, puis réutilise les correspondances qui désignent une même cible. MIND vérifie l’entrée des couleurs, recueille les marques du premier essai et réutilise la commande de soumission déjà observée. SERI teste la seule carte compatible, vérifie son insertion et réutilise la démarche sur les questions suivantes.
+
+Les commandes et retours reproduisent les références. Le nom neutralisé et la palette permutée conservent les gains. MIND gagne alors en quatre commandes, dès la première soumission. Désactiver la règle P02 utilisée dans chaque parcours rend la suite à l’exploration publique. MEMO et SERI restent ouverts au budget de référence. MIND gagne avec la même dernière commande, cette fois fournie par l’exploration.
+
+MEMO `40ac77f931014315cdeb289b623e971f165ce7962801671d5b2bda66f288e482`. MIND `d2af6be8e55804dace772b7227f902dc86056bea5dedae2a4b1532f3c0c87a50`. SERI `e327a63ace9a61f555be390a32afada20bce326a81e975542d70fc383278e13a`.

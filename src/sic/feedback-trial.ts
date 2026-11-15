@@ -2,24 +2,17 @@ import { chooseFeedbackTrialCooperative, type FeedbackConfiguration } from '../l
 import { feedbackBorder, feedbackMatches, feedbackPalette, feedbackValues, initialFeedbackLayout,
   type FeedbackHistoryRow, type FeedbackLayout, type FeedbackSlotRow } from '../logos-engine/v6-feedback-sequences-visual.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseFromFeedback, feedbackChoiceFacts, feedbackChoiceModule } from './feedback-choice-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const feedbackTrialId = 'sic_feedback_trial';
+export const verifyOrderedFeedbackId = 'sic_verify_ordered_feedback';
 export const feedbackTrialStrategies = {
   test_ordered_entry: 'Test what the distinctive palette tile enters',
   refine_ordered_trial: 'Choose a trial that separates the remaining answers',
   submit_ordered_trial: 'Submit the complete trial to obtain positional feedback',
 } as const;
-const graph = compileStrategyGraph({ id: 'learn_ordered_answer_from_feedback', version: 1, order: 'FALLBACK',
-  priorities: ['submit_ordered_trial', 'refine_ordered_trial', 'test_ordered_entry'],
-  strategies: {
-    test_ordered_entry: [{ fact: 'entry', expected: true, label: 'A single palette tile has a distinct border and the input row is unconfirmed' }],
-    refine_ordered_trial: [{ fact: 'fill', expected: true, label: 'A bounded comparison found a trial compatible with the current prefix' }],
-    submit_ordered_trial: [{ fact: 'submit', expected: true, label: 'The input row is complete and a submission control can be tested' }],
-  },
-}, ['entry', 'fill', 'submit']);
 const configuration: FeedbackConfiguration = { stages: [], allocation_orders: ['LEFT_TO_RIGHT', 'RIGHT_TO_LEFT'],
   measures: ['WORST_NONWINNING_RESIDUAL', 'SUM_SQUARED_RESIDUALS', 'NONWINNING_BRANCHES'],
   maximum_candidates: 4096, maximum_trials: 256, maximum_evaluations: 65536, maximum_bundle: 1,
@@ -38,10 +31,14 @@ function activePrefix(rows: NativeRows, layout: FeedbackLayout, active: Feedback
     equal(values, [...selected, ...Array(values.length - selected.length).fill(active.empty)]) ? selected : null;
 }
 
-export function createSicFeedbackTrial(): NativeFamily<Proposal> {
+export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: feedbackTrialId,
+    id: verifyOrderedFeedbackId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseFromFeedback, {}, await feedbackChoiceModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.layout.epoch === observation.level_epoch ? state : null;
@@ -82,12 +79,18 @@ export function createSicFeedbackTrial(): NativeFamily<Proposal> {
       }
       if (!choice || local.blocked.includes(JSON.stringify([observation.frame_hash, choice.action]))) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        entry: { value: !local.active, evidence }, fill: { value: !!local.active && choice.value !== null, evidence },
-        submit: { value: choice.value === null, evidence },
-      }, planners: { test_ordered_entry: () => choice, refine_ordered_trial: () => choice, submit_ordered_trial: () => choice } });
-      if (!selected) return null;
-      const strategy = selected.id, label = feedbackTrialStrategies[strategy], parent = 'G_official_completion';
+      const submitting = choice.value === null;
+      const knownSubmission = submitting && local.submission === choice.action.action_ref;
+      const singleAnswer = choice.candidates === 1;
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const facts = feedbackChoiceFacts(mode, { pointedCueNeedsTest: !local.active, feedbackSupportsOneChoice: singleAnswer,
+        trialCanClarifyAlternatives: !!local.active && !submitting && !singleAnswer,
+        firstSubmissionNeedsFeedback: submitting && !knownSubmission, submissionControlObserved: knownSubmission });
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = singleAnswer || knownSubmission ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const phase = submitting ? 'submit_ordered_trial' : local.active ? 'refine_ordered_trial' : 'test_ordered_entry';
+      const label = feedbackTrialStrategies[phase], parent = 'G_official_completion';
       const objective = { kind: 'infer_ordered_code_from_positions', scope: layout.ref, subjects: ['ordered_slots', 'positional_feedback'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_submitting_the_ordered_answer' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `feedback-trial:${need.id}`;
@@ -95,12 +98,17 @@ export function createSicFeedbackTrial(): NativeFamily<Proposal> {
       const point: NativePoint | null = choice.value === null ? null : [choice.action.data.x!, choice.action.data.y!];
       const binding = point && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
       const box = (y: number, count: number): NativeBox => [layout.xs[0]!, y, layout.xs[count - 1]! + w - 1, y + h - 1];
-      return { status: 'proposed', kind: feedbackTrialId, actions, local, choice, palette, needId: need.id,
+      return { status: 'proposed', kind: verifyOrderedFeedbackId, actions, local, choice, palette, needId: need.id,
         steps: [{ action: choice.action, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Infer the ordered answer from the positional marks', mode: 'exploration',
-          situation: choice.candidates === null ? label : `${choice.candidates} answers remain compatible. The next tile preserves the current prefix.`,
-          agenda: entries, evidence, palette: box(layout.palette_y, layout.xs.length), slots: layout.slot_rows.map(row => box(row.y, row.count)) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Infer the ordered answer from the positional marks', mode,
+          situation: choice.candidates === null ? label : singleAnswer ? 'One answer remains compatible with the observed feedback.'
+            : `${choice.candidates} answers remain compatible. The next tile preserves the current prefix.`,
+          agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          palette: box(layout.palette_y, layout.xs.length), slots: layout.slot_rows.map(row => box(row.y, row.count)) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

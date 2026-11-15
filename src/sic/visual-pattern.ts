@@ -1,19 +1,14 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { explainVisual, visualInterior, visualLayout, visualSequenceConfiguration } from '../logos-engine/v6-visual-sequences.ts';
+import { chooseFromFeedback, feedbackChoiceFacts, feedbackChoiceModule } from './feedback-choice-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const visualPatternId = 'sic_visual_pattern';
-const strategy = 'complete_visible_pattern';
+export const verifyPatternChoiceId = 'sic_verify_pattern_choice';
 export const visualPatternStrategies = {
-  [strategy]: 'Complete the pattern with the only compatible option',
+  complete_visible_pattern: 'Complete the pattern with the only compatible option',
 } as const;
-const graph = compileStrategyGraph({
-  id: 'complete_pattern_from_visible_examples', version: 1, order: 'FALLBACK',
-  priorities: [strategy],
-  strategies: { [strategy]: [{ fact: 'unique', expected: true, label: 'Only one option fits the supported color and shape relations' }] },
-}, ['unique']);
 
 type Raster = readonly (readonly number[])[];
 type State = { epoch: number; stopped: boolean; evidence: string[] };
@@ -26,12 +21,16 @@ function fillsTarget(proposal: Proposal, first: NativeRows, second: NativeRows) 
     proposal.preserve.every(box => sameRaster(visualInterior(first, box), visualInterior(second, box)));
 }
 
-export function createSicVisualPattern(): NativeFamily<Proposal> {
+export function createSicVerifyPatternChoice(): NativeFamily<Proposal> {
   let state: State | null = null;
   let configuration: ReturnType<typeof visualSequenceConfiguration> | undefined;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: visualPatternId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifyPatternChoiceId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseFromFeedback, {}, await feedbackChoiceModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped) return null;
@@ -52,22 +51,29 @@ export function createSicVisualPattern(): NativeFamily<Proposal> {
       const command = { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } };
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...(prior?.evidence ?? [])];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active',
-        facts: { unique: { value: true, evidence } }, planners: { [strategy]: () => command } });
-      if (!selected) return null;
+      const verifiedSelection = !!prior?.evidence.length;
+      const mode = execution?.reasoningMode ?? 'solving';
+      const facts = feedbackChoiceFacts(mode, { feedbackSupportsOneChoice: verifiedSelection, modelMatchNeedsTest: !verifiedSelection });
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = verifiedSelection ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
       const target = active.boxes[active.missing]!, preserve = layout.grid.flat().filter(box => box !== target);
-      const parent = 'G_official_completion', label = visualPatternStrategies[strategy];
+      const parent = 'G_official_completion', label = visualPatternStrategies.complete_visible_pattern;
       const goal = { kind: 'fill_missing_pattern_card', scope: layout.question_ref, subjects: ['visible_pattern', 'missing_card'],
         parentObjective: parent, satisfactionContract: 'the predicted card fills the gap and other cards are preserved' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `visual-pattern:${need.id}`, actions = [command];
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
-      return { status: 'proposed', kind: visualPatternId, actions, target, preserve, expected: choice.raster, needId: need.id,
+      return { status: 'proposed', kind: verifyPatternChoiceId, actions, target, preserve, expected: choice.raster, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Fill the missing card', mode: 'solving',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Fill the missing card', mode,
           situation: `One of ${options.length} options fits the measured color and shape relations. Acceptance still needs a return.`,
-          agenda: entries, evidence, target, option: choice.box, examples: active.boxes.filter(box => box !== target) },
+          agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          target, option: choice.box, examples: active.boxes.filter(box => box !== target) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

@@ -1,21 +1,15 @@
 import { measureOccurrenceScene } from '../logos-engine/v6-occurrence-scene.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { chooseFromFeedback, feedbackChoiceFacts, feedbackChoiceModule } from './feedback-choice-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const occurrenceRecallId = 'sic_occurrence_recall';
+export const verifyOccurrenceChoiceId = 'sic_verify_occurrence_from_feedback';
 export const occurrenceRecallStrategies = {
   test_emphasized_occurrence: 'Test the uniquely framed occurrence',
   reuse_observed_occurrence_rule: 'Use the learned correspondence to select an occurrence',
 } as const;
-const graph = compileStrategyGraph({ id: 'identify_repeated_occurrences', version: 1, order: 'FALLBACK',
-  priorities: ['test_emphasized_occurrence', 'reuse_observed_occurrence_rule'],
-  strategies: {
-    test_emphasized_occurrence: [{ fact: 'emphasized', expected: true, label: 'Exactly one measured occurrence has a visible frame' }],
-    reuse_observed_occurrence_rule: [{ fact: 'agreement', expected: true, label: 'Every supported rule that singles out an occurrence points to the same one' }],
-  },
-}, ['emphasized', 'agreement']);
 
 type Appearance = { shape: string; color: number };
 type Occurrence = Appearance & { id: string; marked: boolean; bbox: NativeBox; point: NativePoint };
@@ -67,11 +61,15 @@ function progress(before: Scene, after: Scene | null) {
   return changed === 1;
 }
 
-export function createSicOccurrenceRecall(): NativeFamily<Proposal> {
+export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
   let state = empty();
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: occurrenceRecallId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifyOccurrenceChoiceId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseFromFeedback, {}, await feedbackChoiceModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
@@ -87,11 +85,16 @@ export function createSicOccurrenceRecall(): NativeFamily<Proposal> {
       const visible = marked.length === 1 ? marked[0]! : null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set(supported.flatMap(({ key }) => local.rules[key]!.supports))];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        emphasized: { value: !!visible, evidence }, agreement: { value: !!inferred, evidence },
-      }, planners: { test_emphasized_occurrence: () => visible, reuse_observed_occurrence_rule: () => inferred ?? null } });
-      if (!selected) return null;
-      const strategy = selected.id, chosen = selected.plan, label = occurrenceRecallStrategies[strategy], parent = 'G_official_completion';
+      if (!visible && !inferred) return null;
+      const mode = execution?.reasoningMode ?? (inferred ? 'assimilation' : 'exploration');
+      const facts = feedbackChoiceFacts(mode, { pointedCueNeedsTest: !!visible, feedbackSupportsOneChoice: !!inferred });
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || (strategy !== 'P02' && strategy !== 'P05')) return null;
+      const chosen = strategy === 'P02' ? inferred : visible;
+      if (!chosen) return null;
+      const label = strategy === 'P02' ? occurrenceRecallStrategies.reuse_observed_occurrence_rule : occurrenceRecallStrategies.test_emphasized_occurrence;
+      const parent = 'G_official_completion';
       const goal = { kind: 'find_repeated_occurrence', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_occurrences'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_a_confirmed_occurrence' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
@@ -99,12 +102,16 @@ export function createSicOccurrenceRecall(): NativeFamily<Proposal> {
       const [x, y] = chosen.point;
       const command = { action_ref: 'ACTION6', data: { x, y } }, actions = [command];
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, chosen.point, { reason: label, evidence });
-      return { status: 'proposed', kind: occurrenceRecallId, actions, local, scene, chosen, predictions, needId: need.id,
+      return { status: 'proposed', kind: verifyOccurrenceChoiceId, actions, local, scene, chosen, predictions, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Find which occurrence advances the visible sequence', mode: inferred ? 'assimilation' : 'exploration',
-          situation: inferred ? `${supported.length} supported correspondence rules select this occurrence.` : label,
-          agenda: entries, evidence, chosen: chosen.bbox, candidates: scene.occurrences.filter(part => part.id !== chosen.id).map(part => part.bbox) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Find which occurrence advances the visible sequence', mode,
+          situation: strategy === 'P02' ? `${supported.length} supported correspondence rules select this occurrence.` : label,
+          agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          chosen: chosen.bbox, candidates: scene.occurrences.filter(part => part.id !== chosen.id).map(part => part.bbox) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

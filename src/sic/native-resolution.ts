@@ -21,7 +21,7 @@ import { labeledSequenceId, labeledSequenceStrategies, learnLabeledSequenceId } 
 import { markedCollectionId, markedCollectionStrategies } from './marked-collection.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
-import { occurrenceRecallId, occurrenceRecallStrategies } from './occurrence-recall.ts';
+import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
 import { slotPermutationId, slotPermutationStrategies } from './slot-permutation.ts';
 import { learnSurfaceCopyId, surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
 import { codeRouteId, codeRouteStrategies } from './code-route.ts';
@@ -33,7 +33,7 @@ import { symbolContributionId, symbolContributionStrategies } from './symbol-con
 import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
 import { learnQueuedPlacementId, queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
 import { legendRecolorId, legendRecolorStrategies, matchExampleId } from './legend-recolor.ts';
-import { visualPatternId, visualPatternStrategies } from './visual-pattern.ts';
+import { visualPatternId, visualPatternStrategies, verifyPatternChoiceId } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, chartRouteStrategies, learnChartRouteId } from './chart-route.ts';
 import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
@@ -89,7 +89,8 @@ import { traceCoverageId, traceCoverageStrategies } from './trace-coverage.ts';
 import { learnRadialConnectionId, radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
 import { invitedCaptureId, invitedCaptureStrategies } from './invited-capture.ts';
 import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
-import { feedbackTrialId, feedbackTrialStrategies } from './feedback-trial.ts';
+import { feedbackTrialId, feedbackTrialStrategies, verifyOrderedFeedbackId } from './feedback-trial.ts';
+import { feedbackChoiceStrategies } from './feedback-choice-card.ts';
 import { catalogueComparisonId, catalogueComparisonStrategies, revealedExampleId } from './catalogue-comparison.ts';
 import { learnReceptionAccessId, receptionAccessId, receptionAccessStrategies } from './reception-access.ts';
 import { markerCoverageId, markerCoverageStrategies } from './marker-coverage.ts';
@@ -480,6 +481,7 @@ export function readNativeResolution(agent: {
     : family === trialRepeatedLinearControlsId ? trialRepeatedLinearControlsStrategies
     : family === stableReferenceId ? stableReferenceStrategies
     : (family === verifySharedArrivalId || family === verifyPanelConfigurationId) ? preparedConfigurationStrategies
+    : (family === verifyOccurrenceChoiceId || family === verifyOrderedFeedbackId || family === verifyPatternChoiceId) ? feedbackChoiceStrategies
     : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
@@ -606,7 +608,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === occurrenceRecallId) {
+  if (situationCard && (family === occurrenceRecallId || family === verifyOccurrenceChoiceId)) {
     const chosen = bounds(card?.chosen);
     if (chosen) subjects.push({ label: 'Selected occurrence', box: chosen });
     if (Array.isArray(card?.candidates)) for (const candidate of card.candidates) {
@@ -696,7 +698,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Compatible shape', box });
     }
   }
-  if (situationCard && family === feedbackTrialId) {
+  if (situationCard && (family === feedbackTrialId || family === verifyOrderedFeedbackId)) {
     const palette = bounds(card?.palette);
     if (palette) subjects.push({ label: 'Available tile colors', box: palette });
     if (Array.isArray(card?.slots)) for (const row of card.slots) {
@@ -1081,7 +1083,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === visualPatternId) {
+  if (situationCard && (family === visualPatternId || family === verifyPatternChoiceId)) {
     const target = bounds(card?.target), option = bounds(card?.option);
     if (target) subjects.push({ label: 'Missing card', box: target });
     if (option) subjects.push({ label: 'Compatible option', box: option });
