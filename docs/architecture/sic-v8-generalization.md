@@ -31,6 +31,19 @@ Le retrait d’une famille mesure la redondance disponible dans le runtime. Le t
 
 Le test de transfert conserve le même code, les mêmes cartes et les mêmes paramètres sur plusieurs jeux. Il relève le fait qui déclenche la primitive, le retour qui l’établit, la commande qui le réutilise et les cas où le repli s’abstient. Les permutations de palette et de commandes complètent le test. Un motif visuel sert à produire une hypothèse. Un retour distinct doit pouvoir la confirmer ou la réfuter.
 
+Le [rejeu des dépendances de planification](../../scripts/check-sic-planner-dependency.mjs) exécute trois configurations sur une partie neuve. `original` conserve le registre complet. `family` retire le fournisseur habituel du registre et de l’agenda. `planner` retire aussi le fournisseur de repli qui partage les mesures ou le calcul de trajet. Dans ce dernier mode, le rejeu neutralise les fonctions identifiées dans le module partagé et relève les appels interceptés. Un appel intercepté retourne le résultat vide prévu par la fonction. Les compteurs identifient ainsi les tentatives d’accès au modèle même quand un autre fournisseur termine le niveau.
+
+Le lot couvre d'abord les niveaux 1 de KLOT et LS20 pour les déplacements, puis les niveaux 1 et les parties complètes de DICO, DNOI, HANO et SYME. Les noms servent à charger les parties et à déterminer le retrait. Le moteur reçoit les retours publics et les mêmes commandes disponibles dans les trois configurations. Le rejeu contrôle l’autorité de chaque commande et enregistre une durée par niveau, les fournisseurs réellement choisis et l’empreinte des commandes et retours.
+
+```powershell
+node scripts/check-sic-planner-dependency.mjs DICO planner first 60
+node scripts/check-sic-planner-dependency.mjs DICO planner complete 80
+```
+
+Chaque conclusion porte sur les fonctions explicitement neutralisées. Pour qualifier une reconstruction, le parcours doit aussi montrer quelle nouvelle preuve a été acquise et réutilisée. Le premier lot sert de base à l’extension du retrait aux autres niveaux 1.
+
+Le premier essai sur `341b6cb1` retrouve le niveau 1 de **DICO** en cinq commandes dans les modes `original` et `family`, avec la même empreinte des commandes et retours. Le mode `planner` laisse le niveau ouvert après 60 commandes. L'exploration publique en fournit 40 et les essais de contrôles linéaires 20. Le niveau 1 de **DNOI** reste également ouvert après 40 commandes, toutes fournies par l'exploration publique. Les fonctions prévues sont neutralisées dans les deux essais. Aucun fournisseur actif n'a tenté de les appeler. Ces deux parcours donnent les premières situations de comparaison pour l'apprentissage des groupes de candidats et des correspondances spatiales.
+
 `sic_public_input_exploration` conserve le choix final d’une expérience disponible, le budget et la mémoire des tentatives. Les mesures et producteurs d’offres ont vocation à être réutilisables indépendamment. Le graphe des commandes observées est déjà un module commun. La reconnaissance de marqueurs répétés et la recherche de mouvement après un clic sont encore dans la famille d’exploration. La présence de carrés de marqueurs, l’ordre initial des commandes et l’absence de changement avant un clic portent chacun une hypothèse qui doit être testée sur plusieurs jeux. Une famille distincte est utile lorsqu’elle conserve un modèle vérifiable entre plusieurs décisions, comme des cases découvertes ou une relation entre une commande et un mobile.
 
 La factorisation commence par les contrats récurrents effectivement observés, notamment mesurer un déplacement, vérifier l’objet contrôlé, apprendre un effet de contact, chercher un accès ou distinguer des candidats par un test. Les familles fournissent les observations et les opérations adaptées à leur scène. Les cartes choisissent une primitive selon le besoin, la situation et le mode de réflexion. Une preuve commune doit pouvoir être publiée par plusieurs familles et consommée dans le même format. Le runtime peut ensuite réévaluer la prochaine carte dans l’agenda ou via un workflow SRC. La première extraction utile porte sur la mesure du mouvement avant et après une commande et sa publication sous un format commun, à vérifier sur les retraits KLOT, KA59, LS19 et LS20.
@@ -664,6 +677,8 @@ Les essais ciblés retirent quatre anciens sélecteurs. **S5I5** retrouve ses 13
 
 Chaque essai reproduit les commandes et retours de référence sous SIC seul. Le nom neutralisé et la palette permutée conservent le gain, les commandes et les résumés des changements. Les détecteurs et les planificateurs restent disponibles.
 
+La désactivation de P02 lors de sa première utilisation sur S5I5, et de P07 lors de sa première utilisation sur TRCP, TR87 et KEYD, change les commandes suivantes. Les niveaux restent ouverts après 50 commandes sur S5I5, TR87 et KEYD. TRCP s'arrête après 47 commandes.
+
 ### Vérifier un effet distant, un déplacement ou la disparition d'un support
 
 La carte de trajet distingue trois situations. P05 mesure un effet encore incertain, P07 poursuit un accès soutenu par des observations et P02 répète une interaction déjà confirmée. **BP35** reproduit ses 16 commandes après retrait. La disparition d'un bloc et le déplacement latéral sont suivis avec deux preuves distinctes. La première autorise un nouveau retrait de support et la seconde permet de poursuivre un trajet latéral. **G50T** reproduit ses 27 commandes. Tant que la commande de répétition à distance reste incertaine, elle fait l'objet d'un essai. Les déplacements déjà mesurés servent à rejoindre la zone ouverte.
@@ -671,3 +686,5 @@ La carte de trajet distingue trois situations. P05 mesure un effet encore incert
 **TU93** reproduit ses 30 commandes. Les premiers essais vérifient la commande autour du mobile et les pas suivants suivent les connexions visibles ou reviennent par un déplacement déjà observé. **FUIT** reproduit ses 48 commandes. Chaque commande est un P05 dans ce parcours. La réponse du deuxième sprite, jusqu'au contact, demeure une prédiction à vérifier pour la paire de positions courante.
 
 Les quatre essais gagnent le niveau 1 sous SIC seul avec les commandes et retours de référence. La permutation de palette et la neutralisation du nom conservent les mêmes commandes et les résumés des changements visibles. Ces essais isolés complètent les 85 retraits déjà qualifiés et les onze autres cas rejoués sur les versions intermédiaires. La campagne du catalogue entier doit confirmer les résultats sur la même version.
+
+Sur BP35, G50T et TU93, désactiver P07 au premier trajet confirme que la carte change la suite du parcours. Les trois niveaux restent ouverts aux bornes de l'essai. BP35 et TU93 se terminent sur un échec du jeu après 54 et 50 commandes, et G50T atteint le plafond de 55 commandes.
