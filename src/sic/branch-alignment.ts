@@ -1,5 +1,5 @@
 import { branchBbox, branchLayout, branchReadState, boundedBranchObservedStateCooperative,
-  boundedBranchPlacementCooperative, BranchRoutingIncomplete, type BranchModel, type BranchPoint, type BranchState } from '../logos-engine/v6-branch-routing-geometry.ts';
+  costBoundedBranchPlacementCooperative, BranchRoutingIncomplete, type BranchModel, type BranchPoint, type BranchState } from '../logos-engine/v6-branch-routing-geometry.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
@@ -15,7 +15,10 @@ export const branchAlignmentStrategies = {
 } as const;
 
 type State = { epoch: number; model: BranchModel; positions: BranchPoint[]; controls: Record<string, BranchPoint>;
-  tried: string[]; evidence: string[]; stopped: boolean };
+  tried: string[]; evidence: string[]; stopped: boolean; recalledEvidence?: string[] | null;
+  controlEvidence?: Record<string, string> };
+type ConfirmedControls = { epoch: number; axis: BranchModel['axis']; unit: number; sources: number;
+  controls: State['controls']; evidence: string[] };
 type Proposal = NativeProposal & { local: State; current: BranchState; expected: BranchState | null; attempt: string; launch: boolean; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const bounds = { maximumIdentityAssignments: 2048, maximumPlacements: 8192, yieldInterval: 128 };
@@ -23,6 +26,7 @@ const plain = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 
 export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let confirmed: ConfirmedControls | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyBranchAlignmentId,
@@ -35,14 +39,17 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const model = prior?.model ?? branchLayout(observation, rows, inputs);
       if (!model || model.bars.length > 5 || prior?.stopped || (prior?.tried.length ?? 0) >= 48) return null;
+      const recalled = confirmed?.epoch === observation.level_epoch - 1 && confirmed.axis === model.axis
+        && confirmed.unit === model.unit && confirmed.sources < model.sources.length
+        && Object.keys(confirmed.controls).every(key => keys.includes(key)) ? confirmed : null;
       const local: State = prior ?? { epoch: observation.level_epoch, model, positions: model.bars.map(bar => bar.position),
-        controls: {}, tried: [], evidence: [], stopped: false };
+        controls: recalled?.controls ?? {}, tried: [], evidence: [], stopped: false, recalledEvidence: recalled?.evidence ?? null };
       let current: BranchState | null, displacements: number[] | undefined;
       try {
         current = await boundedBranchObservedStateCooperative(observation, model, local.positions, bounds, execution);
         if (!current) return null;
         if (new Set(Object.values(local.controls).map(vector => JSON.stringify(vector))).size === 4) {
-          displacements = (await boundedBranchPlacementCooperative(model, current[0], current[1], bounds, execution))?.displacement;
+          displacements = (await costBoundedBranchPlacementCooperative(model, current[0], current[1], bounds, execution))?.displacement;
           if (!displacements) return null;
         }
       } catch (error) {
@@ -62,7 +69,8 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
       const movement = magnitude && index === active ? keys.find(action => equal(local.controls[action], delta)) : undefined;
       const launch = displaced?.length === 0 ? unused[0] : undefined;
       const learn = !displaced ? unused[0] : undefined;
-      const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+      const ref = observation.observation_ref;
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.recalledEvidence ?? [])].filter(value => value !== ref))];
       const trial = launch ? plain(launch) : select ?? (learn ? plain(learn) : null);
       const mode = execution?.reasoningMode ?? (learn ? 'exploration' : 'solving');
       const facts = { routeSupported: !!movement, eligibleProbe: !!trial, knownInteraction: false, mode };
@@ -91,7 +99,9 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Deliver every branch to a receiving opening', mode,
-          situation: launching ? 'The measured positions satisfy the proposed geometry. The launch tests whether propagation follows it.' : label,
+          situation: launching ? (model.sources.length > 1
+            ? 'The visible sources feed a shared network. The launch checks that their combined branches reach the measured openings.'
+            : 'The measured positions satisfy the proposed geometry. The launch tests whether propagation follows it.') : label,
           agenda: [], evidence, triggerCard: decision.receipt.workflow, contributor: box, goals: model.goal_boxes.slice(0, 6) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -110,8 +120,13 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: 'compare_contributor_return' };
     },
     async record(before, after, issued, _first: NativeRows, second, proposal, _index, _frames, execution) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, current } = proposal, controls = { ...local.controls };
+      if (after.levels_completed > before.levels_completed && proposal.launch && Object.keys(controls).length === 4) {
+        const { axis, unit, sources } = local.model;
+        confirmed = { epoch: before.level_epoch, axis, unit, sources: sources.length, controls,
+          evidence: [...new Set([...(local.recalledEvidence ?? []), ...Object.values(local.controlEvidence ?? {}), after.observation_ref])].slice(-5) };
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       let next: BranchState | null = null;
       try {
         next = branchReadState(second, local.model, proposal.expected?.[0] ?? current[0]) ??
@@ -119,19 +134,31 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
       } catch (error) {
         if (!(error instanceof BranchRoutingIncomplete)) throw error;
       }
+      if (local.recalledEvidence && controls[issued.action_ref] && proposal.expected && !equal(next, proposal.expected)) {
+        state = { ...local, controls: {}, positions: next?.[0] ?? current[0], recalledEvidence: null, controlEvidence: {},
+          tried: [], evidence: [after.observation_ref], stopped: !next };
+        return { events: [] };
+      }
+      const controlEvidence = { ...local.controlEvidence };
       if (next && issued.action_ref !== 'ACTION6') {
         const [positions, active] = current;
         const moved = positions.flatMap((point, index) => equal(point, next![0][index]) ? [] : [index]);
         if (moved.length === 1 && moved[0] === active) {
           const [x, y] = positions[active]!, [nx, ny] = next[0][active]!;
-          if ((x === nx) !== (y === ny)) controls[issued.action_ref] = [nx - x, ny - y];
+          if ((x === nx) !== (y === ny)) {
+            controls[issued.action_ref] = [nx - x, ny - y];
+            controlEvidence[issued.action_ref] ??= after.observation_ref;
+          }
         }
       }
-      state = { ...local, controls, positions: next?.[0] ?? current[0], stopped: !next || proposal.launch,
+      state = { ...local, controls, controlEvidence, positions: next?.[0] ?? current[0], stopped: !next || proposal.launch,
         tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, confirmed }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      confirmed = structuredClone((value.confirmed ?? null) as ConfirmedControls | null);
+    },
   };
 }

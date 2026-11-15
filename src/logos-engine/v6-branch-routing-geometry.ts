@@ -236,6 +236,11 @@ export function branchPropagated(starts: readonly number[], model: BranchModel, 
   return withExits ? [rays, exits] : rays;
 }
 export interface BranchPlacement { cost: number; starts: number[]; displacement: number[] }
+
+function branchMoveCost(delta: number, index: number, active: number, unit: number): number {
+  return Math.floor(Math.abs(delta) / unit) + Number(delta !== 0 && index !== active);
+}
+
 function* placements(model: BranchModel, positions: readonly (readonly number[])[], active: number,
   bounds: BranchSearchBounds | null, execution?: NativeExecution): Generator<void, BranchPlacement | null> {
   const work = new Work('placements', bounds, execution); work.check();
@@ -244,7 +249,7 @@ function* placements(model: BranchModel, positions: readonly (readonly number[])
     work.take();
     if (sameSet(branchPropagated(indices, model), goals)) {
       const displacement = indices.map((start, index) => start * model.unit - positions[index]![model.tangent]!);
-      const cost = displacement.reduce((sum, delta, index) => sum + Math.floor(Math.abs(delta) / model.unit) + Number(delta !== 0 && index !== active), 1);
+      const cost = displacement.reduce((sum, delta, index) => sum + branchMoveCost(delta, index, active, model.unit), 1);
       // Cartesian traversal is already lexicographic by starts. Its first
       // equal-cost candidate is exactly min((cost, starts, displacement)).
       if (best === null || cost < best.cost) best = { cost, starts: [...indices], displacement };
@@ -259,4 +264,53 @@ export function branchPlacement(model: BranchModel, positions: readonly (readonl
 export function boundedBranchPlacementCooperative(model: BranchModel, positions: readonly (readonly number[])[], active: number,
   bounds: Partial<BranchSearchBounds>, execution?: NativeExecution): Promise<BranchPlacement | null> {
   return cooperate(placements(model, positions, active, checkedBranchBounds(bounds), execution), execution);
+}
+
+function* costBoundedPlacements(model: BranchModel, positions: readonly (readonly number[])[], active: number,
+  bounds: BranchSearchBounds, execution?: NativeExecution): Generator<void, BranchPlacement | null> {
+  const work = new Work('placements', bounds, execution);
+  work.check();
+  const goals = new Set(model.goals), starts: number[] = [], displacement: number[] = [];
+  const options = model.bars.map((bar, index) => Array.from({ length: Math.max(0, model.limit - bar.length + 1) }, (_, start) => {
+    const delta = start * model.unit - positions[index]![model.tangent]!;
+    return { start, delta, cost: branchMoveCost(delta, index, active, model.unit) };
+  }));
+  // Only visit prefixes that can complete at the current cost. Starts stay in
+  // lexicographic order within each cost, matching the exhaustive tie-break.
+  const suffixCosts = Array.from({ length: options.length + 1 }, () => new Set<number>());
+  suffixCosts[options.length]!.add(0);
+  for (let i = options.length - 1; i >= 0; i--) {
+    for (const { cost } of options[i]!) {
+      for (const suffix of suffixCosts[i + 1]!) suffixCosts[i]!.add(cost + suffix);
+    }
+  }
+  function* visit(index: number, budget: number): Generator<void, boolean> {
+    if (index === options.length) {
+      work.take();
+      const matched = sameSet(branchPropagated(starts, model), goals);
+      if (work.due) { yield; work.check(); }
+      return matched;
+    }
+    for (const { start, delta, cost } of options[index]!) {
+      const remaining = budget - cost;
+      if (!suffixCosts[index + 1]!.has(remaining)) continue;
+      starts[index] = start;
+      displacement[index] = delta;
+      if (yield* visit(index + 1, remaining)) return true;
+    }
+    return false;
+  }
+  for (const cost of [...suffixCosts[0]!].sort((a, b) => a - b)) {
+    if (yield* visit(0, cost)) {
+      work.check();
+      return { cost: cost + 1, starts, displacement };
+    }
+  }
+  work.check();
+  return null;
+}
+
+export function costBoundedBranchPlacementCooperative(model: BranchModel, positions: readonly (readonly number[])[], active: number,
+  bounds: Partial<BranchSearchBounds>, execution?: NativeExecution): Promise<BranchPlacement | null> {
+  return cooperate(costBoundedPlacements(model, positions, active, checkedBranchBounds(bounds), execution), execution);
 }

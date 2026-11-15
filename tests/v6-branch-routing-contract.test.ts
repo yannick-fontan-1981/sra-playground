@@ -4,7 +4,7 @@ import { BranchRouting } from '../src/logos-engine/v6-branch-routing.ts';
 import {
   BRANCH_ROUTING_NATIVE_SEARCH_BOUNDS, BranchRoutingIncomplete, checkedBranchBounds,
   branchObservedState, boundedBranchObservedState, boundedBranchObservedStateCooperative,
-  branchPlacement, boundedBranchPlacementCooperative,
+  branchPlacement, boundedBranchPlacementCooperative, costBoundedBranchPlacementCooperative,
 } from '../src/logos-engine/v6-branch-routing-geometry.ts';
 import type { BranchModel, BranchPoint, BranchSearchBounds } from '../src/logos-engine/v6-branch-routing-geometry.ts';
 import type { NativeExecution } from '../src/logos-engine/v6-native-types.ts';
@@ -104,6 +104,19 @@ test('cooperative identity and placement enumeration actually yields on a small 
     { maximumPlacements: 4, yieldInterval: 1 }, { yieldControl: async () => { placementYields++; } }),
   { cost: 1, starts: [2], displacement: [0] });
   assert.equal(placementYields, 4);
+});
+
+test('cost pruning proves the same optimum for a shared network within a smaller search budget', async () => {
+  const positions: BranchPoint[] = [[2, 5], [10, 7], [2, 8], [9, 10]];
+  const lengths = [4, 5, 6, 6];
+  const network: BranchModel = { ...model(), axis: 1, tangent: 0, sign: -1, limit: 16, active: 3,
+    bars: positions.map((position, index) => ({ position, length: lengths[index]!, hue: 1 })),
+    order: [3, 2, 1, 0], sources: [1, 9, 14], goals: [2, 7, 13] };
+  const bounds = { maximumPlacements: 3000 };
+  assert.deepEqual(await costBoundedBranchPlacementCooperative(network, positions, network.active, bounds, EXECUTION),
+    { cost: 10, starts: [3, 8, 0, 10], displacement: [1, -2, -2, 1] });
+  await assert.rejects(() => boundedBranchPlacementCooperative(network, positions, network.active, bounds, EXECUTION),
+    incomplete('placements', 'maximum_placements', 3000));
 });
 
 test('cancellation and deadlines stop before work or at the next cooperative checkpoint', async () => {
