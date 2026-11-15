@@ -627,4 +627,6 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 - **TR87** gagne le niveau 3 en **28 commandes** et **230,12 s** avec la vérification des effets d'édition de séquence. Les 91 commandes du parcours continu relèvent de SIC. Empreinte `c9688e0ff1cc288725043c3051f60c4ea796a9732fa0b12f23d8594f925053dc`.
 - **ZIPP** gagne le niveau 3 en **15 commandes** et **20,97 s** avec la vérification de la couverture par la trace. Les 38 commandes du parcours continu relèvent de SIC. Empreinte `5bafc617fc93339adcc2bae33d6c36a9516508b7f48ffc6e5b1a16306a631d59`.
 
-**38/100 niveaux 3** et **250/636 niveaux** sont attestés sous SIC seul, soit **39,3 %**.
+- **FITE** gagne le niveau 3 en **6 commandes** et **9,34 s**. SIC réutilise la grille et la relation entre le compteur visible et la progression officielle confirmée sur deux niveaux. Après chaque retour, P07 choisit une case ouverte en tenant compte de la proximité des autres pièces et des issues disponibles. Les 38 commandes et retours des niveaux 1 et 2 sont reproduits à l'identique et les 44 commandes du parcours relèvent de SIC. La permutation de palette conserve les commandes et leurs effets mesurés. Empreinte `5b203a5ed1627952ba6fb7c7c5ee4704d559d0288a4109e9a8a966ed202efcaf`.
+
+**39/100 niveaux 3** et **251/636 niveaux** sont attestés sous SIC seul, soit **39,5 %**.
