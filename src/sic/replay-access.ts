@@ -1,10 +1,11 @@
 import { linkedNodes, linkedOpenEnclosures, linkedPhaseSlots } from '../logos-engine/v6-linked-temporal-contact.ts';
 import { temporalPatch } from '../logos-engine/v6-linked-temporal-common.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const replayAccessId = 'sic_replay_access';
+export const verifyRemoteReplayId = 'sic_verify_remote_replay';
 export { navigationPrimitives as replayAccessStrategies } from './navigation-primitives.ts';
 
 type Body = { signature: string; start: NativePoint; size: NativePoint; floor: number; quantum: number; palette: number; mask: readonly NativePoint[] };
@@ -73,11 +74,15 @@ function peerBounds(points: readonly NativePoint[]): NativeBox | null {
   return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
 }
 
-export function createSicReplayAccess(): NativeFamily<Proposal> {
+export function createSicVerifyRemoteReplay(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: replayAccessId,
-    propose(observation, rows, _inputs, remaining, execution) {
+    id: verifyRemoteReplayId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !controls.every(control => observation.available_action_refs.includes(control)) || observation.available_action_refs.includes('ACTION6')) return null;
       const previous = state?.epoch === observation.level_epoch ? state : null;
       if (previous?.stopped || (previous?.count ?? 0) >= 72) return null;
@@ -139,22 +144,27 @@ export function createSicReplayAccess(): NativeFamily<Proposal> {
       }
       const known = proposed && Object.entries(local.controls).find(([, delta]) => equal(delta, proposed!.delta))?.[0];
       const probe = !known && !replayAction ? controls.find(input => !local.controls[input] && !local.tried.includes(positionKey(from) + ':' + input)) : null;
-      const offer = (input: string, expected: NativePoint | null) => ({ input, expected, evidence });
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        access: known && proposed ? offer(known, proposed.to) : null,
-        probe: replayAction ? offer(replayAction, null) : probe ? offer(probe, null) : null, interaction: null });
-      if (!selected) return null;
-      const { id: strategy, plan } = selected, intention = replayAction ? 'replay' : strategy === 'P07' ? 'move' : 'probe';
+      const input = known ?? replayAction ?? probe;
+      if (!input) return null;
+      const facts = { routeSupported: !!known, eligibleProbe: !!(replayAction || probe), knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = facts.routeSupported ? 'P07' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const intention = replayAction ? 'replay' : known ? 'move' : 'probe';
+      const expected = known && proposed ? proposed.to : null;
       const parent = 'G_official_completion', ref = observation.observation_ref;
       const objective = { kind: 'use_repeated_remote_effect_to_gain_access', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['carrier', 'linked_occurrence', 'replay', 'open_receiver'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_verified_replay_access' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'replay-access:' + need.id, action = { action_ref: plan.input, data: {} }, actions = [action];
-      return { status: 'proposed', kind: replayAccessId, actions, local: { ...local, node }, from, to: plan.expected, intention, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: plan.expected }],
+      const id = 'replay-access:' + need.id, action = { action_ref: input, data: {} }, actions = [action];
+      return { status: 'proposed', kind: verifyRemoteReplayId, actions, local: { ...local, node }, from, to: expected, intention, needId: need.id,
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: expected }],
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
         sicSituationCard: { strategy, need: 'Keep the distant passage open long enough to reach the receiver',
-          situation, evidence, agenda: entries, mode, triggerCard: card,
+          situation, evidence, agenda: [], mode, triggerCard: chooseLanding,
           actor: box(from, scene.body.size), target: box(destination, scene.body.size), remote: peerBounds(node.peer_support), slots: scene.slots },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],

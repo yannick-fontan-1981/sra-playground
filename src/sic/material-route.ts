@@ -1,25 +1,16 @@
 import { alternatingDescription, alternatingHistogram, alternatingOverlays, measureAlternatingGraph,
   type AlternatingActor, type AlternatingBox, type AlternatingPosition } from '../logos-engine/v6-alternating-graph-observation.ts';
-import type { NativeBox, NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 
 export const materialRouteId = 'sic_material_route';
+export const verifyConnectedRouteId = 'sic_verify_connected_route';
 export const materialRouteStrategies = {
   probe_grid_direction: 'Test an input from the current grid position',
   follow_observed_grid_edge: 'Return along measured moves to a position with an open question',
   follow_material_connections: 'Follow the connected tiles toward the distinct piece',
 } as const;
-
-const graph = compileStrategyGraph({
-  id: 'reach_distinct_piece_through_visible_connections', version: 1, order: 'FALLBACK',
-  priorities: ['follow_material_connections', 'probe_grid_direction', 'follow_observed_grid_edge'],
-  strategies: {
-    follow_material_connections: [{ fact: 'path', expected: true, label: 'One route through the measured tile connections is compatible with the observed controls' }],
-    probe_grid_direction: [{ fact: 'probe', expected: true, label: 'The piece stays identifiable and a direction remains untested at this position' }],
-    follow_observed_grid_edge: [{ fact: 'frontier', expected: true, label: 'Observed displacements lead to a nearby position with an untested direction' }],
-  },
-}, ['path', 'probe', 'frontier']);
 
 type Move = { input: string; delta: AlternatingPosition };
 type Edge = { input: string; from: string; to: string };
@@ -66,11 +57,15 @@ function matchOrdinary(first: NativeRows, second: NativeRows, actor: Alternating
   return true;
 }
 
-export function createSicMaterialRoute(): NativeFamily<Proposal> {
+export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: materialRouteId,
-    propose(observation, rows, _inputs, remaining) {
+    id: verifyConnectedRouteId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       const available = order.filter(input => observation.available_action_refs.includes(input));
       if (remaining < 1 || available.length < 3 || !rows.length) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -106,23 +101,31 @@ export function createSicMaterialRoute(): NativeFamily<Proposal> {
         ordinary: floor !== null && same(alternatingHistogram(rows, to), [[floor, actor.size ** 2]]) } : null;
       const explore: Choice | null = probe ? { input: probe, to: null, floor: null, ordinary: false } : null;
       const revisit: Choice | null = frontier ? { input: frontier.input, to: null, floor: null, ordinary: false } : null;
-      const { selected, entries } = resolveStrategyGraph({
-        graph, mode: 'active',
-        facts: { path: { value: !!planned, evidence }, probe: { value: !!explore, evidence }, frontier: { value: !!revisit, evidence } },
-        planners: { follow_material_connections: () => planned, probe_grid_direction: () => explore, follow_observed_grid_edge: () => revisit },
-      });
-      if (!selected) return null;
-      const choice = selected.plan, strategy = selected.id, label = materialRouteStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const routeOffer = planned ?? (explore ? null : revisit);
+      const facts = { routeSupported: !!routeOffer, eligibleProbe: !!explore, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      if (!decision) return null;
+      const strategy = decision.result;
+      if (strategy !== 'P07' && strategy !== 'P05') return null;
+      const choice = strategy === 'P07' ? routeOffer : explore;
+      if (!choice) return null;
+      const label = strategy === 'P05' ? materialRouteStrategies.probe_grid_direction
+        : planned ? materialRouteStrategies.follow_material_connections : materialRouteStrategies.follow_observed_grid_edge;
+      const parent = 'G_official_completion';
       const objective = { kind: 'reach_distinct_piece_through_visible_connections', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['controlled_piece', 'connecting_tiles', 'possible_destination'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_contact_along_observed_connections' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'material-route:' + need.id, action = { action_ref: choice.input, data: {} }, actions = [action];
-      return { status: 'proposed', kind: materialRouteId, actions, local, actor, choice, needId: need.id,
+      return { status: 'proposed', kind: verifyConnectedRouteId, actions, local, actor, choice, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: [{ action, expected_after: choice.ordinary ? choice.to : null }],
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
         sicSituationCard: { strategy, need: 'Find an accessible route across the connected tiles', situation: label,
-          evidence, agenda: entries, mode: planned ? 'solving' : 'exploration',
+          evidence, agenda: [], mode, triggerCard: chooseLanding,
           actor: displayBox(actor.bbox), target: choice.to ? displayBox(choice.to) : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],

@@ -1,9 +1,11 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const reactiveTargetId = 'sic_reactive_target';
+export const verifyReactiveMotionId = 'sic_verify_reactive_motion';
 
 const inputs = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Input = typeof inputs[number][0];
@@ -118,11 +120,15 @@ function choose(at: Pair, local: Memory): Plan | null {
   return probe?.plan ?? null;
 }
 
-export function createSicReactiveTarget(): NativeFamily<Proposal> {
+export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
   let memory: Memory | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: reactiveTargetId,
-    propose(observation, rows, _available, remaining, execution): Proposal | null {
+    id: verifyReactiveMotionId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _available, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !inputs.every(([ref]) => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
       const parts = geometricComponents(rows);
@@ -146,28 +152,31 @@ export function createSicReactiveTarget(): NativeFamily<Proposal> {
       const ref = observation.observation_ref, exact = local.edges[edgeKey(at, plan.input)]?.evidence;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(exact ? [exact] : [])].filter(r => r !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
-      const offer = { input: plan.input, expected: plan.target.actor, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        probe: plan.condition === 'probe' ? offer : null, access: plan.condition === 'route' ? offer : null,
-        interaction: plan.condition === 'contact' ? offer : null });
-      if (!selected) return null;
+      const routeSupported = plan.condition === 'route';
+      const facts = { routeSupported, eligibleProbe: !routeSupported, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = routeSupported ? 'P07' : 'P05';
+      if (decision?.result !== strategy) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'test_contact_with_reactive_target', scope: ref.split(':revision:', 1)[0]!, subjects: ['tracked_moving_sprite'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_contact_with_tracked_sprite' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = reactiveTargetId + ':' + need.id;
+      const id = verifyReactiveMotionId + ':' + need.id;
       const situation = plan.condition === 'contact' ? 'Test contact with the tracked sprite'
         : plan.condition === 'route' ? 'Reuse a measured movement of both sprites'
           : 'Test how the second sprite reacts to this move and update the route';
       const action = { action_ref: plan.input, data: {} };
       return {
-        status: 'proposed', kind: reactiveTargetId, at, plan, local, needId: need.id,
+        status: 'proposed', kind: verifyReactiveMotionId, at, plan, local, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: plan.target }],
-        sicSituationCard: { strategy: selected.id, need: 'Reach a sprite that reacts to movement', situation, evidence, agenda: entries, mode,
-          triggerCard: card, actor: box(at.actor, layout.size), focus: box(at.peer, layout.size), landing: box(plan.target.peer, layout.size) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Reach a sprite that reacts to movement', situation, evidence, agenda: [], mode,
+          triggerCard: chooseLanding, actor: box(at.actor, layout.size), focus: box(at.peer, layout.size), landing: box(plan.target.peer, layout.size) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

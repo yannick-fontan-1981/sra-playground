@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const excavateDescentId = 'sic_excavate_descent';
+export const verifyRemovableSupportId = 'sic_verify_removable_support';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Layout = { pitch: number; phaseX: number; phaseY: number; actorColor: number; blockColor: number; wallColor: number; airColor: number };
@@ -11,7 +13,7 @@ type Tile = 'block' | 'wall' | 'air' | 'target';
 type Scene = { actor: Part; at: NativePoint; goal: Part | null; tiles: Record<string, Tile> };
 type Step = { action: NativeCommand; at: NativePoint };
 type Plan = { score: number; steps: Step[]; drop: boolean };
-type State = { epoch: number; layout: Layout; rejected: string[]; refs: string[]; removalRef: string | null };
+type State = { epoch: number; layout: Layout; rejected: string[]; refs: string[]; removalRef: string | null; movementRef?: string };
 type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; drop: boolean; needId: string };
 
 const key = (p: NativePoint) => p.join(',');
@@ -126,10 +128,14 @@ function resultOf(first: NativeRows, second: NativeRows, proposal: Proposal) {
   return { matched, reason: matched ? 'lateral_displacement_observed' : next[0] === old[0] ? 'lateral_move_refused' : 'lateral_displacement_diverged' };
 }
 
-export function createSicExcavateDescent(): NativeFamily<Proposal> {
+export function createSicVerifyRemovableSupport(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: excavateDescentId,
+    id: verifyRemovableSupportId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION3', 'ACTION4', 'ACTION6'].every(ref => observation.available_action_refs.includes(ref))
         || ['ACTION1', 'ACTION2', 'ACTION5'].some(ref => observation.available_action_refs.includes(ref))) return null;
@@ -143,14 +149,15 @@ export function createSicExcavateDescent(): NativeFamily<Proposal> {
       if (!plan) return null;
       const step = plan.steps[0]!, pointCommand = step.action.action_ref === 'ACTION6';
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(local.removalRef ? [local.removalRef] : [])].filter(value => value !== ref))];
+      const proof = [...local.refs, ...(local.removalRef ? [local.removalRef] : []), ...(local.movementRef ? [local.movementRef] : [])];
+      const evidence: [string, ...string[]] = [ref, ...new Set(proof.filter(value => value !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
-      const offer = { input: step.action.action_ref, expected: step.at, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        probe: (pointCommand ? !local.removalRef : !local.refs.length) ? offer : null,
-        access: local.refs.length && !pointCommand ? offer : null,
-        interaction: local.removalRef && pointCommand ? offer : null });
-      if (!selected) return null;
+      const routeSupported = !pointCommand && !!local.movementRef;
+      const knownInteraction = pointCommand && !!local.removalRef;
+      const facts = { routeSupported, knownInteraction, eligibleProbe: !routeSupported && !knownInteraction, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = routeSupported ? 'P07' : knownInteraction ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
       const witness = pointCommand ? await ObservedInputDomain.makeLocusWitness(observation, rows, step.at, { reason: 'Visible block on the route', evidence }) : null;
       if (pointCommand && !witness) return null;
       const parent = 'G_official_completion';
@@ -158,19 +165,22 @@ export function createSicExcavateDescent(): NativeFamily<Proposal> {
         subjects: ['controlled_piece', 'removable_support', 'lower_route'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_descent_or_contact' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = excavateDescentId + ':' + need.id, [x, y] = step.at;
+      const id = verifyRemovableSupportId + ':' + need.id, [x, y] = step.at;
       const situation = pointCommand ? 'Remove a blocking tile and check whether the view follows a drop'
         : scene.goal ? 'Move through the current corridor toward access to the visible marker'
           : 'Follow the measured lateral control toward a visible opening';
       return {
-        status: 'proposed', kind: excavateDescentId, local, scene, step, drop: plan.drop, needId: need.id,
+        status: 'proposed', kind: verifyRemovableSupportId, local, scene, step, drop: plan.drop, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [step.action],
         steps: [{ action: step.action, expected_after: step.at, ...(witness ? { point_binding: witness } : {}) }],
-        sicSituationCard: { strategy: selected.id, need: 'Open access to the lower route', situation, evidence, agenda: entries, mode,
-          triggerCard: card, actor: scene.actor.bbox, focus: [x - 2, y - 2, x + 2, y + 2], goal: scene.goal?.bbox ?? null },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Open access to the lower route', situation, evidence, agenda: [], mode,
+          triggerCard: chooseLanding, actor: scene.actor.bbox, focus: [x - 2, y - 2, x + 2, y + 2], goal: scene.goal?.bbox ?? null },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [step.action], outcome_guard: { path: ['value'], contains: id } },
       };
@@ -189,6 +199,7 @@ export function createSicExcavateDescent(): NativeFamily<Proposal> {
       const { local, step } = proposal, matched = resultOf(first, second, proposal).matched;
       state = { ...local, refs: matched ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         removalRef: matched && step.action.action_ref === 'ACTION6' ? after.observation_ref : local.removalRef,
+        ...(matched && step.action.action_ref !== 'ACTION6' ? { movementRef: after.observation_ref } : {}),
         rejected: matched ? [] : [...local.rejected, signature(step)] };
       return { events: [] };
     },
