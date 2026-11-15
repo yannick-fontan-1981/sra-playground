@@ -469,6 +469,10 @@ Sur **SEQN**, SIC apprend les quatre associations touche–glyphe en observant l
 
 Le bilan atteint **62/100 niveaux 2** et **179/636 niveaux attestés sous SIC seul** (28,1 %).
 
+Sur **LKEY**, SIC réutilise la prise, l’échange de rangée et le test d’insertion observés au niveau 1. Au niveau 2, aucun profil visible ne correspond encore à l’un des réceptacles. Le moteur repère l’outil encadré et teste la commande dont l’effet reste inconnu. Le retour confirme l’inversion de l’ordre des dents. SIC pose le profil préparé, puis déplace le foyer et ouvre le second réceptacle en préservant le premier acquis. Le niveau 2 gagne en **8 commandes** et **16,22 s**, comme dans le rejeu à palette permutée pour le nombre de commandes. Les huit commandes et retours du niveau 1 sont reproduits. Les 16 commandes relèvent de SIC, avec l’empreinte `e5b3a18fd0b17e4974266bb9fb4013479befd66d4bbcdbae74e57a94957e7c28`.
+
+Le bilan atteint **63/100 niveaux 2** et **180/636 niveaux attestés sous SIC seul** (28,3 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.

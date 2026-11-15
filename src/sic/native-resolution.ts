@@ -653,7 +653,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === profileTransferId || family === verifyProfileTransferId)) {
-    for (const [field, label] of [['marker', 'Current focus marker'], ['profile', 'Matching profile'], ['receiver', 'Receiver to fill']] as const) {
+    for (const [field, label] of [['marker', 'Current focus marker'], ['profile', 'Current profile'],
+      ['receiver', 'Receiver to fill'], ['tool', 'Profile transformation control']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
