@@ -36,7 +36,7 @@ import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { createSicFieldRepair } from '../sic/field-repair.ts';
 import { createSicVerifyContactOrder } from '../sic/ordered-contact.ts';
 import { createSicSupportTransfer } from '../sic/support-transfer.ts';
-import { createSicLearnSupportMoves } from '../sic/learn-support-moves.ts';
+import { createSicLearnSupportMoves, learnObservedSupportsId } from '../sic/learn-support-moves.ts';
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects, learnVisibleGroupEffectsId } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
@@ -2616,11 +2616,11 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const now = options.now ?? (() => performance.now());
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 171, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 173, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(),
+      createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
       createSicVerifySharedArrival(), createSicOutlineService(), createSicOutlineService(learnOutlineServiceId),

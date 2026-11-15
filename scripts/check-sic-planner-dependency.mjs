@@ -28,7 +28,7 @@ const cases = {
   HANO: {
     original: 'sic_ordered_support_transfer', shared: 'sic_learn_support_moves',
     module: 'src/logos-engine/v6-ordered-support.ts',
-    guards: { measureOrderedSupportScene: 'null', measureSupportBand: 'null' },
+    guards: { measureOrderedSupportScene: 'null', measureSupportBand: 'null', measureMaterialBands: 'null' },
   },
   KLOT: {
     original: 'sic_move_masked_pieces', shared: 'sic_learn_selected_access',

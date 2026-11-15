@@ -26,15 +26,16 @@ function repeatedGap(cells: readonly Cell[], axis: 0 | 1, width: number): number
 }
 
 /** Read rectangular neighborhoods from repeated neighbor offsets in public pixels. */
-export function observeRepeatedCells(rows: NativeRows, { minimumSide = 3, includeUnitCells = false } = {}): RegularField[] {
+export function observeRepeatedCells(rows: NativeRows, { minimumSide = 3, includeUnitCells = false, separateValues = false } = {}): RegularField[] {
   const sizes = new Map<string, { size: NativePoint; cells: Cell[] }>();
   for (const part of geometricComponents(rows)) {
     const [left, top, right, bottom] = part.bbox;
     const size: NativePoint = [right - left + 1, bottom - top + 1];
     if ((!includeUnitCells && part.area === 1) || part.area !== size[0] * size[1]) continue;
-    const group = sizes.get(key(size)) ?? { size, cells: [] };
+    const signature = separateValues ? key(size) + ':' + part.color : key(size);
+    const group = sizes.get(signature) ?? { size, cells: [] };
     group.cells.push({ point: [left, top], value: part.color });
-    sizes.set(key(size), group);
+    sizes.set(signature, group);
   }
   const fields: RegularField[] = [];
   for (const { size, cells } of sizes.values()) {

@@ -19,7 +19,7 @@ const extent = ([l, t, r, b]: NativeBox) => (r - l + 1) * (b - t + 1);
 /** The shared appearance of a control and a marked region suggests a scope to test. */
 export function observeVisibleScope(rows: NativeRows): VisibleScope | null {
   const parts = geometricComponents(rows);
-  const offers = observeRepeatedCells(rows, { minimumSide: 2, includeUnitCells: true }).flatMap(field => {
+  const offers = observeRepeatedCells(rows, { minimumSide: 2, includeUnitCells: true, separateValues: true }).flatMap(field => {
     const { xs, ys, size: [w, h], values } = field;
     const colors = new Set(values.values());
     if (colors.size !== 1) return [];

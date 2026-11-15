@@ -1,21 +1,25 @@
 import { measureOrderedSupportScene, measureSupportBand, orderedSupportSelectionMatches,
   type MaterialBand, type OrderedSupportScene } from '../logos-engine/v6-ordered-support.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { observeSupports, type ObservedSupports } from './observed-supports.ts';
 
 export const learnSupportMovesId = 'sic_learn_support_moves';
+export const learnObservedSupportsId = 'sic_learn_observed_supports';
 
+type Scene = OrderedSupportScene | ObservedSupports;
 type Move = { source: number; destination: number; expected: number[][] };
-type State = { epoch: number; selected: { member: MaterialBand; source: number; key: string; frameHash: string; scene: OrderedSupportScene } | null; effects: string[]; refused: string[] };
+type State = { epoch: number; selected: { member: MaterialBand; source: number; key: string; frameHash: string; scene: Scene } | null; effects: string[]; refused: string[] };
 type Offer = NativeProposal & { local: State; move: Move; member: MaterialBand; key: string; phase: 'select' | 'deposit'; needId: string;
-  scene: OrderedSupportScene };
+  scene: Scene };
 const signature = (state: number[][]) => JSON.stringify(state);
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const center = ([l,t,r,b]: NativeBox): NativePoint => [Math.floor((l+r)/2), Math.floor((t+b)/2)];
 
-function nextTransfer(scene: OrderedSupportScene, local: State): Move | null {
+function nextTransfer(scene: Scene, local: State): Move | null {
   const { configuration, target } = scene;
   const total = configuration.flat().length;
   const key = signature(configuration);
@@ -43,42 +47,55 @@ function nextTransfer(scene: OrderedSupportScene, local: State): Move | null {
   return null;
 }
 
-async function deposited(offer: Offer, rows: NativeRows) {
-  const scene = await measureOrderedSupportScene(rows);
-  return !!scene && scene.target === offer.scene.target && same(scene.configuration, offer.move.expected)
-    && same(scene.structural_supports, offer.scene.structural_supports);
-}
-
-export function createSicLearnSupportMoves(): NativeFamily<Offer> {
+export function createSicLearnSupportMoves(family = learnSupportMovesId): NativeFamily<Offer> {
+  const fromObservedSupports = family === learnObservedSupportsId;
+  const readScene = (rows: NativeRows) => fromObservedSupports ? observeSupports(rows) : measureOrderedSupportScene(rows);
+  async function deposited(offer: Offer, rows: NativeRows) {
+    const scene = await readScene(rows);
+    return !!scene && scene.target === offer.scene.target && same(scene.configuration, offer.move.expected)
+      && same(scene.structural_supports, offer.scene.structural_supports);
+  }
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: learnSupportMovesId,
+    id: family,
+    async attachPrograms(registry) {
+      if (fromObservedSupports) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const local = state?.epoch === observation.level_epoch && (!state.selected || state.selected.frameHash === observation.frame_hash)
+      const local: State = state?.epoch === observation.level_epoch && (!state.selected || state.selected.frameHash === observation.frame_hash)
         ? state : { epoch: observation.level_epoch, selected: null, effects: [], refused: [] };
       // The selection outline can cover parts of the structural supports.
       // Its verified frame binds the last complete measurement until deposit.
-      const scene = local.selected?.scene ?? await measureOrderedSupportScene(rows);
+      const scene = local.selected?.scene ?? await readScene(rows);
       if (!scene) return null;
       const move = nextTransfer(scene, local);
       if (!move) return null;
       const layout = signature(scene.configuration);
       const phase = local.selected?.key === layout && local.selected.source === move.source ? 'deposit' : 'select';
       const member = phase === 'deposit' ? local.selected!.member
-        : await measureSupportBand(rows, scene, move.source, scene.configuration[move.source]!.at(-1)!);
+        : 'bands' in scene ? scene.bands[move.source]?.at(-1)
+          : await measureSupportBand(rows, scene, move.source, scene.configuration[move.source]!.at(-1)!);
       if (!member) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.effects.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const receiver = scene.structural_supports[move.destination]!.bbox;
-      const [y,x] = scene.geometry.supports[phase === 'select' ? move.source : move.destination]!.point;
+      const index = phase === 'select' ? move.source : move.destination;
+      const point = 'contacts' in scene ? scene.contacts[index]! : scene.geometry.supports[index]!.point;
+      const [x, y] = 'contacts' in scene ? point : [point[1], point[0]];
       const action = { action_ref: 'ACTION6', data: { x, y } };
       const offer = { input: action.action_ref, expected: center(receiver), evidence };
       const known = local.effects.length >= 2;
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: known ? null : offer,
+      const legacy = fromObservedSupports ? null : resolveNavigationPrimitives({ mode, evidence, probe: known ? null : offer,
         access: known && phase === 'select' ? offer : null, interaction: known && phase === 'deposit' ? offer : null });
-      if (!selected) return null;
+      const facts = { routeSupported: known && phase === 'select', eligibleProbe: !known, knownInteraction: known && phase === 'deposit', mode };
+      const decision = fromObservedSupports ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : undefined;
+      const primitive = facts.routeSupported ? 'P07' : facts.knownInteraction ? 'P02' : 'P05';
+      if (fromObservedSupports && decision?.result !== primitive) return null;
+      const strategy = fromObservedSupports ? primitive : legacy?.selected?.id;
+      if (!strategy) return null;
       const purpose = phase === 'select' ? 'Test or reuse selection of the exposed piece' : 'Check the deposit on a support with enough room';
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x,y], { reason: purpose, evidence });
       if (!witness) return null;
@@ -86,17 +103,21 @@ export function createSicLearnSupportMoves(): NativeFamily<Offer> {
       const objective = { kind: 'move_exposed_pieces_to_receiving_support', scope: ref.split(':revision:',1)[0]!,
         subjects: ['exposed_piece', 'receiving_support'], parentObjective: parent, satisfactionContract: 'official_progress_after_verified_deposits' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = learnSupportMovesId + ':' + need.id;
+      const id = family + ':' + need.id;
       return {
-        status: 'proposed', kind: learnSupportMovesId, local, move, member, phase, key: layout, needId: need.id,
+        status: 'proposed', kind: family, local, move, member, phase, key: layout, needId: need.id,
         scene,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         actions: [action], steps: [{ action, point_binding: witness, expected_after: phase === 'deposit' ? move.expected : null }],
-        sicSituationCard: { strategy: selected.id, need: 'Move exposed pieces to the indicated support', situation: purpose, evidence,
-          agenda: entries, mode, triggerCard: card, focus: member.bbox, target: receiver, goal: scene.structural_supports[scene.target]!.bbox },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Move exposed pieces to the indicated support', situation: purpose, evidence,
+          agenda: legacy?.entries ?? [], mode, triggerCard: fromObservedSupports ? chooseLanding : legacy?.card,
+          focus: member.bbox, target: receiver, goal: scene.structural_supports[scene.target]!.bbox },
         question: { reason: purpose, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: purpose, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
