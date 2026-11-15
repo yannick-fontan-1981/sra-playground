@@ -698,6 +698,9 @@ export function readNativeResolution(agent: {
   if (situationCard && family === observedLinePlacementId) {
     const target = bounds(card?.target);
     if (target) subjects.push({ label: 'Cell selected for the next mark', box: target });
+    const own = bounds(card?.ownMark), other = bounds(card?.otherMark), pending = card?.markRolesPending === true;
+    if (own) subjects.push({ label: pending ? 'Candidate mark under control' : 'Mark under control', box: own });
+    if (other) subjects.push({ label: pending ? 'Candidate opposing mark' : 'Opposing mark', box: other });
   }
   if (situationCard && family === observedPolePairId) {
     for (const [field, label] of [['selected', 'Piece under control'], ['partner', 'Coupled piece'], ['destination', 'Marked destination']] as const) {
