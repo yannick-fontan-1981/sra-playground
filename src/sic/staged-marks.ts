@@ -1,17 +1,19 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 
 export const stagedMarksId = 'sic_staged_marks';
+export const verifyCombinedMarksId = 'sic_verify_combined_marks';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Source = { box: NativeBox; mark: NativeBox };
 type Model = { reference: Source; donors: Source[]; outlineHeight: number };
 type Layer = { box: NativeBox; marks: { box: NativeBox; color: number }[] };
 type Scene = { preview: NativeBox; layers: Layer[] };
-type State = { epoch: number; model: Model; refs: string[]; resizeRef: string | null; rejected: string[] };
-type Choice = { input: string; reason: string; target: NativeBox; click?: NativePoint };
+type State = { epoch: number; model: Model; refs: string[]; resizeRef: string | null; rejected: string[]; depositRef?: string };
+type Choice = { input: string; reason: string; target: NativeBox; click?: NativePoint; prepared?: true };
 type Proposal = NativeProposal & { local: State; scene: Scene; choice: Choice; needId: string };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -81,17 +83,21 @@ function choose({ preview, layers }: Scene, local: State): Choice | null {
     return { input: 'ACTION2', reason: 'Test whether reducing the width preserves the combined marks and clears the reference', target: reference.box };
   }
   if (rejected.includes(preview.join(','))) return null;
-  return confirm(reference.box, 'Advance the combined marks toward the reference');
+  return { ...confirm(reference.box, 'Advance the combined marks toward the reference'), prepared: true };
 }
 
 function containsSignatures(layer: Layer, signatures: ReadonlySet<number>): boolean {
   return [...signatures].every(color => layer.marks.some(mark => mark.color === color));
 }
 
-export function createSicStagedMarks(): NativeFamily<Proposal> {
+export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: stagedMarksId,
+    id: verifyCombinedMarksId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(choosePreparedConfiguration, {}, await preparedConfigurationModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5','ACTION6','ACTION2'].every(id => observation.available_action_refs.includes(id))) return null;
       const parts = geometricComponents(rows);
@@ -104,30 +110,35 @@ export function createSicStagedMarks(): NativeFamily<Proposal> {
       const choice = choose(scene, local);
       if (!choice) return null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(local.depositRef ? [local.depositRef] : [])].filter(v => v !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
-      const offer = { input: choice.input, expected: center(choice.target), evidence };
-      const recurring = choice.input === 'ACTION5' && scene.layers.length > 0;
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        probe: recurring ? null : offer, access: null, interaction: recurring ? offer : null });
-      if (!selected) return null;
+      const recurring = choice.input === 'ACTION5' && !!local.depositRef;
+      const facts = preparedConfigurationFacts(mode, { readyWithKnownApplication: !!choice.prepared && recurring,
+        readyForFirstApplication: !!choice.prepared && !recurring, pendingWithKnownEdit: !choice.prepared && recurring,
+        pendingWithUntestedEdit: !choice.prepared && !recurring });
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = recurring ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
       const witness = choice.click ? await ObservedInputDomain.makeLocusWitness(observation, rows, choice.click, { reason: choice.reason, evidence }) : null;
       if (choice.click && !witness) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'combine_observed_contributions_at_reference', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['control_preview', 'visible_contributions', 'reference'], parentObjective: parent, satisfactionContract: 'official_progress_with_combined_marks' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = stagedMarksId + ':' + need.id;
+      const id = verifyCombinedMarksId + ':' + need.id;
       const action: NativeCommand = { action_ref: choice.input, data: choice.click ? { x: choice.click[0], y: choice.click[1] } : {} };
       return {
-        status: 'proposed', kind: stagedMarksId, local, scene, choice, needId: need.id,
+        status: 'proposed', kind: verifyCombinedMarksId, local, scene, choice, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: choice.target, ...(witness ? { point_binding: witness } : {}) }],
-        sicSituationCard: { strategy: selected.id, need: 'Combine the visible marks at the reference', situation: choice.reason, evidence, agenda: entries, mode,
-          triggerCard: card, focus: scene.preview, target: choice.target, carriers: scene.layers.map(layer => layer.box) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Combine the visible marks at the reference', situation: choice.reason, evidence, agenda: [], mode,
+          triggerCard: decision.receipt.workflow, focus: scene.preview, target: choice.target, carriers: scene.layers.map(layer => layer.box) },
         question: { reason: choice.reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: choice.reason, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: choice.reason,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
@@ -147,6 +158,7 @@ export function createSicStagedMarks(): NativeFamily<Proposal> {
       const { local, choice, scene } = proposal, confirmed = check(proposal, second);
       state = { ...local,
         refs: confirmed ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
+        ...(confirmed === 'new_marked_layer_observed' ? { depositRef: after.observation_ref } : {}),
         resizeRef: choice.input === 'ACTION2' && confirmed ? after.observation_ref : local.resizeRef,
         rejected: confirmed ? local.rejected : [...local.rejected, scene.preview.join(',')] };
       return { events: [] };

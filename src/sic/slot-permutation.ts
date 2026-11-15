@@ -1,23 +1,16 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { fitOrbit, measureOrbitField, orbitCycles, orbitRoute, orbitValues, type OrbitField } from '../logos-engine/v6-orbit-constraints.ts';
-import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const slotPermutationId = 'sic_slot_permutation';
+export const verifySlotPermutationId = 'sic_verify_slot_permutation';
 export const slotPermutationStrategies = {
   test_slot_permutation: 'Test how a visible control rearranges the slots',
   apply_slot_permutation: 'Apply a measured rearrangement toward the marked target',
   distinguish_slot_permutations: 'Retest on a different arrangement to distinguish possible effects',
 } as const;
-const graph = compileStrategyGraph({ id: 'match_marked_slots_by_permuting_contents', version: 1, order: 'FALLBACK',
-  priorities: ['apply_slot_permutation', 'test_slot_permutation', 'distinguish_slot_permutations'],
-  strategies: {
-    test_slot_permutation: [{ fact: 'unmeasuredControl', expected: true, label: 'A repeated control shape has an unmeasured effect on the slots' }],
-    apply_slot_permutation: [{ fact: 'knownRoute', expected: true, label: 'A composition of uniquely measured permutations reaches the marked target' }],
-    distinguish_slot_permutations: [{ fact: 'canDisambiguate', expected: true, label: 'The current arrangement distinguishes remaining interpretations of the same control' }],
-  },
-}, ['unmeasuredControl', 'knownRoute', 'canDisambiguate']);
 
 type Model = { key: NativePoint; permutations: number[][]; evidence: string; tried: string[] };
 type State = { layout: string; models: Record<string, Model>; count: number };
@@ -37,11 +30,15 @@ function visibleControlInputs(observation: NativeObservation): NativeCommand[] {
   });
 }
 
-export function createSicSlotPermutation(): NativeFamily<Proposal> {
+export function createSicVerifySlotPermutation(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: slotPermutationId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifySlotPermutationId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const scene = measureOrbitField(observation, visibleControlInputs(observation));
       if (!scene || scene.positions.length > 32 || scene.controls.size > 8 || scene.targets.size > 3) return null;
@@ -64,13 +61,16 @@ export function createSicSlotPermutation(): NativeFamily<Proposal> {
       });
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set(Object.values(local.models).map(model => model.evidence))];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        unmeasuredControl: { value: !!unmeasured, evidence }, knownRoute: { value: !!next, evidence },
-        canDisambiguate: { value: !!ambiguous, evidence },
-      }, planners: { test_slot_permutation: () => unmeasured ?? null, apply_slot_permutation: () => next ?? null,
-        distinguish_slot_permutations: () => ambiguous ?? null } });
-      if (!selected) return null;
-      const strategy = selected.id, control = selected.plan, label = slotPermutationStrategies[strategy], parent = 'G_official_completion';
+      const trial = unmeasured ?? ambiguous;
+      const mode = execution?.reasoningMode ?? (next ? 'solving' : 'exploration');
+      const facts = { routeSupported: !!next, eligibleProbe: !!trial, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
+      const control = strategy === 'P07' ? next : trial;
+      if (!control) return null;
+      const phase = strategy === 'P07' ? 'apply_slot_permutation' : unmeasured ? 'test_slot_permutation' : 'distinguish_slot_permutations';
+      const label = slotPermutationStrategies[phase], parent = 'G_official_completion';
       const goal = { kind: 'match_visible_marked_slots', scope: ref.split(':revision:', 1)[0]!, subjects: ['marked_slot_field'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_matching_marked_slots' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
@@ -78,13 +78,16 @@ export function createSicSlotPermutation(): NativeFamily<Proposal> {
       const [x, y] = control.key, command = { action_ref: 'ACTION6', data: { x, y } }, actions = [command];
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, control.key, { reason: label, evidence });
       const operator = operators.get(key(control.key));
-      return { status: 'proposed', kind: slotPermutationId, actions, local, control: control.key,
+      return { status: 'proposed', kind: verifySlotPermutationId, actions, local, control: control.key,
         board: { values, positions, size }, prediction: operator ? predict(operator.permutation, values) : null, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: pointBinding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Bring the marked slots to their displayed target colors', mode: next ? 'solving' : 'exploration',
-          situation: next ? `The measured rearrangements give a route in ${path!.length} moves.` : label,
-          agenda: entries, evidence, control: control.box, distance: path?.length ?? null,
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Bring the marked slots to their displayed target colors', mode,
+          situation: strategy === 'P07' ? `The measured rearrangements give a route in ${path!.length} moves.` : label,
+          agenda: [], evidence, triggerCard: decision.receipt.workflow, control: control.box, distance: strategy === 'P07' ? path!.length : null,
           targets: [...targets.keys()].map(i => {
             const [x, y] = positions[i]!;
             return [x, y, x + size - 1, y + size - 1];

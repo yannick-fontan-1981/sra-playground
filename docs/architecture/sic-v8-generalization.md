@@ -597,3 +597,13 @@ Sur `5f1b16ee`, les **73/100 retraits gagnants** totalisent 835 commandes SIC se
 Les commandes et retours reproduisent les références. Le nom neutralisé et la palette permutée conservent les gains. MIND gagne alors en quatre commandes, dès la première soumission. Désactiver la règle P02 utilisée dans chaque parcours rend la suite à l’exploration publique. MEMO et SERI restent ouverts au budget de référence. MIND gagne avec la même dernière commande, cette fois fournie par l’exploration.
 
 MEMO `40ac77f931014315cdeb289b623e971f165ce7962801671d5b2bda66f288e482`. MIND `d2af6be8e55804dace772b7227f902dc86056bea5dedae2a4b1532f3c0c87a50`. SERI `e327a63ace9a61f555be390a32afada20bce326a81e975542d70fc383278e13a`.
+
+### Réutiliser un effet mesuré pour préparer l’étape suivante
+
+**LP85** gagne en cinq clics. Un essai P05 mesure une permutation. La carte commune de déplacement choisit ensuite quatre actions P07 à partir des permutations compatibles avec les retours. Si la règle P07 est désactivée après le premier clic, la carte essaie un autre contrôle. Le niveau reste ouvert au budget de cinq commandes.
+
+**TN36 et TEQU** gagnent en huit commandes chacun. La carte `sic.apply_verified_configuration.choose`, déjà utilisée par SMLP et RSWP, distingue une modification encore à tester, la réutilisation d’un contrôle confirmé et l’application de la configuration. TN36 lit les déplacements dans les images du programme initial, puis compare la modification de chaque bit au retour avant de lancer le programme. TEQU vérifie chaque dépôt et la présence des marques sur le support avant de réutiliser ce contrôle.
+
+Les trois parcours reproduisent les commandes et retours de référence. La palette permutée et le nom neutralisé conservent les gains. Sur TN36 et TEQU, désactiver la règle de réutilisation de l’édition après les deux premières commandes change la suite. Les niveaux restent ouverts à huit commandes.
+
+LP85 `5fd87809ca31d185f273cae83fa67b11a89ceaa30ada9d48143e1bc5374e9eb2`. TN36 `845a346dfa829f2a5b5692d46b19062379aec2e179bb14ea5e147f2b2a83d141`. TEQU `28eaa8b1bcea3ccb1d747b2b70fb48aa3ad6475f1af0934e7e0d8e112163612d`.

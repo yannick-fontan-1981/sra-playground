@@ -22,9 +22,9 @@ import { markedCollectionId, markedCollectionStrategies } from './marked-collect
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
-import { slotPermutationId, slotPermutationStrategies } from './slot-permutation.ts';
+import { slotPermutationId, slotPermutationStrategies, verifySlotPermutationId } from './slot-permutation.ts';
 import { learnSurfaceCopyId, surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
-import { codeRouteId, codeRouteStrategies } from './code-route.ts';
+import { codeRouteId, codeRouteStrategies, verifyProgramConfigurationId } from './code-route.ts';
 import { profileTransferId, profileTransferStrategies } from './profile-transfer.ts';
 import { learnOrderedReplenishmentId, orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
 import { learnProgramOriginId, programOriginId, programOriginStrategies } from './program-origin.ts';
@@ -69,7 +69,7 @@ import { litRouteId, learnLitRouteId } from './lit-route.ts';
 import { learnPivotCargoId, pivotCargoId } from './pivot-cargo.ts';
 import { learnNestedPassageId, nestedPassageId } from './nested-passage.ts';
 import { learnContactAccessId, translateCoupledPiecesId } from './translate-coupled-pieces.ts';
-import { stagedMarksId } from './staged-marks.ts';
+import { stagedMarksId, verifyCombinedMarksId } from './staged-marks.ts';
 import { learnSelectedAccessId, moveMaskedPiecesId } from './move-masked-pieces.ts';
 import { learnLinkOpeningsId, linkOpeningsId } from './link-openings.ts';
 import { learnAnimatedCueId, reproduceCueId } from './reproduce-cue.ts';
@@ -480,9 +480,11 @@ export function readNativeResolution(agent: {
     : family === recheckDirectionalControlsId ? recheckDirectionalControlsStrategies
     : family === trialRepeatedLinearControlsId ? trialRepeatedLinearControlsStrategies
     : family === stableReferenceId ? stableReferenceStrategies
-    : (family === verifySharedArrivalId || family === verifyPanelConfigurationId) ? preparedConfigurationStrategies
+    : (family === verifySharedArrivalId || family === verifyPanelConfigurationId || family === verifyProgramConfigurationId
+      || family === verifyCombinedMarksId) ? preparedConfigurationStrategies
     : (family === verifyOccurrenceChoiceId || family === verifyOrderedFeedbackId || family === verifyPatternChoiceId) ? feedbackChoiceStrategies
-    : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId) ? inventoryAccessStrategies
+    : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId
+      || family === verifySlotPermutationId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -616,7 +618,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Other visible occurrence', box });
     }
   }
-  if (situationCard && family === slotPermutationId) {
+  if (situationCard && (family === slotPermutationId || family === verifySlotPermutationId)) {
     const control = bounds(card?.control);
     if (control) subjects.push({ label: 'Rearrangement control', box: control });
     if (Array.isArray(card?.targets)) for (const target of card.targets) {
@@ -630,7 +632,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === codeRouteId) {
+  if (situationCard && (family === codeRouteId || family === verifyProgramConfigurationId)) {
     for (const [field, label] of [['actor', 'Programmed piece'], ['target', 'Target cell'], ['addressed', 'Edited instruction or run control']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
@@ -843,7 +845,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === stagedMarksId) {
+  if (situationCard && (family === stagedMarksId || family === verifyCombinedMarksId)) {
     const preview = bounds(card?.focus), target = bounds(card?.target);
     if (preview) subjects.push({ label: 'Placement preview', box: preview });
     if (target) subjects.push({ label: 'Visible mark source or reference', box: target });

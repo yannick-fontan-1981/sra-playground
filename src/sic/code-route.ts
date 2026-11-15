@@ -1,29 +1,22 @@
 import { CODE_DIRECTIONS, codeBits, codePosition, decodeCodeWord, encodeCodeWord, measureCodeScene, moveCodePosition, type CodeWord } from '../logos-engine/v6-code-program.ts';
 import { ObservedInputDomain, projection } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 
 export const codeRouteId = 'sic_code_route';
+export const verifyProgramConfigurationId = 'sic_verify_program_configuration';
 export const codeRouteStrategies = {
   observe_program_trace: 'Run the visible program to measure instruction effects',
   edit_program_step: 'Edit one instruction to build a route to the target',
   execute_verified_program: 'Run the edited program whose instructions lead to the target',
 } as const;
-const graph = compileStrategyGraph({ id: 'build_program_from_measured_motion', version: 1, order: 'FALLBACK',
-  priorities: ['execute_verified_program', 'edit_program_step', 'observe_program_trace'],
-  strategies: {
-    observe_program_trace: [{ fact: 'untriedRun', expected: true, label: 'The effect of executing this visible program from the current cell is untested' }],
-    edit_program_step: [{ fact: 'needsEdit', expected: true, label: 'Measured instructions can reach the target after an edit' }],
-    execute_verified_program: [{ fact: 'verifiedProgram', expected: true, label: 'Every current instruction matches a measured route to the target' }],
-  },
-}, ['untriedRun', 'needsEdit', 'verifiedProgram']);
 
 type Scene = { origin: NativePoint; size: number; goal: NativePoint; allowed: NativePoint[]; columns: NativeBox[][];
   bit_commands: NativeCommand[][]; values: number[]; execute: NativeCommand; button_box: NativeBox; button_hue: number };
 type Effect = { motion: NativePoint; ref: string };
 type State = { epoch: number; scene: Scene; effects: Record<string, Effect>; rejected: string[]; runs: string[];
-  count: number; stopped: boolean };
+  count: number; stopped: boolean; editRef?: string };
 type Proposal = NativeProposal & { local: State; program: CodeWord[]; start: NativePoint;
   edit: CodeWord[] | null; run: string; needId: string };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -69,11 +62,15 @@ function observedInstructions(proposal: Proposal, frames: readonly NativeRows[])
   });
 }
 
-export function createSicCodeRoute(): NativeFamily<Proposal> {
+export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: codeRouteId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifyProgramConfigurationId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(choosePreparedConfiguration, {}, await preparedConfigurationModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 48) return null;
@@ -90,14 +87,19 @@ export function createSicCodeRoute(): NativeFamily<Proposal> {
       const run = JSON.stringify([start, program]);
       const untried = !local.runs.includes(run), editable = column !== -1 && bit !== -1;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set(Object.values(local.effects).map(effect => effect.ref))];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        untriedRun: { value: untried && !wanted, evidence }, needsEdit: { value: editable, evidence },
-        verifiedProgram: { value: untried && !!wanted && column === -1, evidence },
-      }, planners: { observe_program_trace: () => scene.execute, execute_verified_program: () => scene.execute,
-        edit_program_step: () => editable ? scene.bit_commands[column]![bit]! : null } });
-      if (!selected) return null;
-      const strategy = selected.id, label = codeRouteStrategies[strategy], command = selected.plan;
+      const evidence: [string, ...string[]] = [ref, ...new Set([...Object.values(local.effects).map(effect => effect.ref),
+        ...(local.editRef ? [local.editRef] : [])])];
+      const ready = untried && !!wanted && column === -1, canObserve = untried && !wanted;
+      const phase = ready ? 'execute_verified_program' : editable ? 'edit_program_step' : canObserve ? 'observe_program_trace' : null;
+      if (!phase) return null;
+      const reuseEdit = editable && !!local.editRef;
+      const mode = execution?.reasoningMode ?? (wanted ? 'solving' : 'exploration');
+      const facts = preparedConfigurationFacts(mode, { readyWithKnownApplication: ready, pendingWithKnownEdit: reuseEdit,
+        pendingWithUntestedEdit: editable && !reuseEdit, needsApplicationObservation: canObserve });
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = ready || reuseEdit ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const label = codeRouteStrategies[phase], command = editable ? scene.bit_commands[column]![bit]! : scene.execute;
       const parent = 'G_official_completion';
       const goal = { kind: 'program_motion_to_visible_target', scope: ref.split(':revision:', 1)[0]!, subjects: ['program_and_moving_piece'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_program_execution' };
@@ -106,11 +108,15 @@ export function createSicCodeRoute(): NativeFamily<Proposal> {
       const edit = editable ? program.map((word, index) => index === column ? encodeCodeWord(decodeCodeWord(word) ^ weights[bit]!) : word) : null;
       const addressed = editable ? scene.columns[column]![bit]! : scene.button_box;
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence });
-      return { status: 'proposed', kind: codeRouteId, actions, local, program, start, edit, run, needId: need.id,
+      return { status: 'proposed', kind: verifyProgramConfigurationId, actions, local, program, start, edit, run, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: pointBinding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Build a program that moves the piece to its target', mode: wanted ? 'solving' : 'exploration',
-          situation: label, agenda: entries, evidence, actor: cell(start, scene), target: cell(scene.goal, scene), addressed },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Build a program that moves the piece to its target', mode,
+          situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          actor: cell(start, scene), target: cell(scene.goal, scene), addressed },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -132,7 +138,8 @@ export function createSicCodeRoute(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, edit, run } = proposal;
       if (edit) {
-        state = { ...local, stopped: !editMatches(proposal, second), count: local.count + 1 };
+        const confirmed = editMatches(proposal, second);
+        state = { ...local, stopped: !confirmed, count: local.count + 1, ...(confirmed ? { editRef: after.observation_ref } : {}) };
         return { events: [] };
       }
       const effects = { ...local.effects }, rejected = new Set(local.rejected);
