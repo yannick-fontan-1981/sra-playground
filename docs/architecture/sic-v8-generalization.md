@@ -454,6 +454,8 @@ Avec `sic_pivot_cargo` retirée, **GABA gagne en 49 commandes SIC seul**. La fam
 
 Le parcours de référence gagne en 47 commandes. Le nom neutre et la palette permutée conservent le gain en 49 commandes. Après désactivation de P07 au premier retour, le niveau reste ouvert et SIC épuise ses propositions à la 44ᵉ commande. Empreinte après retrait `4c0535fed4795be259cc0651ddc053e32eeabcd9d5fb0a69081d1d51e0170ee2`.
 
+Les campagnes ESCT et GABA portent le total à **47/100** après retrait, en 570 commandes SIC seul, dont 222 choisies par le SRC. Les 100 niveaux 1 en usage normal et les quatre jeux complets avec et sans retrait reproduisent la référence. Sur COLM, un rejeu parallèle a choisi le dépôt dès la septième commande et gagné en 18 commandes. Le rejeu isolé du même code retrouve les 20 commandes et retours de référence. À la même observation, une recherche arrêtée après 3 999 ou 7 999 projections propose le dépôt. La recherche complète, en 15 684 projections, propose d’abord de déplacer le groupe. Les deux parties gagnent sous SIC seul.
+
 ### Confier les transferts de jetons à la carte commune en usage normal
 
 Le runtime SIC retire le sélecteur historique `sic_slot_transfer` de son agenda. Le fournisseur de mesure `sic_verify_matching_slot_transfers` utilise la carte SRC pour chaque commande. SB26 conserve les neuf commandes du niveau 1 et les 15 du niveau 2 en partie continue. Les 24 commandes et retours reproduisent la référence, empreinte `6936f8d27b9ebbb066c67bb5c333ae4f66f7fca624596128466c68789916cbb6`. Le comparateur vérifie que l’identifiant retiré ne figure dans aucune famille ni dans aucun groupe du runtime.
@@ -471,3 +473,9 @@ Les commandes et retours reproduisent la référence, empreinte `7c16581499aadaa
 Avec `sic_arrange_turn_posts` retirée, **MOTO gagne en dix commandes SIC seul**. Les quatre premières directions exploratoires laissent la vue finale inchangée. Le cinquième essai, Space, produit 12 images. La pièce quitte son point de départ pendant l’animation puis le retrouve. Le reçu lie ce changement transitoire à la commande et à l’observation courante.
 
 La carte SRC `sic.follow_observed_landings.choose` choisit ensuite deux sélections P05, deux déplacements de plots P07 et une relance P02. Le fournisseur partagé projette le trajet et vérifie la position de chaque plot. Le parcours de référence gagne en six commandes. Le nom neutre et la palette permutée conservent le gain en dix commandes. Désactiver P07 après la première sélection laisse le niveau ouvert au même budget. Empreinte après retrait `98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b`.
+
+### Choisir entre une case à tester et une réécriture observée
+
+Avec `sic_window_relation` retirée, **FT09 gagne en quatre clics SIC seul**. Le fournisseur dérive les contraintes des fenêtres visibles et transmet à la carte SRC les cases en désaccord. La carte `sic.verify_observed_interaction.choose` choisit P05 pour les deux premiers clics. Le retour de chacune de ces deux cases établit la même réécriture. P02 peut alors choisir une case où cette réécriture satisfait aussi les contraintes. Le moteur vérifie l’effet réel des deux derniers clics.
+
+Les animations des cinq premiers clics exploratoires précédemment observés modifiaient le même ensemble de 80 pixels sans modifier les cases mesurées. La disponibilité d’une réécriture repose sur les changements des cases après les clics ciblés. Le gain reproduit la référence, empreinte `aad75de79d835cace7021e511a80b8cfed9f1b3b1f5d32013ae43d3898be8940`. Le nom neutre et la palette permutée conservent les quatre commandes. Désactiver P02 après les deux premiers clics laisse le niveau ouvert au même budget.

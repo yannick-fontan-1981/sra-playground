@@ -39,7 +39,7 @@ import { displayCouplingId } from './display-coupling.ts';
 import { contrastControlsId, contrastProbeId } from './contrast-controls.ts';
 import { framedSearchId } from './framed-search.ts';
 import { framedReceptionId, learnFramedReceptionId } from './framed-reception.ts';
-import { windowRelationId } from './window-relation.ts';
+import { learnWindowRelationId, windowRelationId } from './window-relation.ts';
 import { glyphEditingId } from './glyph-editing.ts';
 import { fieldIsolationId, learnFieldIsolationId } from './field-isolation.ts';
 import { directionalReceptionId, learnDirectionalReceptionId } from './directional-reception.ts';
@@ -91,7 +91,7 @@ export const standalonePlanningGroups = [
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, orderedContactId, supportTransferId, learnSupportMovesId] },
   { id: 'inspect_candidate_relations', families: [crossingRowsId, invitedCaptureId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, stagedMarksId, materialAssemblyId, animationContactId, learnAnimationContactId] },
   { id: 'coordinate_visible_motion', families: [bandAlignmentId, sharedArrivalId, outlineServiceId, learnOutlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, branchAlignmentId, receptionAccessId, learnReceptionAccessId, markerCoverageId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, learnPivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, coupledMotionId, materialRouteId, inventoryAccessId, replayAccessId, orientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, seatedContactId, switchedSurfaceId, learnSwitchedSurfaceId, reactiveTargetId, pointReachId, linkedMidpointId, excavateDescentId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, learnLinkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId, learnTurnPostsId] },
-  { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
+  { id: 'interpret_examples_and_collections', families: [labeledSequenceId, markedCollectionId, slotTransferId, visualPatternId, framedSearchId, feedbackTrialId, catalogueComparisonId, revealedExampleId, windowRelationId, learnWindowRelationId, layeredFitId, learnLayeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, occurrenceRecallId, slotPermutationId, surfaceCopyId, learnSurfaceCopyId, chartRouteId, learnChartRouteId] },
   { id: 'construct_executable_program', families: [codeRouteId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, learnWindowCoverageId, panelMatchingId] },
   { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, learnPortPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId, learnFramedReceptionId] },
