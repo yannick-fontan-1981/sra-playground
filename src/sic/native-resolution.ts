@@ -833,9 +833,13 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === reproduceCueId || family === learnAnimatedCueId)) {
-    for (const [field, label] of [['actor', 'Moving sprite'], ['panel', 'Demonstration panel'], ['target', 'Current target'], ['exit', 'Matching region']] as const) {
+    for (const [field, label] of [['actor', 'Moving sprite'], ['panel', 'Input grid'], ['target', 'Current target'], ['exit', 'Matching region']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+    if (Array.isArray(card?.sampleCells)) for (const cue of card.sampleCells) {
+      const box = bounds(cue);
+      if (box) subjects.push({ label: 'Marked cell of the visible sample', box });
     }
     if (Array.isArray(card?.observedCues)) for (const cue of card.observedCues) {
       const box = bounds(cue);
