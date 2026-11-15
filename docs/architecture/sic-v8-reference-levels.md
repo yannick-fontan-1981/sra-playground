@@ -31,7 +31,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | DNOI | 6 | [3](../../docs/migration/native-campaigns/dnoi.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/DNOI/LVL1/good_run_pseudocode.md) | [3](../../docs/migration/v6-baseline-parity.json) | — | 3 | 4 | 6 · WIN |
 | ELAS | 6 | [3](../../docs/migration/native-campaigns-v37/elas-three-levels.json) | — | 3 (archive locale) | — | 3 | 4 | 2 |
 | ESCT | 6 | [1](../../docs/migration/native-campaigns-v53/attempt3/esct-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/ESCT/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
-| ETAG | 6 | — | — | 2 (archive locale) | — | 2 | 3 | 2 |
+| ETAG | 6 | — | — | 2 (archive locale) | — | 2 | 3 | 3 |
 | EVAS | 6 | — | — | 2 (archive locale) | — | 2 | 3 | 2 |
 | FITE | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/FITE/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | FOGW | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/FOGW/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 3 |
@@ -49,7 +49,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | HANO | 4 | [4](../../docs/migration/native-campaigns-v32/before-memory-fix/hano.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/HANO/LVL1/good_run_pseudocode.md) | [3](../../docs/migration/v6-baseline-parity.json) | — | 4 | 4 | 4 · WIN |
 | HOLE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
 | HPDL | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 3 |
-| ISOS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
+| ISOS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 3 |
 | KA59 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KA59/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
 | KATA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KATA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | KEYD | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KEYD/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
@@ -73,7 +73,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | R11L | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/R11L/LVL2/good_run_pseudocode.md) | 1 (archive locale) | — | 2 | 3 | 2 |
 | RE86 | 8 | [3](../../docs/migration/native-campaigns-v54/baseline-re86/re86-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 2 |
 | RECR | 6 | [3](../../docs/migration/lot10c-evidence/development/recr01/recruitment-campaign.json.gz) | — | — | — | 3 | 4 | 2 |
-| REGN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/REGN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
+| REGN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/REGN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 3 |
 | REWI | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/REWI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | RSWP | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
 | S5I5 | 8 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/S5I5/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
