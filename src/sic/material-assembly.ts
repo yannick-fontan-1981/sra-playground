@@ -1,12 +1,17 @@
 import { measureTypedCarriers, typedReplacementCandidate, typedMaterialDescendants, typedMaterialRequests,
   typedChildPresent, typedLocalChildMark } from '../logos-engine/v6-typed-material-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const materialAssemblyId = 'sic_material_assembly';
+export const learnMaterialAssemblyId = 'sic_assemble_after_observed_mark';
 export const materialAssemblyStrategies = {
+  P02: navigationPrimitives.P02,
+  P05: navigationPrimitives.P05,
   test_marked_material: 'Test the response of a piece with internal marks',
   combine_compatible_material: 'Test a second piece with a matching border pattern',
   open_replacement_material: 'Test the new piece that contains the previous marks',
@@ -29,14 +34,15 @@ const graph = compileStrategyGraph({
 type Piece = { id: string; bbox: NativeBox; center: NativePoint; point: NativePoint; signature: string;
   body_palette: number; fringe: number[][]; support_source?: string };
 type Child = Piece & { core_signature: string; source_ref: string };
+type AssemblyStrategy = Exclude<keyof typeof materialAssemblyStrategies, 'P02' | 'P05'>;
 type Request = { bbox: NativeBox; point: NativePoint; descriptor: { palette: number } };
 type Scene = { carriers: Piece[]; source_ref: string };
 type Replacement = { selected: Piece; removed: Piece[]; evidence: string[] };
 type State = { epoch: number; frameHash: string; steps: number; marked: Piece | null; replacement: Replacement | null; children: Child[];
   selected: Child | null; filled: NativeBox[]; associations: Record<string, Request['descriptor']>;
-  calibrations: { size: NativePoint; evidence: string[] }[]; evidence: string[]; stopped: boolean };
+  calibrations: { size: NativePoint; evidence: string[] }[]; evidence: string[]; stopped: boolean; confirmed?: AssemblyStrategy[] };
 type Choice = { piece: Piece | Request; child?: Child; request?: Request };
-type Proposal = NativeProposal & { local: State; scene: Scene | null; choice: Choice; strategy: keyof typeof materialAssemblyStrategies; needId: string };
+type Proposal = NativeProposal & { local: State; scene: Scene | null; choice: Choice; strategy: AssemblyStrategy; needId: string };
 
 const config = { minimum_body_fill: 0.75, minimum_distinct_internal_marks: 2, maximum_pixels_per_mark: 1, minimum_repeated_carriers: 2 };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -59,16 +65,50 @@ function externalMark(box: NativeBox, before: NativeRows, after: NativeRows): bo
 }
 const patch = (rows: NativeRows, [l, t, r, b]: NativeBox) => rows.slice(t, b + 1).map(row => row.slice(l, r + 1));
 
-export function createSicMaterialAssembly(): NativeFamily<Proposal> {
+function confirmsMark(piece: Piece, scene: Scene, first: NativeRows, second: NativeRows, after: NativeObservation, calibrations: State['calibrations']) {
+  if (!externalMark(piece.bbox, first, second)) return false;
+  const updated = measureTypedCarriers(second, after, { ...config, observed_body_shapes: calibrations }) as Scene | null;
+  return !!updated && updated.carriers.length === scene.carriers.length && scene.carriers.every(old =>
+    updated.carriers.some(result => same(old.bbox, result.bbox) && old.signature === result.signature && old.body_palette === result.body_palette));
+}
+
+function calibrateMark(calibrations: State['calibrations'], piece: Piece, evidence: string[]) {
+  const [width, height] = shape(piece.bbox), size: NativePoint = [width + 1, height + 1];
+  return piece.support_source === 'component' && !calibrations.some(calibration => same(calibration.size, size))
+    ? [...calibrations, { size, evidence }] : calibrations;
+}
+
+async function acquireMark(rows: NativeRows, observation: NativeObservation, execution: NativeExecution | undefined) {
+  const receipt = await execution?.readPriorClickScene?.((first, before, command) => {
+    const scene = measureTypedCarriers(first, before, { ...config, observed_body_shapes: [] }) as Scene | null;
+    if (!scene) return null;
+    const { x, y } = command.data;
+    if (x === undefined || y === undefined) return null;
+    const targets = scene.carriers.filter(({ bbox: [l, t, r, b] }) => l <= x && x <= r && t <= y && y <= b);
+    return targets.length === 1 && confirmsMark(targets[0]!, scene, first, rows, observation, []) ? targets[0]! : null;
+  });
+  return receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch ? receipt : null;
+}
+
+export function createSicMaterialAssembly(family = materialAssemblyId): NativeFamily<Proposal> {
+  const learns = family === learnMaterialAssemblyId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: materialAssemblyId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior && (prior.stopped || prior.steps >= 36 || prior.frameHash !== observation.frame_hash)) return null;
-      const local: State = prior ?? { epoch: observation.level_epoch, frameHash: observation.frame_hash, steps: 0,
-        marked: null, replacement: null, children: [], selected: null, filled: [], associations: {}, calibrations: [], evidence: [], stopped: false };
+      const acquired = learns && !prior ? await acquireMark(rows, observation, execution) : null;
+      if (learns && !prior && !acquired) return null;
+      const evidenceRefs = acquired ? [acquired.beforeRef, acquired.afterRef] : [];
+      const local: State = prior ?? { epoch: observation.level_epoch, frameHash: observation.frame_hash, steps: acquired ? 1 : 0,
+        marked: acquired?.scene ?? null, replacement: null, children: [], selected: null, filled: [], associations: {},
+        calibrations: acquired ? calibrateMark([], acquired.scene, evidenceRefs) : [], evidence: evidenceRefs, stopped: false };
       const scene = measureTypedCarriers(rows, observation, { ...config, observed_body_shapes: local.calibrations }) as Scene | null;
       const carriers = scene?.carriers ?? [];
       let select: Choice | null = null, deliver: Choice | null = null, pair: Choice | null = null;
@@ -103,6 +143,13 @@ export function createSicMaterialAssembly(): NativeFamily<Proposal> {
       });
       if (!selected) return null;
       const choice: Choice = selected.plan, strategy = selected.id, label = materialAssemblyStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const repeated = local.confirmed?.includes(strategy) ?? false;
+      const facts = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = repeated ? 'P02' : 'P05';
+      if (learns && decision?.result !== primitive) return null;
+      const selectedStrategy = learns ? primitive : strategy;
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, choice.piece.point, { reason: label, evidence });
       if (!pointBinding) return null;
       const [x, y] = choice.piece.point, action = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
@@ -111,14 +158,17 @@ export function createSicMaterialAssembly(): NativeFamily<Proposal> {
         satisfactionContract: 'official_progress_after_a_compatible_placement' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'material-assembly:' + need.id;
-      return { status: 'proposed', kind: materialAssemblyId, local, scene, choice, strategy, actions, needId: need.id,
+      return { status: 'proposed', kind: family, local, scene, choice, strategy, actions, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, point_binding: pointBinding, expected_after: null }],
-        sicSituationCard: { strategy, need: 'Find how marked pieces produce material that fills the frames', situation: label, evidence, agenda: entries,
-          mode: strategy === 'deliver_produced_piece' ? 'solving' : strategy === 'select_produced_piece' ? 'assimilation' : 'exploration',
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy: selectedStrategy, need: 'Find how marked pieces produce material that fills the frames', situation: label, evidence, agenda: entries,
+          mode: learns ? mode : strategy === 'deliver_produced_piece' ? 'solving' : strategy === 'select_produced_piece' ? 'assimilation' : 'exploration',
+          ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
           focus: choice.child?.bbox ?? choice.piece.bbox, partner: local.marked?.bbox ?? null, destination: choice.request?.bbox ?? null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+        sicLocalDecision: { strategy: selectedStrategy, objective: { id, label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
@@ -139,14 +189,8 @@ export function createSicMaterialAssembly(): NativeFamily<Proposal> {
       const measurement = { ...config, observed_body_shapes: local.calibrations };
       if (strategy === 'test_marked_material' && scene) {
         const piece = choice.piece as Piece;
-        const updated = measureTypedCarriers(second, after, measurement) as Scene | null;
-        const preserved = updated && updated.carriers.length === scene.carriers.length && scene.carriers.every(old =>
-          updated.carriers.some(result => same(old.bbox, result.bbox) && old.signature === result.signature && old.body_palette === result.body_palette));
-        if (preserved && externalMark(piece.bbox, first, second)) {
-          const [width, height] = shape(piece.bbox), size: NativePoint = [width + 1, height + 1];
-          if (piece.support_source === 'component' && !local.calibrations.some(c => same(c.size, size))) {
-            next.calibrations = [...local.calibrations, { size, evidence: [before.observation_ref, after.observation_ref] }];
-          }
+        if (confirmsMark(piece, scene, first, second, after, local.calibrations)) {
+          next.calibrations = calibrateMark(local.calibrations, piece, [before.observation_ref, after.observation_ref]);
           next.marked = piece;
           next.stopped = false;
         }
@@ -170,6 +214,7 @@ export function createSicMaterialAssembly(): NativeFamily<Proposal> {
         next.associations = { ...local.associations, [child.core_signature]: request.descriptor };
         next.stopped = false;
       }
+      if (learns && !next.stopped && !next.confirmed?.includes(strategy)) next.confirmed = [...(next.confirmed ?? []), strategy];
       state = next;
       return { events: [] };
     },

@@ -482,6 +482,8 @@ Avec `sic_window_relation` retirée, **FT09 gagne en quatre clics SIC seul**. Le
 
 Chacune des animations des cinq premiers clics exploratoires modifie temporairement 80 pixels. Les centres des cases mesurées restent inchangés. La disponibilité d’une réécriture repose sur les changements des cases après les clics ciblés. Le gain reproduit la référence, empreinte `aad75de79d835cace7021e511a80b8cfed9f1b3b1f5d32013ae43d3898be8940`. Le nom neutre et la palette permutée conservent les quatre commandes. Désactiver P02 après les deux premiers clics laisse le niveau ouvert au même budget.
 
+La campagne FT09 porte le total à **50/100** victoires après retrait, en 593 commandes SIC seul, dont 240 choisies par le SRC. Les 100 niveaux 1 en usage normal, les 49 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours de référence.
+
 ### Aborder des passages appariés après un déplacement confirmé
 
 Avec `sic_paired_passage` retirée, **PORT gagne en 17 commandes SIC seul**. Le premier essai de la famille d’accès est bloqué. Le deuxième déplace la pièce d’une maille. Le fournisseur vérifie le départ, la nouvelle position et la direction utilisée. La carte SRC choisit 13 déplacements P07, un premier franchissement P05 et un second sous P02. Les positions d’arrivée et les repères éloignés permettent de vérifier les passages.
@@ -499,3 +501,9 @@ En configuration normale, désactiver la règle de sélection à la troisième d
 Avec `sic_labeled_sequence` retirée, **CATL gagne en huit commandes SIC seul**. SIC soumet une première réponse P05 lorsque les hypothèses compatibles avec les exemples désignent le même contrôle. Si la question visible change après la commande et que les exemples restent valides, la carte SRC `sic.verify_observed_interaction.choose` autorise P02. Le fournisseur recalcule la réponse pour chaque question. La victoire officielle est observée après sept nouvelles soumissions.
 
 Les commandes et retours reproduisent la référence, empreinte `7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996`. Le nom neutre et la palette permutée conservent le gain en huit commandes. Désactiver P02 après la première soumission rend certains choix à l’exploration. Le niveau reste ouvert au même budget.
+
+### Reprendre un assemblage après le marquage d’un composant
+
+Avec `sic_material_assembly` retirée, **LIFE gagne en 26 commandes SIC seul**. Les 13 premières viennent de l’exploration publique. La dernière marque un composant sans changer le contenu des pièces. SIC vérifie que le point cliqué désigne une seule pièce et que le marquage se trouve autour de cette pièce. Le fournisseur retrouve le partenaire compatible et vérifie les remplacements, les sélections et les dépôts à chaque retour. La carte SRC choisit cinq essais P05 et huit réutilisations P02.
+
+Le parcours de référence gagne en 14 commandes. Le nom neutre et la palette permutée conservent le gain en 26 commandes. Désactiver P02 avant sa première utilisation laisse le niveau ouvert à 26 commandes. Empreinte après retrait `2b9779ce96977cfff637d7eec694c362f45017d98677b243a48d4b6754e675cb`.
