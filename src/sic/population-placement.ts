@@ -1,25 +1,18 @@
 import { maximumInjectiveMatching } from '../logos-engine/v5-reference-population-calculus.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { measureReferencePopulation, referencePopulationCellKey, referencePopulationPaths, referencePopulationPoint,
   type ReferencePopulationCell } from '../logos-engine/v6-reference-population-observation.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 
 export const populationPlacementId = 'sic_population_placement';
+export const verifyReferencePlacementId = 'sic_verify_reference_placement';
 export const populationPlacementStrategies = {
   select_unplaced_piece: 'Select a piece outside the reference positions',
   test_selected_displacement: 'Measure a direction for the selected piece',
   move_to_assigned_slot: 'Move toward a distinct position required by the reference',
 } as const;
-const graph = compileStrategyGraph({ id: 'place_distinct_pieces_by_reference', version: 1, order: 'FALLBACK',
-  priorities: ['move_to_assigned_slot', 'test_selected_displacement', 'select_unplaced_piece'],
-  strategies: {
-    select_unplaced_piece: [{ fact: 'unselected', expected: true, label: 'An unplaced piece is available for selection' }],
-    test_selected_displacement: [{ fact: 'canLearn', expected: true, label: 'A direction can be tested from this measured position' }],
-    move_to_assigned_slot: [{ fact: 'assigned', expected: true, label: 'Measured directions give each remaining piece a distinct reachable target' }],
-  },
-}, ['unselected', 'canLearn', 'assigned']);
 
 type Cell = ReferencePopulationCell;
 type Scene = { q: number; offset: Cell; floor: Cell[]; zone_box: NativeBox; reference_box: NativeBox; reference_digest: string;
@@ -59,11 +52,15 @@ function selectionScene(scene: Scene, cell: Cell, first: NativeRows, second: Nat
   return next && next.bodies.every((body, index) => key(body.cell) === key(scene.bodies[index]!.cell)) ? next : null;
 }
 
-export function createSicPopulationPlacement(): NativeFamily<Proposal> {
+export function createSicVerifyReferencePlacement(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: populationPlacementId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifyReferencePlacementId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const available = cardinal.filter(action => observation.available_action_refs.includes(action));
       if (!available.length) return null;
@@ -103,24 +100,34 @@ export function createSicPopulationPlacement(): NativeFamily<Proposal> {
         pick = { command: { action_ref: 'ACTION6', data: referencePopulationPoint(scene, cell) }, cell, slot: null, expected: null };
       }
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        unselected: { value: !!pick, evidence }, canLearn: { value: !!probe, evidence }, assigned: { value: !!move, evidence },
-      }, planners: { select_unplaced_piece: () => pick, test_selected_displacement: () => probe, move_to_assigned_slot: () => move } });
-      if (!selected) return null;
-      const strategy = selected.id, choice = selected.plan, label = populationPlacementStrategies[strategy], parent = 'G_official_completion';
+      const trial = probe ?? pick;
+      const mode = execution?.reasoningMode ?? (move ? 'solving' : 'exploration');
+      const facts = { routeSupported: !!move, eligibleProbe: !!trial, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
+      const choice = strategy === 'P07' ? move : trial;
+      if (!choice) return null;
+      const phase = strategy === 'P07' ? 'move_to_assigned_slot'
+        : choice === pick ? 'select_unplaced_piece' : 'test_selected_displacement';
+      const label = populationPlacementStrategies[phase], parent = 'G_official_completion';
       const goal = { kind: 'match_reference_occupancy', scope: scene.reference_digest, subjects: ['movable_pieces', 'distinct_reference_slots'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_matching_reference_positions' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `population-placement:${need.id}`, actions = [choice.command];
       const point = [choice.command.data.x, choice.command.data.y] as NativePoint;
-      const binding = strategy === 'select_unplaced_piece'
+      const binding = phase === 'select_unplaced_piece'
         ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence }) : undefined;
-      return { status: 'proposed', kind: populationPlacementId, actions, local, choice, strategy, needId: need.id,
+      return { status: 'proposed', kind: verifyReferencePlacementId, actions, local, choice, strategy: phase, needId: need.id,
         steps: [{ action: choice.command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Occupy the positions shown by the reference', mode: move && strategy === 'move_to_assigned_slot' ? 'solving' : 'exploration',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Occupy the positions shown by the reference', mode,
           situation: choice.slot ? 'The matched position is reachable with measured commands. Color interactions still need confirmation.' : label,
-          agenda: entries, evidence, piece: cellBox(scene, choice.cell), target: choice.slot ? cellBox(scene, choice.slot) : scene.zone_box,
+          agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          piece: cellBox(scene, choice.cell), target: choice.slot ? cellBox(scene, choice.slot) : scene.zone_box,
           reference: scene.reference_box },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],

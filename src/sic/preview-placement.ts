@@ -3,24 +3,17 @@ import { PreviewPackingIncomplete, previewPackingAssignments, previewPackingTran
 import { previewPackingMeasureScene, previewPackingPointFor, previewPackingPose, previewPackingSample } from '../logos-engine/v6-preview-packing-geometry.ts';
 import type { PreviewPackingCell as Cell, PreviewPackingControl as Control, PreviewPackingPiece as Piece,
   PreviewPackingPose as Pose, PreviewPackingScene as Scene, PreviewPackingTransform as Transform } from '../logos-engine/v6-preview-packing-types.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const previewPlacementId = 'sic_preview_placement';
+export const verifyPreviewPlacementId = 'sic_verify_preview_placement';
 export const previewPlacementStrategies = {
   select_piece_for_partition: 'Select the piece needed to fill the remaining area',
   test_preview_control: 'Test an input on the selected piece',
   move_preview_into_partition: 'Move the selected piece toward its place in the partition',
 } as const;
-const graph = compileStrategyGraph({ id: 'fit_preview_piece_in_remaining_space', version: 1, order: 'FALLBACK',
-  priorities: ['move_preview_into_partition', 'select_piece_for_partition', 'test_preview_control'],
-  strategies: {
-    select_piece_for_partition: [{ fact: 'canSelect', expected: true, label: 'A complete partition indicates a unique position for the movable piece' }],
-    test_preview_control: [{ fact: 'canTest', expected: true, label: 'A selected piece has an untested command in its current pose' }],
-    move_preview_into_partition: [{ fact: 'canRoute', expected: true, label: 'Observed commands produce a route to the measured partition' }],
-  },
-}, ['canSelect', 'canTest', 'canRoute']);
 
 type Strategy = keyof typeof previewPlacementStrategies;
 type State = { epoch: number; scene: Scene; piece: Piece; goal: Pose; controls: Record<string, Control>; tried: string[];
@@ -79,10 +72,14 @@ async function prepare(rows: NativeRows, epoch: number, execution: Parameters<ty
   }
 }
 
-export function createSicPreviewPlacement(): NativeFamily<Proposal> {
+export function createSicVerifyPreviewPlacement(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: previewPlacementId,
+    id: verifyPreviewPlacementId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const local = state?.epoch === observation.level_epoch ? state : await prepare(rows, observation.level_epoch, execution);
@@ -98,12 +95,17 @@ export function createSicPreviewPlacement(): NativeFamily<Proposal> {
       const click: NativeCommand = { action_ref: 'ACTION6', data: point };
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        canSelect: { value: !scene.selected, evidence }, canTest: { value: !!probe, evidence }, canRoute: { value: !!route, evidence },
-      }, planners: { select_piece_for_partition: () => click, test_preview_control: () => probe,
-        move_preview_into_partition: () => route?.command ?? null } });
-      if (!selected) return null;
-      const strategy = selected.id, command = selected.plan, label = previewPlacementStrategies[strategy];
+      const trial = scene.selected ? probe : click;
+      const mode = execution?.reasoningMode ?? (route ? 'solving' : 'exploration');
+      const facts = { routeSupported: !!route, eligibleProbe: !!trial, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
+      const selectedRoute = strategy === 'P07' ? route : null;
+      const command = strategy === 'P07' ? route?.command : trial;
+      if (!command) return null;
+      const phase = selectedRoute ? 'move_preview_into_partition' : command === click ? 'select_piece_for_partition' : 'test_preview_control';
+      const label = previewPlacementStrategies[phase];
       const parent = 'G_official_completion';
       const goal = { kind: 'complete_visible_partition', scope: ref.split(':revision:', 1)[0]!, subjects: ['frame_and_movable_piece'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_filling_the_frame' };
@@ -111,12 +113,16 @@ export function createSicPreviewPlacement(): NativeFamily<Proposal> {
       const id = `preview-placement:${need.id}`, actions = [command];
       const binding = command === click ? await ObservedInputDomain.makeLocusWitness(observation, rows,
         [point.x, point.y], { reason: label, evidence }) : null;
-      return { status: 'proposed', kind: previewPlacementId, actions, local, strategy, current, predicted: route?.pose ?? null,
+      return { status: 'proposed', kind: verifyPreviewPlacementId, actions, local, strategy: phase, current, predicted: selectedRoute?.pose ?? null,
         attempt: key([poseKey(current), command.action_ref]), needId: need.id,
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Fill the remaining part of the frame with the movable piece', mode: route ? 'solving' : 'exploration',
-          situation: label, agenda: entries, evidence, currentPiece: bounds(scene, current), target: bounds(scene, local.goal) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Fill the remaining part of the frame with the movable piece', mode,
+          situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          currentPiece: bounds(scene, current), target: bounds(scene, local.goal) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

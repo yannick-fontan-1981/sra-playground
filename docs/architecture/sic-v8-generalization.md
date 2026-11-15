@@ -598,6 +598,8 @@ Les commandes et retours reproduisent les références. Le nom neutralisé et la
 
 MEMO `40ac77f931014315cdeb289b623e971f165ce7962801671d5b2bda66f288e482`. MIND `d2af6be8e55804dace772b7227f902dc86056bea5dedae2a4b1532f3c0c87a50`. SERI `e327a63ace9a61f555be390a32afada20bce326a81e975542d70fc383278e13a`.
 
+Sur `eb82031a`, les **76/100 retraits gagnants** totalisent 857 commandes SIC seul. Les 100 niveaux 1 en configuration normale et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours. FT09 s’est arrêté avant sa première commande sur une erreur mémoire lors du rejeu groupé. Rejoué seul sur la même révision, il reproduit les quatre commandes et l’empreinte de référence après retrait.
+
 ### Réutiliser un effet mesuré pour préparer l’étape suivante
 
 **LP85** gagne en cinq clics. Un essai P05 mesure une permutation. La carte commune de déplacement choisit ensuite quatre actions P07 à partir des permutations compatibles avec les retours. Si la règle P07 est désactivée après le premier clic, la carte essaie un autre contrôle. Le niveau reste ouvert au budget de cinq commandes.
@@ -607,3 +609,11 @@ MEMO `40ac77f931014315cdeb289b623e971f165ce7962801671d5b2bda66f288e482`. MIND `d
 Les trois parcours reproduisent les commandes et retours de référence. La palette permutée et le nom neutralisé conservent les gains. Sur TN36 et TEQU, désactiver la règle de réutilisation de l’édition après les deux premières commandes change la suite. Les niveaux restent ouverts à huit commandes.
 
 LP85 `5fd87809ca31d185f273cae83fa67b11a89ceaa30ada9d48143e1bc5374e9eb2`. TN36 `845a346dfa829f2a5b5692d46b19062379aec2e179bb14ea5e147f2b2a83d141`. TEQU `28eaa8b1bcea3ccb1d747b2b70fb48aa3ad6475f1af0934e7e0d8e112163612d`.
+
+### Placer une pièce en vérifiant la sélection et les déplacements
+
+**KATA, VOIS et LKEY** gagnent en huit, quatorze et huit commandes SIC seul après retrait des anciens sélecteurs. Sur KATA et VOIS, la carte de déplacement choisit P05 pour tester une sélection ou une direction, puis P07 quand les effets mesurés permettent de rejoindre une place. KATA vérifie la pose prévue. VOIS attribue des places distinctes et vérifie la position après chaque déplacement. Sur LKEY, la carte de vérification d’interaction n’autorise P02 que si la même commande a confirmé le même effet de transfert dans un contexte compatible.
+
+Les trois parcours reproduisent leurs commandes et retours de référence. La neutralisation du nom et la permutation de palette conservent les gains. Désactiver P07 sur KATA ou VOIS, ou P02 sur LKEY, à sa première utilisation change la suite et laisse le niveau ouvert au budget de référence.
+
+KATA `cce7cd4d173da4bd2f683c32d9d6ea147073a58eb1b7b202e6b64a483a8e7109`. VOIS `cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186`. LKEY `45eacf89a9b32e59f2a3d45d51b33f1ff42d3128a6bff46fd7646f7304294c2b`.

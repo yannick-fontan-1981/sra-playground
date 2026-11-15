@@ -23,10 +23,10 @@ import { verifyOccurrenceChoiceId } from './occurrence-recall.ts';
 import { verifySlotPermutationId } from './slot-permutation.ts';
 import { learnSurfaceCopyId, surfaceCopyId } from './surface-copy.ts';
 import { verifyProgramConfigurationId } from './code-route.ts';
-import { profileTransferId } from './profile-transfer.ts';
+import { verifyProfileTransferId } from './profile-transfer.ts';
 import { orderedReplenishmentId, learnOrderedReplenishmentId } from './ordered-replenishment.ts';
 import { learnProgramOriginId, programOriginId } from './program-origin.ts';
-import { previewPlacementId } from './preview-placement.ts';
+import { verifyPreviewPlacementId } from './preview-placement.ts';
 import { symbolContributionId } from './symbol-contribution.ts';
 import { markedLatticeId } from './marked-lattice.ts';
 import { queuedPlacementId, learnQueuedPlacementId } from './queued-placement.ts';
@@ -34,7 +34,7 @@ import { legendRecolorId, matchExampleId } from './legend-recolor.ts';
 import { verifyPatternChoiceId } from './visual-pattern.ts';
 import { facetGrowthId, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, learnChartRouteId } from './chart-route.ts';
-import { populationPlacementId } from './population-placement.ts';
+import { verifyReferencePlacementId } from './population-placement.ts';
 import { carryToFrameId, learnCarryToFrameId } from './carry-to-frame.ts';
 import { learnPortPairingId, portPairingId } from './port-pairing.ts';
 import { displayCouplingId } from './display-coupling.ts';
@@ -96,9 +96,9 @@ export const standalonePlanningGroups = [
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, learnLabeledSequenceId, markedCollectionId, slotTransferId, verifyPatternChoiceId, stableReferenceId, verifyOrderedFeedbackId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, verifyOccurrenceChoiceId, verifySlotPermutationId, surfaceCopyId, learnSurfaceCopyId, chartRouteId, learnChartRouteId] },
   { id: 'construct_executable_program', families: [verifyProgramConfigurationId, programOriginId, learnProgramOriginId, glyphEditingId, windowCoverageId, learnWindowCoverageId, verifyPanelConfigurationId] },
-  { id: 'fit_profiles_into_receivers', families: [profileTransferId, portPairingId, learnPortPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId, learnFramedReceptionId] },
+  { id: 'fit_profiles_into_receivers', families: [verifyProfileTransferId, portPairingId, learnPortPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId, learnFramedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId, learnOrderedReplenishmentId] },
-  { id: 'fill_visible_partition', families: [previewPlacementId, populationPlacementId] },
+  { id: 'fill_visible_partition', families: [verifyPreviewPlacementId, verifyReferencePlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [traceCoverageId, markedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId] },

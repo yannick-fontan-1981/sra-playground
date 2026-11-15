@@ -25,10 +25,10 @@ import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceI
 import { slotPermutationId, slotPermutationStrategies, verifySlotPermutationId } from './slot-permutation.ts';
 import { learnSurfaceCopyId, surfaceCopyId, surfaceCopyStrategies } from './surface-copy.ts';
 import { codeRouteId, codeRouteStrategies, verifyProgramConfigurationId } from './code-route.ts';
-import { profileTransferId, profileTransferStrategies } from './profile-transfer.ts';
+import { profileTransferId, profileTransferStrategies, verifyProfileTransferId } from './profile-transfer.ts';
 import { learnOrderedReplenishmentId, orderedReplenishmentId, orderedReplenishmentStrategies } from './ordered-replenishment.ts';
 import { learnProgramOriginId, programOriginId, programOriginStrategies } from './program-origin.ts';
-import { previewPlacementId, previewPlacementStrategies } from './preview-placement.ts';
+import { previewPlacementId, previewPlacementStrategies, verifyPreviewPlacementId } from './preview-placement.ts';
 import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
 import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
 import { learnQueuedPlacementId, queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
@@ -36,7 +36,7 @@ import { legendRecolorId, legendRecolorStrategies, matchExampleId } from './lege
 import { visualPatternId, visualPatternStrategies, verifyPatternChoiceId } from './visual-pattern.ts';
 import { facetGrowthId, facetGrowthStrategies, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, chartRouteStrategies, learnChartRouteId } from './chart-route.ts';
-import { populationPlacementId, populationPlacementStrategies } from './population-placement.ts';
+import { populationPlacementId, populationPlacementStrategies, verifyReferencePlacementId } from './population-placement.ts';
 import { carryToFrameId, carryToFrameStrategies, learnCarryToFrameId } from './carry-to-frame.ts';
 import { learnPortPairingId, portPairingId, portPairingCardStrategies } from './port-pairing.ts';
 import { contrastControlsId, contrastControlsStrategies, contrastProbeId } from './contrast-controls.ts';
@@ -484,7 +484,8 @@ export function readNativeResolution(agent: {
       || family === verifyCombinedMarksId) ? preparedConfigurationStrategies
     : (family === verifyOccurrenceChoiceId || family === verifyOrderedFeedbackId || family === verifyPatternChoiceId) ? feedbackChoiceStrategies
     : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId
-      || family === verifySlotPermutationId) ? inventoryAccessStrategies
+      || family === verifySlotPermutationId || family === verifyPreviewPlacementId || family === verifyReferencePlacementId
+      || family === verifyProfileTransferId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -638,7 +639,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === profileTransferId) {
+  if (situationCard && (family === profileTransferId || family === verifyProfileTransferId)) {
     for (const [field, label] of [['marker', 'Current focus marker'], ['profile', 'Matching profile'], ['receiver', 'Receiver to fill']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
@@ -655,7 +656,7 @@ export function readNativeResolution(agent: {
     if (origin) subjects.push({ label: 'Program starting node', box: origin });
     if (target) subjects.push({ label: 'Marked destination', box: target });
   }
-  if (situationCard && family === previewPlacementId) {
+  if (situationCard && (family === previewPlacementId || family === verifyPreviewPlacementId)) {
     const piece = bounds(card?.currentPiece), target = bounds(card?.target);
     if (piece) subjects.push({ label: 'Movable piece', box: piece });
     if (target) subjects.push({ label: 'Place in the partition', box: target });
@@ -1065,7 +1066,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === populationPlacementId) {
+  if (situationCard && (family === populationPlacementId || family === verifyReferencePlacementId)) {
     for (const [field, label] of [['piece', 'Selected piece'], ['target', 'Receiving position'], ['reference', 'Visible reference']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

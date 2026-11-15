@@ -1,10 +1,11 @@
 import { project } from '../logos-engine/v6-ranked-workshop-geometry.ts';
 import { profiles } from '../logos-engine/v6-ranked-workshop-methods.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 
 export const profileTransferId = 'sic_profile_transfer';
+export const verifyProfileTransferId = 'sic_verify_profile_transfer';
 export const profileTransferStrategies = {
   locate_compatible_profile: 'Move focus to the profile that fits the receiver',
   test_profile_carry: 'Test picking up the focused profile',
@@ -12,16 +13,6 @@ export const profileTransferStrategies = {
   fit_carried_profile: 'Test fitting the carried profile into its matching receiver',
   release_profile_after_fit: 'Release the fitted profile to select the next one',
 } as const;
-const graph = compileStrategyGraph({ id: 'fit_profiles_into_visible_receivers', version: 1, order: 'FALLBACK',
-  priorities: ['release_profile_after_fit', 'fit_carried_profile', 'carry_profile_to_receiver_band', 'test_profile_carry', 'locate_compatible_profile'],
-  strategies: {
-    locate_compatible_profile: [{ fact: 'seek', expected: true, label: 'The focused profile fits a receiver in another row, while focus is free' }],
-    test_profile_carry: [{ fact: 'grasp', expected: true, label: 'The focus is on the profile to carry and the visible grip is empty' }],
-    carry_profile_to_receiver_band: [{ fact: 'carry', expected: true, label: 'The grip is now visibly active and the matching receiver is in another row' }],
-    fit_carried_profile: [{ fact: 'fit', expected: true, label: 'The carried profile and the open receiver in this row have equal contours' }],
-    release_profile_after_fit: [{ fact: 'release', expected: true, label: 'The receiver is filled and the grip still shows an active profile' }],
-  },
-}, ['seek', 'grasp', 'carry', 'fit', 'release']);
 
 const geometry = {
   stem: { minimum_rank_count: 2, maximum_rank_count: 12, maximum_component_count: 512,
@@ -35,7 +26,8 @@ type Strategy = keyof typeof profileTransferStrategies;
 type Part = { box: NativeBox; values: number[] };
 type Band = { profile: Part; receiver: Part };
 type Scene = { bands: [Band, Band]; focus: 0 | 1; held: boolean; marker: NativeBox };
-type State = { epoch: number; count: number; tried: string[]; evidence: string[]; stopped: boolean };
+type State = { epoch: number; count: number; tried: string[]; evidence: string[]; stopped: boolean;
+  verified?: Partial<Record<Strategy, { control: string; evidence: string }>> };
 type Proposal = NativeProposal & { local: State; scene: Scene; strategy: Strategy; target: 0 | 1; attempt: string; needId: string };
 const equal = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 const empty = (epoch = 0): State => ({ epoch, count: 0, tried: [], evidence: [], stopped: false });
@@ -62,11 +54,15 @@ function measure(observation: NativeObservation, rows: NativeRows): Scene | null
     focus, held: grip === 1, marker: horizontalBox(rawMarker) };
 }
 
-export function createSicProfileTransfer(): NativeFamily<Proposal> {
+export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
   let state = empty();
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: profileTransferId,
-    async propose(observation, rows, inputs, remaining) {
+    id: verifyProfileTransferId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !['ACTION1', 'ACTION2', 'ACTION5'].every(ref => observation.available_action_refs.includes(ref))) return null;
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       if (local.stopped || local.count >= 24) return null;
@@ -81,33 +77,40 @@ export function createSicProfileTransfer(): NativeFamily<Proposal> {
       const switchGrip = toward('ACTION5');
       const side = bands[target].profile.box[2] < bands[target].receiver.box[0] ? 'ACTION4'
         : bands[target].profile.box[0] > bands[target].receiver.box[2] ? 'ACTION3' : '';
-      const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
-      const applicable = {
-        seek: !held && focus !== source,
-        grasp: !held && focus === source,
-        carry: held && focus === source && source !== target,
-        fit: held && focus === target && source === target && !!side,
-        release: held && filled(bands[focus].receiver),
-      };
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active',
-        facts: { seek: { value: applicable.seek, evidence }, grasp: { value: applicable.grasp, evidence },
-          carry: { value: applicable.carry, evidence }, fit: { value: applicable.fit, evidence }, release: { value: applicable.release, evidence } },
-        planners: { locate_compatible_profile: () => toward(direction(source)), test_profile_carry: () => switchGrip,
-          carry_profile_to_receiver_band: () => toward(direction(target)), fit_carried_profile: () => toward(side),
-          release_profile_after_fit: () => switchGrip } });
-      if (!selected) return null;
-      const strategy = selected.id, command = selected.plan, label = profileTransferStrategies[strategy], parent = 'G_official_completion';
+      const offers: { phase: Strategy; applicable: boolean; command: NativeCommand | null }[] = [
+        { phase: 'release_profile_after_fit', applicable: held && filled(bands[focus].receiver), command: switchGrip },
+        { phase: 'fit_carried_profile', applicable: held && focus === target && source === target && !!side, command: toward(side) },
+        { phase: 'carry_profile_to_receiver_band', applicable: held && focus === source && source !== target, command: toward(direction(target)) },
+        { phase: 'test_profile_carry', applicable: !held && focus === source, command: switchGrip },
+        { phase: 'locate_compatible_profile', applicable: !held && focus !== source, command: toward(direction(source)) },
+      ];
+      const offer = offers.find(offer => offer.applicable && offer.command);
+      if (!offer?.command) return null;
+      const { phase, command } = offer;
       const attempt = JSON.stringify([bands.map(band => [band.profile.values, band.receiver.values]), focus, held, command.action_ref]);
       if (local.tried.includes(attempt)) return null;
+      const proof = local.verified?.[phase];
+      const reused = proof?.control === command.action_ref;
+      const ref = observation.observation_ref;
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(reused ? [proof.evidence] : [])]
+        .filter(item => item !== ref))];
+      const mode = execution?.reasoningMode ?? (phase === 'test_profile_carry' ? 'exploration' : 'solving');
+      const facts = { repeatSupportedInteraction: reused, probeNeededInteraction: !reused, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = reused ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const label = profileTransferStrategies[phase], parent = 'G_official_completion';
       const goal = { kind: 'match_profile_to_receiver', scope: ref.split(':revision:', 1)[0]!, subjects: ['profiles_and_open_receivers'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_fitting_the_profiles' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `profile-transfer:${need.id}`, actions = [command];
-      return { status: 'proposed', kind: profileTransferId, actions, local, scene, strategy, target, attempt, needId: need.id,
+      return { status: 'proposed', kind: verifyProfileTransferId, actions, local, scene, strategy: phase, target, attempt, needId: need.id,
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Fit each profile into the receiver with the matching contour',
-          mode: strategy === 'test_profile_carry' ? 'exploration' : 'solving', situation: label, agenda: entries, evidence,
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Fit each profile into the receiver with the matching contour', mode,
+          situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
           marker: scene.marker, profile: bands[source].profile.box, receiver: bands[target].receiver.box },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -125,10 +128,12 @@ export function createSicProfileTransfer(): NativeFamily<Proposal> {
       const matched = observed(proposal, measure(after, second));
       return { matched, seal_prefix: true, reason: matched ? 'profile_transfer_confirmed' : 'profile_transfer_contradicted' };
     },
-    record(before, after, _command, _first, second, proposal) {
+    record(before, after, command, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = proposal.local;
-      state = { ...local, count: local.count + 1, stopped: !observed(proposal, measure(after, second)),
+      const confirmed = observed(proposal, measure(after, second));
+      state = { ...local, count: local.count + 1, stopped: !confirmed,
+        ...(confirmed ? { verified: { ...local.verified, [proposal.strategy]: { control: command.action_ref, evidence: after.observation_ref } } } : {}),
         tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
