@@ -2,14 +2,16 @@ import { morphologyPairs, type MorphologyPair } from '../logos-engine/v6-morphol
 import { ObservedMeter } from '../logos-engine/v6-inventory-caller-context.ts';
 import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { measureInsetContact } from './inset-contact.ts';
 import { measureDirectionalMotion, type DirectionalMotion } from './observed-translation.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { chooseManagedFramedPlan, chooseManagedTransitPlan, framedResidual, observedFramedRotation, observeFramedReserve,
   pixelsAt, pointKey, reserveSteps, stripUnits, type FramedReserve, type FramedRotation, type FramedTransport, type ManagedFramedPlan } from './managed-framed-access.ts';
-import { chooseCycleStep, cycleSubject, learnCycleGauge, observeCycleStep, readCycleLayout, readCycleSymbol,
+import { chooseCycleStep, cycleSubject, learnCycleGauge, observeCycleStep, readCycleLayout, readCycleReserve, readCycleSymbol,
   type CycleGauge, type CycleKnowledge, type CycleState, type CycleStep } from './inset-cycle-route.ts';
+import { chooseCompositeCycleStep, observeCompositeCycleStep, readCompositeCycle,
+  type CompositeCycleEvidence, type CompositeCycleState, type CompositeCycleStep } from './inset-composite-route.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 
 export const framedContactId = 'sic_framed_contact';
@@ -41,7 +43,8 @@ type Transfer = { epoch: number; rotation: FramedRotation; confirmedMoves: Direc
 type Plan = { command: Direction; landing: NativePoint; target: NativePoint; contact: boolean };
 type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target: NativeBox | null; surface: NativeBox | null;
   inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string; pair: MorphologyPair | null;
-  managed?: ManagedFramedPlan; rotation?: FramedRotation; cycle?: { local: CycleState; step: CycleStep } };
+  managed?: ManagedFramedPlan; rotation?: FramedRotation; cycle?: { local: CycleState; step: CycleStep };
+  composite?: { local: CompositeCycleState; step: CompositeCycleStep } };
 const empty = (epoch = 0): State => ({ epoch, body: null, target: null, surface: null, inset: null, beneath: null,
   trials: [], blocked: [], tested: [], crossed: [], count: 0 });
 const footprint = ([x, y]: NativePoint, pitch: number): NativeBox => [x, y, x + pitch - 1, y + pitch - 1];
@@ -136,9 +139,11 @@ function route(rows: NativeRows, body: Body, surface: NativeBox, directions: rea
   return candidates[0]?.plan ?? null;
 }
 
-function cycleProposal(family: string, local: CycleState, step: CycleStep, observation: NativeObservation,
+function cycleProposal(family: string, plan: { cycle: NonNullable<Proposal['cycle']> } | { composite: NonNullable<Proposal['composite']> },
+  observation: NativeObservation,
   mode: ReasoningMode | undefined,
 ): Proposal | null {
+  const { local, step } = 'cycle' in plan ? plan.cycle : plan.composite;
   const parent = 'G_official_completion', ref = observation.observation_ref;
   const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
   const facts = { input: step.action, expected: step.step, evidence };
@@ -149,23 +154,26 @@ function cycleProposal(family: string, local: CycleState, step: CycleStep, obser
   const strategy = choice.selected?.id;
   if (!strategy) return null;
   const reason = step.purpose === 'recharge' ? 'Reach the recharge before running out of moves'
-    : step.purpose === 'test_shape' ? 'Re-enter the observed station and compare the changed symbol'
-      : 'Reach the matching exit while keeping the current shape';
+    : step.purpose === 'test_color' ? 'Enter the color station and verify that it preserves the shape'
+      : step.purpose === 'test_shape' ? ('composite' in plan ? 'Enter the shape station and verify that it preserves the color'
+        : 'Re-enter the observed station and compare the changed symbol')
+        : 'Reach the matching exit while keeping the current shape';
   const goal = { kind: 'match_symbol_and_reach_exit_with_reserve', scope: ref.split(':revision:', 1)[0]!,
     subjects: [pointKey(local.layout.exit)], parentObjective: parent, satisfactionContract: 'official_progress_after_symbol_and_access' };
   const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id;
   const target = cycleSubject(local.layout, step.target), action = { action_ref: step.action, data: {} };
-  const { point: [sx, sy], side, scale } = local.layout.symbol;
+  const { point: [sx, sy], side, scale } = 'display' in local.layout ? local.layout.display : local.layout.symbol;
   const symbol: NativeBox = [sx, sy, sx + side * scale - 1, sy + side * scale - 1];
   return { status: 'proposed', kind: family, action: step.action, target, inset: null, surface: null, pair: null, plan: null,
-    cycle: { local, step }, needId: need.id, binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
+    ...plan, needId: need.id, binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
     steps: [{ action, expected_after: step.step }],
     sicSituationCard: { strategy, need: 'Match the symbol and reach the exit within the reserve',
       situation: `${reason}. Reserve for ${step.units} moves. Current route ${step.distance} moves.`, evidence,
       agenda: choice.entries, mode: mode ?? 'assimilation', triggerCard: choice.card,
       controlledPiece: cycleSubject(local.layout, local.at), addressedRegion: target, exit: cycleSubject(local.layout, local.layout.exit),
       motifs: [symbol, cycleSubject(local.layout, local.layout.exit)], route: 'managed_access',
-      routeObligation: step.purpose === 'test_shape' ? 'shape' : step.purpose, reserve: step.units, steps: step.distance },
+      routeObligation: step.purpose === 'test_shape' ? 'shape' : step.purpose === 'test_color' ? 'color' : step.purpose,
+      reserve: step.units, steps: step.distance },
     question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: reason, relations: [`contributes_to:${parent}`] }],
     sicLocalDecision: { strategy, objective: { id, label: reason, parent }, need },
@@ -181,11 +189,30 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
   let gauge: { epoch: number; reading: CycleGauge } | null = null;
   let cycleModel: CycleKnowledge | null = null;
   let cycle: CycleState | null = null;
+  let compositeModel: CompositeCycleEvidence | null = null;
+  let composite: CompositeCycleState | null = null;
+  function offerComposite(observation: NativeObservation, rows: NativeRows, available: readonly string[], remaining: number,
+    mode: ReasoningMode | undefined,
+  ): Proposal | null {
+    if (fallback || compositeModel?.epoch !== observation.level_epoch - 1 || available.length !== 4 || remaining < 1) return null;
+    const local = composite?.epoch === observation.level_epoch ? composite : readCompositeCycle(rows, compositeModel, observation.level_epoch);
+    const step = local ? chooseCompositeCycleStep(rows, local, available, remaining) : null;
+    return local && step ? cycleProposal(family, { composite: { local, step } }, observation, mode) : null;
+  }
   return {
     id: family,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group === observedMechanicsGroup) {
+        const available = inputs.map(input => input.action_ref).filter(key => Object.hasOwn(directionVectors, key));
+        return offerComposite(observation, rows, available, remaining, execution?.reasoningMode);
+      }
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, inputs, remaining, execution) {
       let local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       const available = inputs.map(input => input.action_ref).filter((key): key is Direction => Object.hasOwn(directionVectors, key));
+      const compositeProposal = offerComposite(observation, rows, available, remaining, execution?.reasoningMode);
+      if (compositeProposal) return compositeProposal;
       if (observation.level_epoch === state.epoch + 1 && state.score !== undefined && observation.levels_completed > state.score
         && state.rotation && state.confirmedMoves?.length) {
         // Another SIC provider may have issued the winning command.
@@ -200,7 +227,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
           triedSymbols: [], refs: [cycleModel.ref], stopped: false } : null);
         const step = learned ? chooseCycleStep(rows, learned) : null;
         if (learned && step && available.includes(step.action)) {
-          const proposed = cycleProposal(family, learned, step, observation, execution?.reasoningMode);
+          const proposed = cycleProposal(family, { cycle: { local: learned, step } }, observation, execution?.reasoningMode);
           if (proposed) return proposed;
         }
       }
@@ -303,6 +330,11 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
     },
     async after(proposal, _index, before, after, first, second) {
       const scored = after.levels_completed > before.levels_completed;
+      if (proposal.composite && !scored) {
+        const { local, step } = proposal.composite;
+        const observed = observeCompositeCycleStep(first, second, local, step);
+        return { matched: !!observed, seal_prefix: true, reason: observed?.reason ?? 'glyph_or_reserve_prediction_contradicted' };
+      }
       if (proposal.cycle && !scored) {
         const { local, step } = proposal.cycle;
         const observed = observeCycleStep(second, first, local, step);
@@ -318,6 +350,13 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
     },
     async record(before, after, _command, first, second, proposal, _index, frames) {
       if (after.levels_completed > before.levels_completed) {
+        const learned = proposal.cycle?.local;
+        if (learned?.restoredReserve && cycleModel?.epoch === before.level_epoch - 1) {
+          const { pitch, gauge, body, station, exit, symbol } = learned.layout;
+          compositeModel = { epoch: before.level_epoch, ref: after.observation_ref, pitch, gauge, body, floor: cycleModel.floor,
+            patternStation: pixelsAt(first, station, pitch), exitRim: first[exit[1]]![exit[0]]!,
+            fullReserve: learned.restoredReserve, display: symbol };
+        }
         if (proposal.inset && state.body && gauge?.epoch === before.level_epoch && gauge.reading.observations >= 2) {
           cycleModel = { epoch: before.level_epoch, gauge: gauge.reading, pitch: state.body.pitch,
             floor: state.body.floor, ref: after.observation_ref };
@@ -330,13 +369,23 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         }
       }
       if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
+      if (proposal.composite) {
+        const { local, step } = proposal.composite, observed = observeCompositeCycleStep(first, second, local, step);
+        const repeated = !!observed?.symbol && !observed.matchesGoal && local.seen.includes(observed.symbol);
+        composite = { ...local, at: observed ? step.step : local.at, stopped: !observed || repeated,
+          seen: observed?.symbol ? [...local.seen, observed.symbol] : local.seen,
+          spent: observed && step.charge >= 0 ? local.spent | (1 << step.charge) : local.spent,
+          refs: [...local.refs.slice(-5), after.observation_ref] };
+        return { events: [] };
+      }
       if (proposal.cycle) {
         const { local, step } = proposal.cycle, observed = observeCycleStep(second, first, local, step);
         const priorSymbol = observed?.symbol ? readCycleSymbol(first, local.layout) : null;
         const repeated = !!observed?.symbol && observed.symbol !== local.layout.symbol.target && local.triedSymbols.includes(observed.symbol);
         cycle = { ...local, at: observed ? step.step : local.at, stopped: !observed || repeated,
           triedSymbols: priorSymbol ? [...new Set([...local.triedSymbols, priorSymbol])] : local.triedSymbols,
-          spentCharge: local.spentCharge || observed?.recovered === true, refs: [...local.refs.slice(-5), after.observation_ref] };
+          spentCharge: local.spentCharge || observed?.recovered === true, refs: [...local.refs.slice(-5), after.observation_ref],
+          ...(observed?.recovered ? { restoredReserve: readCycleReserve(second, local.layout.gauge) } : {}) };
         return { events: [] };
       }
       if (proposal.inset && before.frame_hash !== after.frame_hash) {
@@ -407,14 +456,17 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       }
       return { events: [] };
     },
-    state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null, gauge, cycleModel, cycle }),
+    state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null, gauge, cycleModel, cycle, compositeModel, composite }),
     restore(value: NativeRecord) {
-      const { transfer: savedTransfer, reserveMeter, gauge: savedGauge, cycleModel: savedModel, cycle: savedCycle, ...local } = structuredClone(value);
+      const { transfer: savedTransfer, reserveMeter, gauge: savedGauge, cycleModel: savedModel, cycle: savedCycle,
+        compositeModel: savedCompositeModel, composite: savedComposite, ...local } = structuredClone(value);
       state = local as State;
       transfer = (savedTransfer ?? null) as Transfer | null;
       gauge = (savedGauge ?? null) as typeof gauge;
       cycleModel = (savedModel ?? null) as CycleKnowledge | null;
       cycle = (savedCycle ?? null) as CycleState | null;
+      compositeModel = (savedCompositeModel ?? null) as CompositeCycleEvidence | null;
+      composite = (savedComposite ?? null) as CompositeCycleState | null;
       meter = new ObservedMeter();
       if (reserveMeter) meter.restore(reserveMeter as ReturnType<ObservedMeter['state']>);
     },

@@ -3,15 +3,15 @@ import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-nati
 import { measureInsetContact } from './inset-contact.ts';
 import { pixelsAt, pointKey } from './managed-framed-access.ts';
 
-const moves = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
+export const cycleMoves = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 export type CycleGauge = { line: number; active: number; depleted: number; dots: number[]; perMove: number; observations: number };
 export type CycleKnowledge = { epoch: number; gauge: CycleGauge; pitch: number; floor: number; ref: string };
 type Inlay = { point: NativePoint; scale: number; side: number; palette: number[]; target: string };
 export type CycleLayout = { pitch: number; grid: NativePoint[]; station: NativePoint; exit: NativePoint;
   charge: NativePoint; gauge: CycleGauge; symbol: Inlay; body: number[] };
 export type CycleState = { epoch: number; layout: CycleLayout; at: NativePoint; spentCharge: boolean; triedSymbols: string[];
-  refs: string[]; stopped: boolean };
-export type CycleStep = { action: typeof moves[number][0]; step: NativePoint; target: NativePoint;
+  refs: string[]; stopped: boolean; restoredReserve?: number };
+export type CycleStep = { action: typeof cycleMoves[number][0]; step: NativePoint; target: NativePoint;
   purpose: 'test_shape' | 'recharge' | 'exit'; units: number; distance: number };
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((p, i) => p === b[i]);
 const corner = ([l, t]: NativeBox): NativePoint => [l, t];
@@ -103,7 +103,7 @@ function path(layout: CycleLayout, start: NativePoint, target: NativePoint, avoi
   const accessible = new Set(layout.grid.filter(point => !avoid.some(skip => same(point, skip))).map(pointKey));
   const queue: { at: NativePoint; depth: number; first?: Pick<CycleStep, 'action' | 'step'> }[] = [{ at: start, depth: 0 }];
   const seen = new Set<string>();
-  for (const item of queue) for (const [action, dx, dy] of moves) {
+  for (const item of queue) for (const [action, dx, dy] of cycleMoves) {
     const step: NativePoint = [item.at[0] + dx * layout.pitch, item.at[1] + dy * layout.pitch], key = pointKey(step);
     if (!accessible.has(key)) continue;
     const candidate = { at: step, depth: item.depth + 1, first: item.first ?? { action, step } };
@@ -144,6 +144,6 @@ export function observeCycleStep(rows: NativeRows, first: NativeRows, state: Cyc
   return oldSymbol === symbol ? { reason: 'step_preserved_symbol_and_consumed_measured_reserve' } : null;
 }
 
-export function cycleSubject(layout: CycleLayout, point: NativePoint): NativeBox {
+export function cycleSubject(layout: Pick<CycleLayout, 'pitch'>, point: NativePoint): NativeBox {
   return widen(point, layout.pitch);
 }
