@@ -3,6 +3,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgram
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const arrangeTurnPostsId = 'sic_arrange_turn_posts';
 export const learnTurnPostsId = 'sic_redirect_observed_autonomous_motion';
@@ -13,7 +14,8 @@ type Scene = { pitch: number; start: NativePoint; heading: number; exit: NativeB
   width: number; height: number; posts: Post[]; actorMask: NativePoint[]; marker: number };
 type Layout = NativePoint[];
 type Choice = { action: NativeCommand; kind: 'observe' | 'select' | 'place' | 'launch'; index?: number; point?: NativePoint; layout?: Layout };
-type State = { epoch: number; scene: Scene; refs: string[]; observedLaunch: boolean; selected: number | null; layout: Layout | null; rejected: string[] };
+type State = { epoch: number; scene: Scene; refs: string[]; observedLaunch: boolean; selected: number | null; layout: Layout | null;
+  rejected: string[]; positions?: Layout };
 type LaunchModel = { completed: number; pitch: number; actorMask: NativePoint[]; ref: string };
 type Proposal = NativeProposal & { local: State; choice: Choice; needId: string };
 
@@ -27,13 +29,36 @@ const ordered = (q: number) => (q % 4 + 4) % 4;
 const rotate = ([x, y]: NativePoint, angle: number): NativePoint =>
   [Math.round(x * Math.cos(angle) - y * Math.sin(angle)), Math.round(x * Math.sin(angle) + y * Math.cos(angle))];
 
-function readPosts(parts: Part[], scene: Scene): Post[] | null {
+const selectionCorners = ([x, y]: NativePoint, reach: number): NativePoint[] =>
+  [-reach, reach].flatMap(dx => [-reach, reach].map(dy => [x + dx, y + dy] as NativePoint));
+
+function readPosts(parts: Part[], scene: Scene, expected?: Layout,
+  selection?: { rows: NativeRows; index: number | null }): Post[] | null {
   const r = scene.pitch / 2;
-  const posts = scene.posts.map(post => {
+  const active = selection?.index;
+  const corners = typeof active === 'number'
+    ? selectionCorners(expected?.[active] ?? scene.posts[active]!.point, scene.pitch - 1) : [];
+  const posts = scene.posts.map((post, index) => {
     const sameColor = parts.filter(p => p.color === post.color && p.area === post.mask.length);
-    if (sameColor.length !== 1) return null;
-    const p = sameColor[0]!, x = p.bbox[0] - Math.min(...post.mask.map(([dx]) => dx)), y = p.bbox[1] - Math.min(...post.mask.map(([, dy]) => dy));
-    return x % scene.pitch === r && y % scene.pitch === r ? { ...post, point: [x, y] as NativePoint } : null;
+    const left = Math.min(...post.mask.map(([dx]) => dx)), top = Math.min(...post.mask.map(([, dy]) => dy));
+    const duplicate = scene.posts.some(other => other !== post && other.color === post.color && other.mask.length === post.mask.length);
+    const candidates = sameColor.flatMap(p => {
+      const point: NativePoint = [p.bbox[0] - left, p.bbox[1] - top];
+      if (point[0] % scene.pitch !== r || point[1] % scene.pitch !== r) return [];
+      if (duplicate && (!same(point, expected?.[index] ?? post.point)
+        || !p.mask.every(([x, y]) => post.mask.some(([dx, dy]) => dx === x + left && dy === y + top)))) return [];
+      return [{ ...post, point }];
+    });
+    if (candidates.length === 1) return candidates[0]!;
+    if (candidates.length > 1 || !selection || !corners.length) return null;
+    const point = expected?.[index] ?? post.point;
+    let visible = 0;
+    const witnessed = post.mask.every(([dx, dy]) => {
+      const x = point[0] + dx, y = point[1] + dy, ink = selection.rows[y]?.[x];
+      if (ink === post.color) { visible++; return true; }
+      return ink === scene.marker && corners.some(corner => same(corner, [x, y]));
+    });
+    return witnessed && visible >= post.mask.length - 2 ? { ...post, point } : null;
   });
   return posts.every((post): post is Post => post !== null) ? posts : null;
 }
@@ -69,10 +94,10 @@ function measure(parts: Part[], rows: NativeRows): Scene | null {
       : spanX === pitch + 1 && spanY === mid + 1 && p.area === (mid + 1) ** 2 ? 1
         : spanX === pitch + 1 && spanY === pitch + 1 && p.area === (pitch + 1) ** 2 - 4 ? 3 : 0;
     const point: NativePoint = [snap((args[0] + args[2]) / 2), snap((args[1] + args[3]) / 2)];
-    if (!quarters || parts.some(other => other !== p && other.color === p.color && other.area === p.area)) return [];
+    if (!quarters || parts.filter(other => other.color === p.color && other.area === p.area).length > 4) return [];
     return [{ color: p.color, quarters, point, mask: p.mask.map(([x,y]) => [x + args[0] - point[0], y + args[1] - point[1]] as NativePoint) }];
   }).sort((a,b) => a.quarters - b.quarters);
-  if (posts.length < 2 || posts.length > 3 || new Set(posts.map(p => p.color)).size !== posts.length) return null;
+  if (posts.length < 2 || posts.length > 4) return null;
   const exitHeading = exit[0] === 0 ? 2 : exit[1] === 0 ? 3 : exit[2] === w - 1 ? 0 : 1;
   return { pitch, start, heading: orientation, exit, exitHeading, wall: wall.color, width: w, height: h,
     posts, actorMask, marker: actorColor };
@@ -179,6 +204,14 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
     async attachPrograms(registry) {
       if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group === observedMechanicsGroup) {
+        if (learns || known?.completed !== observation.levels_completed) return null;
+        const scene = state?.epoch === observation.level_epoch ? state.scene : measure(geometricComponents(rows), rows);
+        if (scene?.posts.length !== 4) return null;
+      }
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5','ACTION6'].every(id => observation.available_action_refs.includes(id))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -186,7 +219,7 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
       const parts = geometricComponents(rows);
       const scene = prior?.scene ?? measure(parts, rows);
       if (!scene || prior && !prior.observedLaunch) return null;
-      const posts = readPosts(parts, scene);
+      const posts = readPosts(parts, scene, prior?.positions, { rows, index: prior?.selected ?? null });
       if (!posts) return null;
       const ref = observation.observation_ref;
       const reusable = known?.completed === observation.levels_completed && known.pitch === scene.pitch
@@ -260,10 +293,11 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
       const observedLaunch = local.observedLaunch || choice.kind === 'observe' && frames.length > 2
         && frames.some(rows => rows[local.scene.start[1]]?.[local.scene.start[0]] !== first[local.scene.start[1]]?.[local.scene.start[0]]);
       const failed = choice.kind !== 'observe' && !confirmed && choice.layout;
+      const positions = confirmed && choice.kind === 'place' ? movedPostPositions(local, choice) : local.positions;
       state = { ...local, observedLaunch, refs: [...local.refs.slice(-4), after.observation_ref],
         selected: confirmed && choice.kind === 'select' ? choice.index! : local.selected,
         layout: failed ? null : choice.layout ?? null,
-        rejected: failed ? [...local.rejected, JSON.stringify(failed)] : local.rejected };
+        rejected: failed ? [...local.rejected, JSON.stringify(failed)] : local.rejected, ...(positions ? { positions } : {}) };
       return { events: [] };
     },
     state: () => ({ state, known }),
@@ -274,19 +308,23 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
   };
 }
 
+function movedPostPositions(local: State, choice: Choice): Layout {
+  return (local.positions ?? local.scene.posts.map(post => post.point)).map((point, index) => index === choice.index ? choice.point! : point);
+}
+
 function checked({ local, choice }: Proposal, first: NativeRows, second: NativeRows): boolean {
   if (!choice.point || choice.index === undefined) return false;
   if (choice.kind === 'place') {
-    const post = readPosts(geometricComponents(second), local.scene)?.[choice.index];
+    const post = readPosts(geometricComponents(second), local.scene, movedPostPositions(local, choice),
+      { rows: second, index: choice.index })?.[choice.index];
     return !!post && same(post.point, choice.point);
   }
-  const [x,y] = choice.point, reach = local.scene.pitch - 1;
-  const markers = [-reach,reach].flatMap(dx => [-reach,reach].map(dy => [x+dx,y+dy] as const));
+  const markers = selectionCorners(choice.point, local.scene.pitch - 1);
   const visible = markers.filter(([a,b]) => second[b]?.[a] === local.scene.marker);
   if (visible.length < 3 || !visible.some(([a,b]) => first[b]?.[a] !== second[b]?.[a])) return false;
   if (visible.length === markers.length) return true;
   const [a,b] = markers.find(marker => !visible.includes(marker))!;
-  const posts = readPosts(geometricComponents(first), local.scene);
+  const posts = readPosts(geometricComponents(first), local.scene, local.positions, { rows: first, index: local.selected });
   return first[b]?.[a] === second[b]?.[a] && !!posts?.some((post, index) => index !== choice.index
     && post.mask.some(([dx,dy]) => post.point[0] + dx === a && post.point[1] + dy === b));
 }
