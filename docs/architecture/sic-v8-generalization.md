@@ -630,6 +630,8 @@ Les trois jeux conservent leurs gains avec palette permutée et nom neutralisé.
 
 DAME `cc8a46aa966f6d1bcccf601d1d6eda435a22d2c802a9a6f8355a572e088dbb92`. RE86 `2e761f7e86ac527a3257dbdc72d5a86342d33c00ea1a92dce2bc7951bfbbfc61`. SWCH `c73007473fee951eb29663e83927e436f8c26b83c12e2fd88c90da2979355d07`.
 
+Sur `0789241d`, les **85/100 retraits gagnants** totalisent 966 commandes SIC seul. Le rejeu confirme les 82 trajectoires précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait.
+
 ### Réviser un trajet quand un contact déplace plusieurs pièces
 
 **SK48** retrouve les 19 commandes de son niveau 1 après retrait de l’ancien sélecteur. La carte `sic.choose_contact_response.choose` choisit le fournisseur de mesure ou de trajet à partir des preuves disponibles. Après quatre essais P05, elle applique le trajet mesuré, puis demande sa révision quand le retour de la douzième commande montre que plusieurs pièces se déplacent ensemble. Les deux niveaux déjà acquis sont reproduits en 56 commandes, avec la même empreinte `421bc40521294b8860233d93ee249f7c1b5d87ffb623dfcf4326a455c5f65614`.
@@ -647,3 +649,9 @@ Sur SK48, la neutralisation du nom reproduit les 19 commandes et retours du nive
 Les identifiants de pièces dérivés des couleurs modifiaient l’ordre de recherche. La projection SIC identifie désormais chaque pièce par sa position dans la référence visible. Sur les observations des quatre premiers essais, la recherche retrouve le même trajet de onze commandes dans les deux palettes, avec la même borne. Ce trajet reste une projection. Le retour observé après le premier contact continue de guider la révision.
 
 Sur `d22e317f`, le rejeu des deux niveaux de SK48 reproduit exactement les 56 commandes et retours de référence. Avec palette permutée et nom neutralisé, il gagne aussi les deux niveaux en 56 commandes, avec les mêmes commandes et les mêmes résumés de changements visibles. Les 112 commandes des deux rejeux relèvent du SIC.
+
+### Couvrir une zone à partir de déplacements confirmés
+
+`sic.follow_observed_landings.choose` choisit P05 pour mesurer une commande encore inconnue, P07 pour poursuivre un trajet soutenu par un déplacement observé et P02 pour répéter une interaction déjà confirmée dans la situation. Les fournisseurs de mesure continuent à comparer l'arrivée visible, la couverture ou l'effet sur le repère après chaque commande. Ils conservent leur calcul de géométrie et de trajet.
+
+Dans les essais ciblés après retrait, **ZIPP** retrouve ses huit commandes pour couvrir la trace, **WEAV** ses 27 commandes pour traverser les rangées, **SP80** ses huit commandes pour vérifier la sélection puis l'alignement et **SIGN** ses quinze commandes pour visiter et activer les repères. Les quatre jeux reproduisent les commandes et retours de référence. Avec palette permutée et nom neutralisé, ils conservent leurs commandes et leurs résumés de changements visibles.

@@ -1,22 +1,15 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const markedLatticeId = 'sic_marked_lattice';
+export const verifyMarkedLatticeId = 'sic_verify_marked_lattice';
 export const markedLatticeStrategies = {
   acquire_marked_lattice_motion: 'Test how the cursor moves on the marked surface',
   approach_unvisited_marker: 'Move toward the nearest marker still awaiting a test',
   apply_at_current_marker: 'Test the local command on the reached marker',
 } as const;
-const graph = compileStrategyGraph({ id: 'test_each_marker_on_a_surface', version: 1, order: 'FALLBACK',
-  priorities: ['apply_at_current_marker', 'acquire_marked_lattice_motion', 'approach_unvisited_marker'],
-  strategies: {
-    acquire_marked_lattice_motion: [{ fact: 'acquire', expected: true, label: 'A unique cursor and repeated markers share a visible lattice' }],
-    approach_unvisited_marker: [{ fact: 'move', expected: true, label: 'One direction reduces distance to an unvisited marker' }],
-    apply_at_current_marker: [{ fact: 'onTarget', expected: true, label: 'The cursor occupies a marker whose local effect remains untested' }],
-  },
-}, ['acquire', 'move', 'onTarget']);
 
 type State = { epoch: number; field: NativeBox; color: number; pitch: number; markers: NativeBox[];
   at: NativePoint; visited: number[]; count: number; evidence: string[]; stopped: boolean };
@@ -62,11 +55,15 @@ function measure(rows: NativeRows, epoch: number): State | null {
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
-export function createSicMarkedLattice(): NativeFamily<Proposal> {
+export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: markedLatticeId,
-    propose(observation, rows, inputs, remaining) {
+    id: verifyMarkedLatticeId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || observation.available_action_refs.includes('ACTION6') || !inputs.some(command => command.action_ref === 'ACTION5')) return null;
       const local = state?.epoch === observation.level_epoch ? state : measure(rows, observation.level_epoch);
       if (!local || local.stopped || local.count >= 32) return null;
@@ -85,21 +82,28 @@ export function createSicMarkedLattice(): NativeFamily<Proposal> {
       const command: NativeCommand | null = onTarget ? inputs.find(input => input.action_ref === 'ACTION5') ?? null : move?.command ?? null;
       if (!command) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        acquire: { value: !onTarget && local.count === 0, evidence }, move: { value: !onTarget && !!move, evidence },
-        onTarget: { value: onTarget, evidence },
-      }, planners: { acquire_marked_lattice_motion: () => command, approach_unvisited_marker: () => command, apply_at_current_marker: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = markedLatticeStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? (onTarget ? 'exploration' : 'solving');
+      const routeSupported = !onTarget && local.count > local.visited.length;
+      const knownInteraction = onTarget && local.visited.length > 0;
+      const facts = { routeSupported, knownInteraction, eligibleProbe: !routeSupported && !knownInteraction, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = routeSupported ? 'P07' : knownInteraction ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const phase = onTarget ? 'apply_at_current_marker' : routeSupported ? 'approach_unvisited_marker' : 'acquire_marked_lattice_motion';
+      const label = markedLatticeStrategies[phase], parent = 'G_official_completion';
       const goal = { kind: 'test_repeated_markers_in_reachable_order', scope: ref.split(':revision:', 1)[0]!, subjects: ['cursor_and_visible_markers'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_marker_contacts' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `marked-lattice:${need.id}`, actions = [command];
-      return { status: 'proposed', kind: markedLatticeId, actions, local, target: target.i,
+      return { status: 'proposed', kind: verifyMarkedLatticeId, actions, local, target: target.i,
         landing: onTarget ? null : move!.landing, needId: need.id,
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Find the effect of visiting and using the marked cells', mode: onTarget ? 'exploration' : 'solving',
-          situation: label, agenda: entries, evidence, cursor: [x - 1, y - 1, x + 1, y + 1], target: local.markers[target.i],
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Find the effect of visiting and using the marked cells', mode,
+          situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          cursor: [x - 1, y - 1, x + 1, y + 1], target: local.markers[target.i],
           distance: distance(local.at, target.at) / pitch },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],

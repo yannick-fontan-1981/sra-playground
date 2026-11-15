@@ -30,7 +30,7 @@ import { learnOrderedReplenishmentId, orderedReplenishmentId, orderedReplenishme
 import { learnProgramOriginId, programOriginId, programOriginStrategies } from './program-origin.ts';
 import { previewPlacementId, previewPlacementStrategies, verifyPreviewPlacementId } from './preview-placement.ts';
 import { symbolContributionId, symbolContributionStrategies } from './symbol-contribution.ts';
-import { markedLatticeId, markedLatticeStrategies } from './marked-lattice.ts';
+import { markedLatticeId, markedLatticeStrategies, verifyMarkedLatticeId } from './marked-lattice.ts';
 import { learnQueuedPlacementId, queuedPlacementId, queuedPlacementStrategies } from './queued-placement.ts';
 import { legendRecolorId, legendRecolorStrategies, matchExampleId } from './legend-recolor.ts';
 import { visualPatternId, visualPatternStrategies, verifyPatternChoiceId } from './visual-pattern.ts';
@@ -84,11 +84,11 @@ import { fieldIsolationId, learnFieldIsolationId, fieldIsolationStrategies } fro
 import { directionalReceptionId, directionalReceptionStrategies, learnDirectionalReceptionId } from './directional-reception.ts';
 import { learnWindowCoverageId, windowCoverageId, windowCoverageStrategies } from './window-coverage.ts';
 import { panelMatchingId, panelMatchingStrategies, verifyPanelConfigurationId } from './panel-matching.ts';
-import { crossingRowsId, crossingRowsStrategies } from './crossing-rows.ts';
-import { traceCoverageId, traceCoverageStrategies } from './trace-coverage.ts';
+import { crossingRowsId, crossingRowsStrategies, verifyCrossingRowsId } from './crossing-rows.ts';
+import { traceCoverageId, traceCoverageStrategies, verifyTraceCoverageId } from './trace-coverage.ts';
 import { learnRadialConnectionId, radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
 import { invitedCaptureId, invitedCaptureStrategies, verifyCaptureRouteId } from './invited-capture.ts';
-import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
+import { branchAlignmentId, branchAlignmentStrategies, verifyBranchAlignmentId } from './branch-alignment.ts';
 import { feedbackTrialId, feedbackTrialStrategies, verifyOrderedFeedbackId } from './feedback-trial.ts';
 import { feedbackChoiceStrategies } from './feedback-choice-card.ts';
 import { catalogueComparisonId, catalogueComparisonStrategies, revealedExampleId } from './catalogue-comparison.ts';
@@ -487,7 +487,8 @@ export function readNativeResolution(agent: {
       || family === verifySlotPermutationId || family === verifyPreviewPlacementId || family === verifyReferencePlacementId
       || family === verifyProfileTransferId || family === verifyCaptureRouteId || family === verifyMarkerPlacementId
       || family === verifyFrameContactId || family === verifyContactOrderId || family === verifyCoupledRouteId
-      || family === verifyOrientedDeliveryId) ? inventoryAccessStrategies
+      || family === verifyOrientedDeliveryId || family === verifyTraceCoverageId || family === verifyCrossingRowsId
+      || family === verifyBranchAlignmentId || family === verifyMarkedLatticeId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -667,7 +668,7 @@ export function readNativeResolution(agent: {
     const guide = bounds(card?.guide);
     if (guide) subjects.push({ label: 'Indicated symbol or operand', box: guide });
   }
-  if (situationCard && family === markedLatticeId) {
+  if (situationCard && (family === markedLatticeId || family === verifyMarkedLatticeId)) {
     const cursor = bounds(card?.cursor), target = bounds(card?.target);
     if (cursor) subjects.push({ label: 'Current cursor', box: cursor });
     if (target) subjects.push({ label: 'Unvisited marker', box: target });
@@ -711,7 +712,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Ordered slots', box });
     }
   }
-  if (situationCard && family === branchAlignmentId) {
+  if (situationCard && (family === branchAlignmentId || family === verifyBranchAlignmentId)) {
     const contributor = bounds(card?.contributor);
     if (contributor) subjects.push({ label: 'Selected contributor', box: contributor });
     if (Array.isArray(card?.goals)) for (const goal of card.goals) {
@@ -733,13 +734,13 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Tile in the arrangement', box });
     }
   }
-  if (situationCard && family === traceCoverageId) {
+  if (situationCard && (family === traceCoverageId || family === verifyTraceCoverageId)) {
     for (const [field, label] of [['head', 'Current trace end'], ['next', 'Next adjacent cell'], ['endpoint', 'Candidate finish']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === crossingRowsId) {
+  if (situationCard && (family === crossingRowsId || family === verifyCrossingRowsId)) {
     for (const [field, label] of [['controller', 'Row or column selector'], ['target', 'Cell to compare'], ['reference', 'Visible reference']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

@@ -1,26 +1,18 @@
 import { branchBbox, branchLayout, branchReadState, boundedBranchObservedStateCooperative,
   boundedBranchPlacementCooperative, BranchRoutingIncomplete, type BranchModel, type BranchPoint, type BranchState } from '../logos-engine/v6-branch-routing-geometry.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const branchAlignmentId = 'sic_branch_alignment';
+export const verifyBranchAlignmentId = 'sic_verify_branch_alignment';
 export const branchAlignmentStrategies = {
   learn_contributor_control: 'Measure how commands move the selected contributor',
   select_unaligned_contributor: 'Select a contributor that needs to move',
   align_contributor_to_openings: 'Move the contributor to align its branches with the openings',
   test_aligned_propagation: 'Test propagation after the contributors are aligned',
 } as const;
-const graph = compileStrategyGraph({ id: 'route_all_branches_to_visible_openings', version: 1, order: 'FALLBACK',
-  priorities: ['test_aligned_propagation', 'align_contributor_to_openings', 'select_unaligned_contributor', 'learn_contributor_control'],
-  strategies: {
-    learn_contributor_control: [{ fact: 'learn', expected: true, label: 'Some available commands still lack a measured displacement' }],
-    select_unaligned_contributor: [{ fact: 'select', expected: true, label: 'A different contributor must move to satisfy the route' }],
-    align_contributor_to_openings: [{ fact: 'move', expected: true, label: 'A measured step brings the contributor toward its conditional position' }],
-    test_aligned_propagation: [{ fact: 'launch', expected: true, label: 'The current geometry routes the visible branches to the receiving openings' }],
-  },
-}, ['learn', 'select', 'move', 'launch']);
 
 type State = { epoch: number; model: BranchModel; positions: BranchPoint[]; controls: Record<string, BranchPoint>;
   tried: string[]; evidence: string[]; stopped: boolean };
@@ -29,10 +21,14 @@ const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b
 const bounds = { maximumIdentityAssignments: 2048, maximumPlacements: 8192, yieldInterval: 128 };
 const plain = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 
-export function createSicBranchAlignment(): NativeFamily<Proposal> {
+export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: branchAlignmentId,
+    id: verifyBranchAlignmentId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action)).sort();
       if (remaining < 1 || keys.length !== 5) return null;
@@ -67,27 +63,36 @@ export function createSicBranchAlignment(): NativeFamily<Proposal> {
       const launch = displaced?.length === 0 ? unused[0] : undefined;
       const learn = !displaced ? unused[0] : undefined;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        learn: { value: !!learn, evidence }, select: { value: !!select, evidence }, move: { value: !!movement, evidence },
-        launch: { value: !!launch, evidence },
-      }, planners: { learn_contributor_control: () => learn ? plain(learn) : null, select_unaligned_contributor: () => select,
-        align_contributor_to_openings: () => movement ? plain(movement) : null, test_aligned_propagation: () => launch ? plain(launch) : null } });
-      if (!selected) return null;
-      const strategy = selected.id, action = selected.plan, attempt = contextKey(action);
+      const trial = launch ? plain(launch) : select ?? (learn ? plain(learn) : null);
+      const mode = execution?.reasoningMode ?? (learn ? 'exploration' : 'solving');
+      const facts = { routeSupported: !!movement, eligibleProbe: !!trial, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
+      const action = strategy === 'P07' ? (movement ? plain(movement) : null) : trial;
+      if (!action) return null;
+      const selecting = action === select;
+      const launching = strategy === 'P05' && !!launch;
+      const phase = strategy === 'P07' ? 'align_contributor_to_openings' : launching ? 'test_aligned_propagation'
+        : selecting ? 'select_unaligned_contributor' : 'learn_contributor_control';
+      const attempt = contextKey(action);
       if (local.tried.includes(attempt)) return null;
-      const label = branchAlignmentStrategies[strategy], parent = 'G_official_completion';
+      const label = branchAlignmentStrategies[phase], parent = 'G_official_completion';
       const objective = { kind: 'align_branches_with_openings', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['straight_contributors', 'receiving_openings'], parentObjective: parent, satisfactionContract: 'official_progress_after_propagation' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `branch-alignment:${need.id}`;
-      const expected: BranchState | null = select ? [positions, index] : movement ? [positions.map(([x, y], i): BranchPoint =>
+      const expected: BranchState | null = selecting ? [positions, index] : strategy === 'P07' ? [positions.map(([x, y], i): BranchPoint =>
         i === index ? [x + delta[0], y + delta[1]] : [x, y]), active] : null;
-      const actions = [action], binding = select && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
-      return { status: 'proposed', kind: branchAlignmentId, actions, local, current, expected, attempt, launch: !!launch, needId: need.id,
+      const actions = [action], binding = selecting && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
+      return { status: 'proposed', kind: verifyBranchAlignmentId, actions, local, current, expected, attempt, launch: launching, needId: need.id,
         steps: [{ action, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Deliver every branch to a receiving opening', mode: learn ? 'exploration' : 'solving',
-          situation: launch ? 'The measured positions satisfy the proposed geometry. The launch tests whether propagation follows it.' : label,
-          agenda: entries, evidence, contributor: box, goals: model.goal_boxes.slice(0, 6) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Deliver every branch to a receiving opening', mode,
+          situation: launching ? 'The measured positions satisfy the proposed geometry. The launch tests whether propagation follows it.' : label,
+          agenda: [], evidence, triggerCard: decision.receipt.workflow, contributor: box, goals: model.goal_boxes.slice(0, 6) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

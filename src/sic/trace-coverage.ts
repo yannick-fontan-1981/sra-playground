@@ -2,22 +2,16 @@ import { localTraceEffect } from '../logos-engine/v6-trace-field-access.ts';
 import { constructTraceField } from '../logos-engine/v6-trace-field-mechanics.ts';
 import { measureTraceField, traceFieldCenter } from '../logos-engine/v6-trace-field-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const traceCoverageId = 'sic_trace_coverage';
+export const verifyTraceCoverageId = 'sic_verify_trace_coverage';
 export const traceCoverageStrategies = {
   test_adjacent_trace_step: 'Test whether clicking the adjacent cell extends the trace',
   extend_verified_trace: 'Continue the trace through the remaining cells',
 } as const;
-const graph = compileStrategyGraph({ id: 'cover_visible_cells_with_one_trace', version: 1, order: 'FALLBACK',
-  priorities: ['extend_verified_trace', 'test_adjacent_trace_step'],
-  strategies: {
-    test_adjacent_trace_step: [{ fact: 'confirmed', expected: false, label: 'A conditional covering path gives a new adjacent cell to test' }],
-    extend_verified_trace: [{ fact: 'confirmed', expected: true, label: 'Two distinct returns confirmed a one-cell extension and the current prefix still agrees' }],
-  },
-}, ['confirmed']);
 type Scene = NonNullable<ReturnType<typeof measureTraceField>>;
 type State = { epoch: number; geometry: Scene['geometry']; geometryRef: string; evidence: string[]; count: number; stopped: boolean };
 type Proposal = NativeProposal & { local: State; scene: Scene; from: NativePoint; to: NativePoint; needId: string };
@@ -31,10 +25,14 @@ function predictedExtension(proposal: Proposal, before: NativeRows, after: Nativ
   return next !== null && next.geometry_ref === scene.geometry_ref && equal(next.prefix, [...scene.prefix, to]);
 }
 
-export function createSicTraceCoverage(): NativeFamily<Proposal> {
+export function createSicVerifyTraceCoverage(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: traceCoverageId,
+    id: verifyTraceCoverageId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || execution?.signal?.aborted) return null;
       const local = state?.epoch === observation.level_epoch ? state : null;
@@ -48,11 +46,14 @@ export function createSicTraceCoverage(): NativeFamily<Proposal> {
       const from = scene.head.cell as NativePoint, point = traceFieldCenter(scene.geometry, to);
       const command = { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } };
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...(local?.evidence.filter(value => value !== ref) ?? [])];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        confirmed: { value: (local?.count ?? 0) >= 2, evidence },
-      }, planners: { test_adjacent_trace_step: () => command, extend_verified_trace: () => command } });
-      if (!selected) return null;
-      const strategy = selected.id, label = traceCoverageStrategies[strategy], parent = 'G_official_completion';
+      const confirmed = (local?.count ?? 0) >= 2;
+      const mode = execution?.reasoningMode ?? (confirmed ? 'solving' : 'exploration');
+      const facts = { routeSupported: confirmed, eligibleProbe: !confirmed, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = confirmed ? 'P07' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const label = confirmed ? traceCoverageStrategies.extend_verified_trace : traceCoverageStrategies.test_adjacent_trace_step;
+      const parent = 'G_official_completion';
       const objective = { kind: 'extend_trace_to_cover_visible_field', scope: scene.geometry_ref, subjects: ['measured_cells', 'distinct_endpoint'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_covering_each_visible_cell_once' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `trace-coverage:${need.id}`;
@@ -64,12 +65,15 @@ export function createSicTraceCoverage(): NativeFamily<Proposal> {
         const [x, y] = traceFieldCenter(scene.geometry, cell);
         return [x - half, y - half, x + half, y + half];
       };
-      return { status: 'proposed', kind: traceCoverageId, actions, local: initial, scene, from, to, needId: need.id,
+      return { status: 'proposed', kind: verifyTraceCoverageId, actions, local: initial, scene, from, to, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Reach the other marker by covering the visible cells once', mode: initial.count >= 2 ? 'solving' : 'exploration',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Reach the other marker by covering the visible cells once', mode,
           situation: `The trace covers ${scene.prefix.length} of ${estimate!.path.length} measured cells. The proposed cell keeps a route to the other marker.`,
-          agenda: entries, evidence, head: box(from), next: box(to), endpoint: box(scene.receiver_hypothesis.cell) },
+          agenda: [], evidence, triggerCard: decision.receipt.workflow, head: box(from), next: box(to), endpoint: box(scene.receiver_hypothesis.cell) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

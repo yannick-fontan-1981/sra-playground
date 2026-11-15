@@ -1,24 +1,17 @@
 import { crossedPrefixCell, crossedPrefixGeometry, crossedPrefixMeasureControls, crossedPrefixReferencePresent, crossedPrefixSlot,
   type CrossedPrefixController, type CrossedPrefixLayout } from '../logos-engine/v6-crossed-prefix-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const crossingRowsId = 'sic_crossing_rows';
+export const verifyCrossingRowsId = 'sic_verify_crossing_rows';
 export const crossingRowsStrategies = {
   select_aligned_prefix: 'Select the row or column that can contribute to the pattern',
   test_prefix_advance: 'Test a command for advancing the selected row or column',
   extend_measured_prefix: 'Extend the selected row or column with a measured command',
 } as const;
-const graph = compileStrategyGraph({ id: 'fill_a_reference_through_crossing_prefixes', version: 1, order: 'FALLBACK',
-  priorities: ['extend_measured_prefix', 'test_prefix_advance', 'select_aligned_prefix'],
-  strategies: {
-    select_aligned_prefix: [{ fact: 'selection', expected: true, label: 'The next contribution belongs to a different visible row or column' }],
-    test_prefix_advance: [{ fact: 'trial', expected: true, label: 'There is a cell where the effect or crossing order can be tested' }],
-    extend_measured_prefix: [{ fact: 'measured', expected: true, label: 'An earlier return confirmed an advance on this axis and the crossing remains compatible' }],
-  },
-}, ['selection', 'trial', 'measured']);
 type State = { epoch: number; layout: CrossedPrefixLayout; progress: Record<string, number>; selected: string | null;
   commands: Record<string, string>; axisCommands: [string[], string[]]; crossed: boolean; tried: string[]; stopped: boolean; evidence: string[] };
 type Choice = { controller: CrossedPrefixController; action: NativeCommand; cell: NativePoint; selecting: boolean; crossing: boolean };
@@ -50,11 +43,15 @@ function returnAssessment(proposal: Proposal, first: NativeRows, second: NativeR
   return painted(second, layout, choice.cell) === expected ? 'advanced' : 'refuted';
 }
 
-export function createSicCrossingRows(): NativeFamily<Proposal> {
+export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: crossingRowsId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifyCrossingRowsId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const local = state?.epoch === observation.level_epoch ? state : initial(observation.level_epoch, rows);
       if (!local || local.stopped || local.tried.length >= 80 || !crossedPrefixReferencePresent(rows, local.layout)) return null;
@@ -97,11 +94,13 @@ export function createSicCrossingRows(): NativeFamily<Proposal> {
       if (!action || tested(action)) return null;
       const measured = !selecting && learned.includes(action.action_ref) && (!crossing || local.crossed);
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        selection: { value: selecting, evidence }, trial: { value: !selecting && !measured, evidence }, measured: { value: measured, evidence },
-      }, planners: { select_aligned_prefix: () => action, test_prefix_advance: () => action, extend_measured_prefix: () => action } });
-      if (!selected) return null;
-      const strategy = selected.id, label = crossingRowsStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? (measured ? 'solving' : 'exploration');
+      const facts = { routeSupported: measured, eligibleProbe: !measured, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = measured ? 'P07' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const phase = selecting ? 'select_aligned_prefix' : measured ? 'extend_measured_prefix' : 'test_prefix_advance';
+      const label = crossingRowsStrategies[phase], parent = 'G_official_completion';
       const objective = { kind: 'copy_pattern_with_crossing_lines', scope: layout.ref, subjects: ['row_contributions', 'column_contributions'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_advancing_the_reference_contributions' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `crossing-rows:${need.id}`;
@@ -111,13 +110,16 @@ export function createSicCrossingRows(): NativeFamily<Proposal> {
       const target: NativeBox = [left, top, left + layout.size[0] - 1, top + layout.size[1] - 1];
       const { origin: [rx, ry], scale: [sx, sy] } = layout.reference;
       const reference: NativeBox = [rx, ry, rx + sx * layout.shape[0] - 1, ry + sy * layout.shape[1] - 1];
-      return { status: 'proposed', kind: crossingRowsId, actions, local, choice: { controller, action, cell, selecting, crossing },
+      return { status: 'proposed', kind: verifyCrossingRowsId, actions, local, choice: { controller, action, cell, selecting, crossing },
         attempt: key([controller.key, index, priorCommand ?? null, action]), needId: need.id,
         steps: [{ action, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Reproduce the reference through contributions from both axes', mode: measured ? 'solving' : 'exploration',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Reproduce the reference through contributions from both axes', mode,
           situation: crossing ? 'The other axis has already reached this cell. Compare the crossing color with the reference.' : label,
-          agenda: entries, evidence, target, reference, controller: [...point, ...point] },
+          agenda: [], evidence, triggerCard: decision.receipt.workflow, target, reference, controller: [...point, ...point] },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
