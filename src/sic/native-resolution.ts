@@ -559,7 +559,7 @@ export function readNativeResolution(agent: {
     if (actor) subjects.push({ label: 'Controlled piece', box: actor });
     if (region) subjects.push({ label: card?.routeObligation === 'recharge' ? 'Candidate recharge'
       : card?.routeObligation === 'rotation' ? 'Observed rotator' : card?.routeObligation === 'exit' ? 'Approach to the exit'
-        : 'Proposed contact surface', box: region });
+        : card?.routeObligation === 'shape' ? 'Shape station' : 'Proposed contact surface', box: region });
     const exit = bounds(card?.exit);
     if (exit) subjects.push({ label: 'Exit', box: exit });
     if (Array.isArray(card?.motifs)) for (const motif of card.motifs.slice(0, 2)) {

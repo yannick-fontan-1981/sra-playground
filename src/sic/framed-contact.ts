@@ -1,6 +1,6 @@
 import { morphologyPairs, type MorphologyPair } from '../logos-engine/v6-morphology-measurements.ts';
 import { ObservedMeter } from '../logos-engine/v6-inventory-caller-context.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { measureInsetContact } from './inset-contact.ts';
@@ -8,6 +8,9 @@ import { measureDirectionalMotion, type DirectionalMotion } from './observed-tra
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { chooseManagedFramedPlan, framedResidual, observedFramedRotation, pixelsAt, pointKey, stripUnits,
   type FramedRotation, type ManagedFramedPlan } from './managed-framed-access.ts';
+import { chooseCycleStep, cycleSubject, learnCycleGauge, observeCycleStep, readCycleLayout, readCycleSymbol,
+  type CycleGauge, type CycleKnowledge, type CycleState, type CycleStep } from './inset-cycle-route.ts';
+import type { ReasoningMode } from './reasoning-mode.ts';
 
 export const framedContactId = 'sic_framed_contact';
 export const learnPatternAccessId = 'sic_learn_pattern_access';
@@ -37,7 +40,7 @@ type Transfer = { epoch: number; rotation: FramedRotation; confirmedMoves: Direc
 type Plan = { command: Direction; landing: NativePoint; target: NativePoint; contact: boolean };
 type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target: NativeBox | null; surface: NativeBox | null;
   inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string; pair: MorphologyPair | null;
-  managed?: ManagedFramedPlan; rotation?: FramedRotation };
+  managed?: ManagedFramedPlan; rotation?: FramedRotation; cycle?: { local: CycleState; step: CycleStep } };
 const empty = (epoch = 0): State => ({ epoch, body: null, target: null, surface: null, inset: null, beneath: null,
   trials: [], blocked: [], tested: [], crossed: [], count: 0 });
 const footprint = ([x, y]: NativePoint, pitch: number): NativeBox => [x, y, x + pitch - 1, y + pitch - 1];
@@ -117,11 +120,51 @@ function route(rows: NativeRows, body: Body, surface: NativeBox, directions: rea
   return candidates[0]?.plan ?? null;
 }
 
+function cycleProposal(family: string, local: CycleState, step: CycleStep, observation: NativeObservation,
+  mode: ReasoningMode | undefined,
+): Proposal | null {
+  const parent = 'G_official_completion', ref = observation.observation_ref;
+  const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
+  const facts = { input: step.action, expected: step.step, evidence };
+  const inContact = pointKey(step.step) === pointKey(step.target);
+  const choice = resolveNavigationPrimitives({ mode: mode ?? 'assimilation', evidence,
+    probe: inContact && step.purpose !== 'exit' ? facts : null, access: !inContact ? facts : null,
+    interaction: inContact && step.purpose === 'exit' ? facts : null });
+  const strategy = choice.selected?.id;
+  if (!strategy) return null;
+  const reason = step.purpose === 'recharge' ? 'Reach the recharge before running out of moves'
+    : step.purpose === 'test_shape' ? 'Re-enter the observed station and compare the changed symbol'
+      : 'Reach the matching exit while keeping the current shape';
+  const goal = { kind: 'match_symbol_and_reach_exit_with_reserve', scope: ref.split(':revision:', 1)[0]!,
+    subjects: [pointKey(local.layout.exit)], parentObjective: parent, satisfactionContract: 'official_progress_after_symbol_and_access' };
+  const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id;
+  const target = cycleSubject(local.layout, step.target), action = { action_ref: step.action, data: {} };
+  const { point: [sx, sy], side, scale } = local.layout.symbol;
+  const symbol: NativeBox = [sx, sy, sx + side * scale - 1, sy + side * scale - 1];
+  return { status: 'proposed', kind: family, action: step.action, target, inset: null, surface: null, pair: null, plan: null,
+    cycle: { local, step }, needId: need.id, binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
+    steps: [{ action, expected_after: step.step }],
+    sicSituationCard: { strategy, need: 'Match the symbol and reach the exit within the reserve',
+      situation: `${reason}. Reserve for ${step.units} moves. Current route ${step.distance} moves.`, evidence,
+      agenda: choice.entries, mode: mode ?? 'assimilation', triggerCard: choice.card,
+      controlledPiece: cycleSubject(local.layout, local.at), addressedRegion: target, exit: cycleSubject(local.layout, local.layout.exit),
+      motifs: [symbol, cycleSubject(local.layout, local.layout.exit)], route: 'managed_access',
+      routeObligation: step.purpose === 'test_shape' ? 'shape' : step.purpose, reserve: step.units, steps: step.distance },
+    question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: reason, relations: [`contributes_to:${parent}`] }],
+    sicLocalDecision: { strategy, objective: { id, label: reason, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: reason,
+      preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicFramedContact(family = framedContactId): NativeFamily<Proposal> {
   const fallback = family === learnPatternAccessId;
   let state = empty();
   let transfer: Transfer | null = null;
   let meter = new ObservedMeter();
+  let gauge: { epoch: number; reading: CycleGauge } | null = null;
+  let cycleModel: CycleKnowledge | null = null;
+  let cycle: CycleState | null = null;
   return {
     id: family,
     async propose(observation, rows, inputs, remaining, execution) {
@@ -134,6 +177,17 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       }
       const recalled = transfer?.epoch === observation.level_epoch - 1 && !local.reserveContradicted ? transfer : null;
       if (remaining < 1 || (local.count >= 32 && !recalled) || available.length !== 4) return null;
+      if (cycleModel?.epoch === observation.level_epoch - 1) {
+        const current = cycle?.epoch === observation.level_epoch ? cycle : null;
+        const fresh = current ? null : readCycleLayout(rows, cycleModel);
+        const learned = current ?? (fresh ? { ...fresh, epoch: observation.level_epoch, spentCharge: false,
+          triedSymbols: [], refs: [cycleModel.ref], stopped: false } : null);
+        const step = learned ? chooseCycleStep(rows, learned) : null;
+        if (learned && step && available.includes(step.action)) {
+          const proposed = cycleProposal(family, learned, step, observation, execution?.reasoningMode);
+          if (proposed) return proposed;
+        }
+      }
       if (recalled) meter.observe(observation.level_epoch, observation.observation_ref, rows);
       if (fallback && !local.body && !execution?.readDirectionalMotion) return null;
       const [pairs, parts] = await morphologyPairs(rows);
@@ -225,6 +279,11 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
     },
     async after(proposal, _index, before, after, first, second) {
       const scored = after.levels_completed > before.levels_completed;
+      if (proposal.cycle && !scored) {
+        const { local, step } = proposal.cycle;
+        const observed = observeCycleStep(second, first, local, step);
+        return { matched: !!observed, seal_prefix: true, reason: observed?.reason ?? 'cycle_or_reserve_prediction_contradicted' };
+      }
       const body = fallback ? proposal.adoptedBody : state.body;
       const moved = !scored && proposal.plan && body ? sameLanding(first, second, body, proposal.plan.landing, state.beneath) : null;
       const effect = moved && proposal.managed ? await managedEffect(proposal, second) : null;
@@ -235,6 +294,10 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
     },
     async record(before, after, _command, first, second, proposal) {
       if (after.levels_completed > before.levels_completed) {
+        if (proposal.inset && state.body && gauge?.epoch === before.level_epoch && gauge.reading.observations >= 2) {
+          cycleModel = { epoch: before.level_epoch, gauge: gauge.reading, pitch: state.body.pitch,
+            floor: state.body.floor, ref: after.observation_ref };
+        }
         const rotation = state.rotation ?? proposal.rotation;
         if (rotation && state.confirmedMoves?.length) {
           transfer = { epoch: before.level_epoch, rotation, confirmedMoves: state.confirmedMoves, victory: after.observation_ref };
@@ -243,6 +306,20 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         }
       }
       if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
+      if (proposal.cycle) {
+        const { local, step } = proposal.cycle, observed = observeCycleStep(second, first, local, step);
+        const priorSymbol = observed?.symbol ? readCycleSymbol(first, local.layout) : null;
+        const repeated = !!observed?.symbol && observed.symbol !== local.layout.symbol.target && local.triedSymbols.includes(observed.symbol);
+        cycle = { ...local, at: observed ? step.step : local.at, stopped: !observed || repeated,
+          triedSymbols: priorSymbol ? [...new Set([...local.triedSymbols, priorSymbol])] : local.triedSymbols,
+          spentCharge: local.spentCharge || observed?.recovered === true, refs: [...local.refs.slice(-5), after.observation_ref] };
+        return { events: [] };
+      }
+      if (proposal.inset && before.frame_hash !== after.frame_hash) {
+        const pitch = proposal.inset.body[2] - proposal.inset.body[0] + 1;
+        const reading = learnCycleGauge(first, second, pitch, gauge?.epoch === before.level_epoch ? gauge.reading : undefined);
+        if (reading) gauge = { epoch: before.level_epoch, reading };
+      }
       if (state.epoch !== before.level_epoch) state = empty(before.level_epoch);
       state.score = before.levels_completed;
       if (fallback && !state.body && proposal.adoptedBody) state.body = proposal.adoptedBody;
@@ -285,11 +362,14 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       }
       return { events: [] };
     },
-    state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null }),
+    state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null, gauge, cycleModel, cycle }),
     restore(value: NativeRecord) {
-      const { transfer: savedTransfer, reserveMeter, ...local } = structuredClone(value);
+      const { transfer: savedTransfer, reserveMeter, gauge: savedGauge, cycleModel: savedModel, cycle: savedCycle, ...local } = structuredClone(value);
       state = local as State;
       transfer = (savedTransfer ?? null) as Transfer | null;
+      gauge = (savedGauge ?? null) as typeof gauge;
+      cycleModel = (savedModel ?? null) as CycleKnowledge | null;
+      cycle = (savedCycle ?? null) as CycleState | null;
       meter = new ObservedMeter();
       if (reserveMeter) meter.restore(reserveMeter as ReturnType<ObservedMeter['state']>);
     },

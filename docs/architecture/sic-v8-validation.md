@@ -507,7 +507,9 @@ Sur **CWSE**, SIC réutilise les commandes de déplacement observées au niveau 
 
 Sur **ISOS**, SIC conserve la création du premier motif et l’élévation observées au niveau 1. Il réutilise le calcul de projection visible de V6 pour comparer la référence et le dessin. Le premier clic latéral vérifie l’extension attendue, puis SIC repère la nouvelle face pour poursuivre la branche. Les retours intermédiaires concordent avec la projection des couleurs et la scène extérieure au plateau reste stable. Le niveau 2 gagne en **4 clics** et **8,00 s**. Les trois commandes et retours du niveau 1 sont reproduits exactement. Les sept commandes relèvent de SIC, et la permutation de palette conserve le trajet. Empreinte `91041f9c253597406e2aea456c90067be36b71b7f788f256cd75e3ffdc585d22`.
 
-Le bilan atteint **77/100 niveaux 2** et **194/636 niveaux attestés sous SIC seul** (30,5 %).
+Sur **LS19**, SIC mesure sur les retours du niveau 1 la consommation de la réserve et retrouve le motif demandé sur le panneau. Au niveau 2, quatre passages à la station changent le motif. Avant le quatrième essai, SIC choisit un détour vers la recharge pour garder assez de réserve. Le contact recharge de 3 à 22 points et préserve le motif acquis. Une fois le motif demandé confirmé, SIC rejoint la sortie. Le niveau 2 gagne en **31 commandes** et **27,47 s**. Les cinq commandes et retours du niveau 1 sont reproduits exactement. Les 36 commandes sont décidées par SIC, et leur séquence reste identique après permutation de palette. Empreinte `0290f34f93881e7c97c33f430296335b1c3459c25db70828b733625df654e130`.
+
+Le bilan atteint **78/100 niveaux 2** et **195/636 niveaux attestés sous SIC seul** (30,7 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
