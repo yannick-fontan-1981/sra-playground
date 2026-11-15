@@ -15,7 +15,7 @@ export const shiftReflectionPoints=(points:Set<string>,d:number[]):Set<string>=>
 export const reflectCoverPoints=(points:Set<string>,a:number,dim:number):Set<string>=>new Set([...points].map(p=>{const q=point(p);q[dim]=2*a-q[dim]!;return key(q);}));
 const visible=(points:Set<string>,s:R):Set<string>=>new Set([...points].filter(p=>{const [x,y]=point(p);return x!>=0&&x!<s.nx&&y!>=0&&y!<s.ny;}));
 const pixel=(w:R,p:number[]):[number,number]=>[w.phase[0]+p[0]!*w.pitch+Math.floor(w.pitch/2),w.phase[1]+p[1]!*w.pitch+Math.floor(w.pitch/2)];
-export function measureReflectedLattice(rows:NativeRows,hint:R|null=null):R|null{
+export function measureReflectedLattice(rows: NativeRows, hint: R | null = null, measurePieceMarker = false): R | null {
  const h=rows.length,w=rows[0]!.length,cs=parts(rows),bands=new Map<string,Set<number>>();
  for(const c of cs){const b=c.bbox,ww=b.right-b.left+1,hh=b.bottom-b.top+1;if(!(Math.min(ww,hh)>=2&&Math.min(ww,hh)<=Math.floor(Math.min(h,w)/8)&&Math.max(ww,hh)>=Math.min(h,w)*.3))continue;
   const dim=hh>ww?0:1,k=JSON.stringify([dim,dim===0?b.left:b.top,Math.min(ww,hh),c.value]),extent=bands.get(k)??new Set<number>();for(let n=dim===0?b.top:b.left;n<=(dim===0?b.bottom:b.right);n++)extent.add(n);bands.set(k,extent);
@@ -25,8 +25,32 @@ export function measureReflectedLattice(rows:NativeRows,hint:R|null=null):R|null
   const direct=union(hint.bodies);for(const [pos,extent]of segments){const a=(pos-hint.phase[dim])/pitch,layers=new Map<number,Set<string>>([[hint.direct,direct],[hint.image,reflectCoverPoints(direct,a,dim)],[hint.target,hint.targets]]);let valid=true;const markerMasks=new Map<string,Set<string>>();
    const patch=(cell:number[]):Map<string,number>=>{const xx=hint.phase[0]+cell[0]!*pitch,yy=hint.phase[1]+cell[1]!*pitch,out=new Map<string,number>();for(let dy=0;dy<pitch;dy++)for(let dx=0;dx<pitch;dx++)out.set(key([dx,dy]),rows[yy+dy]![xx+dx]!);return out;};
    for(const q of range(dim===0?hint.ny:hint.nx)){const cell=dim===0?[a,q]:[q,a],center=hint.phase[1-dim]+q*pitch+Math.floor(pitch/2);if(!extent.has(center))continue;const values=patch(cell);if([...values.values()].every(v=>v===color||v===hint.marker_value)){const mask=new Set([...values].filter(([,v])=>v===hint.marker_value).map(([p])=>p));if(mask.size)markerMasks.set(JSON.stringify(sortedPoints(mask)),mask);}}
+   if (measurePieceMarker && markerMasks.size === 0) {
+     // Selection can transfer the marker from the axis to a piece. Recover the
+     // mask on visible cells of that piece before checking an occluded axis.
+     for (const position of visible(direct, hint)) {
+       const cell = point(position);
+       if (cell[dim] === a) continue;
+       const values = patch(cell);
+       if (![...values.values()].every(value => value === hint.direct || value === hint.marker_value)) continue;
+       const mask = new Set([...values].filter(([, value]) => value === hint.marker_value).map(([p]) => p));
+       if (mask.size === 1) markerMasks.set(JSON.stringify(sortedPoints(mask)), mask);
+     }
+     if (markerMasks.size === 0 && hint.markerOffset) {
+       const mask = new Set([key(hint.markerOffset)]);
+       markerMasks.set(JSON.stringify(sortedPoints(mask)), mask);
+     }
+   }
    for(const q of range(dim===0?hint.ny:hint.nx)){const cell=dim===0?[a,q]:[q,a],center=hint.phase[1-dim]+q*pitch+Math.floor(pitch/2);if(extent.has(center))continue;const [x,y]=pixel(hint,cell),allowed=[...layers].filter(([,points])=>points.has(key(cell))).map(([v])=>v);if(x<0||x>=w||y<0||y>=h){valid=false;break;}
-    const values=patch(cell);let supported=false;for(const material of allowed){const residual=new Set([...values].filter(([,v])=>v!==material).map(([p])=>p));if(!residual.size||markerMasks.size===1&&markerMasks.has(JSON.stringify(sortedPoints(residual)))&&[...residual].every(p=>values.get(p)===hint.marker_value))supported=true;}if(!supported){valid=false;break;}
+    const values = patch(cell);
+    const supported = allowed.some(material => {
+      const residual = new Set([...values].filter(([, value]) => value !== material).map(([p]) => p));
+      if (residual.size === 0) return true;
+      // The transferred marker can expose the background at its old pixel.
+      return markerMasks.size === 1 && markerMasks.has(JSON.stringify(sortedPoints(residual)))
+        && [...residual].every(p => values.get(p) === hint.marker_value || (measurePieceMarker && values.get(p) === hint.background));
+    });
+    if (!supported) { valid = false; break; }
    }if(valid&&extent.size>=Math.min(h,w)*.5&&Math.max(...extent)-Math.min(...extent)+1>=Math.min(h,w)*.8)candidates.push([dim,pos,pitch,color]);
   }
  }

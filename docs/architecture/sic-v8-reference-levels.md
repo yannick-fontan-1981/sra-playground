@@ -9,7 +9,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | Jeu | Total | Natif | V5 | V6 | V7 | Maximum attesté | Prochain jalon | SIC seul |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | AMZE | 6 | — | — | — | — | — | — | 3 |
-| AR25 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
+| AR25 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 3 |
 | AS66 | 9 | [3](../../docs/migration/native-campaigns-v55/baseline-as66/as66-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AS66/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 5 |
 | BP35 | 9 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/BP35/LVL1/good_run_pseudocode.md) | 0 (archive locale) | — | 1 | 2 | 2 |
 | CASC | 6 | [0](../../docs/migration/native-campaigns-v55/baseline-casc/casc-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CASC/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
@@ -45,25 +45,25 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | GMAP | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
 | GORI | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/GORI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | GRAV | 6 | — | — | — | — | — | — | 2 |
-| GRIL | 6 | [3](../../docs/migration/native-campaigns-v49/gril-three-levels.json) | — | — | — | 3 | 4 | 2 |
+| GRIL | 6 | [3](../../docs/migration/native-campaigns-v49/gril-three-levels.json) | — | — | — | 3 | 4 | 3 |
 | HANO | 4 | [4](../../docs/migration/native-campaigns-v32/before-memory-fix/hano.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/HANO/LVL1/good_run_pseudocode.md) | [3](../../docs/migration/v6-baseline-parity.json) | — | 4 | 4 | 4 · WIN |
 | HOLE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
-| HPDL | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
+| HPDL | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 3 |
 | ISOS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
 | KA59 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KA59/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
 | KATA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KATA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | KEYD | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KEYD/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
-| KLOT | 6 | [3](../../docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz) | — | — | — | 3 | 4 | 2 |
+| KLOT | 6 | [3](../../docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz) | — | — | — | 3 | 4 | 3 |
 | LF52 | 10 | [3](../../docs/migration/native-campaigns-v45/lf52-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LF52/LVL1/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
 | LIFE | 6 | [3](../../docs/migration/native-campaigns-v50/life-three-levels-final.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LIFE/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
 | LKEY | 6 | [3](../../docs/architecture/sic-v8-validation.md) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LKEY/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
 | LOGI | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LOGI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
-| LP85 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LP85/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
+| LP85 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LP85/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 3 |
 | LS19 | 8 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LS19/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | LS20 | 7 | [3](../../docs/migration/lot2c-cost-evidence/final/ls20-regression/summary.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/LS20/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
 | M0R0 | 6 | [3](../../docs/migration/native-campaigns-v35/m0r0-before-native-checkpoint.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/M0R0/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
 | MEMO | 6 | [3](../../docs/migration/native-campaigns-v40/memo-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/MEMO/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
-| MIND | 6 | 1 (rejeu local 0.68), [0](../../docs/migration/lot4a-evidence/baseline/mind-native049/mind-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/MIND/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
+| MIND | 6 | 1 (rejeu local 0.68), [0](../../docs/migration/lot4a-evidence/baseline/mind-native049/mind-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/MIND/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 3 |
 | MOTO | 6 | — | — | — | — | — | — | 2 |
 | ONDE | 6 | [6](../../docs/migration/native-campaigns-v32/before-memory-fix/onde.json) | — | 3 (archive locale) | — | 6 | 6 | 2 |
 | PIPE | 6 | [3](../../docs/migration/native-campaigns-v41/pipe-three-levels.json) | — | — | — | 3 | 4 | 2 |

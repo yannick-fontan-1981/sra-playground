@@ -33,8 +33,9 @@ type Owner = number | 'axis' | null;
 type World = {
   pitch: number; phase: NativePoint; nx: number; ny: number; axis: number; dim: 0 | 1; axis_color: number;
   direct: number; image: number; target: number; marker_value: number; focus: Owner; bodies: Set<string>[]; targets: Set<string>;
+  markerOffset?: NativePoint;
 };
-type Scene = { axis: number; cells: Map<string, number>; families: Map<number, Set<string>> };
+type Scene = { axis: number; cells: Map<string, number>; families: Map<number, Set<string>>; mark_values: Map<string, number> };
 type Control = { action: string; role: 'axis' | 'piece'; delta: NativePoint };
 type Strategy = keyof typeof reflectedPlacementStrategies;
 type State = { epoch: number; world: NativeRecord; controls: Control[]; tested: string[]; evidence: string[]; stopped: boolean; recalled?: boolean };
@@ -48,6 +49,25 @@ const at = (world: World, [x, y]: NativePoint): NativePoint => [
   world.phase[1] + y * world.pitch + Math.floor(world.pitch / 2),
 ];
 const point = (p: readonly number[]): NativePoint => [p[0]!, p[1]!];
+
+function visibleMarkerOffset(world: World, scene: Scene, rows: NativeRows): NativePoint | null {
+  const focus = reflectedFocus(world, scene) as Owner;
+  if (focus === null) return null;
+  const offsets = new Map<string, NativePoint>();
+  for (const [key, value] of scene.mark_values) {
+    const [x, y] = supportPoint(key);
+    const selected = focus === 'axis' ? [x, y][world.dim] === world.axis && scene.cells.get(key) === world.axis_color
+      : world.bodies[focus]!.has(key) && scene.cells.get(key) === world.direct;
+    if (!selected || value !== world.marker_value) continue;
+    const left = world.phase[0] + x! * world.pitch, top = world.phase[1] + y! * world.pitch;
+    for (let dy = 0; dy < world.pitch; dy++) for (let dx = 0; dx < world.pitch; dx++) {
+      if (rows[top + dy]![left + dx] !== value) continue;
+      const offset: NativePoint = [dx, dy];
+      offsets.set(supportKey(offset), offset);
+    }
+  }
+  return offsets.size === 1 ? offsets.values().next().value! : null;
+}
 
 function box(world: World, cells: Set<string>): NativeBox | null {
   if (!cells.size) return null;
@@ -86,6 +106,25 @@ function measureChange(world: World, scene: Scene): { world: World; delta: Nativ
   const result = fits[0]!;
   result.world.focus = reflectedFocus(result.world, scene, result.delta.some(Boolean)) as Owner;
   return result;
+}
+
+function reconcileOccludedMotion(world: World, rows: NativeRows, controls: readonly Control[]) {
+  if (typeof world.focus !== 'number') return null;
+  const measured = new Map<string, NativePoint>();
+  for (const { role, delta } of controls) {
+    if (role !== 'piece') continue;
+    measured.set(supportKey(delta), delta);
+    const opposite: NativePoint = [-delta[0], -delta[1]];
+    measured.set(supportKey(opposite), opposite);
+  }
+  const matches = [];
+  for (const delta of measured.values()) {
+    const next = moveWorld(world, world.focus, delta);
+    const scene = measureReflectedLattice(rows, next, true) as Scene | null;
+    if (!scene || !matchesReflectedWorld(next, scene) || reflectedFocus(next, scene, true) !== world.focus) continue;
+    matches.push({ world: next, delta });
+  }
+  return matches.length === 1 ? matches[0]! : null;
 }
 
 function acquireControl(world: World, motion: DirectionalMotion | null): Control | null {
@@ -159,11 +198,13 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
       if (declarative && (!choose || (!prior && !recalled && !execution?.readDirectionalMotion))) return null;
       if (prior?.stopped || (prior?.tested.length ?? 0) >= 72) return null;
       const retained = prior ? decodeReflectedWorld(prior.world) as World : null;
-      const scene = measureReflectedLattice(rows, retained) as Scene | null;
+      const scene = measureReflectedLattice(rows, retained, true) as Scene | null;
       if (!scene) return null;
       const world = retained ?? initializeReflectedWorld(scene, recalled?.direct, recalled?.marker, recalled?.image) as World | null;
       if (!world || world.bodies.length > 5 || world.targets.size > 40 || !matchesReflectedWorld(world, scene)) return null;
       world.focus = reflectedFocus(world, scene, true) as Owner;
+      const markerOffset = visibleMarkerOffset(world, scene, rows);
+      if (markerOffset) world.markerOffset = markerOffset;
       const revalidated = recalled && world.pitch === recalled.pitch && world.direct === recalled.direct && world.image === recalled.image
         && world.marker_value === recalled.marker && world.focus !== null ? recalled : null;
       const motion = declarative && !prior ? execution?.readDirectionalMotion?.() ?? null : null;
@@ -242,7 +283,7 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
       const selection = proposal.plan.selection;
       const expected = selection === undefined ? proposal.plan.after && decodeReflectedWorld(proposal.plan.after) as World | null
         : { ...decodeReflectedWorld(proposal.local.world), focus: selection } as World;
-      const scene = expected ? measureReflectedLattice(rows, expected) : null;
+      const scene = expected ? measureReflectedLattice(rows, expected, true) : null;
       const matched = expected ? matchesReflectedWorld(expected, scene) && reflectedFocus(expected, scene!, selection === undefined) === expected.focus : null;
       if (verify) {
         const checked = await verify.run({ outcome: { matched } });
@@ -261,8 +302,10 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
         return { events: [], reviewEvidence: 'The reflected pieces covered the target and advanced the level.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const scene = measureReflectedLattice(rows, world) as Scene | null;
-      const change = scene && measureChange(world, scene);
+      const scene = measureReflectedLattice(rows, world, true) as Scene | null;
+      const directional = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'].includes(command.action_ref);
+      const change = scene ? measureChange(world, scene)
+        : local.recalled && directional ? reconcileOccludedMotion(world, rows, local.controls) : null;
       const controls = [...local.controls];
       if (change && change.delta.some(Boolean)) {
         const owner = role(world.focus);
