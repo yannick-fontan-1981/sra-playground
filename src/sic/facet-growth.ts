@@ -1,5 +1,7 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { facetBox, facetInside, facetProject, facetShape, type FacetProjection } from '../logos-engine/v6-facet-examples-geometry.ts';
+import { acquireFacetSeed, facetCompoundPlan, type FacetCompoundCache, type FacetCompoundConfiguration,
+  type FacetPortableMethod } from '../logos-engine/v6-facet-examples-compound.ts';
 import type { NativeFamily, NativeObservation, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
@@ -11,17 +13,31 @@ export const facetGrowthStrategies = {
   test_matching_surface: 'Test a bounded area that matches the example',
   measure_visible_extension: 'Test whether the top moves and the sides extend',
   repeat_verified_extension: 'Repeat the measured extension toward the reference',
+  extend_visible_side_toward_reference: 'Test an exposed side for the missing branch of the reference',
+  repeat_verified_side_extension: 'Extend the branch from a face whose effect was verified',
 } as const;
 const graph = compileStrategyGraph({ id: 'extend_visible_form_toward_reference', version: 1, order: 'FALLBACK',
-  priorities: ['repeat_verified_extension', 'measure_visible_extension', 'test_matching_surface'],
+  priorities: ['repeat_verified_side_extension', 'extend_visible_side_toward_reference', 'repeat_verified_extension',
+    'measure_visible_extension', 'test_matching_surface'],
   strategies: {
     test_matching_surface: [{ fact: 'empty', expected: true, label: 'An empty area fits the example with room for the projected extension' }],
     measure_visible_extension: [{ fact: 'newTop', expected: true, label: 'The example appeared and the sides are shorter than the reference' }],
     repeat_verified_extension: [{ fact: 'repeat', expected: true, label: 'The previous click raised the top and extended the sides' }],
+    extend_visible_side_toward_reference: [{ fact: 'side', expected: true, label: 'The reference calls for a branch from a currently exposed side' }],
+    repeat_verified_side_extension: [{ fact: 'knownSide', expected: true, label: 'The visible result confirmed the previous use of this side' }],
   },
-}, ['empty', 'newTop', 'repeat']);
-type State = { scope: string; count: number; stopped: boolean; rise: number | null; evidence: string[] };
+}, ['empty', 'newTop', 'repeat', 'side', 'knownSide']);
+type State = { scope: string; count: number; stopped: boolean; rise: number | null; evidence: string[]; ports?: number[] };
 type Proposal = NativeProposal & { projection: FacetProjection; local: State; needId: string };
+const compoundSearch: FacetCompoundConfiguration = {
+  maximum_units: 5,
+  maximum_states: 1024,
+  lateral_rule: 'conditional_stencil_sharing_measured_face_edges',
+  requires_observed_seed_and_vertical_effect_and_boundary: true,
+  question: 'Fill the missing visible contributions of the reference while preserving the rest of the scene.',
+  maximum_sample_denominator: 8,
+  sample_offsets: [-0.5, 0, 0.5],
+};
 const sameShape = (a: FacetProjection['offer']['support'], b: FacetProjection['offer']['support']) =>
   JSON.stringify(facetShape(a)) === JSON.stringify(facetShape(b));
 
@@ -45,15 +61,33 @@ function observedRise({ projection, local }: Proposal, before: NativeObservation
   return rise;
 }
 
+function matchesCompound(projection: FacetProjection, first: NativeRows, second: NativeRows): boolean {
+  const compound = projection.compound;
+  if (!compound) return false;
+  const [l, t, r, b] = projection.world;
+  let painted = 0;
+  for (let y = 0; y < first.length; y++) for (let x = 0; x < first[y]!.length; x++) {
+    const value = second[y]?.[x];
+    if (x <= l || x >= r || y <= t || y >= b) {
+      if (value !== first[y]![x]) return false;
+    } else if (value !== undefined && compound.palette.includes(value)) painted++;
+  }
+  return painted === compound.expected_colored_pixels.length
+    && compound.expected_colored_pixels.every(([x, y, value]) => second[y]?.[x] === value);
+}
+
 export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Proposal> {
   const learns = family === learnFacetGrowthId;
   let state: State | null = null;
+  let portable: FacetPortableMethod | null = null;
+  const cache: FacetCompoundCache = new Map();
   return {
     id: family,
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       if (learns && !state && !execution?.readWorkspaceClick) return null;
-      const projection = facetProject(observation, rows);
+      const reusable = portable && portable.source_epoch !== observation.level_epoch ? portable : null;
+      const projection = facetCompoundPlan(observation, rows, reusable, cache, compoundSearch) ?? facetProject(observation, rows);
       if (!projection) return null;
       const prior = state?.scope === projection.scope_ref ? state : null;
       const click = learns && !prior && projection.offer.kind === 'probe_visible_cap'
@@ -61,15 +95,21 @@ export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Propo
       if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch
         || !facetInside([...click.point, ...click.point], projection.offer.support.bbox))) return null;
       const local = prior ?? { scope: projection.scope_ref, count: 0, stopped: false, rise: null,
-        evidence: click ? [click.beforeRef, click.afterRef] : [] };
+        evidence: projection.compound && reusable?.boundary_ref ? [...reusable.evidence, reusable.boundary_ref]
+          : click ? [click.beforeRef, click.afterRef] : [] };
       if (local.stopped || local.count >= 16) return null;
-      const empty = projection.offer.kind === 'probe_congruent_empty_face';
-      const repeat = !empty && local.rise !== null;
+      const empty = projection.offer.kind === 'probe_congruent_empty_face' || projection.offer.kind === 'recall_seed_for_compound_reference';
+      const port = projection.offer.support.palette_value;
+      const side = !!projection.compound && !empty && port !== reusable?.cap_value;
+      const knownSide = side && !!local.ports?.includes(port);
+      const repeat = !empty && !side && (local.rise !== null || !!projection.compound);
       const [x, y] = projection.offer.point, command = { action_ref: 'ACTION6', data: { x, y } };
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        empty: { value: empty, evidence }, newTop: { value: !empty && !repeat, evidence }, repeat: { value: repeat, evidence },
-      }, planners: { test_matching_surface: () => command, measure_visible_extension: () => command, repeat_verified_extension: () => command } });
+        empty: { value: empty, evidence }, newTop: { value: !empty && !repeat && !side, evidence }, repeat: { value: repeat, evidence },
+        side: { value: side && !knownSide, evidence }, knownSide: { value: knownSide, evidence },
+      }, planners: { test_matching_surface: () => command, measure_visible_extension: () => command, repeat_verified_extension: () => command,
+        extend_visible_side_toward_reference: () => command, repeat_verified_side_extension: () => command } });
       if (!selected) return null;
       const strategy = selected.id, label = facetGrowthStrategies[strategy], parent = 'G_official_completion';
       const goal = { kind: 'match_reference_form', scope: projection.scope_ref, subjects: ['bounded_workspace', 'visible_reference'],
@@ -80,10 +120,10 @@ export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Propo
       return { status: 'proposed', kind: family, actions, local, projection, needId: need.id,
         steps: [{ action: command, expected_after: null, point_binding: binding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Match the proportions of the separate reference', mode: repeat ? 'solving' : 'exploration',
-          situation: repeat ? `The previous click raised the top by ${local.rise} pixels, with both sides extending upward.` : label,
+        sicSituationCard: { strategy, need: 'Match the proportions of the separate reference', mode: repeat || knownSide ? 'solving' : 'exploration',
+          situation: repeat && local.rise !== null ? `The previous click raised the top by ${local.rise} pixels, with both sides extending upward.` : label,
           agenda: entries, evidence, support: projection.offer.support.bbox, example: projection.example_box,
-          reference: facetBox(projection.reference_parts) },
+          reference: projection.compound?.reference.box ?? facetBox(projection.reference_parts) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -97,17 +137,36 @@ export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Propo
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = observedRise(proposal, before, after, first, second) !== null;
+      const matched = proposal.projection.compound ? matchesCompound(proposal.projection, first, second)
+        : observedRise(proposal, before, after, first, second) !== null;
       return { matched, seal_prefix: true, reason: matched ? 'face_effect_observed' : 'face_effect_unconfirmed' };
     },
     record(before, after, _command, first, second, proposal) {
+      if (after.levels_completed > before.levels_completed && portable) portable.boundary_ref = after.observation_ref;
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const rise = observedRise(proposal, before, after, first, second), local = proposal.local;
+      const { local, projection } = proposal;
+      if (projection.compound) {
+        const confirmed = matchesCompound(projection, first, second);
+        const port = projection.offer.support.palette_value;
+        state = { ...local, count: local.count + 1, stopped: !confirmed,
+          ports: confirmed ? [...new Set([...(local.ports ?? []), port])] : local.ports ?? [],
+          evidence: [...local.evidence.slice(-5), after.observation_ref] };
+        return { events: [] };
+      }
+      const rise = observedRise(proposal, before, after, first, second);
+      if (rise === 0) portable = acquireFacetSeed(before, after, first, second, projection);
+      if (rise && portable?.source_epoch === before.level_epoch) {
+        portable.up_shift = [0, -rise];
+        portable.evidence = [...new Set([...portable.evidence, before.observation_ref, after.observation_ref])];
+      }
       state = { ...local, count: local.count + 1, stopped: rise === null, rise: rise || null,
         evidence: [...local.evidence.slice(-3), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, portable }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      portable = structuredClone((value.portable as FacetPortableMethod | undefined) ?? null);
+    },
   };
 }
