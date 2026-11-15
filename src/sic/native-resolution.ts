@@ -1087,9 +1087,14 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === reactiveTargetId || family === verifyReactiveMotionId)) {
-    for (const [field, label] of [['actor', 'Controlled sprite'], ['focus', 'Reactive sprite'], ['landing', 'Predicted position of the reactive sprite']] as const) {
+    for (const [field, label] of [['actor', 'Controlled sprite'], ['focus', 'Reactive sprite'], ['landing', 'Predicted position of the reactive sprite'],
+      ['step', 'Next position of the controlled sprite'], ['movedObstacle', 'Obstacle expected to move']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+    if (Array.isArray(card?.movingTargets)) for (const target of card.movingTargets) {
+      const box = bounds(target);
+      if (box) subjects.push({ label: 'Remaining moving target', box });
     }
   }
   if (situationCard && (family === markedGaugeId || family === verifyGaugeEffectId)) {

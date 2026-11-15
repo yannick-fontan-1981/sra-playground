@@ -543,7 +543,9 @@ Sur **VOIS**, SIC réutilise au niveau 2 les directions vérifiées au niveau 1.
 
 Sur **ELAS**, SIC vérifie au niveau 1 les quatre directions sur une pièce sélectionnée et confirme dans les images de victoire que sa disposition finale correspond à la miniature. Au niveau 2, la miniature a une autre échelle et contient une pièce supplémentaire. SIC relocalise les cases de destination à partir des proportions observées, vérifie chaque sélection et évite les cases occupées. Le niveau 2 gagne en **9 commandes** et **10,13 s**. Les 16 commandes et retours du niveau 1 sont reproduits à l'identique. Les 25 commandes sont décidées par SIC et la permutation de palette conserve le trajet. Empreinte `a557c373a4227e8c559fec157d6ca23aca1b921fadf9506ef62210e568cd92e6`.
 
-Le bilan atteint **95/100 niveaux 2** et **212/636 niveaux attestés sous SIC seul** (33,3 %).
+Sur **FUIT**, SIC conserve la règle de fuite compatible avec les retours du niveau 1 et les déplacements d'obstacles observés au contact. Au niveau 2, il relocalise les deux sprites mobiles, prévoit le prochain contact, puis recalcule le trajet vers le sprite restant après la première capture. Chaque commande contrôle les positions du poursuivant, des cibles et des obstacles. Le niveau 2 gagne en **18 commandes** et **27,35 s**, mesurés pendant les qualifications parallèles. Les 48 commandes et retours du niveau 1 sont reproduits à l'identique. Les 66 commandes sont décidées par SIC et la permutation de palette conserve le trajet. Empreinte `e1f5f5d9b098f8b573199ee98a1bf1a4c69905613a7ef3d4ada250104b9b0388`.
+
+Le bilan atteint **96/100 niveaux 2** et **213/636 niveaux attestés sous SIC seul** (33,5 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
