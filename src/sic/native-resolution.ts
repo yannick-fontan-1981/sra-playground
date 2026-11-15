@@ -12,6 +12,7 @@ import { recheckDirectionalControlsId, recheckDirectionalControlsStrategies } fr
 import { trialRepeatedLinearControlsId, trialRepeatedLinearControlsStrategies } from './trial-repeated-linear-controls.ts';
 import { compareAvailableControlsId, compareAvailableControlsStrategies } from './compare-available-controls.ts';
 import { framedContactId, framedContactStrategies, learnPatternAccessId } from './framed-contact.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { learnTransportAccessId, transportContactId, transportContactStrategies } from './transport-contact.ts';
 import { bandAlignmentId, bandAlignmentStrategies, verifyBandTransferId } from './band-alignment.ts';
 import { sharedArrivalId, sharedArrivalStrategies, verifySharedArrivalId } from './shared-arrival.ts';
@@ -491,7 +492,7 @@ export function readNativeResolution(agent: {
       || family === verifyBranchAlignmentId || family === verifyMarkedLatticeId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
-    : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
+    : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : (family === outlineServiceId || family === learnOutlineServiceId) ? outlineServiceStrategies
           : (family === labeledSequenceId || family === learnLabeledSequenceId) ? labeledSequenceStrategies : family === markedCollectionId ? markedCollectionStrategies
@@ -551,7 +552,11 @@ export function readNativeResolution(agent: {
   if (situationCard && (family === framedContactId || family === learnPatternAccessId)) {
     const region = bounds(card?.addressedRegion), actor = bounds(card?.controlledPiece);
     if (actor) subjects.push({ label: 'Controlled piece', box: actor });
-    if (region) subjects.push({ label: 'Proposed contact surface', box: region });
+    if (region) subjects.push({ label: card?.routeObligation === 'recharge' ? 'Candidate recharge'
+      : card?.routeObligation === 'rotation' ? 'Observed rotator' : card?.routeObligation === 'exit' ? 'Approach to the exit'
+        : 'Proposed contact surface', box: region });
+    const exit = bounds(card?.exit);
+    if (exit) subjects.push({ label: 'Exit', box: exit });
     if (Array.isArray(card?.motifs)) for (const motif of card.motifs.slice(0, 2)) {
       const box = bounds(motif);
       if (box) subjects.push({ label: 'Motif compared by SIC', box });

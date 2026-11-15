@@ -1,10 +1,13 @@
-import { morphologyPairs } from '../logos-engine/v6-morphology-measurements.ts';
+import { morphologyPairs, type MorphologyPair } from '../logos-engine/v6-morphology-measurements.ts';
+import { ObservedMeter } from '../logos-engine/v6-inventory-caller-context.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { measureInsetContact } from './inset-contact.ts';
 import { measureDirectionalMotion, type DirectionalMotion } from './observed-translation.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { chooseManagedFramedPlan, framedResidual, observedFramedRotation, pixelsAt, pointKey, stripUnits,
+  type FramedRotation, type ManagedFramedPlan } from './managed-framed-access.ts';
 
 export const framedContactId = 'sic_framed_contact';
 export const learnPatternAccessId = 'sic_learn_pattern_access';
@@ -28,16 +31,16 @@ type Direction = keyof typeof directionVectors;
 type Body = { at: NativePoint; pitch: number; floor: number; colors: number[]; evidence: string };
 type Inset = NonNullable<ReturnType<typeof measureInsetContact>>;
 type State = { epoch: number; body: Body | null; target: NativeBox | null; surface: NativeBox | null; inset: Inset | null; beneath: number[] | null;
-  trials: Direction[]; blocked: string[]; tested: string[]; crossed: string[]; count: number };
+  trials: Direction[]; blocked: string[]; tested: string[]; crossed: string[]; count: number;
+  score?: number; rotation?: FramedRotation; confirmedMoves?: Direction[]; lastPair?: MorphologyPair; reserveContradicted?: boolean };
+type Transfer = { epoch: number; rotation: FramedRotation; confirmedMoves: Direction[]; victory: string };
 type Plan = { command: Direction; landing: NativePoint; target: NativePoint; contact: boolean };
 type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target: NativeBox | null; surface: NativeBox | null;
-  inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string };
+  inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string; pair: MorphologyPair | null;
+  managed?: ManagedFramedPlan; rotation?: FramedRotation };
 const empty = (epoch = 0): State => ({ epoch, body: null, target: null, surface: null, inset: null, beneath: null,
   trials: [], blocked: [], tested: [], crossed: [], count: 0 });
-const pointKey = (point: NativePoint) => point.join(',');
 const footprint = ([x, y]: NativePoint, pitch: number): NativeBox => [x, y, x + pitch - 1, y + pitch - 1];
-const pixelsAt = (rows: NativeRows, [x, y]: NativePoint, pitch: number) =>
-  rows.slice(y, y + pitch).flatMap(row => row.slice(x, x + pitch));
 const overlaps = (a: NativeBox, b: readonly number[]) => a[0] <= b[2]! && a[2] >= b[0]! && a[1] <= b[3]! && a[3] >= b[1]!;
 
 function sameLanding(first: NativeRows, second: NativeRows, { at, pitch, floor, colors }: Body, landing: NativePoint,
@@ -117,15 +120,26 @@ function route(rows: NativeRows, body: Body, surface: NativeBox, directions: rea
 export function createSicFramedContact(family = framedContactId): NativeFamily<Proposal> {
   const fallback = family === learnPatternAccessId;
   let state = empty();
+  let transfer: Transfer | null = null;
+  let meter = new ObservedMeter();
   return {
     id: family,
     async propose(observation, rows, inputs, remaining, execution) {
       let local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       const available = inputs.map(input => input.action_ref).filter((key): key is Direction => Object.hasOwn(directionVectors, key));
-      if (remaining < 1 || local.count >= 32 || available.length !== 4) return null;
+      if (observation.level_epoch === state.epoch + 1 && state.score !== undefined && observation.levels_completed > state.score
+        && state.rotation && state.confirmedMoves?.length) {
+        // Another SIC provider may have issued the winning command.
+        transfer = { epoch: state.epoch, rotation: state.rotation, confirmedMoves: state.confirmedMoves, victory: observation.observation_ref };
+      }
+      const recalled = transfer?.epoch === observation.level_epoch - 1 && !local.reserveContradicted ? transfer : null;
+      if (remaining < 1 || (local.count >= 32 && !recalled) || available.length !== 4) return null;
+      if (recalled) meter.observe(observation.level_epoch, observation.observation_ref, rows);
       if (fallback && !local.body && !execution?.readDirectionalMotion) return null;
       const [pairs, parts] = await morphologyPairs(rows);
-      const pair = !local.inset && pairs.length === 1 && pairs[0]!.quarter_turns !== null ? pairs[0]! : null;
+      const visiblePair = !local.inset && pairs.length === 1 && pairs[0]!.quarter_turns !== null ? pairs[0]! : null;
+      const partlyCovered = recalled && local.body && local.lastPair?.sites.some(site => overlaps(footprint(local.body!.at, local.body!.pitch), site));
+      const pair = visiblePair ?? (partlyCovered ? local.lastPair! : null);
       const inset = !pair ? local.inset ?? (!local.body ? measureInsetContact(rows, parts) : null) : null;
       if (!pair && !inset) return null;
       const motion = fallback && !local.body ? execution?.readDirectionalMotion?.() : null;
@@ -144,13 +158,20 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         && site[2]! <= surface[2] && site[3]! <= surface[3]) : [];
       const retained = local.target && sites.some(site => site.every((value, index) => value === local.target![index])) ? local.target : null;
       const target = inset?.target ?? retained ?? (peers.length === 1 ? peers[0] as unknown as NativeBox : null);
-      const plan = body && surface ? route(rows, body, surface, available, target, !!inset || (pair?.quarter_turns === 0 && !!target),
-        local, remaining, !!inset) : null;
+      const forecast = recalled && body && pair ? meter.forecast() : null;
+      const rotation = local.rotation ?? recalled?.rotation;
+      const directions = recalled ? Object.fromEntries(available.filter(command => recalled.confirmedMoves.includes(command))
+        .map(command => [command, directionVectors[command]])) : {};
+      const managed = forecast && body && pair && rotation ? chooseManagedFramedPlan(rows, parts, pair, body, local.beneath,
+        rotation, forecast, directions, local.blocked, execution?.remainingLevelActions ?? remaining) : null;
+      const plan: Plan | null = managed ? { ...managed, command: managed.command as Direction } : body && surface
+        ? route(rows, body, surface, available, target, !!inset || (pair?.quarter_turns === 0 && !!target), local, remaining, !!inset) : null;
       const trial = !body && available.find(key => !local.trials.includes(key));
       const command = inputs.find(input => input.action_ref === (plan?.command ?? trial));
       if (!command) return null;
       const action = command.action_ref as Direction;
-      const evidence: [string, ...string[]] = [ref, ...new Set([body?.evidence, motion?.beforeRef].filter((value): value is string => !!value && value !== ref))];
+      const proof = [body?.evidence, motion?.beforeRef, ...(managed ? [rotation?.evidence, recalled?.victory] : [])];
+      const evidence: [string, ...string[]] = [ref, ...new Set(proof.filter((value): value is string => !!value && value !== ref))];
       const native = resolveStrategyGraph({ graph, mode: 'active', facts: {
         canReachPeer: { value: plan?.contact === true && !inset, evidence },
         canReachInset: { value: plan?.contact === true && !!inset, evidence },
@@ -161,22 +182,34 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: action, expected: plan?.landing ?? null, evidence };
       const reachesTest = !!plan && pointKey(plan.landing) === pointKey(plan.target);
-      const primitive = fallback ? resolveNavigationPrimitives({ mode, evidence, probe: reachesTest ? offer : null,
+      const primitive = fallback || managed ? resolveNavigationPrimitives({ mode, evidence, probe: reachesTest ? offer : null,
         access: reachesTest ? null : offer, interaction: null }) : null;
       const selected = primitive?.selected ?? native.selected;
       if (!selected || !native.selected) return null;
-      const strategy = selected.id, label = framedContactStrategies[native.selected.id], objective = 'G_official_completion';
-      const goal = { kind: 'test_access_to_visible_motif', scope: ref.split(':revision:', 1)[0]!, subjects: sites.map(site => site.join(',')),
+      const strategy = selected.id, objective = 'G_official_completion';
+      const label = managed ? {
+        recharge: 'Reach the candidate recharge before the measured reserve runs out',
+        rotation: 'Reach the observed rotator within the measured reserve',
+        exit: 'Reach the exit with the matching orientation and enough reserve',
+      }[managed.obligation] : framedContactStrategies[native.selected.id];
+      const moves = (count: number) => `${count} ${count === 1 ? 'move' : 'moves'}`;
+      const plannedRefills = managed?.recharges ? ` with ${managed.recharges} planned ${managed.recharges === 1 ? 'recharge' : 'recharges'}` : '';
+      const situation = managed ? `${label}. Reserve for ${moves(managed.reserve)}. Current route ${moves(managed.steps)}${plannedRefills}.` : label;
+      const goal = { kind: managed ? 'align_and_reach_with_reserve' : 'test_access_to_visible_motif',
+        scope: ref.split(':revision:', 1)[0]!, subjects: sites.map(site => site.join(',')),
         parentObjective: objective, satisfactionContract: 'observe_public_contact_and_official_progress' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `framed-contact:${need.id}`, actions = [command];
-      return { status: 'proposed', kind: family, actions, action, plan, target, surface, inset, needId: need.id,
+      return { status: 'proposed', kind: family, actions, action, plan, target, surface, inset, needId: need.id, pair,
+        ...(managed && rotation ? { managed, rotation } : {}),
         ...(fallback && body ? { adoptedBody: body } : {}),
-        ...(body && plan && inset ? { beneath: pixelsAt(rows, plan.landing, body.pitch) } : {}),
+        ...(body && plan && (inset || managed) ? { beneath: pixelsAt(rows, plan.landing, body.pitch) } : {}),
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, mode: plan?.contact ? 'solving' : 'exploration',
-          need: inset ? 'Test what happens on reaching the inlaid motif' : 'Find how to reach the matching motif',
-          situation: label, evidence, agenda: primitive?.entries ?? native.entries, motifs: sites,
+        sicSituationCard: { strategy, mode: managed ? mode : plan?.contact ? 'solving' : 'exploration',
+          need: managed ? 'Match the orientation and reach the exit within the reserve'
+            : inset ? 'Test what happens on reaching the inlaid motif' : 'Find how to reach the matching motif',
+          situation, evidence, agenda: primitive?.entries ?? native.entries, motifs: sites,
+          ...(managed ? { routeObligation: managed.obligation, exit: managed.targetBox } : {}),
           ...(motion ? { motionSource: motion.family, motionBefore: motion.beforeRef } : {}),
           ...(body ? { controlledPiece: footprint(body.at, body.pitch) } : {}),
           ...(body && plan ? { addressedRegion: footprint(plan.target, body.pitch) } : {}) },
@@ -190,17 +223,28 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'framed_contact_scope_bound' : 'framed_contact_scope_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    async after(proposal, _index, before, after, first, second) {
       const scored = after.levels_completed > before.levels_completed;
       const body = fallback ? proposal.adoptedBody : state.body;
-      const matched = !scored && proposal.plan && body ? sameLanding(first, second, body, proposal.plan.landing, state.beneath) : null;
-      return { matched, seal_prefix: true, reason: scored ? 'official_boundary' : matched === false ? 'predicted_piece_did_not_leave'
-        : 'observe_the_contact_or_displacement',
+      const moved = !scored && proposal.plan && body ? sameLanding(first, second, body, proposal.plan.landing, state.beneath) : null;
+      const effect = moved && proposal.managed ? await managedEffect(proposal, second) : null;
+      const matched = effect ? effect.matched : moved;
+      return { matched, seal_prefix: true, reason: scored ? 'official_boundary'
+        : effect?.reason ?? (matched === false ? 'predicted_piece_did_not_leave' : 'observe_the_contact_or_displacement'),
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
-    record(before, after, _command, first, second, proposal) {
+    async record(before, after, _command, first, second, proposal) {
+      if (after.levels_completed > before.levels_completed) {
+        const rotation = state.rotation ?? proposal.rotation;
+        if (rotation && state.confirmedMoves?.length) {
+          transfer = { epoch: before.level_epoch, rotation, confirmedMoves: state.confirmedMoves, victory: after.observation_ref };
+          meter.observe(after.level_epoch, after.observation_ref, second);
+          return { events: [], reviewEvidence: 'The exit was reached after alignment. Retain the selective rotation for the next layout.' };
+        }
+      }
       if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
       if (state.epoch !== before.level_epoch) state = empty(before.level_epoch);
+      state.score = before.levels_completed;
       if (fallback && !state.body && proposal.adoptedBody) state.body = proposal.adoptedBody;
       state.count++;
       state.target = proposal.target;
@@ -211,6 +255,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         state.body = bindTranslation(measureDirectionalMotion(first, second, { command: proposal.action, family,
           beforeRef: before.observation_ref, afterRef: after.observation_ref, levelEpoch: after.level_epoch }), second);
         if (state.body && proposal.inset && state.body.pitch !== proposal.inset.body[2] - proposal.inset.body[0] + 1) state.body = null;
+        if (state.body) state.confirmedMoves = [...new Set([...(state.confirmedMoves ?? []), proposal.action])];
       } else if (proposal.plan) {
         const { plan } = proposal, { at, pitch } = state.body;
         const key = pointKey(plan.landing);
@@ -220,6 +265,19 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
           if (proposal.inset && !plan.contact && key === pointKey(plan.target)) state.crossed.push(key);
           state.body = { ...state.body, at: plan.landing, evidence: after.observation_ref };
           state.beneath = proposal.beneath ?? null;
+          state.confirmedMoves = [...new Set([...(state.confirmedMoves ?? []), proposal.action])];
+          if (proposal.managed) {
+            if (proposal.pair) state.lastPair = proposal.pair;
+            const effect = await managedEffect(proposal, second);
+            if (effect && !effect.matched) state.reserveContradicted = true;
+            if (effect?.matched) return { events: [], reviewEvidence: proposal.managed.effect === 'recharge'
+              ? 'Contact restored the visible reserve.' : 'Contact applied the predicted rotation.' };
+          } else if (!state.rotation && proposal.pair && !plan.contact && key === pointKey(plan.target)) {
+            const [next] = await morphologyPairs(second);
+            const rotation = next.length === 1 && observedFramedRotation(proposal.pair, next[0]!,
+              pixelsAt(first, plan.landing, pitch), after.observation_ref);
+            if (rotation) state.rotation = rotation;
+          }
         } else {
           state.blocked.push(key);
           if (vacancy.some((pixel, index) => pixel !== prior[index])) state.body = null;
@@ -227,7 +285,28 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       }
       return { events: [] };
     },
-    state: () => ({ ...state }),
-    restore(value: NativeRecord) { state = structuredClone(value as State); },
+    state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null }),
+    restore(value: NativeRecord) {
+      const { transfer: savedTransfer, reserveMeter, ...local } = structuredClone(value);
+      state = local as State;
+      transfer = (savedTransfer ?? null) as Transfer | null;
+      meter = new ObservedMeter();
+      if (reserveMeter) meter.restore(reserveMeter as ReturnType<ObservedMeter['state']>);
+    },
   };
+}
+
+async function managedEffect(proposal: Proposal, rows: NativeRows) {
+  const planned = proposal.managed;
+  if (planned?.effect === 'recharge') {
+    const matched = stripUnits(rows, planned.meter) > planned.meter.current_units;
+    return { matched, reason: matched ? 'reserve_restored_by_contact' : 'predicted_recharge_absent' };
+  }
+  if (planned?.effect === 'rotation' && proposal.rotation) {
+    const [next] = await morphologyPairs(rows);
+    const matched = next.length === 1 && framedResidual(next[0]!, proposal.rotation.peerScale) === planned.orientationAfter;
+    return { matched, reason: matched ? 'selective_rotation_confirmed' : 'predicted_rotation_absent' };
+  }
+  if (planned?.effect === 'exit') return { matched: false, reason: 'predicted_exit_did_not_advance' };
+  return null;
 }
