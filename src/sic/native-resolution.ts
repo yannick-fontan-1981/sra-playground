@@ -759,7 +759,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === surfaceCopyId || family === learnSurfaceCopyId)) {
-    for (const [field, label] of [['reference', 'Reference pattern'], ['surface', 'Working surface'], ['swatch', 'Color selector']] as const) {
+    for (const [field, label] of [['reference', 'Reference pattern'], ['surface', 'Working surface'],
+      ['swatch', 'Color selector'], ['attachment', 'Smaller part of the tool']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
