@@ -1,10 +1,12 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
 
 export const seatedContactId = 'sic_seated_contact';
+export const verifyFrameContactId = 'sic_verify_frame_contact';
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Direction = typeof directions[number];
@@ -95,11 +97,15 @@ function outcome(rows: NativeRows, proposal: Proposal) {
   return { kind: 'changed' as const, at: local.at };
 }
 
-export function createSicSeatedContact(): NativeFamily<Proposal> {
+export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: seatedContactId,
-    propose(observation, rows, _inputs, remaining, execution): Proposal | null {
+    id: verifyFrameContactId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !directions.every(([ref]) => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -112,29 +118,31 @@ export function createSicSeatedContact(): NativeFamily<Proposal> {
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(r => r !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const action = { action_ref: step.direction[0], data: {} };
-      const offer = { input: action.action_ref, expected: step.at, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({
-        mode, evidence, probe: local.refs.length ? null : offer, access: local.refs.length && !local.seated ? offer : null,
-        interaction: local.seated ? offer : null,
-      });
-      if (!selected) return null;
+      const facts = { eligibleProbe: !local.refs.length && !local.seated,
+        routeSupported: !!local.refs.length && !local.seated, knownInteraction: local.seated, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = local.seated ? 'P02' : local.refs.length ? 'P07' : 'P05';
+      if (decision?.result !== strategy) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'test_contact_with_compatible_frame', scope: ref.split(':revision:', 1)[0]!,
         subjects: [key(origin(scene.frame.bbox))], parentObjective: parent, satisfactionContract: 'official_progress_after_contact' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = seatedContactId + ':' + need.id;
+      const id = verifyFrameContactId + ':' + need.id;
       const situation = local.seated ? 'Test the direction into the frame after the piece and frame joined visually'
-        : selected.id === 'P05' ? 'Check that the direction moves the piece by one tile'
+        : strategy === 'P05' ? 'Check that the direction moves the piece by one tile'
           : 'Approach the frame through the visible surface and revise the route if a step is refused';
       return {
-        status: 'proposed', kind: seatedContactId, local, step, needId: need.id,
+        status: 'proposed', kind: verifyFrameContactId, local, step, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: step.at }],
-        sicSituationCard: { strategy: selected.id, need: 'Test contact with the receiving frame', situation, evidence, agenda: entries, mode,
-          triggerCard: card, actor: footprint(local.at, scene.side), focus: scene.frame.bbox, landing: footprint(step.at, scene.side) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Test contact with the receiving frame', situation, evidence, agenda: [], mode,
+          triggerCard: decision.receipt.workflow, actor: footprint(local.at, scene.side), focus: scene.frame.bbox, landing: footprint(step.at, scene.side) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

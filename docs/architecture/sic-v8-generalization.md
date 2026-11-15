@@ -610,6 +610,8 @@ Les trois parcours reproduisent les commandes et retours de référence. La pale
 
 LP85 `5fd87809ca31d185f273cae83fa67b11a89ceaa30ada9d48143e1bc5374e9eb2`. TN36 `845a346dfa829f2a5b5692d46b19062379aec2e179bb14ea5e147f2b2a83d141`. TEQU `28eaa8b1bcea3ccb1d747b2b70fb48aa3ad6475f1af0934e7e0d8e112163612d`.
 
+Sur `c1bf5d85`, les **79/100 retraits gagnants** totalisent 878 commandes SIC seul. Le rejeu confirme les 76 trajectoires précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait. FT09 passe également après retrait dans ce lot limité à six processus simultanés.
+
 ### Placer une pièce en vérifiant la sélection et les déplacements
 
 **KATA, VOIS et LKEY** gagnent en huit, quatorze et huit commandes SIC seul après retrait des anciens sélecteurs. Sur KATA et VOIS, la carte de déplacement choisit P05 pour tester une sélection ou une direction, puis P07 quand les effets mesurés permettent de rejoindre une place. KATA vérifie la pose prévue. VOIS attribue des places distinctes et vérifie la position après chaque déplacement. Sur LKEY, la carte de vérification d’interaction n’autorise P02 que si la même commande a confirmé le même effet de transfert dans un contexte compatible.
@@ -617,3 +619,11 @@ LP85 `5fd87809ca31d185f273cae83fa67b11a89ceaa30ada9d48143e1bc5374e9eb2`. TN36 `8
 Les trois parcours reproduisent leurs commandes et retours de référence. La neutralisation du nom et la permutation de palette conservent les gains. Désactiver P07 sur KATA ou VOIS, ou P02 sur LKEY, à sa première utilisation change la suite et laisse le niveau ouvert au budget de référence.
 
 KATA `cce7cd4d173da4bd2f683c32d9d6ea147073a58eb1b7b202e6b64a483a8e7109`. VOIS `cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186`. LKEY `45eacf89a9b32e59f2a3d45d51b33f1ff42d3128a6bff46fd7646f7304294c2b`.
+
+### Vérifier un déplacement avant de réutiliser le trajet ou le contact
+
+**DAME, RE86 et SWCH** gagnent en sept, 26 et 25 commandes lorsque les anciens sélecteurs sont retirés. La même carte SRC choisit l’essai P05, le trajet P07 fondé sur les déplacements observés ou la réutilisation P02 d’un contrôle confirmé. DAME vérifie la case d’arrivée et la disparition de la pièce franchie. RE86 relève le déplacement des pièces et le changement de sélection. SWCH conserve les refus de mouvement et recalcule l’approche avant de retester le contact avec le cadre.
+
+Les trois jeux conservent leurs gains avec palette permutée et nom neutralisé. Désactiver P07 au premier trajet laisse RE86 et SWCH ouverts au budget de référence. Sur DAME, les cases d’arrivée offertes suffisent aux essais P05 pour reproduire le même gain. RE86 reproduit aussi les deux niveaux déjà acquis en 73 commandes, avec les mêmes retours.
+
+DAME `cc8a46aa966f6d1bcccf601d1d6eda435a22d2c802a9a6f8355a572e088dbb92`. RE86 `2e761f7e86ac527a3257dbdc72d5a86342d33c00ea1a92dce2bc7951bfbbfc61`. SWCH `c73007473fee951eb29663e83927e436f8c26b83c12e2fd88c90da2979355d07`.

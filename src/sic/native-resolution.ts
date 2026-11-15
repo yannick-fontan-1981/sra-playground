@@ -55,7 +55,7 @@ import { orientedDeliveryId } from './oriented-delivery.ts';
 import { indicatedJumpId, learnIndicatedJumpId } from './indicated-jump.ts';
 import { highlightedRouteId, learnHighlightedRouteId } from './highlighted-route.ts';
 import { learnPairedPassageId, pairedPassageId } from './paired-passage.ts';
-import { seatedContactId } from './seated-contact.ts';
+import { seatedContactId, verifyFrameContactId } from './seated-contact.ts';
 import { learnSwitchedSurfaceId, switchedSurfaceId } from './switched-surface.ts';
 import { markedGaugeId } from './marked-gauge.ts';
 import { reactiveTargetId } from './reactive-target.ts';
@@ -87,13 +87,13 @@ import { panelMatchingId, panelMatchingStrategies, verifyPanelConfigurationId } 
 import { crossingRowsId, crossingRowsStrategies } from './crossing-rows.ts';
 import { traceCoverageId, traceCoverageStrategies } from './trace-coverage.ts';
 import { learnRadialConnectionId, radialConnectionId, radialConnectionStrategies } from './radial-connection.ts';
-import { invitedCaptureId, invitedCaptureStrategies } from './invited-capture.ts';
+import { invitedCaptureId, invitedCaptureStrategies, verifyCaptureRouteId } from './invited-capture.ts';
 import { branchAlignmentId, branchAlignmentStrategies } from './branch-alignment.ts';
 import { feedbackTrialId, feedbackTrialStrategies, verifyOrderedFeedbackId } from './feedback-trial.ts';
 import { feedbackChoiceStrategies } from './feedback-choice-card.ts';
 import { catalogueComparisonId, catalogueComparisonStrategies, revealedExampleId } from './catalogue-comparison.ts';
 import { learnReceptionAccessId, receptionAccessId, receptionAccessStrategies } from './reception-access.ts';
-import { markerCoverageId, markerCoverageStrategies } from './marker-coverage.ts';
+import { markerCoverageId, markerCoverageStrategies, verifyMarkerPlacementId } from './marker-coverage.ts';
 import { frontierStrategies, isFrontierStrategy, type FrontierStrategy } from './frontier-strategy.ts';
 import { isViewStrategy, viewStrategies, type ViewStrategy } from './view-strategy.ts';
 import { informationStrategies, isInformationStrategy, type InformationStrategy } from './information-strategy.ts';
@@ -485,7 +485,8 @@ export function readNativeResolution(agent: {
     : (family === verifyOccurrenceChoiceId || family === verifyOrderedFeedbackId || family === verifyPatternChoiceId) ? feedbackChoiceStrategies
     : (family === verifyBandTransferId || family === verifyPointAccessId || family === verifyLinkedMotionId
       || family === verifySlotPermutationId || family === verifyPreviewPlacementId || family === verifyReferencePlacementId
-      || family === verifyProfileTransferId) ? inventoryAccessStrategies
+      || family === verifyProfileTransferId || family === verifyCaptureRouteId || family === verifyMarkerPlacementId
+      || family === verifyFrameContactId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -675,7 +676,7 @@ export function readNativeResolution(agent: {
     if (group) subjects.push({ label: 'Active group', box: group });
     if (field) subjects.push({ label: 'Receiving field', box: field });
   }
-  if (situationCard && family === markerCoverageId) {
+  if (situationCard && (family === markerCoverageId || family === verifyMarkerPlacementId)) {
     const actor = bounds(card?.actor);
     if (actor) subjects.push({ label: 'Selected piece or focus marker', box: actor });
     for (const [field, label] of [['otherSupports', 'Other measured piece'], ['targets', 'Candidate placement']] as const) {
@@ -717,7 +718,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Receiving opening', box });
     }
   }
-  if (situationCard && family === invitedCaptureId) {
+  if (situationCard && (family === invitedCaptureId || family === verifyCaptureRouteId)) {
     for (const [field, label] of [['focus', 'Selected piece'], ['target', 'Next cell'], ['victim', 'Piece to capture']] as const) {
       const box = bounds(card?.[field]);
       if (box && !subjects.some(subject => subject.box.every((value, i) => value === box[i]))) subjects.push({ label, box });
@@ -938,7 +939,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && (family === seatedContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId)) {
+  if (situationCard && (family === seatedContactId || family === verifyFrameContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId)) {
     for (const [field, label] of [['actor', 'Current piece'], ['focus', family === seatedContactId ? 'Receiving frame' : 'Target sprite'], ['landing', 'Predicted landing']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

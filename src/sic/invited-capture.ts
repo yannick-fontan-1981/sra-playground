@@ -1,23 +1,16 @@
 import { measureReductionScene, reductionGeometry, reductionPacked, reductionPoint, retainedReductionScene, type ReductionScene } from '../logos-engine/v6-invited-reduction.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const invitedCaptureId = 'sic_invited_capture';
+export const verifyCaptureRouteId = 'sic_verify_capture_route';
 export const invitedCaptureStrategies = {
   reveal_capture_choices: 'Select an occurrence and look for available landing cells',
   test_invited_capture: 'Test a visibly offered landing cell',
   preserve_capture_continuation: 'Follow a route that keeps the remaining captures possible',
 } as const;
-const graph = compileStrategyGraph({ id: 'reduce_population_by_visible_capture', version: 1, order: 'FALLBACK',
-  priorities: ['preserve_capture_continuation', 'test_invited_capture', 'reveal_capture_choices'],
-  strategies: {
-    reveal_capture_choices: [{ fact: 'selection', expected: true, label: 'A current piece can reveal the next landing cells' }],
-    test_invited_capture: [{ fact: 'invitation', expected: true, label: 'A highlighted empty cell can test a capture' }],
-    preserve_capture_continuation: [{ fact: 'route', expected: true, label: 'Observed jump geometry admits a route that reduces the population' }],
-  },
-}, ['selection', 'invitation', 'route']);
 
 type Cell = [number, number];
 type Body = [number, string];
@@ -105,11 +98,15 @@ function captureEffect(proposal: Proposal, after: ReductionScene, selected: Cell
   return equal(packed(expected), packed(after.bodies)) ? { rank: selectedBody[1], jump: { over: diff(victim, selected), by: diff(added[0]!, selected) } } : null;
 }
 
-export function createSicInvitedCapture(): NativeFamily<Proposal> {
+export function createSicVerifyCaptureRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: invitedCaptureId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifyCaptureRouteId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.tried.length ?? 0) >= 40) return null;
@@ -128,15 +125,20 @@ export function createSicInvitedCapture(): NativeFamily<Proposal> {
       const test = offered && local.focus ? { target: offered, focus: local.focus, victim: null } : null;
       const select = pending ? { target: pending, focus: pending, victim: null } : null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        selection: { value: !!select, evidence }, invitation: { value: !!test, evidence },
-        route: { value: !!route && !local.tried.includes(attemptKey(route.target)), evidence },
-      }, planners: { reveal_capture_choices: () => select, test_invited_capture: () => test, preserve_capture_continuation: () => route } });
-      if (!selected) return null;
-      const strategy = selected.id, move = selected.plan, selection = scene.bodies.has(key(move.target));
+      const supported = route && !local.tried.includes(attemptKey(route.target)) ? route : null;
+      const trial = test ?? select;
+      const mode = execution?.reasoningMode ?? (supported ? 'solving' : 'exploration');
+      const facts = { routeSupported: !!supported, eligibleProbe: !!trial, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
+      const move = strategy === 'P07' ? supported : trial;
+      if (!move) return null;
+      const phase = strategy === 'P07' ? 'preserve_capture_continuation' : test ? 'test_invited_capture' : 'reveal_capture_choices';
+      const selection = scene.bodies.has(key(move.target));
       const point = reductionPoint(scene, move.target), [x, y] = point;
       const command = { action_ref: 'ACTION6', data: { x, y } };
-      const label = invitedCaptureStrategies[strategy], parent = 'G_official_completion';
+      const label = invitedCaptureStrategies[phase], parent = 'G_official_completion';
       const goal = { kind: 'reduce_visible_population', scope: ref.split(':revision:', 1)[0]!, subjects: ['capture_source', 'intermediate_piece', 'offered_landing'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_reducing_the_visible_population' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = `invited-capture:${need.id}`;
@@ -145,11 +147,15 @@ export function createSicInvitedCapture(): NativeFamily<Proposal> {
         const [cx, cy] = reductionPoint(scene, cell), half = Math.floor(scene.pitch / 2);
         return [cx - half, cy - half, cx - half + scene.pitch - 1, cy - half + scene.pitch - 1];
       };
-      return { status: 'proposed', kind: invitedCaptureId, actions, local, move, selection, before, needId: need.id, attempt: attemptKey(move.target),
+      return { status: 'proposed', kind: verifyCaptureRouteId, actions, local, move, selection, before, needId: need.id, attempt: attemptKey(move.target),
         steps: [{ action: command, expected_after: null, point_binding: binding }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Remove pieces while keeping a capture route open', mode: route ? 'solving' : 'exploration',
-          situation: route ? 'The measured jump supports a route to one remaining piece. The next landing is checked against the current highlights.' : label,
-          agenda: entries, evidence, focus: box(move.focus), target: box(move.target), victim: move.victim ? box(move.victim) : null },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Remove pieces while keeping a capture route open', mode,
+          situation: strategy === 'P07' ? 'The measured jump supports a route to one remaining piece. The next landing is checked against the current highlights.' : label,
+          agenda: [], evidence, triggerCard: decision.receipt.workflow, focus: box(move.focus), target: box(move.target),
+          victim: move.victim ? box(move.victim) : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

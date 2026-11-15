@@ -4,11 +4,12 @@ import {
   constellationPlus, ConstellationEvidence, measureConstellationLayout,
 } from '../logos-engine/v6-constellation-cover.ts';
 import { PointSet, type Point } from '../logos-engine/v6-point-set.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const markerCoverageId = 'sic_marker_coverage';
+export const verifyMarkerPlacementId = 'sic_verify_marker_placement';
 export const markerCoverageStrategies = {
   measure_support_motion: 'Test how the selected piece moves',
   measure_remaining_directions: 'Complete the observed movement controls',
@@ -16,16 +17,12 @@ export const markerCoverageStrategies = {
   cover_compatible_markers: 'Move the selected piece toward compatible markers',
 } as const;
 
-const graph = compileStrategyGraph({
-  id: 'place_independently_controlled_supports', version: 1, order: 'FALLBACK',
-  priorities: ['cover_compatible_markers', 'change_controlled_support', 'measure_remaining_directions', 'measure_support_motion'],
-  strategies: {
-    measure_support_motion: [{ fact: 'acquire', expected: true, label: 'Independent movement is needed to distinguish the selected piece from overlapping pieces' }],
-    measure_remaining_directions: [{ fact: 'calibrate', expected: true, label: 'The selected piece is tracked and some directions remain unmeasured' }],
-    change_controlled_support: [{ fact: 'cycle', expected: true, label: 'Another piece must be measured or moved and the input is a candidate for changing selection' }],
-    cover_compatible_markers: [{ fact: 'move', expected: true, label: 'The pieces fit the current view and a measured direction brings one closer to a compatible placement' }],
-  },
-}, ['acquire', 'calibrate', 'cycle', 'move']);
+const phaseLabels = {
+  acquire: markerCoverageStrategies.measure_support_motion,
+  calibrate: markerCoverageStrategies.measure_remaining_directions,
+  cycle: markerCoverageStrategies.change_controlled_support,
+  move: markerCoverageStrategies.cover_compatible_markers,
+};
 
 type Step = { action: NativeCommand; cursor: Point; mode: 'acquire' | 'calibrate' | 'cycle' | 'move';
   poses?: readonly Point[]; expected_after: readonly Point[] | null; acquisition_focus_projection?: Point; unobserved_support_pixels?: number };
@@ -81,12 +78,16 @@ function nextProbe(measured: ConstellationEvidence, rows: NativeRows, cursor: Po
   return input && inputs.includes(input) ? { action: command(input), cursor, mode: 'cycle', expected_after: null } : null;
 }
 
-export function createSicMarkerCoverage(): NativeFamily<Proposal> {
+export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
   let snapshot: NativeRecord | null = null;
   let count = 0;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: markerCoverageId,
-    async propose(observation, rows, inputs, remaining) {
+    id: verifyMarkerPlacementId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, inputs, remaining, execution) {
       const keys = inputs.filter(input => !Object.keys(input.data ?? {}).length && input.action_ref !== 'ACTION7').map(input => input.action_ref);
       if (remaining < 1 || keys.length < 3) return null;
       const prior = snapshot?.epoch === observation.level_epoch ? snapshot : null;
@@ -141,28 +142,28 @@ export function createSicMarkerCoverage(): NativeFamily<Proposal> {
       }
       if (!step) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...new Set([...measured.refs.values()].filter(value => value !== ref))];
-      const { selected, entries } = resolveStrategyGraph({
-        graph, mode: 'active',
-        facts: {
-          acquire: { value: step.mode === 'acquire', evidence }, calibrate: { value: step.mode === 'calibrate', evidence },
-          cycle: { value: step.mode === 'cycle', evidence }, move: { value: step.mode === 'move', evidence },
-        },
-        planners: { measure_support_motion: () => step, measure_remaining_directions: () => step,
-          change_controlled_support: () => step, cover_compatible_markers: () => step },
-      });
-      if (!selected) return null;
-      const strategy = selected.id, label = markerCoverageStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? (step.mode === 'move' ? 'solving' : measured.complete ? 'assimilation' : 'exploration');
+      const routeSupported = step.mode === 'move';
+      const knownInteraction = step.mode === 'cycle' && measured.selector === step.action.action_ref;
+      const facts = { routeSupported, knownInteraction, eligibleProbe: !routeSupported && !knownInteraction, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = routeSupported ? 'P07' : knownInteraction ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const label = phaseLabels[step.mode], parent = 'G_official_completion';
       const objective = { kind: 'place_independently_controlled_supports', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['selected_piece', 'other_pieces', 'compatible_markers'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_observed_marker_coverage' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'marker-coverage:' + need.id, actions = [step.action];
-      return { status: 'proposed', kind: markerCoverageId, actions, steps: [step], measured: measured.state(), count: issued, needId: need.id,
+      return { status: 'proposed', kind: verifyMarkerPlacementId, actions, steps: [step], measured: measured.state(), count: issued, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch, levels_completed: observation.levels_completed },
-        sicSituationCard: { strategy, need: 'Bring movable pieces onto compatible markers when their controls are known',
-          mode: step.mode === 'move' ? 'solving' : measured.complete ? 'assimilation' : 'exploration',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Bring movable pieces onto compatible markers when their controls are known', mode,
           situation: measured.complete ? label : label + '. Some pixels may belong to overlapping pieces.',
-          agenda: entries, evidence, actor: active === null ? bounds([cursor]) : bounds(constellationBodyPixels(measured.bodies[active]!, cursor)),
+          agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          actor: active === null ? bounds([cursor]) : bounds(constellationBodyPixels(measured.bodies[active]!, cursor)),
           otherSupports: measured.bodies.flatMap((body, i) => i === active ? [] : [bounds(constellationBodyPixels(body, measured.poses[i]!))]),
           targets: destination ? [destination] : [...model.targets.values()].map(bounds) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
