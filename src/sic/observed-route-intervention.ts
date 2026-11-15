@@ -7,15 +7,17 @@ import { sicNeedId } from './need-identity.ts';
 export const observedRouteInterventionId = 'sic_intervene_on_observed_route';
 
 export type RouteInterventionWitness = {
-  epoch: number; score: number; actor: number; carrier: number; wall: number; pitch: number; refs: string[];
+  epoch: number; score: number; actor: number; carrier: number; wall: number; pitch: number; refs: string[]; routeVerified?: boolean;
 };
 
 type Grid = { bounds: NativeBox; pitch: number; width: number; height: number; floor: number; inset: number; frame: number };
+type Rival = { id: string; color: number; cell: number; cue: number | null };
 type Scene = { actor: number; carrier: number; exit: number; cue: number | null; walls: number[]; rails: number[];
-  rivals: { color: number; cell: number; cue: number | null }[] };
-type Memory = { epoch: number; grid: Grid; cells: Pick<Scene, 'walls' | 'rails' | 'exit'>;
-  visited: number[]; intercept: number | null; caged: number[]; refs: string[]; count: number };
-type Intervention = 'contain' | 'divert' | 'open' | 'accompany';
+  rivals: Rival[] };
+type Memory = { epoch: number; grid: Grid; cells: Pick<Scene, 'walls' | 'rails' | 'exit'> & { rivals?: Rival[] };
+  visited: number[]; intercept: string | null; caged: string[]; refs: string[]; count: number;
+  forecast?: boolean; opening?: number; shield?: { cell: number; rivalId: string } };
+type Intervention = 'contain' | 'divert' | 'open' | 'accompany' | 'shield';
 type Choice = { kind: Intervention; target: number; action: string; actor: number; carrier: number | null;
   toggle: boolean; rival: Scene['rivals'][number] | null };
 type Proposal = NativeProposal & { memory: Memory; scene: Scene; choice: Choice; needId: string };
@@ -45,6 +47,36 @@ function mostCommon(counts: Map<number, number>): number | null {
   return [...counts].sort((a, b) => b[1] - a[1])[0]?.[0] ?? null;
 }
 
+function matchCells(grid: Grid, from: readonly number[], to: readonly number[], cost = (a: number, b: number) => distance(grid, a, b)) {
+  const pairs = from.flatMap(a => to.map(b => ({ a, b, cost: cost(a, b) }))).sort((a, b) => a.cost - b.cost);
+  const found = new Map<number, number>(), used = new Set<number>();
+  for (const { a, b } of pairs) {
+    if (found.has(a) || used.has(b)) continue;
+    found.set(a, b);
+    used.add(b);
+  }
+  return found;
+}
+
+function trackRivals(grid: Grid, color: number, cells: number[], cues: number[], previous: Rival[], walls: Set<number>): Rival[] {
+  const old = previous.filter(rival => rival.color === color), byCell = new Map(old.map(rival => [rival.cell, rival]));
+  const linked = matchCells(grid, cells, old.map(rival => rival.cell), (current, last) =>
+    current === last ? 0 : byCell.get(last)?.cue === current ? 1 : 2 + distance(grid, current, last));
+  const intentions = cells.length === 1 && cues.length
+    ? new Map([[cells[0]!, cues.at(-1)!]]) : matchCells(grid, cells.filter(cell => !walls.has(cell)), cues);
+  const used = new Set(old.map(rival => rival.id));
+  return cells.map(cell => {
+    let id = byCell.get(linked.get(cell) ?? -1)?.id;
+    if (!id) {
+      const stem = cells.length === 1 ? String(color) : `${color}:${cell}`;
+      id = stem;
+      for (let occurrence = 2; used.has(id); occurrence++) id = `${stem}:${occurrence}`;
+      used.add(id);
+    }
+    return { id, color, cell, cue: intentions.get(cell) ?? null };
+  });
+}
+
 function gridOn(rows: NativeRows, { actor, carrier, wall, pitch }: RouteInterventionWitness): Grid | null {
   const fits: Grid[] = [];
   for (const part of geometricComponents(rows)) {
@@ -72,7 +104,7 @@ function gridOn(rows: NativeRows, { actor, carrier, wall, pitch }: RouteInterven
 
 function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, prior: Memory['cells']): Scene | null {
   const walls = new Set<number>(), rails = new Set(prior.rails), oldWalls = new Set(prior.walls);
-  const bodies = new Map<number, number>(), markers = new Map<number, number>();
+  const bodies = new Map<number, number[]>(), markers = new Map<number, number[]>();
   const terrain = new Set([roles.wall, roles.actor, grid.floor, grid.inset, grid.frame]);
   let actor = -1, exit = prior.exit;
   for (let cell = 0; cell < grid.width * grid.height; cell++) {
@@ -96,21 +128,21 @@ function project(rows: NativeRows, grid: Grid, roles: RouteInterventionWitness, 
     const color = mostCommon(counts);
     if (color !== null && counts.get(color)! >= pixels.length - Number(!control)
       && !(cell === exit && color !== roles.carrier)) {
-      if (bodies.has(color)) return null;
-      bodies.set(color, cell);
+      bodies.set(color, [...(bodies.get(color) ?? []), cell]);
     }
     const carrierMark = rows[y + 1]![x + 1]!;
     const rivalMark = rows[y + grid.pitch - 2]![x + grid.pitch - 2]!;
-    if (carrierMark === roles.carrier && bodies.get(roles.carrier) !== cell) markers.set(roles.carrier, cell);
-    if (rivalMark !== roles.carrier && !terrain.has(rivalMark) && bodies.get(rivalMark) !== cell) markers.set(rivalMark, cell);
+    if (carrierMark === roles.carrier && !bodies.get(roles.carrier)?.includes(cell)) markers.set(roles.carrier, [...(markers.get(roles.carrier) ?? []), cell]);
+    if (rivalMark !== roles.carrier && !terrain.has(rivalMark) && !bodies.get(rivalMark)?.includes(cell)) {
+      markers.set(rivalMark, [...(markers.get(rivalMark) ?? []), cell]);
+    }
   }
   const carrier = bodies.get(roles.carrier);
-  if (actor < 0 || exit < 0 || carrier === undefined || bodies.size < 2) return null;
+  if (actor < 0 || exit < 0 || carrier?.length !== 1 || bodies.size < 2) return null;
   rails.add(exit);
-  return { actor, exit, carrier, cue: markers.get(roles.carrier) ?? null, walls: [...walls], rails: [...rails],
-    rivals: [...bodies].filter(([color]) => color !== roles.carrier).map(([color, cell]) => ({
-      color, cell, cue: markers.get(color) ?? null,
-    })) };
+  return { actor, exit, carrier: carrier[0]!, cue: markers.get(roles.carrier)?.at(-1) ?? null, walls: [...walls], rails: [...rails],
+    rivals: [...bodies].flatMap(([color, cells]) => color === roles.carrier ? []
+      : trackRivals(grid, color, cells, markers.get(color) ?? [], prior.rivals ?? [], walls)) };
 }
 
 function shortCorridor(grid: Grid, scene: Scene, visited: readonly number[]): number[] {
@@ -134,13 +166,70 @@ function shortCorridor(grid: Grid, scene: Scene, visited: readonly number[]): nu
   return [];
 }
 
+function entranceOptions(scene: Scene, grid: Grid, path: number[]) {
+  const pathSet = new Set(path), walls = new Set(scene.walls);
+  const horizon = Math.max(grid.width, grid.height);
+  return scene.rivals.flatMap(rival => {
+    if (walls.has(rival.cell) || pathSet.has(rival.cell)) return [];
+    const distances = new Map([[rival.cell, 0]]), queue = [rival.cell];
+    for (const cell of queue) for (const { cell: step } of neighbors(grid, cell)) {
+      if (!inside(grid, step) || walls.has(step) || distances.has(step) || pathSet.has(step)) continue;
+      distances.set(step, distances.get(cell)! + 1);
+      queue.push(step);
+    }
+    return path.flatMap((entry, time) => {
+      if (time < 3 || time > horizon) return [];
+      return neighbors(grid, entry).flatMap(({ cell }) => {
+        if (pathSet.has(cell) || walls.has(cell) || !distances.has(cell)) return [];
+        const actorDistance = distance(grid, scene.actor, cell), rivalDistance = distances.get(cell)!;
+        // Compare geometric travel times as a forecast. The next public
+        // return can show that either mobile took a different route.
+        const lead = time - rivalDistance - 1;
+        if (actorDistance + 1 > time || lead <= 0) return [];
+        return [{ cell, actorDistance, lead, rival }];
+      });
+    });
+  }).sort((a, b) => b.lead - a.lead || a.actorDistance - b.actorDistance);
+}
+
 function selectIntervention(scene: Scene, memory: Memory): Pick<Choice, 'kind' | 'target' | 'rival'> | null {
   const { grid, visited, caged } = memory, path = shortCorridor(grid, scene, visited);
   if (path.length < 2) return null;
+  const shield = memory.shield;
+  if (memory.forecast && shield && !scene.walls.includes(shield.cell) && !path.includes(shield.cell)) {
+    const rival = scene.rivals.find(candidate => candidate.id === shield.rivalId);
+    if (rival) return { kind: 'shield', target: shield.cell, rival };
+  }
+  if (memory.forecast && memory.opening !== undefined && !shield) {
+    const option = entranceOptions(scene, grid, path)[0];
+    if (option) return { kind: 'shield', target: option.cell, rival: option.rival };
+  }
+  // Follow an announced local corridor before diverting to a separate threat.
+  if (memory.forecast && memory.opening === undefined && scene.carrier !== scene.exit) {
+    const former = [...visited].reverse().find(at => at !== scene.carrier);
+    const heading = scene.cue ?? (former === undefined ? null : 2 * scene.carrier - former);
+    if (heading !== null && distance(grid, heading, scene.carrier) === 1) {
+      const stride = heading - scene.carrier;
+      let continuation: number | undefined;
+      let at = scene.carrier;
+      for (let step = 0; step < 3; step++) {
+        const next = neighbors(grid, at).find(candidate => candidate.cell === at + stride)?.cell;
+        if (next === undefined || !inside(grid, next) || scene.rivals.some(rival => rival.cell === next)) break;
+        if (scene.walls.includes(next)) {
+          continuation = next;
+          break;
+        }
+        at = next;
+      }
+      if (continuation !== undefined && !path.slice(1, 3).some(at => scene.rivals.some(rival => rival.cue === at))) {
+        return { kind: 'open', target: continuation, rival: null };
+      }
+    }
+  }
   const free = scene.rivals.filter(rival => !scene.walls.includes(rival.cell));
-  const candidate = free.find(rival => rival.color === memory.intercept) ?? free.map(rival => ({
+  const candidate = free.find(rival => rival.id === memory.intercept) ?? free.map(rival => ({
     rival, index: path.findIndex(cell => cell === rival.cell || cell === rival.cue),
-  })).filter(({ rival, index }) => index > 0 && index <= Math.max(2, Math.ceil(path.length / 2)) && !caged.includes(rival.color))
+  })).filter(({ rival, index }) => index > 0 && index <= Math.max(2, Math.ceil(path.length / 2)) && !caged.includes(rival.id))
     .sort((a, b) => a.index - b.index)[0]?.rival;
   if (candidate) {
     const { cell, cue } = candidate;
@@ -179,7 +268,7 @@ function expectedCells(proposal: Proposal): Memory['cells'] {
   const { scene, choice } = proposal, walls = new Set(scene.walls);
   if (choice.toggle && choice.kind === 'open') walls.delete(choice.target);
   else if (choice.toggle) walls.add(choice.target);
-  return { walls: [...walls], rails: scene.rails, exit: scene.exit };
+  return { walls: [...walls], rails: scene.rails, exit: scene.exit, rivals: scene.rivals };
 }
 
 function verifyIntervention(proposal: Proposal, next: Scene | null, rows: NativeRows, wall: number): boolean | null {
@@ -187,7 +276,7 @@ function verifyIntervention(proposal: Proposal, next: Scene | null, rows: Native
   if (!next || next.actor !== choice.actor || (choice.carrier !== null && next.carrier !== choice.carrier)) return false;
   if (!choice.toggle) return true;
   if (choice.kind === 'contain') {
-    const rival = next.rivals.find(value => value.color === choice.rival?.color);
+    const rival = next.rivals.find(value => value.id === choice.rival?.id);
     return !rival || rival.cell !== choice.target ? false : choice.rival?.cue !== null ? true : null;
   }
   const [x, y] = cellBox(memory.grid, choice.target);
@@ -200,6 +289,7 @@ const purposes = {
   divert: 'Close a rail branch that leads away from the destination',
   open: 'Open the blocked continuation toward the matching outline',
   accompany: 'Let the announced move proceed and check the next position',
+  shield: 'Close a side passage before a rival can reach the projected corridor',
 };
 
 export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & { learn(witness: RouteInterventionWitness): void } {
@@ -216,7 +306,8 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
       const grid = prior?.grid ?? gridOn(rows, roles);
       if (!grid) return null;
       const memory = prior ?? { epoch: observation.level_epoch, grid,
-        cells: { walls: [], rails: [], exit: -1 }, visited: [], intercept: null, caged: [], refs: roles.refs, count: 0 };
+        cells: { walls: [], rails: [], exit: -1 }, visited: [], intercept: null, caged: [], refs: roles.refs, count: 0,
+        forecast: roles.routeVerified === true };
       const scene = project(rows, grid, roles, memory.cells);
       if (!scene) return null;
       const choice = selectChoice(scene, memory);
@@ -256,20 +347,32 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
     },
     record(before, after, _command, _first, second, proposal) {
       const { memory, scene, choice } = proposal;
+      if (roles && after.levels_completed > before.levels_completed) {
+        roles = { ...roles, epoch: after.level_epoch, score: after.levels_completed,
+          refs: [...memory.refs.slice(-5), after.observation_ref], routeVerified: roles.routeVerified || memory.opening !== undefined };
+        return { events: [] };
+      }
       if (!roles || before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const projected = expectedCells(proposal), next = project(second, memory.grid, roles, projected);
       if (!next) return { events: [] };
       const verified = verifyIntervention(proposal, next, second, roles.wall);
-      const caged = choice.toggle && choice.rival && verified !== false;
+      const followedRival = choice.kind === 'contain' ? choice.rival : null;
+      const caged = choice.toggle && followedRival && verified !== false;
       const cells = verified === false && choice.toggle ? project(second, memory.grid, roles, scene) ?? next : next;
       state = { ...memory, count: memory.count + 1, visited: [...new Set([...memory.visited, scene.carrier])], cells,
-        intercept: caged ? null : choice.rival?.color ?? null, caged: caged ? [...memory.caged, choice.rival!.color] : memory.caged,
+        intercept: caged ? null : followedRival?.id ?? null, caged: caged ? [...memory.caged, followedRival!.id] : memory.caged,
         refs: [...memory.refs.slice(-6), after.observation_ref] };
+      if (choice.kind === 'open' && choice.toggle && verified !== false) state.opening = choice.target;
+      if (choice.kind === 'shield' && choice.rival) state.shield = { cell: choice.target, rivalId: choice.rival.id };
       return { events: [] };
     },
     state: () => ({ state, roles }),
     restore(value: NativeRecord) {
       state = structuredClone((value.state as Memory | null | undefined) ?? null);
+      if (state) {
+        state.intercept = state.intercept === null ? null : String(state.intercept);
+        state.caged = state.caged.map(String);
+      }
       roles = structuredClone((value.roles as RouteInterventionWitness | null | undefined) ?? null);
     },
   };

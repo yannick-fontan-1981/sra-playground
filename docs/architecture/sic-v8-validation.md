@@ -608,4 +608,6 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 - **REGN** gagne le niveau 3 en **10 commandes** et **22,40 s**. SIC compare l'effet des commandes disponibles et revient sur une configuration lorsqu'il reste une commande à essayer. Les 19 commandes du parcours continu relèvent de SIC. Empreinte `dee893afe0971cf764557d0b0aec960e61395f6bad1f017f20ea11d7c7c02ccb`.
 - **ISOS** gagne le niveau 3 en **5 commandes** et **17,06 s**. SIC teste l'extension d'une face puis réutilise l'effet vérifié pour compléter la branche de l'exemple. Les 12 commandes du parcours continu relèvent de SIC. Empreinte `5ff4400086ac0b08ba79ed68a3c530250b3bbab1d32003930ab45288b8404527`.
 
-**25/100 niveaux 3** et **237/636 niveaux** sont attestés sous SIC seul, soit **37,3 %**.
+- **ESCT** gagne le niveau 3 en **21 commandes** et **36,38 s** mesurées pendant les rejeux parallèles. SIC distingue les mobiles de même couleur par leurs positions et leurs déplacements annoncés. Il réutilise l'effet vérifié de la commande locale, ouvre la continuation annoncée et ferme un accès latéral qu'un mobile pourrait prendre avant le convoyé. Les 33 commandes et retours des niveaux 1 et 2 sont identiques à l'audit de référence. Les 54 commandes sont décidées par SIC. La permutation de palette conserve les commandes et les scores. Empreinte `96583f36a5010d8e7a1ac71aa8625b263d15bd950f113c8ccaa75e1ef1c17a1b`.
+
+**26/100 niveaux 3** et **238/636 niveaux** sont attestés sous SIC seul, soit **37,4 %**.
