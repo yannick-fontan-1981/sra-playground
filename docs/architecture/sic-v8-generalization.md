@@ -474,6 +474,8 @@ Avec `sic_arrange_turn_posts` retirée, **MOTO gagne en dix commandes SIC seul**
 
 La carte SRC `sic.follow_observed_landings.choose` choisit ensuite deux sélections P05, deux déplacements de plots P07 et une relance P02. Le fournisseur partagé projette le trajet et vérifie la position de chaque plot. Le parcours de référence gagne en six commandes. Le nom neutre et la palette permutée conservent le gain en dix commandes. Désactiver P07 après la première sélection laisse le niveau ouvert au même budget. Empreinte après retrait `98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b`.
 
+Les campagnes CRAF et MOTO portent le total à **49/100** victoires après retrait, en 589 commandes SIC seul, dont 236 choisies par le SRC. Les 100 niveaux 1 en usage normal, les 47 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours de référence.
+
 ### Choisir entre une case à tester et une réécriture observée
 
 Avec `sic_window_relation` retirée, **FT09 gagne en quatre clics SIC seul**. Le fournisseur dérive les contraintes des fenêtres visibles et transmet à la carte SRC les cases en désaccord. La carte `sic.verify_observed_interaction.choose` choisit P05 pour les deux premiers clics. Le retour de chacune de ces deux cases établit la même réécriture. P02 peut alors choisir une case où cette réécriture satisfait aussi les contraintes. Le moteur vérifie l’effet réel des deux derniers clics.
