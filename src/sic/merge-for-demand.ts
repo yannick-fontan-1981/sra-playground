@@ -9,14 +9,18 @@ export const mergeForDemandId = 'sic_merge_to_meet_visible_demand';
 
 type Piece = { readonly color: number; readonly side: number; readonly box: NativeBox; readonly point: NativePoint };
 type Scene = { readonly samples: readonly Piece[]; readonly demand: Piece; readonly receptor: NativeBox;
-  readonly field: readonly [number, number]; readonly probeRange: number };
+  readonly field: readonly [number, number]; readonly probeRange: number;
+  readonly requirements?: readonly Piece[]; readonly receivers?: readonly NativeBox[]; readonly screenWidth?: number };
 type Recipe = { readonly input: number; readonly inputSide: number; readonly output: number; readonly outputSide: number;
   readonly evidence: string };
 type Motion = { readonly color: number; readonly side: number; readonly range: number; readonly evidence: string };
+type Radius = { readonly lower: number; readonly upper: number; readonly refs: readonly string[] };
+type Transfer = { readonly palette: readonly number[]; readonly recipes: readonly Recipe[]; readonly motion: readonly Motion[]; readonly radius: Radius };
 type Memory = { readonly epoch: number; readonly scene: Scene; readonly recipes: readonly Recipe[];
-  readonly motion: readonly Motion[]; readonly tried: readonly string[]; readonly count: number };
+  readonly motion: readonly Motion[]; readonly tried: readonly string[]; readonly count: number; readonly radius?: Radius };
 type Choice = { readonly intent: 'merge' | 'approach' | 'deliver'; readonly member: Piece; readonly partner: Piece | null;
-  readonly point: NativePoint; readonly expected: Recipe | null };
+  readonly point: NativePoint; readonly expected: Recipe | null; readonly delivery?: { demand: Piece; receptor: NativeBox };
+  readonly projected?: readonly Piece[]; readonly reserved?: readonly Piece[] };
 type Proposal = NativeProposal & { readonly memory: Memory; readonly stock: readonly Piece[]; readonly choice: Choice;
   readonly attempt: string; readonly needId: string };
 
@@ -56,14 +60,16 @@ function identify(observation: NativeObservation, screenWidth: number, screenHei
       samples.some(item => item.side !== samples[0]!.side || item.point[1] !== samples[0]!.point[1])) continue;
     const demand = entities.filter(part => solidSquare(part) && !enclosed(frame.bbox, part.bbox) && width(part.bbox) > samples[0]!.side &&
       part.bbox[1] <= screenHeight / 6 && samples.some(item => item.color === part.palette_value));
-    if (demand.length !== 1) continue;
-    const wanted = piece(demand[0]!), fieldTop = Math.max(stripBottom, wanted.box[3]) + 1;
+    if (!demand.length || demand.length > 4) continue;
+    const requirements = demand.map(piece), wanted = requirements.reduce((largest, item) => item.side > largest.side ? item : largest);
+    const fieldTop = Math.max(stripBottom, ...requirements.map(item => item.box[3])) + 1;
     const receptacles = entities.filter(part => part.bbox[1] >= fieldTop && part.bbox[3] <= bottom &&
       !part.rectangular && width(part.bbox) === height(part.bbox) && width(part.bbox) > 2 * wanted.side &&
       part.area > width(part.bbox) ** 2 / 2 && samples.every(item => item.color !== part.palette_value));
-    if (receptacles.length !== 1) continue;
+    if (demand.length === 1 ? receptacles.length !== 1 : receptacles.length < 2 || receptacles.length > 5) continue;
     const receptor = receptacles[0]!.bbox;
-    const scene: Scene = { samples, demand: wanted, receptor, field: [fieldTop, bottom], probeRange: Math.floor(width(receptor) * 0.8) };
+    const scene: Scene = { samples, demand: wanted, receptor, field: [fieldTop, bottom], probeRange: Math.floor(width(receptor) * 0.8),
+      ...(requirements.length > 1 ? { requirements, receivers: receptacles.map(part => part.bbox), screenWidth } : {}) };
     const stock = readStock(observation, scene);
     if (stock.length < 2 || stock.length > 24 || !stock.some((a, i) => stock.slice(i + 1).some(b => matches(a, b)))) continue;
     scenes.push(scene);
@@ -73,6 +79,122 @@ function identify(observation: NativeObservation, screenWidth: number, screenHei
 
 function attemptKey(stock: readonly Piece[], point: NativePoint) {
   return stock.map(p => [p.color, p.side, p.point.join(',')].join(':')).sort().join('|') + '>' + point.join(',');
+}
+
+const anchor = ({ point: [x, y] }: Piece): NativePoint => [Math.round(x), Math.round(y)];
+const boxDistance = ([x, y]: NativePoint, [l, t, r, b]: NativeBox) =>
+  Math.hypot(Math.max(l - x, 0, x - r), Math.max(t - y, 0, y - b));
+const typeKey = (color: number, side: number) => [color, side].join(':');
+
+function updateRadius(previous: Radius | undefined, stock: readonly Piece[], actual: readonly Piece[], point: NativePoint, ref: string): Radius | undefined {
+  let lower = previous?.lower ?? 0, upper = previous?.upper ?? Math.ceil(Math.hypot(64, 64));
+  for (const item of stock) {
+    const span = Math.ceil(boxDistance(point, item.box));
+    if (!actual.some(candidate => samePiece(candidate, item))) lower = Math.max(lower, span);
+    else if (!same(point, anchor(item))) upper = Math.min(upper, span - 1);
+  }
+  if (lower > upper) return previous;
+  if (previous && lower === previous.lower && upper === previous.upper) return previous;
+  return { lower, upper, refs: [...(previous?.refs ?? []).slice(-3), ref] };
+}
+
+function placedAt(color: number, side: number, at: NativePoint): Piece {
+  const [x, y] = at, left = x - Math.floor(side / 2), top = y - Math.floor(side / 2);
+  const box: NativeBox = [left, top, left + side - 1, top + side - 1];
+  return { color, side, box, point: center(box) };
+}
+
+function canSupply(stock: readonly Piece[], requirements: readonly Piece[], memory: Memory): boolean {
+  const counts = new Map<string, number>();
+  for (const { color, side } of stock) {
+    const key = typeKey(color, side);
+    counts.set(key, (counts.get(key) ?? 0) + 1);
+  }
+  for (const sample of memory.scene.samples) {
+    for (const request of requirements.filter(item => item.color === sample.color)) {
+      const key = typeKey(request.color, request.side), count = counts.get(key) ?? 0;
+      if (!count) return false;
+      counts.set(key, count - 1);
+    }
+    for (const recipe of memory.recipes.filter(rule => rule.input === sample.color
+      && paletteRank(memory.scene, rule.output) > paletteRank(memory.scene, rule.input))) {
+      const input = typeKey(recipe.input, recipe.inputSide), output = typeKey(recipe.output, recipe.outputSide);
+      const pairs = Math.floor((counts.get(input) ?? 0) / 2);
+      counts.set(input, (counts.get(input) ?? 0) - 2 * pairs);
+      counts.set(output, (counts.get(output) ?? 0) + pairs);
+    }
+  }
+  return true;
+}
+
+function clickToward(stock: readonly Piece[], memory: Memory, affected: readonly Piece[], ideal: NativePoint,
+  improvements: (point: NativePoint) => boolean): NativePoint | null {
+  const { lower, upper } = memory.radius!, { scene, tried } = memory;
+  const others = stock.filter(item => !affected.includes(item));
+  const left = Math.max(1, ...affected.map(item => item.box[0] - lower));
+  const right = Math.min(scene.screenWidth! - 2, ...affected.map(item => item.box[2] + lower));
+  const top = Math.max(scene.field[0] + 1, ...affected.map(item => item.box[1] - lower));
+  const bottom = Math.min(scene.field[1] - 1, ...affected.map(item => item.box[3] + lower));
+  let best: NativePoint | null = null, score = Infinity;
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+    const point: NativePoint = [x, y], gap = distance(point, ideal);
+    if (gap >= score || !improvements(point) || affected.some(item => boxDistance(point, item.box) > lower)
+      || others.some(item => boxDistance(point, item.box) <= upper) || tried.includes(attemptKey(stock, point))) continue;
+    best = point;
+    score = gap;
+  }
+  return best;
+}
+
+function nextSplitChoice(stock: readonly Piece[], memory: Memory): Choice | null {
+  const { scene, radius } = memory, requirements = [...scene.requirements!];
+  if (!radius || radius.lower < 1 || radius.upper - radius.lower > 5 || !canSupply(stock, requirements, memory)) return null;
+  const receivers = scene.receivers!;
+  const nearest = (demand: Piece) => Math.min(...stock.filter(item => matches(item, demand))
+    .flatMap(item => receivers.map(receptor => distance(anchor(item), center(receptor)))));
+  requirements.sort((a, b) => nearest(a) - nearest(b));
+  const reserved: Piece[] = [], used = new Set<Piece>(), occupied = new Set<NativeBox>();
+  const placements = requirements.flatMap(demand => {
+    const candidates = stock.filter(item => matches(item, demand) && !used.has(item));
+    if (!candidates.length) return [];
+    const zones = receivers.length >= requirements.length ? receivers.filter(receptor => !occupied.has(receptor)) : receivers;
+    const options = candidates.flatMap(member => zones.map(receptor => ({ member, demand, receptor, gap: distance(anchor(member), center(receptor)) })));
+    options.sort((a, b) => a.gap - b.gap);
+    const best = options[0]!;
+    used.add(best.member);
+    occupied.add(best.receptor);
+    reserved.push(best.member);
+    return [best];
+  });
+  for (const { member, demand, receptor, gap } of placements) {
+    if (gap <= 1) continue;
+    const goal = center(receptor), point = clickToward(stock, memory, [member], goal, at => distance(at, goal) < gap);
+    if (point) return { intent: 'deliver', member, partner: null, point, expected: null, delivery: { demand, receptor }, reserved,
+      projected: [...stock.filter(item => item !== member), placedAt(member.color, member.side, point)] };
+  }
+  const working = stock.filter(item => !used.has(item));
+  const pairs = working.flatMap((a, i) => working.slice(i + 1).flatMap(b => {
+    if (!matches(a, b)) return [];
+    const recipe = memory.recipes.find(rule => rule.input === a.color && rule.inputSide === a.side);
+    if (!recipe || recipe.outputSide > scene.demand.side) return [];
+    const rest = stock.filter(item => item !== a && item !== b);
+    const middle = center([a.point[0], a.point[1], b.point[0], b.point[1]]);
+    const output = placedAt(recipe.output, recipe.outputSide, middle);
+    return canSupply([...rest, output], requirements, memory) ? [{ a, b, recipe, rest, middle, gap: distance(a.point, b.point) }] : [];
+  })).sort((a, b) => a.gap - b.gap);
+  for (const { a, b, recipe, rest, middle } of pairs) {
+    const point = clickToward(stock, memory, [a, b], middle, () => true);
+    if (point) return { intent: 'merge', member: a, partner: b, point, expected: recipe, reserved,
+      projected: [...rest, placedAt(recipe.output, recipe.outputSide, point)] };
+  }
+  for (const { a, b, recipe, gap } of pairs) {
+    for (const [member, partner] of [[a, b], [b, a]] as const) {
+      const goal = anchor(partner), point = clickToward(stock, memory, [member], goal, at => distance(at, goal) + 1 < gap);
+      if (point) return { intent: 'approach', member, partner, point, expected: recipe, reserved,
+        projected: [...stock.filter(item => item !== member), placedAt(member.color, member.side, point)] };
+    }
+  }
+  return null;
 }
 
 function nextChoice(stock: readonly Piece[], memory: Memory): Choice | null {
@@ -120,6 +242,10 @@ function nextChoice(stock: readonly Piece[], memory: Memory): Choice | null {
 function measureReturn(proposal: Proposal, after: NativeObservation) {
   const { choice, stock, memory } = proposal, { member, partner, expected } = choice;
   const actual = readStock(after, memory.scene);
+  if (choice.projected) {
+    if (actual.length !== choice.projected.length || !actual.every(item => choice.projected!.some(projected => samePiece(item, projected)))) return null;
+    return choice.intent === 'merge' ? { recipe: expected, range: null } : { recipe: null, range: distance(member.point, choice.point) };
+  }
   const gone = stock.filter(old => !actual.some(now => samePiece(old, now)));
   const added = actual.filter(now => !stock.some(old => samePiece(old, now)));
   if (partner && gone.length === 2 && added.length === 1 && gone.some(item => samePiece(item, member)) &&
@@ -147,7 +273,7 @@ function measureReturn(proposal: Proposal, after: NativeObservation) {
 }
 
 export function createSicMergeForDemand(): NativeFamily<Proposal> {
-  let state: Memory | null = null;
+  let state: Memory | null = null, transfer: Transfer | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: mergeForDemandId,
@@ -160,9 +286,11 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const scene = prior?.scene ?? identify(observation, rows[0]!.length, rows.length);
       if (!scene || (prior?.count ?? 0) >= 40) return null;
-      const memory = prior ?? { scene, epoch: observation.level_epoch, recipes: [], motion: [], tried: [], count: 0 };
+      const inherited = scene.requirements && transfer && scene.samples.map(sample => sample.color).join() === transfer.palette.join() ? transfer : null;
+      const memory: Memory = prior ?? { scene, epoch: observation.level_epoch, recipes: inherited?.recipes ?? [],
+        motion: inherited?.motion ?? [], tried: [], count: 0, ...(inherited ? { radius: inherited.radius } : {}) };
       const stock = readStock(observation, scene);
-      const choice = nextChoice(stock, memory);
+      const choice = scene.requirements ? nextSplitChoice(stock, memory) : nextChoice(stock, memory);
       if (!choice) return null;
       const mode = execution?.reasoningMode ?? 'exploration';
       const measured = memory.motion.find(item => matches(item, choice.member));
@@ -173,7 +301,8 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       const strategy = knownInteraction ? 'P02' : routeSupported ? 'P07' : 'P05';
       if (decision.result !== strategy) return null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set([measured?.evidence, ...memory.recipes.map(recipe => recipe.evidence)]
+      const evidence: [string, ...string[]] = [ref, ...new Set([measured?.evidence, ...memory.recipes.map(recipe => recipe.evidence),
+        ...(scene.requirements ? memory.radius?.refs ?? [] : [])]
         .filter((item): item is string => !!item && item !== ref))];
       const situation = choice.intent === 'merge'
         ? knownInteraction ? 'Repeat the observed merge on two compatible pieces' : 'Test whether two nearby pieces merge into a new type'
@@ -181,8 +310,9 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: situation, evidence });
       if (!witness) return null;
       const [x, y] = choice.point, parent = 'G_official_completion';
+      const demand = choice.delivery?.demand ?? scene.demand, receptor = choice.delivery?.receptor ?? scene.receptor;
       const objective = { kind: 'produce_and_deliver_requested_visible_type', scope: ref.split(':revision:', 1)[0]!,
-        subjects: [`${scene.demand.color}:${scene.demand.side}`], parentObjective: parent,
+        subjects: [typeKey(demand.color, demand.side)], parentObjective: parent,
         satisfactionContract: 'official_progress_after_delivery_of_requested_type' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = mergeForDemandId + ':' + need.id, action = { action_ref: 'ACTION6', data: { x, y } };
@@ -195,7 +325,8 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
           edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
         sicSituationCard: { strategy, need: 'Make the displayed product and bring it to the receiver', situation, evidence, agenda: [],
           mode, triggerCard: decision.receipt.workflow, actor: choice.member.box, partner: choice.partner?.box ?? null,
-          demand: scene.demand.box, receptor: scene.receptor, focus: [x, y, x, y] },
+          demand: demand.box, receptor, focus: [x, y, x, y],
+          ...(choice.reserved ? { reserved: choice.reserved.filter(item => item !== choice.member).map(item => item.box) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -219,17 +350,26 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       return { matched: !!effect, seal_prefix: true, reason };
     },
     record(before, after, _command, _first, _second, proposal) {
+      const { memory, choice: { member } } = proposal;
+      if (after.levels_completed > before.levels_completed && memory.radius && memory.recipes.length) {
+        transfer = { palette: memory.scene.samples.map(sample => sample.color), recipes: memory.recipes, motion: memory.motion, radius: memory.radius };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { memory, choice: { member } } = proposal, effect = measureReturn(proposal, after), recipe = effect?.recipe;
+      const effect = measureReturn(proposal, after), recipe = effect?.recipe;
       const previous = memory.motion.find(item => matches(item, member));
       const motion = effect?.range && effect.range > (previous?.range ?? 0) ? [...memory.motion.filter(item => item !== previous),
         { color: member.color, side: member.side, range: effect.range, evidence: after.observation_ref }] : memory.motion;
       const recipes = recipe && !memory.recipes.some(known => known.input === recipe.input && known.inputSide === recipe.inputSide)
         ? [...memory.recipes, recipe] : memory.recipes;
-      state = { ...memory, motion, recipes, count: memory.count + 1, tried: [...memory.tried, proposal.attempt] };
+      const radius = effect ? updateRadius(memory.radius, proposal.stock, readStock(after, memory.scene), proposal.choice.point, after.observation_ref)
+        : memory.radius;
+      state = { ...memory, motion, recipes, count: memory.count + 1, tried: [...memory.tried, proposal.attempt], ...(radius ? { radius } : {}) };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as Memory | null); },
+    state: () => ({ state, transfer }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as Memory | null);
+      transfer = structuredClone((value.transfer as Transfer | undefined) ?? null);
+    },
   };
 }

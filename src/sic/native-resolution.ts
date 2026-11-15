@@ -1122,6 +1122,10 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.reserved)) for (const item of card.reserved) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Reserved for another delivery', box });
+    }
   }
   if (situationCard && family === compartmentGrowthId) {
     const gate = bounds(card?.target), threshold = bounds(card?.threshold);
