@@ -17,6 +17,7 @@ select { width:100%; margin-bottom:14px; } .pad { display:grid; grid-template-co
 .utility { display:flex; flex-wrap:wrap; gap:7px; } #status { min-height:1.5em; font-weight:650; color:#9ec7ff; }
 .legend { display:grid; grid-template-columns:18px 1fr; gap:10px 9px; margin:22px 0; }
 .swatch { width:16px; height:16px; margin-top:4px; } .merchant { background:#f59e29; } .water { background:#2765d3; } .goal { border:3px solid #ffe14a; } .mirror { background:linear-gradient(135deg,#000 42%,#fff 43%,#fff 57%,#777 58%); }
+.stone { background:#8b5a2b; } .switch { background:#f5a9c8; }
 .note { color:#a8b7ca; font-size:.9rem; } footer { border-top:1px solid #344257; margin-top:25px; padding-top:14px; color:#97a9bf; font-size:.85rem; }
 @media(max-width:730px) { .layout { grid-template-columns:1fr; } canvas { max-width:512px; margin:auto; } }
 </style>
@@ -24,17 +25,17 @@ select { width:100%; margin-bottom:14px; } .pad { display:grid; grid-template-co
 <body><main>
 <div class="eyebrow">SRA PLAYGROUND · LABORATOIRE AUTONOME</div>
 <h1>Les Îles du Reflet</h1>
-<p class="intro">SS01 — Marchand. Trois niveaux pilotes, avant les huit niveaux du jeu complet. Cellules logiques de 3 × 3 pixels, affichées sans lissage.</p>
+<p class="intro">SS01 — Marchand. Huit niveaux jouables. Explorez les îles et découvrez leurs reflets. Cellules logiques de 3 × 3 pixels, affichées sans lissage.</p>
 <div class="layout"><section><canvas id="board" width="64" height="64" aria-label="Plateau SS01, marchand orange et destination jaune"></canvas><p id="status" aria-live="polite"></p></section>
-<section><label for="level">Niveau pilote</label><select id="level"></select>
+<section><label for="level">Niveau</label><select id="level"></select>
 <div class="pad"><button class="up" data-action="1" aria-label="Haut">↑</button><button class="left" data-action="3" aria-label="Gauche">←</button><button data-action="2" aria-label="Bas">↓</button><button data-action="4" aria-label="Droite">→</button></div>
 <button class="power" data-action="5">Pouvoir du miroir · Espace</button>
 <div class="utility"><button id="undo">Undo · Z</button><button id="reset">Reset</button><button id="restart">Repartir du niveau 1</button></div>
-<div class="legend"><span class="swatch merchant"></span><span>Marchand orange ; pixel blanc = direction.</span><span class="swatch goal"></span><span>Destination jaune : rejoindre cette case.</span><span class="swatch mirror"></span><span>Miroir : deux rayons cyan, même distance de chaque côté.</span><span class="swatch water"></span><span>Eau : pas de déplacement ni d’arrivée dessus.</span></div>
-<p class="note">Flèches : marcher. Espace : passer sur l’autre rayon, à distance égale du miroir. Rouge : essai de pouvoir impossible. Le Marchand n’a pas besoin de regarder le miroir lorsqu’un seul miroir est utilisable.</p>
+<div class="legend"><span class="swatch merchant"></span><span>Marchand orange ; pixel blanc = direction.</span><span class="swatch goal"></span><span>Destination jaune : rejoindre cette case.</span><span class="swatch mirror"></span><span>Miroir : deux rayons cyan, même distance de chaque côté.</span><span class="swatch stone"></span><span>Pierre marron : échange sa place avec le Marchand.</span><span class="swatch switch"></span><span>Plus rose : bouton à maintenir occupé. Carré rose : porte.</span><span class="swatch water"></span><span>Eau : pas de déplacement ni d’arrivée dessus.</span></div>
+<p class="note">Flèches : marcher. Espace : passer sur l’autre rayon, à distance égale du miroir. Une pierre peut prendre votre ancienne place. Rouge : essai de pouvoir impossible. Le Marchand n’a pas besoin de regarder le miroir lorsqu’un seul miroir est utilisable.</p>
 <p class="note">Aucun SRA, solveur, serveur, Python ou accès réseau dans cette démonstration. Les autres personnages ne sont pas encore jouables.</p>
 </section></div>
-<footer>Prototype original inspiré de mécaniques de réflexion. Cartes originales, aucun asset du jeu source. Hors catalogue et hors site publié.</footer>
+<footer>Prototype original inspiré de mécaniques de réflexion. Cartes originales, aucun asset du jeu source. Version 0.1.0 · Huit niveaux · Hors catalogue et hors site publié.</footer>
 </main>
 <!-- BUNDLE -->
 </body></html>

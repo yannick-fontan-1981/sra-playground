@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { GRID, PALETTE, compileLevel, initialState, stepWorld, renderWorld, cellToPixel, pixelToCell, SinkingStarSession } from '../dist/core.js';
-import { SS01_LEVELS } from '../dist/levels.js';
+import { LEGACY_LEVELS as SS01_LEVELS } from './fixtures/pilot-levels.mjs';
 
 /** Authoring oracle only. Never imported by browser.ts or shipped in agent input. */
 function solve(world, actions = [1,2,3,4,5]) {

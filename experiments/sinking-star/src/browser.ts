@@ -17,7 +17,7 @@ function paint(): void {
     context.fillRect(x, y, 1, 1);
   }
   select.value = String(observation.level);
-  status.textContent = observation.state === 'WIN' ? 'VICTORY — 3 niveaux pilotes terminés'
+  status.textContent = observation.state === 'WIN' ? `VICTORY — ${observation.levelCount} niveaux terminés`
     : `Niveau ${observation.level} / ${observation.levelCount} · ${observation.levelsCompleted} terminé(s)`;
   document.querySelector<HTMLButtonElement>('#undo')!.disabled = !observation.canUndo;
 }
@@ -33,7 +33,11 @@ document.addEventListener('keydown', event => {
   if (event.target instanceof HTMLSelectElement || event.target instanceof HTMLInputElement || event.target instanceof HTMLTextAreaElement) return;
   const map: Record<string, number> = { ArrowUp: 1, ArrowDown: 2, ArrowLeft: 3, ArrowRight: 4, ' ': 5 };
   const id = map[event.key];
-  if (id) { event.preventDefault(); act(id); }
+  if (id) {
+    event.preventDefault();
+    // Holding Space must not bounce between mirrors or skip a just-loaded level.
+    if (id !== 5 || !event.repeat) act(id);
+  }
   else if (event.key.toLowerCase() === 'z') { event.preventDefault(); session.undo(); paint(); }
 });
 paint();

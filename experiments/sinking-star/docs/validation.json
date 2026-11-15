@@ -1,0 +1,184 @@
+{
+  "version": "0.1.0",
+  "scope": "author-validation-only; not SRA performance",
+  "search": "Exhaustive breadth-first search; facing and feedback omitted from key because Merchant rules ignore them.",
+  "levels": [
+    {
+      "level": 1,
+      "id": "SS01-L1",
+      "title": "Première réflexion",
+      "walkableCellsBeforePower": 25,
+      "previousWalkableCells": 2,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 4,
+      "shortestActions": [
+        2,
+        4,
+        5,
+        1
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 42,
+      "walkingOnly": "unsolvable"
+    },
+    {
+      "level": 2,
+      "id": "SS01-L2",
+      "title": "La bonne distance",
+      "walkableCellsBeforePower": 25,
+      "previousWalkableCells": 4,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 7,
+      "shortestActions": [
+        1,
+        5,
+        1,
+        1,
+        1,
+        4,
+        4
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 43,
+      "walkingOnly": "unsolvable"
+    },
+    {
+      "level": 3,
+      "id": "SS01-L3",
+      "title": "Reflet bloqué",
+      "walkableCellsBeforePower": 24,
+      "previousWalkableCells": 3,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 6,
+      "shortestActions": [
+        1,
+        5,
+        1,
+        1,
+        4,
+        4
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 43,
+      "walkingOnly": "unsolvable"
+    },
+    {
+      "level": 4,
+      "id": "SS01-L4",
+      "title": "L’autre face",
+      "walkableCellsBeforePower": 25,
+      "previousWalkableCells": null,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 4,
+      "shortestActions": [
+        2,
+        2,
+        5,
+        1
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 41,
+      "walkingOnly": "unsolvable"
+    },
+    {
+      "level": 5,
+      "id": "SS01-L5",
+      "title": "Une place à échanger",
+      "walkableCellsBeforePower": 25,
+      "previousWalkableCells": null,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 12,
+      "shortestActions": [
+        1,
+        1,
+        1,
+        4,
+        5,
+        1,
+        1,
+        1,
+        4,
+        4,
+        4,
+        4
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 41,
+      "walkingOnly": "unsolvable"
+    },
+    {
+      "level": 6,
+      "id": "SS01-L6",
+      "title": "Le poids du reflet",
+      "walkableCellsBeforePower": 25,
+      "previousWalkableCells": null,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 12,
+      "shortestActions": [
+        1,
+        1,
+        1,
+        4,
+        5,
+        1,
+        1,
+        1,
+        4,
+        4,
+        4,
+        4
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 41,
+      "walkingOnly": "unsolvable"
+    },
+    {
+      "level": 7,
+      "id": "SS01-L7",
+      "title": "Deux miroirs, trois îles",
+      "walkableCellsBeforePower": 25,
+      "previousWalkableCells": null,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 10,
+      "shortestActions": [
+        1,
+        1,
+        4,
+        5,
+        3,
+        5,
+        2,
+        2,
+        2,
+        4
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 59,
+      "walkingOnly": "unsolvable"
+    },
+    {
+      "level": 8,
+      "id": "SS01-L8",
+      "title": "L’archipel des échanges",
+      "walkableCellsBeforePower": 25,
+      "previousWalkableCells": null,
+      "initialMovementChoices": 4,
+      "shortestActionCount": 10,
+      "shortestActions": [
+        1,
+        1,
+        4,
+        5,
+        3,
+        5,
+        2,
+        2,
+        2,
+        4
+      ],
+      "searchStatus": "solved",
+      "discoveredStates": 53,
+      "walkingOnly": "unsolvable"
+    }
+  ]
+}

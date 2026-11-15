@@ -1,6 +1,6 @@
 # Feuille de route SS01–SS25
 
-Date de ce jalon : 15 novembre 2026.
+Date de ce jalon : 15 novembre 2026 — version 0.1.0, huit niveaux de SS01.
 
 ## Architecture retenue
 
@@ -13,15 +13,21 @@ L'intégration est volontairement précoce : raccorder le premier jeu terminé a
 | Lot | Contenu | Critère de sortie | État |
 |---|---|---|---|
 | SS0 | Contrat, géométrie, palette locale, démarrage autonome | Compilation et tests de géométrie ; règles restantes identifiées | Socle livré, spécification complète encore évolutive |
-| SS1a | SS01 L1–L3, marchand et miroirs | Jeu manuel, solutions témoins, aucun raccourci sans miroir, Undo | Livré dans le laboratoire |
-| SS1b | SS01 L4–L8, pierres/boutons/portes nécessaires | 8 niveaux originaux, tous rejouables et testés ; règle de porte occupée définie | Prochaine étape |
-| SS2 | Adaptateur natif et intégration pilote de SS01 | Parité des frames/replays ; 100 jeux existants non régressés ; mesure globale | À faire après SS1b |
+| SS1a | SS01 L1–L3, marchand et miroirs | Jeu manuel, solutions témoins, aucun raccourci sans miroir, Undo | Livré ; L1–L3 élargis à 25/25/24 cases accessibles |
+| SS1b | SS01 L4–L8, pierres/boutons/portes nécessaires | 8 niveaux originaux, tous rejouables et testés ; règle de porte occupée définie | Livré dans le laboratoire ; tests et témoins validés |
+| SS2 | Adaptateur natif et intégration pilote de SS01 | Parité des frames/replays ; 100 jeux existants non régressés ; mesure globale | Prochaine étape |
 | SS3 | SS02–SS05 : autres compétences seules | 4 jeux × 8 niveaux ; chaque règle identifiable par observation | À faire |
 | SS4 | SS06–SS15 : toutes les paires | 10 jeux × 8 niveaux ; interaction des deux rôles réellement nécessaire | À faire |
 | SS5 | SS16–SS20 : trios | 5 jeux × 8 niveaux ; simultanéité et monstres spécifiés avant utilisation | À faire |
 | SS6 | SS21–SS25 : synthèses | 5 jeux × 8 niveaux ; couverture de la série et campagnes gelées | À faire |
 
-Contenu actuel : **3/8 niveaux pilotes pour SS01 (37,5 % du nombre de niveaux, pas de l'effort)** ; **0/25 jeux complets** ; **3/200 niveaux ciblés**. Ne pas présenter ces ratios comme un pourcentage de migration ou de travail moteur terminé.
+Contenu actuel : **8/8 niveaux de SS01 (100 % du contenu prévu pour ce jeu)** ; **1/25 jeux développé en autonomie** ; **8/200 niveaux ciblés (4 % du nombre de niveaux)**. **0/25 jeux intégré au Playground.** Ces ratios ne mesurent pas l'effort moteur ni l'avancement de l'intégration globale.
+
+## Retour utilisateur pris en compte
+
+Les premiers niveaux étaient trop contraints. Les cartes ont été remplacées par des salles à deux dimensions, avec boucles et quatre directions possibles au départ. L1/L2/L3 : 25/25/24 cases accessibles avant tout pouvoir, contre 2/4/3. La destination demeure inaccessible à pied. Plusieurs points d'activation du miroir restent possibles : la règle ne se réduit plus à un couloir imposé.
+
+Ajouts : pierres échangeables, boutons maintenus, portes conditionnelles, deux miroirs successifs et cinq cartes nouvelles. Une action qui refermerait une porte sur une entité est refusée atomiquement ; cette règle est documentée et testée.
 
 ## Catalogue de conception
 
@@ -82,15 +88,18 @@ Les jeux nouveaux n'ont pas encore de baseline historique : établir leur propre
 
 ## Vérification du présent jalon
 
-- Node `22.16.0`, TypeScript local `5.8.3` : compilation stricte et **23/23 tests réussis**.
-- Le dépôt annonce Node `>=22.18.0` et TypeScript `5.9.3`. Les tests du laboratoire portent sur du JavaScript compilé ; la suite complète avec les versions exactes du dépôt reste à exécuter lors du raccordement.
-- Compatibilité structurelle TypeScript avec l'interface `GameObservation` consultée à `cdab7463` : validée séparément. Aucun test bout en bout du Playground effectué.
-- Démonstration HTML exécutée dans Chromium par injection du HTML autonome : clavier, boutons, victoire, Undo, reprise depuis le niveau 1, navigation, largeur mobile et absence d'appels HTTP validés. Aucune erreur JavaScript observée.
-- L'ouverture `file://` est bloquée par la politique du navigateur de cet environnement ; le test navigateur a utilisé `set_content` sur le même HTML. L'ouverture directe du fichier sur le poste de l'utilisateur n'a donc pas été vérifiée ici.
-- Aucun benchmark officiel du Playground ; aucun lancement du SRA sur ces jeux ; aucune publication Site.
+- Node `22.16.0`, TypeScript local `5.8.3` : compilation stricte et **66/66 tests réussis**. Les 23 tests du pilote initial sont conservés, avec leurs cartes comme fixtures de non-régression.
+- Huit solutions témoins rejouées ; impossibilité de résoudre chaque niveau par la marche seule, établie par recherche exhaustive. Aucun état pertinent accessible ne rend la résolution impossible. Les limites de budget ne sont jamais assimilées à une preuve d'impossibilité.
+- Échange de pierre indispensable dans L5, L6 et L8 ; chacun des deux miroirs indispensable dans L7 et L8.
+- Rapport reproductible : `npm run validate` produit `docs/validation.json`. Le solveur et les solutions restent hors de la démonstration et hors observation agent.
+- Chromium : campagne des huit niveaux au clavier jusqu'à WIN, boutons, Undo de pierre, Undo après WIN, Reset, Restart, sélection de niveau et largeur mobile 390 px validés. Aucune erreur JavaScript ni requête HTTP.
+- L'ouverture `file://` reste bloquée par la politique du navigateur de cet environnement ; contrôle par `set_content` du HTML autonome exact. L'ouverture directe du fichier sur le poste utilisateur n'a donc pas été vérifiée ici.
+- Le dépôt annonce Node `>=22.18.0` et TypeScript `5.9.3` : qualification avec ces versions exactes à réaliser lors du raccordement.
+- Aucun fichier de production modifié ; aucune campagne du SRA ni mesure officielle du coût global du Playground. Le seuil global inférieur à +10 % reste à vérifier lors de l'intégration, pas revendiqué ici.
+- Aucune intégration canonique ni publication Site dans ce jalon. La synchronisation du Site déjà publié n'a pas été contrôlée.
 
 ## Sauvegarde et reprise
 
 Respecter `AGENTS.md` et `docs/migration/git-site-sync-policy.md` : travail → tests → commit → sauvegarde GitHub → intégration canonique → publication Site → vérification des SHA.
 
-Branche du lot : `feat/sinking-star-lab-20261115`. Le SHA de livraison est indiqué dans le compte rendu du jalon ; ne pas fabriquer un SHA autoréférent dans son propre commit. Pas d'intégration canonique ni publication dans ce jalon. Prochaine étape : SS1b, commencer par les niveaux d'orientation puis les échanges avec une pierre et les mécanismes bouton/porte, avec tests ciblés à chaque ajout.
+Branche du lot : `feat/sinking-star-lab-20261115`. Le SHA de livraison est indiqué dans le compte rendu du jalon ; ne pas fabriquer un SHA autoréférent dans son propre commit. Pas d'intégration canonique ni publication dans ce jalon. Prochaine étape : SS2, relire le HEAD canonique actuel et brancher le même moteur natif TypeScript pour SS01, puis tester la parité laboratoire/Playground et les jeux existants avant toute publication. Ne pas modifier le SRA pour lui révéler les règles de ce jeu.

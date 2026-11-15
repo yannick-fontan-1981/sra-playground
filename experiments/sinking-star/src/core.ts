@@ -1,4 +1,4 @@
-/** Standalone SS01 pilot. No imports from the agent, DOM, Python or Playground. */
+/** Standalone SS01 game. No imports from the agent, DOM, Python or Playground. */
 export type Direction = 'N' | 'S' | 'W' | 'E';
 export type MirrorFace = 'NE' | 'SE' | 'SW' | 'NW';
 export type Position = Readonly<{ x: number; y: number }>;
@@ -16,11 +16,15 @@ export interface World {
   readonly tiles: readonly string[];
   readonly mirrors: readonly Mirror[];
   readonly start: Position;
+  readonly rocks: readonly Position[];
+  readonly buttons: readonly Position[];
+  readonly doors: readonly Position[];
   readonly goal: Position;
   readonly facing: Direction;
 }
 export interface WorldState {
   readonly hero: Position;
+  readonly rocks: readonly Position[];
   readonly facing: Direction;
   readonly complete: boolean;
   /** Visual feedback only, not a rule label exposed to an agent. */
@@ -60,8 +64,18 @@ const inside = (p: Position): boolean => Number.isInteger(p.x) && Number.isInteg
   && p.x >= 0 && p.x < GRID.cells && p.y >= 0 && p.y < GRID.cells;
 const tile = (w: World, p: Position): string => inside(p) ? w.tiles[p.y * GRID.cells + p.x]! : '#';
 const mirrorAt = (w: World, p: Position): boolean => w.mirrors.some(m => same(m, p));
-const solid = (w: World, p: Position): boolean => tile(w, p) === '#' || mirrorAt(w, p);
-const floor = (w: World, p: Position): boolean => tile(w, p) === '.' && !mirrorAt(w, p);
+const rockAt = (s: WorldState, p: Position): boolean => s.rocks.some(rock => same(rock, p));
+const doorAt = (w: World, p: Position): boolean => w.doors.some(door => same(door, p));
+/** A single AND circuit. No implicit latch or hidden occupied-door exception. */
+export function buttonsPressed(w: World, s: WorldState): boolean {
+  return w.buttons.length > 0 && w.buttons.every(p => same(p, s.hero) || rockAt(s, p));
+}
+const solid = (w: World, s: WorldState, p: Position): boolean => tile(w, p) === '#'
+  || mirrorAt(w, p) || (doorAt(w, p) && !buttonsPressed(w, s));
+const floor = (w: World, s: WorldState, p: Position): boolean => tile(w, p) === '.' && !solid(w, s, p);
+/** Reject an entire move/swap if it would close a door onto any entity. */
+const doorsSafe = (w: World, s: WorldState): boolean => buttonsPressed(w, s)
+  || w.doors.every(p => !same(p, s.hero) && !rockAt(s, p));
 const along = (p: Position, d: Direction, n = 1): Position => ({
   x: p.x + DELTA[d].x * n, y: p.y + DELTA[d].y * n,
 });
@@ -84,13 +98,14 @@ export function compileLevel(spec: LevelSpec): World {
   const ox = Math.floor((20 - width) / 2), oy = Math.floor((20 - height) / 2);
   const tiles: string[] = Array(400).fill('#');
   const mirrors: Mirror[] = [];
+  const rocks: Position[] = [], buttons: Position[] = [], doors: Position[] = [];
   let start: Position | undefined, goal: Position | undefined;
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const symbol = spec.rows[y]![x]!;
-    if (!'#.~Mg1234'.includes(symbol)) throw new Error(`Unknown map symbol: ${symbol}`);
+    if (!'#.~Mg1234obD*@'.includes(symbol)) throw new Error(`Unknown map symbol: ${symbol}`);
     const p = Object.freeze({ x: ox + x, y: oy + y });
     tiles[p.y * 20 + p.x] = '#~'.includes(symbol) ? symbol : '.';
-    if (symbol === 'M') {
+    if (symbol === 'M' || symbol === '@') {
       if (start) throw new Error('The pilot requires exactly one merchant.');
       start = p;
     }
@@ -98,14 +113,18 @@ export function compileLevel(spec: LevelSpec): World {
       if (goal) throw new Error('The pilot requires exactly one destination.');
       goal = p;
     }
+    if (symbol === 'o' || symbol === '*') rocks.push(p);
+    if (symbol === 'b' || symbol === '*' || symbol === '@') buttons.push(p);
+    if (symbol === 'D') doors.push(p);
     if (FACES[symbol]) mirrors.push(Object.freeze({ ...p, face: FACES[symbol]! }));
   }
   if (!start || !goal || !mirrors.length) throw new Error('Merchant, destination and mirror required.');
   return Object.freeze({ id: spec.id, title: spec.title, tiles: Object.freeze(tiles),
-    mirrors: Object.freeze(mirrors), start, goal, facing: spec.facing });
+    mirrors: Object.freeze(mirrors), rocks: Object.freeze(rocks), buttons: Object.freeze(buttons),
+    doors: Object.freeze(doors), start, goal, facing: spec.facing });
 }
 export function initialState(w: World): WorldState {
-  return { hero: { ...w.start }, facing: w.facing, complete: false, failed: false };
+  return { hero: { ...w.start }, rocks: w.rocks.map(p => ({ ...p })), facing: w.facing, complete: false, failed: false };
 }
 
 function rayDistance(origin: Position, p: Position, direction: Direction): number | null {
@@ -114,43 +133,55 @@ function rayDistance(origin: Position, p: Position, direction: Direction): numbe
   const distance = dx * d.x + dy * d.y;
   return distance > 0 && dx === distance * d.x && dy === distance * d.y ? distance : null;
 }
-function rayClear(w: World, origin: Position, d: Direction, distance: number): boolean {
-  for (let n = 1; n <= distance; n++) if (solid(w, along(origin, d, n))) return false;
+function rayClear(w: World, s: WorldState, origin: Position, d: Direction, distance: number): boolean {
+  for (let n = 1; n <= distance; n++) {
+    const p = along(origin, d, n);
+    if (solid(w, s, p) || (n < distance && rockAt(s, p))) return false;
+  }
   return true;
 }
-/** Geometric counterpart(s); water is transparent but not a valid landing tile. */
-export function mirrorCandidates(w: World, p: Position): Position[] {
+/** Geometric counterpart(s). A stone may be the endpoint, never an intervening object. */
+export function mirrorCandidates(w: World, s: WorldState): Position[] {
   const candidates: Position[] = [];
   for (const m of w.mirrors) {
     const arms = ARMS[m.face];
     for (let i = 0; i < 2; i++) {
       const sourceArm = arms[i]!, targetArm = arms[1 - i]!;
-      const distance = rayDistance(m, p, sourceArm);
-      if (distance !== null && rayClear(w, m, sourceArm, distance)) {
+      const distance = rayDistance(m, s.hero, sourceArm);
+      if (distance !== null && rayClear(w, s, m, sourceArm, distance)) {
         const target = along(m, targetArm, distance);
-        if (rayClear(w, m, targetArm, distance) && floor(w, target)) candidates.push(target);
+        if (rayClear(w, s, m, targetArm, distance) && floor(w, s, target)) {
+          const next = reflectedState(s, target);
+          if (doorsSafe(w, next)) candidates.push(target);
+        }
       }
     }
   }
   return candidates;
 }
+function reflectedState(s: WorldState, target: Position): WorldState {
+  return { ...s, hero: target, rocks: s.rocks.map(p => same(p, target) ? { ...s.hero } : p) };
+}
 /** Pure transition. Direction keys move one cell and update facing even on a block. */
 export function stepWorld(w: World, s: WorldState, actionId: number): WorldState {
-  if (!Number.isInteger(actionId) || actionId < 1 || actionId > 5) throw new RangeError('Pilot actions: 1 to 5.');
+  if (!Number.isInteger(actionId) || actionId < 1 || actionId > 5) throw new RangeError('SS01 actions: 1 to 5.');
   if (s.complete) return s;
-  let hero = s.hero, facing = s.facing, failed = false;
+  let next: WorldState = { ...s, failed: false };
   const direction = ACTION_DIRECTION[actionId];
   if (direction) {
-    facing = direction;
-    const next = along(hero, direction);
-    if (floor(w, next)) hero = next;
+    next = { ...next, facing: direction };
+    const target = along(s.hero, direction);
+    if (floor(w, s, target) && !rockAt(s, target)) {
+      const moved = { ...next, hero: target };
+      if (doorsSafe(w, moved)) next = moved;
+    }
   } else {
-    const candidates = mirrorCandidates(w, hero);
+    const candidates = mirrorCandidates(w, s);
     // No hidden array-order priority when several mirrors are usable.
-    if (candidates.length === 1) hero = candidates[0]!;
-    else failed = true;
+    next = candidates.length === 1 ? { ...reflectedState(next, candidates[0]!) }
+      : { ...next, failed: true };
   }
-  return { hero, facing, failed, complete: same(hero, w.goal) };
+  return { ...next, complete: same(next.hero, w.goal) };
 }
 
 export function renderWorld(w: World, s: WorldState): number[][] {
@@ -166,12 +197,17 @@ export function renderWorld(w: World, s: WorldState): number[][] {
   for (const m of w.mirrors) for (const arm of ARMS[m.face]) {
     for (let n = 1; n < 20; n++) {
       const p = along(m, arm, n);
-      if (solid(w, p)) break;
+      if (solid(w, s, p)) break;
       const c = s.failed ? 8 : 10;
       stamp(p, DELTA[arm].x ? [[null,null,null],[c,c,c],[null,null,null]]
         : [[null,c,null],[null,c,null],[null,c,null]]);
+      if (rockAt(s, p)) break;
     }
   }
+  for (const p of w.buttons) stamp(p, [[null,7,null],[7,7,7],[null,7,null]]);
+  const open = buttonsPressed(w, s);
+  for (const p of w.doors) stamp(p, open ? [[7,null,7],[null,null,null],[7,null,7]]
+    : [[7,7,7],[7,5,7],[7,7,7]]);
   for (const m of w.mirrors) {
     let sprite: (number | null)[][] = [[5,5,0],[5,0,null],[0,null,null]];
     const rotations = { SE: 0, SW: 1, NW: 2, NE: 3 }[m.face];
@@ -179,10 +215,16 @@ export function renderWorld(w: World, s: WorldState): number[][] {
     stamp(m, sprite);
   }
   stamp(w.goal, [[11,11,11],[11,null,11],[11,11,11]]);
+  for (const p of s.rocks) stamp(p, [[13,13,13],[13,5,13],[13,13,13]]);
   const hero: (number | null)[][] = [[null,12,null],[12,12,12],[null,12,null]];
   const d = DELTA[s.facing];
   hero[1 + d.y]![1 + d.x] = 0;
   stamp(s.hero, hero);
+  // Preserve the supporting tile when occupied; stones remain recognizably brown.
+  for (const p of w.buttons) if (same(p, s.hero) || rockAt(s, p)) {
+    stamp(p, [[7,null,7],[null,null,null],[7,null,7]]);
+  }
+  if (rockAt(s, w.goal)) stamp(w.goal, [[11,null,11],[null,null,null],[11,null,11]]);
   return frame;
 }
 interface Snapshot { index: number; completed: number[]; state: WorldState }
