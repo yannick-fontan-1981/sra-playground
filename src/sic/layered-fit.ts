@@ -8,7 +8,8 @@ export const layeredFitId = 'sic_layered_fit';
 export const learnLayeredFitId = 'sic_learn_layered_fit';
 type Part = ReturnType<typeof geometricComponents>[number];
 type Pane = { color: number; box: NativeBox; points: NativePoint[] };
-type Scene = { panes: Pane[]; canvas: NativeBox; reference: NativeBox; mixed: number; empty: number };
+type LayerRelation = { colors: number[]; mixed: number; learnedAt: number; evidence: string[] };
+type Scene = { panes: Pane[]; canvas: NativeBox; reference: NativeBox; mixed: number; empty: number; reuseRefs?: string[] };
 type Stage = 'select' | 'measure' | 'fit';
 type State = { epoch: number; scene: Scene; index: number; stage: Stage; marker: NativePoint | null; remaining: string[]; refs: string[]; failed: boolean };
 type Proposal = NativeProposal & { local: State; pane: Pane; stage: Stage; delta: NativePoint | null; marker: NativePoint | null; needId: string };
@@ -50,29 +51,32 @@ function findFrames(parts: Part[], rows: NativeRows): NativeBox[] {
   return [...seen.values()].sort((a, b) => a[1] - b[1]);
 }
 
-function initial(rows: NativeRows): Scene | null {
+function initial(rows: NativeRows, relation?: LayerRelation): Scene | null {
   const parts = geometricComponents(rows), frames = findFrames(parts, rows);
   if (frames.length !== 2) return null;
   const canvas = inset(frames[0]!), reference = inset(frames[1]!);
   if (canvas[3] >= reference[1]) return null;
   const target = colorsIn(rows, reference);
   const current = colorsIn(rows, canvas);
-  if (target.size !== 4 || current.size !== 1) return null;
+  if (current.size !== 1) return null;
   const empty = [...current.keys()][0]!;
-  if (!target.has(empty)) return null;
+  const reuse = relation && target.has(relation.mixed) && relation.mixed !== empty && !relation.colors.includes(empty)
+    && [...target.keys()].every(color => color === empty || color === relation.mixed || relation.colors.includes(color))
+    ? relation : null;
+  if (!reuse && (target.size !== 4 || !target.has(empty))) return null;
   const field: NativeBox = [0, 0, rows[0]!.length - 1, reference[1] - 2];
   const colors = colorsIn(rows, field);
   const available = [...target.keys()].filter(c => c !== empty);
   const panes: Pane[] = [];
-  for (const color of available) {
+  for (const color of reuse?.colors ?? available) {
     const choices = parts.filter(p => p.color === color && p.area > 2 * width(canvas) * height(canvas) && p.bbox[3] < field[3]);
     if (choices.length !== 1) continue;
     panes.push({ color, box: choices[0]!.bbox, points: colors.get(color) ?? [] });
   }
-  const mixed = available.filter(c => !panes.some(p => p.color === c));
+  const mixed = reuse ? [reuse.mixed] : available.filter(c => !panes.some(p => p.color === c));
   if (panes.length !== 2 || mixed.length !== 1) return null;
   panes.sort((a, b) => (a.box[0] > 0 && a.box[1] > 0 ? 1 : 0) - (b.box[0] > 0 && b.box[1] > 0 ? 1 : 0));
-  return { panes, canvas, reference, empty, mixed: mixed[0]! };
+  return { panes, canvas, reference, empty, mixed: mixed[0]!, ...(reuse ? { reuseRefs: reuse.evidence } : {}) };
 }
 
 function selectionPoint(pane: Pane): NativePoint {
@@ -138,15 +142,19 @@ function paneMatches(rows: NativeRows, scene: Scene, pane: Pane, marker: NativeP
 export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposal> {
   const learns = family === learnLayeredFitId;
   let memory: State | null = null;
+  let relation: LayerRelation | undefined;
   return {
     id: family,
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5', 'ACTION6'].every(ref => observation.available_action_refs.includes(ref))) return null;
       const prior = memory?.epoch === observation.level_epoch ? memory : null;
-      const click = learns && !prior ? execution?.readClickMarker?.() : null;
-      if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
-      const scene = prior?.scene ?? initial(rows);
+      const preceding = relation?.learnedAt === observation.level_epoch - 1 ? relation : undefined;
+      const marker = learns && !prior ? execution?.readClickMarker?.() : null;
+      const click = marker?.afterRef === observation.observation_ref && marker.levelEpoch === observation.level_epoch ? marker : null;
+      if (learns && !prior && !preceding && !click) return null;
+      const scene = prior?.scene ?? initial(rows, preceding);
       if (!scene || prior?.failed) return null;
+      if (learns && !prior && !scene.reuseRefs && !click) return null;
       if (click && (!inside(scene.panes[0]!.box, click.point) || !inside(scene.panes[0]!.box, click.marker)
         || scene.panes.some(pane => pane.color === click.value && pane.points.length > 1))) return null;
       const local: State = prior ?? { epoch: observation.level_epoch, scene, index: 0, stage: click ? 'measure' : 'select',
@@ -159,7 +167,8 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
       if (!action_ref) return null;
       const action: NativeCommand = { action_ref, data: target ? { x: target[0], y: target[1] } : {} };
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...local.refs.filter(r => r !== ref)];
+      const refs = [...local.refs, ...(scene.reuseRefs ?? [])];
+      const evidence: [string, ...string[]] = [ref, ...new Set(refs.filter(r => r !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: action_ref, expected: target, evidence };
       const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: local.stage === 'fit' ? null : offer,
@@ -172,7 +181,9 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
         parentObjective: parent, satisfactionContract: 'visible_color_layer_matches_reference' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = family + ':' + need.id;
-      const situation = local.stage === 'select' ? 'Select the visible pane and locate its selection marker'
+      const situation = local.stage === 'select' ? scene.reuseRefs
+        ? 'Both layers are visible again. Reuse the confirmed overlap rule and measure this layer in the new layout'
+        : 'Select the visible pane and locate its selection marker'
         : local.stage === 'measure' ? 'Measure one translation and recover the portion hidden at the edge'
           : 'Apply the next measured transform toward the matching reference layer';
       return { status: 'proposed', kind: family, local, pane, stage: local.stage, marker: local.marker,
@@ -203,13 +214,22 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
         ...(next.index > proposal.local.index ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
     },
     record(before, after, _action, first, second, proposal) {
+      if (after.levels_completed > before.levels_completed) {
+        const { panes, mixed } = proposal.local.scene;
+        relation = { colors: panes.map(pane => pane.color), mixed, learnedAt: before.level_epoch,
+          evidence: [before.observation_ref, after.observation_ref] };
+        return { events: [], reviewEvidence: 'Official advancement confirmed the fit of the two overlapping layers.' };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const next = observeReturn(first, second, proposal);
       memory = { ...next, refs: [...next.refs.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ memory }),
-    restore(value: NativeRecord) { memory = structuredClone(value.memory as State | null); },
+    state: () => ({ memory, relation: relation ?? null }),
+    restore(value: NativeRecord) {
+      memory = structuredClone(value.memory as State | null);
+      relation = value.relation ? structuredClone(value.relation as LayerRelation) : undefined;
+    },
   };
 }
 
