@@ -93,7 +93,12 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
   const strategy = knownInteraction ? 'P02' : 'P07';
   if (decision.result !== strategy) return null;
-  const situation = knownInteraction ? 'Record the measured route that opened the passage'
+  const preparation = recording.preparation;
+  const beforeFirstCommit = !!preparation && recording.paths.length === 0;
+  const situation = knownInteraction && beforeFirstCommit ? 'Record the shift along the route and the contact held at the end'
+    : beforeFirstCommit && !preparation.event ? 'Reach the contact linked to the solid obstruction and measure what it changes'
+    : beforeFirstCommit ? 'Leave the shifted obstruction behind and reach a contact to hold'
+    : knownInteraction ? 'Record the measured route that opened the passage'
     : recording.node ? 'Reach another contact while checking the replayed paths'
       : 'Reach the receiver while the recorded contacts keep the passages open';
   const evidence: [string, ...string[]] = [ref, ...new Set([...recording.paths.flatMap(item => item.evidence), ...recording.evidence]
@@ -142,11 +147,11 @@ export function createSicVerifyRemoteReplay(): NativeFamily<ReplayProposal> {
       if (scene.slots.length > 2) {
         let current: Recording | null = null;
         if (recording?.epoch === epoch - 1 && !recording.stopped) {
-          current = beginRecording(scene, epoch, recording.vectors, recording.phase, recording.evidence);
+          current = beginRecording(scene, epoch, recording.vectors, recording.phase, recording.evidence, rows);
         } else if (state?.epoch === epoch - 1 && state.replay && !state.stopped && state.scene.body.quantum === scene.body.quantum) {
           const evidence = [state.phaseEvidence, ...Object.values(state.controlEvidence ?? {}), ...state.evidence]
             .filter((ref): ref is string => !!ref);
-          current = beginRecording(scene, epoch, state.controls, state.replay, [...new Set(evidence)]);
+          current = beginRecording(scene, epoch, state.controls, state.replay, [...new Set(evidence)], rows);
         }
         return current && decide ? proposeRecording(observation, rows, current, decide, execution) : null;
       }
@@ -242,8 +247,16 @@ export function createSicVerifyRemoteReplay(): NativeFamily<ReplayProposal> {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isRecorded(proposal)) {
-        const confirmed = !!observeRecording(proposal.recordingChoice, after, _first, second);
-        return { matched: confirmed, seal_prefix: true, reason: confirmed ? 'recorded_contribution_reconciled' : 'recorded_replay_prediction_changed' };
+        const { recording: previous, intent } = proposal.recordingChoice;
+        const next = observeRecording(proposal.recordingChoice, after, _first, second);
+        const oldEffect = previous.preparation?.event, newEffect = next?.preparation?.event;
+        const reason = !next ? 'recorded_replay_prediction_changed'
+          : newEffect && !oldEffect ? 'remote_block_shift_observed'
+            : newEffect?.retained && !oldEffect?.retained ? 'remote_shift_persists_after_departure'
+              : intent === 'commit' && previous.preparation ? 'rewind_restored_obstructions_and_recorded_contributions'
+                : previous.paths.some(path => path.prepared?.tick === previous.path.length) ? 'persistent_shift_reproduced_at_recorded_tick'
+                  : 'recorded_contribution_reconciled';
+        return { matched: !!next, seal_prefix: true, reason };
       }
       const { scene, node } = proposal.local, position = actorPosition(after, scene);
       const openFloor = proposal.to && temporalPatch(second, proposal.from, scene.body.size).every(row => row.every(pixel => pixel === scene.body.floor));
