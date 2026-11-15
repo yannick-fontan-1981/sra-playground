@@ -1,7 +1,7 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { SELECTED_RIGID_DIRECTIONS, selectedRigidMoved, selectedRigidPoint, selectedRigidPoses, selectedRigidScene } from '../logos-engine/v6-selected-rigid-geometry.ts';
-import { selectedRigidRoute, SelectedRigidIncomplete } from '../logos-engine/v6-selected-rigid-search.ts';
+import { selectedRigidRoute, SELECTED_RIGID_SOURCE_LIMITS, SelectedRigidIncomplete } from '../logos-engine/v6-selected-rigid-search.ts';
 import type { SelectedRigidPoses, SelectedRigidRouteStep, SelectedRigidScene } from '../logos-engine/v6-selected-rigid-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -30,11 +30,11 @@ type Proposal = NativeProposal & { local: State; choice: Choice; needId: string 
 const same = ([x, y]: NativePoint, [a, b]: NativePoint) => x === a && y === b;
 const samePoses = (a: SelectedRigidPoses, b: SelectedRigidPoses) => a.length === b.length && a.every((p, i) => same(p, b[i]!));
 
-async function choose(local: State, execution?: NativeExecution): Promise<Choice | null> {
+async function choose(local: State, routeTimeBoundMs: number, execution?: NativeExecution): Promise<Choice | null> {
   const { scene, active, models } = local;
   if (!models.length) return null;
   const now = execution?.now ?? (() => performance.now());
-  const deadline = Math.min(execution?.deadlineMs ?? Infinity, now() + 4000);
+  const deadline = Math.min(execution?.deadlineMs ?? Infinity, now() + routeTimeBoundMs);
   let route = local.route;
   if (!route) {
     try {
@@ -81,6 +81,7 @@ function boxFor(scene: SelectedRigidScene, position: NativePoint, mask: NativePo
 
 export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily<Proposal> {
   let state: State | null = null;
+  const routeTimeBoundMs = id === learnSelectedAccessId ? SELECTED_RIGID_SOURCE_LIMITS.timeBoundMs : 4000;
   return {
     id,
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
@@ -111,7 +112,7 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
         local.models = controlModels.filter(model => same(model[inputIndex]!, [dx, dy]));
         local.refs = [...motion.evidence];
       }
-      const choice = await choose(local, execution);
+      const choice = await choose(local, routeTimeBoundMs, execution);
       if (!choice) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];

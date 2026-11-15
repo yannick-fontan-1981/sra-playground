@@ -507,3 +507,9 @@ Les commandes et retours reproduisent la référence, empreinte `7d52d817584ee80
 Avec `sic_material_assembly` retirée, **LIFE gagne en 26 commandes SIC seul**. Les 13 premières viennent de l’exploration publique. La dernière marque un composant sans changer le contenu des pièces. SIC vérifie que le point cliqué désigne une seule pièce et que le marquage se trouve autour de cette pièce. Le fournisseur retrouve le partenaire compatible et vérifie les remplacements, les sélections et les dépôts à chaque retour. La carte SRC choisit cinq essais P05 et huit réutilisations P02.
 
 Le parcours de référence gagne en 14 commandes. Le nom neutre et la palette permutée conservent le gain en 26 commandes. Désactiver P02 avant sa première utilisation laisse le niveau ouvert à 26 commandes. Empreinte après retrait `2b9779ce96977cfff637d7eec694c362f45017d98677b243a48d4b6754e675cb`.
+
+### Préserver la recherche après acquisition du déplacement
+
+Un rejeu parallèle de KLOT avec la famille habituelle retirée reproduit les 16 premiers retours. À la 17ᵉ décision, la recherche du trajet s’abstient et l’exploration publique poursuit jusqu’à 40 commandes sans victoire. Le rejeu isolé retrouve les 30 commandes et retours de référence.
+
+Sur la même observation, une horloge simulée de 0,25 ou 0,5 ms par lecture interrompt l’ancienne recherche avant qu’elle propose la première commande. Avec la borne de 18 s du planificateur source, la recherche retrouve la commande attendue après 24 510 lectures dans les deux essais. Cette borne s’applique au fournisseur qui a déjà acquis un déplacement. La limite de temps du niveau et les limites de recherche continuent de s’appliquer. Le rejeu complet corrigé gagne en 30 commandes, empreinte `5a2f20e21f5f1254102872d5ca30d278252701bb4eb8aec5a442f82f22dcea8f`.
