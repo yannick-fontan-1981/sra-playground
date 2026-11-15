@@ -16,16 +16,18 @@ type Service = { kind: string; input: number; output?: number; symbol: Pattern; 
 type Panel = { id: string; bbox: NativeBox; material: number; selection_color: number; operators: Service[]; services: Service[] };
 type Scene = { panels: Panel[]; layout: unknown };
 type State = { epoch: number; symbols: Pattern[]; attempts: string[]; stopped: boolean; evidence: string[]; verifiedEditRef?: string };
-type Proposal = NativeProposal & { local: State; symbols: Pattern[]; expected: NativeRecord[] | null; attempt: string; needId: string };
+type LearnedSymbols = { completed: number; symbols: Pattern[]; proof: string };
+type Proposal = NativeProposal & { local: State; symbols: Pattern[]; expected: NativeRecord[] | null; attempt: string; needId: string;
+  outputs?: { panelId: string; value: number }[] };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
-function bestLocalActivity(panel: Panel) {
+function bestLocalActivity(panel: Panel): Service | null {
   const direct = panel.operators.filter(service => service.kind === 'displayed_receiver' && service.input === panel.material);
-  if (direct.length === 1) return direct[0]!.control;
+  if (direct.length === 1) return direct[0]!;
   if (direct.length > 1) return null;
   const conversion = panel.operators.filter(service => service.kind === 'displayed_rewrite' && service.input === panel.material &&
     panel.services.some(receiver => receiver.kind === 'displayed_receiver' && service.output === receiver.input));
-  return conversion.length === 1 ? conversion[0]!.control : null;
+  return conversion.length === 1 ? conversion[0]! : null;
 }
 
 function measuredMatch(proposal: Proposal, rows: NativeRows) {
@@ -33,8 +35,14 @@ function measuredMatch(proposal: Proposal, rows: NativeRows) {
   return !!returned && equal(panelServiceProjection(returned), proposal.expected);
 }
 
+function observedOutputs(proposal: Proposal, rows: NativeRows): boolean {
+  const scene = measurePanelService(rows, proposal.symbols) as Scene | null;
+  return !!scene && !!proposal.outputs?.every(({ panelId, value }) => scene.panels.some(panel => panel.id === panelId && panel.material === value));
+}
+
 export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let retained: LearnedSymbols | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyPanelConfigurationId,
@@ -43,12 +51,17 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || !observation.available_action_refs.includes('ACTION5')) return null;
+      const learned = retained?.completed === observation.levels_completed ? retained : null;
       const local: State = state?.epoch === observation.level_epoch ? state :
-        { epoch: observation.level_epoch, symbols: [], attempts: [], stopped: false, evidence: [] };
+        { epoch: observation.level_epoch, symbols: learned?.symbols ?? [], attempts: [], stopped: false,
+          evidence: learned ? [learned.proof] : [] };
       if (local.stopped || local.attempts.length >= 16) return null;
       const scene = measurePanelService(rows, local.symbols) as Scene | null;
       if (!scene || scene.panels.length < 2 || scene.panels.length > 6) return null;
-      const choices = scene.panels.map(panel => ({ panel, control: bestLocalActivity(panel) }));
+      const choices = scene.panels.map(panel => {
+        const service = bestLocalActivity(panel);
+        return { panel, service, control: service?.control };
+      });
       if (choices.some(({ control }) => !control)) return null;
       const proposed = choices.find(({ panel, control }) => control!.outline !== panel.selection_color);
       const point = proposed?.control?.point ?? null;
@@ -60,6 +73,8 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
       const symbols = [...new Map([...local.symbols, ...scene.panels.flatMap(panel => panel.services.map(service => service.symbol))]
         .map(symbol => [JSON.stringify(symbol), symbol])).values()];
       const expected = proposed ? projection.map(panel => panel.id === proposed.panel.id ? { ...panel, activity: [proposed.control!.row] } : panel) : null;
+      const outputs = proposed ? [] : choices.flatMap(({ panel, service }) =>
+        service?.kind === 'displayed_rewrite' && service.output !== undefined ? [{ panelId: panel.id, value: service.output }] : []);
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.verifiedEditRef ? [local.verifiedEditRef] : [])]
         .filter(item => item !== ref))];
@@ -71,7 +86,8 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
       const strategy = reuseEdit ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
       const phase = proposed ? 'select_matching_activity' : 'test_shared_application';
-      const label = panelMatchingStrategies[phase], parent = 'G_official_completion';
+      const label = outputs.length ? 'Run the selected transformations and compare each material return' : panelMatchingStrategies[phase];
+      const parent = 'G_official_completion';
       const objective = { kind: 'apply_matching_material_activities', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_materials', 'displayed_receivers'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_applying_the_matching_panel_settings' };
@@ -79,6 +95,7 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
       const actions = [command];
       const binding = point && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
       return { status: 'proposed', kind: verifyPanelConfigurationId, actions, local, symbols, expected, attempt, needId: need.id,
+        ...(outputs.length ? { outputs } : {}),
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -86,7 +103,8 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
           situation: facts },
         sicSituationCard: { strategy, need: 'Prepare an activity for the material in each panel', mode,
           situation: proposed ? 'The shown material matches a proposed activity. Verify the selection and the other panels.' :
-            'The observed selections match the displayed material requirements. Their joint effect still needs a return.',
+            outputs.length ? 'The selected activities display the materials needed by the next operation.' :
+              'The observed selections match the displayed material requirements. Their joint effect still needs a return.',
           agenda: [], evidence, triggerCard: decision.receipt.workflow, panels: scene.panels.map(panel => panel.bbox) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -101,20 +119,29 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = proposal.expected ? measuredMatch(proposal, second) : null;
-      return { matched, seal_prefix: true, reason: matched ? 'panel_selection_observed' : 'measure_panel_return' };
+      const matched = proposal.expected ? measuredMatch(proposal, second) : proposal.outputs ? observedOutputs(proposal, second) : null;
+      const reason = proposal.outputs ? matched ? 'panel_material_outputs_observed' : 'panel_material_outputs_contradicted'
+        : matched ? 'panel_selection_observed' : 'measure_panel_return';
+      return { matched, seal_prefix: true, reason };
     },
     record(before, after, _command, _first, second, proposal) {
+      if (after.levels_completed > before.levels_completed) {
+        retained = { completed: after.levels_completed, symbols: proposal.symbols, proof: after.observation_ref };
+        return { events: [] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, symbols } = proposal;
       const verifiedEdit = !!proposal.expected && measuredMatch(proposal, second);
       state = { ...local, symbols, attempts: [...local.attempts, proposal.attempt],
         ...(verifiedEdit ? { verifiedEditRef: after.observation_ref } : {}),
-        stopped: proposal.expected ? !verifiedEdit : before.frame_hash === after.frame_hash,
+        stopped: proposal.expected ? !verifiedEdit : proposal.outputs ? !observedOutputs(proposal, second) : before.frame_hash === after.frame_hash,
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, retained }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      retained = structuredClone((value.retained as LearnedSymbols | undefined) ?? null);
+    },
   };
 }

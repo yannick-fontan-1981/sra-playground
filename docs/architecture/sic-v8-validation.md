@@ -477,6 +477,12 @@ Sur **GIGO**, SIC retrouve l’ouverture du niveau 2 grâce à un trait extérie
 
 Le bilan atteint **64/100 niveaux 2** et **181/636 niveaux attestés sous SIC seul** (28,5 %).
 
+Le retrait de `sic_nested_passage` sur GIGO gagne également les deux niveaux en 16 commandes SIC. Après trois commandes d’exploration publique, `sic_connect_openings_after_observed_motion` prend le relais. Le niveau 2 reste résolu en neuf commandes.
+
+Sur **RSWP**, SIC réutilise les formes des activités observées au niveau 1 et relit les matières du niveau 2. Il prépare les trois transformations puis lance un premier tour. Le retour confirme la matière produite dans chaque panneau. SIC choisit ensuite les trois récepteurs qui acceptent ces produits. Le deuxième tour valide le gain officiel. Le niveau 2 gagne en **8 commandes** et **16,41 s**, avec la même séquence dans le rejeu à palette permutée. Les trois commandes et retours du niveau 1 sont reproduits. Les 11 commandes relèvent de SIC, avec l’empreinte `3e5a439ee548d4ce05185253a0e860ed2241a544b006259151442ad61766d68d`.
+
+Le bilan atteint **65/100 niveaux 2** et **182/636 niveaux attestés sous SIC seul** (28,6 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
