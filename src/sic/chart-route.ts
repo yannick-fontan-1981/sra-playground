@@ -40,6 +40,11 @@ function boundaryAdmission(edge: ChartEdge, color: number, chart: MeasuredChart,
   });
 }
 
+function admittedLink(point: ChartPoint, color: number, chart: MeasuredChart, frames: readonly NativeRows[], final: NativeRows) {
+  const links = chart.links.filter(edge => same(edge.from, point) && edge.annotation === color);
+  return links.length === 1 && boundaryAdmission(links[0]!, color, chart, frames, final) ? links[0] : undefined;
+}
+
 export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposal> {
   const learns = family === learnChartRouteId;
   let state: Local | null = null;
@@ -133,18 +138,23 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
       const from = chartInventory(first, chart), to = chartInventory(second, chart);
       const changed = chartScene(first, chart) !== chartScene(second, chart);
       const anchor = measureChart(second, after);
-      const positions = anchor ? [anchor.current] : [...new Map([...(changed ? [] : local.positions), ...edges.map(edge => edge.to)]
+      let positions = anchor ? [anchor.current] : [...new Map([...(changed ? [] : local.positions), ...edges.map(edge => edge.to)]
         .map(point => [chartPointKey(point), point])).values()];
+      const lost = from.filter(value => !to.includes(value));
+      if (positions.length > 1 && lost.length) {
+        // Two rooms can render the same scene. A disappearing inventory color
+        // can distinguish them when the animation locates its matching link.
+        const consistent = positions.filter(point => lost.every(color => admittedLink(point, color, chart, frames, second)));
+        if (consistent.length === 1) positions = consistent;
+      }
       const open = [...local.open], visited = [...local.visited];
       if (positions.length === 1) {
-        const point = positions[0]!, gained = to.filter(value => !from.includes(value)), lost = from.filter(value => !to.includes(value));
+        const point = positions[0]!, gained = to.filter(value => !from.includes(value));
         const node = chart.nodes.find(candidate => same(candidate.center, point));
         if (node?.inside != null && gained.includes(node.inside)) visited.push(chartPointKey(point));
         for (const color of lost) {
-          const links = chart.links.filter(edge => same(edge.from, point) && edge.annotation === color);
-          if (links.length === 1 && boundaryAdmission(links[0]!, color, chart, [first, ...frames], second)) {
-            open.push(chartEdgeKey(links[0]!));
-          }
+          const link = admittedLink(point, color, chart, [first, ...frames], second);
+          if (link) open.push(chartEdgeKey(link));
         }
       }
       state = { ...local, positions, open: [...new Set(open)], visited: [...new Set(visited)], frame: after.frame_hash,
