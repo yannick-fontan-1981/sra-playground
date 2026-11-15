@@ -12,8 +12,10 @@ type Direction = typeof directions[number];
 type Part = ReturnType<typeof geometricComponents>[number];
 type Frame = { box: NativeBox; point: NativePoint; color: number; area: number };
 type Pair = { key: string; frames: [Frame, Frame] };
-type Scene = { actor: Part; goal: Frame; pairs: Pair[]; floor: Record<string, NativePoint>; pitch: number; flags: Part[] };
+type Scene = { actor: Part; goal: Frame; pairs: Pair[]; floor: Record<string, NativePoint>; pitch: number; flags: Part[];
+  ground: number; neutral?: true };
 type Memory = { epoch: number; evidence: string[]; traversed: string[]; rejected: string[]; goal: Frame };
+type KnownPassage = { side: number; actorPaint: number; ground: number; completed: number; ref: string };
 type Crossing = { pair: Pair; from: Frame; to: Frame };
 type Step = { direction: Direction; point: NativePoint; crossing?: Crossing };
 type Route = { steps: Step[]; target: Frame; crossing?: Crossing };
@@ -27,6 +29,7 @@ const same = (a: NativePoint, b: NativePoint) => key(a) === key(b);
 const square = (p: Part) => width(p.bbox) === height(p.bbox);
 const solid = (p: Part) => square(p) && p.area === width(p.bbox) ** 2;
 const commonAxis = (a: NativePoint, b: NativePoint) => a[0] === b[0] || a[1] === b[1];
+const framePattern = (rows: NativeRows, [l, t, r, b]: NativeBox) => rows.slice(t + 1, b).flatMap(row => row.slice(l + 1, r)).join(',');
 
 function frameFor(part: Part, interiorSide: number): Frame | null {
   const size = interiorSide + 2;
@@ -36,8 +39,7 @@ function frameFor(part: Part, interiorSide: number): Frame | null {
   return { box: part.bbox, point: [x + 1, y + 1], color: part.color, area: part.area };
 }
 
-function measure(rows: NativeRows, priorGoal: Frame | null): Scene | null {
-  const parts = geometricComponents(rows);
+function measure(rows: NativeRows, priorGoal: Frame | null, parts = geometricComponents(rows)): Scene | null {
   const result: Scene[] = [];
   for (const actor of parts.filter(p => solid(p) && width(p.bbox) >= 2 && width(p.bbox) <= 4)) {
     const side = width(actor.bbox), pitch = side + 2, point = origin(actor.bbox);
@@ -70,14 +72,95 @@ function measure(rows: NativeRows, priorGoal: Frame | null): Scene | null {
     const goal = goals[0]!;
     const flags = allFrames.filter(p => !aligned(p.point)).map(frame => parts.find(p => p.bbox === frame.box)!);
     const tiles = [point, goal.point, ...floors.filter(p => p.color === ground).map(p => origin(p.bbox))];
-    result.push({ actor, goal, pairs, floor: Object.fromEntries(tiles.map(p => [key(p), p])), pitch, flags });
+    result.push({ actor, goal, pairs, floor: Object.fromEntries(tiles.map(p => [key(p), p])), pitch, flags, ground });
     if (result.length > 1) return null;
   }
   return result[0] ?? null;
 }
 
+function patternedPassages(rows: NativeRows, parts: Part[], known: KnownPassage, priorGoal?: Frame): Scene | null {
+  const { side, actorPaint, ground } = known, pitch = side + 2;
+  const actors = parts.filter(part => part.color === actorPaint && width(part.bbox) === side && solid(part));
+  if (actors.length !== 1) return null;
+  const actor = actors[0]!, [ax, ay] = origin(actor.bbox);
+  const onGrid = ([x, y]: NativePoint) => (x - ax) % pitch === 0 && (y - ay) % pitch === 0;
+  const pattern = (box: NativeBox) => framePattern(rows, box);
+  const allFrames = parts.flatMap(part => {
+    const frame = frameFor(part, side);
+    return frame ? [{ part, frame }] : [];
+  });
+  const indicators = allFrames.filter(({ frame }) => !onGrid(frame.point) && frame.box[1] > ay
+    && frame.box[1] >= rows.length - pitch * 2 && new Set(pattern(frame.box).split(',')).size > 1);
+  if (indicators.length < 4 || indicators.length > 16 || indicators.some(({ frame }) => frame.box[1] !== indicators[0]!.frame.box[1])) return null;
+  const flags = indicators.map(({ part }) => part);
+  const zoneBottom = indicators[0]!.frame.box[1];
+  const groups = new Map<string, Frame[]>();
+  for (const { frame } of indicators) groups.set(pattern(frame.box), []);
+  if (groups.size * 2 !== indicators.length || [...groups.keys()].some(mark => indicators.filter(({ frame }) => pattern(frame.box) === mark).length !== 2)) return null;
+  for (let y = (ay + pitch - 1) % pitch; y + pitch <= zoneBottom; y += pitch) {
+    for (let x = (ax + pitch - 1) % pitch; x + pitch <= rows[0]!.length; x += pitch) {
+      const box: NativeBox = [x, y, x + pitch - 1, y + pitch - 1];
+      const group = groups.get(pattern(box));
+      if (!group) continue;
+      const paint = rows[y]![x]!;
+      const measures = rows.slice(y, y + pitch).flatMap((row, j) => row.slice(x, x + pitch)
+        .filter((_, i) => i === 0 || i === pitch - 1 || j === 0 || j === pitch - 1));
+      const area = measures.filter(value => value === paint).length;
+      if (area >= 3 * pitch - 2) group.push({ box, point: [x + 1, y + 1], color: paint, area });
+    }
+  }
+  const pairs: Pair[] = [];
+  for (const frames of groups.values()) {
+    if (frames.length !== 2) return null;
+    const [a, b] = frames as [Frame, Frame];
+    pairs.push({ key: [key(a.point), key(b.point)].sort().join('/'), frames: [a, b] });
+  }
+  const entrances = new Set(pairs.flatMap(pair => pair.frames.map(frame => key(frame.point))));
+  const goals = allFrames.map(({ frame }) => frame).filter(frame => onGrid(frame.point) && frame.box[3] < zoneBottom
+    && !entrances.has(key(frame.point)) && (priorGoal ? same(frame.point, priorGoal.point) : rows[frame.point[1]]?.[frame.point[0]] === ground));
+  if (goals.length !== 1) return null;
+  const goal = goals[0]!;
+  const tiles = parts.filter(part => part.color === ground && width(part.bbox) === pitch - 1 && solid(part)
+    && onGrid(origin(part.bbox))).map(part => origin(part.bbox));
+  if (tiles.length < 8) return null;
+  tiles.push([ax, ay], goal.point);
+  return { actor, goal, pitch, pairs, flags, ground, neutral: true, floor: Object.fromEntries(tiles.map(point => [key(point), point])) };
+}
+
 function shift(point: NativePoint, [, dx, dy]: Direction, pitch: number): NativePoint {
   return [point[0] + dx * pitch, point[1] + dy * pitch];
+}
+
+/** Search positions together with the pairs already visited. A return through a
+ * proven passage can be useful even when it leaves the indicators unchanged. */
+function coverPassages(scene: Scene, memory: Memory, inputs: readonly string[]): Route | null {
+  const start = origin(scene.actor.bbox), all = (1 << scene.pairs.length) - 1;
+  const visited = scene.pairs.reduce((bits, pair, i) => bits | (memory.traversed.includes(pair.key) ? 1 << i : 0), 0);
+  const entrances = new Map(scene.pairs.flatMap((pair, i) => pair.frames.map((from, j) =>
+    [key(from.point), { pair, from, to: pair.frames[1 - j]!, bit: 1 << i }] as const)));
+  const queue: { point: NativePoint; bits: number; steps: Step[] }[] = [{ point: start, bits: visited, steps: [] }];
+  const seen = new Set([key(start) + '/' + visited]);
+  for (const item of queue) {
+    if (seen.size >= 8192) return null;
+    for (const direction of directions) {
+      if (!inputs.includes(direction[0]) || memory.rejected.includes(key(item.point) + '/' + direction[0])) continue;
+      const next = shift(item.point, direction, scene.pitch), crossing = entrances.get(key(next));
+      const point = crossing ? shift(crossing.to.point, direction, scene.pitch) : next;
+      const bits = item.bits | (crossing?.bit ?? 0);
+      if (!scene.floor[key(point)]) continue;
+      const steps = [...item.steps, { direction, point, ...(crossing ? { crossing } : {}) }];
+      if (same(point, scene.goal.point)) {
+        if (bits !== all) continue;
+        const pending = steps.find(step => step.crossing && !memory.traversed.includes(step.crossing.pair.key))?.crossing;
+        return { steps, target: pending?.from ?? scene.goal, ...(pending ? { crossing: pending } : {}) };
+      }
+      const state = key(point) + '/' + bits;
+      if (seen.has(state)) continue;
+      seen.add(state);
+      queue.push({ point, bits, steps });
+    }
+  }
+  return null;
 }
 
 function plan(scene: Scene, memory: Memory, inputs: readonly string[]): Route | null {
@@ -119,6 +202,17 @@ function actorAt(rows: NativeRows, actor: Part, point: NativePoint): boolean {
     && width(p.bbox) === side && height(p.bbox) === side);
 }
 
+function observedStep(proposal: Proposal, first: NativeRows, second: NativeRows) {
+  const step = proposal.route.steps[0]!, crossing = step.crossing;
+  const moved = actorAt(second, proposal.scene.actor, step.point);
+  const changed = crossing ? proposal.scene.flags.filter(({ bbox: [x, y] }) => first[y]?.[x] !== second[y]?.[x]) : [];
+  if (!proposal.scene.neutral || !crossing) return { moved, markers: changed.length > 0 };
+  const repeated = proposal.memory.traversed.includes(crossing.pair.key);
+  const intended = framePattern(first, crossing.from.box);
+  const matched = repeated ? changed.length === 0 : changed.length === 2 && changed.every(flag => framePattern(first, flag.bbox) === intended);
+  return { moved: moved && matched, markers: matched && !repeated };
+}
+
 function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined): Memory | null {
   const receipt = execution?.readPriorDirectionalScene?.(first => measure(first, null));
   if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== epoch) return null;
@@ -136,6 +230,7 @@ function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: 
 export function createSicPairedPassage(family = pairedPassageId): NativeFamily<Proposal> {
   const learns = family === learnPairedPassageId;
   let local: Memory | null = null;
+  let previous: KnownPassage | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -149,10 +244,14 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
       const prior = local?.epoch === observation.level_epoch ? local
         : learns ? acquireMotion(rows, ref, observation.level_epoch, execution) : null;
       if (learns && !prior) return null;
-      const scene = measure(rows, prior?.goal ?? null);
+      const known = previous?.completed === observation.levels_completed ? previous : null;
+      const parts = geometricComponents(rows);
+      const scene = measure(rows, prior?.goal ?? null, parts) ?? (known ? patternedPassages(rows, parts, known, prior?.goal) : null);
       if (!scene) return null;
-      const memory = prior ?? { epoch: observation.level_epoch, evidence: [], traversed: [], rejected: [], goal: scene.goal };
-      const route = plan(scene, memory, observation.available_action_refs);
+      const memory = prior ?? { epoch: observation.level_epoch, evidence: scene.neutral && known ? [known.ref] : [],
+        traversed: [], rejected: [], goal: scene.goal };
+      const route = scene.neutral ? coverPassages(scene, memory, observation.available_action_refs)
+        : plan(scene, memory, observation.available_action_refs);
       if (!route) return null;
       const step = route.steps[0]!, action = { action_ref: step.direction[0], data: {} };
       const crossing = step.crossing;
@@ -177,7 +276,9 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
         parentObjective: parent, satisfactionContract: route.crossing ? 'piece_at_paired_exit' : 'official_progress_at_framed_exit' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = pairedPassageId + ':' + need.id;
-      const situation = crossing ? 'Verify that entering the opening transfers the piece to its paired landing'
+      const revisiting = crossing && scene.neutral && memory.traversed.includes(crossing.pair.key);
+      const situation = revisiting ? 'Return through the verified opening to reach the remaining pair'
+        : crossing ? 'Verify that entering the opening transfers the piece to its paired landing'
         : route.crossing ? 'Approach a visible pair whose transfer is still unverified'
           : 'Reach the exit after observing a transfer through each pair';
       const [x, y] = step.point, last = width(scene.actor.bbox) - 1;
@@ -206,23 +307,30 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const step = proposal.route.steps[0]!, crossing = step.crossing;
-      const moved = actorAt(second, proposal.scene.actor, step.point);
-      const markersChanged = crossing && proposal.scene.flags.some(({ bbox: [x, y] }) => first[y]?.[x] !== second[y]?.[x]);
-      const reason = moved ? markersChanged ? 'paired_landing_and_remote_markers_observed' : 'expected_position_observed' : 'expected_position_missing';
+      const { moved, markers } = observedStep(proposal, first, second);
+      const reason = moved ? markers ? 'paired_landing_and_remote_markers_observed' : 'expected_position_observed'
+        : proposal.scene.neutral && crossing ? 'expected_transfer_or_indicators_unconfirmed' : 'expected_position_missing';
       return { matched: moved, seal_prefix: true, reason, ...(crossing && moved && crossing.pair.key === proposal.route.crossing?.pair.key
         ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, first, second, proposal) {
+      if (after.levels_completed > before.levels_completed && proposal.memory.traversed.length === proposal.scene.pairs.length) {
+        previous = { side: width(proposal.scene.actor.bbox), actorPaint: proposal.scene.actor.color, ground: proposal.scene.ground,
+          completed: after.levels_completed, ref: after.observation_ref };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { memory, route } = proposal, step = route.steps[0]!;
-      const moved = actorAt(second, proposal.scene.actor, step.point);
+      const { moved } = observedStep(proposal, first, second);
       const crossing = moved ? step.crossing : undefined;
       local = { ...memory, evidence: moved ? [...memory.evidence.slice(-5), after.observation_ref] : memory.evidence,
         traversed: crossing && !memory.traversed.includes(crossing.pair.key) ? [...memory.traversed, crossing.pair.key] : memory.traversed,
         rejected: moved ? memory.rejected : [...memory.rejected, proposal.attempt] };
       return { events: [] };
     },
-    state: () => ({ local }),
-    restore(value: NativeRecord) { local = structuredClone(value.local as Memory | null); },
+    state: () => ({ local, previous }),
+    restore(value: NativeRecord) {
+      local = structuredClone(value.local as Memory | null);
+      previous = structuredClone((value.previous as KnownPassage | undefined) ?? null);
+    },
   };
 }
