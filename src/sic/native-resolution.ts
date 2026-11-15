@@ -27,6 +27,7 @@ import { observedPrefixQuotasId, observedPrefixQuotaStrategies } from './observe
 import { observedCarrierReductionId, observedCarrierStrategies } from './observed-carrier-reduction.ts';
 import { observedLinePlacementId, observedLineStrategies } from './observed-line-placement.ts';
 import { observedPolePairId, observedPolePairStrategies } from './observed-pole-pair.ts';
+import { observedSharedRelationsId, observedSharedRelationsStrategies } from './observed-shared-relations.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -510,6 +511,7 @@ export function readNativeResolution(agent: {
     : family === observedCarrierReductionId ? observedCarrierStrategies
     : family === observedLinePlacementId ? observedLineStrategies
     : family === observedPolePairId ? observedPolePairStrategies
+    : family === observedSharedRelationsId ? observedSharedRelationsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -669,6 +671,18 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['selected', 'Piece under control'], ['partner', 'Coupled piece'], ['destination', 'Marked destination']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === observedSharedRelationsId) {
+    const control = bounds(card?.control);
+    if (control) subjects.push({ label: 'Shared relation control', box: control });
+    for (const [field, label] of [['actors', 'Piece expected to move'], ['destinations', 'Marked destination']] as const) {
+      const values = card?.[field];
+      if (!Array.isArray(values)) continue;
+      for (const value of values) {
+        const box = bounds(value);
+        if (box) subjects.push({ label, box });
+      }
     }
   }
   if (situationCard && family === slotTransferId) {
