@@ -26,19 +26,19 @@ function repeatedGap(cells: readonly Cell[], axis: 0 | 1, width: number): number
 }
 
 /** Read rectangular neighborhoods from repeated neighbor offsets in public pixels. */
-export function observeRepeatedCells(rows: NativeRows): RegularField[] {
+export function observeRepeatedCells(rows: NativeRows, { minimumSide = 3, includeUnitCells = false } = {}): RegularField[] {
   const sizes = new Map<string, { size: NativePoint; cells: Cell[] }>();
   for (const part of geometricComponents(rows)) {
     const [left, top, right, bottom] = part.bbox;
     const size: NativePoint = [right - left + 1, bottom - top + 1];
-    if (part.area <= 1 || part.area !== size[0] * size[1]) continue;
+    if ((!includeUnitCells && part.area === 1) || part.area !== size[0] * size[1]) continue;
     const group = sizes.get(key(size)) ?? { size, cells: [] };
     group.cells.push({ point: [left, top], value: part.color });
     sizes.set(key(size), group);
   }
   const fields: RegularField[] = [];
   for (const { size, cells } of sizes.values()) {
-    if (cells.length < 9) continue;
+    if (cells.length < minimumSide ** 2) continue;
     const dx = repeatedGap(cells, 0, size[0]), dy = repeatedGap(cells, 1, size[1]);
     if (dx === null || dy === null) continue;
     const pending = new Map(cells.map(cell => [key(cell.point), cell]));
@@ -57,7 +57,7 @@ export function observeRepeatedCells(rows: NativeRows): RegularField[] {
       }
       const xs = [...new Set(connected.map(entry => entry.point[0]))].sort((a, b) => a - b);
       const ys = [...new Set(connected.map(entry => entry.point[1]))].sort((a, b) => a - b);
-      if (xs.length >= 3 && ys.length >= 3 && connected.length === xs.length * ys.length) {
+      if (xs.length >= minimumSide && ys.length >= minimumSide && connected.length === xs.length * ys.length) {
         fields.push({ xs, ys, values: new Map(connected.map(entry => [key(entry.point), entry.value])), size });
       }
     }

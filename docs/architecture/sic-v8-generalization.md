@@ -23,7 +23,7 @@ Un échec de repli conduit d’abord à retrouver la première preuve qui manque
 
 Le passage au composant commun demande un rejeu avec retrait de la famille ciblée, les 100 niveaux 1 et les quatre parcours intégraux sous SIC seul. Comparer les gains, les commandes, les contradictions, l’autorité de décision et la durée par niveau. Une modification des commandes est acceptable lorsque les preuves et les résultats restent vérifiables. Garder la première divergence et le nombre de jeux où la primitive contribue réellement.
 
-Les niveaux 1 restent prioritaires. La campagne systématique des niveaux 2 reprend quand les 100 niveaux 1 sont gagnés sous SIC seul après retrait de la famille habituelle, avec preuves du repli par des familles et primitives réutilisables. La référence de retrait est figée sur le rejeu normal du runtime `07e5e687` pour suivre les gains sans faire changer la famille retirée au fil des mises à jour. La campagne des niveaux 3 suit celle des niveaux 2.
+Les niveaux 1 restent prioritaires. Sur `341b6cb1`, le rejeu gagne les 100 niveaux 1 sous SIC seul après retrait de leur famille habituelle. Ce résultat ouvre le chantier de généralisation avec les niveaux 1 et les quatre jeux terminés. La référence du premier retrait reste figée sur le rejeu normal du runtime `07e5e687`. La campagne systématique des niveaux 2 reprend après le chantier de généralisation, puis la campagne des niveaux 3.
 
 ## Mesurer la généralité
 
@@ -57,6 +57,16 @@ Sur `f20e48b0`, **DNOI termine ses six niveaux en 59 commandes** après le doubl
 Sur **TRIA**, qui n'a pas servi à mettre au point cette mesure, la carte de correspondance ne propose aucune commande. Avec le même modèle neutralisé, les autres fournisseurs gagnent en 20 commandes. Le parcours normal de référence en prend huit.
 
 Au niveau 2 de **SYME**, la mesure retrouve toutes les cellules de la grille. Le premier modèle s'abstient parce que deux cellules en miroir portent des valeurs différentes. La variante suivante autorise une prédiction quand une seule des valeurs est déjà attestée par au moins deux autres paires concordantes. Lorsque les deux valeurs sont soutenues, la paire reste ouverte. Dans les deux cas, la réutilisation de la relation continue à dépendre des retours des commandes.
+
+Sur `476b5e42`, **SYME termine ses six niveaux en 78 commandes** dans les deux projections, avec les mêmes commandes. Le SRC choisit douze P05 et 66 P02 soutenus par des retours distincts. La projection d'origine reproduit la trajectoire du premier retrait. DNOI reproduit ses 59 commandes et retours dans la même version, toujours avec les deux fournisseurs retirés et les trois fonctions neutralisées.
+
+### Apprendre ce qu'un contrôle change pendant l'animation
+
+Sur **DICO**, les premiers retours montrent deux effets. Le changement de groupe préserve les huit candidats. Un retour animé touche d'abord deux cases, puis reste local ou s'étend aux huit. SIC peut comparer les cadres successifs, distinguer les deux effets et réduire les candidats à partir du groupe effectivement touché. La nouvelle mesure part de sites régulièrement espacés et cherche des marques visibles associées à un contrôle extérieur au groupe. Cette association reste une hypothèse jusqu'au retour.
+
+Avec les deux fournisseurs habituels retirés et les deux anciennes fonctions neutralisées, **DICO** gagne son niveau 1 en cinq commandes, avec quatre P05 et un P02. Le même trajet gagne avec un nom neutre et une palette permutée. La règle de réutilisation s'appuie sur la réponse du premier essai comparable.
+
+Sur **LF52**, qui n'a pas servi à mettre cette mesure au point, le fournisseur s'abstient après le même retrait. L'exploration publique gagne en 28 commandes.
 
 `sic_public_input_exploration` conserve le choix final d’une expérience disponible, le budget et la mémoire des tentatives. Les mesures et producteurs d’offres ont vocation à être réutilisables indépendamment. Le graphe des commandes observées est déjà un module commun. La reconnaissance de marqueurs répétés et la recherche de mouvement après un clic sont encore dans la famille d’exploration. La présence de carrés de marqueurs, l’ordre initial des commandes et l’absence de changement avant un clic portent chacun une hypothèse qui doit être testée sur plusieurs jeux. Une famille distincte est utile lorsqu’elle conserve un modèle vérifiable entre plusieurs décisions, comme des cases découvertes ou une relation entre une commande et un mobile.
 
@@ -708,3 +718,5 @@ Les quatre essais gagnent le niveau 1 sous SIC seul avec les commandes et retour
 Sur BP35, G50T et TU93, désactiver P07 au premier trajet confirme que la carte change la suite du parcours. Les trois niveaux restent ouverts aux bornes de l'essai. BP35 et TU93 se terminent sur un échec du jeu après 54 et 50 commandes, et G50T atteint le plafond de 55 commandes.
 
 Sur FUIT, désactiver P05 après la première commande rend la main à d'autres fournisseurs. Le niveau reste ouvert après 39 commandes.
+
+Sur `341b6cb1`, **100/100 retraits sont gagnants**, en 1 306 commandes SIC seul. Les 100 parcours normaux reproduisent leurs 1 248 commandes et retours. Les quatre jeux complets reproduisent leurs 268 commandes et retours dans chacune des deux configurations. Le rejeu qualifie les huit derniers cas sur la même version que les 92 premiers.

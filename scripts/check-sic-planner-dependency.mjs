@@ -14,12 +14,14 @@ const field = {
   module: 'src/logos-engine/v6-field-constraints.ts',
   guards: { measuredFields: '[]', symmetryEvidence: 'null', periodicHypotheses: '[]' },
 };
+const groupEffects = {
+  original: 'sic_subset_experiment', shared: 'sic_learn_scope_effects',
+  module: 'src/logos-engine/v6-subset-diagnosis.ts',
+  guards: { measureSubsetScene: 'null', subsetFeedback: 'null' },
+};
 const cases = {
-  DICO: {
-    original: 'sic_subset_experiment', shared: 'sic_learn_scope_effects',
-    module: 'src/logos-engine/v6-subset-diagnosis.ts',
-    guards: { measureSubsetScene: 'null', subsetFeedback: 'null' },
-  },
+  DICO: groupEffects,
+  LF52: groupEffects,
   DNOI: field,
   SYME: field,
   TRIA: field,
@@ -44,7 +46,7 @@ const entry = Object.hasOwn(cases, code) ? cases[code] : null;
 const budget = Number(budgetText);
 assert.ok(entry && ['original', 'family', 'planner'].includes(mode) && ['first', 'complete'].includes(scope)
   && Number.isSafeInteger(budget) && budget > 0 && ['standard', 'neutral'].includes(projection),
-  'Usage: node scripts/check-sic-planner-dependency.mjs DICO|DNOI|HANO|SYME|TRIA|KLOT|LS20 original|family|planner [first|complete] [actions per level] [standard|neutral]');
+  'Usage: node scripts/check-sic-planner-dependency.mjs DICO|DNOI|HANO|SYME|LF52|TRIA|KLOT|LS20 original|family|planner [first|complete] [actions per level] [standard|neutral]');
 
 const disabled = new Set(mode === 'original' ? [] : [entry.original]);
 if (mode === 'planner') disabled.add(entry.shared);

@@ -3,7 +3,7 @@ import { verifyContactOrderId } from './ordered-contact.ts';
 import { supportTransferId } from './support-transfer.ts';
 import { learnSupportMovesId } from './learn-support-moves.ts';
 import { subsetExperimentId } from './subset-experiment.ts';
-import { learnScopeEffectsId } from './learn-scope-effects.ts';
+import { learnScopeEffectsId, learnVisibleGroupEffectsId } from './learn-scope-effects.ts';
 import { cavityAccessId } from './cavity-access.ts';
 import { publicInputExplorationId } from './public-input-exploration.ts';
 import { recheckDirectionalControlsId } from './recheck-directional-controls.ts';
@@ -102,7 +102,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [verifyTraceCoverageId, verifyMarkedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId] },
-  { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, verifyChannelAccessId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, learnRepeatedCellsId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
+  { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, verifyChannelAccessId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, learnRepeatedCellsId, learnVisibleGroupEffectsId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze(standalonePlanningGroups.flatMap(group => group.families));

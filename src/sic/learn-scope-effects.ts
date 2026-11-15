@@ -1,14 +1,16 @@
 import { measureSubsetScene, subsetFeedback } from '../logos-engine/v6-subset-diagnosis.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { assessHypothesisPartition } from './discriminating-experiment.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { measureGroupResponse, observeVisibleScope, type VisibleScope } from './observed-group-effects.ts';
 
 export const learnScopeEffectsId = 'sic_learn_scope_effects';
+export const learnVisibleGroupEffectsId = 'sic_learn_visible_group_effects';
 
-type Scene = NonNullable<ReturnType<typeof measureSubsetScene>>;
-type Control = { color: string; bbox: NativeBox; shape: readonly [number, number, unknown]; area: number };
+type Scene = VisibleScope;
 type Mode = 'test' | 'navigate';
 type Effect = { mode: Mode; ref: string };
 type State = { epoch: number; universe: string; possible: number[]; tried: string[];
@@ -21,8 +23,7 @@ const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2
 const attempt = (focus: readonly number[], point: NativePoint) => JSON.stringify([focus, point]);
 
 function choose(scene: Scene, local: State): Choice | null {
-  const focus = scene.focus as number[], controls = scene.controls as Control[], boxes = scene.boxes as NativeBox[];
-  const scopeMembers = scene.scope_members as Record<string, number[]>;
+  const { focus, controls, boxes, scope_members: scopeMembers } = scene;
   const remaining = local.possible.length;
   const make = (box: NativeBox, group: number[], density: number, shape?: string): Choice | null => {
     const point = center(box), key = attempt(focus, point);
@@ -57,16 +58,23 @@ function choose(scene: Scene, local: State): Choice | null {
   return null;
 }
 
-export function createSicLearnScopeEffects(): NativeFamily<Proposal> {
+export function createSicLearnScopeEffects(family = learnScopeEffectsId): NativeFamily<Proposal> {
+  const fromVisibleGroups = family === learnVisibleGroupEffectsId;
+  const readScene = (rows: NativeRows): Scene | null => fromVisibleGroups
+    ? observeVisibleScope(rows) : measureSubsetScene(rows) as Scene | null;
   let memory: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: learnScopeEffectsId,
+    id: family,
+    async attachPrograms(registry) {
+      if (fromVisibleGroups) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const scene = measureSubsetScene(rows);
+      const scene = readScene(rows);
       if (!scene) return null;
       const local: State = memory?.epoch === observation.level_epoch && memory.universe === scene.universe_ref ? memory : {
-        epoch: observation.level_epoch, universe: scene.universe_ref, possible: (scene.boxes as NativeBox[]).map((_, i) => i),
+        epoch: observation.level_epoch, universe: scene.universe_ref, possible: scene.boxes.map((_, i) => i),
         tried: [], effects: memory?.effects ?? {}, refs: [], hypothesisRefuted: false,
       };
       if (local.hypothesisRefuted) return null;
@@ -77,9 +85,14 @@ export function createSicLearnScopeEffects(): NativeFamily<Proposal> {
       const evidence: [string, ...string[]] = [ref, ...prior];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: 'ACTION6', expected: choice.point, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: !choice.mode ? offer : null,
+      const legacy = fromVisibleGroups ? null : resolveNavigationPrimitives({ mode, evidence, probe: !choice.mode ? offer : null,
         access: choice.mode === 'navigate' ? offer : null, interaction: choice.mode === 'test' ? offer : null });
-      if (!selected) return null;
+      const facts = { routeSupported: choice.mode === 'navigate', eligibleProbe: !choice.mode, knownInteraction: choice.mode === 'test', mode };
+      const decision = fromVisibleGroups ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : undefined;
+      const primitive = choice.mode === 'navigate' ? 'P07' : choice.mode === 'test' ? 'P02' : 'P05';
+      if (fromVisibleGroups && decision?.result !== primitive) return null;
+      const strategy = fromVisibleGroups ? primitive : legacy?.selected?.id;
+      if (!strategy) return null;
       const purpose = choice.mode === 'navigate' ? 'Access a group while preserving the remaining candidates'
         : choice.mode === 'test' ? 'Reuse the observed group test to distinguish remaining candidates'
           : choice.shape ? 'Measure whether this control changes the view or tests the group' : 'Test the remaining candidate at its visible cell';
@@ -87,19 +100,23 @@ export function createSicLearnScopeEffects(): NativeFamily<Proposal> {
       if (!witness) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'resolve_scope_feedback', scope: ref.split(':revision:', 1)[0]!,
-        subjects: [scene.universe_ref as string], parentObjective: parent, satisfactionContract: 'official_progress_after_candidate_confirmation' };
+        subjects: [scene.universe_ref], parentObjective: parent, satisfactionContract: 'official_progress_after_candidate_confirmation' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = learnScopeEffectsId + ':' + need.id, [x, y] = choice.point, action = { action_ref: 'ACTION6', data: { x, y } };
+      const id = family + ':' + need.id, [x, y] = choice.point, action = { action_ref: 'ACTION6', data: { x, y } };
       return {
-        status: 'proposed', kind: learnScopeEffectsId, local, scene, choice, needId: need.id,
+        status: 'proposed', kind: family, local, scene, choice, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, point_binding: witness, expected_after: null }],
-        sicSituationCard: { strategy: selected.id, need: 'Identify which candidate causes the global response', situation: purpose,
-          evidence, agenda: entries, mode, triggerCard: card, target: choice.box, members: choice.group.map(member => scene.boxes[member]),
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Identify which candidate causes the global response', situation: purpose,
+          evidence, agenda: legacy?.entries ?? [], mode, triggerCard: fromVisibleGroups ? chooseLanding : legacy?.card,
+          target: choice.box, members: choice.group.map(member => scene.boxes[member]),
           remainingCandidates: local.possible.length },
         question: { reason: purpose, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: purpose, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
@@ -115,17 +132,20 @@ export function createSicLearnScopeEffects(): NativeFamily<Proposal> {
     },
     record(before, after, _command, rows, returned, { local, scene, choice }, _index, frames) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const feedback = subsetFeedback(rows, frames.length ? frames : [returned], scene);
+      const visibleFrames = frames.length ? frames : [returned];
+      const legacy = fromVisibleGroups ? null : subsetFeedback(rows, visibleFrames, scene);
+      const feedback = fromVisibleGroups ? measureGroupResponse(rows, visibleFrames, scene.boxes)
+        : legacy?.status === 'sealed_scope_feedback' ? { tested: legacy.tested as number[], reachesEverySite: legacy.label === 'GLOBAL' } : null;
       const tried = [...local.tried, choice.key], refs = [...local.refs.slice(-3), after.observation_ref];
-      if (feedback?.status === 'sealed_scope_feedback') {
-        const tested = new Set<number>(feedback.tested);
-        const possible = local.possible.filter(member => tested.has(member) === (feedback.label === 'GLOBAL'));
+      if (feedback) {
+        const tested = new Set(feedback.tested), result = feedback.reachesEverySite ? 'GLOBAL' : 'LOCAL';
+        const possible = local.possible.filter(member => tested.has(member) === feedback.reachesEverySite);
         const effects = choice.shape ? { ...local.effects, [choice.shape]: { mode: 'test' as const, ref: after.observation_ref } } : local.effects;
         memory = { ...local, possible, tried, refs, effects, hypothesisRefuted: !possible.length };
-        return { events: [{ kind: 'sic_observed_scope_feedback', result: feedback.label, tested: tested.size,
+        return { events: [{ kind: 'sic_observed_scope_feedback', result, tested: tested.size,
           candidates: possible.length, modelRefuted: !possible.length, observation: after.observation_ref }] };
       }
-      const next = measureSubsetScene(returned);
+      const next = readScene(returned);
       const changed = next?.universe_ref === scene.universe_ref && JSON.stringify(next?.focus) !== JSON.stringify(scene.focus);
       const effects = choice.shape && changed ? { ...local.effects, [choice.shape]: { mode: 'navigate' as const, ref: after.observation_ref } } : local.effects;
       memory = { ...local, tried, effects, refs: changed ? refs : local.refs };
