@@ -144,3 +144,10 @@ Les victoires et les résultats SIC seul de la campagne sont détaillés dans la
 - TR87 · `runs/yf_arc3_v6/common-tr87-02-20261104/report.json` dans le dépôt de l’agent source.
 - VC33 · `runs/yf_arc3_v6/common-vc33-02-20261104/report.json` dans le dépôt de l’agent source.
 - WA30 · `runs/yf_arc3_v6/common-wa30-02-20261104/report.json` dans le dépôt de l’agent source.
+
+## Rejeux V5 depuis un niveau intermédiaire
+
+Ces archives décrivent des effets et des décisions à examiner lors des prochains rejeux SIC. Le seuil du tableau reste celui d'une partie continue depuis le niveau 1.
+
+- **AR25**. Un contrôleur neuf gagne le niveau 8 à partir d'un état préparé par un rejeu de l'environnement jusqu'au niveau 7. [Rejeu du niveau 8](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL8/good_run_pseudocode.md)
+- **VC33**. Les archives partent avec les scores 2 et 6. Le premier rejeu documente la représentation après un changement d'échelle. Le second vérifie la victoire officielle après reprise d'une sauvegarde du niveau 7. [Rejeu du niveau 3](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VC33/LVL3/good_run_pseudocode.md) · [Rejeu du niveau 7](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VC33/LVL7/good_run_pseudocode.md)
