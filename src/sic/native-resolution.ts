@@ -59,6 +59,7 @@ import { learnPairedPassageId, pairedPassageId } from './paired-passage.ts';
 import { seatedContactId, verifyFrameContactId } from './seated-contact.ts';
 import { learnSwitchedSurfaceId, switchedSurfaceId } from './switched-surface.ts';
 import { markedGaugeId, verifyGaugeEffectId } from './marked-gauge.ts';
+import { coupledGaugeRouteId } from './coupled-gauge-route.ts';
 import { reactiveTargetId, verifyReactiveMotionId } from './reactive-target.ts';
 import { pairedChannelsId, verifyChannelAccessId } from './paired-channels.ts';
 import { pointReachId, verifyPointAccessId } from './point-reach.ts';
@@ -491,7 +492,7 @@ export function readNativeResolution(agent: {
       || family === verifyOrientedDeliveryId || family === verifyTraceCoverageId || family === verifyCrossingRowsId
       || family === verifyBranchAlignmentId || family === verifyMarkedLatticeId) ? inventoryAccessStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
-    : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
+    : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
         : family === sharedArrivalId ? sharedArrivalStrategies : (family === outlineServiceId || family === learnOutlineServiceId) ? outlineServiceStrategies
@@ -946,6 +947,17 @@ export function readNativeResolution(agent: {
     for (const [field, label] of [['focus', 'Selected button'], ['gauge', 'Current gauge'], ['target', 'Target tick']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === coupledGaugeRouteId) {
+    for (const [field, label] of [['focus', 'Selected button'], ['gauge', 'Extending piece'], ['actor', 'Transported marker'],
+      ['target', 'Destination marks'], ['obstacle', 'Obstacle'], ['landing', 'Predicted marker position']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+    if (Array.isArray(card?.carried)) for (const item of card.carried) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Transported piece', box });
     }
   }
   if (situationCard && (family === seatedContactId || family === verifyFrameContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId)) {

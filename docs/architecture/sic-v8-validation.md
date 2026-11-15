@@ -409,6 +409,10 @@ Sur **CN04**, le niveau 2 introduit une quatrième pièce. SIC mesure les dépla
 
 Le bilan atteint **47/100 niveaux 2** et **164/636 niveaux attestés sous SIC seul** (25,8 %).
 
+Sur **S5I5**, le niveau 2 présente quatre paires de boutons alignées et un marqueur à amener au centre de quatre repères. SIC teste les changements d'étendue et leurs inverses sous P05. Les retours établissent quelles pièces sont entraînées et de combien. Le moteur calcule ensuite un trajet autour de l'obstacle et compare les positions du marqueur et des pièces après chaque clic sous P02. Le niveau 2 gagne en **38 clics**, dont douze de mesure et vingt-six de trajet. Le niveau 1 reproduit ses 13 commandes et leurs retours. Les 51 commandes sont sous autorité SIC, avec l'empreinte `72f263562720f010b6d92a84a082190fa9022851a76a0ac05cf2019f8fc753f6` également reproduite dans la variante historique où l'ancienne famille `sic_marked_gauge` est déjà absente. Le retrait de la famille utilisée au niveau 1, `sic_verify_gauge_effect`, conduit à une défaite à ce niveau après 50 clics.
+
+Le bilan atteint **48/100 niveaux 2** et **165/636 niveaux attestés sous SIC seul** (25,9 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
