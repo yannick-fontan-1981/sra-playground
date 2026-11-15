@@ -34,6 +34,33 @@ export function configuredScene(rows:NativeRows,retained:[number,number,number]|
 export function configuredRoute(nodes:Set<string>,start:P,target:P,order:readonly P[],pitch:number):P[]|null{
  const dist=new Map<string,number>([[key(target),0]]),q=[target];for(let i=0;i<q.length;i++){const [x,y]=q[i]!;for(const [dx,dy]of order){const p:P=[x+dx*pitch,y+dy*pitch],k=key(p);if(nodes.has(k)&&!dist.has(k)){dist.set(k,dist.get(key([x,y]))!+1);q.push(p);}}}if(!dist.has(key(start)))return null;const result=[start];while(!same(result.at(-1),target)){const [x,y]=result.at(-1)!,p=order.map(([dx,dy])=>[x+dx*pitch,y+dy*pitch]as P).find(a=>dist.get(key(a))===dist.get(key([x,y]))!-1);if(!p)return null;result.push(p);}return result;
 }
+export function configuredTrajectories(scene: ConfiguredScene, frames: readonly NativeRows[]): Map<number, [P[], number[]]> {
+ const tracks=new Map<number,[number,number,number][]>(scene.actors.map(([v])=>[v,[]]));
+ frames.map(configuredCrosses).forEach((poses,i)=>{for(const [v,x,y]of poses)tracks.get(v)?.push([i,x,y]);});
+ const realized=new Map<number,[P[],number[]]>(),[pitch,px,py]=scene.grid;
+ for (const [v,x,y] of scene.actors) {
+  const path:P[]=[],times:number[]=[];
+  const track=tracks.get(v)!;
+  let last:P|null=null;
+  for (const [i,a,b] of track) {
+   if (last&&Math.abs(a-last[0])+Math.abs(b-last[1])>pitch*2) break;
+   last=[a,b];
+   if (a%pitch===px&&b%pitch===py&&(!path.length||!same(path.at(-1),last))) {
+    path.push(last);
+    times.push(i);
+   }
+  }
+  if(path.length<3)continue;
+  const [lastX,lastY]=path.at(-1)!;
+  if(!path.some(p=>same(p,scene.target))&&Math.abs(lastX-scene.target[0])+Math.abs(lastY-scene.target[1])===pitch){
+   const ends=track.filter(([i,a,b])=>i>=times.at(-1)!&&Math.abs(a-lastX)+Math.abs(b-lastY)<=pitch&&(a!==x||b!==y)).map(([i])=>i);
+   path.push(scene.target);
+   times.push((ends.length?Math.max(...ends):times.at(-1)!)+1);
+  }
+  if(same(path.at(-1),scene.target))realized.set(v,[path,times]);
+ }
+ return realized;
+}
 export class ConfiguredArrivals implements NativeFamily<any>{readonly id='configured_arrivals';epoch:number|null=null;grid:[number,number,number]|null=null;launch:R|null=null;races=0;orders:P[][]=permute([[1,0],[-1,0],[0,1],[0,-1]]);toggle_pairs:[Patch,Patch][]=[];delays=new Map<string,number>();refs:string[]=[];events:R[]=[];tried=new Set<string>();goal_method=false;fit:R[]=[];
  readonly policy:R;constructor(policy:R=(frontierPolicy as R).configured_arrivals??{}){this.policy=policy;}
  current(rows:NativeRows){return configuredScene(rows,this.grid);}
@@ -43,8 +70,7 @@ export class ConfiguredArrivals implements NativeFamily<any>{readonly id='config
  record(before:R,after:R,command:R,first:NativeRows,second:NativeRows,proposal?:R,_index?:number,frames:readonly NativeRows[]=[]):any{
   this.events=[];this.reset(before.level_epoch);const s=this.current(first);if(!s)return {status:'configured_trace_domain_absent',events:[]};this.grid=s.grid;const packet=frames.length?frames:[second],owned=!!proposal?.support_plan?.configured_arrivals;
   if(command.action_ref==='ACTION6'&&owned){const p:P=[command.data.x,command.data.y],a=configuredPatch(first,p),b=configuredPatch(second,p);if(!same(a,b)){this.toggle_pairs.push(...configuredVariants(a,b),...configuredVariants(b,a));this.refs.push(after.observation_ref);this.events.push({kind:'configured_local_rewrite',before:before.observation_ref,after:after.observation_ref,point:p,independent_control:'provisional until other occurrences checked'});}else this.tried.add(JSON.stringify([before.level_epoch,p,digest(a)]));}
-  else if(packet.length>3){const tracks=new Map<number,[number,number,number][]>(s.actors.map(([v])=>[v,[]]));packet.map(configuredCrosses).forEach((poses,i)=>{for(const [v,x,y]of poses)tracks.get(v)?.push([i,x,y]);});const realized=new Map<number,[P[],number[]]>(),intervals:number[]=[],pitch=s.grid[0];
-   for(const [v,x,y]of s.actors){const path:P[]=[],times:number[]=[];let last:P|null=null;for(const [i,a,b]of tracks.get(v)!){if(last&&Math.abs(a-last[0])+Math.abs(b-last[1])>pitch*2)break;last=[a,b];if(a%pitch===s.grid[1]&&b%pitch===s.grid[2]&&(!path.length||!same(path.at(-1),[a,b]))){path.push([a,b]);times.push(i);}}if(path.length<3)continue;const tail=tracks.get(v)!.filter(([i,a,b])=>i>=times.at(-1)!&&Math.abs(a-path.at(-1)![0])+Math.abs(b-path.at(-1)![1])<=pitch);if(!path.some(p=>same(p,s.target))&&Math.abs(path.at(-1)![0]-s.target[0])+Math.abs(path.at(-1)![1]-s.target[1])===pitch){const ends=tail.filter(([_i,a,b])=>a!==x||b!==y).map(([i])=>i);path.push(s.target);times.push((ends.length?Math.max(...ends):times.at(-1)!)+1);}if(!same(path.at(-1),s.target))continue;intervals.push(...times.slice(1).map((b,i)=>b-times[i]!));realized.set(v,[path,times]);}
+  else if(packet.length>3){const realized=configuredTrajectories(s,packet),intervals=[...realized.values()].flatMap(([_path,times])=>times.slice(1).map((b,i)=>b-times[i]!)),pitch=s.grid[0];
    if(realized.size===s.actors.length){const base=common(intervals);if(base>0){this.launch=clone(command);this.races++;this.refs.push(after.observation_ref);const bindings=this.bindings(s),bound=new Set(bindings.map(([p])=>key(p))),nodes=this.nodes(s,bindings,bindings.map(()=>false));for(const p of s.candidates)if(!bound.has(key(p)))nodes.add(key(p));for(const [path]of realized.values())for(const p of path)nodes.add(key(p));const compatible=this.orders.filter(order=>s.actors.every(([v,x,y])=>same(configuredRoute(nodes,[x,y],s.target,order,pitch),realized.get(v)![0])));if(compatible.length)this.orders=compatible;
     for(const [path,times]of realized.values())for(let i=0;i<times.length-1;i++)if((times[i+1]!-times[i]!)%base===0)this.delays.set(key(path[i]!),(times[i+1]!-times[i]!)/base-1);const supported=new Map<string,number>();for(const [p,d]of this.delays)if(d>0)supported.set(JSON.stringify(configuredPatch(first,point(p)as P)),d);for(const p of s.candidates){const k=JSON.stringify(s.cells.get(key(p))!.patch);if(supported.has(k))this.delays.set(key(p),supported.get(k)!);}
     this.fit.push({epoch:before.level_epoch,compatible_orders:compatible.length,base_samples_per_cell:base,arrivals:Object.fromEntries([...realized].map(([v,[_path,times]])=>[v,times.at(-1)])),evidence:after.observation_ref});this.events.push({kind:'public_configured_arrival_packet',before:before.observation_ref,after:after.observation_ref,tracks:realized.size,compatible_route_orders:compatible.length,samples_per_cell:base,time_unit:'public stable-cell interval, not wall clock',target_status:'shared arrival candidate, simultaneity remains a goal hypothesis until score'});
