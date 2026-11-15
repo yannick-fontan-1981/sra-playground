@@ -645,7 +645,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === codeRouteId || family === verifyProgramConfigurationId)) {
-    for (const [field, label] of [['actor', 'Programmed piece'], ['target', 'Target cell'], ['addressed', 'Edited instruction or run control']] as const) {
+    for (const [field, label] of [['actor', 'Programmed piece'], ['target', 'Target cell'], ['addressed', 'Edited instruction or run control'],
+      ['demonstration', 'Separate demonstration area']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }

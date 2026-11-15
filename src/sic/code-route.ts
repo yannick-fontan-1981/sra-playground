@@ -3,6 +3,7 @@ import { ObservedInputDomain, projection } from '../logos-engine/v6-native-obser
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
+import { bindExamples, readDemonstration, type CodeExample } from './code-demonstration.ts';
 
 export const codeRouteId = 'sic_code_route';
 export const verifyProgramConfigurationId = 'sic_verify_program_configuration';
@@ -13,12 +14,13 @@ export const codeRouteStrategies = {
 } as const;
 
 type Scene = { origin: NativePoint; size: number; goal: NativePoint; allowed: NativePoint[]; columns: NativeBox[][];
-  bit_commands: NativeCommand[][]; values: number[]; execute: NativeCommand; button_box: NativeBox; button_hue: number };
+  bit_commands: NativeCommand[][]; values: number[]; execute: NativeCommand; button_box: NativeBox; button_hue: number;
+  mask: NativePoint[]; examples?: readonly CodeExample[] };
 type Effect = { motion: NativePoint; ref: string };
 type State = { epoch: number; scene: Scene; effects: Record<string, Effect>; rejected: string[]; runs: string[];
-  count: number; stopped: boolean; editRef?: string };
+  count: number; stopped: boolean; editRef?: string; examplesTried?: readonly number[] };
 type Proposal = NativeProposal & { local: State; program: CodeWord[]; start: NativePoint;
-  edit: CodeWord[] | null; run: string; needId: string };
+  edit: CodeWord[] | null; run: string; needId: string; example?: number };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2), Math.floor((t + b) / 2)];
 const cell = ([x, y]: NativePoint, { origin: [l, t], size }: Scene): NativeBox =>
@@ -89,7 +91,9 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...Object.values(local.effects).map(effect => effect.ref),
         ...(local.editRef ? [local.editRef] : [])])];
-      const ready = untried && !!wanted && column === -1, canObserve = untried && !wanted;
+      const exampleIndex = wanted ? -1 : scene.examples?.findIndex((_, index) => !local.examplesTried?.includes(index)) ?? -1;
+      const example = scene.examples?.[exampleIndex];
+      const ready = untried && !!wanted && column === -1, canObserve = !wanted && (untried || !!example);
       const phase = ready ? 'execute_verified_program' : editable ? 'edit_program_step' : canObserve ? 'observe_program_trace' : null;
       if (!phase) return null;
       const reuseEdit = editable && !!local.editRef;
@@ -99,16 +103,18 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = ready || reuseEdit ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
-      const label = codeRouteStrategies[phase], command = editable ? scene.bit_commands[column]![bit]! : scene.execute;
+      const label = example ? 'Compare the highlighted instruction with motion in the separate demonstrator' : codeRouteStrategies[phase];
+      const command = editable ? scene.bit_commands[column]![bit]! : example?.command ?? scene.execute;
       const parent = 'G_official_completion';
       const goal = { kind: 'program_motion_to_visible_target', scope: ref.split(':revision:', 1)[0]!, subjects: ['program_and_moving_piece'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_program_execution' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `code-route:${need.id}`, actions = [command];
       const edit = editable ? program.map((word, index) => index === column ? encodeCodeWord(decodeCodeWord(word) ^ weights[bit]!) : word) : null;
-      const addressed = editable ? scene.columns[column]![bit]! : scene.button_box;
+      const addressed = editable ? scene.columns[column]![bit]! : example?.box ?? scene.button_box;
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence });
       return { status: 'proposed', kind: verifyProgramConfigurationId, actions, local, program, start, edit, run, needId: need.id,
+        ...(example ? { example: exampleIndex } : {}),
         steps: [{ action: command, expected_after: null, point_binding: pointBinding }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -116,7 +122,7 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
           situation: facts },
         sicSituationCard: { strategy, need: 'Build a program that moves the piece to its target', mode,
           situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
-          actor: cell(start, scene), target: cell(scene.goal, scene), addressed },
+          actor: cell(start, scene), target: cell(scene.goal, scene), addressed, ...(example ? { demonstration: example.stage } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -130,6 +136,9 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.example !== undefined) {
+        return { matched: realProgramUnchanged(proposal, second), seal_prefix: true, reason: 'verify_demonstration_preserves_real_program' };
+      }
       const matched = proposal.edit ? editMatches(proposal, second) : null;
       return { matched, seal_prefix: true, reason: matched === null ? 'observe_program_trace'
         : matched ? 'program_edit_observed' : 'program_edit_contradicted' };
@@ -143,14 +152,19 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
         return { events: [] };
       }
       const effects = { ...local.effects }, rejected = new Set(local.rejected);
-      for (const { word, motion } of observedInstructions(proposal, frames)) {
+      const example = proposal.example === undefined ? undefined : local.scene.examples?.[proposal.example];
+      const isolated = !example || realProgramUnchanged(proposal, second) && frames.every(frame => realProgramUnchanged(proposal, frame));
+      const observed = example ? isolated ? readDemonstration(local.scene, example, frames) : [] : observedInstructions(proposal, frames);
+      for (const { word, motion } of observed) {
         if (rejected.has(word)) continue;
         if (effects[word] && !same(effects[word]!.motion, motion)) {
           rejected.add(word);
           delete effects[word];
         } else effects[word] = { motion, ref: after.observation_ref };
       }
-      state = { ...local, effects, rejected: [...rejected], runs: [...local.runs, run], count: local.count + 1 };
+      const history = proposal.example === undefined ? { runs: [...local.runs, run] }
+        : { examplesTried: [...local.examplesTried ?? [], proposal.example] };
+      state = { ...local, effects, rejected: [...rejected], ...history, count: local.count + 1 };
       return { events: [] };
     },
     state: () => ({ state }),
@@ -163,9 +177,14 @@ function findScene(observation: NativeObservation, rows: NativeRows) {
     const [x, y] = center(entity.bbox);
     return { action_ref: 'ACTION6', data: { x, y } };
   });
-  return measureCodeScene(observation, rows, clicks) as Scene | null;
+  const scene = measureCodeScene(observation, rows, clicks) as Scene | null;
+  return scene?.examples?.length ? { ...scene, examples: bindExamples(scene.examples, scene, observation) } : scene;
 }
 
 function editMatches({ local: { scene }, edit, start }: Proposal, rows: NativeRows) {
   return same(edit, codeBits(rows, scene)) && same(start, codePosition(rows, scene));
+}
+
+function realProgramUnchanged({ local: { scene }, program, start }: Proposal, rows: NativeRows) {
+  return same(program, codeBits(rows, scene)) && same(start, codePosition(rows, scene));
 }

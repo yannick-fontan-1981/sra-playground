@@ -433,6 +433,10 @@ Sur **WA30**, SIC réserve une caisse après deux déplacements conjoints avec u
 
 Le bilan atteint **53/100 niveaux 2** et **170/636 niveaux attestés sous SIC seul** (26,7 %).
 
+Sur **TN36**, SIC identifie les contrôles du démonstrateur séparé et vérifie que le programme et le mobile réels restent inchangés pendant chaque image des démonstrations. Les colonnes mises en évidence associent un premier mot complet à quatre translations vers la gauche et un second à quatre translations vers le haut. Le moteur calcule une suite de quatre montées pour rejoindre la cible, modifie les huit traits qui diffèrent puis lance le programme. Le niveau 2 gagne en **11 clics**. Les huit commandes et retours du niveau 1 restent identiques. Les 19 commandes sont sous autorité SIC avec l'empreinte `08f463e67efccdb7f63123ba76f5f259490866581d978af11ed99c7df5ca05e9`, également observée dans la variante historique où `sic_code_route` est déjà absente. Le retrait de `sic_verify_program_configuration` laisse le niveau 1 non résolu.
+
+Le bilan atteint **54/100 niveaux 2** et **171/636 niveaux attestés sous SIC seul** (26,9 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.
