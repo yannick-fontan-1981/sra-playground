@@ -24,6 +24,7 @@ import { visibleConfigurationCoverageId, visibleConfigurationStrategies } from '
 import { markedCompartmentFlowId, markedCompartmentStrategies } from './marked-compartment-flow.ts';
 import { observedRelayRouteId, observedRelayStrategies } from './observed-relay-route.ts';
 import { observedPrefixQuotasId, observedPrefixQuotaStrategies } from './observed-prefix-quotas.ts';
+import { observedCarrierReductionId, observedCarrierStrategies } from './observed-carrier-reduction.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -504,6 +505,7 @@ export function readNativeResolution(agent: {
     : family === markedCompartmentFlowId ? markedCompartmentStrategies
     : family === observedRelayRouteId ? observedRelayStrategies
     : family === observedPrefixQuotasId ? observedPrefixQuotaStrategies
+    : family === observedCarrierReductionId ? observedCarrierStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -648,6 +650,12 @@ export function readNativeResolution(agent: {
   if (situationCard && family === observedPrefixQuotasId) {
     const target = bounds(card?.target);
     if (target) subjects.push({ label: 'Cell selected to satisfy the visible quota', box: target });
+  }
+  if (situationCard && family === observedCarrierReductionId) {
+    for (const [field, label] of [['carrier', 'Measured carrier'], ['source', 'Piece chosen for the jump'], ['landing', 'Projected landing']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
   }
   if (situationCard && family === slotTransferId) {
     const source = bounds(card?.source), destination = bounds(card?.destination);
