@@ -629,4 +629,6 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 
 - **FITE** gagne le niveau 3 en **6 commandes** et **9,34 s**. SIC réutilise la grille et la relation entre le compteur visible et la progression officielle confirmée sur deux niveaux. Après chaque retour, P07 choisit une case ouverte en tenant compte de la proximité des autres pièces et des issues disponibles. Les 38 commandes et retours des niveaux 1 et 2 sont reproduits à l'identique et les 44 commandes du parcours relèvent de SIC. La permutation de palette conserve les commandes et leurs effets mesurés. Empreinte `5b203a5ed1627952ba6fb7c7c5ee4704d559d0288a4109e9a8a966ed202efcaf`.
 
-**39/100 niveaux 3** et **251/636 niveaux** sont attestés sous SIC seul, soit **39,5 %**.
+- **TN36** gagne le niveau 3 en **13 commandes** et **46,60 s** avec la vérification de la configuration du programme. Les 32 commandes du parcours continu relèvent de SIC. Empreinte `207b4f9af8ec1606b65cd8ddb28bb855424c032ee24912654a58e53b011937d3`.
+
+**40/100 niveaux 3** et **252/636 niveaux** sont attestés sous SIC seul, soit **39,6 %**.
