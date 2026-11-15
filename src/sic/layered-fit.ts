@@ -8,10 +8,13 @@ export const layeredFitId = 'sic_layered_fit';
 export const learnLayeredFitId = 'sic_learn_layered_fit';
 type Part = ReturnType<typeof geometricComponents>[number];
 type Pane = { color: number; box: NativeBox; points: NativePoint[] };
-type LayerRelation = { colors: number[]; mixed: number; learnedAt: number; evidence: string[] };
-type Scene = { panes: Pane[]; canvas: NativeBox; reference: NativeBox; mixed: number; empty: number; reuseRefs?: string[] };
+type Blend = { color: number; layers: number[] };
+type LayerRelation = { colors: number[]; mixed: number; learnedAt: number; evidence: string[]; motionStep?: number; blends?: Blend[] };
+type Scene = { panes: Pane[]; canvas: NativeBox; reference: NativeBox; mixed: number; empty: number; reuseRefs?: string[];
+  composite?: { step: number; possibilities: Blend[][] } };
 type Stage = 'select' | 'measure' | 'fit';
-type State = { epoch: number; scene: Scene; index: number; stage: Stage; marker: NativePoint | null; remaining: string[]; refs: string[]; failed: boolean };
+type State = { epoch: number; scene: Scene; index: number; stage: Stage; marker: NativePoint | null; remaining: string[]; refs: string[]; failed: boolean;
+  motionStep?: number };
 type Proposal = NativeProposal & { local: State; pane: Pane; stage: Stage; delta: NativePoint | null; marker: NativePoint | null; needId: string };
 
 const dirs = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
@@ -60,7 +63,7 @@ function initial(rows: NativeRows, relation?: LayerRelation): Scene | null {
   const current = colorsIn(rows, canvas);
   if (current.size !== 1) return null;
   const empty = [...current.keys()][0]!;
-  const reuse = relation && target.has(relation.mixed) && relation.mixed !== empty && !relation.colors.includes(empty)
+  const reuse = relation?.colors.length === 2 && target.has(relation.mixed) && relation.mixed !== empty && !relation.colors.includes(empty)
     && [...target.keys()].every(color => color === empty || color === relation.mixed || relation.colors.includes(color))
     ? relation : null;
   if (!reuse && (target.size !== 4 || !target.has(empty))) return null;
@@ -98,10 +101,6 @@ function fitPane(rows: NativeRows, pane: Pane, scene: Scene, [dx, dy]: NativePoi
   const known = colorsIn(rows, area);
   const translated = [...(known.get(pane.color) ?? []), ...(known.get(scene.mixed) ?? [])];
   const absolute = [...new Map([...pane.points.map(([x, y]): NativePoint => [x + dx, y + dy]), ...translated].map(p => [key(p), p])).values()];
-  let x = Infinity, y = Infinity;
-  for (const p of absolute) { x = Math.min(x, p[0]); y = Math.min(y, p[1]); }
-  if (!Number.isFinite(x) || absolute.length > 1200) return null;
-  let shape = absolute.map(([a, b]): NativePoint => [a - x, b - y]);
   const target = new Set<string>(), reference = colorsIn(rows, scene.reference);
   for (const color of [pane.color, scene.mixed]) {
     for (const [a, b] of reference.get(color) ?? []) {
@@ -109,14 +108,22 @@ function fitPane(rows: NativeRows, pane: Pane, scene: Scene, [dx, dy]: NativePoi
     }
   }
   const pitch = Math.abs(dx) + Math.abs(dy);
+  return fitProjection(absolute, target, scene.canvas, pitch);
+}
+
+function fitProjection(absolute: NativePoint[], target: ReadonlySet<string>, canvas: NativeBox, pitch: number) {
+  let x = Infinity, y = Infinity;
+  for (const p of absolute) { x = Math.min(x, p[0]); y = Math.min(y, p[1]); }
+  if (!Number.isFinite(x) || absolute.length > 1200 || pitch < 1) return null;
+  let shape = absolute.map(([a, b]): NativePoint => [a - x, b - y]);
   let best: string[] | null = null;
   for (let turn = 0; turn < 4; turn++) {
     for (let row = -12; row <= 12; row++) for (let col = -12; col <= 12; col++) {
       const length = turn + Math.abs(row) + Math.abs(col);
       if (best && best.length <= length) continue;
       const origin: NativePoint = [x + col * pitch, y + row * pitch];
-      if (origin[0] > scene.canvas[2] || origin[1] > scene.canvas[3]) continue;
-      const cut = shape.map(([a, b]): NativePoint => [a + origin[0], b + origin[1]]).filter(p => inside(scene.canvas, p));
+      if (origin[0] > canvas[2] || origin[1] > canvas[3]) continue;
+      const cut = shape.map(([a, b]): NativePoint => [a + origin[0], b + origin[1]]).filter(p => inside(canvas, p));
       if (cut.length !== target.size || cut.some(p => !target.has(key(p)))) continue;
       best = [...Array<string>(Math.abs(row)).fill(row < 0 ? 'ACTION1' : 'ACTION2'),
         ...Array<string>(Math.abs(col)).fill(col < 0 ? 'ACTION3' : 'ACTION4'), ...Array<string>(turn).fill('ACTION5')];
@@ -139,6 +146,125 @@ function paneMatches(rows: NativeRows, scene: Scene, pane: Pane, marker: NativeP
   return wanted.size === actual.size && [...wanted].every(p => actual.has(p));
 }
 
+function bounds(points: NativePoint[]): NativeBox {
+  return [Math.min(...points.map(p => p[0])), Math.min(...points.map(p => p[1])),
+    Math.max(...points.map(p => p[0])), Math.max(...points.map(p => p[1]))];
+}
+
+const workArea = (rows: NativeRows, reference: NativeBox): NativeBox => [0, 0, rows[0]!.length - 1, reference[1] - 2];
+const clipped = (pane: Pane, area: NativeBox) => pane.box.some((edge, index) => edge === area[index]);
+
+function targetLayer(reference: Map<number, NativePoint[]>, scene: Scene, palette: readonly number[]) {
+  return new Set(palette.flatMap(color => (reference.get(color) ?? [])
+    .map(([x, y]) => key([x - scene.reference[0] + scene.canvas[0], y - scene.reference[1] + scene.canvas[1]]))));
+}
+
+const layerPalette = (pane: Pane, blends: readonly Blend[]) =>
+  [pane.color, ...blends.filter(blend => blend.layers.includes(pane.color)).map(blend => blend.color)];
+
+function initialComposite(rows: NativeRows, relation: LayerRelation | undefined): Scene | null {
+  const step = relation?.motionStep;
+  if (!relation || !step) return null;
+  const parts = geometricComponents(rows), frames = findFrames(parts, rows);
+  if (frames.length !== 2) return null;
+  const canvas = inset(frames[0]!), reference = inset(frames[1]!);
+  if (canvas[3] >= reference[1]) return null;
+  const area = workArea(rows, reference), field = colorsIn(rows, area), target = colorsIn(rows, reference);
+  const empty = [...field].sort((a, b) => b[1].length - a[1].length)[0]?.[0];
+  if (empty === undefined || !target.has(empty) || relation.colors.includes(empty)) return null;
+  const known = relation.blends ?? [{ color: relation.mixed, layers: relation.colors }];
+  const primaries = [...new Set([...relation.colors, ...[...target.keys()].filter(color => color !== empty
+    && !known.some(blend => blend.color === color) && (field.get(color)?.length ?? 0) > width(canvas) * height(canvas))])];
+  if (primaries.length !== 3 || primaries.some(color => !(field.get(color)?.length))) return null;
+  const panes = primaries.map(color => ({ color, points: field.get(color)!, box: bounds(field.get(color)!) }))
+    .sort((a, b) => Number(clipped(a, area)) - Number(clipped(b, area)));
+  const scene: Scene = { panes, canvas, reference, empty, mixed: relation.mixed, reuseRefs: relation.evidence };
+  const unknown = [...target.keys()].filter(color => color !== empty && !primaries.includes(color)
+    && !known.some(blend => blend.color === color));
+  const masks = Array.from({ length: 1 << primaries.length }, (_, mask) => primaries.filter((_, i) => mask & (1 << i)))
+    .filter(layers => layers.length > 1 && !known.some(blend => blend.layers.length === layers.length
+      && layers.every(layer => blend.layers.includes(layer))));
+  if (unknown.length > masks.length) return null;
+  let possibilities = [known];
+  for (const color of unknown) possibilities = possibilities.flatMap(blends => masks
+    .filter(layers => !blends.some(blend => blend.layers === layers)).map(layers => [...blends, { color, layers }]));
+  const compatible = possibilities.filter(blends => panes.every(pane => {
+    if (clipped(pane, area)) return true;
+    const palette = layerPalette(pane, blends), points = palette.flatMap(color => field.get(color) ?? []);
+    const wanted = targetLayer(target, scene, palette);
+    return wanted.size > 0 && fitProjection(points, wanted, canvas, step) !== null;
+  }));
+  if (!compatible.length) return null;
+  return { ...scene, composite: { step, possibilities: compatible } };
+}
+
+function unchangedLayers(first: NativeRows, second: NativeRows, scene: Scene, moved: Pane, blends: readonly Blend[]) {
+  const membership = new Map<number, number>([[scene.empty, 0]]);
+  scene.panes.forEach((pane, i) => membership.set(pane.color, 1 << i));
+  for (const blend of blends) membership.set(blend.color, blend.layers.reduce((mask, color) => mask | membership.get(color)!, 0));
+  const moving = membership.get(moved.color)!;
+  const bottom = workArea(second, scene.reference)[3];
+  for (let y = 0; y <= bottom; y++) for (let x = 0; x < second[y]!.length; x++) {
+    const a = membership.get(first[y]![x]!), b = membership.get(second[y]![x]!);
+    if (a !== undefined && b !== undefined && ((a ^ b) & ~moving)) return false;
+  }
+  return true;
+}
+
+function planComposite(first: NativeRows, second: NativeRows, local: State, pane: Pane, marker: NativePoint, delta?: NativePoint): State {
+  const { scene } = local, { step, possibilities } = scene.composite!;
+  const current = colorsIn(delta ? second : first, workArea(first, scene.reference));
+  const ref = colorsIn(second, scene.reference);
+  const plans = possibilities.flatMap(blends => {
+    if (delta && !unchangedLayers(first, second, scene, pane, blends)) return [];
+    const palette = layerPalette(pane, blends);
+    const moved = delta ? pane.points.map(([x, y]): NativePoint => [x + delta[0], y + delta[1]]) : [];
+    const recovered = [...new Map([...moved, ...palette.flatMap(color => current.get(color) ?? [])].map(p => [key(p), p])).values()];
+    const wanted = targetLayer(ref, scene, palette);
+    const route = wanted.size ? fitProjection(recovered, wanted, scene.canvas, step) : null;
+    return route ? [{ blends, route }] : [];
+  });
+  const remaining = plans[0]?.route;
+  if (!remaining || plans.some(plan => plan.route.join(',') !== remaining.join(','))) return { ...local, failed: true };
+  const fitted = { ...scene, composite: { step, possibilities: plans.map(plan => plan.blends) } };
+  return remaining.length
+    ? { ...local, scene: fitted, stage: 'fit', remaining, marker }
+    : { ...local, scene: fitted, index: local.index + 1, stage: 'select', remaining, marker: null };
+}
+
+function observeComposite(first: NativeRows, second: NativeRows, proposal: Pick<Proposal, 'local' | 'pane' | 'marker' | 'stage'>): State {
+  const { local, pane, marker, stage } = proposal, { scene } = local;
+  const { step, possibilities } = scene.composite!;
+  if (stage === 'select') {
+    const selection = selectionMarker(first, second, pane, scene);
+    if (!selection) return { ...local, failed: true };
+    return clipped(pane, workArea(first, scene.reference))
+      ? { ...local, stage: 'measure', marker: selection }
+      : planComposite(first, second, local, pane, selection);
+  }
+  if (stage === 'measure' && marker) {
+    const [, dx, dy] = firstDirection(pane, scene), delta = markerDisplacement(first, second, marker, [dx, dy], step);
+    return delta ? planComposite(first, second, local, pane, [marker[0] + delta[0], marker[1] + delta[1]], delta)
+      : { ...local, failed: true };
+  }
+  const field = colorsIn(second, scene.canvas), ref = colorsIn(second, scene.reference);
+  const markerColor = marker ? first[marker[1]]?.[marker[0]] : undefined;
+  const marks = markerColor === undefined ? [] : colorsIn(second, workArea(second, scene.reference)).get(markerColor) ?? [];
+  const visibleMarker = marks.length === 1 ? marks[0]! : null;
+  const remaining = local.remaining.slice(1), limit = local.index + Number(!remaining.length);
+  const consistent = possibilities.filter(blends => unchangedLayers(first, second, scene, pane, blends)
+    && scene.panes.slice(0, limit).every(settled => {
+      const palette = layerPalette(settled, blends), target = targetLayer(ref, scene, palette);
+      const actual = new Set(palette.flatMap(color => (field.get(color) ?? []).map(key)));
+      if (visibleMarker) { actual.delete(key(visibleMarker)); target.delete(key(visibleMarker)); }
+      return target.size === actual.size && [...target].every(point => actual.has(point));
+    }));
+  const failed = !consistent.length || first.every((row, y) => row.every((color, x) => color === second[y]?.[x]));
+  return { ...local, scene: { ...scene, composite: { step, possibilities: consistent } }, failed,
+    index: remaining.length ? local.index : local.index + Number(!failed), stage: remaining.length ? 'fit' : 'select',
+    remaining, marker: remaining.length ? visibleMarker : null };
+}
+
 export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposal> {
   const learns = family === learnLayeredFitId;
   let memory: State | null = null;
@@ -152,7 +278,7 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
       const marker = learns && !prior ? execution?.readClickMarker?.() : null;
       const click = marker?.afterRef === observation.observation_ref && marker.levelEpoch === observation.level_epoch ? marker : null;
       if (learns && !prior && !preceding && !click) return null;
-      const scene = prior?.scene ?? initial(rows, preceding);
+      const scene = prior?.scene ?? initial(rows, preceding) ?? initialComposite(rows, preceding);
       if (!scene || prior?.failed) return null;
       if (learns && !prior && !scene.reuseRefs && !click) return null;
       if (click && (!inside(scene.panes[0]!.box, click.point) || !inside(scene.panes[0]!.box, click.marker)
@@ -181,7 +307,9 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
         parentObjective: parent, satisfactionContract: 'visible_color_layer_matches_reference' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = family + ':' + need.id;
-      const situation = local.stage === 'select' ? scene.reuseRefs
+      const situation = local.stage === 'select' ? scene.composite
+        ? 'Select the next pane while preserving the layers already aligned to the reference'
+        : scene.reuseRefs
         ? 'Both layers are visible again. Reuse the confirmed overlap rule and measure this layer in the new layout'
         : 'Select the visible pane and locate its selection marker'
         : local.stage === 'measure' ? 'Measure one translation and recover the portion hidden at the edge'
@@ -215,10 +343,15 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
     },
     record(before, after, _action, first, second, proposal) {
       if (after.levels_completed > before.levels_completed) {
-        const { panes, mixed } = proposal.local.scene;
+        const { panes, mixed, composite } = proposal.local.scene;
+        const step = composite?.step ?? proposal.local.motionStep;
+        const blends = composite?.possibilities[0]?.filter(blend => composite.possibilities.every(choice => choice.some(candidate =>
+          candidate.color === blend.color && candidate.layers.length === blend.layers.length
+          && blend.layers.every(layer => candidate.layers.includes(layer)))));
         relation = { colors: panes.map(pane => pane.color), mixed, learnedAt: before.level_epoch,
-          evidence: [before.observation_ref, after.observation_ref] };
-        return { events: [], reviewEvidence: 'Official advancement confirmed the fit of the two overlapping layers.' };
+          evidence: [before.observation_ref, after.observation_ref], ...(step ? { motionStep: step } : {}), ...(blends ? { blends } : {}) };
+        return { events: [], reviewEvidence: composite ? 'Official advancement confirmed the fit of the composed layers.'
+          : 'Official advancement confirmed the fit of the two overlapping layers.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const next = observeReturn(first, second, proposal);
@@ -234,6 +367,7 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
 }
 
 function observeReturn(first: NativeRows, second: NativeRows, { local, pane, stage, marker }: Proposal): State {
+  if (local.scene.composite) return observeComposite(first, second, { local, pane, stage, marker });
   if (stage === 'select') {
     const next = selectionMarker(first, second, pane, local.scene);
     return { ...local, stage: 'measure', marker: next, failed: !next };
@@ -243,7 +377,7 @@ function observeReturn(first: NativeRows, second: NativeRows, { local, pane, sta
     const delta = markerDisplacement(first, second, marker, [dx, dy], 12);
     const fit = delta && fitPane(second, pane, local.scene, delta);
     return { ...local, stage: 'fit', marker: delta ? [marker[0] + delta[0], marker[1] + delta[1]] : null,
-      remaining: fit ?? [], failed: !fit?.length };
+      remaining: fit ?? [], failed: !fit?.length, ...(delta ? { motionStep: Math.abs(delta[0]) + Math.abs(delta[1]) } : {}) };
   }
   const remaining = local.remaining.slice(1);
   const markerColor = marker ? first[marker[1]]?.[marker[0]] : undefined;
@@ -257,7 +391,8 @@ function observeReturn(first: NativeRows, second: NativeRows, { local, pane, sta
 function selectionMarker(first: NativeRows, rows: NativeRows, pane: Pane, scene: Scene): NativePoint | null {
   const point = singleChangedPoint(first, rows);
   if (point) return point;
-  const palette = new Set([scene.empty, scene.mixed, ...scene.panes.map(p => p.color)]);
+  const palette = new Set([scene.empty, scene.mixed, ...scene.panes.map(p => p.color),
+    ...(scene.composite?.possibilities.flatMap(blends => blends.map(blend => blend.color)) ?? [])]);
   const candidates = geometricComponents(rows).filter(p => p.area === 1 && !palette.has(p.color)
     && inside(pane.box, mid(p.bbox)) && first[p.bbox[1]]?.[p.bbox[0]] !== p.color);
   return candidates.length === 1 ? mid(candidates[0]!.bbox) : null;
