@@ -535,3 +535,15 @@ La palette permutée et le nom neutralisé conservent ces trois gains. Désactiv
 CATR `cc5a59b1ed6864bd002cdd0c32c24e3fcf405e27cc02b79ab06baaf6d91c3fed`. CONN `3b762dc9ae12072003f117e92150edf379a983f187b94d41faab32fe6044eb33`. UPST `cc8c0a6a86de9cacfffbf225243b69a10b29fc842d8d917c5180d1a939bf7068`.
 
 Sur `57678993`, les **58/100 retraits gagnants** totalisent 705 commandes SIC seul. Le rejeu vérifie les 55 trajectoires gagnantes précédentes après retrait. Les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait conservent leurs commandes et retours de référence.
+
+### Comparer les directions à partir de leurs retours
+
+Avec l’exploration publique retirée, la même carte remporte **SEQN en quatre commandes, GRAV et COMB en cinq chacun, ONDE en deux et FITE en dix-huit**. Elle réévalue les commandes disponibles pour chaque état, donne la priorité aux essais inédits et diffère la direction inverse après un changement de plateau. Si un retour déjà mesuré mène à un état où un essai reste ouvert, P07 peut y revenir. Dans ces cinq parcours, P05 choisit les essais directionnels. Sur FITE, la famille d’accès par glissement fournit aussi deux commandes.
+
+Les mêmes cinq jeux gagnent avec palette permutée et nom neutralisé. Désactiver P05 après le premier essai laisse chaque niveau ouvert à la décision suivante. POLA et ELAS conservent leurs commandes et leurs retours de référence après retrait.
+
+### Vérifier une vue qui change et un échantillon qui reste stable
+
+Sur **REWI**, le registre et l’agenda remplacent l’ancien sélecteur `sic_framed_search` par `sic_follow_stable_reference`. Le fournisseur TypeScript mesure la grande vue, le petit échantillon et les correspondances exactes. Après un premier essai P05, le retour établit que la vue a changé et que l’échantillon est resté identique. La carte SRC autorise P02 pour répéter la direction et vérifie ces deux effets au retour. Une unique correspondance devient ensuite une cible P05.
+
+Le jeu gagne en trois commandes et reproduit l’empreinte `9a758416241620fd41236df69fbde31454b3b418d370b8159e8f6a1ce34b2c52`. Le nom neutralisé et la palette permutée conservent le gain. Désactiver P02 après le premier retour transfère la deuxième commande à la famille d’accès par glissement. Cette famille choisit la même direction dans cet essai et le parcours reste gagnant.

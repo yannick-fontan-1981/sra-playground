@@ -40,7 +40,7 @@ import { carryToFrameId, carryToFrameStrategies, learnCarryToFrameId } from './c
 import { learnPortPairingId, portPairingId, portPairingCardStrategies } from './port-pairing.ts';
 import { contrastControlsId, contrastControlsStrategies, contrastProbeId } from './contrast-controls.ts';
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
-import { framedSearchId, framedSearchStrategies } from './framed-search.ts';
+import { framedSearchId, framedSearchStrategies, stableReferenceId, stableReferenceStrategies } from './framed-search.ts';
 import { framedReceptionId, framedReceptionStrategies, learnFramedReceptionId } from './framed-reception.ts';
 import { windowRelationId, windowRelationStrategies } from './window-relation.ts';
 import { animationContactId, animationContactStrategies, learnAnimationContactId } from './animation-contact.ts';
@@ -477,6 +477,7 @@ export function readNativeResolution(agent: {
     : family === publicInputExplorationId ? publicInputStrategies
     : family === recheckDirectionalControlsId ? recheckDirectionalControlsStrategies
     : family === trialRepeatedLinearControlsId ? trialRepeatedLinearControlsStrategies
+    : family === stableReferenceId ? stableReferenceStrategies
     : family === compareAvailableControlsId ? compareAvailableControlsStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId ? inventoryAccessStrategies
     : family === framedContactId ? framedContactStrategies : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
@@ -1028,7 +1029,7 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label, box });
     }
   }
-  if (situationCard && family === framedSearchId) {
+  if (situationCard && (family === framedSearchId || family === stableReferenceId)) {
     for (const [field, label] of [['reference', 'Framed sample'], ['view', 'Area searched'], ['match', 'Exact match']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

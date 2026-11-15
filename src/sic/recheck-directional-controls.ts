@@ -12,16 +12,16 @@ export const recheckDirectionalControlsStrategies = {
 
 type State = {
   epoch: number;
+  tested: number;
   transitions: ObservedCommandGraph;
   options: Record<string, string[]>;
   activation: { remaining: number; evidence: string[] } | null;
   lastChange: { action: string; destination: string; evidence: string } | null;
-  stopped: boolean;
 };
 type Proposal = NativeProposal & { source: string; candidates: string[]; directions: string[];
-  stage: 'direction' | 'activation' | 'recheck'; expected?: string; needId: string };
+  stage: 'compare' | 'activation' | 'recheck'; expected?: string; needId: string };
 
-const initialize = (epoch: number): State => ({ epoch, transitions: {}, options: {}, activation: null, lastChange: null, stopped: false });
+const initialize = (epoch: number): State => ({ epoch, tested: 0, transitions: {}, options: {}, activation: null, lastChange: null });
 
 export function createSicRecheckDirectionalControls(): NativeFamily<Proposal> {
   let state: State | null = null;
@@ -33,27 +33,25 @@ export function createSicRecheckDirectionalControls(): NativeFamily<Proposal> {
     },
     async propose(observation, _rows, inputs, remaining, execution) {
       const local = state?.epoch === observation.level_epoch ? state : initialize(observation.level_epoch);
-      if (local.stopped || remaining < 1 || !observation.available_action_refs.includes('ACTION5')) return null;
+      const budget = Math.min(remaining, 40 - local.tested, local.activation?.remaining ?? 40);
+      if (budget < 1) return null;
       const candidates = inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref));
       const keys = candidates.map(command => command.action_ref);
       const directions = keys.filter(action => action !== 'ACTION5');
       if (directions.length < 2) return null;
 
       const source = observedCommandState(observation);
-      const outgoing = local.transitions[source] ?? [];
       const lastChange = local.lastChange?.destination === source ? local.lastChange : null;
-      const frontier = local.activation && local.activation.remaining > 0
-        ? observedCommandFrontier(local.transitions, source, keys, Math.min(remaining, local.activation.remaining),
-          board => board === source ? keys : local.options[board] ?? [], lastChange ? oppositeDirection[lastChange.action] : undefined)
-        : null;
-      const untested = !local.activation ? directions.find(action => !outgoing.some(edge => edge.action === action)) : undefined;
-      const stationary = !local.activation && !untested ? stationaryDirectionalEvidence(local.transitions, source, directions) : null;
-      const input = frontier?.action ?? untested ?? (stationary ? 'ACTION5' : null);
+      const frontier = observedCommandFrontier(local.transitions, source, keys, budget,
+        board => board === source ? keys : local.options[board] ?? [], lastChange ? oppositeDirection[lastChange.action] : undefined);
+      const input = frontier?.action;
       const command = candidates.find(candidate => candidate.action_ref === input);
-      if (!command || !input) return null;
+      if (!frontier || !command) return null;
+      const stationary = !local.activation && input === 'ACTION5'
+        ? stationaryDirectionalEvidence(local.transitions, source, directions) : null;
 
       const mode = execution?.reasoningMode ?? 'exploration';
-      const routeSupported = !!frontier?.first;
+      const routeSupported = !!frontier.first;
       const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = routeSupported ? 'P07' : 'P05';
@@ -61,17 +59,17 @@ export function createSicRecheckDirectionalControls(): NativeFamily<Proposal> {
 
       const ref = observation.observation_ref;
       const evidence = [...new Set([ref, ...(stationary ?? local.activation?.evidence ?? []),
-        ...(frontier?.first ? [frontier.first.evidence] : []), ...(lastChange ? [lastChange.evidence] : [])])];
-      const stage = local.activation ? 'recheck' : input === 'ACTION5' ? 'activation' : 'direction';
-      const situation = stage === 'activation' ? 'The directions left the board unchanged. Test the remaining control.'
+        ...(frontier.first ? [frontier.first.evidence] : []), ...(lastChange ? [lastChange.evidence] : [])])];
+      const stage = local.activation ? 'recheck' : stationary ? 'activation' : 'compare';
+      const situation = stage === 'activation' ? 'The tested directions left the board unchanged. Try the alternate key.'
         : stage === 'recheck' ? 'The visible interface changed. Compare the directional controls in this state.'
-          : 'Measure the direction in the current interface.';
+          : recheckDirectionalControlsStrategies[strategy];
       const parent = 'G_official_completion';
-      const goal = { kind: 'verify_controls_after_interface_change', scope: ref.split(':revision:', 1)[0]!,
-        subjects: [...directions, 'ACTION5'], parentObjective: parent, satisfactionContract: 'observe_the_current_control_effect' };
+      const goal = { kind: 'compare_current_directional_controls', scope: ref.split(':revision:', 1)[0]!,
+        subjects: keys, parentObjective: parent, satisfactionContract: 'observe_the_current_control_effect' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = 'recheck-directions:' + need.id;
-      const actions = [command], expected = frontier?.first?.destination;
+      const actions = [command], expected = frontier.first?.destination;
       return {
         status: 'proposed', kind: recheckDirectionalControlsId, stage, source, candidates: keys, directions,
         ...(expected ? { expected } : {}), actions, needId: need.id,
@@ -105,12 +103,11 @@ export function createSicRecheckDirectionalControls(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = state?.epoch === before.level_epoch ? state : initialize(before.level_epoch);
       const destination = observedCommandState(after), changed = destination !== proposal.source;
+      local.tested++;
       local.options[proposal.source] = proposal.candidates;
-      if (proposal.stage === 'direction') local.stopped = changed;
       if (proposal.stage === 'activation') {
         const previous = stationaryDirectionalEvidence(local.transitions, proposal.source, proposal.directions);
         if (changed && previous) local.activation = { remaining: proposal.directions.length * 3, evidence: [...previous, after.observation_ref] };
-        else local.stopped = true;
       }
       if (local.activation && proposal.stage === 'recheck') local.activation.remaining--;
       rememberCommandReturn(local.transitions, proposal.source, destination, command.action_ref, after.observation_ref);
@@ -119,6 +116,12 @@ export function createSicRecheckDirectionalControls(): NativeFamily<Proposal> {
       return { events: [] };
     },
     state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    restore(value: NativeRecord) {
+      const restored = structuredClone(value.state as State | null);
+      if (restored && !Number.isInteger(restored.tested)) {
+        restored.tested = Object.values(restored.transitions).reduce((count, edges) => count + edges.length, 0);
+      }
+      state = restored;
+    },
   };
 }
