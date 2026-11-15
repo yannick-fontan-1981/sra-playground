@@ -779,7 +779,7 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === directionalReceptionId || family === learnDirectionalReceptionId)) {
-    for (const [field, label] of [['actor', 'Controlled body'], ['dial', 'Orientation control']] as const) {
+    for (const [field, label] of [['actor', 'Controlled body'], ['dial', 'Orientation control'], ['landing', 'Expected piece position']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }

@@ -503,7 +503,9 @@ Sur **CAVA**, SIC réutilise la géométrie des sauts et relit le nouveau quadri
 
 Sur **MOTO**, SIC réutilise le lancement vérifié au niveau 1 et recalcule les placements pour la nouvelle piste. Un essai hors agent a isolé l’effet d’un déplacement d’un plot. Le tracé sans portion droite entre deux virages échoue, tandis que la variante avec une séparation gagne. SIC vérifie aussi les trois coins visibles du repère de sélection lorsque le quatrième est masqué par un autre plot. Le niveau 2 gagne en **7 commandes** et **18,01 s**. Les six commandes et retours du niveau 1 sont reproduits exactement. Les 13 commandes relèvent de SIC, et la permutation de palette conserve le trajet. Empreinte `5789d17b2dffbd1ba7f787e0e4ce7a4f59cbf675221328a99db4de1c42e53730`.
 
-Le bilan atteint **75/100 niveaux 2** et **192/636 niveaux attestés sous SIC seul** (30,2 %).
+Sur **CWSE**, SIC réutilise les commandes de déplacement observées au niveau 1. Dans le premier tableau du niveau 2, la pièce suit le curseur en conservant sa couleur et le même écart. Dans le second, le cadran oriente le faisceau vers le récepteur. Le retour confirme que la pièce avance et prend la couleur demandée tandis que le curseur reste immobile. SIC donne alors un tour de plus au faisceau. Le niveau 2 gagne en **5 commandes** et **3,87 s**. Les quatre commandes et retours du niveau 1 sont reproduits exactement. Les neuf commandes relèvent de SIC, et la permutation de palette conserve le trajet. Empreinte `a08fb4ad9dccf7c0379534e8c47eb9c58d01eb6597c3476ea9516d19fd58bb76`.
+
+Le bilan atteint **76/100 niveaux 2** et **193/636 niveaux attestés sous SIC seul** (30,3 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 

@@ -13,6 +13,9 @@ export const directionalReceptionStrategies = {
   measure_reception_displacement: 'Measure a direction that could move the pieces toward their receivers',
   approach_reception_slots: 'Use the measured displacement toward the matching receivers',
   orient_toward_mismatched_piece: 'Point the orientation control toward the mismatched piece',
+  move_with_adjacent_piece: 'Check that the adjacent piece follows without entering the beam',
+  orient_to_move_piece: 'Point the beam along the path from the piece to its receiver',
+  continue_verified_illumination: 'Use another turn of the verified beam while the cursor stays still',
 } as const;
 const graph = compileStrategyGraph({ id: 'align_piece_and_receiver_state', version: 1, order: 'FALLBACK',
   priorities: ['orient_toward_mismatched_piece', 'approach_reception_slots', 'measure_reception_displacement'],
@@ -27,14 +30,19 @@ type Dial = { point: NativePoint; vector: NativePoint; active: boolean };
 type Scene = { origin: NativePoint; size: NativePoint; pitch: number; actor: NativePoint; bodies: Site[]; slots: Site[];
   walls: NativePoint[]; dial: Dial[]; layout: string };
 type State = { epoch: number; layout: string; directions: Record<string, NativePoint>; coupled: number[]; tried: string[];
-  evidence: string[]; count: number };
-type Choice = { command: NativeCommand; target?: Site; dial?: Dial };
+  evidence: string[]; count: number; beam?: { at: NativePoint; actor: NativePoint; direction: NativePoint } };
+type LearnedControls = { completed: number; pitch: number; directions: Record<string, NativePoint>; ref: string };
+type Effect = { kind: 'follow' | 'orient' | 'continue'; actor: NativePoint; body: Site; receiver: Site; direction: NativePoint };
+type Choice = { command: NativeCommand; target?: Site; dial?: Dial; effect?: Effect };
 type Proposal = NativeProposal & { local: State; scene: Scene; choice: Choice; attempt: string; needId: string };
 const hints: Readonly<Record<string, NativePoint>> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const plus = (a: NativePoint, b: NativePoint): NativePoint => [a[0] + b[0], a[1] + b[1]];
 const minus = (a: NativePoint, b: NativePoint): NativePoint => [a[0] - b[0], a[1] - b[1]];
 const command = (action_ref: string): Choice => ({ command: { action_ref, data: {} } });
+const length = ([x, y]: NativePoint) => Math.abs(x) + Math.abs(y);
+const directionOf = ([x, y]: NativePoint): NativePoint => [Math.sign(x), Math.sign(y)];
+const alongAxis = ([x, y]: NativePoint) => (x === 0) !== (y === 0);
 function cellBox({ origin, pitch }: Scene, [x, y]: NativePoint): NativeBox {
   const left = origin[0] + x * pitch, top = origin[1] + y * pitch;
   return [left, top, left + pitch - 1, top + pitch - 1];
@@ -43,9 +51,48 @@ function pointScore(vector: NativePoint, direction: NativePoint) {
   return (vector[0] * direction[0] + vector[1] * direction[1]) / Math.hypot(...vector);
 }
 
+function chooseObservedEffect(scene: Scene, state: State, allowed: readonly string[]): Choice | null {
+  if (scene.bodies.length !== 1 || scene.slots.length !== 1) return null;
+  const body = scene.bodies[0]!, receiver = scene.slots[0]!, lamp = scene.dial.find(control => control.active);
+  if (!lamp) return null;
+  const bearing = minus(body.pos, scene.actor), needs = minus(receiver.pos, body.pos);
+  if (!alongAxis(needs)) return null;
+  const direction = directionOf(needs);
+  const available = ([x, y]: NativePoint) => x >= 0 && y >= 0 && x < scene.size[0] && y < scene.size[1]
+    && !scene.walls.some(wall => same(wall, [x, y]));
+  const landing = plus(body.pos, direction);
+  if (!available(landing)) return null;
+  if (body.color === receiver.color && length(bearing) === 1
+    && bearing[0] * direction[0] + bearing[1] * direction[1] === 0
+    && !same(directionOf(lamp.vector), bearing)) {
+    const actor = plus(scene.actor, direction);
+    const action = allowed.find(key => state.directions[key] && same(state.directions[key]!, direction))
+      ?? allowed.find(key => hints[key] && same(hints[key]!, direction));
+    return action && available(actor) ? { ...command(action), target: body,
+      effect: { kind: 'follow', actor, body: { pos: landing, color: body.color }, receiver, direction } } : null;
+  }
+  if (!alongAxis(bearing) || !same(directionOf(bearing), direction)) return null;
+  // The cursor stays still; only the lit object is predicted to move.
+  const effect = { actor: scene.actor, body: { pos: landing, color: receiver.color }, receiver, direction };
+  if (body.color !== receiver.color) {
+    const dial = scene.dial.find(control => !control.active && same(directionOf(control.vector), direction));
+    return dial ? { command: { action_ref: 'ACTION6', data: { x: dial.point[0], y: dial.point[1] } }, target: body, dial,
+      effect: { ...effect, kind: 'orient' } } : null;
+  }
+  return state.beam && same(state.beam.at, body.pos) && same(state.beam.actor, scene.actor)
+    && same(state.beam.direction, direction) && same(directionOf(lamp.vector), direction) && allowed.includes('ACTION5')
+    ? { ...command('ACTION5'), target: body, effect: { ...effect, kind: 'continue' } } : null;
+}
+
+function returnedEffect(scene: Scene, effect: Effect): boolean {
+  return same(scene.actor, effect.actor) && scene.bodies.some(body => body.color === effect.body.color && same(body.pos, effect.body.pos))
+    && (effect.kind === 'follow' || scene.dial.some(dial => dial.active && same(directionOf(dial.vector), effect.direction)));
+}
+
 export function createSicDirectionalReception(family = directionalReceptionId): NativeFamily<Proposal> {
   const learns = family === learnDirectionalReceptionId;
   let state: State | null = null;
+  let known: LearnedControls | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -59,28 +106,32 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
       const scene = measureExposedReception(rows) as Scene | null;
       if (!scene || scene.bodies.length > 4 || scene.size[0] * scene.size[1] > 256) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
+      const reusable = !learns && known?.completed === observation.levels_completed && known.pitch === scene.pitch ? known : null;
       const receipt = learns && !prior ? execution?.readDirectionalMotion?.() : null;
       const movement = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch
         ? motionIntoFootprint(receipt, cellBox(scene, scene.actor)) : null;
       const delta = movement ? [movement[0] / scene.pitch, movement[1] / scene.pitch] as NativePoint : null;
       if (learns && !prior && (!delta || Math.abs(delta[0]) + Math.abs(delta[1]) !== 1)) return null;
       const local: State = prior?.layout === scene.layout ? prior : {
-        epoch: observation.level_epoch, layout: scene.layout, directions: prior?.directions ?? (receipt && delta ? { [receipt.command]: delta } : {}),
-        coupled: [], tried: [], evidence: prior?.evidence ?? (receipt ? [receipt.beforeRef] : []), count: prior?.count ?? 0,
+        epoch: observation.level_epoch, layout: scene.layout,
+        directions: prior?.directions ?? reusable?.directions ?? (receipt && delta ? { [receipt.command]: delta } : {}),
+        coupled: [], tried: [], evidence: prior?.evidence ?? (reusable ? [reusable.ref] : receipt ? [receipt.beforeRef] : []), count: prior?.count ?? 0,
       };
       if (local.count >= 32) return null;
       const key = (action: NativeCommand) => JSON.stringify([observation.frame_hash, action]);
       const available = (choice: Choice) => !local.tried.includes(key(choice.command));
+      const proposal = reusable && chooseObservedEffect(scene, local, observation.available_action_refs);
+      const effectChoice = proposal && available(proposal) ? proposal : null;
       const mismatch = scene.bodies.find(body => scene.slots.some(slot => same(slot.pos, body.pos) && slot.color !== body.color));
       let orientation: Choice | null = null, route: Choice | null = null, trial: Choice | null = null;
-      if (mismatch) {
+      if (!effectChoice && mismatch) {
         const direction = minus(mismatch.pos, scene.actor);
         const dial = [...scene.dial].filter(control => !control.active).sort((a, b) =>
           pointScore(b.vector, direction) - pointScore(a.vector, direction));
         orientation = dial.map(control => ({ command: { action_ref: 'ACTION6', data: { x: control.point[0], y: control.point[1] } },
           target: mismatch, dial: control })).find(available) ?? null;
       }
-      if (!orientation) {
+      if (!effectChoice && !orientation) {
         const model = freshReceptionModels();
         for (const color of local.coupled) model.coupled[String(color)] = true;
         const result = pathToReceptions(scene, model, 800, {
@@ -102,8 +153,10 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
         test: { value: !!trial, evidence }, route: { value: !!route, evidence }, orientation: { value: !!orientation, evidence },
       }, planners: { measure_reception_displacement: () => trial, approach_reception_slots: () => route,
         orient_toward_mismatched_piece: () => orientation } });
-      const choices = { measure_reception_displacement: trial, approach_reception_slots: route, orient_toward_mismatched_piece: orientation };
-      const requested = decision?.result ?? evaluated?.selected?.id;
+      const choices = { measure_reception_displacement: trial, approach_reception_slots: route, orient_toward_mismatched_piece: orientation,
+        move_with_adjacent_piece: effectChoice, orient_to_move_piece: effectChoice, continue_verified_illumination: effectChoice };
+      const byEffect = { follow: 'move_with_adjacent_piece', orient: 'orient_to_move_piece', continue: 'continue_verified_illumination' } as const;
+      const requested = effectChoice?.effect ? byEffect[effectChoice.effect.kind] : decision?.result ?? evaluated?.selected?.id;
       if (typeof requested !== 'string' || !Object.hasOwn(choices, requested)) return null;
       const strategy = requested as keyof typeof choices, choice = choices[strategy];
       if (!choice) return null;
@@ -119,10 +172,11 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Bring the pieces and the receivers into agreement', mode: route ? 'solving' : 'exploration',
-          situation: choice.dial ? 'The piece is in the receiver but has a different color. Test the nearby direction on the dial.' : label,
+          situation: choice.dial && !choice.effect ? 'The piece is in the receiver but has a different color. Test the nearby direction on the dial.' : label,
           agenda: evaluated?.entries ?? [], evidence, actor: cellBox(scene, scene.actor),
           pieces: (choice.target ? [choice.target] : scene.bodies).map(body => cellBox(scene, body.pos)),
           receivers: scene.slots.map(slot => cellBox(scene, slot.pos)),
+          ...(choice.effect ? { landing: cellBox(scene, choice.effect.body.pos) } : {}),
           dial: choice.dial ? [...choice.dial.point, ...choice.dial.point] : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -134,16 +188,44 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'directional_reception_bound' : 'directional_reception_changed' };
     },
-    after(proposal, _index, before, after) {
+    after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.choice.effect) {
+        const next = measureExposedReception(second) as Scene | null;
+        if (next?.layout === proposal.scene.layout) {
+          const matched = returnedEffect(next, proposal.choice.effect);
+          const success = proposal.choice.effect.kind === 'follow' ? 'adjacent_piece_kept_its_offset' : 'light_moved_piece_while_cursor_stayed';
+          return { matched, seal_prefix: true, reason: matched ? success : 'piece_or_control_return_contradicted' };
+        }
+      }
       return { matched: null, seal_prefix: true, reason: 'remeasure_piece_receiver_and_orientation' };
     },
-    record(before, after, issued, _first, second: NativeRows, proposal) {
+    record(before, after, issued, _first, second: NativeRows, proposal, _index, frames) {
+      if (after.levels_completed > before.levels_completed && Object.keys(proposal.local.directions).length) {
+        known = { completed: after.levels_completed, pitch: proposal.scene.pitch, directions: proposal.local.directions, ref: after.observation_ref };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, scene, choice } = proposal;
       const returned = measureExposedReception(second) as Scene | null;
       const directions = { ...local.directions }, coupled = [...local.coupled];
+      if (choice.effect) {
+        const effect = choice.effect;
+        const changed = returned && returned.layout !== scene.layout;
+        const matched = !!returned && returned.layout === scene.layout && returnedEffect(returned, effect);
+        const terminal = changed && same(effect.body.pos, effect.receiver.pos) && frames.some(rows => {
+          const measured = measureExposedReception(rows) as Scene | null;
+          return measured?.layout === scene.layout && returnedEffect(measured, effect);
+        });
+        if (matched && effect.kind === 'follow') directions[issued.action_ref] = effect.direction;
+        const beam = matched && effect.kind !== 'follow' ? { at: effect.body.pos, actor: effect.actor, direction: effect.direction } : undefined;
+        const { beam: _priorBeam, ...rest } = local;
+        state = { ...rest, directions, ...(beam ? { beam } : {}), count: local.count + 1,
+          tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
+        const status = terminal ? 'receiver_filled_in_animation_before_layout_changed' : changed ? 'receiver_layout_changed'
+          : matched ? 'observed_reception_effect_confirmed' : 'observed_reception_effect_contradicted';
+        return { events: [{ status, evidence: [before.observation_ref, after.observation_ref] }] };
+      }
       let colorMatched = false;
       if (returned?.layout === scene.layout) {
         const delta = minus(returned.actor, scene.actor);
@@ -165,7 +247,10 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
       const status = returned?.layout !== scene.layout ? 'receiver_layout_changed' : colorMatched ? 'receiver_color_match_observed' : 'receiver_return_measured';
       return { events: [{ status, evidence: [before.observation_ref, after.observation_ref] }] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, known }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      known = structuredClone((value.known as LearnedControls | undefined) ?? null);
+    },
   };
 }
