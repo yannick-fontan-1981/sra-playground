@@ -92,6 +92,15 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       const [a, b] = pair.boxes;
       if (!a || !b || (a[0] - b[0]) % pair.size || (a[1] - b[1]) % pair.size) return null;
       if (!prior && new Set(rows.flat()).size < 4) return null;
+      if (!prior) {
+        const stationary = execution?.readPriorDirectionalScene?.(first => pairVisible(first, pair.value, pair.boxes) ? true : null);
+        const motion = stationary ? execution?.readDirectionalMotion?.() : null;
+        const moving = motion?.translations.length === 1 ? motion.translations[0] : null;
+        // A verified translation of a separate piece takes precedence over a fresh pair hypothesis.
+        if (stationary?.afterRef === observation.observation_ref && moving && moving.color !== pair.value
+          && moving.area === pair.size ** 2 && moving.to[2] - moving.to[0] + 1 === pair.size
+          && moving.to[3] - moving.to[1] + 1 === pair.size) return null;
+      }
       const local: State = prior ?? { epoch: observation.level_epoch, pair, samples: [], floors: [], evidence: [],
         remainingRoute: null, count: 0, stopped: false };
       const untested = available.find(input => !local.samples.some(sample => sample.input === input));

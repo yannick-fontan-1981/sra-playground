@@ -682,7 +682,11 @@ export function readNativeResolution(agent: {
   if (situationCard && (family === markedLatticeId || family === verifyMarkedLatticeId)) {
     const cursor = bounds(card?.cursor), target = bounds(card?.target);
     if (cursor) subjects.push({ label: 'Current cursor', box: cursor });
-    if (target) subjects.push({ label: 'Unvisited marker', box: target });
+    if (target) subjects.push({ label: Array.isArray(card?.counter) ? 'Current marker or control' : 'Unvisited marker', box: target });
+    if (Array.isArray(card?.counter)) for (const slot of card.counter) {
+      const box = bounds(slot);
+      if (box) subjects.push({ label: 'Acquisition slot', box });
+    }
   }
   if (situationCard && (family === queuedPlacementId || family === learnQueuedPlacementId)) {
     const group = bounds(card?.activeGroup), field = bounds(card?.field);
