@@ -203,7 +203,12 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
     },
     record(before, after, command, first, second, proposal) {
       if (isMulti(proposal)) {
-        if (before.level_epoch === after.level_epoch && before.state === after.state) {
+        if (after.levels_completed > before.levels_completed) {
+          const { model } = proposal.deliveries;
+          previousDelivery = { ...model, completed: after.levels_completed,
+            evidence: [...new Set([...model.evidence.slice(0, 1), ...proposal.deliveries.refs.slice(-4),
+              before.observation_ref, after.observation_ref])] };
+        } else if (before.level_epoch === after.level_epoch && before.state === after.state) {
           const proof = assessDelivery(proposal.deliveries, proposal.transfer, after, first, second, proposal.actor);
           multiple = { epoch: before.level_epoch, deliveries: proof?.state ?? { ...proposal.deliveries, stopped: true } };
         }

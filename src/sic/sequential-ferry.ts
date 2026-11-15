@@ -10,6 +10,12 @@ export type DeliveryStep = { phase: 'approach' | 'take' | 'align' | 'cross' | 'r
 const boxEqual = (a: NativeBox, b: NativeBox) => a.every((value, axis) => b[axis] === value);
 const shiftBox = ([l, t, r, b]: NativeBox, [x, y]: NativePoint): NativeBox => [l + x, t + y, r + x, b + y];
 const midpoint = (box: NativeBox, axis: number) => center(box)[axis]!;
+function nearestPickupRow(object: NativeBox, row: number, height: number, step: number) {
+  const first = row + step * Math.ceil((object[1] - height - row) / step);
+  const last = row + step * Math.floor((object[3] - row) / step);
+  return first <= last ? Math.max(first, Math.min(row, last)) : null;
+}
+
 const area = (rows: NativeRows, box: NativeBox, palette: number) => {
   const [l, t, r, b] = box;
   let count = 0;
@@ -40,8 +46,14 @@ export function startRecoveredDelivery(observation: NativeObservation, rows: Nat
     cargo.push(choices[0]!);
   }
   if (cargo.length < 2 || cargo.length > 4 || new Set(cargo.map(pair => pair.object.palette_value)).size !== cargo.length) return null;
-  cargo.sort((a, b) => Math.abs(midpoint(a.object.bbox, 1) - midpoint(actor.bbox, 1))
-    - Math.abs(midpoint(b.object.bbox, 1) - midpoint(actor.bbox, 1)));
+  const row = actor.bbox[1], height = actor.bbox[3] - row;
+  const stride = Object.values(motion).find(([dx, dy]) => !dx && dy > 0)?.[1];
+  const pickupDistance = ({ object }: Cargo) => {
+    if (model.completed < 2 || !stride) return Math.abs(midpoint(object.bbox, 1) - midpoint(actor.bbox, 1));
+    const target = nearestPickupRow(object.bbox, row, height, stride);
+    return target === null ? Infinity : Math.abs(target - row);
+  };
+  cargo.sort((a, b) => pickupDistance(a) - pickupDistance(b));
   return { model, cargo, delivered: 0, held: null, refs: model.evidence, stopped: false };
 }
 
@@ -68,7 +80,10 @@ export function nextDeliveryStep(state: DeliveryState, actor: NativeBox): Delive
   if (!state.held) {
     const object = active.object.bbox;
     const aligned = shiftBox(actor, [homeApproach - x, 0]);
-    const row = state.delivered && intersects(aligned, object) ? y : y + stepY * Math.round((midpoint(object, 1) - midpoint(actor, 1)) / stepY);
+    const row = state.delivered && intersects(aligned, object) ? y
+      : state.model.completed >= 2 ? nearestPickupRow(object, y, actor[3] - y, stepY)
+        : y + stepY * Math.round((midpoint(object, 1) - midpoint(actor, 1)) / stepY);
+    if (row === null) return null;
     if (row !== y) return vertical('approach', object, row);
     if (!intersects(aligned, object)) return null;
     return x === homeApproach
@@ -77,8 +92,8 @@ export function nextDeliveryStep(state: DeliveryState, actor: NativeBox): Delive
   }
   if (other) {
     const object = other.object.bbox, height = actor[3] - y;
-    const row = Math.max(y + stepY * Math.ceil((object[1] - height - y) / stepY),
-      Math.min(y, y + stepY * Math.floor((object[3] - y) / stepY)));
+    const row = nearestPickupRow(object, y, height, stepY);
+    if (row === null) return null;
     if (row !== y) return vertical('align', object, row);
   }
   const landing = x === crossing.from ? crossing.to : crossing.from;
@@ -103,7 +118,13 @@ export function assessDelivery(state: DeliveryState, step: DeliveryStep, observa
     const reach: NativeBox = [actor[0] - (actor[2] - actor[0] + 1), actor[1] - (actor[3] - actor[1] + 1),
       actor[2] + (actor[2] - actor[0] + 1), actor[3] + (actor[3] - actor[1] + 1)];
     const candidates = observation.entities.filter(entity => entity.palette_value === object.palette_value
-      && entity.area >= eligibleArea && contains(reach, entity.bbox) && !intersects(entity.bbox, object.bbox));
+      && entity.area >= eligibleArea && contains(reach, entity.bbox) && !boxEqual(entity.bbox, object.bbox)
+      && (!intersects(entity.bbox, object.bbox) || (
+        entity.area === object.area
+        && entity.bbox[2] - entity.bbox[0] === object.bbox[2] - object.bbox[0]
+        && entity.bbox[3] - entity.bbox[1] === object.bbox[3] - object.bbox[1]
+        && area(rows, entity.bbox, object.palette_value) - area(before, entity.bbox, object.palette_value) >= eligibleArea
+      )));
     return candidates.length === 1 && area(rows, object.bbox, object.palette_value) < eligibleArea
       ? { state: { ...retained, held: candidates[0]!.bbox }, reason: 'object_left_source_and_is_bound_to_the_carrier' } : null;
   }
