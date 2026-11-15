@@ -22,16 +22,18 @@ export type SupplyModel = {
   openOrientation: string;
   completed: number;
   refs: string[];
+  continued?: boolean;
 };
-export type SupplyLayout = {
-  relay: Basin & { gate: Gate };
+type SupplyFields = {
+  relay: Basin;
   receivers: (Basin & { gate: Gate })[];
   stock: Stock;
   pump: { bbox: NativeBox; point: NativePoint };
   openOrientation: string;
 };
+export type SupplyLayout = SupplyFields & ({ buffered?: false; relay: Basin & { gate: Gate } } | { buffered: true });
 export type SupplyChoice = {
-  kind: 'open_relay' | 'open_receiver' | 'protect_receiver' | 'deliver';
+  kind: 'open_relay' | 'open_receiver' | 'protect_receiver' | 'deliver' | 'charge_storage' | 'test_release';
   target: { bbox: NativeBox; point: NativePoint };
 };
 const dimensions = ([l, t, r, b]: NativeBox): Extent => [r - l + 1, b - t + 1];
@@ -57,6 +59,26 @@ function stockCandidates(rows: NativeRows): Stock[] {
     const [w, h] = dimensions(part.bbox);
     return part.rectangular && w >= 6 * h && w >= rows[0]!.length / 4 && h <= rows.length / 16
       ? [{ box: part.bbox, palette: part.color }] : [];
+  });
+}
+
+function enclosedStorage(rows: NativeRows, empty: number, receiverWidth: number): Basin[] {
+  return geometricComponents(rows).flatMap(part => {
+    const [l, t, r, b] = part.bbox;
+    const [w, h] = dimensions(part.bbox);
+    if (part.color !== empty || part.rectangular || w !== receiverWidth + 2 || h < 4 || h > receiverWidth + 2) return [];
+    const uniform = (y: number) => rows[y]!.slice(l + 1, r).every(value => value === empty);
+    const insideWalls = (y: number) => uniform(y) && (rows[y]![l] !== empty || rows[y]![r] !== empty);
+    const top = insideWalls(t) ? t : t + 1, bottom = insideWalls(b) ? b : b - 1;
+    if (bottom - top < 2) return [];
+    let leftWall = 0, rightWall = 0;
+    for (let y = top; y <= bottom; y++) {
+      if (!uniform(y)) return [];
+      leftWall += Number(rows[y]![l] !== empty);
+      rightWall += Number(rows[y]![r] !== empty);
+    }
+    if (Math.min(leftWall, rightWall) * 2 <= bottom - top + 1) return [];
+    return [{ box: [l + 1, top, r - 1, bottom], empty }];
   });
 }
 
@@ -92,25 +114,36 @@ export function bindSupply(rows: NativeRows, pump: SupplyLayout['pump'], model: 
   const basins = basinCandidates(rows);
   const relay = basins.filter(basin => sameExtent(dimensions(basin.box), model.relay));
   const receivers = basins.filter(basin => sameExtent(dimensions(basin.box), model.receiver));
-  const stocks = stockCandidates(rows).filter(stock => sameExtent(dimensions(stock.box), model.stock));
-  if (relay.length !== 1 || receivers.length < 2 || receivers.length > 4 || stocks.length !== 1) return null;
+  const stocks = stockCandidates(rows);
+  if (receivers.length < 2 || receivers.length > 4) return null;
   const controls = pairedControls(rows);
   const withGate = (basin: Basin) => {
     const gate = linkedControl({ bbox: basin.box }, controls) as Gate | null;
     return gate ? { ...basin, gate } : null;
   };
-  const main = withGate(relay[0]!);
   const targets = receivers.map(withGate);
-  if (!main || targets.some(target => !target)) return null;
+  if (targets.some(target => !target)) return null;
+  const destinations = targets.filter(target => target !== null);
+  if (new Set(destinations.map(basin => basin.gate.point.join(','))).size !== destinations.length) return null;
+  const common = { receivers: destinations, pump, openOrientation: model.openOrientation };
+  if (!relay.length && model.continued && stocks.length === 1 && receivers.every(basin => basin.empty === receivers[0]!.empty)) {
+    const stores = enclosedStorage(rows, receivers[0]!.empty, model.receiver[0]);
+    if (stores.length === 1 && destinations.some(basin => basin.gate.orientation === model.openOrientation)) {
+      return { ...common, buffered: true, relay: stores[0]!, stock: stocks[0]! };
+    }
+  }
+  const matchingStocks = stocks.filter(stock => sameExtent(dimensions(stock.box), model.stock));
+  if (relay.length !== 1 || matchingStocks.length !== 1) return null;
+  const main = withGate(relay[0]!);
+  if (!main) return null;
   // Revalidate that peers on the input band are already isolated.
   const at = main.gate.point, [l, , r] = main.box;
   const depth = at[0] >= l && at[0] <= r ? 1 : 0;
   const competing = controls.filter(control => control.point[depth] === at[depth]
     && control.point[1 - depth] !== at[1 - depth] && sameExtent(dimensions(control.bbox), dimensions(main.gate.bbox)));
   if (!competing.length || competing.some(gate => gate.orientation === model.openOrientation)) return null;
-  const destinations = targets.filter(target => target !== null);
-  if (new Set([main, ...destinations].map(basin => basin.gate.point.join(','))).size !== 1 + destinations.length) return null;
-  return { relay: main, receivers: destinations, stock: stocks[0]!, pump, openOrientation: model.openOrientation };
+  if (destinations.some(basin => basin.gate.point.every((value, axis) => value === at[axis]))) return null;
+  return { ...common, relay: main, stock: matchingStocks[0]! };
 }
 
 const open = (rows: NativeRows, gate: Gate, layout: SupplyLayout): boolean | null => {
@@ -123,21 +156,26 @@ const full = (rows: NativeRows, basin: Basin): boolean => {
 };
 
 export function chooseSupplyCommand(rows: NativeRows, layout: SupplyLayout): SupplyChoice | null {
-  const input = open(rows, layout.relay.gate, layout);
   const outlets = layout.receivers.map(basin => ({ basin, open: open(rows, basin.gate, layout), full: full(rows, basin) }));
-  if (input === null || outlets.some(outlet => outlet.open === null)) return null;
-  if (!input) return { kind: 'open_relay', target: layout.relay.gate };
+  if (outlets.some(outlet => outlet.open === null)) return null;
+  if (!layout.buffered) {
+    const input = open(rows, layout.relay.gate, layout);
+    if (input === null) return null;
+    if (!input) return { kind: 'open_relay', target: layout.relay.gate };
+  }
   const saturated = outlets.find(outlet => outlet.open && outlet.full);
   if (saturated) return { kind: 'protect_receiver', target: saturated.basin.gate };
   const closed = outlets.find(outlet => !outlet.open && !outlet.full);
   if (closed) return { kind: 'open_receiver', target: closed.basin.gate };
   if (!outlets.some(outlet => outlet.open && !outlet.full) || count(rows, layout.stock.box, layout.stock.palette) < 1) return null;
-  return { kind: 'deliver', target: layout.pump };
+  const kind = !layout.buffered ? 'deliver' : count(rows, layout.relay.box, layout.relay.empty) <= dimensions(layout.relay.box)[0]
+    ? 'test_release' : 'charge_storage';
+  return { kind, target: layout.pump };
 }
 
 export function supplyOutcome(choice: SupplyChoice, layout: SupplyLayout, before: NativeRows, after: NativeRows): string | null {
   const basins = [layout.relay, ...layout.receivers], { stock } = layout;
-  if (choice.kind !== 'deliver') {
+  if (choice.kind === 'open_relay' || choice.kind === 'open_receiver' || choice.kind === 'protect_receiver') {
     const target = choice.target as Gate;
     return open(after, target, layout) === (choice.kind !== 'protect_receiver')
       && !basins.some(basin => changed(before, after, basin.box)) && !changed(before, after, stock.box)
@@ -146,6 +184,31 @@ export function supplyOutcome(choice: SupplyChoice, layout: SupplyLayout, before
   if (count(after, stock.box, stock.palette) >= count(before, stock.box, stock.palette)) return null;
   const protectedReceivers = layout.receivers.filter(basin => full(before, basin) && open(before, basin.gate, layout) === false);
   if (protectedReceivers.some(basin => changed(before, after, basin.box))) return null;
+  if (layout.buffered) {
+    const previousRoom = count(before, layout.relay.box, layout.relay.empty);
+    const room = count(after, layout.relay.box, layout.relay.empty);
+    const changedReceivers = layout.receivers.some(basin => changed(before, after, basin.box));
+    if (room < previousRoom && !changedReceivers) return 'storage_charge_observed_without_outlet_transfer';
+    return room > previousRoom && changedReceivers ? 'stored_supply_released_to_receivers' : null;
+  }
   if (layout.receivers.some(basin => !full(before, basin) && full(after, basin))) return 'receiver_saturation_observed';
   return basins.some(basin => changed(before, after, basin.box)) ? 'observed_stock_delivered_to_a_basin' : null;
+}
+
+export function observeSupplyRelease(layout: SupplyLayout, before: NativeRows, frames: readonly NativeRows[]): number {
+  if (!layout.buffered) return 0;
+  let room = count(before, layout.relay.box, layout.relay.empty), receivers = 0;
+  let atCapacity = room === 0;
+  const [width, height] = dimensions(layout.relay.box), capacity = width * height;
+  for (const frame of frames) {
+    const after = count(frame, layout.relay.box, layout.relay.empty);
+    atCapacity ||= after === 0;
+    if (atCapacity && after > room) {
+      const filled = layout.receivers.filter(basin => count(frame, basin.box, basin.empty) < count(before, basin.box, basin.empty)).length;
+      receivers = Math.max(receivers, filled);
+      if (after === capacity) break;
+    }
+    room = after;
+  }
+  return receivers;
 }

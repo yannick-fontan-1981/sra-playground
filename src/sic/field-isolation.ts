@@ -4,7 +4,7 @@ import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-nat
 import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
-import { acquireSupplyCalibration, bindSupply, chooseSupplyCommand, consolidateSupply, supplyOutcome,
+import { acquireSupplyCalibration, bindSupply, chooseSupplyCommand, consolidateSupply, observeSupplyRelease, supplyOutcome,
   type SupplyCalibration, type SupplyChoice, type SupplyLayout, type SupplyModel } from './supply-distribution.ts';
 
 export const fieldIsolationId = 'sic_field_isolation';
@@ -27,6 +27,8 @@ export const fieldIsolationStrategies = {
   enable_pending_receiver: 'Open access to a receiver with visible room',
   protect_saturated_receiver: 'Isolate the filled receiver before delivering again',
   deliver_observed_supply: 'Deliver from the measured supply to the open fields',
+  charge_storage: 'Add supply and check where it accumulates',
+  test_release: 'Test whether the full chamber releases to the prepared receivers',
 } as const;
 const priorities = ['repeat_isolated_field_effect', 'isolate_noncontributing_branch', 'test_inverse_field_effect',
   'compare_repeated_field_effect', 'test_compact_control'] as const;
@@ -83,7 +85,8 @@ async function supplyProposal(
   const choice = !stopped && chooseSupplyCommand(rows, layout);
   if (!choice) return null;
   const strategies = { open_relay: 'activate_verified_relay', open_receiver: 'enable_pending_receiver',
-    protect_receiver: 'protect_saturated_receiver', deliver: 'deliver_observed_supply' } as const;
+    protect_receiver: 'protect_saturated_receiver', deliver: 'deliver_observed_supply',
+    charge_storage: 'charge_storage', test_release: 'test_release' } as const;
   const strategy = strategies[choice.kind], label = fieldIsolationStrategies[strategy], parent = 'G_official_completion';
   const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...refs.filter(value => value !== ref)];
   const { point: [x, y], bbox } = choice.target, action = { action_ref: 'ACTION6', data: { x, y } };
@@ -93,9 +96,10 @@ async function supplyProposal(
   const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = family + ':' + need.id;
   return { status: 'proposed', kind: family, distribution, choice, needId: need.id, actions: [action],
     steps: [{ action, expected_after: null, point_binding: witness }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-    sicSituationCard: { strategy, need: 'Supply all receivers and preserve those already filled', mode: 'solving',
+    sicSituationCard: { strategy, need: 'Supply all receivers and preserve those already filled',
+      mode: choice.kind === 'test_release' ? 'exploration' : 'solving',
       situation: label, agenda: [], evidence, control: bbox, relay: layout.relay.box, reserve: layout.stock.box,
-      fields: layout.receivers.map(receiver => receiver.box) },
+      fields: layout.receivers.map(receiver => receiver.box), buffered: layout.buffered === true },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
     sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -187,11 +191,17 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
       const matched = local.phase === 'serve' ? measured[local.other!]?.appearance_digest === local.history.at(-1)![local.other!]?.appearance_digest : null;
       return { matched, seal_prefix: true, reason: 'compare_linked_fields_and_control' };
     },
-    record(before, after, _command, first, second, proposal) {
+    record(before, after, _command, first, second, proposal, _index, frames) {
       if (isSupplyProposal(proposal)) {
+        const prior = proposal.distribution;
+        const refs = [...prior.refs.slice(-5), after.observation_ref];
+        if (after.levels_completed > before.levels_completed && supply) {
+          supply = { ...supply, completed: after.levels_completed, refs, continued: true };
+          const receivers = observeSupplyRelease(prior.layout, first, frames);
+          if (receivers) return { events: [], reviewEvidence: `observed_storage_release_into_${receivers}_receivers` };
+        }
         if (before.level_epoch === after.level_epoch && before.state === after.state) {
-          const prior = proposal.distribution;
-          distribution = { ...prior, refs: [...prior.refs.slice(-5), after.observation_ref],
+          distribution = { ...prior, refs,
             stopped: supplyOutcome(proposal.choice, prior.layout, first, second) === null };
         }
         return { events: [] };
