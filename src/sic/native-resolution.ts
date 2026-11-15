@@ -707,6 +707,13 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    for (const [field, label] of [['partners', 'Other visible piece'], ['projected', 'Predicted landing']] as const) {
+      if (!Array.isArray(card?.[field])) continue;
+      for (const item of card[field]) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
+    }
   }
   if (situationCard && family === observedSharedRelationsId) {
     const control = bounds(card?.control);

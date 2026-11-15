@@ -1,23 +1,30 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { coupledPiecesKey, settleCoupledPieces, type CoupledPiece as Piece } from './coupled-piece-settling.ts';
 
 export const observedPolePairId = 'sic_reorient_observed_coupled_pair';
 export const observedPolePairStrategies = {
   bind_piece_in_coupled_pair: 'Select the piece whose outward path reaches the marked destination',
   rotate_out_of_coupling_axis: 'Turn the selected piece out of the current coupling axis',
   confirm_outward_pair_motion: 'Oppose the paired poles and verify the projected outward movement',
+  select_coupled_piece: 'Select the piece that can change the active coupling',
+  test_coupled_motion: 'Turn the selected piece and verify which pieces move or stop',
 } as const;
 
 type Grid = { x: number; y: number; width: number; height: number; pitch: number };
 type Tile = { point: NativePoint; edges: number[]; center: number; inner: number };
-type Piece = { point: NativePoint; direction: number; selected: boolean };
 type Layout = { grid: Grid; poles: number[]; goal: NativePoint; goalMark: string; floor: string[] };
 type Training = { epoch: number; layout: Layout | null; turns: Record<string, number>; apart: string | null; idle: string | null };
 type Witness = { epoch: number; poles: number[]; goalMark: string; turns: Record<string, number>; refs: string[] };
 type Local = { epoch: number; layout: Layout; driver: NativePoint; partner: NativePoint; input: string;
   expected: [NativePoint, NativePoint]; stage: 0 | 1 | 2; stopped: boolean };
-type Proposal = NativeProposal & { local: Local; was: Piece[]; needId: string };
+type PairProposal = NativeProposal & { local: Local; was: Piece[]; needId: string };
+type Network = { epoch: number; layout: Layout; refs: string[]; rejected: string[] };
+type Step = { action: NativeCommand; focus: NativePoint; expected: Piece[] };
+type NetworkProposal = NativeProposal & { network: Network; step: Step; attempt: string; needId: string };
+type Proposal = PairProposal | NetworkProposal;
+const isNetworkProposal = (proposal: Proposal): proposal is NetworkProposal => 'network' in proposal;
 
 const vectors: readonly NativePoint[] = [[0, -1], [1, 0], [0, 1], [-1, 0]];
 const key = (p: readonly number[]) => p.join(',');
@@ -91,7 +98,7 @@ function readLayout(observation: NativeObservation, rows: NativeRows): Layout | 
     const poles = polesOf(tile);
     return poles ? [{ tile, poles }] : [];
   });
-  if (candidates.length !== 2 || key(candidates[0]!.poles) !== key(candidates[1]!.poles)) return null;
+  if (candidates.length < 2 || candidates.some(({ poles }) => key(poles) !== key(candidates[0]!.poles))) return null;
   const goals = cells.filter(tile => uniform(tile.edges) && tile.edges[0] === tile.center && tile.center !== tile.inner);
   if (goals.length !== 1) return null;
   const goal = goals[0]!, floor = cells.filter(tile => uniform(tile.edges) && tile.edges[0] === tile.center && tile.center === tile.inner);
@@ -120,7 +127,7 @@ function outward(layout: Layout, a: NativePoint, b: NativePoint): NativePoint {
   return current;
 }
 
-function confirmPairReturn(proposal: Proposal, rows: NativeRows, turns: Record<string, number>) {
+function confirmPairReturn(proposal: PairProposal, rows: NativeRows, turns: Record<string, number>) {
   const { local, was } = proposal, pieces = readPieces(rows, local.layout), returned = selectedPair(pieces);
   if (!returned) return false;
   const [selected, partner] = returned;
@@ -133,8 +140,81 @@ function confirmPairReturn(proposal: Proposal, rows: NativeRows, turns: Record<s
     : samePoint(selected.point, local.expected[0]) && samePoint(partner.point, local.expected[1]);
 }
 
+function findCoupledStep(pieces: Piece[], network: Network, turns: [string, number][], remaining: number, deadline: () => boolean) {
+  const { layout, rejected } = network, { grid } = layout;
+  const floor = new Set(layout.floor);
+  const scene = coupledPiecesKey(pieces);
+  const queue: { pieces: Piece[]; depth: number; first: Step | null; attempt: string }[] = [
+    { pieces, depth: 0, first: null, attempt: '' },
+  ];
+  const visited = new Set([scene]), limit = Math.min(remaining, 12);
+  for (let head = 0; head < queue.length && head < 2400; head++) {
+    if (deadline()) break;
+    const current = queue[head]!;
+    if (current.depth >= limit) continue;
+    const active = current.pieces.find(piece => piece.selected);
+    const inputs: Step[] = current.pieces.filter(piece => !piece.selected).map(({ point }) => ({
+      action: { action_ref: 'ACTION6', data: { x: grid.x + point[0] * grid.pitch, y: grid.y + point[1] * grid.pitch } },
+      focus: point,
+      expected: current.pieces.map(piece => ({ ...piece, selected: samePoint(point, piece.point) })),
+    }));
+    if (active) for (const [action_ref, quarter] of turns) {
+      const changed = current.pieces.map(piece => piece === active ? { ...piece, direction: rotate(piece.direction, quarter) } : piece);
+      const expected = settleCoupledPieces(changed, floor, grid.width, grid.height);
+      if (expected) inputs.push({ action: { action_ref, data: {} }, focus: active.point, expected });
+    }
+    for (const step of inputs) {
+      const attempt = current.first ? current.attempt : [scene, step.action.action_ref, key(step.focus)].join('/');
+      if (!current.first && rejected.includes(attempt)) continue;
+      const destination = coupledPiecesKey(step.expected);
+      if (visited.has(destination)) continue;
+      visited.add(destination);
+      const first = current.first ?? step;
+      if (step.action.action_ref !== 'ACTION6' && step.expected.some(piece => samePoint(piece.point, layout.goal))) return { step: first, attempt };
+      queue.push({ pieces: step.expected, depth: current.depth + 1, first, attempt });
+    }
+  }
+  return null;
+}
+
+async function proposeCoupledNetwork(
+  observation: NativeObservation, rows: NativeRows, network: Network, memory: Witness, remaining: number, deadline: () => boolean,
+): Promise<NetworkProposal | null> {
+  const { layout } = network, pieces = readPieces(rows, layout);
+  const turns = Object.entries(memory.turns).filter(([input]) => observation.available_action_refs.includes(input));
+  if (pieces.length < 3 || pieces.length > 6 || pieces.filter(piece => piece.selected).length > 1
+    || !turns.length || !observation.available_action_refs.includes('ACTION6')) return null;
+  const plan = findCoupledStep(pieces, network, turns, remaining, deadline);
+  if (!plan) return null;
+  const { step, attempt } = plan, { action, focus, expected } = step;
+  const selecting = action.action_ref === 'ACTION6';
+  const strategy = selecting ? 'select_coupled_piece' : 'test_coupled_motion', label = observedPolePairStrategies[strategy];
+  const ref = observation.observation_ref, parent = 'G_official_completion';
+  const evidence: [string, ...string[]] = [ref, ...new Set([...memory.refs, ...network.refs].filter(value => value !== ref))];
+  const point: NativePoint = [layout.grid.x + focus[0] * layout.grid.pitch, layout.grid.y + focus[1] * layout.grid.pitch];
+  const binding = selecting ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence }) : null;
+  if (selecting && !binding) return null;
+  const goal = { kind: 'settle_coupled_pieces_at_marked_destination', scope: ref.split(':revision:', 1)[0]!,
+    subjects: ['selected_piece', 'coupled_pieces', 'marked_destination'], parentObjective: parent,
+    satisfactionContract: 'verify_projected_settled_positions_and_official_progress' };
+  const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
+  const id = 'coupled-pieces:' + need.id, actions = [action];
+  return { status: 'proposed', kind: observedPolePairId, network, step, attempt, actions, needId: need.id,
+    binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    steps: [{ action, ...(binding ? { point_binding: binding } : {}), expected_after: null }],
+    sicSituationCard: { strategy, mode: 'exploration', need: 'Settle a piece on the marked destination', situation: label, evidence,
+      agenda: [], selected: box(layout.grid, focus), partners: pieces.filter(piece => !samePoint(piece.point, focus)).map(piece => box(layout.grid, piece.point)),
+      destination: box(layout.grid, layout.goal), projected: expected.filter(piece => !pieces.some(old => samePoint(old.point, piece.point)))
+        .map(piece => box(layout.grid, piece.point)) },
+    question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
+    sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+      preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicObservedPolePair(): NativeFamily<Proposal> {
-  let training: Training | null = null, witness: Witness | null = null, local: Local | null = null;
+  let training: Training | null = null, witness: Witness | null = null, local: Local | null = null, network: Network | null = null;
   return {
     id: observedPolePairId,
     observePublicOutcome(before, after, action, first, second, frames = []) {
@@ -162,15 +242,21 @@ export function createSicObservedPolePair(): NativeFamily<Proposal> {
         training.apart = after.observation_ref;
       }
     },
-    async propose(observation, rows, _inputs, remaining) {
+    async propose(observation, rows, _inputs, remaining, execution) {
       const memory = witness;
       if (remaining < 1 || memory?.epoch !== observation.level_epoch) return null;
       let state = local?.epoch === observation.level_epoch ? local : null;
+      const now = execution?.now ?? (() => performance.now()), deadline = Math.min(execution?.deadlineMs ?? Infinity, now() + 160);
+      const inTime = () => now() >= deadline;
+      if (network?.epoch === observation.level_epoch) return proposeCoupledNetwork(observation, rows, network, memory, remaining, inTime);
       if (!state) {
         if (remaining < 3) return null;
         const layout = readLayout(observation, rows);
         if (!layout || layout.goalMark !== memory.goalMark || key(layout.poles) !== key(memory.poles)) return null;
         const pieces = readPieces(rows, layout), [one, two] = pieces;
+        if (pieces.length > 2) return proposeCoupledNetwork(observation, rows, {
+          epoch: observation.level_epoch, layout, refs: [], rejected: [],
+        }, memory, remaining, inTime);
         if (!one || !two || !aligned(one, two) || one.direction !== two.direction || samePoint(one.point, two.point)) return null;
         const route = pieces.flatMap((driver, i) => {
           const partner = pieces[1 - i]!, end = outward(layout, driver.point, partner.point);
@@ -216,20 +302,35 @@ export function createSicObservedPolePair(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) {
         return { matched: true, seal_prefix: true, reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       }
-      const matched = !!witness && confirmPairReturn(proposal, second, witness.turns);
+      const matched = isNetworkProposal(proposal)
+        ? coupledPiecesKey(readPieces(second, proposal.network.layout)) === coupledPiecesKey(proposal.step.expected)
+        : !!witness && confirmPairReturn(proposal, second, witness.turns);
       return { matched, seal_prefix: true, reason: matched ? 'expected_orientation_and_motion_confirmed' : 'orientation_or_motion_prediction_contradicted' };
     },
-    record(before, after, _action, _first, second, proposal) {
-      if (!witness || before.level_epoch !== after.level_epoch) return { events: [] };
+    record(before, after, _action, _first, second, proposal, _index, frames) {
+      if (!witness) return { events: [] };
+      const layout = isNetworkProposal(proposal) ? proposal.network.layout : proposal.local.layout;
+      if (after.levels_completed > before.levels_completed && frames.some(frame => observedGoalContact(frame, layout))) {
+        witness = { ...witness, epoch: after.level_epoch, refs: [...witness.refs.slice(-4), after.observation_ref] };
+      }
+      if (before.level_epoch !== after.level_epoch) return { events: [] };
+      if (isNetworkProposal(proposal)) {
+        const prior = proposal.network;
+        const matched = coupledPiecesKey(readPieces(second, layout)) === coupledPiecesKey(proposal.step.expected);
+        network = { ...prior, refs: [...prior.refs.slice(-4), after.observation_ref],
+          rejected: matched ? prior.rejected : [...prior.rejected.slice(-30), proposal.attempt] };
+        return { events: [] };
+      }
       const changed = confirmPairReturn(proposal, second, witness.turns), previous = proposal.local;
       local = { ...previous, stage: previous.stage === 0 ? 1 : 2, stopped: !changed || previous.stage === 2 };
       return { events: [] };
     },
-    state: () => ({ training, witness, local }),
+    state: () => ({ training, witness, local, network }),
     restore(value: NativeRecord) {
       training = structuredClone((value.training as Training | undefined) ?? null);
       witness = structuredClone((value.witness as Witness | undefined) ?? null);
       local = structuredClone((value.local as Local | undefined) ?? null);
+      network = structuredClone((value.network as Network | undefined) ?? null);
     },
   };
 }
