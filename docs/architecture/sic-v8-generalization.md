@@ -453,3 +453,9 @@ Les commandes et retours reproduisent la référence, empreinte `9861fc98ec42743
 Avec `sic_pivot_cargo` retirée, **GABA gagne en 49 commandes SIC seul**. La famille de déplacement couplé fournit le premier essai. La pièce porteuse avance d’une maille et les cargaisons restent à leur place. SIC valide la vue précédente et le déplacement, puis calcule le trajet depuis la position réellement atteinte. La carte SRC `sic.follow_observed_landings.choose` décide des 48 commandes restantes, dont 40 déplacements P07, trois essais P05 et cinq réutilisations P02. Les retours vérifient les pièces déplacées, l’attache, la rotation et le dépôt.
 
 Le parcours de référence gagne en 47 commandes. Le nom neutre et la palette permutée conservent le gain en 49 commandes. Après désactivation de P07 au premier retour, le niveau reste ouvert et SIC épuise ses propositions à la 44ᵉ commande. Empreinte après retrait `4c0535fed4795be259cc0651ddc053e32eeabcd9d5fb0a69081d1d51e0170ee2`.
+
+### Confier les transferts de jetons à la carte commune en usage normal
+
+Le runtime SIC retire le sélecteur historique `sic_slot_transfer` de son agenda. Le fournisseur de mesure `sic_verify_matching_slot_transfers` utilise la carte SRC pour chaque commande. SB26 conserve les neuf commandes du niveau 1 et les 15 du niveau 2 en partie continue. Les 24 commandes et retours reproduisent la référence, empreinte `6936f8d27b9ebbb066c67bb5c333ae4f66f7fca624596128466c68789916cbb6`. Le comparateur vérifie que l’identifiant retiré ne figure dans aucune famille ni dans aucun groupe du runtime.
+
+Dans cette configuration normale, désactiver P02 après le premier dépôt rend la main à l’exploration publique et laisse le niveau 1 ouvert après neuf commandes. Les contours, la lecture de la séquence et la validation du dépôt restent mesurés par le fournisseur TypeScript.

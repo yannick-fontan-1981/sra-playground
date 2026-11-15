@@ -4,10 +4,8 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgram
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
-export const slotTransferId = 'sic_slot_transfer';
-export const learnSlotTransferId = 'sic_verify_matching_slot_transfers';
+export const slotTransferId = 'sic_verify_matching_slot_transfers';
 export const slotTransferStrategies = {
   P02: navigationPrimitives.P02,
   P05: navigationPrimitives.P05,
@@ -15,15 +13,6 @@ export const slotTransferStrategies = {
   place_selected_token: 'Put the selected token into its matching slot',
   submit_completed_sequence: 'Submit the filled sequence',
 } as const;
-const graph = compileStrategyGraph({ id: 'fill_slots_to_match_reference', version: 1, order: 'FALLBACK',
-  priorities: ['submit_completed_sequence', 'place_selected_token', 'select_matching_token'],
-  strategies: {
-    select_matching_token: [{ fact: 'canSelect', expected: true, label: 'An empty slot has a unique matching available token' }],
-    place_selected_token: [{ fact: 'canPlace', expected: true, label: 'The visibly selected token matches an empty slot' }],
-    submit_completed_sequence: [{ fact: 'isComplete', expected: true, label: 'Every slot matches the expanded reference sequence' }],
-  },
-}, ['canSelect', 'canPlace', 'isComplete']);
-
 type Layout = { targets: number[]; slots: NativeBox[]; inventory: NativeBox[]; hues: number[]; word: number[]; neutral_borders: number[][] };
 type Stage = 'select_matching_token' | 'place_selected_token' | 'submit_completed_sequence';
 type Move = { stage: Stage; command: NativeCommand; expected: SlotState | null; source: NativeBox | null; destination: NativeBox | null };
@@ -51,14 +40,13 @@ function transferOffer(layout: Layout, [available, contents, active]: SlotState,
   return { stage: 'select_matching_token', command: click(box), source: box, destination, expected: [available, contents, source] };
 }
 
-export function createSicSlotTransfer(family = slotTransferId): NativeFamily<Proposal> {
-  const learns = family === learnSlotTransferId;
+export function createSicSlotTransfer(): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: family,
+    id: slotTransferId,
     async attachPrograms(registry) {
-      if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+      decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
@@ -78,16 +66,9 @@ export function createSicSlotTransfer(family = slotTransferId): NativeFamily<Pro
       const mode = execution?.reasoningMode ?? 'exploration';
       const repeated = local.confirmed?.includes(move.stage) ?? false;
       const facts = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
-      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
-      const primitive = repeated ? 'P02' : 'P05';
-      if (learns && decision?.result !== primitive) return null;
-      const agenda = learns ? null : resolveStrategyGraph({ graph, mode: 'active', facts: {
-        canSelect: { value: move.stage === 'select_matching_token', evidence },
-        canPlace: { value: move.stage === 'place_selected_token', evidence },
-        isComplete: { value: move.stage === 'submit_completed_sequence', evidence },
-      }, planners: { select_matching_token: () => move, place_selected_token: () => move, submit_completed_sequence: () => move } });
-      const strategy = learns ? primitive : agenda?.selected?.id;
-      if (!strategy) return null;
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = repeated ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
       const label = slotTransferStrategies[move.stage], parent = 'G_official_completion';
       const goal = { kind: 'match_expanded_reference_sequence', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_slot_row'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_matching_every_slot' };
@@ -95,15 +76,14 @@ export function createSicSlotTransfer(family = slotTransferId): NativeFamily<Pro
       const id = `slot-transfer:${need.id}`, actions = [move.command];
       const address = move.stage === 'select_matching_token' ? move.source : move.stage === 'place_selected_token' ? move.destination : null;
       const pointBinding = address ? await ObservedInputDomain.makeLocusWitness(observation, rows, point(address), { reason: label, evidence }) : null;
-      if (learns && address && !pointBinding) return null;
-      return { status: 'proposed', kind: family, actions, local, move, needId: need.id,
+      if (address && !pointBinding) return null;
+      return { status: 'proposed', kind: slotTransferId, actions, local, move, needId: need.id,
         steps: [{ action: move.command, expected_after: null, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
-          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
-        sicSituationCard: { strategy, need: 'Fill the visible slots to match the reference sequence', mode: learns ? mode : 'solving',
-          situation: label, agenda: agenda?.entries ?? [], evidence, source: move.source, destination: move.destination,
-          ...(decision ? { triggerCard: decision.receipt.workflow } : {}) },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+        sicSituationCard: { strategy, need: 'Fill the visible slots to match the reference sequence', mode,
+          situation: label, agenda: [], evidence, source: move.source, destination: move.destination, triggerCard: decision.receipt.workflow },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -125,7 +105,7 @@ export function createSicSlotTransfer(family = slotTransferId): NativeFamily<Pro
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, move } = proposal;
       const matched = !!move.expected && sameState(move.expected, readSlotState(second, local.layout));
-      const confirmed = matched && learns ? [...new Set([...(local.confirmed ?? []), move.stage])] : local.confirmed;
+      const confirmed = matched ? [...new Set([...(local.confirmed ?? []), move.stage])] : local.confirmed;
       state = { ...local, evidence: [local.evidence[0]!, ...local.evidence.slice(-2).filter(ref => ref !== local.evidence[0]), after.observation_ref],
         stopped: !matched, ...(confirmed ? { confirmed } : {}) };
       return { events: [] };
