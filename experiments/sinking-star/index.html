@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sinking Star Lab — SS01</title>
+<style>
+:root { color-scheme:dark; font:16px/1.5 system-ui,sans-serif; background:#111723; color:#eaf1fb; }
+* { box-sizing:border-box; } body { margin:0; padding:28px 18px; }
+main { max-width:1040px; margin:auto; } .eyebrow { color:#8dbbff; letter-spacing:.1em; font-size:.75rem; }
+h1 { font-size:clamp(1.7rem,5vw,2.7rem); margin:.2em 0; } .intro { color:#b6c4d7; max-width:760px; }
+.layout { display:grid; grid-template-columns:minmax(280px,512px) minmax(250px,1fr); gap:32px; align-items:start; }
+canvas { display:block; width:100%; aspect-ratio:1; image-rendering:pixelated; background:#333; border:1px solid #42526c; }
+button,select { font:inherit; border:1px solid #42526c; border-radius:6px; background:#202c3e; color:inherit; padding:9px 12px; cursor:pointer; }
+button:hover { background:#30435d; } button:disabled { opacity:.4; cursor:default; } button:focus-visible,select:focus-visible { outline:2px solid #8dbbff; outline-offset:3px; }
+select { width:100%; margin-bottom:14px; } .pad { display:grid; grid-template-columns:repeat(3,56px); gap:6px; justify-content:center; margin:16px 0 8px; }
+.pad .up { grid-column:2; } .pad .left { grid-column:1; } .power { width:100%; margin-bottom:12px; background:#294d7d; }
+.utility { display:flex; flex-wrap:wrap; gap:7px; } #status { min-height:1.5em; font-weight:650; color:#9ec7ff; }
+.legend { display:grid; grid-template-columns:18px 1fr; gap:10px 9px; margin:22px 0; }
+.swatch { width:16px; height:16px; margin-top:4px; } .merchant { background:#f59e29; } .water { background:#2765d3; } .goal { border:3px solid #ffe14a; } .mirror { background:linear-gradient(135deg,#000 42%,#fff 43%,#fff 57%,#777 58%); }
+.note { color:#a8b7ca; font-size:.9rem; } footer { border-top:1px solid #344257; margin-top:25px; padding-top:14px; color:#97a9bf; font-size:.85rem; }
+@media(max-width:730px) { .layout { grid-template-columns:1fr; } canvas { max-width:512px; margin:auto; } }
+</style>
+</head>
+<body><main>
+<div class="eyebrow">SRA PLAYGROUND · LABORATOIRE AUTONOME</div>
+<h1>Les Îles du Reflet</h1>
+<p class="intro">SS01 — Marchand. Trois niveaux pilotes, avant les huit niveaux du jeu complet. Cellules logiques de 3 × 3 pixels, affichées sans lissage.</p>
+<div class="layout"><section><canvas id="board" width="64" height="64" aria-label="Plateau SS01, marchand orange et destination jaune"></canvas><p id="status" aria-live="polite"></p></section>
+<section><label for="level">Niveau pilote</label><select id="level"></select>
+<div class="pad"><button class="up" data-action="1" aria-label="Haut">↑</button><button class="left" data-action="3" aria-label="Gauche">←</button><button data-action="2" aria-label="Bas">↓</button><button data-action="4" aria-label="Droite">→</button></div>
+<button class="power" data-action="5">Pouvoir du miroir · Espace</button>
+<div class="utility"><button id="undo">Undo · Z</button><button id="reset">Reset</button><button id="restart">Repartir du niveau 1</button></div>
+<div class="legend"><span class="swatch merchant"></span><span>Marchand orange ; pixel blanc = direction.</span><span class="swatch goal"></span><span>Destination jaune : rejoindre cette case.</span><span class="swatch mirror"></span><span>Miroir : deux rayons cyan, même distance de chaque côté.</span><span class="swatch water"></span><span>Eau : pas de déplacement ni d’arrivée dessus.</span></div>
+<p class="note">Flèches : marcher. Espace : passer sur l’autre rayon, à distance égale du miroir. Rouge : essai de pouvoir impossible. Le Marchand n’a pas besoin de regarder le miroir lorsqu’un seul miroir est utilisable.</p>
+<p class="note">Aucun SRA, solveur, serveur, Python ou accès réseau dans cette démonstration. Les autres personnages ne sont pas encore jouables.</p>
+</section></div>
+<footer>Prototype original inspiré de mécaniques de réflexion. Cartes originales, aucun asset du jeu source. Hors catalogue et hors site publié.</footer>
+</main>
+<!-- BUNDLE -->
+</body></html>
