@@ -576,6 +576,8 @@ La palette permutée et le nom neutralisé conservent les gains. Désactiver P05
 
 SPOR `079729fb629eb587dbef6b04df1e58c37a661169b8cfd10a34bf537a0faa2c12`. SELE `9a503869250e719e48223a979ec297615f68b4d3b80d167347cd69651581e30e`.
 
+Sur `986cb006`, les **71/100 retraits gagnants** totalisent 791 commandes SIC seul. Les 66 trajectoires précédentes après retrait, le catalogue normal et les quatre jeux complets avec et sans retrait gardent les mêmes commandes et retours. Le rejeu des deux niveaux déjà acquis de VC33 reproduit aussi les 14 commandes et leurs retours.
+
 ### Choisir les cibles de clic à partir de la zone qui réagit
 
 Avec l’exploration publique retirée, **THER gagne en 25 commandes**. Après quatre commandes de la famille d’accès, quatre essais mesurent les directions dans le plateau. Le changement intérieur sous la commande alternative permet d’essayer les formes intérieures. Les commandes et retours reproduisent la référence.
@@ -585,3 +587,5 @@ Avec l’exploration publique retirée, **THER gagne en 25 commandes**. Après q
 Le nom neutralisé et la palette permutée conservent les deux victoires. Désactiver P05 avant le premier clic laisse les deux niveaux ouverts. Le même fournisseur reproduit les trajectoires après retrait de SPOR, SELE, POLA et ELAS.
 
 THER `4a30b3d9ed344cc3e67c989728a733fd88729729c63f4ea7b9ee46587d14eb49`. LF52 `143c844406ae4210b054f2fd5f34493081cb822b0f1b7a222a8d232bf9d85852`.
+
+Sur `5f1b16ee`, les **73/100 retraits gagnants** totalisent 835 commandes SIC seul. Le rejeu vérifie les 71 trajectoires précédentes après retrait, les 100 premiers niveaux en configuration normale et les quatre jeux complets avec et sans retrait.
