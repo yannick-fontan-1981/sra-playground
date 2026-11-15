@@ -14,9 +14,11 @@ export const crossingRowsStrategies = {
 } as const;
 type State = { epoch: number; layout: CrossedPrefixLayout; progress: Record<string, number>; selected: string | null;
   commands: Record<string, string>; axisCommands: [string[], string[]]; crossed: boolean; tried: string[]; stopped: boolean; evidence: string[];
-  pairs?: CrossingPair[]; transferred?: boolean };
+  pairs?: CrossingPair[]; transferred?: boolean; pattern?: SwatchPattern };
 type CrossingPair = { commands: [string, string]; owner: 0 | 1; proof: string };
 type Acquired = { axes: [string[], string[]]; pairs: CrossingPair[]; layout: CrossedPrefixLayout };
+type Swatch = { point: CrossedPrefixController['point']; color: number };
+type SwatchPattern = { choices: Record<string, Swatch>; pairs: CrossingPair[][] };
 type Choice = { controller: CrossedPrefixController; action: NativeCommand; cell: NativePoint; selecting: boolean; crossing: boolean;
   interaction?: { peer: CrossedPrefixController; input: string; expected: number } };
 type Proposal = NativeProposal & { local: State; choice: Choice; attempt: string; needId: string };
@@ -27,6 +29,33 @@ const painted = (rows: NativeRows, layout: CrossedPrefixLayout, cell: NativePoin
   return pixels[Math.floor(pixels.length / 2)]?.[Math.floor((pixels[0]?.length ?? 0) / 2)];
 };
 
+function solveSwatches(layout: CrossedPrefixLayout, known: readonly CrossingPair[]): SwatchPattern | undefined {
+  const { controllers, reference } = layout;
+  const rows = controllers.filter(control => control.axis === 0), cols = controllers.filter(control => control.axis === 1);
+  const cells = reference.values.flatMap((row, y) => row.map((target, x) => ({ target, keys: [rows[y]!.key, cols[x]!.key] })));
+  if (cells.every(({ target, keys }) => controllers.some(control => keys.includes(control.key) && control.color === target))) return;
+  const choices: Record<string, Swatch> = {};
+  const pairFor = ({ target, keys }: typeof cells[number]) => known.find(pair => choices[keys[pair.owner]!]!.color === target);
+  let best: SwatchPattern | undefined, lowestCost = Infinity, visits = 0;
+  function visit(index: number, cost: number) {
+    if (cost >= lowestCost || ++visits > 5000) return;
+    if (index === controllers.length) {
+      const pairs = reference.values.map((row, y) => row.map((_, x) => pairFor(cells[y * row.length + x]!)!));
+      lowestCost = cost;
+      best = { choices: { ...choices }, pairs };
+      return;
+    }
+    const control = controllers[index]!;
+    for (const { color, point } of [control, ...control.alternatives]) {
+      choices[control.key] = { color, point };
+      if (cells.every(cell => cell.keys.some(key => !choices[key]) || pairFor(cell))) visit(index + 1, cost + Number(color !== control.color));
+    }
+    delete choices[control.key];
+  }
+  visit(0, 0);
+  return best;
+}
+
 function initial(epoch: number, rows: NativeRows, acquired: Acquired | null): State | null {
   const layout = crossedPrefixGeometry(rows);
   if (!layout || layout.controllers.length > 16 || layout.shape[0] * layout.shape[1] > 64) return null;
@@ -36,15 +65,20 @@ function initial(epoch: number, rows: NativeRows, acquired: Acquired | null): St
   const analogous = acquired && equal(layout.reference.scale, acquired.layout.reference.scale)
     && equal(layout.size, acquired.layout.size) && equal(layout.pitch, acquired.layout.pitch)
     && layout.controllers.every(control => acquired.layout.controllers.some(previous => previous.axis === control.axis && previous.side === control.side));
+  const pattern = analogous ? solveSwatches(layout, acquired.pairs) : undefined;
   return { epoch, layout, progress: Object.fromEntries(layout.controllers.map(control => [control.key, 0])), selected: null,
     commands: {}, axisCommands: analogous ? acquired.axes : [[], []], crossed: false, tried: [], stopped: false, evidence: [],
-    ...(analogous ? { pairs: acquired.pairs, transferred: true } : {}) };
+    ...(analogous ? { pairs: acquired.pairs, transferred: true } : {}), ...(pattern ? { pattern } : {}) };
 }
 
 function returnAssessment(proposal: Proposal, first: NativeRows, second: NativeRows) {
   const { local, choice } = proposal, { layout } = local;
   if (!crossedPrefixReferencePresent(second, layout)) return 'refuted';
-  if (choice.selecting) return 'selection';
+  if (choice.selecting) {
+    const measured = !local.pattern || crossedPrefixMeasureControls(second, layout)
+      ?.some(control => control.key === choice.controller.key && control.color === choice.controller.color);
+    return measured ? 'selection' : 'refuted';
+  }
   const before = crossedPrefixSlot(first, layout, choice.cell), after = crossedPrefixSlot(second, layout, choice.cell);
   if (equal(before, after)) return equal(first, second) ? 'unchanged' : 'refuted';
   const [x, y] = choice.cell, expected = choice.crossing ? layout.reference.values[y]![x] : choice.controller.color;
@@ -71,8 +105,9 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const local = state?.epoch === observation.level_epoch ? state : initial(observation.level_epoch, rows, acquired);
       if (!local || local.stopped || local.tried.length >= 80 || !crossedPrefixReferencePresent(rows, local.layout)) return null;
-      const { layout } = local, controls = crossedPrefixMeasureControls(rows, layout);
-      if (!controls) return null;
+      const { layout, pattern } = local, observed = crossedPrefixMeasureControls(rows, layout);
+      if (!observed) return null;
+      const controls = pattern ? observed.map(control => ({ ...control, ...pattern.choices[control.key]! })) : observed;
       const horizontal = controls.filter(control => control.axis === 0), vertical = controls.filter(control => control.axis === 1);
       const byLane = (items: CrossedPrefixController[], lane: number) => items.find(item => item.lane === lane)!;
       if (layout.reference.values.some((row, y) => row.some((value, x) =>
@@ -103,6 +138,7 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
       const learned = local.axisCommands[controller.axis], opposite = local.axisCommands[1 - controller.axis]!;
       const available = observation.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action));
       const expected = layout.reference.values[y]![x]!;
+      const composed = pattern?.pairs[y]?.[x];
       const pairMatches = (pair: CrossingPair) => priorCommand === undefined || pair.commands[1 - controller.axis] === priorCommand;
       const matchingOwner = (pair: CrossingPair) => (pair.owner === controller.axis ? controller.color : peer.color) === expected;
       const applicable = local.transferred ? (local.pairs ?? []).filter(pairMatches) : [];
@@ -113,14 +149,15 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
       const ordered = [...new Set(local.transferred
         ? [...preferred, ...newCommands, ...learned.filter(action => !contrary.has(action)), ...available.filter(action => !contrary.has(action))]
         : [...learned, ...newCommands, ...available])];
-      const plain = ordered.filter(action => available.includes(action)).map(action_ref => ({ action_ref, data: {} }))
+      const plain = (composed ? [composed.commands[controller.axis]] : ordered).filter(action => available.includes(action))
+        .map(action_ref => ({ action_ref, data: {} }))
         .find(action => !tested(action));
       const point = controller.point;
       const action = selecting ? { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } } : plain;
       if (!action || tested(action)) return null;
       const measured = !selecting && learned.includes(action.action_ref)
-        && (local.transferred ? preferred.includes(action.action_ref) : !crossing || local.crossed);
-      const selectedPair = applicable.find(pair => matchingOwner(pair) && pair.commands[controller.axis] === action.action_ref);
+        && (!!composed || (local.transferred ? preferred.includes(action.action_ref) : !crossing || local.crossed));
+      const selectedPair = composed ?? applicable.find(pair => matchingOwner(pair) && pair.commands[controller.axis] === action.action_ref);
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref,
         ...new Set([...local.evidence, ...(selectedPair ? [selectedPair.proof] : [])].filter(value => value !== ref))];
       const mode = execution?.reasoningMode ?? (measured ? 'solving' : 'exploration');
@@ -148,7 +185,8 @@ export function createSicVerifyCrossingRows(): NativeFamily<Proposal> {
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Reproduce the reference through contributions from both axes', mode,
-          situation: crossing ? 'The other axis has already reached this cell. Compare the crossing color with the reference.' : label,
+          situation: pattern && selecting ? 'Choose the visible swatch needed by this line and its crossings.'
+            : crossing ? 'The other axis has already reached this cell. Compare the crossing color with the reference.' : label,
           agenda: [], evidence, triggerCard: decision.receipt.workflow, target, reference, controller: [...point, ...point] },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
