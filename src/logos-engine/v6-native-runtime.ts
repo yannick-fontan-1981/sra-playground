@@ -65,6 +65,7 @@ import { createSicObservedLinePlacement } from '../sic/observed-line-placement.t
 import { createSicObservedPolePair } from '../sic/observed-pole-pair.ts';
 import { createSicObservedSharedRelations } from '../sic/observed-shared-relations.ts';
 import { createSicObservedPatternLayout } from '../sic/observed-pattern-layout.ts';
+import { createSicObservedActuatorArrangement } from '../sic/observed-actuator-arrangement.ts';
 import { createSicSlotTransfer } from '../sic/slot-transfer.ts';
 import { createSicRemoteSupportRoute, learnRemoteAccessId } from '../sic/remote-support-route.ts';
 import { createSicVerifyOccurrenceChoice } from '../sic/occurrence-recall.ts';
@@ -2686,7 +2687,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicLabeledSequence(sequence, now), createSicLabeledSequence(sequence, now, learnLabeledSequenceId),
       createSicMarkedCollection(), createSicVisibleConfigurationCoverage(), createSicMarkedCompartmentFlow(), createSicObservedRelayRoute(), createSicObservedPrefixQuotas(),
       createSicObservedCarrierReduction(), createSicObservedLinePlacement(), createSicObservedPolePair(), createSicObservedSharedRelations(),
-      createSicObservedPatternLayout(),
+      createSicObservedPatternLayout(), createSicObservedActuatorArrangement(),
       createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicRemoteSupportRoute(learnRemoteAccessId), createSicVerifyOccurrenceChoice(),
       createSicVerifySlotPermutation(), createSicSurfaceCopy(), createSicSurfaceCopy(learnSurfaceCopyId), createSicVerifyProgramConfiguration(), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicVerifyProfileTransfer(),
       createSicOrderedReplenishment(), createSicOrderedReplenishment(learnOrderedReplenishmentId), createSicVerifyPreviewPlacement(), createSicSymbolContribution(), createSicVerifyMarkedLattice(),

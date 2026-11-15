@@ -549,7 +549,9 @@ Sur **ETAG**, SIC conserve les rôles vérifiés au niveau 1 et relocalise la de
 
 Sur **GABA**, SIC réassemble les portions de sol séparées qui suivent le même quadrillage. Il retrouve les charges, leurs récepteurs et la station de rotation. Les effets de prise, de rotation et de dépôt confirmés au niveau 1 guident le nouveau trajet. Le retour de chaque commande vérifie les positions du porteur et des charges. Le niveau 2 gagne en **37 commandes** et **78,70 s**, mesurés pendant les qualifications parallèles. Les 47 commandes et retours du niveau 1 sont reproduits à l'identique. Les 84 commandes sont décidées par SIC. La permutation de palette conserve le trajet. Empreinte `d8e84441f18b906b07106f0e72ad42f49a461e36cdb53e6e462dc31bbec2baa6`.
 
-Le bilan atteint **98/100 niveaux 2** et **215/636 niveaux attestés sous SIC seul** (33,8 %).
+Sur **TRIA**, la disposition finale du niveau 1 vérifie que les positions relatives de l'exemple constituent un objectif. Au niveau 2, SIC mesure les axes des commandes visibles, compose leurs effets, puis vérifie la position de la pièce déplacée et la conservation des autres pièces après chaque commande. Le niveau 2 gagne en **14 commandes** et **41,58 s**, mesurés pendant les qualifications parallèles. Les huit commandes et retours du niveau 1 sont reproduits à l'identique. Les 22 commandes sont décidées par SIC. La permutation de palette conserve les commandes et les scores. Empreinte `bb6251eafba258b327edd9635868b0943aa3af2776c15959cdd2c18fa7970691`.
+
+Le bilan atteint **99/100 niveaux 2** et **216/636 niveaux attestés sous SIC seul** (34,0 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 

@@ -29,6 +29,7 @@ import { observedLinePlacementId, observedLineStrategies } from './observed-line
 import { observedPolePairId, observedPolePairStrategies } from './observed-pole-pair.ts';
 import { observedSharedRelationsId, observedSharedRelationsStrategies } from './observed-shared-relations.ts';
 import { observedPatternLayoutId, observedPatternLayoutStrategies } from './observed-pattern-layout.ts';
+import { observedActuatorArrangementId } from './observed-actuator-arrangement.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -689,6 +690,13 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === observedPatternLayoutId) {
     for (const [field, label] of [['focus', 'Piece to place'], ['destination', 'Position shown by the preview'], ['example', 'Corresponding preview piece']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === observedActuatorArrangementId) {
+    for (const [field, label] of [['focus', 'Selected piece'], ['control', 'Control point'],
+      ['destination', 'Position in the relative arrangement'], ['reference', 'Visible reference']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
