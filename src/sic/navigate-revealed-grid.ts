@@ -7,10 +7,11 @@ export const navigateRevealedGridId = 'sic_navigate_revealed_grid';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Grid = { box: NativeBox; pitch: number; columns: number; size: number; tint: number; base: number; actor: number; enemy: number; trail: number;
-  goal: number; charges: NativePoint[] };
+  goal: number; charges: NativePoint[]; actorPixels?: NativePoint[]; rail?: number };
 type Cell = 'wall' | 'free';
-type Reading = { position: number; obstacle: number | null; risk: number[]; memory: Partial<Record<number, Cell>>; charges: number };
-type State = { epoch: number; grid: Grid; last: Reading; previousObstacle: number | null; refs: string[]; consecutiveWaits: number };
+type Reading = { position: number; obstacle: number | null; obstacles: number[]; risk: number[]; memory: Partial<Record<number, Cell>>; charges: number };
+type Motion = { from: number; at: number };
+type State = { epoch: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean };
 type Proposal = NativeProposal & { local: State; choice: Choice; needId: string };
 
@@ -42,24 +43,41 @@ function measure(rows: NativeRows): Grid | null {
       const columns = width(box) / pitch, size = columns * height(box) / pitch;
       const dots = Array.from({ length: size }, (_, i) => [x + i % columns * pitch, y + Math.floor(i / columns) * pitch] as const);
       if (dots.filter(([a, b]) => rows[b]?.[a] === tint && rows[b]?.[a + 1] === base).length < size * 0.8) continue;
-      const squareFrames = parts.filter(p => inside(p) && width(p.bbox) === pitch && height(p.bbox) === pitch
+      const squareFrames: Part[] = parts.filter(p => inside(p) && width(p.bbox) === pitch && height(p.bbox) === pitch
         && (p.bbox[0] - x) % pitch === 0 && (p.bbox[1] - y) % pitch === 0 && p.color !== base && p.color !== tint && !p.rectangular);
-      if (squareFrames.length !== 2) continue;
-      const goalFrames = squareFrames.filter(p => colorAt(rows, center(p.bbox)) === base);
+      if (squareFrames.length < 2) continue;
+      const repeated = squareFrames.length > 2;
+      const goalFrames: Part[] = repeated ? squareFrames.filter(p => squareFrames.filter(q => p.color === q.color).length === 1)
+        : squareFrames.filter(p => colorAt(rows, center(p.bbox)) === base);
       if (goalFrames.length !== 1) continue;
-      const goalFrame = goalFrames[0]!, enemyFrame = squareFrames.find(p => p !== goalFrame)!;
+      const goalFrame = goalFrames[0]!;
+      const enemyFrames = squareFrames.filter(p => p !== goalFrame);
+      const enemyFrame = enemyFrames[0]!;
       const trail = colorAt(rows, center(enemyFrame.bbox));
       if (trail === undefined || trail === enemyFrame.color || trail === tint) continue;
+      if (repeated && enemyFrames.some(frame => frame.color !== enemyFrame.color || colorAt(rows, center(frame.bbox)) !== trail)) continue;
+      const details = new Set<number>();
+      if (repeated) for (const frame of enemyFrames) {
+        const [left, top, right, bottom] = frame.bbox;
+        for (let v = top + 1; v < bottom; v++) for (let u = left + 1; u < right; u++) {
+          const color = rows[v]?.[u];
+          if (color !== undefined && color !== enemyFrame.color && color !== trail && color !== base && color !== tint) details.add(color);
+        }
+      }
+      const rail = details.size === 1 ? [...details][0]! : null;
       const bodies = parts.filter(p => inside(p) && p.color !== base && p.color !== tint && width(p.bbox) === height(p.bbox)
-        && width(p.bbox) >= 2 && width(p.bbox) <= pitch / 2 && !p.rectangular
+        && width(p.bbox) >= 2 && width(p.bbox) <= (repeated ? Math.ceil(pitch / 2) : pitch / 2) && !p.rectangular
         && !squareFrames.some(f => p.bbox[0] >= f.bbox[0] && p.bbox[1] >= f.bbox[1] && p.bbox[2] <= f.bbox[2] && p.bbox[3] <= f.bbox[3]));
       if (bodies.length !== 1) continue;
       const badges = parts.filter(p => p.color === enemyFrame.color && p.rectangular && p.bbox[3] < y
         && width(p.bbox) >= 2 && width(p.bbox) <= pitch && height(p.bbox) >= 2 && height(p.bbox) <= pitch);
       if (!badges.length) continue;
       const goal = ((goalFrame.bbox[1] - y) / pitch) * columns + (goalFrame.bbox[0] - x) / pitch;
+      const actor = bodies[0]!;
+      const actorPixels = actor.mask.map(([dx, dy]) => [(actor.bbox[0] - x) % pitch + dx, (actor.bbox[1] - y) % pitch + dy] as const);
+      if (repeated && actorPixels.some(([dx, dy]) => dx >= pitch || dy >= pitch)) continue;
       candidates.push({ box, pitch, columns, size, tint, base, actor: bodies[0]!.color, enemy: enemyFrame.color, trail,
-        goal, charges: badges.map(p => center(p.bbox)) });
+        goal, charges: badges.map(p => center(p.bbox)), ...(repeated ? { actorPixels } : {}), ...(rail === null ? {} : { rail }) });
     }
   }
   return candidates.length === 1 ? candidates[0]! : null;
@@ -71,17 +89,18 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
   for (let i = 0; i < grid.size; i++) {
     const [x, y] = tile(grid, i), m = Math.floor(grid.pitch / 2);
     const a = rows[y]?.[x], b = rows[y]?.[x + 1], c = rows[y + 1]?.[x + 1], d = rows[y + m]?.[x + m];
-    const occupied = d === grid.actor && a !== grid.enemy && i !== grid.goal;
+    const actorVisible = grid.actorPixels ? grid.actorPixels.every(([dx, dy]) => rows[y + dy]?.[x + dx] === grid.actor) : d === grid.actor;
+    const occupied = actorVisible && a !== grid.enemy && i !== grid.goal;
     if (occupied) positions.push(i);
     if (a === grid.enemy) obstacles.push(i);
-    if (a === grid.enemy || d === grid.trail) risk.add(i);
+    if (a === grid.enemy || d === grid.trail || (grid.rail !== undefined && d === grid.rail)) risk.add(i);
     if (i === grid.goal || occupied) memory[i] = 'free';
     else if (a === grid.enemy) continue;
     else if (a === b && c !== b && a !== grid.tint && a !== grid.base) memory[i] = 'wall';
     else if (a === grid.tint && b === a && c === a && memory[i] !== 'wall') memory[i] = 'free';
   }
-  if (positions.length !== 1 || obstacles.length > 1) return null;
-  return { position: positions[0]!, obstacle: obstacles[0] ?? null, risk: [...risk], memory,
+  if (positions.length !== 1 || (!grid.actorPixels && obstacles.length > 1)) return null;
+  return { position: positions[0]!, obstacle: obstacles[0] ?? null, obstacles, risk: [...risk], memory,
     charges: grid.charges.filter(p => colorAt(rows, p) === grid.enemy).length };
 }
 
@@ -107,12 +126,34 @@ function route(reading: Reading, grid: Grid): { action: string; target: number }
   return null;
 }
 
-function choose({ grid, last, previousObstacle, consecutiveWaits }: State): Choice | null {
+function coordinate(index: number, grid: Grid): NativePoint {
+  return [index % grid.columns, Math.floor(index / grid.columns)];
+}
+
+function axisDistance(a: number, b: number, grid: Grid): number {
+  const [x, y] = coordinate(a, grid), [u, v] = coordinate(b, grid);
+  return Math.abs(x - u) + Math.abs(y - v);
+}
+
+function track(previous: Reading, current: Reading, grid: Grid, motions: Motion[] = []): Motion[] {
+  const old = previous.obstacles ?? [];
+  return current.obstacles.flatMap(at => {
+    const nearby = old.filter(from => axisDistance(from, at, grid) <= 1);
+    if (nearby.length !== 1 || current.obstacles.filter(other => axisDistance(nearby[0]!, other, grid) <= 1).length !== 1) return [];
+    const from = nearby[0]!;
+    if (at !== from) return [{ from, at }];
+    const known = motions.find(motion => motion.at === at);
+    return known ? [known] : [];
+  });
+}
+
+function choose({ grid, last, previousObstacle, consecutiveWaits, motions }: State): Choice | null {
   const next = route(last, grid);
   if (!next) return null;
   const target = next.target, uncertain = !last.memory[target], obstacle = last.obstacle;
-  const approaching = obstacle !== null && previousObstacle !== null && target === 2 * obstacle - previousObstacle;
-  const wait = obstacle === target || approaching;
+  const approaching = grid.actorPixels ? motions?.some(({ at, from }) => target === 2 * at - from && axisDistance(at, target, grid) === 1)
+    : obstacle !== null && previousObstacle !== null && target === 2 * obstacle - previousObstacle;
+  const wait = last.obstacles.includes(target) || approaching;
   if (last.charges && (!Object.keys(last.memory).some(i => Number(i) !== grid.goal && Number(i) !== last.position) || uncertain)) {
     return { action: { action_ref: 'ACTION5', data: {} }, kind: 'pulse', target, uncertain: true };
   }
@@ -145,7 +186,8 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         access: known ? offer : null, interaction: null });
       if (!selected) return null;
       const situation = choice.kind === 'pulse' ? 'Reveal nearby cells before taking an uncertain route'
-        : choice.kind === 'wait' ? 'Check the next phase of the moving obstacle before crossing'
+        : choice.kind === 'wait' ? last.obstacles.length > 1 ? 'Check the next positions of the moving obstacles before crossing'
+          : 'Check the next phase of the moving obstacle before crossing'
           : choice.uncertain ? 'Test the next unconfirmed cell on the route' : 'Follow the route through observed open cells';
       const parent = 'G_official_completion';
       const objective = { kind: 'navigate_with_partially_revealed_terrain', scope: ref.split(':revision:', 1)[0]!,
@@ -158,7 +200,9 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         steps: [{ action, expected_after: choice.kind === 'move' ? target : null }],
         sicSituationCard: { strategy: selected.id, need: 'Find a passable route to the exit', situation, evidence, agenda: entries, mode,
           triggerCard: card, actor: tile(grid, last.position), target, exit: tile(grid, grid.goal),
-          obstacle: last.obstacle === null ? null : tile(grid, last.obstacle), revealedWalls: Object.values(last.memory).filter(v => v === 'wall').length },
+          obstacle: last.obstacle === null ? null : tile(grid, last.obstacle),
+          ...(last.obstacles.length > 1 ? { obstacles: last.obstacles.map(index => tile(grid, index)) } : {}),
+          revealedWalls: Object.values(last.memory).filter(v => v === 'wall').length },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
@@ -184,10 +228,11 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, choice } = proposal, next = read(second, local.grid, local.last);
       if (!next) return { events: [] };
-      if (choice.kind === 'move' && next.position === local.last.position && next.obstacle !== choice.target && !next.risk.includes(choice.target)) {
+      if (choice.kind === 'move' && next.position === local.last.position && !next.obstacles.includes(choice.target) && !next.risk.includes(choice.target)) {
         next.memory[choice.target] = 'wall';
       }
       state = { ...local, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
+        ...(local.grid.actorPixels ? { motions: track(local.last, next, local.grid, local.motions) } : {}),
         refs: [...local.refs.slice(-4), after.observation_ref],
         consecutiveWaits: choice.kind === 'wait' ? local.consecutiveWaits + 1 : 0 };
       return { events: [] };

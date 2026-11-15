@@ -922,8 +922,13 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === navigateRevealedGridId || family === learnGridAccessId)) {
     for (const [field, label] of [['actor', 'Moving sprite'], ['target', 'Next cell'], ['obstacle', 'Moving obstacle'], ['exit', 'Exit']] as const) {
+      if (field === 'obstacle' && Array.isArray(card?.obstacles)) continue;
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+    if (Array.isArray(card?.obstacles)) for (const obstacle of card.obstacles) {
+      const box = bounds(obstacle);
+      if (box) subjects.push({ label: 'Moving obstacle', box });
     }
   }
   if (situationCard && (family === reproduceCueId || family === learnAnimatedCueId)) {
