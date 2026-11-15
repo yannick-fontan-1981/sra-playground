@@ -1,4 +1,5 @@
 export type Applicability = 'applicable' | 'inapplicable' | 'undetermined';
+export const observedMechanicsGroup = 'reuse_observed_mechanics';
 
 export type StrategyFact = { readonly value: boolean; readonly evidence: readonly [string, ...string[]] }
   | { readonly value: 'unknown' };

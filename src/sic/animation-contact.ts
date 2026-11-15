@@ -1,9 +1,11 @@
 import { animatedCrossInvitation } from '../logos-engine/v6-animated-contact.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeEntity, NativeFamily, NativePoint, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { measureAnimatedContact, type AnimatedContact } from './observed-animation.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
+import { chooseRegulatedContact, learnCurveWitness, measureRegulatedAdjustment, regulatedContactStrategies, retainRegulatedReturn,
+  type CurveWitness, type RegulatedChoice } from './regulated-transient-contact.ts';
 
 export const animationContactId = 'sic_animation_contact';
 export const learnAnimationContactId = 'sic_learn_animation_contact';
@@ -11,6 +13,7 @@ export const animationContactStrategies = {
   observe_transient_motion: 'Test an input and follow what moves through the animation',
   refine_transient_path: 'Test a new point to clarify the observed path',
   test_transient_contact: 'Test a point that could bring the moving piece into contact',
+  ...regulatedContactStrategies,
 } as const;
 
 const graph = compileStrategyGraph({
@@ -24,7 +27,8 @@ const graph = compileStrategyGraph({
 }, ['contact', 'disclosure', 'invitation']);
 
 type State = AnimatedContact & { epoch: number; frameHash: string; evidence: string[]; tried: NativePoint[] };
-type Proposal = NativeProposal & { local: State; target: NativePoint; needId: string };
+type FirstContact = { local: State; target: NativePoint; regulated?: never };
+type Proposal = NativeProposal & { needId: string } & (FirstContact | { regulated: RegulatedChoice });
 const samePoint = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 function hasUniquePairBelowAim(entities: readonly NativeEntity[], [x, y]: NativePoint): boolean {
   const compact = entities.flatMap(({ bbox: [l, t, r, b], area }) => {
@@ -36,13 +40,48 @@ function hasUniquePairBelowAim(entities: readonly NativeEntity[], [x, y]: Native
     && y < Math.min(a.t, b.t) && (a.r < x && x < b.l || b.r < x && x < a.l)));
   return pairs.length === 1;
 }
+
+async function regulatedProposal(observation: NativeObservation, rows: NativeRows, choice: RegulatedChoice): Promise<Proposal | null> {
+  const ref = observation.observation_ref, parent = 'G_official_completion';
+  const label = regulatedContactStrategies[choice.strategy], action = choice.action, actions = [action];
+  const evidence: [string, ...string[]] = [ref, ...choice.evidence.filter(value => value !== ref)];
+  const pointBinding = choice.projected && await ObservedInputDomain.makeLocusWitness(observation, rows, choice.projected, { reason: label, evidence });
+  if (choice.projected && !pointBinding) return null;
+  const objective = { kind: 'adapt_observed_motion_to_current_clearance', scope: ref.split(':revision:', 1)[0]!,
+    subjects: ['adjustable_magnitude', 'moving_piece', 'stationary_piece'], parentObjective: parent,
+    satisfactionContract: 'official_progress_after_regulated_trajectory' };
+  const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+  const id = 'animation-contact:' + need.id;
+  return { status: 'proposed', kind: animationContactId, regulated: choice, actions, needId: need.id,
+    binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    steps: [{ action, ...(pointBinding ? { point_binding: pointBinding } : {}), expected_after: null }],
+    sicSituationCard: { strategy: choice.strategy, need: 'Find a trajectory that reaches the stationary piece',
+      situation: label, evidence, agenda: [], mode: choice.shot ? 'solving' : 'exploration',
+      source: choice.source, peer: choice.peer, meter: choice.meter, point: choice.projected ? [...choice.projected, ...choice.projected] : null },
+    question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
+    sicLocalDecision: { strategy: choice.strategy, objective: { id, label, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label, preconditions: {},
+      preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicAnimationContact(family = animationContactId): NativeFamily<Proposal> {
   const learns = family === learnAnimationContactId;
   let state: State | null = null;
+  let curve: CurveWitness | null = null;
   return {
     id: family,
+    proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      const current = !learns && curve?.epoch === observation.level_epoch;
+      if ((group === observedMechanicsGroup) !== current) return null;
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (!learns && curve?.epoch === observation.level_epoch) {
+        const choice = chooseRegulatedContact(curve, observation, rows);
+        return choice ? regulatedProposal(observation, rows, choice) : null;
+      }
       const previous = state?.epoch === observation.level_epoch ? state : null;
       const receipt = learns && previous?.evidence.at(-1) !== observation.observation_ref ? execution?.readAnimatedContact?.() : null;
       const prior: State | null = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch
@@ -91,19 +130,38 @@ export function createSicAnimationContact(family = animationContactId): NativeFa
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_animation_experiment_bound' : 'animation_experiment_context_changed' };
     },
-    after(proposal, _index, before, after) {
+    after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.regulated) {
+        if (proposal.regulated.shot) return { matched: false, seal_prefix: true, reason: 'projected_trajectory_did_not_complete_contact' };
+        const delta = measureRegulatedAdjustment(proposal.regulated, first, second);
+        const matched = delta !== null && delta !== 0
+          && (proposal.regulated.expectedSign === null || Math.sign(delta) === proposal.regulated.expectedSign);
+        return { matched, seal_prefix: true, reason: matched ? 'magnitude_adjustment_observed' : 'magnitude_adjustment_unconfirmed' };
+      }
       return { matched: null, seal_prefix: true, reason: 'inspect_ordered_return_before_next_aim' };
     },
     record(before, after, command, first, second, proposal, _index, frames) {
+      if (proposal.regulated && curve) {
+        curve = retainRegulatedReturn(curve, proposal.regulated, before, after, first, second, frames);
+        return { events: [] };
+      }
+      if (!learns && !curve) curve = learnCurveWitness(before, after, command, first, second, frames);
+      if (curve && after.levels_completed > before.levels_completed) {
+        curve = { ...curve, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (proposal.regulated) return { events: [] };
       const { local, target } = proposal;
       state = { ...local, ...measureAnimatedContact(first, second, frames, command), frameHash: after.frame_hash, tried: [...local.tried, target],
         evidence: [...local.evidence.slice(-4), before.observation_ref, after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, ...(curve ? { curve } : {}) }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      curve = structuredClone((value.curve as CurveWitness | undefined) ?? null);
+    },
   };
 }

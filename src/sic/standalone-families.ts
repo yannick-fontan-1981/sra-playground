@@ -16,7 +16,8 @@ import { verifyBandTransferId } from './band-alignment.ts';
 import { verifySharedArrivalId } from './shared-arrival.ts';
 import { learnOutlineServiceId, outlineServiceId } from './outline-service.ts';
 import { labeledSequenceId, learnLabeledSequenceId } from './labeled-sequence.ts';
-import { markedCollectionId, reuseObservedProgramGroup } from './marked-collection.ts';
+import { markedCollectionId } from './marked-collection.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { visibleConfigurationCoverageId } from './visible-configuration-coverage.ts';
 import { markedCompartmentFlowId } from './marked-compartment-flow.ts';
 import { slotTransferId } from './slot-transfer.ts';
@@ -97,9 +98,7 @@ import { learnCorrespondenceId, learnRepeatedCellsId } from './learn-corresponde
 import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
-  { id: reuseObservedProgramGroup, families: [markedCollectionId] },
-  { id: 'cover_displayed_configurations', families: [visibleConfigurationCoverageId] },
-  { id: 'use_observed_compartment_readiness', families: [markedCompartmentFlowId] },
+  { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId] },
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },
   { id: 'inspect_candidate_relations', families: [verifyCrossingRowsId, verifyCaptureRouteId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, verifyCombinedMarksId, materialAssemblyId, learnMaterialAssemblyId, animationContactId, learnAnimationContactId] },
   { id: 'coordinate_visible_motion', families: [coupledGaugeRouteId, mergeForDemandId, verifyBandTransferId, verifySharedArrivalId, outlineServiceId, learnOutlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, verifyBranchAlignmentId, receptionAccessId, learnReceptionAccessId, verifyMarkerPlacementId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, learnPivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyConnectedRouteId, verifyInventoryTransferId, verifyRemoteReplayId, verifyOrientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, learnPairedPassageId, verifyFrameContactId, switchedSurfaceId, learnSwitchedSurfaceId, verifyReactiveMotionId, verifyPointAccessId, verifyLinkedMotionId, linkedGroupRouteId, verifyRemovableSupportId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, learnLinkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId, learnTurnPostsId] },

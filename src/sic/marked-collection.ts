@@ -4,10 +4,9 @@ import { collectionValues, matchesCollectionEdit, measureCollection } from './co
 import { sicNeedId } from './need-identity.ts';
 import { chooseObservedProgram, learnObservedProgram, verifyObservedProgram,
   type ProgramChoice, type ProgramEdit, type ProgramWitness, type RetainedProgram } from './observed-program-continuation.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const markedCollectionId = 'sic_marked_collection';
-export const reuseObservedProgramGroup = 'reuse_program_from_observed_returns';
 export const markedCollectionStrategies = {
   remove_marked_member: 'Test removing the marked member',
   insert_marked_contribution: 'Test inserting the marked contribution',
@@ -61,7 +60,7 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
     id: markedCollectionId,
     proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       const scoped = state.epoch === observation.level_epoch && !!state.program;
-      if ((group === reuseObservedProgramGroup) !== scoped) return null;
+      if ((group === observedMechanicsGroup) !== scoped) return null;
       return this.propose(observation, rows, inputs, remaining, execution);
     },
     async propose(observation, rows, inputs, remaining, execution) {

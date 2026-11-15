@@ -65,9 +65,9 @@ export function transientQuadratic(values:readonly number[]):number[]{
   return[moment[1]!,moment[2]!];
 }
 
-export function ballisticContactClick(track:readonly R[],source:R,peer:R,beforeComponents:readonly R[],rows:NativeRows,avoid:readonly number[]|null=null):[number[]|null,number[]|null]{
+export function ballisticContactClick(track:readonly R[],source:R,peer:R,beforeComponents:readonly R[],rows:NativeRows,avoid:readonly number[]|null=null,velocityScale=1):[number[]|null,number[]|null]{
   if(track.length<4||beforeComponents.filter(c=>c.value===peer.value).length!==1)return[null,null];
-  const points=track.map(center),[vr,square]=transientQuadratic(points.map(p=>p[0]!)),gravity=2*square!,vc=transientLinearSlope(points.map(p=>p[1]!)),speed=Math.hypot(vr!,vc);if(speed<0.5||Math.abs(gravity)<0.05)return[null,null];
+  const points=track.map(center),[vr,square]=transientQuadratic(points.map(p=>p[0]!)),gravity=2*square!,vc=transientLinearSlope(points.map(p=>p[1]!)),speed=Math.hypot(vr!,vc)*velocityScale;if(speed<0.5||Math.abs(gravity)<0.05)return[null,null];
   const sc=center(source),pc=center(peer),offset=Math.hypot(points[0]![0]!-sc[0]!,points[0]![1]!-sc[1]!);if(offset<1)return[null,null];
   const height=rows.length,width=rows[0]!.length,background=[...beforeComponents].sort((a,b)=>b.area-a.area)[0]!,excluded=new Set([source.component_id,peer.component_id,background.component_id]),blocked=new Set<string>(beforeComponents.filter(c=>!excluded.has(c.component_id)&&c.area>1).flatMap(c=>c.pixels.map(supportKey)));
   const fullWidth=beforeComponents.filter(c=>c.bbox.width>=width&&c.bbox.top>Math.floor(height/2)).map(c=>c.bbox.top);let playBottom=fullWidth.length?Math.min(...fullWidth):height;const fill=measureScalarFillDisplay(rows),fillIndex=fill.scalar_fill_index;
