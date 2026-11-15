@@ -44,14 +44,16 @@ const cases = {
 const [code, mode, scope = 'first', budgetText = '80', projection = 'standard'] = process.argv.slice(2);
 const entry = Object.hasOwn(cases, code) ? cases[code] : null;
 const budget = Number(budgetText);
-assert.ok(entry && ['original', 'family', 'planner'].includes(mode) && ['first', 'complete'].includes(scope)
+const requestedLevels = /^\d+$/.test(scope) ? Number(scope) : null;
+const validScope = ['first', 'complete'].includes(scope) || (Number.isSafeInteger(requestedLevels) && requestedLevels > 0);
+assert.ok(code && (mode === 'original' || (entry && ['family', 'planner'].includes(mode))) && validScope
   && Number.isSafeInteger(budget) && budget > 0 && ['standard', 'neutral'].includes(projection),
-  'Usage: node scripts/check-sic-planner-dependency.mjs DICO|DNOI|HANO|SYME|LF52|TRIA|KLOT|LS20 original|family|planner [first|complete] [actions per level] [standard|neutral]');
+  'Usage: node scripts/check-sic-planner-dependency.mjs GAME original|family|planner [first|complete|LEVELS] [actions per level] [standard|neutral]');
 
 const disabled = new Set(mode === 'original' ? [] : [entry.original]);
 if (mode === 'planner') disabled.add(entry.shared);
-const guardHits = Object.fromEntries(Object.keys(entry.guards).map(name => [name, 0]));
-const targetModule = new URL(entry.module, root).href;
+const guardHits = Object.fromEntries(Object.keys(entry?.guards ?? {}).map(name => [name, 0]));
+const targetModule = mode === 'planner' ? new URL(entry.module, root).href : null;
 const guardToken = Symbol.for('sic.planner-dependency.guard');
 let installedGuards = [];
 globalThis[guardToken] = name => { guardHits[name]++; };
@@ -122,7 +124,9 @@ async function run() {
     return { ...packet, gameCode: packet.code ?? packet.gameCode };
   }
   let board = play({ type: 'load', code, level: 1 });
-  const target = scope === 'complete' ? board.levelCount : 1;
+  const target = scope === 'complete' ? board.levelCount : requestedLevels ?? 1;
+  assert.ok(Number.isSafeInteger(target) && target >= 1 && target <= board.levelCount,
+    `Requested ${target} levels for ${code}, which has ${board.levelCount}`);
   const usage = new Map(), primitives = new Map();
   const levels = [];
   const entryReviews = new Map();

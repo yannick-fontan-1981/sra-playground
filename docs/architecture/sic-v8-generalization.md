@@ -40,6 +40,12 @@ node scripts/check-sic-planner-dependency.mjs DICO planner first 60
 node scripts/check-sic-planner-dependency.mjs DICO planner complete 80
 ```
 
+Le mode `original` accepte tous les jeux disponibles dans l'environnement local. Un nombre à la place de `first` ou `complete` fixe le score cumulé visé depuis le niveau 1. Le rapport donne le nombre de commandes, un temps par niveau et les empreintes du rejeu. Chaque commande est vérifiée avant son envoi pour confirmer qu'elle est décidée par SIC seul.
+
+```sh
+node scripts/check-sic-planner-dependency.mjs ESCT original 2 80
+```
+
 Chaque conclusion porte sur les fonctions explicitement neutralisées. Pour qualifier une reconstruction, le parcours doit aussi montrer quelle nouvelle preuve a été acquise et réutilisée. Le premier lot sert de base à l’extension du retrait aux autres niveaux 1.
 
 Le premier essai sur `341b6cb1` retrouve le niveau 1 de **DICO** en cinq commandes dans les modes `original` et `family`, avec la même empreinte des commandes et retours. Le mode `planner` laisse le niveau ouvert après 60 commandes. L'exploration publique en fournit 40 et les essais de contrôles linéaires 20. Le niveau 1 de **DNOI** reste également ouvert après 40 commandes, toutes fournies par l'exploration publique. Les fonctions prévues sont neutralisées dans les deux essais. Aucun fournisseur actif n'a tenté de les appeler. Ces deux parcours donnent les premières situations de comparaison pour l'apprentissage des groupes de candidats et des correspondances spatiales.
