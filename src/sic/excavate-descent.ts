@@ -9,7 +9,7 @@ export const verifyRemovableSupportId = 'sic_verify_removable_support';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Layout = { pitch: number; phaseX: number; phaseY: number; actorColor: number; blockColor: number; wallColor: number; airColor: number };
-type Tile = 'block' | 'wall' | 'air' | 'target';
+type Tile = 'block' | 'wall' | 'air' | 'target' | 'unverified';
 type Scene = { actor: Part; at: NativePoint; goal: Part | null; tiles: Record<string, Tile> };
 type Step = { action: NativeCommand; at: NativePoint };
 type Plan = { score: number; steps: Step[]; drop: boolean };
@@ -67,7 +67,9 @@ function sceneFor(rows: NativeRows, parts: Part[], layout: Layout): Scene | null
       if (goal && Math.abs(center(goal.bbox)[0] - x) < 3 && Math.abs(center(goal.bbox)[1] - y) < 3) tiles[key([x, y])] = 'target';
       else if (block === 21) tiles[key([x, y])] = 'block';
       else if (solid >= 20) tiles[key([x, y])] = 'wall';
-      else if (pixels.length === 25 && pixels.every(c => c === airColor)) tiles[key([x, y])] = 'air';
+      else if (pixels.length === (pitch - 1) ** 2) {
+        tiles[key([x, y])] = pixels.every(c => c === airColor) ? 'air' : 'unverified';
+      }
     }
   }
   tiles[key(at)] = 'air';
@@ -80,6 +82,23 @@ function route(scene: Scene, local: State): Plan | null {
   const dropScore = (x: number, first: number, base: number) => {
     let n = base, test = first;
     while (tile(x, test) === 'air') { n++; test -= pitch; }
+    if (n > 0) {
+      const blockedSide = (side: number, row: number) => {
+        const cell = tile(x + side * pitch, row);
+        return cell !== 'air' && cell !== 'block' && cell !== 'target';
+      };
+      const boxed = (row: number) => blockedSide(-1, row) && blockedSide(1, row);
+      // Check successive visible supports when the first landing has no lateral exit.
+      if (boxed(test + pitch)) {
+        let floor = test;
+        while (tile(x, floor) === 'block' && boxed(floor + pitch)) {
+          floor -= pitch;
+          while (tile(x, floor) === 'air') floor -= pitch;
+        }
+        if (tile(x, floor) === 'unverified' || (tile(x, floor) === 'wall' && boxed(floor + pitch))) return -1;
+      }
+    }
+    if (tile(x, test) === 'unverified') return -1;
     return n * 4 + (tile(x, test) === 'target' ? 120 : 0);
   };
   const click = (x: number, y: number): Step => ({ action: { action_ref: 'ACTION6', data: { x, y } }, at: [x, y] });
@@ -98,12 +117,13 @@ function route(scene: Scene, local: State): Plan | null {
       const move: Step = { action: { action_ref: d < 0 ? 'ACTION3' : 'ACTION4', data: {} }, at: [x, y] };
       const steps = [...current.steps, move];
       const score = t === 'target' ? 240 : dropScore(x, y - pitch, 0);
-      if (score) options.push({ score, steps, drop: steps.length === 1 && t !== 'target' });
+      if (score < 0) continue;
+      if (score > 0) options.push({ score, steps, drop: steps.length === 1 && t !== 'target' });
       else queue.push({ x, steps });
     }
     if (tile(current.x, y - pitch) === 'block') {
       const score = dropScore(current.x, y - 2 * pitch, 1);
-      options.push({ score, steps: [...current.steps, click(current.x, y - pitch)], drop: current.steps.length === 0 });
+      if (score > 0) options.push({ score, steps: [...current.steps, click(current.x, y - pitch)], drop: current.steps.length === 0 });
     }
   }
   options.sort((a, b) => b.score - a.score || a.steps.length - b.steps.length);
