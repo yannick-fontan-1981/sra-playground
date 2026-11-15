@@ -440,8 +440,16 @@ Avec `sic_framed_reception` retirée, **GARE gagne en 11 commandes SIC seul**. L
 
 L’empreinte du parcours après retrait est `28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09`. Le parcours de référence gagne en sept commandes. Le nom neutre et la palette permutée conservent le gain en 11 commandes. Désactiver P02 après le premier clic laisse le niveau ouvert au même budget.
 
+Les campagnes CD82 et GARE portent le total à **45/100** victoires après retrait, en 505 commandes SIC seul, dont 159 choisies par le SRC. L’exploration publique reste disponible dans 43 de ces essais. Les 100 niveaux 1 en usage normal, les 43 victoires précédentes après retrait et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours de référence.
+
 ### Relier le déplacement d’un contour à un cadre et à un repère
 
 Avec `sic_outline_service` retirée, **ESCT gagne en 16 commandes SIC seul**. Une commande de la famille d’accès déplace le contour d’une maille. Le fournisseur confirme sa position d’origine, son arrivée et la préservation du cadre. La carte SRC `sic.follow_observed_landings.choose` choisit 12 déplacements P07 et trois essais P05 pour vérifier successivement l’ouverture du cadre, le changement de direction du repère et le contact final.
 
 Les commandes et retours reproduisent la référence, empreinte `9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e`. Le nom neutre et la palette permutée conservent le gain. Désactiver P07 après le premier déplacement laisse le niveau ouvert. La famille d’accès choisit les 16 commandes.
+
+### Recalculer le trajet de livraison après un déplacement observé
+
+Avec `sic_pivot_cargo` retirée, **GABA gagne en 49 commandes SIC seul**. La famille de déplacement couplé fournit le premier essai. La pièce porteuse avance d’une maille et les cargaisons restent à leur place. SIC valide la vue précédente et le déplacement, puis calcule le trajet depuis la position réellement atteinte. La carte SRC `sic.follow_observed_landings.choose` décide des 48 commandes restantes, dont 40 déplacements P07, trois essais P05 et cinq réutilisations P02. Les retours vérifient les pièces déplacées, l’attache, la rotation et le dépôt.
+
+Le parcours de référence gagne en 47 commandes. Le nom neutre et la palette permutée conservent le gain en 49 commandes. Après désactivation de P07 au premier retour, le niveau reste ouvert et SIC épuise ses propositions à la 44ᵉ commande. Empreinte après retrait `4c0535fed4795be259cc0651ddc053e32eeabcd9d5fb0a69081d1d51e0170ee2`.

@@ -1,9 +1,11 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const pivotCargoId = 'sic_pivot_cargo';
+export const learnPivotCargoId = 'sic_deliver_cargo_after_observed_motion';
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Layout = { origin: NativePoint; pitch: number; floor: string[]; destinations: string[][]; pivot: string[];
@@ -138,20 +140,20 @@ function search(layout: Layout, start: Position): Move[] | null {
   return null;
 }
 
-function witnessed(rows: NativeRows, { local, move }: Proposal): boolean {
-  const { layout } = local, { next } = move;
+function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): boolean {
+  const { next } = move;
   const color = (point: NativePoint) => {
     const [x, y] = tileBox(layout, point);
     const cells = patch(rows, [x, y], layout.pitch);
     return cells[Math.floor(layout.pitch / 2) * (layout.pitch + 1)] === layout.core ? cells[0] : undefined;
   };
-  if (color(next.actor) !== layout.actorColor || !same(local.at.actor, next.actor) && color(local.at.actor) === layout.actorColor) return false;
+  if (color(next.actor) !== layout.actorColor || !same(at.actor, next.actor) && color(at.actor) === layout.actorColor) return false;
   return next.cargo.every((group, i) => {
     const shell = color(group[0]!);
     if (shell === undefined || shell === layout.actorColor || group.some(p => color(p) !== shell)) return false;
     if (move.intent === 'attach' && i === move.subject) return shell !== layout.freeColors[i];
     if (move.intent === 'drop' && i === move.subject) return shell === layout.freeColors[i];
-    const removed = local.at.cargo[i]!.filter(p => !group.some(q => same(q, p)));
+    const removed = at.cargo[i]!.filter(p => !group.some(q => same(q, p)));
     return removed.every(p => next.cargo.some(g => g.some(q => same(p, q))) || color(p) !== shell);
   });
 }
@@ -166,24 +168,53 @@ function initial(rows: NativeRows, epoch: number): Memory | null {
   return { epoch, layout, steps, at: layout.initial, refs: [], moves: false, interactions: [], failed: false };
 }
 
-export function createSicPivotCargo(): NativeFamily<Proposal> {
+function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined): Memory | null {
+  const receipt = execution?.readPriorDirectionalScene?.(measure);
+  if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== epoch) return null;
+  const direction = directions.find(([input]) => input === receipt.command);
+  if (!direction) return null;
+  const [input, dx, dy] = direction;
+  const options = receipt.scene.flatMap(layout => {
+    const at = layout.initial, actor = shift(at.actor, dx, dy);
+    if (!layout.floor.includes(key(actor)) || at.cargo.some(group => group.some(point => same(point, actor)))) return [];
+    const next = { ...at, actor };
+    if (!witnessed(rows, layout, at, { input, intent: 'move', next, subject: -1 })) return [];
+    const steps = search(layout, next);
+    return steps?.length ? [{ layout, at: next, steps }] : [];
+  });
+  if (options.length !== 1) return null;
+  return { ...options[0]!, epoch, moves: true, interactions: [], failed: false, refs: [receipt.beforeRef, ref] };
+}
+
+export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposal> {
+  const learns = family === learnPivotCargoId;
   let state: Memory | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: pivotCargoId,
-    propose(observation, rows, _inputs, remaining, execution): Proposal | null {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5'].every(ref => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
-      const local = state?.epoch === observation.level_epoch ? state : initial(rows, observation.level_epoch);
+      const ref = observation.observation_ref;
+      const local = state?.epoch === observation.level_epoch ? state
+        : learns ? acquireMotion(rows, ref, observation.level_epoch, execution) : initial(rows, observation.level_epoch);
       const move = local?.steps[0];
       if (!local || local.failed || !move) return null;
-      const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(r => r !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const motion = move.intent === 'move', known = motion ? local.moves : local.interactions.includes(move.intent);
       const offer = { input: move.input, expected: move.next.actor, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
+      const facts = { routeSupported: motion && known, eligibleProbe: !known, knownInteraction: !motion && known, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = !known ? 'P05' : motion ? 'P07' : 'P02';
+      if (learns && decision?.result !== primitive) return null;
+      const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence,
         probe: known ? null : offer, access: motion && known ? offer : null, interaction: !motion && known ? offer : null });
-      if (!selected) return null;
+      const strategy = learns ? primitive : navigation?.selected?.id;
+      if (!strategy) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'fit_cargo_onto_compatible_pads', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['carrier', 'cargo', 'pivot_surface', 'receiving_cells'], parentObjective: parent, satisfactionContract: 'official_progress_after_all_deliveries' };
@@ -195,14 +226,16 @@ export function createSicPivotCargo(): NativeFamily<Proposal> {
       const { layout } = local;
       const tile = (p: string) => tileBox(layout, p.split(',').map(Number) as [number, number]);
       return {
-        status: 'proposed', kind: pivotCargoId, local, move, needId: need.id,
+        status: 'proposed', kind: family, local, move, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: move.next.actor }],
-        sicSituationCard: { strategy: selected.id, need: 'Deliver the differently shaped cargo', situation, evidence, agenda: entries, mode,
-          triggerCard: card, actor: tileBox(layout, local.at.actor), cargo: local.at.cargo[subject]?.map(p => tileBox(layout, p)),
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: 'Deliver the differently shaped cargo', situation, evidence, agenda: navigation?.entries ?? [], mode,
+          triggerCard: navigation?.card ?? decision?.receipt.workflow, actor: tileBox(layout, local.at.actor), cargo: local.at.cargo[subject]?.map(p => tileBox(layout, p)),
           receivers: layout.destinations[subject]?.map(tile), pivot: move.intent === 'turn' ? layout.pivot.map(tile) : [] },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
@@ -214,13 +247,13 @@ export function createSicPivotCargo(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = witnessed(second, proposal);
+      const matched = witnessed(second, proposal.local.layout, proposal.local.at, proposal.move);
       return { matched, seal_prefix: true, reason: matched ? { move: 'cargo_translation_confirmed', attach: 'cargo_attachment_confirmed',
         turn: 'cargo_rotation_confirmed', drop: 'cargo_delivery_confirmed' }[proposal.move.intent] : 'cargo_projection_contradicted' };
     },
     record(before, after, _action, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, move } = proposal, matched = witnessed(second, proposal);
+      const { local, move } = proposal, matched = witnessed(second, local.layout, local.at, move);
       state = { ...local, failed: !matched, at: matched ? move.next : local.at, steps: matched ? local.steps.slice(1) : local.steps,
         moves: local.moves || matched && move.intent === 'move',
         interactions: matched && !local.interactions.includes(move.intent) ? [...local.interactions, move.intent] : local.interactions,
