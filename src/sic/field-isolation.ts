@@ -1,9 +1,11 @@
 import { acquireFields, fieldDirections, fieldStates, linkedControl, pairedControls } from '../logos-engine/v6-field-service-observation.ts';
 import { framedPatterns, type FramedPattern } from '../logos-engine/v6-geometric-scene.ts';
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { acquireSupplyCalibration, bindSupply, chooseSupplyCommand, consolidateSupply, supplyOutcome,
+  type SupplyCalibration, type SupplyChoice, type SupplyLayout, type SupplyModel } from './supply-distribution.ts';
 
 export const fieldIsolationId = 'sic_field_isolation';
 export const learnFieldIsolationId = 'sic_learn_field_isolation';
@@ -21,6 +23,10 @@ export const fieldIsolationStrategies = {
   test_inverse_field_effect: 'Test whether a contrasting control restores the previous field state',
   isolate_noncontributing_branch: 'Change the control aligned with the other field',
   repeat_isolated_field_effect: 'Repeat the measured effect with the other field isolated',
+  activate_verified_relay: 'Open the access to the previously verified relay',
+  enable_pending_receiver: 'Open access to a receiver with visible room',
+  protect_saturated_receiver: 'Isolate the filled receiver before delivering again',
+  deliver_observed_supply: 'Deliver from the measured supply to the open fields',
 } as const;
 const priorities = ['repeat_isolated_field_effect', 'isolate_noncontributing_branch', 'test_inverse_field_effect',
   'compare_repeated_field_effect', 'test_compact_control'] as const;
@@ -38,8 +44,12 @@ type Field = ReturnType<typeof acquireFields>[number];
 type Snapshot = ReturnType<typeof fieldStates>;
 type Target = { bbox: NativeBox; point: NativePoint; orientation?: string };
 type State = { epoch: number; phase: Phase; forward: Target; inverse: Target | null; gate: Target | null; fields: Field[];
-  history: Snapshot[]; other: string | null; count: number; stopped: boolean; evidence: string[] };
-type Proposal = NativeProposal & { local: State; target: Target; needId: string };
+  history: Snapshot[]; other: string | null; count: number; stopped: boolean; evidence: string[]; supplyCalibration?: SupplyCalibration | null };
+type IsolationProposal = NativeProposal & { local: State; target: Target; needId: string };
+type Distribution = { epoch: number; layout: SupplyLayout; refs: string[]; stopped: boolean };
+type SupplyProposal = NativeProposal & { distribution: Distribution; choice: SupplyChoice; needId: string };
+type Proposal = IsolationProposal | SupplyProposal;
+const isSupplyProposal = (proposal: Proposal): proposal is SupplyProposal => 'distribution' in proposal;
 const extent = ([l, t, r, b]: NativeBox) => [r - l + 1, b - t + 1];
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const matches = (a: Snapshot, b: Snapshot) => Object.keys(a).every(id => a[id]?.appearance_digest === b[id]?.appearance_digest);
@@ -66,9 +76,38 @@ function isolatedGate(local: State, rows: NativeRows) {
   return gate ? { gate, other: other[0]!.id as string } : null;
 }
 
+async function supplyProposal(
+  family: string, observation: NativeObservation, rows: NativeRows, distribution: Distribution,
+): Promise<SupplyProposal | null> {
+  const { layout, refs, stopped } = distribution;
+  const choice = !stopped && chooseSupplyCommand(rows, layout);
+  if (!choice) return null;
+  const strategies = { open_relay: 'activate_verified_relay', open_receiver: 'enable_pending_receiver',
+    protect_receiver: 'protect_saturated_receiver', deliver: 'deliver_observed_supply' } as const;
+  const strategy = strategies[choice.kind], label = fieldIsolationStrategies[strategy], parent = 'G_official_completion';
+  const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...refs.filter(value => value !== ref)];
+  const { point: [x, y], bbox } = choice.target, action = { action_ref: 'ACTION6', data: { x, y } };
+  const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
+  const objective = { kind: 'distribute_observed_supply', scope: ref.split(':revision:', 1)[0]!, subjects: layout.receivers.map(basin => basin.box.join(',')),
+    parentObjective: parent, satisfactionContract: 'all_receivers_filled_without_depleting_the_supply_early' };
+  const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = family + ':' + need.id;
+  return { status: 'proposed', kind: family, distribution, choice, needId: need.id, actions: [action],
+    steps: [{ action, expected_after: null, point_binding: witness }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    sicSituationCard: { strategy, need: 'Supply all receivers and preserve those already filled', mode: 'solving',
+      situation: label, agenda: [], evidence, control: bbox, relay: layout.relay.box, reserve: layout.stock.box,
+      fields: layout.receivers.map(receiver => receiver.box) },
+    question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
+    sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+      preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily<Proposal> {
   const learns = family === learnFieldIsolationId;
   let state: State | null = null;
+  let supply: SupplyModel | null = null;
+  let distribution: Distribution | null = null;
   return {
     id: family,
     async propose(observation, rows, _inputs, remaining, execution) {
@@ -76,9 +115,23 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
         !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 20) return null;
+      const model = supply?.completed === observation.levels_completed ? supply : null;
       const click = learns && !prior ? execution?.readClickFields?.() : null;
-      if (learns && !prior && (click?.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
+      const clickSupported = click?.afterRef === observation.observation_ref && click.levelEpoch === observation.level_epoch;
+      if (!model && learns && !prior && !clickSupported) return null;
       const patterns = framedPatterns(rows, geometricComponents(rows));
+      if (model) {
+        const current = distribution?.epoch === observation.level_epoch ? distribution : null;
+        const pump = !current && firstControl(patterns, rows);
+        const layout = current?.layout ?? (pump ? bindSupply(rows, pump, model) : null);
+        if (layout) {
+          const candidate = await supplyProposal(family, observation, rows, current ?? {
+            epoch: observation.level_epoch, layout, refs: model.refs, stopped: false,
+          });
+          if (candidate) return candidate;
+        }
+      }
+      if (learns && !prior && !clickSupported) return null;
       const forward = prior?.forward ?? firstControl(patterns, rows);
       if (!forward || !patterns.some(pattern => same(pattern.bbox, forward.bbox) && same(pattern.center, forward.point))) return null;
       if (click && !click.point.every((value, axis) => value >= forward.bbox[axis]! && value <= forward.bbox[axis + 2]!)) return null;
@@ -122,17 +175,32 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'field_control_bound' : 'field_control_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isSupplyProposal(proposal)) {
+        const received = supplyOutcome(proposal.choice, proposal.distribution.layout, first, second);
+        return { matched: received !== null, seal_prefix: true, reason: received ?? 'supply_return_contradicted' };
+      }
       const { local } = proposal;
       const measured = fieldStates(second, local.fields);
       const matched = local.phase === 'serve' ? measured[local.other!]?.appearance_digest === local.history.at(-1)![local.other!]?.appearance_digest : null;
       return { matched, seal_prefix: true, reason: 'compare_linked_fields_and_control' };
     },
     record(before, after, _command, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (isSupplyProposal(proposal)) {
+        if (before.level_epoch === after.level_epoch && before.state === after.state) {
+          const prior = proposal.distribution;
+          distribution = { ...prior, refs: [...prior.refs.slice(-5), after.observation_ref],
+            stopped: supplyOutcome(proposal.choice, prior.layout, first, second) === null };
+        }
+        return { events: [] };
+      }
       const { local, target } = proposal, { phase } = local;
+      if (after.levels_completed > before.levels_completed && phase === 'serve') {
+        supply = consolidateSupply(local.supplyCalibration ?? null, local.forward.bbox, after.levels_completed, after.observation_ref);
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const evidence = [...local.evidence.slice(-4), after.observation_ref];
       const next = { ...local, count: local.count + 1, evidence };
       if (phase === 'discover') {
@@ -161,12 +229,20 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
         } else {
           const previous = local.history.at(-1)!;
           next.stopped = matches(present, previous) || present[local.other!]?.appearance_digest !== previous[local.other!]?.appearance_digest;
+          if (!next.stopped && local.gate?.orientation) {
+            next.supplyCalibration = acquireSupplyCalibration(local.supplyCalibration ?? null, first, second,
+              local.gate.orientation, [before.observation_ref, after.observation_ref]);
+          }
         }
       }
       state = next;
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, supply, distribution }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      supply = structuredClone((value.supply as SupplyModel | undefined) ?? null);
+      distribution = structuredClone((value.distribution as Distribution | undefined) ?? null);
+    },
   };
 }

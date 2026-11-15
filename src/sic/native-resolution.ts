@@ -794,6 +794,9 @@ export function readNativeResolution(agent: {
   if (situationCard && (family === fieldIsolationId || family === learnFieldIsolationId)) {
     const control = bounds(card?.control);
     if (control) subjects.push({ label: 'Control tested', box: control });
+    const relay = bounds(card?.relay), reserve = bounds(card?.reserve);
+    if (relay) subjects.push({ label: 'Relay basin', box: relay });
+    if (reserve) subjects.push({ label: 'Visible supply', box: reserve });
     if (Array.isArray(card?.fields)) for (const field of card.fields) {
       const box = bounds(field);
       if (box) subjects.push({ label: 'Compared field', box });
