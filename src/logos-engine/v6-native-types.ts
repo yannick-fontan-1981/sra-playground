@@ -206,7 +206,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
     frames: readonly NativeRows[], execution?: NativeExecution): NativeMaybePromise<NativeRecordResult>;
   /** Retain evidence from a sealed public SIC action selected by another family. */
   observePublicOutcome?(before: NativeObservation, after: NativeObservation, command: NativeCommand,
-    firstRows: NativeRows, secondRows: NativeRows): void;
+    firstRows: NativeRows, secondRows: NativeRows): NativeMaybePromise<void>;
   // execution is native scheduling context, never an extra Python source datum.
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
