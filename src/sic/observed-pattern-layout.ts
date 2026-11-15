@@ -6,9 +6,12 @@ export const observedPatternLayoutId = 'sic_match_observed_pattern_layout';
 export const observedPatternLayoutStrategies = {
   select_piece_to_match_preview: 'Check which piece a click selects',
   align_piece_to_preview: 'Move one cell toward the position shown in the example',
+  park_piece_absent_from_preview: 'Bring the extra piece to a cell where it can be covered',
+  cover_piece_to_match_preview: 'Test which piece remains visible when they share a cell',
 } as const;
 
 type Grid = { xs: number[]; ys: number[]; floor: NativePoint; boundary: NativeBox };
+type Scan = { edges: number[]; colors: NativePoint; line: number };
 type Piece = { color: number; cell: NativePoint; selected: boolean };
 type Preview = { color: number; box: NativeBox };
 type Scene = { grid: Grid; preview: Preview[]; pieces: Piece[]; goals: Record<number, NativePoint> };
@@ -16,19 +19,37 @@ type Moves = Record<string, NativePoint>;
 type Training = { epoch: number; scene: Scene; controls: Moves; refs: string[] };
 type Witness = { epoch: number; score: number; controls: Moves; refs: string[] };
 type Local = { epoch: number; scene: Scene; refs: string[]; contradicted: boolean };
-type Proposal = NativeProposal & { scene: Scene; piece: Piece; destination: NativePoint | null; refs: string[]; needId: string };
+type Proposal = NativeProposal & { scene: Scene; piece: Piece; destination: NativePoint | null; covered?: Piece; refs: string[]; needId: string };
 
 const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2), Math.floor((t + b) / 2)];
 const size = ([l, t, r, b]: NativeBox): NativePoint => [r - l + 1, b - t + 1];
 const same = ([x, y]: NativePoint, [u, v]: NativePoint) => x === u && y === v;
 const key = ([x, y]: NativePoint) => `${x},${y}`;
 const direction = /^ACTION[1-4]$/;
-const goalSatisfied = (scene: Scene, pieces: Piece[]) => pieces.every(piece => same(piece.cell, scene.goals[piece.color]!));
+const goalSatisfied = (scene: Scene, pieces: Piece[]) => pieces.length === scene.preview.length
+  && pieces.every(piece => !!scene.goals[piece.color] && same(piece.cell, scene.goals[piece.color]!));
 const cellBox = (grid: Grid, [c, r]: NativePoint): NativeBox =>
   [grid.xs[c]!, grid.ys[r]!, grid.xs[c + 1]! - 1, grid.ys[r + 1]! - 1];
 
 function runStarts(values: readonly number[], offset: number): number[] {
   return [...values.flatMap((value, index) => index === 0 || value !== values[index - 1] ? [offset + index] : []), offset + values.length];
+}
+
+function checkerScan(values: readonly number[], offset: number, line: number): Scan | null {
+  if (new Set(values).size !== 2) return null;
+  const edges = runStarts(values, offset);
+  if (edges.length < 4 || edges.length > 15 || edges.slice(1).some((edge, i) => edge - edges[i]! < 3)) return null;
+  return { edges, colors: [values[0]!, values[edges[1]! - offset]!], line };
+}
+
+function crossingGrid(horizontal: Scan, vertical: Scan, boundary: NativeBox): Grid | null {
+  const xs = horizontal.edges, ys = vertical.edges;
+  const row = ys.slice(1).findIndex(edge => edge > horizontal.line);
+  const column = xs.slice(1).findIndex(edge => edge > vertical.line);
+  if (row < 0 || column < 0) return null;
+  const floor: NativePoint = row % 2 === 0 ? horizontal.colors : [horizontal.colors[1], horizontal.colors[0]];
+  if (vertical.colors[0] !== floor[column % 2] || vertical.colors[1] !== floor[1 - column % 2]) return null;
+  return { boundary, xs, ys, floor };
 }
 
 function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows): Grid | null {
@@ -39,13 +60,22 @@ function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows): Gr
   });
   if (borders.length !== 1) return null;
   const boundary = borders[0]!.bbox, [l, t, r, b] = boundary;
-  const horizontal = rows[t + 1]!.slice(l + 1, r), vertical = rows.slice(t + 1, b).map(row => row[l + 1]!);
-  const xs = runStarts(horizontal, l + 1), ys = runStarts(vertical, t + 1);
-  const floor: NativePoint = [horizontal[0]!, horizontal[xs[1]! - l - 1]!];
-  if (xs.length < 4 || ys.length < 4 || xs.length > 15 || ys.length > 15
-    || new Set(horizontal).size !== 2 || new Set(vertical).size !== 2 || !floor.every(color => vertical.includes(color))) return null;
-  if (![xs, ys].every(axis => axis.slice(1).every((line, index) => line - axis[index]! >= 3))) return null;
-  return { boundary, xs, ys, floor };
+  const inside = rows.slice(t + 1, b);
+  const rowAt = (y: number) => checkerScan(rows[y]!.slice(l + 1, r), l + 1, y);
+  const columnAt = (x: number) => checkerScan(inside.map(row => row[x]!), t + 1, x);
+  const top = rowAt(t + 1), left = columnAt(l + 1);
+  const direct = top && left && crossingGrid(top, left, boundary);
+  if (direct && readPieces(rows, direct)) return direct;
+
+  const horizontal = inside.map((_, i) => rowAt(t + 1 + i)).filter((scan): scan is Scan => scan !== null);
+  const vertical = rows[0]!.slice(l + 1, r).map((_, i) => columnAt(l + 1 + i)).filter((scan): scan is Scan => scan !== null);
+  const distinct = new Map<string, Grid>();
+  for (const h of horizontal) for (const v of vertical) {
+    const grid = crossingGrid(h, v, boundary);
+    if (grid) distinct.set(JSON.stringify([grid.xs, grid.ys, grid.floor]), grid);
+  }
+  const consistent = [...distinct.values()].filter(grid => readPieces(rows, grid) !== null);
+  return consistent.length === 1 ? consistent[0]! : null;
 }
 
 function cells(grid: Grid): NativePoint[] {
@@ -100,7 +130,8 @@ function readScene(observation: NativeObservation, rows: NativeRows): Scene | nu
     const [x, y, u, v] = entity.bbox, [width, height] = size(entity.bbox);
     return entity.palette_value === piece.color && entity.rectangular && Math.min(width, height) >= 2
       && (u < l || x > r || v < t || y > b);
-  }).map(entity => ({ color: piece.color, box: entity.bbox })));
+  }).map(entity => ({ color: piece.color, box: entity.bbox }))).filter(domain => domain.length > 0);
+  if (candidates.length < 2) return null;
   if (candidates.reduce((count, domain) => count * domain.length, 1) > 32) return null;
   let variants: Preview[][] = [[]];
   for (const domain of candidates) variants = variants.flatMap(variant => domain.map(sample => [...variant, sample]));
@@ -108,7 +139,7 @@ function readScene(observation: NativeObservation, rows: NativeRows): Scene | nu
   return layouts.length === 1 ? layouts[0]! : null;
 }
 
-function nextMove(grid: Grid, piece: Piece, goal: NativePoint, controls: Moves, occupied: Set<string>) {
+function nextMove(grid: Grid, piece: Piece, goal: NativePoint, controls: Moves, occupied: Set<string>, cover = false) {
   const found = new Set([key(piece.cell)]);
   const queue: { cell: NativePoint; first: string | null; step: NativePoint; length: number }[] =
     [{ cell: piece.cell, first: null, step: piece.cell, length: 0 }];
@@ -118,12 +149,35 @@ function nextMove(grid: Grid, piece: Piece, goal: NativePoint, controls: Moves, 
     for (const [command, [dx, dy]] of Object.entries(controls)) {
       const next: NativePoint = [x + dx, y + dy], id = key(next);
       if (next[0] < 0 || next[0] >= grid.xs.length - 1 || next[1] < 0 || next[1] >= grid.ys.length - 1
-        || found.has(id) || occupied.has(id)) continue;
+        || found.has(id) || (occupied.has(id) && !(cover && same(next, goal)))) continue;
       found.add(id);
       queue.push({ cell: next, first: entry.first ?? command, step: entry.first ? entry.step : next, length: entry.length + 1 });
     }
   }
   return null;
+}
+
+function previewRoutes(scene: Scene, controls: Moves) {
+  const occupancy = new Map(scene.pieces.map(piece => [key(piece.cell), piece]));
+  const occupied = new Set(occupancy.keys()), goals = Object.values(scene.goals);
+  const parking = goals.filter(goal => {
+    const holding = occupancy.get(key(goal));
+    return !holding || !scene.goals[holding.color];
+  });
+  const routes = scene.pieces.flatMap(piece => {
+    const expected = scene.goals[piece.color];
+    const destinations = expected ? [expected] : goals.some(goal => same(goal, piece.cell)) ? [] : parking;
+    return destinations.flatMap(goal => {
+      const occupant = occupancy.get(key(goal)), cover = !!occupant && !scene.goals[occupant.color];
+      const move = nextMove(scene.grid, piece, goal, controls, occupied, cover);
+      if (!move) return [];
+      const covered = move && cover && same(move.step, goal) ? occupant : undefined;
+      return [{ piece, move, goal, covered }];
+    });
+  });
+  const spareRoutes = routes.filter(({ piece }) => !scene.goals[piece.color]);
+  return (spareRoutes.length ? spareRoutes : routes)
+    .sort((a, b) => Number(b.piece.selected) - Number(a.piece.selected) || a.move.length - b.move.length);
 }
 
 function singleChange(pieces: Piece[], after: Piece[], focus: Piece) {
@@ -146,7 +200,7 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) {
         if (prior && Object.keys(prior.controls).length === 4 && frames.some(frame => {
           const current = readPieces(frame, scene.grid);
-          return current && current.length === pieces.length && current.every(piece => scene.goals[piece.color])
+          return current && current.length === pieces.length
             && !!singleChange(pieces, current, selected) && goalSatisfied(scene, current);
         })) {
           witness = { epoch: after.level_epoch, score: after.levels_completed, controls: prior.controls, refs: [...prior.refs, after.observation_ref] };
@@ -174,17 +228,14 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
       const retained = prior?.scene ?? readScene(observation, rows);
       if (!retained) return null;
       const pieces = readPieces(rows, retained.grid);
-      if (!pieces || pieces.length !== retained.pieces.length || pieces.some(piece => !retained.goals[piece.color])) return null;
-      const scene = { ...retained, pieces }, occupied = new Set(pieces.map(piece => key(piece.cell)));
+      if (!pieces || pieces.length !== retained.pieces.length || pieces.some(piece => !retained.pieces.some(known => piece.color === known.color))) return null;
+      const scene = { ...retained, pieces };
       const controls = Object.fromEntries(Object.entries(witness.controls).filter(([input]) => observation.available_action_refs.includes(input)));
-      const routes = pieces.flatMap(piece => {
-        const move = nextMove(scene.grid, piece, scene.goals[piece.color]!, controls, occupied);
-        return move ? [{ piece, move }] : [];
-      }).sort((a, b) => Number(b.piece.selected) - Number(a.piece.selected) || a.move.length - b.move.length);
-      const next = routes[0];
+      const next = previewRoutes(scene, controls)[0];
       if (!next) return null;
-      const { piece, move } = next, focus = cellBox(scene.grid, piece.cell), [x, y] = center(focus);
-      const strategy = piece.selected ? 'align_piece_to_preview' : 'select_piece_to_match_preview';
+      const { piece, move, goal: target, covered } = next, focus = cellBox(scene.grid, piece.cell), [x, y] = center(focus);
+      const strategy = !piece.selected ? 'select_piece_to_match_preview' : covered ? 'cover_piece_to_match_preview'
+        : scene.goals[piece.color] ? 'align_piece_to_preview' : 'park_piece_absent_from_preview';
       const label = observedPatternLayoutStrategies[strategy], ref = observation.observation_ref, parent = 'G_official_completion';
       const evidence: [string, ...string[]] = [ref, ...new Set([...witness.refs, ...(prior?.refs ?? [])].filter(value => value !== ref))];
       const binding = piece.selected ? null : await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
@@ -197,11 +248,13 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `preview-layout:${need.id}`;
       return { status: 'proposed', kind: observedPatternLayoutId, actions, scene, piece, destination, refs: evidence, needId: need.id,
+        ...(piece.selected && covered ? { covered } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: [{ action, ...(binding ? { point_binding: binding } : {}), expected_after: destination }],
         sicSituationCard: { strategy, need: 'Match the arrangement shown in the example', situation: label,
-          mode: piece.selected ? 'solving' : 'assimilation', evidence, agenda: [], focus,
-          destination: cellBox(scene.grid, scene.goals[piece.color]!), example: scene.preview.find(sample => sample.color === piece.color)!.box },
+          mode: piece.selected ? covered ? 'exploration' : 'solving' : 'assimilation', evidence, agenda: [], focus,
+          destination: cellBox(scene.grid, target), example: scene.preview.find(sample => sample.color === piece.color)?.box ?? null,
+          covered: piece.selected && covered ? cellBox(scene.grid, covered.cell) : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -222,8 +275,7 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) {
         if (witness && frames.some(frame => {
           const observed = readPieces(frame, proposal.scene.grid);
-          return observed && observed.length === proposal.scene.pieces.length && observed.every(piece => proposal.scene.goals[piece.color])
-            && goalSatisfied(proposal.scene, observed);
+          return observed && goalSatisfied(proposal.scene, observed);
         })) {
           witness = { ...witness, epoch: after.level_epoch, score: after.levels_completed,
             refs: [...proposal.refs.slice(-3), after.observation_ref] };
@@ -245,7 +297,8 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
 }
 
 function confirmed(proposal: Proposal, rows: NativeRows): Piece[] | null {
-  const { scene, piece, destination } = proposal;
-  const observed = readPieces(rows, scene.grid), moved = observed && singleChange(scene.pieces, observed, piece);
+  const { scene, piece, destination, covered } = proposal;
+  const expected = covered ? scene.pieces.filter(other => other.color !== covered.color) : scene.pieces;
+  const observed = readPieces(rows, scene.grid), moved = observed && singleChange(expected, observed, piece);
   return moved?.selected && same(moved.cell, destination ?? piece.cell) ? observed : null;
 }

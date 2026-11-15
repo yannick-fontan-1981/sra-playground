@@ -728,7 +728,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && family === observedPatternLayoutId) {
-    for (const [field, label] of [['focus', 'Piece to place'], ['destination', 'Position shown by the preview'], ['example', 'Corresponding preview piece']] as const) {
+    for (const [field, label] of [['focus', 'Piece to place'], ['destination', 'Position shown by the preview'],
+      ['example', 'Corresponding preview piece'], ['covered', 'Piece expected to be covered']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
