@@ -1,8 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { measureAnimatedCells } from './observed-animation.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { aimCommands, aimPoseMatches, aimRoute, hasAimedRay, readAimPose, readRemoteRoute, remoteFlightObserved, remoteOpeningObserved,
+  type AimCommand, type AimPose, type AimWitness, type RemoteRoute } from './remote-effect-route.ts';
 
 export const reproduceCueId = 'sic_reproduce_cue';
 export const learnAnimatedCueId = 'sic_learn_animated_cue';
@@ -16,6 +19,11 @@ type Step = { action: NativeCommand; kind: 'observe' | 'reproduce' | 'approach';
 type State = { epoch: number; scene: Scene; cues: readonly number[]; refs: string[]; demonstrationRef: string | null; prepared: boolean;
   receiver: NativeBox | null; horizontal: number | null; rejected: string[] };
 type Proposal = NativeProposal & { local: State; step: Step; needId: string; attempt: string };
+type RemoteState = { epoch: number; route: RemoteRoute; panel: NativeBox; cells: Cell[]; samples: NativeBox[];
+  opened: boolean; stopped: boolean; refs: string[]; lastRef: string };
+type RemoteStep = { kind: 'aim' | 'copy' | 'launch' | 'exit'; action: NativeCommand; pose: AimPose; expected: AimPose; cell?: Cell };
+type RemoteProposal = NativeProposal & { remote: RemoteState; aiming: RemoteStep; needId: string };
+const isRemote = (p: Proposal | RemoteProposal): p is RemoteProposal => 'remote' in p;
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -25,13 +33,13 @@ const intersects = (a: NativeBox, b: NativeBox) => a[0] <= b[2] && b[0] <= a[2] 
 const union = (a: NativeBox, b: NativeBox): NativeBox => [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3])];
 const colorAt = (rows: NativeRows, [x, y]: NativePoint) => rows[y]?.[x];
 
-function measure(rows: NativeRows, allowVisible: boolean): Scene | null {
-  const parts = geometricComponents(rows), h = rows.length;
-  const squaresInside = (panel: Part) => parts.filter(p => p.rectangular && width(p.bbox) === height(p.bbox)
-    && width(p.bbox) >= 2 && width(p.bbox) <= 5 && inside(panel.bbox, p.bbox) && p.color !== panel.color);
+const squaresInside = (parts: Part[], panel: Part) => parts.filter(p => p.rectangular && width(p.bbox) === height(p.bbox)
+  && width(p.bbox) >= 2 && width(p.bbox) <= 5 && inside(panel.bbox, p.bbox) && p.color !== panel.color);
+
+function measureInput(parts: Part[], h: number, allowVisible: boolean) {
   const candidates = parts.flatMap(panel => {
     if (panel.bbox[1] < h / 2 || width(panel.bbox) < 10 || height(panel.bbox) < 10) return [];
-    const squares = squaresInside(panel);
+    const squares = squaresInside(parts, panel);
     if (squares.length !== 9) return [];
     const cells = squares.map(p => ({ box: p.bbox, point: center(p.bbox), initial: p.color }))
       .sort((a, b) => a.point[1] - b.point[1] || a.point[0] - b.point[0]);
@@ -43,9 +51,35 @@ function measure(rows: NativeRows, allowVisible: boolean): Scene | null {
     return [{ panel: panel.bbox, panelColor: panel.color, cells, checkered }];
   });
   const checkerboards = candidates.filter(candidate => candidate.checkered);
-  const input = checkerboards.length === 1 ? checkerboards[0] : allowVisible && candidates.length === 1 ? candidates[0] : null;
+  return checkerboards.length === 1 ? checkerboards[0] : allowVisible && candidates.length === 1 ? candidates[0] : null;
+}
+
+function measureExample(parts: Part[], { panel, panelColor, cells }: NonNullable<ReturnType<typeof measureInput>>) {
+  const miniatures = parts.flatMap(preview => {
+    const box = preview.bbox;
+    if (preview.color !== panelColor || intersects(panel, box) || width(box) >= width(panel) || height(box) >= height(panel)
+      || width(box) !== height(box)) return [];
+    const examples = squaresInside(parts, preview);
+    const size = width(examples[0]?.bbox ?? box);
+    if (!cueSubset(examples, cells) || width(box) < 3 * size
+      || !examples.every(p => p.color === examples[0]!.color && width(p.bbox) === size)) return [];
+    const pitch = width(box) / 3;
+    const positions = examples.map(({ bbox }) => {
+      const [x, y] = center(bbox);
+      return [(x - box[0] + size / 2) / pitch, (y - box[1] + size / 2) / pitch];
+    });
+    if (!positions.every(point => point.every(coordinate => Math.abs(coordinate % 1 - 0.5) <= 0.25))) return [];
+    const cue = positions.map(([x, y]) => Math.floor(y!) * 3 + Math.floor(x!));
+    if (new Set(cue).size !== cue.length) return [];
+    return [{ box, cells: cue.sort((a, b) => a - b), examples: examples.map(p => p.bbox), ink: examples[0]!.color }];
+  });
+  return miniatures.length === 1 ? miniatures[0]! : null;
+}
+
+function measure(rows: NativeRows, allowVisible: boolean): Scene | null {
+  const parts = geometricComponents(rows), input = measureInput(parts, rows.length, allowVisible);
   if (!input) return null;
-  const { panel, panelColor, cells, checkered } = input;
+  const { panel, cells, checkered } = input;
   const rowsOfTrack = checkered ? parts.filter(p => p.bbox[3] < panel[1] && width(p.bbox) > 3 * height(p.bbox)
     && height(p.bbox) >= 2 && height(p.bbox) <= 8 && p.area >= width(p.bbox) * height(p.bbox) * 0.7) : [];
   const scenes = rowsOfTrack.flatMap(track => {
@@ -63,26 +97,8 @@ function measure(rows: NativeRows, allowVisible: boolean): Scene | null {
   });
   if (scenes.length === 1) return scenes[0]!;
   if (scenes.length || !allowVisible) return null;
-  const miniatures = parts.flatMap(preview => {
-    const box = preview.bbox;
-    if (preview.color !== panelColor || intersects(panel, box) || width(box) >= width(panel) || height(box) >= height(panel)
-      || width(box) !== height(box)) return [];
-    const examples = squaresInside(preview);
-    const size = width(examples[0]?.bbox ?? box);
-    if (!cueSubset(examples, cells) || width(box) < 3 * size
-      || !examples.every(p => p.color === examples[0]!.color && width(p.bbox) === size)) return [];
-    const pitch = width(box) / 3;
-    const positions = examples.map(({ bbox }) => {
-      const [x, y] = center(bbox);
-      return [(x - box[0] + size / 2) / pitch, (y - box[1] + size / 2) / pitch];
-    });
-    if (!positions.every(point => point.every(coordinate => Math.abs(coordinate % 1 - 0.5) <= 0.25))) return [];
-    const cue = positions.map(([x, y]) => Math.floor(y!) * 3 + Math.floor(x!));
-    if (new Set(cue).size !== cue.length) return [];
-    return [{ box, cells: cue.sort((a, b) => a - b), examples: examples.map(p => p.bbox) }];
-  });
-  if (miniatures.length !== 1) return null;
-  const miniature = miniatures[0]!;
+  const miniature = measureExample(parts, input);
+  if (!miniature) return null;
   const field = parts.filter(p => !intersects(p.bbox, panel) && !intersects(p.bbox, miniature.box));
   const halves = field.filter(p => p.rectangular && Math.max(width(p.bbox), height(p.bbox)) === 2 * Math.min(width(p.bbox), height(p.bbox)));
   const routes: Scene[] = [];
@@ -153,13 +169,107 @@ function choose(local: State, rows: NativeRows): Step | null {
     ...(predicted ? { predicted } : {}) };
 }
 
-export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Proposal> {
+function chooseRemote(local: RemoteState, rows: NativeRows, available: readonly string[], remaining: number): RemoteStep | null {
+  const pose = readAimPose(rows, local.route);
+  if (!pose) return null;
+  const aimed = hasAimedRay(rows, local.route, pose);
+  if (!local.opened && aimed) {
+    const unresolved = local.cells.filter(cell => colorAt(rows, cell.point) === cell.initial), cell = unresolved[0];
+    if (!cell) return null;
+    const [x, y] = cell.point;
+    return { kind: unresolved.length === 1 ? 'launch' : 'copy', action: { action_ref: 'ACTION6', data: { x, y } },
+      pose, expected: pose, cell };
+  }
+  const plan = aimRoute(rows, local.route, pose, available, local.opened ? 'exit' : 'aim', remaining);
+  if (!plan) return null;
+  return { kind: local.opened ? 'exit' : 'aim', action: { action_ref: plan.action, data: {} }, pose, expected: plan.pose };
+}
+
+function remoteReturn(rows: NativeRows, { remote, aiming }: RemoteProposal): string | null {
+  const { kind, expected, cell } = aiming;
+  if (!aimPoseMatches(rows, remote.route.witness, expected)) return null;
+  if (kind === 'launch') return remoteOpeningObserved(rows, remote.route) ? 'contact_and_distant_barrier_removed' : null;
+  if (kind === 'copy') return cell && colorAt(rows, cell.point) !== cell.initial ? 'recipe_cell_activation_confirmed' : null;
+  return kind === 'aim' ? 'movement_and_heading_confirmed' : 'movement_through_opened_route_confirmed';
+}
+
+function witnessedAim(rows: NativeRows, proposal: Proposal, epoch: number, ref: string): AimWitness | null {
+  const { local, step } = proposal, { receiver, horizontal, scene } = local;
+  if (!scene.visible || !receiver || !horizontal || step.kind !== 'approach' || !Object.hasOwn(aimCommands, step.action.action_ref)) return null;
+  const heading = step.action.action_ref as AimCommand, [dx, dy] = aimCommands[heading];
+  const side = width(receiver);
+  if (side !== height(receiver) || side % 2 || Math.sign(horizontal) !== (dx || dy)) return null;
+  const opposite = (from: number, to: number, sign: number) => sign > 0 ? [to, from] : [from, to];
+  const [frontX, backX] = dx ? opposite(receiver[0], receiver[2], dx) : [receiver[0], receiver[0]];
+  const [frontY, backY] = dy ? opposite(receiver[1], receiver[3], dy) : [receiver[1], receiver[1]];
+  const frontInk = rows[frontY!]?.[frontX!], backInk = rows[backY!]?.[backX!];
+  if (frontInk === undefined || backInk === undefined || frontInk === backInk) return null;
+  const candidate = { epoch, unit: Math.abs(horizontal), side, frontInk, backInk, refs: [...local.refs.slice(-3), ref] };
+  return aimPoseMatches(rows, candidate, { box: receiver, heading }) ? candidate : null;
+}
+
+export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Proposal | RemoteProposal> {
   const learns = family === learnAnimatedCueId;
   let state: State | null = null;
+  let witness: AimWitness | null = null;
+  let remoteState: RemoteState | null = null;
+  async function offerRemote(observation: NativeObservation, rows: NativeRows, remaining: number,
+    execution?: NativeExecution): Promise<RemoteProposal | null> {
+    const { level_epoch: epoch, observation_ref: ref, available_action_refs: available } = observation;
+    if (learns || witness?.epoch !== epoch || remaining < 1 || !available.includes('ACTION6')) return null;
+    let remote = remoteState?.epoch === epoch ? remoteState : null;
+    if (remote && (remote.stopped || remote.lastRef !== ref)) return null;
+    if (!remote) {
+      const parts = geometricComponents(rows), input = measureInput(parts, rows.length, true);
+      const sample = input && measureExample(parts, input);
+      const route = input && sample && readRemoteRoute(rows, input.panel, sample.ink, witness);
+      if (!input || !sample || !route) return null;
+      remote = { epoch, route, panel: input.panel, cells: sample.cells.map(i => input.cells[i]!), samples: sample.examples,
+        opened: false, stopped: false, refs: [], lastRef: ref };
+    }
+    const aiming = chooseRemote(remote, rows, available, remaining);
+    if (!aiming) return null;
+    const { action, kind, cell, pose, expected } = aiming;
+    const route = remote.route, target = cell?.box ?? (kind === 'aim' ? route.target : route.exit);
+    const evidence: [string, ...string[]] = [ref, ...new Set([...remote.refs, ...witness.refs].filter(value => value !== ref))];
+    const mode = execution?.reasoningMode ?? 'assimilation';
+    const offer = { input: action.action_ref, expected: center(cell?.box ?? expected.box), evidence };
+    const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: kind === 'launch' ? offer : null,
+      access: cell ? null : offer, interaction: kind === 'copy' ? offer : null });
+    if (!selected) return null;
+    const situation = kind === 'aim' ? 'Turn the moving piece toward the inset linked to the blocked passage'
+      : kind === 'copy' ? 'Copy the marked cell from the visible motif'
+        : kind === 'launch' ? 'Test whether the aligned motif effect removes both the inset and the distant barrier'
+          : 'Move to the framed exit through the opened passage';
+    const pointBinding = cell ? await ObservedInputDomain.makeLocusWitness(observation, rows, cell.point, { reason: situation, evidence }) : null;
+    if (cell && !pointBinding) return null;
+    const parent = 'G_official_completion';
+    const objective = { kind: 'open_route_by_remote_effect', scope: ref.split(':revision:', 1)[0]!,
+      subjects: [center(route.target).join(','), center(route.barrier).join(','), center(route.exit).join(',')],
+      parentObjective: parent, satisfactionContract: 'official_progress_after_opening_and_access' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = family + ':' + need.id;
+    return { status: 'proposed', kind: family, remote, aiming, needId: need.id, actions: [action],
+      binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action, expected_after: expected.box, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
+      sicSituationCard: { strategy: selected.id, need: 'Open the blocked passage and reach the exit', situation, mode, evidence,
+        agenda: entries, triggerCard: card, panel: remote.panel, sampleCells: remote.samples, actor: pose.box,
+        target, addressedRegion: route.target, obstacle: route.barrier, exit: route.exit },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+  }
   return {
     id: family,
-    async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      return group === observedMechanicsGroup ? offerRemote(observation, rows, remaining, execution)
+        : this.propose(observation, rows, inputs, remaining, execution);
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      const opening = await offerRemote(observation, rows, remaining, execution);
+      if (opening) return opening;
       const supports = (a: string, b: string) => observation.available_action_refs.includes(a) && observation.available_action_refs.includes(b);
       if (!supports('ACTION3', 'ACTION4') && (learns || !supports('ACTION1', 'ACTION2'))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -220,11 +330,25 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isRemote(proposal)) {
+        const reason = remoteReturn(second, proposal);
+        return { matched: !!reason, seal_prefix: true, reason: reason ?? 'remote_effect_or_movement_contradicted' };
+      }
       if (proposal.step.kind === 'observe') return { matched: null, seal_prefix: true, reason: 'check_intermediate_frames_for_cue' };
       const reason = check(proposal, first, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'cue_or_movement_not_confirmed' };
     },
     record(before, after, _action, first, second, proposal, _index, frames) {
+      if (isRemote(proposal)) {
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const { remote, aiming } = proposal, reason = remoteReturn(second, proposal);
+        const flight = aiming.kind === 'launch' && !!reason && remoteFlightObserved(first, frames ?? [], aiming.pose, remote.route);
+        const confirmed = reason && (aiming.kind !== 'launch' || flight);
+        remoteState = { ...remote, opened: remote.opened || flight, stopped: !confirmed,
+          refs: confirmed ? [...remote.refs.slice(-5), after.observation_ref] : remote.refs, lastRef: after.observation_ref };
+        return { events: [], ...(flight ? { reviewEvidence: 'The visible effect travelled to the inset before the distant passage opened.' } : {}) };
+      }
+      if (after.levels_completed > before.levels_completed) witness = witnessedAim(first, proposal, after.level_epoch, after.observation_ref);
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, step } = proposal;
       const animated = step.kind === 'observe' ? measureAnimatedCells(first, second, frames, local.scene.cells.map(cell => cell.point)) : [];
@@ -239,8 +363,12 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
         rejected: reason ? local.rejected : [...local.rejected, proposal.attempt] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, witness, remoteState }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      witness = structuredClone((value.witness ?? null) as AimWitness | null);
+      remoteState = structuredClone((value.remoteState ?? null) as RemoteState | null);
+    },
   };
 }
 
