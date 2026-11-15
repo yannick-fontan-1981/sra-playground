@@ -1020,7 +1020,9 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === seatedContactId || family === verifyFrameContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId)) {
-    for (const [field, label] of [['actor', 'Current piece'], ['focus', family === seatedContactId ? 'Receiving frame' : 'Target sprite'], ['landing', 'Predicted landing']] as const) {
+    for (const [field, label] of [['actor', 'Current piece'], ['focus', family === seatedContactId ? 'Receiving frame' : 'Target sprite'],
+      ['landing', 'Predicted landing'], ['capacity', 'Capacity indicator'], ['passage', 'Passage between observed rooms'],
+      ['exit', 'Receiving frame']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
