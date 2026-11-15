@@ -2,6 +2,8 @@ import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-nat
 import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { selectTimedCompartment } from './timed-compartment-growth.ts';
+import type { TimedCompartmentChoice } from './timed-compartment-growth.ts';
 
 export const compartmentGrowthId = 'sic_verify_compartment_growth';
 
@@ -12,6 +14,47 @@ export type Inhabitant = { box: NativeBox; area: number; color: number; room: nu
 
 function inside([x, y]: NativePoint, [l, t, r, b]: NativeBox): boolean {
   return x >= l && x <= r && y >= t && y <= b;
+}
+
+function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): CompartmentLayout {
+  const { rooms, floor, gates } = layout;
+  const sample = ({ point: [x, y], axis: [dx, dy] }: Gate, offset: number) => rows[y + dx * offset]?.[x + dy * offset];
+  const styles = gates.flatMap(gate => {
+    const wall = sample(gate, 4), shoulder = sample(gate, 3);
+    return wall !== undefined && shoulder !== undefined && wall !== shoulder && wall !== floor && shoulder !== floor
+      && sample(gate, -4) === wall && sample(gate, -3) === shoulder ? [{ wall, shoulder }] : [];
+  });
+  const apertures: Gate[] = [];
+  const boxes = rooms.flatMap(({ box: [l, t, r, b] }) => {
+    const partitions: { gate: Gate; boxes: NativeBox[] }[] = [];
+    for (const [dx, dy] of [[1, 0], [0, 1]] as const) {
+      for (let y = t + 8 * dy; y <= b - 8 * dy; y++) for (let x = l + 8 * dx; x <= r - 8 * dx; x++) {
+        const gate: Gate = { point: [x, y], axis: [dx, dy], rooms: [-1, -1] };
+        if (![-2, -1, 0, 1, 2].every(offset => sample(gate, offset) === floor)) continue;
+        const style = styles.find(({ wall, shoulder }) => sample(gate, -4) === wall && sample(gate, 4) === wall
+          && sample(gate, -3) === shoulder && sample(gate, 3) === shoulder);
+        if (!style) continue;
+        const first = dx ? t - y : l - x, last = dx ? b - y : r - x;
+        const strip = Array.from({ length: last - first + 1 }, (_, index) => index + first);
+        if (!strip.every(offset => Math.abs(offset) <= 3 || sample(gate, offset) === style.wall)) continue;
+        const next: NativeBox[] = dx ? [[l, t, x - 1, b], [x + 1, t, r, b]] : [[l, t, r, y - 1], [l, y + 1, r, b]];
+        partitions.push({ gate, boxes: next });
+      }
+    }
+    if (partitions.length !== 1) return [[l, t, r, b] as NativeBox];
+    apertures.push(partitions[0]!.gate);
+    return partitions[0]!.boxes;
+  });
+  if (!apertures.length || boxes.length > 16) return layout;
+  const separated = boxes.map((box, index) => ({ box, index }));
+  const connected = [...gates, ...apertures].flatMap((gate): Gate[] => {
+    const [x, y] = gate.point, [dx, dy] = gate.axis;
+    const left = separated.find(room => inside([x - dx, y - dy], room.box));
+    const right = separated.find(room => inside([x + dx, y + dy], room.box));
+    return left && right && left !== right ? [{ ...gate, rooms: [left.index, right.index] }] : [];
+  });
+  return connected.length === gates.length + apertures.length && gateRegion(0, connected).size === separated.length
+    ? { floor, rooms: separated, gates: connected } : layout;
 }
 
 export function measureCompartments(rows: NativeRows): CompartmentLayout | null {
@@ -44,7 +87,7 @@ export function measureCompartments(rows: NativeRows): CompartmentLayout | null 
     return [...byMarker.values()].flatMap(gates => gates.length >= rooms.length - 1 && gates.length <= 2 * rooms.length
       && gateRegion(0, gates).size === rooms.length ? [{ rooms, floor, gates }] : []);
   });
-  return layouts.length === 1 ? layouts[0]! : null;
+  return layouts.length === 1 ? includeOpenPartitions(layouts[0]!, rows) : null;
 }
 
 export function gateRegion(origin: number, gates: readonly Gate[]): Set<number> {
@@ -77,8 +120,39 @@ export function readInhabitants(layout: CompartmentLayout, rows: NativeRows): In
 type Reusable = { food: number; starter: number; activated: number; grower: number; threshold: number; evidence: string[]; completed: number };
 type Calibration = { layout: CompartmentLayout; threshold: number; feeding?: Pick<Reusable, 'food' | 'starter' | 'activated'> & { ref: string } };
 type Choice = { gate: Gate; phase: 'feed' | 'grow' | 'connect'; focus: Inhabitant[]; threshold: Inhabitant };
-type Local = { epoch: number; layout: CompartmentLayout; evidence: string[]; stopped?: boolean };
-type Proposal = NativeProposal & { local: Local; choice: Choice; needId: string; food: number; grower: number };
+type TurnMeter = { row: number; first: number; step: number; pending: number; spent: number; ref: string };
+type Local = { epoch: number; layout: CompartmentLayout; evidence: string[]; stopped?: boolean; clockGate?: Gate };
+type Proposal = NativeProposal & { local: Local; choice: Choice | TimedCompartmentChoice; needId: string; food: number; grower: number;
+  timing?: { meter: TurnMeter; turns: number } };
+
+function learnMeter(layout: CompartmentLayout, before: NativeRows, after: NativeRows, ref: string): TurnMeter | null {
+  const limit = Math.min(...layout.rooms.map(room => room.box[1]));
+  for (let row = 0; row < limit; row++) {
+    const line = before[row]!, next = after[row]!;
+    const changes = line.flatMap((value, x) => next[x] !== value ? [x] : []);
+    if (changes.length !== 1) continue;
+    const at = changes[0]!, pending = line[at]!, spent = next[at]!;
+    const marks = line.flatMap((value, x) => value === pending ? [x] : []);
+    const step = marks.length > 1 ? marks[1]! - marks[0]! : 0;
+    if (marks.length < 3 || step < 2 || !marks.every((x, i) => x === marks[0]! + i * step)) continue;
+    return { row, first: marks[0]!, step, pending, spent, ref };
+  }
+  return null;
+}
+
+function readMeter(rows: NativeRows, meter: TurnMeter) {
+  const line = rows[meter.row];
+  if (!line) return null;
+  let turns = 0, slots = 0, seenSpent = false;
+  for (let x = meter.first; x < line.length; x += meter.step) {
+    if (line[x] !== meter.pending && line[x] !== meter.spent) break;
+    if (line[x] === meter.spent) seenSpent = true;
+    else if (seenSpent) return null;
+    else turns++;
+    slots++;
+  }
+  return slots >= 3 ? turns : null;
+}
 
 function uniqueLargest(population: readonly Inhabitant[]): Inhabitant | undefined {
   const sorted = [...population].sort((a, b) => b.area - a.area);
@@ -146,7 +220,14 @@ function clickInterface(observation: NativeObservation): boolean {
 
 function assess(proposal: Proposal, before: NativeRows, after: NativeRows): string | null {
   const { layout } = proposal.local;
-  const { gate, phase, focus } = proposal.choice;
+  const { choice } = proposal;
+  const { gate, phase, focus } = choice;
+  if ('expectedOpen' in choice) {
+    const timing = proposal.timing;
+    const flipped = openGates(layout, before).includes(gate) !== choice.expectedOpen
+      && openGates(layout, after).includes(gate) === choice.expectedOpen;
+    return flipped && timing && readMeter(after, timing.meter) === timing.turns - 1 ? 'door_changed_and_turn_spent' : null;
+  }
   if (!openGates(layout, after).includes(gate)) return null;
   const previous = readInhabitants(layout, before), next = readInhabitants(layout, after);
   if (phase === 'feed') {
@@ -165,6 +246,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
   let measuredEpoch: number | null = null;
   let model: Reusable | null = null;
   let local: Local | null = null;
+  let meter: TurnMeter | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: compartmentGrowthId,
@@ -183,6 +265,9 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       if (x === undefined || y === undefined) return;
       const gate = layout.gates.find(({ point: [gx, gy] }) => Math.abs(gx - x) <= 3 && Math.abs(gy - y) <= 3);
       if (!gate || openGates(layout, first).includes(gate)) return;
+      if (!meter && before.level_epoch === after.level_epoch && openGates(layout, second).includes(gate)) {
+        meter = learnMeter(layout, first, second, after.observation_ref);
+      }
       const population = readInhabitants(layout, first);
       if (after.levels_completed > before.levels_completed) {
         const { feeding, threshold } = calibration;
@@ -204,15 +289,20 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       const prior = local?.epoch === observation.level_epoch ? local : undefined;
       const layout = prior?.layout ?? measureCompartments(rows);
       if (!layout || prior?.stopped) return null;
-      const choice = selectInteraction(layout, rows, model);
+      const turns = meter && readMeter(rows, meter);
+      const timed = model.completed >= 2 && turns !== null
+        ? selectTimedCompartment(layout, rows, model, Math.min(turns, remaining), prior?.clockGate) : null;
+      const choice = timed ?? selectInteraction(layout, rows, model);
       if (!choice) return null;
       const { point: [x, y] } = choice.gate;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set([...(prior?.evidence ?? []), ...model.evidence].filter(value => value !== ref))];
+      const timeRef = timed && meter ? [meter.ref] : [];
+      const evidence: [string, ...string[]] = [ref, ...new Set([...(prior?.evidence ?? []), ...model.evidence, ...timeRef].filter(value => value !== ref))];
       const mode = execution?.reasoningMode ?? 'assimilation';
-      const routeSupported = !!prior;
-      const situation = { routeSupported, eligibleProbe: !routeSupported, knownInteraction: false, mode };
-      const strategy = routeSupported ? 'P07' : 'P05';
+      const repeat = choice.phase === 'advance_encounter' && !!prior?.clockGate;
+      const routeSupported = !!prior && !repeat;
+      const situation = { routeSupported, eligibleProbe: !routeSupported && !repeat, knownInteraction: repeat, mode };
+      const strategy = repeat ? 'P02' : routeSupported ? 'P07' : 'P05';
       const decision = await choose?.run({ situation }, { signal: execution?.signal });
       if (decision?.result !== strategy) return null;
       const action = { action_ref: 'ACTION6', data: { x, y } };
@@ -224,15 +314,24 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
         satisfactionContract: 'growth_or_official_completion_observed' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = compartmentGrowthId + ':' + need.id;
-      const reason = choice.phase === 'connect' ? 'The grown sprite matches the size of the isolated reference. Open a route between them.'
-        : choice.phase === 'grow' ? 'Two growth candidates share a compartment. Open a remote gate and check whether the candidates change.'
-        : 'Open access between the feeding group and the resources, keeping the larger sprite isolated.';
+      const reason = {
+        connect: 'The grown sprite matches the size of the isolated reference. Open a route between them.',
+        grow: 'Two growth candidates share a compartment. Open a remote gate and check whether the candidates change.',
+        feed: 'Open access between the feeding group and the resources, keeping the larger sprite isolated.',
+        feed_route: 'Open the next passage toward resources that the small sprites can reach.',
+        join_candidates: 'Connect the groups so a growing sprite can reach other participants.',
+        prepare_route: 'Prepare access to larger resources while allowing the growth group another turn.',
+        open_encounter: 'Connect the prepared route when the growing sprite reaches the required size.',
+        advance_encounter: 'Pay for another turn through a gate that preserves access between the two sprites.',
+      }[choice.phase];
       return { status: 'proposed', kind: compartmentGrowthId, local: prior ?? { epoch: observation.level_epoch, layout, evidence: [] },
         choice, needId: need.id, food: model.food, grower: model.grower, actions: [action],
+        ...(timed && meter && turns !== null ? { timing: { meter, turns } } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, point_binding: target, expected_after: null }],
         sicSituationCard: { strategy, need: 'Grow a sprite before opening access to the isolated reference', situation: reason,
           evidence, agenda: [], mode, triggerCard: chooseLanding, target: [x, y, x, y], focus: choice.focus.map(sprite => sprite.box),
-          threshold: choice.threshold.box },
+          threshold: choice.threshold.box, ...(timed ? { turnsLeft: turns, gateOpens: timed.expectedOpen,
+            plannedGates: timed.route.map(gate => { const [x, y] = gate.point; return [x, y, x, y]; }) } : {}) },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation },
         question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
@@ -253,16 +352,23 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       return { matched: effect !== null, seal_prefix: true, reason: effect ?? 'compartment_interaction_unconfirmed' };
     },
     record(before, after, _action, first, second, proposal) {
-      if (before.level_epoch === after.level_epoch) local = { ...proposal.local,
-        evidence: [...proposal.local.evidence, after.observation_ref].slice(-4), stopped: !assess(proposal, first, second) };
+      if (model?.completed === before.levels_completed && after.levels_completed > before.levels_completed) {
+        model = { ...model, completed: after.levels_completed,
+          evidence: [...model.evidence.slice(-4), before.observation_ref, after.observation_ref] };
+      } else if (before.level_epoch === after.level_epoch) {
+        local = { ...proposal.local, evidence: [...proposal.local.evidence, after.observation_ref].slice(-4),
+          stopped: !assess(proposal, first, second),
+          ...(proposal.choice.phase === 'advance_encounter' ? { clockGate: proposal.choice.gate } : {}) };
+      }
       return { events: [] };
     },
-    state: () => ({ calibration, measuredEpoch, model, local }),
+    state: () => ({ calibration, measuredEpoch, model, local, meter }),
     restore(state) {
       calibration = (state.calibration as Calibration | undefined) ?? null;
       measuredEpoch = (state.measuredEpoch as number | undefined) ?? null;
       model = (state.model as Reusable | undefined) ?? null;
       local = (state.local as Local | undefined) ?? null;
+      meter = (state.meter as TurnMeter | undefined) ?? null;
     },
   };
 }

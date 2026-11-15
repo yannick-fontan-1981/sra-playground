@@ -1102,11 +1102,15 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === compartmentGrowthId) {
     const gate = bounds(card?.target), threshold = bounds(card?.threshold);
-    if (gate) subjects.push({ label: 'Gate to open', box: gate });
-    if (threshold) subjects.push({ label: 'Isolated sprite used for the size comparison', box: threshold });
+    if (gate) subjects.push({ label: card?.gateOpens === false ? 'Gate to close' : 'Gate to open', box: gate });
+    if (threshold) subjects.push({ label: card?.turnsLeft === undefined ? 'Isolated sprite used for the size comparison' : 'Sprite used for the size comparison', box: threshold });
     if (Array.isArray(card?.focus)) for (const item of card.focus) {
       const box = bounds(item);
       if (box) subjects.push({ label: 'Sprite involved in the expected interaction', box });
+    }
+    if (Array.isArray(card?.plannedGates)) for (const item of card.plannedGates.slice(0, 8)) {
+      const box = bounds(item);
+      if (box && (!gate || box[0] !== gate[0] || box[1] !== gate[1])) subjects.push({ label: 'Gate on the planned route', box });
     }
   }
   if (situationCard && (family === pairedChannelsId || family === verifyChannelAccessId)) {
