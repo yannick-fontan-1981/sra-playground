@@ -404,6 +404,8 @@ Le nom neutre et la palette permutée conservent le gain. Désactiver P02 après
 
 Les campagnes PIPE et HPDL portent le total qualifié à **40/100 niveaux 1** après retrait, en 451 commandes SIC seul, dont 109 choisies par le SRC. L’exploration publique reste active dans 38 de ces 40 essais. REGN et TICT conservent leur gain dans les essais où l’exploration est retirée. Les 100 niveaux 1 en usage normal et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours de référence.
 
+La version PIPE–HPDL a également rejoué les 60 retraits restants du catalogue. Aucun de ces essais ne gagne. Dans les 46 cas où l’exploration publique reste disponible, 44 produisent au moins un changement visible. Parmi ces 46 cas, 39 atteignent le plafond de 40 commandes. Ces rejeux permettent de choisir les prochaines acquisitions à partir de retours déjà observés.
+
 ### Apprendre séparément la sélection et le dépôt
 
 Avec `sic_slot_transfer` retirée, **SB26 gagne en neuf commandes SIC seul**. La carte SRC utilisée dans PIPE et HPDL choisit P05 pour tester la sélection du premier jeton, puis P05 pour tester son dépôt. La sélection est confirmée par le changement de bordure. Le dépôt est confirmé quand le jeton disparaît de la réserve et que la case contient la valeur prévue. P02 réutilise séparément ces deux interactions pour les trois jetons restants. P05 lance la séquence remplie et le retour confirme le gain officiel. Le fournisseur TypeScript partagé mesure la correspondance entre la séquence visible, les jetons et les cases.
@@ -416,6 +418,8 @@ Avec `sic_port_pairing` retirée, **CN04 gagne en 18 commandes SIC seul**. La pr
 
 Le nom neutre et la palette permutée conservent le gain. Désactiver P02 après le premier quart de tour laisse le niveau ouvert au même budget. Les commandes suivantes proviennent de la famille d’accès et de nouveaux essais P05.
 
+Les campagnes SB26 et CN04 atteignent **42/100** victoires après retrait en 478 commandes SIC seul, dont 135 choisies par le SRC. Les 100 niveaux 1 en usage normal et les quatre jeux complets avec et sans retrait reproduisent leurs commandes et retours de référence.
+
 ### Retrouver la cible après un changement de surface
 
 Avec `sic_switched_surface` retirée, **ETAG gagne en sept commandes SIC seul**. Une commande de la famille d’accès déplace la pièce d’un pas dans une ouverture et la cible cesse d’être visible. SIC reconstitue l’entrée en comparant les deux observations et conserve la dernière position mesurée de la cible. La carte SRC `sic.follow_observed_landings.choose` choisit quatre déplacements P07 vers l’ouverture de sortie, puis deux essais P05 pour vérifier la sortie et le contact. La mesure des ouvertures et la recherche du trajet restent dans le fournisseur TypeScript partagé.
@@ -427,3 +431,9 @@ Les commandes et retours reproduisent la référence, empreinte `fa59891322e73ae
 Avec `sic_surface_copy` retirée, **CD82 gagne en neuf commandes SIC seul**. La première commande de l’exploration publique laisse l’outil et la surface de travail inchangés. SIC compare ces deux observations et élimine les modèles qui prévoyaient un changement. La carte SRC `sic.verify_observed_interaction.choose` choisit cinq essais P05 et trois réutilisations P02 au fil de la copie. Le modèle TypeScript partagé conserve les hypothèses compatibles avec chaque retour et calcule les étapes qui rapprochent la surface de la référence.
 
 Les commandes et retours reproduisent la référence, empreinte `10cfd4ca1bd7a8fbd1ef29cd82b4c79f7724ef3a742cf0e0a40666657de739cd`. Le nom neutre et la palette permutée conservent le gain. Désactiver P02 avant sa première utilisation rend les quatre dernières commandes à l’exploration et laisse le niveau ouvert au budget de neuf commandes.
+
+### Transférer un déplacement mesuré entre des contrôles apparentés
+
+Avec `sic_framed_reception` retirée, **GARE gagne en 11 commandes SIC seul**. Le premier clic de l’exploration publique déplace une pièce et fournit une relation entre le point cliqué et le déplacement. La carte SRC `sic.verify_observed_interaction.choose` choisit quatre réutilisations P02 lorsqu’un nouveau contrôle admet un déplacement compatible et six essais P05 pour vérifier les autres réceptions. Le fournisseur partagé apparie les bandes et mesure les translations et les remplacements après chaque clic.
+
+L’empreinte du parcours après retrait est `28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09`. Le parcours de référence gagne en sept commandes. Le nom neutre et la palette permutée conservent le gain en 11 commandes. Désactiver P02 après le premier clic laisse le niveau ouvert au même budget.

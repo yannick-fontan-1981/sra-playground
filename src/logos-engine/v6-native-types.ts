@@ -148,6 +148,13 @@ export interface NativeExecution {
     readonly exposed: readonly number[];
   } | null;
   readonly readClickFields?: () => import('../sic/field-isolation.ts').ClickFieldEvidence | null;
+  readonly readPriorClickScene?: <T>(project: (rows: NativeRows, observation: NativeObservation, command: NativeCommand) =>
+    NativeMaybePromise<T | null>) => Promise<{
+    readonly beforeRef: string;
+    readonly afterRef: string;
+    readonly levelEpoch: number;
+    readonly scene: T;
+  } | null>;
   readonly readClickRegions?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionEvidence | null;
   readonly readClickRegionChanges?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionChanges | null;
   readonly readPriorFramedRows?: () => NativeBox[][] | null;

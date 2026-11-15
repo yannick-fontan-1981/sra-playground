@@ -1,12 +1,17 @@
 import { compareUnicode } from '../logos-engine/canonical.ts';
 import { candidates, extract, transition, type FramedOffer, type FramedRecord } from '../logos-engine/v6-framed-transfer-observation.ts';
 import { FramedPolicy } from '../logos-engine/v6-framed-transfer-policy.ts';
-import type { NativeBox, NativeFamily, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const framedReceptionId = 'sic_framed_reception';
+export const learnFramedReceptionId = 'sic_follow_observed_framed_transfer';
 export const framedReceptionStrategies = {
+  P02: navigationPrimitives.P02,
+  P05: navigationPrimitives.P05,
   test_reception_by_analogy: 'Test whether a matching frame responds like the one already observed',
   test_matching_reception: 'Test the matching frame at its measured entry',
   prepare_uniform_reception: 'Test whether moving the receiving frame opens an entry',
@@ -48,22 +53,57 @@ function applicableOffers(offers: readonly FramedOffer[]) {
   };
 }
 
-export function createSicFramedReception(): NativeFamily<Proposal> {
+async function measureReturn(first: NativeRows, second: NativeRows, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, measurement: FramedPolicy, local: State) {
+  const [motion, replacement] = await transition(first, second, before, after, command, measurement, local.spans);
+  const spans = [...local.spans], receipts = [...local.receipts];
+  const records: readonly [string, FramedRecord[], FramedRecord[]][] = [
+    ['policy.record_observed_point_motion_span', motion.point_motion_span_rows, spans],
+    ['policy.record_observed_framed_replacement', replacement.framed_replacement_rows, receipts],
+  ];
+  for (const [policy, factsByTransition, target] of records) for (const facts of factsByTransition) {
+    const result = measurement.projectRecord({ policy, facts });
+    if (result.status === 'derived' && !target.some(record => record.source_claim_ref === result.record.source_claim_ref)) target.push(result.record);
+  }
+  return { spans, receipts, learned: spans.length > local.spans.length || receipts.length > local.receipts.length };
+}
+
+export function createSicFramedReception(family = framedReceptionId): NativeFamily<Proposal> {
+  const learns = family === learnFramedReceptionId;
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   let measurement: Promise<FramedPolicy> | null = null;
   const getMeasurement = () => measurement ??= FramedPolicy.create();
   return {
-    id: framedReceptionId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const local = state?.epoch === observation.level_epoch ? state : {
+      const ref = observation.observation_ref;
+      const prior = state?.epoch === observation.level_epoch ? state : null;
+      if (learns && !prior && !execution?.readPriorClickScene) return null;
+      let local: State = prior ?? {
         epoch: observation.level_epoch, spans: [], receipts: [], attempts: [], evidence: [], emptyReturns: 0,
       };
       if (local.attempts.length >= 24 || local.emptyReturns >= 3) return null;
-      const offers = await candidates(rows, observation, await getMeasurement(), local.spans, local.receipts,
+      const policy = await getMeasurement();
+      if (learns && !prior) {
+        const receipt = await execution?.readPriorClickScene?.(async (first, before, command) => {
+          const previous = await candidates(first, before, policy);
+          if (!applicableOffers(previous).probe) return null;
+          const result = await measureReturn(first, rows, before, observation, command, policy, local);
+          if (!result.learned) return null;
+          const attempt = previous.find(offer => offer.point_x === command.data.x && offer.point_y === command.data.y);
+          return { spans: result.spans, receipts: result.receipts, attempts: attempt ? [attempt.candidate_ref] : [] };
+        });
+        if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== observation.level_epoch) return null;
+        local = { ...local, ...receipt.scene, evidence: [receipt.beforeRef, ref] };
+      }
+      const offers = await candidates(rows, observation, policy, local.spans, local.receipts,
         Object.fromEntries(local.attempts.map(key => [key, { unchanged: true }])));
       const choices = applicableOffers(offers);
-      const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const { selected, entries } = resolveStrategyGraph({
         graph, mode: 'active',
@@ -80,6 +120,13 @@ export function createSicFramedReception(): NativeFamily<Proposal> {
       });
       if (!selected) return null;
       const strategy = selected.id, offer = selected.plan, label = framedReceptionStrategies[strategy], parent = 'G_official_completion';
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const repeated = strategy === 'reuse_measured_offset';
+      const facts = { repeatSupportedInteraction: repeated, probeNeededInteraction: !repeated, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = repeated ? 'P02' : 'P05';
+      if (learns && decision?.result !== primitive) return null;
+      const selectedStrategy = learns ? primitive : strategy;
       const objective = { kind: 'reconcile_motion_and_frame_reception', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['paired_bands', 'framed_piece', 'candidate_reception'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_a_measured_framed_reception' };
@@ -102,14 +149,16 @@ export function createSicFramedReception(): NativeFamily<Proposal> {
         source = componentBox(sourceRef);
         marker = componentBox(markerRef);
       }
-      return { status: 'proposed', kind: framedReceptionId, actions, local, offer, needId: need.id, binding,
+      return { status: 'proposed', kind: family, actions, local, offer, needId: need.id, binding,
         steps: [{ action, expected_after: null, point_binding: pointBinding }],
-        sicSituationCard: { strategy, need: 'Find which controls move a piece into a compatible frame', situation: label, evidence, agenda: entries,
-          mode: strategy === 'reuse_measured_offset' ? 'assimilation' : 'exploration',
-          control, point: [x, y, x, y], source, marker },
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy: selectedStrategy, need: 'Find which controls move a piece into a compatible frame',
+          situation: label, evidence, agenda: entries, mode: learns ? mode : repeated ? 'assimilation' : 'exploration',
+          control, point: [x, y, x, y], source, marker, ...(decision ? { triggerCard: decision.receipt.workflow } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+        sicLocalDecision: { strategy: selectedStrategy, objective: { id, label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
@@ -126,17 +175,7 @@ export function createSicFramedReception(): NativeFamily<Proposal> {
     async record(before, after, command, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local } = proposal, measurement = await getMeasurement();
-      const [motion, replacement] = await transition(first, second, before, after, command, measurement, local.spans);
-      const spans = [...local.spans], receipts = [...local.receipts];
-      const records: readonly [string, FramedRecord[], FramedRecord[]][] = [
-        ['policy.record_observed_point_motion_span', motion.point_motion_span_rows, spans],
-        ['policy.record_observed_framed_replacement', replacement.framed_replacement_rows, receipts],
-      ];
-      for (const [policy, rows, target] of records) for (const facts of rows) {
-        const result = measurement.projectRecord({ policy, facts });
-        if (result.status === 'derived' && !target.some(record => record.source_claim_ref === result.record.source_claim_ref)) target.push(result.record);
-      }
-      const learned = spans.length > local.spans.length || receipts.length > local.receipts.length;
+      const { spans, receipts, learned } = await measureReturn(first, second, before, after, command, measurement, local);
       state = { ...local, spans, receipts, attempts: [...local.attempts, proposal.offer.candidate_ref],
         evidence: [...local.evidence.slice(-5), after.observation_ref], emptyReturns: learned ? 0 : local.emptyReturns + 1 };
       return { events: [] };
