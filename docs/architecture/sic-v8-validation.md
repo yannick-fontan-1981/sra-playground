@@ -610,4 +610,6 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 
 - **ESCT** gagne le niveau 3 en **21 commandes** et **36,38 s** mesurées pendant les rejeux parallèles. SIC distingue les mobiles de même couleur par leurs positions et leurs déplacements annoncés. Il réutilise l'effet vérifié de la commande locale, ouvre la continuation annoncée et ferme un accès latéral qu'un mobile pourrait prendre avant le convoyé. Les 33 commandes et retours des niveaux 1 et 2 sont identiques à l'audit de référence. Les 54 commandes sont décidées par SIC. La permutation de palette conserve les commandes et les scores. Empreinte `96583f36a5010d8e7a1ac71aa8625b263d15bd950f113c8ccaa75e1ef1c17a1b`.
 
-**26/100 niveaux 3** et **238/636 niveaux** sont attestés sous SIC seul, soit **37,4 %**.
+- **MEMO** gagne le niveau 3 en **10 commandes** et **8,93 s**. SIC compare les règles de correspondance soutenues par les retours, puis teste l'occurrence compatible. Les 30 commandes du parcours continu relèvent de SIC. Empreinte `7d0e4db9da86d5c16a6c5288a1d942f785831b81b77462b92edbb115afee7017`.
+
+**27/100 niveaux 3** et **239/636 niveaux** sont attestés sous SIC seul, soit **37,6 %**.
