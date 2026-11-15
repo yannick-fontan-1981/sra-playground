@@ -1253,6 +1253,10 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.neighbors)) for (const neighbor of card.neighbors) {
+      const box = bounds(neighbor);
+      if (box) subjects.push({ label: 'Neighbor with an observed color change', box });
+    }
   }
   if (situationCard && (family === chartRouteId || family === learnChartRouteId)) {
     const marker = bounds(card?.marker);

@@ -18,8 +18,10 @@ type Cell = ReferencePopulationCell;
 type Scene = { q: number; offset: Cell; floor: Cell[]; zone_box: NativeBox; reference_box: NativeBox; reference_digest: string;
   target: [number, number, number][]; background: number; empty: number; border: number; population: number;
   bodies: { cell: Cell; appearance: number }[]; observed_marker_overlays?: number[][] };
-type State = { epoch: number; scene: Scene; selection: Cell | null; active: boolean; controls: Record<string, { delta: Cell }>;
-  tried: string[]; evidence: string[]; frame: string; stopped: boolean };
+type Controls = Record<string, { delta: Cell }>;
+type State = { epoch: number; scene: Scene; selection: Cell | null; active: boolean; controls: Controls;
+  tried: string[]; evidence: string[]; frame: string; stopped: boolean; probes?: number; changedNeighbors?: Cell[] };
+type PlacementWitness = { epoch: number; score: number; pitch: number; controls: Controls; evidence: string[] };
 type Choice = { command: NativeCommand; cell: Cell; expected: Cell | null; slot: Cell | null };
 type Proposal = NativeProposal & { local: State; choice: Choice; strategy: keyof typeof populationPlacementStrategies; needId: string };
 const key = referencePopulationCellKey;
@@ -40,6 +42,14 @@ function compareMovement({ local, choice }: Proposal, rows: NativeRows) {
   return { next, destination: added[0]!.cell };
 }
 
+function changedNeighbors(previous: Scene, current: Scene, from: Cell, to: Cell): Cell[] {
+  return previous.bodies.flatMap(body => {
+    if (distance(body.cell, from) !== 1 && distance(body.cell, to) !== 1) return [];
+    const after = current.bodies.find(candidate => key(candidate.cell) === key(body.cell));
+    return after && after.appearance !== body.appearance ? [body.cell] : [];
+  });
+}
+
 function selectionScene(scene: Scene, cell: Cell, first: NativeRows, second: NativeRows) {
   const [l, t, r, b] = cellBox(scene, cell), changed: number[][] = [];
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
@@ -54,6 +64,7 @@ function selectionScene(scene: Scene, cell: Cell, first: NativeRows, second: Nat
 
 export function createSicVerifyReferencePlacement(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let witness: PlacementWitness | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyReferencePlacementId,
@@ -65,11 +76,14 @@ export function createSicVerifyReferencePlacement(): NativeFamily<Proposal> {
       const available = cardinal.filter(action => observation.available_action_refs.includes(action));
       if (!available.length) return null;
       const prior = state?.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
-      if (prior?.stopped || (prior?.tried.length ?? 0) >= 20) return null;
+      if (prior?.stopped) return null;
       const scene = prior?.scene ?? (measureReferencePopulation(rows) as Scene | null);
       if (!scene || scene.floor.length > 256 || scene.population > 8) return null;
-      const local = prior ?? { epoch: observation.level_epoch, scene, selection: null, active: false, controls: {},
-        tried: [], evidence: [], frame: observation.frame_hash, stopped: false };
+      if ((prior?.probes ?? 0) >= Math.max(20, scene.population * available.length)) return null;
+      const transferred = witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed && witness.pitch === scene.q
+        ? witness : null;
+      const local: State = prior ?? { epoch: observation.level_epoch, scene, selection: null, active: false,
+        controls: transferred?.controls ?? {}, tried: [], evidence: transferred?.evidence ?? [], frame: observation.frame_hash, stopped: false };
       const targets = scene.target.map(([y, x]): Cell => [y, x]), occupied = new Set(scene.bodies.map(body => key(body.cell)));
       const unsettled = scene.bodies.map(body => body.cell).filter(cell => targets.every(target => key(target) !== key(cell)));
       const empty = targets.filter(cell => !occupied.has(key(cell)));
@@ -84,15 +98,17 @@ export function createSicVerifyReferencePlacement(): NativeFamily<Proposal> {
       let move: Choice | null = null, probe: Choice | null = null, pick: Choice | null = null;
       if (index >= 0) {
         const cell = unsettled[index]!;
-        if (local.active && !missing.length && assignment) {
+        if ((local.active || transferred) && !missing.length && assignment) {
           const slot: Cell = [assignment[1][0]!, assignment[1][1]!];
           const [word, path] = paths[index]!.get(key(slot))!;
-          move = { command: { action_ref: word[0]!.action_ref, data: {} }, cell, slot, expected: path[1]! };
+          const approach = { command: { action_ref: word[0]!.action_ref, data: {} }, cell, slot, expected: path[1]! };
+          if (local.active) move = approach;
+          else probe = approach;
         }
         const unexplored = available.filter(action => !local.tried.includes(JSON.stringify([action, cell])) && !local.controls[action]);
         const action = local.active ? unexplored[0] : [...unexplored, ...available.filter(command =>
           !local.tried.includes(JSON.stringify([command, cell])))][0];
-        if (action) probe = { command: { action_ref: action, data: {} }, cell, slot: null, expected: null };
+        if (action && !probe) probe = { command: { action_ref: action, data: {} }, cell, slot: null, expected: null };
       }
       if (index < 0) {
         const score = (cell: Cell) => Math.min(...empty.map(slot => distance(cell, slot)));
@@ -125,10 +141,13 @@ export function createSicVerifyReferencePlacement(): NativeFamily<Proposal> {
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Occupy the positions shown by the reference', mode,
-          situation: choice.slot ? 'The matched position is reachable with measured commands. Color interactions still need confirmation.' : label,
+          situation: choice.slot && local.changedNeighbors?.length
+            ? 'A neighboring piece changed color after the last move. Check the next position against the current reference.'
+            : choice.slot ? 'The matched position is reachable with measured commands. Color interactions still need confirmation.' : label,
           agenda: [], evidence, triggerCard: decision.receipt.workflow,
           piece: cellBox(scene, choice.cell), target: choice.slot ? cellBox(scene, choice.slot) : scene.zone_box,
-          reference: scene.reference_box },
+          reference: scene.reference_box,
+          ...(local.changedNeighbors?.length ? { neighbors: local.changedNeighbors.map(cell => cellBox(scene, cell)) } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -151,8 +170,15 @@ export function createSicVerifyReferencePlacement(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: matched ? 'population_return_measured' : 'population_effect_contradicted' };
     },
     record(before, after, _command, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, choice, strategy } = proposal;
+      if (after.levels_completed > before.levels_completed && choice.expected && Object.keys(local.controls).length >= 2) {
+        const expected = new Set(local.scene.bodies.map(body => key(key(body.cell) === key(choice.cell) ? choice.expected! : body.cell)));
+        if (local.scene.target.every(([y, x]) => expected.has(key([y, x])))) {
+          witness = { epoch: after.level_epoch, score: after.levels_completed, pitch: local.scene.q, controls: local.controls,
+            evidence: [...local.evidence.slice(-3), before.observation_ref, after.observation_ref] };
+        }
+      }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const evidence = [...local.evidence.slice(-4), after.observation_ref];
       const current = { ...local, frame: after.frame_hash, evidence };
       if (strategy === 'select_unplaced_piece') {
@@ -166,11 +192,16 @@ export function createSicVerifyReferencePlacement(): NativeFamily<Proposal> {
       const contradicted = !!choice.expected && (!destination || key(destination) !== key(choice.expected));
       if (contradicted) delete controls[choice.command.action_ref];
       if (destination) controls[choice.command.action_ref] = { delta: [destination[0] - choice.cell[0], destination[1] - choice.cell[1]] };
+      const neighbors = measured && destination ? changedNeighbors(local.scene, measured.next, choice.cell, destination) : [];
       state = { ...current, scene: measured?.next ?? local.scene, selection: destination ?? choice.cell,
-        active: local.active || !!destination, tried, controls, stopped: !measured };
-      return { events: [] };
+        active: local.active || !!destination, tried, controls, stopped: !measured, changedNeighbors: neighbors,
+        probes: (local.probes ?? 0) + Number(strategy === 'test_selected_displacement' || contradicted) };
+      return { events: [], ...(neighbors.length ? { reviewEvidence: 'A stationary neighbor changed appearance after the selected piece moved' } : {}) };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, witness }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      witness = structuredClone((value.witness as PlacementWitness | null | undefined) ?? null);
+    },
   };
 }
