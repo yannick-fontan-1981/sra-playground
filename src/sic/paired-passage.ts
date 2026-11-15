@@ -1,9 +1,11 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const pairedPassageId = 'sic_paired_passage';
+export const learnPairedPassageId = 'sic_follow_paired_passages_after_motion';
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Direction = typeof directions[number];
@@ -117,14 +119,36 @@ function actorAt(rows: NativeRows, actor: Part, point: NativePoint): boolean {
     && width(p.bbox) === side && height(p.bbox) === side);
 }
 
-export function createSicPairedPassage(): NativeFamily<Proposal> {
+function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined): Memory | null {
+  const receipt = execution?.readPriorDirectionalScene?.(first => measure(first, null));
+  if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== epoch) return null;
+  const direction = directions.find(([input]) => input === receipt.command);
+  if (!direction) return null;
+  const { actor, goal, pitch, pairs } = receipt.scene, start = origin(actor.bbox);
+  const entry = shift(start, direction, pitch);
+  const pair = pairs.find(candidate => candidate.frames.some(frame => same(frame.point, entry)));
+  const exit = pair?.frames.find(frame => !same(frame.point, entry));
+  const expected = exit ? shift(exit.point, direction, pitch) : entry;
+  if (!actorAt(rows, actor, expected) || actorAt(rows, actor, start)) return null;
+  return { epoch, goal, traversed: pair ? [pair.key] : [], rejected: [], evidence: [receipt.beforeRef, ref] };
+}
+
+export function createSicPairedPassage(family = pairedPassageId): NativeFamily<Proposal> {
+  const learns = family === learnPairedPassageId;
   let local: Memory | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: pairedPassageId,
-    propose(observation, rows, _inputs, remaining, execution): Proposal | null {
+    id: family,
+    async attachPrograms(registry) {
+      if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !directions.every(([ref]) => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
-      const prior = local?.epoch === observation.level_epoch ? local : null;
+      const ref = observation.observation_ref;
+      const prior = local?.epoch === observation.level_epoch ? local
+        : learns ? acquireMotion(rows, ref, observation.level_epoch, execution) : null;
+      if (learns && !prior) return null;
       const scene = measure(rows, prior?.goal ?? null);
       if (!scene) return null;
       const memory = prior ?? { epoch: observation.level_epoch, evidence: [], traversed: [], rejected: [], goal: scene.goal };
@@ -132,16 +156,21 @@ export function createSicPairedPassage(): NativeFamily<Proposal> {
       if (!route) return null;
       const step = route.steps[0]!, action = { action_ref: step.direction[0], data: {} };
       const crossing = step.crossing;
-      const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...memory.evidence.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: action.action_ref, expected: step.point, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({
+      const facts = { eligibleProbe: !memory.evidence.length || !!crossing && !memory.traversed.length,
+        routeSupported: memory.evidence.length > 0 && !crossing, knownInteraction: !!crossing && memory.traversed.length > 0, mode };
+      const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
+      const primitive = facts.routeSupported ? 'P07' : facts.knownInteraction ? 'P02' : 'P05';
+      if (learns && decision?.result !== primitive) return null;
+      const navigation = learns ? null : resolveNavigationPrimitives({
         mode, evidence, probe: !memory.evidence.length || crossing && !memory.traversed.length ? offer : null,
         access: memory.evidence.length && !crossing ? offer : null,
         interaction: crossing && memory.traversed.length ? offer : null,
       });
-      if (!selected) return null;
+      const strategy = learns ? primitive : navigation?.selected?.id;
+      if (!strategy) return null;
       const parent = 'G_official_completion';
       const objective = { kind: route.crossing ? 'verify_access_through_paired_passage' : 'reach_exit_after_verified_transfers',
         scope: ref.split(':revision:', 1)[0]!, subjects: [route.crossing?.pair.key ?? key(scene.goal.point)],
@@ -153,15 +182,18 @@ export function createSicPairedPassage(): NativeFamily<Proposal> {
           : 'Reach the exit after observing a transfer through each pair';
       const [x, y] = step.point, last = width(scene.actor.bbox) - 1;
       return {
-        status: 'proposed', kind: pairedPassageId, scene, route, memory, needId: need.id, attempt: key(origin(scene.actor.bbox)) + '/' + action.action_ref,
+        status: 'proposed', kind: family, scene, route, memory, needId: need.id, attempt: key(origin(scene.actor.bbox)) + '/' + action.action_ref,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: step.point }],
-        sicSituationCard: { strategy: selected.id, need: route.crossing ? 'Verify a paired passage' : 'Exit after using the passages',
-          situation, evidence, agenda: entries, mode, triggerCard: card, actor: scene.actor.bbox, focus: crossing?.from.box ?? route.target.box,
+        ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
+        sicSituationCard: { strategy, need: route.crossing ? 'Verify a paired passage' : 'Exit after using the passages',
+          situation, evidence, agenda: navigation?.entries ?? [], mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
+          actor: scene.actor.bbox, focus: crossing?.from.box ?? route.target.box,
           landing: [x, y, x + last, y + last], exit: crossing?.to.box ?? null, flags: scene.flags.map(p => p.bbox) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
