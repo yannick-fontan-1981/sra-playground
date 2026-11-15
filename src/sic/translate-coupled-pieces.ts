@@ -1,7 +1,10 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { ReasoningMode } from './reasoning-mode.ts';
 import { sicNeedId } from './need-identity.ts';
+import { contactBox, identifyContactRoute, observeContactRoute, planContacts, selectionPoint,
+  type ContactCalibration, type ContactRoute, type ContactRouteMove } from './rectangular-contact-route.ts';
 
 export const translateCoupledPiecesId = 'sic_translate_coupled_pieces';
 export const learnContactAccessId = 'sic_learn_contact_access';
@@ -19,8 +22,11 @@ type Position = { pieces: NativePoint[]; selected: number };
 type Move = { input: string; click?: NativePoint; position: Position; contact?: number };
 type ContactEffect = { input: string; offset: NativePoint; evidence: string; from: NativePoint; to: NativePoint };
 type State = { epoch: number; model: Model; position: Position; refs: string[]; attempts: Record<string, number>;
-  controls?: Record<string, string>; contacts?: ContactEffect[] };
+  controls?: Record<string, string>; contacts?: ContactEffect[]; launch?: ContactCalibration; motionEvidence?: Record<string, string> };
 type Proposal = NativeProposal & { local: State; move: Move; needId: string; attempt: string };
+type RouteProposal = NativeProposal & { contactRoute: ContactRoute; contactMove: ContactRouteMove; needId: string };
+type CoupledProposal = Proposal | RouteProposal;
+const isRoute = (proposal: CoupledProposal): proposal is RouteProposal => Object.hasOwn(proposal, 'contactRoute');
 
 const eq = ([x, y]: NativePoint, [a, b]: NativePoint) => x === a && y === b;
 const label = (p: NativePoint) => p.join(',');
@@ -151,16 +157,72 @@ function returned(rows: NativeRows, proposal: Proposal): Position | null {
   return { pieces, selected: move.position.selected };
 }
 
-export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): NativeFamily<Proposal> {
+async function proposeContactRoute(id: string, observation: NativeObservation, rows: NativeRows, initial: ContactRoute,
+  mode: ReasoningMode): Promise<RouteProposal | null> {
+  if (initial.stopped) return null;
+  const route = initial.path.length ? initial : { ...initial, path: planContacts(initial, directions) };
+  const move = route.path[0];
+  if (!move || !observation.available_action_refs.includes(move.input)) return null;
+  const { scene, position } = route;
+  const chosen = move.position.selected, at = position.pieces[chosen]!;
+  const click = move.input === 'ACTION6' ? selectionPoint(scene, chosen, at) : null;
+  const ref = observation.observation_ref;
+  const evidence: [string, ...string[]] = [ref, ...new Set([scene.calibration.evidence, ...Object.values(route.observedControls), ...route.evidence]
+    .filter(item => item !== ref))];
+  const isProbe = !!click || move.contact !== null || !route.observedControls[move.input];
+  const goalIndex = move.contact ?? chosen;
+  const points = move.position.pieces.map((cell, index) => contactBox(scene, cell, index));
+  const [x, y] = points[goalIndex]!;
+  const offer = { input: move.input, expected: [x, y] as NativePoint, evidence };
+  const choice = resolveNavigationPrimitives({ mode, evidence, probe: isProbe ? offer : null, access: isProbe ? null : offer, interaction: null });
+  if (!choice.selected) return null;
+  const situation = click ? 'Select the piece needed for the next placement or contact'
+    : move.contact !== null ? 'Test the projected landing while keeping the launcher available'
+      : 'Move the selected piece along the available route';
+  const witness = click ? await ObservedInputDomain.makeLocusWitness(observation, rows, click, { reason: situation, evidence }) : null;
+  if (click && !witness) return null;
+  const parent = 'G_official_completion';
+  const objective = { kind: 'place_matching_rectangular_pieces_using_contact_transfers', scope: ref.split(':revision:', 1)[0]!,
+    subjects: ['selectable_pieces', 'matching_openings', 'contact_transfers'], parentObjective: parent,
+    satisfactionContract: 'official_progress_after_all_matching_openings_are_filled' };
+  const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+  const composition = id + ':' + need.id;
+  const action: NativeCommand = { action_ref: move.input, data: click ? { x: click[0], y: click[1] } : {} };
+  const actions = [action];
+  return {
+    status: 'proposed', kind: id, contactRoute: route, contactMove: move, needId: need.id, actions,
+    binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    steps: [{ action, expected_after: points, ...(witness ? { point_binding: witness } : {}) }],
+    sicSituationCard: { strategy: choice.selected.id, need: 'Fill each opening while keeping the remaining launchers available',
+      situation, evidence, agenda: choice.entries, mode, triggerCard: choice.card, focus: contactBox(scene, at, chosen),
+      related: move.contact === null ? null : contactBox(scene, position.pieces[goalIndex]!, goalIndex),
+      projected: move.contact === null ? null : points[goalIndex]!,
+      target: contactBox(scene, scene.pieces[goalIndex]!.goal, goalIndex) },
+    question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id: composition, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+    sicLocalDecision: { strategy: choice.selected.id, objective: { id: composition, label: navigationPrimitives[choice.selected.id], parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: composition, objective_ref: parent, purpose: situation,
+      preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: composition } },
+  };
+}
+
+export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): NativeFamily<CoupledProposal> {
   const learns = id === learnContactAccessId;
   let state: State | null = null;
+  let route: ContactRoute | null = null;
   return {
     id,
-    async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
+    async propose(observation, rows, _inputs, remaining, execution): Promise<CoupledProposal | null> {
       if (remaining < 1 || !['ACTION6', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
-      const prior = state?.epoch === observation.level_epoch ? state : null;
+      const epoch = observation.level_epoch, mode = execution?.reasoningMode ?? 'exploration';
+      if (route?.epoch === epoch) return proposeContactRoute(id, observation, rows, route, mode);
+      const prior = state?.epoch === epoch ? state : null;
       const initial = prior ?? measure(rows);
-      if (!initial) return null;
+      if (!initial) {
+        const previous = state?.epoch === epoch - 1 ? state : null;
+        const fresh = previous?.launch && identifyContactRoute(observation, rows, previous.launch, previous.motionEvidence ?? {});
+        return fresh ? proposeContactRoute(id, observation, rows, fresh, mode) : null;
+      }
       const local = prior ?? { ...initial, epoch: observation.level_epoch, refs: [], attempts: {}, ...(learns ? { controls: {}, contacts: [] } : {}) };
       const move = choose(local);
       if (!move) return null;
@@ -170,7 +232,6 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
       const supportedContact = contact && move.contact !== undefined
         && eq(advance(local.position.pieces[move.contact]!, ...contact.offset), move.position.pieces[move.contact]!);
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(control ? [control] : []), ...(contact ? [contact.evidence] : [])].filter(v => v !== ref))];
-      const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: move.input, expected: move.position.pieces[move.position.selected]!, evidence };
       const probe = learns ? !!move.click || (move.contact === undefined ? !control : !supportedContact)
         : !local.refs.length || !!move.click || move.contact !== undefined;
@@ -212,32 +273,52 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isRoute(proposal)) {
+        const result = observeContactRoute(second, proposal.contactRoute, proposal.contactMove, after.observation_ref);
+        return { matched: result?.position === proposal.contactMove.position, seal_prefix: true, reason: 'compare_carrier_and_contact_piece_poses' };
+      }
       const result = returned(second, proposal);
       const matched = result !== null && (key(result) === key(proposal.move.position) || proposal.move.contact !== undefined && key(result) !== key(proposal.local.position));
       return { matched, seal_prefix: true, reason: matched ? 'piece_positions_observed' : 'piece_projection_unconfirmed' };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (isRoute(proposal)) {
+        route = observeContactRoute(second, proposal.contactRoute, proposal.contactMove, after.observation_ref) ??
+          { ...proposal.contactRoute, stopped: true };
+        return { events: [] };
+      }
       const { local, move } = proposal, result = returned(second, proposal);
       state = { ...local, position: result ?? local.position, refs: result ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         attempts: result && key(result) === key(move.position) ? local.attempts : { ...local.attempts, [proposal.attempt]: (local.attempts[proposal.attempt] ?? 0) + 1 } };
-      if (!learns || !result || move.click) return { events: [] };
+      if (!result || move.click) return { events: [] };
       const selected = local.position.selected, peer = 1 - selected;
       if (move.contact === undefined && eq(result.pieces[peer]!, local.position.pieces[peer]!)
         && eq(result.pieces[selected]!, move.position.pieces[selected]!) && !eq(result.pieces[selected]!, local.position.pieces[selected]!)) {
-        state.controls = { ...local.controls, [move.input]: after.observation_ref };
+        state.motionEvidence = { ...local.motionEvidence, [move.input]: after.observation_ref };
+        if (learns) state.controls = { ...local.controls, [move.input]: after.observation_ref };
       }
       if (move.contact === peer) {
         const from = local.position.pieces[peer]!, to = result.pieces[peer]!;
         const [left, , right] = local.model.divider;
         const crossed = from[0] < left ? to[0] > right : to[0] < left;
+        if (crossed && from[1] === to[1] && eq(result.pieces[selected]!, local.position.pieces[selected]!)) {
+          const [x, y] = local.model.divider, band = first[y]?.[x], steps = Math.abs(to[0] - from[0]) / local.model.pitch;
+          if (band !== undefined && Number.isInteger(steps) && steps > (local.launch?.steps ?? 0) && steps <= 12) {
+            state.launch = { pitch: local.model.pitch, band, steps, evidence: after.observation_ref };
+          }
+        }
+        if (!learns) return { events: [] };
         const contacts = local.contacts?.filter(effect => effect.input !== move.input) ?? [];
         state.contacts = crossed && from[1] === to[1] ? [...contacts,
           { input: move.input, offset: [to[0] - from[0], to[1] - from[1]], evidence: after.observation_ref, from, to }] : contacts;
       }
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, ...(route ? { route } : {}) }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      route = structuredClone(value.route as ContactRoute | undefined) ?? null;
+    },
   };
 }

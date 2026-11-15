@@ -425,6 +425,10 @@ Sur **G50T**, SIC réutilise les déplacements et la commande de changement de p
 
 Le bilan atteint **51/100 niveaux 2** et **168/636 niveaux attestés sous SIC seul** (26,4 %).
 
+Sur **KA59**, SIC réutilise le pas de déplacement et la traversée observés au niveau 1. Il apparie les quatre empreintes rectangulaires à leurs cavités et calcule des placements qui gardent disponibles les lanceurs nécessaires aux transferts suivants. Le niveau 2 gagne en **43 commandes**, avec trois projections de portées différentes. À chaque retour, SIC vérifie la répartition de la matière visible, y compris lorsque les contours des pièces se déforment au contact. Le niveau 1 reproduit ses 15 commandes et leurs retours. Avec `sic_translate_coupled_pieces` retirée, `sic_learn_contact_access` acquiert les mêmes éléments et les deux niveaux reproduisent exactement les 58 commandes et leurs effets. Empreinte commune `1d592d3c42d53f7713572265431587a054c2fc37846d9d69a6336b8be7d78eba`.
+
+Le bilan atteint **52/100 niveaux 2** et **169/636 niveaux attestés sous SIC seul** (26,6 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.

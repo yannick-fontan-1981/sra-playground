@@ -867,7 +867,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === translateCoupledPiecesId || family === learnContactAccessId)) {
-    for (const [field, label] of [['focus', 'Controlled piece'], ['related', 'Other piece'], ['target', 'Matching opening']] as const) {
+    for (const [field, label] of [['focus', 'Controlled piece'], ['related', 'Other piece'], ['target', 'Matching opening'],
+      ['projected', 'Predicted landing after contact']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
