@@ -52,6 +52,7 @@ import { verifyReferencePlacementId } from './population-placement.ts';
 import { carryToFrameId, learnCarryToFrameId } from './carry-to-frame.ts';
 import { learnPortPairingId, portPairingId } from './port-pairing.ts';
 import { displayCouplingId } from './display-coupling.ts';
+import { periodicProfileAlignmentId } from './periodic-profile-alignment.ts';
 import { contrastControlsId, contrastProbeId } from './contrast-controls.ts';
 import { stableReferenceId } from './framed-search.ts';
 import { framedReceptionId, learnFramedReceptionId } from './framed-reception.ts';
@@ -111,7 +112,7 @@ import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly
 export const standalonePlanningGroups = [
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId,
-    displayCouplingId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId,
+    displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId,
     pivotCargoId, observedActuatorArrangementId, observedRouteInterventionId, observedSurvivalId, observedRailTransfersId] },
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },
   { id: 'inspect_candidate_relations', families: [verifyCrossingRowsId, verifyCaptureRouteId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, verifyCombinedMarksId, materialAssemblyId, learnMaterialAssemblyId, animationContactId, learnAnimationContactId] },

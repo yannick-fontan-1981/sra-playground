@@ -90,6 +90,7 @@ import { createSicVerifyReferencePlacement } from '../sic/population-placement.t
 import { createSicCarryToFrame, learnCarryToFrameId } from '../sic/carry-to-frame.ts';
 import { createSicPortPairing, learnPortPairingId } from '../sic/port-pairing.ts';
 import { createSicDisplayCoupling } from '../sic/display-coupling.ts';
+import { createSicPeriodicProfileAlignment } from '../sic/periodic-profile-alignment.ts';
 import { createSicContrastControls, contrastProbeId } from '../sic/contrast-controls.ts';
 import { createSicFollowStableReference } from '../sic/framed-search.ts';
 import { createSicFramedReception, learnFramedReceptionId } from '../sic/framed-reception.ts';
@@ -2684,7 +2685,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
-      createSicVerifyParallelSymbolPrefixes(),
+      createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
       createSicVerifySharedArrival(), createSicOutlineService(outlineServiceId, routeIntervention.learn),

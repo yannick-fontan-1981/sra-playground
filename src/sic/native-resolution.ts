@@ -55,6 +55,7 @@ import { carryToFrameId, carryToFrameStrategies, learnCarryToFrameId } from './c
 import { learnPortPairingId, portPairingId, portPairingCardStrategies } from './port-pairing.ts';
 import { contrastControlsId, contrastControlsStrategies, contrastProbeId } from './contrast-controls.ts';
 import { displayCouplingId, displayCouplingStrategies } from './display-coupling.ts';
+import { periodicProfileAlignmentId, periodicProfileStrategies } from './periodic-profile-alignment.ts';
 import { framedSearchId, framedSearchStrategies, stableReferenceId, stableReferenceStrategies } from './framed-search.ts';
 import { framedReceptionId, framedReceptionStrategies, learnFramedReceptionId } from './framed-reception.ts';
 import { windowRelationId, windowRelationStrategies } from './window-relation.ts';
@@ -518,6 +519,7 @@ export function readNativeResolution(agent: {
     : family === observedPolePairId ? observedPolePairStrategies
     : family === observedSharedRelationsId ? observedSharedRelationsStrategies
     : family === observedPatternLayoutId ? observedPatternLayoutStrategies
+    : family === periodicProfileAlignmentId ? periodicProfileStrategies
     : family === learnGridAccessId || family === learnSelectedAccessId || family === learnContactAccessId || family === coupledGaugeRouteId ? inventoryAccessStrategies
     : family === framedContactId ? { ...framedContactStrategies, ...navigationPrimitives } : family === learnPatternAccessId || family === learnTransportAccessId || family === learnReceptionAccessId || family === learnRemoteAccessId ? inventoryAccessStrategies
       : family === transportContactId ? transportContactStrategies : family === bandAlignmentId ? bandAlignmentStrategies
@@ -1314,6 +1316,17 @@ export function readNativeResolution(agent: {
     if (Array.isArray(card?.receivers)) for (const indicator of card.receivers) {
       const box = bounds(indicator);
       if (box) subjects.push({ label: 'Separate indicator', box });
+    }
+  }
+  if (situationCard && family === periodicProfileAlignmentId) {
+    const control = bounds(card?.control);
+    if (control) subjects.push({ label: 'Control under test', box: control });
+    for (const [field, label] of [['gauges', 'Target gauge'], ['profiles', 'Profile selector']] as const) {
+      if (!Array.isArray(card?.[field])) continue;
+      for (const item of card[field]) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
     }
   }
   if (situationCard && (family === portPairingId || family === learnPortPairingId) && Array.isArray(card?.pieces)) {
