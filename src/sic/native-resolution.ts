@@ -1045,6 +1045,10 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.seals)) for (const seal of card.seals) {
+      const box = bounds(seal);
+      if (box) subjects.push({ label: 'Seal still visible', box });
+    }
   }
   if (situationCard && (family === indicatedJumpId || family === learnIndicatedJumpId)) {
     for (const [field, label] of [['actor', 'Current direction indicator'], ['focus', 'Selected jump destination'],

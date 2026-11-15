@@ -3,6 +3,7 @@ import type { NativeBox, NativeExecution, NativeFamily, NativePoint, NativeProgr
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { searchCoverageRoute } from './coverage-route.ts';
 
 export const pairedPassageId = 'sic_paired_passage';
 export const learnPairedPassageId = 'sic_follow_paired_passages_after_motion';
@@ -138,29 +139,17 @@ function coverPassages(scene: Scene, memory: Memory, inputs: readonly string[]):
   const visited = scene.pairs.reduce((bits, pair, i) => bits | (memory.traversed.includes(pair.key) ? 1 << i : 0), 0);
   const entrances = new Map(scene.pairs.flatMap((pair, i) => pair.frames.map((from, j) =>
     [key(from.point), { pair, from, to: pair.frames[1 - j]!, bit: 1 << i }] as const)));
-  const queue: { point: NativePoint; bits: number; steps: Step[] }[] = [{ point: start, bits: visited, steps: [] }];
-  const seen = new Set([key(start) + '/' + visited]);
-  for (const item of queue) {
-    if (seen.size >= 8192) return null;
+  const steps = searchCoverageRoute<Step>(start, scene.goal.point, visited, all, function* (at) {
     for (const direction of directions) {
-      if (!inputs.includes(direction[0]) || memory.rejected.includes(key(item.point) + '/' + direction[0])) continue;
-      const next = shift(item.point, direction, scene.pitch), crossing = entrances.get(key(next));
+      if (!inputs.includes(direction[0]) || memory.rejected.includes(key(at) + '/' + direction[0])) continue;
+      const next = shift(at, direction, scene.pitch), crossing = entrances.get(key(next));
       const point = crossing ? shift(crossing.to.point, direction, scene.pitch) : next;
-      const bits = item.bits | (crossing?.bit ?? 0);
-      if (!scene.floor[key(point)]) continue;
-      const steps = [...item.steps, { direction, point, ...(crossing ? { crossing } : {}) }];
-      if (same(point, scene.goal.point)) {
-        if (bits !== all) continue;
-        const pending = steps.find(step => step.crossing && !memory.traversed.includes(step.crossing.pair.key))?.crossing;
-        return { steps, target: pending?.from ?? scene.goal, ...(pending ? { crossing: pending } : {}) };
-      }
-      const state = key(point) + '/' + bits;
-      if (seen.has(state)) continue;
-      seen.add(state);
-      queue.push({ point, bits, steps });
+      if (scene.floor[key(point)]) yield { point, visits: crossing?.bit ?? 0, step: { direction, point, ...(crossing ? { crossing } : {}) } };
     }
-  }
-  return null;
+  });
+  if (!steps) return null;
+  const pending = steps.find(step => step.crossing && !memory.traversed.includes(step.crossing.pair.key))?.crossing;
+  return { steps, target: pending?.from ?? scene.goal, ...(pending ? { crossing: pending } : {}) };
 }
 
 function plan(scene: Scene, memory: Memory, inputs: readonly string[]): Route | null {
