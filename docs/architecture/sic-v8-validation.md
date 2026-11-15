@@ -545,7 +545,9 @@ Sur **ELAS**, SIC vérifie au niveau 1 les quatre directions sur une pièce sél
 
 Sur **FUIT**, SIC conserve la règle de fuite compatible avec les retours du niveau 1 et les déplacements d'obstacles observés au contact. Au niveau 2, il relocalise les deux sprites mobiles, prévoit le prochain contact, puis recalcule le trajet vers le sprite restant après la première capture. Chaque commande contrôle les positions du poursuivant, des cibles et des obstacles. Le niveau 2 gagne en **18 commandes** et **27,35 s**, mesurés pendant les qualifications parallèles. Les 48 commandes et retours du niveau 1 sont reproduits à l'identique. Les 66 commandes sont décidées par SIC et la permutation de palette conserve le trajet. Empreinte `e1f5f5d9b098f8b573199ee98a1bf1a4c69905613a7ef3d4ada250104b9b0388`.
 
-Le bilan atteint **96/100 niveaux 2** et **213/636 niveaux attestés sous SIC seul** (33,5 %).
+Sur **ETAG**, SIC conserve les rôles vérifiés au niveau 1 et relocalise la destination et les passages au niveau 2. Il tient une carte distincte par étage et relie les passages ayant produit un changement de vue. Il vérifie chaque arrivée et conserve les refus dans leur contexte. Le niveau 2 gagne en **55 commandes** et **117,54 s**, mesurés pendant les qualifications parallèles. Les sept commandes et retours du niveau 1 sont reproduits à l'identique. Les 62 commandes sont décidées par SIC. La permutation de palette conserve le trajet gagnant. Empreinte `47e8a841ee743518b9eef46d88e0d11bfe8006d3fcceebb17ef5c431424a1e38`.
+
+Le bilan atteint **97/100 niveaux 2** et **214/636 niveaux attestés sous SIC seul** (33,6 %).
 
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
