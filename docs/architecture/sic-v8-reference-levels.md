@@ -81,7 +81,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | SC25 | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SC25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
 | SELE | 6 | [3](../../docs/migration/native-campaigns-v47/sele-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SELE/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
 | SEQN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SEQN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
-| SERI | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SERI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
+| SERI | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SERI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 3 |
 | SIGN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SIGN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 2 |
 | SK48 | 8 | [1](../../docs/architecture/sic-v8-validation.md) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SK48/LVL2/good_run_pseudocode.md) | — | — | 2 | 3 | 2 |
 | SKBN | 6 | [3](../../docs/migration/native-campaigns-v32/before-memory-fix/skbn.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/SKBN/LVL2/good_run_pseudocode.md) | 0 (archive locale) | — | 3 | 4 | 3 |
@@ -97,7 +97,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | THER | 6 | [6](../../docs/migration/native-campaigns-v43/ther-six-levels.json) | — | — | — | 6 | 6 | 3 |
 | TICT | 6 | [6](../../docs/migration/native-campaigns-v38/tict-six-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TICT/LVL1/good_run_pseudocode.md) | — | — | 6 | 6 | 2 |
 | TN36 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TN36/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
-| TR87 | 6 | 1 (rejeu local 0.68) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TR87/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 2 |
+| TR87 | 6 | 1 (rejeu local 0.68) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TR87/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 3 |
 | TRCP | 6 | — | — | — | — | — | — | 2 |
 | TRIA | 6 | — | — | — | — | — | — | 2 |
 | TU93 | 9 | [3](../../docs/migration/native-campaigns-v36/tu93-three-levels.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TU93/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 2 |
@@ -107,7 +107,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | VOIS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
 | WA30 | 9 | [1](../../docs/migration/native-campaigns-v54/baseline-wa30/wa30-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/WA30/LVL2/good_run_pseudocode.md) | 1 (archive locale) | — | 2 | 3 | 2 |
 | WEAV | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 2 |
-| ZIPP | 6 | [6](../../docs/migration/native-campaigns-v48/zipp-six-levels.json) | — | — | — | 6 | 6 | 2 |
+| ZIPP | 6 | [6](../../docs/migration/native-campaigns-v48/zipp-six-levels.json) | — | — | — | 6 | 6 | 3 |
 
 Les victoires et les résultats SIC seul de la campagne sont détaillés dans la [validation SIC V8](sic-v8-validation.md). Pour les traces locales de V6, les sources sont indiquées ci-dessous.
 

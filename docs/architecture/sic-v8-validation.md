@@ -623,4 +623,8 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 
 - **THER** gagne le niveau 3 en **4 commandes** et **3,11 s**. SIC utilise les comptes visibles de lignes et de colonnes pour régler la longueur des tubes. Les 32 commandes du parcours continu relèvent de SIC. Empreinte `b5950ff4c0afb7a6775062134a8b91b2cff4b6120ed0dcb277c73b640a06c0fc`.
 
-**35/100 niveaux 3** et **247/636 niveaux** sont attestés sous SIC seul, soit **38,8 %**.
+- **SERI** gagne le niveau 3 en **4 commandes** et **8,28 s** avec la vérification de choix visuel. Les 12 commandes du parcours continu relèvent de SIC. Empreinte `cbe6f4b21d5ed1679807629cc5d9d19c350d53cfec6d1269a047775ef417a7c`.
+- **TR87** gagne le niveau 3 en **28 commandes** et **230,12 s** avec la vérification des effets d'édition de séquence. Les 91 commandes du parcours continu relèvent de SIC. Empreinte `c9688e0ff1cc288725043c3051f60c4ea796a9732fa0b12f23d8594f925053dc`.
+- **ZIPP** gagne le niveau 3 en **15 commandes** et **20,97 s** avec la vérification de la couverture par la trace. Les 38 commandes du parcours continu relèvent de SIC. Empreinte `5bafc617fc93339adcc2bae33d6c36a9516508b7f48ffc6e5b1a16306a631d59`.
+
+**38/100 niveaux 3** et **250/636 niveaux** sont attestés sous SIC seul, soit **39,3 %**.
