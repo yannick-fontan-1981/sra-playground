@@ -1,11 +1,13 @@
 import { provisional_scenes } from '../logos-engine/v6-inventory-initial.ts';
 import { world_complements, transferred_shape, display_matches } from '../logos-engine/v6-inventory-contrast.ts';
 import { patch } from '../logos-engine/v6-inventory-measurements.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 
 export const inventoryAccessId = 'sic_inventory_access';
+export const verifyInventoryTransferId = 'sic_verify_inventory_transfer';
 export const inventoryAccessStrategies = navigationPrimitives;
 const situations = {
   approach_inventory_source: 'Approach the object whose shape matches a blocked passage',
@@ -111,11 +113,15 @@ function commandFor(wanted: NativePoint, state: State, available: readonly strin
   return hint ?? available.find(input => !state.controls[input] && !tried(input)) ?? null;
 }
 
-export function createSicInventoryAccess(): NativeFamily<Proposal> {
+export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: inventoryAccessId,
-    propose(observation, rows, _inputs, remaining, execution) {
+    id: verifyInventoryTransferId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       const available = Object.keys(directions).filter(input => observation.available_action_refs.includes(input));
       if (remaining < 1 || available.length !== 4 || !observation.available_action_refs.includes('ACTION5') || observation.available_action_refs.includes('ACTION6')) return null;
       const previous = state?.epoch === observation.level_epoch ? state : null;
@@ -160,19 +166,18 @@ export function createSicInventoryAccess(): NativeFamily<Proposal> {
       const mode = execution?.reasoningMode ?? 'exploration';
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(r => r !== ref)];
       const input = interaction ? local.transfer ?? 'ACTION5' : wanted ? commandFor(wanted, local, available, here) : null;
-      const known = input ? local.controls[input] : null;
+      if (!input) return null;
+      const known = local.controls[input];
       const inverse = wanted && available.find(key => same(local.controls[key], negative(wanted)));
-      const offer = input ? { input, evidence, expected: known ? add(here, known)
-        : wanted && inverse && same(directions[input], wanted) ? add(here, wanted) : null } : null;
-      const { selected, entries, card } = resolveNavigationPrimitives({
-        mode, evidence,
-        probe: !known && (!interaction || !local.transfer) ? offer : null,
-        access: !interaction && known ? offer : null,
-        interaction: interaction && local.transfer ? offer : null,
-      });
-      if (!selected) return null;
-      const { id: strategy, plan } = selected, { input: selectedInput, expected } = plan;
-      const choice: Choice = { input: selectedInput, target, expected, interaction, need: purpose };
+      const expected = known ? add(here, known)
+        : wanted && inverse && same(directions[input], wanted) ? add(here, wanted) : null;
+      const routeSupported = !interaction && !!known;
+      const knownInteraction = interaction && !!local.transfer;
+      const facts = { routeSupported, knownInteraction, eligibleProbe: !known && !knownInteraction, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = routeSupported ? 'P07' : knownInteraction ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
+      const choice: Choice = { input, target, expected, interaction, need: purpose };
       const label = navigationPrimitives[strategy], parent = 'G_official_completion';
       const situation = purpose === 'source' ? interaction ? situations.test_inventory_transfer : situations.approach_inventory_source
         : purpose === 'passage' ? situations.test_complementary_passage
@@ -182,11 +187,14 @@ export function createSicInventoryAccess(): NativeFamily<Proposal> {
         subjects: ['carrier', 'transferable_object', 'complementary_passage', 'reserve'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_measured_access_and_continued_route' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'inventory-access:' + need.id, action = { action_ref: selectedInput, data: {} }, actions = [action];
-      return { status: 'proposed', kind: inventoryAccessId, actions, local, actor, choice, here, needId: need.id,
+      const id = 'inventory-access:' + need.id, action = { action_ref: input, data: {} }, actions = [action];
+      return { status: 'proposed', kind: verifyInventoryTransferId, actions, local, actor, choice, here, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: expected }],
-        sicSituationCard: { strategy, need: 'Open the blocked route and reach the marked destination', evidence, agenda: entries,
-          mode, triggerCard: card, situation,
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Open the blocked route and reach the marked destination', evidence, agenda: [],
+          mode, triggerCard: chooseLanding, situation,
           actor, target: target.box, display: local.receipt?.display_bbox ?? null,
           reserve: local.meter && local.meter.length > 0 ? [local.meter.x, local.meter.y, local.meter.x + local.meter.length - 1, local.meter.y] : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,

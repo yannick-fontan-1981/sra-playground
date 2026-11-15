@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const pairedChannelsId = 'sic_paired_channels';
+export const verifyChannelAccessId = 'sic_verify_channel_access';
 type Tile = { point: NativePoint; box: NativeBox; color: number; count: number; accents: number[] };
 type Part = ReturnType<typeof geometricComponents>[number];
 type Pair = { color: number; from: Tile; to: Tile };
@@ -116,10 +118,14 @@ function plan(layout: Layout, rejected: readonly string[]): Thread[] | null {
   return best;
 }
 
-export function createSicPairedChannels(): NativeFamily<Proposal> {
+export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
   let memory: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: pairedChannelsId,
+    id: verifyChannelAccessId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
@@ -140,28 +146,33 @@ export function createSicPairedChannels(): NativeFamily<Proposal> {
       const mode = execution?.reasoningMode ?? 'exploration';
       const offset = Math.floor(layout.pitch / 2), [x, y] = tile.point;
       const point: NativePoint = [x + offset, y + offset];
-      const offer = { input: 'ACTION6', expected: point, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
-        probe: prior ? null : offer, access: prior ? offer : null, interaction: null });
-      if (!selected) return null;
+      const routeSupported = !!prior && threads.some(candidate => candidate.clicks.some(previous =>
+        measureTile(rows, ...previous.point, layout.pitch).color !== layout.closed));
+      const facts = { routeSupported, eligibleProbe: !routeSupported, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = routeSupported ? 'P07' : 'P05';
+      if (decision?.result !== strategy) return null;
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: 'One closed tile on a candidate channel', evidence });
       if (!witness) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'connect_matching_endpoints', scope: ref.split(':revision:', 1)[0]!,
         subjects: [key(pair.from.point), key(pair.to.point)], parentObjective: parent, satisfactionContract: 'paired_endpoints_in_the_same_open_channel' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = pairedChannelsId + ':' + need.id;
-      const situation = prior ? 'Open the next tile and compare the change with the two paired endpoints' : 'Test whether one closed tile can be opened';
+      const id = verifyChannelAccessId + ':' + need.id;
+      const situation = routeSupported ? 'Open the next tile and compare the change with the two paired endpoints' : 'Test whether one closed tile can be opened';
       const action = { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } };
       return {
-        status: 'proposed', kind: pairedChannelsId, tile, pair, state, completes, needId: need.id,
+        status: 'proposed', kind: verifyChannelAccessId, tile, pair, state, completes, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, point_binding: witness, expected_after: null }],
-        sicSituationCard: { strategy: selected.id, need: 'Connect matching endpoints within the visible reserve', situation, evidence, agenda: entries,
-          mode, triggerCard: card, target: tile.box, source: pair.from.box, sink: pair.to.box },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Connect matching endpoints within the visible reserve', situation, evidence, agenda: [],
+          mode, triggerCard: chooseLanding, target: tile.box, source: pair.from.box, sink: pair.to.box },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };

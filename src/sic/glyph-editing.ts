@@ -1,20 +1,16 @@
 import { measureWordScene, wordFocus, wordGlyphs, wordVisitPlan, type WordRecord, type WordState } from '../logos-engine/v6-word-interface.ts';
-import type { NativeFamily, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 
 export const glyphEditingId = 'sic_glyph_editing';
+export const verifySequenceEditsId = 'sic_verify_sequence_edits';
 export const glyphEditingStrategies = {
   test_glyph_command: 'Test a command for local symbol editing or cursor movement',
   apply_glyph_route: 'Follow the measured edits toward the required symbol sequence',
+  P05: 'Test a command for local symbol editing or cursor movement',
+  P07: 'Follow the measured edits toward the required symbol sequence',
 } as const;
-const graph = compileStrategyGraph({ id: 'derive_and_edit_required_glyphs', version: 1, order: 'FALLBACK',
-  priorities: ['apply_glyph_route', 'test_glyph_command'],
-  strategies: {
-    test_glyph_command: [{ fact: 'trial', expected: true, label: 'A command can reveal another edit or cursor rule' }],
-    apply_glyph_route: [{ fact: 'route', expected: true, label: 'Measured edits and cursor movements give a route to the derived sequence' }],
-  },
-}, ['trial', 'route']);
 type Scene = { editable: WordRecord; source: WordRecord; cursor: WordRecord[]; ink: number; target: string[]; rule_count: number };
 type Edit = [before: string, after: string];
 type State = { epoch: number; scene: Scene; edits: Record<string, Edit[]>; directions: Record<string, number>;
@@ -39,11 +35,15 @@ function closedCycle(edges: ReadonlyMap<string, string>, start: string) {
   return visited.has(node);
 }
 
-export function createSicGlyphEditing(): NativeFamily<Proposal> {
+export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: glyphEditingId,
-    async propose(observation, rows, _inputs, remaining) {
+    id: verifySequenceEditsId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async propose(observation, rows, _inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action)).sort();
       if (!keys.length || observation.available_action_refs.includes('ACTION6') || remaining < 1) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -60,11 +60,15 @@ export function createSicGlyphEditing(): NativeFamily<Proposal> {
       const test = usable.find(action => edits.has(action) && !closedCycle(edits.get(action)!, word[at]!))
         ?? usable.find(action => !local.tried.includes(action));
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
-        route: { value: !!route, evidence }, trial: { value: !!test, evidence },
-      }, planners: { apply_glyph_route: () => route ?? null, test_glyph_command: () => test ?? null } });
-      if (!selected) return null;
-      const strategy = selected.id, action = selected.plan, shift = directions.get(action), rewrite = edits.get(action)?.get(word[at]!);
+      const mode = execution?.reasoningMode ?? 'exploration';
+      const facts = { routeSupported: !!route, eligibleProbe: !!test, knownInteraction: false, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      if (!decision) return null;
+      const strategy = decision.result;
+      if (strategy !== 'P07' && strategy !== 'P05') return null;
+      const action = strategy === 'P07' ? route : test;
+      if (!action) return null;
+      const shift = directions.get(action), rewrite = edits.get(action)?.get(word[at]!);
       const expected: WordState | null = shift ? [word, modulo(at + shift, word.length)] : rewrite
         ? [word.map((glyph, i) => i === at ? rewrite : glyph), at] : null;
       const command = { action_ref: action, data: {} }, label = glyphEditingStrategies[strategy], parent = 'G_official_completion';
@@ -74,11 +78,14 @@ export function createSicGlyphEditing(): NativeFamily<Proposal> {
       const id = `glyph-editing:${need.id}`, actions = [command];
       const [left, top, , bottom] = scene.editable.box;
       const active = [left + at * scene.editable.size, top, left + (at + 1) * scene.editable.size - 1, bottom];
-      return { status: 'proposed', kind: glyphEditingId, actions, local, current, expected, needId: need.id,
+      return { status: 'proposed', kind: verifySequenceEditsId, actions, local, current, expected, needId: need.id,
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        sicSituationCard: { strategy, need: 'Find and enter the sequence implied by the example rules', mode: route ? 'solving' : 'exploration',
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Find and enter the sequence implied by the example rules', mode, triggerCard: chooseLanding,
           situation: `${scene.rule_count} visible rules yield one sequence. ${word.filter((glyph, i) => glyph !== scene.target[i]).length} slots differ.`,
-          agenda: entries, evidence, active, source: scene.source.box, editable: scene.editable.box },
+          agenda: [], evidence, active, source: scene.source.box, editable: scene.editable.box },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },

@@ -1,9 +1,11 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import type { NativeBox, NativeFamily, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
+import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const markedGaugeId = 'sic_marked_gauge';
+export const verifyGaugeEffectId = 'sic_verify_gauge_effect';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Axis = 0 | 1;
@@ -63,10 +65,14 @@ function lengthOf(rows: NativeRows, gauge: Gauge) {
 
 function cap(gauge: Gauge) { return gauge.goal[gauge.axis] - gauge.origin[gauge.axis]; }
 
-export function createSicMarkedGauge(): NativeFamily<Proposal> {
+export function createSicVerifyGaugeEffect(): NativeFamily<Proposal> {
   let state: Memory | null = null;
+  let decide: NativeProgramHandle | undefined;
   return {
-    id: markedGaugeId,
+    id: verifyGaugeEffectId,
+    async attachPrograms(registry) {
+      decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action))) return null;
@@ -84,18 +90,17 @@ export function createSicMarkedGauge(): NativeFamily<Proposal> {
       const old = previous(button), index = indexOf(button), ref = observation.observation_ref;
       const evidence: [string, ...string[]] = old && old.evidence !== ref ? [ref, old.evidence] : [ref];
       const mode = execution?.reasoningMode ?? 'exploration';
-      const offer = { input: 'ACTION6', expected: gauge.goal, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({
-        mode, evidence, probe: old ? null : offer, interaction: old ? offer : null, access: null,
-      });
-      if (!selected) return null;
+      const facts = { repeatSupportedInteraction: !!old, probeNeededInteraction: !old, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = old ? 'P02' : 'P05';
+      if (decision?.result !== strategy) return null;
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, button.point, { reason: 'Button sharing the gauge marker color', evidence });
       if (!witness) return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'set_visible_gauge_to_marked_target', scope: ref.split(':revision:', 1)[0]!,
         subjects: [gauge.goal.join(',')], parentObjective: parent, satisfactionContract: 'gauge_reaches_visible_mark' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = markedGaugeId + ':' + need.id;
+      const id = verifyGaugeEffectId + ':' + need.id;
       const action = { action_ref: 'ACTION6', data: { x: button.point[0], y: button.point[1] } };
       const [x, y] = gauge.goal;
       const expected = old ? Math.min(cap(gauge), beforeLength + old.delta) : null;
@@ -104,14 +109,17 @@ export function createSicMarkedGauge(): NativeFamily<Proposal> {
       const measured: NativeBox = gauge.axis === 0 ? [left, top, left + beforeLength - 1, bottom]
         : [left, top, right, top + beforeLength - 1];
       return {
-        status: 'proposed', kind: markedGaugeId, memory, gauge, index, button, beforeLength, expected, needId: need.id,
+        status: 'proposed', kind: verifyGaugeEffectId, memory, gauge, index, button, beforeLength, expected, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, point_binding: witness, expected_after: expected }],
-        sicSituationCard: { strategy: selected.id, need: 'Bring each gauge to its marked value', situation, evidence, agenda: entries, mode,
-          triggerCard: card, focus: button.box, gauge: measured, target: [x - 1, y - 1, x + 1, y + 1] },
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Bring each gauge to its marked value', situation, evidence, agenda: [], mode,
+          triggerCard: chooseInteraction, focus: button.box, gauge: measured, target: [x - 1, y - 1, x + 1, y + 1] },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
-        sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+        sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
