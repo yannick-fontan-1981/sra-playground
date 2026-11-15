@@ -473,6 +473,10 @@ Sur **LKEY**, SIC réutilise la prise, l’échange de rangée et le test d’in
 
 Le bilan atteint **63/100 niveaux 2** et **180/636 niveaux attestés sous SIC seul** (28,3 %).
 
+Sur **GIGO**, SIC retrouve l’ouverture du niveau 2 grâce à un trait extérieur aligné sur un passage de l’enceinte. Il relit les quatre pièces, déplace le contenant commun avec ses deux pièces internes, puis règle chacune pour relier la source au passage. Le retour officiel confirme la liaison. Le niveau 2 gagne en **9 commandes** et **28,14 s** lors du rejeu en parallèle de la qualification. Les six commandes et retours du niveau 1 sont reproduits. Les 15 commandes relèvent de SIC, avec l’empreinte `43072bf3635a00b20a3407954b1ba394ad39ae7e129df32144c7489b40952a7d`. Le parcours gagne aussi avec une palette permutée.
+
+Le bilan atteint **64/100 niveaux 2** et **181/636 niveaux attestés sous SIC seul** (28,5 %).
+
 La reprise de la campagne qualifie le transfert entre niveaux. À l'ouverture du niveau 2, le panneau doit relier chaque acquis réutilisé à sa preuve du niveau 1 et au contexte visible qui permet son application. SIC compare la nouvelle disposition, les sprites, les commandes disponibles et leurs contraintes avec les acquis confirmés. Les différences visibles sont signalées avant la première commande. Une relation dont le contexte change reste à vérifier par un essai ciblé.
 
 Au retour qui valide le niveau 1, une rétrospection doit formuler le but observé. Elle relie l'augmentation du score aux relations entre sprites et aux conditions qui étaient déjà satisfaites. Les tentatives comparables qui ont échoué aident à distinguer les conditions nécessaires des changements simultanés. À l'ouverture du niveau 2, le panneau doit montrer les preuves, les hypothèses encore ouvertes et ce que SIC vérifie sur la nouvelle disposition. La première qualification de ce bilan utilisera les parties déjà terminées.

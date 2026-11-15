@@ -39,13 +39,32 @@ function crossAt(rows: NativeRows, [x, y]: NativePoint): boolean {
     && rows[y]?.[x - 1] === arm && rows[y]?.[x + 1] === arm;
 }
 
+function markedExit(root: Part, parts: Part[], pitch: number): NativePoint | null {
+  const [l, t, r, b] = root.bbox, columns = width(root.bbox) / pitch, rows = height(root.bbox) / pitch;
+  const exits = parts.flatMap(({ bbox, color, rectangular }) => {
+    if (color !== root.color || !rectangular || bbox === root.bbox) return [];
+    const [x, y, u, v] = bbox;
+    const sideY = Math.floor(((y + v) / 2 - t) / pitch), sideX = Math.floor(((x + u) / 2 - l) / pitch);
+    if (height(bbox) <= pitch && width(bbox) >= 2 * pitch && y >= t && v <= b) {
+      if (x === r + 1) return [[columns - 1, sideY] as NativePoint];
+      if (u === l - 1) return [[0, sideY] as NativePoint];
+    }
+    if (width(bbox) <= pitch && height(bbox) >= 2 * pitch && x >= l && u <= r) {
+      if (y === b + 1) return [[sideX, rows - 1] as NativePoint];
+      if (v === t - 1) return [[sideX, 0] as NativePoint];
+    }
+    return [];
+  });
+  return exits.length === 1 ? exits[0]! : null;
+}
+
 function measure(rows: NativeRows): { layout: Layout; position: Position } | null {
   const parts = geometricComponents(rows);
   const candidates = parts.filter(p => p.area > 180 && p.area < 750 && width(p.bbox) > 30 && height(p.bbox) > 20
     && p.bbox[0] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[1] > 0 && p.bbox[3] < rows.length - 4);
   const goals = parts.filter(p => p.area === 9 && width(p.bbox) === 3 && height(p.bbox) === 3 && (p.bbox[0] === 0 || p.bbox[2] === rows[0]!.length - 1));
-  if (goals.length !== 1) return null;
-  const goal = goals[0]!, goalY = goal.bbox[1] + 1;
+  if (goals.length > 1) return null;
+  const goal = goals[0], goalY = goal ? goal.bbox[1] + 1 : null;
   const painted = (part: Part, x: number, y: number) => rows[y]?.[x] === part.color;
   const isFrame = (part: Part, pitch: number) => {
     const bounds = part.bbox;
@@ -57,15 +76,21 @@ function measure(rows: NativeRows): { layout: Layout; position: Position } | nul
   };
   const layouts = [];
   for (const root of candidates) for (const pitch of [2, 3, 4]) {
-    if (!isFrame(root, pitch) || goalY < root.bbox[1] || goalY > root.bbox[3]) continue;
+    if (!isFrame(root, pitch)) continue;
     const origin: NativePoint = [root.bbox[0], root.bbox[1]];
+    let exit: NativePoint | null;
+    if (goal && goalY !== null) {
+      if (goalY < root.bbox[1] || goalY > root.bbox[3]) continue;
+      exit = [goal.bbox[0] === 0 ? 0 : width(root.bbox) / pitch - 1, Math.floor((goalY - origin[1]) / pitch)];
+    } else exit = markedExit(root, parts, pitch);
+    if (!exit) continue;
     const background = rows[origin[1] + pitch]?.[origin[0] + pitch];
     if (background === undefined || background === root.color) continue;
     const enclosed = parts.filter(p => p.color !== root.color && p.color !== background && contains(root.bbox, p.bbox)
       && (p.bbox[0] - origin[0]) % pitch === 0 && (p.bbox[1] - origin[1]) % pitch === 0 && isFrame(p, pitch))
       .sort((a, b) => width(b.bbox) * height(b.bbox) - width(a.bbox) * height(a.bbox));
     if (enclosed.length < 2 || enclosed.length > 5 || new Set(enclosed.map(p => p.color)).size !== enclosed.length) continue;
-    const rectangles = [root, ...enclosed], exit: NativePoint = [goal.bbox[0] === 0 ? 0 : width(root.bbox) / pitch - 1, Math.floor((goalY - origin[1]) / pitch)];
+    const rectangles = [root, ...enclosed];
     if (painted(root, origin[0] + exit[0] * pitch, origin[1] + exit[1] * pitch)) continue;
     const position: Position = { rooms: rectangles.map(p => [(p.bbox[0] - origin[0]) / pitch, (p.bbox[1] - origin[1]) / pitch]), selected: 1 };
     const rooms: Room[] = rectangles.map((p, i) => {
