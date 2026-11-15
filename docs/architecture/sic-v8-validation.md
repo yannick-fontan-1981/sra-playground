@@ -621,4 +621,6 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 - **RE86** gagne le niveau 3 en **61 commandes** et **134,50 s**. SIC identifie la pièce contrôlée et vérifie ses déplacements vers les repères compatibles malgré des recouvrements. Les 134 commandes du parcours continu relèvent de SIC. Empreinte `1966269dfa9151aa8025141c3f1d97ae32a30aed5a77df03c178efde4bbe989d`.
 - **SKBN** gagne le niveau 3 en **19 commandes** et **21,11 s**. SIC choisit la position depuis laquelle pousser, puis pousse la pièce vers les repères correspondants. Les 51 commandes du parcours continu relèvent de SIC. Empreinte `c70fc485545d7b3168f1f4bd5f6926921c955326077140e9c43f7cf4ae45aef4`.
 
-**34/100 niveaux 3** et **246/636 niveaux** sont attestés sous SIC seul, soit **38,7 %**.
+- **THER** gagne le niveau 3 en **4 commandes** et **3,11 s**. SIC utilise les comptes visibles de lignes et de colonnes pour régler la longueur des tubes. Les 32 commandes du parcours continu relèvent de SIC. Empreinte `b5950ff4c0afb7a6775062134a8b91b2cff4b6120ed0dcb277c73b640a06c0fc`.
+
+**35/100 niveaux 3** et **247/636 niveaux** sont attestés sous SIC seul, soit **38,8 %**.
