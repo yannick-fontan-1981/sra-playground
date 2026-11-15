@@ -1017,6 +1017,12 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    for (const [field, label] of [['externalCarriers', 'Other observed carrier'], ['reservedParts', 'Part carried by the other carrier']] as const) {
+      if (Array.isArray(card?.[field])) for (const candidate of card[field]) {
+        const box = bounds(candidate);
+        if (box) subjects.push({ label, box });
+      }
+    }
   }
   if (situationCard && (family === replayAccessId || family === verifyRemoteReplayId)) {
     for (const [field, label] of [['actor', 'Current carrier'], ['target', 'Current destination'],
