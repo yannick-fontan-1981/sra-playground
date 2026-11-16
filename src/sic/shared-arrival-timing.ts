@@ -1,10 +1,12 @@
-import { configuredRoute, configuredTrajectories, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
+import { configuredCrosses, configuredRoute, configuredTrajectories, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Point = [number, number];
-type Gate = { point: Point; open: boolean };
+type Gate = { point: Point; open: boolean; mark: string };
+type GateEdit = { point: Point; toggles: Point[] };
+export type GateEffects = Readonly<Record<string, Point[]>>;
 export type TimedNetwork = { gates: Gate[]; pads: Map<string, string>; nodes: Set<string> };
-export type ArrivalTiming = { orders: Point[][]; delays: Record<string, number>; observed: number[] };
+export type ArrivalTiming = { orders: Point[][]; delays: Record<string, number>; observed: (number | null)[] };
 const key = (point: Point) => point.join(',');
 const cardinals: Point[] = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 const permutations = (points: Point[]): Point[][] => points.length === 0 ? [[]]
@@ -23,13 +25,13 @@ export function timedNetwork(scene: ConfiguredScene): TimedNetwork | null {
     if (occupied.has(position)) continue;
     const patch: number[] = cell.patch.flat();
     const center = patch[4]!;
-    for (const { pips, strips } of axes) {
+    for (const [axis, { pips, strips }] of axes.entries()) {
       const open = cell.open && patch[pips[0]!] === patch[pips[1]!] && !scene.background.has(patch[pips[0]!]!)
         && patch.every((ink, index) => pips.includes(index) || index === 4 || ink === scene.floor);
       const closed = !cell.open && !scene.background.has(patch[strips[0]!]!)
         && patch.every((ink, index) => ink === (strips.includes(index) ? patch[strips[0]!] : center));
       if (open || (closed && scene.background.has(center))) {
-        gates.push({ point: cell.point, open });
+        gates.push({ point: cell.point, open, mark: axis + '/' + (open ? patch[pips[0]!] : patch[strips[0]!]) });
         break;
       }
     }
@@ -45,14 +47,41 @@ export function timedNetwork(scene: ConfiguredScene): TimedNetwork | null {
   return pads.size && gates.length && gates.length <= 8 ? { gates, pads, nodes } : null;
 }
 
-export function measureArrivalTiming(scene: ConfiguredScene, network: TimedNetwork, frames: readonly NativeRows[]): ArrivalTiming | null {
-  const paths = configuredTrajectories(scene, frames);
-  if (paths.size !== scene.actors.length) return null;
-  const compatible = orders.filter(order => scene.actors.every(([color, x, y]) => {
-    const projected = configuredRoute(network.nodes, [x, y], scene.target, order, scene.grid[0]);
-    return projected?.map(key).join(';') === paths.get(color)![0].map(key).join(';');
+function visiblePrefixes(scene: ConfiguredScene, frames: readonly NativeRows[]): Map<number, Point[]> {
+  const [pitch, left, top] = scene.grid, poses = frames.map(configuredCrosses);
+  return new Map(scene.actors.map(([color, x, y]) => {
+    const path: Point[] = [[x, y]];
+    for (const frame of poses) {
+      const matches = frame.filter(([value, a, b]) => value === color && a % pitch === left && b % pitch === top);
+      if (matches.length !== 1) continue;
+      const [, a, b] = matches[0]!, [u, v] = path.at(-1)!;
+      const distance = Math.abs(a - u) + Math.abs(b - v);
+      if (distance === 0) continue;
+      if (distance !== pitch || path.some(point => key(point) === key([a, b]))) break;
+      path.push([a, b]);
+      if (key([a, b]) === key(scene.target)) break;
+    }
+    return [color, path];
   }));
-  if (!compatible.length) return null;
+}
+
+function prefixDelay(network: TimedNetwork, delays: Readonly<Record<string, number>>, positions: readonly string[]): number | null {
+  let total = 0;
+  for (const position of positions) {
+    const pad = network.pads.get(position);
+    if (!pad) continue;
+    const dwell = delays[pad];
+    if (dwell === undefined) return null;
+    total += dwell;
+  }
+  return total;
+}
+
+export function measureArrivalTiming(scene: ConfiguredScene, network: TimedNetwork, frames: readonly NativeRows[],
+  inherited?: Readonly<Record<string, number>>): ArrivalTiming | null {
+  const paths = configuredTrajectories(scene, frames);
+  const partial = paths.size !== scene.actors.length;
+  if (!paths.size || partial && !inherited) return null;
   const intervals = new Map<number, number>();
   for (const [, times] of paths.values()) {
     for (let i = 1; i < times.length; i++) {
@@ -73,20 +102,60 @@ export function measureArrivalTiming(scene: ConfiguredScene, network: TimedNetwo
       delays[pad] = dwell;
     }
   }
-  if (!Object.values(delays).some(dwell => dwell > 0)) return null;
-  const observed = scene.actors.map(([color]) => paths.get(color)![1].at(-1)! / baseline);
-  return { orders: compatible, delays, observed };
+  const retained = { ...inherited, ...delays };
+  if (!Object.values(retained).some(dwell => dwell > 0)) return null;
+  const prefixes = partial ? visiblePrefixes(scene, frames) : null;
+  const compatible = orders.filter(order => {
+    const projected = scene.actors.map(([, x, y]) => configuredRoute(network.nodes, [x, y], scene.target, order, scene.grid[0])?.map(key));
+    return scene.actors.every(([color], i) => {
+      const route = projected[i], complete = paths.get(color);
+      if (!route) return false;
+      if (complete) return route.join(';') === complete[0].map(key).join(';');
+      const prefix = prefixes?.get(color)?.map(key);
+      if (!prefix || prefix.length < 2 || prefix.length >= route.length || !prefix.every((position, j) => route[j] === position)) return false;
+      const delay = prefixDelay(network, retained, prefix);
+      if (delay === null) return false;
+      // Pieces can share the remaining visible cells only if they reach the merge together.
+      return projected.some((other, j) => j !== i && other?.length === route.length
+        && route.slice(prefix.length).every((position, k) => position === other[prefix.length + k])
+        && delay === prefixDelay(network, retained, other.slice(0, prefix.length)));
+    });
+  });
+  if (!compatible.length) return null;
+  const observed = scene.actors.map(([color]) => {
+    const frame = paths.get(color)?.[1].at(-1);
+    return frame === undefined ? null : frame / baseline;
+  });
+  return { orders: compatible, delays: retained, observed };
 }
 
-export function planTimedArrival(scene: ConfiguredScene, network: TimedNetwork, timing: ArrivalTiming, remaining: number) {
-  let best: { edits: Gate[]; ticks: number[]; matchingOrders: number } | null = null;
-  for (let mask = 0; mask < 2 ** network.gates.length; mask++) {
-    const edits = network.gates.filter((_, index) => (mask & (1 << index)) !== 0);
+function gateEdits(network: TimedNetwork, effects: GateEffects | undefined, rejected: readonly string[]): GateEdit[] {
+  return network.gates.flatMap(gate => {
+    const id = key(gate.point);
+    if (rejected.includes(id)) return [];
+    const measured = effects?.[id];
+    if (measured) return [{ point: gate.point, toggles: measured }];
+    const peers = effects && network.gates.filter(other => other.mark === gate.mark);
+    if (!peers || peers.length !== 2 || peers[0]!.open === peers[1]!.open
+      || peers.some(peer => effects?.[key(peer.point)])) return [{ point: gate.point, toggles: [gate.point] }];
+    const candidates = peers.filter(peer => !rejected.includes(key(peer.point)));
+    const trial = candidates.find(peer => !peer.open) ?? candidates[0];
+    return gate === trial ? [{ point: gate.point, toggles: peers.map(peer => peer.point) }] : [];
+  });
+}
+
+export function planTimedArrival(scene: ConfiguredScene, network: TimedNetwork, timing: ArrivalTiming, remaining: number,
+  effects?: GateEffects, rejected: readonly string[] = []) {
+  let best: { edits: GateEdit[]; ticks: number[]; matchingOrders: number } | null = null;
+  const controls = gateEdits(network, effects, rejected);
+  for (let mask = 0; mask < 2 ** controls.length; mask++) {
+    const edits = controls.filter((_, index) => (mask & (1 << index)) !== 0);
     if (edits.length + 1 > remaining || (best?.matchingOrders === timing.orders.length && edits.length >= best.edits.length)) continue;
     const nodes = new Set(network.nodes);
-    for (const gate of edits) {
-      if (gate.open) nodes.delete(key(gate.point));
-      else nodes.add(key(gate.point));
+    for (const edit of edits) for (const gate of edit.toggles) {
+      const id = key(gate);
+      if (nodes.has(id)) nodes.delete(id);
+      else nodes.add(id);
     }
     const ticks = new Set<number>();
     let matchingOrders = 0;

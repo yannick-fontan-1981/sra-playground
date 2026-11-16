@@ -3,7 +3,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { measureArrivalTiming, planTimedArrival, timedNetwork, type ArrivalTiming } from './shared-arrival-timing.ts';
+import { measureArrivalTiming, planTimedArrival, timedNetwork, type ArrivalTiming, type GateEffects } from './shared-arrival-timing.ts';
 
 export const sharedArrivalId = 'sic_shared_arrival';
 export const verifySharedArrivalId = 'sic_verify_shared_arrival_configuration';
@@ -16,11 +16,13 @@ export const sharedArrivalStrategies = {
 
 type Point = [number, number];
 type Arrival = { interval: number; visited: string[] };
+type Transfer = { grid: ConfiguredScene['grid']; delays: ArrivalTiming['delays']; evidence: string[] };
 type State = { epoch: number; launched: boolean; arrivals: Arrival[]; launchRef: string | null;
-  edited: Point | null; editRef: string | null; replayed: boolean; timing?: ArrivalTiming };
+  edited: Point | null; editRef: string | null; replayed: boolean; timing?: ArrivalTiming; transfer?: Transfer;
+  gateEffects?: GateEffects; rejected?: string[] };
 type Strategy = keyof typeof sharedArrivalStrategies;
 type Proposal = NativeProposal & { strategy: Strategy; grid: ConfiguredScene['grid']; actors: ConfiguredScene['actors']; receiver: Point;
-  edit: Point | null; needId: string; timed: boolean };
+  edit: Point | null; needId: string; timed: boolean; grouped?: true; expectedGates?: Point[] };
 const empty = (epoch = 0): State => ({ epoch, launched: false, arrivals: [], launchRef: null, edited: null, editRef: null, replayed: false });
 const order: readonly Point[] = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 const key = (p: NativePoint) => p.join(',');
@@ -53,21 +55,32 @@ function observeApproaches(proposal: Proposal, frames: readonly NativeRows[]): A
   });
 }
 
-function confirmedGateEdit(proposal: Proposal, first: NativeRows, second: NativeRows): boolean {
+function observedGateEdit(proposal: Proposal, first: NativeRows, second: NativeRows): Point[] | null {
   const before = configuredScene(first, proposal.grid), after = configuredScene(second, proposal.grid);
-  if (!before || !after || !proposal.edit || key(before.target) !== key(after.target)
-    || JSON.stringify(before.actors) !== JSON.stringify(after.actors)) return false;
+  const control = proposal.edit;
+  if (!before || !after || !control || key(before.target) !== key(after.target)
+    || JSON.stringify(before.actors) !== JSON.stringify(after.actors)) return null;
   const former = timedNetwork(before), current = timedNetwork(after);
-  if (!former || !current) return false;
-  const changed = key(proposal.edit);
-  return former.gates.some(gate => key(gate.point) === changed)
-    && former.gates.length === current.gates.length && former.gates.every((gate, index) => {
-    const next = current.gates[index]!;
-    const position = key(gate.point);
-    return key(next.point) === position && next.open === (position === changed ? !gate.open : gate.open);
-  }) && [...former.nodes].every(node => current.nodes.has(node) || node === changed)
-    && [...current.nodes].every(node => former.nodes.has(node) || node === changed)
-    && current.pads.size === former.pads.size && [...former.pads].every(([cell, mark]) => current.pads.get(cell) === mark);
+  if (!former || !current || former.gates.length !== current.gates.length || current.pads.size !== former.pads.size
+    || [...former.pads].some(([cell, mark]) => current.pads.get(cell) !== mark)
+    || !former.gates.some(gate => key(gate.point) === key(control))) return null;
+  const next = new Map(current.gates.map(gate => [key(gate.point), gate]));
+  const changed: Point[] = [];
+  for (const gate of former.gates) {
+    const observed = next.get(key(gate.point));
+    if (!observed || gate.mark !== observed.mark) return null;
+    if (gate.open !== observed.open) changed.push(gate.point);
+  }
+  const edited = new Set(changed.map(key));
+  if ([...former.nodes].some(node => !current.nodes.has(node) && !edited.has(node))
+    || [...current.nodes].some(node => !former.nodes.has(node) && !edited.has(node))) return null;
+  return changed;
+}
+
+function confirmedGateEdit(proposal: Proposal, changed: Point[] | null): boolean {
+  const expected = proposal.expectedGates ?? (proposal.edit ? [proposal.edit] : []);
+  return !!changed?.length && changed.length === expected.length
+    && expected.every(point => changed.some(other => key(other) === key(point)));
 }
 
 export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
@@ -82,7 +95,7 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       const launch = inputs.find(input => input.action_ref === 'ACTION5');
       if (!launch || remaining < 1 || local.replayed || !observation.available_action_refs.includes('ACTION6')) return null;
-      const scene = configuredScene(rows);
+      const scene = configuredScene(rows) ?? (local.transfer ? configuredScene(rows, local.transfer.grid) : null);
       if (!scene) return null;
       const timed = timedNetwork(scene);
       if (!timed && (scene.actors.length !== 2 || !scene.candidates.length || scene.candidates.length > 8)) return null;
@@ -92,12 +105,14 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
       const candidates = differentApproaches
         ? scene.candidates.filter(point => scene.base.has(key(point)) && local.arrivals.some(a => a.visited.includes(key(point)))
           && equal(routeLengths(scene, point))) : [];
-      const timedPlan = timed && local.timing ? planTimedArrival(scene, timed, local.timing, remaining) : null;
+      const timedPlan = timed && local.timing
+        ? planTimedArrival(scene, timed, local.timing, remaining, local.transfer ? local.gateEffects ?? {} : undefined, local.rejected) : null;
       const edit = timed ? timedPlan?.edits[0]?.point ?? null
         : !local.edited && !equal(lengths) && candidates.length === 1 ? candidates[0]! : null;
       const command: NativeCommand = edit ? { action_ref: 'ACTION6', data: { x: edit[0], y: edit[1] } } : launch;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...(local.launchRef ? [local.launchRef] : []), ...(local.editRef ? [local.editRef] : [])];
+      const evidence: [string, ...string[]] = [ref, ...new Set([...(local.launchRef ? [local.launchRef] : []),
+        ...(local.editRef ? [local.editRef] : []), ...(local.transfer?.evidence ?? [])].filter(item => item !== ref))];
       const verifyTiming = !!timedPlan && timedPlan.edits.length === 0;
       const ready = timed ? verifyTiming && timedPlan.matchingOrders === local.timing?.orders.length : !!local.editRef && equal(lengths);
       const phase = ready ? 'launch_after_route_edit' : edit ? 'test_route_edit' : verifyTiming ? 'test_projected_arrivals'
@@ -110,8 +125,10 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
       const strategy = ready ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
       const label = timed && ready ? 'Launch with coincident projected arrival times' : sharedArrivalStrategies[phase];
+      const observations = local.timing?.observed.map(tick => tick ?? 'partly hidden').join(', ');
+      const toggles = timedPlan?.edits[0]?.toggles ?? [];
       const condition = timed && timedPlan && local.timing
-        ? `Observed arrivals at ticks ${local.timing.observed.join(', ')}. After ${timedPlan.edits.length} gate edits, ${timedPlan.matchingOrders} of ${local.timing.orders.length} compatible route orders predict a shared arrival at tick ${timedPlan.ticks.join(' or ')} including measured pauses.`
+        ? `Arrival observations: ${observations}. After ${timedPlan.edits.length} control changes, ${timedPlan.matchingOrders} of ${local.timing.orders.length} compatible route orders predict a shared arrival at tick ${timedPlan.ticks.join(' or ')} including measured pauses.${toggles.length > 1 ? ' This click may toggle both marked gates.' : ''}`
         : edit ? `Current route lengths are ${lengths.join(' and ')}. Test the marked cell that could make them equal.` : label;
       const objective = 'G_official_completion';
       const goal = { kind: 'test_shared_receiver_arrival', scope: ref.split(':revision:', 1)[0]!, subjects: [key(scene.target)],
@@ -121,6 +138,7 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
       const binding = edit ? await ObservedInputDomain.makeLocusWitness(observation, rows, edit, { reason: label, evidence }) : null;
       return { status: 'proposed', kind: verifySharedArrivalId, actions, strategy: phase, grid: scene.grid, actors: scene.actors,
         receiver: scene.target, edit, needId: need.id, timed: !!timed,
+        ...(local.transfer ? { grouped: true, expectedGates: toggles } : {}),
         steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -130,7 +148,7 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
           situation: condition,
           agenda: [], evidence, triggerCard: decision.receipt.workflow,
           subjects: [...scene.actors.map(([, x, y]) => neighborhood([x, y])), neighborhood(scene.target),
-            ...(edit ? [neighborhood(edit)] : [])] },
+            ...(edit ? [neighborhood(edit)] : []), ...toggles.filter(point => !edit || key(point) !== key(edit)).map(neighborhood)] },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent: objective }, need },
@@ -144,12 +162,17 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       const scored = after.levels_completed > before.levels_completed;
       const scene = proposal.edit && !scored && !proposal.timed ? configuredScene(second, proposal.grid) : null;
-      const matched = proposal.edit && !scored ? proposal.timed ? confirmedGateEdit(proposal, first, second)
+      const matched = proposal.edit && !scored ? proposal.timed ? confirmedGateEdit(proposal, observedGateEdit(proposal, first, second))
         : !!scene && !scene.base.has(key(proposal.edit)) && equal(routeLengths(scene)) : null;
       return { matched, seal_prefix: true, reason: scored ? 'official_boundary' : matched === false ? 'local_route_edit_contradicted'
         : 'observe_route_or_arrival_return', ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     record(before, after, _command, first, second, proposal, _index, frames) {
+      if (after.levels_completed > before.levels_completed && proposal.timed && state.timing && state.launchRef) {
+        const transfer = { grid: proposal.grid, delays: state.timing.delays, evidence: [state.launchRef, after.observation_ref] };
+        state = { ...empty(after.level_epoch), transfer };
+        return { events: [] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       if (state.epoch !== before.level_epoch) state = empty(before.level_epoch);
       if (proposal.strategy === 'observe_launch' || proposal.strategy === 'test_projected_arrivals') {
@@ -157,7 +180,7 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
         if (proposal.timed) {
           const scene = configuredScene(first, proposal.grid);
           const network = scene && timedNetwork(scene);
-          const timing = scene && network && measureArrivalTiming(scene, network, frames);
+          const timing = scene && network && measureArrivalTiming(scene, network, frames, state.transfer?.delays);
           if (timing && state.timing) {
             const previous = state.timing;
             const valid = timing.orders.filter(order => previous.orders.some(candidate => String(candidate) === String(order)));
@@ -175,8 +198,14 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
         }
       } else if (proposal.edit) {
         if (proposal.timed) {
-          if (confirmedGateEdit(proposal, first, second)) state.editRef = after.observation_ref;
-          else delete state.timing;
+          const changed = observedGateEdit(proposal, first, second);
+          if (changed?.length && (proposal.grouped || confirmedGateEdit(proposal, changed))) {
+            state.editRef = after.observation_ref;
+            if (proposal.grouped) state.gateEffects = { ...state.gateEffects, [key(proposal.edit)]: changed };
+            if (changed.length > 1) return { events: [], reviewEvidence: 'One click toggled several distinct gates in the same return' };
+          } else if (proposal.grouped && changed?.length === 0) {
+            state.rejected = [...(state.rejected ?? []), key(proposal.edit)];
+          } else delete state.timing;
         } else {
           state.edited = proposal.edit;
           const scene = configuredScene(second, proposal.grid);
