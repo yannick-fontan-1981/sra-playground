@@ -2175,7 +2175,7 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   private async persistFamilies(cause: DeltaCause, extra: NativeStoreWrite[] = [], evidenceId?: string): Promise<void> {
     if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
-    await this.knowledge.commit([...extra, ...(this.caller?.checkpointWrites() ?? []), ...(this.caller ? [{
+    const committed = await this.knowledge.commit([...extra, ...(this.caller?.checkpointWrites() ?? []), ...(this.caller ? [{
       id: 'caller:lifecycle', kind: 'component_state' as const, component: 'common_caller.lifecycle',
       value: { acquiredTransitions: this.callerAcquisitions, boundaryReplays: this.callerBoundaryReplays },
       relations: [{ relation: 'reconciles_with', target: 'reasoning:memory' }],
@@ -2183,7 +2183,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: familyCheckpoint(family),
       ...(evidenceId ? { evidence: [evidenceId] } : {}),
     }))], cause);
-    this.authority?.didCheckpoint();
+    this.authority?.didCheckpoint(committed);
   }
 
   /** This is the real immutable Kernel graph, not a second inspection model. */

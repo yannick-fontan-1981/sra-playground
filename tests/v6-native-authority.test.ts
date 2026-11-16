@@ -29,9 +29,23 @@ async function retainedAuthority() {
   await authority.initialize(store, fixture.initial.observation);
   authority.restore();
   authority.memory.trace(EPISODE, 'original', { seen: 'original' });
-  await store.commit(authority.checkpointWrites(), CHECKPOINT); authority.didCheckpoint();
+  authority.didCheckpoint(await store.commit(authority.checkpointWrites(), CHECKPOINT));
   return { authority, store };
 }
+
+test('the committed immutable checkpoint needs no immediate hydration', async () => {
+  const { authority, store } = await retainedAuthority();
+  authority.memory.put(EPISODE, 'typed_result', [true, -0], 'measured', 2);
+  const prepared = authority.checkpointWrites();
+  const receipt = await store.commit(prepared, CHECKPOINT);
+  const readState = store.stateValue.bind(store);
+  let hydrations = 0;
+  store.stateValue = id => { hydrations++; return readState(id); };
+  authority.didCheckpoint(receipt);
+  assert.equal(hydrations, 0);
+  assert.ok(!authority.checkpointWrites().some(write => write.component === 'native_reasoning_fact'));
+  assert.ok(Object.is(authority.retainedDynamicState().facts.find(fact => fact.key === 'typed_result')!.value[1], -0));
+});
 
 for (const kind of ['fact', 'trace'] as const) {
   test(`an independently revised ${kind} is acquired even after an unrelated checkpoint acknowledgement`, async () => {
@@ -85,12 +99,12 @@ test('a leaf changed after the prepared commit is read before its new identity c
   const prepared = authority.checkpointWrites();
   const write = prepared.find(write => write.component === 'native_reasoning_fact'
     && (write.value as Record<string, unknown>).key === 'property_rules')!;
-  await store.commit(prepared, CHECKPOINT);
+  const receipt = await store.commit(prepared, CHECKPOINT);
   // Python equality treats these as equal; they are different stored values.
   const changed = { ...write.value as Record<string, unknown>, value: [1, 0] };
   await store.commit([{ id: write.id, kind: 'component_state', value: changed }], { ...CHECKPOINT, statement: 'leaf.edit' });
   const edited = store.node(write.id);
-  authority.didCheckpoint();
+  authority.didCheckpoint(receipt);
   assert.throws(() => authority.checkpointWrites(), /restore before checkpoint/);
   authority.restore();
   assert.deepEqual(authority.memory.get(EPISODE, 'property_rules').value, [1, 0]);

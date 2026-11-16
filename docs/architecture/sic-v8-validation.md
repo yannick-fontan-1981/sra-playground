@@ -1075,3 +1075,22 @@ Au niveau 4, les reprises de décision passent de **14,37 s à 2,06 s** et le tr
 L’assemblage et la publication du graphe passent de **5,31 s à 2,55 s** sur les huit niveaux, soit **52,1 %** de temps en moins. Au niveau 4, ils passent de **1,347 s à 0,683 s** sur LS19 et de **1,968 s à 0,776 s** sur LS20. Le temps total des huit niveaux passe de **89,910 s à 87,009 s**.
 
 Le rejeu séparé à horloge figée donne la même empreinte de chaîne, le même nombre de nœuds et de deltas, et les mêmes acquisitions à la fin de chacun des huit niveaux. Le niveau 4 se termine avec **12 960 deltas et 143 acquisitions** sur LS19 et **13 869 deltas et 144 acquisitions** sur LS20. Les **169 tests** du noyau, du graphe natif, du moteur et des familles passent.
+
+### Relecture des faits après écriture sur GABA
+
+Le profil V8 du niveau 4, sur la version 113 (`d053fa72`), attribue **15,48 s** à la validation de fin de sauvegarde. Elle hydrate les fragments des faits et des traces fraîchement écrits, puis compare les valeurs reconstituées aux entrées de la sauvegarde. La transaction fournit désormais le lien entre chaque entrée immuable et le nœud effectivement publié. Quand les deux identités concordent, cette preuve suffit. Pour une preuve absente ou périmée, la comparaison exacte avec le graphe reste active.
+
+Le même profil avec ce changement mesure **0,05 s** dans la validation de fin de sauvegarde. L’encodage des fragments reste proche de **15–16 s** sur le profil du niveau 4. Les durées du profil sont des estimations par échantillonnage et incluent les appels imbriqués.
+
+| Niveau | Temps version 113 | Temps optimisé | Gain total | Traitement des retours avant → après |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 10,760 s | 9,829 s | +8,7 % | 7,640 s → 6,701 s |
+| 2 | 10,239 s | 8,144 s | +20,5 % | 9,388 s → 7,367 s |
+| 3 | 21,723 s | 16,647 s | +23,4 % | 19,913 s → 15,075 s |
+| 4 | 49,024 s | 31,852 s | +35,0 % | 46,291 s → 29,008 s |
+
+Les temps viennent d’un passage sans profileur par variante, sur la même machine et à un worker. Le temps total passe de **91,746 s à 66,472 s**. Les **239 commandes**, leurs retours complets et les **70 reprises de décision** concordent.
+
+Le rejeu à horloge figée retrouve les mêmes empreintes des chaînes de deltas après chacun des quatre niveaux de GABA. Au niveau 4, les deux variantes ont acquis **239 retours** et écrit **14 325 deltas**.
+
+Le même contrôle passe sur les niveaux 1 à 4 de LS19 et LS20. Sur les trois jeux, les **526 commandes et leurs retours**, les acquisitions et les empreintes de fin de niveau concordent. Le typage TypeScript et **79 tests** passent, dont un test qui vérifie que la confirmation d’une écriture immuable ne déclenche aucune hydratation.

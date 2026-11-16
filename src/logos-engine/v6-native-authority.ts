@@ -10,7 +10,7 @@ import { pythonEqual as same } from './v6-operations.ts';
 import { objectValue } from './canonical.ts';
 import { symbolicDigest } from './v6-hash.ts';
 import type { KnowledgeNode } from './kernel.ts';
-import type { NativeKnowledgeStore, NativeStoreWrite } from './v6-knowledge-store.ts';
+import type { NativeKnowledgeStore, NativeStoreCommitReceipt, NativeStoreWrite } from './v6-knowledge-store.ts';
 import type { NativeAfterResult, NativeCommand, NativeExecution, NativeObservation, NativeProposal, NativePublicObservation } from './v6-native-types.ts';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -71,10 +71,10 @@ export class NativeCompositionAuthority {
     this.memory.put(EPISODE, 'composition_target', null, 'fresh_episode', 0);
     this.memory.put(EPISODE, 'property_rules', [], observation.observation_ref, observation.revision);
     const state = this.memory.state(), { facts: _facts, traces: _traces, ...catalog } = state;
-    await store.commit([{ id: 'reasoning:catalog', kind: 'reasoning_catalog', component: 'native_reasoning_memory', status: 'retained', value: catalog,
+    const committed = await store.commit([{ id: 'reasoning:catalog', kind: 'reasoning_catalog', component: 'native_reasoning_memory', status: 'retained', value: catalog,
       definition: { reference_commit: '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e', tree_sha256: TREE_SHA256 } }, ...this.checkpointWrites()],
     { workflow: 'prototype.laya_router.route', step: 'initialize', statement: 'reasoning.install' });
-    this.didCheckpoint();
+    this.didCheckpoint(committed);
     await this.bridge.attachPrograms(store);
   }
 
@@ -132,22 +132,26 @@ export class NativeCompositionAuthority {
     return [...this.retainedEntries].every(([id, entry]) => this.store?.memory.nodes[id] === entry.node);
   }
   /** Called only after the containing V7 transaction succeeds. */
-  didCheckpoint(): void {
+  didCheckpoint(committed?: NativeStoreCommitReceipt): void {
     const pending = this.pendingCheckpoint; this.pendingCheckpoint = null;
     if (!pending || !this.store?.memory.nodes['reasoning:memory']
       || pending.revision !== this.memory.nativeCheckpoint().revision) return;
-    const index = this.store.stateValue('reasoning:memory') as R;
-    if (!sameStoredValue(index, pending.index)) return;
+    const matches = (id: string, node: KnowledgeNode, source: unknown): boolean => {
+      const write = committed?.get(id);
+      return write?.node === node && write.source === source || sameStoredValue(this.store!.stateValue(id), source);
+    };
+    const indexNode = this.store.node('reasoning:memory');
+    if (!matches(indexNode.id, indexNode, pending.index)) return;
     const retained = new Map<string, { version: number; node: KnowledgeNode }>();
     for (const [id, entry] of pending.entries) {
       const node = this.store.memory.nodes[id];
       // Unwritten entries keep their acquired identity. Written entries are
-      // acknowledged only after reading their actually committed value.
-      if (!node || (entry.written ? !sameStoredValue(this.store.stateValue(id), entry.record) : node !== entry.node)) return;
+      // acknowledged against the published node and immutable checkpoint input.
+      if (!node || (entry.written ? !matches(id, node, entry.record) : node !== entry.node)) return;
       retained.set(id, { version: entry.version, node });
     }
     this.retainedEntries = retained;
-    this.restoredMemoryNode = this.store.node('reasoning:memory'); this.restoredNativeRevision = pending.revision;
+    this.restoredMemoryNode = indexNode; this.restoredNativeRevision = pending.revision;
   }
   checkpointWrites(): NativeStoreWrite[] {
     if (this.restoredMemoryNode && (this.store?.memory.nodes['reasoning:memory'] !== this.restoredMemoryNode || !this.retainedNodesCurrent())) {
@@ -167,7 +171,8 @@ export class NativeCompositionAuthority {
     };
     for (const entry of checkpoint.facts) { const id = factId(entry.record.episode, entry.record.key); facts.push(id); retain(id, entry.version, entry.record, 'native_reasoning_fact'); }
     for (const entry of checkpoint.traces) { const id = traceId(entry.record.id); traces.push(id); retain(id, entry.version, entry.record, 'native_reasoning_trace'); }
-    const index = { schema: MEMORY_INDEX, native_revision: checkpoint.revision, facts, traces };
+    const index = Object.freeze({ schema: MEMORY_INDEX, native_revision: checkpoint.revision,
+      facts: Object.freeze(facts), traces: Object.freeze(traces) });
     this.pendingCheckpoint = { revision: checkpoint.revision, index, entries };
     return [...writes, { id: 'reasoning:memory', kind: 'component_state', component: 'native_reasoning_memory',
       value: index,
@@ -177,8 +182,8 @@ export class NativeCompositionAuthority {
   }
   private async checkpoint(statement: string, extra: NativeStoreWrite[] = []): Promise<void> {
     if (!this.store) throw new Error('Native composition authority is not initialized');
-    await this.store.commit([...extra, ...this.checkpointWrites()], { workflow: 'prototype.laya_router.route', step: 'native_memory', statement });
-    this.didCheckpoint();
+    const committed = await this.store.commit([...extra, ...this.checkpointWrites()], { workflow: 'prototype.laya_router.route', step: 'native_memory', statement });
+    this.didCheckpoint(committed);
   }
   private async run(request: R, execution: NativeExecution): Promise<CompositionReport> {
     await this.checkpoint('before.prepare'); this.restore();

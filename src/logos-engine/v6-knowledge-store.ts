@@ -82,6 +82,10 @@ export interface NativeStoreWrite {
   status?: 'active' | 'retained' | 'observed';
 }
 
+/** Identifies the source accepted for each node by a successful commit. Only
+ * callers that own immutable inputs can use source identity as a value check. */
+export type NativeStoreCommitReceipt = ReadonlyMap<string, { readonly source: unknown; readonly node: KnowledgeNode }>;
+
 export interface StoredNativeProgram {
   readonly workflowId: string;
   run(inputs: JsonObject, options?: ExecutionOptions): Promise<{ result: JsonValue; receipt: NativeSrcReceipt & { native_execution_hash: string; source_definition_hash: string; edited: boolean } }>;
@@ -136,18 +140,20 @@ export class NativeKnowledgeStore {
   }
   value(id: string): JsonValue { return this.stateValue(id); }
 
-  async commit(writes: readonly NativeStoreWrite[], cause: DeltaCause, expectedChain = this.graphChain): Promise<void> {
+  async commit(writes: readonly NativeStoreWrite[], cause: DeltaCause, expectedChain = this.graphChain): Promise<NativeStoreCommitReceipt> {
     if (this.busy) throw new Error('Native knowledge transaction already active');
     if (expectedChain !== this.graphChain) throw new Error('Native knowledge graph changed');
     this.busy = true;
     try {
       const staged = this.kernel.beginTransaction(this.state);
+      const accepted = new Map<string, { source: unknown; node: KnowledgeNode }>();
       let lastPublicTransition = this.lastPublicTransition;
       for (const write of writes) {
         // Fragment before the ordinary V7 JSON boundary: a complete observed
         // episode can exceed one million values without any individual node
         // exceeding the declared structural limit. Old fragments are immutable
         // and content-addressed, so repeated frames/evidence are shared.
+        const source = write.value;
         let storedValue: JsonValue;
         if (GRAPH_STATE_KINDS.has(write.kind)) {
           // Consecutive public transitions have distinct identities and often
@@ -155,7 +161,7 @@ export class NativeKnowledgeStore {
           // as a comparison for this stream only, including within a batch.
           const publicTransition = write.kind === 'transition_evidence' && write.component === 'public_transition';
           const root = staged.node(write.id)?.value ?? (publicTransition ? lastPublicTransition : undefined);
-          const graph = splitNativeState(write.value, write.id, isNativeStateGraph(root)
+          const graph = splitNativeState(source, write.id, isNativeStateGraph(root)
             ? { prior: { root, readFragment: id => staged.node(id)?.value } } : undefined);
           if (publicTransition) lastPublicTransition = graph.root;
           for (const fragment of graph.fragments) {
@@ -171,7 +177,7 @@ export class NativeKnowledgeStore {
             }) as JsonObject, cause);
           }
           storedValue = immutableJson(graph.root);
-        } else storedValue = encodeNativeState(write.value);
+        } else storedValue = encodeNativeState(source);
         const previous = staged.node(write.id);
         if (previous && (previous.kind !== write.kind || previous.scope !== this.scope)) throw new TypeError('Native node identity cannot change kind or scope');
         // Metadata-only writes must retain their delta, provenance and revision.
@@ -189,9 +195,11 @@ export class NativeKnowledgeStore {
           ...(definition === undefined ? {} : { definition }),
         };
         await staged.commit(immutableJson(node) as JsonObject, cause);
+        accepted.set(node.id, { source, node: staged.node(node.id)! });
       }
       this.state = staged.finish();
       this.lastPublicTransition = lastPublicTransition;
+      return accepted;
     } finally { this.busy = false; }
   }
 
