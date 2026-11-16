@@ -7,6 +7,7 @@ import { nativeProgramDescriptions } from '../src/logos-engine/v6-src-program.ts
 import { V6AgentService } from '../src/runtime/v6-agent-service.ts';
 import { BrowserV6Agent } from '../src/runtime/v6-agent.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
+import { createSicFramedContact, learnPatternAccessId } from '../src/sic/framed-contact.ts';
 import { standalonePlanningFamilies } from '../src/sic/standalone-families.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
@@ -253,6 +254,41 @@ test('native runtime defers family recording until a sealed prefix and ignores p
   clock += 3_600_000;
   result = await service.handle({ type: 'advance', sessionId: 'native-test', sequence: 2, ticketId: result.ticket!.id, observation: toV6PublicObservation(board(2), 2), executionMs: 7 });
   assert.equal(result.kind, 'boundary'); assert.deepEqual(records, [0, 1]); assert.equal(result.snapshot.activeSeconds, 0.012);
+});
+
+test('a declared walk reconciles the confirmed prefix when its next landing changes', async () => {
+  const family = createSicFramedContact(learnPatternAccessId);
+  const command = { action_ref: 'ACTION4', data: {} };
+  family.propose = observation => ({
+    status: 'proposed', kind: family.id, action: 'ACTION4', actions: [command, command],
+    binding: { observation_ref: observation.observation_ref, level_epoch: observation.level_epoch },
+    steps: [[4, 2], [6, 2]].map(landing => ({ action: command, expected_after: landing, landingBefore: [0, 0, 0, 0] })),
+    adoptedBody: { at: [2, 2], pitch: 2, floor: 0, colors: [1], evidence: observation.observation_ref },
+    plan: { command: 'ACTION4', landing: [4, 2], target: [8, 2], contact: false, walk: [
+      { command: 'ACTION4', from: [2, 2], landing: [4, 2], beneath: [0, 0, 0, 0] },
+      { command: 'ACTION4', from: [4, 2], landing: [6, 2], beneath: [0, 0, 0, 0] },
+    ] },
+    surface: null, target: null, inset: null, pair: null, needId: 'test_reach_destination',
+  });
+  const scene = (left: number, blocked: boolean): GameObservation => {
+    const result = { ...board(), availableActionIds: [4] };
+    for (const y of [2, 3]) for (const x of [left, left + 1]) result.frame[y]![x] = 1;
+    if (blocked) result.frame[2]![6] = 2;
+    return result;
+  };
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [family], sourceDigest: 'walk-guard-test', maxPointOccurrences: 250 }));
+  const first = await service.handle({ ...init(), observation: toV6PublicObservation(scene(2, false)) });
+  assert.equal(first.kind, 'action');
+  const next = await service.handle({ type: 'advance', sessionId: first.sessionId, sequence: 1, ticketId: first.ticket!.id,
+    observation: toV6PublicObservation(scene(4, true), 1), executionMs: 1 });
+  assert.equal(next.kind, 'boundary');
+  assert.equal(next.command, null);
+  assert.equal(next.ticket, null);
+  const trace = next.snapshot.trace as Record<string, unknown>[];
+  assert.equal(trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+  assert.equal(trace.findLast(event => event.kind === 'before_guard')?.reason, 'declared_bfs_landing_changed');
+  assert.equal(trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+  assert.deepEqual((family.state().body as { at: number[] }).at, [4, 2]);
 });
 
 for (const [parallelWorkers, expectedMs] of [[1, 360_000], [4, 514_286], [8, 720_000], [12, 720_000]]) {

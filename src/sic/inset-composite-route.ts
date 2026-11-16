@@ -1,6 +1,6 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { cycleMoves, readCycleReserve, type CycleGauge, type CycleState, type CycleStep } from './inset-cycle-route.ts';
+import { cycleMoves, readCycleReserve, type CycleGauge, type CycleRouteLeg, type CycleState, type CycleStep } from './inset-cycle-route.ts';
 import { pixelsAt, pointKey } from './managed-framed-access.ts';
 
 export type CycleGlyph = { mask: string; ink: number };
@@ -14,7 +14,7 @@ type Layout = CompositeCycleEvidence & { points: NativePoint[]; shape: NativePoi
 export type CompositeCycleState = { epoch: number; layout: Layout; at: NativePoint; spent: number; seen: string[]; refs: string[]; stopped: boolean;
   transitions?: GlyphTransitions };
 export type CompositeCycleStep = Omit<CycleStep, 'purpose'> & { purpose: CycleStep['purpose'] | 'test_color' | 'test_rotation'; charge: number };
-type Flight = { at: NativePoint; reserve: number; spent: number; distance: number;
+type Flight = { at: NativePoint; reserve: number; spent: number; distance: number; walk: CycleRouteLeg[];
   first?: Pick<CompositeCycleStep, 'action' | 'step' | 'charge'> };
 export const sameCyclePixels = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 const same = sameCyclePixels;
@@ -125,7 +125,7 @@ export function chooseCompositeCycleStep(rows: NativeRows, state: CompositeCycle
     return false;
   }
 
-  const queue: Flight[] = [{ at, reserve: units, spent, distance: 0 }], bestEnergy = new Map<string, number>();
+  const queue: Flight[] = [{ at, reserve: units, spent, distance: 0, walk: [] }], bestEnergy = new Map<string, number>();
   for (const item of queue) {
     if (queue.length >= 24000) break;
     if (item.reserve < 1 || item.distance >= remaining) continue;
@@ -140,13 +140,15 @@ export function chooseCompositeCycleStep(rows: NativeRows, state: CompositeCycle
       const purpose = goals.get(signature);
       if (purpose === 'exit' || (purpose && reserve > 0 && canLeave(step, reserve, nextSpent))) {
         const charging = first.charge >= 0;
-        return { ...first, purpose: charging ? 'recharge' : purpose, target: charging ? first.step : step, units, distance: item.distance + 1 };
+        return { ...first, purpose: charging ? 'recharge' : purpose, target: charging ? first.step : step, units, distance: item.distance + 1,
+          walk: item.walk };
       }
       if (stops.has(signature) || reserve <= 0) continue;
       const key = signature + ':' + nextSpent;
       if ((bestEnergy.get(key) ?? -1) >= reserve) continue;
       bestEnergy.set(key, reserve);
-      queue.push({ at: step, reserve, spent: nextSpent, distance: item.distance + 1, first });
+      const walk = collecting || item.walk.length !== item.distance ? item.walk : [...item.walk, { action, step }];
+      queue.push({ at: step, reserve, spent: nextSpent, distance: item.distance + 1, first, walk });
     }
   }
   return null;

@@ -1,5 +1,5 @@
 import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { cycleMoves, readCycleReserve } from './inset-cycle-route.ts';
+import { cycleMoves, readCycleReserve, type CycleRouteLeg } from './inset-cycle-route.ts';
 import { sameCyclePixels as same, sampleCycleGlyph, type CompositeCycleEvidence, type CompositeCycleState, type CompositeCycleStep,
   type CycleGlyph, type GlyphTransitions } from './inset-composite-route.ts';
 import { pixelsAt, pointKey } from './managed-framed-access.ts';
@@ -9,7 +9,7 @@ type Layout = CompositeCycleState['layout'] & { orientation: NativePoint; orient
 export type OrientedCycleState = CompositeCycleState & { layout: Layout; transitions: GlyphTransitions; rotation?: number };
 type Input = typeof cycleMoves[number][0];
 type Site = { point: NativePoint; purpose: CompositeCycleStep['purpose']; charge: number };
-type Segment = { site: number; length: number; action: Input; step: NativePoint };
+type Segment = { site: number; length: number; action: Input; step: NativePoint; legs: CycleRouteLeg[] };
 type Flight = { site: number; units: number; spent: number; glyph: OrientedGlyph; first?: CompositeCycleStep };
 
 export function hasOrientation(state: CompositeCycleState): state is OrientedCycleState {
@@ -89,7 +89,9 @@ function segments(start: NativePoint, sites: Site[], layout: Layout, moves: type
       const next: NativePoint = [point[0] + dx * layout.pitch, point[1] + dy * layout.pitch], key = pointKey(next);
       if (reached.has(key) || !ordinary.has(key)) continue;
       reached.add(key);
-      const leg = path ? { ...path, length: path.length + 1 } : { step: next, action, length: 1 };
+      const step: CycleRouteLeg = { action, step: next };
+      const leg = path ? { ...path, length: path.length + 1, legs: [...path.legs, step] }
+        : { ...step, length: 1, legs: [step] };
       const destination = destinations.get(key);
       if (destination === undefined) queue.push({ point: next, path: leg });
       else found.push({ site: destination, ...leg });
@@ -145,7 +147,7 @@ export function chooseOrientedCycleStep(rows: NativeRows, state: OrientedCycleSt
       if (distance > maximum || distance >= finishCost || leg.length >= flight.units) continue;
       const site = sites[leg.site]!, collecting = site.charge >= 0 && !(flight.spent & (1 << site.charge));
       const first: CompositeCycleStep = flight.first ?? { action: leg.action, step: leg.step, target: site.point, purpose: site.purpose,
-        units, distance, charge: collecting && leg.length === 1 ? site.charge : -1 };
+        units, distance, charge: collecting && leg.length === 1 ? site.charge : -1, walk: leg.legs.slice(0, -1) };
       if (site.purpose === 'exit') {
         if (agrees(flight.glyph, layout.wanted)) { finishing = { ...first, distance }; finishCost = distance; }
         continue;

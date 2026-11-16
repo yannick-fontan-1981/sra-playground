@@ -178,7 +178,9 @@ export class BrowserV6Agent {
       throw new V6AgentError('invalid', 'The V6 solver returned an inconsistent native reasoning state.');
     }
     this.knowledge = copiedSnapshot(result.snapshot);
-    this.pending = deepFreeze(structuredClone(result));
+    // The validated snapshot is already detached and frozen. Reuse it while
+    // copying the ticket and command, including between consecutive steps.
+    this.pending = deepFreeze({ ...structuredClone({ ...result, snapshot: null }), snapshot: this.knowledge });
   }
 
   private budgets(current: GameObservation): V6Budgets {

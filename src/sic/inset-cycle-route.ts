@@ -11,8 +11,9 @@ export type CycleLayout = { pitch: number; grid: NativePoint[]; station: NativeP
   charge: NativePoint; gauge: CycleGauge; symbol: Inlay; body: number[] };
 export type CycleState = { epoch: number; layout: CycleLayout; at: NativePoint; spentCharge: boolean; triedSymbols: string[];
   refs: string[]; stopped: boolean; restoredReserve?: number };
-export type CycleStep = { action: typeof cycleMoves[number][0]; step: NativePoint; target: NativePoint;
-  purpose: 'test_shape' | 'recharge' | 'exit'; units: number; distance: number };
+export type CycleRouteLeg = { action: typeof cycleMoves[number][0]; step: NativePoint };
+export type CycleStep = CycleRouteLeg & { target: NativePoint;
+  purpose: 'test_shape' | 'recharge' | 'exit'; units: number; distance: number; walk?: CycleRouteLeg[] };
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((p, i) => p === b[i]);
 const corner = ([l, t]: NativeBox): NativePoint => [l, t];
 const widen = ([x, y]: NativePoint, side: number): NativeBox => [x, y, x + side - 1, y + side - 1];
@@ -101,12 +102,12 @@ export function readCycleSymbol(rows: NativeRows, { symbol }: CycleLayout) {
 
 function path(layout: CycleLayout, start: NativePoint, target: NativePoint, avoid: readonly NativePoint[]) {
   const accessible = new Set(layout.grid.filter(point => !avoid.some(skip => same(point, skip))).map(pointKey));
-  const queue: { at: NativePoint; depth: number; first?: Pick<CycleStep, 'action' | 'step'> }[] = [{ at: start, depth: 0 }];
+  const queue: { at: NativePoint; depth: number; legs: CycleRouteLeg[] }[] = [{ at: start, depth: 0, legs: [] }];
   const seen = new Set<string>();
   for (const item of queue) for (const [action, dx, dy] of cycleMoves) {
     const step: NativePoint = [item.at[0] + dx * layout.pitch, item.at[1] + dy * layout.pitch], key = pointKey(step);
     if (!accessible.has(key)) continue;
-    const candidate = { at: step, depth: item.depth + 1, first: item.first ?? { action, step } };
+    const candidate = { at: step, depth: item.depth + 1, legs: [...item.legs, { action, step }] };
     if (same(step, target)) return candidate;
     if (same(step, start) || seen.has(key)) continue;
     seen.add(key);
@@ -120,14 +121,17 @@ export function chooseCycleStep(rows: NativeRows, state: CycleState): CycleStep 
   if (state.stopped) return null;
   const current = readCycleSymbol(rows, layout), units = readCycleReserve(rows, layout.gauge), aligned = current === symbol.target;
   const toExit = aligned ? path(layout, at, exit, [station, ...(!state.spentCharge ? [charge] : [])]) : null;
-  if (toExit && toExit.depth <= units) return { ...toExit.first!, purpose: 'exit', target: exit, units, distance: toExit.depth };
+  if (toExit && toExit.depth <= units) return { ...toExit.legs[0]!, purpose: 'exit', target: exit, units, distance: toExit.depth,
+    walk: toExit.legs.slice(0, -1) };
   const toStation = !aligned ? path(layout, at, station, [exit, ...(!state.spentCharge ? [charge] : [])]) : null;
   const afterward = !state.spentCharge ? path(layout, station, charge, [exit])?.depth : 0;
   if (toStation && afterward !== undefined && toStation.depth + afterward < units) {
-    return { ...toStation.first!, purpose: 'test_shape', target: station, units, distance: toStation.depth };
+    return { ...toStation.legs[0]!, purpose: 'test_shape', target: station, units, distance: toStation.depth,
+      walk: toStation.legs.slice(0, -1) };
   }
   const refill = !state.spentCharge ? path(layout, at, charge, [station, exit]) : null;
-  return refill && refill.depth <= units ? { ...refill.first!, purpose: 'recharge', target: charge, units, distance: refill.depth } : null;
+  return refill && refill.depth <= units ? { ...refill.legs[0]!, purpose: 'recharge', target: charge, units, distance: refill.depth,
+    walk: refill.legs.slice(0, -1) } : null;
 }
 
 export function observeCycleStep(rows: NativeRows, first: NativeRows, state: CycleState, step: CycleStep) {

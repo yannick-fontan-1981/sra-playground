@@ -10,6 +10,7 @@ export type FramedRotation = {
 export type FramedTransport = { from: NativePoint; action: string; landing: NativePoint; evidence: string };
 export type FramedReserve = { row: number; left: number; right: number; active: number; depleted: number; cost: number; samples: number };
 export type BodyOnSurface = { at: NativePoint; pitch: number; floor: number };
+export type ManagedRouteLeg = { command: string; from: NativePoint; to: NativePoint; remaining_after: number };
 export type ManagedFramedPlan = {
   command: string; landing: NativePoint; target: NativePoint; contact: boolean;
   obligation: 'rotation' | 'recharge' | 'exit' | 'color' | 'transport';
@@ -17,7 +18,19 @@ export type ManagedFramedPlan = {
   reserve: number; orientationAfter: number; steps: number; recharges: number;
   targetBox: NativeBox; meter: NonNullable<ReturnType<ObservedMeter['forecast']>>;
   reserveBand?: FramedReserve; colorAfter?: number; mobileIndex?: number;
+  walk: ManagedRouteLeg[];
 };
+
+export function knownManagedWalk(path: readonly (ManagedRouteLeg & Record<string, unknown>)[]): ManagedRouteLeg[] {
+  const walk: ManagedRouteLeg[] = [];
+  for (const step of path) {
+    if (typeof step.command !== 'string'
+      || ['unidentified_control', 'conditional_crossing', 'charge', 'modifier', 'feature', 'peer'].some(key => Object.hasOwn(step, key))) break;
+    const { command, from, to, remaining_after } = step;
+    walk.push({ command, from, to, remaining_after });
+  }
+  return walk;
+}
 
 export const pointKey = (point: NativePoint) => point.join(',');
 export const pixelsAt = (rows: NativeRows, [x, y]: NativePoint, pitch: number) =>
@@ -115,7 +128,7 @@ export function chooseManagedFramedPlan(rows: NativeRows, parts: Parameters<type
     obligation: target.charge ? 'recharge' : target.modifier ? 'rotation' : 'exit',
     effect: step.charge ? 'recharge' : step.modifier ? 'rotation' : step.peer ? 'exit' : null,
     reserve: step.remaining_before, orientationAfter: step.orientation_after,
-    steps: selected.primitive_count, recharges: selected.charge_order.length, targetBox, meter,
+    steps: selected.primitive_count, recharges: selected.charge_order.length, targetBox, meter, walk: knownManagedWalk(selected.conditional_path),
   };
 }
 
@@ -218,5 +231,6 @@ export function chooseManagedTransitPlan(rows: NativeRows, parts: Parameters<typ
       : target.modifier ? 'rotation' : 'exit',
     reserve: step.remaining_before, orientationAfter: step.orientation_after, steps: planned.primitive_count,
     recharges: planned.charge_order.length, targetBox, meter, reserveBand: reserve, colorAfter: step.color_after, mobileIndex,
+    walk: knownManagedWalk(planned.conditional_path),
   };
 }

@@ -4,7 +4,7 @@ import { centeredMorphologyEnclosures } from '../logos-engine/v6-morphology-meas
 import { geometricComponents, rotateMask } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { cycleMoves, type CycleStep } from './inset-cycle-route.ts';
-import { pixelsAt, pointKey, reserveSteps, type BodyOnSurface, type FramedReserve, type FramedTransport } from './managed-framed-access.ts';
+import { knownManagedWalk, pixelsAt, pointKey, reserveSteps, type BodyOnSurface, type FramedReserve, type FramedTransport } from './managed-framed-access.ts';
 
 type Direction = CycleStep['action'];
 type Glyph = { mask: string; ink: number };
@@ -157,7 +157,8 @@ export function chooseGlyphRoute(rows: NativeRows, state: GlyphRouteState, avail
   const effect = first.modifier ? 'shape' : first.feature ? 'color' : first.charge ? 'charge' : first.conditional_crossing ? 'transport' : null;
   const purpose = effect === 'transport' ? 'transport' : goal.modifier ? 'test_shape' : goal.feature ? 'test_color' : goal.charge ? 'recharge' : 'exit';
   return { action: first.command, step: first.to, target: effect === 'transport' ? first.to : goal.to,
-    entry, effect, purpose, units, distance: plan.primitive_count };
+    entry, effect, purpose, units, distance: plan.primitive_count,
+    walk: knownManagedWalk(plan.conditional_path).map(leg => ({ action: leg.command as Direction, step: leg.to })) };
 }
 
 export function observeGlyphRoute(first: NativeRows, second: NativeRows, local: GlyphRouteState, step: GlyphRouteStep, ref: string) {
