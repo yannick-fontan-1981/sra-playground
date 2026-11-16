@@ -11,6 +11,7 @@ export const linkedGroupRouteId = 'sic_route_by_linked_groups';
 type Scene = { readonly side: number; readonly mask: readonly NativePoint[]; readonly activeColor: number; readonly band: number;
   readonly selectorColors: readonly number[]; readonly barriers: readonly number[] };
 type Group = { readonly color: number; readonly goal: NativePoint; readonly target: NativeBox; readonly marks: readonly NativePoint[];
+  readonly bodyMask?: readonly NativePoint[];
   readonly anchors: readonly NativePoint[]; readonly confirmedAt: string | null; readonly contactAt: string | null;
   readonly contactColor: number | null };
 type Move = { readonly index: number; readonly point: NativePoint };
@@ -69,7 +70,7 @@ function identify(observation: NativeObservation, rows: NativeRows): { scene: Sc
         const subset = anchors.filter((_, i) => bits & 1 << i);
         if (subset.length >= 2 && subset.length <= 4 && same(centroid(subset), point)) subsets.push(subset);
       }
-      return [{ color: part.color, goal: goal.point, target: goal.box, marks, subsets }];
+      return [{ color: part.color, bodyMask: part.mask, goal: goal.point, target: goal.box, marks, subsets }];
     });
     if (candidates.length < 2 || candidates.length > 4 || new Set(candidates.map(group => group.color)).size !== candidates.length) continue;
     const partitions: Group[][] = [];
@@ -79,10 +80,10 @@ function identify(observation: NativeObservation, rows: NativeRows): { scene: Sc
         if (used.size === anchors.length) partitions.push(groups);
         return;
       }
-      const { color, goal, target, marks, subsets } = candidates[groups.length]!;
+      const { color, bodyMask, goal, target, marks, subsets } = candidates[groups.length]!;
       for (const subset of subsets) {
         if (subset.some(point => used.has(point))) continue;
-        assign([...groups, { color, goal, target, marks, anchors: subset, confirmedAt: null, contactAt: null, contactColor: null }],
+        assign([...groups, { color, bodyMask, goal, target, marks, anchors: subset, confirmedAt: null, contactAt: null, contactColor: null }],
           new Set([...used, ...subset]));
       }
     };
@@ -102,15 +103,37 @@ function identify(observation: NativeObservation, rows: NativeRows): { scene: Sc
 }
 
 function matchesScene(observation: NativeObservation, rows: NativeRows, local: Memory, points: readonly NativePoint[],
-  focus: number, target?: NativePoint) {
-  const { scene } = local;
-  if (target && !hasAnchor(rows, scene, target, [scene.activeColor])) return false;
-  return local.groups.every((group, i) => {
-    const anchors = i === focus ? points : group.anchors;
-    const actual = body(observation, scene.side, group.color);
-    if (!same(actual, centroid(anchors))) return false;
+  focus: number, target?: NativePoint, touching = false) {
+  const { scene } = local, radius = (scene.side - 1) / 2, width = rows[0]!.length;
+  const projected = local.groups.map((group, index) => ({ group, anchors: index === focus ? points : group.anchors }));
+  const covered = new Set<number>();
+  for (const { group, anchors } of projected) {
+    const center = centroid(anchors);
+    if (!group.bodyMask?.length) {
+      if (!same(body(observation, scene.side, group.color), center)) return false;
+      continue;
+    }
+    const [x, y] = center;
+    for (const [dx, dy] of group.bodyMask) {
+      const col = x - radius + dx, row = y - radius + dy;
+      if (rows[row]?.[col] !== group.color) return false;
+      covered.add(row * width + col);
+    }
+  }
+  const visibleAnchor = ([x, y]: NativePoint, colors: readonly number[], active = false) => {
+    const left = x - radius, top = y - radius;
+    const exposed = scene.mask.filter(([dx, dy]) => !covered.has((top + dy) * width + left + dx));
+    if (active && exposed.length * 2 < scene.mask.length) return false;
+    if (!exposed.length) return true;
+    // Adjacent lines can cover a pixel of an already tracked anchor. Verify the rest against the observed paint.
+    const required = Math.min(Math.ceil(exposed.length * 3 / 4), Math.max(1, exposed.length - 1));
+    return colors.some(color => exposed.filter(([dx, dy]) => rows[top + dy]?.[left + dx] === color).length >= required);
+  };
+  if (target && !touching && !visibleAnchor(target, [scene.activeColor], true)) return false;
+  return projected.every(({ group, anchors }, index) => {
     if (group.contactColor !== null) return group.marks.every(([x, y]) => rows[y]?.[x] === group.contactColor);
-    return anchors.every(point => hasAnchor(rows, scene, point, scene.selectorColors));
+    // Contact recolors the target and may redraw a control that overlaps it.
+    return (index === focus && touching) || anchors.every(point => visibleAnchor(point, scene.selectorColors));
   });
 }
 
@@ -118,8 +141,9 @@ function verifyMove(proposal: Proposal, observation: NativeObservation, first: N
   const { local, index, move, selecting, prediction } = proposal;
   const group = local.groups[index]!;
   const points = selecting ? group.anchors : moveAnchor(group.anchors, move);
-  const geometry = matchesScene(observation, second, local, points, index, points[move.index]);
-  if (selecting || !same(prediction, group.goal)) return { points, matched: geometry, contactColor: null };
+  const touching = !selecting && same(prediction, group.goal);
+  const geometry = matchesScene(observation, second, local, points, index, points[move.index], touching);
+  if (!touching) return { points, matched: geometry, contactColor: null };
   const [x, y] = group.marks[0]!;
   const color = second[y]?.[x];
   const contact = geometry && color !== undefined && group.marks.every(([mx, my]) => second[my]?.[mx] === color) &&
