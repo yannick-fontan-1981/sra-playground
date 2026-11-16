@@ -640,6 +640,10 @@ export function readNativeResolution(agent: {
   if (situationCard && family === settleMatchingEdgesId) {
     const edge = bounds(card?.edge);
     if (edge) subjects.push({ label: 'Edge in the direction selected', box: edge });
+    if (Array.isArray(card?.stationaryBlockers)) for (const item of card.stationaryBlockers) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Stationary obstruction', box });
+    }
     if (Array.isArray(card?.slides)) for (const slide of card.slides) {
       const part = slide as { from?: unknown; to?: unknown; attaches?: boolean } | null;
       const from = bounds(part?.from), to = bounds(part?.to);

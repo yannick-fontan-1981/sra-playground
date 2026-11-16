@@ -6,10 +6,11 @@ export const settleMatchingEdgesId = 'sic_settle_pieces_at_matching_edges';
 const directions = [[0, -1], [0, 1], [-1, 0], [1, 0]] as const;
 type Piece = { x: number; y: number; ink: number };
 type Grid = { x: number; y: number; cols: number; rows: number; pitch: number; edges: readonly number[] };
-type Board = { grid: Grid; pieces: Piece[]; freeMark?: number; fixedMark?: number };
+type Blocker = { x: number; y: number; border: number; inset: number };
+type Board = { grid: Grid; pieces: Piece[]; blockers: Blocker[]; freeMark?: number; fixedMark?: number };
 type Witness = { direction: number; refs: readonly [string, string] };
 type Memory = { controls: Record<string, Witness>; wins: number; blockedEpoch: number | null; fit: string };
-type Proposal = NativeProposal & { grid: Grid; predicted: Piece[]; needId: string };
+type Proposal = NativeProposal & { grid: Grid; predicted: Piece[]; blockers: Blocker[]; needId: string };
 
 function matchingContact(piece: Piece, { edges, cols, rows }: Grid) {
   return (piece.y === 0 && piece.ink === edges[0]) || (piece.y === rows - 1 && piece.ink === edges[1])
@@ -18,10 +19,19 @@ function matchingContact(piece: Piece, { edges, cols, rows }: Grid) {
 
 function readBoard(frame: NativeRows, grid: Grid): Board | null {
   const { x, y, cols, rows, pitch, edges } = grid;
-  const pieces: Piece[] = [], fields = new Map<number, number>();
+  const pieces: Piece[] = [], blockers: Blocker[] = [], fields = new Map<number, number>();
   let markOffset: number | undefined, fixedMark: number | undefined, freeMark: number | undefined;
   for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
     const left = x + i * pitch, top = y + j * pitch, ink = frame[top]![left]!;
+    const inset = frame[top + 1]![left + 1]!;
+    if (ink !== inset && !edges.includes(ink) && !edges.includes(inset)) {
+      const outlined = frame.slice(top, top + pitch).every((row, v) =>
+        row.slice(left, left + pitch).every((value, u) =>
+          value === (u === 0 || v === 0 || u === pitch - 1 || v === pitch - 1 ? ink : inset)));
+      if (!outlined) return null;
+      blockers.push({ x: i, y: j, border: ink, inset });
+      continue;
+    }
     let mark: { offset: number; ink: number } | undefined;
     for (let v = 0; v < pitch; v++) for (let u = 0; u < pitch; u++) {
       const value = frame[top + v]![left + u]!;
@@ -47,7 +57,7 @@ function readBoard(frame: NativeRows, grid: Grid): Board | null {
     pieces.push(piece);
   }
   return fields.size === 1 && pieces.length >= 2 && (fixedMark === undefined || fixedMark !== freeMark)
-    ? { grid, pieces, ...(freeMark === undefined ? {} : { freeMark }), ...(fixedMark === undefined ? {} : { fixedMark }) }
+    ? { grid, pieces, blockers, ...(freeMark === undefined ? {} : { freeMark }), ...(fixedMark === undefined ? {} : { fixedMark }) }
     : null;
 }
 
@@ -83,8 +93,10 @@ function findBoard(frame: NativeRows): Board | null {
 }
 
 const signature = (pieces: readonly Piece[]) => pieces.map(({ x, y, ink }) => `${ink}:${x},${y}`).sort().join('|');
+const blockerPositions = ({ grid, blockers }: Board) => new Set(blockers.map(({ x, y }) => y * grid.cols + x));
+const sameBlockers = (left: Blocker[], right: Blocker[]) => JSON.stringify(left) === JSON.stringify(right);
 
-function settle(grid: Grid, pieces: readonly Piece[], direction: number): Piece[] {
+function settle(grid: Grid, pieces: readonly Piece[], direction: number, blockers: ReadonlySet<number>): Piece[] {
   const [dx, dy] = directions[direction]!;
   let settled = [...pieces];
   for (;;) {
@@ -93,9 +105,9 @@ function settle(grid: Grid, pieces: readonly Piece[], direction: number): Piece[
     function canMove(piece: Piece): boolean {
       const known = moving.get(piece);
       if (known !== undefined) return known;
-      const x = piece.x + dx, y = piece.y + dy, ahead = occupied.get(y * grid.cols + x);
+      const x = piece.x + dx, y = piece.y + dy, cell = y * grid.cols + x, ahead = occupied.get(cell);
       const result = !matchingContact(piece, grid) && x >= 0 && x < grid.cols && y >= 0 && y < grid.rows
-        && (!ahead || canMove(ahead));
+        && !blockers.has(cell) && (!ahead || canMove(ahead));
       moving.set(piece, result);
       return result;
     }
@@ -108,11 +120,12 @@ function findFirstStep(board: Board, controls: readonly [string, Witness][], bud
   type Node = { pieces: Piece[]; depth: number; first?: { input: string; predicted: Piece[]; direction: number } };
   const queue: Node[] = [{ pieces: board.pieces, depth: 0 }], seen = new Set([signature(board.pieces)]);
   const maxDepth = Math.min(budget, 12), maxNodes = 5_000;
+  const blockers = blockerPositions(board);
   for (let index = 0; index < queue.length && index < maxNodes; index++) {
     const { pieces, depth, first } = queue[index]!;
     if (depth >= maxDepth) continue;
     for (const [input, { direction }] of controls) {
-      const predicted = settle(board.grid, pieces, direction), key = signature(predicted);
+      const predicted = settle(board.grid, pieces, direction, blockers), key = signature(predicted);
       if (seen.has(key)) continue;
       const step = first ?? { input, predicted, direction };
       if (predicted.every(piece => matchingContact(piece, board.grid))) return { ...step, moves: depth + 1 };
@@ -124,8 +137,8 @@ function findFirstStep(board: Board, controls: readonly [string, Witness][], bud
   return null;
 }
 
-function pieceBox(grid: Grid, piece: Piece): NativeBox {
-  const x = grid.x + piece.x * grid.pitch, y = grid.y + piece.y * grid.pitch;
+function tileBox(grid: Grid, tile: { x: number; y: number }): NativeBox {
+  const x = grid.x + tile.x * grid.pitch, y = grid.y + tile.y * grid.pitch;
   return [x, y, x + grid.pitch - 1, y + grid.pitch - 1];
 }
 
@@ -139,9 +152,9 @@ const fitKey = ({ grid }: Board) => grid.edges.join(',');
 
 export function createSicSettleMatchingEdges(): NativeFamily<Proposal> {
   let memory: Memory | null = null;
-  const expectedBoard = (frame: NativeRows, { grid, predicted }: Proposal) => {
+  const expectedBoard = (frame: NativeRows, { grid, predicted, blockers = [] }: Proposal) => {
     const observed = readBoard(frame, grid);
-    return !!observed && signature(observed.pieces) === signature(predicted);
+    return !!observed && sameBlockers(observed.blockers, blockers) && signature(observed.pieces) === signature(predicted);
   };
   function learn(before: NativeObservation, after: NativeObservation, command: NativeCommand, first: NativeRows, second: NativeRows,
     frames: readonly NativeRows[]) {
@@ -152,7 +165,8 @@ export function createSicSettleMatchingEdges(): NativeFamily<Proposal> {
     if (!board) return;
     const returned = won && after.level_epoch !== before.level_epoch ? frames.at(-2) : second;
     const actual = returned && readBoard(returned, board.grid);
-    if (!actual || (won && !actual.pieces.every(piece => matchingContact(piece, board.grid)))) return;
+    if (!actual || !sameBlockers(board.blockers, actual.blockers)
+      || (won && !actual.pieces.every(piece => matchingContact(piece, board.grid)))) return;
     const fit = fitKey(board);
     const prior = memory?.fit === fit ? memory : { controls: {}, wins: 0, blockedEpoch: null, fit };
     if (!directional) {
@@ -163,8 +177,9 @@ export function createSicSettleMatchingEdges(): NativeFamily<Proposal> {
     }
     const known = prior.controls[input];
     const previous = signature(board.pieces);
+    const blockers = blockerPositions(board);
     const possible = directions.flatMap((_delta, direction) => {
-      const predicted = settle(board.grid, board.pieces, direction);
+      const predicted = settle(board.grid, board.pieces, direction, blockers);
       if (signature(predicted) === previous) return [];
       if (signature(predicted) === signature(actual.pieces)) return [direction];
       return [];
@@ -215,12 +230,13 @@ export function createSicSettleMatchingEdges(): NativeFamily<Proposal> {
         subjects: ['sliding_pieces', 'matching_edges'], parentObjective: parent, satisfactionContract: 'official_completion_after_matched_contacts' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = settleMatchingEdgesId + ':' + need.id;
       return {
-        status: 'proposed', kind: settleMatchingEdgesId, actions, grid, predicted, needId: need.id,
+        status: 'proposed', kind: settleMatchingEdgesId, actions, grid, predicted, blockers: board.blockers, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        steps: [{ action, expected_after: pieceBox(grid, focus.piece) }],
+        steps: [{ action, expected_after: tileBox(grid, focus.piece) }],
         sicSituationCard: { strategy, need: 'Bring every moving piece into contact with a matching edge', mode, situation, evidence,
           agenda: nav.entries, triggerCard: nav.card, edge: edgeBox(grid, step.direction), movesRemaining: step.moves,
-          slides: moved.map(({ from, piece }) => ({ from: pieceBox(grid, from), to: pieceBox(grid, piece), attaches: matchingContact(piece, grid) })) },
+          slides: moved.map(({ from, piece }) => ({ from: tileBox(grid, from), to: tileBox(grid, piece), attaches: matchingContact(piece, grid) })),
+          ...(board.blockers.length ? { stationaryBlockers: board.blockers.map(blocker => tileBox(grid, blocker)) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: 'Seat the pieces at matching edges', parent }, need },
