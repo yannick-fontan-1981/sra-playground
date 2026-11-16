@@ -1194,3 +1194,9 @@ Les 100 jeux sont rejoués en SIC seul depuis le niveau 1. Le contrôleur s’ar
 | POLA | L’animation de victoire établit le quart de tour et ses conditions. Le niveau 2 vérifie le retournement de la paire sur sa propre disposition. | 3 | 1,69 s |
 
 Les temps proviennent de la même campagne à huit processus. POLA est aussi vérifié en SIC Fallback sur les deux niveaux après retrait de la famille principale. Le contrôle TypeScript et les 49 tests ciblés passent.
+
+### Revalidation des 100 niveaux 3 après les séries continues
+
+Sur le code `969014e7`, les 100 jeux gagnent le niveau 3 en SIC seul en partant du niveau 1. La campagne s’arrête à la victoire cible pour chaque jeu. L’empreinte des commandes, des observations et des animations jusqu’au niveau 2 correspond pour les 100 jeux à la campagne précédente.
+
+Les parcours totalisent 4 965 commandes sous autorité SIC, dont 2 092 au niveau 3.
