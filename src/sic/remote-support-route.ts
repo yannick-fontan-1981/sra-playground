@@ -1,7 +1,7 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 
 export const remoteSupportRouteId = 'sic_remote_support_route';
@@ -26,12 +26,17 @@ type Strategy = keyof typeof remoteSupportRouteStrategies;
 type Piece = { at: NativePoint; color: number; floor: number };
 type Control = { box: NativeBox; color: number };
 type Edit = readonly [x: number, y: number, before: number, after: number];
-type Scene = { arena: NativeBox; panel: NativeBox; template: string; pitch: number; candidates: Piece[]; controls: Control[]; supports: number[] };
-type Transfer = { epoch: number; pitch: number; actor: number; target: number; controlColors: number[]; evidence: string[] };
+type Pad = { at: NativePoint; floor: number; pixels: number[] };
+type Circuit = { button: Control; pads: [Pad, Pad]; pickups: Acquisition[] };
+type Scene = { arena: NativeBox; panel: NativeBox; template: string; pitch: number; candidates: Piece[]; controls: Control[]; supports: number[];
+  circuit?: Circuit };
+type Transfer = { epoch: number; pitch: number; actor: number; target: number; controlColors: number[]; evidence: string[]; template?: string };
 type Acquisition = { at: NativePoint; color: number; floor: number };
 type State = { epoch: number; scene: Scene; actor: Piece | null; target: Piece | null; effects: (Edit[] | null)[];
-  evidence: string[]; effectRefs?: (string | null)[]; stopped: boolean; count: number; recalled?: Transfer; triedAcquisitions?: string[] };
-type Move = { command: NativeCommand; landing: NativePoint | null; floor: number | null; control: number | null; acquisition?: Acquisition };
+  evidence: string[]; effectRefs?: (string | null)[]; stopped: boolean; count: number; recalled?: Transfer; triedAcquisitions?: string[];
+  transferred?: boolean };
+type Move = { command: NativeCommand; landing: NativePoint | null; floor: number | null; control: number | null; acquisition?: Acquisition;
+  transfer?: Control };
 type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string };
 const directions = [
   ['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0],
@@ -53,6 +58,77 @@ function uniform(rows: NativeRows, [x, y]: NativePoint, pitch: number): number |
   if (value === undefined || y + pitch > rows.length || x + pitch > rows[0]!.length) return null;
   for (let dy = 0; dy < pitch; dy++) for (let dx = 0; dx < pitch; dx++) if (rows[y + dy]![x + dx] !== value) return null;
   return value;
+}
+
+const patch = (rows: NativeRows, [x, y]: NativePoint, pitch: number) => rows.slice(y, y + pitch).flatMap(row => row.slice(x, x + pitch));
+const diagonalPad = (pixels: readonly number[]) => pixels.length === 4 && pixels[0] === pixels[3] && pixels[1] === pixels[2] && pixels[0] !== pixels[1];
+const padVisible = (rows: NativeRows, pad: Pad, pitch: number) => {
+  const actual = patch(rows, pad.at, pitch);
+  return diagonalPad(actual) && actual.every(ink => pad.pixels.includes(ink));
+};
+
+function measureCircuit(rows: NativeRows, known: Transfer): Scene | null {
+  const { pitch, template } = known;
+  if (pitch !== 2 || !template) return null;
+  const parts = geometricComponents(rows);
+  const regions = parts.filter(part => !part.rectangular && part.area * 5 >= rows.length * rows[0]!.length);
+  const scenes: Scene[] = [];
+  for (const field of regions) for (const panel of regions) {
+    if (field === panel || field.bbox[0] <= panel.bbox[2] && panel.bbox[0] <= field.bbox[2]) continue;
+    const controls = parts.filter(part => inside(panel.bbox, part.bbox) && controlTemplate(part) === template
+      && pixelAt(rows, center(part.bbox)) === part.color).map(part => ({ box: part.bbox, color: part.color }));
+    if (controls.length < 3 || controls.length > 5 || new Set(controls.map(control => control.color)).size !== controls.length) continue;
+    const actors = parts.filter(part => inside(field.bbox, part.bbox) && part.rectangular
+      && width(part.bbox) === pitch && height(part.bbox) === pitch && part.color === known.actor);
+    const targets = parts.filter(part => inside(field.bbox, part.bbox) && part.rectangular
+      && width(part.bbox) === pitch && height(part.bbox) === pitch && part.color === known.target);
+    if (actors.length !== 1 || targets.length !== 1) continue;
+    const start = origin(actors[0]!.bbox), goal = origin(targets[0]!.bbox);
+    const aligned = ([x, y]: NativePoint) => (x - start[0]) % pitch === 0 && (y - start[1]) % pitch === 0;
+    if (!aligned(goal)) continue;
+    const excluded = [field.color, known.actor, known.target];
+    const floorAt = ([x, y]: NativePoint) => {
+      const adjacent = directions.map(([, dx, dy]) => uniform(rows, [x + dx * pitch, y + dy * pitch], pitch));
+      const colors = [...new Set(adjacent)].filter((ink): ink is number =>
+        ink !== null && !excluded.includes(ink) && adjacent.filter(value => value === ink).length >= 2);
+      return colors.length === 1 ? colors[0]! : null;
+    };
+    const actorFloor = floorAt(start), goalFloor = floorAt(goal);
+    if (actorFloor === null || goalFloor === null || actorFloor !== goalFloor) continue;
+    const terrain = parts.filter(part => part.rectangular && inside(field.bbox, part.bbox) && aligned(origin(part.bbox))
+      && width(part.bbox) % pitch === 0 && height(part.bbox) % pitch === 0 && !excluded.includes(part.color));
+    const supports = [...new Set([actorFloor, ...terrain.map(part => part.color)])];
+    const [l,t,r,b] = field.bbox;
+    const first = (anchor: number, from: number) => from + ((anchor - from) % pitch + pitch) % pitch;
+    const markers: { at: NativePoint; inks: number[]; pixels: number[]; floor: number }[] = [];
+    const pickups: Acquisition[] = [];
+    for (let y = first(start[1], t); y + pitch - 1 <= b; y += pitch) {
+      for (let x = first(start[0], l); x + pitch - 1 <= r; x += pitch) {
+        const at: NativePoint = [x, y], pixels = patch(rows, at, pitch), inks = [...new Set(pixels)];
+        if (inks.length !== 2 || inks.some(ink => excluded.includes(ink))) continue;
+        if (diagonalPad(pixels)) {
+          const floor = floorAt(at);
+          if (floor === actorFloor && !inks.includes(floor)) markers.push({ at, inks, pixels, floor });
+        } else if (pixels.filter(ink => ink === actorFloor).length === 1) {
+          const color = inks.find(ink => ink !== actorFloor)!;
+          if (!controls.some(control => control.color === color)) pickups.push({ at, color, floor: actorFloor });
+        }
+      }
+    }
+    const linked = controls.flatMap<Pick<Circuit, 'button' | 'pads'>>(button => {
+      const endpoints = markers.filter(marker => marker.inks.includes(button.color));
+      const [first, second] = endpoints;
+      return endpoints.length === 2 && first && second && first.inks.every(ink => second.inks.includes(ink))
+        ? [{ button, pads: [first, second] }] : [];
+    });
+    if (linked.length !== 1 || new Set(pickups.map(item => item.color)).size !== 1 || pickups.length > 4) continue;
+    const { button, pads } = linked[0]!, other = controls.filter(control => control !== button);
+    if (other.some(control => !supports.includes(control.color))) continue;
+    scenes.push({ arena: field.bbox, panel: panel.bbox, template, pitch, supports,
+      controls: other, candidates: [{ at: start, color: known.actor, floor: actorFloor }, { at: goal, color: known.target, floor: goalFloor }],
+      circuit: { button, pads, pickups } });
+  }
+  return scenes.length === 1 ? scenes[0]! : null;
 }
 
 function measureScene(rows: NativeRows, recalled?: Transfer | null): Scene | null {
@@ -102,7 +178,7 @@ function measureScene(rows: NativeRows, recalled?: Transfer | null): Scene | nul
   return scenes.length === 1 ? scenes[0]! : null;
 }
 
-function remoteEdits(first: NativeRows, second: NativeRows, arena: NativeBox, control: Control, recalled: boolean) {
+function remoteEdits(first: NativeRows, second: NativeRows, arena: NativeBox, control: Control, recalled: boolean, circuit = false) {
   const edits: Edit[] = [], [l, t, r, b] = arena;
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
     const before = first[y]![x]!, after = second[y]![x]!;
@@ -113,6 +189,7 @@ function remoteEdits(first: NativeRows, second: NativeRows, arena: NativeBox, co
   if (recalled) {
     const colors = new Set(edits.flatMap(edit => [edit[2], edit[3]]));
     const [a] = colors, forward = edits.filter(edit => edit[2] === a).length;
+    if (circuit && colors.size === 2 && colors.has(control.color) && edits.every(edit => edit[3] === control.color)) return edits;
     return colors.size === 2 && forward > 0 && forward < edits.length
       && (colors.has(control.color) || forward * 2 === edits.length) ? edits : null;
   }
@@ -138,7 +215,7 @@ function controlCommand(control: Control): NativeCommand {
 }
 
 function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeCommand[], remaining: number, acquisitions: Acquisition[] = []): Move | null {
-  const { scene: { arena, pitch, supports, controls }, effects } = local;
+  const { scene: { arena, pitch, supports, controls, circuit }, effects } = local;
   const actor = local.actor!, target = local.target!;
   const occupied = cell(actor.at, pitch);
   const editsAt = new Map<string, { bit: number; value: number }>();
@@ -146,12 +223,13 @@ function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeComm
   for (const [i, edits] of effects.entries()) {
     if (!edits) continue;
     const bit = 1 << i;
-    knownMask |= bit;
     const current = edits.map(([x, y, before, after]) => {
       const value = inside(occupied, [x, y, x, y]) ? actor.floor : rows[y]![x];
       return value === before ? false : value === after ? true : null;
     });
     if (current.some(value => value === null || value !== current[0])) return null;
+    const activationOnly = circuit && edits.every(edit => edit[3] === controls[i]!.color);
+    if (!activationOnly || !current[0]) knownMask |= bit;
     for (const [x, y, before, after] of edits) {
       const key = `${x},${y}`;
       if (editsAt.has(key)) return null;
@@ -162,6 +240,8 @@ function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeComm
     const footprint = cell(at, pitch);
     if (!inside(arena, footprint)) return null;
     if (same(at, target.at)) return target.floor;
+    const pad = circuit?.pads.find(pad => same(at, pad.at));
+    if (pad) return pad.floor;
     const marker = acquisitions.find(item => same(at, item.at));
     if (marker) return marker.floor;
     let first: number | undefined;
@@ -196,6 +276,12 @@ function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeComm
       const floor = passes(next, mask);
       if (floor !== null) add(next, mask, { command, landing: next, floor, control: null });
     }
+    const here = circuit?.pads.findIndex(pad => same(at, pad.at)) ?? -1;
+    if (circuit && here >= 0) {
+      const landing = circuit.pads[1 - here]!;
+      add(landing.at, mask, { command: controlCommand(circuit.button), landing: landing.at, floor: landing.floor,
+        control: null, transfer: circuit.button });
+    }
     for (const [index, control] of controls.entries()) {
       const bit = 1 << index, nextMask = mask ^ bit;
       const support = passes(at, mask);
@@ -208,8 +294,10 @@ function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeComm
 }
 
 function acquisitionSites(rows: NativeRows, local: State): Acquisition[] {
-  const { scene: { arena, pitch, controls, supports }, actor, recalled } = local;
+  const { scene: { arena, pitch, controls, supports, circuit }, actor, recalled } = local;
   if (!recalled || !actor) return [];
+  if (circuit) return circuit.pickups.filter(marker => !controls.some(control => control.color === marker.color)
+    && !local.triedAcquisitions?.includes(marker.at.join(',')) && patch(rows, marker.at, pitch).includes(marker.color));
   const missing = recalled.controlColors.filter(color => !controls.some(control => control.color === color));
   if (!missing.length) return [];
   const phase = (from: number, at: number) => from + ((at - from) % pitch + pitch) % pitch;
@@ -252,6 +340,12 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
   let transfer: Transfer | null = null;
   return {
     id: family,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (learns || transfer?.epoch !== observation.level_epoch - 1) return null;
+      const proposed = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposed?.local.scene.circuit ? proposed : null;
+    },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
@@ -260,12 +354,13 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       if (learns && !prior && !recalled && !execution?.readDirectionalMotion) return null;
       const fresh = prior ? null : measureScene(rows);
       const revalidated = !prior && !fresh && recalled ? measureScene(rows, recalled) : null;
-      const scene = prior?.scene ?? fresh ?? revalidated;
+      const circuit = !prior && !fresh && !revalidated && recalled ? measureCircuit(rows, recalled) : null;
+      const scene = prior?.scene ?? fresh ?? revalidated ?? circuit;
       if (!scene) return null;
       let local: State = prior ?? { epoch: observation.level_epoch, scene, actor: null, target: null,
-        effects: scene.controls.map(() => null), evidence: revalidated && recalled ? recalled.evidence : [], stopped: false, count: 0,
-        ...(revalidated && recalled ? { recalled } : {}) };
-      if (revalidated && recalled) {
+        effects: scene.controls.map(() => null), evidence: (revalidated || circuit) && recalled ? recalled.evidence : [], stopped: false, count: 0,
+        ...((revalidated || circuit) && recalled ? { recalled } : {}) };
+      if ((revalidated || circuit) && recalled) {
         local = { ...local, actor: scene.candidates.find(piece => piece.color === recalled.actor)!,
           target: scene.candidates.find(piece => piece.color === recalled.target)!, effectRefs: scene.controls.map(() => null) };
       } else if (learns && !prior) {
@@ -300,7 +395,9 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         follow_supported_route: () => route, change_support_to_continue: () => route } });
       if (!normal.selected) return null;
       const move = normal.selected.plan, parent = 'G_official_completion';
-      const label = move.acquisition ? 'Reach the marker to test whether it makes the missing control available'
+      const label = move.transfer ? (local.transferred ? 'Use the observed transfer between the two matching pads'
+        : 'Test the matching control while standing on one of the two patterned pads')
+        : move.acquisition ? 'Reach the marker to test whether it makes the missing control available'
         : remoteSupportRouteStrategies[normal.selected.id];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: move.command.action_ref, expected: move.landing, evidence };
@@ -311,7 +408,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_supported_navigation' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `${learns ? family : 'remote-support'}:${need.id}`, actions = [move.command];
-      const control = move.control === null ? null : scene.controls[move.control]!;
+      const control = move.transfer ?? (move.control === null ? null : scene.controls[move.control]!);
       const edits = move.control === null ? null : local.effects[move.control];
       const affectedSupport = edits?.length ? [
         Math.min(...edits.map(edit => edit[0])), Math.min(...edits.map(edit => edit[1])),
@@ -341,6 +438,8 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       const update = observeReturn(proposal, first, second);
       const { landing, acquisition } = proposal.move;
+      if (proposal.move.transfer) return { matched: !update.stopped, seal_prefix: true,
+        reason: update.stopped ? 'paired_pad_transfer_contradicted' : 'nonlocal_transfer_and_unchanged_terrain_confirmed' };
       if (!update.stopped && landing && acquisition && same(landing, acquisition.at)) {
         const matched = update.scene.controls.length > proposal.local.scene.controls.length;
         return { matched, seal_prefix: true, reason: matched ? 'new_control_appeared_on_contact' : 'expected_control_did_not_appear' };
@@ -353,7 +452,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       if (after.levels_completed > before.levels_completed && local.actor && local.target) {
         transfer = { epoch: before.level_epoch, pitch: local.scene.pitch, actor: local.actor.color, target: local.target.color,
           controlColors: local.scene.controls.filter((_, i) => !!local.effects[i]).map(control => control.color),
-          evidence: [before.observation_ref, after.observation_ref] };
+          evidence: [before.observation_ref, after.observation_ref], template: local.scene.template };
         return { events: [], reviewEvidence: 'The measured controls made the supported route to the target possible.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
@@ -393,14 +492,29 @@ function observeReturn({ local, move }: Proposal, first: NativeRows, second: Nat
   }
   if (!target || !atPiece(second, target, pitch)) return stopped;
   if (move.control !== null) {
-    const edit = remoteEdits(first, second, arena, controls[move.control]!, !!local.recalled);
+    const control = controls[move.control]!;
+    const edit = remoteEdits(first, second, arena, control, !!local.recalled, !!local.scene.circuit);
     const expected = effects[move.control];
     if (!atPiece(second, actor, pitch) || !edit || (expected && !sameEdits(edit, expected))) return stopped;
-      return expected ? local : { ...local, effects: effects.map((old, index) => index === move.control ? edit : old) };
+    const supports = local.scene.circuit && !local.scene.supports.includes(control.color) && edit.some(entry => entry[3] === control.color)
+      ? [...local.scene.supports, control.color] : local.scene.supports;
+    return expected ? local : { ...local, scene: { ...local.scene, supports }, effects: effects.map((old, index) => index === move.control ? edit : old) };
   }
   if (!move.landing || move.floor === null) return stopped;
   const translated = { ...actor, at: move.landing, floor: move.floor };
-  if (!atPiece(second, translated, pitch) || uniform(second, actor.at, pitch) !== actor.floor) return stopped;
+  const circuit = local.scene.circuit, departed = circuit?.pads.find(pad => same(pad.at, actor.at));
+  const restored = departed ? padVisible(second, departed, pitch) : uniform(second, actor.at, pitch) === actor.floor;
+  if (!atPiece(second, translated, pitch) || !restored) return stopped;
+  if (move.transfer) {
+    const arrived = circuit?.pads.find(pad => same(pad.at, translated.at));
+    if (!departed || !arrived || arrived === departed || !padVisible(first, arrived, pitch)) return stopped;
+    const sourceBox = cell(departed.at, pitch), targetBox = cell(arrived.at, pitch);
+    for (let y = arena[1]; y <= arena[3]; y++) for (let x = arena[0]; x <= arena[2]; x++) {
+      const point: NativeBox = [x, y, x, y];
+      if (!inside(sourceBox, point) && !inside(targetBox, point) && first[y]?.[x] !== second[y]?.[x]) return stopped;
+    }
+    return { ...local, actor: translated, transferred: true };
+  }
   if (!move.acquisition || !same(translated.at, move.acquisition.at)) return { ...local, actor: translated };
   const discovered = newControls(second, local.scene).filter(control => control.color === move.acquisition!.color);
   if (discovered.length !== 1 || controls.length >= 6) return { ...local, actor: translated,
