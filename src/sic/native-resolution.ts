@@ -1234,6 +1234,10 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.branches)) for (const branch of card.branches) {
+      const box = bounds(branch);
+      if (box) subjects.push({ label: 'Another outlet of the same channel', box });
+    }
   }
   if (situationCard && (family === reactiveTargetId || family === verifyReactiveMotionId)) {
     for (const [field, label] of [['actor', 'Controlled sprite'], ['focus', 'Reactive sprite'], ['landing', 'Predicted position of the reactive sprite'],
