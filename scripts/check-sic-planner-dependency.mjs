@@ -6,6 +6,7 @@ import { registerHooks } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript';
 import { loadPyodide } from '../public/vendor/pyodide/pyodide.mjs';
+import { v6LevelActiveTimeMs } from '../src/logos-engine/v6-time-budget.ts';
 
 const root = new URL('../', import.meta.url);
 const field = {
@@ -41,14 +42,16 @@ const cases = {
     guards: { measureInsetContact: 'null' },
   },
 };
-const [code, mode, scope = 'first', budgetText = '80', projection = 'standard'] = process.argv.slice(2);
+const [code, mode, scope = 'first', budgetText = '80', projection = 'standard', workerCount = '1'] = process.argv.slice(2);
 const entry = Object.hasOwn(cases, code) ? cases[code] : null;
 const budget = Number(budgetText);
+const parallelWorkers = Number(workerCount);
 const requestedLevels = /^\d+$/.test(scope) ? Number(scope) : null;
 const validScope = ['first', 'complete'].includes(scope) || (Number.isSafeInteger(requestedLevels) && requestedLevels > 0);
 assert.ok(code && (mode === 'original' || (entry && ['family', 'planner'].includes(mode))) && validScope
-  && Number.isSafeInteger(budget) && budget > 0 && ['standard', 'neutral'].includes(projection),
-  'Usage: node scripts/check-sic-planner-dependency.mjs GAME original|family|planner [first|complete|LEVELS] [actions per level] [standard|neutral]');
+  && Number.isSafeInteger(budget) && budget > 0 && ['standard', 'neutral'].includes(projection)
+  && Number.isSafeInteger(parallelWorkers) && parallelWorkers > 0,
+  'Usage: node scripts/check-sic-planner-dependency.mjs GAME original|family|planner [first|complete|LEVELS] [actions per level] [standard|neutral] [workers]');
 
 const disabled = new Set(mode === 'original' ? [] : [entry.original]);
 if (mode === 'planner') disabled.add(entry.shared);
@@ -136,6 +139,7 @@ async function run() {
     transport: { request: operation => service.handle(operation), reset() {}, dispose() {} },
     targetLevels: target,
     actionsPerLevel: budget,
+    parallelWorkers,
     recoveryConfiguration: () => ({ ...defaultRecoveryPack, solver: 'sic' }),
     getObservation: () => board,
     canDispatch: () => true,
@@ -166,7 +170,8 @@ async function run() {
       const start = performance.now(), before = agent.snapshot.actionCount;
       await agent.run(budget);
       const won = board.levelsCompleted >= level;
-      levels.push({ level, won, actions: agent.snapshot.actionCount - before, ms: Math.round(performance.now() - start) });
+      levels.push({ level, won, actions: agent.snapshot.actionCount - before, ms: Math.round(performance.now() - start),
+        prefixHash: trajectory.copy().digest('hex') });
       if (!won || agent.snapshot.status === 'stopped') break;
     }
     const snapshot = agent.snapshot;
@@ -174,7 +179,8 @@ async function run() {
     assert.equal(snapshot.sicActionCoverage?.sicOnly ?? 0, snapshot.actionCount);
     const retained = snapshot.coverage?.registeredFamilies ?? [];
     assert.ok([...disabled].every(id => !retained.includes(id)), 'A forbidden provider remained in the runtime');
-    return { code, mode, projection, target, completed: board.levelsCompleted, disabled: [...disabled], installedGuards, guardHits,
+    return { code, mode, projection, target, completed: board.levelsCompleted, parallelWorkers,
+      levelActiveTimeBudgetMs: v6LevelActiveTimeMs(parallelWorkers), disabled: [...disabled], installedGuards, guardHits,
       actions: snapshot.actionCount, reason: snapshot.reason ?? snapshot.status, levels,
       providers: Object.fromEntries(usage), primitives: Object.fromEntries(primitives), verifiedReuse,
       victoryReviews: snapshot.victoryReviews?.map(review => ({ level: review.level, action: review.winningAction,
