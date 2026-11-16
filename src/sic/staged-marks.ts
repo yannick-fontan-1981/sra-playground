@@ -3,7 +3,7 @@ import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObs
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
-import { assessSpanStep, beamBox, measureSpan, nextSpanStep, planSpan, readSpanPose,
+import { assessSpanStep, beamBox, distributedSpanLoad, measureSpan, nextSpanStep, planSpan, readSpanPose,
   type SpanLayout, type SpanMemory, type SpanPose, type SpanStep } from './supported-span.ts';
 
 export const stagedMarksId = 'sic_staged_marks';
@@ -19,7 +19,7 @@ type State = { epoch: number; model: Model; refs: string[]; resizeRef: string | 
 type Choice = { input: string; reason: string; target: NativeBox; click?: NativePoint; prepared?: true };
 type MarksProposal = NativeProposal & { local: State; scene: Scene; choice: Choice; needId: string };
 type SpanState = { epoch: number; layout: SpanLayout; plan: NonNullable<ReturnType<typeof planSpan>>; placed: number;
-  refs: string[]; refused: boolean; stopped: boolean };
+  refs: string[]; refused: boolean; stopped: boolean; distributed?: true };
 type SpanProposal = NativeProposal & { span: SpanState; pose: SpanPose; step: SpanStep; needId: string };
 type Proposal = MarksProposal | SpanProposal;
 const isSpan = (proposal: Proposal): proposal is SpanProposal => 'span' in proposal;
@@ -115,8 +115,12 @@ async function spanProposal(
   const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
   const strategy = placed || knownEdit ? 'P02' : 'P05';
   if (decision?.result !== strategy) return null;
+  const bridge = span.distributed ? span.plan.findIndex(item => item.y + layout.h === layout.fixture.y) : -1;
+  const sharesLoad = placed && bridge >= 0 && bridge <= span.placed
+    && distributedSpanLoad(layout, span.plan.slice(0, span.placed + 1))?.beams[bridge]?.onFixture === false;
   const reason = step.kind === 'resize' ? 'Select the width planned for the next support or corridor'
     : step.kind === 'align' ? 'Align the preview with the measured contact interval'
+      : sharesLoad ? 'Place the span with the bridge load shared across the side branches'
       : step.beam.y + layout.h === layout.fixture.y ? 'Join the two branches across the fixed support'
         : 'Place the span at the verified preview location and check that one unit of stock is used';
   const witness = step.point ? await ObservedInputDomain.makeLocusWitness(observation, rows, step.point, { reason, evidence }) : null;
@@ -131,7 +135,8 @@ async function spanProposal(
     steps: [{ action, expected_after: target, ...(witness ? { point_binding: witness } : {}) }],
     sicSituationCard: { strategy, need: 'Connect both foundations while supporting the span', situation: reason, evidence, agenda: [], mode,
       triggerCard: choosePreparedConfiguration, focus: pose.box, target, fixture: beamBox(layout.fixture, layout.pitch),
-      reference: beamBox(layout.goal, layout.pitch), carriers: layout.bases.map(base => beamBox(base, layout.pitch)) },
+      reference: beamBox(layout.goal, layout.pitch),
+      carriers: [...layout.bases, ...(bridge >= 0 && bridge < span.placed ? [span.plan[bridge]!] : [])].map(base => beamBox(base, layout.pitch)) },
     sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
       edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
     question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
@@ -159,10 +164,12 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
         if (pose) {
           const prior = planning?.epoch === observation.level_epoch ? planning : null;
           const layout = prior?.layout ?? measureSpan(rows, parts, learned, pose);
-          const plan = prior?.plan ?? (layout && planSpan(layout, pose));
+          const centered = prior?.plan ?? (layout && planSpan(layout, pose));
+          const plan = centered ?? (layout && learned.confirmedSpan && planSpan(layout, pose, true));
           if (layout && plan) {
             const proposed = await spanProposal(prior ?? { epoch: observation.level_epoch, layout, plan, placed: 0,
-              refs: learned.refs, refused: false, stopped: false }, pose, observation, rows, decide, execution);
+              refs: learned.refs, refused: false, stopped: false, ...(!centered ? { distributed: true } : {}) },
+            pose, observation, rows, decide, execution);
             if (proposed) return proposed;
           }
         }
@@ -221,6 +228,10 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
     },
     record(before, after, _action, first, second, proposal) {
       if (isSpan(proposal)) {
+        if (learned && after.levels_completed > before.levels_completed) {
+          learned = { ...learned, completed: after.levels_completed, confirmedSpan: true,
+            refs: [...proposal.span.refs.slice(-5), after.observation_ref] };
+        }
         if (before.level_epoch === after.level_epoch) {
           const { span, step, pose } = proposal, confirmed = assessSpanStep(span.layout, step, pose, first, second);
           planning = { ...span, placed: span.placed + Number(step.kind === 'place' && !!confirmed),

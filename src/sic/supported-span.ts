@@ -6,7 +6,7 @@ type Rect = { x: number; y: number; w: number; h: number };
 type Beam = Rect;
 type Slot = { box: NativeBox; width: number; backing: number };
 export type SpanMemory = { pitch: number; beamHeight: number; resize: number; targetPaint: number; barPaint: number; validPaint: number;
-  completed: number; refs: string[] };
+  completed: number; refs: string[]; confirmedSpan?: true };
 export type SpanLayout = { pitch: number; width: number; h: number; bases: [Rect, Rect]; fixture: Rect; bars: Rect[];
   goal: Rect; slots: Slot[]; stock: number[]; validPaint: number };
 export type SpanPose = { box: NativeBox; x: number; y: number; w: number; valid: boolean };
@@ -102,6 +102,50 @@ function loadClearance(stack: readonly Beam[], fixed: Rect): number {
   return clearance;
 }
 
+type Force = { x: number; amount: number };
+type SpanLoad = { x: number; onFixture: boolean };
+type StructureLoad = { pressure: number; beams: SpanLoad[] };
+
+export function distributedSpanLoad(layout: SpanLayout, placed: readonly Beam[]): StructureLoad | null {
+  const supports = [...placed, ...layout.bases, layout.fixture];
+  const fixture = supports.length - 1;
+  const incoming = placed.map(() => [] as Force[]);
+  const loads: SpanLoad[] = [];
+  let pressure = 0;
+  const order = placed.map((_, i) => i).sort((a, b) => placed[a]!.y - placed[b]!.y);
+  for (const i of order) {
+    const beam = placed[i]!, forces = incoming[i]!;
+    const amount = beam.w + forces.reduce((sum, applied) => sum + applied.amount, 0);
+    const moment = beam.w * (beam.x + beam.w / 2) + forces.reduce((sum, applied) => sum + applied.x * applied.amount, 0);
+    const x = moment / amount;
+    const contacts = supports.flatMap((support, j) => {
+      if (support.y !== beam.y + beam.h || !touchesX(beam, support)) return [];
+      const [l, r] = contact(beam, support);
+      return [{ j, l, r, center: (l + r) / 2 }];
+    });
+    const covers = ({ l, r }: { l: number; r: number }) => l <= x + 1e-9 && x <= r + 1e-9;
+    const fixed = contacts.filter(item => item.j >= placed.length && covers(item));
+    const engaged = fixed.length ? fixed : contacts;
+    if (!engaged.length) return null;
+    const ordered = engaged.sort((a, b) => a.center - b.center);
+    const first = ordered[0]!, last = ordered.at(-1)!;
+    const covering = ordered.find(covers);
+    const transmit = (j: number, x: number, amount: number) => {
+      if (j < placed.length && amount > 0) incoming[j]!.push({ x, amount });
+    };
+    if (first.center < last.center && x >= first.center && x <= last.center) {
+      const share = amount * (last.center - x) / (last.center - first.center);
+      transmit(first.j, first.center, share);
+      transmit(last.j, last.center, amount - share);
+    } else if (covering) {
+      transmit(covering.j, x, amount);
+    } else return null;
+    pressure = Math.max(pressure, amount / ordered.reduce((sum, item) => sum + item.r - item.l, 0));
+    loads[i] = { x, onFixture: !!covering && covering.j === fixture && fixed.length > 0 };
+  }
+  return { pressure, beams: loads };
+}
+
 function drop(layout: SpanLayout, x: number, w: number, placed: readonly Beam[]): Beam | null {
   const projection = { x, y: 0, w, h: layout.h };
   const supports = [...layout.bases, layout.fixture, ...placed].filter(s => touchesX(projection, s));
@@ -114,7 +158,7 @@ function stocksAfter(layout: SpanLayout, placed: readonly Beam[]): number[] {
   return layout.slots.map((slot, i) => layout.stock[i]! - placed.filter(beam => beam.w === slot.width).length);
 }
 
-export function planSpan(layout: SpanLayout, pose: SpanPose): Beam[] | null {
+export function planSpan(layout: SpanLayout, pose: SpanPose, distribute = false): Beam[] | null {
   const { bases, fixture, goal, width, h, slots } = layout;
   const depth = (bases[0].y - fixture.y) / h, cap = 100_000;
   if (!Number.isInteger(depth) || depth < 1 || depth > 3 || bases[0].y !== bases[1].y) return null;
@@ -136,29 +180,34 @@ export function planSpan(layout: SpanLayout, pose: SpanPose): Beam[] | null {
     return plans;
   };
   const left = build(0), right = build(1);
-  let result: { cost: number; poses: Beam[] } | null = null;
-  const consider = (placed: Beam[], upper: Beam[], lowerMargin: number, lowerWidth: number) => {
+  let result: { cost: number; pressure: number; poses: Beam[] } | null = null;
+  const consider = (placed: Beam[], upper: Beam[], lowerMargin: number, lowerWidth: number, previousPressure = 0) => {
     const clearance = loadClearance(upper, fixture);
-    if (clearance < 0.1 || ++examined > cap) return;
+    if ((!distribute && clearance < 0.1) || ++examined > cap) return;
+    const built = [...placed, ...upper];
+    const load = distribute ? distributedSpanLoad(layout, built) : null;
+    if (distribute && !load) return;
+    const pressure = Math.max(previousPressure, load?.pressure ?? 0);
     const top = upper.at(-1)!;
     if (overlaps(top, goal)) {
-      const total = [...placed, ...upper];
       let changes = 0, prior = pose;
-      for (const beam of total) {
+      for (const beam of built) {
         changes += 1 + Number(prior.x !== beam.x) + Math.abs(slots.findIndex(slot => slot.width === prior.w) - slots.findIndex(slot => slot.width === beam.w));
         prior = { ...prior, x: beam.x, w: beam.w };
       }
-      const cost = changes - Math.min(lowerMargin, clearance) * 2 - lowerWidth / 5;
-      if (!result || cost < result.cost) result = { cost, poses: total };
+      const cost = changes - Math.min(lowerMargin, distribute ? lowerMargin : clearance) * 2 - lowerWidth / 5;
+      if (!result || pressure < result.pressure - 1e-9 || Math.abs(pressure - result.pressure) < 1e-9 && cost < result.cost) {
+        result = { cost, pressure, poses: built };
+      }
       return;
     }
     if (top.y <= goal.y) return;
-    const built = [...placed, ...upper], available = stocksAfter(layout, built);
+    const available = stocksAfter(layout, built);
     for (const [i, slot] of slots.entries()) {
       if (available[i]! <= 0) continue;
       for (let x = Math.max(0, top.x - slot.width + 1); x < end(top) && x + slot.width <= width; x++) {
         const candidate = drop(layout, x, slot.width, built);
-        if (candidate?.y === top.y - h && candidate.y >= goal.y) consider(placed, [...upper, candidate], lowerMargin, lowerWidth);
+        if (candidate?.y === top.y - h && candidate.y >= goal.y) consider(placed, [...upper, candidate], lowerMargin, lowerWidth, pressure);
       }
     }
   };
