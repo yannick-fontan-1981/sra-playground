@@ -3,11 +3,13 @@ import { alternatingDescription, alternatingHistogram, alternatingOverlays, meas
 import { alternatingTopology, instrumentalAlternatingContact, type AlternatingGuard } from '../logos-engine/v6-alternating-graph-questions.ts';
 import type { NativeBox, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { movedPatrol, observePatrolReturn, planPatrolStep, type PatrolMemory, type PatrolStep } from './material-route-patrol.ts';
 
 export const materialRouteId = 'sic_material_route';
 export const verifyConnectedRouteId = 'sic_verify_connected_route';
+export const learnConnectedRouteId = 'sic_learn_connected_route';
 export const materialRouteStrategies = {
   probe_grid_direction: 'Test an input from the current grid position',
   follow_observed_grid_edge: 'Return along measured moves to a position with an open question',
@@ -32,7 +34,8 @@ type State = { epoch: number; size: number; histogram: number[][]; samples: Move
   completed?: { readonly nextEpoch: number; readonly score: number; readonly evidence: string } };
 type Choice = { input: string; to: AlternatingBox | null; ordinary: boolean; floor: number | null;
   guarded?: boolean; contact?: boolean; patrol?: PatrolStep };
-type Proposal = NativeProposal & { local: State; choice: Choice; actor: AlternatingActor; needId: string };
+type WalkStep = { actor: AlternatingActor; choice: Choice };
+type Proposal = NativeProposal & { local: State; choice: Choice; actor: AlternatingActor; needId: string; walk?: WalkStep[] };
 const order = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
 const same = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right);
 const location = (actor: AlternatingActor) => actor.bbox.slice(0, 2).join(',');
@@ -85,11 +88,11 @@ function removalAtDeparture(local: State, rows: NativeRows, destination: Alterna
   return { guard_histogram: pendingContact.guard.histogram, size, evidence: [...pendingContact.evidence, ref] };
 }
 
-export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
+export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyConnectedRouteId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -108,9 +111,21 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       if (eligible.length !== 1) return null;
       const actor = eligible[0]!;
       if (!known && !hasRepeatedTiles(rows, actor.size)) return null;
+      const motion = !known && family === learnConnectedRouteId && execution?.readPriorDirectionalScene?.((previous) => {
+        const candidates = alternatingOverlays(previous);
+        if (candidates.length !== 1 || !hasRepeatedTiles(previous, actor.size)) return null;
+        const candidate = candidates[0]!;
+        return candidate.size === actor.size && same(candidate.histogram, actor.histogram) ? candidate : null;
+      });
+      const learnedDelta: AlternatingPosition = motion
+        ? [actor.bbox[0] - motion.scene.bbox[0], actor.bbox[1] - motion.scene.bbox[1]] : [0, 0];
+      if (!known && family === learnConnectedRouteId && (!motion || motion.afterRef !== observation.observation_ref
+        || !available.includes(motion.command) || !((learnedDelta[0] === 0) !== (learnedDelta[1] === 0)))) return null;
       const local: State = prior ?? { epoch: observation.level_epoch, size: actor.size, histogram: actor.histogram,
-        samples: remembered?.samples ?? [], edges: [], evidence: remembered ? [...remembered.evidence, remembered.completed!.evidence] : [],
-        lastMoved: null, repeat: null, count: 0, stopped: false,
+        samples: remembered?.samples ?? (motion ? [{ input: motion.command, delta: learnedDelta }] : []),
+        edges: motion ? [{ input: motion.command, from: location(motion.scene), to: location(actor) }] : [],
+        evidence: remembered ? [...remembered.evidence, remembered.completed!.evidence] : motion ? [motion.beforeRef, motion.afterRef] : [],
+        lastMoved: motion ? motion.command : null, repeat: motion ? motion.command : null, count: 0, stopped: false,
         ...(remembered?.calibration && remembered.removals?.length ? {
           calibration: remembered.calibration, removals: remembered.removals, guardedTransfer: true,
         } : {}) };
@@ -170,10 +185,26 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
         subjects: ['controlled_piece', 'connecting_tiles', 'possible_destination'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_contact_along_observed_connections' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'material-route:' + need.id, action = { action_ref: choice.input, data: {} }, actions = [action];
-      return { status: 'proposed', kind: verifyConnectedRouteId, actions, local: calibration ? { ...local, calibration } : local, actor, choice, needId: need.id,
+      const id = 'material-route:' + need.id;
+      const prefix: WalkStep[] = [];
+      if (choice === planned && choice.ordinary && !choice.guarded && !patrol && floor !== null) {
+        let current = actor;
+        for (const input of route?.slice(0, Math.min(remaining, maximumCommittedActions, 80 - local.count)) ?? []) {
+          const delta = controls[input];
+          if (!delta || !available.includes(input)) break;
+          const destination = asBox(current.bbox[0] + delta[0], current.bbox[1] + delta[1]);
+          if (!same(alternatingHistogram(rows, destination), [[floor, actor.size ** 2]])) break;
+          prefix.push({ actor: current, choice: { input, to: destination, floor, ordinary: true } });
+          current = { ...current, bbox: destination };
+        }
+      }
+      const walk = prefix.length > 1 ? prefix : undefined;
+      const actions = walk?.map(step => ({ action_ref: step.choice.input, data: {} })) ?? [{ action_ref: choice.input, data: {} }];
+      return { status: 'proposed', kind: family, actions, local: calibration ? { ...local, calibration } : local, actor, choice, needId: need.id,
+        ...(walk ? { walk } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        steps: [{ action, expected_after: choice.ordinary || choice.guarded ? choice.to : null }],
+        steps: actions.map((action, index) => ({ action, expected_after: walk?.[index]?.choice.to
+          ?? (choice.ordinary || choice.guarded ? choice.to : null) })),
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -190,14 +221,19 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const step = proposal.walk?.[index];
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!step?.choice.to && proposal.binding?.level_epoch === observation.level_epoch
+          && same(alternatingHistogram(packet.frame_rows, step.actor.bbox), step.actor.histogram)
+          && same(alternatingHistogram(packet.frame_rows, step.choice.to), [[step.choice.floor, step.actor.size ** 2]]);
       return { admitted, reason: admitted ? 'current_piece_and_grid_bound' : 'piece_or_grid_context_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { choice, actor, local } = proposal;
+      const { choice, actor } = proposal.walk?.[index] ?? proposal;
+      const { local } = proposal;
       if (choice.patrol) {
         const matched = before.state === after.state && !!movedPatrol(choice.patrol, actor, second);
         return { matched, seal_prefix: true, reason: matched ? 'patrol_and_player_positions_observed' : 'patrol_transition_contradicted' };
@@ -205,17 +241,18 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       const matched = (choice.ordinary || choice.guarded) && choice.to && choice.floor !== null
         ? before.state === after.state && matchOrdinary(first, second, actor, choice.to, choice.floor) : null;
       const revealed = matched && choice.guarded && choice.to && removalAtDeparture(local, second, choice.to, after.observation_ref);
-      return { matched, seal_prefix: true, reason: revealed ? 'ordinary_tile_revealed_after_guard_contact'
+      return { matched, seal_prefix: matched !== true || index + 1 === proposal.actions.length, reason: revealed ? 'ordinary_tile_revealed_after_guard_contact'
         : matched && choice.contact ? 'contact_observed_waiting_to_reveal_tile'
           : matched === true ? 'observed_tile_displacement' : 'compare_piece_displacement_and_contact' };
     },
-    record(before, after, command, first, second, proposal, _index, frames = []) {
+    record(before, after, command, first, second, proposal, index, frames = []) {
+      const local = index > 0 ? state ?? proposal.local : proposal.local;
       if (after.levels_completed > before.levels_completed) {
-        state = { ...proposal.local, completed: { nextEpoch: after.level_epoch, score: after.levels_completed, evidence: after.observation_ref } };
+        state = { ...local, completed: { nextEpoch: after.level_epoch, score: after.levels_completed, evidence: after.observation_ref } };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, actor, choice } = proposal;
+      const { actor, choice } = proposal.walk?.[index] ?? proposal;
       if (choice.patrol) {
         const at = movedPatrol(choice.patrol, actor, second);
         const patrol = at && observePatrolReturn(choice.patrol, actor, at, frames, local.patrol, after.observation_ref);

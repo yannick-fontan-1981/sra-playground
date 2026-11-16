@@ -3,11 +3,13 @@ import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativePro
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { measureSectorNetwork, type SectorNetwork } from './sector-delivery.ts';
 
 export const orientedDeliveryId = 'sic_oriented_delivery';
 export const verifyOrientedDeliveryId = 'sic_verify_oriented_delivery';
+export const learnOrientedDeliveryId = 'sic_learn_oriented_delivery';
 
 type Geometry = { pitch: number; phase: NativePoint; core: number; background: number; rest_shell: number;
   targets: NativePoint[]; initial_boxes: NativePoint[] };
@@ -20,9 +22,12 @@ type State = { epoch: number; geometry: Geometry; color: number; held: NativePoi
 type Transport = { readonly carrier: string; readonly pose: NativePoint; readonly box: NativePoint;
   readonly sources: readonly string[] };
 type Move = { pose: NativePoint; face: NativePoint; cargo: NativePoint | null };
+type Motion = { input: string; prediction: Move };
 type Intent = 'motion' | 'attach' | 'release';
-type Step = { input: string; intent: Intent; prediction: Move | null; target: NativePoint | null; waitForTransport?: true };
-type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string };
+type Step = { input: string; intent: Intent; prediction: Move | null; target: NativePoint | null; waitForTransport?: true;
+  route?: Motion[] };
+type WalkStep = { input: string; before: Scene; after: Scene };
+type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string; walk?: WalkStep[] };
 
 const labels = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] } as const;
 const add = ([x, y]: NativePoint, [u, v]: NativePoint): NativePoint => [x + u, y + v];
@@ -94,13 +99,21 @@ function transportReturn(before: NativeObservation, after: NativeObservation, lo
 function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: Readonly<Record<string, NativePoint>>,
   accepts: (state: Move) => boolean, cargoFloor = floor): { step: Step | null; end: Move; length: number } | null {
   const moves = Object.entries(vectors);
-  const queue = [{ state: start, step: null as Step | null, length: 0 }];
+  const queue: { state: Move; step: Motion | null; parent: number; length: number }[] =
+    [{ state: start, step: null, parent: -1, length: 0 }];
   const visited = new Set<string>();
-  for (const { state, step, length } of queue) {
+  for (let index = 0; index < queue.length; index++) {
+    const { state, length } = queue[index]!;
     const identity = JSON.stringify([state.pose, state.face, state.cargo]);
     if (visited.has(identity)) continue;
     visited.add(identity);
-    if (accepts(state)) return { step, end: state, length };
+    if (accepts(state)) {
+      const route: Motion[] = [];
+      for (let entry = queue[index]!; entry.step; entry = queue[entry.parent]!) route.push(entry.step);
+      route.reverse();
+      const step: Step | null = route[0] ? { ...route[0], intent: 'motion', target: null, route } : null;
+      return { step, end: state, length };
+    }
     if (visited.size >= 2048) return null;
     for (const [input, delta] of moves) {
       const pose = add(state.pose, delta), face = state.cargo ? state.face : delta;
@@ -108,7 +121,7 @@ function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: 
       const occupiable = (q: NativePoint, surface: Set<string>) => surface.has(key(q)) && !fixed.has(key(q));
       const prediction = occupiable(pose, floor) && (!cargo || occupiable(cargo, cargoFloor)) ? { pose, face, cargo } : { ...state, face };
       if (same(prediction.pose, state.pose) && same(prediction.face, state.face)) continue;
-      queue.push({ state: prediction, step: step ?? { input, intent: 'motion', prediction, target: null }, length: length + 1 });
+      queue.push({ state: prediction, step: { input, prediction }, parent: index, length: length + 1 });
     }
   }
   return null;
@@ -309,11 +322,39 @@ function relayMatches(proposal: Proposal, scene: Scene): boolean {
     : (shell !== undefined && shell !== scene.face_value) || !Object.hasOwn(scene.boxes, contact);
 }
 
-export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
+function walkPrefix(step: Step, initial: Scene, local: State, remaining: number): WalkStep[] {
+  const walk: WalkStep[] = [];
+  let before = initial, cargo = local.held;
+  for (const { input, prediction } of step.route?.slice(0, Math.min(remaining, maximumCommittedActions, 70 - local.count)) ?? []) {
+    const known = (cargo ? local.loaded : local.free)[input];
+    if (!known || !same(add(before.pose, known), prediction.pose)) break;
+    const boxes = { ...before.boxes };
+    if (cargo && prediction.cargo) {
+      const value = boxes[key(cargo)]!;
+      delete boxes[key(cargo)];
+      boxes[key(prediction.cargo)] = value;
+    }
+    const ahead = add(prediction.pose, prediction.face);
+    if (!same(ahead, prediction.cargo) && Object.hasOwn(boxes, key(ahead))) break;
+    const after = { ...before, pose: prediction.pose, face: prediction.face, boxes };
+    walk.push({ input, before, after });
+    cargo = prediction.cargo;
+    before = after;
+  }
+  return walk;
+}
+
+function matchesScene(actual: Scene | null, predicted: Scene): boolean {
+  return !!actual && same(actual.pose, predicted.pose) && same(actual.face, predicted.face)
+    && actual.face_value === predicted.face_value && Object.keys(actual.boxes).length === Object.keys(predicted.boxes).length
+    && Object.entries(predicted.boxes).every(([position, value]) => actual.boxes[position] === value);
+}
+
+export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryId): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyOrientedDeliveryId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -330,7 +371,10 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const previous = state?.epoch === observation.level_epoch - 1 && state.sharedEvidence ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= (prior?.relay || prior?.sectorNetwork ? 120 : 70)) return null;
-      const ordinary = prior?.geometry ?? orientedCouplingInitial(rows) as Geometry | null;
+      const learns = family === learnOrientedDeliveryId && !prior && !previous;
+      const receipt = learns ? execution?.readPriorDirectionalScene?.(earlier => orientedCouplingInitial(earlier) as Geometry | null) : null;
+      if (learns && (!receipt || receipt.afterRef !== observation.observation_ref)) return null;
+      const ordinary = prior?.geometry ?? receipt?.scene ?? orientedCouplingInitial(rows) as Geometry | null;
       const divided = !ordinary && !!previous;
       const geometry = ordinary ?? (divided ? orientedCouplingInitial(rows, true) as Geometry | null : null);
       if (!geometry || geometry.targets.length > 12 || (!divided && !prior?.sectorNetwork && geometry.initial_boxes.length > 6)) return null;
@@ -341,8 +385,16 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       });
       if (scenes.length !== 1) return null;
       const { color, scene } = scenes[0]!, ahead = add(scene.pose, scene.face);
-      const initial: State = prior ?? { epoch: observation.level_epoch, geometry, color, held: null, invitation: null,
-        free: {}, loaded: {}, tried: [], refs: [], count: 0 };
+      const priorScene = receipt && execution?.readPriorDirectionalScene?.(earlier => orientedCouplingScene(earlier, geometry, color) as Scene | null);
+      const delta = priorScene ? sub(scene.pose, priorScene.scene.pose) : null;
+      if (receipt && (!delta || Math.abs(delta[0]) + Math.abs(delta[1]) !== 1 || !same(scene.face, delta)
+        || Object.keys(priorScene!.scene.boxes).join('|') !== Object.keys(scene.boxes).join('|'))) return null;
+      const shellChanges = priorScene ? Object.keys(scene.boxes).filter(key => scene.boxes[key] !== priorScene.scene.boxes[key]) : [];
+      if (receipt && shellChanges.length && (shellChanges.length !== 1 || shellChanges[0] !== key(ahead))) return null;
+      const initial: State = prior ?? { epoch: observation.level_epoch, geometry, color, held: null,
+        invitation: shellChanges.length ? ahead : null, free: receipt && delta ? { [receipt.command]: delta } : {}, loaded: {},
+        tried: priorScene ? [JSON.stringify([priorScene.scene.pose, priorScene.scene.face, priorScene.scene.boxes, null, priorScene.command])] : [],
+        refs: receipt ? [receipt.beforeRef, receipt.afterRef] : [], count: receipt ? 1 : 0 };
       const relay = prior?.relay ?? (!prior && previous && !divided ? measureRelay(rows, observation, initial, scene, previous) : null);
       const sectorNetwork = prior?.sectorNetwork ?? (divided && previous
         ? measureSectorNetwork(rows, geometry, scene.pose, positions(scene), sectorCarriers(observation, { ...initial, transportCarriers: previous.transportCarriers })) : null);
@@ -386,10 +438,15 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
         subjects: ['oriented_carrier', 'part_in_front', 'receiving_region'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_depositing_compatible_parts' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'oriented-delivery:' + need.id, action = { action_ref: step.input, data: {} }, actions = [action];
+      const id = 'oriented-delivery:' + need.id, action = { action_ref: step.input, data: {} };
       const prediction = known || handsOff ? step.prediction : null;
       const peer = relay ? externalCarriers(observation, local).get(relay.carrier) : null;
-      return { status: 'proposed', kind: verifyOrientedDeliveryId, actions, steps: [{ action, expected_after: prediction }],
+      const prefix = known && !handsOff && !local.sharedEvidence ? walkPrefix(step, scene, local, remaining) : [];
+      const walk = prefix.length > 1 ? prefix : undefined;
+      const actions = walk?.map(step => ({ action_ref: step.input, data: {} })) ?? [action];
+      return { status: 'proposed', kind: family, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: walk?.[index]?.after ?? prediction })),
+        ...(walk ? { walk } : {}),
         local, scene, step, needId: need.id, attempt: unique(step),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -409,13 +466,24 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const { local } = proposal, step = proposal.walk?.[index];
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!step && proposal.binding?.level_epoch === observation.level_epoch
+          && matchesScene(orientedCouplingScene(packet.frame_rows, local.geometry, local.color) as Scene | null, step.before);
       return { admitted, reason: admitted ? 'current_oriented_carrier_bound' : 'oriented_carrier_context_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      const walk = proposal.walk?.[index];
+      if (walk) {
+        const { local } = proposal;
+        const matched = before.state === after.state
+          && matchesScene(orientedCouplingScene(second, local.geometry, local.color) as Scene | null, walk.after);
+        return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
+          reason: matched ? 'carrier_and_parts_followed_declared_route' : 'carrier_or_parts_diverged' };
+      }
       if (proposal.local.relay || proposal.local.sectorNetwork) {
         const scene = orientedCouplingScene(second, proposal.local.geometry, proposal.local.color) as Scene | null;
         const matched = !!scene && before.state === after.state && relayMatches(proposal, scene);
@@ -443,9 +511,11 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
         && expected.size === Object.keys(scene.boxes).length && Object.keys(scene.boxes).every(p => expected.has(p)) : null;
       return { matched, seal_prefix: true, reason: 'compare_carrier_orientation_and_part_positions' };
     },
-    record(before, after, action, _first, second, proposal) {
+    record(before, after, action, _first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, scene: old, step } = proposal;
+      const local = index > 0 ? state ?? proposal.local : proposal.local;
+      const old = proposal.walk?.[index]?.before ?? proposal.scene;
+      const { step } = proposal;
       const scene = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
       if (!scene) return { events: [] };
       const delta = sub(scene.pose, old.pose), moved = delta.some(Boolean);
@@ -453,7 +523,7 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       const ahead = add(scene.pose, scene.face);
       const external = transportReturn(before, after, local, old, scene);
       const next: State = { ...local, count: local.count + 1, invitation: null, refs: [...local.refs.slice(-5), after.observation_ref],
-        tried: [...local.tried, proposal.attempt] };
+        tried: [...local.tried, index === 0 ? proposal.attempt : JSON.stringify([old.pose, old.face, old.boxes, local.held, action.action_ref])] };
       if (local.transports?.length || external.transports.length) next.transports = external.transports;
       const confirmedCarriers = external.transports.filter(item => item.sources.length >= 2);
       if (confirmedCarriers.length) {

@@ -6,10 +6,12 @@ import type { PreviewPackingCell as Cell, PreviewPackingControl as Control, Prev
 import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const previewPlacementId = 'sic_preview_placement';
 export const verifyPreviewPlacementId = 'sic_verify_preview_placement';
+export const learnPreviewPlacementId = 'sic_learn_preview_placement';
 export const previewPlacementStrategies = {
   select_piece_for_partition: 'Select the piece needed to fill the remaining area',
   test_preview_control: 'Test an input on the selected piece',
@@ -23,7 +25,8 @@ type Transfer = { completed: number; controls: Record<string, Control>; evidence
 type State = { epoch: number; scene: Scene; piece: Piece; goal: Pose; controls: Record<string, Control>; tried: string[];
   evidence: string[]; count: number; stopped: boolean; pending?: Contribution[] };
 type Proposal = NativeProposal & { local: State; strategy: Strategy; current: Pose; predicted: Pose | null;
-  attempt: string; needId: string; nextPiece?: Contribution };
+  needId: string; nextPiece?: Contribution; route?: PreviewStep[] };
+type PreviewStep = { command: NativeCommand; pose: Pose };
 const key = (value: unknown) => JSON.stringify(value);
 const poseKey = ({ anchor, mask }: Pose) => key([anchor, mask]);
 const same = (a: unknown, b: unknown) => key(a) === key(b);
@@ -40,11 +43,16 @@ function previewRoute(scene: Scene, goal: Pose, controls: State['controls'], cur
   inputs: readonly NativeCommand[], budget: number) {
   const moves = inputs.filter(command => Object.hasOwn(controls, command.action_ref));
   const world = new Set(scene.world.map(key));
-  const queue: { pose: Pose; depth: number; first: { command: NativeCommand; pose: Pose } | null }[] =
-    [{ pose: current, depth: 0, first: null }];
+  const queue: { pose: Pose; depth: number; parent: number; step: PreviewStep | null }[] =
+    [{ pose: current, depth: 0, parent: -1, step: null }];
   const seen = new Set([poseKey(current)]);
-  for (const position of queue) {
-    if (poseKey(position.pose) === poseKey(goal)) return { first: position.first, cost: position.depth };
+  for (let index = 0; index < queue.length; index++) {
+    const position = queue[index]!;
+    if (poseKey(position.pose) === poseKey(goal)) {
+      const path: PreviewStep[] = [];
+      for (let entry = position; entry.step; entry = queue[entry.parent]!) path.push(entry.step);
+      return { path: path.reverse(), cost: position.depth };
+    }
     if (position.depth >= budget || seen.size >= 2048) continue;
     for (const command of moves) {
       const effect = controls[command.action_ref]!;
@@ -55,7 +63,7 @@ function previewRoute(scene: Scene, goal: Pose, controls: State['controls'], cur
       const signature = poseKey(pose);
       if (seen.has(signature) || pose.mask.some(([r, c]) => !world.has(key([r + pose.anchor[0], c + pose.anchor[1]])))) continue;
       seen.add(signature);
-      queue.push({ pose, depth: position.depth + 1, first: position.first ?? { command, pose } });
+      queue.push({ pose, depth: position.depth + 1, parent: index, step: { command, pose } });
     }
   }
   return null;
@@ -101,12 +109,12 @@ async function prepare(rows: NativeRows, epoch: number, inputs: readonly NativeC
   }
 }
 
-export function createSicVerifyPreviewPlacement(): NativeFamily<Proposal> {
+export function createSicVerifyPreviewPlacement(family = verifyPreviewPlacementId): NativeFamily<Proposal> {
   let state: State | null = null;
   let transfer: Transfer | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyPreviewPlacementId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -119,8 +127,27 @@ export function createSicVerifyPreviewPlacement(): NativeFamily<Proposal> {
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const learned = transfer?.completed === observation.levels_completed ? transfer : null;
-      const local = state?.epoch === observation.level_epoch ? state
-        : await prepare(rows, observation.level_epoch, inputs, remaining, learned, execution);
+      let local = state?.epoch === observation.level_epoch ? state : null;
+      if (!local && family === learnPreviewPlacementId) {
+        const receipt = await execution?.readPriorClickScene?.(async (before, previous, command) => {
+          const scene = previewPackingMeasureScene(before);
+          const piece = scene?.pieces.find(piece => piece.movable);
+          if (!scene || !piece || !piece.mask.some(([row, column]) => {
+            const [top, left] = scene.offset;
+            const x = left + (piece.anchor[1] + column) * scene.q, y = top + (piece.anchor[0] + row) * scene.q;
+            return x <= command.data.x! && command.data.x! < x + scene.q && y <= command.data.y! && command.data.y! < y + scene.q;
+          })) return null;
+          return prepare(before, previous.level_epoch, inputs, remaining, null, execution);
+        });
+        if (!receipt || receipt.afterRef !== observation.observation_ref) return null;
+        const { scene, piece } = receipt.scene, color = selection(rows, scene, piece);
+        if (color === null) return null;
+        const selected = { ...scene, selected: piece.id, preview_color: color };
+        const pose = previewPackingPose(rows, selected);
+        if (!pose || poseKey(pose) !== poseKey(piece)) return null;
+        local = { ...receipt.scene, scene: selected, evidence: [receipt.beforeRef, receipt.afterRef] };
+      }
+      local ??= await prepare(rows, observation.level_epoch, inputs, remaining, learned, execution);
       if (!local || local.stopped || (local.pending === undefined && local.count >= 24)) return null;
       const { scene, piece } = local;
       const current = scene.selected ? previewPackingPose(rows, scene) : { anchor: piece.anchor, mask: piece.mask };
@@ -129,7 +156,8 @@ export function createSicVerifyPreviewPlacement(): NativeFamily<Proposal> {
       const nextPiece = ready && scene.selected ? local.pending?.[0] : undefined;
       if (ready && !nextPiece) return null;
       const commands = inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref));
-      const route = scene.selected && !nextPiece ? previewRoute(scene, local.goal, local.controls, current, commands, remaining)?.first ?? null : null;
+      const path = scene.selected && !nextPiece ? previewRoute(scene, local.goal, local.controls, current, commands, remaining)?.path : null;
+      const route = path?.[0] ?? null;
       const probe = scene.selected ? commands.find(command => !local.controls[command.action_ref]
         && !local.tried.includes(key([poseKey(current), command.action_ref]))) ?? null : null;
       const point = previewPackingPointFor(scene, nextPiece?.piece ?? piece);
@@ -153,13 +181,20 @@ export function createSicVerifyPreviewPlacement(): NativeFamily<Proposal> {
         subjects: [local.pending ? 'frame_and_complementary_pieces' : 'frame_and_movable_piece'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_filling_the_frame' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `preview-placement:${need.id}`, actions = [command];
+      const id = `preview-placement:${need.id}`;
+      const interaction = path?.findIndex(({ command }) => command.action_ref === 'ACTION5') ?? -1;
+      const count = local.pending ? maximumCommittedActions : Math.min(maximumCommittedActions, 24 - local.count);
+      const declared = selectedRoute ? path?.slice(0, interaction < 0 ? count : Math.min(count, interaction)) : null;
+      const series = declared && declared.length > 1 ? declared : undefined;
+      const actions = series?.map(step => step.command) ?? [command];
       const binding = command === click ? await ObservedInputDomain.makeLocusWitness(observation, rows,
         [point.x, point.y], { reason: label, evidence }) : null;
-      return { status: 'proposed', kind: verifyPreviewPlacementId, actions, local, strategy: phase, current, predicted: selectedRoute?.pose ?? null,
+      return { status: 'proposed', kind: family, actions, local, strategy: phase, current, predicted: selectedRoute?.pose ?? null,
+        ...(series ? { route: series } : {}),
         ...(nextPiece ? { nextPiece } : {}),
-        attempt: key([poseKey(current), command.action_ref]), needId: need.id,
-        steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
+        needId: need.id,
+        steps: actions.map((action, index) => ({ action, expected_after: series?.[index]?.pose ?? null,
+          ...(binding ? { point_binding: binding } : {}) })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -177,29 +212,38 @@ export function createSicVerifyPreviewPlacement(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const previous = proposal.route?.[index - 1];
+      const pose = previous && previewPackingPose(packet.frame_rows, proposal.local.scene);
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!pose && !!previous && poseKey(pose) === poseKey(previous.pose)
+          && proposal.binding?.level_epoch === observation.level_epoch;
       return { admitted, reason: admitted ? 'preview_placement_bound' : 'preview_placement_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { local, predicted, strategy } = proposal;
+      const { local, strategy } = proposal;
+      const predicted = proposal.route?.[index]?.pose ?? proposal.predicted;
       const next = predicted ? previewPackingPose(second, local.scene) : null;
       const matched = proposal.nextPiece ? switchedPiece(second, local, proposal.nextPiece) !== null
         : strategy === 'select_piece_for_partition' ? selection(second, local.scene, local.piece) !== null
         : predicted ? next !== null && poseKey(next) === poseKey(predicted) : null;
-      return { matched, seal_prefix: true, reason: matched === null ? 'observe_preview_control_return'
+      return { matched, seal_prefix: matched !== true || index + 1 === proposal.actions.length, reason: matched === null ? 'observe_preview_control_return'
         : matched ? 'preview_pose_confirmed' : 'preview_pose_contradicted' };
     },
-    record(before, after, command, _first, second, proposal) {
+    record(before, after, command, _first, second, proposal, index) {
+      const local = index > 0 ? state ?? proposal.local : proposal.local;
       if (after.levels_completed > before.levels_completed) {
-        transfer = { completed: after.levels_completed, controls: proposal.local.controls,
-          evidence: [...proposal.local.evidence.slice(-4), after.observation_ref] };
+        transfer = { completed: after.levels_completed, controls: local.controls,
+          evidence: [...local.evidence.slice(-4), after.observation_ref] };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, strategy, current, predicted, attempt } = proposal;
+      const { strategy } = proposal;
+      const current = proposal.route?.[index - 1]?.pose ?? proposal.current;
+      const predicted = proposal.route?.[index]?.pose ?? proposal.predicted;
+      const attempt = key([poseKey(current), command.action_ref]);
       const next = { ...local, count: local.count + 1, evidence: [...local.evidence.slice(-4), after.observation_ref] };
       if (proposal.nextPiece) {
         const scene = switchedPiece(second, local, proposal.nextPiece);

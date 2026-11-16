@@ -2,6 +2,7 @@ import { morphologyPairs, type MorphologyPair } from '../logos-engine/v6-morphol
 import { ObservedMeter } from '../logos-engine/v6-inventory-caller-context.ts';
 import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { measureInsetContact } from './inset-contact.ts';
 import { measureDirectionalMotion, type DirectionalMotion } from './observed-translation.ts';
@@ -43,7 +44,8 @@ type State = { epoch: number; body: Body | null; target: NativeBox | null; surfa
   score?: number; rotation?: FramedRotation; confirmedMoves?: Direction[]; lastPair?: MorphologyPair; reserveContradicted?: boolean;
   transports?: FramedTransport[]; reserveBand?: FramedReserve };
 type Transfer = { epoch: number; rotation: FramedRotation; confirmedMoves: Direction[]; victory: string };
-type WalkStep = { command: Direction; from: NativePoint; landing: NativePoint; beneath: number[]; remainingReserve?: number };
+type WalkStep = { command: Direction; from: NativePoint; landing: NativePoint; beneath: number[];
+  remainingReserve?: number; terminalContact?: true };
 type Plan = { command: Direction; landing: NativePoint; target: NativePoint; contact: boolean; walk?: WalkStep[] };
 type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target: NativeBox | null; surface: NativeBox | null;
   inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string; pair: MorphologyPair | null;
@@ -136,7 +138,14 @@ function route(rows: NativeRows, body: Body, surface: NativeBox, directions: rea
         : !clean && (aligned || varied < 3)))) continue;
       const distance = aligned && target ? Math.abs(at[0] + pitch / 2 - (target[0] + target[2] + 1) / 2)
         + Math.abs(at[1] + pitch / 2 - (target[1] + target[3] + 1) / 2) : 0;
-      candidates.push({ plan: { ...first, target: at, contact, walk: current.walk }, distance, floorPixels: clean,
+      const confirmed = local.confirmedMoves ?? [];
+      const ruledContact = inset && contact && testedIntermediate && current.walk.length > 0
+        && current.walk.length === current.depth && confirmed.includes(command)
+        && current.walk.every(step => confirmed.includes(step.command)) && current.depth + 1 <= remaining;
+      const walk: WalkStep[] = ruledContact
+        ? [...current.walk, { command, from: current.at, landing: at, beneath: patch, terminalContact: true }]
+        : current.walk;
+      candidates.push({ plan: { ...first, target: at, contact, walk }, distance, floorPixels: clean,
         depth: current.depth + 1, variety: varied });
     }
   }
@@ -353,7 +362,8 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         parentObjective: objective, satisfactionContract: 'observe_public_contact_and_official_progress' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `framed-contact:${need.id}`;
-      const walk = (!recalled || managed) && plan?.walk && plan.walk.length > 1 ? plan.walk : [];
+      const walk = (!recalled || managed) && plan?.walk && plan.walk.length > 1
+        ? plan.walk.slice(0, Math.min(remaining, maximumCommittedActions)) : [];
       const actions = walk.length ? walk.map(step => ({ action_ref: step.command, data: {} })) : [command];
       return { status: 'proposed', kind: family, actions, action, plan, target, surface, inset, needId: need.id, pair,
         ...(managed && rotation ? { managed, rotation } : {}),
@@ -401,6 +411,9 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       const scored = after.levels_completed > before.levels_completed;
       const complete = index + 1 >= proposal.actions.length;
       const walk = proposal.plan?.walk?.[index];
+      if (!scored && walk?.terminalContact && proposal.actions.length > 1) return {
+        matched: false, seal_prefix: true, reason: 'planned_contact_did_not_advance_the_level',
+      };
       if (!scored && walk && proposal.actions.length > 1) {
         const body = proposal.adoptedBody ?? state.body;
         const prior = body && pixelsAt(first, walk.from, body.pitch);

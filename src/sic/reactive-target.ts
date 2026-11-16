@@ -3,12 +3,14 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { planPursuit, projectPursuit, pursuitDirections, pursuitStateKey, pursuitTrialKey, readPursuitState,
   type PursuitDirection, type PursuitMove, type PursuitRoles, type PursuitState } from './pursuit-forecast.ts';
 
 export const reactiveTargetId = 'sic_reactive_target';
 export const verifyReactiveMotionId = 'sic_verify_reactive_motion';
+export const learnReactiveMotionId = 'sic_learn_reactive_motion';
 
 const inputs = pursuitDirections;
 type Input = typeof inputs[number][0];
@@ -21,11 +23,13 @@ type Hypothesis = { order: Direction[]; matches: number };
 type Memory = { epoch: number; layout: Layout; edges: Record<string, Return>; visits: Record<string, number>;
   hypotheses: Hypothesis[]; refs: string[]; count: number };
 type Plan = { input: Input; target: Pair; condition: 'contact' | 'route' | 'probe' };
+type Leg = { from: Pair; plan: Plan; previous: Leg | null };
 type Calibration = { epoch: number; roles: PursuitRoles; orders: Direction[][]; pushRef: string | null };
 type PursuitWitness = { epoch: number; score: number; roles: PursuitRoles; order: Direction[]; refs: string[] };
 type PursuitMemory = { epoch: number; layout: Layout; rejected: string[]; refs: string[]; verified: boolean; blocked: boolean };
 type CrowdPlan = { local: PursuitMemory; current: PursuitState; move: PursuitMove; obstacle: number };
-type Proposal = NativeProposal & ({ local: Memory; at: Pair; plan: Plan; needId: string; crowd?: never }
+type Proposal = NativeProposal & ({ local: Memory; at: Pair; plan: Plan; needId: string; crowd?: never;
+  walk?: { from: Pair; plan: Plan; predicted: PursuitState }[]; obstacle?: number }
   | { crowd: CrowdPlan; needId: string });
 const key = (p: NativePoint) => p.join(',');
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
@@ -102,11 +106,11 @@ function prediction(layout: Layout, actor: NativePoint, peer: NativePoint, order
   return best;
 }
 
-function choose(at: Pair, local: Memory): Plan | null {
+function choose(at: Pair, local: Memory): { first: Plan; tail: Leg } | null {
   const { layout, edges, visits, hypotheses } = local;
-  const queue: { at: Pair; first: Plan | null; depth: number }[] = [{ at, first: null, depth: 0 }];
+  const queue: { at: Pair; first: Plan | null; depth: number; previous: Leg | null }[] = [{ at, first: null, depth: 0, previous: null }];
   const seen = new Set([pairKey(at)]);
-  let probe: { plan: Plan; score: number } | null = null;
+  let probe: { first: Plan; tail: Leg; score: number } | null = null;
   const order = hypotheses[0]!.order;
   for (const item of queue) {
     for (const d of inputs) {
@@ -116,19 +120,20 @@ function choose(at: Pair, local: Memory): Plan | null {
       if (returned && same(returned.actor, item.at.actor)) continue;
       const contact = !returned && same(actor, item.at.peer);
       const target = returned ?? { actor, peer: contact ? item.at.peer : prediction(layout, actor, item.at.peer, order) };
-      const first: Plan = item.first ?? { input, target, condition: contact ? 'contact' : returned ? 'route' : 'probe' };
-      if (contact) return first;
+      const plan: Plan = { input, target, condition: contact ? 'contact' : returned ? 'route' : 'probe' };
+      const first = item.first ?? plan, tail: Leg = { from: item.at, plan, previous: item.previous };
+      if (contact) return { first, tail };
       const k = pairKey(target);
       if (!returned && item.depth <= 3) {
         const score = item.depth * 7 + Math.min(20, (visits[k] ?? 0) * 5);
-        if (!probe || score < probe.score) probe = { plan: first, score };
+        if (!probe || score < probe.score) probe = { first, tail, score };
       }
       if (seen.has(k)) continue;
       seen.add(k);
-      queue.push({ at: target, first, depth: item.depth + 1 });
+      queue.push({ at: target, first, depth: item.depth + 1, previous: tail });
     }
   }
-  return probe?.plan ?? null;
+  return probe;
 }
 
 function fitReactiveReturns(local: Memory, input: Direction, first: NativeRows, second: NativeRows, ref: string,
@@ -149,12 +154,12 @@ function fitReactiveReturns(local: Memory, input: Direction, first: NativeRows, 
   return { epoch: local.epoch, roles, orders, pushRef: retained?.pushRef ?? (pushed && orders.length ? ref : null) };
 }
 
-export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
+export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): NativeFamily<Proposal> {
   let memory: Memory | null = null;
   let calibration: Calibration | null = null, witness: PursuitWitness | null = null, pursuit: PursuitMemory | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyReactiveMotionId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -194,7 +199,7 @@ export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
               satisfactionContract: 'verify_each_contact_and_official_progress' };
             const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
             const id = `pursuit:${need.id}`;
-            return { status: 'proposed', kind: verifyReactiveMotionId, actions,
+            return { status: 'proposed', kind: family, actions,
               crowd: { local, current: observed, move: planned, obstacle: inherited.roles.obstacle }, needId: need.id,
               binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: planned.expected }],
               sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
@@ -211,13 +216,28 @@ export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
         }
       }
       const prior = memory?.epoch === observation.level_epoch ? memory : null;
-      const layout = prior?.layout ?? layoutFor(rows, parts);
+      const learns = !prior && family === learnReactiveMotionId;
+      const motion = learns ? execution?.readPriorDirectionalScene?.(earlier => {
+        const measured = geometricComponents(earlier), layout = layoutFor(earlier, measured);
+        const at = layout && positions(measured, layout);
+        return layout && at ? { layout, at } : null;
+      }) : null;
+      if (learns && (!motion || motion.afterRef !== observation.observation_ref)) return null;
+      const layout = prior?.layout ?? motion?.scene.layout ?? layoutFor(rows, parts);
       if (!layout || (prior?.count ?? 0) >= 100) return null;
-      const local = prior ?? { epoch: observation.level_epoch, layout, edges: {}, visits: {}, refs: [], count: 0,
-        hypotheses: permutations(inputs).map(order => ({ order, matches: 0 })) };
       const at = positions(parts, layout);
       if (!at) return null;
-      let plan = choose(at, local);
+      const measuredInput = motion && inputs.find(input => input[0] === motion.command);
+      if (motion && (!measuredInput || !same(shift(motion.scene.at.actor, measuredInput, layout.pitch), at.actor)
+        || same(motion.scene.at.peer, at.peer))) return null;
+      const local: Memory = prior ?? { epoch: observation.level_epoch, layout,
+        edges: motion && measuredInput ? { [edgeKey(motion.scene.at, measuredInput[0])]: { ...at, evidence: motion.afterRef } } : {},
+        visits: motion ? { [pairKey(motion.scene.at)]: 1 } : {}, refs: motion ? [motion.beforeRef, motion.afterRef] : [],
+        count: motion ? 1 : 0, hypotheses: permutations(inputs).map(order => ({ order,
+          matches: Number(!!motion && same(prediction(layout, at.actor, motion.scene.at.peer, order), at.peer)) }))
+          .sort((a, b) => b.matches - a.matches) };
+      const selected = choose(at, local);
+      let plan = selected?.first;
       if (!plan || (local.visits[pairKey(at)] ?? 0) > 1) {
         const untested = inputs.find(d => layout.cells[key(shift(at.actor, d, layout.pitch))] && !local.edges[edgeKey(at, d[0])]);
         if (untested) {
@@ -244,9 +264,42 @@ export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
         : plan.condition === 'route' ? 'Reuse a measured movement of both sprites'
           : 'Test how the second sprite reacts to this move and update the route';
       const action = { action_ref: plan.input, data: {} };
+      const legs: Leg[] = [];
+      if (selected?.first === plan) {
+        for (let leg: Leg | null = selected.tail; leg; leg = leg.previous) legs.push(leg);
+        legs.reverse();
+      }
+      const training = calibration?.epoch === local.epoch ? calibration : null;
+      const orders = training?.orders ?? [];
+      const [goalX, goalY] = layout.goals[0]!;
+      const obstacle = training?.roles.obstacle ?? rows[goalY]?.[goalX];
+      const series: NonNullable<Extract<Proposal, { plan: Plan }>['walk']> = [];
+      const best = local.hypotheses[0]?.matches ?? 0;
+      const forecasts = orders.length ? orders
+        : local.hypotheses.filter(hypothesis => hypothesis.matches === best).map(hypothesis => hypothesis.order);
+      let projected = obstacle !== undefined && obstacle !== layout.actor && obstacle !== layout.peer
+        ? readPursuitState(rows, layout, obstacle) : null;
+      for (const leg of legs.slice(0, Math.min(remaining, maximumCommittedActions, 100 - local.count))) {
+        if (!projected || leg.plan.condition === 'contact') break;
+        const input = inputs.find(direction => direction[0] === leg.plan.input)!;
+        const known = local.edges[edgeKey(leg.from, leg.plan.input)] || best >= 2;
+        if (!known || projected.obstacles.some(site => same(site, leg.plan.target.actor))) break;
+        const predicted = projectPursuit(projected, layout, input, forecasts[0]!);
+        if (!predicted || predicted.peers.length !== 1 || !same(predicted.actor, leg.plan.target.actor)
+          || !same(predicted.peers[0]!, leg.plan.target.peer) || forecasts.some(order => {
+            const candidate = projectPursuit(projected!, layout, input, order);
+            return !candidate || pursuitStateKey(candidate) !== pursuitStateKey(predicted);
+          })) break;
+        series.push({ from: leg.from, plan: leg.plan, predicted });
+        projected = predicted;
+      }
+      const walk = series.length > 1 ? series : undefined;
+      const actions = walk?.map(step => ({ action_ref: step.plan.input, data: {} })) ?? [action];
       return {
-        status: 'proposed', kind: verifyReactiveMotionId, at, plan, local, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: plan.target }],
+        status: 'proposed', kind: family, at, plan, local, needId: need.id,
+        ...(walk ? { walk, obstacle } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: walk?.[index]?.predicted ?? plan.target })),
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -256,14 +309,19 @@ export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const previous = !proposal.crowd && proposal.walk?.[index - 1];
+      const scene = previous && !proposal.crowd && proposal.obstacle !== undefined
+        ? readPursuitState(packet.frame_rows, proposal.local.layout, proposal.obstacle) : null;
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!previous && !!scene && proposal.binding?.level_epoch === observation.level_epoch
+          && pursuitStateKey(scene) === pursuitStateKey(previous.predicted);
       return { admitted, reason: admitted ? 'tracked_pair_move_bound' : 'tracked_pair_context_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.crowd) {
@@ -272,11 +330,18 @@ export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
         const matched = !!actual && pursuitStateKey(actual) === pursuitStateKey(move.expected);
         return { matched, seal_prefix: true, reason: matched ? 'pursuit_forecast_confirmed' : 'pursuit_response_diverged_replan' };
       }
+      const step = proposal.walk?.[index];
+      if (step && proposal.obstacle !== undefined) {
+        const actual = readPursuitState(second, proposal.local.layout, proposal.obstacle);
+        const matched = !!actual && pursuitStateKey(actual) === pursuitStateKey(step.predicted);
+        return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
+          reason: matched ? 'pursuit_forecast_confirmed' : 'pursuit_response_diverged_replan' };
+      }
       const actual = positions(geometricComponents(second), proposal.local.layout), expected = proposal.plan.target;
       const matched = !!actual && same(actual.actor, expected.actor) && same(actual.peer, expected.peer);
       return { matched, seal_prefix: true, reason: matched ? 'both_sprite_positions_confirmed' : 'sprite_response_diverged_replan' };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index) {
       if (proposal.crowd) {
         const { local, current, move, obstacle } = proposal.crowd;
         if (after.levels_completed > before.levels_completed && witness?.epoch === before.level_epoch
@@ -291,7 +356,8 @@ export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
         pursuit = { ...local, verified, rejected, blocked: !actual, refs: [...local.refs.slice(-4), after.observation_ref] };
         return { events: [], ...(actual && actual.peers.length < current.peers.length ? { reviewEvidence: 'One tracked sprite disappeared on contact' } : {}) };
       }
-      const { at, local, plan } = proposal;
+      const leg = proposal.walk?.[index], at = leg?.from ?? proposal.at, plan = leg?.plan ?? proposal.plan;
+      const local = index > 0 ? memory ?? proposal.local : proposal.local;
       const direction = inputs.find(input => input[0] === plan.input)!;
       const trained = calibration?.epoch === local.epoch ? calibration : null;
       if (after.levels_completed > before.levels_completed && trained?.orders.length === 1 && trained.pushRef

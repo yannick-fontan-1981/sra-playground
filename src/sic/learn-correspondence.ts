@@ -4,6 +4,7 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { fieldConsensus, pairedReflectionConsensus } from './field-consensus.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { independentPredictionSupport, type PredictionTrial } from './independent-prediction.ts';
 import { observeRepeatedCells } from './observed-repeated-cells.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
@@ -30,7 +31,8 @@ const graph = compileStrategyGraph({ id: 'acquire_field_correspondence_from_retu
 const transforms = ['horizontal', 'vertical', 'half_turn', 'diagonal', 'antidiagonal'] as const;
 type State = { epoch: number; field: string; marker: number | null; hypotheses: string[]; samples: PredictionTrial<number>[] };
 type Candidate = { point: NativePoint; source: NativePoint; observed: number; expected: number; hypotheses: string[] };
-type Proposal = NativeProposal & { local: State; candidate: Candidate; box: NativeBox; field: NativeBox; needId: string };
+type Site = { candidate: Candidate; box: NativeBox; source: NativeBox };
+type Proposal = NativeProposal & Site & { local: State; field: NativeBox; needId: string; route?: Site[] };
 const key = (point: NativePoint) => point.join(',');
 const box = ([x, y]: NativePoint, [w, h]: NativePoint): NativeBox => [x, y, x + w - 1, y + h - 1];
 const asPoint = ([x, y]: NativePoint, field: RegularField): NativePoint => [field.xs[x]!, field.ys[y]!];
@@ -193,12 +195,36 @@ export function createSicLearnCorrespondence(id = learnCorrespondenceId): Native
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
       if (!witness) return null;
       const action = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
+      const steps = [{ action, point_binding: witness, expected_after: { value: candidate.expected } }];
+      const sites: Site[] = [{ candidate, box: target, source }];
+      if (matches.length && !fromRepeatedCells) {
+        const projected = { ...field, values: new Map(field.values) };
+        const used = new Set<string>();
+        for (let index = 1; index < Math.min(remaining, maximumCommittedActions, 24 - local.samples.length); index++) {
+          const previous = sites[index - 1]!.candidate;
+          const address = key(previous.point);
+          used.add(address);
+          projected.values.set(address, previous.expected);
+          const next = nominate(projected, local, observation.level_epoch, fromRepeatedCells)?.candidate;
+          if (!next || used.has(key(next.point)) || used.has(key(next.source))
+            || !matches.some(sample => sample.hypotheses.some(name => next.hypotheses.includes(name)))) break;
+          const target = box(next.point, field.size), source = box(next.source, field.size);
+          if (uniform(rows, target) !== next.observed || uniform(rows, source) !== next.expected) break;
+          const x = target[0] + Math.floor(field.size[0] / 2), y = target[1] + Math.floor(field.size[1] / 2);
+          const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
+          if (!binding) break;
+          const action = { action_ref: 'ACTION6', data: { x, y } };
+          actions.push(action);
+          steps.push({ action, point_binding: binding, expected_after: { value: next.expected } });
+          sites.push({ candidate: next, box: target, source });
+        }
+      }
       const objective = { kind: 'acquire_field_correspondence_from_returns', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['paired_cells'], parentObjective: parent, satisfactionContract: 'official_progress_after_independent_field_predictions' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const composition = 'learn-correspondence:' + need.id;
-      return { status: 'proposed', kind: id, local, candidate, box: target, field: area, needId: need.id,
-        actions, steps: [{ action, point_binding: witness, expected_after: { value: candidate.expected } }],
+      return { status: 'proposed', kind: id, local, candidate, box: target, source, field: area, needId: need.id,
+        actions, steps, ...(sites.length > 1 ? { route: sites } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -215,19 +241,26 @@ export function createSicLearnCorrespondence(id = learnCorrespondenceId): Native
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: composition } } };
     },
     before(proposal, index, packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref
-        && uniform(packet.frame_rows, proposal.box) === proposal.candidate.observed;
+      const site = proposal.route?.[index] ?? proposal;
+      const bound = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!proposal.route?.[index] && proposal.local.epoch === observation.level_epoch
+          && uniform(packet.frame_rows, site.source) === site.candidate.expected;
+      const admitted = bound && uniform(packet.frame_rows, site.box) === site.candidate.observed;
       return { admitted, reason: admitted ? 'paired_cells_are_current' : 'paired_cell_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = localReturn(proposal, first, second) === proposal.candidate.expected;
-      return { matched, seal_prefix: true, reason: matched ? 'observed_predicted_cell_value' : 'correspondence_prediction_refuted' };
+      const site = proposal.route?.[index] ?? proposal;
+      const matched = localReturn(proposal.field, site.box, first, second) === site.candidate.expected;
+      return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
+        reason: matched ? 'observed_predicted_cell_value' : 'correspondence_prediction_refuted' };
     },
-    record(before, after, _command, first, second, proposal) {
+    record(before, after, _command, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, candidate } = proposal, actual = localReturn(proposal, first, second);
+      const local = index > 0 ? state ?? proposal.local : proposal.local;
+      const site = proposal.route?.[index] ?? proposal, { candidate } = site;
+      const actual = localReturn(proposal.field, site.box, first, second);
       state = { ...local, hypotheses: actual === candidate.expected ? local.hypotheses : local.hypotheses.filter(name => !candidate.hypotheses.includes(name)),
         samples: [...local.samples, { address: key(candidate.point), expected: candidate.expected, actual, ref: after.observation_ref, hypotheses: candidate.hypotheses }] };
       return { events: [] };
@@ -237,11 +270,11 @@ export function createSicLearnCorrespondence(id = learnCorrespondenceId): Native
   };
 }
 
-function localReturn(proposal: Proposal, first: NativeRows, second: NativeRows): number | null {
-  const [l, t, r, b] = proposal.field, [x, y, u, v] = proposal.box;
+function localReturn([l, t, r, b]: NativeBox, target: NativeBox, first: NativeRows, second: NativeRows): number | null {
+  const [x, y, u, v] = target;
   for (let row = t; row <= b; row++) for (let col = l; col <= r; col++) {
     if (x <= col && col <= u && y <= row && row <= v) continue;
     if (first[row]?.[col] !== second[row]?.[col]) return null;
   }
-  return uniform(second, proposal.box);
+  return uniform(second, target);
 }
