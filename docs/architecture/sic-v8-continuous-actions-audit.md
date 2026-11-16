@@ -94,6 +94,32 @@ Les trajets s’arrêtent à un nouvel effet à mesurer, à un retour contradict
 | WA30 | Gagné, aucune série | Échec |
 | WEAV | Gagné, aucune série | Échec |
 
+## Repli et chemins confirmés sur le lot de 42 jeux
+
+Le lot de 42 jeux est rejoué dans les deux modes au niveau 1. Les essais excluent SELE et PRTL. Le contrôleur navigateur et le service exécutent chaque commande et le jeu renvoie ses images. Une série doit comporter au moins deux commandes du même plan effectivement exécutées.
+
+| Mode | Victoires avant → après | Jeux avec série avant → après | Reprises de décision avant → après |
+| --- | ---: | ---: | ---: |
+| SIC | 42 → 42 | 11 → 17 | 500 → 471 |
+| SIC Fallback | 26 → 30 | 10 → 17 | 1320 → 1116 |
+
+Les parcours SIC concordent sur 42 jeux. En Fallback, les parcours modifiés concernent G50T, SK48, SP80 et VOIS. Toute commande relève de SIC seul. Le journal confirme le retrait de la famille principale et son absence parmi les familles exécutantes pour 40 jeux. ELAS et POLA utilisent uniquement l’exploration publique dès le départ.
+
+| Jeu désormais continu dans les deux modes | SIC | SIC Fallback | Famille de repli utilisée pour le trajet |
+| --- | --- | --- | --- |
+| G50T | 2, 2, 2 · 27 commandes | 2, 2, 2 · 27 commandes | `sic_learn_remote_replay` |
+| KA59 | 2 · 15 commandes | 2 · 15 commandes | `sic_learn_contact_access` |
+| KLOT | 2 · 14 commandes | 2, 2 · 30 commandes | `sic_learn_selected_access` |
+| SK48 | 8, 7 · 19 commandes | 8, 7 · 19 commandes | `sic_learn_contact_order` |
+| SNAR | 5, 3 · 16 commandes | 2, 4 · 17 commandes | `sic_learn_grid_access` |
+| SP80 | 3 · 8 commandes | 3 · 8 commandes | `sic_learn_branch_alignment` |
+| VOIS | 3, 4 · 14 commandes | 3, 4 · 45 commandes | `sic_learn_reference_placement` |
+
+En repli, le déplacement ou la sélection mesurés pendant une exploration peuvent amorcer un autre planificateur. SK48 retient les projections du support et des pièces, VOIS suit la sélection et l’occupation des emplacements, SP80 mesure le mouvement d’un contributeur, et G50T relie un déplacement au début de l’enregistrement. Les sondes de mécanismes, les changements de terrain et les retours contradictoires interrompent la série.
+
+- **Sans série dans les deux modes** — CASC, CD82, CGWL, CWSE, DAME, DNOI, ELAS, ETAG, EVAS, FITE, FT09, FUIT, KATA, KEYD, LF52, LS19, POLA, S5I5, SIGN, SYME, TN36, TU93, VC33, WA30, WEAV.
+- **Niveaux encore non gagnés en Fallback** — DAME, FT09, FUIT, KATA, KEYD, S5I5, SIGN, TN36, TU93, VC33, WA30, WEAV.
+
 ## Référence avant extension
 
 La campagne locale utilise SIC seul sur le commit `e483a9d5`, à trois processus. Chaque passage part de l’image initiale et s’arrête à la première victoire du niveau 1. Une série contient plusieurs commandes exécutées sous le même plan engagé. Le délai est mesuré entre les lancements de deux commandes de cette série et inclut le retour du jeu et ses contrôles. Les délais mesurés dépendent aussi de la concurrence des processus.
