@@ -5,6 +5,7 @@ import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { linkedWindowCoverage, measureLinkedWindows, type RailWindow } from './linked-window-rail.ts';
 
 export const windowCoverageId = 'sic_window_coverage';
 export const learnWindowCoverageId = 'sic_configure_observed_receiver_fields';
@@ -26,7 +27,7 @@ const model = { maximal_group_required: false, one_use_for_run: true, configurat
   dual_field_operation_hypothesis: 'PAINT', single_field_operation_hypothesis: 'CAPTURE' };
 type Field = 'capacity' | 'filter' | 'second_field';
 type Value = number | null;
-type Window = { bbox: NativeBox; capacity: number; capacity_domain: number[]; filter: Value; filter_domain: number[];
+type Window = RailWindow & { capacity: number; capacity_domain: number[]; filter: Value; filter_domain: number[];
   second_field: { value: number; domain: number[] } | null };
 type Measured = { boxes: Window[]; word: { bbox: NativeBox; value: number }[]; colors: number[] };
 type Edit = { box: number; field: Field; point: NativePoint; desired: Value };
@@ -36,7 +37,7 @@ type Proposal = NativeProposal & { local: State; measurement: Measured; edit: Ed
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const value = (box: Window, field: Field) => field === 'second_field' ? box.second_field?.value ?? null : box[field];
 const settings = (box: Window) => [box.capacity, box.filter, box.second_field?.value ?? null];
-const captureSettings = (rows: NativeRows) => measure(rows) as Measured | null;
+const captureSettings = (rows: NativeRows) => measure(rows, true) as Measured | null;
 function fieldDomain(box: Window, field: Field): number[] {
   if (field === 'second_field') return box.second_field?.domain ?? [];
   return field === 'capacity' ? box.capacity_domain : box.filter_domain;
@@ -101,7 +102,12 @@ export function createSicWindowCoverage(family = windowCoverageId): NativeFamily
       const acquired = directionalReturn?.afterRef === ref && directionalReturn.levelEpoch === observation.level_epoch
         ? acquiredCapacity(directionalReturn.scene, measurement, directionalReturn.command) : null;
       if (learns && !prior && !acquired) return null;
-      const [choices, receipt] = await plansCooperative(measurement, model, execution);
+      const linked = measurement.boxes.some(box => box.signal_marker);
+      const rail = linked ? measureLinkedWindows(rows, measurement.boxes) : null;
+      if (linked && !rail) return null;
+      const paint = measurement.boxes.map(box => box.second_field !== null);
+      const [choices, receipt] = await plansCooperative(measurement, model, execution,
+        rail ? (_scene, settings) => linkedWindowCoverage(rail, measurement.colors, paint, settings) : undefined);
       if (receipt.truncated) return null;
       const goal = choices.filter(candidate => candidate.cost <= remaining).sort((a, b) => a.cost - b.cost)[0];
       if (!goal) return null;
@@ -149,10 +155,13 @@ export function createSicWindowCoverage(family = windowCoverageId): NativeFamily
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Configure the receivers to cover the visible sequence', mode: learns ? mode : edit ? 'assimilation' : 'solving',
-          situation: reused ? `Reuse the measured direction and verify that the selected receiver changes to capacity ${expected}.`
+          situation: rail ? edit ? 'Adjust a receiver so that linked windows can capture on the same beat'
+            : 'Run the measured route with the linked windows aligned on the same beat'
+            : reused ? `Reuse the measured direction and verify that the selected receiver changes to capacity ${expected}.`
             : edit ? 'The measured settings admit a conditional plan. Compare the field after this click.' :
             'The current settings cover all visible units in the model. The launch still needs a real return.',
           agenda: agenda?.entries ?? [], evidence, sequence, receivers: measurement.boxes.map(box => box.bbox),
+          ...(rail ? { signalLinks: rail.links.map(link => link.box) } : {}),
           ...(decision ? { triggerCard: decision.receipt.workflow } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],

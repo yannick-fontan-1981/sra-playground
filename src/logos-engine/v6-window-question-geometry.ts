@@ -14,6 +14,7 @@ export type WindowMeasurement = Record<string, any>;
 type R = WindowMeasurement;
 export type WindowSettings = (readonly [number, number | null, number | null])[];
 export type WindowPlanResult = [R[], R];
+type CoverageProjection = (measurement: R, settings: WindowSettings, model: R) => [boolean, R[]];
 export const digest = symbolicDigest;
 
 /** Counter.most_common keeps the first inserted value on a count tie. */
@@ -29,7 +30,7 @@ const coordinateKey = (x: number, y: number): string => `${x},${y}`;
 const modulo = (n: number, d: number): number => ((n % d) + d) % d;
 const pythonScalar = (value: unknown): string => value === null ? 'None' : value === true ? 'True' : value === false ? 'False' : String(value);
 
-export function measure(rows: NativeRows | null | undefined): R | null {
+export function measure(rows: NativeRows | null | undefined, allowSignalMarker = false): R | null {
   if (!rows?.length || !rows[0]?.length) return null;
   const cc = components(rows), boxes: R[] = [];
   for (const component of cc) {
@@ -37,9 +38,15 @@ export function measure(rows: NativeRows | null | undefined): R | null {
     if (h < 6 || w < 2 * h || w > 3 * h) continue;
     const cells = new Set<string>((component.cells as number[][]).map(([x, y]) => coordinateKey(x!, y!)));
     let ring = true;
+    const opening: number[] = [];
     for (let y = t!; y <= b! && ring; y++) for (let x = l!; x <= r!; x++) {
-      if ((x === l || x === r || y === t || y === b) && !cells.has(coordinateKey(x, y))) { ring = false; break; }
+      if ((x === l || x === r || y === t || y === b) && !cells.has(coordinateKey(x, y))) {
+        if (allowSignalMarker && y === b && Math.abs(x - (l! + r!) / 2) <= 1) opening.push(x);
+        else { ring = false; break; }
+      }
     }
+    const markerInks = new Set(opening.map(x => rows[b!]![x]!));
+    if (opening.length && (opening.length !== 3 || markerInks.size !== 1)) continue;
     if (!ring || (h - 2) % 3) continue;
     const unit = (h - 2) / 3, start = b! - unit, interior: number[] = [], slots: R[] = [];
     for (let y = t! + 1; y < b!; y++) for (let x = l! + 1; x < r!; x++) interior.push(rows[y]![x]!);
@@ -98,7 +105,8 @@ export function measure(rows: NativeRows | null | undefined): R | null {
     boxes.push({ bbox: [l, t, r, b], border: component.value, base, unit, slots, capacity,
       capacity_domain: fixed ? [slots.length] : Array.from({ length: slots.length }, (_, i) => i + 1),
       capacity_point: [Math.floor((l! + r!) / 2), start], filter, filter_domain: domain, filter_point: filterPoint,
-      wildcard_hypothesis: filter === null, fixed_capacity: fixed, left_field: leftField, second_field: output });
+      wildcard_hypothesis: filter === null, fixed_capacity: fixed, left_field: leftField, second_field: output,
+      ...(opening.length ? { signal_marker: { point: [opening[1]!, b!], ink: [...markerInks][0]! } } : {}) });
   }
   if (boxes.length < 2 || new Set(boxes.map(box => `${box.bbox[2] - box.bbox[0]},${box.bbox[3] - box.bbox[1]}`)).size !== 1) return null;
   boxes.sort((a, b) => a.bbox[1] - b.bbox[1] || a.bbox[0] - b.bbox[0]);
@@ -176,11 +184,11 @@ function searchDomain(measurement: R, model: R): SearchDomain {
 
 /** Lazy equivalent of product(*[product(capacity, filter, output), ...]).
  * The rightmost dimension varies fastest, including the empty product. */
-function* configurations(axes: readonly any[][]): Generator<any[][]> {
+function* configurations(axes: readonly any[][]): Generator<WindowSettings> {
   if (axes.some(values => !values.length)) return;
   const indexes = axes.map(() => 0);
   for (;;) {
-    const settings: any[][] = [];
+    const settings: WindowSettings = [];
     for (let index = 0; index < axes.length; index += 3) settings.push([
       axes[index]![indexes[index]!], axes[index + 1]![indexes[index + 1]!], axes[index + 2]![indexes[index + 2]!],
     ]);
@@ -195,9 +203,9 @@ function cyclicSteps(domain: readonly any[], desired: unknown, current: unknown)
   if (next < 0 || previous < 0 || !domain.length) throw new TypeError('A source edit value is absent from its declared cycle');
   return modulo(next - previous, domain.length);
 }
-function* candidates(measurement: R, model: R, axes: readonly any[][]): Generator<R | null> {
+function* candidates(measurement: R, model: R, axes: readonly any[][], project: CoverageProjection = coverage): Generator<R | null> {
   for (const settings of configurations(axes)) {
-    const [okay, receipts] = coverage(measurement, settings, model);
+    const [okay, receipts] = project(measurement, settings, model);
     if (!okay) { yield null; continue; }
     const edits: R[] = [];
     for (let index = 0; index < Math.min(measurement.boxes.length, settings.length); index++) {
@@ -215,11 +223,11 @@ function* candidates(measurement: R, model: R, axes: readonly any[][]): Generato
   }
 }
 
-export function plans(measurement: R, model: R): WindowPlanResult {
+export function plans(measurement: R, model: R, project?: CoverageProjection): WindowPlanResult {
   const { axes, bound } = searchDomain(measurement, model);
   if (bound.truncated) return [[], bound];
   const result: R[] = [];
-  for (const candidate of candidates(measurement, model, axes)) if (candidate) result.push(candidate);
+  for (const candidate of candidates(measurement, model, axes, project)) if (candidate) result.push(candidate);
   return [result, bound];
 }
 
@@ -230,15 +238,15 @@ function interrupted(execution: NativeExecution, completed: number): R | null {
 }
 /** Native scheduling adaptation only. Source budgets still use their own
  * per-coverage clock. An interrupted enumeration exposes no partial plans. */
-export async function plansCooperative(measurement: R, model: R, execution?: NativeExecution): Promise<WindowPlanResult> {
-  if (!execution) return plans(measurement, model);
+export async function plansCooperative(measurement: R, model: R, execution?: NativeExecution, project?: CoverageProjection): Promise<WindowPlanResult> {
+  if (!execution) return plans(measurement, model, project);
   const { axes, bound } = searchDomain(measurement, model);
   if (bound.truncated) return [[], bound];
   const incomplete = (detail: R): WindowPlanResult => [[], { ...bound, truncated: true, native_search_incomplete: detail }];
   let completed = 0, stop = interrupted(execution, completed);
   if (stop) return incomplete(stop);
   const result: R[] = [];
-  for (const candidate of candidates(measurement, model, axes)) {
+  for (const candidate of candidates(measurement, model, axes, project)) {
     completed++; if (candidate) result.push(candidate);
     stop = interrupted(execution, completed); if (stop) return incomplete(stop);
     if (completed % 32 === 0) {

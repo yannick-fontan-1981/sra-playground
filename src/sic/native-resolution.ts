@@ -952,6 +952,10 @@ export function readNativeResolution(agent: {
       const box = bounds(receiver);
       if (box) subjects.push({ label: 'Configurable receiver', box });
     }
+    if (Array.isArray(card?.signalLinks)) for (const link of card.signalLinks) {
+      const box = bounds(link);
+      if (box) subjects.push({ label: 'Signal between receivers', box });
+    }
   }
   if (situationCard && (family === directionalReceptionId || family === learnDirectionalReceptionId)) {
     for (const [field, label] of [['actor', 'Controlled body'], ['dial', 'Orientation control'], ['landing', 'Expected piece position']] as const) {
