@@ -19,6 +19,14 @@ export interface NativeStateGraphRoot extends JsonObject {
 export interface NativeStateFragment { readonly id: string; readonly value: JsonObject }
 export interface SplitNativeState { readonly root: NativeStateGraphRoot; readonly fragments: readonly NativeStateFragment[] }
 interface Sized { node: Encoded; cost: number }
+interface PriorNativeState {
+  root: NativeStateGraphRoot;
+  readFragment(id: string): unknown;
+}
+type SplitOptions = { maxFragmentNodes?: number; prior?: PriorNativeState };
+const ownedRoots = new WeakSet<NativeStateGraphRoot>();
+const ownedFragments = new WeakMap<object, NativeStateFragment>();
+const fragmentsByNode = new WeakMap<object, { fragment: NativeStateFragment; reference: Sized }>();
 // Entries are installed only after the ordinary encoder has validated a deeply
 // frozen input subtree. Mutable descendants disqualify the entire container.
 // Height and all referenced fragments accompany the cached representation so
@@ -81,13 +89,22 @@ function encodedCanonical(node: Encoded): string {
  * Pixel matrices receive their own reusable fragments; oversized objects and
  * arrays become ordered groups. No entry, frame or history is truncated.
  */
-export function splitNativeState(value: unknown, component: string, options: { maxFragmentNodes?: number } = {}): SplitNativeState {
+export function splitNativeState(value: unknown, component: string, options: SplitOptions = {}): SplitNativeState {
   assertUnicode(component);
   if (!component) throw new TypeError('A native state component identity is required');
   const limit = options.maxFragmentNodes ?? DEFAULT_BOUND;
   if (!Number.isSafeInteger(limit) || limit < 32 || limit > 65_536) throw new RangeError('Native fragment bound must be between 32 and 65536');
   // Reserve the three scalar/container nodes used by the outer root envelope.
   const bound = limit - 3;
+  // The prior graph supplies comparison candidates. Each new raw subtree still
+  // passes the surface checks, traversal bounds, and lossless scalar encoding.
+  const prior = options.prior && ownedRoots.has(options.prior.root) ? options.prior : undefined;
+  const priorNode = (node: Encoded | undefined): Encoded | undefined => {
+    if (!node || typeof node !== 'object' || node.kind !== 'ref') return node;
+    const found = prior?.readFragment(node.id);
+    const fragment = found && typeof found === 'object' ? ownedFragments.get(found) : undefined;
+    return fragment?.id === node.id ? fragment.value.node as Encoded : undefined;
+  };
   const fragments = new Map<string, NativeStateFragment>(), ancestors = new WeakSet<object>();
   const emitted: NativeStateFragment[] = [];
   const measured = new WeakMap<object, { value: Sized; height: number; immutable: boolean; start: number; end: number }>();
@@ -101,11 +118,17 @@ export function splitNativeState(value: unknown, component: string, options: { m
     emitted.push(fragment);
   };
   const fragment = (node: Encoded): Sized => {
+    const cached = node !== null && typeof node === 'object' ? fragmentsByNode.get(node) : undefined;
+    if (cached) { emit(cached.fragment); return cached.reference; }
     const value = immutableJson({ profile: NATIVE_STATE_GRAPH_PROFILE, node }) as JsonObject;
     const bytes = new TextEncoder().encode(`{"node":${encodedCanonical(node)},"profile":${JSON.stringify(NATIVE_STATE_GRAPH_PROFILE)}}`);
     const id = `${NATIVE_STATE_FRAGMENT_PREFIX}${sha256Bytes(bytes)}`;
-    emit(fragments.get(id) ?? Object.freeze({ id, value }));
-    return { node: ownedEncoded({ kind: 'ref', id }), cost: 3 };
+    const evidence = fragments.get(id) ?? Object.freeze({ id, value });
+    const reference: Sized = { node: ownedEncoded({ kind: 'ref', id }), cost: 3 };
+    emit(evidence);
+    ownedFragments.set(evidence.value, evidence);
+    if (node !== null && typeof node === 'object') fragmentsByNode.set(node, { fragment: evidence, reference });
+    return reference;
   };
   const combine = (kind: 'concat' | 'merge', children: Sized[]): Sized => {
     // A flat collection can itself be enormous: bound the reference fanout too.
@@ -121,7 +144,7 @@ export function splitNativeState(value: unknown, component: string, options: { m
     }
     return { node: ownedEncoded({ kind, parts: Object.freeze(parts.map(p => p.node)) }), cost: 3 + parts.reduce((n, p) => n + p.cost, 0) };
   };
-  const visitRaw = (input: unknown, depth: number): Sized => {
+  const visitRaw = (input: unknown, depth: number, previous?: Encoded): Sized => {
     if (depth > 128) throw new TypeError('Native state nesting exceeds the V7 structural contract');
     if (input === null || typeof input === 'boolean') return { node: input, cost: 1 };
     if (typeof input === 'string') { assertUnicode(input); return { node: input, cost: 1 }; }
@@ -129,7 +152,10 @@ export function splitNativeState(value: unknown, component: string, options: { m
       if (!Number.isFinite(input)) throw new TypeError('Native state numbers must be finite');
       if (Number.isSafeInteger(input) && !Object.is(input, -0)) return { node: input, cost: 1 };
       const bytes = new Uint8Array(8); new DataView(bytes.buffer).setFloat64(0, input, false);
-      return { node: ownedEncoded({ kind: 'float64', bits: [...bytes].map(byte => byte.toString(16).padStart(2, '0')).join('') }), cost: 3 };
+      const bits = [...bytes].map(byte => byte.toString(16).padStart(2, '0')).join('');
+      const before = priorNode(previous);
+      return { node: before && typeof before === 'object' && before.kind === 'float64' && before.bits === bits
+        ? before : ownedEncoded({ kind: 'float64', bits }), cost: 3 };
     }
     if (typeof input !== 'object') throw new TypeError('Native state requires explicit JSON values');
     if (!Array.isArray(input) && !isJsonObject(input)) throw new TypeError('Native state requires plain objects and arrays');
@@ -167,11 +193,14 @@ export function splitNativeState(value: unknown, component: string, options: { m
           }
         }
       }
+      const before = priorNode(previous);
       if (array) {
-        const children = entries.map(([, value]) => visit(value, depth + 1));
+        const priorArray = before && typeof before === 'object' && before.kind === 'array' ? before : undefined;
+        const children = entries.map(([, value], index) => visit(value, depth + 1, priorArray?.items[index]));
         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
         if (cost <= bound) {
-          const node = ownedEncoded({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
+          const node = priorArray?.items.length === children.length && children.every((child, i) => child.node === priorArray.items[i])
+            ? priorArray : ownedEncoded({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
           const pixelMatrix = input.length > 0 && input.every(row => Array.isArray(row) && row.length > 0 && row.every(v => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0 && v <= 255));
           if (pixelMatrix && cost >= 512) {
             return fragment(node);
@@ -187,9 +216,16 @@ export function splitNativeState(value: unknown, component: string, options: { m
         if (group.length) groups.push(fragment(ownedEncoded({ kind: 'array', items: Object.freeze(group.map(c => c.node)) })));
         return combine('concat', groups);
       }
-      const children = entries.sort(([a], [b]) => compareUnicode(a, b)).map(([name, value]) => [name, visit(value, depth + 1)] as const);
+      const priorObject = before && typeof before === 'object' && before.kind === 'object' ? before : undefined;
+      const children = entries.sort(([a], [b]) => compareUnicode(a, b)).map(([name, value]) =>
+        [name, visit(value, depth + 1, priorObject && Object.hasOwn(priorObject.members, name) ? priorObject.members[name] : undefined)] as const);
       const cost = 3 + children.reduce((n, [, child]) => n + child.cost, 0);
-      if (cost <= bound) return { node: ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(children.map(([name, child]) => [name, child.node]))) }), cost };
+      if (cost <= bound) {
+        const node = priorObject && Object.keys(priorObject.members).length === children.length
+          && children.every(([name, child]) => Object.hasOwn(priorObject.members, name) && child.node === priorObject.members[name])
+          ? priorObject : ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(children.map(([name, child]) => [name, child.node]))) });
+        return { node, cost };
+      }
       const groups: Sized[] = []; let group: (readonly [string, Sized])[] = [], groupCost = 3;
       for (const [name, original] of children) {
         const child = original.cost + 3 > bound ? fragment(original.node) : original;
@@ -200,7 +236,7 @@ export function splitNativeState(value: unknown, component: string, options: { m
       return combine('merge', groups);
     } finally { ancestors.delete(input); }
   };
-  const visit = (input: unknown, depth: number): Sized => {
+  const visit = (input: unknown, depth: number, previous?: Encoded): Sized => {
     if (input !== null && typeof input === 'object') {
       const cached = frozenStateNodes.get(input);
       if (cached?.limit === limit) {
@@ -217,7 +253,7 @@ export function splitNativeState(value: unknown, component: string, options: { m
       const start = emitted.length, measure = { height: 0, immutable: Object.isFrozen(input) };
       metrics.push(measure);
       let value: Sized;
-      try { value = visitRaw(input, depth); } finally { metrics.pop(); }
+      try { value = visitRaw(input, depth, previous); } finally { metrics.pop(); }
       const end = emitted.length;
       measured.set(input, { value, ...measure, start, end });
       // Small tuple leaves are cheaper to encode than to retain independently;
@@ -228,11 +264,13 @@ export function splitNativeState(value: unknown, component: string, options: { m
       }
       note(measure.height, measure.immutable); return value;
     }
-    const value = visitRaw(input, depth); note(0, true); return value;
+    const value = visitRaw(input, depth, previous); note(0, true); return value;
   };
-  const encoded = visit(value, 0);
-  return Object.freeze({ root: immutableJson({ profile: NATIVE_STATE_GRAPH_PROFILE, component, root: encoded.node as JsonValue }) as NativeStateGraphRoot,
-    fragments: Object.freeze([...fragments.values()]) });
+  const encoded = visit(value, 0, prior?.root.root as Encoded | undefined);
+  const root = prior?.root.component === component && encoded.node === prior.root.root ? prior.root
+    : immutableJson({ profile: NATIVE_STATE_GRAPH_PROFILE, component, root: encoded.node as JsonValue }) as NativeStateGraphRoot;
+  ownedRoots.add(root);
+  return Object.freeze({ root, fragments: Object.freeze([...fragments.values()]) });
 }
 
 export function isNativeStateGraph(value: unknown): value is NativeStateGraphRoot {

@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import test from 'node:test';
 import { immutableJson } from '../src/logos-engine/canonical.ts';
 import { sha256Bytes } from '../src/logos-engine/v6-hash.ts';
-import { decodeNativeState, encodeNativeState } from '../src/logos-engine/v6-knowledge-store.ts';
+import { decodeNativeState, encodeNativeState, NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { hydrateNativeState, isHydratedNativeJson, isNativeStateGraph, splitNativeState, type SplitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 
 function restore(graph: SplitNativeState) {
@@ -45,6 +45,42 @@ test('fragment identity is stable across component roots and a new episode keeps
   assert.deepEqual(left.fragments, right.fragments);
   assert.notDeepEqual(left.root, right.root);
   assert.deepEqual(restore(right), { observations: [rows, rows] });
+});
+
+test('a checkpoint reuses unchanged fragments from an earlier owned root and encodes changed data exactly', () => {
+  const rows = Array.from({ length: 32 }, (_, y) => Array.from({ length: 32 }, (_, x) => (x + y) % 16));
+  const input = { unchanged: { rows, balance: -0 }, mutable: { moves: [1, 2], score: 0 } };
+  const first = splitNativeState(input, 'checkpoint');
+  const fragments = new Map(first.fragments.map(fragment => [fragment.id, fragment.value]));
+  const prior = { root: first.root, readFragment: (id: string) => fragments.get(id) };
+  const same = splitNativeState(structuredClone(input), 'checkpoint', { prior });
+  assert.equal(same.root, first.root);
+  assert.equal(same.fragments[0], first.fragments[0]);
+  input.mutable.score = 1;
+  input.mutable.moves.push(3);
+  const changed = splitNativeState(structuredClone(input), 'checkpoint', { prior });
+  assert.notEqual(changed.root, first.root);
+  assert.equal(changed.fragments[0], first.fragments[0]);
+  assert.deepEqual(changed, splitNativeState(input, 'checkpoint'));
+  assert.deepEqual(restore(changed), input);
+  const next = splitNativeState(input, 'next-checkpoint', { prior });
+  assert.equal(next.fragments[0], first.fragments[0]);
+  assert.deepEqual(next, splitNativeState(input, 'next-checkpoint'));
+
+  const untrustedPrior = { root: first.root, readFragment: () => ({ ...same.fragments[0]!.value, node: false }) };
+  assert.deepEqual(splitNativeState(input, 'checkpoint', { prior: untrustedPrior }), changed);
+  Object.defineProperty(input.mutable, 'score', { get: () => assert.fail('checkpoint invoked an accessor'), enumerable: true });
+  assert.throws(() => splitNativeState(input, 'checkpoint', { prior }), /enumerable data properties/);
+});
+
+test('a checkpoint cannot replace a fragment introduced by its own write', async () => {
+  const rows = Array.from({ length: 32 }, () => Array<number>(32).fill(1));
+  const id = splitNativeState(rows, 'checkpoint').fragments[0]!.id;
+  const store = new NativeKnowledgeStore('fragment-identity-test', 'test');
+  const initial = store.memory;
+  await assert.rejects(store.commit([{ id, kind: 'component_state', component: 'checkpoint', value: rows }],
+    { workflow: 'test', step: 'test', statement: 'reject-fragment-replacement' }), /cannot change kind or scope/);
+  assert.equal(store.memory, initial);
 });
 
 test('typed reference envelopes preserve reserved user fields, Unicode and Float64 bits', () => {

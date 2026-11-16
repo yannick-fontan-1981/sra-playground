@@ -6,7 +6,7 @@ import { executeWorkflow, validateCompiledModule } from './interpreter.ts';
 import type { CompiledModule, ExecutionOptions, JsonObject, JsonValue, Primitive } from './ir.ts';
 import { NativeSrcProgram, V6_NATIVE_PROGRAM_REFERENCE } from './v6-src-program.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
-import { hydrateNativeState, isNativeStateGraph, splitNativeState } from './v6-native-state-graph.ts';
+import { hydrateNativeState, isNativeStateGraph, splitNativeState, type NativeStateGraphRoot } from './v6-native-state-graph.ts';
 
 const FLOAT = '$v6_float64';
 const OBJECT = '$v6_object';
@@ -94,6 +94,7 @@ export class NativeKnowledgeStore {
   private busy = false;
   private callbacks = new Map<string, Readonly<Record<string, Primitive>>>();
   private hydrated = new Map<string, { node: KnowledgeNode; fragments: readonly KnowledgeNode[]; value: JsonValue }>();
+  private lastPublicTransition: NativeStateGraphRoot | undefined;
 
   constructor(sourceDigest: string, scope: string, maxNodes = 16_384) {
     this.scope = scope;
@@ -141,6 +142,7 @@ export class NativeKnowledgeStore {
     this.busy = true;
     try {
       const staged = this.kernel.beginTransaction(this.state);
+      let lastPublicTransition = this.lastPublicTransition;
       for (const write of writes) {
         // Fragment before the ordinary V7 JSON boundary: a complete observed
         // episode can exceed one million values without any individual node
@@ -148,7 +150,14 @@ export class NativeKnowledgeStore {
         // and content-addressed, so repeated frames/evidence are shared.
         let storedValue: JsonValue;
         if (GRAPH_STATE_KINDS.has(write.kind)) {
-          const graph = splitNativeState(write.value, write.id);
+          // Consecutive public transitions have distinct identities and often
+          // share most of their visual evidence. Reuse the last closed root
+          // as a comparison for this stream only, including within a batch.
+          const publicTransition = write.kind === 'transition_evidence' && write.component === 'public_transition';
+          const root = staged.node(write.id)?.value ?? (publicTransition ? lastPublicTransition : undefined);
+          const graph = splitNativeState(write.value, write.id, isNativeStateGraph(root)
+            ? { prior: { root, readFragment: id => staged.node(id)?.value } } : undefined);
+          if (publicTransition) lastPublicTransition = graph.root;
           for (const fragment of graph.fragments) {
             const existing = staged.node(fragment.id);
             if (existing) {
@@ -182,6 +191,7 @@ export class NativeKnowledgeStore {
         await staged.commit(immutableJson(node) as JsonObject, cause);
       }
       this.state = staged.finish();
+      this.lastPublicTransition = lastPublicTransition;
     } finally { this.busy = false; }
   }
 

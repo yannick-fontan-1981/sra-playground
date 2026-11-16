@@ -1018,3 +1018,26 @@ La campagne consolidée des niveaux 1 à 4 attribue des commandes à la famille 
 Le coût moyen de l’appel qui acquiert un retour passe du niveau 1 au niveau 4 de **129 à 281 ms sur LS19** et de **151 à 404 ms sur LS20**, même avec les séries rapides. Le nombre de nœuds monte respectivement de 394 à 1 144 et de 432 à 1 300. Chaque transaction copie encore l’index des nœuds et le tableau des deltas lors de la publication de l’état immuable. Le relevé de temps par appel ne détermine pas à lui seul quelle part revient à ces copies.
 
 Un profil CPU séparé de LS19 niveau 4 relève **9,03 s inclusives** dans le découpage et l’encodage de l’état avant son écriture, sur **26,37 s** de profil. Les écritures dédupliquent les fragments déjà connus après ce traitement. Le profil distingue donc deux coûts à mesurer séparément, la préparation des fragments et la publication de l’historique.
+
+### Réutilisation des fragments de réconciliation
+
+L’encodeur compare les données validées au dernier état de la même entrée et, pour les retours publics successifs, au dernier retour encodé. Il réutilise les sous-arbres immuables qui correspondent exactement. Lorsqu’un sous-arbre fragmenté est conservé, il récupère aussi sa référence et son empreinte. La forme des objets, l’ordre des tableaux, les bits des nombres et la chaîne historique restent dans le format existant.
+
+Mesure instrumentée à un worker, un passage par variante, depuis le niveau 1. La référence `f9ceefb6` inclut déjà les séries rapides et a été publiée dans la version 111 du site.
+
+| Jeu | Niveau | Temps référence | Temps avec réutilisation | Réduction du temps |
+| --- | ---: | ---: | ---: | ---: |
+| LS19 | 1 | 2,203 s | 2,103 s | 4,5 % |
+| LS19 | 2 | 5,706 s | 5,463 s | 4,3 % |
+| LS19 | 3 | 11,829 s | 10,502 s | 11,2 % |
+| LS19 | 4 | 20,224 s | 19,005 s | 6,0 % |
+| LS20 | 1 | 4,143 s | 4,065 s | 1,9 % |
+| LS20 | 2 | 11,921 s | 11,428 s | 4,1 % |
+| LS20 | 3 | 18,222 s | 17,619 s | 3,3 % |
+| LS20 | 4 | 21,470 s | 20,526 s | 4,4 % |
+
+Le temps total passe de **95,718 s à 90,711 s**, avec un temps d’encodage mesuré qui passe de **34,30 s à 30,63 s**. Les **287 commandes et leurs retours complets**, animations comprises, sont identiques. Chaque action reste acquise et les comptes de reprises concordent niveau par niveau.
+
+Le rejeu de réconciliation utilise le même identifiant de session et des horloges figées pour les deux variantes. L’empreinte de la chaîne des deltas est identique à la fin de chacun des huit niveaux. Le niveau 4 se ferme avec **12 960 deltas sur LS19** et **13 869 sur LS20**. Les acquisitions atteignent respectivement 143 et 144.
+
+Au niveau 4 de la référence, les **286 transactions** de LS19 cumulent **114,04 ms** pour la copie de l’index des nœuds et **12,88 ms** pour la copie du tableau des deltas. Les **275 transactions** de LS20 cumulent **111,35 ms** et **14,49 ms** respectivement. La publication immuable qui suit ces copies coûte **1,14 s** sur LS19 et **1,65 s** sur LS20. Au niveau 1, cette publication coûte **37 ms** et **46 ms**.
