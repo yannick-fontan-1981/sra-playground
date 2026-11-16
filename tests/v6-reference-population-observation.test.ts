@@ -88,6 +88,28 @@ test('fresh and retained projections detach all mutable measured and inherited f
   assert.deepEqual(measureReferencePopulation(rows), first);
 });
 
+test('a surplus piece can be measured without expanding the reference itself', () => {
+  const rows = clone(fixture.rasters.base), first = measureReferencePopulation(rows)!;
+  const [oy, ox] = first.offset, pitch = first.q;
+  const [left, top, right, bottom] = first.zone_box;
+  const spare = first.floor.find(([row, col]: [number, number]) => {
+    const y = oy + row * pitch, x = ox + col * pitch;
+    const outside = y + pitch < top || y > bottom || x + pitch < left || x > right;
+    return outside && rows.slice(y, y + pitch - 1).every((line: number[]) =>
+      line.slice(x, x + pitch - 1).every(value => value === first.background));
+  });
+  assert.ok(spare);
+  const [row, col] = spare, y = oy + row * pitch, x = ox + col * pitch;
+  for (let dy = 0; dy < pitch - 1; dy++) rows[y + dy].fill(first.bodies[0].appearance, x, x + pitch - 1);
+  assert.equal(measureReferencePopulation(rows), null);
+  const scene = measureReferencePopulation(rows, null, { allowSurplus: true });
+  assert.ok(scene);
+  assert.equal(scene.population, first.population + 1);
+  assert.deepEqual(scene.target, first.target);
+  assert.ok(scene.bodies.some((body: R) => referencePopulationCellKey(body.cell) === referencePopulationCellKey(spare)));
+  assert.deepEqual(measureReferencePopulation(rows, scene), scene);
+});
+
 test('retained occupancy records an appearance change without inventing its color rule', () => {
   const rows = clone(fixture.rasters.base), first = measureReferencePopulation(rows)!;
   const body = first.bodies[0], [oy, ox] = first.offset, [y, x] = body.cell;

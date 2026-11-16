@@ -36,7 +36,7 @@ function measuredPixel(rows: NativeRows, y: number, x: number): number {
   return rows[y]![x]!;
 }
 
-export function measureReferencePopulation(rows: NativeRows, retained: R | null = null): R | null {
+export function measureReferencePopulation(rows: NativeRows, retained: R | null = null, options?: { allowSurplus?: boolean }): R | null {
   if (retained && Object.keys(retained).length) {
     validateRows(rows);
     const pitch = retained.q, size = pitch - 1, [oy, ox] = retained.offset, bodies: R[] = [];
@@ -109,7 +109,7 @@ export function measureReferencePopulation(rows: NativeRows, retained: R | null 
     const bodyParts = squares.filter(part => part.scale === pitch - 1 && part.bbox[3] < lowerBoundary
       && ![background, empty, zone.color].includes(part.color)
       && part.bbox[0] % pitch === ox && part.bbox[1] % pitch === oy);
-    if (bodyParts.length !== target.length) continue;
+    if (bodyParts.length !== target.length && !(options?.allowSurplus && bodyParts.length > target.length)) continue;
     const bodies = bodyParts.map(part => ({ cell: [Math.floor((part.bbox[1] - oy) / pitch), Math.floor((part.bbox[0] - ox) / pitch)], appearance: part.color }))
       .sort((a, b) => orderCell(a.cell, b.cell));
     const desired = target.map(([y, x, appearance]) => [Math.floor((zy - oy) / pitch) + y!, Math.floor((zx - ox) / pitch) + x!, appearance]);
@@ -149,13 +149,15 @@ export function referencePopulationPaths(start: readonly number[], floor: CellCo
   return found;
 }
 
+export function referencePopulationNeighborhood([y, x]: readonly number[], occupied: ReadonlySet<string>) {
+  let mask = 0, degree = 0;
+  for (const [index, [dy, dx]] of [[-1, 0], [1, 0], [0, -1], [0, 1]].entries()) {
+    if (occupied.has(referencePopulationCellKey([y! + dy!, x! + dx!]))) { mask += 1 << index; degree++; }
+  }
+  return { local_direction_mask: mask, degree };
+}
+
 export function referencePopulationLocalRelations(scene: R): R[] {
-  const occupied = new Set(scene.bodies.map((body: R) => referencePopulationCellKey(body.cell)));
-  return scene.bodies.map((body: R) => {
-    const [y, x] = body.cell; let mask = 0, degree = 0;
-    for (const [index, [dy, dx]] of [[-1, 0], [1, 0], [0, -1], [0, 1]].entries()) {
-      if (occupied.has(referencePopulationCellKey([y + dy!, x + dx!]))) { mask += 1 << index; degree++; }
-    }
-    return { local_direction_mask: mask, degree, appearance: body.appearance };
-  });
+  const occupied = new Set<string>(scene.bodies.map((body: R) => referencePopulationCellKey(body.cell)));
+  return scene.bodies.map((body: R) => ({ ...referencePopulationNeighborhood(body.cell, occupied), appearance: body.appearance }));
 }

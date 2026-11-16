@@ -1447,13 +1447,18 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === populationPlacementId || family === verifyReferencePlacementId)) {
-    for (const [field, label] of [['piece', 'Selected piece'], ['target', 'Receiving position'], ['reference', 'Visible reference']] as const) {
+    const targetLabel = card?.supportingPlacement ? 'Position beside the reference' : 'Receiving position';
+    for (const [field, label] of [['piece', 'Selected piece'], ['target', targetLabel], ['reference', 'Visible reference']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
     if (Array.isArray(card?.neighbors)) for (const neighbor of card.neighbors) {
       const box = bounds(neighbor);
       if (box) subjects.push({ label: 'Neighbor with an observed color change', box });
+    }
+    if (Array.isArray(card?.predictedNeighbors)) for (const neighbor of card.predictedNeighbors) {
+      const box = bounds(neighbor);
+      if (box) subjects.push({ label: 'Neighbor expected to change color', box });
     }
   }
   if (situationCard && (family === chartRouteId || family === learnChartRouteId)) {
