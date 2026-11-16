@@ -3,6 +3,7 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
 import { assessRoomStep, contactDirections as directions, nextRoomStep, shiftTile as shift, startRoomRoute,
   tileBox as footprint, type ContactStep as Step, type RoomRoute, type RoomStep } from './revealed-compartment-route.ts';
@@ -97,12 +98,18 @@ function outcome(rows: NativeRows, proposal: Proposal) {
 
 export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
   let state: State | null = null;
-  let previousWin: { completed: number; side: number; ref: string } | null = null;
+  let previousWin: { completed: number; side: number; ref: string; usedRoomMap?: boolean } | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyFrameContactId,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (!previousWin?.usedRoomMap || previousWin.completed !== observation.levels_completed) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal?.local.roomRoute?.resources ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !directions.every(([ref]) => observation.available_action_refs.includes(ref))
@@ -123,10 +130,12 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
         ...(roomRoute && learned && learned.ref !== ref ? [learned.ref] : [])];
       const mode = execution?.reasoningMode ?? 'exploration';
       const action = { action_ref: step.direction[0], data: {} };
-      const facts = { eligibleProbe: !local.refs.length && !local.seated,
-        routeSupported: !!local.refs.length && !local.seated, knownInteraction: local.seated, mode };
+      const probeControl = roomStep?.contact === true && (roomStep.intent === 'survey' || roomStep.intent === 'open');
+      const probe = !local.refs.length || probeControl;
+      const facts = { eligibleProbe: probe && !local.seated,
+        routeSupported: !probe && !local.seated, knownInteraction: local.seated, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
-      const strategy = local.seated ? 'P02' : local.refs.length ? 'P07' : 'P05';
+      const strategy = local.seated ? 'P02' : probe ? 'P05' : 'P07';
       if (decision?.result !== strategy) return null;
       const parent = 'G_official_completion';
       const objective = { kind: roomRoute ? 'reach_frame_via_observed_compartments' : 'test_contact_with_compatible_frame', scope: ref.split(':revision:', 1)[0]!,
@@ -140,7 +149,15 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
         open_access: 'Reach the remaining control and check whether it removes the barrier between the rooms',
         traverse: 'Cross the verified passage using floor observed when the rooms were lit',
       } as const;
+      const resourceSituations = {
+        refill: 'Reach the visible refill before the movement reserve runs out',
+        release: 'Free a visible capacity unit while keeping the observed map',
+        survey: 'Reach the control that reveals the next uncharted room',
+        open: 'Open the gate between two surveyed rooms without reserving capacity',
+        exit: 'Reach the exit through the opened gates and remembered terrain',
+      } as const;
       const situation = local.seated ? 'Test the direction into the frame after the piece and frame joined visually'
+        : roomStep?.intent ? resourceSituations[roomStep.intent]
         : roomRoute ? roomSituations[roomRoute.phase] : strategy === 'P05' ? 'Check that the direction moves the piece by one tile'
           : 'Approach the frame through the visible surface and revise the route if a step is refused';
       return {
@@ -150,11 +167,14 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
-        sicSituationCard: { strategy, need: roomRoute ? 'Reach the exit with the two room maps retained' : 'Test contact with the receiving frame',
+        sicSituationCard: { strategy, need: roomRoute?.resources ? 'Reach the exit before the action reserve runs out'
+          : roomRoute ? 'Reach the exit with the two room maps retained' : 'Test contact with the receiving frame',
           situation, evidence, agenda: [], mode, triggerCard: decision.receipt.workflow, actor: footprint(local.at, scene.side),
           focus: roomStep ? footprint(roomStep.target, scene.side) : scene.frame.bbox, landing: footprint(step.at, scene.side),
           ...(roomRoute?.passage ? { passage: footprint(roomRoute.passage, scene.side) } : {}),
           ...(roomRoute?.capacity ? { capacity: roomRoute.capacity.box } : {}),
+          ...(roomRoute?.resources ? { reserve: roomRoute.resources.meter.bar, capacity: roomRoute.resources.meter.capacity, mappedRooms: roomRoute.rooms.length,
+            actionsRemaining: roomRoute.resources.reserve, freeCapacity: roomRoute.resources.free } : {}),
           ...(roomRoute ? { exit: scene.frame.bbox } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
@@ -181,7 +201,7 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
     },
     record(before, after, _action, first, second, proposal) {
       if (after.levels_completed > before.levels_completed) previousWin = { completed: after.levels_completed,
-        side: proposal.local.scene.side, ref: after.observation_ref };
+        side: proposal.local.scene.side, ref: after.observation_ref, usedRoomMap: !!proposal.local.roomRoute };
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, step } = proposal, { kind: result, at } = outcome(second, proposal);
       if (local.roomRoute && proposal.roomStep) {
