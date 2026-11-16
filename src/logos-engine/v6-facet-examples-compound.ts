@@ -117,7 +117,7 @@ export function facetCompoundModelIdentity(stamp: NativeRows, reference: NativeR
 }
 
 export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, portable: FacetPortableMethod | null,
-  cache: FacetCompoundCache, configuration: FacetCompoundConfiguration): FacetProjection | null {
+  cache: FacetCompoundCache, configuration: FacetCompoundConfiguration, allowTrimmedContour = false): FacetProjection | null {
   if (configuration.lateral_rule !== 'conditional_stencil_sharing_measured_face_edges'
     || configuration.requires_observed_seed_and_vertical_effect_and_boundary !== true) throw new Error('Unsupported compound stencil contract');
   if (!portable || !portable.up_shift?.length || !portable.boundary_ref) return null;
@@ -137,9 +137,14 @@ export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, port
     steps.set(face.value, [Math.floor((face.point[0] < cap.point[0] ? -1 : 1) * (width - 1) / 2), Math.floor((capHeight + 1) / 2)]);
     statuses.set(face.value, 'shared_face_extrusion_hypothesis_not_observed');
   }
-  const key = facetCompoundModelIdentity(model.stamp, reference.rows, steps, configuration);
-  if (!cache.has(key)) cache.set(key, facetCandidates(reference.rows, model.stamp, model.faces, steps, model.background, model.palette,
-    configuration.maximum_units, configuration.maximum_states, configuration.maximum_sample_denominator, configuration.sample_offsets));
+  const search = [reference.rows, model.stamp, model.faces, steps, model.background, model.palette,
+    configuration.maximum_units, configuration.maximum_states, configuration.maximum_sample_denominator, configuration.sample_offsets] as const;
+  let key = facetCompoundModelIdentity(model.stamp, reference.rows, steps, configuration);
+  if (!cache.has(key)) cache.set(key, facetCandidates(...search));
+  if (allowTrimmedContour && cache.get(key)!.status === 'no_compatible_composition') {
+    key = identity([key, 'trimmed_reference_contour']);
+    if (!cache.has(key)) cache.set(key, facetCandidates(...search, true));
+  }
   const result = cache.get(key)!;
   if (result.status !== 'compatible_minimal_within_model' || result.solutions.length !== 1) return null;
   const solution = result.solutions[0]!, world = model.world, palette = new Set(model.palette), actual: FacetImage = new Map();

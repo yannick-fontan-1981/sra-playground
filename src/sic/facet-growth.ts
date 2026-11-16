@@ -87,7 +87,7 @@ export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Propo
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       if (learns && !state && !execution?.readWorkspaceClick) return null;
       const reusable = portable && portable.source_epoch !== observation.level_epoch ? portable : null;
-      const projection = facetCompoundPlan(observation, rows, reusable, cache, compoundSearch) ?? facetProject(observation, rows);
+      const projection = facetCompoundPlan(observation, rows, reusable, cache, compoundSearch, true) ?? facetProject(observation, rows);
       if (!projection) return null;
       const prior = state?.scope === projection.scope_ref ? state : null;
       const click = learns && !prior && projection.offer.kind === 'probe_visible_cap'
