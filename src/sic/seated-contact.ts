@@ -5,17 +5,20 @@ import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
+import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
+import { counterValue, observeLinearCounter, projectedCounterWrite, type LinearCounter } from './linear-counter.ts';
 import { assessRoomStep, contactDirections as directions, nextRoomStep, shiftTile as shift, startRoomRoute,
   tileBox as footprint, type ContactStep as Step, type RoomRoute, type RoomStep } from './revealed-compartment-route.ts';
 
 export const seatedContactId = 'sic_seated_contact';
 export const verifyFrameContactId = 'sic_verify_frame_contact';
+export const learnFrameAccessId = 'sic_learn_frame_access';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Scene = { piece: Part; frame: Part; floor: Part; side: number };
 type State = { epoch: number; at: NativePoint; scene: Scene; refs: string[]; blocked: RouteRefusals; avoid: string[];
-  seated: boolean; tried: string[]; count: number; roomRoute?: RoomRoute };
-type Proposal = NativeProposal & { local: State; step: Step; needId: string; roomStep?: RoomStep };
+  seated: boolean; tried: string[]; count: number; roomRoute?: RoomRoute; counter?: LinearCounter | null };
+type Proposal = NativeProposal & { local: State; path: Step[]; needId: string; roomStep?: RoomStep };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -50,15 +53,15 @@ function visibleFloor(rows: NativeRows, box: NativeBox, color: number): boolean 
   return rows.slice(t, b + 1).every(row => row.slice(l, r + 1).every(pixel => pixel === color));
 }
 
-function plan(rows: NativeRows, local: State): Step | null {
+function plan(rows: NativeRows, local: State): Step[] | null {
   const { scene, at, seated, tried, blocked, avoid } = local;
   const goal = origin(scene.frame.bbox), side = scene.side;
   if (seated) {
     const toward = directions.find(d => same(shift(at, d, side), goal) && !tried.includes(d[0]));
     const direction = toward ?? directions.find(d => !tried.includes(d[0]) && visibleFloor(rows, footprint(shift(at, d, side), side), scene.floor.color));
-    return direction ? { direction, at: shift(at, direction, side) } : null;
+    return direction ? [{ direction, at: shift(at, direction, side) }] : null;
   }
-  const queue: { at: NativePoint; first?: Step }[] = [{ at }];
+  const queue: { at: NativePoint; path: Step[] }[] = [{ at, path: [] }];
   const seen = new Set([key(at)]);
   for (const item of queue) {
     const candidates = directions.map(direction => ({ direction, at: shift(item.at, direction, side) }));
@@ -67,18 +70,17 @@ function plan(rows: NativeRows, local: State): Step | null {
     for (const step of candidates) {
       const k = key(step.at);
       if (seen.has(k) || avoid.includes(k) || blockedRouteStep(blocked, item.at, step.direction[0])) continue;
-      const first = item.first ?? step;
       if (!visibleFloor(rows, footprint(step.at, side), scene.floor.color)) continue;
-      if (dist(step.at, goal) === side) return first;
+      const path = [...item.path, step];
+      if (dist(step.at, goal) === side) return path;
       seen.add(k);
-      queue.push({ at: step.at, first });
+      queue.push({ at: step.at, path });
     }
   }
   return null;
 }
 
-function outcome(rows: NativeRows, proposal: Proposal) {
-  const { local, step } = proposal;
+function outcome(rows: NativeRows, local: State, step: Step) {
   const { piece, frame, side } = local.scene;
   const parts = geometricComponents(rows);
   const actor = parts.find(p => p.color === piece.color && p.area === piece.area
@@ -96,12 +98,17 @@ function outcome(rows: NativeRows, proposal: Proposal) {
   return { kind: 'changed' as const, at: local.at };
 }
 
-export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
+function routeState(proposal: Proposal, index: number): State {
+  return index === 0 ? proposal.local : { ...proposal.local, at: proposal.path[index - 1]!.at };
+}
+
+export function createSicVerifyFrameContact(family = verifyFrameContactId): NativeFamily<Proposal> {
+  const learns = family === learnFrameAccessId;
   let state: State | null = null;
   let previousWin: { completed: number; side: number; ref: string; usedRoomMap?: boolean } | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyFrameContactId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -115,15 +122,26 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
       if (remaining < 1 || !directions.every(([ref]) => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const scene = prior?.scene ?? measure(rows);
+      const motion = learns && !prior ? execution?.readPriorDirectionalScene?.(measure) : null;
+      if (learns && !prior && (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch)) return null;
+      const scene = prior?.scene ?? motion?.scene ?? measure(rows);
       if (!scene || (prior?.count ?? 0) >= 36) return null;
       const start = origin(scene.piece.bbox), goal = origin(scene.frame.bbox);
       const learned = previousWin?.completed === observation.levels_completed && previousWin.side === scene.side ? previousWin : null;
       const roomRoute = prior?.roomRoute ?? (!prior && learned ? startRoomRoute(rows, { side: scene.side, start, goal }) : null);
-      const local: State = prior ?? { epoch: observation.level_epoch, at: start, scene, refs: [], blocked: [], avoid: [], seated: false,
+      let local: State = prior ?? { epoch: observation.level_epoch, at: start, scene, refs: [], blocked: [], avoid: [], seated: false,
         tried: [], count: 0, ...(roomRoute ? { roomRoute } : {}) };
+      if (motion) {
+        const direction = directions.find(([command]) => command === motion.command);
+        if (!direction) return null;
+        const expected = shift(start, direction, scene.side);
+        const observed = outcome(rows, local, { direction, at: expected });
+        if (observed.kind !== 'landing') return null;
+        local = { ...local, at: observed.at, refs: [motion.beforeRef, motion.afterRef], count: 1 };
+      }
       const roomStep = roomRoute ? nextRoomStep(roomRoute, local.at) : null;
-      const step = roomRoute ? roomStep : plan(rows, local);
+      const planned = roomRoute ? roomStep ? [roomStep] : null : plan(rows, local);
+      const step = planned?.[0];
       if (!step) return null;
 
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(r => r !== ref),
@@ -141,7 +159,7 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
       const objective = { kind: roomRoute ? 'reach_frame_via_observed_compartments' : 'test_contact_with_compatible_frame', scope: ref.split(':revision:', 1)[0]!,
         subjects: [key(goal)], parentObjective: parent, satisfactionContract: 'official_progress_after_contact' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = verifyFrameContactId + ':' + need.id;
+      const id = family + ':' + need.id;
       const roomSituations = {
         release_home: 'Test the nearby control and retain the visible map if the room goes dark',
         survey: 'Reach an untested control and check whether it reveals the distant room',
@@ -160,10 +178,12 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
         : roomStep?.intent ? resourceSituations[roomStep.intent]
         : roomRoute ? roomSituations[roomRoute.phase] : strategy === 'P05' ? 'Check that the direction moves the piece by one tile'
           : 'Approach the frame through the visible surface and revise the route if a step is refused';
+      const path = strategy === 'P07' && !roomRoute ? planned!.slice(0, Math.min(remaining, maximumCommittedActions, 36 - local.count)) : [step];
+      const actions = path.map(leg => ({ action_ref: leg.direction[0], data: {} }));
       return {
-        status: 'proposed', kind: verifyFrameContactId, local, step, needId: need.id, ...(roomStep ? { roomStep } : {}),
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: step.at }],
+        status: 'proposed', kind: family, local, path, needId: need.id, ...(roomStep ? { roomStep } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: path.map((leg, index) => ({ action: actions[index], expected_after: leg.at })),
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -180,30 +200,44 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const local = routeState(proposal, index), leg = proposal.path[index]!;
+      const { side, piece, floor } = local.scene;
+      const counter = projectedCounterWrite(local.counter, index + 1);
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : local.epoch === observation.level_epoch && visibleFloor(packet.frame_rows, footprint(leg.at, side), floor.color)
+          && (!counter || counterValue(packet.frame_rows, counter, 'from'))
+          && piece.mask.every(([x, y]) => packet.frame_rows[local.at[1] + y]?.[local.at[0] + x] === piece.color);
       return { admitted, reason: admitted ? 'frame_contact_step_bound' : 'frame_contact_context_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { kind: result, at } = outcome(second, proposal);
+      const local = routeState(proposal, index), step = proposal.path[index]!;
+      const { kind: result, at } = outcome(second, local, step);
       if (proposal.local.roomRoute && proposal.roomStep) {
         const assessment = assessRoomStep(proposal.local.roomRoute, proposal.roomStep, first, second, proposal.local.at, at, result);
         return { matched: assessment !== null, seal_prefix: true, reason: assessment?.reason ?? 'room_route_prediction_contradicted' };
       }
-      return { matched: result === 'landing' || result === 'contact', seal_prefix: true,
+      const side = local.scene.side;
+      const counter = projectedCounterWrite(local.counter, index + 1);
+      const moving = [footprint(local.at, side), footprint(at, side)];
+      if (counter && counterValue(first, counter, 'from') && counterValue(second, counter, 'to')) moving.push(counter.box);
+      const canContinue = index + 1 < proposal.path.length && result === 'landing'
+        && unchangedOutside(first, second, moving);
+      return { matched: result === 'landing' || result === 'contact', seal_prefix: !canContinue,
         reason: { landing: 'piece_at_predicted_tile', contact: 'piece_joined_frame_without_completion', blocked: 'piece_did_not_move',
           redirected: 'piece_redirected_to_another_tile', changed: 'piece_or_surface_changed' }[result] };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index) {
       if (after.levels_completed > before.levels_completed) previousWin = { completed: after.levels_completed,
         side: proposal.local.scene.side, ref: after.observation_ref, usedRoomMap: !!proposal.local.roomRoute };
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, step } = proposal, { kind: result, at } = outcome(second, proposal);
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? routeState(proposal, index);
+      const step = proposal.path[index]!, { kind: result, at } = outcome(second, local, step);
       if (local.roomRoute && proposal.roomStep) {
         const assessment = assessRoomStep(local.roomRoute, proposal.roomStep, first, second, local.at, at, result);
         state = { ...local, at, seated: result === 'contact', count: local.count + 1,
@@ -212,11 +246,15 @@ export function createSicVerifyFrameContact(): NativeFamily<Proposal> {
         return { events: [] };
       }
       const moved = result === 'landing' || result === 'contact';
+      const side = local.scene.side;
+      const counter = result === 'landing' ? observeLinearCounter(first, second,
+        [footprint(local.at, side), footprint(at, side)], local.counter) : undefined;
       state = { ...local, count: local.count + 1, at, seated: result === 'contact' || local.seated && result === 'changed',
         tried: local.seated && !moved ? [...local.tried, step.direction[0]] : [],
         avoid: local.seated && result === 'redirected' ? [...local.avoid, key(local.at)] : local.avoid,
         refs: moved ? [...local.refs.slice(-5), after.observation_ref] : local.refs,
-        blocked: result === 'blocked' ? rememberRouteRefusal(local.blocked, local.at, step.direction[0], after.observation_ref) : local.blocked };
+        blocked: result === 'blocked' ? rememberRouteRefusal(local.blocked, local.at, step.direction[0], after.observation_ref) : local.blocked,
+        counter: counter ?? null };
       if (result === 'changed' && !local.seated) state = { ...state, count: 36 };
       return { events: [] };
     },

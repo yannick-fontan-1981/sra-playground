@@ -2,6 +2,7 @@ import { measureReceptionService, receptionServiceCarriers, receptionServicePath
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
 import { chooseReceptionActivation, crossingRestoredStart, recordReceptionActivation, startReceptionActivation,
   type ReceptionActivation, type ReceptionActivationStep, type ReceptionMemory } from './reception-activation.ts';
@@ -9,11 +10,14 @@ import { chooseReceptionActivation, crossingRestoredStart, recordReceptionActiva
 export const receptionAccessId = 'sic_reception_access';
 export const learnReceptionAccessId = 'sic_learn_reception_access';
 export const receptionAccessStrategies = navigationPrimitives;
-type Scene = { pitch: number; cells: NativePoint[]; target: { anchor: NativePoint; color: number }; counterparts: { request_bbox: NativeBox; body_bbox: NativeBox }[] };
+type Scene = { pitch: number; background: number; cells: NativePoint[]; target: { anchor: NativePoint; color: number };
+  support_candidates: { anchor: NativePoint }[]; counterparts: { request_bbox: NativeBox; body_bbox: NativeBox }[] };
 type State = { epoch: number; count: number; scene: Scene; controls: Record<string, NativePoint>; trials: string[]; waits: number;
   last: { action: string; from: NativePoint | null } | null; evidence: string[]; stopped: boolean };
 type Choice = { action: string; expected: NativePoint | null };
-type ReceptionProposal = NativeProposal & { local: State; choice: Choice; attempt: string; from: NativePoint | null; wait: boolean; needId: string };
+type Leg = { action_ref: string; from: NativePoint; to: NativePoint };
+type ReceptionProposal = NativeProposal & { local: State; choice: Choice; attempt: string; from: NativePoint | null; wait: boolean; needId: string;
+  route?: readonly Leg[] };
 type ActivationProposal = NativeProposal & { activation: ReceptionActivation; step: ReceptionActivationStep; needId: string };
 type Proposal = ReceptionProposal | ActivationProposal;
 const isActivation = (proposal: Proposal): proposal is ActivationProposal => 'activation' in proposal;
@@ -26,6 +30,17 @@ const distance = ([x, y]: NativePoint, [a, b]: NativePoint) => Math.abs(x - a) +
 function carrier(rows: NativeRows, scene: Scene): NativePoint | null {
   const bodies = receptionServiceCarriers(rows, scene);
   return bodies.length === 1 ? bodies[0]!.anchor as NativePoint : null;
+}
+
+function admitsLanding(rows: NativeRows, scene: Scene, to: NativePoint): boolean {
+  if (equal(to, scene.target.anchor)) return true;
+  if (!scene.cells.some(cell => equal(cell, to)) || scene.support_candidates.some(support => equal(support.anchor, to))) return false;
+  const [x, y] = to;
+  let floor = 0;
+  for (let dy = 0; dy < scene.pitch; dy++) for (let dx = 0; dx < scene.pitch; dx++) {
+    if (rows[y + dy]?.[x + dx] === scene.background) floor++;
+  }
+  return floor >= Math.floor(scene.pitch ** 2 / 2);
 }
 
 export function createSicReceptionAccess(family = receptionAccessId): NativeFamily<Proposal> {
@@ -130,10 +145,14 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       const objective = { kind: 'reach_support_for_visible_request', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_request', 'carrier', 'distinct_support'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_arrival_at_the_candidate_support' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `${family === receptionAccessId ? 'reception-access' : family}:${need.id}`;
-      const command = { action_ref: choice.action, data: {} }, actions = [command];
+      const command = { action_ref: choice.action, data: {} };
+      const route = strategy === 'P07' ? (path as Leg[]).slice(0, Math.min(maximumCommittedActions, 48 - local.count)) : [];
+      const actions = route.length > 1 ? route.map(leg => ({ action_ref: leg.action_ref, data: {} })) : [command];
       return { status: 'proposed', kind: family, actions, local, choice, attempt: key(choice.action), from,
+        ...(actions.length > 1 ? { route } : {}),
         wait: strategy === 'P02', needId: need.id,
-        steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        steps: actions.map((action, index) => ({ action, expected_after: route[index]?.to ?? null })),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Bring the carrier to the support for the visible request', mode, triggerCard: card,
           situation, agenda: entries, evidence, actor: from ? box(from, scene.pitch) : null, target: box(target, scene.pitch),
           request: scene.counterparts[0]!.request_bbox },
@@ -143,11 +162,21 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !isActivation(proposal) && proposal.route) {
+        const { local, route } = proposal, leg = route[index]!;
+        const current = measureReceptionService(packet.frame_rows, local.scene) as Scene | null;
+        const admitted = local.epoch === observation.level_epoch && !!current && current.pitch === local.scene.pitch
+          && current.counterparts.length === 1 && equal(current.target.anchor, local.scene.target.anchor)
+          && current.target.color === local.scene.target.color && equal(carrier(packet.frame_rows, current), leg.from)
+          && admitsLanding(packet.frame_rows, current, leg.to)
+          && !local.trials.includes(JSON.stringify([leg.from, current.target.anchor, leg.action_ref]));
+        return { admitted, reason: admitted ? 'carrier_and_next_landing_confirmed' : 'carrier_or_support_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_carrier_and_support_bound' : 'carrier_or_support_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isActivation(proposal)) {
@@ -159,10 +188,12 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
         return { matched, seal_prefix: true, reason: reset ? 'crossing_restored_start' : matched ? 'carrier_projection_observed'
           : 'carrier_position_unconfirmed' };
       }
-      const matched = proposal.choice.expected ? equal(carrier(second, proposal.local.scene), proposal.choice.expected) : null;
-      return { matched, seal_prefix: true, reason: matched ? 'carrier_projection_observed' : 'compare_carrier_and_support_return' };
+      const expected = proposal.route?.[index]?.to ?? proposal.choice.expected;
+      const matched = expected ? equal(carrier(second, proposal.local.scene), expected) : null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'carrier_projection_observed' : 'compare_carrier_and_support_return' };
     },
-    record(before, after, issued, _first, second, proposal) {
+    record(before, after, issued, _first, second, proposal, index) {
       if (isActivation(proposal)) {
         if (after.levels_completed > before.levels_completed && remembered && proposal.activation.target) {
           remembered = { ...remembered, epoch: after.level_epoch,
@@ -176,19 +207,21 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
         activation = result.next;
         return { events: [], ...(result.evidence ? { reviewEvidence: result.evidence } : {}) };
       }
-      if (after.levels_completed > before.levels_completed && equal(proposal.from, proposal.local.scene.target.anchor)) {
-        const { local } = proposal;
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const from = proposal.route?.[index]?.from ?? proposal.from;
+      if (after.levels_completed > before.levels_completed && equal(from, local.scene.target.anchor)) {
         remembered = { epoch: after.level_epoch, pitch: local.scene.pitch, supportInk: local.scene.target.color,
           controls: { ...(remembered?.pitch === local.scene.pitch ? remembered.controls : {}), ...local.controls },
           evidence: [...local.evidence.slice(-4), before.observation_ref, after.observation_ref] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, from, wait } = proposal, position = carrier(second, local.scene), controls = { ...local.controls };
+      const { wait } = proposal, position = carrier(second, local.scene), controls = { ...local.controls };
       if (from && position) {
         const delta: NativePoint = [position[0] - from[0], position[1] - from[1]];
         if (Math.abs(delta[0]) + Math.abs(delta[1]) === local.scene.pitch && (delta[0] === 0 || delta[1] === 0)) controls[issued.action_ref] = delta;
       }
-      state = { ...local, count: local.count + 1, controls, trials: equal(from, position) || !position ? [...local.trials, proposal.attempt] : local.trials, waits: local.waits + Number(wait),
+      const attempt = index === 0 ? proposal.attempt : JSON.stringify([from, local.scene.target.anchor, issued.action_ref]);
+      state = { ...local, count: local.count + 1, controls, trials: equal(from, position) || !position ? [...local.trials, attempt] : local.trials, waits: local.waits + Number(wait),
         last: { action: issued.action_ref, from }, stopped: wait && !equal(position, local.scene.target.anchor),
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };

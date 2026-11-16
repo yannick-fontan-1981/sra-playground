@@ -1,3 +1,4 @@
+import { maximumCommittedActions } from './plan-step.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { assemblePorts, compatiblePorts, inferPortPoses, measurePortLayout, placedPorts, portAccessPath, portAgreement, portCells,
@@ -148,7 +149,7 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
               (!local.blockedOverlap ? portAccessPath(model, poses, part, target, vectors, true) : null);
             const other = new Map(poses.flatMap((pose, index) => index === part ? [] : [[index, pose] as const]));
             let [turn, x, y] = current;
-            for (const action of path?.slice(0, Math.min(remaining, 48 - local.attempts.length)) ?? []) {
+            for (const action of path?.slice(0, Math.min(remaining, maximumCommittedActions, 48 - local.attempts.length)) ?? []) {
               const [dx, dy] = vectors.get(action)!;
               x += dx;
               y += dy;

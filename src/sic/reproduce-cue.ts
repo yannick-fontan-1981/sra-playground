@@ -4,7 +4,7 @@ import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-
 import { sicNeedId } from './need-identity.ts';
 import { measureAnimatedCells } from './observed-animation.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
-import { bindTranslationLanding, sameLandingPixels, unchangedOutside, type MeasuredLanding } from './plan-step.ts';
+import { bindTranslationLanding, maximumCommittedActions, sameLandingPixels, unchangedOutside, type MeasuredLanding } from './plan-step.ts';
 import { aimCommands, aimPoseMatches, aimRoute, hasAimedRay, overlaps, readAdaptableRemote, readAimPose, readGauge,
   readRemoteRoute, remoteFlightObserved, remoteOpeningObserved,
   type AimCommand, type AimPose, type AimWitness, type RemoteRoute, type ResizeWitness } from './remote-effect-route.ts';
@@ -417,7 +417,7 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
         subjects: ['demonstration_panel', 'controlled_piece', 'matching_region'], parentObjective: parent, satisfactionContract: 'official_progress_at_matching_region' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = family + ':' + need.id, action = step.action;
-      const approach = approachPath(local, step, rows, remaining);
+      const approach = approachPath(local, step, rows, Math.min(remaining, maximumCommittedActions));
       const actions = approach.length > 1 ? approach.map(leg => leg.step.action) : [action];
       return {
         status: 'proposed', kind: family, local, step, needId: need.id, attempt,

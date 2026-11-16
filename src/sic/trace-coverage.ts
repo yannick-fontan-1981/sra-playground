@@ -5,6 +5,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { LocusWitness } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const traceCoverageId = 'sic_trace_coverage';
@@ -65,7 +66,7 @@ export function createSicVerifyTraceCoverage(): NativeFamily<Proposal> {
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
       const route: TraceLeg[] = [{ action: command, binding, to }];
       if (confirmed) {
-        for (const next of estimate!.path.slice(scene.prefix.length + 1, scene.prefix.length + remaining) as NativePoint[]) {
+        for (const next of estimate!.path.slice(scene.prefix.length + 1, scene.prefix.length + Math.min(remaining, maximumCommittedActions)) as NativePoint[]) {
           const locus = traceFieldCenter(scene.geometry, next);
           try {
             const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, locus, { reason: label, evidence });

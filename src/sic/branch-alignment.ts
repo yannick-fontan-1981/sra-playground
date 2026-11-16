@@ -4,6 +4,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { measureStackedBranchLayout, placeStackedBranches, stackedBranchBox, stackedBranchSelection,
   verifyStackedBranchLayout, type StackedBranchLayout } from './stacked-branch-layout.ts';
 
@@ -21,7 +22,8 @@ type State = { epoch: number; model: BranchModel; positions: BranchPoint[]; cont
   controlEvidence?: Record<string, string> };
 type ConfirmedControls = { epoch: number; axis: BranchModel['axis']; unit: number; sources: number;
   controls: State['controls']; evidence: string[] };
-type LinearProposal = NativeProposal & { local: State; current: BranchState; expected: BranchState | null; attempt: string; launch: boolean; needId: string };
+type LinearProposal = NativeProposal & { local: State; current: BranchState; expected: BranchState | null; approach: BranchState[];
+  attempt: string; launch: boolean; needId: string };
 type StackedState = { epoch: number; layout: StackedBranchLayout; positions: NativePoint[]; placements: NativePoint[];
   focused: number; controls: Record<string, NativePoint>; evidence: string[]; stopped: boolean };
 type StackedProposal = NativeProposal & { stackedPlan: StackedState; needId: string; launch: boolean };
@@ -165,8 +167,18 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
       const expected: BranchState | null = selecting ? [positions, index] : strategy === 'P07' ? [positions.map(([x, y], i): BranchPoint =>
         i === index ? [x + delta[0], y + delta[1]] : [x, y]), active] : null;
       const actions = [action], binding = selecting && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
-      return { status: 'proposed', kind: verifyBranchAlignmentId, actions, local, current, expected, attempt, launch: launching, needId: need.id,
-        steps: [{ action, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
+      const approach: BranchState[] = expected && strategy === 'P07' ? [expected] : [];
+      if (approach.length && magnitude) {
+        const length = Math.min(remaining, maximumCommittedActions, Math.floor(Math.abs(magnitude) / model.unit));
+        for (let count = 2; count <= length; count++) {
+          if (local.tried.includes(JSON.stringify([approach.at(-1), action]))) break;
+          approach.push([positions.map(([x, y], member): BranchPoint =>
+            member === index ? [x + delta[0] * count, y + delta[1] * count] : [x, y]), active]);
+          actions.push(action);
+        }
+      }
+      return { status: 'proposed', kind: verifyBranchAlignmentId, actions, local, current, expected, approach, attempt, launch: launching, needId: need.id,
+        steps: actions.map((action, step) => ({ action, expected_after: approach[step] ?? null, ...(binding ? { point_binding: binding } : {}) })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -182,11 +194,14 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const previous = index > 0 && !isStacked(proposal) ? proposal.approach[index - 1] : null;
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!previous && proposal.binding?.level_epoch === observation.level_epoch && !isStacked(proposal)
+          && equal(branchReadState(packet.frame_rows, proposal.local.model, previous[0]), previous);
       return { admitted, reason: admitted ? 'current_contributor_positions_bound' : 'current_contributor_positions_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isStacked(proposal)) {
@@ -199,10 +214,11 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
         const matched = !proposal.launch && verifyStackedBranchLayout(second, layout, positions, focused);
         return { matched, seal_prefix: true, reason: matched ? 'observed_stacked_contributor_positions' : 'stacked_projection_contradicted' };
       }
-      const matched = proposal.expected ? equal(branchReadState(second, proposal.local.model, proposal.expected[0]), proposal.expected) : null;
-      return { matched, seal_prefix: true, reason: 'compare_contributor_return' };
+      const expected = proposal.approach[index] ?? proposal.expected;
+      const matched = expected ? equal(branchReadState(second, proposal.local.model, expected[0]), expected) : null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: 'compare_contributor_return' };
     },
-    async record(before, after, issued, _first: NativeRows, second, proposal, _index, _frames, execution) {
+    async record(before, after, issued, _first: NativeRows, second, proposal, index, _frames, execution) {
       if (isStacked(proposal)) {
         const { layout, positions, focused } = proposal.stackedPlan;
         if (before.level_epoch === after.level_epoch) stacked = { ...proposal.stackedPlan,
@@ -210,7 +226,10 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
           stopped: proposal.launch || !verifyStackedBranchLayout(second, layout, positions, focused) };
         return { events: [] };
       }
-      const { local, current } = proposal, controls = { ...local.controls };
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const current = proposal.approach[index - 1] ?? proposal.current;
+      const expected = proposal.approach[index] ?? proposal.expected;
+      const controls = { ...local.controls };
       if (after.levels_completed > before.levels_completed && proposal.launch && Object.keys(controls).length === 4) {
         const { axis, unit, sources } = local.model;
         confirmed = { epoch: before.level_epoch, axis, unit, sources: sources.length, controls,
@@ -219,12 +238,12 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       let next: BranchState | null = null;
       try {
-        next = branchReadState(second, local.model, proposal.expected?.[0] ?? current[0]) ??
+        next = branchReadState(second, local.model, expected?.[0] ?? current[0]) ??
           await boundedBranchObservedStateCooperative(after, local.model, current[0], bounds, execution);
       } catch (error) {
         if (!(error instanceof BranchRoutingIncomplete)) throw error;
       }
-      if (local.recalledEvidence && controls[issued.action_ref] && proposal.expected && !equal(next, proposal.expected)) {
+      if (local.recalledEvidence && controls[issued.action_ref] && expected && !equal(next, expected)) {
         state = { ...local, controls: {}, positions: next?.[0] ?? current[0], recalledEvidence: null, controlEvidence: {},
           tried: [], evidence: [after.observation_ref], stopped: !next };
         return { events: [] };
@@ -241,8 +260,9 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
           }
         }
       }
+      const attempt = index === 0 ? proposal.attempt : JSON.stringify([current, issued]);
       state = { ...local, controls, controlEvidence, positions: next?.[0] ?? current[0], stopped: !next || proposal.launch,
-        tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
+        tried: [...local.tried, attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
     state: () => ({ state, confirmed, stacked }),

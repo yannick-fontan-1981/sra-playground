@@ -1,3 +1,4 @@
+import { maximumCommittedActions } from './plan-step.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { assemblePorts, type PortModel } from '../logos-engine/v6-port-assembly.ts';
@@ -25,15 +26,15 @@ const graph = compileStrategyGraph({ id: 'connect_fixed_tiles_by_rotation', vers
 type Cell = { point: NativePoint; bbox: NativeBox; ports: number[] };
 type Scene = { geometry_ref: string; cells: Cell[] };
 type State = { epoch: number; geometry: string; turn: number | null; evidence: string[]; count: number; stopped: boolean };
-type Proposal = NativeProposal & { local: State; scene: Scene; cell: number; needId: string };
+type Rotation = { before: Scene; cell: number };
+type Proposal = NativeProposal & { local: State; rotations: Rotation[]; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
-function returnedTurn(proposal: Proposal, rows: NativeRows) {
-  const { scene, cell, local } = proposal;
+function returnedTurn({ before: scene, cell }: Rotation, turn: number | null, rows: NativeRows) {
   const next = radialAtGeometry(rows, scene) as Scene | null;
   if (!next || next.cells.length !== scene.cells.length || scene.cells.some((value, i) => i !== cell && !equal(value.ports, next.cells[i]?.ports))) return null;
-  const rotations = (local.turn === null ? [1, 3] : [local.turn]).filter(turn =>
-    equal(rotateRadialPorts(scene.cells[cell]!.ports, turn), next.cells[cell]?.ports));
+  const rotations = (turn === null ? [1, 3] : [turn]).filter(rotation =>
+    equal(rotateRadialPorts(scene.cells[cell]!.ports, rotation), next.cells[cell]?.ports));
   return rotations.length === 1 ? rotations[0]! : null;
 }
 
@@ -76,8 +77,29 @@ export function createSicRadialConnection(family = radialConnectionId): NativeFa
         parentObjective: parent, satisfactionContract: 'official_progress_after_connecting_the_ports' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `radial-connection:${need.id}`;
       const actions = [command], binding = await ObservedInputDomain.makeLocusWitness(observation, rows, focus.point, { reason: label, evidence });
-      return { status: 'proposed', kind: family, actions, local, scene, cell, needId: need.id,
-        steps: [{ action: command, expected_after: null, point_binding: binding }],
+      const steps = [{ action: command, expected_after: null, point_binding: binding }];
+      const rotations: Rotation[] = [{ before: scene, cell }];
+      if (local.turn !== null && target) {
+        let projected = scene;
+        for (const [index, [rotation]] of target.entries()) {
+          if (index < cell || rotation === 0) continue;
+          if (index !== cell) {
+            if (actions.length >= Math.min(remaining, maximumCommittedActions, 32 - local.count)) break;
+            const [x, y] = scene.cells[index]!.point;
+            const next = { action_ref: 'ACTION6', data: { x, y } };
+            const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
+            actions.push(next);
+            steps.push({ action: next, expected_after: null, point_binding: witness });
+            rotations.push({ before: projected, cell: index });
+          }
+          if (rotation !== local.turn) break;
+          const cells = [...projected.cells], tile = cells[index]!;
+          cells[index] = { ...tile, ports: rotateRadialPorts(tile.ports, local.turn) };
+          projected = { ...projected, cells };
+        }
+      }
+      return { status: 'proposed', kind: family, actions, local, rotations, needId: need.id,
+        steps,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Connect neighboring tiles by matching their openings',
           mode: learns ? mode : local.turn === null ? 'exploration' : 'solving',
@@ -93,19 +115,24 @@ export function createSicRadialConnection(family = radialConnectionId): NativeFa
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const expected = proposal.rotations[index]?.before;
+      const actual = index > 0 && expected ? radialAtGeometry(packet.frame_rows, expected) as Scene | null : null;
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : proposal.binding?.level_epoch === observation.level_epoch && !!actual
+          && equal(actual.cells.map(cell => cell.ports), expected!.cells.map(cell => cell.ports));
       return { admitted, reason: admitted ? 'tile_and_neighbors_bound' : 'tile_or_neighbors_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = returnedTurn(proposal, second) !== null;
-      return { matched, seal_prefix: true, reason: matched ? 'tile_rotation_observed' : 'tile_rotation_unconfirmed' };
+      const matched = returnedTurn(proposal.rotations[index]!, proposal.local.turn, second) !== null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: matched ? 'tile_rotation_observed' : 'tile_rotation_unconfirmed' };
     },
-    record(before, after, _command, _first, second, proposal) {
+    record(before, after, _command, _first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local } = proposal, turn = returnedTurn(proposal, second);
+      const local = (index > 0 && state?.count === proposal.local.count + index ? state : null) ?? proposal.local;
+      const turn = returnedTurn(proposal.rotations[index]!, local.turn, second);
       state = { ...local, turn, count: local.count + 1, stopped: turn === null, evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },

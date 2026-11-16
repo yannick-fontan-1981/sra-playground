@@ -4,6 +4,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { auxiliarySubjects, measureAuxiliaryRoute, verifyAuxiliaryStep, type AuxiliaryRoute } from './auxiliary-coupled-route.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
@@ -211,7 +212,7 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         satisfactionContract: 'official_progress_after_the_joint_meeting_test' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'coupled-motion:' + need.id;
-      const inputs = candidate.route?.actions.slice(0, Math.min(remaining, 60 - local.count)) ?? [candidate.input];
+      const inputs = candidate.route?.actions.slice(0, Math.min(remaining, maximumCommittedActions, 60 - local.count)) ?? [candidate.input];
       const actions = inputs.map(action_ref => ({ action_ref, data: {} }));
       return { status: 'proposed', kind: verifyCoupledRouteId, candidate, local, actions, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },

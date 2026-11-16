@@ -6,6 +6,7 @@ import {
 import { sortedPoints, supportKey, supportPoint } from '../logos-engine/v6-support-measurements.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
 import type { DirectionalMotion } from './observed-translation.ts';
 import { checkObservedMotion, chooseObservedMotion, observedMotionModule } from './reflected-motion-card.ts';
@@ -178,7 +179,7 @@ function coveragePlan(world: World, scene: Scene, local: State, keys: readonly s
   const route = [encodeReflectedWorld(first)];
   if (typeof desired === 'number' && control.role === kind) {
     let next = first;
-    const count = Math.min(remaining, Math.floor(Math.abs(amount / control.delta[dim])));
+    const count = Math.min(remaining, maximumCommittedActions, Math.floor(Math.abs(amount / control.delta[dim])));
     for (let i = 1; i < count; i++) {
       next = moveWorld(next, desired, control.delta);
       const body = next.bodies[desired]!;

@@ -1,5 +1,7 @@
 import type { NativeBox, NativeRows } from '../logos-engine/v6-native-types.ts';
 
+export const maximumCommittedActions = 16;
+
 /** The plan stays open only while its next step can still be checked in the current situation. */
 export function decidePlanContinuation(input: {
   readonly boundary: boolean;

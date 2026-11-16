@@ -1,4 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
@@ -18,7 +19,7 @@ type Collection = { goals: NativePoint[]; verified: string[]; provisional: strin
 type Memory = { epoch: number; ground: number; highlight: number; evidence: string[]; blocked: string[];
   collection?: Collection; switching?: SwitchingLayout; portal?: Portal; checkedTransfers?: string[] };
 type Proposal = NativeProposal & { scene: Scene; target: Tile; memory: Memory; attempt: string; needId: string;
-  switching?: { previous: SwitchingScene; step: SwitchingStep }; arrival?: Tile };
+  switching?: { previous: SwitchingScene; step: SwitchingStep }; arrival?: Tile; route?: Tile[] };
 
 const boxWidth = ([left, , right]: NativeBox) => right - left + 1;
 const boxHeight = ([, top, , bottom]: NativeBox) => bottom - top + 1;
@@ -265,6 +266,26 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = family + ':' + need.id;
       const action = { action_ref: 'ACTION6', data: { x: target.point[0], y: target.point[1] } };
+      const route = [target], actions = [action], steps = [{ action, expected_after: landing.point, point_binding: pointBinding }];
+      if (strategy === 'P07' && distance && !transfer) {
+        while (route.length < Math.min(remaining, maximumCommittedActions)) {
+          const at = route.at(-1)!;
+          const cost = distance.get(at);
+          if (!cost) break;
+          const next = scene.tiles.find(tile => distance.get(tile) === cost - 1 && same(displacement(at, tile), scene.offsets)
+            && !memory.blocked.includes([key(at.point), key(tile.point), key(scene.offsets)].join('/')));
+          if (!next) break;
+          const [x, y] = next.point;
+          const current = await ObservedInputDomain.makeLocusWitness(observation, rows, next.point,
+            { reason: 'Landing predicted to be highlighted by the observed jump effect', evidence });
+          const palette = rows[y]![x] === next.color ? memory.highlight : rows[y]![x]!;
+          const point_binding = await ObservedInputDomain.projectLocusWitness(current, palette);
+          const command = { action_ref: 'ACTION6', data: { x, y } };
+          route.push(next);
+          actions.push(command);
+          steps.push({ action: command, expected_after: next.point, point_binding });
+        }
+      }
       const situation = transfer ? 'Use the highlighted entrance and verify where the same piece comes to rest' : step ? step.switches
         ? 'Land on the marked switch and check which highlighted jumps become available'
         : `Choose a highlighted jump on the ${step.distance}-jump route through the current and projected door states`
@@ -277,8 +298,9 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
         status: 'proposed', kind: family, scene, target, memory, attempt: attemptFor(target), needId: need.id,
         ...(phased && step ? { switching: { previous: phased, step } } : {}),
         ...(transfer ? { arrival: landing } : {}),
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: landing.point, point_binding: pointBinding }],
+        ...(route.length > 1 ? { route } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps,
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: memory.collection || phased ? 'Collect the seals and reach the exit' : 'Reach the framed marker',
@@ -289,14 +311,23 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && proposal.route) {
+        const current = measure(packet.frame_rows, proposal.memory)?.scene;
+        const admitted = proposal.memory.epoch === observation.level_epoch && !!current
+          && same(current.actor.point, proposal.route[index - 1]!.point) && same(current.offsets, proposal.scene.offsets)
+          && current.tiles.length === proposal.scene.tiles.length
+          && current.tiles.every(tile => proposal.scene.tiles.some(prior => same(prior.point, tile.point)))
+          && current.moves.some(tile => same(tile.point, proposal.route![index]!.point));
+        return { admitted, reason: admitted ? 'predicted_highlight_confirmed' : 'highlighted_route_context_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_landing_bound' : 'highlighted_route_context_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.switching) {
@@ -306,23 +337,28 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
       }
       const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection, proposal.memory.portal)
         : measure(second, proposal.memory)?.scene;
-      const matched = !!next && same(next.actor.point, (proposal.arrival ?? proposal.target).point) && same(next.offsets, proposal.scene.offsets);
+      const matched = !!next && same(next.actor.point, (proposal.route?.[index] ?? proposal.arrival ?? proposal.target).point)
+        && same(next.offsets, proposal.scene.offsets);
       if (next && matched && proposal.memory.collection) {
         const receipt = assessCollection(proposal, next);
         return { matched: !!receipt && receipt.reason !== 'seal_returned_after_departure', seal_prefix: true,
           reason: proposal.arrival && receipt?.reason === 'landing_and_next_highlights_confirmed' ? 'portal_arrival_and_next_highlights_confirmed'
             : receipt?.reason ?? 'collection_return_changed_unexpectedly' };
       }
-      return { matched, seal_prefix: true, reason: matched ? 'landing_and_next_highlights_confirmed' : 'landing_or_next_highlights_diverged' };
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'landing_and_next_highlights_confirmed' : 'landing_or_next_highlights_diverged' };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index) {
+      const memory = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.memory;
+      const from = proposal.route?.[index - 1]?.point ?? proposal.scene.actor.point;
+      const target = proposal.route?.[index] ?? proposal.target;
       if (after.levels_completed > before.levels_completed) {
         if (proposal.switching && known) {
           known = { ...known, completed: after.levels_completed, ref: after.observation_ref };
           return { events: [] };
         }
-        const { scene, memory } = proposal, parts = geometricComponents(first);
-        const actor = parts.find(part => part.color === memory.ground && same(center(part.bbox), scene.actor.point)
+        const { scene } = proposal, parts = geometricComponents(first);
+        const actor = parts.find(part => part.color === memory.ground && same(center(part.bbox), from)
           && boxWidth(part.bbox) === boxWidth(scene.actor.box));
         const goal = parts.find(part => part.color === scene.goal.color && same(center(part.bbox), scene.goal.point)
           && boxWidth(part.bbox) === boxWidth(scene.goal.box) && hasCenteredInset(part, parts));
@@ -339,12 +375,12 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
       }
       const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection, proposal.memory.portal)
         : measure(second, proposal.memory)?.scene;
-      const confirmed = !!next && same(next.actor.point, (proposal.arrival ?? proposal.target).point) && same(next.offsets, proposal.scene.offsets);
-      const { memory } = proposal;
+      const confirmed = !!next && same(next.actor.point, (proposal.arrival ?? target).point) && same(next.offsets, proposal.scene.offsets);
       const receipt = confirmed && next && memory.collection ? assessCollection(proposal, next) : null;
       const acquired = confirmed && (!memory.collection || receipt && receipt.reason !== 'seal_returned_after_departure');
       state = { ...memory, evidence: acquired ? [...memory.evidence.slice(-5), after.observation_ref] : [],
-        blocked: acquired ? memory.blocked : [...memory.blocked, proposal.attempt],
+        blocked: acquired ? memory.blocked : [...memory.blocked,
+          index === 0 ? proposal.attempt : [key(from), key(target.point), key(proposal.scene.offsets)].join('/')],
         ...(receipt ? { collection: receipt.collection } : {}),
         ...(acquired && proposal.arrival ? { checkedTransfers: [...new Set([...(memory.checkedTransfers ?? []), key(proposal.target.point)])] } : {}) };
       return { events: [], ...(acquired && proposal.arrival ? { reviewEvidence: 'The piece emerged at the other entrance and the new highlights belong to that landing.' } : {}) };

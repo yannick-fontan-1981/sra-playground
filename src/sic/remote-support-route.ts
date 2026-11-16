@@ -3,7 +3,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposa
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
-import { unchangedOutside } from './plan-step.ts';
+import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
 import { measurePhasedSupport, observePhaseStep, phaseAffectedSupport, phaseFootprint, planPhasedSupport,
   type PhasedSupport, type PhaseStep } from './phased-support-route.ts';
 
@@ -497,7 +497,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       const verified: Move[] = [];
       let laterControl = null;
       if (move === route) {
-        for (const step of path ?? []) {
+        for (const step of path?.slice(0, maximumCommittedActions) ?? []) {
           if (!confirmedLanding(rows, local, step)) {
             const previous = verified.at(-1);
             if (previous?.landing && previous.floor !== null && local.actor && step.control !== null

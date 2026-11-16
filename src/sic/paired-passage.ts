@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { searchCoverageRoute } from './coverage-route.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const pairedPassageId = 'sic_paired_passage';
@@ -295,8 +296,8 @@ function actorAt(rows: NativeRows, actor: Part, point: NativePoint): boolean {
     && width(p.bbox) === side && height(p.bbox) === side);
 }
 
-function observedStep(proposal: Proposal, first: NativeRows, second: NativeRows) {
-  const step = proposal.route.steps[0]!, crossing = step.crossing;
+function observedStep(proposal: Proposal, index: number, first: NativeRows, second: NativeRows) {
+  const step = proposal.route.steps[index]!, crossing = step.crossing;
   const moved = actorAt(second, proposal.scene.actor, step.point);
   const changed = crossing ? proposal.scene.flags.filter(({ bbox: [x, y] }) => first[y]?.[x] !== second[y]?.[x]) : [];
   if (proposal.memory.rewrite && proposal.scene.switches) {
@@ -412,10 +413,14 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
         : route.crossing ? 'Approach a visible pair whose transfer is still unverified'
           : 'Reach the exit after observing a transfer through each pair';
       const [x, y] = step.point, last = width(scene.actor.bbox) - 1;
+      const plain = facts.routeSupported && !scene.neutral && !switches;
+      const routeStart = plain ? route.steps.findIndex(leg => leg.crossing) : 1;
+      const path = route.steps.slice(0, Math.max(1, Math.min(routeStart < 0 ? route.steps.length : routeStart, remaining, maximumCommittedActions)));
+      const actions = path.map(leg => ({ action_ref: leg.direction[0], data: {} }));
       return {
         status: 'proposed', kind: family, scene, route, memory, needId: need.id, attempt: key(origin(scene.actor.bbox)) + '/' + action.action_ref,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: step.point }],
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: path[index]!.point })),
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: route.crossing ? 'Verify a paired passage' : 'Exit after using the passages',
@@ -427,30 +432,43 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      if (index > 0) {
+        const { scene, route, memory } = proposal, previous = route.steps[index - 1]!.point;
+        const current = measure(packet.frame_rows, memory.goal);
+        const admitted = observation.level_epoch === memory.epoch && !!current && same(origin(current.actor.bbox), previous)
+          && current.ground === scene.ground && current.pitch === scene.pitch && current.actor.color === scene.actor.color
+          && current.pairs.map(pair => pair.key).join('/') === scene.pairs.map(pair => pair.key).join('/')
+          && Object.keys(current.floor).length === Object.keys(scene.floor).length
+          && Object.keys(current.floor).every(tile => !!scene.floor[tile])
+          && !!current.floor[key(route.steps[index]!.point)];
+        return { admitted, reason: admitted ? 'paired_passage_corridor_retained' : 'paired_passage_context_changed' };
+      }
+      const admitted = proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'paired_passage_step_bound' : 'paired_passage_context_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const step = proposal.route.steps[0]!, crossing = step.crossing;
-      const { moved, markers, rewired } = observedStep(proposal, first, second);
+      const step = proposal.route.steps[index]!, crossing = step.crossing;
+      const { moved, markers, rewired } = observedStep(proposal, index, first, second);
       const reason = moved ? rewired ? 'passage_connections_rewritten_at_landing'
         : markers ? 'paired_landing_and_remote_markers_observed' : 'expected_position_observed'
         : proposal.scene.neutral && crossing ? 'expected_transfer_or_indicators_unconfirmed' : 'expected_position_missing';
-      return { matched: moved, seal_prefix: true, reason, ...(moved && (rewired || !proposal.route.switchTest && crossing && crossing.pair.key === proposal.route.crossing?.pair.key)
+      return { matched: moved, seal_prefix: !moved || index + 1 >= proposal.actions.length, reason,
+        ...(moved && (rewired || !proposal.route.switchTest && crossing && crossing.pair.key === proposal.route.crossing?.pair.key)
         ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
     },
-    record(before, after, _action, first, second, proposal) {
-      const { memory, scene, route } = proposal;
+    record(before, after, action, first, second, proposal, index) {
+      const { scene, route } = proposal;
+      const memory = (index > 0 && local?.epoch === before.level_epoch ? local : null) ?? proposal.memory;
       const coverage = memory.rewrite ? scene.pairs.every(pair => pair.frames.every(frame => memory.rewrite!.visited.includes(key(frame.point))))
         : memory.traversed.length === scene.pairs.length;
       if (after.levels_completed > before.levels_completed && coverage) {
-        const sightings = proposal.memory.outlets ?? [];
+        const sightings = memory.outlets ?? [];
         const inks = new Set(sightings.map(sighting => sighting.ink));
         const outlet = sightings.length >= 2 && inks.size === 1
           ? { ink: sightings[0]!.ink, refs: sightings.map(sighting => sighting.ref) } : null;
@@ -460,8 +478,8 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
           ...(scene.neutral && visitedInks.size === 1 ? { visitedInk: scene.flags[0]!.color } : {}) };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const step = route.steps[0]!;
-      const { moved, rewired, altered } = observedStep(proposal, first, second);
+      const step = route.steps[index]!;
+      const { moved, rewired, altered } = observedStep(proposal, index, first, second);
       const crossing = moved ? step.crossing : undefined;
       const at = crossing && key(crossing.to.point), observedOutlet = crossing && proposal.scene.neutral && readOutlet(first, crossing.to);
       const sightings = memory.outlets ?? [];
@@ -474,7 +492,9 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
         tests: contact ? [...rewrite.tests, switchTestKey(scene, rewrite.visited, step.point)] : rewrite.tests } : null;
       local = { ...memory, evidence: moved ? [...memory.evidence.slice(-5), after.observation_ref] : memory.evidence,
         traversed: crossing && !memory.traversed.includes(crossing.pair.key) ? [...memory.traversed, crossing.pair.key] : memory.traversed,
-        rejected: moved && altered ? [] : moved ? memory.rejected : [...memory.rejected, proposal.attempt], ...(outlets.length ? { outlets } : {}),
+        rejected: moved && altered ? [] : moved ? memory.rejected : [...memory.rejected,
+          index === 0 ? proposal.attempt : key(route.steps[index - 1]!.point) + '/' + action.action_ref],
+        ...(outlets.length ? { outlets } : {}),
         ...(updated ? { rewrite: updated } : {}) };
       return { events: [], ...(moved && rewired
         ? { reviewEvidence: 'The switch changed the partners of the same openings while retaining previously lit indicators.' } : {}) };

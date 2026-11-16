@@ -1,5 +1,6 @@
 import { measureWordScene, wordFocus, wordGlyphs, wordVisitPlan, type WordRecord, type WordState } from '../logos-engine/v6-word-interface.ts';
 import type { NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 
@@ -86,7 +87,7 @@ export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
       const id = `glyph-editing:${need.id}`, planned: WordLeg[] = [];
       if (strategy === 'P07') {
         let before = current;
-        for (const name of path!.slice(0, Math.min(remaining, 64 - local.count))) {
+        for (const name of path!.slice(0, Math.min(remaining, maximumCommittedActions, 64 - local.count))) {
           const after = projectedEdit(before, name, edits, directions);
           if (!after || local.blocked.includes(trialKey(name, before))) break;
           planned.push({ action: { action_ref: name, data: {} }, before, after });

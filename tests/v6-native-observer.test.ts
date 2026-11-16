@@ -38,6 +38,23 @@ test('geometric transition correspondence keeps original ambiguity rules', () =>
   assert.deepEqual(geometricTransitions(geometricComponents(value.before), geometricComponents(value.after)), value.expected);
 });
 
+test('a projected click retains its locus and requires the forecast pixel in the same level', async () => {
+  const sample = reference.cases[0]!;
+  const observation = await measureNativeObservation(sample.public, 1, 'reference');
+  const original = await ObservedInputDomain.makeLocusWitness(observation, sample.rows, sample.witness.point,
+    { reason: 'measured reference', evidence: [observation.observation_ref] });
+  const [x, y] = original.point;
+  const value = (original.palette_value + 1) % 256;
+  const projected = await ObservedInputDomain.projectLocusWitness(original, value);
+  const point_binding = projected, command = { action_ref: 'ACTION6', data: { x, y } };
+  const changed = sample.rows.map((row: number[]) => [...row]);
+  changed[y][x] = value;
+  assert.equal(await ObservedInputDomain.pointGuard(sample.public, command, { point_binding }), false);
+  assert.equal(await ObservedInputDomain.pointGuard({ ...sample.public, frame_rows: changed }, command, { point_binding }), true);
+  assert.equal(await ObservedInputDomain.pointGuard({ ...sample.public, frame_rows: changed, level: 2 }, command, { point_binding }), false);
+  assert.deepEqual(projected.evidence, original.evidence);
+});
+
 test('geometric connectivity preserves diagonal separation, ordering and edge coordinates', () => {
   const rows = [[4, 9, 9], [9, 4, 9], [9, 9, 4]];
   assert.deepEqual(geometricComponents(rows, 4).map(({ color, area }) => [color, area]),
