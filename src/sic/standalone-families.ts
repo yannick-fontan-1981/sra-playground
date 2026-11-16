@@ -115,7 +115,7 @@ export const standalonePlanningGroups = [
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId,
     verifyInventoryTransferId, framedContactId, coupledGaugeRouteId, reproduceCueId, arrangeTurnPostsId, directionalReceptionId, pairedPassageId,
     remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyOrientedDeliveryId, verifyReferencePlacementId, verifyChannelAccessId,
-    displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId,
+    displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId, navigateRevealedGridId,
     pivotCargoId, observedActuatorArrangementId, observedRouteInterventionId, observedSurvivalId, observedRailTransfersId] },
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },
   { id: 'inspect_candidate_relations', families: [verifyCrossingRowsId, verifyCaptureRouteId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, verifyCombinedMarksId, materialAssemblyId, learnMaterialAssemblyId, animationContactId, learnAnimationContactId] },

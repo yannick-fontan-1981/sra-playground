@@ -2,14 +2,16 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const navigateRevealedGridId = 'sic_navigate_revealed_grid';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Grid = { box: NativeBox; pitch: number; columns: number; size: number; tint: number; base: number; actor: number; enemy: number; trail: number;
-  goal: number; charges: NativePoint[]; actorPixels?: NativePoint[]; rail?: number };
+  goal: number; charges: NativePoint[]; actorPixels?: NativePoint[]; rail?: number; sentry?: [number, number, number][] };
 type Cell = 'wall' | 'free';
-type Reading = { position: number; obstacle: number | null; obstacles: number[]; risk: number[]; memory: Partial<Record<number, Cell>>; charges: number };
+type Reading = { position: number; obstacle: number | null; obstacles: number[]; risk: number[];
+  memory: Partial<Record<number, Cell>>; charges: number; sentries?: number[] };
 type Motion = { from: number; at: number };
 type State = { epoch: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean };
@@ -27,7 +29,7 @@ function tile(grid: Grid, index: number): NativeBox {
   return [x, y, x + grid.pitch - 1, y + grid.pitch - 1];
 }
 
-function measure(rows: NativeRows): Grid | null {
+function measure(rows: NativeRows, inherited?: Grid): Grid | null {
   const parts = geometricComponents(rows), candidates: Grid[] = [];
   const outlines = parts.filter(p => width(p.bbox) >= 24 && height(p.bbox) >= 24
     && p.area >= 2 * (width(p.bbox) + height(p.bbox) - 2)
@@ -53,7 +55,10 @@ function measure(rows: NativeRows): Grid | null {
       const goalFrame = goalFrames[0]!;
       const enemyFrames = squareFrames.filter(p => p !== goalFrame);
       const enemyFrame = enemyFrames[0]!;
-      const trail = colorAt(rows, center(enemyFrame.bbox));
+      const rebound: Grid | null = inherited && inherited.pitch !== pitch && inherited.tint === tint && inherited.base === base
+        && enemyFrame.color === inherited.enemy ? inherited : null;
+      if (inherited && !rebound) continue;
+      const trail: number | undefined = rebound?.trail ?? colorAt(rows, center(enemyFrame.bbox));
       if (trail === undefined || trail === enemyFrame.color || trail === tint) continue;
       if (repeated && enemyFrames.some(frame => frame.color !== enemyFrame.color || colorAt(rows, center(frame.bbox)) !== trail)) continue;
       const details = new Set<number>();
@@ -64,20 +69,34 @@ function measure(rows: NativeRows): Grid | null {
           if (color !== undefined && color !== enemyFrame.color && color !== trail && color !== base && color !== tint) details.add(color);
         }
       }
-      const rail = details.size === 1 ? [...details][0]! : null;
+      const rail = details.size === 1 ? [...details][0]! : rebound?.rail ?? null;
       const bodies = parts.filter(p => inside(p) && p.color !== base && p.color !== tint && width(p.bbox) === height(p.bbox)
         && width(p.bbox) >= 2 && width(p.bbox) <= (repeated ? Math.ceil(pitch / 2) : pitch / 2) && !p.rectangular
         && !squareFrames.some(f => p.bbox[0] >= f.bbox[0] && p.bbox[1] >= f.bbox[1] && p.bbox[2] <= f.bbox[2] && p.bbox[3] <= f.bbox[3]));
-      if (bodies.length !== 1) continue;
+      const player = rebound ? bodies.filter(body => body.color === rebound.actor) : bodies;
+      if (player.length !== 1) continue;
       const badges = parts.filter(p => p.color === enemyFrame.color && p.rectangular && p.bbox[3] < y
         && width(p.bbox) >= 2 && width(p.bbox) <= pitch && height(p.bbox) >= 2 && height(p.bbox) <= pitch);
       if (!badges.length) continue;
       const goal = ((goalFrame.bbox[1] - y) / pitch) * columns + (goalFrame.bbox[0] - x) / pitch;
-      const actor = bodies[0]!;
+      const actor = player[0]!;
       const actorPixels = actor.mask.map(([dx, dy]) => [(actor.bbox[0] - x) % pitch + dx, (actor.bbox[1] - y) % pitch + dy] as const);
-      if (repeated && actorPixels.some(([dx, dy]) => dx >= pitch || dy >= pitch)) continue;
-      candidates.push({ box, pitch, columns, size, tint, base, actor: bodies[0]!.color, enemy: enemyFrame.color, trail,
-        goal, charges: badges.map(p => center(p.bbox)), ...(repeated ? { actorPixels } : {}), ...(rail === null ? {} : { rail }) });
+      if ((repeated || rebound) && actorPixels.some(([dx, dy]) => dx >= pitch || dy >= pitch)) continue;
+      const phase = ([left, top]: NativeBox) => [(left - x) % pitch, (top - y) % pitch];
+      const otherBodies = rebound ? bodies.filter(body => body !== actor && body.area === actor.area
+        && width(body.bbox) === width(actor.bbox) && phase(body.bbox).every((value, axis) => value === phase(actor.bbox)[axis])) : [];
+      let sentry: Grid['sentry'];
+      if (otherBodies.length === 1) {
+        const [left, top, right, bottom] = otherBodies[0]!.bbox, [u, v] = phase(otherBodies[0]!.bbox);
+        const pixels: [number, number, number][] = [];
+        for (let row = top; row <= bottom; row++) for (let col = left; col <= right; col++) {
+          pixels.push([u! + col - left, v! + row - top, rows[row]![col]!]);
+        }
+        if (pixels.some(([, , value]) => value === actor.color)) sentry = pixels;
+      }
+      candidates.push({ box, pitch, columns, size, tint, base, actor: actor.color, enemy: enemyFrame.color, trail,
+        goal, charges: badges.map(p => center(p.bbox)), ...(repeated || rebound ? { actorPixels } : {}),
+        ...(rail === null ? {} : { rail }), ...(sentry ? { sentry } : {}) });
     }
   }
   return candidates.length === 1 ? candidates[0]! : null;
@@ -85,13 +104,14 @@ function measure(rows: NativeRows): Grid | null {
 
 function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
   const memory = { ...prior?.memory }, risk = new Set(prior?.risk);
-  const positions: number[] = [], obstacles: number[] = [];
+  const positions: number[] = [], obstacles: number[] = [], sentries: number[] = [];
   for (let i = 0; i < grid.size; i++) {
     const [x, y] = tile(grid, i), m = Math.floor(grid.pitch / 2);
     const a = rows[y]?.[x], b = rows[y]?.[x + 1], c = rows[y + 1]?.[x + 1], d = rows[y + m]?.[x + m];
     const actorVisible = grid.actorPixels ? grid.actorPixels.every(([dx, dy]) => rows[y + dy]?.[x + dx] === grid.actor) : d === grid.actor;
     const occupied = actorVisible && a !== grid.enemy && i !== grid.goal;
     if (occupied) positions.push(i);
+    if (grid.sentry?.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value)) sentries.push(i);
     if (a === grid.enemy) obstacles.push(i);
     if (a === grid.enemy || d === grid.trail || (grid.rail !== undefined && d === grid.rail)) risk.add(i);
     if (i === grid.goal || occupied) memory[i] = 'free';
@@ -99,9 +119,9 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
     else if (a === b && c !== b && a !== grid.tint && a !== grid.base) memory[i] = 'wall';
     else if (a === grid.tint && b === a && c === a && memory[i] !== 'wall') memory[i] = 'free';
   }
-  if (positions.length !== 1 || (!grid.actorPixels && obstacles.length > 1)) return null;
+  if (positions.length !== 1 || (!grid.actorPixels && obstacles.length > 1) || (grid.sentry && !sentries.length)) return null;
   return { position: positions[0]!, obstacle: obstacles[0] ?? null, obstacles, risk: [...risk], memory,
-    charges: grid.charges.filter(p => colorAt(rows, p) === grid.enemy).length };
+    charges: grid.charges.filter(p => colorAt(rows, p) === grid.enemy).length, ...(grid.sentry ? { sentries } : {}) };
 }
 
 function route(reading: Reading, grid: Grid): { action: string; target: number } | null {
@@ -117,6 +137,7 @@ function route(reading: Reading, grid: Grid): { action: string; target: number }
       const x = index % grid.columns + dx, y = Math.floor(index / grid.columns) + dy;
       const target = y * grid.columns + x;
       if (x < 0 || x >= grid.columns || y < 0 || target >= grid.size || reading.memory[target] === 'wall') continue;
+      if (index === start && reading.sentries?.some(sentry => axisDistance(sentry, target, grid) <= 1)) continue;
       const nextCost = cost + 1 + (reading.memory[target] ? 0 : 2) + (risk.has(target) ? 8 : 0);
       if (nextCost >= (best.get(target) ?? Infinity)) continue;
       best.set(target, nextCost);
@@ -168,14 +189,23 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
   let state: State | null = null;
   return {
     id: navigateRevealedGridId,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (state?.epoch !== observation.level_epoch - 1 && !state?.grid.sentry) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal?.local.grid.sentry ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const grid = prior?.grid ?? measure(rows);
+      const inherited = state?.epoch === observation.level_epoch - 1 ? state : null;
+      const normal = prior?.grid ?? measure(rows);
+      const grid = normal ?? (inherited ? measure(rows, inherited.grid) : null);
       if (!grid) return null;
       const last = read(rows, grid, prior?.last);
       if (!last) return null;
-      const local = prior ? { ...prior, last } : { epoch: observation.level_epoch, grid, last, previousObstacle: null, refs: [], consecutiveWaits: 0 };
+      const local = prior ? { ...prior, last } : { epoch: observation.level_epoch, grid, last, previousObstacle: null,
+        refs: !normal && inherited ? inherited.refs : [], consecutiveWaits: 0 };
       const choice = choose(local);
       if (!choice) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
@@ -202,6 +232,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
           triggerCard: card, actor: tile(grid, last.position), target, exit: tile(grid, grid.goal),
           obstacle: last.obstacle === null ? null : tile(grid, last.obstacle),
           ...(last.obstacles.length > 1 ? { obstacles: last.obstacles.map(index => tile(grid, index)) } : {}),
+          ...(last.sentries?.length ? { sentries: last.sentries.map(index => tile(grid, index)) } : {}),
           revealedWalls: Object.values(last.memory).filter(v => v === 'wall').length },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],

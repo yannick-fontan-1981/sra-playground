@@ -1021,6 +1021,10 @@ export function readNativeResolution(agent: {
       const box = bounds(obstacle);
       if (box) subjects.push({ label: 'Moving obstacle', box });
     }
+    if (Array.isArray(card?.sentries)) for (const sentry of card.sentries) {
+      const box = bounds(sentry);
+      if (box) subjects.push({ label: 'Moving hazard', box });
+    }
   }
   if (situationCard && (family === reproduceCueId || family === learnAnimatedCueId)) {
     for (const [field, label] of [['actor', 'Moving sprite'], ['panel', 'Input grid'], ['target', 'Current target'], ['exit', 'Matching region']] as const) {
