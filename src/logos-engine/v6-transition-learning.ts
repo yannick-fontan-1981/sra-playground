@@ -8,7 +8,7 @@
  * environment action. Hashes use the existing portable integer JSON contract;
  * Python float/int identity is outside that shared browser contract.
  */
-import { canonical, compareUnicode, digest } from './canonical.ts';
+import { canonical, compareUnicode, digest, equal } from './canonical.ts';
 import { v6Digest } from './v6-native-observer.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeRows } from './v6-native-types.ts';
@@ -386,6 +386,34 @@ export async function predictCandidateRule(rule: TransitionRecord, observation: 
     predicted_entities: predicted, position_context: positionContext(bindings), conditions: copy(rule.conditions), scope: copy(rule.scope),
     predictive_use_allowed: truth(rule.predictive_use_allowed), uncertainty: copy(rule.uncertainty) };
 }
+
+export interface ReleasedRuleProjections {
+  readonly predictions: readonly TransitionRecord[];
+}
+const releasedProjections = new WeakMap<ReleasedRuleProjections, {
+  observation: TransitionObservation;
+  command: TransitionAction;
+  rules: ReadonlyMap<TransitionRecord, TransitionRecord>;
+}>();
+
+/** The receipt keeps the original predictions. Its local binding is never
+ * persisted or reconstructed from a rule id or an observation reference. */
+export async function captureReleasedRuleProjections(priorRules: readonly TransitionRecord[], observation: TransitionObservation,
+  action: TransitionAction): Promise<ReleasedRuleProjections> {
+  const rules = retainNativeJson(priorRules), command = retainNativeJson(action);
+  const predictions = frozenRecord(await Promise.all(rules.map(rule => predictCandidateRule(rule, observation, command))));
+  const capture = Object.freeze({ predictions });
+  let reusable: Map<TransitionRecord, TransitionRecord> | undefined;
+  for (const [index, prediction] of predictions.entries()) {
+    // Nonstructural and refuted rules are already rejected in constant time.
+    if (prediction.status !== 'unknown') (reusable ??= new Map()).set(rules[index]!, prediction);
+  }
+  if (reusable && deeplyFrozen(observation)) {
+    releasedProjections.set(capture, { observation, command, rules: reusable });
+  }
+  return capture;
+}
+
 function predictionMatches(prediction: TransitionRecord, after: TransitionObservation): boolean {
   const actual = after.entities.map(neutralView);
   return prediction.predicted_entities.every((item: TransitionRecord) => actual.filter(entity => same(entity, item.entity)).length === 1);
@@ -456,18 +484,22 @@ export async function assessRetainedTransition(before: TransitionObservation, af
   return (await assessRetainedTransitionWithChecks(before, after, action, priorRules, false)).assessment;
 }
 export async function assessRetainedTransitionWithChecks(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
-  priorRules: readonly TransitionRecord[], checkPredictions: boolean): Promise<{ assessment: TransitionRecord; predictionChecks: TransitionRecord[] }> {
-  const result = await assessTransitionState(before, after, action, priorRules, true, checkPredictions);
+  priorRules: readonly TransitionRecord[], checkPredictions: boolean, released?: ReleasedRuleProjections):
+  Promise<{ assessment: TransitionRecord; predictionChecks: TransitionRecord[] }> {
+  const result = await assessTransitionState(before, after, action, priorRules, true, checkPredictions, released);
   return { assessment: retainNativeJson(result.assessment), predictionChecks: result.predictionChecks };
 }
 async function assessTransitionState(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
-  priorRules: readonly TransitionRecord[], retained: boolean, checkPredictions: boolean):
+  priorRules: readonly TransitionRecord[], retained: boolean, checkPredictions: boolean, released?: ReleasedRuleProjections):
   Promise<{ assessment: TransitionRecord; predictionChecks: TransitionRecord[] }> {
   checkNeutralTransition(before, after, action);
   const observed = await evidence(before, after, action);
   let literal: TransitionRecord | undefined, featureDigest: Promise<string> | undefined, pairs: PairProjection | undefined;
   const retainedRules = retained ? priorRules.map(rule => retainNativeJson(rule)) : priorRules;
   const projections = new Map<TransitionRecord, ReturnType<ProjectRule>>();
+  const releasedBinding = checkPredictions && released ? releasedProjections.get(released) : undefined;
+  const priorProjections = releasedBinding?.observation === before && equal(releasedBinding.command, action)
+    ? releasedBinding.rules : undefined;
   const shared: SharedRuleEvidence | undefined = retained ? {
     observed,
     literalConditions: () => literal ??= literalConditions(before, action, false),
@@ -475,7 +507,8 @@ async function assessTransitionState(before: TransitionObservation, after: Trans
     projectRule: rule => {
       const existing = projections.get(rule);
       if (existing) return existing;
-      const pending = predictCandidateRule(rule, before, action).then(prediction => {
+      const prepared = priorProjections?.get(rule);
+      const pending = (prepared ? Promise.resolve(prepared) : predictCandidateRule(rule, before, action)).then(prediction => {
         let matched: boolean | undefined;
         return { prediction, matches: () => matched ??= predictionMatches(prediction, after) };
       });

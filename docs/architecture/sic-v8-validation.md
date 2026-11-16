@@ -1155,3 +1155,19 @@ Le temps total passe de **44,23 s à 41,76 s**. Les **239 commandes**, leurs ret
 Le rejeu à horloge figée donne les mêmes empreintes du graphe de GABA après chaque niveau. Les deux variantes enregistrent respectivement **167, 447, 883 et 2 292** vérifications de prédiction aux niveaux 1 à 4. Après la victoire du niveau 4, chacune compte **239 acquisitions et 14 325 deltas**. Le typage TypeScript et **255 tests** passent.
 
 Les contrôles croisés sur LS19 et LS20 produisent aussi les mêmes empreintes et les mêmes acquisitions du niveau 1 au niveau 4. Sur l’ensemble des trois jeux, les **526 commandes et leurs retours complets** sont identiques.
+
+### Réutilisation de la projection avant commande
+
+La projection préparée avant la première commande reste rattachée à l’objet d’observation immuable, à la version immuable de la règle et au contenu de la commande. Quand les trois concordent, elle sert à contrôler l’image réellement retournée. La liaison est interne au préfixe et ne se transmet pas à la commande suivante. Le rejeu instrumenté de GABA compte **102, 263, 508 et 1 346 réutilisations** aux niveaux 1 à 4.
+
+Les durées sont les moyennes de deux passages à un worker et sans profileur, dans des ordres inversés. La référence est la version 117 (`4ee23065`).
+
+| Niveau GABA | Temps version 117 | Temps optimisé | Gain total |
+| --- | ---: | ---: | ---: |
+| 1 | 9,119 s | 9,112 s | +0,1 % |
+| 2 | 6,491 s | 6,209 s | +4,3 % |
+| 3 | 9,829 s | 10,213 s | −3,9 % |
+| 4 | 17,400 s | 16,758 s | +3,7 % |
+| Total | 42,838 s | 42,292 s | +1,3 % |
+
+Le niveau 3 est plus lent dans les deux passages. Le niveau 4 varie dans les deux sens selon l’ordre du passage. Les **526 commandes et leurs retours complets** et les empreintes du graphe à chaque fin de niveau concordent sur GABA, LS19 et LS20, du niveau 1 au niveau 4. Le typage TypeScript et **199 tests** passent.

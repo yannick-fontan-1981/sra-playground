@@ -9,7 +9,7 @@
  */
 import { assessPropertyTransition, assessRetainedTransitionWithChecks, checkNeutralTransition,
   NeutralEntityDomainError, transitionObservationRef } from './v6-transition-learning.ts';
-import type { TransitionAction, TransitionObservation, TransitionRecord as R } from './v6-transition-learning.ts';
+import type { ReleasedRuleProjections, TransitionAction, TransitionObservation, TransitionRecord as R } from './v6-transition-learning.ts';
 
 export interface NativeTransitionAssessment {
   assessment: R;
@@ -19,7 +19,7 @@ export interface NativeTransitionAssessment {
 
 export async function assessNativeTransitionDomain(
   before: TransitionObservation, after: TransitionObservation, command: TransitionAction,
-  priorRules: readonly R[], priorProperties: readonly R[], checkPredictions: boolean,
+  priorRules: readonly R[], priorProperties: readonly R[], checkPredictions: boolean, released?: ReleasedRuleProjections,
 ): Promise<NativeTransitionAssessment> {
   // Catch only this preflight refusal. Exceptions from actual inference,
   // evidence validation, rule reconstruction or acquisition are never caught.
@@ -47,7 +47,7 @@ export async function assessNativeTransitionDomain(
       predictionChecks: checkPredictions ? priorRules.map(rule => ({ rule_id: rule.rule_id, status: 'unknown', reason,
         evidence_refs, validation_performed: false, release_authority: false })) : [] };
   }
-  const learning = await assessRetainedTransitionWithChecks(before, after, command, priorRules, checkPredictions);
+  const learning = await assessRetainedTransitionWithChecks(before, after, command, priorRules, checkPredictions, released);
   const assessment = { ...learning.assessment };
   if (command.action_ref === 'ACTION6') {
     const properties = await assessPropertyTransition(before, after, command, priorProperties);

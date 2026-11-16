@@ -4,7 +4,8 @@ import type { ReasoningDynamicState, ReasoningMemoryState } from './v6-reasoning
 import { NativeSrcBridge, NeutralEngine } from './v6-composition-engine.ts';
 import type { CompositionBridgeState, CompositionReport } from './v6-composition-engine.ts';
 import { CompositionTargetTree, mainObjective, postAnalysis, protocolProjection, stateCompositions } from './v6-target-binding.ts';
-import { predictCandidateRule, predictPropertyRule } from './v6-transition-learning.ts';
+import { captureReleasedRuleProjections, predictPropertyRule } from './v6-transition-learning.ts';
+import type { ReleasedRuleProjections } from './v6-transition-learning.ts';
 import { assessNativeTransitionDomain } from './v6-native-transition-domain.ts';
 import { pythonEqual as same } from './v6-operations.ts';
 import { objectValue } from './canonical.ts';
@@ -61,6 +62,7 @@ export class NativeCompositionAuthority {
     version: number; node: KnowledgeNode | undefined; written: boolean; record: unknown;
   }> } | null = null;
   private frozen: R | null = null;
+  private releasedRuleProjections: ReleasedRuleProjections | undefined;
   private lastRelease: CompositionReport | null = null;
   private lastAnalysis: R[] = [];
   constructor(policy: R, targetLevels: number) { this.objective = mainObjective(policy, targetLevels); }
@@ -216,11 +218,13 @@ export class NativeCompositionAuthority {
     try { const remembered = this.memory.nativeGet(EPISODE, 'empirical_registry'); registry = remembered.value; registryRevision = remembered.revision; } catch (error) { if (!(error instanceof RangeError)) throw error; }
     const properties: R[] = this.memory.nativeGet(EPISODE, 'property_rules').value;
     const first = proposal.actions[0]!;
+    const projected = await captureReleasedRuleProjections(registry, observation, first);
     this.frozen = frozenSource({ before_observation_ref: observation.observation_ref, prior_rules: registry, prior_property_rules: properties,
-      first_action: first, candidate_predictions: await Promise.all(registry.map(rule => predictCandidateRule(rule, observation, first))),
+      first_action: first, candidate_predictions: projected.predictions,
       addressed_predictions: first.action_ref === 'ACTION6' ? await Promise.all(properties.map(async rule => ({ action: first, prediction: await predictPropertyRule(rule, observation, first) }))) : [],
       selected_experiment: (proposal.question as R)?.experiment ?? null, selected_control: (proposal.question as R)?.control_experiment ?? null,
       scope: 'first-action mechanism predictions are conditional; later path steps use frozen historical protocol expectations from the committed proposal' });
+    this.releasedRuleProjections = projected;
     this.memory.put(EPISODE, 'state', { level_epoch: observation.level_epoch, observation_revision: revision, facts: proposal.facts ?? {},
       compositions: stateCompositions(proposal, this.objective), bundles: [{ id: 'B0', composition_ref: ref, admitted: guard.admitted, actions: proposal.actions }],
       memory_hint: { current_observation: summary(observation), main_objective_memory_revision: this.memory.get(EPISODE, 'main_objective').revision,
@@ -264,7 +268,7 @@ export class NativeCompositionAuthority {
         const priorProperties = command.action_ref === 'ACTION6'
           ? transition.index === 0 ? this.frozen?.prior_property_rules ?? [] : this.memory.nativeGet(EPISODE, 'property_rules').value : [];
         const { assessment, predictionChecks: checks, updateRegistries } = await assessNativeTransitionDomain(
-          before, after, command, prior, priorProperties, transition.index === 0);
+          before, after, command, prior, priorProperties, transition.index === 0, this.releasedRuleProjections);
         if (updateRegistries && command.action_ref === 'ACTION6') {
           this.memory.nativePut(EPISODE, 'property_rules', assessment.property_rules, after.observation_ref, after.revision);
         }
@@ -301,7 +305,9 @@ export class NativeCompositionAuthority {
     if (target.route_key) this.memory.put(EPISODE, 'composition_target', CompositionTargetTree.seal(target, record), after.observation_ref, after.revision);
     await this.checkpoint('transition.acquire', writes);
     this.lastAnalysis = await postAnalysis(this.memory, { run: request => this.run(request, execution) }, EPISODE, after, after.revision, this.objective, record, boundary);
-    this.frozen = null; return record;
+    this.frozen = null;
+    this.releasedRuleProjections = undefined;
+    return record;
   }
 
   snapshot(): R {

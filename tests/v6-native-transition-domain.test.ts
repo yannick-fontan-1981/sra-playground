@@ -2,8 +2,10 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
+import { canonical } from '../src/logos-engine/canonical.ts';
 import { assessNativeTransitionDomain } from '../src/logos-engine/v6-native-transition-domain.ts';
-import { assessTransition, checkNeutralTransition, NeutralEntityDomainError } from '../src/logos-engine/v6-transition-learning.ts';
+import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
+import { assessTransition, captureReleasedRuleProjections, checkNeutralTransition, NeutralEntityDomainError } from '../src/logos-engine/v6-transition-learning.ts';
 
 type R = Record<string, any>;
 const fixture = JSON.parse(await readFile(new URL('./fixtures/v6-transition-reference.json', import.meta.url), 'utf8'));
@@ -78,6 +80,53 @@ test('the prediction report and registry share each check for its exact observed
     assert.deepEqual(continuation.predictionChecks, []);
     assert.deepEqual(continuation.assessment, result.assessment);
   }
+});
+
+test('a released projection only reuses its original rule, starting observation and command', async context => {
+  const sample = fixture.cases.find((row: R) => row.name === 'changed_positions_acquire_translation');
+  const [rule, before, after, command] = retainNativeJson(structuredClone(sample.args));
+  const capture = await captureReleasedRuleProjections([rule], before, command);
+  assert.equal(capture.predictions[0]!.status, 'conditional_prediction');
+  assert.ok(Object.isFrozen(capture.predictions[0]));
+  let expectedDigestInput = canonical(rule), hashes = 0;
+  const hash = crypto.subtle.digest.bind(crypto.subtle), decoder = new TextDecoder();
+  context.mock.method(crypto.subtle, 'digest', (algorithm: AlgorithmIdentifier, bytes: BufferSource) => {
+    if (decoder.decode(bytes) === expectedDigestInput) hashes++;
+    return hash(algorithm, bytes);
+  });
+
+  const exact = await assessNativeTransitionDomain(before, after, structuredClone(command), [rule], [], true, capture);
+  assert.equal(hashes, 0, 'The released rule digest is reused for the actual returned command');
+  assert.deepEqual(exact.predictionChecks[0], sample.expected);
+
+  const missingEntities = { ...after, entities: [] };
+  const changedReturn = await assessNativeTransitionDomain(before, missingEntities, command, [rule], [], true, capture);
+  assert.equal(hashes, 0);
+  assert.equal(changedReturn.predictionChecks[0]!.last_validation.status, 'refuted', 'The actual return is compared again');
+
+  for (const [start, prepared] of [[structuredClone(before), capture], [before, { ...capture }]]) {
+    hashes = 0;
+    const result = await assessNativeTransitionDomain(start, after, command, [rule], [], true, prepared);
+    assert.equal(hashes, 1, 'A new observation object or an unbound copy of the capture recomputes the prediction');
+    assert.deepEqual(result.predictionChecks[0], sample.expected);
+  }
+
+  const shallow = Object.freeze(structuredClone(before));
+  const fromShallow = await captureReleasedRuleProjections([rule], shallow, command);
+  hashes = 0;
+  await assessNativeTransitionDomain(shallow, after, command, [rule], [], true, fromShallow);
+  assert.equal(hashes, 1, 'A frozen envelope with mutable descendants does not authorize reuse');
+
+  const changedCommand = await assessNativeTransitionDomain(before, after, { ...command, action_ref: 'ACTION9' }, [rule], [], true, capture);
+  assert.equal(changedCommand.predictionChecks[0]!.last_validation.status, 'not_applicable');
+
+  const changedRule = retainNativeJson({ ...rule, uncertainty: [...rule.uncertainty, 'revised'] });
+  expectedDigestInput = canonical(changedRule);
+  hashes = 0;
+  const revised = await assessNativeTransitionDomain(before, after, command, [changedRule], [], true, capture);
+  assert.equal(hashes, 1, 'A different version with the same rule id receives a new digest');
+  assert.notEqual(revised.predictionChecks[0]!.validation_evidence.at(-1)!.frozen_rule_digest,
+    capture.predictions[0]!.rule_digest);
 });
 
 test('invalid neutral input and later evidence errors still stop acquisition', async () => {
