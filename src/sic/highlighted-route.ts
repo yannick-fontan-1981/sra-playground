@@ -357,7 +357,9 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
           known = { ...known, completed: after.levels_completed, ref: after.observation_ref };
           return { events: [] };
         }
-        const { scene } = proposal, parts = geometricComponents(first);
+        const scene = index > 0 && proposal.route ? measure(first, memory)?.scene : proposal.scene;
+        if (!scene) return { events: [] };
+        const parts = geometricComponents(first);
         const actor = parts.find(part => part.color === memory.ground && same(center(part.bbox), from)
           && boxWidth(part.bbox) === boxWidth(scene.actor.box));
         const goal = parts.find(part => part.color === scene.goal.color && same(center(part.bbox), scene.goal.point)

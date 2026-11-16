@@ -16,7 +16,7 @@ type Grid = { x: number; y: number; width: number; height: number; pitch: number
 type Tile = { point: NativePoint; edges: number[]; center: number; inner: number };
 type Layout = { grid: Grid; poles: number[]; goal: NativePoint; goalMark: string; floor: string[] };
 type Training = { epoch: number; layout: Layout | null; turns: Record<string, number>; apart: string | null; idle: string | null };
-type Witness = { epoch: number; poles: number[]; goalMark: string; turns: Record<string, number>; refs: string[] };
+type Witness = { epoch: number; poles: number[]; goalMark: string; turns: Record<string, number>; refs: string[]; rotationOnly?: true };
 type Local = { epoch: number; layout: Layout; driver: NativePoint; partner: NativePoint; input: string;
   expected: [NativePoint, NativePoint]; stage: 0 | 1 | 2; stopped: boolean };
 type PairProposal = NativeProposal & { local: Local; was: Piece[]; needId: string };
@@ -114,6 +114,21 @@ function box(grid: Grid, [c, r]: NativePoint): NativeBox {
 function selectedPair(pieces: Piece[]): [Piece, Piece] | null {
   const selected = pieces.filter(piece => piece.selected);
   return pieces.length === 2 && selected.length === 1 ? [selected[0]!, pieces.find(piece => !piece.selected)!] : null;
+}
+
+function rotationInWinningAnimation(layout: Layout, first: NativeRows, frames: readonly NativeRows[]): number | null {
+  const prior = selectedPair(readPieces(first, layout));
+  if (!prior) return null;
+  const [driver, partner] = prior;
+  for (const frame of frames) {
+    const returned = selectedPair(readPieces(frame, layout));
+    if (!returned) continue;
+    const [selected, other] = returned;
+    if (!samePoint(driver.point, selected.point) || !samePoint(partner.point, other.point) || partner.direction !== other.direction) continue;
+    const delta = (selected.direction - driver.direction + 4) % 4;
+    if (delta === 1 || delta === 3) return delta === 1 ? 1 : -1;
+  }
+  return null;
 }
 
 function aligned(a: Piece, b: Piece) {
@@ -224,9 +239,14 @@ export function createSicObservedPolePair(): NativeFamily<Proposal> {
       const { layout } = training;
       if (!layout || !/^ACTION[1-4]$/.test(action.action_ref)) return;
       if (after.levels_completed > before.levels_completed) {
-        if (training.apart && training.idle && frames.some(frame => observedGoalContact(frame, layout))) {
+        if (!frames.some(frame => observedGoalContact(frame, layout))) return;
+        if (training.apart && training.idle) {
           witness = { epoch: after.level_epoch, poles: layout.poles, goalMark: layout.goalMark, turns: training.turns,
             refs: [training.apart, training.idle, after.observation_ref] };
+        } else {
+          const turn = rotationInWinningAnimation(layout, first, frames);
+          if (turn !== null) witness = { epoch: after.level_epoch, poles: layout.poles, goalMark: layout.goalMark,
+            turns: { ...training.turns, [action.action_ref]: turn }, refs: [before.observation_ref, after.observation_ref], rotationOnly: true };
         }
         return;
       }
@@ -254,7 +274,7 @@ export function createSicObservedPolePair(): NativeFamily<Proposal> {
         const layout = readLayout(observation, rows);
         if (!layout || layout.goalMark !== memory.goalMark || key(layout.poles) !== key(memory.poles)) return null;
         const pieces = readPieces(rows, layout), [one, two] = pieces;
-        if (pieces.length > 2) return proposeCoupledNetwork(observation, rows, {
+        if (pieces.length > 2) return memory.rotationOnly ? null : proposeCoupledNetwork(observation, rows, {
           epoch: observation.level_epoch, layout, refs: [], rejected: [],
         }, memory, remaining, inTime);
         if (!one || !two || !aligned(one, two) || one.direction !== two.direction || samePoint(one.point, two.point)) return null;
@@ -311,7 +331,10 @@ export function createSicObservedPolePair(): NativeFamily<Proposal> {
       if (!witness) return { events: [] };
       const layout = isNetworkProposal(proposal) ? proposal.network.layout : proposal.local.layout;
       if (after.levels_completed > before.levels_completed && frames.some(frame => observedGoalContact(frame, layout))) {
+        const demonstratedOutward = witness.rotationOnly && !isNetworkProposal(proposal) && proposal.local.stage === 2
+          && frames.some(frame => confirmPairReturn(proposal, frame, witness!.turns));
         witness = { ...witness, epoch: after.level_epoch, refs: [...witness.refs.slice(-4), after.observation_ref] };
+        if (demonstratedOutward) delete witness.rotationOnly;
       }
       if (before.level_epoch !== after.level_epoch) return { events: [] };
       if (isNetworkProposal(proposal)) {

@@ -154,7 +154,10 @@ function liveLeg(proposal: Proposal, index: number, rows: NativeRows) {
   if (index === 0) return proposal;
   const scene = sceneFor(rows, geometricComponents(rows), proposal.local.layout);
   if (!scene || !proposal.burst) return null;
-  return { local: proposal.local, scene, step: proposal.burst[index]!, drop: false };
+  const step = proposal.burst[index]!;
+  const drop = step.action.action_ref === 'ACTION6' && step.at[0] === scene.at[0]
+    && step.at[1] === scene.at[1] - proposal.local.layout.pitch;
+  return { local: proposal.local, scene, step, drop };
 }
 
 export function createSicVerifyRemovableSupport(family = verifyRemovableSupportId): NativeFamily<Proposal> {
