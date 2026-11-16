@@ -727,7 +727,8 @@ export function readNativeResolution(agent: {
     if (target) subjects.push({ label: 'Cell selected to satisfy the visible quota', box: target });
   }
   if (situationCard && family === observedCarrierReductionId) {
-    for (const [field, label] of [['carrier', 'Measured carrier'], ['source', 'Piece chosen for the jump'], ['landing', 'Projected landing']] as const) {
+    for (const [field, label] of [['carrier', 'Measured carrier'], ['source', 'Piece chosen for the jump'],
+      ['intermediate', 'Fixed intermediate'], ['landing', 'Projected landing']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
