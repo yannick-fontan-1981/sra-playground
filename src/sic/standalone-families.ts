@@ -114,7 +114,7 @@ export const standalonePlanningGroups = [
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId,
     verifyInventoryTransferId, framedContactId, coupledGaugeRouteId, reproduceCueId, arrangeTurnPostsId, directionalReceptionId, pairedPassageId,
-    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId,
+    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId, translateCoupledPiecesId, learnContactAccessId,
     displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId,
     pivotCargoId, observedActuatorArrangementId, observedRouteInterventionId, observedSurvivalId, observedRailTransfersId] },
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },

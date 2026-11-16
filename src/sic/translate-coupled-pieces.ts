@@ -3,7 +3,8 @@ import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeP
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 import { sicNeedId } from './need-identity.ts';
-import { contactBox, identifyContactRoute, observeContactRoute, planContacts, selectionPoint,
+import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { contactBox, identifyContactRoute, identifyMaskedContactRoute, observeContactRoute, planContacts, selectionPoint,
   type ContactCalibration, type ContactRoute, type ContactRouteMove } from './rectangular-contact-route.ts';
 
 export const translateCoupledPiecesId = 'sic_translate_coupled_pieces';
@@ -167,22 +168,30 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
   const chosen = move.position.selected, at = position.pieces[chosen]!;
   const click = move.input === 'ACTION6' ? selectionPoint(scene, chosen, at) : null;
   const ref = observation.observation_ref;
-  const evidence: [string, ...string[]] = [ref, ...new Set([scene.calibration.evidence, ...Object.values(route.observedControls), ...route.evidence]
+  const evidence: [string, ...string[]] = [ref, ...new Set([scene.calibration.evidence, ...Object.values(route.observedControls), ...route.evidence,
+    ...(route.contactRef ? [route.contactRef] : [])]
     .filter(item => item !== ref))];
-  const isProbe = !!click || move.contact !== null || !route.observedControls[move.input];
+  const fixed = scene.fixedCarrier !== undefined;
+  const reuseContact = fixed && !!route.contactRef && move.contact !== null;
+  const isProbe = !!click || !reuseContact && (move.contact !== null || !route.observedControls[move.input]);
   const goalIndex = move.contact ?? chosen;
   const points = move.position.pieces.map((cell, index) => contactBox(scene, cell, index));
   const [x, y] = points[goalIndex]!;
   const offer = { input: move.input, expected: [x, y] as NativePoint, evidence };
-  const choice = resolveNavigationPrimitives({ mode, evidence, probe: isProbe ? offer : null, access: isProbe ? null : offer, interaction: null });
+  const choice = resolveNavigationPrimitives({ mode, evidence, probe: isProbe ? offer : null,
+    access: isProbe || reuseContact ? null : offer, interaction: reuseContact ? offer : null });
   if (!choice.selected) return null;
   const situation = click ? 'Select the piece needed for the next placement or contact'
-    : move.contact !== null ? 'Test the projected landing while keeping the launcher available'
-      : 'Move the selected piece along the available route';
+    : move.contact !== null ? fixed ? 'Push the cargo toward the planned position while keeping control of the carrier'
+      : 'Test the projected landing while keeping the launcher available'
+      : fixed ? route.path.some(step => step.contact !== null) ? 'Approach the next contact through the free cells of the shape'
+        : 'Move the controlled piece into its own opening'
+        : 'Move the selected piece along the available route';
   const witness = click ? await ObservedInputDomain.makeLocusWitness(observation, rows, click, { reason: situation, evidence }) : null;
   if (click && !witness) return null;
   const parent = 'G_official_completion';
-  const objective = { kind: 'place_matching_rectangular_pieces_using_contact_transfers', scope: ref.split(':revision:', 1)[0]!,
+  const objective = { kind: fixed ? 'place_matching_shapes_using_contact_transfers' : 'place_matching_rectangular_pieces_using_contact_transfers',
+    scope: ref.split(':revision:', 1)[0]!,
     subjects: ['selectable_pieces', 'matching_openings', 'contact_transfers'], parentObjective: parent,
     satisfactionContract: 'official_progress_after_all_matching_openings_are_filled' };
   const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
@@ -193,11 +202,13 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
     status: 'proposed', kind: id, contactRoute: route, contactMove: move, needId: need.id, actions,
     binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     steps: [{ action, expected_after: points, ...(witness ? { point_binding: witness } : {}) }],
-    sicSituationCard: { strategy: choice.selected.id, need: 'Fill each opening while keeping the remaining launchers available',
-      situation, evidence, agenda: choice.entries, mode, triggerCard: choice.card, focus: contactBox(scene, at, chosen),
+    sicSituationCard: { strategy: choice.selected.id, need: fixed ? 'Fit the controlled piece and pushed cargo into their openings'
+      : 'Fill each opening while keeping the remaining launchers available',
+      situation, evidence, agenda: choice.entries, mode, triggerCard: choice.card,
+      focus: contactBox(scene, fixed ? position.pieces[chosen]! : at, chosen),
       related: move.contact === null ? null : contactBox(scene, position.pieces[goalIndex]!, goalIndex),
       projected: move.contact === null ? null : points[goalIndex]!,
-      target: contactBox(scene, scene.pieces[goalIndex]!.goal, goalIndex) },
+      target: contactBox(scene, fixed ? route.path.at(-1)!.position.pieces[goalIndex]! : scene.pieces[goalIndex]!.goal, goalIndex) },
     question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id: composition, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
     sicLocalDecision: { strategy: choice.selected.id, objective: { id: composition, label: navigationPrimitives[choice.selected.id], parent }, need },
@@ -212,6 +223,13 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
   let route: ContactRoute | null = null;
   return {
     id,
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      const epoch = observation.level_epoch;
+      if (!route || (route.epoch !== epoch - 1 && (route.epoch !== epoch || route.scene.fixedCarrier === undefined))) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal && isRoute(proposal) && proposal.contactRoute.scene.fixedCarrier !== undefined ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<CoupledProposal | null> {
       if (remaining < 1 || !['ACTION6', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
       const epoch = observation.level_epoch, mode = execution?.reasoningMode ?? 'exploration';
@@ -219,6 +237,13 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
       const prior = state?.epoch === epoch ? state : null;
       const initial = prior ?? measure(rows);
       if (!initial) {
+        const retained = route?.epoch === epoch - 1 && !route.stopped ? route : null;
+        if (retained) {
+          const masked = identifyMaskedContactRoute(observation, rows, retained.scene.calibration, retained.observedControls);
+          if (masked) return proposeContactRoute(id, observation, rows, {
+            ...masked, evidence: [...new Set([...masked.evidence, ...retained.evidence.slice(-1)])],
+          }, mode);
+        }
         const previous = state?.epoch === epoch - 1 ? state : null;
         const fresh = previous?.launch && identifyContactRoute(observation, rows, previous.launch, previous.motionEvidence ?? {});
         return fresh ? proposeContactRoute(id, observation, rows, fresh, mode) : null;
@@ -275,19 +300,28 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isRoute(proposal)) {
         const result = observeContactRoute(second, proposal.contactRoute, proposal.contactMove, after.observation_ref);
-        return { matched: result?.position === proposal.contactMove.position, seal_prefix: true, reason: 'compare_carrier_and_contact_piece_poses' };
+        const matched = result?.position === proposal.contactMove.position;
+        const reason = proposal.contactRoute.scene.fixedCarrier === undefined ? 'compare_carrier_and_contact_piece_poses'
+          : !matched ? 'shape_footprint_prediction_contradicted'
+            : proposal.contactMove.contact === null ? 'carrier_moved_and_cargo_preserved' : 'cargo_translated_and_carrier_held_position';
+        return { matched, seal_prefix: true, reason };
       }
       const result = returned(second, proposal);
       const matched = result !== null && (key(result) === key(proposal.move.position) || proposal.move.contact !== undefined && key(result) !== key(proposal.local.position));
       return { matched, seal_prefix: true, reason: matched ? 'piece_positions_observed' : 'piece_projection_unconfirmed' };
     },
     record(before, after, _action, first, second, proposal) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       if (isRoute(proposal)) {
-        route = observeContactRoute(second, proposal.contactRoute, proposal.contactMove, after.observation_ref) ??
-          { ...proposal.contactRoute, stopped: true };
+        if (after.levels_completed > before.levels_completed) {
+          route = { ...proposal.contactRoute, position: proposal.contactMove.position, path: [],
+            evidence: [...proposal.contactRoute.evidence.slice(-5), after.observation_ref] };
+        } else if (before.level_epoch === after.level_epoch && before.state === after.state) {
+          route = observeContactRoute(second, proposal.contactRoute, proposal.contactMove, after.observation_ref) ??
+            { ...proposal.contactRoute, stopped: true };
+        }
         return { events: [] };
       }
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, move } = proposal, result = returned(second, proposal);
       state = { ...local, position: result ?? local.position, refs: result ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         attempts: result && key(result) === key(move.position) ? local.attempts : { ...local.attempts, [proposal.attempt]: (local.attempts[proposal.attempt] ?? 0) + 1 } };

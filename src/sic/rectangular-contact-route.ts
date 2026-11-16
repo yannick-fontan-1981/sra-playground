@@ -3,7 +3,8 @@ import type { NativeBox, NativeObservation, NativePoint, NativeRows } from '../l
 export type Direction = readonly [input: string, dx: number, dy: number];
 export type ContactCalibration = { readonly pitch: number; readonly band: number; readonly steps: number; readonly evidence: string };
 type Position = { readonly pieces: readonly number[]; readonly selected: number };
-type Piece = { readonly width: number; readonly height: number; readonly goal: number };
+type Piece = { readonly width: number; readonly height: number; readonly goal: number;
+  readonly mask?: readonly NativePoint[]; readonly goalOptions?: readonly number[] };
 type Scene = {
   readonly pieces: readonly Piece[];
   readonly width: number;
@@ -13,6 +14,8 @@ type Scene = {
   readonly selectedInk: number;
   readonly field: readonly number[];
   readonly calibration: ContactCalibration;
+  readonly fixedCarrier?: number;
+  readonly carrierInk?: number;
 };
 export type ContactRouteMove = { readonly input: string; readonly position: Position; readonly contact: number | null };
 export type ContactRoute = {
@@ -24,6 +27,7 @@ export type ContactRoute = {
   readonly observedControls: Readonly<Record<string, string>>;
   readonly blocked: readonly string[];
   readonly stopped: boolean;
+  readonly contactRef?: string;
 };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -102,6 +106,74 @@ export function identifyContactRoute(observation: NativeObservation, rows: Nativ
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
+type MaskedPart = { box: NativeBox; paint: number; mask: NativePoint[]; signature: string };
+
+export function identifyMaskedContactRoute(observation: NativeObservation, rows: NativeRows, calibration: ContactCalibration,
+  observedControls: Readonly<Record<string, string>>): ContactRoute | null {
+  const { pitch, band, evidence } = calibration, { entities } = observation;
+  const fields = entities.filter(part => part.area > rows.length * rows[0]!.length / 2
+    && width(part.bbox) % pitch === 0 && height(part.bbox) % pitch === 0);
+  if (fields.length !== 1) return null;
+  const field = fields[0]!, [l, t, r, b] = field.bbox, origin: NativePoint = [l, t];
+  const columns = width(field.bbox) / pitch, lines = height(field.bbox) / pitch;
+  if (columns * lines > 1024) return null;
+  const belongs = (box: NativeBox) => box[0] >= l && box[1] >= t && box[2] <= r && box[3] <= b
+    && (box[0] - l) % pitch === 0 && (box[1] - t) % pitch === 0;
+  const latch = (box: NativeBox) => entities.some(part => part.palette_value !== field.palette_value
+    && part.bbox.every((value, i) => value === box[i]! + (i < 2 ? -1 : 1)));
+  const shape = (part: typeof entities[number]): MaskedPart | null => {
+    const box = part.bbox, w = width(box), h = height(box);
+    if (!belongs(box) || w % pitch || h % pitch || w > 5 * pitch || h > 5 * pitch) return null;
+    const counts = new Map<number, number>();
+    for (const [x, y] of part.mask) {
+      const cell = Math.floor(y / pitch) * (w / pitch) + Math.floor(x / pitch);
+      counts.set(cell, (counts.get(cell) ?? 0) + 1);
+    }
+    if ([...counts.values()].some(count => count !== pitch ** 2)) return null;
+    const indices = [...counts.keys()].sort((a, b) => a - b);
+    return { box, paint: part.palette_value, mask: indices.map(i => coords(w / pitch, i)), signature: w + '/' + h + '/' + indices.join(',') };
+  };
+  const observed = entities.flatMap(part => {
+    const measured = shape(part);
+    return measured ? [measured] : [];
+  });
+  const cavities = observed.filter(part => part.paint === field.palette_value && latch(part.box));
+  const small = cavities.filter(part => part.mask.length === 1);
+  if (small.length !== 1) return null;
+  const carriers = entities.filter(part => belongs(part.bbox) && width(part.bbox) === pitch && height(part.bbox) === pitch
+    && part.area === pitch ** 2 - 1 && part.palette_value !== field.palette_value
+    && pixel(rows, center(part.bbox)) !== part.palette_value);
+  if (carriers.length !== 1) return null;
+  const carrier = carriers[0]!, selectedInk = pixel(rows, center(carrier.bbox));
+  if (selectedInk === undefined || selectedInk === field.palette_value) return null;
+  const targets = cavities.filter(part => part.mask.length > 1);
+  const cargo = observed.filter(part => part.paint !== field.palette_value && part.paint !== carrier.palette_value
+    && part.mask.length * pitch ** 2 < width(part.box) * height(part.box)
+    && targets.some(target => target.signature === part.signature));
+  if (cargo.length < 2 || cargo.length > 4 || cargo.length !== targets.length || new Set(cargo.map(part => part.paint)).size !== 1
+    || targets.some(target => targets.filter(part => part.signature === target.signature).length !== cargo.filter(part => part.signature === target.signature).length)) {
+    return null;
+  }
+  const encode = ([x, y]: NativeBox) => (y - t) / pitch * columns + (x - l) / pitch;
+  const pieces: Piece[] = [{ width: 1, height: 1, goal: encode(small[0]!.box) }];
+  for (const part of cargo) {
+    const goalOptions = targets.filter(target => target.signature === part.signature).map(target => encode(target.box));
+    pieces.push({ width: width(part.box) / pitch, height: height(part.box) / pitch, goal: goalOptions[0]!, goalOptions, mask: part.mask });
+  }
+  const starts = [encode(carrier.bbox), ...cargo.map(part => encode(part.box))], half = Math.floor(pitch / 2);
+  const terrain = Array.from({ length: columns * lines }, (_, i) => {
+    const [x, y] = coords(columns, i), value = pixel(rows, [l + x * pitch + half, t + y * pitch + half]);
+    return value === field.palette_value ? 0 : value === band ? 1 : 2;
+  });
+  for (const [i, start] of starts.entries()) {
+    for (const [x, y] of pieces[i]?.mask ?? [[0, 0]]) terrain[start + y * columns + x] = 0;
+  }
+  const scene: Scene = { pieces, width: columns, height: lines, origin, paint: cargo[0]!.paint,
+    selectedInk, field: terrain, calibration, fixedCarrier: 0, carrierInk: carrier.palette_value };
+  return { epoch: observation.level_epoch, scene, position: { pieces: starts, selected: 0 }, path: [],
+    evidence: [evidence], observedControls, blocked: [], stopped: false };
+}
+
 type Candidate = { readonly position: Position; readonly walk: number; readonly score: number; readonly priority: number;
   readonly parent: Candidate | null; readonly input: string; readonly contact: number | null };
 
@@ -141,6 +213,7 @@ export function planContacts(state: ContactRoute, directions: readonly Direction
   const footprints = pieces.map(piece => Array.from({ length: count }, (_, at) => {
     const [x, y] = coords(columns, at);
     if (x + piece.width > columns || y + piece.height > lines) return [];
+    if (piece.mask) return piece.mask.map(([dx, dy]) => (y + dy) * columns + x + dx);
     return Array.from({ length: piece.height }, (_, r) => Array.from({ length: piece.width }, (_, c) => (y + r) * columns + x + c)).flat();
   }));
   const traversable = (limit: number) => footprints.map(items => items.map(cells => !!cells.length && cells.every(at => field[at]! <= limit)));
@@ -166,12 +239,15 @@ export function planContacts(state: ContactRoute, directions: readonly Direction
     for (let at = 0; at < count; at++) if (floor[index]![at]) {
       for (const direction of directions) {
         const walk = advance(at, direction), slide = launch(index, at, direction);
-        if (floor[index]![walk]) { links[walk]!.push(at); steps[at]!.push(walk); }
-        if (slide !== at) links[slide]!.push(at);
+        if (floor[index]![walk] && (scene.fixedCarrier === undefined || index === scene.fixedCarrier)) {
+          links[walk]!.push(at); steps[at]!.push(walk);
+        }
+        if (slide !== at && index !== scene.fixedCarrier) links[slide]!.push(at);
       }
     }
-    const min = new Int32Array(count).fill(1000), queue = [piece.goal], room = new Set([piece.goal]), onFoot = [piece.goal];
-    min[piece.goal] = 0;
+    const goals = piece.goalOptions ?? [piece.goal];
+    const min = new Int32Array(count).fill(1000), queue = [...goals], room = new Set(goals), onFoot = [...goals];
+    for (const goal of goals) min[goal] = 0;
     for (let i = 0; i < queue.length; i++) for (const from of links[queue[i]!]!) {
       if (min[from] !== 1000) continue;
       min[from] = min[queue[i]!]! + 1;
@@ -205,7 +281,9 @@ export function planContacts(state: ContactRoute, directions: readonly Direction
       queue.add({ position: next, walk: cost, score, priority: cost + 2.6 * score, parent: node, input, contact });
     };
     const { selected } = position;
-    for (const index of position.pieces.keys()) if (index !== selected) offer({ ...position, selected: index }, 'ACTION6');
+    if (scene.fixedCarrier === undefined) {
+      for (const index of position.pieces.keys()) if (index !== selected) offer({ ...position, selected: index }, 'ACTION6');
+    }
     for (const direction of directions) {
       const at = advance(position.pieces[selected]!, direction);
       if (!floor[selected]![at]) continue;
@@ -223,6 +301,28 @@ export function planContacts(state: ContactRoute, directions: readonly Direction
 function matchesPositions(rows: NativeRows, scene: Scene, position: Position) {
   const rectangles = position.pieces.map((at, i) => contactBox(scene, at, i));
   const { pitch } = scene.calibration;
+  if (scene.fixedCarrier !== undefined) {
+    const owned = new Map<number, number>();
+    for (const [i, [x, y]] of rectangles.map(([l, t]) => [l, t] as const).entries()) {
+      const paint = i === scene.fixedCarrier ? scene.carrierInk! : scene.paint;
+      let count = 0;
+      for (const [cx, cy] of scene.pieces[i]?.mask ?? [[0, 0]]) {
+        for (let dy = 0; dy < pitch; dy++) for (let dx = 0; dx < pitch; dx++) {
+          const color = rows[y + cy * pitch + dy]?.[x + cx * pitch + dx];
+          if (color === paint) count++;
+          else if (i !== scene.fixedCarrier || color !== scene.selectedInk) return false;
+        }
+      }
+      if (count === 0) return false;
+      owned.set(paint, (owned.get(paint) ?? 0) + count);
+    }
+    const [l, t] = scene.origin;
+    for (let y = t; y < t + scene.height * pitch; y++) for (let x = l; x < l + scene.width * pitch; x++) {
+      const paint = rows[y]?.[x];
+      if (paint !== undefined && owned.has(paint)) owned.set(paint, owned.get(paint)! - 1);
+    }
+    return [...owned.values()].every(count => count === 0);
+  }
   let found = 0;
   for (const row of rows) for (const color of row) found += Number(color === scene.paint);
   let owned = 0;
@@ -242,7 +342,8 @@ export function observeContactRoute(rows: NativeRows, state: ContactRoute, move:
   if (selectedMatches && matchesPositions(rows, scene, move.position)) {
     const observedControls = !isSelection && move.contact === null && !state.observedControls[move.input]
       ? { ...state.observedControls, [move.input]: ref } : state.observedControls;
-    return { ...state, position: move.position, path: state.path.slice(1), evidence: [...state.evidence.slice(-5), ref], observedControls };
+    return { ...state, position: move.position, path: state.path.slice(1), evidence: [...state.evidence.slice(-5), ref], observedControls,
+      ...(scene.fixedCarrier !== undefined && move.contact !== null ? { contactRef: ref } : {}) };
   }
   if (state.blocked.length < 8 && !same(position, move.position) && matchesPositions(rows, scene, position) &&
     (!isSelection || pixel(rows, center(contactBox(scene, position.pieces[position.selected]!, position.selected))) === scene.selectedInk)) {
