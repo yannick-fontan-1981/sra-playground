@@ -1,5 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
@@ -13,8 +13,9 @@ type Part = ReturnType<typeof geometricComponents>[number];
 type Room = { width: number; height: number; parent: number; walls: NativePoint[]; color: number };
 type Position = { rooms: NativePoint[]; selected: number };
 type Layout = { origin: NativePoint; pitch: number; rooms: Room[]; source: { room: number; point: NativePoint }; exit: NativePoint; highlight: number };
-type State = { epoch: number; layout: Layout; position: Position; refs: string[]; rejected: string[] };
+type State = { epoch: number; layout: Layout; position: Position; refs: string[]; rejected: string[]; route?: Move[]; routeFrame?: string };
 type Move = { position: Position; input: string; click?: NativePoint };
+type RoomRoute = { position: Position; moves: Move[] };
 type Proposal = NativeProposal & { local: State; move: Move; needId: string; attempt: string };
 
 const key = (p: NativePoint) => p.join(',');
@@ -185,6 +186,97 @@ function choose(local: State): Move | null {
   return null;
 }
 
+function passageDistance(layout: Layout) {
+  const { width, height } = layout.rooms[0]!, area = width * height, wallCost = 100;
+  const index = ([x, y]: NativePoint) => x + y * width;
+  const exit = index(layout.exit), cache = new Map<string, { cost: number; open: boolean }>();
+  const neighbors = Array.from({ length: area }, (_, i) => dirs.flatMap(([, dx, dy]) => {
+    const x = i % width + dx, y = Math.floor(i / width) + dy;
+    return x >= 0 && x < width && y >= 0 && y < height ? [index([x, y])] : [];
+  }));
+  return (position: Position, physical: string) => {
+    const earlier = cache.get(physical);
+    if (earlier) return earlier;
+    const walls = new Uint8Array(area);
+    for (const [i, room] of layout.rooms.entries()) for (const wall of room.walls) walls[index(add(position.rooms[i]!, wall))] = 1;
+    const start = index(add(position.rooms[layout.source.room]!, layout.source.point));
+    const distances = new Int32Array(area).fill(0x7fffffff), buckets = Array.from({ length: wallCost + 2 }, () => [] as number[]);
+    distances[start] = 0;
+    buckets[0]!.push(start);
+    let distance = 0, pending = 1;
+    while (pending) {
+      const bucket = buckets[distance % buckets.length]!;
+      if (!bucket.length) { distance++; continue; }
+      const at = bucket.pop()!;
+      pending--;
+      if (distances[at] !== distance) continue;
+      if (at === exit) break;
+      for (const destination of neighbors[at]!) {
+        const cost = distance + 1 + walls[destination]! * wallCost;
+        if (cost >= distances[destination]!) continue;
+        distances[destination] = cost;
+        buckets[cost % buckets.length]!.push(destination);
+        pending++;
+      }
+    }
+    // The wall penalty guides search. A long passage can still be entirely open.
+    const result = { cost: distance, open: distance < wallCost || connected(layout, position) };
+    cache.set(physical, result);
+    return result;
+  };
+}
+
+function* roomPlacements(layout: Layout, route: RoomRoute, rejected: ReadonlySet<string>): Generator<RoomRoute> {
+  const entry = positionKey(route.position), firstSegment = route.moves.length === 0;
+  for (let room = 1; room < layout.rooms.length; room++) {
+    const origin = { ...route.position, selected: room }, [x, y] = boxFor(layout, origin, room);
+    const selection: Move[] = room === route.position.selected ? [] : [{ input: 'ACTION6', click: [x, y], position: origin }];
+    if (firstSegment && selection.length && rejected.has(entry + '/' + positionKey(origin))) continue;
+    const queue: RoomRoute[] = [{ position: origin, moves: selection }], seen = new Set([key(origin.rooms[room]!)]);
+    for (const { position, moves } of queue) for (const [input, dx, dy] of dirs) {
+      const next = translated(layout, position, dx, dy);
+      if (!next || firstSegment && !moves.length && rejected.has(entry + '/' + positionKey(next))) continue;
+      const pose = key(next.rooms[room]!);
+      if (seen.has(pose)) continue;
+      seen.add(pose);
+      const segment = [...moves, { input, position: next }];
+      queue.push({ position: next, moves: segment });
+      yield { position: next, moves: [...route.moves, ...segment] };
+    }
+  }
+}
+
+async function searchPlacements(local: State, execution?: NativeExecution): Promise<Move[] | null> {
+  const { layout, position } = local, rejected = new Set(local.rejected);
+  const measure = passageDistance(layout), costs = new Map([[positionKey(position), 0]]);
+  let frontier: RoomRoute[] = [{ position, moves: [] }];
+  // Keep alternative room placements while limiting work on larger hierarchies.
+  for (let round = 0; round < 6 && frontier.length; round++) {
+    const next: { route: RoomRoute; rank: number; physical: string }[] = [];
+    let best: Move[] | null = null;
+    for (const [i, from] of frontier.entries()) {
+      if (execution && i > 0 && i % 8 === 0) await execution.yieldControl();
+      if (execution?.signal?.aborted || (execution?.now?.() ?? performance.now()) >= (execution?.deadlineMs ?? Infinity)) return best;
+      for (const route of roomPlacements(layout, from, rejected)) {
+        const id = positionKey(route.position), cost = route.moves.length;
+        if (cost >= (costs.get(id) ?? Infinity)) continue;
+        costs.set(id, cost);
+        const physical = route.position.rooms.map(key).join(';'), passage = measure(route.position, physical);
+        if (passage.open && (!best || cost < best.length)) best = route.moves;
+        next.push({ route, rank: passage.cost * 2 + cost * 3, physical });
+      }
+    }
+    if (best) return best;
+    const poses = new Set<string>();
+    frontier = next.sort((a, b) => a.rank - b.rank).filter(candidate => {
+      if (poses.has(candidate.physical)) return false;
+      poses.add(candidate.physical);
+      return true;
+    }).slice(0, 48).map(candidate => candidate.route);
+  }
+  return null;
+}
+
 function checked(rows: NativeRows, { local, move }: Proposal): boolean {
   const { layout } = local;
   const predicted = move.position;
@@ -208,7 +300,7 @@ export function createSicNestedPassage(family = nestedPassageId): NativeFamily<P
     },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5', 'ACTION6', ...dirs.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
-      const prior = state?.epoch === observation.level_epoch ? state : null;
+      const prior = state?.epoch === observation.level_epoch && (!state.route || state.routeFrame === observation.frame_hash) ? state : null;
       const initial = prior ?? measure(rows);
       if (!initial) return null;
       const receipt = learns && !prior ? execution?.readDirectionalMotion?.() : null;
@@ -218,10 +310,13 @@ export function createSicNestedPassage(family = nestedPassageId): NativeFamily<P
       const supported = !!motion && !!projected &&
         motion[0] === projected[1] * initial.layout.pitch && motion[1] === projected[2] * initial.layout.pitch;
       if (learns && !prior && !supported) return null;
-      const local = prior ?? { ...initial, epoch: observation.level_epoch,
+      const current = prior ?? { ...initial, epoch: observation.level_epoch,
         refs: supported && receipt ? [receipt.beforeRef, receipt.afterRef] : [], rejected: [] };
-      const move = choose(local);
+      const immediate = current.route?.length ? null : choose(current);
+      const route = current.route?.length ? current.route : immediate ? null : await searchPlacements(current, execution);
+      const move = immediate ?? route?.[0];
       if (!move) return null;
+      const local = route ? { ...current, route, routeFrame: observation.frame_hash } : current;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
@@ -276,7 +371,8 @@ export function createSicNestedPassage(family = nestedPassageId): NativeFamily<P
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, move } = proposal, matched = checked(second, proposal);
       state = { ...local, position: matched ? move.position : local.position, refs: matched ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
-        rejected: matched ? local.rejected : [...local.rejected, proposal.attempt] };
+        rejected: matched ? local.rejected : [...local.rejected, proposal.attempt],
+        ...(local.route ? { route: matched ? local.route.slice(1) : [], routeFrame: after.frame_hash } : {}) };
       return { events: [] };
     },
     state: () => ({ state }),
