@@ -21,7 +21,8 @@ const count = <T>(values: Iterable<T>): Map<T, number> => {
 };
 
 export function measureOccurrenceScene(rows: NativeRows, observation: OccurrenceRecord,
-  previousCalibration: OccurrenceRecord | null = null): OccurrenceRecord | null {
+  previousCalibration: OccurrenceRecord | null = null,
+  options: { allowNarrowerForeground?: boolean } = {}): OccurrenceRecord | null {
   const height = rows.length, width = rows[0]!.length, parts = geometricComponents(rows);
   const background = [...count(rows.flat())].sort((a, b) => b[1] - a[1])[0]![0];
   let outlines: GeometricComponent[] = [];
@@ -108,7 +109,11 @@ export function measureOccurrenceScene(rows: NativeRows, observation: Occurrence
     }
     const pixels = [...pixelMap.values()], left = Math.min(...pixels.map(p => p[0])), top = Math.min(...pixels.map(p => p[1]));
     const right = Math.max(...pixels.map(p => p[0])), bottom = Math.max(...pixels.map(p => p[1]));
-    if (right - left + 1 !== calibration.max_width || bottom - top + 1 !== calibration.max_height) {
+    const w = right - left + 1, h = bottom - top + 1;
+    const spansWidth = w === calibration.max_width, spansHeight = h === calibration.max_height;
+    const narrowerForeground = options.allowNarrowerForeground && (spansWidth || spansHeight)
+      && w > 1 && h > 1 && pixels.length >= Math.max(w, h);
+    if (!(spansWidth && spansHeight) && !narrowerForeground) {
       ambiguous.push({ bbox: [left, top, right, bottom], reason: 'outside_current_foreground_extent_hypothesis' }); continue;
     }
     const enclosing = outlines.filter(part => part.bbox[0] < left && part.bbox[1] < top && part.bbox[2] > right && part.bbox[3] > bottom);
