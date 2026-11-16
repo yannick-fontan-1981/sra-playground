@@ -3,12 +3,14 @@ import type { NativeBox, NativeExecution, NativeFamily, NativeProgramHandle, Nat
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const pairedChannelsId = 'sic_paired_channels';
 export const verifyChannelAccessId = 'sic_verify_channel_access';
 type Tile = { point: NativePoint; box: NativeBox; color: number; count: number; accents: number[] };
 type Part = ReturnType<typeof geometricComponents>[number];
 type Pair = { color: number; from: Tile; to: Tile; other?: Tile };
+type Recipe = { from: number; other: number; result: number; evidence: string };
 type Layout = { pitch: number; tiles: Tile[]; pairs: Pair[]; closed: number; open: number; reserve: number };
 type Thread = { pair: Pair; clicks: Tile[]; mergeAt?: Tile };
 type State = { epoch: number; layout: Layout; threads: Thread[]; rejected: string[]; refs: string[]; count: number; stopped?: true };
@@ -33,9 +35,39 @@ function endpointReached(rows: NativeRows, pair: Pair, pitch: number): boolean {
   return sink.color === pair.color && sink.count >= pitch ** 2 - 1;
 }
 
-function layoutFor(rows: NativeRows): Layout | null {
+function samePigments(recipe: Recipe, a: number, b: number): boolean {
+  return (recipe.from === a && recipe.other === b) || (recipe.from === b && recipe.other === a);
+}
+
+function sourceAssignments(sources: Tile[], sinks: Tile[], recipes: readonly Recipe[]): Pair[][] {
+  const groups: Pair[][] = [], pigments = new Set(sources.map(source => source.color));
+  const compatible = (from: Tile, other: Tile, result: number) => from.color !== other.color
+    && recipes.every(recipe => !samePigments(recipe, from.color, other.color) || recipe.result === result);
+  const assign = (left: Tile[], pairs: Pair[]) => {
+    if (groups.length > 48) return;
+    const to = sinks[pairs.length];
+    if (!to) {
+      if (!left.length) groups.push(pairs);
+      return;
+    }
+    const color = to.accents[0]!;
+    for (const [index, from] of left.entries()) {
+      if (pigments.has(color)) {
+        if (from.color === color) assign(left.filter(tile => tile !== from), [...pairs, { color, from, to }]);
+        continue;
+      }
+      for (const other of left.slice(index + 1)) if (compatible(from, other, color)) {
+        assign(left.filter(tile => tile !== from && tile !== other), [...pairs, { color, from, other, to }]);
+      }
+    }
+  };
+  assign(sources, []);
+  return groups.length <= 48 ? groups : [];
+}
+
+function layoutFor(rows: NativeRows, recipes: readonly Recipe[]): Layout[] {
   const parts = geometricComponents(rows);
-  const candidates: Layout[] = [];
+  const candidates: Layout[][] = [];
   for (const field of parts.filter(p => Math.min(width(p.bbox), height(p.bbox)) >= 24 && p.area > 100
     && p.bbox[0] > 0 && p.bbox[1] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[3] < rows.length - 1)) {
     for (const pitch of [3, 4, 5]) {
@@ -54,7 +86,23 @@ function layoutFor(rows: NativeRows): Layout | null {
       const marks = surface.filter(tile => tile.count === pitch ** 2 - pitch && tile.accents.length === 1);
       const sources = marks.filter(tile => tile.color !== open && tile.color !== closed);
       const sinks = marks.filter(tile => tile.color === open);
-      if (sources.length < 2 || sources.length > 4 || sinks.length < 2 || marks.length !== sinks.length + sources.length) continue;
+      if (sources.length < 2 || sources.length > 8 || sinks.length < 2 || sinks.length > 6 || marks.length !== sinks.length + sources.length) continue;
+      const indicators = parts.filter(p => p.bbox[3] < t && height(p.bbox) === 2 && width(p.bbox) >= 6 && p.area === 2 * width(p.bbox));
+      if (indicators.length !== 1) continue;
+      const geometry = { pitch, tiles: surface, closed, open, reserve: width(indicators[0]!.bbox) };
+      if (sources.length > 4 || sinks.length > 3) {
+        // A source can have the same paint as its marker. Require an exact demanded pigment and a unique isolated solid tile.
+        const uniform = [...new Set(sinks.map(sink => sink.accents[0]!))].flatMap(color => {
+          if (color === open || color === closed || sources.some(source => source.color === color)) return [];
+          const matching = surface.filter(tile => tile.color === color && tile.count === pitch ** 2);
+          return matching.length === 1 ? matching : [];
+        });
+        const allSources = [...sources, ...uniform];
+        if (allSources.length < sinks.length || allSources.length > Math.min(8, sinks.length * 2)) continue;
+        const groups = sourceAssignments(allSources, sinks, recipes);
+        if (groups.length) candidates.push(groups.map(pairs => ({ ...geometry, pairs })));
+        continue;
+      }
       const pairs: Pair[] = [];
       for (const from of sources) {
         const matches = sinks.filter(tile => tile.accents[0] === from.color);
@@ -68,12 +116,10 @@ function layoutFor(rows: NativeRows): Layout | null {
         if (sources.some(source => source.color === to.accents[0])) continue;
         pairs.push({ color: to.accents[0]!, from: spare[0]!, other: spare[1]!, to });
       } else if (spare.length || unmatched.length) continue;
-      const indicators = parts.filter(p => p.bbox[3] < t && height(p.bbox) === 2 && width(p.bbox) >= 6 && p.area === 2 * width(p.bbox));
-      if (indicators.length !== 1) continue;
-      candidates.push({ pitch, tiles: surface, pairs, closed, open, reserve: width(indicators[0]!.bbox) });
+      candidates.push([{ ...geometry, pairs }]);
     }
   }
-  return candidates.length === 1 ? candidates[0]! : null;
+  return candidates.length === 1 ? candidates[0]! : [];
 }
 
 function permutations(pairs: readonly Pair[]): Pair[][] {
@@ -224,6 +270,20 @@ async function planSeparated(layout: Layout, budget: number, execution?: NativeE
   return best;
 }
 
+async function selectSeparatedLayout(rows: NativeRows, recipes: readonly Recipe[], remaining: number, execution?: NativeExecution) {
+  let best: { layout: Layout; threads: Thread[] } | null = null, budget = remaining;
+  for (const layout of layoutFor(rows, recipes)) {
+    if (execution?.deadlineMs !== undefined && (execution.now?.() ?? performance.now()) >= execution.deadlineMs) break;
+    const threads = layout.pairs.some(pair => pair.other) ? await planSeparated(layout, budget, execution) : plan(layout, []);
+    if (!threads) continue;
+    const cost = threads.reduce((count, thread) => count + thread.clicks.length, 0);
+    if (best && cost > budget) continue;
+    best = { layout, threads };
+    budget = cost - 1;
+  }
+  return best;
+}
+
 function mixConfirmed(pair: Pair, rows: NativeRows, pitch: number): boolean {
   return !!pair.other && [pair.from, pair.other].every(source => measureTile(rows, ...source.point, pitch).color === pair.color);
 }
@@ -242,21 +302,29 @@ function separatedReturn(proposal: Proposal, before: NativeRows, after: NativeRo
 
 export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
   let memory: State | null = null;
+  let recipes: Recipe[] = [];
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyChannelAccessId,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      const current = memory?.epoch === observation.level_epoch ? memory : null;
+      if (current ? current.layout.pairs.filter(pair => pair.other).length < 2 : !recipes.length) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return (proposal?.state.layout.pairs.filter(pair => pair.other).length ?? 0) >= 2 ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const prior = memory?.epoch === observation.level_epoch ? memory : null;
-      const layout = prior?.layout ?? layoutFor(rows);
-      if (!layout || prior?.stopped || (prior?.count ?? 0) >= layout.reserve) return null;
-      const threads = prior?.threads ?? (layout.pairs.some(pair => pair.other) ? await planSeparated(layout, remaining, execution) : plan(layout, []));
-      if (!threads) return null;
-      const state = prior ?? { epoch: observation.level_epoch, layout, threads, rejected: [], refs: [], count: 0 };
+      if (prior?.stopped || (prior && prior.count >= prior.layout.reserve)) return null;
+      const selected = prior ?? await selectSeparatedLayout(rows, recipes, remaining, execution);
+      if (!selected) return null;
+      const { layout, threads } = selected;
+      const state = prior ?? { epoch: observation.level_epoch, layout, threads, rejected: [], refs: recipes.slice(-4).map(recipe => recipe.evidence), count: 0 };
       const nextTile = (thread: Thread) => thread.clicks.find(tile => measureTile(rows, ...tile.point, layout.pitch).color === layout.closed);
       const thread = threads.find(t => nextTile(t));
       const tile = thread && nextTile(thread);
@@ -327,12 +395,21 @@ export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { state, tile } = proposal;
       const opened = measureTile(second, ...tile.point, state.layout.pitch).color !== state.layout.closed;
+      const separated = separatedReturn(proposal, first, second);
+      if (proposal.merging && opened && separated && proposal.pair.other) {
+        const { from, color } = proposal.pair, other = proposal.pair.other.color;
+        const known = recipes.some(recipe => recipe.result === color && samePigments(recipe, from.color, other));
+        if (!known) recipes = [...recipes.slice(-11), { from: from.color, other, result: color, evidence: after.observation_ref }];
+      }
       memory = { ...state, count: state.count + 1, refs: [...state.refs.slice(-4), after.observation_ref],
-        ...(!separatedReturn(proposal, first, second) ? { stopped: true as const } : {}),
+        ...(!separated ? { stopped: true as const } : {}),
         rejected: opened ? state.rejected : [...state.rejected, key(tile.point)] };
       return { events: [] };
     },
-    state: () => ({ memory }),
-    restore(value: NativeRecord) { memory = structuredClone(value.memory as State | null); },
+    state: () => ({ memory, recipes }),
+    restore(value: NativeRecord) {
+      memory = structuredClone(value.memory as State | null);
+      recipes = structuredClone((value.recipes as Recipe[] | undefined) ?? []);
+    },
   };
 }
