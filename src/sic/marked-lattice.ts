@@ -4,6 +4,8 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { assessMarkerStep, markerDirections, nextMarkerStep, readMarkerField, retainMarkerStep,
   type MarkerField, type MarkerStep } from './observed-marker-field.ts';
+import { assessRendezvous, nextRendezvousStep, readRendezvousField, retainRendezvous,
+  type RendezvousField, type RendezvousStep } from './marker-rendezvous.ts';
 
 export const markedLatticeId = 'sic_marked_lattice';
 export const verifyMarkedLatticeId = 'sic_verify_marked_lattice';
@@ -17,9 +19,11 @@ type State = { epoch: number; field: NativeBox; color: number; pitch: number; ma
   at: NativePoint; visited: number[]; count: number; evidence: string[]; stopped: boolean; movements?: string[] };
 type LegacyProposal = NativeProposal & { local: State; landing: NativePoint | null; target: number; needId: string };
 type FieldProposal = NativeProposal & { field: MarkerField; step: MarkerStep; needId: string };
-type Proposal = LegacyProposal | FieldProposal;
-type Transfer = { completed: number; evidence: string[]; movements: string[] };
+type PatrolProposal = NativeProposal & { patrol: RendezvousField; rendezvous: RendezvousStep; needId: string };
+type Proposal = LegacyProposal | FieldProposal | PatrolProposal;
+type Transfer = { completed: number; evidence: string[]; movements: string[]; preparation?: string };
 const isFieldProposal = (proposal: Proposal): proposal is FieldProposal => 'field' in proposal;
+const isPatrolProposal = (proposal: Proposal): proposal is PatrolProposal => 'patrol' in proposal;
 const distance = ([x, y]: NativePoint, [u, v]: NativePoint) => Math.abs(x - u) + Math.abs(y - v);
 const center = ([x, y, r, b]: NativeBox): NativePoint => [(x + r) / 2, (y + b) / 2];
 const inside = ([x, y]: NativePoint, [l, t, r, b]: NativeBox) => l <= x && x <= r && t <= y && y <= b;
@@ -63,6 +67,7 @@ function measure(rows: NativeRows, epoch: number): State | null {
 export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
   let state: State | null = null;
   let measured: MarkerField | null = null;
+  let patrol: RendezvousField | null = null;
   let transfer: Transfer | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
@@ -72,13 +77,23 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || observation.available_action_refs.includes('ACTION6') || !inputs.some(command => command.action_ref === 'ACTION5')) return null;
+      if (patrol?.epoch === observation.level_epoch) {
+        const step = nextRendezvousStep(patrol, rows, inputs, remaining);
+        return step ? rendezvousProposal(observation, patrol, step, decide, execution) : null;
+      }
       const current = measured?.epoch === observation.level_epoch ? measured : null;
       const local = current ? null : state?.epoch === observation.level_epoch ? state : measure(rows, observation.level_epoch);
       if (!local) {
         if (!transfer || transfer.completed !== observation.levels_completed) return null;
         const field = current ?? readMarkerField(rows, observation.level_epoch, transfer.evidence, transfer.movements);
-        const step = field ? nextMarkerStep(field, rows, inputs) : null;
-        return field && step ? fieldProposal(observation, field, step, decide, execution) : null;
+        if (field) {
+          const step = nextMarkerStep(field, rows, inputs);
+          return step ? fieldProposal(observation, field, step, decide, execution) : null;
+        }
+        const moving = transfer.preparation ? readRendezvousField(rows, observation.level_epoch,
+          [...new Set([...transfer.evidence, transfer.preparation])], transfer.movements) : null;
+        const step = moving ? nextRendezvousStep(moving, rows, inputs, remaining) : null;
+        return moving && step ? rendezvousProposal(observation, moving, step, decide, execution) : null;
       }
       if (local.stopped || local.count >= 32) return null;
       const [x, y] = local.at, { pitch } = local;
@@ -132,6 +147,11 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isPatrolProposal(proposal)) {
+        const result = assessRendezvous(proposal.patrol, proposal.rendezvous, second);
+        return { matched: result.kind === 'tested' ? null : result.kind !== 'contradicted', seal_prefix: true,
+          reason: `marker_rendezvous_${result.kind}` };
+      }
       if (isFieldProposal(proposal)) {
         const result = assessMarkerStep(proposal.field, proposal.step, first, second);
         return { matched: result.kind === 'tested' ? null : result.kind !== 'contradicted' && result.kind !== 'blocked',
@@ -142,12 +162,21 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
     },
     record(before, after, command, first, second, proposal) {
       if (after.levels_completed > before.levels_completed) {
-        const local = isFieldProposal(proposal) ? proposal.field : proposal.local;
+        const local = isPatrolProposal(proposal) ? proposal.patrol : isFieldProposal(proposal) ? proposal.field : proposal.local;
+        const preparation = isPatrolProposal(proposal) && proposal.rendezvous.finish ? after.observation_ref
+          : isFieldProposal(proposal) ? proposal.field.prepared?.evidence : undefined;
         transfer = { completed: after.levels_completed, evidence: [...local.evidence.slice(-4), after.observation_ref],
-          movements: local.movements ?? [] };
+          movements: local.movements ?? [], ...(preparation ? { preparation } : {}) };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (isPatrolProposal(proposal)) {
+        const result = assessRendezvous(proposal.patrol, proposal.rendezvous, second);
+        patrol = retainRendezvous(proposal.patrol, proposal.rendezvous, result, after.observation_ref);
+        return { events: [], ...(!proposal.patrol.cycle && patrol.cycle ? {
+          reviewEvidence: 'Two successive ordered tracks show the same cycle.',
+        } : {}) };
+      }
       if (isFieldProposal(proposal)) {
         const result = assessMarkerStep(proposal.field, proposal.step, first, second);
         measured = retainMarkerStep(proposal.field, proposal.step, result, after.observation_ref);
@@ -159,10 +188,11 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
         ...(matched && landing ? { movements: [...new Set([...(local.movements ?? []), command.action_ref])] } : {}) };
       return { events: [] };
     },
-    state: () => ({ state, measured, transfer }),
+    state: () => ({ state, measured, transfer, ...(patrol ? { patrol } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       measured = structuredClone((value.measured as MarkerField | undefined) ?? null);
+      patrol = structuredClone((value.patrol as RendezvousField | undefined) ?? null);
       transfer = structuredClone((value.transfer as Transfer | undefined) ?? null);
     },
   };
@@ -212,6 +242,47 @@ async function fieldProposal(observation: Parameters<NativeFamily['propose']>[0]
       counter: scene.counter, ...(field.prepared && scene.preparation ? { preparation: scene.preparation } : {}) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
+    sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label, preconditions: {},
+      preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
+  };
+}
+
+async function rendezvousProposal(observation: Parameters<NativeFamily['propose']>[0], patrol: RendezvousField, step: RendezvousStep,
+  decide: NativeProgramHandle | undefined, execution: Parameters<NativeFamily['propose']>[4]): Promise<PatrolProposal | null> {
+  const ref = observation.observation_ref;
+  const evidence: [string, ...string[]] = [ref, ...new Set(patrol.evidence.filter(value => value !== ref))];
+  const mode = execution?.reasoningMode ?? (step.landing || patrol.cycle ? 'solving' : 'exploration');
+  const routeSupported = !!step.landing && patrol.movements.includes(step.command.action_ref);
+  const knownInteraction = step.finish === true;
+  const facts = { routeSupported, knownInteraction, eligibleProbe: !routeSupported && !knownInteraction, mode };
+  const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+  const strategy = routeSupported ? 'P07' : knownInteraction ? 'P02' : 'P05';
+  if (decision?.result !== strategy) return null;
+  const label = step.finish ? 'Complete the contact while the preparation indicator is still on'
+    : step.kind === 'observe' ? 'Wait a turn to measure the next position of the moving marker'
+      : step.kind === 'mobile' ? step.landing ? 'Reach the cell where the moving marker stays for two turns'
+        : step.window ? 'Use the contact window predicted by the observed cycle'
+          : 'Wait for the measured contact window'
+      : 'Test a stationary marker for an acquisition';
+  const parent = 'G_official_completion';
+  const goal = { kind: 'hold_contact_until_marker_acquired', scope: ref.split(':revision:', 1)[0]!,
+    subjects: ['cursor', 'visible_marker', 'preparation_indicator'], parentObjective: parent,
+    satisfactionContract: 'observe_official_progress_after_marker_contacts' };
+  const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
+  const id = `marked-lattice:${need.id}`, actions = [step.command];
+  const box = ([x, y]: NativePoint, radius: number): NativeBox => [x - radius, y - radius, x + radius, y + radius];
+  const tail = patrol.history.at(-1);
+  return { status: 'proposed', kind: verifyMarkedLatticeId, actions, patrol, rendezvous: step, needId: need.id,
+    steps: [{ action: step.command, expected_after: step.landing }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+      instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+    sicSituationCard: { strategy, need: 'Keep contact long enough to acquire the marker', mode, situation: label, agenda: [], evidence,
+      triggerCard: decision.receipt.workflow, cursor: box(patrol.at, 0), target: box(step.target, (patrol.scene.size - 1) / 2),
+      ...(tail ? { moving: box(tail, (patrol.scene.size - 1) / 2) } : {}), preparation: patrol.scene.preparation, counter: patrol.scene.counter,
+      ...(patrol.cycle ? { cycleLength: patrol.cycle.positions.length } : {}) },
+    question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
     sicLocalDecision: { strategy, objective: { id, label, parent }, need },
     bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label, preconditions: {},
       preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },

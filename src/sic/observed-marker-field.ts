@@ -36,7 +36,7 @@ const attempt = (phase: number, point: NativePoint) => phase + ':' + key(point);
 const square = (part: Part) => part.rectangular && width(part.bbox) === height(part.bbox);
 const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : Math.abs(a);
 
-function readCounter(parts: Part[], ground: NativeBox): NativeBox[] | null {
+export function readCounter(parts: Part[], ground: NativeBox): NativeBox[] | null {
   const frames = parts.filter(part => part.bbox[1] > ground[3] && width(part.bbox) >= 2 * height(part.bbox)
     && part.area === 2 * (width(part.bbox) + height(part.bbox)) - 4
     && part.mask.every(([x, y]) => x === 0 || x === width(part.bbox) - 1 || y === 0 || y === height(part.bbox) - 1));
@@ -55,7 +55,7 @@ function readCounter(parts: Part[], ground: NativeBox): NativeBox[] | null {
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
-function readPreparationBlocks(parts: Part[], ground: NativeBox): NativeBox[] | null {
+export function readPreparationBlocks(parts: Part[], ground: NativeBox): NativeBox[] | null {
   const groups = new Map<string, NativeBox[]>();
   for (const { bbox, area, mask, color } of parts) {
     const size = width(bbox);
