@@ -11,6 +11,7 @@ export interface FeedbackConfiguration {
   stages: string[]; allocation_orders: ('LEFT_TO_RIGHT' | 'RIGHT_TO_LEFT')[];
   measures: FeedbackMeasure[]; maximum_candidates: number; maximum_trials: number;
   maximum_evaluations: number; maximum_bundle: number; question: string;
+  group_equivalent_trials?: boolean;
 }
 export type FeedbackMeasure = 'WORST_NONWINNING_RESIDUAL' | 'SUM_SQUARED_RESIDUALS' | 'NONWINNING_BRANCHES' | 'WINNING_HYPOTHESES';
 interface Law { ref: string; exact: string; elsewhere: string; absent: string; order: 'LEFT_TO_RIGHT' | 'RIGHT_TO_LEFT' }
@@ -24,6 +25,20 @@ const numericLexical = (a: readonly number[], b: readonly number[]): number => {
   for (let i = 0; i < Math.min(a.length, b.length); i++) if (a[i] !== b[i]) return a[i]! - b[i]!;
   return a.length - b.length;
 };
+
+function trialRepresentatives(trials: string[][], alphabet: string[], fixed: ReadonlySet<string>): string[][] {
+  const interchangeable = alphabet.filter(value => !fixed.has(value)).sort();
+  if (interchangeable.length < 2) return trials;
+  return trials.filter(trial => {
+    const used = new Set<string>();
+    for (const value of trial) {
+      if (fixed.has(value) || used.has(value)) continue;
+      if (value !== interchangeable[used.size]) return false;
+      used.add(value);
+    }
+    return true;
+  });
+}
 /** Exact occurrences are reserved before displaced occurrences, for both orders. */
 export function evaluateFeedbackAccounting(secret: readonly string[], trial: readonly string[], law: Law): string[] {
   const marks = trial.map(() => law.absent), remaining = new Map<string, number>();
@@ -88,10 +103,15 @@ function* feedbackTrialCalculation(alphabet: readonly number[], length: number, 
   if (!accounts.length) return { status: 'feedback_contradiction_or_bound', prerequisites: ['code.current_reading_or_model_contradiction'], bound: false };
   const legal = candidates.filter(code => same(code.slice(0, prefix.length), prefix) && (repeatable !== false || new Set(code).size === code.length));
   if (!legal.length) return { status: 'preserved_prefix_has_no_admissible_trial', candidates: candidates.length };
-  if (legal.length > configuration.maximum_trials) return { status: 'trial_bound', candidates: candidates.length, trials: legal.length };
+  // A relabeling that fixes the known slots and prior trials preserves every
+  // feedback partition. Keep its smallest representative and all possible secrets.
+  const fixed = new Set([...prefix, ...histories.flatMap(row => row.trial),
+    ...revealed.flatMap(value => value === null ? [] : [`value:${value}`])]);
+  const trials = configuration.group_equivalent_trials && repeatable !== false ? trialRepresentatives(legal, refs, fixed) : legal;
+  if (trials.length > configuration.maximum_trials) return { status: 'trial_bound', candidates: candidates.length, trials: trials.length };
   let selected: { trial: string[]; score: number[]; partitionCount: number } | null = null;
-  for (let trialIndex = 0; trialIndex < legal.length; trialIndex++) {
-    const trial = legal[trialIndex]!;
+  for (let trialIndex = 0; trialIndex < trials.length; trialIndex++) {
+    const trial = trials[trialIndex]!;
     yield { phase: 'trial_partitions', next_trial_index: trialIndex, feedback_evaluations: evaluations };
     if (evaluations + accounts.length > configuration.maximum_evaluations) return { status: 'partition_bound', bound: true };
     evaluations += accounts.length;
@@ -120,6 +140,7 @@ function* feedbackTrialCalculation(alphabet: readonly number[], length: number, 
   if (needed > budget) return { status: 'input_budget', needed, remaining: budget };
   return { status: 'proposed', trial: selected!.trial.map(value => Number(value.slice(6))), candidate_count: candidates.length,
     law_alternatives: compatibleLaws.size, trial_count: legal.length,
+    ...(trials.length !== legal.length ? { evaluated_trial_count: trials.length } : {}),
     minimax: Object.fromEntries(configuration.measures.map((measure, i) => [measure, selected!.score[i]!])),
     partition_count: selected!.partitionCount, information_cost: needed,
     scope: 'minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee',

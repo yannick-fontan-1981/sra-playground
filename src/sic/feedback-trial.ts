@@ -16,12 +16,13 @@ export const feedbackTrialStrategies = {
 const configuration: FeedbackConfiguration = { stages: [], allocation_orders: ['LEFT_TO_RIGHT', 'RIGHT_TO_LEFT'],
   measures: ['WORST_NONWINNING_RESIDUAL', 'SUM_SQUARED_RESIDUALS', 'NONWINNING_BRANCHES'],
   maximum_candidates: 4096, maximum_trials: 256, maximum_evaluations: 65536, maximum_bundle: 1,
-  question: 'Separate the possible ordered answers' };
+  group_equivalent_trials: true, question: 'Separate the possible ordered answers' };
 type State = { layout: FeedbackLayout; active: FeedbackSlotRow | null; repeatable: boolean | null; submission: string | null;
   history: FeedbackHistoryRow[]; blocked: string[]; evidence: string[]; stopped: boolean };
 type EntryEvidence = { completed: number; size: FeedbackLayout['size']; pitch: number; rowOffsets: number[];
   activeOffset: number; submit: string; proof: string[] };
-type Choice = { action: NativeCommand; value: number | null; prefix: number[]; candidates: number | null; trial: number[] | null };
+type Choice = { action: NativeCommand; value: number | null; prefix: number[]; candidates: number | null; trial: number[] | null;
+  evaluatedTrials?: number };
 type Proposal = NativeProposal & { local: State; choice: Choice; palette: [number, number][]; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
@@ -78,12 +79,18 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
         const other = layout.slot_rows.find(row => row.y !== local.active!.y)!;
         const raw = feedbackValues(rows, layout, other.y, layout.count);
         if (!raw) return null;
-        const revealed = raw.map(color => color === other.empty ? null : color);
-        const result = await chooseFeedbackTrialCooperative([layout.alphabet, layout.count, prefix, local.history, revealed, local.repeatable,
-          observation, remaining, configuration], execution);
+        // Use the measured palette order as stable input identities for tie-breaking.
+        const indexOf = (color: number) => layout.alphabet.indexOf(color);
+        const revealed = raw.map(color => color === other.empty ? null : indexOf(color));
+        if (revealed.includes(-1)) return null;
+        const ordered = layout.alphabet.map((_, index) => index);
+        const history = local.history.map(row => ({ ...row, values: row.values.map(indexOf) }));
+        const result = await chooseFeedbackTrialCooperative([ordered, layout.count, prefix.map(indexOf), history,
+          revealed, local.repeatable, observation, remaining, configuration], execution);
         if (result.status === 'proposed') {
-          const trial = result.trial as number[];
+          const trial = (result.trial as number[]).map(index => layout.alphabet[index]!);
           choice = entry(trial[prefix.length]!, Number(result.candidate_count), trial);
+          if (choice && typeof result.evaluated_trial_count === 'number') choice.evaluatedTrials = result.evaluated_trial_count;
         }
       }
       if (!choice || local.blocked.includes(JSON.stringify([observation.frame_hash, choice.action]))) return null;
@@ -115,7 +122,8 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
           situation: facts },
         sicSituationCard: { strategy, need: 'Infer the ordered answer from the positional marks', mode,
           situation: choice.candidates === null ? label : singleAnswer ? 'One answer remains compatible with the observed feedback.'
-            : `${choice.candidates} answers remain compatible. The next tile preserves the current prefix.`,
+            : choice.evaluatedTrials === undefined ? `${choice.candidates} answers remain compatible. The next tile preserves the current prefix.`
+              : `${choice.candidates} answers remain compatible. ${choice.evaluatedTrials} distinct trial patterns were compared.`,
           agenda: [], evidence, triggerCard: decision.receipt.workflow,
           palette: box(layout.palette_y, layout.xs.length), slots: layout.slot_rows.map(row => box(row.y, row.count)) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -165,7 +173,8 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
         } else next.blocked = [...local.blocked, JSON.stringify([before.frame_hash, choice.action])];
       }
       state = next;
-      return { events: [] };
+      return { events: [], ...(local.repeatable === null && next.repeatable === true
+        ? { reviewEvidence: 'The value was appended and the palette remained visible, allowing another selection of the same value.' } : {}) };
     },
     state: () => ({ state, retained }),
     restore(value: NativeRecord) {

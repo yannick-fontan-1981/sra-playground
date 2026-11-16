@@ -5,7 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
 import { readEvidenceSync } from './helpers/chunked-evidence.ts';
 import { FeedbackSequences } from '../src/logos-engine/v6-feedback-sequences.ts';
-import { chooseFeedbackTrial } from '../src/logos-engine/v6-feedback-sequences-finite.ts';
+import { chooseFeedbackTrial, type FeedbackConfiguration } from '../src/logos-engine/v6-feedback-sequences-finite.ts';
 import { initialFeedbackLayout, feedbackPalette } from '../src/logos-engine/v6-feedback-sequences-visual.ts';
 import { ObservedInputDomain, measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 
@@ -37,6 +37,28 @@ test('two source-observed discriminating returns produce different justified nex
     assert.deepEqual(result.evidence, ['public-feedback-1']);
     assert.deepEqual(result.trial, row.expected.trial);
   }
+});
+
+test('trial symmetry preserves the exhaustive ranking and leaves repeated secrets in the domain', () => {
+  const observation = fixture.finite[0].arguments.observation;
+  const limits: FeedbackConfiguration = { stages: [], allocation_orders: ['LEFT_TO_RIGHT', 'RIGHT_TO_LEFT'],
+    measures: ['WORST_NONWINNING_RESIDUAL', 'SUM_SQUARED_RESIDUALS', 'NONWINNING_BRANCHES'],
+    maximum_candidates: 4096, maximum_trials: 256, maximum_evaluations: 65_536, maximum_bundle: 1, question: 'Compare trials' };
+  const history = [{ values: [7, 7, 7], marks: ['style', 'style', 'style'], ref: 'observed-trial' }];
+  const evaluate = (configuration: FeedbackConfiguration) =>
+    chooseFeedbackTrial([2, 7, 5, 12], 3, [5], history, [5, null, null], true, observation, 8, configuration);
+  const exhaustive = evaluate(limits);
+  const { evaluated_trial_count: evaluated, ...grouped } = evaluate({ ...limits, group_equivalent_trials: true });
+  assert.equal(exhaustive.status, 'proposed');
+  assert.ok(Number(evaluated) < Number(exhaustive.trial_count));
+  assert.deepEqual(grouped, exhaustive);
+
+  const larger = chooseFeedbackTrial([2, 7, 5, 12, 9], 4, [], [], [null, null, null, null], true, observation, 8,
+    { ...limits, maximum_trials: 15, group_equivalent_trials: true });
+  assert.equal(larger.status, 'proposed');
+  assert.equal(larger.candidate_count, 625);
+  assert.equal(larger.trial_count, 625);
+  assert.equal(larger.evaluated_trial_count, 15);
 });
 
 for (const row of fixture.initial) test(`original public interface recognition and acquisition: ${row.id}`, async () => {
