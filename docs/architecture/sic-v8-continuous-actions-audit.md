@@ -158,6 +158,39 @@ La trace compare les commandes, leurs coordonnées, les observations, les étape
 
 Les tests ciblés de l’agenda, des commandes et du runtime passent (49 tests).
 
+## Couverture des 42 jeux au niveau 1
+
+Les 13 jeux restants gagnent avec au moins une série dans les deux modes. Les 42 jeux de la liste atteignent ce critère. Les deux campagnes s’arrêtent à la première victoire et les séries comptent uniquement les commandes réellement exécutées sous un même plan.
+
+| Mode | Victoires avant → après | Victoires avec une série avant → après | Commandes avant → après | Reprises de décision avant → après | Parcours identiques |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| SIC | 42 → 42 | 29 → 42 | 603 → 555 | 429 → 300 | 38/42 |
+| SIC Fallback | 37 → 42 | 29 → 42 | 1 032 → 743 | 858 → 484 | 33/42 |
+
+| Jeu | SIC | SIC Fallback | Famille retirée en Fallback |
+| --- | --- | --- | --- |
+| CWSE | click-path ×2 · 4 commandes | click-path ×2 · 6 commandes | `sic_directional_reception` |
+| DNOI | click-path ×2 · 3 commandes | click-path ×2 · 3 commandes | `sic_field_repair` |
+| ELAS | mix-path ×2 · 2 commandes | mix-path ×2 · 7 commandes | `sic_compose_measured_supports` |
+| FITE | move-path ×2 · 12 commandes | move-path ×2 · 12 commandes | `sic_preserve_room_to_survive` |
+| FUIT | move-path ×5, move-path ×4, move-path ×2, move-path ×3, move-path ×6, move-path ×8, move-path ×2, move-path ×7 · 48 commandes | move-path ×5, move-path ×4, move-path ×2, move-path ×3, move-path ×6, move-path ×8, move-path ×2, move-path ×7 · 49 commandes | `sic_verify_reactive_motion` |
+| KATA | move-path ×3 · 8 commandes | move-path ×3 · 14 commandes | `sic_verify_preview_placement` |
+| LF52 | click-path ×8 · 8 commandes | click-path ×8 · 16 commandes | `sic_compose_visible_reductions` |
+| LS19 | move-path ×2 · 5 commandes | move-path ×2 · 5 commandes | `sic_framed_contact` |
+| POLA | mix-path ×2 · 2 commandes | move-path ×2 · 6 commandes | `sic_align_opposing_faces` |
+| SYME | click-path ×8 · 9 commandes | click-path ×8 · 9 commandes | `sic_field_repair` |
+| TU93 | move-path ×16 · 30 commandes | move-path ×16 · 30 commandes | `sic_verify_connected_route` |
+| WA30 | move-path ×2, move-path ×4, move-path ×2 · 26 commandes | move-path ×2, move-path ×4, move-path ×2 · 26 commandes | `sic_verify_oriented_delivery` |
+| WEAV | move-path ×2, move-path ×3, move-path ×3, move-path ×2, move-path ×3, move-path ×3 · 27 commandes | move-path ×2, move-path ×3, move-path ×3, move-path ×2, move-path ×3, move-path ×3 · 26 commandes | `sic_verify_crossing_rows` |
+
+Les cinq victoires récupérées en Fallback sont FUIT, KATA, TU93, WA30, WEAV. Le journal confirme le retrait de la famille principale avant sa première commande pour chacun des 42 jeux. Les commandes des deux campagnes relèvent de SIC seul.
+
+Sur TU93 en Fallback, la série de 16 déplacements a un intervalle médian de 43 ms entre commandes, mesuré sur 15 intervalles pendant la campagne à quatre processus.
+
+Une série se poursuit tant que les observations confirment son prochain pas. Cela inclut les deux positions lors d’un rapprochement, la pièce sélectionnée et sa réception pour une réduction, le curseur actif sur une ligne de peinture et les couleurs source et cible pour une réparation. Une contradiction rend la main à la décision.
+
+La comparaison porte sur les commandes, les coordonnées, les observations, les images d’animation et l’issue. Les 29 jeux déjà couverts conservent leur résultat. Le typecheck et les 49 tests ciblés passent.
+
 ## Référence avant extension
 
 La campagne locale utilise SIC seul sur le commit `e483a9d5`, à trois processus. Chaque passage part de l’image initiale et s’arrête à la première victoire du niveau 1. Une série contient plusieurs commandes exécutées sous le même plan engagé. Le délai est mesuré entre les lancements de deux commandes de cette série et inclut le retour du jeu et ses contrôles. Les délais mesurés dépendent aussi de la concurrence des processus.
