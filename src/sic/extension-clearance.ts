@@ -7,8 +7,9 @@ type Body = { box: NativeBox; ink: number; cap: NativeBox | null; axis: Axis; si
   buttons: [Button, Button] | null; marker: NativePoint | null; parent: number | null };
 type Target = { at: NativePoint; marks: NativePoint[]; body: number; amount: number };
 export type ExtensionWitness = { epoch: number; quantum: number; extend: string; retract: string; evidence: string[] };
-export type ClearanceLayout = { field: NativeBox; bodies: Body[]; targets: Target[]; quantum: number; capInk: number; markerInk: number };
-export type ClearanceMove = { body: number; delta: 1 | -1 };
+export type ClearanceLayout = { field: NativeBox; bodies: Body[]; targets: Target[]; quantum: number; capInk: number; markerInk: number;
+  panels?: NativeBox[] };
+export type ClearanceMove = { body: number; delta: 1 | -1; receivers?: number[] };
 export type ClearanceProjection = { boxes: NativeBox[]; caps: (NativeBox | null)[]; markers: (NativePoint | null)[] };
 
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
@@ -30,9 +31,9 @@ export function extensionButtonMask(rows: NativeRows, [l, t, r, b]: NativeBox, h
   return [r - l + 1, b - t + 1, ...bits].join(',');
 }
 
-function readTargets(parts: readonly Part[], bodies: readonly Body[], quantum: number) {
+function readTargets(parts: readonly Part[], bodies: readonly Body[], quantum: number, minimum: number) {
   const dots = parts.filter(p => p.area === 1).map(p => ({ at: center(p.bbox), ink: p.palette_value }));
-  const targets = [];
+  const targets: { at: NativePoint; marks: NativePoint[]; ink: number }[] = [];
   for (const { at: [x, y], ink } of dots) {
     const arms: NativePoint[] = [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]];
     const centerPoint = [x, y] as NativePoint;
@@ -41,7 +42,7 @@ function readTargets(parts: readonly Part[], bodies: readonly Body[], quantum: n
       targets.push({ at: centerPoint, marks: arms, ink: markerInk });
     }
   }
-  if (targets.length !== 2 || targets[0]!.ink !== targets[1]!.ink) return null;
+  if (targets.length < minimum || targets.length > 2 || targets.some(target => target.ink !== targets[0]!.ink)) return null;
   const markerInk = targets[0]!.ink, arms = targets.flatMap(target => target.marks);
   const pieces = dots.filter(({ at, ink }) => ink === markerInk && !arms.some(mark => same(mark, at)));
   const options = targets.map(target =>
@@ -52,7 +53,8 @@ function readTargets(parts: readonly Part[], bodies: readonly Body[], quantum: n
       const amount = body.sign * (target.at[body.axis] - marker.at[body.axis]) / quantum;
       return amount > 0 && Number.isInteger(amount) ? [{ body: index, marker: marker.at, amount, at: target.at, marks: target.marks }] : [];
     }));
-  const assignments = options[0]!.flatMap(first => options[1]!.filter(second => second.body !== first.body).map(second => [first, second]));
+  const assignments = options[0]!.flatMap(first => options[1]
+    ? options[1].filter(second => second.body !== first.body).map(second => [first, second]) : [[first]]);
   if (assignments.length !== 1) return null;
   return { targets: assignments[0]!.map(({ marker, ...target }) => {
     bodies[target.body]!.marker = marker;
@@ -61,6 +63,10 @@ function readTargets(parts: readonly Part[], bodies: readonly Body[], quantum: n
 }
 
 export function readClearanceLayout(rows: NativeRows, parts: readonly Part[], witness: ExtensionWitness): ClearanceLayout | null {
+  return measureClearanceLayout(rows, parts, witness, false) ?? measureClearanceLayout(rows, parts, witness, true);
+}
+
+function measureClearanceLayout(rows: NativeRows, parts: readonly Part[], witness: ExtensionWitness, shared: boolean): ClearanceLayout | null {
   const { quantum } = witness;
   const marked = parts.flatMap(part => {
     if (part.area < 4 || extent(part.bbox, 0) > quantum + 2 || extent(part.bbox, 1) > quantum + 2) return [];
@@ -71,8 +77,15 @@ export function readClearanceLayout(rows: NativeRows, parts: readonly Part[], wi
   const buttonColors = [...new Set(marked.map(button => button.part.palette_value))];
   if (buttonColors.length < 4 || buttonColors.length > 8 || marked.length !== 2 * buttonColors.length) return null;
   const top = Math.min(...marked.map(button => button.part.bbox[1]));
-  const field: NativeBox = [0, 0, rows[0]!.length - 1, top - quantum];
-  const fieldParts = parts.filter(part => contains(field, part.bbox));
+  const panels = shared ? buttonColors.flatMap(ink => {
+    const buttons = marked.filter(button => button.part.palette_value === ink).map(button => button.part.bbox);
+    const outlines = parts.filter(part => !part.rectangular && extent(part.bbox, 0) >= quantum * 2
+      && extent(part.bbox, 1) <= quantum * 3 && buttons.every(box => contains(part.bbox, box)));
+    return outlines.length === 1 ? [outlines[0]!.bbox] : [];
+  }) : [];
+  if (shared && panels.length !== buttonColors.length) return null;
+  const field: NativeBox = [0, 0, rows[0]!.length - 1, shared ? rows.length - 2 : top - quantum];
+  const fieldParts = parts.filter(part => contains(field, part.bbox) && !panels.some(panel => contains(panel, part.bbox)));
   const caps = fieldParts.filter(part => part.rectangular && part.area === quantum
     && (extent(part.bbox, 0) === 1 || extent(part.bbox, 1) === 1));
   const bodies: Body[] = [];
@@ -81,22 +94,24 @@ export function readClearanceLayout(rows: NativeRows, parts: readonly Part[], wi
     const pair = marked.filter(button => button.part.palette_value === ink);
     const extend = pair.find(button => button.extend), retract = pair.find(button => !button.extend);
     const pieces = fieldParts.filter(part => part.palette_value === ink && part.area > quantum);
-    if (!extend || !retract || pieces.length !== 1) return null;
-    const box = pieces[0]!.bbox;
-    const adjacent = caps.flatMap(({ bbox, palette_value }) =>
-      ([0, 1] as const).flatMap<{ bbox: NativeBox; axis: Axis; sign: 1 | -1; palette_value: number }>(axis => {
-      const cross = crossAxis(axis);
-      if (extent(bbox, axis) !== 1 || bbox[cross] !== box[cross] || bbox[cross + 2] !== box[cross + 2]) return [];
-      if (bbox[axis + 2]! === box[axis] - 1) return [{ bbox, axis, sign: 1 as const, palette_value }];
-      if (bbox[axis] === box[axis + 2]! + 1) return [{ bbox, axis, sign: -1 as const, palette_value }];
-      return [];
-    }));
-    if (adjacent.length !== 1 || capInk !== null && adjacent[0]!.palette_value !== capInk) return null;
-    const { bbox: cap, axis, sign, palette_value } = adjacent[0]!;
-    capInk = palette_value;
-    bodies.push({ box, ink, cap, axis, sign, parent: null, marker: null,
-      buttons: [extend, retract].map(({ part }) => ({ box: part.bbox, point: center(part.bbox) })) as [Button, Button] });
+    if (!extend || !retract || !pieces.length || (!shared && pieces.length !== 1)) return null;
+    for (const { bbox: box } of pieces) {
+      const adjacent = caps.flatMap(({ bbox, palette_value }) =>
+        ([0, 1] as const).flatMap<{ bbox: NativeBox; axis: Axis; sign: 1 | -1; palette_value: number }>(axis => {
+          const cross = crossAxis(axis);
+          if (extent(bbox, axis) !== 1 || bbox[cross] !== box[cross] || bbox[cross + 2] !== box[cross + 2]) return [];
+          if (bbox[axis + 2]! === box[axis] - 1) return [{ bbox, axis, sign: 1 as const, palette_value }];
+          if (bbox[axis] === box[axis + 2]! + 1) return [{ bbox, axis, sign: -1 as const, palette_value }];
+          return [];
+        }));
+      if (adjacent.length !== 1 || capInk !== null && adjacent[0]!.palette_value !== capInk) return null;
+      const { bbox: cap, axis, sign, palette_value } = adjacent[0]!;
+      capInk = palette_value;
+      bodies.push({ box, ink, cap, axis, sign, parent: null, marker: null,
+        buttons: [extend, retract].map(({ part }) => ({ box: part.bbox, point: center(part.bbox) })) as [Button, Button] });
+    }
   }
+  if (shared && bodies.length === buttonColors.length) return null;
   for (const part of fieldParts) {
     const { area, bbox, rectangular, palette_value } = part;
     if (!rectangular || area < quantum * quantum || buttonColors.includes(palette_value) || palette_value === capInk) continue;
@@ -121,14 +136,21 @@ export function readClearanceLayout(rows: NativeRows, parts: readonly Part[], wi
       visited.add(at);
     }
   }
-  const goals = readTargets(fieldParts, bodies, quantum);
-  if (!goals || capInk === null || goals.targets.some(target => bodies.some(body => body.parent === target.body))
-    || !bodies.some(body => !body.buttons && body.parent !== null)) return null;
-  return { field, bodies, quantum, capInk, ...goals };
+  const goals = readTargets(fieldParts, bodies, quantum, shared ? 1 : 2);
+  if (!goals || capInk === null || goals.targets.some(target => {
+    const members = receiversOf(bodies, target.body);
+    return bodies.some(body => body.parent !== null && members.includes(body.parent));
+  }) || (!shared && !bodies.some(body => !body.buttons && body.parent !== null))) return null;
+  return { field, bodies, quantum, capInk, ...goals, ...(shared ? { panels } : {}) };
+}
+
+function receiversOf(bodies: readonly Body[], index: number): number[] {
+  const button = bodies[index]!.buttons![0].point;
+  return bodies.flatMap((body, i) => body.buttons && same(body.buttons[0].point, button) ? [i] : []);
 }
 
 export const clearanceMoved = (lengths: readonly number[], move: ClearanceMove) =>
-  lengths.map((value, i) => i === move.body ? value + move.delta : value);
+  lengths.map((value, i) => (move.receivers ? move.receivers.includes(i) : i === move.body) ? value + move.delta : value);
 export const clearanceEdge = (lengths: readonly number[], move: ClearanceMove) => [lengths.join(','), move.body, move.delta].join('/');
 
 export function clearanceProject(layout: ClearanceLayout, lengths: readonly number[]): ClearanceProjection {
@@ -167,22 +189,36 @@ export function clearanceObserved(rows: NativeRows, layout: ClearanceLayout, pro
   boxes.forEach((box, i) => paint(box, layout.bodies[i]!.ink));
   caps.forEach(cap => { if (cap) paint(cap, layout.capInk); });
   const ignored = new Set(markerPoints.map(([x, y]) => key(x, y)));
+  const panelPixels = new Set<string>();
+  for (const [l, t, r, b] of layout.panels ?? []) for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) panelPixels.add(key(x, y));
   const tracked = new Set(layout.bodies.map(body => body.ink));
   for (let y = layout.field[1]; y <= layout.field[3]; y++) for (let x = layout.field[0]; x <= layout.field[2]; x++) {
     const position = key(x, y), actual = rows[y]?.[x], expected = map.get(position);
-    if (expected === undefined ? tracked.has(actual ?? -1) : actual !== expected && !ignored.has(position)) return false;
+    if (!panelPixels.has(position) && (expected === undefined ? tracked.has(actual ?? -1) : actual !== expected && !ignored.has(position))) return false;
   }
   return markers.every(point => point === null || rows[point[1]]?.[point[0]] === layout.markerInk);
 }
 
 export async function chooseClearanceRoute(layout: ClearanceLayout, lengths: readonly number[], rejected: readonly string[], remaining: number,
   execution?: NativeExecution): Promise<ClearanceMove[]> {
-  const goalBodies = new Set(layout.targets.map(target => target.body)), blocked = new Set(rejected);
-  const suffix = layout.targets.flatMap(({ body, amount }) => Array.from({ length: Math.max(0, amount - lengths[body]!) },
-    (): ClearanceMove => ({ body, delta: 1 })));
+  const blocked = new Set(rejected);
+  const moveFor = (body: number, delta: 1 | -1): ClearanceMove => {
+    const receivers = receiversOf(layout.bodies, body);
+    return receivers.length > 1 ? { body, delta, receivers } : { body, delta };
+  };
+  const goalBodies = new Set<number>();
+  const suffix: ClearanceMove[] = [];
+  for (const target of layout.targets) {
+    if (goalBodies.has(target.body)) continue;
+    const move = moveFor(target.body, 1), receivers = move.receivers ?? [target.body];
+    for (const receiver of receivers) goalBodies.add(receiver);
+    for (let count = lengths[target.body]!; count < target.amount; count++) suffix.push(move);
+  }
+  const verifiedTerminal = suffix.reduce(clearanceMoved, lengths);
+  if (!layout.targets.every(({ body, amount }) => verifiedTerminal[body] === amount)) return [];
   if (suffix.length > remaining) return [];
   const moves = layout.bodies.flatMap((body, i) => body.buttons && !goalBodies.has(i)
-    ? ([1, -1] as const).map(delta => ({ body: i, delta })) : []);
+    && receiversOf(layout.bodies, i)[0] === i ? ([1, -1] as const).map(delta => moveFor(i, delta)) : []);
   type Node = { lengths: readonly number[]; depth: number; parent: number; move?: ClearanceMove };
   const queue: Node[] = [{ lengths, depth: 0, parent: -1 }];
   const visited = new Set([lengths.join(',')]);
@@ -191,7 +227,7 @@ export async function chooseClearanceRoute(layout: ClearanceLayout, lengths: rea
     if (execution && i % 128 === 127) await execution.yieldControl();
     const node = queue[i]!;
     if (node.depth + suffix.length > remaining) break;
-    const terminal = node.lengths.map((length, j) => layout.targets.find(target => target.body === j)?.amount ?? length);
+    const terminal = node.lengths.map((length, index) => goalBodies.has(index) ? verifiedTerminal[index]! : length);
     // The targets have fixed roots and no descendants. Growing them only makes
     // each footprint larger, so clear terminal footprints certify the suffix.
     if (allowed(layout, clearanceProject(layout, terminal))) {

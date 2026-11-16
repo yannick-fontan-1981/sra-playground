@@ -236,8 +236,10 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
     if (decision.result !== strategy) return null;
     const evidence: [string, ...string[]] = [ref, ...new Set([...witnessed.evidence, ...current.refs].filter(value => value !== ref))];
     const target = layout.targets.find(target => target.body === move.body);
-    const situation = target ? 'Extend the marked bar along the cleared corridor toward its target'
-      : 'Move the obstructing group so both marked bars can reach their targets';
+    const situation = move.receivers ? 'Extend all bars on the shared control after clearing their paths'
+      : target ? 'Extend the marked bar along the cleared corridor toward its target'
+        : layout.targets.length === 1 ? 'Move the obstructing group out of the paths of the linked bars'
+          : 'Move the obstructing group so both marked bars can reach their targets';
     const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, button.point, { reason: situation, evidence });
     if (!witness) return null;
     const parent = 'G_official_completion';
@@ -251,7 +253,8 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
       steps: [{ action, point_binding: witness, expected_after: expected }],
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
         edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
-      sicSituationCard: { strategy, need: 'Free the paths to both visible targets', situation, mode, evidence, agenda: [],
+      sicSituationCard: { strategy, need: layout.targets.length === 1 ? 'Make room for every bar driven by the shared control'
+        : 'Free the paths to both visible targets', situation, mode, evidence, agenda: [],
         triggerCard: chooseInteraction, focus: button.box, gauge: geometry.boxes[move.body],
         carried: geometry.boxes.filter((box, index) => index !== move.body && !same(box, expected.boxes[index]!)),
         ...(target ? { actor: dot(geometry.markers[move.body]!), target: dot(target.at), landing: dot(expected.markers[move.body]!) } : {}) },
@@ -350,6 +353,10 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
     },
     record(before, after, _action, first, second, proposal) {
       if (isClearance(proposal)) {
+        if (after.levels_completed > before.levels_completed && witnessed?.epoch === before.level_epoch) {
+          witnessed = { ...witnessed, epoch: after.level_epoch,
+            evidence: [...witnessed.evidence.slice(-6), after.observation_ref] };
+        }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const { clearance: current, expected, move } = proposal, { layout, lengths } = current;
         const matched = clearanceObserved(second, layout, expected);
