@@ -1,25 +1,33 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseStackStep, readStackExample, type PatternExample, type PatternGrid as Grid, type PatternPiece as Piece,
+  type PatternPiles, type PatternStep } from './pattern-stacks.ts';
 
 export const observedPatternLayoutId = 'sic_match_observed_pattern_layout';
 export const observedPatternLayoutStrategies = {
   select_piece_to_match_preview: 'Check which piece a click selects',
   align_piece_to_preview: 'Move one cell toward the position shown in the example',
   park_piece_absent_from_preview: 'Bring the extra piece to a cell where it can be covered',
+  park_surplus_piece: 'Move the surplus piece to a cell where it can be covered',
   cover_piece_to_match_preview: 'Test which piece remains visible when they share a cell',
+  reveal_piece_under_stack: 'Move the top piece to check what it hides',
+  clear_preview_destination: 'Temporarily clear a cell needed by the example',
 } as const;
 
-type Grid = { xs: number[]; ys: number[]; floor: NativePoint; boundary: NativeBox };
 type Scan = { edges: number[]; colors: NativePoint; line: number };
-type Piece = { color: number; cell: NativePoint; selected: boolean };
 type Preview = { color: number; box: NativeBox };
 type Scene = { grid: Grid; preview: Preview[]; pieces: Piece[]; goals: Record<number, NativePoint> };
 type Moves = Record<string, NativePoint>;
 type Training = { epoch: number; scene: Scene; controls: Moves; refs: string[] };
 type Witness = { epoch: number; score: number; controls: Moves; refs: string[] };
 type Local = { epoch: number; scene: Scene; refs: string[]; contradicted: boolean };
-type Proposal = NativeProposal & { scene: Scene; piece: Piece; destination: NativePoint | null; covered?: Piece; refs: string[]; needId: string };
+type OrdinaryProposal = NativeProposal & { scene: Scene; piece: Piece; destination: NativePoint | null; covered?: Piece; refs: string[]; needId: string };
+type StackedLayout = { epoch: number; grid: Grid; goals: PatternExample[]; piles: PatternPiles; refs: string[]; stopped: boolean };
+type StackProposal = NativeProposal & { stack: StackedLayout; pieces: Piece[]; choice: PatternStep;
+  destination: NativePoint | null; refs: string[]; needId: string };
+type Proposal = OrdinaryProposal | StackProposal;
+const isStack = (proposal: Proposal): proposal is StackProposal => 'stack' in proposal;
 
 const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2), Math.floor((t + b) / 2)];
 const size = ([l, t, r, b]: NativeBox): NativePoint => [r - l + 1, b - t + 1];
@@ -52,7 +60,8 @@ function crossingGrid(horizontal: Scan, vertical: Scan, boundary: NativeBox): Gr
   return { boundary, xs, ys, floor };
 }
 
-function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows): Grid | null {
+function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows, repeatedColors = false): Grid | null {
+  const read = repeatedColors ? readTopPieces : readPieces;
   const borders = entities.filter(entity => {
     const [width, height] = size(entity.bbox);
     return Math.min(width, height) >= 24 && entity.area === 2 * (width + height - 2)
@@ -65,7 +74,7 @@ function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows): Gr
   const columnAt = (x: number) => checkerScan(inside.map(row => row[x]!), t + 1, x);
   const top = rowAt(t + 1), left = columnAt(l + 1);
   const direct = top && left && crossingGrid(top, left, boundary);
-  if (direct && readPieces(rows, direct)) return direct;
+  if (direct && read(rows, direct)) return direct;
 
   const horizontal = inside.map((_, i) => rowAt(t + 1 + i)).filter((scan): scan is Scan => scan !== null);
   const vertical = rows[0]!.slice(l + 1, r).map((_, i) => columnAt(l + 1 + i)).filter((scan): scan is Scan => scan !== null);
@@ -74,7 +83,7 @@ function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows): Gr
     const grid = crossingGrid(h, v, boundary);
     if (grid) distinct.set(JSON.stringify([grid.xs, grid.ys, grid.floor]), grid);
   }
-  const consistent = [...distinct.values()].filter(grid => readPieces(rows, grid) !== null);
+  const consistent = [...distinct.values()].filter(grid => read(rows, grid) !== null);
   return consistent.length === 1 ? consistent[0]! : null;
 }
 
@@ -82,7 +91,7 @@ function cells(grid: Grid): NativePoint[] {
   return grid.ys.slice(0, -1).flatMap((_, row) => grid.xs.slice(0, -1).map((_, column) => [column, row] as const));
 }
 
-function readPieces(rows: NativeRows, grid: Grid): Piece[] | null {
+function readTopPieces(rows: NativeRows, grid: Grid): Piece[] | null {
   const [left, top, right, bottom] = grid.boundary, frame = rows[top]?.[left];
   if (frame === undefined || rows[top]?.[right] !== frame || rows[bottom]?.[left] !== frame || rows[bottom]?.[right] !== frame) return null;
   const pieces: Piece[] = [];
@@ -102,9 +111,13 @@ function readPieces(rows: NativeRows, grid: Grid): Piece[] | null {
       pieces.push({ color: ink, cell, selected });
     }
   }
-  if (pieces.length < 2 || pieces.length > 8 || pieces.filter(piece => piece.selected).length > 1
-    || new Set(pieces.map(piece => piece.color)).size !== pieces.length) return null;
+  if (!pieces.length || pieces.length > 16 || pieces.filter(piece => piece.selected).length > 1) return null;
   return pieces;
+}
+
+function readPieces(rows: NativeRows, grid: Grid): Piece[] | null {
+  const pieces = readTopPieces(rows, grid);
+  return pieces && pieces.length >= 2 && pieces.length <= 8 && new Set(pieces.map(piece => piece.color)).size === pieces.length ? pieces : null;
 }
 
 function mappedExamples(grid: Grid, preview: Preview[]): Record<number, NativePoint>[] {
@@ -186,8 +199,77 @@ function singleChange(pieces: Piece[], after: Piece[], focus: Piece) {
     || after.some(next => next.color === piece.color && same(piece.cell, next.cell))) ? found : null;
 }
 
+function confirmedStack(proposal: StackProposal, rows: NativeRows): Piece[] | null {
+  const { stack, pieces, choice: { piece }, destination } = proposal;
+  const current = readTopPieces(rows, stack.grid), expected = destination ?? piece.cell;
+  const moved = current?.find(item => item.selected && same(item.cell, expected) && item.color === piece.color);
+  if (!current || !moved) return null;
+  if (destination) {
+    const source = stack.piles[key(piece.cell)];
+    const exposed = current.find(item => same(item.cell, piece.cell));
+    if (!source || (source.colors.length > 1 ? source.colors[1] !== exposed?.color : !source.unknownBelow && exposed)) return null;
+  }
+  const unrelated = (item: Piece) => !same(item.cell, piece.cell) && !same(item.cell, expected);
+  const before = pieces.filter(unrelated), after = current.filter(unrelated);
+  return before.length === after.length && before.every(item => after.some(other => item.color === other.color && same(item.cell, other.cell)))
+    ? current : null;
+}
+
+function updatePiles(proposal: StackProposal, observed: Piece[]) {
+  const { stack: { piles }, choice: { piece }, destination } = proposal;
+  if (!destination) return { piles, exposed: null };
+  const source = key(piece.cell), target = key(destination), below = piles[source]!, replaced = piles[target];
+  const exposed = observed.find(item => same(item.cell, piece.cell)) ?? null;
+  const next = { ...piles, [target]: { colors: [piece.color, ...(replaced?.colors ?? [])], unknownBelow: replaced?.unknownBelow ?? false } };
+  if (exposed) next[source] = { colors: below.colors.length > 1 ? below.colors.slice(1) : [exposed.color], unknownBelow: below.unknownBelow };
+  else delete next[source];
+  return { piles: next, exposed };
+}
+
 export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
   let training: Training | null = null, witness: Witness | null = null, local: Local | null = null;
+  let stacked: StackedLayout | null = null;
+
+  async function offerStack(observation: NativeObservation, rows: NativeRows, retained: Witness): Promise<StackProposal | null> {
+    const prior = stacked?.epoch === observation.level_epoch ? stacked : null;
+    if (prior?.stopped) return null;
+    const grid = prior?.grid ?? gridFromBorder(observation.entities, rows, true), pieces = grid && readTopPieces(rows, grid);
+    if (!grid || !pieces) return null;
+    const goals = prior?.goals ?? readStackExample(grid, rows, observation.entities, pieces);
+    if (!goals) return null;
+    const stack = prior ?? { epoch: observation.level_epoch, grid, goals, refs: [], stopped: false,
+      piles: Object.fromEntries(pieces.map(piece => [key(piece.cell), { colors: [piece.color], unknownBelow: true }])) };
+    if (Object.keys(stack.piles).length !== pieces.length || pieces.some(piece => stack.piles[key(piece.cell)]?.colors[0] !== piece.color)) return null;
+    const controls = Object.fromEntries(Object.entries(retained.controls).filter(([input]) => observation.available_action_refs.includes(input)));
+    const choice = chooseStackStep(grid, pieces, goals, stack.piles, (piece, goal, occupied, cover) => nextMove(grid, piece, goal, controls, occupied, cover));
+    if (!choice) return null;
+    const { piece, intent, covered, move } = choice, focus = cellBox(grid, piece.cell), [x, y] = center(focus);
+    const strategy = !piece.selected ? 'select_piece_to_match_preview' : intent === 'uncover' ? 'reveal_piece_under_stack'
+      : intent === 'clear' ? 'clear_preview_destination' : covered ? 'cover_piece_to_match_preview'
+      : intent === 'park' ? 'park_surplus_piece' : 'align_piece_to_preview';
+    const label = observedPatternLayoutStrategies[strategy], ref = observation.observation_ref, parent = 'G_official_completion';
+    const evidence: [string, ...string[]] = [ref, ...new Set([...retained.refs, ...stack.refs].filter(value => value !== ref))];
+    const point = piece.selected ? null : await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
+    if (!piece.selected && !point) return null;
+    const action: NativeCommand = piece.selected ? { action_ref: move.command, data: {} } : { action_ref: 'ACTION6', data: { x, y } };
+    const actions = [action], destination = piece.selected ? move.step : null;
+    const goal = { kind: 'match_scaled_preview_positions', scope: ref.split(':revision:', 1)[0]!, subjects: ['piece', 'scaled_preview', 'destination'],
+      parentObjective: parent, satisfactionContract: 'match_the_observed_example_and_verify_official_progress' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = `preview-layout:${need.id}`;
+    return { status: 'proposed', kind: observedPatternLayoutId, actions, stack, pieces, choice, destination, refs: evidence, needId: need.id,
+      binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+      steps: [{ action, ...(point ? { point_binding: point } : {}), expected_after: destination }],
+      sicSituationCard: { strategy, need: 'Match the visible pieces to the example', situation: label,
+        mode: intent === 'uncover' ? 'exploration' : piece.selected ? 'solving' : 'assimilation', evidence, agenda: [], focus,
+        destination: cellBox(grid, choice.goal), example: goals.find(sample => same(sample.cell, choice.goal))?.box ?? null,
+        covered: piece.selected && covered ? cellBox(grid, covered.cell) : null },
+      question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
+
   return {
     id: observedPatternLayoutId,
     observePublicOutcome(before, after, action, first, second, frames = []) {
@@ -223,10 +305,11 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining) {
       if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed || remaining < 1
         || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (stacked?.epoch === observation.level_epoch) return offerStack(observation, rows, witness);
       const prior = local?.epoch === observation.level_epoch ? local : null;
       if (prior?.contradicted) return null;
       const retained = prior?.scene ?? readScene(observation, rows);
-      if (!retained) return null;
+      if (!retained) return offerStack(observation, rows, witness);
       const pieces = readPieces(rows, retained.grid);
       if (!pieces || pieces.length !== retained.pieces.length || pieces.some(piece => !retained.pieces.some(known => piece.color === known.color))) return null;
       const scene = { ...retained, pieces };
@@ -268,10 +351,25 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = before.level_epoch === after.level_epoch && !!confirmed(proposal, second);
+      const matched = before.level_epoch === after.level_epoch && !!(isStack(proposal) ? confirmedStack(proposal, second) : confirmed(proposal, second));
       return { matched, seal_prefix: true, reason: matched ? 'observed_selection_or_step' : 'preview_placement_prediction_contradicted' };
     },
     record(before, after, _action, _first, second, proposal, _index, frames) {
+      if (isStack(proposal)) {
+        if (after.levels_completed > before.levels_completed) {
+          if (witness && frames.some(frame => {
+            const pieces = readTopPieces(frame, proposal.stack.grid);
+            return pieces?.length === proposal.stack.goals.length && proposal.stack.goals.every(goal =>
+              pieces.some(piece => piece.color === goal.color && same(piece.cell, goal.cell)));
+          })) witness = { ...witness, epoch: after.level_epoch, score: after.levels_completed, refs: [...proposal.refs.slice(-3), after.observation_ref] };
+          return { events: [] };
+        }
+        const pieces = before.level_epoch === after.level_epoch ? confirmedStack(proposal, second) : null;
+        const result = pieces && updatePiles(proposal, pieces);
+        stacked = { ...proposal.stack, piles: result?.piles ?? proposal.stack.piles, stopped: !result,
+          refs: [...proposal.refs.slice(-4), after.observation_ref] };
+        return { events: [], ...(result?.exposed ? { reviewEvidence: 'Moving the top piece revealed another piece on its previous cell.' } : {}) };
+      }
       if (after.levels_completed > before.levels_completed) {
         if (witness && frames.some(frame => {
           const observed = readPieces(frame, proposal.scene.grid);
@@ -287,16 +385,17 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
         refs: [...proposal.refs.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ training, witness, local }),
+    state: () => ({ training, witness, local, ...(stacked ? { stacked } : {}) }),
     restore(value: NativeRecord) {
       training = structuredClone((value.training as Training | undefined) ?? null);
       witness = structuredClone((value.witness as Witness | undefined) ?? null);
       local = structuredClone((value.local as Local | undefined) ?? null);
+      stacked = structuredClone((value.stacked as StackedLayout | undefined) ?? null);
     },
   };
 }
 
-function confirmed(proposal: Proposal, rows: NativeRows): Piece[] | null {
+function confirmed(proposal: OrdinaryProposal, rows: NativeRows): Piece[] | null {
   const { scene, piece, destination, covered } = proposal;
   const expected = covered ? scene.pieces.filter(other => other.color !== covered.color) : scene.pieces;
   const observed = readPieces(rows, scene.grid), moved = observed && singleChange(expected, observed, piece);
