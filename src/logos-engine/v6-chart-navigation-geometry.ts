@@ -75,9 +75,12 @@ export function chartRectangles(rows: NativeRows): ChartRectangle[] {
   return out;
 }
 
-export function measureChart(rows: NativeRows, obs: ChartRecord): MeasuredChart | null {
+export function measureChart(rows: NativeRows, obs: ChartRecord, retained?: MeasuredChart): MeasuredChart | null {
+  const previous = retained?.nodes.find(node => samePoint(node.center, retained.current));
   const rectangles = chartRectangles(rows), markers = rectangles.filter(rectangle =>
-    rectangle.corner !== rectangle.edge && rectangle.center_value === rectangle.corner && rectangle.inside !== null);
+    rectangle.corner !== rectangle.edge && rectangle.inside !== null
+    && (rectangle.center_value === rectangle.corner
+      || !!previous && rectangle.corner === previous.corner && rectangle.edge === previous.edge && rectangle.size === previous.size));
   const charts: MeasuredChart[] = [];
   for (const marker of markers) {
     const candidates = rectangles.filter(rectangle => rectangle.size === marker.size && rectangle.edge === marker.edge);
@@ -104,6 +107,9 @@ export function measureChart(rows: NativeRows, obs: ChartRecord): MeasuredChart 
     const nodes = candidates.filter(node => reached.has(chartPointKey(node.center))),
       edges = links.filter(link => reached.has(chartPointKey(link.from)) && reached.has(chartPointKey(link.to)));
     if (nodes.length < 3 || nodes.filter(node => node.corner !== node.edge).length !== 1) continue;
+    const starts = marker.center_value === marker.corner ? [marker] : nodes.filter(node =>
+      node.center_value === marker.corner && node.inside === retained?.goal_annotation_hypothesis);
+    if (starts.length !== 1) continue;
     const nodeBottom = Math.max(...nodes.map(node => node.bbox[3])),
       slots = rectangles.filter(rectangle => rectangle.size !== marker.size && rectangle.edge === marker.edge
         && rectangle.corner === rectangle.edge && rectangle.bbox[1] > nodeBottom),
@@ -124,8 +130,8 @@ export function measureChart(rows: NativeRows, obs: ChartRecord): MeasuredChart 
     // Counter.most_common(1) retains the first observed value on equal counts.
     let background = 0, most = -1;
     for (const [value, count] of counts) if (count > most) { background = value; most = count; }
-    charts.push({ nodes, links: edges, current: marker.center, origin: marker.center, pitch,
-      goal_annotation_hypothesis: marker.inside!, slots: selectedSlots, slot_background: background,
+    charts.push({ nodes, links: edges, current: marker.center, origin: starts[0]!.center, pitch,
+      goal_annotation_hypothesis: starts[0]!.inside!, slots: selectedSlots, slot_background: background,
       field_bottom: bottom, evidence: [obs.observation_ref], epoch: obs.level_epoch });
   }
   return charts.length === 1 ? charts[0]! : null;

@@ -3,7 +3,7 @@ import { chartEdgeKey, chartInventory, chartPointKey, chartScene, measureChart, 
 import type { NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const chartRouteId = 'sic_chart_route';
 export const learnChartRouteId = 'sic_follow_observed_links';
@@ -20,7 +20,7 @@ const graph = compileStrategyGraph({ id: 'route_by_visible_links_and_prerequisit
 }, ['prerequisite', 'destination']);
 const directions = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] } as const;
 type Local = { chart: MeasuredChart; positions: ChartPoint[]; open: string[]; visited: string[]; attempts: string[];
-  evidence: string[]; frame: string };
+  evidence: string[]; frame: string; startFrame?: string; chartFrame?: string };
 type Proposal = NativeProposal & { local: Local; edges: ChartEdge[]; attempt: string; needId: string };
 const same = (a: ChartPoint, b: ChartPoint) => a[0] === b[0] && a[1] === b[1];
 
@@ -45,6 +45,23 @@ function admittedLink(point: ChartPoint, color: number, chart: MeasuredChart, fr
   return links.length === 1 && boundaryAdmission(links[0]!, color, chart, frames, final) ? links[0] : undefined;
 }
 
+function alignFragment(local: Local, next: MeasuredChart, positions: ChartPoint[]): Local | null {
+  const { chart } = local;
+  const transform = ([x, y]: ChartPoint): ChartPoint => [
+    next.origin[0] + (x - chart.origin[0]) / chart.pitch * next.pitch,
+    next.origin[1] + (y - chart.origin[1]) / chart.pitch * next.pitch,
+  ];
+  if (!positions.some(point => same(transform(point), next.current))) return null;
+  const linkKeys = new Set(next.links.map(chartEdgeKey)), nodeKeys = new Set(next.nodes.map(node => chartPointKey(node.center)));
+  const shared = chart.links.map(link => ({ previous: chartEdgeKey(link),
+    current: chartEdgeKey({ from: transform(link.from), to: transform(link.to) }) })).filter(link => linkKeys.has(link.current));
+  if (!shared.length) return null;
+  const open = shared.filter(link => local.open.includes(link.previous)).map(link => link.current);
+  const visited = chart.nodes.filter(node => local.visited.includes(chartPointKey(node.center)))
+    .map(node => chartPointKey(transform(node.center))).filter(key => nodeKeys.has(key));
+  return { ...local, chart: { ...next, evidence: chart.evidence }, positions: [next.current], open, visited };
+}
+
 export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposal> {
   const learns = family === learnChartRouteId;
   let state: Local | null = null;
@@ -54,15 +71,21 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
     async attachPrograms(registry) {
       if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group === observedMechanicsGroup && (state?.chart.epoch !== observation.level_epoch
+        || state.frame !== observation.frame_hash || !state.chartFrame || state.positions.length !== 1)) return null;
+      return this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !Object.keys(directions).some(action => observation.available_action_refs.includes(action))) return null;
       const retained = state?.chart.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
       const fresh = retained ? null : measureChart(rows, observation);
       const local = retained ?? (fresh && { chart: fresh, positions: [fresh.origin], open: [], visited: [], attempts: [],
-        evidence: [observation.observation_ref], frame: observation.frame_hash });
+        evidence: [observation.observation_ref], frame: observation.frame_hash, startFrame: observation.frame_hash });
       if (!local || local.attempts.length >= 36 || local.positions.length > 4) return null;
       const { chart, positions, visited } = local;
-      const goals = chart.nodes.filter(node => !same(node.center, chart.origin) && node.inside === chart.goal_annotation_hypothesis);
+      const goals = chart.nodes.filter(node => !same(node.center, chart.origin) && !same(node.center, chart.current)
+        && node.inside === chart.goal_annotation_hypothesis);
       if (goals.length !== 1) return null;
       const held = chartInventory(rows, chart), annotations = new Set(chart.links.map(link => link.annotation));
       const dependencies = chart.nodes.filter(node => node.inside !== null && annotations.has(node.inside) && node.inside !== chart.goal_annotation_hypothesis);
@@ -104,6 +127,11 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
         parentObjective: parent, satisfactionContract: 'official_progress_after_following_visible_links' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `chart-route:${need.id}`, actions = [offer.action];
+      const visibleChart = fresh || local.chartFrame === observation.frame_hash;
+      const fragmentAnchors = visibleChart && !same(chart.current, chart.origin) ? {
+        chartOrigin: chart.nodes.find(node => same(node.center, chart.origin))?.bbox,
+        chartPosition: chart.nodes.find(node => same(node.center, chart.current))?.bbox,
+      } : {};
       return { status: 'proposed', kind: family, actions, local, edges: offer.edges, attempt: offer.attempt, needId: need.id,
         steps: [{ action: offer.action, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -116,7 +144,7 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
             held.length ? 'A visible slot now contains a matching color.' : local.open.length ? 'An animation showed the matching color disappear at a boundary.' : '',
             label + '.',
           ].filter(Boolean).join(' '),
-          marker: fresh ? offer.target.bbox : null, slots: chart.slots.map(slot => slot.bbox) },
+          marker: visibleChart ? offer.target.bbox : null, slots: chart.slots.map(slot => slot.bbox), ...fragmentAnchors },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -133,21 +161,27 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
       return { matched: null, seal_prefix: true, reason: 'compare_chart_scene_inventory_and_returned_boundary' };
     },
     record(before, after, _command, first, second, proposal, _index, frames) {
-      const { local, edges } = proposal, { chart } = local;
+      const { local, edges } = proposal;
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const from = chartInventory(first, chart), to = chartInventory(second, chart);
-      const changed = chartScene(first, chart) !== chartScene(second, chart);
-      const anchor = measureChart(second, after);
-      let positions = anchor ? [anchor.current] : [...new Map([...(changed ? [] : local.positions), ...edges.map(edge => edge.to)]
+      const from = chartInventory(first, local.chart);
+      const changed = chartScene(first, local.chart) !== chartScene(second, local.chart);
+      const anchor = measureChart(second, after, local.chart);
+      const plausible = [...new Map([...(changed ? [] : local.positions), ...edges.map(edge => edge.to)]
         .map(point => [chartPointKey(point), point])).values()];
-      const lost = from.filter(value => !to.includes(value));
+      const fragment = anchor && !same(anchor.current, anchor.origin) ? alignFragment(local, anchor, plausible) : null;
+      const basis = fragment ?? local, { chart } = basis;
+      const to = chartInventory(second, chart);
+      const atStart = !!anchor && same(anchor.current, anchor.origin);
+      const reset = atStart && !same(local.chart.current, local.chart.origin) && local.startFrame === after.frame_hash;
+      let positions: ChartPoint[] = fragment ? fragment.positions : atStart ? [chart.origin] : plausible;
+      const lost = reset ? [] : from.filter(value => !to.includes(value));
       if (positions.length > 1 && lost.length) {
         // Two rooms can render the same scene. A disappearing inventory color
         // can distinguish them when the animation locates its matching link.
         const consistent = positions.filter(point => lost.every(color => admittedLink(point, color, chart, frames, second)));
         if (consistent.length === 1) positions = consistent;
       }
-      const open = [...local.open], visited = [...local.visited];
+      const open = reset ? [] : [...basis.open], visited = reset ? [] : [...basis.visited];
       if (positions.length === 1) {
         const point = positions[0]!, gained = to.filter(value => !from.includes(value));
         const node = chart.nodes.find(candidate => same(candidate.center, point));
@@ -157,9 +191,12 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
           if (link) open.push(chartEdgeKey(link));
         }
       }
-      state = { ...local, positions, open: [...new Set(open)], visited: [...new Set(visited)], frame: after.frame_hash,
+      state = { ...basis, positions, open: [...new Set(open)], visited: [...new Set(visited)], frame: after.frame_hash,
+        ...(fragment ? { chartFrame: after.frame_hash } : {}),
         attempts: [...local.attempts, proposal.attempt], evidence: [...new Set([chart.evidence[0]!, ...local.evidence.slice(-3), after.observation_ref])] };
-      return { events: [] };
+      const reviewEvidence = fragment ? 'The visible position and the shared starting mark register this chart fragment with the previous map.'
+        : !reset && state.open.length > basis.open.length ? 'An inventory color disappeared as the animation opened the matching boundary.' : undefined;
+      return { events: [], ...(reviewEvidence ? { reviewEvidence } : {}) };
     },
     state: () => ({ state }),
     restore(value: NativeRecord) { state = structuredClone(value.state as Local | null); },

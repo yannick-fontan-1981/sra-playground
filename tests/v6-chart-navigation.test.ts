@@ -25,6 +25,31 @@ for (const row of fixture.geometryCases) test(`chart immutable original geometry
   if (row.error) assert.throws(run); else assert.deepEqual(run(), row.value);
 });
 
+test('a continued chart anchors its current position separately from its shared start', () => {
+  const { rows, observation } = fixture.frames.chart_cold;
+  const original = geometry.measureChart(rows, observation);
+  assert.ok(original);
+  const start = original.nodes.find(node => geometry.chartPointKey(node.center) === geometry.chartPointKey(original.origin))!;
+  const destination = original.nodes.find(node => node !== start && node.inside !== null && node.center_value !== start.corner)!;
+  assert.ok(destination);
+  const changed = copy(rows) as number[][];
+  for (const [node, color] of [[start, start.edge], [destination, start.corner]] as const) {
+    const [left, top, right, bottom] = node.bbox;
+    for (const y of [top, bottom]) for (const x of [left, right]) changed[y]![x] = color;
+  }
+
+  assert.equal(geometry.measureChart(changed, observation), null);
+  const continued = geometry.measureChart(changed, observation, original);
+  assert.ok(continued);
+  assert.deepEqual(continued.origin, start.center);
+  assert.deepEqual(continued.current, destination.center);
+  assert.deepEqual(continued.links, original.links);
+
+  const [x, y] = start.center;
+  changed[y]![x] = start.inside!;
+  assert.equal(geometry.measureChart(changed, observation, original), null);
+});
+
 for (const row of fixture.cases) test(`chart immutable original owner: ${row.id}`, async () => {
   const family = await ChartNavigation.create();
   family.restore(copy(row.seedState));

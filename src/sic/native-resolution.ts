@@ -1451,8 +1451,11 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === chartRouteId || family === learnChartRouteId)) {
-    const marker = bounds(card?.marker);
-    if (marker) subjects.push({ label: 'Candidate chart marker', box: marker });
+    for (const [field, label] of [['marker', 'Candidate chart marker'], ['chartOrigin', 'Shared starting mark'],
+      ['chartPosition', 'Current chart marker']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
     if (Array.isArray(card?.slots)) for (const slot of card.slots.slice(0, 3)) {
       const box = bounds(slot);
       if (box) subjects.push({ label: 'Observed inventory slot', box });
