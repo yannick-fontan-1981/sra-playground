@@ -1313,7 +1313,7 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === materialAssemblyId || family === learnMaterialAssemblyId)) {
     for (const [field, label] of [['focus', 'Current marked or produced piece'], ['partner', 'Previously marked piece'],
-      ['destination', 'Matching frame']] as const) {
+      ['destination', 'Matching frame'], ['control', 'Core orientation control']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
