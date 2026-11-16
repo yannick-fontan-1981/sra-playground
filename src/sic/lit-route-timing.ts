@@ -57,6 +57,17 @@ export function collectLightTiming(timing: LightTiming | null, before: NativeRow
     period, waitTicks: ticks, stopped: !period && samples.length >= 320 };
 }
 
+export function sampledExposureSites(samples: readonly string[], points: readonly NativePoint[], width: number, pitch: number): string[] {
+  const masks = samples.map(mask => atob(mask));
+  return points.filter(([x, y]) => masks.some(mask => {
+    for (let dy = 0; dy < pitch; dy++) for (let dx = 0; dx < pitch; dx++) {
+      const i = (y + dy) * width + x + dx;
+      if (mask.charCodeAt(i >> 3) & (1 << (i & 7))) return true;
+    }
+    return false;
+  })).map(key);
+}
+
 export function searchLightTiming(timing: LightTiming, view: View, pitch: number, width: number, height: number,
   routes: (start: NativePoint) => Map<string, LightRoute>, remaining: number): TimedStep | null {
   const { period, elapsed, waitTicks, samples } = timing;

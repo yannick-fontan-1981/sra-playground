@@ -1,7 +1,7 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
-import { collectLightTiming, exposureMask, searchLightTiming } from './lit-route-timing.ts';
+import { collectLightTiming, exposureMask, sampledExposureSites, searchLightTiming } from './lit-route-timing.ts';
 import type { LightTiming } from './lit-route-timing.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -12,8 +12,9 @@ export const learnLitRouteId = 'sic_learn_route_from_exposure';
 type Scene = { actor: NativePoint; goal: NativePoint; stripe: [number, number]; tiles: Tile[]; walls: number; light: number;
   litBox: NativeBox | null; guards?: { ink: number; boxes: NativeBox[] } };
 type Tile = { point: NativePoint; lit: number };
-type Memory = { epoch: number; refs: string[]; rejected: string[]; steps: number };
-type Plan = { target: NativePoint; route: NativePoint[]; lit: number; toward: number; wait?: true; timed?: true };
+type Recovery = { failedSites: NativePoint[]; exposedSites: string[]; seeking: boolean };
+type Memory = { epoch: number; refs: string[]; rejected: string[]; steps: number; recovery?: Recovery };
+type Plan = { target: NativePoint; route: NativePoint[]; lit: number; toward: number; wait?: true; timed?: true; refuge?: true };
 type Proposal = NativeProposal & { scene: Scene; plan: Plan; local: Memory; attempt: string; needId: string };
 const pitch = 4;
 const offsets = [[1, 0], [0, 1], [-1, 0], [0, -1]] as const;
@@ -40,7 +41,7 @@ function stripes(rows: NativeRows, colors: [number, number], axis: 0 | 1, phase?
   return matches;
 }
 
-function measure(rows: NativeRows, prior: Scene | null): Scene | null {
+function measure(rows: NativeRows, prior: Scene | null, retainDuringPatrol = false): Scene | null {
   const parts = geometricComponents(rows);
   const near = (part: typeof parts[number]) => part.area === pitch && part.bbox[3] < rows.length - pitch;
   const horizontal = parts.filter(p => near(p) && p.bbox[3] === p.bbox[1] && p.bbox[2] - p.bbox[0] === pitch - 1);
@@ -57,7 +58,10 @@ function measure(rows: NativeRows, prior: Scene | null): Scene | null {
     if (actors.length !== 1) continue;
     const actor = actors[0]!;
     const goals = stripes(rows, stripe, 1, actor);
-    if (goals.length !== 1 || same(goals[0]!, actor)) continue;
+    const obstructed = retainDuringPatrol && prior?.guards
+      && tilePixels(rows, prior.goal).includes(prior.guards.ink);
+    const goal = goals.length === 1 ? goals[0]! : !goals.length && obstructed ? prior!.goal : null;
+    if (!goal || same(goal, actor)) continue;
     const walls = prior?.walls ?? wall!.color;
     const lighting = prior?.light ?? parts.filter(p => p.color !== walls && !stripe.includes(p.color)
       && p.bbox[3] < rows.length - pitch && p.area > 20 && p.area < rows.length * rows[0]!.length / 3
@@ -75,9 +79,11 @@ function measure(rows: NativeRows, prior: Scene | null): Scene | null {
       .sort((a, b) => b.area - a.area)[0]?.bbox ?? null;
     const bodies = parts.filter(p => p.area === 7 && p.bbox[3] < rows.length - pitch && p.bbox[2] - p.bbox[0] === 2
       && p.bbox[3] - p.bbox[1] === 2 && p.color !== walls && p.color !== lighting && !stripe.includes(p.color));
-    const guards = bodies.length >= 3 && bodies.every(p => p.color === bodies[0]!.color)
-      ? { ink: bodies[0]!.color, boxes: bodies.map(p => p.bbox) } : null;
-    candidates.push({ actor, goal: goals[0]!, stripe, tiles, walls, light: lighting, litBox, ...(guards ? { guards } : {}) });
+    const guards = retainDuringPatrol && prior?.guards
+      ? { ink: prior.guards.ink, boxes: bodies.filter(p => p.color === prior.guards!.ink).map(p => p.bbox) }
+      : bodies.length >= 3 && bodies.every(p => p.color === bodies[0]!.color)
+        ? { ink: bodies[0]!.color, boxes: bodies.map(p => p.bbox) } : null;
+    candidates.push({ actor, goal, stripe, tiles, walls, light: lighting, litBox, ...(guards ? { guards } : {}) });
   }
   return candidates.length === 1 ? candidates[0]! : null;
 }
@@ -114,14 +120,29 @@ function choose(scene: Scene, rejected: readonly string[]): Plan | null {
   return viable[0] ?? null;
 }
 
+function nextRefuge(scene: Scene, recovery: Recovery): Plan | null {
+  const { actor, goal } = scene, tiles = new Map(scene.tiles.map(tile => [key(tile.point), tile]));
+  const exposed = new Set(recovery.exposedSites);
+  const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+  const candidates = [...paths(tiles, actor).values()].filter(path =>
+    path.route.length && !path.lit && !same(path.point, goal) && !exposed.has(key(path.point))
+    && !recovery.failedSites.some(site => same(site, path.point)));
+  candidates.sort((a, b) => Number(recovery.failedSites.some(site => distance(a.point, site) <= pitch))
+    - Number(recovery.failedSites.some(site => distance(b.point, site) <= pitch)) || a.route.length - b.route.length);
+  const path = candidates[0];
+  return path ? { target: path.point, route: path.route, lit: path.lit, toward: 0, refuge: true } : null;
+}
+
 function timingPlan(scene: Scene, local: Memory, timing: LightTiming | null, rows: NativeRows, remaining: number): Plan | null {
   if (!scene.guards || timing?.stopped || remaining < 2 && !timing?.period) return null;
   const { actor, guards } = scene;
   if (!timing?.period) {
+    if (local.recovery?.seeking) return nextRefuge(scene, local.recovery);
     const [l, t, r, b] = box(actor), margin = pitch * 2;
     const clearStart = guards.boxes.every(([x, y, u, v]) => u + margin < l || x - margin > r || v + margin < t || y - margin > b)
       && scene.tiles.every(tile => !tile.lit || Math.abs(tile.point[0] - l) + Math.abs(tile.point[1] - t) > pitch);
-    return (timing || (!local.steps && clearStart)) ? { target: actor, route: [], lit: 0, toward: 0, wait: true } : null;
+    const arrivedAtRefuge = local.recovery && !local.recovery.seeking && scene.tiles.some(tile => same(tile.point, actor) && !tile.lit);
+    return (timing || (!local.steps && clearStart) || arrivedAtRefuge) ? { target: actor, route: [], lit: 0, toward: 0, wait: true } : null;
   }
   const tiles = new Map(scene.tiles.map(t => [key(t.point), t]));
   const step = searchLightTiming(timing, { ...scene, guardInk: guards.ink }, pitch, rows[0]!.length,
@@ -151,8 +172,8 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
       if (remaining < 1 || !['ACTION5', 'ACTION6'].every(ref => before.available_action_refs.includes(ref))
         || before.available_action_refs.some(ref => /^ACTION[1-4]$/.test(ref))) return null;
       const prior = memory?.epoch === before.level_epoch ? memory : null;
-      if ((prior?.steps ?? 0) >= 16) return null;
-      const scene = measure(rows, prior ? observation : null);
+      if ((prior?.steps ?? 0) >= (prior?.recovery ? 48 : 16)) return null;
+      const scene = measure(rows, prior ? observation : null, !!(prior?.recovery && timing?.period));
       if (!scene) return null;
       const local = prior ?? { epoch: before.level_epoch, refs: [], rejected: [], steps: 0 };
       const plan = timingPlan(scene, local, prior ? timing : null, rows, remaining) ?? choose(scene, local.rejected);
@@ -180,6 +201,7 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
       const id = litRouteId + ':' + need.id;
       const action: NativeCommand = { action_ref: input, data: plan.wait ? {} : { x: target[0], y: target[1] } };
       const situation = plan.wait ? (plan.timed ? 'Wait for the next measured safe crossing window' : 'Observe the patrols from the current stopping point')
+        : plan.refuge ? 'Move to an unlit stopping point farther from the interrupted observation'
         : plan.timed ? `Cross during a safe window in the observed ${timing!.period}-frame patrol cycle`
         : same(plan.target, scene.goal) ? 'Take the route to the exit with the current corridor unlit'
         : 'Move to a stopping point with lower visible exposure and assess the new lighting';
@@ -224,17 +246,32 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
       const { local } = proposal;
       const { scene, plan } = proposal;
       const clock = memory?.epoch === before.level_epoch ? timing : null;
-      let timingObserved = false;
-      if (scene.guards && plan.wait && !plan.timed && reached) {
-        timing = collectLightTiming(clock, first, second, frames, { ...scene, guardInk: scene.guards.ink }, pitch);
+      let timingObserved = false, recovery = local.recovery;
+      if (scene.guards && plan.wait && !plan.timed) {
+        const view = { ...scene, guardInk: scene.guards.ink };
+        timing = reached ? collectLightTiming(clock, first, second, frames, view, pitch) : null;
         timingObserved = timing !== null;
+        if (!timing && (clock || frames.length > 0)) {
+          const samples = [...(clock?.samples ?? []), ...frames.filter(rows => rows[1]?.[1] === scene.walls)
+            .map(rows => exposureMask(rows, view, pitch))];
+          const exposed = sampledExposureSites(samples, scene.tiles.map(tile => tile.point), first[0]!.length, pitch);
+          recovery = { seeking: true, failedSites: [...(recovery?.failedSites ?? []), scene.actor],
+            exposedSites: [...new Set([...(recovery?.exposedSites ?? []), ...exposed])] };
+        }
       } else if (plan.timed && clock && reached) {
         timing = checkedPhase(clock, proposal, second);
         timingObserved = timing !== null;
       } else timing = null;
+      if (plan.refuge && recovery) {
+        recovery = { ...recovery, seeking: !reached, failedSites: reached ? recovery.failedSites : [...recovery.failedSites, plan.target] };
+      }
       observation = proposal.scene;
-      memory = { ...local, steps: local.steps + 1, refs: movedThroughAnimation || timingObserved ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
+      memory = { ...local, ...(recovery ? { recovery } : {}), steps: local.steps + 1,
+        refs: movedThroughAnimation || timingObserved || recovery !== local.recovery ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         rejected: reached ? local.rejected : [...local.rejected, proposal.attempt] };
+      if (plan.wait && !plan.timed && recovery?.seeking && recovery !== local.recovery) {
+        return { events: [], reviewEvidence: 'The wait interrupted the sequence of patrol observations. Measure again from another stopping point.' };
+      }
       return { events: [] };
     },
     state: () => ({ memory, observation, timing }),
