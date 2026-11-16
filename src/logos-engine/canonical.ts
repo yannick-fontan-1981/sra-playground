@@ -31,13 +31,6 @@ export function isOwnedImmutableJson(value: unknown): boolean {
 }
 
 function jsonEntries(item: object): [string, unknown][] {
-  // Only immutableJson's own closed, deeply frozen results enter this set.
-  // Their keys and enumerable data properties have already been validated at
-  // ingress. A canonical-text eviction must not make us allocate and validate
-  // another descriptor object for every unchanged member. Scalar canonical
-  // validation and structural size/depth accounting still happen in encode.
-  // Foreign frozen inputs, including shallow freezes, use the full check below.
-  if (immutableObjects.has(item)) return Object.entries(item);
   if (Object.getOwnPropertySymbols(item).length) throw new TypeError('JSON symbol properties are unsupported');
   const array = Array.isArray(item);
   if (!array && !isJsonObject(item)) throw new TypeError('Only plain JSON objects are accepted');
@@ -212,13 +205,16 @@ export function canonical(value: unknown): string {
   const ancestors = new WeakSet<object>();
   let nodes = 0;
   let lastHeight = 0, lastImmutable = true;
-  function encode(item: unknown, depth: number): string {
+  function encode(item: unknown, depth: number, closedValue = false): string {
     if (++nodes > MAX_JSON_NODES || depth > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
     lastHeight = 0; lastImmutable = true;
     if (item === null) return 'null';
     if (typeof item === 'boolean') return item ? 'true' : 'false';
     if (typeof item === 'number') { assertPortableNumber(item); return String(item); }
-    if (typeof item === 'string') { assertUnicode(item); return JSON.stringify(item); }
+    if (typeof item === 'string') {
+      if (!closedValue) assertUnicode(item);
+      return JSON.stringify(item);
+    }
     if (typeof item !== 'object') throw new TypeError('Only explicit JSON values can be canonicalized');
     const cached = canonicalObjects.get(item);
     if (cached) {
@@ -226,25 +222,43 @@ export function canonical(value: unknown): string {
       if (nodes > MAX_JSON_NODES || depth + cached.height > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
       lastHeight = cached.height; return cached.text;
     }
-    if (ancestors.has(item)) throw new TypeError('Cyclic JSON value');
-    ancestors.add(item);
+    const owned = immutableObjects.has(item);
+    if (!owned) {
+      if (ancestors.has(item)) throw new TypeError('Cyclic JSON value');
+      ancestors.add(item);
+    }
     const initialNodes = nodes;
-    const entries = jsonEntries(item);
-    let height = 0, deeplyImmutable = Object.isFrozen(item);
+    let height = 0, deeplyImmutable = owned || Object.isFrozen(item);
     const child = (value: unknown): string => {
-      const text = encode(value, depth + 1);
-      height = Math.max(height, lastHeight + 1); deeplyImmutable &&= lastImmutable;
+      const text = encode(value, depth + 1, owned);
+      height = Math.max(height, lastHeight + 1);
+      if (!owned) deeplyImmutable &&= lastImmutable;
       return text;
     };
     let encoded: string;
-    if (Array.isArray(item)) {
-      encoded = `[${entries.map(([, value]) => child(value)).join(',')}]`;
+    if (owned) {
+      // Ingress already validated shape, keys and strings and owns every
+      // descendant. Numbers still need the narrower portable-number check.
+      if (Array.isArray(item)) {
+        encoded = `[${item.map(child).join(',')}]`;
+      } else {
+        const record = item as JsonObject;
+        const keys = Object.keys(record);
+        // All owned records were built in code-point order. JavaScript moves
+        // array-index keys to the front, which is the only exception to it.
+        if (keys[0] !== undefined && /^[0-9]/.test(keys[0])) keys.sort(compareUnicode);
+        encoded = `{${keys.map(key => `${JSON.stringify(key)}:${child(record[key])}`).join(',')}}`;
+      }
     } else {
-      encoded = `{${entries.sort(([a], [b]) => compareUnicode(a, b)).map(([key, value]) => {
-        return `${JSON.stringify(key)}:${child(value)}`;
-      }).join(',')}}`;
+      const entries = jsonEntries(item);
+      if (Array.isArray(item)) {
+        encoded = `[${entries.map(([, value]) => child(value)).join(',')}]`;
+      } else {
+        encoded = `{${entries.sort(([a], [b]) => compareUnicode(a, b)).map(([key, value]) =>
+          `${JSON.stringify(key)}:${child(value)}`).join(',')}}`;
+      }
+      ancestors.delete(item);
     }
-    ancestors.delete(item);
     lastHeight = height; lastImmutable = deeplyImmutable;
     if (deeplyImmutable) canonicalObjects.set(item, { text: encoded, nodes: nodes - initialNodes + 1, height }, 2 * encoded.length + 128);
     return encoded;

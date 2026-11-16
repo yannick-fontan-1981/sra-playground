@@ -1113,3 +1113,22 @@ Les durées ci-dessous sont la moyenne de deux passages par variante, à un work
 Sur les quatre niveaux, le temps moyen passe de **72,79 s à 47,70 s**. Les **31 séries continues** et les **70 reprises de décision** concordent sur les quatre passages.
 
 Le rejeu à horloge figée donne les mêmes empreintes de la chaîne des deltas aux niveaux 1 à 4 de GABA, LS19 et LS20. Les **526 commandes**, leurs retours complets et les acquisitions concordent. GABA atteint **14 325 deltas** et **239 acquisitions** au niveau 4 dans les deux variantes. Le typage TypeScript et **80 tests** passent.
+
+### Sérialisation canonique des valeurs déjà validées
+
+Pour les tableaux et objets immuables produits à l’entrée JSON, le sérialiseur lit directement les éléments et les propriétés. Il réutilise la validation des chaînes et l’ordre des clés, avec un tri quand JavaScript remonte les clés d’indices numériques. La validation des nombres portables, le calcul de la taille et de la profondeur et la vérification des entrées externes restent actifs.
+
+Sur GABA niveau 4, le profil échantillonné mesure **2,99 s** dans la sérialisation canonique sur la version 115 (`a661d933`) et **2,64 s** avec le changement, soit **11,7 %** de moins dans cette phase.
+
+Les temps ci-dessous sont la moyenne de deux passages par variante, sans profileur et à un worker. L’ordre des variantes a été inversé au second passage.
+
+| Niveau GABA | Temps version 115 | Temps optimisé | Gain total | Traitement des retours avant → après |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 9,638 s | 9,503 s | +1,4 % | 6,299 s → 6,207 s |
+| 2 | 6,676 s | 6,341 s | +5,0 % | 5,773 s → 5,529 s |
+| 3 | 11,548 s | 11,042 s | +4,4 % | 10,159 s → 9,700 s |
+| 4 | 19,259 s | 19,381 s | −0,6 % | 16,351 s → 16,431 s |
+
+Le temps total des quatre niveaux passe de **47,12 s à 46,27 s**. Le niveau 4 gagne 2,1 % au premier passage et perd 3,3 % dans l’ordre inverse. Son temps total reste proche de 19,3 s pendant ces mesures. Les 239 commandes, leurs retours, les 31 séries et les 70 reprises de décision concordent sur les quatre passages chronométrés.
+
+À horloge figée, les empreintes des chaînes du graphe et les acquisitions concordent à chaque fin de niveau, du niveau 1 au niveau 4 sur GABA, LS19 et LS20. Les **526 commandes et leurs retours complets** sont identiques. Le typage TypeScript et **98 tests** passent.

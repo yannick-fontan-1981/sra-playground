@@ -29,7 +29,7 @@ test('cached immutable subtrees retain their actual nesting depth', () => {
 });
 
 test('cached scalars and tree encodings preserve Python Unicode code-point order', () => {
-  const names = ['a', 'z', 'é', '漢', '\ue000', '\u{10000}', '\u{1f600}', 'a\u{10000}', 'a\ue000'];
+  const names = ['10', '2', '0', '', '__proto__', 'a', 'z', 'é', '漢', '\ue000', '\u{10000}', '\u{1f600}', 'a\u{10000}', 'a\ue000'];
   const expected = [...names].sort((a, b) => {
     const x = [...a].map(c => c.codePointAt(0)!), y = [...b].map(c => c.codePointAt(0)!);
     for (let i = 0; i < Math.min(x.length, y.length); i++) if (x[i] !== y[i]) return x[i]! - y[i]!;
@@ -39,6 +39,19 @@ test('cached scalars and tree encodings preserve Python Unicode code-point order
   const value = immutableJson(Object.fromEntries(names.map((name, index) => [name, index])));
   assert.equal(canonical(value), canonical(structuredClone(value)));
   assert.equal(canonical(value), canonical(value));
+  assert.ok(canonical(value).startsWith('{"":3,"0":2,"10":0,"2":1,"__proto__":4'));
+});
+
+test('owned JSON still rejects non-portable numbers and counts the full depth of shared branches', () => {
+  for (const value of [-0, 0.5, Number.MAX_SAFE_INTEGER + 1]) {
+    assert.throws(() => canonical(immutableJson({ nested: [value] })), /safe integers/);
+  }
+  let wrapped: unknown = 1;
+  for (let depth = 0; depth < 128; depth++) wrapped = immutableJson([wrapped]);
+  const tooDeep = immutableJson([wrapped]);
+  assert.throws(() => canonical(tooDeep), /size\/nesting/);
+  assert.doesNotThrow(() => canonical(wrapped));
+  assert.throws(() => canonical(tooDeep), /size\/nesting/);
 });
 
 test('frozen accessor objects, symbols and sparse arrays are never cached as valid JSON', () => {
