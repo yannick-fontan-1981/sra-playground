@@ -77,13 +77,12 @@ function readCatalogue(observation: NativeObservation, rows: NativeRows, visited
           const [, y] = center(part.bbox);
           return rows[y]!.slice(part.bbox[0] + 1, part.bbox[2]);
         });
-        const area = strips.flat();
-        const backings = groups(area, value => String(value)).filter(group => group.length > area.length / 2);
-        if (backings.length !== 1) return [];
-        const background = backings[0]![0];
-        const positions = (strip: readonly number[]) => strip.flatMap((value, index) => value === background ? [] : [index]);
-        const slots = positions(strips[0]!);
-        if (slots.length !== factors.length || strips.some(strip => key(positions(strip)) !== key(slots))) return [];
+        const slots: number[] = [], backing = new Set<number>();
+        for (const [index, value] of strips[0]!.entries()) {
+          if (strips.every(strip => strip[index] === value)) backing.add(value);
+          else slots.push(index);
+        }
+        if (backing.size !== 1 || slots.length !== factors.length) return [];
         const cards: Card[] = group.map((part, index) => ({ box: part.bbox, border: part.palette_value,
           values: slots.map(slot => strips[index]![slot]!) }));
         const borders = new Set(cards.map(card => card.border));
@@ -132,13 +131,22 @@ function inputTargets(command: NativeCommand, box: NativeBox): boolean {
   return command.action_ref === 'ACTION6' && typeof x === 'number' && typeof y === 'number' && inside(box, [x, y]);
 }
 
+function confirmsClosingVisit(scene: Catalogue, choice: Choice, rows: NativeRows, visitedBorder: number): boolean {
+  const active = scene.cards.find(card => key(card.values) === key(scene.current));
+  if (!active || !scene.factors.every((factor, index) => {
+    const [x, y] = center(factor.box);
+    return rows[y]?.[x] === choice.expected[index];
+  })) return false;
+  return scene.cards.every(card => hasBorder(rows, card.box, card === choice.target ? active.border : visitedBorder));
+}
+
 export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> {
   let learned: Calibration | null = null;
   let witness: Witness | null = null;
   let stopped: number | null = null;
   return {
     id: visibleConfigurationCoverageId,
-    observePublicOutcome(before, after, command, first, second) {
+    observePublicOutcome(before, after, command, first, second, frames = []) {
       const calibration = learned?.epoch === before.level_epoch ? learned : null;
       const knownBorder = calibration?.visitedBorder ?? (witness?.epoch === before.level_epoch ? witness.visitedBorder : null);
       const current = readCatalogue(before, first, knownBorder);
@@ -147,7 +155,8 @@ export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> 
       if (after.levels_completed > before.levels_completed) {
         if (knownBorder === null || previous.length < 2 || current.visited.length !== current.cards.length - 1) return;
         const choice = chooseConfiguration(current);
-        if (choice && key(choice.expected) === key(choice.target.values) && inputTargets(command, current.factors[choice.factor]!.box)) {
+        if (choice && key(choice.expected) === key(choice.target.values) &&
+          (inputTargets(command, current.factors[choice.factor]!.box) || frames.some(frame => confirmsClosingVisit(current, choice, frame, knownBorder)))) {
           witness = { epoch: after.level_epoch, factors: previous, visitedBorder: knownBorder, boundary: after.observation_ref };
         }
         return;
@@ -170,13 +179,15 @@ export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> 
     async propose(observation, rows, _inputs, remaining) {
       if (remaining < 1 || witness?.epoch !== observation.level_epoch || stopped === observation.level_epoch) return null;
       const current = readCatalogue(observation, rows, witness.visitedBorder);
-      if (!current || witness.factors.some(known => !current.factors.some(factor => key(factor.values) === key(known.values)))) return null;
+      if (!current) return null;
+      const transferable = witness.factors.filter(known => current.factors.some(factor => key(factor.values) === key(known.values)));
+      if (transferable.length < 2) return null;
       if (current.cards.length - current.visited.length > remaining) return null;
       const choice = chooseConfiguration(current);
       if (!choice) return null;
       const factor = current.factors[choice.factor]!;
       const learnedHere = learned?.epoch === observation.level_epoch ? learned.factors : [];
-      const observations = [...witness.factors, ...learnedHere];
+      const observations = [...transferable, ...learnedHere];
       const known = observations.some(entry => key(entry.values) === key(factor.values));
       const strategy = known ? 'cover_next_configuration' : 'test_visible_factor_cycle', label = visibleConfigurationStrategies[strategy];
       const ref = observation.observation_ref, parent = 'G_official_completion';
@@ -212,8 +223,8 @@ export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> 
       const matched = !!next && verifyChange(proposal.current, next, proposal.choice.expected);
       return { matched, seal_prefix: true, reason: matched ? 'configuration_and_visit_confirmed' : 'visible_factor_prediction_contradicted' };
     },
-    record(before, after, command, first, second, proposal) {
-      this.observePublicOutcome!(before, after, command, first, second);
+    record(before, after, command, first, second, proposal, _index, frames) {
+      this.observePublicOutcome!(before, after, command, first, second, frames);
       if (before.level_epoch === after.level_epoch) {
         const next = readCatalogue(after, second, witness?.visitedBorder);
         if (!next || !verifyChange(proposal.current, next, proposal.choice.expected)) stopped = before.level_epoch;
