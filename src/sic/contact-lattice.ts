@@ -6,7 +6,7 @@ type Scene = { unit: number; field: Box; root: Box; tip: number; order: readonly
 type Effect = { action_ref: string; extent_delta: number; root_translation: NativePoint };
 type Move = { command: string; dy: number; dx: number };
 type Position = { row: number; tip: number; pieces: readonly NativePoint[] };
-type Node = { state: Position; depth: number; first: { move: Move; result: Position } | null };
+type Node = { state: Position; depth: number; from?: { node: Node; move: Move } };
 type GuideOrder = { box: Box; order: readonly string[] };
 
 export function measureFixedGuides(rows: NativeRows, scene: Scene & { background: number }): Box[] {
@@ -155,28 +155,33 @@ export function planOrderedLattice(scene: Scene, effects: readonly Effect[], dep
     if (bucket) bucket.push(node);
     else queue.set(rank, [node]);
   };
-  enqueue({ state: start, depth: 0, first: null });
+  enqueue({ state: start, depth: 0 });
   for (let expanded = 0; queue.size && expanded < nodeLimit && !shouldStop(); ) {
     const rank = Math.min(...queue.keys()), bucket = queue.get(rank)!;
     const node = bucket.pop()!;
     if (!bucket.length) queue.delete(rank);
     if (visited.get(key(node.state)) !== node.depth) continue;
     expanded++;
-    if (node.first && (assignments.length ? guideDistance(node.state) === 0 : aligned(node.state) === parts.length)) {
-      const { move, result } = node.first;
-      const pieces = parts.map(({ id }, index) => {
-        const [x, y] = result.pieces[index]!, px = left + x * stride, py = top + y * stride;
-        return [id, [px, py, px + unit - 1, py + unit - 1]] as const;
-      }).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0);
-      return { command: move.command, distance: node.depth, prediction: {
-        root: root.map((value, index) => index % 2 ? value + (result.row - start.row) * stride : value),
-        tip: left + result.tip * stride + unit, pieces,
-      } };
+    if (node.from && (assignments.length ? guideDistance(node.state) === 0 : aligned(node.state) === parts.length)) {
+      const chain: { result: Position; move: Move }[] = [];
+      for (let at = node; at.from; at = at.from.node) chain.push({ result: at.state, move: at.from.move });
+      const route = chain.reverse().map(({ move, result }) => ({
+        command: move.command,
+        prediction: {
+          root: root.map((value, index) => index % 2 ? value + (result.row - start.row) * stride : value),
+          tip: left + result.tip * stride + unit,
+          pieces: parts.map(({ id }, index) => {
+            const [x, y] = result.pieces[index]!, px = left + x * stride, py = top + y * stride;
+            return [id, [px, py, px + unit - 1, py + unit - 1]] as const;
+          }).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0),
+        },
+      }));
+      return { ...route[0]!, distance: node.depth, route };
     }
     if (node.depth >= depthLimit) continue;
     for (const move of moves) {
       const result = predict(node.state, move);
-      if (result) enqueue({ state: result, depth: node.depth + 1, first: node.first ?? { move, result } });
+      if (result) enqueue({ state: result, depth: node.depth + 1, from: { node, move } });
     }
   }
   return null;

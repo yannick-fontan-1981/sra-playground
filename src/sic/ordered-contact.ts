@@ -11,9 +11,11 @@ import { sicNeedId } from './need-identity.ts';
 import { situationChoiceWorkflow } from './situation-choice-workflow.ts';
 import { measureFixedGuides, planOrderedLattice } from './contact-lattice.ts';
 import { measureReceivingGuides, type ReceivingGuideLayout } from './receiving-guide-scene.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const orderedContactId = 'sic_ordered_contact';
 export const verifyContactOrderId = 'sic_verify_contact_order';
+export const learnContactOrderId = 'sic_learn_contact_order';
 type EvidenceRow = NonNullable<ReturnType<typeof rootedLineEffect>>;
 type Projection = ReturnType<typeof physicalRootedLine>;
 type Configuration = Parameters<typeof projectedRootedLine>[0];
@@ -21,7 +23,8 @@ type Memory = { epoch: number; tried: string[]; effects: Record<string, Evidence
   counterexample: readonly string[]; retained: Configuration | null; refused: boolean; guideRefused?: boolean; receiverLayout?: ReceivingGuideLayout;
   transferableContact: readonly string[] };
 type Plan = { command: NativeCommand; prediction: Projection | null; distance: number | null; configuration: Configuration | null };
-type ContactProposal = NativeProposal & { contact: Plan; strategy: ContactPhase; needId: string; receiverLayout?: ReceivingGuideLayout };
+type ContactProposal = NativeProposal & { route: Plan[]; layout: unknown; strategy: ContactPhase; needId: string;
+  receiverLayout?: ReceivingGuideLayout; adoptedEffect?: EvidenceRow };
 const empty: Memory = { epoch: 0, tried: [], effects: {}, counterexample: [], retained: null, refused: false, transferableContact: [] };
 const objective = 'G_official_completion';
 const maximumReceivingGuidePlacements = 20_000;
@@ -73,7 +76,9 @@ function measureContactScene(rows: NativeRows, receiverLayout?: ReceivingGuideLa
     ({ ...pieces.get(type), id: 'material:' + rank, type: rank })) };
 }
 
-export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLineModel>[0], limits: RecoveryPack): NativeFamily<ContactProposal> {
+export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLineModel>[0], limits: RecoveryPack,
+  family = verifyContactOrderId): NativeFamily<ContactProposal> {
+  const learns = family === learnContactOrderId;
   let memory: Memory = structuredClone(empty);
   let decide: NativeProgramHandle | undefined;
   function current(epoch: number): Memory {
@@ -84,15 +89,23 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     return before.level_epoch !== after.level_epoch || before.levels_completed !== after.levels_completed || before.state !== after.state;
   }
   return {
-    id: verifyContactOrderId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseContactResponse, {}, await contactChoiceModule());
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !policy) return null;
-      const retainedMemory = current(observation.level_epoch);
+      let retainedMemory = current(observation.level_epoch);
       const scene = measureContactScene(rows, retainedMemory.receiverLayout);
       if (!scene) return null;
+      let adoptedEffect: EvidenceRow | null = null;
+      if (learns && memory.epoch !== observation.level_epoch) {
+        const prior = execution?.readPriorDirectionalScene?.(rows => measureContactScene(rows, retainedMemory.receiverLayout));
+        if (!prior || prior.afterRef !== observation.observation_ref || prior.levelEpoch !== observation.level_epoch) return null;
+        adoptedEffect = rootedLineEffect(prior.command, prior.scene, scene, [prior.beforeRef, prior.afterRef]);
+        if (!adoptedEffect) return null;
+        retainedMemory = { ...retainedMemory, effects: { ...retainedMemory.effects, [prior.command]: adoptedEffect } };
+      }
       const { tried, effects, counterexample, retained, refused, guideRefused, transferableContact } = retainedMemory;
       if (refused) return null;
       const available = new Map(inputs.filter(input => !Object.keys(input.data).length).map(input => [input.action_ref, input]));
@@ -116,6 +129,15 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         const command = available.get(action);
         return command ? { command, prediction, distance, configuration } : null;
       };
+      const retainedRoute = (path: { command: string; prediction: Projection; configuration?: Configuration }[], distance: number) => {
+        const steps: Plan[] = [];
+        for (const step of path.slice(0, maximumCommittedActions)) {
+          const planned = planFrom(step.command, step.prediction, distance - steps.length, step.configuration);
+          if (!planned) break;
+          steps.push(planned);
+        }
+        return steps.length ? steps : null;
+      };
       const depth = Math.min(limits.maxDepth, remaining, execution?.remainingLevelActions ?? remaining);
       const facts = {
         learn_command_displacement: !!unmeasured,
@@ -125,20 +147,23 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         order_components_by_contact: !receivers && !unmeasured && !counterexample.length,
         mode: execution?.reasoningMode ?? 'exploration',
       };
-      const planners: Record<ContactPhase, () => Plan | null> = {
-        learn_command_displacement: () => unmeasured ? planFrom(unmeasured) : null,
+      const planners: Record<ContactPhase, () => Plan[] | null> = {
+        learn_command_displacement: () => {
+          const trial = unmeasured ? planFrom(unmeasured) : null;
+          return trial ? [trial] : null;
+        },
         compose_axial_guide_release: () => {
           const maximumPlacements = receivers ? maximumReceivingGuidePlacements : limits.maxNodes;
           const plan = planOrderedLattice(lattice, latticeEffects, depth, maximumPlacements, shouldStop, guides, receivers);
-          return plan ? planFrom(plan.command, plan.prediction, plan.distance) : null;
+          return plan ? retainedRoute(plan.route, plan.distance) : null;
         },
         revise_contact_chain: () => {
-          const revised = planCellPush(scene, currentEffects, depth, limits.maxNodes, shouldStop);
-          return revised ? planFrom(revised.command, revised.prediction, revised.predictedGoalDistance) : null;
+          const revised = planCellPush(scene, currentEffects, depth, limits.maxNodes, shouldStop, { retainRoute: true });
+          return revised?.route ? retainedRoute(revised.route, revised.predictedGoalDistance) : null;
         },
         revalidate_contact_composition: () => {
           const revised = planOrderedLattice(lattice, latticeEffects, depth, limits.maxNodes, shouldStop);
-          return revised ? planFrom(revised.command, revised.prediction, revised.distance) : null;
+          return revised ? retainedRoute(revised.route, revised.distance) : null;
         },
         order_components_by_contact: () => {
           if (shouldStop() || !Object.keys(currentEffects).length) return null;
@@ -148,8 +173,10 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
             goal_requested_root_ref: 'current_root', goal_requested_type_order: [...scene.order], max_microsteps: policy.max_microsteps,
             max_depth: depth, max_nodes: limits.maxNodes, max_plans: 1 }, { now, deadlineMs, shouldStop });
           const plan = result.plans.find((offer: { effects: unknown[] }) => offer.effects.length > 0);
-          return plan ? planFrom(plan.effects[0].action_ref, projectedRootedLine(plan.steps[0].configuration),
-            plan.effects.length, plan.steps[0].configuration) : null;
+          return plan ? retainedRoute(plan.effects.map((effect: { action_ref: string }, index: number) => ({
+            command: effect.action_ref, prediction: projectedRootedLine(plan.steps[index].configuration),
+            configuration: plan.steps[index].configuration,
+          })), plan.effects.length) : null;
         },
       };
       const selectPlan = async () => {
@@ -165,18 +192,20 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       };
       const selected = await selectPlan();
       if (!selected || shouldStop()) return null;
-      const { phase, plan, decision } = selected;
+      const { phase, plan: route, decision } = selected;
+      const plan = route[0]!;
       const strategy = contactPrimitives[phase];
       const goal = { kind: phase === 'learn_command_displacement' ? 'measure_control_effect' : 'achieve_observed_reference_order',
         scope: ref.split(':revision:', 1)[0]!, subjects: [scene.layout as string],
         parentObjective: objective, satisfactionContract: phase === 'learn_command_displacement'
           ? 'observe_displacement_in_public_return' : 'observe_game_advance_after_alignment' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
-      const id = `contact:${need.id}`, label = orderedContactStrategies[phase], actions = [plan.command];
+      const id = `contact:${need.id}`, label = orderedContactStrategies[phase], actions = route.map(step => step.command);
       const [mode, explanation] = situations[phase];
       const situation = receivers && phase === 'compose_axial_guide_release'
         ? 'Use the mobile support to distribute the pieces in the reference order on each receiving guide' : explanation;
-      return { status: 'proposed', kind: verifyContactOrderId, strategy: phase, contact: plan, needId: need.id, actions,
+      return { status: 'proposed', kind: family, strategy: phase, route, layout: scene.layout, needId: need.id, actions,
+        ...(adoptedEffect ? { adoptedEffect } : {}),
         ...(scene.receiverLayout ? { receiverLayout: scene.receiverLayout as ReceivingGuideLayout } : {}),
         rooted_line_plan: { scene: { root: scene.root, pieces: scene.pieces.slice(0, 8),
           guides: phase === 'compose_axial_guide_release' ? guides : [] } },
@@ -185,7 +214,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
           situation: { ...facts, phase } },
         sicSituationCard: { strategy, need: goal.kind === 'measure_control_effect' ? 'Understand a command' : 'Reproduce the visible reference order',
           mode, situation, agenda: [], triggerCard: decision.receipt.workflow, evidence: proof, distance: plan.distance },
-        steps: [{ action: plan.command, expected_after: plan.prediction }],
+        steps: route.map(step => ({ action: step.command, expected_after: step.prediction })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
         question: { reason: label, hypothesis_refs: proof }, route_refs: proof,
@@ -193,38 +222,44 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: objective, purpose: label,
           evidence: proof, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const scene = index > 0 ? measureContactScene(packet.frame_rows, proposal.receiverLayout) : null;
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : proposal.binding?.level_epoch === observation.level_epoch && !!scene && scene.layout === proposal.layout
+          && equal(physicalRootedLine(scene), proposal.route[index - 1]!.prediction);
       return { admitted, reason: admitted ? 'current_reference_order_bound' : 'reference_order_scene_changed' };
     },
-    after(proposal, _index, before, after, _oldRows, newRows) {
+    after(proposal, index, before, after, _oldRows, newRows) {
       const boundary = changedLevel(before, after);
       const scene = boundary ? null : measureContactScene(newRows, proposal.receiverLayout);
-      const matched = scene && proposal.contact.prediction ? equal(physicalRootedLine(scene), proposal.contact.prediction) : null;
+      const { prediction } = proposal.route[index]!;
+      const matched = scene && prediction ? scene.layout === proposal.layout && equal(physicalRootedLine(scene), prediction) : null;
       const advanced = after.levels_completed > before.levels_completed;
-      return { matched, seal_prefix: true, reason: boundary ? 'official_boundary'
+      return { matched, seal_prefix: matched !== true || index + 1 >= proposal.route.length, reason: boundary ? 'official_boundary'
         : matched === null ? 'control_effect_awaits_measurement' : matched ? 'contact_projection_confirmed' : 'contact_projection_contradicted',
         ...(advanced ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
-    record(before, after, command, oldRows, newRows, proposal) {
+    record(before, after, command, oldRows, newRows, proposal, index) {
       memory = structuredClone(current(before.level_epoch));
+      if (index === 0 && proposal.adoptedEffect) memory.effects[proposal.adoptedEffect.action_ref] = proposal.adoptedEffect;
       const first = measureContactScene(oldRows, proposal.receiverLayout), second = measureContactScene(newRows, proposal.receiverLayout);
       if (changedLevel(before, after) || !first || !second) return { events: [] };
       if (proposal.receiverLayout) memory.receiverLayout = proposal.receiverLayout;
       const refs = [before.observation_ref, after.observation_ref] as const;
       const action = command.action_ref;
       const previousEffect = memory.effects[action];
+      const leg = proposal.route[index]!;
       if (proposal.strategy === 'learn_command_displacement') {
         memory.tried.push(action);
         const effect = rootedLineEffect(action, first, second, refs);
         if (effect) memory.effects[action] = effect;
-      } else if (equal(physicalRootedLine(second), proposal.contact.prediction)) {
-        memory.retained = proposal.contact.configuration;
+      } else if (equal(physicalRootedLine(second), leg.prediction)) {
+        memory.retained = leg.configuration;
       } else if (proposal.strategy === 'compose_axial_guide_release') {
         memory.guideRefused = true;
         memory.retained = null;
-      } else if (!memory.counterexample.length && proposal.contact.prediction && previousEffect
-        && witnessedCellPush(first, second, proposal.contact.prediction, previousEffect)) {
+      } else if (!memory.counterexample.length && leg.prediction && previousEffect
+        && witnessedCellPush(first, second, leg.prediction, previousEffect)) {
         memory.counterexample = refs;
         memory.transferableContact = refs;
         memory.retained = null;

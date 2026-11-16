@@ -5,6 +5,7 @@ import { selectedRigidRoute, SELECTED_RIGID_SOURCE_LIMITS, SelectedRigidIncomple
 import type { SelectedRigidPoses, SelectedRigidRouteStep, SelectedRigidScene } from '../logos-engine/v6-selected-rigid-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const moveMaskedPiecesId = 'sic_move_masked_pieces';
 export const learnSelectedAccessId = 'sic_learn_selected_access';
@@ -26,11 +27,19 @@ type State = {
 type Variant = { model: NativePoint[]; poses: SelectedRigidPoses };
 type Transfer = { epoch: number; models: NativePoint[][]; evidence: string[] };
 type Choice = { kind: 'select' | 'probe' | 'move'; index: number; action: NativeCommand; variants: Variant[]; route: SelectedRigidRouteStep[] };
-type Proposal = NativeProposal & { local: State; choice: Choice; needId: string };
+type RigidLeg = { action: NativeCommand; index: number; prediction: SelectedRigidPoses };
+type Proposal = NativeProposal & { local: State; choice: Choice; walk?: RigidLeg[]; needId: string };
 
 const same = ([x, y]: NativePoint, [a, b]: NativePoint) => x === a && y === b;
 const samePoses = (a: SelectedRigidPoses, b: SelectedRigidPoses) => a.length === b.length && a.every((p, i) => same(p, b[i]!));
 const measurement = { outlinedReceptacles: true };
+
+function forLeg(proposal: Proposal, index: number, models: State['models']): Choice {
+  if (!index || !proposal.walk) return proposal.choice;
+  const { action, index: piece, prediction } = proposal.walk[index]!;
+  return { kind: 'move', index: piece, action, variants: models.map(model => ({ model, poses: prediction })),
+    route: proposal.choice.route.slice(index) };
+}
 
 function partiallyInserted(scene: SelectedRigidScene): boolean {
   const target = scene.receptacle.access && scene.bodies.find(body => body.key === scene.receptacle.key);
@@ -147,10 +156,24 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const composition = id + ':' + need.id, action = choice.action;
       const focus = scene.bodies[choice.index]!, goal = scene.receptacle;
+      const walk: RigidLeg[] = [];
+      if (choice.kind === 'move' && choice.variants.every(variant => samePoses(variant.poses, next[2]))) {
+        let poses = selectedRigidPoses(scene);
+        for (const [index, direction, prediction] of choice.route.slice(0, Math.min(remaining, maximumCommittedActions))) {
+          if (index !== local.active) break;
+          const input = inputs.findIndex((_, i) => local.models.every(model => same(model[i]!, direction)));
+          if (input < 0 || !samePoses(selectedRigidMoved(scene, poses, index, direction), prediction)) break;
+          walk.push({ action: { action_ref: inputs[input]!, data: {} }, index, prediction });
+          poses = prediction;
+        }
+      }
+      const actions = walk.length > 1 ? walk.map(step => step.action) : [action];
       return {
         status: 'proposed', kind: id, local, choice, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: choice.kind === 'move' ? next[2] : null, ...(witness ? { point_binding: witness } : {}) }],
+        ...(walk.length > 1 ? { walk } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: choice.kind === 'move' ? walk[index]?.prediction ?? next[2] : null,
+          ...(witness ? { point_binding: witness } : {}) })),
         sicSituationCard: { strategy: selected.id, need: 'Clear a route for the piece that fits the opening', situation, evidence, agenda: entries, mode,
           triggerCard: card, focus: boxFor(scene, focus.position, focus.mask), target: boxFor(scene, goal.position, goal.mask),
           destination: boxFor(scene, next[2][choice.index]!, focus.mask), compatibleControls: local.models.length },
@@ -158,23 +181,32 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
         compositions: [{ id: composition, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy: selected.id, objective: { id: composition, label: navigationPrimitives[selected.id], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: composition, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: composition } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: composition } },
       };
     },
-    before(proposal, index, _packet, current) {
+    before(proposal, index, packet, current) {
+      if (index > 0 && proposal.walk) {
+        const observed = selectedRigidScene(packet.frame_rows, proposal.local.scene, measurement);
+        const admitted = proposal.local.epoch === current.level_epoch && !!observed
+          && samePoses(selectedRigidPoses(observed), proposal.walk[index - 1]!.prediction);
+        return { admitted, reason: admitted ? 'retained_masks_and_landing_confirmed' : 'piece_configuration_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
       return { admitted, reason: admitted ? 'piece_configuration_bound' : 'piece_configuration_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { local, choice } = proposal, scene = selectedRigidScene(second, local.scene, measurement);
+      const { local } = proposal, choice = forLeg(proposal, index, local.models);
+      const scene = selectedRigidScene(second, local.scene, measurement);
       if (choice.kind === 'select') return { matched: null, seal_prefix: true, reason: 'selection_pending_directional_evidence' };
       const compatible = scene && choice.variants.some(v => samePoses(v.poses, selectedRigidPoses(scene)));
-      return { matched: !!compatible, seal_prefix: true, reason: compatible
+      return { matched: !!compatible, seal_prefix: !compatible || index + 1 >= proposal.actions.length, reason: compatible
         ? partiallyInserted(scene) ? 'observed_partial_insertion' : 'compatible_full_mask_return' : 'full_mask_projection_contradicted' };
     },
-    record(before, after, action, _first, second, { local, choice }) {
+    record(before, after, action, _first, second, proposal, index) {
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const choice = forLeg(proposal, index, local.models);
       if (after.levels_completed > before.levels_completed && choice.kind === 'move' && local.models.length === 1) {
         transfer = { epoch: before.level_epoch, models: local.models, evidence: [...local.refs.slice(-4), after.observation_ref] };
       }

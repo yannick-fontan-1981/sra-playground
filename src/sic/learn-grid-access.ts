@@ -2,6 +2,7 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const learnGridAccessId = 'sic_learn_grid_access';
 
@@ -16,7 +17,7 @@ type State = { epoch: number; grid: Lattice; reading: Reading; goal: number; ris
   terrain: Partial<Record<number, Terrain>>; effects: Partial<Record<Direction, DirectionEffect>>;
   terrainEvidence: Partial<Record<number, string>>; refused: string[]; revealOrigins: number[]; waits: number };
 type Choice = { action: NativeCommand; target: number; purpose: 'measure' | 'access' | 'reveal' | 'wait'; effect?: DirectionEffect };
-type Proposal = NativeProposal & { local: State; choice: Choice; needId: string };
+type Proposal = NativeProposal & { local: State; choices: Choice[]; needId: string };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -187,9 +188,22 @@ export function createSicLearnGridAccess(): NativeFamily<Proposal> {
       const objective = { kind: 'learn_grid_access', scope: ref.split(':revision:', 1)[0]!, subjects: ['mobile', 'terrain', 'target'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_access' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `${learnGridAccessId}:${need.id}`;
-      const action = choice.action;
-      return { status: 'proposed', kind: learnGridAccessId, local, choice, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: access ? target : null }],
+      const choices = [choice];
+      if (access) {
+        const seen = new Set([reading.at, choice.target]);
+        let at = choice.target;
+        while (at !== goal && choices.length < Math.min(remaining, maximumCommittedActions)) {
+          const next = choose({ ...local, reading: { ...reading, at } }, false);
+          if (next?.purpose !== 'access' || seen.has(next.target) || risk.includes(next.target)) break;
+          choices.push(next);
+          at = next.target;
+          seen.add(at);
+        }
+      }
+      const actions = choices.map(step => step.action);
+      return { status: 'proposed', kind: learnGridAccessId, local, choices, needId: need.id,
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: choices.map(step => ({ action: step.action, expected_after: step.purpose === 'access' ? tile(grid, step.target) : null })),
         sicSituationCard: { strategy: selected.id, need: 'Reach a target through partially observed terrain', situation, evidence, agenda: entries, mode,
           triggerCard: card, actor: tile(grid, reading.at), target, exit: tile(grid, goal),
           observedTerrain: Object.keys(terrain).length, targetEvidence: terrainEvidence[choice.target] ?? null,
@@ -198,21 +212,35 @@ export function createSicLearnGridAccess(): NativeFamily<Proposal> {
         compositions: [{ id, observed: false, open_question: situation, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, current) {
+    before(proposal, index, packet, current) {
+      if (index > 0) {
+        const { local, choices } = proposal, reading = readGrid(packet.frame_rows, local.grid), { target } = choices[index]!;
+        const hazard = reading ? movingObstacle(reading, local.grid) : null;
+        const admitted = local.epoch === current.level_epoch && !!reading && reading.at === choices[index - 1]!.target
+          && local.terrain[target] === 'open' && reading.cells[target] !== 'blocked' && hazard !== target
+          && (hazard === null || Math.abs(hazard % local.grid.columns - target % local.grid.columns)
+            + Math.abs(Math.floor(hazard / local.grid.columns) - Math.floor(target / local.grid.columns)) > 1);
+        return { admitted, reason: admitted ? 'learned_grid_step_still_available' : 'lattice_observation_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
       return { admitted, reason: admitted ? 'current_lattice_bound' : 'lattice_observation_changed' };
     },
-    after(proposal, _index, before, after, _rows, returned) {
+    after(proposal, index, before, after, _rows, returned) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { local, choice } = proposal, next = readGrid(returned, local.grid);
+      const { local } = proposal, choice = proposal.choices[index]!, next = readGrid(returned, local.grid);
       const matched = choice.purpose === 'access' ? next?.at === choice.target : null;
-      return { matched, seal_prefix: true, reason: matched === false ? 'measured_direction_contradicted' : 'acquire_public_grid_return' };
+      const terrainChanged = next && proposal.choices.length > 1 && Object.entries(next.cells)
+        .some(([cell, terrain]) => local.terrain[Number(cell)] !== terrain);
+      return { matched, seal_prefix: matched !== true || !!terrainChanged || index + 1 >= proposal.choices.length,
+        reason: matched === false ? 'measured_direction_contradicted' : 'acquire_public_grid_return' };
     },
-    record(before, after, _command, _rows, returned, { local, choice }) {
+    record(before, after, _command, _rows, returned, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const choice = proposal.choices[index]!;
       const { grid, terrain, reading } = local, next = readGrid(returned, grid);
       if (!next) return { events: [] };
       const learned = { ...terrain, ...next.cells }, terrainEvidence = { ...local.terrainEvidence };

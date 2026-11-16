@@ -36,7 +36,7 @@ export function witnessedCellPush(before: R, after: R, expected: R, effect: R): 
 /** Search a conditional lattice model after evidence for whole-cell contact.
  * The caller admits one step at a time and verifies the full public projection. */
 export function planCellPush(scene: R, effects: R, limit: number, maxNodes: number, timedOut: () => boolean,
-  options: { allowFirst?: (command: string) => boolean; visit?: () => void } = {}) {
+  options: { allowFirst?: (command: string) => boolean; visit?: () => void; retainRoute?: boolean } = {}) {
   const stride = scene.unit + 2, [left, top, right, bottom] = scene.field;
   const pieces: R[] = scene.pieces;
   const first = scene.tip - scene.unit;
@@ -87,7 +87,8 @@ export function planCellPush(scene: R, effects: R, limit: number, maxNodes: numb
     return next;
   }
   const key = (state: Board) => JSON.stringify(state);
-  const queue: { state: Board; depth: number; first?: { command: string; state: Board } }[] = [{ state: start, depth: 0 }];
+  type Node = { state: Board; depth: number; command?: string; parent?: Node };
+  const queue: Node[] = [{ state: start, depth: 0 }];
   const seen = new Set([key(start)]);
   for (let i = 0; i < queue.length && i < maxNodes; i++) {
     if (timedOut()) return null;
@@ -95,24 +96,28 @@ export function planCellPush(scene: R, effects: R, limit: number, maxNodes: numb
     const entry = queue[i]!;
     const inOrder = entry.state.pieces.map((cell, index) => ({ cell, index })).filter(({ cell }) => onRod(entry.state, cell))
       .sort((a, b) => a.cell[0] - b.cell[0]).map(({ index }) => index);
-    if (entry.first && equal(inOrder, wanted)) {
-      const result = entry.first.state;
-      const root = scene.root.map((value: number, i: number) => value + (i % 2 ? result.y - row : 0));
-      const prediction = { root, tip: result.tip + scene.unit,
+    if (entry.parent && equal(inOrder, wanted)) {
+      const predictReturn = (result: Board) => ({
+        root: scene.root.map((value: number, i: number) => value + (i % 2 ? result.y - row : 0)), tip: result.tip + scene.unit,
         pieces: pieces.map((piece, index) => {
           const [x, y0] = result.pieces[index]!;
           return [piece.id, [x, y0, x + scene.unit - 1, y0 + scene.unit - 1]];
-        }).sort(([a], [b]) => String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0) };
-      return { command: entry.first.command, prediction, predictedGoalDistance: entry.depth };
+        }).sort(([a], [b]) => String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0),
+      });
+      const route: Node[] = [];
+      for (let at = entry; at.parent; at = at.parent) route.push(at);
+      const first = route.at(-1)!;
+      return { command: first.command!, prediction: predictReturn(first.state), predictedGoalDistance: entry.depth,
+        ...(options.retainRoute ? { route: route.reverse().map(node => ({ command: node.command!, prediction: predictReturn(node.state) })) } : {}) };
     }
     if (entry.depth >= limit) continue;
     for (const { command, dy, extent } of moves) {
       if (queue.length >= maxNodes) break;
-      if (!entry.first && options.allowFirst && !options.allowFirst(command)) continue;
+      if (!entry.parent && options.allowFirst && !options.allowFirst(command)) continue;
       const state = predict(entry.state, dy, extent);
       if (!state || seen.has(key(state))) continue;
       seen.add(key(state));
-      queue.push({ state, depth: entry.depth + 1, first: entry.first ?? { command, state } });
+      queue.push({ state, depth: entry.depth + 1, command, parent: entry });
     }
   }
   return null;

@@ -2,6 +2,7 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const navigateRevealedGridId = 'sic_navigate_revealed_grid';
@@ -15,7 +16,8 @@ type Reading = { position: number; obstacle: number | null; obstacles: number[];
 type Motion = { from: number; at: number };
 type State = { epoch: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean };
-type Proposal = NativeProposal & { local: State; choice: Choice; needId: string };
+type Walk = { action: string; target: number };
+type Proposal = NativeProposal & { local: State; choice: Choice; walk?: Walk[]; needId: string };
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION4', 1, 0], ['ACTION3', -1, 0]] as const;
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -136,15 +138,19 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
     ...(sentryRisk ? { sentryRisk: [...sentryRisk] } : {}) };
 }
 
-function route(reading: Reading, grid: Grid): { action: string; target: number } | null {
+function route(reading: Reading, grid: Grid): Walk[] | null {
   const start = reading.position, risk = new Set(reading.risk), sentryRisk = new Set(reading.sentryRisk);
-  type Candidate = { index: number; cost: number; first: { action: string; target: number } | null };
-  const queue: Candidate[] = [{ index: start, cost: 0, first: null }], best = new Map([[start, 0]]);
+  type Candidate = { index: number; cost: number; from?: { parent: Candidate; step: Walk } };
+  const queue: Candidate[] = [{ index: start, cost: 0 }], best = new Map([[start, 0]]);
   while (queue.length) {
     queue.sort((a, b) => a.cost - b.cost);
-    const { index, cost, first } = queue.shift()!;
+    const candidate = queue.shift()!, { index, cost } = candidate;
     if (cost !== best.get(index)) continue;
-    if (index === grid.goal) return first;
+    if (index === grid.goal) {
+      const path: Walk[] = [];
+      for (let node = candidate; node.from; node = node.from.parent) path.push(node.from.step);
+      return path.reverse();
+    }
     for (const [action, dx, dy] of directions) {
       const x = index % grid.columns + dx, y = Math.floor(index / grid.columns) + dy;
       const target = y * grid.columns + x;
@@ -153,7 +159,7 @@ function route(reading: Reading, grid: Grid): { action: string; target: number }
       const nextCost = cost + 1 + (reading.memory[target] ? 0 : 2) + (risk.has(target) ? 8 : 0) + (sentryRisk.has(target) ? 6 : 0);
       if (nextCost >= (best.get(target) ?? Infinity)) continue;
       best.set(target, nextCost);
-      queue.push({ index: target, cost: nextCost, first: first ?? { action, target } });
+      queue.push({ index: target, cost: nextCost, from: { parent: candidate, step: { action, target } } });
     }
   }
   return null;
@@ -180,8 +186,8 @@ function track(previous: Reading, current: Reading, grid: Grid, motions: Motion[
   });
 }
 
-function choose({ grid, last, previousObstacle, consecutiveWaits, motions }: State): Choice | null {
-  const next = route(last, grid);
+function choose({ grid, last, previousObstacle, consecutiveWaits, motions }: State, path: Walk[] | null): Choice | null {
+  const next = path?.[0];
   if (!next) return null;
   const target = next.target, uncertain = !last.memory[target], obstacle = last.obstacle;
   const approaching = grid.actorPixels ? motions?.some(({ at, from }) => target === 2 * at - from && axisDistance(at, target, grid) === 1)
@@ -218,7 +224,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       if (!last) return null;
       const local = prior ? { ...prior, last } : { epoch: observation.level_epoch, grid, last, previousObstacle: null,
         refs: !normal && inherited ? inherited.refs : [], consecutiveWaits: 0 };
-      const choice = choose(local);
+      const path = route(last, grid), choice = choose(local, path);
       if (!choice) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
@@ -239,10 +245,18 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         subjects: ['controlled_sprite', 'revealed_cells', 'moving_obstacle', 'exit'], parentObjective: parent, satisfactionContract: 'official_progress_at_visible_exit' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = navigateRevealedGridId + ':' + need.id, action = choice.action;
+      const walk: Walk[] = [];
+      if (known) for (const leg of path!.slice(0, Math.min(remaining, maximumCommittedActions))) {
+        if (last.memory[leg.target] !== 'free' || last.risk.includes(leg.target) || last.sentryRisk?.includes(leg.target)
+          || last.obstacles.includes(leg.target)) break;
+        walk.push(leg);
+      }
+      const actions = walk.length > 1 ? walk.map(leg => ({ action_ref: leg.action, data: {} })) : [action];
       return {
         status: 'proposed', kind: navigateRevealedGridId, local, choice, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: choice.kind === 'move' ? target : null }],
+        ...(walk.length > 1 ? { walk } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: choice.kind === 'move' ? tile(grid, walk[index]?.target ?? choice.target) : null })),
         sicSituationCard: { strategy: selected.id, need: 'Find a passable route to the exit', situation, evidence, agenda: entries, mode,
           triggerCard: card, actor: tile(grid, last.position), target, exit: tile(grid, grid.goal),
           obstacle: last.obstacle === null ? null : tile(grid, last.obstacle),
@@ -253,26 +267,38 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, current) {
+    before(proposal, index, packet, current) {
+      if (index > 0 && proposal.walk) {
+        const { local } = proposal, reading = read(packet.frame_rows, local.grid, local.last), target = proposal.walk[index]!.target;
+        const admitted = local.epoch === current.level_epoch && reading?.position === proposal.walk[index - 1]!.target
+          && reading.memory[target] === 'free' && !reading.risk.includes(target) && !reading.obstacles.includes(target)
+          && !reading.sentryRisk?.includes(target);
+        return { admitted, reason: admitted ? 'next_grid_cell_still_open' : 'revealed_grid_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
       return { admitted, reason: admitted ? 'revealed_grid_bound' : 'revealed_grid_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { local, choice } = proposal, next = read(second, local.grid, local.last);
+      const { local } = proposal, walk = proposal.walk?.[index], choice = walk ? { ...proposal.choice, target: walk.target } : proposal.choice;
+      const prior = index > 0 ? read(first, local.grid, local.last) ?? local.last : local.last;
+      const next = read(second, local.grid, prior);
       if (!next) return { matched: false, seal_prefix: true, reason: 'grid_return_unreadable' };
       const matched = choice.kind === 'pulse' ? next.charges < local.last.charges && Object.keys(next.memory).length > Object.keys(local.last.memory).length
         : choice.kind === 'move' ? next.position === choice.target : null;
-      return { matched, seal_prefix: true, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
+      const terrainChanged = proposal.walk && Object.entries(next.memory).some(([cell, value]) => prior.memory[Number(cell)] !== value);
+      return { matched, seal_prefix: !matched || !!terrainChanged || index + 1 >= proposal.actions.length, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
         ? matched ? 'observed_grid_step' : 'grid_step_contradicted' : 'observe_obstacle_phase' };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, _first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, choice } = proposal, next = read(second, local.grid, local.last);
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const walk = proposal.walk?.[index], choice = walk ? { ...proposal.choice, target: walk.target } : proposal.choice;
+      const next = read(second, local.grid, local.last);
       if (!next) return { events: [] };
       if (choice.kind === 'move' && next.position === local.last.position && !next.obstacles.includes(choice.target) && !next.risk.includes(choice.target)) {
         next.memory[choice.target] = 'wall';

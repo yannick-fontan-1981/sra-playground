@@ -22,7 +22,11 @@ test('SIC plans selective displacement when a measured row has the reverse of th
   const plan = planOrderedLattice(scene, effects, 88, 1000, () => false);
   assert.ok(plan);
   assert.ok(plan.distance > 1);
+  assert.equal(plan.route.length, plan.distance);
+  assert.deepEqual(plan.route[0], { command: plan.command, prediction: plan.prediction });
   assert.deepEqual(plan.prediction.pieces, scene.pieces.map(({ id, bbox }) => [id, bbox]));
+  const ordered = plan.route.at(-1)!.prediction.pieces.map(([, bbox]) => bbox);
+  assert.ok(ordered.every(([x, y], index) => y === ordered[0]![1] && (!index || x > ordered[index - 1]![0])));
   assert.equal(planOrderedLattice(scene, effects, 88, 1000, () => true), null);
   assert.equal(planOrderedLattice(scene, effects.slice(1, 2), 88, 1000, () => false), null);
 });

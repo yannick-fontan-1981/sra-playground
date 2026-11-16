@@ -1,5 +1,5 @@
 import { fieldRepairId } from './field-repair.ts';
-import { verifyContactOrderId } from './ordered-contact.ts';
+import { learnContactOrderId, verifyContactOrderId } from './ordered-contact.ts';
 import { supportTransferId } from './support-transfer.ts';
 import { learnSupportMovesId, learnObservedSupportsId } from './learn-support-moves.ts';
 import { subsetExperimentId } from './subset-experiment.ts';
@@ -50,7 +50,7 @@ import { legendRecolorId, matchExampleId } from './legend-recolor.ts';
 import { verifyPatternChoiceId } from './visual-pattern.ts';
 import { facetGrowthId, learnFacetGrowthId } from './facet-growth.ts';
 import { chartRouteId, learnChartRouteId } from './chart-route.ts';
-import { verifyReferencePlacementId } from './population-placement.ts';
+import { learnReferencePlacementId, verifyReferencePlacementId } from './population-placement.ts';
 import { carryToFrameId, learnCarryToFrameId } from './carry-to-frame.ts';
 import { learnPortPairingId, portPairingId } from './port-pairing.ts';
 import { displayCouplingId } from './display-coupling.ts';
@@ -69,7 +69,7 @@ import { parallelSymbolPrefixesId } from './parallel-symbol-prefixes.ts';
 import { verifyTraceCoverageId } from './trace-coverage.ts';
 import { learnRadialConnectionId, radialConnectionId } from './radial-connection.ts';
 import { verifyCaptureRouteId } from './invited-capture.ts';
-import { verifyBranchAlignmentId } from './branch-alignment.ts';
+import { learnBranchAlignmentId, verifyBranchAlignmentId } from './branch-alignment.ts';
 import { verifyOrderedFeedbackId } from './feedback-trial.ts';
 import { catalogueComparisonId, revealedExampleId } from './catalogue-comparison.ts';
 import { learnReceptionAccessId, receptionAccessId } from './reception-access.ts';
@@ -78,7 +78,7 @@ import { coordinateObservedMotionId, reflectedPlacementId } from './reflected-pl
 import { verifyCoupledRouteId } from './coupled-motion.ts';
 import { verifyConnectedRouteId } from './material-route.ts';
 import { verifyInventoryTransferId } from './inventory-access.ts';
-import { verifyRemoteReplayId } from './replay-access.ts';
+import { learnRemoteReplayId, verifyRemoteReplayId } from './replay-access.ts';
 import { verifyOrientedDeliveryId } from './oriented-delivery.ts';
 import { indicatedJumpId, learnIndicatedJumpId } from './indicated-jump.ts';
 import { highlightedRouteId, learnHighlightedRouteId } from './highlighted-route.ts';
@@ -116,18 +116,18 @@ export const standalonePlanningGroups = [
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId,
     verifyInventoryTransferId, chartRouteId, framedContactId, coupledGaugeRouteId, reproduceCueId, arrangeTurnPostsId, directionalReceptionId, pairedPassageId,
-    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyOrientedDeliveryId, verifyReferencePlacementId, verifyChannelAccessId,
+    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyOrientedDeliveryId, verifyReferencePlacementId, learnReferencePlacementId, verifyChannelAccessId,
     displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId, navigateRevealedGridId,
     pivotCargoId, observedActuatorArrangementId, observedRouteInterventionId, observedSurvivalId, observedRailTransfersId, settleMatchingEdgesId, columnAlignmentId] },
-  { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },
+  { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, learnContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },
   { id: 'inspect_candidate_relations', families: [verifyCrossingRowsId, verifyCaptureRouteId, subsetExperimentId, learnScopeEffectsId, framedContactId, learnPatternAccessId, transportContactId, learnTransportAccessId, verifyCombinedMarksId, materialAssemblyId, learnMaterialAssemblyId, animationContactId, learnAnimationContactId] },
-  { id: 'coordinate_visible_motion', families: [coupledGaugeRouteId, mergeForDemandId, verifyBandTransferId, verifySharedArrivalId, outlineServiceId, learnOutlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, verifyBranchAlignmentId, receptionAccessId, learnReceptionAccessId, verifyMarkerPlacementId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, learnPivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyConnectedRouteId, verifyInventoryTransferId, verifyRemoteReplayId, verifyOrientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, learnPairedPassageId, verifyFrameContactId, learnFrameAccessId, switchedSurfaceId, learnSwitchedSurfaceId, verifyReactiveMotionId, verifyPointAccessId, verifyLinkedMotionId, linkedGroupRouteId, verifyRemovableSupportId, learnRemovableSupportId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, learnLinkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId, learnTurnPostsId] },
+  { id: 'coordinate_visible_motion', families: [coupledGaugeRouteId, mergeForDemandId, verifyBandTransferId, verifySharedArrivalId, outlineServiceId, learnOutlineServiceId, carryToFrameId, learnCarryToFrameId, directionalReceptionId, learnDirectionalReceptionId, verifyBranchAlignmentId, learnBranchAlignmentId, receptionAccessId, learnReceptionAccessId, verifyMarkerPlacementId, reflectedPlacementId, coordinateObservedMotionId, pivotCargoId, learnPivotCargoId, moveMaskedPiecesId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyConnectedRouteId, verifyInventoryTransferId, verifyRemoteReplayId, learnRemoteReplayId, verifyOrientedDeliveryId, indicatedJumpId, learnIndicatedJumpId, highlightedRouteId, learnHighlightedRouteId, pairedPassageId, learnPairedPassageId, verifyFrameContactId, learnFrameAccessId, switchedSurfaceId, learnSwitchedSurfaceId, verifyReactiveMotionId, verifyPointAccessId, verifyLinkedMotionId, linkedGroupRouteId, verifyRemovableSupportId, learnRemovableSupportId, litRouteId, learnLitRouteId, nestedPassageId, learnNestedPassageId, linkOpeningsId, learnLinkOpeningsId, navigateRevealedGridId, arrangeTurnPostsId, learnTurnPostsId] },
   { id: 'interpret_examples_and_collections', families: [labeledSequenceId, learnLabeledSequenceId, markedCollectionId, slotTransferId, verifyPatternChoiceId, stableReferenceId, verifyOrderedFeedbackId, catalogueComparisonId, revealedExampleId, windowRelationId, layeredFitId, learnLayeredFitId] },
   { id: 'apply_learned_relations', families: [remoteSupportRouteId, learnRemoteAccessId, verifyOccurrenceChoiceId, verifySlotPermutationId, learnSlotPermutationId, surfaceCopyId, learnSurfaceCopyId, chartRouteId, learnChartRouteId] },
   { id: 'construct_executable_program', families: [verifyProgramConfigurationId, programOriginId, learnProgramOriginId, parallelSymbolPrefixesId, verifySequenceEditsId, windowCoverageId, learnWindowCoverageId, verifyPanelConfigurationId] },
   { id: 'fit_profiles_into_receivers', families: [verifyProfileTransferId, portPairingId, learnPortPairingId, radialConnectionId, learnRadialConnectionId, framedReceptionId, learnFramedReceptionId] },
   { id: 'preserve_ordered_team', families: [orderedReplenishmentId, learnOrderedReplenishmentId] },
-  { id: 'fill_visible_partition', families: [verifyPreviewPlacementId, verifyReferencePlacementId] },
+  { id: 'fill_visible_partition', families: [verifyPreviewPlacementId, verifyReferencePlacementId, learnReferencePlacementId] },
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [verifyTraceCoverageId, verifyMarkedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId] },

@@ -10,6 +10,7 @@ import { measureStackedBranchLayout, placeStackedBranches, stackedBranchBox, sta
 
 export const branchAlignmentId = 'sic_branch_alignment';
 export const verifyBranchAlignmentId = 'sic_verify_branch_alignment';
+export const learnBranchAlignmentId = 'sic_learn_branch_alignment';
 export const branchAlignmentStrategies = {
   learn_contributor_control: 'Measure how commands move the selected contributor',
   select_unaligned_contributor: 'Select a contributor that needs to move',
@@ -32,8 +33,16 @@ const isStacked = (proposal: Proposal): proposal is StackedProposal => Object.ha
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const bounds = { maximumIdentityAssignments: 2048, maximumPlacements: 8192, yieldInterval: 128 };
 const plain = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
+function movedContributor(before: BranchState, after: BranchState): BranchPoint | null {
+  const [positions, active] = before;
+  const moved = positions.flatMap((point, index) => equal(point, after[0][index]) ? [] : [index]);
+  if (active !== after[1] || moved.length !== 1 || moved[0] !== active) return null;
+  const [x, y] = positions[active]!, [nx, ny] = after[0][active]!;
+  return (x === nx) !== (y === ny) ? [nx - x, ny - y] : null;
+}
 
-export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
+export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId): NativeFamily<Proposal> {
+  const learns = family === learnBranchAlignmentId;
   let state: State | null = null;
   let confirmed: ConfirmedControls | null = null;
   let stacked: StackedState | null = null;
@@ -102,7 +111,7 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
         preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
   }
   return {
-    id: verifyBranchAlignmentId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -112,17 +121,36 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (stacked?.epoch === observation.level_epoch) return proposeStacked(observation, rows, keys, execution);
       const model = prior?.model ?? branchLayout(observation, rows, inputs);
-      if (!model) return proposeStacked(observation, rows, keys, execution);
+      if (!model) return learns ? null : proposeStacked(observation, rows, keys, execution);
       if (model.bars.length > 5 || prior?.stopped || (prior?.tried.length ?? 0) >= 48) return null;
       const recalled = confirmed?.epoch === observation.level_epoch - 1 && confirmed.axis === model.axis
         && confirmed.unit === model.unit && confirmed.sources < model.sources.length
         && Object.keys(confirmed.controls).every(key => keys.includes(key)) ? confirmed : null;
-      const local: State = prior ?? { epoch: observation.level_epoch, model, positions: model.bars.map(bar => bar.position),
+      let local: State = prior ?? { epoch: observation.level_epoch, model, positions: model.bars.map(bar => bar.position),
         controls: recalled?.controls ?? {}, tried: [], evidence: [], stopped: false, recalledEvidence: recalled?.evidence ?? null };
       let current: BranchState | null, displacements: number[] | undefined;
       try {
         current = await boundedBranchObservedStateCooperative(observation, model, local.positions, bounds, execution);
         if (!current) return null;
+        if (learns && !prior) {
+          const [positions, active] = current;
+          const motion = execution?.readPriorDirectionalScene?.(first => {
+            const before = [[-1, 0], [1, 0], [0, -1], [0, 1]].flatMap(([dx, dy]) => {
+              const location = positions.map(([x, y], index): BranchPoint =>
+                index === active ? [x + dx! * model.unit, y + dy! * model.unit] : [x, y]);
+              const [left, top, right, bottom] = branchBbox(location[active]!, model.bars[active]!.length, model);
+              if (left < 0 || top < 0 || bottom >= first.length || right >= (first[0]?.length ?? 0)) return [];
+              const measured = branchReadState(first, model, location);
+              return measured?.[1] === active ? [measured] : [];
+            });
+            return before.length === 1 ? before[0]! : null;
+          });
+          const delta = motion && movedContributor(motion.scene, current);
+          if (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch
+            || !keys.includes(motion.command) || !delta || Math.abs(delta[0]) + Math.abs(delta[1]) !== model.unit) return null;
+          local = { ...local, positions: current[0], controls: { [motion.command]: delta },
+            controlEvidence: { [motion.command]: motion.afterRef }, evidence: [motion.beforeRef, motion.afterRef] };
+        }
         if (new Set(Object.values(local.controls).map(vector => JSON.stringify(vector))).size === 4) {
           displacements = (await costBoundedBranchPlacementCooperative(model, current[0], current[1], bounds, execution))?.displacement;
           if (!displacements) return null;
@@ -177,7 +205,7 @@ export function createSicVerifyBranchAlignment(): NativeFamily<Proposal> {
           actions.push(action);
         }
       }
-      return { status: 'proposed', kind: verifyBranchAlignmentId, actions, local, current, expected, approach, attempt, launch: launching, needId: need.id,
+      return { status: 'proposed', kind: family, actions, local, current, expected, approach, attempt, launch: launching, needId: need.id,
         steps: actions.map((action, step) => ({ action, expected_after: approach[step] ?? null, ...(binding ? { point_binding: binding } : {}) })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
