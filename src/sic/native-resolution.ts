@@ -1287,7 +1287,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === highlightedRouteId || family === learnHighlightedRouteId)) {
-    for (const [field, label] of [['actor', 'Current piece'], ['focus', 'Highlighted landing'], ['destination', 'Framed marker']] as const) {
+    for (const [field, label] of [['actor', 'Current piece'], ['focus', card?.projectedLanding ? 'Highlighted entrance' : 'Highlighted landing'],
+      ['projectedLanding', 'Projected arrival after the transfer'], ['destination', 'Framed marker']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
