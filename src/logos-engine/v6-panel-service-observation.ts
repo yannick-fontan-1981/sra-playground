@@ -14,6 +14,7 @@ type R = Record<string, any>;
 type Box = readonly [number, number, number, number];
 type Pattern = readonly (readonly [number, number])[];
 export type PanelParameter = { point: NativePoint; bbox: NativeBox; row: number; col: number; outline: number | null };
+export type PanelLattice = { panelId: string; xs: number[]; ys: number[]; unit: number; selection: number };
 export type RemotePanelServiceChoice = {
   operator: PanelParameter; parameter: PanelParameter; roomMarker: number; receiverSite: NativePoint;
 };
@@ -40,7 +41,28 @@ function pattern(rows: NativeRows, x: number, y: number, unit: number, backgroun
   return result;
 }
 
-export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[] = []): R | null {
+function measuredLattice(parts: ReturnType<typeof geometricComponents>, box: Box, background: number) {
+  const [, top, right, bottom] = box;
+  const squares = parts.filter(part => inside(part.bbox, box) && part.area === 9 && part.bbox[2] - part.bbox[0] === 2
+    && part.bbox[3] - part.bbox[1] === 2 && part.color !== background);
+  if (!squares.length) return null;
+  const unit = squares[0]!.bbox[2] - squares[0]!.bbox[0] + 1;
+  const small = parts.filter(part => inside(part.bbox, box) && part.color !== background
+    && part.bbox[2] - part.bbox[0] === unit - 1 && part.bbox[3] - part.bbox[1] <= unit - 1);
+  const xs = [...new Set(small.map(part => part.bbox[0]))].sort((a, b) => a - b);
+  const ys = [...new Set(small.filter(part => part.bbox[3] - part.bbox[1] === unit - 1).map(part => part.bbox[1]))].sort((a, b) => a - b);
+  if (xs.length < 3 || !ys.length) return null;
+  const step = Math.min(...xs.slice(1).map((value, i) => value - xs[i]!));
+  const ystep = ys.length > 1 ? Math.min(...ys.slice(1).map((value, i) => value - ys[i]!)) : step;
+  const allXs: number[] = [], allYs: number[] = [];
+  for (let x = xs[0]!; x <= right - unit; x += step) allXs.push(x);
+  if (allXs.length !== 5 || ystep % step !== 0) return null;
+  for (let y = top + 2; y <= bottom - unit; y += step) allYs.push(y);
+  return allYs.length === 3 ? { xs: allXs, ys: allYs, unit } : null;
+}
+
+export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[] = [],
+  remembered?: readonly PanelLattice[]): R | null {
   const parts = geometricComponents(rows);
   const frames = parts.filter(part => 15 <= part.bbox[2] - part.bbox[0] && part.bbox[2] - part.bbox[0] <= 35
     && 10 <= part.bbox[3] - part.bbox[1] && part.bbox[3] - part.bbox[1] <= 25 && border(rows, part.bbox, part.color));
@@ -57,23 +79,10 @@ export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[
     const box = frame.bbox, [left, top, right, bottom] = box, interior: number[] = [];
     for (let y = top + 1; y < bottom; y++) for (let x = left + 1; x < right; x++) interior.push(rows[y]![x]!);
     const background = majority(interior);
-    const squares = parts.filter(part => inside(part.bbox, box) && part.area === 9 && part.bbox[2] - part.bbox[0] === 2
-      && part.bbox[3] - part.bbox[1] === 2 && part.color !== background);
-    if (!squares.length) return null;
-    const unit = squares[0]!.bbox[2] - squares[0]!.bbox[0] + 1;
-    const small = parts.filter(part => inside(part.bbox, box) && part.color !== background
-      && part.bbox[2] - part.bbox[0] === unit - 1 && part.bbox[3] - part.bbox[1] <= unit - 1);
-    const xs = [...new Set(small.map(part => part.bbox[0]))].sort((a, b) => a - b);
-    const ys = [...new Set(small.filter(part => part.bbox[3] - part.bbox[1] === unit - 1).map(part => part.bbox[1]))].sort((a, b) => a - b);
-    if (xs.length < 3 || !ys.length) return null;
-    const step = Math.min(...xs.slice(1).map((value, i) => value - xs[i]!));
-    const ystep = ys.length > 1 ? Math.min(...ys.slice(1).map((value, i) => value - ys[i]!)) : step;
-    const allXs: number[] = [];
-    for (let x = xs[0]!; x <= right - unit; x += step) allXs.push(x);
-    if (allXs.length !== 5 || ystep % step !== 0) return null;
-    const allYs: number[] = [];
-    for (let y = top + 2; y <= bottom - unit; y += step) allYs.push(y);
-    if (allYs.length !== 3) return null;
+    const id = identity([box, frame.color]), prior = remembered?.find(item => item.panelId === id);
+    const measured = prior ?? measuredLattice(parts, box, background);
+    if (!measured) return null;
+    const { xs: allXs, ys: allYs, unit } = measured;
     const cells: R[] = [];
     for (const [ri, y] of allYs.entries()) for (const [ci, x] of allXs.entries()) {
       const shape = pattern(rows, x, y, unit, background);
@@ -85,8 +94,8 @@ export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[
         bbox: [x, y, x + unit - 1, y + unit - 1], pattern: shape, color, solid: shape.length === unit * unit, outline });
     }
     const materials = cells.filter(cell => cell.col === 0 && cell.solid), selected = materials.filter(cell => cell.outline !== null);
-    if (selected.length !== 1) return null;
-    const selection = selected[0]!.outline;
+    if (selected.length !== 1 && (!prior || materials.length > 0)) return null;
+    const selection = selected[0]?.outline ?? prior?.selection;
     const marks = parts.filter(part => part.area === 4 && part.bbox[2] - part.bbox[0] === 1 && part.bbox[0] < left
       && left - part.bbox[2] <= 5 && top <= part.bbox[1] && part.bbox[1] <= bottom);
     if (marks.length !== 1) return null;
@@ -94,7 +103,7 @@ export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[
     if (!roomCandidates.length || new Set(roomCandidates.map(part => JSON.stringify([part.bbox[1], part.bbox[3]]))).size !== 1) return null;
     const room: Box = [Math.min(...roomCandidates.map(part => part.bbox[0])), roomCandidates[0]!.bbox[1],
       Math.max(...roomCandidates.map(part => part.bbox[2])), roomCandidates[0]!.bbox[3]];
-    const [rx, ry, rr, rb] = room, material = selected[0]!.color;
+    const [rx, ry, rr, rb] = room, material = selected[0]?.color ?? null;
     const external = parts.filter(part => rx <= part.bbox[0] && part.bbox[0] <= part.bbox[2] && part.bbox[2] <= rr
       && ry <= part.bbox[1] && part.bbox[1] <= part.bbox[3] && part.bbox[3] <= rb && part.area === unit * unit
       && part.bbox[2] - part.bbox[0] === unit - 1 && part.bbox[3] - part.bbox[1] === unit - 1);
@@ -125,8 +134,9 @@ export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[
       services.push(relations[0]!);
       if (control !== null) operators.push(relations[0]!);
     }
-    panels.push({ id: identity([box, frame.color]), bbox: box, color: frame.color, room, room_marker: marks[0]!.color,
-      material, selection_color: selection, cells, operators, services, activity_controls: controls });
+    panels.push({ id, bbox: box, color: frame.color, room, room_marker: marks[0]!.color,
+      material, selection_color: selection, cells, operators, services, activity_controls: controls,
+      ...(remembered ? { lattice: { panelId: id, xs: allXs, ys: allYs, unit, selection } } : {}) });
   }
   if (panels.length !== selectedFrames.length) return null;
   return structuredClone({ panels, layout: panels.map(panel => [panel.bbox, panel.color]) });
