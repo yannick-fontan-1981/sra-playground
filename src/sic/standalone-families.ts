@@ -93,6 +93,7 @@ import { compartmentGrowthId } from './compartment-growth.ts';
 import { verifyPointAccessId } from './point-reach.ts';
 import { verifyLinkedMotionId } from './linked-midpoint.ts';
 import { verifyRemovableSupportId } from './excavate-descent.ts';
+import { protectGravityRouteId } from './protect-gravity-route.ts';
 import { gatedCascadeId, learnCascadeId } from './gated-cascade.ts';
 import { layeredFitId, learnLayeredFitId } from './layered-fit.ts';
 import { litRouteId, learnLitRouteId } from './lit-route.ts';
@@ -113,7 +114,7 @@ export const standalonePlanningGroups = [
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId,
     verifyInventoryTransferId, framedContactId, coupledGaugeRouteId, reproduceCueId, arrangeTurnPostsId, directionalReceptionId, pairedPassageId,
-    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId,
+    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId,
     displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId,
     pivotCargoId, observedActuatorArrangementId, observedRouteInterventionId, observedSurvivalId, observedRailTransfersId] },
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },

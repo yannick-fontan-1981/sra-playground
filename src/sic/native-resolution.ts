@@ -82,6 +82,7 @@ import { pointReachId, verifyPointAccessId } from './point-reach.ts';
 import { linkedMidpointId, verifyLinkedMotionId } from './linked-midpoint.ts';
 import { linkedGroupRouteId } from './linked-group-route.ts';
 import { excavateDescentId, verifyRemovableSupportId } from './excavate-descent.ts';
+import { protectGravityRouteId } from './protect-gravity-route.ts';
 import { gatedCascadeId, learnCascadeId } from './gated-cascade.ts';
 import { layeredFitId, learnLayeredFitId } from './layered-fit.ts';
 import { litRouteId, learnLitRouteId } from './lit-route.ts';
@@ -1129,6 +1130,13 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === excavateDescentId || family === verifyRemovableSupportId)) {
     for (const [field, label] of [['actor', 'Controlled sprite'], ['focus', 'Chosen passage'], ['goal', 'Visible destination']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === protectGravityRouteId) {
+    for (const [field, label] of [['actor', 'Controlled sprite'], ['focus', 'Cell to cross or change'],
+      ['ceiling', 'Protective ceiling'], ['danger', 'Visible hazard'], ['landing', 'Expected stopping point'], ['exit', 'Exit']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
