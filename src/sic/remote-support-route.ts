@@ -3,6 +3,8 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposa
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { measurePhasedSupport, observePhaseStep, phaseAffectedSupport, phaseFootprint, planPhasedSupport,
+  type PhasedSupport, type PhaseStep } from './phased-support-route.ts';
 
 export const remoteSupportRouteId = 'sic_remote_support_route';
 export const learnRemoteAccessId = 'sic_learn_remote_access';
@@ -30,7 +32,8 @@ type Pad = { at: NativePoint; floor: number; pixels: number[] };
 type Circuit = { button: Control; pads: [Pad, Pad]; pickups: Acquisition[] };
 type Scene = { arena: NativeBox; panel: NativeBox; template: string; pitch: number; candidates: Piece[]; controls: Control[]; supports: number[];
   circuit?: Circuit };
-type Transfer = { epoch: number; pitch: number; actor: number; target: number; controlColors: number[]; evidence: string[]; template?: string };
+type Transfer = { epoch: number; pitch: number; actor: number; target: number; controlColors: number[]; evidence: string[];
+  template?: string; portalConfirmed?: boolean };
 type Acquisition = { at: NativePoint; color: number; floor: number };
 type State = { epoch: number; scene: Scene; actor: Piece | null; target: Piece | null; effects: (Edit[] | null)[];
   evidence: string[]; effectRefs?: (string | null)[]; stopped: boolean; count: number; recalled?: Transfer; triedAcquisitions?: string[];
@@ -38,6 +41,9 @@ type State = { epoch: number; scene: Scene; actor: Piece | null; target: Piece |
 type Move = { command: NativeCommand; landing: NativePoint | null; floor: number | null; control: number | null; acquisition?: Acquisition;
   transfer?: Control };
 type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string };
+type PhaseMemory = { epoch: number; scene: PhasedSupport; refs: string[]; lastRef: string; stopped: boolean };
+type PhaseProposal = NativeProposal & { phased: PhaseMemory; step: PhaseStep; needId: string };
+const isPhased = (proposal: Proposal | PhaseProposal): proposal is PhaseProposal => 'phased' in proposal;
 const directions = [
   ['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0],
 ] as const;
@@ -209,7 +215,7 @@ function atPiece(rows: NativeRows, piece: Piece, pitch: number) {
   return uniform(rows, piece.at, pitch) === piece.color;
 }
 
-function controlCommand(control: Control): NativeCommand {
+function controlCommand(control: Pick<Control, 'box'>): NativeCommand {
   const [x, y] = center(control.box);
   return { action_ref: 'ACTION6', data: { x, y } };
 }
@@ -334,20 +340,67 @@ function motionTrial(rows: NativeRows, scene: Scene, inputs: readonly NativeComm
   return choices[0] ?? null;
 }
 
-export function createSicRemoteSupportRoute(family = remoteSupportRouteId): NativeFamily<Proposal> {
+export function createSicRemoteSupportRoute(family = remoteSupportRouteId): NativeFamily<Proposal | PhaseProposal> {
   const learns = family === learnRemoteAccessId;
   let state: State | null = null;
   let transfer: Transfer | null = null;
+  let phaseMemory: PhaseMemory | null = null;
+  const offerPhased: NativeFamily<PhaseProposal>['propose'] = async (observation, rows, inputs, remaining, execution) => {
+    const { observation_ref: ref, level_epoch: epoch } = observation;
+    if (learns || transfer?.epoch !== epoch - 1 || !transfer.portalConfirmed) return null;
+    const prior = phaseMemory?.epoch === epoch ? phaseMemory : null;
+    if (prior && (prior.stopped || prior.lastRef !== ref)) return null;
+    const measured = prior?.scene ?? measurePhasedSupport(rows, transfer);
+    if (!measured) return null;
+    const directionInputs = directions.map(([name]) => inputs.find(candidate => candidate.action_ref === name));
+    const available = directionInputs.flatMap((input, index) => input ? [index] : []);
+    const route = planPhasedSupport(measured, available, remaining), step = route[0];
+    if (!step) return null;
+    const probe = 'control' in step && step.probing;
+    const actionBox = 'control' in step ? measured.controls[step.control]! : 'portal' in step ? measured.portal : null;
+    const action = 'direction' in step ? directionInputs[step.direction] : actionBox && controlCommand({ box: actionBox });
+    if (!action) return null;
+    const evidence: [string, ...string[]] = [ref, ...new Set([...transfer.evidence, ...(prior?.refs ?? [])].filter(item => item !== ref))];
+    const landing = phaseFootprint(measured.terrain, step.next.cell);
+    const mode = execution?.reasoningMode ?? 'exploration', offer = { input: action.action_ref, expected: origin(landing), evidence };
+    const navigation = resolveNavigationPrimitives({ mode, evidence, probe: probe ? offer : null,
+      access: 'direction' in step ? offer : null, interaction: actionBox && !probe ? offer : null });
+    if (!navigation.selected) return null;
+    const situation = probe ? 'Measure the next support position while the cursor remains on fixed ground'
+      : 'portal' in step ? 'Use the verified transfer between the two patterned pads'
+        : 'control' in step ? 'Advance the support to a measured phase that still holds the cursor'
+          : 'Cross to the next supported cell in the current phase';
+    const pointBinding = actionBox && await ObservedInputDomain.makeLocusWitness(observation, rows, center(actionBox), { reason: situation, evidence });
+    if (actionBox && !pointBinding) return null;
+    const parent = 'G_official_completion';
+    const goal = { kind: 'reach_target_on_observed_support_phases', scope: ref.split(':revision:', 1)[0]!,
+      subjects: [String(measured.target)], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_supported_navigation' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id;
+    const actor = phaseFootprint(measured.terrain, measured.position.cell), target = phaseFootprint(measured.terrain, measured.target);
+    return { status: 'proposed', kind: family, step, needId: need.id,
+      phased: { epoch, scene: { ...measured, route: probe ? [] : route }, refs: prior?.refs ?? [], lastRef: ref, stopped: false },
+      actions: [action], binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action, expected_after: landing, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
+      sicSituationCard: { strategy: navigation.selected.id, need: 'Maintain support throughout the route',
+        mode, situation, agenda: navigation.entries, triggerCard: navigation.card, evidence, actor, target, control: actionBox, landing,
+        affectedSupport: 'control' in step ? phaseAffectedSupport(measured, step.control) : null },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy: navigation.selected.id, objective: { id, label: navigationPrimitives[navigation.selected.id], parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+  };
   return {
     id: family,
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       if (learns || transfer?.epoch !== observation.level_epoch - 1) return null;
       const proposed = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposed?.local.scene.circuit ? proposed : null;
+      return proposed && (isPhased(proposed) || proposed.local.scene.circuit) ? proposed : null;
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (phaseMemory?.epoch === observation.level_epoch) return offerPhased(observation, rows, inputs, remaining, execution);
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const recalled = transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 64) return null;
@@ -356,7 +409,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       const revalidated = !prior && !fresh && recalled ? measureScene(rows, recalled) : null;
       const circuit = !prior && !fresh && !revalidated && recalled ? measureCircuit(rows, recalled) : null;
       const scene = prior?.scene ?? fresh ?? revalidated ?? circuit;
-      if (!scene) return null;
+      if (!scene) return offerPhased(observation, rows, inputs, remaining, execution);
       let local: State = prior ?? { epoch: observation.level_epoch, scene, actor: null, target: null,
         effects: scene.controls.map(() => null), evidence: (revalidated || circuit) && recalled ? recalled.evidence : [], stopped: false, count: 0,
         ...((revalidated || circuit) && recalled ? { recalled } : {}) };
@@ -436,6 +489,14 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isPhased(proposal)) {
+        const observed = observePhaseStep(proposal.phased.scene, proposal.step, second);
+        const { step } = proposal;
+        const reason = !observed ? 'support_phase_or_landing_contradicted' : 'portal' in step ? 'paired_pad_landing_confirmed'
+          : 'control' in step ? step.probing ? 'support_phase_measured' : 'cursor_support_preserved_after_phase_change'
+            : 'landing_on_phase_support_confirmed';
+        return { matched: !!observed, seal_prefix: true, reason };
+      }
       const update = observeReturn(proposal, first, second);
       const { landing, acquisition } = proposal.move;
       if (proposal.move.transfer) return { matched: !update.stopped, seal_prefix: true,
@@ -448,11 +509,26 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         reason: update.stopped ? 'support_route_hypothesis_contradicted' : 'support_route_effect_observed' };
     },
     record(before, after, _command, first, second, proposal) {
+      if (isPhased(proposal)) {
+        const { phased, step } = proposal;
+        if (after.levels_completed > before.levels_completed && transfer) {
+          transfer = { ...transfer, epoch: before.level_epoch, evidence: [before.observation_ref, after.observation_ref] };
+        }
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const update = observePhaseStep(phased.scene, step, second);
+        phaseMemory = { ...phased, scene: update ?? phased.scene, stopped: !update,
+          lastRef: after.observation_ref, refs: update ? [...phased.refs.slice(-7), after.observation_ref] : phased.refs };
+        if (update && 'control' in step && step.probing && update.cycles[step.control]!.closed) {
+          return { events: [], reviewEvidence: 'The controlled terrain returned to its initial state after the measured sequence.' };
+        }
+        return { events: [] };
+      }
       const { local } = proposal;
       if (after.levels_completed > before.levels_completed && local.actor && local.target) {
         transfer = { epoch: before.level_epoch, pitch: local.scene.pitch, actor: local.actor.color, target: local.target.color,
           controlColors: local.scene.controls.filter((_, i) => !!local.effects[i]).map(control => control.color),
-          evidence: [before.observation_ref, after.observation_ref], template: local.scene.template };
+          evidence: [before.observation_ref, after.observation_ref], template: local.scene.template,
+          ...(local.transferred ? { portalConfirmed: true } : {}) };
         return { events: [], reviewEvidence: 'The measured controls made the supported route to the target possible.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
@@ -467,10 +543,11 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       }
       return { events: [] };
     },
-    state: () => ({ state, transfer }),
+    state: () => ({ state, transfer, phaseMemory }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       transfer = structuredClone(value.transfer as Transfer | null) ?? null;
+      phaseMemory = structuredClone((value.phaseMemory ?? null) as PhaseMemory | null);
     },
   };
 }
