@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { executeWorkflow } from '../src/logos-engine/interpreter.ts';
+import { measure } from '../src/logos-engine/v6-topological-recolor-geometry.ts';
 import { checkExampleWorkflow, matchExampleModule, matchExampleOperations, matchExampleWorkflow } from '../src/sic/legend-recolor-card.ts';
 
 test('the SRC example card selects or reuses a value and checks outside preservation', async () => {
@@ -17,4 +18,41 @@ test('the SRC example card selects or reuses a value and checks outside preserva
     }, matchExampleOperations);
     assert.equal(result.value, preserved && expectedValueObserved);
   }
+});
+
+function twoSidedLegend(fieldSize: number) {
+  const rows = Array.from({ length: 32 }, () => Array<number>(32).fill(0));
+  function square(left: number, top: number, size: number, color: number, outline = false) {
+    for (let y = top; y < top + size; y++) for (let x = left; x < left + size; x++) {
+      if (!outline || y === top || x === left || y === top + size - 1 || x === left + size - 1) rows[y]![x] = color;
+    }
+  }
+  for (let y = 0; y < 23; y++) {
+    rows[y]!.fill(1, 0, 7);
+    rows[y]![7] = 4;
+  }
+  rows[23]!.fill(4);
+  square(2, 2, 3, 2);
+  square(2, 9, 3, 3, true);
+  square(10, 2, fieldSize, 3);
+  square(10, 10, fieldSize, 2, true);
+  square(1, 25, 4, 7);
+  square(2, 26, 2, 2);
+  square(9, 26, 2, 3);
+  square(16, 26, 2, 5);
+  return rows;
+}
+
+test('recolor orients a reversible divider using consistently smaller legend examples', () => {
+  const rows = twoSidedLegend(6);
+  const observation = { observation_ref: 'observed-layout' };
+  for (const flip of [false, true]) {
+    const scene = measure(flip ? rows.map(row => [...row].reverse()) : rows, observation, [], { examples: true });
+    assert.ok(scene?.reduced_examples);
+    assert.deepEqual(scene.legend, flip ? [25, 0, 31, 22] : [0, 0, 6, 22]);
+    assert.deepEqual(scene.mapping, { 0: 2, 1: 3 });
+    assert.equal(scene.active, 2);
+  }
+  assert.equal(measure(twoSidedLegend(3), observation, [], { examples: true }), null);
+  assert.equal(measure(rows, observation), null);
 });

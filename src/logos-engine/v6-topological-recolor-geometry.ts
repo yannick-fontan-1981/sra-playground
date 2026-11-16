@@ -125,6 +125,19 @@ function containsCorners(c: R, box: readonly number[]): boolean {
   return [[box[0]!, box[1]!], [box[0]!, box[3]!], [box[2]!, box[1]!], [box[2]!, box[3]!]].every(p => cells.has(key(p)));
 }
 
+function directionFromExampleScale(layouts: readonly R[]): R | undefined {
+  const [first, second] = layouts;
+  if (layouts.length !== 2 || !first || !second
+    || !equal(first.field, second.legend) || !equal(first.legend, second.field)) return undefined;
+  const oriented = layouts.filter(layout => (layout.bodies as R[]).every(body => {
+    if (body.relation_kind === 'surround') return true;
+    const [left, top, right, bottom] = body.bbox;
+    const [exampleLeft, exampleTop, exampleRight, exampleBottom] = body.example;
+    return right - left > exampleRight - exampleLeft && bottom - top > exampleBottom - exampleTop;
+  }));
+  return oriented.length === 1 ? oriented[0] : undefined;
+}
+
 export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], options?: { examples?: boolean }): R | null {
   if (!rows.length || !rows[0]?.length) return null;
   const height = rows.length, width = rows[0].length, cc = components(rows), groups = new Map<string, R[]>();
@@ -197,7 +210,7 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], opt
     }
   }
   if (layouts.length > 1) {
-    layouts = layouts.filter(m => writes.some(receipt => {
+    const boundLayouts = layouts.filter(m => writes.some(receipt => {
       const mask = receipt.changed_mask ?? [];
       if (receipt.source_epoch !== obs.level_epoch || !receipt.only_target_pigment || receipt.outside_count !== 0
         || !mask.length || (receipt.evidence ?? []).length !== 2) return false;
@@ -206,6 +219,8 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], opt
       const [x0, y0, x1, y1] = m.field;
       return mask.every(([x, y]: number[]) => x0 <= x! && x! <= x1 && y0 <= y! && y! <= y1);
     }));
+    const oriented = options?.examples && !boundLayouts.length ? directionFromExampleScale(layouts) : undefined;
+    layouts = oriented ? [{ ...oriented, reduced_examples: true }] : boundLayouts;
   }
   return layouts.length === 1 ? layouts[0]! : null;
 }
