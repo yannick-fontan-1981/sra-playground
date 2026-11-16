@@ -18,6 +18,8 @@ export const coupledMotionStrategies = {
 type Sample = { input: string; first: CoupledPairDelta; second: CoupledPairDelta };
 type State = { epoch: number; pair: CoupledPair; samples: Sample[]; floors: number[]; evidence: string[];
   remainingRoute: { actions: string[]; expected: CoupledPairBox[][] } | null; count: number; stopped: boolean; frame?: string };
+type AuxiliaryTransfer = { epoch: number; pairColor: number; auxiliaryColor: number; floor: number;
+  leftFirst: boolean; controls: AuxiliaryRoute['field']['controls']; evidence: string[] };
 type Candidate = { input: string; route: State['remainingRoute'] };
 type Proposal = NativeProposal & ({ local: State; candidate: Candidate; auxiliary?: undefined } | { auxiliary: AuxiliaryRoute }) & { needId: string };
 const displayBox = ([t, l, b, r]: CoupledPairBox): NativeBox => [l, t, r, b];
@@ -89,6 +91,7 @@ function transferredControls(state: State) {
 export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
   let auxiliary: AuxiliaryRoute | null = null;
+  let auxiliaryTransfer: AuxiliaryTransfer | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyCoupledRouteId,
@@ -101,6 +104,18 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       if (remaining < 1 || !['ACTION6', ...keys].every(input => observation.available_action_refs.includes(input))) return null;
       let local = auxiliary?.epoch === epoch ? auxiliary : null;
       if (local && (local.stopped || local.frame !== observation.frame_hash)) return null;
+      if (!local && auxiliaryTransfer?.epoch === epoch - 1) {
+        const recalled = auxiliaryTransfer;
+        const pairs = measureCoupledPairs(rows).filter(pair => pair.value === recalled.pairColor);
+        const pair = pairs.length === 1 ? pairs[0]! : null;
+        if (pair && pair.boxes[0]![1] !== pair.boxes[1]![1]) {
+          const leftFirst = pair.boxes[0]![1] < pair.boxes[1]![1];
+          const controls = leftFirst === recalled.leftFirst ? recalled.controls
+            : recalled.controls.map(({ first, second }) => ({ first: second, second: first }));
+          local = measureAuxiliaryRoute(rows, pair, [recalled.floor], controls, epoch, observation.frame_hash, recalled.evidence,
+            recalled.auxiliaryColor, remaining);
+        }
+      }
       if (!local && state?.epoch === epoch - 1 && !state.stopped) {
         const controls = transferredControls(state);
         const pair = measureCoupledPairs(rows).filter(candidate => candidate.size === state!.pair.size);
@@ -117,7 +132,11 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       const strategy = decision?.result;
       if (!decision || strategy !== (facts.routeSupported ? 'P07' : facts.knownInteraction ? 'P02' : 'P05')) return null;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
-      const label = step.click ? step.auxiliary === undefined ? 'Return control to the two pieces'
+      const label = local.singleAuxiliary && step.stoppedMember !== undefined
+        ? 'Use the repositioned auxiliary to hold one piece while the other moves'
+        : local.singleAuxiliary && step.auxiliary !== undefined && !step.click
+          ? 'Move the selected auxiliary to clear the passage and prepare a directional stop'
+          : step.click ? step.auxiliary === undefined ? 'Return control to the two pieces'
         : local.focusPaint ? 'Select an auxiliary to clear the passage' : 'Test whether selecting the auxiliary transfers directional control'
         : step.auxiliary === undefined ? 'Bring together the two pieces with shared controls' : 'Move the selected auxiliary into a side pocket';
       const point = step.click ? [Math.floor((step.click[0] + step.click[2] + Number(step.auxiliary !== undefined)) / 2),
@@ -220,6 +239,7 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         const step = proposal.auxiliary.steps[0]!;
         return { matched, seal_prefix: true, reason: !matched ? 'auxiliary_route_prediction_contradicted'
           : step.click ? 'observed_directional_focus_transfer'
+          : step.stoppedMember !== undefined ? 'observed_one_piece_stopped_by_auxiliary'
           : step.auxiliary === undefined ? 'observed_joint_displacement' : 'observed_auxiliary_displacement_while_pair_stationary' };
       }
       const expected = proposal.candidate.route?.expected[0];
@@ -227,12 +247,22 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: matched === true ? 'observed_joint_displacement' : 'compare_both_piece_returns' };
     },
     record(before, after, command, first, second, proposal) {
+      if (proposal.auxiliary && after.levels_completed > before.levels_completed) {
+        const { field, focusPaint, initialLeftFirst, steps, epoch, evidence } = proposal.auxiliary;
+        const [a, b] = steps[0]!.position.members;
+        if (a === b && focusPaint && initialLeftFirst !== undefined && field.floorColor !== undefined) {
+          auxiliaryTransfer = { epoch, pairColor: field.pairColor, auxiliaryColor: field.auxiliaryColor, floor: field.floorColor,
+            leftFirst: initialLeftFirst, controls: field.controls, evidence: [...evidence.slice(-7), after.observation_ref] };
+        }
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       if (proposal.auxiliary) {
-        const local = proposal.auxiliary, focusPaint = verifyAuxiliaryStep(local, first, second);
-        auxiliary = focusPaint ? { ...local, focusPaint, position: local.steps[0]!.position, steps: local.steps.slice(1),
+        const local = proposal.auxiliary, verified = verifyAuxiliaryStep(local, first, second);
+        const step = local.steps[0]!;
+        auxiliary = verified ? { ...local, focusPaint: verified.focusPaint, position: step.position, steps: local.steps.slice(1),
           evidence: [...local.evidence.slice(-7), after.observation_ref], frame: after.frame_hash } : { ...local, stopped: true };
-        return { events: [] };
+        return { events: [], ...(verified && step.stoppedMember !== undefined
+          ? { reviewEvidence: 'The return shows one piece stopping at the relocated auxiliary while the other continues.' } : {}) };
       }
       const { local, candidate } = proposal, previous = local.pair, route = candidate.route, expected = route?.expected[0];
       const measured = measureCoupledPairs(second).filter(pair => pair.value === previous.value && pair.size === previous.size);
@@ -247,10 +277,11 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         remainingRoute: projected && route && route.actions.length > 1 ? { actions: route.actions.slice(1), expected: route.expected.slice(1) } : null };
       return { events: [] };
     },
-    state: () => ({ state, auxiliary }),
+    state: () => ({ state, auxiliary, auxiliaryTransfer }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       auxiliary = structuredClone((value.auxiliary as AuxiliaryRoute | undefined) ?? null);
+      auxiliaryTransfer = structuredClone((value.auxiliaryTransfer as AuxiliaryTransfer | undefined) ?? null);
     },
   };
 }

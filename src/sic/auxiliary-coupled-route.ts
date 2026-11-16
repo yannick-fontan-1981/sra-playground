@@ -5,12 +5,13 @@ import type { NativeBox, NativeRows } from '../logos-engine/v6-native-types.ts';
 export const auxiliaryDirections: readonly CoupledPairDelta[] = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 type Motion = { first: CoupledPairDelta; second: CoupledPairDelta };
 type Field = { top: number; left: number; pitch: number; height: number; width: number; floor: boolean[];
-  pairColor: number; auxiliaryColor: number; controls: Motion[] };
+  floorColor: number; pairColor: number; auxiliaryColor: number; controls: Motion[] };
 type PairCells = readonly [number, number];
 type Position = { members: PairCells; auxiliaries: number[]; selected: number | null };
-type Step = { position: Position; direction?: number; click?: NativeBox; auxiliary?: number; parking?: number };
+type Step = { position: Position; direction?: number; click?: NativeBox; auxiliary?: number; parking?: number; stoppedMember?: number };
 export type AuxiliaryRoute = { epoch: number; field: Field; position: Position; steps: Step[];
-  focusPaint: { pair: number; auxiliary: number } | null; evidence: string[]; frame: string; stopped?: boolean };
+  focusPaint: { pair: number; auxiliary: number } | null; evidence: string[]; frame: string; stopped?: boolean;
+  initialLeftFirst?: boolean; singleAuxiliary?: boolean };
 
 function cellBox(field: Field, cell: number): NativeBox {
   const left = field.left + cell % field.width * field.pitch;
@@ -130,8 +131,49 @@ function planParking(field: Field, position: Position): Step[] | null {
   return find(position, [], 0, null);
 }
 
+function planWithMovableStop(field: Field, start: Position, remaining: number): Step[] | null {
+  type Node = { position: Position; parent: number; step?: Step; depth: number };
+  const signature = ({ members, auxiliaries: [block], selected }: Position) => [...members, block, selected ?? -1].join(',');
+  const queue: Node[] = [{ position: start, parent: -1, depth: 0 }];
+  const seen = new Set([signature(start)]);
+  for (let i = 0; i < queue.length; i++) {
+    const { position, depth } = queue[i]!;
+    const { selected, members, auxiliaries } = position;
+    if (members[0] === members[1]) {
+      const path: Step[] = [];
+      for (let node = queue[i]!; node.step; node = queue[node.parent]!) path.push(node.step);
+      return path.reverse();
+    }
+    if (depth >= remaining) continue;
+    const [block] = auxiliaries;
+    const add = (step: Step) => {
+      const key = signature(step.position);
+      if (seen.has(key) || queue.length >= 30_000) return;
+      seen.add(key);
+      queue.push({ position: step.position, step, parent: i, depth: depth + 1 });
+    };
+    if (selected === null) {
+      for (const [direction, motion] of field.controls.entries()) {
+        const next = nextPair(field, members, auxiliaries, motion);
+        if (next.every((cell, index) => cell === members[index])) continue;
+        const stopped = [motion.first, motion.second].findIndex((delta, index) => stepOnFloor(field, members[index]!, delta) === block);
+        add({ position: { ...position, members: next }, direction, ...(stopped >= 0 ? { stoppedMember: stopped } : {}) });
+      }
+      add({ position: { ...position, selected: 0 }, click: insetBox(field, block!), auxiliary: 0 });
+    } else {
+      for (const [direction, delta] of auxiliaryDirections.entries()) {
+        const destination = stepOnFloor(field, block!, delta);
+        if (destination < 0 || members.includes(destination)) continue;
+        add({ position: { ...position, auxiliaries: [destination] }, direction, auxiliary: 0 });
+      }
+      add({ position: { ...position, selected: null }, click: cellBox(field, members[0]) });
+    }
+  }
+  return null;
+}
+
 export function measureAuxiliaryRoute(rows: NativeRows, pair: CoupledPair, floors: readonly number[], controls: Motion[],
-  epoch: number, frame: string, evidence: string[]): AuxiliaryRoute | null {
+  epoch: number, frame: string, evidence: string[], knownAuxiliary?: number, remaining = 60): AuxiliaryRoute | null {
   const pitch = pair.size;
   if (pitch < 4 || floors.length !== 1 || floors.includes(pair.value)) return null;
   const [top, left] = [pair.boxes[0]![0] % pitch, pair.boxes[0]![1] % pitch];
@@ -142,7 +184,7 @@ export function measureAuxiliaryRoute(rows: NativeRows, pair: CoupledPair, floor
     return Number.isInteger(column) && Number.isInteger(row) && column >= 0 && column < width && row >= 0 && row < height ? row * width + column : -1;
   };
   const groups = new Map<number, number[]>();
-  const field: Field = { top, left, width, height, pitch, floor: [], pairColor: pair.value, auxiliaryColor: -1, controls };
+  const field: Field = { top, left, width, height, pitch, floor: [], floorColor: floors[0]!, pairColor: pair.value, auxiliaryColor: -1, controls };
   const members = [locate(pair.boxes[0]![1], pair.boxes[0]![0]), locate(pair.boxes[1]![1], pair.boxes[1]![0])] as const;
   if (members.includes(-1)) return null;
   for (const { bbox, area, color } of geometricComponents(rows)) {
@@ -157,42 +199,57 @@ export function measureAuxiliaryRoute(rows: NativeRows, pair: CoupledPair, floor
     cells.push(cell);
     groups.set(color, cells);
   }
-  const candidates = [...groups].filter(([, cells]) => cells.length >= 2 && cells.length <= 4);
+  const candidates = [...groups].filter(([color, cells]) => knownAuxiliary === undefined
+    ? cells.length >= 2 && cells.length <= 4 : color === knownAuxiliary && cells.length === 1);
   if (candidates.length !== 1) return null;
   const [auxiliaryColor, auxiliaries] = candidates[0]!;
   field.auxiliaryColor = auxiliaryColor;
   field.floor = Array.from({ length: width * height }, (_, cell) => members.includes(cell)
     || auxiliaries.includes(cell) || uniformInk(rows, cellBox(field, cell)) === floors[0]);
   const position = { members, auxiliaries, selected: null };
+  const initialLeftFirst = members[0] % width < members[1] % width;
+  if (knownAuxiliary !== undefined) {
+    const steps = planWithMovableStop(field, position, remaining);
+    return steps?.length ? { epoch, frame, field, position, steps, focusPaint: null, evidence, initialLeftFirst, singleAuxiliary: true } : null;
+  }
   const steps = planParking(field, position);
   if (!steps?.[0]?.click) return null;
-  return { epoch, frame, field, position, steps, focusPaint: null, evidence };
+  return { epoch, frame, field, position, steps, focusPaint: null, evidence, initialLeftFirst };
 }
 
 export function auxiliarySubjects({ field, position, steps }: AuxiliaryRoute) {
   const step = steps[0]!;
+  const destination = step.parking ?? steps.find(candidate => candidate.position.selected === null)?.position.auxiliaries[0];
   return { members: position.members.map(cell => cellBox(field, cell)),
     nextMembers: step.position.members.map(cell => cellBox(field, cell)),
+    ...(step.stoppedMember === undefined ? {} : { blocker: insetBox(field, position.auxiliaries[0]!),
+      stoppedMember: cellBox(field, position.members[step.stoppedMember]!) }),
     ...(step.auxiliary === undefined ? {} : { auxiliary: insetBox(field, position.auxiliaries[step.auxiliary]!),
-      nextAuxiliary: insetBox(field, step.position.auxiliaries[step.auxiliary]!), parking: cellBox(field, step.parking!) }) };
+      nextAuxiliary: insetBox(field, step.position.auxiliaries[step.auxiliary]!),
+      ...(destination === undefined ? {} : { parking: cellBox(field, destination) }) }) };
 }
 
-export function verifyAuxiliaryStep(route: AuxiliaryRoute, before: NativeRows, after: NativeRows): AuxiliaryRoute['focusPaint'] {
+export function verifyAuxiliaryStep(route: AuxiliaryRoute, before: NativeRows, after: NativeRows): { focusPaint: AuxiliaryRoute['focusPaint'] } | null {
   const { field, position, steps } = route, next = steps[0]!.position;
   const memberBoxes = next.members.map(cell => cellBox(field, cell));
   const auxBoxes = next.auxiliaries.map(cell => insetBox(field, cell));
-  const paint = route.focusPaint ?? (next.selected === null ? null : {
-    pair: uniformInk(after, memberBoxes[0]!),
-    auxiliary: uniformInk(after, auxBoxes[next.selected]!),
-  });
-  if (paint?.pair === undefined || paint.auxiliary === undefined || paint.pair === field.pairColor
-    || paint.auxiliary === field.auxiliaryColor || paint.auxiliary === paint.pair) return null;
-  if (memberBoxes.some(box => uniformInk(after, box) !== (next.selected === null ? field.pairColor : paint.pair))
-    || auxBoxes.some((box, index) => uniformInk(after, box) !== (index === next.selected ? paint.auxiliary : field.auxiliaryColor))) return null;
+  let paint = route.focusPaint;
+  if (!paint && next.selected !== null) {
+    const pair = uniformInk(after, memberBoxes[0]!), auxiliary = uniformInk(after, auxBoxes[next.selected]!);
+    if (pair === undefined || auxiliary === undefined || pair === field.pairColor || auxiliary === field.auxiliaryColor || pair === auxiliary) return null;
+    paint = { pair, auxiliary };
+  }
+  if (memberBoxes.some(box => uniformInk(after, box) !== (next.selected === null ? field.pairColor : paint?.pair))
+    || auxBoxes.some((box, index) => uniformInk(after, box) !== (index === next.selected ? paint?.auxiliary : field.auxiliaryColor))) return null;
+  if (route.singleAuxiliary) {
+    const occupied = new Set([...next.members, ...next.auxiliaries]);
+    if ([...position.members, ...position.auxiliaries].some(cell => !occupied.has(cell)
+      && uniformInk(after, cellBox(field, cell)) !== field.floorColor)) return null;
+  }
   const affected = [...memberBoxes, ...auxBoxes, ...position.members.map(cell => cellBox(field, cell)),
     ...position.auxiliaries.map(cell => insetBox(field, cell))];
   for (let y = 1; y < before.length - 1; y++) for (let x = 1; x < before[y]!.length - 1; x++) {
     if (before[y]![x] !== after[y]?.[x] && !affected.some(([l, t, r, b]) => l <= x && x <= r && t <= y && y <= b)) return null;
   }
-  return { pair: paint.pair, auxiliary: paint.auxiliary };
+  return { focusPaint: paint };
 }
