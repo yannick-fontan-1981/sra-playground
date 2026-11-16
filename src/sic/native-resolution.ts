@@ -788,6 +788,12 @@ export function readNativeResolution(agent: {
       const box = bounds(target);
       if (box) subjects.push({ label: 'Marked target slot', box });
     }
+    if (Array.isArray(card?.motion)) for (const movement of card.motion) {
+      const move = record(movement);
+      const source = bounds(move?.source), destination = bounds(move?.destination);
+      if (source) subjects.push({ label: 'Piece on the measured cycle', box: source });
+      if (destination) subjects.push({ label: 'Expected next slot', box: destination });
+    }
   }
   if (situationCard && (family === surfaceCopyId || family === learnSurfaceCopyId)) {
     for (const [field, label] of [['reference', 'Reference pattern'], ['surface', 'Working surface'],
