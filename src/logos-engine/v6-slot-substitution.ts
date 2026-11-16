@@ -5,7 +5,7 @@ import type { NativePublicObservation, NativeRows } from './v6-native-types.ts';
 export type SlotRecord = Record<string, any>;
 export interface SlotCommand extends SlotRecord { action_ref: string; data?: Record<string, number> }
 export interface SlotObservation extends SlotRecord { entities: readonly SlotRecord[]; level_epoch: number; levels_completed: number; observation_ref: string; frame_hash: string; state: string }
-export type SlotState = readonly [available: readonly boolean[], contents: readonly (number | null)[], selected: number | null];
+export type SlotState<Value extends number | string = number> = readonly [available: readonly boolean[], contents: readonly (Value | null)[], selected: number | null];
 const keyOf = (value: unknown) => JSON.stringify(value);
 const addressed = (action: SlotCommand) => !!action.data && Object.keys(action.data).length > 0;
 function same(a: any, b: any): boolean {
