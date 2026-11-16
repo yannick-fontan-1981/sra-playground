@@ -11,7 +11,8 @@ export const glyphEditingStrategies = {
   P05: 'Test a command for local symbol editing or cursor movement',
   P07: 'Follow the measured edits toward the required symbol sequence',
 } as const;
-type Scene = { editable: WordRecord; source: WordRecord; cursor: WordRecord[]; ink: number; target: string[]; rule_count: number };
+type Scene = { editable: WordRecord; source: WordRecord; cursor: WordRecord[]; ink: number; target: string[]; rule_count: number;
+  translation_stages?: number };
 type Edit = [before: string, after: string];
 type State = { epoch: number; scene: Scene; edits: Record<string, Edit[]>; directions: Record<string, number>;
   tried: string[]; blocked: string[]; count: number; evidence: string[] };
@@ -47,7 +48,7 @@ export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
       const keys = observation.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action)).sort();
       if (!keys.length || observation.available_action_refs.includes('ACTION6') || remaining < 1) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const scene = prior?.scene ?? await measureWordScene(observation, rows) as Scene | null;
+      const scene = prior?.scene ?? await measureWordScene(observation, rows, true) as Scene | null;
       if (!scene || (prior?.count ?? 0) >= 64) return null;
       const local = prior ?? { epoch: observation.level_epoch, scene, edits: {}, directions: {}, tried: [], blocked: [], count: 0, evidence: [] };
       const current = await read(rows, scene);
@@ -78,13 +79,16 @@ export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
       const id = `glyph-editing:${need.id}`, actions = [command];
       const [left, top, , bottom] = scene.editable.box;
       const active = [left + at * scene.editable.size, top, left + (at + 1) * scene.editable.size - 1, bottom];
+      const derivation = scene.translation_stages ? `The visible rules compose into ${scene.translation_stages} translations and yield one sequence.`
+        : `${scene.rule_count} visible rules yield one sequence.`;
+      const differences = word.filter((glyph, i) => glyph !== scene.target[i]).length;
       return { status: 'proposed', kind: verifySequenceEditsId, actions, local, current, expected, needId: need.id,
         steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Find and enter the sequence implied by the example rules', mode, triggerCard: chooseLanding,
-          situation: `${scene.rule_count} visible rules yield one sequence. ${word.filter((glyph, i) => glyph !== scene.target[i]).length} slots differ.`,
+          situation: `${derivation} ${differences === 1 ? '1 slot differs.' : `${differences} slots differ.`}`,
           agenda: [], evidence, active, source: scene.source.box, editable: scene.editable.box },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],

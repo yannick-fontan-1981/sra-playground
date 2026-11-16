@@ -101,7 +101,48 @@ export function wordFocus(rows: NativeRows, group: WordRecord, cursor: readonly 
   return found.length === 1 ? found[0]! : null;
 }
 
-export async function measureWordScene(observation: WordObservation, rows: NativeRows): Promise<WordRecord | null> {
+function composeTypedWord(word: readonly string[], rules: readonly TypedWordRule[], from: string, to: string, goalLength: number) {
+  const byType = new Map<string, Map<string, TypedWordRule[]>>();
+  for (const rule of rules) {
+    const outputs = byType.get(rule.input_type_ref) ?? new Map<string, TypedWordRule[]>();
+    const alternatives = outputs.get(rule.output_type_ref) ?? [];
+    alternatives.push(rule);
+    outputs.set(rule.output_type_ref, alternatives);
+    byType.set(rule.input_type_ref, outputs);
+  }
+  const budget = new WordBudget(32768);
+  const outputs = new Map<string, { word: string[]; stages: number }>();
+  type SearchState = { word: readonly string[]; types: readonly string[] };
+  const pending: SearchState[] = [{ word, types: [from] }];
+  const seen = new Set<string>();
+  for (let cursor = 0; cursor < pending.length; cursor++) {
+    const state = pending[cursor]!, last = state.types.at(-1)!;
+    for (const [type, stage] of byType.get(last) ?? []) {
+      if (state.types.includes(type)) continue;
+      const types = [...state.types, type];
+      const limit = state.word.length * Math.max(...stage.map(rule => rule.right.length));
+      const [parses, , complete] = parseTypedWord(state.word, stage, last, type, limit, budget.maximum, budget);
+      if (!complete || budget.reached) return null;
+      for (const parse of parses) {
+        const translated = parse.output_word as string[];
+        if (type === to) {
+          if (translated.length !== goalLength) continue;
+          const key = keyOf(translated), prior = outputs.get(key);
+          if (!prior || types.length - 1 < prior.stages) outputs.set(key, { word: translated, stages: types.length - 1 });
+          if (outputs.size > 1) return null;
+        } else {
+          const key = keyOf([types, translated]);
+          if (seen.has(key)) continue;
+          seen.add(key);
+          pending.push({ word: translated, types });
+        }
+      }
+    }
+  }
+  return outputs.size === 1 ? outputs.values().next().value! : null;
+}
+
+export async function measureWordScene(observation: WordObservation, rows: NativeRows, allowComposition = false): Promise<WordRecord | null> {
   const grouped = new Map<string, { size: number; ink: number; groups: WordRecord[] }>();
   for (const entity of observation.entities) {
     const [left, top, right, bottom] = entity.bbox, height = bottom - top + 1, width = right - left + 1;
@@ -151,8 +192,15 @@ export async function measureWordScene(observation: WordObservation, rows: Nativ
   const word = await wordGlyphs(rows, source, ink), maximum = Math.floor((editable.box[2] - editable.box[0] + 1) / editable.size);
   const depth = word.length + 1, states = BigInt(rules.length + 1) ** BigInt(depth);
   const budget = new WordBudget(states * BigInt(rules.reduce((sum, rule) => sum + rule.left.length + rule.right.length, 0) + maximum + depth + 3));
-  const [parses, , complete] = parseTypedWord(word, rules, String(source.type), String(editable.type), maximum, states, budget);
+  const from = String(source.type), to = String(editable.type);
+  const [parses, , complete] = parseTypedWord(word, rules, from, to, maximum, states, budget);
   const outputs = new Map(parses.filter(parse => parse.output_word.length === maximum).map(parse => [keyOf(parse.output_word), parse.output_word]));
+  if (allowComposition && !outputs.size && !budget.reached
+    && !rules.some(rule => rule.input_type_ref === from && rule.output_type_ref === to)) {
+    const composed = composeTypedWord(word, rules, from, to, maximum);
+    if (composed) return { editable, source, cursor, ink, target: composed.word, rule_count: rules.length,
+      bounded_derivations_complete: true, goal_length: maximum, translation_stages: composed.stages };
+  }
   if (outputs.size !== 1 || budget.reached) return null;
   return { editable, source, cursor, ink, target: [...outputs.values()][0], rule_count: rules.length, parse_count: parses.length, bounded_derivations_complete: complete, goal_length: maximum };
 }
