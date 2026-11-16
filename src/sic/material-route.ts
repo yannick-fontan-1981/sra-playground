@@ -4,6 +4,7 @@ import { alternatingTopology, instrumentalAlternatingContact, type AlternatingGu
 import type { NativeBox, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { movedPatrol, observePatrolReturn, planPatrolStep, type PatrolMemory, type PatrolStep } from './material-route-patrol.ts';
 
 export const materialRouteId = 'sic_material_route';
 export const verifyConnectedRouteId = 'sic_verify_connected_route';
@@ -13,6 +14,8 @@ export const materialRouteStrategies = {
   follow_material_connections: 'Follow the connected tiles toward the distinct piece',
   follow_guarded_connections: 'Follow the measured connections outside each guard’s facing direction',
   test_side_contact: 'Test a side approach using the previous removal as evidence',
+  measure_patrol_phase: 'Use a safe move to measure when the patrol advances',
+  follow_patrol_phase: 'Move along a route that stays clear when the patrol advances',
 } as const;
 
 type Move = { input: string; delta: AlternatingPosition };
@@ -25,9 +28,10 @@ type ContactRoute = { guard: AlternatingGuard; prefix: { action_ref: string; to:
 type State = { epoch: number; size: number; histogram: number[][]; samples: Move[]; edges: Edge[];
   evidence: string[]; lastMoved: string | null; repeat: string | null; count: number; stopped: boolean;
   calibration?: Calibration; pendingContact?: Contact | null; removals?: Removal[]; guardedTransfer?: boolean;
+  patrol?: PatrolMemory;
   completed?: { readonly nextEpoch: number; readonly score: number; readonly evidence: string } };
 type Choice = { input: string; to: AlternatingBox | null; ordinary: boolean; floor: number | null;
-  guarded?: boolean; contact?: boolean };
+  guarded?: boolean; contact?: boolean; patrol?: PatrolStep };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: AlternatingActor; needId: string };
 const order = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
 const same = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right);
@@ -128,8 +132,11 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       const topology = local.guardedTransfer && calibration ? alternatingTopology(rows, actor, calibration) : null;
       const conditional = topology && calibration && topology.guards.length
         ? instrumentalAlternatingContact(rows, actor, controls, calibration, local.removals ?? [], remaining) as ContactRoute | null : null;
+      const patrol = topology && (local.patrol || !conditional && topology.guards.length > 1)
+        ? planPatrolStep(topology, actor, controls, local.removals ?? [], local.patrol, remaining) : null;
+      if (local.patrol && !patrol) return null;
       const step = conditional?.prefix[0];
-      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence,
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.patrol?.evidence ?? []),
         ...(topology ? local.removals?.slice(-3).flatMap(item => item.evidence) ?? [] : [])].filter(item => item !== ref))];
       const route = graphFacts?.alternating_material_first_shortest_action_refs as string[] | undefined;
       const input = step?.action_ref ?? route?.[0], delta = input ? controls[input] : null;
@@ -139,10 +146,12 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       const planned: Choice | null = to && input ? { input, to, floor,
         ordinary: floor !== null && same(alternatingHistogram(rows, to), [[floor, actor.size ** 2]]),
         ...(topology ? { guarded: true, contact: !!step && step.contact_index !== null } : {}) } : null;
-      const explore: Choice | null = probe && !topology ? { input: probe, to: null, floor: null, ordinary: false } : null;
+      const timed: Choice | null = patrol ? { input: patrol.input, to: asBox(...patrol.to), floor, ordinary: false, guarded: true, patrol } : null;
+      const explore: Choice | null = timed?.patrol?.learning ? timed
+        : probe && !topology ? { input: probe, to: null, floor: null, ordinary: false } : null;
       const revisit: Choice | null = frontier && !topology ? { input: frontier.input, to: null, floor: null, ordinary: false } : null;
       const mode = execution?.reasoningMode ?? 'exploration';
-      const routeOffer = planned ?? (explore ? null : revisit);
+      const routeOffer = timed ? timed.patrol!.learning ? null : timed : planned ?? (explore ? null : revisit);
       const facts = { routeSupported: !!routeOffer, eligibleProbe: !!explore, knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       if (!decision) return null;
@@ -150,7 +159,9 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       if (strategy !== 'P07' && strategy !== 'P05') return null;
       const choice = strategy === 'P07' ? routeOffer : explore;
       if (!choice) return null;
-      const label = strategy === 'P05' ? materialRouteStrategies.probe_grid_direction
+      const label = patrol ? patrol.learning ? materialRouteStrategies.measure_patrol_phase
+        : patrol.capture ? materialRouteStrategies.test_side_contact : materialRouteStrategies.follow_patrol_phase
+        : strategy === 'P05' ? materialRouteStrategies.probe_grid_direction
         : choice.contact ? materialRouteStrategies.test_side_contact
           : topology?.guards.length ? materialRouteStrategies.follow_guarded_connections
             : planned ? materialRouteStrategies.follow_material_connections : materialRouteStrategies.follow_observed_grid_edge;
@@ -169,6 +180,9 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
         sicSituationCard: { strategy, need: 'Find an accessible route across the connected tiles', situation: label,
           evidence, agenda: [], mode, triggerCard: chooseLanding,
           actor: displayBox(actor.bbox), target: choice.to ? displayBox(choice.to) : null,
+          ...(patrol ? { patrol: displayBox(patrol.obstacle.bbox),
+            ...(patrol.expected ? { patrolNext: displayBox(asBox(...patrol.expected)) } : {}) } : {}),
+          ...(patrol?.capture ? { guard: displayBox(patrol.capture.bbox), front: displayBox(asBox(...patrol.capture.front)) } : {}),
           ...(conditional ? { guard: displayBox(conditional.guard.bbox), front: displayBox(asBox(...conditional.guard.front)) } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
@@ -184,6 +198,10 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const { choice, actor, local } = proposal;
+      if (choice.patrol) {
+        const matched = before.state === after.state && !!movedPatrol(choice.patrol, actor, second);
+        return { matched, seal_prefix: true, reason: matched ? 'patrol_and_player_positions_observed' : 'patrol_transition_contradicted' };
+      }
       const matched = (choice.ordinary || choice.guarded) && choice.to && choice.floor !== null
         ? before.state === after.state && matchOrdinary(first, second, actor, choice.to, choice.floor) : null;
       const revealed = matched && choice.guarded && choice.to && removalAtDeparture(local, second, choice.to, after.observation_ref);
@@ -191,13 +209,20 @@ export function createSicVerifyConnectedRoute(): NativeFamily<Proposal> {
         : matched && choice.contact ? 'contact_observed_waiting_to_reveal_tile'
           : matched === true ? 'observed_tile_displacement' : 'compare_piece_displacement_and_contact' };
     },
-    record(before, after, command, first, second, proposal) {
+    record(before, after, command, first, second, proposal, _index, frames = []) {
       if (after.levels_completed > before.levels_completed) {
         state = { ...proposal.local, completed: { nextEpoch: after.level_epoch, score: after.levels_completed, evidence: after.observation_ref } };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, actor, choice } = proposal;
+      if (choice.patrol) {
+        const at = movedPatrol(choice.patrol, actor, second);
+        const patrol = at && observePatrolReturn(choice.patrol, actor, at, frames, local.patrol, after.observation_ref);
+        state = { ...local, count: local.count + 1, stopped: !patrol,
+          ...(patrol ? { patrol, evidence: [...local.evidence.slice(-5), after.observation_ref] } : {}) };
+        return { events: [] };
+      }
       const matches = alternatingOverlays(second).filter(next => next.size === actor.size && same(next.histogram, actor.histogram));
       const next = matches.length === 1 ? matches[0]! : null;
       const delta: AlternatingPosition = next ? [next.bbox[0] - actor.bbox[0], next.bbox[1] - actor.bbox[1]] : [0, 0];

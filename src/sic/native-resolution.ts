@@ -1346,7 +1346,8 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === materialRouteId || family === verifyConnectedRouteId)) {
     for (const [field, label] of [['actor', 'Controlled piece'], ['target', 'Next tile'], ['guard', 'Guard being approached'],
-      ['front', 'Tile in the guard’s facing direction']] as const) {
+      ['front', 'Tile in the guard’s facing direction'], ['patrol', 'Patrol before the move'],
+      ['patrolNext', 'Predicted patrol position after the move']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
