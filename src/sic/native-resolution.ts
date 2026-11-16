@@ -33,6 +33,7 @@ import { observedActuatorArrangementId } from './observed-actuator-arrangement.t
 import { observedRouteInterventionId } from './observed-route-intervention.ts';
 import { observedSurvivalId } from './observed-survival.ts';
 import { observedRailTransfersId } from './observed-rail-transfers.ts';
+import { settleMatchingEdgesId } from './settle-matching-edges.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
 import { occurrenceRecallId, occurrenceRecallStrategies, verifyOccurrenceChoiceId } from './occurrence-recall.ts';
@@ -634,6 +635,16 @@ export function readNativeResolution(agent: {
     if (Array.isArray(card?.arms)) for (const item of card.arms.slice(0, 6)) {
       const box = bounds(item);
       if (box) subjects.push({ label: 'Arm in the predicted transfer sequence', box });
+    }
+  }
+  if (situationCard && family === settleMatchingEdgesId) {
+    const edge = bounds(card?.edge);
+    if (edge) subjects.push({ label: 'Edge in the direction selected', box: edge });
+    if (Array.isArray(card?.slides)) for (const slide of card.slides) {
+      const part = slide as { from?: unknown; to?: unknown; attaches?: boolean } | null;
+      const from = bounds(part?.from), to = bounds(part?.to);
+      if (from) subjects.push({ label: 'Piece before the slide', box: from });
+      if (to) subjects.push({ label: part?.attaches === true ? 'Predicted matching contact' : 'Predicted piece position', box: to });
     }
   }
   if (situationCard && family === observedSurvivalId) {
