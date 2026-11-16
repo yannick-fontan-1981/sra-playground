@@ -1004,3 +1004,17 @@ La campagne de référence porte sur les **93 niveaux 5** encore à qualifier. E
 **COLM** gagne en **57 commandes et 263,57 s** au niveau 5. SIC utilise neuf commandes d’exploration publique et 48 commandes de placement en file. Les 180 commandes de la partie proviennent de SIC seul. Les commandes et les mesures de changement des quatre premiers niveaux concordent avec celles de la campagne consolidée.
 
 Le total atteint **8/99 niveaux 5** et **412/636 niveaux**, soit **64,8 %**.
+
+### Séries rapides sur les déplacements vérifiables
+
+Les recherches de déplacement, d’accès avec réserve et de chemin vers un motif publient une série de pas ordinaires jusqu’au prochain contact ou changement de mécanisme. Les commandes et les positions prévues restent liées à la même décision. Le moteur vérifie le retour de chaque pas et l’état de la prochaine case. Si le trajet diverge, le suffixe est abandonné et chaque transition effectuée est réconciliée dans l’ordre. Les observations de réserve accumulées pendant la série alimentent cette réconciliation.
+
+Le rejeu séquentiel en SIC seul, avec un worker, reproduit les **143 commandes de LS19** et les **144 commandes de LS20** du niveau 1 au niveau 4. Les empreintes des parcours complets, animations comprises, sont identiques. LS19 passe de **76,44 s à 40,11 s** et LS20 de **104,81 s à 56,52 s**. La moyenne sur les huit niveaux passe de **22,66 s à 12,08 s**, soit **46,7 % de temps en moins**. Les séries atteignent 12 commandes sur LS19 et 14 sur LS20, avec un intervalle médian respectif de **14 ms** et **16 ms** entre deux commandes d’une même série.
+
+Sur les 100 niveaux 1, les **1 248 commandes** et les mesures des retours concordent avec la référence. Ce lot précède l’ajout de la garde sur la prochaine case. LS20 est le seul niveau 1 de ce lot à exécuter une série issue du nouveau trajet. Le rejeu final de LS20 confirme le même parcours avec cette garde en place. Les **131 tests** ciblés passent. Le test de la garde réconcilie le déplacement déjà confirmé lorsque la case suivante change. Le test de pause sur LS20 reprend la même commande sous la même décision.
+
+La campagne consolidée des niveaux 1 à 4 attribue des commandes à la famille modifiée sur quatre jeux. LS19, LS20, TR87 et WA30 reproduisent tous l’empreinte du parcours complet, avec **611 commandes SIC seul** au total et arrêt sur la victoire du niveau 4. Le niveau 4 de TR87 prend **87,35 s** et celui de WA30 **87,76 s** dans les rejeux en parallèle.
+
+Le coût moyen de l’appel qui acquiert un retour passe du niveau 1 au niveau 4 de **129 à 281 ms sur LS19** et de **151 à 404 ms sur LS20**, même avec les séries rapides. Le nombre de nœuds monte respectivement de 394 à 1 144 et de 432 à 1 300. Chaque transaction copie encore l’index des nœuds et le tableau des deltas lors de la publication de l’état immuable. Le relevé de temps par appel ne détermine pas à lui seul quelle part revient à ces copies.
+
+Un profil CPU séparé de LS19 niveau 4 relève **9,03 s inclusives** dans le découpage et l’encodage de l’état avant son écriture, sur **26,37 s** de profil. Les écritures dédupliquent les fragments déjà connus après ce traitement. Le profil distingue donc deux coûts à mesurer séparément, la préparation des fragments et la publication de l’historique.
