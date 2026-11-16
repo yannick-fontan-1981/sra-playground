@@ -10,6 +10,7 @@ import type { RecoveryPack } from './active-recovery.ts';
 import { sicNeedId } from './need-identity.ts';
 import { situationChoiceWorkflow } from './situation-choice-workflow.ts';
 import { measureFixedGuides, planOrderedLattice } from './contact-lattice.ts';
+import { measureReceivingGuides, type ReceivingGuideLayout } from './receiving-guide-scene.ts';
 
 export const orderedContactId = 'sic_ordered_contact';
 export const verifyContactOrderId = 'sic_verify_contact_order';
@@ -17,12 +18,13 @@ type EvidenceRow = NonNullable<ReturnType<typeof rootedLineEffect>>;
 type Projection = ReturnType<typeof physicalRootedLine>;
 type Configuration = Parameters<typeof projectedRootedLine>[0];
 type Memory = { epoch: number; tried: string[]; effects: Record<string, EvidenceRow>;
-  counterexample: readonly string[]; retained: Configuration | null; refused: boolean; guideRefused?: boolean;
+  counterexample: readonly string[]; retained: Configuration | null; refused: boolean; guideRefused?: boolean; receiverLayout?: ReceivingGuideLayout;
   transferableContact: readonly string[] };
 type Plan = { command: NativeCommand; prediction: Projection | null; distance: number | null; configuration: Configuration | null };
-type ContactProposal = NativeProposal & { contact: Plan; strategy: ContactPhase; needId: string };
+type ContactProposal = NativeProposal & { contact: Plan; strategy: ContactPhase; needId: string; receiverLayout?: ReceivingGuideLayout };
 const empty: Memory = { epoch: 0, tried: [], effects: {}, counterexample: [], retained: null, refused: false, transferableContact: [] };
 const objective = 'G_official_completion';
+const maximumReceivingGuidePlacements = 20_000;
 export const orderedContactStrategies = {
   learn_command_displacement: 'Measure which part moves when this command is applied',
   compose_axial_guide_release: 'Make the reference order by sliding pieces along a fixed guide',
@@ -59,13 +61,15 @@ function contactPhase(value: unknown): value is ContactPhase {
   return typeof value === 'string' && Object.hasOwn(contactPrimitives, value);
 }
 
-function measureContactScene(rows: NativeRows): ReturnType<typeof measureRootedLine> {
-  const scene = measureRootedLine(rows);
+function measureContactScene(rows: NativeRows, receiverLayout?: ReceivingGuideLayout): ReturnType<typeof measureRootedLine> {
+  const scene = receiverLayout ? measureReceivingGuides(rows, receiverLayout) : measureRootedLine(rows) ?? measureReceivingGuides(rows);
   if (!scene) return null;
   // Use the visible reference order so palette values cannot affect search ordering.
   const kinds = new Map((scene.order as string[]).map((type, index) => [type, String(index).padStart(2, '0')]));
   const pieces = new Map((scene.pieces as NativeRecord[]).map(piece => [String(piece.type), piece]));
-  return { ...scene, order: [...kinds.values()], pieces: [...kinds].map(([type, rank]) =>
+  const receivingGuides = (scene.receivingGuides as NonNullable<ReturnType<typeof measureReceivingGuides>>['receivingGuides'] | undefined)?.map(guide =>
+    ({ ...guide, order: guide.order.map(type => kinds.get(type)!) }));
+  return { ...scene, ...(receivingGuides ? { receivingGuides } : {}), order: [...kinds.values()], pieces: [...kinds].map(([type, rank]) =>
     ({ ...pieces.get(type), id: 'material:' + rank, type: rank })) };
 }
 
@@ -86,9 +90,10 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !policy) return null;
-      const scene = measureContactScene(rows);
+      const retainedMemory = current(observation.level_epoch);
+      const scene = measureContactScene(rows, retainedMemory.receiverLayout);
       if (!scene) return null;
-      const { tried, effects, counterexample, retained, refused, guideRefused, transferableContact } = current(observation.level_epoch);
+      const { tried, effects, counterexample, retained, refused, guideRefused, transferableContact } = retainedMemory;
       if (refused) return null;
       const available = new Map(inputs.filter(input => !Object.keys(input.data).length).map(input => [input.action_ref, input]));
       const ref = observation.observation_ref;
@@ -99,7 +104,8 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         action_ref: effect.action_ref, extent_delta: effect.extent_delta, root_translation: effect.root_translation,
       }));
       const lattice = scene as Parameters<typeof planOrderedLattice>[0] & { background: number };
-      const guides = guideRefused ? [] : measureFixedGuides(rows, lattice);
+      const receivers = scene.receivingGuides as NonNullable<ReturnType<typeof measureReceivingGuides>>['receivingGuides'] | undefined;
+      const guides = guideRefused ? [] : receivers?.map(receiver => receiver.box) ?? measureFixedGuides(rows, lattice);
       const effectEvidence = Object.values(currentEffects).flatMap(effect => effect.evidence_refs as string[]);
       const proof: [string, ...string[]] = [ref, ...new Set([...effectEvidence, ...counterexample, ...transferableContact])];
       const now = execution?.now ?? (() => performance.now());
@@ -114,15 +120,16 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       const facts = {
         learn_command_displacement: !!unmeasured,
         compose_axial_guide_release: guides.length > 0 && latticeEffects.length > 0,
-        revise_contact_chain: !!counterexample.length,
-        revalidate_contact_composition: !!transferableContact.length,
-        order_components_by_contact: !unmeasured && !counterexample.length,
+        revise_contact_chain: !receivers && !!counterexample.length,
+        revalidate_contact_composition: !receivers && !!transferableContact.length,
+        order_components_by_contact: !receivers && !unmeasured && !counterexample.length,
         mode: execution?.reasoningMode ?? 'exploration',
       };
       const planners: Record<ContactPhase, () => Plan | null> = {
         learn_command_displacement: () => unmeasured ? planFrom(unmeasured) : null,
         compose_axial_guide_release: () => {
-          const plan = planOrderedLattice(lattice, latticeEffects, depth, limits.maxNodes, shouldStop, guides);
+          const maximumPlacements = receivers ? maximumReceivingGuidePlacements : limits.maxNodes;
+          const plan = planOrderedLattice(lattice, latticeEffects, depth, maximumPlacements, shouldStop, guides, receivers);
           return plan ? planFrom(plan.command, plan.prediction, plan.distance) : null;
         },
         revise_contact_chain: () => {
@@ -166,8 +173,11 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
           ? 'observe_displacement_in_public_return' : 'observe_game_advance_after_alignment' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
       const id = `contact:${need.id}`, label = orderedContactStrategies[phase], actions = [plan.command];
-      const [mode, situation] = situations[phase];
+      const [mode, explanation] = situations[phase];
+      const situation = receivers && phase === 'compose_axial_guide_release'
+        ? 'Use the mobile support to distribute the pieces in the reference order on each receiving guide' : explanation;
       return { status: 'proposed', kind: verifyContactOrderId, strategy: phase, contact: plan, needId: need.id, actions,
+        ...(scene.receiverLayout ? { receiverLayout: scene.receiverLayout as ReceivingGuideLayout } : {}),
         rooted_line_plan: { scene: { root: scene.root, pieces: scene.pieces.slice(0, 8),
           guides: phase === 'compose_axial_guide_release' ? guides : [] } },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -189,7 +199,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     },
     after(proposal, _index, before, after, _oldRows, newRows) {
       const boundary = changedLevel(before, after);
-      const scene = boundary ? null : measureContactScene(newRows);
+      const scene = boundary ? null : measureContactScene(newRows, proposal.receiverLayout);
       const matched = scene && proposal.contact.prediction ? equal(physicalRootedLine(scene), proposal.contact.prediction) : null;
       const advanced = after.levels_completed > before.levels_completed;
       return { matched, seal_prefix: true, reason: boundary ? 'official_boundary'
@@ -198,8 +208,9 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     },
     record(before, after, command, oldRows, newRows, proposal) {
       memory = structuredClone(current(before.level_epoch));
-      const first = measureContactScene(oldRows), second = measureContactScene(newRows);
+      const first = measureContactScene(oldRows, proposal.receiverLayout), second = measureContactScene(newRows, proposal.receiverLayout);
       if (changedLevel(before, after) || !first || !second) return { events: [] };
+      if (proposal.receiverLayout) memory.receiverLayout = proposal.receiverLayout;
       const refs = [before.observation_ref, after.observation_ref] as const;
       const action = command.action_ref;
       const previousEffect = memory.effects[action];

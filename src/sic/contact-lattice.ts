@@ -7,6 +7,7 @@ type Effect = { action_ref: string; extent_delta: number; root_translation: Nati
 type Move = { command: string; dy: number; dx: number };
 type Position = { row: number; tip: number; pieces: readonly NativePoint[] };
 type Node = { state: Position; depth: number; first: { move: Move; result: Position } | null };
+type GuideOrder = { box: Box; order: readonly string[] };
 
 export function measureFixedGuides(rows: NativeRows, scene: Scene & { background: number }): Box[] {
   const { unit, root, field, tip, background } = scene;
@@ -47,7 +48,7 @@ export function measureFixedGuides(rows: NativeRows, scene: Scene & { background
 /** Test a conditional model in which displacement on the support is
  * reversible, and contact on a developing span can push a chain. */
 export function planOrderedLattice(scene: Scene, effects: readonly Effect[], depthLimit: number, nodeLimit: number, shouldStop: () => boolean,
-  guides: readonly Box[] = []) {
+  guides: readonly Box[] = [], guideOrders: readonly GuideOrder[] = []) {
   const { unit, root, field } = scene, stride = unit + 2;
   const startX = scene.tip - unit, startY = root[1] + (root[3] - root[1] + 1 - unit) / 2;
   const left = startX - Math.floor((startX - field[0]) / stride) * stride;
@@ -71,10 +72,34 @@ export function planOrderedLattice(scene: Scene, effects: readonly Effect[], dep
     const col = (l - left - Math.floor((unit - 2) / 2)) / stride;
     for (let y = t + 1; y + unit <= b; y += stride) guideCells.add(`${col},${(y - top) / stride}`);
   }
+  const assignments = guideOrders.map(({ box: [l, t, , b], order }) => {
+    const column = (l - left - Math.floor((unit - 2) / 2)) / stride;
+    const rows = [];
+    for (let y = t + 1; y + unit <= b; y += stride) rows.push((y - top) / stride);
+    const pieces = order.map(type => parts.findIndex(part => part.type === type));
+    return { column, rows, pieces };
+  });
 
   function predict(state: Position, { dy, dx }: Move): Position | null {
     const row = state.row + dy, tip = state.tip + dx;
     if (row < 0 || row >= rows || tip < -1 || tip >= columns) return null;
+    if (dx && assignments.length) {
+      const pieces = [...state.pieces], moved = new Set<number>();
+      function slide(index: number): boolean {
+        if (moved.has(index)) return true;
+        const [x, y] = state.pieces[index]!, to = x + dx;
+        if (!inside(to, y) || guideCells.has(`${x},${y}`) || guideCells.has(`${to},${y}`)) return false;
+        const blocker = pieces.findIndex(([u, v]) => u === to && v === y);
+        if (blocker >= 0 && !slide(blocker)) return false;
+        pieces[index] = [to, y];
+        moved.add(index);
+        return true;
+      }
+      for (const [index, [x, y]] of state.pieces.entries()) {
+        if (y === row && (x <= state.tip || dx === 1 && x === tip)) slide(index);
+      }
+      return { row, tip, pieces };
+    }
     const moving = new Set<number>();
     for (const [index, [x, y]] of state.pieces.entries()) {
       if (dx && guideCells.has(`${x},${y}`)) continue;
@@ -95,7 +120,21 @@ export function planOrderedLattice(scene: Scene, effects: readonly Effect[], dep
     const firstUnmatched = pieces.findIndex(([x, y], index) => y !== row || x > tip || index > 0 && x <= pieces[index - 1]![0]);
     return firstUnmatched === -1 ? pieces.length : firstUnmatched;
   }
+  function guideDistance(state: Position) {
+    let distance = 0;
+    for (const { column, rows, pieces } of assignments) {
+      let costs = rows.map(() => 0);
+      for (const [index, piece] of pieces.entries()) {
+        const [x, y] = state.pieces[piece]!;
+        costs = rows.map((row, i) => (index ? Math.min(...costs.slice(0, i)) : 0)
+          + 3 * Math.abs(x - column) + Math.abs(y - row));
+      }
+      distance += Math.min(...costs);
+    }
+    return distance;
+  }
   function priority(state: Position, depth: number) {
+    if (assignments.length) return depth * 4 + guideDistance(state) * 15;
     const prefix = aligned(state), remaining = state.pieces.length - prefix;
     if (!remaining) return depth * 20;
     const wrongOnSupport = state.pieces.slice(prefix).filter(([x, y]) => y === state.row && x <= state.tip).length;
@@ -123,7 +162,7 @@ export function planOrderedLattice(scene: Scene, effects: readonly Effect[], dep
     if (!bucket.length) queue.delete(rank);
     if (visited.get(key(node.state)) !== node.depth) continue;
     expanded++;
-    if (node.first && aligned(node.state) === parts.length) {
+    if (node.first && (assignments.length ? guideDistance(node.state) === 0 : aligned(node.state) === parts.length)) {
       const { move, result } = node.first;
       const pieces = parts.map(({ id }, index) => {
         const [x, y] = result.pieces[index]!, px = left + x * stride, py = top + y * stride;
