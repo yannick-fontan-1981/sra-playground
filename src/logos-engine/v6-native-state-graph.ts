@@ -11,6 +11,14 @@ type Scalar = null | boolean | number | string;
 type Encoded = Scalar | { kind: 'float64'; bits: string } | { kind: 'ref'; id: string }
   | { kind: 'array'; items: readonly Encoded[] } | { kind: 'object'; members: Readonly<Record<string, Encoded>> }
   | { kind: 'concat' | 'merge'; parts: readonly Encoded[] };
+type EncodedCollection<K extends 'array' | 'object'> = Extract<Encoded, { kind: K }>;
+type GroupKind = 'concat' | 'merge';
+
+function sameEncoded(left: Encoded, right: Encoded | undefined): boolean {
+  return left === right || (left !== null && typeof left === 'object' && left.kind === 'ref'
+    && right != null && typeof right === 'object' && right.kind === 'ref' && left.id === right.id);
+}
+
 export interface NativeStateGraphRoot extends JsonObject {
   profile: typeof NATIVE_STATE_GRAPH_PROFILE;
   component: string;
@@ -105,6 +113,21 @@ export function splitNativeState(value: unknown, component: string, options: Spl
     const fragment = found && typeof found === 'object' ? ownedFragments.get(found) : undefined;
     return fragment?.id === node.id ? fragment.value.node as Encoded : undefined;
   };
+  // Follow only the packing structure of this collection. A fragment missing
+  // from the current store cannot establish the positions of later chunks.
+  const priorChunks = <K extends 'array' | 'object'>(node: Encoded | undefined, group: GroupKind, leaf: K): EncodedCollection<K>[] | undefined => {
+    if (node == null || typeof node !== 'object' || node.kind !== group) return;
+    const chunks: EncodedCollection<K>[] = [];
+    const collect = (part: Encoded): boolean => {
+      const resolved = priorNode(part);
+      if (resolved == null || typeof resolved !== 'object') return false;
+      if (resolved.kind === leaf) {
+        chunks.push(resolved as EncodedCollection<K>); return true;
+      }
+      return resolved.kind === group && resolved.parts.every(collect);
+    };
+    return node.parts.every(collect) ? chunks : undefined;
+  };
   const fragments = new Map<string, NativeStateFragment>(), ancestors = new WeakSet<object>();
   const emitted: NativeStateFragment[] = [];
   const measured = new WeakMap<object, { value: Sized; height: number; immutable: boolean; start: number; end: number }>();
@@ -130,7 +153,7 @@ export function splitNativeState(value: unknown, component: string, options: Spl
     if (node !== null && typeof node === 'object') fragmentsByNode.set(node, { fragment: evidence, reference });
     return reference;
   };
-  const combine = (kind: 'concat' | 'merge', children: Sized[]): Sized => {
+  const combine = (kind: GroupKind, children: Sized[], previous: Encoded | undefined): Sized => {
     // A flat collection can itself be enormous: bound the reference fanout too.
     let parts = children;
     while (3 + parts.reduce((n, part) => n + part.cost, 0) > bound) {
@@ -142,7 +165,10 @@ export function splitNativeState(value: unknown, component: string, options: Spl
       if (group.length) next.push(fragment(ownedEncoded({ kind, parts: Object.freeze(group.map(p => p.node)) })));
       parts = next;
     }
-    return { node: ownedEncoded({ kind, parts: Object.freeze(parts.map(p => p.node)) }), cost: 3 + parts.reduce((n, p) => n + p.cost, 0) };
+    const reusable = previous != null && typeof previous === 'object' && previous.kind === kind
+      && previous.parts.length === parts.length && parts.every((part, index) => sameEncoded(part.node, previous.parts[index]));
+    return { node: reusable ? previous : ownedEncoded({ kind, parts: Object.freeze(parts.map(p => p.node)) }),
+      cost: 3 + parts.reduce((n, p) => n + p.cost, 0) };
   };
   const visitRaw = (input: unknown, depth: number, previous?: Encoded): Sized => {
     if (depth > 128) throw new TypeError('Native state nesting exceeds the V7 structural contract');
@@ -196,10 +222,18 @@ export function splitNativeState(value: unknown, component: string, options: Spl
       const before = priorNode(previous);
       if (array) {
         const priorArray = before && typeof before === 'object' && before.kind === 'array' ? before : undefined;
-        const children = entries.map(([, value], index) => visit(value, depth + 1, priorArray?.items[index]));
+        const chunks = priorChunks(before, 'concat', 'array');
+        const priorAt = chunks && new Map<number, EncodedCollection<'array'>>();
+        let offset = 0;
+        const priorItems = priorArray?.items ?? chunks?.flatMap(chunk => {
+          priorAt!.set(offset, chunk);
+          offset += chunk.items.length;
+          return chunk.items;
+        });
+        const children = entries.map(([, value], index) => visit(value, depth + 1, priorItems?.[index]));
         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
         if (cost <= bound) {
-          const node = priorArray?.items.length === children.length && children.every((child, i) => child.node === priorArray.items[i])
+          const node = priorArray?.items.length === children.length && children.every((child, i) => sameEncoded(child.node, priorArray.items[i]))
             ? priorArray : ownedEncoded({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
           const pixelMatrix = input.length > 0 && input.every(row => Array.isArray(row) && row.length > 0 && row.every(v => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0 && v <= 255));
           if (pixelMatrix && cost >= 512) {
@@ -207,33 +241,55 @@ export function splitNativeState(value: unknown, component: string, options: Spl
           }
           return { node, cost };
         }
-        const groups: Sized[] = []; let group: Sized[] = [], groupCost = 3;
+        const groups: Sized[] = []; let group: Sized[] = [], groupCost = 3, start = 0;
+        const appendGroup = (): void => {
+          const candidate = priorAt?.get(start);
+          const reusable = candidate?.items.length === group.length && group.every((child, i) => sameEncoded(child.node, candidate.items[i]));
+          groups.push(fragment(reusable ? candidate : ownedEncoded({ kind: 'array', items: Object.freeze(group.map(child => child.node)) })));
+          start += group.length;
+          group = []; groupCost = 3;
+        };
         for (let child of children) {
           if (child.cost + 3 > bound) child = fragment(child.node);
-          if (groupCost + child.cost > bound && group.length) { groups.push(fragment(ownedEncoded({ kind: 'array', items: Object.freeze(group.map(c => c.node)) }))); group = []; groupCost = 3; }
+          if (groupCost + child.cost > bound && group.length) appendGroup();
           group.push(child); groupCost += child.cost;
         }
-        if (group.length) groups.push(fragment(ownedEncoded({ kind: 'array', items: Object.freeze(group.map(c => c.node)) })));
-        return combine('concat', groups);
+        if (group.length) appendGroup();
+        return combine('concat', groups, before);
       }
       const priorObject = before && typeof before === 'object' && before.kind === 'object' ? before : undefined;
-      const children = entries.sort(([a], [b]) => compareUnicode(a, b)).map(([name, value]) =>
-        [name, visit(value, depth + 1, priorObject && Object.hasOwn(priorObject.members, name) ? priorObject.members[name] : undefined)] as const);
+      const chunks = priorChunks(before, 'merge', 'object');
+      const priorAt = chunks && new Map<string, EncodedCollection<'object'>>();
+      if (priorAt) {
+        for (const chunk of chunks!) for (const name of Object.keys(chunk.members)) priorAt.set(name, chunk);
+      }
+      const children = entries.sort(([a], [b]) => compareUnicode(a, b)).map(([name, value]) => {
+        const candidate = priorObject ?? priorAt?.get(name);
+        return [name, visit(value, depth + 1, candidate && Object.hasOwn(candidate.members, name) ? candidate.members[name] : undefined)] as const;
+      });
       const cost = 3 + children.reduce((n, [, child]) => n + child.cost, 0);
       if (cost <= bound) {
         const node = priorObject && Object.keys(priorObject.members).length === children.length
-          && children.every(([name, child]) => Object.hasOwn(priorObject.members, name) && child.node === priorObject.members[name])
+          && children.every(([name, child]) => Object.hasOwn(priorObject.members, name) && sameEncoded(child.node, priorObject.members[name]))
           ? priorObject : ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(children.map(([name, child]) => [name, child.node]))) });
         return { node, cost };
       }
       const groups: Sized[] = []; let group: (readonly [string, Sized])[] = [], groupCost = 3;
+      const appendGroup = (): void => {
+        const candidate = priorAt?.get(group[0]![0]);
+        const reusable = candidate && Object.keys(candidate.members).length === group.length
+          && group.every(([name, child]) => Object.hasOwn(candidate.members, name) && sameEncoded(child.node, candidate.members[name]));
+        groups.push(fragment(reusable ? candidate : ownedEncoded({ kind: 'object',
+          members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) })));
+        group = []; groupCost = 3;
+      };
       for (const [name, original] of children) {
         const child = original.cost + 3 > bound ? fragment(original.node) : original;
-        if (groupCost + child.cost > bound && group.length) { groups.push(fragment(ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) }))); group = []; groupCost = 3; }
+        if (groupCost + child.cost > bound && group.length) appendGroup();
         group.push([name, child]); groupCost += child.cost;
       }
-      if (group.length) groups.push(fragment(ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) })));
-      return combine('merge', groups);
+      if (group.length) appendGroup();
+      return combine('merge', groups, before);
     } finally { ancestors.delete(input); }
   };
   const visit = (input: unknown, depth: number, previous?: Encoded): Sized => {

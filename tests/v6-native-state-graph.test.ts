@@ -102,6 +102,33 @@ test('oversized flat arrays and objects bound the reference fanout without dropp
   assert.deepEqual(restore(graph), input);
 });
 
+test('a new checkpoint retains unchanged array and object groups from the preceding graph', () => {
+  const input = {
+    list: Array.from({ length: 160 }, (_, i) => ({ x: i, offset: -0 })),
+    members: Object.fromEntries(Array.from({ length: 160 }, (_, i) => [`k${i}`, [i, i + 0.5]])),
+  };
+  const options = { maxFragmentNodes: 48 };
+  const first = splitNativeState(input, 'grouped-checkpoint', options);
+  const previous = new Map(first.fragments.map(fragment => [fragment.id, fragment]));
+  const prior = { root: first.root, readFragment: (id: string) => previous.get(id)?.value };
+  input.list[159]!.offset = 0;
+  input.members.k159![0] = -1;
+  const next = splitNativeState(input, 'grouped-checkpoint', { ...options, prior });
+  assert.deepEqual(next, splitNativeState(input, 'grouped-checkpoint', options));
+  assert.deepEqual(restore(next), input);
+  for (const kind of ['array', 'object']) {
+    const inherited = next.fragments.filter(fragment => previous.get(fragment.id) === fragment
+      && (fragment.value.node as { kind?: string }).kind === kind);
+    assert.ok(inherited.length > 1, `Unchanged ${kind} groups retain their original fragment objects`);
+  }
+  const missing = next.fragments.find(fragment => previous.get(fragment.id) === fragment)!;
+  const incomplete = { ...prior, readFragment: (id: string) => id === missing.id ? undefined : prior.readFragment(id) };
+  assert.deepEqual(splitNativeState(input, 'grouped-checkpoint', { ...options, prior: incomplete }), next);
+  const smaller = { maxFragmentNodes: 36 };
+  assert.deepEqual(splitNativeState(input, 'grouped-checkpoint', { ...smaller, prior }),
+    splitNativeState(input, 'grouped-checkpoint', smaller));
+});
+
 test('missing and tampered persisted fragments cannot be hydrated', () => {
   const graph = splitNativeState(Array.from({ length: 100 }, (_, i) => i), 'integrity', { maxFragmentNodes: 32 });
   assert.throws(() => hydrateNativeState(graph.root, () => undefined), /digest mismatch|missing/);

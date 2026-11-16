@@ -1094,3 +1094,22 @@ Les temps viennent d’un passage sans profileur par variante, sur la même mach
 Le rejeu à horloge figée retrouve les mêmes empreintes des chaînes de deltas après chacun des quatre niveaux de GABA. Au niveau 4, les deux variantes ont acquis **239 retours** et écrit **14 325 deltas**.
 
 Le même contrôle passe sur les niveaux 1 à 4 de LS19 et LS20. Sur les trois jeux, les **526 commandes et leurs retours**, les acquisitions et les empreintes de fin de niveau concordent. Le typage TypeScript et **79 tests** passent, dont un test qui vérifie que la confirmation d’une écriture immuable ne déclenche aucune hydratation.
+
+### Réutilisation des groupes de fragments
+
+Le profil de GABA niveau 4 attribue **16,27 s** à l’encodage de l’état natif sur la version 114 (`7c9c1fa8`). L’encodeur retrouve les groupes de tableaux et d’objets dans l’état précédent et compare leurs membres. Quand le découpage et les éléments coïncident, il conserve le fragment et son empreinte. Les groupes modifiés sont encodés et hachés par le chemin habituel. Une référence précédente manquante ou invalide ne peut pas établir une réutilisation.
+
+Un profil indépendant mesure **5,60 s** pour cet encodage avec le changement, soit **65,6 %** de moins. Le sous-ensemble consacré à la construction et au hachage des fragments passe de **12,82 s à 1,83 s**. Ces durées de profil sont échantillonnées et se recouvrent.
+
+Les durées ci-dessous sont la moyenne de deux passages par variante, à un worker et sans profilage. L’ordre des variantes a été inversé au deuxième passage.
+
+| Niveau GABA | Temps version 114 | Temps optimisé | Gain total | Traitement des retours avant → après |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 10,195 s | 9,605 s | +5,8 % | 6,937 s → 6,224 s |
+| 2 | 9,140 s | 6,642 s | +27,3 % | 8,213 s → 5,649 s |
+| 3 | 19,485 s | 11,199 s | +42,5 % | 18,007 s → 9,881 s |
+| 4 | 33,968 s | 20,256 s | +40,4 % | 30,973 s → 17,147 s |
+
+Sur les quatre niveaux, le temps moyen passe de **72,79 s à 47,70 s**. Les **31 séries continues** et les **70 reprises de décision** concordent sur les quatre passages.
+
+Le rejeu à horloge figée donne les mêmes empreintes de la chaîne des deltas aux niveaux 1 à 4 de GABA, LS19 et LS20. Les **526 commandes**, leurs retours complets et les acquisitions concordent. GABA atteint **14 325 deltas** et **239 acquisitions** au niveau 4 dans les deux variantes. Le typage TypeScript et **80 tests** passent.
