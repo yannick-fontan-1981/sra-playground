@@ -45,7 +45,7 @@ function borderOrder(a: Border, b: Border): number {
   return 0;
 }
 
-export function measureReceptionService(rows: NativeRows, retained: R | null = null): R | null {
+function locateReceptionLayout(rows: NativeRows) {
   const parts = geometricComponents(rows), groups = new Map<string, { color: number; width: number; items: Part[] }>();
   for (const part of parts) {
     const [left, top, right, bottom] = part.bbox, width = right - left + 1;
@@ -104,6 +104,25 @@ export function measureReceptionService(rows: NativeRows, retained: R | null = n
     for (const cell of cells) if (manhattan(cell, [a, z]) < manhattan(anchor, [a, z])) anchor = cell;
     supports.push({ bbox: part.bbox, anchor, color: part.color, mask: [...part.normalized].sort(pointOrder) });
   }
+  return { box, pitch, cells, background, supports, parts };
+}
+
+function requestShapes(parts: Part[], bottom: number, pitch: number): Part[] {
+  return parts.filter(part => part.bbox[1] > bottom && 3 <= part.area && part.area <= pitch * pitch && !part.rectangular);
+}
+
+export function measureReceptionLayout(rows: NativeRows): R | null {
+  const geometry = locateReceptionLayout(rows);
+  if (!geometry) return null;
+  const { parts, supports, ...layout } = geometry;
+  return { ...layout, support_candidates: supports,
+    requests: requestShapes(parts, layout.box[3]!, layout.pitch).map(part => part.bbox) };
+}
+
+export function measureReceptionService(rows: NativeRows, retained: R | null = null): R | null {
+  const geometry = locateReceptionLayout(rows);
+  if (!geometry) return null;
+  const { box, pitch, cells, background, supports, parts } = geometry, [left, top, right, bottom] = box;
   const colors = new Map<number, number>();
   for (const support of supports) colors.set(support.color, (colors.get(support.color) ?? 0) + 1);
   const targets = supports.length >= 4 ? supports.filter(support => colors.get(support.color) === 1) : [];
@@ -115,7 +134,7 @@ export function measureReceptionService(rows: NativeRows, retained: R | null = n
     if (old.mask.every(([dx, dy]: number[]) => corners.has(pointKey([a + dx!, z + dy!])) || rows[z + dy!]![a + dx!] === old.color)) target = old;
   }
   if (!target) return null;
-  const hud = parts.filter(part => part.bbox[1] > bottom! && 3 <= part.area && part.area <= pitch * pitch && !part.rectangular);
+  const hud = requestShapes(parts, bottom!, pitch);
   const world = parts.filter(part => top! < part.bbox[1] && part.bbox[1] <= part.bbox[3] && part.bbox[3] < bottom!
     && left! < part.bbox[0] && part.bbox[0] <= part.bbox[2] && part.bbox[2] < right!);
   const counterparts: R[] = [];

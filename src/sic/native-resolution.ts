@@ -888,7 +888,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === receptionAccessId || family === learnReceptionAccessId)) {
-    for (const [field, label] of [['actor', 'Current carrier'], ['target', 'Candidate support'], ['request', 'Visible request']] as const) {
+    for (const [field, label] of [['actor', 'Current carrier'], ['target', 'Candidate support'], ['request', 'Visible request'],
+      ['device', 'Device under contact test'], ['next', 'Expected carrier position']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
