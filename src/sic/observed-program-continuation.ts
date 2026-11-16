@@ -7,6 +7,7 @@ import { observeRespondentProgramPacket, programSupportMatch } from '../logos-en
 import type { NativeBox, NativeCommand, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { OccurrenceRecord } from '../logos-engine/v6-occurrence-scene.ts';
 import { planRespondentPrograms, type ProgramTurn, type RespondentContext, type ScheduledProgramStep } from './respondent-program-planner.ts';
+import { chooseProgramContactTrial, verifyProgramTrialEdit } from './program-contact-trial.ts';
 
 export type ProgramEdit = { before: NativeRows; after: NativeRows; epoch: number; evidence: string[] };
 export type ProgramWitness = { model: OccurrenceRecord; epoch: number; evidence: string[]; continued?: boolean };
@@ -26,6 +27,7 @@ export type ProgramChoice = {
   respondentProbe?: { origin: number[]; next: number[] };
   respondents?: ProgramTurn[];
   scheduled?: ScheduledProgramStep[];
+  contactTrial?: { palette: number[]; pending: boolean; destination?: NativeBox };
 };
 
 const same = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right);
@@ -105,6 +107,7 @@ export function chooseObservedProgram(witness: ProgramWitness, rows: NativeRows,
 }
 
 export function verifyObservedProgram(choice: ProgramChoice, witness: ProgramWitness, rows: NativeRows): boolean {
+  if (choice.contactTrial) return verifyProgramTrialEdit(choice, witness, rows);
   const { model } = witness;
   const members = displayMembers(rows, choice.display, model);
   if (!same(members.map(member => member.color), choice.word)) return false;
@@ -134,6 +137,10 @@ export function chooseRespondentProgram(witness: ProgramWitness, rows: NativeRow
   remaining: number, deadline: number, retained?: RetainedProgram, context?: RespondentContext,
   scheduled?: ScheduledProgramStep[]): ProgramChoice | null {
   const { model } = witness, layout = programEditor(rows, model);
+  if (!layout && !context && !scheduled) {
+    const trial = chooseProgramContactTrial(witness, rows, available, remaining, deadline, body => wordBounds(body, model));
+    if (trial || !retained) return trial;
+  }
   const display: Display | undefined = layout ? { member_box: layout.member_box, member_size: layout.member_size, limit: layout.limit } : retained?.display;
   if (!display || !available.includes(model.command_ref)) return null;
   const members: OccurrenceRecord[] = layout?.members ?? displayMembers(rows, display, model);

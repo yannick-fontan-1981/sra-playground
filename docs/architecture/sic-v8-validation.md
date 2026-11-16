@@ -787,16 +787,22 @@ Les onze victoires du tableau sont obtenues sur le socle figé. CATL, THER et ZI
 
 - **COMB** gagne le niveau 4 en **15 clics et 14,83 s**. Le socle épuisait sa réserve avant de couvrir le catalogue. SIC repère les quatre valeurs variables d’une carte et identifie son fond par les positions qui restent constantes entre les cartes. Le retour animé lui permet de transmettre la preuve de couverture après une victoire déclenchée par une touche. Il réutilise les deux cycles reconnus, vérifie les deux autres au premier clic concerné et couvre les 16 combinaisons, dont une est déjà visitée au départ. Chaque clic atteint une combinaison encore absente. Les niveaux 1 et 2 reproduisent leurs 15 commandes et retours. Le niveau 3 passe de 41 à 11 commandes. Les 41 commandes de la partie relèvent de SIC, la permutation de palette conserve le trajet et les deux essais s’arrêtent à la victoire du niveau 4. Empreinte `340815bf0c6c9e7095d51b4eca575aa5ce7fc03c7f596b44ea54e0a13982c5f4`.
 
-Cinq autres victoires sont obtenues sur le socle `48bc2cfa`, avec arrêt à la victoire du niveau 4.
+Les victoires suivantes sont obtenues sur le socle `48bc2cfa`, avec arrêt à la victoire du niveau 4.
 
 | Jeu | Commandes au niveau 4 | Temps au niveau 4 | Famille observée | Empreinte du parcours |
 | --- | ---: | ---: | --- | --- |
 | AR25 | 22 | 23,63 s | `sic_reflected_placement` | `4e4f59b6763cb8e79341fce5d8cc85521d2f760a871fce938761a1a27fcbad3f` |
 | CD82 | 27 | 59,20 s | `sic_surface_copy` | `2925ff4cba9006b6017c1b85fb914fb7ccc0b8c1c1388e3c673a4c5bdf312428` |
 | CGWL | 18 | 13,31 s | `sic_carry_to_frame` | `40e037ed83567872db243bc34b06369204c8ccfdc60473bacbae1616cfaf56a4` |
+| CLRS | 15 | 15,97 s | `sic_layered_fit` | `2f8508d7caf36aa0f0af745eeef97aea3b3aa6664b592300929ed03856e425c4` |
+| ESCT | 22 | 23,18 s | `sic_intervene_on_observed_route` | `56225454e20ebe7ba19d59de8ef77bfbe66d6039b170cec77908573a6e04681d` |
 | ETAG | 111 | 221,10 s | `sic_switched_surface` | `f5e4c5159ca66138d9cc41915313ef33b012ed370a2b85ee7021611b76b08141` |
+| FITE | 9 | 10,50 s | `sic_preserve_room_to_survive`, `sic_cavity_access` | `9df48edd8518754b41266dd249d1342f3bbecc88de75fe0e2a93d748973db8aa` |
 | FUIT | 47 | 42,95 s | `sic_verify_reactive_motion` | `a97dde4d9f39b9537add52b6de8199300ad6e63bb3e2b5677baa7edaec5b5655` |
+| GORI | 3 | 2,17 s | `sic_animation_contact` | `4920933441beefa62b275abbe91700a07514cf3d710fea4d94958c9abfd6414f` |
 
 - **HPDL** gagne le niveau 4 en **7 commandes et 13,13 s**. Le marqueur du signal interrompt le contour d’un récepteur, que le socle omettait. SIC reconnaît les quatre récepteurs, les 51 positions du rail et la liaison entre deux prises. Sur 192 réglages possibles, un seul couvre les dix wagons et permet aux deux prises liées de se déclencher au même battement. Les six éditions produisent les changements prévus, puis le lancement remporte le niveau en une traversée. La carte de situation montre le signal entre les récepteurs. Les 16 commandes et retours des trois premiers niveaux sont reproduits. Les 23 commandes relèvent de SIC, la permutation de palette conserve le trajet et les deux essais s’arrêtent à la victoire du niveau 4. Empreinte `a1c15b30143163d05365c169bd4122c4290c398dcc06a1302f53492f887f26df`.
 
-Le total atteint **30/100 niveaux 4** et **340/636 niveaux**, soit **53,5 %**.
+- **STCK** gagne le niveau 4 en **5 commandes et 9,57 s**. SIC relie les cartes de déplacement à leurs contrôles toujours visibles et repère une commande supplémentaire sans lui attribuer d’effet à partir de son apparence. En calculant un essai de déplacement au contact vers la seule case intérieure d’apparence différente, il compose une approche, un essai, une nouvelle approche et un second essai. Le clic d’insertion confirme l’identité de la carte. L’animation du lancement montre la première translation de la pile adverse avec ses trois cartes, puis sa disparition après le second contact. Les 28 commandes et retours des trois premiers niveaux sont reproduits. Les 33 commandes relèvent de SIC, la permutation de palette conserve le trajet et les deux essais s’arrêtent à la victoire du niveau 4. Empreinte `36af8ff7e401f7a1cd59c58cafcbee8a0dacac0258cf1808ebe0f6ba6a2d6306`.
+
+Le total atteint **35/100 niveaux 4** et **345/636 niveaux**, soit **54,2 %**.

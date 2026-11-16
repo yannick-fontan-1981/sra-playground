@@ -36,7 +36,8 @@ const empty = (epoch = 0): State => ({ epoch, edit: null, stopped: false, count:
 async function programProposal(observation: NativeObservation, rows: NativeRows, witness: ProgramWitness, choice: ProgramChoice): Promise<Proposal> {
   const ref = observation.observation_ref, parent = 'G_official_completion';
   const evidence: [string, ...string[]] = [ref, ...witness.evidence.filter(value => value !== ref)];
-  const label = markedCollectionStrategies[choice.kind];
+  const label = choice.contactTrial?.destination ? 'Test whether the new operator moves a neighbouring piece toward the unfamiliar tile'
+    : markedCollectionStrategies[choice.kind];
   const objective = { kind: 'compose_publicly_observed_operators', scope: ref.split(':revision:', 1)[0]!,
     subjects: ['ordered_program', 'controlled_piece', 'reachable_surface'], parentObjective: parent,
     satisfactionContract: 'official_progress_after_public_program_projection' };
@@ -49,9 +50,10 @@ async function programProposal(observation: NativeObservation, rows: NativeRows,
       ...(pointBinding ? { point_binding: pointBinding } : {}) }],
     binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     sicSituationCard: { strategy: choice.kind, need: 'Reach the remaining pieces with the observed program operators',
-      mode: choice.kind === 'bind_program_bearer' ? 'assimilation' : choice.respondentProbe ? 'exploration' : 'solving',
+      mode: choice.kind === 'bind_program_bearer' ? 'assimilation' : choice.respondentProbe || choice.contactTrial ? 'exploration' : 'solving',
       situation: label, agenda: [], evidence,
-      members: choice.sceneMembers, addressedRegion: choice.region, actor: choice.actor, affected: choice.affected },
+      members: choice.sceneMembers, addressedRegion: choice.region, actor: choice.actor, affected: choice.affected,
+      ...(choice.contactTrial?.destination ? { contactDestination: choice.contactTrial.destination } : {}) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
     sicLocalDecision: { strategy: choice.kind, objective: { id, label, parent }, need },
