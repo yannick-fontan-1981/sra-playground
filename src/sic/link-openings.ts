@@ -12,10 +12,11 @@ type Endpoint = { box: NativeBox; point: NativePoint; button: NativeBox; color: 
 type RelayLeg = { pair: [Endpoint, Endpoint]; departure: NativeBox; arrival: NativeBox; floor: number };
 type LinkedLoad = { button: NativeBox; idle: number; source: NativeBox; pixels: NativeRows;
   standing: NativeBox; plate: NativeBox; gate: NativeBox; passage: number };
+type FallLink = { departure: NativeBox; arrival: NativeBox; shelf: NativeBox; landing: NativeBox; releaseDirection: number };
 type Scene = { endpoints: Endpoint[]; actorColor: number; actorMask: string; goal: NativeBox; goalColor?: number; goalMask?: string;
-  footGap?: number; relay?: [RelayLeg, RelayLeg]; load?: LinkedLoad };
+  footGap?: number; relay?: [RelayLeg, RelayLeg]; load?: LinkedLoad; flight?: FallLink };
 type State = { epoch: number; scene: Scene; refs: string[]; selected: number | null; walkRef: string | null; crossed: boolean; rejected: string[];
-  leg?: number; settleRef?: string; held?: boolean; stationed?: NativeBox };
+  leg?: number; settleRef?: string; held?: boolean; stationed?: NativeBox; redirection?: { entry: NativeBox; release: NativeBox } };
 type PriorLink = { completed: number; scene: Scene; proof: string };
 type Choice = { kind: 'select' | 'place' | 'walk' | 'settle' | 'take' | 'drop'; input: string; target: NativeBox; index: number; reason: string;
   point?: NativePoint; direction?: number };
@@ -126,6 +127,51 @@ function discoverRelay(parts: Part[], rows: NativeRows, previous: Scene): Scene 
         { pair: [entrance, relayExit], departure, arrival: relayRoom, floor: floor.bbox[1] },
         { pair: [bind(floor, 0), bind(terminal, 1)], departure: relayRoom, arrival: finalRoom, floor: goal[3] + 1 },
       ] });
+    }
+  }
+  return layouts.length === 1 ? layouts[0]! : null;
+}
+
+function discoverFallLink(parts: Part[], rows: NativeRows, previous: Scene): Scene | null {
+  const controlled = actor(parts, previous);
+  const gap = previous.footGap;
+  const goals = parts.filter(part => part.color === previous.goalColor && silhouette(part) === previous.goalMask);
+  if (!controlled || !gap || goals.length !== 1 || previous.endpoints.length !== 2) return null;
+  const goal = goals[0]!.bbox, [x, y] = center(controlled), [gx] = center(goal);
+  const near = rows[y]?.[controlled[0] - 1];
+  const span = height(previous.endpoints[0]!.box);
+  const air = parts.filter(part => part.color === near && part.area > span * span);
+  const departure = air.find(part => contains(part.bbox, [x, y]));
+  const arrival = air.find(part => contains(part.bbox, center(goal)));
+  if (!departure || !arrival || departure === arrival) return null;
+  const buttons = previous.endpoints.map(endpoint => parts.filter(part => part.color === endpoint.color
+    && part.bbox[1] > 0 && part.bbox[3] < rows.length / 8 && silhouette(part) === endpoint.buttonMask));
+  if (buttons.some(matches => matches.length !== 1)) return null;
+  const bars = parts.filter(part => part.rectangular && part.bbox[1] > controlled[1]
+    && Math.min(width(part.bbox), height(part.bbox)) === 1 && part.color !== near);
+  const supports = bars.filter(part => height(part.bbox) === 1 && width(part.bbox) >= width(controlled));
+  const shelves = supports.filter(part => part.bbox[1] === controlled[3] + gap && contains(part.bbox, [x, part.bbox[1]]));
+  if (shelves.length !== 1) return null;
+  const shelf = shelves[0]!;
+  const landings = supports.filter(part => part.color === shelf.color && part.bbox[1] === goal[3] + 1
+    && contains(part.bbox, [gx, part.bbox[1]]));
+  if (landings.length !== 1) return null;
+  const landing = landings[0]!.bbox;
+  const entrances = supports.filter(part => part.color !== shelf.color && part.bbox[1] > shelf.bbox[1] + span
+    && width(part.bbox) <= span && contains(departure.bbox, [center(part.bbox)[0], part.bbox[1] - 1]));
+  const layouts: Scene[] = [];
+  const bind = (part: Part, i: number): Endpoint => ({ box: part.bbox, point: center(part.bbox),
+    button: buttons[i]![0]!.bbox, color: buttons[i]![0]!.color, buttonMask: previous.endpoints[i]!.buttonMask });
+  for (const entrance of entrances) {
+    const [px, py] = center(entrance.bbox);
+    if ((px >= shelf.bbox[0] && px <= shelf.bbox[2]) || py !== departure.bbox[3] + 1) continue;
+    for (const exit of bars) {
+      if (width(exit.bbox) !== 1 || height(exit.bbox) !== span || exit.color !== entrance.color) continue;
+      const [ex, ey] = center(exit.bbox), direction = Math.sign(gx - ex);
+      if (!direction || ey >= landing[1] || !contains(arrival.bbox, [ex + direction, ey])
+        || contains(arrival.bbox, [ex - direction, ey])) continue;
+      layouts.push({ ...previous, goal, endpoints: [bind(entrance, 0), bind(exit, 1)],
+        flight: { departure: departure.bbox, arrival: arrival.bbox, shelf: shelf.bbox, landing, releaseDirection: direction } });
     }
   }
   return layouts.length === 1 ? layouts[0]! : null;
@@ -361,6 +407,84 @@ function relayReturn({ local, choice, actor: first }: Proposal, before: NativeRo
     ? 'approach_displacement_observed' : null;
 }
 
+function fallChoice(local: State, rows: NativeRows, controlled: NativeBox): Choice | null {
+  const { scene, crossed, selected } = local;
+  const { departure, arrival, shelf, landing } = scene.flight!;
+  const [entrance] = scene.endpoints;
+  const pose = center(controlled);
+  const walk = (target: NativeBox, reason: string): Choice | null => {
+    const direction = Math.sign(center(target)[0] - pose[0]);
+    return direction ? { kind: 'walk', input: direction < 0 ? 'ACTION3' : 'ACTION4', target, direction, index: 0, reason } : null;
+  };
+  if (crossed) {
+    if (!contains(arrival, pose)) return null;
+    if (controlled[3] + scene.footGap! < landing[1]) {
+      return { kind: 'settle', input: 'ACTION2', index: 1, target: landing,
+        reason: 'Let the redirected movement finish and verify support on the landing platform' };
+    }
+    return supportedOnLanding(scene, controlled) ? walk(scene.goal, 'Approach the exit from the observed supported pose') : null;
+  }
+  if (!contains(departure, pose)) return null;
+  const offShelf = entrance!.point[0] > shelf[2] ? controlled[0] > shelf[2] : controlled[2] < shelf[0];
+  if (!offShelf) return walk(entrance!.box, 'Move beyond the edge of the support to expose the opening below');
+  const pending = scene.endpoints.findIndex(endpoint => !placed(rows, endpoint));
+  if (pending >= 0) {
+    const endpoint = scene.endpoints[pending]!;
+    if (selected !== pending) return { kind: 'select', input: 'ACTION6', point: center(endpoint.button),
+      target: endpoint.button, index: pending, reason: 'Select the control for the second end of the link' };
+    return { kind: 'place', input: 'ACTION6', point: endpoint.point, target: endpoint.box, index: pending,
+      reason: pending ? 'Place the release opening facing the landing compartment' : 'Test placement on the opening below the falling sprite' };
+  }
+  if (pose[0] < entrance!.box[0] || pose[0] > entrance!.box[2]) {
+    return walk(entrance!.box, 'Align the falling sprite with the entrance');
+  }
+  return { kind: 'settle', input: 'ACTION2', index: 0, target: entrance!.box,
+    reason: 'Advance the fall with both openings placed and check for emergence in the other compartment' };
+}
+
+function supportedOnLanding(scene: Scene, pose: NativeBox) {
+  const [left, top, right] = scene.flight!.landing;
+  return pose[3] + scene.footGap! === top && pose[0] <= right && pose[2] >= left;
+}
+
+function fallReturn(proposal: Proposal, before: NativeRows, after: NativeRows): string | null {
+  const { local, choice, actor: first } = proposal;
+  const { scene, crossed } = local;
+  const { arrival, departure } = scene.flight!;
+  const second = actor(geometricComponents(after), scene);
+  if (!second) return null;
+  if (choice.kind === 'select' || choice.kind === 'place') {
+    return sameBounds(first, second) ? checked(proposal, before, after) : null;
+  }
+  if (!crossed && choice.kind === 'settle' && contains(arrival, center(second)) && scene.endpoints.every(endpoint => placed(after, endpoint))) {
+    return 'linked_crossing_observed';
+  }
+  if (!contains(crossed ? arrival : departure, center(second))) return null;
+  if (choice.kind === 'walk' && Math.sign(center(second)[0] - center(first)[0]) === choice.direction) {
+    return 'approach_displacement_observed';
+  }
+  if (choice.kind !== 'settle' || second[3] <= first[3]) return null;
+  if (!crossed) return 'fall_toward_link_observed';
+  return supportedOnLanding(scene, second) ? 'landing_support_observed' : 'flight_toward_support_observed';
+}
+
+function measuredRedirection(proposal: Proposal, frames: readonly NativeRows[]) {
+  const { scene } = proposal.local;
+  const { arrival, departure, releaseDirection } = scene.flight!;
+  const [entrance, exit] = scene.endpoints;
+  const positions = [proposal.actor, ...frames.map(rows => actor(geometricComponents(rows), scene)).filter(pose => pose !== null)];
+  const release = positions.findIndex(pose => contains(arrival, center(pose)));
+  if (release < 1) return null;
+  const entryPose = positions[release - 1]!, releasePose = positions[release]!;
+  if (!contains(departure, center(entryPose)) || entrance!.point[1] - entryPose[3] > width(entryPose) + scene.footGap!
+    || Math.abs(exit!.point[0] - center(releasePose)[0]) > width(releasePose) + 1) return null;
+  const departed = positions.slice(release + 1).some(pose => {
+    const dx = center(pose)[0] - center(releasePose)[0], dy = center(pose)[1] - center(releasePose)[1];
+    return Math.sign(dx) === releaseDirection && Math.abs(dx) > Math.abs(dy);
+  });
+  return departed ? { entry: entryPose, release: releasePose } : null;
+}
+
 function checked({ local, choice, actor: first }: Proposal, before: NativeRows, after: NativeRows): string | null {
   const endpoint = local.scene.endpoints[choice.index]!;
   if (choice.kind === 'select') {
@@ -394,16 +518,17 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const transfer = retained?.completed === observation.levels_completed ? retained : null;
       const scene = prior?.scene ?? discover(parts, rows)
-        ?? (transfer ? discoverRelay(parts, rows, transfer.scene) ?? discoverLoad(parts, rows, transfer.scene) : null);
+        ?? (transfer ? discoverRelay(parts, rows, transfer.scene) ?? discoverLoad(parts, rows, transfer.scene)
+          ?? discoverFallLink(parts, rows, transfer.scene) : null);
       if (!scene) return null;
       const setup = scene.endpoints.map(endpoint => endpointKey(rows, endpoint));
       const selectedIndex = setup.filter(Boolean).length === 1 ? setup.indexOf(true) : null;
       const local: State = prior ?? { epoch: observation.level_epoch, scene, selected: selectedIndex,
-        refs: (scene.relay || scene.load) && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
+        refs: (scene.relay || scene.load || scene.flight) && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
       const controlled = local.held ? scene.load!.standing : actor(parts, scene);
       if (!controlled) return null;
       const choice = scene.load ? loadChoice(local, rows, controlled, parts)
-        : scene.relay ? relayChoice(local, rows, controlled) : choose(local, rows, controlled);
+        : scene.relay ? relayChoice(local, rows, controlled) : scene.flight ? fallChoice(local, rows, controlled) : choose(local, rows, controlled);
       if (!choice || !observation.available_action_refs.includes(choice.input)) return null;
       const attempt = JSON.stringify([choice.kind, choice.index, choice.input, controlled, local.selected, ...(scene.relay ? [local.leg ?? 0] : [])]);
       if (local.rejected.includes(attempt)) return null;
@@ -424,7 +549,8 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       if (choice.point && !witness) return null;
       const parent = 'G_official_completion';
       const objective = { kind: scene.load ? 'delegate_support_to_transferred_load'
-        : scene.relay ? 'replace_links_along_the_route_to_exit' : 'link_opposite_openings_to_reach_exit', scope: ref.split(':revision:', 1)[0]!,
+        : scene.relay ? 'replace_links_along_the_route_to_exit' : scene.flight ? 'redirect_fall_into_exit_compartment'
+          : 'link_opposite_openings_to_reach_exit', scope: ref.split(':revision:', 1)[0]!,
         subjects: scene.load ? ['visible_openings', 'actor', 'load', 'support', 'passage', 'exit'] : ['visible_openings', 'control_symbols', 'actor', 'exit'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_crossing' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
@@ -437,11 +563,15 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: scene.load ? 'Keep the passage open after leaving the occupied support'
-          : scene.relay ? 'Link each reachable compartment on the way to the exit' : 'Link the two openings and reach the exit', situation: choice.reason, evidence,
+          : scene.relay ? 'Link each reachable compartment on the way to the exit'
+          : scene.flight ? 'Reach the exit platform by linking the fall to the wall opening'
+          : 'Link the two openings and reach the exit', situation: choice.reason, evidence,
           agenda: navigation?.entries ?? [], mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
           actor: controlled, target: choice.target, exit: scene.goal,
           ...(scene.load ? { load: loadAt(parts, rows, scene.load)[0] ?? null, loadControl: scene.load.button,
             support: scene.load.plate, passage: scene.load.gate } : {}),
+          ...(scene.flight ? { support: local.crossed ? scene.flight.landing : scene.flight.shelf,
+            ...(local.redirection ? { redirection: local.redirection } : {}) } : {}),
           openings: (scene.relay?.flatMap(leg => leg.pair) ?? scene.endpoints).map(endpoint => endpoint.box) },
         question: { reason: choice.reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: choice.reason, relations: ['contributes_to:' + parent] }],
@@ -458,16 +588,18 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const reason = proposal.local.scene.load ? loadReturn(proposal, first, second)?.reason
-        : proposal.local.scene.relay ? relayReturn(proposal, first, second) : checked(proposal, first, second);
+        : proposal.local.scene.relay ? relayReturn(proposal, first, second)
+        : proposal.local.scene.flight ? fallReturn(proposal, first, second) : checked(proposal, first, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'opening_effect_not_confirmed' };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, _index, frames) {
       const { local, choice } = proposal;
       if (after.levels_completed > before.levels_completed) {
-        if (local.scene.relay && retained && local.crossed) retained = {
+        if (retained && (local.scene.relay && local.crossed || local.scene.load && local.stationed
+          || local.scene.flight && local.crossed)) retained = {
           ...retained, completed: after.levels_completed, proof: after.observation_ref,
         };
-        if (!local.scene.relay && !local.scene.load && local.crossed && local.walkRef) retained = {
+        if (!local.scene.relay && !local.scene.load && !local.scene.flight && local.crossed && local.walkRef) retained = {
           completed: after.levels_completed, scene: local.scene, proof: after.observation_ref,
         };
         return { events: [] };
@@ -475,18 +607,24 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const loadEffect = local.scene.load ? loadReturn(proposal, first, second) : null;
       const reason = local.scene.load ? loadEffect?.reason
-        : local.scene.relay ? relayReturn(proposal, first, second) : checked(proposal, first, second);
+        : local.scene.relay ? relayReturn(proposal, first, second)
+        : local.scene.flight ? fallReturn(proposal, first, second) : checked(proposal, first, second);
+      const redirection = local.scene.flight && local.settleRef && reason === 'linked_crossing_observed'
+        ? measuredRedirection(proposal, frames) : null;
       state = { ...local,
         selected: reason && choice.kind === 'select' ? choice.index : local.selected,
         walkRef: reason && choice.kind === 'walk' ? after.observation_ref : local.walkRef,
         crossed: local.crossed || reason === 'linked_crossing_observed',
         ...(local.scene.relay && reason === 'linked_crossing_observed' ? { leg: (local.leg ?? 0) + 1 } : {}),
         ...(choice.kind === 'settle' && reason ? { settleRef: after.observation_ref } : {}),
+        ...(redirection ? { redirection } : {}),
         ...(choice.kind === 'take' && loadEffect ? { held: true } : {}),
         ...(loadEffect?.stationed ? { held: false, stationed: loadEffect.stationed } : {}),
         refs: reason ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         rejected: reason ? local.rejected : [...local.rejected, proposal.attempt] };
-      return { events: [] };
+      return { events: [], ...(redirection ? {
+        reviewEvidence: 'The intermediate frames show vertical descent into one opening and horizontal movement away from the other.',
+      } : {}) };
     },
     state: () => ({ state, retained }),
     restore(value: NativeRecord) {
