@@ -358,6 +358,9 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
     record(before, after, action, first, second, proposal) {
       if (isRoute(proposal)) {
         const { routeState: local, next } = proposal;
+        if (after.levels_completed > before.levels_completed && next.kind === 'finish' && boundary?.epoch === before.level_epoch) {
+          boundary = { ...boundary, epoch: after.level_epoch, before: before.observation_ref, after: after.observation_ref };
+        }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const energy = verifyInventoryReturn(local.scene, local.position, next, before, after, first, second);
         inventoryRoute = energy === null ? { ...local, stopped: true } : { ...local, position: { ...next.position, energy },

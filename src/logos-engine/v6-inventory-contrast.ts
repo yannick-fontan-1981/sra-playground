@@ -37,7 +37,7 @@ export function world_complements(facts:R,rows:NativeRows):R[]{
  return out.slice(0,8);
 }
 export function display_matches(receipt:R,rows:NativeRows):boolean{
- const [l,t,r,b]=receipt.display_bbox,mask=new Set<string>(receipt.source_mask.map(key)),value=receipt.source_value;
+ const [l,t,r,b]=receipt.display_bbox,mask=new Set<string>(receipt.source_mask.map(key)),value=receipt.display_value??receipt.source_value;
  for(let y=t;y<=b;y++)for(let x=l;x<=r;x++)if((rows[y]![x]===value)!==mask.has(key([x-l,y-t])))return false;return true;
 }
 export function reverse_transfer(receipt:R,before:R,after:R,first:NativeRows,second:NativeRows,facts:R):R{
