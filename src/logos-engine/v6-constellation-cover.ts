@@ -4,15 +4,17 @@ import { compareUnicode } from './canonical.ts';
 import { PointSet, pointKey, comparePoints, type Point } from './v6-point-set.ts';
 import { v6Digest } from './v6-native-observer.ts';
 import { measureRigidMarkerPoses, type RigidMarkerComponent } from './v6-rigid-marker-pose.ts';
-import type { NativePublicObservation, NativeRows } from './v6-native-types.ts';
+import type { NativeBox, NativePublicObservation, NativeRows } from './v6-native-types.ts';
 export type ConstellationRecord = Record<string, any>;
 export interface ConstellationObservation extends ConstellationRecord { entities: readonly ConstellationRecord[]; level_epoch: number; levels_completed: number; observation_ref: string; frame_hash: string; state: string }
 export interface ConstellationCommand extends ConstellationRecord { action_ref: string; data?: Record<string, number> }
 export interface ConstellationBody { color: number; mask: PointSet; pose: Point }
 export interface ConstellationSample { focus: Point; material: Map<number, PointSet> }
+export interface ConstellationMaterialRegion { color: number; box: NativeBox; interior: NativeBox }
 export interface ConstellationModel extends ConstellationRecord {
   targets: Map<number, PointSet>; marker_rows: Map<number, readonly ConstellationRecord[]>; background: number; excluded: PointSet; boundary_overlay: PointSet;
   marker_raster: Map<string, { point: Point; value: number }>; ring_widths: number[]; focus_color: number; focus_occlusion: PointSet; width: number; height: number;
+  materialRegions?: readonly ConstellationMaterialRegion[];
 }
 export const CONSTELLATION_NEIGHBORS: readonly Point[] = [-1, 0, 1].flatMap(x => [-1, 0, 1].flatMap(y => x || y ? [[x, y] as Point] : []));
 const keyOf = (value: unknown): string => JSON.stringify(value);
@@ -26,7 +28,8 @@ function same(a: any, b: any): boolean {
 function compare(a: any, b: any): number { if (Array.isArray(a) && Array.isArray(b)) { for (let i = 0; i < Math.min(a.length, b.length); i++) { const n = compare(a[i], b[i]); if (n) return n; } return a.length - b.length; } return typeof a === 'string' ? compareUnicode(a, b) : Number(a) - Number(b); }
 function gcd(a: number, b: number): number { a = Math.abs(a); b = Math.abs(b); while (b) [a, b] = [b, a % b]; return a; }
 
-export function measureConstellationLayout(observation: ConstellationObservation, rows: NativeRows): ConstellationModel | null {
+export function measureConstellationLayout(observation: ConstellationObservation, rows: NativeRows,
+  materialRegions: readonly ConstellationMaterialRegion[] = []): ConstellationModel | null {
   const rings: [number, number, number, number][] = [];
   for (const entity of observation.entities) {
     const [l, t, r, b] = entity.bbox, size = r - l + 1; if (size < 3 || size % 2 !== 1 || size !== b - t + 1 || entity.area !== size * size - 1) continue;
@@ -44,13 +47,19 @@ export function measureConstellationLayout(observation: ConstellationObservation
   if ([...targets.values()].some(points => points.size < 2)) return null;
   const counts = new Map<number, number>(); for (const row of rows.slice(1)) for (const value of row) counts.set(value, (counts.get(value) ?? 0) + 1);
   const background = [...counts].sort((a, b) => b[1] - a[1])[0]![0], height = rows.length, width = rows[0]!.length;
-  const semantic = new Set([background, ...targets.keys(), ...rings.map(ring => ring[3])]), boundary = new PointSet();
+  const materialColors = new Set([...targets.keys(), ...materialRegions.map(region => region.color)]);
+  if (materialRegions.length && ![...targets.keys()].every(color => materialRegions.some(region => region.color === color))) return null;
+  for (const { box: [l, t, r, b] } of materialRegions) {
+    for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) excluded.add([x, y]);
+  }
+  const semantic = new Set([background, ...materialColors, ...rings.map(ring => ring[3])]), boundary = new PointSet();
   for (const y of [0, height - 1]) if (rows[y]!.every(value => !semantic.has(value))) boundary.update(new PointSet(Array.from({ length: width }, (_, x) => [x, y])));
   for (const x of [0, width - 1]) if (rows.every(row => !semantic.has(row[x]!))) boundary.update(new PointSet(Array.from({ length: height }, (_, y) => [x, y])));
-  const hidden = excluded.union(boundary), singleton = observation.entities.filter(entity => entity.area === 1 && !hidden.has(entity.position) && !targets.has(entity.palette_value) && entity.palette_value !== background);
+  const hidden = excluded.union(boundary), singleton = observation.entities.filter(entity => entity.area === 1 && !hidden.has(entity.position) && !materialColors.has(entity.palette_value) && entity.palette_value !== background);
   if (singleton.length !== 1) return null;
   return { targets, marker_rows: markerRows, background, excluded, boundary_overlay: boundary, marker_raster: new Map([...excluded].map(point => [pointKey(point), { point, value: rows[point[1]]![point[0]]! }])),
-    ring_widths: [...new Set(rings.map(ring => ring[2]))].sort((a, b) => a - b), focus_color: singleton[0]!.palette_value, focus_occlusion: new PointSet([[0, 0]]), width, height };
+    ring_widths: [...new Set(rings.map(ring => ring[2]))].sort((a, b) => a - b), focus_color: singleton[0]!.palette_value, focus_occlusion: new PointSet([[0, 0]]), width, height,
+    ...(materialRegions.length ? { materialRegions } : {}) };
 }
 export function constellationFocusLoci(rows: NativeRows, model: ConstellationModel): Point[] {
   const points: Point[] = []; rows.forEach((row, y) => row.forEach((value, x) => { if (value === model.focus_color && !model.boundary_overlay.has([x, y]) && model.marker_raster.get(pointKey([x, y]))?.value !== model.focus_color) points.push([x, y]); })); return points;
@@ -64,7 +73,8 @@ export function constellationCursorAt(rows: NativeRows, model: ConstellationMode
 }
 export function constellationMaterial(rows: NativeRows, model: ConstellationModel): Map<number, PointSet> {
   const result = new Map<number, PointSet>(), excluded = model.excluded.union(model.boundary_overlay);
-  for (const color of model.targets.keys()) { const pixels = new PointSet(); rows.forEach((row, y) => row.forEach((value, x) => { if (value === color && !excluded.has([x, y])) pixels.add([x, y]); })); result.set(color, pixels); } return result;
+  const colors = new Set([...model.targets.keys(), ...(model.materialRegions ?? []).map(region => region.color)]);
+  for (const color of colors) { const pixels = new PointSet(); rows.forEach((row, y) => row.forEach((value, x) => { if (value === color && !excluded.has([x, y])) pixels.add([x, y]); })); result.set(color, pixels); } return result;
 }
 export function* constellationComponents(points: PointSet): IterableIterator<PointSet> {
   const left = points.copy(); while (left.size) { const part = new PointSet([left.pop()]), queue = [...part];
@@ -75,8 +85,9 @@ export function acquireConstellation(samples: readonly ConstellationSample[], mo
   if (samples.length < 3) return null; const base = samples[0]!.focus, offsets = samples.slice(1).map(sample => constellationMinus(sample.focus, base));
   if (!offsets.some(a => offsets.some(b => a[0] * b[1] !== a[1] * b[0]))) return null;
   const candidates: ConstellationBody[] = [];
-  for (const color of model.targets.keys()) {
+  for (const color of samples[0]!.material.keys()) {
     const evidence = new PointSet(); for (const sample of samples) evidence.update(new PointSet([...sample.material.get(color)!].map(point => constellationMinus(point, sample.focus))));
+    if (model.materialRegions) evidence.update(new PointSet([...evidence].map(([x, y]) => [-x, -y])));
     let possible = evidence.union(new PointSet([[0, 0]]));
     for (const sample of samples) { const allowed = new PointSet(); for (const points of sample.material.values()) allowed.update(points);
       const field = allowed.union(model.excluded, new PointSet([...model.focus_occlusion].map(point => constellationPlus(sample.focus, point))));
@@ -84,7 +95,8 @@ export function acquireConstellation(samples: readonly ConstellationSample[], mo
     if (CONSTELLATION_NEIGHBORS.filter(point => possible.has(point)).length < 2) possible.delete([0, 0]);
     for (const part of constellationComponents(possible)) {
       if (part.size < 3) continue; const l = Math.min(...[...part].map(p => p[0])), r = Math.max(...[...part].map(p => p[0])), t = Math.min(...[...part].map(p => p[1])), b = Math.max(...[...part].map(p => p[1]));
-      if (l + r === 0 && t + b === 0) candidates.push({ color, mask: part, pose: samples.at(-1)!.focus });
+      if (l + r === 0 && t + b === 0 && (!model.materialRegions || [...part].some(point => samples.some(sample =>
+        sample.material.get(color)!.has(constellationPlus(point, sample.focus)))))) candidates.push({ color, mask: part, pose: samples.at(-1)!.focus });
     }
   }
   return candidates.length === 1 ? candidates[0]! : null;

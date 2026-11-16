@@ -140,9 +140,9 @@ export function startRoomRoute(rows: NativeRows, grid: Grid): RoomRoute | null {
   const home = rooms.length === 1 ? rooms[0] : undefined;
   if (!home || !inBox(grid.start, home.box) || inBox(grid.goal, home.box) || home.controls.length < 3) return null;
   const close = home.controls.filter(point => contactDirections.some(direction => same(shiftTile(grid.start, direction, grid.side), point)));
-  if (close.length !== 1) return null;
   const resources = measureResources(rows, grid);
-  return { grid, rooms, phase: 'release_home', control: close[0]!, tried: [], capacity: null, passage: null, stopped: false,
+  if (!resources && close.length !== 1) return null;
+  return { grid, rooms, phase: 'release_home', control: (close[0] ?? home.controls[0])!, tried: [], capacity: null, passage: null, stopped: false,
     ...(resources ? { resources } : {}) };
 }
 
