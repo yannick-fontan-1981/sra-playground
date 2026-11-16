@@ -1171,3 +1171,14 @@ Les durées sont les moyennes de deux passages à un worker et sans profileur, d
 | Total | 42,838 s | 42,292 s | +1,3 % |
 
 Le niveau 3 est plus lent dans les deux passages. Le niveau 4 varie dans les deux sens selon l’ordre du passage. Les **526 commandes et leurs retours complets** et les empreintes du graphe à chaque fin de niveau concordent sur GABA, LS19 et LS20, du niveau 1 au niveau 4. Le typage TypeScript et **199 tests** passent.
+
+### Planning SIC et RESET du niveau courant
+
+Planning propose **SIC** et **SIC Fallback**. En Fallback, la sélection repère la première famille de résolution admise en dehors de l’exploration publique, retire cette famille avant d’émettre une commande et demande une nouvelle sélection sous autorité SIC. Sur GABA niveau 1, elle retire `sic_pivot_cargo` et émet la première commande de `sic_verify_coupled_route`. Un test fait enchaîner deux commandes dans le même préfixe de la famille de repli.
+
+**Reset level** appelle la remise à zéro native à une frontière acquise. Le niveau et les victoires antérieures sont vérifiés. L'agent conserve sa session et l’historique du graphe, enregistre RESET puis repart de l’état de planification retenu à l’entrée du niveau au prochain Run.
+
+- Sur **GABA niveau 5**, la session gagne les quatre premiers niveaux en 239 commandes. Après la première action du niveau 5, RESET restaure l’image d’entrée du niveau 5 et les quatre victoires. La même session reprend avec la commande 241.
+- Sur **BP35 niveau 2**, deux clics en **(20, 32)** provoquent le contact avec le piège violet et `GAME_OVER`. RESET restaure l’image d’entrée du niveau 2 et la victoire du niveau 1. Le rejeu de ce contact sur le moteur officiel, avec le contrôleur SIC, conserve le retour fatal dans la même session.
+
+Le typage TypeScript et **38 tests** du contrôleur, du moteur et des frontières d’acquisition passent. L’[audit des actions continues](sic-v8-continuous-actions-audit.md) couvre les 100 premiers niveaux.

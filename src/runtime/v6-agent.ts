@@ -31,6 +31,7 @@ export interface V6AgentSnapshot extends V6BackendSnapshot {
   pendingAction: AgentAction | null;
   canStep: boolean;
   canRun: boolean;
+  canResetLevel: boolean;
   paused: boolean;
   busy: boolean;
   requiresNewSession: boolean;
@@ -44,6 +45,7 @@ export interface V6AgentHost {
   recoveryConfiguration?(): import('../sic/active-recovery.ts').RecoveryPack;
   /** Serialize one native command and await its final public visual observation. */
   dispatch(action: AgentAction): Promise<V6DispatchResult>;
+  resetLevel?(): Promise<GameObservation>;
   onState(snapshot: V6AgentSnapshot): void;
   /** Optional host checkpoint, after acquiring the return and before the next action. */
   onAcquired?(snapshot: V6AgentSnapshot): void;
@@ -142,6 +144,8 @@ export class BrowserV6Agent {
     const current = this.host.getObservation();
     const problem = this.entryProblem(current);
     const canStep = !this.disposed && !this.operation && !this.requiresNewSession && this.host.canDispatch() && !problem;
+    const canResetLevel = !this.disposed && !this.operation && !!this.sessionId && !!this.observed
+      && !!this.knowledge.canResetLevel && !!this.host.resetLevel && this.host.canDispatch() && this.status !== 'error';
     let pendingAction: AgentAction | null = null;
     if (this.pending?.kind === 'action' && this.pending.command) {
       try { pendingAction = nativeV6Action(this.pending.command); } catch { /* Invalid replies never dispatch. */ }
@@ -151,6 +155,7 @@ export class BrowserV6Agent {
       message: !this.operation && !this.requiresNewSession && problem ? problem : this.message,
       actionCount: this.actionCount, sequence: this.sequence, sessionId: this.sessionId,
       phase: this.pending?.phase ?? null, pendingAction, canStep, canRun: canStep,
+      canResetLevel,
       paused: this.status === 'paused', busy: this.operation !== null, requiresNewSession: this.requiresNewSession,
       actionsPerLevel: this.actionsPerLevel, targetLevels: this.targetLevels,
     });
@@ -395,6 +400,39 @@ export class BrowserV6Agent {
     this.state('paused', !this.operation ? 'Paused. The V6 plan and acquired evidence are retained.'
       : this.phase === 'acting' || this.phase === 'observing' ? 'Pausing after the engaged action and its real outcome…'
         : 'Pausing at the next V6 action boundary. The current computation will finish safely…');
+  }
+
+  /** Reset is an explicit host control. The agent resumes only on the next Run. */
+  resetLevel(): Promise<void> {
+    if (!this.snapshot.canResetLevel) return Promise.resolve();
+    const epoch = this.epoch, sessionId = this.sessionId!, before = this.observed!;
+    let operation: Promise<void>;
+    operation = Promise.resolve().then(async () => {
+      this.assertFresh(before, epoch);
+      this.phase = 'acting';
+      this.state('acting', 'Resetting the current level…');
+      const returned = await this.host.resetLevel!();
+      if (!this.stillCurrent(epoch)) return;
+      const next = toV6PublicObservation(returned, this.sequence);
+      if (returned.gameCode !== this.gameCode || !sameV6Observation(next, this.host.getObservation())) {
+        throw new V6AgentError('stale', 'The displayed board does not match the level reset.');
+      }
+      this.phase = 'observing';
+      if (!await this.request({ type: 'reset_level', sessionId, sequence: this.sequence, observation: next }, epoch)) return;
+      this.observed = next;
+      this.requiresNewSession = false;
+      this.stopRequested = false;
+      this.state('paused', 'Level reset. Previous evidence is retained. Run to plan from the reset board.');
+    }).catch(error => {
+      if (!this.stillCurrent(epoch)) return;
+      this.requiresNewSession = true;
+      this.state('error', error instanceof Error ? error.message : String(error));
+    }).finally(() => {
+      if (this.operation === operation) { this.operation = null; this.phase = null; this.emit(); }
+    });
+    this.operation = operation;
+    this.emit();
+    return operation;
   }
 
   invalidate(reason: string): void {

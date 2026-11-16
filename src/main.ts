@@ -169,11 +169,12 @@ app.innerHTML = `
               <h3>Solve with SRA.</h3>
               <p id="agent-message" class="agent-message" role="status" aria-live="polite" aria-atomic="true" tabindex="0">Ready to run from level 1.</p>
               <label for="agent-planning">Planning</label>
-              <select id="agent-planning"><option value="native">SRA AgentNative TS</option><option value="sic">SIC only</option></select>
+              <select id="agent-planning"><option value="sic">SIC</option><option value="sic-fallback">SIC Fallback</option></select>
               <div class="agent-run-controls">
                 <button id="agent-run" type="button" class="primary-button">Run to next level</button>
                 <button id="agent-batch" type="button" class="secondary-button">Run 16 actions</button>
                 <button id="agent-step" type="button" class="secondary-button">One action</button>
+                <button id="agent-reset-level" type="button" class="secondary-button" hidden>Reset level</button>
                 <button id="agent-pause" type="button" class="secondary-button agent-pause-wide" disabled>Pause</button>
               </div>
               <div id="agent-sic-review" hidden>
@@ -463,8 +464,24 @@ function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: st
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
-  recoveryConfiguration: () => element<HTMLSelectElement>('#agent-planning').value === 'sic'
-    ? { ...defaultRecoveryPack, solver: 'sic' } : recoveryConfiguration(),
+  resetLevel: async () => {
+    const generation = selectionGeneration;
+    busy = true;
+    updateInterface();
+    try {
+      const next = await runtime.reset();
+      await present(next, generation);
+      return next;
+    } catch (error) {
+      if (generation === selectionGeneration) { busy = false; updateInterface(); }
+      throw error;
+    }
+  },
+  recoveryConfiguration: () => {
+    const { maxDepth, maxNodes } = recoveryConfiguration();
+    const solver = element<HTMLSelectElement>('#agent-planning').value === 'sic-fallback' ? 'sic-fallback' : 'sic';
+    return { ...defaultRecoveryPack, maxDepth, maxNodes, solver };
+  },
   dispatch: async action => {
     if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(action.id)) {
       throw new Error('The game changed before the action could be sent.');
@@ -591,9 +608,8 @@ function updateSicModeLabel(): void {
   const recoveryStop = mode === 'agent' && state?.status === 'stopped' && isRecoveryStop(state.reason) ? state.reason : null;
   const label = recoveryStop === 'sic_recovery_shadow' ? 'Contact recovery observed in shadow'
     : recoveryStop ? 'Contact recovery limited'
-    : mode === 'agent' && element<HTMLSelectElement>('#agent-planning').value === 'sic' ? 'SIC only'
     : mode === 'agent' && selectedGame.code === 'AS66' && element<HTMLInputElement>('#agent-sic-pause').checked ? 'Pause for review enabled'
-    : mode === 'agent' && state?.sessionId ? 'Native agent and SIC'
+    : mode === 'agent' ? (element<HTMLSelectElement>('#agent-planning').value === 'sic-fallback' ? 'SIC Fallback' : 'SIC')
     : 'Read-only preview';
   if (sicModeLabel.textContent !== label) sicModeLabel.textContent = label;
 }
@@ -618,6 +634,9 @@ function updateAgentInterface(): void {
   confirm.hidden = !reviewing;
   confirm.disabled = !reviewing || !available || !state?.canRun;
   element<HTMLButtonElement>('#agent-pause').disabled = !state?.busy;
+  const resetLevel = element<HTMLButtonElement>('#agent-reset-level');
+  resetLevel.hidden = mode !== 'agent' || !state?.canResetLevel;
+  resetLevel.disabled = !state?.canResetLevel;
   element<HTMLButtonElement>('#agent-new-session').disabled = !ready() || Boolean(state?.busy);
   element<HTMLButtonElement>('#agent-restart').disabled = !ready() || Boolean(state?.busy);
   element('#agent-unsupported').hidden = !needsRestart && !recoveryStop;
@@ -881,6 +900,7 @@ element('#agent-run').addEventListener('click', () => {
 });
 element('#agent-batch').addEventListener('click', () => { if (!contradictionReview) void agent.run(16); });
 element('#agent-pause').addEventListener('click', () => agent.pause());
+element('#agent-reset-level').addEventListener('click', () => { contradictionReview = null; void agent.resetLevel(); });
 element('#agent-sic-pause').addEventListener('change', updateAgentInterface);
 element('#agent-sic-resume').addEventListener('click', () => {
   if (!contradictionReview || !agentState?.canRun || element<HTMLButtonElement>('#agent-sic-resume').disabled) return;

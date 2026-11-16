@@ -244,6 +244,24 @@ export class V6AgentService {
         return this.accept(yielded);
       }
       if (operation.sequence !== this.sequence) throw new V6AgentError('stale', 'The native solver observation sequence has changed.');
+      if (operation.type === 'reset_level') {
+        if (this.pending || !this.result.snapshot.canResetLevel || !this.backend.resetLevel) {
+          throw new V6AgentError('invalid', 'Reset requires an acquired level boundary without an outstanding command.');
+        }
+        const packet = validateV6PublicObservation(operation.observation);
+        if (packet.stepIndex !== this.sequence || packet.level !== this.current.level
+          || packet.levelsCompleted !== this.current.levels_completed || packet.state !== 'NOT_FINISHED') {
+          throw new V6AgentError('stale', 'The reset did not restore the current level and completed score.');
+        }
+        const observation = await nativeObservation(packet);
+        this.checkSignal(signal);
+        backendWork = true;
+        const yielded = await this.backend.resetLevel(observation, this.execution(signal));
+        this.checkSignal(signal);
+        if (yielded.kind !== 'boundary') throw new V6AgentError('invalid', 'A reset does not release a command.');
+        this.current = observation;
+        return this.accept(yielded);
+      }
       if (operation.type === 'close') {
         backendWork = true;
         await this.backend.close('host_session_closed'); this.closed = true; this.pending = null;

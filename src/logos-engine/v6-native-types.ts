@@ -265,6 +265,7 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly sourceCommit: string;
   readonly sourceDigest: string;
   readonly proposal: unknown;
+  readonly canResetLevel?: boolean;
   readonly graphChain?: string;
   readonly graphRevision?: number;
   readonly nativeExecutionDigest?: string;
@@ -335,6 +336,7 @@ export interface NativeV6Backend {
   readonly sourceDigest: string;
   initialize(input: NativeInitialize, execution: NativeExecution): Promise<NativeRuntimeYield>;
   advance(outcome: NativeOutcome, execution: NativeExecution): Promise<NativeRuntimeYield>;
+  resetLevel?(observation: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield>;
   resume(execution: NativeExecution): Promise<NativeRuntimeYield>;
   snapshot(): NativeRuntimeSnapshot;
   /** Opt-in read of current authority; backends without it retain snapshot validation. */

@@ -204,7 +204,8 @@ import type { NativeSrcReceipt } from './v6-src-program.ts';
 import { arrayValue, immutableJson, objectValue, stringValue } from './canonical.ts';
 import { NativeKnowledgeStore, NATIVE_STORE_PROFILE } from './v6-knowledge-store.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
-import type { DeltaCause, KnowledgeMemory } from './kernel.ts';
+import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
+import { hydrateNativeState } from './v6-native-state-graph.ts';
 import { NativeEditRejected } from './v6-native-types.ts';
 import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
@@ -332,6 +333,7 @@ export interface NativeV6RuntimeConfiguration {
   sicView?: 'shadow' | 'active';
   sicInformation?: 'shadow' | 'active';
   familyAgenda?: FamilyAgendaMode;
+  withdrawPrimaryFamily?: boolean;
   adaptiveReasoning?: boolean;
   openingCuriosity?: import('../sic/opening-curiosity.ts').OpeningCuriosityMode;
   informationPreference?: import('../sic/information-preference.ts').InformationPreference;
@@ -354,6 +356,8 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly sicView?: 'shadow' | 'active';
   private readonly sicInformation?: 'shadow' | 'active';
   private readonly familyAgenda?: FamilyAgendaMode;
+  private readonly withdrawPrimaryFamily: boolean;
+  private withdrawnPrimaryFamily: string | null = null;
   private readonly adaptiveReasoning: boolean;
   private readonly openingCuriosity?: import('../sic/opening-curiosity.ts').OpeningCuriosityMode;
   private readonly informationPreference?: import('../sic/information-preference.ts').InformationPreference;
@@ -369,6 +373,8 @@ export class NativeV6Runtime implements NativeV6Backend {
   private omittedClickReturns = 0;
   private prefix: Prefix | null = null;
   private actions = 0;
+  private resetCount = 0;
+  private levelStart: { level: number; families: readonly KnowledgeNode[] } | null = null;
   private sicFamilyActions = 0;
   private readonly sicActionCoverage: Record<Exclude<keyof SicActionCoverage, 'sicOnly'>, number> & { sicOnly?: number } = {
     contactRecovery: 0, configurableFrontier: 0, fixedFrontier: 0, viewAccess: 0, information: 0, native: 0,
@@ -429,6 +435,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.sicView = configuration.sicView;
     this.sicInformation = configuration.sicInformation;
     this.familyAgenda = configuration.familyAgenda;
+    this.withdrawPrimaryFamily = configuration.withdrawPrimaryFamily === true;
     this.adaptiveReasoning = configuration.adaptiveReasoning === true;
     this.openingCuriosity = configuration.openingCuriosity;
     this.informationPreference = configuration.informationPreference;
@@ -598,6 +605,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     const reason = this.budgetReason();
     if (reason) { this.stop(reason); return; }
     if (!this.current || !this.observation) throw new Error('No public native observation');
+    if (!this.caller) this.rememberLevelStart();
     // Family instances are working copies. Persisted nodes, not object caches,
     // determine every new plan, including across natural level transitions.
     this.restoreFamilies();
@@ -616,6 +624,19 @@ export class NativeV6Runtime implements NativeV6Backend {
     const inputs = this.domain.candidates(this.observation);
     const obligations = (await Promise.all(this.families.map(family => family.preservationObligations?.(this.observation!, this.current!.frame_rows) ?? []))).flat();
     let selected = await this.selectAdmittedFamily(execution, inputs);
+    if (this.withdrawPrimaryFamily && !this.withdrawnPrimaryFamily && selected?.proposal.status === 'proposed'
+      && selected.family.id !== publicInputExplorationId) {
+      const family = selected.family.id;
+      const write: NativeStoreWrite = { id: `family_activation:${family}`, kind: 'family_activation', family, value: { enabled: false } };
+      const digest = await this.knowledge!.executionDigest([write]);
+      this.check(execution);
+      await this.knowledge!.commit([write], { workflow: SELECTION_PROGRAM, step: 'selection', statement: 'sic_fallback.withdraw_primary_family' });
+      this.executionDigest = digest;
+      this.withdrawnPrimaryFamily = family;
+      this.note({ kind: 'sic_fallback_primary_withdrawn', family, observation_ref: this.observation.observation_ref });
+      this.restoreFamilies();
+      selected = await this.selectAdmittedFamily(execution, inputs);
+    }
     if (selected && this.caller) {
       let [protectedProposal, rejected] = this.caller.protect(selected.proposal, obligations, this.observation, this.current.frame_rows);
       if (rejected.length) {
@@ -1465,7 +1486,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.familyAgendaReceipt?.mode === 'active') this.sicFamilyActions += 1;
     this.actions += 1; this.levelActions.set(first.level, (this.levelActions.get(first.level) ?? 0) + 1); this.current = freeze(structuredClone(outcome.observation));
     await this.timed(first.level, async () => {
-      this.observation = freeze(await measureNativeObservation(this.current!, this.actions + 1, this.sessionId));
+      this.observation = freeze(await measureNativeObservation(this.current!, this.actions + this.resetCount + 1, this.sessionId));
       const after = this.observation;
       let result = await prefix.family.after(prefix.proposal, prefix.index, before, after, first.frame_rows, this.current!.frame_rows);
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
@@ -1726,7 +1747,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     // and GAME_OVER take precedence over an experimental stop request.
     const officialStop = this.current!.levels_completed >= this.budgets!.targetLevels
       || ['WIN', 'GAME_OVER'].includes(this.current!.state);
-    const sourceStop = this.families.map(family => family.requestedStopReason?.(this.observation!) ?? null)
+    const sourceStop = this.families.map(family => family.id === this.withdrawnPrimaryFamily ? null : family.requestedStopReason?.(this.observation!) ?? null)
       .find(reason => reason !== null) ?? null;
     const parent = this.caller?.attention.composition;
     const parentStop = parent?.owner === TYPED_MATERIAL_COMPOSITION_OWNER && parent.status === 'pending' && parent.binding?.phase === 'suspended'
@@ -2162,6 +2183,47 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.prefix = null; await this.timed(this.current.level, () => this.plan(execution)); return this.output();
   }
 
+  private rememberLevelStart(): void {
+    const level = this.current!.level;
+    if (this.levelStart?.level === level) return;
+    this.levelStart = { level, families: this.families.map(family => this.knowledge!.node(`family_state:${family.id}`)) };
+  }
+
+  private canResetCurrentLevel(): boolean {
+    return !this.caller && !this.closed && !this.editing && this.kind !== 'action' && !!this.current && !!this.budgets
+      && this.current.state !== 'WIN' && this.current.levels_completed < this.budgets.targetLevels;
+  }
+
+  /** RESET is a host control at an acquired boundary. It retains the physical
+   * return and restores planning state from the entry of this same level. */
+  async resetLevel(packet: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield> {
+    this.check(execution);
+    const before = this.observation, current = this.current, knowledge = this.knowledge;
+    if (!this.canResetCurrentLevel() || !before || !current || !knowledge
+      || packet.level !== current.level || packet.levels_completed !== current.levels_completed
+      || packet.step_index !== current.step_index || packet.state !== 'NOT_FINISHED' || !packet.available_action_refs.length) {
+      throw new Error('RESET must return the same unfinished level at the current acquired boundary');
+    }
+    this.rememberLevelStart();
+    const next = freeze(structuredClone(packet));
+    const measured = freeze(await measureNativeObservation(next, this.actions + this.resetCount + 2, this.sessionId));
+    const writes: NativeStoreWrite[] = this.levelStart!.families.map(node => ({
+      id: node.id, kind: 'family_state', family: node.family as string,
+      value: hydrateNativeState(node.value, id => knowledge.memory.nodes[id]?.value),
+    }));
+    const receipt = { observation_ref: measured.observation_ref, before_observation_ref: before.observation_ref,
+      level: next.level, levels_completed: next.levels_completed, action_ref: 'RESET', after_packet: next };
+    writes.push({ id: `reasoning:level-reset:${measured.revision}`, kind: 'component_state', component: 'public_level_reset',
+      status: 'observed', value: receipt, evidence: [before.observation_ref, measured.observation_ref] });
+    this.check(execution);
+    await knowledge.commit(writes, { workflow: SELECTION_PROGRAM, step: 'recovery', statement: 'official_level_reset' });
+    this.current = next; this.observation = measured; this.resetCount++;
+    this.prefix = null; this.kind = 'boundary'; this.reason = null;
+    this.latestReasoningReturn = null; this.observedQueue = undefined; this.lastClickReturn = null;
+    this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref });
+    return this.output();
+  }
+
   private restoreFamilies(): void {
     if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
     for (const family of this.families) {
@@ -2270,6 +2332,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       // detached copies; worker transport still copies each complete response.
       activeSeconds: (this.elapsedMs + this.runningMs()) / 1000, lastDecision: this.lastFamily, trace: this.trace.slice(), reason: this.reason,
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
+      canResetLevel: this.canResetCurrentLevel(),
       ...(this.lastClickReturn ? { lastClickReturn: this.lastClickReturn } : {}),
       ...(reviews.length ? { victoryReviews: reviews } : {}),
       ...(this.clickReturns.length ? { clickReturns: this.clickReturns, omittedClickReturns: this.omittedClickReturns } : {}),
@@ -2673,7 +2736,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const loaded = declarations ?? await loadNativeV6Declarations();
   const symmetry = loaded.strategy.declarations[0]?.configuration.regular_field_correspondence;
   if (!symmetry || !loaded.common.ordered_support_transfer || !loaded.common.input_domain) throw new Error('Incomplete native V6 declarations');
-  if (recovery.solver === 'sic') {
+  if (recovery.solver === 'sic' || recovery.solver === 'sic-fallback') {
     const configuration = loaded.strategy.declarations[0]!.configuration;
     const policy = configuration.observed_composition_services.rooted_line_question;
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
@@ -2701,7 +2764,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicOrderedReplenishment(), createSicOrderedReplenishment(learnOrderedReplenishmentId), createSicVerifyPreviewPlacement(), createSicSymbolContribution(), createSicVerifyMarkedLattice(),
       createSicQueuedPlacement(), createSicQueuedPlacement(learnQueuedPlacementId), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVerifyPatternChoice(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId), createSicChartRoute(), createSicChartRoute(learnChartRouteId), createSicVerifyReferencePlacement(), createSicCarryToFrame(), createSicCarryToFrame(learnCarryToFrameId), createSicPortPairing(), createSicPortPairing(learnPortPairingId), createSicFollowStableReference(), createSicVerifySequenceEdits(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicDirectionalReception(learnDirectionalReceptionId), createSicWindowCoverage(), createSicWindowCoverage(learnWindowCoverageId), createSicVerifyPanelConfiguration(), createSicVerifyCrossingRows(), createSicVerifyTraceCoverage(), createSicRadialConnection(), createSicRadialConnection(learnRadialConnectionId), createSicVerifyCaptureRoute(), createSicVerifyBranchAlignment(), createSicVerifyOrderedFeedback(), createSicCatalogueComparison(), createSicCatalogueComparison(revealedExampleId), createSicReceptionAccess(), createSicVerifyMarkerPlacement(), createSicFramedReception(), createSicFramedReception(learnFramedReceptionId), createSicWindowRelation(), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicReflectedPlacement(coordinateObservedMotionId), createSicMaterialAssembly(), createSicMaterialAssembly(learnMaterialAssemblyId), createSicTranslateCoupledPieces(), createSicVerifyCoupledRoute(), createSicVerifyConnectedRoute(), createSicVerifyInventoryTransfer(), createSicVerifyRemoteReplay(), createSicVerifyOrientedDelivery(), createSicIndicatedJump(), createSicIndicatedJump(learnIndicatedJumpId), createSicHighlightedRoute(), createSicHighlightedRoute(learnHighlightedRouteId), createSicPairedPassage(), createSicPairedPassage(learnPairedPassageId), createSicVerifyFrameContact(), createSicSwitchedSurface(), createSicSwitchedSurface(learnSwitchedSurfaceId), createSicVerifyGaugeEffect(), createSicCoupledGaugeRoute(), createSicVerifyReactiveMotion(), createSicVerifyChannelAccess(), createSicVerifyCompartmentGrowth(), createSicVerifyPointAccess(), createSicMergeForDemand(), createSicVerifyLinkedMotion(), createSicLinkedGroupRoute(), createSicVerifyRemovableSupport(), createSicProtectGravityRoute(), createSicGatedCascade(), createSicGatedCascade(learnCascadeId), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicLitRoute(learnLitRouteId), createSicPivotCargo(), createSicPivotCargo(learnPivotCargoId), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicNestedPassage(learnNestedPassageId), createSicLinkOpenings(), createSicLinkOpenings(learnLinkOpeningsId), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicArrangeTurnPosts(learnTurnPostsId), createSicCavityAccess(), createSicLearnCorrespondence(), createSicLearnCorrespondence(learnRepeatedCellsId), createSicCompareAvailableControls(), createSicPublicInputExploration(), createSicRecheckDirectionalControls(), createSicTrialRepeatedLinearControls(), createSicContrastControls(contrastProbeId),
     ],
-      authorityPolicy: loaded.common, familyAgenda: 'active', adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
+      authorityPolicy: loaded.common, familyAgenda: 'active', withdrawPrimaryFamily: recovery.solver === 'sic-fallback',
+      adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
   }
   // Each selected proposal is returned only to the family that created it.

@@ -256,6 +256,66 @@ test('native runtime defers family recording until a sealed prefix and ignores p
   assert.equal(result.kind, 'boundary'); assert.deepEqual(records, [0, 1]); assert.equal(result.snapshot.activeSeconds, 0.012);
 });
 
+test('SIC Fallback withdraws the admitted family before any of its commands is released', async () => {
+  const family = (id: string, action_ref: string, length: number): NativeFamily => ({
+    id,
+    propose: () => ({ status: 'proposed', kind: id, actions: Array.from({ length }, () => ({ action_ref, data: {} })),
+      steps: Array.from({ length }, () => ({ expected_after: null })) }),
+    before: () => ({ admitted: true, reason: 'current' }),
+    after: (_proposal, index) => ({ matched: true, seal_prefix: index + 1 === length, reason: 'observed' }),
+    record: () => ({ events: [] }), state: () => ({}), restore: () => {},
+  });
+  const backend = new NativeV6Runtime({ families: [family('primary', 'ACTION1', 1), family('recovery', 'ACTION2', 2)],
+    maxPointOccurrences: 250, sourceDigest: 'test-fallback', withdrawPrimaryFamily: true });
+  const service = new V6AgentService(() => backend);
+  const first = await service.handle({ ...init(), observation: toV6PublicObservation({ ...board(), availableActionIds: [1, 2] }) });
+  assert.equal(first.command?.actionRef, 'ACTION2');
+  const withdrawal = (first.snapshot.trace as Record<string, unknown>[]).find(event => event.kind === 'sic_fallback_primary_withdrawn');
+  assert.equal(withdrawal?.family, 'primary');
+  const second = await service.handle({ type: 'advance', sessionId: first.sessionId, sequence: 1, ticketId: first.ticket!.id,
+    observation: toV6PublicObservation({ ...board(1), availableActionIds: [1, 2] }, 1), executionMs: 1 });
+  assert.equal(second.command?.actionRef, 'ACTION2');
+  assert.equal(second.ticket?.decisionRevision, first.ticket?.decisionRevision);
+  assert.equal(second.ticket?.actionIndex, 1);
+});
+
+test('an acquired loss can RESET the current level, retain evidence and replan from its entry', async () => {
+  let state = 0;
+  const family: NativeFamily = {
+    id: 'reset-test',
+    propose: () => ({ status: 'proposed', kind: 'reset-test', actions: [{ action_ref: 'ACTION1', data: {} }], steps: [{}] }),
+    before: () => ({ admitted: true, reason: 'current' }),
+    after: () => ({ matched: false, seal_prefix: true, reason: 'observed_loss' }),
+    record: () => { state++; return { events: [] }; }, state: () => ({ state }), restore: value => { state = value.state as number; },
+  };
+  const backend = new NativeV6Runtime({ families: [family], maxPointOccurrences: 250, sourceDigest: 'test-level-reset' });
+  const service = new V6AgentService(() => backend);
+  const startingBoard = board();
+  const first = await service.handle(init());
+  await assert.rejects(service.handle({ type: 'reset_level', sessionId: first.sessionId, sequence: 0,
+    observation: toV6PublicObservation(startingBoard, 0) }), /outstanding command/);
+  const lost = await service.handle({ type: 'advance', sessionId: first.sessionId, sequence: 1, ticketId: first.ticket!.id,
+    observation: toV6PublicObservation({ ...board(1), state: 'GAME_OVER' }, 1), executionMs: 1 });
+  assert.equal(lost.kind, 'stopped');
+  assert.equal(lost.snapshot.canResetLevel, true);
+  assert.equal(lost.snapshot.actions, 1);
+  const failedGraph = backend.inspectKnowledge();
+  await assert.rejects(service.handle({ type: 'reset_level', sessionId: first.sessionId, sequence: 1,
+    observation: toV6PublicObservation({ ...startingBoard, level: 2, levelsCompleted: 1 }, 1) }), /current level/);
+  const reset = await service.handle({ type: 'reset_level', sessionId: first.sessionId, sequence: 1,
+    observation: toV6PublicObservation(startingBoard, 1) });
+  assert.equal(reset.kind, 'boundary');
+  assert.equal(reset.snapshot.actions, 1);
+  assert.equal(reset.snapshot.levelsCompleted, 0);
+  const resetGraph = backend.inspectKnowledge();
+  assert.equal(resetGraph.deltas[failedGraph.deltas.length - 1], failedGraph.deltas.at(-1));
+  assert.ok(Object.keys(resetGraph.nodes).some(id => id.startsWith('reasoning:level-reset:')));
+  const next = await service.handle({ type: 'resume', sessionId: first.sessionId, sequence: 1 });
+  assert.equal(next.kind, 'action');
+  assert.equal(state, 0);
+  assert.notEqual(next.ticket?.observationRef, first.ticket?.observationRef);
+});
+
 test('a declared walk reconciles the confirmed prefix when its next landing changes', async () => {
   const family = createSicFramedContact(learnPatternAccessId);
   const command = { action_ref: 'ACTION4', data: {} };
