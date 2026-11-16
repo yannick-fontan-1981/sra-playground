@@ -25,6 +25,7 @@ const same = ([x, y]: NativePoint, [a, b]: NativePoint) => x === a && y === b;
 const distance = ([x, y]: NativePoint, [a, b]: NativePoint) => Math.abs(x - a) + Math.abs(y - b);
 const inside = ([l, t, r, b]: NativeBox, [x, y]: NativePoint) => x >= l && x <= r && y >= t && y <= b;
 const directions: readonly NativePoint[] = [[1,0], [0,1], [-1,0], [0,-1]];
+const maxTurnPosts = 6;
 const ordered = (q: number) => (q % 4 + 4) % 4;
 const rotate = ([x, y]: NativePoint, angle: number): NativePoint =>
   [Math.round(x * Math.cos(angle) - y * Math.sin(angle)), Math.round(x * Math.sin(angle) + y * Math.cos(angle))];
@@ -94,10 +95,10 @@ function measure(parts: Part[], rows: NativeRows): Scene | null {
       : spanX === pitch + 1 && spanY === mid + 1 && p.area === (mid + 1) ** 2 ? 1
         : spanX === pitch + 1 && spanY === pitch + 1 && p.area === (pitch + 1) ** 2 - 4 ? 3 : 0;
     const point: NativePoint = [snap((args[0] + args[2]) / 2), snap((args[1] + args[3]) / 2)];
-    if (!quarters || parts.filter(other => other.color === p.color && other.area === p.area).length > 4) return [];
+    if (!quarters || parts.filter(other => other.color === p.color && other.area === p.area).length > maxTurnPosts) return [];
     return [{ color: p.color, quarters, point, mask: p.mask.map(([x,y]) => [x + args[0] - point[0], y + args[1] - point[1]] as NativePoint) }];
   }).sort((a,b) => a.quarters - b.quarters);
-  if (posts.length < 2 || posts.length > 4) return null;
+  if (posts.length < 2 || posts.length > maxTurnPosts) return null;
   const exitHeading = exit[0] === 0 ? 2 : exit[1] === 0 ? 3 : exit[2] === w - 1 ? 0 : 1;
   return { pitch, start, heading: orientation, exit, exitHeading, wall: wall.color, width: w, height: h,
     posts, actorMask, marker: actorColor };
@@ -156,11 +157,14 @@ function plan(scene: Scene, rows: NativeRows, posts: Post[], rejected: string[])
     return positions.sort((a,b) => distance(a,post.point) - distance(b,post.point));
   });
   let best: Layout | null = null, bestCost = Infinity;
+  const costOf = (layout: Layout) => layout.reduce((sum,p,i) => sum + (same(initial[i]!,p) ? 0 : 2 + distance(initial[i]!,p) / 100), 0);
   function visit(aim: Aim, layout: Layout, used: number[]) {
+    // A post already committed to the trajectory keeps its placement in every continuation.
+    if (posts.length > 4 && best && costOf(layout) >= bestCost) return;
     if (used.length && towardExit(scene, rows, aim)) {
       const overlapping = layout.some((a,i) => layout.some((b,j) => j > i && Math.abs(a[0]-b[0]) < pitch && Math.abs(a[1]-b[1]) < pitch));
       if (overlapping || rejected.includes(JSON.stringify(layout))) return;
-      const cost = layout.reduce((sum,p,i) => sum + (same(initial[i]!,p) ? 0 : 2 + distance(initial[i]!,p) / 100), 0);
+      const cost = costOf(layout);
       if (cost < bestCost) { best = layout; bestCost = cost; }
       return;
     }
@@ -208,7 +212,7 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
       if (group === observedMechanicsGroup) {
         if (learns || known?.completed !== observation.levels_completed) return null;
         const scene = state?.epoch === observation.level_epoch ? state.scene : measure(geometricComponents(rows), rows);
-        if (scene?.posts.length !== 4) return null;
+        if (!scene || scene.posts.length < 4) return null;
       }
       return this.propose(observation, rows, inputs, remaining, execution);
     },
