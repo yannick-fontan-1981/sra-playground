@@ -17,7 +17,7 @@ type Rule = Parameters<typeof fieldConstraints>[1];
 type State = { epoch: number; rule: Rule; size: NativePoint; pitch: NativePoint; rejected: string[];
   effects: { address: string; from: number; to: number }[]; firstRef: string; evidence: string[]; count: number; recalled?: boolean };
 type Transfer = { epoch: number; rule: Rule; evidence: string[] };
-type Cell = { box: NativeBox; address: string; actual: number; expected: number | null; sourcePoints: NativePoint[] };
+type Cell = { box: NativeBox; address: string; actual: number; expected: number | null; intermediate: boolean; sourcePoints: NativePoint[] };
 type Proposal = NativeProposal & { local: State; cell: Cell; field: NativeBox; needId: string };
 const point = (key: string): NativePoint => { const [x, y] = key.split(',').map(Number); return [x!, y!]; };
 const pointOrder = (a: NativePoint, b: NativePoint) => a[0] - b[0] || a[1] - b[1];
@@ -30,6 +30,36 @@ function uniformValue(rows: NativeRows, [l, t, r, b]: NativeBox): number | null 
 }
 function constraintSignature(table: ReadonlyMap<string, Constraint>): string {
   return JSON.stringify([...table].sort(([a], [b]) => pointOrder(point(a), point(b))).map(([p, c]) => [p, [...c.eq].sort(), [...c.ne].sort()]));
+}
+
+function observedSuccessors(effects: State['effects']): Map<number, number> {
+  const evidence = new Map<number, { destinations: Set<number>; addresses: Set<string> }>();
+  for (const { from, to, address } of effects) {
+    const entry = evidence.get(from) ?? { destinations: new Set<number>(), addresses: new Set<string>() };
+    entry.destinations.add(to);
+    entry.addresses.add(address);
+    evidence.set(from, entry);
+  }
+  const successors = new Map<number, number>();
+  for (const [from, { destinations, addresses }] of evidence) {
+    if (destinations.size === 1 && addresses.size >= 2) successors.set(from, [...destinations][0]!);
+  }
+  return successors;
+}
+
+function nextObservedValue(constraint: Constraint, address: string, successors: ReadonlyMap<number, number>,
+  rejected: ReadonlySet<string>): number | null | undefined {
+  const { actual } = constraint, expected = successors.get(actual);
+  if (expected === undefined) return null;
+  const seen = new Set([actual]);
+  let value: number | undefined = expected;
+  while (value !== undefined) {
+    if (acceptsConstraint(constraint, value)) return expected;
+    if (seen.has(value) || rejected.has(address + ',' + value)) return undefined;
+    seen.add(value);
+    value = successors.get(value);
+  }
+  return expected;
 }
 
 export function createSicWindowRelation(): NativeFamily<Proposal> {
@@ -64,13 +94,13 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
       const [w, h] = field.size, places = field.groups.flatMap(group => [...group.keys()].map(point));
       const xs = places.map(p => p[0]), ys = places.map(p => p[1]);
       const fieldBox: NativeBox = [Math.min(...xs) - 1, Math.min(...ys) - 1, Math.max(...xs) + w, Math.max(...ys) + h];
+      const successors = observedSuccessors(local.effects), rejected = new Set(local.rejected);
       const cells = [...table].flatMap(([address, constraint]) => {
-        if (acceptsConstraint(constraint, constraint.actual) || local.rejected.includes(address + ',' + constraint.actual)) return [];
-        const known = local.effects.filter(effect => effect.from === constraint.actual);
-        const outcomes = new Set(known.map(effect => effect.to));
-        const expected = outcomes.size === 1 && new Set(known.map(effect => effect.address)).size >= 2 ? known[0]!.to : null;
-        if (expected !== null && !acceptsConstraint(constraint, expected)) return [];
-        return [{ box: cellBox(point(address), field.size), address, actual: constraint.actual, expected, sourcePoints: [...constraint.sources].map(point) }];
+        if (acceptsConstraint(constraint, constraint.actual) || rejected.has(address + ',' + constraint.actual)) return [];
+        const expected = nextObservedValue(constraint, address, successors, rejected);
+        if (expected === undefined) return [];
+        return [{ box: cellBox(point(address), field.size), address, actual: constraint.actual, expected,
+          intermediate: expected !== null && !acceptsConstraint(constraint, expected), sourcePoints: [...constraint.sources].map(point) }];
       }).sort((a, b) => b.sourcePoints.length - a.sourcePoints.length || pointOrder(point(a.address), point(b.address)));
       const learned = cells.find(cell => cell.expected !== null);
       const probe = cells.find(cell => cell.expected === null);
@@ -85,8 +115,8 @@ export function createSicWindowRelation(): NativeFamily<Proposal> {
       const cell = strategy === 'P02' ? learned : probe;
       if (!cell) return null;
       const label = strategy === 'P02' ? windowRelationStrategies.apply_observed_cell_rewrite : windowRelationStrategies.test_inconsistent_cell;
-      const situation = local.recalled && cell.sourcePoints.length > 1
-        ? 'Reconcile the agreeing window constraints on this shared cell' : label;
+      const situation = cell.intermediate ? 'Take the verified intermediate step and check the remaining color constraint'
+        : local.recalled && cell.sourcePoints.length > 1 ? 'Reconcile the agreeing window constraints on this shared cell' : label;
       const parent = 'G_official_completion';
       const [left, top] = cell.box;
       const x = left + Math.floor(w / 2), y = top + Math.floor(h / 2);
