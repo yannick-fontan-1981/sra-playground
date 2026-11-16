@@ -3,7 +3,8 @@ import type { CompartmentLayout, Gate, Inhabitant } from './compartment-growth.t
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Roles = { food: number; starter: number; activated: number; grower: number; threshold: number };
-export type TimedCompartmentPhase = 'feed_route' | 'join_candidates' | 'prepare_route' | 'open_encounter' | 'advance_encounter';
+export type TimedCompartmentPhase = 'feed_route' | 'join_candidates' | 'prepare_route' | 'stage_growth' | 'advance_growth'
+  | 'open_encounter' | 'advance_encounter';
 export type TimedCompartmentChoice = {
   phase: TimedCompartmentPhase; gate: Gate; focus: Inhabitant[]; threshold: Inhabitant;
   expectedOpen: boolean; route: Gate[];
@@ -22,7 +23,46 @@ function routeBetween(from: ReadonlySet<number>, to: ReadonlySet<number>, allowe
   return null;
 }
 
-export function selectTimedCompartment(layout: CompartmentLayout, rows: NativeRows, roles: Roles, turns: number, earlierClock?: Gate): TimedCompartmentChoice | null {
+function planGrowthApproach(best: Inhabitant, threshold: Inhabitant, actors: Inhabitant[], open: Gate[], closed: Gate[],
+  turns: number, staged: boolean): TimedCompartmentChoice | null {
+  const source = gateRegion(best.room, open);
+  const protectedRegion = gateRegion(threshold.room, open);
+  if (source.has(threshold.room)) return null;
+  const prospects = actors.filter(sprite => !protectedRegion.has(sprite.room) && sprite.area < threshold.area);
+  const rooms = new Set(prospects.map(sprite => sprite.room));
+  const route = routeBetween(new Set([best.room]), new Set([threshold.room]),
+    room => source.has(room) || protectedRegion.has(room) || rooms.has(room), [...open, ...closed]);
+  if (!route?.length || route.filter(gate => !open.includes(gate)).length > turns) return null;
+  const boundary = route.find(gate => gate.rooms.some(room => protectedRegion.has(room)));
+  if (!boundary || open.includes(boundary)) return null;
+  const approach = route.slice(0, route.indexOf(boundary));
+  const targetRoom = (gate: Gate, from: number) => gate.rooms.find(room => room !== from)!;
+  let room = best.room;
+  const pendingRooms = new Map<Gate, number>();
+  for (const gate of approach) {
+    room = targetRoom(gate, room);
+    pendingRooms.set(gate, room);
+  }
+  const next = approach.find(gate => !open.includes(gate));
+  const choose = (phase: TimedCompartmentPhase, gate: Gate, focus: Inhabitant[]): TimedCompartmentChoice =>
+    ({ phase, gate, focus: [best, ...focus], threshold, expectedOpen: !open.includes(gate), route });
+  if (!next && staged && best.area >= threshold.area) return choose('open_encounter', boundary, []);
+
+  const edible = prospects.filter(sprite => sprite.area <= best.area);
+  if (next) {
+    const targets = edible.filter(sprite => sprite.room === pendingRooms.get(next));
+    if (targets.length) return choose('stage_growth', next, targets);
+  }
+  if (!staged || best.area >= threshold.area || turns <= route.filter(gate => !open.includes(gate)).length) return null;
+  const reachedRooms = new Set(approach.slice(0, next ? approach.indexOf(next) : approach.length).map(gate => pendingRooms.get(gate)));
+  const reachableTargets = edible.filter(sprite => reachedRooms.has(sprite.room) || sprite.room === best.room);
+  if (!reachableTargets.length) return null;
+  const clock = open.find(gate => gate.rooms.includes(best.room) && !approach.includes(gate));
+  return clock ? choose('advance_growth', clock, reachableTargets) : null;
+}
+
+export function selectTimedCompartment(layout: CompartmentLayout, rows: NativeRows, roles: Roles, turns: number,
+  earlierClock?: Gate, staged = false): TimedCompartmentChoice | null {
   const parts = readInhabitants(layout, rows), thresholds = parts.filter(sprite => sprite.color === roles.threshold);
   if (thresholds.length !== 1 || turns <= 0) return null;
   const threshold = thresholds[0]!, open = openGates(layout, rows), closed = layout.gates.filter(gate => !open.includes(gate));
@@ -36,6 +76,9 @@ export function selectTimedCompartment(layout: CompartmentLayout, rows: NativeRo
   const best = parts.filter(sprite => sprite.color === roles.grower).sort((a, b) => b.area - a.area)[0];
   const choose = (phase: TimedCompartmentPhase, gate: Gate, focus: Inhabitant[], route: Gate[] = []): TimedCompartmentChoice =>
     ({ phase, gate, focus, route, threshold, expectedOpen: !open.includes(gate) });
+
+  const approach = best && planGrowthApproach(best, threshold, actors, open, closed, turns, staged);
+  if (approach) return approach;
 
   const explored = new Set<number>(), feeding: { choice: TimedCompartmentChoice; score: number }[] = [];
   for (const actor of activated.length ? activated : actors) {

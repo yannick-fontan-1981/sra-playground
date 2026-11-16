@@ -101,7 +101,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | TRCP | 6 | — | — | — | — | — | — | 4 |
 | TRIA | 6 | — | — | — | — | — | — | 4 |
 | TU93 | 9 | [3](../../docs/migration/native-campaigns-v36/tu93-three-levels.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TU93/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 4 |
-| UPST | 6 | — | — | — | — | — | — | 3 |
+| UPST | 6 | — | — | — | — | — | — | 4 |
 | VALV | 6 | [3](../../docs/migration/native-campaigns-v51/valv-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VALV/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 4 |
 | VC33 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VC33/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 4 |
 | VOIS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 4 |

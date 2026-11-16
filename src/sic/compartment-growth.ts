@@ -59,11 +59,28 @@ function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): Com
 
 export function measureCompartments(rows: NativeRows): CompartmentLayout | null {
   const parts = geometricComponents(rows);
-  const interior = parts.filter(({ bbox: [l, t, r, b], area }) =>
+  const rectangles = parts.filter(({ bbox: [l, t, r, b] }) =>
     l > 0 && t > 0 && r < (rows[0]?.length ?? 0) - 1 && b < rows.length - 1
-    && r - l >= 7 && b - t >= 7 && area * 5 >= (r - l + 1) * (b - t + 1) * 4);
+    && r - l >= 7 && b - t >= 7);
+  const interior = rectangles.filter(({ bbox: [l, t, r, b], area }) => area * 5 >= (r - l + 1) * (b - t + 1) * 4);
+  const layouts = compartmentLayouts(rows, parts, interior);
+  if (layouts.length) return layouts.length === 1 ? includeOpenPartitions(layouts[0]!, rows) : null;
+  // Occupants can hide part of the floor. Recover a candidate only when its corners
+  // are visible and the same gate markers still connect the whole layout.
+  const occupied = rectangles.filter(part => {
+    if (interior.includes(part)) return true;
+    const { bbox: [l, t, r, b], area, color } = part;
+    const corners: NativePoint[] = [[l, t], [r, t], [l, b], [r, b]];
+    return corners.every(([x, y]) => rows[y]?.[x] === color)
+      && area * 4 >= (r - l + 1) * (b - t + 1) * 3;
+  });
+  const recovered = compartmentLayouts(rows, parts, occupied);
+  return recovered.length === 1 ? includeOpenPartitions(recovered[0]!, rows) : null;
+}
+
+function compartmentLayouts(rows: NativeRows, parts: ReturnType<typeof geometricComponents>, interior: ReturnType<typeof geometricComponents>): CompartmentLayout[] {
   const floors = [...new Set(interior.map(part => part.color))];
-  const layouts = floors.flatMap(floor => {
+  return floors.flatMap(floor => {
     const rooms = interior.filter(part => part.color === floor).map((part, index) => ({ box: part.bbox, index }));
     if (rooms.length < 3 || rooms.length > 16) return [];
     const byMarker = new Map<string, Gate[]>();
@@ -87,7 +104,6 @@ export function measureCompartments(rows: NativeRows): CompartmentLayout | null 
     return [...byMarker.values()].flatMap(gates => gates.length >= rooms.length - 1 && gates.length <= 2 * rooms.length
       && gateRegion(0, gates).size === rooms.length ? [{ rooms, floor, gates }] : []);
   });
-  return layouts.length === 1 ? includeOpenPartitions(layouts[0]!, rows) : null;
 }
 
 export function gateRegion(origin: number, gates: readonly Gate[]): Set<number> {
@@ -121,7 +137,7 @@ type Reusable = { food: number; starter: number; activated: number; grower: numb
 type Calibration = { layout: CompartmentLayout; threshold: number; feeding?: Pick<Reusable, 'food' | 'starter' | 'activated'> & { ref: string } };
 type Choice = { gate: Gate; phase: 'feed' | 'grow' | 'connect'; focus: Inhabitant[]; threshold: Inhabitant };
 type TurnMeter = { row: number; first: number; step: number; pending: number; spent: number; ref: string };
-type Local = { epoch: number; layout: CompartmentLayout; evidence: string[]; stopped?: boolean; clockGate?: Gate };
+type Local = { epoch: number; layout: CompartmentLayout; evidence: string[]; stopped?: boolean; clockGate?: Gate; stagedGrowth?: boolean };
 type Proposal = NativeProposal & { local: Local; choice: Choice | TimedCompartmentChoice; needId: string; food: number; grower: number;
   timing?: { meter: TurnMeter; turns: number } };
 
@@ -291,7 +307,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       if (!layout || prior?.stopped) return null;
       const turns = meter && readMeter(rows, meter);
       const timed = model.completed >= 2 && turns !== null
-        ? selectTimedCompartment(layout, rows, model, Math.min(turns, remaining), prior?.clockGate) : null;
+        ? selectTimedCompartment(layout, rows, model, Math.min(turns, remaining), prior?.clockGate, prior?.stagedGrowth) : null;
       const choice = timed ?? selectInteraction(layout, rows, model);
       if (!choice) return null;
       const { point: [x, y] } = choice.gate;
@@ -321,6 +337,8 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
         feed_route: 'Open the next passage toward resources that the small sprites can reach.',
         join_candidates: 'Connect the groups so a growing sprite can reach other participants.',
         prepare_route: 'Prepare access to larger resources while allowing the growth group another turn.',
+        stage_growth: 'Open the next passage to a reachable participant in the growing sprite’s approach. Check how each sprite changes.',
+        advance_growth: 'Spend one turn without breaking access to the next participant. Check whether the growing sprite increases in size.',
         open_encounter: 'Connect the prepared route when the growing sprite reaches the required size.',
         advance_encounter: 'Pay for another turn through a gate that preserves access between the two sprites.',
       }[choice.phase];
@@ -356,9 +374,18 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
         model = { ...model, completed: after.levels_completed,
           evidence: [...model.evidence.slice(-4), before.observation_ref, after.observation_ref] };
       } else if (before.level_epoch === after.level_epoch) {
+        const confirmed = assess(proposal, first, second);
+        const phase = proposal.choice.phase;
+        const stagedGrowth = phase === 'stage_growth' || phase === 'advance_growth';
         local = { ...proposal.local, evidence: [...proposal.local.evidence, after.observation_ref].slice(-4),
-          stopped: !assess(proposal, first, second),
-          ...(proposal.choice.phase === 'advance_encounter' ? { clockGate: proposal.choice.gate } : {}) };
+          stopped: !confirmed, stagedGrowth: !!confirmed && stagedGrowth,
+          ...(phase === 'advance_encounter' ? { clockGate: proposal.choice.gate } : {}) };
+        if (confirmed && stagedGrowth) {
+          const area = proposal.choice.focus[0]?.area ?? 0;
+          const grown = readInhabitants(proposal.local.layout, second).some(sprite => sprite.color === proposal.grower && sprite.area > area);
+          return { events: [], reviewEvidence: grown ? 'The return shows a larger sprite in the observed growth state'
+            : 'The passage changed and the turn was spent. Growth remains unconfirmed.' };
+        }
       }
       return { events: [] };
     },
