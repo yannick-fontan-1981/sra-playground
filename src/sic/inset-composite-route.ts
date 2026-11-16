@@ -3,16 +3,21 @@ import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts
 import { cycleMoves, readCycleReserve, type CycleGauge, type CycleState, type CycleStep } from './inset-cycle-route.ts';
 import { pixelsAt, pointKey } from './managed-framed-access.ts';
 
-type Glyph = { mask: string; ink: number };
+export type CycleGlyph = { mask: string; ink: number };
+type Glyph = CycleGlyph;
+export type GlyphTransitions = { shape: Record<string, string>; color: Record<number, number> };
 export type CompositeCycleEvidence = { epoch: number; ref: string; pitch: number; floor: number; gauge: CycleGauge;
-  body: number[]; patternStation: number[]; exitRim: number; fullReserve: number; display: CycleState['layout']['symbol'] };
+  body: number[]; patternStation: number[]; exitRim: number; fullReserve: number; display: CycleState['layout']['symbol'];
+  observed?: { transitions: GlyphTransitions; anchorInk: number; rotation?: { advance: number; stamp: number[] } } };
 type Layout = CompositeCycleEvidence & { points: NativePoint[]; shape: NativePoint; color: NativePoint;
   exit: NativePoint; charges: NativePoint[]; displayGround: number; anchorInk: number; wanted: Glyph };
-export type CompositeCycleState = { epoch: number; layout: Layout; at: NativePoint; spent: number; seen: string[]; refs: string[]; stopped: boolean };
-export type CompositeCycleStep = Omit<CycleStep, 'purpose'> & { purpose: CycleStep['purpose'] | 'test_color'; charge: number };
+export type CompositeCycleState = { epoch: number; layout: Layout; at: NativePoint; spent: number; seen: string[]; refs: string[]; stopped: boolean;
+  transitions?: GlyphTransitions };
+export type CompositeCycleStep = Omit<CycleStep, 'purpose'> & { purpose: CycleStep['purpose'] | 'test_color' | 'test_rotation'; charge: number };
 type Flight = { at: NativePoint; reserve: number; spent: number; distance: number;
   first?: Pick<CompositeCycleStep, 'action' | 'step' | 'charge'> };
-const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
+export const sameCyclePixels = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
+const same = sameCyclePixels;
 const cyclicGlyphKey = ({ mask, ink }: Glyph) => mask + ':' + ink;
 
 function glyph(palette: number[], base: number, ground: number): Glyph | null {
@@ -20,10 +25,11 @@ function glyph(palette: number[], base: number, ground: number): Glyph | null {
   return palette[0] === base && colors.length === 1 ? { ink: colors[0]!, mask: palette.map(ink => Number(ink !== ground)).join('') } : null;
 }
 
-function sampleGlyph(rows: NativeRows, [x, y]: NativePoint, side: number, scale: number): number[] {
+export function sampleCycleGlyph(rows: NativeRows, [x, y]: NativePoint, side: number, scale: number): number[] {
   const half = Math.floor(scale / 2);
   return Array.from({ length: side * side }, (_, i) => rows[y + Math.floor(i / side) * scale + half]?.[x + (i % side) * scale + half] ?? -1);
 }
+const sampleGlyph = sampleCycleGlyph;
 
 function rescale(square: number[], before: number, after: number): number[] {
   const ratio = before / after;
@@ -157,5 +163,6 @@ export function observeCompositeCycleStep(first: NativeRows, second: NativeRows,
   if (shape !== same(step.step, layout.shape) || color !== same(step.step, layout.color)) return null;
   return { reason: recharge ? 'reserve_recovered_with_shape_and_color_preserved'
     : shape ? 'shape_changed_with_color_preserved' : color ? 'color_changed_with_shape_preserved' : 'step_preserved_both_glyph_properties',
-    symbol: shape || color ? cyclicGlyphKey(after) : null, matchesGoal: cyclicGlyphKey(after) === cyclicGlyphKey(layout.wanted) };
+    symbol: shape || color ? cyclicGlyphKey(after) : null, matchesGoal: cyclicGlyphKey(after) === cyclicGlyphKey(layout.wanted),
+    changedShape: shape ? [before.mask, after.mask] as const : null, changedColor: color ? [before.ink, after.ink] as const : null };
 }

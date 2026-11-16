@@ -584,7 +584,8 @@ export function readNativeResolution(agent: {
     const region = bounds(card?.addressedRegion), actor = bounds(card?.controlledPiece);
     if (actor) subjects.push({ label: 'Controlled piece', box: actor });
     if (region) subjects.push({ label: card?.routeObligation === 'recharge' ? 'Candidate recharge'
-      : card?.routeObligation === 'rotation' ? 'Observed rotator' : card?.routeObligation === 'exit' ? 'Approach to the exit'
+      : card?.routeObligation === 'rotation' ? card.rotationConfirmed === false ? 'Candidate rotator' : 'Observed rotator'
+        : card?.routeObligation === 'exit' ? 'Approach to the exit'
         : card?.routeObligation === 'shape' ? 'Shape station' : card?.routeObligation === 'color' ? 'Color station'
           : card?.routeObligation === 'transport' ? 'Projected landing' : 'Proposed contact surface', box: region });
     const transportEntry = bounds(card?.transportEntry);
