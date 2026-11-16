@@ -5,12 +5,14 @@ import { dirname, resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { runNativeGameCampaign } from '../tests/helpers/v6-live-game-campaign.ts';
 
-const [game, target, cap, reportArgument, traceArgument, journalArgument] = process.argv.slice(2);
+const [game, target, cap, reportArgument, traceArgument, journalArgument, workers] = process.argv.slice(2);
 const targetLevels = Number(target), maximumAcquiredActions = Number(cap);
+const parallelWorkers = workers === undefined ? undefined : Number(workers);
 if (!game || !Number.isInteger(targetLevels) || targetLevels < 1
     || !Number.isInteger(maximumAcquiredActions) || maximumAcquiredActions < 1
+    || (parallelWorkers !== undefined && (!Number.isSafeInteger(parallelWorkers) || parallelWorkers < 1))
     || !reportArgument || !traceArgument || !journalArgument) {
-  throw new Error('Usage: run-bounded-native-campaign.mjs GAME TARGET_LEVELS MAX_ACTIONS REPORT.gz TRACE.gz JOURNAL');
+  throw new Error('Usage: run-bounded-native-campaign.mjs GAME TARGET_LEVELS MAX_ACTIONS REPORT.gz TRACE.gz JOURNAL [PARALLEL_WORKERS]');
 }
 const [reportPath, tracePath, journalPath] = [reportArgument, traceArgument, journalArgument].map(value => resolve(value));
 for (const path of [reportPath, tracePath, journalPath]) {
@@ -20,7 +22,7 @@ for (const path of [reportPath, tracePath, journalPath]) {
 }
 const packets = [];
 let actionCapReached = false;
-const report = await runNativeGameCampaign({ gameCode: game, targetLevels,
+const report = await runNativeGameCampaign({ gameCode: game, targetLevels, parallelWorkers,
   progress: event => {
     console.log(JSON.stringify(event));
     // A response follows acquisition and precedes acceptance/dispatch of another

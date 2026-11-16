@@ -984,3 +984,9 @@ Le total atteint **99/100 niveaux 4** et **409/636 niveaux**, soit **64,3 %**.
 - **BP35** gagne le niveau 4 en **19 commandes et 52,19 s** lors des rejeux parallèles. SIC réutilise la grille et les blocs amovibles, puis mesure l’inversion en raccordant les points fixes du terrain après le défilement. Il conserve les zones déjà visibles pour écarter le retour vers un danger et choisit une autre colonne avant l’inversion suivante. Trois retraits libèrent le passage. La quatrième inversion rejoint la sortie et déclenche la victoire. Les 97 commandes et retours des trois premiers niveaux sont reproduits. Les 116 commandes relèvent de SIC. La permutation de palette conserve le parcours et les deux essais s’arrêtent à la victoire du niveau 4. Empreinte `a827c73db114175d79e3cdcfe309215312ad8d731d19ffd9991c65144da1e272`.
 
 Les qualifications par jeu atteignent **100/100 niveaux 4** et **410/636 niveaux**, soit **64,5 %**. Les 410 victoires comprennent dix niveaux au-delà des quatre premières séries déjà attestés. Une campagne sur un seul commit doit vérifier la coexistence des qualifications.
+
+### Temps actif par niveau en campagne
+
+Le lanceur transmet à chaque partie le nombre de processus prévus en parallèle. Le budget actif de chaque niveau augmente linéairement de **6 minutes à un processus** à **12 minutes à huit processus**. Au-delà de huit, il reste plafonné à 12 minutes. Le réglage s’applique à la planification, à l’exécution des commandes et à l’acquisition des retours. La limite de commandes reste indépendante.
+
+Le lanceur `scripts/run-bounded-native-campaign.mjs` accepte ce nombre en dernier argument facultatif `PARALLEL_WORKERS`. Une session sans ce réglage utilise le budget d’un seul processus.

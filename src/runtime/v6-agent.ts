@@ -58,6 +58,8 @@ export interface V6AgentOptions extends V6AgentHost {
   /** Defaults to the game's complete native campaign. */
   targetLevels?: number;
   maxSessionActions?: number;
+  /** Number of concurrently scheduled game processes in a campaign. */
+  parallelWorkers?: number;
 }
 
 type HostPhase = 'initializing' | 'planning' | 'acting' | 'observing' | null;
@@ -101,6 +103,7 @@ export class BrowserV6Agent {
   private readonly actionsPerLevel: number;
   private readonly requestedTarget?: number;
   private readonly maxSessionActions?: number;
+  private readonly parallelWorkers?: number;
   private knowledge: V6BackendSnapshot = emptyV6Snapshot();
   private status: V6AgentStatus = 'idle';
   private message = 'Start the native SRA agent from level 1. Step and Pause preserve its current plan.';
@@ -124,6 +127,7 @@ export class BrowserV6Agent {
     this.actionsPerLevel = positiveInteger(options.actionsPerLevel ?? V6_DEFAULT_ACTIONS_PER_LEVEL, 'The action cap per level');
     if (options.targetLevels !== undefined) this.requestedTarget = positiveInteger(options.targetLevels, 'The target level count');
     if (options.maxSessionActions !== undefined) this.maxSessionActions = positiveInteger(options.maxSessionActions, 'The session action cap');
+    if (options.parallelWorkers !== undefined) this.parallelWorkers = positiveInteger(options.parallelWorkers, 'The campaign worker count');
   }
 
   private entryProblem(current: GameObservation | null): string | null {
@@ -185,7 +189,9 @@ export class BrowserV6Agent {
     const total = targetLevels * this.actionsPerLevel;
     if (!Number.isSafeInteger(total)) throw new V6AgentError('invalid', 'The total action budget is too large.');
     this.targetLevels = targetLevels;
-    return { targetLevels, levelActionCaps, ...(this.maxSessionActions === undefined ? {} : { maxActions: Math.min(this.maxSessionActions, total) }) };
+    return { targetLevels, levelActionCaps,
+      ...(this.maxSessionActions === undefined ? {} : { maxActions: Math.min(this.maxSessionActions, total) }),
+      ...(this.parallelWorkers === undefined ? {} : { parallelWorkers: this.parallelWorkers }) };
   }
 
   step(): Promise<void> { return this.start(1); }

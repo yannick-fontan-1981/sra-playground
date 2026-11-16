@@ -25,7 +25,7 @@ function integer(value: unknown, minimum: number, maximum: number, name: string)
 }
 
 function budgets(value: V6Budgets): NativeBudgets {
-  if (!value || typeof value !== 'object' || Object.keys(value).some(key => !['targetLevels', 'levelActionCaps', 'maxActions'].includes(key))) {
+  if (!value || typeof value !== 'object' || Object.keys(value).some(key => !['targetLevels', 'levelActionCaps', 'maxActions', 'parallelWorkers'].includes(key))) {
     throw new V6AgentError('invalid', 'Malformed native solver budgets.');
   }
   const targetLevels = integer(value.targetLevels, 1, 1000, 'target level count');
@@ -33,7 +33,9 @@ function budgets(value: V6Budgets): NativeBudgets {
   const caps = value.levelActionCaps.map(cap => integer(cap, 1, 100_000, 'per-level action cap'));
   const total = caps.reduce((sum, cap) => sum + cap, 0);
   const maxActions = value.maxActions === undefined ? total : Math.min(total, integer(value.maxActions, 1, 1_000_000, 'total action cap'));
-  return freeze({ targetLevels, levelActionCaps: caps, maxActions });
+  const parallelWorkers = value.parallelWorkers === undefined ? undefined
+    : integer(value.parallelWorkers, 1, Number.MAX_SAFE_INTEGER, 'campaign worker count');
+  return freeze({ targetLevels, levelActionCaps: caps, maxActions, ...(parallelWorkers === undefined ? {} : { parallelWorkers }) });
 }
 
 async function nativeObservation(packet: V6PublicObservation): Promise<NativePublicObservation> {

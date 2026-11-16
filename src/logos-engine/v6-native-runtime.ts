@@ -206,6 +206,7 @@ import { NativeKnowledgeStore, NATIVE_STORE_PROFILE } from './v6-knowledge-store
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory } from './kernel.ts';
 import { NativeEditRejected } from './v6-native-types.ts';
+import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
 import type {
@@ -376,6 +377,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private cycles = 0;
   private levelActions = new Map<number, number>();
   private levelMs = new Map<number, number>();
+  private levelActiveTimeMs = v6LevelActiveTimeMs();
   private elapsedMs = 0;
   private computeStart: number | null = null;
   private computeLevel = 1;
@@ -518,8 +520,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.closed) throw new Error('The native reasoning session is closed');
   }
   private note(value: NativeRecord): void { this.trace.push(freeze(structuredClone(value))); this.trace = this.trace.slice(-128); }
-  private runningMs(level?: number): number {
-    return this.computeStart !== null && (level === undefined || level === this.computeLevel) ? Math.max(0, this.now() - this.computeStart) : 0;
+  private runningMs(level?: number, now?: number): number {
+    return this.computeStart !== null && (level === undefined || level === this.computeLevel) ? Math.max(0, (now ?? this.now()) - this.computeStart) : 0;
   }
   private async timed(level: number, operation: () => Promise<void>): Promise<void> {
     if (this.computeStart !== null) throw new Error('Native reasoning operations cannot overlap');
@@ -538,8 +540,11 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.actions >= total) return 'session_action_budget';
     const cap = this.budgets.levelActionCaps[this.current.level - 1];
     if (cap === undefined || (this.levelActions.get(this.current.level) ?? 0) >= cap) return 'level_action_budget';
-    if ((this.levelMs.get(this.current.level) ?? 0) + this.runningMs(this.current.level) >= 360_000) return 'level_active_time_budget';
+    if (this.remainingActiveMs(this.current.level) === 0) return 'level_active_time_budget';
     return null;
+  }
+  private remainingActiveMs(level: number, now?: number): number {
+    return Math.max(0, this.levelActiveTimeMs - (this.levelMs.get(level) ?? 0) - this.runningMs(level, now));
   }
   private remaining(): number {
     if (!this.current || !this.budgets) return 0;
@@ -556,6 +561,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.initialized) throw new Error('Native runtime already initialized');
     this.check(execution);
     if (input.observation.level !== 1 || input.observation.levels_completed !== 0 || input.observation.step_index !== 0) throw new Error('Native V6 must begin at level 1');
+    this.levelActiveTimeMs = v6LevelActiveTimeMs(input.budgets.parallelWorkers);
     this.initialized = true; this.sessionId = input.sessionId; this.current = freeze(structuredClone(input.observation)); this.budgets = freeze(structuredClone(input.budgets));
     await this.timed(this.current.level, async () => {
       this.knowledge = new NativeKnowledgeStore(this.sourceDigest, this.sessionId);
@@ -740,14 +746,10 @@ export class NativeV6Runtime implements NativeV6Backend {
   private currentExecution(execution: NativeExecution): NativeExecution {
     if (!this.current) return execution;
     const currentNow = this.now();
-    const runningActiveMs = this.computeStart !== null && this.computeLevel === this.current.level
-      ? Math.max(0, currentNow - this.computeStart) : 0;
-    const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(this.current.level) ?? 0)
-      - runningActiveMs);
     const callerRemainingMs = execution.deadlineMs === undefined ? Infinity
       : Math.max(0, execution.deadlineMs - (execution.now ?? (() => performance.now()))());
     return { ...execution, now: this.now,
-      deadlineMs: currentNow + Math.min(remainingActiveMs, callerRemainingMs),
+      deadlineMs: currentNow + Math.min(this.remainingActiveMs(this.current.level, currentNow), callerRemainingMs),
       remainingLevelActions: this.remainingLevelActions() };
   }
 
@@ -1624,14 +1626,10 @@ export class NativeV6Runtime implements NativeV6Backend {
     // to the level whose actual primitive(s) formed this sealed prefix.
     const acquisitionLevel = prefix.witnessed[0]?.first.level ?? this.computeLevel;
     const acquisitionNow = this.now();
-    const runningActiveMs = this.computeStart !== null && this.computeLevel === acquisitionLevel
-      ? Math.max(0, acquisitionNow - this.computeStart) : 0;
-    const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(acquisitionLevel) ?? 0)
-      - runningActiveMs);
     const callerRemainingMs = execution.deadlineMs === undefined ? Infinity
       : Math.max(0, execution.deadlineMs - (execution.now ?? (() => performance.now()))());
     const acquisitionExecution: NativeExecution = { ...execution, now: this.now,
-      deadlineMs: acquisitionNow + Math.min(remainingActiveMs, callerRemainingMs) };
+      deadlineMs: acquisitionNow + Math.min(this.remainingActiveMs(acquisitionLevel, acquisitionNow), callerRemainingMs) };
     const compositionReturns: R[] = [];
     const recordedEffects = new Map<string, string>();
     const nativeAcquisitionsIncomplete: R[] = [];

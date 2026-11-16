@@ -10,6 +10,7 @@ import { createNativeV6Runtime, rawNativePreviewPacking, rawNativeSelectedRigid 
 import { capturePreviewPacking } from './capture-preview-packing.ts';
 import { captureSelectedRigid } from './capture-selected-rigid.ts';
 import { hydrateNativeState } from '../../src/logos-engine/v6-native-state-graph.ts';
+import { v6LevelActiveTimeMs } from '../../src/logos-engine/v6-time-budget.ts';
 import type { NativeV6Declarations } from '../../src/logos-engine/v6-native-runtime.ts';
 import type { NativeCommand, NativePublicObservation } from '../../src/logos-engine/v6-native-types.ts';
 import type { GameObservation } from '../../src/runtime/browser-games.ts';
@@ -34,6 +35,7 @@ function negativeZeroPaths(value: unknown, path: (string | number)[] = []): (str
 export interface NativeGameCampaignOptions {
   gameCode: string;
   targetLevels: number;
+  parallelWorkers?: number;
   progress?: (event: R) => void;
   /** Evidence sink only; returned values never enter the production agent. */
   publicTrace?: (packet: NativePublicObservation, command: NativeCommand | null) => void;
@@ -86,14 +88,15 @@ async function baselineFor(game: string): Promise<R | null> {
 
 /** Production time/action limits; no injected replay clock or Python solver. */
 export async function runNativeGameCampaign(options: NativeGameCampaignOptions): Promise<R> {
-  const { gameCode, targetLevels } = options;
+  const { gameCode, targetLevels, parallelWorkers } = options;
   assert.match(gameCode, /^[A-Z0-9]{4}$/);
   assert.ok(Number.isInteger(targetLevels) && targetLevels >= 1 && targetLevels <= 100);
   const started = performance.now(), sourceBefore = await nativeSourceManifest();
   const report: R = {
     schema: options.recordedPublic ? 'logos-engine.v6.recorded-public-regression.v1' : 'logos-engine.v6.integrated-game-campaign.v1', game: gameCode, targetLevels,
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
-    budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
+    budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: v6LevelActiveTimeMs(parallelWorkers) / 1000,
+      clock: 'real active compute and native execution', ...(parallelWorkers === undefined ? {} : { parallelWorkers }) },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
     baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], symbolRestoreCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], facetExampleSourceCalls: [], facetExampleRestoreCalls: [], previewPackingEvents: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
@@ -1047,7 +1050,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
       assert.equal(packetHash(initial), packetHash(baseline.fixture.initial.public), 'The initial real game matches the original public scene');
       report.baseline.packetsCompared += 1;
     }
-    agent = new BrowserV6Agent({ transport, targetLevels, actionsPerLevel: 600, getObservation: () => current!, canDispatch: () => true, onState: () => {},
+    agent = new BrowserV6Agent({ transport, targetLevels, actionsPerLevel: 600, parallelWorkers, getObservation: () => current!, canDispatch: () => true, onState: () => {},
       dispatch: async action => {
         assert.equal((lastResponse!.snapshot as R).whyAct.decision.decision.status, 'action_set_released');
         const command = { action_ref: `ACTION${action.id}`, data: action.id === 6 ? { ...action.data } : {} };

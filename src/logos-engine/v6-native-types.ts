@@ -246,6 +246,7 @@ export interface NativeBudgets {
   readonly targetLevels: number;
   readonly levelActionCaps: readonly number[];
   readonly maxActions?: number;
+  readonly parallelWorkers?: number;
 }
 
 /** Counts are reported only when they correspond to actual retained structures. */

@@ -26,6 +26,7 @@ export interface V6Budgets {
   targetLevels: number;
   levelActionCaps: number[];
   maxActions?: number;
+  parallelWorkers?: number;
 }
 
 export interface V6Command {

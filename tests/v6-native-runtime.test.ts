@@ -255,6 +255,42 @@ test('native runtime defers family recording until a sealed prefix and ignores p
   assert.equal(result.kind, 'boundary'); assert.deepEqual(records, [0, 1]); assert.equal(result.snapshot.activeSeconds, 0.012);
 });
 
+for (const [parallelWorkers, expectedMs] of [[1, 360_000], [4, 514_286], [8, 720_000], [12, 720_000]]) {
+  test(`the per-level active deadline scales with ${parallelWorkers} campaign workers`, async () => {
+    const deadlines: number[] = [];
+    const command = { action_ref: 'ACTION1', data: {} };
+    const family: NativeFamily = {
+      id: 'parallel-campaign-time-test',
+      propose: (_observation, _rows, _inputs, remaining, execution) => {
+        assert.equal(remaining, 600);
+        deadlines.push(execution!.deadlineMs!);
+        return { status: 'proposed', kind: 'public_test', actions: [command, command], steps: [{}, {}] };
+      },
+      before: () => ({ admitted: true, reason: 'current' }),
+      after: () => ({ matched: true, seal_prefix: false, reason: 'witnessed' }),
+      record: () => ({ events: [] }),
+      state: () => ({}),
+      restore: () => {},
+    };
+    const service = new V6AgentService(() => new NativeV6Runtime({ families: [family], maxPointOccurrences: 250,
+      sourceDigest: 'native-campaign-clock-test', now: () => 0 }));
+    const first = await service.handle({ ...init(), budgets: { ...init().budgets, parallelWorkers } });
+    assert.deepEqual(deadlines, [expectedMs]);
+    const reply = await service.handle({ type: 'advance', sessionId: 'native-test', sequence: 1, ticketId: first.ticket!.id,
+      observation: toV6PublicObservation(board(1), 1), executionMs: 360_000 });
+    if (parallelWorkers === 1) {
+      assert.equal(reply.reason, 'level_active_time_budget');
+      assert.equal(reply.snapshot.actions, 1);
+      return;
+    }
+    assert.equal(reply.kind, 'action');
+    const stopped = await service.handle({ type: 'advance', sessionId: 'native-test', sequence: 2, ticketId: reply.ticket!.id,
+      observation: toV6PublicObservation(board(2), 2), executionMs: expectedMs - 360_000 });
+    assert.equal(stopped.reason, 'level_active_time_budget');
+    assert.equal(stopped.snapshot.actions, 2);
+  });
+}
+
 for (const [runtimeOrigin, callerOrigin] of [[1000, 10], [10, 1000]] as const) {
   test(`native current deadlines convert caller clock ${callerOrigin} to runtime clock ${runtimeOrigin}`, async () => {
     let runtimeClock: number = runtimeOrigin, callerClock: number = callerOrigin;
