@@ -1,12 +1,12 @@
-import { CODE_DIRECTIONS, codeBits, decodeCodeWord } from '../logos-engine/v6-code-program.ts';
+import { CODE_DIRECTIONS, codeBits, decodeCodeWord, normalizeCodeMask } from '../logos-engine/v6-code-program.ts';
 import { geometricComponents, projection } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeObservation, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export type CodeExample = { readonly command: NativeCommand; readonly box: NativeBox;
   readonly columns: readonly (readonly NativeBox[])[]; readonly stage: NativeBox };
 type DemonstrationBoard = { readonly size: number; readonly mask: readonly NativePoint[]; readonly button_hue: number;
-  readonly values: readonly number[] };
-type Pose = { readonly point: NativePoint; readonly mask: string };
+  readonly values: readonly number[]; readonly scaled?: boolean };
+type Pose = { readonly point: NativePoint; readonly mask: string; readonly scale: number };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -41,10 +41,16 @@ export function readDemonstration(board: DemonstrationBoard, example: CodeExampl
   const observed = new Map<number, Pose & { readonly word: string }>();
   let examplePose: Pose | null = null, firstHighlight = false;
   for (const frame of frames) {
-    const objects = geometricComponents(frame).filter(part => contains(example.stage, part.bbox) &&
-      width(part.bbox) === size && height(part.bbox) === size && part.area === mask.length && rotationKey(part.mask, size) === silhouette);
+    const objects = geometricComponents(frame).flatMap(part => {
+      const side = width(part.bbox), scale = side / size;
+      if (!contains(example.stage, part.bbox) || height(part.bbox) !== side || (!board.scaled && scale !== 1)
+        || part.area !== mask.length * scale ** 2) return [];
+      const normalized = normalizeCodeMask(part.mask, scale);
+      return normalized && rotationKey(normalized, size) === silhouette
+        ? [{ point: [part.bbox[0], part.bbox[1]] as NativePoint, mask: maskKey(normalized), scale }] : [];
+    });
     if (objects.length !== 1) continue;
-    const part = objects[0]!, pose: Pose = { point: [part.bbox[0], part.bbox[1]], mask: maskKey(part.mask) };
+    const pose = objects[0]!;
     const scores = example.columns.map(column => {
       const [l, t, r] = column[0]!, bottom = column.at(-1)![3];
       return projection(frame, [l - 1, t - 1, r + 1, bottom + 1]).flat().filter(pixel => pixel === board.button_hue).length;
@@ -63,6 +69,10 @@ export function readDemonstration(board: DemonstrationBoard, example: CodeExampl
     const before = index ? observed.get(index - 1) : examplePose;
     if (!before || before.mask !== after.mask) return [];
     const motion: NativePoint = [(after.point[0] - before.point[0]) / size, (after.point[1] - before.point[1]) / size];
-    return CODE_DIRECTIONS.some(([x, y]) => motion[0] === x && motion[1] === y) ? [{ word: after.word, motion }] : [];
+    const resize = after.scale - before.scale;
+    const translated = resize === 0 && CODE_DIRECTIONS.some(([x, y]) => motion[0] === x && motion[1] === y);
+    const resized = resize !== 0 && motion.every(value => value === 0);
+    return translated || resized ? [{ word: after.word, motion,
+      ...(board.scaled ? { resize, fromScale: before.scale } : {}) }] : [];
   });
 }

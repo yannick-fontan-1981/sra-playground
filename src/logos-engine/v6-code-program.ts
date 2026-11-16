@@ -35,7 +35,20 @@ export function codeInputAt(inputs: readonly CodeCommand[], box: readonly number
   return inputs.find(action => addressed(action) && box[0]! <= action.data!.x! && action.data!.x! <= box[2]! && box[1]! <= action.data!.y! && action.data!.y! <= box[3]!) ?? null;
 }
 
-export function measureCodeScene(observation: CodeObservation, rows: NativeRows, inputs: readonly CodeCommand[]): CodeRecord | null {
+export function normalizeCodeMask(mask: readonly NativePoint[], scale: number): NativePoint[] | null {
+  if (!Number.isSafeInteger(scale) || scale < 1) return null;
+  const blocks = new Map<string, { point: NativePoint; pixels: number }>();
+  for (const [x, y] of mask) {
+    const point: NativePoint = [Math.floor(x / scale), Math.floor(y / scale)], key = pointKey(point);
+    const block = blocks.get(key) ?? { point, pixels: 0 };
+    block.pixels++;
+    blocks.set(key, block);
+  }
+  return [...blocks.values()].every(block => block.pixels === scale ** 2)
+    ? [...blocks.values()].map(block => block.point).sort(comparePoint) : null;
+}
+
+export function measureCodeScene(observation: CodeObservation, rows: NativeRows, inputs: readonly CodeCommand[], allowScaled = false): CodeRecord | null {
   const parts = observation.entities, tiles = new Map<number, CodeRecord[]>();
   for (const entity of parts) { const [x, y, right, bottom] = entity.bbox; if (entity.rectangular && right - x === bottom - y && right > x) {
     const size = right - x + 1; if (!tiles.has(size)) tiles.set(size, []); tiles.get(size)!.push(entity); } }
@@ -51,13 +64,25 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
       const xs = [...new Set([...connected.values()].map(p => p[0]))], ys = [...new Set([...connected.values()].map(p => p[1]))];
       const hues = new Set([...connected.keys()].map(key => places.get(key)!.palette_value as number));
       if (xs.length < 3 || ys.length < 3 || hues.size !== 2) continue;
-      const x0 = Math.min(...xs), y0 = Math.min(...ys), width = Math.floor((Math.max(...xs) - x0) / size) + 1, height = Math.floor((Math.max(...ys) - y0) / size) + 1;
-      if (connected.size * 2 < width * height) continue;
+      const x0 = Math.min(...xs), y0 = Math.min(...ys), width = Math.floor((Math.max(...xs) - x0) / size) + 1;
+      let lastRow = Math.max(...ys);
+      if (connected.size * 2 < width * (1 + (lastRow - y0) / size)) continue;
+      if (allowScaled) {
+        const alignedRows = new Set(group.filter(tile => {
+          const [x, y] = tile.position;
+          return hues.has(tile.palette_value) && x >= x0 && x < x0 + width * size && (x - x0) % size === 0 && (y - y0) % size === 0;
+        }).map(tile => tile.position[1]));
+        while (alignedRows.has(lastRow + size)) lastRow += size;
+      }
+      const height = 1 + (lastRow - y0) / size;
       for (const entity of parts) {
         if (hues.has(entity.palette_value) || entity.area <= size * size / 2) continue;
-        const [x, y, right, bottom] = entity.bbox;
-        if (right - x + 1 !== size || bottom - y + 1 !== size || (x - x0) % size || (y - y0) % size || !(x0 <= x && x < x0 + width * size && y0 <= y && y < y0 + height * size)) continue;
-        const mask = maskKey(entity.mask), targets = new Map<string, NativePoint>();
+        const [x, y, right, bottom] = entity.bbox, side = right - x + 1, scale = side / size;
+        if (bottom - y + 1 !== side || !Number.isInteger(scale) || (allowScaled ? scale < 1 : scale !== 1)
+          || (x - x0) % size || (y - y0) % size || !(x0 <= x && x + side <= x0 + width * size && y0 <= y && y + side <= y0 + height * size)) continue;
+        const normalized = normalizeCodeMask(entity.mask, scale);
+        if (!normalized) continue;
+        const mask = maskKey(normalized), targets = new Map<string, NativePoint>();
         for (let cy = 0; cy < height; cy++) for (let cx = 0; cx < width; cx++) {
           const X = x0 + cx * size, Y = y0 + cy * size, cut = projection(rows, [X, Y, X + size - 1, Y + size - 1]);
           for (const base of hues) {
@@ -69,7 +94,8 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
         }
         if (targets.size !== 1) continue;
         boards.push({ origin: [x0, y0], size, shape: [width, height], floor: [...hues].sort((a, b) => a - b), hue: entity.palette_value,
-          mask: [...entity.mask].sort(comparePoint), goal: [...targets.values()][0], start: [Math.floor((x - x0) / size), Math.floor((y - y0) / size)] });
+          mask: normalized, goal: [...targets.values()][0], start: [Math.floor((x - x0) / size), Math.floor((y - y0) / size)],
+          ...(scale > 1 ? { scaled: true } : {}) });
       }
     }
   }
@@ -124,9 +150,13 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
     if (same(group.columns, columns) || group.columns[0]!.boxes.length !== columns[0]!.boxes.length) continue;
     const left = Math.min(...group.columns.map(column => column.x)), right = Math.max(...group.columns.flatMap(column => column.boxes.map(box => box[2]!)));
     const demoBottom = Math.max(...group.columns.flatMap(column => column.boxes.map(box => box[3]!)));
+    const stageBottom = group.ys[0]! - 1, boardRight = x0 + width * size;
+    const stage = board.scaled && right < x0 ? [0, 0, x0 - 1, stageBottom]
+      : board.scaled && left >= boardRight ? [boardRight, 0, rows[0]!.length - 1, stageBottom]
+      : [left - size, 0, right + size, stageBottom];
     for (const entity of parts) {
       const box = entity.bbox; if (entity.palette_value !== board.hue || box[1] <= demoBottom || Math.max(box[2] - box[0] + 1, box[3] - box[1] + 1) >= size) continue;
-      const command = codeInputAt(inputs, box); if (command) examples.push({ command, box, columns: group.columns.map(column => column.boxes), stage: [left - size, 0, right + size, group.ys[0]! - 1] });
+      const command = codeInputAt(inputs, box); if (command) examples.push({ command, box, columns: group.columns.map(column => column.boxes), stage });
     }
   }
   Object.assign(board, { columns: columns.map(column => column.boxes), bit_commands: bindings, values: [...values].sort((a, b) => a - b), execute: button.command,
