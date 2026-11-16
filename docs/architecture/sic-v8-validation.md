@@ -1182,3 +1182,15 @@ Planning propose **SIC** et **SIC Fallback**. En Fallback, la sélection repère
 - Sur **BP35 niveau 2**, deux clics en **(20, 32)** provoquent le contact avec le piège violet et `GAME_OVER`. RESET restaure l’image d’entrée du niveau 2 et la victoire du niveau 1. Le rejeu de ce contact sur le moteur officiel, avec le contrôleur SIC, conserve le retour fatal dans la même session.
 
 Le typage TypeScript et **38 tests** du contrôleur, du moteur et des frontières d’acquisition passent. L’[audit des actions continues](sic-v8-continuous-actions-audit.md) couvre les 100 premiers niveaux.
+
+### Revalidation des 100 niveaux 2 après les séries continues
+
+Les 100 jeux sont rejoués en SIC seul depuis le niveau 1. Le contrôleur s’arrête à la victoire du niveau 2. Le commit `805de790` obtient 97 victoires au niveau 2. Sur `969014e7`, les 100 jeux gagnent, avec 2 873 commandes sous autorité SIC. Les 97 parcours déjà gagnants retrouvent la même empreinte de commandes, observations et images d’animation.
+
+| Jeu | Correction du transfert ou de la réconciliation | Commandes au niveau 2 | Temps actif du niveau 2 |
+| --- | --- | ---: | ---: |
+| BP35 | Le clic sous le sprite reste une ouverture de support lorsqu’il termine une série. Le défilement confirme le changement de terrain. | 47 | 47,06 s |
+| CAVA | Le moteur mesure la pièce et le repère dans l’image qui précède le dernier saut. La victoire transmet le saut au nouveau terrain. | 12 | 9,62 s |
+| POLA | L’animation de victoire établit le quart de tour et ses conditions. Le niveau 2 vérifie le retournement de la paire sur sa propre disposition. | 3 | 1,69 s |
+
+Les temps proviennent de la même campagne à huit processus. POLA est aussi vérifié en SIC Fallback sur les deux niveaux après retrait de la famille principale. Le contrôle TypeScript et les 49 tests ciblés passent.
