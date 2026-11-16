@@ -1103,6 +1103,10 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.patrols)) for (const patrol of card.patrols) {
+      const box = bounds(patrol);
+      if (box) subjects.push({ label: 'Patrol', box });
+    }
   }
   if (situationCard && (family === layeredFitId || family === learnLayeredFitId)) {
     for (const [field, label] of [['pane', 'Pane under control'], ['marker', 'Selection marker'], ['canvas', 'Current composite'], ['reference', 'Reference pattern']] as const) {
