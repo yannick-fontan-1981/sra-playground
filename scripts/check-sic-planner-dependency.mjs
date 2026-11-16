@@ -141,6 +141,7 @@ async function run() {
     canDispatch: () => true,
     onState() {},
     dispatch: async action => {
+      assert.ok(board.levelsCompleted < target, `Dispatch after the requested level ${target}`);
       if (board.levelsCompleted > 0 && !entryReviews.has(board.level)) {
         const prior = agent.snapshot.victoryReviews?.find(review => review.level === board.level - 1
           && review.score === board.levelsCompleted);
