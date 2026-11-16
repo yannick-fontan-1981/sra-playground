@@ -120,6 +120,44 @@ En repli, le déplacement ou la sélection mesurés pendant une exploration peuv
 - **Sans série dans les deux modes** — CASC, CD82, CGWL, CWSE, DAME, DNOI, ELAS, ETAG, EVAS, FITE, FT09, FUIT, KATA, KEYD, LF52, LS19, POLA, S5I5, SIGN, SYME, TN36, TU93, VC33, WA30, WEAV.
 - **Niveaux encore non gagnés en Fallback** — DAME, FT09, FUIT, KATA, KEYD, S5I5, SIGN, TN36, TU93, VC33, WA30, WEAV.
 
+## Progression sur les 25 jeux restants
+
+Les 42 jeux de la liste sont rejoués au niveau 1 dans les deux modes. Le parcours s’arrête dès la première victoire. Une série compte au moins deux commandes réellement exécutées dans le même plan, avec contrôle des retours à chaque commande.
+
+| Mode | Victoires avant → après | Victoires avec une série avant → après | Reprises de décision avant → après | Parcours identiques |
+| --- | ---: | ---: | ---: | ---: |
+| SIC | 42 → 42 | 17 → 29 | 471 → 429 | 42/42 |
+| SIC Fallback | 30 → 37 | 17 → 29 | 1116 → 858 | 35/42 |
+
+12 des 25 jeux restants gagnent avec au moins une série dans les deux modes. Le total atteint 29/42. Les 17 déjà couverts conservent leur résultat.
+
+| Jeu nouvellement couvert | SIC | SIC Fallback |
+| --- | --- | --- |
+| CASC | move-path ×2 · 6 commandes | move-path ×2 · 6 commandes |
+| CD82 | move-path ×2 · 9 commandes | move-path ×2 · 9 commandes |
+| CGWL | move-path ×4 · 15 commandes | move-path ×4 · 15 commandes |
+| DAME | click-path ×3 · 7 commandes | click-path ×3 · 29 commandes |
+| ETAG | move-path ×3 · 7 commandes | move-path ×3 · 7 commandes |
+| EVAS | click-path ×2 · 3 commandes | click-path ×2 · 3 commandes |
+| FT09 | click-path ×2 · 4 commandes | click-path ×2 · 25 commandes |
+| KEYD | move-path ×2, move-path ×10 · 34 commandes | move-path ×2, move-path ×10 · 35 commandes |
+| S5I5 | click-path ×6, click-path ×5 · 13 commandes | click-path ×7, click-path ×5 · 25 commandes |
+| SIGN | move-path ×2, move-path ×4 · 15 commandes | move-path ×2, move-path ×4 · 16 commandes |
+| TN36 | click-path ×6 · 8 commandes | click-path ×7 · 53 commandes |
+| VC33 | click-path ×4 · 5 commandes | click-path ×4 · 12 commandes |
+
+Sur KEYD en Fallback, les séries comptent 2 et 10 déplacements. Le délai médian entre commandes d’une même série est de 32 ms, sur dix intervalles mesurés lors de cette campagne.
+
+Les nouveaux replis s’amorcent à partir de retours observés pendant la partie, comme un déplacement mesuré, une sélection qui ouvre une capture ou un clic qui modifie une relation entre éléments. Pour chaque commande enchaînée, le moteur vérifie la cible et l’effet prévu. Une contradiction rend la main à SIC.
+
+La trace compare les commandes, leurs coordonnées, les observations, les étapes d’animation et l’issue. Les parcours modifiés en Fallback concernent DAME, FT09, KEYD, S5I5, SIGN, TN36, VC33. Le retrait de la famille principale est établi sur 40 jeux. ELAS et POLA commencent par l’exploration publique. Les 1635 commandes des deux campagnes relèvent de SIC seul.
+
+- **Nouvelles victoires en Fallback** — DAME, FT09, KEYD, S5I5, SIGN, TN36, VC33.
+- **En attente d’une victoire avec série dans les deux modes** — CWSE, DNOI, ELAS, FITE, FUIT, KATA, LF52, LS19, POLA, SYME, TU93, WA30, WEAV.
+- **Niveaux 1 encore perdus en Fallback** — FUIT, KATA, TU93, WA30, WEAV.
+
+Les tests ciblés de l’agenda, des commandes et du runtime passent (49 tests).
+
 ## Référence avant extension
 
 La campagne locale utilise SIC seul sur le commit `e483a9d5`, à trois processus. Chaque passage part de l’image initiale et s’arrête à la première victoire du niveau 1. Une série contient plusieurs commandes exécutées sous le même plan engagé. Le délai est mesuré entre les lancements de deux commandes de cette série et inclut le retour du jeu et ses contrôles. Les délais mesurés dépendent aussi de la concurrence des processus.
