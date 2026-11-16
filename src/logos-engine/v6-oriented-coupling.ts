@@ -12,7 +12,7 @@ const coordinates=(boxes:R):number[][]=>Object.keys(boxes).map(supportPoint).sor
 const setSame=(a:readonly number[][],b:readonly number[][]):boolean=>supportSame([...a].sort(supportCompare),[...b].sort(supportCompare));
 const frequency=(values:readonly any[]):[any,number][]=>{const counts=new Map<any,number>();for(const v of values)counts.set(v,(counts.get(v)??0)+1);return[...counts].sort((a,b)=>b[1]-a[1]);};
 
-export function orientedCouplingInitial(rows:NativeRows):R|null{
+export function orientedCouplingInitial(rows:NativeRows, multipleReceivers=false):R|null{
   const cs=supportParts(rows),rings:number[][]=[];
   for(const c of cs){const b=c.bbox,p=b.width;if(p<3||b.height!==p||c.area!==p*p-(p-2)**2)continue;
     const edge:number[]=[],inside=new Set<number>();for(let y=b.top;y<=b.bottom;y++)for(let x=b.left;x<=b.right;x++){
@@ -20,17 +20,26 @@ export function orientedCouplingInitial(rows:NativeRows):R|null{
     }
     if(new Set(edge).size===1&&inside.size===1&&!inside.has(c.value))rings.push([p,c.value,[...inside][0]!,b.left,b.top]);
   }
-  const groups=frequency(rings.map(r=>v6Canonical(r.slice(0,3)))).filter(([,n])=>n>=2);if(groups.length!==1)return null;
+  const groups=frequency(rings.map(r=>v6Canonical(r.slice(0,3)))).filter(([,n])=>n>=2);
+  if(!groups.length||(multipleReceivers?groups[0]![1]===groups[1]?.[1]:groups.length!==1))return null;
   const[p,shell,core]=JSON.parse(groups[0]![0]) as [number,number,number],rs=rings.filter(r=>v6Canonical(r.slice(0,3))===groups[0]![0]);
   const phase=[mod(rs[0]![3]!,p),mod(rs[0]![4]!,p)];if(rs.some(r=>!supportSame([mod(r[3]!,p),mod(r[4]!,p)],phase)))return null;
-  const boxes:R[]=[];for(const c of cs){const b=c.bbox;if(c.value!==core||b.width%p||b.height%p||b.width*b.height<=p*p||!supportSame([mod(b.left,p),mod(b.top,p)],phase))continue;
+  const boxes:R[]=[];for(const c of cs){const b=c.bbox;if(c.value!==core||b.width%p||b.height%p
+    ||(multipleReceivers?b.width*b.height===p*p&&c.area!==p*p-(p-2)**2:b.width*b.height<=p*p)
+    ||!supportSame([mod(b.left,p),mod(b.top,p)],phase))continue;
     let good=true;for(let y=b.top;y<=b.bottom;y++)for(let x=b.left;x<=b.right;x++)if((x===b.left||x===b.right||y===b.top||y===b.bottom)&&rows[y]![x]!==core)good=false;
     if(good)boxes.push(b);
   }
-  if(boxes.length!==1)return null;const b=boxes[0]!,targets:number[][]=[];
-  for(let x=Math.floor((b.left-phase[0]!)/p);x<Math.floor((b.right-phase[0]!+1)/p);x++)for(let y=Math.floor((b.top-phase[1]!)/p);y<Math.floor((b.bottom-phase[1]!+1)/p);y++)targets.push([x,y]);
-  if(targets.length<rs.length)return null;
-  return{pitch:p,phase,core,rest_shell:shell,targets,initial_boxes:rs.map(r=>[Math.floor((r[3]!-phase[0]!)/p),Math.floor((r[4]!-phase[1]!)/p)]).sort(supportCompare),background:frequency(rows.flat())[0]![0]};
+  if(multipleReceivers?boxes.length<2:boxes.length!==1)return null;const targets:number[][]=[];
+  for(const b of boxes)for(let x=Math.floor((b.left-phase[0]!)/p);x<Math.floor((b.right-phase[0]!+1)/p);x++)for(let y=Math.floor((b.top-phase[1]!)/p);y<Math.floor((b.bottom-phase[1]!+1)/p);y++)targets.push([x,y]);
+  const initialBoxes=rs.map(r=>[Math.floor((r[3]!-phase[0]!)/p),Math.floor((r[4]!-phase[1]!)/p)]);
+  if(multipleReceivers)for(let y=0;phase[1]!+(y+1)*p<=rows.length;y++)for(let x=0;phase[0]!+(x+1)*p<=rows[0]!.length;x++){
+    if(initialBoxes.some(site=>supportSame(site,[x,y])))continue;
+    const patch=orientedCouplingTile(rows,{phase,pitch:p},[x,y])!;
+    if(patch.every((row,dy)=>row.every((ink,dx)=>ink===(dx===0||dy===0||dx===p-1||dy===p-1?shell:core))))initialBoxes.push([x,y]);
+  }
+  if(targets.length<initialBoxes.length)return null;
+  return{pitch:p,phase,core,rest_shell:shell,targets,initial_boxes:initialBoxes.sort(supportCompare),background:frequency(rows.flat())[0]![0]};
 }
 export function orientedCouplingTile(rows:NativeRows,h:R,p:readonly number[]):number[][]|null{
   const q=h.pitch,x=h.phase[0]+p[0]!*q,y=h.phase[1]+p[1]!*q;if(x<0||y<0||y+q>rows.length||x+q>rows[0]!.length)return null;

@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { measureSectorNetwork, type SectorNetwork } from './sector-delivery.ts';
 
 export const orientedDeliveryId = 'sic_oriented_delivery';
 export const verifyOrientedDeliveryId = 'sic_verify_oriented_delivery';
@@ -15,7 +16,7 @@ type Relay = { axis: 0 | 1; line: number; direction: NativePoint; cells: NativeP
 type State = { epoch: number; geometry: Geometry; color: number; held: NativePoint | null; invitation: NativePoint | null;
   free: Record<string, NativePoint>; loaded: Record<string, NativePoint>; tried: string[]; refs: string[]; count: number;
   transports?: readonly Transport[]; sharedEvidence?: string; transportCarriers?: string[];
-  relay?: Relay; waits?: number; stalledWaits?: number; stopped?: boolean };
+  relay?: Relay; sectorNetwork?: SectorNetwork; waits?: number; stalledWaits?: number; stopped?: boolean };
 type Transport = { readonly carrier: string; readonly pose: NativePoint; readonly box: NativePoint;
   readonly sources: readonly string[] };
 type Move = { pose: NativePoint; face: NativePoint; cargo: NativePoint | null };
@@ -36,7 +37,7 @@ function tileBox(g: Geometry, [x, y]: NativePoint): NativeBox {
   return [l, t, l + g.pitch - 1, t + g.pitch - 1];
 }
 
-function externalCarriers(observation: NativeObservation, local: State): Map<string, NativePoint> {
+function carrierPositions(observation: NativeObservation, local: State): Map<string, NativePoint[]> {
   const { pitch, phase, background, core } = local.geometry;
   const found = new Map<string, NativePoint[]>();
   for (const part of observation.entities) {
@@ -47,7 +48,15 @@ function externalCarriers(observation: NativeObservation, local: State): Map<str
     sites.push([(x - phase[0]) / pitch, (y - phase[1]) / pitch]);
     found.set(part.signature, sites);
   }
-  return new Map([...found].flatMap(([id, sites]) => sites.length === 1 ? [[id, sites[0]!] as const] : []));
+  return found;
+}
+
+function externalCarriers(observation: NativeObservation, local: State): Map<string, NativePoint> {
+  return new Map([...carrierPositions(observation, local)].flatMap(([id, sites]) => sites.length === 1 ? [[id, sites[0]!] as const] : []));
+}
+
+function sectorCarriers(observation: NativeObservation, local: State): NativePoint[] {
+  return [...carrierPositions(observation, local)].flatMap(([signature, sites]) => local.transportCarriers?.includes(signature) ? sites : []).sort(compare);
 }
 
 function transportReturn(before: NativeObservation, after: NativeObservation, local: State, old: Scene, next: Scene) {
@@ -248,6 +257,44 @@ function planRelay(local: State, scene: Scene, rows: NativeRows, commands: Reado
     target: parts.find(site => !geometry.targets.some(goal => same(site, goal))) ?? null, waitForTransport: true };
 }
 
+function planSectorRelay(local: State, scene: Scene, commands: Readonly<Record<string, NativePoint>>): Step | null {
+  const network = local.sectorNetwork!, floor = new Set(network.sending), parts = positions(scene);
+  const held = local.held, current: Move = { pose: scene.pose, face: scene.face, cargo: held };
+  const pendingPorts = network.receiving.flatMap(sector => {
+    const cells = new Set([...sector.cells, ...sector.ports.map(port => key(port.cell))]);
+    const loaded = parts.filter(part => !same(part, held) && cells.has(key(part))).length;
+    return loaded < sector.targets.length ? sector.ports : [];
+  });
+  const cargoFloor = new Set([...floor, ...pendingPorts.map(port => key(port.cell))]);
+  const choices = (held ? [held] : parts.filter(part => floor.has(key(part)))).flatMap(part => {
+    const fixed = new Set(parts.filter(other => !same(part, other)).map(key));
+    const contact = (face: NativePoint) => same(current.face, face) && same(add(current.pose, face), part);
+    return (held ? [scene.face] : Object.values(commands)).flatMap(face => {
+      if (!pendingPorts.some(port => same(port.face, face))) return [];
+      const approach = held || contact(face) ? { end: current, length: 0, step: null }
+        : shortest(current, new Set([...fixed, key(part)]), floor, commands,
+          move => same(move.face, face) && same(add(move.pose, face), part));
+      if (!approach) return [];
+      const stage = shortest({ ...approach.end, cargo: part }, fixed, floor, commands,
+        move => pendingPorts.some(port => same(port.face, face) && same(move.cargo, port.cell)), cargoFloor);
+      if (!stage?.end.cargo) return [];
+      const step: Step = approach.step ?? (held ? stage.step ?? { input: 'ACTION5', intent: 'release', prediction: null, target: stage.end.cargo }
+        : { input: 'ACTION5', intent: 'attach', prediction: null, target: part });
+      return [{ step: { ...step, target: step.target ?? stage.end.cargo }, cost: approach.length + stage.length, part }];
+    });
+  });
+  choices.sort((a, b) => a.cost - b.cost || compare(a.part, b.part));
+  if (choices.length) return choices[0]!.step;
+  if (held || parts.some(part => floor.has(key(part))) || (local.waits ?? 0) >= 48 || (local.stalledWaits ?? 0) >= 6) return null;
+  const blocked = Object.keys(scene.boxes);
+  const delays = Object.entries(commands);
+  const [input, face] = delays.find(([, face]) => !floor.has(key(add(scene.pose, face))) || blocked.includes(key(add(scene.pose, face))))
+    ?? delays[0]!;
+  const ahead = add(scene.pose, face), pose = floor.has(key(ahead)) && !blocked.includes(key(ahead)) ? ahead : scene.pose;
+  return { input, intent: 'motion', prediction: { pose, face, cargo: null },
+    target: parts.find(site => !local.geometry.targets.some(goal => same(site, goal))) ?? null, waitForTransport: true };
+}
+
 function relayMatches(proposal: Proposal, scene: Scene): boolean {
   const { local, step, scene: previous } = proposal;
   if (step.prediction) {
@@ -273,17 +320,20 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       const epoch = observation.level_epoch;
-      if (!(state?.epoch === epoch && state.relay) && !(state?.epoch === epoch - 1 && state.sharedEvidence)) return null;
+      if (!(state?.epoch === epoch && (state.relay || state.sectorNetwork)) && !(state?.epoch === epoch - 1 && state.sharedEvidence)) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal?.local.relay ? proposal : null;
+      return proposal?.local.relay || proposal?.local.sectorNetwork ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !Object.keys(labels).every(input => observation.available_action_refs.includes(input))
         || !observation.available_action_refs.includes('ACTION5') || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      if (prior?.stopped || (prior?.count ?? 0) >= (prior?.relay ? 120 : 70)) return null;
-      const geometry = prior?.geometry ?? orientedCouplingInitial(rows) as Geometry | null;
-      if (!geometry || geometry.targets.length > 12 || geometry.initial_boxes.length > 6) return null;
+      const previous = state?.epoch === observation.level_epoch - 1 && state.sharedEvidence ? state : null;
+      if (prior?.stopped || (prior?.count ?? 0) >= (prior?.relay || prior?.sectorNetwork ? 120 : 70)) return null;
+      const ordinary = prior?.geometry ?? orientedCouplingInitial(rows) as Geometry | null;
+      const divided = !ordinary && !!previous;
+      const geometry = ordinary ?? (divided ? orientedCouplingInitial(rows, true) as Geometry | null : null);
+      if (!geometry || geometry.targets.length > 12 || (!divided && !prior?.sectorNetwork && geometry.initial_boxes.length > 6)) return null;
       const possible = prior ? [prior.color] : [...new Set(rows.flat())].filter(value => ![geometry.core, geometry.background, geometry.rest_shell].includes(value));
       const scenes = possible.flatMap(color => {
         const scene = orientedCouplingScene(rows, geometry, color) as Scene | null;
@@ -293,21 +343,25 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       const { color, scene } = scenes[0]!, ahead = add(scene.pose, scene.face);
       const initial: State = prior ?? { epoch: observation.level_epoch, geometry, color, held: null, invitation: null,
         free: {}, loaded: {}, tried: [], refs: [], count: 0 };
-      const previous = state?.epoch === observation.level_epoch - 1 && state.sharedEvidence ? state : null;
-      const relay = prior?.relay ?? (!prior && previous ? measureRelay(rows, observation, initial, scene, previous) : null);
-      if (!relay && geometry.targets.length > 6) return null;
-      const local: State = !prior && relay && previous
-        ? { ...initial, relay, free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
+      const relay = prior?.relay ?? (!prior && previous && !divided ? measureRelay(rows, observation, initial, scene, previous) : null);
+      const sectorNetwork = prior?.sectorNetwork ?? (divided && previous
+        ? measureSectorNetwork(rows, geometry, scene.pose, positions(scene), sectorCarriers(observation, { ...initial, transportCarriers: previous.transportCarriers })) : null);
+      const handsOff = !!relay || !!sectorNetwork;
+      if (!handsOff && (divided || geometry.targets.length > 6)) return null;
+      const local: State = !prior && handsOff && previous
+        ? { ...initial, ...(relay ? { relay } : {}), ...(sectorNetwork ? { sectorNetwork } : {}),
+          free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
           transportCarriers: [...(previous.transportCarriers ?? [])] } : initial;
       const commands: Readonly<Record<string, NativePoint>> = { ...labels, ...local.free, ...(local.held ? local.loaded : {}) };
       const reserved = (local.transports ?? []).filter(item => item.sources.length >= 2);
       const invited = same(ahead, local.invitation) && Object.hasOwn(scene.boxes, key(ahead)) && !reserved.some(item => same(item.box, ahead));
       const unique = (step: Step) => JSON.stringify([scene.pose, scene.face, scene.boxes, local.held, step.input]);
-      const step: Step | null = relay ? planRelay(local, scene, rows, commands)
+      const step: Step | null = sectorNetwork ? planSectorRelay(local, scene, commands)
+        : relay ? planRelay(local, scene, rows, commands)
         : !local.held && invited && (!local.count || !Object.keys(local.loaded).length)
         ? { input: 'ACTION5', intent: 'attach', prediction: null, target: ahead }
         : planDelivery(local, scene, rows, commands) ?? allowDelivery(local, scene, rows, commands, reserved, step => local.tried.includes(unique(step)));
-      if (!step || (!(relay && step.waitForTransport) && local.tried.includes(unique(step)))) return null;
+      if (!step || (!(handsOff && step.waitForTransport) && local.tried.includes(unique(step)))) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources)]
         .filter((value): value is string => !!value && value !== ref))];
@@ -319,7 +373,10 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       const strategy = known ? 'P07' : knownInteraction ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
       const label = navigationPrimitives[strategy], parent = 'G_official_completion';
-      const situation = step.waitForTransport ? 'Keep the receiving area free while the other carrier completes the observed delivery'
+      const situation = sectorNetwork && step.waitForTransport ? 'Give the carriers time to finish deliveries in their sectors'
+        : sectorNetwork && step.intent === 'release' ? 'Leave the part for a carrier in a sector that still has an open target'
+        : sectorNetwork && local.held ? 'Take the part to a relay port serving a sector that needs a delivery'
+        : step.waitForTransport ? 'Keep the receiving area free while the other carrier completes the observed delivery'
         : relay && step.intent === 'release' ? 'Leave the part on the shared strip for the other carrier'
           : relay && local.held ? 'Move the part to the shared strip while the player stays on its side'
         : step.intent === 'attach' ? 'Test whether the object in front attaches'
@@ -330,7 +387,7 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
         satisfactionContract: 'official_progress_after_depositing_compatible_parts' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'oriented-delivery:' + need.id, action = { action_ref: step.input, data: {} }, actions = [action];
-      const prediction = known || relay ? step.prediction : null;
+      const prediction = known || handsOff ? step.prediction : null;
       const peer = relay ? externalCarriers(observation, local).get(relay.carrier) : null;
       return { status: 'proposed', kind: verifyOrientedDeliveryId, actions, steps: [{ action, expected_after: prediction }],
         local, scene, step, needId: need.id, attempt: unique(step),
@@ -342,6 +399,8 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
           triggerCard: decision.receipt.workflow,
           actor: tileBox(geometry, scene.pose), cargo: local.held ? tileBox(geometry, local.held) : invited ? tileBox(geometry, ahead) : null,
           target: step.target ? tileBox(geometry, step.target) : null,
+          ...(sectorNetwork ? { receivingTargets: sectorNetwork.receiving.flatMap(sector => sector.targets.map(target => tileBox(geometry, target))),
+            externalCarriers: sectorCarriers(observation, local).map(site => tileBox(geometry, site)) } : {}),
           ...(peer ? { externalCarriers: [tileBox(geometry, peer)] } : {}),
           ...(reserved.length ? { externalCarriers: reserved.map(item => tileBox(geometry, item.pose)), reservedParts: reserved.map(item => tileBox(geometry, item.box)) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
@@ -357,7 +416,7 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      if (proposal.local.relay) {
+      if (proposal.local.relay || proposal.local.sectorNetwork) {
         const scene = orientedCouplingScene(second, proposal.local.geometry, proposal.local.color) as Scene | null;
         const matched = !!scene && before.state === after.state && relayMatches(proposal, scene);
         return { matched, seal_prefix: true, reason: !matched ? 'relay_carrier_prediction_contradicted'
@@ -401,14 +460,15 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
         next.sharedEvidence ??= after.observation_ref;
         next.transportCarriers = [...new Set([...(local.transportCarriers ?? []), ...confirmedCarriers.map(item => item.carrier)])];
       }
-      if (local.relay) {
+      if (local.relay || local.sectorNetwork) {
         next.stopped = !relayMatches(proposal, scene);
         if (step.waitForTransport) {
-          const previousPeer = externalCarriers(before, local).get(local.relay.carrier) ?? null;
-          const peer = externalCarriers(after, local).get(local.relay.carrier) ?? null;
+          const peerChanged = local.relay
+            ? !same(externalCarriers(before, local).get(local.relay.carrier) ?? null, externalCarriers(after, local).get(local.relay.carrier) ?? null)
+            : JSON.stringify(sectorCarriers(before, local)) !== JSON.stringify(sectorCarriers(after, local));
           const changedParts = JSON.stringify(old.boxes) !== JSON.stringify(scene.boxes);
           next.waits = (local.waits ?? 0) + 1;
-          next.stalledWaits = changedParts || !same(previousPeer, peer) ? 0 : (local.stalledWaits ?? 0) + 1;
+          next.stalledWaits = changedParts || peerChanged ? 0 : (local.stalledWaits ?? 0) + 1;
         }
         if (step.intent === 'attach' || step.intent === 'release' || local.held) {
           next.held = scene.boxes[key(ahead)] === scene.face_value ? ahead : null;
