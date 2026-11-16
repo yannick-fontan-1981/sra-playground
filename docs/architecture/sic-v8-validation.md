@@ -1200,3 +1200,11 @@ Les temps proviennent de la même campagne à huit processus. POLA est aussi vé
 Sur le code `969014e7`, les 100 jeux gagnent le niveau 3 en SIC seul en partant du niveau 1. La campagne s’arrête à la victoire cible pour chaque jeu. L’empreinte des commandes, des observations et des animations jusqu’au niveau 2 correspond pour les 100 jeux à la campagne précédente.
 
 Les parcours totalisent 4 965 commandes sous autorité SIC, dont 2 092 au niveau 3.
+
+### Revalidation des 100 niveaux 4 après les séries continues
+
+La campagne sur `969014e7` obtient 99 victoires au niveau 4. ELAS reste bloqué devant une pièce cachée. Un déplacement observé au niveau 2 faisait apparaître une autre couleur sous la pièce déplacée. La miniature était relue différemment après cette révélation et le mouvement était écarté des acquis. La correction vérifie la grille, la sélection, le déplacement et les cases préservées. Elle transmet les quatre directions mesurées dès que le nouveau motif demande une pièce absente des dessus de pile.
+
+Sur `26cb728e`, les 100 jeux gagnent le niveau 4 en SIC seul. ELAS gagne en 46 commandes et 25,54 s au niveau 4 pendant la campagne à huit processus. Les 99 autres parcours gardent leur empreinte. Toutes les commandes, observations et animations des trois premiers niveaux concordent avec la campagne de niveau 3.
+
+La campagne totalise 7 147 commandes sous autorité SIC, dont 2 182 au niveau 4. Le contrôle TypeScript et les 49 tests ciblés passent.
