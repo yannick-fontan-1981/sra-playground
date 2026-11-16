@@ -278,8 +278,14 @@ export function createSicVerifyReactiveMotion(): NativeFamily<Proposal> {
     },
     record(before, after, _action, first, second, proposal) {
       if (proposal.crowd) {
+        const { local, current, move, obstacle } = proposal.crowd;
+        if (after.levels_completed > before.levels_completed && witness?.epoch === before.level_epoch
+          && local.verified && move.expected.peers.length === 0) {
+          witness = { ...witness, epoch: after.level_epoch, score: after.levels_completed,
+            refs: [...local.refs.slice(-4), after.observation_ref] };
+        }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-        const { local, current, move, obstacle } = proposal.crowd, actual = readPursuitState(second, local.layout, obstacle);
+        const actual = readPursuitState(second, local.layout, obstacle);
         const verified = !!actual && pursuitStateKey(actual) === pursuitStateKey(move.expected);
         const rejected = verified ? local.rejected : [...local.rejected.slice(-31), pursuitTrialKey(current, move.input)];
         pursuit = { ...local, verified, rejected, blocked: !actual, refs: [...local.refs.slice(-4), after.observation_ref] };
