@@ -15,7 +15,8 @@ type Position = { actor: NativePoint; cargo: NativePoint[][]; held: number; deli
 type Intent = 'move' | 'attach' | 'turn' | 'drop';
 type Move = { input: string; intent: Intent; next: Position; subject: number };
 type Memory = { epoch: number; layout: Layout; at: Position; steps: Move[]; refs: string[]; moves: boolean; interactions: Intent[]; failed: boolean };
-type Proposal = NativeProposal & { local: Memory; move: Move; needId: string };
+type Landing = { point: NativePoint; pixels: number[] };
+type Proposal = NativeProposal & { local: Memory; move: Move; needId: string; landings?: Landing[][] };
 type ReceiverBinding = { cargo: number; receiver: number };
 type CargoWitness = { epoch: number; score: number; pitch: number; actorColor: number; core: number; interactions: Intent[]; refs: string[];
   receivers?: ReceiverBinding[] };
@@ -232,6 +233,29 @@ function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): 
   });
 }
 
+function translationLandings(rows: NativeRows, local: Memory, remaining: number): Landing[][] {
+  const { layout, at, steps } = local;
+  const occupied = new Set([key(at.actor), ...at.cargo.flat().map(key)]);
+  const moving = (position: Position) => [position.actor, ...(position.cargo[position.held] ?? [])];
+  const result: Landing[][] = [];
+  let previous = at;
+  for (const move of steps.slice(0, remaining)) {
+    if (move.intent !== 'move') break;
+    const entering = moving(move.next).filter(point => !moving(previous).some(current => same(current, point)));
+    // A cell vacated earlier in this series has no observed background at
+    // planning time. Rebind it at the next decision instead of guessing.
+    if (entering.some(point => occupied.has(key(point)))) break;
+    const landings = entering.map(point => {
+      const [x, y] = tileBox(layout, point);
+      return { point, pixels: patch(rows, [x, y], layout.pitch) };
+    });
+    if (landings.some(landing => landing.pixels.length !== layout.pitch ** 2)) break;
+    result.push(landings);
+    previous = move.next;
+  }
+  return result;
+}
+
 function initial(rows: NativeRows, epoch: number, witness: CargoWitness | null): Memory | null {
   const ordinary = measure(rows);
   const layouts = !ordinary.length && witness ? measure(rows, true) : ordinary;
@@ -312,6 +336,9 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
         subjects: ['carrier', 'cargo', 'pivot_surface', 'receiving_cells'], parentObjective: parent, satisfactionContract: 'official_progress_after_all_deliveries' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = pivotCargoId + ':' + need.id, action = { action_ref: move.input, data: {} };
+      const landings = motion && known ? translationLandings(rows, local, remaining) : [];
+      const series = landings.length > 1 ? local.steps.slice(0, landings.length) : [move];
+      const actions = series.length > 1 ? series.map(step => ({ action_ref: step.input, data: {} })) : [action];
       const situation = { move: 'Translate the carrier and verify the position of every attached tile', attach: 'Test attaching the adjacent cargo',
         turn: 'Test rotating the cargo without crossing occupied cells', drop: 'Release the cargo onto its compatible pads' }[move.intent];
       const subject = move.subject >= 0 ? move.subject : local.steps.find(m => m.subject >= 0)?.subject ?? -1;
@@ -319,32 +346,48 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
       const tile = (p: string) => tileBox(layout, p.split(',').map(Number) as [number, number]);
       return {
         status: 'proposed', kind: family, local, move, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: move.next.actor }],
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: series.map((step, index) => ({ action: actions[index], expected_after: step.next.actor })),
+        ...(series.length > 1 ? { landings } : {}),
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Deliver the differently shaped cargo', situation, evidence, agenda: navigation?.entries ?? [], mode,
           triggerCard: navigation?.card ?? decision?.receipt.workflow, actor: tileBox(layout, local.at.actor), cargo: local.at.cargo[subject]?.map(p => tileBox(layout, p)),
-          receivers: layout.destinations[subject]?.map(tile), pivot: move.intent === 'turn' ? layout.pivot.map(tile) : [] },
+          receivers: layout.destinations[subject]?.map(tile), pivot: move.intent === 'turn' ? layout.pivot.map(tile) : [],
+          ...(series.length > 1 ? { plannedSeries: series.map(step => step.next.actor) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0) {
+        const { layout } = proposal.local, landing = proposal.landings?.[index];
+        const admitted = proposal.binding?.level_epoch === observation.level_epoch && !!landing && landing.every(expected => {
+          const [x, y] = tileBox(layout, expected.point);
+          const actual = patch(packet.frame_rows, [x, y], layout.pitch);
+          return actual.length === expected.pixels.length && actual.every((value, i) => value === expected.pixels[i]);
+        });
+        return { admitted, reason: admitted ? 'cargo_landing_still_available' : 'cargo_landing_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'cargo_step_bound' : 'cargo_observation_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = witnessed(second, proposal.local.layout, proposal.local.at, proposal.move);
-      return { matched, seal_prefix: true, reason: matched ? { move: 'cargo_translation_confirmed', attach: 'cargo_attachment_confirmed',
-        turn: 'cargo_rotation_confirmed', drop: 'cargo_delivery_confirmed' }[proposal.move.intent] : 'cargo_projection_contradicted' };
+      const { local } = proposal, move = local.steps[index]!;
+      const at = local.steps[index - 1]?.next ?? local.at;
+      const matched = witnessed(second, local.layout, at, move);
+      return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
+        reason: matched ? { move: 'cargo_translation_confirmed', attach: 'cargo_attachment_confirmed',
+          turn: 'cargo_rotation_confirmed', drop: 'cargo_delivery_confirmed' }[move.intent] : 'cargo_projection_contradicted' };
     },
-    record(before, after, _action, _first, second, proposal) {
-      const { local, move } = proposal;
+    record(before, after, _action, _first, second, proposal, index) {
+      const local = index > 0 && state?.epoch === proposal.local.epoch ? state : proposal.local;
+      const move = local.steps[0]!;
       if (!learns && after.levels_completed > before.levels_completed && local.moves && move.intent === 'drop'
         && move.next.delivered === (1 << local.at.cargo.length) - 1 && local.interactions.includes('attach')) {
         const { actorColor, core, pitch, freeColors, receiverColors } = local.layout;

@@ -1041,3 +1041,37 @@ Le temps total passe de **95,718 s à 90,711 s**, avec un temps d’encodage mes
 Le rejeu de réconciliation utilise le même identifiant de session et des horloges figées pour les deux variantes. L’empreinte de la chaîne des deltas est identique à la fin de chacun des huit niveaux. Le niveau 4 se ferme avec **12 960 deltas sur LS19** et **13 869 sur LS20**. Les acquisitions atteignent respectivement 143 et 144.
 
 Au niveau 4 de la référence, les **286 transactions** de LS19 cumulent **114,04 ms** pour la copie de l’index des nœuds et **12,88 ms** pour la copie du tableau des deltas. Les **275 transactions** de LS20 cumulent **111,35 ms** et **14,49 ms** respectivement. La publication immuable qui suit ces copies coûte **1,14 s** sur LS19 et **1,65 s** sur LS20. Au niveau 1, cette publication coûte **37 ms** et **46 ms**.
+
+### Publication du graphe et déplacements continus sur GABA
+
+La transaction construit l’index et le journal avec les nœuds et deltas déjà validés. Elle valide les ajouts et ferme les nouveaux conteneurs directement. Les révisions, les références et leur ordre restent dans le format existant.
+
+La famille de transport et de rotation de charges présente désormais les translations consécutives d’un trajet comme une seule série. Le moteur contrôle les cases d’arrivée du porteur et de sa charge avant chaque pas, puis vérifie les pièces sur le retour. La prise, la rotation, le dépôt et une case dont le fond doit être observé clôturent la série.
+
+**GABA** rejoue ses quatre premiers niveaux avec les **239 mêmes commandes SIC seul et les mêmes retours complets**. Le rejeu produit **31 séries**, jusqu’à **16 commandes**, à **15 ms** d’intervalle médian dans une série. Les mesures locales à un worker cumulent les effets des séries et de la nouvelle publication du graphe.
+
+| Niveau | Temps version 112 | Temps avec les deux changements | Reprises de décision avant → après |
+| --- | ---: | ---: | ---: |
+| 1 | 21,162 s | 10,747 s | 46 → 15 |
+| 2 | 21,721 s | 10,338 s | 37 → 14 |
+| 3 | 64,316 s | 21,375 s | 67 → 16 |
+| 4 | 143,432 s | 48,494 s | 88 → 25 |
+
+Au niveau 4, les reprises de décision passent de **14,37 s à 2,06 s** et le traitement des retours de **128,02 s à 45,62 s**. Sur ce traitement, l’assemblage et la publication du graphe passent de **19,74 s à 0,77 s**.
+
+**LS19 et LS20** rejouent les **287 mêmes commandes SIC seul et les mêmes retours complets**, animations comprises. Les deux jeux font le même nombre de transactions par niveau avant et après. Un passage chronométré par variante, à un worker, donne les temps suivants.
+
+| Jeu | Niveau | Temps version 112 | Temps optimisé | Gain |
+| --- | ---: | ---: | ---: | ---: |
+| LS19 | 1 | 1,868 s | 1,822 s | +2,5 % |
+| LS19 | 2 | 5,377 s | 5,309 s | +1,3 % |
+| LS19 | 3 | 10,784 s | 10,614 s | +1,6 % |
+| LS19 | 4 | 19,426 s | 18,563 s | +4,4 % |
+| LS20 | 1 | 3,897 s | 3,780 s | +3,0 % |
+| LS20 | 2 | 11,260 s | 11,360 s | −0,9 % |
+| LS20 | 3 | 17,542 s | 16,962 s | +3,3 % |
+| LS20 | 4 | 19,756 s | 18,599 s | +5,9 % |
+
+L’assemblage et la publication du graphe passent de **5,31 s à 2,55 s** sur les huit niveaux, soit **52,1 %** de temps en moins. Au niveau 4, ils passent de **1,347 s à 0,683 s** sur LS19 et de **1,968 s à 0,776 s** sur LS20. Le temps total des huit niveaux passe de **89,910 s à 87,009 s**.
+
+Le rejeu séparé à horloge figée donne la même empreinte de chaîne, le même nombre de nœuds et de deltas, et les mêmes acquisitions à la fin de chacun des huit niveaux. Le niveau 4 se termine avec **12 960 deltas et 143 acquisitions** sur LS19 et **13 869 deltas et 144 acquisitions** sur LS20. Les **169 tests** du noyau, du graphe natif, du moteur et des familles passent.

@@ -1,5 +1,6 @@
 import type { CallContext, JsonObject, JsonValue, Primitive } from './ir.ts';
-import { arrayValue, canonical, compareUnicode, digest, equal, exactKeys, immutableJson, isJsonObject, objectValue, ownValue, stringValue } from './canonical.ts';
+import { appendImmutableJsonArray, arrayValue, canonical, compareUnicode, digest, equal, exactKeys, immutableJson, isJsonObject,
+  MAX_JSON_NODES, objectValue, ownValue, stringValue, updateImmutableJsonRecord } from './canonical.ts';
 
 export { equal } from './canonical.ts';
 
@@ -425,12 +426,14 @@ class StagedKernelTransaction implements KernelTransaction {
     if (this.busy) throw new Error('Kernel transaction still has a pending write');
     try {
       if (!this.appended.length) { this.closed = true; return this.initial; }
-      const nodes = { ...this.initial.nodes };
-      for (const [identity, node] of this.updates) {
-        // Define data properties even for names such as __proto__.
-        Object.defineProperty(nodes, identity, { value: node, enumerable: true, writable: true, configurable: true });
+      // The index and journal had already validated their children. Preserve
+      // the original outer size bound when publishing both closed containers.
+      if (this.nodeCount + this.initial.deltas.length + this.appended.length + 4 > MAX_JSON_NODES) {
+        throw new TypeError('JSON size/nesting limit exceeded');
       }
-      const result = immutableJson({ nodes, deltas: [...this.initial.deltas, ...this.appended], chain: this.chain }) as KnowledgeMemory;
+      const nodes = updateImmutableJsonRecord(this.initial.nodes, this.updates);
+      const deltas = appendImmutableJsonArray(this.initial.deltas, this.appended);
+      const result = immutableJson({ nodes, deltas, chain: this.chain }) as KnowledgeMemory;
       this.closed = true;
       return result;
     } catch (error) { this.failed = true; throw error; }

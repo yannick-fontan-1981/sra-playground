@@ -110,7 +110,7 @@ test('the batch node budget counts distinct additions and permits updates at the
 test('batch identities are own data properties, including prototype-like and Unicode names', async () => {
   const owner = kernel(), batch = owner.beginTransaction(emptyMemory());
   let expected = emptyMemory();
-  for (const id of ['__proto__', 'constructor', 'toString', '\u{10000}', '\ue000']) {
+  for (const id of ['__proto__', 'constructor', 'toString', '\u{10000}', '\ue000', '20', '3']) {
     const input = node(id, id);
     assert.equal(batch.node(id), undefined);
     await batch.commit(input, CAUSE);
@@ -118,6 +118,7 @@ test('batch identities are own data properties, including prototype-like and Uni
   }
   const actual = batch.finish();
   assert.deepEqual(actual, expected);
+  assert.equal(JSON.stringify(actual), JSON.stringify(expected));
   for (const id of ['__proto__', 'constructor', 'toString']) assert.equal(Object.hasOwn(actual.nodes, id), true);
 });
 

@@ -23,7 +23,7 @@ const immutableObjects = new WeakSet<object>();
 // eviction only removes a recomputable encoding, never a knowledge revision.
 const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; height: number }>(16 * 1024 * 1024, 4096);
 const MAX_DEPTH = 128;
-const MAX_NODES = 1_000_000;
+export const MAX_JSON_NODES = 1_000_000;
 
 /** Read-only ownership test; a foreign or merely frozen object is not certified. */
 export function isOwnedImmutableJson(value: unknown): boolean {
@@ -148,7 +148,7 @@ export function immutableJson(value: unknown): JsonValue {
   const ancestors = new WeakSet<object>();
   let nodes = 0;
   function visit(item: unknown, depth: number): JsonValue {
-    if (++nodes > MAX_NODES || depth > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
+    if (++nodes > MAX_JSON_NODES || depth > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
     if (item === null || typeof item === 'boolean') return item;
     if (typeof item === 'string') { assertUnicode(item); return item; }
     if (typeof item === 'number') {
@@ -177,13 +177,43 @@ export function immutableJson(value: unknown): JsonValue {
   return visit(value, 0);
 }
 
+/** Only the new entries require ingress validation. The record and its keys
+ * were already closed by this module. Build one fresh canonical-order index. */
+export function updateImmutableJsonRecord<T extends JsonValue>(base: Readonly<Record<string, T>>,
+  changes: ReadonlyMap<string, T>): Readonly<Record<string, T>> {
+  if (!isOwnedImmutableJson(base) || Array.isArray(base)) throw new TypeError('Expected a validated immutable JSON record');
+  const updates = new Map<string, T>();
+  const keys = Object.keys(base);
+  for (const [name, value] of changes) {
+    const key = stringValue(name, 'JSON member');
+    if (!Object.hasOwn(base, key) && !updates.has(key)) keys.push(key);
+    updates.set(key, immutableJson(value));
+  }
+  if (keys.length + 1 > MAX_JSON_NODES) throw new TypeError('JSON size/nesting limit exceeded');
+  const result = Object.fromEntries<T>(keys.sort(compareUnicode).map(key => [key, updates.has(key) ? updates.get(key)! : base[key]!] as const));
+  Object.freeze(result);
+  immutableObjects.add(result);
+  return result;
+}
+
+/** Extend a validated dense array without enumerating the old entries again. */
+export function appendImmutableJsonArray<T extends JsonValue>(base: readonly T[], tail: readonly T[]): readonly T[] {
+  if (!isOwnedImmutableJson(base) || !Array.isArray(base)) throw new TypeError('Expected a validated immutable JSON array');
+  const added = immutableJson(tail);
+  if (!Array.isArray(added)) throw new TypeError('Expected a JSON array to append');
+  if (base.length + added.length + 1 > MAX_JSON_NODES) throw new TypeError('JSON size/nesting limit exceeded');
+  const result = Object.freeze([...base, ...added]) as readonly T[];
+  immutableObjects.add(result);
+  return result;
+}
+
 /** Python json.dumps(ensure_ascii=False, sort_keys=True, separators=(',', ':')) on the portable domain. */
 export function canonical(value: unknown): string {
   const ancestors = new WeakSet<object>();
   let nodes = 0;
   let lastHeight = 0, lastImmutable = true;
   function encode(item: unknown, depth: number): string {
-    if (++nodes > MAX_NODES || depth > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
+    if (++nodes > MAX_JSON_NODES || depth > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
     lastHeight = 0; lastImmutable = true;
     if (item === null) return 'null';
     if (typeof item === 'boolean') return item ? 'true' : 'false';
@@ -193,7 +223,7 @@ export function canonical(value: unknown): string {
     const cached = canonicalObjects.get(item);
     if (cached) {
       nodes += cached.nodes - 1;
-      if (nodes > MAX_NODES || depth + cached.height > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
+      if (nodes > MAX_JSON_NODES || depth + cached.height > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
       lastHeight = cached.height; return cached.text;
     }
     if (ancestors.has(item)) throw new TypeError('Cyclic JSON value');
