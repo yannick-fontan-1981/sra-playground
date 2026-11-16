@@ -1293,7 +1293,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === materialRouteId || family === verifyConnectedRouteId)) {
-    for (const [field, label] of [['actor', 'Controlled piece'], ['target', 'Next tile']] as const) {
+    for (const [field, label] of [['actor', 'Controlled piece'], ['target', 'Next tile'], ['guard', 'Guard being approached'],
+      ['front', 'Tile in the guard’s facing direction']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
