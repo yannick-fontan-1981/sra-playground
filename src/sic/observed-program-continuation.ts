@@ -2,15 +2,18 @@ import { occurrenceCollectionScene, observeOccurrenceProgramPacket } from '../lo
 import { programEditor, programWorld, programWordAt, projectedProgramMembers } from '../logos-engine/v6-program-composition-access.ts';
 import { fitProgramCompositionModel, programSurface, searchProgram } from '../logos-engine/v6-program-compositions.ts';
 import { renderProgramLayers } from '../logos-engine/v6-program-geometry.ts';
+import { candidateProgramInputSites, learnProgramInputSupport } from '../logos-engine/v6-program-input-access.ts';
+import { observeRespondentProgramPacket, programSupportMatch } from '../logos-engine/v6-program-respondent-observations.ts';
 import type { NativeBox, NativeCommand, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { OccurrenceRecord } from '../logos-engine/v6-occurrence-scene.ts';
+import { planRespondentPrograms, type ProgramTurn, type RespondentContext, type ScheduledProgramStep } from './respondent-program-planner.ts';
 
 export type ProgramEdit = { before: NativeRows; after: NativeRows; epoch: number; evidence: string[] };
-export type ProgramWitness = { model: OccurrenceRecord; epoch: number; evidence: string[] };
+export type ProgramWitness = { model: OccurrenceRecord; epoch: number; evidence: string[]; continued?: boolean };
 type Display = { member_box: NativeBox; member_size: number[]; limit: number };
 export type RetainedProgram = { word: number[]; display: Display };
 export type ProgramChoice = {
-  kind: 'bind_program_bearer' | 'compose_observed_program' | 'run_verified_program';
+  kind: 'bind_program_bearer' | 'compose_observed_program' | 'run_verified_program' | 'remove_program_operator' | 'probe_respondent_programs';
   action: NativeCommand;
   region: NativeBox | null;
   word: number[];
@@ -20,6 +23,9 @@ export type ProgramChoice = {
   affected: NativeBox[];
   forecast: { base: number[]; remaining: number }[] | null;
   next: number[] | null;
+  respondentProbe?: { origin: number[]; next: number[] };
+  respondents?: ProgramTurn[];
+  scheduled?: ScheduledProgramStep[];
 };
 
 const same = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right);
@@ -102,6 +108,14 @@ export function verifyObservedProgram(choice: ProgramChoice, witness: ProgramWit
   const { model } = witness;
   const members = displayMembers(rows, choice.display, model);
   if (!same(members.map(member => member.color), choice.word)) return false;
+  if (choice.respondents) {
+    const world = programWorld(rows, model);
+    return choice.respondents.some(turn => {
+      if (!programSupportMatch(rows, model, turn.base, choice.word).matches) return false;
+      if (turn.targets.some(body => !programSupportMatch(rows, model, body.base, body.word).matches)) return false;
+      return world.every(body => same(body.base, turn.base) || turn.targets.some(target => same(body.base, target.base) && same(body.word, target.word)));
+    });
+  }
   if (choice.next && !programWordAt(rows, model, choice.next, choice.word)) return false;
   if (!choice.forecast) return true;
   const world = programWorld(rows, model);
@@ -109,4 +123,107 @@ export function verifyObservedProgram(choice: ProgramChoice, witness: ProgramWit
     const matching = world.filter(object => same(object.base, base));
     return remaining ? matching.length === 1 && matching[0]!.word.length === remaining : !matching.length;
   });
+}
+
+function clickProgramRegion(region: NativeBox): NativeCommand {
+  const [left, top, right, bottom] = region;
+  return { action_ref: 'ACTION6', data: { x: Math.floor((left + right) / 2), y: Math.floor((top + bottom) / 2) } };
+}
+
+export function chooseRespondentProgram(witness: ProgramWitness, rows: NativeRows, available: readonly string[],
+  remaining: number, deadline: number, retained?: RetainedProgram, context?: RespondentContext,
+  scheduled?: ScheduledProgramStep[]): ProgramChoice | null {
+  const { model } = witness, layout = programEditor(rows, model);
+  const display: Display | undefined = layout ? { member_box: layout.member_box, member_size: layout.member_size, limit: layout.limit } : retained?.display;
+  if (!display || !available.includes(model.command_ref)) return null;
+  const members: OccurrenceRecord[] = layout?.members ?? displayMembers(rows, display, model);
+  const word = members.map(member => member.color as number), world = programWorld(rows, model);
+  if (!word.length && !context) return chooseObservedProgram(witness, rows, available, remaining, deadline, retained);
+  const owners = word.length ? world.filter(body => same(body.word, word)) : [];
+  const plan = !context ? null : scheduled ?? (layout ? planRespondentPrograms(model, context, word,
+    layout.controls.map((control: OccurrenceRecord) => control.color), remaining, deadline) : null);
+  const step = plan?.[0];
+  const matchedOwner: OccurrenceRecord | null = step && word.length ? owners.find(body => same(body.base, step.base))
+    ?? (programSupportMatch(rows, model, step.base, word).matches ? { base: step.base, word } : null)
+    : owners.length === 1 ? owners[0]! : null;
+  const base: number[] | undefined = step?.base ?? matchedOwner?.base;
+  if (!base) return null;
+  const opponents = world.filter(body => !same(body.base, base));
+  const actor = matchedOwner ? wordBounds({ ...matchedOwner, anchor: matchedOwner.anchor
+    ?? base.map((value, index) => value - word.length * model.layer.step[index]) }, model) : null;
+  const common = { display, actor, sceneMembers: members.map(member => member.bbox as NativeBox),
+    affected: opponents.map(body => wordBounds(body, model)), forecast: null };
+  if (context) {
+    if (!step || !same(word, step.before) || (word.length && !matchedOwner)) return null;
+    if (step.kind === 'execute') return { ...common, kind: 'run_verified_program', action: { action_ref: model.command_ref, data: {} },
+      region: null, word, next: null, respondents: step.forecasts, scheduled: plan!.slice(1) };
+    if (!layout || !available.includes('ACTION6')) return null;
+    const edited = step.kind === 'remove' ? layout.members[0]
+      : layout.controls.find((control: OccurrenceRecord) => control.color === step.label);
+    if (!edited) return null;
+    const region = edited.bbox as NativeBox;
+    return { ...common, kind: step.kind === 'remove' ? 'remove_program_operator' : 'compose_observed_program',
+      action: clickProgramRegion(region), region, word: step.word, next: step.word.length ? base : null, scheduled: plan!.slice(1) };
+  }
+  if (!layout || !matchedOwner || word.length > 2) return null;
+  const moves = (model.moves as OccurrenceRecord[]).filter(move => move.status === 'phase_observed_translation');
+  if (opponents.length && opponents.every(body => body.word.every((label: number) => label === model.interaction.label))) {
+    return chooseObservedProgram(witness, rows, available, remaining, deadline, retained);
+  }
+  const motion = moves.find(move => move.label === word.at(-1));
+  if (!motion) return null;
+  const vector: number[] = motion.vectors[0], next = base.map((value, index) => value + vector[index]!);
+  const field = programSurface(rows, model, world, base);
+  if (!field?.points.some((point: number[]) => same(point, next)) || opponents.some(body => same(body.base, next))) return null;
+  const reverse = moves.find(move => vector.every((value, index) => value === -move.vectors[0][index]));
+  if (!reverse) return null;
+  if (word.length === 1) {
+    const control = layout.controls.find((part: OccurrenceRecord) => part.color === reverse.label);
+    if (!control || !available.includes('ACTION6')) return null;
+    const region = control.bbox as NativeBox;
+    return { ...common, kind: 'compose_observed_program', action: clickProgramRegion(region), region, word: [reverse.label, ...word], next: base };
+  }
+  if (word[0] !== reverse.label) return null;
+  return { ...common, kind: 'probe_respondent_programs', action: { action_ref: model.command_ref, data: {} }, region: null,
+    word, next: base, respondentProbe: { origin: base, next } };
+}
+
+export function learnRespondentContext(choice: ProgramChoice, witness: ProgramWitness, before: NativeRows, after: NativeRows,
+  frames: readonly NativeRows[], evidence: string): RespondentContext | null {
+  if (!choice.respondentProbe) return null;
+  const { model } = witness, { origin, next } = choice.respondentProbe;
+  const layout = programEditor(before, model), world = programWorld(after, model);
+  if (!layout || !verifyObservedProgram(choice, witness, after) || !programEditor(after, model)) return null;
+  const moves = model.moves as OccurrenceRecord[];
+  const candidates = programWorld(before, model).filter(body => !same(body.base, origin)).flatMap(body => {
+    const label = [...body.word as number[]].reverse().find(label => moves.some(move => move.label === label));
+    const operator = moves.find(move => move.label === label);
+    if (!operator) return [];
+    const vector = operator.vectors[0] as number[];
+    return [{ object: body, expected_first_base: body.base.map((value: number, index: number) => value + vector[index]!) }];
+  });
+  const probe = { model, layout, own_prediction: { object: { base: origin, word: choice.word }, expected_first_base: next },
+    prepared_word: choice.word, candidates };
+  const support = learnProgramInputSupport(probe, before, frames);
+  if (!support) return null;
+  const packet = observeRespondentProgramPacket(probe, before, frames, { same_epoch: true });
+  const observed = [
+    ...packet.results.filter((result: OccurrenceRecord) => result.status === 'predicted_local_translation_witnessed'
+      && !same(result.candidate.object.base, origin))
+      .map((result: OccurrenceRecord) => ({ base: result.candidate.expected_first_base, word: result.candidate.object.word,
+        frame: result.matching_packet_indices[0] })),
+    ...packet.revealed_candidates.filter((result: OccurrenceRecord) => result.compatible_retroprojections.length === 1)
+      .map((result: OccurrenceRecord) => ({ base: result.object.base, word: result.object.word,
+        frame: result.first_complete_packet_index })),
+  ];
+  const others = world.filter(body => !same(body.base, origin));
+  if (!others.length || others.length !== observed.length) return null;
+  const order = observed.sort((a, b) => a.frame - b.frame);
+  if (order.some((body, index) => (index > 0 && order[index - 1]!.frame === body.frame)
+    || others.filter(other => same(body.base, other.base) && same(body.word, other.word)).length !== 1)) return null;
+  const field = programSurface(after, model, world, origin);
+  if (!field) return null;
+  const sites = [origin, ...candidateProgramInputSites(after, field, support, origin)];
+  return { initial: { base: origin, targets: order.map(({ base, word }) => ({ base, word })) },
+    points: field.points, sites, evidence: [evidence] };
 }

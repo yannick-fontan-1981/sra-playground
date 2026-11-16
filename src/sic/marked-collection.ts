@@ -2,8 +2,9 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { collectionValues, matchesCollectionEdit, measureCollection } from './collection-experiment.ts';
 import { sicNeedId } from './need-identity.ts';
-import { chooseObservedProgram, learnObservedProgram, verifyObservedProgram,
+import { chooseObservedProgram, chooseRespondentProgram, learnObservedProgram, learnRespondentContext, verifyObservedProgram,
   type ProgramChoice, type ProgramEdit, type ProgramWitness, type RetainedProgram } from './observed-program-continuation.ts';
+import type { RespondentContext, ScheduledProgramStep } from './respondent-program-planner.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 
 export const markedCollectionId = 'sic_marked_collection';
@@ -13,6 +14,8 @@ export const markedCollectionStrategies = {
   run_edited_collection: 'Test the edited collection with the available command',
   bind_program_bearer: 'Add a known operator to identify which piece carries the program',
   compose_observed_program: 'Add the next operator in the program projected on the visible board',
+  remove_program_operator: 'Remove the top operator to prepare the next program at an editing site',
+  probe_respondent_programs: 'Run two opposite operators to return to the editing site and observe the other programs',
   run_verified_program: 'Run the current program and compare the resulting positions and stacks',
 } as const;
 const graph = compileStrategyGraph({ id: 'test_effect_of_editing_a_collection', version: 1, order: 'FALLBACK',
@@ -26,7 +29,7 @@ const graph = compileStrategyGraph({ id: 'test_effect_of_editing_a_collection', 
 
 type Strategy = keyof typeof markedCollectionStrategies;
 type State = { epoch: number; edit: string | null; stopped: boolean; count: number; samples?: ProgramEdit[];
-  program?: ProgramWitness; retained?: RetainedProgram };
+  program?: ProgramWitness; retained?: RetainedProgram; respondents?: RespondentContext; scheduled?: ScheduledProgramStep[] };
 type Proposal = NativeProposal & { strategy: Strategy; expected: number[] | null; needId: string; followUp?: ProgramChoice };
 const empty = (epoch = 0): State => ({ epoch, edit: null, stopped: false, count: 0 });
 
@@ -42,10 +45,12 @@ async function programProposal(observation: NativeObservation, rows: NativeRows,
   const point = choice.region && [Number(choice.action.data.x), Number(choice.action.data.y)] as NativePoint;
   const pointBinding = point && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
   return { status: 'proposed', kind: markedCollectionId, actions, strategy: choice.kind, expected: null, needId: need.id, followUp: choice,
-    steps: [{ action: choice.action, expected_after: null, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
+    steps: [{ action: choice.action, expected_after: choice.respondents ?? choice.respondentProbe?.origin ?? null,
+      ...(pointBinding ? { point_binding: pointBinding } : {}) }],
     binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     sicSituationCard: { strategy: choice.kind, need: 'Reach the remaining pieces with the observed program operators',
-      mode: choice.kind === 'bind_program_bearer' ? 'assimilation' : 'solving', situation: label, agenda: [], evidence,
+      mode: choice.kind === 'bind_program_bearer' ? 'assimilation' : choice.respondentProbe ? 'exploration' : 'solving',
+      situation: label, agenda: [], evidence,
       members: choice.sceneMembers, addressedRegion: choice.region, actor: choice.actor, affected: choice.affected },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -66,10 +71,13 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const local = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
-      if (local.stopped || local.count >= 12) return null;
+      if (local.stopped || local.count >= (local.program?.continued ? 32 : 12)) return null;
       if (local.program?.epoch === observation.level_epoch) {
-        const deadline = Math.min(execution?.deadlineMs ?? Infinity, performance.now() + 120);
-        const choice = chooseObservedProgram(local.program, rows, observation.available_action_refs, remaining, deadline, local.retained);
+        const deadline = Math.min(execution?.deadlineMs ?? Infinity, performance.now() + (local.program.continued ? 1_350 : 120));
+        const choice = local.program.continued
+          ? chooseRespondentProgram(local.program, rows, observation.available_action_refs, remaining, deadline,
+            local.retained, local.respondents, local.scheduled)
+          : chooseObservedProgram(local.program, rows, observation.available_action_refs, remaining, deadline, local.retained);
         return choice ? programProposal(observation, rows, local.program, choice) : null;
       }
       const scene = measureCollection(rows);
@@ -118,7 +126,8 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.followUp && state.program) {
         const matched = before.level_epoch === after.level_epoch && verifyObservedProgram(proposal.followUp, state.program, second);
-        return { matched, seal_prefix: true, reason: matched ? 'program_projection_confirmed' : 'program_projection_contradicted' };
+        return { matched, seal_prefix: true, reason: !matched ? 'program_projection_contradicted' : proposal.followUp.respondentProbe
+          ? 'bearer_returned_to_the_editing_site' : 'program_projection_confirmed' };
       }
       const matched = proposal.expected ? matchesCollectionEdit(second, proposal.expected) : null;
       return { matched, seal_prefix: true, reason: matched === null ? 'observe_edited_collection_effect'
@@ -132,13 +141,22 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
             const program = learnObservedProgram(sample, before, after, command, first, frames);
             if (program) { state = { ...empty(after.level_epoch), program }; break; }
           }
+        } else if (after.levels_completed > before.levels_completed && local.program && proposal.strategy === 'run_verified_program') {
+          const program = { ...local.program, epoch: after.level_epoch, continued: true,
+            evidence: [...local.program.evidence, before.observation_ref, after.observation_ref] };
+          state = { ...empty(after.level_epoch), program };
         }
         return { events: [] };
       }
       if (proposal.followUp && local.program) {
         const choice = proposal.followUp, matched = verifyObservedProgram(choice, local.program, second);
-        const retained = matched && choice.kind === 'run_verified_program' ? { word: choice.word, display: choice.display } : undefined;
-        state = { ...local, count: local.count + 1, stopped: !matched, ...(retained ? { retained } : {}) };
+        const retained = matched && (local.program.continued || choice.kind === 'run_verified_program')
+          ? { word: choice.word, display: choice.display } : undefined;
+        const respondents = matched && choice.respondentProbe
+          ? learnRespondentContext(choice, local.program, first, second, frames, after.observation_ref) : null;
+        state = { ...local, count: local.count + 1, stopped: !matched || !!choice.respondentProbe && !respondents,
+          ...(retained ? { retained } : {}), ...(choice.scheduled ? { scheduled: choice.scheduled } : {}),
+          ...(respondents ? { respondents, program: { ...local.program, evidence: [...local.program.evidence, ...respondents.evidence] } } : {}) };
         return { events: [] };
       }
       const confirmed = proposal.expected !== null && matchesCollectionEdit(second, proposal.expected);
