@@ -198,17 +198,25 @@ async function matching(before: TransitionObservation, after: TransitionObservat
   }
   return [matched, unresolved];
 }
+type PairProjection = ReturnType<typeof matching>;
+type ProjectRule = (rule: TransitionRecord) => Promise<{ prediction: TransitionRecord; matches(): boolean }>;
+
 function model(name: string, status: string, source: Evidence, fields: TransitionRecord = {}): TransitionRecord {
   return { model: name, status, evidence_refs: [source.before, source.after], predictive_use_allowed: false, ...fields };
 }
 
 export async function assessMechanicalLibrary(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
   priorRules: readonly TransitionRecord[], source?: Evidence): Promise<TransitionRecord> {
-  const observed = source ?? await evidence(before, after, action), compatible: TransitionRecord[] = [], refuted: TransitionRecord[] = [], unknown: TransitionRecord[] = [];
+  return assessLibrary(before, after, action, priorRules, source ?? await evidence(before, after, action));
+}
+async function assessLibrary(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
+  priorRules: readonly TransitionRecord[], observed: Evidence, projectPairs?: () => PairProjection,
+  projectRule?: ProjectRule): Promise<TransitionRecord> {
+  const compatible: TransitionRecord[] = [], refuted: TransitionRecord[] = [], unknown: TransitionRecord[] = [];
   if (!same(before.coordinate_basis, after.coordinate_basis) || before.coordinate_basis == null) {
     return { status: 'unknown', compatible: [], refuted: [], unknown: [model('rigid_translation', 'unknown', observed, { reason: 'coordinate_basis_not_bound' })], domain_complete: false };
   }
-  const [pairs, unresolved] = await matching(before, after);
+  const [pairs, unresolved] = await (projectPairs?.() ?? matching(before, after));
   type Motion = { a: TransitionRecord; b: TransitionRecord; delta: Point; sa: Support | null; sb: Support | null; rigid: boolean };
   const motions: Motion[] = [];
   for (const [a, b] of pairs) {
@@ -245,9 +253,10 @@ export async function assessMechanicalLibrary(before: TransitionObservation, aft
     }
   }
   for (const rule of priorRules) {
-    if (rule.status !== 'mechanism_acquired') continue;
-    const prediction = await applyEmpiricalRule(rule, before, action);
-    if (prediction.status !== 'prediction' || predictionMatches(prediction, after)) continue;
+    if (rule.status !== 'mechanism_acquired' || !truth(rule.predictive_use_allowed)) continue;
+    const projected = projectRule ? await projectRule(rule) : undefined;
+    const prediction = projected?.prediction ?? await predictCandidateRule(rule, before, action);
+    if (prediction.status !== 'conditional_prediction' || (projected?.matches() ?? predictionMatches(prediction, after))) continue;
     const stationary = motions.filter(motion => same(motion.delta, [0, 0])), blocked: TransitionRecord[] = [];
     for (const expected of prediction.predicted_entities) for (const first of stationary) {
       if (!same(first.a.signature, expected.entity.signature) || first.sa === null) continue;
@@ -326,7 +335,11 @@ function positionContext(bindings: TransitionRecord): TransitionRecord {
 
 export async function constructEmpiricalRule(before: TransitionObservation, after: TransitionObservation, action: TransitionAction): Promise<TransitionRecord> {
   checkNeutralTransition(before, after, action);
-  const observed = await evidence(before, after, action), [pairs, unresolved] = await matching(before, after);
+  return constructRule(before, after, action, await evidence(before, after, action));
+}
+async function constructRule(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
+  observed: Evidence, projectPairs?: () => PairProjection): Promise<TransitionRecord> {
+  const [pairs, unresolved] = await (projectPairs?.() ?? matching(before, after));
   const rigid: { a: TransitionRecord; b: TransitionRecord; delta: Point }[] = [];
   for (const [a, b] of pairs) {
     const delta: Point = [position(b)[0] - position(a)[0], position(b)[1] - position(a)[1]], sa = support(a), sb = support(b);
@@ -391,24 +404,36 @@ export async function validateEmpiricalRule(rule: TransitionRecord, before: Tran
 export async function validateRetainedEmpiricalRule(rule: TransitionRecord, before: TransitionObservation, after: TransitionObservation, action: TransitionAction): Promise<TransitionRecord> {
   return retainNativeJson(await validateRule(retainNativeJson(rule), before, after, action, true));
 }
-async function validateRule(rule: TransitionRecord, before: TransitionObservation, after: TransitionObservation, action: TransitionAction, retained: boolean): Promise<TransitionRecord> {
-  checkNeutralTransition(before, after, action);
-  const updated = retained ? { ...rule } : copy(rule), observed = await evidence(before, after, action);
+interface SharedRuleEvidence {
+  observed: Evidence;
+  literalConditions(): TransitionRecord;
+  observedFeatureDigest(): Promise<string>;
+  projectRule: ProjectRule;
+}
+async function validateRule(rule: TransitionRecord, before: TransitionObservation, after: TransitionObservation,
+  action: TransitionAction, retained: boolean, shared?: SharedRuleEvidence): Promise<TransitionRecord> {
+  if (!shared) checkNeutralTransition(before, after, action);
+  const updated = retained ? { ...rule } : copy(rule);
+  const observed = shared ? { ...shared.observed } : await evidence(before, after, action);
   const seen = new Set([...rule.validation_evidence, ...rule.counterexamples].map(item => item.transition_ref));
   if (seen.has(observed.transition_ref)) { updated.last_validation = { status: 'duplicate_evidence_not_independent' }; return updated; }
   let confirmed: boolean, changed: boolean;
   if (rule.rule_family === 'translation_relation') {
-    const prediction = await predictCandidateRule(rule, before, action);
+    const projected = shared ? await shared.projectRule(rule) : undefined;
+    const prediction = projected?.prediction ?? await predictCandidateRule(rule, before, action);
     if (prediction.status !== 'conditional_prediction') { updated.last_validation = { status: prediction.status }; return updated; }
-    confirmed = predictionMatches(prediction, after); observed.position_context = prediction.position_context;
+    confirmed = projected?.matches() ?? predictionMatches(prediction, after); observed.position_context = prediction.position_context;
     observed.frozen_rule_digest = prediction.rule_digest; observed.prediction_digest = await digest(prediction.predicted_entities);
     changed = rule.validation_evidence.every((item: Evidence) => !same(item.position_context, prediction.position_context));
   } else {
-    if (!same(rule.conditions, literalConditions(before, action, false))) { updated.last_validation = { status: 'not_applicable' }; return updated; }
+    if (!same(rule.conditions, shared?.literalConditions() ?? literalConditions(before, action, false))) {
+      updated.last_validation = { status: 'not_applicable' }; return updated;
+    }
     confirmed = same(applyLiteralEffect(observedStateView(before), rule.effect), observedStateView(after)); changed = false;
   }
   if (!confirmed) {
-    updated.counterexamples = [...updated.counterexamples, { ...observed, observed_feature_digest: await digest(observedStateView(after)) }];
+    const featureDigest = await (shared?.observedFeatureDigest() ?? digest(observedStateView(after)));
+    updated.counterexamples = [...updated.counterexamples, { ...observed, observed_feature_digest: featureDigest }];
     Object.assign(updated, { status: 'refuted', predictive_use_allowed: false, last_validation: { status: 'refuted', evidence: observed.transition_ref } });
   } else {
     updated.validation_evidence = [...updated.validation_evidence, observed]; updated.independent_confirmations = updated.validation_evidence.length;
@@ -423,22 +448,57 @@ async function validateRule(rule: TransitionRecord, before: TransitionObservatio
 }
 export async function assessTransition(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
   priorRules: readonly TransitionRecord[] = []): Promise<TransitionRecord> {
-  return assessTransitionState(before, after, action, priorRules, false);
+  return (await assessTransitionState(before, after, action, priorRules, false, false)).assessment;
 }
 /** Native acquisition retains immutable rule subtrees while acquiring every check. */
 export async function assessRetainedTransition(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
   priorRules: readonly TransitionRecord[] = []): Promise<TransitionRecord> {
-  return retainNativeJson(await assessTransitionState(before, after, action, priorRules, true));
+  return (await assessRetainedTransitionWithChecks(before, after, action, priorRules, false)).assessment;
+}
+export async function assessRetainedTransitionWithChecks(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
+  priorRules: readonly TransitionRecord[], checkPredictions: boolean): Promise<{ assessment: TransitionRecord; predictionChecks: TransitionRecord[] }> {
+  const result = await assessTransitionState(before, after, action, priorRules, true, checkPredictions);
+  return { assessment: retainNativeJson(result.assessment), predictionChecks: result.predictionChecks };
 }
 async function assessTransitionState(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
-  priorRules: readonly TransitionRecord[], retained: boolean): Promise<TransitionRecord> {
+  priorRules: readonly TransitionRecord[], retained: boolean, checkPredictions: boolean):
+  Promise<{ assessment: TransitionRecord; predictionChecks: TransitionRecord[] }> {
   checkNeutralTransition(before, after, action);
-  const observed = await evidence(before, after, action), library = await assessMechanicalLibrary(before, after, action, priorRules, observed);
+  const observed = await evidence(before, after, action);
+  let literal: TransitionRecord | undefined, featureDigest: Promise<string> | undefined, pairs: PairProjection | undefined;
+  const retainedRules = retained ? priorRules.map(rule => retainNativeJson(rule)) : priorRules;
+  const projections = new Map<TransitionRecord, ReturnType<ProjectRule>>();
+  const shared: SharedRuleEvidence | undefined = retained ? {
+    observed,
+    literalConditions: () => literal ??= literalConditions(before, action, false),
+    observedFeatureDigest: () => featureDigest ??= digest(observedStateView(after)),
+    projectRule: rule => {
+      const existing = projections.get(rule);
+      if (existing) return existing;
+      const pending = predictCandidateRule(rule, before, action).then(prediction => {
+        let matched: boolean | undefined;
+        return { prediction, matches: () => matched ??= predictionMatches(prediction, after) };
+      });
+      projections.set(rule, pending);
+      return pending;
+    },
+  } : undefined;
+  const projectPairs = retained ? () => pairs ??= matching(before, after) : undefined;
+  const validate = async (rule: TransitionRecord): Promise<TransitionRecord> => retained
+    ? retainNativeJson(await validateRule(rule, before, after, action, true, shared))
+    : validateEmpiricalRule(rule, before, after, action);
+  // A report and the registry check the same immutable rule on the same
+  // observed transition. Keep their separate evidence fields and list order.
+  const predictionChecks = checkPredictions ? await Promise.all(retainedRules.map(validate)) : [];
+  const library = await assessLibrary(before, after, action, retainedRules, observed, projectPairs, shared?.projectRule);
   const updated = new Map<string, TransitionRecord>();
-  for (const rule of priorRules) updated.set(rule.rule_id, await (retained ? validateRetainedEmpiricalRule : validateEmpiricalRule)(rule, before, after, action));
-  const candidate = await constructEmpiricalRule(before, after, action);
+  for (const [index, rule] of retainedRules.entries()) {
+    updated.set(rule.rule_id, predictionChecks[index] ?? await validate(rule));
+  }
+  const candidate = retained ? await constructRule(before, after, action, { ...observed }, projectPairs)
+    : await constructEmpiricalRule(before, after, action);
   if (!updated.has(candidate.rule_id)) {
-    const contradictory = priorRules.filter(rule => same(rule.conditions, candidate.conditions) && !same(rule.effect, candidate.effect));
+    const contradictory = retainedRules.filter(rule => same(rule.conditions, candidate.conditions) && !same(rule.effect, candidate.effect));
     if (contradictory.length) {
       candidate.counterexamples = contradictory.flatMap(rule => rule.validation_evidence.map((item: Evidence) => ({ ...copy(item), reason: 'contrary_observed_effect_under_same_conditions' })));
       candidate.status = 'refuted'; candidate.predictive_use_allowed = false; candidate.uncertainty.push('additional_observable_condition_or_nondeterministic_model_required');
@@ -447,10 +507,11 @@ async function assessTransitionState(before: TransitionObservation, after: Trans
   }
   const rules = [...updated.values()], applications = [];
   for (const rule of rules) if (rule.status === 'mechanism_acquired') applications.push(await applyEmpiricalRule(rule, before, action));
-  return { schema: MECHANISM_SCHEMA, evidence_refs: [observed.before, observed.after], library, empirical_rules: rules,
+  const assessment = { schema: MECHANISM_SCHEMA, evidence_refs: [observed.before, observed.after], library, empirical_rules: rules,
     construction: { status: updated.get(candidate.rule_id)!.status, rule_id: candidate.rule_id, catalog_absence_does_not_discard_transition: true,
       generalized_induction_beyond_translation: 'not_implemented' }, predictive_applications: applications, release_authority: false,
     limitations: ['no_object_role_or_goal_assignment', 'contact_push_compatibility_not_driver_causation', 'stationarity_not_proof_of_blocking', 'reflection_toggle_and_general_context_induction_not_implemented'] };
+  return { assessment, predictionChecks };
 }
 
 function properties(entity: TransitionRecord): TransitionRecord {

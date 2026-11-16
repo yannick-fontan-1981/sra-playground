@@ -1132,3 +1132,26 @@ Les temps ci-dessous sont la moyenne de deux passages par variante, sans profile
 Le temps total des quatre niveaux passe de **47,12 s à 46,27 s**. Le niveau 4 gagne 2,1 % au premier passage et perd 3,3 % dans l’ordre inverse. Son temps total reste proche de 19,3 s pendant ces mesures. Les 239 commandes, leurs retours, les 31 séries et les 70 reprises de décision concordent sur les quatre passages chronométrés.
 
 À horloge figée, les empreintes des chaînes du graphe et les acquisitions concordent à chaque fin de niveau, du niveau 1 au niveau 4 sur GABA, LS19 et LS20. Les **526 commandes et leurs retours complets** sont identiques. Le typage TypeScript et **98 tests** passent.
+
+### Réutilisation entre les contrôles d’une règle apprise
+
+L’acquisition produit toujours le rapport de vérification des prédictions et le registre des règles. Sur le premier retour d’une série, les deux utilisent le même résultat immuable par règle. Dans le périmètre exact d’un retour, l’évaluation mécanique et la validation d’une règle partagent sa projection, l’empreinte de sa version et la comparaison avec les éléments observés. Les règles révisées sont évaluées avec leurs propres empreintes.
+
+Les contrôles d’un même retour partagent aussi l’empreinte de la transition, les conditions littérales, l’empreinte des observations contradictoires et les correspondances entre entités. Les calculs commencent à nouveau pour le retour suivant.
+
+Sur GABA niveau 4, le profil échantillonné mesure **2,59 s → 1,32 s** dans la validation des règles, soit **49,2 %** de moins par rapport à la version 116 (`2b6c4efa`).
+
+Les temps sont la moyenne de deux passages par variante, à un worker et sans profileur, avec inversion de l’ordre au second passage.
+
+| Niveau GABA | Temps version 116 | Temps optimisé | Gain total | Traitement des retours avant → après |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 9,257 s | 9,078 s | +1,9 % | 6,030 s → 5,759 s |
+| 2 | 6,078 s | 6,036 s | +0,7 % | 5,287 s → 5,194 s |
+| 3 | 10,912 s | 10,138 s | +7,1 % | 9,613 s → 8,827 s |
+| 4 | 17,983 s | 16,510 s | +8,2 % | 15,192 s → 13,654 s |
+
+Le temps total passe de **44,23 s à 41,76 s**. Les **239 commandes**, leurs retours, les **31 séries continues** et les **70 reprises de décision** concordent sur les quatre passages chronométrés.
+
+Le rejeu à horloge figée donne les mêmes empreintes du graphe de GABA après chaque niveau. Les deux variantes enregistrent respectivement **167, 447, 883 et 2 292** vérifications de prédiction aux niveaux 1 à 4. Après la victoire du niveau 4, chacune compte **239 acquisitions et 14 325 deltas**. Le typage TypeScript et **255 tests** passent.
+
+Les contrôles croisés sur LS19 et LS20 produisent aussi les mêmes empreintes et les mêmes acquisitions du niveau 1 au niveau 4. Sur l’ensemble des trois jeux, les **526 commandes et leurs retours complets** sont identiques.

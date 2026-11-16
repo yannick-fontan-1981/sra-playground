@@ -63,6 +63,23 @@ test('512 remains accepted by the source domain and either 513 side remains refu
   }
 });
 
+test('the prediction report and registry share each check for its exact observed transition', async () => {
+  for (const name of ['changed_positions_acquire_translation', 'failed_frozen_translation_refutes']) {
+    const fixtureCase = fixture.cases.find((row: R) => row.name === name);
+    const [rule, before, after, command] = structuredClone(fixtureCase.args);
+    const result = await assessNativeTransitionDomain(before, after, command, [rule], [], true);
+    const checked = result.predictionChecks[0]!;
+    const retained = result.assessment.empirical_rules.find((entry: R) => entry.rule_id === rule.rule_id);
+    assert.equal(checked, retained, 'The evidence report and registry retain the same immutable check');
+    assert.deepEqual(checked, fixtureCase.expected);
+    assert.ok(Object.isFrozen(checked));
+
+    const continuation = await assessNativeTransitionDomain(before, after, command, [rule], [], false);
+    assert.deepEqual(continuation.predictionChecks, []);
+    assert.deepEqual(continuation.assessment, result.assessment);
+  }
+});
+
 test('invalid neutral input and later evidence errors still stop acquisition', async () => {
   const item = fixture.cases.find((row: R) => row.name === 'library_rigid_movement');
   const [before, after, command] = structuredClone(item.args);

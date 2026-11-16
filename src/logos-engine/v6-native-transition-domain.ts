@@ -4,11 +4,11 @@
  * The unchanged 512-entity source domain still refuses mechanical assessment.
  * Its refusal is retained as unknown while independent source families may
  * continue. No entities are removed and no unperformed validation is credited.
- * All other errors propagate. Inside the source domain the original functions
- * and their order are used without changing their outputs.
+ * All other errors propagate. Inside the source domain the source checks
+ * keep their outputs, sharing results within the same observed transition.
  */
-import { assessPropertyTransition, assessRetainedTransition, checkNeutralTransition,
-  NeutralEntityDomainError, transitionObservationRef, validateRetainedEmpiricalRule } from './v6-transition-learning.ts';
+import { assessPropertyTransition, assessRetainedTransitionWithChecks, checkNeutralTransition,
+  NeutralEntityDomainError, transitionObservationRef } from './v6-transition-learning.ts';
 import type { TransitionAction, TransitionObservation, TransitionRecord as R } from './v6-transition-learning.ts';
 
 export interface NativeTransitionAssessment {
@@ -47,12 +47,11 @@ export async function assessNativeTransitionDomain(
       predictionChecks: checkPredictions ? priorRules.map(rule => ({ rule_id: rule.rule_id, status: 'unknown', reason,
         evidence_refs, validation_performed: false, release_authority: false })) : [] };
   }
-  const predictionChecks = checkPredictions
-    ? await Promise.all(priorRules.map(rule => validateRetainedEmpiricalRule(rule, before, after, command))) : [];
-  const assessment = { ...await assessRetainedTransition(before, after, command, priorRules) };
+  const learning = await assessRetainedTransitionWithChecks(before, after, command, priorRules, checkPredictions);
+  const assessment = { ...learning.assessment };
   if (command.action_ref === 'ACTION6') {
     const properties = await assessPropertyTransition(before, after, command, priorProperties);
     assessment.property_rules = properties.property_rules; assessment.addressed_assessment = properties;
   }
-  return { assessment, predictionChecks, updateRegistries: true };
+  return { assessment, predictionChecks: learning.predictionChecks, updateRegistries: true };
 }
