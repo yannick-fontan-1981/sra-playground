@@ -148,8 +148,8 @@ function chooseStep(layout: Layout, sample: Sample, gain: number[] | null, input
   return null;
 }
 
-function shiftReturn(proposal: Proposal, rows: NativeRows): number[] | null {
-  const { local, current, step } = proposal, next = readSample(rows, local.layout);
+function shiftReturn(proposal: Proposal, next: Sample | null): number[] | null {
+  const { current, step } = proposal;
   if (!next || next.selected !== step.selected) return null;
   const shifts = measuredShifts(current, next);
   const supported = step.shifts ? equal(shifts, step.shifts.map((delta, i) => {
@@ -232,12 +232,24 @@ export function createSicPeriodicProfileAlignment(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = !!shiftReturn(proposal, second);
+      const matched = !!shiftReturn(proposal, readSample(second, proposal.local.layout));
       return { matched, seal_prefix: true, reason: matched ? 'relative_profile_shift_verified' : 'profile_prediction_contradicted' };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, _first, second, proposal, _index, frames) {
+      const state = proposal.local;
+      if (after.levels_completed > before.levels_completed) {
+        const closing = frames.some(frame => {
+          const sample = readSample(frame, state.layout);
+          return sample !== null && satisfied(state.layout, sample.totals) && shiftReturn(proposal, sample) !== null;
+        });
+        if (closing && witness?.epoch === before.level_epoch) {
+          witness = { ...witness, epoch: after.level_epoch, gauges: state.layout.gauges.length,
+            refs: [...state.refs.slice(-4), before.observation_ref, after.observation_ref] };
+        }
+        return { events: [] };
+      }
       if (before.level_epoch !== after.level_epoch) return { events: [] };
-      const shifts = shiftReturn(proposal, second), state = proposal.local;
+      const shifts = shiftReturn(proposal, readSample(second, state.layout));
       local = { ...state, gain: state.gain ?? shifts, stopped: !shifts, refs: [...state.refs.slice(-4), after.observation_ref] };
       return { events: [] };
     },
