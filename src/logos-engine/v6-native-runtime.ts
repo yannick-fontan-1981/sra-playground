@@ -57,6 +57,7 @@ import { createSicOutlineService, learnOutlineServiceId, outlineServiceId } from
 import { createSicObservedRouteIntervention } from '../sic/observed-route-intervention.ts';
 import { createSicObservedSurvival } from '../sic/observed-survival.ts';
 import { createSicObservedRailTransfers } from '../sic/observed-rail-transfers.ts';
+import { createSicColumnAlignment } from '../sic/column-alignment.ts';
 import { createSicSettleMatchingEdges } from '../sic/settle-matching-edges.ts';
 import { createSicLabeledSequence, learnLabeledSequenceId } from '../sic/labeled-sequence.ts';
 import { createSicMarkedCollection } from '../sic/marked-collection.ts';
@@ -2692,7 +2693,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
       createSicVerifySharedArrival(), createSicOutlineService(outlineServiceId, routeIntervention.learn),
       createSicOutlineService(learnOutlineServiceId, routeIntervention.learn), routeIntervention, createSicObservedSurvival(), createSicObservedRailTransfers(),
-      createSicSettleMatchingEdges(),
+      createSicSettleMatchingEdges(), createSicColumnAlignment(),
       createSicLabeledSequence(sequence, now), createSicLabeledSequence(sequence, now, learnLabeledSequenceId),
       createSicMarkedCollection(), createSicVisibleConfigurationCoverage(), createSicMarkedCompartmentFlow(), createSicObservedRelayRoute(), createSicObservedPrefixQuotas(),
       createSicObservedCarrierReduction(), createSicObservedLinePlacement(), createSicObservedPolePair(), createSicObservedSharedRelations(),

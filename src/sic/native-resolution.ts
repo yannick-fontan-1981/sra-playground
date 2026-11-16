@@ -33,6 +33,7 @@ import { observedActuatorArrangementId } from './observed-actuator-arrangement.t
 import { observedRouteInterventionId } from './observed-route-intervention.ts';
 import { observedSurvivalId } from './observed-survival.ts';
 import { observedRailTransfersId } from './observed-rail-transfers.ts';
+import { columnAlignmentId } from './column-alignment.ts';
 import { settleMatchingEdgesId } from './settle-matching-edges.ts';
 import { slotTransferId, slotTransferStrategies } from './slot-transfer.ts';
 import { learnRemoteAccessId, remoteSupportRouteId, remoteSupportRouteStrategies } from './remote-support-route.ts';
@@ -632,6 +633,16 @@ export function readNativeResolution(agent: {
       ['destination', 'Matching outline']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+  }
+  if (situationCard && family === columnAlignmentId) {
+    const target = bounds(card?.target);
+    if (target) subjects.push({ label: 'Next supported placement', box: target });
+    if (Array.isArray(card?.line)) for (const cell of card.line) {
+      const box = bounds(cell);
+      if (box && !subjects.some(subject => subject.box.every((value, i) => value === box[i]))) {
+        subjects.push({ label: card.defensive ? 'Opponent token in the threat' : 'Token in the winning line', box });
+      }
     }
   }
   if (situationCard && family === observedRailTransfersId) {
