@@ -1203,7 +1203,9 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && family === mergeForDemandId) {
-    for (const [field, label] of [['actor', 'Material moved'], ['partner', 'Other merge input'], ['focus', 'Click target'],
+    const mobile = bounds(card?.autonomous);
+    if (mobile) subjects.push({ label: 'Mobile approaching the material', box: mobile });
+    for (const [field, label] of [['actor', card?.protectiveClick ? 'Material to protect' : 'Material moved'], ['partner', 'Other merge input'], ['focus', 'Click target'],
       ['demand', 'Product requested'], ['receptor', 'Delivery receiver']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });

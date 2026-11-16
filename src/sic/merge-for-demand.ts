@@ -16,9 +16,12 @@ type Recipe = { readonly input: number; readonly inputSide: number; readonly out
 type Motion = { readonly color: number; readonly side: number; readonly range: number; readonly evidence: string };
 type Radius = { readonly lower: number; readonly upper: number; readonly refs: readonly string[] };
 type Transfer = { readonly palette: readonly number[]; readonly recipes: readonly Recipe[]; readonly motion: readonly Motion[]; readonly radius: Radius };
+type MobileGlyph = { readonly color: number; readonly mask: readonly NativePoint[]; readonly box: NativeBox };
+type Pressure = { readonly body: MobileGlyph; readonly travel: number; readonly diversion: number;
+  readonly attempts: readonly string[]; readonly refs: readonly string[]; readonly lost?: true };
 type Memory = { readonly epoch: number; readonly scene: Scene; readonly recipes: readonly Recipe[];
-  readonly motion: readonly Motion[]; readonly tried: readonly string[]; readonly count: number; readonly radius?: Radius };
-type Choice = { readonly intent: 'merge' | 'approach' | 'deliver'; readonly member: Piece; readonly partner: Piece | null;
+  readonly motion: readonly Motion[]; readonly tried: readonly string[]; readonly count: number; readonly radius?: Radius; readonly pressure?: Pressure };
+type Choice = { readonly intent: 'merge' | 'approach' | 'deliver' | 'divert'; readonly member: Piece; readonly partner: Piece | null;
   readonly point: NativePoint; readonly expected: Recipe | null; readonly delivery?: { demand: Piece; receptor: NativeBox };
   readonly projected?: readonly Piece[]; readonly reserved?: readonly Piece[] };
 type Proposal = NativeProposal & { readonly memory: Memory; readonly stock: readonly Piece[]; readonly choice: Choice;
@@ -85,6 +88,64 @@ const anchor = ({ point: [x, y] }: Piece): NativePoint => [Math.round(x), Math.r
 const boxDistance = ([x, y]: NativePoint, [l, t, r, b]: NativeBox) =>
   Math.hypot(Math.max(l - x, 0, x - r), Math.max(t - y, 0, y - b));
 const typeKey = (color: number, side: number) => [color, side].join(':');
+
+function observeMobile(observation: NativeObservation, scene: Scene, known?: MobileGlyph): MobileGlyph | null {
+  const candidates = observation.entities.filter(part => part.bbox[1] >= scene.field[0] && part.bbox[3] <= scene.field[1]
+    && !part.rectangular && part.area >= 3 && width(part.bbox) <= scene.demand.side && height(part.bbox) <= scene.demand.side
+    && paletteRank(scene, part.palette_value) < 0 && (!known || part.palette_value === known.color && part.mask.length === known.mask.length
+      && part.mask.every((point, i) => same(point, known.mask[i]!))));
+  const body = candidates.length === 1 ? candidates[0] : null;
+  return body ? { box: body.bbox, color: body.palette_value, mask: body.mask } : null;
+}
+
+const diversionKey = (body: MobileGlyph, point: NativePoint) => `${center(body.box).join(',')}>${point.join(',')}`;
+const clearance = (point: NativePoint, stock: readonly Piece[]) => Math.min(...stock.map(item => boxDistance(point, item.box)));
+
+function protectChoice(stock: readonly Piece[], memory: Memory, planned: Choice | null): Choice | null {
+  const { pressure, radius, scene } = memory;
+  if (pressure?.lost) return null;
+  if (!pressure || !radius || !planned || !pressure.travel) return planned;
+  const position = center(pressure.body.box), margin = Math.hypot(width(pressure.body.box), height(pressure.body.box)) / 2;
+  const safe = clearance(position, planned.projected ?? stock), current = clearance(position, stock);
+  if (Math.min(safe, current) > 2 * pressure.travel + margin) return planned;
+  const step = Math.floor(radius.lower), reach = Math.max(step, pressure.diversion);
+  const [x, y] = position;
+  const [top, bottom] = scene.field, screenWidth = scene.screenWidth!;
+  const hazard = stock.reduce((nearer, item) => boxDistance(position, item.box) < boxDistance(position, nearer.box) ? item : nearer);
+  let bestPoint: NativePoint | null = null, bestClearance = current;
+  for (let cy = Math.max(top + 1, Math.ceil(y - step)); cy <= Math.min(bottom - 1, Math.floor(y + step)); cy++) {
+    for (let cx = Math.max(1, Math.ceil(x - step)); cx <= Math.min(screenWidth - 2, Math.floor(x + step)); cx++) {
+      const point: NativePoint = [cx, cy], span = distance(position, point);
+      if (span < 1 || span > step || clearance(point, stock) <= radius.upper || pressure.attempts.includes(diversionKey(pressure.body, point))) continue;
+      const projected: NativePoint = [x + (cx - x) * reach / span, y + (cy - y) * reach / span];
+      if (projected[0] < margin || projected[0] >= screenWidth - margin || projected[1] < top + margin || projected[1] > bottom - margin) continue;
+      const gap = clearance(projected, stock);
+      if (gap <= bestClearance || clearance(projected, planned.projected ?? stock) <= safe) continue;
+      bestClearance = gap;
+      bestPoint = point;
+    }
+  }
+  if (bestPoint) return { intent: 'divert', member: hazard, partner: null, point: bestPoint, expected: null, projected: stock };
+  return safe > pressure.travel + margin ? planned : null;
+}
+
+function pressureReturn(proposal: Proposal, after: NativeObservation) {
+  const { memory, choice, stock } = proposal;
+  const prior = memory.pressure;
+  if (!prior) return null;
+  const body = observeMobile(after, memory.scene, prior.body);
+  if (!body) return null;
+  const start = center(prior.body.box), end = center(body.box), shift = distance(start, end);
+  const isolated = choice.intent === 'divert', nextStock = readStock(after, memory.scene);
+  const preserved = nextStock.length === stock.length && stock.every(item => nextStock.some(next => samePiece(item, next)));
+  const followsClick = (end[0] - start[0]) * (choice.point[0] - start[0]) + (end[1] - start[1]) * (choice.point[1] - start[1]) > 0;
+  const widened = isolated && preserved && followsClick && shift > prior.travel && clearance(end, nextStock) > clearance(start, stock);
+  const pressure: Pressure = { body, travel: isolated ? prior.travel : Math.max(prior.travel, shift),
+    diversion: widened ? Math.max(prior.diversion, shift) : prior.diversion,
+    attempts: isolated ? [...prior.attempts, diversionKey(prior.body, choice.point)] : prior.attempts,
+    refs: shift ? [...new Set([...prior.refs.slice(-3), after.observation_ref])] : prior.refs };
+  return { pressure, widened };
+}
 
 function updateRadius(previous: Radius | undefined, stock: readonly Piece[], actual: readonly Piece[], point: NativePoint, ref: string): Radius | undefined {
   let lower = previous?.lower ?? 0, upper = previous?.upper ?? Math.ceil(Math.hypot(64, 64));
@@ -284,27 +345,33 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       if (!choose || remaining < 1 || !observation.available_action_refs.includes('ACTION6') ||
         observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const scene = prior?.scene ?? identify(observation, rows[0]!.length, rows.length);
-      if (!scene || (prior?.count ?? 0) >= 40) return null;
-      const inherited = scene.requirements && transfer && scene.samples.map(sample => sample.color).join() === transfer.palette.join() ? transfer : null;
+      const identified = prior?.scene ?? identify(observation, rows[0]!.length, rows.length);
+      if (!identified || (prior?.count ?? 0) >= 40) return null;
+      const saved = transfer && identified.samples.map(sample => sample.color).join() === transfer.palette.join() ? transfer : null;
+      const mobile = !prior && !identified.requirements && saved ? observeMobile(observation, identified) : null;
+      const scene = mobile ? { ...identified, requirements: [identified.demand], receivers: [identified.receptor], screenWidth: rows[0]!.length } : identified;
+      const inherited = scene.requirements ? saved : null;
+      const pressure: Pressure | undefined = mobile ? { body: mobile, travel: 0, diversion: 0, attempts: [], refs: [observation.observation_ref] } : undefined;
       const memory: Memory = prior ?? { scene, epoch: observation.level_epoch, recipes: inherited?.recipes ?? [],
-        motion: inherited?.motion ?? [], tried: [], count: 0, ...(inherited ? { radius: inherited.radius } : {}) };
+        motion: inherited?.motion ?? [], tried: [], count: 0, ...(inherited ? { radius: inherited.radius } : {}), ...(pressure ? { pressure } : {}) };
       const stock = readStock(observation, scene);
-      const choice = scene.requirements ? nextSplitChoice(stock, memory) : nextChoice(stock, memory);
+      const planned = scene.requirements ? nextSplitChoice(stock, memory) : nextChoice(stock, memory);
+      const choice = protectChoice(stock, memory, planned);
       if (!choice) return null;
       const mode = execution?.reasoningMode ?? 'exploration';
       const measured = memory.motion.find(item => matches(item, choice.member));
       const knownInteraction = choice.intent === 'merge' && !!choice.expected;
-      const routeSupported = choice.intent !== 'merge' && !!measured;
+      const routeSupported = choice.intent !== 'merge' && choice.intent !== 'divert' && !!measured;
       const facts = { knownInteraction, routeSupported, eligibleProbe: !knownInteraction && !routeSupported, mode };
       const decision = await choose.run({ situation: facts }, { signal: execution?.signal });
       const strategy = knownInteraction ? 'P02' : routeSupported ? 'P07' : 'P05';
       if (decision.result !== strategy) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([measured?.evidence, ...memory.recipes.map(recipe => recipe.evidence),
-        ...(scene.requirements ? memory.radius?.refs ?? [] : [])]
+        ...(scene.requirements ? memory.radius?.refs ?? [] : []), ...(memory.pressure?.refs ?? [])]
         .filter((item): item is string => !!item && item !== ref))];
-      const situation = choice.intent === 'merge'
+      const situation = choice.intent === 'divert' ? 'Test whether an isolated click gives the needed material more room'
+        : choice.intent === 'merge'
         ? knownInteraction ? 'Repeat the observed merge on two compatible pieces' : 'Test whether two nearby pieces merge into a new type'
         : choice.intent === 'deliver' ? 'Bring the requested product to its receiver' : 'Bring two compatible pieces within range of the same click';
       const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: situation, evidence });
@@ -326,7 +393,8 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
         sicSituationCard: { strategy, need: 'Make the displayed product and bring it to the receiver', situation, evidence, agenda: [],
           mode, triggerCard: decision.receipt.workflow, actor: choice.member.box, partner: choice.partner?.box ?? null,
           demand: demand.box, receptor, focus: [x, y, x, y],
-          ...(choice.reserved ? { reserved: choice.reserved.filter(item => item !== choice.member).map(item => item.box) } : {}) },
+          ...(choice.reserved ? { reserved: choice.reserved.filter(item => item !== choice.member).map(item => item.box) } : {}),
+          ...(memory.pressure ? { autonomous: memory.pressure.body.box, protectiveClick: choice.intent === 'divert' } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -341,6 +409,11 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
     after(proposal, _index, before, after) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.choice.intent === 'divert') {
+        const result = pressureReturn(proposal, after);
+        return { matched: result?.widened ?? false, seal_prefix: true, reason: result?.widened
+          ? 'mobile_redirected_material_preserved' : 'protective_click_not_confirmed' };
+      }
       const effect = measureReturn(proposal, after);
       if (proposal.choice.intent === 'merge' && proposal.choice.expected && !effect?.recipe) {
         return { matched: false, seal_prefix: true, reason: 'expected_merge_not_observed' };
@@ -355,6 +428,12 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
         transfer = { palette: memory.scene.samples.map(sample => sample.color), recipes: memory.recipes, motion: memory.motion, radius: memory.radius };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      const mobile = pressureReturn(proposal, after);
+      const pressure: Pressure | undefined = mobile?.pressure ?? (memory.pressure ? { ...memory.pressure, lost: true } : undefined);
+      if (proposal.choice.intent === 'divert') {
+        state = { ...memory, count: memory.count + 1, pressure };
+        return { events: [], ...(mobile?.widened ? { reviewEvidence: 'The mobile moved away and the material stayed in place.' } : {}) };
+      }
       const effect = measureReturn(proposal, after), recipe = effect?.recipe;
       const previous = memory.motion.find(item => matches(item, member));
       const motion = effect?.range && effect.range > (previous?.range ?? 0) ? [...memory.motion.filter(item => item !== previous),
@@ -363,8 +442,10 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
         ? [...memory.recipes, recipe] : memory.recipes;
       const radius = effect ? updateRadius(memory.radius, proposal.stock, readStock(after, memory.scene), proposal.choice.point, after.observation_ref)
         : memory.radius;
-      state = { ...memory, motion, recipes, count: memory.count + 1, tried: [...memory.tried, proposal.attempt], ...(radius ? { radius } : {}) };
-      return { events: [] };
+      state = { ...memory, motion, recipes, count: memory.count + 1, tried: [...memory.tried, proposal.attempt], ...(radius ? { radius } : {}),
+        ...(pressure ? { pressure } : {}) };
+      return { events: [], ...(memory.pressure?.travel === 0 && mobile?.pressure.travel ?
+        { reviewEvidence: 'The mobile changed position during the material action.' } : {}) };
     },
     state: () => ({ state, transfer }),
     restore(value: NativeRecord) {
