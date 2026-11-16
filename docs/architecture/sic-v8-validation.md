@@ -983,7 +983,11 @@ Le total atteint **99/100 niveaux 4** et **409/636 niveaux**, soit **64,3 %**.
 
 - **BP35** gagne le niveau 4 en **19 commandes et 52,19 s** lors des rejeux parallèles. SIC réutilise la grille et les blocs amovibles, puis mesure l’inversion en raccordant les points fixes du terrain après le défilement. Il conserve les zones déjà visibles pour écarter le retour vers un danger et choisit une autre colonne avant l’inversion suivante. Trois retraits libèrent le passage. La quatrième inversion rejoint la sortie et déclenche la victoire. Les 97 commandes et retours des trois premiers niveaux sont reproduits. Les 116 commandes relèvent de SIC. La permutation de palette conserve le parcours et les deux essais s’arrêtent à la victoire du niveau 4. Empreinte `a827c73db114175d79e3cdcfe309215312ad8d731d19ffd9991c65144da1e272`.
 
-Les qualifications par jeu atteignent **100/100 niveaux 4** et **410/636 niveaux**, soit **64,5 %**. Les 410 victoires comprennent dix niveaux au-delà des quatre premières séries déjà attestés. Une campagne sur un seul commit doit vérifier la coexistence des qualifications.
+Les qualifications par jeu atteignent **100/100 niveaux 4** et **410/636 niveaux**, soit **64,5 %**. Les 410 victoires comprennent dix niveaux au-delà des quatre premières séries déjà attestés.
+
+La campagne consolidée part du niveau 1 sur le commit figé `460283f21d6d2d47766bf56ce5dfe714431adeec`. Le premier passage à huit processus donne **99/100** en **37 min 52 s**. GABA atteint le budget actif de six minutes après 81 des 88 commandes de sa qualification, avec les mêmes retours. Relancé sur le même commit pendant que les derniers groupes se terminaient, il gagne en 88 commandes et retrouve son empreinte de qualification. Au total, les **100 jeux** passent sur ce commit dans la fenêtre de campagne de **37 min 52 s**, avec **7 195 commandes sous autorité SIC** dans les parcours gagnants et arrêt dès la victoire du niveau 4 pour chacun.
+
+Sur ce même commit, les **19 commandes du niveau 4 de BP35** prennent **115,54 s** pendant le passage à huit processus et **45,84 s** lors d’un rejeu avec un seul processus. Les commandes, les retours et l’empreinte du parcours continu sont identiques. Le rapport de **2,52** décrit cette mesure sur BP35.
 
 ### Temps actif par niveau en campagne
 
