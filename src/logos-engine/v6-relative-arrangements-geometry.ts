@@ -181,17 +181,18 @@ export function relativeArrangementProject(obs: NativeObservation, rows: NativeR
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
-export function translatedRelativeArrangementTargets(layout: RelativeArrangementLayout): RelativeArrangementTarget[] {
+export function translatedRelativeArrangementTargets(layout: RelativeArrangementLayout,
+  anchors: readonly RelativeArrangementFeature[] = layout.objects): RelativeArrangementTarget[] {
   const features = layout.legend.features, objects = layout.objects, [w, h] = layout.shape, seen = new Set<string>();
-  const out: RelativeArrangementTarget[] = [];
-  for (const obj of objects) for (const feature of features) {
+  const current = objectSet(objects), out: RelativeArrangementTarget[] = [];
+  for (const obj of anchors) for (const feature of features) {
     if (obj.value !== feature.value) continue;
     const dx = obj.xy[0] - feature.xy[0], dy = obj.xy[1] - feature.xy[1];
     const target = features.map((part): RelativeArrangementTriple => [part.xy[0] + dx, part.xy[1] + dy, part.value]).sort(lexical);
     const key = JSON.stringify(target);
     if (target.some(([x, y]) => !(0 <= x && x < w && 0 <= y && y < h)) || seen.has(key)) continue;
     seen.add(key);
-    const current = objectSet(objects), wanted = new Map(target.map(point => [tripleKey(point), point]));
+    const wanted = new Map(target.map(point => [tripleKey(point), point]));
     out.push({ target, already_preserved: [...current].filter(([key]) => wanted.has(key)).map(([, point]) => point).sort(lexical),
       remove: [...current].filter(([key]) => !wanted.has(key)).map(([, point]) => point).sort(lexical),
       add: [...wanted].filter(([key]) => !current.has(key)).map(([, point]) => point).sort(lexical),

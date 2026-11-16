@@ -7,7 +7,7 @@ import { readEvidenceSync } from './helpers/chunked-evidence.ts';
 import { RelativeArrangements } from '../src/logos-engine/v6-relative-arrangements.ts';
 import {
   relativeArrangementRectangles, relativeArrangementCell, relativeArrangementPads,
-  relativeArrangementProject, translatedRelativeArrangementTargets, relativeArrangementEffect,
+  relativeArrangementProject, translatedRelativeArrangementTargets, relativeArrangementEffect, type RelativeArrangementLayout,
 } from '../src/logos-engine/v6-relative-arrangements-geometry.ts';
 import {
   relativeArrangementAssignments, relativeArrangementOptions, relativeArrangementTrialKey,
@@ -17,6 +17,25 @@ import { ObservedInputDomain, measureNativeObservation } from '../src/logos-engi
 const fixture = JSON.parse(gunzipSync(readEvidenceSync(new URL('./fixtures/v6-relative-arrangements-reference.json.gz', import.meta.url))).toString('utf8'));
 const sourceRoot = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/', import.meta.url);
 const clone = <T>(value: T): T => JSON.parse(JSON.stringify(value));
+
+test('measured reachable anchors can place a motif away from every current piece', () => {
+  const layout: RelativeArrangementLayout = {
+    board: [0, 0, 16, 13], size: 3, shape: [5, 4], terrain: [0, 1],
+    objects: [
+      { xy: [0, 0], point: [2, 2], value: 2, marker: null },
+      { xy: [4, 3], point: [14, 11], value: 3, marker: null },
+    ],
+    legend: { box: [0, 18, 3, 20], features: [{ xy: [0, 0], value: 2 }, { xy: [1, 0], value: 3 }] },
+    selected: null, pads: [], observation_ref: 'arrangement', level_epoch: 1, frame_hash: 'frame', scope_ref: 'scope',
+  };
+  assert.ok(translatedRelativeArrangementTargets(layout).every(target => target.already_preserved.length > 0));
+  const targets = translatedRelativeArrangementTargets(layout, [{ xy: [1, 1], value: 2 }]);
+  assert.equal(targets.length, 1);
+  assert.deepEqual(targets[0]?.target, [[1, 1, 2], [2, 1, 3]]);
+  assert.deepEqual(targets[0]?.already_preserved, []);
+  assert.deepEqual(targets[0]?.remove, [[0, 0, 2], [4, 3, 3]]);
+  assert.deepEqual(targets[0]?.add, targets[0]?.target);
+});
 
 // family.py exports list(set). Only this unordered collection is normalized.
 // Rank vectors, ordered alternatives, DFS pad cells and SRC receipts stay exact.

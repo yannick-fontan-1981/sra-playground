@@ -2,7 +2,7 @@ import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { relativeArrangementCell, relativeArrangementEffect, relativeArrangementProject, translatedRelativeArrangementTargets,
   type RelativeArrangementCell, type RelativeArrangementLayout, type RelativeArrangementPad, type RelativeArrangementPoint } from '../logos-engine/v6-relative-arrangements-geometry.ts';
-import { relativeArrangementAssignments } from '../logos-engine/v6-relative-arrangements-planner.ts';
+import { relativeArrangementAssignments, type RelativeArrangementPair } from '../logos-engine/v6-relative-arrangements-planner.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 
@@ -12,7 +12,7 @@ type Point = RelativeArrangementPoint;
 type Axis = 0 | 1;
 type Gains = [number | null, number | null];
 type SelectedPad = RelativeArrangementPad & { selected: RelativeArrangementCell };
-type Select = { kind: 'select'; point: Point; piece: Point; goal?: Point };
+type Select = { kind: 'select'; point: Point; piece: Point; goal?: Point; measuredRoute?: true };
 type Learn = { kind: 'learn'; point: Point; axis: Axis; pad: string; marker: Point; goal?: Point };
 type Place = { kind: 'place'; point: Point; pad: string; marker: Point; expected: Point; goal: Point };
 type Choice = Select | Learn | Place;
@@ -52,7 +52,13 @@ function rememberSelection(memory: Memory, layout: RelativeArrangementLayout): M
   return { ...memory, pieces: { ...memory.pieces, [pieceKey(layout.selected)]: activePads(layout) } };
 }
 
-function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: RelativeArrangementCell, partial = false): Map<string, Route> {
+function needsCalibration(memory: Memory, object: RelativeArrangementCell): boolean {
+  const pads = memory.pieces[pieceKey(object)];
+  return !pads?.length || pads.some(pad => gainsFor(memory, object.value, pad.ref).includes(null));
+}
+
+function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: RelativeArrangementCell,
+  options: { partial?: boolean; ignoreOccupied?: boolean } = {}): Map<string, Route> {
   const pads = memory.pieces[pieceKey(object)]!;
   const markers = pads.map(pad => pad.selected.xy), occupied = new Set(layout.objects
     .filter(peer => !equal(peer.xy, object.xy)).map(peer => pointKey(peer.xy)));
@@ -64,16 +70,16 @@ function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: Re
     if (!routes.has(location)) routes.set(location, current);
     for (const [index, pad] of pads.entries()) {
       const [horizontal, vertical] = gainsFor(memory, object.value, pad.ref);
-      if (partial ? horizontal === null && vertical === null : horizontal === null || vertical === null) continue;
+      if (options.partial ? horizontal === null && vertical === null : horizontal === null || vertical === null) continue;
       const from = current.markers[index]!;
       for (const choice of pad.cells) {
         const offset = [choice.xy[0] - from[0], choice.xy[1] - from[1]];
         if (horizontal === null && offset[0] || vertical === null && offset[1]) continue;
         const markers = current.markers.map((value, j) => j === index ? choice.xy : value), id = stateKey(markers);
-        if (seen.has(id) || rejected.has(trialKey({ ...object, xy: current.at }, pad.ref, from, choice.xy))) continue;
+        if (seen.has(id) || !options.ignoreOccupied && rejected.has(trialKey({ ...object, xy: current.at }, pad.ref, from, choice.xy))) continue;
         const at: Point = [wrapped(current.at[0] + offset[0]! * (horizontal ?? 0), layout.shape[0]),
           wrapped(current.at[1] + offset[1]! * (vertical ?? 0), layout.shape[1])];
-        if (occupied.has(pointKey(at))) continue;
+        if (!options.ignoreOccupied && occupied.has(pointKey(at))) continue;
         seen.add(id);
         queue.push({ at, markers, depth: current.depth + 1, first: current.first
           ?? { point: choice.point, pad: pad.ref, marker: choice.xy, expected: at } });
@@ -84,11 +90,16 @@ function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: Re
 }
 
 const distance = (a: Point, b: Point) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+const byPosition = (a: Point, b: Point) => a[1] - b[1] || a[0] - b[0];
+const byPlacement = (a: RelativeArrangementPair, b: RelativeArrangementPair) => byPosition(a.from, b.from) || byPosition(a.to, b.to);
 
 function chooseTowardDestination(layout: RelativeArrangementLayout, memory: Memory): Choice | null {
   if (!memory.destination) return null;
+  const knownRoutes = new Map(layout.objects.filter(object => !needsCalibration(memory, object))
+    .map(object => [pointKey(object.xy), routesFor(layout, memory, object, { ignoreOccupied: true })]));
   const plans = relativeArrangementAssignments(layout, [memory.destination], 720)
-    .filter(plan => plan.moves.length).sort((a, b) => a.moves.length - b.moves.length || a.distance - b.distance);
+    .filter(plan => plan.moves.length && plan.moves.every(move => knownRoutes.get(pointKey(move.from))?.has(pointKey(move.to)) ?? true))
+    .sort((a, b) => a.moves.length - b.moves.length || a.distance - b.distance);
   const moves = plans[0]?.moves;
   if (!moves) return null;
   const available = [...moves].sort((a, b) => distance(a.from, a.to) - distance(b.from, b.to)
@@ -101,7 +112,7 @@ function chooseTowardDestination(layout: RelativeArrangementLayout, memory: Memo
   if (!layout.selected || !equal(layout.selected.xy, object.xy)) {
     return { kind: 'select', point: object.point, piece: object.xy, goal: next.to };
   }
-  const measured = routesFor(layout, memory, object, true).get(pointKey(next.to))?.first;
+  const measured = routesFor(layout, memory, object, { partial: true }).get(pointKey(next.to))?.first;
   if (measured) return { kind: 'place', ...measured, goal: next.to };
   for (const pad of activePads(layout)) for (const axis of [0, 1] as const) {
     const residual = next.to[axis] - object.xy[axis];
@@ -118,33 +129,44 @@ function chooseTowardDestination(layout: RelativeArrangementLayout, memory: Memo
 }
 
 function choose(layout: RelativeArrangementLayout, memory: Memory): Choice | null {
-  const directed = chooseTowardDestination(layout, memory);
-  if (directed) return directed;
-  const trial = learnAxis(layout, memory);
-  if (trial) return trial;
-  const unknown = layout.objects.find(object => !memory.pieces[pieceKey(object)]?.length
-    || memory.pieces[pieceKey(object)]!.some(pad => gainsFor(memory, object.value, pad.ref).includes(null)));
-  if (unknown) return layout.selected && equal(unknown.xy, layout.selected.xy) ? null : { kind: 'select', point: unknown.point, piece: unknown.xy };
+  const unknown = layout.objects.find(object => needsCalibration(memory, object));
+  if (unknown) {
+    return chooseTowardDestination(layout, memory) ?? learnAxis(layout, memory)
+      ?? (layout.selected && equal(unknown.xy, layout.selected.xy) ? null : { kind: 'select', point: unknown.point, piece: unknown.xy });
+  }
 
   const objects = new Map(layout.objects.map(object => [pointKey(object.xy), object]));
   const paths = new Map(layout.objects.map(object => [pointKey(object.xy), routesFor(layout, memory, object)]));
-  const targets = translatedRelativeArrangementTargets(layout);
-  const assignments = relativeArrangementAssignments(layout, targets, 720);
-  let chosen: Choice | null = null, bestCost = Infinity;
-  for (const { pairs } of assignments) {
-    const trips = pairs.map(pair => ({ pair, route: paths.get(pointKey(pair.from))?.get(pointKey(pair.to)) }));
-    if (trips.some(trip => !trip.route)) continue;
-    const cost = trips.reduce((sum, trip) => sum + trip.route!.depth, 0);
-    if (cost >= bestCost || cost === 0) continue;
-    const moving = trips.find(trip => trip.route!.first && layout.selected && equal(layout.selected.xy, trip.pair.from))
-      ?? trips.find(trip => trip.route!.first);
-    if (!moving) continue;
-    bestCost = cost;
-    chosen = layout.selected && equal(layout.selected.xy, moving.pair.from)
-      ? { kind: 'place', ...moving.route!.first!, goal: moving.pair.to }
-      : { kind: 'select', point: objects.get(pointKey(moving.pair.from))!.point, piece: moving.pair.from };
+  function chooseReachable(targets: ReturnType<typeof translatedRelativeArrangementTargets>): Choice | null {
+    let chosen: Choice | null = null, bestCost = Infinity, bestPairs: RelativeArrangementPair[] = [];
+    for (const { pairs } of relativeArrangementAssignments(layout, targets, 720)) {
+      const ordered = [...pairs].sort(byPlacement);
+      const trips = ordered.map(pair => ({ pair, route: paths.get(pointKey(pair.from))?.get(pointKey(pair.to)) }));
+      if (trips.some(trip => !trip.route)) continue;
+      const cost = trips.reduce((sum, trip) => sum + trip.route!.depth, 0);
+      if (cost > bestCost || cost === 0) continue;
+      if (cost === bestCost) {
+        const firstDifference = ordered.map((pair, i) => byPlacement(pair, bestPairs[i]!)).find(order => order !== 0);
+        if (firstDifference === undefined || firstDifference > 0) continue;
+      }
+      const moving = trips.find(trip => trip.route!.first && layout.selected && equal(layout.selected.xy, trip.pair.from))
+        ?? trips.find(trip => trip.route!.first);
+      if (!moving) continue;
+      bestCost = cost;
+      bestPairs = ordered;
+      chosen = layout.selected && equal(layout.selected.xy, moving.pair.from)
+        ? { kind: 'place', ...moving.route!.first!, goal: moving.pair.to }
+        : { kind: 'select', point: objects.get(pointKey(moving.pair.from))!.point, piece: moving.pair.from,
+          goal: moving.pair.to, measuredRoute: true };
+    }
+    return chosen;
   }
-  return chosen;
+  const anchored = chooseReachable(translatedRelativeArrangementTargets(layout));
+  if (anchored) return anchored;
+  const anchor = layout.legend.features[0]!;
+  const reachable = layout.objects.filter(object => object.value === anchor.value).flatMap(object =>
+    [...paths.get(pointKey(object.xy))!.values()].map(route => ({ xy: route.at, value: object.value })));
+  return chooseReachable(translatedRelativeArrangementTargets(layout, reachable));
 }
 
 function layoutBox(layout: RelativeArrangementLayout, [column, row]: NativePoint): NativeBox {
@@ -217,7 +239,8 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
       if (!choice) return null;
       const [x, y] = choice.point, ref = observation.observation_ref, parent = 'G_official_completion';
       const evidence: [string, ...string[]] = [ref, ...new Set(memory.refs.filter(value => value !== ref))];
-      const reason = choice.kind === 'select' ? choice.goal ? 'Keep the matching pieces in place and select a displaced piece'
+      const reason = choice.kind === 'select' ? choice.measuredRoute ? 'Select a piece with a measured route to its place in the arrangement'
+        : choice.goal ? 'Keep the matching pieces in place and select a displaced piece'
         : 'Select the piece and read its current controls'
         : choice.kind === 'learn' ? choice.goal ? 'Test one control axis toward the missing position'
           : 'Change one control axis and measure the piece displacement'
