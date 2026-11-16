@@ -1,7 +1,7 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export const observedRailTransfersId = 'sic_follow_visible_rail_transfers';
 
@@ -14,7 +14,9 @@ type Board = { grid: Grid; trains: Train[]; rails: Cell[]; arms: (Cell & { dy: n
 type Witness = { epoch: number; grid: Grid; wins: number; evidence: string[] };
 type Move = { train: number; rail: Cell; col: number; travel: number };
 type Projection = { trains: Train[]; stock: Board['stock']; exposed: number; filled: number; disturbed: number; transfers: number; arms: Cell[] };
-type Proposal = NativeProposal & { move: Move; projection: Projection; needId: string; grid: Grid };
+type Route = { moves: Move[]; purpose: 'expose' | 'fill' };
+type Choice = { move: Move; prediction: Projection; continuation?: Route };
+type Proposal = NativeProposal & { move: Move; projection: Projection; needId: string; grid: Grid; continuation?: Route };
 
 const key = ({ col, row }: Cell) => `${col},${row}`;
 const at = (grid: Grid, { col, row }: Cell): NativePoint =>
@@ -135,7 +137,8 @@ function moves(board: Board): Move[] {
 }
 
 function project(board: Board, move: Move): Projection | null {
-  const { trains, stock } = structuredClone(board);
+  const trains = board.trains.map(train => ({ ...train, bays: train.bays.map(bay => ({ ...bay })) }));
+  const stock = board.stock.map(crate => ({ ...crate }));
   trains[move.train]!.col = move.col;
   const slots = new Map<string, Bay>();
   for (const train of trains) train.bays.forEach((bay, i) => slots.set(key({ row: train.row, col: train.col + i + 1 }), bay));
@@ -163,6 +166,97 @@ function project(board: Board, move: Move): Projection | null {
     disturbed: bays.filter(bay => bay.alreadyFilled && !bay.box).length };
 }
 
+type TransferBay = { train: number; index: number; row: number; offset: number; left: number; right: number; slot: Bay['slot'] };
+type TransferSource = TransferBay | { stock: number; row: number; col: number };
+type TransferLink = { from: number; to: number; fromCol: number; toCol: number };
+
+function transferRank(start: Board) {
+  const rails = new Set(start.rails.map(key));
+  const bays = start.trains.flatMap((train, i): TransferBay[] => {
+    const { row } = train;
+    let left = train.col, right = train.col;
+    while (rails.has(key({ row, col: left - 1 }))) left--;
+    while (rails.has(key({ row, col: right + train.length }))) right++;
+    return train.bays.map((bay, index) => ({ train: i, index, row, offset: index + 1, left, right, slot: bay.slot }));
+  });
+  const sources: TransferSource[] = [...bays, ...start.stock.map(({ row, col }, stock) => ({ row, col, stock }))];
+  const links = start.arms.flatMap(({ row, col, dy }): TransferLink[] => {
+    const reaches = (site: TransferSource, lane: number) => site.row === lane
+      && ('stock' in site ? site.col === col : site.left <= col - site.offset && col - site.offset <= site.right);
+    return sources.flatMap((source, from) => reaches(source, row - dy) ? bays.flatMap((target, to) =>
+      reaches(target, row + dy) ? [{ from, to, fromCol: col - ('stock' in source ? 0 : source.offset), toCol: col - target.offset }] : []) : []);
+  });
+  const goals = bays.flatMap(({ slot }, index) => {
+    if (!slot) return [];
+    if (slot === 'hidden') return [{ index, slot, options: links.filter(link => link.from === index).map(link => ({ ...link, distance: 0 })) }];
+    const distance = sources.map((_, source) => source === index ? 0 : Infinity);
+    // Relax the train positions and bay occupancy to rank routes by possible transfers.
+    // Each actual move still uses the exact rail and transfer model.
+    for (let i = 1; i < sources.length; i++) for (const { from, to } of links) {
+      distance[from] = Math.min(distance[from]!, distance[to]! + 1);
+    }
+    return [{ index, slot, options: links.filter(({ to }) => Number.isFinite(distance[to])).map(link => ({ ...link, distance: distance[link.to]! })) }];
+  });
+  return (board: Board) => {
+    const cargo = sources.map(site => 'stock' in site ? board.stock[site.stock]!.box : board.trains[site.train]!.bays[site.index]!.box);
+    let best = sources.length + 3;
+    for (const { index, slot, options } of goals) {
+      if (cargo[index] === slot) continue;
+      for (const { from, to, fromCol, toCol, distance } of options) {
+        if (slot === 'hidden' ? !cargo[from] : cargo[from] !== slot) continue;
+        const source = sources[from]!, target = bays[to]!;
+        const misaligned = Number(!('stock' in source) && board.trains[source.train]!.col !== fromCol)
+          + Number(board.trains[target.train]!.col !== toCol);
+        best = Math.min(best, distance + Math.max(1, misaligned) + Number(!!cargo[to]));
+      }
+    }
+    return best;
+  };
+}
+
+type RouteNode = { board: Board; path: Move[] };
+
+async function planTransfers(start: Board, execution?: NativeExecution): Promise<Route | null> {
+  if (!start.trains.some(train => train.bays.some(bay => bay.slot))) return null;
+  const rank = transferRank(start), frontier = new Map<number, RouteNode[]>(), bestDepth = new Map<string, number>();
+  const maxDepth = Math.min(12, execution?.remainingLevelActions ?? Infinity);
+  function visit(board: Board, path: Move[]) {
+    const signature = JSON.stringify([board.trains.map(train => [train.col, ...train.bays.map(bay => bay.box)]), board.stock.map(crate => crate.box)]);
+    if (path.length >= (bestDepth.get(signature) ?? Infinity) || bestDepth.size >= 18_000) return;
+    bestDepth.set(signature, path.length);
+    const priority = path.length + 3 * rank(board), bucket = frontier.get(priority) ?? [];
+    if (!frontier.has(priority)) frontier.set(priority, bucket);
+    bucket.push({ board, path });
+  }
+  visit(start, []);
+  for (let expanded = 0; frontier.size && expanded < 2_000; expanded++) {
+    if (execution && expanded > 0 && expanded % 32 === 0) await execution.yieldControl();
+    if (execution?.signal?.aborted || (execution?.now?.() ?? performance.now()) >= (execution?.deadlineMs ?? Infinity)) return null;
+    const priority = Math.min(...frontier.keys()), bucket = frontier.get(priority)!;
+    const { board, path } = bucket.pop()!;
+    if (!bucket.length) frontier.delete(priority);
+    if (path.length >= maxDepth) continue;
+    for (const move of moves(board)) {
+      const prediction = project(board, move);
+      if (!prediction) continue;
+      const route = [...path, move];
+      if (prediction.exposed || prediction.filled) return { moves: route, purpose: prediction.exposed ? 'expose' : 'fill' };
+      visit({ ...board, trains: prediction.trains, stock: prediction.stock }, route);
+    }
+  }
+  return null;
+}
+
+function nextOnRoute(board: Board, available: Move[], route: Route | null): Choice | null {
+  const step = route?.moves[0];
+  if (!step || !route) return null;
+  const move = available.find(candidate => candidate.train === step.train && key(candidate.rail) === key(step.rail) && candidate.col === step.col);
+  if (!move) return null;
+  const prediction = project(board, move);
+  if (!prediction || route.moves.length === 1 && !(prediction.exposed || prediction.filled)) return null;
+  return { move, prediction, ...(route.moves.length > 1 ? { continuation: { ...route, moves: route.moves.slice(1) } } : {}) };
+}
+
 function matches(board: Board, projection: Projection) {
   const expectedStock = projection.stock.filter(crate => crate.box);
   return board.stock.length === expectedStock.length && expectedStock.every(crate => board.stock.some(actual =>
@@ -178,6 +272,7 @@ function matches(board: Board, projection: Projection) {
 export function createSicObservedRailTransfers(): NativeFamily<Proposal> {
   let witness: Witness | null = null;
   let stopped: number | null = null;
+  let continuation: Route | null = null;
   function learn(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows) {
     if (after.levels_completed <= before.levels_completed || command.action_ref !== 'ACTION6') return;
     const board = findBoard(rows, witness?.grid);
@@ -191,20 +286,25 @@ export function createSicObservedRailTransfers(): NativeFamily<Proposal> {
   }
   return {
     id: observedRailTransfersId,
-    observePublicOutcome: learn,
+    observePublicOutcome(before, after, command, rows) {
+      continuation = null;
+      learn(before, after, command, rows);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (!witness || witness.wins < 2 || observation.level_epoch !== witness.epoch || observation.level_epoch === stopped
         || remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const board = findBoard(rows, witness.grid);
       if (!board) return null;
-      const choice = moves(board).flatMap(move => {
+      const available = moves(board);
+      const choice: Choice | null = nextOnRoute(board, available, continuation) ?? available.flatMap(move => {
         const prediction = project(board, move);
         return prediction && (prediction.exposed || prediction.filled) ? [{ move, prediction }] : [];
       }).sort((a, b) => b.prediction.filled - a.prediction.filled || b.prediction.exposed - a.prediction.exposed
         || a.prediction.disturbed - b.prediction.disturbed || b.prediction.transfers - a.prediction.transfers
-        || a.move.travel - b.move.travel || a.move.rail.row - b.move.rail.row)[0];
+        || a.move.travel - b.move.travel || a.move.rail.row - b.move.rail.row)[0]
+        ?? nextOnRoute(board, available, await planTransfers(board, execution));
       if (!choice) return null;
-      const { move, prediction } = choice, { grid } = board, point = at(grid, move.rail), [x, y] = point;
+      const { move, prediction, continuation: next } = choice, { grid } = board, point = at(grid, move.rail), [x, y] = point;
       const action = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
       const ref = observation.observation_ref, parent = 'G_official_completion';
       const evidence: [string, ...string[]] = [ref, ...witness.evidence];
@@ -215,7 +315,9 @@ export function createSicObservedRailTransfers(): NativeFamily<Proposal> {
       const strategy = nav.selected?.id;
       if (!strategy) return null;
       const situation = prediction.exposed ? 'Move a train to clear the mismatched load and expose its receiving slot'
-        : 'Align an empty receiving slot with a compatible load and the visible transfer arm';
+        : prediction.filled ? 'Align an empty receiving slot with a compatible load and the visible transfer arm'
+          : next?.purpose === 'expose' ? 'Position a train so a later transfer can uncover a receiving slot'
+            : 'Position a train so a compatible load can reach a receiving slot through the transfer arms';
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: situation, evidence });
       if (!pointBinding) return null;
       const goal = { kind: 'route_typed_loads_through_visible_transfers', scope: ref.split(':revision:', 1)[0]!,
@@ -223,6 +325,7 @@ export function createSicObservedRailTransfers(): NativeFamily<Proposal> {
         satisfactionContract: 'predicted_train_and_load_placement_confirmed' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = observedRailTransfersId + ':' + need.id;
       return { status: 'proposed', kind: observedRailTransfersId, actions, move, grid, projection: prediction, needId: need.id,
+        ...(next ? { continuation: next } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: null, point_binding: pointBinding }],
         sicSituationCard: { strategy, need: 'Move loads into compatible receiving slots', mode, situation, evidence, agenda: nav.entries,
           triggerCard: nav.card, target: box(grid, move.rail), train: box(grid, board.trains[move.train]!, board.trains[move.train]!.length),
@@ -244,16 +347,23 @@ export function createSicObservedRailTransfers(): NativeFamily<Proposal> {
       return { matched, seal_prefix: true, reason: matched ? 'rail_and_transfer_projection_confirmed' : 'transfer_projection_contradicted' };
     },
     record(before, after, command, first, second, proposal) {
+      continuation = null;
       if (after.levels_completed > before.levels_completed) learn(before, after, command, first);
       else {
         const board = findBoard(second, proposal.grid);
         if (!board || !matches(board, proposal.projection)) stopped = before.level_epoch;
-        else if (witness?.epoch === after.level_epoch) witness = { ...witness,
-          evidence: [...witness.evidence.slice(-4), after.observation_ref] };
+        else if (witness?.epoch === after.level_epoch) {
+          continuation = proposal.continuation ?? null;
+          witness = { ...witness, evidence: [...witness.evidence.slice(-4), after.observation_ref] };
+        }
       }
       return { events: [] };
     },
-    state: () => ({ witness, stopped }),
-    restore(value) { witness = structuredClone((value.witness as Witness | undefined) ?? null); stopped = (value.stopped as number | undefined) ?? null; },
+    state: () => ({ witness, stopped, continuation }),
+    restore(value) {
+      witness = structuredClone((value.witness as Witness | undefined) ?? null);
+      stopped = (value.stopped as number | undefined) ?? null;
+      continuation = structuredClone((value.continuation as Route | undefined) ?? null);
+    },
   };
 }
