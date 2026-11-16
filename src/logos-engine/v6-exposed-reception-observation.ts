@@ -31,8 +31,8 @@ function mostCommon(counts: Map<number, number>): [number, number] {
   for (const entry of counts) if (!selected || entry[1] > selected[1]) selected = entry;
   return selected!;
 }
-function enclosingBars(parts: Components): [Component, Component] | null {
-  const bars = parts.filter(part => part.bbox[1] > 4 && part.bbox[3] < 45
+function enclosingBars(parts: Components, minimumTop = 5): [Component, Component] | null {
+  const bars = parts.filter(part => part.bbox[1] >= minimumTop && part.bbox[3] < 45
     && part.bbox[1] === part.bbox[3] && part.bbox[2] - part.bbox[0] > 24
     && part.area === part.bbox[2] - part.bbox[0] + 1);
   let selected: [Component, Component] | null = null;
@@ -121,8 +121,8 @@ function largeScene(rows: NativeRows, parts: Components): R | null {
   const actor: Point = [Math.floor((actorCenter[0] - left) / pitch), Math.floor((actorCenter[1] - yt) / pitch)];
   return finalScene([left, yt], pitch, [width, height], actor, actors[0]!.color, bodies, slots, patterns, wallPatterns, parts, false);
 }
-function smallScene(rows: NativeRows, parts: Components): R | null {
-  const pair = enclosingBars(parts);
+function smallScene(rows: NativeRows, parts: Components, minimumTop?: number): R | null {
+  const pair = enclosingBars(parts, minimumTop);
   if (!pair) return null;
   const [top, bottom] = pair, [left, yt, right] = top.bbox, yb = bottom.bbox[1];
   const strips = parts.filter(part => part.color === top.color && part.bbox[1] === part.bbox[3]
@@ -167,6 +167,10 @@ function smallScene(rows: NativeRows, parts: Components): R | null {
 
 export function measureLargeExposedReception(rows: NativeRows): R | null { return largeScene(rows, geometricComponents(rows)); }
 export function measureSmallExposedReception(rows: NativeRows): R | null { return smallScene(rows, geometricComponents(rows)); }
+export function measureRetainedExposedReception(rows: NativeRows, pitch: number): R | null {
+  const scene = smallScene(rows, geometricComponents(rows), 0);
+  return scene?.pitch === pitch ? scene : null;
+}
 export function measureExposedReception(rows: NativeRows): R | null {
   const parts = geometricComponents(rows);
   return largeScene(rows, parts) ?? smallScene(rows, parts);

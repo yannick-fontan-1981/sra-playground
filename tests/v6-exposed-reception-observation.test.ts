@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
 import { symbolicDigest } from '../src/logos-engine/v6-hash.ts';
-import { measureExposedReception, measureLargeExposedReception, measureSmallExposedReception,
+import { measureExposedReception, measureLargeExposedReception, measureSmallExposedReception, measureRetainedExposedReception,
   exposedReceptionInputCandidates, exposedReceptionPlanIdentity, exposedReceptionProjection } from '../src/logos-engine/v6-exposed-reception-observation.ts';
 import { receptionRaster } from './helpers/v6-exposed-reception-raster.ts';
 
@@ -40,6 +40,18 @@ test('two source lattice grammars measure body, receiver, actor and orientation 
     assert.deepEqual(scene.orientation, [-4, -4]);
     assert.deepEqual(pitch === 4 ? measureSmallExposedReception(rows) : measureLargeExposedReception(rows), scene);
     assert.equal(pitch === 4 ? measureLargeExposedReception(rows) : measureSmallExposedReception(rows), null);
+  }
+});
+
+test('the retained pitch lets SIC read the same lattice at a higher origin', () => {
+  const rows = receptionRaster({ pitch: 4 }), original = measureExposedReception(rows)!;
+  const raised = rows.map((row, y) => y < 40 ? rows[y + 5]!.slice() : row.slice());
+  assert.equal(measureExposedReception(raised), null);
+  assert.equal(measureRetainedExposedReception(raised, 5), null);
+  const scene = measureRetainedExposedReception(raised, 4)!;
+  assert.deepEqual(scene.origin, [8, 3]);
+  for (const field of ['pitch', 'size', 'actor', 'actor_color', 'bodies', 'slots', 'walls', 'dial']) {
+    assert.deepEqual(scene[field], original[field]);
   }
 });
 

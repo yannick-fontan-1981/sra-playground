@@ -5,6 +5,7 @@ export type ExposureDial = { point: NativePoint; vector: NativePoint; active: bo
 export type ExposureScene = { origin: NativePoint; size: NativePoint; pitch: number; actor: NativePoint; bodies: ExposureSite[];
   slots: ExposureSite[]; walls: NativePoint[]; dial: ExposureDial[]; layout: string; actor_color: number };
 export type ExposureColors = { linked: number; released: number; shadow: number; lit: number };
+export type CouplingColors = Pick<ExposureColors, 'linked' | 'released'>;
 export type ExposureBoard = { width: number; height: number; walls: number[]; goals: { cell: number; color: number }[]; colors: ExposureColors };
 type Piece = { cell: number; color: number };
 export type ExposureState = { actor: number; facing: number; pieces: Piece[] };
@@ -16,16 +17,18 @@ const at = ([x, y]: NativePoint, width: number) => y * width + x;
 export const exposureBearing = ([x, y]: NativePoint) => exposureBearings.findIndex(([dx, dy]) => dx === Math.sign(x) && dy === Math.sign(y));
 const stateKey = ({ actor, facing, pieces }: ExposureState) => [actor, facing, ...pieces.flatMap(piece => [piece.cell, piece.color])].join(',');
 
-export function readExposureBoard(scene: ExposureScene, photo: Pick<ExposureColors, 'shadow' | 'lit'>): [ExposureBoard, ExposureState] | null {
+export function readExposureBoard(scene: ExposureScene, photo: Pick<ExposureColors, 'shadow' | 'lit'>,
+  retained?: CouplingColors): [ExposureBoard, ExposureState] | null {
   const { size: [width, height], slots, bodies, actor, dial, walls } = scene;
-  if (bodies.length < 3 || bodies.length > 5 || slots.length !== bodies.length || dial.length !== exposureBearings.length) return null;
-  const linked = [...new Set(bodies.filter(b => b.color !== photo.shadow).map(b => b.color))];
-  const released = [...new Set(slots.filter(slot => slot.color !== linked[0] && slot.color !== photo.shadow).map(slot => slot.color))];
+  if (bodies.length < 3 || bodies.length > (retained ? 6 : 5) || slots.length !== bodies.length || dial.length !== exposureBearings.length) return null;
+  const linked = retained ? [retained.linked] : [...new Set(bodies.filter(b => b.color !== photo.shadow).map(b => b.color))];
+  const released = retained ? [retained.released] : [...new Set(slots.filter(slot => slot.color !== linked[0] && slot.color !== photo.shadow).map(slot => slot.color))];
   if (linked.length !== 1 || released.length !== 1 || !bodies.some(b => b.color === photo.shadow)
-    || !slots.some(slot => slot.color === linked[0]) || released[0] === photo.lit || linked[0] === photo.lit) return null;
+    || !slots.some(slot => slot.color === linked[0])) return null;
+  const colors = { linked: linked[0]!, released: released[0]!, ...photo }, palette = new Set(Object.values(colors));
+  if (palette.size !== 4 || [...bodies, ...slots].some(piece => !palette.has(piece.color))) return null;
   const facing = exposureBearing(dial.find(position => position.active)?.vector ?? [0, 0]);
   if (facing < 0) return null;
-  const colors = { linked: linked[0]!, released: released[0]!, ...photo };
   const board = { width, height, walls: walls.map(p => at(p, width)), goals: slots.map(s => ({ cell: at(s.pos, width), color: s.color })), colors };
   const sorted = [...bodies].sort((a, b) => at(a.pos, width) - at(b.pos, width));
   return [board, { actor: at(actor, width), facing, pieces: sorted.map(b => ({ cell: at(b.pos, width), color: b.color })) }];
