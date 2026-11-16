@@ -832,7 +832,8 @@ export function readNativeResolution(agent: {
     if (origin) subjects.push({ label: 'Program starting node', box: origin });
     if (target) subjects.push({ label: 'Marked destination', box: target });
     if (instruction) subjects.push({ label: 'Instruction under test', box: instruction });
-    for (const [field, label] of [['repeat', 'Possible repeat-move node'], ['blocked', 'Same marking as interrupted route']] as const) {
+    for (const [field, label] of [['repeat', 'Possible repeat-move node'], ['blocked', 'Same marking as interrupted route'],
+      ['repellers', 'Possible source of redirection'], ['arrivals', 'Predicted intermediate arrival']] as const) {
       const regions = card?.[field];
       if (!Array.isArray(regions)) continue;
       for (const region of regions) {
