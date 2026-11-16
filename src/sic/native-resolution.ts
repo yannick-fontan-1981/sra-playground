@@ -1280,13 +1280,18 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === pairedPassageId || family === learnPairedPassageId)) {
-    for (const [field, label] of [['actor', 'Current piece'], ['focus', 'Passage or exit'], ['exit', 'Paired opening'], ['landing', 'Predicted landing']] as const) {
+    for (const [field, label] of [['actor', 'Current piece'], ['focus', 'Passage or exit'], ['exit', 'Paired opening'], ['landing', 'Predicted landing'],
+      ['routingState', 'Passage configuration indicator']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
     if (Array.isArray(card?.flags)) for (const flag of card.flags) {
       const box = bounds(flag);
       if (box) subjects.push({ label: 'Remote indicator', box });
+    }
+    if (Array.isArray(card?.switchSites)) for (const site of card.switchSites) {
+      const box = bounds(site);
+      if (box) subjects.push({ label: 'Configuration switch', box });
     }
   }
   if (situationCard && (family === highlightedRouteId || family === learnHighlightedRouteId)) {
