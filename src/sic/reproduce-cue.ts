@@ -4,8 +4,9 @@ import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-
 import { sicNeedId } from './need-identity.ts';
 import { measureAnimatedCells } from './observed-animation.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
-import { aimCommands, aimPoseMatches, aimRoute, hasAimedRay, readAimPose, readRemoteRoute, remoteFlightObserved, remoteOpeningObserved,
-  type AimCommand, type AimPose, type AimWitness, type RemoteRoute } from './remote-effect-route.ts';
+import { aimCommands, aimPoseMatches, aimRoute, hasAimedRay, overlaps, readAdaptableRemote, readAimPose, readGauge,
+  readRemoteRoute, remoteFlightObserved, remoteOpeningObserved,
+  type AimCommand, type AimPose, type AimWitness, type RemoteRoute, type ResizeWitness } from './remote-effect-route.ts';
 
 export const reproduceCueId = 'sic_reproduce_cue';
 export const learnAnimatedCueId = 'sic_learn_animated_cue';
@@ -17,11 +18,15 @@ type Scene = { panel: NativeBox; cells: Cell[]; goal: NativeBox; initialActor: N
   { track: NativeBox; actorColors: number[]; visible?: never } | { visible: VisibleCue; track?: never; actorColors?: never });
 type Step = { action: NativeCommand; kind: 'observe' | 'reproduce' | 'approach'; target: NativeBox; cell?: Cell; predicted?: NativeBox };
 type State = { epoch: number; scene: Scene; cues: readonly number[]; refs: string[]; demonstrationRef: string | null; prepared: boolean;
-  receiver: NativeBox | null; horizontal: number | null; rejected: string[] };
+  receiver: NativeBox | null; horizontal: number | null; rejected: string[]; resize?: Omit<ResizeWitness, 'unit' | 'refs'> };
 type Proposal = NativeProposal & { local: State; step: Step; needId: string; attempt: string };
+type Recipe = { box: NativeBox; cells: number[]; examples: NativeBox[]; ink: number };
+type Adaptation = { resizeRecipe: Recipe; shotRecipe: Recipe; fineRoute: RemoteRoute; pose: AimPose; finePose: AimPose;
+  gauge: NativeBox; fill: number; inputs: Cell[]; active: Cell[]; resized: boolean; replenished: boolean; refs: string[] };
 type RemoteState = { epoch: number; route: RemoteRoute; panel: NativeBox; cells: Cell[]; samples: NativeBox[];
-  opened: boolean; stopped: boolean; refs: string[]; lastRef: string };
-type RemoteStep = { kind: 'aim' | 'copy' | 'launch' | 'exit'; action: NativeCommand; pose: AimPose; expected: AimPose; cell?: Cell };
+  opened: boolean; stopped: boolean; refs: string[]; lastRef: string; recipe: number[]; adaptation?: Adaptation };
+type RemoteStep = { kind: 'aim' | 'copy' | 'launch' | 'exit' | 'select' | 'resize' | 'recover'; action: NativeCommand;
+  pose: AimPose; expected: AimPose; cell?: Cell; recipe?: Recipe };
 type RemoteProposal = NativeProposal & { remote: RemoteState; aiming: RemoteStep; needId: string };
 const isRemote = (p: Proposal | RemoteProposal): p is RemoteProposal => 'remote' in p;
 
@@ -54,8 +59,8 @@ function measureInput(parts: Part[], h: number, allowVisible: boolean) {
   return checkerboards.length === 1 ? checkerboards[0] : allowVisible && candidates.length === 1 ? candidates[0] : null;
 }
 
-function measureExample(parts: Part[], { panel, panelColor, cells }: NonNullable<ReturnType<typeof measureInput>>) {
-  const miniatures = parts.flatMap(preview => {
+function measureExamples(parts: Part[], { panel, panelColor, cells }: NonNullable<ReturnType<typeof measureInput>>): Recipe[] {
+  return parts.flatMap(preview => {
     const box = preview.bbox;
     if (preview.color !== panelColor || intersects(panel, box) || width(box) >= width(panel) || height(box) >= height(panel)
       || width(box) !== height(box)) return [];
@@ -73,6 +78,10 @@ function measureExample(parts: Part[], { panel, panelColor, cells }: NonNullable
     if (new Set(cue).size !== cue.length) return [];
     return [{ box, cells: cue.sort((a, b) => a - b), examples: examples.map(p => p.bbox), ink: examples[0]!.color }];
   });
+}
+
+function measureExample(parts: Part[], input: NonNullable<ReturnType<typeof measureInput>>) {
+  const miniatures = measureExamples(parts, input);
   return miniatures.length === 1 ? miniatures[0]! : null;
 }
 
@@ -170,6 +179,7 @@ function choose(local: State, rows: NativeRows): Step | null {
 }
 
 function chooseRemote(local: RemoteState, rows: NativeRows, available: readonly string[], remaining: number): RemoteStep | null {
+  if (local.adaptation) return chooseAdaptedRemote(local, local.adaptation, rows, available, remaining);
   const pose = readAimPose(rows, local.route);
   if (!pose) return null;
   const aimed = hasAimedRay(rows, local.route, pose);
@@ -185,12 +195,58 @@ function chooseRemote(local: RemoteState, rows: NativeRows, available: readonly 
   return { kind: local.opened ? 'exit' : 'aim', action: { action_ref: plan.action, data: {} }, pose, expected: plan.pose };
 }
 
-function remoteReturn(rows: NativeRows, { remote, aiming }: RemoteProposal): string | null {
-  const { kind, expected, cell } = aiming;
-  if (!aimPoseMatches(rows, remote.route.witness, expected)) return null;
+function chooseAdaptedRemote(local: RemoteState, adapted: Adaptation, rows: NativeRows, available: readonly string[],
+  remaining: number): RemoteStep | null {
+  const { pose, active, finePose, resized, replenished } = adapted;
+  const { route } = local;
+  if (!aimPoseMatches(rows, route.witness, pose)) return null;
+  const needsAim = resized && !local.opened && !hasAimedRay(rows, route, pose);
+  if (needsAim || local.opened) {
+    const goal = needsAim ? 'aim' : replenished ? 'exit' : 'supply';
+    const plan = aimRoute(rows, route, pose, available, goal, remaining);
+    if (!plan) return null;
+    return { kind: goal === 'supply' ? 'recover' : goal, action: { action_ref: plan.action, data: {} }, pose, expected: plan.pose };
+  }
+  if (!active.length) {
+    const recipe = resized ? adapted.shotRecipe : adapted.resizeRecipe;
+    const [x, y] = center(recipe.box);
+    return { kind: 'select', action: { action_ref: 'ACTION6', data: { x, y } }, pose, expected: pose, recipe };
+  }
+  const unresolved = active.filter(cell => colorAt(rows, cell.point) === cell.initial);
+  const cell = unresolved[0];
+  if (!cell) return null;
+  const [x, y] = cell.point, final = unresolved.length === 1;
+  return { kind: final ? resized ? 'launch' : 'resize' : 'copy', action: { action_ref: 'ACTION6', data: { x, y } },
+    pose, expected: final && !resized ? finePose : pose, cell };
+}
+
+function selectedCells(rows: NativeRows, adapted: Adaptation, recipe: Recipe): Cell[] {
+  const visible = adapted.inputs.filter(cell => colorAt(rows, cell.point) !== cell.initial);
+  if (visible.length !== recipe.cells.length || !recipe.cells.every(i => visible.includes(adapted.inputs[i]!))) return [];
+  return visible.map(cell => ({ ...cell, initial: colorAt(rows, cell.point)! }));
+}
+
+function remoteReturn(rows: NativeRows, { remote, aiming }: RemoteProposal, first?: NativeRows): string | null {
+  const { kind, expected, cell, recipe } = aiming;
+  const adapted = remote.adaptation, witness = kind === 'resize' ? adapted!.fineRoute.witness : remote.route.witness;
+  if (!aimPoseMatches(rows, witness, expected)) return null;
+  if (kind === 'select') return recipe && adapted && selectedCells(rows, adapted, recipe).length ? 'recipe_selection_confirmed' : null;
+  if (kind === 'resize') return 'smaller_directional_footprint_confirmed';
   if (kind === 'launch') return remoteOpeningObserved(rows, remote.route) ? 'contact_and_distant_barrier_removed' : null;
   if (kind === 'copy') return cell && colorAt(rows, cell.point) !== cell.initial ? 'recipe_cell_activation_confirmed' : null;
+  if (kind === 'recover' && adapted && remote.route.supply && overlaps(expected.box, remote.route.supply)) {
+    return first && readGauge(rows, adapted.gauge, adapted.fill) > readGauge(first, adapted.gauge, adapted.fill)
+      ? 'contact_and_reserve_increase_confirmed' : null;
+  }
+  if (kind === 'recover') return 'movement_toward_reserve_confirmed';
   return kind === 'aim' ? 'movement_and_heading_confirmed' : 'movement_through_opened_route_confirmed';
+}
+
+function seenResize(local: State, receiver: NativeBox | null): State['resize'] {
+  if (local.scene.visible || !receiver) return undefined;
+  const start = local.scene.initialActor, from = width(start), side = width(receiver);
+  if (width(start) !== height(start) || side !== height(receiver) || side >= from) return undefined;
+  return { from, side, offsets: [receiver[0] - start[0], receiver[1] - start[1]], cells: [...local.cues].sort((a, b) => a - b) };
 }
 
 function witnessedAim(rows: NativeRows, proposal: Proposal, epoch: number, ref: string): AimWitness | null {
@@ -213,6 +269,8 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
   let state: State | null = null;
   let witness: AimWitness | null = null;
   let remoteState: RemoteState | null = null;
+  let resize: ResizeWitness | null = null;
+  let shot: { epoch: number; cells: number[]; refs: string[] } | null = null;
   async function offerRemote(observation: NativeObservation, rows: NativeRows, remaining: number,
     execution?: NativeExecution): Promise<RemoteProposal | null> {
     const { level_epoch: epoch, observation_ref: ref, available_action_refs: available } = observation;
@@ -221,28 +279,51 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
     if (remote && (remote.stopped || remote.lastRef !== ref)) return null;
     if (!remote) {
       const parts = geometricComponents(rows), input = measureInput(parts, rows.length, true);
-      const sample = input && measureExample(parts, input);
+      const samples = input ? measureExamples(parts, input) : [];
+      const sample = samples.length === 1 ? samples[0]! : null;
       const route = input && sample && readRemoteRoute(rows, input.panel, sample.ink, witness);
-      if (!input || !sample || !route) return null;
-      remote = { epoch, route, panel: input.panel, cells: sample.cells.map(i => input.cells[i]!), samples: sample.examples,
-        opened: false, stopped: false, refs: [], lastRef: ref };
+      if (!input) return null;
+      if (sample && route) {
+        remote = { epoch, route, panel: input.panel, cells: sample.cells.map(i => input.cells[i]!), samples: sample.examples,
+          opened: false, stopped: false, refs: [], lastRef: ref, recipe: sample.cells };
+      } else if (resize && shot?.epoch === epoch && samples.length > 1) {
+        const matching = (cells: number[]) => samples.filter(s => s.cells.join() === cells.join());
+        const resizeCards = matching(resize.cells), shotCards = matching(shot.cells);
+        if (resizeCards.length !== 1 || shotCards.length !== 1 || resizeCards[0] === shotCards[0]) return null;
+        const resizeRecipe = resizeCards[0]!, shotRecipe = shotCards[0]!;
+        const adapted = readAdaptableRemote(rows, input.panel, shotRecipe.ink, witness, resize);
+        if (!adapted) return null;
+        const { actor, fineRoute, finePose, gauge, fill } = adapted;
+        const adaptation = { resizeRecipe, shotRecipe, fineRoute, pose: actor, finePose, gauge, fill,
+          inputs: input.cells, active: [], resized: false, replenished: false, refs: [...resize.refs, ...shot.refs] };
+        remote = { epoch, route: adapted.route, panel: input.panel, cells: [], samples: shotRecipe.examples,
+          opened: false, stopped: false, refs: [], lastRef: ref, recipe: shot.cells, adaptation };
+      } else return null;
     }
     const aiming = chooseRemote(remote, rows, available, remaining);
     if (!aiming) return null;
-    const { action, kind, cell, pose, expected } = aiming;
-    const route = remote.route, target = cell?.box ?? (kind === 'aim' ? route.target : route.exit);
-    const evidence: [string, ...string[]] = [ref, ...new Set([...remote.refs, ...witness.refs].filter(value => value !== ref))];
+    const { action, kind, cell, pose, expected, recipe } = aiming;
+    const route = remote.route, click = cell?.box ?? recipe?.box;
+    const target = click ?? (kind === 'aim' ? route.target : kind === 'recover' ? route.supply ?? route.exit : route.exit);
+    const evidence: [string, ...string[]] = [ref,
+      ...new Set([...remote.refs, ...(remote.adaptation?.refs ?? []), ...witness.refs].filter(value => value !== ref))];
     const mode = execution?.reasoningMode ?? 'assimilation';
-    const offer = { input: action.action_ref, expected: center(cell?.box ?? expected.box), evidence };
+    const offer = { input: action.action_ref, expected: center(click ?? expected.box), evidence };
     const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: kind === 'launch' ? offer : null,
-      access: cell ? null : offer, interaction: kind === 'copy' ? offer : null });
+      access: click ? null : offer, interaction: click && kind !== 'launch' ? offer : null });
     if (!selected) return null;
-    const situation = kind === 'aim' ? 'Turn the moving piece toward the inset linked to the blocked passage'
-      : kind === 'copy' ? 'Copy the marked cell from the visible motif'
-        : kind === 'launch' ? 'Test whether the aligned motif effect removes both the inset and the distant barrier'
-          : 'Move to the framed exit through the opened passage';
-    const pointBinding = cell ? await ObservedInputDomain.makeLocusWitness(observation, rows, cell.point, { reason: situation, evidence }) : null;
-    if (cell && !pointBinding) return null;
+    const situation = {
+      aim: 'Turn the moving piece toward the inset linked to the blocked passage',
+      copy: 'Copy the marked cell from the visible motif',
+      launch: 'Test whether the aligned motif effect removes both the inset and the distant barrier',
+      exit: 'Move to the framed exit through the opened passage',
+      select: remote.adaptation?.resized ? 'Select the observed recipe linked to the aimed effect'
+        : 'Select the observed recipe that reduced the piece to fit a narrower alignment',
+      resize: 'Apply the recipe and verify the smaller footprint and preserved heading',
+      recover: 'Test whether contact with the piece matching the reserve gauge restores it',
+    }[kind];
+    const pointBinding = click ? await ObservedInputDomain.makeLocusWitness(observation, rows, center(click), { reason: situation, evidence }) : null;
+    if (click && !pointBinding) return null;
     const parent = 'G_official_completion';
     const objective = { kind: 'open_route_by_remote_effect', scope: ref.split(':revision:', 1)[0]!,
       subjects: [center(route.target).join(','), center(route.barrier).join(','), center(route.exit).join(',')],
@@ -252,8 +333,10 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
       binding: { observation_ref: ref, level_epoch: epoch },
       steps: [{ action, expected_after: expected.box, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
       sicSituationCard: { strategy: selected.id, need: 'Open the blocked passage and reach the exit', situation, mode, evidence,
-        agenda: entries, triggerCard: card, panel: remote.panel, sampleCells: remote.samples, actor: pose.box,
-        target, addressedRegion: route.target, obstacle: route.barrier, exit: route.exit },
+        agenda: entries, triggerCard: card, panel: remote.panel,
+        sampleCells: recipe?.examples ?? (remote.adaptation && !remote.adaptation.resized ? remote.adaptation.resizeRecipe.examples : remote.samples),
+        actor: pose.box, target, addressedRegion: route.target, obstacle: route.barrier, exit: route.exit,
+        ...(remote.adaptation ? { reserveGauge: remote.adaptation.gauge, expectedFootprint: expected.box } : {}) },
       question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
       sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
@@ -331,7 +414,7 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isRemote(proposal)) {
-        const reason = remoteReturn(second, proposal);
+        const reason = remoteReturn(second, proposal, first);
         return { matched: !!reason, seal_prefix: true, reason: reason ?? 'remote_effect_or_movement_contradicted' };
       }
       if (proposal.step.kind === 'observe') return { matched: null, seal_prefix: true, reason: 'check_intermediate_frames_for_cue' };
@@ -340,15 +423,31 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
     },
     record(before, after, _action, first, second, proposal, _index, frames) {
       if (isRemote(proposal)) {
+        const { remote, aiming } = proposal;
+        if (after.levels_completed > before.levels_completed && remote.opened && remote.recipe?.length && !remote.adaptation && witness) {
+          shot = { epoch: after.level_epoch, cells: remote.recipe, refs: [...remote.refs, after.observation_ref] };
+          witness = { ...witness, epoch: after.level_epoch };
+        }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-        const { remote, aiming } = proposal, reason = remoteReturn(second, proposal);
+        const reason = remoteReturn(second, proposal, first);
         const flight = aiming.kind === 'launch' && !!reason && remoteFlightObserved(first, frames ?? [], aiming.pose, remote.route);
         const confirmed = reason && (aiming.kind !== 'launch' || flight);
-        remoteState = { ...remote, opened: remote.opened || flight, stopped: !confirmed,
+        const adapted = remote.adaptation;
+        const resized = reason === 'smaller_directional_footprint_confirmed';
+        const adaptation = adapted && confirmed ? { ...adapted, pose: aiming.expected, resized: adapted.resized || resized,
+          replenished: adapted.replenished || reason === 'contact_and_reserve_increase_confirmed',
+          active: aiming.recipe ? selectedCells(second, adapted, aiming.recipe) : resized || flight ? [] : adapted.active } : adapted;
+        remoteState = { ...remote, ...(adaptation ? { adaptation } : {}), route: resized && adapted ? adapted.fineRoute : remote.route,
+          opened: remote.opened || flight, stopped: !confirmed,
           refs: confirmed ? [...remote.refs.slice(-5), after.observation_ref] : remote.refs, lastRef: after.observation_ref };
         return { events: [], ...(flight ? { reviewEvidence: 'The visible effect travelled to the inset before the distant passage opened.' } : {}) };
       }
-      if (after.levels_completed > before.levels_completed) witness = witnessedAim(first, proposal, after.level_epoch, after.observation_ref);
+      if (after.levels_completed > before.levels_completed) {
+        const { local } = proposal;
+        witness = witnessedAim(first, proposal, after.level_epoch, after.observation_ref);
+        if (local.resize && local.horizontal && local.prepared) resize = { ...local.resize, unit: Math.abs(local.horizontal),
+          refs: [...local.refs.slice(-2), after.observation_ref] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, step } = proposal;
       const animated = step.kind === 'observe' ? measureAnimatedCells(first, second, frames, local.scene.cells.map(cell => cell.point)) : [];
@@ -357,17 +456,21 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
       const receiver = reason === 'prepared_footprint_observed' || local.prepared ? controlled(second, local.scene) : null;
       const axis = local.scene.visible?.axis ?? 0;
       const horizontal = receiver && local.receiver && step.kind === 'approach' && reason ? receiver[axis] - local.receiver[axis] : local.horizontal;
+      const measuredResize = reason === 'prepared_footprint_observed' ? seenResize(local, receiver) : local.resize;
       state = { ...local, cues, receiver, horizontal, prepared: local.prepared || reason === 'prepared_footprint_observed',
+        ...(measuredResize ? { resize: measuredResize } : {}),
         demonstrationRef: step.kind === 'observe' && cues.length ? after.observation_ref : local.demonstrationRef,
         refs: reason ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         rejected: reason ? local.rejected : [...local.rejected, proposal.attempt] };
       return { events: [] };
     },
-    state: () => ({ state, witness, remoteState }),
+    state: () => ({ state, witness, remoteState, resize, shot }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       witness = structuredClone((value.witness ?? null) as AimWitness | null);
       remoteState = structuredClone((value.remoteState ?? null) as RemoteState | null);
+      resize = structuredClone((value.resize ?? null) as ResizeWitness | null);
+      shot = structuredClone((value.shot ?? null) as typeof shot);
     },
   };
 }

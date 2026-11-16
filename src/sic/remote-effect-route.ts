@@ -6,7 +6,8 @@ export type AimCommand = keyof typeof aimCommands;
 export type AimWitness = { epoch: number; unit: number; side: number; frontInk: number; backInk: number; refs: string[] };
 export type AimPose = { box: NativeBox; heading: AimCommand };
 export type RemoteRoute = { target: NativeBox; core: NativeBox; barrier: NativeBox; exit: NativeBox; field: NativeBox;
-  floor: number; witness: AimWitness };
+  floor: number; witness: AimWitness; supply?: NativeBox };
+export type ResizeWitness = { from: number; side: number; unit: number; offsets: NativePoint; cells: number[]; refs: string[] };
 type Navigation = { pose: AimPose; action: AimCommand; distance: number };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -15,7 +16,7 @@ const covers = (outer: NativeBox, inner: NativeBox) =>
   outer[0] <= inner[0] && outer[1] <= inner[1] && outer[2] >= inner[2] && outer[3] >= inner[3];
 const square = (x: number, y: number, side: number): NativeBox => [x, y, x + side - 1, y + side - 1];
 const contains = ([l, t, r, b]: NativeBox, x: number, y: number) => l <= x && x <= r && t <= y && y <= b;
-const sameBox = (box: NativeBox, other: NativeBox) => box.every((value, i) => value === other[i]);
+export const overlaps = (a: NativeBox, b: NativeBox) => a[0] <= b[2] && a[2] >= b[0] && a[1] <= b[3] && a[3] >= b[1];
 const commands = Object.keys(aimCommands) as AimCommand[];
 
 function everyPixel(box: NativeBox, test: (x: number, y: number) => boolean): boolean {
@@ -48,7 +49,7 @@ export function readAimPose(rows: NativeRows, layout: Pick<RemoteRoute, 'field' 
 function navigable(rows: NativeRows, layout: RemoteRoute, actor: AimPose, box: NativeBox, projectedOpening: boolean) {
   return covers(layout.field, box) && everyPixel(box, (x, y) =>
     rows[y]?.[x] === layout.floor || contains(actor.box, x, y) || contains(layout.exit, x, y)
-    || projectedOpening && contains(layout.barrier, x, y));
+    || projectedOpening && contains(layout.barrier, x, y) || !!layout.supply && contains(layout.supply, x, y));
 }
 
 type Ray = { box: NativeBox; axis: 0 | 1; sign: number; first: number; last: number };
@@ -72,7 +73,7 @@ export function hasAimedRay(rows: NativeRows, layout: RemoteRoute, pose: AimPose
 }
 
 export function aimRoute(rows: NativeRows, layout: RemoteRoute, actor: AimPose, available: readonly string[],
-  goal: 'aim' | 'exit', remaining: number, projectedOpening = false): Navigation | null {
+  goal: 'aim' | 'exit' | 'supply', remaining: number, projectedOpening = false): Navigation | null {
   type Node = { pose: AimPose; distance: number; first?: Omit<Navigation, 'distance'> };
   const queue: Node[] = [{ pose: actor, distance: 0 }], visited = new Set<string>();
   for (const current of queue) {
@@ -84,7 +85,9 @@ export function aimRoute(rows: NativeRows, layout: RemoteRoute, actor: AimPose, 
       if (!navigable(rows, layout, actor, box, projectedOpening)) continue;
       const pose = { box, heading: action }, distance = current.distance + 1;
       const first = current.first ?? { pose, action };
-      if (goal === 'aim' ? hasAimedRay(rows, layout, pose) : sameBox(pose.box, layout.exit)) return { ...first, distance };
+      const reached = goal === 'aim' ? hasAimedRay(rows, layout, pose) : goal === 'supply'
+        ? layout.supply && overlaps(pose.box, layout.supply) : covers(layout.exit, pose.box);
+      if (reached) return { ...first, distance };
       const signature = [box[0], box[1], goal === 'aim' ? action : ''].join(',');
       if (visited.has(signature)) continue;
       visited.add(signature);
@@ -94,7 +97,7 @@ export function aimRoute(rows: NativeRows, layout: RemoteRoute, actor: AimPose, 
   return null;
 }
 
-export function readRemoteRoute(rows: NativeRows, panel: NativeBox, cueInk: number, witness: AimWitness): RemoteRoute | null {
+function readRemoteOptions(rows: NativeRows, panel: NativeBox, cueInk: number, witness: AimWitness) {
   if (witness.unit < 1 || witness.unit > witness.side || witness.side % 2 || witness.side < 2 || witness.side > 12) return null;
   const field: NativeBox = [0, 0, rows[0]!.length - 1, panel[1] - 1];
   const actor = readAimPose(rows, { field, witness });
@@ -117,11 +120,51 @@ export function readRemoteRoute(rows: NativeRows, panel: NativeBox, cueInk: numb
     if (cores.length !== 1) continue;
     for (const barrier of parts.filter(part => part !== cores[0] && part.color === cores[0]!.color && part.rectangular
       && (width(part.bbox) === witness.side || height(part.bbox) === witness.side))) {
-      const layout = { field, target: rim.bbox, core: cores[0]!.bbox, barrier: barrier.bbox, exit, floor, witness };
-      const opened = aimRoute(rows, layout, actor, commands, 'exit', 40, true);
-      if (opened && !aimRoute(rows, layout, actor, commands, 'exit', opened.distance + 16)) candidates.push(layout);
+      candidates.push({ field, target: rim.bbox, core: cores[0]!.bbox, barrier: barrier.bbox, exit, floor, witness });
     }
   }
+  return { actor, parts, candidates };
+}
+
+export function readRemoteRoute(rows: NativeRows, panel: NativeBox, cueInk: number, witness: AimWitness): RemoteRoute | null {
+  const measured = readRemoteOptions(rows, panel, cueInk, witness);
+  const candidates = measured?.candidates.filter(layout => {
+    const opened = aimRoute(rows, layout, measured.actor, commands, 'exit', 40, true);
+    return opened && !aimRoute(rows, layout, measured.actor, commands, 'exit', opened.distance + 16);
+  });
+  return candidates?.length === 1 ? candidates[0]! : null;
+}
+
+export function readGauge(rows: NativeRows, box: NativeBox, fill: number): number {
+  let length = 0;
+  for (let y = box[3]; y >= box[1]; y--) {
+    if (!everyPixel([box[0], y, box[2], y], (x, yy) => rows[yy]?.[x] === fill)) break;
+    length++;
+  }
+  return length;
+}
+
+export function readAdaptableRemote(rows: NativeRows, panel: NativeBox, cueInk: number, witness: AimWitness, resize: ResizeWitness) {
+  if (resize.from !== witness.side || resize.side >= witness.side || resize.side % 2 || resize.unit < 1) return null;
+  const measured = readRemoteOptions(rows, panel, cueInk, witness);
+  if (!measured) return null;
+  const gauges = geometricComponents(rows).filter(p => p.rectangular && height(p.bbox) === rows.length
+    && width(p.bbox) <= resize.side && (p.bbox[0] === 0 || p.bbox[2] === rows[0]!.length - 1));
+  if (gauges.length !== 1) return null;
+  const gauge = gauges[0]!, actor = measured.actor, [dx, dy] = resize.offsets;
+  const finePose = { box: square(actor.box[0] + dx, actor.box[1] + dy, resize.side), heading: actor.heading };
+  const candidates = measured.candidates.flatMap(layout => {
+    const supplies = measured.parts.filter(p => p.rectangular && width(p.bbox) === resize.side
+      && height(p.bbox) === resize.side && p.color === gauge.color && !overlaps(p.bbox, gauge.bbox));
+    if (supplies.length !== 1) return [];
+    const fineRoute = { ...layout, supply: supplies[0]!.bbox, witness: { ...witness, side: resize.side, unit: resize.unit } };
+    const canAim = (route: RemoteRoute, pose: AimPose) =>
+      hasAimedRay(rows, route, pose) || aimRoute(rows, route, pose, commands, 'aim', 40);
+    if (canAim(layout, actor) || !canAim(fineRoute, finePose)
+      || !aimRoute(rows, fineRoute, finePose, commands, 'exit', 60, true)
+      || aimRoute(rows, fineRoute, finePose, commands, 'exit', 60)) return [];
+    return [{ route: layout, fineRoute, actor, finePose, gauge: gauge.bbox, fill: gauge.color }];
+  });
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
