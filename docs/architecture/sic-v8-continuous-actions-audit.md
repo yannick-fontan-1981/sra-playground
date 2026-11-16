@@ -2,7 +2,7 @@
 
 ## Couverture après extension des trajets
 
-Les **100 niveaux 1** sont gagnés en SIC seul. Les **1 248 commandes** et tous les retours publics, animations comprises, sont identiques à ceux du parcours de référence. La comparaison utilise une empreinte de la commande et de chaque paquet de retour. Les reprises de décision passent de **1 105 à 1 026**.
+Les **100 niveaux 1** sont gagnés en SIC seul. Les **1 248 commandes** et les retours comparés sont identiques au parcours de référence. L’empreinte couvre les commandes, les images finales et intermédiaires, le niveau, le score et l’état du jeu. Les reprises de décision passent de **1 105 à 1 026**.
 
 **12 jeux sur 100** exécutent au moins deux commandes sous un même plan, contre 3 au départ. Les 32 séries se répartissent en 27 `move-path`, 4 `click-path` et 1 `mix-path`. Une série interrompue avant sa deuxième commande est exclue. Dans une série mixte, le journal doit montrer au moins un déplacement directionnel et un clic effectifs dans le même plan.
 
