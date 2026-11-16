@@ -3,7 +3,7 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
-import { placeCascadePeers, planCascadeSetup } from './cascade-setup.ts';
+import { placeCascadePeers, planCascadeSetup, planParallelCascadeSetup } from './cascade-setup.ts';
 import type { CascadePeer, CascadePreparation, CascadeTile } from './cascade-setup.ts';
 
 export const gatedCascadeId = 'sic_gated_cascade';
@@ -16,7 +16,7 @@ type Channel = { path: NativePoint[]; covered: NativePoint | null };
 type Setup = { preparation: CascadePreparation; tiles: CascadeTile[] };
 type Layout = { pitch: number; cells: NativePoint[]; cursorColor: number; gate: NativePoint; junction: NativePoint;
   target: NativePoint; branch: NativePoint[]; roles?: CascadeRoles; channel?: { covered: NativePoint | null; floorColor: number };
-  setup?: Setup };
+  setup?: Setup; targets?: NativePoint[] };
 type Scene = { layout: Layout; cursor: NativePoint };
 type Memory = { epoch: number; layout: Layout; routeRef: string | null; burstRef: string | null; failed: boolean };
 type Proposal = NativeProposal & { local: Memory; scene: Scene; next: NativePoint; launch: boolean; needId: string };
@@ -182,10 +182,12 @@ function measureCascadeSetup(rows: NativeRows, known: CascadeMemory, previous: S
   const junctions = tiles.filter(tile => tile.junction);
   const sources = tiles.filter(tile => tile.color === roles.source).map(tile => tile.at);
   const targets = tiles.filter(tile => tile.color === roles.target);
-  if (active < 0 || guards.length < 2 || bridges.length !== 1 || junctions.length < 2 || targets.length !== 1) return null;
+  if (active < 0 || guards.length < 2 || bridges.length !== 1 || !junctions.length || !targets.length) return null;
   const target = targets[0]!.at;
-  const preparation = previous?.preparation.setup ? previous.preparation
-    : planCascadeSetup({ pitch, tiles, sources, target }, guards, bridges[0]!, shouldStop);
+  const board = { pitch, tiles, sources, target }, destinations = targets.map(tile => tile.at);
+  const preparation = previous?.preparation.setup ? previous.preparation : targets.length > 1
+    ? planParallelCascadeSetup(board, destinations, peers, shouldStop)
+    : junctions.length > 1 ? planCascadeSetup(board, guards, bridges[0]!, shouldStop) : null;
   if (!preparation) return null;
   const movement = placeCascadePeers(peers, active, blockerMark, preparation, pitch, tiles, shouldStop);
   if (!movement) return null;
@@ -193,7 +195,8 @@ function measureCascadeSetup(rows: NativeRows, known: CascadeMemory, previous: S
   const junction = junctions.find(tile => branch.some(at => same(at, tile.at)))?.at ?? junctions[0]!.at;
   const gate = preparation.reveal ?? preparation.setup?.guards[0] ?? junction;
   const layout: Layout = { cursorColor: roles.focus, pitch, target, gate, junction, branch, roles,
-    cells: tiles.map(tile => tile.at), setup: { preparation, tiles } };
+    cells: tiles.map(tile => tile.at), setup: { preparation, tiles },
+    ...(targets.length > 1 ? { targets: destinations } : {}) };
   const step = movement.step ? { ref: moves[movement.step.index]![0], at: movement.step.at } : null;
   return { scene: { cursor, layout }, step };
 }
@@ -268,11 +271,16 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
       if (strategy !== 'P05' && strategy !== 'P07' && strategy !== 'P02') return null;
       const parent = 'G_official_completion';
       const objective = { kind: 'control_cascade_at_shared_junction', scope: ref.split(':revision:', 1)[0]!,
-        subjects: [key(layout.junction), key(layout.target)], parentObjective: parent, satisfactionContract: 'official_progress_after_directional_cascade' };
+        subjects: [key(layout.junction), ...(layout.targets ?? [layout.target]).map(key)],
+        parentObjective: parent, satisfactionContract: 'official_progress_after_directional_cascade' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = gatedCascadeId + ':' + need.id;
       const setup = layout.setup?.preparation;
-      const situation = setup ? launch ? 'Test whether the protected route and the relay carry the reaction to the target'
+      const parallel = setup?.setup?.sharedJunctions;
+      const targetStates = layout.targets?.map(at => ({ box: square(at), state: cascadeTargetState(rows, at, layout.roles!) }));
+      const situation = parallel ? launch ? 'Advance the cascade and check each target separately'
+        : 'Bridge the gap and keep the simultaneous arrivals to the shared junction free'
+        : setup ? launch ? 'Test whether the protected route and the relay carry the reaction to the target'
         : setup.reveal ? 'Move a piece to reveal a link on the candidate route'
           : 'Protect the planned route from competing arrivals and place the relay at the gap'
         : layout.channel ? launch ? 'Advance the visible cascade route toward the target and measure which links respond'
@@ -293,7 +301,8 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
           coveredLink: layout.channel?.covered ? square(layout.channel.covered) : null, channel: !!layout.channel,
           guards: setup?.setup?.guards.map(square) ?? [], gap: setup?.setup ? square(setup.setup.gap) : null,
           reveal: setup?.reveal ? square(setup.reveal) : null,
-          junction: square(layout.junction), target: square(layout.target) },
+          junction: square(layout.junction), target: square(layout.target),
+          ...(layout.targets ? { targets: layout.targets.map(square), targetStates, sharedJunctions: parallel?.map(square) ?? [] } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -326,7 +335,9 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
           ? (blockerMark === undefined ? undefined : before.observation_ref) : knowledge?.blockerRef;
         knowledge = { roles: layout.roles!, epoch: before.level_epoch, blockerMark, blockerRef,
           evidence: [before.observation_ref, after.observation_ref] };
-        return { events: [], reviewEvidence: 'The observed cascade reached the target and advanced the level.' };
+        return { events: [], reviewEvidence: layout.targets
+          ? 'The cascade fulfilled the combined target requirement and advanced the level.'
+          : 'The observed cascade reached the target and advanced the level.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, launch } = proposal;
@@ -361,6 +372,14 @@ function channelChanged(first: NativeRows, second: NativeRows, points: NativePoi
     const before = patch(first, point), after = patch(second, point);
     return before.some((color, index) => color !== after[index]);
   });
+}
+
+function cascadeTargetState(rows: NativeRows, at: NativePoint, roles: CascadeRoles) {
+  const colors = patch(rows, at);
+  if (isCursor(colors)) return 'covered';
+  const piece = domino(at, colors, roles.tip);
+  if (piece?.color === roles.target) return 'standing';
+  return piece?.color === roles.source ? 'activated' : 'changed';
 }
 
 function burstChanged(first: NativeRows, second: NativeRows, layout: Layout) {
