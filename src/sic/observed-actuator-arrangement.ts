@@ -12,13 +12,13 @@ type Point = RelativeArrangementPoint;
 type Axis = 0 | 1;
 type Gains = [number | null, number | null];
 type SelectedPad = RelativeArrangementPad & { selected: RelativeArrangementCell };
-type Select = { kind: 'select'; point: Point; piece: Point };
-type Learn = { kind: 'learn'; point: Point; axis: Axis; pad: string; marker: Point };
+type Select = { kind: 'select'; point: Point; piece: Point; goal?: Point };
+type Learn = { kind: 'learn'; point: Point; axis: Axis; pad: string; marker: Point; goal?: Point };
 type Place = { kind: 'place'; point: Point; pad: string; marker: Point; expected: Point; goal: Point };
 type Choice = Select | Learn | Place;
 type Memory = { epoch: number; scope: string; gains: Record<string, Gains>; pieces: Record<string, SelectedPad[]>;
-  rejected: string[]; refs: string[]; blocked: boolean };
-type Witness = { epoch: number; score: number; refs: string[] };
+  rejected: string[]; refs: string[]; blocked: boolean; destination?: ReturnType<typeof translatedRelativeArrangementTargets>[number] };
+type Witness = { epoch: number; score: number; refs: string[]; shape?: Point; pads?: string[]; gains?: Record<string, Gains> };
 type Proposal = NativeProposal & { layout: RelativeArrangementLayout; memory: Memory; choice: Choice; needId: string };
 type Waypoint = { point: Point; pad: string; marker: Point; expected: Point };
 type Route = { at: Point; markers: Point[]; depth: number; first: Waypoint | null };
@@ -52,7 +52,7 @@ function rememberSelection(memory: Memory, layout: RelativeArrangementLayout): M
   return { ...memory, pieces: { ...memory.pieces, [pieceKey(layout.selected)]: activePads(layout) } };
 }
 
-function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: RelativeArrangementCell): Map<string, Route> {
+function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: RelativeArrangementCell, partial = false): Map<string, Route> {
   const pads = memory.pieces[pieceKey(object)]!;
   const markers = pads.map(pad => pad.selected.xy), occupied = new Set(layout.objects
     .filter(peer => !equal(peer.xy, object.xy)).map(peer => pointKey(peer.xy)));
@@ -64,13 +64,15 @@ function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: Re
     if (!routes.has(location)) routes.set(location, current);
     for (const [index, pad] of pads.entries()) {
       const [horizontal, vertical] = gainsFor(memory, object.value, pad.ref);
-      if (horizontal === null || vertical === null) continue;
+      if (partial ? horizontal === null && vertical === null : horizontal === null || vertical === null) continue;
       const from = current.markers[index]!;
       for (const choice of pad.cells) {
+        const offset = [choice.xy[0] - from[0], choice.xy[1] - from[1]];
+        if (horizontal === null && offset[0] || vertical === null && offset[1]) continue;
         const markers = current.markers.map((value, j) => j === index ? choice.xy : value), id = stateKey(markers);
         if (seen.has(id) || rejected.has(trialKey({ ...object, xy: current.at }, pad.ref, from, choice.xy))) continue;
-        const at: Point = [wrapped(current.at[0] + (choice.xy[0] - from[0]) * horizontal, layout.shape[0]),
-          wrapped(current.at[1] + (choice.xy[1] - from[1]) * vertical, layout.shape[1])];
+        const at: Point = [wrapped(current.at[0] + offset[0]! * (horizontal ?? 0), layout.shape[0]),
+          wrapped(current.at[1] + offset[1]! * (vertical ?? 0), layout.shape[1])];
         if (occupied.has(pointKey(at))) continue;
         seen.add(id);
         queue.push({ at, markers, depth: current.depth + 1, first: current.first
@@ -81,7 +83,43 @@ function routesFor(layout: RelativeArrangementLayout, memory: Memory, object: Re
   return routes;
 }
 
+const distance = (a: Point, b: Point) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+
+function chooseTowardDestination(layout: RelativeArrangementLayout, memory: Memory): Choice | null {
+  if (!memory.destination) return null;
+  const plans = relativeArrangementAssignments(layout, [memory.destination], 720)
+    .filter(plan => plan.moves.length).sort((a, b) => a.moves.length - b.moves.length || a.distance - b.distance);
+  const moves = plans[0]?.moves;
+  if (!moves) return null;
+  const available = [...moves].sort((a, b) => distance(a.from, a.to) - distance(b.from, b.to)
+    || a.from[0] - b.from[0] || a.from[1] - b.from[1]);
+  const occupied = new Set(layout.objects.map(object => pointKey(object.xy)));
+  const next = available.find(move => layout.selected && equal(move.from, layout.selected.xy) && !occupied.has(pointKey(move.to)))
+    ?? available.find(move => !occupied.has(pointKey(move.to)));
+  if (!next) return null;
+  const object = layout.objects.find(cell => equal(cell.xy, next.from))!;
+  if (!layout.selected || !equal(layout.selected.xy, object.xy)) {
+    return { kind: 'select', point: object.point, piece: object.xy, goal: next.to };
+  }
+  const measured = routesFor(layout, memory, object, true).get(pointKey(next.to))?.first;
+  if (measured) return { kind: 'place', ...measured, goal: next.to };
+  for (const pad of activePads(layout)) for (const axis of [0, 1] as const) {
+    const residual = next.to[axis] - object.xy[axis];
+    if (!residual || gainsFor(memory, object.value, pad.ref)[axis] !== null) continue;
+    const other = axis === 0 ? 1 : 0, from = pad.selected.xy, direction = Math.sign(residual);
+    const target = pad.cells.find(cell => cell.xy[other] === from[other] && cell.xy[axis] === from[axis] + direction);
+    if (!target || memory.rejected.includes(trialKey(object, pad.ref, from, target.xy))) continue;
+    const predicted: Point = [...object.xy];
+    predicted[axis] = wrapped(predicted[axis] + direction, layout.shape[axis]);
+    if (occupied.has(pointKey(predicted))) continue;
+    return { kind: 'learn', point: target.point, axis, pad: pad.ref, marker: target.xy, goal: next.to };
+  }
+  return null;
+}
+
 function choose(layout: RelativeArrangementLayout, memory: Memory): Choice | null {
+  const directed = chooseTowardDestination(layout, memory);
+  if (directed) return directed;
   const trial = learnAxis(layout, memory);
   if (trial) return trial;
   const unknown = layout.objects.find(object => !memory.pieces[pieceKey(object)]?.length
@@ -168,14 +206,21 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
       if (!layout || layout.objects.length > 6 || layout.pads.length > 3) return null;
       const prior = state?.epoch === observation.level_epoch && state.scope === layout.scope_ref ? state : null;
       if (prior?.blocked) return null;
+      const transferred = witness.shape && equal(witness.shape, layout.shape) && witness.pads
+        && witness.pads.length === layout.pads.length && witness.pads.every((pad, index) => pad === layout.pads[index]!.ref) ? witness.gains : null;
+      const goals = !prior && transferred && Object.keys(transferred).length ? translatedRelativeArrangementTargets(layout) : [];
+      const nearby = goals.sort((a, b) => b.already_preserved.length - a.already_preserved.length)[0];
       const memory = rememberSelection(prior ?? { epoch: observation.level_epoch, scope: layout.scope_ref,
-        gains: {}, pieces: {}, rejected: [], refs: witness.refs, blocked: false }, layout);
+        gains: transferred ?? {}, pieces: {}, rejected: [], refs: witness.refs, blocked: false,
+        ...(nearby?.already_preserved.length && nearby.remove.length ? { destination: nearby } : {}) }, layout);
       const choice = choose(layout, memory);
       if (!choice) return null;
       const [x, y] = choice.point, ref = observation.observation_ref, parent = 'G_official_completion';
       const evidence: [string, ...string[]] = [ref, ...new Set(memory.refs.filter(value => value !== ref))];
-      const reason = choice.kind === 'select' ? 'Select the piece and read its current controls'
-        : choice.kind === 'learn' ? 'Change one control axis and measure the piece displacement'
+      const reason = choice.kind === 'select' ? choice.goal ? 'Keep the matching pieces in place and select a displaced piece'
+        : 'Select the piece and read its current controls'
+        : choice.kind === 'learn' ? choice.goal ? 'Test one control axis toward the missing position'
+          : 'Change one control axis and measure the piece displacement'
           : 'Combine measured control effects to match the visible arrangement';
       const action: NativeCommand = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
       const binding = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason, evidence });
@@ -192,7 +237,7 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
         sicSituationCard: { strategy, mode: choice.kind === 'place' ? 'solving' : 'exploration',
           need: 'Match the relative positions shown by the example', situation: reason, evidence, agenda: [],
           focus: layoutBox(layout, focus), reference: layout.legend.box, control: [x - 1, y - 1, x + 1, y + 1],
-          destination: choice.kind === 'place' ? layoutBox(layout, choice.goal) : null },
+          destination: choice.goal ? layoutBox(layout, choice.goal) : null },
         question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: reason, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -212,7 +257,8 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
     record(before, after, _action, _first, second, proposal) {
       const { layout, choice, memory } = proposal;
       if (after.levels_completed > before.levels_completed) {
-        witness = { epoch: after.level_epoch, score: after.levels_completed, refs: [...memory.refs.slice(-5), after.observation_ref] };
+        witness = { epoch: after.level_epoch, score: after.levels_completed, refs: [...memory.refs.slice(-5), after.observation_ref],
+          shape: layout.shape, pads: layout.pads.map(pad => pad.ref), gains: memory.gains };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
