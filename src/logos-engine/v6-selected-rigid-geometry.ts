@@ -29,7 +29,41 @@ function mostCommon(counts: ReadonlyMap<number, number>): readonly [number, numb
   return [color, maximum];
 }
 
-export function selectedRigidScene(rows: NativeRows, old: Scene | null = null): Scene | null {
+function insetInk(rows: NativeRows, left: number, top: number, q: number): readonly [number, number] {
+  const inside = new Map<number, number>();
+  for (let y = top + 1; y < top + q - 1; y++) for (let x = left + 1; x < left + q - 1; x++) {
+    increment(inside, pixel(rows, x, y));
+  }
+  return mostCommon(inside);
+}
+
+function outlinedAccess(rows: NativeRows, geometry: SelectedRigidGeometry, body: SelectedRigidBody,
+  position: Cell, maskWidth: number, maskHeight: number): Cell[] | null {
+  const { q, origin: [ox, oy], size: [width, height] } = geometry, [gx, gy] = position;
+  if (gy !== height || gx < 0 || gx + maskWidth > width || body.mask.length === maskWidth * maskHeight) return null;
+  const mask = new Set(body.mask.map(cellKey));
+  const inside = (x: number, y: number) => mask.has(cellKey([Math.floor(x / q), Math.floor(y / q)]));
+  const x0 = ox + gx * q, y0 = oy + gy * q;
+  for (let y = 0; y < maskHeight * q; y++) for (let x = 0; x < maskWidth * q; x++) {
+    if (!inside(x, y)) {
+      if (pixel(rows, x0 + x, y0 + y) === body.color) return null;
+    } else if (SELECTED_RIGID_DIRECTIONS.some(([dx, dy]) => !inside(x + dx, y + dy))
+      && pixel(rows, x0 + x, y0 + y) !== body.color) return null;
+  }
+  const [headX, headY] = body.mask[0]!;
+  const [fill] = insetInk(rows, x0 + headX * q, y0 + headY * q, q);
+  const access: Cell[] = [];
+  for (let x = 0; x < maskWidth; x++) for (let y = 0; y < maskHeight; y++) {
+    const [value, count] = insetInk(rows, x0 + x * q, y0 + y * q, q);
+    if (value !== fill || count !== (q - 2) ** 2) break;
+    access.push([gx + x, gy + y]);
+  }
+  const reachable = new Set(access.map(cellKey));
+  return body.mask.every(([x, y]) => reachable.has(cellKey([gx + x, gy + y]))) ? access : null;
+}
+
+export function selectedRigidScene(rows: NativeRows, old: Scene | null = null,
+  options: { outlinedReceptacles?: boolean } = {}): Scene | null {
   validateRows(rows);
   const parts = geometricComponents(rows), backgroundCounts = new Map<number, number>();
   for (const row of rows) for (const value of row) increment(backgroundCounts, value);
@@ -62,23 +96,33 @@ export function selectedRigidScene(rows: NativeRows, old: Scene | null = null): 
   }
   const { q } = geometry, [ox, oy] = geometry.origin, [width, height] = geometry.size;
   const fillColors = new Set<number>(), cells = new Map<number, Cell[]>();
+  const retained = options.outlinedReceptacles && old?.receptacle.access ? old : null;
   for (const c of parts) {
     const [left, top, right, bottom] = c.bbox;
     if (ox < left && left <= right && right < ox + width * q && oy < top && top <= bottom && bottom < oy + height * q
       && (left - ox - 1) % q === 0 && (top - oy - 1) % q === 0
       && (right - left + 3) % q === 0 && (bottom - top + 3) % q === 0) fillColors.add(c.color);
   }
+  if (retained) for (const body of retained.bodies) fillColors.add(body.color);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-    const left = ox + x * q, top = oy + y * q, inside = new Map<number, number>();
-    for (let yy = top + 1; yy < top + q - 1; yy++) for (let xx = left + 1; xx < left + q - 1; xx++) {
-      increment(inside, pixel(rows, xx, yy));
-    }
-    const [color, count] = mostCommon(inside);
+    const left = ox + x * q, top = oy + y * q;
+    const [color, count] = insetInk(rows, left, top, q);
     // The source measures these corners but does not use them as a role rule.
     void [pixel(rows, left, top), pixel(rows, left + q - 1, top),
       pixel(rows, left, top + q - 1), pixel(rows, left + q - 1, top + q - 1)];
     if (fillColors.has(color) && count >= (q - 2) ** 2 * 0.55) {
       const occupied = cells.get(color) ?? []; occupied.push([x, y]); cells.set(color, occupied);
+    }
+  }
+  if (retained) {
+    const target = retained.bodies.find(body => body.key === retained.receptacle.key);
+    if (!target) return null;
+    for (const [x, y] of retained.receptacle.access!) {
+      const [color, count] = insetInk(rows, ox + x * q, oy + y * q, q);
+      if (color !== target.color || count < (q - 2) ** 2 * 0.55) continue;
+      const occupied = cells.get(color) ?? [];
+      occupied.push([x, y]);
+      cells.set(color, occupied);
     }
   }
   if (cells.size < 3) return null;
@@ -88,6 +132,14 @@ export function selectedRigidScene(rows: NativeRows, old: Scene | null = null): 
     for (const p of occupied) { x = Math.min(x, p[0]); y = Math.min(y, p[1]); }
     const mask: Cell[] = occupied.map(([a, b]) => [a - x, b - y]); mask.sort(compareCell);
     bodies.push({ key: String(color), color, position: [x, y], mask });
+  }
+  if (retained) {
+    if (bodies.length !== retained.bodies.length || bodies.some((body, i) => {
+      const previous = retained.bodies[i]!;
+      return body.key !== previous.key || body.mask.length !== previous.mask.length
+        || body.mask.some((cell, j) => compareCell(cell, previous.mask[j]!) !== 0);
+    })) return null;
+    return { geometry, bodies, receptacle: retained.receptacle };
   }
   const receptacles: SelectedRigidReceptacle[] = [];
   for (const c of parts) {
@@ -100,12 +152,16 @@ export function selectedRigidScene(rows: NativeRows, old: Scene | null = null): 
         borderMatches = false; break;
       }
     }
-    if (!borderMatches) continue;
     const body = bodies.find(b => b.color === color)!;
     let maskWidth = 0, maskHeight = 0;
     for (const [x, y] of body.mask) { maskWidth = Math.max(maskWidth, x + 1); maskHeight = Math.max(maskHeight, y + 1); }
     if (right - left + 1 === maskWidth * q && bottom - top + 1 === maskHeight * q) {
-      receptacles.push({ key: body.key, position: [(left - ox) / q, (top - oy) / q], mask: body.mask });
+      const position: Cell = [(left - ox) / q, (top - oy) / q];
+      if (borderMatches) receptacles.push({ key: body.key, position, mask: body.mask });
+      else if (options.outlinedReceptacles) {
+        const access = outlinedAccess(rows, geometry, body, position, maskWidth, maskHeight);
+        if (access) receptacles.push({ key: body.key, position, mask: body.mask, access });
+      }
     }
   }
   if (receptacles.length !== 1) return null;
@@ -142,8 +198,9 @@ export function selectedRigidMoved(scene: Scene, poses: Poses, index: number, di
     for (const [x, y] of scene.bodies[j]!.mask) { occupied.add(cellKey([p[0] + x, p[1] + y])); tick?.(); }
   }
   const extra = new Set<string>();
-  if (body.key === target.key) for (const [x, y] of target.mask) {
-    extra.add(cellKey([target.position[0] + x, target.position[1] + y])); tick?.();
+  if (body.key === target.key) {
+    const access = target.access ?? target.mask.map(([x, y]): Cell => [target.position[0] + x, target.position[1] + y]);
+    for (const cell of access) { extra.add(cellKey(cell)); tick?.(); }
   }
   for (const [x, y] of body.mask) {
     const cell: Cell = [at[0] + x, at[1] + y], key = cellKey(cell); tick?.();

@@ -135,6 +135,33 @@ test('only the homologous body receives the measured target-cell boundary except
   assert.strictEqual(selectedRigidMoved(scene, poses, 2, [0, 1]), poses);
 });
 
+test('a concave receptacle preserves the rigid mask across the board boundary', () => {
+  const q = 6, origin = 3, goal: Cell = [2, 4], mask: Cell[] = [[0, 0], [0, 1], [1, 1]];
+  const paint = (pose: Cell) => {
+    const rows = raster().map((row, y) => row.map(value => value === 10 || (y >= 27 && value === 2) ? 0 : value));
+    const inside = (x: number, y: number) => mask.some(([a, b]) => a === Math.floor(x / q) && b === Math.floor(y / q));
+    const left = origin + goal[0] * q, top = origin + goal[1] * q;
+    for (let y = 0; y < 2 * q; y++) for (let x = 0; x < 2 * q; x++) {
+      const border = inside(x, y) && (!inside(x - 1, y) || !inside(x + 1, y) || !inside(x, y - 1) || !inside(x, y + 1));
+      rows[top + y]![left + x] = border ? 10 : 7;
+    }
+    for (const [dx, dy] of mask) for (let y = 1; y < q - 1; y++) for (let x = 1; x < q - 1; x++) {
+      rows[origin + (pose[1] + dy) * q + y]![origin + (pose[0] + dx) * q + x] = 10;
+    }
+    return rows;
+  };
+  const rows = paint([2, 2]), options = { outlinedReceptacles: true };
+  assert.equal(selectedRigidScene(rows), null);
+  const initial = selectedRigidScene(rows, null, options); assert.ok(initial);
+  assert.deepEqual(initial.receptacle.access, [[2, 4], [2, 5], [3, 4], [3, 5]]);
+  const first = selectedRigidMoved(initial, selectedRigidPoses(initial), 1, [0, 1]);
+  assert.deepEqual(first[1], [2, 3]);
+  const partial = selectedRigidScene(paint([2, 3]), initial, options); assert.ok(partial);
+  assert.deepEqual(partial.bodies[1]!.mask, mask);
+  assert.deepEqual(selectedRigidPoses(partial), first);
+  assert.deepEqual(selectedRigidMoved(partial, first, 1, [0, 1])[1], goal);
+});
+
 test('A* retains the source four-step route and exact expanded-node accounting', async () => {
   const scene = selectedRigidScene(raster()); assert.ok(scene);
   const [path, nodes] = await selectedRigidRoute(scene, null, 1000, execution()); assert.ok(path);

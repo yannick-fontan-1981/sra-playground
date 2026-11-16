@@ -13,6 +13,7 @@ export interface SelectedRigidBody {
 }
 export interface SelectedRigidReceptacle {
   key: string; position: SelectedRigidCell; mask: SelectedRigidCell[];
+  access?: SelectedRigidCell[];
 }
 export interface SelectedRigidScene {
   geometry: SelectedRigidGeometry; bodies: SelectedRigidBody[]; receptacle: SelectedRigidReceptacle;

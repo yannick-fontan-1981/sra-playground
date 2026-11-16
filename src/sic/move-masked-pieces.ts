@@ -24,11 +24,20 @@ type State = {
   refs: string[];
 };
 type Variant = { model: NativePoint[]; poses: SelectedRigidPoses };
+type Transfer = { epoch: number; models: NativePoint[][]; evidence: string[] };
 type Choice = { kind: 'select' | 'probe' | 'move'; index: number; action: NativeCommand; variants: Variant[]; route: SelectedRigidRouteStep[] };
 type Proposal = NativeProposal & { local: State; choice: Choice; needId: string };
 
 const same = ([x, y]: NativePoint, [a, b]: NativePoint) => x === a && y === b;
 const samePoses = (a: SelectedRigidPoses, b: SelectedRigidPoses) => a.length === b.length && a.every((p, i) => same(p, b[i]!));
+const measurement = { outlinedReceptacles: true };
+
+function partiallyInserted(scene: SelectedRigidScene): boolean {
+  const target = scene.receptacle.access && scene.bodies.find(body => body.key === scene.receptacle.key);
+  if (!target) return false;
+  const entered = target.mask.filter(([, y]) => y + target.position[1] >= scene.geometry.size[1]).length;
+  return entered > 0 && entered < target.mask.length;
+}
 
 async function choose(local: State, routeTimeBoundMs: number, execution?: NativeExecution): Promise<Choice | null> {
   const { scene, active, models } = local;
@@ -81,6 +90,7 @@ function boxFor(scene: SelectedRigidScene, position: NativePoint, mask: NativePo
 
 export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily<Proposal> {
   let state: State | null = null;
+  let transfer: Transfer | null = null;
   const routeTimeBoundMs = id === learnSelectedAccessId ? SELECTED_RIGID_SOURCE_LIMITS.timeBoundMs : 4000;
   return {
     id,
@@ -89,11 +99,12 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const motion = execution?.observedControlledMotion;
       if (id === learnSelectedAccessId && !prior && !motion) return null;
-      const scene = selectedRigidScene(rows, prior?.scene);
+      const scene = selectedRigidScene(rows, prior?.scene, measurement);
       if (!scene) return null;
       const continuous = prior && samePoses(selectedRigidPoses(prior.scene), selectedRigidPoses(scene));
+      const recalled = scene.receptacle.access && transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
       const local: State = continuous ? { ...prior, scene } : { epoch: observation.level_epoch, scene, active: null,
-        models: prior?.models ?? controlModels, route: null, refs: prior?.refs ?? [] };
+        models: prior?.models ?? recalled?.models ?? controlModels, route: null, refs: prior?.refs ?? recalled?.evidence ?? [] };
       if (id === learnSelectedAccessId && !prior && motion) {
         const q = scene.geometry.q;
         const dx = (motion.to[0] - motion.from[0]) / q, dy = (motion.to[1] - motion.from[1]) / q;
@@ -124,7 +135,9 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
       if (!selected) return null;
       const situation = choice.kind === 'select' ? 'Select the piece needed to clear or reach the opening'
         : choice.kind === 'probe' ? 'Distinguish the possible directional effects on the selected piece'
-          : 'Follow the route while checking the full outline of each piece';
+          : partiallyInserted(scene) && scene.bodies[choice.index]?.key === scene.receptacle.key
+            ? 'Part of the piece is still on the board. Complete the insertion and check the level result.'
+            : 'Follow the route while checking the full outline of each piece';
       const witness = choice.kind === 'select' ? await ObservedInputDomain.makeLocusWitness(observation, rows,
         [choice.action.data.x!, choice.action.data.y!], { reason: situation, evidence }) : null;
       if (choice.kind === 'select' && !witness) return null;
@@ -155,14 +168,18 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { local, choice } = proposal, scene = selectedRigidScene(second, local.scene);
+      const { local, choice } = proposal, scene = selectedRigidScene(second, local.scene, measurement);
       if (choice.kind === 'select') return { matched: null, seal_prefix: true, reason: 'selection_pending_directional_evidence' };
       const compatible = scene && choice.variants.some(v => samePoses(v.poses, selectedRigidPoses(scene)));
-      return { matched: !!compatible, seal_prefix: true, reason: compatible ? 'compatible_full_mask_return' : 'full_mask_projection_contradicted' };
+      return { matched: !!compatible, seal_prefix: true, reason: compatible
+        ? partiallyInserted(scene) ? 'observed_partial_insertion' : 'compatible_full_mask_return' : 'full_mask_projection_contradicted' };
     },
-    record(before, after, _action, _first, second, { local, choice }) {
+    record(before, after, action, _first, second, { local, choice }) {
+      if (after.levels_completed > before.levels_completed && choice.kind === 'move' && local.models.length === 1) {
+        transfer = { epoch: before.level_epoch, models: local.models, evidence: [...local.refs.slice(-4), after.observation_ref] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const scene = selectedRigidScene(second, local.scene);
+      const scene = selectedRigidScene(second, local.scene, measurement);
       if (!scene) {
         state = { ...local, active: null, models: [], route: null };
         return { events: [] };
@@ -170,6 +187,11 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
       const poses = selectedRigidPoses(scene), stationary = samePoses(poses, selectedRigidPoses(local.scene));
       let models = choice.kind === 'select' ? local.models : choice.variants.filter(v => samePoses(v.poses, poses)).map(v => v.model);
       let active: number | null = choice.index;
+      if (local.scene.receptacle.access && !models.length && choice.kind !== 'select') {
+        const input = inputs.findIndex(candidate => candidate === action.action_ref);
+        if (input >= 0) models = controlModels.filter(model => samePoses(poses,
+          selectedRigidMoved(local.scene, selectedRigidPoses(local.scene), choice.index, model[input]!)));
+      }
       if (id === learnSelectedAccessId && !models.length && choice.kind !== 'select') {
         const priorPoses = selectedRigidPoses(local.scene);
         const moved = poses.flatMap((position, index) => same(position, priorPoses[index]!) ? [] : [index]);
@@ -188,9 +210,14 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
       state = { ...local, scene, active, models,
         route: active === null ? null : stationary ? choice.route : advanced ? choice.route.slice(1) : null,
         refs: [...local.refs.slice(-4), after.observation_ref] };
-      return { events: [] };
+      return { events: [], ...(!stationary && partiallyInserted(scene) ? {
+        reviewEvidence: 'The observed full mask still spans the board and the entrance, with no level advancement.',
+      } : {}) };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, transfer }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      transfer = structuredClone((value.transfer as Transfer | undefined) ?? null);
+    },
   };
 }
