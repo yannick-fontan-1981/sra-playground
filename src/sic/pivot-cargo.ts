@@ -10,13 +10,15 @@ export const learnPivotCargoId = 'sic_deliver_cargo_after_observed_motion';
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Layout = { origin: NativePoint; pitch: number; floor: string[]; destinations: string[][]; pivot: string[];
-  actorColor: number; core: number; initial: Position; freeColors: number[] };
+  actorColor: number; core: number; initial: Position; freeColors: number[]; receiverColors?: number[] };
 type Position = { actor: NativePoint; cargo: NativePoint[][]; held: number; delivered: number };
 type Intent = 'move' | 'attach' | 'turn' | 'drop';
 type Move = { input: string; intent: Intent; next: Position; subject: number };
 type Memory = { epoch: number; layout: Layout; at: Position; steps: Move[]; refs: string[]; moves: boolean; interactions: Intent[]; failed: boolean };
 type Proposal = NativeProposal & { local: Memory; move: Move; needId: string };
-type CargoWitness = { epoch: number; score: number; pitch: number; actorColor: number; core: number; interactions: Intent[]; refs: string[] };
+type ReceiverBinding = { cargo: number; receiver: number };
+type CargoWitness = { epoch: number; score: number; pitch: number; actorColor: number; core: number; interactions: Intent[]; refs: string[];
+  receivers?: ReceiverBinding[] };
 type Component = ReturnType<typeof geometricComponents>[number];
 type Field = Pick<Component, 'bbox' | 'color' | 'area'>;
 
@@ -70,7 +72,7 @@ function splitFields(parts: Component[], rows: NativeRows): Field[] {
   return [...found.values()];
 }
 
-function measure(rows: NativeRows, reassemble = false): Layout[] {
+function measure(rows: NativeRows, reassemble = false, receivers?: ReceiverBinding[]): Layout[] {
   const parts = geometricComponents(rows);
   const results: Layout[] = [];
   const fields = reassemble ? splitFields(parts, rows)
@@ -109,30 +111,39 @@ function measure(rows: NativeRows, reassemble = false): Layout[] {
         .map(points => ({ color, points })));
       if (cargo.length < 2 || cargo.length > 5) continue;
       const inset = nodes.filter(n => n.count === pitch ** 2 - (pitch - 2) ** 2 && n.shell !== n.core && !cargoColors.includes(n.shell));
-      const insets = [...new Set(inset.map(n => n.core))].map(c => inset.filter(n => n.core === c).map(n => key(n.point)));
+      const insets = [...new Set(inset.map(n => n.core))].map(color =>
+        ({ color, cells: inset.filter(n => n.core === color).map(n => key(n.point)) }));
       const size = cargoColors.map(c => cargo.filter(g => g.color === c).reduce((n, g) => n + g.points.length, 0));
       if (insets.length !== 3) continue;
-      for (const first of insets.filter(g => g.length === size[0])) for (const second of insets.filter(g => g !== first && g.length === size[1])) {
+      const fitting = (i: number) => insets.filter(group => receivers
+        ? group.cells.length >= size[i]! && receivers.some(binding => binding.cargo === cargoColors[i] && binding.receiver === group.color)
+        : group.cells.length === size[i]);
+      for (const first of fitting(0)) for (const second of fitting(1).filter(group => group !== first)) {
         const pivot = insets.find(g => g !== first && g !== second)!;
         results.push({ origin, pitch, floor: [...easy, ...objects, ...inset].map(n => key(n.point)),
-          destinations: cargo.map(g => g.color === cargoColors[0] ? first : second), pivot, actorColor, core,
-          freeColors: cargo.map(g => g.color), initial: { actor: actor.point, cargo: cargo.map(g => g.points), held: -1, delivered: 0 } });
+          destinations: cargo.map(g => (g.color === cargoColors[0] ? first : second).cells), pivot: pivot.cells, actorColor, core,
+          freeColors: cargo.map(g => g.color), receiverColors: cargo.map(g => (g.color === cargoColors[0] ? first : second).color),
+          initial: { actor: actor.point, cargo: cargo.map(g => g.points), held: -1, delivered: 0 } });
       }
     }
   }
   return results;
 }
 
-function search(layout: Layout, start: Position): Move[] | null {
+function* cargoRoutes(layout: Layout, start: Position, stopAtDelivery: boolean, budget: { remaining: number },
+  subject?: number): Generator<Move[]> {
   const floor = new Set(layout.floor), pivot = new Set(layout.pivot), done = (1 << start.cargo.length) - 1;
   const queue: { at: Position; parent: number; move: Move | null }[] = [{ at: start, parent: -1, move: null }];
   const seen = new Set([identity(start)]);
-  for (let i = 0; i < queue.length && i < 12000; i++) {
+  for (let i = 0; i < queue.length && budget.remaining > 0; i++) {
+    budget.remaining--;
     const { at } = queue[i]!;
-    if (at.delivered === done) {
+    if (at.delivered === done || stopAtDelivery && at.delivered !== start.delivered) {
       const steps: Move[] = [];
       for (let j = i; j >= 0 && queue[j]!.move; j = queue[j]!.parent) steps.push(queue[j]!.move!);
-      return steps.reverse();
+      yield steps.reverse();
+      if (!stopAtDelivery) return;
+      continue;
     }
     const fixed = new Set(at.cargo.flatMap((group, j) => j === at.held ? [] : group.map(key)));
     const occupiable = (p: NativePoint) => floor.has(key(p)) && !fixed.has(key(p));
@@ -151,7 +162,9 @@ function search(layout: Layout, start: Position): Move[] | null {
     }
     if (at.held < 0) {
       const adjacent = at.cargo.flatMap((group, j) => !(at.delivered & (1 << j)) && group.some(p => directions.some(([, x, y]) => same(p, shift(at.actor, x, y)))) ? [j] : []);
-      if (adjacent.length === 1) offer('ACTION5', 'attach', { ...at, held: adjacent[0]! }, adjacent[0]!);
+      if (adjacent.length === 1 && (subject === undefined || subject === adjacent[0])) {
+        offer('ACTION5', 'attach', { ...at, held: adjacent[0]! }, adjacent[0]!);
+      }
       continue;
     }
     const cargo = at.cargo[at.held]!;
@@ -166,7 +179,39 @@ function search(layout: Layout, start: Position): Move[] | null {
       offer('ACTION5', 'turn', { ...at, cargo: at.cargo.map((p, j) => j === at.held ? rotated : p) }, at.held);
     }
   }
-  return null;
+}
+
+function search(layout: Layout, start: Position): Move[] | null {
+  const candidate = cargoRoutes(layout, start, false, { remaining: 12_000 }).next();
+  return candidate.done ? null : candidate.value;
+}
+
+function searchByDelivery(layout: Layout, start: Position): Move[] | null {
+  const done = (1 << start.cargo.length) - 1, bestAt = new Map<string, number>(), budget = { remaining: 80_000 };
+  let best: Move[] | null = null;
+  function visit(at: Position, prefix: Move[]) {
+    // Each segment ends at a supported drop. Keep the resting carrier pose because
+    // it changes the cost and feasibility of reaching the next cargo.
+    if (prefix.length >= (best?.length ?? Infinity)) return;
+    if (at.delivered === done) {
+      best = prefix;
+      return;
+    }
+    const signature = identity(at);
+    if (prefix.length >= (bestAt.get(signature) ?? Infinity)) return;
+    bestAt.set(signature, prefix.length);
+    for (let subject = 0; subject < at.cargo.length; subject++) {
+      if (at.delivered & (1 << subject)) continue;
+      let alternatives = 0;
+      for (const segment of cargoRoutes(layout, at, true, budget, subject)) {
+        if (prefix.length + segment.length >= (best?.length ?? Infinity)) break;
+        visit(segment.at(-1)!.next, [...prefix, ...segment]);
+        if (++alternatives >= 5) break;
+      }
+    }
+  }
+  visit(start, []);
+  return best;
 }
 
 function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): boolean {
@@ -190,10 +235,18 @@ function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): 
 function initial(rows: NativeRows, epoch: number, witness: CargoWitness | null): Memory | null {
   const ordinary = measure(rows);
   const layouts = !ordinary.length && witness ? measure(rows, true) : ordinary;
-  const options = layouts.flatMap(layout => {
+  let options = layouts.flatMap(layout => {
     const steps = search(layout, layout.initial);
     return steps?.length ? [{ layout, steps }] : [];
   });
+  if (!options.length && witness?.receivers?.length) {
+    options = measure(rows, !ordinary.length, witness.receivers)
+      .filter(layout => witness.pitch === layout.pitch && witness.actorColor === layout.actorColor && witness.core === layout.core)
+      .flatMap(layout => {
+        const steps = searchByDelivery(layout, layout.initial);
+        return steps?.length ? [{ layout, steps }] : [];
+      });
+  }
   if (options.length !== 1) return null;
   const { layout, steps } = options[0]!;
   const prior = witness?.pitch === layout.pitch && witness.actorColor === layout.actorColor && witness.core === layout.core ? witness : null;
@@ -294,9 +347,11 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
       const { local, move } = proposal;
       if (!learns && after.levels_completed > before.levels_completed && local.moves && move.intent === 'drop'
         && move.next.delivered === (1 << local.at.cargo.length) - 1 && local.interactions.includes('attach')) {
-        const { actorColor, core, pitch } = local.layout;
+        const { actorColor, core, pitch, freeColors, receiverColors } = local.layout;
+        const receivers = receiverColors && [...new Map(freeColors.map((cargo, i) => [cargo, { cargo, receiver: receiverColors[i]! }])).values()];
         witness = { epoch: after.level_epoch, score: after.levels_completed, actorColor, core, pitch,
-          interactions: [...new Set([...local.interactions, move.intent])], refs: [...local.refs.slice(-4), before.observation_ref, after.observation_ref] };
+          interactions: [...new Set([...local.interactions, move.intent])], refs: [...local.refs.slice(-4), before.observation_ref, after.observation_ref],
+          ...(receivers ? { receivers } : {}) };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const matched = witnessed(second, local.layout, local.at, move);
