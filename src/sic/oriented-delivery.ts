@@ -3,6 +3,7 @@ import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativePro
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const orientedDeliveryId = 'sic_oriented_delivery';
 export const verifyOrientedDeliveryId = 'sic_verify_oriented_delivery';
@@ -10,9 +11,11 @@ export const verifyOrientedDeliveryId = 'sic_verify_oriented_delivery';
 type Geometry = { pitch: number; phase: NativePoint; core: number; background: number; rest_shell: number;
   targets: NativePoint[]; initial_boxes: NativePoint[] };
 type Scene = { pose: NativePoint; face: NativePoint; face_value: number; boxes: Record<string, number> };
+type Relay = { axis: 0 | 1; line: number; direction: NativePoint; cells: NativePoint[]; carrier: string; evidence: string[] };
 type State = { epoch: number; geometry: Geometry; color: number; held: NativePoint | null; invitation: NativePoint | null;
   free: Record<string, NativePoint>; loaded: Record<string, NativePoint>; tried: string[]; refs: string[]; count: number;
-  transports?: readonly Transport[]; sharedEvidence?: string };
+  transports?: readonly Transport[]; sharedEvidence?: string; transportCarriers?: string[];
+  relay?: Relay; waits?: number; stalledWaits?: number; stopped?: boolean };
 type Transport = { readonly carrier: string; readonly pose: NativePoint; readonly box: NativePoint;
   readonly sources: readonly string[] };
 type Move = { pose: NativePoint; face: NativePoint; cargo: NativePoint | null };
@@ -80,7 +83,7 @@ function transportReturn(before: NativeObservation, after: NativeObservation, lo
 }
 
 function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: Readonly<Record<string, NativePoint>>,
-  accepts: (state: Move) => boolean): { step: Step | null; end: Move; length: number } | null {
+  accepts: (state: Move) => boolean, cargoFloor = floor): { step: Step | null; end: Move; length: number } | null {
   const moves = Object.entries(vectors);
   const queue = [{ state: start, step: null as Step | null, length: 0 }];
   const visited = new Set<string>();
@@ -93,8 +96,8 @@ function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: 
     for (const [input, delta] of moves) {
       const pose = add(state.pose, delta), face = state.cargo ? state.face : delta;
       const cargo = state.cargo ? add(state.cargo, delta) : null;
-      const occupiable = (q: NativePoint) => floor.has(key(q)) && !fixed.has(key(q));
-      const prediction = occupiable(pose) && (!cargo || occupiable(cargo)) ? { pose, face, cargo } : { ...state, face };
+      const occupiable = (q: NativePoint, surface: Set<string>) => surface.has(key(q)) && !fixed.has(key(q));
+      const prediction = occupiable(pose, floor) && (!cargo || occupiable(cargo, cargoFloor)) ? { pose, face, cargo } : { ...state, face };
       if (same(prediction.pose, state.pose) && same(prediction.face, state.face)) continue;
       queue.push({ state: prediction, step: step ?? { input, intent: 'motion', prediction, target: null }, length: length + 1 });
     }
@@ -158,6 +161,107 @@ function allowDelivery(local: State, scene: Scene, rows: NativeRows, commands: R
   return choices[0] ?? null;
 }
 
+function onSendingSide(relay: Relay, site: NativePoint): boolean {
+  return (site[relay.axis] - relay.line) * relay.direction[relay.axis] < 0;
+}
+
+function measureRelay(rows: NativeRows, observation: NativeObservation, local: State, scene: Scene, previous: State): Relay | null {
+  const g = local.geometry, carriers = externalCarriers(observation, local);
+  const limits = [Math.floor((rows[0]!.length - g.phase[0]) / g.pitch), Math.floor((rows.length - g.phase[1]) / g.pitch)];
+  const candidates: Relay[] = [];
+  for (const axis of [0, 1] as const) {
+    const sign = Math.sign(g.targets[0]![axis] - scene.pose[axis]);
+    if (!sign || g.targets.some(target => Math.sign(target[axis] - scene.pose[axis]) !== sign)) continue;
+    const direction: NativePoint = axis === 0 ? [sign, 0] : [0, sign];
+    const crossAxis = axis === 0 ? 1 : 0;
+    for (let line = scene.pose[axis] + sign; g.targets.every(target => (target[axis] - line) * sign > 0); line += sign) {
+      const peers = (previous.transportCarriers ?? []).filter(id => {
+        const site = carriers.get(id);
+        return !!site && (site[axis] - line) * sign > 0;
+      });
+      if (peers.length !== 1) continue;
+      const patterns = new Map<string, NativePoint[]>(), occupied: NativePoint[] = [];
+      for (let offset = 0; offset < limits[crossAxis]!; offset++) {
+        const site: NativePoint = axis === 0 ? [line, offset] : [offset, line];
+        if (Object.hasOwn(scene.boxes, key(site))) {
+          occupied.push(site);
+          continue;
+        }
+        const tile = orientedCouplingTile(rows, g, site);
+        if (!tile) continue;
+        const values = new Set(tile.flat());
+        if (values.size < 2 || !values.has(g.background) || values.has(g.core)) continue;
+        const signature = JSON.stringify(tile), sites = patterns.get(signature) ?? [];
+        sites.push(site);
+        patterns.set(signature, sites);
+      }
+      const repeated = [...patterns.values()].filter(sites => sites.length >= 3);
+      if (repeated.length !== 1 || !occupied.length) continue;
+      const measured = [...repeated[0]!, ...occupied].sort((a, b) => a[crossAxis] - b[crossAxis]);
+      if (measured.some((site, index) => index > 0 && site[crossAxis] !== measured[index - 1]![crossAxis] + 1)) continue;
+      const cells = measured.filter(site => {
+        const across = add(site, direction);
+        return [...carriers.values()].some(pose => same(pose, across)) || Object.hasOwn(scene.boxes, key(across))
+          || orientedCouplingTile(rows, g, across)?.every(row => row.every(value => value === g.background));
+      });
+      if (cells.length) candidates.push({ axis, line, direction, cells, carrier: peers[0]!,
+        evidence: [previous.sharedEvidence!, observation.observation_ref] });
+    }
+  }
+  return candidates.length === 1 ? candidates[0]! : null;
+}
+
+function planRelay(local: State, scene: Scene, rows: NativeRows, commands: Readonly<Record<string, NativePoint>>): Step | null {
+  const { geometry, held, relay } = local;
+  if (!relay) return null;
+  const parts = positions(scene), floor = new Set([scene.pose, ...parts].filter(site => onSendingSide(relay, site)).map(key));
+  for (let y = 0; y * geometry.pitch + geometry.phase[1] + geometry.pitch <= rows.length; y++) {
+    for (let x = 0; x * geometry.pitch + geometry.phase[0] + geometry.pitch <= rows[0]!.length; x++) {
+      const site: NativePoint = [x, y];
+      if (onSendingSide(relay, site) && orientedCouplingTile(rows, geometry, site)?.every(row => row.every(p => p === geometry.background))) {
+        floor.add(key(site));
+      }
+    }
+  }
+  const goals = new Set(relay.cells.map(key)), cargoFloor = new Set([...floor, ...goals]);
+  const current: Move = { pose: scene.pose, face: scene.face, cargo: held };
+  const choices = (held ? [held] : parts.filter(site => onSendingSide(relay, site))).flatMap(part => {
+    const fixed = new Set(parts.filter(other => !same(part, other)).map(key));
+    const approach = held ? { end: current, length: 0, step: null }
+      : shortest(current, new Set([...fixed, key(part)]), floor, commands,
+        move => same(move.pose, sub(part, relay.direction)) && same(move.face, relay.direction));
+    if (!approach) return [];
+    const stage = shortest({ ...approach.end, cargo: part }, fixed, floor, commands,
+      move => !!move.cargo && goals.has(key(move.cargo)), cargoFloor);
+    if (!stage?.end.cargo) return [];
+    const step: Step = approach.step ?? (held ? stage.step ?? { input: 'ACTION5', intent: 'release', prediction: null, target: stage.end.cargo }
+      : { input: 'ACTION5', intent: 'attach', prediction: null, target: part });
+    return [{ step: { ...step, target: step.target ?? stage.end.cargo }, cost: approach.length + stage.length, part }];
+  });
+  choices.sort((a, b) => a.cost - b.cost || compare(a.part, b.part));
+  if (choices.length) return choices[0]!.step;
+  if (held || parts.some(site => onSendingSide(relay, site)) || (local.waits ?? 0) >= 48 || (local.stalledWaits ?? 0) >= 6) return null;
+  const input = Object.entries(commands).find(([, delta]) => same(delta, relay.direction))?.[0];
+  if (!input) return null;
+  const ahead = add(scene.pose, relay.direction), pose = floor.has(key(ahead)) ? ahead : scene.pose;
+  return { input, intent: 'motion', prediction: { pose, face: relay.direction, cargo: null },
+    target: parts.find(site => !geometry.targets.some(goal => same(site, goal))) ?? null, waitForTransport: true };
+}
+
+function relayMatches(proposal: Proposal, scene: Scene): boolean {
+  const { local, step, scene: previous } = proposal;
+  if (step.prediction) {
+    const { pose, face, cargo } = step.prediction;
+    return same(scene.pose, pose) && same(scene.face, face)
+      && (!cargo || scene.boxes[key(cargo)] === scene.face_value
+        && (same(local.held, cargo) || !local.held || !Object.hasOwn(scene.boxes, key(local.held))));
+  }
+  if (!same(scene.pose, previous.pose) || !same(scene.face, previous.face)) return false;
+  const contact = key(add(scene.pose, scene.face)), shell = scene.boxes[contact];
+  return step.intent === 'attach' ? shell === scene.face_value
+    : (shell !== undefined && shell !== scene.face_value) || !Object.hasOwn(scene.boxes, contact);
+}
+
 export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
@@ -166,13 +270,20 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      const epoch = observation.level_epoch;
+      if (!(state?.epoch === epoch && state.relay) && !(state?.epoch === epoch - 1 && state.sharedEvidence)) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal?.local.relay ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !Object.keys(labels).every(input => observation.available_action_refs.includes(input))
         || !observation.available_action_refs.includes('ACTION5') || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      if ((prior?.count ?? 0) >= 70) return null;
+      if (prior?.stopped || (prior?.count ?? 0) >= (prior?.relay ? 120 : 70)) return null;
       const geometry = prior?.geometry ?? orientedCouplingInitial(rows) as Geometry | null;
-      if (!geometry || geometry.targets.length > 6 || geometry.initial_boxes.length > 6) return null;
+      if (!geometry || geometry.targets.length > 12 || geometry.initial_boxes.length > 6) return null;
       const possible = prior ? [prior.color] : [...new Set(rows.flat())].filter(value => ![geometry.core, geometry.background, geometry.rest_shell].includes(value));
       const scenes = possible.flatMap(color => {
         const scene = orientedCouplingScene(rows, geometry, color) as Scene | null;
@@ -180,19 +291,25 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       });
       if (scenes.length !== 1) return null;
       const { color, scene } = scenes[0]!, ahead = add(scene.pose, scene.face);
-      const local: State = prior ?? { epoch: observation.level_epoch, geometry, color, held: null, invitation: null,
+      const initial: State = prior ?? { epoch: observation.level_epoch, geometry, color, held: null, invitation: null,
         free: {}, loaded: {}, tried: [], refs: [], count: 0 };
+      const previous = state?.epoch === observation.level_epoch - 1 && state.sharedEvidence ? state : null;
+      const relay = prior?.relay ?? (!prior && previous ? measureRelay(rows, observation, initial, scene, previous) : null);
+      if (!relay && geometry.targets.length > 6) return null;
+      const local: State = !prior && relay && previous
+        ? { ...initial, relay, free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
+          transportCarriers: [...(previous.transportCarriers ?? [])] } : initial;
       const commands: Readonly<Record<string, NativePoint>> = { ...labels, ...local.free, ...(local.held ? local.loaded : {}) };
-      const approach = planDelivery(local, scene, rows, commands);
       const reserved = (local.transports ?? []).filter(item => item.sources.length >= 2);
       const invited = same(ahead, local.invitation) && Object.hasOwn(scene.boxes, key(ahead)) && !reserved.some(item => same(item.box, ahead));
       const unique = (step: Step) => JSON.stringify([scene.pose, scene.face, scene.boxes, local.held, step.input]);
-      const step: Step | null = !local.held && invited && (!local.count || !Object.keys(local.loaded).length)
+      const step: Step | null = relay ? planRelay(local, scene, rows, commands)
+        : !local.held && invited && (!local.count || !Object.keys(local.loaded).length)
         ? { input: 'ACTION5', intent: 'attach', prediction: null, target: ahead }
-        : approach ?? allowDelivery(local, scene, rows, commands, reserved, step => local.tried.includes(unique(step)));
-      if (!step || local.tried.includes(unique(step))) return null;
+        : planDelivery(local, scene, rows, commands) ?? allowDelivery(local, scene, rows, commands, reserved, step => local.tried.includes(unique(step)));
+      if (!step || (!(relay && step.waitForTransport) && local.tried.includes(unique(step)))) return null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, ...reserved.flatMap(item => item.sources)]
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources)]
         .filter((value): value is string => !!value && value !== ref))];
       const known = step.intent === 'motion' ? (local.held ? local.loaded : local.free)[step.input] : null;
       const mode = execution?.reasoningMode ?? 'exploration';
@@ -203,6 +320,8 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       if (decision?.result !== strategy) return null;
       const label = navigationPrimitives[strategy], parent = 'G_official_completion';
       const situation = step.waitForTransport ? 'Keep the receiving area free while the other carrier completes the observed delivery'
+        : relay && step.intent === 'release' ? 'Leave the part on the shared strip for the other carrier'
+          : relay && local.held ? 'Move the part to the shared strip while the player stays on its side'
         : step.intent === 'attach' ? 'Test whether the object in front attaches'
         : step.intent === 'release' ? 'Test whether the part stays in its receiving cell'
           : local.held ? 'Move while checking that the part keeps its offset' : 'Approach the next part and bring it in front of the carrier';
@@ -211,7 +330,8 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
         satisfactionContract: 'official_progress_after_depositing_compatible_parts' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'oriented-delivery:' + need.id, action = { action_ref: step.input, data: {} }, actions = [action];
-      const prediction = known ? step.prediction : null;
+      const prediction = known || relay ? step.prediction : null;
+      const peer = relay ? externalCarriers(observation, local).get(relay.carrier) : null;
       return { status: 'proposed', kind: verifyOrientedDeliveryId, actions, steps: [{ action, expected_after: prediction }],
         local, scene, step, needId: need.id, attempt: unique(step),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
@@ -222,8 +342,8 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
           triggerCard: decision.receipt.workflow,
           actor: tileBox(geometry, scene.pose), cargo: local.held ? tileBox(geometry, local.held) : invited ? tileBox(geometry, ahead) : null,
           target: step.target ? tileBox(geometry, step.target) : null,
-          ...(reserved.length ? { externalCarriers: reserved.map(item => tileBox(geometry, item.pose)),
-            reservedParts: reserved.map(item => tileBox(geometry, item.box)) } : {}) },
+          ...(peer ? { externalCarriers: [tileBox(geometry, peer)] } : {}),
+          ...(reserved.length ? { externalCarriers: reserved.map(item => tileBox(geometry, item.pose)), reservedParts: reserved.map(item => tileBox(geometry, item.box)) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -237,6 +357,13 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.local.relay) {
+        const scene = orientedCouplingScene(second, proposal.local.geometry, proposal.local.color) as Scene | null;
+        const matched = !!scene && before.state === after.state && relayMatches(proposal, scene);
+        return { matched, seal_prefix: true, reason: !matched ? 'relay_carrier_prediction_contradicted'
+          : proposal.step.waitForTransport ? 'observed_parallel_delivery_turn'
+            : proposal.step.intent === 'release' ? 'observed_release_on_the_shared_strip' : 'observed_own_carrier_and_part' };
+      }
       const predicted = proposal.steps?.[0]?.expected_after as Move | null, previous = proposal.scene;
       if (proposal.local.sharedEvidence && proposal.step.intent !== 'motion') {
         const scene = orientedCouplingScene(second, proposal.local.geometry, proposal.local.color) as Scene | null;
@@ -269,7 +396,27 @@ export function createSicVerifyOrientedDelivery(): NativeFamily<Proposal> {
       const next: State = { ...local, count: local.count + 1, invitation: null, refs: [...local.refs.slice(-5), after.observation_ref],
         tried: [...local.tried, proposal.attempt] };
       if (local.transports?.length || external.transports.length) next.transports = external.transports;
-      if (!next.sharedEvidence && external.transports.some(item => item.sources.length >= 2)) next.sharedEvidence = after.observation_ref;
+      const confirmedCarriers = external.transports.filter(item => item.sources.length >= 2);
+      if (confirmedCarriers.length) {
+        next.sharedEvidence ??= after.observation_ref;
+        next.transportCarriers = [...new Set([...(local.transportCarriers ?? []), ...confirmedCarriers.map(item => item.carrier)])];
+      }
+      if (local.relay) {
+        next.stopped = !relayMatches(proposal, scene);
+        if (step.waitForTransport) {
+          const previousPeer = externalCarriers(before, local).get(local.relay.carrier) ?? null;
+          const peer = externalCarriers(after, local).get(local.relay.carrier) ?? null;
+          const changedParts = JSON.stringify(old.boxes) !== JSON.stringify(scene.boxes);
+          next.waits = (local.waits ?? 0) + 1;
+          next.stalledWaits = changedParts || !same(previousPeer, peer) ? 0 : (local.stalledWaits ?? 0) + 1;
+        }
+        if (step.intent === 'attach' || step.intent === 'release' || local.held) {
+          next.held = scene.boxes[key(ahead)] === scene.face_value ? ahead : null;
+          if (next.held && moved) next.loaded = { ...local.loaded, [action.action_ref]: delta };
+        } else if (moved) next.free = { ...local.free, [action.action_ref]: delta };
+        state = next;
+        return { events: [] };
+      }
       const contactChanged = changed.includes(key(ahead));
       if (step.intent !== 'motion' && !moved && contactChanged && (next.sharedEvidence || changed.length === 1)) {
         next.held = next.sharedEvidence ? (scene.boxes[key(ahead)] === scene.face_value ? ahead : null)
