@@ -1,7 +1,9 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseGravityReversal, gravityAttempt, gravityReturn, gravityStateKey, gravityTerrain, gravityTile, gravityTileBox,
+  readReversibleGravity, type GravityHistory, type GravityStep, type GravityView } from './reversible-gravity.ts';
 
 export const protectGravityRouteId = 'sic_protect_gravity_route';
 
@@ -11,7 +13,11 @@ type Layout = { pitch: number; phase: NativePoint; actor: number; air: number; t
 type Scene = { layout: Layout; actor: NativeBox; columns: number; tiles: Tile[]; at: number; exit: number | null };
 type Step = { input: string; at: number; landing: number; edit?: 'on' | 'off' | 'air'; frontier?: true };
 type State = { epoch: number; layout: Layout; refs: string[]; rejected: string[]; solidVerified: boolean };
-type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; attempt: string; needId: string };
+type ProtectiveProposal = NativeProposal & { local: State; scene: Scene; step: Step; attempt: string; needId: string };
+type ReversibleState = { epoch: number; geometry: Layout; memory: GravityHistory; refs: string[]; stopped: boolean };
+type ReversibleProposal = NativeProposal & { reversal: ReversibleState; view: GravityView; advance: GravityStep; needId: string };
+type Proposal = ProtectiveProposal | ReversibleProposal;
+const isReversible = (proposal: Proposal): proposal is ReversibleProposal => Object.hasOwn(proposal, 'reversal');
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -178,7 +184,7 @@ function choose(scene: Scene, rejected: readonly string[], remaining: number): S
   return best;
 }
 
-function outcome(proposal: Proposal, rows: NativeRows): string | null {
+function outcome(proposal: ProtectiveProposal, rows: NativeRows): string | null {
   const { scene, step } = proposal, next = readScene(rows, geometricComponents(rows), scene.layout);
   if (!next || next.columns !== scene.columns || next.at % next.columns !== step.landing % scene.columns) return null;
   const sameTerrain = (offset: number) => {
@@ -209,14 +215,64 @@ function outcome(proposal: Proposal, rows: NativeRows): string | null {
 
 export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let reversal: ReversibleState | null = null;
+  async function offerReversal(observation: NativeObservation, rows: NativeRows, remaining: number, execution?: NativeExecution): Promise<ReversibleProposal | null> {
+    const { level_epoch: epoch, observation_ref: ref } = observation;
+    const prior = reversal?.epoch === epoch ? reversal : null;
+    const previous = state?.epoch === epoch - 1 && state.solidVerified ? state : null;
+    const geometry = prior?.geometry ?? previous?.layout;
+    if (!geometry || prior?.stopped) return null;
+    const view = readReversibleGravity(rows, geometry);
+    if (!view) return null;
+    const worldRow = Math.floor(view.at / view.width);
+    const local: ReversibleState = prior ?? { epoch, geometry, refs: previous!.refs.slice(-2), stopped: false,
+      memory: { rowOrigin: 0, direction: -1, highest: worldRow, lowest: worldRow, inverted: false, denied: [],
+        seen: [gravityStateKey(view, 0, -1)], terrain: gravityTerrain(view, 0) } };
+    const step = chooseGravityReversal(view, local.memory, remaining);
+    if (!step) return null;
+    const mode = execution?.reasoningMode ?? 'exploration';
+    const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
+    const landing = Math.min(Math.max(0, Math.floor(step.landing / view.width)), view.tiles.length / view.width - 1) * view.width
+      + (step.landing % view.width + view.width) % view.width;
+    const front = step.frontier || landing !== step.landing, offer = { input: step.command.action_ref, expected: gravityTile(view, landing), evidence };
+    const unknownEdit = step.edit === 'invert' && !local.memory.inverted;
+    const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: front || unknownEdit ? offer : null,
+      access: !step.edit && !front ? offer : null, interaction: step.edit && !front && !unknownEdit ? offer : null });
+    if (!selected) return null;
+    const situation = step.edit === 'invert' ? unknownEdit ? 'Test whether the newly visible block reverses the fall'
+      : 'Reverse the fall after checking the visible and remembered path'
+      : step.edit === 'remove' ? 'Remove the blocking tile to open the next fall'
+        : front ? 'Reveal more terrain in the current direction' : 'Move sideways to the next safe landing';
+    const point = gravityTile(view, step.index);
+    const witness = step.edit ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: situation, evidence }) : null;
+    if (step.edit && !witness) return null;
+    const parent = 'G_official_completion';
+    const objective = { kind: 'reach_exit_with_reversible_gravity', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['moving_piece', 'direction', 'remembered_terrain'], parentObjective: parent,
+      satisfactionContract: 'official_progress_after_gravity_route' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+    const id = protectGravityRouteId + ':' + need.id, actions = [step.command];
+    return { status: 'proposed', kind: protectGravityRouteId, reversal: local, view, advance: step, needId: need.id, actions,
+      binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action: step.command, expected_after: gravityTileBox(view, landing), ...(witness ? { point_binding: witness } : {}) }],
+      sicSituationCard: { strategy: selected.id, need: 'Find a safe path to the exit by changing the direction of the fall', situation, evidence,
+        agenda: entries, mode, triggerCard: card, actor: view.actor, focus: gravityTileBox(view, step.index), landing: gravityTileBox(view, landing),
+        exit: view.exit === null ? null : gravityTileBox(view, view.exit), direction: local.memory.direction },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
   return {
     id: protectGravityRouteId,
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !['ACTION3', 'ACTION4', 'ACTION6'].every(ref => observation.available_action_refs.includes(ref))) return null;
+      if (reversal?.epoch === observation.level_epoch) return offerReversal(observation, rows, remaining, execution);
       const parts = geometricComponents(rows);
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const layout = prior?.layout ?? measureLayout(rows, parts);
-      if (!layout) return null;
+      if (!layout) return offerReversal(observation, rows, remaining, execution);
       const scene = readScene(rows, parts, layout);
       const local = prior ?? { epoch: observation.level_epoch, layout, refs: [], rejected: [], solidVerified: false };
       const step = scene && choose(scene, local.rejected, remaining);
@@ -271,18 +327,50 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isReversible(proposal)) {
+        const next = readReversibleGravity(second, proposal.reversal.geometry);
+        const result = next && gravityReturn(proposal.view, next, proposal.advance, proposal.reversal.memory);
+        const reason = result?.matched ? result.inverted ? 'reversed_fall_confirmed_by_terrain_alignment'
+          : proposal.advance.edit ? 'blocking_tile_removed_in_gravity_path'
+            : 'gravity_landing_confirmed_by_terrain_alignment' : 'reversible_gravity_projection_contradicted';
+        return { matched: !!result?.matched, seal_prefix: true, reason };
+      }
       const reason = outcome(proposal, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'gravity_projection_contradicted' };
     },
     record(before, after, _action, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (isReversible(proposal)) {
+        const { reversal: local, advance, view } = proposal, { memory } = local;
+        const next = readReversibleGravity(second, local.geometry);
+        const result = next && gravityReturn(view, next, advance, memory);
+        if (!next || !result) {
+          reversal = { ...local, stopped: true };
+          return { events: [] };
+        }
+        const origin = memory.rowOrigin + result.shift, landing = memory.rowOrigin + result.landing;
+        const direction = result.matched ? advance.direction : memory.direction;
+        const terrain = { ...memory.terrain };
+        if (advance.edit && result.removed) {
+          terrain[[advance.index % view.width, memory.rowOrigin + Math.floor(advance.index / view.width)].join(',')] = 'air';
+        }
+        reversal = { ...local, refs: [...local.refs.slice(-5), after.observation_ref], memory: { ...memory, rowOrigin: origin, direction,
+          terrain: gravityTerrain(next, origin, terrain), inverted: memory.inverted || result.inverted,
+          highest: Math.min(memory.highest, landing), lowest: Math.max(memory.lowest, landing),
+          seen: [...new Set([...memory.seen, gravityStateKey(next, origin, direction)])],
+          denied: result.matched ? memory.denied : [...memory.denied.slice(-16), gravityAttempt(view, advance, memory)] } };
+        return { events: [] };
+      }
       const { local, step } = proposal, confirmed = outcome(proposal, second);
       state = { ...local, refs: confirmed ? [...local.refs.slice(-5), after.observation_ref] : local.refs,
         solidVerified: local.solidVerified || confirmed === 'movement_stopped_under_solidified_ceiling',
         rejected: confirmed ? [] : [...local.rejected.slice(-12), proposal.attempt] };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, reversal }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      reversal = structuredClone(value.reversal as ReversibleState | null ?? null);
+    },
   };
 }
