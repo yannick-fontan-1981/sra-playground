@@ -9,6 +9,7 @@ import { InvitedReduction } from '../src/logos-engine/v6-invited-reduction.ts';
 import { measureRayCaptureDomain } from '../src/logos-engine/v6-ray-capture-domain.ts';
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
+import { measureRetainedTransport, rememberTransportAppearance } from '../src/sic/transport-contact-observation.ts';
 type R = Record<string, any>;
 const data = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/v6-support-extensions-reference.json.gz', import.meta.url))).toString());
 const fresh = (kind: string): any => kind === 'joint' ? new JointTransport(data.policy.joint_transport_question) : kind === 'reduction' ? new InvitedReduction(data.policy.invited_reduction) : new ContextualCompartments(data.policy.contextual_compartments);
@@ -80,4 +81,33 @@ test('joint transfer requires a live caller deadline and rejects changed authori
   const altered = structuredClone(proposal); altered.actions[0].action_ref = 'ACTION5';
   assert.equal((await family.before(altered, 0, initial.public, initial.observation)).admitted, false);
   assert.throws(() => measureJointTransport(Array.from({ length: 64 }, () => Array(64).fill(0))));
+});
+
+test('confirmed transport roles survive a change in pitch and contact with tile edges', () => {
+  const paint = (scale: number, pushed: boolean) => {
+    const rows = Array.from({ length: 3 * scale }, () => Array<number>(5 * scale).fill(8));
+    for (let cell = 1; cell <= 4; cell++) for (let y = scale; y < 2 * scale; y++) {
+      rows[y]!.fill(cell === 2 ? 4 : 5, cell * scale, (cell + 1) * scale);
+    }
+    const player = pushed ? 2 : 1, body = pushed ? 3 : 2;
+    rows[scale]![player * scale] = 9;
+    rows[scale + 1]![player * scale + 1] = 10;
+    rows[scale + 1]![body * scale + 1] = 11;
+    rows[scale + 2]![body * scale + 1] = 12;
+    if (!pushed) rows[scale]![3 * scale] = 1;
+    return rows;
+  };
+  const previous = { scale: 5, offset: [0, 0] as [number, number], player: [1, 1] as [number, number],
+    floor: new Set(['1,1', '2,1', '3,1', '4,1']), boxes: new Set(['2,1']), targets: new Set(['3,1']), wall_count: 0, sprite_count: 3 };
+  const appearance = rememberTransportAppearance(paint(5, false), previous, {
+    surfaces: [4], controllers: [], bodies: [], markers: [],
+  });
+  assert.ok(appearance);
+  const grid = { scale: 4, offset: [0, 0] as const };
+  const first = measureRetainedTransport(paint(4, false), appearance, [], grid);
+  assert.deepEqual(first.player, [1, 1]);
+  assert.deepEqual(first.targets, new Set(['3,1']));
+  const second = measureRetainedTransport(paint(4, true), appearance, [[3, 1]], grid);
+  assert.deepEqual(second.player, [2, 1]);
+  assert.deepEqual(second.boxes, second.targets);
 });

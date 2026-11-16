@@ -17,8 +17,8 @@ const stateKey = (s: JointState): string => JSON.stringify([s[0], sorted(s[1])])
 export const jointStatePair = (s: JointScene): [Point, Point[]] => [[...s.player], sorted(s.boxes)];
 export const jointLayers = (s: JointScene): R => ({ scale: s.scale, offset: [...s.offset], floor: sorted(s.floor), targets: sorted(s.targets) });
 
-export function measureJointTransport(rows: NativeRows, rememberedTargets: readonly Point[] = []): JointScene {
-  const h = rows.length, w = rows[0]!.length, parts = geometricComponents(rows);
+export function measureJointGrid(rows: NativeRows): { scale: number; offset: Point; hud: number } {
+  const h = rows.length, parts = geometricComponents(rows);
   const squares = parts.filter(p => p.rectangular && p.bbox[2] - p.bbox[0] === p.bbox[3] - p.bbox[1] && p.bbox[2] - p.bbox[0] + 1 >= 4 && p.bbox[2] - p.bbox[0] + 1 <= 12);
   const tally = new Map<number, number>();
   for (const p of squares) { const size = p.bbox[2] - p.bbox[0] + 1; tally.set(size, (tally.get(size) ?? 0) + 1); }
@@ -29,6 +29,21 @@ export function measureJointTransport(rows: NativeRows, rememberedTargets: reado
   const [ox, oy] = point([...offsets].sort((a, b) => b[1] - a[1])[0]![0]);
   let hud = h;
   for (let y = 0; y < h; y++) if (y > Math.floor(h / 2) && new Set(rows[y]).size === 1 && rows[y]![0] !== rows[0]![0]) { hud = y; break; }
+  return { scale, offset: [ox, oy], hud };
+}
+
+export function connectedJointFloor(floor: ReadonlySet<string>, player: Point): Set<string> {
+  const connected = new Set([key(player)]), todo = [player];
+  for (let i = 0; i < todo.length; i++) for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
+    const q: Point = [todo[i]![0] + dx!, todo[i]![1] + dy!], k = key(q);
+    if (floor.has(k) && !connected.has(k)) { connected.add(k); todo.push(q); }
+  }
+  return connected;
+}
+
+export function measureJointTransport(rows: NativeRows, rememberedTargets: readonly Point[] = []): JointScene {
+  const w = rows[0]!.length;
+  const { scale, offset: [ox, oy], hud } = measureJointGrid(rows);
   let floor = new Set<string>(), boxes = new Set<string>(), targets = new Set(rememberedTargets.map(key));
   const walls = new Set<string>(), players: Point[] = [], sprites = new Map<string, string>();
   for (let y = oy; y <= hud - scale; y += scale) for (let x = ox; x <= w - scale; x += scale) {
@@ -45,12 +60,8 @@ export function measureJointTransport(rows: NativeRows, rememberedTargets: reado
     else { players.push(cell); sprites.set(k, 'controller'); }
   }
   if (players.length !== 1) throw new Error(`Controlled sprite ambiguity: ${players.length}`);
-  const player = players[0]!, connected = new Set([key(player)]), todo = [player];
-  for (let i = 0; i < todo.length; i++) for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
-    const q: Point = [todo[i]![0] + dx!, todo[i]![1] + dy!], k = key(q);
-    if (floor.has(k) && !connected.has(k)) { connected.add(k); todo.push(q); }
-  }
-  floor = connected; boxes = new Set([...boxes].filter(p => floor.has(p))); targets = new Set([...targets].filter(p => floor.has(p)));
+  const player = players[0]!;
+  floor = connectedJointFloor(floor, player); boxes = new Set([...boxes].filter(p => floor.has(p))); targets = new Set([...targets].filter(p => floor.has(p)));
   if (!boxes.size || boxes.size !== targets.size) throw new Error(`Occupancy composition unresolved: ${boxes.size} bodies/${targets.size} loci`);
   return { scale, offset: [ox, oy], floor, boxes, targets, player, wall_count: walls.size, sprite_count: sprites.size };
 }
