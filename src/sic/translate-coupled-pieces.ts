@@ -4,7 +4,7 @@ import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-
 import type { ReasoningMode } from './reasoning-mode.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
-import { contactBox, identifyContactRoute, identifyMaskedContactRoute, observeContactRoute, planContacts, selectionPoint,
+import { contactBox, identifyContactRoute, identifyMaskedContactRoute, identifyRelayContactRoute, observeContactRoute, planContacts, selectionPoint,
   type ContactCalibration, type ContactRoute, type ContactRouteMove } from './rectangular-contact-route.ts';
 
 export const translateCoupledPiecesId = 'sic_translate_coupled_pieces';
@@ -171,8 +171,8 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
   const evidence: [string, ...string[]] = [ref, ...new Set([scene.calibration.evidence, ...Object.values(route.observedControls), ...route.evidence,
     ...(route.contactRef ? [route.contactRef] : [])]
     .filter(item => item !== ref))];
-  const fixed = scene.fixedCarrier !== undefined;
-  const reuseContact = fixed && !!route.contactRef && move.contact !== null;
+  const fixed = scene.fixedCarrier !== undefined, masked = fixed || !!scene.carriers;
+  const reuseContact = masked && !!route.contactRef && move.contact !== null;
   const isProbe = !!click || !reuseContact && (move.contact !== null || !route.observedControls[move.input]);
   const goalIndex = move.contact ?? chosen;
   const points = move.position.pieces.map((cell, index) => contactBox(scene, cell, index));
@@ -182,7 +182,8 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
     access: isProbe || reuseContact ? null : offer, interaction: reuseContact ? offer : null });
   if (!choice.selected) return null;
   const situation = click ? 'Select the piece needed for the next placement or contact'
-    : move.contact !== null ? fixed ? 'Push the cargo toward the planned position while keeping control of the carrier'
+    : move.contact !== null ? scene.carriers ? 'Transfer the contacted piece while keeping the current launcher in place'
+      : fixed ? 'Push the cargo toward the planned position while keeping control of the carrier'
       : 'Test the projected landing while keeping the launcher available'
       : fixed ? route.path.some(step => step.contact !== null) ? 'Approach the next contact through the free cells of the shape'
         : 'Move the controlled piece into its own opening'
@@ -190,7 +191,7 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
   const witness = click ? await ObservedInputDomain.makeLocusWitness(observation, rows, click, { reason: situation, evidence }) : null;
   if (click && !witness) return null;
   const parent = 'G_official_completion';
-  const objective = { kind: fixed ? 'place_matching_shapes_using_contact_transfers' : 'place_matching_rectangular_pieces_using_contact_transfers',
+  const objective = { kind: masked ? 'place_matching_shapes_using_contact_transfers' : 'place_matching_rectangular_pieces_using_contact_transfers',
     scope: ref.split(':revision:', 1)[0]!,
     subjects: ['selectable_pieces', 'matching_openings', 'contact_transfers'], parentObjective: parent,
     satisfactionContract: 'official_progress_after_all_matching_openings_are_filled' };
@@ -208,7 +209,7 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
       focus: contactBox(scene, fixed ? position.pieces[chosen]! : at, chosen),
       related: move.contact === null ? null : contactBox(scene, position.pieces[goalIndex]!, goalIndex),
       projected: move.contact === null ? null : points[goalIndex]!,
-      target: contactBox(scene, fixed ? route.path.at(-1)!.position.pieces[goalIndex]! : scene.pieces[goalIndex]!.goal, goalIndex) },
+      target: contactBox(scene, masked ? route.path.at(-1)!.position.pieces[goalIndex]! : scene.pieces[goalIndex]!.goal, goalIndex) },
     question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id: composition, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
     sicLocalDecision: { strategy: choice.selected.id, objective: { id: composition, label: navigationPrimitives[choice.selected.id], parent }, need },
@@ -226,18 +227,23 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       const epoch = observation.level_epoch;
-      if (!route || (route.epoch !== epoch - 1 && (route.epoch !== epoch || route.scene.fixedCarrier === undefined))) return null;
+      if (!route || (route.epoch !== epoch - 1 && (route.epoch !== epoch || route.scene.fixedCarrier === undefined && !route.scene.carriers))) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal && isRoute(proposal) && proposal.contactRoute.scene.fixedCarrier !== undefined ? proposal : null;
+      return proposal && isRoute(proposal)
+        && (proposal.contactRoute.scene.fixedCarrier !== undefined || proposal.contactRoute.scene.carriers) ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution): Promise<CoupledProposal | null> {
       if (remaining < 1 || !['ACTION6', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
       const epoch = observation.level_epoch, mode = execution?.reasoningMode ?? 'exploration';
       if (route?.epoch === epoch) return proposeContactRoute(id, observation, rows, route, mode);
+      const retained = route?.epoch === epoch - 1 && !route.stopped ? route : null;
+      if (retained?.scene.fixedCarrier !== undefined || retained?.scene.carriers) {
+        const relay = identifyRelayContactRoute(observation, rows, retained);
+        if (relay) return proposeContactRoute(id, observation, rows, relay, mode);
+      }
       const prior = state?.epoch === epoch ? state : null;
       const initial = prior ?? measure(rows);
       if (!initial) {
-        const retained = route?.epoch === epoch - 1 && !route.stopped ? route : null;
         if (retained) {
           const masked = identifyMaskedContactRoute(observation, rows, retained.scene.calibration, retained.observedControls);
           if (masked) return proposeContactRoute(id, observation, rows, {
@@ -301,9 +307,11 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
       if (isRoute(proposal)) {
         const result = observeContactRoute(second, proposal.contactRoute, proposal.contactMove, after.observation_ref);
         const matched = result?.position === proposal.contactMove.position;
-        const reason = proposal.contactRoute.scene.fixedCarrier === undefined ? 'compare_carrier_and_contact_piece_poses'
+        const { scene } = proposal.contactRoute;
+        const reason = scene.fixedCarrier === undefined && !scene.carriers ? 'compare_carrier_and_contact_piece_poses'
           : !matched ? 'shape_footprint_prediction_contradicted'
-            : proposal.contactMove.contact === null ? 'carrier_moved_and_cargo_preserved' : 'cargo_translated_and_carrier_held_position';
+            : scene.carriers && proposal.contactMove.input === 'ACTION6' ? 'carrier_selection_confirmed'
+              : proposal.contactMove.contact === null ? 'carrier_moved_and_cargo_preserved' : 'cargo_translated_and_carrier_held_position';
         return { matched, seal_prefix: true, reason };
       }
       const result = returned(second, proposal);
