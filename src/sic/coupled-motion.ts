@@ -1,8 +1,11 @@
 import { matchCoupledPair, measureCoupledPairs, type CoupledPair, type CoupledPairBox, type CoupledPairDelta } from '../logos-engine/v6-coupled-pair-observation.ts';
 import { jointCoupledPairRoute, type CoupledPairRoute } from '../logos-engine/v6-coupled-pair-route.ts';
-import type { NativeBox, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { auxiliarySubjects, measureAuxiliaryRoute, verifyAuxiliaryStep, type AuxiliaryRoute } from './auxiliary-coupled-route.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const coupledMotionId = 'sic_coupled_motion';
 export const verifyCoupledRouteId = 'sic_verify_coupled_route';
@@ -16,7 +19,7 @@ type Sample = { input: string; first: CoupledPairDelta; second: CoupledPairDelta
 type State = { epoch: number; pair: CoupledPair; samples: Sample[]; floors: number[]; evidence: string[];
   remainingRoute: { actions: string[]; expected: CoupledPairBox[][] } | null; count: number; stopped: boolean; frame?: string };
 type Candidate = { input: string; route: State['remainingRoute'] };
-type Proposal = NativeProposal & { local: State; candidate: Candidate; needId: string };
+type Proposal = NativeProposal & ({ local: State; candidate: Candidate; auxiliary?: undefined } | { auxiliary: AuxiliaryRoute }) & { needId: string };
 const displayBox = ([t, l, b, r]: CoupledPairBox): NativeBox => [l, t, r, b];
 const keys = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -70,13 +73,78 @@ function routeFromSamples(state: State, rows: NativeRows, available: readonly st
   return jointCoupledPairRoute(rows, state.pair, controls, state.floors, signs.map(axis => [...axis][0]!), Math.min(40, remaining), state.evidence, true);
 }
 
+function transferredControls(state: State) {
+  const normalize = (delta: CoupledPairDelta): CoupledPairDelta => [delta[0] / state.pair.size, delta[1] / state.pair.size];
+  const unit = (delta: CoupledPairDelta) => Math.abs(delta[0]) + Math.abs(delta[1]) === state.pair.size;
+  const controls = keys.flatMap(input => {
+    const candidates = state.samples.filter(sample => sample.input === input && unit(sample.first) && unit(sample.second));
+    const reference = candidates[0];
+    return reference && candidates.every(sample => same(reference, sample))
+      ? [{ first: normalize(reference.first), second: normalize(reference.second) }] : [];
+  });
+  return controls.length === keys.length && new Set(controls.map(control => control.first.join(','))).size === keys.length
+    && new Set(controls.map(control => control.second.join(','))).size === keys.length ? controls : null;
+}
+
 export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
+  let auxiliary: AuxiliaryRoute | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyCoupledRouteId,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      const epoch = observation.level_epoch, ref = observation.observation_ref;
+      if (remaining < 1 || !['ACTION6', ...keys].every(input => observation.available_action_refs.includes(input))) return null;
+      let local = auxiliary?.epoch === epoch ? auxiliary : null;
+      if (local && (local.stopped || local.frame !== observation.frame_hash)) return null;
+      if (!local && state?.epoch === epoch - 1 && !state.stopped) {
+        const controls = transferredControls(state);
+        const pair = measureCoupledPairs(rows).filter(candidate => candidate.size === state!.pair.size);
+        if (controls && pair.length === 1 && pair[0]!.value === state.pair.value) {
+          local = measureAuxiliaryRoute(rows, pair[0]!, state.floors, controls, epoch, observation.frame_hash, state.evidence);
+        }
+      }
+      const step = local?.steps[0];
+      if (!local || !step) return null;
+      const mode = execution?.reasoningMode ?? (local.focusPaint ? 'solving' : 'exploration');
+      const facts = { routeSupported: !step.click, eligibleProbe: !!step.click && !local.focusPaint,
+        knownInteraction: !!step.click && !!local.focusPaint, mode };
+      const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+      const strategy = decision?.result;
+      if (!decision || strategy !== (facts.routeSupported ? 'P07' : facts.knownInteraction ? 'P02' : 'P05')) return null;
+      const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+      const label = step.click ? step.auxiliary === undefined ? 'Return control to the two pieces'
+        : local.focusPaint ? 'Select an auxiliary to clear the passage' : 'Test whether selecting the auxiliary transfers directional control'
+        : step.auxiliary === undefined ? 'Bring together the two pieces with shared controls' : 'Move the selected auxiliary into a side pocket';
+      const point = step.click ? [Math.floor((step.click[0] + step.click[2] + Number(step.auxiliary !== undefined)) / 2),
+        Math.floor((step.click[1] + step.click[3] + Number(step.auxiliary !== undefined)) / 2)] as const : null;
+      const witness = point ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence }) : null;
+      if (point && !witness) return null;
+      const action: NativeCommand = point ? { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } }
+        : { action_ref: keys[step.direction!]!, data: {} };
+      const actions = [action], parent = 'G_official_completion';
+      const objective = { kind: 'bring_jointly_controlled_pieces_together', scope: ref.split(':revision:', 1)[0]!,
+        subjects: ['first_piece', 'second_piece', 'shared_controls'], parentObjective: parent,
+        satisfactionContract: 'official_progress_after_the_joint_meeting_test' };
+      const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+      const id = 'coupled-motion:' + need.id, subjects = auxiliarySubjects(local);
+      return { status: 'proposed', kind: verifyCoupledRouteId, auxiliary: local, actions, needId: need.id,
+        binding: { observation_ref: ref, level_epoch: epoch },
+        steps: [{ action, expected_after: subjects, ...(witness ? { point_binding: witness } : {}) }],
+        sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+          instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
+          situation: facts },
+        sicSituationCard: { strategy, need: 'Make room for the two pieces to meet', situation: label, evidence, agenda: [],
+          mode, triggerCard: decision.receipt.workflow, ...subjects },
+        question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+        compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
+        sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+        bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       const available = keys.filter(input => observation.available_action_refs.includes(input));
@@ -147,12 +215,25 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.auxiliary) {
+        const matched = !!verifyAuxiliaryStep(proposal.auxiliary, first, second);
+        const step = proposal.auxiliary.steps[0]!;
+        return { matched, seal_prefix: true, reason: !matched ? 'auxiliary_route_prediction_contradicted'
+          : step.click ? 'observed_directional_focus_transfer'
+          : step.auxiliary === undefined ? 'observed_joint_displacement' : 'observed_auxiliary_displacement_while_pair_stationary' };
+      }
       const expected = proposal.candidate.route?.expected[0];
       const matched = expected ? matchProjection(first, second, proposal.local.pair, expected) : null;
       return { matched, seal_prefix: true, reason: matched === true ? 'observed_joint_displacement' : 'compare_both_piece_returns' };
     },
     record(before, after, command, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (proposal.auxiliary) {
+        const local = proposal.auxiliary, focusPaint = verifyAuxiliaryStep(local, first, second);
+        auxiliary = focusPaint ? { ...local, focusPaint, position: local.steps[0]!.position, steps: local.steps.slice(1),
+          evidence: [...local.evidence.slice(-7), after.observation_ref], frame: after.frame_hash } : { ...local, stopped: true };
+        return { events: [] };
+      }
       const { local, candidate } = proposal, previous = local.pair, route = candidate.route, expected = route?.expected[0];
       const measured = measureCoupledPairs(second).filter(pair => pair.value === previous.value && pair.size === previous.size);
       const match = measured.length === 1 ? matchCoupledPair(previous, measured[0]!) : null;
@@ -166,7 +247,10 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         remainingRoute: projected && route && route.actions.length > 1 ? { actions: route.actions.slice(1), expected: route.expected.slice(1) } : null };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, auxiliary }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      auxiliary = structuredClone((value.auxiliary as AuxiliaryRoute | undefined) ?? null);
+    },
   };
 }

@@ -1305,6 +1305,11 @@ export function readNativeResolution(agent: {
         if (box) subjects.push({ label: label + ' ' + (index + 1), box });
       }
     }
+    for (const [field, label] of [['auxiliary', 'Auxiliary in focus'], ['nextAuxiliary', 'Projected auxiliary position'],
+      ['parking', 'Side pocket']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
   }
   if (situationCard && (family === materialAssemblyId || family === learnMaterialAssemblyId)) {
     for (const [field, label] of [['focus', 'Current marked or produced piece'], ['partner', 'Previously marked piece'],
