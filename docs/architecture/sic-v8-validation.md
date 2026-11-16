@@ -994,3 +994,11 @@ Sur ce même commit, les **19 commandes du niveau 4 de BP35** prennent **115,54 
 Le lanceur transmet à chaque partie le nombre de processus prévus en parallèle. Le budget actif de chaque niveau augmente linéairement de **6 minutes à un processus** à **12 minutes à huit processus**. Au-delà de huit, il reste plafonné à 12 minutes. Le réglage s’applique à la planification, à l’exécution des commandes et à l’acquisition des retours. La limite de commandes reste indépendante.
 
 Le lanceur `scripts/run-bounded-native-campaign.mjs` accepte ce nombre en dernier argument facultatif `PARALLEL_WORKERS`. Une session sans ce réglage utilise le budget d’un seul processus.
+
+### Niveaux 5
+
+La campagne de référence porte sur les **93 niveaux 5** encore à qualifier. Elle part du niveau 1 sur le commit `8da9f595bf939666d9b9834d10479e4d20a6e7ad`, utilise huit processus et s’arrête à la première victoire du niveau 5.
+
+**ETAG** gagne en **96 commandes et 464,47 s** au niveau 5. SIC suit les passages connus entre les deux surfaces et teste l’arrivée des passages encore inconnus. Les 347 commandes de la partie continue proviennent de SIC seul. Les commandes et les mesures de changement des quatre premiers niveaux concordent avec celles de la campagne consolidée.
+
+Le total atteint **7/99 niveaux 5** et **411/636 niveaux**, soit **64,6 %**.
