@@ -1001,4 +1001,6 @@ La campagne de référence porte sur les **93 niveaux 5** encore à qualifier. E
 
 **ETAG** gagne en **96 commandes et 464,47 s** au niveau 5. SIC suit les passages connus entre les deux surfaces et teste l’arrivée des passages encore inconnus. Les 347 commandes de la partie continue proviennent de SIC seul. Les commandes et les mesures de changement des quatre premiers niveaux concordent avec celles de la campagne consolidée.
 
-Le total atteint **7/99 niveaux 5** et **411/636 niveaux**, soit **64,6 %**.
+**COLM** gagne en **57 commandes et 263,57 s** au niveau 5. SIC utilise neuf commandes d’exploration publique et 48 commandes de placement en file. Les 180 commandes de la partie proviennent de SIC seul. Les commandes et les mesures de changement des quatre premiers niveaux concordent avec celles de la campagne consolidée.
+
+Le total atteint **8/99 niveaux 5** et **412/636 niveaux**, soit **64,8 %**.
