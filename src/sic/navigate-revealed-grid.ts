@@ -8,10 +8,10 @@ export const navigateRevealedGridId = 'sic_navigate_revealed_grid';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Grid = { box: NativeBox; pitch: number; columns: number; size: number; tint: number; base: number; actor: number; enemy: number; trail: number;
-  goal: number; charges: NativePoint[]; actorPixels?: NativePoint[]; rail?: number; sentry?: [number, number, number][] };
+  goal: number; charges: NativePoint[]; actorPixels?: NativePoint[]; rail?: number; sentry?: [number, number, number][]; multipleSentries?: true };
 type Cell = 'wall' | 'free';
 type Reading = { position: number; obstacle: number | null; obstacles: number[]; risk: number[];
-  memory: Partial<Record<number, Cell>>; charges: number; sentries?: number[] };
+  memory: Partial<Record<number, Cell>>; charges: number; sentries?: number[]; sentryRisk?: number[] };
 type Motion = { from: number; at: number };
 type State = { epoch: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean };
@@ -55,10 +55,11 @@ function measure(rows: NativeRows, inherited?: Grid): Grid | null {
       const goalFrame = goalFrames[0]!;
       const enemyFrames = squareFrames.filter(p => p !== goalFrame);
       const enemyFrame = enemyFrames[0]!;
-      const rebound: Grid | null = inherited && inherited.pitch !== pitch && inherited.tint === tint && inherited.base === base
+      const changedBounds = repeated && inherited && box.some((boundary, i) => boundary !== inherited.box[i]);
+      const rebound: Grid | null = inherited && (inherited.pitch !== pitch || changedBounds) && inherited.tint === tint && inherited.base === base
         && enemyFrame.color === inherited.enemy ? inherited : null;
       if (inherited && !rebound) continue;
-      const trail: number | undefined = rebound?.trail ?? colorAt(rows, center(enemyFrame.bbox));
+      const trail: number | undefined = (!repeated ? rebound?.trail : undefined) ?? colorAt(rows, center(enemyFrame.bbox));
       if (trail === undefined || trail === enemyFrame.color || trail === tint) continue;
       if (repeated && enemyFrames.some(frame => frame.color !== enemyFrame.color || colorAt(rows, center(frame.bbox)) !== trail)) continue;
       const details = new Set<number>();
@@ -85,18 +86,21 @@ function measure(rows: NativeRows, inherited?: Grid): Grid | null {
       const phase = ([left, top]: NativeBox) => [(left - x) % pitch, (top - y) % pitch];
       const otherBodies = rebound ? bodies.filter(body => body !== actor && body.area === actor.area
         && width(body.bbox) === width(actor.bbox) && phase(body.bbox).every((value, axis) => value === phase(actor.bbox)[axis])) : [];
-      let sentry: Grid['sentry'];
-      if (otherBodies.length === 1) {
-        const [left, top, right, bottom] = otherBodies[0]!.bbox, [u, v] = phase(otherBodies[0]!.bbox);
+      const sentryPatterns = otherBodies.map(body => {
+        const [left, top, right, bottom] = body.bbox, [u, v] = phase(body.bbox);
         const pixels: [number, number, number][] = [];
         for (let row = top; row <= bottom; row++) for (let col = left; col <= right; col++) {
           pixels.push([u! + col - left, v! + row - top, rows[row]![col]!]);
         }
-        if (pixels.some(([, , value]) => value === actor.color)) sentry = pixels;
-      }
+        return pixels;
+      });
+      const signature = sentryPatterns[0];
+      const sentry = signature?.some(([, , value]) => value === actor.color)
+        && sentryPatterns.every(pattern => pattern.every(([, , value], i) => value === signature[i]?.[2])) ? signature : undefined;
       candidates.push({ box, pitch, columns, size, tint, base, actor: actor.color, enemy: enemyFrame.color, trail,
         goal, charges: badges.map(p => center(p.bbox)), ...(repeated || rebound ? { actorPixels } : {}),
-        ...(rail === null ? {} : { rail }), ...(sentry ? { sentry } : {}) });
+        ...(rail === null ? {} : { rail }), ...(sentry ? { sentry } : {}),
+        ...(sentry && sentryPatterns.length > 1 ? { multipleSentries: true as const } : {}) });
     }
   }
   return candidates.length === 1 ? candidates[0]! : null;
@@ -120,12 +124,20 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
     else if (a === grid.tint && b === a && c === a && memory[i] !== 'wall') memory[i] = 'free';
   }
   if (positions.length !== 1 || (!grid.actorPixels && obstacles.length > 1) || (grid.sentry && !sentries.length)) return null;
+  const sentryRisk = grid.multipleSentries ? new Set([...prior?.sentryRisk ?? [], ...sentries.flatMap(sentry => {
+    const [x, y] = coordinate(sentry, grid);
+    return [sentry, ...directions.flatMap(([, dx, dy]) => {
+      const target = (y + dy) * grid.columns + x + dx;
+      return x + dx >= 0 && x + dx < grid.columns && target >= 0 && target < grid.size ? [target] : [];
+    })];
+  })]) : null;
   return { position: positions[0]!, obstacle: obstacles[0] ?? null, obstacles, risk: [...risk], memory,
-    charges: grid.charges.filter(p => colorAt(rows, p) === grid.enemy).length, ...(grid.sentry ? { sentries } : {}) };
+    charges: grid.charges.filter(p => colorAt(rows, p) === grid.enemy).length, ...(grid.sentry ? { sentries } : {}),
+    ...(sentryRisk ? { sentryRisk: [...sentryRisk] } : {}) };
 }
 
 function route(reading: Reading, grid: Grid): { action: string; target: number } | null {
-  const start = reading.position, risk = new Set(reading.risk);
+  const start = reading.position, risk = new Set(reading.risk), sentryRisk = new Set(reading.sentryRisk);
   type Candidate = { index: number; cost: number; first: { action: string; target: number } | null };
   const queue: Candidate[] = [{ index: start, cost: 0, first: null }], best = new Map([[start, 0]]);
   while (queue.length) {
@@ -138,7 +150,7 @@ function route(reading: Reading, grid: Grid): { action: string; target: number }
       const target = y * grid.columns + x;
       if (x < 0 || x >= grid.columns || y < 0 || target >= grid.size || reading.memory[target] === 'wall') continue;
       if (index === start && reading.sentries?.some(sentry => axisDistance(sentry, target, grid) <= 1)) continue;
-      const nextCost = cost + 1 + (reading.memory[target] ? 0 : 2) + (risk.has(target) ? 8 : 0);
+      const nextCost = cost + 1 + (reading.memory[target] ? 0 : 2) + (risk.has(target) ? 8 : 0) + (sentryRisk.has(target) ? 6 : 0);
       if (nextCost >= (best.get(target) ?? Infinity)) continue;
       best.set(target, nextCost);
       queue.push({ index: target, cost: nextCost, first: first ?? { action, target } });
@@ -215,10 +227,13 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: known ? null : offer,
         access: known ? offer : null, interaction: null });
       if (!selected) return null;
+      const waiting = grid.multipleSentries && last.charges > 0 ? 'Send a pulse to observe the next positions of the moving obstacles'
+        : last.obstacles.length > 1 ? 'Check the next positions of the moving obstacles before crossing'
+          : 'Check the next phase of the moving obstacle before crossing';
+      const traversing = last.sentryRisk?.length ? 'Follow the route through observed open cells while avoiding observed patrol areas'
+        : 'Follow the route through observed open cells';
       const situation = choice.kind === 'pulse' ? 'Reveal nearby cells before taking an uncertain route'
-        : choice.kind === 'wait' ? last.obstacles.length > 1 ? 'Check the next positions of the moving obstacles before crossing'
-          : 'Check the next phase of the moving obstacle before crossing'
-          : choice.uncertain ? 'Test the next unconfirmed cell on the route' : 'Follow the route through observed open cells';
+        : choice.kind === 'wait' ? waiting : choice.uncertain ? 'Test the next unconfirmed cell on the route' : traversing;
       const parent = 'G_official_completion';
       const objective = { kind: 'navigate_with_partially_revealed_terrain', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['controlled_sprite', 'revealed_cells', 'moving_obstacle', 'exit'], parentObjective: parent, satisfactionContract: 'official_progress_at_visible_exit' };
