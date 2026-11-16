@@ -1008,6 +1008,10 @@ export function readNativeResolution(agent: {
     const relay = bounds(card?.relay), reserve = bounds(card?.reserve);
     if (relay) subjects.push({ label: card?.buffered === true ? 'Storage chamber' : 'Relay basin', box: relay });
     if (reserve) subjects.push({ label: 'Visible supply', box: reserve });
+    if (Array.isArray(card?.stores)) for (const store of card.stores) {
+      const box = bounds(store);
+      if (box) subjects.push({ label: 'Stored supply', box });
+    }
     if (Array.isArray(card?.fields)) for (const field of card.fields) {
       const box = bounds(field);
       if (box) subjects.push({ label: 'Compared field', box });

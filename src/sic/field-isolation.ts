@@ -29,6 +29,7 @@ export const fieldIsolationStrategies = {
   deliver_observed_supply: 'Deliver from the measured supply to the open fields',
   charge_storage: 'Add supply and check where it accumulates',
   test_release: 'Test whether the full chamber releases to the prepared receivers',
+  release_stored_supply: 'Open the linked outlet and verify that stored supply reaches the receivers',
 } as const;
 const priorities = ['repeat_isolated_field_effect', 'isolate_noncontributing_branch', 'test_inverse_field_effect',
   'compare_repeated_field_effect', 'test_compact_control'] as const;
@@ -86,7 +87,7 @@ async function supplyProposal(
   if (!choice) return null;
   const strategies = { open_relay: 'activate_verified_relay', open_receiver: 'enable_pending_receiver',
     protect_receiver: 'protect_saturated_receiver', deliver: 'deliver_observed_supply',
-    charge_storage: 'charge_storage', test_release: 'test_release' } as const;
+    charge_storage: 'charge_storage', test_release: 'test_release', release_store: 'release_stored_supply' } as const;
   const strategy = strategies[choice.kind], label = fieldIsolationStrategies[strategy], parent = 'G_official_completion';
   const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...refs.filter(value => value !== ref)];
   const { point: [x, y], bbox } = choice.target, action = { action_ref: 'ACTION6', data: { x, y } };
@@ -97,9 +98,10 @@ async function supplyProposal(
   return { status: 'proposed', kind: family, distribution, choice, needId: need.id, actions: [action],
     steps: [{ action, expected_after: null, point_binding: witness }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     sicSituationCard: { strategy, need: 'Supply all receivers and preserve those already filled',
-      mode: choice.kind === 'test_release' ? 'exploration' : 'solving',
-      situation: label, agenda: [], evidence, control: bbox, relay: layout.relay.box, reserve: layout.stock.box,
-      fields: layout.receivers.map(receiver => receiver.box), buffered: layout.buffered === true },
+      mode: choice.kind === 'test_release' || choice.kind === 'release_store' ? 'exploration' : 'solving',
+      situation: label, agenda: [], evidence, control: bbox, fields: layout.receivers.map(receiver => receiver.box),
+      ...(layout.stored ? { stores: layout.stores.map(store => store.box) }
+        : { relay: layout.relay.box, reserve: layout.stock.box, buffered: layout.buffered === true }) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
     sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -126,8 +128,8 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
       const patterns = framedPatterns(rows, geometricComponents(rows));
       if (model) {
         const current = distribution?.epoch === observation.level_epoch ? distribution : null;
-        const pump = !current && firstControl(patterns, rows);
-        const layout = current?.layout ?? (pump ? bindSupply(rows, pump, model) : null);
+        const pump = current ? null : firstControl(patterns, rows);
+        const layout = current?.layout ?? bindSupply(rows, pump, model);
         if (layout) {
           const candidate = await supplyProposal(family, observation, rows, current ?? {
             epoch: observation.level_epoch, layout, refs: model.refs, stopped: false,
@@ -197,8 +199,11 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
         const refs = [...prior.refs.slice(-5), after.observation_ref];
         if (after.levels_completed > before.levels_completed && supply) {
           supply = { ...supply, completed: after.levels_completed, refs, continued: true };
-          const receivers = observeSupplyRelease(prior.layout, first, frames);
-          if (receivers) return { events: [], reviewEvidence: `observed_storage_release_into_${receivers}_receivers` };
+          const receivers = observeSupplyRelease(prior.layout, first, frames, proposal.choice);
+          if (receivers) {
+            supply = { ...supply, releaseObserved: true };
+            return { events: [], reviewEvidence: `observed_storage_release_into_${receivers}_receivers` };
+          }
         }
         if (before.level_epoch === after.level_epoch && before.state === after.state) {
           distribution = { ...prior, refs,
