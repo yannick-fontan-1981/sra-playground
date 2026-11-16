@@ -1040,6 +1040,11 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    for (const [field, label] of [['load', 'Transferred load'], ['loadControl', 'Load interaction control'],
+      ['support', 'Support to keep occupied'], ['passage', 'Passage kept open']] as const) {
+      const box = bounds(card?.[field]);
+      if (box) subjects.push({ label, box });
+    }
     if (Array.isArray(card?.openings)) for (const opening of card.openings) {
       const box = bounds(opening);
       if (box) subjects.push({ label: 'Linked opening', box });

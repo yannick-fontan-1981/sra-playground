@@ -10,12 +10,14 @@ export const learnLinkOpeningsId = 'sic_test_visible_opening_controls';
 type Part = ReturnType<typeof geometricComponents>[number];
 type Endpoint = { box: NativeBox; point: NativePoint; button: NativeBox; color: number; buttonMask?: string };
 type RelayLeg = { pair: [Endpoint, Endpoint]; departure: NativeBox; arrival: NativeBox; floor: number };
+type LinkedLoad = { button: NativeBox; idle: number; source: NativeBox; pixels: NativeRows;
+  standing: NativeBox; plate: NativeBox; gate: NativeBox; passage: number };
 type Scene = { endpoints: Endpoint[]; actorColor: number; actorMask: string; goal: NativeBox; goalColor?: number; goalMask?: string;
-  footGap?: number; relay?: [RelayLeg, RelayLeg] };
+  footGap?: number; relay?: [RelayLeg, RelayLeg]; load?: LinkedLoad };
 type State = { epoch: number; scene: Scene; refs: string[]; selected: number | null; walkRef: string | null; crossed: boolean; rejected: string[];
-  leg?: number; settleRef?: string };
+  leg?: number; settleRef?: string; held?: boolean; stationed?: NativeBox };
 type PriorLink = { completed: number; scene: Scene; proof: string };
-type Choice = { kind: 'select' | 'place' | 'walk' | 'settle'; input: string; target: NativeBox; index: number; reason: string;
+type Choice = { kind: 'select' | 'place' | 'walk' | 'settle' | 'take' | 'drop'; input: string; target: NativeBox; index: number; reason: string;
   point?: NativePoint; direction?: number };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; needId: string; attempt: string };
 
@@ -127,6 +129,150 @@ function discoverRelay(parts: Part[], rows: NativeRows, previous: Scene): Scene 
     }
   }
   return layouts.length === 1 ? layouts[0]! : null;
+}
+
+function matchesPixels(rows: NativeRows, [l, t]: NativePoint, pixels: NativeRows): boolean {
+  return pixels.every((row, y) => row.every((ink, x) => ink === rows[t + y]?.[l + x]));
+}
+
+function loadAt(parts: Part[], rows: NativeRows, load: LinkedLoad): NativeBox[] {
+  const size = load.pixels.length * load.pixels[0]!.length;
+  return parts.filter(p => p.area === size - 1 && p.bbox[1] > load.button[3]
+    && width(p.bbox) === load.pixels[0]!.length && height(p.bbox) === load.pixels.length
+    && matchesPixels(rows, [p.bbox[0], p.bbox[1]], load.pixels)).map(p => p.bbox);
+}
+
+function discoverLoad(parts: Part[], rows: NativeRows, previous: Scene): Scene | null {
+  const standing = actor(parts, previous), gap = previous.footGap;
+  const goals = parts.filter(p => p.color === previous.goalColor && silhouette(p) === previous.goalMask);
+  if (!standing || !gap || goals.length !== 1) return null;
+  const goal = goals[0]!, [sx] = center(standing), [gx] = center(goal.bbox);
+  const plane = standing[3] + gap - 1;
+  if (goal.bbox[3] !== plane || sx === gx) return null;
+  let plateLeft = standing[0], plateRight = standing[2];
+  while (rows[plane]?.[plateLeft - 1] === goal.color) plateLeft--;
+  while (rows[plane]?.[plateRight + 1] === goal.color) plateRight++;
+  if (plateLeft === standing[0] || plateRight === standing[2]) return null;
+  const plate: NativeBox = [plateLeft, plane, plateRight, plane];
+  const between = (x: number) => x > Math.min(sx, gx) && x < Math.max(sx, gx);
+  const passage = rows[standing[1]]?.[standing[0] - 1];
+  if (passage === undefined || passage === goal.color) return null;
+  const length = height(previous.endpoints[0]!.box);
+  const beacons = parts.filter(p => p.area === 1 && p.color === goal.color && between(p.bbox[0])
+    && !contains(plate, center(p.bbox)));
+  const gates = beacons.flatMap<NativeBox>(top => beacons.filter(bottom => bottom.bbox[1] === plane
+    && top.bbox[1] <= standing[1] - gap && plane - top.bbox[1] <= length * 2
+    && Math.abs(top.bbox[0] - bottom.bbox[0]) < length / 2)
+    .map(bottom => [Math.min(top.bbox[0], bottom.bbox[0]), top.bbox[1] + 1, Math.max(top.bbox[0], bottom.bbox[0]), standing[1] - gap]));
+  const open = gates.filter(box => gateClear(rows, box, passage));
+  if (open.length !== 1) return null;
+  const buttons = previous.endpoints.map(endpoint => parts.filter(part => part.color === endpoint.color && part.bbox[1] > 0
+    && part.bbox[3] < rows.length / 8 && silhouette(part) === endpoint.buttonMask));
+  if (buttons.some(matches => matches.length !== 1)) return null;
+  const controls = parts.filter(p => p.bbox[1] > 0 && p.bbox[3] < rows.length / 8
+    && p.area === 2 * (width(p.bbox) + height(p.bbox) - 2) && !p.rectangular);
+  const bars = parts.filter(p => p.rectangular && p.area === length && p.bbox[1] >= rows.length / 8
+    && Math.min(width(p.bbox), height(p.bbox)) === 1);
+  const layouts: Scene[] = [];
+  const room = (box: NativeBox) => parts.find(p => p.color === passage && p.area > length * length
+    && contains(p.bbox, center(box)));
+  const homeRoom = room(standing);
+  if (!homeRoom) return null;
+  for (const source of parts) {
+    const w = width(source.bbox), h = height(source.bbox);
+    if (w < 3 || h < 3 || w > length || h > length || source.area !== w * h - 1) continue;
+    const [l, t, r, b] = source.bbox;
+    const sourceRoom = room(source.bbox);
+    if (!sourceRoom || sourceRoom === homeRoom || sourceRoom.bbox[0] <= homeRoom.bbox[2] && homeRoom.bbox[0] <= sourceRoom.bbox[2]) continue;
+    const pixels = rows.slice(t, b + 1).map(row => row.slice(l, r + 1));
+    const matched = controls.filter(control => {
+      const [x, y] = center(control.bbox);
+      return width(control.bbox) >= w + 2 && height(control.bbox) >= h + 2
+        && matchesPixels(rows, [x - Math.floor(w / 2), y - Math.floor(h / 2)], pixels);
+    });
+    if (matched.length !== 1) continue;
+    const floor = bars.filter(p => height(p.bbox) === 1 && p.bbox[1] === b + 1 && p.bbox[0] <= l && p.bbox[2] >= r);
+    if (floor.length !== 1) continue;
+    const home = bars.filter(p => width(p.bbox) === 1 && p.color === floor[0]!.color && p.bbox[3] === plane
+      && Math.abs(p.bbox[0] - sx) < length * 2
+      && contains(homeRoom.bbox, [p.bbox[0] + Math.sign(sx - p.bbox[0]), center(p.bbox)[1]]));
+    if (home.length !== 1) continue;
+    const endpoints = [home[0]!, floor[0]!].map((p, i) => {
+      const button = buttons[i]![0]!;
+      return { box: p.bbox, point: [p.bbox[0] + Math.floor(width(p.bbox) / 2), p.bbox[1] + Math.floor(height(p.bbox) / 2)] as NativePoint,
+        button: button.bbox, color: button.color, buttonMask: silhouette(button) };
+    });
+    layouts.push({ ...previous, endpoints, goal: goal.bbox, load: {
+      button: matched[0]!.bbox, idle: matched[0]!.color, source: source.bbox, pixels, standing, plate, gate: open[0]!, passage,
+    } });
+  }
+  return layouts.length === 1 ? layouts[0]! : null;
+}
+
+function gateClear(rows: NativeRows, [l, t, r, b]: NativeBox, passage: number): boolean {
+  return rows.slice(t, b + 1).every(row => row.slice(l, r + 1).every(ink => ink === passage));
+}
+
+function loadChoice(local: State, rows: NativeRows, controlled: NativeBox, partList: Part[]): Choice | null {
+  const { scene, stationed, held } = local, load = scene.load!;
+  if (!gateClear(rows, load.gate, load.passage)) return null;
+  if (stationed) {
+    const direction = Math.sign(center(scene.goal)[0] - center(controlled)[0]);
+    return direction ? { kind: 'walk', input: direction < 0 ? 'ACTION3' : 'ACTION4', target: scene.goal,
+      index: 0, direction, reason: 'Leave the load on the support and verify that the exit remains accessible' } : null;
+  }
+  if (held) return { kind: 'drop', input: 'ACTION6', point: center(load.button), target: load.plate, index: 0,
+    reason: 'Place the carried load on the support currently occupied by the moving sprite' };
+  if (!sameBounds(controlled, load.standing)) return null;
+  const missing = scene.endpoints.findIndex(endpoint => !placed(rows, endpoint));
+  if (missing >= 0) {
+    const endpoint = scene.endpoints[missing]!;
+    return local.selected === missing
+      ? { kind: 'place', input: 'ACTION6', point: endpoint.point, target: endpoint.box, index: missing,
+        reason: missing ? 'Test whether linking the surface below the load brings it to the moving sprite'
+          : 'Place an opening near the occupied support to receive the load' }
+      : { kind: 'select', input: 'ACTION6', point: center(endpoint.button), target: endpoint.button, index: missing,
+        reason: 'Select the control for the next opening' };
+  }
+  const nearby = loadAt(partList, rows, load).filter(box => !sameBounds(box, load.source)
+    && Math.abs(center(box)[0] - center(controlled)[0]) <= width(controlled) + width(box)
+    && Math.abs(box[3] - controlled[3]) <= scene.footGap!);
+  return nearby.length === 1 ? { kind: 'take', input: 'ACTION6', point: center(load.button), target: nearby[0]!, index: 0,
+    reason: 'Test the matching interaction control now that the load has arrived within reach' } : null;
+}
+
+function loadReturn(proposal: Proposal, before: NativeRows, after: NativeRows): { reason: string; stationed?: NativeBox } | null {
+  const { local, choice, actor: first } = proposal, { scene } = local, load = scene.load!;
+  const parts = geometricComponents(after), second = actor(parts, scene);
+  const cargo = loadAt(parts, after, load);
+  const buttonIdle = after[load.button[1]]?.[load.button[0]] === load.idle;
+  if (!gateClear(after, load.gate, load.passage)) return null;
+  if (choice.kind === 'take') {
+    const anchored = matchesPixels(after, [first[0], first[1] - 1], [before[first[1] - 1]!.slice(first[0], first[2] + 1)]);
+    return anchored && !buttonIdle && !cargo.length ? { reason: 'load_acquired_at_current_support' } : null;
+  }
+  if (!second) return null;
+  if (choice.kind === 'drop') {
+    const [box] = cargo;
+    return cargo.length === 1 && box && contains(load.plate, [center(box)[0], box[3]])
+      && center(box)[0] === center(second)[0] && first[3] - second[3] === height(box) && buttonIdle
+      ? { reason: 'load_replaced_sprite_on_support', stationed: box } : null;
+  }
+  if (choice.kind === 'walk') {
+    return local.stationed && cargo.some(box => sameBounds(box, local.stationed!))
+      && Math.sign(center(second)[0] - center(first)[0]) === choice.direction
+      ? { reason: 'load_holds_passage_open_as_sprite_leaves' } : null;
+  }
+  if (!sameBounds(first, second)) return null;
+  const endpoint = scene.endpoints[choice.index]!, peer = scene.endpoints[1 - choice.index]!;
+  if (choice.kind === 'select') return endpointKey(after, endpoint) && !endpointKey(after, peer)
+    ? { reason: 'control_selection_observed' } : null;
+  if (choice.kind !== 'place' || placed(before, endpoint) || !placed(after, endpoint)) return null;
+  if (!placed(before, peer)) return { reason: 'opening_symbol_observed' };
+  const remaining = cargo.filter(box => !sameBounds(box, load.source)
+    && Math.abs(center(box)[0] - center(first)[0]) <= width(first) + width(box));
+  return cargo.length === 1 && remaining.length === 1
+    ? { reason: 'linked_opening_moved_load_without_moving_sprite' } : null;
 }
 
 function placed(rows: NativeRows, endpoint: Endpoint): boolean {
@@ -247,15 +393,17 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const parts = geometricComponents(rows);
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const transfer = retained?.completed === observation.levels_completed ? retained : null;
-      const scene = prior?.scene ?? discover(parts, rows) ?? (transfer ? discoverRelay(parts, rows, transfer.scene) : null);
+      const scene = prior?.scene ?? discover(parts, rows)
+        ?? (transfer ? discoverRelay(parts, rows, transfer.scene) ?? discoverLoad(parts, rows, transfer.scene) : null);
       if (!scene) return null;
       const setup = scene.endpoints.map(endpoint => endpointKey(rows, endpoint));
       const selectedIndex = setup.filter(Boolean).length === 1 ? setup.indexOf(true) : null;
       const local: State = prior ?? { epoch: observation.level_epoch, scene, selected: selectedIndex,
-        refs: scene.relay && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
-      const controlled = actor(parts, scene);
+        refs: (scene.relay || scene.load) && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
+      const controlled = local.held ? scene.load!.standing : actor(parts, scene);
       if (!controlled) return null;
-      const choice = scene.relay ? relayChoice(local, rows, controlled) : choose(local, rows, controlled);
+      const choice = scene.load ? loadChoice(local, rows, controlled, parts)
+        : scene.relay ? relayChoice(local, rows, controlled) : choose(local, rows, controlled);
       if (!choice || !observation.available_action_refs.includes(choice.input)) return null;
       const attempt = JSON.stringify([choice.kind, choice.index, choice.input, controlled, local.selected, ...(scene.relay ? [local.leg ?? 0] : [])]);
       if (local.rejected.includes(attempt)) return null;
@@ -265,7 +413,7 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const offer = { input: choice.input, expected: center(choice.target), evidence };
       const reuse = choice.kind === 'walk' && local.walkRef !== null;
       const crossing = reuse && choice.target !== scene.goal && (scene.relay ? (local.leg ?? 0) < scene.relay.length : !local.crossed);
-      const routeSupported = reuse && !crossing || choice.kind === 'settle' && !!local.settleRef;
+      const routeSupported = choice.kind === 'walk' && !!local.stationed || reuse && !crossing || choice.kind === 'settle' && !!local.settleRef;
       const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
       const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
       const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence,
@@ -275,8 +423,10 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const witness = choice.point ? await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: choice.reason, evidence }) : null;
       if (choice.point && !witness) return null;
       const parent = 'G_official_completion';
-      const objective = { kind: scene.relay ? 'replace_links_along_the_route_to_exit' : 'link_opposite_openings_to_reach_exit', scope: ref.split(':revision:', 1)[0]!,
-        subjects: ['visible_openings', 'control_symbols', 'actor', 'exit'], parentObjective: parent, satisfactionContract: 'official_progress_after_crossing' };
+      const objective = { kind: scene.load ? 'delegate_support_to_transferred_load'
+        : scene.relay ? 'replace_links_along_the_route_to_exit' : 'link_opposite_openings_to_reach_exit', scope: ref.split(':revision:', 1)[0]!,
+        subjects: scene.load ? ['visible_openings', 'actor', 'load', 'support', 'passage', 'exit'] : ['visible_openings', 'control_symbols', 'actor', 'exit'],
+        parentObjective: parent, satisfactionContract: 'official_progress_after_crossing' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = linkOpeningsId + ':' + need.id;
       const action: NativeCommand = { action_ref: choice.input, data: choice.point ? { x: choice.point[0], y: choice.point[1] } : {} };
@@ -286,9 +436,12 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
         steps: [{ action, expected_after: choice.target, ...(witness ? { point_binding: witness } : {}) }],
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
-        sicSituationCard: { strategy, need: scene.relay ? 'Link each reachable compartment on the way to the exit' : 'Link the two openings and reach the exit', situation: choice.reason, evidence,
+        sicSituationCard: { strategy, need: scene.load ? 'Keep the passage open after leaving the occupied support'
+          : scene.relay ? 'Link each reachable compartment on the way to the exit' : 'Link the two openings and reach the exit', situation: choice.reason, evidence,
           agenda: navigation?.entries ?? [], mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
           actor: controlled, target: choice.target, exit: scene.goal,
+          ...(scene.load ? { load: loadAt(parts, rows, scene.load)[0] ?? null, loadControl: scene.load.button,
+            support: scene.load.plate, passage: scene.load.gate } : {}),
           openings: (scene.relay?.flatMap(leg => leg.pair) ?? scene.endpoints).map(endpoint => endpoint.box) },
         question: { reason: choice.reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: choice.reason, relations: ['contributes_to:' + parent] }],
@@ -304,25 +457,33 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const reason = proposal.local.scene.relay ? relayReturn(proposal, first, second) : checked(proposal, first, second);
+      const reason = proposal.local.scene.load ? loadReturn(proposal, first, second)?.reason
+        : proposal.local.scene.relay ? relayReturn(proposal, first, second) : checked(proposal, first, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'opening_effect_not_confirmed' };
     },
     record(before, after, _action, first, second, proposal) {
       const { local, choice } = proposal;
       if (after.levels_completed > before.levels_completed) {
-        if (!local.scene.relay && local.crossed && local.walkRef) retained = {
+        if (local.scene.relay && retained && local.crossed) retained = {
+          ...retained, completed: after.levels_completed, proof: after.observation_ref,
+        };
+        if (!local.scene.relay && !local.scene.load && local.crossed && local.walkRef) retained = {
           completed: after.levels_completed, scene: local.scene, proof: after.observation_ref,
         };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const reason = local.scene.relay ? relayReturn(proposal, first, second) : checked(proposal, first, second);
+      const loadEffect = local.scene.load ? loadReturn(proposal, first, second) : null;
+      const reason = local.scene.load ? loadEffect?.reason
+        : local.scene.relay ? relayReturn(proposal, first, second) : checked(proposal, first, second);
       state = { ...local,
         selected: reason && choice.kind === 'select' ? choice.index : local.selected,
         walkRef: reason && choice.kind === 'walk' ? after.observation_ref : local.walkRef,
         crossed: local.crossed || reason === 'linked_crossing_observed',
         ...(local.scene.relay && reason === 'linked_crossing_observed' ? { leg: (local.leg ?? 0) + 1 } : {}),
         ...(choice.kind === 'settle' && reason ? { settleRef: after.observation_ref } : {}),
+        ...(choice.kind === 'take' && loadEffect ? { held: true } : {}),
+        ...(loadEffect?.stationed ? { held: false, stationed: loadEffect.stationed } : {}),
         refs: reason ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         rejected: reason ? local.rejected : [...local.rejected, proposal.attempt] };
       return { events: [] };
