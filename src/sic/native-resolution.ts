@@ -604,7 +604,9 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === bandAlignmentId || family === verifyBandTransferId)) {
     const button = bounds(card?.addressedRegion);
-    if (button) subjects.push({ label: 'Transfer control tested', box: button });
+    if (button) subjects.push({ label: card?.bandOperation === 'door' ? 'Passage tested' : 'Transfer control tested', box: button });
+    const gate = bounds(card?.gate);
+    if (gate) subjects.push({ label: 'Passage being prepared', box: gate });
     if (Array.isArray(card?.subjects)) for (const subject of card.subjects) {
       const marker = bounds(subject);
       if (marker) subjects.push({ label: 'Marker compared by SIC', box: marker });
