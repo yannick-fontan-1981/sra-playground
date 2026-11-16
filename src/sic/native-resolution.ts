@@ -1399,7 +1399,11 @@ export function readNativeResolution(agent: {
     if (source) subjects.push({ label: 'Previously tested switch', box: source });
     if (Array.isArray(card?.receivers)) for (const indicator of card.receivers) {
       const box = bounds(indicator);
-      if (box) subjects.push({ label: 'Separate indicator', box });
+      if (box) subjects.push({ label: Array.isArray(card?.cascadeGates) ? 'Final lamp' : 'Separate indicator', box });
+    }
+    if (Array.isArray(card?.cascadeGates)) for (const gate of card.cascadeGates) {
+      const box = bounds(gate);
+      if (box) subjects.push({ label: 'Intermediate logic component', box });
     }
   }
   if (situationCard && family === periodicProfileAlignmentId) {

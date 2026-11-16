@@ -1,11 +1,16 @@
 import { framedRows, value } from '../logos-engine/v6-coupled-displays.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
+import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { navigationPrimitives } from './navigation-primitives.ts';
+import { chooseCascade, measureLogicCascade, readCascade, type Cascade, type CascadeChoice, type CascadeReading } from './logic-cascade.ts';
+import type { ReasoningMode } from './reasoning-mode.ts';
 
 export const displayCouplingId = 'sic_display_coupling';
 export const displayCouplingStrategies = {
+  P05: navigationPrimitives.P05,
   test_aligned_switch: 'Test a switch near a distinct indicator',
   vary_coupled_switches: 'Compare another switch after the indicator row changes',
   recheck_scored_switch_spacing: 'Recheck the switch spacing that previously aligned the indicators',
@@ -23,8 +28,10 @@ type ScoredSpacing = { epoch: number; score: number; control: [number, number]; 
 type State = { epoch: number; controls: NativeBox[]; receivers: NativeBox[]; initial: number; attempts: string[]; inert: number[];
   visited: string[]; coupled: boolean; count: number; stopped: boolean; evidence: string[];
   firstCoupled?: number; spacing?: ScoredSpacing | null };
-type Proposal = NativeProposal & { local: State; index: number; controls: number[]; receivers: number[]; attempt: string; needId: string;
+type SpacingProposal = NativeProposal & { cascade?: undefined; local: State; index: number; controls: number[]; receivers: number[]; attempt: string; needId: string;
   sicSituationCard: Record<string, unknown> & { strategy: keyof typeof displayCouplingStrategies } };
+type CascadeState = { epoch: number; layout: Cascade; samples: CascadeReading[]; refs: string[]; blocked: string[]; inconsistent?: true };
+type Proposal = SpacingProposal | (NativeProposal & { needId: string; cascade: { local: CascadeState; current: CascadeReading; choice: CascadeChoice } });
 const values = (rows: NativeRows, boxes: NativeBox[]) => {
   const measured = boxes.map(box => value(rows, box));
   return measured.some(color => color === null) ? null : measured as number[];
@@ -58,7 +65,7 @@ function measure(observation: NativeObservation, rows: NativeRows, spacing: Scor
     visited: [], coupled: false, count: 0, stopped: false, evidence: [] } : null;
 }
 
-function scoreSpacing(proposal: Proposal, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
+function scoreSpacing(proposal: SpacingProposal, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
   const { local, index, controls, receivers } = proposal, first = local.firstCoupled;
   const analogy = local.spacing;
   const newCoupling = first !== undefined && new Set(receivers).size >= 2;
@@ -89,20 +96,69 @@ function scoreSpacing(proposal: Proposal, after: NativeObservation, frames: read
 export function createSicDisplayCoupling(): NativeFamily<Proposal> {
   let state: State | null = null;
   let scored: ScoredSpacing | null = null;
+  let cascade: CascadeState | null = null;
+  let decide: NativeProgramHandle | undefined;
   const currentSpacing = (observation: NativeObservation) => scored?.epoch === observation.level_epoch
     && scored.score === observation.levels_completed ? scored : null;
+
+  async function offerCascade(observation: NativeObservation, rows: NativeRows, remaining: number, mode: ReasoningMode,
+    signal?: AbortSignal): Promise<Proposal | null> {
+    const prior = cascade?.epoch === observation.level_epoch ? cascade : null;
+    if (prior?.inconsistent) return null;
+    const layout = prior?.layout ?? measureLogicCascade(observation, rows);
+    if (!layout) return null;
+    const current = readCascade(rows, layout);
+    if (!current) return null;
+    const ref = observation.observation_ref;
+    const local = prior ?? { epoch: observation.level_epoch, layout, samples: [current], refs: [ref], blocked: [] };
+    const choice = chooseCascade(rows, layout, local.samples, current, local.blocked, remaining);
+    if (!choice) return null;
+    const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
+    const facts = { routeSupported: false, eligibleProbe: true, knownInteraction: false, mode };
+    const decision = await decide?.run({ situation: facts }, { signal });
+    if (decision?.result !== 'P05') return null;
+    const box = layout.controls[choice.index]!;
+    const [left, top, right, bottom] = box, x = Math.floor((left + right) / 2), y = Math.floor((top + bottom) / 2);
+    const command = { action_ref: 'ACTION6', data: { x, y } }, actions = [command];
+    const label = 'Compare the switch, intermediate signals, and final lamp';
+    const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
+    if (!witness) return null;
+    const parent = 'G_official_completion';
+    const objective = { kind: 'activate_observed_signal_cascade', scope: ref.split(':revision:', 1)[0]!, subjects: ['final_lamp'],
+      parentObjective: parent, satisfactionContract: 'observe_official_progress_after_preparing_joint_inputs' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `signal-cascade:${need.id}`;
+    const situation = choice.distance > 1 ? `Prepare an untested setting in ${choice.distance} switch changes and compare the intermediate signals.`
+      : 'Test the new switch setting and compare the intermediate signals with the final lamp.';
+    return { status: 'proposed', kind: displayCouplingId, actions, needId: need.id, cascade: { local, current, choice },
+      steps: [{ action: command, expected_after: { setting: choice.setting }, point_binding: witness }],
+      binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+      sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
+        edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+      sicSituationCard: { strategy: 'P05', need: 'Combine switch settings that activate the final lamp', mode, situation, agenda: [], evidence,
+        triggerCard: decision.receipt.workflow, control: box, receivers: [layout.lamp], cascadeGates: layout.gates.map(gate => gate.box),
+        distance: choice.distance, logicAlternatives: choice.hypotheses },
+      question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
+      sicLocalDecision: { strategy: 'P05', objective: { id, label, parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
+
   return {
     id: displayCouplingId,
+    async attachPrograms(registry) { decide = await registry.registerProgram(chooseLanding, {}, await landingModule()); },
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       if (!currentSpacing(observation)) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal?.sicSituationCard?.strategy === 'recheck_scored_switch_spacing' ? proposal : null;
+      return proposal?.cascade || proposal?.sicSituationCard?.strategy === 'recheck_scored_switch_spacing' ? proposal : null;
     },
-    async propose(observation, rows, _inputs, remaining) {
+    async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (cascade?.epoch === observation.level_epoch) return offerCascade(observation, rows, remaining, execution?.reasoningMode ?? 'exploration', execution?.signal);
       const local = state?.epoch === observation.level_epoch ? state : measure(observation, rows, currentSpacing(observation));
-      if (!local || local.stopped || local.count >= 12) return null;
+      if (!local) return offerCascade(observation, rows, remaining, execution?.reasoningMode ?? 'exploration', execution?.signal);
+      if (local.stopped || local.count >= 12) return null;
       const controls = values(rows, local.controls), receivers = values(rows, local.receivers);
       if (!controls || !receivers) return null;
       const alternative = [...new Set(controls.filter(color => color !== local.initial))];
@@ -150,12 +206,36 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'indicator_rows_bound' : 'indicator_rows_changed' };
     },
-    after(proposal, _index, before, after) {
+    after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.cascade) {
+        const { local, current, choice } = proposal.cascade, returned = readCascade(second, local.layout);
+        const matched = returned?.setting === choice.setting && returned.controlInks.every((ink, i) => i === choice.index || ink === current.controlInks[i]);
+        return { matched, seal_prefix: true, reason: matched ? 'cascade_switch_changed_as_projected' : 'cascade_switch_projection_contradicted' };
+      }
       return { matched: null, seal_prefix: true, reason: 'measure_switch_and_remote_indicators' };
     },
     record(before, after, _command, _first, second, proposal, _index, frames) {
+      if (proposal.cascade) {
+        const ref = after.observation_ref;
+        if (after.levels_completed > before.levels_completed) return { events: [], reviewEvidence: 'The joint switch setting activated the final lamp.' };
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const { local, current, choice } = proposal.cascade, returned = readCascade(second, local.layout);
+        const prior = returned ? local.samples.find(sample => sample.setting === returned.setting) : null;
+        const inconsistent = !returned || !!prior && (prior.lamp !== returned.lamp || JSON.stringify([prior.active, prior.ports]) !== JSON.stringify([returned.active, returned.ports]));
+        const matched = returned?.setting === choice.setting;
+        cascade = { ...local, samples: returned && !prior ? [...local.samples, returned] : local.samples,
+          refs: [...local.refs.slice(-5), ref], blocked: matched ? local.blocked : [...local.blocked, `${current.setting}:${choice.index}`],
+          ...(inconsistent ? { inconsistent: true as const } : {}) };
+        if (!returned || !matched || inconsistent) return { events: [] };
+        const gates = returned.active.filter((active, i) => active !== current.active[i]).length;
+        const ports = returned.ports.reduce((sum, row, index) => sum + row.filter((value, j) => value !== current.ports[index]![j]).length, 0);
+        const lamp = returned.lamp === current.lamp ? 'The final lamp held its state.' : 'The final lamp changed.';
+        const reviewEvidence = gates ? `Intermediate components changed state (${gates}). ${lamp}`
+          : ports ? `Inputs of intermediate components changed (${ports}). ${lamp}` : 'The switch changed. SIC retained the new joint setting.';
+        return { events: [], reviewEvidence };
+      }
       if (after.levels_completed > before.levels_completed) {
         scored = scoreSpacing(proposal, after, frames);
         return { events: [] };
@@ -174,10 +254,11 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
       return { events: [{ status: coupled ? 'remote_indicator_change_observed' : unchanged ? 'no_visible_change' : 'other_visible_change',
         control: index, changed_indicators: remoteChanges, evidence: [before.observation_ref, after.observation_ref] }] };
     },
-    state: () => ({ state, scored }),
+    state: () => ({ state, scored, cascade }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       scored = structuredClone((value.scored as ScoredSpacing | null | undefined) ?? null);
+      cascade = structuredClone((value.cascade as CascadeState | null | undefined) ?? null);
     },
   };
 }
