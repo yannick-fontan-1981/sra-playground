@@ -1,11 +1,14 @@
 import { freshReceptionModels, pathToReceptions } from '../logos-engine/v6-exposed-reception-access.ts';
 import { measureExposedReception } from '../logos-engine/v6-exposed-reception-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
 import { chooseReception, receptionMotionModule } from './reception-motion-card.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
+import { resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { exposureBearing, exposureMatches, exposureMoves, exposurePoint, exposureRules, planExposure, readExposureBoard, readTrackedExposure,
+  type ExposureBoard, type ExposureDial, type ExposureScene, type ExposureSite, type ExposureState } from './coupled-exposure.ts';
 
 export const directionalReceptionId = 'sic_directional_reception';
 export const learnDirectionalReceptionId = 'sic_learn_reception_from_motion';
@@ -25,16 +28,20 @@ const graph = compileStrategyGraph({ id: 'align_piece_and_receiver_state', versi
     orient_toward_mismatched_piece: [{ fact: 'orientation', expected: true, label: 'A piece occupies a receiver with a different appearance' }],
   },
 }, ['test', 'route', 'orientation']);
-type Site = { pos: NativePoint; color: number };
-type Dial = { point: NativePoint; vector: NativePoint; active: boolean };
-type Scene = { origin: NativePoint; size: NativePoint; pitch: number; actor: NativePoint; bodies: Site[]; slots: Site[];
-  walls: NativePoint[]; dial: Dial[]; layout: string };
+type Site = ExposureSite;
+type Dial = ExposureDial;
+type Scene = ExposureScene;
 type State = { epoch: number; layout: string; directions: Record<string, NativePoint>; coupled: number[]; tried: string[];
   evidence: string[]; count: number; beam?: { at: NativePoint; actor: NativePoint; direction: NativePoint } };
 type LearnedControls = { completed: number; pitch: number; directions: Record<string, NativePoint>; ref: string };
 type Effect = { kind: 'follow' | 'orient' | 'continue'; actor: NativePoint; body: Site; receiver: Site; direction: NativePoint };
 type Choice = { command: NativeCommand; target?: Site; dial?: Dial; effect?: Effect };
 type Proposal = NativeProposal & { local: State; scene: Scene; choice: Choice; attempt: string; needId: string };
+type PhotoWitness = { epoch: number; shadow: number; lit: number; ref: string };
+type ExposureMemory = { epoch: number; board: ExposureBoard; scene: Scene; dialInk: number; current: ExposureState;
+  route: number[]; refs: string[]; lastRef: string; stopped: boolean };
+type ExposureProposal = NativeProposal & { exposure: ExposureMemory; expected: ExposureState; needId: string };
+const isExposure = (proposal: Proposal | ExposureProposal): proposal is ExposureProposal => 'exposure' in proposal;
 const hints: Readonly<Record<string, NativePoint>> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const plus = (a: NativePoint, b: NativePoint): NativePoint => [a[0] + b[0], a[1] + b[1]];
@@ -89,18 +96,96 @@ function returnedEffect(scene: Scene, effect: Effect): boolean {
     && (effect.kind === 'follow' || scene.dial.some(dial => dial.active && same(directionOf(dial.vector), effect.direction)));
 }
 
-export function createSicDirectionalReception(family = directionalReceptionId): NativeFamily<Proposal> {
+function observeExposure(rows: NativeRows, memory: ExposureMemory, expected: ExposureState): boolean {
+  const next = readTrackedExposure(rows, memory.scene, memory.board, memory.dialInk);
+  return !!next && exposureMatches(memory.board, expected, next);
+}
+
+export function createSicDirectionalReception(family = directionalReceptionId): NativeFamily<Proposal | ExposureProposal> {
   const learns = family === learnDirectionalReceptionId;
   let state: State | null = null;
   let known: LearnedControls | null = null;
+  let photo: PhotoWitness | null = null;
+  let exposure: ExposureMemory | null = null;
   let choose: NativeProgramHandle | undefined;
+  async function offerExposure(observation: NativeObservation, rows: NativeRows, remaining: number,
+    execution?: NativeExecution): Promise<ExposureProposal | null> {
+    const { level_epoch: epoch, observation_ref: ref, available_action_refs: available } = observation;
+    if (learns || photo?.epoch !== epoch - 1 || known?.completed !== observation.levels_completed || remaining < 1
+      || !available.includes('ACTION6')) return null;
+    let memory = exposure?.epoch === epoch ? exposure : null;
+    if (memory && (memory.stopped || memory.lastRef !== ref)) return null;
+    if (!memory) {
+      const scene = measureExposedReception(rows) as Scene | null;
+      if (!scene || scene.size[0] * scene.size[1] > 144 || Object.values(known.directions).length < 1) return null;
+      const measured = readExposureBoard(scene, { shadow: photo.shadow, lit: photo.lit });
+      const active = scene.dial.find(d => d.active);
+      if (!measured || !active) return null;
+      const dialInk = rows[active.point[1]]?.[active.point[0]];
+      if (dialInk === undefined) return null;
+      const [board, current] = measured;
+      memory = { epoch, board, scene, dialInk, current, route: [], refs: [], lastRef: ref, stopped: false };
+    }
+    const { board, current, scene } = memory;
+    if (!observeExposure(rows, memory, current)) return null;
+    const commands = new Map<number, NativeCommand>();
+    for (const action_ref of available) {
+      const delta = known.directions[action_ref] ?? hints[action_ref];
+      const index = delta ? exposureMoves.findIndex(move => same(move, delta)) : -1;
+      if (index >= 0) commands.set(index, { action_ref, data: {} });
+    }
+    if (available.includes('ACTION5')) commands.set(4, { action_ref: 'ACTION5', data: {} });
+    for (const dial of scene.dial) {
+      const heading = exposureBearing(dial.vector);
+      if (heading >= 0) commands.set(5 + heading, { action_ref: 'ACTION6', data: { x: dial.point[0], y: dial.point[1] } });
+    }
+    const route = memory.route.length ? memory.route : await planExposure(board, current, [...commands.keys()].sort((a, b) => a - b),
+      remaining, execution);
+    const step = route[0], action = step === undefined ? null : commands.get(step);
+    if (step === undefined || !action) return null;
+    const expected = exposureRules(board).project(current, step), movement = step < 4;
+    const evidence: [string, ...string[]] = [ref, ...new Set([photo.ref, known.ref, ...memory.refs].filter(value => value !== ref))];
+    const mode = execution?.reasoningMode ?? 'solving', offer = { input: action.action_ref, expected: exposurePoint(expected.actor, board.width), evidence };
+    const navigation = resolveNavigationPrimitives({ mode, evidence, probe: null, access: movement ? offer : null, interaction: movement ? null : offer });
+    if (!navigation.selected) return null;
+    const satisfied = (value: ExposureState) => board.goals.filter(goal => value.pieces.some(piece => piece.cell === goal.cell && piece.color === goal.color)).length;
+    const situation = satisfied(expected) < satisfied(current) ? 'Free a filled receiver temporarily while keeping it as a goal'
+      : !movement ? 'Change the beam or let its measured effect move a piece'
+        : 'Move along the route and verify the cursor, the pieces and the occupied receivers';
+    const point = action.action_ref === 'ACTION6' ? [Number(action.data.x), Number(action.data.y)] as NativePoint : null;
+    const binding = point && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: situation, evidence });
+    if (point && !binding) return null;
+    const parent = 'G_official_completion';
+    const goal = { kind: 'satisfy_receivers_through_coupled_motion_and_exposure', scope: ref.split(':revision:', 1)[0]!,
+      subjects: scene.slots.map(slot => slot.pos.join(',')), parentObjective: parent, satisfactionContract: 'official_progress_after_matching_all_receivers' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id;
+    return { status: 'proposed', kind: family, exposure: { ...memory, route }, expected, needId: need.id, actions: [action],
+      binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action, expected_after: expected, ...(binding ? { point_binding: binding } : {}) }],
+      sicSituationCard: { strategy: navigation.selected.id, need: 'Fill every receiver with a piece of the required color',
+        situation, evidence, agenda: navigation.entries, mode, triggerCard: navigation.card,
+        actor: cellBox(scene, exposurePoint(current.actor, board.width)),
+        pieces: current.pieces.map(piece => cellBox(scene, exposurePoint(piece.cell, board.width))),
+        receivers: scene.slots.map(slot => cellBox(scene, slot.pos)), ...(point ? { dial: [...point, ...point] } : {}) },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy: navigation.selected.id, objective: { id, label: situation, parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation, preconditions: {},
+        preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+  }
   return {
     id: family,
     async attachPrograms(registry) {
       if (learns) choose = await registry.registerProgram(chooseReception, {}, await receptionMotionModule());
     },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      return group === observedMechanicsGroup ? offerExposure(observation, rows, remaining, execution)
+        : this.propose(observation, rows, inputs, remaining, execution);
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      const complete = await offerExposure(observation, rows, remaining, execution);
+      if (complete) return complete;
       const keys = observation.available_action_refs.filter(action => hints[action]);
       if (!keys.length || execution?.signal?.aborted) return null;
       const scene = measureExposedReception(rows) as Scene | null;
@@ -191,6 +276,10 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isExposure(proposal)) {
+        const matched = observeExposure(second, proposal.exposure, proposal.expected);
+        return { matched, seal_prefix: true, reason: matched ? 'cursor_exposure_and_piece_positions_confirmed' : 'coupled_exposure_prediction_contradicted' };
+      }
       if (proposal.choice.effect) {
         const next = measureExposedReception(second) as Scene | null;
         if (next?.layout === proposal.scene.layout) {
@@ -202,6 +291,13 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
       return { matched: null, seal_prefix: true, reason: 'remeasure_piece_receiver_and_orientation' };
     },
     record(before, after, issued, _first, second: NativeRows, proposal, _index, frames) {
+      if (isExposure(proposal)) {
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const { exposure: local, expected } = proposal, matched = observeExposure(second, local, expected);
+        exposure = { ...local, current: matched ? expected : local.current, route: matched ? local.route.slice(1) : [],
+          refs: matched ? [...local.refs.slice(-4), after.observation_ref] : local.refs, stopped: !matched, lastRef: after.observation_ref };
+        return { events: [] };
+      }
       if (after.levels_completed > before.levels_completed && Object.keys(proposal.local.directions).length) {
         known = { completed: after.levels_completed, pitch: proposal.scene.pitch, directions: proposal.local.directions, ref: after.observation_ref };
       }
@@ -217,6 +313,9 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
           const measured = measureExposedReception(rows) as Scene | null;
           return measured?.layout === scene.layout && returnedEffect(measured, effect);
         });
+        if (matched && effect.kind === 'orient' && scene.bodies.length === 1 && scene.bodies[0]!.color !== effect.body.color) {
+          photo = { epoch: before.level_epoch, shadow: scene.bodies[0]!.color, lit: effect.body.color, ref: after.observation_ref };
+        }
         if (matched && effect.kind === 'follow') directions[issued.action_ref] = effect.direction;
         const beam = matched && effect.kind !== 'follow' ? { at: effect.body.pos, actor: effect.actor, direction: effect.direction } : undefined;
         const { beam: _priorBeam, ...rest } = local;
@@ -247,10 +346,12 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
       const status = returned?.layout !== scene.layout ? 'receiver_layout_changed' : colorMatched ? 'receiver_color_match_observed' : 'receiver_return_measured';
       return { events: [{ status, evidence: [before.observation_ref, after.observation_ref] }] };
     },
-    state: () => ({ state, known }),
+    state: () => ({ state, known, photo, exposure }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       known = structuredClone((value.known as LearnedControls | undefined) ?? null);
+      photo = structuredClone((value.photo ?? null) as PhotoWitness | null);
+      exposure = structuredClone((value.exposure ?? null) as ExposureMemory | null);
     },
   };
 }
