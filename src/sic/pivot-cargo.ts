@@ -279,7 +279,7 @@ function initial(rows: NativeRows, epoch: number, witness: CargoWitness | null):
 }
 
 function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined): Memory | null {
-  const receipt = execution?.readPriorDirectionalScene?.(measure);
+  const receipt = execution?.readPriorDirectionalScene?.(rows => measure(rows));
   if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== epoch) return null;
   const direction = directions.find(([input]) => input === receipt.command);
   if (!direction) return null;

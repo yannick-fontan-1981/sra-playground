@@ -2,6 +2,7 @@ import { center, correspondence, find_body, intersects, moved_core, near } from 
 import { distance, shift } from '../logos-engine/v6-object-binding-planning.ts';
 import type { NativeBox, NativeCommand, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { bindTranslationLanding, maximumCommittedActions, sameLandingPixels, type MeasuredLanding } from './plan-step.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { chooseTransport, transportModule } from './transport-motion-card.ts';
 import { assessDelivery, nextDeliveryStep, startRecoveredDelivery, type Crossing, type DeliveryModel,
@@ -38,7 +39,9 @@ type Strategy = typeof soloStrategies[number];
 type Pair = { object: { bbox: NativeBox; palette_value: number; area: number }; frame: { bbox: NativeBox; interior_bbox: NativeBox } };
 type State = { epoch: number; pair: Pair; actor: string | null; controls: Record<string, NativePoint>; held: NativeBox | null;
   movedTogether: boolean; interaction: string | null; tried: string[]; evidence: string[]; frame: string; stopped: boolean };
-type SingleProposal = NativeProposal & { local: State; actor: NativeBox | null; subject: NativeBox; strategy: Strategy; needId: string; attempt: string };
+type ApproachLeg = { from: NativeBox; to: NativeBox; landing: MeasuredLanding };
+type SingleProposal = NativeProposal & { local: State; actor: NativeBox | null; subject: NativeBox; strategy: Strategy;
+  needId: string; attempt: string; walk?: ApproachLeg[] };
 type MultiProposal = NativeProposal & { deliveries: DeliveryState; actor: NativeBox; transfer: DeliveryStep; needId: string };
 type Proposal = SingleProposal | MultiProposal;
 const isMulti = (proposal: Proposal): proposal is MultiProposal => 'deliveries' in proposal;
@@ -173,10 +176,30 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       const goal = { kind: 'deliver_fitting_object', scope: ref.split(':revision:', 1)[0]!, subjects: ['matching_object', 'receiving_frame'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_or_object_retained_in_the_frame' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `carry-to-frame:${need.id}`, actions = [command];
+      const id = `carry-to-frame:${need.id}`;
+      const walk: ApproachLeg[] = [];
+      const delta = local.controls[action];
+      if (strategy === 'approach_matching_object' && actor && delta) {
+        let from = actor;
+        while (!near(from, subject) && walk.length < Math.min(remaining, maximumCommittedActions)) {
+          const direction = moves.filter(input => local.controls[input]).sort((a, b) =>
+            distance(center(shift(from, local.controls[a]!)), center(target))
+              - distance(center(shift(from, local.controls[b]!)), center(target)))[0];
+          const [left, top, right, bottom] = from, [dx, dy] = delta;
+          const to: NativeBox = [left + dx, top + dy, right + dx, bottom + dy];
+          if (direction !== action || distance(center(to), center(subject)) >= distance(center(from), center(subject))) break;
+          const landing = bindTranslationLanding(rows, actor, from, to);
+          if (!landing) break;
+          walk.push({ from, to, landing });
+          from = to;
+        }
+      }
+      const actions = walk.length > 1 ? walk.map(() => command) : [command];
       return { status: 'proposed', kind: family, actions, local, actor, subject, strategy, needId: need.id,
+        ...(walk.length > 1 ? { walk } : {}),
         attempt: JSON.stringify([observation.frame_hash, command.action_ref]),
-        steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        steps: actions.map((action, index) => ({ action, expected_after: walk[index]?.to ?? null })),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Bring the object to the frame that matches it', mode: learned ? 'solving' : 'exploration',
@@ -188,20 +211,33 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !isMulti(proposal) && proposal.walk) {
+        const { local } = proposal, leg = proposal.walk[index]!;
+        const actor = local.actor && find_body(observation, local.actor) as NativeEntity | null;
+        const admitted = local.epoch === observation.level_epoch && !!actor && equal(actor.bbox, leg.from)
+          && objectCandidates(observation, local.pair).some(object => equal(object.bbox, proposal.subject))
+          && sameLandingPixels(leg.landing, packet.frame_rows);
+        return { admitted, reason: admitted ? 'approach_landing_and_object_confirmed' : 'transport_context_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'transport_context_bound' : 'transport_context_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isMulti(proposal)) {
         const proof = assessDelivery(proposal.deliveries, proposal.transfer, after, first, second, proposal.actor);
         return { matched: proof !== null, seal_prefix: true, reason: proof?.reason ?? 'delivery_return_contradicted' };
       }
-      return { matched: null, seal_prefix: true, reason: 'observe_completed_motion_or_transport_interaction' };
+      const leg = proposal.walk?.[index];
+      const motion = leg && actorMotion({ ...proposal, actor: leg.from }, before, after);
+      const matched = leg ? !!motion && equal(motion.bbox, leg.to)
+        && objectCandidates(after, proposal.local.pair).some(object => equal(object.bbox, proposal.subject)) : null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'approach_translation_confirmed' : 'observe_completed_motion_or_transport_interaction' };
     },
-    record(before, after, command, first, second, proposal) {
+    record(before, after, command, first, second, proposal, index) {
       if (isMulti(proposal)) {
         if (after.levels_completed > before.levels_completed) {
           const { model } = proposal.deliveries;
@@ -214,7 +250,10 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
         }
         return { events: [] };
       }
-      const { local, strategy } = proposal;
+      const local = (index > 0 && state?.frame === before.frame_hash ? state : null) ?? proposal.local;
+      const { strategy } = proposal;
+      if (index > 0 && proposal.walk) proposal = { ...proposal, local, actor: proposal.walk[index]!.from,
+        attempt: JSON.stringify([before.frame_hash, command.action_ref]) };
       if (after.levels_completed > before.levels_completed && strategy === 'test_delivery_at_frame'
         && local.actor && local.interaction && measuredCrossing?.epoch === before.level_epoch) {
         previousDelivery = { actor: local.actor, crossing: measuredCrossing.crossing, motion: local.controls, interaction: local.interaction,

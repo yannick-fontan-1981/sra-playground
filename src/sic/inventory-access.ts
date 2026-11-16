@@ -4,6 +4,7 @@ import { complements, current_goal_witnesses, revalidate } from '../logos-engine
 import { _unique_action_conditioned_control_centered_grid_candidate, box, patch } from '../logos-engine/v6-inventory-measurements.ts';
 import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
@@ -13,6 +14,7 @@ import { inventoryPositionMatches, readInventoryReserve, readInventoryRoute, ver
 
 export const inventoryAccessId = 'sic_inventory_access';
 export const verifyInventoryTransferId = 'sic_verify_inventory_transfer';
+export const learnInventoryTransferId = 'sic_learn_inventory_transfer';
 export const inventoryAccessStrategies = navigationPrimitives;
 const situations = {
   approach_inventory_source: 'Approach the object whose shape matches a blocked passage',
@@ -37,7 +39,8 @@ type State = { epoch: number; scene: Scene; passageObserved: boolean; reserveRes
   visited: string[]; receipt: NativeRecord | null; meter: Meter | null; transfer: string | null; evidence: string[];
   count: number; stopped: boolean; emptySlot?: EmptySlot; recalled?: Boundary; recharge?: number };
 type Choice = { input: string; target: Cell; expected: NativePoint | null; interaction: boolean; need: Need };
-type LegacyProposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; here: NativePoint; needId: string };
+type InventoryWalk = { input: string; here: NativePoint; destination: Cell; pixels: NativeRows };
+type LegacyProposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; here: NativePoint; walk?: InventoryWalk[]; needId: string };
 type RouteState = { epoch: number; scene: InventoryRouteScene; position: InventoryPosition; route: InventoryRouteStep[];
   evidence: string[]; depositProven: boolean; stopped: boolean };
 type RouteProposal = NativeProposal & { routeState: RouteState; next: InventoryRouteStep; needId: string };
@@ -169,7 +172,8 @@ function commandFor(wanted: NativePoint, state: State, available: readonly strin
   return hint ?? available.find(input => !state.controls[input] && !tried(input)) ?? null;
 }
 
-export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
+export function createSicVerifyInventoryTransfer(family = verifyInventoryTransferId): NativeFamily<Proposal> {
+  const learns = family === learnInventoryTransferId;
   let state: State | null = null;
   let boundary: Boundary | null = null;
   let inventoryRoute: RouteState | null = null;
@@ -229,7 +233,7 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
         preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
   }
   return {
-    id: verifyInventoryTransferId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -247,7 +251,23 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
       const memory = !previous && boundary?.epoch === observation.level_epoch ? boundary : null;
       const continued = memory && recalledScene(memory, observation, rows);
       const recalled = previous?.recalled ?? (continued ? memory! : undefined);
-      const scene = previous?.scene ?? continued ?? initialScene(observation, rows);
+      const motion = learns && !previous && !recalled ? execution?.readPriorDirectionalScene?.((first, original) => {
+        const scene = initialScene(original, first);
+        if (!scene) return null;
+        const old = original.entities.filter(entity => entity.signature === scene.signature);
+        const moved = observation.entities.filter(entity => entity.signature === scene.signature);
+        if (old.length !== 1 || moved.length !== 1) return null;
+        const actor = old[0]!.bbox, arrival = moved[0]!.bbox;
+        const from = cellAt(scene, actor), to = cellAt(scene, arrival);
+        if (!from || !to || !same(to.at, scene.start) && !includeAll(to.values, scene.travel)) return null;
+        const delta = add(to.at, negative(from.at));
+        const distance = Math.abs(delta[0]) + Math.abs(delta[1]), meter = capturedMeter(first, rows, null, actor, arrival);
+        if (distance > 1 || distance === 0 && (!meter || !same(actor, arrival))) return null;
+        return { scene, delta, start: from.at, meter, translated: distance === 1 };
+      }) : null;
+      if (learns && !previous && !recalled && (!motion || !available.includes(motion.command)
+        || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch)) return null;
+      const scene = previous?.scene ?? continued ?? motion?.scene.scene ?? initialScene(observation, rows);
       if (!scene) return null;
       const actors = observation.entities.filter(entity => entity.signature === scene.signature);
       if (actors.length !== 1) return null;
@@ -255,10 +275,12 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
       if (!cell) return null;
       const here = cell.at;
       const local: State = previous ?? { epoch: observation.level_epoch, scene, passageObserved: false, reserveRestored: false, anotherTransferObserved: false,
-        controls: recalled?.controls ?? {}, tested: [],
-        visited: [key(scene.start), key(scene.link.source)], receipt: null,
-        meter: recalled ? capturedMeter(rows, rows, recalled.meter, actor, actor) : null, transfer: null,
-        evidence: recalled ? [recalled.slot.evidence, recalled.before, recalled.after] : [], count: 0, stopped: false,
+        controls: recalled?.controls ?? (motion?.scene.translated ? { [motion.command]: motion.scene.delta } : {}),
+        tested: motion && !motion.scene.translated ? [key(here) + ':' + motion.command] : [],
+        visited: [key(motion?.scene.start ?? scene.start), key(scene.link.source)], receipt: null,
+        meter: recalled ? capturedMeter(rows, rows, recalled.meter, actor, actor) : motion?.scene.meter ?? null, transfer: null,
+        evidence: recalled ? [recalled.slot.evidence, recalled.before, recalled.after] : motion ? [motion.beforeRef, motion.afterRef] : [],
+        count: Number(!!motion), stopped: false,
         ...(recalled ? { recalled } : {}) };
       const rejected = local.tested.filter(value => value.includes('>'));
       const route = (to: NativePoint) => path(scene, here, to, rejected, local.passageObserved);
@@ -290,7 +312,7 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
       })[0];
       if (!task) return null;
       const { need: purpose, target } = task;
-      const wanted = route(target.at)?.[0];
+      const pathToTarget = route(target.at), wanted = pathToTarget?.[0];
       const interaction = same(here, target.at) && (purpose === 'source' || purpose === 'reuse');
       const mode = execution?.reasoningMode ?? 'exploration';
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(r => r !== ref)];
@@ -317,9 +339,21 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
         subjects: ['carrier', 'transferable_object', 'complementary_passage', 'reserve'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_measured_access_and_continued_route' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'inventory-access:' + need.id, action = { action_ref: input, data: {} }, actions = [action];
-      return { status: 'proposed', kind: verifyInventoryTransferId, actions, local, actor, choice, here, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: expected }],
+      const id = 'inventory-access:' + need.id, action = { action_ref: input, data: {} };
+      const walk: InventoryWalk[] = [];
+      let at = here;
+      if (routeSupported && local.meter && !local.recalled) for (const delta of pathToTarget!.slice(0,
+        Math.min(remaining, maximumCommittedActions, 52 - local.count, Math.max(0, local.meter.length - 1)))) {
+        const input = available.find(input => same(local.controls[input], delta)), cell = destination(add(at, delta));
+        if (!input || !cell || local.tested.includes(key(at) + '>' + key(cell.at))) break;
+        walk.push({ input, here: at, destination: cell, pixels: patch(rows, cell.box) });
+        at = cell.at;
+      }
+      const actions = walk.length > 1 ? walk.map(step => ({ action_ref: step.input, data: {} })) : [action];
+      return { status: 'proposed', kind: family, actions, local, actor, choice, here, needId: need.id,
+        ...(walk.length > 1 ? { walk } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        steps: actions.map((action, index) => ({ action, expected_after: walk[index]?.destination.at ?? expected })),
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -333,11 +367,20 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !isRoute(proposal) && proposal.walk) {
+        const { local } = proposal, { meter, scene, receipt } = local, step = proposal.walk[index]!;
+        const carrier = observation.entities.find(entity => entity.signature === scene.signature);
+        const admitted = local.epoch === observation.level_epoch && !!carrier && same(cellAt(scene, carrier.bbox)?.at, step.here)
+          && same(patch(packet.frame_rows, step.destination.box), step.pixels)
+          && !!meter && readInventoryReserve(packet.frame_rows, meter) === meter.length - index
+          && (!receipt || display_matches(receipt, packet.frame_rows));
+        return { admitted, reason: admitted ? 'carrier_landing_and_reserve_confirmed' : 'carrier_or_destination_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_carrier_and_destination_bound' : 'carrier_or_destination_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isRoute(proposal)) {
@@ -347,15 +390,19 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
       }
       const actor = after.entities.find(entity => entity.signature === proposal.local.scene.signature)?.bbox;
       const current = actor && cellAt(proposal.local.scene, actor);
-      const matched = proposal.choice.expected ? !!current && same(proposal.choice.expected, current.at) : null;
+      const expected = proposal.walk?.[index]?.destination.at ?? proposal.choice.expected;
+      const matched = expected ? !!current && same(expected, current.at) : null;
       const recalled = proposal.local.recalled;
       if (recalled && matched && proposal.choice.need === 'passage' && same(current?.at, proposal.choice.target.at)) {
         const consumed = same(patch(second, recalled.slot.bounds), recalled.slot.pixels);
         return { matched: consumed, seal_prefix: true, reason: consumed ? 'recalled_object_used_at_matching_passage' : 'recalled_object_use_unconfirmed' };
       }
-      return { matched, seal_prefix: true, reason: 'compare_carrier_and_inventory_return' };
+      const meter = proposal.local.meter;
+      const stable = !!meter && readInventoryReserve(second, meter) === meter.length - index - 1;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length || !stable,
+        reason: 'compare_carrier_and_inventory_return' };
     },
-    record(before, after, action, first, second, proposal) {
+    record(before, after, action, first, second, proposal, index) {
       if (isRoute(proposal)) {
         const { routeState: local, next } = proposal;
         if (after.levels_completed > before.levels_completed && next.kind === 'finish' && boundary?.epoch === before.level_epoch) {
@@ -368,7 +415,10 @@ export function createSicVerifyInventoryTransfer(): NativeFamily<Proposal> {
           evidence: [...local.evidence.slice(-5), after.observation_ref] };
         return { events: [] };
       }
-      const { local, choice, actor, here } = proposal, scene = local.scene;
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local, scene = local.scene;
+      const step = proposal.walk?.[index], here = step?.here ?? proposal.here;
+      const actor = index > 0 ? before.entities.find(entity => entity.signature === scene.signature)?.bbox ?? proposal.actor : proposal.actor;
+      const choice = step ? { ...proposal.choice, expected: step.destination.at } : proposal.choice;
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) {
         const { receipt, emptySlot, meter } = local;
         if (after.levels_completed > before.levels_completed && choice.need === 'goal' && receipt && emptySlot && meter

@@ -3,6 +3,7 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { placeCascadePeers, planCascadeSetup, planParallelCascadeSetup } from './cascade-setup.ts';
 import type { CascadePeer, CascadePreparation, CascadeTile } from './cascade-setup.ts';
 
@@ -19,7 +20,8 @@ type Layout = { pitch: number; cells: NativePoint[]; cursorColor: number; gate: 
   setup?: Setup; targets?: NativePoint[] };
 type Scene = { layout: Layout; cursor: NativePoint };
 type Memory = { epoch: number; layout: Layout; routeRef: string | null; burstRef: string | null; failed: boolean };
-type Proposal = NativeProposal & { local: Memory; scene: Scene; next: NativePoint; launch: boolean; needId: string };
+type CursorStep = { ref: string; at: NativePoint };
+type Proposal = NativeProposal & { local: Memory; scene: Scene; next: NativePoint; launch: boolean; walk?: CursorStep[]; needId: string };
 const key = (p: NativePoint) => p.join(',');
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -201,17 +203,17 @@ function measureCascadeSetup(rows: NativeRows, known: CascadeMemory, previous: S
   return { scene: { cursor, layout }, step };
 }
 
-function nextMove(scene: Scene) {
+function cursorPath(scene: Scene): CursorStep[] | null {
   const { pitch, cells, gate } = scene.layout;
-  const queue: { at: NativePoint; first?: { ref: string; at: NativePoint } }[] = [{ at: scene.cursor }];
+  const queue: { at: NativePoint; steps: CursorStep[] }[] = [{ at: scene.cursor, steps: [] }];
   const available = new Set(cells.map(key)), seen = new Set([key(scene.cursor)]);
   for (const entry of queue) for (const [ref, dx, dy] of moves) {
     const at: NativePoint = [entry.at[0] + dx * pitch, entry.at[1] + dy * pitch], k = key(at);
     if (!available.has(k) || seen.has(k)) continue;
-    const first = entry.first ?? { ref, at };
-    if (same(at, gate)) return first;
+    const steps = [...entry.steps, { ref, at }];
+    if (same(at, gate)) return steps;
     seen.add(k);
-    queue.push({ at, first });
+    queue.push({ at, steps });
   }
   return null;
 }
@@ -252,8 +254,9 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
       const local = { epoch: observation.level_epoch, layout, routeRef: prior?.routeRef ?? null, burstRef: prior?.burstRef ?? null, failed: false };
       const launch = layout.setup ? !prepared?.step : layout.channel ? !layout.channel.covered : same(scene.cursor, layout.gate);
       const clearsChannel = !!layout.channel?.covered && same(scene.cursor, layout.gate);
+      const path = launch || prepared?.step || clearsChannel ? null : cursorPath(scene);
       const step = launch ? { ref: 'ACTION5', at: scene.cursor }
-        : prepared?.step ?? (clearsChannel ? parkCursor(scene, rows) : nextMove(scene));
+        : prepared?.step ?? (clearsChannel ? parkCursor(scene, rows) : path?.[0]);
       if (!step) return null;
 
       const ref = observation.observation_ref;
@@ -289,10 +292,14 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
         : launch ? 'Test the cascade with the earlier branch blocked and check the target branch'
         : 'Move the cursor to block the shorter path into the shared junction';
       const action = { action_ref: step.ref, data: {} };
+      const walk = strategy === 'P07' && !layout.setup && !layout.channel
+        ? path?.slice(0, Math.min(remaining, maximumCommittedActions)) : null;
+      const actions = walk && walk.length > 1 ? walk.map(leg => ({ action_ref: leg.ref, data: {} })) : [action];
       return {
         status: 'proposed', kind: family, local, scene, next: step.at, launch, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: launch ? null : step.at }],
+        ...(walk && walk.length > 1 ? { walk } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: launch ? null : walk?.[index]?.at ?? step.at })),
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Keep the cascade going toward the target', situation, evidence, agenda: navigation?.entries ?? [],
@@ -307,25 +314,29 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const scene = index > 0 ? retained(packet.frame_rows, proposal.local.layout) : null;
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!scene && proposal.local.epoch === observation.level_epoch && !!proposal.walk
+          && same(scene.cursor, proposal.walk[index - 1]!.at) && scene.layout.cells.some(cell => same(cell, proposal.walk![index]!.at));
       return { admitted, reason: admitted ? 'cascade_step_bound' : 'cascade_observation_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const next = retained(second, proposal.local.layout);
-      const matched = stepConfirmed(first, second, proposal, next);
+      const at = proposal.walk?.[index]?.at ?? proposal.next;
+      const matched = stepConfirmed(first, second, { ...proposal, next: at }, next);
       const transfer = matched && !proposal.launch && !!(proposal.scene.layout.channel || proposal.scene.layout.setup)
         && isCursor(patch(first, proposal.next));
-      return { matched, seal_prefix: true, reason: matched ? proposal.launch ? 'cascade_propagation_observed'
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: matched ? proposal.launch ? 'cascade_propagation_observed'
         : transfer ? 'cursor_focus_transferred' : 'cursor_landing_confirmed'
         : proposal.launch ? 'cascade_stalled_or_reset' : 'cursor_did_not_reach_predicted_cell' };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index) {
       if (after.levels_completed > before.levels_completed && proposal.local.layout.roles) {
         const { layout } = proposal.local;
         const priorMark = knowledge?.epoch === before.level_epoch - 1 ? knowledge.blockerMark : undefined;
@@ -340,9 +351,9 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
           : 'The observed cascade reached the target and advanced the level.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, launch } = proposal;
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local, { launch } = proposal;
       const next = retained(second, local.layout);
-      const matched = stepConfirmed(first, second, proposal, next);
+      const matched = stepConfirmed(first, second, { ...proposal, next: proposal.walk?.[index]?.at ?? proposal.next }, next);
       state = { ...local, failed: !matched, routeRef: matched && !launch ? after.observation_ref : local.routeRef,
         burstRef: matched && launch ? after.observation_ref : local.burstRef };
       return { events: [] };

@@ -2,11 +2,13 @@ import { CODE_DIRECTIONS, codeBits, codePosition, decodeCodeWord, encodeCodeWord
 import { geometricComponents, ObservedInputDomain, projection } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 import { bindExamples, readDemonstration, type CodeExample } from './code-demonstration.ts';
 
 export const codeRouteId = 'sic_code_route';
 export const verifyProgramConfigurationId = 'sic_verify_program_configuration';
+export const learnProgramConfigurationId = 'sic_learn_program_configuration';
 export const codeRouteStrategies = {
   observe_program_trace: 'Run the visible program to measure instruction effects',
   edit_program_step: 'Edit one instruction to build a route to the target',
@@ -21,8 +23,8 @@ type Effect = { motion: NativePoint; resize?: number; fromScales?: number[]; ref
 type Instruction = { word: string; motion: NativePoint; resize?: number; fromScale?: number };
 type State = { epoch: number; scene: Scene; effects: Record<string, Effect>; rejected: string[]; runs: string[];
   count: number; stopped: boolean; editRef?: string; examplesTried?: readonly number[] };
-type Proposal = NativeProposal & { local: State; program: CodeWord[]; start: Pose;
-  edit: CodeWord[] | null; run: string; needId: string; example?: number };
+type ProgramLeg = { program: CodeWord[]; edit: CodeWord[] | null; run: string };
+type Proposal = NativeProposal & ProgramLeg & { local: State; start: Pose; edits?: ProgramLeg[]; needId: string; example?: number };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2), Math.floor((t + b) / 2)];
 const cell = ([x, y]: NativePoint, { origin: [l, t], size }: Scene, scale = 1): NativeBox =>
@@ -94,11 +96,12 @@ function observedInstructions(proposal: Proposal, frames: readonly NativeRows[])
   });
 }
 
-export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
+export function createSicVerifyProgramConfiguration(family = verifyProgramConfigurationId): NativeFamily<Proposal> {
+  const learns = family === learnProgramConfigurationId;
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyProgramConfigurationId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(choosePreparedConfiguration, {}, await preparedConfigurationModule());
     },
@@ -106,9 +109,25 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 48) return null;
-      const scene = prior?.scene ?? findScene(observation, rows);
+      const adoption = learns && !prior ? await execution?.readPriorClickScene?.((before, original, action) => {
+        const scene = findScene(original, before);
+        if (!scene) return null;
+        const from = codeBits(before, scene), to = codeBits(rows, scene), pose = codePose(before, scene);
+        if (!from || !to || !pose || !same(pose, codePose(rows, scene))) return null;
+        const column = from.findIndex((word, index) => !same(word, to[index]));
+        if (column < 0 || to.some((word, index) => index !== column && !same(word, from[index]))) return null;
+        const difference = decodeCodeWord(from[column]!) ^ decodeCodeWord(to[column]!);
+        const bit = scene.columns[column]!.findIndex((_, i, bits) => difference === 1n << BigInt(bits.length - i - 1));
+        const bounds = scene.columns[column]![bit];
+        if (!bounds) return null;
+        const [l, t, r, b] = bounds, { x, y } = action.data;
+        return x! >= l && x! <= r && y! >= t && y! <= b ? scene : null;
+      }) : null;
+      if (learns && !prior && (!adoption || adoption.afterRef !== observation.observation_ref || adoption.levelEpoch !== observation.level_epoch)) return null;
+      const scene = prior?.scene ?? adoption?.scene ?? findScene(observation, rows);
       if (!scene || scene.columns.length > 12 || scene.columns[0]!.length > 24) return null;
-      const local = prior ?? { scene, epoch: observation.level_epoch, effects: {}, rejected: [], runs: [], count: 0, stopped: false };
+      const local: State = prior ?? { scene, epoch: observation.level_epoch, effects: {}, rejected: [], runs: [], count: 0, stopped: false,
+        ...(adoption ? { editRef: adoption.afterRef } : {}) };
       const program = codeBits(rows, scene), start = codePose(rows, scene);
       if (!program || !start) return null;
       const wanted = programFor(scene, start, program, local.effects);
@@ -143,9 +162,30 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
       const edit = editable ? program.map((word, index) => index === column ? encodeCodeWord(decodeCodeWord(word) ^ weights[bit]!) : word) : null;
       const addressed = editable ? scene.columns[column]![bit]! : example?.box ?? scene.button_box;
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence });
-      return { status: 'proposed', kind: verifyProgramConfigurationId, actions, local, program, start, edit, run, needId: need.id,
+      const steps = [{ action: command, expected_after: edit, point_binding: pointBinding }];
+      const edits: ProgramLeg[] = [{ program, edit, run }];
+      if (reuseEdit && edit && wanted) {
+        let current = edit;
+        while (edits.length < Math.min(remaining, maximumCommittedActions, 48 - local.count)) {
+          const column = wanted.findIndex((word, index) => !same(word, current[index]));
+          const run = JSON.stringify([scene.scaled ? start : start.at, current]);
+          if (column < 0 && local.runs.includes(run)) break;
+          const delta = column >= 0 ? decodeCodeWord(current[column]!) ^ decodeCodeWord(wanted[column]!) : 0n;
+          const bit = weights.findIndex(weight => (delta & weight) !== 0n);
+          if (column >= 0 && bit < 0) break;
+          const command = column >= 0 ? scene.bit_commands[column]![bit]! : scene.execute;
+          const next = column >= 0 ? current.map((word, i) => i === column ? encodeCodeWord(decodeCodeWord(word) ^ weights[bit]!) : word) : null;
+          const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence });
+          edits.push({ program: current, edit: next, run });
+          steps.push({ action: command, expected_after: next, point_binding: witness });
+          actions.push(command);
+          if (!next) break;
+          current = next;
+        }
+      }
+      return { status: 'proposed', kind: family, actions, local, program, start, edit, run, needId: need.id,
         ...(example ? { example: exampleIndex } : {}),
-        steps: [{ action: command, expected_after: null, point_binding: pointBinding }],
+        ...(edits.length > 1 ? { edits } : {}), steps,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -159,32 +199,39 @@ export function createSicVerifyProgramConfiguration(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const leg = proposal.edits?.[index], { scene } = proposal.local;
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!leg && proposal.local.epoch === observation.level_epoch && same(leg.program, codeBits(packet.frame_rows, scene))
+          && same(proposal.start, codePose(packet.frame_rows, scene));
       return { admitted, reason: admitted ? 'current_program_bound' : 'current_program_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.example !== undefined) {
         return { matched: realProgramUnchanged(proposal, second), seal_prefix: true, reason: 'verify_demonstration_preserves_real_program' };
       }
-      const matched = proposal.edit ? editMatches(proposal, second) : null;
-      return { matched, seal_prefix: true, reason: matched === null ? 'observe_program_trace'
+      const leg = proposal.edits?.[index] ?? proposal;
+      const matched = leg.edit ? editMatches({ ...proposal, edit: leg.edit }, second) : null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: matched === null ? 'observe_program_trace'
         : matched ? 'program_edit_observed' : 'program_edit_contradicted' };
     },
-    record(before, after, _command, _first, second, proposal, _index, frames) {
+    record(before, after, _command, _first, second, proposal, index, frames) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, edit, run } = proposal;
+      const leg = proposal.edits?.[index] ?? proposal;
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const { edit, run } = leg;
       if (edit) {
-        const confirmed = editMatches(proposal, second);
+        const confirmed = editMatches({ ...proposal, edit }, second);
         state = { ...local, stopped: !confirmed, count: local.count + 1, ...(confirmed ? { editRef: after.observation_ref } : {}) };
         return { events: [] };
       }
       const effects = { ...local.effects }, rejected = new Set(local.rejected);
       const example = proposal.example === undefined ? undefined : local.scene.examples?.[proposal.example];
       const isolated = !example || realProgramUnchanged(proposal, second) && frames.every(frame => realProgramUnchanged(proposal, frame));
-      const observed = example ? isolated ? readDemonstration(local.scene, example, frames) : [] : observedInstructions(proposal, frames);
+      const observed = example ? isolated ? readDemonstration(local.scene, example, frames) : []
+        : observedInstructions({ ...proposal, program: leg.program, local }, frames);
       for (const { word, motion, resize, fromScale } of observed) {
         if (rejected.has(word)) continue;
         const previous = effects[word];

@@ -3,9 +3,11 @@ import type { NativeBox, NativeFamily, NativeProgramHandle, NativePoint, NativeP
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const markedGaugeId = 'sic_marked_gauge';
 export const verifyGaugeEffectId = 'sic_verify_gauge_effect';
+export const learnGaugeEffectId = 'sic_learn_gauge_effect';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Axis = 0 | 1;
@@ -13,7 +15,8 @@ type Button = { box: NativeBox; point: NativePoint };
 type Gauge = { color: number; axis: Axis; origin: NativeBox; goal: NativePoint; buttons: Button[] };
 type Trial = { index: number; delta: number; evidence: string };
 type Memory = { epoch: number; gauges: Gauge[]; trials: Trial[]; count: number };
-type Proposal = NativeProposal & { memory: Memory; gauge: Gauge; index: number; button: Button; beforeLength: number; expected: number | null; needId: string };
+type GaugeLeg = { beforeLength: number; expected: number | null };
+type Proposal = NativeProposal & GaugeLeg & { memory: Memory; gauge: Gauge; index: number; button: Button; route?: GaugeLeg[]; needId: string };
 
 const span = (box: NativeBox, axis: Axis) => box[axis + 2]! - box[axis]!;
 const center = ([l, t, r, b]: NativeBox): NativePoint => [(l + r) / 2, (t + b) / 2];
@@ -65,11 +68,12 @@ function lengthOf(rows: NativeRows, gauge: Gauge) {
 
 function cap(gauge: Gauge) { return gauge.goal[gauge.axis] - gauge.origin[gauge.axis]; }
 
-export function createSicVerifyGaugeEffect(): NativeFamily<Proposal> {
+export function createSicVerifyGaugeEffect(family = verifyGaugeEffectId): NativeFamily<Proposal> {
+  const learns = family === learnGaugeEffectId;
   let state: Memory | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyGaugeEffectId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
     },
@@ -77,9 +81,23 @@ export function createSicVerifyGaugeEffect(): NativeFamily<Proposal> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(action => /^ACTION[1-5]$/.test(action))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const gauges = prior?.gauges ?? measure(rows);
+      const observed = learns && !prior ? await execution?.readPriorClickScene?.((first, _before, command) => {
+        const gauges = measure(first);
+        if (!gauges) return null;
+        const changed = gauges.flatMap((gauge, i) => {
+          const delta = lengthOf(rows, gauge) - lengthOf(first, gauge);
+          return delta ? [{ gauge, i, delta }] : [];
+        });
+        if (changed.length !== 1) return null;
+        const { gauge, i, delta } = changed[0]!, { x, y } = command.data;
+        const button = gauge.buttons.findIndex(({ box: [l, t, r, b] }) => x! >= l && x! <= r && y! >= t && y! <= b);
+        return button < 0 ? null : { gauges, index: i * 2 + button, delta };
+      }) : null;
+      if (learns && !prior && (!observed || observed.afterRef !== observation.observation_ref || observed.levelEpoch !== observation.level_epoch)) return null;
+      const gauges = prior?.gauges ?? observed?.scene.gauges ?? measure(rows);
       if (!gauges || (prior?.count ?? 0) >= 40) return null;
-      const memory = prior ?? { epoch: observation.level_epoch, gauges, trials: [], count: 0 };
+      const memory: Memory = prior ?? { epoch: observation.level_epoch, gauges, count: Number(!!observed),
+        trials: observed ? [{ index: observed.scene.index, delta: observed.scene.delta, evidence: observed.afterRef }] : [] };
       const gauge = gauges.find(g => lengthOf(rows, g) < cap(g));
       if (!gauge) return null;
       const beforeLength = lengthOf(rows, gauge);
@@ -100,18 +118,30 @@ export function createSicVerifyGaugeEffect(): NativeFamily<Proposal> {
       const objective = { kind: 'set_visible_gauge_to_marked_target', scope: ref.split(':revision:', 1)[0]!,
         subjects: [gauge.goal.join(',')], parentObjective: parent, satisfactionContract: 'gauge_reaches_visible_mark' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = verifyGaugeEffectId + ':' + need.id;
+      const id = family + ':' + need.id;
       const action = { action_ref: 'ACTION6', data: { x: button.point[0], y: button.point[1] } };
       const [x, y] = gauge.goal;
       const expected = old ? Math.min(cap(gauge), beforeLength + old.delta) : null;
+      const route: GaugeLeg[] = [{ beforeLength, expected }];
+      if (old && old.delta > 0 && expected !== null) {
+        let length = expected;
+        const limit = Math.min(remaining, maximumCommittedActions, 40 - memory.count);
+        while (length < cap(gauge) && route.length < limit) {
+          const next = Math.min(cap(gauge), length + old.delta);
+          route.push({ beforeLength: length, expected: next });
+          length = next;
+        }
+      }
+      const actions = route.map(() => action);
       const situation = old ? 'Repeat the measured increase up to the target tick' : 'Compare the gauge length before and after pressing the matching button';
       const [left, top, right, bottom] = gauge.origin;
       const measured: NativeBox = gauge.axis === 0 ? [left, top, left + beforeLength - 1, bottom]
         : [left, top, right, top + beforeLength - 1];
       return {
-        status: 'proposed', kind: verifyGaugeEffectId, memory, gauge, index, button, beforeLength, expected, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, point_binding: witness, expected_after: expected }],
+        status: 'proposed', kind: family, memory, gauge, index, button, beforeLength, expected, needId: need.id,
+        ...(route.length > 1 ? { route } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: route.map(step => ({ action, point_binding: witness, expected_after: step.expected })),
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -121,27 +151,31 @@ export function createSicVerifyGaugeEffect(): NativeFamily<Proposal> {
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const leg = proposal.route?.[index];
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!leg && proposal.memory.epoch === observation.level_epoch && lengthOf(packet.frame_rows, proposal.gauge) === leg.beforeLength;
       return { admitted, reason: admitted ? 'gauge_button_bound' : 'gauge_context_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { gauge, beforeLength, expected, needId, memory } = proposal;
+      const { gauge, needId, memory } = proposal, { beforeLength, expected } = proposal.route?.[index] ?? proposal;
       const value = lengthOf(second, gauge);
       const alone = memory.gauges.every(other => other.color === gauge.color
         || lengthOf(second, other) === lengthOf(first, other));
       const matched = alone && (expected === null ? value > beforeLength : value === expected);
-      return { matched, seal_prefix: true, reason: matched ? 'gauge_increase_confirmed' : 'predicted_gauge_increase_not_observed',
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'gauge_increase_confirmed' : 'predicted_gauge_increase_not_observed',
         ...(matched && value === cap(gauge) ? { sic_need: { id: needId, status: 'satisfied' as const } } : {}) };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, step) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { memory, gauge, index, beforeLength } = proposal;
+      const memory = (step > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.memory;
+      const { gauge, index } = proposal, { beforeLength } = proposal.route?.[step] ?? proposal;
       const alone = memory.gauges.every(other => other.color === gauge.color || lengthOf(second, other) === lengthOf(first, other));
       const delta = alone ? lengthOf(second, gauge) - beforeLength : 0;
       state = { ...memory, count: memory.count + 1,

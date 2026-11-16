@@ -15,7 +15,7 @@ type Tile = { point: NativePoint; lit: number };
 type Recovery = { failedSites: NativePoint[]; exposedSites: string[]; seeking: boolean };
 type Memory = { epoch: number; refs: string[]; rejected: string[]; steps: number; recovery?: Recovery };
 type Plan = { target: NativePoint; route: NativePoint[]; lit: number; toward: number; wait?: true; timed?: true; refuge?: true };
-type Proposal = NativeProposal & { scene: Scene; plan: Plan; local: Memory; attempt: string; needId: string };
+type Proposal = NativeProposal & { scene: Scene; plan: Plan; finish?: NativePoint[]; local: Memory; attempt: string; needId: string };
 const pitch = 4;
 const offsets = [[1, 0], [0, 1], [-1, 0], [0, -1]] as const;
 const key = (p: NativePoint) => p.join(',');
@@ -200,6 +200,23 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = litRouteId + ':' + need.id;
       const action: NativeCommand = { action_ref: input, data: plan.wait ? {} : { x: target[0], y: target[1] } };
+      const actions = [action];
+      const steps = [{ action, expected_after: plan.target, ...(witness ? { point_binding: witness } : {}) }];
+      let finish: NativePoint[] | undefined;
+      if (routeSupported && remaining > 1 && local.steps < 15 && !plan.wait && !plan.timed && !plan.refuge
+        && !local.recovery && !scene.guards && !same(plan.target, scene.goal)
+        && !local.rejected.includes(key(plan.target) + '/' + key(scene.goal))) {
+        const tiles = new Map(scene.tiles.map(tile => [key(tile.point), tile]));
+        finish = paths(tiles, plan.target).get(key(scene.goal))?.route;
+        if (finish?.length) {
+          const [x, y] = scene.goal, point: NativePoint = [x + 1, y + 1];
+          const point_binding = await ObservedInputDomain.makeLocusWitness(before, rows, point,
+            { reason: 'Exit at the end of the retained corridor, once every tile is confirmed unlit', evidence });
+          const action = { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } };
+          actions.push(action);
+          steps.push({ action, expected_after: scene.goal, point_binding });
+        }
+      }
       const situation = plan.wait ? (plan.timed ? 'Wait for the next measured safe crossing window' : 'Observe the patrols from the current stopping point')
         : plan.refuge ? 'Move to an unlit stopping point farther from the interrupted observation'
         : plan.timed ? `Cross during a safe window in the observed ${timing!.period}-frame patrol cycle`
@@ -207,8 +224,8 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
         : 'Move to a stopping point with lower visible exposure and assess the new lighting';
       return {
         status: 'proposed', kind: family, local, scene, plan, attempt: key(scene.actor) + '/' + key(plan.target), needId: need.id,
-        binding: { observation_ref: ref, level_epoch: before.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: plan.target, ...(witness ? { point_binding: witness } : {}) }],
+        ...(finish?.length ? { finish } : {}),
+        binding: { observation_ref: ref, level_epoch: before.level_epoch }, actions, steps,
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Reach the exit past the changing light', situation, evidence, agenda: navigation?.entries ?? [],
@@ -218,33 +235,43 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, before) {
+    before(proposal, index, packet, before) {
+      if (index === 1 && proposal.finish) {
+        const scene = measure(packet.frame_rows, proposal.scene);
+        const admitted = before.level_epoch === proposal.local.epoch && !!scene && !scene.guards
+          && same(scene.actor, proposal.plan.target) && same(scene.goal, proposal.scene.goal)
+          && proposal.finish.every(point => scene.tiles.some(tile => same(tile.point, point) && tile.lit === 0));
+        return { admitted, reason: admitted ? 'retained_exit_corridor_is_unlit' : 'lit_route_observation_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === before.observation_ref;
       return { admitted, reason: admitted ? 'lit_route_action_bound' : 'lit_route_observation_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const actor = stripes(second, proposal.scene.stripe, 0, proposal.scene.actor);
-      const matched = actor.length === 1 && same(actor[0]!, proposal.plan.target);
+      const origin = index === 0 ? proposal.scene.actor : proposal.plan.target;
+      const target = index === 0 ? proposal.plan.target : proposal.scene.goal;
+      const actor = stripes(second, proposal.scene.stripe, 0, origin);
+      const matched = actor.length === 1 && same(actor[0]!, target);
       if (matched && proposal.plan.timed && timing) {
         const phase = checkedPhase(timing, proposal, second);
         return { matched: !!phase, seal_prefix: true, reason: phase ? 'patrol_phase_and_arrival_confirmed' : 'patrol_phase_prediction_contradicted' };
       }
-      return { matched, seal_prefix: true, reason: matched
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: matched
         ? proposal.plan.wait ? 'stationary_observation_returned' : 'safe_stopping_point_observed' : 'path_refused_or_interrupted' };
     },
-    record(before, after, _action, first, second, proposal, _index, frames) {
+    record(before, after, _action, first, second, proposal, index, frames) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const actor = stripes(second, proposal.scene.stripe, 0, proposal.scene.actor);
-      const reached = actor.length === 1 && same(actor[0]!, proposal.plan.target);
-      const movedThroughAnimation = reached && frames.some(rows => stripes(rows, proposal.scene.stripe, 0)
-        .some(p => !same(p, proposal.scene.actor) && !same(p, proposal.plan.target)));
-      const { local } = proposal;
-      const { scene, plan } = proposal;
+      const local = (index > 0 && memory?.epoch === before.level_epoch ? memory : null) ?? proposal.local;
+      const scene = index === 0 ? proposal.scene : measure(first, proposal.scene) ?? { ...proposal.scene, actor: proposal.plan.target };
+      const plan = index === 0 ? proposal.plan : { target: scene.goal, route: proposal.finish!, lit: 0, toward: 0 } as Plan;
+      const actor = stripes(second, scene.stripe, 0, scene.actor);
+      const reached = actor.length === 1 && same(actor[0]!, plan.target);
+      const movedThroughAnimation = reached && frames.some(rows => stripes(rows, scene.stripe, 0)
+        .some(p => !same(p, scene.actor) && !same(p, plan.target)));
       const clock = memory?.epoch === before.level_epoch ? timing : null;
       let timingObserved = false, recovery = local.recovery;
       if (scene.guards && plan.wait && !plan.timed) {
@@ -265,10 +292,10 @@ export function createSicLitRoute(family = litRouteId): NativeFamily<Proposal> {
       if (plan.refuge && recovery) {
         recovery = { ...recovery, seeking: !reached, failedSites: reached ? recovery.failedSites : [...recovery.failedSites, plan.target] };
       }
-      observation = proposal.scene;
+      observation = scene;
       memory = { ...local, ...(recovery ? { recovery } : {}), steps: local.steps + 1,
         refs: movedThroughAnimation || timingObserved || recovery !== local.recovery ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
-        rejected: reached ? local.rejected : [...local.rejected, proposal.attempt] };
+        rejected: reached ? local.rejected : [...local.rejected, index === 0 ? proposal.attempt : key(scene.actor) + '/' + key(plan.target)] };
       if (plan.wait && !plan.timed && recovery?.seeking && recovery !== local.recovery) {
         return { events: [], reviewEvidence: 'The wait interrupted the sequence of patrol observations. Measure again from another stopping point.' };
       }

@@ -51,7 +51,7 @@ import { createSicCompareAvailableControls } from '../sic/compare-available-cont
 import { createSicFramedContact, learnPatternAccessId } from '../sic/framed-contact.ts';
 import { measureDirectionalMotion, type DirectionalMotion } from '../sic/observed-translation.ts';
 import { createSicTransportContact, learnTransportAccessId } from '../sic/transport-contact.ts';
-import { createSicVerifyBandTransfer } from '../sic/band-alignment.ts';
+import { createSicVerifyBandTransfer, learnBandTransferId } from '../sic/band-alignment.ts';
 import { createSicVerifySharedArrival } from '../sic/shared-arrival.ts';
 import { createSicOutlineService, learnOutlineServiceId, outlineServiceId } from '../sic/outline-service.ts';
 import { createSicObservedRouteIntervention } from '../sic/observed-route-intervention.ts';
@@ -76,13 +76,13 @@ import { createSicRemoteSupportRoute, learnRemoteAccessId } from '../sic/remote-
 import { createSicVerifyOccurrenceChoice } from '../sic/occurrence-recall.ts';
 import { createSicVerifySlotPermutation, learnSlotPermutationId } from '../sic/slot-permutation.ts';
 import { createSicSurfaceCopy, learnSurfaceCopyId } from '../sic/surface-copy.ts';
-import { createSicVerifyProgramConfiguration } from '../sic/code-route.ts';
+import { createSicVerifyProgramConfiguration, learnProgramConfigurationId } from '../sic/code-route.ts';
 import { createSicVerifyProfileTransfer } from '../sic/profile-transfer.ts';
 import { createSicOrderedReplenishment, learnOrderedReplenishmentId } from '../sic/ordered-replenishment.ts';
 import { createSicProgramOrigin, learnProgramOriginId } from '../sic/program-origin.ts';
 import { createSicVerifyPreviewPlacement } from '../sic/preview-placement.ts';
 import { createSicSymbolContribution } from '../sic/symbol-contribution.ts';
-import { createSicVerifyMarkedLattice } from '../sic/marked-lattice.ts';
+import { createSicVerifyMarkedLattice, learnMarkedLatticeId } from '../sic/marked-lattice.ts';
 import { createSicQueuedPlacement, learnQueuedPlacementId } from '../sic/queued-placement.ts';
 import { createSicLegendRecolor, matchExampleId } from '../sic/legend-recolor.ts';
 import { createSicVerifyPatternChoice } from '../sic/visual-pattern.ts';
@@ -96,13 +96,13 @@ import { createSicPeriodicProfileAlignment } from '../sic/periodic-profile-align
 import { createSicContrastControls, contrastProbeId } from '../sic/contrast-controls.ts';
 import { createSicFollowStableReference } from '../sic/framed-search.ts';
 import { createSicFramedReception, learnFramedReceptionId } from '../sic/framed-reception.ts';
-import { createSicWindowRelation } from '../sic/window-relation.ts';
+import { createSicWindowRelation, learnWindowRelationId } from '../sic/window-relation.ts';
 import { createSicAnimationContact, learnAnimationContactId } from '../sic/animation-contact.ts';
 import { coordinateObservedMotionId, createSicReflectedPlacement } from '../sic/reflected-placement.ts';
 import { createSicMaterialAssembly, learnMaterialAssemblyId } from '../sic/material-assembly.ts';
 import { createSicVerifyCoupledRoute } from '../sic/coupled-motion.ts';
 import { createSicVerifyConnectedRoute } from '../sic/material-route.ts';
-import { createSicVerifyInventoryTransfer } from '../sic/inventory-access.ts';
+import { createSicVerifyInventoryTransfer, learnInventoryTransferId } from '../sic/inventory-access.ts';
 import { createSicVerifyRemoteReplay, learnRemoteReplayId } from '../sic/replay-access.ts';
 import { createSicVerifyOrientedDelivery } from '../sic/oriented-delivery.ts';
 import { createSicIndicatedJump, learnIndicatedJumpId } from '../sic/indicated-jump.ts';
@@ -110,7 +110,7 @@ import { createSicHighlightedRoute, learnHighlightedRouteId } from '../sic/highl
 import { createSicPairedPassage, learnPairedPassageId } from '../sic/paired-passage.ts';
 import { createSicVerifyFrameContact, learnFrameAccessId } from '../sic/seated-contact.ts';
 import { createSicSwitchedSurface, learnSwitchedSurfaceId } from '../sic/switched-surface.ts';
-import { createSicVerifyGaugeEffect } from '../sic/marked-gauge.ts';
+import { createSicVerifyGaugeEffect, learnGaugeEffectId } from '../sic/marked-gauge.ts';
 import { createSicCoupledGaugeRoute } from '../sic/coupled-gauge-route.ts';
 import { createSicMergeForDemand } from '../sic/merge-for-demand.ts';
 import { createSicLinkedGroupRoute } from '../sic/linked-group-route.ts';
@@ -148,7 +148,7 @@ import { createSicVerifyCrossingRows } from '../sic/crossing-rows.ts';
 import { createSicVerifyParallelSymbolPrefixes } from '../sic/parallel-symbol-prefixes.ts';
 import { createSicVerifyTraceCoverage } from '../sic/trace-coverage.ts';
 import { createSicRadialConnection, learnRadialConnectionId } from '../sic/radial-connection.ts';
-import { createSicVerifyCaptureRoute } from '../sic/invited-capture.ts';
+import { createSicVerifyCaptureRoute, learnCaptureRouteId } from '../sic/invited-capture.ts';
 import { createSicVerifyBranchAlignment, learnBranchAlignmentId } from '../sic/branch-alignment.ts';
 import { createSicVerifyOrderedFeedback } from '../sic/feedback-trial.ts';
 import { createSicCatalogueComparison, revealedExampleId } from '../sic/catalogue-comparison.ts';
@@ -1521,7 +1521,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           ? receipt ??= freeze(measureDirectionalMotion(first.frame_rows, rows, context)) : null;
         this.readPriorDirectionalScene = project => {
           if (this.observation?.observation_ref !== context.afterRef) return null;
-          const scene = project(first.frame_rows);
+          const scene = project(first.frame_rows, before);
           return scene === null ? null : freeze({ ...context, scene });
         };
         this.readDirectionalView = (field, focus, references) => {
@@ -2751,7 +2751,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
-      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
+      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(), createSicVerifyBandTransfer(learnBandTransferId),
       createSicVerifySharedArrival(), createSicOutlineService(outlineServiceId, routeIntervention.learn),
       createSicOutlineService(learnOutlineServiceId, routeIntervention.learn), routeIntervention, createSicObservedSurvival(), createSicObservedRailTransfers(),
       createSicSettleMatchingEdges(), createSicColumnAlignment(),
@@ -2760,9 +2760,9 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicObservedCarrierReduction(), createSicObservedLinePlacement(), createSicObservedPolePair(), createSicObservedSharedRelations(),
       createSicObservedPatternLayout(), createSicObservedActuatorArrangement(),
       createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicRemoteSupportRoute(learnRemoteAccessId), createSicVerifyOccurrenceChoice(),
-      createSicVerifySlotPermutation(), createSicVerifySlotPermutation(learnSlotPermutationId), createSicSurfaceCopy(), createSicSurfaceCopy(learnSurfaceCopyId), createSicVerifyProgramConfiguration(), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicVerifyProfileTransfer(),
-      createSicOrderedReplenishment(), createSicOrderedReplenishment(learnOrderedReplenishmentId), createSicVerifyPreviewPlacement(), createSicSymbolContribution(), createSicVerifyMarkedLattice(),
-      createSicQueuedPlacement(), createSicQueuedPlacement(learnQueuedPlacementId), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVerifyPatternChoice(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId), createSicChartRoute(), createSicChartRoute(learnChartRouteId), createSicVerifyReferencePlacement(), createSicVerifyReferencePlacement(learnReferencePlacementId), createSicCarryToFrame(), createSicCarryToFrame(learnCarryToFrameId), createSicPortPairing(), createSicPortPairing(learnPortPairingId), createSicFollowStableReference(), createSicVerifySequenceEdits(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicDirectionalReception(learnDirectionalReceptionId), createSicWindowCoverage(), createSicWindowCoverage(learnWindowCoverageId), createSicVerifyPanelConfiguration(), createSicVerifyCrossingRows(), createSicVerifyTraceCoverage(), createSicRadialConnection(), createSicRadialConnection(learnRadialConnectionId), createSicVerifyCaptureRoute(), createSicVerifyBranchAlignment(), createSicVerifyBranchAlignment(learnBranchAlignmentId), createSicVerifyOrderedFeedback(), createSicCatalogueComparison(), createSicCatalogueComparison(revealedExampleId), createSicReceptionAccess(), createSicVerifyMarkerPlacement(), createSicFramedReception(), createSicFramedReception(learnFramedReceptionId), createSicWindowRelation(), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicReflectedPlacement(coordinateObservedMotionId), createSicMaterialAssembly(), createSicMaterialAssembly(learnMaterialAssemblyId), createSicTranslateCoupledPieces(), createSicVerifyCoupledRoute(), createSicVerifyConnectedRoute(), createSicVerifyInventoryTransfer(), createSicVerifyRemoteReplay(), createSicVerifyRemoteReplay(learnRemoteReplayId), createSicVerifyOrientedDelivery(), createSicIndicatedJump(), createSicIndicatedJump(learnIndicatedJumpId), createSicHighlightedRoute(), createSicHighlightedRoute(learnHighlightedRouteId), createSicPairedPassage(), createSicPairedPassage(learnPairedPassageId), createSicVerifyFrameContact(), createSicVerifyFrameContact(learnFrameAccessId), createSicSwitchedSurface(), createSicSwitchedSurface(learnSwitchedSurfaceId), createSicVerifyGaugeEffect(), createSicCoupledGaugeRoute(), createSicVerifyReactiveMotion(), createSicVerifyChannelAccess(), createSicVerifyCompartmentGrowth(), createSicVerifyPointAccess(), createSicMergeForDemand(), createSicVerifyLinkedMotion(), createSicLinkedGroupRoute(), createSicVerifyRemovableSupport(), createSicVerifyRemovableSupport(learnRemovableSupportId), createSicProtectGravityRoute(), createSicGatedCascade(), createSicGatedCascade(learnCascadeId), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicLitRoute(learnLitRouteId), createSicPivotCargo(), createSicPivotCargo(learnPivotCargoId), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicNestedPassage(learnNestedPassageId), createSicLinkOpenings(), createSicLinkOpenings(learnLinkOpeningsId), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicArrangeTurnPosts(learnTurnPostsId), createSicCavityAccess(), createSicLearnCorrespondence(), createSicLearnCorrespondence(learnRepeatedCellsId), createSicCompareAvailableControls(), createSicPublicInputExploration(), createSicRecheckDirectionalControls(), createSicTrialRepeatedLinearControls(), createSicContrastControls(contrastProbeId),
+      createSicVerifySlotPermutation(), createSicVerifySlotPermutation(learnSlotPermutationId), createSicSurfaceCopy(), createSicSurfaceCopy(learnSurfaceCopyId), createSicVerifyProgramConfiguration(), createSicVerifyProgramConfiguration(learnProgramConfigurationId), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicVerifyProfileTransfer(),
+      createSicOrderedReplenishment(), createSicOrderedReplenishment(learnOrderedReplenishmentId), createSicVerifyPreviewPlacement(), createSicSymbolContribution(), createSicVerifyMarkedLattice(), createSicVerifyMarkedLattice(learnMarkedLatticeId),
+      createSicQueuedPlacement(), createSicQueuedPlacement(learnQueuedPlacementId), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVerifyPatternChoice(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId), createSicChartRoute(), createSicChartRoute(learnChartRouteId), createSicVerifyReferencePlacement(), createSicVerifyReferencePlacement(learnReferencePlacementId), createSicCarryToFrame(), createSicCarryToFrame(learnCarryToFrameId), createSicPortPairing(), createSicPortPairing(learnPortPairingId), createSicFollowStableReference(), createSicVerifySequenceEdits(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicDirectionalReception(learnDirectionalReceptionId), createSicWindowCoverage(), createSicWindowCoverage(learnWindowCoverageId), createSicVerifyPanelConfiguration(), createSicVerifyCrossingRows(), createSicVerifyTraceCoverage(), createSicRadialConnection(), createSicRadialConnection(learnRadialConnectionId), createSicVerifyCaptureRoute(), createSicVerifyCaptureRoute(learnCaptureRouteId), createSicVerifyBranchAlignment(), createSicVerifyBranchAlignment(learnBranchAlignmentId), createSicVerifyOrderedFeedback(), createSicCatalogueComparison(), createSicCatalogueComparison(revealedExampleId), createSicReceptionAccess(), createSicVerifyMarkerPlacement(), createSicFramedReception(), createSicFramedReception(learnFramedReceptionId), createSicWindowRelation(), createSicWindowRelation(learnWindowRelationId), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicReflectedPlacement(coordinateObservedMotionId), createSicMaterialAssembly(), createSicMaterialAssembly(learnMaterialAssemblyId), createSicTranslateCoupledPieces(), createSicVerifyCoupledRoute(), createSicVerifyConnectedRoute(), createSicVerifyInventoryTransfer(), createSicVerifyInventoryTransfer(learnInventoryTransferId), createSicVerifyRemoteReplay(), createSicVerifyRemoteReplay(learnRemoteReplayId), createSicVerifyOrientedDelivery(), createSicIndicatedJump(), createSicIndicatedJump(learnIndicatedJumpId), createSicHighlightedRoute(), createSicHighlightedRoute(learnHighlightedRouteId), createSicPairedPassage(), createSicPairedPassage(learnPairedPassageId), createSicVerifyFrameContact(), createSicVerifyFrameContact(learnFrameAccessId), createSicSwitchedSurface(), createSicSwitchedSurface(learnSwitchedSurfaceId), createSicVerifyGaugeEffect(), createSicVerifyGaugeEffect(learnGaugeEffectId), createSicCoupledGaugeRoute(), createSicVerifyReactiveMotion(), createSicVerifyChannelAccess(), createSicVerifyCompartmentGrowth(), createSicVerifyPointAccess(), createSicMergeForDemand(), createSicVerifyLinkedMotion(), createSicLinkedGroupRoute(), createSicVerifyRemovableSupport(), createSicVerifyRemovableSupport(learnRemovableSupportId), createSicProtectGravityRoute(), createSicGatedCascade(), createSicGatedCascade(learnCascadeId), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicLitRoute(learnLitRouteId), createSicPivotCargo(), createSicPivotCargo(learnPivotCargoId), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicNestedPassage(learnNestedPassageId), createSicLinkOpenings(), createSicLinkOpenings(learnLinkOpeningsId), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicArrangeTurnPosts(learnTurnPostsId), createSicCavityAccess(), createSicLearnCorrespondence(), createSicLearnCorrespondence(learnRepeatedCellsId), createSicCompareAvailableControls(), createSicPublicInputExploration(), createSicRecheckDirectionalControls(), createSicTrialRepeatedLinearControls(), createSicContrastControls(contrastProbeId),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', withdrawPrimaryFamily: recovery.solver === 'sic-fallback',
       adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
