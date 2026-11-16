@@ -39,12 +39,15 @@ type Piece = { id: string; bbox: NativeBox; center: NativePoint; point: NativePo
   body_palette: number; fringe: number[][]; support_source?: string };
 type Child = Piece & { core_signature: string; marks: number[][]; source_ref: string };
 type AssemblyStrategy = Exclude<keyof typeof materialAssemblyStrategies, 'P02' | 'P05'>;
-type Request = { bbox: NativeBox; point: NativePoint; descriptor: { palette: number } };
+type Request = { bbox: NativeBox; point: NativePoint;
+  descriptor: { palette: number; width: number; height: number; mask: readonly NativePoint[] } };
 type Delivery = { core: string; destination: Request['descriptor']; evidence: string[] };
 type SmallPart = { bbox: NativeBox; color: number; mask: number[][] };
 type Control = { bbox: NativeBox; point: NativePoint; epoch: number; projection: NativeRows; source_ref: string };
+type TurnWitness = { projection: NativeRows; contact: NativePoint; ref: string };
 type Calibration = { size: NativePoint; evidence: string[] };
-type CompletedAssembly = { nextEpoch: number; score: number; deliveries: Delivery[]; parts?: SmallPart[]; calibrations?: Calibration[] };
+type CompletedAssembly = { nextEpoch: number; score: number; deliveries: Delivery[];
+  parts?: SmallPart[]; calibrations?: Calibration[]; turn?: TurnWitness };
 type Scene = { carriers: Piece[]; source_ref: string };
 type Replacement = { selected: Piece; removed: Piece[]; evidence: string[] };
 type State = { epoch: number; frameHash: string; steps: number; marked: Piece | null; replacement: Replacement | null; children: Child[];
@@ -79,6 +82,30 @@ const visibleCore = (child: Child) => typedMaterialDigest(child.marks);
 const rotateMarks = (marks: number[][], turns: number) => rotatedTypedMarks(marks, turns)
   .map(([value, dx, dy]) => [value!, dx || 0, dy || 0]);
 
+function resolveVisibleDescendants(children: Child[], requests: Request[], rows: NativeRows): Child[] {
+  const fits = children.filter(child => {
+    const targets = requests.filter(request => request.descriptor.palette === child.body_palette);
+    if (targets.length !== 1) return false;
+    const { width, height, mask, palette } = targets[0]!.descriptor;
+    const [cx, cy] = child.center, x = cx - (width - 1) / 2, y = cy - (height - 1) / 2;
+    if (!Number.isInteger(x) || !Number.isInteger(y)) return false;
+    const contained = new Set(mask.map(point => point.join(',')));
+    const marks = new Map(child.marks.map(([value, dx, dy]) => [[cx + dx!, cy + dy!].join(','), value]));
+    let visible = 0;
+    for (let v = 0; v < height; v++) for (let u = 0; u < width; u++) {
+      const ink = rows[y + v]?.[x + u], needed = contained.has([u, v].join(','));
+      if (ink === palette) {
+        if (!needed) return false;
+        visible++;
+      } else if (needed && (ink === undefined || marks.get([x + u, y + v].join(',')) !== ink)) return false;
+    }
+    return visible >= Math.max(2, Math.ceil(mask.length / 2));
+  });
+  if (!fits.length) return children;
+  const resolved = new Set(fits.map(child => child.body_palette));
+  return [...children.filter(child => !resolved.has(child.body_palette)), ...fits];
+}
+
 function reorientation(child: Child, requests: Request[], deliveries: Delivery[], step: number): Choice | null {
   const options = [1, 2, 3].flatMap(count => {
     const core = typedMaterialDigest(rotateMarks(child.marks, count * step));
@@ -88,6 +115,57 @@ function reorientation(child: Child, requests: Request[], deliveries: Delivery[]
   const option = options[0];
   return option && options.every(item => same(item.request.bbox, option.request.bbox))
     ? { ...option, child, piece: child, reorient: true } : null;
+}
+
+function matchOrientedDeliveries(children: Child[], requests: Request[], deliveries: Delivery[], step: number, selected: Child | null) {
+  if (!children.length || requests.length > 12) return null;
+  type Option = { request: Request; child: Child; recalled: Delivery; index: number; turns: number };
+  const options = children.map(child => {
+    const choices = new Map<number, Option>();
+    for (let turns = 0; turns < 4; turns++) {
+      const marks = turns ? rotateMarks(child.marks, turns * step) : child.marks, core = typedMaterialDigest(marks);
+      for (const [index, request] of requests.entries()) {
+        if (choices.has(index)) continue;
+        const recalled = deliveries.find(delivery => delivery.core === core && pythonEqual(delivery.destination, request.descriptor));
+        if (recalled) choices.set(index, { request, child, recalled, index, turns });
+      }
+    }
+    return [...choices.values()];
+  });
+  type Assignment = { cost: number; choices: Option[] };
+  const memo = new Map<number, Assignment | null>();
+  function assign(index: number, occupied: number): Assignment | null {
+    if (index === options.length) return { cost: 0, choices: [] };
+    const key = index * 2 ** requests.length + occupied;
+    if (memo.has(key)) return memo.get(key)!;
+    let best: Assignment | null = null;
+    for (const option of options[index]!) {
+      const bit = 1 << option.index;
+      if (occupied & bit) continue;
+      const rest = assign(index + 1, occupied | bit);
+      if (rest && (!best || rest.cost + option.turns < best.cost)) {
+        best = { cost: rest.cost + option.turns, choices: [option, ...rest.choices] };
+      }
+    }
+    memo.set(key, best);
+    return best;
+  }
+  const choices = assign(0, 0)?.choices;
+  return selected ? choices?.find(choice => choice.child.id === selected.id) ?? null : choices?.[0] ?? null;
+}
+
+function locateRetainedTurn(rows: NativeRows, observation: NativeObservation, retained: TurnWitness): Control | null {
+  const { projection, contact, ref } = retained;
+  const width = projection[0]?.length ?? 0, height = projection.length;
+  if (!width || !height) return null;
+  const matches: Control[] = [];
+  for (let y = 0; y + height <= rows.length; y++) for (let x = 0; x + width <= rows[0]!.length; x++) {
+    if (!projection.every((row, v) => row.every((ink, u) => rows[y + v]?.[x + u] === ink))) continue;
+    matches.push({ bbox: [x, y, x + width - 1, y + height - 1], point: [x + contact[0], y + contact[1]],
+      epoch: observation.level_epoch, projection, source_ref: ref });
+    if (matches.length > 1) return null;
+  }
+  return matches[0] ?? null;
 }
 
 function observedCoreTurn(child: Child, control: Control, before: NativeRows, after: NativeRows, expected?: number) {
@@ -163,10 +241,12 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       const [controls, parts] = !prior && memory?.parts && memory.calibrations?.length
         ? novelTypedControls(memory.parts, rows, observation, { ...config, observed_body_shapes: memory.calibrations }) as [Control[], SmallPart[]]
         : [[], prior ? [] : typedSmallParts(rows) as SmallPart[]];
+      const retainedControl = !prior && memory?.turn ? locateRetainedTurn(rows, observation, memory.turn) : null;
+      const control = retainedControl ?? (controls.length === 1 ? controls[0]! : null);
       const local: State = prior ?? { epoch: observation.level_epoch, frameHash: observation.frame_hash, steps: acquired ? 1 : 0,
         marked: acquired?.scene ?? null, replacement: null, children: [], selected: null, filled: [], associations: {},
         calibrations: acquired ? calibrateMark([], acquired.scene, evidenceRefs) : [], evidence: evidenceRefs, stopped: false,
-        initialParts: parts, ...(controls.length === 1 ? { control: controls[0]! } : {}) };
+        initialParts: parts, ...(control ? { control } : {}) };
       const scene = measureTypedCarriers(rows, observation, { ...config, observed_body_shapes: local.calibrations }) as Scene | null;
       const carriers = scene?.carriers ?? [];
       let select: Choice | null = null, deliver: Choice | null = null, pair: Choice | null = null, turn: Choice | null = null;
@@ -174,8 +254,18 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
         const transferred = memory?.deliveries ?? [];
         const requests = (typedMaterialRequests(rows, observation, local.filled.map(shape)) as Request[])
           .filter(request => !local.filled.some(box => same(request.bbox, box)));
+        const produced = [...local.children].sort(byPosition).filter(child => typedChildPresent(child, rows));
+        const assignment = memory?.turn && local.control && typedControlMatches(local.control, rows, observation.level_epoch)
+          ? matchOrientedDeliveries(produced, requests, transferred, local.rotation?.turns ?? 1, local.selected) : null;
+        if (assignment) {
+          const { child, request, recalled, turns } = assignment;
+          const choice = { piece: child, child, request, recalled, reorient: !!turns };
+          if (!local.selected) select = choice;
+          else if (turns) turn = { ...choice, piece: local.control! };
+          else deliver = { ...choice, piece: request };
+        }
         const children = local.selected ? [local.selected] : [...local.children].sort(byPosition);
-        for (const child of children) {
+        for (const child of assignment ? [] : children) {
           if (!typedChildPresent(child, rows)) continue;
           const core = visibleCore(child);
           const remembered = transferred.filter(delivery => delivery.core === core);
@@ -190,7 +280,7 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
           else select = { piece: child, child, request, recalled };
           break;
         }
-        if (!select && !deliver && local.control && typedControlMatches(local.control, rows, observation.level_epoch)) {
+        if (!select && !deliver && !turn && local.control && typedControlMatches(local.control, rows, observation.level_epoch)) {
           for (const child of children) {
             if (!typedChildPresent(child, rows)) continue;
             const choice = reorientation(child, requests, transferred, local.rotation?.turns ?? 1);
@@ -279,8 +369,14 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
         const finalDelivery = strategy === 'deliver_produced_piece' && deliveryReceipt(choice, before, after);
         const deliveries = local.deliveries ?? [];
         if (finalDelivery && new Set(deliveries.map(delivery => delivery.core)).size >= 2) {
+          const retained = local.control && local.rotation ? {
+            projection: local.control.projection,
+            contact: [local.control.point[0] - local.control.bbox[0], local.control.point[1] - local.control.bbox[1]] as NativePoint,
+            ref: local.rotation.evidence.at(-1)!,
+          } : null;
           completed = { nextEpoch: after.level_epoch, score: after.levels_completed, deliveries: [...deliveries, finalDelivery],
-            ...(local.initialParts ? { parts: local.initialParts } : {}), calibrations: local.calibrations };
+            ...(local.initialParts ? { parts: local.initialParts } : {}), calibrations: local.calibrations,
+            ...(retained ? { turn: retained } : {}) };
         }
         return { events: [] };
       }
@@ -300,7 +396,9 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
         next.marked = null;
         next.stopped = !next.replacement;
       } else if (strategy === 'open_replacement_material' && local.replacement) {
-        next.children = typedMaterialDescendants(local.replacement, first, second, after) as Child[];
+        const descendants = typedMaterialDescendants(local.replacement, first, second, after) as Child[];
+        next.children = resolveVisibleDescendants(descendants, typedMaterialRequests(second, after,
+          local.filled.map(shape)) as Request[], second);
         next.replacement = null;
         next.stopped = !next.children.length;
       } else if (strategy === 'select_produced_piece' && choice.child && typedLocalChildMark(choice.child, first, second)) {
