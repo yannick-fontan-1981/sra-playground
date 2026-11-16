@@ -28,7 +28,7 @@ const phaseLabels = {
 type Step = { action: NativeCommand; cursor: Point; mode: 'acquire' | 'calibrate' | 'cycle' | 'move';
   poses?: readonly Point[]; expected_after: readonly Point[] | null; acquisition_focus_projection?: Point; unobserved_support_pixels?: number;
   materialContact?: MaterialContact };
-type Proposal = NativeProposal & { steps: readonly [Step]; measured: NativeRecord; count: number; needId: string; dismissedContacts?: readonly string[] };
+type Proposal = NativeProposal & { steps: readonly Step[]; measured: NativeRecord; count: number; needId: string; dismissedContacts?: readonly string[] };
 
 const command = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 const samePoint = (a: Point, b: Point) => a[0] === b[0] && a[1] === b[1];
@@ -137,6 +137,7 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       }
 
       let step: Step | null = null;
+      const route: Step[] = [];
       let destination: NativeBox | null = null;
       let finalPlacement: NativeBox | null = null;
       let colorSource: NativeBox | undefined;
@@ -168,13 +169,23 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
             if (measured.selector && keys.includes(measured.selector)) step = { action: command(measured.selector), cursor, mode: 'cycle',
               poses: measured.poses, expected_after: null };
           } else {
-            const move = [...measured.motion].find(([key, vector]) => keys.includes(key) && distance(constellationMinus(delta, vector)) < distance(delta));
-            if (move) {
-              const next = [...measured.poses];
-              next[active] = constellationPlus(cursor, move[1]);
-              step = { action: command(move[0]), cursor, mode: 'move', poses: measured.poses, expected_after: next,
-                unobserved_support_pixels: constellationOutside(constellationBodyPixels(measured.bodies[active]!, next[active]!), model).size };
+            let poses = measured.poses;
+            let at = cursor;
+            for (let i = 0; i < Math.min(remaining, 64 - issued, 16); i++) {
+              const offset = constellationMinus(goal[active]!, at);
+              const move = [...measured.motion].find(([key, vector]) => keys.includes(key)
+                && distance(constellationMinus(offset, vector)) < distance(offset));
+              if (!move) break;
+              const next = [...poses];
+              next[active] = constellationPlus(at, move[1]);
+              const hidden = constellationOutside(constellationBodyPixels(measured.bodies[active]!, next[active]!), model).size;
+              if (hidden && route.length) break;
+              route.push({ action: command(move[0]), cursor: at, mode: 'move', poses, expected_after: next, unobserved_support_pixels: hidden });
+              if (hidden) break;
+              poses = next;
+              at = next[active]!;
             }
+            step = route[0] ?? null;
           }
         }
       }
@@ -194,8 +205,9 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
         subjects: ['selected_piece', 'other_pieces', 'compatible_markers'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_observed_marker_coverage' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'marker-coverage:' + need.id, actions = [step.action];
-      return { status: 'proposed', kind: verifyMarkerPlacementId, actions, steps: [step], measured: measured.state(), count: issued, needId: need.id,
+      const id = 'marker-coverage:' + need.id, steps = route.length ? route : [step];
+      const actions = steps.map(leg => leg.action);
+      return { status: 'proposed', kind: verifyMarkerPlacementId, actions, steps, measured: measured.state(), count: issued, needId: need.id,
         dismissedContacts: dismissed,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch, levels_completed: observation.levels_completed },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -224,11 +236,12 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       if (contactObserved(measured, step, second)) return { matched: true, seal_prefix: true, reason: 'observed_material_change_with_preserved_supports' };
       const result = measured.after(proposal, index, before, after, first, second);
       if (step.materialContact?.expected && result.matched) return { matched: false, seal_prefix: true, reason: 'material_contact_without_color_change' };
-      return { matched: result.matched, seal_prefix: true, reason: result.reason };
+      return { matched: result.matched, seal_prefix: result.seal_prefix, reason: result.reason };
     },
     async record(before, after, command, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const measured = measurements(proposal.measured);
+      const retained = index > 0 && count === proposal.count + index && snapshot?.epoch === before.level_epoch;
+      const measured = measurements(retained ? snapshot : proposal.measured);
       const step = proposal.steps[index]!, contact = step.materialContact;
       dismissedContacts = proposal.dismissedContacts ?? [];
       if (contact && measured.active !== null) {
@@ -242,7 +255,7 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       await measured.record(before, after, command, first, second, proposal, index);
       measured.events = [];
       snapshot = measured.state();
-      count = proposal.count + 1;
+      count = proposal.count + index + 1;
       return { events: [] };
     },
     state: () => ({ snapshot, count, dismissedContacts }),

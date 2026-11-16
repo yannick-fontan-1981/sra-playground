@@ -1,5 +1,43 @@
 # Actions continues de SIC sur les 100 premiers niveaux
 
+## Couverture après extension des trajets
+
+Les **100 niveaux 1** sont gagnés en SIC seul. Les **1 248 commandes** et tous les retours publics, animations comprises, sont identiques à ceux du parcours de référence. La comparaison utilise une empreinte de la commande et de chaque paquet de retour. Les reprises de décision passent de **1 105 à 1 026**.
+
+**12 jeux sur 100** exécutent au moins deux commandes sous un même plan, contre 3 au départ. Les 32 séries se répartissent en 27 `move-path`, 4 `click-path` et 1 `mix-path`. Une série interrompue avant sa deuxième commande est exclue. Dans une série mixte, le journal doit montrer au moins un déplacement directionnel et un clic effectifs dans le même plan.
+
+| Jeu | Type de série | Longueurs des séries | Reprises avant → après | Délai médian dans une série |
+| --- | --- | --- | ---: | ---: |
+| AR25 | Déplacements | 4, 10 | 16 → 4 | 54 ms |
+| CN04 | Déplacements | 11 | 17 → 7 | 24 ms |
+| COLM | Déplacements | 3, 2 | 16 → 13 | 29 ms |
+| DC22 | Déplacements et mixte | 2, 2, 2, 2, 2, 2, 2 | 21 → 14 | 27 ms |
+| GABA | Déplacements | 6, 4, 8, 6, 8, 4, 2 | 15 → 15 | 19 ms |
+| HANO | Clics | 2, 2, 2 | 2 → 2 | 23 ms |
+| LS20 | Déplacements | 6, 5 | 5 → 5 | 29 ms |
+| M0R0 | Déplacements | 15 | 18 → 4 | 22 ms |
+| RE86 | Déplacements | 11, 4 | 25 → 12 | 33 ms |
+| SC25 | Déplacements | 2, 2, 2 | 16 → 13 | 29 ms |
+| TR87 | Déplacements | 13 | 25 → 13 | 26 ms |
+| ZIPP | Clics | 6 | 7 → 2 | 26 ms |
+
+La campagne après extension utilise quatre processus. Les délais incluent le retour du jeu et ses contrôles. La comparaison entre campagnes porte sur les parcours et le nombre de reprises de décision.
+
+### Les 88 jeux sans série au niveau 1
+
+Le regroupement décrit les commandes jouées pendant la résolution.
+
+- **Déplacements et clics (20)** — BP35, CLRS, COMB, CWSE, GIGO, GRAV, GRIL, KA59, KATA, KLOT, LF52, ONDE, PRTL, REWI, SELE, TEQU, THER, TRIA, VOIS, WEAV.
+- **Déplacements sans clic (27)** — AS66, CASC, CD82, CGWL, ELAS, ESCT, ETAG, FITE, FOGW, FUIT, G50T, GMAP, KEYD, LKEY, LS19, POLA, PORT, REGN, SEQN, SIGN, SK48, SKBN, SNAR, SP80, SWCH, TU93, WA30.
+- **Clics uniquement (31)** — AMZE, CATL, CATR, CAVA, CONN, CRAF, DAME, DICO, DNOI, EVAS, FT09, GARE, GORI, HOLE, ISOS, LIFE, LOGI, LP85, MEMO, PIPE, R11L, S5I5, SERI, SU15, SYME, TICT, TN36, TRCP, UPST, VALV, VC33.
+- **Autres commandes sans déplacement directionnel (10)** — GLOB, HPDL, MIND, MOTO, RECR, RSWP, SB26, SMLP, SPOR, STCK.
+
+### SIC Fallback
+
+Les essais ciblés retirent la famille principale et restent sous l’autorité de SIC seul. Les trois formats sont observés au niveau 1. HANO enchaîne deux clics sous `sic_learn_support_moves` après deux dépôts confirmés. Ses six commandes et leurs retours publics sont identiques à ceux du repli avant cette extension. DC22 enchaîne des déplacements et une série mixte après retrait de `sic_remote_support_route`. AR25, GABA, LS20, SC25 et TR87 enchaînent des déplacements. PORT gagne sans série. ZIPP s’arrête au niveau 1 après 84 commandes, faute de famille de repli applicable.
+
+## Référence avant extension
+
 La campagne locale utilise SIC seul sur le commit `e483a9d5`, à trois processus. Chaque passage part de l’image initiale et s’arrête à la première victoire du niveau 1. Une série contient plusieurs commandes exécutées sous le même plan engagé. Le délai est mesuré entre les lancements de deux commandes de cette série et inclut le retour du jeu et ses contrôles. Les délais mesurés dépendent aussi de la concurrence des processus.
 
 Les **100 niveaux 1** sont gagnés en **1 248 commandes SIC seul**. **3 jeux sur 100** exécutent une série continue. Les 12 séries produisent les mesures suivantes.
@@ -12,7 +50,7 @@ Les **100 niveaux 1** sont gagnés en **1 248 commandes SIC seul**. **3 jeux s
 
 Parmi les 97 jeux sans série observée, 55 utilisent au moins une commande directionnelle, 32 utilisent exclusivement des clics et 10 utilisent d’autres commandes sans déplacement directionnel. Dans les parcours sans série, SC25 répète une même direction 12 fois de suite, AR25 10 fois, CN04, RE86 et TR87 7 fois. Ces répétitions indiquent où inspecter les conditions du plan.
 
-## DC22
+### DC22 avant extension
 
 SIC gagne en **22 commandes**, avec **21 reprises de décision** et **aucune série**. La famille `sic_remote_support_route` choisit les 22 commandes. Entre des clics de contrôle, le parcours comporte 5 déplacements identiques consécutifs.
 
@@ -20,7 +58,7 @@ La recherche du trajet conserve le champ `first` dans chaque état de la file. E
 
 Pour faire bénéficier toutes les familles d’une exécution continue, chaque planificateur doit transmettre la portion de trajet dont il connaît les effets, avec la cible et les conditions de validité par pas. L’exécuteur garde la vérification de la case d’arrivée et des supports nécessaires. Une commande exploratoire, un changement de terrain, une contradiction ou une fin de niveau clôt le préfixe. Le même principe s’applique aux clics quand leur cible et leur effet restent vérifiables dans la suite.
 
-## Résultat par jeu
+### Résultat de référence par jeu
 
 | Jeu | Commandes | Reprises de décision | Séries | Plus longue | Délai médian |
 | --- | ---: | ---: | ---: | ---: | ---: |

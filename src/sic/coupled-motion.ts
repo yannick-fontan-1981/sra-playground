@@ -211,10 +211,11 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         satisfactionContract: 'official_progress_after_the_joint_meeting_test' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = 'coupled-motion:' + need.id;
-      const action = { action_ref: candidate.input, data: {} }, actions = [action];
+      const inputs = candidate.route?.actions.slice(0, Math.min(remaining, 60 - local.count)) ?? [candidate.input];
+      const actions = inputs.map(action_ref => ({ action_ref, data: {} }));
       return { status: 'proposed', kind: verifyCoupledRouteId, candidate, local, actions, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        steps: [{ action, expected_after: candidate.route?.expected[0] ?? null }],
+        steps: actions.map((action, index) => ({ action, expected_after: candidate.route?.expected[index] ?? null })),
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -227,11 +228,24 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      let admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+      if (index > 0 && !proposal.auxiliary && proposal.local.epoch === observation.level_epoch) {
+        const previous = proposal.candidate.route?.expected[index - 1], expected = proposal.candidate.route?.expected[index];
+        if (previous && expected && pairVisible(packet.frame_rows, proposal.local.pair.value, previous)) {
+          const floors = proposal.local.floors;
+          admitted = expected.every(([top, left, bottom, right]) => {
+            for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+              const value = packet.frame_rows[y]?.[x];
+              if (!previous.some(box => inBox(box, y, x)) && (value === undefined || !floors.includes(value))) return false;
+            }
+            return true;
+          });
+        }
+      }
       return { admitted, reason: admitted ? 'current_joint_control_and_pieces_bound' : 'joint_control_context_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.auxiliary) {
@@ -242,11 +256,13 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
           : step.stoppedMember !== undefined ? 'observed_one_piece_stopped_by_auxiliary'
           : step.auxiliary === undefined ? 'observed_joint_displacement' : 'observed_auxiliary_displacement_while_pair_stationary' };
       }
-      const expected = proposal.candidate.route?.expected[0];
-      const matched = expected ? matchProjection(first, second, proposal.local.pair, expected) : null;
-      return { matched, seal_prefix: true, reason: matched === true ? 'observed_joint_displacement' : 'compare_both_piece_returns' };
+      const expected = proposal.candidate.route?.expected[index];
+      const boxes = proposal.candidate.route?.expected[index - 1] ?? proposal.local.pair.boxes;
+      const matched = expected ? matchProjection(first, second, { ...proposal.local.pair, boxes }, expected) : null;
+      return { matched, seal_prefix: matched !== true || index + 1 >= proposal.actions.length,
+        reason: matched === true ? 'observed_joint_displacement' : 'compare_both_piece_returns' };
     },
-    record(before, after, command, first, second, proposal) {
+    record(before, after, command, first, second, proposal, index) {
       if (proposal.auxiliary && after.levels_completed > before.levels_completed) {
         const { field, focusPaint, initialLeftFirst, steps, epoch, evidence } = proposal.auxiliary;
         const [a, b] = steps[0]!.position.members;
@@ -264,7 +280,8 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         return { events: [], ...(verified && step.stoppedMember !== undefined
           ? { reviewEvidence: 'The return shows one piece stopping at the relocated auxiliary while the other continues.' } : {}) };
       }
-      const { local, candidate } = proposal, previous = local.pair, route = candidate.route, expected = route?.expected[0];
+      const local = (index > 0 && state?.frame === before.frame_hash ? state : null) ?? proposal.local;
+      const previous = local.pair, route = proposal.candidate.route, expected = route?.expected[index];
       const measured = measureCoupledPairs(second).filter(pair => pair.value === previous.value && pair.size === previous.size);
       const match = measured.length === 1 ? matchCoupledPair(previous, measured[0]!) : null;
       const projected = expected && matchProjection(first, second, previous, expected) ? expected : null;
@@ -274,7 +291,8 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       state = { ...local, pair: { ...previous, boxes }, count: local.count + 1, frame: after.frame_hash,
         samples: sample ? [...local.samples, sample] : local.samples, floors: [...new Set([...local.floors, ...revealedFloor(previous, boxes, second)])],
         evidence: [...local.evidence.slice(-7), after.observation_ref], stopped: route ? !projected : !match,
-        remainingRoute: projected && route && route.actions.length > 1 ? { actions: route.actions.slice(1), expected: route.expected.slice(1) } : null };
+        remainingRoute: projected && route && route.actions.length > index + 1
+          ? { actions: route.actions.slice(index + 1), expected: route.expected.slice(index + 1) } : null };
       return { events: [] };
     },
     state: () => ({ state, auxiliary, auxiliaryTransfer }),

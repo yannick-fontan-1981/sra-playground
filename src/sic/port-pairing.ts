@@ -33,7 +33,7 @@ type Local = { epoch: number; model: PortModel; poses: readonly PortPose[]; acti
   rotate: { action: string; turn: number } | null; attempts: string[]; evidence: string[]; blockedOverlap: boolean; stopped: boolean; frame: string };
 type Choice = { command: NativeCommand; part: number | null; expected?: readonly PortPose[]; overlapping?: boolean };
 type Saved = Omit<Local, 'model'> & { model: StoredModel };
-type Proposal = NativeProposal & { local: Saved; choice: Choice; strategy: Strategy; key: string; needId: string };
+type Proposal = NativeProposal & { local: Saved; choices: Choice[]; strategy: Strategy; needId: string };
 type StoredModel = Omit<PortModel, 'bodies'> & { bodies: { material: PointSetState; ports: PointSetState; known: boolean }[] };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const packModel = (model: PortModel): StoredModel => ({ ...model,
@@ -118,6 +118,7 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
       const vectors = new Map(Object.entries(local.motion).filter(([action]) => plain.includes(action)));
       let calibration: Choice | null = null, selection: Choice | null = null, orientation: Choice | null = null, translation: Choice | null = null;
       let goal: readonly PortPose[] | null = null, part = active;
+      const route: Choice[] = [];
       if (active === null || vectors.size < 4 && unknown.length) {
         if (unknown[0]) calibration = { command: command(unknown[0]), part: active };
       } else {
@@ -145,14 +146,21 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
           } else {
             const path = portAccessPath(model, poses, part, target, vectors) ??
               (!local.blockedOverlap ? portAccessPath(model, poses, part, target, vectors, true) : null);
-            const action = path?.[0];
-            if (action) {
+            const other = new Map(poses.flatMap((pose, index) => index === part ? [] : [[index, pose] as const]));
+            let [turn, x, y] = current;
+            for (const action of path?.slice(0, Math.min(remaining, 48 - local.attempts.length)) ?? []) {
               const [dx, dy] = vectors.get(action)!;
+              x += dx;
+              y += dy;
               const expected = [...poses];
-              expected[part] = [current[0], current[1] + dx, current[2] + dy];
-              const other = new Map(poses.flatMap((pose, index) => index === part ? [] : [[index, pose] as const]));
-              translation = { command: command(action), part, expected, overlapping: !compatiblePorts(model, part, expected[part]!, other) };
+              expected[part] = [turn, x, y];
+              const overlapping = !compatiblePorts(model, part, expected[part]!, other);
+              const next = { command: command(action), part, expected, overlapping };
+              if (overlapping && route.length) break;
+              route.push(next);
+              if (overlapping) break;
             }
+            translation = route[0] ?? null;
           }
         }
       }
@@ -176,13 +184,13 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
       const objective = { kind: 'pair_visible_connectors', scope: ref.split(':revision:', 1)[0]!, subjects: ['rigid_pieces', 'matching_connectors'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_pairing_disjoint_pieces' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = `port-pairing:${need.id}`, actions = [choice.command];
+      const id = `port-pairing:${need.id}`, choices = choice === translation ? route : [choice];
+      const actions = choices.map(step => step.command);
       const binding = selection && choice === selection
         ? await ObservedInputDomain.makeLocusWitness(observation, rows, [choice.command.data.x!, choice.command.data.y!], { reason: label, evidence }) : undefined;
       if (learns && strategy === 'reveal_piece_connectors' && !binding) return null;
-      return { status: 'proposed', kind: family, actions, local: { ...local, model: packModel(model) }, choice, strategy, needId: need.id,
-        key: contextKey(observation.frame_hash, choice.command.action_ref, choice.part),
-        steps: [{ action: choice.command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
+      return { status: 'proposed', kind: family, actions, local: { ...local, model: packModel(model) }, choices, strategy, needId: need.id,
+        steps: choices.map(step => ({ action: step.command, expected_after: null, ...(binding ? { point_binding: binding } : {}) })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
@@ -197,23 +205,27 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const expected = proposal.choices[index - 1]?.expected;
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!expected && proposal.local.epoch === observation.level_epoch
+          && portAgreement(packet.frame_rows, unpackModel(proposal.local.model), expected);
       return { admitted, reason: admitted ? 'connector_arrangement_bound' : 'connector_arrangement_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { choice, local, strategy } = proposal;
+      const { local, strategy } = proposal, choice = proposal.choices[index]!;
       const measured = { ...local, model: unpackModel(local.model) };
       const matched = choice.expected ? portAgreement(second, measured.model, choice.expected) &&
         (strategy !== 'reveal_piece_connectors' || selectionChanged(measured, choice.part!, first, second)) : null;
-      return { matched, seal_prefix: true, reason: 'compare_visible_rigid_piece_poses' };
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.choices.length, reason: 'compare_visible_rigid_piece_poses' };
     },
-    record(before, after, issued, first, second, proposal) {
+    record(before, after, issued, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local: saved, choice, strategy } = proposal, model = unpackModel(saved.model);
-      const local = { ...saved, model };
+      const { local: saved, strategy } = proposal, choice = proposal.choices[index]!;
+      const local = (index > 0 && state?.frame === before.frame_hash ? state : null) ?? { ...saved, model: unpackModel(saved.model) };
+      const { model } = local;
       const predicted = strategy === 'translate_piece_for_matching' && choice.expected &&
         portAgreement(second, model, choice.expected) && !portAgreement(second, model, local.poses);
       const next = predicted ? choice.expected! : inferPortPoses(second, model, local.poses, strategy === 'learn_piece_motion' ? null : choice.part);
@@ -230,7 +242,8 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
       if (next && active !== null) updatePorts(second, model, next, active);
       state = { ...local, model, active, motion, rotate, poses: next ?? local.poses,
         blockedOverlap: local.blockedOverlap || !!choice.overlapping && same(next, local.poses), stopped: !next,
-        frame: after.frame_hash, attempts: [...local.attempts, proposal.key], evidence: [...local.evidence.slice(-3), after.observation_ref] };
+        frame: after.frame_hash, attempts: [...local.attempts, contextKey(before.frame_hash, choice.command.action_ref, choice.part)],
+        evidence: [...local.evidence.slice(-3), after.observation_ref] };
       return { events: [] };
     },
     state: () => ({ state: state && { ...state, model: packModel(state.model) } }),

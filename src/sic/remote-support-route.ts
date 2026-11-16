@@ -3,6 +3,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposa
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { unchangedOutside } from './plan-step.ts';
 import { measurePhasedSupport, observePhaseStep, phaseAffectedSupport, phaseFootprint, planPhasedSupport,
   type PhasedSupport, type PhaseStep } from './phased-support-route.ts';
 
@@ -40,7 +41,7 @@ type State = { epoch: number; scene: Scene; actor: Piece | null; target: Piece |
   transferred?: boolean };
 type Move = { command: NativeCommand; landing: NativePoint | null; floor: number | null; control: number | null; acquisition?: Acquisition;
   transfer?: Control };
-type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string };
+type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string; route?: readonly Move[] };
 type PhaseMemory = { epoch: number; scene: PhasedSupport; refs: string[]; lastRef: string; stopped: boolean };
 type PhaseProposal = NativeProposal & { phased: PhaseMemory; step: PhaseStep; needId: string };
 const isPhased = (proposal: Proposal | PhaseProposal): proposal is PhaseProposal => 'phased' in proposal;
@@ -220,7 +221,7 @@ function controlCommand(control: Pick<Control, 'box'>): NativeCommand {
   return { action_ref: 'ACTION6', data: { x, y } };
 }
 
-function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeCommand[], remaining: number, acquisitions: Acquisition[] = []): Move | null {
+function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeCommand[], remaining: number, acquisitions: Acquisition[] = []): Move[] | null {
   const { scene: { arena, pitch, supports, controls, circuit }, effects } = local;
   const actor = local.actor!, target = local.target!;
   const occupied = cell(actor.at, pitch);
@@ -263,19 +264,25 @@ function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeComm
     const command = inputs.find(input => input.action_ref === key);
     return command ? [{ command, dx, dy }] : [];
   });
-  type Position = { at: NativePoint; mask: number; first: Move | null; depth: number };
-  const queue: Position[] = [{ at: actor.at, mask: 0, first: null, depth: 0 }];
+  type Position = { at: NativePoint; mask: number; parent: Position | null; move: Move | null; depth: number };
+  const queue: Position[] = [{ at: actor.at, mask: 0, parent: null, move: null, depth: 0 }];
   const seen = new Set([`${actor.at.join(',')}:0`]);
-  for (const { at, mask, first, depth } of queue) {
+  for (const position of queue) {
+    const { at, mask, depth } = position;
     const acquisition = acquisitions.find(item => same(at, item.at));
-    if (first && acquisition) return { ...first, acquisition };
-    if (!acquisitions.length && same(at, target.at)) return first;
+    if (depth && (acquisition || (!acquisitions.length && same(at, target.at)))) {
+      const path: Move[] = [];
+      for (let step: Position | null = position; step?.move; step = step.parent) path.push(step.move);
+      path.reverse();
+      if (acquisition) path[path.length - 1] = { ...path.at(-1)!, acquisition };
+      return path;
+    }
     if (depth >= remaining) continue;
     const add = (next: NativePoint, nextMask: number, move: Move) => {
       const key = `${next.join(',')}:${nextMask}`;
       if (seen.has(key)) return;
       seen.add(key);
-      queue.push({ at: next, mask: nextMask, first: first ?? move, depth: depth + 1 });
+      queue.push({ at: next, mask: nextMask, parent: position, move, depth: depth + 1 });
     };
     for (const { command, dx, dy } of options) {
       const next: NativePoint = [at[0] + dx * pitch, at[1] + dy * pitch];
@@ -297,6 +304,30 @@ function searchRoute(rows: NativeRows, local: State, inputs: readonly NativeComm
     }
   }
   return null;
+}
+
+function confirmedLanding(rows: NativeRows, local: State, move: Move): boolean {
+  if (move.control !== null || move.transfer || move.acquisition || !move.landing || move.floor === null) return false;
+  const { circuit, pitch } = local.scene;
+  const onPad = circuit?.pads.find(pad => same(pad.at, move.landing!));
+  return onPad ? padVisible(rows, onPad, pitch) : uniform(rows, move.landing, pitch) === move.floor;
+}
+
+function confirmedSwitch(rows: NativeRows, local: State, move: Move): boolean {
+  const actor = local.actor, edits = move.control === null ? null : local.effects[move.control];
+  if (!actor || !edits?.length) return false;
+  const footprint = cell(actor.at, local.scene.pitch);
+  if (edits.some(([x, y]) => inside(footprint, [x, y, x, y]))) return false;
+  return edits.every(([x, y, before]) => rows[y]?.[x] === before)
+    || edits.every(([x, y, , after]) => rows[y]?.[x] === after);
+}
+
+function projectedStep(proposal: Proposal, index: number, local = proposal.local): { local: State; move: Move } {
+  const previous = proposal.route?.[index - 1];
+  const actor = local.actor;
+  return { local: previous?.landing && previous.floor !== null && actor
+    ? { ...local, actor: { ...actor, at: previous.landing, floor: previous.floor } } : local,
+  move: proposal.route?.[index] ?? proposal.move };
 }
 
 function acquisitionSites(rows: NativeRows, local: State): Acquisition[] {
@@ -433,11 +464,13 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       const question = actor && probe !== -1 && scene.controls[probe]!.color !== actor.floor
         ? { command: controlCommand(scene.controls[probe]!), landing: null, floor: null, control: probe } : null;
       const limit = Math.min(remaining, 64 - local.count);
-      let route = actor && target && probe === -1 ? searchRoute(rows, local, inputs, limit) : null;
-      if (!route && actor && target && probe === -1 && local.recalled) {
+      let path = actor && target && probe === -1 ? searchRoute(rows, local, inputs, limit) : null;
+      if (!path && actor && target && probe === -1 && local.recalled) {
         const markers = acquisitionSites(rows, local);
-        if (markers.length) route = searchRoute(rows, local, inputs, limit, markers);
+        if (markers.length) path = searchRoute(rows, local, inputs, limit, markers);
       }
+      const acquisition = path?.at(-1)?.acquisition;
+      const route = path?.[0] ? (acquisition ? { ...path[0], acquisition } : path[0]) : null;
       const ref = observation.observation_ref;
       const effectRef = route?.control == null ? null : local.effectRefs?.[route.control];
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(effectRef ? [effectRef] : [])].filter(item => item !== ref))];
@@ -460,7 +493,28 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       const goal = { kind: 'reach_target_on_switchable_support', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_support_and_controls'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_supported_navigation' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `${learns ? family : 'remote-support'}:${need.id}`, actions = [move.command];
+      const id = `${learns ? family : 'remote-support'}:${need.id}`;
+      const verified: Move[] = [];
+      let laterControl = null;
+      if (move === route) {
+        for (const step of path ?? []) {
+          if (!confirmedLanding(rows, local, step)) {
+            const previous = verified.at(-1);
+            if (previous?.landing && previous.floor !== null && local.actor && step.control !== null
+              && confirmedSwitch(rows, { ...local, actor: { ...local.actor, at: previous.landing, floor: previous.floor } }, step)) {
+              const control = scene.controls[step.control]!;
+              try {
+                laterControl = await ObservedInputDomain.makeLocusWitness(observation, rows, center(control.box), { reason: label, evidence });
+              } catch (error) { if (!(error instanceof TypeError)) throw error; }
+              if (laterControl) verified.push(step);
+            }
+            break;
+          }
+          verified.push(step);
+        }
+      }
+      const committed = verified.length > 1 ? verified : [move];
+      const actions = committed.map(step => step.command);
       const control = move.transfer ?? (move.control === null ? null : scene.controls[move.control]!);
       const edits = move.control === null ? null : local.effects[move.control];
       const affectedSupport = edits?.length ? [
@@ -469,24 +523,34 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       ] : null;
       const pointBinding = control ? await ObservedInputDomain.makeLocusWitness(observation, rows, center(control.box), { reason: label, evidence }) : null;
       return { status: 'proposed', kind: family, actions, strategy: normal.selected.id, local, move, needId: need.id,
-        steps: [{ action: move.command, expected_after: null, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
+        ...(committed.length > 1 ? { route: committed } : {}),
+        steps: committed.map(step => ({ action: step.command, expected_after: step.landing,
+          ...(pointBinding ? { point_binding: pointBinding } : step.control !== null && laterControl ? { point_binding: laterControl } : {}) })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Reach the other piece by finding connected support', mode: learns ? mode : route ? 'solving' : 'exploration',
           situation: label, agenda: primitive?.entries ?? normal.entries, evidence, actor: actor ? cell(actor.at, scene.pitch) : null,
           target: target ? cell(target.at, scene.pitch) : null, control: control?.box ?? null,
           landing: move.landing ? cell(move.landing, scene.pitch) : null, affectedSupport,
-          acquisition: move.acquisition ? cell(move.acquisition.at, scene.pitch) : null },
+          acquisition: move.acquisition ? cell(move.acquisition.at, scene.pitch) : null,
+          ...(committed.length > 1 ? { plannedSeries: committed.flatMap(step => step.landing ? [step.landing] : []) } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label: primitive?.selected ? navigationPrimitives[primitive.selected.id] : label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !isPhased(proposal) && proposal.route) {
+        const { local, move } = projectedStep(proposal, index);
+        const admitted = proposal.binding?.level_epoch === observation.level_epoch && !!local.actor && !!local.target
+          && atPiece(packet.frame_rows, local.actor, local.scene.pitch) && atPiece(packet.frame_rows, local.target, local.scene.pitch)
+          && (confirmedLanding(packet.frame_rows, local, move) || confirmedSwitch(packet.frame_rows, local, move));
+        return { admitted, reason: admitted ? 'expected_actor_and_support_still_visible' : 'support_route_landing_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'support_route_observation_bound' : 'support_route_observation_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isPhased(proposal)) {
@@ -497,18 +561,21 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
             : 'landing_on_phase_support_confirmed';
         return { matched: !!observed, seal_prefix: true, reason };
       }
-      const update = observeReturn(proposal, first, second);
-      const { landing, acquisition } = proposal.move;
-      if (proposal.move.transfer) return { matched: !update.stopped, seal_prefix: true,
+      const { local, move } = projectedStep(proposal, index);
+      const update = observeReturn({ local, move }, first, second);
+      const { landing, acquisition } = move;
+      if (move.transfer) return { matched: !update.stopped, seal_prefix: true,
         reason: update.stopped ? 'paired_pad_transfer_contradicted' : 'nonlocal_transfer_and_unchanged_terrain_confirmed' };
       if (!update.stopped && landing && acquisition && same(landing, acquisition.at)) {
-        const matched = update.scene.controls.length > proposal.local.scene.controls.length;
+        const matched = update.scene.controls.length > local.scene.controls.length;
         return { matched, seal_prefix: true, reason: matched ? 'new_control_appeared_on_contact' : 'expected_control_did_not_appear' };
       }
-      return { matched: !update.stopped, seal_prefix: true,
+      const canContinue = index + 1 < proposal.actions.length && local.actor && landing
+        && unchangedOutside(first, second, [cell(local.actor.at, local.scene.pitch), cell(landing, local.scene.pitch)]);
+      return { matched: !update.stopped, seal_prefix: update.stopped || !canContinue,
         reason: update.stopped ? 'support_route_hypothesis_contradicted' : 'support_route_effect_observed' };
     },
-    record(before, after, _command, first, second, proposal) {
+    record(before, after, _command, first, second, proposal, index) {
       if (isPhased(proposal)) {
         const { phased, step } = proposal;
         if (after.levels_completed > before.levels_completed && transfer) {
@@ -523,7 +590,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         }
         return { events: [] };
       }
-      const { local } = proposal;
+      const { local, move } = projectedStep(proposal, index, index > 0 && state?.epoch === proposal.local.epoch ? state : proposal.local);
       if (after.levels_completed > before.levels_completed && local.actor && local.target) {
         transfer = { epoch: before.level_epoch, pitch: local.scene.pitch, actor: local.actor.color, target: local.target.color,
           controlColors: local.scene.controls.filter((_, i) => !!local.effects[i]).map(control => control.color),
@@ -532,10 +599,10 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         return { events: [], reviewEvidence: 'The measured controls made the supported route to the target possible.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const update = observeReturn(proposal, first, second);
+      const update = observeReturn({ local, move }, first, second);
       state = { ...update, count: update.count + 1, evidence: [...update.evidence.slice(-5), after.observation_ref] };
-      const { control } = proposal.move;
-      if (state.effectRefs && control !== null && !proposal.local.effects[control] && update.effects[control]) {
+      const { control } = move;
+      if (state.effectRefs && control !== null && !local.effects[control] && update.effects[control]) {
         state.effectRefs = state.effectRefs.map((ref, i) => i === control ? after.observation_ref : ref);
       }
       if (state.scene.controls.length > local.scene.controls.length) {
@@ -552,7 +619,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
   };
 }
 
-function observeReturn({ local, move }: Proposal, first: NativeRows, second: NativeRows): State {
+function observeReturn({ local, move }: Pick<Proposal, 'local' | 'move'>, first: NativeRows, second: NativeRows): State {
   const { scene: { arena, candidates, controls, pitch }, actor, target, effects } = local;
   const stopped = { ...local, stopped: true };
   if (!actor) {
