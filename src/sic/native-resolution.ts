@@ -919,7 +919,8 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === invitedCaptureId || family === verifyCaptureRouteId)) {
-    for (const [field, label] of [['focus', 'Selected piece'], ['target', 'Next cell'], ['victim', 'Piece to capture']] as const) {
+    for (const [field, label] of [['focus', 'Selected piece'], ['terrain', 'Terrain used to change color'], ['swatch', 'Color requested'],
+      ['target', 'Next cell'], ['victim', 'Piece to capture']] as const) {
       const box = bounds(card?.[field]);
       if (box && !subjects.some(subject => subject.box.every((value, i) => value === box[i]))) subjects.push({ label, box });
     }
