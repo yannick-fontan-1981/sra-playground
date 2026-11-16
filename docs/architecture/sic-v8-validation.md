@@ -766,14 +766,17 @@ Le socle `60270c67` démarre avec sept niveaux 4 déjà attestés. Les nouveaux 
 | CATR | 6 | 9,99 s | `sic_adjust_observed_shared_relations` | `b77781bfb9045fe23512251d06f773c415d72208abe2bef7e5e450112cf1e8a1` |
 | GRIL | 8 | 11,10 s | `sic_catalogue_comparison` | `70988d27983832f13fc1e87434cfbf26ef167971447d800e0a5098931686b81d` |
 | PIPE | 14 | 23,26 s | `sic_radial_connection` | `f9fb4cceadbcee9c4319fa851699f515632b75dfaf99bc7e5c22f8ef8cd52299` |
+| RECR | 32 | 135,30 s | `sic_ordered_replenishment`, `sic_public_input_exploration` | `d5bb70c77a9e5fed9940d275ea26f50acf59821497f0b8fd599c3b9393834edd` |
 | REGN | 10 | 12,26 s | `sic_compare_available_controls`, `sic_public_input_exploration` | `c65f89c95ca02f84500a67ff5cddfb00bc94673becb9ed0f8f9f70826f70cea5` |
 | REWI | 8 | 7,07 s | `sic_follow_stable_reference` | `a5db02741f1dd61f55e345b8a3308e67a5b67ee8a6ce957cc8cc960a6ce4ebbc` |
 | THER | 4 | 2,86 s | `sic_satisfy_observed_prefix_quotas` | `3f39b4bf8bba8c110e298964e850d557c725a201e5033c47af8b6a2e3571218a` |
 | TICT | 13 | 20,37 s | `sic_prepare_line_from_observed_responses` | `a0a7f1334e38ad4fdd069ca6c436d9b97a00110532da19077357205cac9b6fde` |
 | ZIPP | 15 | 23,59 s | `sic_verify_trace_coverage` | `b536b3537a379f3da0749d9ffef5d7dc8bf3154a9e9515117f39e3d59ef261fe` |
 
-Les dix victoires du tableau sont obtenues sur le socle figé. CATL, THER et ZIPP retrouvent le nombre de commandes des archives natives pour le niveau 4.
+Les onze victoires du tableau sont obtenues sur le socle figé. CATL, THER et ZIPP retrouvent le nombre de commandes des archives natives pour le niveau 4.
 
 - **ONDE** gagne le niveau 4 en **6 commandes et 6,53 s**, comme dans l’archive native pour le nombre de commandes. Le socle avait épuisé les propositions de SIC après 60 commandes au niveau 4. La dernière action du niveau 3 transmet désormais les décalages unitaires au niveau suivant si l’animation montre à la fois les déplacements prévus et les jauges à leurs cibles. Au niveau 4, SIC mesure trois profils de périodes 8, 10 et 8. Il réévalue le contrôle collectif et observe des décalages de 1, 2 et 3 colonnes, avant de planifier l’alignement des deux jauges. Les 26 commandes et retours des niveaux 1 à 3 sont reproduits. Les 32 commandes relèvent de SIC, la permutation de palette conserve le trajet et les deux essais s’arrêtent à la victoire du niveau 4. Empreinte `fc43fc0e58c0cf68f84c83585518a1114ee73f00f672dba9349201470a1c2a6f`.
 
-Le total atteint **18/100 niveaux 4** et **328/636 niveaux**, soit **51,6 %**.
+- **SERI** gagne le niveau 4 en **4 clics et 2,92 s**. Le socle n’avait pas trouvé de relation permettant de compléter la première ligne. À partir des cartes visibles, SIC isole les suites de couleurs alternées dans les deux premières lignes. À la troisième ligne, il vérifie la rotation de chaque composant autour de son propre centre. À la quatrième, il relève les repères immobiles de l’anneau et mesure l’évolution du nombre de positions franchies. Pour chacune des quatre lignes, une seule proposition satisfait la relation, puis le retour du plateau valide le choix. Les 12 commandes et retours des niveaux 1 à 3 sont reproduits. Les 16 commandes relèvent de SIC, la permutation de palette conserve le trajet et les deux essais s’arrêtent à la victoire du niveau 4. Empreinte `a58316949bc07b7ba831f456eb9b3fdf2a5c39afaf944fe61cb7fdf49e866302`.
+
+Le total atteint **20/100 niveaux 4** et **330/636 niveaux**, soit **51,9 %**.

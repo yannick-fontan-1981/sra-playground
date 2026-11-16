@@ -3,6 +3,7 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeP
 import { explainVisual, visualInterior, visualLayout, visualSequenceConfiguration } from '../logos-engine/v6-visual-sequences.ts';
 import { chooseFromFeedback, feedbackChoiceFacts, feedbackChoiceModule } from './feedback-choice-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { visualRelation, visualRelationDescriptions } from './visual-sequence-relations.ts';
 
 export const visualPatternId = 'sic_visual_pattern';
 export const verifyPatternChoiceId = 'sic_verify_pattern_choice';
@@ -40,10 +41,20 @@ export function createSicVerifyPatternChoice(): NativeFamily<Proposal> {
       const cards = active.rasters.map((raster, index) => index === active.missing ? null : raster);
       const config = configuration ??= visualSequenceConfiguration();
       let choice: (typeof options)[number] | undefined;
+      let relation: ReturnType<typeof visualRelation> = null;
       for (const option of options) {
         if (!await explainVisual(cards, active.missing, option.raster, background, config)) continue;
         if (choice) return null;
         choice = option;
+      }
+      if (!choice) {
+        for (const option of options) {
+          const measured = visualRelation(cards, active.missing, option.raster, background);
+          if (!measured) continue;
+          if (choice) return null;
+          choice = option;
+          relation = measured;
+        }
       }
       if (!choice) return null;
       const [l, t, r, b] = choice.box;
@@ -71,7 +82,8 @@ export function createSicVerifyPatternChoice(): NativeFamily<Proposal> {
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Fill the missing card', mode,
-          situation: `One of ${options.length} options fits the measured color and shape relations. Acceptance still needs a return.`,
+          situation: relation ? visualRelationDescriptions[relation]
+            : `One of ${options.length} options fits the measured color and shape relations. Acceptance still needs a return.`,
           agenda: [], evidence, triggerCard: decision.receipt.workflow,
           target, option: choice.box, examples: active.boxes.filter(box => box !== target) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
