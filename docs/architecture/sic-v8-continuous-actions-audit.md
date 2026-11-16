@@ -36,6 +36,64 @@ Le regroupement décrit les commandes jouées pendant la résolution.
 
 Les essais ciblés retirent la famille principale et restent sous l’autorité de SIC seul. Les trois formats sont observés au niveau 1. HANO enchaîne deux clics sous `sic_learn_support_moves` après deux dépôts confirmés. Ses six commandes et leurs retours publics sont identiques à ceux du repli avant cette extension. DC22 enchaîne des déplacements et une série mixte après retrait de `sic_remote_support_route`. AR25, GABA, LS20, SC25 et TR87 enchaînent des déplacements. PORT gagne sans série. ZIPP s’arrête au niveau 1 après 84 commandes, faute de famille de repli applicable.
 
+## Lot ciblé de 42 jeux
+
+La campagne s’arrête à la première victoire du niveau 1 et exclut SELE et PRTL. Les deux modes ont une référence séparée. Le mode SIC Fallback retire la famille principale et conserve SIC comme seule autorité de décision.
+
+| Mode | Niveaux gagnés avant → après | Jeux avec série avant → après |
+| --- | ---: | ---: |
+| SIC | 42 → 42 | 0 → 11 |
+| SIC Fallback | 23 → 26 | 0 → 10 |
+
+En SIC, le parcours de référence est reproduit sur les 42 jeux comparés. Les 603 commandes et les retours comparés concordent. Les reprises de décision passent de 561 à 500. En SIC Fallback, les parcours modifiés concernent BP35, LP85, SWCH. Une série est observée dans les deux modes pour 10 jeux.
+
+Les trajets s’arrêtent à un nouvel effet à mesurer, à un retour contradictoire ou à la fin du niveau. Le budget du plan est de 16 commandes. À BP35, le clic de retrait est lié à un obstacle visible en fin de trajet après une première observation de l’effet. À LP85, la permutation apprise doit rester compatible avec la disposition et les valeurs visibles. À SWCH, le mouvement et le compteur visible sont vérifiés à chaque pas.
+
+| Jeu | SIC, longueur des séries | SIC Fallback, longueur des séries |
+| --- | --- | --- |
+| AMZE | **clic** · 2 | **clic** · 2 |
+| BP35 | **déplacement, mixte** · 3, 3, 2, 3, 2 | **déplacement, mixte** · 5, 3, 2, 3, 2 |
+| CASC | Gagné, aucune série | Gagné, aucune série |
+| CAVA | **clic** · 6 | **clic** · 6 |
+| CD82 | Gagné, aucune série | Gagné, aucune série |
+| CGWL | Gagné, aucune série | Gagné, aucune série |
+| CWSE | Gagné, aucune série | Gagné, aucune série |
+| DAME | Gagné, aucune série | Échec |
+| DNOI | Gagné, aucune série | Gagné, aucune série |
+| ELAS | Gagné, aucune série | Gagné, aucune série |
+| ESCT | **déplacement** · 2 | **déplacement** · 2 |
+| ETAG | Gagné, aucune série | Gagné, aucune série |
+| EVAS | Gagné, aucune série | Gagné, aucune série |
+| FITE | Gagné, aucune série | Gagné, aucune série |
+| FOGW | **déplacement** · 4, 4 | **déplacement** · 4, 4 |
+| FT09 | Gagné, aucune série | Échec |
+| FUIT | Gagné, aucune série | Échec |
+| G50T | Gagné, aucune série | Échec |
+| KA59 | Gagné, aucune série | Gagné, aucune série |
+| KATA | Gagné, aucune série | Échec |
+| KEYD | Gagné, aucune série | Échec |
+| KLOT | Gagné, aucune série | Gagné, aucune série |
+| LF52 | Gagné, aucune série | Gagné, aucune série |
+| LP85 | **clic** · 4 | **clic** · 4 |
+| LS19 | Gagné, aucune série | Gagné, aucune série |
+| PIPE | **clic** · 2 | **clic** · 2 |
+| POLA | Gagné, aucune série | Gagné, aucune série |
+| PORT | **déplacement** · 3, 2, 8 | **déplacement** · 3, 2, 8 |
+| S5I5 | Gagné, aucune série | Échec |
+| SIGN | Gagné, aucune série | Échec |
+| SK48 | Gagné, aucune série | Échec |
+| SKBN | **déplacement** · 3, 16 | **déplacement** · 3, 16 |
+| SNAR | Gagné, aucune série | Gagné, aucune série |
+| SP80 | **déplacement** · 3 | Échec |
+| SWCH | **déplacement** · 5, 4 | **déplacement** · 6, 4 |
+| SYME | Gagné, aucune série | Gagné, aucune série |
+| TN36 | Gagné, aucune série | Échec |
+| TU93 | Gagné, aucune série | Échec |
+| VC33 | Gagné, aucune série | Échec |
+| VOIS | Gagné, aucune série | Échec |
+| WA30 | Gagné, aucune série | Échec |
+| WEAV | Gagné, aucune série | Échec |
+
 ## Référence avant extension
 
 La campagne locale utilise SIC seul sur le commit `e483a9d5`, à trois processus. Chaque passage part de l’image initiale et s’arrête à la première victoire du niveau 1. Une série contient plusieurs commandes exécutées sous le même plan engagé. Le délai est mesuré entre les lancements de deux commandes de cette série et inclut le retour du jeu et ses contrôles. Les délais mesurés dépendent aussi de la concurrence des processus.
