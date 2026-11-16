@@ -754,3 +754,16 @@ Le commit `23e71270` a rejoué les **100 niveaux 2** depuis le niveau 1 sous aut
 Sur le socle figé `23e71270`, **35 niveaux 3** sont gagnés sans changement du code parmi **100 résultats recueillis**. Soixante-cinq autres victoires ont suivi une évolution du runtime sur AR25, BP35, CASC, CAVA, CD82, CGWL, CLRS, CRAF, CWSE, DC22, DAME, ELAS, ESCT, EVAS, FITE, FUIT, G50T, GARE, GIGO, GLOB, GMAP, GORI, GRAV, HOLE, KA59, KATA, KEYD, LF52, LIFE, LKEY, LOGI, LS19, LS20, M0R0, MOTO, ONDE, POLA, PORT, PRTL, R11L, RSWP, S5I5, SC25, SELE, SEQN, SIGN, SK48, SMLP, SNAR, SP80, SPOR, STCK, SU15, SWCH, TEQU, TICT, TRCP, TRIA, TU93, UPST, VALV, VC33, VOIS, WA30 et WEAV.
 
 **100/100 niveaux 3** et **317/636 niveaux** sont attestés sous SIC seul, soit **49,8 %**. CRAF est le cinquième jeu terminé.
+
+## Campagne des niveaux 4
+
+Le socle `60270c67` démarre avec sept niveaux 4 déjà attestés. Les nouveaux rejeux partent du niveau 1, conservent les acquis et déclenchent l’arrêt à la quatrième victoire. Le script vérifie l’autorité SIC pour chaque commande avant son envoi.
+
+| Jeu | Commandes au niveau 4 | Temps au niveau 4 | Famille observée dans la partie | Empreinte du parcours |
+| --- | ---: | ---: | --- | --- |
+| AMZE | 6 | 4,59 s | `sic_indicated_jump` | `a3c8db3ebec2aef9c1bbc3a015dc5bac3079964d148cc58ad5dc1c37f0bbd75b` |
+| CATL | 8 | 9,43 s | `sic_labeled_sequence` | `b2391d6efa9cada2df2001bc3bb82144b4b0904f24979202f70fb24be29e50f1` |
+| REWI | 8 | 7,07 s | `sic_follow_stable_reference` | `a5db02741f1dd61f55e345b8a3308e67a5b67ee8a6ce957cc8cc960a6ce4ebbc` |
+| THER | 4 | 2,86 s | `sic_satisfy_observed_prefix_quotas` | `3f39b4bf8bba8c110e298964e850d557c725a201e5033c47af8b6a2e3571218a` |
+
+Les quatre victoires sont obtenues sur le socle figé. CATL et THER retrouvent le nombre de commandes des archives natives pour le niveau 4. Le total atteint **11/100 niveaux 4** et **321/636 niveaux**, soit **50,5 %**.
