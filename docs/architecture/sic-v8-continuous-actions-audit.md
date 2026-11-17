@@ -191,6 +191,14 @@ Une série se poursuit tant que les observations confirment son prochain pas. Ce
 
 La comparaison porte sur les commandes, les coordonnées, les observations, les images d’animation et l’issue. Les 29 jeux déjà couverts conservent leur résultat. Le typecheck et les 49 tests ciblés passent.
 
+### Rejeu sur `0a51fd1a`
+
+Les 13 jeux du tableau gagnent de nouveau au niveau 1 et exécutent une série dans les deux modes. Le rejeu part de l’image initiale et s’arrête à la première victoire. Le mode SIC Fallback désactive la famille principale. Quand l’événement de retrait sort du journal de fin de partie, un rejeu ciblé le capture pendant les commandes et vérifie que la famille retirée ne fournit aucune commande.
+
+Les 84 passages des 42 jeux reproduisent les commandes, les coordonnées, les observations, les images d’animation, les séries et les nombres de reprises de décision de la campagne finale de `98558200`. Les 555 commandes en SIC et les 743 en SIC Fallback relèvent toutes de SIC seul. Les 42 retraits en Fallback sont confirmés et correspondent à la famille attendue pour chaque jeu.
+
+Le typecheck et les 28 tests ciblés du contrôleur, du runtime et de l’agenda passent.
+
 ## Référence avant extension
 
 La campagne locale utilise SIC seul sur le commit `e483a9d5`, à trois processus. Chaque passage part de l’image initiale et s’arrête à la première victoire du niveau 1. Une série contient plusieurs commandes exécutées sous le même plan engagé. Le délai est mesuré entre les lancements de deux commandes de cette série et inclut le retour du jeu et ses contrôles. Les délais mesurés dépendent aussi de la concurrence des processus.
