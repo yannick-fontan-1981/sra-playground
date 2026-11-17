@@ -43,12 +43,12 @@ function samePigments(recipe: Recipe, a: number, b: number): boolean {
   return (recipe.from === a && recipe.other === b) || (recipe.from === b && recipe.other === a);
 }
 
-function sourceAssignments(sources: Tile[], sinks: Tile[], recipes: readonly Recipe[]): Pair[][] {
+function sourceAssignments(sources: Tile[], sinks: Tile[], recipes: readonly Recipe[], limit = 48): Pair[][] {
   const groups: Pair[][] = [], pigments = new Set(sources.map(source => source.color));
   const compatible = (from: Tile, other: Tile, result: number) => from.color !== other.color
     && recipes.every(recipe => !samePigments(recipe, from.color, other.color) || recipe.result === result);
   const assign = (left: Tile[], pairs: Pair[]) => {
-    if (groups.length > 48) return;
+    if (groups.length > limit) return;
     const to = sinks[pairs.length];
     if (!to) {
       if (!left.length) groups.push(pairs);
@@ -66,7 +66,7 @@ function sourceAssignments(sources: Tile[], sinks: Tile[], recipes: readonly Rec
     }
   };
   assign(sources, []);
-  return groups.length <= 48 ? groups : [];
+  return groups.length <= limit ? groups : [];
 }
 
 function assignmentEvidence(pairs: readonly Pair[], recipes: readonly Recipe[]): number {
@@ -89,7 +89,8 @@ function sharedSourceAssignments(sources: Tile[], sinks: Tile[], recipes: readon
     demands.set(color, ofColor);
   }
   const representatives = [...demands.values()].map(group => group[0]!);
-  const groups = sourceAssignments(sources, representatives, recipes).map(group => group.map(pair => {
+  const limit = sources.length > 8 ? 2048 : 48;
+  const groups = sourceAssignments(sources, representatives, recipes, limit).map(group => group.map(pair => {
     const branches = demands.get(pair.color)!.slice(1);
     return branches.length ? { ...pair, branches } : pair;
   }));
@@ -114,10 +115,11 @@ function layoutFor(rows: NativeRows, recipes: readonly Recipe[]): Layout[] {
         .filter(c => surface.filter(tile => tile.color === c && tile.count === pitch ** 2 - 1).length >= 10);
       if (openColors.length !== 1 || closedColors.length !== 1 || openColors[0] === closedColors[0]) continue;
       const open = openColors[0]!, closed = closedColors[0]!;
-      const marks = surface.filter(tile => tile.count === pitch ** 2 - pitch && tile.accents.length === 1);
+      const marks = surface.filter(tile => tile.color !== closed && tile.count < pitch ** 2 && tile.accents.length === 1);
+      if (new Set(marks.map(tile => tile.count)).size !== 1) continue;
       const sources = marks.filter(tile => tile.color !== open && tile.color !== closed);
       const sinks = marks.filter(tile => tile.color === open);
-      if (sources.length < 2 || sources.length > 8 || sinks.length < 2 || sinks.length > 6 || marks.length !== sinks.length + sources.length) continue;
+      if (sources.length < 2 || sources.length > sinks.length * 2 || sinks.length < 2 || sinks.length > 6) continue;
       const indicators = parts.filter(p => p.bbox[3] < t && height(p.bbox) === 2 && width(p.bbox) >= 6 && p.area === 2 * width(p.bbox));
       if (indicators.length !== 1) continue;
       const geometry = { pitch, tiles: surface, closed, open, reserve: width(indicators[0]!.bbox) };
@@ -131,7 +133,7 @@ function layoutFor(rows: NativeRows, recipes: readonly Recipe[]): Layout[] {
           return matching.length === 1 ? matching : [];
         });
         const allSources = [...sources, ...uniform];
-        if (allSources.length < demanded.length || allSources.length > Math.min(8, demanded.length * 2)) continue;
+        if (allSources.length < demanded.length || allSources.length > demanded.length * 2) continue;
         const groups = shared ? sharedSourceAssignments(allSources, sinks, recipes) : sourceAssignments(allSources, sinks, recipes);
         if (groups.length) candidates.push(groups.map(pairs => ({ ...geometry, pairs })));
         continue;
@@ -205,7 +207,7 @@ function plan(layout: Layout, rejected: readonly string[]): Thread[] | null {
   return best;
 }
 
-async function planSeparated(layout: Layout, budget: number, execution?: NativeExecution): Promise<Thread[] | null> {
+async function planSeparated(layout: Layout, budget: number, execution?: NativeExecution, seedLimit = 120): Promise<Thread[] | null> {
   const { pitch, pairs, closed, open } = layout;
   const tiles = layout.tiles.filter(tile => tile.color === closed || tile.color === open
     || pairs.some(pair => terminalsOf(pair).includes(tile)));
@@ -287,7 +289,7 @@ async function planSeparated(layout: Layout, budget: number, execution?: NativeE
 
   const orderings = permutations(pairs);
   let best: Thread[] | null = null, limit = Math.min(budget, layout.reserve) + 1;
-  for (let seed = 0; seed < 120; seed++) {
+  for (let seed = 0; seed < seedLimit; seed++) {
     if (execution && seed % 8 === 0) {
       execution.signal?.throwIfAborted();
       if (execution.deadlineMs !== undefined && (execution.now?.() ?? performance.now()) >= execution.deadlineMs) break;
@@ -304,19 +306,40 @@ async function planSeparated(layout: Layout, budget: number, execution?: NativeE
 }
 
 async function selectSeparatedLayout(rows: NativeRows, recipes: readonly Recipe[], remaining: number, execution?: NativeExecution) {
-  let best: { layout: Layout; threads: Thread[] } | null = null, budget = remaining;
-  for (const layout of layoutFor(rows, recipes)) {
-    if (execution?.deadlineMs !== undefined && (execution.now?.() ?? performance.now()) >= execution.deadlineMs) break;
-    if (best && layout.pairs.some(pair => pair.branches?.length)
-      && assignmentEvidence(layout.pairs, recipes) < assignmentEvidence(best.layout.pairs, recipes)) break;
-    const threads = layout.pairs.some(pair => pair.other || pair.branches?.length) ? await planSeparated(layout, budget, execution) : plan(layout, []);
-    if (!threads) continue;
-    const cost = threads.reduce((count, thread) => count + thread.clicks.length, 0);
-    if (best && cost > budget) continue;
-    best = { layout, threads };
-    budget = cost - 1;
+  async function search(layouts: Layout[], seedLimit: number) {
+    let best: { layout: Layout; threads: Thread[] } | null = null, budget = remaining;
+    for (const layout of layouts) {
+      if (execution?.deadlineMs !== undefined && (execution.now?.() ?? performance.now()) >= execution.deadlineMs) break;
+      if (best && layout.pairs.some(pair => pair.branches?.length)
+        && assignmentEvidence(layout.pairs, recipes) < assignmentEvidence(best.layout.pairs, recipes)) break;
+      const threads = layout.pairs.some(pair => pair.other || pair.branches?.length)
+        ? await planSeparated(layout, budget, execution, seedLimit) : plan(layout, []);
+      if (!threads) continue;
+      const cost = threads.reduce((count, thread) => count + thread.clicks.length, 0);
+      if (best && cost > budget) continue;
+      best = { layout, threads };
+      budget = cost - 1;
+    }
+    return best;
   }
-  return best;
+
+  const layouts = layoutFor(rows, recipes);
+  const first = layouts[0];
+  if (!first || first.pairs.length <= 4 || !first.pairs.some(pair => pair.branches?.length)) return search(layouts, 120);
+
+  // With more circuits, compare the shortest constructions across equally supported assignments before varying the paths.
+  const tiers = new Map<number, Layout[]>();
+  for (const layout of layouts) {
+    const evidence = assignmentEvidence(layout.pairs, recipes);
+    const tier = tiers.get(evidence);
+    if (tier) tier.push(layout);
+    else tiers.set(evidence, [layout]);
+  }
+  for (const tier of tiers.values()) {
+    const best = await search(tier, 1) ?? await search(tier, 120);
+    if (best) return best;
+  }
+  return null;
 }
 
 function mixConfirmed(pair: Pair, rows: NativeRows, pitch: number): boolean {

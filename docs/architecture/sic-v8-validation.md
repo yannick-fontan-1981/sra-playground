@@ -1685,3 +1685,13 @@ Le sixième module masque deux centres du rail. SIC restitue ces centres quand d
 SIC mesure six modules sur 51 positions et compare 864 configurations. Une seule couvre les 13 wagons dans la simulation. Deux modules peignent les wagons avant deux captures en aval. Deux autres captures doivent se produire au même battement pour que le signal permette la seconde. Chaque clic est confronté au champ observé et le lancement est validé par le changement d’état officiel.
 
 Le rejeu complet gagne le niveau 5 en **11 commandes et 22,99 s** avec le réglage de huit workers. Les 34 commandes relèvent de SIC seul. Les 23 premières commandes et retours reproduisent la référence `3e78247c`. La permutation de palette conserve les 34 commandes et leurs effets géométriques. Empreinte complète `a0602bcceebc7de12ea90d0f8392f241b9a7afc4568af2e8fbd2f6e4884d436e`. TypeScript et les 366 tests SIC et fenêtre exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+### TRCP niveau 5, affecter neuf sources avant les creusements irréversibles
+
+SIC reconnaît les marqueurs bicolores par leur empreinte commune. La grille de 15 × 15 contient neuf sources, six poches et cinq réseaux à former. Trois recettes observées aux niveaux précédents réduisent les affectations compatibles au nombre de 24. Pour départager les affectations de même niveau de preuve, SIC compare d’abord les constructions par trajets courts et vérifie que les réseaux restent séparés dans la réserve de 56 creusements.
+
+Le cyan, le violet et l’orange réutilisent des mélanges observés. Le violet alimente deux poches. Au creusement 32, P05 vérifie le nouveau mélange marron lors de la jonction. La réserve est de deux creusements à la victoire.
+
+Le rejeu complet gagne le niveau 5 en **54 creusements et 57,93 s** avec le réglage de huit workers. Les 191 commandes relèvent de SIC seul. Les 137 premières commandes et leurs retours reproduisent la référence `efe921a8`. La permutation de palette conserve les 191 commandes et leurs effets géométriques. Empreinte complète `90db94afaf57262abd444926464e538b5dd176c372345707033c46d1edc661bd`. TypeScript et les 291 tests SIC et recoloration exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+Les rejeux qualifiés, cumulés sur les versions de la campagne, couvrent les 100 jeux jusqu’au niveau 4 et les 99 jeux qui ont un niveau 5. Le cumul est de **499 niveaux sur 636**.
