@@ -41,7 +41,7 @@ import { createSicLearnSupportMoves, learnObservedSupportsId } from '../sic/lear
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects, learnVisibleGroupEffectsId } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
-import { createSicPublicInputExploration, currentControlledMotion, exhaustedPanelExploration, publicInputExplorationId } from '../sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, publicInputExplorationId } from '../sic/public-input-exploration.ts';
 import { createSicRecheckDirectionalControls } from '../sic/recheck-directional-controls.ts';
 import { createSicTrialRepeatedLinearControls } from '../sic/trial-repeated-linear-controls.ts';
 import { acquireQueuedField } from './v6-queued-field-models.ts';
@@ -794,10 +794,10 @@ export class NativeV6Runtime implements NativeV6Backend {
     const motionState = this.adaptiveReasoning && this.knowledge?.memory.nodes[`family_state:${publicInputExplorationId}`];
     const exploration = motionState ? objectValue(this.knowledge!.value(motionState.id)) : undefined;
     const motion = exploration ? currentControlledMotion(exploration, this.observation) : undefined;
-    const exhaustedPanelContext = exploration && exhaustedPanelExploration(exploration, this.observation);
+    const panelFrontier = exploration && currentPanelFrontier(exploration, this.observation);
     this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}),
       ...(motion ? { observedControlledMotion: motion } : {}),
-      ...(exhaustedPanelContext ? { exhaustedPanelContext } : {}),
+      ...(panelFrontier ? { panelFrontier } : {}),
       ...(this.readDirectionalMotion ? { readDirectionalMotion: this.readDirectionalMotion } : {}),
       ...(this.observedQueue?.ref === this.observation?.observation_ref ? { observedQueue: this.observedQueue.model } : {}),
       ...(this.readEncounterTransition ? { readEncounterTransition: this.readEncounterTransition } : {}),

@@ -140,8 +140,10 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       // A slot inferred from a visual arrangement may have no mechanical role. Hand off after
       // a bounded comparison when there is still no measured route or timed slide to follow.
       const otherInput = observation.available_action_refs.some(action => /^ACTION[56]$/.test(action));
+      if (!timed && !known && testedEveryDirection && observation.available_action_refs.includes('ACTION6')
+        && visibleCommandPanel(rows)) return null;
       const shareExploration = !!slots.length && testedEveryDirection && otherInput && local.lastSlotReturn === ref
-        && (local.lastRepeatedSlotReturn === ref || observation.available_action_refs.includes('ACTION6') && !!visibleCommandPanel(rows));
+        && local.lastRepeatedSlotReturn === ref;
       const canCompare = slots.length ? (local.slotChecks ?? 0) < slotComparisonsPerDirection * options.length
         : box && local.motionEvidence.length;
       const frontier = !timed && !known && !untested && canCompare && !shareExploration

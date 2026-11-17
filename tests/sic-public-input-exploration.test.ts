@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
-import { createSicPublicInputExploration, currentControlledMotion } from '../src/sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier } from '../src/sic/public-input-exploration.ts';
+import { observedCommandFrontier, observedCommandKey } from '../src/sic/observed-command-frontier.ts';
+import { commandPanelState, visibleCommandPanel } from '../src/sic/visible-command-panel.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 
@@ -32,6 +34,56 @@ test('a separated panel gets a turn between movement probes despite unrelated ch
   assert.equal(sources.size, 1);
   assert.deepEqual(examples.map(([id]) => id), ['ACTION6', 'ACTION1', 'ACTION6', 'ACTION2']);
   assert.notEqual(examples[0]![1], examples[2]![1]);
+});
+
+test('public exploration shares tested panel commands across families and only revisits states with a new test', async () => {
+  const arms = [[27, 4], [24, 7], [30, 7], [27, 10]];
+  const board = (step: number, shifted = false) => Array.from({ length: 20 }, (_, y) => Array.from({ length: 40 }, (_, x) => {
+    if (y === 19) return x < step ? 4 : 0;
+    if (x < 20) {
+      const left = shifted ? 8 : 4;
+      return x >= left && x < left + 3 && y >= 5 && y < 8 ? 3 : 1;
+    }
+    const slot = arms.find(([l, t]) => x >= l! && x < l! + 3 && y >= t! && y < t! + 3);
+    return slot ? (x === slot[0] && y === slot[1] ? 8 : 7) : 2;
+  }));
+  const inputs = [1, 2, 3, 4].map(id => ({ action_ref: `ACTION${id}`, data: {} }));
+  const refs = [...inputs.map(input => input.action_ref), 'ACTION6'];
+  const beforeRows = board(1), afterRows = board(2, true), recurringRows = board(3);
+  const observe = (frame_rows: number[][], step: number) => measureNativeObservation({
+    frame_rows, frame_hash: `frame-${step}`, level: 1, levels_completed: 0, available_action_refs: refs, state: 'NOT_FINISHED',
+  }, step);
+  const before = await observe(beforeRows, 1), after = await observe(afterRows, 2), recurring = await observe(recurringRows, 3);
+  const panel = visibleCommandPanel(beforeRows);
+  assert.ok(panel);
+  assert.deepEqual(panel.buttons.map(button => button.bbox.slice(0, 2)), arms);
+  const initial = commandPanelState(beforeRows, panel, refs), displaced = commandPanelState(afterRows, panel, refs);
+  assert.notEqual(initial, displaced);
+  assert.equal(commandPanelState(recurringRows, panel, refs), initial);
+
+  const family = createSicPublicInputExploration();
+  assert.ok(family.observePublicOutcome);
+  await family.observePublicOutcome(before, after, inputs[0]!, beforeRows, afterRows, [afterRows]);
+  await family.observePublicOutcome(after, recurring, inputs[1]!, afterRows, recurringRows, [recurringRows]);
+  const first = { action_ref: 'ACTION6', data: { x: 28, y: 5 } };
+  await family.observePublicOutcome(recurring, recurring, first, recurringRows, recurringRows, [recurringRows]);
+  const shared = currentPanelFrontier(family.state(), recurring);
+  assert.ok(shared);
+  assert.equal(currentPanelFrontier(family.state(), { ...recurring, level_epoch: recurring.level_epoch + 1 }), undefined);
+  const next = await family.propose(recurring, recurringRows, inputs, 20);
+  assert.ok(next);
+  assert.match(next.actions[0]!.action_ref, /^ACTION[234]$/);
+  await family.record(recurring, recurring, next.actions[0]!, recurringRows, recurringRows, next, 0, [recurringRows]);
+  const click = await family.propose(recurring, recurringRows, inputs, 20);
+  assert.equal(click?.actions[0]!.action_ref, 'ACTION6');
+  assert.notDeepEqual(click?.actions[0], first);
+  const testedHere = ['ACTION1', observedCommandKey(first)];
+  const routable = observedCommandFrontier(shared.transitions, initial, testedHere, 3,
+    state => state === initial ? testedHere : ['ACTION2', 'ACTION3']);
+  assert.equal(routable?.action, 'ACTION1');
+  assert.equal(routable?.probe, 'ACTION3');
+  assert.equal(observedCommandFrontier(shared.transitions, initial, testedHere, 3,
+    state => state === initial ? testedHere : ['ACTION2']), null);
 });
 
 test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {
