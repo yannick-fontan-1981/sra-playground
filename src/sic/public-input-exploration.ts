@@ -22,6 +22,7 @@ import { measureReturningAnimation } from './observed-animation.ts';
 import { centeredToolRegion, dockingDistance, findPanelDock, measureAlignedTool, measurePanelTransport, panelToolTranslation,
   panelTransportPose, unchangedPanelTransport } from './panel-mechanism-probe.ts';
 import { comparePanelSupportAccess } from './panel-access-comparison.ts';
+import { planPanelBridge, type PanelBridgeTarget } from './panel-bridge-planning.ts';
 
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
@@ -59,7 +60,7 @@ type ClickedControl = { box: NativeBox; point: NativePoint; remaining: string[];
 type RevealedControl = { command: NativeCommand; box: NativeBox; contact: NativeBox; before: string; observation: string; ink?: number };
 type AnimatedPanelControl = { control: RevealedControl; region: NativeBox; frames: number[]; evidence: string; tested: string[];
   dock?: NativeBox; changedAtDock?: string; held?: { tool: NativeBox; support: NativeBox }; transport?: string;
-  transportReturns?: ObservedCommandGraph };
+  transportReturns?: ObservedCommandGraph; bridgeTarget?: PanelBridgeTarget };
 type PanelMechanismMotion = { footing: RevealedControl; delta: NativePoint | null; tool: string; evidence: string };
 type ObservedMarkerProgram = { selector: PanelEffect; source: KnownPanelSource; from: string; code: string | null; evidence: string };
 type PanelAccessGoal = { peer: NativeBox; source: KnownPanelSource; tool: string;
@@ -100,7 +101,8 @@ type Proposal = NativeProposal & { source: string; candidates: string[]; expecte
   panelApproach?: PanelApproach; panelComparison?: PanelMarkerTrial; panelContact?: PanelContactApproach;
   revealedControl?: RevealedControl; retestedControl?: AnimatedPanelControl; terrainStep?: PanelTerrainStep;
   mechanismMove?: { motion: PanelMechanismMotion; trial: string };
-  transportMove?: { tool: string; expected?: string }; accessGoal?: PanelAccessGoal };
+  transportMove?: { tool: string; expected?: string }; accessGoal?: PanelAccessGoal;
+  bridgeTarget?: { tool: string; target: PanelBridgeTarget } };
 export type PanelFrontier = Pick<State, 'transitions' | 'options'>;
 const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null, recheck: null });
 export function currentPanelFrontier(state: NativeRecord, observation: NativeObservation): PanelFrontier | undefined {
@@ -326,10 +328,24 @@ function explorePanelTransport(local: State, panel: VisibleCommandPanel, rows: N
     }
     const usable = [...options.keys()];
     const pose = panelTransportPose(mechanism.held);
+    const peers = (local.panelPrograms ?? []).flatMap(program => {
+      const marker = program.code && matchingPanelMarker(rows, panel.area, program.source.marker, program.code);
+      return marker && !local.panelDestinations?.some(destination => sameBox(destination, marker))
+        ? [{ marker, evidence: program.evidence }] : [];
+    });
+    const bridge = planPanelBridge(walker, rows, panel.area, mechanism.held, mechanism.transportReturns ?? {},
+      [...options].map(([key, option]) => ({ key, delta: option.motion.delta!, accessCost: option.route?.route.length ?? 0 })),
+      peers, budget, mechanism.bridgeTarget);
+    if (bridge) {
+      const option = options.get(bridge.first.move.key)!;
+      const first = bridge.first.evidence
+        ? { action: bridge.first.move.key, destination: bridge.first.to, evidence: bridge.first.evidence } : null;
+      return { ...option, mechanism, first, bridge };
+    }
     const next = observedCommandFrontier(mechanism.transportReturns ?? {}, pose, usable, budget);
     const option = next && options.get(next.action);
     if (next && option && (option.route?.route.length ?? 0) + next.depth < budget) {
-      return { ...option, mechanism, first: next.first };
+      return { ...option, mechanism, first: next.first, bridge: undefined };
     }
   }
 }
@@ -515,7 +531,8 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const mechanism = alignment ?? transport;
       const mechanismMove = alignment && !alignment.route ? { motion: alignment.motion, trial: alignment.trial } : undefined;
       const transportMove = transport && !transport.route ? { tool: transport.motion.tool,
-        ...(transport.first?.destination ? { expected: transport.first.destination } : {}) } : undefined;
+        ...((transport.bridge?.first.to ?? transport.first?.destination)
+          ? { expected: (transport.bridge?.first.to ?? transport.first?.destination)! } : {}) } : undefined;
       const phaseCache = new Map<NativeBox, TerrainProjection | null>();
       const phaseFor = (marker: NativeBox) => {
         if (!panel || !local.panelWalker || !local.panelPrograms?.length) return null;
@@ -594,6 +611,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(terrainStep && composed ? [...composed.path.evidence, composed.target.link!] : []),
         ...(mechanism ? [mechanism.motion.evidence, mechanism.mechanism.evidence] : []),
         ...(transport ? [transport.mechanism.transport!, ...(transport.first ? [transport.first.evidence] : [])] : []),
+        ...(transport?.bridge ? [transport.bridge.goal.evidence] : []),
         ...(opening ? [opening.mechanism.transport!, opening.source.evidence] : []),
         ...(unmeasured ? [local.panelArrival!] : [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
@@ -619,6 +637,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       if ((verifiedContextChange || contextualCommand) && decision?.result !== (routeSupported ? 'P07' : 'P05')) return null;
       const strategy = decision ? (routeSupported ? 'P07' : 'P05') : selected.id;
       const label = uncover ? 'Step onto measured ground to uncover the source pattern before selecting a new destination'
+        : transport?.bridge ? (transport.route
+          ? 'Reach the footing for the next move toward the projected bridge placement'
+          : 'Check the next tool move toward the placement that opens access from the matched landing')
         : transport ? (transport.route ? 'Reach the footing that activates a command for the attached support'
         : transport.first ? 'Return to an observed position of the attached support to test another move'
           : 'Test a measured tool command from this position of the attached support')
@@ -657,6 +678,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(terrainStep ? { terrainStep } : {}),
         ...(mechanismMove ? { mechanismMove } : {}),
         ...(transportMove ? { transportMove } : {}),
+        ...(transport?.bridge ? { bridgeTarget: { tool: transport.motion.tool, target: transport.bridge.target } } : {}),
         ...(opening ? { accessGoal: opening.goal } : {}),
         ...(frontier.first?.destination ? { expected: frontier.first.destination } : {}),
         steps: walk ? walk.route.map(step => ({ action: step.command, expected_after: step.to }))
@@ -665,6 +687,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: { ...facts, stage: uncover ? 'uncover_source_pattern'
+            : transport?.bridge ? 'plan_bridge_from_matched_landing'
             : transport ? (transportMove ? 'test_support_placement' : 'reach_transport_control')
             : alignment ? (mechanismMove ? 'align_panel_mechanism' : 'reach_mechanism_control')
             : contact ? 'test_contact_after_landing' : revealedControl ? 'test_revealed_control'
@@ -790,6 +813,10 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
       state.experiments++;
       if (proposal.accessGoal) state.panelAccessGoal = structuredClone(proposal.accessGoal);
+      if (proposal.bridgeTarget) {
+        const mechanism = state.animatedPanelControls?.[proposal.bridgeTarget.tool];
+        if (mechanism?.held) mechanism.bridgeTarget = proposal.bridgeTarget.target;
+      }
       const expected = proposal.collectionTrial?.expected;
       delete state.collectionEdit;
       if (expected && matchesCollectionEdit(afterRows, expected)) state.collectionEdit = [before.observation_ref, after.observation_ref];
