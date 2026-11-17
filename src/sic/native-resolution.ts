@@ -1412,9 +1412,15 @@ export function readNativeResolution(agent: {
       }
     }
     for (const [field, label] of [['auxiliary', 'Auxiliary in focus'], ['nextAuxiliary', 'Projected auxiliary position'],
-      ['parking', 'Side pocket']] as const) {
+      ['parking', 'Side pocket'], ['pressureHolder', 'Piece holding the plate']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+    for (const [field, label] of [['pressurePlates', 'Pressure plate'], ['pressureGates', 'Passage linked to the plate']] as const) {
+      if (Array.isArray(card?.[field])) for (const item of card[field]) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
     }
   }
   if (situationCard && (family === materialAssemblyId || family === learnMaterialAssemblyId)) {
