@@ -24,6 +24,11 @@ const immutableObjects = new WeakSet<object>();
 const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; height: number }>(16 * 1024 * 1024, 4096);
 const MAX_DEPTH = 128;
 export const MAX_JSON_NODES = 1_000_000;
+const validUnicode = new Set<string>();
+const unicodeCacheUnits = 4 * 1024 * 1024;
+const unicodeCacheEntries = 4096;
+let validatedUnicodeUnits = 0;
+const surrogateUnits = /[\ud800-\udfff]/;
 
 /** Read-only ownership test; a foreign or merely frozen object is not certified. */
 export function isOwnedImmutableJson(value: unknown): boolean {
@@ -79,14 +84,25 @@ export function compareUnicode(left: string, right: string): number {
 }
 
 export function assertUnicode(value: string): void {
-  for (let index = 0; index < value.length; index += 1) {
-    const unit = value.charCodeAt(index);
-    if (unit >= 0xd800 && unit <= 0xdbff) {
-      const next = value.charCodeAt(++index);
-      if (!(next >= 0xdc00 && next <= 0xdfff)) throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
-    } else if (unit >= 0xdc00 && unit <= 0xdfff) {
-      throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
+  if (validUnicode.has(value)) return;
+  if (surrogateUnits.test(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      const unit = value.charCodeAt(index);
+      if (unit >= 0xd800 && unit <= 0xdbff) {
+        const next = value.charCodeAt(++index);
+        if (!(next >= 0xdc00 && next <= 0xdfff)) throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
+      } else if (unit >= 0xdc00 && unit <= 0xdfff) {
+        throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
+      }
     }
+  }
+  if (value.length <= unicodeCacheUnits) {
+    if (validUnicode.size >= unicodeCacheEntries || validatedUnicodeUnits + value.length > unicodeCacheUnits) {
+      validUnicode.clear();
+      validatedUnicodeUnits = 0;
+    }
+    validUnicode.add(value);
+    validatedUnicodeUnits += value.length;
   }
 }
 
