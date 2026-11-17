@@ -5,7 +5,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier } from '../src/sic/public-input-exploration.ts';
 import { observedCommandFrontier, observedCommandKey } from '../src/sic/observed-command-frontier.ts';
 import { commandPanelState, visibleCommandPanel } from '../src/sic/visible-command-panel.ts';
-import { learnPanelDirection, projectPanelContact, projectPanelMarker } from '../src/sic/panel-context-probe.ts';
+import { learnPanelDirection, learnPanelTerrain, projectPanelContact, projectPanelMarker } from '../src/sic/panel-context-probe.ts';
 import { sameLandingPixels } from '../src/sic/plan-step.ts';
 import { measureReturningAnimation } from '../src/sic/observed-animation.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
@@ -60,6 +60,11 @@ test('public exploration shares tested panel commands across families and only r
   const panel = visibleCommandPanel(beforeRows);
   assert.ok(panel);
   assert.deepEqual(panel.buttons.map(button => button.bbox.slice(0, 2)), arms);
+  const withTiles = board(1);
+  for (let y = 14; y < 18; y++) for (let x = 34; x < 38; x++) {
+    withTiles[y]![x] = 3 + Math.floor((x - 34) / 2) + 2 * Math.floor((y - 14) / 2);
+  }
+  assert.equal(visibleCommandPanel(withTiles)?.buttons.filter(button => button.area === 4).length, 4);
   const initial = commandPanelState(beforeRows, panel, refs), displaced = commandPanelState(afterRows, panel, refs);
   assert.notEqual(initial, displaced);
   assert.equal(commandPanelState(recurringRows, panel, refs), initial);
@@ -123,7 +128,23 @@ test('a panel comparison projects a guarded route using measured commands and an
   assert.deepEqual(contact.target.box, [8, 4, 9, 5]);
   assert.equal(contact.route.length, 3);
   assert.equal(projectPanelContact(walker, current, field, 0, inputs, [contact.target.key], 3), null);
-  assert.equal(projectPanelContact(walker, current, field, 6, inputs, [], 3), null);
+  assert.equal(projectPanelContact(walker, current, [2, 2, 11, 11], 6, inputs, [], 3), null);
+
+  const shelf = board(4, 6, false), onShelf = board(6, 6, false);
+  for (const x of [6, 7]) shelf[6]![x] = shelf[7]![x] = 9;
+  assert.equal(learnPanelTerrain(walker, field, 0, right.action_ref, shelf, shelf, 'blocked'), walker);
+  const extended = learnPanelTerrain(walker, field, 0, right.action_ref, shelf, onShelf, 'crossed_new_surface');
+  assert.deepEqual(extended.floorReturns, { '9': 'crossed_new_surface' });
+
+  current[4]![8] = current[5]![9] = 8;
+  current[4]![9] = current[5]![8] = 9;
+  current[8]![10] = current[9]![11] = 9;
+  current[8]![11] = current[9]![10] = 8;
+  assert.equal(projectPanelMarker(walker, current, field, inputs, [button], [], 4), null);
+  const matched = projectPanelMarker(walker, current, field, inputs, [button], [], 4,
+    [{ marker: [8, 4, 9, 5], command: observedCommandKey(button.command), evidence: 'earlier_displacement' }]);
+  assert.deepEqual(matched?.target.peer, [10, 8, 11, 9]);
+  assert.equal(matched?.target.link, 'earlier_displacement');
 });
 
 test('a repeated animation localizes a response even when the field returns to its original pixels', () => {

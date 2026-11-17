@@ -8,6 +8,19 @@ export type VisibleCommandPanel = { area: NativeBox; fieldInk: number; panel: Na
 const contains = ([l, t, r, b]: NativeBox, [x, y, u, v]: NativeBox) => l <= x && u <= r && t <= y && v <= b;
 const disjoint = (a: NativeBox, b: NativeBox) => a[2] < b[0] || b[2] < a[0] || a[3] < b[1] || b[3] < a[1];
 
+/** A compact group can contain controls smaller than an isolated button. */
+function fourTileControls(parts: readonly Component[], background: number) {
+  const tiles = new Map(parts.filter(part => part.color !== background && part.rectangular && part.area === 4
+    && part.bbox[2] - part.bbox[0] === 1).map(part => [part.bbox.slice(0, 2).join(','), part]));
+  const groups = [...tiles.values()].flatMap(part => {
+    const [x, y] = part.bbox;
+    const group = [part, tiles.get(`${x + 2},${y}`), tiles.get(`${x},${y + 2}`), tiles.get(`${x + 2},${y + 2}`)];
+    return group.every(tile => tile !== undefined) && new Set(group.map(tile => tile?.color)).size === 4
+      ? group as Component[] : [];
+  });
+  return [...new Set(groups)];
+}
+
 function crossedCenter(parts: readonly Component[], background: number) {
   const matches = parts.filter(center => {
     const [left, top, right, bottom] = center.bbox, side = right - left + 1;
@@ -31,8 +44,10 @@ export function visibleCommandPanel(rows: NativeRows, parts = geometricComponent
   if (!field || !panel) return null;
   const attached = parts.filter(part => part !== panel && contains(panel.bbox, part.bbox)
     && part.area >= 6 && part.area * 8 < panel.area);
+  const small = fourTileControls(parts.filter(part => contains(panel.bbox, part.bbox)), panel.color);
   const center = crossedCenter(attached, panel.color);
-  if (center) return { area: field.bbox, fieldInk: field.color, panel: panel.bbox, buttons: attached.filter(part => part !== center), aligned: [] };
+  if (center) return { area: field.bbox, fieldInk: field.color, panel: panel.bbox,
+    buttons: [...attached.filter(part => part !== center), ...small], aligned: [] };
   const rowsOfButtons = new Map<string, Component[]>();
   for (const part of attached) {
     const [l, t, r, b] = part.bbox, width = r - l + 1, height = b - t + 1;
@@ -52,7 +67,7 @@ export function visibleCommandPanel(rows: NativeRows, parts = geometricComponent
     return spacing > 0 && sorted.every((part, i) => part.bbox[axis] === sorted[0]!.bbox[axis] + i * spacing) ? [sorted] : [];
   }).sort((a, b) => b.length - a.length);
   if (!aligned.length || aligned[0]!.length === aligned[1]?.length) return null;
-  const buttons = [...new Set([...aligned[0]!, ...attached])];
+  const buttons = [...new Set([...aligned[0]!, ...attached, ...small])];
   return { area: field.bbox, fieldInk: field.color, panel: panel.bbox, buttons, aligned: aligned[0]! };
 }
 

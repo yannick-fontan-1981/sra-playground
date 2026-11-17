@@ -578,6 +578,8 @@ export function readNativeResolution(agent: {
     const marker = bounds(card?.marker), control = bounds(card?.control);
     if (marker) subjects.push({ label: 'Marker reached to vary the test conditions', box: marker });
     if (control && !region) subjects.push({ label: 'Panel control previously observed to change the board', box: control });
+    const peer = bounds(card?.projectedPeer);
+    if (peer) subjects.push({ label: 'Candidate destination with the matching marker', box: peer });
     const contact = bounds(card?.contact);
     if (contact) subjects.push({ label: 'Contact at the edge of the known floor', box: contact });
     const animated = bounds(card?.animatedMechanism);
