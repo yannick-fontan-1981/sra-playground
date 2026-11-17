@@ -194,10 +194,11 @@ test('a panel comparison projects a guarded route using measured commands and an
 test('leaving an occupied marker retains its revealed footprint for a guarded return', () => {
   const field = [0, 0, 11, 9] as const;
   const right = { action_ref: 'ACTION4', data: {} }, left = { action_ref: 'ACTION3', data: {} };
-  const up = { action_ref: 'ACTION1', data: {} };
+  const up = { action_ref: 'ACTION1', data: {} }, down = { action_ref: 'ACTION2', data: {} };
   const walker: PanelWalker = { ink: 7, floor: 1, controls: {
     ACTION4: { delta: [2, 0], evidence: 'right' }, ACTION3: { delta: [-2, 0], evidence: 'left' },
     ACTION1: { delta: [0, -2], evidence: 'up' },
+    ACTION2: { delta: [0, 2], evidence: 'down' },
   } };
   const before = Array.from({ length: 10 }, () => Array<number>(12).fill(1));
   const after = before.map(row => [...row]);
@@ -212,6 +213,9 @@ test('leaving an occupied marker retains its revealed footprint for a guarded re
   assert.equal(projectPanelFooting(walker, after, field, [left, up], [0, 4, 1, 5], 'beyond_marker', 2), null);
   assert.equal(route?.route.length, 2);
   assert.ok(route?.evidence.includes('departed_marker'));
+  const fork = projectPanelFooting(learned, after, field, [down, left, up], [2, 6, 3, 7], 'next_control', 2);
+  assert.equal(fork?.route[0]?.command.action_ref, left.action_ref);
+  assert.equal(fork?.route.length, 2);
   const changed = after.map(row => [...row]);
   changed[4]![2] = 0;
   assert.equal(projectPanelFooting(learned, changed, field, [left, up], [0, 4, 1, 5], 'beyond_marker', 2), null);
