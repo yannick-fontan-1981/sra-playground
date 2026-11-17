@@ -1291,3 +1291,9 @@ Le motif comporte sept pièces. SIC reconnaît la grille et les panneaux à part
 FOGW gagne le niveau 5 en **38 commandes et 15,33 s de temps mural** lors du rejeu complet avec le réglage de huit processus. Les 124 commandes relèvent de SIC seul. Les 86 premières commandes, observations et animations reproduisent la référence jusqu’au niveau 4. FOGW est le seul jeu à avoir exécuté la famille de réception pendant la campagne des niveaux 1 à 4.
 
 SIC réutilise les déplacements mesurés et le marquage des supports déjà observés. Deux badges distincts et deux supports actifs ouvrent une séquence de réceptions. Le premier essai de traversée échoue à la 2e commande. SIC reconnaît le retour à la scène initiale et évite la même case à cet instant. À la 20e commande, un badge change de couleurs en conservant sa forme alors que le porteur occupe un support. Son apparence reste identique après le départ du porteur à la commande suivante. SIC rejoint alors le second support et obtient la victoire officielle.
+
+### SNAR niveau 5, éjecteurs, porte et patrouilles
+
+SNAR gagne le niveau 5 en **35 commandes et 13,32 s de temps mural** lors du rejeu complet avec le réglage de huit processus. Les 134 commandes relèvent de SIC seul. Les 99 premières commandes, observations et animations reproduisent la référence jusqu’au niveau 4. SNAR est le seul jeu à avoir exécuté cette famille de navigation pendant la campagne des niveaux 1 à 4.
+
+SIC distingue les cadres fléchés des obstacles déjà connus et mesure l’état de la porte. Il observe son ouverture après une impulsion et confirme deux points d’arrivée à partir des images de déplacement sur les cadres. Il suit séparément les patrouilles et les obstacles sur rails. Lorsqu’une séquence récente de positions a déjà été suivie d’une même position, cette dernière sert à évaluer la prochaine traversée. SIC se retire avant l’arrivée d’une patrouille, attend à côté du passage et y revient après son départ.
