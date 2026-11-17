@@ -47,11 +47,24 @@ export function measureAlignedTool(rows: NativeRows, field: NativeBox, region: N
   return support && dockingDistance(tool, support) === 0 ? { tool, support } : undefined;
 }
 
+type HeldSupport = NonNullable<ReturnType<typeof measureAlignedTool>>;
+
+export const panelTransportPose = ({ tool, support }: HeldSupport) => `${tool.join(',')}:${support.join(',')}`;
+
 export function measurePanelTransport(before: NativeRows, after: NativeRows, field: NativeBox,
-  held: NonNullable<ReturnType<typeof measureAlignedTool>>) {
+  held: HeldSupport) {
   const delta = panelToolTranslation(before, after, field, held.tool);
   if (!delta) return;
   const shift = (box: NativeBox): NativeBox => [box[0] + delta[0], box[1] + delta[1], box[2] + delta[0], box[3] + delta[1]];
   const tool = shift(held.tool), support = findPanelDock(after, field, tool);
   return support && sameBox(support, shift(held.support)) ? { tool, support, delta } : undefined;
+}
+
+export function unchangedPanelTransport(before: NativeRows, after: NativeRows, { tool, support }: HeldSupport) {
+  return [tool, support].every(([left, top, right, bottom]) => {
+    for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+      if (before[y]?.[x] !== after[y]?.[x]) return false;
+    }
+    return true;
+  });
 }
