@@ -36,17 +36,9 @@ export function readPursuitState(rows: NativeRows, terrain: PursuitTerrain, obst
   return { actor: actors[0]!, peers: sorted(peers), obstacles: sorted(obstacles) };
 }
 
-export function projectPursuit(state: PursuitState, terrain: PursuitTerrain, input: PursuitDirection,
-  retreatOrder: readonly PursuitDirection[]): PursuitState | null {
-  const actor = shift(state.actor, input, terrain.pitch);
-  if (!terrain.cells[pursuitPointKey(actor)]) return null;
-  let obstacles = state.obstacles;
-  if (has(obstacles, actor)) {
-    const displaced = shift(actor, input, terrain.pitch);
-    if (!terrain.cells[pursuitPointKey(displaced)] || has(obstacles, displaced) || has(state.peers, displaced)) return null;
-    obstacles = sorted(obstacles.map(obstacle => same(obstacle, actor) ? displaced : obstacle));
-  }
-  const survivors = state.peers.filter(peer => !same(peer, actor));
+export function projectRetreat(actor: NativePoint, previous: NativePoint[], obstacles: NativePoint[], terrain: PursuitTerrain,
+  retreatOrder: readonly PursuitDirection[]): NativePoint[] | null {
+  const survivors = previous.filter(peer => !same(peer, actor));
   const peers = survivors.map(peer => {
     let best = peer, separation = distance(actor, peer);
     for (const direction of retreatOrder) {
@@ -58,7 +50,21 @@ export function projectPursuit(state: PursuitState, terrain: PursuitTerrain, inp
     return best;
   });
   if (new Set(peers.map(pursuitPointKey)).size !== peers.length) return null;
-  return { actor, peers: sorted(peers), obstacles };
+  return sorted(peers);
+}
+
+export function projectPursuit(state: PursuitState, terrain: PursuitTerrain, input: PursuitDirection,
+  retreatOrder: readonly PursuitDirection[]): PursuitState | null {
+  const actor = shift(state.actor, input, terrain.pitch);
+  if (!terrain.cells[pursuitPointKey(actor)]) return null;
+  let obstacles = state.obstacles;
+  if (has(obstacles, actor)) {
+    const displaced = shift(actor, input, terrain.pitch);
+    if (!terrain.cells[pursuitPointKey(displaced)] || has(obstacles, displaced) || has(state.peers, displaced)) return null;
+    obstacles = sorted(obstacles.map(obstacle => same(obstacle, actor) ? displaced : obstacle));
+  }
+  const peers = projectRetreat(actor, state.peers, obstacles, terrain, retreatOrder);
+  return peers ? { actor, peers, obstacles } : null;
 }
 
 export function planPursuit(state: PursuitState, terrain: PursuitTerrain, retreatOrder: PursuitDirection[],
