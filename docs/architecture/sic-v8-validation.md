@@ -1571,3 +1571,11 @@ Le curseur encadre les côtés du dictionnaire. Les deux mots de l'exemple reste
 SIC réutilise le rôle des commandes acquises au niveau précédent et mesure les cycles propres aux glyphes du nouveau dictionnaire. Le contrôle de chaque pas compare le curseur, les côtés éditables et les deux mots fixes. Deux séries continues de deux et cinq commandes suivent les mesures.
 
 Le niveau 5 est gagné en **29 commandes et 12,04 s** dans le rejeu configuré pour huit workers. Les 150 commandes relèvent de SIC seul. Les 121 commandes et retours des niveaux 1 à 4 concordent avec `2257614e`. La permutation de palette reproduit le parcours et les effets géométriques. Empreinte du rejeu `9970a2fb14c4cf1605275fe476a23d821d895f0b40dee50c2ed5fbaf4564866e`. Le contrôle TypeScript et les 111 tests ciblés passent.
+
+### LF52 niveau 5, déplacer le milieu d’un saut
+
+SIC distingue le plot fixe, le plot porté et le transporteur vide. Il peut placer un plot au milieu d'un saut tout en réservant une autre case pour l'atterrissage. Le retour de la septième commande réfute le blocage supposé du second transporteur. Le modèle révisé vérifie que celui-ci avance sur la case libérée par le premier. Les changements de cadrage conservent les positions déjà suivies et ajoutent un puis trois jetons révélés.
+
+Le trajet comprend seize sauts, dont six utilisent un plot porté. Onze sauts gardent le nombre de jetons, et cinq en retirent un. Huit séries continues de déplacement vont jusqu'à neuf commandes. Chaque pas compare les poses, les charges et le cadrage. Le changement de vue scelle la série pour intégrer les éléments révélés.
+
+Le niveau 5 est gagné en **99 commandes et 117,13 s** dans le rejeu configuré pour huit workers. Le temps mesuré des reprises de décision est de 92,50 s. Les 243 commandes relèvent de SIC seul. Les 144 commandes et retours des niveaux 1 à 4 concordent avec `9072b10e`. La permutation de palette conserve le parcours et les effets géométriques. Empreinte complète `9fea2b91a85fd68bda4a22bb20bf63bca34baa959c654992f0678c3a22661c84`. Le contrôle TypeScript et les 148 tests ciblés passent.
