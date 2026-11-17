@@ -160,9 +160,10 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
       if (remaining < 1 || !['ACTION5','ACTION6','ACTION2'].every(id => observation.available_action_refs.includes(id))) return null;
       const parts = geometricComponents(rows);
       if (learned?.completed === observation.levels_completed) {
-        const pose = readSpanPose(parts, learned.pitch, learned.beamHeight, learned.validPaint);
+        const prior = planning?.epoch === observation.level_epoch ? planning : null;
+        const pose = readSpanPose(parts, learned.pitch, learned.beamHeight, learned.validPaint,
+          prior ? { rows, slots: prior.layout.slots } : undefined);
         if (pose) {
-          const prior = planning?.epoch === observation.level_epoch ? planning : null;
           const layout = prior?.layout ?? measureSpan(rows, parts, learned, pose);
           const centered = prior?.plan ?? (layout && planSpan(layout, pose));
           const plan = centered ?? (layout && learned.confirmedSpan && planSpan(layout, pose, true));
