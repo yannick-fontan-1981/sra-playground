@@ -1252,3 +1252,28 @@ Après la correction du rendez-vous, **SIGN gagne le niveau 5 en 53 commandes et
 **SWCH gagne le niveau 5 en 48 commandes et 20,03 s de temps actif**, avec le réglage de huit processus. Les 151 commandes du rejeu relèvent de SIC seul. Les 103 commandes, observations et animations jusqu’à la victoire du niveau 4 reproduisent la référence `26cb728e`. SWCH est le seul jeu à avoir exécuté cette famille pendant la campagne des niveaux 1 à 4.
 
 Quand la carte initiale est encore inconnue, SIC peut tester le seul levier d’éclairage adjacent si la réserve et la capacité sont lisibles. Le retour doit confirmer à la fois l’apparition du plan de la salle et la dépense d’une unité. Avant le premier passage, le plan utilise la première recharge accessible pour financer la prochaine reconnaissance. Après l’ouverture du premier passage, il peut ouvrir une porte depuis une salle cartographiée même si la salle suivante est encore sombre. Chaque mouvement, recharge ou ouverture est réconcilié avec la carte et la réserve observées. Le contrôle TypeScript et les 38 tests ciblés passent.
+
+### DC22 niveau 5, diversité des essais et positions du support porté
+
+Après un tour des directions, une comparaison de passages cède la main si la même scène revient ou si un panneau séparé offre d’autres commandes à tester. En mode exploration, SIC fait alterner les commandes encore inconnues et les candidats du panneau. Il compare le terrain et le panneau pour déterminer si l’essai apporte un retour différent. Une variation sur la seule bande d’état ne crée pas un nouveau terrain. Quand un clic produit une translation de forme et de couleur concordantes, SIC garde les deux poses et leur déplacement.
+
+Sur DC22, le premier bouton du panneau est essayé à la **5e commande** du niveau 5 et les **neuf candidats avant la 22e**. Après épuisement de ces comparaisons sur la même scène, SIC évite le second passage consacré aux directions. Le niveau 5 reste à gagner. Le rejeu s’arrête après **72 commandes**, contre 112 sur `b07dd17a`, et conserve les 187 commandes, observations et animations des niveaux 1 à 4. TRIA gagne de nouveau ses quatre premiers niveaux en 63 commandes contre 57 auparavant. Le contrôle TypeScript et les 41 tests ciblés passent.
+
+Dans un essai séparé, la prise modifie la silhouette de la pince. Le clic de transport suivant translate la pince et le support de quatre pixels sans déplacer le curseur. Avec le curseur sur un îlot fixe, la vérification exhaustive des quatre directions dans chaque pose donne **10 poses accessibles, 18 translations et 22 butées**. En ne retenant pour la calibration que les 16 premiers retours et les pixels du rail visibles à ce stade, une seule projection des poses reste compatible. Elle retrouve les 10 poses vérifiées séparément.
+
+La table donne le coin supérieur gauche du support en pixels. Les ouvertures sont évaluées dans la configuration de portes observée pendant cet essai.
+
+| Pose du support | Effet sur les accès |
+| --- | --- |
+| (20, 10) | Relie l’îlot central au palier supérieur. |
+| (16, 10) | Aucun lien entre îlots. |
+| (12, 10) | Aucun lien entre îlots. |
+| (8, 10) | Aucun lien entre îlots. |
+| (8, 14) | Aucun lien entre îlots. |
+| (8, 18) | Aucun lien entre îlots. |
+| (8, 22) | Touche un îlot sans le relier à un autre. |
+| (12, 22) | Aucun lien entre îlots. |
+| (16, 22) | Aucun lien entre îlots. |
+| (20, 22) | Relie le secteur de départ à l’îlot central après ouverture du passage par le panneau. |
+
+Les deux traversées sont ensuite confirmées sur le jeu. Le curseur rejoint l’îlot central en 12 mouvements après l’ouverture du passage, y reste pendant les neuf déplacements du support et rejoint le palier supérieur en neuf mouvements. La dérivation du rail, le placement du support et le choix de l’ouverture ont été testés hors du solveur autonome.

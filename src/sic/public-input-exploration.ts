@@ -11,6 +11,7 @@ import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
 import { repeatedInputTargets } from './repeated-input-targets.ts';
 import { countChangesInside, workspaceClickCandidate } from './workspace-click.ts';
+import { commandPanelState, visibleCommandPanel, type VisibleCommandPanel } from './visible-command-panel.ts';
 
 export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
@@ -52,16 +53,27 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   controlledPiece?: ControlledMotion;
   directionHadLocalEffect?: true;
   testedDirections?: string[];
+  panelTests?: string[];
+  lastPanelTestWasClick?: boolean;
+  lastPanelContext?: string;
   collectionEdit?: readonly [string, string];
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
-  clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string };
+  clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string;
+  panel?: Pick<VisibleCommandPanel, 'area' | 'panel'>; panelTest?: true };
 const initial = (epoch = 0): State => ({ epoch, experiments: 0, transitions: {}, options: {}, lastChange: null, recheck: null });
 export function currentControlledMotion(state: NativeRecord, observation: NativeObservation): ControlledMotion | undefined {
   const exploration = state as State;
   const motion = exploration.controlledPiece;
   return exploration.epoch === observation.level_epoch && motion?.evidence[1] === observation.observation_ref
     && motion.destination === interfaceKey(observation) ? motion : undefined;
+}
+
+export function exhaustedPanelExploration(state: NativeRecord, observation: NativeObservation): string | undefined {
+  const exploration = state as State;
+  return exploration.epoch === observation.level_epoch && exploration.experiments >= explorationLimit
+    && (exploration.panelTests?.filter(command => command.startsWith('ACTION6:')).length ?? 0) >= 3
+    ? exploration.lastPanelContext : undefined;
 }
 
 function changedWithin(before: NativeRows, after: NativeRows, [l, t, r, b]: NativeBox) {
@@ -138,6 +150,10 @@ function visibleInputs(observation: NativeObservation, rows: NativeRows, inputs:
   return candidates;
 }
 
+function explorationKey(observation: NativeObservation, rows: NativeRows, panel?: Proposal['panel']) {
+  return panel ? commandPanelState(rows, panel, observation.available_action_refs) : interfaceKey(observation);
+}
+
 export function createSicPublicInputExploration(): NativeFamily<Proposal> {
   let state = initial();
   let decide: NativeProgramHandle | undefined;
@@ -150,13 +166,22 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const local = state.epoch === observation.level_epoch ? state : initial(observation.level_epoch);
       const budget = Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
-      const source = interfaceKey(observation), ref = observation.observation_ref;
-      const stationaryClicks = (local.transitions[source] ?? []).filter(edge => edge.destination === source && edge.action.startsWith('ACTION6:'));
+      const ref = observation.observation_ref;
       const nonPoint = inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref));
+      const panel = nonPoint.length > 1 && observation.available_action_refs.includes('ACTION6') ? visibleCommandPanel(rows) : null;
+      const panelBounds = panel ? { area: panel.area, panel: panel.panel } : undefined;
+      const source = explorationKey(observation, rows, panelBounds);
+      const stationaryClicks = (local.transitions[source] ?? []).filter(edge => edge.destination === source && edge.action.startsWith('ACTION6:'));
       const stationaryCommand = nonPoint.length === 1
         ? local.transitions[source]?.find(edge => edge.action === nonPoint[0]!.action_ref && edge.destination === source) : undefined;
       const candidates = visibleInputs(observation, rows, inputs, !!stationaryCommand && stationaryClicks.length >= 4);
       const named = [...candidates.keys()].filter(key => /^ACTION[1-5]$/.test(key));
+      const panelKeys = panel?.buttons.map(part => {
+        const [x, y] = componentCenterPoint(part), command = { action_ref: 'ACTION6', data: { x, y } };
+        const key = commandKey(command);
+        candidates.set(key, { command, box: part.bbox, marker: false, repeated: false });
+        return key;
+      }) ?? [];
       const verifiedEdit = local.collectionEdit?.[1] === ref ? local.collectionEdit : undefined;
       const trial = observation.available_action_refs.includes('ACTION6') && named.length === 1
         ? proposeCollectionTrial(rows, named.map(key => candidates.get(key)!.command), !!verifiedEdit) : null;
@@ -171,7 +196,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       }
       const keys = [...candidates.keys()];
       const clickedControl = local.clickedControl?.destination === source ? local.clickedControl : undefined;
-      const controlledPiece = local.controlledPiece?.destination === source ? local.controlledPiece : undefined;
+      const controlledPiece = local.controlledPiece?.destination === interfaceKey(observation) ? local.controlledPiece : undefined;
       const probe = clickedControl?.remaining.find(key => candidates.has(key));
       const canDiversifyDirection = keys.includes('ACTION5')
         || (keys.some(key => key === 'ACTION1' || key === 'ACTION2') && keys.some(key => key === 'ACTION3' || key === 'ACTION4'));
@@ -184,13 +209,19 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? { action: trialKey, probe: trialKey, depth: 0, first: null } : null;
       const workspaceProbe = workspaceKey && !local.transitions[source]?.some(edge => edge.action === workspaceKey)
         ? { action: workspaceKey, probe: workspaceKey, depth: 0, first: null } : null;
+      const pendingButton = panelKeys.find(key => !local.panelTests?.includes(key));
+      const pendingNonPoint = pendingButton && local.lastPanelTestWasClick
+        && !execution?.readDirectionalMotion?.() ? named.find(key => !local.panelTests?.includes(key)) : undefined;
+      const variedInput = pendingNonPoint || pendingButton;
+      const panelProbe = variedInput ? { action: variedInput, probe: variedInput, depth: 0, first: null } : null;
       const frontier = probe ? { action: probe, probe, depth: 0, first: null }
-        : measuredControls ?? preferred ?? workspaceProbe ?? observedCommandFrontier(local.transitions, source, keys, budget,
+        : measuredControls ?? preferred ?? workspaceProbe ?? panelProbe ?? observedCommandFrontier(local.transitions, source, keys, budget,
           board => board === source ? keys : local.options[board] ?? [], deferred);
       const offer = frontier && candidates.get(frontier.action);
       if (!offer) return null;
       const collectionTrial = frontier === preferred ? trial : null;
       const workspaceTrial = frontier === workspaceProbe ? workspace : null;
+      const panelTest = frontier === panelProbe;
       const verifiedContextChange = recheck && !probe && !collectionTrial && !workspaceTrial && named.includes(frontier.action)
         ? recheck.evidence : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
@@ -224,7 +255,8 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const strategy = decision ? (routeSupported ? 'P07' : 'P05') : selected.id;
       const label = decision
         ? (routeSupported ? publicInputStrategies.P07 : 'Recheck an available control after the visible interface changes')
-        : publicInputStrategies[selected.id];
+        : panelTest && command.action_ref === 'ACTION6' ? 'Test a distinct control on the visible panel'
+          : panelTest ? 'Compare a non-point command with the tested panel controls' : publicInputStrategies[selected.id];
       const goal = { kind: 'learn_public_command_effect', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['current_public_interface'], parentObjective: completion, satisfactionContract: 'observe_public_return_to_available_input' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
@@ -234,6 +266,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         : null;
       return {
         status: 'proposed', kind: publicInputExplorationId, actions, source, candidates: keys, needId: need.id,
+        ...(panelBounds ? { panel: panelBounds } : {}), ...(panelTest ? { panelTest: true } : {}),
         ...(clickedControl && probe ? { clickedControl } : {}), ...(box && !offer.marker ? { selectedBox: box } : {}),
         ...(collectionTrial ? { collectionTrial } : {}),
         ...(workspaceTrial ? { workspaceTrial: workspaceTrial.workspace } : {}),
@@ -268,11 +301,13 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const expected = proposal.collectionTrial?.expected;
       const matched = !scored && expected ? matchesCollectionEdit(afterRows, expected)
         : !scored && proposal.workspaceTrial ? !!countChangesInside(rows, afterRows, proposal.workspaceTrial)
-        : !scored && proposal.expected ? proposal.expected === interfaceKey(after) : null;
+        : !scored && proposal.expected ? proposal.expected === explorationKey(after, afterRows, proposal.panel) : null;
       return { matched, seal_prefix: true, reason: scored ? 'official_boundary'
         : expected ? (matched ? 'collection_edit_confirmed' : 'collection_edit_contradicted')
           : proposal.workspaceTrial ? (matched ? 'workspace_changed_with_example_preserved' : 'workspace_change_unconfirmed')
-          : matched === false ? 'public_transition_contradicted' : 'observed_public_input_return',
+          : matched === false ? 'public_transition_contradicted'
+            : proposal.panelTest && proposal.panel ? (changedWithin(rows, afterRows, proposal.panel.area)
+              ? 'input_changed_playing_surface' : 'input_left_playing_surface_unchanged') : 'observed_public_input_return',
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     record(before, after, command, rows, afterRows, proposal) {
@@ -283,7 +318,12 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       delete state.collectionEdit;
       if (expected && matchesCollectionEdit(afterRows, expected)) state.collectionEdit = [before.observation_ref, after.observation_ref];
       state.options[proposal.source] = proposal.candidates;
-      const destination = interfaceKey(after), action = commandKey(command);
+      const destination = explorationKey(after, afterRows, proposal.panel), action = commandKey(command);
+      if (proposal.panel) state.lastPanelContext = destination;
+      if (proposal.panelTest) {
+        state.panelTests = [...new Set([...(state.panelTests ?? []), action])];
+        state.lastPanelTestWasClick = command.action_ref === 'ACTION6';
+      }
       let motionReceipt: ControlledMotion | undefined;
       if (/^ACTION[1-4]$/.test(action)) {
         const playable: NativeBox = [1, 1, rows[0]!.length - 2, rows.length - 2];
@@ -296,7 +336,8 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         const { box, point, evidence, remaining } = proposal.clickedControl;
         const motion = translatedPiece(rows, afterRows, proposal.clickedControl);
         if (motion) {
-          motionReceipt = { from: motion.from, to: motion.to, command: action, evidence: [evidence, after.observation_ref], destination };
+          motionReceipt = { from: motion.from, to: motion.to, command: action, evidence: [evidence, after.observation_ref],
+            destination: interfaceKey(after) };
           state.controlledPiece = motionReceipt;
         }
         else if (remaining.length > 1 && !changedWithin(rows, afterRows, box)) {
@@ -316,7 +357,16 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       }
       rememberCommandReturn(state.transitions, proposal.source, destination, action, after.observation_ref);
       state.lastChange = destination === proposal.source ? null : { destination, action, evidence: after.observation_ref };
-      return { events: motionReceipt ? [{ kind: 'sic_selected_piece_motion', ...motionReceipt }] : [] };
+      const events: NativeRecord[] = motionReceipt ? [{ kind: 'sic_selected_piece_motion', ...motionReceipt }] : [];
+      if (proposal.panel && proposal.panelTest && command.action_ref === 'ACTION6') {
+        const { area } = proposal.panel;
+        const translations = measureComponentTranslations(rows, afterRows, part => part.area >= 4 && part.area < 256
+          && part.bbox[0] >= area[0] && part.bbox[1] >= area[1] && part.bbox[2] <= area[2] && part.bbox[3] <= area[3]);
+        if (translations.length) events.push({ kind: 'sic_panel_control_translation', command: action,
+          translations: translations.map(({ from, to, displacement }) => ({ from: from.bbox, to: to.bbox, displacement })),
+          evidence: [before.observation_ref, after.observation_ref] });
+      }
+      return { events };
     },
     state: () => ({ ...state }),
     restore(value: NativeRecord) { state = structuredClone(value as State); },

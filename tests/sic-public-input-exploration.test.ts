@@ -6,6 +6,34 @@ import { createSicPublicInputExploration, currentControlledMotion } from '../src
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 
+test('a separated panel gets a turn between movement probes despite unrelated changes in the status strip', async () => {
+  const board = (step: number) => Array.from({ length: 18 }, (_, y) => Array.from({ length: 32 }, (_, x) => {
+    if (y === 17) return x < step ? 4 : 0;
+    if (x < 16) return x >= 4 && x <= 6 && y >= 5 && y <= 7 ? 3 : 1;
+    return y >= 6 && y <= 8 && [20, 23, 26, 29].some(start => x === start || x === start + 1) ? 7 : 2;
+  }));
+  const observe = (step: number) => measureNativeObservation({ frame_rows: board(step), frame_hash: `frame-${step}`,
+    level: 1, levels_completed: 0, available_action_refs: ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION6'], state: 'NOT_FINISHED' }, step);
+  const family = createSicPublicInputExploration();
+  const inputs = [1, 2, 3, 4].map(id => ({ action_ref: `ACTION${id}`, data: {} }));
+  const examples = [];
+  const sources = new Set<string>();
+  for (let i = 1; i <= 4; i++) {
+    const before = await observe(i), after = await observe(i + 1);
+    const proposal = await family.propose(before, board(i), inputs, 20);
+    assert.ok(proposal);
+    const action = proposal.actions[0]!;
+    examples.push([action.action_ref, action.data.x]);
+    sources.add(proposal.source);
+    const effect = await family.after(proposal, 0, before, after, board(i), board(i + 1));
+    assert.equal(effect.reason, 'input_left_playing_surface_unchanged');
+    await family.record(before, after, action, board(i), board(i + 1), proposal, 0, []);
+  }
+  assert.equal(sources.size, 1);
+  assert.deepEqual(examples.map(([id]) => id), ['ACTION6', 'ACTION1', 'ACTION6', 'ACTION2']);
+  assert.notEqual(examples[0]![1], examples[2]![1]);
+});
+
 test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {
   const fixtures = JSON.parse(await readFile(new URL('./fixtures/v6-occurrence-reference.json', import.meta.url), 'utf8'));
   const packet: NativePublicObservation = fixtures.scenes['stck:initial'].public;

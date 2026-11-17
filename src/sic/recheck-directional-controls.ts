@@ -3,6 +3,7 @@ import type { NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, N
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { shapeTargets, type ShapeTargetOrder } from './interior-shape-targets.ts';
 import { sicNeedId } from './need-identity.ts';
+import { commandPanelState, visibleCommandPanel } from './visible-command-panel.ts';
 import { observedCommandFrontier, observedCommandKey, observedCommandState, oppositeDirection, rememberCommandReturn,
   stationaryCommandEvidence, type ObservedCommandGraph } from './observed-command-frontier.ts';
 
@@ -64,6 +65,10 @@ export function createSicRecheckDirectionalControls(): NativeFamily<Proposal> {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
     async propose(observation, rows, inputs, remaining, execution) {
+      if (execution?.exhaustedPanelContext) {
+        const panel = visibleCommandPanel(rows);
+        if (panel && commandPanelState(rows, panel, observation.available_action_refs) === execution.exhaustedPanelContext) return null;
+      }
       const local = state?.epoch === observation.level_epoch ? state : initialize(observation.level_epoch);
       const budget = Math.min(remaining, 40 - local.tested, local.activation?.remaining ?? 40);
       if (budget < 1) return null;
