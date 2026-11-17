@@ -113,12 +113,16 @@ function projectPanelWalk<T>(walker: PanelWalker, rows: NativeRows, field: Nativ
   const seen = new Set([place(actor)]);
   for (const node of nodes) {
     if (node.depth >= budget) continue;
-    for (const move of moves) {
-      const [dx, dy] = move.delta;
-      const next = footprint(node.box[0] + dx, node.box[1] + dy), location = place(next);
+    const candidates = moves.map(move => {
+      const next = footprint(node.box[0] + move.delta[0], node.box[1] + move.delta[1]), patch = tile(rows, next);
+      const contact = walker.contacts?.[place(next)];
+      return { move, next, patch, occupiedBefore: contact?.patch === patch.join(',') };
+    }).sort((left, right) => Number(right.occupiedBefore) - Number(left.occupiedBefore));
+    for (const { move, next, patch } of candidates) {
+      const location = place(next);
       if (!containsBox(field, next) || seen.has(location)) continue;
       seen.add(location);
-      const patch = tile(rows, next), supported = supportEvidence(walker, next, patch);
+      const supported = supportEvidence(walker, next, patch);
       const reached = { box: next, depth: node.depth + 1, previous: node, move, terrain: typeof supported === 'string' ? supported : undefined };
       const target = targetAt(next, patch, !!supported);
       if (target !== undefined) {
