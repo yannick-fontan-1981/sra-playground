@@ -1411,3 +1411,9 @@ Le niveau 5 est gagné en **33 commandes et 16,38 s** dans le lot configuré pou
 Quand les composants connexes ne suffisent pas à identifier la disposition, SIC réunit les fragments de même couleur et vérifie les bords des cadres ainsi que leur emboîtement. Deux salles ont ainsi plusieurs fragments de mur séparés par des ouvertures. Les sept salles mobiles réutilisent la recherche de liaison par placements successifs et la vérification des murs après chaque commande.
 
 Le niveau 5 est gagné en **19 commandes et 17,85 s** dans le lot configuré pour huit workers. Les 54 commandes relèvent de SIC seul. Les 35 commandes et retours des niveaux 1 à 4 concordent avec `03079749`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `9680b951842ea9530b2a8037cc4f29007cbf2af2d1c5c46807f6ec9216be61d0`.
+
+### KEYD niveau 5, capacité de l’inventaire et réutilisation d’une clé
+
+SIC reconnaît deux emplacements vides à partir du cadre observé et associe une clé à deux découpes compatibles. Le premier franchissement teste la conservation de la clé à la commande 9. La recharge rend 18 unités au lieu des 22 prévues, et SIC recalcule la suite. La seconde clé occupe la place libre à la commande 18 et disparaît au verrou à la commande 21. La commande suivante réutilise la première clé avec la preuve du franchissement précédent. Aucun dépôt n’est nécessaire sur ce trajet.
+
+Le niveau 5 est gagné en **26 commandes et 9,04 s** dans le lot configuré pour huit workers. Les 122 commandes relèvent de SIC seul. Les 96 commandes et retours des niveaux 1 à 4 concordent avec `4f58377e`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `4c5b4f63ffe264660475813478f879323b95a401d6aed3a5e40891154782de24`.

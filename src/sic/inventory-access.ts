@@ -8,8 +8,8 @@ import { maximumCommittedActions } from './plan-step.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
-import { planInventoryRoute, type InventoryPosition, type InventoryRouteStep } from './inventory-route-plan.ts';
-import { inventoryPositionMatches, readInventoryReserve, readInventoryRoute, verifyInventoryReturn,
+import { planInventoryRoute, slotContents, type InventoryPosition, type InventoryRouteStep } from './inventory-route-plan.ts';
+import { inventoryPositionMatches, readInventoryReserve, readInventoryRoute, reusableKeyAt, verifyInventoryReturn,
   type InventoryEvidence, type InventoryRouteScene } from './inventory-route-observation.ts';
 
 export const inventoryAccessId = 'sic_inventory_access';
@@ -42,7 +42,7 @@ type Choice = { input: string; target: Cell; expected: NativePoint | null; inter
 type InventoryWalk = { input: string; here: NativePoint; destination: Cell; pixels: NativeRows };
 type LegacyProposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; here: NativePoint; walk?: InventoryWalk[]; needId: string };
 type RouteState = { epoch: number; scene: InventoryRouteScene; position: InventoryPosition; route: InventoryRouteStep[];
-  evidence: string[]; depositProven: boolean; stopped: boolean };
+  evidence: string[]; depositProven: boolean; retentionEvidence?: Record<number, string>; stopped: boolean };
 type RouteProposal = NativeProposal & { routeState: RouteState; next: InventoryRouteStep; needId: string };
 type Proposal = LegacyProposal | RouteProposal;
 const isRoute = (proposal: Proposal): proposal is RouteProposal => 'routeState' in proposal;
@@ -195,36 +195,42 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
     if (!next || !observation.available_action_refs.includes(next.input)) return null;
     const task = route!.find(step => step.kind !== 'walk') ?? next;
     const target = scene.boxes[task.position.at]!;
-    const interaction = next.kind === 'pick' || next.kind === 'deposit';
-    const knownInteraction = interaction && (next.kind === 'pick' || local.depositProven);
+    const reusable = reusableKeyAt(scene, next);
+    const retentionEvidence = reusable === null ? undefined : local.retentionEvidence?.[reusable];
+    const testRetention = reusable !== null && !retentionEvidence;
+    const interaction = next.kind === 'pick' || next.kind === 'deposit' || testRetention;
+    const knownInteraction = next.kind === 'pick' || next.kind === 'deposit' && local.depositProven;
     const mode = execution?.reasoningMode ?? (knownInteraction || !interaction ? 'solving' : 'exploration');
     const facts = { routeSupported: !interaction, knownInteraction, eligibleProbe: interaction && !knownInteraction, mode };
     const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
     const strategy = interaction ? knownInteraction ? 'P02' : 'P05' : 'P07';
     if (decision?.result !== strategy) return null;
-    const label = {
+    const label = testRetention ? 'Test whether crossing the gate keeps the object in the inventory' : {
       walk: 'Continue toward the marked exit',
       pick: 'Collect the object needed for the remaining route',
       deposit: 'Reserve the carried object here so the slot can serve the earlier gate',
-      unlock: 'Use the object whose shape completes this gate',
+      unlock: reusable !== null ? 'Reuse the object that stayed in the inventory after opening the previous gate'
+        : 'Use the object whose shape completes this gate',
       charge: 'Replenish the reserve before the remaining transfers',
       finish: 'Reach the exit through the opened route',
     }[task.kind];
     const ref = observation.observation_ref, parent = 'G_official_completion';
-    const evidence: [string, ...string[]] = [ref, ...new Set(local.evidence.filter(item => item !== ref))];
-    const objective = { kind: 'arrange_access_with_one_inventory_slot', scope: ref.split(':revision:', 1)[0]!,
+    const priorEvidence = retentionEvidence ? [...local.evidence, retentionEvidence] : local.evidence;
+    const evidence: [string, ...string[]] = [ref, ...new Set(priorEvidence.filter(item => item !== ref))];
+    const objective = { kind: scene.slots ? 'arrange_access_with_multiple_inventory_slots' : 'arrange_access_with_one_inventory_slot', scope: ref.split(':revision:', 1)[0]!,
       subjects: ['carrier', 'temporary_storage', 'complementary_passages', 'reserve'],
       parentObjective: parent, satisfactionContract: 'observe_official_progress_after_bounded_inventory_transfers' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
     const id = 'inventory-access:' + need.id, action = { action_ref: next.input, data: {} }, actions = [action];
-    const meter = scene.meter;
+    const meter = scene.meter, [l, t, r, b] = scene.slot.bounds;
+    const display: NativeBox = [l, t, scene.slots?.at(-1)?.bounds[2] ?? r, b];
     return { status: 'proposed', kind: verifyInventoryTransferId, actions, routeState: { ...local, route: route! }, next, needId: need.id,
       binding: { observation_ref: ref, level_epoch: observation.level_epoch },
       steps: [{ action, expected_after: scene.map.nodes[next.position.at]!.at }],
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
         instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
-      sicSituationCard: { strategy, need: 'Open the gates in order with one inventory slot', evidence, agenda: [], mode,
-        triggerCard: chooseLanding, situation: label, actor, target, display: scene.slot.bounds,
+      sicSituationCard: { strategy, need: scene.slots ? 'Open the gates with the available inventory slots' : 'Open the gates in order with one inventory slot',
+        evidence, agenda: [], mode, triggerCard: chooseLanding, situation: label, actor, target, display,
         reserve: position.energy > 0 ? [meter.x, meter.y, meter.x + position.energy - 1, meter.y] : null },
       question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
@@ -385,8 +391,11 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isRoute(proposal)) {
         const { scene, position } = proposal.routeState;
-        const matched = verifyInventoryReturn(scene, position, proposal.next, before, after, first, second) !== null;
-        return { matched, seal_prefix: true, reason: matched ? 'inventory_route_return_observed' : 'inventory_route_return_contradicted' };
+        const observed = verifyInventoryReturn(scene, position, proposal.next, before, after, first, second);
+        const reusable = reusableKeyAt(scene, proposal.next);
+        const matched = !!observed && (reusable === null || slotContents(observed.held).includes(reusable));
+        return { matched, seal_prefix: true, reason: matched ? reusable === null ? 'inventory_route_return_observed' : 'inventory_key_retained_after_unlock'
+          : observed && reusable !== null ? 'inventory_key_consumed_after_unlock' : 'inventory_route_return_contradicted' };
       }
       const actor = after.entities.find(entity => entity.signature === proposal.local.scene.signature)?.bbox;
       const current = actor && cellAt(proposal.local.scene, actor);
@@ -409,9 +418,18 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
           boundary = { ...boundary, epoch: after.level_epoch, before: before.observation_ref, after: after.observation_ref };
         }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-        const energy = verifyInventoryReturn(local.scene, local.position, next, before, after, first, second);
-        inventoryRoute = energy === null ? { ...local, stopped: true } : { ...local, position: { ...next.position, energy },
-          route: energy === next.position.energy ? local.route.slice(1) : [], depositProven: local.depositProven || next.kind === 'deposit',
+        const position = verifyInventoryReturn(local.scene, local.position, next, before, after, first, second);
+        const reusable = reusableKeyAt(local.scene, next);
+        const retained = !!position && reusable !== null && slotContents(position.held).includes(reusable);
+        const consumed = !!position && reusable !== null && !retained;
+        const scene = consumed ? { ...local.scene, map: { ...local.scene.map,
+          reusable: local.scene.map.reusable?.filter(key => key !== reusable) } } : local.scene;
+        inventoryRoute = !position ? { ...local, stopped: true } : { ...local, scene, position,
+          route: !consumed && position.energy === next.position.energy ? local.route.slice(1) : [],
+          depositProven: local.depositProven || next.kind === 'deposit',
+          ...(retained && !local.retentionEvidence?.[reusable] ? {
+            retentionEvidence: { ...local.retentionEvidence, [reusable]: after.observation_ref },
+          } : {}),
           evidence: [...local.evidence.slice(-5), after.observation_ref] };
         return { events: [] };
       }
