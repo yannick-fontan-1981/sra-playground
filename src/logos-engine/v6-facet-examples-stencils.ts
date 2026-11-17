@@ -1,6 +1,6 @@
 /** Bounded visible-stencil composition from pinned V6 facet_examples/stencils.py.
  * Every rational sampling alternative and the incomplete-search result survive. */
-import { facetLexicographic, facetPointKey, type FacetPoint } from './v6-facet-examples-geometry.ts';
+import { facetLexicographic, facetPointKey, type FacetPoint, type FacetTriple } from './v6-facet-examples-geometry.ts';
 import type { NativeRows } from './v6-native-types.ts';
 
 export type FacetImage = Map<string, number>;
@@ -15,6 +15,7 @@ export interface FacetSamplingComparison {
 }
 export interface FacetStencilSolution {
   placements: FacetPoint[]; actions: FacetStencilAction[]; comparisons: FacetSamplingComparison[];
+  paint_order?: number[];
 }
 export interface FacetSearchResult {
   status: 'bounded_incomplete' | 'compatible_minimal_within_model' | 'no_compatible_composition';
@@ -30,6 +31,13 @@ export function facetRender(stamp: NativeRows, placements: readonly (readonly [n
     if (value !== background) out.set(facetPointKey(x + dx, y + dy), value);
   }
   return out;
+}
+export function facetRenderPrefix(stamp: NativeRows, solution: FacetStencilSolution, prefix: number,
+  background: number, anchor: FacetPoint = [0, 0]): FacetImage {
+  const placements = solution.paint_order
+    ? solution.paint_order.filter(index => index < prefix).map(index => solution.placements[index]!)
+    : solution.placements.slice(0, prefix);
+  return facetRender(stamp, placements.map(([x, y]) => [x + anchor[0], y + anchor[1]]), background);
 }
 export function facetBounds(points: Iterable<readonly [number, number]>): [number, number, number, number] {
   let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
@@ -124,6 +132,77 @@ export function facetCandidates(reference: NativeRows, stamp: NativeRows, faces:
     }
     if (results.length) return { status: 'compatible_minimal_within_model', examined, solutions: results,
       model_limit: 'No hidden duplicate origins; new stencil overlays measured visible support.' };
+    states = following;
+  }
+  return { status: 'no_compatible_composition', examined, solutions: [] };
+}
+
+export function facetLayeredCandidates(reference: NativeRows, stamp: NativeRows, faces: readonly FacetFace[],
+  steps: ReadonlyMap<number, FacetPoint>, background: number, palette: readonly number[],
+  maxUnits: number, maxStates: number, maxDenominator: number, sampleOffsets: readonly number[],
+  workspace: FacetPoint): FacetSearchResult {
+  type State = { units: FacetTriple[]; placements: FacetPoint[]; actions: FacetStencilAction[] };
+  const ports = faces.filter(face => steps.has(face.value)).sort((a, b) => facetLexicographic(a.point, b.point));
+  // Exactly three distinct extrusion axes projecting to a closed triangle give
+  // a viewing ray. Moving along all three axes returns to the same image origin.
+  const displacements = ports.map(face => steps.get(face.value)!);
+  const [a, b, c] = displacements;
+  if (ports.length !== 3 || !a || !b || !c || a[0] * b[1] === a[1] * b[0]
+    || a[0] + b[0] + c[0] !== 0 || a[1] + b[1] + c[1] !== 0) {
+    return { status: 'no_compatible_composition', examined: 0, solutions: [] };
+  }
+  const stencil = stamp.flatMap((row, y) => row.flatMap((value, x) => value === background ? [] : [{ x, y, value }]));
+  const unitKey = ([a, b, c]: FacetTriple) => (a * maxUnits + b) * maxUnits + c;
+  const depth = ([a, b, c]: FacetTriple) => a + b + c;
+  let states: State[] = [{ units: [[0, 0, 0]], placements: [[0, 0]], actions: [] }];
+  let examined = 0;
+  for (let count = 1; count <= maxUnits && states.length; count++) {
+    const following: State[] = [], seen = new Set<string>(), solutions: FacetStencilSolution[] = [];
+    for (const { units, placements, actions } of states) {
+      if (examined >= maxStates) return { status: 'bounded_incomplete', examined, solutions };
+      examined++;
+      const paint_order = units.map((_, index) => index)
+        .sort((i, j) => depth(units[i]!) - depth(units[j]!) || facetLexicographic(units[i]!, units[j]!));
+      const image: FacetImage = new Map(), owners = new Map<string, number>();
+      for (const index of paint_order) {
+        const [dx, dy] = placements[index]!;
+        for (const { x, y, value } of stencil) {
+          const key = facetPointKey(x + dx, y + dy);
+          image.set(key, value);
+          owners.set(key, index);
+        }
+      }
+      const comparisons = facetCompare(reference, image, stamp, placements, background, palette, maxDenominator, sampleOffsets, true);
+      if (comparisons.length) solutions.push({ placements, actions, comparisons, paint_order });
+      if (solutions.length || count === maxUnits) continue;
+      const occupied = units.map(unitKey);
+      const left = Math.min(...placements.map(p => p[0])), right = Math.max(...placements.map(p => p[0]));
+      const top = Math.min(...placements.map(p => p[1])), bottom = Math.max(...placements.map(p => p[1]));
+      for (const [index, origin] of placements.entries()) for (const [axis, face] of ports.entries()) {
+        const unit = [...units[index]!] as FacetTriple;
+        unit[axis] = unit[axis]! + 1;
+        const id = unitKey(unit);
+        if (occupied.includes(id)) continue;
+        const key = [...occupied, id].sort((a, b) => a - b).join(',');
+        if (seen.has(key)) continue;
+        const offset = displacements[axis]!, destination: FacetPoint = [origin[0] + offset[0], origin[1] + offset[1]];
+        if (Math.max(right, destination[0]) - Math.min(left, destination[0]) + stamp[0]!.length > workspace[0]
+          || Math.max(bottom, destination[1]) - Math.min(top, destination[1]) + stamp.length > workspace[1]) continue;
+        const distance = ([x, y]: FacetPoint) => (x - face.point[0]) ** 2 + (y - face.point[1]) ** 2;
+        let pixel: FacetPoint | undefined;
+        for (const p of face.pixels) {
+          if (owners.get(facetPointKey(origin[0] + p[0], origin[1] + p[1])) !== index) continue;
+          if (!pixel || distance(p) < distance(pixel)) pixel = p;
+        }
+        if (!pixel) continue;
+        seen.add(key);
+        const action: FacetStencilAction = { owner_origin: origin, port_value: face.value, offset, destination,
+          point: [origin[0] + pixel[0], origin[1] + pixel[1]] };
+        following.push({ units: [...units, unit], placements: [...placements, destination], actions: [...actions, action] });
+      }
+    }
+    if (solutions.length) return { status: 'compatible_minimal_within_model', examined, solutions,
+      model_limit: 'Distinct logical origins can share one projected origin; later checks verify each visible effect.' };
     states = following;
   }
   return { status: 'no_compatible_composition', examined, solutions: [] };
