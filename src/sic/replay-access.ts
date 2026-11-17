@@ -96,7 +96,9 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   const { recording, destination } = choice, { scene } = recording;
   const ref = observation.observation_ref, mode = execution?.reasoningMode ?? 'exploration';
   const knownInteraction = choice.intent === 'commit';
-  const probing = needsTransferPulse(choice) && !choice.entry;
+  const pulseProbe = needsTransferPulse(choice) && !choice.entry;
+  const measuringShift = !recording.paths.length && recording.preparations?.some(item => !item.event && equal(item.node.position, destination));
+  const probing = pulseProbe || !!measuringShift && equal(choice.expected, destination);
   const facts = { routeSupported: !knownInteraction && !probing, eligibleProbe: probing, knownInteraction, mode };
   const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
   const strategy = knownInteraction ? 'P02' : probing ? 'P05' : 'P07';
@@ -104,9 +106,11 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   const preparation = recording.preparation;
   const beforeFirstCommit = !!preparation && recording.paths.length === 0;
   const situation = choice.entry ? 'Step into the linked frame on the tick of the recorded activation'
-    : probing ? 'Reach the linked contact and check whether it sends a pulse between the frames'
+    : pulseProbe ? 'Reach the linked contact and check whether it sends a pulse between the frames'
       : knownInteraction && recording.pendingPulse ? 'Record the timed pulse for a later carrier'
+        : knownInteraction && !recording.paths.length && recording.preparations ? 'Record the shifts and the contact held at the end'
         : knownInteraction && beforeFirstCommit ? 'Record the shift along the route and the contact held at the end'
+    : measuringShift ? 'Reach the contact linked to an obstruction and measure the shift'
     : beforeFirstCommit && !preparation.event ? 'Reach the contact linked to the solid obstruction and measure what it changes'
     : beforeFirstCommit ? 'Leave the shifted obstruction behind and reach a contact to hold'
     : knownInteraction ? 'Record the measured route that opened the passage'
@@ -319,11 +323,13 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
         }
         const next = observeRecording(proposal.recordingChoice, after, first, second);
         const oldEffect = previous.preparation?.event, newEffect = next?.preparation?.event;
+        const newShift = next?.preparations?.some((item, index) => item.event && !previous.preparations?.[index]?.event);
         const reason = !next ? 'recorded_replay_prediction_changed'
-          : newEffect && !oldEffect ? 'remote_block_shift_observed'
+          : newShift || newEffect && !oldEffect ? 'remote_block_shift_observed'
             : newEffect?.retained && !oldEffect?.retained ? 'remote_shift_persists_after_departure'
-              : intent === 'commit' && previous.preparation ? 'rewind_restored_obstructions_and_recorded_contributions'
-                : previous.paths.some(path => path.prepared?.tick === previous.path.length) ? 'persistent_shift_reproduced_at_recorded_tick'
+              : intent === 'commit' && (previous.preparation || previous.preparations) ? 'rewind_restored_obstructions_and_recorded_contributions'
+                : previous.paths.some(path => path.prepared?.tick === previous.path.length
+                  || path.preparations?.some(event => event.tick === previous.path.length)) ? 'persistent_shift_reproduced_at_recorded_tick'
                   : 'recorded_contribution_reconciled';
         return { matched: !!next, seal_prefix: true, reason };
       }

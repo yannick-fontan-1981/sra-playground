@@ -12,12 +12,13 @@ type TimedPreparation = { readonly tick: number; readonly changes: readonly Chan
 type Pulse = { readonly tick: number; readonly ref: string };
 type Preparation = { readonly node: Node; readonly block: NativePoint; readonly ink: number; readonly event: TimedPreparation | null };
 type Contribution = { readonly path: readonly NativePoint[]; readonly contact: NativePoint; readonly changed: readonly Change[];
-  readonly evidence: readonly string[]; readonly prepared?: TimedPreparation; readonly pulse?: Pulse };
+  readonly evidence: readonly string[]; readonly prepared?: TimedPreparation; readonly preparations?: readonly TimedPreparation[]; readonly pulse?: Pulse };
 type Step = { readonly input: string; readonly position: NativePoint; readonly entry?: NativePoint };
 export type Recording = { readonly epoch: number; readonly scene: RecordingScene; readonly vectors: Readonly<Record<string, NativePoint>>;
   readonly phase: string; readonly paths: readonly Contribution[]; readonly path: readonly NativePoint[];
   readonly node: Node | null; readonly route: readonly Step[]; readonly pending: readonly Change[]; readonly evidence: readonly string[];
-  readonly stopped: boolean; readonly preparation?: Preparation; readonly pendingPulse?: Pulse | null };
+  readonly stopped: boolean; readonly preparation?: Preparation; readonly preparations?: readonly Preparation[];
+  readonly pendingPulse?: Pulse | null };
 export type RecordingChoice = { readonly recording: Recording; readonly command: NativeCommand; readonly expected: NativePoint;
   readonly intent: 'move' | 'commit'; readonly destination: NativePoint; readonly entry?: NativePoint };
 
@@ -29,6 +30,7 @@ export const bodyBox = ([x, y]: NativePoint, [w, h]: NativePoint): NativeBox => 
 const poseAt = (item: Contribution, tick: number) => item.path[Math.min(tick, item.path.length - 1)]!;
 const supportAt = (paths: readonly Contribution[], tick: number) => paths.flatMap(item => [
   ...(item.prepared && tick >= item.prepared.tick ? item.prepared.changes : []),
+  ...(item.preparations?.flatMap(event => tick >= event.tick ? event.changes : []) ?? []),
   ...(tick >= item.path.length - 1 ? item.changed : []),
 ]);
 
@@ -66,7 +68,8 @@ export function linkedTransfer(observation: NativeObservation, body: Body & { re
 
 export function needsTransferPulse(choice: RecordingChoice): boolean {
   const { recording, expected, intent } = choice, transfer = recording.scene.transfer;
-  return intent === 'move' && !!transfer && (!!choice.entry || !recording.paths.length && same(expected, transfer.contact));
+  return intent === 'move' && !!transfer && (!!choice.entry || !!recording.node
+    && same(recording.node.position, transfer.contact) && same(expected, transfer.contact));
 }
 
 function sawPulse(transfer: TransferLink, before: NativeRows, after: NativeRows, frames: readonly NativeRows[]) {
@@ -100,8 +103,12 @@ export function openSupports(state: Recording) {
   const active = state.preparation ? state.paths.flatMap(item => [
     ...(item.prepared && tick >= item.prepared.tick ? [item.prepared.changes] : []),
     ...(tick >= item.path.length - 1 ? [item.changed] : []),
+  ]) : state.preparations ? state.paths.flatMap(item => [
+    ...(item.preparations?.flatMap(event => tick >= event.tick ? [event.changes] : []) ?? []),
+    ...(tick >= item.path.length - 1 ? [item.changed] : []),
   ]) : state.paths.map(item => item.changed);
   if (!state.paths.length && state.preparation?.event) active.push(state.preparation.event.changes);
+  if (!state.paths.length && state.preparations) active.push(...state.preparations.flatMap(item => item.event ? [item.event.changes] : []));
   return active.flatMap(changes => {
     if (!changes.length) return [];
     const xs = changes.map(change => change.pixel[0]), ys = changes.map(change => change.pixel[1]);
@@ -109,9 +116,9 @@ export function openSupports(state: Recording) {
   });
 }
 
-function preparationCandidate(scene: RecordingScene, rows: NativeRows): Preparation | null {
+function preparationCandidates(scene: RecordingScene, rows: NativeRows): Preparation[] {
   const { size } = scene.body;
-  const candidates = scene.nodes.flatMap(node => {
+  return scene.nodes.flatMap(node => {
     if (node.peer_support.length !== size[0] * size[1]) return [];
     const [first] = node.peer_support;
     if (!first) return [];
@@ -120,7 +127,6 @@ function preparationCandidate(scene: RecordingScene, rows: NativeRows): Preparat
     const block: NativePoint = [Math.min(...node.peer_support.map(point => point[0])), Math.min(...node.peer_support.map(point => point[1]))];
     return node.peer_support.every(point => inside(bodyBox(block, size), point)) ? [{ node, block, ink, event: null }] : [];
   });
-  return candidates.length === 1 ? candidates[0]! : null;
 }
 
 export function beginRecording(scene: RecordingScene, epoch: number, vectors: Readonly<Record<string, NativePoint>>,
@@ -128,10 +134,11 @@ export function beginRecording(scene: RecordingScene, epoch: number, vectors: Re
   const valid = Object.entries(vectors).filter(([input, [x, y]]) => input !== phase &&
     (x === 0 || y === 0) && Math.abs(x) + Math.abs(y) === scene.body.quantum);
   if (new Set(valid.map(([, delta]) => key(delta))).size !== 4 || !evidence.length) return null;
-  const preparation = preparationCandidate(scene, rows);
+  const preparations = preparationCandidates(scene, rows);
   return { scene, epoch, phase, vectors: Object.fromEntries(valid), paths: [], path: [scene.body.start],
     node: null, route: [], pending: [], evidence, stopped: false,
-    ...(preparation && !scene.transfer ? { preparation } : {}) };
+    ...(preparations.length > 1 ? { preparations }
+      : preparations.length === 1 && !scene.transfer ? { preparation: preparations[0]! } : {}) };
 }
 
 function pathTo(rows: NativeRows, state: Recording, start: NativePoint, goal: NativePoint): Step[] | null {
@@ -187,17 +194,23 @@ export function chooseRecording(observation: NativeObservation, rows: NativeRows
   if (!from || !same(from, initial.path.at(-1)!)) return null;
   if ((initial.pending.length || initial.pendingPulse) && initial.node) {
     if (initial.preparation && initial.paths.length === 0 && !initial.preparation.event?.retained) return null;
+    if (initial.preparations && initial.paths.length === 0 && initial.preparations.some(item => !item.event?.retained)) return null;
     return { recording: initial, command: { action_ref: initial.phase, data: {} }, expected: initial.scene.body.start,
       intent: 'commit', destination: initial.node.position };
   }
   let recording = initial;
   if (!recording.route.length) {
-    const { scene, paths, preparation } = recording;
-    if (recording.path.length !== 1 && !(preparation?.event && paths.length === 0 && recording.node === null)) return null;
-    const exploratoryContact = scene.transfer && !paths.length ? { position: scene.transfer.contact, peer_support: [] }
+    const { scene, paths, preparation, preparations } = recording;
+    const buildingPreparation = !paths.length && !!preparations;
+    if (recording.path.length !== 1 && (paths.length || recording.node || !preparation?.event && !buildingPreparation)) return null;
+    const pulseNeeded = preparations ? paths.length > 0 && !paths.some(item => item.pulse) : !paths.length;
+    const exploratoryContact = scene.transfer && pulseNeeded ? { position: scene.transfer.contact, peer_support: [] }
       : preparation && !preparation.event && paths.length === 0 ? preparation.node : null;
+    const unfinished = buildingPreparation ? preparations.filter(item => !item.event).map(item => item.node) : [];
     const remaining = paths.length < scene.slots.length - 1
-      ? exploratoryContact ? [exploratoryContact] : scene.nodes.filter(node => (!preparation || !same(node.position, preparation.node.position))
+      ? unfinished.length ? unfinished : exploratoryContact ? [exploratoryContact] : scene.nodes.filter(node =>
+        (!preparation || !same(node.position, preparation.node.position))
+        && !preparations?.some(item => same(node.position, item.node.position))
         && !paths.some(item => same(item.contact, node.position))) : [];
     const contacts = remaining.flatMap(node => {
       const route = pathTo(rows, recording, from, node.position);
@@ -224,8 +237,8 @@ function compareReplays(observation: NativeObservation, rows: NativeRows, state:
   return supportAt(state.paths, tick).every(change => occupied.some(box => inside(box, change.pixel)) || pixel(rows, change.pixel) === change.after);
 }
 
-function observedPreparation(state: Recording, before: NativeRows, after: NativeRows, ref: string, tick: number): TimedPreparation | null {
-  const preparation = state.preparation!;
+function observedPreparation(state: Recording, preparation: Preparation, before: NativeRows, after: NativeRows,
+  ref: string, tick: number): TimedPreparation | null {
   const { size, floor } = state.scene.body, { ink, block } = preparation;
   const moved = Object.values(state.vectors).flatMap(([dx, dy]) => {
     const next: NativePoint = [block[0] + dx, block[1] + dy];
@@ -257,14 +270,17 @@ export function observeRecording(choice: RecordingChoice, observation: NativeObs
     if (!recording.node || !recording.pending.length && !recording.pendingPulse || !scene.slots.some(([l, t, r, b]) =>
       temporalPatch(after, [l, t], [r - l + 1, b - t + 1]).some((row, i) => row.some((value, j) => value !== before[t + i]?.[l + j])))) return null;
     const prepared = recording.paths.length === 0 ? recording.preparation?.event : null;
-    if (recording.preparation) {
-      const reset = [...supportAt(recording.paths, Infinity), ...(prepared?.changes ?? []), ...recording.pending];
+    const preparations = recording.paths.length === 0 ? recording.preparations?.flatMap(item => item.event ? [item.event] : []) : undefined;
+    if (recording.preparation || recording.preparations) {
+      const reset = [...supportAt(recording.paths, Infinity), ...(prepared?.changes ?? []),
+        ...(preparations?.flatMap(event => event.changes) ?? []), ...recording.pending];
       if (prepared?.retained === false || !reset.every(change => pixel(after, change.pixel) === change.before)) return null;
     }
     const evidenceRefs = [...(prepared ? [prepared.ref] : []), ...(recording.pendingPulse ? [recording.pendingPulse.ref] : []),
-      recording.evidence.at(-1) ?? ref, ref];
+      ...(preparations?.map(event => event.ref) ?? []), recording.evidence.at(-1) ?? ref, ref];
     const contribution = { path: recording.path, contact: recording.node.position, changed: recording.pending, evidence: evidenceRefs,
-      ...(prepared ? { prepared } : {}), ...(recording.pendingPulse ? { pulse: recording.pendingPulse } : {}) };
+      ...(prepared ? { prepared } : {}), ...(preparations?.length ? { preparations } : {}),
+      ...(recording.pendingPulse ? { pulse: recording.pendingPulse } : {}) };
     const { pendingPulse: _committed, ...rest } = recording;
     return { ...rest, paths: [...recording.paths, contribution], path: [actor], node: null, pending: [], route: [], evidence };
   }
@@ -278,18 +294,39 @@ export function observeRecording(choice: RecordingChoice, observation: NativeObs
   const { preparation } = recording;
   if (preparation && recording.paths.length === 0) {
     if (arrived && same(actor, preparation.node.position) && !preparation.event) {
-      const event = observedPreparation(recording, before, after, ref, tick);
+      const event = observedPreparation(recording, preparation, before, after, ref, tick);
       return event ? { ...recording, preparation: { ...preparation, event }, path: [...recording.path, actor], pending: [],
         node: null, route: [], evidence } : null;
     }
     if (preparation.event && !preparation.event.changes.every(change =>
       inside(bodyBox(actor, scene.body.size), change.pixel) || pixel(after, change.pixel) === change.after)) return null;
   }
+  if (recording.preparations && !recording.paths.length) {
+    const preparations = recording.preparations.map(item => item.event && !same(actor, item.node.position)
+      ? { ...item, event: { ...item.event, retained: true } } : item);
+    if (!preparations.every(item => !item.event || item.event.changes.every(change =>
+      inside(bodyBox(actor, scene.body.size), change.pixel) || pixel(after, change.pixel) === change.after))) return null;
+    const activated = arrived && preparations.find(item => !item.event && same(item.node.position, node.position));
+    if (activated) {
+      const event = observedPreparation(recording, activated, before, after, ref, tick);
+      return event ? { ...recording, preparations: preparations.map(item => item === activated ? { ...item, event } : item),
+        node: null, path: [...recording.path, actor], route: [], evidence } : null;
+    }
+    return observeContact({ ...recording, preparations }, actor, before, after, evidence);
+  }
+  return observeContact(recording, actor, before, after, evidence);
+}
+
+function observeContact(recording: Recording, actor: NativePoint, before: NativeRows, after: NativeRows,
+  evidence: readonly string[]): Recording | null {
+  const node = recording.node;
+  const arrived = node && same(actor, node.position);
   const pending = arrived ? node.peer_support.flatMap(point => {
     const first = pixel(before, point), second = pixel(after, point);
     return first === undefined || second === undefined || first === second ? [] : [{ pixel: point, before: first, after: second }];
   }) : [];
   if (arrived && !pending.length) return null;
+  const { preparation } = recording;
   return { ...recording, path: [...recording.path, actor], pending, route: recording.route.slice(1), evidence,
     ...(preparation?.event && recording.paths.length === 0 && !same(actor, preparation.node.position)
       ? { preparation: { ...preparation, event: { ...preparation.event, retained: true } } } : {}) };
