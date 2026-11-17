@@ -20,6 +20,31 @@ const WORKFLOW = 'v6.composition_strategy.choose';
 const CAUSE = { workflow: 'test.store', step: 'test', statement: 'write' };
 const NO_WAIT = { yieldControl: async () => {} };
 
+test('a published frozen source is reused only for its current root and still records provenance changes', async () => {
+  const store = new NativeKnowledgeStore('test:published-source', 'test');
+  const rows = Object.freeze(Array.from({ length: 48 }, () => Object.freeze(Array<number>(48).fill(1))));
+  const data = Object.freeze({ rows, value: -0 });
+  const write = (id: string, value: unknown, evidence: string[] = []) =>
+    ({ id, kind: 'component_state' as const, component: 'test', value, evidence });
+  const first = await store.commit([write('state', data)], CAUSE);
+  const root = first.get('state')!.node.value;
+  const revision = store.revision;
+  const changed = await store.commit([write('state', data, ['new-evidence'])], CAUSE);
+  assert.equal(changed.get('state')!.node.value, root);
+  assert.deepEqual(store.node('state').evidence, ['new-evidence']);
+  assert.equal(store.revision, revision + 1);
+  await store.commit([write('other-state', data)], CAUSE);
+  assert.equal((store.node('other-state').value as any).component, 'other-state');
+  const mutable = { value: 1 }, shallow = Object.freeze({ child: mutable });
+  await store.commit([write('state', shallow)], CAUSE);
+  mutable.value = 2;
+  await store.commit([write('state', shallow)], CAUSE);
+  assert.deepEqual(store.value('state'), { child: { value: 2 } });
+  await store.commit([write('state', data)], CAUSE);
+  assert.equal(canonical(store.node('state').value), canonical(root));
+  assert.ok(Object.is((store.value('state') as any).value, -0));
+});
+
 test('successive trace identities share unchanged evidence without changing typed graph bytes or hydration', async () => {
   const store = new NativeKnowledgeStore('test:trace-stream', 'test');
   const first = { id: 1, created: 0.125, body: { rows: Array.from({ length: 64 }, (_, y) => Array.from({ length: 64 }, (_, x) => (x + y) % 4)), command: 'ACTION1' } };
