@@ -186,6 +186,37 @@ export function immutableJson(value: unknown): JsonValue {
   return visit(value, 0);
 }
 
+/** Constructors for encoder-owned containers. Children must be scalars or
+ * already closed by this module: this is not an alternative raw JSON ingress. */
+function closedJsonChild(value: JsonValue): JsonValue {
+  if (value === null || typeof value === 'boolean') return value;
+  if (typeof value === 'string') { assertUnicode(value); return value; }
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (value !== null && typeof value === 'object' && immutableObjects.has(value)) return value;
+  throw new TypeError('A constructed JSON container requires validated children');
+}
+
+export function immutableJsonArray(children: Iterable<JsonValue>): readonly JsonValue[] {
+  const result: JsonValue[] = [];
+  for (const value of children) {
+    if (result.length + 2 > MAX_JSON_NODES) throw new TypeError('JSON size/nesting limit exceeded');
+    result.push(closedJsonChild(value));
+  }
+  Object.freeze(result); immutableObjects.add(result); return result;
+}
+
+export function immutableJsonRecord(children: Iterable<readonly [string, JsonValue]>): JsonObject {
+  const entries: [string, JsonValue][] = [];
+  for (const [name, value] of children) {
+    if (entries.length + 2 > MAX_JSON_NODES) throw new TypeError('JSON size/nesting limit exceeded');
+    entries.push([stringValue(name, 'JSON member'), closedJsonChild(value)]);
+  }
+  entries.sort(([a], [b]) => compareUnicode(a, b));
+  if (entries.some(([name], index) => index > 0 && name === entries[index - 1]![0])) throw new TypeError('Duplicate constructed JSON member');
+  const result = Object.fromEntries(entries) as JsonObject;
+  Object.freeze(result); immutableObjects.add(result); return result;
+}
+
 /** Only the new entries require ingress validation. The record and its keys
  * were already closed by this module. Build one fresh canonical-order index. */
 export function updateImmutableJsonRecord<T extends JsonValue>(base: Readonly<Record<string, T>>,

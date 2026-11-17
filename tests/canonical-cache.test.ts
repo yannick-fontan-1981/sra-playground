@@ -1,7 +1,32 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { assertUnicode, canonical, compareUnicode, immutableJson } from '../src/logos-engine/canonical.ts';
+import { assertUnicode, canonical, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord } from '../src/logos-engine/canonical.ts';
 import { digest } from '../src/logos-engine/canonical.ts';
+
+test('constructed containers preserve canonical bytes, ownership and closed child identities', () => {
+  const child = immutableJson({ retained: [1, true, null, 'é𝄞'] });
+  const array = immutableJsonArray([child, 2]);
+  const record = immutableJsonRecord([['\u{10000}', array], ['\ue000', child], ['__proto__', false]]);
+  const expected = immutableJson(Object.fromEntries([['\u{10000}', [child, 2]], ['\ue000', child], ['__proto__', false]]));
+  assert.equal(canonical(record), canonical(expected));
+  assert.equal(immutableJson(record), record);
+  assert.equal(array[0], child);
+  assert.equal(record['\ue000'], child);
+  assert.ok(Object.isFrozen(array)); assert.ok(Object.isFrozen(record));
+  assert.throws(() => { (array as unknown[])[0] = null; }, TypeError);
+});
+
+test('constructed containers cannot certify foreign objects or invalid scalar children', () => {
+  for (const value of [{ mutable: true }, Object.freeze({ frozen: true }), [], undefined, Infinity, '\ud800']) {
+    assert.throws(() => immutableJsonArray([value as never]), TypeError);
+    assert.throws(() => immutableJsonRecord([['value', value as never]]), TypeError);
+  }
+  assert.throws(() => immutableJsonRecord([['\udfff', true]]), TypeError);
+  assert.throws(() => immutableJsonRecord([['same', true], ['same', false]]), /Duplicate/);
+  // Ingress still preserves finite metadata numbers; canonical hashing retains
+  // its separate portable-number restriction.
+  assert.throws(() => canonical(immutableJsonArray([0.5])), /Portable/);
+});
 
 test('Unicode validation reuse keeps exact strings and rejects malformed surrogates after cache turnover', () => {
   const valid = 'é𝄞\u0000終';
