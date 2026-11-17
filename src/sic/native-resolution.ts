@@ -1205,7 +1205,7 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === linkedGroupRouteId) {
     for (const [field, label] of [['actor', 'Derived body'], ['active', 'Selected anchor'], ['focus', 'Click target'],
-      ['goal', 'Destination'], ['landing', 'Predicted body position']] as const) {
+      ['goal', 'Destination'], ['landing', 'Predicted body position'], ['pickup', 'Piece supplying missing colors']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
