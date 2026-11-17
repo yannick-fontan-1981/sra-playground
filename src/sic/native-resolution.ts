@@ -1410,6 +1410,12 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.reflections)) {
+      for (const reflection of card.reflections) {
+        const box = bounds(reflection);
+        if (box) subjects.push({ label: 'Reflected piece', box });
+      }
+    }
   }
   if (situationCard && (family === animationContactId || family === learnAnimationContactId)) {
     for (const [field, label] of [['point', 'Aim point'], ['source', card?.sourceCandidate ? 'Candidate source' : 'Observed source'],

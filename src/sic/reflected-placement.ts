@@ -5,12 +5,17 @@ import {
 } from '../logos-engine/v6-reflected-cover.ts';
 import { sortedPoints, supportKey, supportPoint } from '../logos-engine/v6-support-measurements.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
 import type { DirectionalMotion } from './observed-translation.ts';
 import { checkObservedMotion, chooseObservedMotion, observedMotionModule } from './reflected-motion-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import {
+  measureOrthogonalReflection, moveOrthogonalContributor, orthogonalBox, orthogonalReflectionBoxes,
+  planOrthogonalReflection, reconcileOrthogonalReflection, selectOrthogonalContributor,
+  type OrthogonalWorld,
+} from './orthogonal-reflection.ts';
 
 export const reflectedPlacementId = 'sic_reflected_placement';
 export const coordinateObservedMotionId = 'sic_coordinate_observed_motion';
@@ -43,7 +48,16 @@ type State = { epoch: number; world: NativeRecord; controls: Control[]; tested: 
 type Transfer = { epoch: number; direct: number; image: number; marker: number; pitch: number; controls: Control[]; evidence: string[] };
 type Plan = { action: NativeCommand; after: NativeRecord | null; attempt: string; selection?: Exclude<Owner, null>;
   route?: readonly NativeRecord[] };
-type Proposal = NativeProposal & { local: State; plan: Plan; needId: string };
+type SingleProposal = NativeProposal & { local: State; plan: Plan; needId: string };
+type OrthogonalState = {
+  epoch: number; world: OrthogonalWorld; controls: Control[]; evidence: string[]; stopped: boolean;
+  confirmed: string[]; selections: OrthogonalWorld['focus'][];
+};
+type OrthogonalProposal = NativeProposal & {
+  orthogonal: OrthogonalState; predictions: OrthogonalWorld[]; needId: string;
+};
+type Proposal = SingleProposal | OrthogonalProposal;
+const isOrthogonal = (proposal: Proposal): proposal is OrthogonalProposal => !!proposal.orthogonal;
 const plain = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 const role = (owner: Owner) => owner === 'axis' ? 'axis' : 'piece';
 const at = (world: World, [x, y]: NativePoint): NativePoint => [
@@ -192,12 +206,100 @@ function coveragePlan(world: World, scene: Scene, local: State, keys: readonly s
     attempt: recalled ? attempt(control.action) : JSON.stringify([world.focus, control.action]) } };
 }
 
+function orthogonalReturn(proposal: OrthogonalProposal, index: number, rows: NativeRows) {
+  const expected = proposal.predictions[index];
+  const previous = proposal.predictions[index - 1] ?? proposal.orthogonal.world;
+  return expected ? reconcileOrthogonalReflection(expected, rows, previous) : selectOrthogonalContributor(previous, rows);
+}
+
+function orthogonalProposal(family: string, local: OrthogonalState, ref: string, available: readonly string[],
+  remaining: number): OrthogonalProposal | null {
+  const world = local.world;
+  const layout = planOrthogonalReflection(world);
+  if (!layout) return null;
+  const axes = ([0, 1] as const).filter(dim => layout.axes[dim] !== world.axes[dim]);
+  const desired = world.focus !== 'piece' && axes.includes(world.focus) ? world.focus : axes[0]
+    ?? (layout.translation.some(Boolean) ? 'piece' : null);
+  if (desired === null) return null;
+  const predictions: OrthogonalWorld[] = [];
+  let command: string, strategy: Strategy, label: string;
+  const activeAxis = world.focus === 'piece' ? null : world.focus;
+  if (desired !== world.focus) {
+    if (!available.includes('ACTION5') || local.selections.includes(world.focus)) return null;
+    command = 'ACTION5';
+    strategy = 'select_reflected_contributor';
+    label = 'Check which contributor receives the selection marker while the layout stays fixed';
+  } else {
+    const dim = desired === 'piece' ? (layout.translation[0] ? 0 : 1) : desired;
+    const distance = desired === 'piece' ? layout.translation[dim] : layout.axes[dim] - world.axes[dim];
+    const control = local.controls.find(control => available.includes(control.action) && control.delta[1 - dim] === 0
+      && control.delta[dim]! * distance > 0 && Math.abs(distance) % Math.abs(control.delta[dim]!) === 0);
+    if (!control) return null;
+    command = control.action;
+    const confirmed = local.confirmed.includes(JSON.stringify([world.focus, command]));
+    strategy = confirmed ? 'place_reflected_contributor' : 'test_reflected_displacement';
+    label = world.focus === 'piece' ? 'Move the selected piece and compare its three projected copies with the marked cells'
+      : 'Move the selected axis and check how its reflection changes while the piece stays in place';
+    const count = confirmed ? Math.min(remaining, maximumCommittedActions, Math.abs(distance / control.delta[dim]!)) : 1;
+    let predicted = world;
+    for (let i = 0; i < count; i++) {
+      predicted = moveOrthogonalContributor(predicted, control.delta);
+      predictions.push(predicted);
+    }
+  }
+  const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+  const parent = 'G_official_completion';
+  const objective = { kind: 'cover_targets_with_correlated_reflections', scope: ref.split(':revision:', 1)[0]!,
+    subjects: ['current_piece', 'reflected_pieces', 'target_cells'], parentObjective: parent,
+    satisfactionContract: 'official_progress_after_observed_reflected_coverage' };
+  const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+  const id = 'reflected-placement:' + need.id;
+  const action = plain(command), actions = Array.from({ length: Math.max(predictions.length, 1) }, () => action);
+  const axis = activeAxis === null ? null : orthogonalBox(world, activeAxis === 0
+    ? [supportKey([world.axes[0], 0]), supportKey([world.axes[0], world.size[1] - 1])]
+    : [supportKey([0, world.axes[1]]), supportKey([world.size[0] - 1, world.axes[1]])]);
+  return { status: 'proposed', kind: family, actions, orthogonal: local, predictions, needId: need.id,
+    binding: { observation_ref: ref, level_epoch: local.epoch },
+    steps: actions.map((item, i) => ({ action: item, expected_after: predictions[i] ?? null })),
+    sicSituationCard: { strategy, need: 'Cover the marked cells with the piece and its three reflected copies',
+      situation: label, evidence, mode: strategy === 'place_reflected_contributor' ? 'solving' : 'exploration',
+      body: orthogonalBox(world, world.body), axis, reflections: orthogonalReflectionBoxes(world),
+      target: orthogonalBox(world, world.targets) },
+    question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
+    sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+      preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicReflectedPlacement(family = reflectedPlacementId): NativeFamily<Proposal> {
   const declarative = family === coordinateObservedMotionId;
   let state: State | null = null;
   let transfer: Transfer | null = null;
+  let orthogonal: OrthogonalState | null = null;
   let choose: NativeProgramHandle | undefined;
   let verify: NativeProgramHandle | undefined;
+  async function proposeOrthogonal(local: OrthogonalState, observation: NativeObservation, remaining: number, execution?: NativeExecution) {
+    const proposal = orthogonalProposal(family, local, observation.observation_ref, observation.available_action_refs, remaining);
+    if (!proposal) return null;
+    const card = proposal.sicSituationCard as { strategy: Strategy; evidence: [string, ...string[]] };
+    const { strategy, evidence } = card;
+    const situation = { move: strategy === 'place_reflected_contributor', select: strategy === 'select_reflected_contributor',
+      test: strategy === 'test_reflected_displacement', measuredDirections: local.confirmed.length, mode: execution?.reasoningMode ?? 'exploration' };
+    if (choose) {
+      const decision = await choose.run({ situation }, { signal: execution?.signal });
+      if (decision.result !== strategy) return null;
+      return { ...proposal, sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+        instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } };
+    }
+    const evaluated = resolveStrategyGraph({
+      graph, mode: 'active',
+      facts: { move: { value: situation.move, evidence }, select: { value: situation.select, evidence }, test: { value: situation.test, evidence } },
+      planners: { place_reflected_contributor: () => proposal, select_reflected_contributor: () => proposal,
+        test_reflected_displacement: () => proposal },
+    });
+    return evaluated.selected?.id === strategy ? { ...proposal, sicSituationCard: { ...card, agenda: evaluated.entries } } : null;
+  }
   return {
     id: family,
     async attachPrograms(registry) {
@@ -215,6 +317,16 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
       if (prior?.stopped || (prior?.tested.length ?? 0) >= 72) return null;
       const retained = prior ? decodeReflectedWorld(prior.world) as World : null;
       const scene = measureReflectedLattice(rows, retained, true) as Scene | null;
+      const retainedPair = orthogonal?.epoch === observation.level_epoch ? orthogonal : null;
+      if (retainedPair) {
+        if (retainedPair.stopped || !reconcileOrthogonalReflection(retainedPair.world, rows)) return null;
+        return proposeOrthogonal(retainedPair, observation, remaining, execution);
+      }
+      if (!scene && recalled && observation.available_action_refs.includes('ACTION5')) {
+        const world = measureOrthogonalReflection(rows, recalled);
+        if (world) return proposeOrthogonal({ epoch: observation.level_epoch, world, controls: recalled.controls,
+          evidence: recalled.evidence, stopped: false, confirmed: [], selections: [] }, observation, remaining, execution);
+      }
       if (!scene) return null;
       const world = retained ?? initializeReflectedWorld(scene, recalled?.direct, recalled?.marker, recalled?.image) as World | null;
       if (!world || world.bodies.length > 5 || world.targets.size > 40 || !matchesReflectedWorld(world, scene)) return null;
@@ -292,6 +404,13 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (isOrthogonal(proposal)) {
+        const expected = proposal.predictions[index - 1];
+        const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+          : proposal.binding?.level_epoch === observation.level_epoch && !!expected
+            && !!reconcileOrthogonalReflection(expected, packet.frame_rows);
+        return { admitted, reason: admitted ? 'orthogonal_reflections_bound' : 'orthogonal_reflections_diverged' };
+      }
       if (index > 0 && proposal.plan.route) {
         const expected = decodeReflectedWorld(proposal.plan.route[index - 1]!) as World;
         const scene = measureReflectedLattice(packet.frame_rows, expected, true);
@@ -305,6 +424,14 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
     async after(proposal, index, before, after, _first, rows) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isOrthogonal(proposal)) {
+        const result = after.level_epoch === before.level_epoch && after.state === before.state
+          ? orthogonalReturn(proposal, index, rows) : null;
+        const checked = verify ? await verify.run({ outcome: { matched: !!result } }) : null;
+        const matched = checked ? typeof checked.result === 'boolean' ? checked.result : null : !!result;
+        return { matched, seal_prefix: matched !== true || !result || result.targets.length > proposal.orthogonal.world.targets.length,
+          reason: 'compare_orthogonal_contributors_and_newly_visible_cells' };
+      }
       const selection = proposal.plan.selection;
       const next = proposal.plan.route?.[index] ?? proposal.plan.after;
       const expected = selection === undefined ? next && decodeReflectedWorld(next) as World | null
@@ -322,6 +449,23 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
         reason: selection === undefined ? 'compare_reflected_placement_return' : 'compare_focus_without_displacement' };
     },
     record(before, after, command, _first, rows, proposal, index) {
+      if (isOrthogonal(proposal)) {
+        const local = index > 0 && orthogonal?.epoch === proposal.orthogonal.epoch ? orthogonal : proposal.orthogonal;
+        if (after.levels_completed > before.levels_completed) {
+          const { direct, image, pitch, marker } = local.world;
+          transfer = { epoch: before.level_epoch, direct, image, pitch, marker, controls: local.controls,
+            evidence: [before.observation_ref, after.observation_ref] };
+          return { events: [], reviewEvidence: 'The combined reflections covered the marked cells and advanced the level.' };
+        }
+        const world = after.level_epoch === before.level_epoch && after.state === before.state
+          ? orthogonalReturn(proposal, index, rows) : null;
+        const displacement = !!proposal.predictions[index];
+        const observed = [...new Set([...local.evidence.slice(-5), after.observation_ref])];
+        orthogonal = { ...local, world: world ?? local.world, stopped: !world, evidence: observed,
+          confirmed: world && displacement ? [...new Set([...local.confirmed, JSON.stringify([world.focus, command.action_ref])])] : local.confirmed,
+          selections: world && !displacement ? [...local.selections, local.world.focus] : [] };
+        return { events: [] };
+      }
       const local = index > 0 && state?.epoch === proposal.local.epoch ? state : proposal.local;
       const { plan } = proposal, world = decodeReflectedWorld(local.world) as World;
       if (after.levels_completed > before.levels_completed) {
@@ -348,10 +492,11 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
         stopped: !change };
       return { events: [] };
     },
-    state: () => ({ state, transfer }),
+    state: () => ({ state, transfer, ...(orthogonal ? { orthogonal } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       transfer = structuredClone(value.transfer as Transfer | null) ?? null;
+      orthogonal = structuredClone(value.orthogonal as OrthogonalState | null) ?? null;
     },
   };
 }
