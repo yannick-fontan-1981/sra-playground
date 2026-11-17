@@ -1443,3 +1443,9 @@ Le niveau 5 est gagné en **26 commandes et 9,04 s** dans le lot configuré pour
 Quand la comparaison plane échoue, SIC exploite les trois déplacements de faces dont la somme projetée est nulle. Il distingue la position logique de chaque pièce, projette les faces par profondeur et ne choisit que des pixels dont le port appartient encore à la pièce visée. La solution compatible utilise sept pièces et deux origines projetées identiques. La quatrième pièce fournit un port au cinquième clic, puis la dernière passe devant elle. Les six retours intermédiaires confirment la projection colorée et le septième valide le niveau.
 
 Le niveau 5 est gagné en **7 clics et 5,76 s** dans le lot configuré pour huit workers. Les 24 commandes relèvent de SIC seul. Les 17 commandes et retours des niveaux 1 à 4 concordent avec `5db3a887`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `ed3c7c728839d5c496d4d0172a75a127e77218c113378e0d7997ee749dd1f695`.
+
+### S5I5 niveau 5, dégagement temporaire et restauration d’un alignement
+
+SIC reconnaît une cible déjà occupée et reconstitue la barre visible de part et d’autre de la marque. Le deuxième marqueur se déplace selon deux axes, dont l’un est transmis par une barre parente. La recherche vérifie les collisions et l’alignement conjoint des cibles sur toute la suite de commandes. La carte de décision montre l’alignement temporairement défait à la commande 6 et restauré à la commande 28.
+
+Le niveau 5 est gagné en **28 clics et 8,91 s** dans le lot configuré pour huit workers. Les 146 commandes relèvent de SIC seul. Les 118 commandes et retours des niveaux 1 à 4 concordent avec `d68d768a`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `1f465776d7f30821752d18bacda8980a1c6b1870a4586918dd1ae07240c50250`.

@@ -235,8 +235,18 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
     const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
     if (decision.result !== strategy) return null;
     const evidence: [string, ...string[]] = [ref, ...new Set([...witnessed.evidence, ...current.refs].filter(value => value !== ref))];
-    const target = layout.targets.find(target => target.body === move.body);
-    const situation = move.receivers ? 'Extend all bars on the shared control after clearing their paths'
+    const expected = clearanceProject(layout, clearanceMoved(current.lengths, move));
+    const target = layout.targets.find(({ body }) => layout.coupledTargets
+      ? !same(geometry.markers[body]!, expected.markers[body]!) : body === move.body);
+    const start = target ? geometry.markers[target.body]! : null;
+    const landing = target ? expected.markers[target.body]! : null;
+    const reopensTarget = layout.coupledTargets && target && start && same(start, target.at);
+    const restoresTarget = layout.coupledTargets && target && landing && same(landing, target.at)
+      && same(layout.bodies[target.body]!.marker!, target.at);
+    const situation = reopensTarget ? 'Move the aligned marker temporarily to give the other assembly room'
+      : restoresTarget ? 'Restore the earlier alignment now that the other path is clear'
+      : layout.coupledTargets && target ? 'Move the marked assembly along one axis while accounting for every linked bar'
+      : move.receivers ? 'Extend all bars on the shared control after clearing their paths'
       : target ? 'Extend the marked bar along the cleared corridor toward its target'
         : layout.targets.length === 1 ? 'Move the obstructing group out of the paths of the linked bars'
           : 'Move the obstructing group so both marked bars can reach their targets';
@@ -247,7 +257,6 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
       subjects: layout.targets.map(goal => goal.at.join(',')), parentObjective: parent, satisfactionContract: 'official_progress_after_all_markers_align' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = coupledGaugeRouteId + ':' + need.id;
     const [x, y] = button.point, action = { action_ref: 'ACTION6', data: { x, y } };
-    const expected = clearanceProject(layout, clearanceMoved(current.lengths, move));
     return { status: 'proposed', kind: coupledGaugeRouteId, clearance: { ...current, route }, expected, move, needId: need.id, actions: [action],
       binding: { observation_ref: ref, level_epoch: epoch },
       steps: [{ action, point_binding: witness, expected_after: expected }],
@@ -257,7 +266,7 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
         : 'Free the paths to both visible targets', situation, mode, evidence, agenda: [],
         triggerCard: chooseInteraction, focus: button.box, gauge: geometry.boxes[move.body],
         carried: geometry.boxes.filter((box, index) => index !== move.body && !same(box, expected.boxes[index]!)),
-        ...(target ? { actor: dot(geometry.markers[move.body]!), target: dot(target.at), landing: dot(expected.markers[move.body]!) } : {}) },
+        ...(target && start && landing ? { actor: dot(start), target: dot(target.at), landing: dot(landing) } : {}) },
       question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
       sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
