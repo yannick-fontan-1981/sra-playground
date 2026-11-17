@@ -6,6 +6,7 @@ public/python/*.py text eol=lf
 
 # Pinned V6 archives are verified against hashes of their original bytes.
 /reference/v6/** -text
+/src/logos-engine/v6/frontier-policy.json -text
 
 # Retained proof patches and browser transcripts preserve original whitespace.
 docs/migration/lot4c-evidence/development/isos-live-01/isos-facet-source-parity-snapshot-correction.patch whitespace=-blank-at-eol
