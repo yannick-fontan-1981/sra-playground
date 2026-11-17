@@ -13,18 +13,50 @@ const centerX = ([l, , r]: NativeBox) => (l + r) / 2;
 const cell = (rows: NativeRows, [x, y]: NativePoint) => rows[y]?.[x];
 const near = (a: number, b: number, pitch: number) => 0 < a - b && a - b <= pitch + 1;
 
+function sharedSignalLink(rows: NativeRows, boxes: RailWindow[], to: number, pitch: number): Link | null {
+  const { signal_marker: marker, unit } = boxes[to]!;
+  if (!marker) return null;
+  const { point: [x, bottom], ink } = marker;
+  const matches = new Map<number, Link>();
+  for (let y = bottom + 1; near(y, bottom, pitch + unit); y++) {
+    const row = rows[y];
+    if (!row || row[x] !== ink) continue;
+    let left = x, right = x;
+    while (row[left - 1] === ink) left--;
+    while (row[right + 1] === ink) right++;
+    const nodes = boxes.map((box, index) => ({ box, index, x: centerX(box.bbox) }))
+      .filter(node => node.box.bbox[3] === bottom && node.x >= left && node.x <= right)
+      .sort((a, b) => a.x - b.x);
+    if (nodes.length < 3 || nodes[0]!.x !== left || nodes.at(-1)!.x !== right) continue;
+    const emitters = nodes.filter(node => !node.box.signal_marker);
+    const root = emitters[0];
+    if (emitters.length !== 1 || !root || (root.x !== left && root.x !== right)) continue;
+    if (nodes.some(node => node !== root && node.box.signal_marker?.ink !== ink)) continue;
+    const at = nodes.findIndex(node => node.index === to);
+    const from = nodes[at + Math.sign(root.x - x)];
+    if (at < 0 || !from) continue;
+    matches.set(from.index, { from: from.index, to, box: [Math.min(x, from.x), y, Math.max(x, from.x), y] });
+  }
+  return matches.size === 1 ? matches.values().next().value! : null;
+}
+
 function measureLinks(rows: NativeRows, boxes: RailWindow[], pitch: number): Link[] | null {
   const parts = geometricComponents(rows), links: Link[] = [];
   for (const [to, box] of boxes.entries()) {
     const marker = box.signal_marker;
     if (!marker) continue;
+    const chained = sharedSignalLink(rows, boxes, to, pitch);
+    if (chained) { links.push(chained); continue; }
     const [x, bottom] = marker.point;
     const matches = boxes.flatMap(({ bbox, unit }, from) => {
       if (from === to) return [];
       const sourceX = centerX(bbox);
+      const left = Math.min(sourceX, x), right = Math.max(sourceX, x);
+      if (boxes.some(({ signal_marker: signal }) => signal?.ink === marker.ink && signal.point[1] === bottom
+        && signal.point[0] > left && signal.point[0] < right)) return [];
       // A selection preview can cover the vertical stubs while leaving the full horizontal link visible.
-      return parts.filter(({ color, bbox: [l, t, r, b] }) => color === marker.ink && l === Math.min(sourceX, x)
-        && r === Math.max(sourceX, x) && b > Math.max(bottom, bbox[3])
+      return parts.filter(({ color, bbox: [l, t, r, b] }) => color === marker.ink && l === left
+        && r === right && b > Math.max(bottom, bbox[3])
         && near(t, Math.min(bottom, bbox[3]), pitch + (t === b ? unit : 0)))
         .map(part => ({ from, to, box: part.bbox }));
     });
@@ -153,4 +185,35 @@ export function linkedWindowCoverage(rail: LinkedWindows, colors: readonly numbe
     if (state.spent_for_run_refs.length === receivers.length) break;
   }
   return [false, []];
+}
+
+export function linkedWindowProjection(rail: LinkedWindows, colors: readonly number[], paint: readonly boolean[]) {
+  const amounts = new Array<number>(16).fill(0);
+  for (const color of colors) amounts[color] = amounts[color]! + 1;
+
+  function canCoverPigments(settings: WindowSettings): boolean {
+    if (colors.length > 30 || settings.some(([size, filter, output], index) =>
+      size > 30 || filter === null || (paint[index] && output === null))) return true;
+    const captures = new Array<number>(16).fill(1);
+    const painters: WindowSettings = [];
+    for (const [index, [size, filter, output]] of settings.entries()) {
+      if (paint[index]) painters.push([size, filter, output]);
+      else captures[filter!] = captures[filter!]! | (captures[filter!]! << size);
+    }
+    if (painters.length > 8) return true;
+    // Each window fires at most once. A launch must be able to balance each pigment before timing is considered.
+    for (let mask = 0; mask < 1 << painters.length; mask++) {
+      const balance = amounts.slice();
+      for (const [index, [size, filter, output]] of painters.entries()) {
+        if ((mask & (1 << index)) === 0) continue;
+        balance[filter!] = balance[filter!]! - size;
+        balance[output!] = balance[output!]! + size;
+      }
+      if (balance.every((count, ink) => count >= 0 && count <= colors.length && (captures[ink]! & (1 << count)) !== 0)) return true;
+    }
+    return false;
+  }
+
+  return (_scene: unknown, settings: WindowSettings): [boolean, NativeRecord[]] =>
+    canCoverPigments(settings) ? linkedWindowCoverage(rail, colors, paint, settings) : [false, []];
 }

@@ -30,85 +30,107 @@ const coordinateKey = (x: number, y: number): string => `${x},${y}`;
 const modulo = (n: number, d: number): number => ((n % d) + d) % d;
 const pythonScalar = (value: unknown): string => value === null ? 'None' : value === true ? 'True' : value === false ? 'False' : String(value);
 
+function measureReceiver(rows: NativeRows, component: R, allowSignalMarker: boolean, bounds = component.bbox): R | null {
+  const [l, t, r, b] = bounds as number[], w = r! - l! + 1, h = b! - t! + 1;
+  if (h < 6 || w < 2 * h || w > 3 * h) return null;
+  const cells = new Set<string>((component.cells as number[][]).map(([x, y]) => coordinateKey(x!, y!)));
+  let ring = true;
+  const opening: number[] = [];
+  for (let y = t!; y <= b! && ring; y++) for (let x = l!; x <= r!; x++) {
+    if ((x === l || x === r || y === t || y === b) && !cells.has(coordinateKey(x, y))) {
+      if (allowSignalMarker && y === b && Math.abs(x - (l! + r!) / 2) <= 1) opening.push(x);
+      else { ring = false; break; }
+    }
+  }
+  const markerInks = new Set(opening.map(x => rows[b!]![x]!));
+  if (opening.length && (opening.length !== 3 || markerInks.size !== 1)) return null;
+  if (!ring || (h - 2) % 3) return null;
+  const unit = (h - 2) / 3, start = b! - unit, interior: number[] = [], slots: R[] = [];
+  for (let y = t! + 1; y < b!; y++) for (let x = l! + 1; x < r!; x++) interior.push(rows[y]![x]!);
+  const base = dominant(interior);
+  for (let x = l! + 1; x < r!;) {
+    let empty = true;
+    for (let y = start; y < b!; y++) if (rows[y]![x] !== base) { empty = false; break; }
+    if (empty) { x++; continue; }
+    let end = x;
+    while (end + 1 < r!) {
+      let occupied = false;
+      for (let y = start; y < b!; y++) if (rows[y]![end + 1] !== base) { occupied = true; break; }
+      if (!occupied) break;
+      end++;
+    }
+    const pixels: number[] = [];
+    for (let y = start; y < b!; y++) for (let xx = x; xx <= end; xx++) pixels.push(rows[y]![xx]!);
+    slots.push({ box: [x, start, end, b! - 1], values: pixels, full: new Set(pixels).size === 1 }); x = end + 1;
+  }
+  if (!slots.length || slots.length > 16 || slots.some(slot => slot.box[2] - slot.box[0] + 1 !== unit)) return null;
+  const fixed = !slots.every(slot => slot.full);
+  if (fixed && !slots.every(slot => new Set(slot.values).size === 2
+    && (slot.values as number[]).filter(value => value === base).length === (unit - 1) ** 2)) return null;
+  const active = (slots[0]!.values as number[]).at(-1)!, capacity = fixed ? slots.length
+    : slots.filter(slot => slot.values[0] === active).length;
+  if (!fixed && slots.some((slot, index) => (slot.values[0] === active) !== (index < capacity))) return null;
+  const fw = 2 * unit + 1, fl = l! + 1, ft = t! + 1, fr = fl + fw - 1, fb = start - 1;
+  const field = (left: number): R | null => {
+    const right = left + fw - 1, patch: number[] = [], overlay = new Set<string>(), other: number[][] = [];
+    for (let y = ft; y <= fb; y++) for (let x = left; x <= right; x++) patch.push(rows[y]![x]!);
+    const color = dominant(patch);
+    for (let y = ft + 1; y < fb; y++) overlay.add(coordinateKey(left + unit, y));
+    for (let y = ft; y <= fb; y++) for (let x = left; x <= right; x++) if (rows[y]![x] !== color) other.push([x, y]);
+    const point = [Math.floor((left + right) / 2), Math.floor((ft + fb) / 2)];
+    if (color !== base && other.every(([x, y]) => overlay.has(coordinateKey(x!, y!)))) {
+      return { value: color, domain: [color], fixed_hypothesis: true,
+        overlay: other.sort((a, b) => a[0]! - b[0]! || a[1]! - b[1]!), point };
+    }
+    const core: number[] = [];
+    for (let y = ft; y <= fb; y++) for (let x = left + unit; x <= right; x++) core.push(rows[y]![x]!);
+    if (new Set(core).size !== 1 || core[0] === base) return null;
+    const domain: number[] = [];
+    for (let y = ft; y <= fb; y++) { const value = rows[y]![left]!; if (value !== base && !domain.includes(value)) domain.push(value); }
+    if (domain.length < 2 || !domain.includes(core[0]!)) return null;
+    return { value: core[0], domain, fixed_hypothesis: false, overlay: [], point };
+  };
+  const leftField = field(fl), rightField = field(r! - fw), filter = leftField ? leftField.value : null,
+    domain = leftField ? leftField.domain : [];
+  if (!leftField) {
+    const patch = new Set<number>();
+    for (let y = ft; y <= fb; y++) for (let x = fl; x <= fr; x++) patch.add(rows[y]![x]!);
+    if (patch.size < 3) return null;
+  }
+  const filterPoint = [Math.floor((fl + fr) / 2), Math.floor((ft + fb) / 2)],
+    output = rightField && !equal(rightField.point, filterPoint) ? rightField : null;
+  return { bbox: [l, t, r, b], border: component.value, base, unit, slots, capacity,
+    capacity_domain: fixed ? [slots.length] : Array.from({ length: slots.length }, (_, i) => i + 1),
+    capacity_point: [Math.floor((l! + r!) / 2), start], filter, filter_domain: domain, filter_point: filterPoint,
+    wildcard_hypothesis: filter === null, fixed_capacity: fixed, left_field: leftField, second_field: output,
+    ...(opening.length ? { signal_marker: { point: [opening[1]!, b!], ink: [...markerInks][0]! } } : {}) };
+}
+
+function recoverReceiverOutlines(rows: NativeRows, components: readonly R[], horizontalSpan: number, verticalSpan: number): R[] {
+  const recovered: R[] = [];
+  for (const component of components) {
+    const [left, top, right, bottom] = component.bbox;
+    if (right - left !== horizontalSpan || bottom - top <= verticalSpan) continue;
+    const candidates: R[] = [];
+    for (let y = top; y + verticalSpan <= bottom; y++) {
+      if (!rows[y]!.slice(left, right + 1).every(ink => ink === component.value)) continue;
+      const box = measureReceiver(rows, component, true, [left, y, right, y + verticalSpan]);
+      if (box) candidates.push(box);
+    }
+    if (candidates.length === 1) recovered.push(candidates[0]!);
+  }
+  return recovered;
+}
+
 export function measure(rows: NativeRows | null | undefined, allowSignalMarker = false): R | null {
   if (!rows?.length || !rows[0]?.length) return null;
-  const cc = components(rows), boxes: R[] = [];
-  for (const component of cc) {
-    const [l, t, r, b] = component.bbox as number[], w = r! - l! + 1, h = b! - t! + 1;
-    if (h < 6 || w < 2 * h || w > 3 * h) continue;
-    const cells = new Set<string>((component.cells as number[][]).map(([x, y]) => coordinateKey(x!, y!)));
-    let ring = true;
-    const opening: number[] = [];
-    for (let y = t!; y <= b! && ring; y++) for (let x = l!; x <= r!; x++) {
-      if ((x === l || x === r || y === t || y === b) && !cells.has(coordinateKey(x, y))) {
-        if (allowSignalMarker && y === b && Math.abs(x - (l! + r!) / 2) <= 1) opening.push(x);
-        else { ring = false; break; }
-      }
-    }
-    const markerInks = new Set(opening.map(x => rows[b!]![x]!));
-    if (opening.length && (opening.length !== 3 || markerInks.size !== 1)) continue;
-    if (!ring || (h - 2) % 3) continue;
-    const unit = (h - 2) / 3, start = b! - unit, interior: number[] = [], slots: R[] = [];
-    for (let y = t! + 1; y < b!; y++) for (let x = l! + 1; x < r!; x++) interior.push(rows[y]![x]!);
-    const base = dominant(interior);
-    for (let x = l! + 1; x < r!;) {
-      let empty = true;
-      for (let y = start; y < b!; y++) if (rows[y]![x] !== base) { empty = false; break; }
-      if (empty) { x++; continue; }
-      let end = x;
-      while (end + 1 < r!) {
-        let occupied = false;
-        for (let y = start; y < b!; y++) if (rows[y]![end + 1] !== base) { occupied = true; break; }
-        if (!occupied) break;
-        end++;
-      }
-      const pixels: number[] = [];
-      for (let y = start; y < b!; y++) for (let xx = x; xx <= end; xx++) pixels.push(rows[y]![xx]!);
-      slots.push({ box: [x, start, end, b! - 1], values: pixels, full: new Set(pixels).size === 1 }); x = end + 1;
-    }
-    if (!slots.length || slots.length > 16 || slots.some(slot => slot.box[2] - slot.box[0] + 1 !== unit)) continue;
-    const fixed = !slots.every(slot => slot.full);
-    if (fixed && !slots.every(slot => new Set(slot.values).size === 2
-      && (slot.values as number[]).filter(value => value === base).length === (unit - 1) ** 2)) continue;
-    const active = (slots[0]!.values as number[]).at(-1)!, capacity = fixed ? slots.length
-      : slots.filter(slot => slot.values[0] === active).length;
-    if (!fixed && slots.some((slot, index) => (slot.values[0] === active) !== (index < capacity))) continue;
-    const fw = 2 * unit + 1, fl = l! + 1, ft = t! + 1, fr = fl + fw - 1, fb = start - 1;
-    const field = (left: number): R | null => {
-      const right = left + fw - 1, patch: number[] = [], overlay = new Set<string>(), other: number[][] = [];
-      for (let y = ft; y <= fb; y++) for (let x = left; x <= right; x++) patch.push(rows[y]![x]!);
-      const color = dominant(patch);
-      for (let y = ft + 1; y < fb; y++) overlay.add(coordinateKey(left + unit, y));
-      for (let y = ft; y <= fb; y++) for (let x = left; x <= right; x++) if (rows[y]![x] !== color) other.push([x, y]);
-      const point = [Math.floor((left + right) / 2), Math.floor((ft + fb) / 2)];
-      if (color !== base && other.every(([x, y]) => overlay.has(coordinateKey(x!, y!)))) {
-        return { value: color, domain: [color], fixed_hypothesis: true,
-          overlay: other.sort((a, b) => a[0]! - b[0]! || a[1]! - b[1]!), point };
-      }
-      const core: number[] = [];
-      for (let y = ft; y <= fb; y++) for (let x = left + unit; x <= right; x++) core.push(rows[y]![x]!);
-      if (new Set(core).size !== 1 || core[0] === base) return null;
-      const domain: number[] = [];
-      for (let y = ft; y <= fb; y++) { const value = rows[y]![left]!; if (value !== base && !domain.includes(value)) domain.push(value); }
-      if (domain.length < 2 || !domain.includes(core[0]!)) return null;
-      return { value: core[0], domain, fixed_hypothesis: false, overlay: [], point };
-    };
-    const leftField = field(fl), rightField = field(r! - fw), filter = leftField ? leftField.value : null,
-      domain = leftField ? leftField.domain : [];
-    if (!leftField) {
-      const patch = new Set<number>();
-      for (let y = ft; y <= fb; y++) for (let x = fl; x <= fr; x++) patch.add(rows[y]![x]!);
-      if (patch.size < 3) continue;
-    }
-    const filterPoint = [Math.floor((fl + fr) / 2), Math.floor((ft + fb) / 2)],
-      output = rightField && !equal(rightField.point, filterPoint) ? rightField : null;
-    boxes.push({ bbox: [l, t, r, b], border: component.value, base, unit, slots, capacity,
-      capacity_domain: fixed ? [slots.length] : Array.from({ length: slots.length }, (_, i) => i + 1),
-      capacity_point: [Math.floor((l! + r!) / 2), start], filter, filter_domain: domain, filter_point: filterPoint,
-      wildcard_hypothesis: filter === null, fixed_capacity: fixed, left_field: leftField, second_field: output,
-      ...(opening.length ? { signal_marker: { point: [opening[1]!, b!], ink: [...markerInks][0]! } } : {}) });
-  }
+  const cc = components(rows);
+  const boxes = cc.map(component => measureReceiver(rows, component, allowSignalMarker)).filter(box => box !== null);
   if (boxes.length < 2 || new Set(boxes.map(box => `${box.bbox[2] - box.bbox[0]},${box.bbox[3] - box.bbox[1]}`)).size !== 1) return null;
+  if (allowSignalMarker && boxes.some(box => box.signal_marker)) {
+    const [left, top, right, bottom] = boxes[0]!.bbox;
+    boxes.push(...recoverReceiverOutlines(rows, cc, right - left, bottom - top));
+  }
   boxes.sort((a, b) => a.bbox[1] - b.bbox[1] || a.bbox[0] - b.bbox[0]);
   const top = Math.min(...boxes.map(box => box.bbox[1])), groups = new Map<string, { width: number; units: R[] }>();
   for (const component of cc) {
@@ -238,7 +260,8 @@ function interrupted(execution: NativeExecution, completed: number): R | null {
 }
 /** Native scheduling adaptation only. Source budgets still use their own
  * per-coverage clock. An interrupted enumeration exposes no partial plans. */
-export async function plansCooperative(measurement: R, model: R, execution?: NativeExecution, project?: CoverageProjection): Promise<WindowPlanResult> {
+export async function plansCooperative(measurement: R, model: R, execution?: NativeExecution, project?: CoverageProjection,
+  configurationsPerYield = 32): Promise<WindowPlanResult> {
   if (!execution) return plans(measurement, model, project);
   const { axes, bound } = searchDomain(measurement, model);
   if (bound.truncated) return [[], bound];
@@ -249,7 +272,7 @@ export async function plansCooperative(measurement: R, model: R, execution?: Nat
   for (const candidate of candidates(measurement, model, axes, project)) {
     completed++; if (candidate) result.push(candidate);
     stop = interrupted(execution, completed); if (stop) return incomplete(stop);
-    if (completed % 32 === 0) {
+    if (completed % configurationsPerYield === 0) {
       try { await execution.yieldControl(); }
       catch (error) {
         if (execution.signal?.aborted || error instanceof Error && error.name === 'AbortError') {

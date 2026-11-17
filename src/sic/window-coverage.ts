@@ -5,7 +5,7 @@ import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
-import { linkedWindowCoverage, measureLinkedWindows, type RailWindow } from './linked-window-rail.ts';
+import { linkedWindowProjection, measureLinkedWindows, type RailWindow } from './linked-window-rail.ts';
 
 export const windowCoverageId = 'sic_window_coverage';
 export const learnWindowCoverageId = 'sic_configure_observed_receiver_fields';
@@ -25,6 +25,7 @@ const graph = compileStrategyGraph({ id: 'cover_ordered_sequence_with_visible_wi
 const model = { maximal_group_required: false, one_use_for_run: true, configuration_bound: 4096,
   receiver_order_hypothesis: 'visual_reading_order_not_rail_law',
   dual_field_operation_hypothesis: 'PAINT', single_field_operation_hypothesis: 'CAPTURE' };
+const linkedModel = { ...model, configuration_bound: 2 ** 19 };
 type Field = 'capacity' | 'filter' | 'second_field';
 type Value = number | null;
 type Window = RailWindow & { capacity: number; capacity_domain: number[]; filter: Value; filter_domain: number[];
@@ -32,7 +33,8 @@ type Window = RailWindow & { capacity: number; capacity_domain: number[]; filter
 type Measured = { boxes: Window[]; word: { bbox: NativeBox; value: number }[]; colors: number[] };
 type Edit = { box: number; field: Field; point: NativePoint; desired: Value };
 type CapacityControl = { box: NativeBox; command: string; increment: 1 | -1 };
-type State = { epoch: number; tried: string[]; evidence: string[]; stopped: boolean; control?: CapacityControl };
+type SignalMarker = { box: NativeBox; marker: NonNullable<RailWindow['signal_marker']> };
+type State = { epoch: number; tried: string[]; evidence: string[]; stopped: boolean; control?: CapacityControl; signals?: SignalMarker[] };
 type Proposal = NativeProposal & { local: State; measurement: Measured; edit: Edit | null; expected: Value; attempt: string; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const value = (box: Window, field: Field) => field === 'second_field' ? box.second_field?.value ?? null : box[field];
@@ -94,27 +96,36 @@ export function createSicWindowCoverage(family = windowCoverageId): NativeFamily
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || !observation.available_action_refs.includes('ACTION5')) return null;
       const ref = observation.observation_ref;
       const prior = state?.epoch === observation.level_epoch && (!learns || state.evidence.at(-1) === ref) ? state : null;
-      if (prior?.stopped || (prior?.tried.length ?? 0) >= 18) return null;
+      if (prior?.stopped) return null;
       if (learns && !prior && !execution?.readPriorDirectionalScene) return null;
       const measurement = captureSettings(rows);
       if (!measurement || measurement.word.length > 20) return null;
-      const linked = measurement.boxes.some(box => box.signal_marker);
+      const previousSignals = prior?.evidence.at(-1) === ref ? prior.signals ?? [] : [];
+      // A verified field edit can hide a marker under its preview. Re-read the rail and the link ink from the new frame.
+      const railBoxes = measurement.boxes.map(box => box.signal_marker ? box : {
+        ...box, signal_marker: previousSignals.find(signal => equal(signal.box, box.bbox))?.marker,
+      });
+      const signals = railBoxes.flatMap(box => box.signal_marker ? [{ box: box.bbox, marker: box.signal_marker }] : []);
+      const linked = signals.length > 0;
       if (!linked && measurement.boxes.length > 5) return null;
+      const maxEdits = linked ? Math.max(18, measurement.boxes.reduce((sum, box) => sum
+        + [box.capacity_domain, box.filter_domain, box.second_field?.domain ?? []].reduce((cost, domain) => cost + Math.max(0, domain.length - 1), 0), 0)) : 17;
+      if ((prior?.tried.length ?? 0) > maxEdits) return null;
       const directionalReturn = learns && !prior ? execution?.readPriorDirectionalScene?.(captureSettings) : null;
       const acquired = directionalReturn?.afterRef === ref && directionalReturn.levelEpoch === observation.level_epoch
         ? acquiredCapacity(directionalReturn.scene, measurement, directionalReturn.command) : null;
       if (learns && !prior && !acquired) return null;
-      const rail = linked ? measureLinkedWindows(rows, measurement.boxes) : null;
+      const rail = linked ? measureLinkedWindows(rows, railBoxes) : null;
       if (linked && !rail) return null;
       const paint = measurement.boxes.map(box => box.second_field !== null);
-      const [choices, receipt] = await plansCooperative(measurement, model, execution,
-        rail ? (_scene, settings) => linkedWindowCoverage(rail, measurement.colors, paint, settings) : undefined);
+      const [choices, receipt] = rail ? await plansCooperative(measurement, linkedModel, execution,
+        linkedWindowProjection(rail, measurement.colors, paint), 1024) : await plansCooperative(measurement, model, execution);
       if (receipt.truncated) return null;
       const goal = choices.filter(candidate => candidate.cost <= remaining).sort((a, b) => a.cost - b.cost)[0];
       if (!goal) return null;
-      const local: State = prior ?? { epoch: observation.level_epoch, tried: [],
+      const local: State = { ...(prior ?? { epoch: observation.level_epoch, tried: [],
         evidence: directionalReturn && acquired ? [directionalReturn.beforeRef, ref] : [],
-        stopped: false, ...(acquired ? { control: acquired } : {}) };
+        stopped: false, ...(acquired ? { control: acquired } : {}) }), signals };
       const edit = (goal.edits[0] ?? null) as Edit | null;
       let expected: Value = null;
       let reused: CapacityControl | null = null;

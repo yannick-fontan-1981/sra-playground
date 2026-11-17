@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativeBox, NativePoint } from '../src/logos-engine/v6-native-types.ts';
-import { linkedWindowCoverage, measureLinkedWindows, type RailWindow } from '../src/sic/linked-window-rail.ts';
+import { linkedWindowCoverage, linkedWindowProjection, measureLinkedWindows, type RailWindow } from '../src/sic/linked-window-rail.ts';
 
 function railScene() {
   const base = 4, track = 3, marker = 7;
@@ -53,6 +53,22 @@ test('the horizontal signal link remains identifiable when a preview covers its 
   assert.deepEqual(measureLinkedWindows(rows, boxes)?.links, [{ from: 2, to: 1, box: [30, 25, 50, 25] }]);
 });
 
+test('one signal backbone connects each marked receiver to its neighbor toward the visible source', () => {
+  const { rows, boxes } = railScene();
+  for (let x = 10; x <= 50; x++) {
+    rows[24]![x] = 5;
+    rows[25]![x] = 7;
+  }
+  boxes[0]!.signal_marker = { point: [10, 18], ink: 7 };
+  assert.deepEqual(measureLinkedWindows(rows, boxes)?.links.map(link => [link.from, link.to]), [[1, 0], [2, 1]]);
+
+  boxes[2]!.signal_marker = { point: [50, 18], ink: 7 };
+  assert.equal(measureLinkedWindows(rows, boxes), null);
+
+  delete boxes[0]!.signal_marker;
+  assert.deepEqual(measureLinkedWindows(rows, boxes)?.links.map(link => [link.from, link.to]), [[0, 1], [1, 2]]);
+});
+
 test('the projected rail combines paint and capture with a same-beat dependency', () => {
   const { rows, boxes } = railScene();
   const rail = measureLinkedWindows(rows, boxes);
@@ -69,4 +85,13 @@ test('the projected rail combines paint and capture with a same-beat dependency'
   assert.equal(events[1]!.beat, events[2]!.beat);
   assert.deepEqual(linkedWindowCoverage(rail, colors, paint,
     [[2, 8, 14], [3, 11, null], [4, 9, null], [4, 14, null], [2, 14, null], [3, 15, 14]]), [false, []]);
+});
+
+test('pigment bounds preserve valid coverage that leaves a painter unused', () => {
+  const { path } = railScene();
+  const rail = { path, positions: [0, 5], order: [0, 1], links: [] };
+  const project = linkedWindowProjection(rail, [8, 8], [true, false]);
+  assert.equal(project(null, [[1, 9, 14], [2, 8, null]])[0], true);
+  assert.equal(project(null, [[1, 9, 14], [2, null, null]])[0], true);
+  assert.deepEqual(project(null, [[1, 9, 14], [2, 14, null]]), [false, []]);
 });
