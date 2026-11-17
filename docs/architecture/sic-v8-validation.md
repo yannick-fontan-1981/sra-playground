@@ -1497,3 +1497,9 @@ Le niveau 5 est gagné en **19 commandes et 10,03 s**. Les 63 commandes relèven
 SIC reconstitue l’appui central d’une cellule en associant le marqueur à sa bordure. Le fond entre les cases de stock sert de référence pour compter les unités, y compris quand une case est à moitié pleine. Si le contour de la poutre fantôme rejoint une barre de même couleur, la largeur choisie et le périmètre visible permettent de retrouver sa position. Le plan relie les deux fondations et atteint la cible avec huit poutres. Chaque pose confirme la hauteur et la consommation d’une unité.
 
 Le niveau 5 est gagné en **15 commandes et 6,04 s**. Les 82 commandes relèvent de SIC seul. Les 67 commandes et retours des niveaux 1 à 4 concordent avec la référence `46ebc530f70601b01970450d10aa38fe1dc8825e4a49307867b2d2a83ee1ab8c`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et les 12 tests ciblés passent. Empreinte du rejeu complet `55479d4b1712d69a9b53d5344138b2c6dd3edf0b7d78e0c03630a1be4e78cbac`.
+
+### SB26 niveau 5, réutiliser la même définition à deux emplacements
+
+SIC conserve séparément le nombre de jetons physiques et la longueur de la séquence développée. Les deux jetons d’appel occupent chacun un emplacement, puis développent la même définition de trois valeurs. La définition est remplie une seule fois et son contenu est revérifié à chaque occurrence. Une référence circulaire interromprait le développement.
+
+Le niveau 5 est gagné en **17 commandes et 9,05 s**. Les 71 commandes relèvent de SIC seul. Les 54 commandes et retours des niveaux 1 à 4 concordent avec la référence `14dd5cc328147b2b0bdf13b2d7ee26d419c590cb847d28403d883b5bc6db8dbe`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et les 10 tests ciblés passent. Empreinte du rejeu complet `2b4fbd9abf98a36cb76087f2381110c7ce59f9879525a5503aa22a1b3f2d868a`.

@@ -38,7 +38,7 @@ function uniqueExpansion(word: readonly number[], programs: readonly Program[], 
   for (const token of tokens) {
     if (typeof token.value !== 'string') continue;
     const linked = programs.find(program => token.value === `call:${program.label}`);
-    if (!linked || calls.has(token.value)) return null;
+    if (!linked) return null;
     calls.set(token.value, linked);
   }
   const roots = programs.filter(program => !calls.has(`call:${program.label}`));
@@ -47,23 +47,41 @@ function uniqueExpansion(word: readonly number[], programs: readonly Program[], 
   for (const { value } of tokens) counts.set(value, (counts.get(value) ?? 0) + 1);
   const literals = programs.flatMap(program => program.cells.flatMap(cell => cell.fixed === null ? [] : [cell.fixed]));
   literals.push(...tokens.flatMap(token => typeof token.value === 'number' ? [token.value] : []));
-  if (literals.length !== word.length || [...literals].sort().join(',') !== [...word].sort().join(',')) return null;
+  const availableLiterals = [...word];
+  for (const literal of literals) {
+    const index = availableLiterals.indexOf(literal);
+    if (index < 0) return null;
+    availableLiterals.splice(index, 1);
+  }
 
   const assignments = new Map<Cell, SlotValue>();
   let solution: Map<Cell, SlotValue> | null = null;
   let ambiguous = false, budget = 8192;
-  function visit(pending: readonly Cell[], offset: number) {
+  type ExpansionCell = { cell: Cell; ancestry: readonly Program[] };
+  function visit(pending: readonly ExpansionCell[], offset: number) {
     if (ambiguous || --budget < 0) return;
-    const [cell, ...rest] = pending;
-    if (!cell) {
+    const [current, ...rest] = pending;
+    if (!current) {
       if (offset === word.length && [...counts.values()].every(count => count === 0)) {
         if (solution) ambiguous = true;
         else solution = new Map(assignments);
       }
       return;
     }
-    if (cell.fixed !== null) {
-      if (cell.fixed === word[offset]) visit(rest, offset + 1);
+    const { cell, ancestry } = current;
+    const expand = (value: SlotValue) => {
+      if (typeof value === 'number') {
+        if (value === word[offset]) visit(rest, offset + 1);
+        return;
+      }
+      const linked = calls.get(value)!;
+      if (ancestry.includes(linked)) return;
+      const nested = [...ancestry, linked];
+      visit([...linked.cells.map(child => ({ cell: child, ancestry: nested })), ...rest], offset);
+    };
+    const placed = cell.fixed ?? assignments.get(cell);
+    if (placed !== undefined) {
+      expand(placed);
       return;
     }
     const choices: SlotValue[] = [...calls.keys()];
@@ -71,16 +89,15 @@ function uniqueExpansion(word: readonly number[], programs: readonly Program[], 
     for (const value of choices) {
       const count = counts.get(value) ?? 0;
       if (!count) continue;
-      const linked = typeof value === 'string' ? calls.get(value)! : null;
       counts.set(value, count - 1);
       assignments.set(cell, value);
-      if (linked) visit([...linked.cells, ...rest], offset);
-      else visit(rest, offset + 1);
+      expand(value);
       assignments.delete(cell);
       counts.set(value, count);
     }
   }
-  visit(roots[0]!.cells, 0);
+  const root = roots[0]!;
+  visit(root.cells.map(cell => ({ cell, ancestry: [root] })), 0);
   return budget < 0 || ambiguous ? null : solution;
 }
 
