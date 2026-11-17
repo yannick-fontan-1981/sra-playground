@@ -1,10 +1,11 @@
-import { CODE_DIRECTIONS, codeBits, codePosition, decodeCodeWord, encodeCodeWord, measureCodeScene, normalizeCodeMask, type CodeWord } from '../logos-engine/v6-code-program.ts';
+import { codeBits, codeMaskRotation, codePosition, decodeCodeWord, encodeCodeWord, measureCodeScene, normalizeCodeMask,
+  rotatedCodeMask, type CodePoseGoal, type CodeWord } from '../logos-engine/v6-code-program.ts';
 import { geometricComponents, ObservedInputDomain, projection } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
-import { bindExamples, readDemonstration, type CodeExample } from './code-demonstration.ts';
+import { bindExamples, codeInstructionEffect, readDemonstration, type CodeExample } from './code-demonstration.ts';
 
 export const codeRouteId = 'sic_code_route';
 export const verifyProgramConfigurationId = 'sic_verify_program_configuration';
@@ -17,10 +18,10 @@ export const codeRouteStrategies = {
 
 type Scene = { origin: NativePoint; size: number; goal: NativePoint; allowed: NativePoint[]; columns: NativeBox[][];
   bit_commands: NativeCommand[][]; values: number[]; execute: NativeCommand; button_box: NativeBox; button_hue: number;
-  mask: NativePoint[]; shape: NativePoint; hue: number; scaled?: boolean; examples?: readonly CodeExample[] };
-type Pose = { at: NativePoint; scale: number };
-type Effect = { motion: NativePoint; resize?: number; fromScales?: number[]; ref: string };
-type Instruction = { word: string; motion: NativePoint; resize?: number; fromScale?: number };
+  mask: NativePoint[]; shape: NativePoint; hue: number; floor: number[]; scaled?: boolean; goalPose?: CodePoseGoal; examples?: readonly CodeExample[] };
+type Pose = { at: NativePoint; scale: number; rotation?: number; hue?: number };
+type Effect = { motion: NativePoint; resize?: number; fromScales?: number[]; turn?: number; fromRotations?: number[];
+  hue?: number; ref: string };
 type State = { epoch: number; scene: Scene; effects: Record<string, Effect>; rejected: string[]; runs: string[];
   count: number; stopped: boolean; editRef?: string; examplesTried?: readonly number[] };
 type ProgramLeg = { program: CodeWord[]; edit: CodeWord[] | null; run: string };
@@ -38,10 +39,13 @@ function codePose(rows: NativeRows, scene: Scene): Pose | null {
   const { origin: [left, top], shape: [width, height], size, hue, mask } = scene;
   const poses = geometricComponents(rows).flatMap(part => {
     const [x, y, r, b] = part.bbox, side = r - x + 1, scale = side / size;
-    if (part.color !== hue || side !== b - y + 1 || x < left || y < top
+    if ((scene.goalPose ? scene.floor.includes(part.color) : part.color !== hue) || side !== b - y + 1 || x < left || y < top
       || r >= left + width * size || b >= top + height * size || (x - left) % size || (y - top) % size) return [];
     const normalized = normalizeCodeMask(part.mask, scale);
-    return normalized && same(normalized, mask) ? [{ at: [(x - left) / size, (y - top) / size] as NativePoint, scale }] : [];
+    if (!normalized) return [];
+    const rotation = scene.goalPose ? codeMaskRotation(mask, normalized, size) : null;
+    if (scene.goalPose ? rotation == null : !same(normalized, mask)) return [];
+    return [{ at: [(x - left) / size, (y - top) / size] as NativePoint, scale, ...(rotation == null ? {} : { rotation, hue: part.color }) }];
   });
   return poses.length === 1 ? poses[0]! : null;
 }
@@ -49,30 +53,41 @@ function codePose(rows: NativeRows, scene: Scene): Pose | null {
 function programFor(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects']): CodeWord[] | null {
   const cost = (a: bigint, b: bigint) => (a ^ b).toString(2).replaceAll('0', '').length;
   const allowed = new Set(scene.allowed.map(point => point.join(',')));
-  function fits([x, y]: NativePoint, scale: number) {
+  const goal = scene.goalPose;
+  const masks = goal ? [0, 1, 2, 3].map(turn => new Set(rotatedCodeMask(scene.mask, scene.size, turn).map(point => point.join(',')))) : null;
+  function fits({ at: [x, y], scale, rotation }: Pose) {
     if (scale < 1) return false;
     for (let dy = 0; dy < scale; dy++) for (let dx = 0; dx < scale; dx++) {
       if (!allowed.has(`${x + dx},${y + dy}`)) return false;
     }
-    return true;
+    if (!goal || rotation === undefined || !masks) return true;
+    return !goal.notch.some(([u, v]) => {
+      const row = Math.floor(((goal.at[1] - y) * scene.size + v) / scale);
+      const col = Math.floor(((goal.at[0] - x) * scene.size + u) / scale);
+      return masks[rotation]!.has(`${col},${row}`);
+    });
   }
   type Partial = Pose & { words: CodeWord[]; edits: number };
   let reachable: Partial[] = [{ ...start, words: [], edits: 0 }];
   for (const word of words) {
     const next = new Map<string, Partial>();
-    for (const path of reachable) for (const [value, { motion, resize, fromScales }] of Object.entries(effects)) {
-      if (fromScales && !fromScales.includes(path.scale)) continue;
+    for (const path of reachable) for (const [value, { motion, resize, fromScales, turn, fromRotations, hue }] of Object.entries(effects)) {
+      // A consistent turn from several orientations supports a relative rotation.
+      if (fromScales && !fromScales.includes(path.scale)
+        || fromRotations?.length === 1 && !fromRotations.includes(path.rotation!)) continue;
       const at: NativePoint = [path.at[0] + motion[0], path.at[1] + motion[1]], scale = path.scale + (resize ?? 0);
-      if ((scale === path.scale && same(at, path.at)) || !fits(at, scale)) continue;
-      const edits = path.edits + cost(decodeCodeWord(word), BigInt(value)), key = [...at, scale].join(',');
-      if ((next.get(key)?.edits ?? Infinity) > edits) next.set(key, { at, scale, edits, words: [...path.words, encodeCodeWord(BigInt(value))] });
+      const projected: Pose = { at, scale, ...(goal ? { rotation: (path.rotation! + (turn ?? 0)) % 4, hue: hue ?? path.hue! } : {}) };
+      if ((scale === path.scale && same(at, path.at) && projected.rotation === path.rotation && projected.hue === path.hue) || !fits(projected)) continue;
+      const edits = path.edits + cost(decodeCodeWord(word), BigInt(value)), key = [...at, scale, projected.rotation, projected.hue].join(',');
+      if ((next.get(key)?.edits ?? Infinity) > edits) next.set(key, { ...projected, edits, words: [...path.words, encodeCodeWord(BigInt(value))] });
     }
     reachable = [...next.values()];
   }
-  return reachable.find(path => same(path.at, scene.goal) && path.scale === 1)?.words ?? null;
+  return reachable.find(path => same(path.at, scene.goal) && path.scale === (goal?.scale ?? 1)
+    && (!goal || path.rotation === goal.rotation && path.hue === goal.hue))?.words ?? null;
 }
 
-function observedInstructions(proposal: Proposal, frames: readonly NativeRows[]): Instruction[] {
+function observedInstructions(proposal: Proposal, frames: readonly NativeRows[]) {
   const { local: { scene }, program, start } = proposal;
   const ends = new Map<number, Pose>();
   for (const frame of frames) {
@@ -88,11 +103,9 @@ function observedInstructions(proposal: Proposal, frames: readonly NativeRows[])
   return program.flatMap((word, index) => {
     const end = ends.get(index), begin = index ? ends.get(index - 1) : start;
     if (!end || !begin) return [];
-    const motion: NativePoint = [end.at[0] - begin.at[0], end.at[1] - begin.at[1]], resize = end.scale - begin.scale;
-    const translated = resize === 0 && CODE_DIRECTIONS.some(direction => same(direction, motion));
-    const resized = resize !== 0 && motion.every(value => value === 0);
-    return translated || resized ? [{ word: String(decodeCodeWord(word)), motion,
-      ...(scene.scaled ? { resize, fromScale: begin.scale } : {}) }] : [];
+    const motion: NativePoint = [end.at[0] - begin.at[0], end.at[1] - begin.at[1]];
+    const effect = codeInstructionEffect(motion, begin, end, scene.scaled ?? false);
+    return effect ? [{ word: String(decodeCodeWord(word)), ...effect }] : [];
   });
 }
 
@@ -152,7 +165,8 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = ready || reuseEdit ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
-      const label = example ? 'Compare the highlighted instruction with motion in the separate demonstrator' : codeRouteStrategies[phase];
+      const label = example ? scene.goalPose ? 'Measure the highlighted instruction in the separate demonstrator'
+        : 'Compare the highlighted instruction with motion in the separate demonstrator' : codeRouteStrategies[phase];
       const command = editable ? scene.bit_commands[column]![bit]! : example?.command ?? scene.execute;
       const parent = 'G_official_completion';
       const goal = { kind: 'program_motion_to_visible_target', scope: ref.split(':revision:', 1)[0]!, subjects: ['program_and_moving_piece'],
@@ -190,9 +204,11 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
-        sicSituationCard: { strategy, need: 'Build a program that moves the piece to its target', mode,
+        sicSituationCard: { strategy, need: scene.goalPose ? 'Match the receptacle position, size, orientation and color'
+          : 'Build a program that moves the piece to its target', mode,
           situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
-          actor: cell(start.at, scene, start.scale), target: cell(scene.goal, scene), addressed, ...(example ? { demonstration: example.stage } : {}) },
+          actor: cell(start.at, scene, start.scale), target: scene.goalPose?.box ?? cell(scene.goal, scene),
+          addressed, ...(example ? { demonstration: example.stage } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -232,14 +248,17 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const isolated = !example || realProgramUnchanged(proposal, second) && frames.every(frame => realProgramUnchanged(proposal, frame));
       const observed = example ? isolated ? readDemonstration(local.scene, example, frames) : []
         : observedInstructions({ ...proposal, program: leg.program, local }, frames);
-      for (const { word, motion, resize, fromScale } of observed) {
+      for (const { word, motion, resize, fromScale, turn, fromRotation, hue } of observed) {
         if (rejected.has(word)) continue;
         const previous = effects[word];
-        if (previous && (!same(previous.motion, motion) || (previous.resize ?? 0) !== (resize ?? 0))) {
+        if (previous && (!same(previous.motion, motion) || (previous.resize ?? 0) !== (resize ?? 0)
+          || previous.turn !== turn || previous.hue !== hue)) {
           rejected.add(word);
           delete effects[word];
         } else effects[word] = { motion, ref: after.observation_ref,
-          ...(fromScale !== undefined ? { resize, fromScales: [...new Set([...(previous?.fromScales ?? []), fromScale])] } : {}) };
+          ...(fromScale !== undefined ? { resize, fromScales: [...new Set([...(previous?.fromScales ?? []), fromScale])] } : {}),
+          ...(fromRotation !== undefined ? { turn, fromRotations: [...new Set([...(previous?.fromRotations ?? []), fromRotation])] } : {}),
+          ...(hue !== undefined ? { hue } : {}) };
       }
       const history = proposal.example === undefined ? { runs: [...local.runs, run] }
         : { examplesTried: [...local.examplesTried ?? [], proposal.example] };
@@ -256,7 +275,7 @@ function findScene(observation: NativeObservation, rows: NativeRows) {
     const [x, y] = center(entity.bbox);
     return { action_ref: 'ACTION6', data: { x, y } };
   });
-  const scene = (measureCodeScene(observation, rows, clicks) ?? measureCodeScene(observation, rows, clicks, true)) as Scene | null;
+  const scene = (measureCodeScene(observation, rows, clicks) ?? measureCodeScene(observation, rows, clicks, true, true)) as Scene | null;
   return scene?.examples?.length ? { ...scene, examples: bindExamples(scene.examples, scene, observation) } : scene;
 }
 
