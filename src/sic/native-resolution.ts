@@ -1013,6 +1013,10 @@ export function readNativeResolution(agent: {
       const box = bounds(store);
       if (box) subjects.push({ label: 'Stored supply', box });
     }
+    if (Array.isArray(card?.lossOutlets)) for (const outlet of card.lossOutlets) {
+      const box = bounds(outlet);
+      if (box) subjects.push({ label: 'Grated outlet', box });
+    }
     if (Array.isArray(card?.fields)) for (const field of card.fields) {
       const box = bounds(field);
       if (box) subjects.push({ label: 'Compared field', box });
