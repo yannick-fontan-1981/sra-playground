@@ -1543,3 +1543,11 @@ SIC lit le sens de chaque source à partir de son capuchon et l'incidence de cha
 Le rejeu vérifie les déplacements et la sélection après chaque commande, avec des séries de 2, 8 et 6 translations. La libération gagne le niveau. Les **52 cellules** de la projection apparaissent dans les images. Sur quatre images successives, le front monte jusqu'au coude, puis se propage sur deux cases latérales avant de rejoindre son ouverture.
 
 Le niveau 5 est gagné en **21 commandes et 5,28 s** dans le rejeu configuré pour huit workers. Les 75 commandes relèvent de SIC seul. Les 54 commandes et retours des niveaux 1 à 4 concordent avec `0e659168`. La permutation de palette conserve le trajet et les effets géométriques. Empreinte du rejeu `84032209fe614ea4a5fa528f3ce9be514402f9525851dcf2480ca5448b6dce7e`. Le contrôle TypeScript et les 292 tests ciblés passent.
+
+### TR87 niveau 5, synthétiser un dictionnaire à partir d’un exemple fixe
+
+Le curseur encadre les côtés du dictionnaire. Les deux mots de l'exemple restent fixes. SIC associe les longueurs des côtés aux segments des deux mots. Un côté double porte une seule variable de phase. La mesure d'édition confirme que ses deux glyphes changent ensemble. La synthèse retrouve deux affectations qui expliquent entièrement l'exemple et le trajet retient celle qui conserve les deux entrées déjà correctes.
+
+SIC réutilise le rôle des commandes acquises au niveau précédent et mesure les cycles propres aux glyphes du nouveau dictionnaire. Le contrôle de chaque pas compare le curseur, les côtés éditables et les deux mots fixes. Deux séries continues de deux et cinq commandes suivent les mesures.
+
+Le niveau 5 est gagné en **29 commandes et 12,04 s** dans le rejeu configuré pour huit workers. Les 150 commandes relèvent de SIC seul. Les 121 commandes et retours des niveaux 1 à 4 concordent avec `2257614e`. La permutation de palette reproduit le parcours et les effets géométriques. Empreinte du rejeu `9970a2fb14c4cf1605275fe476a23d821d895f0b40dee50c2ed5fbaf4564866e`. Le contrôle TypeScript et les 111 tests ciblés passent.

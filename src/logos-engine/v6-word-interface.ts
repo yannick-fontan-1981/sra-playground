@@ -142,7 +142,9 @@ function composeTypedWord(word: readonly string[], rules: readonly TypedWordRule
   return outputs.size === 1 ? outputs.values().next().value! : null;
 }
 
-export async function measureWordScene(observation: WordObservation, rows: NativeRows, allowComposition = false): Promise<WordRecord | null> {
+export function measureWordBoard(observation: WordObservation, rows: NativeRows): {
+  ink: number; table: [WordRecord, WordRecord][]; words: WordRecord[];
+} | null {
   const grouped = new Map<string, { size: number; ink: number; groups: WordRecord[] }>();
   for (const entity of observation.entities) {
     const [left, top, right, bottom] = entity.bbox, height = bottom - top + 1, width = right - left + 1;
@@ -165,6 +167,13 @@ export async function measureWordScene(observation: WordObservation, rows: Nativ
   const table: [WordRecord, WordRecord][] = [], words: WordRecord[] = [];
   for (const row of byY.values()) { row.sort((a, b) => a.box[0] - b.box[0]); if (row.length % 2 === 0) { for (let i = 0; i < row.length; i += 2) if (row[i]!.type !== row[i + 1]!.type) table.push([row[i]!, row[i + 1]!]); } else if (row.length === 1) words.push(row[0]!); }
   if (words.length !== 2 || !table.length) return null;
+  return { ink, table, words };
+}
+
+export async function measureWordScene(observation: WordObservation, rows: NativeRows, allowComposition = false): Promise<WordRecord | null> {
+  const board = measureWordBoard(observation, rows);
+  if (!board) return null;
+  const { ink, table, words } = board;
   const cursors: { group: WordRecord; cursor: WordRecord[] }[] = [];
   for (const group of words) {
     const [left, top, right, bottom] = group.box, size = group.size;
