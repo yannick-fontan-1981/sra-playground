@@ -1,0 +1,242 @@
+{
+  "schema": "sic-checkpoint-sharing-evidence.v1",
+  "date": "2026-11-17",
+  "coverage": {
+    "qualified": 533,
+    "total": 636,
+    "level6_qualified": 34,
+    "level6_total": 99
+  },
+  "validation": {
+    "tests_passed": 276,
+    "typescript": true,
+    "reference_source": "4478c8ae068f38e84cea638fafe08bb8282d10ea"
+  },
+  "dc22": {
+    "baseline_source": "710cf9180a7bfd667ef42fe2762088a8ae9d9b24",
+    "measured_source": "f01a937ca10ae9e85bab24e0ad45092ffb0bddc8",
+    "workers": 1,
+    "actions_per_level": 600,
+    "time_budget_per_level_ms": 360000,
+    "reason": "level_active_time_budget",
+    "sic_authorized_commands": 597,
+    "levels": [
+      {
+        "level": 1,
+        "won": true,
+        "commands": 22,
+        "elapsed_ms": 9601,
+        "prefix_hash": "b1b5c16f11a012560f0638c481b4b7d346e4fa119ef5fb943357f3185d5e0c8e",
+        "nodes": 578,
+        "deltas": 3695,
+        "baseline_ms": 10120,
+        "prefix_equal": true,
+        "node_count_equal": true,
+        "delta_count_equal": true,
+        "gain_percent": 5.1
+      },
+      {
+        "level": 2,
+        "won": true,
+        "commands": 44,
+        "elapsed_ms": 17582,
+        "prefix_hash": "8773b34b1edba0ca44544949307c9a563b9d9af493488a916c795912a161b910",
+        "nodes": 896,
+        "deltas": 8592,
+        "baseline_ms": 18860,
+        "prefix_equal": true,
+        "node_count_equal": true,
+        "delta_count_equal": true,
+        "gain_percent": 6.8
+      },
+      {
+        "level": 3,
+        "won": true,
+        "commands": 45,
+        "elapsed_ms": 14163,
+        "prefix_hash": "0750b95ce856e9bedf3cc4ec9662c081823559bdc232b23788eefe5bf677c11f",
+        "nodes": 1170,
+        "deltas": 13656,
+        "baseline_ms": 14773,
+        "prefix_equal": true,
+        "node_count_equal": true,
+        "delta_count_equal": true,
+        "gain_percent": 4.1
+      },
+      {
+        "level": 4,
+        "won": true,
+        "commands": 76,
+        "elapsed_ms": 34937,
+        "prefix_hash": "87e1c51418d91b86058950faeac3bbb2dd173f92191a3def59b435a0d2d72cbe",
+        "nodes": 1926,
+        "deltas": 30251,
+        "baseline_ms": 36107,
+        "prefix_equal": true,
+        "node_count_equal": true,
+        "delta_count_equal": true,
+        "gain_percent": 3.2
+      },
+      {
+        "level": 5,
+        "won": true,
+        "commands": 185,
+        "elapsed_ms": 130297,
+        "prefix_hash": "58c84f6d809d7558184d9a844e5a1058874644183e7f7bf25e5861ea07918509",
+        "nodes": 3990,
+        "deltas": 70907,
+        "baseline_ms": 173804,
+        "prefix_equal": true,
+        "node_count_equal": true,
+        "delta_count_equal": true,
+        "gain_percent": 25
+      },
+      {
+        "level": 6,
+        "won": false,
+        "commands": 225,
+        "elapsed_ms": 365534,
+        "prefix_hash": "6cde1510dbc8517f576bed396aa9ff691edf94f5de61c13a1c5f5fe3307aa79a",
+        "nodes": 6226,
+        "deltas": 107950
+      }
+    ]
+  },
+  "reference_baseline_source": "0d927d83fdbd51435c8e5ba9c29a21b562dced3f",
+  "references": [
+    {
+      "game": "LS20",
+      "won_levels": 4,
+      "commands": 144,
+      "sic_authorized_commands": 144,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "commands": 15,
+          "elapsed_ms": 4640,
+          "baseline_ms": 4587,
+          "prefix_hash": "eab5c5ece8ff78982cdfb2f38b8f7767352f841cb73e0c9f845b6296b26c7601",
+          "prefix_equal": true
+        },
+        {
+          "level": 2,
+          "won": true,
+          "commands": 45,
+          "elapsed_ms": 10001,
+          "baseline_ms": 9970,
+          "prefix_hash": "fa2a88a93402f946d7a614b8a884acc52b06c1ba30082d66a1d0ace0635d8069",
+          "prefix_equal": true
+        },
+        {
+          "level": 3,
+          "won": true,
+          "commands": 41,
+          "elapsed_ms": 12660,
+          "baseline_ms": 13014,
+          "prefix_hash": "29982e1fbb8de3f9e1e0918554d2a58fdd3357790cb6cb33ecae7ae073d3be8b",
+          "prefix_equal": true
+        },
+        {
+          "level": 4,
+          "won": true,
+          "commands": 43,
+          "elapsed_ms": 12186,
+          "baseline_ms": 11802,
+          "prefix_hash": "77379c2a7097fc6c42ec64b81c2c150b309090c3586734114ff7432347aab1c2",
+          "prefix_equal": true
+        }
+      ]
+    },
+    {
+      "game": "GABA",
+      "won_levels": 4,
+      "commands": 239,
+      "sic_authorized_commands": 239,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "commands": 47,
+          "elapsed_ms": 10214,
+          "baseline_ms": 10976,
+          "prefix_hash": "0d8e377ccf65a5dba2b576f1d917a66478ccc0d59a03c6be1ae81550d1ea9a7d",
+          "prefix_equal": true
+        },
+        {
+          "level": 2,
+          "won": true,
+          "commands": 37,
+          "elapsed_ms": 7292,
+          "baseline_ms": 7454,
+          "prefix_hash": "d8e84441f18b906b07106f0e72ad42f49a461e36cdb53e6e462dc31bbec2baa6",
+          "prefix_equal": true
+        },
+        {
+          "level": 3,
+          "won": true,
+          "commands": 67,
+          "elapsed_ms": 11401,
+          "baseline_ms": 11781,
+          "prefix_hash": "a0627f59c092de0e16b6e6e10bb8de142ed57cf265c8da6d49bfc4375225e16c",
+          "prefix_equal": true
+        },
+        {
+          "level": 4,
+          "won": true,
+          "commands": 88,
+          "elapsed_ms": 19679,
+          "baseline_ms": 19401,
+          "prefix_hash": "7caac7d46109ffbf5b01b2c8379443abafeb7a7133588dee28aba778cac70377",
+          "prefix_equal": true
+        }
+      ]
+    }
+  ],
+  "synthetic_retention": {
+    "note": "Controlled 200-trace fixtures, not game-level performance. Raw-trace validation costs more CPU; global gain must be measured in the next chronological run.",
+    "encoded_graph": {
+      "source": "37027e800d502d5b53d2701edef62e7d0716359d",
+      "independent": {
+        "mode": "independent",
+        "traces": 200,
+        "elapsedMs": 960,
+        "retainedMB": 24.76,
+        "unchangedRowShared": false,
+        "nodes": 400,
+        "deltas": 400,
+        "chain": "56d091991693975e2e2872aac3e78637fe4b94c8d070dd95e5033487d826e33e"
+      },
+      "shared": {
+        "mode": "shared",
+        "traces": 200,
+        "elapsedMs": 723,
+        "retainedMB": 20.19,
+        "unchangedRowShared": true,
+        "nodes": 400,
+        "deltas": 400,
+        "chain": "56d091991693975e2e2872aac3e78637fe4b94c8d070dd95e5033487d826e33e"
+      }
+    },
+    "raw_traces": {
+      "source": "4478c8ae068f38e84cea638fafe08bb8282d10ea",
+      "legacy": {
+        "mode": "independent",
+        "traces": 200,
+        "elapsedMs": 76,
+        "retainedMB": 7.13,
+        "unchangedRowShared": false,
+        "hash": "9e5cbb0ca4cc04bf8784f4b2a43cf943c36f7d3b7be267fd27a4728844f519a7"
+      },
+      "native": {
+        "mode": "shared",
+        "traces": 200,
+        "elapsedMs": 262,
+        "retainedMB": 0.51,
+        "unchangedRowShared": true,
+        "hash": "9e5cbb0ca4cc04bf8784f4b2a43cf943c36f7d3b7be267fd27a4728844f519a7"
+      }
+    }
+  },
+  "reproduce": "node scripts/check-sic-chronological.mjs DC22 6 result.jsonl 1"
+}

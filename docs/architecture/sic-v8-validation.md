@@ -1751,3 +1751,27 @@ Le suivi vérifie le départ de pixels du curseur, l'apparition de ses pixels da
 Le runtime complet gagne le **niveau 6 chargé directement en 399 commandes SIC seul sur 399**. Deux processus frais, dont un sur le checkout préparé pour main, reproduisent les mêmes commandes et les mêmes décomptes de pixels modifiés. Empreinte de cette séquence réduite `e1d557e343ae1e11a107443acfe144025f068c8d6f62dc0961ade4dc44e392eb`. Les **22 tests ciblés** passent. LS20 et GABA gagnent chacun leurs niveaux 1 à 5, en **192 et 345 commandes**, avec les empreintes de chaque préfixe identiques aux références.
 
 La qualification chronologique jusqu'au niveau 6 reste à terminer. Un premier essai s'arrête sur le budget de temps au niveau 5 après 347 commandes cumulées. Un second gagne cinq niveaux en 372 commandes, puis le diagnostic est interrompu après dépassement du budget au niveau 6, après 191 commandes de ce niveau. Un profil ciblé attribue environ 91 % des échantillons à la validation JSON immuable dans la publication du graphe. Ce second essai comporte une instrumentation de profilage. La couverture qualifiée reste **533/636, soit 83,8 %**, avec **34/99 niveaux 6**. La prochaine étape consiste à réduire le coût de cette publication et à qualifier le parcours chronologique normal. Le parcours complet en Fallback reste aussi à vérifier.
+
+### Partager les preuves entre les points de reprise et les nouvelles traces
+
+La publication garde ses transactions atomiques, ses versions, ses causes et son journal complet. Elle peut rendre la main au système pendant les écritures. Les points de reprise natifs réutilisent leurs sous-arbres validés ; les API publiques `state()` gardent leurs copies indépendantes. Les petites enveloppes de l'encodeur sont construites à partir d'enfants déjà fermés. Un cache borné réutilise les validations Unicode réussies.
+
+Les traces et retours successifs ont souvent des identifiants distincts. Leur dernier graphe du même composant fournit désormais un candidat de comparaison, même quand le nouvel identifiant n'a pas de version antérieure. Chaque source nouvelle reste contrôlée. Le cache de comparaison est limité à 64 flux et n'est publié qu'après acceptation de la transaction. Les tests vérifient le partage d'une ligne d'image inchangée, le remplacement de la ligne modifiée, les mêmes octets encodés, la même hydratation et le rejet atomique d'un accesseur.
+
+Le rejeu normal de DC22, source `f01a937c`, donne ces temps avec un worker. Les gains comparent un précédent rejeu normal, source `710cf918`, sur la même machine. Ce sont des mesures uniques, sans comparaison de panneau affiché ou masqué.
+
+| Niveau DC22 | Commandes | Temps du niveau | Gain observé |
+| --- | ---: | ---: | ---: |
+| 1 | 22 | 9,601 s | 5,1 % |
+| 2 | 44 | 17,582 s | 6,8 % |
+| 3 | 45 | 14,163 s | 4,1 % |
+| 4 | 76 | 34,937 s | 3,2 % |
+| 5 | 185 | 130,297 s | 25,0 % |
+
+Ces cinq niveaux gardent les mêmes empreintes des commandes et retours officiels, ainsi que les mêmes nombres de nœuds et de deltas. Le niveau 6 s'arrête naturellement sur `level_active_time_budget` : **225 commandes en 365,534 s**, sans victoire. Les **597 commandes** du parcours complet relèvent de SIC seul. Le dépassement observé inclut la fin du traitement en cours. Le budget reste de 360 s et 600 commandes par niveau, avec un worker.
+
+Le lot suivant ajoute `nativeTrace` au port de mémoire du moteur : il ferme les preuves JSON avant l'horloge et partage les éléments inchangés entre traces. L'API historique `trace` conserve son comportement `structuredClone`, notamment les cycles, les Maps et les références répétées ou distinctes. Un essai artificiel de 200 traces donne les mêmes contenus canoniques, avec 7,13 Mo retenus par l'API historique contre 0,51 Mo par le chemin natif. Son coût CPU augmente toutefois de 76 à 262 ms. Cette mesure de mémoire ne prouve pas un gain global en jeu.
+
+Sur cette dernière version, **LS20 et GABA gagnent chacun leurs niveaux 1 à 4**, en 144 et 239 commandes, avec les huit empreintes de préfixe identiques aux références. Les **276 tests ciblés** passent, ainsi que TypeScript. La règle Git `/reference/v6/** -text` conserve aussi les octets des sources épinglées sur Windows ; leurs contrôles d'intégrité passent.
+
+Les [preuves réduites](sic-v8-checkpoint-sharing-evidence.json) distinguent le code mesuré sur DC22 du dernier code vérifié sur les deux jeux de contrôle. Le script `scripts/check-sic-chronological.mjs` rend le parcours reproductible depuis le niveau 1, avec arrêt à la victoire demandée. La couverture reste **533/636, soit 83,8 %**, avec **34/99 niveaux 6**. Prochaine étape : mesurer le parcours chronologique DC22 complet avec `nativeTrace`, puis poursuivre la réduction du coût restant si le niveau 6 dépasse encore son budget.
