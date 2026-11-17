@@ -598,9 +598,11 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         const model = proposal.carried.model;
         const update = observeCarriedStep(model, proposal.carryStep, first, second, after.observation_ref, frames);
         const interrupted = (update?.interruptedSwitches?.length ?? 0) > (model.interruptedSwitches?.length ?? 0);
-        const matched = !!update && !interrupted && update.blocked.length === model.blocked.length;
+        const refusedPhase = (update?.phaseRefusals?.length ?? 0) > (model.phaseRefusals?.length ?? 0);
+        const matched = !!update && !interrupted && !refusedPhase && update.blocked.length === model.blocked.length;
         return { matched, seal_prefix: true, reason: !update ? 'carried_support_projection_contradicted'
           : interrupted ? 'cursor_disappeared_and_returned_during_switch'
+          : refusedPhase ? 'measured_support_phase_did_not_advance'
           : !matched ? 'route_blocked_on_observed_surface' : update.grip === 'held' && model.grip === 'pending'
             ? 'tool_and_support_translation_confirmed' : 'carried_support_effect_observed' };
       }

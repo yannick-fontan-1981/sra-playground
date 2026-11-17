@@ -18,6 +18,9 @@ type Grip = 'open' | 'pending' | 'held';
 type Portal = { index: number; pads: [NativePoint, NativePoint] };
 type SurfaceEdit = { cell: string; before: string; after: string };
 type SwitchEffect = { index: number; edits: SurfaceEdit[] };
+type PhaseImage = Readonly<Record<string, string>>;
+type SwitchCycle = { index: number; anchor: string; start: PhaseImage; phases: PhaseImage[]; period?: number; current: number };
+type PhaseRefusal = { index: number; actor: string; phase: number };
 export type CarriedSupport = {
   layout: ToolLayout; grip: Grip; graph: ObservedCommandGraph; vectors: Record<string, NativePoint>;
   gripTests: string[]; rail: number[]; heldOrigin?: NativePoint; relativeSupport?: NativePoint;
@@ -25,12 +28,15 @@ export type CarriedSupport = {
   interruptedSwitches?: { index: number; actor: string }[];
   blocked: string[]; stableActor: boolean; portals: Portal[]; usedPortals: number[];
   markerTests: string[];
+  acquiredControl?: boolean;
+  switchCycles?: SwitchCycle[];
+  phaseRefusals?: PhaseRefusal[];
 };
 export type CarriedStep = { label: string; expectedActor?: NativePoint; expectedTool?: NativePoint } & (
   { kind: 'button'; index: number; probe: boolean; point: NativePoint }
   | { kind: 'grip'; point: NativePoint }
   | { kind: 'walk'; direction: string; expectedActor: NativePoint; carried: boolean; discoveryInk?: number }
-  | { kind: 'switch'; index: number; point: NativePoint; probe: boolean; edits?: SurfaceEdit[] }
+  | { kind: 'switch'; index: number; point: NativePoint; probe: boolean; edits?: SurfaceEdit[]; measureCycle?: boolean; expectedPhase?: number }
   | { kind: 'portal'; point: NativePoint; expectedActor: NativePoint }
 );
 
@@ -201,10 +207,10 @@ function switchScope(layout: ToolLayout, rows: NativeRows, actor: NativePoint) {
     ink === layout.actorInk || ink === layout.handleInk || ink === layout.toolInk ? null : ink)));
 }
 
-function isSupportedTile(layout: ToolLayout, pixels: number[]) {
+function isSupportedTile(layout: ToolLayout, pixels: number[], allowSupportInk = false) {
   const ink = pixels[0];
   if (ink === undefined || pixels.some(value => layout.voids.includes(value))) return false;
-  return pixels.every(value => value === ink) && ink !== layout.handleInk && ink !== layout.actorInk
+  return pixels.every(value => value === ink) && (allowSupportInk || ink !== layout.handleInk) && ink !== layout.actorInk
     || pixels.length === 4 && ink === pixels[3] && pixels[1] === pixels[2] && ink !== pixels[1];
 }
 
@@ -252,6 +258,118 @@ function knownPoses(state: CarriedSupport) {
   const keys = new Set(Object.keys(state.graph));
   for (const edges of Object.values(state.graph)) for (const edge of edges) if (edge.destination) keys.add(edge.destination);
   return new Map([...keys].map(k => [k, point(k)]));
+}
+
+function extendSwitchCycle(state: CarriedSupport, index: number, before: NativeRows, after: NativeRows, actor: NativePoint) {
+  const anchor = key(actor);
+  const observed = surfaceCells(state.layout, actor).filter(p => !same(p, actor));
+  const paint = (rows: NativeRows) => Object.fromEntries(observed.map(p => [key(p), tileKey(rows, p, state.layout.pitch)]));
+  const previous = state.switchCycles?.find(cycle => cycle.index === index && cycle.anchor === anchor);
+  const start = previous?.start ?? paint(before);
+  const image = paint(after);
+  const delta = Object.fromEntries(Object.entries(image).filter(([at, ink]) => ink !== start[at]));
+  const phases = [...(previous?.phases ?? [{}]), delta];
+  const cellsByPhase = phases.map(phase => Object.keys(phase));
+  let period: number | undefined;
+  for (let candidate = 1; candidate < phases.length / 2; candidate++) {
+    const repeats = phases.slice(candidate).every((image, i) => {
+      const cells = cellsByPhase[i]!;
+      return cells.length === cellsByPhase[i + candidate]!.length && cells.every(at => image[at] === phases[i]![at]);
+    });
+    if (repeats && (candidate > 1 || phases.length >= 5)) {
+      period = candidate;
+      break;
+    }
+  }
+  if (phases.length >= 27 && period === undefined) period = 0;
+  const cycle = period === undefined ? phases : phases.slice(0, period);
+  const footprint = new Set(cycle.flatMap(phase => Object.keys(phase)));
+  const baseline = period === undefined ? start : Object.fromEntries([...footprint].map(at => [at, start[at]!]));
+  const updated: SwitchCycle = { index, anchor, start: baseline, phases: cycle,
+    current: period ? (phases.length - 1) % period : 0, ...(period === undefined ? {} : { period }) };
+  return [...(state.switchCycles ?? []).filter(cycle => cycle.index !== index), updated].sort((a, b) => a.index - b.index);
+}
+
+function planMeasuredCycles(state: CarriedSupport, rows: NativeRows, pose: Pose, poses: Map<string, NativePoint>, remaining: number) {
+  const { layout } = state, { pitch } = layout, terrain = readTerrain(layout, rows, pose.actor);
+  const target = terrain.target;
+  if (!target) return null;
+  const cycleRows = (state.switchCycles ?? []).filter(cycle => cycle.period && cycle.period > 1);
+  const areas = cycleRows.map(cycle => new Set(cycle.phases.flatMap(image => Object.keys(image))));
+  if (areas.some((area, i) => areas.slice(0, i).some(peer => [...area].some(at => peer.has(at))))) return null;
+  const owner = new Map(areas.flatMap((area, i) => [...area].map(at => [at, i] as const)));
+  // These footprints change without moving the grip. They can share its paint and still be fixed ground.
+  const supportedPhases = cycleRows.map((cycle, index) => cycle.phases.map(phase =>
+    new Set([...areas[index]!].filter(at => isSupportedTile(layout, (phase[at] ?? cycle.start[at])!.split(',').map(Number), true)))));
+  const points = surfaceCells(layout, pose.actor);
+  const values = new Map(points.map(p => [key(p), tileKey(rows, p, pitch)]));
+  const support = new Set(pose.support.mask.map(p => key(shift(origin(pose.support.bbox), p))));
+  const plane = new Map<string, Set<string>>(), current = origin(pose.tool.bbox);
+  const offsets = Array.from({ length: pitch ** 2 }, (_, i): NativePoint => [i % pitch, Math.floor(i / pitch)]);
+  const supportedAt = points.filter(at => offsets.every(p => support.has(key(shift(at, p)))));
+  for (const [id, tool] of poses) plane.set(id, new Set(supportedAt.map(at => key(shift(at, delta(current, tool))))));
+  const initialActor = key(pose.actor);
+  if (state.stableActor) terrain.floor.add(initialActor);
+  const phaseInk = (at: string, phases: readonly number[]) => {
+    const i = owner.get(at);
+    const cycle = i === undefined ? undefined : cycleRows[i];
+    return cycle ? cycle.phases[phases[i!]!]![at] ?? cycle.start[at] : values.get(at);
+  };
+  const pass = (p: NativePoint, phases: readonly number[]) => {
+    const id = key(p), index = owner.get(id);
+    if (id === initialActor && !state.stableActor) return false;
+    return index === undefined ? terrain.floor.has(id) : supportedPhases[index]![phases[index]!]!.has(id);
+  };
+  const initialPhase = cycleRows.map(cycle => cycle.current);
+  const blocked = new Set(state.blocked);
+  type Route = { actor: NativePoint; tool: NativePoint; phases: number[]; depth: number; first?: CarriedStep };
+  const visitedDepth = new Map<string, number>(), pending = new Map<number, Route[]>();
+  const routeKey = (node: Route) => [key(node.actor), key(node.tool), node.phases.join(',')].join('/');
+  const enqueue = (node: Route) => {
+    const token = routeKey(node);
+    if ((visitedDepth.get(token) ?? Infinity) <= node.depth) return;
+    visitedDepth.set(token, node.depth);
+    const rank = node.depth + distance(node.actor, target) * 2 / pitch;
+    const items = pending.get(rank);
+    if (items) items.push(node);
+    else pending.set(rank, [node]);
+  };
+  enqueue({ actor: pose.actor, tool: current, phases: initialPhase, depth: 0 });
+  for (let count = 0; pending.size && count < 110_000; count++) {
+    const rank = Math.min(...pending.keys()), items = pending.get(rank)!, node = items.pop()!;
+    if (!items.length) pending.delete(rank);
+    if (visitedDepth.get(routeKey(node)) !== node.depth) continue;
+    if (same(node.actor, target) && node.first) return node.first;
+    if (node.depth >= remaining) continue;
+    const fixed = (p: NativePoint) => pass(p, node.phases);
+    const onSupport = (p: NativePoint, tool: NativePoint) => plane.get(key(tool))?.has(key(p)) === true;
+    const add = (actor: NativePoint, tool: NativePoint, phases: number[], step: CarriedStep) =>
+      enqueue({ actor, tool, phases, depth: node.depth + 1, first: node.first ?? step });
+    const actor = key(node.actor);
+    for (const [direction, dx, dy] of dirs) {
+      const at = shift(node.actor, [dx * pitch, dy * pitch]), id = key(at), fixedGround = fixed(at);
+      if (!fixedGround && !onSupport(at, node.tool) || blocked.has([actor, id, phaseInk(id, node.phases)].join('/'))) continue;
+      add(at, node.tool, node.phases, { kind: 'walk', direction, expectedActor: at, carried: !fixedGround,
+        label: 'Follow the route through the measured support phases' });
+    }
+    if (!fixed(node.actor) || onSupport(node.actor, node.tool)) continue;
+    for (const [i, cycle] of cycleRows.entries()) {
+      const currentPhase = node.phases[i]!, phase = (currentPhase + 1) % cycle.period!;
+      if (state.interruptedSwitches?.some(item => item.index === cycle.index && item.actor === actor)
+        || state.phaseRefusals?.some(item => item.actor === actor && item.index === cycle.index && item.phase === currentPhase)) continue;
+      const phases = node.phases.map((value, index) => index === i ? phase : value);
+      if (areas[i]!.has(actor) && phaseInk(actor, node.phases) !== phaseInk(actor, phases)) continue;
+      add(node.actor, node.tool, phases, { kind: 'switch', index: cycle.index, point: center(layout.switches[cycle.index]!.box),
+        probe: false, expectedPhase: phase, label: 'Advance the measured phase from a stable footing' });
+    }
+    for (const [button, vector] of Object.entries(state.vectors)) {
+      const tool = shift(node.tool, vector), id = key(tool), known = state.graph[key(node.tool)]?.find(edge => edge.action === button);
+      if (!poses.has(id) || known && known.destination !== id || onSupport(node.actor, tool)) continue;
+      add(node.actor, tool, node.phases, { kind: 'button', index: Number(button), point: center(layout.buttons[Number(button)]!),
+        expectedTool: tool, probe: !known, label: 'Reposition the carried support for the measured route' });
+    }
+  }
+  return null;
 }
 
 function planPassage(state: CarriedSupport, rows: NativeRows, pose: Pose, poses: Map<string, NativePoint>, remaining: number) {
@@ -348,9 +466,17 @@ export function nextCarriedStep(state: CarriedSupport, rows: NativeRows, remaini
   if (state.grip === 'held') {
     const experiment = state.stableActor ? buttonStep(state, tool, remaining) : null;
     const poses = projectedRail(state, pose, rows[0]!.length) ?? (!experiment ? knownPoses(state) : null);
-    const route = poses && planPassage(state, rows, pose, poses, remaining);
+    if (state.acquiredControl && state.stableActor) {
+      const index = state.layout.switches.findIndex((_, candidate) => !state.portals.some(portal => portal.index === candidate)
+        && !state.interruptedSwitches?.some(item => item.index === candidate && item.actor === key(pose.actor))
+        && state.switchCycles?.find(cycle => cycle.index === candidate)?.period === undefined);
+      if (index >= 0) return { kind: 'switch', index, point: center(state.layout.switches[index]!.box), probe: true,
+        measureCycle: true, label: 'Measure successive support phases from a stable footing' };
+    }
+    const route = poses && (state.switchCycles?.some(cycle => cycle.period && cycle.period > 1)
+      ? planMeasuredCycles(state, rows, pose, poses, remaining) : planPassage(state, rows, pose, poses, remaining));
     if (route) return route;
-    if (poses && state.stableActor) {
+    if (poses && state.stableActor && !state.switchCycles?.some(cycle => cycle.period && cycle.period > 1)) {
       const source = switchScope(state.layout, rows, pose.actor);
       const candidates = state.layout.switches.flatMap((_, index) => {
         if (state.interruptedSwitches?.some(item => item.index === index && item.actor === key(pose.actor))) return [];
@@ -385,7 +511,8 @@ export function observeCarriedStep(state: CarriedSupport, step: CarriedStep, fir
     const discovered = panel?.buttons.filter(p => p.color === step.discoveryInk) ?? [];
     const layout = discovered.length === 1 ? { ...state.layout, switches: [...state.layout.switches,
       { box: discovered[0]!.bbox, ink: discovered[0]!.color }] } : state.layout;
-    return { ...state, layout, portals, stableActor: !step.carried, markerTests: [...state.markerTests, key(after.actor)] };
+    return { ...state, layout, portals, stableActor: !step.carried, markerTests: [...state.markerTests, key(after.actor)],
+      ...(discovered.length === 1 ? { acquiredControl: true } : {}) };
   }
   if (step.kind === 'portal') {
     if (!same(start, finish) || !same(after.actor, step.expectedActor)) return null;
@@ -406,6 +533,21 @@ export function observeCarriedStep(state: CarriedSupport, step: CarriedStep, fir
         return { ...state, portals,
           interruptedSwitches: [...(state.interruptedSwitches ?? []), { index: step.index, actor: key(before.actor) }] };
       }
+    }
+    if (step.measureCycle) return { ...state, portals, switchCycles: extendSwitchCycle(state, step.index, first, second, before.actor) };
+    if (step.expectedPhase !== undefined) {
+      const cycles = state.switchCycles ?? [], cycle = cycles.find(item => item.index === step.index);
+      if (!cycle) return null;
+      const cells = [...new Set(cycle.phases.flatMap(phase => Object.keys(phase)))].filter(at => at !== key(before.actor));
+      if (edits.some(edit => !cells.includes(edit.cell))) return null;
+      const matches = (phase: number) => cells.every(at =>
+        tileKey(second, point(at), layout.pitch) === (cycle.phases[phase]?.[at] ?? cycle.start[at]));
+      if (matches(step.expectedPhase)) {
+        return { ...state, portals, switchCycles: cycles.map(item => item === cycle ? { ...item, current: step.expectedPhase! } : item) };
+      }
+      if (!matches(cycle.current)) return null;
+      return { ...state, portals, phaseRefusals: [...(state.phaseRefusals ?? []),
+        { actor: key(before.actor), index: step.index, phase: cycle.current }] };
     }
     if (step.edits && JSON.stringify(step.edits) !== JSON.stringify(edits)) return null;
     return { ...state, portals, gateTests: step.probe ? [...state.gateTests, { index: step.index, source: switchScope(layout, first, before.actor) }] : state.gateTests,
