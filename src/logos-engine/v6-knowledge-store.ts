@@ -6,7 +6,7 @@ import { executeWorkflow, validateCompiledModule } from './interpreter.ts';
 import type { CompiledModule, ExecutionOptions, JsonObject, JsonValue, Primitive } from './ir.ts';
 import { NativeSrcProgram, V6_NATIVE_PROGRAM_REFERENCE } from './v6-src-program.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
-import { hydrateNativeState, isNativeStateGraph, splitNativeState, type NativeStateGraphRoot } from './v6-native-state-graph.ts';
+import { hydrateNativeState, isNativeStateGraph, isValidatedFrozenNativeState, splitNativeState, type NativeStateGraphRoot } from './v6-native-state-graph.ts';
 
 const FLOAT = '$v6_float64';
 const OBJECT = '$v6_object';
@@ -101,6 +101,7 @@ export class NativeKnowledgeStore {
   private callbacks = new Map<string, Readonly<Record<string, Primitive>>>();
   private hydrated = new Map<string, { node: KnowledgeNode; fragments: readonly KnowledgeNode[]; value: JsonValue }>();
   private comparisonRoots = new Map<string, NativeStateGraphRoot>();
+  private readonly publishedSources = new WeakMap<object, NativeStateGraphRoot>();
   // Host turns let temporary weak-cache targets be collected while the
   // transaction's complete publication remains staged.
   private readonly yieldControl: (() => Promise<void>) | undefined;
@@ -162,6 +163,7 @@ export class NativeKnowledgeStore {
         // exceeding the declared structural limit. Old fragments are immutable
         // and content-addressed, so repeated frames/evidence are shared.
         const source = write.value;
+        const currentValue = staged.node(write.id)?.value;
         let storedValue: JsonValue;
         if (GRAPH_STATE_KINDS.has(write.kind)) {
           // Appended traces and public returns have distinct identities, but
@@ -169,19 +171,24 @@ export class NativeKnowledgeStore {
           // comparison candidate: the new raw source is still fully checked.
           const stream = write.component && (write.kind === 'component_state' || write.kind === 'transition_evidence')
             ? `${write.kind}:${write.component}` : undefined;
-          const root = staged.node(write.id)?.value ?? (stream ? comparisonRoots.get(stream) : undefined);
-          const graph = splitNativeState(source, write.id, isNativeStateGraph(root)
+          const root = currentValue ?? (stream ? comparisonRoots.get(stream) : undefined);
+          const published = isValidatedFrozenNativeState(source) ? this.publishedSources.get(source) : undefined;
+          // Fragments of this exact root were accepted by this store and
+          // remain in its append-only graph. Other owners or revisions still
+          // traverse the complete encoder, even with the same frozen input.
+          const graph = published && currentValue === published ? null : splitNativeState(source, write.id, isNativeStateGraph(root)
             ? { prior: { root, readFragment: id => staged.node(id)?.value } } : undefined);
+          const encoded = graph?.root ?? published!;
           if (this.yieldControl && performance.now() - this.lastYieldAt >= publicationTurnMs) {
             this.writesSinceYield = 0;
             await this.yieldControl();
             this.lastYieldAt = performance.now();
           }
           if (stream) {
-            comparisonRoots.delete(stream); comparisonRoots.set(stream, graph.root);
+            comparisonRoots.delete(stream); comparisonRoots.set(stream, encoded);
             if (comparisonRoots.size > 64) comparisonRoots.delete(comparisonRoots.keys().next().value!);
           }
-          for (const fragment of graph.fragments) {
+          for (const fragment of graph?.fragments ?? []) {
             const existing = staged.node(fragment.id);
             if (existing) {
               if (existing.kind !== 'state_fragment' || existing.scope !== this.scope) throw new TypeError('Native fragment identity is already bound to another kind or scope');
@@ -198,7 +205,7 @@ export class NativeKnowledgeStore {
               this.lastYieldAt = performance.now();
             }
           }
-          storedValue = immutableJson(graph.root);
+          storedValue = encoded;
         } else storedValue = encodeNativeState(source);
         const previous = staged.node(write.id);
         if (previous && (previous.kind !== write.kind || previous.scope !== this.scope)) throw new TypeError('Native node identity cannot change kind or scope');
@@ -229,6 +236,11 @@ export class NativeKnowledgeStore {
       }
       this.state = staged.finish();
       this.comparisonRoots = comparisonRoots;
+      for (const { source, node } of accepted.values()) {
+        if (GRAPH_STATE_KINDS.has(node.kind) && isValidatedFrozenNativeState(source) && isNativeStateGraph(node.value)) {
+          this.publishedSources.set(source, node.value);
+        }
+      }
       return accepted;
     } finally { this.busy = false; }
   }

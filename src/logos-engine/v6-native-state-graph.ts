@@ -40,7 +40,13 @@ const fragmentsByNode = new WeakMap<object, { fragment: NativeStateFragment; ref
 // Height and all referenced fragments accompany the cached representation so
 // reuse preserves both the nesting bound and a complete export to a new store.
 const frozenStateNodes = new WeakMap<object, { limit: number; value: Sized; height: number; fragments: readonly NativeStateFragment[] }>();
+const validatedFrozenSources = new WeakSet<object>();
 const NO_FRAGMENTS: readonly NativeStateFragment[] = Object.freeze([]);
+
+/** A complete encode, including a check of every descendant, certified this source. */
+export function isValidatedFrozenNativeState(input: unknown): input is object {
+  return input !== null && typeof input === 'object' && validatedFrozenSources.has(input);
+}
 
 interface HydratedFragment { readonly value: JsonValue; readonly height: number }
 // Reuse only terminal fragments: composite references still traverse the actual
@@ -337,6 +343,10 @@ export function splitNativeState(value: unknown, component: string, options: Spl
   const root = prior?.root.component === component && encoded.node === prior.root.root ? prior.root
     : immutableJson({ profile: NATIVE_STATE_GRAPH_PROFILE, component, root: encoded.node as JsonValue }) as NativeStateGraphRoot;
   ownedRoots.add(root);
+  if (value !== null && typeof value === 'object'
+      && (measured.get(value)?.immutable || frozenStateNodes.get(value)?.limit === limit)) {
+    validatedFrozenSources.add(value);
+  }
   return Object.freeze({ root, fragments: Object.freeze([...fragments.values()]) });
 }
 
