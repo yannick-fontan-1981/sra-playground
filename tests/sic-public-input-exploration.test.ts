@@ -5,7 +5,8 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier } from '../src/sic/public-input-exploration.ts';
 import { observedCommandFrontier, observedCommandKey } from '../src/sic/observed-command-frontier.ts';
 import { commandPanelState, visibleCommandPanel } from '../src/sic/visible-command-panel.ts';
-import { learnPanelDirection, learnPanelTerrain, projectPanelContact, projectPanelMarker } from '../src/sic/panel-context-probe.ts';
+import { learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, projectPanelContact, projectPanelMarker,
+  projectPanelTerrain, rememberPanelTerrain, type PanelWalker } from '../src/sic/panel-context-probe.ts';
 import { sameLandingPixels } from '../src/sic/plan-step.ts';
 import { measureReturningAnimation } from '../src/sic/observed-animation.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
@@ -155,6 +156,37 @@ test('a repeated animation localizes a response even when the field returns to i
     { box: [1, 1, 1, 2], frames: [2, 4] });
   assert.equal(measureReturningAnimation(before, flash, [before, flash, before, flash], area), undefined);
   assert.equal(measureReturningAnimation(before, before, [before, flash, before], area), undefined);
+});
+
+test('a phased route applies an observed terrain return only while the occupied footprint stays supported', () => {
+  const board = (opened: boolean, unstable: boolean, covering: boolean) => Array.from({ length: 10 }, (_, y) =>
+    Array.from({ length: 12 }, (_, x) => {
+      if (y < 4 || y >= 6) return 0;
+      if (x >= 8 && x < 10) return (x + y) % 2 ? 6 : 3;
+      if (x >= 4 && x < 6 && covering) return 7;
+      if (x >= 2 && x < 6 && !(opened && unstable && x >= 4)) return 2;
+      return x >= 6 && x < 8 && opened ? 2 : 0;
+    }));
+  const region = [4, 4, 7, 5] as const, actor = [4, 4, 5, 5] as const, observer = [2, 4, 3, 5] as const;
+  const field = [0, 0, 11, 9] as const, target = [8, 4, 9, 5] as const;
+  const walker: PanelWalker = { ink: 7, floor: 2, controls: { ACTION4: { delta: [2, 0], evidence: 'measured_walk' } } };
+  const command = { action_ref: 'ACTION6', data: { x: 13, y: 4 } };
+  const closed = board(false, false, false), open = board(true, false, false), covered = board(false, false, true);
+  const model = rememberPanelTerrain(undefined, command, region, observer, closed, open, 'opened_floor');
+  assert.ok(model);
+  const inputs = [{ action_ref: 'ACTION4', data: {} }];
+  const route = projectPanelTerrain(walker, covered, field, inputs, model, target, 4);
+  assert.equal(route?.distance, 3);
+  assert.equal(route?.change?.command, command);
+  assert.deepEqual(route?.route, []);
+  assert.ok(matchesPanelTerrain(board(true, false, true), region, route!.change!.after, actor));
+
+  const unsafe = board(true, true, false);
+  const unsafeModel = rememberPanelTerrain(undefined, command, region, observer, closed, unsafe, 'opened_without_support');
+  assert.equal(projectPanelTerrain(walker, covered, field, inputs, unsafeModel!, target, 4), null);
+  const disputed = rememberPanelTerrain(model, command, region, observer, closed, unsafe, 'different_return');
+  assert.equal(disputed?.returns[0]?.after, null);
+  assert.equal(projectPanelTerrain(walker, covered, field, inputs, disputed!, target, 4), null);
 });
 
 test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {
