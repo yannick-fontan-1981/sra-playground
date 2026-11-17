@@ -39,3 +39,49 @@ test('a contact must produce an animated change inside the link to be recorded a
   assert.equal(seen?.pendingPulse?.tick, 1);
   assert.equal(seen?.pending.length, 0);
 });
+
+test('one recording preserves distinct ticks for two obstacle shifts before holding a contact', () => {
+  const cells = ([x, y]: NativePoint): NativePoint[] => [[x, y], [x + 1, y], [x, y + 1], [x + 1, y + 1]];
+  const firstBlock = cells([7, 1]), secondBlock = cells([10, 4]);
+  const firstContact: NativePoint = [1, 4], secondContact: NativePoint = [4, 4], heldContact: NativePoint = [7, 4];
+  const field = structuredClone(rows);
+  const paint = (grid: number[][], points: NativePoint[], ink: number) => {
+    for (const [x, y] of points) grid[y]![x] = ink;
+  };
+  for (const contact of [firstContact, secondContact, heldContact]) paint(field, cells(contact), 1);
+  paint(field, firstBlock, 7);
+  paint(field, secondBlock, 8);
+  const initial = beginRecording({ ...scene, slots: [[0, 0, 0, 0], [1, 0, 1, 0], [2, 0, 2, 0]], nodes: [
+    { position: firstContact, peer_support: firstBlock },
+    { position: secondContact, peer_support: secondBlock },
+    { position: heldContact, peer_support: [[13, 0]] },
+  ] }, 1, startRecording().vectors, 'ACTION5', ['start'], field)!;
+  const first = chooseRecording(observation(start), field, initial)!;
+  assert.deepEqual(first.expected, firstContact);
+  const firstShift = structuredClone(field);
+  paint(firstShift, firstBlock, 1);
+  paint(firstShift, cells([10, 1]), 7);
+  const prepared = observeRecording(first, { ...observation(firstContact), observation_ref: 'first-shift' }, field, firstShift)!;
+
+  const second = chooseRecording(observation(firstContact), firstShift, prepared)!;
+  assert.deepEqual(second.expected, secondContact);
+  assert.equal(observeRecording(second, observation(secondContact), firstShift, firstShift), null);
+  const secondShift = structuredClone(firstShift);
+  paint(secondShift, secondBlock, 1);
+  paint(secondShift, cells([13, 4]), 8);
+  const both = observeRecording(second, { ...observation(secondContact), observation_ref: 'second-shift' }, firstShift, secondShift)!;
+  const hold = chooseRecording(observation(secondContact), secondShift, both)!;
+  assert.deepEqual(hold.expected, heldContact);
+  const opened = structuredClone(secondShift);
+  opened[0]![13] = 1;
+  const held = observeRecording(hold, observation(heldContact), secondShift, opened)!;
+
+  const commit = chooseRecording(observation(heldContact), opened, held)!;
+  assert.equal(commit.intent, 'commit');
+  const rewound = structuredClone(field);
+  rewound[0]![0] = 2;
+  const saved = observeRecording(commit, observation(start), opened, rewound);
+  assert.deepEqual(saved?.paths[0]?.preparations?.map(effect => [effect.tick, effect.ref, effect.retained]),
+    [[1, 'first-shift', true], [2, 'second-shift', true]]);
+  assert.equal(saved?.paths[0]?.changed.length, 1);
+});

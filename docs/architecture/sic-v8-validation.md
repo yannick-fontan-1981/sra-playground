@@ -1576,3 +1576,12 @@ La détection retrouve vingt pièces et vingt et une portes lorsque le bord de l
 SIC réutilise les rôles des occupants et le compteur appris pendant les quatre premiers niveaux. Le plan choisit les ouvertures à partir des pièces, des occupants et du budget observés. Quatorze clics sont confirmés par le changement de porte et la dépense d’un tour. Le quinzième déclenche la victoire officielle.
 
 Le rejeu depuis le niveau 1 gagne le niveau 5 en **15 clics et 12,19 s** avec le budget configuré pour huit workers. Les 70 commandes relèvent de SIC seul. Les 55 commandes et retours des niveaux 1 à 4 reproduisent la référence `f374b80d`. La permutation de palette reproduit les 70 commandes et leurs effets géométriques. Empreinte complète `113283a516f24076615c4da606641b87779380ce0357cec955fd3828915e735d`. Le contrôle TypeScript et les 33 tests ciblés passent.
+
+
+### G50T niveau 5, combiner plusieurs effets dans un enregistrement
+
+Deux contacts sont reliés à des obstacles pleins. SIC vérifie séparément leurs translations aux pas 1 et 7 et leur persistance après le départ. Au pas 9, l’acteur atteint un troisième contact qui ouvre un passage tant qu’il l’occupe. Le premier enregistrement conserve les deux changements persistants avec leurs propres pas ainsi que le maintien depuis la position finale. Le retour au départ est vérifié sur les obstacles et le bandeau.
+
+Le deuxième acteur exploite ces ouvertures et mesure une impulsion au pas 15. Le dernier trajet dérive une entrée dans le cadre au même pas. La 41ᵉ commande du niveau confirme l’animation et la sortie dans l’autre cadre. La recherche vérifie la position des acteurs rejoués et les pixels visibles des changements attendus.
+
+G50T gagne le niveau 5 en **50 commandes et 34,64 s** dans le rejeu réglé pour huit workers. Les 203 commandes relèvent de SIC seul. Les 153 commandes et retours des niveaux 1 à 4 reproduisent la référence `b613eab1`. La permutation de palette reproduit les commandes et les effets géométriques. Empreinte complète `6416074c7e9ae53b92d7eabcfa006867e703f9cd4fee6aa610c8999c9b3576cd`. Le contrôle TypeScript et les trois tests d’enregistrement passent. La suite SIC passe 176 tests sur 177. Le test de réserve du cycle orienté échoue aussi sur la référence.
