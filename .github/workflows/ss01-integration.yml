@@ -1,0 +1,44 @@
+name: Materialize and verify SS01 Custom 4
+on:
+  push:
+    branches: [feat/custom4-ss01-integration-20261117]
+    paths: [docs/integration/ss01-v5-source.json.gz, scripts/install-ss01-custom4.mjs]
+permissions:
+  contents: write
+concurrency:
+  group: ss01-custom4-integration
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/custom4-ss01-integration-20261117
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.19.0'
+      - name: Materialize the reviewed v5 sources and integration
+        run: node scripts/install-ss01-custom4.mjs
+      - run: npm ci
+      - name: Laboratory regression suite
+        run: npm --prefix experiments/sinking-star test
+      - name: Production integration tests
+        run: node --test tests/custom4-native.test.ts
+      - name: Typecheck and production build
+        run: npm run build
+      - name: Commit the materialized integration on its own branch
+        run: |
+          test "$(git branch --show-current)" = feat/custom4-ss01-integration-20261117
+          python3 - <<'PY'
+          import gzip,json,subprocess
+          paths=list(json.loads(gzip.decompress(open('docs/integration/ss01-v5-source.json.gz','rb').read())))
+          subprocess.run(['git','add','-f','--',*paths],check=True)
+          PY
+          git add -f src/runtime/native-game-dispatcher.ts src/games/sinking-star.ts scripts/native-game-gallery.mjs tests/custom4-native.test.ts public/gallery/custom_4.png docs/integration/ss01-custom4.md
+          git rm docs/integration/ss01-v5-source.json.gz scripts/install-ss01-custom4.mjs .github/workflows/ss01-integration.yml
+          git add -u
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'Integrate tested SS01 v5 as the first Custom 4 native game'
+          git push origin HEAD:feat/custom4-ss01-integration-20261117
