@@ -18,7 +18,7 @@ type Place = { kind: 'place'; point: Point; pad: string; marker: Point; expected
 type Choice = Select | Learn | Place;
 type Memory = { epoch: number; scope: string; gains: Record<string, Gains>; pieces: Record<string, SelectedPad[]>;
   rejected: string[]; refs: string[]; blocked: boolean; destination?: ReturnType<typeof translatedRelativeArrangementTargets>[number] };
-type Witness = { epoch: number; score: number; refs: string[]; shape?: Point; pads?: string[]; gains?: Record<string, Gains> };
+type Witness = { epoch: number; score: number; refs: string[]; shape?: Point; gains?: Record<string, Gains> };
 type Proposal = NativeProposal & { layout: RelativeArrangementLayout; memory: Memory; choice: Choice; needId: string };
 type Waypoint = { point: Point; pad: string; marker: Point; expected: Point };
 type Route = { at: Point; markers: Point[]; depth: number; first: Waypoint | null };
@@ -225,12 +225,16 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
       if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed || remaining < 1
         || !observation.available_action_refs.includes('ACTION6')) return null;
       const layout = relativeArrangementProject(observation, rows);
-      if (!layout || layout.objects.length > 6 || layout.pads.length > 3) return null;
+      if (!layout || layout.pads.length > 3) return null;
       const prior = state?.epoch === observation.level_epoch && state.scope === layout.scope_ref ? state : null;
       if (prior?.blocked) return null;
-      const transferred = witness.shape && equal(witness.shape, layout.shape) && witness.pads
-        && witness.pads.length === layout.pads.length && witness.pads.every((pad, index) => pad === layout.pads[index]!.ref) ? witness.gains : null;
-      const goals = !prior && transferred && Object.keys(transferred).length ? translatedRelativeArrangementTargets(layout) : [];
+      let transferred: Record<string, Gains> | undefined;
+      if (!prior && witness.shape && equal(witness.shape, layout.shape) && witness.gains) {
+        const colors = new Set(layout.objects.map(object => object.value));
+        const availableGains = new Set([...colors].flatMap(color => layout.pads.map(pad => gainKey(color, pad.ref))));
+        transferred = Object.fromEntries(Object.entries(witness.gains).filter(([key]) => availableGains.has(key)));
+      }
+      const goals = transferred && Object.keys(transferred).length ? translatedRelativeArrangementTargets(layout) : [];
       const nearby = goals.sort((a, b) => b.already_preserved.length - a.already_preserved.length)[0];
       const memory = rememberSelection(prior ?? { epoch: observation.level_epoch, scope: layout.scope_ref,
         gains: transferred ?? {}, pieces: {}, rejected: [], refs: witness.refs, blocked: false,
@@ -281,7 +285,7 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
       const { layout, choice, memory } = proposal;
       if (after.levels_completed > before.levels_completed) {
         witness = { epoch: after.level_epoch, score: after.levels_completed, refs: [...memory.refs.slice(-5), after.observation_ref],
-          shape: layout.shape, pads: layout.pads.map(pad => pad.ref), gains: memory.gains };
+          shape: layout.shape, gains: memory.gains };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };

@@ -1297,3 +1297,9 @@ Après l’apparition d’une nouvelle commande, SIC mesure les phases depuis un
 Le planificateur appliqué directement au jeu gagne officiellement le niveau 5 en 185 commandes, dont les mesures de phase et un essai de déplacement refusé. Le rejeu complet avec profilage V8 confirme la victoire à la même commande en 260,11 s de temps mural pour le niveau 5. Les 372 commandes relèvent de SIC seul. Les 187 premières commandes et leurs retours concordent avec la référence `26cb728e`.
 
 Un autre rejeu, sans profilage V8, a reproduit le même préfixe d’actions et de retours jusqu’à son arrêt sur le budget de temps à la 164e commande du niveau 5. La régularité du temps de rejeu reste à vérifier avant intégration sur `main`. Les tests couvrent les phases visuellement identiques, la reprise d’une mesure en cours à partir de l’état sauvegardé et un pont qui partage la couleur du bloc porté. Le contrôle TypeScript et les sept tests ciblés passent.
+
+### TRIA niveau 5, réutilisation partielle des commandes
+
+Le motif comporte sept pièces. SIC reconnaît la grille et les panneaux à partir des retours publics. Il réutilise les déplacements déjà mesurés pour les commandes dont le panneau et la catégorie de pièce concordent, même si d’autres commandes deviennent visibles. Les déplacements candidats sont toujours contrôlés sur les positions occupées et le retour confirme le placement après chaque clic. La borne d’énumération des affectations est appliquée aux permutations par catégorie.
+
+**TRIA gagne le niveau 5 en 23 clics et 14,20 s de temps mural** lors du rejeu complet avec le réglage de huit processus. Les 86 commandes relèvent de SIC seul. Les 63 commandes et retours jusqu’au niveau 4 reproduisent le rejeu de référence après l’exploration alternée. Le contrôle TypeScript et les 97 tests ciblés passent.
