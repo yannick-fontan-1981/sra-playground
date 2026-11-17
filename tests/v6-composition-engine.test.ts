@@ -5,12 +5,37 @@ import { createHash } from 'node:crypto';
 import { CompositionEngine, NativeEngine, NativeModelUnavailableError, NativeSrcBridge, NeutralEngine,
   operationAdmission, validateBundle } from '../src/logos-engine/v6-composition-engine.ts';
 import { NativeReasoningMemory, TREE_SHA256 } from '../src/logos-engine/v6-reasoning-memory.ts';
+import type { ReasoningWindow } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { nativeProgramDescriptions } from '../src/logos-engine/v6-src-program.ts';
 
 const fixture = JSON.parse(await readFile(new URL('./fixtures/v6-composition-engine-reference.json', import.meta.url), 'utf8'));
 const constructors = { Engine: NativeEngine, CompositionEngine, NeutralEngine };
 type Sample = Record<string, any>;
+
+test('composition checkpoints share unchanged content while preserving detached public snapshots', () => {
+  const engine = new NativeEngine(new NativeReasoningMemory());
+  const window = (key: string): ReasoningWindow => ({ current: { key, address: '/test', line: 1,
+    navigation_excerpt: key, excerpt_only: true }, neighbors: [], remaining_neighbors: 0, adjacency_is_not_permission: true });
+  engine.windows.set('one', window('one'));
+  engine.windows.set('two', window('two'));
+  engine.last_result = { detail: { count: 1 }, weight: -0 };
+  const first = engine.nativeCheckpoint();
+  assert.deepEqual(first, engine.state());
+  assert.equal(engine.nativeCheckpoint(), first);
+  engine.windows.get('one')!.current.navigation_excerpt = 'updated';
+  engine.last_result.detail.count = 2;
+  const second = engine.nativeCheckpoint();
+  assert.deepEqual(second, engine.state());
+  assert.notEqual(second.windows[0], first.windows[0]);
+  assert.equal(second.windows[1], first.windows[1]);
+  assert.equal(first.windows[0]![1].current.navigation_excerpt, 'one');
+  assert.equal(first.last_result!.detail.count, 1);
+  const detached = engine.state();
+  detached.windows[1]![1].current.navigation_excerpt = 'external';
+  assert.equal(engine.windows.get('two')!.current.navigation_excerpt, 'two');
+  assert.equal(engine.nativeCheckpoint(), second);
+});
 
 function setup(sample: Sample) {
   const memory = new NativeReasoningMemory({ clock: () => 1234 }); memory.importCatalog();
