@@ -5,11 +5,16 @@ import type { NativeBox, NativeCommand, NativePoint, NativeRows } from '../logos
 type View = { axis: 0 | 1; reverse: boolean; breadth: number; depth: number };
 type Interval = readonly [start: number, end: number];
 type Control = { kind: 'transfer'; box: NativeBox; index: number } | { kind: 'door'; box: NativeBox; edge: number; amount: number };
-type Marker = { cap: number; thickness: number; width: number; accent: number; pixels: readonly NativePoint[]; height: number; target: NativeBox };
+type Marker = { cap: number; thickness: number; width: number; accent: number; pixels: readonly NativePoint[]; height: number; target: NativeBox;
+  targets: { bands: number[]; amount: number } };
 export type PassageLayout = { view: View; bands: Interval[]; unit: number; fill: number;
-  controls: Control[]; marker: Marker; targets: { bands: number[]; amount: number } };
-export type PassageReading = { quantities: number[]; carried: number; marker: NativeBox };
-export type PassageMove = { index: number; next: { quantities: number[]; carried: number }; distance: number; gate: number | null };
+  controls: Control[]; markers: Marker[] };
+export type LegacyPassageLayout = Omit<PassageLayout, 'markers'> & { marker: Omit<Marker, 'targets'>; targets: Marker['targets'] };
+type PassagePosition = { quantities: number[]; carried: number[] };
+export type PassageReading = PassagePosition & { markerBoxes: NativeBox[] };
+export type PassageStep = { index: number; next: PassagePosition };
+export type PassagePlan = { steps: PassageStep[]; distance: number; gate: number | null };
+export type IntakeLimit = { band: number; occupant: number; amount: number };
 
 const key = (value: unknown) => JSON.stringify(value);
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -17,6 +22,15 @@ const height = ([, t, , b]: NativeBox) => b - t + 1;
 const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2), Math.floor((t + b) / 2)];
 const inBand = ([l, , r]: NativeBox, [start, end]: Interval) => l >= start && r <= end;
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
+
+function markerStarts([left, right]: Interval, markerWidth: number, breadth: number): Set<number> {
+  const center = (left + right - markerWidth + 1) / 2;
+  const starts = new Set([Math.floor(center), Math.ceil(center)]);
+  // A border indicator can shift the visible center of an outer compartment.
+  if (left === 0) starts.add(Math.floor(center) + 1);
+  if (right === breadth - 1) starts.add(Math.ceil(center) - 1);
+  return starts;
+}
 
 function screen(view: View, u: number, v: number): NativePoint {
   const along = view.reverse ? view.depth - 1 - v : v;
@@ -49,8 +63,8 @@ function runs(pixels: readonly (number | undefined)[]) {
 }
 
 export function readPassage(rows: NativeRows, layout: PassageLayout): PassageReading | null {
-  const { bands, view, unit, fill, marker, controls } = layout, bottom = view.depth - 1;
-  const quantities: number[] = [], matches: { band: number; box: NativeBox }[] = [];
+  const { bands, view, unit, fill, markers, controls } = layout, bottom = view.depth - 1;
+  const quantities: number[] = [];
   for (const [index, [left, right]] of bands.entries()) {
     const lengths: number[] = [];
     for (let x = left; x <= right; x++) {
@@ -65,17 +79,25 @@ export function readPassage(rows: NativeRows, layout: PassageLayout): PassageRea
     const amount = [...count].find(([, n]) => n * 2 > lengths.length)?.[0];
     if (amount === undefined || amount % unit !== 0) return null;
     quantities.push(amount);
-    const capBottom = bottom - amount, capTop = capBottom - marker.thickness + 1, top = capTop - marker.height;
-    const x0 = (left + right - marker.width + 1) / 2;
-    for (const x of new Set([Math.floor(x0), Math.ceil(x0)])) {
-      const cap = Array.from({ length: marker.width * marker.thickness }, (_, i) =>
-        pixel(rows, view, x + i % marker.width, capTop + Math.floor(i / marker.width)));
-      if (cap.every(ink => ink === marker.cap) && marker.pixels.every(([u, v]) => pixel(rows, view, x + u, top + v) === marker.accent)) {
-        matches.push({ band: index, box: [x, top, x + marker.width - 1, capBottom] });
+  }
+  const carried: number[] = [], markerBoxes: NativeBox[] = [];
+  for (const marker of markers) {
+    const matches: { band: number; box: NativeBox }[] = [];
+    for (const [index, band] of bands.entries()) {
+      const capBottom = bottom - quantities[index]!, capTop = capBottom - marker.thickness + 1, top = capTop - marker.height;
+      for (const x of markerStarts(band, marker.width, view.breadth)) {
+        const cap = Array.from({ length: marker.width * marker.thickness }, (_, i) =>
+          pixel(rows, view, x + i % marker.width, capTop + Math.floor(i / marker.width)));
+        if (cap.every(ink => ink === marker.cap) && marker.pixels.every(([u, v]) => pixel(rows, view, x + u, top + v) === marker.accent)) {
+          matches.push({ band: index, box: [x, top, x + marker.width - 1, capBottom] });
+        }
       }
     }
+    if (matches.length !== 1 || carried.includes(matches[0]!.band)) return null;
+    carried.push(matches[0]!.band);
+    markerBoxes.push(matches[0]!.box);
   }
-  return matches.length === 1 ? { quantities, carried: matches[0]!.band, marker: matches[0]!.box } : null;
+  return { quantities, carried, markerBoxes };
 }
 
 export function measurePassage(rows: NativeRows): PassageLayout | null {
@@ -115,13 +137,15 @@ export function measurePassage(rows: NativeRows): PassageLayout | null {
         if (doors.length === 1) controls.push({ kind: 'door', box: doors[0]!.box, edge, amount: bottom - doors[0]!.box[3] });
       }
       if (controls.filter(control => control.kind === 'transfer').length !== buttons.length || !controls.some(control => control.kind === 'door')) continue;
+      const byFill = new Map<number, Marker[]>();
       for (const { box: target, rectangular, color } of parts) {
         const edge = cuts.findIndex(([l, r]) => target[0] === l && target[2] === r);
         const amount = bottom - target[3];
         if (!rectangular || edge < 0 || color === wall || height(target) >= unit * 2 || amount <= 0 || amount % unit !== 0
           || pixel(rows, view, target[0], target[1] - 1) !== wall || pixel(rows, view, target[0], target[3] + 1) !== wall) continue;
         const caps = parts.filter(part => part.rectangular && part.color === color && height(part.box) === height(target)
-          && width(part.box) > unit && bands.some(band => inBand(part.box, band) && Math.abs(part.box[0] + part.box[2] - band[0] - band[1]) <= 1));
+          && width(part.box) > unit && bands.some(band => inBand(part.box, band)
+            && markerStarts(band, width(part.box), view.breadth).has(part.box[0])));
         if (caps.length !== 1) continue;
         const cap = caps[0]!.box;
         const accents = parts.filter(part => part.box[3] === cap[1] - 1 && part.box[0] === cap[0] && part.box[2] === cap[2]
@@ -133,8 +157,14 @@ export function measurePassage(rows: NativeRows): PassageLayout | null {
         for (let y = 0; y < height(accentBox); y++) for (let x = 0; x < width(accentBox); x++) {
           if (pixel(rows, view, cap[0] + x, accentBox[1] + y) === accent.color) pixels.push([x, y]);
         }
-        const marker = { cap: color, width: width(cap), thickness: height(cap), accent: accent.color, pixels, height: height(accentBox), target };
-        const layout = { view, bands, fill, unit, controls, marker, targets: { bands: [edge, edge + 1], amount } };
+        const markers = byFill.get(fill) ?? [];
+        markers.push({ cap: color, width: width(cap), thickness: height(cap), accent: accent.color, pixels,
+          height: height(accentBox), target, targets: { bands: [edge, edge + 1], amount } });
+        byFill.set(fill, markers);
+      }
+      for (const [fill, markers] of byFill) {
+        if (new Set(markers.map(marker => marker.cap)).size !== markers.length) continue;
+        const layout = { view, bands, fill, unit, controls, markers };
         if (readPassage(rows, layout)) layouts.push(layout);
       }
     }
@@ -147,38 +177,48 @@ export function passageCommand(layout: PassageLayout, control: Control): NativeC
   return { action_ref: 'ACTION6', data: { x, y } };
 }
 
-export function passageAction(layout: PassageLayout, current: Pick<PassageReading, 'quantities' | 'carried'>, sense: BandSense, index: number) {
+export function passageAction(layout: PassageLayout, current: PassagePosition, sense: BandSense, index: number): PassagePosition | null {
   const { quantities, carried } = current, control = layout.controls[index]!;
   if (control.kind === 'transfer') {
     const next = bandEffect(quantities, control.index, sense, layout.unit);
     return !same(next, quantities) && next.every(amount => amount < layout.view.depth) ? { quantities: next, carried } : null;
   }
   const { edge, amount } = control;
-  return (carried === edge || carried === edge + 1) && quantities[edge] === amount && quantities[edge + 1] === amount
-    ? { quantities, carried: 2 * edge + 1 - carried } : null;
+  if (!carried.some(band => band === edge || band === edge + 1) || quantities[edge] !== amount || quantities[edge + 1] !== amount) return null;
+  return { quantities, carried: carried.map(band => band === edge || band === edge + 1 ? 2 * edge + 1 - band : band) };
 }
 
-export const passageKey = ({ quantities, carried }: Pick<PassageReading, 'quantities' | 'carried'>, action: number) => key([quantities, carried, action]);
-export const samePassage = (a: Pick<PassageReading, 'quantities' | 'carried'>, b: Pick<PassageReading, 'quantities' | 'carried'> | null) =>
-  !!b && a.carried === b.carried && same(a.quantities, b.quantities);
+export const passageKey = ({ quantities, carried }: PassagePosition, action: number) =>
+  key([quantities, carried.length === 1 ? carried[0] : carried, action]);
+export const samePassage = (a: PassagePosition, b: PassagePosition | null) =>
+  !!b && same(a.carried, b.carried) && same(a.quantities, b.quantities);
 
-export function findPassage(layout: PassageLayout, initial: PassageReading, sense: BandSense, rejected: readonly string[], remaining: number): PassageMove | null {
-  const { targets } = layout, blocked = new Set(rejected);
+export function findPassage(layout: PassageLayout, initial: PassageReading, sense: BandSense, rejected: readonly string[],
+  remaining: number, limits: readonly IntakeLimit[] = []): PassagePlan | null {
+  const { markers } = layout, blocked = new Set(rejected);
   const initialState = { quantities: initial.quantities, carried: initial.carried };
-  type Entry = typeof initialState & { first: PassageMove | null; depth: number; gate: number | null };
-  const queue: Entry[] = [{ ...initialState, depth: 0, first: null, gate: null }], seen = new Set([key(initialState)]);
+  type Entry = PassagePosition & { command: number; previous: Entry | null; depth: number; gate: number | null };
+  const queue: Entry[] = [{ ...initialState, depth: 0, command: -1, previous: null, gate: null }], seen = new Set([key(initialState)]);
   for (const entry of queue) {
-    const { depth, first, carried, quantities } = entry;
-    if (first && targets.bands.includes(carried) && quantities[carried] === targets.amount) return { ...first, distance: depth, gate: entry.gate };
+    const { depth, carried, quantities } = entry;
+    if (depth && markers.every(({ targets }, i) => targets.bands.includes(carried[i]!) && quantities[carried[i]!] === targets.amount)) {
+      const steps: PassageStep[] = [];
+      for (let item = entry; item.previous; item = item.previous) {
+        steps.push({ index: item.command, next: { quantities: item.quantities, carried: item.carried } });
+      }
+      return { steps: steps.reverse(), distance: depth, gate: entry.gate };
+    }
     if (depth >= remaining) continue;
     for (let index = 0; index < layout.controls.length; index++) {
       if (blocked.has(passageKey(entry, index))) continue;
       const next = passageAction(layout, entry, sense, index);
-      if (!next || seen.has(key(next))) continue;
-      if (queue.length >= 32_768) return null;
+      if (!next || limits.some(({ band, occupant, amount }) => next.carried.indexOf(band) === occupant
+        && next.quantities[band]! > quantities[band]! && next.quantities[band]! > amount)
+        || seen.has(key(next))) continue;
+      if (queue.length >= (markers.length === 1 ? 32_768 : 96_000)) return null;
       seen.add(key(next));
       const gate = entry.gate ?? (next.carried === carried ? null : index);
-      queue.push({ ...next, first: first ?? { index, next, distance: 0, gate }, depth: depth + 1, gate });
+      queue.push({ ...next, command: index, previous: entry, depth: depth + 1, gate });
     }
   }
   return null;
