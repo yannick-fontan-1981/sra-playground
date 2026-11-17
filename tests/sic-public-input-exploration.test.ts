@@ -7,10 +7,11 @@ import { componentCenterPoint } from '../src/sic/interior-shape-targets.ts';
 import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier } from '../src/sic/public-input-exploration.ts';
 import { observedCommandFrontier, observedCommandKey, rememberCommandReturn, type ObservedCommandGraph } from '../src/sic/observed-command-frontier.ts';
 import { commandPanelState, visibleCommandPanel } from '../src/sic/visible-command-panel.ts';
-import { learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, projectPanelContact, projectPanelMarker,
+import { confirmsPanelTranslation, learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, panelActor, projectPanelContact, projectPanelMarker,
   projectPanelFooting, projectPanelTerrain, rememberPanelTerrain, type PanelWalker } from '../src/sic/panel-context-probe.ts';
 import { sameLandingPixels } from '../src/sic/plan-step.ts';
 import { measureReturningAnimation } from '../src/sic/observed-animation.ts';
+import { comparePanelSupportAccess } from '../src/sic/panel-access-comparison.ts';
 import { dockingDistance, findPanelDock, measureAlignedTool, measurePanelTransport,
   panelTransportPose, unchangedPanelTransport } from '../src/sic/panel-mechanism-probe.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
@@ -189,6 +190,64 @@ test('a panel comparison projects a guarded route using measured commands and an
     [{ marker: [8, 4, 9, 5], command: observedCommandKey(button.command), evidence: 'earlier_displacement' }]);
   assert.deepEqual(matched?.target.peer, [10, 8, 11, 9]);
   assert.equal(matched?.target.link, 'earlier_displacement');
+  const reversed = projectPanelMarker(walker, current, field, inputs, [button], [], 8,
+    [{ marker: [10, 8, 11, 9], command: observedCommandKey(button.command), evidence: 'paired_departure' }], [10, 8, 11, 9]);
+  assert.deepEqual(reversed?.target.marker, [8, 4, 9, 5]);
+  assert.deepEqual(reversed?.target.peer, [10, 8, 11, 9]);
+  assert.equal(projectPanelMarker(walker, current, field, inputs, [button], [], 8,
+    [{ marker: [10, 8, 11, 9], command: observedCommandKey(button.command), evidence: 'paired_departure' }], [2, 2, 3, 3]), null);
+});
+
+test('support access compares new fixed ground and retains uncertainty about untested footprints', () => {
+  const rows = Array.from({ length: 12 }, (_, y) => Array.from({ length: 20 }, (_, x) => {
+    if (y < 4 || y > 7) return 0;
+    if (x < 4 || x >= 16) return 1;
+    if (x >= 8 && x <= 11 && (x === 8 || x === 11 || y === 4 || y === 7)) return 8;
+    return 6;
+  }));
+  const walker: PanelWalker = { ink: 7, floor: 1, floorReturns: { 6: 'crossed_support' }, controls: {
+    ACTION4: { delta: [2, 0], evidence: 'right' }, ACTION3: { delta: [-2, 0], evidence: 'left' },
+    ACTION1: { delta: [0, -2], evidence: 'up' }, ACTION2: { delta: [0, 2], evidence: 'down' },
+  } };
+  const held = { tool: [8, 4, 11, 7] as const, support: [4, 4, 15, 7] as const };
+  assert.equal(comparePanelSupportAccess(walker, rows, [0, 4, 1, 5], held)?.gain, 0);
+  walker.contacts = { '2,8': { patch: '8,6,8,6', evidence: 'crossed_tool_edge' } };
+  const original = structuredClone(rows);
+  const result = comparePanelSupportAccess(walker, rows, [0, 4, 1, 5], held);
+  assert.equal(result?.gain, 4);
+  assert.ok(result && result.withSupport > result.withoutSupport && result.uncertain > 0);
+  assert.deepEqual(rows, original);
+});
+
+test('a partially occluded cursor is tracked only after a visible departure and arrival', () => {
+  const field = [0, 0, 11, 7] as const;
+  const walker: PanelWalker = { ink: 7, floor: 1, controls: { ACTION4: { delta: [2, 0], evidence: 'right' } } };
+  const before = Array.from({ length: 8 }, () => Array<number>(12).fill(1));
+  for (const y of [2, 3]) { before[y]![2] = before[y]![3] = 7; before[y]![5] = 8; }
+  const after = before.map(row => [...row]);
+  for (const y of [2, 3]) { after[y]![2] = after[y]![3] = 1; after[y]![4] = 7; }
+  assert.equal(confirmsPanelTranslation(walker, before, after, [2, 2, 3, 3], [4, 2, 5, 3]), true);
+  const learned = learnPanelTerrain(walker, field, 0, 'ACTION4', before, after, 'partially_visible_arrival');
+  assert.deepEqual(panelActor(learned, after, field), [4, 2, 5, 3]);
+  assert.equal(panelActor(walker, after, field), undefined);
+  assert.equal(confirmsPanelTranslation(walker, before, before, [2, 2, 3, 3], [4, 2, 5, 3]), false);
+  const obscured = after.map(row => [...row]);
+  obscured[2]![4] = obscured[3]![4] = 8;
+  assert.equal(confirmsPanelTranslation(walker, before, obscured, [2, 2, 3, 3], [4, 2, 5, 3]), false);
+  assert.equal(panelActor(learned, obscured, field), undefined);
+});
+
+test('contact discovery follows measured floor beyond the background component boundary', () => {
+  const rows = Array.from({ length: 8 }, (_, y) => Array.from({ length: 12 }, (_, x) =>
+    y >= 4 && y <= 5 ? (x >= 10 ? 9 : x >= 2 && x <= 3 ? 7 : 1) : 0));
+  const walker: PanelWalker = { ink: 7, floor: 1, controls: {
+    ACTION4: { delta: [2, 0], evidence: 'right' }, ACTION1: { delta: [0, -2], evidence: 'up' },
+  } };
+  const inputs = [{ action_ref: 'ACTION4', data: {} }, { action_ref: 'ACTION1', data: {} }];
+  const projection = projectPanelContact(walker, rows, [0, 0, 5, 7], 0, inputs, [], 6, false, true);
+  assert.deepEqual(projection?.target.box, [10, 4, 11, 5]);
+  assert.deepEqual(projection?.field, [0, 0, 11, 7]);
+  assert.equal(projection?.route.length, 4);
 });
 
 test('leaving an occupied marker retains its revealed footprint for a guarded return', () => {
