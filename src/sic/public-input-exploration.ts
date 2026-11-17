@@ -1,4 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
@@ -12,7 +13,8 @@ import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } f
 import { repeatedInputTargets } from './repeated-input-targets.ts';
 import { countChangesInside, workspaceClickCandidate } from './workspace-click.ts';
 import { commandPanelState, visibleCommandPanel, type VisibleCommandPanel } from './visible-command-panel.ts';
-import { containsBox, learnPanelDirection, panelActor, projectPanelContact, projectPanelMarker, sameBox,
+import { canReachPanelMarker, containsBox, learnPanelDirection, learnPanelTerrain, matchingPanelMarker, panelActor, panelMarkerCode, panelMarkerTrialKey,
+  projectPanelContact, projectPanelMarker, sameBox, type KnownPanelSource,
   type PanelApproach, type PanelContactApproach, type PanelEffect, type PanelMarkerTrial, type PanelWalker } from './panel-context-probe.ts';
 import { sameLandingPixels } from './plan-step.ts';
 import { measureReturningAnimation } from './observed-animation.ts';
@@ -50,8 +52,9 @@ const clickLimit = 30;
 const completion = 'G_official_completion';
 
 type ClickedControl = { box: NativeBox; point: NativePoint; remaining: string[]; evidence: string; destination: string };
-type RevealedControl = { command: NativeCommand; box: NativeBox; contact: NativeBox; before: string; observation: string };
+type RevealedControl = { command: NativeCommand; box: NativeBox; contact: NativeBox; before: string; observation: string; ink?: number };
 type AnimatedPanelControl = { control: RevealedControl; region: NativeBox; frames: number[]; evidence: string; tested: string[] };
+type ObservedMarkerProgram = { selector: PanelEffect; source: KnownPanelSource; from: string; code: string | null; evidence: string };
 export type ControlledMotion = { from: NativeBox; to: NativeBox; command: string; evidence: readonly [string, string]; destination: string };
 type State = { epoch: number; experiments: number; transitions: ObservedCommandGraph; options: Record<string, string[]>;
   lastChange: { destination: string; action: string; evidence: string } | null;
@@ -68,8 +71,13 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   testedPanelMarkers?: string[];
   panelArrival?: string;
   testedPanelContacts?: string[];
+  testedPanelTerrain?: string[];
   revealedPanelControl?: RevealedControl;
+  revealedPanelControls?: RevealedControl[];
   animatedPanelControls?: Record<string, AnimatedPanelControl>;
+  panelSources?: KnownPanelSource[];
+  panelDestinations?: NativeBox[];
+  panelPrograms?: ObservedMarkerProgram[];
   collectionEdit?: readonly [string, string];
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
@@ -96,11 +104,26 @@ function changedWithin(before: NativeRows, after: NativeRows, [l, t, r, b]: Nati
   return false;
 }
 
+function panelChangeBounds(before: NativeRows, after: NativeRows, [l, t, r, b]: NativeBox): NativeBox | undefined {
+  let left = r + 1, top = b + 1, right = l - 1, bottom = t - 1;
+  for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
+    if (before[y]?.[x] === after[y]?.[x]) continue;
+    left = Math.min(left, x); top = Math.min(top, y); right = Math.max(right, x); bottom = Math.max(bottom, y);
+  }
+  return right >= left ? [left, top, right, bottom] : undefined;
+}
+
+function terrainTestKey(rows: NativeRows, effect: PanelEffect) {
+  const [l, t, r, b] = effect.affected!;
+  return symbolicDigest([commandKey(effect.command), effect.affected, rows.slice(t, b + 1).map(row => row.slice(l, r + 1))]);
+}
+
 function retainPanelEffect(state: State, panel: VisibleCommandPanel, command: NativeCommand,
   rows: NativeRows, afterRows: NativeRows, evidence: string) {
   if (/^ACTION[1-4]$/.test(command.action_ref)) {
     const walker = learnPanelDirection(state.panelWalker, panel.area, command.action_ref, rows, afterRows, evidence);
-    if (walker) state.panelWalker = walker;
+    if (walker) state.panelWalker = state.panelArrival
+      ? learnPanelTerrain(walker, panel.area, panel.fieldInk, command.action_ref, rows, afterRows, evidence) : walker;
     return;
   }
   if (command.action_ref !== 'ACTION6' || !state.panelWalker || !changedWithin(rows, afterRows, panel.area)) return;
@@ -111,9 +134,11 @@ function retainPanelEffect(state: State, panel: VisibleCommandPanel, command: Na
   const current = previous && panelActor(state.panelWalker, afterRows, panel.area);
   if (!button || !previous || !current || !sameBox(previous, current)) return;
   const effects = state.panelEffects ??= [];
-  if (!effects.some(effect => effect.ink === button.color && commandKey(effect.command) === commandKey(command))) {
-    effects.push({ command, box: button.bbox, ink: button.color, evidence });
-  }
+  const key = commandKey(command);
+  const existing = effects.find(effect => effect.ink === button.color && commandKey(effect.command) === key);
+  const affected = existing?.affected ?? panelChangeBounds(rows, afterRows, panel.area);
+  if (!existing) effects.push({ command, box: button.bbox, ink: button.color, evidence, ...(affected ? { affected } : {}) });
+  else if (!existing.affected && affected) existing.affected = affected;
 }
 
 function finishPanelTrial(state: State, key: string) {
@@ -121,11 +146,56 @@ function finishPanelTrial(state: State, key: string) {
   state.testedPanelMarkers = [...new Set([...(state.testedPanelMarkers ?? []), key])];
 }
 
-function newlyVisibleControl(first: VisibleCommandPanel | null, rows: NativeRows) {
+function newlyVisibleControls(first: VisibleCommandPanel | null, rows: NativeRows) {
   const next = first && visibleCommandPanel(rows);
-  const appeared = next && first && next.buttons.filter(button => !first.buttons.some(previous =>
-    previous.color === button.color && previous.area === button.area && sameBox(previous.bbox, button.bbox)));
-  return appeared?.length === 1 ? appeared[0] : undefined;
+  return next && first ? next.buttons.filter(button => !first.buttons.some(previous =>
+    previous.color === button.color && previous.area === button.area && sameBox(previous.bbox, button.bbox))) : [];
+}
+
+function retainMarkerPrograms(state: State, effect: PanelEffect, before: NativeRows, after: NativeRows, evidence: string) {
+  for (const source of state.panelSources ?? []) {
+    if (!effect.affected || !containsBox(source.marker, effect.affected)) continue;
+    const former = panelMarkerCode(before, source.marker), code = panelMarkerCode(after, source.marker);
+    if (!former || !code) continue;
+    const programs = state.panelPrograms ??= [];
+    const known = programs.find(program => commandKey(program.selector.command) === commandKey(effect.command)
+      && sameBox(program.source.marker, source.marker) && program.from === former);
+    if (known) {
+      if (known.code !== code) known.code = null;
+    } else if (former !== code) programs.push({ selector: effect, source, from: former, code, evidence });
+  }
+}
+
+const gap = (a: NativeBox, b: NativeBox) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+
+function selectMarkerProgram(local: State, effects: readonly PanelEffect[], rows: NativeRows, field: NativeBox,
+  attempted: ReadonlySet<string>, inputs: readonly NativeCommand[], remaining: number) {
+  const available = new Set(effects.map(effect => commandKey(effect.command)));
+  const offers: { program: ObservedMarkerProgram; peer: NativeBox; distance: number; depth: number }[] = [];
+  for (const source of local.panelSources ?? []) {
+    const start = panelMarkerCode(rows, source.marker), portal = effects.find(effect => commandKey(effect.command) === source.command);
+    if (!start || !portal) continue;
+    const transitions = local.panelPrograms?.filter(program => program.code && sameBox(source.marker, program.source.marker)
+      && available.has(commandKey(program.selector.command)));
+    if (!transitions?.length || !canReachPanelMarker(local.panelWalker!, rows, field, inputs, source.marker, remaining - 2)) continue;
+    const queue: { code: string; first?: ObservedMarkerProgram; depth: number }[] = [{ code: start, depth: 0 }];
+    const seen = new Set([start]);
+    for (const step of queue) {
+      for (const transition of transitions) {
+        const code = transition.code!;
+        if (step.code !== transition.from || seen.has(code) || (!step.first && attempted.has(commandKey(transition.selector.command)))) continue;
+        seen.add(code);
+        const first = step.first ?? transition, depth = step.depth + 1;
+        queue.push({ code, first, depth });
+        if (local.testedPanelMarkers?.includes(panelMarkerTrialKey(portal.command, source.marker, code))) continue;
+        const peer = matchingPanelMarker(rows, field, source.marker, code);
+        if (peer && !local.panelDestinations?.some(destination => sameBox(destination, peer))) {
+          offers.push({ program: first, peer, distance: gap(source.marker, peer), depth });
+        }
+      }
+    }
+  }
+  return offers.sort((left, right) => left.distance - right.distance || left.depth - right.depth)[0];
 }
 
 function translatedPiece(before: NativeRows, after: NativeRows, { point: [x, y], box: [l, t, r, b] }: ClickedControl) {
@@ -287,7 +357,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const markerAction = marker && commandKey(marker.control.command);
       const comparison = actor && markerAction && sameBox(actor, marker.marker) && !attempted.has(markerAction)
         && presentEffects?.some(effect => effect.ink === marker.control.ink && commandKey(effect.command) === markerAction) ? marker : null;
-      const newControl = local.revealedPanelControl?.observation === ref ? local.revealedPanelControl : undefined;
+      const newControl = local.revealedPanelControl?.observation === ref ? local.revealedPanelControl
+        : local.revealedPanelControls?.find(item => !attempted.has(commandKey(item.command)) && panel?.buttons.some(button =>
+          sameBox(button.bbox, item.box) && button.color === item.ink));
       const retestedControl = !newControl && panel && Object.values(local.animatedPanelControls ?? {}).find(item => {
         const key = commandKey(item.control.command);
         return panelKeys.includes(key) && !attempted.has(key) && panel.buttons.some(button => sameBox(button.bbox, item.control.box))
@@ -299,11 +371,24 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const contact = !revealedControl && !comparison && panel && local.panelWalker && local.panelArrival
         ? projectPanelContact(local.panelWalker, rows, panel.area, panel.fieldInk, nonPoint, local.testedPanelContacts ?? [], budget)
         : null;
-      const approach = !revealedControl && !comparison && !contact && panel && local.panelWalker && presentEffects?.length
-        ? projectPanelMarker(local.panelWalker, rows, panel.area, nonPoint, presentEffects, local.testedPanelMarkers ?? [], budget)
+      const markerRoute = !revealedControl && !comparison && !contact && panel && local.panelWalker && presentEffects?.length
+        ? projectPanelMarker(local.panelWalker, rows, panel.area, nonPoint, presentEffects, local.testedPanelMarkers ?? [], budget, local.panelSources)
         : null;
+      const programme = !contact && !revealedControl && !comparison && panel && local.panelWalker && presentEffects?.length
+        ? selectMarkerProgram(local, presentEffects, rows, panel.area, attempted, nonPoint, budget) : undefined;
+      const programming = programme && (!markerRoute || markerRoute.target.peer
+        && gap(markerRoute.target.marker, markerRoute.target.peer) > programme.distance) ? programme : undefined;
+      const approach = programming ? null : markerRoute;
       const walk = contact ?? approach;
-      const contextualCommand = revealedControl ? revealKey : comparison ? markerAction : walk ? commandKey(walk.route[0]!.command) : null;
+      const unmeasured = !walk && !revealedControl && !comparison && !programming && local.panelArrival
+        ? named.find(key => /^ACTION[1-4]$/.test(key) && !local.panelWalker?.controls[key] && !attempted.has(key)) : undefined;
+      const terrain = !walk && !revealedControl && !comparison && !unmeasured && local.panelArrival && presentEffects
+        ? presentEffects.find(effect => effect.affected && !attempted.has(commandKey(effect.command))
+          && !local.panelPrograms?.some(program => commandKey(program.selector.command) === commandKey(effect.command))
+          && !local.testedPanelTerrain?.includes(terrainTestKey(rows, effect))) : undefined;
+      const contextualCommand = revealedControl ? revealKey : comparison ? markerAction
+        : walk ? commandKey(walk.route[0]!.command) : programming ? commandKey(programming.program.selector.command)
+          : unmeasured ?? (terrain ? commandKey(terrain.command) : null);
       const frontier = contextualCommand ? { action: contextualCommand, probe: contextualCommand, depth: walk?.route.length ?? 0, first: null }
         : probe ? { action: probe, probe, depth: 0, first: null }
         : measuredControls ?? preferred ?? workspaceProbe ?? panelProbe ?? directionalProbe
@@ -326,7 +411,10 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(approach ? [approach.target.control.evidence, ...approach.evidence] : []), ...(comparison ? [comparison.control.evidence] : []),
         ...(contact ? [local.panelArrival!, ...contact.evidence] : []),
         ...(revealedControl ? [revealedControl.before, revealedControl.observation] : []),
-        ...(retestedControl ? [retestedControl.evidence] : [])];
+        ...(retestedControl ? [retestedControl.evidence] : []), ...(terrain && !programming ? [terrain.evidence] : []),
+        ...(approach?.target.link ? [approach.target.link] : []), ...(comparison?.link ? [comparison.link] : []),
+        ...(programming ? [programming.program.evidence, programming.program.source.evidence] : []),
+        ...(unmeasured ? [local.panelArrival!] : [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
         clickedControl: { value: !!probe, evidence: proof },
         changedControlContext: { value: !!measuredControls, evidence: proof },
@@ -351,6 +439,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const strategy = decision ? (routeSupported ? 'P07' : 'P05') : selected.id;
       const label = contact ? 'Explore the new landing and test contact with an object at the edge of the known floor'
         : revealedControl ? (retestedControl ? 'Retest the command after the animated piece changes' : 'Test the panel command that appeared after contact')
+        : programming ? 'Test a selector that gave the source marker the same pattern as a new destination'
+        : unmeasured ? 'Measure an available direction at the new landing before changing the terrain'
+        : terrain ? 'Test the terrain control from a newly observed configuration'
         : approach ? 'Follow the measured terrain to test a panel control from a matching marker'
         : comparison ? 'Test the same panel control while the moving piece covers the matching marker'
         : decision
@@ -380,7 +471,8 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: { ...facts, stage: contact ? 'test_contact_after_landing' : revealedControl ? 'test_revealed_control'
-            : approach ? 'approach_marker' : comparison ? 'compare_on_marker' : 'recheck' } } } : {}),
+            : programming ? 'test_marker_selector' : unmeasured ? 'calibrate_at_landing' : terrain ? 'test_terrain_configuration'
+              : approach ? 'approach_marker' : comparison ? 'compare_on_marker' : 'recheck' } } } : {}),
         sicSituationCard: { strategy, need: 'Learn how to act on the current board', mode,
           situation: !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
@@ -393,6 +485,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
           ...(contact || revealedControl ? { contact: contact?.target.box ?? revealedControl!.contact } : {}),
           ...(revealedControl && retestedControl ? { animatedMechanism: retestedControl.region,
             animatedMechanismFrames: retestedControl.frames } : {}),
+          ...(terrain && !programming ? { affectedSupport: terrain.affected } : {}),
+          ...(programming ? { marker: programming.program.source.marker, projectedPeer: programming.peer }
+            : approach?.target.peer || comparison?.peer ? { projectedPeer: (approach?.target ?? comparison)!.peer } : {}),
           ...(controlledPiece ? { lastControlledMotion: controlledPiece } : {}) },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${completion}`] }],
         question: { reason: label, hypothesis_refs: proof }, route_refs: proof,
@@ -481,6 +576,12 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         state.lastPanelContext = destination;
         state.lastPanelInputWasClick = command.action_ref === 'ACTION6';
         if (panel) retainPanelEffect(state, panel, command, rows, afterRows, after.observation_ref);
+        const effect = state.panelArrival && command.action_ref === 'ACTION6'
+          ? state.panelEffects?.find(item => item.affected && commandKey(item.command) === action) : undefined;
+        if (effect) {
+          state.testedPanelTerrain = [...new Set([...(state.testedPanelTerrain ?? []), terrainTestKey(rows, effect)])];
+          retainMarkerPrograms(state, effect, rows, afterRows, after.observation_ref);
+        }
       }
       if (proposal.panelTest) {
         state.panelTests = [...new Set([...(state.panelTests ?? []), proposal.panelTest])];
@@ -533,7 +634,15 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         }
         if (proposal.panelComparison) {
           const displaced = !!actor && !sameBox(actor, trial.marker);
-          if (displaced) state.panelArrival = after.observation_ref;
+          if (displaced) {
+            state.panelArrival = after.observation_ref;
+            const sources = state.panelSources ??= [];
+            if (!sources.some(source => source.command === action && sameBox(source.marker, trial.marker))) {
+              sources.push({ marker: trial.marker, command: action, evidence: after.observation_ref });
+            }
+            const destinations = state.panelDestinations ??= [];
+            if (!destinations.some(destination => sameBox(destination, actor))) destinations.push(actor);
+          }
           events.push({ kind: 'sic_panel_control_marker_return', command: action,
             marker: trial.marker, control: trial.control.box, destination: actor ?? null, displaced,
             evidence: [trial.control.evidence, before.observation_ref, after.observation_ref] });
@@ -546,18 +655,27 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         const reached = followed && sameBox(actor, target.box);
         if (!followed || reached) state.testedPanelContacts = [...new Set([...(state.testedPanelContacts ?? []), target.key])];
         if (followed && after.available_action_refs.includes('ACTION6')) {
-          const button = newlyVisibleControl(panel, afterRows);
-          if (button) {
-            state.revealedPanelControl = { command: panelPoint(button), box: button.bbox, contact: actor,
-              before: before.observation_ref, observation: after.observation_ref };
-            events.push({ kind: 'sic_panel_contact_revealed_control', contact: actor, control: button.bbox,
+          const buttons = newlyVisibleControls(panel, afterRows);
+          if (buttons.length) {
+            const controls = state.revealedPanelControls ??= [];
+            for (const button of buttons) {
+              const command = panelPoint(button);
+              if (!controls.some(item => commandKey(item.command) === commandKey(command) && item.ink === button.color)) {
+                controls.push({ command, box: button.bbox, contact: actor, ink: button.color,
+                  before: before.observation_ref, observation: after.observation_ref });
+              }
+            }
+            events.push({ kind: 'sic_panel_contact_revealed_controls', contact: actor, controls: buttons.map(button => button.bbox),
               evidence: [before.observation_ref, after.observation_ref] });
-            reviewEvidence = 'Contact with the object revealed a new panel command.';
+            reviewEvidence = buttons.length === 1 ? 'Contact with the object revealed a new panel command.'
+              : `Contact with the object revealed ${buttons.length} new panel commands.`;
           }
         }
       }
       if (proposal.revealedControl) {
         delete state.revealedPanelControl;
+        if (state.revealedPanelControls) state.revealedPanelControls = state.revealedPanelControls.filter(item =>
+          commandKey(item.command) !== action || item.ink !== proposal.revealedControl!.ink);
         if (proposal.panel) {
           const changed = changedWithin(rows, afterRows, proposal.panel.area) || changedWithin(rows, afterRows, proposal.panel.panel);
           const animation = !changed ? measureReturningAnimation(rows, afterRows, frames, proposal.panel.area) : undefined;
