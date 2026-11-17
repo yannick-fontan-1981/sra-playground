@@ -97,12 +97,13 @@ export function createSicWindowCoverage(family = windowCoverageId): NativeFamily
       if (prior?.stopped || (prior?.tried.length ?? 0) >= 18) return null;
       if (learns && !prior && !execution?.readPriorDirectionalScene) return null;
       const measurement = captureSettings(rows);
-      if (!measurement || measurement.boxes.length > 5 || measurement.word.length > 20) return null;
+      if (!measurement || measurement.word.length > 20) return null;
+      const linked = measurement.boxes.some(box => box.signal_marker);
+      if (!linked && measurement.boxes.length > 5) return null;
       const directionalReturn = learns && !prior ? execution?.readPriorDirectionalScene?.(captureSettings) : null;
       const acquired = directionalReturn?.afterRef === ref && directionalReturn.levelEpoch === observation.level_epoch
         ? acquiredCapacity(directionalReturn.scene, measurement, directionalReturn.command) : null;
       if (learns && !prior && !acquired) return null;
-      const linked = measurement.boxes.some(box => box.signal_marker);
       const rail = linked ? measureLinkedWindows(rows, measurement.boxes) : null;
       if (linked && !rail) return null;
       const paint = measurement.boxes.map(box => box.second_field !== null);
