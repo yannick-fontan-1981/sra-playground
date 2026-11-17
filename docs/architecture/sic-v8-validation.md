@@ -1279,3 +1279,9 @@ La table donne le coin supérieur gauche du support en pixels. Les ouvertures so
 Les deux traversées sont ensuite confirmées sur le jeu. Le curseur rejoint l’îlot central en 12 mouvements après l’ouverture du passage, y reste pendant les neuf déplacements du support et rejoint le palier supérieur en neuf mouvements. La dérivation du rail, le placement du support et le choix de l’ouverture ont été testés hors du solveur autonome.
 
 Le rejeu de régression de `161c7c9e` s’arrête à la victoire du niveau 4 pour chacun des 100 jeux. Les 400 niveaux sont gagnés sous autorité SIC seule. Les commandes, observations et animations concordent pour 98 parcours. SELE et TRIA gagnent chacun avec six commandes de plus.
+
+#### Dérivation utilisée pendant la résolution autonome
+
+Le planificateur de supports confirme la prise quand le support et la pince se déplacent ensemble et que le curseur reste sur place. Il compare les translations et les butées aux pixels du rail visibles. La projection complète est utilisable quand une seule disposition reste compatible. Le plan joint les déplacements du curseur, les poses du support et les changements de terrain observés après les clics sur le panneau.
+
+Lors d’un rejeu complet, les 187 premières commandes et leurs retours concordent avec `26cb728e`. Au niveau 5, SIC utilise le téléporteur à la **65e commande** après avoir traversé les deux passages. Il atteint le marqueur qui révèle une nouvelle commande à la **93e**, puis l’essaie à la **94e** et observe un changement de terrain en aval. Les 366 commandes du rejeu relèvent de SIC seul. Le niveau 5 reste à gagner. Le contrôle TypeScript et les 48 tests ciblés passent.

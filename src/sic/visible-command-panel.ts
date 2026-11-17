@@ -3,7 +3,7 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Component = ReturnType<typeof geometricComponents>[number];
-export type VisibleCommandPanel = { area: NativeBox; panel: NativeBox; buttons: Component[] };
+export type VisibleCommandPanel = { area: NativeBox; panel: NativeBox; buttons: Component[]; aligned: Component[] };
 
 const contains = ([l, t, r, b]: NativeBox, [x, y, u, v]: NativeBox) => l <= x && u <= r && t <= y && v <= b;
 const disjoint = (a: NativeBox, b: NativeBox) => a[2] < b[0] || b[2] < a[0] || a[3] < b[1] || b[3] < a[1];
@@ -36,7 +36,7 @@ export function visibleCommandPanel(rows: NativeRows, parts = geometricComponent
   }).sort((a, b) => b.length - a.length);
   if (!aligned.length || aligned[0]!.length === aligned[1]?.length) return null;
   const buttons = [...new Set([...aligned[0]!, ...attached])];
-  return { area: field.bbox, panel: panel.bbox, buttons };
+  return { area: field.bbox, panel: panel.bbox, buttons, aligned: aligned[0]! };
 }
 
 /** Scope experiments to the observed playing surface and controls, outside status strips. */

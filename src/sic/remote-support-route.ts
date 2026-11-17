@@ -6,6 +6,7 @@ import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-
 import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
 import { measurePhasedSupport, observePhaseStep, phaseAffectedSupport, phaseFootprint, planPhasedSupport,
   type PhasedSupport, type PhaseStep } from './phased-support-route.ts';
+import { measureCarriedSupport, nextCarriedStep, observeCarriedStep, type CarriedStep, type CarriedSupport } from './carried-support-route.ts';
 
 export const remoteSupportRouteId = 'sic_remote_support_route';
 export const learnRemoteAccessId = 'sic_learn_remote_access';
@@ -44,7 +45,11 @@ type Move = { command: NativeCommand; landing: NativePoint | null; floor: number
 type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string; route?: readonly Move[] };
 type PhaseMemory = { epoch: number; scene: PhasedSupport; refs: string[]; lastRef: string; stopped: boolean };
 type PhaseProposal = NativeProposal & { phased: PhaseMemory; step: PhaseStep; needId: string };
-const isPhased = (proposal: Proposal | PhaseProposal): proposal is PhaseProposal => 'phased' in proposal;
+type CarryMemory = { epoch: number; model: CarriedSupport; refs: string[]; lastRef: string; stopped: boolean };
+type CarryProposal = NativeProposal & { carried: CarryMemory; carryStep: CarriedStep; needId: string };
+type RemoteProposal = Proposal | PhaseProposal | CarryProposal;
+const isPhased = (proposal: RemoteProposal): proposal is PhaseProposal => 'phased' in proposal;
+const isCarried = (proposal: RemoteProposal): proposal is CarryProposal => 'carried' in proposal;
 const directions = [
   ['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0],
 ] as const;
@@ -371,11 +376,46 @@ function motionTrial(rows: NativeRows, scene: Scene, inputs: readonly NativeComm
   return choices[0] ?? null;
 }
 
-export function createSicRemoteSupportRoute(family = remoteSupportRouteId): NativeFamily<Proposal | PhaseProposal> {
+export function createSicRemoteSupportRoute(family = remoteSupportRouteId): NativeFamily<RemoteProposal> {
   const learns = family === learnRemoteAccessId;
   let state: State | null = null;
   let transfer: Transfer | null = null;
   let phaseMemory: PhaseMemory | null = null;
+  let carryMemory: CarryMemory | null = null;
+  const offerCarried: NativeFamily<CarryProposal>['propose'] = async (observation, rows, inputs, remaining, execution) => {
+    const { observation_ref: ref, level_epoch: epoch } = observation;
+    if (learns || transfer?.epoch !== epoch - 1 || !transfer.portalConfirmed) return null;
+    const prior = carryMemory?.epoch === epoch ? carryMemory : null;
+    if (prior && (prior.stopped || prior.lastRef !== ref)) return null;
+    const model = prior?.model ?? measureCarriedSupport(rows, transfer);
+    const carryStep = model && nextCarriedStep(model, rows, remaining);
+    if (!model || !carryStep) return null;
+    const action = carryStep.kind === 'walk' ? inputs.find(input => input.action_ref === carryStep.direction)
+      : { action_ref: 'ACTION6', data: { x: carryStep.point[0], y: carryStep.point[1] } };
+    if (!action) return null;
+    const evidence: [string, ...string[]] = [ref, ...new Set([...transfer.evidence, ...(prior?.refs ?? [])].filter(value => value !== ref))];
+    const probing = carryStep.kind === 'grip' || 'probe' in carryStep && carryStep.probe;
+    const mode = execution?.reasoningMode ?? 'exploration', reason = carryStep.label;
+    const offer = { input: action.action_ref, expected: carryStep.expectedActor ?? carryStep.expectedTool ?? null, evidence };
+    const navigation = resolveNavigationPrimitives({ mode, evidence, probe: probing ? offer : null,
+      access: carryStep.kind === 'walk' ? offer : null, interaction: !probing && carryStep.kind !== 'walk' ? offer : null });
+    if (!navigation.selected) return null;
+    const binding = carryStep.kind === 'walk' ? null : await ObservedInputDomain.makeLocusWitness(observation, rows, carryStep.point, { reason, evidence });
+    if (carryStep.kind !== 'walk' && !binding) return null;
+    const parent = 'G_official_completion', goal = { kind: 'open_passage_with_carried_support', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['panel_controls', 'attached_support'], parentObjective: parent, satisfactionContract: 'observe_access_after_repositioning_support' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id, actions = [action];
+    return { status: 'proposed', kind: family, carried: prior ?? { epoch, model, refs: [], lastRef: ref, stopped: false }, carryStep, needId: need.id,
+      actions, binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action, expected_after: carryStep.expectedActor ?? carryStep.expectedTool ?? null, ...(binding ? { point_binding: binding } : {}) }],
+      sicSituationCard: { strategy: navigation.selected.id, need: 'Open access by placing the carried support', mode, situation: reason,
+        agenda: navigation.entries, triggerCard: navigation.card, evidence },
+      question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: reason, relations: [`contributes_to:${parent}`] }],
+      sicLocalDecision: { strategy: navigation.selected.id, objective: { id, label: navigationPrimitives[navigation.selected.id], parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: reason,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  };
   const offerPhased: NativeFamily<PhaseProposal>['propose'] = async (observation, rows, inputs, remaining, execution) => {
     const { observation_ref: ref, level_epoch: epoch } = observation;
     if (learns || transfer?.epoch !== epoch - 1 || !transfer.portalConfirmed) return null;
@@ -427,10 +467,11 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       if (learns || transfer?.epoch !== observation.level_epoch - 1) return null;
       const proposed = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposed && (isPhased(proposed) || proposed.local.scene.circuit) ? proposed : null;
+      return proposed && (isPhased(proposed) || isCarried(proposed) || proposed.local.scene.circuit) ? proposed : null;
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (carryMemory?.epoch === observation.level_epoch) return offerCarried(observation, rows, inputs, remaining, execution);
       if (phaseMemory?.epoch === observation.level_epoch) return offerPhased(observation, rows, inputs, remaining, execution);
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const recalled = transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
@@ -440,7 +481,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       const revalidated = !prior && !fresh && recalled ? measureScene(rows, recalled) : null;
       const circuit = !prior && !fresh && !revalidated && recalled ? measureCircuit(rows, recalled) : null;
       const scene = prior?.scene ?? fresh ?? revalidated ?? circuit;
-      if (!scene) return offerPhased(observation, rows, inputs, remaining, execution);
+      if (!scene) return await offerPhased(observation, rows, inputs, remaining, execution) ?? offerCarried(observation, rows, inputs, remaining, execution);
       let local: State = prior ?? { epoch: observation.level_epoch, scene, actor: null, target: null,
         effects: scene.controls.map(() => null), evidence: (revalidated || circuit) && recalled ? recalled.evidence : [], stopped: false, count: 0,
         ...((revalidated || circuit) && recalled ? { recalled } : {}) };
@@ -540,7 +581,7 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
-      if (index > 0 && !isPhased(proposal) && proposal.route) {
+      if (index > 0 && !isPhased(proposal) && !isCarried(proposal) && proposal.route) {
         const { local, move } = projectedStep(proposal, index);
         const admitted = proposal.binding?.level_epoch === observation.level_epoch && !!local.actor && !!local.target
           && atPiece(packet.frame_rows, local.actor, local.scene.pitch) && atPiece(packet.frame_rows, local.target, local.scene.pitch)
@@ -553,6 +594,14 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
     after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isCarried(proposal)) {
+        const model = proposal.carried.model;
+        const update = observeCarriedStep(model, proposal.carryStep, first, second, after.observation_ref);
+        const matched = !!update && update.blocked.length === model.blocked.length;
+        return { matched, seal_prefix: true, reason: !update ? 'carried_support_projection_contradicted'
+          : !matched ? 'route_blocked_on_observed_surface' : update.grip === 'held' && model.grip === 'pending'
+            ? 'tool_and_support_translation_confirmed' : 'carried_support_effect_observed' };
+      }
       if (isPhased(proposal)) {
         const observed = observePhaseStep(proposal.phased.scene, proposal.step, second);
         const { step } = proposal;
@@ -576,6 +625,18 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
         reason: update.stopped ? 'support_route_hypothesis_contradicted' : 'support_route_effect_observed' };
     },
     record(before, after, _command, first, second, proposal, index) {
+      if (isCarried(proposal)) {
+        const { carried, carryStep } = proposal;
+        if (after.levels_completed > before.levels_completed && transfer) {
+          transfer = { ...transfer, epoch: before.level_epoch, evidence: [before.observation_ref, after.observation_ref] };
+        }
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const update = observeCarriedStep(carried.model, carryStep, first, second, after.observation_ref);
+        carryMemory = { ...carried, model: update ?? carried.model, stopped: !update,
+          lastRef: after.observation_ref, refs: [...carried.refs.slice(-7), after.observation_ref] };
+        return { events: [], ...(update?.grip === 'held' && carried.model.grip === 'pending'
+          ? { reviewEvidence: 'The tool and attached support translated together while the cursor stayed on fixed ground.' } : {}) };
+      }
       if (isPhased(proposal)) {
         const { phased, step } = proposal;
         if (after.levels_completed > before.levels_completed && transfer) {
@@ -610,11 +671,12 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       }
       return { events: [] };
     },
-    state: () => ({ state, transfer, phaseMemory }),
+    state: () => ({ state, transfer, phaseMemory, ...(carryMemory ? { carryMemory } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       transfer = structuredClone(value.transfer as Transfer | null) ?? null;
       phaseMemory = structuredClone((value.phaseMemory ?? null) as PhaseMemory | null);
+      carryMemory = structuredClone((value.carryMemory ?? null) as CarryMemory | null);
     },
   };
 }
