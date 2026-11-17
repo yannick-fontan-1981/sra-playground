@@ -1675,3 +1675,11 @@ Le cyan, le violet et l’orange réutilisent des mélanges observés. Le violet
 Le rejeu complet gagne le niveau 5 en **54 creusements et 57,93 s** avec le réglage de huit workers. Les 191 commandes relèvent de SIC seul. Les 137 premières commandes et leurs retours reproduisent la référence `efe921a8`. La permutation de palette conserve les 191 commandes et leurs effets géométriques. Empreinte complète `90db94afaf57262abd444926464e538b5dd176c372345707033c46d1edc661bd`. TypeScript et les 291 tests SIC et recoloration exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
 
 Les rejeux qualifiés, cumulés sur les versions de la campagne, couvrent les 100 jeux jusqu’au niveau 4 et les 99 jeux qui ont un niveau 5. Le cumul est de **499 niveaux sur 636**.
+
+### TRCP niveau 6, confirmer le pigment même si le marqueur reste dominant
+
+SIC mesure une grille de 17 × 17, dix sources et sept poches. Il réutilise les quatre mélanges observés aux niveaux précédents et planifie six circuits séparés. Les mélanges orange, cyan, violet et rose sont confirmés aux creusements 4, 20, 25 et 40. Le violet alimente deux poches.
+
+Le passage du creusement 40 prend le pigment attendu. Quatre pixels deviennent roses dans chacune des sources, tandis que cinq pixels blancs restent visibles sur l'une d'elles. La confirmation mesure alors la substitution du pigment d'origine sur les pixels modifiés et vérifie le pigment dominant du nouveau passage ainsi que la stabilité des terminaux des autres circuits. Le test de régression couvre une source sans substitution et une substitution partiellement contradictoire.
+
+Le rejeu complet gagne le niveau 6 en **49 creusements sur 60 et 154,21 s** avec le réglage de huit workers. Les 240 commandes relèvent de SIC seul. Les 191 premières commandes et leurs retours reproduisent la référence `be620853`. La permutation de palette conserve les 240 commandes et leurs effets géométriques. Empreinte complète `1c53787c2212bea706f3c34761b6fe5f452a762a0daf111faede3d7930d28a55`. TypeScript et les 293 tests SIC et recoloration exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
