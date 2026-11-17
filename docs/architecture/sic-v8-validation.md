@@ -1594,3 +1594,12 @@ Le planificateur mesure un passage de deux cases entre la zone du joueur et cell
 Dans un essai séparé, la dernière caisse est déjà chargée à gauche du joueur après 99 commandes. Les positions remplies empêchent l’insertion avec ce décalage. SIC choisit un dépôt temporaire, calcule une approche par le dessus, reprend la caisse et termine en 11 commandes, avec vérification du porteur et de la caisse à chaque retour.
 
 Le rejeu complet gagne le niveau 5 en **113 commandes et 31,72 s** avec le réglage de huit workers. Les 316 commandes relèvent de SIC seul. Les 203 commandes et retours des niveaux 1 à 4 reproduisent la référence `3ad1925e`. La permutation de palette reproduit les 316 commandes et leurs effets géométriques. Empreinte complète `785fac99f96e4a4317520e5a6fab5b3b312dd8f0f78fdb6310302d2ad5187189`. Le contrôle TypeScript et les 177 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### CN04 niveau 5, vérifier un changement de géométrie avant l’assemblage
+
+SIC repère une cellule alignée sur la grille, contiguë à une seule pièce et distincte des connecteurs déjà visibles. Le premier clic transforme la pièce. Les retours successifs confirment que les autres pièces gardent leur forme et leur position. La cellule réapparaît à un nouvel emplacement jusqu’au quatrième clic. Sur la pièce modifiée, le nombre de connecteurs passe de trois à sept. À la disparition de la cellule, le modèle géométrique concorde avec l’image entière.
+
+SIC révèle ensuite les autres connecteurs et cherche un assemblage en appariant les positions des connecteurs et en vérifiant que les parties solides restent disjointes. Il contrôle les retours des parcours de translation et s’arrête sur la victoire officielle.
+
+Le rejeu complet gagne le niveau 5 en **55 commandes et 19,86 s** avec le réglage de huit workers. Les 191 commandes relèvent de SIC seul. Les 136 commandes et retours des niveaux 1 à 4 reproduisent la référence `280a62d1`. La permutation de palette reproduit les 191 commandes et leurs effets géométriques. Empreinte complète `5b825d9793a7d32646aee38390b3da8628ea3bae4122c0481c2092e1aa4cbab7`. Le contrôle TypeScript et les 178 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
