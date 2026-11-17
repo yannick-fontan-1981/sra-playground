@@ -5,6 +5,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 import { GAME_CATALOG, SOURCE_COMMIT } from '../src/games/catalog.ts';
+import { SINKING_STAR_CREDIT_HTML } from '../src/games/sinking-star/credit.ts';
 import { renderSiteHeader } from '../src/site-header.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -116,7 +117,7 @@ const page = `<!doctype html>
       ${groups.map(group => `
       <section class="gallery-section" id="${group.anchor}" aria-labelledby="${group.anchor}-title">
         <header class="gallery-section-heading"><h2 id="${group.anchor}-title">${escape(group.title)}</h2><span>${group.entries.length} ${group.entries.length === 1 ? 'game' : 'games'}</span></header>
-${group.id === 'custom_4' ? '        <p class="gallery-source-credit">Wave 4 pays tribute to <a href="https://store.steampowered.com/app/499170/Order_of_the_Sinking_Star/">Order of the Sinking Star</a>, the brilliantly inventive puzzle adventure from Jonathan Blow and the team at Thekla.</p>\n' : ''}        <div class="gallery-grid">${group.entries.map(game => card(game, group)).join('')}
+${group.id === 'custom_4' ? `        <p class="gallery-source-credit">${SINKING_STAR_CREDIT_HTML}</p>\n` : ''}        <div class="gallery-grid">${group.entries.map(game => card(game, group)).join('')}
         </div>
       </section>`).join('')}
     </main>
