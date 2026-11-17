@@ -1435,3 +1435,9 @@ Le niveau 5 est gagné en **28 clics et 8,91 s** dans le lot configuré pour hui
 SIC traite les pixels masqués par le cadre comme inconnus dans la projection du panneau, puis vérifie les masques révélés par les déplacements. Il suit la position du point de sélection pour l’écarter de la comparaison des couleurs composées. Il confirme successivement le vert et le bleu, puis utilise deux translations pour relire le panneau rouge tronqué. Le dernier quart de tour complète le magenta et les six pixels blancs qui demandent les trois couches.
 
 Le niveau 5 est gagné en **14 commandes et 6,34 s** dans le lot configuré pour huit workers. Les 60 commandes relèvent de SIC seul. Les 46 commandes et retours des niveaux 1 à 4 concordent avec `4baeadf6`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `58f0269e9d6c7c13e14262ee77314c80c6b95e1f85fdc53a277732649f27068a`.
+
+### SELE niveau 5, retrouver la cible et suivre les fils des relais
+
+SIC retrouve la cible à partir de son motif intérieur déjà observé, même quand le fil touche l’extérieur de son enveloppe. Il compare les chemins de pixels visibles pour associer les cinq contrôleurs aux relais, puis distingue un vrai changement de sélection d’un changement de couleur du fil. Deux relais sont déjà correctement orientés. Le premier est sélectionné une fois pour confirmer sa phase, le second est conservé directement. Les trois autres demandent chacun trois crans, avant le lancement à travers les cinq relais.
+
+Le niveau 5 est gagné en **14 commandes et 5,12 s** dans le lot configuré pour huit workers. Les 96 commandes relèvent de SIC seul. Les 82 commandes et retours des niveaux 1 à 4 concordent avec `9ed8bb61`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `89574335060867d64dc7a686b446b5f5a1b832286ad4147d6abfe0bcf9e8e63a`.
