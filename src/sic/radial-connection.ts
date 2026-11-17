@@ -1,7 +1,7 @@
 import { maximumCommittedActions } from './plan-step.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { assemblePorts, type PortModel } from '../logos-engine/v6-port-assembly.ts';
+import { constrainedPortAssembly, type PortModel } from '../logos-engine/v6-port-assembly.ts';
 import { measureRadialPorts, radialAssemblyModel, radialAtGeometry, rotateRadialPorts } from '../logos-engine/v6-radial-port-observation.ts';
 import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
@@ -50,12 +50,17 @@ export function createSicRadialConnection(family = radialConnectionId): NativeFa
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const scene = measureRadialPorts(rows) as Scene | null;
-      if (!scene || scene.cells.length > 16) return null;
+      if (!scene) return null;
+      // Any fixed tile can reach its final orientation in at most three quarter-turns.
+      const rotationBudget = 3 * scene.cells.length + 1;
       const prior = state?.epoch === observation.level_epoch && state.geometry === scene.geometry_ref ? state : null;
-      if (prior?.stopped || (prior?.count ?? 0) >= 32) return null;
+      if (prior?.stopped || (prior?.count ?? 0) >= rotationBudget) return null;
       const local: State = prior ?? { epoch: observation.level_epoch, geometry: scene.geometry_ref, turn: null, evidence: [], count: 0, stopped: false };
       const [model, current] = radialAssemblyModel(scene);
-      const target = assemblePorts(model as PortModel, current, null, local.turn);
+      const now = execution?.now ?? (() => performance.now());
+      const target = constrainedPortAssembly(model as PortModel, current, null, local.turn, {
+        maxVisits: 50_000, shouldStop: () => !!execution?.signal?.aborted || now() >= (execution?.deadlineMs ?? Infinity),
+      });
       const cell = target?.findIndex(([rotation]) => rotation !== 0) ?? -1;
       if (cell < 0) return null;
       const focus = scene.cells[cell]!, [x, y] = focus.point;
@@ -84,7 +89,7 @@ export function createSicRadialConnection(family = radialConnectionId): NativeFa
         for (const [index, [rotation]] of target.entries()) {
           if (index < cell || rotation === 0) continue;
           if (index !== cell) {
-            if (actions.length >= Math.min(remaining, maximumCommittedActions, 32 - local.count)) break;
+            if (actions.length >= Math.min(remaining, maximumCommittedActions, rotationBudget - local.count)) break;
             const [x, y] = scene.cells[index]!.point;
             const next = { action_ref: 'ACTION6', data: { x, y } };
             const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
