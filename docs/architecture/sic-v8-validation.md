@@ -1605,3 +1605,12 @@ Deux contacts sont reliés à des obstacles pleins. SIC vérifie séparément le
 Le deuxième acteur exploite ces ouvertures et mesure une impulsion au pas 15. Le dernier trajet dérive une entrée dans le cadre au même pas. La 41ᵉ commande du niveau confirme l’animation et la sortie dans l’autre cadre. La recherche vérifie la position des acteurs rejoués et les pixels visibles des changements attendus.
 
 G50T gagne le niveau 5 en **50 commandes et 34,64 s** dans le rejeu réglé pour huit workers. Les 203 commandes relèvent de SIC seul. Les 153 commandes et retours des niveaux 1 à 4 reproduisent la référence `b613eab1`. La permutation de palette reproduit les commandes et les effets géométriques. Empreinte complète `6416074c7e9ae53b92d7eabcfa006867e703f9cd4fee6aa610c8999c9b3576cd`. Le contrôle TypeScript et les trois tests d’enregistrement passent. La suite SIC passe 176 tests sur 177. Le test de réserve du cycle orienté échoue aussi sur la référence.
+
+
+### WA30 niveau 5, livrer par un passage étroit et changer de prise
+
+Le planificateur mesure un passage de deux cases entre la zone du joueur et celle du porteur auxiliaire. Pour chaque déplacement chargé, il vérifie que la case du joueur et celle de la caisse sont libres. Il dépose cinq caisses à l’entrée du passage et suit leurs positions jusqu’à livraison. Le porteur auxiliaire livre cinq caisses, dont une déjà près du passage à l’entrée du niveau. Le joueur reprend la caisse restante et la livre. Le réceptacle admet huit positions pour six caisses. La victoire officielle confirme le nombre nécessaire.
+
+Dans un essai séparé, la dernière caisse est déjà chargée à gauche du joueur après 99 commandes. Les positions remplies empêchent l’insertion avec ce décalage. SIC choisit un dépôt temporaire, calcule une approche par le dessus, reprend la caisse et termine en 11 commandes, avec vérification du porteur et de la caisse à chaque retour.
+
+Le rejeu complet gagne le niveau 5 en **113 commandes et 31,72 s** avec le réglage de huit workers. Les 316 commandes relèvent de SIC seul. Les 203 commandes et retours des niveaux 1 à 4 reproduisent la référence `3ad1925e`. La permutation de palette reproduit les 316 commandes et leurs effets géométriques. Empreinte complète `785fac99f96e4a4317520e5a6fab5b3b312dd8f0f78fdb6310302d2ad5187189`. Le contrôle TypeScript et les 177 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
