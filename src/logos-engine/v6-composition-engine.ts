@@ -20,6 +20,7 @@ export interface ReasoningMemoryPort {
   put(episode: string, key: string, value: any, evidence?: string, revision?: number): void;
   window(key: string): ReasoningWindow;
   trace(episode: string, kind: string, value: any): void;
+  nativeTrace?(episode: string, kind: string, value: any): void;
 }
 export interface CompositionReport extends CompositionRecord {
   src_status: 'completed';
@@ -223,7 +224,8 @@ export class NativeEngine {
   }
   persist(request: CompositionRecord, report: CompositionReport): void {
     const episode = request.episode;
-    this.memory.trace(episode, 'src_decision', report);
+    if (this.memory.nativeTrace) this.memory.nativeTrace(episode, 'src_decision', report);
+    else this.memory.trace(episode, 'src_decision', report);
     this.memory.put(episode, 'current_key', report.decision.current_key, 'measured-src-prototype', request.revision);
     if (pythonTruthy(get(report.decision, 'action'))) this.memory.put(episode, 'symbolic_last_action', report.decision.action,
       'symbolic-guard-not-real-game', increment(request.revision));

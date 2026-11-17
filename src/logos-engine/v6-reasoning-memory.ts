@@ -122,19 +122,20 @@ export class NativeReasoningMemory {
   }
   trace(episode: string, kind: string, value: any): void {
     this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;
-    const input = { id, episode, kind, body: copy(value), created: this.clock() };
+    this.traces.push(freezeOwned({ id, episode, kind, body: copy(value), created: this.clock() }));
+    this.traceVersions.set(id, ++this.nativeRevision);
+  }
+  /** Native persistence consumes explicit JSON, whose unchanged evidence can
+   * be shared before the source clone boundary. The public trace API above
+   * retains its complete structured-clone behavior, including object aliases. */
+  nativeTrace(episode: string, kind: string, value: any): void {
+    this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;
     const stream = JSON.stringify([episode, kind]);
-    let record: ReasoningTrace;
-    try {
-      record = retainNativeJson(input, this.traceComparisons.get(stream));
-      this.traceComparisons.delete(stream); this.traceComparisons.set(stream, record);
-      if (this.traceComparisons.size > 64) this.traceComparisons.delete(this.traceComparisons.keys().next().value!);
-    } catch (error) {
-      // The source trace API also admits structured-clone values outside JSON
-      // (including cycles). Preserve that API; only validated JSON is shared.
-      if (!(error instanceof TypeError)) throw error;
-      record = freezeOwned(input);
-    }
+    const previous = this.traceComparisons.get(stream);
+    const body = retainNativeJson(value, previous?.body);
+    const record = retainNativeJson({ id, episode, kind, body, created: this.clock() }, previous);
+    this.traceComparisons.delete(stream); this.traceComparisons.set(stream, record);
+    if (this.traceComparisons.size > 64) this.traceComparisons.delete(this.traceComparisons.keys().next().value!);
     this.traces.push(record);
     this.traceVersions.set(id, ++this.nativeRevision);
   }
