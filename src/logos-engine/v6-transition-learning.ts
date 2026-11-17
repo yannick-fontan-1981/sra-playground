@@ -83,6 +83,12 @@ function same(a: any, b: any): boolean {
   return keys.length === Object.keys(b).length && keys.every(key => has(b, key) && same(a[key], b[key]));
 }
 
+/** Reject different actions and contexts before traversing a measured scene. */
+function sameRetainedConditions(a: TransitionRecord | undefined, b: TransitionRecord | undefined): boolean {
+  return a === b || same(a?.action, b?.action)
+    && same(a?.observed_features?.metadata, b?.observed_features?.metadata) && same(a, b);
+}
+
 export function checkNeutralTransition(before: TransitionObservation, after: TransitionObservation, action: TransitionAction): void {
   for (const value of [before, after, action]) {
     const forbidden = Object.keys(value).filter(key => FORBIDDEN_TRANSITION_FIELDS.has(key));
@@ -338,7 +344,7 @@ export async function constructEmpiricalRule(before: TransitionObservation, afte
   return constructRule(before, after, action, await evidence(before, after, action));
 }
 async function constructRule(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
-  observed: Evidence, projectPairs?: () => PairProjection): Promise<TransitionRecord> {
+  observed: Evidence, projectPairs?: () => PairProjection, retained = false): Promise<TransitionRecord> {
   const [pairs, unresolved] = await (projectPairs?.() ?? matching(before, after));
   const rigid: { a: TransitionRecord; b: TransitionRecord; delta: Point }[] = [];
   for (const [a, b] of pairs) {
@@ -364,7 +370,8 @@ async function constructRule(before: TransitionObservation, after: TransitionObs
       mode: conditions.observable_mode, exact_support_measured: rigid.every(({ a, b }) => support(a) !== null && support(b) !== null),
       unmodeled_before_entities: before.entities.length - rigid.length, unresolved_correspondences: unresolved.length };
   } else {
-    conditions = literalConditions(before, action); effect = literalEffect(before, after); kind = 'observed_transition'; status = 'empirical_transition_candidate';
+    conditions = literalConditions(before, action, !retained || !deeplyFrozen(before));
+    effect = literalEffect(before, after); kind = 'observed_transition'; status = 'empirical_transition_candidate';
     if (!same(applyLiteralEffect(observedStateView(before), effect), observedStateView(after))) throw new TypeError('Observed transition delta does not reproduce supplied evidence');
     scope = { kind: 'literal_observed_features_only', generalized_mechanism_construction: 'not_implemented_for_this_effect', predictive_acquisition: 'forbidden_for_transition_replay' };
   }
@@ -441,24 +448,28 @@ interface SharedRuleEvidence {
 async function validateRule(rule: TransitionRecord, before: TransitionObservation, after: TransitionObservation,
   action: TransitionAction, retained: boolean, shared?: SharedRuleEvidence): Promise<TransitionRecord> {
   if (!shared) checkNeutralTransition(before, after, action);
-  const updated = retained ? { ...rule } : copy(rule);
+  const detached = () => retained ? { ...rule } : copy(rule);
+  const statusOnly = (status: string) => {
+    const last_validation = { status };
+    return retained && same(rule.last_validation, last_validation) ? rule : { ...detached(), last_validation };
+  };
   const observed = shared ? { ...shared.observed } : await evidence(before, after, action);
   const seen = new Set([...rule.validation_evidence, ...rule.counterexamples].map(item => item.transition_ref));
-  if (seen.has(observed.transition_ref)) { updated.last_validation = { status: 'duplicate_evidence_not_independent' }; return updated; }
+  if (seen.has(observed.transition_ref)) return statusOnly('duplicate_evidence_not_independent');
   let confirmed: boolean, changed: boolean;
   if (rule.rule_family === 'translation_relation') {
     const projected = shared ? await shared.projectRule(rule) : undefined;
     const prediction = projected?.prediction ?? await predictCandidateRule(rule, before, action);
-    if (prediction.status !== 'conditional_prediction') { updated.last_validation = { status: prediction.status }; return updated; }
+    if (prediction.status !== 'conditional_prediction') return statusOnly(prediction.status);
     confirmed = projected?.matches() ?? predictionMatches(prediction, after); observed.position_context = prediction.position_context;
     observed.frozen_rule_digest = prediction.rule_digest; observed.prediction_digest = await digest(prediction.predicted_entities);
     changed = rule.validation_evidence.every((item: Evidence) => !same(item.position_context, prediction.position_context));
   } else {
-    if (!same(rule.conditions, shared?.literalConditions() ?? literalConditions(before, action, false))) {
-      updated.last_validation = { status: 'not_applicable' }; return updated;
-    }
+    const compare = retained ? sameRetainedConditions : same;
+    if (!compare(rule.conditions, shared?.literalConditions() ?? literalConditions(before, action, false))) return statusOnly('not_applicable');
     confirmed = same(applyLiteralEffect(observedStateView(before), rule.effect), observedStateView(after)); changed = false;
   }
+  const updated = detached();
   if (!confirmed) {
     const featureDigest = await (shared?.observedFeatureDigest() ?? digest(observedStateView(after)));
     updated.counterexamples = [...updated.counterexamples, { ...observed, observed_feature_digest: featureDigest }];
@@ -495,7 +506,7 @@ async function assessTransitionState(before: TransitionObservation, after: Trans
   checkNeutralTransition(before, after, action);
   const observed = await evidence(before, after, action);
   let literal: TransitionRecord | undefined, featureDigest: Promise<string> | undefined, pairs: PairProjection | undefined;
-  const retainedRules = retained ? priorRules.map(rule => retainNativeJson(rule)) : priorRules;
+  const retainedRules = retained ? retainNativeJson(priorRules) : priorRules;
   const projections = new Map<TransitionRecord, ReturnType<ProjectRule>>();
   const releasedBinding = checkPredictions && released ? releasedProjections.get(released) : undefined;
   const priorProjections = releasedBinding?.observation === before && equal(releasedBinding.command, action)
@@ -528,10 +539,11 @@ async function assessTransitionState(before: TransitionObservation, after: Trans
   for (const [index, rule] of retainedRules.entries()) {
     updated.set(rule.rule_id, predictionChecks[index] ?? await validate(rule));
   }
-  const candidate = retained ? await constructRule(before, after, action, { ...observed }, projectPairs)
+  const candidate = retained ? await constructRule(before, after, action, { ...observed }, projectPairs, true)
     : await constructEmpiricalRule(before, after, action);
   if (!updated.has(candidate.rule_id)) {
-    const contradictory = retainedRules.filter(rule => same(rule.conditions, candidate.conditions) && !same(rule.effect, candidate.effect));
+    const compare = retained ? sameRetainedConditions : same;
+    const contradictory = retainedRules.filter(rule => compare(rule.conditions, candidate.conditions) && !same(rule.effect, candidate.effect));
     if (contradictory.length) {
       candidate.counterexamples = contradictory.flatMap(rule => rule.validation_evidence.map((item: Evidence) => ({ ...copy(item), reason: 'contrary_observed_effect_under_same_conditions' })));
       candidate.status = 'refuted'; candidate.predictive_use_allowed = false; candidate.uncertainty.push('additional_observable_condition_or_nondeterministic_model_required');
