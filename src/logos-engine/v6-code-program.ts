@@ -1,12 +1,13 @@
 /** Complete native transfer of V6 common_code_program.py at 786dcf51ca57773d8e3a8948ce9ea3655e7baf8e. */
 import { geometricComponents, projection, rowsDigest, v6Digest } from './v6-native-observer.ts';
 import type { ObservedInputDomain } from './v6-native-observer.ts';
-import type { NativePoint, NativePublicObservation, NativeRows } from './v6-native-types.ts';
+import type { NativeBox, NativePoint, NativePublicObservation, NativeRows } from './v6-native-types.ts';
 export type CodeRecord = Record<string, any>;
 export interface CodeCommand extends CodeRecord { action_ref: string; data?: Record<string, number> }
 export interface CodeObservation extends CodeRecord { entities: readonly CodeRecord[]; level_epoch: number; levels_completed: number; observation_ref: string; frame_hash: string; state: string }
 /** Arbitrary Python code words stay exact beyond the JSON safe-integer domain. */
 export type CodeWord = number | { readonly $v6_integer: string };
+export type CodePoseGoal = { at: NativePoint; scale: number; hue: number; rotation: number; notch: NativePoint[]; box: NativeBox };
 export const CODE_DIRECTIONS: readonly NativePoint[] = [[0, -1], [1, 0], [0, 1], [-1, 0]];
 const keyOf = (value: unknown): string => JSON.stringify(value);
 const pointKey = (value: NativePoint): string => keyOf(value);
@@ -48,7 +49,74 @@ export function normalizeCodeMask(mask: readonly NativePoint[], scale: number): 
     ? [...blocks.values()].map(block => block.point).sort(comparePoint) : null;
 }
 
-export function measureCodeScene(observation: CodeObservation, rows: NativeRows, inputs: readonly CodeCommand[], allowScaled = false): CodeRecord | null {
+export function rotatedCodeMask(mask: readonly NativePoint[], size: number, turns: number): readonly NativePoint[] {
+  let rotated = mask;
+  for (let turn = 0; turn < turns; turn++) rotated = rotated.map(([x, y]): NativePoint => [size - 1 - y, x]);
+  return rotated;
+}
+
+export function codeMaskRotation(base: readonly NativePoint[], mask: readonly NativePoint[], size: number): number | null {
+  const wanted = maskKey(mask);
+  const matches = [0, 1, 2, 3].filter(turn => maskKey(rotatedCodeMask(base, size, turn)) === wanted);
+  return matches.length === 1 ? matches[0]! : null;
+}
+
+function measureReceptacle(rows: NativeRows, parts: readonly CodeRecord[], board: {
+  x0: number; y0: number; size: number; width: number; height: number; floor: ReadonlySet<number>;
+  mask: NativePoint[]; actor: CodeRecord;
+}): CodePoseGoal | null {
+  const { x0, y0, size, width, height, floor, mask, actor } = board;
+  const candidates: CodePoseGoal[] = [];
+  for (const part of parts) {
+    const hue = part.palette_value;
+    if (part === actor || floor.has(hue) || part.rectangular) continue;
+    const [l, t, r, b] = part.bbox as NativeBox;
+    const w = r - l + 1, h = b - t + 1, rim = Math.abs(w - h), inside = Math.min(w, h) - rim;
+    const scale = inside / size;
+    if (!rim || !Number.isInteger(scale) || scale < 1 || l < x0 || t < y0 || r >= x0 + width * size || b >= y0 + height * size) continue;
+    const origins: NativePoint[] = w > h ? [[l + rim, t], [l + rim, t + rim]] : [[l, t + rim], [l + rim, t + rim]];
+    for (const [x, y] of origins) {
+      if ((x - x0) % size || (y - y0) % size) continue;
+      const visible: NativePoint[] = [], notch: NativePoint[] = [];
+      let complete = true;
+      for (let row = t; complete && row <= b; row++) for (let col = l; col <= r; col++) {
+        const ink = rows[row]![col]!;
+        const interior = col >= x && col < x + inside && row >= y && row < y + inside;
+        if (interior && floor.has(ink)) visible.push([col - x, row - y]);
+        else if (interior && ink === hue) notch.push([col - x, row - y]);
+        else if (interior || ink !== hue) { complete = false; break; }
+      }
+      if (!complete || !notch.length) continue;
+      const normalized = normalizeCodeMask(visible, scale);
+      const rotation = normalized && codeMaskRotation(mask, normalized, size);
+      if (rotation == null) continue;
+      candidates.push({ at: [(x - x0) / size, (y - y0) / size], scale, hue, rotation, notch, box: [l, t, r, b] });
+    }
+  }
+  return candidates.length === 1 ? candidates[0]! : null;
+}
+
+function repeatedExampleFrames(parts: readonly CodeRecord[], below: number, size: number): CodeRecord[] {
+  const strips = new Map<string, { entity: CodeRecord; complete: boolean }[]>();
+  for (const part of parts) {
+    const [l, t, r, b] = part.bbox as NativeBox, side = r - l + 1;
+    if (t <= below || side !== b - t + 1 || side <= size || side > size * 3) continue;
+    const edge = (part.mask as NativePoint[]).filter(([x, y]) => x === 0 || y === 0 || x === side - 1 || y === side - 1);
+    if (edge.length < 3 * (side - 1)) continue;
+    const signature = keyOf([t, side, part.palette_value]), strip = strips.get(signature) ?? [];
+    strip.push({ entity: part, complete: edge.length === 4 * (side - 1) });
+    strips.set(signature, strip);
+  }
+  const regular = [...strips.values()].filter(strip => {
+    if (strip.length < 3 || strip.filter(frame => frame.complete).length * 2 <= strip.length) return false;
+    strip.sort((a, b) => a.entity.bbox[0] - b.entity.bbox[0]);
+    return new Set(strip.slice(1).map((part, i) => part.entity.bbox[0] - strip[i]!.entity.bbox[0])).size === 1;
+  });
+  return regular.length === 1 ? regular[0]!.map(frame => frame.entity) : [];
+}
+
+export function measureCodeScene(observation: CodeObservation, rows: NativeRows, inputs: readonly CodeCommand[], allowScaled = false,
+  allowReceptacle = false): CodeRecord | null {
   const parts = observation.entities, tiles = new Map<number, CodeRecord[]>();
   for (const entity of parts) { const [x, y, right, bottom] = entity.bbox; if (entity.rectangular && right - x === bottom - y && right > x) {
     const size = right - x + 1; if (!tiles.has(size)) tiles.set(size, []); tiles.get(size)!.push(entity); } }
@@ -92,10 +160,12 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
             if (rim.flat().filter(value => value === entity.palette_value).length >= size) targets.set(pointKey([cx, cy]), [cx, cy]);
           }
         }
-        if (targets.size !== 1) continue;
+        const goalPose = targets.size === 0 && allowReceptacle
+          ? measureReceptacle(rows, parts, { x0, y0, size, width, height, floor: hues, mask: normalized, actor: entity }) : null;
+        if (targets.size !== 1 && !goalPose) continue;
         boards.push({ origin: [x0, y0], size, shape: [width, height], floor: [...hues].sort((a, b) => a - b), hue: entity.palette_value,
-          mask: normalized, goal: [...targets.values()][0], start: [Math.floor((x - x0) / size), Math.floor((y - y0) / size)],
-          ...(scale > 1 ? { scaled: true } : {}) });
+          mask: normalized, goal: goalPose?.at ?? [...targets.values()][0], start: [Math.floor((x - x0) / size), Math.floor((y - y0) / size)],
+          ...(scale > 1 || goalPose ? { scaled: true } : {}), ...(goalPose ? { goalPose } : {}) });
       }
     }
   }
@@ -154,17 +224,27 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
     const stage = board.scaled && right < x0 ? [0, 0, x0 - 1, stageBottom]
       : board.scaled && left >= boardRight ? [boardRight, 0, rows[0]!.length - 1, stageBottom]
       : [left - size, 0, right + size, stageBottom];
-    for (const entity of parts) {
-      const box = entity.bbox; if (entity.palette_value !== board.hue || box[1] <= demoBottom || Math.max(box[2] - box[0] + 1, box[3] - box[1] + 1) >= size) continue;
+    const frames = board.goalPose ? repeatedExampleFrames(parts, demoBottom, size) : [];
+    const trials = frames.length ? frames : parts.filter(entity => {
+      const [l, t, r, b] = entity.bbox;
+      return entity.palette_value === board.hue && t > demoBottom && Math.max(r - l + 1, b - t + 1) < size;
+    });
+    for (const entity of trials) {
+      const box = entity.bbox;
       const command = codeInputAt(inputs, box); if (command) examples.push({ command, box, columns: group.columns.map(column => column.boxes), stage });
     }
   }
   Object.assign(board, { columns: columns.map(column => column.boxes), bit_commands: bindings, values: [...values].sort((a, b) => a - b), execute: button.command,
     button_box: button.entity.bbox, button_hue: button.entity.palette_value, examples });
   const allowed = new Map<string, NativePoint>();
+  const goalPose = board.goalPose as CodePoseGoal | undefined;
   for (let cy = 0; cy < height; cy++) for (let cx = 0; cx < width; cx++) {
     const cut = projection(rows, [x0 + cx * size, y0 + cy * size, x0 + (cx + 1) * size - 1, y0 + (cy + 1) * size - 1]);
-    if (cut.flat().every(value => board.floor.includes(value) || value === board.hue)) allowed.set(pointKey([cx, cy]), [cx, cy]);
+    const insideReceptacle = goalPose && cx >= goalPose.at[0] && cx < goalPose.at[0] + goalPose.scale
+      && cy >= goalPose.at[1] && cy < goalPose.at[1] + goalPose.scale;
+    if (cut.flat().every(value => board.floor.includes(value) || value === board.hue || insideReceptacle && value === goalPose.hue)) {
+      allowed.set(pointKey([cx, cy]), [cx, cy]);
+    }
   }
   allowed.set(pointKey(board.start), board.start); allowed.set(pointKey(board.goal), board.goal); board.allowed = [...allowed.values()].sort(comparePoint); return board;
 }

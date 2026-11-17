@@ -1,17 +1,34 @@
-import { CODE_DIRECTIONS, codeBits, decodeCodeWord, normalizeCodeMask } from '../logos-engine/v6-code-program.ts';
+import { CODE_DIRECTIONS, codeBits, codeMaskRotation, decodeCodeWord, normalizeCodeMask } from '../logos-engine/v6-code-program.ts';
 import { geometricComponents, projection } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeObservation, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 export type CodeExample = { readonly command: NativeCommand; readonly box: NativeBox;
   readonly columns: readonly (readonly NativeBox[])[]; readonly stage: NativeBox };
 type DemonstrationBoard = { readonly size: number; readonly mask: readonly NativePoint[]; readonly button_hue: number;
-  readonly values: readonly number[]; readonly scaled?: boolean };
-type Pose = { readonly point: NativePoint; readonly mask: string; readonly scale: number };
+  readonly values: readonly number[]; readonly scaled?: boolean; readonly goalPose?: object };
+type Appearance = { readonly scale: number; readonly hue?: number; readonly rotation?: number };
+type Pose = Appearance & { readonly point: NativePoint; readonly mask: string };
+export type CodeInstructionEffect = { motion: NativePoint; resize?: number; fromScale?: number; turn?: number;
+  fromRotation?: number; hue?: number };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
 const contains = ([l, t, r, b]: NativeBox, [x, y, u, v]: NativeBox) => x >= l && y >= t && u <= r && v <= b;
 const maskKey = (points: readonly NativePoint[]) => points.map(point => point.join(',')).sort().join(';');
+
+export function codeInstructionEffect(motion: NativePoint, before: Appearance, after: Appearance, scaled: boolean): CodeInstructionEffect | null {
+  const resize = after.scale - before.scale, anchored = motion.every(value => value === 0);
+  const appearance = before.rotation !== undefined && after.rotation !== undefined && before.hue !== undefined && after.hue !== undefined;
+  const rotated = appearance && before.rotation !== after.rotation, recolored = appearance && before.hue !== after.hue;
+  if (rotated || recolored) {
+    if (!anchored || resize || rotated && recolored) return null;
+    return rotated ? { motion, turn: (after.rotation! - before.rotation! + 4) % 4, fromRotation: before.rotation! }
+      : { motion, hue: after.hue! };
+  }
+  const translated = resize === 0 && CODE_DIRECTIONS.some(([x, y]) => motion[0] === x && motion[1] === y);
+  if (!translated && !(resize !== 0 && anchored)) return null;
+  return { motion, ...(scaled ? { resize, fromScale: before.scale } : {}) };
+}
 
 function rotationKey(points: readonly NativePoint[], side: number) {
   let pose = points;
@@ -46,8 +63,11 @@ export function readDemonstration(board: DemonstrationBoard, example: CodeExampl
       if (!contains(example.stage, part.bbox) || height(part.bbox) !== side || (!board.scaled && scale !== 1)
         || part.area !== mask.length * scale ** 2) return [];
       const normalized = normalizeCodeMask(part.mask, scale);
-      return normalized && rotationKey(normalized, size) === silhouette
-        ? [{ point: [part.bbox[0], part.bbox[1]] as NativePoint, mask: maskKey(normalized), scale }] : [];
+      if (!normalized || rotationKey(normalized, size) !== silhouette) return [];
+      const rotation = board.goalPose ? codeMaskRotation(mask, normalized, size) : null;
+      if (board.goalPose && rotation == null) return [];
+      return [{ point: [part.bbox[0], part.bbox[1]] as NativePoint, mask: maskKey(normalized), scale,
+        ...(rotation == null ? {} : { rotation, hue: part.color }) }];
     });
     if (objects.length !== 1) continue;
     const pose = objects[0]!;
@@ -67,12 +87,9 @@ export function readDemonstration(board: DemonstrationBoard, example: CodeExampl
   }
   return [...observed].flatMap(([index, after]) => {
     const before = index ? observed.get(index - 1) : examplePose;
-    if (!before || before.mask !== after.mask) return [];
+    if (!before || !board.goalPose && before.mask !== after.mask) return [];
     const motion: NativePoint = [(after.point[0] - before.point[0]) / size, (after.point[1] - before.point[1]) / size];
-    const resize = after.scale - before.scale;
-    const translated = resize === 0 && CODE_DIRECTIONS.some(([x, y]) => motion[0] === x && motion[1] === y);
-    const resized = resize !== 0 && motion.every(value => value === 0);
-    return translated || resized ? [{ word: after.word, motion,
-      ...(board.scaled ? { resize, fromScale: before.scale } : {}) }] : [];
+    const effect = codeInstructionEffect(motion, before, after, board.scaled ?? false);
+    return effect ? [{ word: after.word, ...effect }] : [];
   });
 }
