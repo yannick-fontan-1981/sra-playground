@@ -20,7 +20,7 @@ const graph = compileStrategyGraph({ id: 'route_by_visible_links_and_prerequisit
 }, ['prerequisite', 'destination']);
 const directions = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] } as const;
 type Local = { chart: MeasuredChart; positions: ChartPoint[]; open: string[]; visited: string[]; attempts: string[];
-  evidence: string[]; frame: string; startFrame?: string; chartFrame?: string };
+  evidence: string[]; frame: string; startFrame?: string; chartFrame?: string; chartRooms?: string[] };
 type Proposal = NativeProposal & { local: Local; edges: ChartEdge[]; attempt: string; needId: string };
 const same = (a: ChartPoint, b: ChartPoint) => a[0] === b[0] && a[1] === b[1];
 
@@ -59,7 +59,15 @@ function alignFragment(local: Local, next: MeasuredChart, positions: ChartPoint[
   const open = shared.filter(link => local.open.includes(link.previous)).map(link => link.current);
   const visited = chart.nodes.filter(node => local.visited.includes(chartPointKey(node.center)))
     .map(node => chartPointKey(transform(node.center))).filter(key => nodeKeys.has(key));
-  return { ...local, chart: { ...next, evidence: chart.evidence }, positions: [next.current], open, visited };
+  const previousRooms = chart.nodes.filter(node => local.chartRooms?.includes(chartPointKey(node.center)))
+    .map(node => chartPointKey(transform(node.center))).filter(key => nodeKeys.has(key));
+  const chartRooms = [...new Set([...previousRooms, chartPointKey(next.current)])];
+  const sameSlot = (a: typeof next.slots[number], b: typeof next.slots[number]) =>
+    a.bbox.every((value, index) => value === b.bbox[index]) && a.edge === b.edge;
+  const sameInventory = next.slot_background === chart.slot_background
+    && next.slots.every(slot => chart.slots.some(previous => sameSlot(previous, slot)));
+  const slots = sameInventory ? chart.slots : next.slots;
+  return { ...local, chart: { ...next, slots, evidence: chart.evidence }, positions: [next.current], open, visited, chartRooms };
 }
 
 export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposal> {
@@ -84,8 +92,9 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
         evidence: [observation.observation_ref], frame: observation.frame_hash, startFrame: observation.frame_hash });
       if (!local || local.attempts.length >= 36 || local.positions.length > 4) return null;
       const { chart, positions, visited } = local;
+      const chartRooms = new Set(local.chartRooms);
       const goals = chart.nodes.filter(node => !same(node.center, chart.origin) && !same(node.center, chart.current)
-        && node.inside === chart.goal_annotation_hypothesis);
+        && !chartRooms.has(chartPointKey(node.center)) && node.inside === chart.goal_annotation_hypothesis);
       if (goals.length !== 1) return null;
       const held = chartInventory(rows, chart), annotations = new Set(chart.links.map(link => link.annotation));
       const dependencies = chart.nodes.filter(node => node.inside !== null && annotations.has(node.inside) && node.inside !== chart.goal_annotation_hypothesis);
@@ -95,6 +104,7 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
       const offers = targets.flatMap(target => {
         const excluded = new Set(chart.nodes.filter(node => node.inside !== null && node !== target
           && !same(node.center, chart.origin) && !positions.some(point => same(node.center, point))
+          && !chartRooms.has(chartPointKey(node.center))
           && !visited.includes(chartPointKey(node.center))).map(node => chartPointKey(node.center)));
         const routes = positions.map(point => routeChart(chart, point, target.center, excluded, blocked));
         if (routes.some(path => !path?.length)) return [];
