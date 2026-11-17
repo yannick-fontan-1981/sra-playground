@@ -1410,7 +1410,12 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === windowRelationId) {
     const cell = bounds(card?.cell);
-    if (cell) subjects.push({ label: 'Cell that disagrees with the examples', box: cell });
+    const affected = Array.isArray(card?.affected) ? card.affected : null;
+    if (cell) subjects.push({ label: affected ? 'Control clicked' : 'Cell that disagrees with the examples', box: cell });
+    for (const item of affected ?? []) {
+      const box = bounds(item);
+      if (box && !cell?.every((value, i) => value === box[i])) subjects.push({ label: 'Other cell in the predicted effect', box });
+    }
     if (Array.isArray(card?.references)) for (const reference of card.references) {
       const box = bounds(reference);
       if (box) subjects.push({ label: 'Example window', box });
