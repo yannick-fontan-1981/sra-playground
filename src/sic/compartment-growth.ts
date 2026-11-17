@@ -16,7 +16,7 @@ function inside([x, y]: NativePoint, [l, t, r, b]: NativeBox): boolean {
   return x >= l && x <= r && y >= t && y <= b;
 }
 
-function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): CompartmentLayout {
+function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows, minimumSide = 8, maximumRooms = 16): CompartmentLayout {
   const { rooms, floor, gates } = layout;
   const sample = ({ point: [x, y], axis: [dx, dy] }: Gate, offset: number) => rows[y + dx * offset]?.[x + dy * offset];
   const styles = gates.flatMap(gate => {
@@ -28,7 +28,7 @@ function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): Com
   const boxes = rooms.flatMap(({ box: [l, t, r, b] }) => {
     const partitions: { gate: Gate; boxes: NativeBox[] }[] = [];
     for (const [dx, dy] of [[1, 0], [0, 1]] as const) {
-      for (let y = t + 8 * dy; y <= b - 8 * dy; y++) for (let x = l + 8 * dx; x <= r - 8 * dx; x++) {
+      for (let y = t + minimumSide * dy; y <= b - minimumSide * dy; y++) for (let x = l + minimumSide * dx; x <= r - minimumSide * dx; x++) {
         const gate: Gate = { point: [x, y], axis: [dx, dy], rooms: [-1, -1] };
         if (![-2, -1, 0, 1, 2].every(offset => sample(gate, offset) === floor)) continue;
         const style = styles.find(({ wall, shoulder }) => sample(gate, -4) === wall && sample(gate, 4) === wall
@@ -45,7 +45,7 @@ function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): Com
     apertures.push(partitions[0]!.gate);
     return partitions[0]!.boxes;
   });
-  if (!apertures.length || boxes.length > 16) return layout;
+  if (!apertures.length || boxes.length > maximumRooms) return layout;
   const separated = boxes.map((box, index) => ({ box, index }));
   const connected = [...gates, ...apertures].flatMap((gate): Gate[] => {
     const [x, y] = gate.point, [dx, dy] = gate.axis;
@@ -75,14 +75,21 @@ export function measureCompartments(rows: NativeRows): CompartmentLayout | null 
       && area * 4 >= (r - l + 1) * (b - t + 1) * 3;
   });
   const recovered = compartmentLayouts(rows, parts, occupied);
-  return recovered.length === 1 ? includeOpenPartitions(recovered[0]!, rows) : null;
+  if (recovered.length) return recovered.length === 1 ? includeOpenPartitions(recovered[0]!, rows) : null;
+  const clipped = parts.filter(({ bbox: [l, t, r, b], area }) =>
+    l > 0 && t > 0 && r === (rows[0]?.length ?? 0) - 2 && b < rows.length - 1
+    && r - l >= 4 && r - l < 7 && b - t >= 7 && area * 5 >= (r - l + 1) * (b - t + 1) * 4);
+  if (!clipped.length) return null;
+  const extended = compartmentLayouts(rows, parts, [...occupied, ...clipped], 32);
+  return extended.length === 1 ? includeOpenPartitions(extended[0]!, rows, 5, 32) : null;
 }
 
-function compartmentLayouts(rows: NativeRows, parts: ReturnType<typeof geometricComponents>, interior: ReturnType<typeof geometricComponents>): CompartmentLayout[] {
+function compartmentLayouts(rows: NativeRows, parts: ReturnType<typeof geometricComponents>, interior: ReturnType<typeof geometricComponents>,
+  maximumRooms = 16): CompartmentLayout[] {
   const floors = [...new Set(interior.map(part => part.color))];
   return floors.flatMap(floor => {
     const rooms = interior.filter(part => part.color === floor).map((part, index) => ({ box: part.bbox, index }));
-    if (rooms.length < 3 || rooms.length > 16) return [];
+    if (rooms.length < 3 || rooms.length > maximumRooms) return [];
     const byMarker = new Map<string, Gate[]>();
     for (const part of parts) {
       if (part.area !== 1 || part.color === floor) continue;
