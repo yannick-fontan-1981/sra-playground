@@ -56,3 +56,17 @@ test('recolor orients a reversible divider using consistently smaller legend exa
   assert.equal(measure(twoSidedLegend(3), observation, [], { examples: true }), null);
   assert.equal(measure(rows, observation), null);
 });
+
+test('palette ink inside a legend symbol describes the matching pocket', () => {
+  const rows = twoSidedLegend(6);
+  for (let y = 0; y < 23; y++) for (let x = 0; x < 7; x++) {
+    if (rows[y]![x] === 1) rows[y]![x] = 5;
+  }
+  const scene = measure(rows, { observation_ref: 'painted-example' }, [], { examples: true });
+  assert.deepEqual(scene?.legend, [0, 0, 6, 22]);
+  assert.deepEqual(scene?.mapping, { 0: 2, 1: 3 });
+  const pockets = scene?.bodies.filter((body: { relation_kind: string }) => body.relation_kind === 'pocket');
+  assert.equal(pockets.length, 1);
+  assert.deepEqual({ region: pockets[0].bbox, example: pockets[0].example, target: pockets[0].target },
+    { region: [11, 11, 14, 14], example: [2, 9, 4, 11], target: 5 });
+});
