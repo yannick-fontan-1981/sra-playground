@@ -2,7 +2,7 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Part = ReturnType<typeof geometricComponents>[number];
-type Tile = 'air' | 'wall' | 'danger' | 'removable' | 'inverter' | 'exit';
+type Tile = 'air' | 'wall' | 'danger' | 'removable' | 'inverter' | 'exit' | 'ceiling_open' | 'ceiling_solid';
 type Gravity = -1 | 1;
 type Geometry = { pitch: number; phase: NativePoint; air: number; actor: number; removable: number; toggle: number };
 export type GravityView = { origin: NativePoint; pitch: number; width: number; tiles: Tile[]; at: number; actor: NativeBox;
@@ -18,7 +18,14 @@ export type GravityHistory = {
   terrain: Record<string, Tile>;
 };
 export type GravityStep = { command: NativeCommand; index: number; landing: number; direction: Gravity; frontier: boolean;
-  edit: 'remove' | 'invert' | null; };
+  edit: 'remove' | 'invert' | 'solidify' | null; };
+
+const isSolid = (tile: Tile | undefined) => tile === 'wall' || tile === 'removable' || tile === 'inverter' || tile === 'ceiling_solid';
+
+export function startingGravity(view: GravityView, witnessed: Gravity): Gravity {
+  const above = isSolid(view.tiles[view.at - view.width]), below = isSolid(view.tiles[view.at + view.width]);
+  return above === below ? witnessed : above ? -1 : 1;
+}
 
 export function gravityTile(view: GravityView, index: number): NativePoint {
   return [view.origin[0] + index % view.width * view.pitch,
@@ -29,7 +36,7 @@ export function gravityTileBox(view: GravityView, index: number): NativeBox {
   return [x - radius, y - radius, x + radius, y + radius];
 }
 
-export function readReversibleGravity(rows: NativeRows, geometry: Geometry): GravityView | null {
+export function readReversibleGravity(rows: NativeRows, geometry: Geometry, carriesProtection = false): GravityView | null {
   const { pitch, phase, air, actor, removable, toggle } = geometry, radius = Math.floor((pitch - 1) / 2);
   const parts = geometricComponents(rows), actors = parts.filter(part => part.color === actor
     && part.area === 6 && part.bbox[2] - part.bbox[0] === 1 && part.bbox[3] - part.bbox[1] === 3);
@@ -61,6 +68,7 @@ export function readReversibleGravity(rows: NativeRows, geometry: Geometry): Gra
     const ink = blocks.get(index);
     if (ink === removable) return 'removable';
     if (ink !== undefined && ink === inverterInk) return 'inverter';
+    if (carriesProtection && ink === toggle) return 'ceiling_solid';
     const x = origin[0] + index % width * pitch, y = origin[1] + Math.floor(index / width) * pitch;
     const counts = new Map<number, number>();
     for (let v = y - radius; v <= y + radius; v++) for (let u = x - radius; u <= x + radius; u++) {
@@ -68,6 +76,8 @@ export function readReversibleGravity(rows: NativeRows, geometry: Geometry): Gra
       counts.set(value, (counts.get(value) ?? 0) + 1);
     }
     if (counts.size === 1 && counts.has(air)) return 'air';
+    const off = counts.get(toggle) ?? 0;
+    if (carriesProtection && off > 0 && off <= pitch && counts.get(air) === (2 * radius + 1) ** 2 - off) return 'ceiling_open';
     return [...counts].some(([ink, count]) => ink !== air && count >= (2 * radius + 1) ** 2 * 0.8) ? 'wall' : 'danger';
   });
   return { origin, pitch, width, tiles, at, actor: bbox, exit, inverterInk };
@@ -116,29 +126,37 @@ export function gravityReturn(before: GravityView, after: GravityView, step: Gra
   const sameColumn = actorColumn === (step.edit ? before.at % before.width : column);
   const reached = step.frontier ? (landing - predicted) * step.direction >= 0 : landing === predicted;
   const edited = after.tiles[step.index - shift * before.width];
-  const removed = !step.edit || edited === 'air' || (edited === undefined && (landing - departure) * step.direction > 0);
+  const removed = step.edit !== 'solidify' && (!step.edit || edited === 'air'
+    || (edited === undefined && (landing - departure) * step.direction > 0));
+  const solidified = step.edit === 'solidify' && edited === 'ceiling_solid';
   const inverted = step.edit === 'invert' && (landing - departure) * step.direction > 0;
-  return { shift, landing, removed, inverted, matched: sameColumn && reached && removed
+  return { shift, landing, removed, solidified, inverted, matched: sameColumn && reached && (removed || solidified)
     && (step.edit !== 'invert' || inverted || memory.inverted && landing === departure) };
 }
 
-export function chooseGravityReversal(view: GravityView, memory: GravityHistory, remaining: number): GravityStep | null {
+export function chooseGravityReversal(view: GravityView, memory: GravityHistory, remaining: number, retainGoal = false): GravityStep | null {
   const { width, tiles } = view;
-  const edits = tiles.flatMap((tile, index) => tile === 'removable' || tile === 'inverter' ? [index] : []);
+  const startRow = memory.rowOrigin + Math.floor(view.at / width);
+  // The camera can follow a detour away from a previously observed exit.
+  const rememberedExits = retainGoal ? Object.keys(memory.terrain).filter(cell => memory.terrain[cell] === 'exit') : [];
+  const goalRow = !retainGoal ? null : view.exit !== null ? memory.rowOrigin + Math.floor(view.exit / width)
+    : rememberedExits.length === 1 ? Number(rememberedExits[0]!.split(',')[1]) : null;
+  const goalDirection = goalRow === null ? 0 : Math.sign(goalRow - startRow);
+  const edits = tiles.flatMap((tile, index) => tile === 'removable' || tile === 'inverter' || tile === 'ceiling_open' ? [index] : []);
   if (edits.length > 20) return null;
   const masks = new Map(edits.map((index, bit) => [index, 1 << bit]));
-  const solid = (tile: Tile | undefined) => tile === 'wall' || tile === 'removable' || tile === 'inverter';
-  const read = (index: number, mask: number): Tile | undefined => mask & (masks.get(index) ?? 0) ? 'air' : tiles[index]
+  const read = (index: number, mask: number): Tile | undefined => mask & (masks.get(index) ?? 0)
+    ? tiles[index] === 'ceiling_open' ? 'ceiling_solid' : 'air' : tiles[index]
     ?? memory.terrain[[(index % width + width) % width, memory.rowOrigin + Math.floor(index / width)].join(',')];
   function settle(start: number, direction: Gravity, mask: number) {
-    if (solid(read(start, mask)) || read(start, mask) === 'danger') return null;
+    if (isSolid(read(start, mask)) || read(start, mask) === 'danger') return null;
     let at = start, clear = 0;
     for (;;) {
       if (read(at, mask) === 'exit') return { at, frontier: false };
       const advance = at + direction * width, next = read(advance, mask);
       if (next === 'danger') return null;
       if (!next) return clear >= 2 ? { at, frontier: true } : null;
-      if (solid(next)) return { at, frontier: false };
+      if (isSolid(next)) return { at, frontier: false };
       at = advance; clear++;
     }
   }
@@ -154,7 +172,10 @@ export function chooseGravityReversal(view: GravityView, memory: GravityHistory,
       const extra = node.direction < 0 ? memory.highest - worldRow : worldRow - memory.lowest;
       const newCell = !memory.seen.includes(gravityStateKey(view, memory.rowOrigin, node.direction, node.at));
       const novelty = (node.frontier ? 18 : 0) + Math.max(0, extra) * 6 + (newCell ? 2 : 0);
-      const value = novelty - node.depth - (invert ? 2 : 0);
+      const closer = goalRow === null ? 0 : Math.max(0, Math.abs(goalRow - startRow) - Math.abs(goalRow - worldRow));
+      // Restoring the heading can require preparing a safe landing before making any vertical progress.
+      const restored = invert && node.direction === goalDirection ? 40 : 0;
+      const value = novelty + closer * 8 + restored - node.depth - (invert ? 2 : 0);
       if (value > (best?.value ?? 0)) best = { value, step: node.first };
     }
     if (node.frontier || node.at < 0 || node.at >= tiles.length || node.depth >= Math.min(remaining, 9)) continue;
@@ -181,7 +202,8 @@ export function chooseGravityReversal(view: GravityView, memory: GravityHistory,
       const mask = node.mask | masks.get(index)!;
       if (mask === node.mask) continue;
       const flip = tiles[index] === 'inverter';
-      offer(index, mask, flip ? -node.direction as Gravity : node.direction, 'ACTION6', flip ? 'invert' : 'remove');
+      offer(index, mask, flip ? -node.direction as Gravity : node.direction, 'ACTION6',
+        flip ? 'invert' : tiles[index] === 'ceiling_open' ? 'solidify' : 'remove');
     }
   }
   return best?.step ?? null;

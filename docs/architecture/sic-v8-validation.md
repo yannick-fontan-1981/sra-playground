@@ -1207,10 +1207,16 @@ La campagne sur `969014e7` obtient 99 victoires au niveau 4. ELAS reste bloqué 
 
 Sur `26cb728e`, les 100 jeux gagnent le niveau 4 en SIC seul. ELAS gagne en 46 commandes et 25,54 s au niveau 4 pendant la campagne à huit processus. Les 99 autres parcours gardent leur empreinte. Toutes les commandes, observations et animations des trois premiers niveaux concordent avec la campagne de niveau 3.
 
-La campagne totalise 7 147 commandes sous autorité SIC, dont 2 182 au niveau 4. Le contrôle TypeScript et les 49 tests ciblés passent.
+La campagne dure environ **12 min 01 s à huit processus**, d’après le premier lancement et la dernière écriture de résultat. Chaque jeu part du niveau 1 et s’arrête à la victoire du niveau 4. La campagne totalise 7 147 commandes sous autorité SIC, dont 2 182 au niveau 4. Le contrôle TypeScript et les 49 tests ciblés passent.
 
 ### CAVA niveau 5 et appuis consommables
 
 CAVA gagne le niveau 5 en **15 sauts et 18,72 s de temps actif** lors du rejeu depuis le niveau 1, avec le réglage de huit processus. Les 63 commandes sont exécutées sous autorité SIC. L’empreinte des commandes, observations et images d’animation jusqu’à la victoire du niveau 4 correspond à la campagne `26cb728e`. PORT, qui partage la recherche de trajets couvrant plusieurs objectifs, reproduit lui aussi son parcours en 77 commandes jusqu’au niveau 4.
 
 La recherche suit la position, les sceaux acquis et les appuis utilisés. Elle prépare un trajet qui reste praticable si un appui marqué disparaît au départ. Les retours confirment si le motif reste visible ou si l’appui est devenu indisponible. SIC suit la silhouette du sprite quand elle recouvre le motif du support et recalcule le trajet sur le terrain observé. Le contrôle TypeScript et les 50 tests ciblés passent.
+
+### BP35 niveau 5 et retour vers une sortie hors champ
+
+BP35 gagne le niveau 5 en **32 commandes et 19,08 s de temps actif** lors du rejeu depuis le niveau 1, avec le réglage de huit processus. Les 148 commandes relèvent de SIC seul. Jusqu’à la victoire du niveau 4, les 116 commandes, observations et images d’animation concordent avec la référence `26cb728e`. BP35 est le seul jeu ayant exécuté cette famille au cours de la campagne des niveaux 1 à 4.
+
+SIC transmet la preuve d’inversion de gravité entre niveaux et relit le terrain à l’arrivée. Il mémorise la sortie quand la caméra suit le détour vers le bas. Il utilise un second inverseur pour reprendre la direction de la sortie après avoir préparé un plafond sous le danger. Le contrôle TypeScript et les 50 tests ciblés passent. Un test vérifie que le plan protège d’abord le sprite lorsqu’une inversion immédiate le ferait traverser un danger.

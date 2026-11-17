@@ -3,7 +3,7 @@ import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObs
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseGravityReversal, gravityAttempt, gravityReturn, gravityStateKey, gravityTerrain, gravityTile, gravityTileBox,
-  readReversibleGravity, type GravityHistory, type GravityStep, type GravityView } from './reversible-gravity.ts';
+  readReversibleGravity, startingGravity, type GravityHistory, type GravityStep, type GravityView } from './reversible-gravity.ts';
 
 export const protectGravityRouteId = 'sic_protect_gravity_route';
 
@@ -14,7 +14,8 @@ type Scene = { layout: Layout; actor: NativeBox; columns: number; tiles: Tile[];
 type Step = { input: string; at: number; landing: number; edit?: 'on' | 'off' | 'air'; frontier?: true };
 type State = { epoch: number; layout: Layout; refs: string[]; rejected: string[]; solidVerified: boolean };
 type ProtectiveProposal = NativeProposal & { local: State; scene: Scene; step: Step; attempt: string; needId: string };
-type ReversibleState = { epoch: number; geometry: Layout; memory: GravityHistory; refs: string[]; stopped: boolean };
+type ReversibleState = { epoch: number; geometry: Layout; memory: GravityHistory; refs: string[]; stopped: boolean; carriesProtection?: true };
+type ReversalWitness = { epoch: number; geometry: Layout; direction: GravityHistory['direction']; refs: string[] };
 type ReversibleProposal = NativeProposal & { reversal: ReversibleState; view: GravityView; advance: GravityStep; needId: string };
 type Proposal = ProtectiveProposal | ReversibleProposal;
 const isReversible = (proposal: Proposal): proposal is ReversibleProposal => Object.hasOwn(proposal, 'reversal');
@@ -216,19 +217,24 @@ function outcome(proposal: ProtectiveProposal, rows: NativeRows): string | null 
 export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
   let reversal: ReversibleState | null = null;
+  let reversalWitness: ReversalWitness | null = null;
   async function offerReversal(observation: NativeObservation, rows: NativeRows, remaining: number, execution?: NativeExecution): Promise<ReversibleProposal | null> {
     const { level_epoch: epoch, observation_ref: ref } = observation;
     const prior = reversal?.epoch === epoch ? reversal : null;
     const previous = state?.epoch === epoch - 1 && state.solidVerified ? state : null;
-    const geometry = prior?.geometry ?? previous?.layout;
+    const witnessed = reversalWitness?.epoch === epoch ? reversalWitness : null;
+    const geometry = prior?.geometry ?? witnessed?.geometry ?? previous?.layout;
     if (!geometry || prior?.stopped) return null;
-    const view = readReversibleGravity(rows, geometry);
+    const carriesProtection = prior?.carriesProtection || !!witnessed;
+    const view = readReversibleGravity(rows, geometry, carriesProtection);
     if (!view) return null;
     const worldRow = Math.floor(view.at / view.width);
-    const local: ReversibleState = prior ?? { epoch, geometry, refs: previous!.refs.slice(-2), stopped: false,
-      memory: { rowOrigin: 0, direction: -1, highest: worldRow, lowest: worldRow, inverted: false, denied: [],
-        seen: [gravityStateKey(view, 0, -1)], terrain: gravityTerrain(view, 0) } };
-    const step = chooseGravityReversal(view, local.memory, remaining);
+    const direction = witnessed ? startingGravity(view, witnessed.direction) : -1;
+    const local: ReversibleState = prior ?? { epoch, geometry, refs: (witnessed?.refs ?? previous!.refs).slice(-3), stopped: false,
+      ...(carriesProtection ? { carriesProtection: true } : {}),
+      memory: { rowOrigin: 0, direction, highest: worldRow, lowest: worldRow, inverted: !!witnessed, denied: [],
+        seen: [gravityStateKey(view, 0, direction)], terrain: gravityTerrain(view, 0) } };
+    const step = chooseGravityReversal(view, local.memory, remaining, carriesProtection);
     if (!step) return null;
     const mode = execution?.reasoningMode ?? 'exploration';
     const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
@@ -241,6 +247,7 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
     if (!selected) return null;
     const situation = step.edit === 'invert' ? unknownEdit ? 'Test whether the newly visible block reverses the fall'
       : 'Reverse the fall after checking the visible and remembered path'
+      : step.edit === 'solidify' ? 'Build a protective ceiling before entering the next column'
       : step.edit === 'remove' ? 'Remove the blocking tile to open the next fall'
         : front ? 'Reveal more terrain in the current direction' : 'Move sideways to the next safe landing';
     const point = gravityTile(view, step.index);
@@ -268,7 +275,9 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
     id: protectGravityRouteId,
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !['ACTION3', 'ACTION4', 'ACTION6'].every(ref => observation.available_action_refs.includes(ref))) return null;
-      if (reversal?.epoch === observation.level_epoch) return offerReversal(observation, rows, remaining, execution);
+      if (reversal?.epoch === observation.level_epoch || reversalWitness?.epoch === observation.level_epoch) {
+        return offerReversal(observation, rows, remaining, execution);
+      }
       const parts = geometricComponents(rows);
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const layout = prior?.layout ?? measureLayout(rows, parts);
@@ -328,10 +337,11 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isReversible(proposal)) {
-        const next = readReversibleGravity(second, proposal.reversal.geometry);
+        const next = readReversibleGravity(second, proposal.reversal.geometry, proposal.reversal.carriesProtection);
         const result = next && gravityReturn(proposal.view, next, proposal.advance, proposal.reversal.memory);
         const reason = result?.matched ? result.inverted ? 'reversed_fall_confirmed_by_terrain_alignment'
-          : proposal.advance.edit ? 'blocking_tile_removed_in_gravity_path'
+          : result.solidified ? 'protective_ceiling_solidified_in_reversible_path'
+            : proposal.advance.edit ? 'blocking_tile_removed_in_gravity_path'
             : 'gravity_landing_confirmed_by_terrain_alignment' : 'reversible_gravity_projection_contradicted';
         return { matched: !!result?.matched, seal_prefix: true, reason };
       }
@@ -339,10 +349,14 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'gravity_projection_contradicted' };
     },
     record(before, after, _action, _first, second, proposal) {
+      if (isReversible(proposal) && after.levels_completed > before.levels_completed && proposal.reversal.memory.inverted) {
+        reversalWitness = { epoch: after.level_epoch, geometry: proposal.reversal.geometry, direction: proposal.advance.direction,
+          refs: [...proposal.reversal.refs.slice(-3), after.observation_ref] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       if (isReversible(proposal)) {
         const { reversal: local, advance, view } = proposal, { memory } = local;
-        const next = readReversibleGravity(second, local.geometry);
+        const next = readReversibleGravity(second, local.geometry, local.carriesProtection);
         const result = next && gravityReturn(view, next, advance, memory);
         if (!next || !result) {
           reversal = { ...local, stopped: true };
@@ -353,6 +367,9 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
         const terrain = { ...memory.terrain };
         if (advance.edit && result.removed) {
           terrain[[advance.index % view.width, memory.rowOrigin + Math.floor(advance.index / view.width)].join(',')] = 'air';
+        }
+        if (result.solidified) {
+          terrain[[advance.index % view.width, memory.rowOrigin + Math.floor(advance.index / view.width)].join(',')] = 'ceiling_solid';
         }
         reversal = { ...local, refs: [...local.refs.slice(-5), after.observation_ref], memory: { ...memory, rowOrigin: origin, direction,
           terrain: gravityTerrain(next, origin, terrain), inverted: memory.inverted || result.inverted,
@@ -367,10 +384,11 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
         rejected: confirmed ? [] : [...local.rejected.slice(-12), proposal.attempt] };
       return { events: [] };
     },
-    state: () => ({ state, reversal }),
+    state: () => ({ state, reversal, ...(reversalWitness ? { reversalWitness } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       reversal = structuredClone(value.reversal as ReversibleState | null ?? null);
+      reversalWitness = structuredClone((value.reversalWitness as ReversalWitness | undefined) ?? null);
     },
   };
 }
