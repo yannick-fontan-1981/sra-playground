@@ -3,6 +3,33 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
+
+test('new trace records share unchanged JSON evidence while keeping their identity, clock and detached public state', () => {
+  let clock = 10;
+  const memory = new NativeReasoningMemory({ clock: () => clock++ });
+  const body = { observation: { rows: [[1, 2], [3, 4]] }, command: 'ACTION1' };
+  memory.trace('episode', 'decision', body);
+  body.command = 'ACTION2'; memory.trace('episode', 'decision', body);
+  const entries = memory.nativeCheckpoint().traces;
+  const [first, second] = entries.map(entry => entry.record);
+  assert.equal(first!.body.observation, second!.body.observation);
+  assert.equal(first!.body.command, 'ACTION1'); assert.equal(second!.body.command, 'ACTION2');
+  assert.deepEqual(entries.map(entry => [entry.record.id, entry.record.created]), [[1, 10], [2, 11]]);
+  assert.ok(entries[1]!.version > entries[0]!.version);
+  body.observation.rows[0]![0] = 9;
+  assert.equal(first!.body.observation.rows[0][0], 1);
+  const exported = memory.dynamicState(); exported.traces[0]!.body.observation.rows[0][0] = 8;
+  assert.equal(memory.nativeCheckpoint().traces[0]!.record.body.observation.rows[0][0], 1);
+});
+
+test('non-JSON structured-clone traces retain their original source API', () => {
+  const memory = new NativeReasoningMemory({ clock: () => 1 });
+  const cyclic: any = { optional: undefined, map: new Map([['key', 2]]) }; cyclic.self = cyclic;
+  memory.trace('episode', 'diagnostic', cyclic);
+  const body = memory.dynamicState().traces[0]!.body;
+  assert.equal(body.self, body); assert.equal(body.optional, undefined);
+  assert.deepEqual(body.map, cyclic.map); assert.notEqual(body.map, cyclic.map);
+});
 import { assessRetainedTransition, constructEmpiricalRule, validateEmpiricalRule, validateRetainedEmpiricalRule } from '../src/logos-engine/v6-transition-learning.ts';
 import { hydrateNativeState, splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { symbolicDigest } from '../src/logos-engine/v6-hash.ts';
