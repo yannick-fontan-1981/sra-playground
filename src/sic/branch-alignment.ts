@@ -7,6 +7,8 @@ import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { measureStackedBranchLayout, placeStackedBranches, stackedBranchBox, stackedBranchSelection,
   verifyStackedBranchLayout, type StackedBranchLayout } from './stacked-branch-layout.ts';
+import { arrangeDirectedBranches, directedBranchBox, directedBranchSelection, directedBranchWalk, measureDirectedBranchLayout,
+  placeDirectedBranches, verifyDirectedBranches, type DirectedBranchLayout } from './directed-branch-layout.ts';
 
 export const branchAlignmentId = 'sic_branch_alignment';
 export const verifyBranchAlignmentId = 'sic_verify_branch_alignment';
@@ -28,8 +30,13 @@ type LinearProposal = NativeProposal & { local: State; current: BranchState; exp
 type StackedState = { epoch: number; layout: StackedBranchLayout; positions: NativePoint[]; placements: NativePoint[];
   focused: number; controls: Record<string, NativePoint>; evidence: string[]; stopped: boolean };
 type StackedProposal = NativeProposal & { stackedPlan: StackedState; needId: string; launch: boolean };
-type Proposal = LinearProposal | StackedProposal;
+type DirectedState = { epoch: number; layout: DirectedBranchLayout; positions: number[]; placements: number[];
+  focused: number; controls: Record<string, NativePoint>; evidence: string[]; stopped: boolean };
+type DirectedMove = { positions: number[]; focused: number };
+type DirectedProposal = NativeProposal & { directedPlan: DirectedState; moves: DirectedMove[]; needId: string; launch: boolean };
+type Proposal = LinearProposal | StackedProposal | DirectedProposal;
 const isStacked = (proposal: Proposal): proposal is StackedProposal => Object.hasOwn(proposal, 'stackedPlan');
+const isDirected = (proposal: Proposal): proposal is DirectedProposal => Object.hasOwn(proposal, 'directedPlan');
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const bounds = { maximumIdentityAssignments: 2048, maximumPlacements: 8192, yieldInterval: 128 };
 const plain = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
@@ -46,7 +53,84 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
   let state: State | null = null;
   let confirmed: ConfirmedControls | null = null;
   let stacked: StackedState | null = null;
+  let directed: DirectedState | null = null;
   let decide: NativeProgramHandle | undefined;
+  async function proposeDirected(observation: NativeObservation, rows: NativeRows, keys: readonly string[], remaining: number,
+    execution?: NativeExecution): Promise<DirectedProposal | null> {
+    const ref = observation.observation_ref, epoch = observation.level_epoch;
+    let local = directed?.epoch === epoch ? directed : null;
+    if (!local) {
+      const previous = stacked?.epoch === epoch - 1 ? stacked : null;
+      if (!previous || previous.stopped || !Object.keys(previous.controls).every(key => keys.includes(key))) return null;
+      const layout = measureDirectedBranchLayout(rows, previous.layout);
+      if (!layout) return null;
+      const placements = placeDirectedBranches(layout, () => !!execution?.signal?.aborted
+        || (execution?.deadlineMs !== undefined && (execution.now ?? (() => performance.now()))() >= execution.deadlineMs));
+      if (!placements) return null;
+      local = { epoch, layout, placements, positions: layout.pieces.map(piece => piece.at), focused: layout.focused,
+        controls: previous.controls, evidence: previous.evidence, stopped: false };
+    }
+    const { layout, positions, placements, controls, focused } = local;
+    if (local.stopped || !verifyDirectedBranches(rows, layout, positions, focused)) return null;
+    const order = arrangeDirectedBranches(layout, positions, focused, placements);
+    if (!order) return null;
+    const current = order[0], launching = current === undefined, moving = current === focused;
+    const mode = execution?.reasoningMode ?? 'solving', strategy = moving ? 'P07' : 'P05';
+    const facts = { routeSupported: moving, eligibleProbe: !moving, knownInteraction: false, mode };
+    const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+    if (decision?.result !== strategy) return null;
+    const actions: NativeCommand[] = [], moves: DirectedMove[] = [];
+    const region = current === undefined ? null : directedBranchBox(layout, positions[current]!, layout.pieces[current]!.offsets);
+    const subject = current === undefined ? null : layout.pieces[current]!;
+    const reason = launching ? 'Check the predicted straight and lateral arrivals by releasing the shared flow'
+      : moving ? subject?.turn ? 'Move the corner to align its open side with the sideways receiver'
+        : 'Position a straight contributor so its full outline guides the remaining branches'
+        : 'Select the next contributor in the projected layout';
+    const evidence: [string, ...string[]] = [ref, ...new Set(local.evidence.filter(value => value !== ref))];
+    let pointBinding = null;
+    if (launching) {
+      const input = keys.find(key => !Object.hasOwn(controls, key));
+      if (!input) return null;
+      actions.push(plain(input));
+      moves.push({ positions, focused });
+    } else if (!moving) {
+      const point = directedBranchSelection(layout, positions[current]!, current);
+      pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason, evidence });
+      if (!pointBinding || !observation.available_action_refs.includes('ACTION6')) return null;
+      actions.push({ action_ref: 'ACTION6', data: { x: point[0], y: point[1] } });
+      moves.push({ positions, focused: current });
+    } else {
+      const walk = directedBranchWalk(layout, positions, current, placements[current]!);
+      let at = positions[current]!;
+      for (const step of walk?.slice(0, Math.min(remaining, maximumCommittedActions)) ?? []) {
+        const key = keys.find(key => equal(controls[key], step));
+        if (!key) break;
+        actions.push(plain(key));
+        at += step[0] + step[1] * layout.width;
+        moves.push({ positions: positions.map((cell, i) => i === current ? at : cell), focused });
+      }
+    }
+    if (!actions.length) return null;
+    const parent = 'G_official_completion', goal = { kind: 'deliver_flow_into_oriented_openings', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['sources', 'directional_receiver_openings', 'branching_and_turning_contributors'], parentObjective: parent,
+      satisfactionContract: 'official_progress_after_directional_receivers_fill' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = 'branch-alignment:' + need.id;
+    return { status: 'proposed', kind: family, actions, moves, directedPlan: local, needId: need.id, launch: launching,
+      steps: actions.map((action, i) => ({ action, expected_after: launching ? null : moves[i],
+        ...(pointBinding ? { point_binding: pointBinding } : {}) })),
+      binding: { observation_ref: ref, level_epoch: epoch },
+      sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+        instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+      sicSituationCard: { strategy, need: 'Bring every branch into its receiving opening in the right direction',
+        mode, situation: reason, evidence, agenda: [], triggerCard: decision.receipt.workflow, contributor: region,
+        goals: layout.targets.map(target => directedBranchBox(layout, target.opening)),
+        turningContributor: layout.pieces.flatMap((piece, i) => piece.turn ? [directedBranchBox(layout, positions[i]!, piece.offsets)] : [])[0] },
+      question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: reason, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy, objective: { id, label: reason, parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: reason,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
   async function proposeStacked(observation: NativeObservation, rows: NativeRows, keys: readonly string[], execution?: NativeExecution): Promise<StackedProposal | null> {
     const ref = observation.observation_ref, epoch = observation.level_epoch;
     let local = stacked?.epoch === epoch ? stacked : null;
@@ -119,9 +203,11 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
       const keys = observation.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action)).sort();
       if (remaining < 1 || keys.length !== 5) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
+      if (directed?.epoch === observation.level_epoch) return proposeDirected(observation, rows, keys, remaining, execution);
       if (stacked?.epoch === observation.level_epoch) return proposeStacked(observation, rows, keys, execution);
       const model = prior?.model ?? branchLayout(observation, rows, inputs);
-      if (!model) return learns ? null : proposeStacked(observation, rows, keys, execution);
+      if (!model) return learns ? null : await proposeStacked(observation, rows, keys, execution)
+        ?? proposeDirected(observation, rows, keys, remaining, execution);
       if (model.bars.length > 5 || prior?.stopped || (prior?.tried.length ?? 0) >= 48) return null;
       const recalled = confirmed?.epoch === observation.level_epoch - 1 && confirmed.axis === model.axis
         && confirmed.unit === model.unit && confirmed.sources < model.sources.length
@@ -223,6 +309,13 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (isDirected(proposal)) {
+        const next = proposal.moves[index - 1];
+        const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+          : !!next && proposal.directedPlan.epoch === observation.level_epoch
+            && verifyDirectedBranches(packet.frame_rows, proposal.directedPlan.layout, next.positions, next.focused);
+        return { admitted, reason: admitted ? 'oriented_branch_setup_confirmed' : 'oriented_branch_setup_changed' };
+      }
       const previous = index > 0 && !isStacked(proposal) ? proposal.approach[index - 1] : null;
       const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
         : !!previous && proposal.binding?.level_epoch === observation.level_epoch && !isStacked(proposal)
@@ -232,6 +325,12 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
     after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isDirected(proposal)) {
+        const move = proposal.moves[index];
+        const matched = !proposal.launch && before.level_epoch === after.level_epoch && !!move
+          && verifyDirectedBranches(second, proposal.directedPlan.layout, move.positions, move.focused);
+        return { matched, seal_prefix: !matched, reason: 'compare_oriented_branch_setup_return' };
+      }
       if (isStacked(proposal)) {
         const { layout, positions, focused, controls } = proposal.stackedPlan;
         if (proposal.launch && after.levels_completed > before.levels_completed) {
@@ -247,6 +346,17 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
       return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: 'compare_contributor_return' };
     },
     async record(before, after, issued, _first: NativeRows, second, proposal, index, _frames, execution) {
+      if (isDirected(proposal)) {
+        if (after.levels_completed > before.levels_completed) return { events: [],
+          reviewEvidence: 'The directed branch projection was followed by official progress.' };
+        const local = index > 0 && directed?.epoch === before.level_epoch ? directed : proposal.directedPlan;
+        const move = proposal.moves[index]!;
+        const matched = !proposal.launch && before.level_epoch === after.level_epoch
+          && verifyDirectedBranches(second, local.layout, move.positions, move.focused);
+        directed = { ...local, ...(matched ? move : {}), stopped: !matched,
+          evidence: [...new Set([...local.evidence.slice(-5), after.observation_ref])] };
+        return { events: [] };
+      }
       if (isStacked(proposal)) {
         const { layout, positions, focused } = proposal.stackedPlan;
         if (before.level_epoch === after.level_epoch) stacked = { ...proposal.stackedPlan,
@@ -293,10 +403,11 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
         tried: [...local.tried, attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state, confirmed, stacked }),
+    state: () => ({ state, confirmed, stacked, ...(directed ? { directed } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       stacked = structuredClone(value.stacked as StackedState | null ?? null);
+      directed = structuredClone(value.directed as DirectedState | undefined) ?? null;
       confirmed = structuredClone((value.confirmed ?? null) as ConfirmedControls | null);
     },
   };
