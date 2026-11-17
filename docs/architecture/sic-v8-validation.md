@@ -1298,6 +1298,8 @@ Le planificateur appliqué directement au jeu gagne officiellement le niveau 5 e
 
 Un autre rejeu, sans profilage V8, a reproduit le même préfixe d’actions et de retours jusqu’à son arrêt sur le budget de temps à la 164e commande du niveau 5. La régularité du temps de rejeu reste à vérifier avant intégration sur `main`. Les tests couvrent les phases visuellement identiques, la reprise d’une mesure en cours à partir de l’état sauvegardé et un pont qui partage la couleur du bloc porté. Le contrôle TypeScript et les sept tests ciblés passent.
 
+Avec des points de mesure internes et sans profilage V8, le rejeu reproduit ensuite les 372 commandes et leurs retours jusqu’à la victoire. Le rejeu sans points de mesure internes s’arrête sur le budget après le même retour à la 168e commande du niveau 5. Le jeu a renvoyé son image. Le traitement de ce retour prend 789,67 s dans ce rejeu. Dans l’essai instrumenté, l’acquisition de ce même retour prend 2,22 s et l’étape est scellée en 2,43 s au total. L’écart reste à reproduire avec une mesure plus fine de l’acquisition avant de conclure sur sa cause.
+
 ### TRIA niveau 5, réutilisation partielle des commandes
 
 Le motif comporte sept pièces. SIC reconnaît la grille et les panneaux à partir des retours publics. Il réutilise les déplacements déjà mesurés pour les commandes dont le panneau et la catégorie de pièce concordent, même si d’autres commandes deviennent visibles. Les déplacements candidats sont toujours contrôlés sur les positions occupées et le retour confirme le placement après chaque clic. La borne d’énumération des affectations est appliquée aux permutations par catégorie.
