@@ -8,6 +8,21 @@ export type VisibleCommandPanel = { area: NativeBox; panel: NativeBox; buttons: 
 const contains = ([l, t, r, b]: NativeBox, [x, y, u, v]: NativeBox) => l <= x && u <= r && t <= y && v <= b;
 const disjoint = (a: NativeBox, b: NativeBox) => a[2] < b[0] || b[2] < a[0] || a[3] < b[1] || b[3] < a[1];
 
+function crossedCenter(parts: readonly Component[], background: number) {
+  const matches = parts.filter(center => {
+    const [left, top, right, bottom] = center.bbox, side = right - left + 1;
+    if (center.color !== background || !center.rectangular || side < 2 || bottom - top + 1 !== side) return false;
+    const slots = parts.filter(({ color, bbox: [l, t, r, b], area }) => color !== background && r - l + 1 === side
+      && b - t + 1 === side && area >= side * side - 1);
+    const offsets = slots.map(part => [part.bbox[0] - left, part.bbox[1] - top] as const);
+    const spacing = ([[0, -1], [0, 1], [-1, 0], [1, 0]] as const).map(([dx, dy]) =>
+      Math.min(...offsets.filter(([x, y]) => dx ? x * dx >= side && y === 0 : y * dy >= side && x === 0)
+        .map(([x, y]) => Math.abs(x) + Math.abs(y))));
+    return Number.isFinite(spacing[0]) && spacing.every(distance => distance === spacing[0]);
+  });
+  return matches.length === 1 ? matches[0] : undefined;
+}
+
 export function visibleCommandPanel(rows: NativeRows, parts = geometricComponents(rows)): VisibleCommandPanel | null {
   const area = rows.length * rows[0]!.length;
   const surfaces = parts.filter(part => !part.rectangular && part.area * 5 >= area).sort((a, b) => b.area - a.area);
@@ -16,6 +31,8 @@ export function visibleCommandPanel(rows: NativeRows, parts = geometricComponent
   if (!field || !panel) return null;
   const attached = parts.filter(part => part !== panel && contains(panel.bbox, part.bbox)
     && part.area >= 6 && part.area * 8 < panel.area);
+  const center = crossedCenter(attached, panel.color);
+  if (center) return { area: field.bbox, panel: panel.bbox, buttons: attached.filter(part => part !== center), aligned: [] };
   const rowsOfButtons = new Map<string, Component[]>();
   for (const part of attached) {
     const [l, t, r, b] = part.bbox, width = r - l + 1, height = b - t + 1;

@@ -19,9 +19,9 @@ export function stationaryCommandEvidence(graph: ObservedCommandGraph, source: s
 }
 
 export function rememberCommandReturn(graph: ObservedCommandGraph, source: string, destination: string,
-  action: string, evidence: string): void {
+  action: string, evidence: string, maximumStates: number | null = 384): void {
   if (!Object.hasOwn(graph, source)) {
-    if (Object.keys(graph).length >= 384) return;
+    if (maximumStates !== null && Object.keys(graph).length >= maximumStates) return;
     graph[source] = [];
   }
   const edges = graph[source]!;
