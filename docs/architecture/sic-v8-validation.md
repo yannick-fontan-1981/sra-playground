@@ -1277,3 +1277,5 @@ La table donne le coin supérieur gauche du support en pixels. Les ouvertures so
 | (20, 22) | Relie le secteur de départ à l’îlot central après ouverture du passage par le panneau. |
 
 Les deux traversées sont ensuite confirmées sur le jeu. Le curseur rejoint l’îlot central en 12 mouvements après l’ouverture du passage, y reste pendant les neuf déplacements du support et rejoint le palier supérieur en neuf mouvements. La dérivation du rail, le placement du support et le choix de l’ouverture ont été testés hors du solveur autonome.
+
+Le rejeu de régression de `161c7c9e` s’arrête à la victoire du niveau 4 pour chacun des 100 jeux. Les 400 niveaux sont gagnés sous autorité SIC seule. Les commandes, observations et animations concordent pour 98 parcours. SELE et TRIA gagnent chacun avec six commandes de plus.
