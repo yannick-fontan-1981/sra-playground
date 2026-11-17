@@ -164,7 +164,9 @@ function cycleProposal(family: string, plan: { cycle: NonNullable<Proposal['cycl
 ): Proposal | null {
   const { local, step } = 'cycle' in plan ? plan.cycle : 'composite' in plan ? plan.composite : plan.glyphRoute;
   const parent = 'G_official_completion', ref = observation.observation_ref;
-  const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
+  const moving = 'glyphRoute' in plan ? plan.glyphRoute.local.rotation : undefined;
+  const observedCycle = moving?.period ? [moving.rule.evidence, ...moving.witnesses.slice(-2 * moving.period)] : [];
+  const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...observedCycle].filter(value => value !== ref))];
   const facts = { input: step.action, expected: step.step, evidence };
   const inContact = pointKey(step.step) === pointKey(step.target);
   const choice = resolveNavigationPrimitives({ mode: mode ?? 'assimilation', evidence,
@@ -172,7 +174,8 @@ function cycleProposal(family: string, plan: { cycle: NonNullable<Proposal['cycl
     interaction: inContact && step.purpose === 'exit' ? facts : null });
   const strategy = choice.selected?.id;
   if (!strategy) return null;
-  const rotationConfirmed = 'composite' in plan && hasOrientation(plan.composite.local) && !!plan.composite.local.rotation;
+  const rotationConfirmed = ('composite' in plan && hasOrientation(plan.composite.local) && !!plan.composite.local.rotation)
+    || ('glyphRoute' in plan && !!plan.glyphRoute.local.rotation?.period);
   const reason = step.purpose === 'transport' ? 'Test the projected landing of the forced movement'
     : step.purpose === 'recharge' ? 'Reach the recharge before running out of moves'
     : step.purpose === 'test_rotation' ? (rotationConfirmed
@@ -231,7 +234,8 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
     mode: ReasoningMode | undefined,
   ): Proposal | null {
     if (fallback || glyphMemory?.epoch !== observation.level_epoch - 1 || available.length !== 4 || remaining < 1) return null;
-    const local = glyphRoute?.epoch === observation.level_epoch ? glyphRoute : readGlyphRoute(rows, glyphMemory, observation.level_epoch);
+    const local = glyphRoute?.epoch === observation.level_epoch ? glyphRoute
+      : readGlyphRoute(rows, glyphMemory, observation.level_epoch, transfer?.rotation, glyphRoute?.colorEffects);
     const step = local ? chooseGlyphRoute(rows, local, available, observation.observation_ref, remaining) : null;
     return local && step ? cycleProposal(family, { glyphRoute: { local, step } }, observation, mode, remaining, rows) : null;
   }

@@ -1467,3 +1467,9 @@ Le niveau 5 est gagné en **24 commandes et 9,28 s** dans le lot configuré pour
 SIC retrouve les deux pièces sous le cadre lorsque la réserve latérale couvre seulement une partie de la surface à remplir. Les quatre pièces mobiles couvrent exactement les vingt cases libres. Le solveur compare deux partitions atteignables par les commandes déjà vérifiées et conserve un emplacement pour la barre. Un essai séparé montre que la rotation est refusée à la hauteur de départ de la pièce du bas. Une montée d’une case laisse la place à la troisième ligne du masque tourné.
 
 Le niveau 5 est gagné en **34 commandes et 8,75 s** dans le lot configuré pour huit workers. Les 103 commandes relèvent de SIC seul. Les 69 commandes et retours des niveaux 1 à 4 concordent avec `23275f47`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `b18fe017024893cd258964f1077f0e7e5fe41f4d0f446792b6f228b9739f7680`.
+
+### LS20 niveau 5, anticiper le déplacement de la station de rotation
+
+SIC retrouve le motif de la station déjà appris et observe deux cycles de quatre déplacements sur trois cases. Le modèle distingue les deux passages par la case médiane. Il compose le cycle avec les trajets forcés, les changements de forme et de couleur, ainsi que les réserves. SIC vérifie la phase après chaque déplacement en série. Aux commandes 36 et 37, la rotation du motif confirme le contact alors que la station est masquée par la pièce.
+
+Le niveau 5 est gagné en **48 commandes et 13,28 s** lors du rejeu complet. Les 192 commandes relèvent de SIC seul. Les 144 premières commandes et retours concordent avec la référence. La permutation de palette conserve les commandes et effets géométriques des cinq niveaux. LS19 reproduit ses 173 commandes et retours jusqu’à la victoire du niveau 5. Empreinte du rejeu LS20 `8e87218811f5398f19da154312cc56e3f08f2eb0fc3565bdc516e45814b2790a`.
