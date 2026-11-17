@@ -1587,3 +1587,12 @@ Les quatre premières commandes remesurent les déplacements des deux mobiles. E
 Le plan cherche les deux positions conjointement. Il prévoit les quatre traversées qui utilisent un mobile retenu sur sa plaque pendant que l'autre avance. La recherche écarte la fermeture sur un occupant et attend l'ouverture avant d'autoriser l'entrée. Le test compare à chaque commande les deux positions et les passages liés. Sept séries continues de deux à dix commandes préservent ces vérifications et se scellent aux changements de porte.
 
 Le niveau 5 est gagné en **49 commandes et 13,69 s** dans le rejeu configuré pour huit workers. Les 163 commandes relèvent de SIC seul. Les 114 commandes et retours des niveaux 1 à 4 concordent avec `fd2457e6`. La permutation de palette conserve le parcours et les effets géométriques. Empreinte complète `268518470ced21b331a1591ec79263a3b4dadf15984124d5d347049f843b70a8`. Le contrôle TypeScript et les 228 tests ciblés passent.
+
+
+### UPST niveau 5, retrouver les pièces et les ouvertures en bord de plateau
+
+La détection retrouve vingt pièces et vingt et une portes lorsque le bord de la grille réduit la largeur d’une colonne. Une porte déjà ouverte relie visuellement deux sols. La répétition du motif des portes fermées permet de les séparer et de rétablir la connexion dans le graphe. Les seuils de la détection initiale restent ceux utilisés lorsque les pièces ordinaires suffisent.
+
+SIC réutilise les rôles des occupants et le compteur appris pendant les quatre premiers niveaux. Le plan choisit les ouvertures à partir des pièces, des occupants et du budget observés. Quatorze clics sont confirmés par le changement de porte et la dépense d’un tour. Le quinzième déclenche la victoire officielle.
+
+Le rejeu depuis le niveau 1 gagne le niveau 5 en **15 clics et 12,19 s** avec le budget configuré pour huit workers. Les 70 commandes relèvent de SIC seul. Les 55 commandes et retours des niveaux 1 à 4 reproduisent la référence `f374b80d`. La permutation de palette reproduit les 70 commandes et leurs effets géométriques. Empreinte complète `113283a516f24076615c4da606641b87779380ce0357cec955fd3828915e735d`. Le contrôle TypeScript et les 33 tests ciblés passent.
