@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { describeRankOrder, observeRankOrder, projectRankOrder } from '../src/sic/profile-rank-order.ts';
+import { describeRankOrder, observeRankOrder, projectRankOrder, resizeRankOrder } from '../src/sic/profile-rank-order.ts';
 
 test('a second profile distinguishes rank mappings hidden by repeated tooth heights', () => {
   const first = [1, 1, 2, 4], shifted = [4, 1, 1, 2];
@@ -18,4 +18,10 @@ test('a second profile distinguishes rank mappings hidden by repeated tooth heig
 test('equal height counts do not establish a reordering that reuses a source rank', () => {
   const prior = [[0, 2], [0, 3], [1, 2], [2, 3]];
   assert.equal(observeRankOrder([1, 1, 2, 2], [1, 1, 2, 2], prior), null);
+});
+
+test('resizing a rank order requires a unique measured pattern', () => {
+  assert.deepEqual(resizeRankOrder([[3], [2], [1], [0]], 5), [[4], [3], [2], [1], [0]]);
+  assert.deepEqual(resizeRankOrder([[3], [0], [1], [2]], 5), [[4], [0], [1], [2], [3]]);
+  assert.equal(resizeRankOrder([[1], [0]], 5), null);
 });

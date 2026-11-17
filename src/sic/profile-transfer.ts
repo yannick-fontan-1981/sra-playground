@@ -1,10 +1,11 @@
 import { project } from '../logos-engine/v6-ranked-workshop-geometry.ts';
 import { profiles, relations, supports } from '../logos-engine/v6-ranked-workshop-methods.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
+import { measureRankedCuts } from '../logos-engine/v5-stem-reliefs.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
-import { describeRankOrder, observeRankOrder, projectRankOrder } from './profile-rank-order.ts';
+import { describeRankOrder, observeRankOrder, projectRankOrder, resizeRankOrder } from './profile-rank-order.ts';
 import type { RankOrder } from './profile-rank-order.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
@@ -28,21 +29,23 @@ const geometry = {
     maximum_frame_pixels: 16384 },
 };
 type Strategy = keyof typeof profileTransferStrategies;
-type Part = { box: NativeBox; values: number[] };
+type Part = { box: NativeBox; values: number[]; supportOnly?: true };
 type Band = { profile: Part; receiver: Part };
 type Shift = -1 | 1;
 type Domain = { minimum: number; maximum: number };
 type Proof = { control: string; evidence: string };
 type OrderProof = Proof & { ranks: RankOrder; observations: string[] };
-type Tool = { band: number; box: NativeBox; shift?: Shift };
-type Scene = { bands: Band[]; focus: number; held: boolean; marker: NativeBox; tools: Tool[] };
+type Tool = { band: number; box: NativeBox; shift?: Shift; appearance?: string };
+type Scene = { bands: Band[]; focus: number; held: boolean; marker: NativeBox; tools: Tool[]; receiverAnchor?: ReceiverBinding };
 type State = { epoch: number; count: number; tried: string[]; evidence: string[]; stopped: boolean;
   verified?: Partial<Record<Strategy, Proof>>; shifts?: Partial<Record<Shift, Proof>>;
-  used?: string[]; preparing?: true; domain?: Domain; orders?: Record<string, OrderProof> };
-type Transfer = { completed: number; used: string[]; evidence: string[]; toolControl?: string; shifts?: Partial<Record<Shift, Proof>> };
+  used?: string[]; preparing?: true; domain?: Domain; orders?: Record<string, OrderProof>; complements?: Record<string, Proof>;
+  receiverAnchor?: ReceiverBinding };
+type Transfer = { completed: number; used: string[]; evidence: string[]; toolControl?: string; shifts?: Partial<Record<Shift, Proof>>;
+  orders?: Record<string, OrderProof> };
 type Work = { focus: number; held: boolean; profiles: number[][]; acquired: boolean[] };
 type Preparation = { phase: Strategy; command: NativeCommand; target: number; projected: Work; tool?: NativeBox; shift?: Shift;
-  ordering?: { support: string; probe: boolean } };
+  ordering?: { support: string; probe: boolean; transferred?: RankOrder }; complement?: string };
 type Proposal = NativeProposal & { local: State; scene: Scene; strategy: Strategy; target: number; attempt: string; needId: string; preparation?: Preparation };
 const equal = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 const empty = (epoch = 0): State => ({ epoch, count: 0, tried: [], evidence: [], stopped: false });
@@ -68,13 +71,69 @@ function signedSupports(rows: NativeRows, tools: Tool[]): Tool[] {
   });
 }
 
-function measure(observation: NativeObservation, rows: NativeRows, includeTools = false): Scene | null {
+type ReceiverBinding = {
+  bbox: [number, number, number, number];
+  enclosure_value: number;
+  upper_value: number;
+  lower_value: number;
+  reference_row: number;
+  reference_columns: number[];
+  reference_value: number;
+  cut_measurements: { signed_cut_offsets: number[]; rank_columns: number[]; rank_width_pixels: number };
+  supportOnly?: true;
+};
+
+function completeReceiverBands(rows: NativeRows, bindings: ReceiverBinding[], stemRows: number[], retained?: ReceiverBinding): ReceiverBinding[] | null {
+  if (bindings.length === stemRows.length) return bindings;
+  const template = retained ?? bindings[0];
+  if (!template || bindings.length > stemRows.length) return null;
+  const referenceStem = stemRows.find(stem => stem >= template.bbox[0] && stem <= template.bbox[2]);
+  if (referenceStem === undefined) return null;
+  const supportPatterns: string[] = [];
+  const bands: ReceiverBinding[] = [];
+  for (const stem of stemRows) {
+    const measured = bindings.filter(({ bbox: [top, , bottom] }) => stem >= top && stem <= bottom);
+    if (measured.length > 1) return null;
+    if (measured.length) { bands.push(measured[0]!); continue; }
+    const [t, l, b, r] = template.bbox, delta = stem - referenceStem;
+    const top = t + delta, bottom = b + delta, bbox: ReceiverBinding['bbox'] = [top, l, bottom, r];
+    if (top < 0 || bottom >= rows.length) return null;
+    const ink = template.enclosure_value;
+    const framed = rows[top]!.slice(l, r + 1).every(pixel => pixel === ink)
+      && rows[bottom]!.slice(l, r + 1).every(pixel => pixel === ink)
+      && rows.slice(top + 1, bottom).every(row => row[l] === ink && row[r] === ink);
+    const { rank_columns, rank_width_pixels } = template.cut_measurements;
+    if (!framed) {
+      if (rows[top]!.slice(l, r + 1).some(pixel => pixel === ink)
+        || rows[bottom]!.slice(l, r + 1).some(pixel => pixel === ink)) return null;
+      supportPatterns.push(JSON.stringify(rows.slice(top, bottom + 1).map(row => row.slice(l - 1, r + 2))));
+      bands.push({ ...template, bbox, supportOnly: true,
+        cut_measurements: { ...template.cut_measurements, signed_cut_offsets: rank_columns.map(() => 0) } });
+      continue;
+    }
+    const reference_row = template.reference_row + delta;
+    const cut = measureRankedCuts(rows, { rank_columns, rank_width: rank_width_pixels, reference_row,
+      reference_columns: template.reference_columns, reference_value: template.reference_value,
+      band_top: top, band_bottom: bottom, upper_value: template.upper_value, lower_value: template.lower_value });
+    if (!cut.reference_visible || cut.uncertain_rank_indexes.length) return null;
+    bands.push({ ...template, bbox, reference_row, cut_measurements: { rank_columns, rank_width_pixels, signed_cut_offsets: cut.signed_cut_offsets } });
+  }
+  if (supportPatterns.length === 1 || new Set(supportPatterns).size > 1) return null;
+  return bands;
+}
+
+function measure(observation: NativeObservation, rows: NativeRows, includeTools = false, anchor?: ReceiverBinding): Scene | null {
   const [raw, context] = project(observation, rows, geometry);
-  const measured = profiles(raw), bindings = raw.receiver_bindings;
-  if (measured.length < 2 || measured.length > 6 || !Array.isArray(bindings) || bindings.length !== measured.length) return null;
+  const measured = profiles(raw);
+  if (measured.length < 2 || measured.length > 6 || !Array.isArray(raw.receiver_bindings)) return null;
+  const rawBindings = raw.receiver_bindings as ReceiverBinding[];
+  const bindings = completeReceiverBands(rows, rawBindings,
+    measured.map(item => item.profile.stem_relief_stem_origin[0]).sort((a, b) => a - b), anchor);
+  if (!bindings) return null;
   const inOrder = (parts: Part[]) => parts.sort((a, b) => rowCenter(a) - rowCenter(b));
   const pieces = inOrder(measured.map(item => ({ box: horizontalBox(item.bbox), values: item.profile.stem_relief_rank_height_pixels })));
-  const receivers = inOrder(bindings.map(item => ({ box: horizontalBox(item.bbox), values: item.cut_measurements.signed_cut_offsets })));
+  const receivers = inOrder(bindings.map(item => ({ box: horizontalBox(item.bbox), values: item.cut_measurements.signed_cut_offsets,
+    ...(item.supportOnly ? { supportOnly: true as const } : {}) })));
   const overlapped = (parts: Part[]) => parts.some((part, i) => i > 0 && parts[i - 1]!.box[3] >= part.box[1]);
   if (overlapped(pieces) || overlapped(receivers)
     || pieces.some((piece, i) => rowCenter(piece) < receivers[i]!.box[1] || rowCenter(piece) > receivers[i]!.box[3])
@@ -84,12 +143,13 @@ function measure(observation: NativeObservation, rows: NativeRows, includeTools 
   if (!selected || !Array.isArray(rawMarker) || (grip !== 0 && grip !== 1)) return null;
   const focus = pieces.findIndex(piece => equal(piece.box, horizontalBox(selected.bbox)));
   if (focus < 0) return null;
-  const tools = includeTools ? supports(observation, raw).flatMap(glyph => {
+  const tools = includeTools ? supports(observation, { ...raw, receiver_bindings: bindings }).flatMap(glyph => {
     const band = receivers.findIndex(receiver => equal(receiver.box, horizontalBox(glyph.band)));
-    return band < 0 ? [] : [{ band, box: glyph.bbox as NativeBox }];
+    return band < 0 ? [] : [{ band, box: glyph.bbox as NativeBox, appearance: glyph.appearance_sha256 as string }];
   }) : [];
   return { bands: pieces.map((profile, i) => ({ profile, receiver: receivers[i]! })),
-    focus, held: grip === 1, marker: horizontalBox(rawMarker), tools: pieces.length > 2 && tools.length ? signedSupports(rows, tools) : tools };
+    focus, held: grip === 1, marker: horizontalBox(rawMarker), tools: pieces.length > 2 && tools.length ? signedSupports(rows, tools) : tools,
+    ...(receivers.some(receiver => receiver.supportOnly) ? { receiverAnchor: anchor ?? rawBindings[0]! } : {}) };
 }
 
 const workshopState = (scene: Scene): Work => ({ focus: scene.focus, held: scene.held,
@@ -110,22 +170,37 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
   const needed = bands.map(({ receiver }) => receiver.values);
   const multisets = needed.map(heightMultiset);
   const canReorder = !!(domain && transform && tools.some(tool => !tool.shift));
+  const complementaryTool = scene.receiverAnchor && domain && transform && tools.every(tool => !tool.shift)
+    ? tools.filter(tool => tool.appearance && !prior.orders?.[tool.appearance]) : [];
+  const complement = complementaryTool.length === 1 && domain ? domain.minimum + domain.maximum : null;
+  const complementProfile = (profile: number[]) => profile.map(value => complement! - value);
+  function contributes(profile: number[], acquired: boolean[]) {
+    const current = heightMultiset(profile), inverse = complement === null ? null : heightMultiset(complementProfile(profile));
+    return multisets.some((wanted, i) => !acquired[i] && (wanted === current || wanted === inverse));
+  }
   const queue: { current: Work; first: Preparation | null; depth: number }[] = [{ current: workshopState(scene), first: null, depth: 0 }];
   const seen = new Set([JSON.stringify(queue[0]!.current)]);
   let probe: Preparation | null = null, progress: Preparation | null = null;
-  const alreadyAcquired = queue[0]!.current.acquired.filter(Boolean).length;
+  const startingReceipts = queue[0]!.current.acquired;
+  const alreadyAcquired = startingReceipts.filter(Boolean).length;
   for (const { current, first, depth } of queue) {
+    if (scene.receiverAnchor && first) {
+      const target = current.acquired.findIndex((acquired, index) => acquired && !startingReceipts[index]);
+      if (target >= 0) return { ...first, target };
+    }
     if (current.acquired.every(Boolean)) return first;
     if (canReorder && !progress && first && current.acquired.filter(Boolean).length > alreadyAcquired) progress = first;
     if (depth >= remaining || queue.length >= (domain ? 8192 : 256)) continue;
     const prepare = (phase: Strategy, command: NativeCommand, target: number, projected: Work, tool?: Tool,
-      ordering?: Preparation['ordering']): Preparation => first ?? { phase, command, target, projected,
-      ...(tool ? { tool: tool.box } : {}), ...(tool?.shift ? { shift: tool.shift } : {}), ...(ordering ? { ordering } : {}) };
-    const add = (phase: Strategy, command: NativeCommand, target: number, projected: Work, tool?: Tool, ordering?: Preparation['ordering']) => {
+      ordering?: Preparation['ordering'], complementSupport?: string): Preparation => first ?? { phase, command, target, projected,
+      ...(tool ? { tool: tool.box } : {}), ...(tool?.shift ? { shift: tool.shift } : {}), ...(ordering ? { ordering } : {}),
+      ...(complementSupport ? { complement: complementSupport } : {}) };
+    const add = (phase: Strategy, command: NativeCommand, target: number, projected: Work, tool?: Tool,
+      ordering?: Preparation['ordering'], complementSupport?: string) => {
       const id = JSON.stringify(projected);
       if (seen.has(id)) return;
       seen.add(id);
-      queue.push({ current: projected, first: prepare(phase, command, target, projected, tool, ordering), depth: depth + 1 });
+      queue.push({ current: projected, first: prepare(phase, command, target, projected, tool, ordering, complementSupport), depth: depth + 1 });
     };
     const { focus, held, profiles, acquired } = current;
     for (const [next, ref] of [[focus - 1, 'ACTION1'], [focus + 1, 'ACTION2']] as const) {
@@ -135,7 +210,9 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
       if (held) [moved[focus], moved[next]] = [profiles[next]!, profiles[focus]!];
       add(held ? 'carry_profile_to_receiver_band' : 'locate_compatible_profile', command, next, { ...current, focus: next, profiles: moved });
     }
-    if (toggle) add(held ? 'release_profile_after_fit' : 'test_profile_carry', toggle, focus, { ...current, held: !held });
+    if (toggle && (held || !scene.receiverAnchor || contributes(profiles[focus]!, acquired))) {
+      add(held ? 'release_profile_after_fit' : 'test_profile_carry', toggle, focus, { ...current, held: !held });
+    }
     if (!held) continue;
     const fit = commandFor(fitFrom(bands[focus]!));
     if (fit && !acquired[focus] && equal(profiles[focus]!, needed[focus]!)) {
@@ -147,11 +224,24 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
     const tool = available[0]!, shift = tool.shift, profile = profiles[focus]!;
     if (canReorder && transform && !shift) {
       const support = tool.box.join(','), known = orders?.[support];
-      const reordered = known ? projectRankOrder(profile, known.ranks) : null;
+      if (complement !== null && tool === complementaryTool[0]) {
+        const inverted = complementProfile(profile);
+        if (!contributes(inverted, acquired)) continue;
+        const target = needed.findIndex((wanted, i) => !acquired[i] && equal(wanted, inverted));
+        const changed = [...profiles]; changed[focus] = inverted;
+        add('test_framed_profile_tool', transform, target < 0 ? focus : target, { ...current, profiles: changed }, tool, undefined, support);
+        continue;
+      }
+      const portable = scene.receiverAnchor && tool.appearance && prior.orders?.[tool.appearance];
+      const transferred = portable ? resizeRankOrder(portable.ranks, profile.length) : null;
+      const compatible = transferred && (!known || transferred.every(([source], i) => known.ranks[i]?.includes(source!)));
+      const ranks = compatible ? transferred : known?.ranks;
+      const reordered = ranks ? projectRankOrder(profile, ranks) : null;
       if (reordered) {
         const target = needed.findIndex((wanted, i) => !acquired[i] && equal(wanted, reordered));
         const changed = [...profiles]; changed[focus] = reordered;
-        add('test_framed_profile_tool', transform, target < 0 ? focus : target, { ...current, profiles: changed }, tool, { support, probe: false });
+        add('test_framed_profile_tool', transform, target < 0 ? focus : target, { ...current, profiles: changed }, tool,
+          { support, probe: false, ...(compatible ? { transferred } : {}) });
       } else if (!probe && new Set(profile).size > 1) {
         const multiset = heightMultiset(profile);
         const target = needed.findIndex((wanted, i) => !acquired[i] && multisets[i] === multiset && !equal(wanted, profile));
@@ -197,13 +287,13 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       const previous = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       if (previous.stopped) return null;
       const acquired = retained?.completed === observation.levels_completed ? retained : null;
-      const scene = measure(observation, rows, acquired !== null);
+      const scene = measure(observation, rows, acquired !== null, previous.receiverAnchor);
       if (!scene) return null;
       const { bands, focus, held } = scene;
       if (previous.count >= Math.max(24, bands.length * 12)) return null;
       const multipleTools = bands.length > 2;
       const domain = multipleTools ? previous.domain ?? measureDomain(scene) : null;
-      const local = domain ? { ...previous, domain } : previous;
+      const local = domain ? { ...previous, domain, ...(scene.receiverAnchor ? { receiverAnchor: scene.receiverAnchor } : {}) } : previous;
       const direct = bands.every(band => filled(band.receiver)
         || bands.filter(candidate => equal(candidate.profile.values, band.receiver.values)).length === 1);
       const needsPreparation = multipleTools || local.preparing || !direct;
@@ -212,7 +302,8 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       if (!preparation && needsPreparation) return null;
       const target = preparation?.target ?? (filled(bands[0]!.receiver) ? 1 : 0);
       if (!preparation && filled(bands[target]!.receiver)) return null;
-      const source = preparation ? focus : equal(bands[0]!.profile.values, bands[target]!.receiver.values) ? 0 : 1;
+      const source = preparation ? scene.receiverAnchor && preparation.phase === 'locate_compatible_profile' ? preparation.projected.focus : focus
+        : equal(bands[0]!.profile.values, bands[target]!.receiver.values) ? 0 : 1;
       const toward = (ref: string) => inputs.find(input => input.action_ref === ref) ?? null;
       const switchGrip = toward('ACTION5');
       const side = fitFrom(bands[target]!);
@@ -229,13 +320,17 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       const attempt = JSON.stringify([bands.map(band => [band.profile.values, band.receiver.values]), focus, held, command.action_ref,
         ...(local.orders ? [Object.entries(local.orders).map(([support, proof]) => [support, proof.ranks])] : [])]);
       if (local.tried.includes(attempt)) return null;
-      const shift = preparation?.shift, ordering = preparation?.ordering;
+      const shift = preparation?.shift, ordering = preparation?.ordering, complement = preparation?.complement;
       const orderProof = ordering ? local.orders?.[ordering.support] : undefined;
-      const proof = ordering ? orderProof : shift ? local.shifts?.[shift] ?? acquired?.shifts?.[shift] : local.verified?.[phase];
+      const proof = ordering ? orderProof : complement ? local.complements?.[complement]
+        : shift ? local.shifts?.[shift] ?? acquired?.shifts?.[shift] : local.verified?.[phase];
       const reused = ordering ? !ordering.probe && proof?.control === command.action_ref
-        : proof?.control === command.action_ref || !shift && !!preparation && !!acquired?.used.includes(command.action_ref);
+        : proof?.control === command.action_ref || !shift && !complement && !!preparation && !!acquired?.used.includes(command.action_ref);
       const ref = observation.observation_ref;
-      const proofRefs = proof?.control === command.action_ref ? orderProof?.observations ?? [proof.evidence] : [];
+      const transferredProof = ordering?.transferred && preparation?.tool
+        ? scene.tools.find(tool => equal(tool.box, preparation.tool!))?.appearance : undefined;
+      const proofRefs = proof?.control === command.action_ref ? orderProof?.observations ?? [proof.evidence]
+        : transferredProof ? acquired?.orders?.[transferredProof]?.observations ?? [] : [];
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...proofRefs,
         ...(preparation && acquired ? acquired.evidence : [])]
         .filter(item => item !== ref))];
@@ -244,7 +339,9 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = reused ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
-      const label = ordering?.probe ? 'Test whether the tool reorders the teeth while preserving their heights'
+      const label = complement ? proof ? 'Apply the measured height complement to every tooth' : 'Test whether the tool complements every tooth height'
+        : ordering?.probe ? 'Test whether the tool reorders the teeth while preserving their heights'
+        : ordering?.transferred ? describeRankOrder(ordering.transferred)
         : orderProof ? describeRankOrder(orderProof.ranks)
         : shift === 1 ? 'Raise each tooth by one step within the observed height range'
         : shift === -1 ? 'Lower each tooth by one step within the observed height range' : profileTransferStrategies[phase];
@@ -276,31 +373,48 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = observed(proposal, measure(after, second));
+      const matched = observed(proposal, measure(after, second, false, proposal.scene.receiverAnchor));
       return { matched, seal_prefix: true, reason: matched ? 'profile_transfer_confirmed' : 'profile_transfer_contradicted' };
     },
     record(before, after, command, _first, second, proposal) {
       if (after.levels_completed > before.levels_completed) {
         const toolControl = proposal.local.verified?.test_framed_profile_tool?.control ?? retained?.toolControl;
+        const orders = { ...retained?.orders };
+        for (const tool of proposal.scene.tools) {
+          const proof = proposal.local.orders?.[tool.box.join(',')];
+          if (!tool.appearance || !proof) continue;
+          const earlier = orders[tool.appearance];
+          const transferred = earlier && resizeRankOrder(earlier.ranks, proof.ranks.length);
+          const compatible = transferred?.every(([source], i) => proof.ranks[i]?.includes(source!));
+          orders[tool.appearance] = earlier && compatible && proof.ranks.some(sources => sources.length !== 1)
+            ? { ...proof, ranks: earlier.ranks, observations: [...new Set([...earlier.observations, ...proof.observations])] }
+            : proof;
+        }
         retained = { completed: after.levels_completed,
           used: [...new Set([...(retained?.used ?? []), ...(proposal.local.used ?? []), command.action_ref])],
           evidence: [...proposal.local.evidence.slice(-4), after.observation_ref],
           ...(toolControl ? { toolControl } : {}),
+          ...(Object.keys(orders).length ? { orders } : {}),
           ...(proposal.local.shifts || retained?.shifts ? { shifts: { ...retained?.shifts, ...proposal.local.shifts } } : {}) };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = proposal.local;
-      const next = measure(after, second), ordering = proposal.preparation?.ordering;
-      const newOrder = ordering?.probe ? observeOrderProbe(proposal, next) : null;
-      const confirmed = ordering?.probe ? !!newOrder : observed(proposal, next);
+      const next = measure(after, second, false, proposal.scene.receiverAnchor), ordering = proposal.preparation?.ordering;
+      const probedOrder = ordering?.probe ? observeOrderProbe(proposal, next) : null;
+      const confirmed = ordering?.probe ? !!probedOrder : observed(proposal, next);
+      const newOrder = probedOrder ?? (confirmed && ordering?.transferred && next
+        ? observeRankOrder(proposal.scene.bands[proposal.scene.focus]!.profile.values, next.bands[next.focus]!.profile.values,
+          local.orders?.[ordering.support]?.ranks) : null);
       const shift = proposal.preparation?.shift;
+      const complement = proposal.preparation?.complement;
       const proof = { control: command.action_ref, evidence: after.observation_ref };
       const observations = ordering && newOrder
         ? [...new Set([...(local.orders?.[ordering.support]?.observations ?? []), before.observation_ref, after.observation_ref])] : [];
       state = { ...local, count: local.count + 1, stopped: !confirmed,
         ...(proposal.preparation ? { preparing: true as const } : {}),
         ...(newOrder && ordering ? { orders: { ...local.orders, [ordering.support]: { ...proof, ranks: newOrder, observations } } } : {}),
+        ...(confirmed && complement ? { complements: { ...local.complements, [complement]: proof } } : {}),
         ...(confirmed && shift ? { shifts: { ...local.shifts, [shift]: proof } } : {}),
         ...(confirmed ? { verified: { ...local.verified, [proposal.strategy]: proof },
           used: [...new Set([...(local.used ?? []), command.action_ref])] } : {}),
