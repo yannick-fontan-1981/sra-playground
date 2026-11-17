@@ -1555,3 +1555,11 @@ Les premiers retours permettent de mesurer deux cycles de trois et six pas. La b
 La quatrième commande montre la poussée qui ramène le vert dans le couloir. À la huitième, le vert garde sa position pendant que la projection déplace le grand poussoir de 27 pixels. SIC passe ensuite par le haut pour rejoindre l'ouverture. Les positions et les phases sont comparées à chaque retour des deux séries continues de trois et douze commandes.
 
 Le niveau 5 est gagné en **20 commandes et 3,87 s** dans le rejeu configuré pour huit workers. Les 153 commandes relèvent de SIC seul. Les 133 commandes et retours des niveaux 1 à 4 concordent avec `c4effa25`. La permutation de palette reproduit le parcours et les effets géométriques. Empreinte complète `1b066f038778d3a31483ba604a7a63d39394265ceca2ecb094066e9644c965f0`. Le contrôle TypeScript et 217 tests ciblés passent.
+
+### SP80 niveau 5, diviser un flux et changer la direction d’un front
+
+SIC lit le sens de chaque source à partir de son capuchon et l'incidence de chaque réceptacle à partir de son ouverture. Il déduit une pose candidate du coude en alignant sa concavité sur une source et sur l'ouverture latérale. Il ajoute les barres à partir des fronts prévus et recalcule le contour de l'ensemble à chaque ajout. La recherche conserve les placements dont les contours laissent les quatre voies disponibles et vérifie que chaque pièce peut rejoindre sa pose en gardant libres les approches des ouvertures.
+
+Le rejeu vérifie les déplacements et la sélection après chaque commande, avec des séries de 2, 8 et 6 translations. La libération gagne le niveau. Les **52 cellules** de la projection apparaissent dans les images. Sur quatre images successives, le front monte jusqu'au coude, puis se propage sur deux cases latérales avant de rejoindre son ouverture.
+
+Le niveau 5 est gagné en **21 commandes et 5,28 s** dans le rejeu configuré pour huit workers. Les 75 commandes relèvent de SIC seul. Les 54 commandes et retours des niveaux 1 à 4 concordent avec `0e659168`. La permutation de palette conserve le trajet et les effets géométriques. Empreinte du rejeu `84032209fe614ea4a5fa528f3ce9be514402f9525851dcf2480ca5448b6dce7e`. Le contrôle TypeScript et les 292 tests ciblés passent.

@@ -932,6 +932,8 @@ export function readNativeResolution(agent: {
   if (situationCard && (family === branchAlignmentId || family === verifyBranchAlignmentId)) {
     const contributor = bounds(card?.contributor);
     if (contributor) subjects.push({ label: 'Selected contributor', box: contributor });
+    const turn = bounds(card?.turningContributor);
+    if (turn && !contributor?.every((value, i) => value === turn[i])) subjects.push({ label: 'Corner that turns the flow', box: turn });
     if (Array.isArray(card?.goals)) for (const goal of card.goals) {
       const box = bounds(goal);
       if (box) subjects.push({ label: 'Receiving opening', box });
