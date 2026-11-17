@@ -1279,3 +1279,9 @@ La table donne le coin supérieur gauche du support en pixels. Les ouvertures so
 Les deux traversées sont ensuite confirmées sur le jeu. Le curseur rejoint l’îlot central en 12 mouvements après l’ouverture du passage, y reste pendant les neuf déplacements du support et rejoint le palier supérieur en neuf mouvements. La dérivation du rail, le placement du support et le choix de l’ouverture ont été testés hors du solveur autonome.
 
 Le rejeu de régression de `161c7c9e` s’arrête à la victoire du niveau 4 pour chacun des 100 jeux. Les 400 niveaux sont gagnés sous autorité SIC seule. Les commandes, observations et animations concordent pour 98 parcours. SELE et TRIA gagnent chacun avec six commandes de plus.
+
+### TRIA niveau 5, réutilisation partielle des commandes
+
+Le motif comporte sept pièces. SIC reconnaît la grille et les panneaux à partir des retours publics. Il réutilise les déplacements déjà mesurés pour les commandes dont le panneau et la catégorie de pièce concordent, même si d’autres commandes deviennent visibles. Les déplacements candidats sont toujours contrôlés sur les positions occupées et le retour confirme le placement après chaque clic. La borne d’énumération des affectations est appliquée aux permutations par catégorie.
+
+**TRIA gagne le niveau 5 en 23 clics et 14,20 s de temps mural** lors du rejeu complet avec le réglage de huit processus. Les 86 commandes relèvent de SIC seul. Les 63 commandes et retours jusqu’au niveau 4 reproduisent le rejeu de référence après l’exploration alternée. Le contrôle TypeScript et les 97 tests ciblés passent.
