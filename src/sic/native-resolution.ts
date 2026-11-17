@@ -692,6 +692,10 @@ export function readNativeResolution(agent: {
     if (actor) subjects.push({ label: 'Piece carrying the current program', box: actor });
     const destination = bounds(card?.contactDestination);
     if (destination) subjects.push({ label: 'Unfamiliar tile in the proposed trial', box: destination });
+    if (Array.isArray(card?.markedTerrain)) for (const tile of card.markedTerrain) {
+      const box = bounds(tile);
+      if (box) subjects.push({ label: 'Interior tile with an unverified effect', box });
+    }
     if (Array.isArray(card?.affected)) for (const target of card.affected) {
       const box = bounds(target);
       if (box) subjects.push({ label: 'Piece in the projected interaction', box });

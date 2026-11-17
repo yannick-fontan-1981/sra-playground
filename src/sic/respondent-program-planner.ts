@@ -1,16 +1,18 @@
 import type { OccurrenceRecord } from '../logos-engine/v6-occurrence-scene.ts';
+import type { NativePoint } from '../logos-engine/v6-native-types.ts';
 
 type Word = number[];
 export type ProgramBody = { base: number[]; word: Word };
 export type ProgramTurn = { base: number[]; targets: ProgramBody[] };
-export type RespondentContext = { initial: ProgramTurn; points: number[][]; sites: number[][]; evidence: string[] };
+export type RespondentTerrain = { marked: NativePoint[]; unknown: NativePoint[] };
+export type RespondentContext = { initial: ProgramTurn; points: number[][]; sites: number[][]; evidence: string[]; terrain?: RespondentTerrain };
 export type ScheduledProgramStep = {
   kind: 'insert' | 'remove' | 'execute'; label?: number; before: Word; word: Word;
-  base: number[]; forecasts: ProgramTurn[];
+  base: number[]; forecasts: ProgramTurn[]; markedTerrain?: NativePoint[];
 };
 type Body = { at: string; word: Word };
 type Turn = { at: string; targets: Body[] };
-type Hypothesis = { removeTop: boolean; respondentsInteract: boolean };
+type Hypothesis = { removeTop: boolean; respondentsInteract: boolean; removesEnteringRespondent?: boolean };
 type Change = { remove: number; insert: Word };
 type Stage = { word: Word; change: Change; returns: Turn[][]; cost: number };
 
@@ -51,10 +53,11 @@ export function planRespondentPrograms(model: OccurrenceRecord, context: Respond
   const limit = Math.min(5, Math.max(existing.length, Math.max(...context.initial.targets.map(body => body.word.length)) + 2));
   const programs = enumerateWords(labels, limit);
   const sites = new Set(context.sites.map(key));
-  const steps = new Map([...safe].map(at => [at, new Map([...motion].map(([label, vector]) => {
-    const destination = offset(at, vector);
-    return [label, safe.has(destination) ? destination : at] as const;
-  }))]));
+  const marked = new Set(context.terrain?.marked.map(key)), unknown = new Set(context.terrain?.unknown.map(key));
+  const variantsToCheck = context.terrain ? hypotheses.flatMap(hypothesis =>
+    [true, false].map(removesEnteringRespondent => ({ ...hypothesis, removesEnteringRespondent }))) : hypotheses;
+  const steps = new Map([...safe].map(at => [at, new Map([...motion].map(([label, vector]) =>
+    [label, offset(at, vector)] as const))]));
   const contact = new Map([...safe].map(at => [at, new Set((model.interaction.vectors as number[][]).map(vector => offset(at, vector)))]));
 
   const execute = (previous: Turn, word: Word, hypothesis: Hypothesis): Turn | null => {
@@ -72,7 +75,15 @@ export function planRespondentPrograms(model: OccurrenceRecord, context: Respond
           }
         } else {
           const destination = steps.get(actor.at)?.get(label) ?? actor.at;
-          if (!actors.some((other, position) => index !== position && other.word.length && other.at === destination)) actor.at = destination;
+          if (actors.some((other, position) => index !== position && other.word.length && other.at === destination)) continue;
+          if (unknown.has(destination)) return null;
+          if (marked.has(destination)) {
+            // Never test the unfamiliar support by sending the controlled stack
+            // into it. A respondent can distinguish blocking from removal.
+            if (index === 0) return null;
+            if (hypothesis.removesEnteringRespondent) { actor.word = []; break; }
+          }
+          if (safe.has(destination)) actor.at = destination;
         }
       }
       if (targets.every(body => !body.word.length)) break;
@@ -88,20 +99,26 @@ export function planRespondentPrograms(model: OccurrenceRecord, context: Respond
       if (performance.now() >= deadline || projections >= 450_000) break;
       const change = changeWord(current, word), edits = change.remove + change.insert.length;
       if (edits >= budget || (best && edits + 1 >= best.cost)) continue;
-      let variants = hypotheses.map(() => start);
+      let variants = variantsToCheck.map(() => start);
       const returns: Turn[][] = [], seen = new Set<string>();
       for (let turn = 1; turn <= 10 && edits + turn <= budget; turn++) {
-        const next = variants.map((variant, index) => execute(variant, word, hypotheses[index]!));
+        const next = variants.map((variant, index) => {
+          // A removed respondent leaves the projection absorbing at the
+          // official boundary while the blocking alternative checks safety.
+          if (context.terrain && turn > 1 && variant.targets.every(body => !body.word.length)) return variant;
+          return execute(variant, word, variantsToCheck[index]!);
+        });
         projections += next.length;
         if (next.some(item => item === null)) break;
         variants = next as Turn[];
-        if (variants.some(item => item.at !== variants[0]!.at)) break;
+        const expected = context.terrain ? variants.filter((_, index) => variantsToCheck[index]!.removesEnteringRespondent) : variants;
+        if (expected.some(item => item.at !== expected[0]!.at)) break;
         const signatures = variants.map(digest), combined = signatures.join('|');
         if (seen.has(combined)) break;
         seen.add(combined);
-        returns.push(variants);
+        returns.push(expected);
         const stage = { word, change, returns: [...returns], cost: edits + turn };
-        if (variants.every(item => item.targets.every(body => !body.word.length))) {
+        if (expected.every(item => item.targets.every(body => !body.word.length))) {
           if (!best || stage.cost < best.cost) best = stage;
           break;
         }
@@ -147,5 +164,5 @@ export function planRespondentPrograms(model: OccurrenceRecord, context: Respond
       base = forecasts[0]!.base;
     }
   }
-  return plan;
+  return context.terrain ? plan.map(step => ({ ...step, markedTerrain: context.terrain!.marked })) : plan;
 }
