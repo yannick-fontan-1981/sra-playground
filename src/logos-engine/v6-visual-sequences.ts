@@ -35,11 +35,20 @@ const gcd = (a: number, b: number): number => { while (b) [a, b] = [b, a % b]; r
 const json = (v: unknown): JsonValue => v as JsonValue;
 const addGroup = <K, V>(groups: Map<K, V[]>, k: K, value: V): void => { const xs = groups.get(k) ?? []; xs.push(value); groups.set(k, xs); };
 
-export function visualFrameBoxes(observation: NativeObservation): FrameBox[] {
+export function visualFrameBoxes(observation: NativeObservation, rows?: NativeRows): FrameBox[] {
   const boxes: FrameBox[] = [];
   for (const e of observation.entities) {
     const [l, t, r, b] = e.bbox, w = r - l + 1, h = b - t + 1;
-    if (w < 4 || h < 4 || e.area !== 2 * w + 2 * h - 4) continue;
+    const perimeter = 2 * w + 2 * h - 4;
+    if (w < 4 || h < 4 || e.area < perimeter || e.area >= w * h) continue;
+    if (e.area > perimeter) {
+      // A marker can share the frame's ink and touch it without changing its boundary.
+      if (rows && [rows[t], rows[b]].every(row => row?.slice(l, r + 1).every(ink => ink === e.palette_value))
+        && rows.slice(t + 1, b).every(row => row[l] === e.palette_value && row[r] === e.palette_value)) {
+        boxes.push({ box: [l, t, r, b], border: e.palette_value, size: [w, h] });
+      }
+      continue;
+    }
     const expected = new Set<string>();
     for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (x === 0 || x === w - 1 || y === 0 || y === h - 1) expected.add(pkey(x, y));
     if (e.mask.length === expected.size && e.mask.every(([x, y]) => expected.has(pkey(x, y)))) boxes.push({ box: [l, t, r, b], border: e.palette_value, size: [w, h] });
@@ -49,9 +58,9 @@ export function visualFrameBoxes(observation: NativeObservation): FrameBox[] {
 export function visualInterior(rows: NativeRows, box: Box): number[][] {
   const [l, t, r, b] = box; return rows.slice(t + 1, b).map(row => row.slice(l + 1, r));
 }
-export async function visualLayout(observation: NativeObservation, rows: NativeRows): Promise<Layout | null> {
+export async function visualLayout(observation: NativeObservation, rows: NativeRows, includeJoinedFrames = false): Promise<Layout | null> {
   const groups = new Map<string, FrameBox[]>(), matrix = new Map<string, FrameBox[][]>(), counts = new Map<number, number>();
-  for (const box of visualFrameBoxes(observation)) addGroup(groups, canonical([box.size, box.box[1]]), box);
+  for (const box of visualFrameBoxes(observation, includeJoinedFrames ? rows : undefined)) addGroup(groups, canonical([box.size, box.box[1]]), box);
   for (const group of groups.values()) {
     const ordered = [...group].sort((a, b) => a.box[0] - b.box[0]), xs = ordered.map(b => b.box[0]);
     if (xs.length < 3 || new Set(xs.slice(1).map((x, i) => x - xs[i]!)).size !== 1) continue;

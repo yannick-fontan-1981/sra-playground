@@ -1503,3 +1503,9 @@ Le niveau 5 est gagné en **15 commandes et 6,04 s**. Les 82 commandes relèvent
 SIC conserve séparément le nombre de jetons physiques et la longueur de la séquence développée. Les deux jetons d’appel occupent chacun un emplacement, puis développent la même définition de trois valeurs. La définition est remplie une seule fois et son contenu est revérifié à chaque occurrence. Une référence circulaire interromprait le développement.
 
 Le niveau 5 est gagné en **17 commandes et 9,05 s**. Les 71 commandes relèvent de SIC seul. Les 54 commandes et retours des niveaux 1 à 4 concordent avec la référence `14dd5cc328147b2b0bdf13b2d7ee26d419c590cb847d28403d883b5bc6db8dbe`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et les 10 tests ciblés passent. Empreinte du rejeu complet `2b4fbd9abf98a36cb76087f2381110c7ce59f9879525a5503aa22a1b3f2d868a`.
+
+### SERI niveau 5, retrouver le cadre et combiner deux rythmes
+
+Quand un marqueur touche le cadre de même couleur, SIC vérifie le périmètre directement dans le retour. La carte manquante reste au quatrième rang. La règle des barres revient toutes les trois cartes et celle du marqueur toutes les deux. Une seule proposition satisfait les deux rythmes sur la ligne entière. Le retour confirme la carte et préserve celles déjà remplies.
+
+Le niveau 5 est gagné en **4 clics et 1,64 s**. Les 20 commandes relèvent de SIC seul. Les 16 commandes et retours des niveaux 1 à 4 concordent avec la référence `a58316949bc07b7ba831f456eb9b3fdf2a5c39afaf944fe61cb7fdf49e866302`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et 22 tests ciblés passent. Empreinte du rejeu complet `2cea533e9779d07a0d14e30da3c8b1e5ca0600cbd7d97689959acfc4bfe7271b`.
