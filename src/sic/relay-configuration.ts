@@ -3,19 +3,22 @@ import {
   linkedTargetMarker, measureLinkedPacket, measureLinkedScene,
 } from '../logos-engine/v6-linked-packet-observation.ts';
 import type { NativeBox, NativeCommand, NativeObservation, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 
 type Body = { bbox: NativeBox; point: NativePoint; ref: string; connected_extent_bbox?: NativeBox; raster?: number[][] };
 type Control = Body & { radius: number };
-export type RelayScene = { objects: Body[]; controls: Control[]; goal: Body; frame: NativeBox; background: number };
+export type RelayScene = { objects: Body[]; controls: Control[]; goal: Body; frame: NativeBox; background: number; recoveredGoal?: true };
 type Angle = { phase: string; angle: number; ref: string };
 type Edge = { from: string; to: string; input: string; ref: string };
 type Front = { direction: NativePoint; start_frame: number };
 type SourceMark = { unmarked: number[][]; ink: number; distance: number };
+type GoalMark = { pixels: (number | null)[][]; center: NativePoint };
 export type RelayCalibration = { epoch: number; angles: Angle[]; edges: Edge[]; launch: { input: string; ref: string } | null };
 export type RelayWitness = {
   epoch: number; source: string; sourceAngle: number; origin: number; count: number;
   forward: string; reverse: string; launch: string; angles: Angle[]; evidence: string[];
   sourceMark?: SourceMark;
+  goalMark?: GoalMark;
   phaseDirections?: Record<string, number | null>;
 };
 export type RelayLeg = { body: Body; receiver: Body; direction: number };
@@ -72,23 +75,57 @@ function retainsCore(body: Body, measured: Body): boolean {
   return x >= left && x <= right && y >= top && y <= bottom;
 }
 
-export function readRelayScene(rows: NativeRows, retained?: RelayScene): RelayScene | null {
+function measureGoalMark(rows: NativeRows, { goal, background }: RelayScene): GoalMark | null {
+  const patch = bodyPatch(rows, goal.bbox), [l, t] = goal.bbox;
+  if (patch.length < 3 || patch.length > 11 || patch[0]!.length < 3 || patch[0]!.length > 11) return null;
+  const pixels = patch.map(row => {
+    const left = row.findIndex(ink => ink !== background);
+    let right = row.length - 1;
+    while (right >= 0 && row[right] === background) right--;
+    return row.map((ink, x) => x >= left && x <= right ? ink : null);
+  });
+  return { pixels, center: [goal.point[0] - l, goal.point[1] - t] };
+}
+
+function recoverGoal(rows: NativeRows, frame: NativeBox, mark: GoalMark): Body | null {
+  const width = mark.pixels[0]!.length, height = mark.pixels.length;
+  const [l, t, r, b] = frame, [dx, dy] = mark.center, ink = mark.pixels[dy]?.[dx];
+  let goal: Body | null = null;
+  for (let y = t + 1; y + height - 1 < b; y++) for (let x = l + 1; x + width - 1 < r; x++) {
+    if (rows[y + dy]?.[x + dx] !== ink || !mark.pixels.every((row, v) =>
+      row.every((color, u) => color === null || rows[y + v]?.[x + u] === color))) continue;
+    if (goal) return null;
+    const bbox: NativeBox = [x, y, x + width - 1, y + height - 1];
+    goal = { bbox, point: [x + dx, y + dy], ref: 'support:' + symbolicDigest(bbox) };
+  }
+  return goal;
+}
+
+export function readRelayScene(rows: NativeRows, retained?: RelayScene, mark?: GoalMark): RelayScene | null {
   const scene = measureLinkedScene(rows);
-  const goal = scene && linkedTargetMarker(rows, scene) as Body | null;
+  const measuredGoal = scene && linkedTargetMarker(rows, scene) as Body | null;
+  const goal = measuredGoal ?? (scene && mark ? recoverGoal(rows, scene.frame as NativeBox, mark) : null);
   if (!scene || !goal) return null;
   const visible = scene.objects as Body[];
   const objects = visible.map(body => ({ ...body, raster: bodyPatch(rows, body.bbox) }));
-  if (objects.length === scene.controls.length + 2) return { ...scene, goal, objects } as RelayScene;
+  if (!measuredGoal) {
+    const candidates = objects.flatMap((body, index) => retainsCore(goal, body) ? [index] : []);
+    if (candidates.length > 1) return null;
+    if (candidates.length === 1) objects[candidates[0]!] = { ...goal, raster: bodyPatch(rows, goal.bbox) };
+    else objects.push({ ...goal, raster: bodyPatch(rows, goal.bbox) });
+  }
+  const current = { ...scene, goal, objects, ...(!measuredGoal ? { recoveredGoal: true } : {}) } as RelayScene;
+  if (objects.length === scene.controls.length + 2) return current;
   if (!retained || objects.length + 1 !== retained.objects.length || key(scene.frame) !== key(retained.frame)
     || key(goal.point) !== key(retained.goal.point)) return null;
-  const missing = retained.objects.filter(body => !visible.some(measured => retainsCore(body, measured)));
+  const missing = retained.objects.filter(body => !objects.some(measured => retainsCore(body, measured)));
   if (missing.length !== 1) return null;
   const body = missing[0]!, [x, y] = body.point, [l, t] = body.bbox;
   // A wire can merge with the selected relay's component. Its previously observed patch can still be verified.
   const raster = bodyPatch(rows, body.bbox);
   const onlyCenterChanged = body.raster?.every((row, v) => row.every((value, u) =>
     (l + u === x && t + v === y) ? raster[v]?.[u] !== value : raster[v]?.[u] === value));
-  return onlyCenterChanged ? { ...scene, goal, objects: [...objects, { ...body, raster }] } as RelayScene : null;
+  return onlyCenterChanged ? { ...current, objects: [...objects, { ...body, raster }] } : null;
 }
 
 function packetLaunch(scene: RelayScene, rows: NativeRows, frames: readonly NativeRows[], ref: string, action: string) {
@@ -147,10 +184,11 @@ export function recordRelayCalibration(calibration: RelayCalibration | null, bef
   if (quarter < 2 || quarter > 16 || Math.abs(Math.abs(first.step) - Math.PI / (2 * quarter)) > 0.06) {
     return { local: next, witness: null };
   }
+  const goalMark = measureGoalMark(rows, scene);
   const witness: RelayWitness = { epoch: after.level_epoch, source: patchSignature(rows, initial.body.bbox), sourceAngle, origin,
     count: quarter * 4, forward: first.step > 0 ? first.edge.input : first.inverse.input,
     reverse: first.step < 0 ? first.edge.input : first.inverse.input, launch: launch.input, angles,
-    evidence: [launch.ref, first.previous.ref, first.edge.ref, first.inverse.ref, after.observation_ref] };
+    evidence: [launch.ref, first.previous.ref, first.edge.ref, first.inverse.ref, after.observation_ref], ...(goalMark ? { goalMark } : {}) };
   return { local: next, witness };
 }
 
@@ -199,9 +237,46 @@ export function planRelayRoute(scene: RelayScene, rows: NativeRows, witness: Rel
   return null;
 }
 
+function linePixels([x, y]: NativePoint, [u, v]: NativePoint): NativePoint[] {
+  const points: NativePoint[] = [];
+  const dx = Math.abs(u - x), dy = -Math.abs(v - y), sx = x < u ? 1 : -1, sy = y < v ? 1 : -1;
+  let error = dx + dy;
+  while (x !== u || y !== v) {
+    points.push([x, y]);
+    const next = 2 * error;
+    if (next >= dy) { error += dy; x += sx; }
+    if (next <= dx) { error += dx; y += sy; }
+  }
+  return points;
+}
+
+export function inferRelayBindings(scene: RelayScene, source: Body, rows: NativeRows): Record<number, string> {
+  const supports = [...scene.objects, ...scene.controls].map(({ bbox }) => bbox);
+  const relays = scene.objects.filter(body => body.ref !== source.ref && body.ref !== scene.goal.ref);
+  const [left, top, right, bottom] = scene.frame;
+  const used = new Set<string>(), inks = new Set<number>(), bindings: Record<number, string> = {};
+  for (const [slot, control] of scene.controls.entries()) {
+    const matches = relays.flatMap(body => {
+      const exposed = linePixels(body.point, control.point).filter(([x, y]) =>
+        !supports.some(([l, t, r, b]) => x >= l && x <= r && y >= t && y <= b)
+        && !(x >= left && x <= right && (y === top || y === bottom))
+        && !(y >= top && y <= bottom && (x === left || x === right)));
+      if (exposed.length < 4) return [];
+      const [x, y] = exposed[0]!, ink = rows[y]?.[x];
+      return ink !== undefined && ink !== scene.background && exposed.every(([u, v]) => rows[v]?.[u] === ink) ? [{ body, ink }] : [];
+    });
+    if (matches.length !== 1 || used.has(matches[0]!.body.ref)) return {};
+    const { body, ink } = matches[0]!;
+    bindings[slot] = body.ref;
+    used.add(body.ref);
+    inks.add(ink);
+  }
+  return inks.size === 1 ? bindings : {};
+}
+
 export function retainScoredRelay(witness: RelayWitness, route: RelayRoute, before: NativeObservation,
   after: NativeObservation, rows: NativeRows, frames: readonly NativeRows[],
-  phaseDirections: Record<string, number | null> | undefined): RelayWitness | null {
+  phaseDirections: Record<string, number | null> | undefined, scene: RelayScene): RelayWitness | null {
   const trace = measureLinkedPacket(rows, frames, before.observation_ref, witness.launch);
   if (trace.status !== 'measured') return null;
   const segment = linkedSegmentFor(route.source, trace.segments) as Front | null;
@@ -212,7 +287,9 @@ export function retainScoredRelay(witness: RelayWitness, route: RelayRoute, befo
   if (segment ? Math.abs(wrap(angleOf(segment.direction) - angle)) > 0.08
     : !witness.sourceMark || !outgoing || legAngle === undefined || Math.abs(wrap(angleOf(outgoing.direction) - legAngle)) > 0.08) return null;
   const mark = witness.sourceMark ?? sourceMark(rows, route.source, angle);
+  const goalMark = witness.goalMark ?? measureGoalMark(rows, scene);
   return { ...witness, epoch: after.level_epoch, ...(mark ? { sourceMark: mark } : {}),
+    ...(goalMark ? { goalMark } : {}),
     ...(phaseDirections ? { phaseDirections } : {}),
     evidence: [...new Set([...witness.evidence.slice(-5), before.observation_ref, after.observation_ref])] };
 }
@@ -224,7 +301,9 @@ export function currentRelayControl(scene: RelayScene, slot: Control): Control |
 
 export function relaySelection(scene: RelayScene, first: NativeRows, second: NativeRows, previous: Body | null): Body | null {
   const parts = changedLinkedSupports(first, second, scene);
-  return linkedSelectionRecipient(first, second, parts, previous)[0] as Body | null;
+  const affected = scene.recoveredGoal
+    ? parts.filter(({ point: [x, y] }) => first[y]?.[x] !== second[y]?.[x]) : parts;
+  return linkedSelectionRecipient(first, second, affected, previous)[0] as Body | null;
 }
 
 export function sameRelayLayout(original: RelayScene, current: RelayScene): boolean {
