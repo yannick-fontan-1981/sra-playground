@@ -1,7 +1,23 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { canonical, compareUnicode, immutableJson } from '../src/logos-engine/canonical.ts';
+import { assertUnicode, canonical, compareUnicode, immutableJson } from '../src/logos-engine/canonical.ts';
 import { digest } from '../src/logos-engine/canonical.ts';
+
+test('Unicode validation reuse keeps exact strings and rejects malformed surrogates after cache turnover', () => {
+  const valid = 'é𝄞\u0000終';
+  const invalid = [valid + '\ud800', '\udfff' + valid, '\ud800a', '\ud800\ud800', '\udfff\udfff'];
+  for (const value of ['', 'ASCII', valid, valid.repeat(100)]) {
+    assert.doesNotThrow(() => assertUnicode(value));
+    assert.doesNotThrow(() => assertUnicode(value));
+  }
+  for (const value of invalid) assert.throws(() => assertUnicode(value), /Lone Unicode surrogate/);
+  for (let index = 0; index < 5000; index++) assertUnicode(`entry-${index}-終`);
+  for (const value of invalid) {
+    assert.throws(() => assertUnicode(value), /Lone Unicode surrogate/);
+    assert.throws(() => immutableJson({ value }), /Lone Unicode surrogate/);
+  }
+  assert.equal(canonical(valid), JSON.stringify(valid));
+});
 
 test('canonical reuse sees changed mutable descendants of shallowly frozen parents', () => {
   const member = { count: 1 }, shallow = Object.freeze({ member });
