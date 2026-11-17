@@ -24,7 +24,8 @@ export interface AlternatingTopology {
   first: number;
 }
 
-export function alternatingTopology(rows: NativeRows, actor: Readonly<AlternatingActor>, calibration: R): AlternatingTopology | null {
+export function alternatingTopology(rows: NativeRows, actor: Readonly<AlternatingActor>, calibration: R,
+  coveredTarget?: AlternatingPosition): AlternatingTopology | null {
   const q = actor.size, pitch = calibration.alternating_material_full_step_pitch, first = calibration.alternating_material_first_value;
   const links = new Set<number>(calibration.alternating_material_connector_values), [row, column] = actor.bbox;
   if (pitch !== 2 * q) return null;
@@ -51,7 +52,8 @@ export function alternatingTopology(rows: NativeRows, actor: Readonly<Alternatin
     if (modulo(y - row - q, pitch) === 0 && modulo(x - column, pitch) === 0) pairs.push([[y - q, x], [y + q, x]]);
     for (const [a, b] of pairs) if (nodes.has(key(a)) && nodes.has(key(b))) { edges.get(key(a))!.add(key(b)); edges.get(key(b))!.add(key(a)); }
   }
-  if (nodes.size < 4 || new Set(targets.map(key)).size !== 1) return null;
+  const target = new Set(targets.map(key)).size === 1 ? targets[0] : !targets.length && coveredTarget && nodes.has(key(coveredTarget)) ? coveredTarget : null;
+  if (nodes.size < 4 || !target) return null;
   const guards: AlternatingGuard[] = [];
   for (const candidate of alternatingOverlays(rows)) {
     if (same(candidate.bbox, actor.bbox) || candidate.size !== q) continue;
@@ -67,7 +69,7 @@ export function alternatingTopology(rows: NativeRows, actor: Readonly<Alternatin
     guards.push({ position, front: [position[0] + Math.sign(dy) * pitch, position[1] + Math.sign(dx) * pitch],
       histogram: candidate.histogram, bbox: candidate.bbox });
   }
-  return { nodes, edges, target: targets[0]!, guards, pitch, first };
+  return { nodes, edges, target, guards, pitch, first };
 }
 
 interface SearchState {
