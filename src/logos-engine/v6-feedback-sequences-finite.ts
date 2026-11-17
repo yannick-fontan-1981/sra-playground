@@ -11,11 +11,11 @@ export interface FeedbackConfiguration {
   stages: string[]; allocation_orders: ('LEFT_TO_RIGHT' | 'RIGHT_TO_LEFT')[];
   measures: FeedbackMeasure[]; maximum_candidates: number; maximum_trials: number;
   maximum_evaluations: number; maximum_bundle: number; question: string;
-  group_equivalent_trials?: boolean;
+  group_equivalent_trials?: boolean; prune_dominated_trials?: boolean;
 }
 export type FeedbackMeasure = 'WORST_NONWINNING_RESIDUAL' | 'SUM_SQUARED_RESIDUALS' | 'NONWINNING_BRANCHES' | 'WINNING_HYPOTHESES';
 interface Law { ref: string; exact: string; elsewhere: string; absent: string; order: 'LEFT_TO_RIGHT' | 'RIGHT_TO_LEFT' }
-interface Account { code: string[]; law: Law }
+interface Account { code: string[]; law: Law; secretIndex: number }
 const same = (a: readonly unknown[], b: readonly unknown[]): boolean => a.length === b.length && a.every((v, i) => v === b[i]);
 const lexical = (a: readonly string[], b: readonly string[]): number => {
   for (let i = 0; i < Math.min(a.length, b.length); i++) if (a[i] !== b[i]) return a[i]! < b[i]! ? -1 : 1;
@@ -38,6 +38,17 @@ function trialRepresentatives(trials: string[][], alphabet: string[], fixed: Rea
     }
     return true;
   });
+}
+
+function secretMultiplicity(code: readonly string[], interchangeable: ReadonlyMap<string, number>): number {
+  let used = 0, weight = 1;
+  for (const value of code) {
+    const index = interchangeable.get(value);
+    if (index === undefined || index < used) continue;
+    if (index !== used) return 0;
+    weight *= interchangeable.size - used++;
+  }
+  return weight;
 }
 /** Exact occurrences are reserved before displaced occurrences, for both orders. */
 export function evaluateFeedbackAccounting(secret: readonly string[], trial: readonly string[], law: Law): string[] {
@@ -95,7 +106,7 @@ function* feedbackTrialCalculation(alphabet: readonly number[], length: number, 
     for (const law of laws) {
       evaluations += histories.length;
       if (histories.every(row => same(evaluateFeedbackAccounting(code, row.trial, law), row.marks))) {
-        accounts.push({ code, law }); compatibleLaws.add(law.ref); supported = true;
+        accounts.push({ code, law, secretIndex: index }); compatibleLaws.add(law.ref); supported = true;
       }
     }
     if (supported) candidates.push(code);
@@ -109,25 +120,48 @@ function* feedbackTrialCalculation(alphabet: readonly number[], length: number, 
     ...revealed.flatMap(value => value === null ? [] : [`value:${value}`])]);
   const trials = configuration.group_equivalent_trials && repeatable !== false ? trialRepresentatives(legal, refs, fixed) : legal;
   if (trials.length > configuration.maximum_trials) return { status: 'trial_bound', candidates: candidates.length, trials: trials.length };
+  const prune = configuration.prune_dominated_trials && configuration.measures[0] === 'WORST_NONWINNING_RESIDUAL'
+    && evaluations + trials.length * accounts.length > configuration.maximum_evaluations;
+  if (prune) trials.sort((a, b) => new Set(b).size - new Set(a).size);
   let selected: { trial: string[]; score: number[]; partitionCount: number } | null = null;
   for (let trialIndex = 0; trialIndex < trials.length; trialIndex++) {
     const trial = trials[trialIndex]!;
     yield { phase: 'trial_partitions', next_trial_index: trialIndex, feedback_evaluations: evaluations };
-    if (evaluations + accounts.length > configuration.maximum_evaluations) return { status: 'partition_bound', bound: true };
-    evaluations += accounts.length;
-    const branches = new Map<string, { winning: boolean; secrets: Set<string>; accounts: number }>();
+    if (!prune) {
+      if (evaluations + accounts.length > configuration.maximum_evaluations) return { status: 'partition_bound', bound: true };
+      evaluations += accounts.length;
+    }
+    // Renaming values absent from the trial and accumulated evidence preserves its entire feedback vector.
+    const interchangeable = new Map(prune ? refs.filter(value => !fixed.has(value) && !trial.includes(value))
+      .map((value, i) => [value, i]) : []);
+    const branches = new Map<string, { winning: boolean; secrets: Set<number>; count: number; accounts: number }>();
+    let dominated = false;
     for (let accountIndex = 0; accountIndex < accounts.length; accountIndex++) {
       if (accountIndex > 0 && accountIndex % 128 === 0) yield { phase: 'trial_partitions', next_trial_index: trialIndex,
         next_account_index: accountIndex, feedback_evaluations: evaluations };
       const account = accounts[accountIndex]!;
+      const weight = interchangeable.size > 1 ? secretMultiplicity(account.code, interchangeable) : 1;
+      if (!weight) continue;
+      if (prune && ++evaluations > configuration.maximum_evaluations) return { status: 'partition_bound', bound: true };
       const feedback = evaluateFeedbackAccounting(account.code, trial, account.law), winning = same(account.code, trial);
-      const key = JSON.stringify([feedback, winning]), branch = branches.get(key) ?? { winning, secrets: new Set(), accounts: 0 };
-      branch.secrets.add(JSON.stringify(account.code)); branch.accounts++; branches.set(key, branch);
+      const key = JSON.stringify([feedback, winning]), branch = branches.get(key) ?? { winning, secrets: new Set(), count: 0, accounts: 0 };
+      if (!branch.secrets.has(account.secretIndex)) {
+        branch.secrets.add(account.secretIndex);
+        branch.count += weight;
+      }
+      branch.accounts += weight;
+      branches.set(key, branch);
+      // This branch can only grow. A strictly worse worst case cannot win on any tie-breaker.
+      if (prune && selected && !branch.winning && branch.count > selected.score[0]!) {
+        dominated = true;
+        break;
+      }
     }
+    if (dominated) continue;
     const nonwinning = [...branches.values()].filter(branch => !branch.winning);
     const measures: Record<FeedbackMeasure, number> = {
-      WORST_NONWINNING_RESIDUAL: Math.max(0, ...nonwinning.map(branch => branch.secrets.size)),
-      SUM_SQUARED_RESIDUALS: nonwinning.reduce((sum, branch) => sum + branch.secrets.size ** 2, 0),
+      WORST_NONWINNING_RESIDUAL: Math.max(0, ...nonwinning.map(branch => branch.count)),
+      SUM_SQUARED_RESIDUALS: nonwinning.reduce((sum, branch) => sum + branch.count ** 2, 0),
       NONWINNING_BRANCHES: nonwinning.length,
       WINNING_HYPOTHESES: [...branches.values()].filter(branch => branch.winning).reduce((sum, branch) => sum + branch.accounts, 0),
     };

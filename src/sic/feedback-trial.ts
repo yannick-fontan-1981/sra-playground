@@ -16,13 +16,14 @@ export const feedbackTrialStrategies = {
 const configuration: FeedbackConfiguration = { stages: [], allocation_orders: ['LEFT_TO_RIGHT', 'RIGHT_TO_LEFT'],
   measures: ['WORST_NONWINNING_RESIDUAL', 'SUM_SQUARED_RESIDUALS', 'NONWINNING_BRANCHES'],
   maximum_candidates: 4096, maximum_trials: 256, maximum_evaluations: 65536, maximum_bundle: 1,
-  group_equivalent_trials: true, question: 'Separate the possible ordered answers' };
+  group_equivalent_trials: true, prune_dominated_trials: true, question: 'Separate the possible ordered answers' };
+type TrialPlan = { values: number[]; candidates: number; revealed: (number | null)[] };
 type State = { layout: FeedbackLayout; active: FeedbackSlotRow | null; repeatable: boolean | null; submission: string | null;
-  history: FeedbackHistoryRow[]; blocked: string[]; evidence: string[]; stopped: boolean };
+  history: FeedbackHistoryRow[]; blocked: string[]; evidence: string[]; stopped: boolean; plan?: TrialPlan };
 type EntryEvidence = { completed: number; size: FeedbackLayout['size']; pitch: number; rowOffsets: number[];
   activeOffset: number; submit: string; proof: string[] };
 type Choice = { action: NativeCommand; value: number | null; prefix: number[]; candidates: number | null; trial: number[] | null;
-  evaluatedTrials?: number };
+  evaluatedTrials?: number; plan?: TrialPlan };
 type Proposal = NativeProposal & { local: State; choice: Choice; palette: [number, number][]; needId: string };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
@@ -83,14 +84,25 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
         const indexOf = (color: number) => layout.alphabet.indexOf(color);
         const revealed = raw.map(color => color === other.empty ? null : indexOf(color));
         if (revealed.includes(-1)) return null;
-        const ordered = layout.alphabet.map((_, index) => index);
-        const history = local.history.map(row => ({ ...row, values: row.values.map(indexOf) }));
-        const result = await chooseFeedbackTrialCooperative([ordered, layout.count, prefix.map(indexOf), history,
-          revealed, local.repeatable, observation, remaining, configuration], execution);
-        if (result.status === 'proposed') {
-          const trial = (result.trial as number[]).map(index => layout.alphabet[index]!);
-          choice = entry(trial[prefix.length]!, Number(result.candidate_count), trial);
-          if (choice && typeof result.evaluated_trial_count === 'number') choice.evaluatedTrials = result.evaluated_trial_count;
+        const plan = local.plan;
+        if (local.repeatable && plan && equal(plan.revealed, revealed) && equal(plan.values.slice(0, prefix.length), prefix)
+          && plan.values.length === layout.count && layout.count - prefix.length + 1 <= remaining
+          && plan.values.slice(prefix.length).every(value => palette.some(([, color]) => color === value))) {
+          choice = entry(plan.values[prefix.length]!, plan.candidates, plan.values);
+          if (choice) choice.plan = plan;
+        } else {
+          const ordered = layout.alphabet.map((_, index) => index);
+          const history = local.history.map(row => ({ ...row, values: row.values.map(indexOf) }));
+          const result = await chooseFeedbackTrialCooperative([ordered, layout.count, prefix.map(indexOf), history,
+            revealed, local.repeatable, observation, remaining, configuration], execution);
+          if (result.status === 'proposed') {
+            const trial = (result.trial as number[]).map(index => layout.alphabet[index]!);
+            choice = entry(trial[prefix.length]!, Number(result.candidate_count), trial);
+            if (choice) {
+              choice.plan = { values: trial, candidates: Number(result.candidate_count), revealed };
+              if (typeof result.evaluated_trial_count === 'number') choice.evaluatedTrials = result.evaluated_trial_count;
+            }
+          }
         }
       }
       if (!choice || local.blocked.includes(JSON.stringify([observation.frame_hash, choice.action]))) return null;
@@ -155,6 +167,7 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const next = { ...local, evidence: [...local.evidence.slice(-5), after.observation_ref] };
+      delete next.plan;
       if (choice.value === null) {
         const matches = await feedbackMatches(second, after, layout, choice.prefix);
         const cleared = local.active && activePrefix(second, layout, local.active)?.length === 0;
@@ -170,6 +183,7 @@ export function createSicVerifyOrderedFeedback(): NativeFamily<Proposal> {
         if (active.length === 1 && mode !== null && (local.repeatable === null || local.repeatable === mode)) {
           next.active = active[0]!;
           next.repeatable = mode;
+          if (mode && choice.plan) next.plan = choice.plan;
         } else next.blocked = [...local.blocked, JSON.stringify([before.frame_hash, choice.action])];
       }
       state = next;
