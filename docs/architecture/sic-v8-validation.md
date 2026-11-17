@@ -1579,3 +1579,11 @@ SIC distingue le plot fixe, le plot porté et le transporteur vide. Il peut plac
 Le trajet comprend seize sauts, dont six utilisent un plot porté. Onze sauts gardent le nombre de jetons, et cinq en retirent un. Huit séries continues de déplacement vont jusqu'à neuf commandes. Chaque pas compare les poses, les charges et le cadrage. Le changement de vue scelle la série pour intégrer les éléments révélés.
 
 Le niveau 5 est gagné en **99 commandes et 117,13 s** dans le rejeu configuré pour huit workers. Le temps mesuré des reprises de décision est de 92,50 s. Les 243 commandes relèvent de SIC seul. Les 144 commandes et retours des niveaux 1 à 4 concordent avec `9072b10e`. La permutation de palette conserve le parcours et les effets géométriques. Empreinte complète `9fea2b91a85fd68bda4a22bb20bf63bca34baa959c654992f0678c3a22661c84`. Le contrôle TypeScript et les 148 tests ciblés passent.
+
+### M0R0 niveau 5, maintenir les passages avec des commandes communes
+
+Les quatre premières commandes remesurent les déplacements des deux mobiles. Elles confirment l'inversion relative des flèches horizontales. Les plaques isolées et les bandes de même apparence proposent trois relations. Les retours confirment l'ouverture à l'arrivée sur une plaque et la fermeture au départ du dernier mobile qui l'occupe.
+
+Le plan cherche les deux positions conjointement. Il prévoit les quatre traversées qui utilisent un mobile retenu sur sa plaque pendant que l'autre avance. La recherche écarte la fermeture sur un occupant et attend l'ouverture avant d'autoriser l'entrée. Le test compare à chaque commande les deux positions et les passages liés. Sept séries continues de deux à dix commandes préservent ces vérifications et se scellent aux changements de porte.
+
+Le niveau 5 est gagné en **49 commandes et 13,69 s** dans le rejeu configuré pour huit workers. Les 163 commandes relèvent de SIC seul. Les 114 commandes et retours des niveaux 1 à 4 concordent avec `fd2457e6`. La permutation de palette conserve le parcours et les effets géométriques. Empreinte complète `268518470ced21b331a1591ec79263a3b4dadf15984124d5d347049f843b70a8`. Le contrôle TypeScript et les 228 tests ciblés passent.

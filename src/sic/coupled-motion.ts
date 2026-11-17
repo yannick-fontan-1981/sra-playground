@@ -2,11 +2,13 @@ import { matchCoupledPair, measureCoupledPairs, type CoupledPair, type CoupledPa
 import { jointCoupledPairRoute, type CoupledPairRoute } from '../logos-engine/v6-coupled-pair-route.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { auxiliarySubjects, measureAuxiliaryRoute, verifyAuxiliaryStep, type AuxiliaryRoute } from './auxiliary-coupled-route.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { confirmedPressureControl, measurePressureField, planPressureRoute, pressureCellBox, pressureOpen,
+  readPressureResponse, verifyPressureFrame, type PressureState, type PressureStep } from './pressure-coupled-route.ts';
 
 export const coupledMotionId = 'sic_coupled_motion';
 export const verifyCoupledRouteId = 'sic_verify_coupled_route';
@@ -22,7 +24,10 @@ type State = { epoch: number; pair: CoupledPair; samples: Sample[]; floors: numb
 type AuxiliaryTransfer = { epoch: number; pairColor: number; auxiliaryColor: number; floor: number;
   leftFirst: boolean; controls: AuxiliaryRoute['field']['controls']; evidence: string[] };
 type Candidate = { input: string; route: State['remainingRoute'] };
-type Proposal = NativeProposal & ({ local: State; candidate: Candidate; auxiliary?: undefined } | { auxiliary: AuxiliaryRoute }) & { needId: string };
+type PairProposal = NativeProposal & ({ local: State; candidate: Candidate; auxiliary?: undefined } | { auxiliary: AuxiliaryRoute }) & { needId: string };
+type PressureProposal = NativeProposal & { pressure: PressureState; pressureSteps: PressureStep[]; needId: string };
+type Proposal = PairProposal | PressureProposal;
+const isPressure = (proposal: Proposal): proposal is PressureProposal => Object.hasOwn(proposal, 'pressure');
 const displayBox = ([t, l, b, r]: CoupledPairBox): NativeBox => [l, t, r, b];
 const keys = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -93,7 +98,74 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
   let auxiliary: AuxiliaryRoute | null = null;
   let auxiliaryTransfer: AuxiliaryTransfer | null = null;
+  let pressure: PressureState | null = null;
   let decide: NativeProgramHandle | undefined;
+  async function proposePressure(observation: NativeObservation, rows: NativeRows, remaining: number,
+    execution?: NativeExecution): Promise<PressureProposal | null> {
+    const epoch = observation.level_epoch, ref = observation.observation_ref;
+    const available = keys.filter(key => observation.available_action_refs.includes(key));
+    if (available.length !== keys.length || remaining < 1) return null;
+    let local = pressure?.epoch === epoch ? pressure : null;
+    const transfer = auxiliaryTransfer?.epoch === epoch - 1 ? auxiliaryTransfer : null;
+    if (!local && transfer) {
+      const measured = measureCoupledPairs(rows).filter(pair => pair.value === transfer.pairColor);
+      if (measured.length !== 1) return null;
+      const field = measurePressureField(rows, measured[0]!, transfer.floor);
+      if (!field) return null;
+      local = { ...field, epoch, controls: {}, evidence: transfer.evidence, tested: [], opened: [], closed: [], stopped: false };
+    }
+    if (!local || local.stopped || !verifyPressureFrame(rows, local.field, local.positions)) return null;
+    const { field, positions } = local, open = pressureOpen(field, positions);
+    const probe = available.find(key => !local!.controls[key] && !local!.tested.includes(JSON.stringify([key, positions])));
+    const path = probe ? [] : planPressureRoute(local, available, remaining, () => !!execution?.signal?.aborted
+      || (execution?.deadlineMs !== undefined && (execution.now ?? (() => performance.now()))() >= execution.deadlineMs));
+    const first = path[0];
+    if (!probe && !first) return null;
+    const relation = first?.changes[0] ?? first?.gateCrossings[0] ?? open.findIndex(Boolean);
+    const relationEffectsKnown = (index: number) => (open[index] ? local!.closed : local!.opened).includes(index);
+    const testingGate = !!first?.changes.some(index => !relationEffectsKnown(index));
+    const learning = !!probe || testingGate;
+    const mode = execution?.reasoningMode ?? (learning ? 'exploration' : 'solving'), strategy = learning ? 'P05' : 'P07';
+    const facts = { routeSupported: !learning, eligibleProbe: learning, knownInteraction: false, mode };
+    const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+    if (decision?.result !== strategy) return null;
+    const steps: PressureStep[] = [];
+    for (const move of path.slice(0, Math.min(remaining, maximumCommittedActions))) {
+      if (steps.length && move.changes.length) break;
+      steps.push(move);
+      if (move.changes.length) break;
+    }
+    const actions: NativeCommand[] = probe ? [{ action_ref: probe, data: {} }]
+      : steps.map(move => ({ action_ref: move.command, data: {} }));
+    const selectedRelation = field.relations[relation];
+    const holderPositions = first?.positions ?? positions;
+    const holder = selectedRelation ? holderPositions.findIndex(cell => selectedRelation.plates.includes(cell)) : -1;
+    const label = probe ? 'Measure how this direction moves each member on the new board'
+      : testingGate ? 'Compare the marked passage before and after the move onto or off its plate'
+        : holder >= 0 && selectedRelation ? 'Keep one member at the plate while the other approaches or crosses the passage'
+          : 'Reach the next joint position using the observed shared controls';
+    const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+    const parent = 'G_official_completion', objective = { kind: 'bring_jointly_controlled_pieces_together', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['first_piece', 'second_piece', 'pressure_plates', 'held_passages'], parentObjective: parent,
+      satisfactionContract: 'official_progress_after_the_joint_meeting_test' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = 'coupled-pressure:' + need.id;
+    return { status: 'proposed', kind: verifyCoupledRouteId, actions, pressure: local, pressureSteps: steps, needId: need.id,
+      binding: { observation_ref: ref, level_epoch: epoch },
+      steps: actions.map((action, i) => ({ action, expected_after: steps[i] ?? null })),
+      sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+        instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+      sicSituationCard: { strategy, need: 'Keep the passages open so the two pieces can meet',
+        mode, situation: label, evidence, agenda: [], triggerCard: decision.receipt.workflow,
+        members: positions.map(cell => pressureCellBox(field, cell)), nextMembers: first?.positions.map(cell => pressureCellBox(field, cell)) ?? [],
+        ...(selectedRelation ? { pressurePlates: selectedRelation.plates.map(cell => pressureCellBox(field, cell)),
+          pressureGates: selectedRelation.gates.map(cell => pressureCellBox(field, cell)),
+          pressureHolder: holder >= 0 ? pressureCellBox(field, holderPositions[holder]!) : null } : {}) },
+      question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
   return {
     id: verifyCoupledRouteId,
     async attachPrograms(registry) {
@@ -103,6 +175,8 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       const epoch = observation.level_epoch, ref = observation.observation_ref;
       if (remaining < 1 || !['ACTION6', ...keys].every(input => observation.available_action_refs.includes(input))) return null;
+      const held = await proposePressure(observation, rows, remaining, execution);
+      if (held) return held;
       let local = auxiliary?.epoch === epoch ? auxiliary : null;
       if (local && (local.stopped || local.frame !== observation.frame_hash)) return null;
       if (!local && auxiliaryTransfer?.epoch === epoch - 1) {
@@ -169,6 +243,7 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining, execution) {
       const available = keys.filter(input => observation.available_action_refs.includes(input));
       if (remaining < 1 || available.length < 3 || rows.length < 3) return null;
+      if (pressure?.epoch === observation.level_epoch) return proposePressure(observation, rows, remaining, execution);
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 60) return null;
       const measured = measureCoupledPairs(rows);
@@ -230,6 +305,13 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (isPressure(proposal)) {
+        const previous = proposal.pressureSteps[index - 1];
+        const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+          : !!previous && proposal.pressure.epoch === observation.level_epoch
+            && verifyPressureFrame(packet.frame_rows, proposal.pressure.field, previous.positions);
+        return { admitted, reason: admitted ? 'coupled_positions_and_gates_confirmed' : 'pressure_route_context_changed' };
+      }
       let admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       if (index > 0 && !proposal.auxiliary && proposal.local.epoch === observation.level_epoch) {
         const previous = proposal.candidate.route?.expected[index - 1], expected = proposal.candidate.route?.expected[index];
@@ -249,6 +331,16 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
     after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isPressure(proposal)) {
+        const { field } = proposal.pressure, step = proposal.pressureSteps[index];
+        const inScope = before.level_epoch === after.level_epoch && before.state === after.state;
+        const matched = !inScope ? false : step ? verifyPressureFrame(second, field, step.positions)
+          : readPressureResponse(second, field, proposal.pressure.positions) ? null : false;
+        return { matched, seal_prefix: matched !== true || !!step?.changes.length,
+          reason: !step ? 'measure_both_displacements_on_the_current_board' : matched
+            ? step.changes.length ? 'pressure_plate_changed_matching_passages' : 'verify_joint_positions_and_held_passages'
+            : 'joint_positions_or_passage_prediction_refuted' };
+      }
       if (proposal.auxiliary) {
         const matched = !!verifyAuxiliaryStep(proposal.auxiliary, first, second);
         const step = proposal.auxiliary.steps[0]!;
@@ -264,6 +356,28 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         reason: matched === true ? 'observed_joint_displacement' : 'compare_both_piece_returns' };
     },
     record(before, after, command, first, second, proposal, index) {
+      if (isPressure(proposal)) {
+        const local = index > 0 && pressure?.epoch === before.level_epoch ? pressure : proposal.pressure;
+        if (after.levels_completed > before.levels_completed) return { events: [],
+          reviewEvidence: 'Holding the passages allowed both pieces to reach the same position.' };
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const step = proposal.pressureSteps[index], expected = step && verifyPressureFrame(second, local.field, step.positions);
+        const seen = expected ? null : readPressureResponse(second, local.field, local.positions);
+        const positions = expected ? step.positions : seen?.positions ?? local.positions;
+        const learned = !step && seen ? confirmedPressureControl(local.field, local.positions, seen, command.action_ref, local.controls) : null;
+        const controls = learned ? { ...local.controls, [command.action_ref]: learned } : local.controls;
+        const pre = pressureOpen(local.field, local.positions), post = pressureOpen(local.field, positions);
+        const opened = post.flatMap((open, i) => open && !pre[i] ? [i] : []);
+        const closed = pre.flatMap((open, i) => open && !post[i] ? [i] : []);
+        pressure = { ...local, positions, controls, evidence: [...local.evidence.slice(-7), after.observation_ref],
+          tested: [...new Set([...local.tested, ...(!step ? [JSON.stringify([command.action_ref, local.positions])] : [])])],
+          opened: [...new Set([...local.opened, ...opened])], closed: [...new Set([...local.closed, ...closed])],
+          stopped: !expected && !seen };
+        return { events: [], ...(opened.length || closed.length ? {
+          reviewEvidence: opened.length ? 'A matching passage opened when a member reached its plate.'
+            : 'The matching passage closed when the last member left its plate.',
+        } : {}) };
+      }
       if (proposal.auxiliary && after.levels_completed > before.levels_completed) {
         const { field, focusPaint, initialLeftFirst, steps, epoch, evidence } = proposal.auxiliary;
         const [a, b] = steps[0]!.position.members;
@@ -296,11 +410,12 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
           ? { actions: route.actions.slice(index + 1), expected: route.expected.slice(index + 1) } : null };
       return { events: [] };
     },
-    state: () => ({ state, auxiliary, auxiliaryTransfer }),
+    state: () => ({ state, auxiliary, auxiliaryTransfer, ...(pressure ? { pressure } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       auxiliary = structuredClone((value.auxiliary as AuxiliaryRoute | undefined) ?? null);
       auxiliaryTransfer = structuredClone((value.auxiliaryTransfer as AuxiliaryTransfer | undefined) ?? null);
+      pressure = structuredClone((value.pressure as PressureState | undefined) ?? null);
     },
   };
 }
