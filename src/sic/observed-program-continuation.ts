@@ -8,6 +8,7 @@ import type { NativeBox, NativeCommand, NativeObservation, NativeRows } from '..
 import type { OccurrenceRecord } from '../logos-engine/v6-occurrence-scene.ts';
 import { planRespondentPrograms, type ProgramTurn, type RespondentContext, type ScheduledProgramStep } from './respondent-program-planner.ts';
 import { chooseProgramContactTrial, verifyProgramTrialEdit } from './program-contact-trial.ts';
+import { measureRespondentTerrain } from './program-terrain-context.ts';
 
 export type ProgramEdit = { before: NativeRows; after: NativeRows; epoch: number; evidence: string[] };
 export type ProgramWitness = { model: OccurrenceRecord; epoch: number; evidence: string[]; continued?: boolean };
@@ -28,6 +29,7 @@ export type ProgramChoice = {
   respondents?: ProgramTurn[];
   scheduled?: ScheduledProgramStep[];
   contactTrial?: { palette: number[]; pending: boolean; destination?: NativeBox };
+  markedTerrain?: NativeBox[];
 };
 
 const same = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right);
@@ -145,10 +147,10 @@ export function chooseRespondentProgram(witness: ProgramWitness, rows: NativeRow
   if (!display || !available.includes(model.command_ref)) return null;
   const members: OccurrenceRecord[] = layout?.members ?? displayMembers(rows, display, model);
   const word = members.map(member => member.color as number), world = programWorld(rows, model);
-  if (!word.length && !context) return chooseObservedProgram(witness, rows, available, remaining, deadline, retained);
+  if (!word.length && !context && !scheduled) return chooseObservedProgram(witness, rows, available, remaining, deadline, retained);
   const owners = word.length ? world.filter(body => same(body.word, word)) : [];
-  const plan = !context ? null : scheduled ?? (layout ? planRespondentPrograms(model, context, word,
-    layout.controls.map((control: OccurrenceRecord) => control.color), remaining, deadline) : null);
+  const labels = layout?.controls.map((control: OccurrenceRecord) => control.color) ?? [];
+  const plan = scheduled ?? (context && layout ? planRespondentPrograms(model, context, word, labels, remaining, deadline) : null);
   const step = plan?.[0];
   const matchedOwner: OccurrenceRecord | null = step && word.length ? owners.find(body => same(body.base, step.base))
     ?? (programSupportMatch(rows, model, step.base, word).matches ? { base: step.base, word } : null)
@@ -160,37 +162,54 @@ export function chooseRespondentProgram(witness: ProgramWitness, rows: NativeRow
     ?? base.map((value, index) => value - word.length * model.layer.step[index]) }, model) : null;
   const common = { display, actor, sceneMembers: members.map(member => member.bbox as NativeBox),
     affected: opponents.map(body => wordBounds(body, model)), forecast: null };
-  if (context) {
+  const follow = (route: ScheduledProgramStep[] | null): ProgramChoice | null => {
+    const step = route?.[0];
     if (!step || !same(word, step.before) || (word.length && !matchedOwner)) return null;
+    const markedTerrain = step.markedTerrain?.map(([x, y]): NativeBox => {
+      const shape = model.layer.shape as number[][];
+      return [x, y, x + Math.max(...shape.map(point => point[0]!)), y + Math.max(...shape.map(point => point[1]!))];
+    });
+    const evidence = markedTerrain ? { markedTerrain } : {};
     if (step.kind === 'execute') return { ...common, kind: 'run_verified_program', action: { action_ref: model.command_ref, data: {} },
-      region: null, word, next: null, respondents: step.forecasts, scheduled: plan!.slice(1) };
+      region: null, word, next: null, respondents: step.forecasts, scheduled: route!.slice(1), ...evidence };
     if (!layout || !available.includes('ACTION6')) return null;
     const edited = step.kind === 'remove' ? layout.members[0]
       : layout.controls.find((control: OccurrenceRecord) => control.color === step.label);
     if (!edited) return null;
     const region = edited.bbox as NativeBox;
     return { ...common, kind: step.kind === 'remove' ? 'remove_program_operator' : 'compose_observed_program',
-      action: clickProgramRegion(region), region, word: step.word, next: step.word.length ? base : null, scheduled: plan!.slice(1) };
-  }
+      action: clickProgramRegion(region), region, word: step.word, next: step.word.length ? base : null,
+      scheduled: route!.slice(1), ...evidence };
+  };
+  if (context || scheduled) return follow(plan);
   if (!layout || !matchedOwner || word.length > 2) return null;
   const moves = (model.moves as OccurrenceRecord[]).filter(move => move.status === 'phase_observed_translation');
   if (opponents.length && opponents.every(body => body.word.every((label: number) => label === model.interaction.label))) {
     return chooseObservedProgram(witness, rows, available, remaining, deadline, retained);
   }
   const motion = moves.find(move => move.label === word.at(-1));
-  if (!motion) return null;
-  const vector: number[] = motion.vectors[0], next = base.map((value, index) => value + vector[index]!);
   const field = programSurface(rows, model, world, base);
-  if (!field?.points.some((point: number[]) => same(point, next)) || opponents.some(body => same(body.base, next))) return null;
+  const tryTerrain = () => {
+    if (!field || opponents.length !== 1) return null;
+    const terrain = measureRespondentTerrain(rows, field, model, world);
+    if (!terrain) return null;
+    // A single visible respondent has no ordering ambiguity. Its current word,
+    // the confirmed editing site and both tile hypotheses define the projection.
+    return follow(planRespondentPrograms(model, { initial: { base, targets: opponents.map(body => ({ base: body.base, word: body.word })) },
+      points: field.points, sites: [base], evidence: witness.evidence, terrain }, word, labels, remaining, deadline));
+  };
+  if (!motion) return tryTerrain();
+  const vector: number[] = motion.vectors[0], next = base.map((value, index) => value + vector[index]!);
+  if (!field?.points.some((point: number[]) => same(point, next)) || opponents.some(body => same(body.base, next))) return tryTerrain();
   const reverse = moves.find(move => vector.every((value, index) => value === -move.vectors[0][index]));
-  if (!reverse) return null;
+  if (!reverse) return tryTerrain();
   if (word.length === 1) {
     const control = layout.controls.find((part: OccurrenceRecord) => part.color === reverse.label);
-    if (!control || !available.includes('ACTION6')) return null;
+    if (!control || !available.includes('ACTION6')) return tryTerrain();
     const region = control.bbox as NativeBox;
     return { ...common, kind: 'compose_observed_program', action: clickProgramRegion(region), region, word: [reverse.label, ...word], next: base };
   }
-  if (word[0] !== reverse.label) return null;
+  if (word[0] !== reverse.label) return tryTerrain();
   return { ...common, kind: 'probe_respondent_programs', action: { action_ref: model.command_ref, data: {} }, region: null,
     word, next: base, respondentProbe: { origin: base, next } };
 }
