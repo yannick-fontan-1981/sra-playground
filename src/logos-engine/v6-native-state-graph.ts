@@ -1,5 +1,5 @@
 /** Lossless native state graphs; immutable fragments are ordinary versioned V7 nodes. */
-import { assertUnicode, compareUnicode, immutableJson, isJsonObject, isOwnedImmutableJson } from './canonical.ts';
+import { assertUnicode, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord, isJsonObject, isOwnedImmutableJson } from './canonical.ts';
 import { sha256Bytes, symbolicDigest } from './v6-hash.ts';
 import type { JsonObject, JsonValue } from './ir.ts';
 import { BoundedWeakCache } from './bounded-weak-cache.ts';
@@ -65,7 +65,18 @@ function freezeHydrated<T extends object>(value: T): T {
 // their identities instead of recopying every unchanged encoded descendant.
 // Raw caller values still go through visitRaw; the complete canonical digest
 // before a Kernel commit still checks full size, depth and portable scalars.
-function ownedEncoded<T extends Encoded>(node: T): T { return immutableJson(node) as T; }
+function ownedEncoded<T extends Encoded>(node: T): T {
+  if (node === null || typeof node !== 'object') return immutableJson(node) as T;
+  let fields: readonly (readonly [string, JsonValue])[];
+  switch (node.kind) {
+    case 'float64': fields = [['kind', node.kind], ['bits', node.bits]]; break;
+    case 'ref': fields = [['kind', node.kind], ['id', node.id]]; break;
+    case 'array': fields = [['kind', node.kind], ['items', immutableJsonArray(node.items as readonly JsonValue[])]]; break;
+    case 'object': fields = [['kind', node.kind], ['members', immutableJsonRecord(Object.entries(node.members) as [string, JsonValue][])]]; break;
+    case 'concat': case 'merge': fields = [['kind', node.kind], ['parts', immutableJsonArray(node.parts as readonly JsonValue[])]]; break;
+  }
+  return immutableJsonRecord(fields) as T;
+}
 
 /**
  * The encoder below has already checked every raw value and creates this closed
