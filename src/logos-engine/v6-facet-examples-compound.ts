@@ -4,7 +4,7 @@ import { sha256Bytes, symbolicDigest as identity } from './v6-hash.ts';
 import { canonical as sourceCanonical, pythonEqual as equal } from './v6-operations.ts';
 import { facetBackground, facetBox, facetCenter, facetCounts, facetInside, facetLexicographic, facetPointKey,
   facetRectangles, facetShape, type FacetPoint, type FacetProjection, type FacetTriple } from './v6-facet-examples-geometry.ts';
-import { facetBounds, facetCandidates, facetImagePoints, facetRender,
+import { facetBounds, facetCandidates, facetImagePoints, facetLayeredCandidates, facetRender, facetRenderPrefix,
   type FacetFace, type FacetImage, type FacetSearchResult, type FacetStencilSolution } from './v6-facet-examples-stencils.ts';
 import type { NativeBox, NativeEntity, NativeObservation, NativeRecord, NativeRows } from './v6-native-types.ts';
 
@@ -117,7 +117,8 @@ export function facetCompoundModelIdentity(stamp: NativeRows, reference: NativeR
 }
 
 export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, portable: FacetPortableMethod | null,
-  cache: FacetCompoundCache, configuration: FacetCompoundConfiguration, allowTrimmedContour = false): FacetProjection | null {
+  cache: FacetCompoundCache, configuration: FacetCompoundConfiguration, allowTrimmedContour = false,
+  layered?: { maximumUnits: number; maximumStates: number }): FacetProjection | null {
   if (configuration.lateral_rule !== 'conditional_stencil_sharing_measured_face_edges'
     || configuration.requires_observed_seed_and_vertical_effect_and_boundary !== true) throw new Error('Unsupported compound stencil contract');
   if (!portable || !portable.up_shift?.length || !portable.boundary_ref) return null;
@@ -145,6 +146,12 @@ export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, port
     key = identity([key, 'trimmed_reference_contour']);
     if (!cache.has(key)) cache.set(key, facetCandidates(...search, true));
   }
+  if (layered && cache.get(key)!.status === 'no_compatible_composition') {
+    const workspace: FacetPoint = [model.world[2] - model.world[0] - 3, model.world[3] - model.world[1] - 3];
+    key = identity([key, 'layered_origins', layered, workspace]);
+    if (!cache.has(key)) cache.set(key, facetLayeredCandidates(reference.rows, model.stamp, model.faces, steps, model.background,
+      model.palette, layered.maximumUnits, layered.maximumStates, configuration.maximum_sample_denominator, configuration.sample_offsets, workspace));
+  }
   const result = cache.get(key)!;
   if (result.status !== 'compatible_minimal_within_model' || result.solutions.length !== 1) return null;
   const solution = result.solutions[0]!, world = model.world, palette = new Set(model.palette), actual: FacetImage = new Map();
@@ -154,7 +161,7 @@ export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, port
   }
   let support: NativeEntity, anchor: FacetPoint, point: FacetPoint, prefix: number, kind: string, claim: string;
   if (!actual.size) {
-    const full = facetRender(model.stamp, solution.placements, model.background), [l, t, r, b] = facetBounds(facetImagePoints(full));
+    const full = facetRenderPrefix(model.stamp, solution, solution.placements.length, model.background), [l, t, r, b] = facetBounds(facetImagePoints(full));
     const seeds: { margin: number; centered: number; entity: NativeEntity; anchor: FacetPoint }[] = [];
     for (const entity of obs.entities) {
       if (entity.palette_value !== model.background || !facetInside(entity.bbox, world) || !equal(facetShape(entity), portable.seed_face_shape)) continue;
@@ -173,7 +180,7 @@ export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, port
   } else {
     const matches: [number, FacetPoint][] = [], [al, at] = facetBounds(facetImagePoints(actual));
     for (let index = 1; index <= solution.placements.length; index++) {
-      const image = colored(facetRender(model.stamp, solution.placements.slice(0, index), model.background), palette);
+      const image = colored(facetRenderPrefix(model.stamp, solution, index, model.background), palette);
       const [l, t] = facetBounds(facetImagePoints(image)), candidateAnchor: FacetPoint = [al - l, at - t];
       const placed: FacetImage = new Map([...image].map(([pointKey, value]) => {
         const [x, y] = pointKey.split(',').map(Number) as FacetPoint;
@@ -193,8 +200,7 @@ export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, port
     support = found;
   }
   const scope = identity([obs.level_epoch, world, model.control, reference.box, reference.rows, key]);
-  const relativeNext = solution.placements.slice(0, prefix + 1);
-  const predicted = facetRender(model.stamp, relativeNext.map(([x, y]): FacetPoint => [x + anchor[0], y + anchor[1]]), model.background);
+  const predicted = facetRenderPrefix(model.stamp, solution, prefix + 1, model.background, anchor);
   const predictedColors: FacetTriple[] = [...predicted].filter(([, value]) => palette.has(value)).map(([key, value]) => {
     const [x, y] = key.split(',').map(Number) as FacetPoint; return [x, y, value];
   });
@@ -204,7 +210,8 @@ export function facetCompoundPlan(obs: NativeObservation, rows: NativeRows, port
     compound: { model_ref: key, prefix, anchor, solution, source_method: portable, port_status: claim,
       palette: model.palette, reference, expected_colored_pixels: predictedColors, state_bound: result.examined,
       falsifiers: ['whole_current_visible_render_differs', 'local_edit_not_predicted_stencil', 'other_interface_changes', 'final_visible_correspondence_without_score'],
-      limits: ['bounded_2d_stencils_not_hidden_3d_occupancy', 'contour_sampling_alternatives_retained', 'lateral_offsets_are_conditional_until_observed'] },
+      limits: [solution.paint_order ? 'logical_origins_and_depth_are_renderer_hypotheses' : 'bounded_2d_stencils_not_hidden_3d_occupancy',
+        'contour_sampling_alternatives_retained', 'lateral_offsets_are_conditional_until_observed'] },
     offer: { kind, point, support, assumptions: [claim, 'new_stencil_overlays_visible_support'],
       risks: ['return_not_proven', 'reference_sampling_uncertain', 'owner_is_visible_support_not_hidden_voxel'] } };
 }
