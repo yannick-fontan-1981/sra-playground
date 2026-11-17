@@ -71,6 +71,34 @@ function distributedTracks(positions: readonly NativePoint[]): Track[] {
   return tracks;
 }
 
+function latticeChain(positions: readonly NativePoint[]): number[] {
+  const pitches = ([0, 1] as const).map(axis => {
+    const values = [...new Set(positions.map(point => point[axis]))].sort((a, b) => a - b);
+    return Math.min(...values.slice(1).map((value, i) => value - values[i]!));
+  });
+  if (pitches.some(value => !Number.isFinite(value))) return [];
+  const [dx, dy] = pitches as [number, number];
+  const byPoint = new Map(positions.map((point, i) => [key(point), i]));
+  const neighbors = positions.map(([x, y]) => [[x - dx, y], [x + dx, y], [x, y - dy], [x, y + dy]].flatMap(point => {
+    const index = byPoint.get(key(point));
+    return index === undefined ? [] : [index];
+  }));
+  const ends = neighbors.flatMap((adjacent, i) => adjacent.length === 1 ? [i] : []);
+  if (ends.length !== 2 || neighbors.some(adjacent => adjacent.length < 1 || adjacent.length > 2)) return [];
+  const chain = [ends[0]!];
+  while (chain.at(-1) !== ends[1]) {
+    const next = neighbors[chain.at(-1)!]!.find(index => index !== chain.at(-2));
+    if (next === undefined) return [];
+    chain.push(next);
+  }
+  return chain.length === positions.length ? chain : [];
+}
+
+function slotContours(positions: readonly NativePoint[], tracks: readonly Track[]): number[][] {
+  const chain = latticeChain(positions);
+  return [...orbitCycles(positions), ...tracks.flatMap(track => [track.indices, track.alternating]), ...(chain.length ? [chain] : [])];
+}
+
 function prioritizeTrials(tracks: readonly Track[], size: number, controls: ReturnType<typeof sortedControls>, models: State['models']) {
   const unmeasured = controls.filter(control => !models[key(control.key)]);
   if (!tracks.length) return unmeasured[0];
@@ -116,7 +144,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
             || !prior.controls.has(key(point)) || !scene.controls.has(key(point))) return null;
           const before = orbitValues(first, positions, size);
           if (key(before) === key(values)) return null;
-          geometry!.rings ??= [...orbitCycles(positions), ...tracks.flatMap(track => [track.indices, track.alternating])];
+          geometry!.rings ??= slotContours(positions, tracks);
           const permutations = fitOrbit(before, values, geometry!.rings);
           return permutations.length === 1 ? { point, before, permutations } : null;
         });
@@ -226,7 +254,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
         permutations = prior?.permutations ?? [];
       } else if (actual.length) {
         if (geometry?.layout !== local.layout) geometry = { layout: local.layout, tracks: distributedTracks(positions) };
-        geometry.rings ??= [...orbitCycles(positions), ...geometry.tracks.flatMap(track => [track.indices, track.alternating])];
+        geometry.rings ??= slotContours(positions, geometry.tracks);
         const possible = fitOrbit(values, actual, geometry.rings);
         permutations = prior ? possible.filter(option => prior.permutations.some(previous => key(previous) === key(option))) : possible;
       }
