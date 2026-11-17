@@ -4,7 +4,7 @@ import type { PanelLattice, PanelParameter } from '../logos-engine/v6-panel-serv
 export type Pattern = readonly NativePoint[];
 export type PanelCell = PanelParameter & { pattern: Pattern; color: number; solid: boolean };
 export type Service = { kind: string; input: number; output?: number; symbol: Pattern; control: PanelCell | null; observed_site: NativePoint };
-export type Panel = { id: string; bbox: NativeBox; material: number | null; room_marker: number; selection_color: number;
+export type Panel = { id: string; bbox: NativeBox; room: NativeBox; material: number | null; room_marker: number; selection_color: number;
   operators: Service[]; services: Service[]; cells: PanelCell[]; activity_controls: PanelCell[]; lattice?: PanelLattice };
 export type Scene = { panels: Panel[]; layout: unknown };
 type Location = { room: number; material: number };

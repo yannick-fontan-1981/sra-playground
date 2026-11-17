@@ -62,7 +62,7 @@ function measuredLattice(parts: ReturnType<typeof geometricComponents>, box: Box
 }
 
 export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[] = [],
-  remembered?: readonly PanelLattice[]): R | null {
+  remembered?: readonly PanelLattice[], allowUnselected = false): R | null {
   const parts = geometricComponents(rows);
   const frames = parts.filter(part => 15 <= part.bbox[2] - part.bbox[0] && part.bbox[2] - part.bbox[0] <= 35
     && 10 <= part.bbox[3] - part.bbox[1] && part.bbox[3] - part.bbox[1] <= 25 && border(rows, part.bbox, part.color));
@@ -94,7 +94,7 @@ export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[
         bbox: [x, y, x + unit - 1, y + unit - 1], pattern: shape, color, solid: shape.length === unit * unit, outline });
     }
     const materials = cells.filter(cell => cell.col === 0 && cell.solid), selected = materials.filter(cell => cell.outline !== null);
-    if (selected.length !== 1 && (!prior || materials.length > 0)) return null;
+    if (selected.length !== 1 && (!prior || materials.length > 0 && !allowUnselected || selected.length > 1)) return null;
     const selection = selected[0]?.outline ?? prior?.selection;
     const marks = parts.filter(part => part.area === 4 && part.bbox[2] - part.bbox[0] === 1 && part.bbox[0] < left
       && left - part.bbox[2] <= 5 && top <= part.bbox[1] && part.bbox[1] <= bottom);
