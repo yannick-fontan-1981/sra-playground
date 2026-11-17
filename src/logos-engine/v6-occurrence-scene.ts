@@ -7,6 +7,7 @@ import type { GeometricComponent } from './v6-native-observer.ts';
 import type { NativeRows, NativePoint } from './v6-native-types.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual } from './v6-operations.ts';
+import { normalizeCodeMask } from './v6-code-program.ts';
 
 export type OccurrenceRecord = Record<string, any>;
 const pointKey = (x: number, y: number): string => `${x},${y}`;
@@ -20,9 +21,30 @@ const count = <T>(values: Iterable<T>): Map<T, number> => {
   return result;
 };
 
+function collectParts(seed: GeometricComponent, pending: readonly GeometricComponent[], width: number, height: number, scale = 1) {
+  const cluster = new Set([seed]);
+  const [sx, sy] = seed.bbox;
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const part of pending) {
+      if (cluster.has(part) || part.color !== seed.color) continue;
+      const [x, y] = part.bbox;
+      if (scale > 1 && ((x - sx) % scale || (y - sy) % scale || !normalizeCodeMask(part.mask, scale))) continue;
+      const boxes = [...cluster, part].map(item => item.bbox);
+      const left = Math.min(...boxes.map(box => box[0])), top = Math.min(...boxes.map(box => box[1]));
+      const right = Math.max(...boxes.map(box => box[2])), bottom = Math.max(...boxes.map(box => box[3]));
+      if (right - left + 1 > width * scale || bottom - top + 1 > height * scale) continue;
+      cluster.add(part);
+      changed = true;
+    }
+  }
+  return [...cluster];
+}
+
 export function measureOccurrenceScene(rows: NativeRows, observation: OccurrenceRecord,
   previousCalibration: OccurrenceRecord | null = null,
-  options: { allowNarrowerForeground?: boolean } = {}): OccurrenceRecord | null {
+  options: { allowNarrowerForeground?: boolean; inferIntegerScale?: boolean } = {}): OccurrenceRecord | null {
   const height = rows.length, width = rows[0]!.length, parts = geometricComponents(rows);
   const background = [...count(rows.flat())].sort((a, b) => b[1] - a[1])[0]![0];
   let outlines: GeometricComponent[] = [];
@@ -86,23 +108,27 @@ export function measureOccurrenceScene(rows: NativeRows, observation: Occurrence
     }
   }
   for (const part of outlines) excluded.add(part.id);
+  const scaleLimit: number = calibration.foreground_scale ?? (options.inferIntegerScale ? 4 : 1);
+  const maxWidth: number = calibration.max_width, maxHeight: number = calibration.max_height;
   const pending = parts.filter(part => !excluded.has(part.id) && part.color !== background
-    && part.bbox[2] - part.bbox[0] + 1 <= calibration!.max_width && part.bbox[3] - part.bbox[1] + 1 <= calibration!.max_height);
+    && part.bbox[2] - part.bbox[0] + 1 <= maxWidth * scaleLimit && part.bbox[3] - part.bbox[1] + 1 <= maxHeight * scaleLimit);
   const occurrences: OccurrenceRecord[] = [], ambiguous: OccurrenceRecord[] = [];
+  let maximumScale = 1;
   while (pending.length) {
-    const cluster = [pending.shift()!]; let changed = true;
-    while (changed) {
-      changed = false;
-      for (const part of [...pending]) {
-        if (part.color !== cluster[0]!.color) continue;
-        const boxes = [...cluster, part].map(item => item.bbox);
-        const x = Math.min(...boxes.map(box => box[0])), y = Math.min(...boxes.map(box => box[1]));
-        const right = Math.max(...boxes.map(box => box[2])), bottom = Math.max(...boxes.map(box => box[3]));
-        if (right - x + 1 <= calibration.max_width && bottom - y + 1 <= calibration.max_height) {
-          cluster.push(part); pending.splice(pending.indexOf(part), 1); changed = true;
-        }
-      }
+    const seed = pending.shift()!;
+    let cluster: GeometricComponent[] | undefined, scale = 1;
+    for (let factor = scaleLimit; factor > 1; factor--) {
+      if (!normalizeCodeMask(seed.mask, factor)) continue;
+      const fitted = collectParts(seed, pending, maxWidth, maxHeight, factor);
+      const w = Math.max(...fitted.map(part => part.bbox[2])) - Math.min(...fitted.map(part => part.bbox[0])) + 1;
+      const h = Math.max(...fitted.map(part => part.bbox[3])) - Math.min(...fitted.map(part => part.bbox[1])) + 1;
+      if (w <= factor || h <= factor || (w !== maxWidth * factor && h !== maxHeight * factor)) continue;
+      cluster = fitted;
+      scale = factor;
+      break;
     }
+    cluster ??= collectParts(seed, pending, maxWidth, maxHeight);
+    for (const part of cluster.slice(1)) pending.splice(pending.indexOf(part), 1);
     const pixelMap = new Map<string, NativePoint>();
     for (const part of cluster) for (const [x, y] of part.mask) {
       const point: NativePoint = [part.bbox[0] + x, part.bbox[1] + y]; pixelMap.set(pointKey(...point), point);
@@ -110,9 +136,9 @@ export function measureOccurrenceScene(rows: NativeRows, observation: Occurrence
     const pixels = [...pixelMap.values()], left = Math.min(...pixels.map(p => p[0])), top = Math.min(...pixels.map(p => p[1]));
     const right = Math.max(...pixels.map(p => p[0])), bottom = Math.max(...pixels.map(p => p[1]));
     const w = right - left + 1, h = bottom - top + 1;
-    const spansWidth = w === calibration.max_width, spansHeight = h === calibration.max_height;
+    const spansWidth = w === maxWidth * scale, spansHeight = h === maxHeight * scale;
     const narrowerForeground = options.allowNarrowerForeground && (spansWidth || spansHeight)
-      && w > 1 && h > 1 && pixels.length >= Math.max(w, h);
+      && w > 1 && h > 1 && w <= maxWidth * scale && h <= maxHeight * scale && pixels.length >= Math.max(w, h);
     if (!(spansWidth && spansHeight) && !narrowerForeground) {
       ambiguous.push({ bbox: [left, top, right, bottom], reason: 'outside_current_foreground_extent_hypothesis' }); continue;
     }
@@ -121,8 +147,11 @@ export function measureOccurrenceScene(rows: NativeRows, observation: Occurrence
     const distance = ([x, y]: NativePoint): number => (2 * x - left - right) ** 2 + (2 * y - top - bottom) ** 2;
     const point = [...pixels].sort((a, b) => distance(a) - distance(b) || comparePoint(a, b))[0]!;
     const value: OccurrenceRecord = { bbox: [left, top, right, bottom], mask, shape, color: cluster[0]!.color, point: [...point], marked: enclosing.length > 0 };
+    if (scaleLimit > 1) value.scale = scale;
+    maximumScale = Math.max(maximumScale, scale);
     value.id = `occurrence:${identity([observation.observation_ref, value]).slice(0, 24)}`; occurrences.push(value);
   }
+  if (maximumScale > 1) calibration = { ...calibration, foreground_scale: Math.max(calibration.foreground_scale ?? 1, maximumScale) };
   occurrences.sort((a, b) => comparePoint(a.bbox, b.bbox)); indicators.sort((a, b) => comparePoint(a.bbox, b.bbox));
   const scene: OccurrenceRecord = { occurrences, indicators, background, calibration, unknowns: ambiguous,
     source_ref: observation.observation_ref, epoch: observation.level_epoch };
