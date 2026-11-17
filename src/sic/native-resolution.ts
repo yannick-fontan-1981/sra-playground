@@ -1029,10 +1029,13 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && (family === glyphEditingId || family === verifySequenceEditsId)) {
-    for (const [field, label] of [['source', 'Source symbols'], ['editable', 'Editable symbols'], ['active', 'Focused symbol']] as const) {
+    const fixed = bounds(card?.fixedExample);
+    for (const [field, label] of [['source', fixed ? 'Fixed input word' : 'Source symbols'], ['editable', 'Editable symbols'],
+      ['active', fixed ? 'Focused rule side' : 'Focused symbol']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (fixed) subjects.push({ label: 'Fixed output word', box: fixed });
   }
   if (situationCard && family === parallelSymbolPrefixesId) {
     for (const [field, label] of [['targets', 'Symbol advanced by this command'], ['panels', 'Symbol group']] as const) {
