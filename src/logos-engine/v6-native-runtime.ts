@@ -206,6 +206,7 @@ import { nativeProgramDescriptions } from './v6-src-program.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
 import { arrayValue, immutableJson, objectValue, stringValue } from './canonical.ts';
 import { NativeKnowledgeStore, NATIVE_STORE_PROFILE } from './v6-knowledge-store.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 import { hydrateNativeState } from './v6-native-state-graph.ts';
@@ -297,8 +298,12 @@ const CONTACT_SCOPE_NODE = 'native_contact_probe_scope:animated_contact';
 const CALLER_COMPONENTS = ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters'] as const;
 const CALLER_PROVIDERS = ['goal_access', 'pre_score_contact', 'scored_local_rewrite', 'factored_material_return', 'conditional_transit',
   'attention_parent_return', 'returned_branch_contrast', 'information_goal', 'acquire_control_for_target', 'view', 'view_continuity', 'observed_frontier'] as const;
+const retainedFamilyCheckpoints = new WeakMap<NativeFamily, NativeRecord>();
 function familyCheckpoint(family: NativeFamily): NativeRecord {
-  return family.nativeState && family.restoreNative ? family.nativeState() : family.state();
+  if (family.nativeState && family.restoreNative) return family.nativeState();
+  const state = retainNativeJson(family.state(), retainedFamilyCheckpoints.get(family));
+  retainedFamilyCheckpoints.set(family, state);
+  return state;
 }
 function freeze<T>(value: T): T {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
