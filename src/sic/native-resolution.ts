@@ -585,6 +585,8 @@ export function readNativeResolution(agent: {
     const contact = bounds(card?.contact);
     if (contact) subjects.push({ label: 'Contact at the edge of the known floor', box: contact });
     const animated = bounds(card?.animatedMechanism);
+    const dock = bounds(card?.dockingSupport);
+    if (dock) subjects.push({ label: 'Support used as an alignment candidate', box: dock });
     if (animated) {
       const frames = Array.isArray(card?.animatedMechanismFrames) ? card.animatedMechanismFrames.filter(Number.isSafeInteger) : [];
       subjects.push({ label: frames.length ? `Piece that reacted in frames ${frames.join(', ')}` : 'Piece that reacted during the earlier test',
