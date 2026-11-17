@@ -33,11 +33,16 @@ function majority(row: readonly number[]): [number, number] {
   return best!;
 }
 
-export function measureRootedLine(rows: NativeRows): R | null {
+export function measureRootedLine(rows: NativeRows, allowStock = false): R | null {
   const parts = geometricComponents(rows), height = rows.length, width = rows[0]!.length;
   const bands = rows.map(majority), dividers: number[] = [];
   for (let y = Math.floor(height / 2) + 1; y < height - 3; y++) {
-    if (bands[y]![1] >= width * 0.75 && bands[y - 1]![0] !== bands[y]![0] && bands[y]![0] !== bands[y + 1]![0]) dividers.push(y);
+    const above = bands[y - 1]![0], below = bands[y + 1]![0], [ink, count] = bands[y]!;
+    if (above === ink || below === ink) continue;
+    // A draining meter still separates the receipt strip from the playfield.
+    const splitMeter = allowStock && rows[y]!.every(color => color !== above && color !== below)
+      && rows[y]!.filter((color, x, line) => x > 0 && color !== line[x - 1]).length === 1;
+    if (count >= width * 0.75 || splitMeter) dividers.push(y);
   }
   if (dividers.length !== 1) return null;
   const split = dividers[0]!, groups = new Map<string, Part[]>();
@@ -62,12 +67,13 @@ export function measureRootedLine(rows: NativeRows): R | null {
     && part.bbox[2] - part.bbox[0] + 1 === referenceUnit && part.bbox[3] - part.bbox[1] + 1 === referenceUnit
     && revalidate_frame({ bbox: part.bbox, palette_value: part.color, corner_value: part.color }, rows) !== null)
     .sort((a, b) => a.bbox[0] - b.bbox[0]);
-  if (!refs.length || new Set(refs.map(part => part.color)).size !== refs.length
+  if (!refs.length || !allowStock && new Set(refs.map(part => part.color)).size !== refs.length
     || new Set(refs.map(part => part.bbox[2] - part.bbox[0])).size !== 1) return null;
   const colors = new Set(refs.map(part => part.color)), unit = refs[0]!.bbox[2] - refs[0]!.bbox[0] + 1;
   const pieces = parts.filter(part => part.bbox[3] < split && colors.has(part.color) && part.rectangular
     && part.bbox[2] - part.bbox[0] + 1 === unit && part.bbox[3] - part.bbox[1] + 1 === unit);
-  if (pieces.length !== colors.size || [...colors].some(color => pieces.filter(part => part.color === color).length !== 1)) return null;
+  if (allowStock ? [...colors].some(color => pieces.filter(part => part.color === color).length < refs.filter(ref => ref.color === color).length)
+    : pieces.length !== colors.size || [...colors].some(color => pieces.filter(part => part.color === color).length !== 1)) return null;
   const fields = parts.filter(part => part.bbox[3] < split && part.bbox[0] > rootBox[0]
     && part.bbox[2] - part.bbox[0] >= unit * 3 && part.bbox[3] - part.bbox[1] >= unit * 3 && part.area > unit * unit * 3);
   if (!fields.length) return null;
@@ -89,7 +95,8 @@ export function measureRootedLine(rows: NativeRows): R | null {
   const normalized = [...root!.normalized].sort(positionOrder);
   return structuredClone({ root: rootBox, reference_root: referenceBox, root_signature: identity([root!.color, normalized]),
     field, background, line_rows: lineRows, start, tip,
-    pieces: [...pieces].sort((a, b) => a.color - b.color).map(part => ({ id: 'material:' + String(part.color), type: String(part.color), bbox: part.bbox })),
+    pieces: [...pieces].sort((a, b) => a.color - b.color || (allowStock ? positionOrder(a.bbox, b.bbox) : 0))
+      .map((part, index) => ({ id: 'material:' + String(part.color) + (allowStock ? ':' + index : ''), type: String(part.color), bbox: part.bbox })),
     order: refs.map(part => String(part.color)), unit,
     layout: identity([field, referenceBox, refs.map(part => [part.color, part.bbox]), normalized]) });
 }
