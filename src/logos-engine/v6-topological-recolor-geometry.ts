@@ -130,12 +130,19 @@ function directionFromExampleScale(layouts: readonly R[]): R | undefined {
   if (layouts.length !== 2 || !first || !second
     || !equal(first.field, second.legend) || !equal(first.legend, second.field)) return undefined;
   const oriented = layouts.filter(layout => (layout.bodies as R[]).every(body => {
-    if (body.relation_kind === 'surround') return true;
+    if (body.relation_kind !== 'shell') return true;
     const [left, top, right, bottom] = body.bbox;
     const [exampleLeft, exampleTop, exampleRight, exampleBottom] = body.example;
-    return right - left > exampleRight - exampleLeft && bottom - top > exampleBottom - exampleTop;
+    return (right - left + 1) * (bottom - top + 1) > (exampleRight - exampleLeft + 1) * (exampleBottom - exampleTop + 1);
   }));
   return oriented.length === 1 ? oriented[0] : undefined;
+}
+
+function uniformPocketColor(rows: NativeRows, topology: R, palette: ReadonlySet<number>): number | null {
+  const pixels = new Set<number>();
+  for (const mask of topology.pocket_masks as Point[][]) for (const [row, col] of mask) pixels.add(rows[row]![col]!);
+  const hue = pixels.values().next().value;
+  return pixels.size === 1 && hue !== undefined && palette.has(hue) ? hue : null;
 }
 
 export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], options?: { examples?: boolean }): R | null {
@@ -160,15 +167,31 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], opt
         if (!rows.slice(top, bottom! + 1).every(r => r[sx] === edge)) continue;
         const left = [0, top!, sx - 1, bottom!], right = [sx + 1, top!, width - 1, bottom!];
         for (const [lb, fb] of [[left, right], [right, left]] as [number[], number[]][]) {
-          const palette = new Set(wells.map(c => c.value)), legendParts = components(rows, lb),
-            samples = legendParts.filter(c => palette.has(c.value) && !onBoundary(c, lb));
-          if (samples.length < 2) continue;
-          const mapping: R = {}, examples: R = {}; let valid = true;
-          for (const c of samples) {
-            const pk = pockets(c, obs.observation_ref), n = String(pk.pocket_count);
+          const palette = new Set(wells.map(c => c.value)), legendParts = components(rows, lb);
+          const samples = legendParts.filter(c => palette.has(c.value) && !onBoundary(c, lb));
+          const legendTopology = new Map<R, R>();
+          // The legend may use a palette color behind its symbols, including inside their pockets.
+          const enclosed = new Set<string>();
+          if (options?.examples) for (const component of samples) {
+            const topology = pockets(component, obs.observation_ref);
+            legendTopology.set(component, topology);
+            for (const mask of topology.pocket_masks) for (const [y, x] of mask) enclosed.add(key([x, y]));
+          }
+          const visibleExamples = options?.examples
+            ? samples.filter(component => !component.cells.every((point: number[]) => enclosed.has(key(point)))) : samples;
+          if (visibleExamples.length < 2) continue;
+          const mapping: R = {}, examples: R = {}, pocketColors = new Map<string, number | null>();
+          let valid = true;
+          for (const c of visibleExamples) {
+            const topology = legendTopology.get(c) ?? pockets(c, obs.observation_ref);
+            const n = String(topology.pocket_count);
             if (Object.hasOwn(mapping, n) && mapping[n] !== c.value) { valid = false; break; }
             mapping[n] = c.value;
-            if (options?.examples) examples[n] ??= c.bbox;
+            if (options?.examples) {
+              examples[n] ??= c.bbox;
+              const color = uniformPocketColor(rows, topology, palette);
+              pocketColors.set(n, pocketColors.has(n) && pocketColors.get(n) !== color ? null : color);
+            }
           }
           if (!valid) continue;
           const bodies: R[] = [], parts = components(rows, fb), boundary = parts.filter(c => containsCorners(c, fb)), holes = new Set<string>();
@@ -192,6 +215,24 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], opt
               ...(options?.examples ? { example: legendOuter[0]!.bbox } : {}), pocket_count: null, relation_kind: 'surround',
               partial_topology: false, shells_currently_match: shellsMatch, evidence: { source_sample: legendOuter[0],
                 observation_ref: obs.observation_ref, scope: 'current_surround_correspondence_hypothesis' } });
+          }
+          if ([...pocketColors.values()].some(color => color !== null)) {
+            const partAt = new Map(parts.flatMap(part => (part.cells as Point[]).map(cell => [key(cell), part] as const)));
+            const assigned = new Set<R>();
+            for (const shell of [...bodies]) {
+              if (shell.relation_kind !== 'shell') continue;
+              const target = pocketColors.get(String(shell.pocket_count));
+              if (target == null || target === shell.target) continue;
+              for (const mask of shell.evidence.pocket_masks as Point[][]) {
+                const [row, col] = mask[0]!, region = partAt.get(key([col, row]));
+                if (!region || assigned.has(region) || region.cells.length !== mask.length
+                  || !mask.every(([y, x]) => partAt.get(key([x, y])) === region)) continue;
+                assigned.add(region);
+                bodies.push({ ...region, target, pocket_count: null, relation_kind: 'pocket',
+                  example: shell.example, partial_topology: shell.partial_topology,
+                  evidence: { observation_ref: obs.observation_ref, scope: 'uniform_ink_in_matching_example_pockets' } });
+              }
+            }
           }
           const borders = wells.map(c => {
             const [a, b, d, e] = c.bbox, values = new Set<number>();
