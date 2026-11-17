@@ -17,13 +17,15 @@ type Field = { geometry: CellPatchGeometry; grid: string[][] };
 type MarkRoles = { own: string; other: string; empty: string };
 type Marks = MarkRoles & { refs: string[]; colors?: MarkRoles };
 type Training = { epoch: number; fields: Field[]; model: Marks | null };
-type Witness = { epoch: number; model: Marks; boundary: string };
+type Witness = { epoch: number; model: Marks; boundary: string; shape?: readonly number[] };
 type FieldStart = { geometry: CellPatchGeometry; initial: string };
 type Local = { epoch: number; geometry: CellPatchGeometry; initial: string; tried: Record<string, number>; stopped: boolean;
   model?: Marks; needsConfirmation?: boolean; earlierFields?: FieldStart[] };
 type Proposal = NativeProposal & { local: Local; model: Marks; field: Field; point: NativePoint; trial: string; needId: string };
 const encode = (grid: readonly string[][]) => JSON.stringify(grid);
 const samePoint = ([x, y]: readonly number[], [a, b]: readonly number[]) => x === a && y === b;
+const sameShape = (geometry: CellPatchGeometry, shape?: readonly number[]) =>
+  shape !== undefined && geometry.shape.every((size, axis) => size === shape[axis]);
 
 function cellBounds(geometry: CellPatchGeometry, [column, row]: NativePoint): NativeBox {
   const left = geometry.origin[0]! + column * geometry.pitch[0]!, top = geometry.origin[1]! + row * geometry.pitch[1]!;
@@ -63,18 +65,24 @@ function fieldCandidates(rows: NativeRows): Field[] {
   return measureCellPatchFields(rows).filter(field => field.geometry.shape[0] * field.geometry.shape[1] <= 16) as Field[];
 }
 
-function fitMarkRoles(field: Field, rows: NativeRows, model: Marks): Marks | null {
+function fitMarkRoles(field: Field, rows: NativeRows, model: Marks, allowPartial = false): Marks | null {
   if (field.grid.every(row => row.every(value => value === model.own || value === model.other || value === model.empty))) return model;
   const colors = model.colors;
-  if (!colors || new Set(Object.values(colors)).size !== 3) return null;
+  const signatures = new Set(colors && Object.values(colors));
+  if (!colors || signatures.size !== 3) return null;
   const available = new Map<string, string>();
   for (const [y, row] of field.grid.entries()) for (const [x, token] of row.entries()) {
     const signature = cellColors(field.geometry, [x, y], rows);
+    if (!signatures.has(signature)) return null;
     const existing = available.get(signature);
     if (existing !== undefined && existing !== token) return null;
     available.set(signature, token);
   }
   const own = available.get(colors.own), other = available.get(colors.other), empty = available.get(colors.empty);
+  if (allowPartial && empty !== undefined && new Set(available.values()).size === available.size) {
+    const fitted = { ...model, own: own ?? model.own, other: other ?? model.other, empty };
+    if (new Set([fitted.own, fitted.other, fitted.empty]).size === 3) return fitted;
+  }
   return available.size === 3 && own !== undefined && other !== undefined && empty !== undefined
     ? { ...model, own, other, empty } : null;
 }
@@ -110,7 +118,9 @@ export function createSicObservedLinePlacement(): NativeFamily<Proposal> {
     const { current, point } = addressed[0]!, { model } = training;
     if (after.levels_completed > before.levels_completed) {
       if (!model || model.refs.length < 4 || current.grid[point[1]]?.[point[0]] !== model.empty) return;
-      if (completesLine(current, point, model.own)) witness = { epoch: after.level_epoch, model, boundary: after.observation_ref };
+      if (completesLine(current, point, model.own)) {
+        witness = { epoch: after.level_epoch, model, boundary: after.observation_ref, shape: current.geometry.shape };
+      }
       return;
     }
     if (before.level_epoch !== after.level_epoch) return;
@@ -126,19 +136,22 @@ export function createSicObservedLinePlacement(): NativeFamily<Proposal> {
     const { local: state, model, field, point } = proposal;
     const current = projectCellPatch(rows, state.geometry);
     if (current && encode(current.grid) === state.initial) return { matched: null, next: null };
-    const returned = placedAndAnswered(field, rows, point);
-    if (returned && returned.own === model.own && returned.other === model.other && returned.empty === model.empty) {
-      return { matched: true, next: null };
-    }
     if (current?.grid[point[1]]?.[point[0]] === model.own
       && (completesLine(field, point, model.own) || current.grid.every((row: string[]) => !row.includes(model.empty)))) {
       const alternatives = fieldCandidates(rows).flatMap(candidate => {
         if (!independentField(field.geometry, candidate.geometry)) return [];
-        const roles = fitMarkRoles(candidate, rows, model);
+        const roles = fitMarkRoles(candidate, rows, model, sameShape(candidate.geometry, field.geometry.shape));
         if (!roles || !candidate.grid.some(row => row.includes(roles.empty))) return [];
         return [{ field: candidate, roles }];
       });
       if (alternatives.length === 1) return { matched: true, next: alternatives[0]! };
+    }
+    const returned = placedAndAnswered(field, rows, point);
+    if (returned && current) {
+      const verified = fitMarkRoles(current as Field, rows, model);
+      if (verified && returned.own === verified.own && returned.other === verified.other && returned.empty === verified.empty) {
+        return { matched: true, next: null, verified };
+      }
     }
     for (const earlier of state.earlierFields ?? []) {
       const restored = projectCellPatch(rows, earlier.geometry) as Field | null;
@@ -161,7 +174,7 @@ export function createSicObservedLinePlacement(): NativeFamily<Proposal> {
       const fields = previous ? [projectCellPatch(rows, previous.geometry) as Field | null].filter((field): field is Field => !!field) : fieldCandidates(rows);
       const inherited = previous?.model ?? memory.model;
       const choices = fields.flatMap(field => {
-        const model = fitMarkRoles(field, rows, inherited);
+        const model = fitMarkRoles(field, rows, inherited, sameShape(field.geometry, previous?.geometry.shape ?? memory.shape));
         return model ? [{ field, model }] : [];
       });
       if (choices.length !== 1) return null;
@@ -228,7 +241,7 @@ export function createSicObservedLinePlacement(): NativeFamily<Proposal> {
       learnPlacement(before, after, first, second, [x, y], proposal.field);
       if (before.level_epoch !== after.level_epoch) return { events: [] };
       const state = proposal.local, tried = state.tried;
-      const { matched, next } = placementEffect(proposal, first, second);
+      const { matched, next, verified } = placementEffect(proposal, first, second);
       local = { ...state, stopped: matched === false, needsConfirmation: state.needsConfirmation === true && matched !== true,
         tried: { ...tried, [proposal.trial]: (tried[proposal.trial] ?? 0) + 1 } };
       if (next) {
@@ -236,7 +249,7 @@ export function createSicObservedLinePlacement(): NativeFamily<Proposal> {
         local = { ...local, geometry: next.field.geometry, initial: encode(next.field.grid), model: next.roles,
           needsConfirmation: true, earlierFields: [...earlierFields, { geometry: state.geometry, initial: state.initial }] };
       } else if (matched === true) {
-        local.model = { ...proposal.model, refs: [...proposal.model.refs.slice(-4), before.observation_ref, after.observation_ref] };
+        local.model = { ...(verified ?? proposal.model), refs: [...proposal.model.refs.slice(-4), before.observation_ref, after.observation_ref] };
       }
       return { events: [] };
     },
