@@ -75,6 +75,7 @@ export class ObservedFrontier {
   private readonly nativeOwned: boolean;
   private nativeSnapshotValue: R | null = null;
   private nativeSnapshotInputs: readonly unknown[] | null = null;
+  private activeOutgoing: { nodes: R; edges: R; epoch: number; bySource: Map<string, R[]> } | null = null;
   constructor(targetLevels = 3, maxPrefix = 16, state: R | null = null, options: NativeFrontierOptions = {}) {
     if (!(maxPrefix >= 1 && maxPrefix <= 16)) throw new RangeError('Prefix must be bounded by 16');
     this.nativeOwned = options.nativeOwned === true;
@@ -313,15 +314,42 @@ export class ObservedFrontier {
     const node = this.nodes[await frontierIndex(observation)];
     return observation.available_action_refs.includes(command.action_ref) && (!node || !own(node.attempts, await frontierActionKey(command)));
   }
+
+  /** Keep a working index for the last two epochs. The canonical graph still
+   * holds every edge. A query bound to an older observation recalls that
+   * epoch from the graph instead of promoting unrelated history. */
+  private outgoingForEpoch(epoch: number): ReadonlyMap<string, R[]> {
+    const collect = (first: number, last: number): Map<string, R[]> => {
+      const result = new Map<string, R[]>();
+      for (const edge of Object.values(this.edges)) {
+        const sourceEpoch = this.nodes[edge.source]?.protocol.level_epoch;
+        if (sourceEpoch === undefined || sourceEpoch < first || sourceEpoch > last) continue;
+        const outgoing = result.get(edge.source);
+        if (outgoing) outgoing.push(edge);
+        else result.set(edge.source, [edge]);
+      }
+      return result;
+    };
+    let active = this.activeOutgoing;
+    if (!active || active.nodes !== this.nodes || active.edges !== this.edges || !this.nativeOwned) {
+      let latest = epoch;
+      for (const node of Object.values(this.nodes)) latest = Math.max(latest, node.protocol.level_epoch);
+      active = { nodes: this.nodes, edges: this.edges, epoch: latest, bySource: collect(latest - 1, latest) };
+      this.activeOutgoing = this.nativeOwned ? active : null;
+    }
+    return epoch < active.epoch - 1 ? collect(epoch, epoch) : active.bySource;
+  }
+
   async access(start: string, order?: FrontierConfiguration['inputOrder']): Promise<readonly [R[], R] | readonly [null, null]> {
     const epoch = this.nodes[start].protocol.level_epoch, queue: [string, R[]][] = [[start, []]], seen = new Set([start]); let head = 0;
+    const bySource = this.outgoingForEpoch(epoch);
     while (head < queue.length && head < 2048) {
       const [index, path] = queue[head++]!;
       if (path.length) for (const question of await this.open(index, order)) {
         const first = path[0]!, trial = await digest([start, first.action_key, question.question_ref]);
         if ((this.navigation_trials[trial] ?? 0) < 2) return [path, question];
       }
-      const outgoing = Object.values(this.edges).filter(e => e.source === index).sort((a, b) => compareUnicode(canonical(a.action), canonical(b.action)) || compareUnicode(a.target, b.target));
+      const outgoing = [...(bySource.get(index) ?? [])].sort((a, b) => compareUnicode(canonical(a.action), canonical(b.action)) || compareUnicode(a.target, b.target));
       for (const edge of outgoing) {
         const target = edge.target;
         if (seen.has(target) || this.nodes[target].protocol.level_epoch !== epoch || terminal(this.nodes[target].protocol.state)) continue;
