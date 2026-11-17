@@ -120,22 +120,25 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
     const box = layout.controls[choice.index]!;
     const [left, top, right, bottom] = box, x = Math.floor((left + right) / 2), y = Math.floor((top + bottom) / 2);
     const command = { action_ref: 'ACTION6', data: { x, y } }, actions = [command];
-    const label = 'Compare the switch, intermediate signals, and final lamp';
+    const receivers = layout.terminals?.map(terminal => terminal.lamp) ?? [layout.lamp];
+    const label = layout.terminals ? 'Compare the switch, gate signals, and all terminal lamps' : 'Compare the switch, intermediate signals, and final lamp';
     const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
     if (!witness) return null;
     const parent = 'G_official_completion';
-    const objective = { kind: 'activate_observed_signal_cascade', scope: ref.split(':revision:', 1)[0]!, subjects: ['final_lamp'],
+    const objective = { kind: 'activate_observed_signal_cascade', scope: ref.split(':revision:', 1)[0]!, subjects: [layout.terminals ? 'terminal_lamps' : 'final_lamp'],
       parentObjective: parent, satisfactionContract: 'observe_official_progress_after_preparing_joint_inputs' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `signal-cascade:${need.id}`;
     const situation = choice.distance > 1 ? `Prepare an untested setting in ${choice.distance} switch changes and compare the intermediate signals.`
-      : 'Test the new switch setting and compare the intermediate signals with the final lamp.';
+      : layout.terminals ? 'Test the new switch setting and compare its effect on every terminal lamp.'
+        : 'Test the new switch setting and compare the intermediate signals with the final lamp.';
     return { status: 'proposed', kind: displayCouplingId, actions, needId: need.id, cascade: { local, current, choice },
       steps: [{ action: command, expected_after: { setting: choice.setting }, point_binding: witness }],
       binding: { observation_ref: ref, level_epoch: observation.level_epoch },
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
         edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
-      sicSituationCard: { strategy: 'P05', need: 'Combine switch settings that activate the final lamp', mode, situation, agenda: [], evidence,
-        triggerCard: decision.receipt.workflow, control: box, receivers: [layout.lamp], cascadeGates: layout.gates.map(gate => gate.box),
+      sicSituationCard: { strategy: 'P05', need: layout.terminals ? 'Find one setting that activates all terminal lamps'
+        : 'Combine switch settings that activate the final lamp', mode, situation, agenda: [], evidence,
+        triggerCard: decision.receipt.workflow, control: box, receivers, cascadeGates: layout.gates.map(gate => gate.box),
         distance: choice.distance, logicAlternatives: choice.hypotheses },
       question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -219,11 +222,13 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
     record(before, after, _command, _first, second, proposal, _index, frames) {
       if (proposal.cascade) {
         const ref = after.observation_ref;
-        if (after.levels_completed > before.levels_completed) return { events: [], reviewEvidence: 'The joint switch setting activated the final lamp.' };
+        if (after.levels_completed > before.levels_completed) return { events: [], reviewEvidence: proposal.cascade.local.layout.terminals
+          ? 'The joint switch setting activated every terminal lamp.' : 'The joint switch setting activated the final lamp.' };
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const { local, current, choice } = proposal.cascade, returned = readCascade(second, local.layout);
         const prior = returned ? local.samples.find(sample => sample.setting === returned.setting) : null;
-        const inconsistent = !returned || !!prior && (prior.lamp !== returned.lamp || JSON.stringify([prior.active, prior.ports]) !== JSON.stringify([returned.active, returned.ports]));
+        const inconsistent = !returned || !!prior && JSON.stringify([prior.lamp, prior.lamps, prior.active, prior.ports])
+          !== JSON.stringify([returned.lamp, returned.lamps, returned.active, returned.ports]);
         const matched = returned?.setting === choice.setting;
         cascade = { ...local, samples: returned && !prior ? [...local.samples, returned] : local.samples,
           refs: [...local.refs.slice(-5), ref], blocked: matched ? local.blocked : [...local.blocked, `${current.setting}:${choice.index}`],
@@ -231,7 +236,9 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
         if (!returned || !matched || inconsistent) return { events: [] };
         const gates = returned.active.filter((active, i) => active !== current.active[i]).length;
         const ports = returned.ports.reduce((sum, row, index) => sum + row.filter((value, j) => value !== current.ports[index]![j]).length, 0);
-        const lamp = returned.lamp === current.lamp ? 'The final lamp held its state.' : 'The final lamp changed.';
+        const lamps = returned.lamps?.filter((ink, index) => ink !== current.lamps?.[index]).length;
+        const lamp = lamps !== undefined ? `Terminal lamps changed state (${lamps}).`
+          : returned.lamp === current.lamp ? 'The final lamp held its state.' : 'The final lamp changed.';
         const reviewEvidence = gates ? `Intermediate components changed state (${gates}). ${lamp}`
           : ports ? `Inputs of intermediate components changed (${ports}). ${lamp}` : 'The switch changed. SIC retained the new joint setting.';
         return { events: [], reviewEvidence };
