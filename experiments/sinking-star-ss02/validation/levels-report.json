@@ -1,0 +1,112 @@
+{
+  "game": "SS02",
+  "levels": [
+    {
+      "level": 1,
+      "title": "Le camp du Guerrier — tutoriel",
+      "actions": 63,
+      "pushes": 15,
+      "maxChain": 2,
+      "initialWalkingCells": 44,
+      "buttons": 2,
+      "stones": 3,
+      "createdSupports": 1,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 2,
+      "title": "La porte sous pression",
+      "actions": 25,
+      "pushes": 4,
+      "maxChain": 1,
+      "initialWalkingCells": 18,
+      "buttons": 1,
+      "stones": 1,
+      "createdSupports": 0,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 3,
+      "title": "Dégager les deux salles",
+      "actions": 39,
+      "pushes": 12,
+      "maxChain": 3,
+      "initialWalkingCells": 9,
+      "buttons": 0,
+      "stones": 10,
+      "createdSupports": 0,
+      "doorsOpenAtFinish": false,
+      "solved": true
+    },
+    {
+      "level": 4,
+      "title": "Le détour et le verrou",
+      "actions": 42,
+      "pushes": 11,
+      "maxChain": 2,
+      "initialWalkingCells": 9,
+      "buttons": 1,
+      "stones": 7,
+      "createdSupports": 0,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 5,
+      "title": "Convoyer la pierre",
+      "actions": 49,
+      "pushes": 14,
+      "maxChain": 1,
+      "initialWalkingCells": 50,
+      "buttons": 1,
+      "stones": 1,
+      "createdSupports": 0,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 6,
+      "title": "Le damier des pierres",
+      "actions": 21,
+      "pushes": 2,
+      "maxChain": 1,
+      "initialWalkingCells": 41,
+      "buttons": 1,
+      "stones": 9,
+      "createdSupports": 0,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 7,
+      "title": "Les trois boutons",
+      "actions": 69,
+      "pushes": 11,
+      "maxChain": 2,
+      "initialWalkingCells": 33,
+      "buttons": 3,
+      "stones": 3,
+      "createdSupports": 0,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 8,
+      "title": "Les trois boutons — chicane",
+      "actions": 65,
+      "pushes": 11,
+      "maxChain": 2,
+      "initialWalkingCells": 32,
+      "buttons": 3,
+      "stones": 3,
+      "createdSupports": 0,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    }
+  ],
+  "success": true,
+  "animationCount": 86,
+  "totalActions": 373
+}

@@ -1,0 +1,4 @@
+dist/
+node_modules/
+validation/browser-trace.json
+validation/*.png

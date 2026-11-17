@@ -1,0 +1,130 @@
+{
+  "repository": "joric/ootss",
+  "path": "scripts/ootss.pz",
+  "blob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+  "guide": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/",
+  "levels": [
+    {
+      "level": 2,
+      "guidePuzzle": 3,
+      "transcription": "heroes1_3",
+      "sourceRows": [
+        "#############",
+        "#...#...#...#",
+        "#F{...*.#.G.#",
+        "#...#...[...#",
+        "#############"
+      ],
+      "adaptations": []
+    },
+    {
+      "level": 3,
+      "guidePuzzle": 2,
+      "transcription": "heroes1_2_v2",
+      "sourceRows": [
+        "#############",
+        "#...#...#...#",
+        "#F..**....**#",
+        "#...#...#...#",
+        "##########*##",
+        "#...#...#...#",
+        "#.G*..****..#",
+        "#...#...#...#",
+        "#############"
+      ],
+      "adaptations": []
+    },
+    {
+      "level": 4,
+      "guidePuzzle": 6,
+      "transcription": "heroes1_5_v2",
+      "sourceRows": [
+        "#############",
+        "#...#*..#...#",
+        "#T..*...#.*.#",
+        "#...#..*....#",
+        "##########.##",
+        "#..**...#...#",
+        "#.G.#...#.{.#",
+        "#...#...[.*.#",
+        "#############"
+      ],
+      "adaptations": [
+        "Le rôle original est remplacé par le Guerrier (poussée uniquement)."
+      ]
+    },
+    {
+      "level": 5,
+      "guidePuzzle": 10,
+      "transcription": "heroes1_8_v2",
+      "sourceRows": [
+        "#############",
+        "#.......#...#",
+        "#W*.#.......#",
+        "#.......#...#",
+        "######.###.##",
+        "#...#...#...#",
+        "#.G.[.......#",
+        "#...#...#..{#",
+        "#############"
+      ],
+      "adaptations": [
+        "Le rôle original est remplacé par le Guerrier (poussée uniquement)."
+      ]
+    },
+    {
+      "level": 6,
+      "guidePuzzle": 11,
+      "transcription": "heroes1_10_inv_v4_b",
+      "sourceRows": [
+        "#############",
+        "#.....W.#...#",
+        "#.*.*.*.[.G*#",
+        "#.......#...#",
+        "#.*.*.*.#####",
+        "#.......#####",
+        "#.{.*.*.#####",
+        "#.......#####",
+        "#############"
+      ],
+      "adaptations": [
+        "Le Magicien est remplacé par le Guerrier (poussée uniquement).",
+        "Le mécanisme vert est rendu en rose, selon la palette commune."
+      ]
+    },
+    {
+      "level": 7,
+      "guidePuzzle": 4,
+      "transcription": "heroes1_4",
+      "sourceRows": [
+        "#########",
+        "#.....#G#",
+        "#.F*..#[#",
+        "#.**....#",
+        "#...#...#",
+        "##{.{.{.#",
+        "#.......#",
+        "#########"
+      ],
+      "adaptations": []
+    },
+    {
+      "level": 8,
+      "guidePuzzle": 8,
+      "transcription": "heroes1_6",
+      "sourceRows": [
+        "#########",
+        "#.....#G#",
+        "#.T*..#[#",
+        "#.**....#",
+        "#.#...#.#",
+        "#.{.{.{.#",
+        "#...#...#",
+        "#########"
+      ],
+      "adaptations": [
+        "Le rôle original est remplacé par le Guerrier (poussée uniquement)."
+      ]
+    }
+  ]
+}
