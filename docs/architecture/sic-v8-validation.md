@@ -1453,3 +1453,9 @@ Le niveau 5 est gagné en **9 commandes et 5,38 s** dans le lot configuré pour 
 SIC distingue les deux serrures des supports centraux qui servent au passage et aux outils. Il compare les hauteurs nécessaires et concentre la recherche sur les deux profils qui peuvent les fournir. Les motifs des outils permettent de réutiliser le miroir et le décalage vérifiés sur quatre dents, puis de confirmer leur effet sur cinq dents. Un troisième essai confirme le complément des hauteurs. La première serrure reste ouverte quand le profil qui l’a ouverte change de rangée.
 
 Le niveau 5 est gagné en **24 commandes et 9,28 s** dans le lot configuré pour huit workers. Les trois essais relèvent de `P05` et les 21 autres commandes de `P02`. Les 87 commandes relèvent de SIC seul. Les 63 commandes et retours des niveaux 1 à 4 concordent avec `9ffa8818`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `a3b55cf61222cf911f0b1d440a00aa7886b948398b7a87202e7b9a3e10f9117e`.
+
+### KATA niveau 5, inventorier la réserve sous le cadre
+
+SIC retrouve les deux pièces sous le cadre lorsque la réserve latérale couvre seulement une partie de la surface à remplir. Les quatre pièces mobiles couvrent exactement les vingt cases libres. Le solveur compare deux partitions atteignables par les commandes déjà vérifiées et conserve un emplacement pour la barre. Un essai séparé montre que la rotation est refusée à la hauteur de départ de la pièce du bas. Une montée d’une case laisse la place à la troisième ligne du masque tourné.
+
+Le niveau 5 est gagné en **34 commandes et 8,75 s** dans le lot configuré pour huit workers. Les 103 commandes relèvent de SIC seul. Les 69 commandes et retours des niveaux 1 à 4 concordent avec `23275f47`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `b18fe017024893cd258964f1077f0e7e5fe41f4d0f446792b6f228b9739f7680`.
