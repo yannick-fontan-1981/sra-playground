@@ -1425,3 +1425,9 @@ SIC distingue les deux anneaux de terrain des huit pions. Il combine la règle d
 Une source candidate est un motif à cadre répété distinct des réceptacles. SIC vérifie à chaque activation que deux porteurs apparaissent à proximité, que les réceptacles restent intacts et que le reste de la matière suivie ne change pas. Le calibre de 5 × 5 observé précédemment permet de retrouver les porteurs dont le bord se fond dans le décor. SIC traite les trois sources successivement et réutilise la correspondance entre noyaux, orientations et cadres pour les six dépôts.
 
 Le niveau 5 est gagné en **33 commandes et 16,38 s** dans le lot configuré pour huit workers. Les 106 commandes relèvent de SIC seul. Les 73 commandes et retours des niveaux 1 à 4 concordent avec `270a909b`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `052e4b965ceb43b44078c1387a90af1cc723d5118955fcdb5db9c44e97c50ac4`.
+
+### GIGO niveau 5, salles fragmentées par leurs passages
+
+Quand les composants connexes ne suffisent pas à identifier la disposition, SIC réunit les fragments de même couleur et vérifie les bords des cadres ainsi que leur emboîtement. Deux salles ont ainsi plusieurs fragments de mur séparés par des ouvertures. Les sept salles mobiles réutilisent la recherche de liaison par placements successifs et la vérification des murs après chaque commande.
+
+Le niveau 5 est gagné en **19 commandes et 17,85 s** dans le lot configuré pour huit workers. Les 54 commandes relèvent de SIC seul. Les 35 commandes et retours des niveaux 1 à 4 concordent avec `03079749`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `9680b951842ea9530b2a8037cc4f29007cbf2af2d1c5c46807f6ec9216be61d0`.
