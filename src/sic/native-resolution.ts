@@ -1225,6 +1225,10 @@ export function readNativeResolution(agent: {
   if (situationCard && family === mergeForDemandId) {
     const mobile = bounds(card?.autonomous);
     if (mobile) subjects.push({ label: 'Mobile approaching the material', box: mobile });
+    if (Array.isArray(card?.autonomousMobiles)) for (const item of card.autonomousMobiles) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Mobile near the work area', box });
+    }
     for (const [field, label] of [['actor', card?.protectiveClick ? 'Material to protect' : 'Material moved'], ['partner', 'Other merge input'], ['focus', 'Click target'],
       ['demand', 'Product requested'], ['receptor', 'Delivery receiver']] as const) {
       const box = bounds(card?.[field]);
@@ -1232,7 +1236,7 @@ export function readNativeResolution(agent: {
     }
     if (Array.isArray(card?.reserved)) for (const item of card.reserved) {
       const box = bounds(item);
-      if (box) subjects.push({ label: 'Reserved for another delivery', box });
+      if (box) subjects.push({ label: card.protectiveClick ? 'Material reserved for the requested product' : 'Reserved for another delivery', box });
     }
   }
   if (situationCard && family === compartmentGrowthId) {
