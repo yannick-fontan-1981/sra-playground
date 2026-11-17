@@ -63,6 +63,7 @@ function observedGateEdit(proposal: Proposal, first: NativeRows, second: NativeR
   const former = timedNetwork(before), current = timedNetwork(after);
   if (!former || !current || former.gates.length !== current.gates.length || current.pads.size !== former.pads.size
     || [...former.pads].some(([cell, mark]) => current.pads.get(cell) !== mark)
+    || current.clocks.size !== former.clocks.size || [...former.clocks].some(([cell, clock]) => current.clocks.get(cell)?.mark !== clock.mark)
     || !former.gates.some(gate => key(gate.point) === key(control))) return null;
   const next = new Map(current.gates.map(gate => [key(gate.point), gate]));
   const changed: Point[] = [];
@@ -127,8 +128,10 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
       const label = timed && ready ? 'Launch with coincident projected arrival times' : sharedArrivalStrategies[phase];
       const observations = local.timing?.observed.map(tick => tick ?? 'partly hidden').join(', ');
       const toggles = timedPlan?.edits[0]?.toggles ?? [];
+      const clocks = Object.values(local.timing?.clocks ?? {});
+      const waits = clocks.length ? 'including measured stops and periodic admission' : 'including measured pauses';
       const condition = timed && timedPlan && local.timing
-        ? `Arrival observations: ${observations}. After ${timedPlan.edits.length} control changes, ${timedPlan.matchingOrders} of ${local.timing.orders.length} compatible route orders predict a shared arrival at tick ${timedPlan.ticks.join(' or ')} including measured pauses.${toggles.length > 1 ? ' This click may toggle both marked gates.' : ''}`
+        ? `Arrival observations: ${observations}. After ${timedPlan.edits.length} control changes, ${timedPlan.matchingOrders} of ${local.timing.orders.length} compatible route orders predict a shared arrival at tick ${timedPlan.ticks.join(' or ')} ${waits}.${toggles.length > 1 ? ' This click may toggle both marked gates.' : ''}`
         : edit ? `Current route lengths are ${lengths.join(' and ')}. Test the marked cell that could make them equal.` : label;
       const objective = 'G_official_completion';
       const goal = { kind: 'test_shared_receiver_arrival', scope: ref.split(':revision:', 1)[0]!, subjects: [key(scene.target)],
@@ -148,7 +151,8 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
           situation: condition,
           agenda: [], evidence, triggerCard: decision.receipt.workflow,
           subjects: [...scene.actors.map(([, x, y]) => neighborhood([x, y])), neighborhood(scene.target),
-            ...(edit ? [neighborhood(edit)] : []), ...toggles.filter(point => !edit || key(point) !== key(edit)).map(neighborhood)] },
+            ...(edit ? [neighborhood(edit)] : []), ...toggles.filter(point => !edit || key(point) !== key(edit)).map(neighborhood),
+            ...(timed ? [...timed.clocks.values()].map(clock => neighborhood(clock.point)) : [])] },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent: objective }, need },

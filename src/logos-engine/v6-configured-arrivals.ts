@@ -31,8 +31,32 @@ export function configuredScene(rows:NativeRows,retained:[number,number,number]|
  const starts=new Set(actors.map(([_v,x,y])=>key([x,y]))),base=new Set([...cells].filter(([_k,c])=>c.open).map(([k])=>k));for(const p of starts)base.add(p);base.add(key(target));const connected=new Set(starts),q=[...starts];while(q.length){const p=point(q.pop()!) as P;for(const peer of adjacent(p,pitch)){const k=key(peer);if(base.has(k)&&!connected.has(k)){connected.add(k);q.push(k);}}}
  const candidates:P[]=[];for(const [k,c]of cells){if(starts.has(k)||k===key(target)||!c.colors.size)continue;const p=point(k) as P;if(connected.has(k)||adjacent(p,pitch).filter(a=>base.has(key(a))).length>=2)candidates.push(p);}return {grid,actors,target,cells,base,candidates:candidates.sort(compare),background,floor};
 }
-export function configuredRoute(nodes:Set<string>,start:P,target:P,order:readonly P[],pitch:number):P[]|null{
- const dist=new Map<string,number>([[key(target),0]]),q=[target];for(let i=0;i<q.length;i++){const [x,y]=q[i]!;for(const [dx,dy]of order){const p:P=[x+dx*pitch,y+dy*pitch],k=key(p);if(nodes.has(k)&&!dist.has(k)){dist.set(k,dist.get(key([x,y]))!+1);q.push(p);}}}if(!dist.has(key(start)))return null;const result=[start];while(!same(result.at(-1),target)){const [x,y]=result.at(-1)!,p=order.map(([dx,dy])=>[x+dx*pitch,y+dy*pitch]as P).find(a=>dist.get(key(a))===dist.get(key([x,y]))!-1);if(!p)return null;result.push(p);}return result;
+export function configuredDistances(nodes: ReadonlySet<string>, target: P, pitch: number): Map<string, number> {
+  const distances = new Map([[key(target), 0]]), queue = [target];
+  for (const current of queue) {
+    const distance = distances.get(key(current))!;
+    for (const next of adjacent(current, pitch)) {
+      const id = key(next);
+      if (!nodes.has(id) || distances.has(id)) continue;
+      distances.set(id, distance + 1);
+      queue.push(next);
+    }
+  }
+  return distances;
+}
+
+export function configuredRoute(nodes: ReadonlySet<string>, start: P, target: P, order: readonly P[], pitch: number,
+  distances = configuredDistances(nodes, target, pitch)): P[] | null {
+  if (!distances.has(key(start))) return null;
+  const route = [start];
+  while (!same(route.at(-1), target)) {
+    const [x, y] = route.at(-1)!, distance = distances.get(key([x, y]))!;
+    const next = order.map(([dx, dy]): P => [x + dx * pitch, y + dy * pitch])
+      .find(point => distances.get(key(point)) === distance - 1);
+    if (!next) return null;
+    route.push(next);
+  }
+  return route;
 }
 export function configuredTrajectories(scene: ConfiguredScene, frames: readonly NativeRows[]): Map<number, [P[], number[]]> {
  const tracks=new Map<number,[number,number,number][]>(scene.actors.map(([v])=>[v,[]]));
