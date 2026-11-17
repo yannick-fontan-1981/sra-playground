@@ -12,6 +12,7 @@ const FLOAT = '$v6_float64';
 const OBJECT = '$v6_object';
 export const NATIVE_STORE_PROFILE = 'v6.native-state.v2/fragmented-float64-be';
 const GRAPH_STATE_KINDS = new Set(['family_state', 'prefix_evidence', 'component_state', 'reasoning_catalog', 'transition_evidence']);
+const publicationWriteQuantum = 64;
 
 /**
  * Keep V7 canonical integers unchanged. Fractional numbers and negative zero
@@ -99,9 +100,14 @@ export class NativeKnowledgeStore {
   private callbacks = new Map<string, Readonly<Record<string, Primitive>>>();
   private hydrated = new Map<string, { node: KnowledgeNode; fragments: readonly KnowledgeNode[]; value: JsonValue }>();
   private lastPublicTransition: NativeStateGraphRoot | undefined;
+  // Host turns let temporary weak-cache targets be collected while the
+  // transaction's complete publication remains staged.
+  private readonly yieldControl: (() => Promise<void>) | undefined;
+  private writesSinceYield = 0;
 
-  constructor(sourceDigest: string, scope: string, maxNodes = 16_384) {
+  constructor(sourceDigest: string, scope: string, maxNodes = 16_384, yieldControl?: () => Promise<void>) {
     this.scope = scope;
+    this.yieldControl = yieldControl;
     this.kernel = new Kernel({
       node_fields: ['id', 'kind', 'revision', 'status', 'scope', 'origin', 'evidence', 'relations', 'value'],
       kinds: { program: ['definition'], family_state: ['family'], family_activation: ['family'], prefix_evidence: ['family'],
@@ -175,6 +181,10 @@ export class NativeKnowledgeStore {
               origin: { source_digest: this.kernel.sourceDigest, store_profile: NATIVE_STORE_PROFILE, ...cause },
               evidence: [], relations: [], component: 'native_state_fragments', value: fragment.value,
             }) as JsonObject, cause);
+            if (this.yieldControl && ++this.writesSinceYield >= publicationWriteQuantum) {
+              this.writesSinceYield = 0;
+              await this.yieldControl();
+            }
           }
           storedValue = immutableJson(graph.root);
         } else storedValue = encodeNativeState(source);
@@ -195,6 +205,10 @@ export class NativeKnowledgeStore {
           ...(definition === undefined ? {} : { definition }),
         };
         await staged.commit(immutableJson(node) as JsonObject, cause);
+        if (this.yieldControl && ++this.writesSinceYield >= publicationWriteQuantum) {
+          this.writesSinceYield = 0;
+          await this.yieldControl();
+        }
         accepted.set(node.id, { source, node: staged.node(node.id)! });
       }
       this.state = staged.finish();

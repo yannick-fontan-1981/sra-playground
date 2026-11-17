@@ -574,7 +574,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.levelActiveTimeMs = v6LevelActiveTimeMs(input.budgets.parallelWorkers);
     this.initialized = true; this.sessionId = input.sessionId; this.current = freeze(structuredClone(input.observation)); this.budgets = freeze(structuredClone(input.budgets));
     await this.timed(this.current.level, async () => {
-      this.knowledge = new NativeKnowledgeStore(this.sourceDigest, this.sessionId);
+      this.knowledge = new NativeKnowledgeStore(this.sourceDigest, this.sessionId, undefined, execution.yieldControl);
       await this.knowledge.commit(this.families.flatMap(family => [
         { id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: familyCheckpoint(family),
           relations: [{ relation: 'controlled_by', target: `family_activation:${family.id}` }] },

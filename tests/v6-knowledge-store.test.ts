@@ -75,6 +75,51 @@ test('native store commits actual V7 revisions and rolls back a failed multi-nod
   assert.ok(Object.isFrozen(store.memory.nodes));
 });
 
+test('cooperative publication keeps the same graph and stays atomic across host turns', async () => {
+  const baseline = new NativeKnowledgeStore('cooperative-source', 'cooperative-scope');
+  let yielded = 0;
+  let cooperative: NativeKnowledgeStore;
+  cooperative = new NativeKnowledgeStore('cooperative-source', 'cooperative-scope', undefined, async () => {
+    yielded++;
+    assert.equal(cooperative.memory, published);
+    await assert.rejects(cooperative.commit([], CAUSE), /already active/);
+    await new Promise(resolve => setTimeout(resolve, 0));
+  });
+  let published = cooperative.memory;
+  const records = Array.from({ length: 80 }, (_, index) => ({
+    id: `component:${index}`, kind: 'component_state' as const, component: 'test', value: { index },
+  }));
+  const frames = Array.from({ length: 70 }, (_, frame) => Array.from({ length: 32 }, (_, y) =>
+    Array.from({ length: 32 }, (_, x) => (frame + x + y) % 71)));
+  const writes = [...records, { id: 'component:frames', kind: 'component_state' as const,
+    component: 'test', value: { frames } }];
+  await baseline.commit(writes, CAUSE);
+  await cooperative.commit(writes, CAUSE);
+  assert.ok(yielded >= 2);
+  assert.equal(canonical(cooperative.memory), canonical(baseline.memory));
+  assert.deepEqual(cooperative.stateValue('component:frames'), { frames });
+  published = cooperative.memory;
+  await assert.rejects(cooperative.commit([
+    ...records.map(record => ({ ...record, value: { index: -1 } })),
+    { id: 'invalid', kind: 'family_state', value: {} },
+  ], CAUSE), /Logos contract/);
+  assert.equal(cooperative.memory, published);
+});
+
+test('a rejected publication yield rolls back and releases the store for the next transaction', async () => {
+  const store = new NativeKnowledgeStore('yield-source', 'yield-scope', undefined, async () => {
+    throw new Error('host_yield_failed');
+  });
+  const original = store.memory;
+  const writes = Array.from({ length: 80 }, (_, index) => ({
+    id: `component:${index}`, kind: 'component_state' as const, component: 'test', value: { index },
+  }));
+  await assert.rejects(store.commit(writes, CAUSE), /host_yield_failed/);
+  assert.equal(store.memory, original);
+  await store.commit([writes[0]!], CAUSE);
+  assert.deepEqual(store.stateValue(writes[0]!.id), { index: 0 });
+});
+
 test('native state fragments retain an entire large episode and reuse immutable frames across revisions', async () => {
   const store = new NativeKnowledgeStore('large-native-source', 'large-episode');
   const rows = Array.from({ length: 64 }, (_, y) => Array.from({ length: 64 }, (_, x) => (x + y) % 16));
