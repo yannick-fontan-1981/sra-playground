@@ -12,6 +12,7 @@ import type { ReasoningWindow } from './v6-reasoning-memory.ts';
 import { NativeSrcProgram } from './v6-src-program.ts';
 import type { ExecutionOptions, JsonObject, Primitive } from './ir.ts';
 import type { NativeProgramHandle, NativeProgramRegistry } from './v6-native-types.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 
 export type CompositionRecord = Record<string, any>;
 export interface ReasoningMemoryPort {
@@ -95,12 +96,18 @@ export class NativeEngine {
   readonly tree_sha = TREE_SHA256;
   readonly windows = new Map<string, ReasoningWindow>();
   last_result: CompositionRecord | null = null;
+  private retainedCheckpoint: CompositionEngineState | undefined;
   constructor(memory: ReasoningMemoryPort) { this.memory = memory; }
 
   /** Actual engine caches; reasoning facts/catalog are checkpointed by memory. */
   state(): CompositionEngineState {
     return copy({ schema: 'logos-engine.v6.composition-engine.v1', tree_sha: this.tree_sha,
       windows: [...this.windows], last_result: this.last_result });
+  }
+  nativeCheckpoint(): CompositionEngineState {
+    this.retainedCheckpoint = retainNativeJson<CompositionEngineState>({ schema: 'logos-engine.v6.composition-engine.v1', tree_sha: this.tree_sha,
+      windows: [...this.windows], last_result: this.last_result }, this.retainedCheckpoint);
+    return this.retainedCheckpoint;
   }
   restore(state: CompositionEngineState): void {
     const input = copy(state);
@@ -319,6 +326,7 @@ export class NativeSrcBridge {
   readonly engine: NativeEngine;
   readonly continuous: boolean;
   sequence = 0;
+  private retainedCheckpoint: CompositionBridgeState | undefined;
   last_execution: CompositionRecord | null = null;
   private program: Promise<CompositionProgram>;
   private busy = false;
@@ -363,6 +371,12 @@ export class NativeSrcBridge {
     if (this.busy) throw new Error('Cannot checkpoint composition reasoning during execution');
     return { schema: 'logos-engine.v6.composition-bridge.v1', continuous: this.continuous,
       sequence: this.sequence, engine: this.engine.state() };
+  }
+  nativeCheckpoint(): CompositionBridgeState {
+    if (this.busy) throw new Error('Cannot checkpoint composition reasoning during execution');
+    this.retainedCheckpoint = retainNativeJson<CompositionBridgeState>({ schema: 'logos-engine.v6.composition-bridge.v1', continuous: this.continuous,
+      sequence: this.sequence, engine: this.engine.nativeCheckpoint() }, this.retainedCheckpoint);
+    return this.retainedCheckpoint;
   }
   restore(state: CompositionBridgeState): void {
     if (this.busy) throw new Error('Cannot restore composition reasoning during execution');
