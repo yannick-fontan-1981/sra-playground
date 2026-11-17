@@ -104,7 +104,7 @@ function layoutFor(rows: NativeRows, recipes: readonly Recipe[]): Layout[] {
     && p.bbox[0] > 0 && p.bbox[1] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[3] < rows.length - 1)) {
     for (const pitch of [3, 4, 5]) {
       const dimensions = [width(field.bbox) / pitch, height(field.bbox) / pitch];
-      if (!dimensions.every(side => Number.isInteger(side) && side >= 6 && side <= 16)) continue;
+      if (!dimensions.every(side => Number.isInteger(side) && side >= 6 && side <= 18)) continue;
       const tiles: Tile[] = [];
       const [l, t, r, b] = field.bbox;
       for (let y = t; y <= b; y += pitch) for (let x = l; x <= r; x += pitch) tiles.push(measureTile(rows, x, y, pitch));
@@ -119,7 +119,7 @@ function layoutFor(rows: NativeRows, recipes: readonly Recipe[]): Layout[] {
       if (new Set(marks.map(tile => tile.count)).size !== 1) continue;
       const sources = marks.filter(tile => tile.color !== open && tile.color !== closed);
       const sinks = marks.filter(tile => tile.color === open);
-      if (sources.length < 2 || sources.length > sinks.length * 2 || sinks.length < 2 || sinks.length > 6) continue;
+      if (sources.length < 2 || sources.length > sinks.length * 2 || sinks.length < 2 || sinks.length > 7) continue;
       const indicators = parts.filter(p => p.bbox[3] < t && height(p.bbox) === 2 && width(p.bbox) >= 6 && p.area === 2 * width(p.bbox));
       if (indicators.length !== 1) continue;
       const geometry = { pitch, tiles: surface, closed, open, reserve: width(indicators[0]!.bbox) };
@@ -342,8 +342,22 @@ async function selectSeparatedLayout(rows: NativeRows, recipes: readonly Recipe[
   return null;
 }
 
-function mixConfirmed(pair: Pair, rows: NativeRows, pitch: number): boolean {
-  return !!pair.other && [pair.from, pair.other].every(source => measureTile(rows, ...source.point, pitch).color === pair.color);
+function sourcePigmentChanged(source: Tile, result: number, before: NativeRows, after: NativeRows): boolean {
+  const [left, top, right, bottom] = source.box;
+  let changed = false;
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+    const previous = before[y]?.[x], current = after[y]?.[x];
+    if (previous === current) continue;
+    if (previous !== source.color || current !== result) return false;
+    changed = true;
+  }
+  return changed;
+}
+
+function mixConfirmed(pair: Pair, tileColor: number, before: NativeRows, after: NativeRows, pitch: number): boolean {
+  return !!pair.other && [pair.from, pair.other].every(source =>
+    measureTile(after, ...source.point, pitch).color === pair.color
+    || tileColor === pair.color && sourcePigmentChanged(source, pair.color, before, after));
 }
 
 function separatedReturn(proposal: Proposal, before: NativeRows, after: NativeRows): boolean {
@@ -351,8 +365,8 @@ function separatedReturn(proposal: Proposal, before: NativeRows, after: NativeRo
   if (!layout.pairs.some(pair => pair.other || pair.branches?.length)) return true;
   const { from, other, color } = proposal.pair, pitch = layout.pitch;
   const allowed = new Set([from.color, color, ...(other ? [other.color] : [])]);
-  if (!allowed.has(measureTile(after, ...proposal.tile.point, pitch).color)
-    || proposal.merging && !mixConfirmed(proposal.pair, after, pitch)) return false;
+  const tileColor = measureTile(after, ...proposal.tile.point, pitch).color;
+  if (!allowed.has(tileColor) || proposal.merging && !mixConfirmed(proposal.pair, tileColor, before, after, pitch)) return false;
   return layout.pairs.filter(pair => key(pair.to.point) !== key(proposal.pair.to.point)).every(pair =>
     terminalsOf(pair).every(tile =>
       measureTile(before, ...tile.point, pitch).color === measureTile(after, ...tile.point, pitch).color));
