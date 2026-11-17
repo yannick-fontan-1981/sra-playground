@@ -13,6 +13,7 @@ import { NativeSrcProgram } from './v6-src-program.ts';
 import type { ExecutionOptions, JsonObject, Primitive } from './ir.ts';
 import type { NativeProgramHandle, NativeProgramRegistry } from './v6-native-types.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
+import { isOwnedImmutableJson } from './canonical.ts';
 
 export type CompositionRecord = Record<string, any>;
 export interface ReasoningMemoryPort {
@@ -46,6 +47,15 @@ export type CompositionProgram = NativeProgramHandle;
 export type CompositionProgramHost = NativeProgramRegistry;
 
 const copy = <T>(value: T): T => structuredClone(value);
+/** These callbacks only read request. Keep the interpreter's closed request
+ * across steps and detach the session fields they can write. Raw callback
+ * callers retain the original full-clone behavior. Navigation resume below
+ * uses its own full copy because it rewrites request. */
+function copySession(session: CompositionRecord): CompositionRecord {
+  if (!isOwnedImmutableJson(session) || !isOwnedImmutableJson(session.request)) return copy(session);
+  const { request, ...writable } = session;
+  return { ...copy(writable), request };
+}
 const has = (value: object, key: PropertyKey): boolean => Object.hasOwn(value, key);
 function requireField(value: CompositionRecord, key: string): any {
   if (!has(value, key)) throw new TypeError(`Missing composition field: ${key}`);
@@ -148,7 +158,7 @@ export class NativeEngine {
       current_key: requireField(request, 'current_key'), status: 'pending', action: null };
   }
   src_context(session: CompositionRecord): CompositionRecord {
-    const result = copy(session), request = result.request, policy = requireField(request, 'policy');
+    const result = copySession(session), request = result.request, policy = requireField(request, 'policy');
     result.release_phase = result.phase === 'release'; result.navigation_phase = pythonTruthy(get(request, 'navigation'));
     result.release_allowed = pythonTruthy(get(result, 'guard_satisfied', false)); result.code_only = policy === 'code_only';
     const candidates = requireField(request, 'candidates');
@@ -165,7 +175,7 @@ export class NativeEngine {
   src_laya(_session: CompositionRecord): never { throw new NativeModelUnavailableError(); }
 
   src_apply(session: CompositionRecord, choice: CompositionRecord): CompositionRecord {
-    const result = copy(session), request = result.request, selected = requireField(choice, 'key');
+    const result = copySession(session), request = result.request, selected = requireField(choice, 'key');
     result.progress = increment(result.progress); result.selected = selected;
     result.trace.push({ kind: 'choice', key: selected, method: choice.method, tree_sha: request.tree_sha, revision: request.revision });
     if (choice.method === 'laya') result.model_calls.push(choice);
@@ -211,13 +221,13 @@ export class NativeEngine {
   src_complete_navigation(session: CompositionRecord): CompositionRecord { return session; }
   src_release(session: CompositionRecord): CompositionRecord {
     if (!pythonTruthy(requireField(session, 'release_allowed'))) throw new Error('SRC release guard missing');
-    const result = copy(session); result.action = requireField(result.request, 'action');
+    const result = copySession(session); result.action = requireField(result.request, 'action');
     result.symbolic_post_state = { last_action: result.action, revision: increment(result.request.revision) };
     result.trace.push({ kind: 'symbolic_action', action: result.action, guard_evidence: result.request.safety.evidence, game_io: false });
     Object.assign(result, { pending: false, done: true, status: 'symbolic_action_applied', progress: increment(result.progress) }); return result;
   }
   src_reject(session: CompositionRecord): CompositionRecord {
-    const result = copy(session); Object.assign(result, { pending: false, done: true, status: 'action_guard_rejected', progress: increment(result.progress) }); return result;
+    const result = copySession(session); Object.assign(result, { pending: false, done: true, status: 'action_guard_rejected', progress: increment(result.progress) }); return result;
   }
   src_result(session: CompositionRecord): CompositionRecord {
     this.last_result = Object.fromEntries(Object.entries(session).filter(([key]) => key !== 'request' && key !== 'window')); return this.last_result;
@@ -280,7 +290,7 @@ export class CompositionEngine extends NativeEngine {
   override src_apply(session: CompositionRecord, choice: CompositionRecord): CompositionRecord {
     const request = session.request, key = requireField(choice, 'key');
     if (key === 'ABSTAIN' || get(request, 'navigation', []).some((navigation: CompositionRecord) => navigation.id === key)) return super.src_apply(session, choice);
-    const result = copy(session);
+    const result = copySession(session);
     if (!contains(request.candidates, key) || request.tree_sha !== this.tree_sha) throw new Error('Source-bound choice rejected');
     const bundle = requireField(request.bundles, key);
     result.selected = key; result.selected_bundle = bundle; result.progress = increment(result.progress);
@@ -300,7 +310,7 @@ export class CompositionEngine extends NativeEngine {
   }
   override src_release(session: CompositionRecord): CompositionRecord {
     if (!pythonTruthy(requireField(session, 'release_allowed'))) throw new Error('SRC release missing');
-    const result = copy(session); result.action_set = requireField(result, 'selected_bundle');
+    const result = copySession(session); result.action_set = requireField(result, 'selected_bundle');
     result.trace.push({ kind: 'action_set_release', bundle: result.action_set.id, actions: result.action_set.actions.length, game_io: false });
     Object.assign(result, { pending: false, done: true, status: 'action_set_released', progress: increment(result.progress) }); return result;
   }
