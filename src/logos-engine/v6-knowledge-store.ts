@@ -100,7 +100,7 @@ export class NativeKnowledgeStore {
   private busy = false;
   private callbacks = new Map<string, Readonly<Record<string, Primitive>>>();
   private hydrated = new Map<string, { node: KnowledgeNode; fragments: readonly KnowledgeNode[]; value: JsonValue }>();
-  private lastPublicTransition: NativeStateGraphRoot | undefined;
+  private comparisonRoots = new Map<string, NativeStateGraphRoot>();
   // Host turns let temporary weak-cache targets be collected while the
   // transaction's complete publication remains staged.
   private readonly yieldControl: (() => Promise<void>) | undefined;
@@ -155,7 +155,7 @@ export class NativeKnowledgeStore {
     try {
       const staged = this.kernel.beginTransaction(this.state);
       const accepted = new Map<string, { source: unknown; node: KnowledgeNode }>();
-      let lastPublicTransition = this.lastPublicTransition;
+      const comparisonRoots = new Map(this.comparisonRoots);
       for (const write of writes) {
         // Fragment before the ordinary V7 JSON boundary: a complete observed
         // episode can exceed one million values without any individual node
@@ -164,11 +164,12 @@ export class NativeKnowledgeStore {
         const source = write.value;
         let storedValue: JsonValue;
         if (GRAPH_STATE_KINDS.has(write.kind)) {
-          // Consecutive public transitions have distinct identities and often
-          // share most of their visual evidence. Reuse the last closed root
-          // as a comparison for this stream only, including within a batch.
-          const publicTransition = write.kind === 'transition_evidence' && write.component === 'public_transition';
-          const root = staged.node(write.id)?.value ?? (publicTransition ? lastPublicTransition : undefined);
+          // Appended traces and public returns have distinct identities, but
+          // often repeat closed evidence. A component's last root is only a
+          // comparison candidate: the new raw source is still fully checked.
+          const stream = write.component && (write.kind === 'component_state' || write.kind === 'transition_evidence')
+            ? `${write.kind}:${write.component}` : undefined;
+          const root = staged.node(write.id)?.value ?? (stream ? comparisonRoots.get(stream) : undefined);
           const graph = splitNativeState(source, write.id, isNativeStateGraph(root)
             ? { prior: { root, readFragment: id => staged.node(id)?.value } } : undefined);
           if (this.yieldControl && performance.now() - this.lastYieldAt >= publicationTurnMs) {
@@ -176,7 +177,10 @@ export class NativeKnowledgeStore {
             await this.yieldControl();
             this.lastYieldAt = performance.now();
           }
-          if (publicTransition) lastPublicTransition = graph.root;
+          if (stream) {
+            comparisonRoots.delete(stream); comparisonRoots.set(stream, graph.root);
+            if (comparisonRoots.size > 64) comparisonRoots.delete(comparisonRoots.keys().next().value!);
+          }
           for (const fragment of graph.fragments) {
             const existing = staged.node(fragment.id);
             if (existing) {
@@ -224,7 +228,7 @@ export class NativeKnowledgeStore {
         accepted.set(node.id, { source, node: staged.node(node.id)! });
       }
       this.state = staged.finish();
-      this.lastPublicTransition = lastPublicTransition;
+      this.comparisonRoots = comparisonRoots;
       return accepted;
     } finally { this.busy = false; }
   }

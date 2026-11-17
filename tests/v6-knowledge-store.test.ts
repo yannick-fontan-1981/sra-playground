@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { canonical } from '../src/logos-engine/canonical.ts';
 import { Kernel } from '../src/logos-engine/kernel.ts';
 import { decodeNativeState, encodeNativeState, NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
-import { hydrateNativeState, isNativeStateGraph } from '../src/logos-engine/v6-native-state-graph.ts';
+import { hydrateNativeState, isNativeStateGraph, splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import type { NativeFamily, NativeGraphEdit, NativeRecord } from '../src/logos-engine/v6-native-types.ts';
@@ -19,6 +19,30 @@ import type { GameObservation } from '../src/runtime/browser-games.ts';
 const WORKFLOW = 'v6.composition_strategy.choose';
 const CAUSE = { workflow: 'test.store', step: 'test', statement: 'write' };
 const NO_WAIT = { yieldControl: async () => {} };
+
+test('successive trace identities share unchanged evidence without changing typed graph bytes or hydration', async () => {
+  const store = new NativeKnowledgeStore('test:trace-stream', 'test');
+  const first = { id: 1, created: 0.125, body: { rows: Array.from({ length: 64 }, (_, y) => Array.from({ length: 64 }, (_, x) => (x + y) % 4)), command: 'ACTION1' } };
+  const second = structuredClone(first); second.id = 2; second.created = 0.25; second.body.command = 'ACTION2'; second.body.rows[1]![0] = 7;
+  const write = (id: string, value: unknown) => ({ id, kind: 'component_state' as const, component: 'native_reasoning_trace', value });
+  await store.commit([write('trace:1', first)], CAUSE);
+  const previous = store.memory;
+  await store.commit([write('trace:2', second)], CAUSE);
+  const a = store.node('trace:1').value as any, b = store.node('trace:2').value as any;
+  const rowsA = (store.node(a.root.members.body.members.rows.id).value as any).node;
+  const rowsB = (store.node(b.root.members.body.members.rows.id).value as any).node;
+  assert.equal(rowsB.items[0], rowsA.items[0]);
+  assert.notEqual(rowsB.items[1], rowsA.items[1]);
+  const expected = splitNativeState(second, 'trace:2');
+  assert.equal(canonical(b), canonical(expected.root));
+  for (const fragment of expected.fragments) assert.equal(canonical(store.node(fragment.id).value), canonical(fragment.value));
+  assert.deepEqual(store.value('trace:1'), first); assert.deepEqual(store.value('trace:2'), second);
+  assert.equal(previous.nodes['trace:1'], store.node('trace:1'));
+  const accepted = store.memory;
+  const invalid = Object.defineProperty({ ...second }, 'body', { enumerable: true, get: () => second.body });
+  await assert.rejects(store.commit([write('trace:3', invalid)], CAUSE), /data properties/);
+  assert.equal(store.memory, accepted);
+});
 
 test('native Float64 leaves round-trip fractional evidence, negative zero and reserved object keys', () => {
   const value = { confidence: 0.125, negative: -0, large: 2 ** 60, plain: 7,
