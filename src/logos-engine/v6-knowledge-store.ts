@@ -202,7 +202,10 @@ export class NativeKnowledgeStore {
         // Share only the already closed payload when its full typed encoding is
         // unchanged. This keeps source values, Float64 bits and canonical graph
         // bytes exact while avoiding a fresh hydration of passive family state.
-        if (previous?.value !== undefined && equal(previous.value, storedValue)) storedValue = previous.value;
+        // A current node payload already passed its Kernel hash. Exact identity
+        // needs no second canonical encoding; different values keep the full
+        // typed comparison, including a newly encoded caller input.
+        if (previous?.value !== undefined && (previous.value === storedValue || equal(previous.value, storedValue))) storedValue = previous.value;
         const definition = previous?.definition ?? write.definition;
         const node = {
           id: write.id, kind: write.kind, revision: previous?.revision ?? 0, status: write.status ?? previous?.status ?? 'retained', scope: this.scope,
