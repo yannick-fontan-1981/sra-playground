@@ -1509,3 +1509,9 @@ Le niveau 5 est gagné en **17 commandes et 9,05 s**. Les 71 commandes relèvent
 Quand un marqueur touche le cadre de même couleur, SIC vérifie le périmètre directement dans le retour. La carte manquante reste au quatrième rang. La règle des barres revient toutes les trois cartes et celle du marqueur toutes les deux. Une seule proposition satisfait les deux rythmes sur la ligne entière. Le retour confirme la carte et préserve celles déjà remplies.
 
 Le niveau 5 est gagné en **4 clics et 1,64 s**. Les 20 commandes relèvent de SIC seul. Les 16 commandes et retours des niveaux 1 à 4 concordent avec la référence `a58316949bc07b7ba831f456eb9b3fdf2a5c39afaf944fe61cb7fdf49e866302`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et 22 tests ciblés passent. Empreinte du rejeu complet `2cea533e9779d07a0d14e30da3c8b1e5ca0600cbd7d97689959acfc4bfe7271b`.
+
+### PIPE niveau 5, proportionner le budget de rotation à la grille
+
+SIC soumet les 25 tuiles au solveur de raccords. La recherche impose la réciprocité des ouvertures, la connexité et l’absence de cycle. Le budget des rotations est calculé à partir du nombre de tuiles, et la recherche s’arrête sur sa limite de nœuds ou l’échéance du niveau. Après chaque clic, SIC vérifie la rotation et la stabilité des autres tuiles avant de poursuivre la série.
+
+Le niveau 5 est gagné en **19 clics et 7,25 s**, avec 13 tuiles réorientées. Les 60 commandes relèvent de SIC seul. Les 41 commandes et retours des niveaux 1 à 4 concordent avec la référence `f9fb4cceadbcee9c4319fa851699f515632b75dfaf99bc7e5c22f8ef8cd52299`. La permutation de palette reproduit les commandes et effets géométriques. Le contrôle TypeScript et les 408 tests ciblés passent. Empreinte du rejeu complet `ef7d73a271a90abe507c0e288ed33e6b157cd32530dc845e36eba5fb990b6b6a`.
