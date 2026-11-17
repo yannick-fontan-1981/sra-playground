@@ -1,6 +1,7 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { measureAnimatedCells } from './observed-animation.ts';
 import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGraph } from './observed-command-frontier.ts';
 import { visibleCommandPanel } from './visible-command-panel.ts';
 
@@ -21,6 +22,7 @@ export type CarriedSupport = {
   layout: ToolLayout; grip: Grip; graph: ObservedCommandGraph; vectors: Record<string, NativePoint>;
   gripTests: string[]; rail: number[]; heldOrigin?: NativePoint; relativeSupport?: NativePoint;
   gateTests: { index: number; source: string }[]; switchEffects: SwitchEffect[];
+  interruptedSwitches?: { index: number; actor: string }[];
   blocked: string[]; stableActor: boolean; portals: Portal[]; usedPortals: number[];
   markerTests: string[];
 };
@@ -92,7 +94,7 @@ export function measureCarriedSupport(rows: NativeRows, known: { pitch: number; 
     buttons: panel.aligned.map(p => p.bbox), latch: latch.bbox,
     switches: panel.buttons.filter(p => p !== latch && !panel.aligned.includes(p)).map(p => ({ box: p.bbox, ink: p.color })) };
   return readPose(layout, rows) ? { layout, grip: 'open', graph: {}, vectors: {}, gripTests: [], rail: [],
-    gateTests: [], switchEffects: [], blocked: [], stableActor: true, portals: [], usedPortals: [], markerTests: [] } : null;
+    gateTests: [], switchEffects: [], interruptedSwitches: [], blocked: [], stableActor: true, portals: [], usedPortals: [], markerTests: [] } : null;
 }
 
 function readPose(layout: ToolLayout, rows: NativeRows, relative?: NativePoint): Pose | null {
@@ -269,6 +271,12 @@ function planPassage(state: CarriedSupport, rows: NativeRows, pose: Pose, poses:
   const cells = [...new Set(state.switchEffects.flatMap(effect => effect.edits.map(edit => edit.cell)))];
   const initial = new Map(cells.map(id => [id, tileKey(rows, point(id), pitch)]));
   const blocked = new Set(state.blocked);
+  const interrupted = new Map<number, Set<string>>();
+  for (const { index, actor } of state.interruptedSwitches ?? []) {
+    const positions = interrupted.get(index) ?? new Set<string>();
+    positions.add(actor);
+    interrupted.set(index, positions);
+  }
   const signatures = blocked.size ? new Map(surfaceCells(layout, pose.actor).map(at => [key(at), tileKey(rows, at, pitch)])) : null;
   const surfaceId = (surface: ReadonlyMap<string, string>) => cells.map(id => surface.get(id)).join(';');
   type Node = { actor: NativePoint; tool: NativePoint; steps: number; first: CarriedStep | null;
@@ -312,6 +320,7 @@ function planPassage(state: CarriedSupport, rows: NativeRows, pose: Pose, poses:
     }
     if (!fixed(node.actor) || supported(node.actor, node.tool)) continue;
     for (const { index, edits } of state.switchEffects) {
+      if (interrupted.get(index)?.has(key(node.actor))) continue;
       if (!edits.every(edit => node.surface.get(edit.cell) === edit.before && edit.cell !== key(node.actor))) continue;
       const surface = new Map(node.surface);
       for (const edit of edits) surface.set(edit.cell, edit.after);
@@ -344,6 +353,7 @@ export function nextCarriedStep(state: CarriedSupport, rows: NativeRows, remaini
     if (poses && state.stableActor) {
       const source = switchScope(state.layout, rows, pose.actor);
       const candidates = state.layout.switches.flatMap((_, index) => {
+        if (state.interruptedSwitches?.some(item => item.index === index && item.actor === key(pose.actor))) return [];
         const tested = state.gateTests.filter(test => test.index === index);
         const known = state.switchEffects.some(effect => effect.index === index && effect.edits.every(edit =>
           tileKey(rows, point(edit.cell), state.layout.pitch) === edit.before));
@@ -359,7 +369,8 @@ export function nextCarriedStep(state: CarriedSupport, rows: NativeRows, remaini
   return state.stableActor ? (state.grip === 'open' ? approachGrip(state, pose) : null) ?? buttonStep(state, tool, remaining) : null;
 }
 
-export function observeCarriedStep(state: CarriedSupport, step: CarriedStep, first: NativeRows, second: NativeRows, ref: string) {
+export function observeCarriedStep(state: CarriedSupport, step: CarriedStep, first: NativeRows, second: NativeRows, ref: string,
+  frames: readonly NativeRows[] = []) {
   const before = readPose(state.layout, first, state.relativeSupport), after = readPose(state.layout, second, state.relativeSupport);
   if (!before || !after) return null;
   const start = origin(before.tool.bbox), finish = origin(after.tool.bbox);
@@ -388,6 +399,14 @@ export function observeCarriedStep(state: CarriedSupport, step: CarriedStep, fir
       const from = tileKey(first, p, layout.pitch), to = tileKey(second, p, layout.pitch);
       return from === to || same(before.actor, p) ? [] : [{ cell: key(p), before: from, after: to }];
     });
+    if (!edits.length && frames.length > 1) {
+      const footprint = Array.from({ length: layout.pitch ** 2 }, (_, i): NativePoint =>
+        shift(before.actor, [i % layout.pitch, Math.floor(i / layout.pitch)]));
+      if (measureAnimatedCells(first, second, frames, footprint).length === footprint.length) {
+        return { ...state, portals,
+          interruptedSwitches: [...(state.interruptedSwitches ?? []), { index: step.index, actor: key(before.actor) }] };
+      }
+    }
     if (step.edits && JSON.stringify(step.edits) !== JSON.stringify(edits)) return null;
     return { ...state, portals, gateTests: step.probe ? [...state.gateTests, { index: step.index, source: switchScope(layout, first, before.actor) }] : state.gateTests,
       switchEffects: step.probe && edits.length ? [...state.switchEffects, { index: step.index, edits }] : state.switchEffects };

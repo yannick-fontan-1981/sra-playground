@@ -591,14 +591,16 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'support_route_observation_bound' : 'support_route_observation_changed' };
     },
-    after(proposal, index, before, after, first, second) {
+    after(proposal, index, before, after, first, second, frames) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isCarried(proposal)) {
         const model = proposal.carried.model;
-        const update = observeCarriedStep(model, proposal.carryStep, first, second, after.observation_ref);
-        const matched = !!update && update.blocked.length === model.blocked.length;
+        const update = observeCarriedStep(model, proposal.carryStep, first, second, after.observation_ref, frames);
+        const interrupted = (update?.interruptedSwitches?.length ?? 0) > (model.interruptedSwitches?.length ?? 0);
+        const matched = !!update && !interrupted && update.blocked.length === model.blocked.length;
         return { matched, seal_prefix: true, reason: !update ? 'carried_support_projection_contradicted'
+          : interrupted ? 'cursor_disappeared_and_returned_during_switch'
           : !matched ? 'route_blocked_on_observed_surface' : update.grip === 'held' && model.grip === 'pending'
             ? 'tool_and_support_translation_confirmed' : 'carried_support_effect_observed' };
       }
@@ -624,14 +626,14 @@ export function createSicRemoteSupportRoute(family = remoteSupportRouteId): Nati
       return { matched: !update.stopped, seal_prefix: update.stopped || !canContinue,
         reason: update.stopped ? 'support_route_hypothesis_contradicted' : 'support_route_effect_observed' };
     },
-    record(before, after, _command, first, second, proposal, index) {
+    record(before, after, _command, first, second, proposal, index, frames) {
       if (isCarried(proposal)) {
         const { carried, carryStep } = proposal;
         if (after.levels_completed > before.levels_completed && transfer) {
           transfer = { ...transfer, epoch: before.level_epoch, evidence: [before.observation_ref, after.observation_ref] };
         }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-        const update = observeCarriedStep(carried.model, carryStep, first, second, after.observation_ref);
+        const update = observeCarriedStep(carried.model, carryStep, first, second, after.observation_ref, frames);
         carryMemory = { ...carried, model: update ?? carried.model, stopped: !update,
           lastRef: after.observation_ref, refs: [...carried.refs.slice(-7), after.observation_ref] };
         return { events: [], ...(update?.grip === 'held' && carried.model.grip === 'pending'
