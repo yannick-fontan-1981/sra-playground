@@ -31,6 +31,24 @@ test('native fact deltas share retained branches while public reads and snapshot
   assert.equal(second.value.condition.points[0][0], 2, 'older immutable snapshots stay valid');
 });
 
+test('equivalent native fact values share content while their new evidence and revision are retained', () => {
+  const memory = new NativeReasoningMemory();
+  const value = { rows: [[1, 2], [3, 4]], weight: -0 };
+  memory.nativePut('episode', 'view', value, 'observed:1', 1);
+  const first = memory.nativeGet('episode', 'view');
+  const revision = memory.nativeCheckpoint().revision;
+  const next = structuredClone(value);
+  memory.nativePut('episode', 'view', next, 'observed:2', 2);
+  const second = memory.nativeGet('episode', 'view');
+  assert.notEqual(second, first);
+  assert.equal(second.value, first.value);
+  assert.equal(second.evidence, 'observed:2');
+  assert.equal(second.revision, 2);
+  assert.ok(memory.nativeCheckpoint().revision > revision);
+  next.rows[0]![0] = 9;
+  assert.equal(second.value.rows[0][0], 1);
+});
+
 test('a shallow frozen container cannot conceal a mutable descendant from retained ownership', () => {
   const leaf = { points: [[1, 2]] }, input = Object.freeze({ leaf });
   const first = retainNativeJson(input);
