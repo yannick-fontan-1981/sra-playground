@@ -19,10 +19,12 @@ type Cell = [number, number];
 type Body = [number, string];
 type Population = Map<string, Body>;
 type Jump = { over: Cell; by: Cell };
-type Move = { target: Cell; focus: Cell; victim: Cell | null };
+type Move = { target: Cell; focus: Cell; victim: Cell | null; arrival?: Cell };
+type PortalPair = { ends: [Cell, Cell]; marker: Body };
 type ColorGoal = { color: number; swatch: NativeBox; cell: Cell; empty: number[][]; rank: string; confirmed?: true };
 type State = { epoch: number; geometry: NativeRecord; bases: number[]; focus: Cell | null; jumps: Record<string, Jump[]>;
-  tried: string[]; stopped: boolean; evidence: string[]; rayRanks?: string[]; colorGoal?: ColorGoal };
+  tried: string[]; stopped: boolean; evidence: string[]; rayRanks?: string[]; colorGoal?: ColorGoal;
+  portals?: PortalPair[]; confirmedEntries?: string[] };
 type Transfer = { epoch: number; mask: Cell[]; pitch: number; jumps: Record<string, Jump[]>; evidence: string[] };
 type Leg = { move: Move; selection: boolean; before: [number, number, ...Body][]; attempt: string };
 type Proposal = NativeProposal & Leg & { local: State; path?: Leg[]; needId: string };
@@ -38,6 +40,41 @@ function dominant(pixels: number[][]) {
   const counts = new Map<number, number>();
   for (const row of pixels) for (const color of row) counts.set(color, (counts.get(color) ?? 0) + 1);
   return [...counts].sort((a, b) => b[1] - a[1])[0]![0];
+}
+
+function measurePortals(scene: ReductionScene): PortalPair[] {
+  const side = scene.pitch - 2, groups = new Map<string, { marker: Body; cells: Cell[] }>();
+  const inside = scene.mask.filter(([row, col]) => row > 0 && col > 0 && row < side - 1 && col < side - 1);
+  if (!inside.length || inside.length === scene.mask.length) return [];
+  for (const [address, marker] of scene.bodies) {
+    const patch = scene.cells.get(address)!, [color] = marker, floor = patch[0]![0]!;
+    if (color === floor || !inside.every(([row, col]) => patch[row + 1]![col + 1] === floor)) continue;
+    if (!scene.mask.every(([row, col]) => row > 0 && col > 0 && row < side - 1 && col < side - 1
+      || patch[row + 1]![col + 1] === color)) continue;
+    const signature = key(marker), group = groups.get(signature) ?? { marker, cells: [] };
+    group.cells.push(JSON.parse(address) as Cell);
+    groups.set(signature, group);
+  }
+  return [...groups.values()].flatMap(({ marker, cells }) => {
+    const sameColor = [...scene.bodies.values()].filter(([color]) => color === marker[0]).length;
+    return cells.length === 2 && sameColor === 2 ? [{ ends: [cells[0]!, cells[1]!] as [Cell, Cell], marker }] : [];
+  });
+}
+
+function removePortalMarkers(scene: ReductionScene, portals: readonly PortalPair[]) {
+  for (const portal of portals) for (const end of portal.ends) {
+    const address = key(end);
+    if (equal(scene.bodies.get(address), portal.marker)) scene.bodies.delete(address);
+  }
+  return scene;
+}
+
+function portalExit(target: Cell, portals: readonly PortalPair[] = []) {
+  for (const { ends: [first, second] } of portals) {
+    if (equal(target, first)) return second;
+    if (equal(target, second)) return first;
+  }
+  return undefined;
 }
 
 function measureColorGoal(rows: NativeRows, scene: ReductionScene): ColorGoal | null {
@@ -64,7 +101,9 @@ function measureColorGoal(rows: NativeRows, scene: ReductionScene): ColorGoal | 
 async function readCaptureScene(rows: NativeRows, state: State): Promise<ReductionScene | null> {
   const scene = await retainedReductionScene(rows, state.geometry);
   const goal = state.colorGoal;
-  if (!scene || !goal) return scene;
+  if (!scene) return null;
+  if (state.portals) removePortalMarkers(scene, state.portals);
+  if (!goal) return scene;
   const address = key(goal.cell), patch = scene.cells.get(address);
   if (patch && !scene.bodies.has(address) && !equal(patch, goal.empty)
     && scene.mask.every(([r, c]) => patch[r + 1]![c + 1] === goal.color)) {
@@ -132,18 +171,22 @@ function captureRoute(scene: ReductionScene, state: State, exposed: Cell[], rema
       options.sort((a, b) => order(a.victim, b.victim) || order(a.target, b.target));
       for (const { target, victim } of options) {
         if (!population.has(key(victim)) || population.has(key(target)) || !scene.cells.has(key(target))) continue;
+        const exit = portalExit(target, state.portals), landing = exit ?? target;
+        if (exit && population.has(key(exit)) && !equal(exit, from) && !equal(exit, victim)) continue;
         const selected = equal(focus, from);
         if (!predecessor && selected && !available.has(key(target))) continue;
-        if (!predecessor && (rays.size || goal) && state.tried.includes(key([packed(population), focus, selected ? target : from]))) continue;
+        if (!predecessor && (rays.size || goal || state.portals?.length)
+          && state.tried.includes(key([packed(population), focus, selected ? target : from]))) continue;
         const nextCost = cost + (selected ? 1 : 2);
         if (nextCost > remaining) continue;
         const next = new Map(population);
         next.delete(key(from));
         next.delete(key(victim));
-        next.set(key(target), goal && equal(target, goal.cell) ? [goal.color, body[1]] : body);
-        const capture = { target, focus: from, victim }, moves = selected ? [capture] : [{ target: from, focus: from, victim: null }, capture];
-        const successor = { population: next, focus: target, from: { entry, moves }, cost: nextCost };
-        if (!goal || nextCost >= queue.at(-1)!.cost) queue.push(successor);
+        next.set(key(landing), goal && equal(landing, goal.cell) ? [goal.color, body[1]] : body);
+        const capture = { target, focus: from, victim, ...(exit ? { arrival: exit } : {}) };
+        const moves = selected ? [capture] : [{ target: from, focus: from, victim: null }, capture];
+        const successor = { population: next, focus: landing, from: { entry, moves }, cost: nextCost };
+        if ((!goal && !state.portals?.length) || nextCost >= queue.at(-1)!.cost) queue.push(successor);
         else {
           // Planning for a survivor color counts selections and captures separately.
           let left = i + 1, right = queue.length;
@@ -162,21 +205,35 @@ function captureRoute(scene: ReductionScene, state: State, exposed: Cell[], rema
 
 function captureEffect(proposal: Pick<Proposal, 'before' | 'local' | 'move'>, after: ReductionScene, selected: Cell) {
   const original: Population = new Map(proposal.before.map(([x, y, color, rank]) => [key([x, y]), [color, rank]]));
+  const { move } = proposal, goal = proposal.local.colorGoal;
+  const landing = move.arrival ?? move.target, selectedBody = original.get(key(selected));
+  const expectedBody: Body | undefined = selectedBody && goal && equal(landing, goal.cell) ? [goal.color, selectedBody[1]] : selectedBody;
+  if (!selectedBody || !expectedBody) return null;
+  if (move.arrival) {
+    const candidates = move.victim ? [move.victim] : cells(original.keys()).filter(cell => !equal(cell, selected));
+    const observed = packed(after.bodies);
+    const matches = candidates.filter(victim => {
+      if (!original.has(key(victim))) return false;
+      const expected = new Map(original);
+      expected.delete(key(selected));
+      expected.delete(key(victim));
+      if (expected.has(key(landing))) return false;
+      expected.set(key(landing), expectedBody);
+      return equal(observed, packed(expected));
+    });
+    return matches.length === 1 ? { rank: selectedBody[1], jump: { over: diff(matches[0]!, selected), by: diff(move.target, selected) } } : null;
+  }
   const removed = cells([...original.keys()].filter(cell => !after.bodies.has(cell)));
   const added = cells([...after.bodies.keys()].filter(cell => !original.has(cell)));
   const victim = removed.find(cell => !equal(cell, selected));
-  const selectedBody = original.get(key(selected));
-  const goal = proposal.local.colorGoal;
-  const expectedBody: Body | undefined = selectedBody && goal && equal(proposal.move.target, goal.cell)
-    ? [goal.color, selectedBody[1]] : selectedBody;
-  if (!selectedBody || removed.length !== 2 || !removed.some(cell => equal(cell, selected)) || !victim ||
+  if (removed.length !== 2 || !removed.some(cell => equal(cell, selected)) || !victim ||
     added.length !== 1 || !equal(added[0], proposal.move.target) ||
     !equal(after.bodies.get(key(added[0]!)), expectedBody) ||
     (proposal.move.victim && !equal(proposal.move.victim, victim))) return null;
   const expected = new Map(original);
   expected.delete(key(selected));
   expected.delete(key(victim));
-  expected.set(key(added[0]!), expectedBody!);
+  expected.set(key(added[0]!), expectedBody);
   return equal(packed(expected), packed(after.bodies)) ? { rank: selectedBody[1], jump: { over: diff(victim, selected), by: diff(added[0]!, selected) } } : null;
 }
 
@@ -196,29 +253,34 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       const adopted = learns && !prior ? await execution?.readPriorClickScene?.(async (first, _before, action) => {
         const origin = await measureReductionScene(first);
         if (!origin) return null;
+        const portals = measurePortals(origin);
+        removePortalMarkers(origin, portals);
         const bases = [...new Set([...origin.cells].filter(([cell]) => !origin.bodies.has(cell)).map(([, pixels]) => dominant(pixels)))];
         const target = cells(origin.bodies.keys()).find(cell => {
           const [x, y] = reductionPoint(origin, cell), half = Math.floor(origin.pitch / 2);
           return Math.abs(x - action.data.x!) <= half && Math.abs(y - action.data.y!) <= half;
         });
         const current = target && await retainedReductionScene(rows, reductionGeometry(origin));
-        if (!target || !current || !equal(packed(origin.bodies), packed(current.bodies))) return null;
+        if (!target || !current || !equal(packed(origin.bodies), packed(removePortalMarkers(current, portals).bodies))) return null;
         const before = invitations(origin, bases), after = invitations(current, bases);
-        return !before.length && after.length ? { current, target, bases } : null;
+        return !before.length && after.length ? { current, target, bases, portals } : null;
       }) : null;
       if (learns && !prior && (!adopted || adopted.afterRef !== observation.observation_ref || adopted.levelEpoch !== observation.level_epoch)) return null;
       const scene = prior ? await readCaptureScene(rows, prior) : adopted?.scene.current ?? await measureReductionScene(rows);
-      if (!scene || scene.bodies.size < 2 || scene.bodies.size > 8) return null;
+      if (!scene) return null;
+      const portals = prior?.portals ?? adopted?.scene.portals ?? (!prior ? measurePortals(scene) : []);
+      if (!prior && !adopted) removePortalMarkers(scene, portals);
+      if (scene.bodies.size < 2 || scene.bodies.size > 8) return null;
       const previous = transfer?.epoch === observation.level_epoch && transfer.pitch === scene.pitch && equal(transfer.mask, scene.mask) ? transfer : null;
       const ranks = [...new Set([...scene.bodies.values()].map(body => body[1]))];
       const rayRanks = previous && ranks.some(rank => previous.jumps[rank]?.length) ? ranks.filter(rank => !previous.jumps[rank]?.length) : [];
       const colorGoal = !prior && previous && ranks.every(rank => previous.jumps[rank]?.length) ? measureColorGoal(rows, scene) : null;
-      const reuse = rayRanks.length > 0 || !!colorGoal;
+      const reuse = !!previous && (rayRanks.length > 0 || !!colorGoal || portals.length > 0);
       const local: State = prior ?? { epoch: observation.level_epoch, geometry: reductionGeometry(scene),
         bases: adopted?.scene.bases ?? [...new Set([...scene.cells].filter(([cell]) => !scene.bodies.has(cell)).map(([, pixels]) => dominant(pixels)))],
         focus: adopted?.scene.target ?? null, jumps: reuse ? previous!.jumps : {}, tried: [], stopped: false,
         evidence: adopted ? [adopted.beforeRef, adopted.afterRef] : reuse ? previous!.evidence : [],
-        ...(rayRanks.length ? { rayRanks } : {}), ...(colorGoal ? { colorGoal } : {}) };
+        ...(rayRanks.length ? { rayRanks } : {}), ...(colorGoal ? { colorGoal } : {}), ...(portals.length ? { portals } : {}) };
       const exposed = invitations(scene, local.bases);
       const before = packed(scene.bodies);
       const attemptKey = (target: Cell) => key([before, local.focus, target]);
@@ -226,15 +288,18 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       const offered = local.focus && exposed.find(target => !local.tried.includes(attemptKey(target)));
       const pending = cells(scene.bodies.keys()).sort((a, b) => a[1] - b[1] || a[0] - b[0])
         .find(target => !equal(target, local.focus) && !local.tried.includes(attemptKey(target)));
-      const test = offered && local.focus ? { target: offered, focus: local.focus, victim: null } : null;
-      const select = pending ? { target: pending, focus: pending, victim: null } : null;
+      const destination = offered ? portalExit(offered, local.portals) : undefined;
+      const test: Move | null = offered && local.focus
+        ? { target: offered, focus: local.focus, victim: null, ...(destination ? { arrival: destination } : {}) } : null;
+      const select: Move | null = pending ? { target: pending, focus: pending, victim: null } : null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
       const next = route?.[0];
       const supported = next && !local.tried.includes(attemptKey(next.target)) ? next : null;
       const paintProbe = local.colorGoal && !local.colorGoal.confirmed && supported?.victim && equal(supported.target, local.colorGoal.cell);
-      const trial = paintProbe ? supported : test ?? select;
+      const portalProbe = supported?.arrival && !local.confirmedEntries?.includes(key(supported.target));
+      const trial = paintProbe || portalProbe ? supported : test ?? select;
       const mode = execution?.reasoningMode ?? (supported ? 'solving' : 'exploration');
-      const facts = { routeSupported: !!supported && !paintProbe, eligibleProbe: !!trial, knownInteraction: false, mode };
+      const facts = { routeSupported: !!supported && !paintProbe && !portalProbe, eligibleProbe: !!trial, knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = decision?.result;
       if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
@@ -244,7 +309,8 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       const selection = scene.bodies.has(key(move.target));
       const point = reductionPoint(scene, move.target), [x, y] = point;
       const command = { action_ref: 'ACTION6', data: { x, y } };
-      const label = paintProbe ? 'Test the offered landing on the terrain that matches the requested color' : invitedCaptureStrategies[phase];
+      const label = paintProbe ? 'Test the offered landing on the terrain that matches the requested color'
+        : move.arrival && strategy === 'P05' ? 'Test the offered landing that could transfer the piece to its paired mark' : invitedCaptureStrategies[phase];
       const parent = 'G_official_completion';
       const goal = { kind: local.colorGoal ? 'match_surviving_pieces_to_visible_color' : 'reduce_visible_population', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['capture_source', 'intermediate_piece', 'offered_landing'], parentObjective: parent,
@@ -262,7 +328,7 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
         let focus = local.focus;
         for (const [index, step] of route.slice(0, Math.min(maximumCommittedActions, remaining, 40 - local.tried.length)).entries()) {
           const active = population.get(key(step.focus));
-          if (!active) break;
+          if (!active || index > 0 && step.arrival) break;
           if (index > 0) {
             const isSelection = !step.victim;
             if (isSelection && !equal(scene.bodies.get(key(step.target)), population.get(key(step.target)))) break;
@@ -278,9 +344,9 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
           if (step.victim) {
             population.delete(key(step.focus));
             population.delete(key(step.victim));
-            population.set(key(step.target), active);
+            population.set(key(step.arrival ?? step.target), active);
           }
-          focus = step.target;
+          focus = step.arrival ?? step.target;
         }
       }
       const box = (cell: Cell): NativeBox => {
@@ -298,6 +364,8 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
           ? 'Move the recolored piece away and free the terrain for the next arrival.'
           : 'Keep a route to a final population that matches the displayed color.',
       } : {};
+      const portalContext = move.arrival ? { portalExit: box(move.arrival), situation: strategy === 'P05' ? label
+        : 'Use the offered entry and verify that the piece reaches the paired exit.' } : {};
       return { status: 'proposed', kind: family, actions, local, move, selection, before, needId: need.id, attempt: attemptKey(move.target),
         ...(path.length > 1 ? { path } : {}),
         steps, binding: { observation_ref: ref, level_epoch: observation.level_epoch },
@@ -307,7 +375,7 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
         sicSituationCard: { strategy, need: 'Remove pieces while keeping a capture route open', mode,
           situation: strategy === 'P07' ? 'The measured jump supports a route to one remaining piece. The next landing is checked against the current highlights.' : label,
           agenda: [], evidence, triggerCard: decision.receipt.workflow, focus: box(move.focus), target: box(move.target),
-          victim: move.victim ? box(move.victim) : null, ...(strategy === 'P07' ? rayContext : {}), ...paintContext },
+          victim: move.victim ? box(move.victim) : null, ...(strategy === 'P07' ? rayContext : {}), ...paintContext, ...portalContext },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -347,16 +415,19 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       const selected = selection && !!scene && equal(packed(scene.bodies), leg.before) && invitations(scene, local.bases).length > 0;
       const jumps = { ...local.jumps };
       if (effect) jumps[effect.rank] = [...(jumps[effect.rank] ?? []), effect.jump];
+      const landing = move.arrival ?? move.target;
       const colorGoal = local.colorGoal;
-      const acquired = effect && colorGoal && equal(move.target, colorGoal.cell) && leg.before.some(([x, y, color]) =>
+      const acquired = effect && colorGoal && equal(landing, colorGoal.cell) && leg.before.some(([x, y, color]) =>
         equal([x, y], move.focus) && color !== colorGoal.color);
       const freed = effect && colorGoal && equal(move.focus, colorGoal.cell) && scene && equal(scene.cells.get(key(colorGoal.cell)), colorGoal.empty);
-      state = { ...local, jumps, focus: selected || effect ? move.target : selection ? null : local.focus,
+      state = { ...local, jumps, focus: selected || effect ? landing : selection ? null : local.focus,
         stopped: !scene || (!selection && !effect && !equal(packed(scene.bodies), leg.before)),
         tried: [...local.tried, leg.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref],
-        ...(colorGoal && acquired ? { colorGoal: { ...colorGoal, confirmed: true as const } } : {}) };
+        ...(colorGoal && acquired ? { colorGoal: { ...colorGoal, confirmed: true as const } } : {}),
+        ...(effect && move.arrival ? { confirmedEntries: [...new Set([...(local.confirmedEntries ?? []), key(move.target)])] } : {}) };
       return { events: [], ...(acquired ? { reviewEvidence: 'The arriving piece acquired the requested color and kept its rank.' }
-        : freed ? { reviewEvidence: 'The piece kept the new color and the terrain is free for the next arrival.' } : {}) };
+        : freed ? { reviewEvidence: 'The piece kept the new color and the terrain is free for the next arrival.' }
+          : effect && move.arrival ? { reviewEvidence: 'The capture removed the intermediate piece and the selected piece appeared at the paired exit.' } : {}) };
     },
     state: () => ({ state, transfer }),
     restore(value: NativeRecord) {
