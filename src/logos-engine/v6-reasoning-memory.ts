@@ -61,6 +61,7 @@ export class NativeReasoningMemory {
   private nativeRevision = 0;
   private factVersions = new Map<string, number>();
   private traceVersions = new Map<number, number>();
+  private traceComparisons = new Map<string, ReasoningTrace>();
   constructor(options: { clock?: () => number } = {}) { this.clock = options.clock ?? (() => Date.now() / 1000); }
   private available(): void { if (this.closed) throw new Error('Reasoning memory is closed'); }
   close(): void { this.closed = true; }
@@ -121,7 +122,20 @@ export class NativeReasoningMemory {
   }
   trace(episode: string, kind: string, value: any): void {
     this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;
-    this.traces.push(freezeOwned({ id, episode, kind, body: copy(value), created: this.clock() }));
+    const input = { id, episode, kind, body: copy(value), created: this.clock() };
+    const stream = JSON.stringify([episode, kind]);
+    let record: ReasoningTrace;
+    try {
+      record = retainNativeJson(input, this.traceComparisons.get(stream));
+      this.traceComparisons.delete(stream); this.traceComparisons.set(stream, record);
+      if (this.traceComparisons.size > 64) this.traceComparisons.delete(this.traceComparisons.keys().next().value!);
+    } catch (error) {
+      // The source trace API also admits structured-clone values outside JSON
+      // (including cycles). Preserve that API; only validated JSON is shared.
+      if (!(error instanceof TypeError)) throw error;
+      record = freezeOwned(input);
+    }
+    this.traces.push(record);
     this.traceVersions.set(id, ++this.nativeRevision);
   }
   seedArchive(tokenizer: { encode(text: string, options: { add_special_tokens: false }): readonly unknown[] }, minimumTokens = 100_000): { records: number; tokens: number; synthetic: true } {
@@ -162,6 +176,7 @@ export class NativeReasoningMemory {
     });
   }
   private markRestoredTables(): void {
+    this.traceComparisons.clear();
     this.factVersions.clear(); this.traceVersions.clear(); ++this.nativeRevision;
     for (const [id, fact] of this.facts) { freezeOwned(fact); this.factVersions.set(id, ++this.nativeRevision); }
     for (const trace of this.traces) { freezeOwned(trace); this.traceVersions.set(trace.id, ++this.nativeRevision); }
