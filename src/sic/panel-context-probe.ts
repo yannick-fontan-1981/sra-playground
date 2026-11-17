@@ -83,10 +83,15 @@ export function learnPanelTerrain(walker: PanelWalker, field: NativeBox, fieldIn
   if (!source) return walker;
   const next = footprint(source[0] + motion.delta[0], source[1] + motion.delta[1]);
   const patch = tile(before, next);
-  if (!containsBox(field, next) || supportEvidence(walker, next, patch)
-    || !tile(after, next).every(ink => ink === walker.ink)) return walker;
+  if (!containsBox(field, next) || !tile(after, next).every(ink => ink === walker.ink)) return walker;
   const moved = panelActor(walker, after, field);
   if (!moved || !sameBox(moved, next)) return walker;
+  const uncovered = tile(after, source);
+  if (!supportEvidence(walker, source, uncovered)
+    && uncovered.every(ink => ink !== undefined && ink !== fieldInk && ink !== walker.ink)) {
+    walker = { ...walker, contacts: { ...walker.contacts, [place(source)]: { patch: uncovered.join(','), evidence } } };
+  }
+  if (supportEvidence(walker, next, patch)) return walker;
   const color = patch[0];
   if (color !== undefined && color !== fieldInk && color !== walker.ink && patch.every(ink => ink === color)) {
     return { ...walker, floorReturns: { ...walker.floorReturns, [color]: evidence } };

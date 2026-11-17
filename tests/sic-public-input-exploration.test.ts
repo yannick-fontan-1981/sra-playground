@@ -2,14 +2,17 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
+import { componentCenterPoint } from '../src/sic/interior-shape-targets.ts';
 import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier } from '../src/sic/public-input-exploration.ts';
-import { observedCommandFrontier, observedCommandKey } from '../src/sic/observed-command-frontier.ts';
+import { observedCommandFrontier, observedCommandKey, rememberCommandReturn, type ObservedCommandGraph } from '../src/sic/observed-command-frontier.ts';
 import { commandPanelState, visibleCommandPanel } from '../src/sic/visible-command-panel.ts';
 import { learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, projectPanelContact, projectPanelMarker,
-  projectPanelTerrain, rememberPanelTerrain, type PanelWalker } from '../src/sic/panel-context-probe.ts';
+  projectPanelFooting, projectPanelTerrain, rememberPanelTerrain, type PanelWalker } from '../src/sic/panel-context-probe.ts';
 import { sameLandingPixels } from '../src/sic/plan-step.ts';
 import { measureReturningAnimation } from '../src/sic/observed-animation.ts';
-import { dockingDistance, findPanelDock, measureAlignedTool, measurePanelTransport } from '../src/sic/panel-mechanism-probe.ts';
+import { dockingDistance, findPanelDock, measureAlignedTool, measurePanelTransport,
+  panelTransportPose, unchangedPanelTransport } from '../src/sic/panel-mechanism-probe.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 
@@ -96,6 +99,45 @@ test('public exploration shares tested panel commands across families and only r
     state => state === initial ? testedHere : ['ACTION2']), null);
 });
 
+test('a witnessed transport can be replayed to reach an untried placement despite an earlier click on the same board', async () => {
+  const rows = Array.from({ length: 18 }, (_, y) => Array.from({ length: 32 }, (_, x) => {
+    if (x < 16) return x >= 4 && x <= 5 && y >= 4 && y <= 5 ? 14 : 1;
+    return y >= 6 && y <= 8 && [20, 23, 26, 29].some(start => x === start || x === start + 1) ? 7 : 2;
+  }));
+  const inputs = [1, 2, 3, 4].map(id => ({ action_ref: `ACTION${id}`, data: {} }));
+  const refs = [...inputs.map(input => input.action_ref), 'ACTION6'];
+  const observation = await measureNativeObservation({ frame_rows: rows, frame_hash: 'current_transport',
+    level: 1, levels_completed: 0, available_action_refs: refs, state: 'NOT_FINISHED' }, 1);
+  const panel = visibleCommandPanel(rows)!;
+  assert.ok(panel);
+  const control = (index: number) => {
+    const button = panel.buttons[index]!, [x, y] = componentCenterPoint(button);
+    return { command: { action_ref: 'ACTION6', data: { x, y } }, box: button.bbox,
+      ink: button.color, contact: [4, 4, 5, 5] as const, before: 'earlier', observation: observation.observation_ref };
+  };
+  const motion = control(0), action = observedCommandKey(motion.command), tool = 'attached_tool';
+  const held = { tool: [8, 8, 11, 11] as const, support: [6, 9, 13, 10] as const };
+  const other = { tool: [6, 8, 9, 11] as const, support: [4, 9, 11, 10] as const };
+  const source = panelTransportPose(held), destination = panelTransportPose(other);
+  const family = createSicPublicInputExploration();
+  await family.attachPrograms!(new NativeKnowledgeStore('transport-test', 'current'));
+  family.restore({ ...family.state(), epoch: observation.level_epoch,
+    panelWalker: { ink: 14, floor: 1, controls: {} },
+    revealedPanelControl: control(1),
+    transitions: { [commandPanelState(rows, panel, refs)]: [{ action, destination: 'previous_board', evidence: 'prior_click' }] },
+    animatedPanelControls: { [tool]: { control: motion, region: held.tool, frames: [1], tested: [],
+      evidence: 'grip_confirmed', held, transport: 'transport_confirmed',
+      transportReturns: { [source]: [{ action: `${action}@4,4,5,5`, destination, evidence: 'witnessed_transport' }] } } },
+    panelMechanismMotions: [{ footing: motion, delta: [-2, 0], tool, evidence: 'measured_direction' }],
+  });
+  const proposal = await family.propose(observation, rows, inputs, 12);
+  assert.ok(proposal);
+  assert.deepEqual(proposal.actions, [motion.command]);
+  assert.equal(proposal.sicSituationCard.strategy, 'P07');
+  assert.equal(proposal.transportMove?.expected, destination);
+  assert.ok(proposal.route_refs?.includes('witnessed_transport'));
+});
+
 test('a panel comparison projects a guarded route using measured commands and an untested matching marker', () => {
   const board = (ax: number, ay: number, mark = true) => Array.from({ length: 14 }, (_, y) =>
     Array.from({ length: 14 }, (_, x) => {
@@ -147,6 +189,32 @@ test('a panel comparison projects a guarded route using measured commands and an
     [{ marker: [8, 4, 9, 5], command: observedCommandKey(button.command), evidence: 'earlier_displacement' }]);
   assert.deepEqual(matched?.target.peer, [10, 8, 11, 9]);
   assert.equal(matched?.target.link, 'earlier_displacement');
+});
+
+test('leaving an occupied marker retains its revealed footprint for a guarded return', () => {
+  const field = [0, 0, 11, 9] as const;
+  const right = { action_ref: 'ACTION4', data: {} }, left = { action_ref: 'ACTION3', data: {} };
+  const up = { action_ref: 'ACTION1', data: {} };
+  const walker: PanelWalker = { ink: 7, floor: 1, controls: {
+    ACTION4: { delta: [2, 0], evidence: 'right' }, ACTION3: { delta: [-2, 0], evidence: 'left' },
+    ACTION1: { delta: [0, -2], evidence: 'up' },
+  } };
+  const before = Array.from({ length: 10 }, () => Array<number>(12).fill(1));
+  const after = before.map(row => [...row]);
+  for (const y of [4, 5]) for (const x of [2, 3]) before[y]![x] = 7;
+  for (const y of [4, 5]) for (const x of [4, 5]) after[y]![x] = 7;
+  after[4]![2] = after[5]![3] = 8;
+  after[4]![3] = after[5]![2] = 9;
+  assert.equal(projectPanelFooting(walker, after, field, [left, up], [2, 4, 3, 5], 'return', 2)?.route.length, 1);
+  const learned = learnPanelTerrain(walker, field, 0, right.action_ref, before, after, 'departed_marker');
+  assert.deepEqual(learned.contacts?.['2,4'], { patch: '8,9,9,8', evidence: 'departed_marker' });
+  const route = projectPanelFooting(learned, after, field, [left, up], [0, 4, 1, 5], 'beyond_marker', 2);
+  assert.equal(projectPanelFooting(walker, after, field, [left, up], [0, 4, 1, 5], 'beyond_marker', 2), null);
+  assert.equal(route?.route.length, 2);
+  assert.ok(route?.evidence.includes('departed_marker'));
+  const changed = after.map(row => [...row]);
+  changed[4]![2] = 0;
+  assert.equal(projectPanelFooting(learned, changed, field, [left, up], [0, 4, 1, 5], 'beyond_marker', 2), null);
 });
 
 test('a repeated animation localizes a response even when the field returns to its original pixels', () => {
@@ -220,6 +288,25 @@ test('transport is acquired when the aligned tool and both support pieces transl
   assert.deepEqual(measurePanelTransport(before, board(2, 2), field, held!),
     { tool: [5, 4, 8, 7], support: [2, 4, 11, 7], delta: [2, 0] });
   assert.equal(measurePanelTransport(before, board(2, 0), field, held!), undefined);
+  assert.equal(unchangedPanelTransport(before, board(0, 0), held!), true);
+  assert.equal(unchangedPanelTransport(before, board(2, 0), held!), false);
+  assert.equal(unchangedPanelTransport(before, board(0, 2), held!), false);
+  const returns: ObservedCommandGraph = {}, source = panelTransportPose(held!);
+  const moved = measurePanelTransport(before, board(2, 2), field, held!)!;
+  const destination = panelTransportPose(moved);
+  rememberCommandReturn(returns, source, source, 'up', 'blocked_up');
+  rememberCommandReturn(returns, source, source, 'left', 'blocked_left');
+  rememberCommandReturn(returns, source, destination, 'right', 'transported_right');
+  rememberCommandReturn(returns, destination, source, 'left', 'transported_left');
+  rememberCommandReturn(returns, destination, destination, 'right', 'blocked_right');
+  rememberCommandReturn(returns, destination, destination, 'up', 'blocked_up_again');
+  const next = observedCommandFrontier(returns, destination, ['up', 'left', 'right', 'down'], 3,
+    pose => pose === destination ? ['up', 'left', 'right'] : ['up', 'left', 'right', 'down']);
+  assert.equal(next?.action, 'left');
+  assert.equal(next?.probe, 'down');
+  assert.equal(next?.first?.evidence, 'transported_left');
+  rememberCommandReturn(returns, destination, null, 'left', 'transport_unconfirmed');
+  assert.equal(observedCommandFrontier(returns, destination, ['up', 'left', 'right'], 3), null);
 });
 
 test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {
