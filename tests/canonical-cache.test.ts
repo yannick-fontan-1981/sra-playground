@@ -2,6 +2,17 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { assertUnicode, canonical, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord } from '../src/logos-engine/canonical.ts';
 import { digest } from '../src/logos-engine/canonical.ts';
+import { ShardedWeakSet } from '../src/logos-engine/sharded-weak-set.ts';
+
+test('weak identity shards still recognize live objects from every earlier generation', () => {
+  const owned = new ShardedWeakSet(2);
+  const values = Array.from({ length: 17 }, (_, index) => Object.freeze({ index }));
+  values.forEach(value => owned.add(value));
+  for (const value of [...values].reverse()) {
+    assert.equal(owned.has(value), true);
+    assert.equal(owned.has(Object.freeze({ ...value })), false);
+  }
+});
 
 test('constructed containers preserve canonical bytes, ownership and closed child identities', () => {
   const child = immutableJson({ retained: [1, true, null, 'é𝄞'] });

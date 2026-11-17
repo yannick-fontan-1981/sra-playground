@@ -1,5 +1,6 @@
 import type { JsonObject, JsonValue } from './ir.ts';
 import { BoundedWeakCache } from './bounded-weak-cache.ts';
+import { ShardedWeakSet } from './sharded-weak-set.ts';
 
 /**
  * Portable V7 scalar contract for this first browser port.
@@ -14,7 +15,7 @@ import { BoundedWeakCache } from './bounded-weak-cache.ts';
  */
 export const PORTABLE_SCALAR_DOMAIN = 'strings, booleans and safe integers (no negative zero); structural null';
 
-const immutableObjects = new WeakSet<object>();
+const immutableObjects = new ShardedWeakSet();
 // Only deeply immutable, fully validated trees enter this cache. Size and
 // height are retained so reuse cannot evade the original structural limits.
 // Historical V7 nodes deliberately remain alive. Weak keys alone therefore do
