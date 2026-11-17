@@ -149,7 +149,7 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
     const retained = coupling?.epoch === epoch - 1 ? coupling : null;
     if (!memory) {
       const scene = (measureExposedReception(rows) ?? (retained ? measureRetainedExposedReception(rows, known.pitch) : null)) as Scene | null;
-      if (!scene || scene.size[0] * scene.size[1] > 144 || Object.values(known.directions).length < 1) return null;
+      if (!scene || scene.size[0] * scene.size[1] > (retained ? 196 : 144) || Object.values(known.directions).length < 1) return null;
       const measured = readExposureBoard(scene, { shadow: photo.shadow, lit: photo.lit }, retained ?? undefined);
       const active = scene.dial.find(d => d.active);
       if (!measured || !active) return null;
