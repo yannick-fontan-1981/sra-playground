@@ -8,8 +8,8 @@ test('new trace records share unchanged JSON evidence while keeping their identi
   let clock = 10;
   const memory = new NativeReasoningMemory({ clock: () => clock++ });
   const body = { observation: { rows: [[1, 2], [3, 4]] }, command: 'ACTION1' };
-  memory.trace('episode', 'decision', body);
-  body.command = 'ACTION2'; memory.trace('episode', 'decision', body);
+  memory.nativeTrace('episode', 'decision', body);
+  body.command = 'ACTION2'; memory.nativeTrace('episode', 'decision', body);
   const entries = memory.nativeCheckpoint().traces;
   const [first, second] = entries.map(entry => entry.record);
   assert.equal(first!.body.observation, second!.body.observation);
@@ -29,6 +29,12 @@ test('non-JSON structured-clone traces retain their original source API', () => 
   const body = memory.dynamicState().traces[0]!.body;
   assert.equal(body.self, body); assert.equal(body.optional, undefined);
   assert.deepEqual(body.map, cyclic.map); assert.notEqual(body.map, cyclic.map);
+  const shared = { value: 1 };
+  memory.trace('episode', 'aliases', { a: shared, b: shared });
+  memory.trace('episode', 'aliases', { a: { value: 1 }, b: { value: 1 } });
+  const traces = memory.dynamicState().traces;
+  assert.equal(traces[1]!.body.a, traces[1]!.body.b);
+  assert.notEqual(traces[2]!.body.a, traces[2]!.body.b);
 });
 import { assessRetainedTransition, constructEmpiricalRule, validateEmpiricalRule, validateRetainedEmpiricalRule } from '../src/logos-engine/v6-transition-learning.ts';
 import { hydrateNativeState, splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
