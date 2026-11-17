@@ -17,6 +17,13 @@ type Proposal = NativeProposal & { target: NativeBox; preserve: NativeBox[]; exp
 const sameRaster = (first: Raster, second: Raster) => first.length === second.length && first.every((row, y) =>
   row.length === second[y]!.length && row.every((color, x) => color === second[y]![x]));
 
+function combinedCycles(explanation: Awaited<ReturnType<typeof explainVisual>>) {
+  const layers = explanation?.layers as { laws: { model?: string; period?: number }[] }[] | undefined;
+  const periods = [...new Set(layers?.flatMap(layer => layer.laws.flatMap(law =>
+    law.model === 'mask_cycle' && law.period && law.period > 1 ? [law.period] : [])))].sort((a, b) => a - b);
+  return periods.length > 1 ? `Match the independent cycles of ${periods.join(' and ')} cards at the missing rank` : null;
+}
+
 function fillsTarget(proposal: Proposal, first: NativeRows, second: NativeRows) {
   return sameRaster(visualInterior(second, proposal.target), proposal.expected) &&
     proposal.preserve.every(box => sameRaster(visualInterior(first, box), visualInterior(second, box)));
@@ -35,17 +42,21 @@ export function createSicVerifyPatternChoice(): NativeFamily<Proposal> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped) return null;
-      const layout = await visualLayout(observation, rows);
+      const strict = await visualLayout(observation, rows);
+      const layout = strict ?? await visualLayout(observation, rows, true);
       if (!layout || layout.options.length > 12 || layout.active.rasters.length > 12) return null;
       const { active, options, background } = layout;
       const cards = active.rasters.map((raster, index) => index === active.missing ? null : raster);
       const config = configuration ??= visualSequenceConfiguration();
       let choice: (typeof options)[number] | undefined;
       let relation: ReturnType<typeof visualRelation> = null;
+      let cycles: string | null = null;
       for (const option of options) {
-        if (!await explainVisual(cards, active.missing, option.raster, background, config)) continue;
+        const explanation = await explainVisual(cards, active.missing, option.raster, background, config);
+        if (!explanation) continue;
         if (choice) return null;
         choice = option;
+        if (!strict) cycles = combinedCycles(explanation);
       }
       if (!choice) {
         for (const option of options) {
@@ -82,8 +93,8 @@ export function createSicVerifyPatternChoice(): NativeFamily<Proposal> {
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Fill the missing card', mode,
-          situation: relation ? visualRelationDescriptions[relation]
-            : `One of ${options.length} options fits the measured color and shape relations. Acceptance still needs a return.`,
+          situation: relation ? visualRelationDescriptions[relation] : cycles
+            ?? `One of ${options.length} options fits the measured color and shape relations. Acceptance still needs a return.`,
           agenda: [], evidence, triggerCard: decision.receipt.workflow,
           target, option: choice.box, examples: active.boxes.filter(box => box !== target) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
