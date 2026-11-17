@@ -1429,3 +1429,9 @@ Le niveau 5 est gagné en **7 clics et 5,76 s** dans le lot configuré pour huit
 SIC reconnaît une cible déjà occupée et reconstitue la barre visible de part et d’autre de la marque. Le deuxième marqueur se déplace selon deux axes, dont l’un est transmis par une barre parente. La recherche vérifie les collisions et l’alignement conjoint des cibles sur toute la suite de commandes. La carte de décision montre l’alignement temporairement défait à la commande 6 et restauré à la commande 28.
 
 Le niveau 5 est gagné en **28 clics et 8,91 s** dans le lot configuré pour huit workers. Les 146 commandes relèvent de SIC seul. Les 118 commandes et retours des niveaux 1 à 4 concordent avec `d68d768a`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `1f465776d7f30821752d18bacda8980a1c6b1870a4586918dd1ae07240c50250`.
+
+### CLRS niveau 5, distinguer la sélection du blanc composé
+
+SIC traite les pixels masqués par le cadre comme inconnus dans la projection du panneau, puis vérifie les masques révélés par les déplacements. Il suit la position du point de sélection pour l’écarter de la comparaison des couleurs composées. Il confirme successivement le vert et le bleu, puis utilise deux translations pour relire le panneau rouge tronqué. Le dernier quart de tour complète le magenta et les six pixels blancs qui demandent les trois couches.
+
+Le niveau 5 est gagné en **14 commandes et 6,34 s** dans le lot configuré pour huit workers. Les 60 commandes relèvent de SIC seul. Les 46 commandes et retours des niveaux 1 à 4 concordent avec `4baeadf6`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `58f0269e9d6c7c13e14262ee77314c80c6b95e1f85fdc53a277732649f27068a`.
