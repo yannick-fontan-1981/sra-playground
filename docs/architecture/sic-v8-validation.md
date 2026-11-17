@@ -1650,3 +1650,12 @@ La carte passe de six à onze salles à la commande 4, puis à dix-sept salles �
 À chacune des deux prises de clé, le retour dans la salle cartographique masque le cadre de l’emplacement occupé. SIC conserve son emplacement mesuré et lit la clé à cette position. Les animations des commandes 7 et 13 confirment que les clés disparaissent au moment où les bords correspondants s’ouvrent. Le premier passage ouvert reste acquis après le second raccordement.
 
 Le rejeu complet gagne le niveau 5 en **14 commandes et 6,33 s** avec le réglage de huit workers. Les 52 commandes relèvent de SIC seul. Les 38 commandes et retours des niveaux 1 à 4 reproduisent la référence `624119e0`. La permutation de palette reproduit les 52 commandes et leurs effets géométriques. Empreinte complète `b351ef56bedd09cece423b3a639f0f6537b015bd13adfdc75a63a839afda3d06`. TypeScript et les 334 tests SIC et cartographie exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### FUIT niveau 5, fermer la retraite avec une pierre transportée
+
+SIC remesure la grille, distingue les murs fixes des pierres et relocalise le sprite à intercepter malgré son changement de couleur. La règle de fuite acquise aux niveaux précédents reste compatible avec les déplacements ordinaires. Un essai direct montre qu’une tentative de capture dont un voisin reste libre laisse le sprite s’échapper. La recherche doit donc rendre la retraite impossible au moment du contact.
+
+SIC calcule le trajet en tenant compte de la case de la pierre attachée en plus de celle de l’acteur. Il vérifie la première attache à la commande 19, le dépôt à la commande 21 et une nouvelle attache à la commande 23. Le dépôt restreint le déplacement du sprite. La dernière pierre voyage avec l’acteur et ferme la case de retraite lors du contact final. Le suffixe calculé est gardé tant que les positions relues concordent avec le retour précédent.
+
+Le rejeu complet gagne le niveau 5 en **26 commandes et 10,80 s** avec le réglage de huit workers. Les 164 commandes relèvent de SIC seul. Les 138 commandes et retours des niveaux 1 à 4 reproduisent la référence `1c77ad44`. La permutation de palette reproduit les 164 commandes et leurs effets géométriques. Empreinte complète `b33079dcb9794d9bfd268aba9c5aeecf2bad25bff74690c001fbe6356168436e`. TypeScript et les 711 tests SIC et poursuite exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.

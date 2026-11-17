@@ -7,6 +7,7 @@ import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { planPursuit, projectPursuit, pursuitDirections, pursuitStateKey, pursuitTrialKey, readPursuitState,
   type PursuitDirection, type PursuitMove, type PursuitRoles, type PursuitState } from './pursuit-forecast.ts';
+import { gripStateMatches, gripTrialKey, planGrippedPursuit, readGripState, type GripLeg, type GripState, type GripTerrain } from './gripped-pursuit.ts';
 
 export const reactiveTargetId = 'sic_reactive_target';
 export const verifyReactiveMotionId = 'sic_verify_reactive_motion';
@@ -16,7 +17,8 @@ const inputs = pursuitDirections;
 type Input = typeof inputs[number][0];
 type Direction = PursuitDirection;
 type Part = ReturnType<typeof geometricComponents>[number];
-type Layout = { actor: number; peer: number; goals: NativePoint[]; cells: Record<string, boolean>; pitch: number; size: number; bounds: NativeBox };
+type Layout = { actor: number; peer: number; goals: NativePoint[]; cells: Record<string, boolean>; pitch: number; size: number; bounds: NativeBox;
+  grip?: GripTerrain };
 type Pair = { actor: NativePoint; peer: NativePoint };
 type Return = Pair & { evidence: string };
 type Hypothesis = { order: Direction[]; matches: number };
@@ -28,9 +30,12 @@ type Calibration = { epoch: number; roles: PursuitRoles; orders: Direction[][]; 
 type PursuitWitness = { epoch: number; score: number; roles: PursuitRoles; order: Direction[]; refs: string[] };
 type PursuitMemory = { epoch: number; layout: Layout; rejected: string[]; refs: string[]; verified: boolean; blocked: boolean };
 type CrowdPlan = { local: PursuitMemory; current: PursuitState; move: PursuitMove; obstacle: number };
-type Proposal = NativeProposal & ({ local: Memory; at: Pair; plan: Plan; needId: string; crowd?: never;
+type GripMemory = { epoch: number; terrain: GripTerrain; at?: GripState; heldInk?: number; refs: string[]; rejected: string[];
+  plan: GripLeg[]; blocked: boolean };
+type GripPlan = { local: GripMemory; observed: GripState; legs: GripLeg[] };
+type Proposal = NativeProposal & ({ local: Memory; at: Pair; plan: Plan; needId: string; crowd?: never; grip?: never;
   walk?: { from: Pair; plan: Plan; predicted: PursuitState }[]; obstacle?: number }
-  | { crowd: CrowdPlan; needId: string });
+  | { crowd: CrowdPlan; needId: string; grip?: never } | { grip: GripPlan; needId: string; crowd?: never });
 const key = (p: NativePoint) => p.join(',');
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const point = ([x, y]: NativeBox): NativePoint => [x, y];
@@ -48,7 +53,7 @@ function permutations(directions: readonly Direction[]): Direction[][] {
   return directions.flatMap(direction => permutations(directions.filter(d => d !== direction)).map(rest => [direction, ...rest]));
 }
 
-function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles): Layout | null {
+function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles, withWalls = false): Layout | null {
   const candidates: Layout[] = [];
   const boards = parts.filter(p => width(p.bbox) === height(p.bbox) && width(p.bbox) >= 20
     && p.bbox[0] > 0 && p.bbox[1] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[3] < rows.length - 3
@@ -66,22 +71,40 @@ function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles): Layou
       const single = [...groups.values()].filter(g => g.length === 1).map(g => g[0]!);
       const others = [...groups.values()].filter(g => g.length > 1);
       const obstacles = roles ? groups.get(roles.obstacle) : others[0];
-      if (!obstacles || obstacles.length < 3 || (!roles && (single.length !== 2 || others.length !== 1))
-        || (roles && (!groups.get(roles.peer)?.length || groups.size !== 3))) continue;
+      if (!obstacles || obstacles.length < 3) continue;
       const indicators = parts.filter(p => p.bbox[1] > bottom && width(p.bbox) === size && height(p.bbox) === size - 1);
+      const wallCandidates = new Map<number, NativePoint[]>();
+      if (withWalls && roles) {
+        for (const tag of indicators) if (tag.area === size * (size - 1) && ![roles.actor, roles.obstacle, board.color].includes(tag.color)) {
+          wallCandidates.set(tag.color, []);
+        }
+        for (let y = top + 1; y < bottom; y += pitch) for (let x = left + 1; x < right; x += pitch) {
+          const ink = rows[y]![x]!, sites = wallCandidates.get(ink);
+          if (sites && rows.slice(y, y + size).every(row => row.slice(x, x + size).every(value => value === ink))) sites.push([x, y]);
+        }
+      }
+      const walls = [...wallCandidates].filter(([, sites]) => sites.length > obstacles.length);
+      if (withWalls ? walls.length !== 1 : !roles ? single.length !== 2 || others.length !== 1 : !groups.get(roles.peer)?.length || groups.size !== 3) continue;
       const actors = single.filter(p => (!roles || p.color === roles.actor)
         && indicators.some(tag => tag.color === p.color && tag.area === size * (size - 1)));
       if (actors.length !== 1) continue;
-      const actor = actors[0]!, peer = roles ? groups.get(roles.peer)![0]! : single.find(p => p !== actor)!;
+      const actor = actors[0]!, candidatesForPeer = single.filter(p => p !== actor && p.color !== walls[0]?.[0]);
+      if (withWalls && candidatesForPeer.length !== 1) continue;
+      const peer = roles && !withWalls ? groups.get(roles.peer)![0]! : candidatesForPeer[0]!;
       const cells: Record<string, boolean> = {};
       for (let y = top + 1; y < bottom; y += pitch) {
         for (let x = left + 1; x < right; x += pitch) {
-          if ([rows[y - 1]?.[x], rows[y]?.[x - 1], rows[y + size]?.[x + size - 1], rows[y + size - 1]?.[x + size]]
+          if (withWalls || [rows[y - 1]?.[x], rows[y]?.[x - 1], rows[y + size]?.[x + size - 1], rows[y + size - 1]?.[x + size]]
             .every(value => value === board.color)) cells[key([x, y])] = true;
         }
       }
       if (!cells[key(point(actor.bbox))] || !cells[key(point(peer.bbox))] || Object.keys(cells).length > 128) continue;
-      candidates.push({ actor: actor.color, peer: peer.color, pitch, size, bounds: board.bbox, cells, goals: obstacles.map(p => point(p.bbox)) });
+      const fixed = walls[0]?.[1];
+      if (fixed) for (const site of fixed) delete cells[key(site)];
+      const grip = fixed ? { actor: actor.color, peer: peer.color, pitch, size, cells, fixed,
+        obstacle: obstacles[0]!.color, wall: walls[0]![0], floor: board.color } : undefined;
+      candidates.push({ actor: actor.color, peer: peer.color, pitch, size, bounds: board.bbox, cells,
+        goals: obstacles.map(p => point(p.bbox)), ...(grip ? { grip } : {}) });
     }
   }
   return candidates.length === 1 ? candidates[0]! : null;
@@ -157,6 +180,7 @@ function fitReactiveReturns(local: Memory, input: Direction, first: NativeRows, 
 export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): NativeFamily<Proposal> {
   let memory: Memory | null = null;
   let calibration: Calibration | null = null, witness: PursuitWitness | null = null, pursuit: PursuitMemory | null = null;
+  let grip: GripMemory | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -167,13 +191,58 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, available, remaining, execution);
       if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed) return null;
       const proposal = await this.propose(observation, rows, available, remaining, execution);
-      return proposal?.crowd ? proposal : null;
+      return proposal?.crowd || proposal?.grip ? proposal : null;
     },
     async propose(observation, rows, _available, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !inputs.every(([ref]) => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
       const parts = geometricComponents(rows);
       if (witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed) {
+        if (observation.available_action_refs.includes('ACTION5')) {
+          const prior = grip?.epoch === observation.level_epoch ? grip : null;
+          const hasActiveRoute = pursuit?.epoch === observation.level_epoch || memory?.epoch === observation.level_epoch;
+          const terrain = prior?.terrain ?? (!hasActiveRoute ? layoutFor(rows, parts, witness.roles, true)?.grip : undefined);
+          const observed = terrain && !prior?.blocked && (prior || terrain.peer !== witness.roles.peer)
+            ? readGripState(rows, terrain, prior?.heldInk) : null;
+          const cached = observed && prior?.at && prior.plan.length <= remaining && gripStateMatches(observed.state, prior.at) ? prior.plan : [];
+          const legs = observed && terrain ? cached.length ? cached
+            : planGrippedPursuit(observed.state, terrain, witness.order, new Set(prior?.rejected), remaining,
+              () => execution?.signal?.aborted === true) : null;
+          const step = legs?.[0];
+          if (step && observed && terrain) {
+            const local = prior ?? { epoch: observation.level_epoch, terrain, refs: witness.refs, rejected: [], plan: [], blocked: false };
+            const ref = observation.observation_ref, mode = execution?.reasoningMode ?? 'solving';
+            const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
+            const toggle = step.input === 'ACTION5', knownInteraction = toggle && local.heldInk !== undefined;
+            const facts = { routeSupported: !toggle, eligibleProbe: toggle && !knownInteraction, knownInteraction, mode };
+            const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+            const strategy = toggle ? knownInteraction ? 'P02' : 'P05' : 'P07';
+            if (decision?.result !== strategy) return null;
+            const action = { action_ref: step.input, data: {} }, actions = [action], parent = 'G_official_completion';
+            const situation = toggle ? observed.state.held ? 'Leave the carried stone in a position that restricts retreat'
+              : 'Check whether the adjacent stone can move with the actor'
+              : observed.state.held ? 'Move while checking both the actor and the carried stone against the walls'
+                : 'Follow a route that accounts for the fleeing sprite and the movable stones';
+            const objective = { kind: 'reach_reactive_target_with_transportable_obstacles', scope: ref.split(':revision:', 1)[0]!,
+              subjects: ['controlled_sprite', 'moving_target', 'movable_obstacles'], parentObjective: parent,
+              satisfactionContract: 'official_progress_after_checked_interception' };
+            const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+            const id = 'gripped-pursuit:' + need.id;
+            return { status: 'proposed', kind: family, actions, grip: { local, observed: observed.state, legs }, needId: need.id,
+              binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: step.expected }],
+              sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
+                edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+              sicSituationCard: { strategy, need: 'Reach the fleeing sprite using the available space', situation, evidence, agenda: [], mode,
+                triggerCard: chooseLanding, actor: box(observed.state.actor, terrain.size), step: box(step.expected.actor, terrain.size),
+                movingTargets: observed.state.peers.map(peer => box(peer, terrain.size)),
+                ...(observed.state.held ? { movedObstacle: box(observed.state.held, terrain.size) } : {}) },
+              question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+              compositions: [{ id, observed: false, open_question: situation, relations: [`contributes_to:${parent}`] }],
+              sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
+              bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+                preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+          }
+        }
         const inherited = witness, previous = pursuit?.epoch === observation.level_epoch ? pursuit : null;
         const layout = previous?.layout ?? layoutFor(rows, parts, inherited.roles);
         if (layout && !previous?.blocked) {
@@ -313,8 +382,8 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       };
     },
     before(proposal, index, packet, observation) {
-      const previous = !proposal.crowd && proposal.walk?.[index - 1];
-      const scene = previous && !proposal.crowd && proposal.obstacle !== undefined
+      const previous = !proposal.crowd && !proposal.grip && proposal.walk?.[index - 1];
+      const scene = previous && !proposal.crowd && !proposal.grip && proposal.obstacle !== undefined
         ? readPursuitState(packet.frame_rows, proposal.local.layout, proposal.obstacle) : null;
       const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
         : !!previous && !!scene && proposal.binding?.level_epoch === observation.level_epoch
@@ -324,6 +393,12 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
     after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.grip) {
+        const { local, legs } = proposal.grip;
+        const actual = readGripState(second, local.terrain, local.heldInk);
+        const matched = !!actual && gripStateMatches(actual.state, legs[0]!.expected);
+        return { matched, seal_prefix: true, reason: matched ? 'gripped_pursuit_forecast_confirmed' : 'gripped_pursuit_response_diverged_replan' };
+      }
       if (proposal.crowd) {
         const { local, obstacle, move } = proposal.crowd;
         const actual = readPursuitState(second, local.layout, obstacle);
@@ -342,6 +417,24 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       return { matched, seal_prefix: true, reason: matched ? 'both_sprite_positions_confirmed' : 'sprite_response_diverged_replan' };
     },
     record(before, after, _action, first, second, proposal, index) {
+      if (proposal.grip) {
+        const { local, observed, legs } = proposal.grip, step = legs[0]!;
+        if (after.levels_completed > before.levels_completed && witness && !step.expected.peers.length) {
+          const { actor, peer, obstacle } = local.terrain;
+          witness = { ...witness, epoch: after.level_epoch, score: after.levels_completed, roles: { actor, peer, obstacle },
+            refs: [...local.refs.slice(-4), after.observation_ref] };
+        }
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const actual = readGripState(second, local.terrain, local.heldInk);
+        const matched = !!actual && gripStateMatches(actual.state, step.expected);
+        const heldInk = actual?.heldInk ?? local.heldInk;
+        grip = { ...local, ...(actual ? { at: actual.state } : {}), ...(heldInk === undefined ? {} : { heldInk }),
+          plan: matched ? legs.slice(1) : [], blocked: !actual,
+          refs: [...local.refs.slice(-4), after.observation_ref],
+          rejected: matched ? local.rejected : [...local.rejected.slice(-31), gripTrialKey(observed, step.input)] };
+        return { events: [], ...(matched && step.input === 'ACTION5' ? { reviewEvidence: step.expected.held
+          ? 'The adjacent stone entered the carried state at the measured offset.' : 'The stone returned to its free state at the intended cell.' } : {}) };
+      }
       if (proposal.crowd) {
         const { local, current, move, obstacle } = proposal.crowd;
         if (after.levels_completed > before.levels_completed && witness?.epoch === before.level_epoch
@@ -377,12 +470,13 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
         edges: actual ? { ...local.edges, [k]: { ...actual, evidence: after.observation_ref } } : local.edges };
       return { events: [] };
     },
-    state: () => ({ memory, calibration, witness, pursuit }),
+    state: () => ({ memory, calibration, witness, pursuit, grip }),
     restore(value: NativeRecord) {
       memory = structuredClone(value.memory as Memory | null);
       calibration = structuredClone((value.calibration as Calibration | null | undefined) ?? null);
       witness = structuredClone((value.witness as PursuitWitness | null | undefined) ?? null);
       pursuit = structuredClone((value.pursuit as PursuitMemory | null | undefined) ?? null);
+      grip = structuredClone((value.grip as GripMemory | null | undefined) ?? null);
     },
   };
 }
