@@ -1621,3 +1621,12 @@ Le rejeu complet gagne le niveau 5 en **45 commandes et 15,32 s** avec le régla
 La recherche associe les pièces aux repères selon les silhouettes et les poses accessibles avec les déplacements mesurés. Deux pièces peuvent se partager la couverture des repères d’une même couleur. SIC confirme les trois recolorations en vérifiant le déplacement et la conservation des autres silhouettes. Le X et la croix deviennent bleus et couvrent deux groupes distincts. Le losange rouge couvre les quatre repères rouges, dont les deux révélés.
 
 Le rejeu complet gagne le niveau 5 en **76 commandes et 48,32 s** avec le réglage de huit workers. Les 262 commandes relèvent de SIC seul. Les 186 commandes et retours des niveaux 1 à 4 reproduisent la référence `2ba965df`. La permutation de palette reproduit les 262 commandes et leurs effets géométriques. Empreinte complète `eb68659e5d01a422805b66c61adb3ecd6e4d12ffa52354a3333ad138ea109108`. Le contrôle TypeScript et les 181 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### GMAP niveau 5, passer par les salles cartographiques et relire l’inventaire
+
+La carte passe de six à onze salles à la commande 4, puis à dix-sept salles à la commande 9. Lorsqu’un fragment confirme une salle de cartographie, SIC garde ce rôle dans les coordonnées du nouveau fragment. Il peut repasser par cette salle avec la clé. Les salles ayant déjà révélé un fragment sont retirées des candidats à la sortie, même si elles partagent son annotation.
+
+À chacune des deux prises de clé, le retour dans la salle cartographique masque le cadre de l’emplacement occupé. SIC conserve son emplacement mesuré et lit la clé à cette position. Les animations des commandes 7 et 13 confirment que les clés disparaissent au moment où les bords correspondants s’ouvrent. Le premier passage ouvert reste acquis après le second raccordement.
+
+Le rejeu complet gagne le niveau 5 en **14 commandes et 6,33 s** avec le réglage de huit workers. Les 52 commandes relèvent de SIC seul. Les 38 commandes et retours des niveaux 1 à 4 reproduisent la référence `624119e0`. La permutation de palette reproduit les 52 commandes et leurs effets géométriques. Empreinte complète `b351ef56bedd09cece423b3a639f0f6537b015bd13adfdc75a63a839afda3d06`. TypeScript et les 334 tests SIC et cartographie exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
