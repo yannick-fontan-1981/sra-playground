@@ -28,7 +28,8 @@ export type SupplyModel = {
 type Receiver = Basin & { gate: Gate };
 type Store = Receiver & { palette: number };
 type Pump = { bbox: NativeBox; point: NativePoint };
-type Outlets = { receivers: Receiver[]; openOrientation: string };
+type LossOutlet = { box: NativeBox; gate: Gate };
+type Outlets = { receivers: Receiver[]; openOrientation: string; lossOutlets?: LossOutlet[] };
 type SupplyFields = {
   relay: Basin;
   stock: Stock;
@@ -40,7 +41,7 @@ export type SupplyLayout = PumpedSupply | StoredSupply;
 export type SupplyChoice = {
   kind: 'open_relay' | 'open_receiver' | 'protect_receiver' | 'deliver' | 'charge_storage' | 'test_release';
   target: Pump;
-} | { kind: 'release_store'; target: Gate; store: Store };
+} | { kind: 'release_store'; target: Gate; store: Store } | { kind: 'close_loss'; target: Gate };
 const dimensions = ([l, t, r, b]: NativeBox): Extent => [r - l + 1, b - t + 1];
 const sameExtent = (a: Extent, b: Extent) => a[0] === b[0] && a[1] === b[1];
 const sameBox = (a: NativeBox, b: NativeBox) => a.every((value, i) => value === b[i]);
@@ -84,6 +85,32 @@ function enclosedStorage(rows: NativeRows, empty: number, receiverWidth: number)
     }
     if (Math.min(leftWall, rightWall) * 2 <= bottom - top + 1) return [];
     return [{ box: [l + 1, top, r - 1, bottom], empty }];
+  });
+}
+
+function gratedOutlets(rows: NativeRows, controls: readonly Gate[], receivers: readonly Receiver[]): LossOutlet[] {
+  return geometricComponents(rows).flatMap(part => {
+    const box = part.bbox, [l, t, r, b] = box, [w, h] = dimensions(box);
+    if (part.rectangular || Math.min(w, h) < 5 || Math.max(w, h) > Math.min(rows.length, rows[0]!.length) / 4) return [];
+    const rim = part.color, fill = (dx: number, dy: number) => rows[t + dy]![l + dx];
+    if (Array.from({ length: w }, (_, x) => x).some(x => fill(x, 0) !== rim || fill(x, h - 1) !== rim)
+      || Array.from({ length: h }, (_, y) => y).some(y => fill(0, y) !== rim || fill(w - 1, y) !== rim)) return [];
+    const stripes = [true, false].some(vertical => {
+      const other = fill(vertical ? 2 : 1, vertical ? 1 : 2);
+      if (fill(1, 1) === other || (fill(1, 1) !== rim && other !== rim)) return false;
+      for (let y = 1; y < h - 1; y++) for (let x = 1; x < w - 1; x++) {
+        if (fill(x, y) !== ((vertical ? x : y) % 2 ? fill(1, 1) : other)) return false;
+      }
+      return true;
+    });
+    if (!stripes) return [];
+    const candidates = controls.filter(({ point: [x, y] }) => {
+      if (receivers.some(receiver => receiver.gate.point[0] === x && receiver.gate.point[1] === y)) return false;
+      const verticalGap = Math.max(t - y, y - b), horizontalGap = Math.max(l - x, x - r);
+      return Math.abs(2 * x - l - r) <= 1 && verticalGap > 0 && verticalGap <= h
+        || Math.abs(2 * y - t - b) <= 1 && horizontalGap > 0 && horizontalGap <= w;
+    });
+    return candidates.length === 1 ? [{ box, gate: candidates[0]! }] : [];
   });
 }
 
@@ -182,7 +209,8 @@ export function bindSupply(rows: NativeRows, pump: Pump | null, model: SupplyMod
   if (!relay.length && model.continued && stocks.length === 1 && receivers.every(basin => basin.empty === receivers[0]!.empty)) {
     const stores = enclosedStorage(rows, receivers[0]!.empty, model.receiver[0]);
     if (stores.length === 1 && destinations.some(basin => basin.gate.orientation === model.openOrientation)) {
-      return { ...common, buffered: true, relay: stores[0]!, stock: stocks[0]! };
+      const lossOutlets = model.releaseObserved ? gratedOutlets(rows, controls, destinations) : [];
+      return { ...common, buffered: true, relay: stores[0]!, stock: stocks[0]!, ...(lossOutlets.length ? { lossOutlets } : {}) };
     }
   }
   const matchingStocks = stocks.filter(stock => sameExtent(dimensions(stock.box), model.stock));
@@ -211,6 +239,10 @@ const full = (rows: NativeRows, basin: Basin): boolean => {
 export function chooseSupplyCommand(rows: NativeRows, layout: SupplyLayout): SupplyChoice | null {
   const outlets = layout.receivers.map(basin => ({ basin, open: open(rows, basin.gate, layout), full: full(rows, basin) }));
   if (outlets.some(outlet => outlet.open === null)) return null;
+  const lossOutlets = layout.lossOutlets?.map(({ gate }) => ({ gate, opened: open(rows, gate, layout) })) ?? [];
+  if (lossOutlets.some(outlet => outlet.opened === null)) return null;
+  const draining = lossOutlets.find(outlet => outlet.opened);
+  if (draining) return { kind: 'close_loss', target: draining.gate };
   if (!layout.stored && !layout.buffered) {
     const input = open(rows, layout.relay.gate, layout);
     if (input === null) return null;
@@ -232,6 +264,14 @@ export function chooseSupplyCommand(rows: NativeRows, layout: SupplyLayout): Sup
 }
 
 export function supplyOutcome(choice: SupplyChoice, layout: SupplyLayout, before: NativeRows, after: NativeRows): string | null {
+  if (choice.kind === 'close_loss') {
+    if (layout.stored || !layout.lossOutlets || open(before, choice.target, layout) !== true || open(after, choice.target, layout) !== false) return null;
+    const contents = [layout.relay, layout.stock, ...layout.receivers, ...layout.lossOutlets];
+    const gates = [...layout.receivers, ...layout.lossOutlets].map(outlet => outlet.gate).filter(gate => !sameBox(gate.bbox, choice.target.bbox));
+    return !contents.some(basin => changed(before, after, basin.box))
+      && gates.every(gate => open(before, gate, layout) === open(after, gate, layout))
+      ? 'grated_outlet_isolated_preserving_supply' : null;
+  }
   if (layout.stored) {
     if (choice.kind === 'open_receiver' || choice.kind === 'protect_receiver') {
       return open(after, choice.target as Gate, layout) === (choice.kind === 'open_receiver')
@@ -262,10 +302,12 @@ export function supplyOutcome(choice: SupplyChoice, layout: SupplyLayout, before
   const protectedReceivers = layout.receivers.filter(basin => full(before, basin) && open(before, basin.gate, layout) === false);
   if (protectedReceivers.some(basin => changed(before, after, basin.box))) return null;
   if (layout.buffered) {
+    if (layout.lossOutlets?.some(({ gate }) => open(before, gate, layout) !== false || open(after, gate, layout) !== false)) return null;
     const previousRoom = count(before, layout.relay.box, layout.relay.empty);
     const room = count(after, layout.relay.box, layout.relay.empty);
     const changedReceivers = layout.receivers.some(basin => changed(before, after, basin.box));
     if (room < previousRoom && !changedReceivers) return 'storage_charge_observed_without_outlet_transfer';
+    if (layout.lossOutlets && room === previousRoom && room > 0 && !changedReceivers) return 'stock_decreased_without_resolved_storage_rise';
     return room > previousRoom && changedReceivers ? 'stored_supply_released_to_receivers' : null;
   }
   if (layout.receivers.some(basin => !full(before, basin) && full(after, basin))) return 'receiver_saturation_observed';
