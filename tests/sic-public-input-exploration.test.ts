@@ -5,8 +5,9 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier } from '../src/sic/public-input-exploration.ts';
 import { observedCommandFrontier, observedCommandKey } from '../src/sic/observed-command-frontier.ts';
 import { commandPanelState, visibleCommandPanel } from '../src/sic/visible-command-panel.ts';
-import { learnPanelDirection, projectPanelMarker } from '../src/sic/panel-context-probe.ts';
+import { learnPanelDirection, projectPanelContact, projectPanelMarker } from '../src/sic/panel-context-probe.ts';
 import { sameLandingPixels } from '../src/sic/plan-step.ts';
+import { measureReturningAnimation } from '../src/sic/observed-animation.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 
@@ -106,14 +107,33 @@ test('a panel comparison projects a guarded route using measured commands and an
   const inputs = [right, up];
   const projection = projectPanelMarker(walker, current, field, inputs, [button], [], 4);
   assert.ok(projection);
-  assert.deepEqual(projection.trial.marker, [8, 4, 9, 5]);
+  assert.deepEqual(projection.target.marker, [8, 4, 9, 5]);
   assert.equal(projection.route.length, 3);
   assert.deepEqual(new Set(projection.evidence), new Set(['right', 'up']));
   assert.equal(projectPanelMarker(walker, current, field, inputs, [button], [], 3), null);
-  assert.equal(projectPanelMarker(walker, current, field, inputs, [button], [projection.trial.key], 4), null);
+  assert.equal(projectPanelMarker(walker, current, field, inputs, [button], [projection.target.key], 4), null);
   assert.equal(projectPanelMarker(walker, current, field, inputs, [{ ...button, ink: 9 }], [], 4), null);
   assert.ok(sameLandingPixels(projection.route[2]!.landing, current));
   assert.equal(sameLandingPixels(projection.route[2]!.landing, board(4, 6, false)), false);
+
+  current[4]![8] = 2;
+  current[4]![9] = current[5]![8] = current[5]![9] = 6;
+  const contact = projectPanelContact(walker, current, field, 0, inputs, [], 3);
+  assert.ok(contact);
+  assert.deepEqual(contact.target.box, [8, 4, 9, 5]);
+  assert.equal(contact.route.length, 3);
+  assert.equal(projectPanelContact(walker, current, field, 0, inputs, [contact.target.key], 3), null);
+  assert.equal(projectPanelContact(walker, current, field, 6, inputs, [], 3), null);
+});
+
+test('a repeated animation localizes a response even when the field returns to its original pixels', () => {
+  const before = [[0, 0, 2], [0, 4, 2], [0, 4, 2]];
+  const flash = [[0, 0, 2], [0, 5, 2], [0, 5, 2]];
+  const area = [0, 0, 2, 2] as const;
+  assert.deepEqual(measureReturningAnimation(before, before, [before, flash, before, flash, before], area),
+    { box: [1, 1, 1, 2], frames: [2, 4] });
+  assert.equal(measureReturningAnimation(before, flash, [before, flash, before, flash], area), undefined);
+  assert.equal(measureReturningAnimation(before, before, [before, flash, before], area), undefined);
 });
 
 test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {
