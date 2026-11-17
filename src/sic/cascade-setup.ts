@@ -2,7 +2,7 @@ import type { NativePoint } from '../logos-engine/v6-native-types.ts';
 
 export type CascadeTile = { at: NativePoint; direction?: NativePoint; color?: number; junction?: boolean; hidden?: boolean };
 export type CascadePeer = { at: NativePoint; mark: number };
-export type CascadeSetup = { route: NativePoint[]; guards: NativePoint[]; gap: NativePoint; sharedJunctions?: NativePoint[] };
+export type CascadeSetup = { route: NativePoint[]; guards: NativePoint[]; gap: NativePoint; sharedJunctions?: NativePoint[]; forceJunction?: true };
 export type CascadePreparation = { setup: CascadeSetup; reveal: null } | { setup: null; reveal: NativePoint; route: NativePoint[] };
 type Board = { pitch: number; tiles: CascadeTile[]; sources: NativePoint[]; target: NativePoint };
 type Entry = { at: NativePoint; direction: NativePoint };
@@ -39,7 +39,7 @@ function throughChannel(board: Board, tiles: ReadonlyMap<string, CascadeTile>) {
 }
 
 function tickModel(board: Board, tiles: ReadonlyMap<string, CascadeTile>, gap: NativePoint | null, blocked: ReadonlySet<string>,
-  targets: readonly NativePoint[] = [board.target]) {
+  targets: readonly NativePoint[] = [board.target], forced: NativePoint | null = null) {
   let pending: Entry[] = board.sources.flatMap(at => {
     const direction = tiles.get(key(at))?.direction;
     return direction && !blocked.has(key(at)) ? [{ at, direction }] : [];
@@ -70,7 +70,7 @@ function tickModel(board: Board, tiles: ReadonlyMap<string, CascadeTile>, gap: N
         continue;
       }
       const { at } = hits[0]!, tile = tiles.get(id)!;
-      if (tile.junction && !opened.has(id) && hits.length > 1) {
+      if (tile.junction && !opened.has(id) && (hits.length > 1 || forced && same(at, forced))) {
         opened.add(id);
         for (const direction of directions) send(at, direction);
       } else {
@@ -87,20 +87,25 @@ export function planParallelCascadeSetup(board: Board, targets: readonly NativeP
   const tiles = new Map(board.tiles.map(tile => [key(tile.at), tile]));
   const occupied = new Set(peers.map(peer => key(peer.at)));
   const blocked = new Set<string>();
-  if (tickModel(board, tiles, null, blocked, targets).reached) return null;
-  const candidates: CascadeSetup[] = [];
-  for (const { at, direction, junction, hidden } of board.tiles) {
-    if (shouldStop()) return null;
-    if (direction || junction || hidden || occupied.has(key(at))) continue;
-    const result = tickModel(board, tiles, at, blocked, targets);
-    if (!result.reached || !result.opened.size) continue;
-    const route = [...result.touched].map(id => tiles.get(id)!.at);
-    if (route.some(point => tiles.get(key(point))!.hidden)) continue;
-    const sharedJunctions = [...result.opened].map(id => tiles.get(id)!.at);
-    candidates.push({ route, gap: at, guards: [], sharedJunctions });
-    if (candidates.length > 1) return null;
+  const baseline = tickModel(board, tiles, null, blocked, targets);
+  if (baseline.reached) return null;
+  for (const forceJunction of [false, true]) {
+    let setup: CascadeSetup | null = null;
+    for (const { at, direction, junction, hidden } of board.tiles) {
+      if (shouldStop()) return null;
+      if (direction || !!junction !== forceJunction || hidden || occupied.has(key(at))) continue;
+      if (forceJunction && baseline.opened.has(key(at))) continue;
+      const result = tickModel(board, tiles, forceJunction ? null : at, blocked, targets, forceJunction ? at : null);
+      if (!result.reached || !result.opened.size || forceJunction && !result.opened.has(key(at))) continue;
+      const route = [...result.touched].map(id => tiles.get(id)!.at);
+      if (route.some(point => tiles.get(key(point))!.hidden)) continue;
+      if (setup) return null;
+      const sharedJunctions = [...result.opened].map(id => tiles.get(id)!.at);
+      setup = { route, gap: at, guards: [], sharedJunctions, ...(forceJunction ? { forceJunction: true } : {}) };
+    }
+    if (setup) return { setup, reveal: null };
   }
-  return candidates[0] ? { setup: candidates[0], reveal: null } : null;
+  return null;
 }
 
 export function planCascadeSetup(board: Board, guards: readonly CascadePeer[], bridge: CascadePeer, shouldStop: () => boolean): CascadePreparation | null {

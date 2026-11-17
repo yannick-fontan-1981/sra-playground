@@ -1,4 +1,4 @@
-import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
+import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
@@ -19,9 +19,10 @@ type Layout = { pitch: number; cells: NativePoint[]; cursorColor: number; gate: 
   target: NativePoint; branch: NativePoint[]; roles?: CascadeRoles; channel?: { covered: NativePoint | null; floorColor: number };
   setup?: Setup; targets?: NativePoint[] };
 type Scene = { layout: Layout; cursor: NativePoint };
-type Memory = { epoch: number; layout: Layout; routeRef: string | null; burstRef: string | null; failed: boolean };
+type Memory = { epoch: number; layout: Layout; routeRef: string | null; burstRef: string | null; failed: boolean;
+  focusRef?: string; focusTrials?: string[] };
 type CursorStep = { ref: string; at: NativePoint };
-type Proposal = NativeProposal & { local: Memory; scene: Scene; next: NativePoint; launch: boolean; walk?: CursorStep[]; needId: string };
+type Proposal = NativeProposal & { local: Memory; scene: Scene; next: NativePoint; launch: boolean; selectFocus?: true; walk?: CursorStep[]; needId: string };
 const key = (p: NativePoint) => p.join(',');
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -200,7 +201,7 @@ function measureCascadeSetup(rows: NativeRows, known: CascadeMemory, previous: S
     cells: tiles.map(tile => tile.at), setup: { preparation, tiles },
     ...(targets.length > 1 ? { targets: destinations } : {}) };
   const step = movement.step ? { ref: moves[movement.step.index]![0], at: movement.step.at } : null;
-  return { scene: { cursor, layout }, step };
+  return { scene: { cursor, layout }, step, relayFocused: peers[active]!.mark !== blockerMark };
 }
 
 function cursorPath(scene: Scene): CursorStep[] | null {
@@ -251,25 +252,32 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
         : (prior ? null : measure(rows)) ?? (preceding && !prior?.layout.setup ? measureChannel(rows, preceding.roles) : null));
       if (!scene) return null;
       const { layout } = scene;
-      const local = { epoch: observation.level_epoch, layout, routeRef: prior?.routeRef ?? null, burstRef: prior?.burstRef ?? null, failed: false };
+      const local: Memory = { ...prior, epoch: observation.level_epoch, layout, routeRef: prior?.routeRef ?? null,
+        burstRef: prior?.burstRef ?? null, failed: false };
+      const setup = layout.setup?.preparation;
+      const forced = setup?.setup?.forceJunction;
+      const selectFocus = forced && prepared?.step && !prepared.relayFocused && observation.available_action_refs.includes('ACTION6')
+        && !local.focusTrials?.includes(key(scene.cursor));
       const launch = layout.setup ? !prepared?.step : layout.channel ? !layout.channel.covered : same(scene.cursor, layout.gate);
       const clearsChannel = !!layout.channel?.covered && same(scene.cursor, layout.gate);
       const path = launch || prepared?.step || clearsChannel ? null : cursorPath(scene);
-      const step = launch ? { ref: 'ACTION5', at: scene.cursor }
+      const step = selectFocus ? { ref: 'ACTION6', at: scene.cursor } : launch ? { ref: 'ACTION5', at: scene.cursor }
         : prepared?.step ?? (clearsChannel ? parkCursor(scene, rows) : path?.[0]);
       if (!step) return null;
 
       const ref = observation.observation_ref;
       const refs = [local.routeRef, local.burstRef, ...(layout.channel || layout.setup ? preceding?.evidence ?? [] : [])];
+      if (selectFocus) refs.push(local.focusRef ?? null);
       if (layout.setup && preceding?.blockerRef) refs.push(preceding.blockerRef);
       const evidence: [string, ...string[]] = [ref, ...new Set(refs.filter((v): v is string => !!v && v !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: step.ref, expected: step.at, evidence };
-      const known = launch ? local.burstRef : local.routeRef;
-      const facts = { eligibleProbe: !known, routeSupported: !launch && !!known, knownInteraction: launch && !!known, mode };
+      const interaction = launch || !!selectFocus;
+      const known = selectFocus ? local.focusRef : launch ? local.burstRef : local.routeRef;
+      const facts = { eligibleProbe: !known, routeSupported: !interaction && !!known, knownInteraction: interaction && !!known, mode };
       const decision = learns ? await choose?.run({ situation: facts }, { signal: execution?.signal }) : null;
       const navigation = learns ? null : resolveNavigationPrimitives({ mode, evidence,
-        probe: known ? null : offer, access: !launch && known ? offer : null, interaction: launch && known ? offer : null });
+        probe: known ? null : offer, access: !interaction && known ? offer : null, interaction: interaction && known ? offer : null });
       const strategy = decision?.result ?? navigation?.selected?.id;
       if (strategy !== 'P05' && strategy !== 'P07' && strategy !== 'P02') return null;
       const parent = 'G_official_completion';
@@ -278,10 +286,12 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
         parentObjective: parent, satisfactionContract: 'official_progress_after_directional_cascade' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = gatedCascadeId + ':' + need.id;
-      const setup = layout.setup?.preparation;
       const parallel = setup?.setup?.sharedJunctions;
       const targetStates = layout.targets?.map(at => ({ box: square(at), state: cascadeTargetState(rows, at, layout.roles!) }));
-      const situation = parallel ? launch ? 'Advance the cascade and check each target separately'
+      const situation = selectFocus ? 'Check whether the selection command switches focus without moving the pieces'
+        : forced ? launch ? 'Advance the cascade and check whether the occupied junction sends the reaction down both branches'
+        : 'Place the relay on the second junction so one arrival can feed both branches'
+        : parallel ? launch ? 'Advance the cascade and check each target separately'
         : 'Bridge the gap and keep the simultaneous arrivals to the shared junction free'
         : setup ? launch ? 'Test whether the protected route and the relay carry the reaction to the target'
         : setup.reveal ? 'Move a piece to reveal a link on the candidate route'
@@ -291,24 +301,32 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
           : 'Approach the cursor covering a possible link and verify where control moves'
         : launch ? 'Test the cascade with the earlier branch blocked and check the target branch'
         : 'Move the cursor to block the shorter path into the shared junction';
-      const action = { action_ref: step.ref, data: {} };
+      const [x, y] = scene.cursor;
+      const focusPoint: NativePoint = [x + 1, y + 1];
+      const focusWitness = selectFocus ? await ObservedInputDomain.makeLocusWitness(observation, rows, focusPoint, {
+        reason: situation, evidence,
+      }) : null;
+      if (selectFocus && !focusWitness) return null;
+      const action = { action_ref: step.ref, data: selectFocus ? { x: focusPoint[0], y: focusPoint[1] } : {} };
       const walk = strategy === 'P07' && !layout.setup && !layout.channel
         ? path?.slice(0, Math.min(remaining, maximumCommittedActions)) : null;
       const actions = walk && walk.length > 1 ? walk.map(leg => ({ action_ref: leg.ref, data: {} })) : [action];
       return {
         status: 'proposed', kind: family, local, scene, next: step.at, launch, needId: need.id,
+        ...(selectFocus ? { selectFocus: true } : {}),
         ...(walk && walk.length > 1 ? { walk } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
-        steps: actions.map((action, index) => ({ action, expected_after: launch ? null : walk?.[index]?.at ?? step.at })),
+        steps: actions.map((action, index) => ({ action, expected_after: interaction ? null : walk?.[index]?.at ?? step.at,
+          ...(focusWitness ? { point_binding: focusWitness } : {}) })),
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Keep the cascade going toward the target', situation, evidence, agenda: navigation?.entries ?? [],
           mode, triggerCard: navigation?.card ?? decision?.receipt.workflow,
           actor: square(scene.cursor), gate: layout.channel || setup ? null : square(layout.gate),
           coveredLink: layout.channel?.covered ? square(layout.channel.covered) : null, channel: !!layout.channel,
-          guards: setup?.setup?.guards.map(square) ?? [], gap: setup?.setup ? square(setup.setup.gap) : null,
+          guards: setup?.setup?.guards.map(square) ?? [], gap: setup?.setup && !forced ? square(setup.setup.gap) : null,
           reveal: setup?.reveal ? square(setup.reveal) : null,
-          junction: square(layout.junction), target: square(layout.target),
+          junction: square(forced ? setup!.setup!.gap : layout.junction), target: square(layout.target),
           ...(layout.targets ? { targets: layout.targets.map(square), targetStates, sharedJunctions: parallel?.map(square) ?? [] } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
@@ -330,11 +348,11 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
       const next = retained(second, proposal.local.layout);
       const at = proposal.walk?.[index]?.at ?? proposal.next;
       const matched = stepConfirmed(first, second, { ...proposal, next: at }, next);
-      const transfer = matched && !proposal.launch && !!(proposal.scene.layout.channel || proposal.scene.layout.setup)
-        && isCursor(patch(first, proposal.next));
+      const transfer = matched && (proposal.selectFocus || !proposal.launch && !!(proposal.scene.layout.channel || proposal.scene.layout.setup)
+        && isCursor(patch(first, proposal.next)));
       return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: matched ? proposal.launch ? 'cascade_propagation_observed'
         : transfer ? 'cursor_focus_transferred' : 'cursor_landing_confirmed'
-        : proposal.launch ? 'cascade_stalled_or_reset' : 'cursor_did_not_reach_predicted_cell' };
+        : proposal.launch ? 'cascade_stalled_or_reset' : proposal.selectFocus ? 'focus_change_unconfirmed' : 'cursor_did_not_reach_predicted_cell' };
     },
     record(before, after, _action, first, second, proposal, index) {
       if (after.levels_completed > before.levels_completed && proposal.local.layout.roles) {
@@ -354,6 +372,12 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local, { launch } = proposal;
       const next = retained(second, local.layout);
       const matched = stepConfirmed(first, second, { ...proposal, next: proposal.walk?.[index]?.at ?? proposal.next }, next);
+      if (proposal.selectFocus) {
+        state = { ...local, failed: !matched && channelChanged(first, second, local.layout.cells),
+          focusTrials: [...local.focusTrials ?? [], key(proposal.scene.cursor)],
+          ...(matched ? { focusRef: after.observation_ref } : {}) };
+        return { events: [] };
+      }
       state = { ...local, failed: !matched, routeRef: matched && !launch ? after.observation_ref : local.routeRef,
         burstRef: matched && launch ? after.observation_ref : local.burstRef };
       return { events: [] };
@@ -368,6 +392,16 @@ export function createSicGatedCascade(family = gatedCascadeId): NativeFamily<Pro
 
 function stepConfirmed(first: NativeRows, second: NativeRows, proposal: Proposal, next: Scene | null) {
   if (!next) return false;
+  if (proposal.selectFocus) {
+    const previous = proposal.scene.cursor;
+    if (same(previous, next.cursor)) return false;
+    return proposal.local.layout.cells.every(at => {
+      const before = patch(first, at), after = patch(second, at);
+      return same(at, previous) || same(at, next.cursor)
+        ? isCursor(before) && isCursor(after) && before[4] === after[4] && before[0] !== after[0]
+        : before.every((color, index) => color === after[index]);
+    });
+  }
   if (!proposal.launch) return same(next.cursor, proposal.next);
   const { layout } = proposal.local;
   if (layout.setup) {
