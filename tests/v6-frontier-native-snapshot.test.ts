@@ -19,6 +19,27 @@ function observation(index: number, epoch = 1): NativeObservation {
     available_action_refs: ['ACTION1', 'ACTION2'], coordinate_basis: 'screen', entities: [], unknowns: [],
     provenance: 'declared synthetic public observation for frontier state contracts' };
 }
+
+test('the active frontier can recall a route from an archived epoch after restore', async () => {
+  const graph = native(6);
+  const expected = new Map<number, unknown>();
+  for (const epoch of [1, 2, 3, 4]) {
+    const before = observation(epoch * 10, epoch), after = observation(epoch * 10 + 1, epoch);
+    await graph.observe(before, [action]);
+    await graph.recordTransition(before, action, after, { after_action_candidates: [action] });
+    const route = await graph.access(await frontierIndex(before));
+    assert.equal(route[0]?.length, 1);
+    expected.set(epoch, route);
+  }
+  const snapshot = graph.nativeSnapshot();
+  const restored = native(6, 16, snapshot);
+  for (const epoch of [4, 3, 1, 2, 4]) {
+    const index = await frontierIndex(observation(epoch * 10, epoch));
+    assert.deepEqual(await restored.access(index), expected.get(epoch));
+  }
+  assert.deepEqual(restored.nativeSnapshot(), snapshot);
+  assert.deepEqual(restored.drainDeltas(), []);
+});
 async function operation(graph: ObservedFrontier, row: R, saved: Map<string, any>): Promise<any> {
   const a = structuredClone(row.args), kw = structuredClone(row.kwargs);
   switch (row.operation) {
