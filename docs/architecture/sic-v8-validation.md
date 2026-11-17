@@ -1226,3 +1226,23 @@ SIC transmet la preuve d’inversion de gravité entre niveaux et relit le terra
 GABA gagne le niveau 5 en **106 commandes et 29,62 s de temps actif**, avec le réglage de huit processus. Le rejeu part du niveau 1. Les commandes, observations et images d’animation des 239 premières commandes concordent avec `26cb728e`. Les 345 commandes relèvent de SIC seul. GABA est le seul jeu à avoir exécuté cette famille pendant la campagne des niveaux 1 à 4.
 
 SIC reconstitue la grille et vérifie les compatibilités charge–récepteur apprises aux niveaux précédents. Si la recherche ordinaire échoue, il examine davantage de placements et limite le nombre de positions du porteur essayées pour une même occupation du récepteur. Il peut ainsi comparer les livraisons qui laissent des cellules libres différentes pour les charges suivantes. Le contrôle TypeScript et les 48 tests ciblés passent.
+
+### Arrêts sur budget au niveau 5 et rendez-vous de SIGN
+
+La première campagne `26cb728e` couvre les 99 jeux qui ont un niveau 5. Elle donne 36 victoires, 49 arrêts faute de famille applicable, 7 fins de partie et 7 arrêts sur budget. Dans ces sept derniers cas, la plus grande part des commandes sert à explorer un passage dont le rôle reste incertain.
+
+La comparaison des passages supposés cède la main après 32 commandes lorsque quatre directions sont disponibles. Les trajectoires confirmées et les traversées synchronisées restent admissibles. Dans l’essai où seule cette limite change, chaque jeu termine encore au niveau 4 et signale l’absence de famille applicable au niveau 5.
+
+| Jeu | Comparaisons du passage avant → après | Commandes totales au niveau 5 avant → après |
+| --- | ---: | ---: |
+| DC22 | 196 → 32 | 196 → 112 |
+| ESCT | 376 → 32 | 440 → 176 |
+| FOGW | 508 → 32 | 512 → 116 |
+| SIGN | 233 → 32 | 284 → 163 |
+| SNAR | 348 → 32 | 355 → 112 |
+| SWCH | 494 → 32 | 568 → 183 |
+| TRIA | 189 → 32 | 248 → 128 |
+
+Les sept parcours jusqu’à la victoire du niveau 4 conservent l’empreinte de leurs commandes, observations et animations. CN04 et WA30 retrouvent leur niveau 4 à l’identique. AS66, FITE et THER retrouvent leur niveau 5 à l’identique.
+
+Après la correction du rendez-vous, **SIGN gagne le niveau 5 en 53 commandes et 36,26 s de temps actif** pendant un rejeu complet depuis le niveau 1 avec le réglage de huit processus. Les 194 commandes relèvent de SIC seul. Les 141 premières et leurs retours concordent avec la référence jusqu’au niveau 4. Les observations de deux cycles concordants permettent de viser une pause de la cible mobile après le changement de mode. Les deux activations sont contrôlées par la préparation et le compteur d’acquisitions. Le contrôle TypeScript et les 35 tests ciblés passent.

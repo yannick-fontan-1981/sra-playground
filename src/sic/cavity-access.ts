@@ -9,6 +9,7 @@ import { pairedOpenings } from './paired-opening.ts';
 
 export const cavityAccessId = 'sic_cavity_access';
 const objective = 'G_official_completion';
+const slotComparisonsPerDirection = 8;
 export const cavityStrategies = {
   follow_timed_slide: 'Time a slide around a moving obstacle',
   follow_measured_slide: 'Follow a measured slide',
@@ -32,9 +33,9 @@ type Stop = { claim_ref: string; local_row_pitch: number; local_column_pitch: nu
 type State = { epoch: number; body: readonly [number, number, number] | null; floor: number | null;
   directions: Record<string, Displacement>; recent: Displacement | null; tried: string[]; packet: readonly NativeRows[]; stop: Stop | null;
   motion: ReturnType<typeof acquireTemporalOpening>; motionEvidence: readonly string[]; transitions: ObservedCommandGraph;
-  slots: readonly NativeBox[]; slotEvidence: string | null };
+  slots: readonly NativeBox[]; slotEvidence: string | null; slotChecks?: number };
 type Proposal = NativeProposal & { key: string; needId: string; expectedStop?: NativePoint; expectedFrame?: string;
-  slots?: readonly NativeBox[] };
+  slots?: readonly NativeBox[]; comparesSlot?: true };
 const empty: State = { epoch: 0, body: null, floor: null, directions: {}, recent: null, tried: [], packet: [], stop: null,
   motion: null, motionEvidence: [], transitions: {}, slots: [], slotEvidence: null };
 
@@ -134,7 +135,11 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
             return attempts(a.action_ref) - attempts(b.action_ref);
           })[0]
           : undefined);
-      const frontier = !timed && !known && !untested && ((box && local.motionEvidence.length) || slots.length)
+      // A slot inferred from a visual arrangement may have no mechanical role. Hand off after
+      // a bounded comparison when there is still no measured route or timed slide to follow.
+      const canCompare = slots.length ? (local.slotChecks ?? 0) < slotComparisonsPerDirection * options.length
+        : box && local.motionEvidence.length;
+      const frontier = !timed && !known && !untested && canCompare
         ? observedCommandFrontier(local.transitions, observation.frame_hash, options.map(command => command.action_ref), remaining) : null;
       const contrast = options.find(command => command.action_ref === frontier?.action);
       const proof: [string, ...string[]] = [ref, ...new Set([...directions.map(direction => direction.ref), ...(local.stop ? [local.stop.claim_ref] : []),
@@ -177,6 +182,7 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
         ...(strategy === 'follow_timed_slide' && temporal ? { expectedStop: temporal.stop } : {}),
         ...(frontier?.first?.destination ? { expectedFrame: frontier.first.destination } : {}),
         ...(slots.length && !local.slotEvidence ? { slots } : {}),
+        ...(strategy === 'compare_access_to_slot' ? { comparesSlot: true } : {}),
         key: key(command.action_ref), needId: need.id, binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
         question: { reason: label, hypothesis_refs: proof }, route_refs: proof,
@@ -206,6 +212,7 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
         state.slots = proposal.slots;
         state.slotEvidence = before.observation_ref;
       }
+      if (proposal.comparesSlot) state.slotChecks = (state.slotChecks ?? 0) + 1;
       state.tried.push(proposal.key);
       rememberCommandReturn(state.transitions, before.frame_hash, after.frame_hash, command.action_ref, after.observation_ref);
       state.motion = acquireTemporalOpening(first, second, command.action_ref, after.observation_ref, state.motion);

@@ -220,7 +220,7 @@ export function createSicVerifyMarkedLattice(family = verifyMarkedLatticeId): Na
       }
       if (isFieldProposal(proposal)) {
         const result = assessMarkerStep(proposal.field, proposal.step, first, second);
-        measured = retainMarkerStep(proposal.field, proposal.step, result, after.observation_ref);
+        measured = retainMarkerStep(proposal.field, proposal.step, result, after.observation_ref, second);
         return { events: [] };
       }
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
@@ -266,7 +266,8 @@ async function fieldProposal(observation: Parameters<NativeFamily['propose']>[0]
   const strategy = routeSupported ? 'P07' : 'P05';
   if (decision?.result !== strategy) return null;
   const label = field.prepared ? 'Keep the cursor on the prepared marker and test the next activation'
-    : target.kind === 'calibration' ? 'Test the distinct control while the counter is still empty'
+    : step.followsMobile ? 'Observe the moving marker and approach its next verified pause'
+      : target.kind === 'calibration' ? 'Test the distinct control while the counter is still empty'
     : target.kind === 'mode' ? 'Check whether the remaining acquisitions require a different visible group'
       : 'Approach the visible candidate and verify whether it fills the counter';
   const parent = 'G_official_completion';
