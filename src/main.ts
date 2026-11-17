@@ -49,8 +49,10 @@ const groupLabels: Record<GameCatalogEntry['group'], string> = {
   custom: 'Custom · Wave 1',
   custom_2: 'Custom · Wave 2',
   custom_3: 'Custom · Wave 3',
+  custom_4: 'Custom 4 · Sinking Star',
   official: 'Official ARC-AGI-3',
 };
+const customCount = GAME_CATALOG.filter(game => game.group !== 'official').length;
 const defaultGameCode = 'CASC';
 const defaultGame = getGameByCode(defaultGameCode);
 if (!defaultGame) throw new Error(`The ${defaultGameCode} catalogue entry is missing.`);
@@ -83,9 +85,9 @@ app.innerHTML = `
         <p class="hero-agent">Symbolic Reasoning Agent</p>
         <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>
       </div>
-      <a class="intro-art" href="/gallery.html" aria-label="Explore 75 New Games, followed by 25 official games">
+      <a class="intro-art" href="/gallery.html" aria-label="Explore ${customCount} New Games, followed by 25 official games">
         <img src="/game-mosaic.png?v=custom-wave-3" alt="A patchwork of custom game boards" width="405" height="204" />
-        <span class="mosaic-label">EXPLORE 75 NEW GAMES ${icon('arrow')}</span>
+        <span class="mosaic-label">EXPLORE ${customCount} NEW GAMES ${icon('arrow')}</span>
       </a>
     </section>
 
@@ -98,8 +100,8 @@ app.innerHTML = `
     </aside>
 
     <section class="playground-section wrap" id="playground" aria-labelledby="playground-title">
-      <div class="section-line"><div class="playground-heading-group"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><a class="text-link" href="/arc-agi-3.html">What is ARC-AGI-3? ${icon('arrow')}</a></div><a class="catalog-count" href="/gallery.html" aria-label="75 New Games and 25 official games: browse all 100 games">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</a></div>
-      <p class="custom-game-credit"><strong>75 new custom games</strong><span class="custom-game-author">created or compiled by <span>Yannick Fontan.</span></span></p>
+      <div class="section-line"><div class="playground-heading-group"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><a class="text-link" href="/arc-agi-3.html">What is ARC-AGI-3? ${icon('arrow')}</a></div><a class="catalog-count" href="/gallery.html" aria-label="${customCount} New Games and 25 official games: browse all ${GAME_CATALOG.length} games">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + ${customCount} CUSTOM</a></div>
+      <p class="custom-game-credit"><strong>${customCount} new custom games</strong><span class="custom-game-author">created or compiled by <span>Yannick Fontan.</span></span></p>
       <article class="player is-agent-mode">
         <header class="player-header">
           <div class="game-identity">
@@ -159,11 +161,12 @@ app.innerHTML = `
                   <button type="button" id="space-button" data-action="5" class="space-action" aria-label="Primary action (Space)" title="Space">${icon('space')}<span>Space</span></button>
                 </div>
                 <div class="utility-controls">
+                  <button type="button" id="merchant-button" class="utility-button" title="Select next Merchant (C)" hidden disabled><span>Merchant · C</span></button>
                   <button type="button" id="undo-button" class="utility-button" aria-label="Undo last action" title="Undo (Z or Ctrl+Z)">${icon('undo')}<span>Undo</span></button>
                   <button type="button" id="reset-button" class="utility-button" aria-label="Reset level" title="Reset level (R)">${icon('reset')}<span>Reset</span></button>
                 </div>
               </div>
-              <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level.</p>
+              <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -707,6 +710,9 @@ function updateInterface(): void {
   for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) {
     button.disabled = !enabled || Boolean(complete || lost) || !available.has(Number(button.dataset.action));
   }
+  const merchantButton = element<HTMLButtonElement>('#merchant-button');
+  merchantButton.hidden = selectedGame.code !== 'SS01';
+  merchantButton.disabled = !enabled || Boolean(complete || lost) || !available.has(6);
   element<HTMLButtonElement>('#undo-button').disabled = !enabled || !observation?.canUndo;
   element<HTMLButtonElement>('#reset-button').disabled = !enabled;
   element<HTMLButtonElement>('#restart-button').disabled = !enabled;
@@ -800,6 +806,10 @@ async function run(operation: () => Promise<GameObservation>, announcement = '',
 function perform(action: number, data?: { x: number; y: number }): void {
   if (!observation?.availableActionIds.includes(action) || ['WIN', 'LEVEL_COMPLETE', 'GAME_OVER', 'GAMEOVER'].includes(observation.state)) return;
   void run(() => runtime.action(action, data), '', action);
+}
+function nextMerchant(): void {
+  if (selectedGame.code !== 'SS01' || !observation?.availableActionIds.includes(6) || observation.state === 'WIN') return;
+  void run(() => runtime.nextMerchant(), 'Merchant selected.');
 }
 function undo(): void {
   if (!observation?.canUndo) return;
@@ -926,6 +936,9 @@ canvas.addEventListener('click', (event: MouseEvent) => {
 });
 canvas.addEventListener('keydown', (event: KeyboardEvent) => {
   if (event.altKey || event.shiftKey) return;
+  if (!event.ctrlKey && !event.metaKey && event.key.toLowerCase() === 'c' && selectedGame.code === 'SS01') {
+    event.preventDefault(); nextMerchant(); return;
+  }
   if (event.key.toLowerCase() === 'z') {
     event.preventDefault();
     undo();
@@ -943,6 +956,7 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
   event.preventDefault();
   perform(action);
 });
+element('#merchant-button').addEventListener('click', () => { nextMerchant(); focusCanvas(); });
 element('#undo-button').addEventListener('click', () => { undo(); focusCanvas(); });
 element('#reset-button').addEventListener('click', () => { reset(); focusCanvas(); });
 element('#restart-button').addEventListener('click', () => { restart(); focusCanvas(); });

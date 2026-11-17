@@ -1,3 +1,4 @@
+import { createGameDispatcher, type GameRequest } from './native-game-dispatcher.ts';
 /** All game execution happens here. No action is sent to a remote game API. */
 interface PythonRuntime {
   loadPackage(packages: string[]): Promise<void>;
@@ -44,18 +45,25 @@ async function initialize(): Promise<PythonRuntime> {
 }
 
 let ready: Promise<PythonRuntime> | undefined;
+const dispatcher = createGameDispatcher(async () => {
+  ready ??= initialize().catch(error => { ready = undefined; throw error; });
+  const python = await ready;
+  return { dispatch(request) {
+    if (request.type === 'nextMerchant') throw new Error('Merchant selection is only available in SS01.');
+    python.globals.set('_browser_request_json', JSON.stringify(request));
+    let result;
+    try { result = JSON.parse(String(python.runPython('dispatch(_browser_request_json)'))); }
+    finally { python.globals.delete('_browser_request_json'); }
+    if (result.error) throw new Error(String(result.error));
+    return result;
+  } };
+});
 let queue = Promise.resolve();
 workerScope.addEventListener('message', event => {
   const { id, request } = event.data;
   queue = queue.then(async () => {
     try {
-      ready ??= initialize().catch(error => { ready = undefined; throw error; });
-      const python = await ready;
-      python.globals.set('_browser_request_json', JSON.stringify(request));
-      let result;
-      try { result = JSON.parse(String(python.runPython('dispatch(_browser_request_json)'))); }
-      finally { python.globals.delete('_browser_request_json'); }
-      if (result.error) throw new Error(String(result.error));
+      const result = await dispatcher.dispatch(request as GameRequest);
       workerScope.postMessage({ id, result });
     } catch (error) {
       console.error('Local game error:', error);

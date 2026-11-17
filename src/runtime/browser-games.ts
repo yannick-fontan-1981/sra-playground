@@ -17,7 +17,7 @@ export interface GameObservation {
 
 type Request = { type: 'load'; code: string; level?: number }
   | { type: 'action'; actionId: number; data?: { x: number; y: number } }
-  | { type: 'undo' | 'reset' | 'restart' }
+  | { type: 'undo' | 'reset' | 'restart' | 'nextMerchant' }
   | { type: 'selectLevel'; level: number };
 
 interface Pending {
@@ -78,6 +78,7 @@ export class BrowserGameRuntime {
   action(actionId: number, data?: { x: number; y: number }): Promise<GameObservation> {
     return this.request({ type: 'action', actionId, ...(data ? { data } : {}) });
   }
+  nextMerchant(): Promise<GameObservation> { return this.request({ type: 'nextMerchant' }); }
   undo(): Promise<GameObservation> { return this.request({ type: 'undo' }); }
   reset(): Promise<GameObservation> { return this.request({ type: 'reset' }); }
   restart(): Promise<GameObservation> { return this.request({ type: 'restart' }); }
