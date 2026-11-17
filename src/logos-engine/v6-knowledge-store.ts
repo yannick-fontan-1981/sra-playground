@@ -13,6 +13,7 @@ const OBJECT = '$v6_object';
 export const NATIVE_STORE_PROFILE = 'v6.native-state.v2/fragmented-float64-be';
 const GRAPH_STATE_KINDS = new Set(['family_state', 'prefix_evidence', 'component_state', 'reasoning_catalog', 'transition_evidence']);
 const publicationWriteQuantum = 64;
+const publicationTurnMs = 16;
 
 /**
  * Keep V7 canonical integers unchanged. Fractional numbers and negative zero
@@ -104,6 +105,7 @@ export class NativeKnowledgeStore {
   // transaction's complete publication remains staged.
   private readonly yieldControl: (() => Promise<void>) | undefined;
   private writesSinceYield = 0;
+  private lastYieldAt = 0;
 
   constructor(sourceDigest: string, scope: string, maxNodes = 16_384, yieldControl?: () => Promise<void>) {
     this.scope = scope;
@@ -169,6 +171,11 @@ export class NativeKnowledgeStore {
           const root = staged.node(write.id)?.value ?? (publicTransition ? lastPublicTransition : undefined);
           const graph = splitNativeState(source, write.id, isNativeStateGraph(root)
             ? { prior: { root, readFragment: id => staged.node(id)?.value } } : undefined);
+          if (this.yieldControl && performance.now() - this.lastYieldAt >= publicationTurnMs) {
+            this.writesSinceYield = 0;
+            await this.yieldControl();
+            this.lastYieldAt = performance.now();
+          }
           if (publicTransition) lastPublicTransition = graph.root;
           for (const fragment of graph.fragments) {
             const existing = staged.node(fragment.id);
@@ -184,6 +191,7 @@ export class NativeKnowledgeStore {
             if (this.yieldControl && ++this.writesSinceYield >= publicationWriteQuantum) {
               this.writesSinceYield = 0;
               await this.yieldControl();
+              this.lastYieldAt = performance.now();
             }
           }
           storedValue = immutableJson(graph.root);
@@ -208,6 +216,7 @@ export class NativeKnowledgeStore {
         if (this.yieldControl && ++this.writesSinceYield >= publicationWriteQuantum) {
           this.writesSinceYield = 0;
           await this.yieldControl();
+          this.lastYieldAt = performance.now();
         }
         accepted.set(node.id, { source, node: staged.node(node.id)! });
       }

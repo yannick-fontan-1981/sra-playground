@@ -107,8 +107,12 @@ test('cooperative publication keeps the same graph and stays atomic across host 
 });
 
 test('a rejected publication yield rolls back and releases the store for the next transaction', async () => {
+  let fail = true;
   const store = new NativeKnowledgeStore('yield-source', 'yield-scope', undefined, async () => {
-    throw new Error('host_yield_failed');
+    if (fail) {
+      fail = false;
+      throw new Error('host_yield_failed');
+    }
   });
   const original = store.memory;
   const writes = Array.from({ length: 80 }, (_, index) => ({
