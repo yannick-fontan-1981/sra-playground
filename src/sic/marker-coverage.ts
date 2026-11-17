@@ -8,6 +8,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, Nativ
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { markerAcquisitionRisk, markerContactKey, measureMarkerMaterialRegions, nextMarkerMaterialMove, type MaterialContact } from './marker-material-route.ts';
 import { sicNeedId } from './need-identity.ts';
+import { measureUnassignedMaterial, rememberExposedMarkers } from './marker-layers.ts';
 
 export const markerCoverageId = 'sic_marker_coverage';
 export const verifyMarkerPlacementId = 'sic_verify_marker_placement';
@@ -111,7 +112,6 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       const prior = snapshot?.epoch === observation.level_epoch ? snapshot : null;
       const issued = prior ? count : 0;
       const dismissed = prior ? dismissedContacts : [];
-      if (issued >= 64) return null;
       const measured = measurements(prior);
       if (!prior) {
         measured.epoch = observation.level_epoch;
@@ -119,9 +119,13 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
         const regions = measureMarkerMaterialRegions(observation, rows);
         measured.model = (regions.length ? measureConstellationLayout(observation, rows, regions) : null)
           ?? measureConstellationLayout(observation, rows);
+        if (measured.model) {
+          const movingColors = measureUnassignedMaterial(observation, rows, measured.model);
+          if (movingColors.length) measured.model.movingColors = movingColors;
+        }
       }
       const model = measured.model;
-      if (!model || measured.retired) return null;
+      if (!model || measured.retired || !model.movingColors?.length && issued >= 64) return null;
       const retained = measured.active === null ? null : measured.poses[measured.active]!;
       const cursor = constellationFocus(rows, model) ?? (measured.complete && retained
         && constellationCursorAt(rows, model, retained, measured.bodies, measured.poses, measured.active) ? retained : null);
@@ -233,6 +237,7 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const measured = measurements(proposal.measured), step = proposal.steps[index]!;
+      rememberExposedMarkers(after, second, measured, step.expected_after ?? undefined);
       if (contactObserved(measured, step, second)) return { matched: true, seal_prefix: true, reason: 'observed_material_change_with_preserved_supports' };
       const result = measured.after(proposal, index, before, after, first, second);
       if (step.materialContact?.expected && result.matched) return { matched: false, seal_prefix: true, reason: 'material_contact_without_color_change' };
@@ -243,6 +248,7 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       const retained = index > 0 && count === proposal.count + index && snapshot?.epoch === before.level_epoch;
       const measured = measurements(retained ? snapshot : proposal.measured);
       const step = proposal.steps[index]!, contact = step.materialContact;
+      rememberExposedMarkers(after, second, measured, step.expected_after ?? undefined);
       dismissedContacts = proposal.dismissedContacts ?? [];
       if (contact && measured.active !== null) {
         if (contactObserved(measured, step, second)) {
