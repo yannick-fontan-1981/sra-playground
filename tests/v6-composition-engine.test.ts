@@ -8,7 +8,7 @@ import { NativeReasoningMemory, TREE_SHA256 } from '../src/logos-engine/v6-reaso
 import type { ReasoningWindow } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { nativeProgramDescriptions } from '../src/logos-engine/v6-src-program.ts';
-import { canonical } from '../src/logos-engine/canonical.ts';
+import { canonical, immutableJson } from '../src/logos-engine/canonical.ts';
 import { splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 
 const fixture = JSON.parse(await readFile(new URL('./fixtures/v6-composition-engine-reference.json', import.meta.url), 'utf8'));
@@ -89,13 +89,29 @@ for (const sample of fixture.prepareCases) test(`V6 prepare/source/epoch admissi
   assert.deepEqual(request, sample.request);
 });
 
-for (const sample of fixture.callbackCases) test(`V6 pure callback/negative guard parity: ${sample.id}`, () => {
+for (const inputShape of ['mutable', 'closed'] as const)
+for (const sample of fixture.callbackCases) test(`V6 pure callback/negative guard parity (${inputShape}): ${sample.id}`, () => {
   const { engine, memory } = setup(sample); engine.prepare(sample.request);
-  const args = structuredClone(sample.arguments), before = memory.state();
+  const args = inputShape === 'closed' ? immutableJson(sample.arguments) as any[] : structuredClone(sample.arguments), before = memory.state();
   const method = (engine as unknown as Record<string, (...args: any[]) => unknown>)[sample.method]!;
   checkOutcome(() => method.apply(engine, args), sample.outcome);
   assert.deepEqual(args, sample.arguments, 'source callbacks must not mutate supplied session or choice');
   assert.deepEqual(memory.state(), before, 'pure callbacks have no memory or game write boundary');
+});
+
+test('native callbacks reuse a closed read-only request and detach fields they write', () => {
+  const engine = new NativeEngine(new NativeReasoningMemory());
+  const raw = { request: { policy: 'code_only', candidates: ['OP01'], state: { rows: [[1, 2], [3, 4]] } },
+    phase: 'choice', trace: [{ kind: 'previous' }], model_calls: [] };
+  const closed = immutableJson(raw);
+  const result = engine.src_context(closed);
+  assert.equal(result.request, closed.request);
+  assert.notEqual(result.trace, closed.trace);
+  result.trace.push({ kind: 'next' });
+  assert.equal(closed.trace.length, 1);
+  const detached = engine.src_context(raw);
+  detached.request.state.rows[0][0] = 9;
+  assert.equal(raw.request.state.rows[0]![0], 1);
 });
 
 for (const sample of fixture.validationCases) test(`V6 composition contract validation parity: ${sample.id}`, () => {
