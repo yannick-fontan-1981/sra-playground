@@ -13,6 +13,10 @@ export type KnownPanelSource = { marker: NativeBox; command: string; evidence: s
 export type PanelContact = { key: string; box: NativeBox };
 type RouteStep = { command: NativeCommand; from: NativeBox; to: NativeBox; landing: MeasuredLanding };
 type WalkProjection<T> = { target: T; route: RouteStep[]; evidence: string[] };
+type TerrainReturn = { before: number[]; after: number[] | null; evidence: string };
+export type PanelTerrain = { command: NativeCommand; region: NativeBox; returns: TerrainReturn[] };
+export type PanelTerrainStep = { command: NativeCommand; actor: NativeBox; region: NativeBox; before: number[]; after: number[] };
+export type TerrainProjection = { distance: number; evidence: string[]; route: RouteStep[]; change?: PanelTerrainStep };
 
 export const containsBox = (outer: NativeBox, inner: NativeBox) =>
   outer[0] <= inner[0] && outer[1] <= inner[1] && outer[2] >= inner[2] && outer[3] >= inner[3];
@@ -164,6 +168,105 @@ export function projectPanelContact(walker: PanelWalker, rows: NativeRows, field
 export function canReachPanelMarker(walker: PanelWalker, rows: NativeRows, field: NativeBox, inputs: readonly NativeCommand[],
   marker: NativeBox, remaining: number) {
   return !!projectPanelWalk(walker, rows, field, inputs, remaining, box => sameBox(box, marker) ? box : undefined);
+}
+
+const overlaps = (a: NativeBox, b: NativeBox) => a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];
+const crop = (rows: NativeRows, [l, t, r, b]: NativeBox) => rows.slice(t, b + 1).flatMap(row => row.slice(l, r + 1));
+
+export function rememberPanelTerrain(known: PanelTerrain | undefined, command: NativeCommand, region: NativeBox, actor: NativeBox,
+  before: NativeRows, after: NativeRows, evidence: string): PanelTerrain | undefined {
+  if (overlaps(region, actor)) return known;
+  const first = crop(before, region), second = crop(after, region);
+  const observations = known && sameBox(known.region, region) ? known.returns : [];
+  const existing = observations.findIndex(item => item.before.every((ink, i) => ink === first[i]));
+  if (existing < 0) {
+    if (first.every((ink, i) => ink === second[i])) return known;
+    return { command, region, returns: [...observations, { before: first, after: second, evidence }] };
+  }
+  const edge = observations[existing]!;
+  if (!edge.after || edge.after.every((ink, i) => ink === second[i])) return known;
+  return { command, region, returns: observations.map((item, i) => i === existing ? { ...item, after: null } : item) };
+}
+
+export function matchesPanelTerrain(rows: NativeRows, region: NativeBox, phase: readonly number[], actor: NativeBox) {
+  const [l, t, r, b] = region, width = r - l + 1;
+  for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
+    if (containsBox(actor, [x, y, x, y])) continue;
+    if (rows[y]?.[x] !== phase[(y - t) * width + x - l]) return false;
+  }
+  return phase.length === width * (b - t + 1);
+}
+
+/** Search the product of observed walking positions and measured terrain returns. */
+export function projectPanelTerrain(walker: PanelWalker, rows: NativeRows, field: NativeBox, inputs: readonly NativeCommand[],
+  model: PanelTerrain, target: NativeBox, remaining: number): TerrainProjection | null {
+  const actor = panelActor(walker, rows, field);
+  if (!actor || remaining < 1 || overlaps(target, model.region)) return null;
+  const phases = new Map<string, number[]>(), transitions = new Map<string, TerrainReturn>();
+  for (const edge of model.returns) {
+    if (!edge.after) continue;
+    const before = edge.before.join(','), after = edge.after.join(',');
+    phases.set(before, edge.before);
+    phases.set(after, edge.after);
+    transitions.set(before, edge);
+  }
+  const matched = [...phases].filter(([, values]) => matchesPanelTerrain(rows, model.region, values, actor));
+  if (matched.length !== 1) return null;
+  const [l, t, r, b] = model.region, width = r - l + 1;
+  const color = (phase: number[], x: number, y: number) =>
+    x >= l && x <= r && y >= t && y <= b ? phase[(y - t) * width + x - l] : rows[y]?.[x];
+  const support = (box: NativeBox, phase: number[]) => {
+    if (sameBox(box, actor) && !overlaps(box, model.region)) return true;
+    const [x, y, u, v] = box;
+    return supportEvidence(walker, box, [color(phase, x, y), color(phase, u, y), color(phase, x, v), color(phase, u, v)]);
+  };
+  const moves = inputs.flatMap(command => walker.controls[command.action_ref] ? [{ command, ...walker.controls[command.action_ref]! }] : []);
+  type Node = { box: NativeBox; phase: string; depth: number; previous?: Node; action?: NativeCommand; evidence?: string[]; change?: TerrainReturn };
+  const queue: Node[] = [{ box: actor, phase: matched[0]![0], depth: 0 }];
+  const seen = new Set([`${place(actor)}:${matched[0]![0]}`]);
+  const enqueue = (node: Node) => {
+    const key = `${place(node.box)}:${node.phase}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    queue.push(node);
+  };
+  for (const node of queue) {
+    if (sameBox(node.box, target)) {
+      const path: Node[] = [], evidence = new Set<string>();
+      for (let cursor: Node | undefined = node; cursor?.previous; cursor = cursor.previous) {
+        path.push(cursor);
+        for (const ref of cursor.evidence ?? []) evidence.add(ref);
+      }
+      path.reverse();
+      const first = path[0]?.change;
+      if (first?.after) return { distance: node.depth, evidence: [...evidence], route: [],
+        change: { command: model.command, actor, region: model.region, before: first.before, after: first.after } };
+      const route: RouteStep[] = [];
+      for (const step of path) {
+        if (step.change || route.length >= maximumCommittedActions) break;
+        const from = step.previous!.box, landing = bindTranslationLanding(rows, actor, from, step.box);
+        if (!landing) return null;
+        route.push({ command: step.action!, from, to: step.box, landing });
+      }
+      return route.length ? { distance: node.depth, evidence: [...evidence], route } : null;
+    }
+    if (node.depth >= remaining) continue;
+    const phase = phases.get(node.phase)!;
+    for (const move of moves) {
+      const [dx, dy] = move.delta, next = footprint(node.box[0] + dx, node.box[1] + dy);
+      if (!containsBox(field, next)) continue;
+      const measured = support(next, phase);
+      if (!measured && !sameBox(next, target)) continue;
+      enqueue({ box: next, phase: node.phase, depth: node.depth + 1, previous: node, action: move.command,
+        evidence: typeof measured === 'string' ? [move.evidence, measured] : [move.evidence] });
+    }
+    const change = transitions.get(node.phase);
+    if (change?.after && (!overlaps(node.box, model.region) || support(node.box, change.after))) {
+      enqueue({ box: node.box, phase: change.after.join(','), depth: node.depth + 1,
+        previous: node, change, evidence: [change.evidence] });
+    }
+  }
+  return null;
 }
 
 export type PanelApproach = NonNullable<ReturnType<typeof projectPanelMarker>>;

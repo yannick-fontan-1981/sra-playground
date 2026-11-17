@@ -1737,3 +1737,9 @@ SIC ajoute un sol à ses trajets après avoir vérifié le déplacement du curse
 Les retours distinguent le motif initial du motif obtenu. Plusieurs boutons font avancer la même suite de motifs. SIC relie un motif à une destination candidate quand un seul autre damier porte la même paire de couleurs. Le retour autonome du haut du plateau jusqu’au portail reste à résoudre. Une recherche séparée trouve un trajet de 30 commandes dans le vrai jeu depuis le dernier essai du sélecteur choisi. Quatre clics alternent avec la marche. Chacun transforme la case suivante en sol traversable.
 
 Le trajet séparé confirme l’arrivée à `(34,58)`. En déplaçant la pince, les quatre premières tentatives d’accrochage produisent un clignotement réversible. À la cinquième configuration, le clic modifie durablement la forme de la pince. La commande suivante translate la pince et les deux parties visibles du support de quatre pixels. Ce transport a été vérifié hors de la boucle de décision autonome.
+
+### DC22 niveau 6, composer la marche avec les changements mesurés du sol
+
+SIC garde les retours observés d’une commande lorsque le curseur ne masque pas le terrain modifié. Si une même configuration produit deux retours différents, le trajet cesse de réutiliser cette transition. La recherche évalue ensemble la position du curseur et la configuration du terrain. Elle vérifie que le sol restera accessible sous le curseur avant de proposer un changement.
+
+En SIC seul, le trajet autonome utilise une série de marche depuis l’îlot des sélecteurs, alterne marche et changements du sol, puis rejoint le portail. La **103e commande** envoie le curseur à `(34,58)`. En se déplaçant sur cet îlot, SIC fait apparaître des flèches distinctes et mesure leurs premières translations de la pince. Le choix autonome de l’alignement de la pince et la victoire du niveau restent à valider.

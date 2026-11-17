@@ -580,6 +580,8 @@ export function readNativeResolution(agent: {
     if (control && !region) subjects.push({ label: 'Panel control previously observed to change the board', box: control });
     const peer = bounds(card?.projectedPeer);
     if (peer) subjects.push({ label: 'Candidate destination with the matching marker', box: peer });
+    const support = bounds(card?.affectedSupport);
+    if (support) subjects.push({ label: 'Terrain being reconfigured', box: support });
     const contact = bounds(card?.contact);
     if (contact) subjects.push({ label: 'Contact at the edge of the known floor', box: contact });
     const animated = bounds(card?.animatedMechanism);
