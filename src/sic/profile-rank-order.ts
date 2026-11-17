@@ -35,11 +35,22 @@ export function projectRankOrder(values: readonly number[], order: RankOrder): n
   return result;
 }
 
+const reverseRank = (rank: number, length: number) => length - 1 - rank;
+const shiftedRank = (rank: number, length: number) => (rank + length - 1) % length;
+const matchesPattern = (order: RankOrder, source: (rank: number, length: number) => number) =>
+  order.every((possible, rank) => possible.length === 1 && possible[0] === source(rank, order.length));
+
+export function resizeRankOrder(order: RankOrder, length: number): RankOrder | null {
+  if (order.length === length) return order;
+  const patterns = [reverseRank, shiftedRank].filter(pattern => matchesPattern(order, pattern));
+  return patterns.length === 1 ? Array.from({ length }, (_, index) => [patterns[0]!(index, length)]) : null;
+}
+
 export function describeRankOrder(order: RankOrder): string {
-  if (order.every((sources, output) => sources.length === 1 && sources[0] === order.length - 1 - output)) {
+  if (matchesPattern(order, reverseRank)) {
     return 'Reverse the order of the teeth';
   }
-  if (order.every((sources, output) => sources.length === 1 && sources[0] === (output + order.length - 1) % order.length)) {
+  if (matchesPattern(order, shiftedRank)) {
     return 'Move the last tooth to the front and shift the others one place';
   }
   return 'Reorder the teeth using the observed position mapping';
