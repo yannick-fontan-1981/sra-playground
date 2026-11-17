@@ -1144,6 +1144,11 @@ export function readNativeResolution(agent: {
       const landing = bounds(record(contact)?.to);
       if (landing) subjects.push({ label: 'Previously observed contact landing', box: landing });
     }
+    if (Array.isArray(card?.timedSources)) for (const source of card.timedSources) {
+      const actuator = record(source);
+      const box = bounds(actuator?.box);
+      if (box) subjects.push({ label: actuator?.active ? 'Pusher involved in this step' : 'Pusher with its own cycle', box });
+    }
   }
   if (situationCard && (family === nestedPassageId || family === learnNestedPassageId)) {
     for (const [field, label] of [['room', 'Selected room'], ['source', 'Source'], ['exit', 'Exit opening']] as const) {
