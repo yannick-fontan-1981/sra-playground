@@ -107,6 +107,23 @@ test('reference placement shows both supporting positions and distinguishes a pr
   assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Neighbor expected to change color')?.before, [[7]]);
 });
 
+test('capture through paired marks shows the addressed entry and the observed exit separately', () => {
+  const family = 'sic_verify_capture_route', ref = 's:epoch:5:revision:4:frame:a';
+  const decision = readNativeResolution({
+    sessionId: 's', sequence: 3, level: 5, lastDecision: family, phase: 'authorised_not_executed',
+    trace: [{ kind: 'proposal', family },
+      { kind: 'sic_native_plan', family, authority: 'sicOnly', strategy: 'P05', observationRef: ref },
+      { kind: 'before_guard', family, index: 0, admitted: true }],
+    proposal: { actions: [{ action_ref: 'ACTION6', data: { x: 2, y: 0 } }], binding: { observation_ref: ref },
+      sicSituationCard: { strategy: 'P05', need: 'Reduce the population', mode: 'exploration', situation: 'Test the paired marks',
+        focus: [0, 0, 0, 0], victim: [1, 0, 1, 0], target: [2, 0, 2, 0], portalExit: [3, 0, 3, 0] } },
+  })!;
+  const receipt = captureDecisionSprites(decision, [[4, 4, 6, 6]], [[0, 0, 6, 4]]);
+  assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Entry to click')?.after, [[6]]);
+  assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Paired exit')?.after, [[4]]);
+  assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Piece to capture')?.after, [[0]]);
+});
+
 test('an authorized proposal keeps its objective, operation and bounded native sprite evidence', () => {
   const snapshot = {
     sessionId: 's', sequence: 5, level: 2, lastDecision: 'morphology', phase: 'authorised_not_executed',
