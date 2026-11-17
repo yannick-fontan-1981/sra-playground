@@ -23,6 +23,12 @@ test('retained checkpoints compare mutable input and reuse validated unchanged b
   assert.equal(second.changing.count, 2);
   assert.ok(Object.is(second.stable.values[0], -0));
   assert.equal(retainNativeJson(structuredClone(nextInput), second), second);
+  const independentlyClosed = retainNativeJson(structuredClone(nextInput));
+  assert.equal(retainNativeJson(independentlyClosed), independentlyClosed);
+  assert.equal(retainNativeJson(independentlyClosed, second), second);
+  const frozenRows = retainNativeJson({ stable: Object.freeze({ values: Object.freeze([-0, 0.5, 'é𝄞']) }),
+    changing: Object.freeze({ count: 2 }) }, second);
+  assert.equal(frozenRows.stable, second.stable);
   nextInput.stable.values[0] = 0;
   const third = retainNativeJson(nextInput, second);
   assert.notEqual(third.stable, second.stable);

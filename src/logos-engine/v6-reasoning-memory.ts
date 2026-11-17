@@ -116,7 +116,7 @@ export class NativeReasoningMemory {
   /** Preserve unchanged immutable branches when a native fact receives a delta. */
   nativePut(episode: string, key: string, value: any, evidence = 'fixture', revision = 1): void {
     this.available(); const id = JSON.stringify([episode, key]);
-    this.facts.set(id, retainNativeJson({ episode, key, value, evidence, revision }));
+    this.facts.set(id, retainNativeJson({ episode, key, value, evidence, revision }, this.facts.get(id)));
     this.factVersions.set(id, ++this.nativeRevision);
   }
   trace(episode: string, kind: string, value: any): void {
