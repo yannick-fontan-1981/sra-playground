@@ -1,7 +1,7 @@
 import { measureTypedCarriers, typedReplacementCandidate, typedMaterialDescendants, typedMaterialRequests,
   typedChildPresent, typedLocalChildMark, typedMaterialDigest, typedSmallParts, novelTypedControls, rotatedTypedMarks,
   currentTypedMarks, typedControlMatches } from '../logos-engine/v6-typed-material-observation.ts';
-import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { pythonEqual } from '../logos-engine/v6-operations.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
@@ -14,6 +14,7 @@ export const learnMaterialAssemblyId = 'sic_assemble_after_observed_mark';
 export const materialAssemblyStrategies = {
   P02: navigationPrimitives.P02,
   P05: navigationPrimitives.P05,
+  activate_material_source: 'Test whether a framed marker produces the missing pieces',
   test_marked_material: 'Test the response of a piece with internal marks',
   combine_compatible_material: 'Test a second piece with a matching border pattern',
   open_replacement_material: 'Test the new piece that contains the previous marks',
@@ -24,8 +25,10 @@ export const materialAssemblyStrategies = {
 
 const graph = compileStrategyGraph({
   id: 'assemble_and_apply_material_preserving_marks', version: 1, order: 'FALLBACK',
-  priorities: ['deliver_produced_piece', 'orient_produced_core', 'select_produced_piece', 'open_replacement_material', 'combine_compatible_material', 'test_marked_material'],
+  priorities: ['deliver_produced_piece', 'orient_produced_core', 'select_produced_piece', 'open_replacement_material', 'combine_compatible_material',
+    'test_marked_material', 'activate_material_source'],
   strategies: {
+    activate_material_source: [{ fact: 'source', expected: true, label: 'Open requests remain and repeated framed markers are visible where carrier inputs are missing' }],
     test_marked_material: [{ fact: 'probe', expected: true, label: 'Several pieces have comparable internal marks and an input may reveal their role' }],
     combine_compatible_material: [{ fact: 'pair', expected: true, label: 'The first click marked a piece, and one other piece has the same border colors in the same counts' }],
     open_replacement_material: [{ fact: 'open', expected: true, label: 'A new piece contains marks from the pieces that disappeared' }],
@@ -33,7 +36,7 @@ const graph = compileStrategyGraph({
     orient_produced_core: [{ fact: 'turn', expected: true, label: 'An open frame matches another orientation of the selected marks, and a separate control is available' }],
     deliver_produced_piece: [{ fact: 'deliver', expected: true, label: 'The last return marked this piece, and its candidate frame is still visible' }],
   },
-}, ['probe', 'pair', 'open', 'select', 'turn', 'deliver']);
+}, ['probe', 'pair', 'open', 'select', 'turn', 'deliver', 'source']);
 
 type Piece = { id: string; bbox: NativeBox; center: NativePoint; point: NativePoint; signature: string;
   body_palette: number; fringe: number[][]; support_source?: string };
@@ -50,12 +53,13 @@ type CompletedAssembly = { nextEpoch: number; score: number; deliveries: Deliver
   parts?: SmallPart[]; calibrations?: Calibration[]; turn?: TurnWitness };
 type Scene = { carriers: Piece[]; source_ref: string };
 type Replacement = { selected: Piece; removed: Piece[]; evidence: string[] };
+type Source = { bbox: NativeBox; point: NativePoint; projection: string };
 type State = { epoch: number; frameHash: string; steps: number; marked: Piece | null; replacement: Replacement | null; children: Child[];
   selected: Child | null; filled: NativeBox[]; associations: Record<string, Request['descriptor']>;
   calibrations: Calibration[]; evidence: string[]; stopped: boolean; initialParts?: SmallPart[];
-  deliveries?: Delivery[]; confirmed?: AssemblyStrategy[]; control?: Control; rotation?: { turns: number; evidence: string[] } };
+  deliveries?: Delivery[]; confirmed?: AssemblyStrategy[]; control?: Control; rotation?: { turns: number; evidence: string[] }; sources?: Source[] };
 type Choice = { piece: { bbox: NativeBox; point: NativePoint }; child?: Child; request?: Request; recalled?: Delivery | null;
-  reorient?: boolean };
+  reorient?: boolean; source?: Source };
 type Proposal = NativeProposal & { local: State; scene: Scene | null; choice: Choice; strategy: AssemblyStrategy; needId: string };
 
 const config = { minimum_body_fill: 0.75, minimum_distinct_internal_marks: 2, maximum_pixels_per_mark: 1, minimum_repeated_carriers: 2 };
@@ -81,6 +85,48 @@ const patch = (rows: NativeRows, [l, t, r, b]: NativeBox) => rows.slice(t, b + 1
 const visibleCore = (child: Child) => typedMaterialDigest(child.marks);
 const rotateMarks = (marks: number[][], turns: number) => rotatedTypedMarks(marks, turns)
   .map(([value, dx, dy]) => [value!, dx || 0, dy || 0]);
+
+function repeatedSources(rows: NativeRows, observation: NativeObservation) {
+  const requests = typedMaterialRequests(rows, observation);
+  if (requests.length < 2) return [];
+  const groups = new Map<string, Source[]>();
+  for (const part of geometricComponents(rows)) {
+    const [l, t, r, b] = part.bbox, [w, h] = [r - l + 1, b - t + 1];
+    if (w !== h || w < 5 || w > rows.length / 4 || requests.some(request => same(part.bbox, request.bbox))) continue;
+    if (part.mask.length !== 4 * (w - 1) || !part.mask.every(([x, y]) => x === 0 || y === 0 || x === w - 1 || y === h - 1)) continue;
+    const roles = new Map<number, number>(), numberRole = (color: number) => {
+      if (!roles.has(color)) roles.set(color, roles.size);
+      return roles.get(color)!;
+    };
+    const inside = patch(rows, [l + 1, t + 1, r - 1, b - 1]);
+    const motif = inside.map(row => row.map(numberRole));
+    if (roles.size < 3 || motif.flat().filter(value => value !== 0).length * 2 >= (w - 2) ** 2) continue;
+    const key = JSON.stringify([part.color, w, motif]), sources = groups.get(key) ?? [];
+    sources.push({ bbox: part.bbox, point: [Math.floor((l + r) / 2), Math.floor((t + b) / 2)],
+      projection: typedMaterialDigest(patch(rows, part.bbox)) });
+    groups.set(key, sources);
+  }
+  const aligned = [...groups.values()].filter(group => group.length >= 2
+    && (group.every(source => source.point[0] === group[0]!.point[0]) || group.every(source => source.point[1] === group[0]!.point[1])));
+  return aligned.length === 1 ? aligned[0]!.sort((a, b) => a.point[1] - b.point[1] || a.point[0] - b.point[0]) : [];
+}
+
+function spawnedCarriers(proposal: Proposal, before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows) {
+  const { local, choice, scene } = proposal, source = choice.source;
+  if (!source || same(patch(first, source.bbox), patch(second, source.bbox))) return null;
+  const measured = measureTypedCarriers(second, after, { ...config, observed_body_shapes: local.calibrations }) as Scene | null;
+  const previous = scene?.carriers ?? [];
+  const preserved = (a: Piece, b: Piece) => same(a.bbox, b.bbox) && a.signature === b.signature && a.body_palette === b.body_palette;
+  if (!measured || !previous.every(piece => measured.carriers.some(candidate => preserved(piece, candidate)))) return null;
+  const added = measured.carriers.filter(piece => !previous.some(candidate => preserved(piece, candidate)));
+  const [x, y] = source.point, reach = source.bbox[2] - source.bbox[0] + 1;
+  if (added.length !== 2 || !added.every(piece => Math.abs(piece.center[0] - x) <= reach && Math.abs(piece.center[1] - y) <= reach)) return null;
+  if (local.sources?.some(candidate => !same(candidate.bbox, source.bbox)
+    && !same(patch(first, candidate.bbox), patch(second, candidate.bbox)))) return null;
+  const requests = (rows: NativeRows, observation: NativeObservation) => typedMaterialRequests(rows, observation, local.filled.map(shape))
+    .map(request => [request.bbox, request.descriptor]);
+  return same(requests(first, before), requests(second, after)) ? added : null;
+}
 
 function resolveVisibleDescendants(children: Child[], requests: Request[], rows: NativeRows): Child[] {
   const fits = children.filter(child => {
@@ -243,11 +289,15 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
         : [[], prior ? [] : typedSmallParts(rows) as SmallPart[]];
       const retainedControl = !prior && memory?.turn ? locateRetainedTurn(rows, observation, memory.turn) : null;
       const control = retainedControl ?? (controls.length === 1 ? controls[0]! : null);
-      const local: State = prior ?? { epoch: observation.level_epoch, frameHash: observation.frame_hash, steps: acquired ? 1 : 0,
+      let local: State = prior ?? { epoch: observation.level_epoch, frameHash: observation.frame_hash, steps: acquired ? 1 : 0,
         marked: acquired?.scene ?? null, replacement: null, children: [], selected: null, filled: [], associations: {},
         calibrations: acquired ? calibrateMark([], acquired.scene, evidenceRefs) : [], evidence: evidenceRefs, stopped: false,
         initialParts: parts, ...(control ? { control } : {}) };
       const scene = measureTypedCarriers(rows, observation, { ...config, observed_body_shapes: local.calibrations }) as Scene | null;
+      if (!prior && !scene && memory?.calibrations?.length && memory.deliveries.length) {
+        const sources = repeatedSources(rows, observation);
+        if (sources.length) local = { ...local, sources, calibrations: memory.calibrations };
+      }
       const carriers = scene?.carriers ?? [];
       let select: Choice | null = null, deliver: Choice | null = null, pair: Choice | null = null, turn: Choice | null = null;
       if (local.children.length) {
@@ -298,15 +348,21 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       const open: Choice | null = local.replacement ? { piece: local.replacement.selected } : null;
       const first = !local.children.length && !local.replacement && !local.marked ? [...carriers].sort(byPosition)[0] : null;
       const probe: Choice | null = first ? { piece: first } : null;
+      const visibleSource = !local.children.length && !local.replacement && !local.marked && !probe
+        ? local.sources?.find(source => source.projection === typedMaterialDigest(patch(rows, source.bbox))) : undefined;
+      const source = visibleSource && (typedMaterialRequests(rows, observation, local.filled.map(shape)) as Request[])
+        .some(request => !local.filled.some(box => same(box, request.bbox))) ? visibleSource : undefined;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence,
         ...(deliver?.recalled?.evidence ?? select?.recalled?.evidence ?? turn?.recalled?.evidence ?? []),
         ...(turn && local.control ? [local.control.source_ref, ...(local.rotation?.evidence ?? [])] : [])].filter(value => value !== ref))];
       const { selected, entries } = resolveStrategyGraph({
         graph, mode: 'active',
         facts: { probe: { value: !!probe, evidence }, pair: { value: !!pair, evidence }, open: { value: !!open, evidence },
-          select: { value: !!select, evidence }, turn: { value: !!turn, evidence }, deliver: { value: !!deliver, evidence } },
+          select: { value: !!select, evidence }, turn: { value: !!turn, evidence }, deliver: { value: !!deliver, evidence },
+          source: { value: !!source, evidence } },
         planners: { test_marked_material: () => probe, combine_compatible_material: () => pair, open_replacement_material: () => open,
-          select_produced_piece: () => select, orient_produced_core: () => turn, deliver_produced_piece: () => deliver },
+          select_produced_piece: () => select, orient_produced_core: () => turn, deliver_produced_piece: () => deliver,
+          activate_material_source: () => source ? { piece: source, source } : null },
       });
       if (!selected) return null;
       const choice: Choice = selected.plan, strategy = selected.id, parent = 'G_official_completion';
@@ -357,6 +413,10 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const { local, choice, strategy } = proposal;
+      if (strategy === 'activate_material_source') {
+        const matched = !!spawnedCarriers(proposal, before, after, first, second);
+        return { matched, seal_prefix: true, reason: matched ? 'two_material_inputs_observed' : 'material_inputs_not_confirmed' };
+      }
       if (strategy === 'orient_produced_core' && choice.child && local.control) {
         const matched = !!observedCoreTurn(choice.child, local.control, first, second, local.rotation?.turns);
         return { matched, seal_prefix: true, reason: matched ? 'observed_selected_core_turned_in_place' : 'selected_core_turn_not_confirmed' };
@@ -384,7 +444,10 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       const next: State = { ...local, steps: local.steps + 1, frameHash: after.frame_hash,
         evidence: [...local.evidence.slice(-4), after.observation_ref], stopped: true };
       const measurement = { ...config, observed_body_shapes: local.calibrations };
-      if (strategy === 'test_marked_material' && scene) {
+      if (strategy === 'activate_material_source' && choice.source && spawnedCarriers(proposal, before, after, first, second)) {
+        next.sources = local.sources?.filter(source => !same(source.bbox, choice.source!.bbox)) ?? [];
+        next.stopped = false;
+      } else if (strategy === 'test_marked_material' && scene) {
         const piece = choice.piece as Piece;
         if (confirmsMark(piece, scene, first, second, after, local.calibrations)) {
           next.calibrations = calibrateMark(local.calibrations, piece, [before.observation_ref, after.observation_ref]);
@@ -428,7 +491,8 @@ export function createSicMaterialAssembly(family = materialAssemblyId): NativeFa
       }
       if (learns && !next.stopped && !next.confirmed?.includes(strategy)) next.confirmed = [...(next.confirmed ?? []), strategy];
       state = next;
-      return { events: [] };
+      return { events: [], ...(strategy === 'activate_material_source' && !next.stopped
+        ? { reviewEvidence: 'Two marked material inputs appeared near the addressed source and the requests stayed unchanged.' } : {}) };
     },
     state: () => ({ state, completed }),
     restore(value: NativeRecord) {

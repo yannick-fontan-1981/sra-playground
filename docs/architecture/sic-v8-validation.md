@@ -1399,3 +1399,9 @@ SIC déduit du réceptacle la position, le format 8 × 8, la rotation d’un qua
 DAME gagne le niveau 5 en **11 clics et 1,80 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 51 commandes relèvent de SIC seul. Les 40 commandes, observations et animations des quatre premiers niveaux reproduisent l’empreinte du socle `c92a7de9`. La permutation de palette reproduit les 51 commandes et les mesures de changement des images comparées. Empreinte `17bbfaa17897d8ecce28916623d20a830e3a024c73b51ce93ea70a26ee319e45`.
 
 SIC distingue les deux anneaux de terrain des huit pions. Il combine la règle de prise apprise avec une hypothèse de passage entre les deux anneaux. Le quatrième clic `P05` vérifie la disparition de la victime, le déplacement du pion vers l’anneau distant et la préservation des autres pièces. SIC reprend alors à la sortie confirmée et exécute les sept clics restants en série continue. La carte montre séparément le pion, la victime, la case cliquée et la sortie.
+
+### LIFE niveau 5, production de porteurs par les sources
+
+Une source candidate est un motif à cadre répété distinct des réceptacles. SIC vérifie à chaque activation que deux porteurs apparaissent à proximité, que les réceptacles restent intacts et que le reste de la matière suivie ne change pas. Le calibre de 5 × 5 observé précédemment permet de retrouver les porteurs dont le bord se fond dans le décor. SIC traite les trois sources successivement et réutilise la correspondance entre noyaux, orientations et cadres pour les six dépôts.
+
+Le niveau 5 est gagné en **33 commandes et 16,38 s** dans le lot configuré pour huit workers. Les 106 commandes relèvent de SIC seul. Les 73 commandes et retours des niveaux 1 à 4 concordent avec `270a909b`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `052e4b965ceb43b44078c1387a90af1cc723d5118955fcdb5db9c44e97c50ac4`.
