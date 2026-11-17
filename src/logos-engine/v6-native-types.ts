@@ -201,7 +201,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation,
     execution?: NativeExecution): NativeMaybePromise<NativeBeforeResult>;
   after(proposal: P, index: number, before: NativeObservation, after: NativeObservation,
-    firstRows: NativeRows, secondRows: NativeRows): NativeMaybePromise<NativeAfterResult>;
+    firstRows: NativeRows, secondRows: NativeRows, frames?: readonly NativeRows[]): NativeMaybePromise<NativeAfterResult>;
   record(before: NativeObservation, after: NativeObservation, command: NativeCommand,
     firstRows: NativeRows, secondRows: NativeRows, proposal: P, index: number,
     frames: readonly NativeRows[], execution?: NativeExecution): NativeMaybePromise<NativeRecordResult>;

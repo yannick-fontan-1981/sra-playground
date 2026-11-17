@@ -1494,7 +1494,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     await this.timed(first.level, async () => {
       this.observation = freeze(await measureNativeObservation(this.current!, this.actions + this.resetCount + 1, this.sessionId));
       const after = this.observation;
-      let result = await prefix.family.after(prefix.proposal, prefix.index, before, after, first.frame_rows, this.current!.frame_rows);
+      let result = await prefix.family.after(prefix.proposal, prefix.index, before, after,
+        first.frame_rows, this.current!.frame_rows, this.current!.frame_packet);
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
       const previousQueue = this.observedQueue?.ref === before.observation_ref ? this.observedQueue.model : null;
       this.observedQueue = undefined;
@@ -2426,7 +2427,8 @@ function nativeCallerFamilies(getCaller: () => NativeCallerCoordinator, meterFor
       bind: proposal => getCaller().bind(proposal),
       unacquiredInquiryWitness: (proposal, observation) => getCaller().unacquiredInquiryWitness(proposal, observation),
       before: async (proposal, index, publicPacket, observation) => await getCaller().before(proposal, index, publicPacket, observation) as { admitted: boolean; reason: string },
-      after: (...args) => getCaller().after(...args) as NativeAfterResult,
+      after: (proposal, index, before, after, first, second) =>
+        getCaller().after(proposal, index, before, after, first, second) as NativeAfterResult,
       // Goal/View/Frontier acquisition is universal and ordered by the common
       // caller; a selected provider must not replay it a second time.
       record: () => ({ events: [] }),

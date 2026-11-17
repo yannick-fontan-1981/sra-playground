@@ -1280,6 +1280,14 @@ Les deux traversées sont ensuite confirmées sur le jeu. Le curseur rejoint l�
 
 Le rejeu de régression de `161c7c9e` s’arrête à la victoire du niveau 4 pour chacun des 100 jeux. Les 400 niveaux sont gagnés sous autorité SIC seule. Les commandes, observations et animations concordent pour 98 parcours. SELE et TRIA gagnent chacun avec six commandes de plus.
 
+#### Qualification du niveau 5 pour `main`
+
+SIC confirme la prise lorsque la pince et le support se déplacent ensemble et que le curseur reste sur place. Il compare les translations et les butées avec le rail visible, puis utilise la projection lorsque les mesures désignent une seule disposition. Le trajet combine les positions du curseur, les poses du support et les cycles de terrain observés. Un retour animé qui montre la perte de l’appui invalide le changement depuis cet emplacement, même si la dernière image restitue le curseur.
+
+Le rejeu standard depuis le niveau 1 gagne le niveau 5 en **185 commandes et 166,48 s de temps mural**, avec le budget du lot configuré pour huit workers. Les 372 commandes relèvent de SIC seul. Les 187 commandes et retours des niveaux 1 à 4 concordent avec la référence `26cb728e` (empreinte `87e1c51418d91b86058950faeac3bbb2dd173f92191a3def59b435a0d2d72cbe`). La permutation de palette conserve les commandes et les effets géométriques jusqu’à la victoire. Empreinte du rejeu standard complet `58c84f6d809d7558184d9a844e5a1058874644183e7f7bf25e5861ea07918509`.
+
+Le traitement du retour de la 168ᵉ commande du niveau 5 a pris 1,37 s dans le rejeu standard de qualification. Le ralentissement intermittent observé dans les premiers essais ne s’est pas reproduit. Sa cause reste indéterminée. Le contrôle TypeScript et 39 tests ciblés passent.
+
 ### TRIA niveau 5, réutilisation partielle des commandes
 
 Le motif comporte sept pièces. SIC reconnaît la grille et les panneaux à partir des retours publics. Il réutilise les déplacements déjà mesurés pour les commandes dont le panneau et la catégorie de pièce concordent, même si d’autres commandes deviennent visibles. Les déplacements candidats sont toujours contrôlés sur les positions occupées et le retour confirme le placement après chaque clic. La borne d’énumération des affectations est appliquée aux permutations par catégorie.
