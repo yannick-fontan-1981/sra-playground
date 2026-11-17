@@ -731,11 +731,19 @@ export function readNativeResolution(agent: {
     if (target) subjects.push({ label: 'Cell selected to satisfy the visible quota', box: target });
   }
   if (situationCard && family === observedCarrierReductionId) {
+    const cargo = Array.isArray(card?.carriedIntermediates) ? card.carriedIntermediates.flatMap(item => {
+      const box = bounds(item);
+      return box ? [box] : [];
+    }) : [];
+    const intermediate = bounds(card?.intermediate);
+    const carried = (box: NativeBox) => cargo.some(other => other.every((value, i) => value === box[i]));
     for (const [field, label] of [['carrier', 'Measured carrier'], ['source', 'Piece chosen for the jump'],
-      ['intermediate', 'Fixed intermediate'], ['landing', 'Projected landing']] as const) {
+      ['intermediate', intermediate && carried(intermediate) ? 'Carried intermediate in this jump' : 'Fixed intermediate'],
+      ['landing', 'Projected landing']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    for (const box of cargo) if (!intermediate?.every((value, i) => value === box[i])) subjects.push({ label: 'Intermediate on a carrier', box });
   }
   if (situationCard && family === observedLinePlacementId) {
     const target = bounds(card?.target);

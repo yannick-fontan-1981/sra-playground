@@ -19,9 +19,10 @@ export type ReductionModel = {
 };
 export type ReductionScene = {
   floor: Set<string>; pegs: Set<string>; carriers: ReductionPoint[]; rails: Set<string>;
-  edges: Set<string>; known_cells?: Set<string>; plots?: Set<string>;
+  edges: Set<string>; known_cells?: Set<string>; plots?: Set<string>; carriedPlots?: Set<string>;
+  followVacated?: boolean;
 };
-export type ReductionState = [Set<string>, ReductionPoint[]];
+export type ReductionState = [Set<string>, ReductionPoint[], Set<string>?];
 export type ReductionOperation = ['jump', ReductionPoint, ReductionPoint] | ['move', ReductionPoint];
 export interface ReductionSearchBounds {
   readonly maximumStates: number;
@@ -151,33 +152,52 @@ export function reductionScan(rows: NativeRows, m: ReductionModel): ReductionSce
       if (allowed) edges.add(edge(p, q));
     }
   }
-  return { floor, pegs, carriers: sorted(carriers), rails, edges, ...(plots ? { plots } : {}) };
+  const carriedPlots = plots ? new Set([...plots].filter(cell => carriers.has(cell))) : null;
+  if (carriedPlots?.size) for (const cell of carriedPlots) plots!.delete(cell);
+  return { floor, pegs, carriers: sorted(carriers), rails, edges, ...(plots ? { plots } : {}),
+    ...(carriedPlots?.size ? { carriedPlots } : {}) };
 }
 
-export const reductionState = (scene: ReductionScene): ReductionState => [new Set(scene.pegs), scene.carriers.map(p => [...p])];
-export const packReductionState = (current: ReductionState): [ReductionPoint[], ReductionPoint[]] => [sorted(current[0]), current[1].map(p => [...p])];
+export function reductionState(scene: ReductionScene): ReductionState {
+  const state: ReductionState = [new Set(scene.pegs), scene.carriers.map(p => [...p])];
+  if (scene.carriedPlots) state[2] = new Set(scene.carriedPlots);
+  return state;
+}
+export function packReductionState(current: ReductionState): [ReductionPoint[], ReductionPoint[], ReductionPoint[]?] {
+  const packed: [ReductionPoint[], ReductionPoint[], ReductionPoint[]?] = [sorted(current[0]), current[1].map(p => [...p])];
+  if (current[2]) packed[2] = sorted(current[2]);
+  return packed;
+}
 const stateKey = (current: ReductionState): string => JSON.stringify(packReductionState(current));
-export function reductionMoved(current: ReductionState, vector: ReductionPoint, edges: Set<string>, plots?: ReadonlySet<string>): ReductionState {
-  const [pegs, carriers] = current, next = carriers.map(p => [...p] as ReductionPoint), tokens = new Set(pegs), oldCarriers = new Set(carriers.map(key));
-  for (const [index, p] of carriers.entries()) {
+export function reductionMoved(current: ReductionState, vector: ReductionPoint, edges: Set<string>, plots?: ReadonlySet<string>,
+  followVacated = false): ReductionState {
+  const [pegs, carriers, cargo] = current, next = carriers.map(p => [...p] as ReductionPoint), tokens = new Set(pegs), oldCarriers = new Set(carriers.map(key));
+  const movedPlots = cargo && new Set(cargo);
+  const dot = ([x, y]: ReductionPoint) => x * vector[0] + y * vector[1];
+  const order = followVacated ? [...carriers.entries()].sort((a, b) => dot(b[1]) - dot(a[1])) : carriers.entries();
+  for (const [index, p] of order) {
     const q = add(p, vector), k = key(q);
     if (edges.has(edge(p, q)) && !oldCarriers.has(k) && !tokens.has(k) && !plots?.has(k)) {
       next[index] = q; if (tokens.has(key(p))) { tokens.delete(key(p)); tokens.add(k); }
+      if (movedPlots?.delete(key(p))) movedPlots.add(k);
+      if (followVacated) { oldCarriers.delete(key(p)); oldCarriers.add(k); }
     }
   }
-  return [tokens, next.sort(compare)];
+  next.sort(compare);
+  return movedPlots ? [tokens, next, movedPlots] : [tokens, next];
 }
 export function* reductionSuccessors(current: ReductionState, scene: ReductionScene): Generator<[ReductionState, ReductionOperation, number]> {
-  const [pegs, carriers] = current, supports = new Set([...scene.floor, ...carriers.map(key)]);
+  const [pegs, carriers, cargo] = current, supports = new Set([...scene.floor, ...carriers.map(key)]);
+  const isPlot = (at: string) => !!scene.plots?.has(at) || !!cargo?.has(at);
   for (const p of sorted(pegs)) for (const vector of REDUCTION_VECTORS) {
     const mid = add(p, vector), end = add(mid, vector);
-    if ((pegs.has(key(mid)) || scene.plots?.has(key(mid))) && supports.has(key(end)) && !pegs.has(key(end)) && !scene.plots?.has(key(end))) {
+    if ((pegs.has(key(mid)) || isPlot(key(mid))) && supports.has(key(end)) && !pegs.has(key(end)) && !isPlot(key(end))) {
       const tokens = new Set(pegs); tokens.delete(key(p)); tokens.delete(key(mid)); tokens.add(key(end));
-      yield [[tokens, carriers], ['jump', p, end], 2];
+      yield [cargo ? [tokens, carriers, cargo] : [tokens, carriers], ['jump', p, end], 2];
     }
   }
   for (const vector of REDUCTION_VECTORS) {
-    const next = reductionMoved(current, vector, scene.edges, scene.plots);
+    const next = reductionMoved(current, vector, scene.edges, scene.plots, scene.followVacated);
     if (stateKey(next) !== stateKey(current)) yield [next, ['move', [...vector]], 1];
   }
 }
@@ -317,7 +337,8 @@ export function translatedReductionScene(scene: ReductionScene, offset: Reductio
   const shift = (values: Set<string>) => new Set([...values].map(value => key(add(point(value), offset))));
   return { floor: shift(scene.floor), pegs: shift(scene.pegs), rails: shift(scene.rails), carriers: scene.carriers.map(p => add(p, offset)).sort(compare),
     edges: new Set([...scene.edges].map(value => { const [a, b] = value.split('>'); return edge(add(point(a!), offset), add(point(b!), offset)); })),
-    ...(scene.plots ? { plots: shift(scene.plots) } : {}) };
+    ...(scene.plots ? { plots: shift(scene.plots) } : {}),
+    ...(scene.carriedPlots ? { carriedPlots: shift(scene.carriedPlots) } : {}) };
 }
 export function reductionVisibleCells(m: ReductionModel, offset: ReductionPoint): Set<string> {
   const values = new Set<string>(), [px, py] = m.phase;
@@ -331,7 +352,9 @@ export function mergeReductionScene(previous: ReductionScene | null, local: Redu
   return { floor: new Set([...previous.floor, ...next.floor]), rails: new Set([...previous.rails, ...next.rails]), edges: new Set([...previous.edges, ...next.edges]),
     known_cells: new Set([...(previous.known_cells ?? []), ...seen]), pegs: new Set([...previous.pegs].filter(p => !seen.has(p)).concat([...next.pegs])),
     carriers: sorted(new Set(previous.carriers.map(key).filter(p => !seen.has(p)).concat(next.carriers.map(key)))),
-    ...(previous.plots || next.plots ? { plots: new Set([...(previous.plots ?? []), ...(next.plots ?? [])]) } : {}) };
+    ...(previous.plots || next.plots ? { plots: new Set([...(previous.plots ?? []), ...(next.plots ?? [])]) } : {}),
+    ...(previous.carriedPlots || next.carriedPlots ? { carriedPlots: new Set(
+      [...(previous.carriedPlots ?? [])].filter(cell => !seen.has(cell)).concat([...(next.carriedPlots ?? [])])) } : {}) };
 }
 export function alignReductionScene(rows: NativeRows, _observation: R, m: ReductionModel, previous: ReductionScene, offset: ReductionPoint): [ReductionModel, ReductionPoint, ReductionScene] | null {
   const model = structuredClone(m), phases: string[] = [], unit = m.unit;
@@ -549,7 +572,8 @@ export class ReductionTransport {
     const [newModel, newOffset, newScene] = aligned, next = reductionState(newScene);
     const event: R = { ref, mode, status: 'observed_response', before_population: old[0].size, after_population: next[0].size, camera_offset: newOffset };
     if (mode === 'calibrate') {
-      const k = command.action_ref, trial: [string, [ReductionPoint[], ReductionPoint[]]] = [k, packReductionState(old)]; this.tested.set(JSON.stringify(trial), trial);
+      const k = command.action_ref, [pegs, carriers] = packReductionState(old);
+      const trial: [string, [ReductionPoint[], ReductionPoint[]]] = [k, [pegs, carriers]]; this.tested.set(JSON.stringify(trial), trial);
       const fits = REDUCTION_VECTORS.filter(v => stateKey(reductionMoved(old, v, this.scene!.edges)) === stateKey(next) && stateKey(old) !== stateKey(next));
       if (fits.length === 1) { this.motion[k] = [...fits[0]!]; this.refs[k] = ref; } event.compatible_control_vectors = fits.map(v => [...v]);
     } else {
