@@ -89,6 +89,24 @@ test('a released plan without a morphology proposal can show its expected destin
   assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Predicted destination')?.after, [[0]]);
 });
 
+test('reference placement shows both supporting positions and distinguishes a predicted color change', () => {
+  const family = 'sic_verify_reference_placement';
+  const decision = readNativeResolution({
+    sessionId: 's', sequence: 10, level: 5, lastDecision: family, phase: 'authorised_not_executed',
+    trace: [{ kind: 'proposal', family },
+      { kind: 'sic_native_plan', family, authority: 'sicOnly', strategy: 'P07', observationRef: 's:epoch:5:revision:10:frame:a' },
+      { kind: 'before_guard', family, index: 0, admitted: true }],
+    proposal: { actions: [{ action_ref: 'ACTION4', data: {} }], binding: { observation_ref: 's:epoch:5:revision:10:frame:a' },
+      sicSituationCard: { strategy: 'P07', need: 'Match the reference', mode: 'solving', situation: 'Place a supporting piece',
+        piece: [0, 0, 0, 0], target: [1, 0, 1, 0], reference: [3, 0, 3, 0],
+        supportingPlacement: true, predictedNeighbors: [[2, 0, 2, 0]], supportPositions: [[1, 0, 1, 0], [2, 1, 2, 1]] } },
+  })!;
+  const receipt = captureDecisionSprites(decision, [[4, 0, 7, 8], [0, 0, 0, 0]], [[0, 4, 8, 8], [0, 0, 0, 0]]);
+  assert.equal(receipt.sprites.filter(sprite => sprite.label === 'Supporting position beside the reference').length, 1);
+  assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Position beside the reference')?.after, [[4]]);
+  assert.deepEqual(receipt.sprites.find(sprite => sprite.label === 'Neighbor expected to change color')?.before, [[7]]);
+});
+
 test('an authorized proposal keeps its objective, operation and bounded native sprite evidence', () => {
   const snapshot = {
     sessionId: 's', sequence: 5, level: 2, lastDecision: 'morphology', phase: 'authorised_not_executed',

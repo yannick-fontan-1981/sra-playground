@@ -1496,6 +1496,12 @@ export function readNativeResolution(agent: {
       const box = bounds(neighbor);
       if (box) subjects.push({ label: 'Neighbor expected to change color', box });
     }
+    if (Array.isArray(card?.supportPositions)) for (const position of card.supportPositions) {
+      const box = bounds(position), target = bounds(card?.target);
+      if (box && (!target || box.some((coordinate, axis) => coordinate !== target[axis]))) {
+        subjects.push({ label: 'Supporting position beside the reference', box });
+      }
+    }
   }
   if (situationCard && (family === chartRouteId || family === learnChartRouteId)) {
     for (const [field, label] of [['marker', 'Candidate chart marker'], ['chartOrigin', 'Shared starting mark'],
