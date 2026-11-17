@@ -1,4 +1,4 @@
-import { measuredFields, periodicHypotheses, symmetryEvidence, type ConstraintTable,
+import { extractFields, measuredFields, periodicHypotheses, symmetryEvidence, type ConstraintTable,
   type RegularField, type SymmetryPolicy } from '../logos-engine/v6-field-constraints.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
@@ -8,6 +8,7 @@ import { independentPredictionSupport } from './independent-prediction.ts';
 import { fieldConsensus } from './field-consensus.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import type { SicNeed } from './need-registry.ts';
+import { protectedWindowBoxes } from './binary-field-effects.ts';
 
 export const fieldRepairId = 'sic_field_repair';
 const objective = 'G_official_completion';
@@ -107,10 +108,14 @@ export function createSicFieldRepair(policy: SymmetryPolicy): NativeFamily<Field
       const attempted = level === observation.level_epoch ? attempts : [];
       const measured = level === observation.level_epoch ? known : [];
       const fields = measuredFields(observation);
+      let protectedWindows: ReturnType<typeof protectedWindowBoxes> | undefined;
       const findCommand = ({ point: [x, y], size: [width, height] }: Repair) => {
         const bound = inputs.filter(command => command.action_ref === 'ACTION6' && command.data.x! >= x && command.data.x! < x + width
           && command.data.y! >= y && command.data.y! < y + height);
-        return bound.length === 1 ? bound[0]! : null;
+        if (bound.length !== 1) return null;
+        protectedWindows ??= extractFields(observation, rows).flatMap(protectedWindowBoxes);
+        const command = bound[0]!, { x: clickX, y: clickY } = command.data;
+        return protectedWindows.some(([l, t, r, b]) => l <= clickX! && clickX! <= r && t <= clickY! && clickY! <= b) ? null : command;
       };
       for (const repair of repairs(fields, policy)) {
         if (attempted.includes(trialKey(repair))) continue;
