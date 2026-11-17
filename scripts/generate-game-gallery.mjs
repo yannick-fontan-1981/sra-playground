@@ -1,3 +1,4 @@
+import { makeNativeGalleryGroup } from './native-game-gallery.mjs';
 /** Build the gallery from the catalogue and real, pre-rendered level frames. */
 import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -8,6 +9,8 @@ import { renderSiteHeader } from '../src/site-header.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const manifest = JSON.parse(await readFile(resolve(root, 'content/game-gallery-assets.json'), 'utf8'));
+manifest.groups.push(await makeNativeGalleryGroup(root));
+const customGameCount = GAME_CATALOG.filter(game => game.group !== 'official').length;
 const escape = value => String(value ?? '').replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
@@ -17,14 +20,15 @@ const groupDefinitions = [
   { id: 'custom', anchor: 'custom-wave-1', title: 'Custom · Wave 1', shortTitle: 'Wave 1' },
   { id: 'custom_2', anchor: 'custom-wave-2', title: 'Custom · Wave 2', shortTitle: 'Wave 2' },
   { id: 'custom_3', anchor: 'custom-wave-3', title: 'Custom · Wave 3', shortTitle: 'Wave 3' },
+  { id: 'custom_4', anchor: 'custom-wave-4', title: 'Custom 4 · Sinking Star', shortTitle: 'Custom 4' },
   { id: 'official', anchor: 'official-games', title: 'Official ARC-AGI-3 games', shortTitle: 'Official' },
 ];
 
 if (manifest.tileSize !== 64 || manifest.sourceCommit !== SOURCE_COMMIT) {
   throw new Error('Gallery assets must match the catalogue source and native 64×64 frames.');
 }
-if (!Array.isArray(manifest.groups) || manifest.groups.length !== 4 || GAME_CATALOG.length !== 100) {
-  throw new Error('The gallery requires all four groups and all 100 games.');
+if (!Array.isArray(manifest.groups) || manifest.groups.length !== groupDefinitions.length) {
+  throw new Error('The gallery requires all catalogue groups.');
 }
 const codes = new Set();
 const groups = [];
@@ -32,7 +36,7 @@ for (const definition of groupDefinitions) {
   const asset = manifest.groups.find(group => group.id === definition.id);
   const games = GAME_CATALOG.filter(game => game.group === definition.id)
     .sort((a, b) => a.code.localeCompare(b.code, 'en'));
-  if (!asset || games.length !== 25 || asset.rows !== 25 || asset.games?.length !== 25
+  if (!asset || games.length < 1 || asset.rows !== games.length || asset.games?.length !== games.length
       || !Number.isInteger(asset.columns) || asset.columns < 1 || asset.columns > 64
       || asset.width !== asset.columns * 64 || asset.height !== asset.rows * 64
       || !/^\/gallery\/[a-z0-9_-]+\.png$/.test(asset.image)
@@ -93,8 +97,8 @@ const page = `<!doctype html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0e0c0c" />
     <meta name="color-scheme" content="dark" />
-    <meta name="description" content="Browse 75 new custom games created or compiled by Yannick Fontan, followed by 25 official ARC-AGI-3 games. Preview a level and click to play it in your browser." />
-    <title>75 New Games · SRA Playground</title>
+    <meta name="description" content="Browse ${customGameCount} new custom games created or compiled by Yannick Fontan, followed by 25 official ARC-AGI-3 games. Preview a level and click to play it in your browser." />
+    <title>${customGameCount} New Games · SRA Playground</title>
     <link rel="canonical" href="https://sra-playground.yannick-fontan.chatgpt.site/gallery.html" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=green-blue-yellow" />
   </head>
@@ -103,15 +107,15 @@ const page = `<!doctype html>
     ${renderSiteHeader('gallery')}
     <main class="gallery-main wrap" id="gallery">
       <header class="gallery-intro">
-        <div class="gallery-title-row"><div><p class="eyebrow">ARC AGI 3 / CUSTOM &amp; OFFICIAL</p><h1>75 New Games</h1></div><span class="gallery-total">100 games<span>/</span>${levelCount} levels</span></div>
-        <p class="gallery-credit"><strong>75 new custom games</strong><span>created or compiled by <span>Yannick Fontan.</span></span></p>
+        <div class="gallery-title-row"><div><p class="eyebrow">ARC AGI 3 / CUSTOM &amp; OFFICIAL</p><h1>${customGameCount} New Games</h1></div><span class="gallery-total">${GAME_CATALOG.length} games<span>/</span>${levelCount} levels</span></div>
+        <p class="gallery-credit"><strong>${customGameCount} new custom games</strong><span>created or compiled by <span>Yannick Fontan.</span></span></p>
         <p class="gallery-guide">Choose a level, then click its preview to play. The 25 official games follow the custom collection.</p>
       </header>
-      <nav class="gallery-index" aria-label="Game collections">${groups.map(group => `<a href="#${group.anchor}"><span>${escape(group.shortTitle)}</span><span class="gallery-group-count">25</span></a>`).join('')}</nav>
+      <nav class="gallery-index" aria-label="Game collections">${groups.map(group => `<a href="#${group.anchor}"><span>${escape(group.shortTitle)}</span><span class="gallery-group-count">${group.entries.length}</span></a>`).join('')}</nav>
       <p class="sr-only" data-gallery-feedback role="status" aria-live="polite"></p>
       ${groups.map(group => `
       <section class="gallery-section" id="${group.anchor}" aria-labelledby="${group.anchor}-title">
-        <header class="gallery-section-heading"><h2 id="${group.anchor}-title">${escape(group.title)}</h2><span>25 games</span></header>
+        <header class="gallery-section-heading"><h2 id="${group.anchor}-title">${escape(group.title)}</h2><span>${group.entries.length} ${group.entries.length === 1 ? 'game' : 'games'}</span></header>
         <div class="gallery-grid">${group.entries.map(game => card(game, group)).join('')}
         </div>
       </section>`).join('')}
@@ -123,4 +127,4 @@ const page = `<!doctype html>
 `;
 
 await writeFile(resolve(root, 'gallery.html'), page);
-console.log(`Generated the game gallery: ${codes.size} games, ${levelCount} level previews, four native image atlases.`);
+console.log(`Generated the game gallery: ${codes.size} games, ${levelCount} level previews, ${groups.length} native image atlases.`);

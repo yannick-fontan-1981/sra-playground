@@ -97,3 +97,7 @@ to the description, not represented as a verbatim audio transcription.
 The full videos remain hosted on YouTube and are embedded only
 after the visitor selects Play. The code license does not relicense those videos
 or their original media and texts.
+
+## SS01 / Custom 4
+
+The native SS01 engine and original introductory level were developed for SRA Playground. Levels 2–8 adapt publicly transcribed Mirror Isles puzzles from Order of the Sinking Star, via Joric's reconstruction (joric/ootss, script blob 3b8768a5152c34e0f572e7e66251dfadb4cb6d1d). These seven maps are compiled/adapted levels, not claimed as original designs. The original game's names/designs retain their respective attribution. See src/games/sinking-star/PROVENANCE.md for the mapping and fidelity limitations.
