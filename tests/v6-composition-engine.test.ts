@@ -8,6 +8,8 @@ import { NativeReasoningMemory, TREE_SHA256 } from '../src/logos-engine/v6-reaso
 import type { ReasoningWindow } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { nativeProgramDescriptions } from '../src/logos-engine/v6-src-program.ts';
+import { canonical } from '../src/logos-engine/canonical.ts';
+import { splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 
 const fixture = JSON.parse(await readFile(new URL('./fixtures/v6-composition-engine-reference.json', import.meta.url), 'utf8'));
 const constructors = { Engine: NativeEngine, CompositionEngine, NeutralEngine };
@@ -19,9 +21,11 @@ test('composition checkpoints share unchanged content while preserving detached 
     navigation_excerpt: key, excerpt_only: true }, neighbors: [], remaining_neighbors: 0, adjacency_is_not_permission: true });
   engine.windows.set('one', window('one'));
   engine.windows.set('two', window('two'));
-  engine.last_result = { detail: { count: 1 }, weight: -0 };
+  engine.last_result = { detail: { count: 1 }, weight: -0, values: Array.from({ length: 10_000 }, (_, i) => i % 16) };
   const first = engine.nativeCheckpoint();
   assert.deepEqual(first, engine.state());
+  const originalGraph = splitNativeState(engine.state(), 'test:composition');
+  assert.equal(canonical(splitNativeState(first, 'test:composition')), canonical(originalGraph));
   assert.equal(engine.nativeCheckpoint(), first);
   engine.windows.get('one')!.current.navigation_excerpt = 'updated';
   engine.last_result.detail.count = 2;
@@ -31,6 +35,11 @@ test('composition checkpoints share unchanged content while preserving detached 
   assert.equal(second.windows[1], first.windows[1]);
   assert.equal(first.windows[0]![1].current.navigation_excerpt, 'one');
   assert.equal(first.last_result!.detail.count, 1);
+  assert.equal(second.last_result!.values, first.last_result!.values);
+  const fragments = new Map(originalGraph.fragments.map(fragment => [fragment.id, fragment.value]));
+  const prior = { prior: { root: originalGraph.root, readFragment: (id: string) => fragments.get(id) } };
+  assert.equal(canonical(splitNativeState(second, 'test:composition', prior)),
+    canonical(splitNativeState(engine.state(), 'test:composition', prior)));
   const detached = engine.state();
   detached.windows[1]![1].current.navigation_excerpt = 'external';
   assert.equal(engine.windows.get('two')!.current.navigation_excerpt, 'two');
