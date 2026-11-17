@@ -71,7 +71,7 @@ function previewRoute(scene: Scene, goal: Pose, controls: State['controls'], cur
 
 async function prepare(rows: NativeRows, epoch: number, inputs: readonly NativeCommand[], budget: number,
   learned: Transfer | null, execution: Parameters<typeof previewPackingAssignments>[1]): Promise<State | null> {
-  const scene = previewPackingMeasureScene(rows);
+  const scene = previewPackingMeasureScene(rows, learned !== null);
   const movable = scene?.pieces.filter(piece => piece.movable);
   if (!scene || !movable?.length) return null;
   try {
