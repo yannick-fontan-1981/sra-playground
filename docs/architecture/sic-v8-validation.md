@@ -1246,3 +1246,9 @@ La comparaison des passages supposés cède la main après 32 commandes lorsque 
 Les sept parcours jusqu’à la victoire du niveau 4 conservent l’empreinte de leurs commandes, observations et animations. CN04 et WA30 retrouvent leur niveau 4 à l’identique. AS66, FITE et THER retrouvent leur niveau 5 à l’identique.
 
 Après la correction du rendez-vous, **SIGN gagne le niveau 5 en 53 commandes et 36,26 s de temps actif** pendant un rejeu complet depuis le niveau 1 avec le réglage de huit processus. Les 194 commandes relèvent de SIC seul. Les 141 premières et leurs retours concordent avec la référence jusqu’au niveau 4. Les observations de deux cycles concordants permettent de viser une pause de la cible mobile après le changement de mode. Les deux activations sont contrôlées par la préparation et le compteur d’acquisitions. Le contrôle TypeScript et les 35 tests ciblés passent.
+
+### SWCH niveau 5 et départ sans carte éclairée
+
+**SWCH gagne le niveau 5 en 48 commandes et 20,03 s de temps actif**, avec le réglage de huit processus. Les 151 commandes du rejeu relèvent de SIC seul. Les 103 commandes, observations et animations jusqu’à la victoire du niveau 4 reproduisent la référence `26cb728e`. SWCH est le seul jeu à avoir exécuté cette famille pendant la campagne des niveaux 1 à 4.
+
+Quand la carte initiale est encore inconnue, SIC peut tester le seul levier d’éclairage adjacent si la réserve et la capacité sont lisibles. Le retour doit confirmer à la fois l’apparition du plan de la salle et la dépense d’une unité. Avant le premier passage, le plan utilise la première recharge accessible pour financer la prochaine reconnaissance. Après l’ouverture du premier passage, il peut ouvrir une porte depuis une salle cartographiée même si la salle suivante est encore sombre. Chaque mouvement, recharge ou ouverture est réconcilié avec la carte et la réserve observées. Le contrôle TypeScript et les 38 tests ciblés passent.

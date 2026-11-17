@@ -125,7 +125,7 @@ export function createSicVerifyFrameContact(family = verifyFrameContactId): Nati
       const motion = learns && !prior ? execution?.readPriorDirectionalScene?.(measure) : null;
       if (learns && !prior && (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch)) return null;
       const scene = prior?.scene ?? motion?.scene ?? measure(rows);
-      if (!scene || (prior?.count ?? 0) >= 36) return null;
+      if (!scene || (prior?.count ?? 0) >= 36 && !prior?.roomRoute?.resources) return null;
       const start = origin(scene.piece.bbox), goal = origin(scene.frame.bbox);
       const learned = previousWin?.completed === observation.levels_completed && previousWin.side === scene.side ? previousWin : null;
       const roomRoute = prior?.roomRoute ?? (!prior && learned ? startRoomRoute(rows, { side: scene.side, start, goal }) : null);

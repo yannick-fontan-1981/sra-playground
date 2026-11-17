@@ -17,7 +17,7 @@ export type RoomIntent = 'refill' | 'release' | 'survey' | 'open' | 'exit';
 export type RoomRoute = {
   grid: Grid; rooms: Room[]; phase: Phase; control: NativePoint;
   tried: NativePoint[]; capacity: Capacity | null; passage: NativePoint | null; stopped: boolean;
-  resources?: RoomResources;
+  resources?: RoomResources; startedUnmapped?: true;
 };
 export type RoomStep = ContactStep & { target: NativePoint; contact: boolean; intent?: RoomIntent };
 
@@ -138,7 +138,15 @@ function measureResources(rows: NativeRows, grid: Grid): RoomResources | null {
 export function startRoomRoute(rows: NativeRows, grid: Grid): RoomRoute | null {
   const rooms = readRooms(rows, grid, grid.start);
   const home = rooms.length === 1 ? rooms[0] : undefined;
-  if (!home || !inBox(grid.start, home.box) || inBox(grid.goal, home.box) || home.controls.length < 3) return null;
+  if (!home || !inBox(grid.start, home.box) || inBox(grid.goal, home.box) || home.controls.length < 3) {
+    if (rooms.length) return null;
+    const resources = measureResources(rows, grid);
+    const nearbyLights = resources?.controls.filter(control => isLight(control) && !control.active
+      && contactDirections.some(direction => same(shiftTile(grid.start, direction, grid.side), control.point)));
+    if (!resources || resources.free < 1 || nearbyLights?.length !== 1) return null;
+    return { grid, rooms, phase: 'survey', control: nearbyLights[0]!.point, tried: [], capacity: null, passage: null,
+      stopped: false, resources, startedUnmapped: true };
+  }
   const close = home.controls.filter(point => contactDirections.some(direction => same(shiftTile(grid.start, direction, grid.side), point)));
   const resources = measureResources(rows, grid);
   if (!resources && close.length !== 1) return null;
@@ -234,6 +242,18 @@ function resourceStep(route: RoomRoute, from: NativePoint, resources: RoomResour
   const release = nearest(controls.filter(control => isLight(control) && control.active && mapped.has(control.identity[0])), 'release');
   const survey = nearest(controls.filter(control => isLight(control) && !control.active && !mapped.has(control.identity[0])), 'survey');
   if (canAfford(release) && (!free || (free === 1 && release.cost === 1 && !!survey))) return release.step;
+  if (route.startedUnmapped) {
+    // Use the first surveyed room to build a reserve before taking the next survey detour.
+    if (mapped.size && !resources.opened.length && pickup?.first && pickup.distance <= reserve) {
+      return { ...pickup.first, target: pickup.at, contact: false, intent: 'refill' };
+    }
+    // Opening a control from a known side is useful even while the room beyond is still dark.
+    if (resources.opened.length && free > 0) {
+      const access = nearest(controls.filter(control => !isLight(control) && !control.active
+        && (mapped.has(control.identity[0]) || mapped.has(control.identity[2]))), 'open');
+      if (canAfford(access)) return access.step;
+    }
+  }
   if (free > 0 && canAfford(survey) && (!pickup || survey.cost < pickup.distance)) {
     return survey.step;
   }
