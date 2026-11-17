@@ -1603,3 +1603,12 @@ SIC repère une cellule alignée sur la grille, contiguë à une seule pièce et
 SIC révèle ensuite les autres connecteurs et cherche un assemblage en appariant les positions des connecteurs et en vérifiant que les parties solides restent disjointes. Il contrôle les retours des parcours de translation et s’arrête sur la victoire officielle.
 
 Le rejeu complet gagne le niveau 5 en **55 commandes et 19,86 s** avec le réglage de huit workers. Les 191 commandes relèvent de SIC seul. Les 136 commandes et retours des niveaux 1 à 4 reproduisent la référence `280a62d1`. La permutation de palette reproduit les 191 commandes et leurs effets géométriques. Empreinte complète `5b825d9793a7d32646aee38390b3da8628ea3bae4122c0481c2092e1aa4cbab7`. Le contrôle TypeScript et les 178 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### SC25 niveau 5, préparer une plate-forme depuis une autre
+
+SIC reconnaît dans les trois cartes les motifs dont il a déjà observé le changement de taille, le transfert et le tir. Il rapproche chacun des deux blocs de la bande distante qui partage la couleur de son centre. Deux essais séparés depuis l’îlot de départ vérifient que la même recette de transfert conduit à la branche des blocs avec la petite empreinte et à la plate-forme de sortie avec la grande.
+
+Dans le rejeu autonome, SIC vérifie la réduction à la 5ᵉ commande et la première arrivée à la 9ᵉ. Il cherche une ligne de tir qui atteint le bloc par une voie continue, même lorsque l’autre voie est obstruée. Les animations des commandes 20 et 28 confirment séparément que le projectile atteint son bloc et que la bande correspondante disparaît. Le contact de recharge augmente la jauge. SIC calcule ensuite l’alignement de la grande empreinte, confirme l’agrandissement à la commande 35, puis la seconde arrivée à la commande 39. La montée traverse les passages ouverts et déclenche la victoire.
+
+Le rejeu complet gagne le niveau 5 en **45 commandes et 15,32 s** avec le réglage de huit workers. Les 106 commandes relèvent de SIC seul. Les 61 commandes et retours des niveaux 1 à 4 reproduisent la référence `d98a4889`. La permutation de palette reproduit les 106 commandes et leurs effets géométriques. Empreinte complète `1b88de8cea871a0787acb9a146c3b17fcb87b333c11b2d766cb7c59cd9b08417`. Le contrôle TypeScript et les 179 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
