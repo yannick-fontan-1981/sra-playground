@@ -575,6 +575,9 @@ export function readNativeResolution(agent: {
     const focus = bounds(card?.focus), moved = bounds(record(card?.lastControlledMotion)?.to);
     if (focus) subjects.push({ label: 'Piece whose control is being tested', box: focus });
     if (moved) subjects.push({ label: 'Piece moved by the tested direction', box: moved });
+    const marker = bounds(card?.marker), control = bounds(card?.control);
+    if (marker) subjects.push({ label: 'Marker reached to vary the test conditions', box: marker });
+    if (control && !region) subjects.push({ label: 'Panel control previously observed to change the board', box: control });
   }
   if (situationCard && (family === trialRepeatedLinearControlsId || family === recheckDirectionalControlsId)) {
     const target = bounds(card?.addressedRegion);

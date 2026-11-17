@@ -5,6 +5,8 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier } from '../src/sic/public-input-exploration.ts';
 import { observedCommandFrontier, observedCommandKey } from '../src/sic/observed-command-frontier.ts';
 import { commandPanelState, visibleCommandPanel } from '../src/sic/visible-command-panel.ts';
+import { learnPanelDirection, projectPanelMarker } from '../src/sic/panel-context-probe.ts';
+import { sameLandingPixels } from '../src/sic/plan-step.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 
@@ -84,6 +86,34 @@ test('public exploration shares tested panel commands across families and only r
   assert.equal(routable?.probe, 'ACTION3');
   assert.equal(observedCommandFrontier(shared.transitions, initial, testedHere, 3,
     state => state === initial ? testedHere : ['ACTION2']), null);
+});
+
+test('a panel comparison projects a guarded route using measured commands and an untested matching marker', () => {
+  const board = (ax: number, ay: number, mark = true) => Array.from({ length: 14 }, (_, y) =>
+    Array.from({ length: 14 }, (_, x) => {
+      if (x >= ax && x < ax + 2 && y >= ay && y < ay + 2) return 7;
+      if (mark && x >= 8 && x < 10 && y >= 4 && y < 6) return (x + y) % 2 ? 6 : 3;
+      return x >= 2 && x < 12 && y >= 2 && y < 12 ? 2 : 0;
+    }));
+  const field = [0, 0, 13, 13] as const;
+  const right = { action_ref: 'ACTION1', data: {} }, up = { action_ref: 'ACTION4', data: {} };
+  const first = board(2, 8), middle = board(4, 8), current = board(4, 6);
+  const horizontal = learnPanelDirection(undefined, field, right.action_ref, first, middle, 'right');
+  const walker = learnPanelDirection(horizontal, field, up.action_ref, middle, current, 'up');
+  assert.ok(walker);
+  const button = { command: { action_ref: 'ACTION6', data: { x: 24, y: 6 } }, box: [23, 5, 26, 8] as const,
+    ink: 6, evidence: 'click_off_marker' };
+  const inputs = [right, up];
+  const projection = projectPanelMarker(walker, current, field, inputs, [button], [], 4);
+  assert.ok(projection);
+  assert.deepEqual(projection.trial.marker, [8, 4, 9, 5]);
+  assert.equal(projection.route.length, 3);
+  assert.deepEqual(new Set(projection.evidence), new Set(['right', 'up']));
+  assert.equal(projectPanelMarker(walker, current, field, inputs, [button], [], 3), null);
+  assert.equal(projectPanelMarker(walker, current, field, inputs, [button], [projection.trial.key], 4), null);
+  assert.equal(projectPanelMarker(walker, current, field, inputs, [{ ...button, ink: 9 }], [], 4), null);
+  assert.ok(sameLandingPixels(projection.route[2]!.landing, current));
+  assert.equal(sameLandingPixels(projection.route[2]!.landing, board(4, 6, false)), false);
 });
 
 test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {
