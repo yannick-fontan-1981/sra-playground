@@ -8,6 +8,7 @@ import { bindTranslationLanding, maximumCommittedActions, sameLandingPixels, unc
 import { aimCommands, aimPoseMatches, aimRoute, hasAimedRay, overlaps, readAdaptableRemote, readAimPose, readGauge,
   readRemoteRoute, remoteFlightObserved, remoteOpeningObserved,
   type AimCommand, type AimPose, type AimWitness, type RemoteRoute, type ResizeWitness } from './remote-effect-route.ts';
+import { chooseLinkedCue, measureLinkedCue, observeLinkedCue, type LinkedCue, type LinkedCueStep } from './linked-cue-route.ts';
 
 export const reproduceCueId = 'sic_reproduce_cue';
 export const learnAnimatedCueId = 'sic_learn_animated_cue';
@@ -30,7 +31,10 @@ type RemoteState = { epoch: number; route: RemoteRoute; panel: NativeBox; cells:
 type RemoteStep = { kind: 'aim' | 'copy' | 'launch' | 'exit' | 'select' | 'resize' | 'recover'; action: NativeCommand;
   pose: AimPose; expected: AimPose; cell?: Cell; recipe?: Recipe };
 type RemoteProposal = NativeProposal & { remote: RemoteState; aiming: RemoteStep; needId: string };
-const isRemote = (p: Proposal | RemoteProposal): p is RemoteProposal => 'remote' in p;
+type LinkedProposal = NativeProposal & { linked: LinkedCue; linkedStep: LinkedCueStep; needId: string };
+type CueProposal = Proposal | RemoteProposal | LinkedProposal;
+const isRemote = (p: CueProposal): p is RemoteProposal => 'remote' in p;
+const isLinked = (p: CueProposal): p is LinkedProposal => 'linked' in p;
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -290,13 +294,75 @@ function witnessedAim(rows: NativeRows, proposal: Proposal, epoch: number, ref: 
   return aimPoseMatches(rows, candidate, { box: receiver, heading }) ? candidate : null;
 }
 
-export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Proposal | RemoteProposal> {
+export function createSicReproduceCue(family = reproduceCueId): NativeFamily<CueProposal> {
   const learns = family === learnAnimatedCueId;
   let state: State | null = null;
   let witness: AimWitness | null = null;
   let remoteState: RemoteState | null = null;
   let resize: ResizeWitness | null = null;
   let shot: { epoch: number; cells: number[]; refs: string[] } | null = null;
+  let transfer: { cells: number[]; refs: string[] } | null = null;
+  let linked: LinkedCue | null = null;
+  async function offerLinked(observation: NativeObservation, rows: NativeRows, remaining: number,
+    execution?: NativeExecution): Promise<LinkedProposal | null> {
+    const { level_epoch: epoch, observation_ref: ref, available_action_refs: available } = observation;
+    if (learns || remaining < 1 || !available.includes('ACTION6')) return null;
+    let route = linked?.epoch === epoch ? linked : null;
+    if (route && (route.stopped || route.lastRef !== ref)) return null;
+    if (!route) {
+      if (!resize || !shot || !transfer || witness?.epoch !== epoch - 1
+        || remoteState?.epoch !== epoch - 1 || !remoteState.adaptation || !remoteState.opened) return null;
+      const parts = geometricComponents(rows), input = measureInput(parts, rows.length, true);
+      const cards = input ? measureExamples(parts, input) : [];
+      if (!input || cards.length < 3) return null;
+      const match = (cells: readonly number[]) => {
+        const matches = cards.filter(card => card.cells.join() === cells.join());
+        return matches.length === 1 ? matches[0]! : null;
+      };
+      const resizing = match(resize.cells), aiming = match(shot.cells), transport = match(transfer.cells);
+      if (!resizing || !aiming || !transport || new Set([resizing, aiming, transport]).size !== 3) return null;
+      route = measureLinkedCue(rows, input.panel, input.cells, { resize: resizing, launch: aiming, transfer: transport },
+        witness, resize, epoch, ref, [...new Set([...resize.refs, ...shot.refs, ...transfer.refs, ...remoteState.refs])]);
+      if (!route) return null;
+    }
+    const step = chooseLinkedCue(route, rows, available, remaining);
+    if (!step) return null;
+    const { action, click, expected, work } = step, { scene, pose } = route, target = scene.routes[step.target]!;
+    const evidence: [string, ...string[]] = [ref, ...route.refs.filter(value => value !== ref)];
+    const mode = execution?.reasoningMode ?? 'assimilation';
+    const offer = { input: action.action_ref, expected: center(click ?? expected?.box ?? pose.box), evidence };
+    const probing = step.kind === 'apply' && work === 'launch';
+    const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence,
+      probe: probing ? offer : null, access: click ? null : offer, interaction: click && !probing ? offer : null });
+    if (!selected) return null;
+    const situation = step.kind === 'apply'
+      ? work === 'resize' ? 'Change the footprint for the next part of the route'
+        : work === 'launch' ? 'Check the aimed effect against its matching distant barrier'
+          : 'Apply the transfer and verify which platform received the moving piece'
+      : { aim: 'Find a clear line to the inset linked to an unopened barrier',
+        recover: 'Reach the piece that restores the reserve', exit: 'Reach the exit through the openings already confirmed',
+        copy: 'Activate the next marked cell of the current recipe', select: 'Select the observed recipe for the next effect' }[step.kind];
+    const pointBinding = click ? await ObservedInputDomain.makeLocusWitness(observation, rows, center(click), { reason: situation, evidence }) : null;
+    if (click && !pointBinding) return null;
+    const parent = 'G_official_completion';
+    const objective = { kind: 'prepare_linked_exit_from_another_platform', scope: ref.split(':revision:', 1)[0]!,
+      subjects: [...scene.routes.map(item => center(item.barrier).join(',')), center(scene.exit).join(',')],
+      parentObjective: parent, satisfactionContract: 'official_progress_after_verified_platform_transfers' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = family + ':' + need.id;
+    return { status: 'proposed', kind: family, linked: route, linkedStep: step, needId: need.id, actions: [action],
+      binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action, expected_after: expected?.box ?? null, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
+      sicSituationCard: { strategy: selected.id, need: 'Open the passages on the receiving platform', situation, mode, evidence,
+        agenda: entries, triggerCard: card, panel: scene.panel, sampleCells: work ? scene.recipes[work].examples : [],
+        actor: pose.box, target: click ?? (step.kind === 'aim' ? target.target : step.kind === 'recover' ? scene.supply : scene.exit),
+        addressedRegion: target.target, obstacle: target.barrier, exit: scene.exit, reserveGauge: scene.gauge,
+        ...(expected ? { expectedFootprint: expected.box } : {}) },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+  }
   async function offerRemote(observation: NativeObservation, rows: NativeRows, remaining: number,
     execution?: NativeExecution): Promise<RemoteProposal | null> {
     const { level_epoch: epoch, observation_ref: ref, available_action_refs: available } = observation;
@@ -372,12 +438,13 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
   return {
     id: family,
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
-      return group === observedMechanicsGroup ? offerRemote(observation, rows, remaining, execution)
+      return group === observedMechanicsGroup ? await offerLinked(observation, rows, remaining, execution)
+        ?? await offerRemote(observation, rows, remaining, execution)
         : this.propose(observation, rows, inputs, remaining, execution);
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      const opening = await offerRemote(observation, rows, remaining, execution);
+      const opening = await offerLinked(observation, rows, remaining, execution) ?? await offerRemote(observation, rows, remaining, execution);
       if (opening) return opening;
       const supports = (a: string, b: string) => observation.available_action_refs.includes(a) && observation.available_action_refs.includes(b);
       if (!supports('ACTION3', 'ACTION4') && (learns || !supports('ACTION1', 'ACTION2'))) return null;
@@ -438,7 +505,7 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
       };
     },
     before(proposal, index, packet, current) {
-      if (index > 0 && !isRemote(proposal)) {
+      if (index > 0 && !isRemote(proposal) && !isLinked(proposal)) {
         const leg = proposal.approach?.[index], receiver = leg ? controlled(packet.frame_rows, proposal.local.scene) : null;
         const admitted = !!leg && proposal.binding?.level_epoch === current.level_epoch && !!receiver
           && receiver.every((value, i) => value === leg.from[i]) && sameLandingPixels(leg.landing, packet.frame_rows);
@@ -450,6 +517,13 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
     after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isLinked(proposal)) {
+        if (proposal.linkedStep.kind === 'apply' && proposal.linkedStep.work === 'launch') {
+          return { matched: null, seal_prefix: true, reason: 'check_projectile_and_linked_opening_in_frames' };
+        }
+        const outcome = observeLinkedCue(proposal.linked, proposal.linkedStep, first, second);
+        return { matched: !!outcome, seal_prefix: true, reason: outcome?.reason ?? 'linked_cue_prediction_contradicted' };
+      }
       if (isRemote(proposal)) {
         const reason = remoteReturn(second, proposal, first);
         return { matched: !!reason, seal_prefix: true, reason: reason ?? 'remote_effect_or_movement_contradicted' };
@@ -462,6 +536,14 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
       return { matched: !!reason, seal_prefix: !canContinue, reason: reason ?? 'cue_or_movement_not_confirmed' };
     },
     record(before, after, _action, first, second, proposal, index, frames) {
+      if (isLinked(proposal)) {
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const outcome = observeLinkedCue(proposal.linked, proposal.linkedStep, first, second, frames);
+        linked = { ...(outcome?.run ?? proposal.linked), stopped: !outcome, lastRef: after.observation_ref,
+          refs: outcome ? [...proposal.linked.refs.slice(-12), after.observation_ref] : proposal.linked.refs };
+        return { events: [], ...(outcome?.reason === 'visible_effect_reached_inset_and_removed_its_barrier'
+          ? { reviewEvidence: 'The projectile reached the inset and removed the matching barrier on the receiving platform.' } : {}) };
+      }
       if (isRemote(proposal)) {
         const { remote, aiming } = proposal;
         if (after.levels_completed > before.levels_completed && remote.opened && remote.recipe?.length && !remote.adaptation && witness) {
@@ -494,6 +576,10 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
       const cues = step.kind === 'observe' ? (cueSubset(animated, local.scene.cells) ? animated : []) : local.cues;
       const reason = step.kind === 'observe' ? (cues.length ? 'animated_cue_observed' : null) : check(bound, first, second);
       const receiver = reason === 'prepared_footprint_observed' || local.prepared ? controlled(second, local.scene) : null;
+      if (reason === 'prepared_footprint_observed' && receiver && local.scene.visible
+        && width(receiver) === width(local.scene.initialActor) && height(receiver) === height(local.scene.initialActor)) {
+        transfer = { cells: [...local.cues].sort((a, b) => a - b), refs: [...local.refs.slice(-3), after.observation_ref] };
+      }
       const axis = local.scene.visible?.axis ?? 0;
       const horizontal = receiver && local.receiver && step.kind === 'approach' && reason ? receiver[axis] - local.receiver[axis] : local.horizontal;
       const measuredResize = reason === 'prepared_footprint_observed' ? seenResize(local, receiver) : local.resize;
@@ -504,13 +590,15 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Pro
         rejected: reason ? local.rejected : [...local.rejected, JSON.stringify([step.action, local.receiver, local.cues.length])] };
       return { events: [] };
     },
-    state: () => ({ state, witness, remoteState, resize, shot }),
+    state: () => ({ state, witness, remoteState, resize, shot, transfer, linked }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       witness = structuredClone((value.witness ?? null) as AimWitness | null);
       remoteState = structuredClone((value.remoteState ?? null) as RemoteState | null);
       resize = structuredClone((value.resize ?? null) as ResizeWitness | null);
       shot = structuredClone((value.shot ?? null) as typeof shot);
+      transfer = structuredClone((value.transfer ?? null) as typeof transfer);
+      linked = structuredClone((value.linked ?? null) as LinkedCue | null);
     },
   };
 }

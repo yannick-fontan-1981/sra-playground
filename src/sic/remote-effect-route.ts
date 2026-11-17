@@ -6,7 +6,7 @@ export type AimCommand = keyof typeof aimCommands;
 export type AimWitness = { epoch: number; unit: number; side: number; frontInk: number; backInk: number; refs: string[] };
 export type AimPose = { box: NativeBox; heading: AimCommand };
 export type RemoteRoute = { target: NativeBox; core: NativeBox; barrier: NativeBox; exit: NativeBox; field: NativeBox;
-  floor: number; witness: AimWitness; supply?: NativeBox };
+  floor: number; witness: AimWitness; supply?: NativeBox; offsetAim?: boolean };
 export type ResizeWitness = { from: number; side: number; unit: number; offsets: NativePoint; cells: number[]; refs: string[] };
 type Navigation = { pose: AimPose; action: AimCommand; distance: number };
 
@@ -53,13 +53,14 @@ function navigable(rows: NativeRows, layout: RemoteRoute, actor: AimPose, box: N
 }
 
 type Ray = { box: NativeBox; axis: 0 | 1; sign: number; first: number; last: number };
-function aimRay(pose: AimPose, target: NativeBox): Ray | null {
+function aimRay(pose: AimPose, target: NativeBox, offsetAim = false): Ray | null {
   const [dx, dy] = aimCommands[pose.heading], axis = dx ? 0 : 1, cross = axis === 0 ? 1 : 0, sign = dx || dy;
   // Use the observed overlap between the aim line and the centre of the inset.
   const lineStart = Math.floor((pose.box[cross] + pose.box[cross + 2]!) / 2);
   const lineEnd = Math.ceil((pose.box[cross] + pose.box[cross + 2]!) / 2);
-  if (lineStart !== Math.floor((target[cross] + target[cross + 2]!) / 2)
-    || lineEnd !== Math.ceil((target[cross] + target[cross + 2]!) / 2)) return null;
+  if (offsetAim ? lineStart < target[cross] || lineEnd > target[cross + 2]!
+    : lineStart !== Math.floor((target[cross] + target[cross + 2]!) / 2)
+      || lineEnd !== Math.ceil((target[cross] + target[cross + 2]!) / 2)) return null;
   const first = sign > 0 ? pose.box[axis + 2]! + 1 : pose.box[axis] - 1;
   const last = sign > 0 ? target[axis] - 1 : target[axis + 2]! + 1;
   if (sign * (last - first) < 0) return null;
@@ -68,8 +69,16 @@ function aimRay(pose: AimPose, target: NativeBox): Ray | null {
 }
 
 export function hasAimedRay(rows: NativeRows, layout: RemoteRoute, pose: AimPose): boolean {
-  const ray = aimRay(pose, layout.target);
-  return ray !== null && everyPixel(ray.box, (x, y) => rows[y]?.[x] === layout.floor || contains(pose.box, x, y));
+  const ray = aimRay(pose, layout.target, layout.offsetAim);
+  if (!ray) return false;
+  const open = (x: number, y: number) => rows[y]?.[x] === layout.floor || contains(pose.box, x, y);
+  if (!layout.offsetAim) return everyPixel(ray.box, open);
+  const [l, t, r, b] = ray.box, start = ray.axis === 0 ? t : l, end = ray.axis === 0 ? b : r;
+  for (let line = start; line <= end; line++) {
+    const lane: NativeBox = ray.axis === 0 ? [l, line, r, line] : [line, t, line, b];
+    if (everyPixel(lane, open)) return true;
+  }
+  return false;
 }
 
 export function aimRoute(rows: NativeRows, layout: RemoteRoute, actor: AimPose, available: readonly string[],
@@ -173,7 +182,7 @@ export function remoteOpeningObserved(rows: NativeRows, layout: RemoteRoute): bo
 }
 
 export function remoteFlightObserved(first: NativeRows, frames: readonly NativeRows[], actor: AimPose, layout: RemoteRoute): boolean {
-  const ray = aimRay(actor, layout.target);
+  const ray = aimRay(actor, layout.target, layout.offsetAim);
   if (!ray) return false;
   let furthest = -1, advances = 0;
   for (const frame of frames) {
