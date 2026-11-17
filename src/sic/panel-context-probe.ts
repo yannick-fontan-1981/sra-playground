@@ -153,9 +153,10 @@ export function projectPanelMarker(walker: PanelWalker, rows: NativeRows, field:
 
 /** From a new landing, test the boundary where measured floor meets a visible object. */
 export function projectPanelContact(walker: PanelWalker, rows: NativeRows, field: NativeBox, fieldInk: number,
-  inputs: readonly NativeCommand[], excluded: readonly string[], remaining: number): WalkProjection<PanelContact> | null {
+  inputs: readonly NativeCommand[], excluded: readonly string[], remaining: number, broadenContact = false): WalkProjection<PanelContact> | null {
   return projectPanelWalk(walker, rows, field, inputs, remaining, (box, patch, walkable) => {
-    if (walkable || patch.some(ink => ink === undefined || ink === fieldInk || ink === walker.ink)) return;
+    if (walkable || patch.some(ink => ink === undefined || ink === fieldInk) || patch.every(ink => ink === walker.ink)
+      || (!broadenContact && patch.includes(walker.ink))) return;
     const first = patch[0];
     const sameSurface = patch.every(ink => ink === first);
     const joinsFloor = patch.some(ink => ink !== undefined && (ink === walker.floor || walker.floorReturns?.[ink]));
@@ -168,6 +169,11 @@ export function projectPanelContact(walker: PanelWalker, rows: NativeRows, field
 export function canReachPanelMarker(walker: PanelWalker, rows: NativeRows, field: NativeBox, inputs: readonly NativeCommand[],
   marker: NativeBox, remaining: number) {
   return !!projectPanelWalk(walker, rows, field, inputs, remaining, box => sameBox(box, marker) ? box : undefined);
+}
+
+export function projectPanelFooting(walker: PanelWalker, rows: NativeRows, field: NativeBox, inputs: readonly NativeCommand[],
+  footing: NativeBox, key: string, remaining: number): PanelContactApproach | null {
+  return projectPanelWalk(walker, rows, field, inputs, remaining, box => sameBox(box, footing) ? { key, box } : undefined);
 }
 
 const overlaps = (a: NativeBox, b: NativeBox) => a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3];

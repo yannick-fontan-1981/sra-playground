@@ -9,6 +9,7 @@ import { learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, projectPan
   projectPanelTerrain, rememberPanelTerrain, type PanelWalker } from '../src/sic/panel-context-probe.ts';
 import { sameLandingPixels } from '../src/sic/plan-step.ts';
 import { measureReturningAnimation } from '../src/sic/observed-animation.ts';
+import { dockingDistance, findPanelDock, measureAlignedTool, measurePanelTransport } from '../src/sic/panel-mechanism-probe.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 
@@ -187,6 +188,38 @@ test('a phased route applies an observed terrain return only while the occupied 
   const disputed = rememberPanelTerrain(model, command, region, observer, closed, unsafe, 'different_return');
   assert.equal(disputed?.returns[0]?.after, null);
   assert.equal(projectPanelTerrain(walker, covered, field, inputs, disputed!, target, 4), null);
+});
+
+test('alignment uses the centre of a matching support pair and declines an ambiguous pair', () => {
+  const field = [0, 0, 17, 11] as const, tool = [12, 2, 17, 7] as const;
+  const board = (secondPair: boolean) => Array.from({ length: 12 }, (_, y) => Array.from({ length: 18 }, (_, x) => {
+    if ((x >= 1 && x <= 4 || x >= 7 && x <= 10) && y >= 3 && y <= 5) return 6;
+    if (secondPair && (x >= 1 && x <= 4 || x >= 7 && x <= 10) && y >= 8 && y <= 10) return 8;
+    if (x >= 12 && x <= 17 && y >= 2 && y <= 7 && (x === 12 || x === 17 || y === 7)) return 7;
+    return 0;
+  }));
+  const target = findPanelDock(board(false), field, tool);
+  assert.deepEqual(target, [1, 3, 10, 5]);
+  assert.ok(dockingDistance(tool, target!, [-4, 0]) < dockingDistance(tool, target!));
+  assert.ok(dockingDistance(tool, target!, [4, 0]) > dockingDistance(tool, target!));
+  assert.equal(findPanelDock(board(true), field, tool), undefined);
+});
+
+test('transport is acquired when the aligned tool and both support pieces translate together', () => {
+  const field = [0, 0, 17, 11] as const, tool = [3, 4, 6, 7] as const;
+  const board = (toolShift: number, supportShift: number) => Array.from({ length: 12 }, (_, y) =>
+    Array.from({ length: 18 }, (_, x) => {
+      if (y < 4 || y > 7) return 0;
+      const support = x - supportShift, jaw = x - toolShift;
+      if (support >= 0 && support <= 2 || support >= 7 && support <= 9) return 6;
+      if (jaw >= 3 && jaw <= 6 && (jaw === 3 || jaw === 6 || y === 7)) return 7;
+      return 0;
+    }));
+  const before = board(0, 0), held = measureAlignedTool(before, field, tool);
+  assert.deepEqual(held, { tool, support: [0, 4, 9, 7] });
+  assert.deepEqual(measurePanelTransport(before, board(2, 2), field, held!),
+    { tool: [5, 4, 8, 7], support: [2, 4, 11, 7], delta: [2, 0] });
+  assert.equal(measurePanelTransport(before, board(2, 0), field, held!), undefined);
 });
 
 test('SIC prioritizes a marked edit and checks that it changed the collection', async () => {

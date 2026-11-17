@@ -1743,3 +1743,9 @@ Le trajet séparé confirme l’arrivée à `(34,58)`. En déplaçant la pince, 
 SIC garde les retours observés d’une commande lorsque le curseur ne masque pas le terrain modifié. Si une même configuration produit deux retours différents, le trajet cesse de réutiliser cette transition. La recherche évalue ensemble la position du curseur et la configuration du terrain. Elle vérifie que le sol restera accessible sous le curseur avant de proposer un changement.
 
 En SIC seul, le trajet autonome utilise une série de marche depuis l’îlot des sélecteurs, alterne marche et changements du sol, puis rejoint le portail. La **103e commande** envoie le curseur à `(34,58)`. En se déplaçant sur cet îlot, SIC fait apparaître des flèches distinctes et mesure leurs premières translations de la pince. Le choix autonome de l’alignement de la pince et la victoire du niveau restent à valider.
+
+### DC22 niveau 6, vérifier la prise et le transport du support
+
+Le clignotement réversible donne une empreinte de la pince. Deux parties alignées de même forme et séparées par un espace compatible indiquent un alignement à tester. SIC mesure les translations produites par les flèches et mémorise la case où chaque flèche devient utilisable. Il choisit un déplacement mesuré qui rapproche la pince de l’alignement, puis vérifie sur le retour réel l’effet du bouton de prise.
+
+Le rejeu autonome sur le vrai plateau confirme la prise à la **126e commande**. À la **134e commande**, la flèche activée depuis une autre case translate la pince et les deux parties du support de quatre pixels dans la même direction. Les 151 commandes du lot relèvent de SIC seul. Ce résultat couvre l’alignement et le premier transport observé. Il reste à planifier les positions successives qui permettent de rejoindre la sortie.
