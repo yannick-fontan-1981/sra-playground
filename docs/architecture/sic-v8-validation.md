@@ -1220,3 +1220,9 @@ La recherche suit la position, les sceaux acquis et les appuis utilisés. Elle p
 BP35 gagne le niveau 5 en **32 commandes et 19,08 s de temps actif** lors du rejeu depuis le niveau 1, avec le réglage de huit processus. Les 148 commandes relèvent de SIC seul. Jusqu’à la victoire du niveau 4, les 116 commandes, observations et images d’animation concordent avec la référence `26cb728e`. BP35 est le seul jeu ayant exécuté cette famille au cours de la campagne des niveaux 1 à 4.
 
 SIC transmet la preuve d’inversion de gravité entre niveaux et relit le terrain à l’arrivée. Il mémorise la sortie quand la caméra suit le détour vers le bas. Il utilise un second inverseur pour reprendre la direction de la sortie après avoir préparé un plafond sous le danger. Le contrôle TypeScript et les 50 tests ciblés passent. Un test vérifie que le plan protège d’abord le sprite lorsqu’une inversion immédiate le ferait traverser un danger.
+
+### GABA niveau 5 et placements alternatifs des charges
+
+GABA gagne le niveau 5 en **106 commandes et 29,62 s de temps actif**, avec le réglage de huit processus. Le rejeu part du niveau 1. Les commandes, observations et images d’animation des 239 premières commandes concordent avec `26cb728e`. Les 345 commandes relèvent de SIC seul. GABA est le seul jeu à avoir exécuté cette famille pendant la campagne des niveaux 1 à 4.
+
+SIC reconstitue la grille et vérifie les compatibilités charge–récepteur apprises aux niveaux précédents. Si la recherche ordinaire échoue, il examine davantage de placements et limite le nombre de positions du porteur essayées pour une même occupation du récepteur. Il peut ainsi comparer les livraisons qui laissent des cellules libres différentes pour les charges suivantes. Le contrôle TypeScript et les 48 tests ciblés passent.

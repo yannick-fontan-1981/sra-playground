@@ -187,8 +187,9 @@ function search(layout: Layout, start: Position): Move[] | null {
   return candidate.done ? null : candidate.value;
 }
 
-function searchByDelivery(layout: Layout, start: Position): Move[] | null {
+function searchByDelivery(layout: Layout, start: Position, varyPlacements = false): Move[] | null {
   const done = (1 << start.cargo.length) - 1, bestAt = new Map<string, number>(), budget = { remaining: 80_000 };
+  const alternativeLimit = varyPlacements ? 16 : 5;
   let best: Move[] | null = null;
   function visit(at: Position, prefix: Move[]) {
     // Each segment ends at a supported drop. Keep the resting carrier pose because
@@ -204,10 +205,19 @@ function searchByDelivery(layout: Layout, start: Position): Move[] | null {
     for (let subject = 0; subject < at.cargo.length; subject++) {
       if (at.delivered & (1 << subject)) continue;
       let alternatives = 0;
+      const triedPlacements = varyPlacements ? new Map<string, number>() : null;
       for (const segment of cargoRoutes(layout, at, true, budget, subject)) {
         if (prefix.length + segment.length >= (best?.length ?? Infinity)) break;
-        visit(segment.at(-1)!.next, [...prefix, ...segment]);
-        if (++alternatives >= 5) break;
+        const next = segment.at(-1)!.next;
+        if (triedPlacements) {
+          // A delivery can occupy different cells, even when it uses the same receiving pad.
+          const placement = next.cargo[subject]!.map(key).sort().join(';');
+          const poses = triedPlacements.get(placement) ?? 0;
+          if (poses >= 3) continue;
+          triedPlacements.set(placement, poses + 1);
+        }
+        visit(next, [...prefix, ...segment]);
+        if (++alternatives >= alternativeLimit) break;
       }
     }
   }
@@ -264,12 +274,15 @@ function initial(rows: NativeRows, epoch: number, witness: CargoWitness | null):
     return steps?.length ? [{ layout, steps }] : [];
   });
   if (!options.length && witness?.receivers?.length) {
-    options = measure(rows, !ordinary.length, witness.receivers)
-      .filter(layout => witness.pitch === layout.pitch && witness.actorColor === layout.actorColor && witness.core === layout.core)
-      .flatMap(layout => {
-        const steps = searchByDelivery(layout, layout.initial);
+    const bindingLayouts = measure(rows, !ordinary.length, witness.receivers)
+      .filter(layout => witness.pitch === layout.pitch && witness.actorColor === layout.actorColor && witness.core === layout.core);
+    for (const varyPlacements of [false, true]) {
+      options = bindingLayouts.flatMap(layout => {
+        const steps = searchByDelivery(layout, layout.initial, varyPlacements);
         return steps?.length ? [{ layout, steps }] : [];
       });
+      if (options.length) break;
+    }
   }
   if (options.length !== 1) return null;
   const { layout, steps } = options[0]!;
