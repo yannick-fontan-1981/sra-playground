@@ -6,13 +6,14 @@ import { bindTranslationLanding, maximumCommittedActions, type MeasuredLanding }
 
 type Translation = { delta: NativePoint; evidence: string };
 export type PanelWalker = { ink: number; floor: number; controls: Record<string, Translation>;
-  floorReturns?: Record<string, string>; contacts?: Record<string, { patch: string; evidence: string }> };
+  floorReturns?: Record<string, string>; contacts?: Record<string, { patch: string; evidence: string }>; field?: NativeBox;
+  tracked?: { box: NativeBox; patch: string } };
 export type PanelEffect = { command: NativeCommand; box: NativeBox; ink: number; evidence: string; affected?: NativeBox };
 export type PanelMarkerTrial = { key: string; marker: NativeBox; control: PanelEffect; link?: string; peer?: NativeBox };
 export type KnownPanelSource = { marker: NativeBox; command: string; evidence: string };
 export type PanelContact = { key: string; box: NativeBox };
 type RouteStep = { command: NativeCommand; from: NativeBox; to: NativeBox; landing: MeasuredLanding };
-type WalkProjection<T> = { target: T; route: RouteStep[]; evidence: string[] };
+type WalkProjection<T> = { target: T; route: RouteStep[]; evidence: string[]; field?: NativeBox };
 type TerrainReturn = { before: number[]; after: number[] | null; evidence: string };
 export type PanelTerrain = { command: NativeCommand; region: NativeBox; returns: TerrainReturn[] };
 export type PanelTerrainStep = { command: NativeCommand; actor: NativeBox; region: NativeBox; before: number[]; after: number[] };
@@ -45,9 +46,22 @@ export function matchingPanelMarker(rows: NativeRows, field: NativeBox, source: 
 }
 
 export function panelActor(walker: PanelWalker, rows: NativeRows, field: NativeBox): NativeBox | undefined {
+  field = walker.field ?? field;
+  if (walker.tracked && containsBox(field, walker.tracked.box)
+    && tile(rows, walker.tracked.box).join(',') === walker.tracked.patch) return walker.tracked.box;
   const candidates = geometricComponents(rows).filter(part => part.color === walker.ink && part.rectangular && part.area === 4
     && part.bbox[2] - part.bbox[0] === 1 && containsBox(field, part.bbox));
   return candidates.length === 1 ? candidates[0]!.bbox : undefined;
+}
+
+/** A partially covered cursor still reveals a departure and at least one newly occupied pixel. */
+export function confirmsPanelTranslation(walker: PanelWalker, before: NativeRows, after: NativeRows,
+  source: NativeBox, target: NativeBox) {
+  const departure = tile(before, source), uncovered = tile(after, source);
+  const landing = tile(before, target), occupied = tile(after, target);
+  return departure.some((ink, i) => ink === walker.ink && uncovered[i] !== walker.ink)
+    && occupied.some((ink, i) => ink === walker.ink && landing[i] !== walker.ink)
+    && occupied.every((ink, i) => ink === walker.ink || ink === landing[i]);
 }
 
 /** Calibrate a movement from an isolated rigid displacement and its uncovered floor. */
@@ -75,6 +89,22 @@ function supportEvidence(walker: PanelWalker, box: NativeBox, patch: ReturnType<
   return contact?.patch === patch.join(',') ? contact.evidence : false;
 }
 
+export function panelFootingEvidence(walker: PanelWalker, rows: NativeRows, box: NativeBox) {
+  return supportEvidence(walker, box, tile(rows, box));
+}
+
+export function reachablePanelFootings(walker: PanelWalker, rows: NativeRows, field: NativeBox, start: NativeBox,
+  supports: (box: NativeBox) => boolean = box => !!panelFootingEvidence(walker, rows, box)) {
+  const queue: NativeBox[] = [start], seen = new Set([place(start)]);
+  for (const box of queue) for (const { delta: [dx, dy] } of Object.values(walker.controls)) {
+    const next = footprint(box[0] + dx, box[1] + dy), key = place(next);
+    if (!containsBox(field, next) || seen.has(key)) continue;
+    seen.add(key);
+    if (supports(next)) queue.push(next);
+  }
+  return queue;
+}
+
 /** Only a witnessed translation can add support beyond the floor first measured. */
 export function learnPanelTerrain(walker: PanelWalker, field: NativeBox, fieldInk: number,
   command: string, before: NativeRows, after: NativeRows, evidence: string): PanelWalker {
@@ -83,9 +113,8 @@ export function learnPanelTerrain(walker: PanelWalker, field: NativeBox, fieldIn
   if (!source) return walker;
   const next = footprint(source[0] + motion.delta[0], source[1] + motion.delta[1]);
   const patch = tile(before, next);
-  if (!containsBox(field, next) || !tile(after, next).every(ink => ink === walker.ink)) return walker;
-  const moved = panelActor(walker, after, field);
-  if (!moved || !sameBox(moved, next)) return walker;
+  if (!containsBox(field, next) || !confirmsPanelTranslation(walker, before, after, source, next)) return walker;
+  walker = { ...walker, tracked: { box: next, patch: tile(after, next).join(',') } };
   const uncovered = tile(after, source);
   if (!supportEvidence(walker, source, uncovered)
     && uncovered.every(ink => ink !== undefined && ink !== fieldInk && ink !== walker.ink)) {
@@ -101,6 +130,8 @@ export function learnPanelTerrain(walker: PanelWalker, field: NativeBox, fieldIn
 
 function projectPanelWalk<T>(walker: PanelWalker, rows: NativeRows, field: NativeBox, inputs: readonly NativeCommand[], budget: number,
   targetAt: (box: NativeBox, patch: ReturnType<typeof tile>, walkable: boolean) => T | undefined): WalkProjection<T> | null {
+  if (walker.field) field = [Math.min(field[0], walker.field[0]), Math.min(field[1], walker.field[1]),
+    Math.max(field[2], walker.field[2]), Math.max(field[3], walker.field[3])];
   const actor = panelActor(walker, rows, field);
   if (!actor || budget < 1) return null;
   const moves = inputs.flatMap(command => {
@@ -145,15 +176,18 @@ function projectPanelWalk<T>(walker: PanelWalker, rows: NativeRows, field: Nativ
 /** Reach a visible candidate for a controlled comparison using only measured walk vectors and floor. */
 export function projectPanelMarker(walker: PanelWalker, rows: NativeRows, field: NativeBox, inputs: readonly NativeCommand[],
   controls: readonly PanelEffect[], excluded: readonly string[], remaining: number,
-  sources: readonly KnownPanelSource[] = []): WalkProjection<PanelMarkerTrial> | null {
+  sources: readonly KnownPanelSource[] = [], targetPeer?: NativeBox): WalkProjection<PanelMarkerTrial> | null {
   return projectPanelWalk(walker, rows, field, inputs, remaining - 1, (box, patch) => {
     const code = alternatingCode(patch);
     if (!code) return;
     for (const control of controls) {
       const key = panelMarkerTrialKey(control.command, box, code);
       if (excluded.includes(key)) continue;
-      const known = sources.find(source => source.command === observedCommandKey(control.command) && sameBox(source.marker, box));
-      const peer = known && matchingPanelMarker(rows, field, box, code);
+      const known = sources.find(source => source.command === observedCommandKey(control.command)
+        && (sameBox(source.marker, box) || panelMarkerCode(rows, source.marker) === code
+          && sameBox(matchingPanelMarker(rows, field, source.marker, code) ?? source.marker, box)));
+      const peer = known && (sameBox(known.marker, box) ? matchingPanelMarker(rows, field, box, code) : known.marker);
+      if (targetPeer && (!peer || !sameBox(peer, targetPeer))) continue;
       if (known && peer) return { key, marker: box, control, link: known.evidence, peer };
       if (patch.includes(control.ink)) return { key, marker: box, control };
     }
@@ -162,8 +196,18 @@ export function projectPanelMarker(walker: PanelWalker, rows: NativeRows, field:
 
 /** From a new landing, test the boundary where measured floor meets a visible object. */
 export function projectPanelContact(walker: PanelWalker, rows: NativeRows, field: NativeBox, fieldInk: number,
-  inputs: readonly NativeCommand[], excluded: readonly string[], remaining: number, broadenContact = false): WalkProjection<PanelContact> | null {
-  return projectPanelWalk(walker, rows, field, inputs, remaining, (box, patch, walkable) => {
+  inputs: readonly NativeCommand[], excluded: readonly string[], remaining: number,
+  broadenContact = false, expandFloor = false): WalkProjection<PanelContact> | null {
+  const board: NativeBox = [0, 0, rows[0]!.length - 1, rows.length - 1];
+  const actor = expandFloor ? panelActor(walker, rows, field) : undefined;
+  const reachable = actor ? reachablePanelFootings(walker, rows, board, actor) : [];
+  const horizontal = Math.max(0, ...Object.values(walker.controls).map(control => Math.abs(control.delta[0])));
+  const vertical = Math.max(0, ...Object.values(walker.controls).map(control => Math.abs(control.delta[1])));
+  const expanded = reachable.reduce<NativeBox>((area, box) => [
+    Math.max(board[0], Math.min(area[0], box[0] - horizontal)), Math.max(board[1], Math.min(area[1], box[1] - vertical)),
+    Math.min(board[2], Math.max(area[2], box[2] + horizontal)), Math.min(board[3], Math.max(area[3], box[3] + vertical)),
+  ], field);
+  const result = projectPanelWalk(walker, rows, expanded, inputs, remaining, (box, patch, walkable) => {
     if (walkable || patch.some(ink => ink === undefined || ink === fieldInk) || patch.every(ink => ink === walker.ink)
       || (!broadenContact && patch.includes(walker.ink))) return;
     const first = patch[0];
@@ -173,6 +217,7 @@ export function projectPanelContact(walker: PanelWalker, rows: NativeRows, field
     const key = `${place(box)}:${patch.join(',')}`;
     return excluded.includes(key) ? undefined : { box, key };
   });
+  return result && !sameBox(expanded, field) ? { ...result, field: expanded } : result;
 }
 
 export function canReachPanelMarker(walker: PanelWalker, rows: NativeRows, field: NativeBox, inputs: readonly NativeCommand[],
