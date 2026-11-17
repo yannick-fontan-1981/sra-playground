@@ -578,6 +578,14 @@ export function readNativeResolution(agent: {
     const marker = bounds(card?.marker), control = bounds(card?.control);
     if (marker) subjects.push({ label: 'Marker reached to vary the test conditions', box: marker });
     if (control && !region) subjects.push({ label: 'Panel control previously observed to change the board', box: control });
+    const contact = bounds(card?.contact);
+    if (contact) subjects.push({ label: 'Contact at the edge of the known floor', box: contact });
+    const animated = bounds(card?.animatedMechanism);
+    if (animated) {
+      const frames = Array.isArray(card?.animatedMechanismFrames) ? card.animatedMechanismFrames.filter(Number.isSafeInteger) : [];
+      subjects.push({ label: frames.length ? `Piece that reacted in frames ${frames.join(', ')}` : 'Piece that reacted during the earlier test',
+        box: animated });
+    }
   }
   if (situationCard && (family === trialRepeatedLinearControlsId || family === recheckDirectionalControlsId)) {
     const target = bounds(card?.addressedRegion);
