@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
-import { assessRetainedTransition, validateRetainedEmpiricalRule } from '../src/logos-engine/v6-transition-learning.ts';
+import { assessRetainedTransition, constructEmpiricalRule, validateEmpiricalRule, validateRetainedEmpiricalRule } from '../src/logos-engine/v6-transition-learning.ts';
 import { hydrateNativeState, splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { symbolicDigest } from '../src/logos-engine/v6-hash.ts';
 
@@ -79,6 +79,21 @@ for (const row of fixture.cases.filter((item: any) => ['validate_empirical_rule'
     assert.deepEqual(args, row.args, 'the retained prior and observed inputs are unchanged');
   });
 }
+
+test('repeated inapplicable returns retain the whole immutable rule and preserve detached validation', async () => {
+  const before = retainNativeJson({ observation_ref: 'before', entities: [] });
+  const after = retainNativeJson({ observation_ref: 'after', entities: [] });
+  const learned = await constructEmpiricalRule(before, after, { action_ref: 'ACTION1' });
+  const otherAction = { action_ref: 'ACTION2' };
+  const first = await validateRetainedEmpiricalRule(learned, before, after, otherAction);
+  assert.deepEqual(first.last_validation, { status: 'not_applicable' });
+  assert.equal(await validateRetainedEmpiricalRule(first, before, after, otherAction), first);
+
+  const detached = await validateEmpiricalRule(first, before, after, otherAction);
+  assert.deepEqual(detached, first);
+  assert.notEqual(detached, first);
+  assert.notEqual(detached.conditions, first.conditions);
+});
 
 test('incremental state encoding preserves canonical fragment identities and complete exports', () => {
   const branch = retainNativeJson({
