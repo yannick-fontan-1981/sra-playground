@@ -18,6 +18,7 @@ import { defaultRecoveryPack, isRecoveryStop } from './sic/active-recovery.ts';
 import { observeLs20Restart, recordPursuedObjective, type PursuedObjective } from './sic/recovery.ts';
 import ls20ReviewEvidence from './sic/ls20-review-evidence.json';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
+import { SINKING_STAR_CREDIT_HTML } from './games/sinking-star/credit.ts';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const fallbackPalette = [
@@ -138,6 +139,7 @@ app.innerHTML = `
                 <button class="primary-button" type="button" id="win-continue"><span id="win-continue-label">Restart from level 1</span>${icon('arrow')}</button>
               </div>
             </div>
+            <p id="board-source-credit" class="board-source-credit" hidden>${SINKING_STAR_CREDIT_HTML}</p>
           </div>
 
           <aside class="control-column minimal-control-column">
@@ -863,6 +865,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#game-code').textContent = game.code;
   element('#game-title').textContent = game.name;
   element('#game-meta').textContent = groupLabels[game.group];
+  element('#board-source-credit').hidden = game.group !== 'custom_4';
   element('#runtime-message').textContent = 'Loading game…';
   element('#selection-feedback').textContent = `${game.code} selected.`;
   canvas.setAttribute('aria-label', `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
