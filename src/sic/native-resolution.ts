@@ -1375,6 +1375,12 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    for (const [field, label] of [['patrols', 'Visible patrol position'], ['patrolForecast', 'Possible patrol position on the next move']] as const) {
+      if (Array.isArray(card?.[field])) for (const item of card[field]) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
+    }
   }
   if (situationCard && (family === coupledMotionId || family === verifyCoupledRouteId)) {
     for (const [field, label] of [['members', 'Controlled piece'], ['nextMembers', 'Projected position']] as const) {
