@@ -1,7 +1,44 @@
 import type { NativePoint } from '../logos-engine/v6-native-types.ts';
+import { fitOrbit } from '../logos-engine/v6-orbit-constraints.ts';
 
 const rays: readonly NativePoint[] = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
 const key = (point: NativePoint) => point.join(',');
+
+/** Fit simultaneous cycles only when each changing lattice component has one explanation. */
+export function fitDisjointSlotCycles(before: readonly number[], after: readonly number[], positions: readonly NativePoint[],
+  contours: readonly (readonly number[])[]): number[][] {
+  const pitches = ([0, 1] as const).map(axis => {
+    const values = [...new Set(positions.map(point => point[axis]))].sort((a, b) => a - b);
+    return Math.min(...values.slice(1).map((value, i) => value - values[i]!));
+  });
+  const [dx, dy] = pitches as [number, number];
+  const byPoint = new Map(positions.map((point, i) => [key(point), i]));
+  const visited = new Set<number>(), changing: Set<number>[] = [];
+  for (const [start] of positions.entries()) {
+    if (visited.has(start)) continue;
+    const component = new Set([start]);
+    for (const index of component) {
+      visited.add(index);
+      const [x, y] = positions[index]!;
+      const neighbors: NativePoint[] = [[x - dx, y], [x + dx, y], [x, y - dy], [x, y + dy]];
+      for (const point of neighbors) {
+        const next = byPoint.get(key(point));
+        if (next !== undefined) component.add(next);
+      }
+    }
+    if ([...component].some(index => before[index] !== after[index])) changing.push(component);
+  }
+  if (changing.length < 2) return [];
+  const composed = before.map((_, index) => index);
+  for (const component of changing) {
+    const scoped = before.map((value, index) => component.has(index) ? after[index]! : value);
+    const local = contours.filter(contour => contour.every(index => component.has(index)));
+    const options = fitOrbit(before, scoped, local);
+    if (options.length !== 1) return [];
+    for (const index of component) composed[index] = options[0]![index]!;
+  }
+  return [composed];
+}
 
 /** Repeated radial spacing supports independent shifts along the rings or along the rays. */
 export function radialSlotPermutations(positions: readonly NativePoint[], targets: readonly number[]) {

@@ -4,7 +4,7 @@ import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, Nativ
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
-import { projectionWithinLimit, radialSlotPermutations } from './slot-field-transforms.ts';
+import { fitDisjointSlotCycles, projectionWithinLimit, radialSlotPermutations } from './slot-field-transforms.ts';
 
 export const slotPermutationId = 'sic_slot_permutation';
 export const verifySlotPermutationId = 'sic_verify_slot_permutation';
@@ -109,7 +109,8 @@ function fitSlotPermutations(before: readonly number[], after: readonly number[]
   if (contour.length && !geometry.radial) return contour;
   geometry.radial ??= radialSlotPermutations(positions, targetSlots);
   const radial = geometry.radial.filter(permutation => permutation.every((source, i) => before[source] === after[i]));
-  return [...new Map([...contour, ...radial].map(permutation => [key(permutation), permutation])).values()];
+  const options = [...new Map([...contour, ...radial].map(permutation => [key(permutation), permutation])).values()];
+  return options.length ? options : fitDisjointSlotCycles(before, after, positions, geometry.rings);
 }
 
 function prioritizeTrials(tracks: readonly Track[], size: number, controls: ReturnType<typeof sortedControls>, models: State['models']) {
