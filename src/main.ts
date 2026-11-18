@@ -25,9 +25,12 @@ import { LEVEL_INFO as SS03_LEVEL_INFO } from '../experiments/sinking-star-ss03/
 import { PullTutorial } from '../experiments/sinking-star-ss03/src/tutorial.ts';
 import { LEVEL_INFO as SS04_LEVEL_INFO } from '../experiments/sinking-star-ss04/src/level-info.ts';
 import { lessonPrompt as wizardPrompt, observeLesson as observeWizardLesson, type WizardLesson } from '../experiments/sinking-star-ss04/src/tutorial.ts';
+import { LEVEL_INFO as SS05_LEVEL_INFO } from '../experiments/sinking-star-ss05/src/level-info.ts';
+import { lessonPrompt as bardPrompt, observeLesson as observeBardLesson, type BardLesson } from '../experiments/sinking-star-ss05/src/tutorial.ts';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
+const usesNativeManualControls = (code: string): boolean => code === 'SS05' || isDirectionalNativeGame(code);
 const fallbackPalette = [
   '#F3F2EB', '#C9CDC8', '#37404B', '#66707B', '#1B2028', '#11161C',
   '#614439', '#E7B9A3', '#F06B65', '#679DEB', '#63D5D6', '#F1CE62',
@@ -257,6 +260,45 @@ app.innerHTML = `
                   <p>Les monstres noirs marqués d’un X rouge restent immobiles. Ils peuvent être des cibles d’échange, peser sur un bouton et être déplacés par une presse.</p>
                   <p>Évite de terminer une action juste au-dessus, au-dessous, à gauche ou à droite d’un monstre. Un contact diagonal ne déclenche pas d’attaque.</p>
                   <p>Deux monstres côte à côte s’éliminent mutuellement. Vérifie les deux emplacements avant d’échanger : ta nouvelle position et celle du monstre.</p>
+                </div>
+              </details>
+              <p id="ss05-level-info" class="native-game-level-info" lang="fr" hidden><span id="ss05-source-label"></span> <a id="ss05-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+              <details id="ss05-tutorial" class="native-game-tutorial" lang="fr" open hidden>
+                <summary>Niveau 1 · L’atelier du chant</summary>
+                <div class="native-game-tutorial-content">
+                  <p id="ss05-lesson-next" aria-live="polite"></p>
+                  <ul>
+                    <li data-ss05-lesson="move">Avancer avec le Barde magenta.</li>
+                    <li data-ss05-lesson="song">Entraîner une caisse avec le chant.</li>
+                    <li data-ss05-lesson="anchor">Laisser un objet bloqué pour se replacer.</li>
+                    <li data-ss05-lesson="platform">Créer ou déplacer un appui sur l’eau.</li>
+                    <li data-ss05-lesson="mirror">Changer d’axe avec un miroir.</li>
+                    <li data-ss05-lesson="gate">Ouvrir un passage avec un bouton.</li>
+                  </ul>
+                  <p>Le chant accompagne chaque pas. Il entraîne les objets dans un carré de 5 × 5 cases autour du Barde, diagonales comprises. Un mur peut retenir un objet sans arrêter le chant.</p>
+                  <p>Une caisse dans l’eau devient un appui marron avec un X cyan. Le chant peut le faire glisser sur l’eau, mais ne peut pas le remonter sur le sol. L’appui sur lequel tu te trouves ou vas poser le pied reste en place pendant ton pas.</p>
+                </div>
+              </details>
+              <details id="ss05-mirror-help" class="native-game-tutorial" lang="fr" hidden>
+                <summary>Les reflets · Espace ou X</summary>
+                <div class="native-game-tutorial-content">
+                  <p>Espace, X ou le bouton Reflet active les miroirs sans chant. Sur chaque face blanche, le premier occupant d’un axe est envoyé à distance égale sur l’autre axe.</p>
+                  <p>Le + gris clair prévisualise l’arrivée du Barde. Le contour carré gris clair indique celle d’une caisse ou d’un monstre. Une arrivée occupée peut bloquer toute l’opération. Les appuis immergés restent en place.</p>
+                  <p>Une caisse reflétée dans l’eau devient un appui. Le Barde a besoin de sol ou d’un appui à l’arrivée.</p>
+                </div>
+              </details>
+              <details id="ss05-piston-help" class="native-game-tutorial" lang="fr" open hidden>
+                <summary>La porte qui pousse</summary>
+                <div class="native-game-tutorial-content">
+                  <p>Lorsqu’une porte apparaît, elle pousse la file dans le sens du chevron. Les boutons d’un même circuit portent un repère commun et doivent être occupés ensemble.</p>
+                  <p>Une caisse poussée dans l’eau forme un appui. Le Barde peut se noyer ou être écrasé. Z annule toute la séquence.</p>
+                </div>
+              </details>
+              <details id="ss05-monster-help" class="native-game-tutorial" lang="fr" hidden>
+                <summary>Guider les monstres</summary>
+                <div class="native-game-tutorial-content">
+                  <p>Les monstres noirs marqués d’un X rouge suivent le chant quand ils sont à portée. Ils peuvent peser sur un bouton, être reflétés et être déplacés par une presse.</p>
+                  <p>Les monstres attaquent les quatre cases voisines dans les directions cardinales. Deux monstres côte à côte s’éliminent mutuellement, chacun portant encore son attaque pendant cette action.</p>
                 </div>
               </details>
             </div>
@@ -499,12 +541,13 @@ if (!context) throw new Error('This browser does not support the 2D canvas.');
 context.imageSmoothingEnabled = false;
 const runtime = new BrowserGameRuntime();
 let observation: GameObservation | null = null;
-let mode: 'manual' | 'agent' = isDirectionalNativeGame(selectedGame.code) ? 'manual' : 'agent';
+let mode: 'manual' | 'agent' = usesNativeManualControls(selectedGame.code) ? 'manual' : 'agent';
 let busy = false;
 let interruptibleAnimation = false;
 const ss02Lessons = new Set<TutorialLesson>();
 const ss03Tutorial = new PullTutorial();
 const ss04Lessons = new Set<WizardLesson>();
+const ss05Lessons = new Set<BardLesson>();
 let loading = false;
 let failed = false;
 let selectionGeneration = 0;
@@ -563,7 +606,7 @@ function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: st
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent'
-    && (!isDirectionalNativeGame(selectedGame.code) || observation?.state === 'NOT_FINISHED'),
+    && (!usesNativeManualControls(selectedGame.code) || observation?.state === 'NOT_FINISHED'),
   resetLevel: async () => {
     const generation = selectionGeneration;
     busy = true;
@@ -817,17 +860,16 @@ function updateSs02Tutorial(): void {
   if (prompt.textContent !== text) prompt.textContent = text;
 }
 
-function updateNativeRoomHelp(game: 'ss03' | 'ss04', current: GameObservation | null): void {
-  const wizard = game === 'ss04';
-  const rooms = wizard ? SS04_LEVEL_INFO : SS03_LEVEL_INFO;
+function updateNativeRoomHelp(game: 'ss03' | 'ss04' | 'ss05', current: GameObservation | null): void {
+  const rooms = game === 'ss05' ? SS05_LEVEL_INFO : game === 'ss04' ? SS04_LEVEL_INFO : SS03_LEVEL_INFO;
   const info = current ? rooms[current.level - 1] : undefined;
   const tutorial = element(`#${game}-tutorial`);
   const link = element<HTMLAnchorElement>(`#${game}-source-link`);
   element(`#${game}-level-info`).hidden = !info;
   element(`#${game}-piston-help`).hidden = !info?.piston;
-  if (wizard) {
-    element('#ss04-mirror-help').hidden = !info;
-    element('#ss04-monster-help').hidden = !info;
+  if (game !== 'ss03') {
+    element(`#${game}-mirror-help`).hidden = !info;
+    element(`#${game}-monster-help`).hidden = !info;
   }
   tutorial.hidden = current?.level !== 1;
   if (!info || !current) return;
@@ -838,18 +880,18 @@ function updateNativeRoomHelp(game: 'ss03' | 'ss04', current: GameObservation | 
     link.textContent = info.puzzle ? `Voir l’énigme ${info.puzzle} de référence ↗` : 'Voir la source ↗';
   }
   const lessonAttribute = `data-${game}-lesson`;
-  const learned: ReadonlySet<string> = wizard ? ss04Lessons : ss03Tutorial.learned;
+  const learned: ReadonlySet<string> = game === 'ss05' ? ss05Lessons : game === 'ss04' ? ss04Lessons : ss03Tutorial.learned;
   for (const item of tutorial.querySelectorAll<HTMLElement>(`[${lessonAttribute}]`)) {
     item.classList.toggle('done', learned.has(item.getAttribute(lessonAttribute) ?? ''));
   }
   if (tutorial.hidden) return;
   const prompt = element(`#${game}-lesson-next`);
-  const text = wizard ? wizardPrompt(ss04Lessons) : ss03Tutorial.prompt(current.frame);
+  const text = game === 'ss05' ? bardPrompt(ss05Lessons) : game === 'ss04' ? wizardPrompt(ss04Lessons) : ss03Tutorial.prompt(current.frame);
   if (prompt.textContent !== text) prompt.textContent = text;
 }
 
 function hasNextLevel(current: GameObservation): boolean {
-  return current.level < current.levelCount && !(isDirectionalNativeGame(current.gameCode) && current.state === 'WIN');
+  return current.level < current.levelCount && !(usesNativeManualControls(current.gameCode) && current.state === 'WIN');
 }
 
 function updateInterface(): void {
@@ -891,10 +933,10 @@ function updateInterface(): void {
   canvas.setAttribute('aria-busy', String(busy || loading));
   canvas.tabIndex = enabled ? 0 : -1;
   if (selectedGame.code === 'SS02' && mode === 'manual') updateSs02Tutorial();
-  if (selectedGame.code === 'SS03' || selectedGame.code === 'SS04') {
+  if (selectedGame.code === 'SS03' || selectedGame.code === 'SS04' || selectedGame.code === 'SS05') {
     element('#native-defeat').hidden = !ready() || !lost;
     element<HTMLButtonElement>('#native-defeat-undo').disabled = !observation?.canUndo;
-    if (mode === 'manual') updateNativeRoomHelp(selectedGame.code === 'SS04' ? 'ss04' : 'ss03', observation);
+    if (mode === 'manual') updateNativeRoomHelp(selectedGame.code === 'SS05' ? 'ss05' : selectedGame.code === 'SS04' ? 'ss04' : 'ss03', observation);
   }
   updateAgentInterface();
 }
@@ -910,7 +952,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   url.searchParams.set('level', String(next.level));
   if (url.href !== window.location.href) window.history.replaceState(null, '', url);
   const frames = next.frames.length ? next.frames : [next.frame];
-  interruptibleAnimation = manualAction && isDirectionalNativeGame(next.gameCode) && frames.length > 1;
+  interruptibleAnimation = manualAction && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
   for (let i = 0; i < frames.length; i += 1) {
@@ -959,6 +1001,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
   if (before.gameCode === 'SS02' && control && control !== 'undo') ss02Lessons.clear();
   if (before.gameCode === 'SS03' && control) ss03Tutorial.reset(control === 'undo');
   if (before.gameCode === 'SS04' && control && control !== 'undo') ss04Lessons.clear();
+  if (before.gameCode === 'SS05' && control && control !== 'undo') ss05Lessons.clear();
   agent.invalidate('Manual play changed the observation. Start a fresh experiment when ready.');
   const generation = selectionGeneration;
   busy = true;
@@ -969,6 +1012,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS02' && action !== undefined) observeLesson(ss02Lessons, before, next, action);
     if (next.gameCode === 'SS03' && action !== undefined) ss03Tutorial.observe(before, next, action);
     if (next.gameCode === 'SS04' && action !== undefined) observeWizardLesson(ss04Lessons, before, next);
+    if (next.gameCode === 'SS05' && action !== undefined) observeBardLesson(ss05Lessons, before, next, action);
     const presenting = present(next, generation, action !== undefined);
     const presentation = presentationGeneration;
     await presenting;
@@ -1031,7 +1075,8 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   agent.invalidate('A new game observation is ready for native reasoning.');
   const game = getGameByCode(code) ?? defaultGame!;
   const directional = isDirectionalNativeGame(game.code);
-  const enteringDirectionalGame = directional && selectedGame.code !== game.code;
+  const bard = game.code === 'SS05';
+  const enteringNativeManualGame = usesNativeManualControls(game.code) && selectedGame.code !== game.code;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
   interruptibleAnimation = false;
@@ -1041,14 +1086,20 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#ss02-level-info').hidden = true;
   ss03Tutorial.reset();
   ss04Lessons.clear();
-  if (game.code === 'SS03' || game.code === 'SS04') {
+  ss05Lessons.clear();
+  if (game.code === 'SS03' || game.code === 'SS04' || bard) {
     const help = game.code.toLowerCase();
     element<HTMLDetailsElement>(`#${help}-tutorial`).open = true;
     element<HTMLDetailsElement>(`#${help}-piston-help`).open = true;
   }
   for (const id of ['ss03-tutorial', 'ss03-level-info', 'ss03-piston-help', 'ss04-tutorial', 'ss04-level-info',
-    'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'native-defeat']) element(`#${id}`).hidden = true;
-  element<HTMLButtonElement>('#space-button').hidden = directional;
+    'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
+    'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'native-defeat']) element(`#${id}`).hidden = true;
+  const primaryAction = element<HTMLButtonElement>('#space-button');
+  primaryAction.hidden = directional;
+  primaryAction.title = bard ? 'Reflet (Espace ou X)' : 'Space';
+  primaryAction.setAttribute('aria-label', bard ? primaryAction.title : 'Primary action (Space)');
+  element('#space-button span').textContent = bard ? 'Reflet' : 'Space';
   selectedGame = game;
   manualReturns = [];
   manualSequence = 0;
@@ -1065,13 +1116,15 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#selection-feedback').textContent = `${game.code} selected.`;
   const movement = game.code === 'SS04' ? 'swap with a visible crate or monster, or move one cell'
     : game.code === 'SS03' ? 'move or pull' : 'move or push';
-  canvas.setAttribute('aria-label', directional ? `${game.code} game board. Use the arrow keys to ${movement}.`
+  canvas.setAttribute('aria-label', bard ? 'Plateau SS05. Les flèches déplacent le Barde et déclenchent le chant. Espace ou X active les miroirs.'
+    : directional ? `${game.code} game board. Use the arrow keys to ${movement}.`
     : `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
-  element('#keyboard-help').textContent = directional
+  element('#keyboard-help').textContent = bard ? 'Flèches pour marcher et entraîner les objets proches. Espace ou X pour les reflets. Z pour annuler. R pour recommencer.'
+    : directional
     ? `Use the arrow keys to ${movement}. Z or Control Z to undo. R to reset the level.`
     : 'Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.';
   document.title = `SRA Playground · ${game.code} — Symbolic Reasoning Agent`;
-  setMode(enteringDirectionalGame ? 'manual' : mode);
+  setMode(enteringNativeManualGame ? 'manual' : mode);
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);
     url.searchParams.set('game', game.code);
@@ -1139,7 +1192,8 @@ canvas.addEventListener('click', (event: MouseEvent) => {
   focusCanvas();
 });
 canvas.addEventListener('keydown', (event: KeyboardEvent) => {
-  if (event.altKey || event.shiftKey) return;
+  const reflectionShortcut = selectedGame.code === 'SS05' && event.key.toLowerCase() === 'x';
+  if (event.altKey || (event.shiftKey && !reflectionShortcut)) return;
   if (!event.ctrlKey && !event.metaKey && event.key.toLowerCase() === 'c' && selectedGame.code === 'SS01') {
     event.preventDefault(); nextMerchant(); return;
   }
@@ -1155,7 +1209,7 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
     return;
   }
   const actions: Record<string, number> = { ArrowUp: 1, ArrowDown: 2, ArrowLeft: 3, ArrowRight: 4, ' ': 5 };
-  const action = actions[event.key];
+  const action = reflectionShortcut ? 5 : actions[event.key];
   if (action === undefined || (action === 5 && isDirectionalNativeGame(selectedGame.code))) return;
   event.preventDefault();
   perform(action);
