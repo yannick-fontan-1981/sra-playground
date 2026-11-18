@@ -2412,3 +2412,11 @@ Le rejeu de référence s'arrête après 104 clics. Les démonstrations établis
 Le premier essai de montée est interrompu et le départ est restauré. Dans les images du programme, une bande apparaît à la troisième instruction sur la zone où le déplacement prévoyait de poser la pièce. SIC associe les cellules de cette bande aux seules instructions où elle apparaît. À la commande 26, le détour atteint une première dalle. À la commande 34, le deuxième programme traverse la bande à la deuxième instruction et atteint la dalle opposée. Le dernier programme contourne le mur et atteint la cible.
 
 Le niveau 7 gagne en **40 clics et 15,27 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **94 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 134 commandes relèvent de SIC seul et le parcours s'arrête à la victoire. Empreinte chronologique `a86219035b1f6b97c67f5cd19003993a36a46853c91ecf8cc7830500896d0e9b`. TypeScript et les 67 tests ciblés passent.
+
+### VC33 niveau 7, combiner plusieurs passages autour d'un compartiment commun
+
+Le rejeu de référence s'arrête après 80 clics. La lecture de la grille détecte maintenant les paires de commandes le long de plusieurs séparateurs, puis distingue les supports à partir des cloisons visibles. Elle trouve cinq compartiments, huit commandes de transfert et trois portes. Un compartiment peut céder du liquide même si aucune porte ne permet à un marqueur de le rejoindre.
+
+La recherche tient compte des quantités et des emplacements des trois marqueurs. Elle conserve les étapes suivantes tant que chaque retour confirme le plan. Les clics 12, 24, 38 et 39 franchissent les portes. Au clic 24, deux marqueurs échangent leurs compartiments tandis que les quantités restent identiques. Le dernier transfert aligne les trois hauteurs.
+
+Le niveau 7 gagne en **49 clics et 19,13 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **143 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 192 commandes relèvent de SIC seul. L'empreinte chronologique est `e12ebb632fd8ac8edf61338c721aa5cf37f52f4b9fdbbf0cd4ec7f82d90518e9`. TypeScript et huit tests ciblés passent.
