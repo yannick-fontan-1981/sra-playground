@@ -59,12 +59,16 @@ function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows, mini
 
 export function measureCompartments(rows: NativeRows): CompartmentLayout | null {
   const parts = geometricComponents(rows);
+  const complete = (layout: CompartmentLayout, side?: number, limit?: number) => {
+    const separated = includeOpenPartitions(layout, rows, side, limit);
+    return completeCompartmentLattice(separated, rows, parts) ?? separated;
+  };
   const rectangles = parts.filter(({ bbox: [l, t, r, b] }) =>
     l > 0 && t > 0 && r < (rows[0]?.length ?? 0) - 1 && b < rows.length - 1
     && r - l >= 7 && b - t >= 7);
   const interior = rectangles.filter(({ bbox: [l, t, r, b], area }) => area * 5 >= (r - l + 1) * (b - t + 1) * 4);
   const layouts = compartmentLayouts(rows, parts, interior);
-  if (layouts.length) return layouts.length === 1 ? includeOpenPartitions(layouts[0]!, rows) : null;
+  if (layouts.length) return layouts.length === 1 ? complete(layouts[0]!) : null;
   // Occupants can hide part of the floor. Recover a candidate only when its corners
   // are visible and the same gate markers still connect the whole layout.
   const occupied = rectangles.filter(part => {
@@ -75,13 +79,61 @@ export function measureCompartments(rows: NativeRows): CompartmentLayout | null 
       && area * 4 >= (r - l + 1) * (b - t + 1) * 3;
   });
   const recovered = compartmentLayouts(rows, parts, occupied);
-  if (recovered.length) return recovered.length === 1 ? includeOpenPartitions(recovered[0]!, rows) : null;
+  if (recovered.length) return recovered.length === 1 ? complete(recovered[0]!) : null;
   const clipped = parts.filter(({ bbox: [l, t, r, b], area }) =>
     l > 0 && t > 0 && r === (rows[0]?.length ?? 0) - 2 && b < rows.length - 1
     && r - l >= 4 && r - l < 7 && b - t >= 7 && area * 5 >= (r - l + 1) * (b - t + 1) * 4);
   if (!clipped.length) return null;
   const extended = compartmentLayouts(rows, parts, [...occupied, ...clipped], 32);
-  return extended.length === 1 ? includeOpenPartitions(extended[0]!, rows, 5, 32) : null;
+  return extended.length === 1 ? complete(extended[0]!, 5, 32) : null;
+}
+
+function completeCompartmentLattice(layout: CompartmentLayout, rows: NativeRows,
+  parts: ReturnType<typeof geometricComponents>): CompartmentLayout | null {
+  const { floor } = layout;
+  const regions = parts.filter(({ color, bbox: [l, t, r, b], area }) => color === floor && l > 0 && t > 0
+    && r < rows[0]!.length - 1 && b < rows.length - 1 && r - l >= 4 && b - t >= 4
+    && area * 3 >= (r - l + 1) * (b - t + 1) * 2);
+  const spans = (axis: 0 | 1) => {
+    const groups = new Map<string, { start: number; end: number; positions: Set<number> }>();
+    for (const { bbox } of regions) {
+      const start = bbox[axis], end = bbox[axis + 2]!, key = start + ',' + end;
+      const span = groups.get(key) ?? { start, end, positions: new Set<number>() };
+      span.positions.add(bbox[1 - axis]!);
+      groups.set(key, span);
+    }
+    return [...groups.values()].filter(span => span.positions.size >= 2).sort((a, b) => a.start - b.start);
+  };
+  const columns = spans(0), bands = spans(1), count = columns.length * bands.length;
+  const consecutive = (values: ReturnType<typeof spans>) => values.length > 1
+    && values.slice(1).every(({ start }, i) => start === values[i]!.end + 2);
+  if (count <= layout.rooms.length || count > 32 || !consecutive(columns) || !consecutive(bands)) return null;
+  const rooms: Room[] = bands.flatMap(({ start: t, end: b }, row) => columns.map(({ start: l, end: r }, col) =>
+    ({ box: [l, t, r, b], index: row * columns.length + col })));
+  if (rooms.some(({ box: [l, t, r, b] }) => {
+    const visible = rows.slice(t, b + 1).flatMap(row => row.slice(l, r + 1)).filter(ink => ink === floor).length;
+    return visible * 3 < (r - l + 1) * (b - t + 1) * 2;
+  })) return null;
+  const at = ({ point: [x, y], axis: [dx, dy] }: Gate, i: number) => rows[y + i * dx]?.[x + i * dy];
+  const styles = layout.gates.flatMap(gate => {
+    const mark = at(gate, 0), rim = at(gate, 1);
+    return mark !== undefined && rim !== undefined && mark !== floor && rim !== floor && mark !== rim
+      && [-2, -1, 2].every(i => at(gate, i) === rim) ? [{ mark, rim }] : [];
+  });
+  if (!styles.length) return null;
+  const gates = rooms.flatMap(({ box: [l, t, r, b], index }) => {
+    const col = index % columns.length, row = Math.floor(index / columns.length);
+    const scan = (start: number, end: number, axis: NativePoint, next: number) =>
+      Array.from({ length: end - start + 1 }, (_, i): Gate => ({
+        point: axis[0] ? [r + 1, start + i] : [start + i, b + 1], axis, rooms: [index, next],
+      })).filter(gate => styles.some(({ mark, rim }) => at(gate, 0) === mark && [-2, -1, 1, 2].every(i => at(gate, i) === rim))
+        || layout.gates.some(prior => prior.point.every((value, i) => value === gate.point[i])
+          && prior.axis.every((value, i) => value === gate.axis[i])));
+    return [...(col + 1 < columns.length ? scan(t, b, [1, 0], index + 1) : []),
+      ...(row + 1 < bands.length ? scan(l, r, [0, 1], index + columns.length) : [])];
+  });
+  if (gates.length > rooms.length * 2 || gateRegion(0, gates).size !== rooms.length) return null;
+  return { floor, rooms, gates };
 }
 
 function compartmentLayouts(rows: NativeRows, parts: ReturnType<typeof geometricComponents>, interior: ReturnType<typeof geometricComponents>,
