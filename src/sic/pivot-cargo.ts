@@ -203,7 +203,7 @@ function searchByDelivery(layout: Layout, start: Position, varyPlacements = fals
     if (prefix.length >= (bestAt.get(signature) ?? Infinity)) return;
     bestAt.set(signature, prefix.length);
     for (let subject = 0; subject < at.cargo.length; subject++) {
-      if (at.delivered & (1 << subject)) continue;
+      if (at.delivered & (1 << subject) || at.held >= 0 && at.held !== subject) continue;
       let alternatives = 0;
       const triedPlacements = varyPlacements ? new Map<string, number>() : null;
       for (const segment of cargoRoutes(layout, at, true, budget, subject)) {
@@ -223,6 +223,51 @@ function searchByDelivery(layout: Layout, start: Position, varyPlacements = fals
   }
   visit(start, []);
   return best;
+}
+
+function observeAttachmentSplit(layout: Layout, at: Position, move: Move, before: NativeRows, after: NativeRows) {
+  if (move.intent !== 'attach' || at.held >= 0) return null;
+  const { subject } = move, cargo = at.cargo[subject]!, free = layout.freeColors[subject]!;
+  if (cargo.length < 2) return null;
+  const cells = (rows: NativeRows, point: NativePoint) => {
+    const [x, y] = tileBox(layout, point);
+    return patch(rows, [x, y], layout.pitch);
+  };
+  const coreIndex = Math.floor(layout.pitch / 2) * (layout.pitch + 1);
+  const changed: NativePoint[] = [], resting: NativePoint[] = [], palettes = new Set<number>();
+  for (const point of cargo) {
+    const first = cells(before, point), second = cells(after, point);
+    const ink = second[0];
+    if (first.length !== layout.pitch ** 2 || second.length !== first.length
+      || first[coreIndex] !== layout.core || first.some((value, i) => i !== coreIndex && value !== free)
+      || ink === undefined || ink === layout.actorColor
+      || second[coreIndex] !== layout.core || second.some((value, i) => i !== coreIndex && value !== ink)) return null;
+    if (ink === free) resting.push(point);
+    else {
+      palettes.add(ink);
+      changed.push(point);
+    }
+  }
+  if (!resting.length || !changed.length || palettes.size !== 1 || groups(changed).length !== 1
+    || !changed.some(point => directions.some(([, x, y]) => same(point, shift(at.actor, x, y))))) return null;
+  const subjectTiles = new Set(cargo.map(key));
+  for (const tile of layout.floor) {
+    if (subjectTiles.has(tile)) continue;
+    const point = tile.split(',').map(Number) as [number, number];
+    const first = cells(before, point), second = cells(after, point);
+    if (first.some((value, i) => second[i] !== value)) return null;
+  }
+  const parts = groups(resting);
+  const nextCargo = [...at.cargo.map((tiles, i) => i === subject ? changed : tiles), ...parts];
+  if (nextCargo.length >= 31) return null;
+  const next: Position = { ...at, held: subject, cargo: nextCargo };
+  const refined: Layout = {
+    ...layout, initial: next,
+    destinations: [...layout.destinations, ...parts.map(() => layout.destinations[subject]!)],
+    freeColors: [...layout.freeColors, ...parts.map(() => free)],
+    ...(layout.receiverColors ? { receiverColors: [...layout.receiverColors, ...parts.map(() => layout.receiverColors![subject]!)] } : {}),
+  };
+  return { layout: refined, next };
 }
 
 function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): boolean {
@@ -388,17 +433,20 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'cargo_step_bound' : 'cargo_observation_changed' };
     },
-    after(proposal, index, before, after, _first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const { local } = proposal, move = local.steps[index]!;
       const at = local.steps[index - 1]?.next ?? local.at;
       const matched = witnessed(second, local.layout, at, move);
+      if (!matched && observeAttachmentSplit(local.layout, at, move, first, second)) {
+        return { matched: true, seal_prefix: true, reason: 'attachment_distinguishes_touching_loads' };
+      }
       return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
         reason: matched ? { move: 'cargo_translation_confirmed', attach: 'cargo_attachment_confirmed',
           turn: 'cargo_rotation_confirmed', drop: 'cargo_delivery_confirmed' }[move.intent] : 'cargo_projection_contradicted' };
     },
-    record(before, after, _action, _first, second, proposal, index) {
+    record(before, after, _action, first, second, proposal, index) {
       const local = index > 0 && state?.epoch === proposal.local.epoch ? state : proposal.local;
       const move = local.steps[0]!;
       if (!learns && after.levels_completed > before.levels_completed && local.moves && move.intent === 'drop'
@@ -411,6 +459,13 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const matched = witnessed(second, local.layout, local.at, move);
+      const split = !matched ? observeAttachmentSplit(local.layout, local.at, move, first, second) : null;
+      if (split) {
+        const steps = search(split.layout, split.next) ?? searchByDelivery(split.layout, split.next, true);
+        state = { ...local, layout: split.layout, at: split.next, steps: steps ?? [], failed: !steps,
+          interactions: [...new Set<Intent>([...local.interactions, 'attach'])], refs: [...local.refs.slice(-5), after.observation_ref] };
+        return { events: [], reviewEvidence: 'Only the adjacent portion changed to the carried color. The rest of the touching tiles stayed in place.' };
+      }
       state = { ...local, failed: !matched, at: matched ? move.next : local.at, steps: matched ? local.steps.slice(1) : local.steps,
         moves: local.moves || matched && move.intent === 'move',
         interactions: matched && !local.interactions.includes(move.intent) ? [...local.interactions, move.intent] : local.interactions,
