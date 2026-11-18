@@ -6,10 +6,10 @@ export const LEVEL_INFO = [
     "piston": false
   },
   {
-    "puzzle": 18,
-    "label": "Adaptation pour un Voleur solo · Énigme 18.",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-18",
-    "piston": false
+    "puzzle": 0,
+    "label": "Création originale · Difficulté moyenne · Une porte qui pousse.",
+    "url": "",
+    "piston": true
   },
   {
     "puzzle": 6,

@@ -7,14 +7,14 @@ Blob Git source : `3b8768a5152c34e0f572e7e66251dfadb4cb6d1d`.
 
 Témoins originaux : https://github.com/joric/ootss/blob/main/data/solutions.json ; blob `25d772c370f51d44632c2e2c4cf337e1b6ea9ab1`.
 
-Les niveaux 1 et 7 sont originaux. Les niveaux 3 et 6 conservent intégralement les cellules et objets de leur transcription PuzzleScript. Les niveaux 2, 4 et 5 adaptent des salles coopératives pour un seul personnage. Le niveau 8 reprend la grille de Heroes and Light, énigme 2, selon le relevé décrit plus bas. Les adaptations ne sont pas présentées comme des reprises exactes des captures du jeu commercial. Le guide français fournit les correspondances et idées ; les cellules viennent du fichier PuzzleScript identifié ci-dessus.
+Les niveaux 1, 2 et 7 sont originaux. Les niveaux 3 et 6 conservent intégralement les cellules et objets de leur transcription PuzzleScript. Les niveaux 4 et 5 adaptent des salles coopératives pour un seul personnage. Le niveau 8 reprend la grille de Heroes and Light, énigme 2, selon le relevé décrit plus bas. Les adaptations ne sont pas présentées comme des reprises exactes des captures du jeu commercial. Le guide français fournit les correspondances et idées ; les cellules viennent du fichier PuzzleScript identifié ci-dessus.
 
 ## Correspondances
 
 | SS03 | Titre | Énigme du guide | Transcription | Nature |
 |---|---|---:|---|---|
 | 1 | L’atelier du Voleur | — | — | Création originale |
-| 2 | Le triple verrou | Hauling 18 | `heroes1_18` | Adaptation solo, ancien niveau 7 |
+| 2 | La presse latérale | — | — | Création originale, difficulté moyenne |
 | 3 | Les deux entrepôts | 6 | `heroes1_5_v2` | Grille conservée |
 | 4 | Le relais des deux terrasses | 14 | `heroes1_13_v2` | Adaptation solo |
 | 5 | Les alcôves de la cathédrale | 15 | `heroes1_12_v2_alt` | Adaptation solo |
@@ -26,7 +26,7 @@ Les niveaux 1 et 7 sont originaux. Les niveaux 3 et 6 conservent intégralement 
 
 La règle du Voleur est celle du guide et de la transcription : une seule caisse adjacente suit automatiquement un déplacement qui s’en éloigne. Les transcriptions brutes de référence, le solveur et les témoins de résolution restent hors du fichier HTML jouable.
 
-Conversion commune : `*` → `o` (caisse), `{` → `b` (bouton), `[` → `D` (porte), `G` → `g` (destination). La palette SRA remplace les couleurs et sprites d’origine. Les deux transcriptions conservées utilisent déjà `T` comme Voleur. Les niveaux 1 à 6 gardent un circuit AND commun et le refus atomique d’une fermeture sur un acteur. Les niveaux 7 et 8 utilisent des circuits indépendants et les portes qui poussent décrites dans `specification.md`. Les anciennes règles de destruction du fichier PuzzleScript ne servent pas de référence au nouveau moteur piston.
+Conversion commune : `*` → `o` (caisse), `{` → `b` (bouton), `[` → `D` (porte), `G` → `g` (destination). La palette SRA remplace les couleurs et sprites d’origine. Les deux transcriptions conservées utilisent déjà `T` comme Voleur. Les niveaux 1, 3, 4, 5 et 6 gardent un circuit AND commun et le refus atomique d’une fermeture sur un acteur. Les niveaux 2, 7 et 8 utilisent des circuits indépendants et les portes qui poussent décrites dans `specification.md`. Les anciennes règles de destruction du fichier PuzzleScript ne servent pas de référence au nouveau moteur piston.
 
 ## Détail des adaptations
 
@@ -51,19 +51,15 @@ Sortir deux caisses de renfoncements opposés puis tenir deux plaques pour rejoi
 - Une cellule de contournement est ouverte à chaque alcôve : (6,2) et (6,7).
 - La plaque (5,4) passe en (5,3) pour éviter une traction forcée lors de l’entrée dans la porte ; celle de (11,4) passe en (8,4), car la bordure empêchait d’y tirer une caisse.
 
-### Niveau 2 · Énigme 18 — ancien niveau 7
+### Niveau 2 · La presse latérale — création originale
 
-Descendre trois caisses des chambres hautes puis organiser les trois plaques sans bloquer la remontée.
+La salle de 11 × 9 cellules contient deux caisses, une presse orientée vers l’est, son bouton de commande et deux boutons alignés qui ouvrent la porte de sortie. Le pilier oblige à préparer les positions de traction avant de charger la presse. La case terminale ne peut pas être remplie par traction.
 
-- Le Voleur sur la cible (5,1) devient l’unique personnage et sa cible est retirée ; la cible du Magicien (7,1) est également retirée.
-- Le Magicien (7,1) et le Guerrier (6,2) deviennent deux caisses : trois charges mobiles pour les trois plaques.
-- La porte gauche (2,4) devient un passage permanent afin de pouvoir extraire la caisse de la chambre gauche.
-- Les quatre cellules (4,5), (8,5), (4,7), (8,7) sont ouvertes pour contourner une caisse laissée sur une plaque.
-- La plaque droite se décale de (10,6) à (9,6), pour pouvoir monter vers la porte sans arracher automatiquement sa caisse. Les dispositifs violets de la transcription utilisent la palette rose de la série.
+La recherche complète d’états trouve un parcours de 27 directions, huit tractions et deux poussées de presse. Sans piston, les 6 766 états atteignables sont épuisés sans solution ; sans traction, les 40 états atteignables le sont aussi. Les deux caisses sont conservées. La spécification et ces contrôles sont conservés dans `reference/level2-design.json`.
 
 ## Vérification
 
-Les témoins des niveaux 3, 6 et 8 viennent des solutions communautaires ci-dessus. Ceux des créations originales et des trois adaptations ont été trouvés par recherche, puis tous les témoins sont rejoués avec le moteur TypeScript final. Ils prouvent la solvabilité, sans garantie de longueur minimale. `validation/levels-report.json` publie les résultats, dimensions et empreintes des cartes et des témoins.
+Les témoins des niveaux 3, 6 et 8 viennent des solutions communautaires ci-dessus. Ceux des créations originales et des deux adaptations ont été trouvés par recherche, puis tous les témoins sont rejoués avec le moteur TypeScript final. Ils prouvent la solvabilité, sans garantie de longueur minimale. `validation/levels-report.json` publie les résultats, dimensions et empreintes des cartes et des témoins.
 
 ## Niveau 8 · Heroes and Light, énigme 2
 
