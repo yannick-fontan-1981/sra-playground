@@ -517,15 +517,17 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .minimal-play-area .canvas-stage{width:min(100%,384px);margin:0;background:#040608;box-shadow:0 0 0 5px #265b9b,0 0 0 8px #14283f}
 .board-source-credit{max-width:48ch;margin:18px 0 0;color:var(--muted);font-size:16px;line-height:1.5;text-align:center}
 .board-source-credit a{color:#b2d5ff;text-decoration:underline;text-underline-offset:3px}
-.ss02-level-info{margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
-.ss02-tutorial{margin-top:12px;border:1px solid #38516d;border-radius:4px;background:#132136}
-.ss02-tutorial summary{padding:10px;cursor:pointer;color:var(--ink);font-weight:650;font-size:14px}
-.ss02-tutorial-content{padding:0 10px 10px;color:var(--muted);font-size:14px;line-height:1.5}
-.ss02-tutorial-content p,.ss02-tutorial-content ul{margin:0}
-.ss02-tutorial-content ul{list-style:none;padding:0;margin-block:9px}
-.ss02-tutorial-content li{position:relative;padding-left:16px;margin-block:5px}
-.ss02-tutorial-content li::before{content:'○';position:absolute;left:0}
-.ss02-tutorial-content li.done::before{content:'✓';color:#83cdae}
+.native-game-level-info{margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.native-game-level-info a{color:#b2d5ff;text-decoration:underline}
+.native-game-tutorial{margin-top:12px;border:1px solid #38516d;border-radius:4px;background:#132136}
+.native-game-tutorial summary{padding:10px;cursor:pointer;color:var(--ink);font-weight:650;font-size:14px}
+.native-game-tutorial-content{padding:0 10px 10px;color:var(--muted);font-size:14px;line-height:1.5}
+.native-game-tutorial-content p,.native-game-tutorial-content ul{margin:0}
+.native-game-tutorial-content p+p{margin-top:8px}
+.native-game-tutorial-content ul{list-style:none;padding:0;margin-block:9px}
+.native-game-tutorial-content li{position:relative;padding-left:16px;margin-block:5px}
+.native-game-tutorial-content li::before{content:'○';position:absolute;left:0}
+.native-game-tutorial-content li.done::before{content:'✓';color:#83cdae}
 .canvas-stage canvas:focus-visible{outline:2px solid var(--yellow);outline-offset:7px}
 .minimal-play-area #fullscreen-button{top:12px;right:12px;background:#285e9e;border-color:#8ab9f3;color:#f5f9ff;border-radius:3px}
 .minimal-play-area #fullscreen-button:hover{background:#3779bf;border-color:#b5d6ff}

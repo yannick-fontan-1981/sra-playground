@@ -21,8 +21,11 @@ import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/cata
 import { SINKING_STAR_CREDIT_HTML } from './games/sinking-star/credit.ts';
 import { LEVEL_INFO as SS02_LEVEL_INFO } from '../experiments/sinking-star-ss02/src/level-info.ts';
 import { lessonPrompt, observeLesson, type TutorialLesson } from '../experiments/sinking-star-ss02/src/tutorial.ts';
+import { LEVEL_INFO as SS03_LEVEL_INFO } from '../experiments/sinking-star-ss03/src/level-info.ts';
+import { PullTutorial, type PullLesson } from '../experiments/sinking-star-ss03/src/tutorial.ts';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
+const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03';
 const fallbackPalette = [
   '#F3F2EB', '#C9CDC8', '#37404B', '#66707B', '#1B2028', '#11161C',
   '#614439', '#E7B9A3', '#F06B65', '#679DEB', '#63D5D6', '#F1CE62',
@@ -140,6 +143,13 @@ app.innerHTML = `
                 <div class="win-check">${icon('check')}</div><h3 id="win-title">VICTORY</h3>
                 <button class="primary-button" type="button" id="win-continue"><span id="win-continue-label">Restart from level 1</span>${icon('arrow')}</button>
               </div>
+              <div class="game-overlay" id="ss03-defeat" aria-labelledby="ss03-defeat-title" hidden>
+                <h3 id="ss03-defeat-title">GAME OVER</h3>
+                <div class="utility-controls">
+                  <button type="button" id="ss03-defeat-undo" class="utility-button">Undo</button>
+                  <button type="button" id="ss03-defeat-reset" class="utility-button">Reset level</button>
+                </div>
+              </div>
             </div>
             <p id="board-source-credit" class="board-source-credit" hidden>${SINKING_STAR_CREDIT_HTML}</p>
           </div>
@@ -171,10 +181,10 @@ app.innerHTML = `
                 </div>
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
-              <p id="ss02-level-info" class="ss02-level-info" lang="fr" hidden></p>
-              <details id="ss02-tutorial" class="ss02-tutorial" lang="fr" open hidden>
+              <p id="ss02-level-info" class="native-game-level-info" lang="fr" hidden></p>
+              <details id="ss02-tutorial" class="native-game-tutorial" lang="fr" open hidden>
                 <summary>Niveau 1 · Tutoriel guidé</summary>
-                <div class="ss02-tutorial-content">
+                <div class="native-game-tutorial-content">
                   <p id="ss02-lesson-next" aria-live="polite"></p>
                   <ul>
                     <li data-ss02-lesson="move">Se déplacer avec les quatre flèches.</li>
@@ -183,6 +193,29 @@ app.innerHTML = `
                     <li data-ss02-lesson="gate">Maintenir les deux + roses pour ouvrir la porte.</li>
                   </ul>
                   <p>Rejoins ensuite le contour jaune. Une pierre coincée ? Z annule, R recommence. Si la file est bloquée, la flèche ne la déplace pas.</p>
+                </div>
+              </details>
+              <p id="ss03-level-info" class="native-game-level-info" lang="fr" hidden><span id="ss03-source-label"></span> <a id="ss03-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+              <details id="ss03-tutorial" class="native-game-tutorial" lang="fr" open hidden>
+                <summary>Niveau 1 · L’atelier du Voleur</summary>
+                <div class="native-game-tutorial-content">
+                  <p id="ss03-lesson-next" aria-live="polite"></p>
+                  <ul>
+                    <li data-ss03-lesson="move">Marcher avec les quatre flèches.</li>
+                    <li data-ss03-lesson="pull">S’éloigner d’une caisse pour la tirer d’une case.</li>
+                    <li data-ss03-lesson="release">Partir sur le côté pour laisser la caisse en place.</li>
+                    <li data-ss03-lesson="place">Contourner une caisse et l’amener sur un + rose.</li>
+                    <li data-ss03-lesson="gate">Occuper les trois boutons pour ouvrir la porte.</li>
+                  </ul>
+                  <p>Le Voleur ne pousse pas. Prévois la case où tu vas te tenir après chaque traction. Pour laisser une caisse sur son bouton, évite de repartir en ligne droite en l’entraînant. Z annule ; R recommence.</p>
+                </div>
+              </details>
+              <details id="ss03-piston-help" class="native-game-tutorial" lang="fr" open hidden>
+                <summary>La porte qui pousse</summary>
+                <div class="native-game-tutorial-content">
+                  <p>Lorsqu’une porte apparaît, elle pousse la caisse ou le Voleur sur sa case, dans le sens du chevron. Une file de caisses avance ensemble.</p>
+                  <p>Le petit repère coloré relie chaque bouton à ses portes. Si plusieurs boutons portent le même repère, ils doivent être occupés ensemble. Selon la porte, leur activation l’ouvre ou la ferme.</p>
+                  <p>Un déplacement imposé par une porte ne tire pas la caisse derrière le Voleur. Si la poussée est bloquée, l’occupant sur la porte est écrasé. Z permet de revenir en arrière.</p>
                 </div>
               </details>
             </div>
@@ -425,10 +458,11 @@ if (!context) throw new Error('This browser does not support the 2D canvas.');
 context.imageSmoothingEnabled = false;
 const runtime = new BrowserGameRuntime();
 let observation: GameObservation | null = null;
-let mode: 'manual' | 'agent' = selectedGame.code === 'SS02' ? 'manual' : 'agent';
+let mode: 'manual' | 'agent' = isDirectionalNativeGame(selectedGame.code) ? 'manual' : 'agent';
 let busy = false;
-let ss02ManualAnimation = false;
+let interruptibleAnimation = false;
 const ss02Lessons = new Set<TutorialLesson>();
+const ss03Tutorial = new PullTutorial();
 let loading = false;
 let failed = false;
 let selectionGeneration = 0;
@@ -486,7 +520,8 @@ function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: st
 }
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
-  canDispatch: () => ready() && mode === 'agent',
+  canDispatch: () => ready() && mode === 'agent'
+    && (observation?.gameCode !== 'SS03' || observation.state === 'NOT_FINISHED'),
   resetLevel: async () => {
     const generation = selectionGeneration;
     busy = true;
@@ -740,10 +775,36 @@ function updateSs02Tutorial(): void {
   if (prompt.textContent !== text) prompt.textContent = text;
 }
 
+function updateSs03Help(current: GameObservation | null): void {
+  const info = current ? SS03_LEVEL_INFO[current.level - 1] : undefined;
+  const tutorial = element('#ss03-tutorial');
+  const link = element<HTMLAnchorElement>('#ss03-source-link');
+  element('#ss03-level-info').hidden = !info;
+  element('#ss03-piston-help').hidden = !info?.piston;
+  tutorial.hidden = current?.level !== 1;
+  if (!info || !current) return;
+  element('#ss03-source-label').textContent = info.label;
+  link.hidden = !info.url;
+  if (info.url) {
+    link.href = info.url;
+    link.textContent = `Voir l’énigme ${info.puzzle} de référence ↗`;
+  }
+  if (tutorial.hidden) return;
+  for (const item of tutorial.querySelectorAll<HTMLElement>('[data-ss03-lesson]')) {
+    item.classList.toggle('done', ss03Tutorial.learned.has(item.dataset.ss03Lesson as PullLesson));
+  }
+  const prompt = element('#ss03-lesson-next');
+  const text = ss03Tutorial.prompt(current.frame);
+  if (prompt.textContent !== text) prompt.textContent = text;
+}
+
+function hasNextLevel(current: GameObservation): boolean {
+  return current.level < current.levelCount && !(isDirectionalNativeGame(current.gameCode) && current.state === 'WIN');
+}
+
 function updateInterface(): void {
   const enabled = ready() && mode === 'manual';
-  const canNavigate = mode === 'manual' && (enabled || ss02ManualAnimation);
-  const isSs02 = selectedGame.code === 'SS02';
+  const canNavigate = mode === 'manual' && (enabled || interruptibleAnimation);
   const complete = observation?.state === 'WIN' || observation?.state === 'LEVEL_COMPLETE';
   const lost = observation?.state === 'GAME_OVER' || observation?.state === 'GAMEOVER';
   const available = new Set(observation?.availableActionIds ?? []);
@@ -766,12 +827,11 @@ function updateInterface(): void {
   }
   levelSelect.disabled = !canNavigate || levelCount < 2;
   if (levelCount && observation) levelSelect.value = String(observation.level);
-  const hasNextLevel = Boolean(observation && observation.level < observation.levelCount
-    && !(isSs02 && observation.state === 'WIN'));
-  const victory = complete && !hasNextLevel;
+  const nextLevel = Boolean(observation && hasNextLevel(observation));
+  const victory = complete && !nextLevel;
   element('#win-overlay').hidden = !ready() || !complete || (mode === 'agent' && !victory);
   element('#win-title').textContent = victory ? 'VICTORY' : 'Level complete';
-  element('#win-continue-label').textContent = hasNextLevel ? 'Next level' : 'Restart from level 1';
+  element('#win-continue-label').textContent = nextLevel ? 'Next level' : 'Restart from level 1';
   element<HTMLButtonElement>('#win-continue').disabled = !ready() || Boolean(agentState?.busy);
   element('#runtime-overlay').hidden = !loading && !failed;
   element('#runtime-spinner').hidden = !loading;
@@ -780,7 +840,12 @@ function updateInterface(): void {
   element('#game-availability').classList.toggle('is-pending', loading || failed);
   canvas.setAttribute('aria-busy', String(busy || loading));
   canvas.tabIndex = enabled ? 0 : -1;
-  if (isSs02 && mode === 'manual') updateSs02Tutorial();
+  if (selectedGame.code === 'SS02' && mode === 'manual') updateSs02Tutorial();
+  if (selectedGame.code === 'SS03') {
+    element('#ss03-defeat').hidden = !ready() || !lost;
+    element<HTMLButtonElement>('#ss03-defeat-undo').disabled = !observation?.canUndo;
+    if (mode === 'manual') updateSs03Help(observation);
+  }
   updateAgentInterface();
 }
 
@@ -795,7 +860,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   url.searchParams.set('level', String(next.level));
   if (url.href !== window.location.href) window.history.replaceState(null, '', url);
   const frames = next.frames.length ? next.frames : [next.frame];
-  ss02ManualAnimation = manualAction && next.gameCode === 'SS02' && frames.length > 1;
+  interruptibleAnimation = manualAction && isDirectionalNativeGame(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
   for (let i = 0; i < frames.length; i += 1) {
@@ -808,18 +873,18 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   }
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);
-  ss02ManualAnimation = false;
+  interruptibleAnimation = false;
   busy = false;
   agent.refresh();
   updateInterface();
   if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent =
-    next.level >= next.levelCount || (next.gameCode === 'SS02' && next.state === 'WIN') ? 'VICTORY' : `Level ${next.level} complete.`;
+    hasNextLevel(next) ? `Level ${next.level} complete.` : 'VICTORY';
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
 }
 
 function showFailure(error: unknown, generation: number): void {
   if (generation !== selectionGeneration) return;
-  ss02ManualAnimation = false;
+  interruptibleAnimation = false;
   busy = false;
   loading = false;
   failed = true;
@@ -835,13 +900,14 @@ async function run(operation: () => Promise<GameObservation>, options: {
   control?: 'undo' | 'reset' | 'restart' | 'selectLevel';
 } = {}): Promise<void> {
   const { announcement, action, control } = options;
-  if (mode !== 'manual' || (!ready() && !(control && ss02ManualAnimation))) return;
+  if (mode !== 'manual' || (!ready() && !(control && interruptibleAnimation))) return;
   const before = observation!;
-  if (ss02ManualAnimation) {
+  if (interruptibleAnimation) {
     presentationGeneration += 1;
-    ss02ManualAnimation = false;
+    interruptibleAnimation = false;
   }
   if (before.gameCode === 'SS02' && control && control !== 'undo') ss02Lessons.clear();
+  if (before.gameCode === 'SS03' && control) ss03Tutorial.reset(control === 'undo');
   agent.invalidate('Manual play changed the observation. Start a fresh experiment when ready.');
   const generation = selectionGeneration;
   busy = true;
@@ -850,6 +916,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     const next = await operation();
     if (generation !== selectionGeneration) return;
     if (next.gameCode === 'SS02' && action !== undefined) observeLesson(ss02Lessons, before, next, action);
+    if (next.gameCode === 'SS03' && action !== undefined) ss03Tutorial.observe(before, next, action);
     const presenting = present(next, generation, action !== undefined);
     const presentation = presentationGeneration;
     await presenting;
@@ -911,15 +978,22 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
 async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
   agent.invalidate('A new game observation is ready for native reasoning.');
   const game = getGameByCode(code) ?? defaultGame!;
-  const enteringSs02 = game.code === 'SS02' && selectedGame.code !== game.code;
+  const directional = isDirectionalNativeGame(game.code);
+  const enteringDirectionalGame = directional && selectedGame.code !== game.code;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
-  ss02ManualAnimation = false;
+  interruptibleAnimation = false;
   ss02Lessons.clear();
   if (game.code === 'SS02') element<HTMLDetailsElement>('#ss02-tutorial').open = true;
   element('#ss02-tutorial').hidden = true;
   element('#ss02-level-info').hidden = true;
-  element<HTMLButtonElement>('#space-button').hidden = game.code === 'SS02';
+  ss03Tutorial.reset();
+  if (game.code === 'SS03') {
+    element<HTMLDetailsElement>('#ss03-tutorial').open = true;
+    element<HTMLDetailsElement>('#ss03-piston-help').open = true;
+  }
+  for (const id of ['ss03-tutorial', 'ss03-level-info', 'ss03-piston-help', 'ss03-defeat']) element(`#${id}`).hidden = true;
+  element<HTMLButtonElement>('#space-button').hidden = directional;
   selectedGame = game;
   manualReturns = [];
   manualSequence = 0;
@@ -934,13 +1008,14 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#board-source-credit').hidden = game.group !== 'custom_4';
   element('#runtime-message').textContent = 'Loading game…';
   element('#selection-feedback').textContent = `${game.code} selected.`;
-  canvas.setAttribute('aria-label', game.code === 'SS02' ? 'SS02 game board. Use the arrow keys to move and push.'
+  const movement = game.code === 'SS03' ? 'pull' : 'push';
+  canvas.setAttribute('aria-label', directional ? `${game.code} game board. Use the arrow keys to move and ${movement}.`
     : `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
-  element('#keyboard-help').textContent = game.code === 'SS02'
-    ? 'Use the arrow keys to move or push. Z or Control Z to undo. R to reset the level.'
+  element('#keyboard-help').textContent = directional
+    ? `Use the arrow keys to move or ${movement}. Z or Control Z to undo. R to reset the level.`
     : 'Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.';
   document.title = `SRA Playground · ${game.code} — Symbolic Reasoning Agent`;
-  setMode(enteringSs02 ? 'manual' : mode);
+  setMode(enteringDirectionalGame ? 'manual' : mode);
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);
     url.searchParams.set('game', game.code);
@@ -1025,7 +1100,7 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
   }
   const actions: Record<string, number> = { ArrowUp: 1, ArrowDown: 2, ArrowLeft: 3, ArrowRight: 4, ' ': 5 };
   const action = actions[event.key];
-  if (action === undefined || (action === 5 && selectedGame.code === 'SS02')) return;
+  if (action === undefined || (action === 5 && isDirectionalNativeGame(selectedGame.code))) return;
   event.preventDefault();
   perform(action);
 });
@@ -1033,6 +1108,8 @@ element('#merchant-button').addEventListener('click', () => { nextMerchant(); fo
 element('#undo-button').addEventListener('click', () => { undo(); focusCanvas(); });
 element('#reset-button').addEventListener('click', () => { reset(); focusCanvas(); });
 element('#restart-button').addEventListener('click', () => { restart(); focusCanvas(); });
+element('#ss03-defeat-undo').addEventListener('click', () => { setMode('manual'); undo(); focusCanvas(); });
+element('#ss03-defeat-reset').addEventListener('click', () => { setMode('manual'); reset(); focusCanvas(); });
 for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) {
   button.addEventListener('click', () => { perform(Number(button.dataset.action)); focusCanvas(); });
 }
@@ -1045,7 +1122,7 @@ element<HTMLSelectElement>('#level-select').addEventListener('change', event => 
 element('#win-continue').addEventListener('click', () => {
   if (!observation || !ready() || agentState?.busy) return;
   if (mode === 'agent') setMode('manual');
-  if (observation.level < observation.levelCount && !(observation.gameCode === 'SS02' && observation.state === 'WIN')) {
+  if (hasNextLevel(observation)) {
     const level = observation.level + 1;
     void run(() => runtime.selectLevel(level), { control: 'selectLevel', announcement: `Level ${level} selected.` });
   } else restart();

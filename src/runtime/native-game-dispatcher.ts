@@ -31,6 +31,11 @@ export function createGameDispatcher(loadLegacy: () => Promise<GameBackend>, loa
             backend = createSs02Backend();
             break;
           }
+          case 'SS03': {
+            const { createSs03Backend } = await import('../games/sinking-star-ss03.ts');
+            backend = createSs03Backend();
+            break;
+          }
           default:
             backend = await (legacy ??= loadLegacy().catch(error => { legacy = undefined; throw error; }));
         }
