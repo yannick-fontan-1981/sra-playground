@@ -78,24 +78,40 @@ function portalExit(target: Cell, portals: readonly PortalPair[] = []) {
 }
 
 function measureColorGoal(rows: NativeRows, scene: ReductionScene): ColorGoal | null {
-  const swatches = geometricComponents(rows).filter(part => {
-    const [l, t, r, b] = part.bbox, { pitch, origin: [, top] } = scene;
+  const components = geometricComponents(rows), { pitch, origin: [, top] } = scene;
+  const swatches = components.filter(part => {
+    const [l, t, r, b] = part.bbox;
     if (!part.rectangular || l < 1 || t < 1 || r + 1 >= rows[0]!.length || b + 1 >= top
       || r - l + 1 <= 2 * pitch || b - t + 1 >= pitch) return false;
     const edge = [...rows[t - 1]!.slice(l - 1, r + 2), ...rows[b + 1]!.slice(l - 1, r + 2),
       ...rows.slice(t, b + 1).flatMap(row => [row[l - 1], row[r + 1]])];
     return new Set(edge).size === 1 && edge[0] !== part.color;
   });
-  if (swatches.length !== 1) return null;
-  const { color, bbox: swatch } = swatches[0]!;
-  const terrain = [...scene.cells].filter(([address, patch]) => !scene.bodies.has(address)
-    && patch.flat().includes(color) && new Set(patch.flat()).size > 2
-    && scene.mask.some(([r, c]) => patch[r + 1]![c + 1] === color)
-    && scene.mask.some(([r, c]) => patch[r + 1]![c + 1] !== color));
   const ranks = [...new Set([...scene.bodies.values()].map(body => body[1]))];
-  if (terrain.length !== 1 || ranks.length !== 1 || !scene.templates[ranks[0]!]?.every((bit: number) => bit === 0)) return null;
-  const [address, empty] = terrain[0]!;
-  return { color, swatch, cell: JSON.parse(address) as Cell, empty, rank: ranks[0]! };
+  if (ranks.length !== 1 || !scene.templates[ranks[0]!]?.every((bit: number) => bit === 0)) return null;
+  const rank = ranks[0]!;
+  const match = ({ color, bbox: swatch }: (typeof components)[number], requiresTintedCorners: boolean): ColorGoal[] =>
+    [...scene.cells].flatMap(([address, empty]) => {
+      if (scene.bodies.has(address) || new Set(empty.flat()).size <= 2) return [];
+      const marks = scene.mask.map(([r, c]) => empty[r + 1]![c + 1] === color);
+      if (!marks.some(Boolean) || marks.every(Boolean)) return [];
+      if (requiresTintedCorners && ![1, pitch - 2].every(r => [1, pitch - 2].every(c => empty[r]![c] === color))) return [];
+      return [{ color, swatch, cell: JSON.parse(address) as Cell, empty, rank }];
+    });
+  if (swatches.length > 1) return null;
+  if (swatches.length === 1) {
+    const goals = match(swatches[0]!, false);
+    if (goals.length === 1) return goals[0]!;
+  }
+  const framed = components.filter(({ rectangular, bbox: [l, t, r, b], color }) => {
+    if (!rectangular || l < 1 || t < 1 || r + 1 >= rows[0]!.length || b + 1 >= top
+      || r - l + 1 >= pitch || b - t + 1 < 2 || b - t + 1 >= pitch) return false;
+    const rails = [...rows[t - 1]!.slice(l - 1, r + 2), ...rows[b + 1]!.slice(l - 1, r + 2)];
+    const fill = rows.slice(t, b + 1).flatMap(row => [row[l - 1], row[r + 1]]);
+    return new Set(rails).size === 1 && new Set(fill).size === 1
+      && rails[0] !== fill[0] && color !== fill[0] && color !== rails[0];
+  }).flatMap(part => match(part, true));
+  return framed.length === 1 ? framed[0]! : null;
 }
 
 async function readCaptureScene(rows: NativeRows, state: State): Promise<ReductionScene | null> {
@@ -270,7 +286,8 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       if (!scene) return null;
       const portals = prior?.portals ?? adopted?.scene.portals ?? (!prior ? measurePortals(scene) : []);
       if (!prior && !adopted) removePortalMarkers(scene, portals);
-      if (scene.bodies.size < 2 || scene.bodies.size > 8) return null;
+      const populationLimit = portals.length ? 12 : 8;
+      if (scene.bodies.size < 2 || scene.bodies.size > populationLimit) return null;
       const previous = transfer?.epoch === observation.level_epoch && transfer.pitch === scene.pitch && equal(transfer.mask, scene.mask) ? transfer : null;
       const ranks = [...new Set([...scene.bodies.values()].map(body => body[1]))];
       const rayRanks = previous && ranks.some(rank => previous.jumps[rank]?.length) ? ranks.filter(rank => !previous.jumps[rank]?.length) : [];
@@ -285,6 +302,7 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       const before = packed(scene.bodies);
       const attemptKey = (target: Cell) => key([before, local.focus, target]);
       const route = Object.keys(local.jumps).length ? captureRoute(scene, local, exposed, remaining) : null;
+      if (scene.bodies.size > 8 && !route) return null;
       const offered = local.focus && exposed.find(target => !local.tried.includes(attemptKey(target)));
       const pending = cells(scene.bodies.keys()).sort((a, b) => a[1] - b[1] || a[0] - b[0])
         .find(target => !equal(target, local.focus) && !local.tried.includes(attemptKey(target)));
