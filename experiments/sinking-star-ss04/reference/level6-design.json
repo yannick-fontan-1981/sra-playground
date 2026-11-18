@@ -1,0 +1,202 @@
+{
+  "spec": {
+    "id": "SS04-06",
+    "title": "Les deux relais",
+    "rows": [
+      ".W.~~~~~~~~~~~~..g",
+      "....~~~~~~~~~~~...",
+      ".b.~~~~~~~~~.~~.o~",
+      "..o.~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~.b.~~~~~.~~~~~",
+      "~~~~.........~~~~~",
+      "~~~.....o....~~~~~",
+      "~~~~......o..~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 3,
+          "y": 7
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 2
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 1,
+            "y": 2
+          },
+          {
+            "x": 5,
+            "y": 5
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 17,
+          "y": 0
+        },
+        "circuit": "sortie",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "solution": {
+    "status": "solved",
+    "states": 467679,
+    "expanded": 430323,
+    "ms": 8340.617436,
+    "actions": [
+      2,
+      2,
+      2,
+      4,
+      1,
+      3,
+      2,
+      4,
+      4,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      1,
+      1,
+      3,
+      3,
+      3,
+      3,
+      1,
+      3,
+      2,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      1,
+      1,
+      1,
+      4
+    ]
+  },
+  "metrics": {
+    "actions": 35,
+    "swaps": 6,
+    "reflectedSwaps": 2,
+    "monsterSwaps": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "completed": true,
+  "route": "DDDRULDRRDDLLLRUULLLLULDRRRRRRRUUUR",
+  "noReflections": {
+    "status": "unsolvable",
+    "states": 182,
+    "expanded": 182,
+    "ms": 4.9293109999998705
+  },
+  "reflectionTrace": [
+    {
+      "actionIndex": 10,
+      "from": {
+        "x": 3,
+        "y": 3
+      },
+      "to": {
+        "x": 8,
+        "y": 7
+      },
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 7
+          },
+          "facing": "NE"
+        }
+      ]
+    },
+    {
+      "actionIndex": 32,
+      "from": {
+        "x": 12,
+        "y": 8
+      },
+      "to": {
+        "x": 16,
+        "y": 2
+      },
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 2
+          },
+          "facing": "SE"
+        }
+      ]
+    }
+  ],
+  "individualMirrorAblations": [
+    {
+      "at": {
+        "x": 3,
+        "y": 7
+      },
+      "result": {
+        "status": "unsolvable",
+        "states": 182,
+        "expanded": 182,
+        "ms": 8.130103999999996
+      }
+    },
+    {
+      "at": {
+        "x": 12,
+        "y": 2
+      },
+      "result": {
+        "status": "unsolvable",
+        "states": 65838,
+        "expanded": 65838,
+        "ms": 1225.3135320000001
+      }
+    }
+  ],
+  "provenance": {
+    "source": "wizard_mirror_intro",
+    "sourceGuide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+    "kind": "adaptation",
+    "changes": [
+      "55 floor cells and the three-island footprints retained from the extracted initial source map. Original single Wizard, source stone, button, goal and two mirror cells retained.",
+      "Three relay crates added at (2,3),(8,7),(10,8). Second pressure plate added at (5,5); both plates must stay occupied for the exit.",
+      "Mirrors fixed and restricted to reflecting the Wizard sight; no global X reflection. NE lower-left mirror and SE upper-right mirror chosen for this adaptation.",
+      "Source hedge barriers not recreated where exporter did not establish their logical cells; water occupies unrecognized terrain.",
+      "Exit gate shares goal cell as in source. Only the standing Wizard must reach the goal."
+    ],
+    "claims": "BFS found a 35-direction solution and individual black-wall mirror ablations establish that both reflections are necessary in this adaptation; not an exact reproduction of source rules."
+  }
+}

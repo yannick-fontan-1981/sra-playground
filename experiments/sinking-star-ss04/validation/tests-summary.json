@@ -1,0 +1,16 @@
+{
+  "game": "SS04",
+  "version": "0.1.0",
+  "typeScriptBuild": "passed",
+  "engineAndAuthorTests": {
+    "passed": 42,
+    "failed": 0
+  },
+  "witnessActions": 398,
+  "allEightSolved": true,
+  "blockedActions": 0,
+  "deaths": 0,
+  "uiDomChecks": 11,
+  "visualBrowserTest": false,
+  "pixelRenderInspection": "Eight initial engine frames inspected"
+}

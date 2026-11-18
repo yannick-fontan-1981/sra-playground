@@ -1,0 +1,337 @@
+{
+  "game": "SS04",
+  "version": "0.1.0",
+  "levels": [
+    {
+      "level": 1,
+      "id": "SS04-01",
+      "title": "L’atelier des échanges",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Atelier guidé : échange, miroir et pont créé par une presse.",
+        "url": "",
+        "piston": true
+      },
+      "dimensions": [
+        15,
+        11
+      ],
+      "floorCells": 45,
+      "waterCells": 117,
+      "initialStones": 2,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "buttons": 2,
+      "presses": 2,
+      "actions": 34,
+      "swaps": 3,
+      "reflectedSwaps": 1,
+      "monsterSwaps": 0,
+      "pistonPushes": 1,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 38
+      },
+      "mapSha256": "2ef6c674b5e592f70b76964c4d4297a65c20f032e884623e35cfee123567744d",
+      "witnessSha256": "1cd4a1f97d6147fe0f67f6a7848d56fb0bad6ccf669fd3525cc9323957672b68",
+      "observationsSha256": "e685f192b6558b1e4dfc3bfca71792ca2437016a061a1a24ad1eca991ec739f6",
+      "mirrorRequired": {
+        "verified": true,
+        "states": 1521
+      },
+      "pressRequired": {
+        "verified": true,
+        "states": 1480
+      },
+      "platformRequired": {
+        "verified": true,
+        "states": 1480
+      }
+    },
+    {
+      "level": 2,
+      "id": "SS04-02",
+      "title": "Le convoyeur des trois salles",
+      "source": {
+        "puzzle": 10,
+        "label": "Grille transcrite · Heroes of Hauling · Énigme 10.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-10",
+        "piston": false
+      },
+      "dimensions": [
+        13,
+        9
+      ],
+      "floorCells": 61,
+      "waterCells": 0,
+      "initialStones": 1,
+      "initialMonsters": 0,
+      "mirrors": 0,
+      "buttons": 1,
+      "presses": 0,
+      "actions": 54,
+      "swaps": 5,
+      "reflectedSwaps": 0,
+      "monsterSwaps": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 50
+      },
+      "mapSha256": "635c48abeea880c980669a053832050df61df3dafe67b09523deb5e4a1a4f56f",
+      "witnessSha256": "8c4df530705cd2f5d955645eeb762e2562652bce2f56fa9c356da550c0a20e93",
+      "observationsSha256": "ba8cda444937a8c558e900087b3907c1bdec14d154516b0f0743bd37b4c1cf2b"
+    },
+    {
+      "level": 3,
+      "id": "SS04-03",
+      "title": "L’échiquier des neuf blocs",
+      "source": {
+        "puzzle": 11,
+        "label": "Grille transcrite · Heroes of Hauling · Énigme 11.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11",
+        "piston": false
+      },
+      "dimensions": [
+        13,
+        9
+      ],
+      "floorCells": 59,
+      "waterCells": 0,
+      "initialStones": 9,
+      "initialMonsters": 0,
+      "mirrors": 0,
+      "buttons": 1,
+      "presses": 0,
+      "actions": 17,
+      "swaps": 5,
+      "reflectedSwaps": 0,
+      "monsterSwaps": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 41
+      },
+      "mapSha256": "1e12c7dafdf968f04e49ecc4d605bc76f94e38166d70aab306839e1508061412",
+      "witnessSha256": "794b08627ed56360ef0cec74d22b93a47a4b1d0c7b8a4a636b0b2c48b2720c9c",
+      "observationsSha256": "34be73e4f509a60e73612011bd91247cc42e9e57b9eda2a991d9dc048a4de976"
+    },
+    {
+      "level": 4,
+      "id": "SS04-04",
+      "title": "La galerie des sentinelles",
+      "source": {
+        "puzzle": 4,
+        "label": "Grille transcrite · Heroes 2: Monsters · Énigme 4.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-4",
+        "piston": false
+      },
+      "dimensions": [
+        14,
+        13
+      ],
+      "floorCells": 90,
+      "waterCells": 0,
+      "initialStones": 19,
+      "initialMonsters": 15,
+      "mirrors": 0,
+      "buttons": 0,
+      "presses": 0,
+      "actions": 36,
+      "swaps": 17,
+      "reflectedSwaps": 0,
+      "monsterSwaps": 5,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 6
+      },
+      "mapSha256": "e5ca9d10c3f4615822a4aeb27ce8c2056713fec12a9e1841f5506137a92c3d3b",
+      "witnessSha256": "9117495c8e2d674fb084ed69eeadcf51d067d796b5de2eac5cf1a94773763c01",
+      "observationsSha256": "5ef8249147679358de90e0b628f89095ea86894eee12300d48d2a93e99fd630b"
+    },
+    {
+      "level": 5,
+      "id": "SS04-05",
+      "title": "Le long détour des îlots",
+      "source": {
+        "puzzle": 0,
+        "label": "Grille transcrite · a_wiz_out_of_water · Source ouverte de Joric.",
+        "url": "https://github.com/joric/ootss/blob/main/scripts/ootss.pz",
+        "piston": false
+      },
+      "dimensions": [
+        18,
+        14
+      ],
+      "floorCells": 70,
+      "waterCells": 182,
+      "initialStones": 1,
+      "initialMonsters": 0,
+      "mirrors": 0,
+      "buttons": 1,
+      "presses": 0,
+      "actions": 79,
+      "swaps": 8,
+      "reflectedSwaps": 0,
+      "monsterSwaps": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 61
+      },
+      "mapSha256": "893cdcd70a966cfe51f00fe84098543d08c9862eb7820b4ff36593f201227a07",
+      "witnessSha256": "202cd716543070d9670615dc992d020583719317b32524542ab66f6ea727dfce",
+      "observationsSha256": "e2dc7e4c30bee4c486728c2279459e9d8a496557d49f48bdae140c2aaf4d9394"
+    },
+    {
+      "level": 6,
+      "id": "SS04-06",
+      "title": "Les deux relais",
+      "source": {
+        "puzzle": 30,
+        "label": "Adaptation · Heroes and Mirrors · Énigme 30 : deux miroirs fixes et des blocs relais.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+        "piston": true
+      },
+      "dimensions": [
+        18,
+        9
+      ],
+      "floorCells": 55,
+      "waterCells": 107,
+      "initialStones": 4,
+      "initialMonsters": 0,
+      "mirrors": 2,
+      "buttons": 2,
+      "presses": 1,
+      "actions": 35,
+      "swaps": 6,
+      "reflectedSwaps": 2,
+      "monsterSwaps": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 12
+      },
+      "mapSha256": "d9cacdc9bcae6a23fd248eeddf24cedf746e8495bd4805b8a045d4fb123bf3bd",
+      "witnessSha256": "9426e66db15a1a967590ebd8cc8033479c80bf6785d7074ad665375199a40c05",
+      "observationsSha256": "ec85df66880960622363d98e62bf833664f1168a2d3e660d378a8f92383efa63"
+    },
+    {
+      "level": 7,
+      "id": "SS04-07",
+      "title": "Les deux digues",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Deux écluses, des appuis et un monstre à utiliser comme poids.",
+        "url": "",
+        "piston": true
+      },
+      "dimensions": [
+        17,
+        14
+      ],
+      "floorCells": 145,
+      "waterCells": 14,
+      "initialStones": 3,
+      "initialMonsters": 1,
+      "mirrors": 1,
+      "buttons": 4,
+      "presses": 3,
+      "actions": 79,
+      "swaps": 6,
+      "reflectedSwaps": 1,
+      "monsterSwaps": 1,
+      "pistonPushes": 2,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 63
+      },
+      "mapSha256": "0dae76738b0da98817c065fc9008532947f0f920013ffb8f787891429fd75322",
+      "witnessSha256": "fccc341b50ae88d1a8dd9244a46d8dc28242fad2862d423cf5c30913a24d1c73",
+      "observationsSha256": "c17d16a820620e755f29ef47c34e3aac276ee65f213dc99439aac141e85d0ce9"
+    },
+    {
+      "level": 8,
+      "id": "SS04-08",
+      "title": "La citadelle des deux presses",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Les mécanismes du Magicien combinés.",
+        "url": "",
+        "piston": true
+      },
+      "dimensions": [
+        19,
+        17
+      ],
+      "floorCells": 97,
+      "waterCells": 155,
+      "initialStones": 4,
+      "initialMonsters": 2,
+      "mirrors": 2,
+      "buttons": 5,
+      "presses": 4,
+      "actions": 64,
+      "swaps": 5,
+      "reflectedSwaps": 1,
+      "monsterSwaps": 2,
+      "pistonPushes": 2,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "solved": true,
+      "exchangesRequired": {
+        "verified": true,
+        "states": 63
+      },
+      "mapSha256": "8c9cbc9c5dab2abd580781920670b0c2bdd316163daa1b5692ddefa4362bd983",
+      "witnessSha256": "45cbe04ddcd9d4b4ce3b36ca740f3c299361dd5551b6c4caaea8e4494f4cc191",
+      "observationsSha256": "f025c4217fd7aa62e9fd38dea6b88e485d511ee88faa0478afe90eef244d4c71"
+    }
+  ],
+  "totalActions": 398,
+  "totalSwaps": 55,
+  "totalReflectedSwaps": 5,
+  "totalMonsterSwaps": 8,
+  "totalPistonStrokes": 5,
+  "totalPlatformsCreated": 4,
+  "success": true
+}

@@ -1,0 +1,119 @@
+{
+  "spec": {
+    "id": "SS04-01",
+    "title": "L’atelier des échanges",
+    "rows": [
+      "~~~~~~~~~~~~~~~",
+      "~~~~~~~~.~~~o~~",
+      "~......~~~~~D~~",
+      "~.b.#..~~~~~.g~",
+      "~...#.D~b~~~~~~",
+      "~...#..~~~~~~~~",
+      "~..o...~~~~~~~~",
+      "~.W....~~~~~~~~",
+      "~......~~~~~~~~",
+      "~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 1
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 3
+          }
+        ]
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 4
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 4
+        },
+        "circuit": "presse",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 2
+        },
+        "circuit": "sortie",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "status": "solved",
+  "states": 1525,
+  "expanded": 1525,
+  "ms": 42.725756000000004,
+  "actions": [
+    4,
+    4,
+    1,
+    4,
+    4,
+    3,
+    2,
+    4,
+    4,
+    1,
+    1,
+    1,
+    4,
+    2,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    3,
+    1,
+    4,
+    4,
+    4,
+    2,
+    2,
+    4,
+    4,
+    4,
+    1,
+    2,
+    2,
+    4
+  ],
+  "metrics": {
+    "actions": 34,
+    "swaps": 3,
+    "reflectedSwaps": 1,
+    "monsterSwaps": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  }
+}
