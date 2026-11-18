@@ -2450,3 +2450,9 @@ Le rejeu de référence se termine en défaite après 254 commandes. La commande
 SIC compare le retour au modèle où les cases de la glissière sont fermées aux cubes. Cette nouvelle projection reproduit les positions mesurées. Il abandonne le reste du plan, recalcule à partir du plateau courant et vérifie les 45 commandes restantes. Le cube commun finit à l'intersection et contribue aux deux ordres.
 
 Le niveau 7 gagne en **80 commandes et 31,20 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **220 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 300 commandes relèvent de SIC seul. Empreinte chronologique `c0e5aec2efae32f8cdacd7d7f568a388696317cdddb7246935c114d30f09057f`. TypeScript et les cinq tests ciblés passent.
+
+### TU93 niveau 7, distinguer le réveil du garde de son déplacement
+
+La référence se termine après sept commandes. Depuis la sauvegarde, la deuxième commande confirme le déplacement du personnage et le changement de repère du garde resté sur place. La troisième révèle son déplacement. SIC suit le garde à partir du corps encore visible et exclut sa case et ses voisines sur la prochaine commande. Il recalcule après chaque retour et réutilise la prise latérale du garde déjà connu à la commande 10.
+
+Le niveau 7 gagne en **14 commandes et 5,79 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **140 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 154 commandes relèvent de SIC seul. Empreinte chronologique `946da7394ccd7748358afea97a15d20a7003b7a15b1c14986e3806dfb80d2548`. TypeScript et les quatre tests ciblés passent.
