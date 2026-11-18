@@ -2073,3 +2073,11 @@ La zone qui exclut sa case centrale permet de placer l'appui entre les quatre vo
 Le rejeu chronologique gagne le niveau 6 en **66 commandes et 19,82 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **126 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 192 commandes relèvent de SIC seul. TypeScript et les **59 tests ciblés** passent. Empreinte `9eabae388d78cfc6a83f7c5da8c670135688b69309416e8be7e01772f07b2a84`. La couverture atteint **558/636 niveaux (87,7 %)**, dont **59/99 niveaux 6 (59,6 %)**.
 
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
+
+### DAME niveau 6, composer recoloration et téléportation
+
+Le plateau présente neuf pièces du même rang et deux repères appariés. La limite précédente de huit pièces écartait le calcul. Avec la seule limite relevée, un trajet réduit la population à une pièce qui garde sa couleur de départ. Le jeu remet alors le plateau à son état initial.
+
+SIC associe le repère encadré au-dessus du plateau à la seule case qui porte la teinte correspondante. Il réutilise les sauts observés précédemment et compose une arrivée sur la case de recoloration avec des prises et un passage par les repères appariés. Au-delà de huit pièces, SIC doit calculer un trajet complet avant de l'engager. Le deuxième clic confirme la recoloration et le sixième confirme l'arrivée distante. Le masque du sprite distingue la pièce de son repère quand leurs teintes coïncident. Le dernier clic fait ressortir la pièce recolorée et valide la victoire.
+
+Le rejeu chronologique gagne en **14 clics et 4,58 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un processus. Les **51 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 65 commandes relèvent de SIC seul. Le rejeu depuis la sauvegarde reproduit l'empreinte `d256314cd4cc2950e999bc9204ea6e35e5eacca329b6f80e70ed069c3cad3156`. TypeScript et les **143 tests ciblés** passent. La couverture atteint **559/636 niveaux (87,9 %)**, dont **60/99 niveaux 6 (60,6 %)**.
