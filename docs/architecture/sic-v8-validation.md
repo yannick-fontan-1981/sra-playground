@@ -2480,3 +2480,11 @@ Le rejeu de référence s'arrête après 80 commandes. La lecture retrouve les t
 SIC classe les répartitions valides d'après les correspondances entre jetons littéraux et étiquettes visibles des cadres. Les clics 3 à 4 placent l'appel du cadre intermédiaire et les clics 7 à 8 placent l'appel du cadre intérieur. Les retours confirment les huit placements. La commande 17 soumet le programme et valide l'expansion complète.
 
 Le niveau 7 gagne en **17 commandes et 11,17 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **90 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 107 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `e3e6c4fedeccd870e67062e16a5482a340389effa6977e9424638817c71aaf27`. TypeScript et les trois tests ciblés passent.
+
+### BP35 niveau 7, enchaîner les appuis et les inversions
+
+Le modèle de référence dépasse sa limite de 20 éléments modifiables à l'entrée du niveau et le rejeu s'arrête après 82 commandes. En limitant l'analyse du terrain à la zone accessible, les inverseurs isolés par la paroi forment une réserve d'actions équivalentes. Le modèle garde séparément les appuis solidifiés ou rouverts qui modifient les prochains arrêts.
+
+SIC privilégie les arrêts sûrs pour découvrir de nouveaux paliers. Aux commandes 4 et 5 il prépare le premier appui puis inverse la chute. Le long défilement de la commande 38 présente deux raccords visuels possibles. Le sens de la chute écarte le décalage apparent de −7 rangées. Le raccord de +19 rangées avec le terrain mémorisé confirme le retour vers la sortie.
+
+Le niveau 7 gagne en **46 commandes et 44,55 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **190 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 236 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `a6d33ad5cf58cf73bf57570bd107d5893c34043344b82139d4ca6b864fd31036`. TypeScript et les cinq tests ciblés passent.
