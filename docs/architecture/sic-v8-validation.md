@@ -2396,3 +2396,11 @@ SIC retrouve la palette, le pas de la grille et le nombre de pièces du niveau p
 Le rejeu depuis le niveau 1 reproduit les 180 commandes des niveaux 1 à 5 et leurs cinq empreintes, animations comprises. Le niveau 6 gagne en **21 commandes et 7,48 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les 201 commandes relèvent de SIC seul. La plus longue série du niveau 6 compte six commandes. L'empreinte chronologique est `d050d9013b41dd8fb56e4b0323cfc0e3ab0c3fc904ff68a98cb5c6ec3ae1f01e`. L'essai depuis la sauvegarde avec une permutation de palette reproduit cette empreinte. TypeScript et les 171 tests ciblés passent.
 
 Le relevé cumulé des rejeux chronologiques couvre **598/636 niveaux (94,0 %)**. Les **99 jeux qui ont un niveau 6** l'ont gagné en SIC seul. HANO se termine au niveau 4. Les 38 niveaux suivants se situent au niveau 7 ou au-delà.
+
+### LP85 niveau 7, composer les rotations d'un même contrôle
+
+Le rejeu de référence s'arrête après 55 clics au niveau 7. Les deux premiers retours mesurent une rotation verticale sur trois emplacements. Le troisième clic déplace douze contenus à la fois sur deux zones séparées de la grille. Le lecteur d'une seule rotation écarte ce retour.
+
+Quand aucune permutation existante n'explique le retour, SIC cherche une rotation dans chaque composante de la grille ayant changé. Il réunit ces rotations uniquement si chacune explique son retour de manière unique, puis vérifie la prédiction après chaque clic. La recherche de trajet peut déplacer temporairement un contenu dans la branche verticale pendant que le bouton commun tourne les deux autres zones.
+
+Le rejeu SIC seul conserve les six empreintes des **94 commandes** précédentes, animations comprises. Le niveau 7 gagne en **13 clics et 3,93 s**, dont trois sondes et dix clics planifiés, avec 360 s de temps actif et 600 commandes au plus par niveau sur un seul worker. Empreinte chronologique `f0d21ea155e19b3ffd354463aba91674e2fe421457bc5c50b954f5e25f16af3d`. TypeScript et les deux tests de transformation passent. L'exécution s'arrête à la victoire du niveau 7.
