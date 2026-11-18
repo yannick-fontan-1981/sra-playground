@@ -2052,4 +2052,12 @@ Les commandes 4 et 22 révèlent chacune une pièce sous une pile. La lecture co
 
 Depuis le niveau 1, le niveau 6 gagne en **107 commandes et 46,09 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **79 commandes et les empreintes des retours des quatre premiers niveaux** concordent avec la référence. La nouvelle lecture intervient aussi au niveau 5, qui gagne en **82 commandes** contre 136 auparavant. Les 268 commandes relèvent de SIC seul. TypeScript et les trois tests ciblés passent. Empreinte `60f1961c0557e740671c286ea1fac6f4c1ffb8f48e41cdaa71d9737fd0303782`. La couverture atteint **556/636 niveaux (87,4 %)**, dont **57/99 niveaux 6 (57,6 %)**.
 
+### GIGO niveau 6, mesurer les murs d'un pixel derrière un marqueur plus large
+
+L'essai depuis la sauvegarde confirme qu'une commande horizontale déplace la salle sélectionnée et ses salles internes d'un pixel. L'ouverture dans le cadre extérieur mesure un pixel et s'aligne sur le centre du marqueur de sortie. SIC mesure ce cadre et réunit les fragments des huit salles mobiles. Les géométries déjà reconnues gardent leur ordre de recherche.
+
+SIC calcule cinq placements successifs et vérifie les murs après chaque sélection ou déplacement. À la commande 14, la dernière salle aligne son ouverture et le chemin entre la source et la sortie devient continu. Les **14 commandes et leurs retours** concordent avec le rejeu depuis la sauvegarde.
+
+Le rejeu depuis le niveau 1 gagne le niveau 6 en **14 commandes et 14,93 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **54 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 68 commandes relèvent de SIC seul. TypeScript et le test du cadre fin avec un marqueur externe passent. Empreinte `f97a9f4150d20964882f6605706892510f4635092fd834cde6c2d5ae940310fa`. La couverture atteint **557/636 niveaux (87,6 %)**, dont **58/99 niveaux 6 (58,6 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
