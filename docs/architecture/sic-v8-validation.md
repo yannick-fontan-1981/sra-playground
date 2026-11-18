@@ -1947,3 +1947,13 @@ La référence se termine sur une défaite après 39 commandes au niveau 6. Depu
 Le rejeu depuis le niveau 1 gagne en **140 commandes SIC seul**. Les **112 premières commandes** et leurs retours sont identiques à la référence. Le niveau 6 gagne en **28 commandes et 13,20 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit les 28 commandes. TypeScript et les **3 tests ciblés** passent. La couverture atteint **543/636 niveaux (85,4 %)**, dont **44/99 niveaux 6 (44,4 %)**.
 
 Empreinte jusqu'à la victoire `794c0b9f3587303f39673d59e866d3142fb7e780794e5c1b202225c94d78aa0d`.
+
+### VC33 niveau 6, préparer un passage à partir de deux origines distinctes
+
+La référence s'arrête après 40 clics d'exploration. La mesure supposait que les compartiments s'alignaient sur un support commun. SIC retrouve maintenant les boutons appariés de part et d'autre d'une paroi et mesure la profondeur disponible à partir des supports visibles. Il associe chaque bouton aux deux compartiments qu'il relie. La recherche réserve aussi l'espace de la silhouette au-dessus du liquide.
+
+Le premier passage demande 2 unités de chaque côté. Le second demande 10 unités dans le compartiment transversal et 2 à destination pour que les surfaces arrivent à la même position. Les clics 5 et 14 vérifient ces deux déplacements du marqueur en conservant les quantités. Les transferts entre les portes s'exécutent en séries de clics dont chaque retour est vérifié. Le clic 20 atteint la hauteur de la référence.
+
+Le rejeu depuis le niveau 1 gagne en **143 commandes SIC seul**. Les **123 commandes des niveaux 1 à 5** et leurs retours reproduisent les empreintes de la référence. Le niveau 6 gagne en **20 clics et 6,59 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit ces 20 clics. TypeScript et les **3 tests ciblés** passent. La couverture atteint **544/636 niveaux (85,5 %)**, dont **45/99 niveaux 6 (45,5 %)**.
+
+Empreinte jusqu'à la victoire `8206e09d3aaf46c2bb51f794cad89d804c841d67ac30a162f720c12989e064c7`.
