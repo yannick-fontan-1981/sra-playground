@@ -6,6 +6,7 @@ import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 import { bindExamples, codeInstructionEffect, readDemonstration, type CodeExample } from './code-demonstration.ts';
+import { observeProgramHazard, type ProgramHazard } from './program-timing.ts';
 
 export const codeRouteId = 'sic_code_route';
 export const verifyProgramConfigurationId = 'sic_verify_program_configuration';
@@ -23,8 +24,10 @@ type Scene = { origin: NativePoint; size: number; goal: NativePoint; allowed: Na
 type Pose = { at: NativePoint; scale: number; rotation?: number; hue?: number };
 type Effect = { motion: NativePoint; resize?: number; fromScales?: number[]; turn?: number; fromRotations?: number[];
   hue?: number; ref: string };
+type Wait = { word: string; ref: string };
+type ProgramTiming = { wait?: Wait; hazard?: ProgramHazard };
 type State = { epoch: number; scene: Scene; effects: Record<string, Effect>; rejected: string[]; runs: string[];
-  count: number; stopped: boolean; editRef?: string; examplesTried?: readonly number[]; refusedRestarts?: string[] };
+  count: number; stopped: boolean; editRef?: string; examplesTried?: readonly number[]; refusedRestarts?: string[] } & ProgramTiming;
 type ProgramLeg = { program: CodeWord[]; edit: CodeWord[] | null; run: string; restart?: NativePoint };
 type Proposal = NativeProposal & ProgramLeg & { local: State; start: Pose; edits?: ProgramLeg[]; needId: string; example?: number };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -51,7 +54,7 @@ function codePose(rows: NativeRows, scene: Scene): Pose | null {
   return poses.length === 1 ? poses[0]! : null;
 }
 
-function programPaths(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects']) {
+function programPaths(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects'], timing?: ProgramTiming) {
   const cost = (a: bigint, b: bigint) => (a ^ b).toString(2).replaceAll('0', '').length;
   const allowed = new Set(scene.allowed.map(point => point.join(',')));
   const goal = scene.goalPose;
@@ -70,16 +73,19 @@ function programPaths(scene: Scene, start: Pose, words: CodeWord[], effects: Sta
   }
   type Partial = Pose & { words: CodeWord[]; edits: number };
   let reachable: Partial[] = [{ ...start, words: [], edits: 0 }];
-  for (const word of words) {
+  const { wait, hazard } = timing ?? {};
+  const blocked = new Map(hazard?.steps.map(step => [step.instruction, new Set(step.cells.map(cell => cell.join(',')))]));
+  const operators = wait ? { ...effects, [wait.word]: { motion: [0, 0], ref: wait.ref } as Effect } : effects;
+  for (const [instruction, word] of words.entries()) {
     const next = new Map<string, Partial>();
-    for (const path of reachable) for (const [value, { motion, resize, fromScales, turn, fromRotations, hue }] of Object.entries(effects)) {
+    for (const path of reachable) for (const [value, { motion, resize, fromScales, turn, fromRotations, hue }] of Object.entries(operators)) {
       // A consistent turn from several orientations supports a relative rotation.
       if (fromScales && !fromScales.includes(path.scale)
         || fromRotations?.length === 1 && !fromRotations.includes(path.rotation!)) continue;
       const at: NativePoint = [path.at[0] + motion[0], path.at[1] + motion[1]], scale = path.scale + (resize ?? 0);
       const projected: Pose = { at, scale, ...(goal ? { rotation: (path.rotation! + (turn ?? 0)) % 4, hue: hue ?? path.hue! } : {}) };
       const stationary = scale === path.scale && same(at, path.at) && projected.rotation === path.rotation && projected.hue === path.hue;
-      if (stationary || !fits(projected)) continue;
+      if (stationary && value !== wait?.word || blocked.get(instruction)?.has(at.join(',')) || !fits(projected)) continue;
       const edits = path.edits + cost(decodeCodeWord(word), BigInt(value)), key = [...at, scale, projected.rotation, projected.hue].join(',');
       if ((next.get(key)?.edits ?? Infinity) > edits) next.set(key, { ...projected, edits, words: [...path.words, encodeCodeWord(BigInt(value))] });
     }
@@ -88,18 +94,18 @@ function programPaths(scene: Scene, start: Pose, words: CodeWord[], effects: Sta
   return reachable;
 }
 
-function programFor(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects']): CodeWord[] | null {
+function programFor(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects'], timing?: ProgramTiming): CodeWord[] | null {
   const goal = scene.goalPose;
-  return programPaths(scene, start, words, effects).find(path => same(path.at, scene.goal) && path.scale === (goal?.scale ?? 1)
+  return programPaths(scene, start, words, effects, timing).find(path => same(path.at, scene.goal) && path.scale === (goal?.scale ?? 1)
     && (!goal || path.rotation === goal.rotation && path.hue === goal.hue))?.words ?? null;
 }
 
-function programViaRestart(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects'], refused: readonly string[]) {
+function programViaRestart(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects'], refused: readonly string[], timing?: ProgramTiming) {
   const restarts = scene.restarts?.filter(point => !refused.includes(point.join(',')));
   if (!restarts?.length || restarts.length > 12 || scene.goalPose || start.scale !== 1) return null;
   const motion = Object.fromEntries(Object.entries(effects).filter(([, effect]) => !effect.resize && !effect.turn && effect.hue === undefined));
   const distances = new Map([[scene.goal.join(','), 0]]);
-  const edges = restarts.map(at => ({ key: at.join(','), paths: programPaths(scene, { at, scale: 1 }, words, motion) }));
+  const edges = restarts.map(at => ({ key: at.join(','), paths: programPaths(scene, { at, scale: 1 }, words, motion, timing) }));
   for (let distance = 1; distance <= restarts.length; distance++) {
     for (const node of edges) {
       if (!distances.has(node.key) && node.paths.some(path => distances.get(path.at.join(',')) === distance - 1)) {
@@ -107,7 +113,7 @@ function programViaRestart(scene: Scene, start: Pose, words: CodeWord[], effects
       }
     }
   }
-  const path = programPaths(scene, start, words, motion).filter(path => !same(path.at, start.at) && distances.has(path.at.join(',')))
+  const path = programPaths(scene, start, words, motion, timing).filter(path => !same(path.at, start.at) && distances.has(path.at.join(',')))
     .sort((a, b) => distances.get(a.at.join(','))! - distances.get(b.at.join(','))! || a.edits - b.edits)[0];
   return path ? { words: path.words, ...(same(path.at, scene.goal) ? {} : { restart: path.at }) } : null;
 }
@@ -115,23 +121,30 @@ function programViaRestart(scene: Scene, start: Pose, words: CodeWord[], effects
 function observedInstructions(proposal: Proposal, frames: readonly NativeRows[]) {
   const { local: { scene }, program, start } = proposal;
   const ends = new Map<number, Pose>();
+  const phases = new Map<number, NativeRows>();
   for (const frame of frames) {
     const position = codePose(frame, scene);
-    if (!position) continue;
     const emphasis = scene.columns.map(column => {
       const [l, t, r] = column[0]!, bottom = column.at(-1)![3];
       return projection(frame, [l - 1, t - 1, r + 1, bottom + 1]).flat().filter(pixel => pixel === scene.button_hue).length;
     });
     const highest = Math.max(...emphasis);
-    if (highest > 0 && emphasis.filter(value => value === highest).length === 1) ends.set(emphasis.indexOf(highest), position);
+    if (highest > 0 && emphasis.filter(value => value === highest).length === 1) {
+      const index = emphasis.indexOf(highest);
+      phases.set(index, frame);
+      if (position) ends.set(index, position);
+    }
   }
-  return program.flatMap((word, index) => {
+  const movements = program.flatMap((word, index) => {
     const end = ends.get(index), begin = index ? ends.get(index - 1) : start;
     if (!end || !begin) return [];
     const motion: NativePoint = [end.at[0] - begin.at[0], end.at[1] - begin.at[1]];
     const effect = codeInstructionEffect(motion, begin, end, scene.scaled ?? false);
     return effect ? [{ word: String(decodeCodeWord(word)), ...effect }] : [];
   });
+  const blank = program.length > 1 && program.every(word => decodeCodeWord(word) === 0n);
+  const wait = blank && ends.size === program.length && [...ends.values()].every(pose => same(pose, start));
+  return { movements, wait, phases, ends };
 }
 
 export function createSicVerifyProgramConfiguration(family = verifyProgramConfigurationId): NativeFamily<Proposal> {
@@ -169,8 +182,14 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
         ...(adoption ? { editRef: adoption.afterRef } : {}) };
       const program = codeBits(rows, scene), start = codePose(rows, scene);
       if (!program || !start) return null;
-      const direct = programFor(scene, start, program, local.effects);
-      const staged = direct ? null : programViaRestart(scene, start, program, local.effects, local.refusedRestarts ?? []);
+      const timing = local.hazard ? { hazard: local.hazard } : undefined;
+      let direct = programFor(scene, start, program, local.effects, timing);
+      let staged = direct ? null : programViaRestart(scene, start, program, local.effects, local.refusedRestarts ?? [], timing);
+      if (!direct && !staged && local.wait) {
+        const timedWait = { ...timing, wait: local.wait };
+        direct = programFor(scene, start, program, local.effects, timedWait);
+        if (!direct) staged = programViaRestart(scene, start, program, local.effects, local.refusedRestarts ?? [], timedWait);
+      }
       const wanted = direct ?? staged?.words ?? null, restart = staged?.restart;
       const column = wanted ? program.findIndex((word, index) => !same(word, wanted[index])) : -1;
       const change = wanted && column >= 0 ? decodeCodeWord(program[column]!) ^ decodeCodeWord(wanted[column]!) : 0n;
@@ -180,6 +199,8 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const untried = !local.runs.includes(run), editable = column !== -1 && bit !== -1;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...Object.values(local.effects).map(effect => effect.ref),
+        ...(local.wait ? [local.wait.ref] : []),
+        ...(local.hazard ? [local.hazard.ref] : []),
         ...(local.editRef ? [local.editRef] : [])])];
       const exampleIndex = wanted ? -1 : scene.examples?.findIndex((_, index) => !local.examplesTried?.includes(index)) ?? -1;
       const example = scene.examples?.[exampleIndex];
@@ -193,7 +214,10 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = ready || reuseEdit ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
-      const label = example ? scene.goalPose ? 'Measure the highlighted instruction in the separate demonstrator'
+      const label = wanted && local.hazard ? restart
+        ? 'Time the crossing and retain the position on a marked tile'
+        : 'Schedule the program around the observed hazard'
+        : example ? scene.goalPose ? 'Measure the highlighted instruction in the separate demonstrator'
         : 'Compare the highlighted instruction with motion in the separate demonstrator'
         : restart ? editable ? 'Edit the program to reach a marked continuation tile'
           : 'Run the program and check whether the marked tile retains the new position' : codeRouteStrategies[phase];
@@ -270,7 +294,7 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: matched === null ? 'observe_program_trace'
         : matched ? 'program_edit_observed' : 'program_edit_contradicted' };
     },
-    record(before, after, _command, _first, second, proposal, index, frames) {
+    record(before, after, _command, first, second, proposal, index, frames) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const leg = proposal.edits?.[index] ?? proposal;
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
@@ -283,8 +307,8 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const effects = { ...local.effects }, rejected = new Set(local.rejected);
       const example = proposal.example === undefined ? undefined : local.scene.examples?.[proposal.example];
       const isolated = !example || realProgramUnchanged(proposal, second) && frames.every(frame => realProgramUnchanged(proposal, frame));
-      const observed = example ? isolated ? readDemonstration(local.scene, example, frames) : []
-        : observedInstructions({ ...proposal, program: leg.program, local }, frames);
+      const trace = example ? null : observedInstructions({ ...proposal, program: leg.program, local }, frames);
+      const observed = trace?.movements ?? (example && isolated ? readDemonstration(local.scene, example, frames) : []);
       for (const { word, motion, resize, fromScale, turn, fromRotation, hue } of observed) {
         if (rejected.has(word)) continue;
         const previous = effects[word];
@@ -300,8 +324,24 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const history = proposal.example === undefined ? { runs: [...local.runs, run] }
         : { examplesTried: [...local.examplesTried ?? [], proposal.example] };
       const retained = leg.restart && same(codePose(second, local.scene)?.at, leg.restart) && same(codeBits(second, local.scene), leg.program);
+      const wait = trace?.wait ? { word: String(decodeCodeWord(leg.program[0]!)), ref: after.observation_ref } : local.wait;
       state = { ...local, effects, rejected: [...rejected], ...history, count: local.count + 1,
         ...(leg.restart && !retained ? { refusedRestarts: [...local.refusedRestarts ?? [], leg.restart.join(',')] } : {}) };
+      if (wait && !Object.hasOwn(effects, wait.word)) state.wait = wait;
+      else delete state.wait;
+      if (trace && !local.scene.scaled && proposal.start.scale === 1
+        && same(codePose(second, local.scene), proposal.start) && same(codeBits(second, local.scene), leg.program)) {
+        const interrupted = leg.program.findIndex((_, step) =>
+          trace.phases.has(step) && !trace.ends.has(step) && (step === 0 || trace.ends.has(step - 1)));
+        const begin = interrupted === 0 ? proposal.start : trace.ends.get(interrupted - 1);
+        const word = leg.program[interrupted];
+        const motion = word === undefined ? undefined : effects[String(decodeCodeWord(word))]?.motion;
+        if (begin && motion) {
+          const landing: NativePoint = [begin.at[0] + motion[0], begin.at[1] + motion[1]];
+          const hazard = observeProgramHazard(first, trace.phases, interrupted, landing, local.scene, after.observation_ref);
+          if (hazard) state.hazard = hazard;
+        }
+      }
       return { events: [], ...(retained ? { reviewEvidence: 'The program left the piece on the marked tile, which is now the next starting position.' } : {}) };
     },
     state: () => ({ state }),
