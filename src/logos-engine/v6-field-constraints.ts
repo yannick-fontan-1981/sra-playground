@@ -81,12 +81,16 @@ function pitch(origins: Point[], axis: 0 | 1, size: number): number | null {
   return Math.min(...[...counts].filter(([, n]) => n === maximum).map(([value]) => value));
 }
 
-export function extractFields(obs: FieldObservation, rows: Rows): MeasuredField[] {
+export function extractFields(obs: FieldObservation, rows: Rows, carrierShape?: Point): MeasuredField[] {
   const height = rows.length, width = rows[0]!.length;
   const rectangles = new Map<string, Point[]>();
   for (const e of obs.entities) {
     const [left, top, right, bottom] = e.bbox, w = right - left + 1, h = bottom - top + 1;
-    if (Math.min(w, h) >= 2 && e.area === w * h) groupAdd(rectangles, key(w, h), [left, top]);
+    if (carrierShape) {
+      const [columns, lines] = carrierShape, cells = columns * lines;
+      if (w < 2 * columns || h < 2 * lines || w % columns || h % lines || e.area * cells !== w * h * (cells - 1)) continue;
+    } else if (Math.min(w, h) < 2 || e.area !== w * h) continue;
+    groupAdd(rectangles, key(w, h), [left, top]);
   }
   const result: MeasuredField[] = [];
   for (const [sizeKey, origins] of [...rectangles].sort((a, b) => b[1].length - a[1].length)) {
@@ -125,7 +129,8 @@ export function extractFields(obs: FieldObservation, rows: Rows): MeasuredField[
           if (tiles.has(n) && !seen.has(n)) { seen.add(n); work.push(n); }
         }
       }
-      if ([...group.values()].some(v => v.glyph !== undefined) && [...group.values()].filter(v => v.value !== undefined).length >= 2) components.push(group);
+      if ([...group.values()].some(v => v.glyph !== undefined)
+        && (carrierShape || [...group.values()].filter(v => v.value !== undefined).length >= 2)) components.push(group);
     }
     if (components.reduce((n, g) => n + [...g.values()].filter(t => t.glyph !== undefined).length, 0) >= 2) result.push({ size: [w, h], pitch: [dx, dy], groups: components });
   }

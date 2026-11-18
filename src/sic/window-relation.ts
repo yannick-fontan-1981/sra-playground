@@ -5,7 +5,8 @@ import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
-import { actionFootprint, binaryChanges, followsBinaryEffect, readBinaryField, solveBinaryField, type BinaryField, type FieldChange } from './binary-field-effects.ts';
+import { actionFootprint, binaryChanges, binaryEffectClass, followsBinaryEffect, readBinaryField, solveBinaryField,
+  type BinaryField, type FieldChange } from './binary-field-effects.ts';
 
 export const windowRelationId = 'sic_reconcile_observed_fields';
 export const learnWindowRelationId = 'sic_learn_window_relation';
@@ -17,13 +18,13 @@ export const windowRelationStrategies = {
 } as const;
 
 type Rule = Parameters<typeof fieldConstraints>[1];
-type GroupedEffects = { marked: boolean; ordinary: boolean; stopped: boolean };
+type GroupedEffects = { marked: boolean; ordinary: boolean; stopped: boolean; confirmed?: string[] };
 type State = { epoch: number; rule: Rule; size: NativePoint; pitch: NativePoint; rejected: string[];
   effects: { address: string; from: number; to: number }[]; firstRef: string; evidence: string[]; count: number;
   recalled?: boolean; grouped?: GroupedEffects };
 type Transfer = { epoch: number; rule: Rule; evidence: string[] };
 type Cell = { box: NativeBox; address: string; actual: number; expected: number | null; intermediate: boolean; sourcePoints: NativePoint[];
-  binary?: { marked: boolean; changes: FieldChange[] } };
+  binary?: { marked: boolean; effect?: string; projected?: true; changes: FieldChange[] } };
 type ReferenceCell = { box: NativeBox; rows: NativeRows };
 type Proposal = NativeProposal & { local: State; cell: Cell; field: NativeBox; route?: { cell: Cell; references: ReferenceCell[] }[]; needId: string };
 const point = (key: string): NativePoint => { const [x, y] = key.split(',').map(Number); return [x!, y!]; };
@@ -95,14 +96,29 @@ function groupedCells(field: BinaryField, effects: GroupedEffects): Cell[] {
   const solution = solveBinaryField(field);
   if (!solution?.length) return [];
   const planned = [...solution].sort((a, b) => Number(b.marked) - Number(a.marked));
-  const pending = !effects.marked ? true : !effects.ordinary ? false : null;
-  const choices = pending === null ? planned : [planned.find(control => control.marked === pending
-    && (!pending || actionFootprint(field, control).length > 1)) ?? field.controls.find(control => control.marked === pending
-    && (!pending || actionFootprint(field, control).length > 1))].filter(control => control !== undefined);
-  return choices.map(control => ({ box: control.box, address: control.address, actual: control.value,
-    expected: pending === null ? field.colors.find(color => color !== control.value)! : null,
-    intermediate: false, binary: { marked: control.marked, changes: binaryChanges(field, control) },
-    sourcePoints: [...new Set(actionFootprint(field, control).flatMap(item => [...(field.constraints.get(item.address)?.sources ?? [])]))].map(point) }));
+  const confirmed = new Set([...(effects.confirmed ?? []), ...(effects.marked ? ['marked'] : []), ...(effects.ordinary ? ['ordinary'] : [])]);
+  const active = [...new Set(field.controls.map(binaryEffectClass))];
+  const pending = [...active.filter(effect => effect !== 'ordinary'), ...active.filter(effect => effect === 'ordinary')]
+    .find(effect => !confirmed.has(effect)) ?? null;
+  const direction = active.length === 1 && planned[0]?.offsets?.length === 1 ? planned[0]!.offsets![0] : null;
+  if (direction) {
+    const [dx, dy] = direction;
+    planned.sort((a, b) => (a.point[0] - b.point[0]) * dx + (a.point[1] - b.point[1]) * dy);
+  }
+  const choices = pending === null ? planned : [planned.find(control => binaryEffectClass(control) === pending
+    && (!control.marked || actionFootprint(field, control).length > 1)) ?? field.controls.find(control => binaryEffectClass(control) === pending
+    && (!control.marked || actionFootprint(field, control).length > 1))].filter(control => control !== undefined);
+  const projected = direction && pending === null ? new Map<string, number>() : undefined;
+  return choices.map(control => {
+    const actual = projected?.get(control.address) ?? control.value;
+    const changes = binaryChanges(field, control, projected);
+    if (projected) for (const { box: [left, top], to } of changes) projected.set([left, top].join(','), to);
+    return { box: control.box, address: control.address, actual,
+      expected: pending === null ? field.colors.find(color => color !== actual)! : null,
+      intermediate: false, binary: { marked: control.marked, effect: binaryEffectClass(control), changes,
+        ...(projected ? { projected: true as const } : {}) },
+      sourcePoints: [...new Set(actionFootprint(field, control).flatMap(item => [...(field.constraints.get(item.address)?.sources ?? [])]))].map(point) };
+  });
 }
 
 export function createSicWindowRelation(family = windowRelationId): NativeFamily<Proposal> {
@@ -141,9 +157,11 @@ export function createSicWindowRelation(family = windowRelationId): NativeFamily
         prior = { epoch: observation.level_epoch, rule, size, pitch, effects, rejected: [],
           firstRef: click.beforeRef, evidence: [click.afterRef], count: 1 };
       }
-      const fields = extractFields(observation, rows);
+      let fields = extractFields(observation, rows);
       const induced = prior ? [] : induceFields(fields);
       const recalled = !prior && !induced.length && transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
+      const groupedRule = prior?.grouped ? prior.rule : recalled?.rule;
+      if (!fields.length && groupedRule?.shape.join() === '3,3') fields = extractFields(observation, rows, [3, 3]);
       const options = prior
         ? fields.filter(field => equalPoint(field.size, prior.size) && equalPoint(field.pitch, prior.pitch)).map(field => ({ field, rule: prior.rule }))
         : recalled ? fields.map(field => ({ field, rule: recalled.rule })) : induced;
@@ -201,19 +219,22 @@ export function createSicWindowRelation(family = windowRelationId): NativeFamily
         return observed ? [{ box, rows: observed }] : [];
       });
       const route = [{ cell, references: referencesFor(cell) }];
-      if (strategy === 'P02' && !cell.intermediate && !cell.binary?.marked) {
+      if (strategy === 'P02' && !cell.intermediate && (!cell.binary?.marked || cell.binary.projected)) {
         for (const next of cells.slice(cells.indexOf(cell) + 1)) {
           if (next.expected === null) continue;
-          if (next.binary?.marked || route.length >= Math.min(remaining, maximumCommittedActions, (local.grouped ? 64 : 24) - local.count)) break;
+          if (next.binary?.marked && !next.binary.projected
+            || route.length >= Math.min(remaining, maximumCommittedActions, (local.grouped ? 64 : 24) - local.count)) break;
           const references = referencesFor(next);
           if (references.length !== next.sourcePoints.length || next.sourcePoints.some(point =>
             route.some(leg => equalPoint(point, [leg.cell.box[0], leg.cell.box[1]])))) break;
           const [l, t] = next.box, x = l + Math.floor(w / 2), y = t + Math.floor(h / 2);
           const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
+          const projected = next.binary?.projected && rows[y]?.[x] !== next.actual
+            ? await ObservedInputDomain.projectLocusWitness(witness, next.actual) : witness;
           const command = { action_ref: 'ACTION6', data: { x, y } };
           route.push({ cell: next, references });
           actions.push(command);
-          steps.push({ action: command, point_binding: witness, expected_after: next.expected });
+          steps.push({ action: command, point_binding: projected, expected_after: next.expected });
           if (next.intermediate) break;
         }
       }
@@ -243,7 +264,8 @@ export function createSicWindowRelation(family = windowRelationId): NativeFamily
         : proposal.local.epoch === observation.level_epoch && !!leg
           && leg.references.every(({ box, rows }) => JSON.stringify(cellRows(packet.frame_rows, box)) === JSON.stringify(rows));
       const value = cell.binary ? packet.frame_rows[cell.box[1]]?.[cell.box[0]] : uniformValue(packet.frame_rows, cell.box);
-      const admitted = bound && value === cell.actual;
+      const admitted = bound && value === cell.actual && (!cell.binary?.projected
+        || cell.binary.changes.every(({ box: [x, y], from }) => packet.frame_rows[y]?.[x] === from));
       return { admitted, reason: admitted ? 'current_cell_and_example_bound' : 'cell_or_example_changed' };
     },
     after(proposal, index, before, after, first, second) {
@@ -270,7 +292,11 @@ export function createSicWindowRelation(family = windowRelationId): NativeFamily
       if (cell.binary && local.grouped) {
         const matched = followsBinaryEffect(field, cell.binary.changes, first, second);
         const grouped = { ...local.grouped, stopped: !matched };
-        if (matched) grouped[cell.binary.marked ? 'marked' : 'ordinary'] = true;
+        const effect = cell.binary.effect ?? (cell.binary.marked ? 'marked' : 'ordinary');
+        if (matched) {
+          if (effect === 'marked' || effect === 'ordinary') grouped[effect] = true;
+          else grouped.confirmed = [...new Set([...(grouped.confirmed ?? []), effect])];
+        }
         state = { ...local, grouped, count: local.count + 1, evidence: [...local.evidence.slice(-4), after.observation_ref] };
         return { events: [] };
       }

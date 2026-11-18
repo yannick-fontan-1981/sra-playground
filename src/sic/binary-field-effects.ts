@@ -2,24 +2,33 @@ import { acceptsConstraint, fieldConstraints, type ConstraintTable, type Measure
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Rule = Parameters<typeof fieldConstraints>[1];
-type Control = { address: string; point: NativePoint; box: NativeBox; value: number; marked: boolean };
+type Control = { address: string; point: NativePoint; box: NativeBox; value: number; marked: boolean; offsets?: NativePoint[] };
 export type FieldChange = { box: NativeBox; from: number; to: number };
 export type BinaryField = { controls: Control[]; constraints: ConstraintTable; colors: [number, number]; pitch: NativePoint };
 
-// The middle and corners carry the value. The four uniform orthogonal marks describe a possible action footprint.
-function markerValue(glyph: number[][] | undefined): number | undefined {
+const orthogonal: NativePoint[] = [[0, -1], [-1, 0], [1, 0], [0, 1]];
+
+// The carrier color occupies the center and corners. A separate ink suggests an effect at the marked offsets.
+function readMark(glyph: number[][] | undefined) {
   if (glyph?.length !== 3 || glyph.some(row => row.length !== 3)) return undefined;
-  const [a, north, c] = glyph[0]!, [west, value, east] = glyph[1]!, [g, south, i] = glyph[2]!;
-  return a === value && c === value && g === value && i === value && north !== value
-    && north === east && north === south && north === west ? value : undefined;
+  const [a, , c] = glyph[0]!, [, value] = glyph[1]!, [g, , i] = glyph[2]!;
+  if (a !== value || c !== value || g !== value || i !== value) return undefined;
+  const offsets = orthogonal.filter(([x, y]) => glyph[y + 1]![x + 1] !== value);
+  const ink = new Set(offsets.map(([x, y]) => glyph[y + 1]![x + 1]));
+  return ink.size === 1 ? { value: value!, offsets } : undefined;
+}
+
+export function binaryEffectClass(control: Control) {
+  if (!control.marked) return 'ordinary';
+  return !control.offsets || control.offsets.length === orthogonal.length ? 'marked' : control.offsets.map(point => point.join(',')).join('/');
 }
 
 export function protectedWindowBoxes(field: MeasuredField): NativeBox[] {
   if (field.groups.length !== 1) return [];
   const tiles = [...field.groups[0]!], [w, h] = field.size;
-  const marked = tiles.filter(([, tile]) => markerValue(tile.glyph) !== undefined);
+  const marked = tiles.filter(([, tile]) => readMark(tile.glyph) !== undefined);
   if (marked.length < 2 || !tiles.some(([, tile]) => tile.value !== undefined)) return [];
-  const windows = tiles.filter(([, tile]) => tile.shape?.join() === '3,3' && markerValue(tile.glyph) === undefined);
+  const windows = tiles.filter(([, tile]) => tile.shape?.join() === '3,3' && readMark(tile.glyph) === undefined);
   if (windows.length < 2) return [];
   return windows.map(([address]) => {
     const [x, y] = address.split(',').map(Number) as [number, number];
@@ -32,7 +41,7 @@ export function readBinaryField(field: MeasuredField, rule: Rule): BinaryField |
   const group = field.groups[0]!, decoded = new Map(group), controls: Control[] = [];
   const values = new Set<number>();
   for (const [address, tile] of group) {
-    const value = tile.value ?? markerValue(tile.glyph);
+    const mark = readMark(tile.glyph), value = tile.value ?? mark?.value;
     if (value === undefined) {
       const [x, y] = rule.anchor, reference = tile.glyph?.[y!]?.[x!];
       if (reference !== undefined) values.add(reference);
@@ -40,12 +49,12 @@ export function readBinaryField(field: MeasuredField, rule: Rule): BinaryField |
     }
     const [x, y] = address.split(',').map(Number) as [number, number];
     const [w, h] = field.size, marked = tile.value === undefined;
-    controls.push({ address, point: [x, y], box: [x, y, x + w - 1, y + h - 1], value, marked });
+    controls.push({ address, point: [x, y], box: [x, y, x + w - 1, y + h - 1], value, marked,
+      ...(mark ? { offsets: mark.offsets } : {}) });
     values.add(value);
     if (marked) decoded.set(address, { value });
   }
-  if (values.size !== 2 || controls.length > 64 || controls.filter(control => control.marked).length < 2
-    || controls.every(control => control.marked)) return null;
+  if (values.size !== 2 || controls.length > 64 || controls.filter(control => control.marked).length < 2) return null;
   const constraints = fieldConstraints({ ...field, groups: [decoded] }, rule);
   if (!constraints?.size) return null;
   const colors = [...values] as [number, number];
@@ -59,13 +68,15 @@ export function actionFootprint(field: BinaryField, control: Control): Control[]
     if (other.address === control.address) return true;
     if (!control.marked) return false;
     const [a, b] = other.point;
-    return (a === x && Math.abs(b - y) === dy) || (b === y && Math.abs(a - x) === dx);
+    return (control.offsets ?? orthogonal).some(([u, v]) => a === x + u * dx && b === y + v * dy);
   });
 }
 
-export function binaryChanges(field: BinaryField, control: Control): FieldChange[] {
-  return actionFootprint(field, control).map(({ box, value }) => ({ box, from: value,
-    to: field.colors[0] === value ? field.colors[1] : field.colors[0] }));
+export function binaryChanges(field: BinaryField, control: Control, projected?: ReadonlyMap<string, number>): FieldChange[] {
+  return actionFootprint(field, control).map(({ address, box, value }) => {
+    const from = projected?.get(address) ?? value;
+    return { box, from, to: field.colors[0] === from ? field.colors[1] : field.colors[0] };
+  });
 }
 
 export function followsBinaryEffect(bounds: NativeBox, changes: readonly FieldChange[], before: NativeRows, after: NativeRows): boolean {
