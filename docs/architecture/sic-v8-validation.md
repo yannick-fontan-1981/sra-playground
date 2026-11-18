@@ -2442,3 +2442,11 @@ Le rejeu de référence s'arrête après 40 clics. Le bandeau demande deux produ
 SIC dirige la fusion vers le récepteur proche et vérifie les changements observés après chaque clic. Au quatrième clic, il confirme à la fois la fusion prévue et l'apparition d'un deuxième produit dans l'autre zone. Les deux actions suivantes placent les produits dans leurs récepteurs en conservant la protection contre les mobiles.
 
 Le niveau 7 gagne en **six clics et 3,98 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **88 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 94 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `d6af1ad917d92add59e60bc7143e7875fd63cfaeeae7c87b62f926ea049fa4ea`. TypeScript et les deux tests ciblés passent.
+
+### SK48 niveau 7, apprendre où s'arrête le déplacement des cubes
+
+Le rejeu de référence se termine en défaite après 254 commandes. La commande 1 identifie la tige active et le clic 4 change de tige. La première contradiction arrive à la commande 35. Le modèle prévoyait que le premier cube et les suivants reculeraient avec la tige. La tige recule, mais les cubes restent à l'intérieur de la grille.
+
+SIC compare le retour au modèle où les cases de la glissière sont fermées aux cubes. Cette nouvelle projection reproduit les positions mesurées. Il abandonne le reste du plan, recalcule à partir du plateau courant et vérifie les 45 commandes restantes. Le cube commun finit à l'intersection et contribue aux deux ordres.
+
+Le niveau 7 gagne en **80 commandes et 31,20 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **220 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 300 commandes relèvent de SIC seul. Empreinte chronologique `c0e5aec2efae32f8cdacd7d7f568a388696317cdddb7246935c114d30f09057f`. TypeScript et les cinq tests ciblés passent.
