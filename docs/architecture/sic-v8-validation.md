@@ -1967,3 +1967,13 @@ Le premier clic vérifie en P05 que les deux cases prévues changent et que les 
 Le rejeu depuis le niveau 1 gagne en **75 commandes SIC seul**. Les **62 premières commandes** et leurs retours sont identiques à la référence. Le niveau 6 gagne en **13 clics et 3,20 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde retrouve les mêmes 13 commandes. TypeScript et les **181 tests ciblés** passent. La couverture atteint **545/636 niveaux (85,7 %)**, dont **46/99 niveaux 6 (46,5 %)**.
 
 Empreinte jusqu'à la victoire `40f02e926de47cbfa120ca39d0e78c4c0a51de0ae9dfa039389564be36d8dbb9`.
+
+### VALV niveau 6, amorcer le relais avant de charger la tour
+
+La référence s'arrête après 42 clics au niveau 6. Les essais contrôlés depuis la sauvegarde distinguent les deux branches. Les vannes d'entrée fermées empêchent la pompe d'agir. La branche gauche amorce puis restitue son stock sans charger la tour. La branche droite amorce en trois pompages. Le pompage suivant modifie la tour.
+
+SIC reconnaît le contour du relais appris et sa vanne en amont de la tour. Il isole le drain, ouvre ce relais et ouvre le récepteur restant. Les trois premiers pompages diminuent le stock et modifient le relais alors que la tour et les récepteurs restent inchangés. SIC distingue ces retours de la charge de la tour. Il vérifie l'isolement du drain et de la branche concurrente pendant le pompage. Le dernier clic alimente les trois récepteurs et gagne le niveau.
+
+Le rejeu depuis le niveau 1 gagne en **57 commandes SIC seul**. Les **42 commandes des niveaux 1 à 5** et leurs retours reproduisent les empreintes de la référence. Le niveau 6 gagne en **15 clics et 10,77 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit les 15 clics. TypeScript et les **2 tests ciblés** passent. La couverture atteint **546/636 niveaux (85,8 %)**, dont **47/99 niveaux 6 (47,5 %)**.
+
+Empreinte jusqu'à la victoire `3679e26e7b98a7acd4abd3f322750cad1dc5acec61550673ee1fc829ae1da50a`.
