@@ -2,6 +2,7 @@ import { PullPuzzleSession, PALETTE } from './core.js';
 import type { Observation } from './core.js';
 import { SS03_LEVELS } from './levels.js';
 import { LEVEL_INFO } from './level-info.js';
+import { heroCell, pulled, PullTutorial, type PullLesson } from './tutorial.js';
 
 const session = new PullPuzzleSession(SS03_LEVELS);
 const $ = <T extends HTMLElement>(id: string): T => {
@@ -18,9 +19,7 @@ let observation: Observation = session.observe();
 let generation = 0;
 let busy = false;
 let moves = 0;
-let learned = new Set<string>();
-let lastPullAction = 0;
-const directions = [{x:0,y:-3},{x:0,y:3},{x:-3,y:0},{x:3,y:0}] as const;
+const tutorialProgress = new PullTutorial();
 
 function paint(frame: number[][]): void {
   const image = ctx!.createImageData(64, 64);
@@ -32,55 +31,6 @@ function paint(frame: number[][]): void {
   ctx!.putImageData(image, 0, 0);
 }
 
-/** Tutorial progress uses public pixels and the player's inputs, never the internal map. */
-function heroCell(frame: number[][]): number {
-  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
-    if (frame[y + 1]![x + 1] === 14) return y * 64 + x;
-  }
-  return -1;
-}
-function stoneAt(frame: number[][], x: number, y: number): boolean {
-  return x >= 2 && x < 62 && y >= 2 && y < 62 && frame[y+1]![x+1] === 5
-    && frame[y]![x+1] === 13 && frame[y+1]![x] === 13
-    && frame[y+1]![x+2] === 13 && frame[y+2]![x+1] === 13;
-}
-function actionFrame(before: Observation, after: Observation): number[][] {
-  // A successful exit can append the next room after the last image of this room.
-  return after.level !== before.level && after.frames.length > 1 ? after.frames.at(-2)! : after.frame;
-}
-function pulled(before: Observation, after: Observation, action: number): boolean {
-  const origin = heroCell(before.frame), direction = directions[action-1];
-  if (origin < 0 || !direction) return false;
-  const x = origin % 64, y = Math.floor(origin / 64), final = actionFrame(before,after);
-  return heroCell(final) === (y+direction.y)*64+x+direction.x
-    && stoneAt(before.frame,x-direction.x,y-direction.y) && stoneAt(final,x,y);
-}
-function observeLesson(before: Observation, after: Observation, action: number): void {
-  if (before.level !== 1) return;
-  const final = actionFrame(before,after), moved = heroCell(before.frame) !== heroCell(final);
-  const didPull = pulled(before,after,action);
-  if (moved) learned.add('move');
-  if (didPull) {learned.add('pull');lastPullAction = action;}
-  else if (moved) {
-    const previous = directions[lastPullAction-1], current = directions[action-1];
-    if (previous && current && previous.x*current.x+previous.y*current.y === 0) learned.add('release');
-    lastPullAction = 0;
-  }
-  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
-    const pinkCorners = final[y]![x] === 7 && final[y]![x+2] === 7
-      && final[y+2]![x] === 7 && final[y+2]![x+2] === 7;
-    if (pinkCorners && stoneAt(final,x,y)) learned.add('place');
-    if (pinkCorners && final[y+1]![x+1] === 3 && final[y]![x+1] === 3) learned.add('gate');
-  }
-}
-function visibleOpenGate(frame: number[][]): boolean {
-  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
-    if (frame[y]![x] === 7 && frame[y]![x+2] === 7
-      && frame[y+2]![x] === 7 && frame[y+2]![x+2] === 7
-      && frame[y+1]![x+1] === 3 && frame[y]![x+1] === 3) return true;
-  }
-  return false;
-}
 function updateUI(): void {
   select.value = String(observation.level);
   $('level-title').textContent = SS03_LEVELS[observation.level - 1]!.title;
@@ -101,14 +51,9 @@ function updateUI(): void {
   link.textContent = `Voir l’énigme ${info.puzzle} de référence ↗`;
   $('piston-help').hidden = !info.piston;
   for (const item of document.querySelectorAll<HTMLElement>('[data-lesson]')) {
-    item.classList.toggle('done', learned.has(item.dataset.lesson!));
+    item.classList.toggle('done', tutorialProgress.learned.has(item.dataset.lesson as PullLesson));
   }
-  const stage = !learned.has('pull') ? 'Place-toi à côté d’une caisse, avec une case libre devant toi. Éloigne-toi d’elle avec une flèche : elle occupe la case que tu quittes.'
-    : !learned.has('release') ? 'Pour laisser la caisse en place, pars sur le côté après une traction. Contourne-la pour la tirer ensuite dans une autre direction.'
-    : !learned.has('place') ? 'Amène une caisse sur un + rose. Il faut pouvoir dépasser le bouton d’une case pour y tirer la caisse, puis partir sur le côté.'
-    : !visibleOpenGate(observation.frame) ? 'Les trois + roses doivent être occupés ensemble. Garde de la place pour te repositionner autour des autres caisses.'
-    : 'Le passage est ouvert. Rejoins le contour jaune en laissant les trois caisses sur leurs boutons.';
-  $('lesson-next').textContent = stage;
+  $('lesson-next').textContent = tutorialProgress.prompt(observation.frame);
   canvas.dataset.level = String(observation.level);
   canvas.dataset.completed = String(observation.levelsCompleted);
   canvas.dataset.state = observation.state;
@@ -128,7 +73,7 @@ async function present(next: Observation): Promise<void> {
 function act(action: number): void {
   if (busy || observation.state !== 'NOT_FINISHED') return;
   const before = observation, next = session.action(action);
-  moves++; observeLesson(before,next,action);
+  moves++; tutorialProgress.observe(before,next,action);
   $('feedback').textContent = next.state === 'GAME_OVER' ? 'Le Voleur a été écrasé. Z annule ; R recommence.'
     : next.levelsCompleted > before.levelsCompleted ? 'Niveau terminé !'
     : LEVEL_INFO[before.level-1]!.piston && next.frames.length > 3 ? 'La porte a actionné son piston.'
@@ -137,8 +82,8 @@ function act(action: number): void {
   void present(next);
 }
 function reset(kind: 'undo' | 'reset' | 'restart'): void {
-  generation++; busy = false; lastPullAction = 0;
-  if (kind !== 'undo') {moves = 0; learned = new Set();}
+  generation++; busy = false; tutorialProgress.reset(kind === 'undo');
+  if (kind !== 'undo') moves = 0;
   $('feedback').textContent = kind === 'undo' ? 'Dernière action annulée.' : 'Position initiale restaurée.';
   void present(session[kind]());
   canvas.focus({preventScroll:true});
@@ -148,7 +93,7 @@ for (const id of ['undo','reset','restart'] as const) $(id).addEventListener('cl
 $('play-again').addEventListener('click',()=>reset('restart'));
 $('undo-defeat').addEventListener('click',()=>reset('undo'));
 $('reset-defeat').addEventListener('click',()=>reset('reset'));
-select.addEventListener('change',()=>{generation++;busy=false;moves=0;learned=new Set();lastPullAction=0;void present(session.selectLevel(Number(select.value)));canvas.focus({preventScroll:true});});
+select.addEventListener('change',()=>{generation++;busy=false;moves=0;tutorialProgress.reset();void present(session.selectLevel(Number(select.value)));canvas.focus({preventScroll:true});});
 canvas.addEventListener('keydown',event=>{
   if (event.altKey || event.metaKey) return;
   const key=event.key.toLowerCase();

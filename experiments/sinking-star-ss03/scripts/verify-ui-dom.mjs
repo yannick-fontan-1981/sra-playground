@@ -35,7 +35,8 @@ const key = value => $('board').dispatchEvent(new window.KeyboardEvent('keydown'
 const actionKey = [null,'ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
 const equalFrame = observation => assert.deepEqual(pixels,rgba(observation.frame));
 const settled = async observation => {
-  if (observation.frames.length > 1) await wait((observation.frameDurationsMs ?? observation.frames.map(()=>70)).reduce((a,b)=>a+b,0)+25);
+  const deadline = Date.now() + 3000;
+  while ($('board').dataset.busy === 'true' && Date.now() < deadline) await wait(5);
   equalFrame(observation);
   assert.equal($('board').dataset.busy,'false');
 };
