@@ -2137,3 +2137,11 @@ Le gabarit, les trois faces et la translation du sommet restent compatibles avec
 Le premier clic place la pièce de départ. Les clics **2 et 5** étendent les faces latérales et les clics **7 et 8** prolongent la branche latérale. Chaque ajout respecte l'ordre de profondeur des pièces déjà construites. Le **neuvième clic** confirme la victoire.
 
 Le rejeu chronologique gagne en **9 clics et 10,69 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **24 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 33 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `ea3baf915647f9f03c096f4dc90706a06966ef7307f462bd4b9c1263796db9b8`. TypeScript et les **108 tests ciblés** passent. La couverture atteint **566/636 niveaux (89,0 %)**, dont **67/99 niveaux 6 (67,7 %)**.
+
+### KEYD niveau 6, vérifier les objets d'un inventaire opaque
+
+Le niveau s'ouvre avec un emplacement occupé. Le cadre conservé permet de reconnaître l'indicateur, qui masque la forme portée. SIC cherche quelle forme apprise complète les verrous visibles et vérifie le dépôt de la clé à la **commande 5**. La mesure accepte aussi une clé ajourée dont le contour atteint les quatre côtés de sa case.
+
+La **commande 10** montre qu'un verrou consomme une clé dont le plan prévoyait la conservation. SIC conserve l'état acquis et recalcule. La recharge de la **commande 19** laisse **16 unités** au lieu des 20 prévues et provoque un nouveau calcul. Les marches sans interaction se font en séries vérifiées, dont la plus longue comprend six déplacements. Les commandes **30 et 31** ouvrent le dernier verrou et atteignent la sortie.
+
+Le rejeu chronologique gagne en **31 commandes et 11,88 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **122 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 153 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `c62b1a59130ce9841ca5237b33b1925c56e4cfbaf7aee8de293f6e2608542514`. TypeScript et les **213 tests ciblés** passent. La couverture atteint **567/636 niveaux (89,2 %)**, dont **68/99 niveaux 6 (68,7 %)**.
