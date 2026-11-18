@@ -4,7 +4,7 @@ import type { NativeEntity, NativeFamily, NativeObservation, NativePoint, Native
 import { measureAnimatedContact, type AnimatedContact } from './observed-animation.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
-import { chooseRegulatedContact, learnCurveWitness, measureRegulatedAdjustment, regulatedContactStrategies, retainRegulatedReturn,
+import { chooseRegulatedContact, learnCurveWitness, mayRegulateContact, measureRegulatedAdjustment, regulatedContactStrategies, retainRegulatedReturn,
   type CurveWitness, type RegulatedChoice } from './regulated-transient-contact.ts';
 
 export const animationContactId = 'sic_animation_contact';
@@ -43,7 +43,9 @@ function hasUniquePairBelowAim(entities: readonly NativeEntity[], [x, y]: Native
 
 async function regulatedProposal(observation: NativeObservation, rows: NativeRows, choice: RegulatedChoice): Promise<Proposal | null> {
   const ref = observation.observation_ref, parent = 'G_official_completion';
-  const label = regulatedContactStrategies[choice.strategy], action = choice.action, actions = [action];
+  const label = choice.avoidedPortals && choice.shot ? 'Test an arc that reaches the target while avoiding the perpendicular portals'
+    : regulatedContactStrategies[choice.strategy];
+  const action = choice.action, actions = [action];
   const evidence: [string, ...string[]] = [ref, ...choice.evidence.filter(value => value !== ref)];
   const pointBinding = choice.projected && await ObservedInputDomain.makeLocusWitness(observation, rows, choice.projected, { reason: label, evidence });
   if (choice.projected && !pointBinding) return null;
@@ -58,6 +60,7 @@ async function regulatedProposal(observation: NativeObservation, rows: NativeRow
     sicSituationCard: { strategy: choice.strategy, need: 'Find a trajectory that reaches the stationary piece',
       situation: label, evidence, agenda: [], mode: choice.shot ? 'solving' : 'exploration',
       source: choice.source, peer: choice.peer, meter: choice.meter, point: choice.projected ? [...choice.projected, ...choice.projected] : null,
+      ...(choice.avoidedPortals ? { avoidedPortals: choice.avoidedPortals } : {}),
       ...(choice.sourceCandidate ? { sourceCandidate: true } : {}),
       ...(choice.impact ? { obstacle: choice.impact.obstacle } : {}) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -74,13 +77,13 @@ export function createSicAnimationContact(family = animationContactId): NativeFa
   return {
     id: family,
     proposeInGroup(group, observation, rows, inputs, remaining, execution) {
-      const current = !learns && curve?.epoch === observation.level_epoch;
+      const current = !learns && mayRegulateContact(curve, observation);
       if ((group === observedMechanicsGroup) !== current) return null;
       return this.propose(observation, rows, inputs, remaining, execution);
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      if (!learns && curve?.epoch === observation.level_epoch) {
+      if (!learns && curve && mayRegulateContact(curve, observation)) {
         const choice = chooseRegulatedContact(curve, observation, rows);
         return choice ? regulatedProposal(observation, rows, choice) : null;
       }

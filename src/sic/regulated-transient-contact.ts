@@ -3,12 +3,13 @@ import { measureScalarFillDisplay, orderedTransientComponentPathFacts } from '..
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { supportKey, supportParts } from '../logos-engine/v6-support-measurements.ts';
 import type { NativeBox, NativeCommand, NativeObservation, NativePoint, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { revalidatedDirectArc } from './revalidated-transient-arc.ts';
 
 type Model = NonNullable<ReturnType<typeof acquireTransientCurve>>;
 type Adjustment = { delta: number; evidence: string };
 type Impact = { point: NativePoint; count: number; obstacle: NativeBox; evidence: string; displayOverlay?: string };
 export type CurveWitness = { model: Model; epoch: number | null; controls: Record<string, Adjustment>; attempted: string[];
-  boundary?: string; impact?: Impact };
+  boundary?: string; impact?: Impact; revalidated?: true };
 export const regulatedContactStrategies = {
   measure_trajectory_adjustment: 'Test how an available command changes the visible magnitude',
   raise_trajectory_clearance: 'Raise the observed magnitude to seek a contact that clears the visible obstacles',
@@ -21,8 +22,13 @@ type Strategy = keyof typeof regulatedContactStrategies;
 export type RegulatedChoice = {
   strategy: Strategy; action: NativeCommand; source: NativeBox; peer: NativeBox; meter: NativeBox; projected: NativePoint | null;
   count: number; expectedSign: number | null; shot: string | null; evidence: string[];
-  sourceCandidate?: string; impact?: Impact;
+  sourceCandidate?: string; impact?: Impact; avoidedPortals?: NativeBox[];
 };
+
+export function mayRegulateContact(witness: CurveWitness | null, observation: NativeObservation): boolean {
+  return !!witness && (witness.epoch === observation.level_epoch
+    || !!witness.boundary && witness.epoch === observation.level_epoch - 1);
+}
 
 function measureImpact(model: Model, facts: NativeRecord, first: NativeRows, second: NativeRows,
   animationStart: NativeRows, command: NativeCommand, evidence: string): Impact | null {
@@ -62,9 +68,32 @@ export function learnCurveWitness(before: NativeObservation, after: NativeObserv
 
 export function chooseRegulatedContact(witness: CurveWitness, observation: NativeObservation, rows: NativeRows): RegulatedChoice | null {
   const available = observation.available_action_refs;
-  if (witness.epoch !== observation.level_epoch || !available.includes('ACTION6')) return null;
+  if (!mayRegulateContact(witness, observation) || !available.includes('ACTION6')) return null;
   const fill = measureScalarFillDisplay(rows), count = fill.scalar_fill_count as number;
   if (!matchingTransientDisplay(witness.model.fill, fill) || count < 1) return null;
+  const newContext = witness.epoch !== observation.level_epoch;
+  if (newContext || witness.revalidated) {
+    if (fill.scalar_fill_orientation !== 'horizontal') return null;
+    const arc = revalidatedDirectArc(witness.model, rows, count, fill.scalar_fill_index, newContext ? [] : witness.attempted);
+    if (!arc) return null;
+    const evidence = [...new Set([...(witness.model.evidence as string[]), ...(witness.boundary ? [witness.boundary] : []),
+      ...Object.values(witness.controls).map(entry => entry.evidence)])];
+    const meter: NativeBox = [fill.scalar_fill_start, fill.scalar_fill_index, fill.scalar_fill_end, fill.scalar_fill_index];
+    const view = { source: arc.source, peer: arc.peer, meter, count, evidence, avoidedPortals: arc.portals };
+    if (arc.point) {
+      const [x, y] = arc.point;
+      return { ...view, strategy: 'test_regulated_contact', action: { action_ref: 'ACTION6', data: { x, y } },
+        projected: arc.point, expectedSign: null, shot: [count, x, y].join(',') };
+    }
+    if (count >= fill.scalar_fill_span) return null;
+    const opposites: Readonly<Record<string, string>> = { ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3' };
+    const increase = !newContext ? Object.entries(witness.controls).find(([input, control]) => control.delta > 0 && available.includes(input))?.[0] : null;
+    const adjustment = Object.entries(witness.controls).find(([input, control]) => control.delta < 0 &&
+      available.includes(opposites[input]!) && (newContext || !witness.controls[opposites[input]!]));
+    const input = increase ?? (adjustment && opposites[adjustment[0]]);
+    return input ? { ...view, strategy: increase ? 'raise_trajectory_clearance' : 'measure_trajectory_adjustment',
+      action: { action_ref: input, data: {} }, projected: null, expectedSign: increase ? 1 : null, shot: null } : null;
+  }
   const current = projectTransientCurve(witness.model, rows, count);
   const role = current.reason === 'current_source_peer_not_unique' && witness.model.acquisition_epoch !== observation.level_epoch
     ? transientSourceRoleProbe(witness.model, rows) : null;
@@ -130,8 +159,12 @@ export function measureRegulatedAdjustment(choice: RegulatedChoice, first: Nativ
 export function retainRegulatedReturn(witness: CurveWitness, choice: RegulatedChoice, before: NativeObservation,
   after: NativeObservation, first: NativeRows, second: NativeRows, frames: readonly NativeRows[]): CurveWitness {
   if (after.levels_completed > before.levels_completed) {
-    const { impact: _impact, ...retained } = witness;
+    const { impact: _impact, revalidated: _revalidated, ...retained } = witness;
     return { ...retained, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
+  }
+  if (choice.avoidedPortals && witness.epoch !== before.level_epoch) {
+    const { impact: _impact, ...retained } = witness;
+    witness = { ...retained, epoch: before.level_epoch, revalidated: true, attempted: [] };
   }
   if (choice.shot) {
     const measurement = learnCurveWitness(before, after, choice.action, first, second, frames, witness, choice.sourceCandidate);
