@@ -37,6 +37,30 @@ test('measured reachable anchors can place a motif away from every current piece
   assert.deepEqual(targets[0]?.add, targets[0]?.target);
 });
 
+test('preserve the piece under a corner guide on a previously measured grid', async () => {
+  const session = fixture.sessions.find((item: any) => item.id === 'discriminating-return-unit');
+  const sample = session.steps.find((item: any) =>
+    relativeArrangementProject(item.beforeObservation, item.beforePublic.frame_rows)?.selected);
+  const layout = relativeArrangementProject(sample.beforeObservation, sample.beforePublic.frame_rows);
+  assert.ok(layout?.selected);
+  const stationary = layout.objects.find(piece => piece.marker === null);
+  assert.ok(stationary);
+  const rows = sample.beforePublic.frame_rows.map((row: number[]) => row.slice());
+  const [x, y] = stationary.point, mid = Math.floor(layout.size / 2), edge = layout.size - 1;
+  const left = x - mid, top = y - mid;
+  const ink = layout.terrain.find(value => value !== stationary.value);
+  assert.notEqual(ink, undefined);
+  for (const dy of [0, edge]) for (const dx of [0, edge]) rows[top + dy][left + dx] = ink;
+  const observation = await measureNativeObservation({ ...sample.beforePublic, frame_rows: rows }, 100, 'guide-overlay');
+  assert.equal(relativeArrangementProject(observation, rows), null);
+  const retained = relativeArrangementProject(observation, rows, layout);
+  assert.deepEqual(retained?.objects, layout.objects);
+  assert.deepEqual(retained?.selected, layout.selected);
+
+  rows[top][left + 1] = ink;
+  assert.equal(relativeArrangementProject(observation, rows, layout), null);
+});
+
 // family.py exports list(set). Only this unordered collection is normalized.
 // Rank vectors, ordered alternatives, DFS pad cells and SRC receipts stay exact.
 function lexicographic(left: any, right: any): number {

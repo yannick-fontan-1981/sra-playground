@@ -17,7 +17,8 @@ type Learn = { kind: 'learn'; point: Point; axis: Axis; pad: string; marker: Poi
 type Place = { kind: 'place'; point: Point; pad: string; marker: Point; expected: Point; goal: Point };
 type Choice = Select | Learn | Place;
 type Memory = { epoch: number; scope: string; gains: Record<string, Gains>; pieces: Record<string, SelectedPad[]>;
-  rejected: string[]; refs: string[]; blocked: boolean; destination?: ReturnType<typeof translatedRelativeArrangementTargets>[number] };
+  rejected: string[]; refs: string[]; blocked: boolean; destination?: ReturnType<typeof translatedRelativeArrangementTargets>[number];
+  grid?: Pick<RelativeArrangementLayout, 'board' | 'size'> };
 type Witness = { epoch: number; score: number; refs: string[]; shape?: Point; gains?: Record<string, Gains> };
 type Proposal = NativeProposal & { layout: RelativeArrangementLayout; memory: Memory; choice: Choice; needId: string };
 type Waypoint = { point: Point; pad: string; marker: Point; expected: Point };
@@ -33,6 +34,10 @@ const activePads = ({ pads }: RelativeArrangementLayout): SelectedPad[] =>
 const gainsFor = (memory: Memory, value: number, pad: string): Gains => memory.gains[gainKey(value, pad)] ?? [null, null];
 const trialKey = (piece: RelativeArrangementCell, pad: string, from: Point, to: Point) =>
   `${pieceKey(piece)}/${pad}/${pointKey(from)}/${pointKey(to)}`;
+
+function readArrangement(observation: Parameters<typeof relativeArrangementProject>[0], rows: NativeRows, grid?: Memory['grid']) {
+  return relativeArrangementProject(observation, rows) ?? (grid ? relativeArrangementProject(observation, rows, grid) : null);
+}
 
 function learnAxis(layout: RelativeArrangementLayout, memory: Memory): Learn | null {
   if (!layout.selected) return null;
@@ -224,7 +229,7 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining) {
       if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed || remaining < 1
         || !observation.available_action_refs.includes('ACTION6')) return null;
-      const layout = relativeArrangementProject(observation, rows);
+      const layout = readArrangement(observation, rows, state?.epoch === observation.level_epoch ? state.grid : undefined);
       if (!layout || layout.pads.length > 3) return null;
       const prior = state?.epoch === observation.level_epoch && state.scope === layout.scope_ref ? state : null;
       if (prior?.blocked) return null;
@@ -278,7 +283,7 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = verifyChoice(proposal.layout, relativeArrangementProject(after, second), proposal.choice);
+      const matched = verifyChoice(proposal.layout, readArrangement(after, second, proposal.layout), proposal.choice);
       return { matched, seal_prefix: true, reason: matched ? 'selected_piece_and_control_return_verified' : 'relative_motion_prediction_differs' };
     },
     record(before, after, _action, _first, second, proposal) {
@@ -289,8 +294,9 @@ export function createSicObservedActuatorArrangement(): NativeFamily<Proposal> {
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const next = relativeArrangementProject(after, second), matched = verifyChoice(layout, next, choice);
+      const next = readArrangement(after, second, layout), matched = verifyChoice(layout, next, choice);
       const update = { ...memory, pieces: { ...memory.pieces }, gains: { ...memory.gains },
+        grid: { board: layout.board, size: layout.size },
         refs: [...memory.refs.slice(-6), after.observation_ref], blocked: !next || choice.kind === 'select' && !matched };
       if (next?.selected && layout.selected && choice.kind !== 'select') {
         const old = layout.selected, oldPad = activePads(layout).find(pad => pad.ref === choice.pad)!;
