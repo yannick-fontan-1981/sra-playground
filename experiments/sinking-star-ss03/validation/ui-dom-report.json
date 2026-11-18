@@ -1,0 +1,17 @@
+{
+  "success": true,
+  "environment": "happy-dom with a canvas pixel buffer stub",
+  "visualBrowserTest": false,
+  "checks": [
+    "Exact compiled inline script initializes level 1 and the open tutorial; canvas pixels match the engine",
+    "Four directional controls and five pulling lessons; no preview or Space instruction",
+    "Space leaves both game pixels and the action counter unchanged",
+    "A directional pull updates the lessons and displays all three engine frames; concurrent directions are ignored",
+    "Undo during a pull cancels pending animation frames",
+    "A direction button pulls; Reset during animation restores the initial pixels, counter, and lesson checklist",
+    "Level selection during an animation cancels stale frames; source reference and return to the tutorial work",
+    "Undo after opening the gate updates the current guidance to the closed passage while preserving the acquired lesson",
+    "The complete tutorial witness teaches all five lessons and advances automatically to level 2",
+    "All captured stable and animation frames contain no light-gray preview pixels"
+  ]
+}
