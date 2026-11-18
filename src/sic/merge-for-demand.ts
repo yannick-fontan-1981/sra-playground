@@ -24,7 +24,7 @@ type Pressure = { readonly body: MobileGlyph; readonly travel: number; readonly 
   readonly attempts: readonly string[]; readonly refs: readonly string[]; readonly lost?: true };
 type Memory = { readonly epoch: number; readonly scene: Scene; readonly recipes: readonly Recipe[];
   readonly motion: readonly Motion[]; readonly tried: readonly string[]; readonly count: number; readonly radius?: Radius;
-  readonly pressure?: Pressure; readonly mobiles?: readonly Pressure[] };
+  readonly pressure?: Pressure; readonly mobiles?: readonly Pressure[]; readonly parallelContact?: readonly string[] };
 type Choice = { readonly intent: 'merge' | 'approach' | 'deliver' | 'divert'; readonly member: Piece; readonly partner: Piece | null;
   readonly point: NativePoint; readonly expected: Recipe | null; readonly delivery?: { demand: Piece; receptor: NativeBox };
   readonly projected?: readonly Piece[]; readonly reserved?: readonly Piece[] };
@@ -65,11 +65,11 @@ function identify(observation: NativeObservation, screenWidth: number, screenHei
     const samples = entities.filter(part => solidSquare(part) && width(part.bbox) >= 2 &&
       part.bbox[0] > left && part.bbox[1] > top && part.bbox[2] < right && part.bbox[3] < stripBottom).map(piece);
     samples.sort((a, b) => a.point[0] - b.point[0]);
-    if (samples.length < 3 || samples.length > 5 || new Set(samples.map(item => item.color)).size !== samples.length ||
+    if (samples.length < 3 || samples.length > 8 || new Set(samples.map(item => item.color)).size !== samples.length ||
       samples.some(item => item.side !== samples[0]!.side || item.point[1] !== samples[0]!.point[1])) continue;
     const demand = entities.filter(part => solidSquare(part) && !enclosed(frame.bbox, part.bbox) && width(part.bbox) > samples[0]!.side &&
       part.bbox[1] <= screenHeight / 6 && samples.some(item => item.color === part.palette_value));
-    if (!demand.length || demand.length > 4) continue;
+    if (!demand.length || demand.length > 4 || (samples.length > 5 && demand.length === 1)) continue;
     const requirements = demand.map(piece), wanted = requirements.reduce((largest, item) => item.side > largest.side ? item : largest);
     const fieldTop = Math.max(stripBottom, ...requirements.map(item => item.box[3])) + 1;
     const receptacles = entities.filter(part => part.bbox[1] >= fieldTop && part.bbox[3] <= bottom &&
@@ -319,8 +319,20 @@ function clickToward(stock: readonly Piece[], memory: Memory, affected: readonly
 }
 
 function nextSplitChoice(stock: readonly Piece[], memory: Memory): Choice | null {
-  const { scene, radius } = memory, requirements = [...scene.requirements!];
-  if (!radius || radius.lower < 1 || radius.upper - radius.lower > 5 || !canSupply(stock, requirements, memory)) return null;
+  const { scene, radius } = memory;
+  if (!radius || radius.lower < 1 || radius.upper - radius.lower > 5) return null;
+  const requests = scene.requirements!;
+  let requirements = [...requests];
+  if (!canSupply(stock, requirements, memory)) {
+    if (!memory.parallelContact) return null;
+    // Preserve a contribution we can already produce while the independent contact evolves.
+    requirements = [];
+    for (let selected = 1; selected < (1 << requests.length); selected++) {
+      const subset = requests.filter((_, index) => selected & (1 << index));
+      if (subset.length > requirements.length && canSupply(stock, subset, memory)) requirements = subset;
+    }
+    if (!requirements.length) return null;
+  }
   const receivers = scene.receivers!;
   const nearest = (demand: Piece) => Math.min(...stock.filter(item => matches(item, demand))
     .flatMap(item => receivers.map(receptor => distance(anchor(item), center(receptor)))));
@@ -356,8 +368,11 @@ function nextSplitChoice(stock: readonly Piece[], memory: Memory): Choice | null
     if (Number.isFinite(workload) && remainingMerges([...rest, output], requirements, memory) >= workload) return [];
     return canSupply([...rest, output], requirements, memory) ? [{ a, b, recipe, rest, middle, gap: distance(a.point, b.point) }] : [];
   })).sort((a, b) => a.gap - b.gap);
+  const destinations = receivers.filter(receptor => !occupied.has(receptor)).map(center);
   for (const { a, b, recipe, rest, middle } of pairs) {
-    const point = clickToward(stock, memory, [a, b], middle, () => true);
+    const toward = memory.parallelContact
+      ? [...destinations].sort((a, b) => distance(a, middle) - distance(b, middle))[0] ?? middle : middle;
+    const point = clickToward(stock, memory, [a, b], toward, () => true);
     if (point) return { intent: 'merge', member: a, partner: b, point, expected: recipe, reserved,
       projected: [...rest, placedAt(recipe.output, recipe.outputSide, point)] };
   }
@@ -514,7 +529,10 @@ export function createSicMergeForDemand(): NativeFamily<Proposal | ContactPropos
         return offerContact(observation, rows, execution?.reasoningMode ?? 'exploration', execution?.signal, shouldStop);
       }
       if ((prior?.count ?? 0) >= 40) return null;
-      const saved = transfer && identified.samples.map(sample => sample.color).join() === transfer.palette.join() ? transfer : null;
+      const palette = identified.samples.map(sample => sample.color).join();
+      const previousContact = contact?.epoch === observation.level_epoch - 1 && contact.contacts > 0
+        && identified.requirements && identified.requirements.length > 1 && palette === contact.scene.palette.join() ? contact : null;
+      const saved = transfer && (palette === transfer.palette.join() || previousContact) ? transfer : null;
       const glyphs = !prior && saved ? observeMobiles(observation, identified) : [];
       const mobile = !identified.requirements && glyphs.length === 1 ? glyphs[0] : null;
       const inheritedEffect = saved?.mobileEffect;
@@ -525,6 +543,7 @@ export function createSicMergeForDemand(): NativeFamily<Proposal | ContactPropos
       const pressure: Pressure | undefined = mobile ? { body: mobile, travel: 0, diversion: 0, attempts: [], refs: [observation.observation_ref] } : undefined;
       const memory: Memory = prior ?? { scene, epoch: observation.level_epoch, recipes: inherited?.recipes ?? [],
         motion: inherited?.motion ?? [], tried: [], count: 0, ...(inherited ? { radius: inherited.radius } : {}), ...(pressure ? { pressure } : {}),
+        ...(previousContact && multiple ? { parallelContact: previousContact.refs } : {}),
         ...(multiple ? { mobiles: glyphs.map(body => ({ ...inheritedEffect!, body, attempts: [],
           refs: [...inheritedEffect!.refs.slice(-3), observation.observation_ref] })) } : {}) };
       const stock = readStock(observation, scene);
@@ -541,7 +560,8 @@ export function createSicMergeForDemand(): NativeFamily<Proposal | ContactPropos
       if (decision.result !== strategy) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([measured?.evidence, ...memory.recipes.map(recipe => recipe.evidence),
-        ...(scene.requirements ? memory.radius?.refs ?? [] : []), ...(memory.pressure?.refs ?? []), ...(memory.mobiles?.flatMap(body => body.refs) ?? [])]
+        ...(scene.requirements ? memory.radius?.refs ?? [] : []), ...(memory.pressure?.refs ?? []),
+        ...(memory.mobiles?.flatMap(body => body.refs) ?? []), ...(memory.parallelContact ?? [])]
         .filter((item): item is string => !!item && item !== ref))];
       const situation = choice.intent === 'divert' ? 'Test whether an isolated click gives the needed material more room'
         : choice.intent === 'merge'
@@ -635,6 +655,9 @@ export function createSicMergeForDemand(): NativeFamily<Proposal | ContactPropos
         : memory.radius;
       state = { ...memory, motion, recipes, count: memory.count + 1, tried: [...memory.tried, proposal.attempt], ...(radius ? { radius } : {}),
         ...(pressure ? { pressure } : {}), ...(crowd ? { mobiles: crowd.mobiles } : {}) };
+      if (effect && 'parallelChange' in effect && effect.parallelChange && memory.parallelContact) {
+        return { events: [], reviewEvidence: 'The planned material changed as expected, and another piece changed during the same click.' };
+      }
       return { events: [], ...(memory.pressure?.travel === 0 && mobile?.pressure.travel ?
         { reviewEvidence: 'The mobile changed position during the material action.' } : {}) };
     },
