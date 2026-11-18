@@ -210,8 +210,10 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const received = supplyOutcome(proposal.choice, prior.layout, first, second);
         distribution = { ...prior, refs, stopped: received === null };
-        return { events: [], ...(received === 'stock_decreased_without_resolved_storage_rise'
-          ? { reviewEvidence: 'The source decreased while the visible storage height held and the outlet stayed isolated.' } : {}) };
+        return { events: [], ...(received === 'upstream_relay_primed_before_storage'
+          ? { reviewEvidence: 'The source decreased and the inlet relay changed while the store and receivers stayed unchanged.' }
+          : received === 'stock_decreased_without_resolved_storage_rise'
+            ? { reviewEvidence: 'The source decreased while the visible storage height held and the outlet stayed isolated.' } : {}) };
       }
       const { local, target } = proposal, { phase } = local;
       if (after.levels_completed > before.levels_completed && phase === 'serve') {
