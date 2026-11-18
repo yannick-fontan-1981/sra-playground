@@ -17,12 +17,14 @@ type Scene = { actor: number; carrier: number; exit: number; cue: number | null;
   rivals: Rival[] };
 type Shelter = { phase: 'meet' | 'hold' | 'exit'; cell: number }
   | { phase: 'release' | 'seal'; cell: number; opening: number };
+type ApproachProtection = { cage: { cell: number; rival: Rival } | null };
 type Memory = { epoch: number; grid: Grid; cells: Pick<Scene, 'walls' | 'rails' | 'exit'> & { rivals?: Rival[] };
   visited: number[]; intercept: string | null; caged: string[]; refs: string[]; count: number;
   forecast?: boolean; opening?: number; shield?: { cell: number; rivalId: string };
-  rivalCount?: number; shelter?: Shelter | null };
+  rivalCount?: number; shelter?: Shelter | null; approach?: ApproachProtection | null };
 type ShelterAction = 'meet' | 'hold' | 'prepare' | 'release' | 'seal' | 'escort';
-type Intervention = 'contain' | 'divert' | 'open' | 'accompany' | 'shield' | ShelterAction;
+type Intervention = 'contain' | 'divert' | 'open' | 'accompany' | 'shield' | ShelterAction
+  | 'reach_interceptor' | 'cage_interceptor' | 'clear_interceptor';
 type Choice = { kind: Intervention; target: number; action: string; actor: number; carrier: number | null;
   toggle: boolean; rival: Scene['rivals'][number] | null };
 type Proposal = NativeProposal & { memory: Memory; scene: Scene; choice: Choice; needId: string };
@@ -328,6 +330,40 @@ function shelterChoice(scene: Scene, memory: Memory): Choice | null {
   return target === undefined ? null : go('meet', target, false);
 }
 
+function protectApproach(scene: Scene, memory: Memory): Choice | null {
+  const { grid } = memory;
+  const cage = memory.approach?.cage;
+  if (cage?.cell === scene.actor) return { kind: 'clear_interceptor', target: cage.cell, action: localCommand,
+    actor: scene.actor, carrier: scene.cue, toggle: true, rival: cage.rival };
+
+  const rail = new Set(scene.rails.filter(cell => !scene.walls.includes(cell)));
+  const approach = new Map([[scene.exit, 0]]), queue = [scene.exit];
+  for (const cell of queue) for (const step of neighbors(grid, cell)) {
+    if (!rail.has(step.cell) || approach.has(step.cell)) continue;
+    approach.set(step.cell, approach.get(cell)! + 1);
+    queue.push(step.cell);
+  }
+  if (approach.size < 2) return null;
+  const threat = scene.rivals.flatMap(rival => {
+    if (scene.walls.includes(rival.cell)) return [];
+    const target = approach.has(rival.cell) ? rival.cell : rival.cue;
+    return target === null || target === scene.exit || !approach.has(target) ? [] : [{ target, rival }];
+  }).sort((a, b) => approach.get(a.target)! - approach.get(b.target)!
+    || distance(grid, a.target, scene.actor) - distance(grid, b.target, scene.actor))[0];
+  if (threat?.rival.cell === scene.actor && scene.actor !== scene.carrier && scene.actor !== scene.cue) {
+    return { kind: 'cage_interceptor', target: scene.actor, action: localCommand,
+      actor: scene.actor, carrier: scene.cue, toggle: true, rival: threat.rival };
+  }
+  const target = threat?.target ?? scene.exit;
+  const steps = neighbors(grid, scene.actor);
+  const step = scene.actor === target
+    ? steps.find(candidate => candidate.cell !== scene.carrier && candidate.cell !== scene.cue)
+    : steps.find(candidate => distance(grid, candidate.cell, target) < distance(grid, scene.actor, target));
+  if (!step || (!threat && (scene.cue === null || scene.cue === scene.carrier))) return null;
+  return { kind: threat ? 'reach_interceptor' : 'escort', target, action: step.action, actor: step.cell,
+    carrier: scene.cue, toggle: false, rival: threat?.rival ?? null };
+}
+
 function selectChoice(scene: Scene, memory: Memory): Choice | null {
   const instruction = selectIntervention(scene, memory);
   if (!instruction) return null;
@@ -347,13 +383,21 @@ function expectedCells(proposal: Proposal): Memory['cells'] {
   return { walls: [...walls], rails: scene.rails, exit: scene.exit, rivals: scene.rivals };
 }
 
-const opensWall = (kind: Intervention) => kind === 'open' || kind === 'prepare' || kind === 'release';
+const opensWall = (kind: Intervention) => kind === 'open' || kind === 'prepare' || kind === 'release' || kind === 'clear_interceptor';
 
 function verifyIntervention(proposal: Proposal, next: Scene | null, rows: NativeRows, wall: number): boolean | null {
   const { memory, choice } = proposal;
   if (!next || next.actor !== choice.actor || (choice.carrier !== null && next.carrier !== choice.carrier)) return false;
   if (choice.kind === 'prepare' && memory.shelter?.phase === 'hold' && !next.walls.includes(memory.shelter.cell)) return false;
   if (!choice.toggle) return true;
+  if (choice.kind === 'cage_interceptor') {
+    const held = next.rivals.some(rival => rival.cell === choice.target && rival.color === choice.rival?.color && rival.cue === null);
+    return held && next.walls.includes(choice.target) ? null : false;
+  }
+  if (choice.kind === 'clear_interceptor') {
+    return !next.walls.includes(choice.target) && next.rivals.length === proposal.scene.rivals.length - 1
+      && !next.rivals.some(rival => rival.cell === choice.target && rival.color === choice.rival?.color);
+  }
   if (choice.kind === 'contain') {
     const rival = next.rivals.find(value => value.id === choice.rival?.id);
     return !rival || rival.cell !== choice.target ? false : choice.rival?.cue !== null ? true : null;
@@ -376,6 +420,9 @@ const purposes = {
   release: 'Release the marked body when it announces the new passage',
   seal: 'Close the passage behind the marked body after it moves through',
   escort: 'Follow the marked body toward its matching outline and check each announced move',
+  reach_interceptor: 'Reach a visible rival entering the rail connected to the destination',
+  cage_interceptor: 'Contain the rival before it can intercept the marked body on the destination rail',
+  clear_interceptor: 'Reopen the destination rail and check that the contained rival is gone',
 };
 
 export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & { learn(witness: RouteInterventionWitness): void } {
@@ -391,7 +438,7 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
       if ((prior?.count ?? 0) >= 64) return null;
       const grid = prior?.grid ?? gridOn(rows, roles);
       if (!grid) return null;
-      const memory = prior ?? { epoch: observation.level_epoch, grid,
+      const memory: Memory = prior ?? { epoch: observation.level_epoch, grid,
         cells: { walls: [], rails: [], exit: -1 }, visited: [], intercept: null, caged: [], refs: roles.refs, count: 0,
         forecast: roles.routeVerified === true };
       const scene = project(rows, grid, roles, memory.cells, Boolean(memory.shelter));
@@ -400,7 +447,13 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
       const increasedPressure = memory.forecast && roles.rivalCount !== undefined && scene.rivals.length > roles.rivalCount;
       const shelter = memory.shelter || (memory.shelter === undefined && memory.count === 0 && increasedPressure && routeLeadsAway)
         ? shelterChoice(scene, memory) : null;
-      const choice = shelter ?? selectChoice(scene, memory);
+      // Transfer the local wall intervention after a completed sheltered route.
+      // The next route can present greater pressure while still heading toward its exit.
+      const canTransfer = !prior && state?.epoch === observation.level_epoch - 1 && state.shelter?.phase === 'exit'
+        && increasedPressure && !routeLeadsAway;
+      const approach = !shelter && memory.approach && memory.opening !== undefined
+        ? protectApproach(scene, memory) : null;
+      const choice = shelter ?? approach ?? selectChoice(scene, memory);
       const action: NativeCommand | undefined = inputs.find(input => input.action_ref === choice?.action);
       if (!choice || !action) return null;
       const ref = observation.observation_ref, parent = 'G_official_completion', evidence: [string, ...string[]] = [ref, ...memory.refs];
@@ -410,7 +463,8 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = `protect-route:${need.id}`, strategy = choice.toggle ? 'P05' : 'P07';
       const reason = purposes[choice.kind], actions = [action];
-      return { status: 'proposed', kind: observedRouteInterventionId, actions, memory, scene, choice, needId: need.id,
+      return { status: 'proposed', kind: observedRouteInterventionId, actions,
+        memory: canTransfer ? { ...memory, approach: { cage: null } } : memory, scene, choice, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: [{ action, expected_after: { cursor: choice.actor, markedBody: choice.carrier } }],
         sicSituationCard: { strategy, mode: choice.toggle ? 'exploration' : 'solving', need: 'Bring the autonomous body to its matching outline',
@@ -448,6 +502,7 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
       const projected = expectedCells(proposal), next = project(second, memory.grid, roles, projected, overlapping);
       if (!next) {
         if (memory.shelter || choice.kind === 'meet' || choice.kind === 'hold') state = { ...memory, shelter: null };
+        if (memory.approach) state = { ...memory, approach: null };
         return { events: [] };
       }
       const verified = verifyIntervention(proposal, next, second, roles.wall);
@@ -458,6 +513,9 @@ export function createSicObservedRouteIntervention(): NativeFamily<Proposal> & {
         intercept: caged ? null : followedRival?.id ?? null, caged: caged ? [...memory.caged, followedRival!.id] : memory.caged,
         refs: [...memory.refs.slice(-6), after.observation_ref], rivalCount: Math.max(memory.rivalCount ?? 0, scene.rivals.length) };
       if (choice.kind === 'open' && choice.toggle && verified !== false) state.opening = choice.target;
+      if (memory.approach && verified === false) state.approach = null;
+      else if (choice.kind === 'cage_interceptor' && choice.rival) state.approach = { cage: { cell: choice.target, rival: choice.rival } };
+      else if (choice.kind === 'clear_interceptor') state.approach = { cage: null };
       if (choice.kind === 'shield' && choice.rival) state.shield = { cell: choice.target, rivalId: choice.rival.id };
       if (verified === false && (memory.shelter || choice.kind === 'meet' || choice.kind === 'hold')) state.shelter = null;
       else if (choice.kind === 'meet') state.shelter = { phase: 'meet', cell: choice.target };
