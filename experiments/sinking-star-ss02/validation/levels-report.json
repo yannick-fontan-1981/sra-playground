@@ -1,0 +1,209 @@
+{
+  "game": "SS02",
+  "levels": [
+    {
+      "level": 1,
+      "title": "Le camp du Guerrier — tutoriel",
+      "actions": 48,
+      "pushes": 15,
+      "maxChain": 2,
+      "dimensions": [
+        17,
+        13
+      ],
+      "initialWalkingCells": 44,
+      "waterCells": 11,
+      "buttons": 2,
+      "stones": 3,
+      "createdSupports": 1,
+      "platformWalks": 3,
+      "platformPushes": 1,
+      "crossAxisPlatformPushes": 0,
+      "waterNecessity": null,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 2,
+      "title": "Dégager les deux salles",
+      "actions": 27,
+      "pushes": 12,
+      "maxChain": 3,
+      "dimensions": [
+        13,
+        9
+      ],
+      "initialWalkingCells": 9,
+      "waterCells": 0,
+      "buttons": 0,
+      "stones": 10,
+      "createdSupports": 0,
+      "platformWalks": 0,
+      "platformPushes": 0,
+      "crossAxisPlatformPushes": 0,
+      "waterNecessity": null,
+      "doorsOpenAtFinish": false,
+      "solved": true
+    },
+    {
+      "level": 3,
+      "title": "La digue et la cheminée",
+      "actions": 55,
+      "pushes": 13,
+      "maxChain": 1,
+      "dimensions": [
+        15,
+        13
+      ],
+      "initialWalkingCells": 40,
+      "waterCells": 12,
+      "buttons": 1,
+      "stones": 3,
+      "createdSupports": 2,
+      "platformWalks": 3,
+      "platformPushes": 0,
+      "crossAxisPlatformPushes": 0,
+      "waterNecessity": {
+        "proven": true,
+        "method": "exhaustive-search-without-sinking",
+        "status": "unsolvable",
+        "states": 2710
+      },
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 4,
+      "title": "Les amarres croisées",
+      "actions": 86,
+      "pushes": 30,
+      "maxChain": 1,
+      "dimensions": [
+        17,
+        15
+      ],
+      "initialWalkingCells": 58,
+      "waterCells": 20,
+      "buttons": 2,
+      "stones": 5,
+      "createdSupports": 3,
+      "platformWalks": 5,
+      "platformPushes": 2,
+      "crossAxisPlatformPushes": 0,
+      "waterNecessity": {
+        "proven": true,
+        "method": "dry-terrain-components",
+        "unreachableButtons": 2,
+        "goalDisconnected": true
+      },
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 5,
+      "title": "Le port des trois appuis",
+      "actions": 98,
+      "pushes": 44,
+      "maxChain": 1,
+      "dimensions": [
+        18,
+        15
+      ],
+      "initialWalkingCells": 133,
+      "waterCells": 59,
+      "buttons": 2,
+      "stones": 5,
+      "createdSupports": 3,
+      "platformWalks": 5,
+      "platformPushes": 2,
+      "crossAxisPlatformPushes": 2,
+      "waterNecessity": {
+        "proven": true,
+        "method": "dry-terrain-components",
+        "unreachableButtons": 1,
+        "goalDisconnected": true
+      },
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 6,
+      "title": "La spirale et le quai de manœuvre",
+      "actions": 76,
+      "pushes": 25,
+      "maxChain": 1,
+      "dimensions": [
+        15,
+        15
+      ],
+      "initialWalkingCells": 17,
+      "waterCells": 112,
+      "buttons": 2,
+      "stones": 6,
+      "createdSupports": 4,
+      "platformWalks": 7,
+      "platformPushes": 4,
+      "crossAxisPlatformPushes": 4,
+      "waterNecessity": {
+        "proven": true,
+        "method": "dry-terrain-components",
+        "unreachableButtons": 1,
+        "goalDisconnected": true
+      },
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 7,
+      "title": "Les trois boutons",
+      "actions": 58,
+      "pushes": 11,
+      "maxChain": 2,
+      "dimensions": [
+        9,
+        8
+      ],
+      "initialWalkingCells": 33,
+      "waterCells": 0,
+      "buttons": 3,
+      "stones": 3,
+      "createdSupports": 0,
+      "platformWalks": 0,
+      "platformPushes": 0,
+      "crossAxisPlatformPushes": 0,
+      "waterNecessity": null,
+      "doorsOpenAtFinish": true,
+      "solved": true
+    },
+    {
+      "level": 8,
+      "title": "Les trois chantiers",
+      "actions": 88,
+      "pushes": 27,
+      "maxChain": 1,
+      "dimensions": [
+        19,
+        17
+      ],
+      "initialWalkingCells": 30,
+      "waterCells": 182,
+      "buttons": 3,
+      "stones": 9,
+      "createdSupports": 6,
+      "platformWalks": 11,
+      "platformPushes": 4,
+      "crossAxisPlatformPushes": 4,
+      "waterNecessity": {
+        "proven": true,
+        "method": "dry-terrain-components",
+        "unreachableButtons": 3,
+        "goalDisconnected": false
+      },
+      "doorsOpenAtFinish": true,
+      "solved": true
+    }
+  ],
+  "success": true,
+  "animationCount": 183,
+  "totalActions": 536
+}

@@ -1,0 +1,41 @@
+{
+  "repository": "joric/ootss",
+  "path": "scripts/ootss.pz",
+  "blob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+  "guide": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/",
+  "levels": [
+    {
+      "level": 2,
+      "guidePuzzle": 2,
+      "transcription": "heroes1_2_v2",
+      "sourceRows": [
+        "#############",
+        "#...#...#...#",
+        "#F..**....**#",
+        "#...#...#...#",
+        "##########*##",
+        "#...#...#...#",
+        "#.G*..****..#",
+        "#...#...#...#",
+        "#############"
+      ],
+      "adaptations": []
+    },
+    {
+      "level": 7,
+      "guidePuzzle": 4,
+      "transcription": "heroes1_4",
+      "sourceRows": [
+        "#########",
+        "#.....#G#",
+        "#.F*..#[#",
+        "#.**....#",
+        "#...#...#",
+        "##{.{.{.#",
+        "#.......#",
+        "#########"
+      ],
+      "adaptations": []
+    }
+  ]
+}
