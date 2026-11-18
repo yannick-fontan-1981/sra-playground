@@ -62,7 +62,23 @@ function crossingGrid(horizontal: Scan, vertical: Scan, boundary: NativeBox): Gr
   return { boundary, xs, ys, floor };
 }
 
-function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows, repeatedColors = false): Grid | null {
+function gridFromTileEdges(scan: Scan, axis: 0 | 1, rows: NativeRows, boundary: NativeBox): Grid | null {
+  const other = axis === 0 ? 1 : 0;
+  const start = boundary[other]! + 1, end = boundary[other + 2]!, edges = [start];
+  const tileStarts = scan.edges.slice(0, -1);
+  const at = (line: number, position: number) => axis === 1 ? rows[line]?.[position] : rows[position]?.[line];
+  for (let i = start + 1; i < end; i++) {
+    if (tileStarts.some(line => at(line, i) !== at(line, i - 1))) edges.push(i);
+  }
+  edges.push(end);
+  if (edges.length < 4 || edges.length > 15 || edges.slice(1).some((edge, i) => edge - edges[i]! < 3)) return null;
+  const sample = edges.slice(1).findIndex(edge => edge > scan.line);
+  if (sample < 0) return null;
+  const floor: NativePoint = sample % 2 === 0 ? scan.colors : [scan.colors[1], scan.colors[0]];
+  return { boundary, xs: axis === 0 ? scan.edges : edges, ys: axis === 1 ? scan.edges : edges, floor };
+}
+
+export function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows, repeatedColors = false): Grid | null {
   const read = repeatedColors ? readTopPieces : readPieces;
   const borders = entities.filter(entity => {
     const [width, height] = size(entity.bbox);
@@ -86,7 +102,16 @@ function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows, rep
     if (grid) distinct.set(JSON.stringify([grid.xs, grid.ys, grid.floor]), grid);
   }
   const consistent = [...distinct.values()].filter(grid => read(rows, grid) !== null);
-  return consistent.length === 1 ? consistent[0]! : null;
+  if (consistent.length) return consistent.length === 1 ? consistent[0]! : null;
+
+  // Tile borders stay uniform along their edges, even when no full floor scan is exposed.
+  distinct.clear();
+  for (const [axis, scans] of [[0, horizontal], [1, vertical]] as const) for (const scan of scans) {
+    const grid = gridFromTileEdges(scan, axis, rows, boundary);
+    if (grid) distinct.set(JSON.stringify([grid.xs, grid.ys, grid.floor]), grid);
+  }
+  const recovered = [...distinct.values()].filter(grid => read(rows, grid) !== null);
+  return recovered.length === 1 ? recovered[0]! : null;
 }
 
 function cells(grid: Grid): NativePoint[] {
@@ -113,7 +138,7 @@ function readTopPieces(rows: NativeRows, grid: Grid): Piece[] | null {
       pieces.push({ color: ink, cell, selected });
     }
   }
-  if (!pieces.length || pieces.length > 16 || pieces.filter(piece => piece.selected).length > 1) return null;
+  if (!pieces.length || pieces.filter(piece => piece.selected).length > 1) return null;
   return pieces;
 }
 
