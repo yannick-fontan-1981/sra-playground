@@ -4,6 +4,7 @@ import type { NativeCommand, NativeFamily, NativeObservation, NativeProgramHandl
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
+import { measureCompactChart } from './compact-chart.ts';
 
 export const chartRouteId = 'sic_chart_route';
 export const learnChartRouteId = 'sic_follow_observed_links';
@@ -133,6 +134,8 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
       const offer = strategy === 'visit_visible_prerequisite' ? prerequisite : destination;
       if (!offer) return null;
       const label = chartRouteStrategies[strategy], parent = 'G_official_completion';
+      const provisional = Array.isArray(chart.unconfirmed) && offer.edges.some(edge => chart.unconfirmed.includes(chartEdgeKey(edge)));
+      const reason = provisional ? 'Test the next connection suggested by touching rooms on the compact chart' : label;
       const goal = { kind: 'reach_corresponding_chart_marker', scope: chart.evidence[0]!, subjects: ['linked_nodes', 'matching_marker'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_following_visible_links' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
@@ -152,10 +155,10 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
           situation: fresh ? label : [
             positions.length === 1 ? 'The next move uses the inferred map location.' : `The return leaves ${positions.length} plausible map locations.`,
             held.length ? 'A visible slot now contains a matching color.' : local.open.length ? 'An animation showed the matching color disappear at a boundary.' : '',
-            label + '.',
+            reason + '.',
           ].filter(Boolean).join(' '),
           marker: visibleChart ? offer.target.bbox : null, slots: chart.slots.map(slot => slot.bbox), ...fragmentAnchors },
-        question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+        question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
@@ -175,9 +178,9 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const from = chartInventory(first, local.chart);
       const changed = chartScene(first, local.chart) !== chartScene(second, local.chart);
-      const anchor = measureChart(second, after, local.chart);
       const plausible = [...new Map([...(changed ? [] : local.positions), ...edges.map(edge => edge.to)]
         .map(point => [chartPointKey(point), point])).values()];
+      const anchor = measureChart(second, after, local.chart) ?? measureCompactChart(second, after, local.chart, plausible);
       const fragment = anchor && !same(anchor.current, anchor.origin) ? alignFragment(local, anchor, plausible) : null;
       const basis = fragment ?? local, { chart } = basis;
       const to = chartInventory(second, chart);
@@ -192,20 +195,30 @@ export function createSicChartRoute(family = chartRouteId): NativeFamily<Proposa
         if (consistent.length === 1) positions = consistent;
       }
       const open = reset ? [] : [...basis.open], visited = reset ? [] : [...basis.visited];
+      const gained = to.filter(value => !from.includes(value));
+      const located = positions.length === 1 ? chart.nodes.find(candidate => same(candidate.center, positions[0]!)) : null;
       if (positions.length === 1) {
-        const point = positions[0]!, gained = to.filter(value => !from.includes(value));
-        const node = chart.nodes.find(candidate => same(candidate.center, point));
-        if (node?.inside != null && gained.includes(node.inside)) visited.push(chartPointKey(point));
+        const point = positions[0]!;
+        if (located?.inside != null && gained.includes(located.inside)) visited.push(chartPointKey(point));
         for (const color of lost) {
           const link = admittedLink(point, color, chart, [first, ...frames], second);
           if (link) open.push(chartEdgeKey(link));
         }
       }
-      state = { ...basis, positions, open: [...new Set(open)], visited: [...new Set(visited)], frame: after.frame_hash,
+      const compact = Array.isArray(chart.unconfirmed);
+      const comparable = local.chart.pitch === chart.pitch && same(local.chart.origin, chart.origin);
+      const witnessedPosition = !!fragment || located?.inside != null && gained.includes(located.inside);
+      const accepted = compact && !reset && changed && comparable && witnessedPosition && positions.length === 1 && local.positions.length === 1
+        ? edges.filter(edge => same(edge.to, positions[0]!)).map(chartEdgeKey) : [];
+      const updated = accepted.length ? { ...chart, unconfirmed: chart.unconfirmed.filter((key: string) => !accepted.includes(key)) } : chart;
+      state = { ...basis, chart: updated, positions, open: [...new Set(open)], visited: [...new Set(visited)], frame: after.frame_hash,
         ...(fragment ? { chartFrame: after.frame_hash } : {}),
         attempts: [...local.attempts, proposal.attempt], evidence: [...new Set([chart.evidence[0]!, ...local.evidence.slice(-3), after.observation_ref])] };
-      const reviewEvidence = fragment ? 'The visible position and the shared starting mark register this chart fragment with the previous map.'
-        : !reset && state.open.length > basis.open.length ? 'An inventory color disappeared as the animation opened the matching boundary.' : undefined;
+      const opened = !reset && state.open.length > basis.open.length;
+      const reviewEvidence = opened && compact ? 'An inventory color disappeared as the animation opened the matching boundary.'
+        : fragment ? compact ? 'The start and position marks register the touching nodes with the previous chart.'
+          : 'The visible position and the shared starting mark register this chart fragment with the previous map.'
+          : opened ? 'An inventory color disappeared as the animation opened the matching boundary.' : undefined;
       return { events: [], ...(reviewEvidence ? { reviewEvidence } : {}) };
     },
     state: () => ({ state }),
