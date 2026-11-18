@@ -153,7 +153,7 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       if (prior?.stopped || (prior?.tried.length ?? 0) >= 36) return null;
       if (previousDelivery?.completed === observation.levels_completed) {
         const guardedRun = guarded?.epoch === observation.level_epoch ? guarded
-          : !prior && multiple?.epoch !== observation.level_epoch ? measureGuardedFerry(observation, rows, previousDelivery) : null;
+          : !prior && multiple?.epoch !== observation.level_epoch ? measureGuardedFerry(observation, rows, previousDelivery, guarded) : null;
         if (guardedRun) {
           const proposal = guardedProposal(family, observation, guardedRun, remaining);
           if (proposal) return proposal;

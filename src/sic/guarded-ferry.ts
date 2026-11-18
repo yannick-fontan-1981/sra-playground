@@ -9,7 +9,7 @@ type Hazard = readonly [number, number];
 type Ferry = { model: DeliveryModel; graph: Record<string, Record<string, NativePoint>>; cargo: Passenger[]; radius: number;
   pickup: number; initial: Arrangement; firstFrame: string };
 export type GuardedFerry = { epoch: number; ferry: Ferry; at: Arrangement; frame: string; hazards: Hazard[];
-  radius: number; rejected: string[]; refs: string[]; heldBox?: NativeBox; plan: FerryLeg[]; stopped: boolean };
+  hazardRefs?: string[]; radius: number; rejected: string[]; refs: string[]; heldBox?: NativeBox; plan: FerryLeg[]; stopped: boolean };
 type FerryLeg = { input: string; expect: Arrangement; role: 'move' | 'take' | 'release' | 'cross' };
 const key = (point: NativePoint) => point.join(',');
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((v, i) => v === b[i]);
@@ -76,13 +76,23 @@ function measureGraph(model: DeliveryModel, initial: NativePoint, from: number, 
   return graph[key(initial)] ? graph : null;
 }
 
-export function measureGuardedFerry(observation: NativeObservation, rows: NativeRows, model: DeliveryModel): GuardedFerry | null {
+function rebindHazards(previous: GuardedFerry, cargo: Passenger[]): Hazard[] | null {
+  if (!previous.hazards.length || previous.ferry.cargo.length !== cargo.length) return null;
+  const signature = ({ ink, area, shape: [l, t, r, b] }: Passenger) => [ink, area, r - l, b - t].join(',');
+  const identities = cargo.map(signature);
+  const binding = previous.ferry.cargo.map(passenger => identities.indexOf(signature(passenger)));
+  if (binding.includes(-1) || new Set(binding).size !== cargo.length) return null;
+  return previous.hazards.map(([a, b]) => [Math.min(binding[a]!, binding[b]!), Math.max(binding[a]!, binding[b]!)]);
+}
+
+export function measureGuardedFerry(observation: NativeObservation, rows: NativeRows, model: DeliveryModel,
+  previous?: GuardedFerry | null): GuardedFerry | null {
   const inherited = startRecoveredDelivery(observation, rows, model);
   const body = find_body(observation, model.actor) as NativeEntity | null;
   if (!inherited || !body) return null;
   const ordinary = inherited.cargo;
   const occupied = incomingPassenger(observation, rows, ordinary[0]!.frame.bbox, ordinary.map(pair => pair.object.palette_value));
-  if (!occupied) return null;
+  if (!occupied && (previous?.epoch !== observation.level_epoch - 1 || !previous.hazards.length)) return null;
   const observed = midpoint(body.bbox), span = body.bbox[2] - body.bbox[0] + 1;
   const radius = measureField(rows, observed, span);
   if (radius === null) return null;
@@ -93,17 +103,24 @@ export function measureGuardedFerry(observation: NativeObservation, rows: Native
     const right = frame.interior_bbox, left = shift(right, -crossing, 0);
     return { ink: object.palette_value, area: object.area, shape: object.bbox, berths: [left, right], centers: [midpoint(left), midpoint(right)] };
   });
-  const right = occupied.frame, left = shift(right, -crossing, 0);
-  cargo.push({ ink: occupied.body.palette_value, area: occupied.body.area, shape: occupied.body.bbox,
-    berths: [left, right], centers: [midpoint(left), midpoint(right)] });
-  const bank: Bank = 0, banks = cargo.map((_, index): Bank => index === cargo.length - 1 ? 1 : 0);
+  if (occupied) {
+    const right = occupied.frame, left = shift(right, -crossing, 0);
+    cargo.push({ ink: occupied.body.palette_value, area: occupied.body.area, shape: occupied.body.bbox,
+      berths: [left, right], centers: [midpoint(left), midpoint(right)] });
+  }
+  const retained = !occupied && previous?.ferry.radius === radius ? previous : null;
+  const hazards = retained ? rebindHazards(retained, cargo) : null;
+  if (!occupied && !hazards) return null;
+  const bank: Bank = 0, banks = cargo.map((_, index): Bank => occupied && index === cargo.length - 1 ? 1 : 0);
   const initial = { actor: observed, bank, banks, held: null };
   const to = observed[0] + model.crossing.to - model.crossing.from;
   const graph = measureGraph(model, observed, observed[0], to, cargo);
   if (!graph) return null;
   const ferry = { model, graph, cargo, radius, pickup: span - 1, initial, firstFrame: observation.frame_hash };
-  return { epoch: observation.level_epoch, ferry, at: initial, frame: observation.frame_hash, hazards: [], radius, rejected: [],
-    refs: model.evidence, plan: [], stopped: false };
+  const hazardRefs = retained?.hazardRefs ?? [];
+  return { epoch: observation.level_epoch, ferry, at: initial, frame: observation.frame_hash, hazards: hazards ?? [],
+    ...(hazardRefs.length ? { hazardRefs } : {}), radius: retained ? Math.min(radius, retained.radius) : radius, rejected: [],
+    refs: [...new Set([...model.evidence, ...hazardRefs])], plan: [], stopped: false };
 }
 
 const positionKey = ({ actor, bank, banks, held }: Arrangement) => [key(actor), bank, banks.join(''), held].join('/');
@@ -179,9 +196,11 @@ export function observeGuardedFerry(run: GuardedFerry, leg: FerryLeg, after: Nat
     const learned = pairs.length === 1 ? pairs[0]! : null;
     const bank = learned ? pairBank(expect, learned) : null;
     const radius = learned && bank === expect.bank ? Math.min(run.radius, pairRange(expect, ferry, learned, bank) - 1) : run.radius;
-    const hazards = learned && !run.hazards.some(pair => pairKey(pair) === pairKey(learned)) ? [...run.hazards, learned] : run.hazards;
+    const added = learned && !run.hazards.some(pair => pairKey(pair) === pairKey(learned));
+    const hazards = added ? [...run.hazards, learned] : run.hazards;
+    const hazardRefs = added ? [...(run.hazardRefs ?? []), after.observation_ref] : run.hazardRefs;
     const { heldBox: _discarded, ...rest } = retained;
-    return { run: { ...rest, at: ferry.initial, hazards, radius, plan: [],
+    return { run: { ...rest, at: ferry.initial, hazards, ...(hazardRefs?.length ? { hazardRefs } : {}), radius, plan: [],
       rejected: [...run.rejected, positionKey(at) + '/' + leg.input] }, reason: learned ? 'animated_reset_identified_an_unsafe_pair' : 'animated_reset_rejected_transition' };
   }
   if (!same(observed, expect.actor)) return null;

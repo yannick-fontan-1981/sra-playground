@@ -1855,3 +1855,13 @@ SIC associe maintenant les nouveaux voyants à leurs ouvertures visibles. Il val
 Depuis le niveau 1, SIC gagne PORT en **110 commandes**, toutes sous autorité SIC seul. Les cinq premiers niveaux reproduisent leurs actions et retours, en 94 commandes. Le niveau 6 gagne en **16 commandes et 6,19 s**, au budget de 360 s de temps actif et 600 commandes. La 4e commande forme deux nouvelles paires avec les quatre ouvertures et change les partenaires des paires initiales. SIC conserve ce réseau jusqu'à la sortie. Le contrôle TypeScript et les **20 tests ciblés** passent. La couverture passe à **535/636 niveaux (84,1 %)**, dont **36/99 niveaux 6 (36,4 %)**.
 
 Empreinte des commandes et retours jusqu'à la victoire `391afec032ca570a17aba6d5355ed3591f720cbe10e35b5651caa38424b72d31`.
+
+### CGWL niveau 6, retenir les incompatibilités en changeant la disposition
+
+Le rejeu de référence confirme la prise à la 3e commande. La traversée à la 7e commande produit une animation de retour à l'entrée. La famille de transport cesse alors de proposer et le reste des 87 commandes n'atteint pas la victoire. Au niveau 5, SIC avait pourtant appris deux paires incompatibles. L'identification de la traversée sous contraintes exigeait la présence d'un passager sur la rive d'arrivée. Au niveau 6 les trois commencent sur la rive de départ.
+
+Quand le champ d'interaction et l'ensemble des passagers concordent avec les observations du niveau précédent, SIC retrouve les paires incompatibles indépendamment de leur ordre et relit les rives de départ. Il choisit d'abord le passager commun aux deux incompatibilités. Après le premier dépôt, il revient à vide, puis ramène temporairement ce même passager pour livrer le dernier. Les prises, positions et dépôts sont vérifiés sur chaque retour. Les incompatibilités apprises conservent les références de leurs animations de retour.
+
+SIC seul gagne **CGWL en 164 commandes** depuis le niveau 1. Les cinq premières victoires gardent leurs empreintes en 124 commandes. Le niveau 6 gagne en **40 commandes et 22,14 s**, au budget de 360 s de temps actif et 600 commandes. Le diagnostic accéléré rejoue les 124 commandes publiques d'entrée et restaure la famille de transport. Il retrouve la même empreinte jusqu'à la victoire que la partie complète. TypeScript et 20 tests ciblés passent. La couverture passe à **536/636 niveaux (84,3 %)**, dont **37/99 niveaux 6 (37,4 %)**.
+
+Empreinte des commandes et retours jusqu'à la victoire `af3e68af8b592ba176982c2e6a04b78a712406fcf0620bd5a95f34a97bf46572`.
