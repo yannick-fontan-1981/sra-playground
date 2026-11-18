@@ -154,6 +154,7 @@ try {
     assert.equal($('defeat').hidden,true);
   }
   assert.ok($('piston-help').textContent.includes('Une file de caisses avance ensemble.'));
+  assert.ok($('piston-help').textContent.includes('ils doivent être occupés ensemble.'));
   assert.equal($('source-link').href,'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2');
   report.checks.push('Piston help appears only in levels 2, 7 and 8; level 8 links to the requested Heroes and Light puzzle 2');
 
@@ -203,6 +204,11 @@ try {
   assert.equal($('defeat').hidden,true);
   assert.ok([...window.document.querySelectorAll('[data-action]')].every(button=>!button.disabled));
   report.checks.push('Reset during the forced piston phase restores level 7, its counter and playable controls without stale frames');
+
+  const completedBeforeNewLevel7=ref.observe().levelsCompleted;
+  await replay(witnesses.find(w=>w.level===7).actions);
+  assert.equal(ref.observe().levelsCompleted,completedBeforeNewLevel7+1);
+  report.checks.push('The revised level 7 completes through real keyboard events with its additional shared-circuit pressure button');
 
   // Successful witnesses exercise the actual interface; no private state is injected.
   // Engine tests cover death, Undo and Reset independently.

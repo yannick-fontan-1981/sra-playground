@@ -17,6 +17,7 @@
     "Level 7 down input presents all six exact engine images: three pulling images followed by three piston images",
     "Undo during the forced piston phase restores the exact pre-action scene and cancels all remaining images",
     "Reset during the forced piston phase restores level 7, its counter and playable controls without stale frames",
+    "The revised level 7 completes through real keyboard events with its additional shared-circuit pressure button",
     "All captured stable and animation frames contain no light-gray preview pixels"
   ],
   "gameOverCoverage": {

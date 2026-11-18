@@ -1,6 +1,6 @@
 {
   "game": "SS03",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "build": {
     "status": "passed",
     "typescript": "5.9.3"
@@ -12,40 +12,50 @@
   },
   "levelReplay": {
     "solved": 8,
-    "actions": 472,
-    "pulls": 147,
+    "actions": 484,
+    "pulls": 154,
     "pistonStrokes": 10,
     "allRequirePulling": true,
     "cratesLost": 0,
     "blockedActions": 0,
     "deaths": 0
   },
-  "newLevel2": {
-    "actions": 27,
-    "pulls": 8,
-    "pistonStrokes": 2,
-    "pistonsRequired": {
-      "method": "exhaustive complete-state search with piston motion disabled",
+  "revisedLevel7": {
+    "actions": 54,
+    "previousActions": 42,
+    "pulls": 18,
+    "pistonStrokes": 3,
+    "cratesPreserved": 3,
+    "constraint": {
       "verified": true,
-      "states": 6766
+      "oldRoutePrefix": 30,
+      "singleButtonDoesNotPush": true,
+      "remoteCrateEnablesNorthPiston": true
     },
-    "cratesPreserved": 2
+    "tileChanges": [
+      {
+        "x": 10,
+        "y": 5,
+        "before": ".",
+        "after": "b"
+      }
+    ]
   },
   "previousReleaseObservationParity": {
-    "version": "0.2.0",
+    "version": "0.3.0",
     "matchedLevels": [
       1,
+      2,
       3,
       4,
       5,
       6,
-      7,
       8
     ],
-    "scope": "Full public observations, animation pixels and durations on their complete witness routes"
+    "scope": "Full public observations, animation pixels and durations on complete witness routes"
   },
   "domTests": {
-    "passed": 15,
+    "passed": 16,
     "failed": 0,
     "visualBrowserTest": false,
     "gameOverCoverage": {
@@ -55,11 +65,11 @@
   },
   "renderInspection": {
     "status": "passed",
-    "level": 2,
+    "level": 7,
     "states": [
-      "initial",
-      "after-first-piston",
-      "after-second-piston"
+      "previous release initial",
+      "new initial",
+      "both north buttons occupied after action 42"
     ],
     "method": "Actual game pixels inspected at integer scale"
   },
@@ -67,5 +77,5 @@
     "status": "not-run",
     "reason": "No Chromium test in this update; prior launch was blocked by workspace sandbox socket policy"
   },
-  "demoSha256": "5f589267e3d3d280c0e43eff09f5a4adfbe4314b310847eaaddda3ec914ca2de"
+  "demoSha256": "8ef3e416803f6fa24e2c06c325417720be36f4315159491767806807b8a4c9e4"
 }

@@ -1,4 +1,4 @@
-# Progression et choix des niveaux · v0.3.0
+# Progression et choix des niveaux · v0.4.0
 
 Le tutoriel reste chargé et ouvert au démarrage. Le niveau 2 introduit maintenant un défi de difficulté moyenne avec une seule presse ; les niveaux 7 et 8 développent ensuite ce mécanisme.
 
@@ -10,7 +10,7 @@ Le tutoriel reste chargé et ouvert au démarrage. Le niveau 2 introduit mainten
 | 4 · Le relais des deux terrasses | Transporter une caisse vers la chambre basse et garder l’accès à la sortie haute | Adaptation de Heroes of Hauling 14 ; deux caisses et deux chambres nécessaires. |
 | 5 · Les alcôves de la cathédrale | Extraire deux caisses de directions opposées | Adaptation de Heroes of Hauling 15 ; changements d’axe avant de tenir les deux boutons. |
 | 6 · Trois amarres | Organiser trois placements dans un espace contraint | Heroes of Hauling 8, transcription conservée ; trois caisses à manipuler sur les deux axes. |
-| 7 · Les deux presses | Remplir deux niches avec des pistons | Création originale : presse vers l’ouest, poussée d’une file de deux caisses, puis presse vers le nord. |
+| 7 · Les deux presses | Remplir deux niches avec des pistons | Création originale : presse vers l’ouest, poussée d’une file de deux caisses, puis presse vers le nord avec deux boutons simultanés. |
 | 8 · Le train des six caisses | Alimenter une file et coordonner deux circuits | Reproduction de Heroes and Light 2, salle `multipush_for_me2` ; quatre déclenchements horizontaux puis cascade verticale. |
 
 ## Niveau 2 : une seule presse, deux chargements
@@ -22,6 +22,10 @@ Le témoin comporte 27 directions, huit tractions et deux poussées. Les deux ca
 ## Niveau 7 : une poussée indispensable
 
 La première action du témoin, vers le bas, tire une caisse sur la case d’une porte puis presse le bouton qui la fait apparaître. Les deux animations se succèdent. Une deuxième caisse rejoint le dispositif et permet une poussée de file. La troisième caisse utilise une presse orientée vers le haut.
+
+La version 0.4.0 ajoute une plaque en (10,5) au circuit de la presse nord. Le bouton existant en (9,2) et cette nouvelle plaque doivent être occupés ensemble. Le témoin récupère la caisse devenue disponible après les poussées ouest, la place sur la plaque et la contourne avant de préparer la dernière presse. Cela ajoute un besoin de réemploi et de placement ; aucune caisse ni paroi supplémentaire n’est ajoutée.
+
+Le parcours vérifié compte 54 directions, 18 tractions et trois poussées, sans blocage, mort ni caisse perdue. Ce parcours n’est pas annoncé optimal et n’impose pas un ordre unique entre les presses. Les 30 premières directions de l’ancien témoin mettent le héros sur le bouton nord et une caisse sur sa porte, mais la nouvelle plaque reste vide : la porte ne pousse pas. La même configuration de déclenchement fonctionne lorsque la plaque est tenue dans le nouveau témoin.
 
 Les deux boutons finaux sont dans des niches à trois parois. Aucune direction ne permet à la fois de placer une caisse avant le bouton et de laisser au Voleur une case après celui-ci : les niches ne peuvent pas être remplies par simple traction. Elles sont initialement vides et contrôlent l’unique accès à la cible. La nécessité des pistons est donc vérifiée géométriquement, indépendamment du témoin de résolution.
 
@@ -35,8 +39,8 @@ Le témoin communautaire original de 154 directions fonctionne sans changement s
 
 ## Validation de la série
 
-Les huit témoins comptent **472 directions, 147 tractions et 10 phases de piston**. Aucun n’a de mouvement refusé, décès ou caisse détruite. Ces parcours ne sont pas annoncés optimaux.
+Les huit témoins comptent **484 directions, 154 tractions et 10 phases de piston**. Aucun n’a de mouvement refusé, décès ou caisse détruite. Ces parcours ne sont pas annoncés optimaux.
 
-Une ablation des tractions confirme leur nécessité dans les huit niveaux. Les deux reprises intactes de Heroes of Hauling sont comparées cellule par cellule à la transcription. Le niveau 8 est comparé à son relevé de terrain et d’objets. Les observations complètes des sept niveaux conservés sont comparées à des empreintes produites avec le moteur v0.2.0.
+Une ablation des tractions confirme leur nécessité dans les huit niveaux. Les deux reprises intactes de Heroes of Hauling sont comparées cellule par cellule à la transcription. Le niveau 8 est comparé à son relevé de terrain et d’objets. Les observations complètes des sept niveaux conservés sont comparées à des empreintes produites avec le moteur v0.3.0.
 
 L’eau conserve le contour du tutoriel. Le moteur de piston sait créer des plateformes en poussant une caisse dans l’eau, mais aucune eau supplémentaire n’est ajoutée à la reproduction du niveau 8.
