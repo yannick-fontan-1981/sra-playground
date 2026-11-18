@@ -1,5 +1,5 @@
 import { wordCursorPath, wordEditPath, wordVisitPlan, type WordState } from '../logos-engine/v6-word-interface.ts';
-import type { RuleSynthesis } from './rule-synthesis.ts';
+import { composeRuleAssignments, type RuleSynthesis } from './rule-synthesis.ts';
 
 type Edge = [before: string, after: string];
 export type RuleEditor = {
@@ -8,7 +8,7 @@ export type RuleEditor = {
   evidence: string[]; count: number;
 };
 type Graph = Map<string, Map<string, string>>;
-export type RuleEditChoice = { actions: string[]; goal: string[]; exploration: boolean };
+export type RuleEditChoice = { actions: string[]; goal: string[]; exploration: boolean; dictionaries?: number };
 const identity = (type: number, glyph: string) => JSON.stringify([type, glyph]);
 const context = (type: number, arity: number, glyph: string, action: string) => JSON.stringify([type, arity, glyph, action]);
 const groupKey = (type: number, arity: number) => JSON.stringify([type, arity]);
@@ -18,13 +18,21 @@ const known = (local: RuleEditor, type: number, keys: readonly string[]): Graph 
   return edges ? [[action, new Map(edges)] as const] : [];
 }));
 
+function applyEdit(local: RuleEditor, type: number, arity: number, value: string, action: string): string | null {
+  if (!local.groups.includes(groupKey(type, arity))) return null;
+  const edges = local.edits[type]?.[action];
+  if (local.layout.middleType === undefined) return edges?.find(([from]) => from === value)?.[1] ?? null;
+  const symbols = JSON.parse(value) as string[];
+  const next = symbols.map(glyph => edges?.find(([from]) => from === glyph)?.[1]);
+  return next.every(glyph => glyph !== undefined) ? JSON.stringify(next) : null;
+}
+
 export function projectRuleEdit(local: RuleEditor, current: WordState, action: string): WordState | null {
   const [word, at] = current, { type, arity } = local.layout.sides[at]!;
   const movement = local.directions[action];
   if (movement) return [word, modulo(at + movement, word.length)];
-  if (!local.groups.includes(groupKey(type, arity))) return null;
-  const edge = local.edits[type]?.[action]?.find(([from]) => from === word[at]);
-  return edge ? [word.map((glyph, i) => i === at ? edge[1] : glyph), at] : null;
+  const value = applyEdit(local, type, arity, word[at]!, action);
+  return value !== null ? [word.map((glyph, i) => i === at ? value : glyph), at] : null;
 }
 
 function nextMissingMutation(local: RuleEditor, type: number, arity: number, head: string, keys: readonly string[]) {
@@ -46,6 +54,7 @@ function nextMissingMutation(local: RuleEditor, type: number, arity: number, hea
 }
 
 export function chooseRuleEdits(local: RuleEditor, current: WordState, keys: readonly string[]): RuleEditChoice | null {
+  if (local.layout.middleType !== undefined) return chooseComposedEdits(local, current, keys);
   const { sides } = local.layout, [word, at] = current;
   const directions = new Map(Object.entries(local.directions).filter(([action]) => keys.includes(action)));
   const mutations = local.mutations.filter(action => keys.includes(action));
@@ -84,6 +93,77 @@ export function chooseRuleEdits(local: RuleEditor, current: WordState, keys: rea
   return candidates[0] ?? null;
 }
 
+function chooseComposedEdits(local: RuleEditor, current: WordState, keys: readonly string[]): RuleEditChoice | null {
+  const [word, focused] = current, { sides } = local.layout;
+  const directions = new Map(Object.entries(local.directions).filter(([key]) => keys.includes(key)));
+  const mutations = local.mutations.filter(action => keys.includes(action));
+  const probes: string[][] = [];
+  const domains = word.map((value, i) => {
+    const { type, arity } = sides[i]!, paths = new Map<string, string[]>([[value, []]]);
+    const queue = [value], travel = wordCursorPath(directions, focused, i, word.length);
+    for (const token of queue) for (const action of mutations) {
+      const next = applyEdit(local, type, arity, token, action), path = [...paths.get(token)!, action];
+      if (next !== null) {
+        if (!paths.has(next)) { paths.set(next, path); queue.push(next); }
+      } else if (travel && !local.attempted.includes(context(type, arity, token, action))) probes.push([...travel, ...path]);
+    }
+    return paths;
+  });
+  const goals = composeRuleAssignments(local.layout, word, domains.map(paths => [...paths.keys()]));
+  if (goals.some(goal => goal.every((value, i) => value === word[i]))) return null;
+  const walks = new Map<string, string[] | null>();
+  let best: RuleEditChoice | null = null;
+  for (const goal of goals) {
+    const edits = new Map(goal.flatMap((value, i) => value !== word[i] ? [[i, domains[i]!.get(value)!] as const] : []));
+    const signature = [...edits.keys()].join(',');
+    if (!walks.has(signature)) walks.set(signature, walkRuleRing(edits.keys(), directions, focused, word.length));
+    const walk = walks.get(signature);
+    if (!walk) continue;
+    const cost = walk.length + [...edits.values()].reduce((sum, path) => sum + path.length, 0);
+    if (best && cost >= best.actions.length) continue;
+    const actions = [...(edits.get(focused) ?? [])];
+    edits.delete(focused);
+    let at = focused;
+    for (const step of walk) {
+      at = modulo(at + directions.get(step)!, word.length);
+      actions.push(step, ...(edits.get(at) ?? []));
+      edits.delete(at);
+    }
+    best = { actions, goal, exploration: false, dictionaries: goals.length };
+  }
+  if (best) return best;
+  const survey = keys.find(action => !directions.has(action) && !mutations.includes(action) && !local.attempted.includes(action));
+  const actions = survey ? [survey] : probes.sort((a, b) => a.length - b.length)[0];
+  return actions ? { actions, goal: [...word], exploration: actions.length === 1, dictionaries: goals.length } : null;
+}
+
+function walkRuleRing(targets: Iterable<number>, directions: ReadonlyMap<string, number>, start: number, size: number): string[] | null {
+  const needed = new Set(targets);
+  needed.delete(start);
+  if (!needed.size) return [];
+  let best: string[] | null = null;
+  // A shortest walk on a ring goes in one direction or reverses once.
+  for (const [command, direction] of directions) {
+    const reverse = [...directions].find(([, step]) => step === -direction)?.[0];
+    for (let length = 0; length < size; length++) {
+      const remaining = new Set(needed), route: string[] = [];
+      let at = start;
+      for (let i = 0; i < length && remaining.size; i++) {
+        at = modulo(at + direction, size);
+        remaining.delete(at);
+        route.push(command);
+      }
+      if (reverse) for (let i = 0; i < size - 1 && remaining.size; i++) {
+        at = modulo(at - direction, size);
+        remaining.delete(at);
+        route.push(reverse);
+      }
+      if (!remaining.size && (!best || route.length < best.length)) best = route;
+    }
+  }
+  return best;
+}
+
 export function acquireRuleEdit(local: RuleEditor, before: WordState, after: WordState | null, action: string, ref: string): RuleEditor {
   const [word, at] = before, { type, arity } = local.layout.sides[at]!;
   const mutation = context(type, arity, word[at]!, action), directions = { ...local.directions }, edits = { ...local.edits };
@@ -92,11 +172,23 @@ export function acquireRuleEdit(local: RuleEditor, before: WordState, after: Wor
     const [observed, focus] = after;
     const changed = word.flatMap((glyph, i) => observed[i] !== glyph ? [i] : []);
     if (at === focus && changed.length === 1 && changed[0] === at) {
-      const typeGraph = { ...edits[type] }, edges = new Map(typeGraph[action]);
-      edges.set(word[at]!, observed[at]!);
+      const typeGraph = { ...edits[type] };
+      const unpack = (value: string) => local.layout.middleType === undefined ? [value] : JSON.parse(value) as string[];
+      const originals = unpack(word[at]!), outputs = unpack(observed[at]!);
+      const measured = originals.map((glyph, i) => [glyph, outputs[i]!] as const);
+      if (new Map(measured).size !== new Set(measured.map(pair => JSON.stringify(pair))).size) {
+        return { ...local, groups: local.groups.filter(group => group !== groupKey(type, arity)),
+          attempted: [...new Set([...local.attempted, action, mutation])], count: local.count + 1 };
+      }
+      const edges = new Map(typeGraph[action]);
+      if (local.layout.middleType !== undefined && measured.some(([a, b]) => edges.has(a) && edges.get(a) !== b)) {
+        edges.clear();
+        groups = groups.filter(group => (JSON.parse(group) as number[])[0] !== type);
+      }
+      for (const [a, b] of measured) edges.set(a, b);
       typeGraph[action] = [...edges];
       for (const [other, material] of Object.entries(typeGraph)) {
-        if (other === action || !material.some(([from, to]) => from === observed[at] && to === word[at])) continue;
+        if (other === action || !material.some(([from, to]) => measured.some(([a, b]) => from === b && to === a))) continue;
         const reverse = new Map(material);
         if ([...edges].some(([a, b]) => reverse.has(b) && reverse.get(b) !== a)) continue;
         for (const [a, b] of edges) reverse.set(b, a);
@@ -113,7 +205,8 @@ export function acquireRuleEdit(local: RuleEditor, before: WordState, after: Wor
     } else {
       delete directions[action];
       const typeGraph = { ...edits[type] }, edges = new Map(typeGraph[action]);
-      edges.delete(word[at]!);
+      const originals = local.layout.middleType === undefined ? [word[at]!] : JSON.parse(word[at]!) as string[];
+      for (const glyph of originals) edges.delete(glyph);
       typeGraph[action] = [...edges];
       edits[type] = typeGraph;
     }

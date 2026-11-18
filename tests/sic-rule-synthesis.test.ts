@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { wordGlyphs } from '../src/logos-engine/v6-word-interface.ts';
-import { readRuleSynthesis, synthesizeRuleAssignments, type RuleSynthesis } from '../src/sic/rule-synthesis.ts';
+import { composeRuleAssignments, readRuleSynthesis, synthesizeRuleAssignments, type RuleSynthesis } from '../src/sic/rule-synthesis.ts';
 import { acquireRuleEdit, chooseRuleEdits, projectRuleEdit, type RuleEditor } from '../src/sic/rule-editing-plan.ts';
 
 const side = (arity: number, type: number): RuleSynthesis['sides'][number] =>
@@ -35,6 +35,27 @@ test('reuse typed edits and keep a double side out of a series until measured', 
   const verified = acquireRuleEdit(editor, before, final, 'U', 'confirmed-whole-side');
   assert.deepEqual(projectRuleEdit(verified, before, 'U'), final);
   assert.equal(projectRuleEdit(verified, [initial.map((glyph, i) => i === 3 ? 'C' : glyph), 3], 'U'), null);
+});
+
+test('compose two typed tables with a verified joint edit of distinct symbols', () => {
+  const typeA = 4, typeB = 8, typeC = 12;
+  const composed: RuleSynthesis = { ...layout, middleType: typeB,
+    sides: [side(1, typeA), side(2, typeB), side(1, typeB), side(1, typeC), side(1, typeB), side(1, typeC)],
+    examples: [side(1, typeA), side(2, typeC)], words: [['s'], ['x', 'y']] };
+  const pack = (...symbols: string[]) => JSON.stringify(symbols);
+  const initial = [pack('s'), pack('p', 'q'), pack('q'), pack('x'), pack('r'), pack('y')];
+  const changed = [pack('s'), pack('q', 'r'), pack('q'), pack('x'), pack('r'), pack('y')];
+  const domains = initial.map((value, i) => i === 1 ? [value, pack('q', 'q'), changed[i]!] : [value]);
+  assert.deepEqual(composeRuleAssignments(composed, initial, domains), [changed]);
+  const editor: RuleEditor = { epoch: 1, layout: composed, goals: [], directions: { L: -1, R: 1 },
+    edits: { [typeB]: { U: [['p', 'q'], ['q', 'r']] } }, mutations: ['U'], attempted: [], groups: [],
+    evidence: [], count: 0 };
+  const before = [initial, 1] as const, after = [changed, 1] as const, controls = ['L', 'R', 'U'];
+  assert.equal(projectRuleEdit(editor, before, 'U'), null);
+  assert.equal(chooseRuleEdits(editor, before, controls)?.exploration, true);
+  const verified = acquireRuleEdit(editor, before, after, 'U', 'pair-changes-together');
+  assert.deepEqual(projectRuleEdit(verified, before, 'U'), after);
+  assert.deepEqual(chooseRuleEdits(verified, before, controls), { actions: ['U'], goal: changed, exploration: false, dictionaries: 1 });
 });
 
 test('reject a change to either fixed example or an edit splitting the double side', async () => {

@@ -65,17 +65,28 @@ export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
       if (!layout) return null;
       const current = await readRuleSynthesis(rows, layout);
       if (!current) return null;
-      const goals = synthesizeRuleAssignments(layout, current[0]);
-      if (!goals.length) return null;
+      const composed = layout.middleType !== undefined;
+      const goals = composed ? [] : synthesizeRuleAssignments(layout, current[0]);
+      if (!composed && !goals.length) return null;
       const prior = state?.epoch === epoch - 1 && state.scene.editable.size === layout.sides[0]!.size
         && state.scene.ink === layout.ink ? state : null;
       const type = prior?.scene.editable.type;
       const matchesType = type !== undefined && layout.sides.some(item => item.type === type);
+      const previous = composed && ruleEditor?.epoch === epoch - 1 && ruleEditor.layout.ink === layout.ink
+        && ruleEditor.layout.sides[0]?.size === layout.sides[0]?.size ? ruleEditor : null;
       local = { epoch, layout, goals, edits: prior && matchesType ? { [type]: prior.edits } : {},
         directions: prior?.directions ?? {}, mutations: Object.keys(prior?.edits ?? {}).sort(),
         groups: matchesType ? [JSON.stringify([type, 1])] : [], attempted: [], evidence: prior?.evidence ?? [], count: 0 };
+      if (previous) {
+        local.edits = previous.edits;
+        local.directions = previous.directions;
+        local.mutations = previous.mutations;
+        local.groups = previous.groups.filter(group => (JSON.parse(group) as number[])[1] === 1);
+        local.evidence = previous.evidence;
+      }
     }
-    if (local.count >= 80) return null;
+    const editBudget = local.layout.middleType === undefined ? 80 : 120;
+    if (local.count >= editBudget) return null;
     const current = await readRuleSynthesis(rows, local.layout);
     if (!current) return null;
     const choice = chooseRuleEdits(local, current, keys);
@@ -89,7 +100,7 @@ export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
     if (decision?.result !== strategy) return null;
     const ruleLegs: WordLeg[] = [];
     let previous = current;
-    if (!probing) for (const action of choice.actions.slice(0, Math.min(remaining, maximumCommittedActions, 80 - local.count))) {
+    if (!probing) for (const action of choice.actions.slice(0, Math.min(remaining, maximumCommittedActions, editBudget - local.count))) {
       const after = projectRuleEdit(local, previous, action);
       if (!after) break;
       ruleLegs.push({ action: { action_ref: action, data: {} }, before: previous, after });
@@ -99,7 +110,8 @@ export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
     const active = local.layout.sides[focused]!;
     const differences = symbols.filter((glyph, i) => glyph !== choice.goal[i]).length;
     const situation = probing ? 'Compare the complete focused rule side and both fixed examples after this command'
-      : 'Apply measured edits to the rule sides still needed to explain the fixed example';
+      : local.layout.middleType === undefined ? 'Apply measured edits to the rule sides still needed to explain the fixed example'
+        : 'Use measured edits on the rule sides that connect the source to the output through the intermediate symbols';
     const evidence: [string, ...string[]] = [ref, ...new Set(local.evidence.filter(value => value !== ref))];
     const parent = 'G_official_completion';
     const objective = { kind: 'construct_dictionary_explaining_fixed_words', scope: ref.split(':revision:', 1)[0]!,
@@ -116,7 +128,8 @@ export function createSicVerifySequenceEdits(): NativeFamily<Proposal> {
       sicSituationCard: { strategy, need: 'Build rules that explain the two fixed words', mode, triggerCard: chooseLanding,
         situation, agenda: [], evidence, active: active.box, source: local.layout.examples[0].box,
         fixedExample: local.layout.examples[1].box, affectedGlyphs: active.arity,
-        compatibleDictionaries: local.goals.length, remainingRuleSides: differences },
+        compatibleDictionaries: choice.dictionaries ?? local.goals.length, remainingRuleSides: differences,
+        translationStages: local.layout.middleType === undefined ? 1 : 2 },
       question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
       sicLocalDecision: { strategy, objective: { id, label: situation, parent }, need },
