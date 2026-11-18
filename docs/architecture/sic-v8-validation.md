@@ -2404,3 +2404,11 @@ Le rejeu de référence s'arrête après 55 clics au niveau 7. Les deux premiers
 Quand aucune permutation existante n'explique le retour, SIC cherche une rotation dans chaque composante de la grille ayant changé. Il réunit ces rotations uniquement si chacune explique son retour de manière unique, puis vérifie la prédiction après chaque clic. La recherche de trajet peut déplacer temporairement un contenu dans la branche verticale pendant que le bouton commun tourne les deux autres zones.
 
 Le rejeu SIC seul conserve les six empreintes des **94 commandes** précédentes, animations comprises. Le niveau 7 gagne en **13 clics et 3,93 s**, dont trois sondes et dix clics planifiés, avec 360 s de temps actif et 600 commandes au plus par niveau sur un seul worker. Empreinte chronologique `f0d21ea155e19b3ffd354463aba91674e2fe421457bc5c50b954f5e25f16af3d`. TypeScript et les deux tests de transformation passent. L'exécution s'arrête à la victoire du niveau 7.
+
+### TN36 niveau 7, franchir un passage avant son activation
+
+Le rejeu de référence s'arrête après 104 clics. Les démonstrations établissent les quatre déplacements, puis le programme vide confirme que six instructions successives peuvent laisser la pièce en place. SIC admet cette instruction neutre dans la recherche quand aucun programme de déplacements n'atteint la cible ni une reprise utile.
+
+Le premier essai de montée est interrompu et le départ est restauré. Dans les images du programme, une bande apparaît à la troisième instruction sur la zone où le déplacement prévoyait de poser la pièce. SIC associe les cellules de cette bande aux seules instructions où elle apparaît. À la commande 26, le détour atteint une première dalle. À la commande 34, le deuxième programme traverse la bande à la deuxième instruction et atteint la dalle opposée. Le dernier programme contourne le mur et atteint la cible.
+
+Le niveau 7 gagne en **40 clics et 15,27 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **94 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 134 commandes relèvent de SIC seul et le parcours s'arrête à la victoire. Empreinte chronologique `a86219035b1f6b97c67f5cd19003993a36a46853c91ecf8cc7830500896d0e9b`. TypeScript et les 67 tests ciblés passent.
