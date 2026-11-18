@@ -26,7 +26,7 @@ test('a capsule is reachable only while a unit of reserve remains on arrival', (
   rows[0]![2] = 15;
   const step = chooseOrientedCycleStep(rows, state, moves, 8);
   assert.deepEqual(step, {
-    action: 'ACTION4', step: [8, 4], target: [8, 4], purpose: 'recharge', units: 2, distance: 2, charge: 0,
+    action: 'ACTION4', step: [8, 4], target: [8, 4], purpose: 'recharge', units: 2, distance: 2, charge: 0, walk: [],
   });
   assert.ok(step);
   const next = structuredClone(rows);
