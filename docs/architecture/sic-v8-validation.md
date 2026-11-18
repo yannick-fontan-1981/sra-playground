@@ -1927,3 +1927,13 @@ La recherche distingue les états par la position, les sceaux acquis, les dalles
 Le rejeu depuis le niveau 1 gagne en **83 commandes SIC seul**. Les **63 premières commandes** et leurs retours reproduisent ceux des niveaux 1 à 5. Le niveau 6 gagne en **20 clics et 14,94 s** au budget de 360 s de temps actif et 600 commandes. L'essai depuis la sauvegarde reproduit les 20 clics et chaque retour attendu. TypeScript et les **2 tests de parcours avec état** passent. PORT reproduit à l'identique les **16 commandes** et leurs retours depuis sa sauvegarde du niveau 6 jusqu'à la victoire. La couverture atteint **541/636 niveaux (85,1 %)**, dont **42/99 niveaux 6 (42,4 %)**.
 
 Empreinte jusqu'à la victoire `646ba852a78bb4657e1a894d612fd5a0bde8008643a4ac96ce5bb08ae8525c65`.
+
+### WEAV niveau 6, préserver les pastilles qui commandent les lignes
+
+La commande 25 obtient la couleur demandée au croisement de la première colonne et de la dernière ligne. Au clic 26, la réparation locale interprète une pastille de cette colonne comme une case à corriger par symétrie. Le retour montre que ce clic recolore le croisement déjà correct. La partie termine les deux axes avec 15 croisements corrects sur 16, puis s'arrête après 113 commandes au niveau 6. Un essai hors agent retire ce seul clic et gagne avec les 40 commandes restantes.
+
+Après un déplacement confirmé sur une ligne, SIC mesure à nouveau les pastilles à partir de la grille et de la référence conservées. La réparation locale écarte les surfaces qui correspondent à ces commandes. Le filtre se limite aux modèles actifs et revalidés sur l'observation courante. Les autres stratégies gardent accès aux commandes. Les jeux de réparation par clic conservent la même règle de symétrie.
+
+Le rejeu depuis le niveau 1 gagne en **199 commandes SIC seul**. Les **159 premières commandes** et leurs retours gardent leurs empreintes. Le niveau 6 se termine en **40 commandes et 20,36 s** au budget de 360 s de temps actif et 600 commandes. Les coordonnées et commandes correspondent exactement au rejeu de référence après retrait du clic fautif. DNOI gagne toujours son premier niveau en trois clics de réparation locale. TypeScript et les **85 tests ciblés** passent. La couverture atteint **542/636 niveaux (85,2 %)**, dont **43/99 niveaux 6 (43,4 %)**.
+
+Empreinte jusqu'à la victoire `edfe272676670067ceab7237f32bad22a26aa779a47be0b2e6733c650682595f`.
