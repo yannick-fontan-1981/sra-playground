@@ -1,7 +1,8 @@
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
-import { acquireQueuedField, activeQueueMemberCount } from '../logos-engine/v6-queued-field-models.ts';
+import { acquireQueuedField, activeQueueMemberCount, portableQueueHypothesis } from '../logos-engine/v6-queued-field-models.ts';
 import { measureQueuedField, queuedFieldGrid } from '../logos-engine/v6-queued-field-observation.ts';
 import { chooseQueuedField } from '../logos-engine/v6-queued-field-search.ts';
+import { seekQueueHorizon } from './queue-horizon.ts';
 import type { NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -28,7 +29,7 @@ type Grid = number[][];
 type Preparation = { grid: Grid; column: number; values: number[] };
 type Control = { kind: 'translate'; delta: number } | { kind: 'reorder'; permutations: number[][] } | { kind: 'receive' };
 type Proposal = NativeProposal & { model: Model; geometry: NativeRecord; preparations: (Preparation | null)[];
-  preview: unknown; needId: string };
+  preview: unknown; needId: string; visibleInks?: number[] };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 
 function projectPreparation(width: number, rows: readonly number[], empty: number, law: Control | undefined, current: Preparation): Preparation | null {
@@ -40,6 +41,12 @@ function projectPreparation(width: number, rows: readonly number[], empty: numbe
   for (const row of rows) grid[row]![current.column] = empty;
   for (const [index, row] of rows.entries()) grid[row]![column] = values[index]!;
   return { grid, column, values };
+}
+
+function visibleQueueInks(scene: NonNullable<ReturnType<typeof measureQueuedField>>, empty: number | null) {
+  const preview = scene.preview_alternatives.flatMap((item: { members: number[][] }) => item.members.flat());
+  return [...new Set<number>([...scene.grid.flat(), ...preview])]
+    .filter(ink => ink !== empty).sort((a, b) => a - b);
 }
 
 export function createSicQueuedPlacement(family = queuedPlacementId): NativeFamily<Proposal> {
@@ -57,10 +64,20 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
       if (available.length < 3) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const acquired = execution?.observedQueue?.epoch === observation.level_epoch ? execution.observedQueue : null;
-      const local = prior ?? (learns ? acquired : null);
+      let local = prior ?? (learns ? acquired : null);
       if (learns && !local) return null;
       const scene = measureQueuedField(rows, local?.geometry ?? null, activeQueueMemberCount(local));
       if (!scene?.mark || (!local && !scene.preview_alternatives.length)) return null;
+      const visibleInks = !learns ? visibleQueueInks(scene, local?.empty ?? scene.empty_appearance_hypothesis) : undefined;
+      // Several visible colors lie outside the active group. A plan for only
+      // that group can miss preparations for cascades of those other colors.
+      const outsideGroup = visibleInks?.filter(ink => !scene.mark.values.includes(ink)).length ?? 0;
+      if (!local && outsideGroup >= 2 && state?.epoch === observation.level_epoch - 1
+        && observation.levels_completed > state.levelsCompleted
+        && equal(state.observedInks, visibleInks)) {
+        const portable = portableQueueHypothesis(state, scene, observation);
+        if (portable) local = { ...portable, wholeQueue: true };
+      }
       const controls = local?.controls ?? {};
       const laws = Object.values(controls) as { kind: string; delta?: number; permutations?: number[][] }[];
       const move = laws.filter(law => law.kind === 'translate');
@@ -70,8 +87,10 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
         && move.some(law => law.delta! < 0) && move.some(law => law.delta! > 0);
       if (learns && !prior && !complete) return null;
       const now = execution?.now ?? (() => performance.now());
-      const plan = complete ? chooseQueuedField(scene, local, Math.min(remaining, 16),
-        Math.min(execution?.deadlineMs ?? Infinity, now() + 1200), 24000, 3, now) : null;
+      const horizon = local?.wholeQueue && complete ? seekQueueHorizon(scene, local,
+        Math.min(execution?.remainingLevelActions ?? remaining, 64), Math.min(execution?.deadlineMs ?? Infinity, now() + 1800), now) : null;
+      const plan = horizon ?? (local && complete ? chooseQueuedField(scene, local, Math.min(remaining, 16),
+        Math.min(execution?.deadlineMs ?? Infinity, now() + 1200), 24000, 3, now) : null);
       const first = plan?.actions[0]?.action_ref as string | undefined;
       const ambiguous = available.filter(action => controls[action]?.kind === 'reorder' && controls[action].permutations.length > 1);
       const untried = available.filter(action => !Object.hasOwn(controls, action));
@@ -104,8 +123,13 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
         controls[action_ref], { grid: scene.grid, column: mark.column, values: mark.values }) : null;
       const preparations = [preparation];
       if (strategy === 'prepare_queued_group' && local && plan) {
-        for (const planned of plan.actions.slice(1)) {
+        for (const planned of plan.actions.slice(1, Math.min(remaining, 16))) {
           if (!preparation || !available.includes(planned.action_ref)) break;
+          if (horizon && controls[planned.action_ref]?.kind === 'receive') {
+            actions.push({ action_ref: planned.action_ref, data: {} });
+            preparations.push(null);
+            break;
+          }
           preparation = projectPreparation(widthInCells, mark.rows, local.empty, controls[planned.action_ref], preparation);
           if (!preparation) break;
           actions.push({ action_ref: planned.action_ref, data: {} });
@@ -116,10 +140,13 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
       const [dx, dy] = scene.geometry.pitch, [cellWidth, cellHeight] = scene.geometry.size;
       const field = [left, top, left + (width - 1) * dx + cellWidth - 1, top + (height - 1) * dy + cellHeight - 1];
       return { status: 'proposed', kind: family, actions, model: local, geometry: scene.geometry, preparations,
+        ...(visibleInks ? { visibleInks } : {}),
         preview: scene.preview_alternatives, needId: need.id,
         steps: actions.map(action => ({ action, expected_after: null })), binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Place each incoming group where it contributes to the field', mode: first ? 'solving' : 'exploration',
-          situation: label, agenda: resolved?.entries ?? [], evidence, field, activeGroup: mark.bbox },
+          situation: horizon ? 'Prepare this group for the projected clears across the visible queue' : label,
+          agenda: resolved?.entries ?? [], evidence, field, activeGroup: mark.bbox,
+          ...(horizon ? { visibleGroups: horizon.groups, projectedClears: horizon.projected } : {}) },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -148,10 +175,13 @@ export function createSicQueuedPlacement(family = queuedPlacementId): NativeFami
         : matched ? 'queued_preparation_confirmed' : 'observe_queued_control_or_reception' };
     },
     record(before, after, command, first, second, proposal, index, frames) {
-      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       // The acquisition kernel uses source-shaped commands in its attempt receipts.
       const previous = index > 0 && state?.epoch === before.level_epoch ? state : proposal.model;
+      if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       state = acquireQueuedField(previous, before, after, { action_ref: command.action_ref }, first, second, frames) ?? previous;
+      if (state && proposal.visibleInks) state = { ...state,
+        levelsCompleted: before.levels_completed,
+        observedInks: [...new Set<number>([...state.observedInks ?? [], ...proposal.visibleInks])].sort((a, b) => a - b) };
       return { events: [] };
     },
     state: () => ({ state }),
