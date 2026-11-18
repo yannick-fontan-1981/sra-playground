@@ -80,7 +80,8 @@ function joinWallFragments(parts: Part[]): WallBounds[] {
   return [...byColor.values()];
 }
 
-function measure(rows: NativeRows, parts = geometricComponents(rows), splitWalls = false): { layout: Layout; position: Position } | null {
+function measure(rows: NativeRows, parts = geometricComponents(rows), splitWalls = false,
+  allowThinExternalExit = false): { layout: Layout; position: Position } | null {
   const candidates = parts.filter(p => p.area > width(p.bbox) + height(p.bbox) && p.area < 750
     && width(p.bbox) > 30 && height(p.bbox) > 20
     && p.bbox[0] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[1] > 0 && p.bbox[3] < rows.length - 4);
@@ -98,7 +99,7 @@ function measure(rows: NativeRows, parts = geometricComponents(rows), splitWalls
   };
   const layouts = [];
   for (const root of candidates) for (const pitch of [2, 3, 4, 1]) {
-    if (pitch > 1 && root.area <= 180 || pitch === 1 && goal) continue;
+    if (pitch > 1 && root.area <= 180 || pitch === 1 && goal && !allowThinExternalExit) continue;
     if (!isFrame(root, pitch)) continue;
     const origin: NativePoint = [root.bbox[0], root.bbox[1]];
     let exit: NativePoint | null;
@@ -145,7 +146,9 @@ function measure(rows: NativeRows, parts = geometricComponents(rows), splitWalls
   const multiscale = layouts.filter(candidate => candidate.layout.pitch > 1);
   const eligible = multiscale.length ? multiscale : layouts;
   if (eligible.length === 1) return eligible[0]!;
-  return !eligible.length && !splitWalls ? measure(rows, parts, true) : null;
+  if (eligible.length) return null;
+  if (!splitWalls) return measure(rows, parts, true);
+  return goal && !allowThinExternalExit ? measure(rows, parts, true, true) : null;
 }
 
 function connected(layout: Layout, position: Position): boolean {
