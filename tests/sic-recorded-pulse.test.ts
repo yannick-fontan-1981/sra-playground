@@ -40,6 +40,24 @@ test('a contact must produce an animated change inside the link to be recorded a
   assert.equal(seen?.pending.length, 0);
 });
 
+test('a second visible link cannot certify the first contact with its own animation', () => {
+  const initial = startRecording();
+  const choice = chooseRecording(observation(start), rows, initial)!;
+  const first = scene.transfer!;
+  const second = { contact: [4, 4], frames: [[4, 4], [10, 4]], channel: [7, 4, 9, 5] } as const;
+  const recording = { ...choice.recording, scene: { ...scene, transfer: undefined, transfers: [second, first] } };
+  const candidate = { ...choice, recording };
+  const flash = (y: number) => {
+    const frame = structuredClone(rows);
+    frame[y]![7] = 3;
+    frame[y]![8] = 3;
+    return [rows, frame, frame, rows];
+  };
+
+  assert.equal(observeRecording(candidate, observation(entrance), rows, rows, flash(4)), null);
+  assert.equal(observeRecording(candidate, observation(entrance), rows, rows, flash(1))?.pendingPulse?.tick, 1);
+});
+
 test('one recording preserves distinct ticks for two obstacle shifts before holding a contact', () => {
   const cells = ([x, y]: NativePoint): NativePoint[] => [[x, y], [x + 1, y], [x, y + 1], [x + 1, y + 1]];
   const firstBlock = cells([7, 1]), secondBlock = cells([10, 4]);

@@ -5,8 +5,8 @@ import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, Nativ
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
-import { beginRecording, chooseRecording, linkedTransfer, needsTransferPulse, observeRecording, openSupports, recordingActor, replaySprites,
-  type Recording, type RecordingChoice, type RecordingScene } from './recorded-replay-access.ts';
+import { beginRecording, chooseRecording, linkedTransfers, needsTransferPulse, observeRecording, openSupports, recordingActor, replaySprites,
+  transferForChoice, type Recording, type RecordingChoice, type RecordingScene } from './recorded-replay-access.ts';
 
 export const replayAccessId = 'sic_replay_access';
 export const verifyRemoteReplayId = 'sic_verify_remote_replay';
@@ -15,7 +15,7 @@ export { navigationPrimitives as replayAccessStrategies } from './navigation-pri
 
 type Body = { signature: string; start: NativePoint; size: NativePoint; floor: number; quantum: number; palette: number; mask: readonly NativePoint[] };
 type Node = { position: NativePoint; peer_support: NativePoint[] };
-type Scene = { body: Body; goal: NativePoint; nodes: Node[]; slots: NativeBox[]; transfer?: RecordingScene['transfer'] };
+type Scene = { body: Body; goal: NativePoint; nodes: Node[]; slots: NativeBox[]; transfer?: RecordingScene['transfer']; transfers?: RecordingScene['transfers'] };
 type Changed = { pixel: NativePoint; before: number; after: number };
 type State = { epoch: number; scene: Scene; controls: Record<string, NativePoint>; tried: string[]; samples: NativePoint[];
   node: Node | null; entered: Changed[]; restored: boolean; reversible: boolean; replay: string | null; ticks: number;
@@ -56,8 +56,9 @@ function sceneAtStart(observation: NativeObservation, rows: NativeRows): Scene |
   const single = scenes.filter(scene => scene.slots.length === 2);
   const candidates = single.length ? single : scenes;
   if (candidates.length !== 1) return null;
-  const scene = candidates[0]!, transfer = scene.slots.length > 2 ? linkedTransfer(observation, scene.body) : null;
-  return transfer ? { ...scene, transfer } : scene;
+  const scene = candidates[0]!, transfers = scene.slots.length > 2 ? linkedTransfers(observation, scene.body) : [];
+  if (transfers.length === 1) return { ...scene, transfer: transfers[0]! };
+  return transfers.length > 1 ? { ...scene, transfers } : scene;
 }
 
 function actorPosition(observation: NativeObservation, scene: Scene): NativePoint | null {
@@ -97,7 +98,8 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   const ref = observation.observation_ref, mode = execution?.reasoningMode ?? 'exploration';
   const knownInteraction = choice.intent === 'commit';
   const pulseProbe = needsTransferPulse(choice) && !choice.entry;
-  const measuringShift = !recording.paths.length && recording.preparations?.some(item => !item.event && equal(item.node.position, destination));
+  const shifts = recording.preparations ?? (recording.transferPlan && recording.preparation ? [recording.preparation] : []);
+  const measuringShift = !recording.paths.length && shifts.some(item => !item.event && equal(item.node.position, destination));
   const probing = pulseProbe || !!measuringShift && equal(choice.expected, destination);
   const facts = { routeSupported: !knownInteraction && !probing, eligibleProbe: probing, knownInteraction, mode };
   const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
@@ -106,7 +108,10 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   const preparation = recording.preparation;
   const beforeFirstCommit = !!preparation && recording.paths.length === 0;
   const auxiliary = recording.lane?.points[recording.lane.index];
-  const situation = choice.entry ? 'Step into the linked frame on the tick of the recorded activation'
+  const transfer = transferForChoice(choice) ?? scene.transfer;
+  const situation = choice.entry && transfer && recording.transferPlan && equal(transfer.contact, recording.transferPlan.auxiliary.contact)
+    ? 'Enter the linked frame while the independent carrier activates it'
+    : choice.entry ? 'Step into the linked frame on the tick of the recorded activation'
     : pulseProbe ? 'Reach the linked contact and check whether it sends a pulse between the frames'
       : knownInteraction && recording.pendingPulse ? 'Record the timed pulse for a later carrier'
         : knownInteraction && !recording.paths.length && recording.preparations ? 'Record the shifts and the contact held at the end'
@@ -133,10 +138,10 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
       edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
     sicSituationCard: { strategy, need: 'Keep the recorded contacts active while reaching the receiver', situation, evidence, agenda: [],
       mode, triggerCard: chooseLanding, actor: box(from, scene.body.size), target: box(destination, scene.body.size),
-      remote: scene.transfer?.channel ?? peerBounds(recording.node?.peer_support ?? []), slots: scene.slots,
+      remote: transfer?.channel ?? peerBounds(recording.node?.peer_support ?? []), slots: scene.slots,
       ...(auxiliary ? { externalCarriers: [box(auxiliary, scene.body.size)] } : {}),
       replayActors: replaySprites(observation, recording), replaySupports: [
-        ...openSupports(recording), ...(scene.transfer?.frames.map(point => box(point, scene.body.size)) ?? []),
+        ...openSupports(recording), ...(scene.transfers ?? (scene.transfer ? [scene.transfer] : [])).flatMap(link => link.frames.map(point => box(point, scene.body.size))),
       ] },
     question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],

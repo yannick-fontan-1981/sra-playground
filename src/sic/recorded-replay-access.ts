@@ -6,7 +6,7 @@ type Body = { readonly signature: string; readonly start: NativePoint; readonly 
 type Node = { readonly position: NativePoint; readonly peer_support: readonly NativePoint[] };
 type TransferLink = { readonly contact: NativePoint; readonly frames: readonly [NativePoint, NativePoint]; readonly channel: NativeBox };
 export type RecordingScene = { readonly body: Body; readonly goal: NativePoint; readonly nodes: readonly Node[]; readonly slots: readonly NativeBox[];
-  readonly transfer?: TransferLink };
+  readonly transfer?: TransferLink; readonly transfers?: readonly TransferLink[] };
 type Change = { readonly pixel: NativePoint; readonly before: number; readonly after: number };
 type TimedPreparation = { readonly tick: number; readonly changes: readonly Change[]; readonly ref: string; readonly retained: boolean };
 type Pulse = { readonly tick: number; readonly ref: string };
@@ -14,6 +14,7 @@ type Preparation = { readonly node: Node; readonly block: NativePoint; readonly 
 type LaneSwitch = { readonly index: number; readonly block: NativePoint; readonly ink: number; readonly closed: boolean };
 type Lane = { readonly points: readonly NativePoint[]; readonly index: number; readonly direction: 1 | -1;
   readonly switches: readonly LaneSwitch[] };
+type TransferPlan = { readonly auxiliary: TransferLink; readonly hold: Node; readonly exit: TransferLink };
 type Contribution = { readonly path: readonly NativePoint[]; readonly contact: NativePoint; readonly changed: readonly Change[];
   readonly evidence: readonly string[]; readonly prepared?: TimedPreparation; readonly preparations?: readonly TimedPreparation[]; readonly pulse?: Pulse };
 type Step = { readonly input: string; readonly position: NativePoint; readonly entry?: NativePoint };
@@ -22,7 +23,7 @@ export type Recording = { readonly epoch: number; readonly scene: RecordingScene
   readonly node: Node | null; readonly route: readonly Step[]; readonly pending: readonly Change[]; readonly evidence: readonly string[];
   readonly stopped: boolean; readonly preparation?: Preparation; readonly preparations?: readonly Preparation[];
   readonly lane?: Lane; readonly lanePreparation?: Preparation;
-  readonly pendingPulse?: Pulse | null };
+  readonly pendingPulse?: Pulse | null; readonly transferPlan?: TransferPlan };
 export type RecordingChoice = { readonly recording: Recording; readonly command: NativeCommand; readonly expected: NativePoint;
   readonly intent: 'move' | 'commit'; readonly destination: NativePoint; readonly entry?: NativePoint };
 
@@ -38,7 +39,7 @@ const supportAt = (paths: readonly Contribution[], tick: number) => paths.flatMa
   ...(tick >= item.path.length - 1 ? item.changed : []),
 ]);
 
-export function linkedTransfer(observation: NativeObservation, body: Body & { readonly palette: number }): TransferLink | null {
+export function linkedTransfers(observation: NativeObservation, body: Body & { readonly palette: number }): TransferLink[] {
   const { quantum, start, size: [w, h] } = body;
   const candidates: TransferLink[] = [];
   for (const entity of observation.entities) {
@@ -67,13 +68,19 @@ export function linkedTransfer(observation: NativeObservation, body: Body & { re
       : a[1] === b[1] ? [a[0] + w + 1, a[1], b[0] - 2, a[1] + h - 1] : null;
     if (channel && channel[0] <= channel[2] && channel[1] <= channel[3]) candidates.push({ contact: contacts[0]!, frames: [a, b], channel });
   }
-  return candidates.length === 1 ? candidates[0]! : null;
+  return candidates;
+}
+
+export function transferForChoice(choice: RecordingChoice): TransferLink | undefined {
+  const { recording, expected, intent, entry } = choice;
+  if (intent !== 'move') return undefined;
+  const { transfer, transfers = transfer ? [transfer] : [] } = recording.scene;
+  return transfers.find(link => entry ? link.frames.some(frame => same(frame, entry))
+    : !!recording.node && same(recording.node.position, link.contact) && same(expected, link.contact));
 }
 
 export function needsTransferPulse(choice: RecordingChoice): boolean {
-  const { recording, expected, intent } = choice, transfer = recording.scene.transfer;
-  return intent === 'move' && !!transfer && (!!choice.entry || !!recording.node
-    && same(recording.node.position, transfer.contact) && same(expected, transfer.contact));
+  return !!transferForChoice(choice);
 }
 
 function sawPulse(transfer: TransferLink, before: NativeRows, after: NativeRows, frames: readonly NativeRows[]) {
@@ -136,6 +143,17 @@ function preparationCandidates(scene: RecordingScene, rows: NativeRows): Prepara
   });
 }
 
+function linearLane(start: NativePoint, available: ReadonlySet<string>, vectors: readonly NativePoint[]) {
+  const points: NativePoint[] = [start], visited = new Set([key(start)]);
+  for (const [i, point] of points.entries()) {
+    const neighbors = vectors.map(([dx, dy]) => [point[0] + dx, point[1] + dy] as NativePoint)
+      .filter(next => available.has(key(next)) && (i === 0 || !same(next, points[i - 1]!)));
+    if (neighbors.length > 1 || neighbors.some(next => visited.has(key(next)))) return null;
+    if (neighbors.length) { points.push(neighbors[0]!); visited.add(key(neighbors[0]!)); }
+  }
+  return { points, visited };
+}
+
 function measureLane(scene: RecordingScene, rows: NativeRows, observation: NativeObservation,
   preparations: readonly Preparation[], vectors: readonly NativePoint[]) {
   const peers = measuredReplays(observation, scene);
@@ -152,14 +170,9 @@ function measureLane(scene: RecordingScene, rows: NativeRows, observation: Nativ
       if (temporalPatch(rows, [x, y], body.size).every(row => row.every(ink => ink === body.floor))) available.add(key([x, y]));
     }
   }
-  const points: NativePoint[] = [start], visited = new Set([key(start)]);
-  for (let i = 0; i < points.length; i++) {
-    const at = points[i]!;
-    const neighbors = vectors.map(([dx, dy]) => [at[0] + dx, at[1] + dy] as NativePoint)
-      .filter(next => available.has(key(next)) && (i === 0 || !same(next, points[i - 1]!)));
-    if (neighbors.length > 1 || neighbors.some(next => visited.has(key(next)))) return null;
-    if (neighbors.length) { points.push(neighbors[0]!); visited.add(key(neighbors[0]!)); }
-  }
+  const route = linearLane(start, available, vectors);
+  if (!route) return null;
+  const { points, visited } = route;
   if (points.length < 3 || points.length > 32 || visited.has(key(body.start)) || visited.has(key(scene.goal))) return null;
   const switches = preparations.flatMap(({ node, block, ink }) => {
     const index = points.findIndex(point => same(point, node.position));
@@ -175,7 +188,8 @@ function advanceLane(lane: Lane, scene: RecordingScene, changes: readonly Change
   const direction = index + lane.direction < 0 || index + lane.direction >= points.length ? -lane.direction as 1 | -1 : lane.direction;
   const next = index + direction, landing = points[next]!;
   const overlay = new Map(changes.map(change => [key(change.pixel), change.after]));
-  const onContact = scene.nodes.some(node => same(node.position, landing));
+  const onContact = scene.nodes.some(node => same(node.position, landing))
+    || scene.transfers?.some(link => same(link.contact, landing));
   const occupied = bodyBox(visible, scene.body.size);
   const open = onContact || temporalPatch(rows, landing, scene.body.size).every((row, dy) => row.every((ink, dx) => {
     const pixel: NativePoint = [landing[0] + dx, landing[1] + dy];
@@ -185,17 +199,82 @@ function advanceLane(lane: Lane, scene: RecordingScene, changes: readonly Change
     switches: switches.map(s => s.index === next ? { ...s, closed: !s.closed } : s) } : lane;
 }
 
+function walkRegion(rows: NativeRows, body: Body, start: NativePoint, vectors: readonly NativePoint[],
+  walkable: (point: NativePoint) => boolean, extraFloor: ReadonlySet<string> = new Set()) {
+  const [w, h] = body.size, width = rows[0]?.length ?? 0;
+  const points = [start];
+  const visited = new Set([key(start)]);
+  for (const [x, y] of points) {
+    for (const [dx, dy] of vectors) {
+      const point: NativePoint = [x + dx, y + dy];
+      const [left, top] = point, id = key(point);
+      if (visited.has(id) || left < 0 || top < 0 || left + w > width || top + h > rows.length) continue;
+      const floor = temporalPatch(rows, point, body.size).every((row, j) => row.every((ink, i) =>
+        ink === body.floor || extraFloor.has(key([left + i, top + j]))));
+      if (floor || walkable(point)) {
+        visited.add(id);
+        points.push(point);
+      }
+    }
+  }
+  return visited;
+}
+
+function measureTransferPlan(scene: RecordingScene, rows: NativeRows, observation: NativeObservation,
+  preparations: readonly Preparation[], vectors: readonly NativePoint[]) {
+  const links = scene.transfers ?? [], { body, goal } = scene;
+  const peers = measuredReplays(observation, scene);
+  if (peers.length !== 1 || links.length < 2 || scene.slots.length !== 3) return null;
+  const linkedPositions = links.flatMap(link => [link.contact, ...link.frames]).map(key);
+  if (new Set(linkedPositions).size !== linkedPositions.length) return null;
+  const start = peers[0]!, allowPlayer = (point: NativePoint) => same(point, body.start);
+  const region = walkRegion(rows, body, body.start, vectors, allowPlayer);
+  const fromGoal = walkRegion(rows, body, goal, vectors, allowPlayer);
+  const exits = links.filter(link => link.frames.filter(frame => fromGoal.has(key(frame))).length === 1
+    && link.frames.some(frame => region.has(key(frame))));
+  // Work back from the receiver to the held contact and its own means of access.
+  if (exits.length !== 1) return null;
+  const exit = exits[0]!;
+  const canReach = (point: NativePoint, reached: ReadonlySet<string>) =>
+    reached.has(key(point)) || vectors.some(([dx, dy]) => reached.has(key([point[0] + dx, point[1] + dy])));
+  if (canReach(exit.contact, region)) return null;
+  const options = scene.nodes.flatMap(hold => {
+    if (preparations.some(item => item.node === hold) || canReach(hold.position, region)) return [];
+    const released = walkRegion(rows, body, body.start, vectors, allowPlayer, new Set(hold.peer_support.map(key)));
+    if (!canReach(exit.contact, released)) return [];
+    return links.filter(link => link !== exit).flatMap(auxiliary => {
+      if (auxiliary.frames.filter(frame => region.has(key(frame))).length !== 1) return [];
+      const far = auxiliary.frames.find(frame => !region.has(key(frame)))!;
+      if (!canReach(hold.position, walkRegion(rows, body, far, vectors, allowPlayer))) return [];
+      return preparations.flatMap(preparation => {
+        if (!canReach(preparation.node.position, region)) return [];
+        const allowed = (point: NativePoint) => same(point, auxiliary.contact) || same(point, preparation.block);
+        const span = walkRegion(rows, body, start, vectors, allowed);
+        if (span.size < 3 || span.size > 32 || span.has(key(body.start)) || span.has(key(goal))) return [];
+        const route = linearLane(start, span, vectors);
+        if (!route || !same(route.points.at(-1)!, auxiliary.contact) || !route.visited.has(key(preparation.block))) return [];
+        const lane: Lane = { points: route.points, index: 0, direction: 1, switches: [] };
+        return [{ lane, preparation, transferPlan: { auxiliary, hold, exit } }];
+      });
+    });
+  });
+  return options.length === 1 ? options[0]! : null;
+}
+
 export function beginRecording(scene: RecordingScene, epoch: number, vectors: Readonly<Record<string, NativePoint>>,
   phase: string, evidence: readonly string[], rows: NativeRows, observation?: NativeObservation): Recording | null {
   const valid = Object.entries(vectors).filter(([input, [x, y]]) => input !== phase &&
     (x === 0 || y === 0) && Math.abs(x) + Math.abs(y) === scene.body.quantum);
   if (new Set(valid.map(([, delta]) => key(delta))).size !== 4 || !evidence.length) return null;
   const preparations = preparationCandidates(scene, rows);
+  const transferPlan = observation && scene.transfers
+    ? measureTransferPlan(scene, rows, observation, preparations, valid.map(([, delta]) => delta)) : null;
+  if (scene.transfers && !transferPlan) return null;
   const lane = observation && !scene.transfer && preparations.length > 1
     ? measureLane(scene, rows, observation, preparations, valid.map(([, delta]) => delta)) : null;
   return { scene, epoch, phase, vectors: Object.fromEntries(valid), paths: [], path: [scene.body.start],
     node: null, route: [], pending: [], evidence, stopped: false,
-    ...(lane ?? (preparations.length > 1 ? { preparations }
+    ...(transferPlan ?? lane ?? (preparations.length > 1 ? { preparations }
       : preparations.length === 1 && !scene.transfer ? { preparation: preparations[0]! } : {})) };
 }
 
@@ -218,6 +297,18 @@ function pathTo(rows: NativeRows, state: Recording, start: NativePoint, goal: Na
     }
   }
   const pulses = new Set(state.paths.flatMap(item => item.pulse ? [item.pulse.tick] : []));
+  const transferPlan = state.transferPlan;
+  const timedLinks = new Map<number, TransferLink[]>();
+  if (transferPlan) {
+    for (const [tick, lane] of lanes) {
+      const previous = lanes.get(tick - 1);
+      if (previous && lane.index !== previous.index && same(lane.points[lane.index]!, transferPlan.auxiliary.contact)) {
+        timedLinks.set(tick, [transferPlan.auxiliary]);
+      }
+    }
+    const pulse = state.paths.find(item => same(item.contact, transferPlan.exit.contact))?.pulse;
+    if (pulse) timedLinks.set(pulse.tick, [...(timedLinks.get(pulse.tick) ?? []), transferPlan.exit]);
+  }
   const directions = Object.entries(state.vectors);
   type Search = Step & { readonly tick: number; readonly from: number };
   const queue: Search[] = [{ position: start, tick: startTick, from: -1, input: '' }];
@@ -226,11 +317,13 @@ function pathTo(rows: NativeRows, state: Recording, start: NativePoint, goal: Na
     const current = queue[i]!;
     if (state.lane && current.tick >= cap) continue;
     const tick = Math.min(cap, current.tick + 1), overlay = overlays[tick]!;
+    const activeLinks = current.tick < cap
+      ? timedLinks.get(tick) ?? (transfer && pulses.has(tick) ? [transfer] : undefined) : undefined;
     for (const [input, [dx, dy]] of directions) {
       const x = current.position[0] + dx, y = current.position[1] + dy;
       const position: NativePoint = [x, y];
-      const ring = transfer && current.tick < cap && pulses.has(tick) ? transfer.frames.findIndex(at => same(at, position)) : -1;
-      const nextPosition = ring >= 0 ? transfer!.frames[1 - ring]! : position;
+      const active = activeLinks?.find(link => link.frames.some(frame => same(frame, position)));
+      const nextPosition = active?.frames.find(frame => !same(frame, position)) ?? position;
       const visit = key(nextPosition) + '|' + tick;
       if (x < 0 || y < 0 || x + w > width || y + h > height || seen.has(visit) || laneCells.has(key(position))
         || !state.lane && !state.preparation && !transfer && occupants[tick]!.has(key(position))) continue;
@@ -244,7 +337,7 @@ function pathTo(rows: NativeRows, state: Recording, start: NativePoint, goal: Na
       }
       const node = nodes.some(candidate => same(candidate.position, position));
       if (!floor && !node && !same(goal, position)) continue;
-      const next = { position: nextPosition, tick, from: i, input, ...(ring >= 0 ? { entry: position } : {}) };
+      const next = { position: nextPosition, tick, from: i, input, ...(active ? { entry: position } : {}) };
       if (same(goal, nextPosition)) {
         const path: Step[] = [];
         for (let step: Search = next; step.from >= 0; step = queue[step.from]!) {
@@ -275,7 +368,16 @@ export function chooseRecording(observation: NativeObservation, rows: NativeRows
   let recording = initial;
   if (!recording.route.length) {
     const { scene, paths, preparation, preparations } = recording;
-    if (recording.lane && paths.length === scene.slots.length - 1) {
+    if (recording.transferPlan) {
+      const { transferPlan } = recording;
+      const node = paths.length >= scene.slots.length - 1 ? null
+        : paths.length ? { position: transferPlan.exit.contact, peer_support: [] }
+          : preparation?.event ? transferPlan.hold : preparation?.node;
+      if (node === undefined) return null;
+      const route = pathTo(rows, recording, from, node?.position ?? scene.goal);
+      if (!route?.length) return null;
+      recording = { ...recording, node, route };
+    } else if (recording.lane && paths.length === scene.slots.length - 1) {
       const node = recording.lanePreparation?.event ? null : recording.lanePreparation?.node ?? null;
       const route = pathTo(rows, recording, from, node?.position ?? scene.goal);
       if (!route?.length) return null;
@@ -386,10 +488,12 @@ export function observeRecording(choice: RecordingChoice, observation: NativeObs
     return event ? { ...recording, lanePreparation: { ...recording.lanePreparation, event },
       path: [...recording.path, actor], node: null, route: [], evidence } : null;
   }
-  if (needsTransferPulse(choice)) {
-    if (!sawPulse(scene.transfer!, before, after, frames)) return null;
-    return { ...recording, path: [...recording.path, actor], route: recording.route.slice(1), evidence,
-      ...(!choice.entry ? { pendingPulse: { tick, ref } } : {}) };
+  const transfer = transferForChoice(choice);
+  if (transfer) {
+    if (!sawPulse(transfer, before, after, frames)) return null;
+    if (!choice.entry) return { ...recording, path: [...recording.path, actor], route: recording.route.slice(1), evidence,
+      pendingPulse: { tick, ref } };
+    if (!recording.transferPlan) return { ...recording, path: [...recording.path, actor], route: recording.route.slice(1), evidence };
   }
   const { preparation } = recording;
   if (preparation && recording.paths.length === 0) {
@@ -398,8 +502,9 @@ export function observeRecording(choice: RecordingChoice, observation: NativeObs
       return event ? { ...recording, preparation: { ...preparation, event }, path: [...recording.path, actor], pending: [],
         node: null, route: [], evidence } : null;
     }
-    if (preparation.event && !preparation.event.changes.every(change =>
-      inside(bodyBox(actor, scene.body.size), change.pixel) || pixel(after, change.pixel) === change.after)) return null;
+    const moving = lane && bodyBox(lane.points[lane.index]!, scene.body.size);
+    if (preparation.event && !preparation.event.changes.every(change => inside(bodyBox(actor, scene.body.size), change.pixel)
+      || moving && inside(moving, change.pixel) || pixel(after, change.pixel) === change.after)) return null;
   }
   if (recording.preparations && !recording.paths.length) {
     const preparations = recording.preparations.map(item => item.event && !same(actor, item.node.position)
