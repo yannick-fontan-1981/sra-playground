@@ -4,17 +4,21 @@ import { extensionButtonMask, targetPatterns, type ExtensionWitness } from './ex
 type Part = Pick<NativeEntity, 'palette_value' | 'bbox' | 'area' | 'rectangular'>;
 type Button = { box: NativeBox; at: NativePoint };
 type Segment = { ink: number; pivot: NativePoint; direction: NativePoint; length: number;
-  buttons: Record<ExtensionOperation, Button> };
+  buttons: Partial<Record<ExtensionOperation, Button>>; parent?: number | null; mayClip?: boolean };
+type Alignment = { body: number; marker: NativePoint; target: NativePoint };
 export type TurningLayout = {
   segments: Segment[]; quantum: number; width: number; field: NativeBox; obstacles: string[];
   floor: number; capInk: number; markerInk: number; marker: NativePoint; target: NativePoint; marks: NativePoint[];
+  alignments?: Alignment[];
 };
 export type ExtensionOperation = 'extend' | 'retract' | 'turn';
 export type TurnSign = 1 | -1;
 export type TurningPose = { added: number; turns: number }[];
-export type TurningMove = { body: number; operation: ExtensionOperation };
+export type TurningMove = { body: number; operation: ExtensionOperation; quarterTurns?: number };
 type Position = { box: NativeBox; cap: NativeBox; pivot: NativePoint; turns: number };
-type Projection = { parts: Position[]; marker: NativePoint };
+type Projection = { parts: Position[]; marker: NativePoint; markers: NativePoint[] };
+type MaskedPart = { part: Part; mask: string };
+type Controls = { ink: number; buttons: Segment['buttons'] };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -37,6 +41,10 @@ const bound = (a: NativePoint, b: NativePoint): NativeBox =>
 const joined = (a: NativeBox, b: NativeBox): NativeBox =>
   [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3])];
 const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
+const buttonAt = (part: Part): Button => ({ box: part.bbox, at: center(part.bbox) });
+const parentOf = (segment: Segment, index: number) => segment.parent === undefined ? index - 1 : segment.parent ?? -1;
+const alignmentsOf = (layout: TurningLayout): readonly Alignment[] =>
+  layout.alignments ?? [{ body: layout.segments.length - 1, marker: layout.marker, target: layout.target }];
 const poseKey = (pose: TurningPose) => pose.map(({ added, turns }) => added + ':' + turns).join(',');
 export const turningEdge = (pose: TurningPose, { body, operation }: TurningMove) => poseKey(pose) + '/' + body + '/' + operation;
 
@@ -48,7 +56,7 @@ export function readTurningLayout(rows: NativeRows, parts: readonly Part[], witn
   const lengths = buttons.filter(button => button.mask === witness.extend || button.mask === witness.retract);
   const inks = [...new Set(lengths.map(button => button.part.palette_value))];
   if (inks.length < 2 || inks.length > 5 || lengths.length !== inks.length * 2) return null;
-  const controls = inks.flatMap(ink => {
+  const outlined = inks.flatMap(ink => {
     const extend = lengths.find(button => button.part.palette_value === ink && button.mask === witness.extend)?.part;
     const retract = lengths.find(button => button.part.palette_value === ink && button.mask === witness.retract)?.part;
     if (!extend || !retract || extend.bbox[1] !== retract.bbox[1]) return [];
@@ -61,25 +69,35 @@ export function readTurningLayout(rows: NativeRows, parts: readonly Part[], witn
       && height(part.bbox) >= quantum + 2 && height(part.bbox) <= quantum * 3);
     const outline = framed.filter(part => !framed.some(other => other !== part && contains(other.bbox, part.bbox)));
     if (outline.length !== 1) return [];
-    const button = (part: Part) => ({ box: part.bbox, at: center(part.bbox) });
     return [{ ink, y: outline[0]!.bbox[1], mask: turn[0]!.mask,
-      buttons: { extend: button(extend), retract: button(retract), turn: button(turn[0]!.part) } }];
+      buttons: { extend: buttonAt(extend), retract: buttonAt(retract), turn: buttonAt(turn[0]!.part) } }];
   });
-  if (controls.length !== inks.length || controls.some(control => control.y !== controls[0]!.y || control.mask !== controls[0]!.mask)) return null;
-  const field: NativeBox = [0, 0, pixels - 1, controls[0]!.y - 1];
+  const singleChain = outlined.length === inks.length && outlined.every(control =>
+    control.y === outlined[0]!.y && control.mask === outlined[0]!.mask);
+  const panelTop = singleChain ? outlined[0]!.y : Math.min(...lengths.map(({ part }) => part.bbox[1]));
+  const controls = singleChain ? outlined : compactControls(buttons, lengths, inks, witness);
+  if (!controls) return null;
+  const controlInks = controls.map(({ ink }) => ink);
+  const field: NativeBox = [0, 0, pixels - 1, panelTop - 1];
   const fieldParts = parts.filter(part => contains(field, part.bbox));
   const caps = fieldParts.filter(part => part.rectangular && part.area === quantum
-    && (width(part.bbox) === 1 || height(part.bbox) === 1) && !inks.includes(part.palette_value));
-  const { targets, dots } = targetPatterns(fieldParts);
-  if (targets.length !== 1) return null;
-  const { at: target, marks, ink: markerInk } = targets[0]!;
-  const markers = dots.filter(part => part.ink === markerInk && !marks.some(mark => equal(mark, part.at)));
-  if (markers.length !== 1) return null;
-  const { at: marker } = markers[0]!;
+    && (width(part.bbox) === 1 || height(part.bbox) === 1) && !controlInks.includes(part.palette_value));
+  const { targets, dots } = targetPatterns(fieldParts, singleChain ? undefined : rows);
+  if (singleChain ? targets.length !== 1 : targets.length !== 2) return null;
+  const markerInk = targets[0]!.ink;
+  if (targets.some(target => target.ink !== markerInk)) return null;
+  const marks = targets.flatMap(target => target.marks);
   const bodies = controls.flatMap(control => {
-    const bodies = fieldParts.filter(part => part.palette_value === control.ink && part.area >= quantum);
-    if (bodies.length !== 1) return [];
-    const { bbox: box } = bodies[0]!;
+    const matching = fieldParts.filter(part => part.palette_value === control.ink && part.area >= quantum);
+    if (matching.length !== 1) return [];
+    let { bbox: box } = matching[0]!;
+    if (!singleChain) for (const target of targets) {
+      if (!target.filled) continue;
+      const [x, y] = target.at;
+      const rims: NativeBox[] = [[x - 1, y - 1, x - 1, y + 1], [x + 1, y - 1, x + 1, y + 1],
+        [x - 1, y - 1, x + 1, y - 1], [x - 1, y + 1, x + 1, y + 1]];
+      if (rims.some(rim => overlap(box, rim))) box = joined(box, [x - 1, y - 1, x + 1, y + 1]);
+    }
     const possible = caps.flatMap<{ cap: Part; direction: NativePoint }>(cap => {
       const [l, t] = cap.bbox;
       if (width(cap.bbox) === 1 && height(box) === quantum && box[1] === t) {
@@ -97,7 +115,7 @@ export function readTurningLayout(rows: NativeRows, parts: readonly Part[], witn
     const pivot = add(center(cap.bbox), direction), length = direction[0] ? width(box) : height(box);
     return [{ ink: control.ink, buttons: control.buttons, box, cap, direction, pivot, length }];
   });
-  if (bodies.length !== inks.length || bodies.some(body => body.cap.palette_value !== bodies[0]!.cap.palette_value)) return null;
+  if (bodies.length !== controls.length || bodies.some(body => body.cap.palette_value !== bodies[0]!.cap.palette_value)) return null;
   const parents = bodies.map(({ box, cap }, index) => bodies.flatMap((parent, i) => {
     const [dx, dy] = parent.direction, [l, t, r, b] = parent.box, own = joined(box, cap.bbox);
     const touches: NativeBox = dx ? [dx > 0 ? r + 1 : l - 1, t, dx > 0 ? r + 1 : l - 1, b]
@@ -105,27 +123,69 @@ export function readTurningLayout(rows: NativeRows, parts: readonly Part[], witn
     return i !== index && overlap(own, touches) ? [i] : [];
   }));
   if (parents.some(parent => parent.length > 1)) return null;
-  const roots = bodies.map((_, i) => i).filter(i => parents[i]!.length === 0);
-  if (roots.length !== 1) return null;
-  const order = roots.slice();
-  for (let i = 1; i < bodies.length; i++) {
-    const children = bodies.map((_, j) => j).filter(j => parents[j]![0] === order[i - 1] && !order.includes(j));
-    if (children.length !== 1) return null;
-    order.push(children[0]!);
+  const order = bodies.map((_, i) => i).filter(i => parents[i]!.length === 0);
+  if (!order.length || (singleChain && order.length !== 1)) return null;
+  for (let i = 0; i < order.length; i++) {
+    const children = bodies.map((_, j) => j).filter(j => parents[j]![0] === order[i]);
+    if (singleChain && children.length > 1) return null;
+    order.push(...children);
   }
-  if (!contains(bodies[order.at(-1)!]!.box, dot(marker))) return null;
+  if (order.length !== bodies.length) return null;
+  const markers = dots.filter(part => part.ink === markerInk && !marks.some(mark => equal(mark, part.at)));
+  const open = targets.filter(target => !('filled' in target));
+  if (open.length !== 1 || markers.length !== 1) return null;
+  const alignments = [...open, ...targets.filter(target => 'filled' in target)].flatMap(target => {
+    const marker = 'filled' in target ? target.at : markers[0]!.at;
+    const owners = order.flatMap((index, body) => contains(bodies[index]!.box, dot(marker)) ? [body] : []);
+    return owners.length === 1 ? [{ body: owners[0]!, target: target.at, marker }] : [];
+  });
+  if (alignments.length !== targets.length || singleChain && alignments[0]!.body !== order.length - 1) return null;
+  const { target, marker } = alignments[0]!;
   const counts = new Map<number, number>();
   for (const row of rows.slice(0, field[3] + 1)) for (const ink of row) counts.set(ink, (counts.get(ink) ?? 0) + 1);
   const floor = [...counts].find(([, count]) => count * 2 > pixels * (field[3] + 1))?.[0];
-  if (floor === undefined || floor === markerInk || floor === bodies[0]!.cap.palette_value || inks.includes(floor)) return null;
+  if (floor === undefined || floor === markerInk || floor === bodies[0]!.cap.palette_value || controlInks.includes(floor)) return null;
   const obstacles = rows.slice(0, field[3] + 1).map((row, y) => row.map((ink, x) => ink === floor
     || marks.some(mark => equal(mark, [x, y])) || bodies.some(body => contains(joined(body.box, body.cap.bbox), dot([x, y])))
     ? '.' : '#').join(''));
-  const layout = { segments: order.map(i => {
+  const layout: TurningLayout = { segments: order.map(i => {
     const { ink, pivot, direction, length, buttons } = bodies[i]!;
-    return { ink, pivot, direction, length, buttons };
-  }), quantum, width: pixels, field, obstacles, floor, capInk: bodies[0]!.cap.palette_value, markerInk, marker, target, marks };
+    const parent = parents[i]![0];
+    const mayClip = parent === undefined && !buttons.extend && !buttons.retract && !parents.some(p => p[0] === i)
+      && !alignments.some(a => order[a.body] === i);
+    return { ink, pivot, direction, length, buttons, ...(singleChain ? {} : {
+      parent: parent === undefined ? null : order.indexOf(parent), ...(mayClip ? { mayClip } : {}),
+    }) };
+  }), quantum, width: pixels, field, obstacles, floor, capInk: bodies[0]!.cap.palette_value, markerInk, marker, target, marks,
+  ...(singleChain ? {} : { alignments }) };
   return turningObserved(rows, layout, initialTurningPose(layout)) ? layout : null;
+}
+
+function compactControls(buttons: readonly MaskedPart[], lengths: readonly MaskedPart[], inks: readonly number[],
+  witness: ExtensionWitness): Controls[] | null {
+  const paired = inks.flatMap(ink => {
+    const extend = lengths.find(button => button.part.palette_value === ink && button.mask === witness.extend)?.part;
+    const retract = lengths.find(button => button.part.palette_value === ink && button.mask === witness.retract)?.part;
+    return extend && retract && extend.bbox[1] === retract.bbox[1]
+      ? [{ ink, buttons: { extend: buttonAt(extend), retract: buttonAt(retract) } }] : [];
+  });
+  if (paired.length !== inks.length) return null;
+  const rows = new Set(paired.map(control => control.buttons.extend.at[1]));
+  const turns = buttons.filter(button => !lengths.includes(button) && rows.has(center(button.part.bbox)[1]));
+  const nearby = paired.map(({ ink, buttons }) => turns.filter(({ part }) => {
+    const [x, y] = center(part.bbox), [a, row] = buttons.extend.at, [b] = buttons.retract.at;
+    return part.palette_value === ink && y === row && (x < Math.min(a, b) || x > Math.max(a, b))
+      && Math.min(Math.abs(x - a), Math.abs(x - b)) <= witness.quantum * 3;
+  }));
+  const masks = new Set(nearby.flat().map(turn => turn.mask));
+  if (masks.size !== 1 || nearby.filter(list => list.length === 1).length < 2 || nearby.some(list => list.length > 1)) return null;
+  const [mask] = masks;
+  const independent = turns.filter(turn => turn.mask === mask && !inks.includes(turn.part.palette_value));
+  if (new Set(independent.map(turn => turn.part.palette_value)).size !== independent.length) return null;
+  return [...paired.map((control, index) => {
+    const turn = nearby[index]![0];
+    return turn ? { ...control, buttons: { ...control.buttons, turn: buttonAt(turn.part) } } : control;
+  }), ...independent.map(({ part }) => ({ ink: part.palette_value, buttons: { turn: buttonAt(part) } }))];
 }
 
 export function initialTurningPose(layout: TurningLayout): TurningPose {
@@ -133,44 +193,61 @@ export function initialTurningPose(layout: TurningLayout): TurningPose {
 }
 
 export function moveTurningPose(pose: TurningPose, move: TurningMove, direction: TurnSign): TurningPose {
-  return pose.map((old, i) => i !== move.body ? old : move.operation === 'turn' ? { ...old, turns: (old.turns + direction) & 3 }
+  return pose.map((old, i) => i !== move.body ? old : move.operation === 'turn'
+    ? { ...old, turns: (old.turns + direction * (move.quarterTurns ?? 1)) & 3 }
     : { ...old, added: old.added + (move.operation === 'extend' ? 1 : -1) });
 }
 
+function projectSegment(layout: TurningLayout, parts: readonly Position[], pose: TurningPose, i: number): Position {
+  const segment = layout.segments[i]!, { pivot: base, direction, length } = segment, index = parentOf(segment, i);
+  const previous = layout.segments[index], parent = parts[index], local = pose[i]!, half = (layout.quantum - 1) / 2;
+  const turns = (local.turns + (parent?.turns ?? 0)) & 3, along = quarterTurn(direction, turns);
+  const pivot = previous && parent ? add(parent.pivot, quarterTurn(add(add(base, previous.pivot, -1),
+    previous.direction, pose[index]!.added * layout.quantum), parent.turns)) : base;
+  const normal: NativePoint = [along[1] * half, along[0] * half], delta = local.added * layout.quantum;
+  const far = add(pivot, along, length + delta - 1), back = add(pivot, along, -1);
+  return { box: bound(add(pivot, normal, -1), add(far, normal)), cap: bound(add(back, normal, -1), add(back, normal)), pivot, turns };
+}
+
+function projectMarker(layout: TurningLayout, pose: TurningPose, { body, marker }: Alignment, { pivot, turns }: Position): NativePoint {
+  const { pivot: base, direction } = layout.segments[body]!;
+  return add(add(pivot, quarterTurn(add(marker, base, -1), turns)), quarterTurn(direction, turns),
+    pose[body]!.added * layout.quantum);
+}
+
 export function projectTurningPose(layout: TurningLayout, pose: TurningPose): Projection {
-  const parts: Position[] = [], half = (layout.quantum - 1) / 2;
-  let marker = layout.marker;
-  for (const [i, { pivot: base, direction, length }] of layout.segments.entries()) {
-    const previous = layout.segments[i - 1], parent = parts[i - 1], local = pose[i]!;
-    const turns = (local.turns + (parent?.turns ?? 0)) & 3, along = quarterTurn(direction, turns);
-    const pivot = previous && parent ? add(parent.pivot, quarterTurn(add(add(base, previous.pivot, -1),
-      previous.direction, pose[i - 1]!.added * layout.quantum), parent.turns)) : base;
-    const normal: NativePoint = [along[1] * half, along[0] * half], delta = local.added * layout.quantum;
-    const far = add(pivot, along, length + delta - 1), back = add(pivot, along, -1);
-    parts.push({ box: bound(add(pivot, normal, -1), add(far, normal)), cap: bound(add(back, normal, -1), add(back, normal)), pivot, turns });
-    if (i === layout.segments.length - 1) marker = add(add(pivot, quarterTurn(add(layout.marker, base, -1), turns)), along, delta);
-  }
-  return { parts, marker };
+  const parts: Position[] = [];
+  for (let i = 0; i < layout.segments.length; i++) parts.push(projectSegment(layout, parts, pose, i));
+  const markers = alignmentsOf(layout).map(alignment => projectMarker(layout, pose, alignment, parts[alignment.body]!));
+  return { parts, marker: markers[0]!, markers };
+}
+
+function visibleBox(layout: TurningLayout, box: NativeBox, index: number): NativeBox | null {
+  if (contains(layout.field, box)) return box;
+  const [l, t, r, b] = box, [a, c, d, e] = layout.field;
+  if (!layout.segments[index]!.mayClip || !overlap(layout.field, box)) return null;
+  return [Math.max(l, a), Math.max(t, c), Math.min(r, d), Math.min(b, e)];
 }
 
 export function turningObserved(rows: NativeRows, layout: TurningLayout, pose: TurningPose): boolean {
-  const { parts, marker } = projectTurningPose(layout, pose);
-  if (!contains(parts.at(-1)!.box, dot(marker))) return false;
+  const { parts, markers } = projectTurningPose(layout, pose);
+  if (alignmentsOf(layout).some(({ body }, i) => !contains(parts[body]!.box, dot(markers[i]!)))) return false;
   const map = new Int8Array(layout.width * (layout.field[3] + 1)).fill(-1);
   const index = (x: number, y: number) => y * layout.width + x;
   const paint = ([l, t, r, b]: NativeBox, ink: number) => {
     for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) map[index(x, y)] = ink;
   };
   for (const [i, { box, cap }] of parts.entries()) {
-    if (!contains(layout.field, box) || !contains(layout.field, cap)) return false;
-    paint(box, layout.segments[i]!.ink);
-    paint(cap, layout.capInk);
+    const body = visibleBox(layout, box, i), hinge = visibleBox(layout, cap, i);
+    if (!body || !hinge) return false;
+    paint(body, layout.segments[i]!.ink);
+    paint(hinge, layout.capInk);
   }
-  const markerIndex = index(...marker), marks = new Set(layout.marks.map(point => index(...point)));
+  const markerIndices = new Set(markers.map(point => index(...point))), marks = new Set(layout.marks.map(point => index(...point)));
   for (let y = 0; y <= layout.field[3]; y++) for (let x = 0; x < layout.width; x++) {
     const at = index(x, y), ink = rows[y]?.[x], color = map[at]!;
     if (ink === undefined) return false;
-    if (at === markerIndex) {
+    if (markerIndices.has(at)) {
       if (ink !== layout.markerInk) return false;
     } else if (color >= 0) {
       if (ink !== color && !(marks.has(at) && ink === layout.markerInk)) return false;
@@ -181,6 +258,140 @@ export function turningObserved(rows: NativeRows, layout: TurningLayout, pose: T
 }
 
 type SearchNode = { pose: TurningPose; previous: SearchNode | null; move: TurningMove | null; depth: number };
+type ClearBox = (box: NativeBox) => boolean;
+
+function goalPoses(layout: TurningLayout, start: TurningPose, clear: ClearBox): TurningPose[] {
+  const targets = new Map(alignmentsOf(layout).map(goal => [goal.body, goal]));
+  const viewLength = Math.max(layout.width, layout.field[3] + 1);
+  const poses: TurningPose[] = [], pose: TurningPose = [], parts: Position[] = [], boxes: NativeBox[] = [];
+  let examined = 0;
+  const visit = (i: number) => {
+    if (i >= layout.segments.length) {
+      poses.push(pose.slice());
+      return;
+    }
+    if (++examined >= 150_000) return;
+    const segment = layout.segments[i]!, initial = start[i]!, target = targets.get(i);
+    const minimum = segment.buttons.retract ? Math.ceil((1 - segment.length) / layout.quantum) : initial.added;
+    const maximum = segment.buttons.extend ? Math.floor((viewLength - segment.length) / layout.quantum) : initial.added;
+    const rotations = segment.buttons.turn ? [0, 1, 2, 3] : [initial.turns];
+    for (const turns of rotations) {
+      let low = minimum, high = maximum;
+      if (target) {
+        pose[i] = { added: 0, turns };
+        const position = projectSegment(layout, parts, pose, i), origin = projectMarker(layout, pose, target, position);
+        const along = quarterTurn(segment.direction, position.turns);
+        const [dx, dy] = add(target.target, origin, -1), offset = (dx * along[0] + dy * along[1]) / layout.quantum;
+        if (!Number.isInteger(offset) || !equal(add(origin, along, offset * layout.quantum), target.target)) continue;
+        low = Math.max(low, offset);
+        high = Math.min(high, offset);
+      }
+      for (let added = low; added <= high; added++) {
+        pose[i] = { added, turns };
+        const position = projectSegment(layout, parts, pose, i);
+        const box = visibleBox(layout, joined(position.box, position.cap), i);
+        if (!box || !clear(box) || boxes.slice(0, i).some(other => overlap(box, other))
+          || target && !contains(position.box, dot(target.target))) continue;
+        parts[i] = position;
+        boxes[i] = box;
+        visit(i + 1);
+      }
+    }
+  };
+  visit(0);
+  return poses;
+}
+
+async function routeBetweenPoses(layout: TurningLayout, start: TurningPose, direction: TurnSign, moves: TurningMove[],
+  clear: ClearBox, remaining: number, blocked: ReadonlySet<string>, execution?: NativeExecution): Promise<TurningMove[]> {
+  let forward: SearchNode[] = [{ pose: start, previous: null, move: null, depth: 0 }];
+  let backward: SearchNode[] = goalPoses(layout, start, clear).map(pose => ({ pose, previous: null, move: null, depth: 0 }));
+  const fromStart = new Map([[poseKey(start), forward[0]!]]), fromGoals = new Map(backward.map(node => [poseKey(node.pose), node]));
+  let expanded = 0, lastYield = execution?.now?.() ?? performance.now();
+  const invert = (move: TurningMove): TurningMove => move.operation === 'turn' ? move
+    : { body: move.body, operation: move.operation === 'extend' ? 'retract' : 'extend' };
+  const route = (prefix: SearchNode, suffix: SearchNode) => {
+    const first: TurningMove[] = [], second: TurningMove[] = [];
+    for (let node: SearchNode | null = prefix; node?.move; node = node.previous) first.push(node.move);
+    for (let node: SearchNode | null = suffix; node?.move; node = node.previous) second.push(node.move);
+    return [...first.reverse(), ...second];
+  };
+  const goalAlignments = alignmentsOf(layout);
+  const fitByPose = new Map<string, boolean>();
+  const fits = ({ parts, markers }: Projection) => {
+    const boxes: NativeBox[] = [];
+    if (goalAlignments.some(({ body }, i) => !contains(parts[body]!.box, dot(markers[i]!)))) return false;
+    for (const [i, part] of parts.entries()) {
+      const box = visibleBox(layout, joined(part.box, part.cap), i);
+      if (!box || !clear(box) || boxes.some(other => overlap(box, other))) return false;
+      boxes.push(box);
+    }
+    return true;
+  };
+  const canOccupy = (pose: TurningPose, key: string) => {
+    const cached = fitByPose.get(key);
+    if (cached !== undefined) return cached;
+    const fit = fits(projectTurningPose(layout, pose));
+    if (fitByPose.size < 150_000) fitByPose.set(key, fit);
+    return fit;
+  };
+  const foldedIntoParent = (pose: TurningPose, body: number, parent: number) => {
+    const [x, y] = layout.segments[parent]!.direction;
+    return equal(quarterTurn(layout.segments[body]!.direction, pose[body]!.turns), [-x, -y]);
+  };
+  const oppositeSign = direction === 1 ? -1 : 1;
+  while (forward.length && backward.length && expanded < 150_000) {
+    const reverse = backward.length < forward.length;
+    const wave = reverse ? backward : forward, known = reverse ? fromGoals : fromStart, opposite = reverse ? fromStart : fromGoals;
+    const following: SearchNode[] = [];
+    for (const node of wave) {
+      if (++expanded > 150_000) return [];
+      const now = execution?.now?.() ?? performance.now();
+      if (execution?.signal?.aborted || execution?.deadlineMs !== undefined && now >= execution.deadlineMs) return [];
+      if (execution && now - lastYield >= 10) {
+        await execution.yieldControl();
+        lastYield = execution.now?.() ?? performance.now();
+      }
+      if (node.depth >= remaining) continue;
+      for (const operation of moves) {
+        const turning = operation.operation === 'turn';
+        if (!reverse && blocked.has(turningEdge(node.pose, operation))) continue;
+        const parent = turning ? parentOf(layout.segments[operation.body]!, operation.body) : -1;
+        const span = parent >= 0 ? 2 : 1;
+        for (let quarterTurns = 1; quarterTurns <= span; quarterTurns++) {
+          const move = quarterTurns === 1 ? operation : { ...operation, quarterTurns };
+          const input = reverse ? invert(move) : move;
+          const pose = moveTurningPose(node.pose, input, reverse && turning ? oppositeSign : direction);
+          if (layout.segments[move.body]!.length + pose[move.body]!.added * layout.quantum < 1) continue;
+          if (reverse && blocked.has(turningEdge(pose, move))) continue;
+          // A linked joint can skip over the orientation that would fold its
+          // bar into its parent. Walls and independent obstacles still stop it.
+          if (!reverse && parent >= 0 && foldedIntoParent(pose, move.body, parent)) continue;
+          const key = poseKey(pose);
+          if (known.has(key)) {
+            if (reverse) continue;
+            break;
+          }
+          if (!canOccupy(pose, key)) {
+            if (reverse) continue;
+            break;
+          }
+          if (reverse && quarterTurns > 1 && !foldedIntoParent(moveTurningPose(pose, operation, direction), move.body, parent)) continue;
+          const next = { pose, previous: node, move, depth: node.depth + 1 }, joinedAt = opposite.get(key);
+          if (joinedAt && next.depth + joinedAt.depth <= remaining) {
+            return reverse ? route(joinedAt, next) : route(next, joinedAt);
+          }
+          known.set(key, next);
+          following.push(next);
+          if (!reverse) break;
+        }
+      }
+    }
+    if (reverse) backward = following;
+    else forward = following;
+  }
+  return [];
+}
 
 export async function chooseTurningRoute(layout: TurningLayout, start: TurningPose, direction: TurnSign, rejected: readonly string[],
   remaining: number, execution?: NativeExecution): Promise<TurningMove[]> {
@@ -193,14 +404,30 @@ export async function chooseTurningRoute(layout: TurningLayout, start: TurningPo
     sum[(b + 1) * stride + r + 1]! + sum[t * stride + l]! === sum[t * stride + r + 1]! + sum[(b + 1) * stride + l]!;
   const blocked = new Set(rejected), frontier: SearchNode[][] = [], explored = new Map([[poseKey(start), 0]]);
   const operations: ExtensionOperation[] = ['extend', 'retract', 'turn'];
-  const moves = layout.segments.flatMap((_, body) => operations.map(operation => ({ body, operation })));
+  const moves = layout.segments.flatMap((segment, body) =>
+    operations.filter(operation => segment.buttons[operation]).map(operation => ({ body, operation })));
+  if (layout.alignments) return routeBetweenPoses(layout, start, direction, moves, clear, remaining, blocked, execution);
+  const goals = alignmentsOf(layout);
+  const estimate = (markers: NativePoint[]) => Math.ceil(Math.max(...goals.map(({ target }, i) =>
+    distance(markers[i]!, target))) / layout.quantum);
+  const feasible = (projection: Projection) => {
+    const { parts, markers } = projection;
+    if (goals.some(({ body }, i) => !contains(parts[body]!.box, dot(markers[i]!)))) return false;
+    const boxes: NativeBox[] = [];
+    for (const [i, { box, cap }] of parts.entries()) {
+      const outer = visibleBox(layout, joined(box, cap), i);
+      if (!outer || !clear(outer) || boxes.some(other => overlap(outer, other))) return false;
+      boxes.push(outer);
+    }
+    return true;
+  };
   let best = 0, lastYield = execution?.now?.() ?? performance.now();
-  const push = (node: SearchNode, marker: NativePoint) => {
-    const score = node.depth + Math.ceil(distance(marker, layout.target) / layout.quantum);
+  const push = (node: SearchNode, markers: NativePoint[]) => {
+    const score = node.depth + estimate(markers);
     (frontier[score] ??= []).push(node);
     best = Math.min(best, score);
   };
-  push({ pose: start, previous: null, move: null, depth: 0 }, projectTurningPose(layout, start).marker);
+  push({ pose: start, previous: null, move: null, depth: 0 }, projectTurningPose(layout, start).markers);
   for (let expanded = 0; expanded < 65_000; expanded++) {
     const now = execution?.now?.() ?? performance.now();
     if (execution?.signal?.aborted || execution?.deadlineMs !== undefined && now >= execution.deadlineMs) return [];
@@ -214,20 +441,19 @@ export async function chooseTurningRoute(layout: TurningLayout, start: TurningPo
     if (node.depth >= remaining || node.depth > explored.get(poseKey(node.pose))!) continue;
     for (const move of moves) {
       if (blocked.has(turningEdge(node.pose, move))) continue;
-      const next = moveTurningPose(node.pose, move, direction), key = poseKey(next), depth = node.depth + 1;
-      if ((explored.get(key) ?? Infinity) <= depth || layout.segments[move.body]!.length + next[move.body]!.added * layout.quantum < 1) continue;
-      const { parts, marker } = projectTurningPose(layout, next);
-      if (!contains(parts.at(-1)!.box, dot(marker))) continue;
-      const boxes = parts.map(({ box, cap }) => joined(box, cap));
-      if (!boxes.every((box, i) => contains(layout.field, box) && clear(box)
-        && boxes.slice(0, i).every(other => !overlap(box, other)))) continue;
-      if (equal(marker, layout.target)) {
+      const next = moveTurningPose(node.pose, move, direction);
+      if (layout.segments[move.body]!.length + next[move.body]!.added * layout.quantum < 1) continue;
+      const projected = projectTurningPose(layout, next);
+      if (!feasible(projected)) continue;
+      const key = poseKey(next), depth = node.depth + 1;
+      if ((explored.get(key) ?? Infinity) <= depth) continue;
+      if (goals.every(({ target }, i) => equal(projected.markers[i]!, target))) {
         const route = [move];
         for (let parent: SearchNode | null = node; parent?.move; parent = parent.previous) route.push(parent.move);
         return route.reverse();
       }
       explored.set(key, depth);
-      push({ pose: next, previous: node, move, depth }, marker);
+      push({ pose: next, previous: node, move, depth }, projected.markers);
     }
   }
   return [];

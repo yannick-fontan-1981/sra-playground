@@ -255,14 +255,15 @@ export function createSicCoupledGaugeRoute(): NativeFamily<GaugeProposal> {
       : first.operation === 'turn' ? 'Rotate the linked bars to clear a path around an obstacle'
         : 'Adjust the length of the linked bars and advance the marker';
     const objective = { kind: 'align_linked_marker_by_turning_and_extending', scope: ref.split(':revision:', 1)[0]!,
-      subjects: [layout.target.join(',')], parentObjective: 'G_official_completion', satisfactionContract: 'official_progress_after_marker_alignment' };
+      subjects: layout.alignments?.map(({ target }) => target.join(',')) ?? [layout.target.join(',')],
+      parentObjective: 'G_official_completion', satisfactionContract: 'official_progress_after_marker_alignment' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
     const id = coupledGaugeRouteId + ':' + need.id;
     const actions: NativeCommand[] = [], steps: NativeRecord[] = [], turns: TurningStep[] = [];
     const count = probe ? 1 : Math.min(maximumCommittedActions, remaining, unknown < 0 ? route.length : unknown);
     let pose = current.pose;
     for (const move of route.slice(0, count)) {
-      const button = layout.segments[move.body]!.buttons[move.operation];
+      const button = layout.segments[move.body]!.buttons[move.operation]!;
       const point = await ObservedInputDomain.makeLocusWitness(observation, rows, button.at, { reason: situation, evidence });
       if (!point) break;
       const [x, y] = button.at, action = { action_ref: 'ACTION6', data: { x, y } };
@@ -274,15 +275,25 @@ export function createSicCoupledGaugeRoute(): NativeFamily<GaugeProposal> {
     }
     if (!actions.length) return null;
     const projected = projectTurningPose(layout, current.pose), next = projectTurningPose(layout, turns[0]!.after);
-    const button = layout.segments[first.body]!.buttons[first.operation];
+    const button = layout.segments[first.body]!.buttons[first.operation]!;
+    const carries = new Set([first.body]);
+    const carried = projected.parts.flatMap((part, index) => {
+      const parent = layout.segments[index]!.parent;
+      if (!carries.has(parent === undefined ? index - 1 : parent ?? -1)) return [];
+      carries.add(index);
+      return [part.box];
+    });
+    const targetIndex = Math.max(0, layout.alignments?.findIndex(({ body }) => carries.has(body)) ?? 0);
+    const target = layout.alignments?.[targetIndex]?.target ?? layout.target;
     return { status: 'proposed', kind: coupledGaugeRouteId, turning: { ...current, hypothesis, route }, turns, probe, needId: need.id,
       actions, steps, binding: { observation_ref: ref, level_epoch: epoch },
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
         edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
       sicSituationCard: { strategy, need: 'Bring the marker to the visible target', situation, mode, evidence, agenda: [],
         triggerCard: chooseInteraction, focus: button.box, gauge: projected.parts[first.body]!.box,
-        pivot: dot(projected.parts[first.body]!.pivot), carried: projected.parts.slice(first.body + 1).map(part => part.box),
-        actor: dot(projected.marker), target: dot(layout.target), ...(probe ? {} : { landing: dot(next.marker) }) },
+        pivot: dot(projected.parts[first.body]!.pivot), carried,
+        actor: dot(projected.markers[targetIndex]!), target: dot(target),
+        ...(probe ? {} : { landing: dot(next.markers[targetIndex]!) }) },
       question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + objective.parentObjective] }],
       sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent: objective.parentObjective }, need },
@@ -466,7 +477,10 @@ export function createSicCoupledGaugeRoute(): NativeFamily<GaugeProposal> {
           if (turningObserved(second, run.layout, step.after)) {
             turning = { ...next, pose: step.after, direction: proposal.probe ? run.hypothesis : run.direction,
               route: run.route.slice(index + 1) };
-            return { events: [], ...(proposal.probe ? { reviewEvidence: 'The pivot turned by one quarter-turn and carried the rest of the chain.' } : {}) };
+            const reviewEvidence = step.move.quarterTurns === 2
+              ? 'The pivot passed over the folded orientation and moved the attached bars.'
+              : 'The pivot turned by one quarter-turn and moved the attached bars.';
+            return { events: [], ...(proposal.probe ? { reviewEvidence } : {}) };
           }
           if (proposal.probe) {
             const hypothesis = run.hypothesis === 1 ? -1 : 1, other = moveTurningPose(step.before, step.move, hypothesis);

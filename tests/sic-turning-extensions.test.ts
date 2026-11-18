@@ -37,3 +37,19 @@ test('the search uses a clear turn and excludes one contradicted at the current 
   obstacles[7] = '.'.repeat(15) + '#' + '.'.repeat(14);
   assert.deepEqual(await chooseTurningRoute({ ...layout, obstacles }, start, 1, [], 1), []);
 });
+
+test('a linked turn skips the orientation towards its parent while keeping another target aligned', async () => {
+  const target = [6, 11] as const, reserved = [24, 16] as const;
+  const mixed: TurningLayout = { ...layout, target, segments: [
+    { ...layout.segments[0]!, buttons: {}, parent: null },
+    { ...layout.segments[1]!, buttons: { turn: button }, parent: 0 },
+    { ...layout.segments[2]!, buttons: {}, parent: 1 },
+    { ink: 6, pivot: [24, 16], direction: [-1, 0], length: 2, parent: null, buttons: {} },
+  ], alignments: [{ body: 2, marker: layout.marker, target }, { body: 3, marker: reserved, target: reserved }] };
+  const start = initialTurningPose(mixed);
+  const move = { body: 1, operation: 'turn' as const, quarterTurns: 2 };
+  assert.deepEqual(await chooseTurningRoute(mixed, start, -1, [], 1), [move]);
+  const projected = projectTurningPose(mixed, moveTurningPose(start, move, -1));
+  assert.deepEqual(projected.markers, [target, reserved]);
+  assert.deepEqual(await chooseTurningRoute(mixed, start, -1, [turningEdge(start, move)], 1), []);
+});
