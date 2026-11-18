@@ -1,0 +1,35 @@
+{
+  "game": "SS03",
+  "version": "0.1.0",
+  "build": {
+    "status": "passed",
+    "typescript": "5.9.3"
+  },
+  "unitTests": {
+    "passed": 31,
+    "failed": 0,
+    "command": "npm test"
+  },
+  "levelReplay": {
+    "solved": 8,
+    "actions": 473,
+    "pulls": 159,
+    "allRequirePulling": true,
+    "fourUnchangedTranscriptionsVerified": true
+  },
+  "domTests": {
+    "passed": 10,
+    "failed": 0,
+    "visualBrowserTest": false
+  },
+  "renderInspection": {
+    "status": "passed",
+    "initialMaps": 8,
+    "method": "Engine-rendered pixel montage inspected at integer scale"
+  },
+  "realBrowser": {
+    "status": "not-run",
+    "reason": "Chromium launch blocked by workspace sandbox socket policy"
+  },
+  "demoSha256": "6b5122e5fbc163f444610171e442ecd14be0135ed5cc287f7927bd40d9cfc2c8"
+}

@@ -1,0 +1,758 @@
+{
+  "repository": "joric/ootss",
+  "sourcePath": "scripts/ootss.pz",
+  "sourceBlob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+  "solutionsPath": "data/solutions.json",
+  "solutionsBlob": "25d772c370f51d44632c2e2c4cf337e1b6ea9ab1",
+  "guide": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/",
+  "coordinateConvention": "x,y à partir de0 dans la carte source, avant centrage dans la grille20×20.",
+  "fidelity": "Cartes issues de la transcription communautaire PuzzleScript ; aucune identité pixel par pixel aux captures du guide n’est revendiquée.",
+  "recommendedDifficultyOrder": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "levels": [
+    {
+      "level": 2,
+      "id": "ss03-02",
+      "title": "Le pont à rebours",
+      "guidePuzzle": 5,
+      "sourceId": "heroes1_4.5",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-5",
+      "kind": "transcription",
+      "concept": "Se placer de chaque côté d’une caisse ; tirer pour libérer le passage.",
+      "sourceRows": [
+        "#############",
+        "#...#...*...#",
+        "#.T.#...#.G.#",
+        "#...*...#...#",
+        "#############"
+      ],
+      "rows": [
+        "#############",
+        "#...#...o...#",
+        "#.T.#...#.g.#",
+        "#...o...#...#",
+        "#############"
+      ],
+      "adaptations": [
+        "Topologie et positions de la transcription conservées ; seuls les symboles et couleurs sont convertis au contrat ARC 3×3 px."
+      ],
+      "changes": [
+        {
+          "x": 8,
+          "y": 1,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 10,
+          "y": 2,
+          "source": "G",
+          "ss03": "g"
+        },
+        {
+          "x": 4,
+          "y": 3,
+          "source": "*",
+          "ss03": "o"
+        }
+      ],
+      "witness": "RDLLURRDRRRRUULLDRRURRRD",
+      "validation": {
+        "won": true,
+        "pulls": 11,
+        "blocked": 0,
+        "actions": 24
+      }
+    },
+    {
+      "level": 3,
+      "id": "ss03-03",
+      "title": "Les deux entrepôts",
+      "guidePuzzle": 6,
+      "sourceId": "heroes1_5_v2",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-6",
+      "kind": "transcription",
+      "concept": "Désengorger les pièces, transporter une caisse puis maintenir une plaque.",
+      "sourceRows": [
+        "#############",
+        "#...#*..#...#",
+        "#T..*...#.*.#",
+        "#...#..*....#",
+        "##########.##",
+        "#..**...#...#",
+        "#.G.#...#.{.#",
+        "#...#...[.*.#",
+        "#############"
+      ],
+      "rows": [
+        "#############",
+        "#...#o..#...#",
+        "#T..o...#.o.#",
+        "#...#..o....#",
+        "##########.##",
+        "#..oo...#...#",
+        "#.g.#...#.b.#",
+        "#...#...D.o.#",
+        "#############"
+      ],
+      "adaptations": [
+        "Topologie et positions de la transcription conservées ; seuls les symboles et couleurs sont convertis au contrat ARC 3×3 px."
+      ],
+      "changes": [
+        {
+          "x": 5,
+          "y": 1,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 10,
+          "y": 2,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 7,
+          "y": 3,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 3,
+          "y": 5,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 2,
+          "y": 6,
+          "source": "G",
+          "ss03": "g"
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "source": "{",
+          "ss03": "b"
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "source": "[",
+          "ss03": "D"
+        },
+        {
+          "x": 10,
+          "y": 7,
+          "source": "*",
+          "ss03": "o"
+        }
+      ],
+      "witness": "RRLLURRDRRDRURULLDDRRRRRDDRDLULDDLLUULLRRDLDLUULRRRDDLLUULLLD",
+      "validation": {
+        "won": true,
+        "pulls": 19,
+        "blocked": 0,
+        "actions": 61
+      }
+    },
+    {
+      "level": 4,
+      "id": "ss03-04",
+      "title": "Le relais des deux terrasses",
+      "guidePuzzle": 14,
+      "sourceId": "heroes1_13_v2",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-14",
+      "kind": "solo-adaptation",
+      "concept": "Extraire une caisse de la pièce haute, en descendre une sur la plaque de la pièce basse puis rejoindre la sortie opposée.",
+      "sourceRows": [
+        "############",
+        "#...###G..##",
+        "#.F.*.###[##",
+        "#...#.#.{..#",
+        "#####..*...#",
+        "#...#.#.{..#",
+        "#.2...###[##",
+        "#...###G..##",
+        "############"
+      ],
+      "rows": [
+        "############",
+        "#...###g..##",
+        "#.T.o..##D##",
+        "#...#......#",
+        "####...ob..#",
+        "#.....#....#",
+        "#.b...###D##",
+        "#...###...##",
+        "############"
+      ],
+      "adaptations": [
+        "Un seul Voleur remplace le Guerrier de départ ; l’autre Voleur est retiré.",
+        "Seule la cible supérieure reste active ; la cible inférieure devient du sol.",
+        "Quatre cellules de mur sont ouvertes : (6,2), (6,3), (4,4), (4,5), pour les changements de côté nécessaires à la traction et pour ressortir de la chambre basse.",
+        "La plaque (8,3) descend en (8,4). La plaque (8,5) est déplacée en (2,6) dans la chambre basse gauche ; cette pièce doit ainsi être utilisée.",
+        "Les deux portes restent présentes et dépendent des deux plaques."
+      ],
+      "changes": [
+        {
+          "x": 7,
+          "y": 1,
+          "source": "G",
+          "ss03": "g"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "source": "F",
+          "ss03": "T"
+        },
+        {
+          "x": 4,
+          "y": 2,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 9,
+          "y": 2,
+          "source": "[",
+          "ss03": "D"
+        },
+        {
+          "x": 6,
+          "y": 3,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 3,
+          "source": "{",
+          "ss03": "."
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "source": ".",
+          "ss03": "b"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "source": "{",
+          "ss03": "."
+        },
+        {
+          "x": 2,
+          "y": 6,
+          "source": "2",
+          "ss03": "b"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "source": "[",
+          "ss03": "D"
+        },
+        {
+          "x": 7,
+          "y": 7,
+          "source": "G",
+          "ss03": "."
+        }
+      ],
+      "witness": "RLLURRDRRRDLDDDLULLLDRDRUURURURRRDRUUULL",
+      "validation": {
+        "status": "solved",
+        "states": 4805,
+        "won": true,
+        "pulls": 13,
+        "blocked": 0,
+        "actions": 40
+      }
+    },
+    {
+      "level": 5,
+      "id": "ss03-05",
+      "title": "Les alcôves de la cathédrale",
+      "guidePuzzle": 15,
+      "sourceId": "heroes1_12_v2_alt",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-15",
+      "kind": "solo-adaptation",
+      "concept": "Sortir deux caisses de renfoncements opposés puis tenir deux plaques pour rejoindre la sortie latérale.",
+      "sourceRows": [
+        "#############",
+        "#####W...*###",
+        "#######.#####",
+        "#G.#........#",
+        "#..[2{....#{#",
+        "#G.#........#",
+        "######..#####",
+        "#######.*####",
+        "#############"
+      ],
+      "rows": [
+        "#############",
+        "#####....o###",
+        "######..#####",
+        "#g.#.b......#",
+        "#..DT...b.#.#",
+        "#..#........#",
+        "######..#####",
+        "######..o####",
+        "#############"
+      ],
+      "adaptations": [
+        "Le Voleur initialement inactif en (4,4) devient l’unique personnage ; le Magicien est retiré.",
+        "La cible inférieure (1,5) est retirée ; la cible supérieure (1,3) est conservée.",
+        "Une cellule de contournement est ouverte à chaque alcôve : (6,2) et (6,7).",
+        "La plaque (5,4) passe en (5,3) pour éviter une traction forcée lors de l’entrée dans la porte ; celle de (11,4) passe en (8,4), car la bordure empêchait d’y tirer une caisse."
+      ],
+      "changes": [
+        {
+          "x": 5,
+          "y": 1,
+          "source": "W",
+          "ss03": "."
+        },
+        {
+          "x": 9,
+          "y": 1,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 1,
+          "y": 3,
+          "source": "G",
+          "ss03": "g"
+        },
+        {
+          "x": 5,
+          "y": 3,
+          "source": ".",
+          "ss03": "b"
+        },
+        {
+          "x": 3,
+          "y": 4,
+          "source": "[",
+          "ss03": "D"
+        },
+        {
+          "x": 4,
+          "y": 4,
+          "source": "2",
+          "ss03": "T"
+        },
+        {
+          "x": 5,
+          "y": 4,
+          "source": "{",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 4,
+          "source": ".",
+          "ss03": "b"
+        },
+        {
+          "x": 11,
+          "y": 4,
+          "source": "{",
+          "ss03": "."
+        },
+        {
+          "x": 1,
+          "y": 5,
+          "source": "G",
+          "ss03": "."
+        },
+        {
+          "x": 6,
+          "y": 7,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "source": "*",
+          "ss03": "o"
+        }
+      ],
+      "witness": "URRUURRLLDRDDDRURDLLDDLURUUUULDLLDLLUL",
+      "validation": {
+        "won": true,
+        "pulls": 13,
+        "blocked": 0,
+        "actions": 38,
+        "states": 7071,
+        "status": "solved"
+      }
+    },
+    {
+      "level": 6,
+      "id": "ss03-06",
+      "title": "Trois amarres",
+      "guidePuzzle": 8,
+      "sourceId": "heroes1_6",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-8",
+      "kind": "transcription",
+      "concept": "Déposer trois caisses sans arracher les caisses déjà placées.",
+      "sourceRows": [
+        "#########",
+        "#.....#G#",
+        "#.T*..#[#",
+        "#.**....#",
+        "#.#...#.#",
+        "#.{.{.{.#",
+        "#...#...#",
+        "#########"
+      ],
+      "rows": [
+        "#########",
+        "#.....#g#",
+        "#.To..#D#",
+        "#.oo....#",
+        "#.#...#.#",
+        "#.b.b.b.#",
+        "#...#...#",
+        "#########"
+      ],
+      "adaptations": [
+        "Topologie et positions de la transcription conservées ; seuls les symboles et couleurs sont convertis au contrat ARC 3×3 px."
+      ],
+      "changes": [
+        {
+          "x": 7,
+          "y": 1,
+          "source": "G",
+          "ss03": "g"
+        },
+        {
+          "x": 3,
+          "y": 2,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 7,
+          "y": 2,
+          "source": "[",
+          "ss03": "D"
+        },
+        {
+          "x": 2,
+          "y": 3,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 2,
+          "y": 5,
+          "source": "{",
+          "ss03": "b"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "source": "{",
+          "ss03": "b"
+        },
+        {
+          "x": 6,
+          "y": 5,
+          "source": "{",
+          "ss03": "b"
+        }
+      ],
+      "witness": "URRDDRRRDDLLULULDDDLULUURRURDLDDDLLUUURRRRLDRDLRDRURUUUU",
+      "validation": {
+        "won": true,
+        "pulls": 17,
+        "blocked": 0,
+        "actions": 56
+      }
+    },
+    {
+      "level": 7,
+      "id": "ss03-07",
+      "title": "Le triple verrou",
+      "guidePuzzle": 18,
+      "sourceId": "heroes1_18",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-18",
+      "kind": "solo-adaptation",
+      "concept": "Descendre trois caisses des chambres hautes puis organiser les trois plaques sans bloquer la remontée.",
+      "sourceRows": [
+        "#############",
+        "#...#7.8#...#",
+        "#.*.#.1.#.G.#",
+        "#...#...#...#",
+        "##]###.###]##",
+        "#...#...#...#",
+        "#.}...}...}.#",
+        "#...#...#...#",
+        "#############"
+      ],
+      "rows": [
+        "#############",
+        "#...#T.o#...#",
+        "#.o.#.o.#.g.#",
+        "#...#...#...#",
+        "##.###.###D##",
+        "#...........#",
+        "#.b...b..b..#",
+        "#...........#",
+        "#############"
+      ],
+      "adaptations": [
+        "Le Voleur sur la cible (5,1) devient l’unique personnage et sa cible est retirée ; la cible du Magicien (7,1) est également retirée.",
+        "Le Magicien (7,1) et le Guerrier (6,2) deviennent deux caisses : trois charges mobiles pour les trois plaques.",
+        "La porte gauche (2,4) devient un passage permanent afin de pouvoir extraire la caisse de la chambre gauche.",
+        "Les quatre cellules (4,5), (8,5), (4,7), (8,7) sont ouvertes pour contourner une caisse laissée sur une plaque.",
+        "La plaque droite se décale de (10,6) à (9,6), pour pouvoir monter vers la porte sans arracher automatiquement sa caisse. Les dispositifs violets de la transcription utilisent la palette rose de la série."
+      ],
+      "changes": [
+        {
+          "x": 5,
+          "y": 1,
+          "source": "7",
+          "ss03": "T"
+        },
+        {
+          "x": 7,
+          "y": 1,
+          "source": "8",
+          "ss03": "o"
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "source": "1",
+          "ss03": "o"
+        },
+        {
+          "x": 10,
+          "y": 2,
+          "source": "G",
+          "ss03": "g"
+        },
+        {
+          "x": 2,
+          "y": 4,
+          "source": "]",
+          "ss03": "."
+        },
+        {
+          "x": 10,
+          "y": 4,
+          "source": "]",
+          "ss03": "D"
+        },
+        {
+          "x": 4,
+          "y": 5,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 2,
+          "y": 6,
+          "source": "}",
+          "ss03": "b"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "source": "}",
+          "ss03": "b"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "source": ".",
+          "ss03": "b"
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "source": "}",
+          "ss03": "."
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "source": "#",
+          "ss03": "."
+        }
+      ],
+      "witness": "RLDDRDDDDLUULLLUUDDDDRRRRRURULLUUUDDDDDRRURRUUUU",
+      "validation": {
+        "won": true,
+        "pulls": 17,
+        "blocked": 0,
+        "actions": 48,
+        "states": 71561,
+        "status": "solved"
+      }
+    },
+    {
+      "level": 8,
+      "id": "ss03-08",
+      "title": "Le grand détour",
+      "guidePuzzle": 7,
+      "sourceId": "heroes1_7_v2",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-7",
+      "kind": "transcription",
+      "concept": "Convoyer une unique caisse dans un long labyrinthe, en changeant plusieurs fois de côté.",
+      "sourceRows": [
+        "###################",
+        "##########*..######",
+        "#...#........[...##",
+        "#...#....#...#.G.##",
+        "##..#....#####...##",
+        "##..####.#..####[##",
+        "##.......#..T{....#",
+        "##..##...#...##...#",
+        "######...##.#######",
+        "######.###..##...##",
+        "####.............##",
+        "####...############",
+        "###################"
+      ],
+      "rows": [
+        "###################",
+        "##########o..######",
+        "#...#........D...##",
+        "#...#....#...#.g.##",
+        "##..#....#####...##",
+        "##..####.#..####D##",
+        "##.......#..Tb....#",
+        "##..##...#...##...#",
+        "######...##.#######",
+        "######.###..##...##",
+        "####.............##",
+        "####...############",
+        "###################"
+      ],
+      "adaptations": [
+        "Topologie et positions de la transcription conservées ; seuls les symboles et couleurs sont convertis au contrat ARC 3×3 px."
+      ],
+      "changes": [
+        {
+          "x": 10,
+          "y": 1,
+          "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 13,
+          "y": 2,
+          "source": "[",
+          "ss03": "D"
+        },
+        {
+          "x": 15,
+          "y": 3,
+          "source": "G",
+          "ss03": "g"
+        },
+        {
+          "x": 16,
+          "y": 5,
+          "source": "[",
+          "ss03": "D"
+        },
+        {
+          "x": 13,
+          "y": 6,
+          "source": "{",
+          "ss03": "b"
+        }
+      ],
+      "witness": "LDDDLDLLLLUURRUUUUUURRRURDLDLULLLDRDDDDLULLLLLURUUULDLURRDDLDDDRURRRRDLDDDDLULDRRURRRRRRRRRRULLDLLLLURUUUULDDRRURRRRRDLLULLLDLDDLDLLLLUURRUUUUUURRRRRRRD",
+      "validation": {
+        "won": true,
+        "pulls": 56,
+        "blocked": 0,
+        "actions": 152
+      }
+    }
+  ]
+}
