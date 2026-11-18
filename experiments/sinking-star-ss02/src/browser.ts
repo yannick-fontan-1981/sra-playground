@@ -2,6 +2,7 @@ import { PushPuzzleSession, PALETTE } from './core.js';
 import type { Observation } from './core.js';
 import { SS02_LEVELS } from './levels.js';
 import { LEVEL_INFO } from './level-info.js';
+import { heroCell, lessonPrompt, observeLesson, pushedCount, type TutorialLesson } from './tutorial.js';
 
 const session = new PushPuzzleSession(SS02_LEVELS);
 const $ = <T extends HTMLElement>(id: string): T => {
@@ -18,7 +19,7 @@ let observation: Observation = session.observe();
 let generation = 0;
 let busy = false;
 let moves = 0;
-let learned = new Set<string>();
+let learned = new Set<TutorialLesson>();
 function paint(frame: number[][]): void {
   const image = ctx!.createImageData(64, 64);
   for (let y = 0; y < 64; y++) for (let x = 0; x < 64; x++) {
@@ -27,40 +28,6 @@ function paint(frame: number[][]): void {
     image.data[at + 2] = rgb & 255; image.data[at + 3] = 255;
   }
   ctx!.putImageData(image, 0, 0);
-}
-/** Tutorial progress is inferred from public frames, not the engine's internal map. */
-function heroCell(frame: number[][]): number {
-  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
-    if (frame[y + 1]![x + 1] === 8) return y * 64 + x;
-  }
-  return -1;
-}
-function pushedCount(before: Observation, after: Observation, action: number): number {
-  if (after.frames.length < 3) return 0;
-  const origin = heroCell(before.frame);
-  if (origin < 0) return 0;
-  const direction = [{x:0,y:-3},{x:0,y:3},{x:-3,y:0},{x:3,y:0}][action-1];
-  if (!direction) return 0;
-  const frame = before.frame;
-  let x = origin % 64 + direction.x, y = Math.floor(origin / 64) + direction.y;
-  let count = 0;
-  // Brown edges and a black center identify a movable stone, even on a button.
-  while (x >= 2 && x < 62 && y >= 2 && y < 62 && frame[y+1]![x+1] === 5
-    && frame[y]![x+1] === 13 && frame[y+1]![x] === 13
-    && frame[y+1]![x+2] === 13 && frame[y+2]![x+1] === 13) {
-    count++; x += direction.x; y += direction.y;
-  }
-  return count;
-}
-function observeLesson(before: Observation, after: Observation, action: number): void {
-  if (before.level !== 1) return;
-  if (action >= 1 && action <= 4 && heroCell(before.frame) !== heroCell(after.frame)) learned.add('move');
-  const f = after.frame;
-  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
-    if (f[y]![x] === 10 && f[y]![x+2] === 10 && f[y+1]![x+1] === 10 && f[y+2]![x] === 10 && f[y+2]![x+2] === 10) learned.add('bridge');
-    if (f[y]![x] === 7 && f[y]![x+2] === 7 && f[y+2]![x] === 7 && f[y+2]![x+2] === 7 && f[y+1]![x+1] === 3 && f[y]![x+1] === 3) learned.add('gate');
-  }
-  if (pushedCount(before,after,action) > 1) learned.add('chain');
 }
 function updateUI(): void {
   select.value = String(observation.level);
@@ -79,13 +46,9 @@ function updateUI(): void {
   link.href = `https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#${encodeURIComponent('énigme-' + info.puzzle)}`;
   link.textContent = `Voir l’énigme ${info.puzzle} de référence ↗`;
   for (const item of document.querySelectorAll<HTMLElement>('[data-lesson]')) {
-    item.classList.toggle('done', learned.has(item.dataset.lesson!));
+    item.classList.toggle('done', learned.has(item.dataset.lesson as TutorialLesson));
   }
-  const stage = !learned.has('chain') ? 'Approche-toi des deux pierres du passage. Appuie sur la flèche vers elles : toute la file avance d’une case si son extrémité est libre.'
-    : !learned.has('bridge') ? 'Une pierre poussée dans l’eau devient un pont. Préserve les deux autres pour les boutons.'
-    : !learned.has('gate') ? 'Place une pierre sur chacun des deux + roses. Le Guerrier peut aussi peser sur un bouton, mais pas le laisser libre en traversant.'
-    : 'Les deux boutons doivent rester occupés. Dès que la porte est ouverte, rejoins le contour jaune.';
-  $('lesson-next').textContent = stage;
+  $('lesson-next').textContent = lessonPrompt(learned);
   canvas.dataset.level = String(observation.level);
   canvas.dataset.completed = String(observation.levelsCompleted);
   canvas.dataset.state = observation.state;
@@ -105,7 +68,7 @@ async function present(next: Observation): Promise<void> {
 function act(action: number): void {
   if (busy || observation.state === 'WIN') return;
   const before = observation, next = session.action(action);
-  moves++; observeLesson(before,next,action);
+  moves++; observeLesson(learned,before,next,action);
   $('feedback').textContent = next.levelsCompleted > before.levelsCompleted ? 'Niveau terminé !'
     : pushedCount(before,next,action) > 0 ? 'Poussée réussie.'
     : heroCell(before.frame) === heroCell(next.frame) ? 'Passage bloqué : vérifie les obstacles et la fin de la file.' : '';

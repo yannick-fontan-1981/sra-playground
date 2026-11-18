@@ -1138,6 +1138,9 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
 records.push({code:'SS01',id:'ss01-c4000001',name:'Sinking Star — Mirror Isles',group:'custom_4',family:'sinking_star_mirrors',levels:8,
   description:'Guide Merchants across islands using movable mirrors, reflected crates and sunken supports. Two Merchants and two goals in levels 1 and 8.',
   sourcePath:'src/games/sinking-star/levels.ts',availability:'playable'});
+records.push({code:'SS02',id:'ss02-c4000001',name:'La force rouge',group:'custom_4',family:'sinking_star_push',levels:8,
+  description:'Guide the red Warrior, push chains of stones, build bridges and hold buttons to open gates.',
+  sourcePath:'experiments/sinking-star-ss02/src/levels.ts',availability:'playable'});
 
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,

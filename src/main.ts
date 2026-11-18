@@ -19,6 +19,8 @@ import { observeLs20Restart, recordPursuedObjective, type PursuedObjective } fro
 import ls20ReviewEvidence from './sic/ls20-review-evidence.json';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 import { SINKING_STAR_CREDIT_HTML } from './games/sinking-star/credit.ts';
+import { LEVEL_INFO as SS02_LEVEL_INFO } from '../experiments/sinking-star-ss02/src/level-info.ts';
+import { lessonPrompt, observeLesson, type TutorialLesson } from '../experiments/sinking-star-ss02/src/tutorial.ts';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const fallbackPalette = [
@@ -169,6 +171,20 @@ app.innerHTML = `
                 </div>
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
+              <p id="ss02-level-info" class="ss02-level-info" lang="fr" hidden></p>
+              <details id="ss02-tutorial" class="ss02-tutorial" lang="fr" open hidden>
+                <summary>Niveau 1 · Tutoriel guidé</summary>
+                <div class="ss02-tutorial-content">
+                  <p id="ss02-lesson-next" aria-live="polite"></p>
+                  <ul>
+                    <li data-ss02-lesson="move">Se déplacer avec les quatre flèches.</li>
+                    <li data-ss02-lesson="chain">Pousser deux pierres alignées avec une flèche.</li>
+                    <li data-ss02-lesson="bridge">Créer un pont : la pierre immergée devient immobile.</li>
+                    <li data-ss02-lesson="gate">Maintenir les deux + roses pour ouvrir la porte.</li>
+                  </ul>
+                  <p>Rejoins ensuite le contour jaune. Une pierre coincée ? Z annule, R recommence. Si la file est bloquée, la flèche ne la déplace pas.</p>
+                </div>
+              </details>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -409,8 +425,10 @@ if (!context) throw new Error('This browser does not support the 2D canvas.');
 context.imageSmoothingEnabled = false;
 const runtime = new BrowserGameRuntime();
 let observation: GameObservation | null = null;
-let mode: 'manual' | 'agent' = 'agent';
+let mode: 'manual' | 'agent' = selectedGame.code === 'SS02' ? 'manual' : 'agent';
 let busy = false;
+let ss02ManualAnimation = false;
+const ss02Lessons = new Set<TutorialLesson>();
 let loading = false;
 let failed = false;
 let selectionGeneration = 0;
@@ -704,8 +722,28 @@ function ready(): boolean {
   return Boolean(observation && observation.gameCode === selectedGame.code && !busy && !loading && !failed);
 }
 
+function updateSs02Tutorial(): void {
+  const levelInfo = element('#ss02-level-info');
+  const tutorial = element('#ss02-tutorial');
+  const level = observation?.gameCode === 'SS02' ? observation.level : 0;
+  levelInfo.hidden = !level;
+  tutorial.hidden = level !== 1;
+  if (!level) return;
+  levelInfo.textContent = SS02_LEVEL_INFO[level - 1]?.label ?? '';
+  if (tutorial.hidden) return;
+  for (const item of tutorial.querySelectorAll<HTMLElement>('[data-ss02-lesson]')) {
+    const learned = ss02Lessons.has(item.dataset.ss02Lesson as TutorialLesson);
+    item.classList.toggle('done', learned);
+  }
+  const prompt = element('#ss02-lesson-next');
+  const text = lessonPrompt(ss02Lessons);
+  if (prompt.textContent !== text) prompt.textContent = text;
+}
+
 function updateInterface(): void {
   const enabled = ready() && mode === 'manual';
+  const canNavigate = mode === 'manual' && (enabled || ss02ManualAnimation);
+  const isSs02 = selectedGame.code === 'SS02';
   const complete = observation?.state === 'WIN' || observation?.state === 'LEVEL_COMPLETE';
   const lost = observation?.state === 'GAME_OVER' || observation?.state === 'GAMEOVER';
   const available = new Set(observation?.availableActionIds ?? []);
@@ -715,9 +753,9 @@ function updateInterface(): void {
   const merchantButton = element<HTMLButtonElement>('#merchant-button');
   merchantButton.hidden = selectedGame.code !== 'SS01';
   merchantButton.disabled = !enabled || Boolean(complete || lost) || !available.has(6);
-  element<HTMLButtonElement>('#undo-button').disabled = !enabled || !observation?.canUndo;
-  element<HTMLButtonElement>('#reset-button').disabled = !enabled;
-  element<HTMLButtonElement>('#restart-button').disabled = !enabled;
+  element<HTMLButtonElement>('#undo-button').disabled = !canNavigate || !observation?.canUndo;
+  element<HTMLButtonElement>('#reset-button').disabled = !canNavigate;
+  element<HTMLButtonElement>('#restart-button').disabled = !canNavigate;
   const levelSelect = element<HTMLSelectElement>('#level-select');
   const levelCount = observation?.canSelectLevel ? observation.levelCount : 0;
   if (levelCount !== renderedLevelCount) {
@@ -726,9 +764,10 @@ function updateInterface(): void {
       `<option value="${index + 1}">Level ${index + 1}</option>`,
     ).join('') : '<option value="">Loading…</option>';
   }
-  levelSelect.disabled = !enabled || levelCount < 2;
+  levelSelect.disabled = !canNavigate || levelCount < 2;
   if (levelCount && observation) levelSelect.value = String(observation.level);
-  const hasNextLevel = Boolean(observation && observation.level < observation.levelCount);
+  const hasNextLevel = Boolean(observation && observation.level < observation.levelCount
+    && !(isSs02 && observation.state === 'WIN'));
   const victory = complete && !hasNextLevel;
   element('#win-overlay').hidden = !ready() || !complete || (mode === 'agent' && !victory);
   element('#win-title').textContent = victory ? 'VICTORY' : 'Level complete';
@@ -741,10 +780,11 @@ function updateInterface(): void {
   element('#game-availability').classList.toggle('is-pending', loading || failed);
   canvas.setAttribute('aria-busy', String(busy || loading));
   canvas.tabIndex = enabled ? 0 : -1;
+  if (isSs02 && mode === 'manual') updateSs02Tutorial();
   updateAgentInterface();
 }
 
-async function present(next: GameObservation, selectedGeneration: number): Promise<void> {
+async function present(next: GameObservation, selectedGeneration: number, manualAction = false): Promise<void> {
   if (selectedGeneration !== selectionGeneration || next.gameCode !== selectedGame.code) return;
   const generation = ++presentationGeneration;
   observation = next;
@@ -754,8 +794,9 @@ async function present(next: GameObservation, selectedGeneration: number): Promi
   url.searchParams.set('game', next.gameCode);
   url.searchParams.set('level', String(next.level));
   if (url.href !== window.location.href) window.history.replaceState(null, '', url);
-  updateInterface();
   const frames = next.frames.length ? next.frames : [next.frame];
+  ss02ManualAnimation = manualAction && next.gameCode === 'SS02' && frames.length > 1;
+  updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
@@ -767,15 +808,18 @@ async function present(next: GameObservation, selectedGeneration: number): Promi
   }
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);
+  ss02ManualAnimation = false;
   busy = false;
   agent.refresh();
   updateInterface();
-  if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent = next.level >= next.levelCount ? 'VICTORY' : `Level ${next.level} complete.`;
+  if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent =
+    next.level >= next.levelCount || (next.gameCode === 'SS02' && next.state === 'WIN') ? 'VICTORY' : `Level ${next.level} complete.`;
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
 }
 
 function showFailure(error: unknown, generation: number): void {
   if (generation !== selectionGeneration) return;
+  ss02ManualAnimation = false;
   busy = false;
   loading = false;
   failed = true;
@@ -785,21 +829,36 @@ function showFailure(error: unknown, generation: number): void {
   updateInterface();
 }
 
-async function run(operation: () => Promise<GameObservation>, announcement = '', command?: number): Promise<void> {
-  if (!ready() || mode !== 'manual') return;
+async function run(operation: () => Promise<GameObservation>, options: {
+  announcement?: string;
+  action?: number;
+  control?: 'undo' | 'reset' | 'restart' | 'selectLevel';
+} = {}): Promise<void> {
+  const { announcement, action, control } = options;
+  if (mode !== 'manual' || (!ready() && !(control && ss02ManualAnimation))) return;
   const before = observation!;
+  if (ss02ManualAnimation) {
+    presentationGeneration += 1;
+    ss02ManualAnimation = false;
+  }
+  if (before.gameCode === 'SS02' && control && control !== 'undo') ss02Lessons.clear();
   agent.invalidate('Manual play changed the observation. Start a fresh experiment when ready.');
   const generation = selectionGeneration;
   busy = true;
   updateInterface();
   try {
     const next = await operation();
-    await present(next, generation);
-    if (sicDisplayEnabled && generation === selectionGeneration && mode === 'manual') {
-      manualReturns = command === undefined ? [] : recordPublicReturn(manualReturns, `manual:${generation}`, ++manualSequence, command, before, next);
+    if (generation !== selectionGeneration) return;
+    if (next.gameCode === 'SS02' && action !== undefined) observeLesson(ss02Lessons, before, next, action);
+    const presenting = present(next, generation, action !== undefined);
+    const presentation = presentationGeneration;
+    await presenting;
+    if (generation !== selectionGeneration || presentation !== presentationGeneration) return;
+    if (sicDisplayEnabled && mode === 'manual') {
+      manualReturns = action === undefined ? [] : recordPublicReturn(manualReturns, `manual:${generation}`, ++manualSequence, action, before, next);
       updateSicPanel();
     }
-    if (generation === selectionGeneration && announcement) element('#game-feedback').textContent = announcement;
+    if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
   }
@@ -807,21 +866,21 @@ async function run(operation: () => Promise<GameObservation>, announcement = '',
 
 function perform(action: number, data?: { x: number; y: number }): void {
   if (!observation?.availableActionIds.includes(action) || ['WIN', 'LEVEL_COMPLETE', 'GAME_OVER', 'GAMEOVER'].includes(observation.state)) return;
-  void run(() => runtime.action(action, data), '', action);
+  void run(() => runtime.action(action, data), { action });
 }
 function nextMerchant(): void {
   if (selectedGame.code !== 'SS01' || !observation?.availableActionIds.includes(6) || observation.state === 'WIN') return;
-  void run(() => runtime.nextMerchant(), 'Merchant selected.');
+  void run(() => runtime.nextMerchant(), { announcement: 'Merchant selected.' });
 }
 function undo(): void {
   if (!observation?.canUndo) return;
-  void run(() => runtime.undo(), 'Last action undone.');
+  void run(() => runtime.undo(), { control: 'undo', announcement: 'Last action undone.' });
 }
 function reset(): void {
-  void run(() => runtime.reset(), 'Level reset.');
+  void run(() => runtime.reset(), { control: 'reset', announcement: 'Level reset.' });
 }
 function restart(): void {
-  void run(() => runtime.restart(), 'Game restarted from level 1.');
+  void run(() => runtime.restart(), { control: 'restart', announcement: 'Game restarted from level 1.' });
 }
 function focusCanvas(): void {
   canvas.focus({ preventScroll: true });
@@ -852,8 +911,15 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
 async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
   agent.invalidate('A new game observation is ready for native reasoning.');
   const game = getGameByCode(code) ?? defaultGame!;
+  const enteringSs02 = game.code === 'SS02' && selectedGame.code !== game.code;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
+  ss02ManualAnimation = false;
+  ss02Lessons.clear();
+  if (game.code === 'SS02') element<HTMLDetailsElement>('#ss02-tutorial').open = true;
+  element('#ss02-tutorial').hidden = true;
+  element('#ss02-level-info').hidden = true;
+  element<HTMLButtonElement>('#space-button').hidden = game.code === 'SS02';
   selectedGame = game;
   manualReturns = [];
   manualSequence = 0;
@@ -868,9 +934,13 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#board-source-credit').hidden = game.group !== 'custom_4';
   element('#runtime-message').textContent = 'Loading game…';
   element('#selection-feedback').textContent = `${game.code} selected.`;
-  canvas.setAttribute('aria-label', `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
+  canvas.setAttribute('aria-label', game.code === 'SS02' ? 'SS02 game board. Use the arrow keys to move and push.'
+    : `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
+  element('#keyboard-help').textContent = game.code === 'SS02'
+    ? 'Use the arrow keys to move or push. Z or Control Z to undo. R to reset the level.'
+    : 'Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.';
   document.title = `SRA Playground · ${game.code} — Symbolic Reasoning Agent`;
-  setMode(mode);
+  setMode(enteringSs02 ? 'manual' : mode);
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);
     url.searchParams.set('game', game.code);
@@ -955,7 +1025,7 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
   }
   const actions: Record<string, number> = { ArrowUp: 1, ArrowDown: 2, ArrowLeft: 3, ArrowRight: 4, ' ': 5 };
   const action = actions[event.key];
-  if (action === undefined) return;
+  if (action === undefined || (action === 5 && selectedGame.code === 'SS02')) return;
   event.preventDefault();
   perform(action);
 });
@@ -970,14 +1040,14 @@ element<HTMLSelectElement>('#level-select').addEventListener('change', event => 
   const select = event.currentTarget as HTMLSelectElement;
   if (select.disabled || !observation?.canSelectLevel) return;
   const level = Number(select.value);
-  void run(() => runtime.selectLevel(level), `Level ${level} selected.`);
+  void run(() => runtime.selectLevel(level), { control: 'selectLevel', announcement: `Level ${level} selected.` });
 });
 element('#win-continue').addEventListener('click', () => {
   if (!observation || !ready() || agentState?.busy) return;
   if (mode === 'agent') setMode('manual');
-  if (observation.level < observation.levelCount) {
+  if (observation.level < observation.levelCount && !(observation.gameCode === 'SS02' && observation.state === 'WIN')) {
     const level = observation.level + 1;
-    void run(() => runtime.selectLevel(level), `Level ${level} selected.`);
+    void run(() => runtime.selectLevel(level), { control: 'selectLevel', announcement: `Level ${level} selected.` });
   } else restart();
   focusCanvas();
 });

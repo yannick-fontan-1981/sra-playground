@@ -42,7 +42,7 @@ try {
   async function click(selector){const n=await count();await page.locator(selector).click();return changed(n);}
   await page.goto(`${url}/?game=SS01&level=1#playground`);
   await changed(0);await page.locator('#manual-tab').click();await ready();
-  assert.deepEqual(await page.locator('#game-select optgroup[label="Custom 4 · Sinking Star"] option').evaluateAll(opts=>opts.map(o=>o.value)),['SS01']);
+  assert.deepEqual(await page.locator('#game-select optgroup[label="Custom 4 · Sinking Star"] option').evaluateAll(opts=>opts.map(o=>o.value)),['SS01','SS02']);
   const initial=await latest();assert.equal(initial.levelCount,8);assert.ok(initial.availableActionIds.includes(6));
   const reference=new SinkingStarSession(SS01_LEVELS);
   assert.deepEqual(initial.frame,reference.observe().frame);
@@ -84,12 +84,13 @@ try {
   report.checks.push('Real Python legacy CASC and LS20 load/action, followed by native SS01 reload');
   await page.goto(`${url}/gallery.html`);
   const section=page.locator('#custom-wave-4');
-  assert.equal(await section.locator('[data-gallery-game]').count(),1);
-  assert.equal(await section.locator('[data-gallery-game="SS01"] option').count(),8);
-  await section.locator('[data-gallery-level]').selectOption('8');
-  assert.match(await section.locator('[data-gallery-launch]').getAttribute('href'),/game=SS01&level=8/);
+  assert.deepEqual(await section.locator('[data-gallery-game]').evaluateAll(cards=>cards.map(c=>c.dataset.galleryGame)),['SS01','SS02']);
+  const gameCard=section.locator('[data-gallery-game="SS01"]');
+  assert.equal(await gameCard.locator('option').count(),8);
+  await gameCard.locator('[data-gallery-level]').selectOption('8');
+  assert.match(await gameCard.locator('[data-gallery-launch]').getAttribute('href'),/game=SS01&level=8/);
   await section.screenshot({path:`${out}/custom4-gallery.png`});
-  await section.locator('[data-gallery-launch]').click();await changed(0);
+  await gameCard.locator('[data-gallery-launch]').click();await changed(0);
   assert.equal((await latest()).level,8);assert.equal((await latest()).gameCode, 'SS01');
   await page.locator('#manual-tab').click();await ready();
   await page.setViewportSize({width:390,height:844});

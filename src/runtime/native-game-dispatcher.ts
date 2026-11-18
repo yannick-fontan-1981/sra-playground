@@ -21,7 +21,19 @@ export function createGameDispatcher(loadLegacy: () => Promise<GameBackend>, loa
         if (typeof request.code !== 'string' || !/^[a-z0-9]{4}$/i.test(request.code.trim())) throw new Error('Invalid game code.');
         const code = request.code.trim().toUpperCase();
         active = null; // A failed load must not send later actions to the previous game.
-        const backend = code === 'SS01' ? await loadNative() : await (legacy ??= loadLegacy().catch(error => { legacy = undefined; throw error; }));
+        let backend: GameBackend;
+        switch (code) {
+          case 'SS01':
+            backend = await loadNative();
+            break;
+          case 'SS02': {
+            const { createSs02Backend } = await import('../games/sinking-star-ss02.ts');
+            backend = createSs02Backend();
+            break;
+          }
+          default:
+            backend = await (legacy ??= loadLegacy().catch(error => { legacy = undefined; throw error; }));
+        }
         const observation = await backend.dispatch({ ...request, code });
         active = backend;
         return observation;
