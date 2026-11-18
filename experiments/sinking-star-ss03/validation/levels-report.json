@@ -1,0 +1,229 @@
+{
+  "game": "SS03",
+  "version": "0.1.0",
+  "levels": [
+    {
+      "level": 1,
+      "id": "ss03-01",
+      "title": "L’atelier du Voleur",
+      "guidePuzzle": 0,
+      "dimensions": [
+        17,
+        13
+      ],
+      "stones": 3,
+      "buttons": 3,
+      "initialWalkingCells": 82,
+      "actions": 54,
+      "pulls": 13,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 5,
+      "stonesUsingBothAxes": 2,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "1117ee12621d7e873f2d402d09b94fdb04177899816a654be91bcf98f6dd91bc",
+      "witnessSha256": "f31a951c5a31766eeab6ffa23babfe95e196742e5195b70e8d9b02b29e136e1c"
+    },
+    {
+      "level": 2,
+      "id": "ss03-02",
+      "title": "Le pont à rebours",
+      "guidePuzzle": 5,
+      "dimensions": [
+        13,
+        5
+      ],
+      "stones": 2,
+      "buttons": 0,
+      "initialWalkingCells": 9,
+      "actions": 24,
+      "pulls": 11,
+      "pullDirections": [
+        "E",
+        "W"
+      ],
+      "releaseMoves": 4,
+      "stonesUsingBothAxes": 0,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "91f4baa78566479b630e51c944918f2aaaa9e3e6f02680677c471c4891d863b6",
+      "witnessSha256": "39e915f98b3b6ba5a8d4e66d7b17b0a2eb9f54a26bfea92fe2c7f91b2ebd50d4"
+    },
+    {
+      "level": 3,
+      "id": "ss03-03",
+      "title": "Les deux entrepôts",
+      "guidePuzzle": 6,
+      "dimensions": [
+        13,
+        9
+      ],
+      "stones": 7,
+      "buttons": 1,
+      "initialWalkingCells": 9,
+      "actions": 61,
+      "pulls": 19,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 9,
+      "stonesUsingBothAxes": 2,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "75973e1769090512679a144edb048c82c352572502a196c12024d93bf3c245a7",
+      "witnessSha256": "52af1400029d822a84dfc9e1f2f7009c704c32f6d70c67fa822dd32e10ed8a87"
+    },
+    {
+      "level": 4,
+      "id": "ss03-04",
+      "title": "Le relais des deux terrasses",
+      "guidePuzzle": 14,
+      "dimensions": [
+        12,
+        9
+      ],
+      "stones": 2,
+      "buttons": 2,
+      "initialWalkingCells": 9,
+      "actions": 40,
+      "pulls": 13,
+      "pullDirections": [
+        "E",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 6,
+      "stonesUsingBothAxes": 1,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "4a2f5bccd5bea80aede57ca94398df60e524e16a7d1abbeaf6fe0b8626c61979",
+      "witnessSha256": "30d470fdcc64d1d4e110fb051f382d4b0a9e9f68408659bea94192b7572c7b9c"
+    },
+    {
+      "level": 5,
+      "id": "ss03-05",
+      "title": "Les alcôves de la cathédrale",
+      "guidePuzzle": 15,
+      "dimensions": [
+        13,
+        9
+      ],
+      "stones": 2,
+      "buttons": 2,
+      "initialWalkingCells": 33,
+      "actions": 38,
+      "pulls": 13,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 6,
+      "stonesUsingBothAxes": 2,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "97263d8aa01e53c3354fe7c35ee8635c6a9f3021493ada094e787b2c9aa86e5b",
+      "witnessSha256": "a5a927291d652ad88df9edfa486391a39445a6ea84436c32482f288220cc321c"
+    },
+    {
+      "level": 6,
+      "id": "ss03-06",
+      "title": "Trois amarres",
+      "guidePuzzle": 8,
+      "dimensions": [
+        9,
+        8
+      ],
+      "stones": 3,
+      "buttons": 3,
+      "initialWalkingCells": 1,
+      "actions": 56,
+      "pulls": 17,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 10,
+      "stonesUsingBothAxes": 3,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "5bb7156d8221b1b0c89dbd8cbfcc3232a5cbb7dfb6d6eaddc2faf1515578f46b",
+      "witnessSha256": "e5fbc78b8ef5483d019738454bb8ef90826a1ed4f93bf63ffc4618ba1c241507"
+    },
+    {
+      "level": 7,
+      "id": "ss03-07",
+      "title": "Le triple verrou",
+      "guidePuzzle": 18,
+      "dimensions": [
+        13,
+        9
+      ],
+      "stones": 3,
+      "buttons": 3,
+      "initialWalkingCells": 7,
+      "actions": 48,
+      "pulls": 17,
+      "pullDirections": [
+        "E",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 6,
+      "stonesUsingBothAxes": 2,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "59b9e86f620cc01a57eb95f024c1500d428021ff5f641d3516a59a58eea98bbf",
+      "witnessSha256": "a068748e3e901d615a953f596996c1a2ff17b6ef70cf2c85b7806547fe0727bd"
+    },
+    {
+      "level": 8,
+      "id": "ss03-08",
+      "title": "Le grand détour",
+      "guidePuzzle": 7,
+      "dimensions": [
+        19,
+        13
+      ],
+      "stones": 1,
+      "buttons": 1,
+      "initialWalkingCells": 86,
+      "actions": 152,
+      "pulls": 56,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 16,
+      "stonesUsingBothAxes": 1,
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "solved": true,
+      "mapSha256": "5022d29fbee55622e1f6223e703138093148909f3d3e25c5ca81e77bdccd75fb",
+      "witnessSha256": "7ec1a62d35e348e349b632b46227bc5f247612ff52c02c4c1c5606a564377720"
+    }
+  ],
+  "totalActions": 473,
+  "totalPulls": 159,
+  "success": true
+}
