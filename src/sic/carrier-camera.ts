@@ -3,7 +3,7 @@ import { alignReductionScene, mergeReductionScene, reductionScan, reductionVisib
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type PackedScene = { floor: string[]; pegs: string[]; carriers: ReductionPoint[]; rails: string[]; edges: string[]; known: string[];
-  plots?: string[]; carriedPlots?: string[] };
+  plots?: string[]; carriedPlots?: string[]; auxiliaries?: string[] };
 export type CarrierView = { offset: ReductionPoint; memory: PackedScene };
 export type CarrierPosition = ReturnType<typeof packReductionState>;
 
@@ -12,14 +12,16 @@ const key = (point: ReductionPoint) => point.join(',');
 export function carrierView(offset: ReductionPoint, scene: ReductionScene): CarrierView {
   return { offset, memory: { floor: [...scene.floor], pegs: [...scene.pegs], carriers: scene.carriers,
     rails: [...scene.rails], edges: [...scene.edges], known: [...(scene.known_cells ?? [])], ...(scene.plots ? { plots: [...scene.plots] } : {}),
-    ...(scene.carriedPlots ? { carriedPlots: [...scene.carriedPlots] } : {}) } };
+    ...(scene.carriedPlots ? { carriedPlots: [...scene.carriedPlots] } : {}),
+    ...(scene.auxiliaries ? { auxiliaries: [...scene.auxiliaries] } : {}) } };
 }
 
 export function unpackCarrierView({ memory }: CarrierView): ReductionScene {
   return { floor: new Set(memory.floor), pegs: new Set(memory.pegs), carriers: memory.carriers,
     rails: new Set(memory.rails), edges: new Set(memory.edges), known_cells: new Set(memory.known),
     ...(memory.plots ? { plots: new Set(memory.plots) } : {}),
-    ...(memory.carriedPlots ? { carriedPlots: new Set(memory.carriedPlots) } : {}) };
+    ...(memory.carriedPlots ? { carriedPlots: new Set(memory.carriedPlots) } : {}),
+    ...(memory.auxiliaries ? { auxiliaries: new Set(memory.auxiliaries) } : {}) };
 }
 
 export function acquireCarrierView(rows: NativeRows, observation: NativeObservation, model: ReductionModel,
@@ -43,9 +45,11 @@ export function acquireCarrierView(rows: NativeRows, observation: NativeObservat
   const plotsPreserved = !previous.plots || [...visible].every(cell => !known.has(cell)
     || previous.plots!.has(cell) === !!registered.plots?.has(cell));
   const matches = expectation ? plotsPreserved && check(registered.pegs, expectation[0]) && check(registered.carriers.map(key), expectation[1])
-    && check(registered.carriedPlots ?? [], expectation[2] ?? []) : null;
+    && check(registered.carriedPlots ?? [], expectation[2] ?? []) && check(registered.auxiliaries ?? [], expectation[3] ?? []) : null;
   const scene = expectation && matches ? mergeReductionScene({ ...previous, pegs: new Set(expectation[0].map(key)),
-    carriers: expectation[1], ...(expectation[2] ? { carriedPlots: new Set(expectation[2].map(key)) } : {}) },
+    carriers: expectation[1], ...(expectation[2] && (!expectation[3] || previous.carriedPlots || expectation[2].length)
+      ? { carriedPlots: new Set(expectation[2].map(key)) } : {}),
+    ...(expectation[3] ? { auxiliaries: new Set(expectation[3].map(key)) } : {}) },
   actual, nextModel, offset) : unpredicted;
   return { nextModel, view: carrierView(offset, scene), matches,
     cameraChanged: key(offset) !== key(view.offset) || key(model.phase) !== key(nextModel.phase),

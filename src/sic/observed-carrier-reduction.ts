@@ -16,6 +16,7 @@ export const observedCarrierStrategies = {
   select_piece_for_reduction: 'Select the piece that can jump over its neighbor',
   verify_reduction_landing: 'Jump to the measured landing and verify that one piece is removed',
   verify_preserved_intermediate: 'Use the intermediate for access and verify that it stays in place',
+  verify_dock_transfer: 'Test a transfer between the carrier and the fixed landing across the gap',
 } as const;
 
 type Packed = ReturnType<typeof packReductionState>;
@@ -30,19 +31,38 @@ type State = { epoch: number; model: ReductionModel; controls: Record<string, Mo
   followVacated?: boolean; segment?: Segment };
 type Choice = { stage: 'probe' | 'move' | 'select' | 'jump'; command: NativeCommand; effect: Packed | null;
   addressed: ReductionPoint | null; source: ReductionPoint | null; landing: ReductionPoint | null; intermediate?: ReductionPoint;
-  carried?: boolean };
+  carried?: boolean; dock?: boolean };
 type Proposal = NativeProposal & { local: State; choice: Choice; current: Packed; needId: string; directionalSeries?: Choice[] };
 const same = (first: unknown, second: unknown) => JSON.stringify(first) === JSON.stringify(second);
 const packed = (scene: ReductionScene) => packReductionState(reductionState(scene));
 const scopeAttempt = (input: string, current: Packed) => JSON.stringify([input, current]);
 
 const origin: ReductionPoint = [0, 0];
+function remeasureAuxiliaryLayout(observation: NativeObservation, rows: NativeRows, previous: ReductionModel): ReductionModel | null {
+  const { floor, token, ring, rail, unit, pitch } = previous;
+  const squares = observation.entities.filter(entity => entity.palette_value === floor && entity.rectangular && entity.area === unit ** 2
+    && entity.bbox[2] - entity.bbox[0] + 1 === unit && entity.bbox[3] - entity.bbox[1] + 1 === unit);
+  const phases = new Map(squares.map(({ bbox: [x, y] }) => [`${x % pitch},${y % pitch}`, [x % pitch, y % pitch] as ReductionPoint]));
+  if (squares.length < 4 || phases.size !== 1 || ring === null || rail === null) return null;
+  const phase = [...phases.values()][0]!;
+  const cells = observation.entities.filter(({ bbox: [x, y, r, b], area, palette_value }) =>
+    ![floor, ring, rail].includes(palette_value) && r - x + 1 === unit && b - y + 1 === unit && area > unit ** 2 / 2 && area < unit ** 2
+    && x % pitch === phase[0] && y % pitch === phase[1]);
+  const tokens = cells.filter(cell => cell.palette_value === token);
+  const others = cells.filter(cell => cell.palette_value !== token);
+  if (tokens.length < 2 || !others.length || new Set(others.map(cell => cell.palette_value)).size !== 1
+    || !others.every(cell => tokens.some(peg => same(peg.mask, cell.mask)))) return null;
+  const model = { floor, token, ring, rail, unit, pitch, phase, width: rows[0]!.length, height: rows.length, auxiliary: others[0]!.palette_value };
+  const scan = reductionScan(rows, model);
+  return scan.carriers.length && scan.edges.size ? model : null;
+}
+
 function readPlot(observation: NativeObservation, model: ReductionModel): ReductionModel['plot'] {
   const { unit, pitch, phase, floor, token, rail, ring } = model;
   const groups = new Map<string, { plot: NonNullable<ReductionModel['plot']>; count: number }>();
   for (const entity of observation.entities) {
     const [l, t, r, b] = entity.bbox, ink = entity.palette_value;
-    if ([floor, token, rail, ring].includes(ink) || r - l + 1 !== unit || b - t + 1 !== unit || entity.rectangular
+    if ([floor, token, rail, ring, model.auxiliary].includes(ink) || r - l + 1 !== unit || b - t + 1 !== unit || entity.rectangular
       || entity.area < unit ** 2 / 2) continue;
     const offsetBy = (value: number, axis: number) => value - phase[axis]! - Math.round((value - phase[axis]!) / pitch) * pitch;
     const offset: ReductionPoint = [offsetBy(l, 0), offsetBy(t, 1)];
@@ -122,31 +142,37 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       const previous = state?.epoch === observation.level_epoch ? state : null;
       if (previous?.stopped) return null;
       if (previous?.view && previous.refs.at(-1) !== observation.observation_ref) return null;
-      const measured = previous?.model ?? reductionLayout(observation, rows);
+      const inherited = state?.epoch === observation.level_epoch - 1 ? state : null;
+      const measured = previous?.model ?? reductionLayout(observation, rows)
+        ?? (inherited ? remeasureAuxiliaryLayout(observation, rows, inherited.model) : null);
       if (!measured || measured.unit !== retained.unit || measured.pitch !== retained.pitch || measured.token !== retained.token || measured.rail === null) return null;
       const plot = !previous ? readPlot(observation, measured) : undefined;
       const model = plot ? { ...measured, plot } : measured;
       const visible = plannerScene(rows, model, previous?.selectedSupports ?? null);
       const reuse = recalled?.epoch === observation.level_epoch ? recalled.controls : null;
-      const view = previous?.view ?? (reuse && (visible.carriers.length > 1 || visible.plots?.size)
+      const view = previous?.view ?? (reuse && (visible.carriers.length > 1 || visible.plots?.size || visible.auxiliaries?.size)
         ? carrierView(origin, mergeReductionScene(null, visible, model, origin)) : null);
       const local: State = previous ?? { epoch: observation.level_epoch, model, controls: view && reuse ? reuse : {}, tested: [],
         ...(view ? { view } : {}),
+        ...(visible.auxiliaries?.size && inherited?.followVacated ? { followVacated: true } : {}),
         selected: null, selectedSupports: null, stopped: false, refs: [] };
       const scanned = view ? unpackCarrierView(view) : visible;
       const scene = local.followVacated ? { ...scanned, followVacated: true } : scanned, current = packed(scene);
-      if (!scene.carriers.length || !scene.edges.size || scene.pegs.size < (scene.plots && view ? 1 : 2)) return null;
+      const exploratory = !!view && (!!scene.plots || !!scene.auxiliaries);
+      if (!scene.carriers.length || !scene.edges.size || scene.pegs.size < (exploratory ? 1 : 2)) return null;
       const initial = reductionState(scene);
       const budget = remaining + Number(local.selected !== null), mobilePlot = Boolean(scene.carriedPlots?.size);
-      const bounds = mobilePlot ? { maximumStates: 65_536, maximumFrontier: 131_072 }
+      const extended = mobilePlot || !!scene.auxiliaries?.size;
+      const bounds = extended ? { maximumStates: 65_536, maximumFrontier: 131_072 }
         : { maximumStates: 8192, maximumFrontier: 16384 };
-      const retainedSegment = mobilePlot && local.segment?.path.length ? local.segment : null;
-      const result = retainedSegment || scene.plots && scene.pegs.size === 1 ? null
+      const retainedSegment = extended && local.segment?.path.length ? local.segment : null;
+      const result = retainedSegment || exploratory && scene.pegs.size === 1 ? null
         : await boundedReductionRouteCooperative(initial, scene, budget, bounds, false, execution);
-      const partial = !retainedSegment && scene.plots && view && (result?.status === 'exhausted' || mobilePlot && result?.status === 'resource_bound')
+      const partial = !retainedSegment && exploratory && (result?.status === 'exhausted' || extended && result?.status === 'resource_bound')
         ? await boundedReductionRouteCooperative(initial, scene, budget, bounds, 'reduce', execution) : null;
-      const reveal = !retainedSegment && view && (!result || result.status === 'exhausted' || mobilePlot && result.status === 'resource_bound') && !partial?.path
-        ? await boundedReductionRouteCooperative(initial, scene, budget, bounds, true, execution) : null;
+      const reveal = !retainedSegment && view && (!result || result.status === 'exhausted' || extended && result.status === 'resource_bound') && !partial?.path
+        ? await boundedReductionRouteCooperative(initial, scene, budget, bounds,
+          scene.auxiliaries?.size && scene.carriers.length > 1 ? 'reveal_with_auxiliary' : true, execution) : null;
       const segment: Segment | null = retainedSegment ?? (result?.path ? { purpose: 'solve', path: result.path }
         : partial?.path ? { purpose: 'reduce', path: partial.path } : reveal?.path ? { purpose: 'reveal', path: reveal.path } : null);
       const operation = segment?.path[0];
@@ -170,21 +196,30 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
         const planned = [...reductionSuccessors(initial, scene)].find(([, candidate]) => same(candidate, operation));
         if (!planned) return null;
         const mid: ReductionPoint = [(source[0] + landing[0]) / 2, (source[1] + landing[1]) / 2];
-        const carried = !!scene.carriedPlots?.has(mid.join(','));
+        const midKey = mid.join(',');
+        const auxiliaryJump = !!scene.auxiliaries?.has(source.join(','));
+        const carried = !!scene.carriedPlots?.has(midKey) ||
+          !!scene.auxiliaries?.has(midKey) && scene.carriers.some(cell => same(cell, mid));
+        const preserved = carried || scene.plots?.has(midKey) || scene.auxiliaries?.has(midKey)
+          || auxiliaryJump && scene.pegs.has(midKey);
+        const dock = !!scene.auxiliaries && !preserved && !scene.pegs.has(midKey);
         choice = { stage: selected ? 'jump' : 'select', command: { action_ref: 'ACTION6', data: { x, y } },
           effect: selected ? packReductionState(planned[0]) : current, addressed: cell, source, landing,
-          ...(carried || scene.plots?.has(mid.join(',')) ? { intermediate: mid, ...(carried ? { carried: true } : {}) } : {}) };
+          ...(preserved ? { intermediate: mid, ...(carried ? { carried: true } : {}) } : {}), ...(dock ? { dock } : {}) };
       }
       const strategy = choice.stage === 'probe' ? 'identify_carrier_motion'
         : choice.stage === 'move' ? choice.carried ? 'position_carried_intermediate' : 'move_carrier_into_range'
-        : choice.intermediate ? 'verify_preserved_intermediate' : choice.stage === 'select' ? 'select_piece_for_reduction' : 'verify_reduction_landing';
+        : choice.dock ? 'verify_dock_transfer' : choice.intermediate ? 'verify_preserved_intermediate'
+        : choice.stage === 'select' ? 'select_piece_for_reduction' : 'verify_reduction_landing';
       const ref = observation.observation_ref, parent = 'G_official_completion', label = observedCarrierStrategies[strategy];
-      const situation = segment.purpose === 'reveal' ? 'Move a loaded carrier toward the edge of the mapped area and check what the new view reveals'
+      const situation = segment.purpose === 'reveal' && scene.auxiliaries?.size
+        ? 'Keep the auxiliary within reach and check what the next landing reveals'
+        : segment.purpose === 'reveal' ? 'Move a loaded carrier toward the edge of the mapped area and check what the new view reveals'
         : segment.purpose === 'reduce' ? 'Reduce a group that can be reached now and retain the other pieces in the map' : label;
       const evidence: [string, ...string[]] = [ref, ...new Set([...retained.refs, ...local.refs,
         ...Object.values(local.controls).map(motion => motion.ref)].filter(item => item !== ref))];
       const action = choice.command, directionalSeries: Choice[] = [];
-      if (mobilePlot && local.followVacated && view && choice.stage === 'move') {
+      if (extended && local.followVacated && view && choice.stage === 'move') {
         let position = initial;
         for (const next of segment.path.slice(0, Math.min(remaining, maximumCommittedActions))) {
           if (next[0] !== 'move') break;
@@ -201,18 +236,22 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
         subjects: ['piece', 'carrier', 'landing'], parentObjective: parent, satisfactionContract: 'observe_reduce_and_official_progress' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = `carrier-reduction:${need.id}`;
-      return { status: 'proposed', kind: observedCarrierReductionId, actions, local: mobilePlot ? { ...local, segment } : local, choice, current, needId: need.id,
+      const loadedAuxiliaries = scene.carriers.filter(cell => scene.auxiliaries?.has(cell.join(',')));
+      const focusedCarrier = scene.auxiliaries && scene.carriers.find(cell => same(cell, choice.source) || same(cell, choice.landing))
+        || loadedAuxiliaries[0] || scene.carriers[0]!;
+      const cargo = [...(scene.carriedPlots?.size ? current[2] ?? [] : []), ...loadedAuxiliaries]
+        .map(cell => boxFor(model, cell, view?.offset)).filter(([l, t, r, b]) => l >= 0 && t >= 0 && r < model.width && b < model.height);
+      return { status: 'proposed', kind: observedCarrierReductionId, actions, local: extended ? { ...local, segment } : local, choice, current, needId: need.id,
         ...(actions.length > 1 ? { directionalSeries } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         steps: actions.map((item, i) => ({ action: item, ...(locus ? { point_binding: locus } : {}),
           expected_after: directionalSeries[i]?.effect ?? choice.effect })),
         sicSituationCard: { strategy, need: 'Bring the separated pieces into one reachable group',
           situation, mode: choice.stage === 'probe' || segment.purpose === 'reveal' ? 'exploration' : 'solving', evidence, agenda: [],
-          carrier: boxFor(model, scene.carriers[0]!, view?.offset), source: choice.source && boxFor(model, choice.source, view?.offset),
+          carrier: boxFor(model, focusedCarrier, view?.offset), source: choice.source && boxFor(model, choice.source, view?.offset),
           landing: choice.landing && boxFor(model, choice.landing, view?.offset),
           ...(choice.intermediate ? { intermediate: boxFor(model, choice.intermediate, view?.offset) } : {}),
-          ...(mobilePlot ? { carriedIntermediates: current[2]?.map(cell => boxFor(model, cell, view?.offset))
-            .filter(([l, t, r, b]) => l >= 0 && t >= 0 && r < model.width && b < model.height) } : {}) },
+          ...(mobilePlot || cargo.length ? { carriedIntermediates: cargo } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -264,7 +303,7 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
         const scene = unpackCarrierView(local.view);
         const vector = local.controls[action.action_ref]?.vector;
         let learnedVacancy = false;
-        if (next?.matches === false && scene.carriedPlots?.size && !local.followVacated && choice.stage === 'move' && vector) {
+        if (next?.matches === false && (scene.carriedPlots?.size || scene.auxiliaries?.size) && !local.followVacated && choice.stage === 'move' && vector) {
           const alternative = packReductionState(reductionMoved(reductionState(scene), vector, scene.edges, scene.plots, true));
           if (!same(choice.effect, alternative)) {
             const acquired = acquireCarrierView(second, after, local.model, local.view, alternative);
