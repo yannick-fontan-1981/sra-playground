@@ -1,6 +1,6 @@
 import { measureReceptionLayout, receptionServiceCarriers } from '../logos-engine/v6-reception-service-observation.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
-import type { ReceptionMemory } from './reception-activation.ts';
+import { receptionRequestTiles, type ReceptionMemory } from './reception-activation.ts';
 
 type Support = { anchor: NativePoint; color: number };
 type Layout = { box: NativeBox; pitch: number; cells: NativePoint[]; background: number; support_candidates: Support[]; requests: NativeBox[] };
@@ -8,6 +8,7 @@ type Badge = { box: NativeBox; initial: number[] };
 type Receipt = { badge: number; support: NativePoint; pixels: number[]; confirmed: boolean };
 export type ReceptionSequence = {
   epoch: number; layout: Layout; initialHash: string; start: NativePoint; carrierInk: number; at: NativePoint; visible: boolean;
+  inactiveEntry?: { hash: string; at: NativePoint };
   badges: Badge[]; supports: NativePoint[]; walls: string[]; blocked: string[]; failures: string[]; exhausted: string[];
   receipts: Receipt[]; tick: number; waits: number; target: NativePoint | null; evidence: string[];
 };
@@ -24,8 +25,7 @@ export function startReceptionSequence(rows: NativeRows, epoch: number, frameHas
   const layout = measureReceptionLayout(rows) as Layout | null;
   if (!layout || layout.pitch !== memory.pitch || layout.cells.length > 196) return null;
   const { pitch } = layout;
-  const boxes = layout.requests.filter(([l, t, r, b]) => r - l + 1 === pitch && b - t + 1 === pitch);
-  const badges = [...new Map(boxes.map(badge => [badge.join(','), badge])).values()].map(badge => ({ box: badge, initial: pixels(rows, badge) }));
+  const badges = receptionRequestTiles(layout).map(badge => ({ box: badge, initial: pixels(rows, badge) }));
   const supports = layout.support_candidates.filter(support => support.color === memory.supportInk).map(support => support.anchor);
   const actors = receptionServiceCarriers(rows, layout);
   if (badges.length < 2 || badges.length !== supports.length || actors.length !== 1
@@ -86,7 +86,7 @@ function preservesBadge(initial: readonly number[], current: readonly number[]) 
 }
 
 export function receptionSequenceReturn(state: ReceptionSequence, step: ReceptionSequenceStep, rows: NativeRows, frameHash: string) {
-  const reset = frameHash === state.initialHash && (state.receipts.length > 0
+  const reset = frameHash === state.inactiveEntry?.hash || frameHash === state.initialHash && (state.receipts.length > 0
     || !equal(state.at, state.start) && !equal(step.to, state.start));
   const candidates = receptionServiceCarriers(rows, state.layout);
   const actor = candidates.find(candidate => equal(candidate.anchor, step.to))
@@ -99,7 +99,8 @@ export function recordReceptionSequence(state: ReceptionSequence, step: Receptio
   frameHash: string, ref: string): { next: ReceptionSequence; evidence?: string } {
   const { reset, position } = receptionSequenceReturn(state, step, rows, frameHash);
   const tick = state.tick + 1, evidence = [...state.evidence.slice(-5), ref];
-  if (reset) return { next: { ...state, tick: 0, at: state.start, visible: true, receipts: [], exhausted: [], waits: 0, target: null,
+  const restart = state.inactiveEntry?.hash === frameHash ? state.inactiveEntry.at : state.start;
+  if (reset) return { next: { ...state, tick: 0, at: restart, visible: true, receipts: [], exhausted: [], waits: 0, target: null,
     failures: [...state.failures, `${tick}/${key(step.to)}`], evidence },
     evidence: 'The crossing returned the carrier to the starting scene. Try a different position at that time.' };
 

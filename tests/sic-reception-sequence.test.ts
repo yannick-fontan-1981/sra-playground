@@ -44,4 +44,10 @@ test('a receipt persists on departure and is cleared when the original display r
   assert.deepEqual(reset.receipts, []);
   assert.equal(reset.tick, 0);
   assert.deepEqual(reset.failures, ['3/9,1']);
+  const activation = { ...state, at: start, inactiveEntry: { hash: 'inactive', at: first }, tick: 0 };
+  const firstCrossing = { ...route, to: second };
+  const withoutSupports = recordReceptionSequence(activation, firstCrossing, frame(start, initialBadge), 'inactive', 'entry');
+  assert.deepEqual(withoutSupports.next.failures, ['1/9,1']);
+  assert.deepEqual(withoutSupports.next.at, first);
+  assert.equal(withoutSupports.next.tick, 0);
 });

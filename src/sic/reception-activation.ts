@@ -10,6 +10,7 @@ export type ReceptionActivation = {
   epoch: number; layout: Layout; initialHash: string; start: NativePoint; carrierInk: number; at: NativePoint;
   visible: boolean; device: NativePoint | null; deviceMark: string; firstDevice: NativePoint; walls: string[];
   inactiveInk: number; target: NativePoint | null; tick: number; activation: number; failures: Failure[]; evidence: string[];
+  requests?: NativeBox[]; ready?: boolean;
 };
 export type ReceptionActivationStep = {
   input: string; to: NativePoint; stage: 'approach' | 'contact' | 'route' | 'hold'; target: NativePoint;
@@ -37,10 +38,16 @@ function enclosedMark(pixels: NativeRows): boolean {
   return fill > 0 && holes.size === 1;
 }
 
+export function receptionRequestTiles({ pitch, requests }: Pick<Layout, 'pitch' | 'requests'>): NativeBox[] {
+  return [...new Map(requests.filter(([l, t, r, b]) => r - l + 1 === pitch && b - t + 1 === pitch)
+    .map(request => [request.join(','), request])).values()];
+}
+
 export function startReceptionActivation(rows: NativeRows, epoch: number, frameHash: string, memory: ReceptionMemory): ReceptionActivation | null {
   const layout = measureReceptionLayout(rows) as Layout | null;
-  if (!layout || layout.pitch !== memory.pitch || layout.cells.length > 196 || layout.support_candidates.length < 4
-    || layout.requests.length !== 1) return null;
+  if (!layout || layout.pitch !== memory.pitch || layout.cells.length > 196 || layout.support_candidates.length < 4) return null;
+  const requests = receptionRequestTiles(layout);
+  if (layout.requests.length !== 1 && requests.length < 2) return null;
   const actors = receptionServiceCarriers(rows, layout);
   const inactiveInk = layout.support_candidates[0]!.color;
   if (actors.length !== 1 || inactiveInk === memory.supportInk
@@ -55,6 +62,7 @@ export function startReceptionActivation(rows: NativeRows, epoch: number, frameH
   const start = actors[0]!.anchor as NativePoint;
   return { epoch, layout, initialHash: frameHash, start, carrierInk: actors[0]!.color, at: start, visible: true,
     device, deviceMark: fingerprint(pixels), firstDevice: device, walls, inactiveInk, target: null, tick: 0,
+    ...(requests.length > 1 ? { requests, ready: false } : {}),
     activation: 0, failures: [], evidence: memory.evidence };
 }
 
@@ -99,7 +107,7 @@ export function chooseReceptionActivation(state: ReceptionActivation, rows: Nati
     return delta && deltaSize(delta) === state.layout.pitch && (delta[0] === 0 || delta[1] === 0) ? [{ input, delta }] : [];
   }).sort((a, b) => a.input.localeCompare(b.input));
   const target = state.target ?? state.device;
-  if (!target || moves.length < 2 || state.tick >= state.layout.cells.length) return null;
+  if (state.ready || !target || moves.length < 2 || state.tick >= state.layout.cells.length) return null;
   if (state.target && equal(state.at, state.target)) {
     const blocked = moves.find(move => {
       const next = offset(state.at, move.delta);
@@ -112,14 +120,14 @@ export function chooseReceptionActivation(state: ReceptionActivation, rows: Nati
     stage: state.target ? 'route' : equal(first.to, target) ? 'contact' : 'approach' } : null;
 }
 
-function activeSupport(rows: NativeRows, state: ReceptionActivation, supportInk: number): NativePoint | null {
+function activeSupports(rows: NativeRows, state: ReceptionActivation, supportInk: number): NativePoint[] {
   const active = state.layout.support_candidates.filter(support => {
     const [l, t] = support.bbox, [ax, ay] = support.anchor, last = state.layout.pitch - 1;
     const positions = support.mask.map(([dx, dy]) => [l + dx, t + dy] as const)
       .filter(([x, y]) => !((x === ax || x === ax + last) && (y === ay || y === ay + last)));
     return positions.length > 0 && positions.every(([x, y]) => rows[y]![x] === supportInk);
   });
-  return active.length === 1 ? active[0]!.anchor : null;
+  return active.map(support => support.anchor);
 }
 
 export function crossingRestoredStart(state: ReceptionActivation, step: ReceptionActivationStep, frameHash: string): boolean {
@@ -134,16 +142,19 @@ export function recordReceptionActivation(state: ReceptionActivation, step: Rece
     return { next: { ...state, at: state.start, visible: true, device: state.firstDevice, target: null, tick: 0, activation: 0,
       failures: [...state.failures, failed], evidence }, evidence: 'The attempted crossing restored the starting scene. Change the route or the time of arrival.' };
   }
-  const target = activeSupport(rows, state, memory.supportInk) ?? state.target;
+  const supports = activeSupports(rows, state, memory.supportInk);
+  const target = !state.requests && supports.length === 1 ? supports[0]! : state.target;
   const candidates = receptionServiceCarriers(rows, layout);
   const actor = candidates.find(candidate => equal(candidate.anchor, step.to))
     ?? candidates.find(candidate => candidate.color === state.carrierInk);
   const switchTiles = state.device ? layout.cells.filter(site => fingerprint(tile(rows, site, layout.pitch)) === state.deviceMark) : [];
   const device = switchTiles.length === 1 ? switchTiles[0]! : null;
   const changed = step.stage === 'contact' && state.device && device && !equal(state.device, device);
-  const activated = step.stage === 'contact' && !device && !state.target && target;
+  const ready = !!state.requests && step.stage === 'contact' && !device && supports.length === state.requests.length;
+  const activated = step.stage === 'contact' && !device && !state.target && (target || ready);
   return { next: { ...state, tick, target, activation: activated ? tick : state.activation, evidence, device,
-    at: actor?.anchor ?? step.to, visible: !!actor },
-    ...(activated ? { evidence: 'The device disappeared on contact and the distant support took the previously successful marking.' }
+    ...(state.requests ? { ready } : {}), at: actor?.anchor ?? step.to, visible: !!actor },
+    ...(ready ? { evidence: 'The device disappeared and a support became available for each separate request.' }
+      : activated ? { evidence: 'The device disappeared on contact and the distant support took the previously successful marking.' }
       : changed ? { evidence: 'The contacted body shifted by one cell. The support is still inactive.' } : {}) };
 }
