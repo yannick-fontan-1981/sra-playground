@@ -1,6 +1,6 @@
 {
   "game": "SS03",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "levels": [
     {
       "level": 1,
@@ -40,36 +40,54 @@
     {
       "level": 2,
       "id": "ss03-02",
-      "title": "Le triple verrou",
-      "guidePuzzle": 18,
-      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-18",
+      "title": "La presse latérale",
+      "guidePuzzle": 0,
+      "sourceUrl": "",
       "dimensions": [
-        13,
+        11,
         9
       ],
-      "stones": 3,
+      "stones": 2,
       "buttons": 3,
-      "pistonGates": 0,
-      "initialWalkingCells": 7,
-      "actions": 48,
-      "pulls": 17,
+      "pistonGates": 2,
+      "initialWalkingCells": null,
+      "actions": 27,
+      "pulls": 8,
       "pullDirections": [
         "E",
-        "S",
-        "W"
+        "N",
+        "S"
       ],
-      "releaseMoves": 6,
+      "releaseMoves": 4,
       "stonesUsingBothAxes": 2,
-      "pistonStrokes": 0,
-      "pistonEvents": [],
-      "allButtonsOccupiedByStones": true,
+      "pistonStrokes": 2,
+      "pistonEvents": [
+        {
+          "action": 16,
+          "gate": 0,
+          "direction": "E",
+          "movedActors": 1
+        },
+        {
+          "action": 22,
+          "gate": 0,
+          "direction": "E",
+          "movedActors": 2
+        }
+      ],
+      "allButtonsOccupiedByStones": false,
       "pullsRequired": true,
-      "pullAblationStates": 1,
+      "pullAblationStates": 40,
       "cratesPreserved": true,
       "solved": true,
-      "mapSha256": "59b9e86f620cc01a57eb95f024c1500d428021ff5f641d3516a59a58eea98bbf",
-      "rulesSha256": "1b12061b4272a4858f579aada43a9475638fc78d5c5b8fbb28159a646543bcdb",
-      "witnessSha256": "a068748e3e901d615a953f596996c1a2ff17b6ef70cf2c85b7806547fe0727bd"
+      "mapSha256": "52f863d895c0b29b76dc1edf360cabd6d2c1df6818cafa933506ecd743881654",
+      "rulesSha256": "28c324c7cd007d6cfa825030f5a0e5d7a543ba2233d67476907442f6f4fb507a",
+      "witnessSha256": "72b7728391c8e8454d1b8e950874e8fe0ccfdf2f141d46c88e2d06c2063094d0",
+      "pistonsRequired": {
+        "method": "exhaustive complete-state search with piston motion disabled",
+        "verified": true,
+        "states": 6766
+      }
     },
     {
       "level": 3,
@@ -343,13 +361,6 @@
       "sha256": "e8933ee0633637d076d10fb20a91da0356ca3e3620908afb87301b6332553bb8"
     },
     {
-      "level": 2,
-      "previousLevel": 7,
-      "actions": 48,
-      "matched": true,
-      "sha256": "f78c7655614cdfe55c10504e99d70191db5626f07d4b960a610ad6a532ef909b"
-    },
-    {
       "level": 3,
       "previousLevel": 3,
       "actions": 61,
@@ -376,10 +387,24 @@
       "actions": 56,
       "matched": true,
       "sha256": "b49c0bec312b0a36ff6af060ac423b4b9e5bea56fa69fab7a78159a6b221211e"
+    },
+    {
+      "level": 7,
+      "previousLevel": 7,
+      "actions": 42,
+      "matched": true,
+      "sha256": "efb4ecffba0388c9336a5450fc8fe8912538608c842663fa5a62abc56a66aa43"
+    },
+    {
+      "level": 8,
+      "previousLevel": 8,
+      "actions": 154,
+      "matched": true,
+      "sha256": "10677ed38f65c544532286402c4285f840e21d5da1867d78bb2b680c89da8f81"
     }
   ],
-  "totalActions": 493,
-  "totalPulls": 156,
-  "totalPistonStrokes": 8,
+  "totalActions": 472,
+  "totalPulls": 147,
+  "totalPistonStrokes": 10,
   "success": true
 }

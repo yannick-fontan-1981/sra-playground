@@ -1,4 +1,4 @@
-# Spécification SS03 · v0.2.0
+# Spécification SS03 · v0.3.0
 
 ## Représentation
 
@@ -18,8 +18,8 @@ ACTION1 = haut, ACTION2 = bas, ACTION3 = gauche, ACTION4 = droite. Toute autre a
 1. La case devant le Voleur doit être praticable et sans caisse.
 2. Si une caisse est immédiatement derrière lui dans l’axe du déplacement, elle entre dans la case qu’il quitte. Les autres caisses ne suivent pas.
 3. Le Voleur ne pousse jamais une caisse située devant lui. Un pas perpendiculaire permet de quitter une caisse sans l’entraîner.
-4. Dans les niveaux 1 à 6, les boutons commandent ensemble les portes historiques. Une fermeture sur un acteur annule entièrement le déplacement. Cette règle historique est conservée et vérifiée par comparaison des observations de v0.1.0.
-5. Dans les niveaux 7 et 8, les circuits et portes-pistons suivent les règles ci-dessous après le déplacement volontaire.
+4. Dans les niveaux 1, 3, 4, 5 et 6, les boutons commandent ensemble les portes historiques. Une fermeture sur un acteur annule entièrement le déplacement. Cette règle historique est conservée et vérifiée par comparaison des observations de v0.2.0.
+5. Dans les niveaux 2, 7 et 8, les circuits et portes-pistons suivent les règles ci-dessous après le déplacement volontaire.
 6. Le niveau est résolu quand le Voleur vivant atteint la destination jaune. Le moteur charge ensuite le premier niveau non résolu. La victoire de série exige les huit niveaux.
 
 Un refus actualise l’orientation mais conserve toutes les positions. Undo restaure aussi cette orientation, l’état des portes, les caisses et peut annuler une transition entre niveaux. Reset efface la résolution et l’historique du niveau courant ; Restart efface toute la progression.

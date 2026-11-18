@@ -1,17 +1,23 @@
-# Progression et choix des niveaux · v0.2.0
+# Progression et choix des niveaux · v0.3.0
 
-Le tutoriel reste chargé et ouvert au démarrage. À la demande de l’utilisateur, l’ancien niveau 7 devient le niveau 2 et les deux derniers niveaux utilisent des portes qui poussent.
+Le tutoriel reste chargé et ouvert au démarrage. Le niveau 2 introduit maintenant un défi de difficulté moyenne avec une seule presse ; les niveaux 7 et 8 développent ensuite ce mécanisme.
 
 | Niveau | Problème principal | Choix de conception |
 |---|---|---|
 | 1 · L’atelier du Voleur | Tirer, relâcher, changer de côté et occuper trois boutons | Tutoriel conservé : trois caisses, trois boutons, 82 cellules accessibles sans tirer, aide ouverte et cinq apprentissages suivis. |
-| 2 · Le triple verrou | Répartir trois caisses issues de chambres vers trois boutons | Ancien niveau 7 déplacé sans modification de la grille ; adaptation de Heroes of Hauling 18. |
+| 2 · La presse latérale | Charger deux caisses dans une presse et remplir un couloir | Création originale de difficulté moyenne : une presse vers l’est, un pilier à contourner et une porte de sortie commandée par deux boutons. |
 | 3 · Les deux entrepôts | Dégager des accès avant d’ouvrir le passage inférieur | Heroes of Hauling 6, transcription conservée : sept caisses et deux étages reliés par le côté. |
 | 4 · Le relais des deux terrasses | Transporter une caisse vers la chambre basse et garder l’accès à la sortie haute | Adaptation de Heroes of Hauling 14 ; deux caisses et deux chambres nécessaires. |
 | 5 · Les alcôves de la cathédrale | Extraire deux caisses de directions opposées | Adaptation de Heroes of Hauling 15 ; changements d’axe avant de tenir les deux boutons. |
 | 6 · Trois amarres | Organiser trois placements dans un espace contraint | Heroes of Hauling 8, transcription conservée ; trois caisses à manipuler sur les deux axes. |
 | 7 · Les deux presses | Remplir deux niches avec des pistons | Création originale : presse vers l’ouest, poussée d’une file de deux caisses, puis presse vers le nord. |
 | 8 · Le train des six caisses | Alimenter une file et coordonner deux circuits | Reproduction de Heroes and Light 2, salle `multipush_for_me2` ; quatre déclenchements horizontaux puis cascade verticale. |
+
+## Niveau 2 : une seule presse, deux chargements
+
+La carte de 11 × 9 cellules contient deux caisses et une presse orientée vers l’est. Il faut préparer les caisses, contourner le pilier central et charger la presse par le haut pour garder une sortie de manœuvre. Deux déclenchements remplissent les deux boutons alignés : le second pousse une file de deux caisses sur les boutons qui libèrent la destination.
+
+Le témoin comporte 27 directions, huit tractions et deux poussées. Les deux caisses sont conservées. La recherche exhaustive sans déplacement de piston épuise 6 766 états sans atteindre la cible : la presse est indispensable. La niche terminale a trois parois, ce qui empêche d’y tirer directement une caisse.
 
 ## Niveau 7 : une poussée indispensable
 
@@ -29,8 +35,8 @@ Le témoin communautaire original de 154 directions fonctionne sans changement s
 
 ## Validation de la série
 
-Les huit témoins comptent **493 directions, 156 tractions et 8 phases de piston**. Aucun n’a de mouvement refusé, décès ou caisse détruite. Ces parcours ne sont pas annoncés optimaux.
+Les huit témoins comptent **472 directions, 147 tractions et 10 phases de piston**. Aucun n’a de mouvement refusé, décès ou caisse détruite. Ces parcours ne sont pas annoncés optimaux.
 
-Une ablation des tractions confirme leur nécessité dans les huit niveaux. Les deux reprises intactes de Heroes of Hauling sont comparées cellule par cellule à la transcription. Le niveau 8 est comparé à son relevé de terrain et d’objets. Les observations complètes des niveaux 1 à 6 sont comparées à des empreintes produites avec le moteur v0.1.0 ; le niveau 2 correspond à l’ancien 7.
+Une ablation des tractions confirme leur nécessité dans les huit niveaux. Les deux reprises intactes de Heroes of Hauling sont comparées cellule par cellule à la transcription. Le niveau 8 est comparé à son relevé de terrain et d’objets. Les observations complètes des sept niveaux conservés sont comparées à des empreintes produites avec le moteur v0.2.0.
 
 L’eau conserve le contour du tutoriel. Le moteur de piston sait créer des plateformes en poussant une caisse dans l’eau, mais aucune eau supplémentaire n’est ajoutée à la reproduction du niveau 8.
