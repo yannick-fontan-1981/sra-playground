@@ -1994,4 +1994,10 @@ Après obtention du carré demandé, SIC projette l'entrée des deux pièces dan
 
 Depuis le niveau 1, les **77 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Le niveau 6 gagne en **11 clics et 6,90 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les 88 commandes relèvent de SIC. Le diagnostic depuis la sauvegarde retrouve les mêmes clics. Le rejeu s'arrête à la victoire du niveau 6. TypeScript et les deux tests ciblés passent. Empreinte `ba758812c6a55f5ca6d050212b974e1d77072301839755bc566676119fd3ad48`. La couverture atteint **548/636 niveaux (86,2 %)**, dont **49/99 niveaux 6 (49,5 %)**.
 
+### MIND niveau 6, comparer les codes après l'ajout d'une valeur
+
+À l'entrée du niveau, SIC reconnaît les deux rangées, leur pas et la commande de validation grâce au niveau précédent. La sixième valeur élargit le domaine initial de 3 125 à 7 776 codes et dépasse la limite de 4 096. La famille de comparaison admet désormais jusqu'à 8 192 candidats, avec les mêmes limites de **65 536 évaluations** et **256 formes d'essai**. Le regroupement par symétrie compare 52 formes au premier choix. Le test avec six valeurs reproduit le choix, le score et le nombre de partitions du calcul exhaustif.
+
+Dans le rejeu chronologique, les trois premières soumissions réduisent les possibilités de **7 776 à 104, puis à 12 et à 2**. La quatrième gagne le jeu. Les **69 commandes et les empreintes des retours des niveaux 1 à 5** concordent avec la référence. Le niveau 6 gagne en **24 commandes et 13,27 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les 93 commandes relèvent de SIC. TypeScript et les **47 tests ciblés** passent. Empreinte `7a9cac0f1e17d2904152b04479b45764a0834dff75c3426db1e90333f2785001`. La couverture atteint **549/636 niveaux (86,3 %)**, dont **50/99 niveaux 6 (50,5 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
