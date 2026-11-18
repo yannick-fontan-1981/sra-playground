@@ -42,3 +42,24 @@ test('route the complete corner footprint and compare its actual focus and empty
   paint(at + width, layout.focusInk);
   assert.equal(verifyDirectedBranches(raster, layout, [at], 0), false);
 });
+
+test('a marked bar emits a second front and retains its mark when selected', () => {
+  const props = Array<number>(width ** 2).fill(1);
+  props[cell(3,1)] = 5;
+  const at = cell(5,2), marker = cell(6,2);
+  const model: DirectedBranchLayout = {
+    ...layout, unit: 1, capInk: 4, fixed: props, pieces: [{ at, offsets: [[0,0],[1,0],[2,0]], ink: 8, turn: false, emitter: [1,0] }],
+    sources: [{ at: cell(3,1), direction: 2 }],
+    targets: [{ opening: cell(3,6), incoming: 2 }, { opening: cell(6,6), incoming: 2 }],
+  };
+  const projection = projectDirectedBranches(model, [at]);
+  assert.deepEqual([...projection!.served].sort(), [0,1]);
+  assert.ok(projection!.trace.includes(cell(6,3)));
+  assert.equal(projection!.escaped, 0);
+  const rows = Array.from({ length: width }, (_, y) => props.slice(y * width, (y + 1) * width));
+  rows[2]![5] = rows[2]![7] = model.focusInk;
+  rows[2]![6] = model.capInk!;
+  assert.ok(verifyDirectedBranches(rows, model, [at], 0));
+  rows[2]![marker % width] = model.focusInk;
+  assert.equal(verifyDirectedBranches(rows, model, [at], 0), false);
+});

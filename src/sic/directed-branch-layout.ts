@@ -3,12 +3,13 @@ import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-nati
 import type { StackedBranchLayout } from './stacked-branch-layout.ts';
 
 const orthogonal = [[0, -1], [1, 0], [0, 1], [-1, 0]] as const;
-type Piece = { at: number; offsets: NativePoint[]; ink: number; turn: boolean };
+type Piece = { at: number; offsets: NativePoint[]; ink: number; turn: boolean; emitter?: NativePoint };
 type Receiver = { opening: number; incoming: number };
 type Source = { at: number; direction: number };
 export type DirectedBranchLayout = {
   unit: number; origin: NativePoint; width: number; height: number; background: number; focusInk: number;
   fixed: number[]; pieces: Piece[]; targets: Receiver[]; sources: Source[]; focused: number;
+  capInk?: number;
 };
 type Layout = DirectedBranchLayout;
 type RasterPart = { at: number; width: number; height: number; offsets: NativePoint[]; ink: number };
@@ -85,22 +86,43 @@ export function measureDirectedBranchLayout(rows: NativeRows, prior: Pick<Stacke
       }
     }
   }
-  if (sources.length < 2 || new Set(sources.map(source => source.direction)).size !== 1 || targets.length < 3) return null;
+  if (!sources.length || new Set(sources.map(source => source.direction)).size !== 1 || targets.length < 3) return null;
   const main = sources[0]!.direction;
-  if (targets.filter(target => target.incoming % 2 !== main % 2).length !== 1
+  const emitters: Piece[] = [], usedParts = new Set<RasterPart>(fixtures);
+  for (const marker of sparse.filter(part => !fixtures.has(part) && part.ink === prior.capInk && part.offsets.length === 1)) {
+    const [x, y] = point(grid, marker.at);
+    const flanks = sparse.flatMap(left => {
+      const [lx, ly] = point(grid, left.at);
+      if (usedParts.has(left) || ly !== y || left.height !== 1 || lx + left.width !== x
+        || ![prior.restingInk, prior.focusedInk].includes(left.ink)) return [];
+      return sparse.filter(right => !usedParts.has(right) && right.at === offset(grid, marker.at, [1,0])
+        && right.height === 1 && right.width === left.width && right.ink === left.ink).map(right => ({ left, right }));
+    });
+    if (flanks.length !== 1) return null;
+    const { left, right } = flanks[0]!;
+    const length = left.width + right.width + 1;
+    emitters.push({ at: left.at, offsets: Array.from({ length }, (_, dx) => [dx,0]), ink: left.ink, turn: false, emitter: [left.width,0] });
+    usedParts.add(left); usedParts.add(right); usedParts.add(marker);
+  }
+  const mixed = emitters.length > 0;
+  if (mixed ? main !== 2 : sources.length < 2 || targets.filter(target => target.incoming % 2 !== main % 2).length !== 1
     || targets.filter(target => target.incoming === main).length !== targets.length - 1) return null;
-  const pieces = sparse.filter(part => !fixtures.has(part)).map(part => ({ at: part.at, offsets: part.offsets, ink: part.ink,
-    turn: part.width === 2 && part.height === 2 && part.offsets.length === 3 }));
+  const pieces: Piece[] = [...sparse.filter(part => !usedParts.has(part)).map(part => ({ at: part.at, offsets: part.offsets, ink: part.ink,
+    turn: part.width === 2 && part.height === 2 && part.offsets.length === 3 })), ...emitters];
+  if (mixed) pieces.sort((a,b) => a.at - b.at);
   const focused = pieces.flatMap((piece, i) => piece.ink === prior.focusedInk ? [i] : []);
-  if (focused.length !== 1 || pieces.filter(piece => piece.turn).length !== 1 || pieces.length < 3 || pieces.length > 5
-    || pieces.some((piece, i) => !piece.turn && (piece.offsets.length < 2 || piece.offsets.some(([x, y]) => (main % 2 ? x : y) !== 0)
+  const turns = pieces.filter(piece => piece.turn), restingTurn = turns.find(piece => piece.ink !== prior.focusedInk);
+  if (focused.length !== 1 || (mixed ? turns.length < 1 || turns.length > 3 : turns.length !== 1) || pieces.length < 3 || pieces.length > 5
+    || pieces.some((piece, i) => !piece.turn && (piece.offsets.length < 2 || piece.offsets.some(([x, y]) =>
+      mixed ? x !== 0 && y !== 0 : (main % 2 ? x : y) !== 0)
       || i !== focused[0] && piece.ink !== prior.restingInk))) return null;
   const fixed = Array<number>(width * height).fill(background);
   for (const fixture of fixtures) for (const delta of fixture.offsets) fixed[offset(grid, fixture.at, delta)] = fixture.ink;
   if (pieces.some(piece => piece.offsets.some(delta => offset(grid, piece.at, delta) < 0))) return null;
-  const contributors = pieces.map((piece, i) => i === focused[0] && !piece.turn ? { ...piece, ink: prior.restingInk } : piece);
-  if (contributors[focused[0]!]!.turn) return null;
-  const layout = { ...grid, unit, origin, background, focusInk: prior.focusedInk, fixed, pieces: contributors, targets, sources, focused: focused[0]! };
+  if (pieces[focused[0]!]!.turn && (!mixed || !restingTurn)) return null;
+  const contributors = pieces.map((piece, i) => i === focused[0] ? { ...piece, ink: piece.turn ? restingTurn!.ink : prior.restingInk } : piece);
+  const layout = { ...grid, unit, origin, background, focusInk: prior.focusedInk, fixed, pieces: contributors, targets, sources, focused: focused[0]!,
+    ...(mixed ? { capInk: prior.capInk } : {}) };
   return verifyDirectedBranches(rows, layout, pieces.map(piece => piece.at), layout.focused) ? layout : null;
 }
 
@@ -121,9 +143,12 @@ function occupy(layout: Layout, positions: readonly number[]) {
 export function verifyDirectedBranches(rows: NativeRows, layout: Layout, positions: readonly number[], focused: number) {
   const occupied = occupy(layout, positions);
   if (!occupied) return false;
+  const emitters = new Set(layout.pieces.flatMap((piece, i) => piece.emitter && positions[i]! >= 0
+    ? [offset(layout, positions[i]!, piece.emitter)] : []));
   for (let at = 0; at < occupied.length; at++) {
     const owner = occupied[at]! - 1;
-    const ink = owner < 0 ? layout.fixed[at] : owner === focused ? layout.focusInk : layout.pieces[owner]!.ink;
+    const ink = owner < 0 ? layout.fixed[at] : emitters.has(at) ? layout.capInk
+      : owner === focused ? layout.focusInk : layout.pieces[owner]!.ink;
     const [l, t, r, b] = directedBranchBox(layout, at);
     for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) if (rows[y]?.[x] !== ink) return false;
   }
@@ -134,16 +159,26 @@ export function projectDirectedBranches(layout: Layout, positions: readonly numb
   const board = occupy(layout, positions);
   if (!board) return null;
   const trace = new Set<number>(), served = new Set<number>(), used = new Uint8Array(board.length);
+  const mixed = layout.capInk !== undefined, paired = mixed ? new Uint8Array(board.length) : null;
   let escaped = 0;
   let fronts: Front[] = layout.sources.map(source => ({ ...source }));
+  if (mixed) for (const [i, piece] of layout.pieces.entries()) {
+    if (!piece.emitter || positions[i]! < 0) continue;
+    const at = offset(layout, offset(layout, positions[i]!, piece.emitter), orthogonal[2]);
+    if (at < 0 || board[at] || fronts.some(front => front.at === at)) continue;
+    fronts.push({ at, direction: 2 }); trace.add(at);
+  }
   for (const source of fronts) used[source.at] = 1;
+  if (paired) for (const source of fronts) paired[source.at] = paired[source.at]! | 1 << source.direction;
   const goals = new Map(layout.targets.map(({ opening, incoming }, i) => [opening * 4 + incoming, i]));
   while (fronts.length) {
     const pending: Front[] = [];
-    const advance = (at: number, direction: number) => {
-      if (at < 0 || board[at] || used[at]) return;
+    const advance = (at: number, direction: number, follow = false) => {
+      if (at < 0 || (paired && follow && used[at] ? paired[at]! & (1 << direction) : board[at] || used[at])) return;
+      const first = !used[at];
       used[at] = 1;
-      trace.add(at);
+      if (paired) paired[at] = paired[at]! | 1 << direction;
+      if (first) trace.add(at);
       pending.push({ at, direction });
     };
     for (const { at, direction } of fronts) {
@@ -152,8 +187,8 @@ export function projectDirectedBranches(layout: Layout, positions: readonly numb
       const target = goals.get(at * 4 + direction);
       if (target !== undefined) { served.add(target); continue; }
       const obstacle = board[next]!;
-      if (!obstacle) { advance(next, direction); continue; }
-      const sides = [(direction + 1) % 4, (direction + 3) % 4];
+      if (!obstacle || mixed && used[next]) { advance(next, direction, true); continue; }
+      const sides = mixed ? direction % 2 ? [0,2] : [3,1] : [(direction + 1) % 4, (direction + 3) % 4];
       const exits = sides.map(side => offset(layout, at, orthogonal[side]!));
       const elbow = obstacle > 0 && layout.pieces[obstacle - 1]!.turn;
       for (const [i, exit] of exits.entries()) {
@@ -253,7 +288,63 @@ function elbowStarts(layout: Layout, elbow: number) {
   });
 }
 
+function placeEmittingBranches(layout: Layout, interrupted: () => boolean): number[] | null {
+  const start = layout.pieces.map(piece => piece.at), area = assemblyArea(layout);
+  const base = start.map(() => -1), initial = projectDirectedBranches(layout, base);
+  if (!initial) return null;
+  type Candidate = { positions: number[]; projection: Projection; travel: number; score: number };
+  const sourcePositions = layout.pieces.map(piece => piece.emitter
+    ? layout.fixed.flatMap((_, at) => insideAssembly(layout, area, at, piece.offsets) ? [at] : []) : null);
+  const candidates = (projection: Projection, i: number) => {
+    const piece = layout.pieces[i]!;
+    if (sourcePositions[i]) return sourcePositions[i]!;
+    const offered = new Set([start[i]!]);
+    for (const ray of projection.trace) for (const [dx, dy] of piece.offsets) {
+      const at = offset(layout, ray, [-dx, -dy]);
+      if (at >= 0 && insideAssembly(layout, area, at, piece.offsets)) offered.add(at);
+    }
+    return offered;
+  };
+  let frontier: Candidate[] = [{ positions: base, projection: initial, travel: 0, score: 0 }], examined = 0;
+  for (let depth = 0; depth < start.length && frontier.length; depth++) {
+    const choices: Candidate[] = [], seen = new Set<string>();
+    for (const node of frontier) for (const [i, piece] of layout.pieces.entries()) {
+      if (node.positions[i] !== -1) continue;
+      for (const at of candidates(node.projection, i)) {
+        if (++examined % 128 === 0 && interrupted()) return null;
+        if (!insideAssembly(layout, area, at, piece.offsets)) continue;
+        const positions = node.positions.map((cell, j) => j === i ? at : cell), id = positions.join(',');
+        if (seen.has(id)) continue;
+        seen.add(id);
+        const projection = projectDirectedBranches(layout, positions);
+        if (!projection || depth === start.length - 1 && (projection.escaped || projection.served.size !== layout.targets.length)) continue;
+        const [x, y] = point(layout, at), [sx, sy] = point(layout, start[i]!);
+        const travel = node.travel + Math.abs(x - sx) + Math.abs(y - sy);
+        const score = (layout.targets.length - projection.served.size) * 30 + projection.escaped * 4 + travel;
+        choices.push({ positions, projection, travel, score });
+      }
+    }
+    choices.sort((a, b) => a.score - b.score || a.travel - b.travel);
+    if (depth === start.length - 1) {
+      return choices.find(({ positions }) => arrangeDirectedBranches(layout, start, layout.focused, positions))?.positions ?? null;
+    }
+    const groups = new Map<string, number>();
+    frontier = [];
+    for (const candidate of choices) {
+      const group = candidate.positions.map(cell => cell === -1 ? '0' : '1').join('') + '/'
+        + [...candidate.projection.served].sort((a,b) => a - b).join(',');
+      const count = groups.get(group) ?? 0;
+      if (count >= 64) continue;
+      groups.set(group, count + 1);
+      frontier.push(candidate);
+      if (frontier.length === 640) break;
+    }
+  }
+  return null;
+}
+
 export function placeDirectedBranches(layout: Layout, interrupted: () => boolean = () => false) {
+  if (layout.capInk !== undefined) return placeEmittingBranches(layout, interrupted);
   const elbow = layout.pieces.findIndex(piece => piece.turn), start = layout.pieces.map(piece => piece.at);
   const area = assemblyArea(layout);
   const cost = (at: number, placed: number) => {

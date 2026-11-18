@@ -30,8 +30,9 @@ type LinearProposal = NativeProposal & { local: State; current: BranchState; exp
 type StackedState = { epoch: number; layout: StackedBranchLayout; positions: NativePoint[]; placements: NativePoint[];
   focused: number; controls: Record<string, NativePoint>; evidence: string[]; stopped: boolean };
 type StackedProposal = NativeProposal & { stackedPlan: StackedState; needId: string; launch: boolean };
+type DirectedCalibration = Parameters<typeof measureDirectedBranchLayout>[1];
 type DirectedState = { epoch: number; layout: DirectedBranchLayout; positions: number[]; placements: number[];
-  focused: number; controls: Record<string, NativePoint>; evidence: string[]; stopped: boolean };
+  focused: number; controls: Record<string, NativePoint>; evidence: string[]; stopped: boolean; calibration?: DirectedCalibration };
 type DirectedMove = { positions: number[]; focused: number };
 type DirectedProposal = NativeProposal & { directedPlan: DirectedState; moves: DirectedMove[]; needId: string; launch: boolean };
 type Proposal = LinearProposal | StackedProposal | DirectedProposal;
@@ -60,15 +61,24 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
     const ref = observation.observation_ref, epoch = observation.level_epoch;
     let local = directed?.epoch === epoch ? directed : null;
     if (!local) {
-      const previous = stacked?.epoch === epoch - 1 ? stacked : null;
+      const directedPrevious = directed?.epoch === epoch - 1 ? directed : null;
+      const stackedPrevious = stacked?.epoch === epoch - 1 ? stacked : null;
+      const previous = directedPrevious ?? stackedPrevious;
       if (!previous || previous.stopped || !Object.keys(previous.controls).every(key => keys.includes(key))) return null;
-      const layout = measureDirectedBranchLayout(rows, previous.layout);
+      const compatible = directedPrevious && stacked && directedPrevious.layout.unit === stacked.layout.unit
+        && directedPrevious.layout.background === stacked.layout.background && directedPrevious.layout.focusInk === stacked.layout.focusedInk
+        ? stacked.layout : null;
+      const inherited = directedPrevious?.calibration ?? stackedPrevious?.layout ?? compatible;
+      if (!inherited) return null;
+      const { unit, capInk, background, focusedInk, restingInk } = inherited;
+      const calibration = { unit, capInk, background, focusedInk, restingInk };
+      const layout = measureDirectedBranchLayout(rows, calibration);
       if (!layout) return null;
       const placements = placeDirectedBranches(layout, () => !!execution?.signal?.aborted
         || (execution?.deadlineMs !== undefined && (execution.now ?? (() => performance.now()))() >= execution.deadlineMs));
       if (!placements) return null;
       local = { epoch, layout, placements, positions: layout.pieces.map(piece => piece.at), focused: layout.focused,
-        controls: previous.controls, evidence: previous.evidence, stopped: false };
+        controls: previous.controls, evidence: previous.evidence, stopped: false, calibration };
     }
     const { layout, positions, placements, controls, focused } = local;
     if (local.stopped || !verifyDirectedBranches(rows, layout, positions, focused)) return null;
@@ -83,8 +93,9 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
     const region = current === undefined ? null : directedBranchBox(layout, positions[current]!, layout.pieces[current]!.offsets);
     const subject = current === undefined ? null : layout.pieces[current]!;
     const reason = launching ? 'Check the predicted straight and lateral arrivals by releasing the shared flow'
-      : moving ? subject?.turn ? 'Move the corner to align its open side with the sideways receiver'
-        : 'Position a straight contributor so its full outline guides the remaining branches'
+      : moving ? subject?.emitter ? 'Position the marked bar to start a second flow and guide the arriving front'
+        : subject?.turn ? 'Move the corner to align its open side with the sideways receiver'
+          : 'Position a straight contributor so its full outline guides the remaining branches'
         : 'Select the next contributor in the projected layout';
     const evidence: [string, ...string[]] = [ref, ...new Set(local.evidence.filter(value => value !== ref))];
     let pointBinding = null;
@@ -205,9 +216,14 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (directed?.epoch === observation.level_epoch) return proposeDirected(observation, rows, keys, remaining, execution);
       if (stacked?.epoch === observation.level_epoch) return proposeStacked(observation, rows, keys, execution);
+      const directedTransfer = !learns && directed?.epoch === observation.level_epoch - 1;
+      if (directedTransfer) {
+        const transferred = await proposeDirected(observation, rows, keys, remaining, execution);
+        if (transferred) return transferred;
+      }
       const model = prior?.model ?? branchLayout(observation, rows, inputs);
       if (!model) return learns ? null : await proposeStacked(observation, rows, keys, execution)
-        ?? proposeDirected(observation, rows, keys, remaining, execution);
+        ?? (directedTransfer ? null : proposeDirected(observation, rows, keys, remaining, execution));
       if (model.bars.length > 5 || prior?.stopped || (prior?.tried.length ?? 0) >= 48) return null;
       const recalled = confirmed?.epoch === observation.level_epoch - 1 && confirmed.axis === model.axis
         && confirmed.unit === model.unit && confirmed.sources < model.sources.length
@@ -347,8 +363,10 @@ export function createSicVerifyBranchAlignment(family = verifyBranchAlignmentId)
     },
     async record(before, after, issued, _first: NativeRows, second, proposal, index, _frames, execution) {
       if (isDirected(proposal)) {
-        if (after.levels_completed > before.levels_completed) return { events: [],
-          reviewEvidence: 'The directed branch projection was followed by official progress.' };
+        if (after.levels_completed > before.levels_completed) {
+          directed = { ...proposal.directedPlan, evidence: [...proposal.directedPlan.evidence.slice(-5), after.observation_ref] };
+          return { events: [], reviewEvidence: 'The directed branch projection was followed by official progress.' };
+        }
         const local = index > 0 && directed?.epoch === before.level_epoch ? directed : proposal.directedPlan;
         const move = proposal.moves[index]!;
         const matched = !proposal.launch && before.level_epoch === after.level_epoch
