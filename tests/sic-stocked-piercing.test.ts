@@ -2,6 +2,23 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureStockedPiercing, planStockedPiercing, predictStockedPiercing, stockedPiercingMoves,
   type StockedPiercingScene } from '../src/sic/stocked-piercing.ts';
+import { predictCrossedPiercing, type CrossedPiercingLayout } from '../src/sic/crossed-piercing.ts';
+
+test('a cube at a crossing moves along the other shaft and stays in place across it', () => {
+  const layout: CrossedPiercingLayout = {
+    origin: [0,0], stride: 6, width: 5, height: 5, floor: 0, materials: [1], obstacles: [19],
+    shafts: [{ axis: 0, targets: [0], select: [0,0], links: [false,true,true,true] },
+      { axis: 1, targets: [0], select: [0,0], links: [false,true,true,true] }],
+  };
+  const pose = { heads: [{ line: 2, reach: 3 }, { line: 3, reach: 2 }], cubes: [{ at: 13, type: 0 }] };
+  assert.deepEqual(predictCrossedPiercing(layout, pose, 0, [1,0]), {
+    ...pose, heads: [{ line: 2, reach: 4 }, pose.heads[1]],
+  });
+  assert.deepEqual(predictCrossedPiercing(layout, pose, 0, [0,1]), {
+    heads: [{ line: 3, reach: 3 }, pose.heads[1]], cubes: [{ at: 18, type: 0 }],
+  });
+  assert.equal(predictCrossedPiercing(layout, { ...pose, heads: [{ line: 2, reach: 4 }, pose.heads[1]!] }, 0, [0,1]), null);
+});
 
 const scene: StockedPiercingScene = {
   layout: { left: 0, top: 0, stride: 6, width: 5, height: 3, tracks: [true, true],

@@ -73,7 +73,7 @@ export function measureStockedPiercing(rows: NativeRows): Scene | null {
     reference: observed.layout }, placement: { row, tip, stock } };
 }
 
-export function stockedPiercingMoves(layout: Layout, effects: readonly Effect[]): Move[] {
+export function stockedPiercingMoves(layout: Pick<Layout, 'stride'>, effects: readonly Effect[]): Move[] {
   return effects.flatMap(effect => {
     const dx = effect.extent_delta / layout.stride, dy = effect.root_translation[0] / layout.stride;
     return Math.abs(dx) + Math.abs(dy) === 1 && Number.isInteger(dx) && Number.isInteger(dy) && effect.root_translation[1] === 0
