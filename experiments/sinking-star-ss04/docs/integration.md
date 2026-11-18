@@ -1,6 +1,6 @@
 # Raccordement de SS04 au SRA Playground
 
-Cette version livre le laboratoire autonome et ses huit niveaux. Elle ne modifie pas le catalogue, le routeur de jeux, la galerie ou le site publié. Le code source durable se trouve sous `experiments/sinking-star-ss04/`.
+SS04 — L’Axe violet est le quatrième jeu de Custom 4. Le backend de production importe `WizardPuzzleSession` et les huit cartes v0.1.0 depuis le laboratoire. Le tutoriel du Playground partage l’analyse des pixels de la démo et l’interface lit les références des salles dans `src/level-info.ts`.
 
 ## Backend natif
 
@@ -45,3 +45,15 @@ L’agent doit recevoir uniquement les observations publiques : pixels, palette,
 6. Tests → commit → push GitHub → intégration sur `main` → publication du Site existant en respectant son accès actuel → vérification du SHA source publié. Ne pas créer un deuxième site.
 
 Le compte rendu doit distinguer code poussé, code intégré et version effectivement publiée, avec branche, commit, merge, version Site et SHA source disponibles. Ne pas déclarer une publication si seul le laboratoire est présent sur `main`.
+
+## Résultats du raccordement
+
+- Les 42 tests du laboratoire, sa validation des huit niveaux et les 11 contrôles Happy DOM passent. La validation rejoue 398 directions avec 55 échanges, dont 5 réfléchis et 8 avec un monstre, 5 poussées de presse et 4 appuis créés.
+- Les 17 tests du routeur et du catalogue passent, avec comparaison de chaque retour public au moteur du laboratoire. Les parcours en ordre et hors ordre, l’annulation d’une transition, la défaite au niveau 4 et les échecs de chargement sont exercés.
+- La campagne SS04 jouée dans Chromium termine au niveau 1 résolu en dernier et affiche `VICTORY`. Le navigateur valide aussi les six leçons du tutoriel, l’échange réfléchi, la cascade à sept images, les quatre interruptions, la défaite affichée après l’animation et les boutons de récupération. Une commande en mode agent a atteint le backend natif sans requête Python.
+- Les références du niveau 5 et de l’adaptation du niveau 6 sont vérifiées dans le Playground. Les 32 tuiles Custom 4 concordent avec les pixels des quatre moteurs et la galerie ouvre SS04 au niveau sélectionné. Le build génère 104 jeux et 668 aperçus.
+- SS01, SS02 et SS03 terminent leurs campagnes dans Chromium. CASC et LS20 se chargent et répondent aux commandes. Après intégration des derniers changements de `main`, le build, le contrôle navigateur et les 20 tests ciblés passent.
+
+## Performance
+
+Le runner des traces publiques compare `664dcb9e` à `c616f967` dans l’ordre A1/B1/B2/A2, avec la même affinité aux processeurs logiques 12 et 14. Les 24 sessions mesurées et leurs 300 commandes concordent. Les médianes globales sont à +1,18 % sur STCK et −4,17 % sur SMLP. Les deux résultats respectent le seuil de +10 %.
