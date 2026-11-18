@@ -229,6 +229,7 @@ function measureTransferPlan(scene: RecordingScene, rows: NativeRows, observatio
   if (new Set(linkedPositions).size !== linkedPositions.length) return null;
   const start = peers[0]!, allowPlayer = (point: NativePoint) => same(point, body.start);
   const region = walkRegion(rows, body, body.start, vectors, allowPlayer);
+  if (region.has(key(goal))) return null;
   const fromGoal = walkRegion(rows, body, goal, vectors, allowPlayer);
   const exits = links.filter(link => link.frames.filter(frame => fromGoal.has(key(frame))).length === 1
     && link.frames.some(frame => region.has(key(frame))));
@@ -269,10 +270,10 @@ export function beginRecording(scene: RecordingScene, epoch: number, vectors: Re
   const preparations = preparationCandidates(scene, rows);
   const transferPlan = observation && scene.transfers
     ? measureTransferPlan(scene, rows, observation, preparations, valid.map(([, delta]) => delta)) : null;
-  if (scene.transfers && !transferPlan) return null;
+  const recordingScene = scene.transfers && !transferPlan ? { ...scene, transfers: undefined } : scene;
   const lane = observation && !scene.transfer && preparations.length > 1
     ? measureLane(scene, rows, observation, preparations, valid.map(([, delta]) => delta)) : null;
-  return { scene, epoch, phase, vectors: Object.fromEntries(valid), paths: [], path: [scene.body.start],
+  return { scene: recordingScene, epoch, phase, vectors: Object.fromEntries(valid), paths: [], path: [scene.body.start],
     node: null, route: [], pending: [], evidence, stopped: false,
     ...(transferPlan ?? lane ?? (preparations.length > 1 ? { preparations }
       : preparations.length === 1 && !scene.transfer ? { preparation: preparations[0]! } : {})) };
