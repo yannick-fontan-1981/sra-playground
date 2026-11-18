@@ -4,6 +4,7 @@ import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, Nativ
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
+import { projectionWithinLimit, radialSlotPermutations } from './slot-field-transforms.ts';
 
 export const slotPermutationId = 'sic_slot_permutation';
 export const verifySlotPermutationId = 'sic_verify_slot_permutation';
@@ -16,9 +17,9 @@ export const slotPermutationStrategies = {
 
 type Model = { key: NativePoint; permutations: number[][]; evidence: string; tried: string[] };
 type State = { layout: string; models: Record<string, Model>; count: number };
-type Board = { positions: NativePoint[]; size: number };
+type Board = { positions: NativePoint[]; size: number; targetSlots: number[] };
 type Track = { across: 0 | 1; lanes: number[]; indices: number[]; alternating: number[] };
-type Geometry = { layout: string; tracks: Track[]; rings?: number[][] };
+type Geometry = { layout: string; tracks: Track[]; rings?: number[][]; radial?: number[][] };
 type SlotLeg = { control: NativePoint; values: number[]; prediction: number[] | null };
 type Proposal = NativeProposal & { local: State; board: Board; route: SlotLeg[]; needId: string };
 const key = (value: unknown) => JSON.stringify(value);
@@ -27,6 +28,7 @@ const layoutKey = (epoch: number, scene: OrbitField) =>
   key([epoch, scene.positions, scene.size, [...scene.targets], sortedControls(scene).map(control => control.key)]);
 const predict = (permutation: readonly number[], values: readonly number[]) => permutation.map(i => values[i]!);
 const maxProjectedStates = 32 ** 3;
+const maxMeasuredSlots = 128;
 
 function visibleControlInputs(observation: NativeObservation): NativeCommand[] {
   return observation.entities.flatMap(entity => {
@@ -99,6 +101,17 @@ function slotContours(positions: readonly NativePoint[], tracks: readonly Track[
   return [...orbitCycles(positions), ...tracks.flatMap(track => [track.indices, track.alternating]), ...(chain.length ? [chain] : [])];
 }
 
+function fitSlotPermutations(before: readonly number[], after: readonly number[], geometry: Geometry,
+  positions: readonly NativePoint[], targetSlots: readonly number[]) {
+  if (before.length !== after.length || before.every((value, i) => value === after[i])) return [];
+  geometry.rings ??= slotContours(positions, geometry.tracks);
+  const contour = fitOrbit(before, after, geometry.rings);
+  if (contour.length && !geometry.radial) return contour;
+  geometry.radial ??= radialSlotPermutations(positions, targetSlots);
+  const radial = geometry.radial.filter(permutation => permutation.every((source, i) => before[source] === after[i]));
+  return [...new Map([...contour, ...radial].map(permutation => [key(permutation), permutation])).values()];
+}
+
 function prioritizeTrials(tracks: readonly Track[], size: number, controls: ReturnType<typeof sortedControls>, models: State['models']) {
   const unmeasured = controls.filter(control => !models[key(control.key)]);
   if (!tracks.length) return unmeasured[0];
@@ -125,11 +138,13 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const scene = measureOrbitField(observation, visibleControlInputs(observation));
-      if (!scene || scene.positions.length > 64 || scene.targets.size > 3) return null;
-      if (scene.positions.length ** scene.targets.size > maxProjectedStates) return null;
+      if (!scene || scene.positions.length > maxMeasuredSlots || scene.targets.size > 3) return null;
       const { positions, size, targets } = scene, controls = sortedControls(scene);
+      const targetSlots = [...targets.keys()];
       const layout = layoutKey(observation.level_epoch, scene);
       if (geometry?.layout !== layout) geometry = { layout, tracks: distributedTracks(positions) };
+      const extended = positions.length > 64 || positions.length ** targets.size > maxProjectedStates;
+      if (extended && !(geometry.radial ??= radialSlotPermutations(positions, targetSlots)).length) return null;
       const { tracks } = geometry;
       if (controls.length > (tracks.length ? 32 : 8)) return null;
       let local: State = state?.layout === layout ? state : { layout, models: {}, count: 0 };
@@ -144,8 +159,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
             || !prior.controls.has(key(point)) || !scene.controls.has(key(point))) return null;
           const before = orbitValues(first, positions, size);
           if (key(before) === key(values)) return null;
-          geometry!.rings ??= slotContours(positions, tracks);
-          const permutations = fitOrbit(before, values, geometry!.rings);
+          const permutations = fitSlotPermutations(before, values, geometry!, positions, targetSlots);
           return permutations.length === 1 ? { point, before, permutations } : null;
         });
         if (!evidence || evidence.afterRef !== observation.observation_ref || evidence.levelEpoch !== observation.level_epoch) return null;
@@ -154,7 +168,8 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
       }
       const operators = new Map(Object.entries(local.models).flatMap(([ref, model]) =>
         model.permutations.length === 1 ? [[ref, { key: model.key, permutation: model.permutations[0]! }] as const] : []));
-      const path = orbitRoute(values, targets, operators, Math.min(remaining, 32 - local.count));
+      const path = !extended || projectionWithinLimit(targets, operators.values(), maxProjectedStates)
+        ? orbitRoute(values, targets, operators, Math.min(remaining, 32 - local.count)) : null;
       const next = path?.length ? scene.controls.get(key(path[0])) : null;
       if (learns && !next) return null;
       const unmeasured = prioritizeTrials(tracks, size, controls, local.models);
@@ -202,14 +217,14 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
       const distributed = tracks.find(track => track.indices.length === moving.length && track.indices.every(i => moving.includes(i)));
       const slot = (i: number) => { const [x, y] = positions[i]!; return [x, y, x + size - 1, y + size - 1]; };
       const targetColors = new Set(targets.values());
-      const motion = distributed && operator ? moving.flatMap(to => {
+      const motion = (distributed || geometry.radial?.length) && operator ? moving.flatMap(to => {
         const from = operator.permutation[to]!;
         return values[from] !== values[to] && targetColors.has(values[from]!) ? [{ source: slot(from), destination: slot(to) }] : [];
       }).slice(0, 3) : [];
       const situation = distributed && next ? `This control rearranges ${moving.length} slots across ${distributed.lanes.length} lines. ${path!.length} moves remain.`
         : strategy === 'P07' ? `The measured rearrangements give a route in ${path!.length} moves.` : label;
       return { status: 'proposed', kind: family, actions, local, route,
-        board: { positions, size }, needId: need.id, steps,
+        board: { positions, size, targetSlots }, needId: need.id, steps,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -217,7 +232,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
         sicSituationCard: { strategy, need: 'Bring the marked slots to their displayed target colors', mode,
           situation,
           agenda: [], evidence, triggerCard: decision.receipt.workflow, control: control.box, distance: strategy === 'P07' ? path!.length : null,
-          targets: [...targets.keys()].map(slot), ...(motion.length ? { motion } : {}) },
+          targets: targetSlots.map(slot), ...(motion.length ? { motion } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
         sicLocalDecision: { strategy, objective: { id, label, parent }, need },
@@ -245,7 +260,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
     record(before, after, _command, _first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = (index > 0 && state?.layout === proposal.local.layout ? state : null) ?? proposal.local;
-      const { positions, size } = proposal.board;
+      const { positions, size, targetSlots } = proposal.board;
       const { control, values, prediction } = proposal.route[index]!;
       const actual = orbitValues(second, positions, size);
       const prior = local.models[key(control)];
@@ -254,8 +269,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
         permutations = prior?.permutations ?? [];
       } else if (actual.length) {
         if (geometry?.layout !== local.layout) geometry = { layout: local.layout, tracks: distributedTracks(positions) };
-        geometry.rings ??= slotContours(positions, geometry.tracks);
-        const possible = fitOrbit(values, actual, geometry.rings);
+        const possible = fitSlotPermutations(values, actual, geometry, positions, targetSlots);
         permutations = prior ? possible.filter(option => prior.permutations.some(previous => key(previous) === key(option))) : possible;
       }
       const model = { key: control, permutations, evidence: after.observation_ref, tried: [...(prior?.tried ?? []), key(values)] };
