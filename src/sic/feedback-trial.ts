@@ -15,7 +15,7 @@ export const feedbackTrialStrategies = {
 } as const;
 const configuration: FeedbackConfiguration = { stages: [], allocation_orders: ['LEFT_TO_RIGHT', 'RIGHT_TO_LEFT'],
   measures: ['WORST_NONWINNING_RESIDUAL', 'SUM_SQUARED_RESIDUALS', 'NONWINNING_BRANCHES'],
-  maximum_candidates: 4096, maximum_trials: 256, maximum_evaluations: 65536, maximum_bundle: 1,
+  maximum_candidates: 8192, maximum_trials: 256, maximum_evaluations: 65536, maximum_bundle: 1,
   group_equivalent_trials: true, prune_dominated_trials: true, question: 'Separate the possible ordered answers' };
 type TrialPlan = { values: number[]; candidates: number; revealed: (number | null)[] };
 type State = { layout: FeedbackLayout; active: FeedbackSlotRow | null; repeatable: boolean | null; submission: string | null;

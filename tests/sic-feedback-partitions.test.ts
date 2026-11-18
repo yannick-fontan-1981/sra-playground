@@ -19,3 +19,20 @@ test('a bounded comparison of equivalent outcomes selects the full minimax trial
   assert.deepEqual(optimized.minimax, exhaustive.minimax);
   assert.equal(optimized.partition_count, exhaustive.partition_count);
 });
+
+test('a sixth value preserves the exact minimax trial within the same evaluation budget', () => {
+  const configuration: FeedbackConfiguration = { stages: [], allocation_orders: ['LEFT_TO_RIGHT', 'RIGHT_TO_LEFT'],
+    measures: ['WORST_NONWINNING_RESIDUAL', 'SUM_SQUARED_RESIDUALS', 'NONWINNING_BRANCHES'], maximum_candidates: 8192,
+    maximum_trials: 256, maximum_evaluations: 65536, maximum_bundle: 1, group_equivalent_trials: true, question: 'Compare trials' };
+  const assess = (settings: FeedbackConfiguration) => chooseFeedbackTrial([0, 1, 2, 3, 4, 5], 5, [], [], Array(5).fill(null),
+    true, {} as NativeObservation, 30, settings);
+  const exhaustive = assess({ ...configuration, maximum_evaluations: 500000 });
+  const optimized = assess({ ...configuration, prune_dominated_trials: true });
+  assert.equal(exhaustive.status, 'proposed');
+  assert.equal(optimized.status, 'proposed');
+  assert.equal(optimized.candidate_count, 7776);
+  assert.equal(optimized.evaluated_trial_count, 52);
+  assert.deepEqual(optimized.trial, exhaustive.trial);
+  assert.deepEqual(optimized.minimax, exhaustive.minimax);
+  assert.equal(optimized.partition_count, exhaustive.partition_count);
+});
