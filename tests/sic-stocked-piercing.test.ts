@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureStockedPiercing, planStockedPiercing, predictStockedPiercing, stockedPiercingMoves,
   type StockedPiercingScene } from '../src/sic/stocked-piercing.ts';
-import { predictCrossedPiercing, type CrossedPiercingLayout } from '../src/sic/crossed-piercing.ts';
+import { observeCrossedStockBoundary, predictCrossedPiercing, type CrossedPiercingLayout } from '../src/sic/crossed-piercing.ts';
 
 test('a cube at a crossing moves along the other shaft and stays in place across it', () => {
   const layout: CrossedPiercingLayout = {
@@ -18,6 +18,23 @@ test('a cube at a crossing moves along the other shaft and stays in place across
     heads: [{ line: 3, reach: 3 }, pose.heads[1]], cubes: [{ at: 18, type: 0 }],
   });
   assert.equal(predictCrossedPiercing(layout, { ...pose, heads: [{ line: 2, reach: 4 }, pose.heads[1]!] }, 0, [0,1]), null);
+});
+
+test('a retraction can disclose that cubes cannot enter the guide cells', () => {
+  const layout: CrossedPiercingLayout = {
+    origin: [0, 0], stride: 4, width: 5, height: 5, floor: 0, materials: [1], obstacles: [],
+    shafts: [{ axis: 0, targets: [0], select: [0, 0], links: [false, true, true, true] },
+      { axis: 1, targets: [0], select: [4, 0], links: [false, true, true, true] }],
+  };
+  const starting = { heads: [{ line: 4, reach: 1 }, { line: 3, reach: 2 }], cubes: [{ at: 8, type: 0 }, { at: 13, type: 0 }] };
+  const expected = predictCrossedPiercing(layout, starting, 1, [0, -1]);
+  assert.ok(expected);
+  assert.equal(expected.cubes[0]?.at, 3);
+  const actual = { ...starting, heads: [starting.heads[0]!, { line: 3, reach: 1 }] };
+  const constrained = observeCrossedStockBoundary(layout, starting, expected, actual, 1);
+  assert.ok(constrained);
+  assert.deepEqual(predictCrossedPiercing(constrained, starting, 1, [0, -1]), actual);
+  assert.equal(observeCrossedStockBoundary(layout, starting, expected, starting, 1), null);
 });
 
 const scene: StockedPiercingScene = {

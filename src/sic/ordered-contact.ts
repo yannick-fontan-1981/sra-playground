@@ -15,7 +15,7 @@ import { measureReceivingGuides, type ReceivingGuideLayout } from './receiving-g
 import { maximumCommittedActions } from './plan-step.ts';
 import { measureStockedPiercing, planStockedPiercing, stockedPiercingGeometry, stockedPiercingMoves, stockedPlacementKey,
   type RefusedPiercingStep } from './stocked-piercing.ts';
-import { crossedPiercingKey, planCrossedPiercing, predictCrossedPiercing, readCrossedPiercing,
+import { crossedPiercingKey, observeCrossedStockBoundary, planCrossedPiercing, predictCrossedPiercing, readCrossedPiercing,
   type CrossedPiercingLayout, type CrossedPiercingRefusal, type CrossedPiercingStep } from './crossed-piercing.ts';
 
 export const orderedContactId = 'sic_ordered_contact';
@@ -373,14 +373,17 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
           line !== previousPose.heads[i]!.line || reach !== previousPose.heads[i]!.reach ? [i] : []);
         const chosen = active === null ? changed.length === 1 ? changed[0]! : null
           : leg?.select && focusChanged ? leg.active : active;
+        const boundary = matched === false && active !== null && leg && !leg.select && equal(next.tints, scene.tints)
+          ? observeCrossedStockBoundary(scene.layout, previousPose, leg.pose, next.pose, active) : null;
         const refusals = previous.crossed?.refusals ?? [];
         const refs = [...(previous.crossed?.refs ?? []).slice(-4), before.observation_ref, after.observation_ref];
         memory = { ...previous, tried: active === null ? [...previous.tried, command.action_ref] : previous.tried,
-          crossed: { layout: scene.layout, active: chosen, pending: matched ? path.slice(index + 1) : [], refs,
+          crossed: { layout: boundary ?? scene.layout, active: chosen, pending: matched ? path.slice(index + 1) : [], refs,
             pose: crossedPiercingKey(next.pose),
-            refusals: active !== null && matched === false ? [...refusals.slice(-23),
+            refusals: active !== null && matched === false && !boundary ? [...refusals.slice(-23),
               { placement: crossedPiercingKey(previousPose), active, action: command.action_ref }] : refusals } };
         return { events: [], ...(active === null && chosen !== null ? { reviewEvidence: 'Only one of the supports responded to the direction.' }
+          : boundary ? { reviewEvidence: 'The support withdrew but the cubes stayed inside the rails. The next plan respects that limit.' }
           : matched && leg?.select ? { reviewEvidence: 'Both support markings changed while the cubes stayed in place.' } : {}) };
       }
       memory = structuredClone(current(before.level_epoch));

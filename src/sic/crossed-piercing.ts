@@ -7,6 +7,7 @@ type Cube = { at: number; type: number };
 type Shaft = { axis: Axis; targets: number[]; select: NativePoint; links: boolean[] };
 export type CrossedPiercingLayout = {
   origin: NativePoint; stride: number; width: number; height: number; floor: number; materials: number[]; obstacles: number[]; shafts: Shaft[];
+  innerStockOnly?: true;
 };
 export type CrossedPiercingPose = { heads: Head[]; cubes: Cube[] };
 type Direction = { action: string; vector: NativePoint };
@@ -95,7 +96,8 @@ export function readCrossedPiercing(rows: NativeRows, stride: number, prior?: Cr
   if (!prior) for (const shaft of shafts) shaft.targets = shaft.targets.map(ink => materials.indexOf(ink));
   if (!cubes.length || cubes.length > 12 || shafts.some(({ targets }) =>
     targets.some(type => targets.filter(item => item === type).length > cubes.filter(cube => cube.type === type).length))) return null;
-  const layout = { origin, stride, width, height, floor, materials, obstacles, shafts };
+  const layout = { origin, stride, width, height, floor, materials, obstacles, shafts,
+    ...(prior?.innerStockOnly ? { innerStockOnly: prior.innerStockOnly } : {}) };
   if (prior && (!same(obstacles, prior.obstacles) || shafts.some((shaft, i) => {
     const current = prior.shafts[i]!;
     return shaft.axis !== current.axis || !same(shaft.targets, current.targets)
@@ -126,10 +128,11 @@ function stepCrossed(layout: CrossedPiercingLayout, obstacles: ReadonlySet<numbe
     return otherAxis === 0 ? y === otherHead.line && x <= otherHead.reach : x === otherHead.line && y <= otherHead.reach;
   };
   const offset = dx + dy * width;
+  const stockEdge = layout.innerStockOnly ? 1 : 0;
   function push(position: number): boolean {
     if (moved.has(position) || !cubes.has(position)) return true;
     const x = position % width + dx, y = Math.floor(position / width) + dy, next = position + offset;
-    if (x < 0 || x >= width || y < 0 || y >= height || obstacles.has(next)
+    if (x < stockEdge || x >= width || y < stockEdge || y >= height || obstacles.has(next)
       || crossesOther(position) || crossesOther(next) || !push(next)) return false;
     moved.add(position); return true;
   }
@@ -146,6 +149,17 @@ function stepCrossed(layout: CrossedPiercingLayout, obstacles: ReadonlySet<numbe
 
 export function predictCrossedPiercing(layout: CrossedPiercingLayout, pose: CrossedPiercingPose, active: number, vector: NativePoint) {
   return stepCrossed(layout, new Set(layout.obstacles), pose, active, vector);
+}
+
+export function observeCrossedStockBoundary(layout: CrossedPiercingLayout, before: CrossedPiercingPose, expected: CrossedPiercingPose,
+  actual: CrossedPiercingPose, active: number): CrossedPiercingLayout | null {
+  if (layout.innerStockOnly || !expected.cubes.some(({ at }) => at < layout.width || at % layout.width === 0)) return null;
+  const from = before.heads[active]!, plan = expected.heads[active]!;
+  if (plan.line !== from.line || plan.reach !== from.reach - 1) return null;
+  const constrained: CrossedPiercingLayout = { ...layout, innerStockOnly: true };
+  const vector: NativePoint = layout.shafts[active]!.axis === 0 ? [-1, 0] : [0, -1];
+  const forecast = predictCrossedPiercing(constrained, before, active, vector);
+  return forecast && crossedPiercingKey(forecast) === crossedPiercingKey(actual) ? constrained : null;
 }
 
 export function planCrossedPiercing(layout: CrossedPiercingLayout, pose: CrossedPiercingPose, active: number,
