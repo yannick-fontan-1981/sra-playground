@@ -18,9 +18,9 @@ export function createGameDispatcher(loadLegacy: () => Promise<GameBackend>, loa
     async dispatch(request) {
       if (!request || typeof request !== 'object') throw new Error('Invalid game request.');
       if (request.type === 'load') {
+        active = null; // A failed load must not send later actions to the previous game.
         if (typeof request.code !== 'string' || !/^[a-z0-9]{4}$/i.test(request.code.trim())) throw new Error('Invalid game code.');
         const code = request.code.trim().toUpperCase();
-        active = null; // A failed load must not send later actions to the previous game.
         let backend: GameBackend;
         switch (code) {
           case 'SS01':
@@ -34,6 +34,11 @@ export function createGameDispatcher(loadLegacy: () => Promise<GameBackend>, loa
           case 'SS03': {
             const { createSs03Backend } = await import('../games/sinking-star-ss03.ts');
             backend = createSs03Backend();
+            break;
+          }
+          case 'SS04': {
+            const { createSs04Backend } = await import('../games/sinking-star-ss04.ts');
+            backend = createSs04Backend();
             break;
           }
           default:

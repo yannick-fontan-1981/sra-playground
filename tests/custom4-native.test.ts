@@ -12,13 +12,16 @@ import { createSs03Backend } from '../src/games/sinking-star-ss03.ts';
 import { compileLevel, initialState, PullPuzzleSession, stepDetailed } from '../experiments/sinking-star-ss03/src/core.ts';
 import { SS03_LEVELS } from '../experiments/sinking-star-ss03/src/levels.ts';
 import ss03Witnesses from '../experiments/sinking-star-ss03/tests/witnesses.json' with { type: 'json' };
+import { WizardPuzzleSession, compileLevel as compileWizardLevel, initialState as initialWizardState, planSwap, stepDetailed as stepWizard } from '../experiments/sinking-star-ss04/src/core.ts';
+import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
+import ss04Witnesses from '../experiments/sinking-star-ss04/tests/witnesses.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01, SS02 and SS03 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS04 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 103);
+  assert.equal(GAME_CATALOG.length, 104);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -29,6 +32,10 @@ test('Custom 4 lists SS01, SS02 and SS03 and preserves all four legacy collectio
   assert.equal(getGameByCode('SS03')?.id, 'ss03-c4000001');
   assert.equal(getGameByCode('SS03')?.name, 'La ruse verte');
   assert.match(getGameByCode('SS03')!.sourceUrl, /experiments\/sinking-star-ss03\/src\/levels\.ts$/);
+  assert.equal(getGameByCode(' ss04 ')?.levels, 8);
+  assert.equal(getGameByCode('SS04')?.id, 'ss04-c4000001');
+  assert.equal(getGameByCode('SS04')?.name, 'L’Axe violet');
+  assert.match(getGameByCode('SS04')!.sourceUrl, /experiments\/sinking-star-ss04\/src\/levels\.ts$/);
 });
 test('SS01 loads natively without invoking the Python loader', async () => {
   let legacyLoads = 0;
@@ -156,10 +163,11 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS01' })).gameCode, 'SS01');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS02' })).gameCode, 'SS02');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS03' })).gameCode, 'SS03');
+  assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS04' })).gameCode, 'SS04');
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS03', 'SS02', 'SS01', 'LS20', 'SS03']) {
+  for (const code of ['CASC', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS04']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -249,4 +257,101 @@ test('SS03 preserves GAME_OVER, blocks directional changes and recovers via Undo
   assert.deepEqual(await backend.dispatch({ type: 'undo' }), initial);
   assert.equal((await backend.dispatch({ type: 'action', actionId: 4 })).state, 'GAME_OVER');
   assert.deepEqual(await backend.dispatch({ type: 'reset' }), initial);
+});
+
+test('SS04 matches all eight witnesses through the native dispatcher with public observations only', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new WizardPuzzleSession(SS04_LEVELS);
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss04 ' });
+  assert.deepEqual(current, reference.observe());
+  const publicKeys = ['gameCode','frame','frames','state','availableActionIds','canUndo','canSelectLevel','level','levelCount','levelsCompleted','defaultFps','palette'].sort();
+  assert.deepEqual(Object.keys(current).sort(), publicKeys);
+  const directions = ['N', 'S', 'W', 'E'] as const;
+  let actions = 0, swaps = 0, reflected = 0, monsters = 0, pistons = 0, platforms = 0;
+  for (const [index, witness] of ss04Witnesses.entries()) {
+    const level = SS04_LEVELS[index]!;
+    assert.equal(witness.id, level.id);
+    assert.equal(current.level, index + 1);
+    const world = compileWizardLevel(level);
+    let state = initialWizardState(world);
+    for (const [turn, actionId] of witness.actions.entries()) {
+      const plan = planSwap(world, state, directions[actionId - 1]!);
+      const detail = stepWizard(world, state, actionId);
+      assert.equal(Boolean(detail.state.dead || detail.state.failed), false);
+      const exchange = detail.phases.some(phase => phase.kind === 'swap');
+      if (exchange) {
+        swaps++;
+        if (plan && plan.reflections > 0) reflected++;
+        if (plan?.target === 'monster') monsters++;
+      }
+      pistons += detail.phases.filter(phase => phase.kind === 'piston').length;
+      platforms += detail.state.supports.length - state.supports.length;
+      state = detail.state;
+      actions++;
+
+      current = await dispatcher.dispatch({ type: 'action', actionId });
+      assert.deepEqual(current, reference.action(actionId));
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      assert.deepEqual(current.availableActionIds, [1, 2, 3, 4]);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frame.length, 64);
+      assert.ok(current.frame.every(row => row.length === 64 && !row.includes(1)));
+      if (index === 7 && turn === 10) assert.deepEqual(current.frameDurationsMs, [40, 60, 80, 40, 60, 80, 0]);
+    }
+    assert.equal(current.levelsCompleted, index + 1);
+  }
+  assert.deepEqual([actions, swaps, reflected, monsters, pistons, platforms], [398, 55, 5, 8, 5, 4]);
+  assert.equal(current.state, 'WIN');
+});
+
+test('SS04 handles direct navigation, invalid loads, Undo across a transition and an out-of-order victory', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new WizardPuzzleSession(SS04_LEVELS);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'load', code: 'SS04', level: 8 }), reference.selectLevel(8));
+  await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'SS-04' })), /Invalid game code/);
+  await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'load', code: 'SS04', level: 8 }), reference.selectLevel(8));
+  await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'SS04', level: 9 })), /Invalid level/);
+  await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
+  let current = await dispatcher.dispatch({ type: 'load', code: 'SS04' });
+  assert.deepEqual(current, reference.restart());
+  await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 5 })), /ACTION1–ACTION4/);
+  await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'nextMerchant' })), /only supports/);
+  for (const level of [2, 3, 4, 5, 6, 7, 8, 1]) {
+    assert.deepEqual(await dispatcher.dispatch({ type: 'selectLevel', level }), reference.selectLevel(level));
+    const actions = ss04Witnesses[level - 1]!.actions;
+    for (const actionId of actions) {
+      current = await dispatcher.dispatch({ type: 'action', actionId });
+      assert.deepEqual(current, reference.action(actionId));
+    }
+    assert.equal(current.level, 1);
+    if (level === 2) {
+      const undone = await dispatcher.dispatch({ type: 'undo' });
+      assert.deepEqual(undone, reference.undo());
+      assert.equal(undone.level, 2);
+      assert.equal(undone.levelsCompleted, 0);
+      assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: actions.at(-1)! }), reference.action(actions.at(-1)!));
+    }
+  }
+  assert.equal(current.state, 'WIN');
+  assert.equal(current.levelsCompleted, 8);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 1 }), reference.observe());
+  assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(await dispatcher.dispatch({ type: 'restart' }), reference.restart());
+});
+
+test('SS04 preserves a reachable monster defeat, blocks directions, and recovers through Undo and Reset', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const initial = await dispatcher.dispatch({ type: 'load', code: 'SS04', level: 4 });
+  const before = await dispatcher.dispatch({ type: 'action', actionId: 2 });
+  const dead = await dispatcher.dispatch({ type: 'action', actionId: 4 });
+  assert.equal(dead.state, 'GAME_OVER');
+  assert.ok(dead.frames.length > 1);
+  assert.equal(dead.canUndo, true);
+  assert.deepEqual((await dispatcher.dispatch({ type: 'action', actionId: 1 })).frame, dead.frame);
+  const undone = await dispatcher.dispatch({ type: 'undo' });
+  assert.equal(undone.state, 'NOT_FINISHED');
+  assert.deepEqual(undone.frame, before.frame);
+  assert.equal((await dispatcher.dispatch({ type: 'action', actionId: 4 })).state, 'GAME_OVER');
+  assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), initial);
 });

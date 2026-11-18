@@ -1144,6 +1144,9 @@ records.push({code:'SS02',id:'ss02-c4000001',name:'La force rouge',group:'custom
 records.push({code:'SS03',id:'ss03-c4000001',name:'La ruse verte',group:'custom_4',family:'sinking_star_pull',levels:8,
   description:'Guide the green Thief, pull crates and coordinate buttons to trigger piston gates.',
   sourcePath:'experiments/sinking-star-ss03/src/levels.ts',availability:'playable'});
+records.push({code:'SS04',id:'ss04-c4000001',name:'L’Axe violet',group:'custom_4',family:'sinking_star_swap',levels:8,
+  description:'Guide the violet Wizard, swap with visible crates or monsters, and reflect your aim with fixed mirrors.',
+  sourcePath:'experiments/sinking-star-ss04/src/levels.ts',availability:'playable'});
 
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
