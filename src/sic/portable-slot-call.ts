@@ -33,7 +33,7 @@ function orderedRow<T extends { box: NativeBox }>(cells: T[]): T[] {
     box[1] === sorted[0]!.box[1] && box[0] === sorted[0]!.box[0] + pitch * i) ? sorted : [];
 }
 
-function uniqueExpansion(word: readonly number[], programs: readonly Program[], tokens: readonly Token[]): Map<Cell, SlotValue> | null {
+function preferredExpansion(word: readonly number[], programs: readonly Program[], tokens: readonly Token[]): Map<Cell, SlotValue> | null {
   const calls = new Map<Call, Program>();
   for (const token of tokens) {
     if (typeof token.value !== 'string') continue;
@@ -56,15 +56,22 @@ function uniqueExpansion(word: readonly number[], programs: readonly Program[], 
 
   const assignments = new Map<Cell, SlotValue>();
   let solution: Map<Cell, SlotValue> | null = null;
-  let ambiguous = false, budget = 8192;
+  let ambiguous = false, preference = -1, budget = 8192;
   type ExpansionCell = { cell: Cell; ancestry: readonly Program[] };
   function visit(pending: readonly ExpansionCell[], offset: number) {
-    if (ambiguous || --budget < 0) return;
+    if (--budget < 0) return;
     const [current, ...rest] = pending;
     if (!current) {
       if (offset === word.length && [...counts.values()].every(count => count === 0)) {
-        if (solution) ambiguous = true;
-        else solution = new Map(assignments);
+        // The expansion must match the reference first. For equally valid
+        // programs, prefer keeping literals with their visible frame label.
+        const score = programs.reduce((total, program) => total
+          + program.cells.filter(cell => assignments.get(cell) === program.label).length, 0);
+        if (score > preference) {
+          solution = new Map(assignments);
+          preference = score;
+          ambiguous = false;
+        } else if (score === preference) ambiguous = true;
       }
       return;
     }
@@ -159,7 +166,7 @@ export function measurePortableSlotLayout(observation: NativeObservation, rows: 
       if (programs.length < 2 || new Set(programs.map(program => program.label)).size !== programs.length) continue;
       const cells = programs.flatMap(program => program.cells);
       if (cells.filter(cell => cell.fixed === null).length !== tokens.length) continue;
-      const plan = uniqueExpansion(word, programs, tokens);
+      const plan = preferredExpansion(word, programs, tokens);
       if (!plan || plan.size !== tokens.length) continue;
       const orderedCells = [...plan.keys(), ...cells.filter(cell => cell.fixed !== null)];
       layouts.push({ portable: true, tokens, cells: orderedCells, inventory: tokens.map(token => token.box),
