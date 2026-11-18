@@ -21,7 +21,7 @@ for(const [index,id] of [[1,'heroes3_3_v2'],[2,'heroes3_1_v3'],[3,'heroes3_2_v4'
 }
 assert.equal(SS05_LEVELS.length,8);assert.equal(witnesses.length,8);assert.equal(LEVEL_INFO.length,8);
 const session=new BardPuzzleSession(SS05_LEVELS);
-const report={game:'SS05',version:'0.1.0',levels:[],totals:{},success:false};
+const report={game:'SS05',version:'0.1.1',levels:[],totals:{},success:false};
 for(const [index,spec] of SS05_LEVELS.entries()){
  const witness=witnesses[index];assert.equal(witness.level,index+1);assert.equal(witness.id,spec.id);
  const replayed=replay(spec,witness.actions),world=replayed.world;

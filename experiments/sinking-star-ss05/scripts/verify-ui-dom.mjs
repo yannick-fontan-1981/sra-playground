@@ -70,9 +70,10 @@ try{
 
   assert.deepEqual([...window.document.querySelectorAll('[data-action]')].map(b=>Number(b.dataset.action)).sort(),[1,2,3,4,5]);
   assert.deepEqual([...window.document.querySelectorAll('[data-lesson]')].map(e=>e.dataset.lesson),['move','song','anchor','platform','mirror','gate']);
-  assert.ok(!window.document.body.textContent.includes('Espace'));
-  const countBefore=$('moves').textContent;key(' ');equalFrame(ref.observe());assert.equal($('moves').textContent,countBefore);
-  report.checks.push('Four directions and the X reflection control exist; Space does not change game pixels or the action counter');
+  assert.ok(window.document.body.textContent.includes('Espace'));
+  assert.ok($('mirror-help').textContent.includes('+ gris clair'));
+  assert.ok($('mirror-help').textContent.includes('contour carré gris clair'));
+  report.checks.push('Four directions and the reflection control exist; Space and X are advertised, with distinct Bard and crate previews');
 
   const tutorial=actionsFor(1),probe=new BardPuzzleSession(SS05_LEVELS);
   let firstAnimation=-1;
@@ -82,7 +83,7 @@ try{
   const action=tutorial[firstAnimation],captureStart=captures.length;
   key(actionKeys[action]);const first=ref.action(action);
   assert.equal($('board').dataset.busy,'true');
-  const busyCount=$('moves').textContent;key('ArrowRight');key('x');assert.equal($('moves').textContent,busyCount);
+  const busyCount=$('moves').textContent;key('ArrowRight');key('x');assert.equal(key(' '),false,'Space prevents page scrolling during animation');assert.equal($('moves').textContent,busyCount);
   await settled(first);
   for(let i=0;i<first.frames.length;i++)assert.deepEqual(captures[captureStart+i],rgba(first.frames[i]),`Animation frame ${i+1}`);
   report.checks.push('Directional movement shows every engine animation frame and ignores concurrent input');
@@ -120,15 +121,25 @@ try{
   witnessMode=true;
   const reflectionIndex=tutorial.indexOf(5);assert.ok(reflectionIndex>=0,'Tutorial has an actual reflection');
   await replay(tutorial.slice(0,reflectionIndex));
+  // Exercise Space at an actual valid reflection, then undo to compare the button at the same state.
+  const spaceStart=captures.length,spaceWaitStart=waits.length,spaceBefore=ref.observe();
+  assert.equal(key(' '),false,'Space prevents page scrolling');
+  const spaceReflection=ref.action(5);
+  assert.ok(spaceReflection.frames.length>=3,'Space dispatches a valid ACTION5 reflection');
+  await settled(spaceReflection);
+  for(let i=0;i<spaceReflection.frames.length;i++)assert.deepEqual(captures[spaceStart+i],rgba(spaceReflection.frames[i]),`Space reflection frame ${i+1}`);
+  assert.deepEqual(waits.slice(spaceWaitStart),spaceReflection.frameDurationsMs.slice(0,-1));
+  $('undo').click();await settled(ref.undo());equalFrame(spaceBefore);
   const reflectionStart=captures.length,reflectionWaitStart=waits.length;
   window.document.querySelector('[data-action="5"]').click();const reflected=ref.action(5);
   assert.ok(reflected.frames.length>=3,'The reflection animates');
+  assert.deepEqual(reflected.frames,spaceReflection.frames,'Space and the reflection button produce identical ACTION5 frames');
   await settled(reflected);
   assert.deepEqual(waits.slice(reflectionWaitStart),reflected.frameDurationsMs.slice(0,-1));
   witnessActions++;witnessFrames+=reflected.frames.length;
   for(let i=0;i<reflected.frames.length;i++)assert.deepEqual(captures[reflectionStart+i],rgba(reflected.frames[i]),`Reflection frame ${i+1}`);
   await replay(tutorial.slice(reflectionIndex+1));
-  report.checks.push('The reflection button dispatches ACTION5 and presents every teleport frame; keyboard X is exercised by the other routes');
+  report.checks.push('Space and the reflection button dispatch identical ACTION5 teleport frames; Space prevents scrolling and keyboard X remains verified by the other routes');
   assert.equal(ref.observe().levelsCompleted,1);assert.equal(ref.observe().level,2);
   for(const lesson of ['move','song','anchor','platform','mirror','gate'])assert.ok(window.document.querySelector(`[data-lesson="${lesson}"]`).classList.contains('done'),`${lesson} is learned through public pixels and real input`);
   report.checks.push('The complete tutorial witness earns all six lessons through real keyboard input and advances to level 2');
@@ -142,7 +153,7 @@ try{
   assert.equal(witnessActions,witnesses.reduce((sum,w)=>sum+w.actions.length,0));
   assert.equal(ref.observe().state,'WIN');assert.equal($('victory').hidden,false);
   assert.ok([...window.document.querySelectorAll('[data-action]')].every(b=>b.disabled));
-  const wonCount=$('moves').textContent;key('ArrowDown');key('x');assert.equal($('moves').textContent,wonCount);
+  const wonCount=$('moves').textContent;key('ArrowDown');key('x');assert.equal(key(' '),false);assert.equal($('moves').textContent,wonCount);
   report.checks.push('All eight verified routes show every animation frame through the actual interface; WIN requires all rooms and blocks further directional and reflection input');
 
   $('undo').click();await settled(ref.undo());assert.equal($('victory').hidden,true);
@@ -158,7 +169,7 @@ try{
   assert.equal(fatalProbe.observe().state,'GAME_OVER','The authored fatal route must remain an actual reachable defeat');
   choose(fatal.level);await replay(fatal.actions);assert.equal(ref.observe().state,'GAME_OVER');assert.equal($('defeat').hidden,false);
   assert.ok([...window.document.querySelectorAll('[data-action]')].every(b=>b.disabled));
-  const deadCount=$('moves').textContent;key('ArrowUp');key('x');assert.equal($('moves').textContent,deadCount);
+  const deadCount=$('moves').textContent;key('ArrowUp');key('x');assert.equal(key(' '),false);assert.equal($('moves').textContent,deadCount);
   $('undo-defeat').click();await settled(ref.undo());assert.equal($('defeat').hidden,true);assert.equal(ref.observe().state,'NOT_FINISHED');
   await replay([fatal.actions.at(-1)]);assert.equal($('defeat').hidden,false);
   $('reset-defeat').click();await settled(ref.reset());assert.equal($('defeat').hidden,true);

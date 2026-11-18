@@ -124,7 +124,7 @@ function updateUI(): void {
       : !learned.has('platform')
         ? 'Amène une caisse dans l’eau : elle devient un appui marron marqué d’un X cyan. Ton chant peut ensuite déplacer cet appui vers une autre case d’eau.'
         : !learned.has('mirror')
-          ? 'X active les miroirs. Chaque face blanche échange ses deux axes à distance égale. Les contours gris clair indiquent les arrivées possibles.'
+          ? 'Espace active les miroirs. Le + gris clair indique l’arrivée du Barde ; le carré gris clair celle d’une caisse. X fonctionne aussi.'
           : !learned.has('gate')
             ? 'Place un poids sur un + rose. Observe les portes de même repère : certaines s’ouvrent, d’autres poussent quand elles se ferment.'
             : 'Combine le chant, les appuis et les reflets pour rejoindre le contour jaune. Un objet peut quitter son bouton si tu passes trop près : Z annule le dernier coup.';
@@ -175,9 +175,8 @@ canvas.addEventListener('keydown',event=>{
   if(key==='z'){event.preventDefault();reset('undo');return;}
   if(event.ctrlKey)return;
   if(key==='r'){event.preventDefault();reset('reset');return;}
-  const actions:Record<string,number>={ArrowUp:1,ArrowDown:2,ArrowLeft:3,ArrowRight:4,x:5,X:5};
+  const actions:Record<string,number>={ArrowUp:1,ArrowDown:2,ArrowLeft:3,ArrowRight:4,' ':5,x:5,X:5};
   if(actions[event.key]){event.preventDefault();act(actions[event.key]!);}
-  if(event.key===' ')event.preventDefault();
 });
 void present(observation);
 canvas.focus({preventScroll:true});

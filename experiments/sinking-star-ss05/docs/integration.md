@@ -6,9 +6,9 @@ Le laboratoire est autonome. Son intégration dans le catalogue Custom 4 et le s
 
 Importer directement `BardPuzzleSession` depuis `src/core.ts` et `SS05_LEVELS` depuis `src/levels.ts`. Réutiliser `LEVEL_INFO` pour les crédits. Ne pas réécrire le moteur ou les cartes dans un second fichier. SS05 est le cinquième jeu Sinking Star du lot Custom 4, après SS01 à SS04.
 
-Les commandes sont ACTION1–4 pour les flèches et ACTION5 pour les miroirs. Ne pas classer SS05 dans une restriction générique aux quatre directions. La touche X et le bouton Reflet doivent envoyer ACTION5 ; le chant accompagne chaque déplacement et ne nécessite pas d’action spéciale. L’action5 ne déclenche jamais le chant.
+Les commandes sont ACTION1–4 pour les flèches et ACTION5 pour les miroirs. Ne pas classer SS05 dans une restriction générique aux quatre directions. La barre d’espace, la touche X et le bouton Reflet doivent envoyer ACTION5 ; le chant accompagne chaque déplacement et ne nécessite pas d’action spéciale. L’action5 ne déclenche jamais le chant.
 
-Le rendu est exactement 64 × 64, avec cellules 3 × 3 et la palette historique. Toutes les images et leurs durées doivent être présentées : une action peut contenir plusieurs animations de trois images et un éventuel changement de niveau. Les contours gris clair de reflet sont déjà dans les pixels du moteur. Ne pas ajouter d’overlay qui révèle une cible, une solution ou un état caché.
+Le rendu est exactement 64 × 64, avec cellules 3 × 3 et la palette historique. Toutes les images et leurs durées doivent être présentées : une action peut contenir plusieurs animations de trois images et un éventuel changement de niveau. Les prévisualisations de reflet (+ gris clair pour le Barde, contour carré gris clair pour une caisse) et l’aura en pointillés magenta sont déjà dans les pixels du moteur. Ne pas ajouter d’overlay qui révèle une cible, une solution ou un état caché.
 
 La session conserve `undo`, `reset`, `restart`, `selectLevel`. Le catalogue doit proposer huit niveaux. La victoire exige les huit ; après une résolution, la session charge le premier inachevé. Le niveau 1 est chargé par défaut et son tutoriel doit être ouvert. Les six leçons et la légende peuvent être reprises de l’HTML ; toute reconnaissance reste fondée sur les observations publiques.
 

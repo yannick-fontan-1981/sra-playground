@@ -107,9 +107,12 @@ test('a reflected stone becomes a platform, and reflecting the Bard into open wa
 test('underwater platforms are not mirrored',()=>{
   const {w,s}=setup({hero:[2,7],supports:[[5,3]],mirrors:[[5,5,'NE']]});assert.equal(planReflection(w,s),null);
 });
-test('reflection preview is a light-gray square outline on an empty destination',()=>{
+test('reflection previews distinguish the light-gray Bard cross from a crate square',()=>{
   const {w,s,at}=setup({hero:[5,3],mirrors:[[5,5,'NE']]});const f=renderWorld(w,s),p=at(7,5),x=2+p.x*3,y=2+p.y*3;
-  assert.deepEqual(f.slice(y,y+3).map(r=>r.slice(x,x+3)),[[1,1,1],[1,3,1],[1,1,1]]);
+  for(const [dx,dy] of [[1,0],[0,1],[1,1],[2,1],[1,2]])assert.equal(f[y+dy][x+dx],1);
+  for(const [dx,dy] of [[0,0],[2,0],[0,2],[2,2]])assert.notEqual(f[y+dy][x+dx],1);
+  const crate=setup({hero:[2,7],stones:[[5,3]],mirrors:[[5,5,'NE']]});
+  assert.deepEqual(renderWorld(crate.w,crate.s).slice(y,y+3).map(r=>r.slice(x,x+3)),[[1,1,1],[1,3,1],[1,1,1]]);
 });
 test('ordinary song has no square destination preview and advances by 1/2/3 pixels',()=>{
   const {w,s,at}=setup({stones:[[5,3]]});const after=stepWorld(w,s,4),frames=transitionFrames(w,s,after,4);
@@ -118,7 +121,7 @@ test('ordinary song has no square destination preview and advances by 1/2/3 pixe
   assert.equal(frames[0][y+1][x+2],5);assert.equal(frames[1][y+1][x+3],5);assert.equal(frames[2][y+1][x+4],5);
   assert.ok(!renderWorld(w,s).flat().includes(1));
 });
-test('reflection animation includes gray transfer outlines and an exact final frame',()=>{
+test('reflection animation includes gray transfer markers and an exact final frame',()=>{
   const {w,s}=setup({hero:[5,3],mirrors:[[5,5,'NE']]});const after=stepWorld(w,s,5),frames=transitionFrames(w,s,after,5);
   assert.equal(frames.length,3);assert.ok(frames[0].flat().includes(10));assert.ok(frames[1].flat().includes(1));assert.deepEqual(frames[2],renderWorld(w,after));
 });

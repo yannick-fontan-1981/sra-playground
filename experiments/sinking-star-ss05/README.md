@@ -1,18 +1,18 @@
 # SS05 — Le Chant Magenta
 
-Version 0.1.0. Laboratoire HTML autonome du cinquième jeu Sinking Star pour SRA Playground, avec un Barde magenta et huit niveaux. Le premier niveau est chargé immédiatement et son tutoriel est ouvert.
+Version 0.1.1. Laboratoire HTML autonome du cinquième jeu Sinking Star pour SRA Playground, avec un Barde magenta et huit niveaux. Le premier niveau est chargé immédiatement et son tutoriel est ouvert.
 
 ## Jouer
 
 Ouvrir `dist/SS05-demo.html` après compilation. Le fichier est autonome : pas de bibliothèque distante, de compte, de serveur ni de connexion réseau nécessaire pour jouer.
 
 - Flèches / ACTION1–4 : marcher et entraîner les objets proches dans le même sens.
-- X / ACTION5 : activer les miroirs sans déclencher le chant.
+- Espace (ou X) / ACTION5 : activer les miroirs sans déclencher le chant.
 - Z : annuler une action complète, y compris ses conséquences et un changement de niveau.
 - R : recommencer le niveau courant.
 - Le sélecteur permet d’essayer chaque salle. La victoire demande de terminer les huit.
 
-Le chant sélectionne les caisses, monstres et appuis à deux cases du Barde, dans un carré de 5 × 5 cases. Un objet bloqué reste en place. Si le Barde ne peut pas avancer, tout le mouvement est refusé. Une caisse dans l’eau devient un appui ; ces appuis peuvent glisser sur l’eau avec le chant. Les déplacements sont animés en trois images, avec un déplacement de 1, 2 puis 3 pixels. Les reflets ont leur propre animation et une destination en contour carré gris clair.
+Le chant sélectionne les caisses, monstres et appuis à deux cases du Barde, dans un carré de 5 × 5 cases. Un objet bloqué reste en place. Si le Barde ne peut pas avancer, tout le mouvement est refusé. Une caisse dans l’eau devient un appui ; ces appuis peuvent glisser sur l’eau avec le chant. Les déplacements sont animés en trois images, avec un déplacement de 1, 2 puis 3 pixels. Les reflets ont leur propre animation : la destination du Barde est un + gris clair et celle des caisses reste un contour carré gris clair. L’aura du chant est délimitée par des pointillés magenta qui accompagnent les déplacements.
 
 ## Campagne
 

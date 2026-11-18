@@ -409,22 +409,22 @@ function mirrorSprite(facing:MirrorFacing):Sprite {
   }
   return mirror;
 }
-function renderScene(w: World, s: State, stones: readonly Point[], monsters:readonly Point[], hero: Point | null, preview=false): number[][] {
+function renderScene(w: World, s: State, stones: readonly Point[], monsters:readonly Point[], hero: Point | null, preview=false, movingAura?: Point): number[][] {
   const frame = Array.from({length: 64}, () => Array<number>(64).fill(4));
   for (let y = 0; y < 20; y++) for (let x = 0; x < 20; x++) {
     const t = terrainAt(w, {x,y}), c = t === '#' ? 4 : t === '~' ? 9 : 3;
     stamp(frame, {x,y}, [[c,c,c],[c,c,c],[c,c,c]]);
   }
-  if(hero&&!s.dead){
-    for(const dx of [-2,2])for(const dy of [-2,2]){
-      const p={x:hero.x+dx,y:hero.y+dy};
-      if(terrainAt(w,p)==='.'&&!blocked(w,s,p)&&!contains(w.buttons,p)&&!equal(p,w.goal)&&!contains(stones,p)&&!contains(monsters,p)){
-        const x=2+p.x*3+(dx<0?0:2),y=2+p.y*3+(dy<0?0:2);
-        if(x>=2&&x<62&&y>=2&&y<62)frame[y]![x]=2;
-      }
+  const aura=movingAura??(hero?{x:2+hero.x*3,y:2+hero.y*3}:undefined);
+  if(aura&&!s.dead){
+    // A dotted magenta perimeter marks the five-cell square, including water and walls.
+    // Devices and occupants are drawn afterwards so their pixels remain readable.
+    const left=aura.x-6,top=aura.y-6;
+    for(let d=0;d<=14;d+=2)for(const [x,y] of [[left+d,top],[left+d,top+14],[left,top+d],[left+14,top+d]]){
+      if(x!>=2&&x!<62&&y!>=2&&y!<62)frame[y!]![x!]=6;
     }
   }
-  if(preview)for(const m of planReflection(w,s)?.moves??[])stamp(frame,m.to,square(1));
+  if(preview)for(const m of planReflection(w,s)?.moves??[])stamp(frame,m.to,m.actor==='hero'?cross(1):square(1));
   for (const p of s.supports) stamp(frame, p, supportSprite);
   for (const m of w.mirrors) stamp(frame,m.at,mirrorSprite(m.facing));
   for (const p of w.buttons) {
@@ -468,13 +468,15 @@ function phaseFrames(w:World,phase:MotionPhase):number[][][] {
     const transfer=renderScene(w,phase.before,stationaryStones,stationaryMonsters,movingHero?null:phase.before.hero);
     for(const motion of phase.moves){
       stamp(flash,motion.from,square(motion.actor==='hero'?6:motion.actor==='stone'?13:8,0));
-      stamp(transfer,motion.to,square(1,motion.actor==='hero'?6:motion.actor==='stone'?13:8));
+      stamp(transfer,motion.to,motion.actor==='hero'?cross(1):square(1,motion.actor==='stone'?13:8));
     }
     return [flash,transfer,renderWorld(w,phase.after)];
   }
   if(!['walk','song','piston'].includes(phase.kind))return [renderWorld(w,phase.after)];
   const frames=[1,2].map(pixels=>{
-    const frame=renderScene(w,{...phase.before,supports:stationarySupports},stationaryStones,stationaryMonsters,movingHero?null:phase.before.hero);
+    const heroMotion=phase.moves.find(m=>m.actor==='hero');
+    const movingAura=heroMotion?{x:2+heroMotion.from.x*3+(heroMotion.to.x-heroMotion.from.x)*pixels,y:2+heroMotion.from.y*3+(heroMotion.to.y-heroMotion.from.y)*pixels}:undefined;
+    const frame=renderScene(w,{...phase.before,supports:stationarySupports},stationaryStones,stationaryMonsters,movingHero?null:phase.before.hero,false,movingAura);
     // Ground is drawn first, then actors, even when a platform and its rider move together.
     for(const motion of [...phase.moves].sort((a,b)=>(a.actor==='support'?-1:0)-(b.actor==='support'?-1:0))){
       const delta={x:motion.to.x-motion.from.x,y:motion.to.y-motion.from.y};

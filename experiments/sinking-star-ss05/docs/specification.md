@@ -1,4 +1,4 @@
-# Contrat de jeu SS05 v0.1.0
+# Contrat de jeu SS05 v0.1.1
 
 ## Grille et palette
 
@@ -17,7 +17,9 @@ Une observation contient une image de 64 × 64 pixels, une grille logique de 20 
 | Destination | 11 | Contour carré jaune |
 | Miroir | 0 / 5 | Diagonale blanche et dos noir |
 | Monstre | 5 / 8 | Noir avec X rouge |
-| Arrivée de reflet | 1 | Contour carré gris clair |
+| Arrivée du Barde par reflet | 1 | + gris clair |
+| Arrivée d’une caisse par reflet | 1 | Contour carré gris clair |
+| Aura du chant | 6 | Carré de 5 × 5 cases en pointillés magenta |
 
 ## Chant et déplacements
 
@@ -29,9 +31,9 @@ Une caisse entrant dans de l’eau sans appui devient un appui. Un appui ne glis
 
 ## Reflets
 
-ACTION5, touche X ou bouton Reflet, active les miroirs sans chant. Les miroirs sont fixes et possèdent deux axes perpendiculaires du côté blanc. Chaque axe prend son premier Barde, sa première caisse ou son premier monstre ; l’occupant est envoyé sur l’autre axe, à distance égale du miroir. Les appuis immergés ne sont pas reflétés.
+ACTION5, barre d’espace (ou X) ou bouton Reflet, active les miroirs sans chant. Les miroirs sont fixes et possèdent deux axes perpendiculaires du côté blanc. Chaque axe prend son premier Barde, sa première caisse ou son premier monstre ; l’occupant est envoyé sur l’autre axe, à distance égale du miroir. Les appuis immergés ne sont pas reflétés.
 
-Toutes les propositions sont traitées simultanément. Un obstacle statique sur le trajet, une destination incompatible, un occupant qui ne part pas, ou plusieurs destinations pour le même acteur refuse l’ensemble. Cette version solo ne crée aucune copie du Barde. Les murs, miroirs et portes fermées arrêtent les axes. Les arrivées d’un plan valide sont dessinées en contours carrés gris clair ; aucune prévisualisation de déplacement chanté n’est ajoutée.
+Toutes les propositions sont traitées simultanément. Un obstacle statique sur le trajet, une destination incompatible, un occupant qui ne part pas, ou plusieurs destinations pour le même acteur refuse l’ensemble. Cette version solo ne crée aucune copie du Barde. Les murs, miroirs et portes fermées arrêtent les axes. Les arrivées d’un plan valide sont dessinées en gris clair : un + pour le Barde, un contour carré pour les caisses et les monstres. L’aura est un périmètre en pointillés magenta couvrant le carré de 5 × 5 cases et suit aussi les images intermédiaires de déplacement.
 
 Une caisse reflétée dans l’eau devient un appui. Un monstre sans appui se noie. Un Barde reflété au-dessus d’une eau sans appui perd : l’annulation reste disponible.
 
