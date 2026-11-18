@@ -15,13 +15,17 @@ import ss03Witnesses from '../experiments/sinking-star-ss03/tests/witnesses.json
 import { WizardPuzzleSession, compileLevel as compileWizardLevel, initialState as initialWizardState, planSwap, stepDetailed as stepWizard } from '../experiments/sinking-star-ss04/src/core.ts';
 import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
 import ss04Witnesses from '../experiments/sinking-star-ss04/tests/witnesses.json' with { type: 'json' };
+import { createSs05Backend } from '../src/games/sinking-star-ss05.ts';
+import { BardPuzzleSession, compileLevel as compileBardLevel, initialState as initialBardState, stepDetailed as stepBard } from '../experiments/sinking-star-ss05/src/core.ts';
+import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
+import ss05Witnesses from '../experiments/sinking-star-ss05/tests/witnesses.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS04 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS05 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 104);
+  assert.equal(GAME_CATALOG.length, 105);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -36,6 +40,10 @@ test('Custom 4 lists SS01 through SS04 and preserves all four legacy collections
   assert.equal(getGameByCode('SS04')?.id, 'ss04-c4000001');
   assert.equal(getGameByCode('SS04')?.name, 'L’Axe violet');
   assert.match(getGameByCode('SS04')!.sourceUrl, /experiments\/sinking-star-ss04\/src\/levels\.ts$/);
+  assert.equal(getGameByCode(' ss05 ')?.levels, 8);
+  assert.equal(getGameByCode('SS05')?.id, 'ss05-c4000001');
+  assert.equal(getGameByCode('SS05')?.name, 'Le Chant Magenta');
+  assert.match(getGameByCode('SS05')!.sourceUrl, /experiments\/sinking-star-ss05\/src\/levels\.ts$/);
 });
 test('SS01 loads natively without invoking the Python loader', async () => {
   let legacyLoads = 0;
@@ -164,10 +172,11 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS02' })).gameCode, 'SS02');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS03' })).gameCode, 'SS03');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS04' })).gameCode, 'SS04');
+  assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS05' })).gameCode, 'SS05');
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS04']) {
+  for (const code of ['CASC', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS05']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -355,3 +364,93 @@ test('SS04 preserves a reachable monster defeat, blocks directions, and recovers
   assert.equal((await dispatcher.dispatch({ type: 'action', actionId: 4 })).state, 'GAME_OVER');
   assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), initial);
 });
+
+test('SS05 matches the 395 actions and 1222 frames of the lab witnesses through the native dispatcher', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new BardPuzzleSession(SS05_LEVELS);
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss05 ' });
+  assert.deepEqual(current, reference.observe());
+  const publicKeys = ['gameCode','frame','frames','state','availableActionIds','canUndo','canSelectLevel','level','levelCount','levelsCompleted','defaultFps','palette'].sort();
+  assert.deepEqual(Object.keys(current).sort(), publicKeys);
+  const combatDurations = [60, 80, 40, 80, 90, 100, 110, 0];
+  let actions = 0, frames = 0, mutualCombat = false, mobilePlatform = false;
+  for (const [index, witness] of ss05Witnesses.entries()) {
+    assert.equal(current.level, index + 1);
+    const world = compileBardLevel(SS05_LEVELS[index]!);
+    let state = initialBardState(world);
+    for (const [turn, actionId] of witness.actions.entries()) {
+      const detail = stepBard(world, state, actionId);
+      state = detail.state;
+      current = await dispatcher.dispatch({ type: 'action', actionId });
+      assert.deepEqual(current, reference.action(actionId));
+      assert.deepEqual(current.availableActionIds, [1, 2, 3, 4, 5]);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frame.length, 64);
+      assert.ok(current.frame.every(row => row.length === 64));
+      if (index === 2 && detail.phases.some(phase => phase.kind === 'combat' && phase.before.monsters.length - phase.after.monsters.length >= 2)) {
+        assert.deepEqual(current.frameDurationsMs, combatDurations);
+        mutualCombat = true;
+      }
+      if (index === 6 && detail.phases.some(phase => phase.kind === 'song' && phase.moves.some(motion => motion.actor === 'support'))) mobilePlatform = true;
+      if (index === 7 && turn === 19) assert.equal(current.frames.length, 9);
+      assert.equal(Boolean(state.failed || state.dead), false);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, index + 1);
+  }
+  assert.deepEqual([actions, frames, mutualCombat, mobilePlatform], [395, 1222, true, true]);
+  assert.equal(current.state, 'WIN');
+});
+
+test('SS05 validates direct loads and selections before replacing the current session', async () => {
+  const backend = createSs05Backend();
+  const reference = new BardPuzzleSession(SS05_LEVELS);
+  assert.deepEqual(await backend.dispatch({ type: 'load', code: 'SS05', level: 8 }), reference.selectLevel(8));
+  assert.throws(() => backend.dispatch({ type: 'load', code: 'SS05', level: 9 }), /Invalid level/);
+  assert.throws(() => backend.dispatch({ type: 'selectLevel', level: 0 }), /Invalid level/);
+  assert.deepEqual(await backend.dispatch({ type: 'undo' }), reference.observe());
+  assert.throws(() => backend.dispatch({ type: 'nextMerchant' }), /Merchant selection/);
+  assert.deepEqual(await backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+test('SS05 supports out-of-order victory and ignores directions and reflection after WIN', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new BardPuzzleSession(SS05_LEVELS);
+  let current = await dispatcher.dispatch({ type: 'load', code: 'SS05' });
+  for (const level of [2, 3, 4, 5, 6, 7, 8, 1]) {
+    assert.deepEqual(await dispatcher.dispatch({ type: 'selectLevel', level }), reference.selectLevel(level));
+    for (const actionId of ss05Witnesses[level - 1]!.actions) {
+      current = await dispatcher.dispatch({ type: 'action', actionId });
+      assert.deepEqual(current, reference.action(actionId));
+    }
+    assert.equal(current.level, 1);
+  }
+  assert.equal(current.state, 'WIN');
+  for (const actionId of [1, 5]) assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId }), reference.observe());
+  assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(await dispatcher.dispatch({ type: 'restart' }), reference.restart());
+});
+
+for (const [level, route] of [[3, 'UURRRRRDDDRRRUUUUUU'], [6, 'RRRX']] as const) {
+  test(`SS05 level ${level} preserves GAME_OVER and restores the board through Undo and Reset`, async () => {
+    const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+    const reference = new BardPuzzleSession(SS05_LEVELS);
+    const initial = await dispatcher.dispatch({ type: 'load', code: 'SS05', level });
+    assert.deepEqual(initial, reference.selectLevel(level));
+    const actions = [...route].map(key => ({ U:1, D:2, L:3, R:4, X:5 })[key as 'U' | 'D' | 'L' | 'R' | 'X']);
+    let current = initial;
+    for (const actionId of actions) {
+      current = await dispatcher.dispatch({ type: 'action', actionId });
+      assert.deepEqual(current, reference.action(actionId));
+    }
+    assert.equal(current.state, 'GAME_OVER');
+    if (level === 3) assert.deepEqual(current.frameDurationsMs, [60, 80, 40, 80, 90, 100, 110, 0]);
+    for (const actionId of [1, 5]) assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId }), reference.observe());
+    assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), reference.undo());
+    assert.equal((await dispatcher.dispatch({ type: 'action', actionId: actions.at(-1)! })).state, 'GAME_OVER');
+    assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), initial);
+  });
+}
