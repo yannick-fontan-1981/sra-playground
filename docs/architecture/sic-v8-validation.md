@@ -1957,3 +1957,13 @@ Le premier passage demande 2 unités de chaque côté. Le second demande 10 unit
 Le rejeu depuis le niveau 1 gagne en **143 commandes SIC seul**. Les **123 commandes des niveaux 1 à 5** et leurs retours reproduisent les empreintes de la référence. Le niveau 6 gagne en **20 clics et 6,59 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit ces 20 clics. TypeScript et les **3 tests ciblés** passent. La couverture atteint **544/636 niveaux (85,5 %)**, dont **45/99 niveaux 6 (45,5 %)**.
 
 Empreinte jusqu'à la victoire `8206e09d3aaf46c2bb51f794cad89d804c841d67ac30a162f720c12989e064c7`.
+
+### FT09 niveau 6, dériver les effets d'une marque directionnelle
+
+La référence s'arrête après 40 clics d'exploration. La mesure antérieure cherchait des cases uniformes pour retrouver la grille. SIC utilise désormais les contours répétés des 22 cases marquées lorsque la mesure régulière échoue. La règle acquise au niveau précédent fournit les contraintes des fenêtres. Les marques suggèrent quelles cases voisines peuvent changer avec la case cliquée.
+
+Le premier clic vérifie en P05 que les deux cases prévues changent et que les fenêtres restent intactes. SIC combine ensuite les effets pour corriger le champ et projette les couleurs intermédiaires. Les **12 corrections P02** forment une seule série de clics, avec vérification des cases et des références avant chaque envoi et contrôle de l'empreinte après chaque retour.
+
+Le rejeu depuis le niveau 1 gagne en **75 commandes SIC seul**. Les **62 premières commandes** et leurs retours sont identiques à la référence. Le niveau 6 gagne en **13 clics et 3,20 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde retrouve les mêmes 13 commandes. TypeScript et les **181 tests ciblés** passent. La couverture atteint **545/636 niveaux (85,7 %)**, dont **46/99 niveaux 6 (46,5 %)**.
+
+Empreinte jusqu'à la victoire `40f02e926de47cbfa120ca39d0e78c4c0a51de0ae9dfa039389564be36d8dbb9`.
