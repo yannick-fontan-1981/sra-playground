@@ -1,4 +1,4 @@
-import { inferLabeledSequence } from '../logos-engine/v6-labeled-sequence-mechanics.ts';
+import { inferComposedLabeledSequence } from '../logos-engine/v6-labeled-sequence-composition.ts';
 import { measureLabeledSequence } from '../logos-engine/v6-labeled-sequence-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
@@ -48,7 +48,8 @@ export function createSicLabeledSequence(config: NativeRecord, now: () => number
       const prior = state?.cache.epoch === observation.level_epoch ? state : null;
       const scene = measureLabeledSequence(rows, prior?.cache.controls ?? null);
       if (!scene) return null;
-      const result = inferLabeledSequence(scene, observation, now() + 1000, config, prior?.cache ?? null, now);
+      const deadline = Math.min(now() + 1000, execution?.deadlineMs ?? Infinity);
+      const result = inferComposedLabeledSequence(scene, observation, deadline, config, prior?.cache ?? null, now);
       const induction = result?.induction;
       if (!result || induction?.status !== 'COMPLETE' || induction.domain_complete !== true) return null;
       const values = induction.values;
@@ -93,7 +94,9 @@ export function createSicLabeledSequence(config: NativeRecord, now: () => number
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Choose a label supported by the visible examples',
           mode: learns ? mode : result.training_reused ? 'assimilation' : 'solving',
-          situation: `${models} compatible rules agree on this label. The result of the submission is still open.`,
+          situation: result.native_composition
+            ? `${models} compatible rules in the tested AND/OR grammar agree on this label. The submission still needs a return.`
+            : `${models} compatible rules agree on this label. The result of the submission is still open.`,
           agenda: agenda?.entries ?? [], evidence, examples: (scene.panels as Bounds[]).map(panel => panel.bbox),
           ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
           query: (scene.query as Bounds).bbox, addressedRegion: control.bbox },

@@ -10,6 +10,7 @@ import { LabeledSequenceMemory } from '../src/logos-engine/v6-labeled-sequence-a
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { hydrateNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
+import { createSicLabeledSequence } from '../src/sic/labeled-sequence.ts';
 
 type R = Record<string, any>;
 const copy = <T>(value: T): T => structuredClone(value);
@@ -25,6 +26,17 @@ const labeledPolicy = configuration.window_constraints.labeled_sequence_composit
 const execution: NativeExecution = { yieldControl: async () => {}, now: () => 0, deadlineMs: 360_000 };
 const ID = 'family_state:public_occurrence_recall';
 const CAUSE = { workflow: 'test.labeled.common', step: 'checkpoint', statement: 'retain' };
+
+test('SIC can submit an agreed composed label from the public entry observation', async () => {
+  const entry = probe.packets.at(-1)!;
+  assert.equal(entry.observation.levels_completed, 5);
+  const family = createSicLabeledSequence(labeledPolicy.labeled_sequence_question, () => 0);
+  const proposal = await family.propose(entry.observation, entry.packet.frame_rows, [], 8, execution);
+  assert.ok(proposal);
+  assert.deepEqual(proposal.actions, [{ action_ref: 'ACTION6', data: { x: 56, y: 52 } }]);
+  assert.equal((proposal.cache.native_composition as { complete?: boolean } | undefined)?.complete, true);
+  assert.match((proposal.sicSituationCard as { situation: string }).situation, /tested AND\/OR grammar/);
+});
 
 function firstReturn(family: SharedSeriesConstraint, selected = true): R {
   const before = probe.packets[0], after = probe.packets[1];
