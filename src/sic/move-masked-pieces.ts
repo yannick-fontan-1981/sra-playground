@@ -56,12 +56,16 @@ async function choose(local: State, routeTimeBoundMs: number, execution?: Native
   let route = local.route;
   if (!route) {
     try {
-      let checkpoints = 0;
+      // Check cancellation on the search's work interval, but yield the UI on
+      // elapsed time. Counting cheap collision checks can otherwise spend the
+      // route deadline in timers even when the search itself is fast.
+      let resumedAt = now();
       const searchExecution: NativeExecution = {
         ...execution, now, deadlineMs: deadline,
         async yieldControl() {
-          if (++checkpoints % 32 !== 0) return;
+          if (now() - resumedAt < 10) return;
           await (execution?.yieldControl() ?? new Promise<void>(resolve => setTimeout(resolve, 0)));
+          resumedAt = now();
         },
       };
       [route] = await selectedRigidRoute(scene, active, deadline, searchExecution);
