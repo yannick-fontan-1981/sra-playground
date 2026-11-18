@@ -12,6 +12,14 @@
     "Level selection during an animation cancels stale frames; source reference and return to the tutorial work",
     "Undo after opening the gate updates the current guidance to the closed passage while preserving the acquired lesson",
     "The complete tutorial witness teaches all five lessons and advances automatically to level 2",
+    "Piston help appears only in levels 7 and 8; level 8 links to the requested Heroes and Light puzzle 2",
+    "Level 7 down input presents all six exact engine images: three pulling images followed by three piston images",
+    "Undo during the forced piston phase restores the exact pre-action scene and cancels all remaining images",
+    "Reset during the forced piston phase restores level 7, its counter and playable controls without stale frames",
     "All captured stable and animation frames contain no light-gray preview pixels"
-  ]
+  ],
+  "gameOverCoverage": {
+    "status": "not-exercised-through-level-ui",
+    "reason": "No short reachable death route found in the shipped levels; no private state mutation used."
+  }
 }
