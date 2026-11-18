@@ -3,6 +3,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgram
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { checkLinkedSupport, chooseLinkedSupport, measureLinkedSupports, type LinkedSupports } from './linked-support-route.ts';
 
 export const linkOpeningsId = 'sic_link_openings';
 export const learnLinkOpeningsId = 'sic_test_visible_opening_controls';
@@ -18,12 +19,12 @@ type PlateLink = Pick<LinkedLoad, 'button' | 'idle' | 'pixels' | 'passage'> & {
 };
 type FallLink = { departure: NativeBox; arrival: NativeBox; shelf: NativeBox; landing: NativeBox; releaseDirection: number };
 type Scene = { endpoints: Endpoint[]; actorColor: number; actorMask: string; goal: NativeBox; goalColor?: number; goalMask?: string;
-  footGap?: number; relay?: [RelayLeg, RelayLeg]; load?: LinkedLoad; flight?: FallLink; plateLink?: PlateLink };
+  footGap?: number; relay?: [RelayLeg, RelayLeg]; load?: LinkedLoad; flight?: FallLink; plateLink?: PlateLink; supports?: LinkedSupports };
 type State = { epoch: number; scene: Scene; refs: string[]; selected: number | null; walkRef: string | null; crossed: boolean; rejected: string[];
   leg?: number; settleRef?: string; held?: boolean; stationed?: NativeBox; redirection?: { entry: NativeBox; release: NativeBox } };
 type PriorLink = { completed: number; scene: Scene; proof: string };
 type Choice = { kind: 'select' | 'place' | 'walk' | 'settle' | 'take' | 'drop'; input: string; target: NativeBox; index: number; reason: string;
-  point?: NativePoint; direction?: number };
+  point?: NativePoint; direction?: number; destination?: number };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; needId: string; attempt: string };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -194,6 +195,17 @@ function loadAt(parts: Part[], rows: NativeRows, load: Pick<LinkedLoad, 'button'
 
 function region(rows: NativeRows, [left, top, right, bottom]: NativeBox): NativeRows {
   return rows.slice(top, bottom + 1).map(row => row.slice(left, right + 1));
+}
+
+function discoverLinkedSupports(parts: Part[], rows: NativeRows, previous: Scene, measured: PlateLink): Scene | null {
+  const goals = parts.filter(p => p.color === previous.goalColor && p.bbox[1] > measured.button[3]
+    && height(p.bbox) === height(previous.goal) && width(p.bbox) >= 3 && width(p.bbox) <= height(p.bbox));
+  if (goals.length !== 1 || !previous.footGap) return null;
+  const goal = goals[0]!.bbox;
+  const supports = measureLinkedSupports(rows, parts, { buttons: previous.endpoints.map(({ button, color }) => ({ button, color })),
+    span: height(previous.endpoints[0]!.box), actorInk: previous.actorColor, actorMask: previous.actorMask,
+    goal, footGap: previous.footGap, floorInk: measured.passage, use: measured.button, idle: measured.idle, cube: measured.pixels });
+  return supports ? { ...previous, goal, supports } : null;
 }
 
 function discoverPlateLink(parts: Part[], rows: NativeRows, previous: Scene): Scene | null {
@@ -703,15 +715,18 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const transfer = retained?.completed === observation.levels_completed ? retained : null;
       const scene = prior?.scene ?? discover(parts, rows)
         ?? (transfer ? discoverRelay(parts, rows, transfer.scene) ?? discoverLoad(parts, rows, transfer.scene)
-          ?? discoverFallLink(parts, rows, transfer.scene) ?? discoverPlateLink(parts, rows, transfer.scene) : null);
+          ?? discoverFallLink(parts, rows, transfer.scene) ?? discoverPlateLink(parts, rows, transfer.scene)
+          ?? (state?.scene.plateLink ? discoverLinkedSupports(parts, rows, transfer.scene, state.scene.plateLink) : null) : null);
       if (!scene) return null;
       const setup = scene.endpoints.map(endpoint => endpointKey(rows, endpoint));
       const selectedIndex = setup.filter(Boolean).length === 1 ? setup.indexOf(true) : null;
       const local: State = prior ?? { epoch: observation.level_epoch, scene, selected: selectedIndex,
-        refs: (scene.relay || scene.load || scene.flight || scene.plateLink) && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
-      const controlled = local.held ? scene.plateLink ? loadedActor(parts, rows, scene) : scene.load!.standing : actor(parts, scene);
+        refs: (scene.relay || scene.load || scene.flight || scene.plateLink || scene.supports) && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
+      const support = scene.supports ? chooseLinkedSupport(rows, scene.supports) : null;
+      const controlled = scene.supports ? support?.actor
+        : local.held ? scene.plateLink ? loadedActor(parts, rows, scene) : scene.load!.standing : actor(parts, scene);
       if (!controlled) return null;
-      const choice = scene.plateLink ? plateLinkChoice(local, rows, controlled, parts)
+      const choice = scene.supports ? support?.choice : scene.plateLink ? plateLinkChoice(local, rows, controlled, parts)
         : scene.load ? loadChoice(local, rows, controlled, parts)
         : scene.relay ? relayChoice(local, rows, controlled) : scene.flight ? fallChoice(local, rows, controlled) : choose(local, rows, controlled);
       if (!choice || !observation.available_action_refs.includes(choice.input)) return null;
@@ -733,10 +748,10 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const witness = choice.point ? await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: choice.reason, evidence }) : null;
       if (choice.point && !witness) return null;
       const parent = 'G_official_completion';
-      const objective = { kind: scene.plateLink ? 'place_a_link_and_delegate_exit_support' : scene.load ? 'delegate_support_to_transferred_load'
+      const objective = { kind: scene.supports ? 'transport_loads_to_persistent_supports' : scene.plateLink ? 'place_a_link_and_delegate_exit_support' : scene.load ? 'delegate_support_to_transferred_load'
         : scene.relay ? 'replace_links_along_the_route_to_exit' : scene.flight ? 'redirect_fall_into_exit_compartment'
           : 'link_opposite_openings_to_reach_exit', scope: ref.split(':revision:', 1)[0]!,
-        subjects: scene.load || scene.plateLink ? ['visible_openings', 'actor', 'load', 'support', 'passage', 'exit']
+        subjects: scene.load || scene.plateLink || scene.supports ? ['visible_openings', 'actor', 'load', 'support', 'passage', 'exit']
           : ['visible_openings', 'control_symbols', 'actor', 'exit'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_crossing' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
@@ -748,7 +763,8 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
         steps: [{ action, expected_after: choice.target, ...(witness ? { point_binding: witness } : {}) }],
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
-        sicSituationCard: { strategy, need: scene.plateLink ? 'Prepare the link and keep a weight for the exit plate'
+        sicSituationCard: { strategy, need: scene.supports ? 'Keep all required plates occupied while leaving for the exit'
+          : scene.plateLink ? 'Prepare the link and keep a weight for the exit plate'
           : scene.load ? 'Keep the passage open after leaving the occupied support'
           : scene.relay ? 'Link each reachable compartment on the way to the exit'
           : scene.flight ? 'Reach the exit platform by linking the fall to the wall opening'
@@ -762,7 +778,9 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
             passage: local.crossed ? scene.plateLink.exitGate : scene.plateLink.shutter } : {}),
           ...(scene.flight ? { support: local.crossed ? scene.flight.landing : scene.flight.shelf,
             ...(local.redirection ? { redirection: local.redirection } : {}) } : {}),
-          openings: (scene.relay?.flatMap(leg => leg.pair) ?? scene.endpoints).map(endpoint => endpoint.box) },
+          ...(scene.supports && support ? { supports: scene.supports.plates, supportOccupied: support.occupied,
+            loads: support.cubes, passage: scene.supports.gate, passageOpen: support.open, loadControl: scene.supports.use } : {}),
+          openings: (scene.supports?.panels ?? scene.relay?.flatMap(leg => leg.pair) ?? scene.endpoints).map(endpoint => endpoint.box) },
         question: { reason: choice.reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: choice.reason, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -777,7 +795,8 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const reason = proposal.local.scene.plateLink ? plateLinkReturn(proposal, first, second)?.reason
+      const reason = proposal.local.scene.supports ? checkLinkedSupport(proposal.local.scene.supports, proposal.choice, first, second)
+        : proposal.local.scene.plateLink ? plateLinkReturn(proposal, first, second)?.reason
         : proposal.local.scene.load ? loadReturn(proposal, first, second)?.reason
         : proposal.local.scene.relay ? relayReturn(proposal, first, second)
         : proposal.local.scene.flight ? fallReturn(proposal, first, second) : checked(proposal, first, second);
@@ -787,10 +806,10 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const { local, choice } = proposal;
       if (after.levels_completed > before.levels_completed) {
         if (retained && (local.scene.relay && local.crossed || local.scene.load && local.stationed
-          || local.scene.flight && local.crossed || local.scene.plateLink && local.stationed)) retained = {
+          || local.scene.flight && local.crossed || local.scene.plateLink && local.stationed || local.scene.supports)) retained = {
           ...retained, completed: after.levels_completed, proof: after.observation_ref,
         };
-        if (!local.scene.relay && !local.scene.load && !local.scene.flight && !local.scene.plateLink && local.crossed && local.walkRef) retained = {
+        if (!local.scene.relay && !local.scene.load && !local.scene.flight && !local.scene.plateLink && !local.scene.supports && local.crossed && local.walkRef) retained = {
           completed: after.levels_completed, scene: local.scene, proof: after.observation_ref,
         };
         return { events: [] };
@@ -798,7 +817,8 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const loadEffect = local.scene.plateLink ? plateLinkReturn(proposal, first, second)
         : local.scene.load ? loadReturn(proposal, first, second) : null;
-      const reason = local.scene.load || local.scene.plateLink ? loadEffect?.reason
+      const reason = local.scene.supports ? checkLinkedSupport(local.scene.supports, choice, first, second)
+        : local.scene.load || local.scene.plateLink ? loadEffect?.reason
         : local.scene.relay ? relayReturn(proposal, first, second)
         : local.scene.flight ? fallReturn(proposal, first, second) : checked(proposal, first, second);
       const redirection = local.scene.flight && local.settleRef && reason === 'linked_crossing_observed'
@@ -818,6 +838,10 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
         reviewEvidence: 'Both openings remain visible after the firing shutter closes.',
       } : reason === 'cube_holds_exit_plate' ? {
         reviewEvidence: 'The cube replaced the moving sprite on the plate and the exit passage stayed open.',
+      } : reason === 'loads_hold_exit_passage_open' ? {
+        reviewEvidence: 'The loads occupy every required plate and the exit passage is visibly open.',
+      } : reason === 'load_holds_required_support' ? {
+        reviewEvidence: 'The deposited load remains on the plate as the sprite leaves to retrieve the next load.',
       } : redirection ? {
         reviewEvidence: 'The intermediate frames show vertical descent into one opening and horizontal movement away from the other.',
       } : {}) };
