@@ -2552,3 +2552,11 @@ Les 18 niveaux 7 sont qualifiés en SIC seul sur les 18 jeux qui en ont un. Les 
 La sauvegarde d'entrée retrouve les 208 commandes attestées jusqu'au niveau 7. SIC reprend les déplacements mesurés et place les deux axes avant de déplacer les pièces. Les retours confirment séparément le placement des contributeurs et de leurs reflets. AR25 gagne avec le solveur existant.
 
 Le niveau 8 gagne en **47 commandes et 11,99 s**. Les **208 commandes** des sept premiers niveaux gardent les mêmes empreintes, animations comprises. Les 255 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 8. Empreinte chronologique `943997fc739b7cbe9c9361daacf563489df89aebd5ac2ed638de23a1d57a7a90`.
+
+### SB26 niveau 8, fermer deux appels pour produire la répétition
+
+La sauvegarde montre deux lignes de référence identiques et une seule réserve de littéraux. SIC vérifie que les deux appels reproduisent toutes les valeurs affichées et ramènent le curseur logique au début. À égalité de correspondance avec les étiquettes, il privilégie les appels de fin de programme qui évitent de suspendre des instructions.
+
+Les 16 clics placent les six littéraux et les deux liens vérifiés. La commande 17 soumet le programme et le retour officiel valide la répétition.
+
+Le niveau 8 gagne en **17 commandes et 11,10 s**. Les **107 commandes** des sept premiers niveaux gardent les mêmes empreintes, animations comprises. Les 124 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 8. Empreinte chronologique `f3277035290297a66c05ed209b7b84e743dc9c06ef151bb27ff3dd5c058dfe8c`. TypeScript et les quatre tests ciblés passent.
