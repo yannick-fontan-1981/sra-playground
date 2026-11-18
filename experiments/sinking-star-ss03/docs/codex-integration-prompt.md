@@ -9,6 +9,7 @@ Travaille depuis le main actuel, dans ton propre checkout et ta propre branche, 
 La version demandée est SS03 v0.4.0, présente dans experiments/sinking-star-ss03/. Son commit de code est 74ccafef164f6c3ce006b5b6fe8598ff9d11d8e3, intégré par 1242dadee571c30bd4ffc55e999bb8552eefdc56. Ces SHA identifient la référence ; pars du main actuel.
 
 Lis AGENTS.md, les consignes locales applicables, puis :
+
 - experiments/sinking-star-ss03/README.md
 - experiments/sinking-star-ss03/docs/integration.md
 - experiments/sinking-star-ss03/docs/specification.md
@@ -25,6 +26,7 @@ Ajoute SS03 comme troisième jeu de Custom 4, après SS01 et SS02, avec le titre
 Réutilise directement les modules TypeScript validés du laboratoire, comme le fait SS02. Crée l’adaptateur SS03 sur le modèle de src/games/sinking-star-ss02.ts, avec PullPuzzleSession et les opérations load, action, undo, reset, restart et selectLevel.
 
 Raccorde le jeu dans :
+
 - src/runtime/native-game-dispatcher.ts ;
 - src/games/catalog.ts ;
 - src/main.ts et les styles nécessaires ;
