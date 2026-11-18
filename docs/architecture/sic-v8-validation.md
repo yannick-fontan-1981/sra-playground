@@ -1917,3 +1917,13 @@ SIC mesure le plateau avant de déplacer les curseurs. Quand aucun trajet sans p
 Le rejeu depuis le niveau 1 gagne CASC en **93 commandes SIC seul**. Les **71 premières commandes** reproduisent les actions et retours des niveaux 1 à 5. Au niveau 6, SIC prépare le bloqueur et le continuateur en 19 commandes, puis gagne à la troisième rafale. Le niveau se termine en **22 commandes et 15,79 s** au budget de 360 s de temps actif et 600 commandes. TypeScript et les **3 tests ciblés** passent. La couverture atteint **540/636 niveaux (84,9 %)**, dont **41/99 niveaux 6 (41,4 %)**.
 
 Empreinte jusqu'à la victoire `4a9a756b032008a54b6693e140f65322afe3917802fddf2f6a9ad44d244e987e`.
+
+### CAVA niveau 6, suivre les portes avec les sceaux, le portail et les dalles
+
+La référence s'arrête après 80 commandes au niveau 6, faute de famille applicable. À l'entrée, la mesure retrouve trois sceaux, le portail et quatre destinations éclairées. Le graphe de collecte laisse de côté les portes et les commutateurs. Il ne distingue pas non plus les dalles fragiles des autres motifs répétés. La mesure retrouve les deux groupes de portes, isole la paire de commutateurs, puis réutilise le motif des dalles observé au niveau précédent.
+
+La recherche distingue les états par la position, les sceaux acquis, les dalles consommées et le groupe de portes ouvert. Elle simule la destination après le portail et le changement de phase sur le commutateur. Au clic 9, le retour confirme la téléportation et la disparition de l'appui quitté. Seuls quatre pixels de terrain subsistent sur cet appui. Au clic 15, le retour confirme l'ouverture de l'autre groupe de portes et les nouveaux sauts accessibles. Le dernier sceau est collecté au clic 19 et la sortie valide le niveau au clic 20.
+
+Le rejeu depuis le niveau 1 gagne en **83 commandes SIC seul**. Les **63 premières commandes** et leurs retours reproduisent ceux des niveaux 1 à 5. Le niveau 6 gagne en **20 clics et 14,94 s** au budget de 360 s de temps actif et 600 commandes. L'essai depuis la sauvegarde reproduit les 20 clics et chaque retour attendu. TypeScript et les **2 tests de parcours avec état** passent. PORT reproduit à l'identique les **16 commandes** et leurs retours depuis sa sauvegarde du niveau 6 jusqu'à la victoire. La couverture atteint **541/636 niveaux (85,1 %)**, dont **42/99 niveaux 6 (42,4 %)**.
+
+Empreinte jusqu'à la victoire `646ba852a78bb4657e1a894d612fd5a0bde8008643a4ac96ce5bb08ae8525c65`.
