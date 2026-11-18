@@ -50,6 +50,13 @@ const gcd = (first: number, second: number): number => {
   return first;
 };
 
+function fitsSampledSize(width: number, height: number, referenceWidth: number, referenceHeight: number,
+  numerator: number, denominator: number, maximumExtra: number) {
+  const extraWidth = Math.floor(width * numerator / denominator) - referenceWidth;
+  const extraHeight = Math.floor(height * numerator / denominator) - referenceHeight;
+  return extraWidth >= 0 && extraWidth <= maximumExtra && extraHeight >= 0 && extraHeight <= maximumExtra;
+}
+
 export function facetCompare(reference: NativeRows, image: ReadonlyMap<string, number>, stamp: NativeRows,
   placements: readonly (readonly [number, number])[], background: number, palette: readonly number[],
   maxDenominator = 8, sampleOffsets: readonly number[] = [-0.5, 0, 0.5], allowTrimmedContour = false): FacetSamplingComparison[] {
@@ -59,9 +66,7 @@ export function facetCompare(reference: NativeRows, image: ReadonlyMap<string, n
   const width = r - l + 1, height = b - t + 1, ratios = new Map<string, FacetPoint>();
   // Fraction reduces equal rationals before the source sorts them by value.
   for (let d = 1; d <= maxDenominator; d++) for (let n = 1; n <= d; n++) {
-    const extraWidth = Math.floor(width * n / d) - rw, extraHeight = Math.floor(height * n / d) - rh;
-    const maximumExtra = allowTrimmedContour ? 1 : 0;
-    if (extraWidth < 0 || extraHeight < 0 || extraWidth > maximumExtra || extraHeight > maximumExtra) continue;
+    if (!fitsSampledSize(width, height, rw, rh, n, d, allowTrimmedContour ? 1 : 0)) continue;
     const divisor = gcd(n, d), ratio: FacetPoint = [n / divisor, d / divisor];
     ratios.set(`${ratio[0]}/${ratio[1]}`, ratio);
   }
@@ -141,7 +146,8 @@ export function facetLayeredCandidates(reference: NativeRows, stamp: NativeRows,
   steps: ReadonlyMap<number, FacetPoint>, background: number, palette: readonly number[],
   maxUnits: number, maxStates: number, maxDenominator: number, sampleOffsets: readonly number[],
   workspace: FacetPoint): FacetSearchResult {
-  type State = { units: FacetTriple[]; placements: FacetPoint[]; actions: FacetStencilAction[] };
+  type Extent = [number, number, number, number];
+  type State = { units: FacetTriple[]; placements: FacetPoint[]; actions: FacetStencilAction[]; extent: Extent };
   const ports = faces.filter(face => steps.has(face.value)).sort((a, b) => facetLexicographic(a.point, b.point));
   // Exactly three distinct extrusion axes projecting to a closed triangle give
   // a viewing ray. Moving along all three axes returns to the same image origin.
@@ -152,32 +158,55 @@ export function facetLayeredCandidates(reference: NativeRows, stamp: NativeRows,
     return { status: 'no_compatible_composition', examined: 0, solutions: [] };
   }
   const stencil = stamp.flatMap((row, y) => row.flatMap((value, x) => value === background ? [] : [{ x, y, value }]));
+  const stampWidth = stamp[0]!.length, stampHeight = stamp.length;
+  const [xStride, yStride] = ([0, 1] as const).map(axis => displacements.reduce((stride, shift) => gcd(stride, Math.abs(shift[axis])), 0));
+  const finalSizes = new Set<string>(), heightLimit = Array<number>(workspace[0] + 2).fill(0);
+  const referenceWidth = reference[0]!.length, referenceHeight = reference.length;
+  for (let width = stampWidth; width <= workspace[0]; width += xStride!) {
+    for (let height = stampHeight; height <= workspace[1]; height += yStride!) {
+      for (let d = 1; d <= maxDenominator; d++) for (let n = 1; n <= d; n++) {
+        if (fitsSampledSize(width, height, referenceWidth, referenceHeight, n, d, 1)) {
+          finalSizes.add(facetPointKey(width, height));
+          heightLimit[width] = height;
+        }
+      }
+    }
+  }
+  // Adding a unit can expand the rendered extent but cannot shrink it.
+  for (let width = workspace[0]; width >= stampWidth; width--) {
+    heightLimit[width] = Math.max(heightLimit[width]!, heightLimit[width + 1]!);
+  }
   const unitKey = ([a, b, c]: FacetTriple) => (a * maxUnits + b) * maxUnits + c;
   const depth = ([a, b, c]: FacetTriple) => a + b + c;
-  let states: State[] = [{ units: [[0, 0, 0]], placements: [[0, 0]], actions: [] }];
+  const paintOrder = (units: FacetTriple[]) => units.map((_, index) => index)
+    .sort((i, j) => depth(units[i]!) - depth(units[j]!) || facetLexicographic(units[i]!, units[j]!));
+  const facePixels = ports.map(face => {
+    const distance = ([x, y]: FacetPoint) => (x - face.point[0]) ** 2 + (y - face.point[1]) ** 2;
+    return face.pixels.filter(([x, y]) => stamp[y]?.[x] !== undefined && stamp[y]![x] !== background)
+      .sort((a, b) => distance(a) - distance(b));
+  });
+  let states: State[] = [{ units: [[0, 0, 0]], placements: [[0, 0]], actions: [], extent: [0, 0, 0, 0] }];
   let examined = 0;
   for (let count = 1; count <= maxUnits && states.length; count++) {
-    const following: State[] = [], seen = new Set<string>(), solutions: FacetStencilSolution[] = [];
-    for (const { units, placements, actions } of states) {
+    const solutions: FacetStencilSolution[] = [];
+    for (const { units, placements, actions, extent: [left, top, right, bottom] } of states) {
       if (examined >= maxStates) return { status: 'bounded_incomplete', examined, solutions };
       examined++;
-      const paint_order = units.map((_, index) => index)
-        .sort((i, j) => depth(units[i]!) - depth(units[j]!) || facetLexicographic(units[i]!, units[j]!));
-      const image: FacetImage = new Map(), owners = new Map<string, number>();
+      if (!finalSizes.has(facetPointKey(right - left + stampWidth, bottom - top + stampHeight))) continue;
+      const paint_order = paintOrder(units), image: FacetImage = new Map();
       for (const index of paint_order) {
         const [dx, dy] = placements[index]!;
-        for (const { x, y, value } of stencil) {
-          const key = facetPointKey(x + dx, y + dy);
-          image.set(key, value);
-          owners.set(key, index);
-        }
+        for (const { x, y, value } of stencil) image.set(facetPointKey(x + dx, y + dy), value);
       }
       const comparisons = facetCompare(reference, image, stamp, placements, background, palette, maxDenominator, sampleOffsets, true);
       if (comparisons.length) solutions.push({ placements, actions, comparisons, paint_order });
-      if (solutions.length || count === maxUnits) continue;
-      const occupied = units.map(unitKey);
-      const left = Math.min(...placements.map(p => p[0])), right = Math.max(...placements.map(p => p[0]));
-      const top = Math.min(...placements.map(p => p[1])), bottom = Math.max(...placements.map(p => p[1]));
+    }
+    if (solutions.length) return { status: 'compatible_minimal_within_model', examined, solutions,
+      model_limit: 'Distinct logical origins can share one projected origin; later checks verify each visible effect.' };
+    if (count === maxUnits) break;
+    const following: State[] = [], seen = new Set<string>();
+    for (const { units, placements, actions, extent: [left, top, right, bottom] } of states) {
+      const occupied = units.map(unitKey), order = paintOrder(units);
       for (const [index, origin] of placements.entries()) for (const [axis, face] of ports.entries()) {
         const unit = [...units[index]!] as FacetTriple;
         unit[axis] = unit[axis]! + 1;
@@ -186,23 +215,23 @@ export function facetLayeredCandidates(reference: NativeRows, stamp: NativeRows,
         const key = [...occupied, id].sort((a, b) => a - b).join(',');
         if (seen.has(key)) continue;
         const offset = displacements[axis]!, destination: FacetPoint = [origin[0] + offset[0], origin[1] + offset[1]];
-        if (Math.max(right, destination[0]) - Math.min(left, destination[0]) + stamp[0]!.length > workspace[0]
-          || Math.max(bottom, destination[1]) - Math.min(top, destination[1]) + stamp.length > workspace[1]) continue;
-        const distance = ([x, y]: FacetPoint) => (x - face.point[0]) ** 2 + (y - face.point[1]) ** 2;
-        let pixel: FacetPoint | undefined;
-        for (const p of face.pixels) {
-          if (owners.get(facetPointKey(origin[0] + p[0], origin[1] + p[1])) !== index) continue;
-          if (!pixel || distance(p) < distance(pixel)) pixel = p;
-        }
+        const extent: Extent = [Math.min(left, destination[0]), Math.min(top, destination[1]),
+          Math.max(right, destination[0]), Math.max(bottom, destination[1])];
+        const width = extent[2] - extent[0] + stampWidth, height = extent[3] - extent[1] + stampHeight;
+        if (height > (heightLimit[width] ?? 0)) continue;
+        const front = order.slice(order.indexOf(index) + 1);
+        const pixel = facePixels[axis]!.find(([x, y]) => front.every(other => {
+          const [dx, dy] = placements[other]!;
+          const ink = stamp[origin[1] + y - dy]?.[origin[0] + x - dx];
+          return ink === undefined || ink === background;
+        }));
         if (!pixel) continue;
         seen.add(key);
         const action: FacetStencilAction = { owner_origin: origin, port_value: face.value, offset, destination,
           point: [origin[0] + pixel[0], origin[1] + pixel[1]] };
-        following.push({ units: [...units, unit], placements: [...placements, destination], actions: [...actions, action] });
+        following.push({ units: [...units, unit], placements: [...placements, destination], actions: [...actions, action], extent });
       }
     }
-    if (solutions.length) return { status: 'compatible_minimal_within_model', examined, solutions,
-      model_limit: 'Distinct logical origins can share one projected origin; later checks verify each visible effect.' };
     states = following;
   }
   return { status: 'no_compatible_composition', examined, solutions: [] };

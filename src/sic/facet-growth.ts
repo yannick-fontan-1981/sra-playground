@@ -38,7 +38,7 @@ const compoundSearch: FacetCompoundConfiguration = {
   maximum_sample_denominator: 8,
   sample_offsets: [-0.5, 0, 0.5],
 };
-const layeredSearch = { maximumUnits: 8, maximumStates: 32_000 };
+const layeredSearch = { maximumUnits: 10, maximumStates: 256_000 };
 const sameShape = (a: FacetProjection['offer']['support'], b: FacetProjection['offer']['support']) =>
   JSON.stringify(facetShape(a)) === JSON.stringify(facetShape(b));
 
