@@ -9,15 +9,21 @@ export const navigateRevealedGridId = 'sic_navigate_revealed_grid';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Mechanisms = { pads: Record<number, NativePoint>; doors: Record<number, number> };
+type Sentry = [number, number, number][];
 type Grid = { box: NativeBox; pitch: number; columns: number; size: number; tint: number; base: number; actor: number; enemy: number; trail: number;
-  goal: number; charges: NativePoint[]; actorPixels?: NativePoint[]; rail?: number; sentry?: [number, number, number][]; multipleSentries?: true;
+  goal: number; charges: NativePoint[]; actorPixels?: NativePoint[]; rail?: number; sentry?: Sentry; multipleSentries?: true;
+  sentryPatterns?: Sentry[];
   mechanisms?: Mechanisms };
 type Cell = 'wall' | 'free';
 type Reading = { position: number; obstacle: number | null; obstacles: number[]; risk: number[];
   memory: Partial<Record<number, Cell>>; charges: number; sentries?: number[]; sentryRisk?: number[];
   closedDoors?: number[]; landings?: Record<number, number>; failedEntrances?: number[]; nextHazards?: number[] };
 type Motion = { from: number; at: number };
-type Timing = { start: number; patrols: number[][]; walls: number[][]; scannedPads: number[]; pendingPad?: number };
+type RailTrack = { at: number; shifted: number[]; period?: number };
+type RailClock = { turn: number; rails: Record<string, RailTrack>; crossed: number[]; visits: number[]; scans: number[];
+  gateGoal?: number; gateEntry?: { gate: number; from: number } };
+type Timing = { start: number; patrols: number[][]; walls: number[][]; scannedPads: number[]; pendingPad?: number;
+  clock?: RailClock };
 type State = { epoch: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number; timing?: Timing };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean; entry?: number };
 type Walk = { action: string; target: number; entry?: number };
@@ -51,9 +57,14 @@ function measureMechanisms(rows: NativeRows, marks: readonly Part[], grid: Grid)
   for (let i = 0; i < size; i++) {
     if (pads[i]) continue;
     const [a, b] = tile(grid, i), left = rows[b + 1]![a + 1]!, right = rows[b + 1]![a + pitch - 2]!;
-    if (left === right || known.has(left) || known.has(right)) continue;
     const innerRows = rows.slice(b + 1, b + pitch - 1);
-    if (innerRows.every(row => row[a + 1] === left && row[a + pitch - 2] === right)) doors[i] = left;
+    if (left !== right && !known.has(left) && !known.has(right)
+      && innerRows.every(row => row[a + 1] === left && row[a + pitch - 2] === right)) doors[i] = left;
+    else if (grid.sentryPatterns) {
+      const edge = rows[b + 1]![a]!, far = a + pitch - 1;
+      if (!known.has(edge) && rows[b]![a] === grid.tint && rows[b]![far] !== edge
+        && innerRows.every(row => row[a] === edge && row[far] === edge && row[a + 1] !== edge)) doors[i] = edge;
+    }
   }
   return { pads, doors };
 }
@@ -128,10 +139,16 @@ function measure(rows: NativeRows, inherited?: Grid): Grid | null {
       const signature = sentryPatterns[0];
       const sentry = signature?.some(([, , value]) => value === actor.color)
         && sentryPatterns.every(pattern => pattern.every(([, , value], i) => value === signature[i]?.[2])) ? signature : undefined;
+      const secondSignatures = !sentry && rebound?.sentry ? sentryPatterns.filter(pattern =>
+        pattern.some(([, , value]) => value === actor.color) && new Set(pattern.map(([, , value]) => value)).size === 2
+        && pattern.length === rebound.sentry!.length
+        && pattern.every(([dx,dy], i) => dx === rebound.sentry![i]?.[0] && dy === rebound.sentry![i]?.[1])) : [];
+      const separateSentries = [...new Map(secondSignatures.map(pattern => [JSON.stringify(pattern), pattern])).values()];
       const grid: Grid = { box, pitch, columns, size, tint, base, actor: actor.color, enemy: enemyFrame.color, trail,
         goal, charges: badges.map(p => center(p.bbox)), ...(repeated || rebound ? { actorPixels } : {}),
         ...(rail === null ? {} : { rail }), ...(sentry ? { sentry } : {}),
-        ...(sentry && sentryPatterns.length > 1 ? { multipleSentries: true as const } : {}) };
+        ...(sentry && sentryPatterns.length > 1 ? { multipleSentries: true as const } : {}),
+        ...(separateSentries.length > 1 ? { sentryPatterns: separateSentries, multipleSentries: true as const } : {}) };
       const mechanisms = rebound && marks.length ? measureMechanisms(rows, marks, grid) : null;
       if (marks.length && !mechanisms) continue;
       candidates.push(mechanisms ? { ...grid, mechanisms } : grid);
@@ -150,7 +167,8 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
     const actorVisible = grid.actorPixels ? grid.actorPixels.every(([dx, dy]) => rows[y + dy]?.[x + dx] === grid.actor) : d === grid.actor;
     const occupied = actorVisible && a !== grid.enemy && i !== grid.goal;
     if (occupied) positions.push(i);
-    if (grid.sentry?.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value)) sentries.push(i);
+    if (grid.sentry?.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value)
+      || grid.sentryPatterns?.some(pattern => pattern.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value))) sentries.push(i);
     if (a === grid.enemy) obstacles.push(i);
     if (a === grid.enemy || d === grid.trail || (grid.rail !== undefined && d === grid.rail)) risk.add(i);
     const door = grid.mechanisms?.doors[i];
@@ -172,7 +190,7 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
     })];
   })]) : null;
   return { position: positions[0]!, obstacle: obstacles[0] ?? null, obstacles, risk: [...risk], memory,
-    charges: grid.charges.filter(p => colorAt(rows, p) === grid.enemy).length, ...(grid.sentry ? { sentries } : {}),
+    charges: grid.charges.filter(p => colorAt(rows, p) === grid.enemy).length, ...(grid.sentry || grid.sentryPatterns ? { sentries } : {}),
     ...(sentryRisk ? { sentryRisk: [...sentryRisk] } : {}),
     ...(grid.mechanisms ? { closedDoors, landings: { ...prior?.landings }, failedEntrances: prior?.failedEntrances ?? [] } : {}) };
 }
@@ -181,16 +199,18 @@ function hazardOnNextMove(reading: Reading, target: number): boolean {
   return reading.obstacles.includes(target) || !!reading.sentries?.includes(target) || !!reading.nextHazards?.includes(target);
 }
 
-function route(reading: Reading, grid: Grid, protectInitialMove = false): Walk[] | null {
+function route(reading: Reading, grid: Grid, protectInitialMove = false, destination = grid.goal, clock?: RailClock): Walk[] | null {
   const start = reading.position, risk = new Set(reading.risk), sentryRisk = new Set(reading.sentryRisk);
   const { mechanisms } = grid;
+  const repeats = new Map<number, number>();
+  for (const cell of clock?.visits ?? []) repeats.set(cell, (repeats.get(cell) ?? 0) + 1);
   type Candidate = { index: number; cost: number; from?: { parent: Candidate; step: Walk } };
   const queue: Candidate[] = [{ index: start, cost: 0 }], best = new Map([[start, 0]]);
   while (queue.length) {
     queue.sort((a, b) => a.cost - b.cost);
     const candidate = queue.shift()!, { index, cost } = candidate;
     if (cost !== best.get(index)) continue;
-    if (index === grid.goal) {
+    if (index === destination) {
       const path: Walk[] = [];
       for (let node = candidate; node.from; node = node.from.parent) path.push(node.from.step);
       return path.reverse();
@@ -201,14 +221,20 @@ function route(reading: Reading, grid: Grid, protectInitialMove = false): Walk[]
       if (x < 0 || x >= grid.columns || y < 0 || entry >= grid.size || reading.memory[entry] === 'wall') continue;
       const closed = reading.closedDoors?.includes(entry);
       if (closed && !reading.charges) continue;
-      const target = reading.landings?.[entry] ?? entry;
+      const arrow = mechanisms?.pads[entry], projected = arrow ? entry + arrow[0] + arrow[1] * grid.columns : entry;
+      const alongPad = clock && arrow && x + arrow[0] >= 0 && x + arrow[0] < grid.columns && projected >= 0 && projected < grid.size
+        && reading.memory[projected] !== 'wall' && !reading.closedDoors?.includes(projected)
+        && axisDistance(projected, destination, grid) < axisDistance(entry, destination, grid);
+      const target = reading.landings?.[entry] ?? (alongPad ? projected : entry);
       if (index === start && (mechanisms ? protectInitialMove && (hazardOnNextMove(reading, entry) || hazardOnNextMove(reading, target))
         : reading.sentries?.some(sentry => axisDistance(sentry, target, grid) <= 1))) continue;
-      const arrow = mechanisms?.pads[entry], projected = arrow ? entry + arrow[0] + arrow[1] * grid.columns : entry;
       const movesAway = arrow && entry === target && axisDistance(projected, grid.goal, grid) > axisDistance(entry, grid.goal, grid);
+      const riskyStep = clock && destination === grid.goal ? 6 : mechanisms ? 1 : 8;
+      const patrolledStep = clock && destination === grid.goal ? 2 : mechanisms ? 1 : 6;
       const nextCost = cost + 1 + (reading.memory[target] ? 0 : mechanisms ? 1 : 2)
-        + (risk.has(target) ? mechanisms ? 1 : 8 : 0) + (sentryRisk.has(target) ? mechanisms ? 1 : 6 : 0)
-        + (movesAway ? 10 : 0) + (closed ? 16 : 0) + (reading.failedEntrances?.includes(entry) ? 25 : 0);
+        + (risk.has(target) ? riskyStep : 0) + (sentryRisk.has(target) ? patrolledStep : 0)
+        + Math.max(0, (repeats.get(target) ?? 0) - 1) * 3 + (clock?.crossed.includes(entry) ? 9 : 0)
+        + (movesAway ? 10 : 0) + (closed ? grid.sentryPatterns ? 4 : 16 : 0) + (reading.failedEntrances?.includes(entry) ? 25 : 0);
       if (nextCost >= (best.get(target) ?? Infinity)) continue;
       best.set(target, nextCost);
       queue.push({ index: target, cost: nextCost, from: { parent: candidate, step: { action, target, ...(target === entry ? {} : { entry }) } } });
@@ -260,6 +286,52 @@ function forecastTracks(tracks: readonly number[][]): number[] {
   });
 }
 
+function movingRails(rows: NativeRows, grid: Grid) {
+  const { box, pitch, columns, size } = grid;
+  return geometricComponents(rows).flatMap(({ bbox: [l,t,r,b], color }) => {
+    const w = r - l + 1, h = b - t + 1;
+    if (color !== grid.enemy || l < box[0] || t < box[1] || r > box[2] || b > box[3]
+      || w % pitch || h % pitch || (l - box[0]) % pitch || (t - box[1]) % pitch) return [];
+    const x = (l - box[0]) / pitch, y = (t - box[1]) / pitch;
+    const cx = l + Math.floor(w / 2), cy = t + Math.floor(h / 2);
+    if (grid.rail === undefined || rows[cy]?.[cx] !== grid.rail) return [];
+    const headings = directions.filter(([, dx, dy]) => rows[cy + dy]?.[cx + dx] === grid.rail);
+    if (headings.length !== 1) return [];
+    const [, dx, dy] = headings[0]!;
+    const next: number[] = [];
+    for (let j = 0; j < h / pitch; j++) for (let i = 0; i < w / pitch; i++) {
+      const col = x + i + dx, at = (y + j + dy) * columns + col;
+      if (col >= 0 && col < columns && at >= 0 && at < size) next.push(at);
+    }
+    return [{ id: [w, h, dx ? 'row' : 'column', dx ? y : x].join(','), at: y * columns + x, next }];
+  });
+}
+
+function updateRailClock(rows: NativeRows, grid: Grid, prior?: RailClock): Pick<RailClock, 'turn' | 'rails'> {
+  const turn = (prior?.turn ?? -1) + 1;
+  const rails: Record<string, RailTrack> = {};
+  const items = movingRails(rows, grid);
+  for (const item of items) {
+    if (items.filter(candidate => candidate.id === item.id).length !== 1) continue;
+    const previous = prior?.rails[item.id], moved = previous && previous.at !== item.at;
+    const shifted = moved ? [...previous.shifted.slice(-3), turn] : previous?.shifted ?? [];
+    const diff = shifted.length >= 2 ? shifted.at(-1)! - shifted.at(-2)! : 0;
+    const repeat = shifted.length >= 3 && diff === shifted.at(-2)! - shifted.at(-3)!
+      || shifted.length === 2 && diff === shifted[0] ? diff : 0;
+    const retained = previous?.period && (!moved || diff % previous.period === 0) ? previous.period : 0;
+    const period = retained || repeat;
+    rails[item.id] = { at: item.at, shifted, ...(period ? { period } : {}) };
+  }
+  return { turn, rails };
+}
+
+function scheduledRailHazards(rows: NativeRows, grid: Grid, clock: NonNullable<Timing['clock']>) {
+  return movingRails(rows, grid).flatMap(item => {
+    const track = clock.rails[item.id];
+    return track?.period && (clock.turn + 1 - track.shifted.at(-1)!) % track.period !== 0 ? [] : item.next;
+  });
+}
+
 function chooseTimed({ grid, last, timing, consecutiveWaits }: State, path: Walk[] | null): Choice | null {
   const pulse = (target: number, kind: 'pulse' | 'wait'): Choice =>
     ({ action: { action_ref: 'ACTION5', data: {} }, kind, target, uncertain: true });
@@ -285,19 +357,66 @@ function chooseTimed({ grid, last, timing, consecutiveWaits }: State, path: Walk
     ...(entry === undefined ? {} : { entry }) };
 }
 
+function chooseWithPulseReserve(local: State, path: Walk[] | null, destination: number): Choice | null {
+  const { grid, last, consecutiveWaits } = local;
+  const clock = local.timing!.clock!;
+  const first = path?.[0];
+  const contact = first ? first.entry ?? first.target : last.position;
+  const canScan = last.charges > 0 && !last.nextHazards?.includes(last.position);
+  const closed = !!last.closedDoors?.includes(contact);
+  const reveal = clock.crossed.length > 0 && !last.risk.includes(last.position)
+    && !clock.scans.some(cell => axisDistance(cell, last.position, grid) <= 2)
+    && (!path || last.charges > 1 && path.slice(0, 5).filter(leg => !last.memory[leg.target]).length >= 2);
+  if (canScan && (closed || reveal)) {
+    return { action: { action_ref: 'ACTION5', data: {} }, kind: 'pulse', target: closed ? contact : last.position, uncertain: true };
+  }
+  if (!first) return null;
+  const hazardous = closed || hazardOnNextMove(last, first.target) || hazardOnNextMove(last, contact);
+  const move = ({ action, target, entry }: Walk): Choice => ({
+    action: { action_ref: action, data: {} }, kind: 'move', target,
+    uncertain: !last.memory[target] || !!grid.mechanisms?.pads[entry ?? target] && last.landings?.[entry ?? target] === undefined,
+    ...(entry === undefined ? {} : { entry }),
+  });
+  if (!hazardous) return move(first);
+  const [x, y] = coordinate(last.position, grid);
+  if (!last.nextHazards?.includes(last.position) && consecutiveWaits < 12) {
+    if (!last.charges) return { action: { action_ref: 'ACTION5', data: {} }, kind: 'wait', target: contact, uncertain: true };
+    const hold = directions.find(([, dx, dy]) => {
+      const next = (y + dy) * grid.columns + x + dx;
+      return x + dx >= 0 && x + dx < grid.columns && y + dy >= 0 && next < grid.size && last.memory[next] === 'wall';
+    });
+    if (hold) return { action: { action_ref: hold[0], data: {} }, kind: 'wait', target: contact, uncertain: true };
+  }
+  const alternate = route(last, grid, true, destination, local.timing?.clock)?.[0];
+  if (alternate && !last.closedDoors?.includes(alternate.entry ?? alternate.target)) return move(alternate);
+  const refuge = directions.flatMap(([action, dx, dy]) => {
+    const target = (y + dy) * grid.columns + x + dx;
+    return x + dx >= 0 && x + dx < grid.columns && y + dy >= 0 && target < grid.size && last.memory[target] === 'free'
+      && !grid.mechanisms?.pads[target] && !last.closedDoors?.includes(target) && !hazardOnNextMove(last, target)
+      ? [{ action, target }] : [];
+  }).sort((a, b) => Number(last.risk.includes(a.target)) - Number(last.risk.includes(b.target))
+    || axisDistance(a.target, contact, grid) - axisDistance(b.target, contact, grid))[0];
+  return refuge ? move(refuge) : null;
+}
+
+function showsActor(rows: NativeRows, grid: Grid, position: number): boolean {
+  const [left, top] = tile(grid, position);
+  return !!grid.actorPixels?.every(([a, b]) => rows[top + b]?.[left + a] === grid.actor);
+}
+
 function forcedLanding(grid: Grid, entry: number, position: number, frames: readonly NativeRows[]): boolean {
   const arrow = grid.mechanisms?.pads[entry];
   if (!arrow || !grid.actorPixels || entry === position) return false;
   const [x, y] = coordinate(entry, grid), [u, v] = coordinate(position, grid), [dx, dy] = arrow;
   if (dx ? v !== y || (u - x) * dx <= 0 : u !== x || (v - y) * dy <= 0) return false;
-  const [left, top] = tile(grid, entry);
-  return frames.some(frame => grid.actorPixels!.every(([a, b]) => frame[top + b]?.[left + a] === grid.actor));
+  return frames.some(frame => showsActor(frame, grid, entry));
 }
 
 function restoredGridStart(local: State, choice: Choice, next: Reading): boolean {
   const { timing, last } = local;
   return !!timing && next.position === timing.start && last.position !== timing.start
-    && choice.target !== timing.start && next.charges > last.charges;
+    && choice.target !== timing.start && (next.charges > last.charges
+      || !!timing.clock && axisDistance(last.position, timing.start, local.grid) > 1);
 }
 
 function choose({ grid, last, previousObstacle, consecutiveWaits, motions }: State, path: Walk[] | null): Choice | null {
@@ -323,9 +442,9 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
     id: navigateRevealedGridId,
     async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
-      if (state?.epoch !== observation.level_epoch - 1 && !state?.grid.sentry) return null;
+      if (state?.epoch !== observation.level_epoch - 1 && !state?.grid.sentry && !state?.grid.sentryPatterns) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal?.local.grid.sentry ? proposal : null;
+      return proposal?.local.grid.sentry || proposal?.local.grid.sentryPatterns ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
@@ -337,11 +456,21 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const last = read(rows, grid, prior?.last);
       if (!last) return null;
       const timing = grid.mechanisms ? prior?.timing ?? { start: last.position,
-        patrols: updateTracks([], last.sentries ?? [], grid), walls: updateTracks([], last.obstacles, grid), scannedPads: [] } : null;
-      if (timing) last.nextHazards = forecastTracks([...timing.walls, ...timing.patrols]);
+        patrols: updateTracks([], last.sentries ?? [], grid), walls: updateTracks([], last.obstacles, grid), scannedPads: [],
+        ...(grid.sentryPatterns ? { clock: { ...updateRailClock(rows, grid), crossed: [], visits: [last.position], scans: [] } } : {}) } : null;
+      if (timing) last.nextHazards = [...new Set(timing.clock
+        ? [...forecastTracks(timing.patrols), ...scheduledRailHazards(rows, grid, timing.clock)]
+        : forecastTracks([...timing.walls, ...timing.patrols]))];
       const local: State = prior ? { ...prior, last } : { epoch: observation.level_epoch, grid, last, previousObstacle: null,
         refs: !normal && inherited ? inherited.refs : [], consecutiveWaits: 0, ...(timing ? { timing } : {}) };
-      const path = route(last, grid), choice = timing ? chooseTimed(local, path) : choose(local, path);
+      const clock = timing?.clock;
+      const door = clock ? clock.gateGoal ?? (last.charges
+        ? last.closedDoors?.find(cell => !clock.crossed.includes(cell)) : undefined) : undefined;
+      const gateEntry = timing?.clock?.gateEntry;
+      const across = gateEntry?.gate === last.position ? gateEntry.gate * 2 - gateEntry.from : undefined;
+      const destination = across === undefined ? door ?? grid.goal : last.landings?.[across] ?? across;
+      const path = route(last, grid, false, destination, timing?.clock), choice = timing ? grid.sentryPatterns
+        ? chooseWithPulseReserve(local, path, destination) : chooseTimed(local, path) : choose(local, path);
       if (!choice) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
@@ -358,7 +487,8 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const contact = choice.entry ?? choice.target, pad = grid.mechanisms?.pads[contact];
       const situation = choice.kind === 'pulse' && last.closedDoors?.includes(contact) ? 'Test the pulse at the visible closed passage'
         : choice.kind === 'pulse' ? 'Reveal nearby cells before taking an uncertain route'
-          : choice.kind === 'wait' && timing ? 'Let the moving obstacle pass before crossing'
+          : choice.kind === 'wait' && choice.action.action_ref !== 'ACTION5' ? 'Advance the obstacle phase without spending a pulse'
+            : choice.kind === 'wait' && timing ? 'Let the moving obstacle pass before crossing'
             : choice.kind === 'wait' ? waiting : pad && choice.uncertain ? 'Test the landing from the directional marker'
               : choice.uncertain ? 'Test the next unconfirmed cell on the route' : traversing;
       const parent = 'G_official_completion';
@@ -367,9 +497,12 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = navigateRevealedGridId + ':' + need.id, action = choice.action;
       const walk: Walk[] = [];
-      if (known && !timing) for (const leg of path!.slice(0, Math.min(remaining, maximumCommittedActions))) {
+      const first = path?.[0];
+      if (known && (!timing || clock && first?.action === action.action_ref && first.target === choice.target)) for (const leg of path!.slice(0, Math.min(remaining, maximumCommittedActions))) {
         if (last.memory[leg.target] !== 'free' || last.risk.includes(leg.target) || last.sentryRisk?.includes(leg.target)
           || last.obstacles.includes(leg.target)) break;
+        if (clock && (leg.entry !== undefined || grid.mechanisms?.pads[leg.target] || grid.mechanisms?.doors[leg.target] !== undefined
+          || last.nextHazards?.includes(leg.target))) break;
         walk.push(leg);
       }
       const actions = walk.length > 1 ? walk.map(leg => ({ action_ref: leg.action, data: {} })) : [action];
@@ -393,10 +526,14 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
     },
     before(proposal, index, packet, current) {
       if (index > 0 && proposal.walk) {
-        const { local } = proposal, reading = read(packet.frame_rows, local.grid, local.last), target = proposal.walk[index]!.target;
+        const { local } = proposal;
+        const basis = local.timing?.clock && state?.epoch === current.level_epoch ? state : local;
+        const reading = read(packet.frame_rows, local.grid, basis.last), target = proposal.walk[index]!.target;
+        const clock = basis.timing?.clock;
+        const nextHazards = clock ? [...scheduledRailHazards(packet.frame_rows, local.grid, clock), ...forecastTracks(basis.timing!.patrols)] : [];
         const admitted = local.epoch === current.level_epoch && reading?.position === proposal.walk[index - 1]!.target
           && reading.memory[target] === 'free' && !reading.risk.includes(target) && !reading.obstacles.includes(target)
-          && !reading.sentryRisk?.includes(target);
+          && !reading.sentryRisk?.includes(target) && !nextHazards.includes(target);
         return { admitted, reason: admitted ? 'next_grid_cell_still_open' : 'revealed_grid_changed' };
       }
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
@@ -434,17 +571,33 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         && forcedLanding(local.grid, contact, next.position, frames);
       if (ejected && next.landings) next.landings[contact] = next.position;
       if (reset) next.failedEntrances = [...new Set([...(next.failedEntrances ?? []), contact])];
-      if (!reset && !ejected && choice.kind === 'move' && next.position === local.last.position
+      const clock = timing?.clock;
+      const didNotEnter = next.position === local.last.position || !!clock && next.position !== contact && frames.length > 0
+        && !frames.some(frame => showsActor(frame, local.grid, contact));
+      if (!reset && !ejected && choice.kind === 'move' && didNotEnter
         && !next.obstacles.includes(contact) && !next.risk.includes(contact) && !next.closedDoors?.includes(contact)
         && (!timing || !local.last.sentries?.includes(contact) && !next.sentries?.includes(contact))) {
         next.memory[contact] = 'wall';
       }
       const scanned = !reset && choice.kind === 'pulse' && !!local.grid.mechanisms?.pads[contact];
+      const entered = clock && !reset && next.position !== local.last.position && local.grid.mechanisms?.doors[next.position] !== undefined
+        && !clock.crossed.includes(next.position) ? { gate: next.position, from: local.last.position } : undefined;
+      const left = clock?.gateEntry && next.position !== clock.gateEntry.gate ? clock.gateEntry : undefined;
+      const crossed = clock && !reset && left && next.position !== left.from ? [...clock.crossed, left.gate] : reset ? [] : clock?.crossed ?? [];
+      const gateEntry = reset ? undefined : entered ?? (left ? undefined : clock?.gateEntry);
+      const selectedGate = choice.kind === 'pulse' && local.last.closedDoors?.includes(contact) ? contact : clock?.gateGoal;
+      const gateGoal = reset || selectedGate !== undefined && crossed.includes(selectedGate) ? undefined : selectedGate;
+      const visits = !clock || reset ? [next.position] : next.position === local.last.position
+        ? clock.visits : [...clock.visits.slice(-31), next.position];
+      const scans = !clock || reset ? [] : choice.kind === 'pulse' && next.charges < local.last.charges
+        ? [...clock.scans, local.last.position] : clock.scans;
       state = { ...local, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
         ...(local.grid.actorPixels ? { motions: track(local.last, next, local.grid, local.motions) } : {}),
         ...(timing ? { timing: { start: timing.start, patrols: updateTracks(reset ? [] : timing.patrols, next.sentries ?? [], local.grid),
           walls: updateTracks(reset ? [] : timing.walls, next.obstacles, local.grid),
           scannedPads: reset ? [] : scanned ? [...timing.scannedPads, contact] : timing.scannedPads,
+          ...(clock ? { clock: { ...updateRailClock(second, local.grid, reset ? undefined : clock), crossed, visits, scans,
+            ...(gateGoal === undefined ? {} : { gateGoal }), ...(gateEntry ? { gateEntry } : {}) } } : {}),
           ...(scanned ? { pendingPad: contact } : {}) } } : {}),
         refs: [...local.refs.slice(-4), after.observation_ref],
         consecutiveWaits: choice.kind === 'wait' ? local.consecutiveWaits + 1 : 0 };

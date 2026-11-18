@@ -53,3 +53,16 @@ test('a forced landing requires evidence at the marked cell during the return', 
   await family.record(before, after, proposal.actions[0]!, first, landing, proposal, 0, [first, during, landing]);
   assert.deepEqual(state().state.last.landings, { 1: 2 });
 });
+
+test('a displacement after a blocked move does not make the attempted cell passable', async () => {
+  const family = createSicNavigateRevealedGrid(), proposal = fixture('move');
+  proposal.local.grid.mechanisms!.pads = {};
+  proposal.local.timing!.clock = { turn: 0, rails: {}, crossed: [], visits: [0], scans: [] };
+  const first = rowsAt(0, true), landing = rowsAt(3, true), contact = rowsAt(1, true);
+  const before = await observe(first, 1), after = await observe(landing, 2);
+  const state = () => family.state() as { state: { last: { memory: Record<number, string> } } };
+  await family.record(before, after, proposal.actions[0]!, first, landing, proposal, 0, [first, landing]);
+  assert.equal(state().state.last.memory[1], 'wall');
+  await family.record(before, after, proposal.actions[0]!, first, landing, proposal, 0, [first, contact, landing]);
+  assert.equal(state().state.last.memory[1], 'free');
+});
