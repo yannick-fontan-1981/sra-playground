@@ -2024,4 +2024,10 @@ La commande 2 mesure le quart de tour en sens inverse. SIC compare les deux rota
 
 Le rejeu chronologique gagne le niveau 6 en **15 commandes et 5,86 s** avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **25 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 40 commandes relèvent de SIC seul. TypeScript et les deux tests ciblés passent. Empreinte `3e6790dc0350e699729577d778dc31011e019d86014f086f9b67bc47b429e472`. La couverture atteint **552/636 niveaux (86,8 %)**, dont **53/99 niveaux 6 (53,5 %)**.
 
+### MEMO niveau 6, lire les indicateurs sous un motif
+
+Les huit premiers clics du rejeu de référence avaient confirmé les correspondances entre motifs. Le neuvième fait apparaître un motif qui couvre le bord de deux indicateurs. L'ancienne lecture exigeait un rectangle visible complet et perdait alors la mesure de progression. SIC peut désormais lire la couleur sur les rangées visibles d'un indicateur calibré. Il exige une majorité de rangées intactes et vérifie que les pixels différents appartiennent à un motif qui dépasse du cadre.
+
+La mesure confirme le neuvième retour, puis le dixième clic remporte le jeu. Le rejeu depuis la sauvegarde retrouve les mêmes clics et les dix retours concordent. Le rejeu chronologique gagne en **10 clics et 6,21 s** avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **50 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 60 commandes relèvent de SIC seul. TypeScript et les **43 tests ciblés** passent. Empreinte `07bdf38a8695e76c7c529246c227239f9bd089dfe53b732945fe94f8823d4968`. La couverture atteint **553/636 niveaux (86,9 %)**, dont **54/99 niveaux 6 (54,5 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
