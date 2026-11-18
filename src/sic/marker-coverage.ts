@@ -9,6 +9,8 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { markerAcquisitionRisk, markerContactKey, measureMarkerMaterialRegions, nextMarkerMaterialMove, type MaterialContact } from './marker-material-route.ts';
 import { sicNeedId } from './need-identity.ts';
 import { measureUnassignedMaterial, rememberExposedMarkers } from './marker-layers.ts';
+import { isStopProposal, observeStopPlacement, proposeStopPlacement, stopProjectionMatches,
+  type StopControls, type StopMemory, type StopProposal } from './marker-stop-planning.ts';
 
 export const markerCoverageId = 'sic_marker_coverage';
 export const verifyMarkerPlacementId = 'sic_verify_marker_placement';
@@ -29,7 +31,8 @@ const phaseLabels = {
 type Step = { action: NativeCommand; cursor: Point; mode: 'acquire' | 'calibrate' | 'cycle' | 'move';
   poses?: readonly Point[]; expected_after: readonly Point[] | null; acquisition_focus_projection?: Point; unobserved_support_pixels?: number;
   materialContact?: MaterialContact };
-type Proposal = NativeProposal & { steps: readonly Step[]; measured: NativeRecord; count: number; needId: string; dismissedContacts?: readonly string[] };
+type RigidProposal = NativeProposal & { steps: readonly Step[]; measured: NativeRecord; count: number; needId: string; dismissedContacts?: readonly string[] };
+type Proposal = RigidProposal | StopProposal;
 
 const command = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 const samePoint = (a: Point, b: Point) => a[0] === b[0] && a[1] === b[1];
@@ -100,6 +103,7 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
   let snapshot: NativeRecord | null = null;
   let count = 0;
   let dismissedContacts: readonly string[] = [];
+  let stopMemory: StopMemory | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyMarkerPlacementId,
@@ -109,6 +113,13 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
     async propose(observation, rows, inputs, remaining, execution) {
       const keys = inputs.filter(input => !Object.keys(input.data ?? {}).length && input.action_ref !== 'ACTION7').map(input => input.action_ref);
       if (remaining < 1 || keys.length < 3) return null;
+      const epoch = observation.level_epoch;
+      const previous = stopMemory?.epoch !== epoch && snapshot?.complete && snapshot.epoch === epoch - 1
+        ? measurements(snapshot) : null;
+      const learned: StopControls | null = previous?.selector
+        ? { motion: [...previous.motion], selector: previous.selector, refs: [...previous.refs.values()] } : null;
+      const stop = await proposeStopPlacement(observation, rows, keys, remaining, stopMemory, learned, decide, execution);
+      if (stop) return stop;
       const prior = snapshot?.epoch === observation.level_epoch ? snapshot : null;
       const issued = prior ? count : 0;
       const dismissed = prior ? dismissedContacts : [];
@@ -230,12 +241,24 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (isStopProposal(proposal)) {
+        const admitted = proposal.stopMemory.epoch === observation.level_epoch && (index === 0
+          ? proposal.binding?.observation_ref === observation.observation_ref
+          : stopProjectionMatches(proposal, index - 1, packet.frame_rows));
+        return { admitted, reason: admitted ? 'visible_contact_route_bound' : 'visible_contact_route_changed' };
+      }
       const result = measurements(proposal.measured).before(proposal, index, packet, observation);
       return { admitted: result.admitted, reason: result.reason };
     },
     after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isStopProposal(proposal)) {
+        const matched = before.level_epoch === after.level_epoch && before.state === after.state
+          && stopProjectionMatches(proposal, index, second);
+        return { matched, seal_prefix: !matched || index + 1 === proposal.stopSteps.length,
+          reason: matched ? 'observed_shape_and_marker_pose' : 'shape_or_marker_pose_changed' };
+      }
       const measured = measurements(proposal.measured), step = proposal.steps[index]!;
       rememberExposedMarkers(after, second, measured, step.expected_after ?? undefined);
       if (contactObserved(measured, step, second)) return { matched: true, seal_prefix: true, reason: 'observed_material_change_with_preserved_supports' };
@@ -245,6 +268,13 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
     },
     async record(before, after, command, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (isStopProposal(proposal)) {
+        const local = index > 0 && stopMemory?.epoch === before.level_epoch ? stopMemory : proposal.stopMemory;
+        const step = proposal.stopSteps[index]!;
+        stopMemory = observeStopPlacement(local, step, second, after.observation_ref);
+        return { events: [], ...(step.effect && stopProjectionMatches(proposal, index, second)
+          ? { reviewEvidence: 'Contact with the fixed obstacle changed the selected shape and preserved the other pieces.' } : {}) };
+      }
       const retained = index > 0 && count === proposal.count + index && snapshot?.epoch === before.level_epoch;
       const measured = measurements(retained ? snapshot : proposal.measured);
       const step = proposal.steps[index]!, contact = step.materialContact;
@@ -264,11 +294,12 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       count = proposal.count + index + 1;
       return { events: [] };
     },
-    state: () => ({ snapshot, count, dismissedContacts }),
+    state: () => ({ snapshot, count, dismissedContacts, ...(stopMemory ? { stopMemory } : {}) }),
     restore(value) {
       snapshot = structuredClone(value.snapshot as NativeRecord | null ?? null);
       count = typeof value.count === 'number' ? value.count : 0;
       dismissedContacts = Array.isArray(value.dismissedContacts) ? value.dismissedContacts as string[] : [];
+      stopMemory = structuredClone(value.stopMemory as StopMemory | undefined) ?? null;
     },
   };
 }
