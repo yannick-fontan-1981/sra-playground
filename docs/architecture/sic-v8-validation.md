@@ -2546,3 +2546,9 @@ Les commandes 9 et 10 servent à attendre et observer. La commande 11 neutralise
 Le niveau 7 gagne en **42 commandes et 16,24 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **364 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 406 commandes relèvent de SIC seul. Le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `1bb4206796fa8521f9a361e9d76419861fa31595c2cadcb8303ab03e1ef91722`. TypeScript et les trois tests ciblés passent.
 
 Les 18 niveaux 7 sont qualifiés en SIC seul sur les 18 jeux qui en ont un. Les 20 niveaux encore à qualifier se répartissent en 13 niveaux 8, 6 niveaux 9 et 1 niveau 10.
+
+### AR25 niveau 8, conserver les contributeurs alignés
+
+La sauvegarde d'entrée retrouve les 208 commandes attestées jusqu'au niveau 7. SIC reprend les déplacements mesurés et place les deux axes avant de déplacer les pièces. Les retours confirment séparément le placement des contributeurs et de leurs reflets. AR25 gagne avec le solveur existant.
+
+Le niveau 8 gagne en **47 commandes et 11,99 s**. Les **208 commandes** des sept premiers niveaux gardent les mêmes empreintes, animations comprises. Les 255 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 8. Empreinte chronologique `943997fc739b7cbe9c9361daacf563489df89aebd5ac2ed638de23a1d57a7a90`.
