@@ -2000,4 +2000,12 @@ Depuis le niveau 1, les **77 commandes et les empreintes des retours des cinq pr
 
 Dans le rejeu chronologique, les trois premières soumissions réduisent les possibilités de **7 776 à 104, puis à 12 et à 2**. La quatrième gagne le jeu. Les **69 commandes et les empreintes des retours des niveaux 1 à 5** concordent avec la référence. Le niveau 6 gagne en **24 commandes et 13,27 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les 93 commandes relèvent de SIC. TypeScript et les **47 tests ciblés** passent. Empreinte `7a9cac0f1e17d2904152b04479b45764a0834dff75c3426db1e90333f2785001`. La couverture atteint **549/636 niveaux (86,3 %)**, dont **50/99 niveaux 6 (50,5 %)**.
 
+### RSWP niveau 6, planifier le traitement de neuf caisses
+
+SIC retrouve les trois panneaux, le contrôle de transport et les stocks depuis les observations du niveau précédent. La recherche initiale atteint sa limite sans proposer de tour. La recherche choisit désormais une priorité qui favorise les états où il reste moins de travail après 4 096 états examinés. Elle réutilise les états déjà explorés et garde les limites de tours et d'états. Quand un second ensemble de contours apparaît, le détecteur rattache les panneaux à leurs cadres déjà confirmés par leur position et leur couleur.
+
+SIC contrôle les réservations pendant la saisie et vérifie les quantités, la salle de chaque ouvrier et le refroidissement des fours après chaque tour. À la commande 46, une caisse utilisable reste dans chaque salle et les trois fours sont prêts. La commande 50 valide le neuvième tour et gagne le jeu. Le rejeu depuis la sauvegarde confirme les mêmes 50 commandes et leurs retours.
+
+Le rejeu chronologique gagne en **50 commandes et 36,48 s** au niveau 6, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **60 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 110 commandes relèvent de SIC. TypeScript et les **62 tests ciblés** passent, dont la comparaison des 100 rasters initiaux et un cas avec deux ensembles de cadres. Empreinte `4fb20580a611b668663c3bac9fdb83ffb0454a6541c53edb59572be442d5659d`. La couverture atteint **550/636 niveaux (86,5 %)**, dont **51/99 niveaux 6 (51,5 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
