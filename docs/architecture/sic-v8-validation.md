@@ -1986,4 +1986,12 @@ Les clics 2, 3 et 6 construisent la première signature et le clic 9 confirme so
 
 Le rejeu depuis le niveau 1 gagne en **97 commandes SIC seul**. Les **71 commandes des niveaux 1 à 5** et leurs retours gardent les empreintes de la référence. Le niveau 6 gagne en **26 clics et 12,58 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde retrouve les mêmes clics et confirme les 26 retours. TypeScript et le test ciblé passent. La couverture atteint **547/636 niveaux (86,0 %)**, dont **48/99 niveaux 6 (48,5 %)**.
 
+### SU15 niveau 6, transformer le carré et synchroniser les livraisons
+
+Le rejeu de référence s'arrête après 46 commandes au niveau 6. Le nuancier affiche six rangs et prolonge les quatre rangs déjà mesurés. Le bandeau demande un carré et un autre mobile, identifié par son motif. SIC réutilise la mesure de portée des clics et le déplacement du mobile. Les clics 1 et 3 rapprochent les pièces. Les clics 2 et 4, hors de portée des deux pièces, laissent le mobile poursuivre sa course. Chacun confirme un recul et une baisse de rang du carré, tandis que le mobile reste visible.
+
+Après obtention du carré demandé, SIC projette l'entrée des deux pièces dans les récepteurs pendant la même animation. Il recalcule le trajet à partir des positions observées après chaque clic. La carte montre les deux pièces et leurs récepteurs. Quatre sondes `P05` précèdent sept commandes `P07`.
+
+Depuis le niveau 1, les **77 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Le niveau 6 gagne en **11 clics et 6,90 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les 88 commandes relèvent de SIC. Le diagnostic depuis la sauvegarde retrouve les mêmes clics. Le rejeu s'arrête à la victoire du niveau 6. TypeScript et les deux tests ciblés passent. Empreinte `ba758812c6a55f5ca6d050212b974e1d77072301839755bc566676119fd3ad48`. La couverture atteint **548/636 niveaux (86,2 %)**, dont **49/99 niveaux 6 (49,5 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
