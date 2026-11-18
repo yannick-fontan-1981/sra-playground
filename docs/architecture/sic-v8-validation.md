@@ -2030,4 +2030,10 @@ Les huit premiers clics du rejeu de référence avaient confirmé les correspond
 
 La mesure confirme le neuvième retour, puis le dixième clic remporte le jeu. Le rejeu depuis la sauvegarde retrouve les mêmes clics et les dix retours concordent. Le rejeu chronologique gagne en **10 clics et 6,21 s** avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **50 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 60 commandes relèvent de SIC seul. TypeScript et les **43 tests ciblés** passent. Empreinte `07bdf38a8695e76c7c529246c227239f9bd089dfe53b732945fe94f8823d4968`. La couverture atteint **553/636 niveaux (86,9 %)**, dont **54/99 niveaux 6 (54,5 %)**.
 
+### KATA niveau 6, terminer le calcul de partition dans le budget
+
+Le diagnostic depuis la sauvegarde retrouve les cinq pièces, les contrôles appris et les huit partitions possibles. Le rejeu normal s'arrêtait après 57 commandes d'exploration. La trace d'entrée montre que la recherche de partition atteignait sa limite de deux secondes en attendant les reprises de l'ordonnanceur. Les points de contrôle gardent leurs vérifications d'annulation et d'échéance. Le calcul espace les pauses selon le temps écoulé et le nombre d'opérations effectuées.
+
+SIC choisit une partition entièrement atteignable et vérifie chaque position au retour, y compris entre deux commandes d'une série continue. Le rejeu chronologique gagne en **41 commandes et 10,38 s** au niveau 6, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **103 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 144 commandes relèvent de SIC seul. TypeScript et les **47 tests ciblés** passent. Empreinte `3051eefe0e4d0e49933a6b78fa99a43d3872fb20b931fedb3e4652db6c2cc101`. La couverture atteint **554/636 niveaux (87,1 %)**, dont **55/99 niveaux 6 (55,6 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
