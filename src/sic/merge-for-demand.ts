@@ -1,9 +1,11 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal,
-  NativeRecord } from '../logos-engine/v6-native-types.ts';
+  NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { chooseContactDemand, contactMobileBox, measureContactDemand, observeContactDemand, type ContactChoice,
+  type ContactDemand } from './contact-demand.ts';
 
 export const mergeForDemandId = 'sic_merge_to_meet_visible_demand';
 
@@ -28,6 +30,8 @@ type Choice = { readonly intent: 'merge' | 'approach' | 'deliver' | 'divert'; re
   readonly projected?: readonly Piece[]; readonly reserved?: readonly Piece[] };
 type Proposal = NativeProposal & { readonly memory: Memory; readonly stock: readonly Piece[]; readonly choice: Choice;
   readonly attempt: string; readonly needId: string };
+type ContactProposal = NativeProposal & { readonly contact: ContactDemand; readonly contactChoice: ContactChoice; readonly needId: string };
+const isContactProposal = (proposal: Proposal | ContactProposal): proposal is ContactProposal => !!proposal.contact;
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -452,9 +456,49 @@ function measureReturn(proposal: Proposal, after: NativeObservation) {
   return { recipe: null, range: distance(member.point, choice.point) };
 }
 
-export function createSicMergeForDemand(): NativeFamily<Proposal> {
+export function createSicMergeForDemand(): NativeFamily<Proposal | ContactProposal> {
   let state: Memory | null = null, transfer: Transfer | null = null;
+  let contact: ContactDemand | null = null;
   let choose: NativeProgramHandle | undefined;
+
+  async function offerContact(observation: NativeObservation, rows: NativeRows, mode: string, signal: AbortSignal | undefined,
+    shouldStop: () => boolean): Promise<ContactProposal | null> {
+    const local = contact?.epoch === observation.level_epoch ? contact : transfer ? measureContactDemand(observation, rows, transfer) : null;
+    const picked = local && chooseContactDemand(local, shouldStop);
+    if (!local || !picked) return null;
+    const delivering = picked.intent === 'deliver';
+    const facts = { knownInteraction: false, routeSupported: delivering, eligibleProbe: !delivering, mode };
+    const decision = await choose?.run({ situation: facts }, { signal });
+    const strategy = delivering ? 'P07' : 'P05';
+    if (decision?.result !== strategy) return null;
+    const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...new Set(local.refs.filter(item => item !== ref))];
+    const situation = delivering ? 'Bring both requested pieces into their receivers during the same return'
+      : picked.intent === 'advance' ? 'Let the nearby mobile advance while leaving both bodies outside the click field'
+        : 'Bring the square and mobile close enough to test a type change';
+    const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, picked.point, { reason: situation, evidence });
+    if (!pointBinding) return null;
+    const parent = 'G_official_completion';
+    const objective = { kind: 'produce_and_deliver_requested_visible_type', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['requested_square', 'requested_mobile'], parentObjective: parent,
+      satisfactionContract: 'both_requested_pieces_simultaneously_accepted' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = mergeForDemandId + ':' + need.id;
+    const [x, y] = picked.point, action = { action_ref: 'ACTION6', data: { x, y } };
+    return { status: 'proposed', kind: mergeForDemandId, contact: local, contactChoice: picked, needId: need.id,
+      binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
+      steps: [{ action, point_binding: pointBinding, expected_after: null }],
+      sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
+        instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+      sicSituationCard: { strategy, need: 'Prepare the requested square and deliver both pieces together', situation, evidence, mode,
+        agenda: [], triggerCard: decision.receipt.workflow, actor: local.world.square.box,
+        mobileRequest: contactMobileBox(local.scene, local.world.mobile.at),
+        focus: [x, y, x, y], ...(picked.receivers ? { receptor: picked.receivers[0].box, otherReceiver: picked.receivers[1].box } : {}) },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+  }
+
   return {
     id: mergeForDemandId,
     async attachPrograms(registry) {
@@ -465,7 +509,11 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
         observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const identified = prior?.scene ?? identify(observation, rows[0]!.length, rows.length);
-      if (!identified || (prior?.count ?? 0) >= 40) return null;
+      if (!identified || contact?.epoch === observation.level_epoch) {
+        const shouldStop = () => !!execution?.signal?.aborted || (execution?.now?.() ?? performance.now()) >= (execution?.deadlineMs ?? Infinity);
+        return offerContact(observation, rows, execution?.reasoningMode ?? 'exploration', execution?.signal, shouldStop);
+      }
+      if ((prior?.count ?? 0) >= 40) return null;
       const saved = transfer && identified.samples.map(sample => sample.color).join() === transfer.palette.join() ? transfer : null;
       const glyphs = !prior && saved ? observeMobiles(observation, identified) : [];
       const mobile = !identified.requirements && glyphs.length === 1 ? glyphs[0] : null;
@@ -532,9 +580,14 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'production_click_bound' : 'production_scene_changed' };
     },
-    after(proposal, _index, before, after) {
+    after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isContactProposal(proposal)) {
+        const returned = observeContactDemand(proposal.contact, proposal.contactChoice, after, second);
+        return { matched: returned?.confirmed ?? false, seal_prefix: true, reason: returned?.converted ? 'contact_lowered_square_rank'
+          : returned?.confirmed ? 'both_bodies_remeasured_after_click' : 'contact_or_transport_not_confirmed' };
+      }
       if (proposal.choice.intent === 'divert') {
         const result = multiplePressureReturn(proposal, after) ?? pressureReturn(proposal, after);
         return { matched: result?.widened ?? false, seal_prefix: true, reason: result?.widened
@@ -550,6 +603,13 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       return { matched: !!effect, seal_prefix: true, reason };
     },
     record(before, after, _command, _first, _second, proposal) {
+      if (isContactProposal(proposal)) {
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const returned = observeContactDemand(proposal.contact, proposal.contactChoice, after, _second);
+        contact = returned?.next ?? { ...proposal.contact, stopped: true };
+        return { events: [], ...(returned?.converted
+          ? { reviewEvidence: 'The square changed to a lower rank after the encounter and the requested mobile remained visible.' } : {}) };
+      }
       const { memory, choice: { member } } = proposal;
       if (after.levels_completed > before.levels_completed && memory.radius && memory.recipes.length) {
         const mobile = memory.pressure ?? memory.mobiles?.[0];
@@ -578,10 +638,11 @@ export function createSicMergeForDemand(): NativeFamily<Proposal> {
       return { events: [], ...(memory.pressure?.travel === 0 && mobile?.pressure.travel ?
         { reviewEvidence: 'The mobile changed position during the material action.' } : {}) };
     },
-    state: () => ({ state, transfer }),
+    state: () => ({ state, transfer, ...(contact ? { contact } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as Memory | null);
       transfer = structuredClone((value.transfer as Transfer | undefined) ?? null);
+      contact = structuredClone((value.contact as ContactDemand | undefined) ?? null);
     },
   };
 }

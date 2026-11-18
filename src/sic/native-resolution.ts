@@ -1273,7 +1273,8 @@ export function readNativeResolution(agent: {
       if (box) subjects.push({ label: 'Mobile near the work area', box });
     }
     for (const [field, label] of [['actor', card?.protectiveClick ? 'Material to protect' : 'Material moved'], ['partner', 'Other merge input'], ['focus', 'Click target'],
-      ['demand', 'Product requested'], ['receptor', 'Delivery receiver']] as const) {
+      ['demand', 'Product requested'], ['mobileRequest', 'Requested mobile'],
+      ['receptor', 'Delivery receiver'], ['otherReceiver', 'Receiver for the mobile']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
