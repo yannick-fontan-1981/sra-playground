@@ -1,6 +1,6 @@
 import { crossedPrefixCell, crossedPrefixGeometry, crossedPrefixMeasureControls, crossedPrefixReferencePresent, crossedPrefixSlot,
   type CrossedPrefixController, type CrossedPrefixLayout } from '../logos-engine/v6-crossed-prefix-observation.ts';
-import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -103,6 +103,17 @@ export function createSicVerifyCrossingRows(family = verifyCrossingRowsId): Nati
     id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
+    },
+    controlledClickRegions(observation, rows) {
+      if (!state || state.epoch !== observation.level_epoch || !Object.values(state.progress).some(count => count > 0)) return [];
+      const { layout } = state;
+      if (!crossedPrefixReferencePresent(rows, layout)) return [];
+      const controls = crossedPrefixMeasureControls(rows, layout);
+      if (!controls) return [];
+      const swatches = controls.flatMap(control => [control, ...control.alternatives]);
+      return geometricComponents(rows).filter(({ bbox: [l, t, r, b], color, area }) => area === (r - l + 1) * (b - t + 1)
+        && swatches.some(({ point: [x, y], color: ink }) => ink === color && l <= x && x <= r && t <= y && y <= b))
+        .map(part => part.bbox);
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;

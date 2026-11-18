@@ -158,6 +158,7 @@ export interface NativeExecution {
   } | null>;
   readonly readClickRegions?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionEvidence | null;
   readonly readClickRegionChanges?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionChanges | null;
+  readonly readControlledClickRegions?: () => readonly NativeBox[];
   readonly readPriorFramedRows?: () => NativeBox[][] | null;
   readonly readClickMarker?: () => import('../sic/observed-click-regions.ts').ClickMarkerEvidence | null;
   readonly readWorkspaceClick?: (workspace: NativeBox) => import('../sic/workspace-click.ts').WorkspaceClickEvidence | null;
@@ -197,6 +198,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
    * A recognized interface may stop its remaining group without stopping later groups. */
   sourceGroupStop?(group: string, entry: string | null, observation: NativeObservation): NativeRecord | null;
   preservationObligations?(observation: NativeObservation, rows: NativeRows): NativeMaybePromise<readonly NativeRecord[]>;
+  /** Public regions with a measured click role coupled to another part of the board. */
+  controlledClickRegions?(observation: NativeObservation, rows: NativeRows): readonly NativeBox[];
   bind?(proposal: P, domain: ObservedInputDomain): NativeMaybePromise<void>;
   before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation,
     execution?: NativeExecution): NativeMaybePromise<NativeBeforeResult>;

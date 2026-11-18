@@ -800,6 +800,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     const exploration = motionState ? objectValue(this.knowledge!.value(motionState.id)) : undefined;
     const motion = exploration ? currentControlledMotion(exploration, this.observation) : undefined;
     const panelFrontier = exploration && currentPanelFrontier(exploration, this.observation);
+    const observation = this.observation, rows = this.current.frame_rows;
+    let controlledClickRegions: readonly NativeBox[] | undefined;
     this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}),
       ...(motion ? { observedControlledMotion: motion } : {}),
       ...(panelFrontier ? { panelFrontier } : {}),
@@ -812,6 +814,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.readPriorDirectionalScene ? { readPriorDirectionalScene: this.readPriorDirectionalScene } : {}),
       ...(this.readClickRegions ? { readClickRegions: this.readClickRegions } : {}),
       ...(this.readClickRegionChanges ? { readClickRegionChanges: this.readClickRegionChanges } : {}),
+      readControlledClickRegions: () => controlledClickRegions ??= this.families.flatMap(family =>
+        family.controlledClickRegions && objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true
+          ? family.controlledClickRegions(observation, rows) : []),
       ...(this.readPriorFramedRows ? { readPriorFramedRows: this.readPriorFramedRows } : {}),
       ...(this.readClickMarker ? { readClickMarker: this.readClickMarker } : {}),
       ...(this.readWorkspaceClick ? { readWorkspaceClick: this.readWorkspaceClick } : {}),
@@ -2523,6 +2528,7 @@ function subquestionFamily(family: NativeFamily<any>, field: string, subquestion
     ...(family.groundedInquiryWitness ? { groundedInquiryWitness: (...args: Parameters<NonNullable<NativeFamily['groundedInquiryWitness']>>) => family.groundedInquiryWitness!(...args) } : {}),
     ...(family.currentRequiredServiceWitness ? { currentRequiredServiceWitness: (...args: Parameters<NonNullable<NativeFamily['currentRequiredServiceWitness']>>) => family.currentRequiredServiceWitness!(...args) } : {}),
     ...(family.preservationObligations ? { preservationObligations: (...args: Parameters<NonNullable<NativeFamily['preservationObligations']>>) => family.preservationObligations!(...args) } : {}),
+    ...(family.controlledClickRegions ? { controlledClickRegions: (...args: Parameters<NonNullable<NativeFamily['controlledClickRegions']>>) => family.controlledClickRegions!(...args) } : {}),
     ...(family.retainedSuccessWitness ? { retainedSuccessWitness: (...args: Parameters<NonNullable<NativeFamily['retainedSuccessWitness']>>) => family.retainedSuccessWitness!(...args) } : {}),
     ...(family.acquiredContinuationWitness ? { acquiredContinuationWitness: (...args: Parameters<NonNullable<NativeFamily['acquiredContinuationWitness']>>) => family.acquiredContinuationWitness!(...args) } : {}),
     ...(family.unacquiredInquiryWitness ? { unacquiredInquiryWitness: (...args: Parameters<NonNullable<NativeFamily['unacquiredInquiryWitness']>>) => family.unacquiredInquiryWitness!(...args) } : {}),

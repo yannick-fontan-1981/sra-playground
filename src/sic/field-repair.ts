@@ -1,7 +1,7 @@
 import { extractFields, measuredFields, periodicHypotheses, symmetryEvidence, type ConstraintTable,
   type RegularField, type SymmetryPolicy } from '../logos-engine/v6-field-constraints.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { resolveStrategyGraph, compileStrategyGraph } from './strategy-agenda.ts';
 import { sicNeedId } from './need-identity.ts';
 import { independentPredictionSupport } from './independent-prediction.ts';
@@ -102,20 +102,21 @@ export function createSicFieldRepair(policy: SymmetryPolicy): NativeFamily<Field
   let known: ObservedRepair[] = [];
   return {
     id: fieldRepairId,
-    async propose(observation, rows, inputs, remaining) {
+    async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const ref = observation.observation_ref;
       const attempted = level === observation.level_epoch ? attempts : [];
       const measured = level === observation.level_epoch ? known : [];
       const fields = measuredFields(observation);
-      let protectedWindows: ReturnType<typeof protectedWindowBoxes> | undefined;
+      let protectedRegions: readonly NativeBox[] | undefined;
       const findCommand = ({ point: [x, y], size: [width, height] }: Repair) => {
         const bound = inputs.filter(command => command.action_ref === 'ACTION6' && command.data.x! >= x && command.data.x! < x + width
           && command.data.y! >= y && command.data.y! < y + height);
         if (bound.length !== 1) return null;
-        protectedWindows ??= extractFields(observation, rows).flatMap(protectedWindowBoxes);
+        protectedRegions ??= [...extractFields(observation, rows).flatMap(protectedWindowBoxes),
+          ...(execution?.readControlledClickRegions?.() ?? [])];
         const command = bound[0]!, { x: clickX, y: clickY } = command.data;
-        return protectedWindows.some(([l, t, r, b]) => l <= clickX! && clickX! <= r && t <= clickY! && clickY! <= b) ? null : command;
+        return protectedRegions.some(([l, t, r, b]) => l <= clickX! && clickX! <= r && t <= clickY! && clickY! <= b) ? null : command;
       };
       for (const repair of repairs(fields, policy)) {
         if (attempted.includes(trialKey(repair))) continue;
