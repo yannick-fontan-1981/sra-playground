@@ -1882,6 +1882,10 @@ Dans le rejeu gagnant, la **commande 6** ouvre les deux passages. La **commande 
 
 Le niveau 6 gagne en **47 commandes et 18,08 s** au budget de 360 s de temps actif et 600 commandes. Les 163 commandes des cinq premiers niveaux gardent les mêmes empreintes. Les **210 commandes** du parcours relèvent de SIC seul et deux rejeux chronologiques produisent la même empreinte `d52f4f1d457c15cef26f2e207f68d5aa33b6df93ca2d756f9a095580200dfa53`. TypeScript et les **151 tests ciblés** passent. La couverture atteint **537/636 niveaux (84,4 %)**, dont **38/99 niveaux 6 (38,4 %)**.
 
+Le contrôle sur `8f8f919a` retrouve les déplacements écran mesurés par les quatre premières commandes. Vers le haut et le bas, les deux pièces se déplacent ensemble de quatre pixels. Vers la gauche, la pièce gauche se déplace de quatre pixels à gauche et la pièce droite de quatre à droite. Vers la droite, ces déplacements s'inversent. En conservant les mêmes mesures et le même budget, le calcul avec les deux pièces seules ne trouve aucun trajet. Avec le bloc mobile, il trouve 43 commandes après la mesure. Chaque retour confirme la position des pièces, celle du bloc et l'état attendu des passages jusqu'à la victoire.
+
+Le rejeu depuis la sauvegarde et le rejeu SIC seul depuis le niveau 1 produisent les mêmes commandes et les mêmes retours, avec la même empreinte que la qualification d'origine. Les **47 commandes du niveau 6 prennent 17,36 s** dans le rejeu chronologique. Les cinq tests ciblés sur les plaques et les passages passent.
+
 ### AR25 niveau 6, conserver les deux axes et les deux pièces
 
 Le rejeu de référence s'arrête au niveau 6 après 112 commandes. L'axe vertical est partiellement masqué. Le détecteur peut maintenant retrouver cette bande à partir de l'autre axe et vérifier la grille reconstruite. Les deux pièces occupent cinq et huit cellules. Une connexité diagonale propose de rattacher les fragments de la seconde pièce. Son premier déplacement confirme la translation de l'ensemble et l'immobilité de l'autre pièce.
