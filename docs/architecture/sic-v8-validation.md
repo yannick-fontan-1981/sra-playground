@@ -1865,3 +1865,9 @@ Quand le champ d'interaction et l'ensemble des passagers concordent avec les obs
 SIC seul gagne **CGWL en 164 commandes** depuis le niveau 1. Les cinq premières victoires gardent leurs empreintes en 124 commandes. Le niveau 6 gagne en **40 commandes et 22,14 s**, au budget de 360 s de temps actif et 600 commandes. Le diagnostic accéléré rejoue les 124 commandes publiques d'entrée et restaure la famille de transport. Il retrouve la même empreinte jusqu'à la victoire que la partie complète. TypeScript et 20 tests ciblés passent. La couverture passe à **536/636 niveaux (84,3 %)**, dont **37/99 niveaux 6 (37,4 %)**.
 
 Empreinte des commandes et retours jusqu'à la victoire `af3e68af8b592ba176982c2e6a04b78a712406fcf0620bd5a95f34a97bf46572`.
+
+### M0R0 niveau 6, rendre l'exploration possible
+
+Les **873 composantes** du plateau incluent seulement **13** composantes capables de servir de contour ou de témoin d'intérieur centré. En SIC, les détecteurs éliminent les composantes trop fines avant d'appliquer les limites de la mesure. La mesure originale conserve le domaine natif. Le test de régression met le même contour sur un fond de damier à pixels isolés. TypeScript et les **38 tests ciblés** passent.
+
+Les niveaux 1 à 5 conservent leurs empreintes en **163 commandes**. Au niveau 6, SIC passe l'erreur d'entrée, exécute **80 commandes en 54,72 s** et s'arrête faute de proposition applicable. Les quatre premières directions produisent des déplacements conjoints mesurables. Parmi les 80 retours, 54 modifient l'image, sans déboucher sur un plan émis par la famille de trajet conjoint. Le [relevé action par action](sic-v8-m0r0-level6-actions.md) précise la décision, le retour et les positions des deux pièces quand leur appariement est unique. La couverture reste à **536/636 niveaux (84,3 %)**, dont **37/99 niveaux 6 (37,4 %)**.
