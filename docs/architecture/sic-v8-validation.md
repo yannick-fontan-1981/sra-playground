@@ -1907,3 +1907,13 @@ Dans le parcours choisi par SIC, la commande 5 prépare l'appui de la colonne `x
 Deux rejeux chronologiques gagnent en **190 commandes SIC seul**, avec les mêmes actions et retours. Les **148 premières commandes** reproduisent les empreintes des niveaux 1 à 5. Le niveau 6 du rejeu final gagne en **42 commandes et 17,60 s**, au budget de 360 s de temps actif et 600 commandes. TypeScript et **12 tests ciblés** passent. La couverture atteint **539/636 niveaux (84,7 %)**, dont **40/99 niveaux 6 (40,4 %)**.
 
 Empreinte jusqu'à la victoire `6a3ba777efdffa0a83df7a8bb41a6fb44d097a52f79b528f136a5487b71da86f`.
+
+### CASC niveau 6, réserver une jonction avant de lancer les rafales
+
+La référence atteint le budget du niveau 6 après 427 commandes. Depuis la même entrée, les déplacements de la référence couvrent une des trois cibles. Le plan se fonde alors sur les deux cibles visibles et répète des rafales qui reviennent aux mêmes configurations. Un essai hors agent confirme qu'une disposition préparée avec deux bloqueurs peut servir les trois cibles.
+
+SIC mesure le plateau avant de déplacer les curseurs. Quand aucun trajet sans protection ne dessert toutes les cibles, il simule les arrivées en bloquant des cases qui reçoivent une impulsion. Il compare les dispositions selon leurs déplacements estimés. Ici, un seul bloqueur suffit à préserver une jonction pour deux arrivées simultanées. Le continuateur peut alors distribuer la propagation depuis une autre jonction. SIC vérifie les changements de focus avant de poursuivre la préparation. Si une rafale ramène le plateau à une configuration déjà essayée, la famille cède la main à l'agenda.
+
+Le rejeu depuis le niveau 1 gagne CASC en **93 commandes SIC seul**. Les **71 premières commandes** reproduisent les actions et retours des niveaux 1 à 5. Au niveau 6, SIC prépare le bloqueur et le continuateur en 19 commandes, puis gagne à la troisième rafale. Le niveau se termine en **22 commandes et 15,79 s** au budget de 360 s de temps actif et 600 commandes. TypeScript et les **3 tests ciblés** passent. La couverture atteint **540/636 niveaux (84,9 %)**, dont **41/99 niveaux 6 (41,4 %)**.
+
+Empreinte jusqu'à la victoire `4a9a756b032008a54b6693e140f65322afe3917802fddf2f6a9ad44d244e987e`.
