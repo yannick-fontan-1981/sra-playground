@@ -1,0 +1,4542 @@
+{
+  "source": "7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa",
+  "mode": "sic",
+  "budgetMs": 360000,
+  "actionCap": 600,
+  "processes": 4,
+  "startedAt": "2026-11-17T23:49:39.398Z",
+  "endedAt": "2026-11-18T00:41:26.909Z",
+  "wallMs": 3107511,
+  "completed": 64,
+  "target": 64,
+  "coverage": {
+    "qualified": 534,
+    "total": 636,
+    "level6": 35,
+    "level6Total": 99
+  },
+  "newWins": [],
+  "nonWins": {
+    "no_applicable_transferred_family": 54,
+    "native_game_over": 5,
+    "level_active_time_budget": 3,
+    "level_action_budget": 1,
+    "contour component bound exceeded Start a new reasoning session to continue.": 1
+  },
+  "endOfExploration": {
+    "atLevelSix": 54,
+    "afterPublicExploration": 54,
+    "afterVisibleChangeFromExploration": 53,
+    "lastCommandFamily": {
+      "sic_recheck_directional_controls": 40,
+      "sic_trial_repeated_linear_controls": 12,
+      "sic_public_input_exploration": 2
+    }
+  },
+  "bridgeReuse": [],
+  "bridgePositiveControl": {
+    "commands": 20,
+    "first": {
+      "level": 6,
+      "action": 162,
+      "type": "walk",
+      "changed": 22
+    },
+    "changedClicks": 10,
+    "won": true
+  },
+  "lowerLevelRechecks": [],
+  "regression": [
+    {
+      "code": "LS20",
+      "referenceLevels": 4,
+      "testedLevels": 6,
+      "parity": true,
+      "graphSizeParity": true,
+      "commands": 144
+    },
+    {
+      "code": "GABA",
+      "referenceLevels": 4,
+      "testedLevels": 6,
+      "parity": true,
+      "graphSizeParity": true,
+      "commands": 239
+    },
+    {
+      "code": "DC22",
+      "referenceLevels": 6,
+      "testedLevels": 6,
+      "parity": true,
+      "graphSizeParity": true,
+      "commands": 613
+    }
+  ],
+  "earlierLevels": {
+    "wonFiveAgain": 64,
+    "exactFive": 64,
+    "different": [],
+    "unknown": []
+  },
+  "historicalSix": {
+    "compared": 60,
+    "exact": 58,
+    "distinct": [
+      {
+        "game": "CASC",
+        "before": {
+          "commands": 600,
+          "reason": "level_action_budget",
+          "budgetWorkers": 8
+        },
+        "current": {
+          "commands": 427,
+          "reason": "level_active_time_budget"
+        },
+        "commonDispatchAndVisibleEffectSummaries": 498,
+        "firstDispatchOrVisibleEffectDifference": null
+      },
+      {
+        "game": "KLOT",
+        "before": {
+          "commands": 89,
+          "reason": "no_applicable_transferred_family",
+          "budgetWorkers": 8
+        },
+        "current": {
+          "commands": 81,
+          "reason": "level_active_time_budget"
+        },
+        "commonDispatchAndVisibleEffectSummaries": 162,
+        "firstDispatchOrVisibleEffectDifference": null
+      }
+    ]
+  },
+  "control": {
+    "game": "DC22",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "wonLevels": 6,
+    "authority": true,
+    "levels": [
+      {
+        "level": 1,
+        "won": true,
+        "actions": 22,
+        "ms": 12777,
+        "prefixHash": "b1b5c16f11a012560f0638c481b4b7d346e4fa119ef5fb943357f3185d5e0c8e",
+        "nodes": 578,
+        "deltas": 3695
+      },
+      {
+        "level": 2,
+        "won": true,
+        "actions": 44,
+        "ms": 24994,
+        "prefixHash": "8773b34b1edba0ca44544949307c9a563b9d9af493488a916c795912a161b910",
+        "nodes": 896,
+        "deltas": 8592
+      },
+      {
+        "level": 3,
+        "won": true,
+        "actions": 45,
+        "ms": 19462,
+        "prefixHash": "0750b95ce856e9bedf3cc4ec9662c081823559bdc232b23788eefe5bf677c11f",
+        "nodes": 1170,
+        "deltas": 13656
+      },
+      {
+        "level": 4,
+        "won": true,
+        "actions": 76,
+        "ms": 46754,
+        "prefixHash": "87e1c51418d91b86058950faeac3bbb2dd173f92191a3def59b435a0d2d72cbe",
+        "nodes": 1926,
+        "deltas": 30251
+      },
+      {
+        "level": 5,
+        "won": true,
+        "actions": 185,
+        "ms": 168261,
+        "prefixHash": "58c84f6d809d7558184d9a844e5a1058874644183e7f7bf25e5861ea07918509",
+        "nodes": 3990,
+        "deltas": 70907
+      },
+      {
+        "level": 6,
+        "won": true,
+        "actions": 241,
+        "ms": 336324,
+        "prefixHash": "8e43ddf3546adf9bfcc2290b83fdb71842cc272c5b195f6f6135c8cbae564be5",
+        "nodes": 6251,
+        "deltas": 106722
+      }
+    ],
+    "bridge": {
+      "commands": 20,
+      "first": {
+        "level": 6,
+        "action": 162,
+        "type": "walk",
+        "changed": 22
+      },
+      "changedClicks": 10
+    }
+  },
+  "cases": [
+    {
+      "game": "AR25",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 17,
+          "ms": 5133,
+          "prefixHash": "79a55cb7b2a69f8c21b10535cf8c671246e17841b1ff5f295bff30039653817b",
+          "nodes": 459,
+          "deltas": 1493
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 11,
+          "ms": 2879,
+          "prefixHash": "131862b408f335d86cf2ec67bec7dfbcbfddde47ba389fd05faece3aeda3fc85",
+          "nodes": 516,
+          "deltas": 2382
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 40,
+          "ms": 14409,
+          "prefixHash": "5c40e529415a56533435a1541e46009c7a60d36fad078fdcc23e92390d270f9e",
+          "nodes": 720,
+          "deltas": 5498
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 22,
+          "ms": 9608,
+          "prefixHash": "4e4f59b6763cb8e79341fce5d8cc85521d2f760a871fce938761a1a27fcbad3f",
+          "nodes": 866,
+          "deltas": 7724
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 28,
+          "ms": 9146,
+          "prefixHash": "66bf9418598aa609e79b900fd8c77436d16dcbee64db29ac471f8ef099087cbd",
+          "nodes": 1042,
+          "deltas": 9980
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 112,
+          "ms": 104209,
+          "prefixHash": "23d40dccced705ba142c40e8dae8880f2df1fd51e6e5873aed024e84e5fa6d09",
+          "nodes": 2399,
+          "deltas": 34691
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "BP35",
+      "status": "stopped",
+      "reason": "native_game_over",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 16,
+          "ms": 9755,
+          "prefixHash": "6cd6f471367923f3ff3b8e3aef1c81905067c25dbdb9a7dbdc19474469fb7984",
+          "nodes": 501,
+          "deltas": 2163
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 47,
+          "ms": 33606,
+          "prefixHash": "31ce10398024e567f402ae0721e52b69ca304a049039b1315440175afaa0ab4b",
+          "nodes": 951,
+          "deltas": 8671
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 34,
+          "ms": 20450,
+          "prefixHash": "715b9cb1114d323a3f59b077179afa1568a21b6e49ccc9c30bb85ea8eca43a7e",
+          "nodes": 1354,
+          "deltas": 16158
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 19,
+          "ms": 9703,
+          "prefixHash": "a827c73db114175d79e3cdcfe309215312ad8d731d19ffd9991c65144da1e272",
+          "nodes": 1537,
+          "deltas": 20297
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 32,
+          "ms": 18293,
+          "prefixHash": "1ca5ba20dc13cf51f536c6f2dbb412d8b9435e7f2f391abebe99daadb4c1bdbc",
+          "nodes": 1883,
+          "deltas": 27307
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 64,
+          "ms": 65648,
+          "prefixHash": "ac7851641fd90ae68545a05f4a8e955d03044f6da394daa1827e146dbd975042",
+          "nodes": 2621,
+          "deltas": 41391
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "CASC",
+      "status": "stopped",
+      "reason": "level_active_time_budget",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 6,
+          "ms": 5711,
+          "prefixHash": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8",
+          "nodes": 454,
+          "deltas": 1486
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 14,
+          "ms": 10999,
+          "prefixHash": "b795352edc9003c7e87d1865d359e5df23f225e8539cdc1736e4aef2e24161d6",
+          "nodes": 586,
+          "deltas": 4528
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 22,
+          "ms": 19019,
+          "prefixHash": "b8af04f5713f1bd4f0bbde6b4a647c4060cc373da24eac81d0f7baa5ff7649a6",
+          "nodes": 783,
+          "deltas": 9298
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 20,
+          "ms": 18439,
+          "prefixHash": "4c32ba79d154a214812ec65da21f181ef1337fc6d7a81a40f63bc6be75a56844",
+          "nodes": 968,
+          "deltas": 13641
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 9,
+          "ms": 8184,
+          "prefixHash": "0e9043486b0acc17465e2f417b39210b046fc8a6b7f7a6364bf2eafc99233d8a",
+          "nodes": 1047,
+          "deltas": 15592
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 427,
+          "ms": 390140,
+          "prefixHash": "dbfbc72b2a3eab43328d060e4c91a42338ecd162ed88d51b47e0017c60df17be",
+          "nodes": 4076,
+          "deltas": 107437
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "CATL",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 6644,
+          "prefixHash": "7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996",
+          "nodes": 493,
+          "deltas": 2156
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 8,
+          "ms": 4980,
+          "prefixHash": "33fd25b3adc192901ba5787aaed48888ddae10d6b4a78a3b353409332e5e0b9b",
+          "nodes": 578,
+          "deltas": 3910
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 8,
+          "ms": 5272,
+          "prefixHash": "de6613db2740f583ea6ff7af31e1c6213404a6162deb33c8c54835a29602c236",
+          "nodes": 663,
+          "deltas": 5664
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 8,
+          "ms": 5615,
+          "prefixHash": "b2391d6efa9cada2df2001bc3bb82144b4b0904f24979202f70fb24be29e50f1",
+          "nodes": 749,
+          "deltas": 7419
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 8,
+          "ms": 5343,
+          "prefixHash": "5aabfe5e8c6489003136d24d66c5e4a7f9e652f0ef2c9b9d3e7b85096c87b2c6",
+          "nodes": 831,
+          "deltas": 9170
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 115,
+          "ms": 121891,
+          "prefixHash": "29dbdb5c9e894ef4d92c885442881687ec32a32f87d1acc9cdbc3f484bed173f",
+          "nodes": 2087,
+          "deltas": 34458
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "CAVA",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 7,
+          "ms": 3960,
+          "prefixHash": "0fbbe16a8f1b47ec732708f4ab9132037bcc972efb781160f952d2143f34a1ad",
+          "nodes": 434,
+          "deltas": 846
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 12,
+          "ms": 8022,
+          "prefixHash": "4db7141d669a0803da7758147d02f3c077acab4c9f781da501d00b431d2426bf",
+          "nodes": 549,
+          "deltas": 3466
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 17,
+          "ms": 12462,
+          "prefixHash": "618955be35b5e8c8df09d207686e4403af58595c965128e8540955b15377fe03",
+          "nodes": 713,
+          "deltas": 7180
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 12,
+          "ms": 9257,
+          "prefixHash": "3f1a5a5ef30d6a6386802d1bba454306b0c9bc0b1f499b3fb95a358e8f629a52",
+          "nodes": 825,
+          "deltas": 9797
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 15,
+          "ms": 10816,
+          "prefixHash": "41c8ada5b8dad1bb2706fd49752e5882d000cb2da681de943ed7b8c0e4778019",
+          "nodes": 965,
+          "deltas": 13069
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 77984,
+          "prefixHash": "4b4db028fe6bb8c32c68367bd8d606bc2e320592909707a741e5fe732264ac47",
+          "nodes": 1706,
+          "deltas": 30528
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "CGWL",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 15,
+          "ms": 6661,
+          "prefixHash": "5220df2eaf6f89a0e088ad929d4b80e941c428fae787b8d81da5447d3b8c00ab",
+          "nodes": 530,
+          "deltas": 3018
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 16,
+          "ms": 6659,
+          "prefixHash": "341ca45122db320efcbd3ec71237b0d2899ab9e6934249cbc0182f918a3b4797",
+          "nodes": 693,
+          "deltas": 6507
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 14,
+          "ms": 6372,
+          "prefixHash": "35757ca662c11f4a91d25a309f317f0f35ec478c1a30acab3d05c610d2ae7cd8",
+          "nodes": 836,
+          "deltas": 9560
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 18,
+          "ms": 8597,
+          "prefixHash": "40e037ed83567872db243bc34b06369204c8ccfdc60473bacbae1616cfaf56a4",
+          "nodes": 999,
+          "deltas": 13465
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 61,
+          "ms": 33054,
+          "prefixHash": "11a54092f2d728d63fcec4de779f1cb5a9c24905c9f22129b49a6b04084ff5d5",
+          "nodes": 1581,
+          "deltas": 26733
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 87,
+          "ms": 70066,
+          "prefixHash": "7ebb57b9b1edb354b62093709cc5e76a963a482e00579bd7cccbc0ef2813f75e",
+          "nodes": 2494,
+          "deltas": 45739
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "CLRS",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 6309,
+          "prefixHash": "86d909e16abb259b7090e5019dae013e82361b6218c6e4063c52fcd7a21d31e3",
+          "nodes": 490,
+          "deltas": 2147
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 10,
+          "ms": 5418,
+          "prefixHash": "b1465032b5d0b1a94dbf34a8fa1cc230b1fd918d7a4be11f363cd88bdf70f8f1",
+          "nodes": 589,
+          "deltas": 4325
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 13,
+          "ms": 7861,
+          "prefixHash": "64498f42a9a4757d79fea0503d197ef39286af95f61e5e20f30aa9b01e61f091",
+          "nodes": 718,
+          "deltas": 7157
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 15,
+          "ms": 9482,
+          "prefixHash": "2f8508d7caf36aa0f0af745eeef97aea3b3aa6664b592300929ed03856e425c4",
+          "nodes": 874,
+          "deltas": 10432
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 14,
+          "ms": 9290,
+          "prefixHash": "58f0269e9d6c7c13e14262ee77314c80c6b95e1f85fdc53a277732649f27068a",
+          "nodes": 1022,
+          "deltas": 13491
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 92,
+          "ms": 83902,
+          "prefixHash": "e4706800c3d33e31f9a3d359d4e035aab3c593b58d2de80659aeaa1aecd5cbc9",
+          "nodes": 1894,
+          "deltas": 33560
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "CN04",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 18,
+          "ms": 8811,
+          "prefixHash": "2ca5cca4d493d40e38003380887a1cb178c887d645fdde548434b2a37b708205",
+          "nodes": 504,
+          "deltas": 2162
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 43,
+          "ms": 21509,
+          "prefixHash": "519ef9d4bfa5b6a4ed35dc1da90987543cb80315601f53e70a1f862e78240dcd",
+          "nodes": 756,
+          "deltas": 6574
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 32,
+          "ms": 21049,
+          "prefixHash": "75544b9500b73025160cbae35e1fa42e4be301d4aa6b94b165e233bc86e360bc",
+          "nodes": 1016,
+          "deltas": 12242
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 43,
+          "ms": 21794,
+          "prefixHash": "53d3e9a4b008c1b7b4bf58818d07046a7868316f08e8cc84e8d5d18d74e0d801",
+          "nodes": 1262,
+          "deltas": 16444
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 55,
+          "ms": 30781,
+          "prefixHash": "5b825d9793a7d32646aee38390b3da8628ea3bae4122c0481c2092e1aa4cbab7",
+          "nodes": 1593,
+          "deltas": 22400
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 116,
+          "ms": 94667,
+          "prefixHash": "db548b77fc6553b1ef2121ce1572982e2c7ce16707dcf27e5aa718a3c4d91a3c",
+          "nodes": 2647,
+          "deltas": 47635
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "COLM",
+      "status": "stopped",
+      "reason": "level_action_budget",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 17,
+          "ms": 14440,
+          "prefixHash": "1dbbb65241430c64134960b0a70ad39aac6906237a00cf441772360bd4d40fb5",
+          "nodes": 559,
+          "deltas": 3463
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 28,
+          "ms": 17384,
+          "prefixHash": "7825505e0145a9cf00ebc2fa4cba38bc8e6d2ae5207a03c78bf20c5962934830",
+          "nodes": 777,
+          "deltas": 7838
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 52,
+          "ms": 31760,
+          "prefixHash": "e8afc26bffef678b53000eef730d13eaf6def0e1859bf219657dbef370acfaf3",
+          "nodes": 1160,
+          "deltas": 15289
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 26,
+          "ms": 13507,
+          "prefixHash": "1fa60088ab89cfb5c1ef3c1dca8d534451b24a45fccec40c3079f306c21bc904",
+          "nodes": 1362,
+          "deltas": 19440
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 57,
+          "ms": 31727,
+          "prefixHash": "5ad8f2ee53927530c05c852a1bdb06c033a65fbede61412c32f0ba91f80c0bb6",
+          "nodes": 1765,
+          "deltas": 27952
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 600,
+          "ms": 367586,
+          "prefixHash": "940af2910eeb58f1f3b3d33a88942cf1d740b263d6a4a04abd19fcc20548fa8e",
+          "nodes": 4990,
+          "deltas": 91912
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "COMB",
+      "status": "stopped",
+      "reason": "native_game_over",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 7369,
+          "prefixHash": "20b99f9a68d710d8c7bc0927b2b8b9eecc20f6b7f05a8047181dfc9e03e09fdc",
+          "nodes": 478,
+          "deltas": 2137
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 7,
+          "ms": 2469,
+          "prefixHash": "3956192bd956589f78378ebd77606432570bdc8d5fdd0e44a76c41a4d807a7fd",
+          "nodes": 541,
+          "deltas": 3660
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 11,
+          "ms": 3914,
+          "prefixHash": "74fc9e351fc88da8d14f5e3d89f82bf4faf14c97c64f72e8482f3e42791c0492",
+          "nodes": 640,
+          "deltas": 6055
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 15,
+          "ms": 5613,
+          "prefixHash": "340815bf0c6c9e7095d51b4eca575aa5ce7fc03c7f596b44ea54e0a13982c5f4",
+          "nodes": 775,
+          "deltas": 9322
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 23,
+          "ms": 8520,
+          "prefixHash": "3c817997b885a082934e095b3fd4b698e63b957ea6a556205b83a7c5e519deb4",
+          "nodes": 984,
+          "deltas": 14335
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 67,
+          "ms": 54645,
+          "prefixHash": "529302e1bba5e4569c316ba1b4fae864cdfb1bfeaf473c071753594d140ac735",
+          "nodes": 1651,
+          "deltas": 28967
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "DAME",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 7,
+          "ms": 3810,
+          "prefixHash": "cc8a46aa966f6d1bcccf601d1d6eda435a22d2c802a9a6f8355a572e088dbb92",
+          "nodes": 453,
+          "deltas": 1489
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 11,
+          "ms": 2905,
+          "prefixHash": "77f2e461992ab8c7a054535ba9a1e6991ea36672dd65fe34c769fb87eb3d9260",
+          "nodes": 519,
+          "deltas": 2391
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 12,
+          "ms": 5862,
+          "prefixHash": "72495a2ce855285d73f4d04152990a21fd7ae7b37e9eeba0ab14597ad277cb47",
+          "nodes": 652,
+          "deltas": 5029
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 10,
+          "ms": 4608,
+          "prefixHash": "4faaa0bff36fde1410e9e983694b6c15a55d158f9cc4c50d12fbe9468aaa6825",
+          "nodes": 749,
+          "deltas": 7213
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 11,
+          "ms": 2729,
+          "prefixHash": "17bbfaa17897d8ecce28916623d20a830e3a024c73b51ce93ea70a26ee319e45",
+          "nodes": 806,
+          "deltas": 8106
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 65,
+          "ms": 45348,
+          "prefixHash": "a7823c159e96226d1c73393f88585b74452ab2d50cedc4586ea9829e12441d4f",
+          "nodes": 1412,
+          "deltas": 22295
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "ELAS",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 2,
+          "ms": 2132,
+          "prefixHash": "6d296fc8fc160465abc625e1791e05ed5bd1c686595dab0256cbd239f2992c15",
+          "nodes": 419,
+          "deltas": 624
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 9,
+          "ms": 6020,
+          "prefixHash": "fa2488867cf46b52a44e9c0a1506b5fb0c86285de7b06773e3d4e30c4d492f4e",
+          "nodes": 489,
+          "deltas": 1734
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 22,
+          "ms": 8367,
+          "prefixHash": "4ded21bc5aee034a3e774aa6fa8df124a96243cbcb58fea92acbb9df1c9ffdf2",
+          "nodes": 597,
+          "deltas": 2469
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 46,
+          "ms": 20323,
+          "prefixHash": "d84f22b04c091c94bd6c09c1e1394006c95ed7cc0ef1c3c05f544d9cc64adeab",
+          "nodes": 1078,
+          "deltas": 12527
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 136,
+          "ms": 92570,
+          "prefixHash": "623faf2f22c1f7db768a0a5e7cd68e83d08f4e6c4bbc5c5187b78a6c20dddad8",
+          "nodes": 2453,
+          "deltas": 42327
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 57,
+          "ms": 56063,
+          "prefixHash": "4d500f6b82734c0c597346e388d2798105a4e4c7f1d1380cb1cefbd7458a71d2",
+          "nodes": 3013,
+          "deltas": 54764
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "ESCT",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 16,
+          "ms": 8736,
+          "prefixHash": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e",
+          "nodes": 552,
+          "deltas": 3664
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 17,
+          "ms": 6766,
+          "prefixHash": "aa17dde1be31cda1c70095f977a29e0816ac7101981a9b72f17249bda1edebd8",
+          "nodes": 714,
+          "deltas": 7360
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 21,
+          "ms": 9317,
+          "prefixHash": "96583f36a5010d8e7a1ac71aa8625b263d15bd950f113c8ccaa75e1ef1c17a1b",
+          "nodes": 914,
+          "deltas": 11926
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 22,
+          "ms": 10079,
+          "prefixHash": "56225454e20ebe7ba19d59de8ef77bfbe66d6039b170cec77908573a6e04681d",
+          "nodes": 1125,
+          "deltas": 16711
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 17,
+          "ms": 8031,
+          "prefixHash": "dbbc34afa6e7e28d81068cb69b5ddd15ca9b2441223b92d576ccf0edfc4cfaa2",
+          "nodes": 1291,
+          "deltas": 20411
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 176,
+          "ms": 174692,
+          "prefixHash": "24b7c80e1484d8fd65197395fff52f1dfc641c58e09d94b84edc8fe7fdc33594",
+          "nodes": 2912,
+          "deltas": 58636
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "FOGW",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 18,
+          "ms": 7806,
+          "prefixHash": "4711a8652d6ce194b1d75befd4d2a1bd814000e0ffabe9a2540c9452257e9e8e",
+          "nodes": 518,
+          "deltas": 3006
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 14,
+          "ms": 3985,
+          "prefixHash": "4d77287485b8041f404622bc9ddedc02c3f772a2909f1b309505eafa50b805fe",
+          "nodes": 597,
+          "deltas": 4541
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 25,
+          "ms": 8697,
+          "prefixHash": "0960d08ce97aededecc46e518b44c5f923918c8c5f34af5e5ec7188313ca2386",
+          "nodes": 746,
+          "deltas": 7600
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 29,
+          "ms": 13417,
+          "prefixHash": "566c3ca864963b107b5630266846c41e2808e971f9290b4e340ef14a435c80dc",
+          "nodes": 994,
+          "deltas": 13877
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 38,
+          "ms": 21030,
+          "prefixHash": "f6234e412ce95bfee78746263c09796b3899a45399d74cb7bbfe6ee17348dec1",
+          "nodes": 1332,
+          "deltas": 22117
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 116,
+          "ms": 88616,
+          "prefixHash": "a2d206c2f0a3fe818e47a77b9a106bde52733e8e36a2dc3f76c8cb949b746b2c",
+          "nodes": 2293,
+          "deltas": 47202
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "FT09",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 4,
+          "ms": 3336,
+          "prefixHash": "aad75de79d835cace7021e511a80b8cfed9f1b3b1f5d32013ae43d3898be8940",
+          "nodes": 447,
+          "deltas": 1068
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 7,
+          "ms": 2466,
+          "prefixHash": "57ee1b4a11114b063e0f825eed6c87de2d2d9b8ff24e485224ae840e056370cc",
+          "nodes": 488,
+          "deltas": 1736
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 14,
+          "ms": 4425,
+          "prefixHash": "8b278453556dffaed53f86d4d87d27f740e37f22799c5f363cd837efeed084e5",
+          "nodes": 577,
+          "deltas": 2452
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 16,
+          "ms": 7566,
+          "prefixHash": "c1fadc58cec90ca07597f75f5917858a5b51676fdef3049a082f83904961c145",
+          "nodes": 726,
+          "deltas": 4691
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 21,
+          "ms": 8698,
+          "prefixHash": "11113beda5d9a15645af0bdd565fda610465c97c646bd54813e7aedbdd91da5d",
+          "nodes": 874,
+          "deltas": 6090
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 40,
+          "ms": 36711,
+          "prefixHash": "7ba38a5c1527b5a111be263d5bae80053f77d76b9cb54057e9b56e5c416ad6f7",
+          "nodes": 1395,
+          "deltas": 14970
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "FUIT",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 48,
+          "ms": 12202,
+          "prefixHash": "024f524e1ff75538451186ea6f347e475892376b4eea9c821e68219d2173623f",
+          "nodes": 598,
+          "deltas": 4542
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 18,
+          "ms": 6909,
+          "prefixHash": "e1f5f5d9b098f8b573199ee98a1bf1a4c69905613a7ef3d4ada250104b9b0388",
+          "nodes": 752,
+          "deltas": 8438
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 25,
+          "ms": 10263,
+          "prefixHash": "8268f6ff92ec913fed58bc010b483c63c2871fcaeaf10f5274135a4829326c55",
+          "nodes": 961,
+          "deltas": 13845
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 47,
+          "ms": 20155,
+          "prefixHash": "a97dde4d9f39b9537add52b6de8199300ad6e63bb3e2b5677baa7edaec5b5655",
+          "nodes": 1354,
+          "deltas": 24012
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 26,
+          "ms": 12350,
+          "prefixHash": "b33079dcb9794d9bfd268aba9c5aeecf2bad25bff74690c001fbe6356168436e",
+          "nodes": 1579,
+          "deltas": 29643
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 55508,
+          "prefixHash": "832e743231b1cd02b89ed474743a6b89744e8794bb14f60b954c04190bac5efa",
+          "nodes": 2283,
+          "deltas": 46985
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "G50T",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 27,
+          "ms": 20552,
+          "prefixHash": "39d192be6d253d0c6bf1dc86b618dcd286f068fed5f926d6f6e45a3b9ef2d05b",
+          "nodes": 634,
+          "deltas": 5618
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 31,
+          "ms": 26635,
+          "prefixHash": "d83a735731aa926421220febabdc1cdb6f90eaf698d6c760ce835c1a54b20a2f",
+          "nodes": 927,
+          "deltas": 12357
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 64,
+          "ms": 60865,
+          "prefixHash": "366220ace5136661ceade344b5f9b5cad7e9d629b9447d4719da8a77f2ccdd12",
+          "nodes": 1557,
+          "deltas": 26297
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 31,
+          "ms": 30080,
+          "prefixHash": "6017acb11e80bb054e49a2bb55a7aa044ee71660ee97ed7145dace3faa331306",
+          "nodes": 1852,
+          "deltas": 33038
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 50,
+          "ms": 53361,
+          "prefixHash": "6416074c7e9ae53b92d7eabcfa006867e703f9cd4fee6aa610c8999c9b3576cd",
+          "nodes": 2385,
+          "deltas": 43969
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 87880,
+          "prefixHash": "1862872ca691d25f63a4fa1d4c0af03aedb44b56117bdfcc3c06f7d1b02e1cd2",
+          "nodes": 3110,
+          "deltas": 61332
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "GABA",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 47,
+          "ms": 14741,
+          "prefixHash": "0d8e377ccf65a5dba2b576f1d917a66478ccc0d59a03c6be1ae81550d1ea9a7d",
+          "nodes": 623,
+          "deltas": 3943
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 37,
+          "ms": 10200,
+          "prefixHash": "d8e84441f18b906b07106f0e72ad42f49a461e36cdb53e6e462dc31bbec2baa6",
+          "nodes": 809,
+          "deltas": 7039
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 67,
+          "ms": 16791,
+          "prefixHash": "a0627f59c092de0e16b6e6e10bb8de142ed57cf265c8da6d49bfc4375225e16c",
+          "nodes": 1083,
+          "deltas": 10639
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 88,
+          "ms": 26167,
+          "prefixHash": "7caac7d46109ffbf5b01b2c8379443abafeb7a7133588dee28aba778cac70377",
+          "nodes": 1469,
+          "deltas": 16223
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 106,
+          "ms": 36884,
+          "prefixHash": "865b551d1c70fe9086b7762930e160f85039918bd397876d352d576127adaba2",
+          "nodes": 2072,
+          "deltas": 23896
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 93,
+          "ms": 75992,
+          "prefixHash": "30b07178e6bd888e40a5d5238732b7070e941dad7a74378d586d7763ede25213",
+          "nodes": 2995,
+          "deltas": 42703
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "GIGO",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 6,
+          "ms": 5040,
+          "prefixHash": "15b0d65c05018848267cb86c623ca7cd94fb1c1fb6a901a27af99c1b1c5deb7e",
+          "nodes": 467,
+          "deltas": 1708
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 9,
+          "ms": 7391,
+          "prefixHash": "43072bf3635a00b20a3407954b1ba394ad39ae7e129df32144c7489b40952a7d",
+          "nodes": 555,
+          "deltas": 3668
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 9,
+          "ms": 7853,
+          "prefixHash": "2adc76dff6583f7e77bca98456d6bb577c394e27f7f9647c08fb19da1020b764",
+          "nodes": 643,
+          "deltas": 5628
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 11,
+          "ms": 10511,
+          "prefixHash": "d495ec902e83f8d5f0d8b430053260b570767cc5fd72dc3d6a45a667e9c31d03",
+          "nodes": 748,
+          "deltas": 8021
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 19,
+          "ms": 25415,
+          "prefixHash": "9680b951842ea9530b2a8037cc4f29007cbf2af2d1c5c46807f6ec9216be61d0",
+          "nodes": 948,
+          "deltas": 12176
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 58,
+          "ms": 59102,
+          "prefixHash": "41d9ab43d616162d4a61f4ae329d92843e5ef484028d562aa9ea44034634d06c",
+          "nodes": 1558,
+          "deltas": 24879
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "GMAP",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 5,
+          "ms": 4496,
+          "prefixHash": "2965646b168ce1b7f5b9723472b246d71d61d09e1782ba63c58793fa3ca11ef3",
+          "nodes": 467,
+          "deltas": 1499
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 7,
+          "ms": 4415,
+          "prefixHash": "5ac70b0ee99dec70947791f985a0053b4b0555723ed3ef9c744ae860ce54a16c",
+          "nodes": 550,
+          "deltas": 3036
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 17,
+          "ms": 11504,
+          "prefixHash": "eee85e4c16e55d1c9482787b8bd967b8a73ba110edd6c6372906135df21ced9d",
+          "nodes": 732,
+          "deltas": 6750
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 9,
+          "ms": 5351,
+          "prefixHash": "a64100d155b553300443bae1aacdac57abfd1204ef640b4f4cb4e7a412482b6e",
+          "nodes": 832,
+          "deltas": 8720
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 14,
+          "ms": 8449,
+          "prefixHash": "b351ef56bedd09cece423b3a639f0f6537b015bd13adfdc75a63a839afda3d06",
+          "nodes": 991,
+          "deltas": 11789
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 444,
+          "ms": 277170,
+          "prefixHash": "414a07ce41560d853b8c31ab891318341054b24a62bae1e9dbaf97c5e5711ad5",
+          "nodes": 5192,
+          "deltas": 108314
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "GORI",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 2,
+          "ms": 4501,
+          "prefixHash": "b03757ae1681ccd7ccf6514e46069834c1296cd2563203fe8cd4b4b484909385",
+          "nodes": 430,
+          "deltas": 839
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 6,
+          "ms": 4822,
+          "prefixHash": "0d105d26cdd8843641bcd2ef342f0122f26c345587d82f479ccd592c13c071c0",
+          "nodes": 492,
+          "deltas": 2148
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 7,
+          "ms": 5653,
+          "prefixHash": "c6e2fdd28d6c0a19a92f06b1ddde965ae551d37aed0457ed433b08553ba014ea",
+          "nodes": 568,
+          "deltas": 3679
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 3,
+          "ms": 1777,
+          "prefixHash": "4920933441beefa62b275abbe91700a07514cf3d710fea4d94958c9abfd6414f",
+          "nodes": 600,
+          "deltas": 4333
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 25,
+          "ms": 21004,
+          "prefixHash": "829a8dcec883a4e5a4b4ae94565fc20498171b9429cc1ac1d82a452b1dc73a89",
+          "nodes": 839,
+          "deltas": 9782
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 81,
+          "ms": 74738,
+          "prefixHash": "51b2a79ef7923273a6f69add16a6d13cfb178d5e8e1d9fc3ef1325b4679fc739",
+          "nodes": 1582,
+          "deltas": 27407
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "GRAV",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 11,
+          "ms": 9557,
+          "prefixHash": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa",
+          "nodes": 507,
+          "deltas": 2793
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 47,
+          "ms": 38998,
+          "prefixHash": "c85c5f5833056a3811ac14968bbb70dc670c5ac7d8d8ecf8bf46f2ed63b70a8c",
+          "nodes": 957,
+          "deltas": 13052
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 6,
+          "ms": 2629,
+          "prefixHash": "d9a36c6c7be12103173a49a6cc9e3d21b4dd01baa4c97d60fd525ceff5dc7a2f",
+          "nodes": 1013,
+          "deltas": 14354
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 8,
+          "ms": 3352,
+          "prefixHash": "261656a6b994f9f2c0a4d0b762862559d9b3fbd800de4e716a78c2431457dfb0",
+          "nodes": 1088,
+          "deltas": 16091
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 23,
+          "ms": 16887,
+          "prefixHash": "1a604656967af96ec729d4dc31cd5482b4c55d7571eeac67185ed991c0274a7d",
+          "nodes": 1307,
+          "deltas": 21102
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 119,
+          "ms": 105202,
+          "prefixHash": "085b2e495ddf3583edb7459bb08edcaf3152baf07ffbb0ca7735561dbec070a8",
+          "nodes": 2436,
+          "deltas": 47048
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "GRIL",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 5,
+          "ms": 4677,
+          "prefixHash": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e",
+          "nodes": 473,
+          "deltas": 1507
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 5,
+          "ms": 2958,
+          "prefixHash": "6ddf5b81c59b00bcc79da29779fa6b006a1d6e7fbf0716b27173ffae46152a60",
+          "nodes": 539,
+          "deltas": 2613
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 8,
+          "ms": 4697,
+          "prefixHash": "abc84989719856b7e0d1bb671577f69fc1c74432cef9845adfcc9ae892d15738",
+          "nodes": 644,
+          "deltas": 4384
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 8,
+          "ms": 5243,
+          "prefixHash": "70988d27983832f13fc1e87434cfbf26ef167971447d800e0a5098931686b81d",
+          "nodes": 736,
+          "deltas": 6142
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 13,
+          "ms": 9002,
+          "prefixHash": "53c7fb2dcd63ee2d51a0b88ec9c8cdda8866c968d746ac86a479f394ec14aad8",
+          "nodes": 885,
+          "deltas": 8999
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 82,
+          "ms": 92138,
+          "prefixHash": "3040b76e240959b8ef1b6f864cd907d710a05c3da3c66c1cebd0076278b3595f",
+          "nodes": 1726,
+          "deltas": 26948
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "HOLE",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 5,
+          "ms": 5546,
+          "prefixHash": "012c8aaf2cae6c42b84cff41bc39f11d4d9a76d61fdd2817e600c406ea372ebb",
+          "nodes": 457,
+          "deltas": 1493
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 6,
+          "ms": 4992,
+          "prefixHash": "af732526acba237a8c1e085a9d73a9ba48e9e3a52c181a17a138a183c9f71df5",
+          "nodes": 515,
+          "deltas": 2802
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 10,
+          "ms": 9478,
+          "prefixHash": "e8e2121889d31df93f3c3aa94e478a1d9ce39385eb36ae4c8921e739f0074c00",
+          "nodes": 614,
+          "deltas": 4988
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 9,
+          "ms": 8345,
+          "prefixHash": "c5f15e74aa132b85e6d1fe375529a8353c37a0964457337d03e0002fe20be482",
+          "nodes": 718,
+          "deltas": 6970
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 19,
+          "ms": 20762,
+          "prefixHash": "0a851b0541f517d62f432073eb3c65fbb169e23ef321ba1ec789642949724f8f",
+          "nodes": 932,
+          "deltas": 11152
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 57,
+          "ms": 59920,
+          "prefixHash": "401748806424a14f708bdb635f10020163340d49d8d431c4f8e7bcc78d6d2650",
+          "nodes": 1471,
+          "deltas": 23553
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "ISOS",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 3,
+          "ms": 4077,
+          "prefixHash": "cfa123ebda88519e2a5678023784a2449be6381ccec41e40b4ade48ef515d39a",
+          "nodes": 439,
+          "deltas": 1057
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 4,
+          "ms": 3517,
+          "prefixHash": "91041f9c253597406e2aea456c90067be36b71b7f788f256cd75e3ffdc585d22",
+          "nodes": 480,
+          "deltas": 1931
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 5,
+          "ms": 4969,
+          "prefixHash": "5ff4400086ac0b08ba79ed68a3c530250b3bbab1d32003930ab45288b8404527",
+          "nodes": 539,
+          "deltas": 3032
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 5,
+          "ms": 5036,
+          "prefixHash": "b28d897249b258fcdd751f30448b7282e2c7931922b69dd875897bc76130e456",
+          "nodes": 611,
+          "deltas": 4146
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 7,
+          "ms": 8398,
+          "prefixHash": "ed3c7c728839d5c496d4d0172a75a127e77218c113378e0d7997ee749dd1f695",
+          "nodes": 701,
+          "deltas": 5696
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 86433,
+          "prefixHash": "d0c666572682ab0333128df9d6582039ea67ccffee5a765dc2868c73dd2f1c70",
+          "nodes": 1437,
+          "deltas": 23150
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "KA59",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 15,
+          "ms": 10029,
+          "prefixHash": "69617fabeca88d0e43c7e143e2470084e66fd2b0f31139262983666b393f98c7",
+          "nodes": 541,
+          "deltas": 3448
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 43,
+          "ms": 28654,
+          "prefixHash": "1d592d3c42d53f7713572265431587a054c2fc37846d9d69a6336b8be7d78eba",
+          "nodes": 952,
+          "deltas": 12811
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 37,
+          "ms": 17961,
+          "prefixHash": "64b0b55ea8ea6171b981db1fb45312a2e8bddfe880b74897dba728770a622fb6",
+          "nodes": 1313,
+          "deltas": 20866
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 38,
+          "ms": 20482,
+          "prefixHash": "76f2ccb1d148fbde6d1a90a3ab61bce25d5288e4e665c7d110672b9dfe33e04a",
+          "nodes": 1683,
+          "deltas": 29140
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 20,
+          "ms": 5314,
+          "prefixHash": "1b066f038778d3a31483ba604a7a63d39394265ceca2ecb094066e9644c965f0",
+          "nodes": 1781,
+          "deltas": 30694
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 89,
+          "ms": 67590,
+          "prefixHash": "c0c711b75618081b593860da6d63f97068ad97de7734989aea85ac34a197ceb7",
+          "nodes": 2641,
+          "deltas": 50097
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "KATA",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 7901,
+          "prefixHash": "cce7cd4d173da4bd2f683c32d9d6ea147073a58eb1b7b202e6b64a483a8e7109",
+          "nodes": 478,
+          "deltas": 1721
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 11,
+          "ms": 7146,
+          "prefixHash": "625b79627307d964187322f85bcc10ba98156ccb224cfb11a997a47b612426df",
+          "nodes": 571,
+          "deltas": 3479
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 17,
+          "ms": 5813,
+          "prefixHash": "8b160b23a2c9df024d7885523d1481ae1d41973150786e275484d191ab44a458",
+          "nodes": 688,
+          "deltas": 4430
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 33,
+          "ms": 10803,
+          "prefixHash": "a9769b5069871504d9ec662c4a408643200a54f5e8663ac2546ddbcedbca7d6f",
+          "nodes": 912,
+          "deltas": 6735
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 34,
+          "ms": 13681,
+          "prefixHash": "b18fe017024893cd258964f1077f0e7e5fe41f4d0f446792b6f228b9739f7680",
+          "nodes": 1167,
+          "deltas": 9488
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 57,
+          "ms": 165751,
+          "prefixHash": "a8953234b4a7e60921e5b0d296cb10604f8b12611f57f4847ca02aa991347a1f",
+          "nodes": 1863,
+          "deltas": 22059
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "KEYD",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 34,
+          "ms": 19988,
+          "prefixHash": "6ee4ae61454cadfc972c34a77b81f66985e06bdb52ffe00d9dc045b0351059bb",
+          "nodes": 652,
+          "deltas": 5638
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 6,
+          "ms": 4149,
+          "prefixHash": "49731e0d72035fd9ce7d00035b39c1a3d7ae7cfa90e1b0398c8efebf2b96acff",
+          "nodes": 712,
+          "deltas": 6944
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 30,
+          "ms": 16571,
+          "prefixHash": "cf23326e5680c2f33afc8c889492ae067829f6e06a294caa7426403c2bc9c009",
+          "nodes": 994,
+          "deltas": 13464
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 26,
+          "ms": 12788,
+          "prefixHash": "e3b03f074f6552860b357221129f6d6447a12ccecef7241f6f5188d103be6fb9",
+          "nodes": 1227,
+          "deltas": 19103
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 26,
+          "ms": 12699,
+          "prefixHash": "4c5b4f63ffe264660475813478f879323b95a401d6aed3a5e40891154782de24",
+          "nodes": 1471,
+          "deltas": 24753
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 78949,
+          "prefixHash": "9a496ba1e603db7c60b7337c57ca907b3a4c3e8cff71d01c3a9fc195c8da8149",
+          "nodes": 2390,
+          "deltas": 42310
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "KLOT",
+      "status": "stopped",
+      "reason": "level_active_time_budget",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 14,
+          "ms": 9808,
+          "prefixHash": "dc4a9799c3c3d1f25446955162c206dbfde15290e5f5e694e8d969fcb61174f3",
+          "nodes": 539,
+          "deltas": 3241
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 16,
+          "ms": 8961,
+          "prefixHash": "9416bf3003337f9e38eb99b6892b76b45d7134a8f87d9314abeaae061256c57e",
+          "nodes": 676,
+          "deltas": 5878
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 17,
+          "ms": 9006,
+          "prefixHash": "c4c20c4ced12b62261e77cd66661f00f3746586967f7fca08a55ba81d575c6ca",
+          "nodes": 836,
+          "deltas": 9164
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 16,
+          "ms": 8416,
+          "prefixHash": "47159ed8850e996d250f4ef4ffcb2061223b8e9fdc7d69352e72c6053d9f50f7",
+          "nodes": 974,
+          "deltas": 11804
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 18,
+          "ms": 10370,
+          "prefixHash": "f2a2d4d687b76bf14af8d27c1c24e190087bc5e647bb57aa4d3cd7a572a5014f",
+          "nodes": 1124,
+          "deltas": 14873
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 81,
+          "ms": 363841,
+          "prefixHash": "512969c3fe2b7235210f0e61ad5cbee9d5f5273012b03d4b26f1fe5653a1bd3e",
+          "nodes": 1859,
+          "deltas": 32090
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "LF52",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 2796,
+          "prefixHash": "d5f788ca4f78836561e17b22df0987134be65edcb6afbf5daacc4c0fa449fd00",
+          "nodes": 446,
+          "deltas": 650
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 40,
+          "ms": 12734,
+          "prefixHash": "b881add9737a8c8554d0f61aaa3d4aadc2fdd30318d8a8d8bdf1133f740ef0e0",
+          "nodes": 816,
+          "deltas": 9344
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 46,
+          "ms": 29634,
+          "prefixHash": "9fa7bb025ca30f76537589c7763f97c23fedc7861ab61ef0052c6da6ea375d54",
+          "nodes": 1329,
+          "deltas": 19448
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 50,
+          "ms": 32100,
+          "prefixHash": "905b42ef8e2b08c17ea8a5c23d0d2c50d02cf6b37b6277cef52cb7f864bab5aa",
+          "nodes": 1895,
+          "deltas": 30443
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 99,
+          "ms": 123392,
+          "prefixHash": "9fea2b91a85fd68bda4a22bb20bf63bca34baa959c654992f0678c3a22661c84",
+          "nodes": 2666,
+          "deltas": 43931
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 85910,
+          "prefixHash": "e1341e5f52db27f4a358030f7c37c06f54c752b769a270a92c59fb863a65c868",
+          "nodes": 3617,
+          "deltas": 61556
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "LKEY",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 6653,
+          "prefixHash": "45eacf89a9b32e59f2a3d45d51b33f1ff42d3128a6bff46fd7646f7304294c2b",
+          "nodes": 490,
+          "deltas": 2146
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 8,
+          "ms": 5481,
+          "prefixHash": "e5b3a18fd0b17e4974266bb9fb4013479befd66d4bbcdbae74e57a94957e7c28",
+          "nodes": 580,
+          "deltas": 3898
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 19,
+          "ms": 8739,
+          "prefixHash": "791312948ae3d9a162af9bc9f65384555eeee7290c7d3cd55dc75e1aff22f0d0",
+          "nodes": 795,
+          "deltas": 8063
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 28,
+          "ms": 13778,
+          "prefixHash": "8bc22cf3df5caa9c9c7f67224e4b09cf98846e95e9df03f8c0645948c259633c",
+          "nodes": 1099,
+          "deltas": 14189
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 24,
+          "ms": 12847,
+          "prefixHash": "a3b55cf61222cf911f0b1d440a00aa7886b948398b7a87202e7b9a3e10f9117e",
+          "nodes": 1370,
+          "deltas": 19450
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 84,
+          "ms": 71464,
+          "prefixHash": "17f6aab9f41e81a01091f2952d2ce6db38b9e630b11eda2d7c497a53a91ef9c2",
+          "nodes": 2161,
+          "deltas": 37774
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "LP85",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 5,
+          "ms": 3165,
+          "prefixHash": "5fd87809ca31d185f273cae83fa67b11a89ceaa30ada9d48143e1bc5374e9eb2",
+          "nodes": 428,
+          "deltas": 840
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 20,
+          "ms": 7478,
+          "prefixHash": "bea227afb52808b7f792bf0fd5d7ed290a69dc4e0ad48420f290cb4842cc2de8",
+          "nodes": 538,
+          "deltas": 2622
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 18,
+          "ms": 4863,
+          "prefixHash": "c12f9e793e639725712e4c48236375e23d7c3d6268061daebf798a14ad25cbba",
+          "nodes": 607,
+          "deltas": 3527
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 13,
+          "ms": 3960,
+          "prefixHash": "6ff208ee7a85bb9964b9c9f532c999ce0511edefbb508d0f45abaae34cf89129",
+          "nodes": 660,
+          "deltas": 4207
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 18,
+          "ms": 4832,
+          "prefixHash": "fc8681ef397db75c1f3421e4b61bc60df2ec40ad4104420f9c63ed8c9b5ef6bb",
+          "nodes": 735,
+          "deltas": 4909
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 48,
+          "ms": 33238,
+          "prefixHash": "199e5dfd27874dc9119599989e01e4bfe1d06d0ad4dac7de983bd3b4a8ca3ce3",
+          "nodes": 1191,
+          "deltas": 15395
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "LS19",
+      "status": "stopped",
+      "reason": "native_game_over",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 5,
+          "ms": 2115,
+          "prefixHash": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c",
+          "nodes": 440,
+          "deltas": 1266
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 31,
+          "ms": 5512,
+          "prefixHash": "0290f34f93881e7c97c33f430296335b1c3459c25db70828b733625df654e130",
+          "nodes": 596,
+          "deltas": 3916
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 42,
+          "ms": 8853,
+          "prefixHash": "352406e80076f9c5e6ef18c2f6e07bd49f907aa2a2cf8078e1e6794a3648757c",
+          "nodes": 847,
+          "deltas": 8741
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 65,
+          "ms": 12832,
+          "prefixHash": "57b173302fd85c2daebf82f6190a89553ffdcc7d45f34a02f1b7ee13b0959f08",
+          "nodes": 1190,
+          "deltas": 14490
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 30,
+          "ms": 7147,
+          "prefixHash": "022f0546341f5c8b2d8bc7071a07fe16584bd2d3ee66771ce6301292b44e733f",
+          "nodes": 1374,
+          "deltas": 17584
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 66,
+          "ms": 40850,
+          "prefixHash": "5fb129886c58c18dc0eba7a4d4b0af0e984e71e851cbc25e2b1250c1ffb43638",
+          "nodes": 2025,
+          "deltas": 31958
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "LS20",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 15,
+          "ms": 6256,
+          "prefixHash": "eab5c5ece8ff78982cdfb2f38b8f7767352f841cb73e0c9f845b6296b26c7601",
+          "nodes": 484,
+          "deltas": 1723
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 45,
+          "ms": 14095,
+          "prefixHash": "fa2a88a93402f946d7a614b8a884acc52b06c1ba30082d66a1d0ace0635d8069",
+          "nodes": 748,
+          "deltas": 5532
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 41,
+          "ms": 18709,
+          "prefixHash": "29982e1fbb8de3f9e1e0918554d2a58fdd3357790cb6cb33ecae7ae073d3be8b",
+          "nodes": 1074,
+          "deltas": 10239
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 43,
+          "ms": 16740,
+          "prefixHash": "77379c2a7097fc6c42ec64b81c2c150b309090c3586734114ff7432347aab1c2",
+          "nodes": 1352,
+          "deltas": 15715
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 48,
+          "ms": 19662,
+          "prefixHash": "8e87218811f5398f19da154312cc56e3f08f2eb0fc3565bdc516e45814b2790a",
+          "nodes": 1693,
+          "deltas": 22918
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 150,
+          "ms": 79012,
+          "prefixHash": "96552c3fb1e02bef8d8006626aab1356ac83c95c9ef0e5dc5ff2d2c7a02a15a6",
+          "nodes": 2656,
+          "deltas": 44262
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "M0R0",
+      "status": "error",
+      "reason": "contour component bound exceeded Start a new reasoning session to continue.",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 19,
+          "ms": 5358,
+          "prefixHash": "7a4a5f9132ebaf038bf0ec96697749301b7c1e1b65ac0388de0925b0cfb94e98",
+          "nodes": 508,
+          "deltas": 1542
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 27,
+          "ms": 12650,
+          "prefixHash": "b5218c24cf5c27a1edcaaec26cd34fa5903e3fc59190c70e6c6ad14986ce9f7d",
+          "nodes": 738,
+          "deltas": 3020
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 57,
+          "ms": 22222,
+          "prefixHash": "b80f1b6d498d2d0deeee9476a1ce96f08c83d023396dad42a5aba4e674c594c5",
+          "nodes": 1308,
+          "deltas": 15448
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 11,
+          "ms": 6426,
+          "prefixHash": "7f58445a5f1ef979b31c4cb121a5bc50169012536ff96997e68f136982b76439",
+          "nodes": 1441,
+          "deltas": 17869
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 49,
+          "ms": 17472,
+          "prefixHash": "268518470ced21b331a1591ec79263a3b4dadf15984124d5d347049f843b70a8",
+          "nodes": 1771,
+          "deltas": 22567
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 0,
+          "ms": 129,
+          "prefixHash": "268518470ced21b331a1591ec79263a3b4dadf15984124d5d347049f843b70a8",
+          "nodes": 1771,
+          "deltas": 22567
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "MEMO",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 10,
+          "ms": 6741,
+          "prefixHash": "40ac77f931014315cdeb289b623e971f165ce7962801671d5b2bda66f288e482",
+          "nodes": 480,
+          "deltas": 2561
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 10,
+          "ms": 5544,
+          "prefixHash": "76ea20ee9fb6d89220f8fd189937a43fc1f4cad19c9269a2a8a8aef1a03b3b8d",
+          "nodes": 569,
+          "deltas": 4737
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 10,
+          "ms": 6068,
+          "prefixHash": "7d0e4db9da86d5c16a6c5288a1d942f785831b81b77462b92edbb115afee7017",
+          "nodes": 666,
+          "deltas": 6921
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 10,
+          "ms": 7835,
+          "prefixHash": "2b82c5620ec741029be21e08cb2372555d99f10efbb75f63ec608c3c29fe6f0b",
+          "nodes": 784,
+          "deltas": 9126
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 10,
+          "ms": 7813,
+          "prefixHash": "9ec6ec4b8ecf4b36a44de87388afe88d0cf4a910adc0f66293af69ffbc8c96ef",
+          "nodes": 899,
+          "deltas": 11328
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 51,
+          "ms": 46216,
+          "prefixHash": "6f470f3b321d3818aa084fd37579e7dbfb4e2d1aa46e8aefe160845f737be4c1",
+          "nodes": 1407,
+          "deltas": 22491
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "MIND",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 5930,
+          "prefixHash": "d2af6be8e55804dace772b7227f902dc86056bea5dedae2a4b1532f3c0c87a50",
+          "nodes": 488,
+          "deltas": 2150
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 8,
+          "ms": 3909,
+          "prefixHash": "9f38a5c35f0a01e49e2ba5e2d938847a32885c6318e0ecc8a1aa5b6f5dce854e",
+          "nodes": 566,
+          "deltas": 3896
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 15,
+          "ms": 9628,
+          "prefixHash": "87c9e8ea28823f9739418f2da13069e3bf4d7328efbb01da1b368d85dd55962f",
+          "nodes": 726,
+          "deltas": 7186
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 20,
+          "ms": 12815,
+          "prefixHash": "a274d547bfcbce2b2f800fd747dfa6e290203a4a76354e31b4050f3ce089efdf",
+          "nodes": 940,
+          "deltas": 11574
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 18,
+          "ms": 12809,
+          "prefixHash": "92f4417e31aab2a43dd3f53313cd204c6a36b2f19d5f231a9643c8b80bb47a26",
+          "nodes": 1125,
+          "deltas": 15516
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 46,
+          "ms": 316170,
+          "prefixHash": "2e1743d33b68f059e06f48975fb8109c88ee77e73cca863d38751f08c60b3805",
+          "nodes": 1608,
+          "deltas": 25608
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "POLA",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 2,
+          "ms": 1877,
+          "prefixHash": "1d64f28c143e952927547d46ea69eda61ff387b2d82c035b2bcaddeca8ac9a0c",
+          "nodes": 420,
+          "deltas": 624
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 3,
+          "ms": 1223,
+          "prefixHash": "79d9f973f0e914cae6dabc6c644ab95ddea77b32a5674295278044acb2c9ff48",
+          "nodes": 453,
+          "deltas": 1279
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 4,
+          "ms": 1665,
+          "prefixHash": "861ad10056e157a3bd5213de5d3c85ddfb91069375a7a795886bffaf295a19dd",
+          "nodes": 493,
+          "deltas": 2150
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 7,
+          "ms": 3008,
+          "prefixHash": "54add1ef0d53f2451294528bed7f533c53740026b9a5e436ff704b204f820b52",
+          "nodes": 567,
+          "deltas": 3681
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 9,
+          "ms": 3576,
+          "prefixHash": "21453b283c751b019a00672aa6fd1a7a3054b71107421377d3c2b9e9d9592f09",
+          "nodes": 667,
+          "deltas": 5655
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 49,
+          "ms": 47464,
+          "prefixHash": "f443a443aeece65437d98cc6505d391e9d17965fc4d44eebef05aa21bfbe75c5",
+          "nodes": 1248,
+          "deltas": 16457
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "PORT",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 16,
+          "ms": 6994,
+          "prefixHash": "e98e2dedd56d2d3ccd3342bdfb540d587d480b26de079f771e319927b6347d0f",
+          "nodes": 485,
+          "deltas": 1725
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 18,
+          "ms": 9299,
+          "prefixHash": "a239c076afa87ac90d72495f49ef5b1dfc7940dc9fe41c06ed47caf77527eb30",
+          "nodes": 646,
+          "deltas": 5626
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 26,
+          "ms": 14282,
+          "prefixHash": "7e97f58690f565a8855015ed27c827650482f4451a384aecaeba030d68082111",
+          "nodes": 906,
+          "deltas": 11288
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 17,
+          "ms": 9115,
+          "prefixHash": "959937576b129817ae59fb0ba3e3647f8c4c0c52f5abcc02875c66cd95a5533d",
+          "nodes": 1072,
+          "deltas": 14985
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 17,
+          "ms": 8072,
+          "prefixHash": "4943b0ad6fdbaa69c48ef2faaeb0679c794949300a8b2c093c241c67d02eacac",
+          "nodes": 1225,
+          "deltas": 18669
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 182,
+          "ms": 141531,
+          "prefixHash": "8f260c66ca653ce654d038f282b6eba2051c6eede384bed6adb6e436f95fc3ae",
+          "nodes": 2970,
+          "deltas": 58261
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "PRTL",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 6,
+          "ms": 5363,
+          "prefixHash": "2d4f52bd81c100ce13b0cafc0e2ee2561d106f0a78bef9b84468d3d4b3ef5682",
+          "nodes": 466,
+          "deltas": 1709
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 17,
+          "ms": 11725,
+          "prefixHash": "6cbbf9d3fc58e9c5ef3882657362bde977f65a8ee23903251daea3b1c0ff359d",
+          "nodes": 643,
+          "deltas": 5427
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 9,
+          "ms": 6500,
+          "prefixHash": "3dac3abebcb66839364097cafec366d65970cc5dafafb4a34589d8943bda4497",
+          "nodes": 730,
+          "deltas": 7389
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 12,
+          "ms": 8692,
+          "prefixHash": "5af8e587dcf4fa87ec52b0f35ce03125540f6297c0254641724d0f8c53f22cfd",
+          "nodes": 856,
+          "deltas": 10012
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 19,
+          "ms": 14049,
+          "prefixHash": "5c5da30661831e7ffa91a1fe020913e76d19c4f11441d4bc109a8b9e9316dda0",
+          "nodes": 1050,
+          "deltas": 14161
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 80353,
+          "prefixHash": "4d662e3c07fc4cc04334d0b46507c8e4426f9c1f9748deb39875ff7f0087b56b",
+          "nodes": 1975,
+          "deltas": 31789
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "R11L",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 3,
+          "ms": 2849,
+          "prefixHash": "7a045be75e5463cf6aa21e377e59d236b94250d5b5eecaec29251b0f9851bcd9",
+          "nodes": 434,
+          "deltas": 1052
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 12,
+          "ms": 6988,
+          "prefixHash": "2dde80859778aff8a218ff35dcc94d66cc0fd4a91421a572f78c128de018ba2b",
+          "nodes": 558,
+          "deltas": 3680
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 20,
+          "ms": 12071,
+          "prefixHash": "0f56dbebb64fc3536b6c898795cc0260ef71bfa29e0691ef90d8527245a00e3a",
+          "nodes": 774,
+          "deltas": 8072
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 17,
+          "ms": 11328,
+          "prefixHash": "a4fc19ab1ae4022dc1805e1bec81ecb7a86ef71b3d0920ee3eb9adcbb0b853de",
+          "nodes": 947,
+          "deltas": 11793
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 19,
+          "ms": 12287,
+          "prefixHash": "6a3565579a681a88b9cd59a56b276bdd31c7f090f2265c2b61b5cba19c0b965a",
+          "nodes": 1128,
+          "deltas": 15941
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 43,
+          "ms": 43207,
+          "prefixHash": "d962e50cc5be6869d501906bf00e55c6882a12234cdf4226f7bbb8ede4193784",
+          "nodes": 1620,
+          "deltas": 25418
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "RE86",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 26,
+          "ms": 8199,
+          "prefixHash": "2e761f7e86ac527a3257dbdc72d5a86342d33c00ea1a92dce2bc7951bfbbfc61",
+          "nodes": 539,
+          "deltas": 3235
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 47,
+          "ms": 10593,
+          "prefixHash": "874b2bf9c182d7e13eec6b0d9785e035ced12ea277d5390d8a2b42228fa15b8a",
+          "nodes": 796,
+          "deltas": 6820
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 61,
+          "ms": 14208,
+          "prefixHash": "1966269dfa9151aa8025141c3f1d97ae32a30aed5a77df03c178efde4bbe989d",
+          "nodes": 1096,
+          "deltas": 10864
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 52,
+          "ms": 30505,
+          "prefixHash": "db1d8ad1aa0e19f6346da0f04cf436aa3a088f76f2ff90cf0455cd2ee48b271c",
+          "nodes": 1629,
+          "deltas": 22211
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 76,
+          "ms": 59282,
+          "prefixHash": "eb68659e5d01a422805b66c61adb3ecd6e4d12ffa52354a3333ad138ea109108",
+          "nodes": 2457,
+          "deltas": 38845
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 88,
+          "ms": 82697,
+          "prefixHash": "bcfaf492fc77c53d08e79eb25b5cf7986512c260a46d0aa1813395dc68c18c07",
+          "nodes": 3325,
+          "deltas": 58014
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "RSWP",
+      "status": "stopped",
+      "reason": "level_active_time_budget",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 3,
+          "ms": 3573,
+          "prefixHash": "53e34526abf02d4311004a9ad726c131b277a7e995f552afc95913845d7fbecf",
+          "nodes": 445,
+          "deltas": 1063
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 8,
+          "ms": 6051,
+          "prefixHash": "3e5a439ee548d4ce05185253a0e860ed2241a544b006259151442ad61766d68d",
+          "nodes": 541,
+          "deltas": 2827
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 8,
+          "ms": 6065,
+          "prefixHash": "5c8f55ae67b9ab24c3e41cdd500779455ac8a3c3fbbc6631bcabc320cc84ac0d",
+          "nodes": 636,
+          "deltas": 4590
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 11,
+          "ms": 8698,
+          "prefixHash": "565788ba4d9be48b86e7a6c9e4174e3595a3e1bf778c926b2d71d44bf9252d35",
+          "nodes": 754,
+          "deltas": 7001
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 30,
+          "ms": 25433,
+          "prefixHash": "4b122ce71cbb1ab1aa480931f1af3def7036062e3fa5d01bdeb27ab6dcc56da5",
+          "nodes": 1105,
+          "deltas": 13614
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 47,
+          "ms": 362278,
+          "prefixHash": "e98b4276d1613d0daaf867c90704b4dc9f6558dc3ff6ecf4ea426c006f11b5ae",
+          "nodes": 1535,
+          "deltas": 23864
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "S5I5",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 13,
+          "ms": 7420,
+          "prefixHash": "bc37bd77e2785e79ed09898b6cbd5ed4d1ca8af1c4ef012b778864a6ded27e85",
+          "nodes": 495,
+          "deltas": 1324
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 38,
+          "ms": 21322,
+          "prefixHash": "72f263562720f010b6d92a84a082190fa9022851a76a0ac05cf2019f8fc753f6",
+          "nodes": 855,
+          "deltas": 9623
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 37,
+          "ms": 20592,
+          "prefixHash": "a6010a708cdf84ce6d48763b0a4794da843ce790f9c43494f09838cabe6f8353",
+          "nodes": 1326,
+          "deltas": 17824
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 30,
+          "ms": 20207,
+          "prefixHash": "0751ad81d69b8883187f4e582420af16ce5921421a670e859d524615da8656ec",
+          "nodes": 1692,
+          "deltas": 24457
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 28,
+          "ms": 15707,
+          "prefixHash": "1f465776d7f30821752d18bacda8980a1c6b1870a4586918dd1ae07240c50250",
+          "nodes": 1981,
+          "deltas": 30595
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 86012,
+          "prefixHash": "c7e2903f3ae8cc17eba444bf72a40b8842945a4c6b0273fff412b22c22c9acd8",
+          "nodes": 2718,
+          "deltas": 48050
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SC25",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 17,
+          "ms": 9010,
+          "prefixHash": "899f9857e7f597a81d5e01597818e973f420a9b178315717b582e35b4bfde1b9",
+          "nodes": 546,
+          "deltas": 3455
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 5,
+          "ms": 2125,
+          "prefixHash": "7f88d1436f776cceedfc5491cbe6a47103a22334dce04533fb11da5ee7d66735",
+          "nodes": 595,
+          "deltas": 4545
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 12,
+          "ms": 5097,
+          "prefixHash": "c567bb842d2c8cc5d9c0fe7aed26548db15038f4318f928ee8a6743cadc52830",
+          "nodes": 715,
+          "deltas": 7162
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 27,
+          "ms": 13160,
+          "prefixHash": "560ca3a17f27aa6a3f5aa695e90dc98b3543c0cfeec5efda50096f0947ee4de2",
+          "nodes": 960,
+          "deltas": 13030
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 45,
+          "ms": 25857,
+          "prefixHash": "1b88de8cea871a0787acb9a146c3b17fcb87b333c11b2d766cb7c59cd9b08417",
+          "nodes": 1392,
+          "deltas": 22846
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 84,
+          "ms": 89960,
+          "prefixHash": "f8192b951fa04548ab9eea73701045787d91578ff6fecdffef220ddf167db2c0",
+          "nodes": 2158,
+          "deltas": 41115
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SIGN",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 15,
+          "ms": 13122,
+          "prefixHash": "cf397945e80fdf9236f0e861512b29325c2314d928fb4231d2a1ba4ce06883b8",
+          "nodes": 520,
+          "deltas": 2800
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 48,
+          "ms": 43084,
+          "prefixHash": "af4625a97aef0a0e658fe95b761d9cf5993f13f1d613abb2ed438ca73fc6bf53",
+          "nodes": 961,
+          "deltas": 13222
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 56,
+          "ms": 60649,
+          "prefixHash": "b9634c84f695f679b65851c72bead0e224b7a47972605788d3a4851331ec43d3",
+          "nodes": 1491,
+          "deltas": 25398
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 22,
+          "ms": 23105,
+          "prefixHash": "d8d1f8e387d4c6f82ef08cdd56eb9e3357eeea23fa63c3013451e359bb2a1916",
+          "nodes": 1698,
+          "deltas": 30179
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 53,
+          "ms": 55360,
+          "prefixHash": "4fe284822f8e3d21692dfe7197f031505c6132b86f142d7465c8e19d79748ded",
+          "nodes": 2180,
+          "deltas": 41683
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 179,
+          "ms": 184320,
+          "prefixHash": "bbcef37a37251c19831a023deb5f8eb19cd32b7e51c9ea0cd54fe4b1898d6d56",
+          "nodes": 3857,
+          "deltas": 80588
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SK48",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 19,
+          "ms": 9048,
+          "prefixHash": "99b977093936446832060fad6f5abf416beaa1a2f13630c98f9a6e21046daa5a",
+          "nodes": 515,
+          "deltas": 1756
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 37,
+          "ms": 9824,
+          "prefixHash": "421bc40521294b8860233d93ee249f7c1b5d87ffb623dfcf4326a455c5f65614",
+          "nodes": 664,
+          "deltas": 2529
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 33,
+          "ms": 9207,
+          "prefixHash": "231ef4d931f3424d52386faa4cdbcdabeaf3d5aa3f6389037e11edba1fce97b2",
+          "nodes": 798,
+          "deltas": 3285
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 29,
+          "ms": 9542,
+          "prefixHash": "d7e35bfb03ea55e703ef46d5ebfd84f077309fae125e5dff949851cc460460b8",
+          "nodes": 946,
+          "deltas": 3849
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 33,
+          "ms": 13396,
+          "prefixHash": "84ce53eb311113316065e29e8e82d6254b8f992eec64f5de3b1cd066f459192d",
+          "nodes": 1095,
+          "deltas": 4620
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 77813,
+          "prefixHash": "1a41af132a04c538b9394e03ea0f2065175ea3f635dba64565614b1c17287dd1",
+          "nodes": 2006,
+          "deltas": 22202
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SMLP",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 3,
+          "ms": 4418,
+          "prefixHash": "98b11e4a22d936380c77194c26216bd0de53cc574f53053b0cce682508625582",
+          "nodes": 436,
+          "deltas": 1053
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 28,
+          "ms": 27267,
+          "prefixHash": "72d0ad27bfd9f3119c68680cae52e02b4a6859ffc091cb13f7b98c5fe342d0ab",
+          "nodes": 772,
+          "deltas": 7237
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 6,
+          "ms": 7252,
+          "prefixHash": "6f770fb1272890f71d7939bf848f575f4eb2efa199e5d1b19ff32c256309458f",
+          "nodes": 848,
+          "deltas": 8563
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 7,
+          "ms": 9908,
+          "prefixHash": "2eb4c9ede65eb2a274a74b7a023edf85dfa505a90656653109d30d33c4c87b93",
+          "nodes": 930,
+          "deltas": 10104
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 6,
+          "ms": 10465,
+          "prefixHash": "52c782d45a6883a6ccc361cd0ef6dc2cdb56b06418fd020d00d50e3e62da0672",
+          "nodes": 1000,
+          "deltas": 11424
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 71,
+          "ms": 85187,
+          "prefixHash": "3a9a1da40216f9fb4051ac875e32c2d416ddd8c9944a4bd51cc6fc605837d13a",
+          "nodes": 1653,
+          "deltas": 26911
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SNAR",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 16,
+          "ms": 10987,
+          "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121",
+          "nodes": 520,
+          "deltas": 2592
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 24,
+          "ms": 17392,
+          "prefixHash": "866682c03c73d6c6bb084d8ebb0bf4a02637ac2cac9f062a27aafe6de6471045",
+          "nodes": 717,
+          "deltas": 6739
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 23,
+          "ms": 9915,
+          "prefixHash": "58a7e3c5ea6f58c3a8cff96b82f0c6310ef10a9974917c582fba1696c51d5c9d",
+          "nodes": 895,
+          "deltas": 10243
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 36,
+          "ms": 17172,
+          "prefixHash": "8dced2e20837ed63a2401b33c21ce7290ab84a600d4a0eded3dec121d2c64bc9",
+          "nodes": 1189,
+          "deltas": 16567
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 35,
+          "ms": 20465,
+          "prefixHash": "761f2fce5f691dfe3379190fcff9b02c579acb61ab215f99ced9d08da1915e0b",
+          "nodes": 1532,
+          "deltas": 24188
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 151,
+          "ms": 127505,
+          "prefixHash": "d4abbbbc0c00989bf2dd55611b0b21a16ed790a074f6b3a3cd067499dc4de848",
+          "nodes": 3023,
+          "deltas": 57082
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SP80",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 4808,
+          "prefixHash": "e4630c05f5e67cf69c8fbb86c694ee9209ef16d8f0a48e008821003769c18e6d",
+          "nodes": 452,
+          "deltas": 1692
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 11,
+          "ms": 4356,
+          "prefixHash": "f7b3e94fee1ab0fd24a2787467741c50d949a2952c8cddd3b56c20915881ff20",
+          "nodes": 529,
+          "deltas": 3432
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 10,
+          "ms": 4701,
+          "prefixHash": "0e5fa6780eed7aaf78bc1497e76d609896004055edc4bec7c1838c8bf96f59ab",
+          "nodes": 609,
+          "deltas": 5177
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 25,
+          "ms": 14503,
+          "prefixHash": "39ec91e1fc1f330117bf6122abcdf751d905932c8b419e82f767d6ff054a25cc",
+          "nodes": 856,
+          "deltas": 10625
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 21,
+          "ms": 8509,
+          "prefixHash": "84032209fe614ea4a5fa528f3ce9be514402f9525851dcf2480ca5448b6dce7e",
+          "nodes": 964,
+          "deltas": 12398
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 88,
+          "ms": 73777,
+          "prefixHash": "093d17b947ba7f58c017631e99597ce6d56485bacd7614d021f06c902f897d81",
+          "nodes": 1834,
+          "deltas": 31629
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SPOR",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 18,
+          "ms": 18599,
+          "prefixHash": "1c56c9bc869b580013d1f87205d1d160221db32767d8525bb98a48dab2eab345",
+          "nodes": 592,
+          "deltas": 4344
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 13,
+          "ms": 8313,
+          "prefixHash": "c3682a04e5e6747286de95a34cd1eeaef130986cd89e9a5c1370cb96813d52f6",
+          "nodes": 745,
+          "deltas": 7211
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 16,
+          "ms": 11295,
+          "prefixHash": "e69efba15c1dbaa0469c7de1b15f6b1c7fe71c47f4fa800307643e67622719a2",
+          "nodes": 922,
+          "deltas": 10729
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 17,
+          "ms": 12636,
+          "prefixHash": "9289c7ceef7ed948b932dbaef65a4630c444eb45880f1be4dee2c574ea9a7c41",
+          "nodes": 1100,
+          "deltas": 14457
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 27,
+          "ms": 19492,
+          "prefixHash": "c5f929929ef6e1057edece27ad5bd95f4be310ff4b222a1f158d8ecfc0165c7a",
+          "nodes": 1449,
+          "deltas": 20446
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 99179,
+          "prefixHash": "015c31d78a955aaf791e525a8b570e983c31506bd5ede5c1561e69871fdd62a8",
+          "nodes": 2365,
+          "deltas": 38078
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "STCK",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 3,
+          "ms": 2673,
+          "prefixHash": "f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97",
+          "nodes": 441,
+          "deltas": 1059
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 7,
+          "ms": 3351,
+          "prefixHash": "551f4d1641c1e8fdd5a10e54f966db772df0aad8db1243578d8bbcdcdf117c2d",
+          "nodes": 523,
+          "deltas": 2600
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 18,
+          "ms": 10093,
+          "prefixHash": "9ac5c97a5d6446e51de0434c5eaf08f6715adda43b2521a8c4431a8b41fcda94",
+          "nodes": 748,
+          "deltas": 6578
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 5,
+          "ms": 2617,
+          "prefixHash": "36af8ff7e401f7a1cd59c58cafcbee8a0dacac0258cf1808ebe0f6ba6a2d6306",
+          "nodes": 825,
+          "deltas": 7697
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 6,
+          "ms": 3788,
+          "prefixHash": "b7e57c5839ae3351c8de590037526b23b356cd06861a6138e46dcedb10ff8ddb",
+          "nodes": 909,
+          "deltas": 9031
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 86,
+          "ms": 87240,
+          "prefixHash": "6dab5ca24a30cd85f05142a7e8f2b7265ddabd91522b1ef2c93962828e657ae6",
+          "nodes": 1780,
+          "deltas": 27869
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SU15",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 7,
+          "ms": 6382,
+          "prefixHash": "02db3e592a953091af8ea3da275535063b5d28496e8dc5c403294544f23723fe",
+          "nodes": 485,
+          "deltas": 1939
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 15,
+          "ms": 10353,
+          "prefixHash": "c7313afb93fc1c0a0ab6714ac133652bcdddea3912a717ca079e44b5e12c0a50",
+          "nodes": 658,
+          "deltas": 5244
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 19,
+          "ms": 14175,
+          "prefixHash": "8872ff856aa25a65397ad88926a6ecbc372e5a49df891b32e1adfebb4b40092f",
+          "nodes": 861,
+          "deltas": 9414
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 16,
+          "ms": 10058,
+          "prefixHash": "e14821d33f99a0c914ac73698b0de5e1745c14f9e78d6eb93f750c3eaa3490fe",
+          "nodes": 1004,
+          "deltas": 12898
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 20,
+          "ms": 15911,
+          "prefixHash": "30090798de9499077f83cab074a931ce29ce51ded7747627db160b380e7313e2",
+          "nodes": 1232,
+          "deltas": 17303
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 46,
+          "ms": 75652,
+          "prefixHash": "1388b3528390b825802fb73513141cd2ab09d9934068d35b3feb69aaf128fcba",
+          "nodes": 1679,
+          "deltas": 27362
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "SWCH",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 25,
+          "ms": 11201,
+          "prefixHash": "c73007473fee951eb29663e83927e436f8c26b83c12e2fd88c90da2979355d07",
+          "nodes": 571,
+          "deltas": 4307
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 20,
+          "ms": 10072,
+          "prefixHash": "07f47a6df260de8a13d6cc8476fb3e427358bc61a90a3e7c974ed9d6930fe21a",
+          "nodes": 751,
+          "deltas": 8645
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 30,
+          "ms": 17492,
+          "prefixHash": "f9a2e8f773a32b383a5b3d25ce047aeb894607188ba13c05a8b3e4535647ad48",
+          "nodes": 1048,
+          "deltas": 15180
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 28,
+          "ms": 16794,
+          "prefixHash": "b9e6c8a82b2978e03508b3998e7f5176cf9b89f9ca060ae75f6e38c6188b4cbe",
+          "nodes": 1334,
+          "deltas": 21288
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 48,
+          "ms": 29760,
+          "prefixHash": "daf38b600ea4261a9b774f9f358af7068dcdb840dd8e5a99cf18ffd90935a3f0",
+          "nodes": 1783,
+          "deltas": 31719
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 125,
+          "ms": 96572,
+          "prefixHash": "6f09325728e5dee7a5d5cabe8bff6a01a3bac7563f556e4c9db1c44f9c6bdd25",
+          "nodes": 2825,
+          "deltas": 57926
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "TN36",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 8,
+          "ms": 4810,
+          "prefixHash": "845a346dfa829f2a5b5692d46b19062379aec2e179bb14ea5e147f2b2a83d141",
+          "nodes": 456,
+          "deltas": 1077
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 11,
+          "ms": 4741,
+          "prefixHash": "08f463e67efccdb7f63123ba76f5f259490866581d978af11ed99c7df5ca05e9",
+          "nodes": 527,
+          "deltas": 1984
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 13,
+          "ms": 6476,
+          "prefixHash": "207b4f9af8ec1606b65cd8ddb28bb855424c032ee24912654a58e53b011937d3",
+          "nodes": 623,
+          "deltas": 3334
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 16,
+          "ms": 7236,
+          "prefixHash": "31c16e107217824d6564824f15798a75875708ced36124d2c4b4ced90a948a73",
+          "nodes": 723,
+          "deltas": 4479
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 21,
+          "ms": 9614,
+          "prefixHash": "73ea781e96f2792d744cf6d041afd22b148744d7942c6ec454c3c216e3adb4c5",
+          "nodes": 855,
+          "deltas": 6074
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 78403,
+          "prefixHash": "760bc081b704cf8adf7e07ca5f5eb2915ceb7629772510c2aeb0777b3fad4084",
+          "nodes": 1633,
+          "deltas": 23570
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "TR87",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 26,
+          "ms": 10989,
+          "prefixHash": "c3949e5f90cec59eeedb15838f1549a6abdc6129ead20cc909bc33aca3d8d708",
+          "nodes": 588,
+          "deltas": 3493
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 37,
+          "ms": 13810,
+          "prefixHash": "7614050836b6961bd471361c3a0ef7233bc5a215c0be7624c410b68ccabcb8a5",
+          "nodes": 910,
+          "deltas": 6934
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 28,
+          "ms": 11215,
+          "prefixHash": "c9688e0ff1cc288725043c3051f60c4ea796a9732fa0b12f23d8594f925053dc",
+          "nodes": 1154,
+          "deltas": 9466
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 30,
+          "ms": 11477,
+          "prefixHash": "f9b04d9689d1f7c194fa6d61fbebcb690ef8f5ff8f8089ceb2be08f2ebd7d9a0",
+          "nodes": 1408,
+          "deltas": 12008
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 29,
+          "ms": 15935,
+          "prefixHash": "9970a2fb14c4cf1605275fe476a23d821d895f0b40dee50c2ed5fbaf4564866e",
+          "nodes": 1651,
+          "deltas": 17243
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 84,
+          "ms": 63450,
+          "prefixHash": "a6e029e3a060465c88a13b727a4d0d7c0bf296d148af51443e5ab463d93fa5af",
+          "nodes": 2435,
+          "deltas": 35496
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "TRIA",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 14,
+          "ms": 22239,
+          "prefixHash": "a5c0834a56e327c88ea9c55fb092a71fbe7e7e424682233a87d565aaeeaa9a34",
+          "nodes": 556,
+          "deltas": 3459
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 14,
+          "ms": 7705,
+          "prefixHash": "48257a595983d039a1003448efa21fb7194d6002dda781de684d997b8c8fc72c",
+          "nodes": 720,
+          "deltas": 6546
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 4,
+          "ms": 2977,
+          "prefixHash": "be51dd539b3aae1ccd2d189a798fd130308cadce7a5adc90cf40cd8e4f38d55f",
+          "nodes": 772,
+          "deltas": 7431
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 31,
+          "ms": 20047,
+          "prefixHash": "fcb35ab305696ae587965bde044d77cc9cb38f6952e892daa9f335c40ab3c75d",
+          "nodes": 1137,
+          "deltas": 14272
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 23,
+          "ms": 15490,
+          "prefixHash": "467cf3360be4e6c013bb87531801d2be58849012f17e571507008f46546b2cf7",
+          "nodes": 1406,
+          "deltas": 19345
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 144,
+          "ms": 195720,
+          "prefixHash": "c439b03b64fc292a90bd4e4fe37736affbc5a3afc5303f544f44c94ad4f1b011",
+          "nodes": 2836,
+          "deltas": 50810
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "TU93",
+      "status": "stopped",
+      "reason": "native_game_over",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 30,
+          "ms": 10871,
+          "prefixHash": "e58c1f6d1b8809ff3ee0f739703b06e7e30fdccc2182d968b603a05cdab4f569",
+          "nodes": 554,
+          "deltas": 3666
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 14,
+          "ms": 5260,
+          "prefixHash": "80a47ed172333c20993b3614c0431518e75ba490c01eaae88593c749090ef433",
+          "nodes": 652,
+          "deltas": 5633
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 19,
+          "ms": 10143,
+          "prefixHash": "1ec9aa3bd5eef868cd4f8a1ed4d7910c622342a7f99fb16af46d6a01a589994b",
+          "nodes": 821,
+          "deltas": 9752
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 20,
+          "ms": 11825,
+          "prefixHash": "0936ab2249cbe4eaebdb1766cc093d94a6de4dfec00b896402cd8c631aa14ec5",
+          "nodes": 1008,
+          "deltas": 14096
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 29,
+          "ms": 19458,
+          "prefixHash": "bd17a810e7e541510cdee18178c850915382d3ec28db0fed527cdf367c3a9588",
+          "nodes": 1282,
+          "deltas": 20400
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 39,
+          "ms": 31732,
+          "prefixHash": "312388747a76f605e43dcabe942d7ad05aff6d0a4969999da40ecae7ea5e40b6",
+          "nodes": 1690,
+          "deltas": 28915
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "UPST",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 30,
+          "ms": 27807,
+          "prefixHash": "6f99a32adbe04ab3cf551d9dbf82d8ce7df839b35dfee3099480b5b6e7641b60",
+          "nodes": 695,
+          "deltas": 6956
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 4,
+          "ms": 5839,
+          "prefixHash": "8dfb2816f368d7b8d6ef75c3874267c4a88dce34ed421258b349a7ca7fff6d21",
+          "nodes": 743,
+          "deltas": 7834
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 14,
+          "ms": 15274,
+          "prefixHash": "bb2e8be3c15aca194707ec11ee3419e49d093647158fdbc1e2c45506c63a7262",
+          "nodes": 904,
+          "deltas": 10905
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 7,
+          "ms": 8228,
+          "prefixHash": "a3b516868d4ce5d8a7c8bbbd94c6fb890b8c13dc567dfe547e3d5532d65af63f",
+          "nodes": 993,
+          "deltas": 12448
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 15,
+          "ms": 17292,
+          "prefixHash": "113283a516f24076615c4da606641b87779380ce0357cec955fd3828915e735d",
+          "nodes": 1160,
+          "deltas": 15733
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 80,
+          "ms": 87328,
+          "prefixHash": "346e69e5a7641e4e6d7cbcb794bc8b1a63ed2703603c66fff880d5a1bec4bb2f",
+          "nodes": 2010,
+          "deltas": 33301
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "VALV",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 10,
+          "ms": 11598,
+          "prefixHash": "d278e7e63c20f293bc809c8a59674e3e9e08dd518a76d76217b477ee71af8947",
+          "nodes": 498,
+          "deltas": 2579
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 8,
+          "ms": 7752,
+          "prefixHash": "73558411f7f3a9f0779a6cd3f13bc368b02e63c9eef1528e9eb15719b11ee618",
+          "nodes": 592,
+          "deltas": 4342
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 8,
+          "ms": 7706,
+          "prefixHash": "ecc6f6195c8bc06a9d5c59ee5e31cb8211008e5f51a6d23ce450ee56726d79c1",
+          "nodes": 685,
+          "deltas": 6104
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 3,
+          "ms": 2993,
+          "prefixHash": "4b3c810e2bc91eb9829a471e62275fbd692904888dda2900aa666f9eec047888",
+          "nodes": 721,
+          "deltas": 6764
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 13,
+          "ms": 12509,
+          "prefixHash": "b5fe2436fe80342609a0504b8665b55cc3bd3ef229c8df1590b8d4e50fe4a2dc",
+          "nodes": 878,
+          "deltas": 9635
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 42,
+          "ms": 36173,
+          "prefixHash": "54515e0933d3dcf89f7bb7ceeddb9d80be3fc8d8598f3fed248e50b9d362ddf0",
+          "nodes": 1268,
+          "deltas": 18799
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "VC33",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 5,
+          "ms": 2335,
+          "prefixHash": "f63879ed7ec99ac7338beb9f1c4f8a3edf8cecbf395aa6ae741e32bc344f99da",
+          "nodes": 424,
+          "deltas": 836
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 9,
+          "ms": 2361,
+          "prefixHash": "3294557bc1f6d716b6801b20dd4dc37493ca4f712cedb0260c47b9c770b0ac60",
+          "nodes": 486,
+          "deltas": 1316
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 23,
+          "ms": 4104,
+          "prefixHash": "84dc8b0cfcdf713cf65db08c98f35fdbf254d0135e86ede20a22c99de202c7a8",
+          "nodes": 585,
+          "deltas": 1833
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 21,
+          "ms": 14008,
+          "prefixHash": "4d8f6265d4166e89ee5fb1c2045faa3efaa542c880e547ea05550d1b91c4b5f1",
+          "nodes": 808,
+          "deltas": 6442
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 65,
+          "ms": 26736,
+          "prefixHash": "ea73a76ab49037c9826b0e4a3bb971446cb03acec6279c557e8c9b798a8d5449",
+          "nodes": 1132,
+          "deltas": 9692
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 40,
+          "ms": 35007,
+          "prefixHash": "efecde31424fe43223d3b224e94dcdcf36e38523c17e9d17683e917d107b8f5e",
+          "nodes": 1500,
+          "deltas": 18419
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "VOIS",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 14,
+          "ms": 9036,
+          "prefixHash": "cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186",
+          "nodes": 502,
+          "deltas": 2370
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 18,
+          "ms": 9958,
+          "prefixHash": "3f135185cabbc08b0b18ba5be3eeb843689afbfafe442b2acd752d6998899439",
+          "nodes": 633,
+          "deltas": 5001
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 34,
+          "ms": 12600,
+          "prefixHash": "a973efa26aeddc92bbc8f941bc11ec99d561fef31953b7e90eb393425150671f",
+          "nodes": 905,
+          "deltas": 10270
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 23,
+          "ms": 8789,
+          "prefixHash": "28ee6d5aa23a67c0dbd547859e776c7b2e7d95e9b6223b47500e367ee15e9e41",
+          "nodes": 1076,
+          "deltas": 13566
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 37,
+          "ms": 14847,
+          "prefixHash": "f6a8a07f9c16c89da97eb39bd320afad78165cb73d9b1f0839cca8c587edd668",
+          "nodes": 1340,
+          "deltas": 18410
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 65,
+          "ms": 61231,
+          "prefixHash": "94f128410ce31412bb2c8283d74f4e499be7e41e1f746cb5e2a82522c921ba1d",
+          "nodes": 2085,
+          "deltas": 32703
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "WA30",
+      "status": "stopped",
+      "reason": "native_game_over",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 26,
+          "ms": 12737,
+          "prefixHash": "b8590d9cd1f336a57ab225ee2221c5dad1bb5bc156b281cd9fce79e6b4889dd0",
+          "nodes": 610,
+          "deltas": 4970
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 53,
+          "ms": 33672,
+          "prefixHash": "683e08647bce82914ba514c1096735375198d919498d17b7f4416120b2df3b75",
+          "nodes": 1083,
+          "deltas": 16255
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 76,
+          "ms": 29994,
+          "prefixHash": "d192145cef0a282b3cded8b9b0ed10b09c3bb02febb16fd6ed054d633169fcb8",
+          "nodes": 1802,
+          "deltas": 32780
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 48,
+          "ms": 21564,
+          "prefixHash": "ee97ea0c13f126bd9780c7c2367310052d302a9af3297454365b74f653cc0d8b",
+          "nodes": 2368,
+          "deltas": 43328
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 113,
+          "ms": 44582,
+          "prefixHash": "785fac99f96e4a4317520e5a6fab5b3b312dd8f0f78fdb6310302d2ad5187189",
+          "nodes": 3406,
+          "deltas": 67868
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 75,
+          "ms": 64463,
+          "prefixHash": "b1c4b6fc8264be1d8bc86c9930937d2aca68e03ae8931863915bf9778da4820c",
+          "nodes": 4044,
+          "deltas": 82645
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    },
+    {
+      "game": "WEAV",
+      "status": "stopped",
+      "reason": "no_applicable_transferred_family",
+      "wonLevels": 5,
+      "authority": true,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 27,
+          "ms": 10646,
+          "prefixHash": "db33112f07ff753fb2ac8ed65958948d68395c7614070387a2293a5ca1fedff8",
+          "nodes": 597,
+          "deltas": 4135
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 28,
+          "ms": 12696,
+          "prefixHash": "f0916bb06a0a2906be540050eba5010aaa768272e0799a36ebb1111c9933bd17",
+          "nodes": 855,
+          "deltas": 10221
+        },
+        {
+          "level": 3,
+          "won": true,
+          "actions": 24,
+          "ms": 12021,
+          "prefixHash": "d549b3f466a74205fe6bc9b201305a1592f3da01d12ac7487b16c225439afaa2",
+          "nodes": 1083,
+          "deltas": 15445
+        },
+        {
+          "level": 4,
+          "won": true,
+          "actions": 40,
+          "ms": 21319,
+          "prefixHash": "77f1b8856302af3963654d5aa7b06f1fbe14cd41092109268dcd8e66aede182a",
+          "nodes": 1517,
+          "deltas": 24205
+        },
+        {
+          "level": 5,
+          "won": true,
+          "actions": 40,
+          "ms": 21361,
+          "prefixHash": "891e87fee28525a1f041c30c108a7cd62740f4656d47fa09c1331655b23bdb0c",
+          "nodes": 1953,
+          "deltas": 32967
+        },
+        {
+          "level": 6,
+          "won": false,
+          "actions": 113,
+          "ms": 155455,
+          "prefixHash": "850079ea1710535b3e0a32390ea5feb52b193e8c9083be0be872d83c9f07e57c",
+          "nodes": 3244,
+          "deltas": 57814
+        }
+      ],
+      "bridge": {
+        "commands": 0,
+        "first": null,
+        "changedClicks": 0
+      }
+    }
+  ]
+}

@@ -1825,3 +1825,23 @@ Sur `67345956`, le rejeu normal part du niveau 1, garde le budget de **360 s et 
 DC22 niveau 6 rejoint la couverture qualifiée. Le total passe à **534/636 niveaux (84,0 %)**, dont **35/99 niveaux 6**.
 
 LS20 et GABA reproduisent leurs niveaux 1 à 4 en **144 et 239 commandes SIC seul**, avec les mêmes empreintes et volumes du graphe à chaque niveau. Les **369 tests ciblés**, TypeScript et le build Vite passent.
+
+### Campagne des 64 niveaux 6 restants
+
+Sur `7bb9f152`, quatre processus ont rejoué les **64 jeux dont le niveau 6 restait à qualifier**. Chaque partie démarre au niveau 1 en mode SIC seul. Le budget par niveau est fixé à **360 s de temps actif et 600 commandes**, comme pour la qualification de DC22. La campagne, témoin DC22 compris, a duré **51 min 48 s**. Pour reproduire un jeu avec le même budget, exécuter `node scripts/check-sic-chronological.mjs CODE 6 resultat.jsonl 1` à la racine avec Node 22 ou supérieur. Le [relevé par jeu](sic-v8-level6-campaign-7bb9f152.json) contient les empreintes et un temps mesuré par niveau.
+
+Les 64 jeux reproduisent leurs cinq premières victoires et les empreintes des commandes et retours officiels. Aucun ne gagne le niveau 6. La couverture reste à **534/636 niveaux (84,0 %)**, dont **35/99 niveaux 6 (35,4 %)**. HANO compte quatre niveaux.
+
+| Arrêt au niveau 6 | Jeux | Détail |
+| --- | ---: | --- |
+| Aucune proposition applicable | 54 | Dans 53 cas, l’exploration publique avait produit au moins un changement visible |
+| Défaite déclarée par le jeu | 5 | BP35, COMB, LS19, TU93, WA30 |
+| Temps actif | 3 | CASC, KLOT, RSWP |
+| Plafond de commandes | 1 | COLM |
+| Limite de mesure des contours | 1 | M0R0, même erreur qu’au rejeu précédent, avant la première commande du niveau |
+
+Sur les 60 niveaux 6 qui ont un rejeu historique comparable, 58 ont la même empreinte finale. Les deux autres, CASC et KLOT, reproduisent les commandes et résumés de retours de la portion commune. Leurs anciens essais utilisaient le budget indexé sur huit workers et leur parcours actuel se termine plus tôt sur le temps.
+
+Le témoin DC22 reproduit ses six niveaux en **613 commandes** avec les mêmes empreintes et volumes de graphe. Le niveau 6 gagne en **241 commandes et 336,32 s** pendant la campagne. Le plan à rebours guide **20 commandes à partir de la 162e**, dont 10 clics qui modifient le plateau. Le relevé compte les commandes émises avec l’un des deux libellés exclusifs au plan de pont. Aucune activation n’apparaît sur les 64 autres jeux. PORT utilise les passages appariés au niveau 6 et CGWL le transport vers un cadre. Ils fournissent deux cas pour tester séparément les preuves de transfert et de transport sur lesquelles s’appuie le plan de DC22.
+
+Les contrôles LS20 et GABA gardent leurs empreintes et volumes de graphe jusqu’au niveau 4, en **144 et 239 commandes**. Les **260 tests SIC, agent et runtime** passent après correction de l’attendu du test de recharge à un pas. La série intermédiaire est vide pour ce cas. Les décisions et le code d’exécution restent ceux de `7bb9f152`.
