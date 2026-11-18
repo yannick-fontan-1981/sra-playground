@@ -16,6 +16,8 @@ import { chooseCompositeCycleStep, observeCompositeCycleStep, readCompositeCycle
 import { chooseOrientedCycleStep, hasOrientation, observeOrientedCycleStep, readOrientedCycle } from './inset-oriented-cycle.ts';
 import { carriedBandInks, chooseGlyphRoute, observeGlyphRoute, readGlyphRoute,
   type GlyphRouteMemory, type GlyphRouteState, type GlyphRouteStep } from './managed-glyph-access.ts';
+import { chooseGlyphWorkshopStep, observeGlyphWorkshop, readGlyphWorkshop,
+  type GlyphWorkshopState, type GlyphWorkshopStep } from './managed-glyph-workshop.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 
 export const framedContactId = 'sic_framed_contact';
@@ -50,7 +52,8 @@ type Plan = { command: Direction; landing: NativePoint; target: NativePoint; con
 type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target: NativeBox | null; surface: NativeBox | null;
   inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string; pair: MorphologyPair | null;
   managed?: ManagedFramedPlan; rotation?: FramedRotation; cycle?: { local: CycleState; step: CycleStep };
-  composite?: { local: CompositeCycleState; step: CompositeCycleStep }; glyphRoute?: { local: GlyphRouteState; step: GlyphRouteStep } };
+  composite?: { local: CompositeCycleState; step: CompositeCycleStep }; glyphRoute?: { local: GlyphRouteState; step: GlyphRouteStep };
+  glyphWorkshop?: { local: GlyphWorkshopState; step: GlyphWorkshopStep } };
 const empty = (epoch = 0): State => ({ epoch, body: null, target: null, surface: null, inset: null, beneath: null,
   trials: [], blocked: [], tested: [], crossed: [], count: 0 });
 const footprint = ([x, y]: NativePoint, pitch: number): NativeBox => [x, y, x + pitch - 1, y + pitch - 1];
@@ -156,13 +159,14 @@ function route(rows: NativeRows, body: Body, surface: NativeBox, directions: rea
 }
 
 function cycleProposal(family: string, plan: { cycle: NonNullable<Proposal['cycle']> } | { composite: NonNullable<Proposal['composite']> }
-  | { glyphRoute: NonNullable<Proposal['glyphRoute']> },
+  | { glyphRoute: NonNullable<Proposal['glyphRoute']> } | { glyphWorkshop: NonNullable<Proposal['glyphWorkshop']> },
   observation: NativeObservation,
   mode: ReasoningMode | undefined,
   remaining: number,
   rows: NativeRows,
 ): Proposal | null {
-  const { local, step } = 'cycle' in plan ? plan.cycle : 'composite' in plan ? plan.composite : plan.glyphRoute;
+  const { local, step } = 'cycle' in plan ? plan.cycle : 'composite' in plan ? plan.composite
+    : 'glyphRoute' in plan ? plan.glyphRoute : plan.glyphWorkshop;
   const parent = 'G_official_completion', ref = observation.observation_ref;
   const moving = 'glyphRoute' in plan ? plan.glyphRoute.local.rotation : undefined;
   const observedCycle = moving?.period ? [moving.rule.evidence, ...moving.witnesses.slice(-2 * moving.period)] : [];
@@ -175,8 +179,9 @@ function cycleProposal(family: string, plan: { cycle: NonNullable<Proposal['cycl
   const strategy = choice.selected?.id;
   if (!strategy) return null;
   const rotationConfirmed = ('composite' in plan && hasOrientation(plan.composite.local) && !!plan.composite.local.rotation)
-    || ('glyphRoute' in plan && !!plan.glyphRoute.local.rotation?.period);
-  const reason = step.purpose === 'transport' ? 'Test the projected landing of the forced movement'
+    || ('glyphRoute' in plan && !!plan.glyphRoute.local.rotation?.period) || ('glyphWorkshop' in plan && !!plan.glyphWorkshop.local.cycle);
+  const reason = step.purpose === 'track_stations' ? 'Compare the next locations of the moving stations'
+    : step.purpose === 'transport' ? 'Test the projected landing of the forced movement'
     : step.purpose === 'recharge' ? 'Reach the recharge before running out of moves'
     : step.purpose === 'test_rotation' ? (rotationConfirmed
       ? 'Reuse the confirmed rotation and check the preserved shape and color' : 'Test the direction of rotation and check the preserved shape and color')
@@ -188,10 +193,13 @@ function cycleProposal(family: string, plan: { cycle: NonNullable<Proposal['cycl
     subjects: [pointKey(local.layout.exit)], parentObjective: parent, satisfactionContract: 'official_progress_after_symbol_and_access' };
   const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id;
   const target = cycleSubject(local.layout, step.target), action = { action_ref: step.action, data: {} };
-  const walk = step.walk?.slice(0, remaining) ?? [];
+  const walk = 'walk' in step ? step.walk?.slice(0, remaining) ?? [] : [];
   const actions = walk.length > 1 ? walk.map(leg => ({ action_ref: leg.action, data: {} })) : [action];
   const { point: [sx, sy], side, scale } = 'display' in local.layout ? local.layout.display : local.layout.symbol;
   const symbol: NativeBox = [sx, sy, sx + side * scale - 1, sy + side * scale - 1];
+  const motifs = 'glyphWorkshop' in plan
+    ? plan.glyphWorkshop.local.layout.goals.filter((_, i) => !(plan.glyphWorkshop.local.acquired & (1 << i))).map(exit => exit.box)
+    : ['exitBox' in local.layout ? local.layout.exitBox : cycleSubject(local.layout, local.layout.exit)];
   return { status: 'proposed', kind: family, action: step.action, target, inset: null, surface: null, pair: null, plan: null,
     ...plan, needId: need.id, binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
     steps: actions.map((command, index) => ({ action: command, expected_after: walk[index]?.step ?? step.step,
@@ -200,7 +208,7 @@ function cycleProposal(family: string, plan: { cycle: NonNullable<Proposal['cycl
       situation: `${reason}. Reserve for ${step.units} moves. Current route ${step.distance} moves.`, evidence,
       agenda: choice.entries, mode: mode ?? 'assimilation', triggerCard: choice.card,
       controlledPiece: cycleSubject(local.layout, local.at), addressedRegion: target, exit: cycleSubject(local.layout, local.layout.exit),
-      motifs: [symbol, 'exitBox' in local.layout ? local.layout.exitBox : cycleSubject(local.layout, local.layout.exit)], route: 'managed_access',
+      motifs: [symbol, ...motifs], route: 'managed_access',
       ...('entry' in step && step.effect === 'transport' ? { transportEntry: cycleSubject(local.layout, step.entry) } : {}),
       routeObligation: step.purpose === 'test_shape' ? 'shape' : step.purpose === 'test_color' ? 'color'
         : step.purpose === 'test_rotation' ? 'rotation' : step.purpose,
@@ -218,6 +226,11 @@ function cycleLeg<T extends CycleStep | CompositeCycleStep | GlyphRouteStep>(ste
   return leg ? { ...step, ...leg, units: step.units - index, ...('entry' in step ? { entry: leg.step } : {}) } : step;
 }
 
+function workshopLeg(step: GlyphWorkshopStep, index: number): GlyphWorkshopStep {
+  const leg = step.walk?.[index];
+  return leg ? { ...step, ...leg, effect: null } : step;
+}
+
 export function createSicFramedContact(family = framedContactId): NativeFamily<Proposal> {
   const fallback = family === learnPatternAccessId;
   let state = empty();
@@ -230,14 +243,24 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
   let composite: CompositeCycleState | null = null;
   let glyphMemory: GlyphRouteMemory | null = null;
   let glyphRoute: GlyphRouteState | null = null;
+  let glyphWorkshop: GlyphWorkshopState | null = null;
   function offerGlyphRoute(observation: NativeObservation, rows: NativeRows, available: readonly string[], remaining: number,
     mode: ReasoningMode | undefined,
   ): Proposal | null {
     if (fallback || glyphMemory?.epoch !== observation.level_epoch - 1 || available.length !== 4 || remaining < 1) return null;
-    const local = glyphRoute?.epoch === observation.level_epoch ? glyphRoute
+    const currentWorkshop = glyphWorkshop?.epoch === observation.level_epoch ? glyphWorkshop : null;
+    const local = currentWorkshop ? null : glyphRoute?.epoch === observation.level_epoch ? glyphRoute
       : readGlyphRoute(rows, glyphMemory, observation.level_epoch, transfer?.rotation, glyphRoute?.colorEffects);
-    const step = local ? chooseGlyphRoute(rows, local, available, observation.observation_ref, remaining) : null;
-    return local && step ? cycleProposal(family, { glyphRoute: { local, step } }, observation, mode, remaining, rows) : null;
+    if (local) {
+      const step = chooseGlyphRoute(rows, local, available, observation.observation_ref, remaining);
+      return step ? cycleProposal(family, { glyphRoute: { local, step } }, observation, mode, remaining, rows) : null;
+    }
+    const workshop = currentWorkshop ?? readGlyphWorkshop(rows, glyphMemory, observation.level_epoch, transfer?.rotation, glyphRoute?.colorEffects);
+    const step = workshop ? chooseGlyphWorkshopStep(rows, workshop, available, remaining) : null;
+    if (!workshop || !step) return null;
+    const goal = workshop.layout.goals[step.goal]!;
+    const goalLayout = { ...workshop.layout, exit: goal.at, exitBox: goal.box };
+    return cycleProposal(family, { glyphWorkshop: { local: { ...workshop, layout: goalLayout }, step } }, observation, mode, remaining, rows);
   }
   function offerComposite(observation: NativeObservation, rows: NativeRows, available: readonly string[], remaining: number,
     mode: ReasoningMode | undefined,
@@ -396,7 +419,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       if (index > 0) {
         const step = proposal.steps?.[index];
         const pitch = proposal.cycle?.local.layout.pitch ?? proposal.composite?.local.layout.pitch
-          ?? proposal.glyphRoute?.local.layout.pitch ?? proposal.adoptedBody?.pitch ?? state.body?.pitch;
+          ?? proposal.glyphRoute?.local.layout.pitch ?? proposal.glyphWorkshop?.local.layout.pitch ?? proposal.adoptedBody?.pitch ?? state.body?.pitch;
         if (!step || !pitch || !Array.isArray(step.expected_after) || step.expected_after.length !== 2
           || !step.expected_after.every(Number.isSafeInteger) || !Array.isArray(step.landingBefore)
           || proposal.binding?.level_epoch !== observation.level_epoch) {
@@ -435,6 +458,13 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         const result = observeGlyphRoute(first, second, from ? { ...local, at: from } : local, cycleLeg(step, index), after.observation_ref);
         return { matched: result?.matched ?? false, seal_prefix: complete || result?.matched !== true, reason: result?.reason ?? 'glyph_or_landing_unresolved' };
       }
+      if (proposal.glyphWorkshop && !scored) {
+        const { local, step } = proposal.glyphWorkshop;
+        const current = index > 0 && glyphWorkshop?.epoch === before.level_epoch ? glyphWorkshop : local;
+        const result = observeGlyphWorkshop(first, second, current, workshopLeg(step, index), after.observation_ref);
+        return { matched: result?.matched ?? false, seal_prefix: complete || result?.matched !== true,
+          reason: result?.reason ?? 'glyph_or_landing_unresolved' };
+      }
       if (proposal.composite && !scored) {
         const { local, step } = proposal.composite;
         const leg = cycleLeg(step, index);
@@ -466,6 +496,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       if (proposal.cycle) proposal = { ...proposal, cycle: {
         local: index > 0 && cycle ? cycle : proposal.cycle.local, step: cycleLeg(proposal.cycle.step, index) } };
       if (after.levels_completed > before.levels_completed) {
+        if (proposal.glyphWorkshop) return { events: [], reviewEvidence: 'All observed exit frames accepted their matching motifs.' };
         const transitions = proposal.composite?.local.transitions;
         if (proposal.composite && transitions) {
           const { local } = proposal.composite;
@@ -506,6 +537,13 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         }
       }
       if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
+      if (proposal.glyphWorkshop) {
+        const { local, step } = proposal.glyphWorkshop;
+        const current = index > 0 && glyphWorkshop?.epoch === before.level_epoch ? glyphWorkshop : local;
+        const result = observeGlyphWorkshop(first, second, current, workshopLeg(step, index), after.observation_ref);
+        glyphWorkshop = result?.state ?? { ...current, stopped: true };
+        return { events: [], ...(result?.evidence ? { reviewEvidence: result.evidence } : {}) };
+      }
       if (proposal.glyphRoute) {
         const { local, step } = proposal.glyphRoute;
         const result = observeGlyphRoute(first, second, local, step, after.observation_ref);
@@ -612,10 +650,12 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       }
       return { events: [] };
     },
-    state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null, gauge, cycleModel, cycle, compositeModel, composite, glyphMemory, glyphRoute }),
+    state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null, gauge, cycleModel, cycle, compositeModel, composite, glyphMemory, glyphRoute,
+      ...(glyphWorkshop ? { glyphWorkshop } : {}) }),
     restore(value: NativeRecord) {
       const { transfer: savedTransfer, reserveMeter, gauge: savedGauge, cycleModel: savedModel, cycle: savedCycle,
         compositeModel: savedCompositeModel, composite: savedComposite, glyphMemory: savedGlyphMemory, glyphRoute: savedGlyphRoute,
+        glyphWorkshop: savedGlyphWorkshop,
         ...local } = structuredClone(value);
       state = local as State;
       transfer = (savedTransfer ?? null) as Transfer | null;
@@ -626,6 +666,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       composite = (savedComposite ?? null) as CompositeCycleState | null;
       glyphMemory = (savedGlyphMemory ?? null) as GlyphRouteMemory | null;
       glyphRoute = (savedGlyphRoute ?? null) as GlyphRouteState | null;
+      glyphWorkshop = (savedGlyphWorkshop ?? null) as GlyphWorkshopState | null;
       meter = new ObservedMeter();
       if (reserveMeter) meter.restore(reserveMeter as ReturnType<ObservedMeter['state']>);
     },

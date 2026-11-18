@@ -7,7 +7,7 @@ import { cycleMoves, type CycleRouteLeg, type CycleStep } from './inset-cycle-ro
 import { knownManagedWalk, pixelsAt, pointKey, reserveSteps, type BodyOnSurface, type FramedReserve, type FramedRotation, type FramedTransport } from './managed-framed-access.ts';
 
 type Direction = CycleStep['action'];
-type Glyph = { mask: string; ink: number };
+export type Glyph = { mask: string; ink: number };
 type Band = { entry: NativePoint; vector: NativePoint; ink: number };
 type Landing = { entry: NativePoint; to: NativePoint; evidence: string[] };
 export type GlyphRouteMemory = {
@@ -39,7 +39,7 @@ const mod = (n: number, m: number) => ((n % m) + m) % m;
 const center = ([l, t, r, b]: NativeBox, pitch: number): NativePoint => [(l + r - pitch + 1) / 2, (t + b - pitch + 1) / 2];
 const mask = (points: readonly NativePoint[]) => points.map(pointKey).sort().join(';');
 
-function bands(rows: NativeRows, pitch: number, origin: NativePoint): Band[] {
+export function bands(rows: NativeRows, pitch: number, origin: NativePoint): Band[] {
   return geometricComponents(rows).flatMap(({ rectangular, area, bbox: [l, t, r, b], color: ink }) => {
     if (!rectangular || area !== pitch || Math.min(r - l, b - t) !== 0) return [];
     const candidates: Band[] = l === r
@@ -62,7 +62,7 @@ export function carriedBandInks(rows: NativeRows, body: BodyOnSurface, transport
   }))];
 }
 
-function readGlyph(rows: NativeRows, box: NativeBox, scale: number): Glyph | null {
+export function readGlyph(rows: NativeRows, box: NativeBox, scale: number): Glyph | null {
   const [l, t, r, b] = box, ground = rows[t]?.[l];
   const points: NativePoint[] = [], colors = new Set<number>();
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
@@ -140,7 +140,7 @@ function rotationSite(rows: NativeRows, layout: Layout, rule: FramedRotation) {
   return sites.length === 1 ? sites[0] : undefined;
 }
 
-function rotated(value: string, turns: number) {
+export function rotated(value: string, turns: number) {
   const points = value.split(';').map((token): NativePoint => {
     const [x, y] = token.split(',');
     return [Number(x), Number(y)];

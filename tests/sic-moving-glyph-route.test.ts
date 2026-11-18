@@ -2,6 +2,44 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
 import { chooseGlyphRoute, observeGlyphRoute, type GlyphRouteState, type GlyphRouteStep } from '../src/sic/managed-glyph-access.ts';
+import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
+import { measureGlyphStationCycle, observeGlyphWorkshop, type GlyphWorkshopState } from '../src/sic/managed-glyph-workshop.ts';
+
+test('the joint station cycle is measured through occlusion using separated repeats', () => {
+  const full: [number, number][][] = Array.from({ length: 6 }, (_, i) => [[i % 2, 0], [0, i % 3]]);
+  const history = Array.from({ length: 13 }, (_, i) => full[i % 6]!.map(point => point as [number, number] | null));
+  history[2]![0] = null;
+  history[7]![1] = null;
+  assert.equal(measureGlyphStationCycle(history.slice(0, -1)), undefined);
+  assert.deepEqual(measureGlyphStationCycle(history), full);
+  history[12]![0] = [3, 0];
+  assert.equal(measureGlyphStationCycle(history), undefined);
+});
+
+test('tracking before the station period is known publishes valid retained state', () => {
+  const frame = (x: number, reserve: number) => {
+    const rows = Array.from({ length: 10 }, () => Array<number>(10).fill(0));
+    rows[1]![1] = 7;
+    for (let y = 3; y < 6; y++) rows[y]!.fill(2, x, x + 3);
+    rows[9]!.fill(1, 0, reserve);
+    return rows;
+  };
+  const state: GlyphWorkshopState = {
+    epoch: 1, at: [0,3], refs: [], history: [[]], shapes: [], colors: [], landings: [], acquired: 0, spent: 0, blocked: [], visits: [],
+    layout: {
+      epoch: 0, evidence: 'previous-win', pitch: 3, actor: Array<number>(9).fill(2), floor: 0, peerScale: 1,
+      bandInks: [], directions: ['ACTION4'], reserve: { row: 9, left: 0, right: 6, active: 1, depleted: 0, cost: 1, samples: 1 },
+      display: { point: [0,0], scale: 1, side: 3 }, shownBox: [0,0,2,2], exit: [6,3], exitBox: [6,3,8,5],
+      positions: [[0,3],[3,3]], cells: [[0,3],[3,3]], goals: [], stations: [], charges: [], turn: 1,
+    },
+  };
+  const observed = observeGlyphWorkshop(frame(0, 6), frame(3, 5), state, {
+    action: 'ACTION4', entry: [3,3], step: [3,3], effect: null, purpose: 'track_stations', target: [3,3], units: 6, distance: 1, goal: 0,
+  }, 'after-move');
+  assert.ok(observed?.matched);
+  assert.deepEqual(retainNativeJson(observed.state).at, [3,3]);
+  assert.equal(Object.hasOwn(observed.state, 'cycle'), false);
+});
 
 const left: NativePoint = [0, 6], middle: NativePoint = [3, 6], right: NativePoint = [6, 6];
 const start: NativePoint = [0, 9], adjacent: NativePoint = [3, 9], exit: NativePoint = [6, 9];
