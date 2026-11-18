@@ -449,7 +449,46 @@ function renderScene(w: World, s: State, stones: readonly Point[], monsters:read
 export function renderWorld(w: World, s: State): number[][] {
   return renderScene(w, s, s.stones, s.monsters, s.hero, true);
 }
+/** Presentation only: attacks remain simultaneous and never advance the logical state. */
+function combatFrames(w:World,phase:MotionPhase):number[][][] {
+  const before=phase.before,after=phase.after;
+  const adjacent=(a:Point,b:Point)=>Math.abs(a.x-b.x)+Math.abs(a.y-b.y)===1;
+  const alive=before.monsters.filter(p=>supported(w,before,p));
+  const heroHit=!before.dead&&!!after.dead&&alive.some(p=>adjacent(p,before.hero));
+  const attacks=alive.flatMap(from=>[
+    ...(heroHit&&adjacent(from,before.hero)?[{from,to:before.hero}]:[]),
+    ...alive.filter(to=>adjacent(from,to)).map(to=>({from,to})),
+  ]);
+  const attackers=alive.filter(p=>attacks.some(a=>equal(a.from,p)));
+  const fallen=before.monsters.filter(p=>!contains(after.monsters,p));
+  const stationary=before.monsters.filter(p=>!contains(attackers,p));
+  const pixel=(p:Point):Point=>({x:2+p.x*3,y:2+p.y*3});
+  const lunge=(p:Point,amount:number):Point=>{
+    const target=attacks.find(a=>equal(a.from,p))?.to;
+    const at=pixel(p);
+    return target?{x:at.x+Math.sign(target.x-p.x)*amount,y:at.y+Math.sign(target.y-p.y)*amount}:at;
+  };
+  const base=()=>renderScene(w,before,before.stones,stationary,before.hero);
+  // A short wind-up separates the hit from the step that brought the actors together.
+  const windup=base();
+  for(const p of attackers)stampPixels(windup,lunge(p,-1),[[8,5,8],[5,0,5],[8,5,8]]);
+  const strike=base();
+  for(const p of attackers)stampPixels(strike,lunge(p,1),monsterSprite);
+  // Show every contact, including monsters attacking while they themselves are killed.
+  const impact=base();
+  for(const p of attackers)stampPixels(impact,lunge(p,1),monsterSprite);
+  for(const {from,to} of attacks){
+    const a=pixel(from),b=pixel(to),x=Math.round((a.x+b.x)/2),y=Math.round((a.y+b.y)/2);
+    stampPixels(impact,{x,y},[[null,8,null],[8,0,8],[null,8,null]]);
+  }
+  if(heroHit)stamp(impact,before.hero,[[8,0,8],[0,6,0],[8,0,8]]);
+  const dissolve=renderScene(w,before,after.stones,after.monsters,heroHit?null:before.hero);
+  for(const p of fallen)stamp(dissolve,p,[[8,null,8],[null,2,null],[8,null,8]]);
+  if(heroHit)stamp(dissolve,before.hero,[[6,null,6],[null,8,null],[6,null,6]]);
+  return [windup,strike,impact,dissolve,renderWorld(w,after)];
+}
 function phaseFrames(w:World,phase:MotionPhase):number[][][] {
+  if(phase.kind==='combat')return combatFrames(w,phase);
   const stationaryStones=phase.before.stones.filter(p=>!phase.moves.some(m=>m.actor==='stone'&&equal(m.from,p)));
   const stationaryMonsters=phase.before.monsters.filter(p=>!phase.moves.some(m=>m.actor==='monster'&&equal(m.from,p)));
   const stationarySupports=phase.before.supports.filter(p=>!phase.moves.some(m=>m.actor==='support'&&equal(m.from,p)));
@@ -493,7 +532,7 @@ function presentation(w:World,detail:DetailedStep):{frames:number[][][];duration
   const frames:number[][][]=[],durations:number[]=[];
   for(const phase of detail.phases){
     const part=phaseFrames(w,phase);frames.push(...part);
-    durations.push(...(part.length===3?(phase.kind==='reflect'?[70,90,40]:[60,80,40]):[40]));
+    durations.push(...(phase.kind==='combat'?[80,90,100,110,40]:part.length===3?(phase.kind==='reflect'?[70,90,40]:[60,80,40]):[40]));
   }
   durations[durations.length-1]=0;
   return {frames,durations};

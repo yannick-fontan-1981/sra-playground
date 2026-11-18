@@ -1,6 +1,6 @@
 # SS05 — Le Chant Magenta
 
-Version 0.1.1. Laboratoire HTML autonome du cinquième jeu Sinking Star pour SRA Playground, avec un Barde magenta et huit niveaux. Le premier niveau est chargé immédiatement et son tutoriel est ouvert.
+Version 0.1.2. Laboratoire HTML autonome du cinquième jeu Sinking Star pour SRA Playground, avec un Barde magenta et huit niveaux. Le premier niveau est chargé immédiatement et son tutoriel est ouvert.
 
 ## Jouer
 
@@ -13,6 +13,8 @@ Ouvrir `dist/SS05-demo.html` après compilation. Le fichier est autonome : pas d
 - Le sélecteur permet d’essayer chaque salle. La victoire demande de terminer les huit.
 
 Le chant sélectionne les caisses, monstres et appuis à deux cases du Barde, dans un carré de 5 × 5 cases. Un objet bloqué reste en place. Si le Barde ne peut pas avancer, tout le mouvement est refusé. Une caisse dans l’eau devient un appui ; ces appuis peuvent glisser sur l’eau avec le chant. Les déplacements sont animés en trois images, avec un déplacement de 1, 2 puis 3 pixels. Les reflets ont leur propre animation : la destination du Barde est un + gris clair et celle des caisses reste un contour carré gris clair. L’aura du chant est délimitée par des pointillés magenta qui accompagnent les déplacements.
+
+Les combats ont une animation dédiée en cinq temps : préparation, coup vers la cible, impact blanc et rouge, désagrégation des victimes puis état final. Les monstres attaquent simultanément, même lorsqu’ils s’éliminent entre eux. Le panneau de défaite attend la fin de cette séquence.
 
 ## Campagne
 

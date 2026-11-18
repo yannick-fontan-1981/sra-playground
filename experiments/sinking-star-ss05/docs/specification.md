@@ -1,4 +1,4 @@
-# Contrat de jeu SS05 v0.1.1
+# Contrat de jeu SS05 v0.1.2
 
 ## Grille et palette
 
@@ -49,7 +49,7 @@ Les monstres ne se déplacent que sous l’effet du chant, d’un reflet ou d’
 
 ## Animation, progression et interface publique
 
-Un pas ou une poussée représente trois images d’avancement à 1, 2 et 3 pixels ; un reflet représente trois images distinctes. Plusieurs phases peuvent se suivre pour une seule action. L’action 20 du témoin de L8 produit neuf images : chant, poussée d’une file, puis poussée dans l’eau. Les durées fournies par le moteur font partie du contrat d’observation. Les animations ne rejouent jamais la logique.
+Un pas ou une poussée représente trois images d’avancement à 1, 2 et 3 pixels ; un reflet représente trois images distinctes. Plusieurs phases peuvent se suivre pour une seule action. L’action 20 du témoin de L8 produit neuf images : chant, poussée d’une file, puis poussée dans l’eau. Les durées fournies par le moteur font partie du contrat d’observation. Les combats présentent cinq images distinctes : préparation avec recul, attaque avec avancée d’un pixel, impact blanc et rouge sur tous les contacts, désagrégation des victimes et état final. Les quatre premières images durent respectivement 80, 90, 100 et 110 ms. Les attaques restent simultanées et l’animation ne modifie pas le résultat logique. Les animations ne rejouent jamais la logique.
 
 `BardPuzzleSession` fournit `observe`, `action`, `undo`, `reset`, `restart`, `selectLevel`. Les observations contiennent uniquement pixels, palette, images, durées, progression et commandes disponibles. Elles n’exposent ni positions sémantiques, ni plans de miroir, ni parcours, ni phases internes. Le tutoriel de l’HTML se fonde uniquement sur les pixels publics.
 

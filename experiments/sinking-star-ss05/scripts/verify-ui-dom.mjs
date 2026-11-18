@@ -33,6 +33,11 @@ const flush=async()=>{
   }
   throw new Error('Animation did not settle within 200 timer callbacks');
 };
+const advanceTimer=async()=>{
+  await Promise.resolve();
+  assert.ok(timers.length,'An intermediate animation frame must have a pending timer');
+  const next=timers.shift();next.callback(...next.args);await Promise.resolve();
+};
 const html=readFileSync(resolve(root,'dist/SS05-demo.html'),'utf8');
 const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(match=>match[1]);
 window.document.write(html.replace(/<script>[\s\S]*?<\/script>/g,''));
@@ -44,9 +49,10 @@ const key=value=>$('board').dispatchEvent(new window.KeyboardEvent('keydown',{ke
 const actionKeys=[null,'ArrowUp','ArrowDown','ArrowLeft','ArrowRight','x'];
 const equalFrame=observation=>assert.deepEqual(pixels,rgba(observation.frame));
 const settled=async observation=>{await flush();equalFrame(observation);assert.equal($('board').dataset.busy,'false');};
+const monsterCount=frame=>{let count=0;for(let y=2;y<62;y+=3)for(let x=2;x<62;x+=3)if(frame[y+1][x+1]===8&&frame[y][x+1]===5&&frame[y+1][x]===5&&frame[y+1][x+2]===5&&frame[y+2][x+1]===5)count++;return count;};
 let witnessMode=false,witnessActions=0,witnessFrames=0;
 const replay=async actions=>{for(const action of actions){
-  const start=captures.length,waitStart=waits.length;
+  const start=captures.length,waitStart=waits.length,before=ref.observe();
   key(actionKeys[action]);const next=ref.action(action);
   if(next.frames.length>1&&next.state!=='NOT_FINISHED'){
     assert.equal($('victory').hidden,true,'Victory must not cover the final animation');
@@ -55,7 +61,14 @@ const replay=async actions=>{for(const action of actions){
   await settled(next);
   for(let i=0;i<next.frames.length;i++)assert.deepEqual(captures[start+i],rgba(next.frames[i]),`Presented frame ${i+1}/${next.frames.length}`);
   assert.deepEqual(waits.slice(waitStart),(next.frameDurationsMs??next.frames.map(()=>70)).slice(0,-1),'Every frame uses its engine-specified display duration');
-  if(witnessMode){witnessActions++;witnessFrames+=next.frames.length;}
+  if(witnessMode){
+    witnessActions++;witnessFrames+=next.frames.length;
+    const removed=monsterCount(before.frame)-monsterCount(next.frame);
+    if(before.level===3&&next.level===3&&removed>=2){
+      assert.ok(next.frames.length>=8,'Mutual monster combat presents movement plus five combat frames');
+      report.mutualCombatCoverage={level:3,monstersRemoved:removed,frames:next.frames.length,frameDurationsMs:next.frameDurationsMs};
+    }
+  }
 }};
 const choose=level=>{$('level').value=String(level);$('level').dispatchEvent(new window.Event('change'));equalFrame(ref.selectLevel(level));};
 const witnesses=JSON.parse(readFileSync(resolve(root,'tests/witnesses.json'),'utf8'));
@@ -151,6 +164,7 @@ try{
   witnessMode=false;
   report.witnessCoverage={levels:SS05_LEVELS.length,actions:witnessActions,frames:witnessFrames,frameDurationsVerified:true};
   assert.equal(witnessActions,witnesses.reduce((sum,w)=>sum+w.actions.length,0));
+  assert.ok(report.mutualCombatCoverage,'The actual level 3 witness must exercise mutual monster elimination');
   assert.equal(ref.observe().state,'WIN');assert.equal($('victory').hidden,false);
   assert.ok([...window.document.querySelectorAll('[data-action]')].every(b=>b.disabled));
   const wonCount=$('moves').textContent;key('ArrowDown');key('x');assert.equal(key(' '),false);assert.equal($('moves').textContent,wonCount);
@@ -162,7 +176,6 @@ try{
   report.checks.push('Undo can leave the final victory; Restart clears completion and returns to the open tutorial');
 
   // This actual-room mistake reflects the Bard into open water in level 6.
-  // Engine unit tests cover monster combat; this real UI route covers the common defeat flow.
   const fatal={level:6,actions:[4,4,4,5],cause:'reflection into unsupported water'};
   const fatalProbe=new BardPuzzleSession(SS05_LEVELS);fatalProbe.selectLevel(fatal.level);
   for(const action of fatal.actions)fatalProbe.action(action);
@@ -175,6 +188,37 @@ try{
   $('reset-defeat').click();await settled(ref.reset());assert.equal($('defeat').hidden,true);
   report.gameOverCoverage={status:'verified-through-real-ui',level:fatal.level,actions:fatal.actions,cause:fatal.cause};
   report.checks.push('A reachable reflection-into-water defeat waits for the last animation frame before GAME_OVER, disables directions, and supports Undo and Reset from the defeat panel');
+
+  // Found once by author-state BFS (217 expanded states), then replayed here only through the public UI.
+  const attackRoute=[1,1,4,4,4,4,4,2,2,2,4,4,4,1,1,1,1,1,1];
+  choose(3);await replay(attackRoute.slice(0,-1));
+  const beforeAttack=ref.observe(),attackAction=attackRoute.at(-1);
+  key(actionKeys[attackAction]);let attack=ref.action(attackAction);
+  assert.equal(attack.state,'GAME_OVER');assert.ok(attack.frames.length>=8,'The real monster strike includes five combat frames after movement');
+  assert.equal($('defeat').hidden,true);assert.equal($('board').dataset.busy,'true');
+  // Stop on the lunge, the second of the final five combat frames.
+  const lungeFrame=attack.frames.length-4;
+  for(let i=1;i<=lungeFrame;i++){await advanceTimer();assert.deepEqual(pixels,rgba(attack.frames[i]));assert.equal($('defeat').hidden,true);}
+  $('undo').click();const restored=ref.undo();equalFrame(beforeAttack);
+  assert.deepEqual(restored,beforeAttack,'Mid-combat Undo restores the complete public observation');
+  const canceledAt=captures.length;await settled(restored);
+  assert.equal(captures.length,canceledAt,'Canceled combat callbacks cannot paint stale frames');
+  assert.equal($('defeat').hidden,true);assert.equal(restored.state,'NOT_FINISHED');
+  report.checks.push('Undo during the actual monster lunge restores the complete pre-attack observation and prevents stale combat frames');
+
+  const attackCapture=captures.length,attackWait=waits.length;
+  key(actionKeys[attackAction]);attack=ref.action(attackAction);
+  for(let i=0;i<attack.frames.length;i++){
+    if(i)await advanceTimer();
+    assert.deepEqual(captures[attackCapture+i],rgba(attack.frames[i]),`Monster attack frame ${i+1}`);
+    assert.equal($('defeat').hidden,i<attack.frames.length-1,'The defeat overlay waits until the final settled combat frame');
+  }
+  await settled(attack);assert.deepEqual(waits.slice(attackWait),attack.frameDurationsMs.slice(0,-1));
+  assert.equal($('defeat').hidden,false);
+  $('undo-defeat').click();await settled(ref.undo());equalFrame(beforeAttack);
+  assert.equal($('defeat').hidden,true);assert.equal(ref.observe().state,'NOT_FINISHED');
+  report.monsterAttackCoverage={level:3,actions:attackRoute,frames:attack.frames.length,frameDurationsMs:attack.frameDurationsMs,midCombatUndo:true,overlayAfterFinalFrame:true};
+  report.checks.push('A real monster attack shows every combat frame and duration before defeat; Undo restores the Bard and monsters');
 
   report.success=true;
 }catch(error){report.error=error.stack;process.exitCode=1;}

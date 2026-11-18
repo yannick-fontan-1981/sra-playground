@@ -14,12 +14,29 @@
     "The complete tutorial witness earns all six lessons through real keyboard input and advances to level 2",
     "All eight verified routes show every animation frame through the actual interface; WIN requires all rooms and blocks further directional and reflection input",
     "Undo can leave the final victory; Restart clears completion and returns to the open tutorial",
-    "A reachable reflection-into-water defeat waits for the last animation frame before GAME_OVER, disables directions, and supports Undo and Reset from the defeat panel"
+    "A reachable reflection-into-water defeat waits for the last animation frame before GAME_OVER, disables directions, and supports Undo and Reset from the defeat panel",
+    "Undo during the actual monster lunge restores the complete pre-attack observation and prevents stale combat frames",
+    "A real monster attack shows every combat frame and duration before defeat; Undo restores the Bard and monsters"
   ],
+  "mutualCombatCoverage": {
+    "level": 3,
+    "monstersRemoved": 2,
+    "frames": 8,
+    "frameDurationsMs": [
+      60,
+      80,
+      40,
+      80,
+      90,
+      100,
+      110,
+      0
+    ]
+  },
   "witnessCoverage": {
     "levels": 8,
     "actions": 395,
-    "frames": 1218,
+    "frames": 1222,
     "frameDurationsVerified": true
   },
   "gameOverCoverage": {
@@ -32,5 +49,42 @@
       5
     ],
     "cause": "reflection into unsupported water"
+  },
+  "monsterAttackCoverage": {
+    "level": 3,
+    "actions": [
+      1,
+      1,
+      4,
+      4,
+      4,
+      4,
+      4,
+      2,
+      2,
+      2,
+      4,
+      4,
+      4,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "frames": 8,
+    "frameDurationsMs": [
+      60,
+      80,
+      40,
+      80,
+      90,
+      100,
+      110,
+      0
+    ],
+    "midCombatUndo": true,
+    "overlayAfterFinalFrame": true
   }
 }

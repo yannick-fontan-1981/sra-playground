@@ -1,6 +1,6 @@
 {
   "game": "SS05",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "levels": [
     {
       "level": 1,
@@ -123,8 +123,8 @@
       "monstersRemoved": 2,
       "blocked": 0,
       "deaths": 0,
-      "frames": 155,
-      "maxFrames": 4,
+      "frames": 159,
+      "maxFrames": 8,
       "solved": true,
       "songRequired": {
         "verified": true,
@@ -132,7 +132,7 @@
       },
       "mapSha256": "32834411d5028a6fb9fc694b9744570326f040fab1e2fd0fa0fd648048c353c5",
       "witnessSha256": "c0184d1b359f81616dbbfaaa573e562b78329dcdc46a597604a0653fbc479272",
-      "observationsSha256": "1ba9f7d15ca92591d04d94591d633c00e5797c2d6168cf04d7a884e54e3ae982"
+      "observationsSha256": "f3d2261219eb41f0df17c19e2b1bedc788787cc616f4f029a3d9f83b51bdbf7f"
     },
     {
       "level": 4,
@@ -409,10 +409,10 @@
     "pistonPushes": 6,
     "platformsCreated": 5,
     "monstersRemoved": 3,
-    "frames": 1218
+    "frames": 1222
   },
   "success": true,
-  "htmlSha256": "3e9cfdc746ae79ec06d1d53414731f6696e3a123012ac1fb17773dcb92f84b05",
+  "htmlSha256": "c34359cf1895933bbebeab7094f8be5b7e393109a95e72923dd75fb73d9653e7",
   "limitations": [
     "These are validated author witnesses, not autonomous SRA agent runs.",
     "The tutorial demonstrates its press, but alternative solutions can avoid it.",

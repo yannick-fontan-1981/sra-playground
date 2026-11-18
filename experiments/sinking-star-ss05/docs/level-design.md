@@ -40,4 +40,4 @@ Une revue indépendante trouve un parcours de 37 actions utilisant les mêmes fa
 
 ## Validation et limites
 
-Les huit témoins totalisent 395 actions et 1 218 images présentées. Chaque carte exige au moins un déplacement chanté selon une recherche exhaustive. Les rapports distinguent toujours recherche résolue, impossibilité prouvée par épuisement et recherche limitée. Aucun résultat de solveur d’auteur n’est annoncé comme une réussite autonome de l’agent SRA.
+Les huit témoins totalisent 395 actions et 1 222 images présentées. Chaque carte exige au moins un déplacement chanté selon une recherche exhaustive. Les rapports distinguent toujours recherche résolue, impossibilité prouvée par épuisement et recherche limitée. Aucun résultat de solveur d’auteur n’est annoncé comme une réussite autonome de l’agent SRA.
