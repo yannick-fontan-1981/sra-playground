@@ -16,10 +16,11 @@ export type GravityHistory = {
   denied: string[];
   inverted: boolean;
   reversedHere?: true;
+  supportHeading?: Gravity;
   terrain: Record<string, Tile>;
 };
 export type GravityStep = { command: NativeCommand; index: number; landing: number; direction: Gravity; frontier: boolean;
-  edit: 'remove' | 'invert' | 'solidify' | null; };
+  edit: 'remove' | 'invert' | 'solidify' | 'open' | null; };
 
 const isSolid = (tile: Tile | undefined) => tile === 'wall' || tile === 'removable' || tile === 'inverter' || tile === 'ceiling_solid';
 
@@ -84,11 +85,12 @@ export function readReversibleGravity(rows: NativeRows, geometry: Geometry, carr
   return { origin, pitch, width, tiles, at, actor: bbox, exit, inverterInk };
 }
 
-export function cameraRowShift(before: GravityView, after: GravityView, expected?: number): number | null {
+export function cameraRowShift(before: GravityView, after: GravityView, expected?: number, accepts?: (offset: number) => boolean): number | null {
   if (before.width !== after.width) return null;
   const { width } = before, rows = before.tiles.length / width, nextRows = after.tiles.length / width;
   const shifts = expected !== undefined ? [expected] : Array.from({ length: rows + nextRows - 5 }, (_, i) => 3 - nextRows + i);
   const scored = shifts.flatMap(offset => {
+    if (accepts && !accepts(offset)) return [];
     let matches = 0, changes = 0, anchors = 0;
     for (let index = 0; index < before.tiles.length; index++) {
       const other = index - offset * width;
@@ -116,7 +118,7 @@ export function gravityTerrain(view: GravityView, rowOrigin: number, prior: Reco
   return terrain;
 }
 
-function animationRowShift(before: GravityView, after: GravityView, frames: readonly GravityView[]) {
+function animationRowShift(before: GravityView, after: GravityView, frames: readonly GravityView[], accepts?: (offset: number) => boolean) {
   if (!frames.length) return null;
   const views = [before, ...frames, after];
   const shifts = views.map(() => new Set<number>());
@@ -130,11 +132,11 @@ function animationRowShift(before: GravityView, after: GravityView, frames: read
       if (shifts[to]!.size > 20) return null;
     }
   }
-  const final = shifts.at(-1)!;
-  return final.size === 1 ? [...final][0]! : null;
+  const final = [...shifts.at(-1)!].filter(offset => !accepts || accepts(offset));
+  return final.length === 1 ? final[0]! : null;
 }
 
-function rememberedRowShift(after: GravityView, memory: GravityHistory) {
+function rememberedRowShift(after: GravityView, memory: GravityHistory, accepts?: (offset: number) => boolean) {
   const knownRows = new Set(Object.keys(memory.terrain).map(key => Number(key.split(',')[1])));
   if (!knownRows.size) return null;
   const { width } = after, height = after.tiles.length / width;
@@ -142,6 +144,7 @@ function rememberedRowShift(after: GravityView, memory: GravityHistory) {
   const stable = (tile: Tile | undefined) => tile === 'air' || tile === 'wall' || tile === 'danger' || tile === 'exit';
   let best: { row: number; matches: number } | null = null, tied = false;
   for (let row = first; row <= last; row++) {
+    if (accepts && !accepts(row - memory.rowOrigin)) continue;
     let matches = 0, anchors = 0, contradicted = false;
     for (let index = 0; index < after.tiles.length; index++) {
       if (index === after.at) continue;
@@ -163,22 +166,25 @@ export function gravityReturn(before: GravityView, after: GravityView, step: Gra
   const predicted = Math.floor(step.landing / before.width);
   const observed = Math.floor(after.at / after.width);
   const expected = step.frontier ? undefined : predicted - observed;
-  const direct = cameraRowShift(before, after, expected) ?? (expected === undefined ? null : cameraRowShift(before, after));
-  const remembered = direct === null && memory.reversedHere ? rememberedRowShift(after, memory) : null;
-  const shift = direct ?? remembered ?? (animation ? animationRowShift(before, after, animation()) : null);
+  const accepts = step.frontier && memory.supportHeading !== undefined
+    ? (offset: number) => (offset + observed - predicted) * step.direction >= 0 : undefined;
+  const direct = cameraRowShift(before, after, expected, accepts) ?? (expected === undefined ? null : cameraRowShift(before, after));
+  const remembered = direct === null && memory.reversedHere ? rememberedRowShift(after, memory, accepts) : null;
+  const shift = direct ?? remembered ?? (animation ? animationRowShift(before, after, animation(), accepts) : null);
   if (shift === null) return null;
   const landing = shift + observed, departure = Math.floor(before.at / before.width);
   const column = step.index % before.width, actorColumn = after.at % after.width;
   const sameColumn = actorColumn === (step.edit ? before.at % before.width : column);
   const reached = step.frontier ? (landing - predicted) * step.direction >= 0 : landing === predicted;
   const edited = after.tiles[step.index - shift * before.width];
-  const removed = step.edit !== 'solidify' && (!step.edit || edited === 'air'
+  const removed = step.edit !== 'solidify' && step.edit !== 'open' && (!step.edit || edited === 'air'
     || (edited === undefined && (landing - departure) * step.direction > 0));
   const solidified = step.edit === 'solidify' && edited === 'ceiling_solid';
+  const opened = step.edit === 'open' && edited === 'ceiling_open';
   const inverted = step.edit === 'invert' && (landing - departure) * step.direction > 0;
-  return { shift, landing, removed, solidified, inverted,
+  return { shift, landing, removed, solidified, opened, inverted,
     alignedThroughAnimation: direct === null && remembered === null, alignedThroughMemory: remembered !== null,
-    matched: sameColumn && reached && (removed || solidified)
+    matched: sameColumn && reached && (removed || solidified || opened)
     && (step.edit !== 'invert' || inverted || memory.inverted && landing === departure) };
 }
 

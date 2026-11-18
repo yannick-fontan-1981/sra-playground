@@ -4,6 +4,7 @@ import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-
 import { sicNeedId } from './need-identity.ts';
 import { chooseGravityReversal, gravityAttempt, gravityReturn, gravityStateKey, gravityTerrain, gravityTile, gravityTileBox,
   readReversibleGravity, startingGravity, type GravityHistory, type GravityStep, type GravityView } from './reversible-gravity.ts';
+import { canPlanSupportChain, planSupportChain } from './gravity-support-route.ts';
 
 export const protectGravityRouteId = 'sic_protect_gravity_route';
 
@@ -245,11 +246,15 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
     if (!view) return null;
     const worldRow = Math.floor(view.at / view.width);
     const direction = witnessed ? startingGravity(view, witnessed.direction) : -1;
-    const local: ReversibleState = prior ?? { epoch, geometry, refs: (witnessed?.refs ?? previous!.refs).slice(-3), stopped: false,
+    const base: ReversibleState = prior ?? { epoch, geometry, refs: (witnessed?.refs ?? previous!.refs).slice(-3), stopped: false,
       ...(carriesProtection ? { carriesProtection: true } : {}),
       memory: { rowOrigin: 0, direction, highest: worldRow, lowest: worldRow, inverted: !!witnessed, denied: [],
         seen: [gravityStateKey(view, 0, direction)], terrain: gravityTerrain(view, 0) } };
-    const step = chooseGravityReversal(view, local.memory, remaining, carriesProtection);
+    const heading = base.memory.supportHeading ?? (carriesProtection && canPlanSupportChain(view) ? base.memory.direction : undefined);
+    const local = heading !== undefined && base.memory.supportHeading === undefined
+      ? { ...base, memory: { ...base.memory, supportHeading: heading } } : base;
+    const step = heading === undefined ? chooseGravityReversal(view, local.memory, remaining, carriesProtection)
+      : planSupportChain(view, local.memory, remaining, heading);
     if (!step) return null;
     const mode = execution?.reasoningMode ?? 'exploration';
     const evidence: [string, ...string[]] = [ref, ...local.refs.filter(value => value !== ref)];
@@ -263,6 +268,7 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
     const situation = step.edit === 'invert' ? unknownEdit ? 'Test whether the newly visible block reverses the fall'
       : 'Reverse the fall after checking the visible and remembered path'
       : step.edit === 'solidify' ? 'Build a protective ceiling before entering the next column'
+      : step.edit === 'open' ? 'Reopen the support now that the next landing is ready'
       : step.edit === 'remove' ? 'Remove the blocking tile to open the next fall'
         : front ? 'Reveal more terrain in the current direction' : 'Move sideways to the next safe landing';
     const point = gravityTile(view, step.index);
@@ -357,6 +363,7 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
           : result.alignedThroughAnimation ? 'gravity_landing_confirmed_through_animation'
           : result.inverted ? 'reversed_fall_confirmed_by_terrain_alignment'
           : result.solidified ? 'protective_ceiling_solidified_in_reversible_path'
+            : result.opened ? 'temporary_support_reopened_in_reversible_path'
             : proposal.advance.edit ? 'blocking_tile_removed_in_gravity_path'
             : 'gravity_landing_confirmed_by_terrain_alignment' : 'reversible_gravity_projection_contradicted';
         return { matched: !!result?.matched, seal_prefix: true, reason };
@@ -386,6 +393,9 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
         }
         if (result.solidified) {
           terrain[[advance.index % view.width, memory.rowOrigin + Math.floor(advance.index / view.width)].join(',')] = 'ceiling_solid';
+        }
+        if (result.opened) {
+          terrain[[advance.index % view.width, memory.rowOrigin + Math.floor(advance.index / view.width)].join(',')] = 'ceiling_open';
         }
         reversal = { ...local, refs: [...local.refs.slice(-5), after.observation_ref], memory: { ...memory, rowOrigin: origin, direction,
           terrain: gravityTerrain(next, origin, terrain), inverted: memory.inverted || result.inverted,

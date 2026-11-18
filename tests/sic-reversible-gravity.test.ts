@@ -44,6 +44,22 @@ test('recover a landing from successive visible overlaps across an animated scro
   assert.deepEqual([recalled?.shift, recalled?.landing, recalled?.matched, recalled?.alignedThroughMemory], [9, 11, true, true]);
 });
 
+test('align a frontier fall with remembered terrain in the direction of travel', () => {
+  const width = 4, height = 7;
+  const tiles: GravityView['tiles'] = Array.from({ length: width * height }, (_, i) =>
+    (Math.floor(i / width) + 1) & (1 << (i % width)) ? 'wall' : 'danger');
+  const before: GravityView = { width, tiles, origin: [2, 2], pitch: 6, at: 21, actor: [8, 30, 9, 33],
+    exit: null, inverterInk: 2 };
+  const after: GravityView = { ...before, at: 9, actor: [8, 12, 9, 15] };
+  const memory: GravityHistory = { direction: 1, supportHeading: -1, rowOrigin: 0, highest: 5, lowest: 5,
+    inverted: true, reversedHere: true, seen: [], denied: [],
+    terrain: gravityTerrain(after, 10, gravityTerrain(before, 0)) };
+  const step: GravityStep = { command: { action_ref: 'ACTION4', data: {} }, index: 21,
+    landing: 25, direction: 1, frontier: true, edit: null };
+  const aligned = gravityReturn(before, after, step, memory);
+  assert.deepEqual([aligned?.shift, aligned?.landing, aligned?.matched, aligned?.alignedThroughMemory], [10, 12, true, true]);
+});
+
 test('prepare a landing above a visible hazard before the first inversion of a new board', () => {
   const width = 3, at = 7;
   const tiles: GravityView['tiles'] = [
