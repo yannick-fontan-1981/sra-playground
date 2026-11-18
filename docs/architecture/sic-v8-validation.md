@@ -1937,3 +1937,13 @@ Après un déplacement confirmé sur une ligne, SIC mesure à nouveau les pastil
 Le rejeu depuis le niveau 1 gagne en **199 commandes SIC seul**. Les **159 premières commandes** et leurs retours gardent leurs empreintes. Le niveau 6 se termine en **40 commandes et 20,36 s** au budget de 360 s de temps actif et 600 commandes. Les coordonnées et commandes correspondent exactement au rejeu de référence après retrait du clic fautif. DNOI gagne toujours son premier niveau en trois clics de réparation locale. TypeScript et les **85 tests ciblés** passent. La couverture atteint **542/636 niveaux (85,2 %)**, dont **43/99 niveaux 6 (43,4 %)**.
 
 Empreinte jusqu'à la victoire `edfe272676670067ceab7237f32bad22a26aa779a47be0b2e6733c650682595f`.
+
+### TU93 niveau 6, combiner les prises latérales et les patrouilles
+
+La référence se termine sur une défaite après 39 commandes au niveau 6. Depuis sa sauvegarde d'entrée, la mesure reconnaît deux patrouilles mobiles et six gardes dont la prise latérale a été observée à des niveaux précédents. SIC explore maintenant les positions du mobile avec les phases des patrouilles et les gardes déjà pris. Il vérifie qu'une destination reste libre avant et après le mouvement des patrouilles. Après une prise, il attend que le mobile quitte la case et que celle-ci soit visible pour confirmer le retour au terrain.
+
+À la troisième commande, les images de transition montrent qu'une patrouille avance derrière un garde fixe. SIC conserve la trajectoire masquée tant qu'elle concorde avec la position de ce garde et les patrouilles visibles. Elle redevient visible au retour suivant. Les commandes 10, 13, 18, 19, 21 et 22 exécutent les prises latérales. La commande 28 atteint la sortie et le test s'arrête à cette victoire.
+
+Le rejeu depuis le niveau 1 gagne en **140 commandes SIC seul**. Les **112 premières commandes** et leurs retours sont identiques à la référence. Le niveau 6 gagne en **28 commandes et 13,20 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit les 28 commandes. TypeScript et les **3 tests ciblés** passent. La couverture atteint **543/636 niveaux (85,4 %)**, dont **44/99 niveaux 6 (44,4 %)**.
+
+Empreinte jusqu'à la victoire `794c0b9f3587303f39673d59e866d3142fb7e780794e5c1b202225c94d78aa0d`.
