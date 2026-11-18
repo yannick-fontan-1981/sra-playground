@@ -2060,4 +2060,12 @@ SIC calcule cinq placements successifs et vérifie les murs après chaque sélec
 
 Le rejeu depuis le niveau 1 gagne le niveau 6 en **14 commandes et 14,93 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **54 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 68 commandes relèvent de SIC seul. TypeScript et le test du cadre fin avec un marqueur externe passent. Empreinte `f97a9f4150d20964882f6605706892510f4635092fd834cde6c2d5ae940310fa`. La couverture atteint **557/636 niveaux (87,6 %)**, dont **58/99 niveaux 6 (58,6 %)**.
 
+### VOIS niveau 6, placer l'appui hors du contour comparé
+
+Le plateau contient neuf pièces et la référence comporte huit positions occupées. Un essai depuis la sauvegarde reproduit les huit couleurs dans le premier cadre. La neuvième pièce y occupe la case qui doit rester vide, et le jeu reste au niveau 6. SIC mesure les trois zones par les bordures entre cases et compare les translations qui contiennent toutes les positions demandées. Il exige que les pièces d'appui restent hors du contour comparé.
+
+La zone qui exclut sa case centrale permet de placer l'appui entre les quatre voisines tout en reproduisant la référence. SIC réutilise les relations entre voisins et couleurs, puis vérifie chaque déplacement. Le rejeu depuis la sauvegarde retrouve les mêmes **66 commandes** et confirme leurs retours.
+
+Le rejeu chronologique gagne le niveau 6 en **66 commandes et 19,82 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **126 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 192 commandes relèvent de SIC seul. TypeScript et les **59 tests ciblés** passent. Empreinte `9eabae388d78cfc6a83f7c5da8c670135688b69309416e8be7e01772f07b2a84`. La couverture atteint **558/636 niveaux (87,7 %)**, dont **59/99 niveaux 6 (59,6 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
