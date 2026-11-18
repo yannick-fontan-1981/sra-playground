@@ -3,6 +3,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposa
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { markerDisplacement, singleChangedPoint } from './observed-click-regions.ts';
+import { chooseSharedColorMove, measureSharedColorPanes, observeSharedColorMove, type SharedColorPanes } from './shared-color-panes.ts';
 
 export const layeredFitId = 'sic_layered_fit';
 export const learnLayeredFitId = 'sic_learn_layered_fit';
@@ -14,8 +15,10 @@ type Scene = { panes: Pane[]; canvas: NativeBox; reference: NativeBox; mixed: nu
   composite?: { step: number; possibilities: Blend[][]; occlusion?: { frame: NativeBox; ink: number } } };
 type Stage = 'select' | 'measure' | 'fit';
 type State = { epoch: number; scene: Scene; index: number; stage: Stage; marker: NativePoint | null; remaining: string[]; refs: string[]; failed: boolean;
-  motionStep?: number; activeBox?: NativeBox };
-type Proposal = NativeProposal & { local: State; pane: Pane; stage: Stage; delta: NativePoint | null; marker: NativePoint | null; needId: string };
+  motionStep?: number; activeBox?: NativeBox; shared?: SharedColorPanes };
+type SharedMove = NonNullable<ReturnType<typeof chooseSharedColorMove>>;
+type Proposal = NativeProposal & { local: State; pane: Pane; stage: Stage; delta: NativePoint | null; marker: NativePoint | null; needId: string;
+  shared?: SharedMove };
 
 const dirs = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 const key = (p: NativePoint) => p.join(',');
@@ -357,11 +360,19 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
         || scene.panes.some(pane => pane.color === click.value && pane.points.length > 1))) return null;
       const local: State = prior ?? { epoch: observation.level_epoch, scene, index: 0, stage: click ? 'measure' : 'select',
         marker: click?.marker ?? null, remaining: [], refs: click ? [click.beforeRef, click.afterRef] : [], failed: false };
-      const pane = scene.panes[local.index];
-      if (!pane) return null;
+      const channel = scene.panes[local.index];
+      if (!channel) return null;
+      const sharedModel = local.shared ?? (local.stage === 'select' && local.index === scene.panes.length - 1 && scene.composite?.occlusion
+        && scene.composite.possibilities.length === 1 ? measureSharedColorPanes(rows, channel.color,
+          layerPalette(channel, scene.composite.possibilities[0]!), scene.canvas, scene.reference, scene.composite.step, local.marker) : null);
+      const shared = sharedModel ? chooseSharedColorMove(sharedModel, rows) : null;
+      if (sharedModel && !shared) return null;
+      const pane = shared ? { color: channel.color, ...shared.state.panes[shared.step.index]! } : channel;
+      const stage = shared ? ({ select: 'select', reveal: 'measure', place: 'fit' } as const)[shared.step.kind] : local.stage;
       const direction = firstDirection(pane, scene);
-      const target = local.stage === 'select' ? selectionPoint(pane) : null;
-      const action_ref = local.stage === 'select' ? 'ACTION6' : local.stage === 'measure' ? direction[0] : local.remaining[0];
+      const target = stage === 'select' ? shared
+        ? [shared.step.command.data.x!, shared.step.command.data.y!] as const : selectionPoint(pane) : null;
+      const action_ref = shared?.step.command.action_ref ?? (stage === 'select' ? 'ACTION6' : stage === 'measure' ? direction[0] : local.remaining[0]);
       if (!action_ref) return null;
       const action: NativeCommand = { action_ref, data: target ? { x: target[0], y: target[1] } : {} };
       const ref = observation.observation_ref;
@@ -369,19 +380,24 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
       const evidence: [string, ...string[]] = [ref, ...new Set(refs.filter(r => r !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: action_ref, expected: target, evidence };
-      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: local.stage === 'fit' ? null : offer,
-        access: local.stage === 'fit' ? offer : null, interaction: null });
+      const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: stage === 'fit' ? null : offer,
+        access: stage === 'fit' ? offer : null, interaction: null });
       if (!selected) return null;
       const witness = target ? await ObservedInputDomain.makeLocusWitness(observation, rows, target, { reason: 'Select a visible pane', evidence }) : null;
       if (target && !witness) return null;
       const parent = 'G_official_completion';
-      const objective = { kind: 'fit_layer_to_reference', scope: ref.split(':revision:', 1)[0]!, subjects: ['pane:' + local.index],
+      const objective = { kind: shared ? 'compose_same_color_panes' : 'fit_layer_to_reference', scope: ref.split(':revision:', 1)[0]!,
+        subjects: shared ? ['independent_panes', 'shared_color_channel'] : ['pane:' + local.index],
         parentObjective: parent, satisfactionContract: 'visible_color_layer_matches_reference' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = family + ':' + need.id;
       const completesOverlap = scene.composite?.occlusion && local.index === scene.panes.length - 1
         && scene.composite.possibilities.every(blends => blends.some(blend => blend.layers.length === scene.panes.length));
-      const situation = local.stage === 'select' ? scene.composite
+      const situation = shared ? {
+        select: 'Select one of the independently observed panes of this color',
+        reveal: 'Move the selected pane to expose its hidden outline',
+        place: 'Check the union formed by both panes of this color',
+      }[shared.step.kind] : local.stage === 'select' ? scene.composite
         ? 'Select the next pane while preserving the layers already aligned to the reference'
         : scene.reuseRefs
         ? 'Both layers are visible again. Reuse the confirmed overlap rule and measure this layer in the new layout'
@@ -389,12 +405,13 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
         : local.stage === 'measure' ? 'Measure one translation and recover the portion hidden at the edge'
           : completesOverlap ? 'Align the final pane to complete the colors formed by all three layers'
             : 'Apply the next measured transform toward the matching reference layer';
-      return { status: 'proposed', kind: family, local, pane, stage: local.stage, marker: local.marker,
-        delta: local.stage === 'measure' ? [direction[1], direction[2]] : null, needId: need.id,
+      return { status: 'proposed', kind: family, local, pane, stage, marker: local.marker, ...(shared ? { shared } : {}),
+        delta: stage === 'measure' ? [direction[1], direction[2]] : null, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
         steps: [{ action, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         sicSituationCard: { strategy: selected.id, need: 'Match the visible superposition to the reference', situation, evidence, agenda: entries, mode,
           triggerCard: card, pane: pane.box, canvas: scene.canvas, reference: scene.reference,
+          ...(shared ? { sharedPanes: shared.state.panes.map(piece => piece.box) } : {}),
           marker: local.marker ? [...local.marker, ...local.marker] : null },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
@@ -441,7 +458,13 @@ export function createSicLayeredFit(family = layeredFitId): NativeFamily<Proposa
   };
 }
 
-function observeReturn(first: NativeRows, second: NativeRows, { local, pane, stage, marker }: Proposal): State {
+function observeReturn(first: NativeRows, second: NativeRows, { local, pane, stage, marker, shared }: Proposal): State {
+  if (shared) {
+    const next = observeSharedColorMove(shared.state, shared.step, first, second);
+    const fixed = next && unchangedLayers(first, second, local.scene, pane, local.scene.composite!.possibilities[0]!,
+      shared.state.marker, next.marker);
+    return fixed ? { ...local, shared: next, marker: next.marker } : { ...local, failed: true };
+  }
   if (local.scene.composite) return observeComposite(first, second, { local, pane, stage, marker });
   if (stage === 'select') {
     const next = selectionMarker(first, second, pane, local.scene);
