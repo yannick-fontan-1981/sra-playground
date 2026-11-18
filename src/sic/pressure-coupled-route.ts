@@ -71,31 +71,41 @@ export function pressureOpen(field: PressureField, positions: Positions) {
   return field.relations.map(relation => positions.some(cell => relation.plates.includes(cell)));
 }
 
-export function verifyPressureFrame(rows: NativeRows, field: PressureField, positions: Positions) {
+export function verifyPressureFrame(rows: NativeRows, field: PressureField, positions: Positions,
+  stop?: { cell: number; ink: number; memberInk: number }) {
   const open = pressureOpen(field, positions);
   for (let cell = 0; cell < field.terrain.length; cell++) {
     const baseline = field.terrain[cell];
     if (baseline === null) continue;
     const gate = field.gateOf[cell]!;
-    const expected = positions.includes(cell) ? field.paint : gate >= 0 && open[gate] ? field.floor : baseline;
-    if (tileInk(rows, pressureCellBox(field, cell)) !== expected) return false;
+    const expected = positions.includes(cell) ? stop?.memberInk ?? field.paint : gate >= 0 && open[gate] ? field.floor : baseline;
+    const box = pressureCellBox(field, cell);
+    if (stop?.cell === cell) {
+      const [l, t, r, b] = box;
+      if (expected !== field.floor) return false;
+      for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
+        const rim = x === l || y === t || x === r || y === b;
+        if (rows[y]?.[x] !== (rim ? field.floor : stop.ink)) return false;
+      }
+    } else if (tileInk(rows, box) !== expected) return false;
   }
   return true;
 }
 
-function stepTo(field: PressureField, from: number, [dx, dy]: NativePoint) {
+export function pressureDestination(field: PressureField, from: number, [dx, dy]: NativePoint) {
   const [x, y] = point(field.width, from), next: NativePoint = [x + dx, y + dy];
   return next[0] >= 0 && next[1] >= 0 && next[0] < field.width && next[1] < field.height
     ? next[1] * field.width + next[0] : -1;
 }
 
-export function projectPressureControl(field: PressureField, positions: Positions, command: string, motion: Motion): PressureStep | null {
+export function projectPressureControl(field: PressureField, positions: Positions, command: string, motion: Motion,
+  stopCell?: number): PressureStep | null {
   const open = pressureOpen(field, positions);
   const canEnter = (cell: number) => cell >= 0 && (field.terrain[cell] === field.floor
     || field.relations.some(({ plates }) => plates.includes(cell)) || open[field.gateOf[cell]!] === true);
   const next = positions.map((cell, i) => {
-    const to = stepTo(field, cell, motion[i]!);
-    return canEnter(to) ? to : cell;
+    const to = pressureDestination(field, cell, motion[i]!);
+    return to !== stopCell && canEnter(to) ? to : cell;
   }) as [number, number];
   const after = pressureOpen(field, next);
   // A projected traversal holds its gate through the entire command.

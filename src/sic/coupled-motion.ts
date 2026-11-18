@@ -9,6 +9,7 @@ import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { confirmedPressureControl, measurePressureField, planPressureRoute, pressureCellBox, pressureOpen,
   readPressureResponse, verifyPressureFrame, type PressureState, type PressureStep } from './pressure-coupled-route.ts';
+import { measurePressureStop, planPressureWithStop, verifyPressureStop, type MovableStop } from './pressure-movable-stop.ts';
 
 export const coupledMotionId = 'sic_coupled_motion';
 export const verifyCoupledRouteId = 'sic_verify_coupled_route';
@@ -25,7 +26,7 @@ type AuxiliaryTransfer = { epoch: number; pairColor: number; auxiliaryColor: num
   leftFirst: boolean; controls: AuxiliaryRoute['field']['controls']; evidence: string[] };
 type Candidate = { input: string; route: State['remainingRoute'] };
 type PairProposal = NativeProposal & ({ local: State; candidate: Candidate; auxiliary?: undefined } | { auxiliary: AuxiliaryRoute }) & { needId: string };
-type PressureProposal = NativeProposal & { pressure: PressureState; pressureSteps: PressureStep[]; needId: string };
+type PressureProposal = NativeProposal & { pressure: PressureState; pressureSteps: PressureStep[]; pressureStop?: MovableStop; needId: string };
 type Proposal = PairProposal | PressureProposal;
 const isPressure = (proposal: Proposal): proposal is PressureProposal => Object.hasOwn(proposal, 'pressure');
 const displayBox = ([t, l, b, r]: CoupledPairBox): NativeBox => [l, t, r, b];
@@ -99,6 +100,7 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
   let auxiliary: AuxiliaryRoute | null = null;
   let auxiliaryTransfer: AuxiliaryTransfer | null = null;
   let pressure: PressureState | null = null;
+  let pressureStop: MovableStop | null = null;
   let decide: NativeProgramHandle | undefined;
   async function proposePressure(observation: NativeObservation, rows: NativeRows, remaining: number,
     execution?: NativeExecution): Promise<PressureProposal | null> {
@@ -106,57 +108,88 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
     const available = keys.filter(key => observation.available_action_refs.includes(key));
     if (available.length !== keys.length || remaining < 1) return null;
     let local = pressure?.epoch === epoch ? pressure : null;
+    let stop = local ? pressureStop : null;
     const transfer = auxiliaryTransfer?.epoch === epoch - 1 ? auxiliaryTransfer : null;
-    if (!local && transfer) {
-      const measured = measureCoupledPairs(rows).filter(pair => pair.value === transfer.pairColor);
+    const prior = pressure?.epoch === epoch - 1 && !pressure.stopped && pressure.opened.length ? pressure : null;
+    if (!local && (transfer || prior)) {
+      const pairColor = prior?.field.paint ?? transfer!.pairColor, floor = prior?.field.floor ?? transfer!.floor;
+      const measured = measureCoupledPairs(rows).filter(pair => pair.value === pairColor);
       if (measured.length !== 1) return null;
-      const field = measurePressureField(rows, measured[0]!, transfer.floor);
+      const field = measurePressureField(rows, measured[0]!, floor);
       if (!field) return null;
-      local = { ...field, epoch, controls: {}, evidence: transfer.evidence, tested: [], opened: [], closed: [], stopped: false };
+      local = { ...field, epoch, controls: {}, evidence: prior?.evidence ?? transfer!.evidence,
+        tested: [], opened: [], closed: [], stopped: false };
     }
-    if (!local || local.stopped || !verifyPressureFrame(rows, local.field, local.positions)) return null;
+    if (!local || local.stopped || (stop ? !verifyPressureStop(rows, local.field, stop, stop.pose)
+      : !verifyPressureFrame(rows, local.field, local.positions))) return null;
+    const probe = !stop && available.find(key => !local!.controls[key] && !local!.tested.includes(JSON.stringify([key, local!.positions])));
+    const interrupted = () => !!execution?.signal?.aborted || (execution?.deadlineMs !== undefined
+      && (execution.now ?? (() => performance.now()))() >= execution.deadlineMs);
+    const path = probe || stop ? [] : planPressureRoute(local, available, remaining, interrupted);
+    if (!probe && !path[0] && !stop && auxiliaryTransfer && auxiliaryTransfer.pairColor === local.field.paint
+      && auxiliaryTransfer.floor === local.field.floor && observation.available_action_refs.includes('ACTION6')
+      && available.every(command => local!.controls[command]) && !interrupted()) {
+      const measured = measurePressureStop(rows, local, auxiliaryTransfer.auxiliaryColor);
+      if (measured) {
+        const route = planPressureWithStop(measured.field, measured.stop.pose, local.controls, available, remaining, interrupted);
+        if (route.length) {
+          stop = { ...measured.stop, remaining: route };
+          local = { ...local, field: measured.field, evidence: [...new Set([...local.evidence, ...auxiliaryTransfer.evidence])] };
+        }
+      }
+    }
     const { field, positions } = local, open = pressureOpen(field, positions);
-    const probe = available.find(key => !local!.controls[key] && !local!.tested.includes(JSON.stringify([key, positions])));
-    const path = probe ? [] : planPressureRoute(local, available, remaining, () => !!execution?.signal?.aborted
-      || (execution?.deadlineMs !== undefined && (execution.now ?? (() => performance.now()))() >= execution.deadlineMs));
-    const first = path[0];
+    const stopStep = stop?.remaining[0], first = stopStep ?? path[0];
     if (!probe && !first) return null;
-    const relation = first?.changes[0] ?? first?.gateCrossings[0] ?? open.findIndex(Boolean);
+    const held = stopStep?.heldMember;
+    const heldRelation = held === undefined ? -1 : field.relations.findIndex(candidate => candidate.plates.includes(positions[held]!));
+    const relation = heldRelation >= 0 ? heldRelation : first?.changes[0] ?? first?.gateCrossings[0] ?? open.findIndex(Boolean);
     const relationEffectsKnown = (index: number) => (open[index] ? local!.closed : local!.opened).includes(index);
     const testingGate = !!first?.changes.some(index => !relationEffectsKnown(index));
-    const learning = !!probe || testingGate;
+    const learning = !!probe || testingGate || (stopStep?.command === 'ACTION6' && !stop?.focus);
     const mode = execution?.reasoningMode ?? (learning ? 'exploration' : 'solving'), strategy = learning ? 'P05' : 'P07';
     const facts = { routeSupported: !learning, eligibleProbe: learning, knownInteraction: false, mode };
     const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
     if (decision?.result !== strategy) return null;
     const steps: PressureStep[] = [];
-    for (const move of path.slice(0, Math.min(remaining, maximumCommittedActions))) {
+    for (const move of (stopStep ? [stopStep] : path.slice(0, Math.min(remaining, maximumCommittedActions)))) {
       if (steps.length && move.changes.length) break;
       steps.push(move);
       if (move.changes.length) break;
     }
-    const actions: NativeCommand[] = probe ? [{ action_ref: probe, data: {} }]
+    const actions: NativeCommand[] = stopStep ? [stopStep.action] : probe ? [{ action_ref: probe, data: {} }]
       : steps.map(move => ({ action_ref: move.command, data: {} }));
     const selectedRelation = field.relations[relation];
     const holderPositions = first?.positions ?? positions;
     const holder = selectedRelation ? holderPositions.findIndex(cell => selectedRelation.plates.includes(cell)) : -1;
+    const stopLabel = stopStep?.command === 'ACTION6' ? (stopStep.pose.selected ? 'Select the movable stop'
+      : 'Return the directional controls to the two pieces')
+      : stopStep?.pose.selected ? (stopStep.gateCrossings.length ? 'Move the selected stop through the open passage'
+        : 'Reposition the selected stop while both pieces stay in place')
+        : held !== undefined ? (heldRelation >= 0 ? 'Keep one piece on its plate while the other moves'
+          : 'Use the movable stop to hold one piece while the other moves') : null;
     const label = probe ? 'Measure how this direction moves each member on the new board'
-      : testingGate ? 'Compare the marked passage before and after the move onto or off its plate'
+      : stopLabel ?? (testingGate ? 'Compare the marked passage before and after the move onto or off its plate'
         : holder >= 0 && selectedRelation ? 'Keep one member at the plate while the other approaches or crosses the passage'
-          : 'Reach the next joint position using the observed shared controls';
+          : 'Reach the next joint position using the observed shared controls');
     const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+    const point = stopStep?.command === 'ACTION6' ? [stopStep.action.data.x!, stopStep.action.data.y!] as const : null;
+    const witness = point ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence }) : null;
+    if (point && !witness) return null;
     const parent = 'G_official_completion', objective = { kind: 'bring_jointly_controlled_pieces_together', scope: ref.split(':revision:', 1)[0]!,
       subjects: ['first_piece', 'second_piece', 'pressure_plates', 'held_passages'], parentObjective: parent,
       satisfactionContract: 'official_progress_after_the_joint_meeting_test' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = 'coupled-pressure:' + need.id;
     return { status: 'proposed', kind: verifyCoupledRouteId, actions, pressure: local, pressureSteps: steps, needId: need.id,
+      ...(stop ? { pressureStop: stop } : {}),
       binding: { observation_ref: ref, level_epoch: epoch },
-      steps: actions.map((action, i) => ({ action, expected_after: steps[i] ?? null })),
+      steps: actions.map((action, i) => ({ action, expected_after: steps[i] ?? null, ...(witness ? { locus_witness: witness } : {}) })),
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
         instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
       sicSituationCard: { strategy, need: 'Keep the passages open so the two pieces can meet',
         mode, situation: label, evidence, agenda: [], triggerCard: decision.receipt.workflow,
         members: positions.map(cell => pressureCellBox(field, cell)), nextMembers: first?.positions.map(cell => pressureCellBox(field, cell)) ?? [],
+        ...(stop && stopStep ? { auxiliary: pressureCellBox(field, stop.pose.cell), nextAuxiliary: pressureCellBox(field, stopStep.pose.cell) } : {}),
         ...(selectedRelation ? { pressurePlates: selectedRelation.plates.map(cell => pressureCellBox(field, cell)),
           pressureGates: selectedRelation.gates.map(cell => pressureCellBox(field, cell)),
           pressureHolder: holder >= 0 ? pressureCellBox(field, holderPositions[holder]!) : null } : {}) },
@@ -334,6 +367,12 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
       if (isPressure(proposal)) {
         const { field } = proposal.pressure, step = proposal.pressureSteps[index];
         const inScope = before.level_epoch === after.level_epoch && before.state === after.state;
+        const stop = proposal.pressureStop, stopStep = stop?.remaining[0];
+        if (stop && stopStep) {
+          const matched = inScope && !!verifyPressureStop(second, field, stop, stopStep.pose);
+          return { matched, seal_prefix: true, reason: matched ? 'verify_movable_stop_joint_positions_and_passages'
+            : 'movable_stop_or_passage_prediction_refuted' };
+        }
         const matched = !inScope ? false : step ? verifyPressureFrame(second, field, step.positions)
           : readPressureResponse(second, field, proposal.pressure.positions) ? null : false;
         return { matched, seal_prefix: matched !== true || !!step?.changes.length,
@@ -361,9 +400,14 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
         if (after.levels_completed > before.levels_completed) return { events: [],
           reviewEvidence: 'Holding the passages allowed both pieces to reach the same position.' };
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-        const step = proposal.pressureSteps[index], expected = step && verifyPressureFrame(second, local.field, step.positions);
-        const seen = expected ? null : readPressureResponse(second, local.field, local.positions);
-        const positions = expected ? step.positions : seen?.positions ?? local.positions;
+        const stop = proposal.pressureStop, stopStep = stop?.remaining[0];
+        const proof = stop && stopStep ? verifyPressureStop(second, local.field, stop, stopStep.pose) : null;
+        if (stop && stopStep) pressureStop = proof ? { ...stop, ...proof, pose: stopStep.pose, remaining: stop.remaining.slice(1) } : null;
+        else pressureStop = null;
+        const step = proposal.pressureSteps[index];
+        const expected = stop ? !!proof : step && verifyPressureFrame(second, local.field, step.positions);
+        const seen = expected || stop ? null : readPressureResponse(second, local.field, local.positions);
+        const positions = expected && step ? step.positions : seen?.positions ?? local.positions;
         const learned = !step && seen ? confirmedPressureControl(local.field, local.positions, seen, command.action_ref, local.controls) : null;
         const controls = learned ? { ...local.controls, [command.action_ref]: learned } : local.controls;
         const pre = pressureOpen(local.field, local.positions), post = pressureOpen(local.field, positions);
@@ -410,12 +454,13 @@ export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
           ? { actions: route.actions.slice(index + 1), expected: route.expected.slice(index + 1) } : null };
       return { events: [] };
     },
-    state: () => ({ state, auxiliary, auxiliaryTransfer, ...(pressure ? { pressure } : {}) }),
+    state: () => ({ state, auxiliary, auxiliaryTransfer, ...(pressure ? { pressure } : {}), ...(pressureStop ? { pressureStop } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       auxiliary = structuredClone((value.auxiliary as AuxiliaryRoute | undefined) ?? null);
       auxiliaryTransfer = structuredClone((value.auxiliaryTransfer as AuxiliaryTransfer | undefined) ?? null);
       pressure = structuredClone((value.pressure as PressureState | undefined) ?? null);
+      pressureStop = structuredClone((value.pressureStop as MovableStop | undefined) ?? null);
     },
   };
 }

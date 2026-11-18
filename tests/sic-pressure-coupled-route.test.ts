@@ -24,6 +24,27 @@ test('use a directional stop to keep one piece on its plate while the other cros
   assert.deepEqual(leave, { command: 'leave', positions: [index(2, 3), index(3, 1)], changes: [0], gateCrossings: [] });
 });
 
+test('an observed movable stop can hold one piece on its plate while the other enters a gate', () => {
+  const stop = index(1, 2), start = [plate, index(3, 3)] as const;
+  const layout = { ...field, unit: 4, terrain: terrain.map((ink, cell) => cell === stop ? field.floor : ink) };
+  const directions = [[0, -1], [0, -1]] as const;
+  assert.equal(projectPressureControl(layout, start, 'up', directions), null);
+  const step = projectPressureControl(layout, start, 'up', directions, stop);
+  assert.deepEqual(step, { command: 'up', positions: [plate, gate], changes: [], gateCrossings: [0] });
+  assert.ok(step);
+  const rows = Array.from({ length: 20 }, () => Array<number>(20).fill(field.floor));
+  for (const [cell, ink] of layout.terrain.entries()) {
+    const [l, t, r, b] = pressureCellBox(layout, cell);
+    for (let y = t; y <= b; y++) rows[y]!.fill(step.positions.includes(cell) ? field.paint : ink, l, r + 1);
+  }
+  const [l, t] = pressureCellBox(layout, stop);
+  for (let y = t + 1; y < t + 3; y++) rows[y]!.fill(4, l + 1, l + 3);
+  const overlay = { cell: stop, ink: 4, memberInk: field.paint };
+  assert.ok(verifyPressureFrame(rows, layout, step.positions, overlay));
+  rows[t + 1]![l + 1] = field.floor;
+  assert.equal(verifyPressureFrame(rows, layout, step.positions, overlay), false);
+});
+
 test('release an opening on entry to its plate and refuse to close a gate on an occupant', () => {
   const approach = projectPressureControl(field, [index(0, 3), index(3, 3)], 'approach', [[1, 0], [0, -1]]);
   assert.deepEqual(approach, { command: 'approach', positions: [plate, index(3, 3)], changes: [0], gateCrossings: [] });
