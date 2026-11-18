@@ -9,7 +9,7 @@ const at = (origin: readonly number[], a: NativePoint, b: NativePoint, u: number
 
 /** Locate a repeated patch inside the measured board. Its effect is still a hypothesis. */
 export function measureRespondentTerrain(rows: NativeRows, field: OccurrenceRecord, model: OccurrenceRecord,
-  bodies: readonly OccurrenceRecord[]): RespondentTerrain | null {
+  bodies: readonly OccurrenceRecord[], retainUnclassified = false): RespondentTerrain | null {
   const points = new Set<string>(field.points.map(key));
   const [a, b] = model.basis as [NativePoint, NativePoint];
   const origin = field.origin as NativePoint;
@@ -48,7 +48,7 @@ export function measureRespondentTerrain(rows: NativeRows, field: OccurrenceReco
     }
   }
   const marked = [...patterns.values()].filter(group => group.length > 1);
-  if (marked.length !== 1) return null;
+  if (marked.length !== 1) return retainUnclassified ? { marked: [], unknown: unsupported } : null;
   // Keep unseen positions inside the lattice as unknown. Only exterior positions
   // can still use the outer-boundary hypothesis from the earlier levels.
   const [tiles] = marked;

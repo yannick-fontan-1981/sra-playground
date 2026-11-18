@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { planRespondentPrograms, type RespondentContext } from '../src/sic/respondent-program-planner.ts';
+import { planClosedRespondentRound, planRespondentPrograms, type RespondentContext } from '../src/sic/respondent-program-planner.ts';
 import { measureRespondentTerrain } from '../src/sic/program-terrain-context.ts';
 
 test('measure repeated interior markings and preserve occluded terrain as unknown', () => {
@@ -17,6 +17,23 @@ test('measure repeated interior markings and preserve occluded terrain as unknow
   assert.deepEqual(terrain, { marked: [[3, 3], [5, 3]], unknown: [[4, 2]] });
   rows[3]![5] = 6;
   assert.equal(measureRespondentTerrain(rows, field, model, [{ anchor: [4, 2], word: [7] }]), null);
+  assert.deepEqual(measureRespondentTerrain(rows, field, model, [{ anchor: [4, 2], word: [7] }], true),
+    { marked: [], unknown: [[3, 3], [4, 2], [5, 3]] });
+});
+
+test('compose a longer closed round and check both respondents before returning to the editor', () => {
+  const model = { moves: [{ label: 1, vectors: [[1, 0]] }, { label: 2, vectors: [[-1, 0]] }],
+    interaction: { label: 8, vectors: [[1, 0], [-1, 0]] } };
+  const context: RespondentContext = {
+    initial: { base: [3, 0], targets: [{ base: [0, 0], word: [8, 8, 8, 8] }, { base: [6, 0], word: [8, 8, 8] }] },
+    points: Array.from({ length: 7 }, (_, x) => [x, 0]), sites: [[3, 0]], evidence: ['observed'],
+  };
+  const plan = planClosedRespondentRound(model, context, [], [1, 2, 8], 8, 9, Infinity);
+  assert.ok(plan);
+  assert.equal(plan.length, 9);
+  assert.deepEqual(plan.at(-1)?.word, [1, 1, 8, 8, 8, 8, 2, 2]);
+  assert.deepEqual(plan.at(-1)?.forecasts, [{ base: [3, 0], targets: [{ base: [6, 0], word: [8, 8, 8] }] }]);
+  assert.equal(planClosedRespondentRound(model, context, [], [1, 2, 8], 4, 9, Infinity), null);
 });
 
 const model = { moves: [{ label: 1, vectors: [[1, 0]] }, { label: 2, vectors: [[-1, 0]] }],

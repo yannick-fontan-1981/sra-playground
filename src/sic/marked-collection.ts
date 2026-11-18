@@ -37,6 +37,9 @@ async function programProposal(observation: NativeObservation, rows: NativeRows,
   const ref = observation.observation_ref, parent = 'G_official_completion';
   const evidence: [string, ...string[]] = [ref, ...witness.evidence.filter(value => value !== ref)];
   const label = choice.contactTrial?.destination ? 'Test whether the new operator moves a neighbouring piece toward the unfamiliar tile'
+    : choice.roundBase ? choice.kind === 'run_verified_program'
+      ? 'Compare the respondent turns and verify the return to the editing site'
+      : 'Prepare a round that reduces a respondent stack and returns to the editing site'
     : choice.markedTerrain ? choice.kind === 'run_verified_program'
       ? 'Run the program and compare the response to the projected route past the unfamiliar tiles'
       : 'Prepare a program that leaves the controlled stack on measured support while the other stack approaches an unfamiliar tile'
@@ -158,12 +161,13 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
       if (proposal.followUp && local.program) {
         const choice = proposal.followUp, matched = verifyObservedProgram(choice, local.program, second);
         const retained = matched && (local.program.continued || choice.kind === 'run_verified_program')
-          ? { word: choice.word, display: choice.display } : undefined;
+          ? { word: choice.word, display: choice.display, ...(choice.roundBase ? { roundBase: choice.roundBase } : {}) } : undefined;
         const respondents = matched && choice.respondentProbe
           ? learnRespondentContext(choice, local.program, first, second, frames, after.observation_ref) : null;
         state = { ...local, count: local.count + 1, stopped: !matched || !!choice.respondentProbe && !respondents,
           ...(retained ? { retained } : {}), ...(choice.scheduled ? { scheduled: choice.scheduled } : {}),
           ...(respondents ? { respondents, program: { ...local.program, evidence: [...local.program.evidence, ...respondents.evidence] } } : {}) };
+        if (choice.roundBase && !choice.scheduled?.length) delete state.scheduled;
         return { events: [] };
       }
       const confirmed = proposal.expected !== null && matchesCollectionEdit(second, proposal.expected);
