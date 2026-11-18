@@ -1,0 +1,498 @@
+{
+  "spec": {
+    "id": "SS04-08",
+    "title": "La citadelle des deux presses",
+    "rows": [
+      "###################",
+      "#~~~~~~~~~...#..b~#",
+      "#~~~~~~~~~..#m#..~#",
+      "#~~~~~.~~~.oob...~#",
+      "#~~~~~~~~~.......~#",
+      "#~~~~~~~~~.......~#",
+      "#~~~~~~~~~o......~#",
+      "#~~~~~~~~~.....o.~#",
+      "#~~~~~~~~~~~~~.~~~#",
+      "#...b.~~~~~~~~~...#",
+      "#.....~~~~~~~~~~~.#",
+      "#....b.~~~~~~~....#",
+      "#.b...~~~~~~~~.~~~#",
+      "#.....~~~~~~~~...~#",
+      "#.W...~~~~~~~~~~g~#",
+      "#m....~~~~~~~~~~~~#",
+      "###################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 6,
+          "y": 11
+        },
+        "facing": "NW"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 3
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "file",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 12
+          }
+        ]
+      },
+      {
+        "id": "pont",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 3
+          }
+        ]
+      },
+      {
+        "id": "deux-poids",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 9
+          },
+          {
+            "x": 5,
+            "y": 11
+          }
+        ]
+      },
+      {
+        "id": "ultime",
+        "buttons": [
+          {
+            "x": 16,
+            "y": 1
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 3
+        },
+        "circuit": "file",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 7
+        },
+        "circuit": "pont",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 11
+        },
+        "circuit": "deux-poids",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 13
+        },
+        "circuit": "ultime",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "solution": {
+    "status": "manual-witness",
+    "actions": [
+      1,
+      3,
+      1,
+      1,
+      1,
+      1,
+      2,
+      4,
+      1,
+      1,
+      1,
+      4,
+      4,
+      1,
+      1,
+      1,
+      3,
+      2,
+      4,
+      4,
+      2,
+      2,
+      4,
+      4,
+      1,
+      4,
+      2,
+      4,
+      4,
+      4,
+      4,
+      2,
+      2,
+      3,
+      1,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      1,
+      1,
+      1,
+      1,
+      2,
+      3,
+      3,
+      2,
+      2,
+      4,
+      2,
+      4,
+      4,
+      2,
+      2,
+      3,
+      3,
+      3,
+      2,
+      2,
+      4,
+      4,
+      2
+    ]
+  },
+  "route": "ULUUUUDRUUURRUUULDRRDDRRURDRRRRDDLURRRRRRUUUUDLLDDRDRRDDLLLDDRRD",
+  "metrics": {
+    "actions": 64,
+    "swaps": 5,
+    "reflectedSwaps": 1,
+    "monsterSwaps": 2,
+    "pistonPushes": 2,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "completed": true,
+  "noReflections": {
+    "status": "unsolvable",
+    "states": 2079,
+    "expanded": 2079,
+    "ms": 143.39230700000002
+  },
+  "individualMirrorAblations": [
+    {
+      "at": {
+        "x": 6,
+        "y": 11
+      },
+      "result": {
+        "status": "unsolvable",
+        "states": 2080,
+        "expanded": 2080,
+        "ms": 60.80570700000001
+      }
+    },
+    {
+      "at": {
+        "x": 6,
+        "y": 3
+      },
+      "result": {
+        "status": "unsolvable",
+        "states": 2080,
+        "expanded": 2080,
+        "ms": 74.66526899999997
+      }
+    }
+  ],
+  "boundedSearch": {
+    "status": "limit",
+    "states": 350000,
+    "expanded": 218024,
+    "ms": 7220.13642
+  },
+  "events": [
+    {
+      "actionIndex": 7,
+      "kind": "swap",
+      "moves": [
+        {
+          "actor": "hero",
+          "from": {
+            "x": 1,
+            "y": 9
+          },
+          "to": {
+            "x": 1,
+            "y": 15
+          }
+        },
+        {
+          "actor": "monster",
+          "from": {
+            "x": 1,
+            "y": 15
+          },
+          "to": {
+            "x": 1,
+            "y": 9
+          }
+        }
+      ],
+      "reflections": 0
+    },
+    {
+      "actionIndex": 11,
+      "kind": "piston",
+      "moves": [
+        {
+          "actor": "stone",
+          "from": {
+            "x": 11,
+            "y": 3
+          },
+          "to": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "actor": "stone",
+          "from": {
+            "x": 12,
+            "y": 3
+          },
+          "to": {
+            "x": 13,
+            "y": 3
+          }
+        }
+      ]
+    },
+    {
+      "actionIndex": 11,
+      "kind": "piston",
+      "moves": [
+        {
+          "actor": "stone",
+          "from": {
+            "x": 15,
+            "y": 7
+          },
+          "to": {
+            "x": 15,
+            "y": 8
+          }
+        }
+      ]
+    },
+    {
+      "actionIndex": 17,
+      "kind": "swap",
+      "moves": [
+        {
+          "actor": "hero",
+          "from": {
+            "x": 4,
+            "y": 9
+          },
+          "to": {
+            "x": 1,
+            "y": 9
+          }
+        },
+        {
+          "actor": "monster",
+          "from": {
+            "x": 1,
+            "y": 9
+          },
+          "to": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "reflections": 0
+    },
+    {
+      "actionIndex": 26,
+      "kind": "swap",
+      "moves": [
+        {
+          "actor": "hero",
+          "from": {
+            "x": 5,
+            "y": 11
+          },
+          "to": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "actor": "stone",
+          "from": {
+            "x": 12,
+            "y": 3
+          },
+          "to": {
+            "x": 5,
+            "y": 11
+          }
+        }
+      ],
+      "reflections": 2
+    },
+    {
+      "actionIndex": 34,
+      "kind": "swap",
+      "moves": [
+        {
+          "actor": "hero",
+          "from": {
+            "x": 16,
+            "y": 6
+          },
+          "to": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "actor": "stone",
+          "from": {
+            "x": 10,
+            "y": 6
+          },
+          "to": {
+            "x": 16,
+            "y": 6
+          }
+        }
+      ],
+      "reflections": 0
+    },
+    {
+      "actionIndex": 46,
+      "kind": "swap",
+      "moves": [
+        {
+          "actor": "hero",
+          "from": {
+            "x": 16,
+            "y": 1
+          },
+          "to": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "actor": "stone",
+          "from": {
+            "x": 16,
+            "y": 6
+          },
+          "to": {
+            "x": 16,
+            "y": 1
+          }
+        }
+      ],
+      "reflections": 0
+    }
+  ],
+  "provenance": {
+    "kind": "original",
+    "title": "La citadelle des deux presses",
+    "description": "Original SS04 level combining Wizard exchange, fixed one-sided mirrors, stationary adjacent-attacking goblins, multi-crate lateral pressing and a chained water-platform press. Not a reproduction of a particular commercial room."
+  },
+  "necessity": {
+    "mirrors": "Both mirrors are the only ray route between the starting island x1–5,y9–15 and the machine island x10–16,y1–7. Their individual wall ablations are exhaustively unsolvable.",
+    "platform": "The exit island initially contains no actor; exchange cannot introduce the first actor onto it. Its sole walking entry is through (15,8), initially unsupported water. A submerged crate is therefore necessary.",
+    "pistons": "A piston is necessary to create the water platform. The chosen witness uses the east-moving two-crate file and then the south-moving bridge press in a single cascade. The sentinel next to the bridge-trigger plate blocks direct Wizard occupation (verified fatal shortcut probe). Independent exhaustive necessity of each press was not run; no separate minimality claim is made.",
+    "monster": "The starting island always contains two actors: it has no walking exit or piston, and exchanges preserve its actor count. Its original goblin starts away from the two exit-control plates. To leave both plates weighted after departure, this goblin must be moved onto a plate or exchanged out and replaced. Thus at least one monster exchange is necessary; neither final actor identity nor permanent survival of this specific goblin is claimed."
+  },
+  "validationNote": "64-direction successful authored witness, not a minimality claim. Full BFS reached its 350000-state cap; this is not an insolubility result. Mirror ablations exhausted their search spaces.",
+  "shortcutProbe": {
+    "route": "URRRUURRR",
+    "metrics": {
+      "actions": 9,
+      "swaps": 2,
+      "reflectedSwaps": 1,
+      "monsterSwaps": 0,
+      "pistonPushes": 1,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 1
+    },
+    "hero": {
+      "x": 13,
+      "y": 4
+    },
+    "dead": true,
+    "meaning": "Entering the bridge-trigger plate at (13,3) directly kills the Wizard beside the guard at (13,2)."
+  },
+  "presentation": {
+    "maximumFrames": 7,
+    "cascadeAction": 11,
+    "cascadeFrames": {
+      "action": 1,
+      "frames": 7,
+      "durations": [
+        40,
+        60,
+        80,
+        40,
+        60,
+        80,
+        0
+      ]
+    },
+    "maxFrameActions": [
+      {
+        "actionIndex": 11,
+        "action": 1,
+        "frames": 7,
+        "durations": [
+          40,
+          60,
+          80,
+          40,
+          60,
+          80,
+          0
+        ]
+      }
+    ]
+  }
+}
