@@ -1,0 +1,177 @@
+{
+  "spec": {
+    "id": "ss05-05",
+    "title": "Rompre le chant",
+    "rows": [
+      "~~~~~~~~~~~~",
+      "~~~~.~.....~",
+      "~~~*.......~",
+      "~~~B.......~",
+      "~~~~.......~",
+      "~~~~.......~",
+      "~~~~......~~",
+      "~gDD.......~",
+      "~~~~~~~~..~~",
+      "~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 10,
+          "y": 1
+        },
+        "facing": "SW"
+      }
+    ]
+  },
+  "actions": [
+    4,
+    4,
+    4,
+    1,
+    5,
+    4,
+    4,
+    4,
+    4,
+    2,
+    1,
+    3,
+    1,
+    5,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    1,
+    5,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3
+  ],
+  "metrics": {
+    "actions": 31,
+    "songTurns": 14,
+    "stoneMoves": 14,
+    "monsterMoves": 0,
+    "platformMoves": 0,
+    "reflections": 3,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "source": {
+    "sourceId": "detachment",
+    "sourceGuide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-1",
+    "sourcePuzzle": 1,
+    "originalWitness": "RRRRUXURRXLUXLLLLLLUXLLLLLLLLL",
+    "originalActions": 30,
+    "coordinateConversion": "x=rawX-2, y=9-rawY; all TER_TILE_Parquet variants count as floor; asset u pairs with next instance p",
+    "rawObjects": [
+      [
+        "bard",
+        [
+          4,
+          7
+        ]
+      ],
+      [
+        "GAME_SOKO_Gate_Button_D",
+        [
+          4,
+          8
+        ]
+      ],
+      [
+        "GAME_SOKO_Exit_A",
+        [
+          2,
+          3
+        ]
+      ],
+      [
+        "GAME_SOKO_Crystal_D",
+        [
+          4,
+          8
+        ]
+      ],
+      [
+        "GAME_MIRR_Mirror_Magic_A",
+        [
+          11,
+          9
+        ]
+      ],
+      [
+        "GAME_SOKO_Gate_Glyph_C_Down_Short",
+        [
+          4,
+          3
+        ]
+      ],
+      [
+        "GAME_SOKO_Gate_Glyph_C_Down_Short",
+        [
+          3,
+          3
+        ]
+      ]
+    ],
+    "gateCells": [
+      {
+        "x": 2,
+        "y": 6
+      },
+      {
+        "x": 1,
+        "y": 6
+      }
+    ],
+    "buttonCells": [
+      {
+        "x": 2,
+        "y": 1
+      }
+    ],
+    "notes": [
+      "Source initial geometry extracted from layout and checked visually against matching level screenshot.",
+      "Gates placed on floor in adaptation; original gate raised/lowered geometry not implemented.",
+      "The SW mirror orientation is checked against the source image and a successful SS05 witness.",
+      "One water border added to prevent artificial anchoring against the 20×20 outside-wall padding."
+    ],
+    "waterBorderAdded": 1
+  },
+  "validation": {
+    "solved": true,
+    "blocked": 0,
+    "deaths": 0,
+    "ablations": {
+      "withoutSong": {
+        "status": "unsolvable",
+        "states": 1,
+        "ms": 0.3253910000000104
+      },
+      "withoutReflections": {
+        "status": "unsolvable",
+        "states": 1640,
+        "ms": 48.614046999999985
+      },
+      "withoutMirror1": {
+        "status": "unsolvable",
+        "states": 1635,
+        "ms": 25.955239000000006
+      }
+    }
+  }
+}

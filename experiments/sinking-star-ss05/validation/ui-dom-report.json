@@ -1,0 +1,36 @@
+{
+  "success": true,
+  "environment": "happy-dom with a canvas pixel buffer and controlled animation timer queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "The complete compiled inline script loads level 1 with its tutorial open and exact engine pixels",
+    "Four directions and the X reflection control exist; Space does not change game pixels or the action counter",
+    "Directional movement shows every engine animation frame and ignores concurrent input",
+    "Undo during animation restores the complete pre-action observation and cancels stale frames",
+    "A direction button acts; Reset during animation restores the room, counter and lesson checklist",
+    "Changing level and returning to the tutorial cancel pending presentation callbacks",
+    "Every room displays its own source and piston help; Bard aura, mobile platforms, reflection, cardinal-monster and shared-button rules are explained",
+    "The reflection button dispatches ACTION5 and presents every teleport frame; keyboard X is exercised by the other routes",
+    "The complete tutorial witness earns all six lessons through real keyboard input and advances to level 2",
+    "All eight verified routes show every animation frame through the actual interface; WIN requires all rooms and blocks further directional and reflection input",
+    "Undo can leave the final victory; Restart clears completion and returns to the open tutorial",
+    "A reachable reflection-into-water defeat waits for the last animation frame before GAME_OVER, disables directions, and supports Undo and Reset from the defeat panel"
+  ],
+  "witnessCoverage": {
+    "levels": 8,
+    "actions": 395,
+    "frames": 1218,
+    "frameDurationsVerified": true
+  },
+  "gameOverCoverage": {
+    "status": "verified-through-real-ui",
+    "level": 6,
+    "actions": [
+      4,
+      4,
+      4,
+      5
+    ],
+    "cause": "reflection into unsupported water"
+  }
+}

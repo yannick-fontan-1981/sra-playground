@@ -1,0 +1,193 @@
+{
+  "spec": {
+    "id": "ss05-06",
+    "title": "Le contretemps des trois îlots",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~....~~~~~~~",
+      "~~~~~~~..b.~D.~~~~",
+      "~~~~~~~....~~~~~~~",
+      "~~~~~~~....~~~~~~~",
+      "~....~~....~~~...~",
+      "~B...~~...b~~..g.~",
+      "~.o..~~~~~~~~~...~",
+      "~....~~~~~~~~~~~~~",
+      "~....~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 5
+        },
+        "facing": "SE"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 2
+        },
+        "facing": "SW"
+      }
+    ]
+  },
+  "actions": [
+    2,
+    2,
+    4,
+    4,
+    5,
+    4,
+    5,
+    1,
+    5,
+    2,
+    4,
+    5,
+    1,
+    5,
+    4,
+    5,
+    1,
+    5,
+    1,
+    1,
+    1,
+    4,
+    4,
+    5,
+    4,
+    4
+  ],
+  "metrics": {
+    "actions": 26,
+    "songTurns": 7,
+    "stoneMoves": 7,
+    "monsterMoves": 0,
+    "platformMoves": 0,
+    "reflections": 8,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "source": {
+    "sourceId": "reattachment",
+    "sourceGuide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-2",
+    "sourcePuzzle": 2,
+    "originalWitness": "RRDDXRXRXUXRXUXURLDXDXLXDXRUUUXRR",
+    "originalActions": 33,
+    "coordinateConversion": "x=rawX-2, y=10-rawY; all TER_TILE_Parquet variants count as floor; asset u pairs with next instance p",
+    "rawObjects": [
+      [
+        "GAME_SOKO_Exit_A",
+        [
+          16,
+          5
+        ]
+      ],
+      [
+        "GAME_SOKO_Gate_Button_A",
+        [
+          10,
+          9
+        ]
+      ],
+      [
+        "GAME_SOKO_Gate_Button_A",
+        [
+          10,
+          8
+        ]
+      ],
+      [
+        "GAME_MIRR_Mirror_Magic_A",
+        [
+          5,
+          6
+        ]
+      ],
+      [
+        "bard",
+        [
+          2,
+          5
+        ]
+      ],
+      [
+        "GAME_MIRR_Mirror_Magic_A",
+        [
+          14,
+          9
+        ]
+      ],
+      [
+        "GAME_SOKO_Gate_Glyph_A_Down",
+        [
+          13,
+          9
+        ]
+      ],
+      [
+        "GAME_SOKO_Crystal_D",
+        [
+          3,
+          4
+        ]
+      ]
+    ],
+    "gateCells": [
+      {
+        "x": 11,
+        "y": 1
+      }
+    ],
+    "buttonCells": [
+      {
+        "x": 8,
+        "y": 1
+      },
+      {
+        "x": 8,
+        "y": 2
+      }
+    ],
+    "notes": [
+      "Source initial geometry extracted from layout and checked visually against matching level screenshot.",
+      "Gates placed on floor in adaptation; original gate raised/lowered geometry not implemented.",
+      "Mirror orientations inferred from source witness and screenshot (SE left / SW right). Validate against final SS05 engine.",
+      "One water border added to prevent artificial anchoring against the 20×20 outside-wall padding.",
+      "Second button moved from the upper-central column to lower-right of the central island (10,6 after water padding), requiring a different crate/Bard offset and more reflection choreography."
+    ],
+    "waterBorderAdded": 1
+  },
+  "validation": {
+    "solved": true,
+    "blocked": 0,
+    "deaths": 0,
+    "ablations": {
+      "withoutSong": {
+        "status": "unsolvable",
+        "states": 1,
+        "ms": 0.07299000000000433
+      },
+      "withoutReflections": {
+        "status": "unsolvable",
+        "states": 397,
+        "ms": 4.193230999999997
+      },
+      "withoutMirror1": {
+        "status": "unsolvable",
+        "states": 422,
+        "ms": 7.633538000000016
+      },
+      "withoutMirror2": {
+        "status": "unsolvable",
+        "states": 2959,
+        "ms": 64.321157
+      }
+    }
+  }
+}

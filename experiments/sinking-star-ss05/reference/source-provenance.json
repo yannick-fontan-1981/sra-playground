@@ -1,0 +1,76 @@
+{
+  "checkedOn": "2026-11-18",
+  "sources": [
+    {
+      "name": "Transcription exécutable communautaire Joric",
+      "url": "https://github.com/joric/ootss/blob/main/scripts/ootss.pz",
+      "gitBlob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+      "use": "Règles du chant et grilles heroes3_1_v3, heroes3_2_v4, heroes3_3_v2.",
+      "bytes": 68520,
+      "sha256": "251b10eda9e35c848104c1dc37438d3ecd6420417bf8a9d31765024ffabcfba3"
+    },
+    {
+      "name": "Parcours sources communautaires",
+      "url": "https://github.com/joric/ootss/blob/main/data/solutions.json",
+      "gitBlob": "25d772c370f51d44632c2e2c4cf337e1b6ea9ab1",
+      "use": "Témoins originaux; à ne pas confondre avec les parcours adaptés SS05.",
+      "bytes": 185055,
+      "sha256": "850753dd06767ca6e28c8392e9adba523c5fdbd2dad46d4047e30f14222f55dd"
+    },
+    {
+      "name": "Export des objets des niveaux",
+      "url": "https://github.com/chenyuyang712/OSS-puzzlewiki/blob/main/data/levels_layout.json.gz",
+      "use": "Géométrie initiale detachment et reattachment; décodage u associé au p suivant.",
+      "bytes": 46431449,
+      "sha256": "99cd374249526ceb47d7c162c783311d3425dd9ccdad0a862f52fdf86b72b417"
+    },
+    {
+      "name": "Capture detachment",
+      "url": "https://github.com/joric/ootss_tileset/blob/main/images/levels/detachment.webp",
+      "gitBlob": "ccfc8433e41539060db1cc18b6c5bd78ac8ea25d",
+      "use": "Correspondance visuelle Heroes and Mirrors énigme 1.",
+      "bytes": 114184,
+      "sha256": "a931f714ceb378e09d063a2ee1468edbb07df637ea203d3e5e4e1d07eaeb001f"
+    },
+    {
+      "name": "Capture reattachment",
+      "url": "https://github.com/joric/ootss_tileset/blob/main/images/levels/reattachment.webp",
+      "gitBlob": "4d04003dd59a524869465abbd4bb10ab5f44e88d",
+      "use": "Correspondance visuelle Heroes and Mirrors énigme 2.",
+      "bytes": 98570,
+      "sha256": "28eb25471aa370608dfa4f6058960d34120dd649c02909f98a4a40b554774780"
+    }
+  ],
+  "guides": [
+    {
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/",
+      "puzzles": [
+        10,
+        11,
+        12,
+        13
+      ],
+      "note": "Guide narratif; carré 5×5 vérifié dans le code, pas déduit de sa description «ligne»."
+    },
+    {
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+      "puzzles": [
+        1,
+        2
+      ],
+      "note": "Premières salles Barde+miroirs: détacher la caisse du chant, changer sa position relative."
+    }
+  ],
+  "originalLevels": [
+    "ss05-01",
+    "ss05-07",
+    "ss05-08"
+  ],
+  "adaptationNotes": [
+    "Le moteur SS05 emploie un Barde seul, des miroirs fixes et des portes sur sol.",
+    "Les appuis entrés/occupés restent immobiles pendant ce pas; contrat SS05 explicite.",
+    "L5/L6 conservent la topologie des plateformes mais ajoutent une bordure d’eau pour éviter les butées artificielles du cadrage.",
+    "L6 déplace le deuxième bouton en bas à droite de l’îlot central.",
+    "Les reproductions sont des adaptations; aucune identité complète des règles commerciales n’est revendiquée."
+  ]
+}

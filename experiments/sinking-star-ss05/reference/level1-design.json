@@ -1,0 +1,136 @@
+{
+  "spec": {
+    "id": "ss05-01",
+    "title": "L’atelier du chant",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~......~~~~~~~~~~~",
+      "~~~......~...~~~~~~~",
+      "~~#......~...~~~~~~~",
+      "~#b.....o~...~~~~~~~",
+      "~~.......~~~.~~.~~~~",
+      "~~.......~~~~~~...g~",
+      "~~o.B....~~~~~~~~~~~",
+      "~~~..b...~~~~~~~~~~~",
+      "~~~......~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "circuits": [
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 6
+          }
+        ]
+      },
+      {
+        "id": "pont",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 10
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 17,
+          "y": 8
+        },
+        "circuit": "sortie",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 6
+        },
+        "circuit": "pont",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 12,
+          "y": 7
+        },
+        "facing": "NE"
+      }
+    ]
+  },
+  "actions": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    1,
+    1,
+    5,
+    2,
+    4,
+    4,
+    4
+  ],
+  "metrics": {
+    "actions": 32,
+    "songTurns": 3,
+    "stoneMoves": 3,
+    "monsterMoves": 0,
+    "platformMoves": 0,
+    "reflections": 1,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "solved": true,
+  "ablations": {
+    "disableSong": {
+      "status": "unsolvable",
+      "states": 1
+    },
+    "disableReflections": {
+      "status": "limit",
+      "states": 50000
+    },
+    "disablePistons": {
+      "status": "solved",
+      "states": 48094
+    },
+    "disablePlatforms": {
+      "status": "unsolvable",
+      "states": 5063
+    }
+  }
+}
