@@ -8,6 +8,7 @@ export interface CodeObservation extends CodeRecord { entities: readonly CodeRec
 /** Arbitrary Python code words stay exact beyond the JSON safe-integer domain. */
 export type CodeWord = number | { readonly $v6_integer: string };
 export type CodePoseGoal = { at: NativePoint; scale: number; hue: number; rotation: number; notch: NativePoint[]; box: NativeBox };
+export type CodeLattice = { origin: NativePoint; size: number; shape: NativePoint; floor: number[] };
 export const CODE_DIRECTIONS: readonly NativePoint[] = [[0, -1], [1, 0], [0, 1], [-1, 0]];
 const keyOf = (value: unknown): string => JSON.stringify(value);
 const pointKey = (value: NativePoint): string => keyOf(value);
@@ -115,13 +116,62 @@ function repeatedExampleFrames(parts: readonly CodeRecord[], below: number, size
   return regular.length === 1 ? regular[0]!.map(frame => frame.entity) : [];
 }
 
+function boardsOnCodeLattice(rows: NativeRows, parts: readonly CodeRecord[], lattice: CodeLattice,
+  allowScaled: boolean, allowReceptacle: boolean): CodeRecord[] {
+  const { origin: [x0, y0], size, shape: [width, height], floor } = lattice, hues = new Set(floor);
+  const boards: CodeRecord[] = [];
+  for (const entity of parts) {
+    if (hues.has(entity.palette_value) || entity.area <= size * size / 2) continue;
+    const [x, y, right, bottom] = entity.bbox, side = right - x + 1, scale = side / size;
+    if (bottom - y + 1 !== side || !Number.isInteger(scale) || (allowScaled ? scale < 1 : scale !== 1)
+      || (x - x0) % size || (y - y0) % size || !(x0 <= x && x + side <= x0 + width * size && y0 <= y && y + side <= y0 + height * size)) continue;
+    const normalized = normalizeCodeMask(entity.mask, scale);
+    if (!normalized) continue;
+    const mask = maskKey(normalized), targets = new Map<string, NativePoint>();
+    for (let cy = 0; cy < height; cy++) for (let cx = 0; cx < width; cx++) {
+      const X = x0 + cx * size, Y = y0 + cy * size, cut = projection(rows, [X, Y, X + size - 1, Y + size - 1]);
+      for (const base of hues) {
+        const found: NativePoint[] = []; cut.forEach((row, yy) => row.forEach((value, xx) => { if (value === base) found.push([xx, yy]); }));
+        if (maskKey(found) !== mask) continue;
+        const rim = projection(rows, [Math.max(0, X - 1), Math.max(0, Y - 1), X + size, Y + size]);
+        if (rim.flat().filter(value => value === entity.palette_value).length >= size) targets.set(pointKey([cx, cy]), [cx, cy]);
+      }
+    }
+    const goalPose = targets.size === 0 && allowReceptacle
+      ? measureReceptacle(rows, parts, { x0, y0, size, width, height, floor: hues, mask: normalized, actor: entity }) : null;
+    if (targets.size !== 1 && !goalPose) continue;
+    boards.push({ origin: lattice.origin, size, shape: lattice.shape, floor: [...hues].sort((a, b) => a - b), hue: entity.palette_value,
+      mask: normalized, goal: goalPose?.at ?? [...targets.values()][0], start: [Math.floor((x - x0) / size), Math.floor((y - y0) / size)],
+      ...(scale > 1 || goalPose ? { scaled: true } : {}), ...(goalPose ? { goalPose } : {}) });
+  }
+  return boards;
+}
+
+function matchesCodeLattice(parts: readonly CodeRecord[], lattice: CodeLattice, rows: NativeRows): boolean {
+  const { origin: [l, t], size, shape: [width, height], floor } = lattice;
+  if (size < 2 || width < 3 || height < 3 || floor.length !== 2 || l < 0 || t < 0
+    || l + width * size > rows[0]!.length || t + height * size > rows.length) return false;
+  const phase = [new Set<number>(), new Set<number>()], xs = new Set<number>(), ys = new Set<number>();
+  for (const tile of parts) {
+    const [x, y, r, b] = tile.bbox, col = (x - l) / size, row = (y - t) / size;
+    if (!tile.rectangular || r - x + 1 !== size || b - y + 1 !== size || !floor.includes(tile.palette_value)
+      || !Number.isInteger(col) || !Number.isInteger(row) || col < 0 || row < 0 || col >= width || row >= height) continue;
+    phase[(col + row) % 2]!.add(tile.palette_value);
+    xs.add(col);
+    ys.add(row);
+  }
+  return phase.every(inks => inks.size === 1) && [...phase[0]!][0] !== [...phase[1]!][0]
+    && xs.size >= 3 && ys.size >= 3 && xs.has(0) && xs.has(width - 1) && ys.has(0) && ys.has(height - 1);
+}
+
 export function measureCodeScene(observation: CodeObservation, rows: NativeRows, inputs: readonly CodeCommand[], allowScaled = false,
-  allowReceptacle = false): CodeRecord | null {
+  allowReceptacle = false, lattice?: CodeLattice): CodeRecord | null {
   const parts = observation.entities, tiles = new Map<number, CodeRecord[]>();
   for (const entity of parts) { const [x, y, right, bottom] = entity.bbox; if (entity.rectangular && right - x === bottom - y && right > x) {
     const size = right - x + 1; if (!tiles.has(size)) tiles.set(size, []); tiles.get(size)!.push(entity); } }
-  const boards: CodeRecord[] = [];
-  for (const [size, group] of tiles) {
+  const boards: CodeRecord[] = lattice && matchesCodeLattice(parts, lattice, rows)
+    ? boardsOnCodeLattice(rows, parts, lattice, allowScaled, allowReceptacle) : [];
+  if (!lattice) for (const [size, group] of tiles) {
     const places = new Map(group.map(entity => [pointKey(entity.position), entity])), left = new Map(group.map(entity => [pointKey(entity.position), entity.position as NativePoint]));
     while (left.size) {
       const seed = left.values().next().value!; left.delete(pointKey(seed));
@@ -143,30 +193,7 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
         while (alignedRows.has(lastRow + size)) lastRow += size;
       }
       const height = 1 + (lastRow - y0) / size;
-      for (const entity of parts) {
-        if (hues.has(entity.palette_value) || entity.area <= size * size / 2) continue;
-        const [x, y, right, bottom] = entity.bbox, side = right - x + 1, scale = side / size;
-        if (bottom - y + 1 !== side || !Number.isInteger(scale) || (allowScaled ? scale < 1 : scale !== 1)
-          || (x - x0) % size || (y - y0) % size || !(x0 <= x && x + side <= x0 + width * size && y0 <= y && y + side <= y0 + height * size)) continue;
-        const normalized = normalizeCodeMask(entity.mask, scale);
-        if (!normalized) continue;
-        const mask = maskKey(normalized), targets = new Map<string, NativePoint>();
-        for (let cy = 0; cy < height; cy++) for (let cx = 0; cx < width; cx++) {
-          const X = x0 + cx * size, Y = y0 + cy * size, cut = projection(rows, [X, Y, X + size - 1, Y + size - 1]);
-          for (const base of hues) {
-            const found: NativePoint[] = []; cut.forEach((row, yy) => row.forEach((value, xx) => { if (value === base) found.push([xx, yy]); }));
-            if (maskKey(found) !== mask) continue;
-            const rim = projection(rows, [Math.max(0, X - 1), Math.max(0, Y - 1), X + size, Y + size]);
-            if (rim.flat().filter(value => value === entity.palette_value).length >= size) targets.set(pointKey([cx, cy]), [cx, cy]);
-          }
-        }
-        const goalPose = targets.size === 0 && allowReceptacle
-          ? measureReceptacle(rows, parts, { x0, y0, size, width, height, floor: hues, mask: normalized, actor: entity }) : null;
-        if (targets.size !== 1 && !goalPose) continue;
-        boards.push({ origin: [x0, y0], size, shape: [width, height], floor: [...hues].sort((a, b) => a - b), hue: entity.palette_value,
-          mask: normalized, goal: goalPose?.at ?? [...targets.values()][0], start: [Math.floor((x - x0) / size), Math.floor((y - y0) / size)],
-          ...(scale > 1 || goalPose ? { scaled: true } : {}), ...(goalPose ? { goalPose } : {}) });
-      }
+      boards.push(...boardsOnCodeLattice(rows, parts, { origin: [x0, y0], size, shape: [width, height], floor: [...hues] }, allowScaled, allowReceptacle));
     }
   }
   if (boards.length !== 1) return null;
@@ -237,6 +264,7 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
   Object.assign(board, { columns: columns.map(column => column.boxes), bit_commands: bindings, values: [...values].sort((a, b) => a - b), execute: button.command,
     button_box: button.entity.bbox, button_hue: button.entity.palette_value, examples });
   const allowed = new Map<string, NativePoint>();
+  const restarts: NativePoint[] = [];
   const goalPose = board.goalPose as CodePoseGoal | undefined;
   for (let cy = 0; cy < height; cy++) for (let cx = 0; cx < width; cx++) {
     const cut = projection(rows, [x0 + cx * size, y0 + cy * size, x0 + (cx + 1) * size - 1, y0 + (cy + 1) * size - 1]);
@@ -245,7 +273,11 @@ export function measureCodeScene(observation: CodeObservation, rows: NativeRows,
     if (cut.flat().every(value => board.floor.includes(value) || value === board.hue || insideReceptacle && value === goalPose.hue)) {
       allowed.set(pointKey([cx, cy]), [cx, cy]);
     }
+    if (lattice && !goalPose && cut[0]![0] !== cut[0]![1] && [cut[0]![0], cut[0]![1]].includes(board.hue)
+      && [cut[0]![0], cut[0]![1]].some(ink => board.floor.includes(ink))
+      && cut.every((row, y) => row.every((ink, x) => ink === cut[0]![(x + y) % 2]))) restarts.push([cx, cy]);
   }
+  if (restarts.length) board.restarts = restarts;
   allowed.set(pointKey(board.start), board.start); allowed.set(pointKey(board.goal), board.goal); board.allowed = [...allowed.values()].sort(comparePoint); return board;
 }
 

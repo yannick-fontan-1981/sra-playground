@@ -1,5 +1,5 @@
 import { codeBits, codeMaskRotation, codePosition, decodeCodeWord, encodeCodeWord, measureCodeScene, normalizeCodeMask,
-  rotatedCodeMask, type CodePoseGoal, type CodeWord } from '../logos-engine/v6-code-program.ts';
+  rotatedCodeMask, type CodeLattice, type CodePoseGoal, type CodeWord } from '../logos-engine/v6-code-program.ts';
 import { geometricComponents, ObservedInputDomain, projection } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -18,13 +18,14 @@ export const codeRouteStrategies = {
 
 type Scene = { origin: NativePoint; size: number; goal: NativePoint; allowed: NativePoint[]; columns: NativeBox[][];
   bit_commands: NativeCommand[][]; values: number[]; execute: NativeCommand; button_box: NativeBox; button_hue: number;
-  mask: NativePoint[]; shape: NativePoint; hue: number; floor: number[]; scaled?: boolean; goalPose?: CodePoseGoal; examples?: readonly CodeExample[] };
+  mask: NativePoint[]; shape: NativePoint; hue: number; floor: number[]; scaled?: boolean; goalPose?: CodePoseGoal;
+  examples?: readonly CodeExample[]; restarts?: NativePoint[] };
 type Pose = { at: NativePoint; scale: number; rotation?: number; hue?: number };
 type Effect = { motion: NativePoint; resize?: number; fromScales?: number[]; turn?: number; fromRotations?: number[];
   hue?: number; ref: string };
 type State = { epoch: number; scene: Scene; effects: Record<string, Effect>; rejected: string[]; runs: string[];
-  count: number; stopped: boolean; editRef?: string; examplesTried?: readonly number[] };
-type ProgramLeg = { program: CodeWord[]; edit: CodeWord[] | null; run: string };
+  count: number; stopped: boolean; editRef?: string; examplesTried?: readonly number[]; refusedRestarts?: string[] };
+type ProgramLeg = { program: CodeWord[]; edit: CodeWord[] | null; run: string; restart?: NativePoint };
 type Proposal = NativeProposal & ProgramLeg & { local: State; start: Pose; edits?: ProgramLeg[]; needId: string; example?: number };
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2), Math.floor((t + b) / 2)];
@@ -50,7 +51,7 @@ function codePose(rows: NativeRows, scene: Scene): Pose | null {
   return poses.length === 1 ? poses[0]! : null;
 }
 
-function programFor(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects']): CodeWord[] | null {
+function programPaths(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects']) {
   const cost = (a: bigint, b: bigint) => (a ^ b).toString(2).replaceAll('0', '').length;
   const allowed = new Set(scene.allowed.map(point => point.join(',')));
   const goal = scene.goalPose;
@@ -77,14 +78,38 @@ function programFor(scene: Scene, start: Pose, words: CodeWord[], effects: State
         || fromRotations?.length === 1 && !fromRotations.includes(path.rotation!)) continue;
       const at: NativePoint = [path.at[0] + motion[0], path.at[1] + motion[1]], scale = path.scale + (resize ?? 0);
       const projected: Pose = { at, scale, ...(goal ? { rotation: (path.rotation! + (turn ?? 0)) % 4, hue: hue ?? path.hue! } : {}) };
-      if ((scale === path.scale && same(at, path.at) && projected.rotation === path.rotation && projected.hue === path.hue) || !fits(projected)) continue;
+      const stationary = scale === path.scale && same(at, path.at) && projected.rotation === path.rotation && projected.hue === path.hue;
+      if (stationary || !fits(projected)) continue;
       const edits = path.edits + cost(decodeCodeWord(word), BigInt(value)), key = [...at, scale, projected.rotation, projected.hue].join(',');
       if ((next.get(key)?.edits ?? Infinity) > edits) next.set(key, { ...projected, edits, words: [...path.words, encodeCodeWord(BigInt(value))] });
     }
     reachable = [...next.values()];
   }
-  return reachable.find(path => same(path.at, scene.goal) && path.scale === (goal?.scale ?? 1)
+  return reachable;
+}
+
+function programFor(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects']): CodeWord[] | null {
+  const goal = scene.goalPose;
+  return programPaths(scene, start, words, effects).find(path => same(path.at, scene.goal) && path.scale === (goal?.scale ?? 1)
     && (!goal || path.rotation === goal.rotation && path.hue === goal.hue))?.words ?? null;
+}
+
+function programViaRestart(scene: Scene, start: Pose, words: CodeWord[], effects: State['effects'], refused: readonly string[]) {
+  const restarts = scene.restarts?.filter(point => !refused.includes(point.join(',')));
+  if (!restarts?.length || restarts.length > 12 || scene.goalPose || start.scale !== 1) return null;
+  const motion = Object.fromEntries(Object.entries(effects).filter(([, effect]) => !effect.resize && !effect.turn && effect.hue === undefined));
+  const distances = new Map([[scene.goal.join(','), 0]]);
+  const edges = restarts.map(at => ({ key: at.join(','), paths: programPaths(scene, { at, scale: 1 }, words, motion) }));
+  for (let distance = 1; distance <= restarts.length; distance++) {
+    for (const node of edges) {
+      if (!distances.has(node.key) && node.paths.some(path => distances.get(path.at.join(',')) === distance - 1)) {
+        distances.set(node.key, distance);
+      }
+    }
+  }
+  const path = programPaths(scene, start, words, motion).filter(path => !same(path.at, start.at) && distances.has(path.at.join(',')))
+    .sort((a, b) => distances.get(a.at.join(','))! - distances.get(b.at.join(','))! || a.edits - b.edits)[0];
+  return path ? { words: path.words, ...(same(path.at, scene.goal) ? {} : { restart: path.at }) } : null;
 }
 
 function observedInstructions(proposal: Proposal, frames: readonly NativeRows[]) {
@@ -137,13 +162,16 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
         return x! >= l && x! <= r && y! >= t && y! <= b ? scene : null;
       }) : null;
       if (learns && !prior && (!adoption || adoption.afterRef !== observation.observation_ref || adoption.levelEpoch !== observation.level_epoch)) return null;
-      const scene = prior?.scene ?? adoption?.scene ?? findScene(observation, rows);
+      const lattice = state?.epoch === observation.level_epoch - 1 ? state.scene : undefined;
+      const scene = prior?.scene ?? adoption?.scene ?? findScene(observation, rows, lattice);
       if (!scene || scene.columns.length > 12 || scene.columns[0]!.length > 24) return null;
       const local: State = prior ?? { scene, epoch: observation.level_epoch, effects: {}, rejected: [], runs: [], count: 0, stopped: false,
         ...(adoption ? { editRef: adoption.afterRef } : {}) };
       const program = codeBits(rows, scene), start = codePose(rows, scene);
       if (!program || !start) return null;
-      const wanted = programFor(scene, start, program, local.effects);
+      const direct = programFor(scene, start, program, local.effects);
+      const staged = direct ? null : programViaRestart(scene, start, program, local.effects, local.refusedRestarts ?? []);
+      const wanted = direct ?? staged?.words ?? null, restart = staged?.restart;
       const column = wanted ? program.findIndex((word, index) => !same(word, wanted[index])) : -1;
       const change = wanted && column >= 0 ? decodeCodeWord(program[column]!) ^ decodeCodeWord(wanted[column]!) : 0n;
       const weights = scene.columns[0]!.map((_, i, bits) => 1n << BigInt(bits.length - i - 1));
@@ -166,7 +194,9 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const strategy = ready || reuseEdit ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
       const label = example ? scene.goalPose ? 'Measure the highlighted instruction in the separate demonstrator'
-        : 'Compare the highlighted instruction with motion in the separate demonstrator' : codeRouteStrategies[phase];
+        : 'Compare the highlighted instruction with motion in the separate demonstrator'
+        : restart ? editable ? 'Edit the program to reach a marked continuation tile'
+          : 'Run the program and check whether the marked tile retains the new position' : codeRouteStrategies[phase];
       const command = editable ? scene.bit_commands[column]![bit]! : example?.command ?? scene.execute;
       const parent = 'G_official_completion';
       const goal = { kind: 'program_motion_to_visible_target', scope: ref.split(':revision:', 1)[0]!, subjects: ['program_and_moving_piece'],
@@ -177,7 +207,7 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       const addressed = editable ? scene.columns[column]![bit]! : example?.box ?? scene.button_box;
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence });
       const steps = [{ action: command, expected_after: edit, point_binding: pointBinding }];
-      const edits: ProgramLeg[] = [{ program, edit, run }];
+      const edits: ProgramLeg[] = [{ program, edit, run, ...(restart && !edit ? { restart } : {}) }];
       if (reuseEdit && edit && wanted) {
         let current = edit;
         while (edits.length < Math.min(remaining, maximumCommittedActions, 48 - local.count)) {
@@ -190,7 +220,7 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
           const command = column >= 0 ? scene.bit_commands[column]![bit]! : scene.execute;
           const next = column >= 0 ? current.map((word, i) => i === column ? encodeCodeWord(decodeCodeWord(word) ^ weights[bit]!) : word) : null;
           const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence });
-          edits.push({ program: current, edit: next, run });
+          edits.push({ program: current, edit: next, run, ...(restart && !next ? { restart } : {}) });
           steps.push({ action: command, expected_after: next, point_binding: witness });
           actions.push(command);
           if (!next) break;
@@ -198,6 +228,7 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
         }
       }
       return { status: 'proposed', kind: family, actions, local, program, start, edit, run, needId: need.id,
+        ...(restart && !edit ? { restart } : {}),
         ...(example ? { example: exampleIndex } : {}),
         ...(edits.length > 1 ? { edits } : {}), steps,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
@@ -207,7 +238,8 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
         sicSituationCard: { strategy, need: scene.goalPose ? 'Match the receptacle position, size, orientation and color'
           : 'Build a program that moves the piece to its target', mode,
           situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
-          actor: cell(start.at, scene, start.scale), target: scene.goalPose?.box ?? cell(scene.goal, scene),
+          actor: cell(start.at, scene, start.scale), target: scene.goalPose?.box ?? cell(restart ?? scene.goal, scene),
+          ...(restart ? { finalTarget: cell(scene.goal, scene) } : {}),
           addressed, ...(example ? { demonstration: example.stage } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -229,6 +261,11 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
         return { matched: realProgramUnchanged(proposal, second), seal_prefix: true, reason: 'verify_demonstration_preserves_real_program' };
       }
       const leg = proposal.edits?.[index] ?? proposal;
+      if (leg.restart) {
+        const matched = same(codePose(second, proposal.local.scene)?.at, leg.restart)
+          && same(codeBits(second, proposal.local.scene), leg.program);
+        return { matched, seal_prefix: true, reason: matched ? 'program_left_a_retained_start' : 'program_did_not_retain_marked_start' };
+      }
       const matched = leg.edit ? editMatches({ ...proposal, edit: leg.edit }, second) : null;
       return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: matched === null ? 'observe_program_trace'
         : matched ? 'program_edit_observed' : 'program_edit_contradicted' };
@@ -262,20 +299,24 @@ export function createSicVerifyProgramConfiguration(family = verifyProgramConfig
       }
       const history = proposal.example === undefined ? { runs: [...local.runs, run] }
         : { examplesTried: [...local.examplesTried ?? [], proposal.example] };
-      state = { ...local, effects, rejected: [...rejected], ...history, count: local.count + 1 };
-      return { events: [] };
+      const retained = leg.restart && same(codePose(second, local.scene)?.at, leg.restart) && same(codeBits(second, local.scene), leg.program);
+      state = { ...local, effects, rejected: [...rejected], ...history, count: local.count + 1,
+        ...(leg.restart && !retained ? { refusedRestarts: [...local.refusedRestarts ?? [], leg.restart.join(',')] } : {}) };
+      return { events: [], ...(retained ? { reviewEvidence: 'The program left the piece on the marked tile, which is now the next starting position.' } : {}) };
     },
     state: () => ({ state }),
     restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
   };
 }
 
-function findScene(observation: NativeObservation, rows: NativeRows) {
+function findScene(observation: NativeObservation, rows: NativeRows, lattice?: CodeLattice) {
   const clicks = observation.entities.map(entity => {
     const [x, y] = center(entity.bbox);
     return { action_ref: 'ACTION6', data: { x, y } };
   });
-  const scene = (measureCodeScene(observation, rows, clicks) ?? measureCodeScene(observation, rows, clicks, true, true)) as Scene | null;
+  const scene = (measureCodeScene(observation, rows, clicks) ?? measureCodeScene(observation, rows, clicks, true, true)
+    ?? (lattice && (measureCodeScene(observation, rows, clicks, false, false, lattice)
+      ?? measureCodeScene(observation, rows, clicks, true, true, lattice)))) as Scene | null | undefined;
   return scene?.examples?.length ? { ...scene, examples: bindExamples(scene.examples, scene, observation) } : scene;
 }
 
