@@ -4,7 +4,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { measurePortableSlotLayout, type SlotValue } from '../src/sic/portable-slot-call.ts';
 
 function scene(word: number[], stock: SlotValue[], main: (number | null)[], secondary: (number | null)[],
-  third?: (number | null)[]) {
+  third?: (number | null)[], repetitions = 1) {
   const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(5));
   const fill = (x: number, y: number, w: number, h: number, ink: number) => {
     for (let yy = y; yy < y + h; yy++) rows[yy]!.fill(ink, x, x + w);
@@ -15,7 +15,9 @@ function scene(word: number[], stock: SlotValue[], main: (number | null)[], seco
     fill(x, y + 1, 1, h - 2, ink);
     fill(x + w - 1, y + 1, 1, h - 2, ink);
   };
-  for (const [i, value] of word.entries()) outline(2 + i * 7, 3, 5, 5, value);
+  for (let row = 0; row < repetitions; row++) {
+    for (const [i, value] of word.entries()) outline(2 + i * 7, 3 + 6 * row, 5, 5, value);
+  }
   for (const [i, value] of stock.entries()) {
     if (typeof value === 'number') fill(4 + i * 6, 55, 3, 3, value);
     else outline(4 + i * 6, 55, 3, 3, Number(value.slice(5)));
@@ -63,4 +65,15 @@ test('prefers the matching frame labels among valid nested expansions', async ()
   assert.deepEqual(valuesAt(18), [7, 'call:9', 7]);
   assert.deepEqual(valuesAt(33), [9, 'call:14', 9]);
   assert.deepEqual(valuesAt(46), [14, 11, 14]);
+});
+
+test('two reciprocal tail calls repeat the visible word without spending the literals twice', async () => {
+  const rows = scene([7, 11, 12, 9, 14, 15], [15, 11, 12, 7, 9, 14, 'call:7', 'call:9'],
+    [null, null, null, null], [null, null, null, null], undefined, 2);
+  const layout = await read(rows);
+  assert.ok(layout);
+  const valuesAt = (y: number) => layout.slots.map((box, i) => ({ box, value: layout.targets[i] }))
+    .filter(({ box }) => box[1] === y).sort((a, b) => a.box[0] - b.box[0]).map(item => item.value);
+  assert.deepEqual(valuesAt(18), [7, 11, 12, 'call:9']);
+  assert.deepEqual(valuesAt(33), [9, 14, 15, 'call:7']);
 });
