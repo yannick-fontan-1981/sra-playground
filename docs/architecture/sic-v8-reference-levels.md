@@ -67,7 +67,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | MOTO | 6 | — | — | — | — | — | — | 4 |
 | ONDE | 6 | [6](../../docs/migration/native-campaigns-v32/before-memory-fix/onde.json) | — | 3 (archive locale) | — | 6 | 6 | 4 |
 | PIPE | 6 | [3](../../docs/migration/native-campaigns-v41/pipe-three-levels.json) | — | — | — | 3 | 4 | 4 |
-| POLA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/POLA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 5 |
+| POLA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/POLA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
 | PORT | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/PORT/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
 | PRTL | 6 | — | — | — | — | — | — | 4 |
 | R11L | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/R11L/LVL2/good_run_pseudocode.md) | 1 (archive locale) | — | 2 | 3 | 6 · WIN |

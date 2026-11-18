@@ -2016,4 +2016,12 @@ La recherche remonte depuis les cases marquées. Elle borne les combinaisons à 
 
 Le rejeu chronologique gagne le niveau 6 en **20 clics et 7,53 s**, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **74 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 94 commandes relèvent de SIC. Le rejeu s'arrête à la victoire du niveau 6. TypeScript et les **50 tests ciblés** passent. Empreinte `4ad804933315cc6f4a02e13a870507fe4fe735e676a5c527765a8e5b732219de`. La couverture atteint **551/636 niveaux (86,6 %)**, dont **52/99 niveaux 6 (52,5 %)**.
 
+### POLA niveau 6, préparer les alignements qui permettent un arrêt sur la cible
+
+Un essai depuis la sauvegarde montre une pièce qui traverse la cible pendant l'attraction et la quitte avant l'arrêt. SIC évalue désormais les alignements à partir desquels une paire pourrait s'arrêter sur la cible. Ces alignements orientent la recherche. Chaque déplacement projeté tient compte des cinq pièces et les retours vérifient les positions et orientations avant de poursuivre.
+
+La commande 2 mesure le quart de tour en sens inverse. SIC compare les deux rotations possibles au retour et retient celle qui explique la disposition stabilisée. À la commande 13 du rejeu gagnant, deux pièces orientées dans le même sens s'arrêtent au-dessus de la cible. À la commande 15, la dernière pièce s'oriente dans le même sens, remonte dans la colonne et s'arrête sur la cible, juste sous les deux autres.
+
+Le rejeu chronologique gagne le niveau 6 en **15 commandes et 5,86 s** avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **25 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 40 commandes relèvent de SIC seul. TypeScript et les deux tests ciblés passent. Empreinte `3e6790dc0350e699729577d778dc31011e019d86014f086f9b67bc47b429e472`. La couverture atteint **552/636 niveaux (86,8 %)**, dont **53/99 niveaux 6 (53,5 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
