@@ -29,26 +29,30 @@ function paint(frame: number[][]): void {
   ctx!.putImageData(image, 0, 0);
 }
 /** Tutorial progress is inferred from public frames, not the engine's internal map. */
+function heroCell(frame: number[][]): number {
+  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
+    if (frame[y + 1]![x + 1] === 8) return y * 64 + x;
+  }
+  return -1;
+}
+function pushedCount(after: Observation): number {
+  if (after.frames.length < 3) return 0;
+  const pulse = after.frames[0]!;
+  let count = 0;
+  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
+    if (pulse[y]![x] === 0 && pulse[y]![x+2] === 0 && pulse[y+1]![x+1] === 13 && pulse[y+2]![x] === 0 && pulse[y+2]![x+2] === 0) count++;
+  }
+  return count;
+}
 function observeLesson(before: Observation, after: Observation, action: number): void {
   if (before.level !== 1) return;
-  if (action >= 1 && action <= 4 && JSON.stringify(before.frame) !== JSON.stringify(after.frame)) learned.add('move');
+  if (action >= 1 && action <= 4 && heroCell(before.frame) !== heroCell(after.frame)) learned.add('move');
   const f = after.frame;
-  let outlines = 0;
   for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
-    if (f[y]![x] === 1 && f[y]![x+2] === 1 && f[y+2]![x] === 1 && f[y+2]![x+2] === 1) outlines++;
     if (f[y]![x] === 10 && f[y]![x+2] === 10 && f[y+1]![x+1] === 10 && f[y+2]![x] === 10 && f[y+2]![x+2] === 10) learned.add('bridge');
     if (f[y]![x] === 7 && f[y]![x+2] === 7 && f[y+2]![x] === 7 && f[y+2]![x+2] === 7 && f[y+1]![x+1] === 3 && f[y]![x+1] === 3) learned.add('gate');
   }
-  if (outlines > 0) learned.add('preview');
-  if (action === 5 && after.frames.length > 1) {
-    learned.add('push');
-    let ghosts = 0;
-    for (let y=2; y<62; y+=3) for (let x=2; x<62; x+=3) {
-      const p = before.frame;
-      if (p[y]![x]===1 && p[y]![x+2]===1 && p[y+2]![x]===1 && p[y+2]![x+2]===1) ghosts++;
-    }
-    if (ghosts > 1) learned.add('chain');
-  }
+  if (pushedCount(after) > 1) learned.add('chain');
 }
 function updateUI(): void {
   select.value = String(observation.level);
@@ -69,8 +73,7 @@ function updateUI(): void {
   for (const item of document.querySelectorAll<HTMLElement>('[data-lesson]')) {
     item.classList.toggle('done', learned.has(item.dataset.lesson!));
   }
-  const stage = !learned.has('preview') ? 'Approche-toi des deux pierres du passage. Une flèche vers elles oriente le Guerrier sans les pousser.'
-    : !learned.has('chain') ? 'Appuie sur Espace : une file entière avance d’une case si son extrémité est libre.'
+  const stage = !learned.has('chain') ? 'Approche-toi des deux pierres du passage. Appuie sur la flèche vers elles : toute la file avance d’une case si son extrémité est libre.'
     : !learned.has('bridge') ? 'Une pierre poussée dans l’eau devient un pont. Préserve les deux autres pour les boutons.'
     : !learned.has('gate') ? 'Place une pierre sur chacun des deux + roses. Le Guerrier peut aussi peser sur un bouton, mais pas le laisser libre en traversant.'
     : 'Les deux boutons doivent rester occupés. Dès que la porte est ouverte, rejoins le contour jaune.';
@@ -95,7 +98,9 @@ function act(action: number): void {
   if (busy || observation.state === 'WIN') return;
   const before = observation, next = session.action(action);
   moves++; observeLesson(before,next,action);
-  $('feedback').textContent = next.level !== before.level ? 'Niveau terminé !' : action === 5 ? (next.frames.length > 1 ? 'Poussée réussie.' : 'Poussée impossible : vérifie la fin de la file et les portes.') : '';
+  $('feedback').textContent = next.levelsCompleted > before.levelsCompleted ? 'Niveau terminé !'
+    : pushedCount(next) > 0 ? 'Poussée réussie.'
+    : heroCell(before.frame) === heroCell(next.frame) ? 'Passage bloqué : vérifie les obstacles et la fin de la file.' : '';
   void present(next);
 }
 function reset(kind: 'undo' | 'reset' | 'restart'): void {
@@ -116,7 +121,7 @@ canvas.addEventListener('keydown',event=>{
   if (key==='z') {event.preventDefault();reset('undo');return;}
   if (event.ctrlKey) return;
   if (key==='r') {event.preventDefault();reset('reset');return;}
-  const a: Record<string,number>={ArrowUp:1,ArrowDown:2,ArrowLeft:3,ArrowRight:4,' ':5};
+  const a: Record<string,number>={ArrowUp:1,ArrowDown:2,ArrowLeft:3,ArrowRight:4};
   if (a[event.key]) {event.preventDefault();act(a[event.key]!);}
 });
 void present(observation);

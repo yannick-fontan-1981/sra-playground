@@ -1,14 +1,9 @@
 {
-  "success": true,
-  "checks": [
-    "Standalone load; level 1 selected and tutorial expanded; first frame matches engine",
-    "Undo and Reset interrupt a chain-push animation without stale frames",
-    "All eight levels completed by keyboard; 373 public frames match reference",
-    "Victory undo; restart; direct level navigation; buttons; 390px mobile layout without horizontal overflow"
-  ],
-  "pageErrors": [],
-  "httpRequests": [],
-  "loadMode": "exact standalone HTML via set_content",
-  "fileNavigationTest": "Blocked by environment in separate attempted navigation (ERR_BLOCKED_BY_ADMINISTRATOR)",
-  "totalActions": 373
+  "success": false,
+  "status": "blocked",
+  "stage": "browser-launch",
+  "error": "Chromium failed before opening a page: socket() failed: Operation not permitted (1).",
+  "checks": [],
+  "totalActions": 0,
+  "scope": "This revision has no completed real-browser or visual test in this environment; engine witnesses validated separately."
 }

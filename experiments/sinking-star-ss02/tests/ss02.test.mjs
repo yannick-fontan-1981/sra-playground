@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {compileLevel,initialState,stepWorld,pushPreview,doorsOpen,renderWorld,PushPuzzleSession,GRID,PALETTE,equal,offset,contains} from '../dist/core.js';
+import {compileLevel,initialState,stepWorld,planPush,transitionFrames,doorsOpen,renderWorld,PushPuzzleSession,GRID,PALETTE,equal,offset,contains} from '../dist/core.js';
 import {SS02_LEVELS} from '../dist/levels.js';
 import {reachable} from '../scripts/solver.mjs';
 const witnesses=JSON.parse(readFileSync(new URL('witnesses.json',import.meta.url)));
@@ -16,37 +16,51 @@ test('strict 20×20 logical grid, 3×3 cells, 64×64 canvas and agreed palette',
 });
 for(const n of [1,2,3,7])test(`atomic file of ${n} stones advances one cell`,()=>{
  const row='#W'+'o'.repeat(n)+'..g#',w=fixture(['#'.repeat(row.length),row,'#'.repeat(row.length)]),s=initialState(w);
- const p=pushPreview(w,s);assert.equal(p.stones.length,n);assert.equal(p.valid,true);
- const before=structuredClone(s),next=stepWorld(w,s,5);assert.deepEqual(s,before);
+ const p=planPush(w,s,'E');assert.equal(p.stones.length,n);assert.equal(p.valid,true);
+ const before=structuredClone(s),next=stepWorld(w,s,4);assert.deepEqual(s,before);
  assert.ok(equal(next.hero,s.stones[0]));assert.deepEqual(next.stones,s.stones.map(p=>offset(p,'E')));
 });
 for(const n of [1,2,3])test(`wall at tail cancels all ${n} stones`,()=>{
- const row='#W'+'o'.repeat(n)+'#g#',w=fixture(['#'.repeat(row.length),row,'#'.repeat(row.length)]),s=initialState(w),p=pushPreview(w,s);
- assert.equal(p.valid,false);const next=stepWorld(w,s,5);
+ const row='#W'+'o'.repeat(n)+'#g#',w=fixture(['#'.repeat(row.length),row,'#'.repeat(row.length)]),s=initialState(w),p=planPush(w,s,'E');
+ assert.equal(p.valid,false);const next=stepWorld(w,s,4);
  assert.equal(next.failed,true);assert.deepEqual(next.stones,s.stones);assert.deepEqual(next.hero,s.hero);
 });
-test('arrows face a stone but do not push it',()=>{
- const w=fixture(['######','#Wo.g#','######'],'N'),s=initialState(w),next=stepWorld(w,s,4);
- assert.equal(next.facing,'E');assert.deepEqual(next.hero,s.hero);assert.deepEqual(next.stones,s.stones);
+test('a direction turns and pushes immediately, with animation and no destination preview',()=>{
+ const w=fixture(['#######','#Wo..g#','#######'],'N'),s=initialState(w),next=stepWorld(w,s,4);
+ assert.equal(next.facing,'E');assert.deepEqual(next.hero,s.stones[0]);assert.deepEqual(next.stones,[offset(s.stones[0],'E')]);
+ const frames=transitionFrames(w,s,next,4);
+ assert.equal(frames.length,3);assert.deepEqual(frames.at(-1),renderWorld(w,next));
+ assert.ok(frames.every(f=>!f.flat().includes(1)));
+ assert.deepEqual(tile(frames[0],next.stones[0]),[[3,3,3],[3,3,3],[3,3,3]]);
+});
+for(const [direction,action,rows] of [
+ ['N',1,['#######','#.....#','#..o..#','#..W.g#','#######']],
+ ['S',2,['#######','#..W.g#','#..o..#','#.....#','#######']],
+ ['W',3,['#######','#.....#','#.oW.g#','#.....#','#######']],
+ ['E',4,['#######','#.....#','#.Wo.g#','#.....#','#######']],
+])test(`directional action ${action} pushes toward ${direction}`,()=>{
+ const w=fixture(rows,direction==='N'?'S':'N'),s=initialState(w),next=stepWorld(w,s,action);
+ assert.equal(next.facing,direction);assert.deepEqual(next.hero,s.stones[0]);
+ assert.deepEqual(next.stones,[offset(s.stones[0],direction)]);assert.equal(next.failed,false);
 });
 test('warrior cannot enter water',()=>{
  const w=fixture(['######','#W~.g#','######']),s=initialState(w);
  assert.deepEqual(stepWorld(w,s,4).hero,s.hero);
 });
 test('chain into water sinks only the last stone and creates a permanent support',()=>{
- const w=fixture(['########','#Woo~.g#','########']),s=initialState(w),p=pushPreview(w,s),next=stepWorld(w,s,5);
+ const w=fixture(['########','#Woo~.g#','########']),s=initialState(w),p=planPush(w,s,'E'),next=stepWorld(w,s,4);
  assert.equal(p.sinks,true);assert.equal(next.stones.length,1);assert.equal(next.supports.length,1);
  assert.deepEqual(next.supports[0],p.to);
- const next2=stepWorld(w,next,5);assert.equal(next2.stones.length,1);assert.equal(next2.supports.length,1);
+ const next2=stepWorld(w,next,4);assert.equal(next2.stones.length,1);assert.equal(next2.supports.length,1);
  assert.deepEqual(next2.stones[0],p.to);
 });
 test('submerged stone is walkable, not pushable',()=>{
- const w=fixture(['#######','#Wos.g#','#######']),s=initialState(w),next=stepWorld(w,s,5);
+ const w=fixture(['#######','#Wos.g#','#######']),s=initialState(w),next=stepWorld(w,s,4);
  assert.equal(next.stones.length,1);assert.equal(next.supports.length,1);
- const next2=stepWorld(w,next,5);
+ const next2=stepWorld(w,next,4);
  assert.ok(equal(next2.hero,s.supports[0]));
  const bare=fixture(['#######','#Ws..g#','#######']),b=initialState(bare),walk=stepWorld(bare,b,4);
- assert.ok(equal(walk.hero,b.supports[0]));assert.equal(stepWorld(bare,walk,5).failed,true);
+ assert.ok(equal(walk.hero,b.supports[0]));assert.deepEqual(stepWorld(bare,walk,4).supports,b.supports);
  assert.deepEqual(walk.supports,b.supports);
 });
 test('all buttons must be occupied at once, by hero or stone',()=>{
@@ -65,23 +79,27 @@ test('moving off last button onto its door is rejected atomically',()=>{
 });
 test('pushing from a button cannot close the door on the moved stone',()=>{
  const w=fixture(['#######','#@oD.g#','#######']),s=initialState(w);
- assert.equal(pushPreview(w,s).valid,false);const next=stepWorld(w,s,5);
+ assert.equal(planPush(w,s,'E').valid,false);const next=stepWorld(w,s,4);
  assert.deepEqual(next.hero,s.hero);assert.deepEqual(next.stones,s.stones);
 });
-test('stone preview is a grey square with transparent center, never a cross',()=>{
- const w=fixture(['#######','#Wo..g#','#######']),s=initialState(w),p=pushPreview(w,s);
- assert.deepEqual(tile(renderWorld(w,s),p.to),[[1,1,1],[1,3,1],[1,1,1]]);
+test('a pushable stone has no destination preview',()=>{
+ const w=fixture(['#######','#Wo..g#','#######']),s=initialState(w),p=planPush(w,s,'E');
+ assert.deepEqual(tile(renderWorld(w,s),p.to),[[3,3,3],[3,3,3],[3,3,3]]);
+ assert.ok(!renderWorld(w,s).flat().includes(1));
 });
-test('blocked preview keeps square shape with a red center',()=>{
- const w=fixture(['######','#Wo#g#','######']),s=initialState(w),p=pushPreview(w,s);
- assert.deepEqual(tile(renderWorld(w,s),p.to),[[1,1,1],[1,8,1],[1,1,1]]);
+test('a blocked push has no preview or animation',()=>{
+ const w=fixture(['######','#Wo#g#','######']),s=initialState(w),p=planPush(w,s,'E');
+ assert.deepEqual(tile(renderWorld(w,s),p.to),[[4,4,4],[4,4,4],[4,4,4]]);
+ const next=stepWorld(w,s,4);assert.equal(next.failed,true);
+ const frames=transitionFrames(w,s,next,4);assert.equal(frames.length,1);
+ assert.ok(!frames[0].flat().includes(1));
 });
 test('sunk stone renders a cyan X on brown',()=>{
- const w=fixture(['#######','#Wo~.g#','#######']),s=stepWorld(w,initialState(w),5);
- assert.deepEqual(tile(renderWorld(w,s,false),s.supports[0]),[[10,13,10],[13,10,13],[10,13,10]]);
+ const w=fixture(['#######','#Wo~.g#','#######']),s=stepWorld(w,initialState(w),4);
+ assert.deepEqual(tile(renderWorld(w,s),s.supports[0]),[[10,13,10],[13,10,13],[10,13,10]]);
 });
 test('button corners remain visible below a stone',()=>{
- const w=fixture(['#######','#WobDg#','#######']),s=stepWorld(w,initialState(w),5),sprite=tile(renderWorld(w,s,false),w.buttons[0]);
+ const w=fixture(['#######','#WobDg#','#######']),s=stepWorld(w,initialState(w),4),sprite=tile(renderWorld(w,s),w.buttons[0]);
  assert.equal(sprite[0][0],7);assert.equal(sprite[0][2],7);assert.equal(sprite[2][0],7);assert.equal(sprite[2][2],7);
 });
 for(const r of source.levels)test(`L${r.level}: retained source grid ${r.transcription}`,()=>{
@@ -93,7 +111,8 @@ for(const [index,spec] of SS02_LEVELS.entries())test(`${spec.id}: verified witne
  const w=compileLevel(spec),first=initialState(w);let s=first,pushes=0,chain=false;
  assert.equal(reachable(w,first).has(key(w.goal)),false);
  for(const a of witnesses[index].actions){
-  if(a===5){const p=pushPreview(w,s);assert.equal(p?.valid,true,`invalid witnessed push in ${spec.id}`);pushes++;chain ||= p.stones.length>1;}
+  assert.ok(a>=1&&a<=4);const p=planPush(w,s,['N','S','W','E'][a-1]);
+  if(p){assert.equal(p.valid,true,`invalid witnessed push in ${spec.id}`);pushes++;chain ||= p.stones.length>1;}
   s=stepWorld(w,s,a);assert.equal(s.failed,false);
   const frame=renderWorld(w,s);assert.equal(frame.length,64);assert.ok(frame.every(r=>r.length===64&&r.every(v=>Number.isInteger(v)&&v>=0&&v<=15)));
  }
@@ -127,9 +146,10 @@ test('mutating an observation cannot mutate game state',()=>{
 });
 test('observations contain only public pixels, actions and progress',()=>{
  const o=new PushPuzzleSession(SS02_LEVELS).observe();
+ assert.deepEqual(o.availableActionIds,[1,2,3,4]);
  assert.deepEqual(Object.keys(o).sort(),['gameCode','frame','frames','state','availableActionIds','canUndo','canSelectLevel','level','levelCount','levelsCompleted','defaultFps','palette'].sort());
 });
-for(const a of [-1,0,6,7,1.5,NaN])test(`invalid action ${a} is rejected`,()=>{
+for(const a of [-1,0,5,6,7,1.5,NaN])test(`invalid action ${a} is rejected`,()=>{
  const w=compileLevel(SS02_LEVELS[0]);assert.throws(()=>stepWorld(w,initialState(w),a),RangeError);
 });
 for(const level of [0,9,-1,1.5,NaN])test(`invalid level ${level} is rejected`,()=>assert.throws(()=>new PushPuzzleSession(SS02_LEVELS).selectLevel(level),RangeError));

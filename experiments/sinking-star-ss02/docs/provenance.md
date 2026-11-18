@@ -40,8 +40,9 @@ modifier la carte. Aucune modification géométrique silencieuse n'a été faite
 
 La poussée de files est attestée par les règles du port : propagation de mouvement
 `Moveable` vers le `Moveable` suivant lorsque `Fighter` est actif. Le parcours
-public de `heroes1_2_v2` dans `data/solutions.json` a été rejoué en ajoutant ACTION5
-après les directions qui poussent : 39 commandes dans SS02. Les autres témoins
+public de `heroes1_2_v2` dans `data/solutions.json` sert de témoin de solvabilité.
+Depuis la version 0.3.0, les flèches déclenchent directement les poussées : les
+parcours témoins sont exprimés uniquement avec ACTION1–4. Les autres témoins
 proviennent de la recherche de validation locale, pas d'une solution transmise au SRA.
 
 Attribution : conception des énigmes d'origine — Order of the Sinking Star ;

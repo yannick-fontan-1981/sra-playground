@@ -8,6 +8,8 @@ export function reachable(w,s){
  for(let head=0;head<queue.length;head++){
   const p=queue[head], path=map.get(num(p));
   for(let action=1;action<=4;action++){
+   // Walking regions must not push stones or discard a changed stone layout.
+   if(contains(s.stones,offset(p,directions[action-1])))continue;
    const next=stepWorld(w,{...s,hero:p,complete:false},action);
    if(equal(next.hero,p)||map.has(num(next.hero)))continue;
    map.set(num(next.hero),[...path,action]);queue.push(next.hero);
@@ -47,12 +49,12 @@ export function solve(spec,{maxStates=100000,maxMs=8000,disableSinking=false,loc
    const behind=offset(rock,directions[d^1]), path=reach.get(num(behind));
    if(!path)continue;
    const oriented={...s,hero:behind,facing:directions[d],complete:false};
-   const after=stepWorld(w,oriented,5);
+   const after=stepWorld(w,oriented,d+1);
    if(after.failed)continue;
    if(disableSinking&&after.supports.length>s.supports.length)continue;
    const r=reachable(w,after), k=key(after,r);
    if(seen.has(k))continue;
-   seen.add(k);queue.push({s:after,reach:r,parent:head,segment:[...path,d+1,5],pushes:node.pushes+1});
+   seen.add(k);queue.push({s:after,reach:r,parent:head,segment:[...path,d+1],pushes:node.pushes+1});
    if(usePriority)enqueue(queue.length-1);
    if(seen.size>=maxStates)return {status:'limit',states:seen.size,ms:performance.now()-started};
   }

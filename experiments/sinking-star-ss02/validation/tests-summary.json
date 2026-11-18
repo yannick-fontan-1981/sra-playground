@@ -1,11 +1,11 @@
 {
   "success": true,
   "command": "npm test",
-  "tests": 53,
-  "passed": 53,
+  "tests": 58,
+  "passed": 58,
   "failed": 0,
-  "node": "v22.16.0",
-  "compiler": "TypeScript 5.8.3 (installed environment compiler)",
+  "node": "v24.22.1",
+  "compiler": "TypeScript 5.9.3",
   "configuredDevDependency": "TypeScript 5.9.3",
-  "scope": "Standalone SS02 only; not a production Playground integration or performance test."
+  "scope": "Standalone SS02 0.3.0; direct directional pushing without preview. No production integration or performance claim."
 }

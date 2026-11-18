@@ -1,6 +1,6 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import {compileLevel,initialState,stepWorld,pushPreview,doorsOpen,renderWorld,PushPuzzleSession} from '../dist/core.js';
+import {compileLevel,initialState,stepWorld,planPush,doorsOpen,PushPuzzleSession} from '../dist/core.js';
 import {SS02_LEVELS} from '../dist/levels.js';
 import {reachable} from './solver.mjs';
 const witnesses=JSON.parse(await readFile(new URL('../tests/witnesses.json',import.meta.url),'utf8'));
@@ -10,7 +10,8 @@ for(const [i,spec] of SS02_LEVELS.entries()){
  const w=compileLevel(spec);let s=initialState(w),pushes=0,maxChain=0;
  const n=reachable(w,s).size;
  for(const a of witnesses[i].actions){
-  if(a===5){const p=pushPreview(w,s);assert.ok(p?.valid);pushes++;maxChain=Math.max(maxChain,p.stones.length);}
+  const p=planPush(w,s,['N','S','W','E'][a-1]);
+  if(p){assert.ok(p.valid);pushes++;maxChain=Math.max(maxChain,p.stones.length);}
   s=stepWorld(w,s,a);assert.ok(!s.failed);const o=session.action(a);if(o.frames.length>1)animationCount++;
  }
  assert.ok(s.complete);

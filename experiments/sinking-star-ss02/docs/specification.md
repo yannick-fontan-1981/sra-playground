@@ -1,4 +1,4 @@
-# SS02 — spécification 0.2.0
+# SS02 — spécification 0.3.0
 
 ## Présentation
 
@@ -6,15 +6,16 @@ Image 64×64, plateau logique 20×20, origine (2,2), cellule 3×3 pixels. Les ca
 plus petites sont centrées sans mise à l'échelle. Palette commune : Guerrier rouge
 8, sol gris 3, mur gris foncé 4, eau bleue 9, pierre marron 13, support immergé
 marron avec X cyan 10, bouton + rose 7, porte carrée rose 7, destination contour
-jaune 11, prévisualisation contour carré gris clair 1, direction blanche 0.
+jaune 11, direction blanche 0. Aucune prévisualisation de poussée n’est affichée.
 
 ## Règles
 
-ACTION1–4 : déplacement d'une cellule et orientation. Un obstacle arrête la marche,
-mais pas le changement d'orientation. Une flèche ne pousse jamais automatiquement.
-ACTION5 : la file contiguë de pierres devant le Guerrier avance d'une cellule ;
-le Guerrier prend la place de la première. Une extrémité bloquée annule toute la
-poussée. La poussée de files est nécessaire pour conserver la carte heroes1_2_v2.
+ACTION1–4 : déplacement d'une cellule dans la direction choisie. Une flèche vers
+une pierre pousse directement toute sa file contiguë d'une cellule ; le Guerrier
+prend la place de la première pierre. Un obstacle arrête la marche, mais pas le
+changement d'orientation. Une extrémité bloquée annule toute la poussée.
+Il n'existe aucune commande de poussée séparée et Espace ne déclenche aucune
+action. La poussée de files est nécessaire pour conserver la carte heroes1_2_v2.
 Il n'y a ni traction, ni téléportation, ni monstres dans SS02.
 
 La dernière pierre d'une file poussée dans de l'eau non comblée devient un support
@@ -42,10 +43,11 @@ Le moteur renvoie uniquement les images et les métadonnées publiques : code,
 carte, états internes, solveur et parcours témoins ne sont jamais ajoutés à
 l'observation fournie à un agent.
 
-Les contours gris montrent les arrivées des pierres de la file. Le centre reste
-transparent, ou devient rouge lorsque la poussée est impossible. Les animations
-de poussée comportent trois images avec délais de 60 et 80 ms avant l'image
-stable. Les images intermédiaires n'ajoutent aucun tour logique.
+Le plateau stable ne montre que l'état courant, sans contours de destination
+ni indication anticipée des poussées possibles. Après une poussée réussie, les
+pierres clignotent en blanc à leur départ puis à leur arrivée. Cette animation
+comporte trois images avec délais de 60 et 80 ms avant l'image stable. Les images
+intermédiaires n'ajoutent aucun tour logique.
 
 Undo restaure aussi les chaînes, supports immergés, portes et changements de
 niveau. Undo, Reset, Restart et changement manuel de niveau invalident une

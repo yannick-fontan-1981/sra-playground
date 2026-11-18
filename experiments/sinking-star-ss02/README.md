@@ -10,8 +10,9 @@ n'est modifié par ce laboratoire.
 Ouvrir `dist/SS02-demo.html` dans un navigateur. Le fichier inclut le moteur, les
 cartes et l'interface, sans serveur ni dépendance réseau.
 
-Flèches : marcher et s'orienter. Espace : pousser une pierre ou une file de pierres
-d'une case. Z / Ctrl+Z : Undo. R : recommencer le niveau. Les boutons à l'écran
+Flèches : marcher et pousser une pierre ou une file de pierres d'une case dans
+la direction choisie. La poussée est immédiate, sans prévisualisation ni commande
+séparée. Z / Ctrl+Z : Undo. R : recommencer le niveau. Les boutons à l'écran
 conviennent aussi au tactile. Le tutoriel du niveau 1 est ouvert au démarrage.
 
 ## Construire et tester
@@ -27,14 +28,21 @@ CHROMIUM_PATH=/usr/bin/chromium python scripts/verify-browser.py
 ```
 
 Le dernier contrôle nécessite Python, Playwright et Chromium. Il injecte le HTML
-exact dans le navigateur ; la navigation directe `file://` était bloquée par
-l'environnement de réalisation. Ce point n'est pas présenté comme testé ici.
-Le test de navigateur n'est pas une dépendance du jeu.
+exact dans le navigateur. Pour cette révision, l'environnement interdit la création
+du socket nécessaire au démarrage de Chromium : le contrôle navigateur est bloqué,
+comme l'indique `validation/browser-report.json`. Le test de navigateur n'est pas
+une dépendance du jeu.
+
+La logique de l'interface est aussi vérifiable sans navigateur via
+`scripts/verify-ui-dom.mjs` et Happy DOM installé séparément. Définir
+`HAPPY_DOM_MODULE` vers son module `lib/index.js`, puis exécuter le script avec Node.
+Le résultat figure dans `validation/ui-dom-report.json` ; ce contrôle des événements
+et du buffer Canvas ne remplace pas une vérification visuelle dans un navigateur.
 
 ## Limites et livraison
 
-- 53 tests automatisés réussis ; huit parcours témoins rejoués jusqu'à WIN.
-- Campagne de 373 commandes vérifiée dans Chromium, avec comparaison des images.
+- Les validations du moteur, des huit parcours témoins et du navigateur sont
+  consignées dans `validation/`. Les parcours utilisent uniquement les quatre directions.
 - Les parcours sont des témoins de solvabilité, pas des solutions minimales.
 - Un mauvais placement peut rendre un niveau insoluble : Undo et Reset sont disponibles.
 - Les niveaux 4, 5, 6 et 8 changent le rôle original en Guerrier ; leurs solutions

@@ -87,25 +87,25 @@ export function compileLevel(spec: LevelSpec): World {
 export function initialState(w: World): State {
   return {hero: {...w.start}, facing: w.facing, stones: w.stones.map(p => ({...p})), supports: w.supports.map(p => ({...p})), complete: false, failed: false};
 }
-export interface PushPreview {
+export interface PushPlan {
   from: Point; to: Point; valid: boolean; sinks: boolean;
   stones: readonly Point[]; destinations: readonly Point[];
 }
 /** Push an entire contiguous file one cell; blocked tail cancels the whole action. */
-export function pushPreview(w: World, s: State): PushPreview | null {
+export function planPush(w: World, s: State, direction: Direction): PushPlan | null {
   if (s.complete) return null;
-  const from = offset(s.hero, s.facing);
+  const from = offset(s.hero, direction);
   if (!contains(s.stones, from)) return null;
   const stones: Point[] = [];
   let to = from;
-  while (contains(s.stones, to)) {stones.push(to); to = offset(to, s.facing);}
-  const destinations = stones.map(p => offset(p, s.facing));
+  while (contains(s.stones, to)) {stones.push(to); to = offset(to, direction);}
+  const destinations = stones.map(p => offset(p, direction));
   const sinks = terrainAt(w, to) === '~' && !contains(s.supports, to);
-  const plan: PushPreview = {from, to, valid: !blocked(w, s, to), sinks, stones, destinations};
+  const plan: PushPlan = {from, to, valid: !blocked(w, s, to), sinks, stones, destinations};
   if (plan.valid) plan.valid = safeDoors(w, performPush(s, plan));
   return plan;
 }
-function performPush(s: State, plan: PushPreview): State {
+function performPush(s: State, plan: PushPlan): State {
   const moved = s.stones.flatMap(p => {
     const index = plan.stones.findIndex(q => equal(p, q));
     if (index < 0) return [p];
@@ -115,22 +115,22 @@ function performPush(s: State, plan: PushPreview): State {
   return {...s, hero: plan.from, stones: moved,
     supports: plan.sinks ? [...s.supports, plan.to] : s.supports, failed: false};
 }
-/** Arrows move/face; ACTION5 pushes the adjacent stone and follows into its cell. */
+/** A direction moves the Warrior or pushes the adjacent file and follows it. */
 export function stepWorld(w: World, s: State, actionId: number): State {
-  if (!Number.isInteger(actionId) || actionId < 1 || actionId > 5) throw new RangeError('SS02 accepts ACTION1–ACTION5.');
+  if (!Number.isInteger(actionId) || actionId < 1 || actionId > 4) throw new RangeError('SS02 accepts ACTION1–ACTION4.');
   if (s.complete) return s;
   let next: State = {...s, failed: false};
-  const direction = directionIds[actionId];
-  if (direction) {
-    const p = offset(s.hero, direction);
-    next = {...next, facing: direction};
-    if (supported(w, s, p) && !blocked(w, s, p) && !contains(s.stones, p)) {
+  const direction = directionIds[actionId]!;
+  const p = offset(s.hero, direction);
+  next = {...next, facing: direction};
+  if (contains(s.stones, p)) {
+    const plan = planPush(w, s, direction)!;
+    next = plan.valid ? performPush(next, plan) : {...next, failed: true};
+  } else {
+    if (supported(w, s, p) && !blocked(w, s, p)) {
       const moved = {...next, hero: p};
       if (safeDoors(w, moved)) next = moved;
     }
-  } else {
-    const preview = pushPreview(w, s);
-    next = preview?.valid ? performPush(next, preview) : {...next, failed: true};
   }
   return {...next, complete: equal(next.hero, w.goal)};
 }
@@ -141,7 +141,7 @@ function stamp(frame: number[][], p: Point, sprite: Sprite): void {
   if (!inside(p)) return;
   sprite.forEach((row, y) => row.forEach((v, x) => {if (v !== null) frame[2 + p.y * 3 + y]![2 + p.x * 3 + x] = v;}));
 }
-export function renderWorld(w: World, s: State, preview = true): number[][] {
+export function renderWorld(w: World, s: State): number[][] {
   const frame = Array.from({length: 64}, () => Array<number>(64).fill(4));
   for (let y = 0; y < 20; y++) for (let x = 0; x < 20; x++) {
     const t = terrainAt(w, {x,y}), c = t === '#' ? 4 : t === '~' ? 9 : 3;
@@ -156,22 +156,18 @@ export function renderWorld(w: World, s: State, preview = true): number[][] {
   hero[1+d.y]![1+d.x] = 0; stamp(frame, s.hero, hero);
   for (const p of w.buttons) if (contains(s.stones,p) || equal(p,s.hero)) stamp(frame,p,[[7,null,7],[null,null,null],[7,null,7]]);
   if (contains(s.stones,w.goal)) stamp(frame,w.goal,[[11,null,11],[null,null,null],[11,null,11]]);
-  if (preview) {
-    const p = pushPreview(w,s);
-    if (p) for (const target of p.destinations) stamp(frame,target,square(1,p.valid ? null : 8));
-  }
   return frame;
 }
 /** Intermediates are presentation only; they never advance game logic. */
 export function transitionFrames(w: World, before: State, after: State, action: number): number[][][] {
-  if (action !== 5 || after.failed) return [renderWorld(w,after)];
-  const preview = pushPreview(w,before);
-  if (!preview?.valid) return [renderWorld(w,after)];
-  const pulse = renderWorld(w,before,false), arrival = renderWorld(w,after,false);
-  for (const p of preview.stones) stamp(pulse,p,square(0,13));
-  for (const p of preview.destinations) {
-    stamp(pulse,p,square(1));
-    stamp(arrival,p,preview.sinks && equal(p,preview.to) ? [[10,0,10],[0,10,0],[10,0,10]] : square(13,0));
+  const direction = directionIds[action];
+  if (!direction || after.failed || equal(before.hero,after.hero)) return [renderWorld(w,after)];
+  const plan = planPush(w,before,direction);
+  if (!plan?.valid) return [renderWorld(w,after)];
+  const pulse = renderWorld(w,before), arrival = renderWorld(w,after);
+  for (const p of plan.stones) stamp(pulse,p,square(0,13));
+  for (const p of plan.destinations) {
+    stamp(arrival,p,plan.sinks && equal(p,plan.to) ? [[10,0,10],[0,10,0],[10,0,10]] : square(13,0));
   }
   return [pulse,arrival,renderWorld(w,after)];
 }
@@ -189,7 +185,7 @@ export class PushPuzzleSession {
   }
   observe(): Observation {
     const frame = renderWorld(this.worlds[this.index]!,this.state);
-    return {gameCode:this.gameCode,frame,frames:[frame],state:this.completed.size===this.worlds.length?'WIN':'NOT_FINISHED',availableActionIds:[1,2,3,4,5],canUndo:this.history.length>0,canSelectLevel:true,level:this.index+1,levelCount:this.worlds.length,levelsCompleted:this.completed.size,defaultFps:10,palette:[...PALETTE]};
+    return {gameCode:this.gameCode,frame,frames:[frame],state:this.completed.size===this.worlds.length?'WIN':'NOT_FINISHED',availableActionIds:[1,2,3,4],canUndo:this.history.length>0,canSelectLevel:true,level:this.index+1,levelCount:this.worlds.length,levelsCompleted:this.completed.size,defaultFps:10,palette:[...PALETTE]};
   }
   action(actionId: number): Observation {
     const world=this.worlds[this.index]!,before=this.state,next=stepWorld(world,before,actionId);

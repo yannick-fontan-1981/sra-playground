@@ -7,13 +7,17 @@ trace=json.loads((ROOT/'validation/browser-trace.json').read_text())
 report={'success':False,'checks':[],'pageErrors':[],'httpRequests':[]}
 hashjs="""() => {const c=document.getElementById('board');let h=2166136261;for(const b of c.getContext('2d').getImageData(0,0,64,64).data)h=Math.imul(h^b,16777619)>>>0;return String(h);}"""
 with sync_playwright() as pw:
- browser=pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
+ try:
+  browser=pw.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
+ except Exception as exc:
+  report.update(status='blocked',stage='browser-launch',error=str(exc))
+  (ROOT/'validation/browser-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
+  raise
  page=browser.new_page(viewport={'width':1280,'height':1050})
  page.on('pageerror',lambda error:report['pageErrors'].append(str(error)))
  page.on('request',lambda req:report['httpRequests'].append(req.url) if req.url.startswith(('http:','https:')) else None)
  try:
   report['loadMode']='exact standalone HTML via set_content'
-  report['fileNavigationTest']='Blocked by environment in separate attempted navigation (ERR_BLOCKED_BY_ADMINISTRATOR)'
   page.set_content((ROOT/'dist/SS02-demo.html').read_text(),wait_until='load')
   board=page.locator('#board')
   page.wait_for_function("document.getElementById('board').dataset.busy === 'false'")
@@ -22,22 +26,30 @@ with sync_playwright() as pw:
   assert page.evaluate(hashjs)==trace['initial']
   page.screenshot(path=str(ROOT/'validation/ss02-tutorial.png'),full_page=True)
   report['checks'].append('Standalone load; level 1 selected and tutorial expanded; first frame matches engine')
-  for _ in range(2):board.press('ArrowRight')
+  assert page.locator('[data-action]').count()==4
+  assert page.locator('[data-action="5"]').count()==0
+  moves=page.locator('#moves').inner_text()
+  board.press('Space')
+  assert page.evaluate(hashjs)==trace['initial'] and page.locator('#moves').inner_text()==moves
+  report['checks'].append('Only four direction buttons; Space does not act')
+  board.press('ArrowRight')
   before=page.evaluate(hashjs)
-  board.press('Space');page.locator('#undo').click();page.wait_for_timeout(240)
+  board.press('ArrowRight');page.locator('#undo').click();page.wait_for_timeout(240)
   assert page.evaluate(hashjs)==before
-  board.press('Space');page.locator('#reset').click();page.wait_for_timeout(240)
+  board.press('ArrowRight');page.locator('#reset').click();page.wait_for_timeout(240)
   assert page.evaluate(hashjs)==trace['initial']
   report['checks'].append('Undo and Reset interrupt a chain-push animation without stale frames')
   seen=set()
   for index,step in enumerate(trace['steps']):
    page.wait_for_function("document.getElementById('board').dataset.busy === 'false'")
-   board.press({1:'ArrowUp',2:'ArrowDown',3:'ArrowLeft',4:'ArrowRight',5:'Space'}[step['action']])
+   board.press({1:'ArrowUp',2:'ArrowDown',3:'ArrowLeft',4:'ArrowRight'}[step['action']])
    page.wait_for_function("document.getElementById('board').dataset.busy === 'false'")
    assert page.evaluate(hashjs)==step['hash'],f"pixel mismatch after {index+1}"
    assert board.get_attribute('data-level')==str(step['level'])
    assert board.get_attribute('data-completed')==str(step['completed'])
    assert board.get_attribute('data-state')==step['state']
+   if index==1:
+    assert 'done' in page.locator('[data-lesson="chain"]').get_attribute('class')
    if step['completed'] not in seen:
     seen.add(step['completed']);print('completed:',step['completed'],flush=True)
   assert page.locator('#victory').is_visible()

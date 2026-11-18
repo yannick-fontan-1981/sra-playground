@@ -1,17 +1,16 @@
-# SS01–SS25 — jalon SS02 / 0.2.0
+# SS01–SS25 — jalon SS02 / 0.3.0
 
 ## Livré dans ce laboratoire
 
 SS02 possède huit niveaux jouables : tutoriel original complet puis sept grilles
 attribuées à Heroes of Hauling. Guerrier rouge, cellules 3×3, chaînes de pierres,
-prévisualisation carrée gris clair, animation de poussée, eau, supports, boutons,
-portes, Undo, Reset, navigation et VICTORY sont opérationnels.
+poussée directement avec les flèches, animation de poussée, eau, supports, boutons,
+portes, Undo, Reset, navigation et VICTORY sont opérationnels. La poussée n’affiche
+aucune prévisualisation et ne demande plus de commande Espace.
 
-Validation : compilation TypeScript stricte ; 53/53 tests ; huit témoins rejoués ;
-373 commandes de campagne dans Chromium ; aucune erreur JavaScript ni requête HTTP.
-Le HTML exact est injecté dans Chromium car la navigation `file://` était bloquée
-par l'environnement. Les contrôles tactiles sont disponibles ; l'affichage 390 px
-est testé sans débordement horizontal. Les témoins ne sont pas annoncés minimaux.
+Validation : les résultats actualisés de compilation TypeScript, des tests du
+moteur, des huit témoins et du parcours navigateur figurent dans `validation/`.
+Les témoins utilisent uniquement les directions et ne sont pas annoncés minimaux.
 
 ## Sauvegarde et intégration
 
