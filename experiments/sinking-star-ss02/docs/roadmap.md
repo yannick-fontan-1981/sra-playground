@@ -1,5 +1,11 @@
 # SS01–SS25 — jalon SS02 / 0.4.0
 
+## Raccordement au Playground
+
+SS02 rejoint Custom 4 après SS01 avec les huit cartes du laboratoire 0.4.0. Le [compte rendu d’intégration](../../../docs/integration/ss02-custom4.md) consigne la parité des parcours, le fonctionnement du tutoriel et des interruptions, les contrôles navigateur et le protocole de performance.
+
+La prochaine étape du lot Custom 4 est de raccorder et qualifier le laboratoire SS03, le Voleur vert.
+
 ## Livré dans ce laboratoire
 
 SS02 possède huit niveaux jouables : tutoriel original, deux grilles attribuées à
@@ -15,7 +21,7 @@ moteur, des huit témoins, de la nécessité de l’eau et de l’interface DOM 
 dans `validation/`. Le contrôle Chromium est indisponible dans cet environnement.
 Les témoins utilisent uniquement les directions et ne sont pas annoncés minimaux.
 
-## Sauvegarde et intégration
+## Sauvegarde historique du laboratoire
 
 Branche : `feat/ss02-warrior-lab-20261117`, base GitHub
 `9e36d1998013454566dbe33198ab2b958fbcd850`.
@@ -28,7 +34,7 @@ Intégration de SS02 au catalogue et au runtime : non. Publication Site de SS02 
 Site : sans objet pour cette livraison. La synchronisation du site existant n'a
 pas été réévaluée. Aucun résultat autonome du SRA n'est revendiqué.
 
-## Suite
+## Étapes prévues à la livraison du laboratoire
 
 1. Raccorder le même moteur SS02 au backend natif du Playground ; enregistrer
    SS02 comme deuxième jeu de Custom 4 ; créer les huit aperçus de galerie.
