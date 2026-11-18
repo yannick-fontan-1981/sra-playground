@@ -1,14 +1,18 @@
 # Série SS01–SS25 — jalon SS06
 
-SS06 **Les Ponts Réfléchis**, version 0.1.0, est le premier duo de la série : Marchand + Guerrier. Huit niveaux sont livrés en HTML autonome, avec leur moteur TypeScript, témoins, documentation et rapports de validation.
+SS06 **Les Ponts Réfléchis**, version 0.1.1, est le premier duo de la série : Marchand + Guerrier. Huit niveaux sont livrés en HTML autonome, avec leur moteur TypeScript, témoins, documentation et rapports de validation.
 
 Le contenu préparé atteint **6 jeux sur 25 et 48 niveaux sur 200, soit 24 % en nombre**. Ce pourcentage ne mesure pas l’effort restant et ne signifie pas que les six jeux sont déjà publiés sur le site.
+
+## Révision 0.1.1 / HTML v2
+
+L1 reconstruit après un contournement confirmé : la force du Guerrier, la presse, les appuis et chacune des quatre caisses sont maintenant nécessaires, preuves exhaustives à l’appui. L5 remplace le miroir posé sur la presse par une caisse lisible et conserve la nécessité de détruire l’obstacle. Les huit acquis restent validés.
 
 ## Résultat du lot
 
 - Tutoriel ouvert et riche en enseignement, huit acquis effectivement vérifiés.
 - Cinq adaptations déclarées (Heroes and Mirrors 17, 16, 21, 18 et 24) et trois compositions originales.
-- 43 tests du moteur ; 13 contrôles HTML ; 418 actions et 1 284 images.
+- 43 tests du moteur ; 14 contrôles HTML ; 413 actions et 1 267 images.
 - Grille et palette de la série, sélection ACTION6, reflets Espace/X, poussées directes, presses et combats.
 - Travail isolé dans `experiments/sinking-star-ss06/`, sans modification de l’agent ou du runtime de production.
 

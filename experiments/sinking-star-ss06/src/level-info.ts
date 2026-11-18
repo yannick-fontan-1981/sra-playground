@@ -1,7 +1,7 @@
 export const LEVEL_INFO=[
   {
     "puzzle": 0,
-    "label": "Création originale · Deux rôles, un pont, une presse et une traversée par miroir.",
+    "label": "Création originale · Poussées complémentaires, deux appuis indispensables, presse distante et traversée par miroir.",
     "url": "",
     "piston": true
   },
@@ -25,7 +25,7 @@ export const LEVEL_INFO=[
   },
   {
     "puzzle": 18,
-    "label": "Adaptation de principe · Heroes and Mirrors 18 : détruire le miroir qui bloque la traversée.",
+    "label": "Adaptation de principe · Heroes and Mirrors 18 : écraser la caisse qui bloque le reflet, puis rétablir le passage.",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
     "piston": true
   },

@@ -2,71 +2,13 @@
   {
     "level": 1,
     "id": "ss06-01",
-    "commands": "DCDDDDDDLDURRDRRUXRRRRUCRRDDDDDRDRRUXRRRUUUR",
+    "commands": "DDRRUCRRRURRRRRUXRDDCDRRRRRRRUXLLDD",
     "actions": [
       {
         "id": 2
       },
       {
-        "id": 6,
-        "data": {
-          "x": 18,
-          "y": 18
-        }
-      },
-      {
         "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
       },
       {
         "id": 4
@@ -81,7 +23,7 @@
         "id": 6,
         "data": {
           "x": 12,
-          "y": 21
+          "y": 30
         }
       },
       {
@@ -91,25 +33,19 @@
         "id": 4
       },
       {
-        "id": 2
+        "id": 4
       },
       {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
+        "id": 1
       },
       {
         "id": 4
       },
       {
-        "id": 2
+        "id": 4
+      },
+      {
+        "id": 4
       },
       {
         "id": 4
@@ -127,6 +63,37 @@
         "id": 4
       },
       {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 15,
+          "y": 24
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
         "id": 4
       },
       {
@@ -136,13 +103,19 @@
         "id": 1
       },
       {
-        "id": 1
+        "id": 5
       },
       {
-        "id": 1
+        "id": 3
       },
       {
-        "id": 4
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
       }
     ]
   },
@@ -765,7 +738,7 @@
   {
     "level": 5,
     "id": "ss06-05",
-    "commands": "RUCRRRRUULRURXXRRRUCLDDDRRRUURXRRRRDD",
+    "commands": "RUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
     "actions": [
       {
         "id": 4
@@ -802,10 +775,16 @@
         "id": 3
       },
       {
+        "id": 5
+      },
+      {
         "id": 4
       },
       {
-        "id": 1
+        "id": 2
+      },
+      {
+        "id": 2
       },
       {
         "id": 4
@@ -814,7 +793,13 @@
         "id": 5
       },
       {
-        "id": 5
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
       },
       {
         "id": 4
@@ -857,16 +842,16 @@
         "id": 4
       },
       {
-        "id": 1
+        "id": 4
       },
       {
-        "id": 1
+        "id": 5
       },
       {
         "id": 4
       },
       {
-        "id": 5
+        "id": 4
       },
       {
         "id": 4

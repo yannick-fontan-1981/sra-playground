@@ -1,6 +1,6 @@
 {
   "name": "sra-sinking-star-ss06-lab",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,6 +8,10 @@
     "test": "npm run build && node --test tests/*.test.mjs",
     "validate": "npm run build && node scripts/validate-levels.mjs"
   },
-  "devDependencies": {"typescript": "5.9.3"},
-  "engines": {"node": ">=22.0.0"}
+  "devDependencies": {
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
 }

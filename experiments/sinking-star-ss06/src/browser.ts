@@ -121,7 +121,7 @@ const hints:Record<string,string>={
   move:'Déplace le personnage portant le point blanc avec les flèches. Les autres restent en place ; ils peuvent servir de poids ou attendre près d’un miroir.',
   select:'Clique sur l’autre personnage, utilise Tab dans la grille ou les boutons Marchand et Guerrier. La sélection ne fait pas avancer les mécanismes.',
   'merchant-push':'Le Marchand orange pousse un seul objet. Place-toi du bon côté d’une caisse ou d’un miroir, puis avance vers lui. Deux objets en file bloquent sa poussée.',
-  'warrior-push':'Sélectionne le Guerrier rouge et pousse les deux caisses alignées : une seule flèche avance toute la file, si son extrémité est libre.',
+  'warrior-push':'Sélectionne le Guerrier rouge et pousse la file de caisses alignées : une seule flèche avance toute la file, si son extrémité est libre.',
   platform:'Pousse une caisse dans l’eau pour créer un appui marron marqué d’un X cyan. Utilise ce passage pour contourner une autre caisse et la pousser du bon côté.',
   mirror:'Place les occupants devant la face blanche d’un miroir. Le + gris clair montre l’arrivée d’un personnage, le carré celle d’une caisse. Espace active tous les miroirs ensemble.',
   gate:'Maintiens un + rose avec un personnage ou une caisse. Observe la porte liée : elle peut libérer le passage ou pousser sa file en se fermant. Le repère indique son sens.',

@@ -89,6 +89,17 @@ try{
   for(let level=1;level<=SS06_LEVELS.length;level++){choose(level);assert.equal($('piston-help').hidden,!LEVEL_INFO[level-1].piston);assert.equal($('tutorial').hidden,level!==1);assert.equal($('source-link').hidden,!LEVEL_INFO[level-1].url);if(LEVEL_INFO[level-1].url)assert.equal($('source-link').href,LEVEL_INFO[level-1].url);}
   report.checks.push('Every level displays its own source attribution and relevant piston help, with all eight rooms available');
 
+  // The fifth room must visibly start with the condemned crate, not a mirror on its press.
+  choose(5);
+  const fifth=SS06_LEVELS[4],fifthMirrors=[...(fifth.mirrors??[]).map(m=>m.at)];
+  fifth.rows.forEach((row,y)=>[...row].forEach((c,x)=>{if('1234'.includes(c))fifthMirrors.push({x,y});}));
+  assert.ok(fifthMirrors.every(m=>!(fifth.gates??[]).some(g=>g.at.x===m.x&&g.at.y===m.y)),'No level-5 mirror may occupy a press cell initially');
+  const cratePresses=(fifth.gates??[]).filter(g=>'o*'.includes(fifth.rows[g.at.y][g.at.x]));
+  assert.ok(cratePresses.length>0,'Level 5 starts with a crate on its press');
+  const ox=Math.floor((20-fifth.rows[0].length)/2),oy=Math.floor((20-fifth.rows.length)/2),fifthFrame=ref.observe().frame;
+  for(const g of cratePresses){const px=2+(g.at.x+ox)*3,py=2+(g.at.y+oy)*3;assert.equal(fifthFrame[py+1][px+1],5);assert.deepEqual([fifthFrame[py][px+1],fifthFrame[py+1][px],fifthFrame[py+1][px+2],fifthFrame[py+2][px+1]],[13,13,13,13],'The initial crate remains visibly brown above the press');}
+  report.checks.push('Level 5 visibly starts with a brown condemned crate on its press and has no initial mirror/press overlap');
+
   $('restart').click();await settled(ref.restart());
   const reflectionIndex=tutorial.findIndex(a=>normal(a).id===5);assert.ok(reflectionIndex>=0);await replay(tutorial.slice(0,reflectionIndex));
   const beforeReflection=ref.observe(),start=captures.length,waitStart=waits.length;assert.equal(key(' '),false);const reflected=ref.action(5);assert.ok(reflected.frames.length>=3);await settled(reflected);

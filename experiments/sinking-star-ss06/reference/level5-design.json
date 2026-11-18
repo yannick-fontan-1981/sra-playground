@@ -1,16 +1,16 @@
 {
   "spec": {
     "id": "ss06-05",
-    "title": "Le miroir condamné",
+    "title": "La caisse condamnée",
     "facing": "E",
     "rows": [
       "~~~~~~~~~~~~~~~",
       "~..~..~~~~~~~~~",
       "~..~..~~~~~~~~~",
       "~M*...~~~~~~~~~",
-      "~..~..~~......~",
+      "~..~.#~~......~",
       "Woo~..~#....g.~",
-      "~~~~#.~.......~",
+      "~~~~#.~o......~",
       "~~~~~#~~......~",
       "~~~~~~~~....g.~",
       "~~~~~~~~......~",
@@ -21,13 +21,6 @@
       {
         "at": {
           "x": 5,
-          "y": 6
-        },
-        "facing": "NE"
-      },
-      {
-        "at": {
-          "x": 7,
           "y": 6
         },
         "facing": "NE"
@@ -56,10 +49,10 @@
       }
     ]
   },
-  "commands": "RUCRRRRUULRURXXRRRUCLDDDRRRUURXRRRRDD",
+  "commands": "RUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
   "source": {
     "puzzle": 18,
-    "label": "Adaptation de principe · Heroes and Mirrors 18 : détruire le miroir qui bloque la traversée.",
+    "label": "Adaptation de principe · Heroes and Mirrors 18 : écraser la caisse qui bloque le reflet, puis rétablir le passage.",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
     "piston": true
   },
@@ -99,10 +92,16 @@
       "id": 3
     },
     {
+      "id": 5
+    },
+    {
       "id": 4
     },
     {
-      "id": 1
+      "id": 2
+    },
+    {
+      "id": 2
     },
     {
       "id": 4
@@ -111,7 +110,13 @@
       "id": 5
     },
     {
-      "id": 5
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 4
@@ -154,16 +159,16 @@
       "id": 4
     },
     {
-      "id": 1
+      "id": 4
     },
     {
-      "id": 1
+      "id": 5
     },
     {
       "id": 4
     },
     {
-      "id": 5
+      "id": 4
     },
     {
       "id": 4

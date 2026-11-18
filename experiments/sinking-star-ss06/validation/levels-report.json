@@ -1,6 +1,6 @@
 {
   "game": "SS06",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "levels": [
     {
       "level": 1,
@@ -8,45 +8,46 @@
       "title": "L’atelier des deux rives",
       "source": {
         "puzzle": 0,
-        "label": "Création originale · Deux rôles, un pont, une presse et une traversée par miroir.",
+        "label": "Création originale · Poussées complémentaires, deux appuis indispensables, presse distante et traversée par miroir.",
         "url": "",
         "piston": true
       },
       "dimensions": [
-        17,
-        14
+        18,
+        12
       ],
-      "floorCells": 99,
-      "waterCells": 138,
+      "floorCells": 47,
+      "waterCells": 5,
       "initialStones": 4,
-      "initialSupports": 1,
+      "initialSupports": 0,
       "initialMonsters": 0,
       "mirrors": 1,
-      "buttons": 2,
       "gates": 2,
-      "actions": 44,
+      "buttons": 1,
+      "actions": 35,
       "selections": 2,
       "merchantPushes": 1,
       "warriorPushes": 3,
       "chainPushes": 1,
       "stoneMoves": 6,
-      "mirrorMoves": 0,
+      "mirrorMoves": 1,
       "reflections": 2,
       "heroReflections": 2,
       "pistonPushes": 1,
-      "platformsCreated": 3,
+      "platformsCreated": 2,
       "monstersRemoved": 0,
       "blocked": 0,
       "deaths": 0,
       "combatWaves": 0,
       "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
-      "frames": 134,
+      "frames": 105,
       "maxFrames": 6,
       "solved": true,
-      "mapSha256": "c8d89a7af7d3b08e5977b156aba44e2913ece5eaf62d31517208073a7e5e232e",
-      "witnessSha256": "c2ebab19475b0ca377ce1eb4e7322d319cc5be0a13a7fbfac880fb64d7ff4a28",
-      "observationsSha256": "4934f18c728d3c75730a3d00b6deb25ea6823542afba3b70d4707b53be65f44d"
+      "mapSha256": "03b60473290c4bd9f86d294fb47db6bdffe229c2b17e7339baa76b665b9a618a",
+      "witnessSha256": "8bd7acdda6591832aec24f1e7ccb27164f1e53b52d558fe3f355f5f89f05c6ed",
+      "observationsSha256": "6e7ca2ab628debde504fe19752f3a83220a37900b8ef6492c80b1e66736ef570"
     },
     {
       "level": 2,
@@ -68,8 +69,8 @@
       "initialSupports": 0,
       "initialMonsters": 0,
       "mirrors": 2,
-      "buttons": 2,
       "gates": 2,
+      "buttons": 2,
       "actions": 35,
       "selections": 2,
       "merchantPushes": 1,
@@ -86,6 +87,7 @@
       "deaths": 0,
       "combatWaves": 0,
       "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 1,
       "frames": 109,
       "maxFrames": 6,
@@ -114,8 +116,8 @@
       "initialSupports": 0,
       "initialMonsters": 0,
       "mirrors": 1,
-      "buttons": 1,
       "gates": 14,
+      "buttons": 1,
       "actions": 119,
       "selections": 3,
       "merchantPushes": 20,
@@ -132,6 +134,7 @@
       "deaths": 0,
       "combatWaves": 0,
       "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "frames": 360,
       "maxFrames": 4,
@@ -160,8 +163,8 @@
       "initialSupports": 0,
       "initialMonsters": 0,
       "mirrors": 1,
-      "buttons": 0,
       "gates": 0,
+      "buttons": 0,
       "actions": 35,
       "selections": 2,
       "merchantPushes": 2,
@@ -178,21 +181,22 @@
       "deaths": 0,
       "combatWaves": 0,
       "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "frames": 102,
       "maxFrames": 4,
       "solved": true,
       "mapSha256": "4e571816768641d9d8ce8da97711bb1868526a03bad601106caf917bc544c5fa",
       "witnessSha256": "544f36e5065f3c460717b0b3371365c1a75943cc1235720d1f6e17ee34cdc8d4",
-      "observationsSha256": "0aa2f2795f1892372b125609d51307a206a21a5e4c315d0f538cbb2887576672"
+      "observationsSha256": "f63018f4fecdeb2fba15386f74fcd90059b5318484716d63f0116545d3cdbae4"
     },
     {
       "level": 5,
       "id": "ss06-05",
-      "title": "Le miroir condamné",
+      "title": "La caisse condamnée",
       "source": {
         "puzzle": 18,
-        "label": "Adaptation de principe · Heroes and Mirrors 18 : détruire le miroir qui bloque la traversée.",
+        "label": "Adaptation de principe · Heroes and Mirrors 18 : écraser la caisse qui bloque le reflet, puis rétablir le passage.",
         "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
         "piston": true
       },
@@ -200,15 +204,15 @@
         15,
         12
       ],
-      "floorCells": 66,
+      "floorCells": 65,
       "waterCells": 111,
-      "initialStones": 3,
+      "initialStones": 4,
       "initialSupports": 0,
       "initialMonsters": 0,
-      "mirrors": 2,
-      "buttons": 1,
+      "mirrors": 1,
       "gates": 1,
-      "actions": 37,
+      "buttons": 1,
+      "actions": 41,
       "selections": 2,
       "merchantPushes": 1,
       "warriorPushes": 5,
@@ -223,14 +227,15 @@
       "blocked": 0,
       "deaths": 0,
       "combatWaves": 0,
-      "mirrorsDestroyed": 1,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 1,
       "simultaneousHeroReflections": 0,
-      "frames": 110,
+      "frames": 122,
       "maxFrames": 4,
       "solved": true,
-      "mapSha256": "f7a64ecb666c6c6c831d8019e003168c4357a4987d84bd9097215af69db90557",
-      "witnessSha256": "4b23399152fe175035ecb940e89b8bd1ad0e2b2f90ecbfee74bd0b104ec98bf0",
-      "observationsSha256": "f938babc81ca898e3c2ff5cc4c217de763d8c9a780e05882c0d036b7bc7f1a7b"
+      "mapSha256": "18a50e08303924ca641dbe493d7ee3feb44959c4845ce36a08788074b69ae350",
+      "witnessSha256": "a201039cdbd661e6b426a57aa632e8f60a9de5706f157b8ea510bdc74c293adf",
+      "observationsSha256": "3e33308526a527e6ecace952da963e77917f5bd643a8b2022610c9a9b5f1a5a6"
     },
     {
       "level": 6,
@@ -252,8 +257,8 @@
       "initialSupports": 1,
       "initialMonsters": 4,
       "mirrors": 1,
-      "buttons": 2,
       "gates": 2,
+      "buttons": 2,
       "actions": 37,
       "selections": 2,
       "merchantPushes": 2,
@@ -270,6 +275,7 @@
       "deaths": 0,
       "combatWaves": 2,
       "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "frames": 120,
       "maxFrames": 9,
@@ -298,8 +304,8 @@
       "initialSupports": 1,
       "initialMonsters": 2,
       "mirrors": 1,
-      "buttons": 2,
       "gates": 2,
+      "buttons": 2,
       "actions": 68,
       "selections": 4,
       "merchantPushes": 0,
@@ -316,6 +322,7 @@
       "deaths": 0,
       "combatWaves": 1,
       "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "frames": 209,
       "maxFrames": 11,
@@ -344,8 +351,8 @@
       "initialSupports": 1,
       "initialMonsters": 2,
       "mirrors": 2,
-      "buttons": 5,
       "gates": 4,
+      "buttons": 5,
       "actions": 43,
       "selections": 2,
       "merchantPushes": 1,
@@ -362,6 +369,7 @@
       "deaths": 0,
       "combatWaves": 1,
       "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 1,
       "frames": 140,
       "maxFrames": 11,
@@ -372,22 +380,23 @@
     }
   ],
   "totals": {
-    "actions": 418,
+    "actions": 413,
     "selections": 19,
     "merchantPushes": 28,
     "warriorPushes": 52,
     "chainPushes": 23,
     "stoneMoves": 98,
-    "mirrorMoves": 32,
+    "mirrorMoves": 33,
     "reflections": 29,
     "heroReflections": 16,
     "pistonPushes": 5,
-    "platformsCreated": 18,
+    "platformsCreated": 17,
     "monstersRemoved": 8,
     "combatWaves": 4,
-    "mirrorsDestroyed": 1,
+    "mirrorsDestroyed": 0,
+    "cratesCrushed": 1,
     "simultaneousHeroReflections": 2,
-    "frames": 1284
+    "frames": 1267
   },
   "success": true,
   "failureRoutes": [
@@ -408,12 +417,44 @@
   ],
   "mechanismChecks": [
     {
+      "level": 1,
+      "option": "disableWarriorChains",
+      "status": "unsolvable",
+      "states": 784,
+      "expanded": 784,
+      "ms": 19
+    },
+    {
+      "level": 1,
+      "option": "disablePistons",
+      "status": "unsolvable",
+      "states": 2668,
+      "expanded": 2668,
+      "ms": 72
+    },
+    {
+      "level": 1,
+      "option": "disablePlatforms",
+      "status": "unsolvable",
+      "states": 784,
+      "expanded": 784,
+      "ms": 30
+    },
+    {
+      "level": 1,
+      "option": "disableReflections",
+      "status": "unsolvable",
+      "states": 5736,
+      "expanded": 5736,
+      "ms": 102
+    },
+    {
       "level": 2,
       "option": "disableMirrorMotion",
       "status": "unsolvable",
       "states": 2608,
       "expanded": 2608,
-      "ms": 94
+      "ms": 92
     },
     {
       "level": 2,
@@ -421,7 +462,15 @@
       "status": "unsolvable",
       "states": 156,
       "expanded": 156,
-      "ms": 6
+      "ms": 4
+    },
+    {
+      "level": 5,
+      "option": "disablePistons",
+      "status": "unsolvable",
+      "states": 42650,
+      "expanded": 42650,
+      "ms": 830
     },
     {
       "level": 7,
@@ -429,7 +478,7 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 103
+      "ms": 66
     },
     {
       "level": 7,
@@ -437,10 +486,58 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 85
+      "ms": 69
+    },
+    {
+      "level": 1,
+      "option": "removeCrate",
+      "at": {
+        "x": 3,
+        "y": 3
+      },
+      "status": "unsolvable",
+      "states": 8076,
+      "expanded": 8076,
+      "ms": 138
+    },
+    {
+      "level": 1,
+      "option": "removeCrate",
+      "at": {
+        "x": 6,
+        "y": 4
+      },
+      "status": "unsolvable",
+      "states": 2056,
+      "expanded": 2056,
+      "ms": 31
+    },
+    {
+      "level": 1,
+      "option": "removeCrate",
+      "at": {
+        "x": 7,
+        "y": 4
+      },
+      "status": "unsolvable",
+      "states": 2840,
+      "expanded": 2840,
+      "ms": 44
+    },
+    {
+      "level": 1,
+      "option": "removeCrate",
+      "at": {
+        "x": 8,
+        "y": 8
+      },
+      "status": "unsolvable",
+      "states": 5736,
+      "expanded": 5736,
+      "ms": 88
     }
   ],
-  "htmlSha256": "f3a3b3a8371545c0bfe5c98b0096d91d2860324994adabb089cbb53dc38a1acb",
+  "htmlSha256": "51a3ce06f8718acc88440ac8f89bab0c8a0513a1eedb088c54f0bee4a678d5b2",
   "limitations": [
     "Adaptations are explicit, not certified cell-for-cell copies of the original game.",
     "Witnesses prove solvability, not optimality or autonomous SRA success.",

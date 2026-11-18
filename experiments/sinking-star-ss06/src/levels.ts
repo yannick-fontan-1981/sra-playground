@@ -3,48 +3,37 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
   {
     "id": "ss06-01",
     "title": "L’atelier des deux rives",
-    "facing": "S",
     "rows": [
-      "~~~~~~~~~~~~~~~~~",
-      "~.......~~~~~~~~~",
-      "~.M.W...~~~~~~~~~",
-      "~.o.o...~~~~~~~~~",
-      "~...o...~~~~~~~~~",
-      "~s~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~",
-      "~.....~.~~......~",
-      "~.....~.~~....g.~",
-      "~...#o~.~~......~",
-      "~.....~.~~....g.~",
-      "~.....~.~~......~",
-      "~.....~.~~......~",
-      "~~~~~~~~~~~~~~~~~"
+      "##################",
+      "##################",
+      "#M#.#.############",
+      "#.#o#.####...#####",
+      "#.....oo~~...#####",
+      "#.W...####...#####",
+      "##########.#######",
+      "##########~##....#",
+      "########o..~~....#",
+      "#############....#",
+      "#############g..g#",
+      "##################"
     ],
+    "facing": "E",
     "mirrors": [
       {
         "at": {
-          "x": 7,
-          "y": 11
+          "x": 9,
+          "y": 8
         },
         "facing": "NE"
       }
     ],
     "circuits": [
       {
-        "id": "passage",
-        "buttons": [
-          {
-            "x": 2,
-            "y": 4
-          }
-        ]
-      },
-      {
-        "id": "presse",
+        "id": "atelier",
         "buttons": [
           {
             "x": 3,
-            "y": 9
+            "y": 2
           }
         ]
       }
@@ -52,21 +41,21 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
     "gates": [
       {
         "at": {
-          "x": 4,
-          "y": 7
+          "x": 8,
+          "y": 8
         },
-        "circuit": "passage",
-        "direction": "S",
-        "closedWhen": "released"
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "pressed"
       },
       {
         "at": {
-          "x": 5,
-          "y": 9
+          "x": 10,
+          "y": 6
         },
-        "circuit": "presse",
-        "direction": "E",
-        "closedWhen": "pressed"
+        "circuit": "atelier",
+        "direction": "S",
+        "closedWhen": "released"
       }
     ]
   },
@@ -306,16 +295,16 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
   },
   {
     "id": "ss06-05",
-    "title": "Le miroir condamné",
+    "title": "La caisse condamnée",
     "facing": "E",
     "rows": [
       "~~~~~~~~~~~~~~~",
       "~..~..~~~~~~~~~",
       "~..~..~~~~~~~~~",
       "~M*...~~~~~~~~~",
-      "~..~..~~......~",
+      "~..~.#~~......~",
       "Woo~..~#....g.~",
-      "~~~~#.~.......~",
+      "~~~~#.~o......~",
       "~~~~~#~~......~",
       "~~~~~~~~....g.~",
       "~~~~~~~~......~",
@@ -326,13 +315,6 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
       {
         "at": {
           "x": 5,
-          "y": 6
-        },
-        "facing": "NE"
-      },
-      {
-        "at": {
-          "x": 7,
           "y": 6
         },
         "facing": "NE"

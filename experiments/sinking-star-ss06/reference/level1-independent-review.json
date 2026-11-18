@@ -1,0 +1,239 @@
+{
+  "oldBypass": {
+    "spec": {
+      "id": "ss06-01",
+      "title": "L’atelier des deux rives",
+      "facing": "S",
+      "rows": [
+        "~~~~~~~~~~~~~~~~~",
+        "~.......~~~~~~~~~",
+        "~.M.W...~~~~~~~~~",
+        "~.o.o...~~~~~~~~~",
+        "~...o...~~~~~~~~~",
+        "~s~~~~~~~~~~~~~~~",
+        "~~~~~~~~~~~~~~~~~",
+        "~.....~.~~......~",
+        "~.....~.~~....g.~",
+        "~...#o~.~~......~",
+        "~.....~.~~....g.~",
+        "~.....~.~~......~",
+        "~.....~.~~......~",
+        "~~~~~~~~~~~~~~~~~"
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "circuits": [
+        {
+          "id": "passage",
+          "buttons": [
+            {
+              "x": 2,
+              "y": 4
+            }
+          ]
+        },
+        {
+          "id": "presse",
+          "buttons": [
+            {
+              "x": 3,
+              "y": 9
+            }
+          ]
+        }
+      ],
+      "gates": [
+        {
+          "at": {
+            "x": 4,
+            "y": 7
+          },
+          "circuit": "passage",
+          "direction": "S",
+          "closedWhen": "released"
+        },
+        {
+          "at": {
+            "x": 5,
+            "y": 9
+          },
+          "circuit": "presse",
+          "direction": "E",
+          "closedWhen": "pressed"
+        }
+      ]
+    },
+    "commands": "RDLULDDDDDDDDRRRRUDLLLUURRRRRXRRRRUCLLLDDDDDDRRRRRRXRRRUUUR",
+    "complete": true,
+    "metrics": {
+      "actions": 59,
+      "selections": 1,
+      "merchantPushes": 6,
+      "warriorPushes": 0,
+      "chainPushes": 0,
+      "stoneMoves": 6,
+      "mirrorMoves": 0,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 0,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "untouchedCrates": [
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 4
+      }
+    ],
+    "reasons": [
+      "Initial support at (1,5) plus Merchant crate produces a path in column 1, bypassing the Warrior chain and entry gate.",
+      "Press crate can move from (5,9) to (5,8) and be pushed east from (4,8), constructing a mirror approach without the press."
+    ]
+  },
+  "newProposal": {
+    "spec": {
+      "id": "ss06-01",
+      "title": "L’atelier des deux rives",
+      "rows": [
+        "##################",
+        "##################",
+        "#M#.#.############",
+        "#.#o#.####...#####",
+        "#.....oo~~...#####",
+        "#.W...####...#####",
+        "##########.#######",
+        "##########~##....#",
+        "########o..~~....#",
+        "#############....#",
+        "#############g..g#",
+        "##################"
+      ],
+      "facing": "E",
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "circuits": [
+        {
+          "id": "atelier",
+          "buttons": [
+            {
+              "x": 3,
+              "y": 2
+            }
+          ]
+        }
+      ],
+      "gates": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "circuit": "atelier",
+          "direction": "E",
+          "closedWhen": "pressed"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 6
+          },
+          "circuit": "atelier",
+          "direction": "S",
+          "closedWhen": "released"
+        }
+      ]
+    },
+    "commands": "DDRRUCRRRURRRRRUXRDDCDRRRRRRRUXLLDD",
+    "complete": true,
+    "metrics": {
+      "actions": 35,
+      "selections": 2,
+      "merchantPushes": 1,
+      "warriorPushes": 3,
+      "chainPushes": 1,
+      "stoneMoves": 6,
+      "mirrorMoves": 1,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "findings": [],
+    "independentProofs": [
+      {
+        "label": "normal",
+        "status": "solved",
+        "states": 8072,
+        "expanded": 8066,
+        "commands": "DDRRUDCURRRRRRRRUXDDRCDLXDD"
+      },
+      {
+        "label": "forbidWarriorChain",
+        "status": "unsolvable",
+        "states": 784,
+        "expanded": 784
+      },
+      {
+        "label": "forbidPressPushOrCrush",
+        "status": "unsolvable",
+        "states": 2668,
+        "expanded": 2668
+      },
+      {
+        "label": "forbidReflection",
+        "status": "unsolvable",
+        "states": 5736,
+        "expanded": 5736
+      },
+      {
+        "label": "keepOriginal_merchantCrate_unmoved",
+        "status": "unsolvable",
+        "states": 2668,
+        "expanded": 2668
+      },
+      {
+        "label": "keepOriginal_rearFileCrate_unmoved",
+        "status": "unsolvable",
+        "states": 784,
+        "expanded": 784
+      },
+      {
+        "label": "keepOriginal_frontFileCrate_unmoved",
+        "status": "unsolvable",
+        "states": 784,
+        "expanded": 784
+      },
+      {
+        "label": "keepOriginal_transmissionCrate_unmoved",
+        "status": "unsolvable",
+        "states": 2668,
+        "expanded": 2668
+      }
+    ],
+    "method": "Independent BFS over all accepted commands UDLRXC; forbidden transitions are removed, never altered. Freezing a crate forbids any motion from its initial square and requires it remain present there. Exhausted queues are impossibility proofs; limits would be inconclusive.",
+    "recommendation": "Accept: Warrior chain, press action, reflections, and movement of all four initial crates are necessary."
+  }
+}

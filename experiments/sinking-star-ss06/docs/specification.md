@@ -1,4 +1,4 @@
-# Contrat SS06 0.1.0
+# Contrat SS06 0.1.1
 
 ## Grille et états
 

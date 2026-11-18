@@ -11,6 +11,7 @@
     "Undo during an animation restores both heroes and cancels stale callbacks",
     "Reset, level changes and return to tutorial cancel pending animation callbacks and reset the appropriate counters",
     "Every level displays its own source attribution and relevant piston help, with all eight rooms available",
+    "Level 5 visibly starts with a brown condemned crate on its press and has no initial mirror/press overlap",
     "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
     "The complete tutorial earns all eight discoveries, including both push strengths, platform, reflection, gate and two simultaneous goals",
     "All eight witnesses replay through the actual UI with exact frames and timing; victory needs all rooms and disables direction, reflection and hero selection",
@@ -19,8 +20,8 @@
   ],
   "witnessCoverage": {
     "levels": 8,
-    "actions": 418,
-    "frames": 1284,
+    "actions": 413,
+    "frames": 1267,
     "selectionActions": 19,
     "allFrameDurationsVerified": true
   },
