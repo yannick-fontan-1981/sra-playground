@@ -2155,3 +2155,11 @@ SIC remesure la grille et les rails à partir du terrain, puis distingue le jeto
 La commande 43 réutilise l'auxiliaire comme appui et révèle trois jetons verts supplémentaires. La commande 91 déclenche la victoire officielle. Les mouvements compatibles avec les mêmes rails s'enchaînent en séries vérifiées, interrompues si la caméra bouge ou si de nouveaux jetons apparaissent.
 
 Le rejeu chronologique gagne en **91 commandes et 56,12 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **243 commandes** et les retours des niveaux 1 à 5 reproduisent les empreintes de la campagne précédente. Les 334 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `0b495c4f4d710f633d2bffd3e652d4227c8f9504a5672bc8caf7bef9e87d4939`. TypeScript et les **144 tests ciblés** passent. La couverture atteint **568/636 niveaux (89,3 %)**, dont **69/99 niveaux 6 (69,7 %)**.
+
+### LKEY niveau 6, distinguer les effets des outils sur les dents
+
+Les deux nouveaux outils changent les hauteurs. Au premier essai, la **commande 4** transforme `[4,1,2,4,3]` en `[1,4,3,1,2]`. Le modèle précédent cherchait une permutation et rejetait ce retour. SIC compare maintenant le réordonnancement et le complément de chaque dent dans la plage mesurée. La **commande 6** confirme un complément limité aux positions 1, 3 et 5. Les autres profils et les serrures conservent leurs contours pendant chacun de ces essais.
+
+SIC prépare un profil à la fois et compare les trajets selon le profil tenu et les outils accessibles. Il vérifie la position du curseur, les contours et l'état des serrures après chaque commande. Le décalage appris sur un niveau précédent complète les deux nouveaux effets. Les commandes **11 et 30** ajustent les deux serrures.
+
+Le rejeu chronologique gagne en **30 commandes et 12,80 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **87 commandes** et retours des niveaux 1 à 5 reproduisent la référence. Les 117 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `e7887e25bb1d8f3c1ddaa32107649b79dad963ef642f320ddd8aea5dd14978a5`. TypeScript et les **171 tests ciblés** passent. La couverture atteint **569/636 niveaux (89,5 %)**, dont **70/99 niveaux 6 (70,7 %)**.
