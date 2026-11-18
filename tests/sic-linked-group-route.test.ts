@@ -4,22 +4,23 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
 import { createSicLinkedGroupRoute } from '../src/sic/linked-group-route.ts';
 
-test('a partial pickup updates the linked body only when its previous colors remain', async () => {
+test('a partly covered pickup must preserve earlier colors and have a visible source', async () => {
   const mask = Array.from({ length: 25 }, (_, i): NativePoint => [i % 5, Math.floor(i / 5)])
     .filter(([x, y]) => !((x === 0 || x === 4) && (y === 0 || y === 4)));
   const outline = mask.filter(([x, y]) => x === 0 || x === 4 || y === 0 || y === 4);
-  const anchors = [[9, 6], [17, 6]] as const, point = [9, 20] as const, pickupCenter = [9, 13] as const;
+  const anchors = [[13, 15], [17, 6]] as const, point = [5, 11] as const, pickupCenter = [9, 13] as const;
   const render = (phase: 'before' | 'preserved' | 'overwritten') => {
     const rows = Array.from({ length: 32 }, () => Array<number>(32).fill(5));
     const paint = ([x, y]: NativePoint, shape: readonly NativePoint[], left: number, right = left) => {
       for (const [dx, dy] of shape) rows[y + dy - 2]![x + dx - 2] = dx < 2 ? left : right;
     };
+    if (phase === 'before') {
+      paint([15, 10], mask, 0, 6);
+      paint(pickupCenter, mask, 2, 0);
+    }
     paint(anchors[0], outline, 3);
     paint(phase === 'before' ? anchors[1] : point, outline, 9);
-    if (phase === 'before') {
-      paint([13, 6], mask, 0, 6);
-      paint(pickupCenter, mask, 2, 0);
-    } else paint(pickupCenter, mask, 2, phase === 'preserved' ? 6 : 0);
+    if (phase !== 'before') paint(pickupCenter, mask, 2, phase === 'preserved' ? 6 : 0);
     return rows;
   };
   const observe = (frame_rows: number[][], revision: number) => measureNativeObservation({ frame_rows,
@@ -39,4 +40,8 @@ test('a partial pickup updates the linked body only when its previous colors rem
     const outcome = await family.after!(proposal, 0, before, after, first, second, []);
     assert.equal(outcome.matched, phase === 'preserved');
   }
+  const unrelated = structuredClone(first);
+  unrelated[12]![8] = 3;
+  const second = render('preserved'), after = await observe(second, 2);
+  assert.equal((await family.after!(proposal, 0, before, after, unrelated, second, [])).matched, false);
 });
