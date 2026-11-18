@@ -8,6 +8,7 @@ import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { readPopulationZones, populationZoneTargets, type PopulationZone } from './population-zones.ts';
 
 export const populationPlacementId = 'sic_population_placement';
 export const verifyReferencePlacementId = 'sic_verify_reference_placement';
@@ -21,7 +22,7 @@ export const populationPlacementStrategies = {
 type Cell = ReferencePopulationCell;
 type Scene = { q: number; offset: Cell; floor: Cell[]; zone_box: NativeBox; reference_box: NativeBox; reference_digest: string;
   target: [number, number, number][]; background: number; empty: number; border: number; population: number;
-  bodies: { cell: Cell; appearance: number }[]; observed_marker_overlays?: number[][] };
+  bodies: { cell: Cell; appearance: number }[]; observed_marker_overlays?: number[][]; comparisonCells?: Cell[] };
 type Controls = Record<string, { delta: Cell }>;
 type Neighborhood = Partial<Record<number, { appearance: number | null; ref: string }>>;
 type Support = { cells: Cell[]; evidence: string[] };
@@ -35,6 +36,8 @@ type Proposal = NativeProposal & { local: State; choice: Choice; route?: Choice[
 const key = referencePopulationCellKey;
 const supportKey = (cells: readonly Cell[]) => cells.length === 1 ? key(cells[0]!)
   : JSON.stringify([...cells].sort(([row, col], [otherRow, otherCol]) => row - otherRow || col - otherCol));
+const supportAttempt = (scene: Scene, cells: readonly Cell[]) => scene.comparisonCells
+  ? JSON.stringify([scene.target, supportKey(cells)]) : supportKey(cells);
 const cardinal = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
 const neighbors: readonly Cell[] = [[-1, 0], [1, 0], [0, -1], [0, 1]];
 const distance = ([y, x]: Cell, [r, c]: Cell) => Math.abs(y - r) + Math.abs(x - c);
@@ -144,15 +147,16 @@ function planSupport(local: State, controls: Controls, deadline: number): { supp
   if (!neighborhood) return null;
   const target = scene.target.map(([row, col]): Cell => [row, col]), surplus = scene.population - target.length;
   const targetKeys = new Set(target.map(key)), floor = new Set(scene.floor.map(key));
+  const compared = new Set(scene.comparisonCells?.map(key));
   const candidates = new Map<string, Cell>();
   for (const [row, col] of target) for (const [dy, dx] of neighbors) {
     const cell: Cell = [row + dy, col + dx], id = key(cell);
-    if (floor.has(id) && !targetKeys.has(id)) candidates.set(id, cell);
+    if (floor.has(id) && !targetKeys.has(id) && !compared.has(id)) candidates.set(id, cell);
   }
   const positions = [...candidates.values()], rejected = new Set(local.rejectedSupport);
   let best: { support: Support; ordered: Choice[] } | null = null;
   const evaluate = (cells: Cell[]) => {
-    if (rejected.has(supportKey(cells))) return;
+    if (rejected.has(supportAttempt(scene, cells))) return;
     const evidence = supportEvidence(scene, cells, neighborhood);
     if (!evidence) return;
     const plan = orderReferencePlacements(scene, controls, deadline, [...target, ...cells]);
@@ -170,6 +174,17 @@ function planSupport(local: State, controls: Controls, deadline: number): { supp
     }
   }
   choose(0, []);
+  return best;
+}
+
+function planInMeasuredZone(local: State, controls: Controls, zones: PopulationZone[], deadline: number) {
+  let best: { scene: Scene; support: Support; ordered: Choice[] } | null = null;
+  for (const { positions, zone } of populationZoneTargets(local.scene.target, zones)) {
+    if (performance.now() >= deadline) break;
+    const scene = { ...local.scene, target: positions, zone_box: zone.box, comparisonCells: zone.cells };
+    const plan = planSupport({ ...local, scene }, controls, deadline);
+    if (plan && (!best || plan.ordered.length < best.ordered.length)) best = { ...plan, scene };
+  }
   return best;
 }
 
@@ -212,9 +227,9 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       }) : null;
       if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
       const previous = witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed ? witness : null;
-      const scene = prior?.scene ?? click?.scene.scene ?? (measureReferencePopulation(rows) as Scene | null)
+      let scene = prior?.scene ?? click?.scene.scene ?? (measureReferencePopulation(rows) as Scene | null)
         ?? (previous?.neighborhood ? measureReferencePopulation(rows, null, { allowSurplus: true }) as Scene | null : null);
-      if (!scene || scene.floor.length > 256 || scene.population > 8) return null;
+      if (!scene || scene.floor.length > 256) return null;
       if ((prior?.probes ?? 0) >= Math.max(20, scene.population * available.length)) return null;
       const transferred = previous?.pitch === scene.q ? previous : null;
       let local: State = prior ?? { epoch: observation.level_epoch, scene, selection: click?.scene.selection ?? null, active: false,
@@ -229,14 +244,18 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       if (!local.ordered?.length && Object.keys(controls).length === available.length) {
         const deadline = Math.min(execution?.deadlineMs ?? Infinity, performance.now() + 300);
         if (surplus > 0) {
-          const support = planSupport(local, controls, deadline);
-          if (support) local = { ...local, ...support };
+          const zones = readPopulationZones(rows, scene);
+          const support = zones.length > 1 ? planInMeasuredZone(local, controls, zones, deadline) : planSupport(local, controls, deadline);
+          if (support) {
+            local = { ...local, ...support };
+            scene = local.scene;
+          }
         } else if (surplus === 0) {
           const plan = orderReferencePlacements(scene, controls, deadline);
           if (plan?.length) local = { ...local, ordered: plan };
         }
       }
-      if (surplus && !local.ordered?.length) return null;
+      if ((surplus || scene.population > 8) && !local.ordered?.length) return null;
       const targets = scene.target.map(([y, x]): Cell => [y, x]);
       if (local.support) targets.push(...local.support.cells);
       const occupied = new Set(scene.bodies.map(body => key(body.cell)));
@@ -426,7 +445,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
         active: local.active || !!destination, tried, controls, stopped: !measured, changedNeighbors: neighbors,
         ...(choice.ordered ? { ordered: contradicted ? [] : local.ordered!.slice(1) } : {}),
         ...(measured ? { neighborhood: rememberNeighborhood(measured.next, local.neighborhood, after.observation_ref) } : {}),
-        ...(exhaustedSupport ? { support: null, rejectedSupport: [...(local.rejectedSupport ?? []), supportKey(local.support!.cells)] } : {}),
+        ...(exhaustedSupport ? { support: null, rejectedSupport: [...(local.rejectedSupport ?? []), supportAttempt(local.scene, local.support!.cells)] } : {}),
         ...(assignment || local.assignment ? { assignment } : {}),
         probes: (local.probes ?? 0) + Number(strategy === 'test_selected_displacement' || contradicted) };
       return { events: [], ...(neighbors.length ? { reviewEvidence: 'A stationary neighbor changed appearance after the selected piece moved' } : {}) };
