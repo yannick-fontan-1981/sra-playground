@@ -2008,4 +2008,12 @@ SIC contrôle les réservations pendant la saisie et vérifie les quantités, la
 
 Le rejeu chronologique gagne en **50 commandes et 36,48 s** au niveau 6, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **60 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 110 commandes relèvent de SIC. TypeScript et les **62 tests ciblés** passent, dont la comparaison des 100 rasters initiaux et un cas avec deux ensembles de cadres. Empreinte `4fb20580a611b668663c3bac9fdb83ffb0454a6541c53edb59572be442d5659d`. La couverture atteint **550/636 niveaux (86,5 %)**, dont **51/99 niveaux 6 (51,5 %)**.
 
+### LP85 niveau 6, distinguer les décalages sur les rayons et les anneaux
+
+Le plateau contient 75 cases et trois cibles. SIC mesure trois groupes de cases disposés en anneaux régulièrement espacés. Sept essais `P05` identifient les décalages sur les rayons, les décalages le long des anneaux et l'échange des trois cibles avec leurs voisines. Des clics distincts depuis la sauvegarde reproduisent chacun de ces effets sur d'autres dispositions.
+
+La recherche remonte depuis les cases marquées. Elle borne les combinaisons à partir des cases reliées à chaque cible par les permutations mesurées. Dans ce niveau, chaque cible est reliée aux 24 cases d'un seul groupe. Le produit borne la recherche à **15 625 configurations** sous la limite de 32 768. SIC effectue **13 clics continus `P07`** avec vérification des permutations sur le plateau entier après chaque retour. Le dernier échange livre les trois couleurs.
+
+Le rejeu chronologique gagne le niveau 6 en **20 clics et 7,53 s**, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **74 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 94 commandes relèvent de SIC. Le rejeu s'arrête à la victoire du niveau 6. TypeScript et les **50 tests ciblés** passent. Empreinte `4ad804933315cc6f4a02e13a870507fe4fe735e676a5c527765a8e5b732219de`. La couverture atteint **551/636 niveaux (86,6 %)**, dont **52/99 niveaux 6 (52,5 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
