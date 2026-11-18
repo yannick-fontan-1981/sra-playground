@@ -1977,3 +1977,13 @@ SIC reconnaît le contour du relais appris et sa vanne en amont de la tour. Il i
 Le rejeu depuis le niveau 1 gagne en **57 commandes SIC seul**. Les **42 commandes des niveaux 1 à 5** et leurs retours reproduisent les empreintes de la référence. Le niveau 6 gagne en **15 clics et 10,77 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit les 15 clics. TypeScript et les **2 tests ciblés** passent. La couverture atteint **546/636 niveaux (85,8 %)**, dont **47/99 niveaux 6 (47,5 %)**.
 
 Empreinte jusqu'à la victoire `3679e26e7b98a7acd4abd3f322750cad1dc5acec61550673ee1fc829ae1da50a`.
+
+### R11L niveau 6, retrouver les ancres et vérifier les ressources partiellement masquées
+
+La référence s'arrête après 43 clics au niveau 6. Les pixels de l'ancre active touchent ceux de la balise voisine, si bien que les deux formes appartiennent à la même composante. SIC réapplique le masque appris aux contours visibles. Il retient la partition dont les moyennes correspondent aux deux balises. Les ressources visibles permettent de composer les signatures de deux des trois cibles.
+
+Les clics 2, 3 et 6 construisent la première signature et le clic 9 confirme son arrivée. SIC préserve les ancres encore visibles du groupe livré dans les trajets de collecte. Les clics 13, 16 et 21 complètent la seconde signature. Quand une ancre masque une partie d'une ressource, les pixels visibles doivent rester compatibles avec la signature mesurée. Le retour doit confirmer le nouvel apport et la préservation des couleurs précédentes. Le clic 26 confirme la victoire.
+
+Le rejeu depuis le niveau 1 gagne en **97 commandes SIC seul**. Les **71 commandes des niveaux 1 à 5** et leurs retours gardent les empreintes de la référence. Le niveau 6 gagne en **26 clics et 12,58 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde retrouve les mêmes clics et confirme les 26 retours. TypeScript et le test ciblé passent. La couverture atteint **547/636 niveaux (86,0 %)**, dont **48/99 niveaux 6 (48,5 %)**.
+
+Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
