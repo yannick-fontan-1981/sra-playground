@@ -181,7 +181,8 @@ export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> 
       const current = readCatalogue(observation, rows, witness.visitedBorder);
       if (!current) return null;
       const transferable = witness.factors.filter(known => current.factors.some(factor => key(factor.values) === key(known.values)));
-      if (transferable.length < 2) return null;
+      const clickEvidence = witness.factors.filter(known => known.input === 'ACTION6');
+      if (transferable.length < 2 && clickEvidence.length < 2) return null;
       if (current.cards.length - current.visited.length > remaining) return null;
       const choice = chooseConfiguration(current);
       if (!choice) return null;
@@ -191,7 +192,8 @@ export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> 
       const known = observations.some(entry => key(entry.values) === key(factor.values));
       const strategy = known ? 'cover_next_configuration' : 'test_visible_factor_cycle', label = visibleConfigurationStrategies[strategy];
       const ref = observation.observation_ref, parent = 'G_official_completion';
-      const evidence: [string, ...string[]] = [ref, ...new Set([witness.boundary, ...observations.map(entry => entry.ref)].filter(item => item !== ref))];
+      const support = transferable.length >= 2 ? observations : [...clickEvidence, ...observations];
+      const evidence: [string, ...string[]] = [ref, ...new Set([witness.boundary, ...support.map(entry => entry.ref)].filter(item => item !== ref))];
       const [x, y] = center(factor.box), action = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
       const goal = { kind: 'cover_displayed_tuple_catalogue', scope: ref.split(':revision:', 1)[0]!,
