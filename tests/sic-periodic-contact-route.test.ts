@@ -23,6 +23,21 @@ test('the same movement into an opening has two successors at two measured phase
   assert.deepEqual(path[0]?.pose.phases, [1]);
 });
 
+test('a periodic extension carries the actor past the band while a fitted payload stays in place', () => {
+  const field = Array<number>(30).fill(0);
+  field.fill(1, 10, 20);
+  const room: PeriodicContactRoute = {
+    ...route, size: [5, 6], field, goal: 7,
+    rhythms: [{ side: 1, period: 2, reach: 1 }],
+    payloads: [{ mask: [[0, 0], [1, 0], [0, 1]], ink: 7, goal: 0 }],
+    pose: { actor: 22, sources: [27], phases: [1], payloads: [0] },
+  };
+  assert.deepEqual(planPeriodicContact(room, directions, 1), [{
+    direction: directions[0], contact: null, automatic: [0], pose: { actor: 7, sources: [27], phases: [0], payloads: [0] },
+  }]);
+  assert.equal(planPeriodicContact({ ...room, payloads: [{ ...room.payloads![0]!, goal: 1 }] }, directions, 1).length, 0);
+});
+
 test('compose a contact across the learned continuation band and an independent voluntary move', () => {
   const corridor: PeriodicContactRoute = {
     ...route, size: [8, 1], field: [0, 0, 0, 1, 1, 1, 0, 0], goal: 2,

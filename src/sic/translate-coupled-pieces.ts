@@ -246,13 +246,13 @@ function proposePeriodicRoute(id: string, observation: NativeObservation, rows: 
   const timed = calibratedPeriodicContact(route);
   if (route.stopped || !matchesPeriodicContact(route, rows) || !timed && route.samples >= 12) return null;
   const keys = directions.filter(([key]) => observation.available_action_refs.includes(key));
-  const path = planPeriodicContact(route, keys, Math.min(remaining, 48));
+  const path = route.payloads && !timed ? [] : planPeriodicContact(route, keys, Math.min(remaining, route.payloads ? 96 : 48));
   const first = timed ? path[0] : choosePeriodicSample(route, path, keys);
   if (!first) return null;
-  const contact = first.contact !== null || first.automatic.length > 0;
+  const contact = first.contact !== null || first.automatic.length > 0 || first.payloadContact !== undefined;
   const batch = [first];
   if (timed && !contact) for (const move of path.slice(1, Math.min(maximumCommittedActions, remaining))) {
-    if (move.contact !== null || move.automatic.length) break;
+    if (move.contact !== null || move.automatic.length || move.payloadContact !== undefined) break;
     batch.push(move);
   }
   const ref = observation.observation_ref;
@@ -268,6 +268,7 @@ function proposePeriodicRoute(id: string, observation: NativeObservation, rows: 
   const box = (source: number, at = route.pose.sources[source]!) => periodicContactBox(route, at, route.sources[source]!.size);
   const reason = !timed ? 'Approach the opening and measure when the moving fronts extend and retract'
     : first.contact !== null ? 'Clear the passage by projecting the contacted pusher across the separating band'
+      : first.payloadContact !== undefined ? 'Project the shaped payload into the matching opening'
       : first.automatic.length ? 'Use the measured extension to move the controlled piece toward the opening'
         : 'Follow the route that reaches the opening between the measured extensions';
   const parent = 'G_official_completion';
@@ -282,6 +283,11 @@ function proposePeriodicRoute(id: string, observation: NativeObservation, rows: 
     steps: actions.map((action, i) => ({ action, expected_after: timed ? batch[i]!.pose : null })),
     sicSituationCard: { strategy: choice.selected.id, need: 'Reach the matching opening through periodic contact', situation: reason,
       evidence, agenda: choice.entries, mode, triggerCard: choice.card, focus: periodicContactBox(route, route.pose.actor), target,
+      ...(route.payloads ? { payloads: route.payloads.map((payload, i) => {
+        const size = [1 + Math.max(...payload.mask.map(([x]) => x)), 1 + Math.max(...payload.mask.map(([, y]) => y))] as const;
+        return { box: periodicContactBox(route, route.pose.payloads![i]!, size), destination: periodicContactBox(route, payload.goal, size),
+          placed: route.pose.payloads![i] === payload.goal };
+      }) } : {}),
       ...(first.contact === null ? {} : { projected: box(first.contact, first.pose.sources[first.contact]) }),
       timedSources: route.sources.map((_, i) => ({ box: box(i), active: activeSource === i,
         phase: route.rhythms[i] ? route.pose.phases[i] : null, period: route.rhythms[i]?.period ?? null })) },
@@ -324,7 +330,7 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
       const acquired = priorPeriodic ?? retained;
       if (acquired && periodicMaterial) {
         const scene = measurePeriodicContact(observation, rows, priorPeriodic?.calibration ?? retained!.scene.calibration,
-          ...periodicMaterial, acquired.observedControls);
+          ...periodicMaterial, acquired.observedControls, priorPeriodic ?? undefined);
         if (scene) return proposePeriodicRoute(id, observation, rows, scene, remaining, mode);
       }
       const prior = state?.epoch === epoch ? state : null;

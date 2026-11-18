@@ -109,7 +109,7 @@ export function identifyContactRoute(observation: NativeObservation, rows: Nativ
 
 type MaskedPart = { box: NativeBox; paint: number; mask: NativePoint[]; signature: string };
 
-function maskedParts(entities: NativeObservation['entities'], pitch: number, belongs: (box: NativeBox) => boolean): MaskedPart[] {
+export function maskedParts(entities: NativeObservation['entities'], pitch: number, belongs: (box: NativeBox) => boolean): MaskedPart[] {
   return entities.flatMap(part => {
     const box = part.bbox, w = width(box), h = height(box);
     if (!belongs(box) || w % pitch || h % pitch || w > 5 * pitch || h > 5 * pitch) return [];
@@ -124,7 +124,7 @@ function maskedParts(entities: NativeObservation['entities'], pitch: number, bel
   });
 }
 
-function fittedOutline(entities: NativeObservation['entities'], part: MaskedPart, pitch: number) {
+export function fittedOutline(entities: NativeObservation['entities'], part: MaskedPart, pitch: number) {
   const possible = entities.filter(entity => entity.palette_value !== part.paint
     && entity.bbox.every((value, i) => value === part.box[i]! + (i < 2 ? -1 : 1)));
   if (!possible.length) return null;
