@@ -21,7 +21,7 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 | CLRS | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CLRS/LVL2/good_run_pseudocode.md) | 0 (archive locale) | — | 2 | 3 | 4 |
 | CN04 | 6 | [3](../../docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CN04/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 4 |
 | COLM | 6 | [3](../../docs/migration/native-campaigns-v48/colm-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/COLM/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 5 |
-| COMB | 6 | [6](../../docs/migration/native-campaigns-v43/comb-six-levels.json) | — | — | — | 6 | 6 | 4 |
+| COMB | 6 | [6](../../docs/migration/native-campaigns-v43/comb-six-levels.json) | — | — | — | 6 | 6 | 6 · WIN |
 | CONN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CONN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 4 |
 | CRAF | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CRAF/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
 | CWSE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 4 |
