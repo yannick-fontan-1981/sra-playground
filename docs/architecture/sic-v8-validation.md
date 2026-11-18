@@ -2534,3 +2534,15 @@ Le modèle combine sur chaque trajet les changements de forme et de couleur. Il 
 Les commandes 33 et 62 changent la sélection. Les retours confirment chaque déplacement et chaque contact. La commande 98 confirme la couverture complète.
 
 Le niveau 7 gagne en **98 commandes et 21,43 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **308 commandes** des six premiers niveaux conservent les empreintes de leurs commandes, retours et animations. Les 406 commandes relèvent de SIC seul. Le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `4c79aa6769101b70ab00632c73d6170c7e9e527b87fc0a4dcff4268183c5d70c`. TypeScript et les quatre tests ciblés passent.
+
+### WA30 niveau 7, laisser libre la case du rendez-vous
+
+La couleur dominante remplit l'extérieur de la scène. SIC remesure le contour des deux places, le remplissage du réceptacle et le sol accessible depuis le porteur. Il conserve l'identité de la caisse qui vient d'être transportée sur la plage grise.
+
+Le premier rejeu du modèle de poursuite confirme les mouvements du joueur, puis s'épuise après 16 commandes. Le joueur occupe la case nécessaire au déplacement du porteur autonome. SIC garde cette case libre quand le porteur peut y arriver et qu'une caisse vient d'atteindre la plage de transfert.
+
+Les commandes 9 et 10 servent à attendre et observer. La commande 11 neutralise le porteur dont le contour est visible devant le joueur. Les retours confirment la reprise des deux caisses et leur dépôt à la commande 42.
+
+Le niveau 7 gagne en **42 commandes et 16,24 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **364 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 406 commandes relèvent de SIC seul. Le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `1bb4206796fa8521f9a361e9d76419861fa31595c2cadcb8303ab03e1ef91722`. TypeScript et les trois tests ciblés passent.
+
+Les 18 niveaux 7 sont qualifiés en SIC seul sur les 18 jeux qui en ont un. Les 20 niveaux encore à qualifier se répartissent en 13 niveaux 8, 6 niveaux 9 et 1 niveau 10.
