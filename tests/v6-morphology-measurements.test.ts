@@ -5,7 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
 import { Snapshot } from '../src/logos-engine/v6-composition-memory.ts';
 import { NativeMorphologyPolicy } from '../src/logos-engine/v6-morphology-policy.ts';
-import { morphologyPairs, measureMorphologyRoutes, observedMorphologySelectiveChange } from '../src/logos-engine/v6-morphology-measurements.ts';
+import { centeredMorphologyEnclosures, morphologyPairs, measureMorphologyRoutes, observedMorphologySelectiveChange } from '../src/logos-engine/v6-morphology-measurements.ts';
 import { ObservedMeter } from '../src/logos-engine/v6-inventory-caller-context.ts';
 
 type R = Record<string, any>;
@@ -46,6 +46,17 @@ test('current centered enclosures and homologous pairs match the original on all
     assert.deepEqual(pairs, scene.pairs, name);
     assert.deepEqual(parts, scene.components, name);
   }
+});
+
+test('unrelated one-pixel texture does not hide a centered enclosure from SIC', () => {
+  const rows = Array.from({ length: 64 }, (_, y) => Array.from({ length: 64 }, (_, x) => (x + y) % 2));
+  for (let y = 8; y < 16; y++) for (let x = 8; x < 16; x++) {
+    rows[y]![x] = x === 8 || x === 15 || y === 8 || y === 15 ? 2 : 3;
+  }
+  assert.throws(() => centeredMorphologyEnclosures(rows), /contour component bound exceeded/);
+  assert.deepEqual(centeredMorphologyEnclosures(rows, undefined, 'eligible_components'), [
+    { box: [8, 8, 15, 15], value: 2 },
+  ]);
 });
 
 for (const sample of fixture.cases) test(`original current morphology measures and policy: ${sample.id}`, async () => {

@@ -286,7 +286,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       }
       if (recalled) meter.observe(observation.level_epoch, observation.observation_ref, rows);
       if (fallback && !local.body && !execution?.readDirectionalMotion) return null;
-      const [pairs, parts] = await morphologyPairs(rows);
+      const [pairs, parts] = await morphologyPairs(rows, 'eligible_components');
       const visiblePair = !local.inset && pairs.length === 1 && pairs[0]!.quarter_turns !== null ? pairs[0]! : null;
       const partlyCovered = recalled && local.body && local.lastPair?.sites.some(site => overlaps(footprint(local.body!.at, local.body!.pitch), site));
       const pair = visiblePair ?? (partlyCovered ? local.lastPair! : null);
@@ -591,7 +591,7 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
               return { events: [], reviewEvidence: evidence[proposal.managed.effect] };
             }
           } else if (!state.rotation && proposal.pair && !plan.contact && key === pointKey(plan.target)) {
-            const [next] = await morphologyPairs(second);
+            const [next] = await morphologyPairs(second, 'eligible_components');
             const rotation = next.length === 1 && observedFramedRotation(proposal.pair, next[0]!,
               pixelsAt(first, plan.landing, pitch), after.observation_ref);
             if (rotation) state.rotation = rotation;
@@ -640,7 +640,7 @@ async function managedEffect(proposal: Proposal, rows: NativeRows) {
     return { matched, reason: matched ? 'reserve_restored_by_contact' : 'predicted_recharge_absent' };
   }
   if (planned?.effect === 'color' && planned.mobileIndex !== undefined) {
-    const [next] = await morphologyPairs(rows);
+    const [next] = await morphologyPairs(rows, 'eligible_components');
     const matched = next.length === 1 && next[0]!.palette_values[planned.mobileIndex] === planned.colorAfter;
     return { matched, reason: matched ? 'selective_color_confirmed' : 'predicted_color_absent' };
   }
@@ -649,7 +649,7 @@ async function managedEffect(proposal: Proposal, rows: NativeRows) {
     return { matched, reason: matched ? 'observed_transport_landing_and_reserve' : 'transport_reserve_contradicted' };
   }
   if (planned?.effect === 'rotation' && proposal.rotation) {
-    const [next] = await morphologyPairs(rows);
+    const [next] = await morphologyPairs(rows, 'eligible_components');
     const matched = next.length === 1 && framedResidual(next[0]!, proposal.rotation.peerScale) === planned.orientationAfter;
     return { matched, reason: matched ? 'selective_rotation_confirmed' : 'predicted_rotation_absent' };
   }

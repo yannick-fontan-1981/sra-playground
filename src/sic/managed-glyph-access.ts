@@ -84,7 +84,7 @@ export function readGlyphRoute(rows: NativeRows, memory: GlyphRouteMemory, epoch
   const { pitch, actor, floor, reserve, peerScale, bandInks } = memory;
   if (!rows[reserve.row]?.slice(reserve.left, reserve.right).every(ink => ink === reserve.active || ink === reserve.depleted)) return null;
   const parts = geometricComponents(rows);
-  const contours = new Set(centeredMorphologyEnclosures(rows, parts).map(item => JSON.stringify(item.box)));
+  const contours = new Set(centeredMorphologyEnclosures(rows, parts, 'eligible_components').map(item => JSON.stringify(item.box)));
   const patterns = framedPatterns(rows, parts).filter(item => contours.has(JSON.stringify(item.bbox)));
   const peer = patterns.find(item => item.scale === peerScale), shown = patterns.find(item => item.scale !== peerScale);
   if (patterns.length !== 2 || !peer || !shown || [0, 1, 2, 3].some(turn => mask(rotateMask(shown.mask, turn)) === mask(peer.mask))) return null;

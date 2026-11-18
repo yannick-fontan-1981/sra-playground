@@ -67,14 +67,24 @@ const enclosed = (inner: readonly number[], outer: readonly number[]): boolean =
 const bounds = (at: NativePoint, size: NativePoint): NativeBox => [at[0], at[1], at[0] + size[0] - 1, at[1] + size[1] - 1];
 
 export class MorphologyMeasurementDomainError extends RangeError {}
+type ContourScope = 'raster' | 'eligible_components';
 
 /** Consumed V5 measure_contours/measure_centered_enclosure_identities result.
  * Components have the same four-connected raster order in V5 and V6; the V5
  * component IDs are not consumed. Open contours still count toward MAX_BOXES,
  * so an overfull inventory never leaks a partial set of closed enclosures. */
-export function centeredMorphologyEnclosures(rows: NativeRows, parts = geometricComponents(rows)): R[] {
-  if (rows.length * rows[0]!.length > 4096) throw new MorphologyMeasurementDomainError('contour raster bound exceeded');
-  if (parts.length > 512) throw new MorphologyMeasurementDomainError('contour component bound exceeded');
+export function centeredMorphologyEnclosures(rows: NativeRows, rasterParts = geometricComponents(rows),
+  scope: ContourScope = 'raster'): R[] {
+  // A centered interior must span two rows and columns. A contour
+  // must be larger still, so thin components supply neither witness.
+  const parts = scope === 'eligible_components'
+    ? rasterParts.filter(({ bbox: [l, t, r, b] }) => l < r && t < b) : rasterParts;
+  const bound = rows.length * rows[0]!.length > 4096 ? 'contour raster bound exceeded'
+    : parts.length > 512 ? 'contour component bound exceeded' : null;
+  if (bound) {
+    if (scope === 'eligible_components') return [];
+    throw new MorphologyMeasurementDomainError(bound);
+  }
   const contours: { box: NativeBox; value: number; closed: boolean }[] = [];
   for (const part of parts) {
     const [l, t, r, b] = part.bbox, w = r - l + 1, h = b - t + 1;
@@ -125,8 +135,8 @@ export async function matchedMorphologyPairs(patterns: readonly FramedPattern[])
   }
   return out;
 }
-export async function morphologyPairs(rows: NativeRows): Promise<[MorphologyPair[], GeometricComponent[]]> {
-  const parts = geometricComponents(rows), boxes = new Set(centeredMorphologyEnclosures(rows, parts).map(c => key(c.box)));
+export async function morphologyPairs(rows: NativeRows, scope: ContourScope = 'raster'): Promise<[MorphologyPair[], GeometricComponent[]]> {
+  const parts = geometricComponents(rows), boxes = new Set(centeredMorphologyEnclosures(rows, parts, scope).map(c => key(c.box)));
   return [await matchedMorphologyPairs(framedPatterns(rows, parts).filter(p => boxes.has(key(p.bbox)))), parts];
 }
 export const morphologyPairKey = (pair: MorphologyPair): Promise<string> => compositionIdentity([...pair.sites].sort(lex));
