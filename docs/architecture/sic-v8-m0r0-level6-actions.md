@@ -1,5 +1,9 @@
 # M0R0 · niveau 6 · commandes et retours
 
+Le niveau est désormais gagné en **47 commandes SIC seul**. Le [bilan du trajet gagnant](sic-v8-validation.md#m0r0-niveau-6-tenir-une-plaque-avec-un-bloc-mobile) résume le rejeu depuis le niveau 1. La trace ci-dessous conserve l'essai antérieur de 80 commandes.
+
+Le nouvel essai depuis la sauvegarde réutilise les quatre mesures de déplacement. Après retour à la pose initiale, un premier pas vers le haut laisse les passages fermés. Le second place les deux pièces sur les plaques et ouvre les deux passages. Un pas vers le bas referme les deux passages. Lors du rejeu gagnant, le bloc maintient ensuite la pièce gauche sur sa plaque pendant la descente de la pièce droite. Le passage gauche se referme. La plaque gauche maintient le passage droit ouvert, et la pièce droite le franchit.
+
 Rejeu dfe34f91 en SIC seul depuis le niveau 1, 360 s de temps actif et 600 commandes par niveau.
 La référence s’arrêtait après **0 commandes sur ce niveau** (contour component bound exceeded Start a new reasoning session to continue.).
 Le rejeu s’arrête après **80 commandes en 54,72 s**. **Aucune proposition applicable**.
