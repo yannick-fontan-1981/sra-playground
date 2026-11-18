@@ -1,6 +1,6 @@
 import { measureContextualCompartments } from '../logos-engine/v6-contextual-compartments.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const markedCompartmentFlowId = 'sic_follow_observed_compartment_readiness';
@@ -10,11 +10,13 @@ export const markedCompartmentStrategies = {
   deliver_from_confirmed_outlet: 'Use the outlet that previously produced official progress',
 } as const;
 
-type Chamber = { box: NativeBox; point: NativePoint; filled: number };
+type Chamber = { box: NativeBox; point: NativePoint; filled: number; contents: [number, number][] };
 type Scene = { frames: Chamber[]; marked: Chamber[]; mark: number; normal: number; background: number; key: string };
 type Witness = { epoch: number; mark: number; normal: number; background: number; chambers: NativeBox[]; wins?: number;
-  outlet: NativeBox; refs: [string, string] };
-type Proposal = NativeProposal & { changedRegion: NativeBox; concurrentRegion?: NativeBox; attempt: string; needId: string };
+  outlet: NativeBox; refs: [string, string]; concurrentDelivery?: true };
+type Flow = { sources: NativeBox[]; used: number[]; pending?: { chamber: Chamber; waits: number } };
+type Proposal = NativeProposal & { changedRegion: NativeBox; concurrentRegion?: NativeBox; attempt: string; needId: string;
+  flow?: Flow; source?: number; startBatch?: true; startProcess?: Chamber; delivery?: true; wait?: true };
 
 const boxKey = (box: NativeBox) => box.join(',');
 const contains = ([left, top, right, bottom]: NativeBox, [x, y]: NativePoint) => x >= left && x <= right && y >= top && y <= bottom;
@@ -53,7 +55,27 @@ function orderTowardOutlet(memory: Witness) {
   const strongest = extent[0]!;
   if (!strongest.span || Math.abs(strongest.offset) * 3 < strongest.span
     || Math.abs(strongest.offset) < 2 * Math.abs(extent[1]!.offset)) return null;
-  return (chamber: Chamber) => Math.sign(strongest.offset) * center(chamber.box, strongest.axis);
+  return { axis: strongest.axis, sign: Math.sign(strongest.offset),
+    rank: (chamber: Chamber) => Math.sign(strongest.offset) * center(chamber.box, strongest.axis) };
+}
+
+function sourcesForBatch(scene: Scene, direction: NonNullable<ReturnType<typeof orderTowardOutlet>>): Flow | null {
+  const stocked = scene.marked.filter(chamber => chamber.filled > 0 && chamber.contents.length === 1)
+    .sort((a, b) => direction.rank(a) - direction.rank(b));
+  const first = stocked[0];
+  if (!first) return null;
+  const [axis, sign] = [direction.axis, direction.sign];
+  const from = (box: NativeBox) => sign > 0 ? box[axis] : -box[axis + 2]!;
+  const to = (box: NativeBox) => sign > 0 ? box[axis + 2]! : -box[axis];
+  const sources = stocked.filter(chamber => from(chamber.box) <= to(first.box)).map(chamber => chamber.box);
+  return sources.length > 1 ? { sources, used: [] } : null;
+}
+
+function readyBatch(chamber: Chamber, memory: Witness, direction: NonNullable<ReturnType<typeof orderTowardOutlet>>): boolean {
+  const axis = direction.axis, cross = axis === 0 ? 1 : 0, sign = direction.sign;
+  const gap = sign > 0 ? memory.outlet[axis] - chamber.box[axis + 2]! : chamber.box[axis] - memory.outlet[axis + 2]!;
+  return chamber.contents.length > 1 && gap > 0 && gap <= memory.outlet[axis + 2]! - memory.outlet[axis] + 1
+    && Math.min(chamber.box[cross + 2]!, memory.outlet[cross + 2]!) >= Math.max(chamber.box[cross], memory.outlet[cross]);
 }
 
 function localRegion(chamber: NativeBox, rows: NativeRows): NativeBox {
@@ -72,21 +94,27 @@ function changed(first: NativeRows, second: NativeRows, [left, top, right, botto
 export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
   let witness: Witness | null = null;
   let attempted: string[] = [];
+  let flow: Flow | null = null;
   return {
     id: markedCompartmentFlowId,
     async observePublicOutcome(before, after, command, first) {
       if (after.levels_completed <= before.levels_completed || command.action_ref !== 'ACTION6' || !acceptsPoint(before)) return;
       const { x, y } = command.data;
       if (typeof x !== 'number' || typeof y !== 'number') return;
-      const scene = await measureContextualCompartments(first) as Scene | null;
-      if (!scene || scene.marked.length !== 1) return;
-      const outlet = scene.marked[0]!;
-      if (!outlet.filled || !contains(outlet.box, [x, y])) return;
+      const prior = witness?.epoch === before.level_epoch ? witness : null;
+      const measured = await measureContextualCompartments(first) as Scene | null;
+      const transferred = !measured && prior ? await measureContextualCompartments(first, prior.mark) as Scene | null : null;
+      const scene = measured ?? (transferred && prior && continuationOf(transferred, prior) ? transferred : null);
+      if (!scene) return;
+      const candidates = scene.marked.filter(chamber => chamber.filled && contains(chamber.box, [x, y]));
+      if (candidates.length !== 1) return;
+      const outlet = candidates[0]!;
       const repeated = witness?.epoch === before.level_epoch && continuationOf(scene, witness) && sameChamberSite(witness.outlet, outlet.box);
       witness = { epoch: after.level_epoch, mark: scene.mark, normal: scene.normal, background: scene.background,
         chambers: scene.frames.map(chamber => chamber.box), outlet: outlet.box, wins: repeated ? (witness?.wins ?? 1) + 1 : 1,
-        refs: [before.observation_ref, after.observation_ref] };
+        refs: [before.observation_ref, after.observation_ref], ...(scene.marked.length > 1 ? { concurrentDelivery: true } : {}) };
       attempted = [];
+      flow = null;
     },
     async propose(observation, rows, _inputs, remaining) {
       const memory = witness;
@@ -95,30 +123,47 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
       if (!scene || !continuationOf(scene, memory)) return null;
       const attemptFor = (chamber: Chamber) => scene.key + ':' + boxKey(chamber.box);
       const isOutlet = (chamber: Chamber) => sameChamberSite(chamber.box, memory.outlet) && chamber.filled > 0;
-      const downstream = orderTowardOutlet(memory);
-      const choice = scene.marked.filter(chamber => !attempted.includes(attemptFor(chamber)))
-        .sort((a, b) => Number(isOutlet(b)) - Number(isOutlet(a)) || Number(b.filled > 0) - Number(a.filled > 0)
-          || (downstream ? downstream(b) - downstream(a) : 0)
+      const direction = orderTowardOutlet(memory), downstream = direction?.rank;
+      const batching = flow ?? (memory.concurrentDelivery && direction && scene.marked.some(chamber => readyBatch(chamber, memory, direction))
+        ? sourcesForBatch(scene, direction) : null);
+      const sourceAt = (chamber: Chamber) => batching?.sources.findIndex(box => sameChamberSite(box, chamber.box)) ?? -1;
+      const startsBatch = (chamber: Chamber) => !!(batching && direction && readyBatch(chamber, memory, direction));
+      const available = (chamber: Chamber) => chamber.filled > 0
+        && (!batching || chamber.contents.some(([ink]) => ink !== scene.normal));
+      const rank = (chamber: Chamber) => 4 * Number(isOutlet(chamber)) + 3 * Number(startsBatch(chamber))
+        + 2 * Number(sourceAt(chamber) >= 0) + Number(available(chamber));
+      const marked = scene.marked.filter(chamber => !attempted.includes(attemptFor(chamber)) && !batching?.used.includes(sourceAt(chamber)))
+        .sort((a, b) => rank(b) - rank(a) || (downstream ? downstream(b) - downstream(a) : 0)
           || a.box[0] - b.box[0] || a.box[1] - b.box[1])[0];
+      // A running process may temporarily cover its own highlighted outline.
+      const pending = batching?.pending, wait = !marked && pending && pending.waits < 2;
+      const choice = marked ?? (wait ? pending.chamber : null);
       if (!choice) return null;
-      const concurrent = downstream && choice.filled ? scene.marked.find(chamber => !chamber.filled && downstream(chamber) > downstream(choice)) : null;
-      const strategy = isOutlet(choice) ? 'deliver_from_confirmed_outlet'
-        : choice.filled ? 'use_marked_compartment' : 'advance_marked_process';
+      const concurrent = !wait && downstream && available(choice)
+        ? scene.marked.find(chamber => !available(chamber) && downstream(chamber) > downstream(choice)) : null;
+      const strategy = wait ? 'advance_marked_process' : isOutlet(choice) ? 'deliver_from_confirmed_outlet'
+        : available(choice) ? 'use_marked_compartment' : 'advance_marked_process';
       const label = markedCompartmentStrategies[strategy];
       const situation = concurrent ? 'Use an available input this turn and check the downstream compartment at the same time.' : label;
       const ref = observation.observation_ref, parent = 'G_official_completion';
       const evidence: [string, ...string[]] = [ref, ...memory.refs.filter(value => value !== ref)];
-      const [x, y] = choice.point, action = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
-      const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: label, evidence });
+      const [x, y] = choice.point;
+      const action: NativeCommand = wait ? { action_ref: 'ACTION5', data: {} } : { action_ref: 'ACTION6', data: { x, y } };
+      const actions = [action];
+      const pointBinding = wait ? null : await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: label, evidence });
       const goal = { kind: 'maintain_flow_toward_confirmed_outlet', scope: ref.split(':revision:', 1)[0]!,
         subjects: ['marked_control', 'previous_scoring_outlet'], parentObjective: parent,
         satisfactionContract: 'confirm_local_transition_then_official_delivery' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `marked-compartment:${need.id}`;
       return { status: 'proposed', kind: markedCompartmentFlowId, actions, changedRegion: localRegion(choice.box, rows),
+        ...(batching ? { flow: batching, source: sourceAt(choice),
+          ...(!wait && startsBatch(choice) ? { startBatch: true } : {}),
+          ...(!wait && choice.contents.filter(([ink]) => ink !== scene.normal).length > 1 ? { startProcess: choice } : {}),
+          ...(isOutlet(choice) ? { delivery: true } : {}), ...(wait ? { wait: true } : {}) } : {}),
         ...(concurrent ? { concurrentRegion: concurrent.box } : {}),
-        attempt: attemptFor(choice), needId: need.id,
-        steps: [{ action, point_binding: pointBinding, expected_after: null }],
+        attempt: wait ? `wait:${pending.waits}:${attemptFor(choice)}` : attemptFor(choice), needId: need.id,
+        steps: [{ action, ...(pointBinding ? { point_binding: pointBinding } : {}), expected_after: null }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Advance material toward the outlet that led to progress',
           situation, mode: strategy === 'deliver_from_confirmed_outlet' ? 'solving' : 'assimilation',
@@ -144,12 +189,25 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
     },
     async record(before, after, command, first, second, proposal) {
       if (after.levels_completed > before.levels_completed) await this.observePublicOutcome!(before, after, command, first, second);
-      else attempted = [...attempted, proposal.attempt];
+      else {
+        attempted = [...attempted, proposal.attempt];
+        if (proposal.flow) {
+          const confirmed = changed(first, second, proposal.changedRegion);
+          const used = confirmed && proposal.startBatch ? [] : confirmed && (proposal.source ?? -1) >= 0
+            ? [...proposal.flow.used, proposal.source!] : proposal.flow.used;
+          const previous = proposal.flow.pending;
+          const pending = confirmed && proposal.delivery ? undefined : confirmed && proposal.startProcess
+            ? { chamber: proposal.startProcess, waits: 0 } : proposal.wait && previous
+              ? { ...previous, waits: previous.waits + 1 } : previous;
+          flow = { sources: proposal.flow.sources, used, ...(pending ? { pending } : {}) };
+        }
+      }
       return { events: [] };
     },
-    state: () => ({ witness, attempted }),
+    state: () => ({ witness, attempted, ...(flow ? { flow } : {}) }),
     restore(value: NativeRecord) {
       witness = structuredClone((value.witness as Witness | undefined) ?? null);
+      flow = structuredClone((value.flow as Flow | undefined) ?? null);
       attempted = structuredClone((value.attempted as string[] | undefined) ?? []);
     },
   };
