@@ -1,6 +1,6 @@
 // Reproduce SIC-only official-game chronology from level 1, stopping at the target victory.
-// Node 22+, repository root: node scripts/check-sic-chronological.mjs DC22 6 result.jsonl 1
-// Arguments: comma-separated games, target (1–6), local result path, budget worker count.
+// Node 22+, repository root: node scripts/check-sic-chronological.mjs LP85 7 result.jsonl 1
+// Arguments: comma-separated games, target (1–7), local result path, budget worker count.
 // One process runs games sequentially. No source-game logic or oracle is exposed to SIC.
 // Raw observations remain local; per-level prefixes hash actions and official returns.
 import {pathToFileURL} from 'node:url';
@@ -39,7 +39,7 @@ async function run(code,target,parallelWorkers) {
   const agent=new BrowserV6Agent({transport,targetLevels:target,actionsPerLevel:600,parallelWorkers,
     recoveryConfiguration:()=>pack,getObservation:()=>board,canDispatch:()=>true,onState:()=>{},
     dispatch:async action=>{
-      if (board.levelsCompleted >= target) throw new Error('Dispatch after target victory');
+      if (board.levelsCompleted >= target || board.level > target) throw new Error('Dispatch past the requested level');
       const issued=performance.now(); if(effects.length%25===0)console.log(JSON.stringify({progress:effects.length,level:board.level})); const plan=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan'); if(plan){const kind=action.id===6?"click":action.id>=1&&action.id<=4?"move":"other"; const types=pathKinds.get(plan.id)??new Set();types.add(kind);pathKinds.set(plan.id,types);series.set(plan.id,(series.get(plan.id)??0)+1);if(priorDispatch){(priorDispatch.plan===plan.id?continuedGaps:boundaryGaps).push(issued-priorDispatch.at);}priorDispatch={plan:plan.id,at:issued};}
       first??=issued-start;
       const previous=board; board=game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
@@ -76,7 +76,7 @@ async function run(code,target,parallelWorkers) {
 const { appendFile } = await import('node:fs/promises');
 const target=Number(process.argv[3]);
 const parallelWorkers=Number(process.argv[5]);
-if (!Number.isInteger(target) || target < 1 || target > 6 || !Number.isInteger(parallelWorkers) || parallelWorkers<1) throw new Error('Invalid chronological campaign configuration');
+if (!Number.isInteger(target) || target < 1 || target > 7 || !Number.isInteger(parallelWorkers) || parallelWorkers<1) throw new Error('Invalid chronological campaign configuration');
 for (const code of process.argv[2].split(',')) {
   console.log(JSON.stringify({game:code,target,status:'started'}));
   try {
