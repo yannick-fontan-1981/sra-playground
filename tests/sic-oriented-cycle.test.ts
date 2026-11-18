@@ -2,7 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { chooseOrientedCycleStep, observeOrientedCycleStep, type OrientedCycleState } from '../src/sic/inset-oriented-cycle.ts';
 
-test('a capsule is reachable only while a unit of reserve remains on arrival', () => {
+const moves = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
+
+function cycleFixture() {
   const rows = Array.from({ length: 20 }, () => Array<number>(20).fill(5));
   for (let y = 4; y < 8; y++) rows[y]!.fill(6, 4, 8);
   rows[15]![1] = 9;
@@ -20,8 +22,11 @@ test('a capsule is reachable only while a unit of reserve remains on arrival', (
       displayGround: 5, anchorInk: 9, wanted: { ink: 10, mask: '110000000', turn: 0 },
     },
   };
+  return { rows, state };
+}
 
-  const moves = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
+test('a capsule is reachable only while a unit of reserve remains on arrival', () => {
+  const { rows, state } = cycleFixture();
   assert.equal(chooseOrientedCycleStep(rows, state, moves, 8), null);
   rows[0]![2] = 15;
   const step = chooseOrientedCycleStep(rows, state, moves, 8);
@@ -39,4 +44,31 @@ test('a capsule is reachable only while a unit of reserve remains on arrival', (
   assert.ok(actual);
   assert.equal(Object.hasOwn(actual.state, 'rotation'), false);
   assert.equal(actual.state.spent, 1);
+});
+
+test('observe a missing color transition with enough reserve to return before planning the exit', () => {
+  const { rows, state } = cycleFixture();
+  state.layout.charges = [];
+  state.layout.color = [8, 4];
+  state.layout.wanted.ink = 11;
+  rows[0]![2] = 15;
+  assert.equal(chooseOrientedCycleStep(rows, state, moves, 8), null);
+
+  rows[0]![3] = 15;
+  const contact = chooseOrientedCycleStep(rows, state, moves, 8);
+  assert.equal(contact?.purpose, 'test_color');
+  assert.deepEqual(contact?.step, [8, 4]);
+  assert.ok(contact);
+
+  const observed = structuredClone(rows);
+  observed[0]![3] = 5;
+  observed[15]![2] = 11;
+  for (let y = 4; y < 8; y++) {
+    observed[y]!.fill(5, 4, 8);
+    observed[y]!.fill(6, 8, 12);
+  }
+  const next = observeOrientedCycleStep(rows, observed, state, contact);
+  assert.equal(next?.state.transitions.color[10], 11);
+  assert.ok(next);
+  assert.equal(chooseOrientedCycleStep(observed, next.state, moves, 8)?.purpose, 'exit');
 });

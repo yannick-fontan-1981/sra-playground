@@ -138,6 +138,7 @@ export function chooseOrientedCycleStep(rows: NativeRows, state: OrientedCycleSt
   queue[0]!.push({ site: origin, units, spent, glyph });
   const best = new Map<string, number>();
   let finishing: CompositeCycleStep | null = null, finishCost = maximum + 1;
+  let probe: CompositeCycleStep | null = null, probeCost = maximum + 1;
   for (let cost = 0; cost < finishCost && cost <= maximum; cost++) for (const flight of queue[cost]!) {
     const key = [flight.site, flight.glyph.mask, flight.glyph.ink, flight.glyph.turn, flight.spent].join(':');
     if ((best.get(key) ?? -1) >= flight.units) continue;
@@ -155,9 +156,15 @@ export function chooseOrientedCycleStep(rows: NativeRows, state: OrientedCycleSt
       const after = applyStation(flight.glyph, state, site.purpose), energy = collecting ? layout.fullReserve : flight.units - leg.length;
       if (after && energy > 0) queue[distance]!.push({ site: leg.site, units: energy, glyph: after,
         spent: collecting ? flight.spent | (1 << site.charge) : flight.spent, first });
+      const unresolved = site.purpose === 'test_color' && flight.glyph.ink !== layout.wanted.ink
+        || site.purpose === 'test_shape' && flight.glyph.mask !== layout.wanted.mask;
+      if (!after && unresolved && distance < probeCost && 2 * leg.length < flight.units) {
+        probe = { ...first, distance };
+        probeCost = distance;
+      }
     }
   }
-  return finishing;
+  return finishing ?? probe;
 }
 
 export function observeOrientedCycleStep(first: NativeRows, second: NativeRows, state: OrientedCycleState, step: CompositeCycleStep) {
