@@ -2456,3 +2456,11 @@ Le niveau 7 gagne en **80 commandes et 31,20 s**, au budget de 360 s de temps ac
 La référence se termine après sept commandes. Depuis la sauvegarde, la deuxième commande confirme le déplacement du personnage et le changement de repère du garde resté sur place. La troisième révèle son déplacement. SIC suit le garde à partir du corps encore visible et exclut sa case et ses voisines sur la prochaine commande. Il recalcule après chaque retour et réutilise la prise latérale du garde déjà connu à la commande 10.
 
 Le niveau 7 gagne en **14 commandes et 5,79 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **140 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 154 commandes relèvent de SIC seul. Empreinte chronologique `946da7394ccd7748358afea97a15d20a7003b7a15b1c14986e3806dfb80d2548`. TypeScript et les quatre tests ciblés passent.
+
+### S5I5 niveau 7, composer un trajet avec des barres aux commandes différentes
+
+Le rejeu de référence s'arrête après 96 clics au niveau 7. SIC réutilise les formes de boutons et le pas d'allongement attestés aux niveaux précédents. Le panneau visible rattache les commandes disponibles à chaque barre. La géométrie distingue les articulations de la chaîne, la barre indépendante qui dégage un passage et la barre déjà alignée sur sa cible.
+
+La recherche part des positions compatibles avec les cibles et les raccorde à la configuration courante. SIC mesure la direction de rotation au clic 2 et contrôle les positions visibles à chaque retour. Les clics 38 et 39 raccourcissent temporairement la barre déjà alignée. Les clics 40 et 43 font pivoter l'obstacle, puis les clics 44 et 45 restaurent l'alignement et déclenchent la victoire. Les rotations du trajet respectent l'orientation interdite vers la barre porteuse.
+
+Le niveau 7 gagne en **45 clics et 19,06 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **171 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 216 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `a4dad5be8a83852adba8f3b7d4fa944b7957da28d7187f64bfad23d9787d2415`. TypeScript et les trois tests ciblés passent.
