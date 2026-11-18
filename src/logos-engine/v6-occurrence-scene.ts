@@ -4,7 +4,7 @@
  */
 import { geometricComponents } from './v6-native-observer.ts';
 import type { GeometricComponent } from './v6-native-observer.ts';
-import type { NativeRows, NativePoint } from './v6-native-types.ts';
+import type { NativeBox, NativeRows, NativePoint } from './v6-native-types.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual } from './v6-operations.ts';
 import { normalizeCodeMask } from './v6-code-program.ts';
@@ -42,9 +42,29 @@ function collectParts(seed: GeometricComponent, pending: readonly GeometricCompo
   return [...cluster];
 }
 
+const insideBox = ([l, t, r, b]: NativeBox, [a, c, x, y]: NativeBox) => l <= a && t <= c && x <= r && y <= b;
+
+function readOccludedIndicator(rows: NativeRows, box: NativeBox, parts: GeometricComponent[], background: number) {
+  const [l, t, r, b] = box, width = r - l + 1;
+  const samples = rows.slice(t, b + 1).map(row => row.slice(l, r + 1));
+  if (samples.length !== b - t + 1 || samples.some(row => row.length !== width)) return undefined;
+  const solid = samples.map(row => row.every(pixel => pixel === row[0]) ? row[0] : undefined);
+  const value = [solid[0], solid.at(-1)].find(ink => ink !== undefined && ink !== background
+    && solid.filter(sample => sample === ink).length > samples.length / 2);
+  if (value === undefined) return undefined;
+  const coverage = new Set<string>();
+  for (const part of parts) {
+    const [x, y, right, bottom] = part.bbox;
+    if (part.color === value || part.color === background || insideBox(box, part.bbox)
+      || right < l || x > r || bottom < t || y > b) continue;
+    for (const [a, c] of part.mask) coverage.add(pointKey(x + a, y + c));
+  }
+  return samples.every((row, y) => row.every((ink, x) => ink === value || coverage.has(pointKey(l + x, t + y)))) ? value : undefined;
+}
+
 export function measureOccurrenceScene(rows: NativeRows, observation: OccurrenceRecord,
   previousCalibration: OccurrenceRecord | null = null,
-  options: { allowNarrowerForeground?: boolean; inferIntegerScale?: boolean } = {}): OccurrenceRecord | null {
+  options: { allowNarrowerForeground?: boolean; inferIntegerScale?: boolean; readOccludedIndicators?: boolean } = {}): OccurrenceRecord | null {
   const height = rows.length, width = rows[0]!.length, parts = geometricComponents(rows);
   const background = [...count(rows.flat())].sort((a, b) => b[1] - a[1])[0]![0];
   let outlines: GeometricComponent[] = [];
@@ -101,10 +121,17 @@ export function measureOccurrenceScene(rows: NativeRows, observation: Occurrence
     }
     calibration = { ...calibration, indicator_boxes: indicators.map(part => part.bbox) };
   } else {
-    for (const box of calibration.indicator_boxes as readonly number[][]) {
+    for (const box of calibration.indicator_boxes as readonly NativeBox[]) {
       const matching = parts.filter(part => part.rectangular && pythonEqual(part.bbox, box));
-      if (matching.length !== 1) return null;
-      excluded.add(matching[0]!.id); indicators.push({ bbox: box, value: matching[0]!.color });
+      if (matching.length === 1) {
+        excluded.add(matching[0]!.id);
+        indicators.push({ bbox: box, value: matching[0]!.color });
+        continue;
+      }
+      const value = options.readOccludedIndicators ? readOccludedIndicator(rows, box, parts, background) : undefined;
+      if (value === undefined) return null;
+      for (const part of parts) if (part.color === value && insideBox(box, part.bbox)) excluded.add(part.id);
+      indicators.push({ bbox: box, value });
     }
   }
   for (const part of outlines) excluded.add(part.id);

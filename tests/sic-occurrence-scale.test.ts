@@ -19,3 +19,19 @@ test('exact integer scaling keeps separated parts and holes in one occurrence', 
   assert.deepEqual(scene?.occurrences.map(part => part.scale), [2, 1]);
   assert.deepEqual(scene?.occurrences.map(part => normalizeCodeMask(part.mask, part.scale)), [mask, mask]);
 });
+
+test('an observed foreground can cover the edge of a calibrated indicator', () => {
+  const rows = Array.from({ length: 16 }, () => Array<number>(16).fill(0));
+  for (let y = 1; y <= 4; y++) rows[y]!.fill(6, 2, 7);
+  for (let y = 4; y <= 7; y++) rows[y]!.fill(9, 5, 8);
+  const box = [2, 1, 6, 4];
+  const calibration = { max_width: 3, max_height: 4, indicator_boxes: [box] };
+  const observation = { observation_ref: 'visible-indicator', level_epoch: 1 };
+  assert.equal(measureOccurrenceScene(rows, observation, calibration), null);
+  const read = () => measureOccurrenceScene(rows, observation, calibration, { readOccludedIndicators: true });
+  const scene = read();
+  assert.deepEqual(scene?.indicators, [{ bbox: box, value: 6 }]);
+  assert.deepEqual(scene?.occurrences.map(part => part.color), [9]);
+  rows[3]![3] = 10;
+  assert.equal(read(), null);
+});

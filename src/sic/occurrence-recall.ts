@@ -28,7 +28,7 @@ type Prediction = { key: string; candidates: string[]; minimum: number; oriented
 type Proposal = NativeProposal & { local: State; scene: Scene; chosen: Occurrence; predictions: Prediction[]; needId: string;
   rotationTest?: true; scaleTest?: true };
 const empty = (epoch = 0): State => ({ epoch, context: null, seen: [], rules: {}, calibration: null, visited: [], stopped: false });
-const occurrenceMeasurement = { allowNarrowerForeground: true };
+const occurrenceMeasurement = { allowNarrowerForeground: true, readOccludedIndicators: true };
 
 function hasMeter(scene: Scene) {
   const [first, second] = scene.indicators;
