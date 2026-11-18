@@ -1,6 +1,7 @@
 import { fieldChangeGroups } from '../logos-engine/v6-field-service-observation.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { unchangedOutside } from './plan-step.ts';
 
 export const contactDirections = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 export type ContactDirection = typeof contactDirections[number];
@@ -13,18 +14,20 @@ type Control = { point: NativePoint; identity: [number, number, number]; active:
 type ResourceMeter = { bar: NativeBox; capacity: NativeBox; ink: number; pips: NativePoint[]; freeInk: number };
 type RoomResources = { meter: ResourceMeter; reserve: number; free: number; controls: Control[];
   refills: NativePoint[]; opened: NativePoint[] };
+type DarkTransit = { candidates: NativePoint[]; reached: NativePoint[]; refused: string[] };
 export type RoomIntent = 'refill' | 'release' | 'survey' | 'open' | 'exit';
 export type RoomRoute = {
   grid: Grid; rooms: Room[]; phase: Phase; control: NativePoint;
   tried: NativePoint[]; capacity: Capacity | null; passage: NativePoint | null; stopped: boolean;
-  resources?: RoomResources; startedUnmapped?: true;
+  resources?: RoomResources; startedUnmapped?: true; dark?: DarkTransit;
 };
-export type RoomStep = ContactStep & { target: NativePoint; contact: boolean; intent?: RoomIntent };
+export type RoomStep = ContactStep & { target: NativePoint; contact: boolean; intent?: RoomIntent; probe?: boolean };
 
 export const tileBox = ([x, y]: NativePoint, side: number): NativeBox => [x, y, x + side - 1, y + side - 1];
 export const shiftTile = ([x, y]: NativePoint, [, dx, dy]: ContactDirection, side: number): NativePoint => [x + dx * side, y + dy * side];
 const key = (point: NativePoint) => point.join(',');
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
+const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const inBox = ([x, y]: NativePoint, [l, t, r, b]: NativeBox) => x >= l && x <= r && y >= t && y <= b;
 const crop = (rows: NativeRows, [l, t, r, b]: NativeBox) => rows.slice(t, b + 1).map(row => row.slice(l, r + 1));
 const uniform = (values: readonly number[], value = values[0]) => values.length > 0 && values.every(pixel => pixel === value);
@@ -111,11 +114,13 @@ function readResources(rows: NativeRows, grid: Grid, meter: ResourceMeter, opene
     controls: readControls(rows, grid), refills: readRefills(rows, grid, meter.ink), opened };
 }
 
-function measureResources(rows: NativeRows, grid: Grid): RoomResources | null {
+function measureResources(rows: NativeRows, grid: Grid, partial = false): RoomResources | null {
   if (grid.side < 5) return null;
   const controls = readControls(rows, grid);
   const lights = controls.filter(isLight);
-  if (new Set(lights.map(control => control.identity[0])).size < 3 || controls.length - lights.length < 2) return null;
+  const lampRooms = new Set(lights.map(control => control.identity[0])), gates = controls.filter(control => !isLight(control));
+  if (lampRooms.size < (partial ? 2 : 3) || gates.length < 2) return null;
+  if (partial && !gates.some(({ identity: [first, , last] }) => !lampRooms.has(first) || !lampRooms.has(last))) return null;
   const freeInks = new Set(lights.map(control => control.identity[1]));
   if (freeInks.size !== 1) return null;
   const freeInk = lights[0]!.identity[1];
@@ -128,7 +133,7 @@ function measureResources(rows: NativeRows, grid: Grid): RoomResources | null {
     if (!track) continue;
     const pips = hud.filter(p => p.bbox[0] > track.bbox[2] && p.bbox[1] === top && p.bbox[3] === bottom
       && p.bbox[2] - p.bbox[0] + 1 === height - 1).map(p => [p.bbox[0], top] as NativePoint);
-    if (pips.length < 2 || !pips.some(p => inkAt(rows, p) === freeInk)) continue;
+    if (pips.length < (partial ? 1 : 2) || !pips.some(p => inkAt(rows, p) === freeInk)) continue;
     return readResources(rows, grid, { bar: [left, top, track.bbox[2], bottom],
       capacity: [pips[0]![0], top, pips.at(-1)![0] + height - 2, bottom], ink: fill.color, pips, freeInk });
   }
@@ -140,12 +145,17 @@ export function startRoomRoute(rows: NativeRows, grid: Grid): RoomRoute | null {
   const home = rooms.length === 1 ? rooms[0] : undefined;
   if (!home || !inBox(grid.start, home.box) || inBox(grid.goal, home.box) || home.controls.length < 3) {
     if (rooms.length) return null;
-    const resources = measureResources(rows, grid);
+    const complete = measureResources(rows, grid);
+    const resources = complete ?? measureResources(rows, grid, true);
     const nearbyLights = resources?.controls.filter(control => isLight(control) && !control.active
       && contactDirections.some(direction => same(shiftTile(grid.start, direction, grid.side), control.point)));
     if (!resources || resources.free < 1 || nearbyLights?.length !== 1) return null;
+    const hidden = !complete ? geometricComponents(rows).find(part => part.area * 2 > rows.length * rows[0]!.length) : null;
+    if (!complete && !hidden) return null;
+    const dark = hidden ? { candidates: gridTiles(rows, grid).filter(point =>
+      uniform(tileValues(rows, point, grid.side).flat(), hidden.color)), reached: [], refused: [] } : null;
     return { grid, rooms, phase: 'survey', control: nearbyLights[0]!.point, tried: [], capacity: null, passage: null,
-      stopped: false, resources, startedUnmapped: true };
+      stopped: false, resources, startedUnmapped: true, ...(dark ? { dark } : {}) };
   }
   const close = home.controls.filter(point => contactDirections.some(direction => same(shiftTile(grid.start, direction, grid.side), point)));
   const resources = measureResources(rows, grid);
@@ -172,6 +182,7 @@ function findPassage(rows: NativeRows, route: RoomRoute, away: Room): NativePoin
 
 export function nextRoomStep(route: RoomRoute, from: NativePoint): RoomStep | null {
   if (route.stopped) return null;
+  if (route.dark && route.resources) return darkResourceStep(route, from, route.resources, route.dark);
   if (route.resources) return resourceStep(route, from, route.resources);
   const { grid, phase, rooms, tried, passage } = route;
   const traversing = phase === 'traverse';
@@ -202,19 +213,78 @@ export function nextRoomStep(route: RoomRoute, from: NativePoint): RoomStep | nu
 }
 
 type ResourcePath = { at: NativePoint; first: ContactStep | null; distance: number };
-function walkablePaths(start: NativePoint, route: RoomRoute, resources: RoomResources): ResourcePath[] {
-  const floor = new Set([...route.rooms.flatMap(room => room.floor), ...resources.refills, ...resources.opened].map(key));
-  const queue: ResourcePath[] = [{ at: start, first: null, distance: 0 }], seen = new Set([key(start)]);
-  for (const { at, first, distance } of queue) for (const direction of contactDirections) {
-    const next = shiftTile(at, direction, route.grid.side), id = key(next);
-    if (!floor.has(id) || seen.has(id)) continue;
-    seen.add(id);
-    queue.push({ at: next, first: first ?? { direction, at: next }, distance: distance + 1 });
+const edge = (a: NativePoint, b: NativePoint) => key(a) + '>' + key(b);
+function walkablePaths(start: NativePoint, route: RoomRoute, resources: RoomResources, considerDark = false): ResourcePath[] {
+  const { rooms, dark, grid } = route, { opened, refills, reserve } = resources;
+  const floor = new Set([...rooms.flatMap(room => room.floor), ...refills, ...opened, ...(dark?.reached ?? [])].map(key));
+  const refused = new Set(dark?.refused ?? []);
+  const questioned = new Set([...refused].map(attempt => attempt.slice(attempt.indexOf('>') + 1)));
+  const explore = !!dark && considerDark && opened.length > 0;
+  const hidden = new Set(explore ? dark.candidates.filter(point => !rooms.some(room => inBox(point, room.box))).map(key) : []);
+  const paths: ResourcePath[] = [{ at: start, first: null, distance: 0 }], seen = new Set([key(start)]);
+  for (const path of paths) {
+    if (considerDark && path.distance + 1 >= reserve) continue;
+    const steps = contactDirections.map(direction => ({ direction, at: shiftTile(path.at, direction, grid.side) }));
+    // Equally short routes through unexplored terrain extend away from the entry
+    // instead of repeatedly approaching the same obstacle from the known side.
+    if (explore) steps.sort((a, b) => distance(b.at, grid.start) - distance(a.at, grid.start));
+    for (const step of steps) {
+      const site = key(step.at), confirmed = floor.has(site);
+      if (seen.has(site) || refused.has(edge(path.at, step.at)) || (!confirmed && (!hidden.has(site) || questioned.has(site)))) continue;
+      seen.add(site);
+      paths.push({ at: step.at, first: path.first ?? step, distance: path.distance + 1 });
+    }
   }
-  return queue;
+  return paths;
 }
 
 type ResourceOffer = { path: ResourcePath; step: RoomStep; cost: number };
+
+function darkResourceStep(route: RoomRoute, from: NativePoint, resources: RoomResources, dark: DarkTransit): RoomStep | null {
+  const { side, goal } = route.grid, { controls, free, refills, opened, reserve } = resources;
+  const rooms = route.rooms, mapped = new Set(rooms.map(room => room.ink));
+  const known = new Set([...rooms.flatMap(room => room.floor), ...opened, ...dark.reached, ...refills].map(key));
+  const move = (first: ContactStep, target: NativePoint, intent: RoomIntent, contact = false): RoomStep =>
+    ({ ...first, target, intent, contact, ...(!contact && !known.has(key(first.at)) ? { probe: true } : {}) });
+  const goalMapped = rooms.some(room => inBox(goal, room.box));
+  if (goalMapped) {
+    const exit = walkablePaths(from, route, resources).find(path => same(path.at, goal) && path.distance <= reserve);
+    if (exit?.first) return move(exit.first, goal, 'exit');
+  }
+  const paths = walkablePaths(from, route, resources, true);
+  const go = (targets: readonly NativePoint[], intent: RoomIntent) => {
+    const path = paths.find(path => path.first && targets.some(target => same(target, path.at)));
+    return path?.first ? move(path.first, path.at, intent) : null;
+  };
+  const approach = (targets: readonly Control[], intent: RoomIntent) => {
+    for (const path of paths) for (const direction of contactDirections) {
+      const at = shiftTile(path.at, direction, side);
+      if (path.distance + 1 < reserve && targets.some(control => same(control.point, at))) {
+        return move(path.first ?? { direction, at }, at, intent, path.first === null);
+      }
+    }
+    return null;
+  };
+  const lights = controls.filter(isLight), gates = controls.filter(control => !isLight(control) && !control.active);
+  if (goalMapped && gates.length === 0) {
+    const exit = go([goal], 'exit');
+    if (exit) return exit;
+  }
+  if (!free) return approach(lights.filter(light => light.active && mapped.has(light.identity[0])), 'release') ?? go(refills, 'refill');
+  if (!opened.length && rooms.length) {
+    const refill = go(refills, 'refill');
+    if (refill) return refill;
+  }
+  const nearbyRefill = paths.find(path => path.first && path.distance <= 3 && refills.some(point => same(point, path.at)));
+  const full = resources.meter.bar[2] - resources.meter.bar[0] + 1;
+  if (nearbyRefill?.first && reserve + 2 * nearbyRefill.distance + 4 <= full) {
+    return move(nearbyRefill.first, nearbyRefill.at, 'refill');
+  }
+  const survey = approach(lights.filter(light => !light.active && !mapped.has(light.identity[0])), 'survey');
+  const gate = approach(gates.filter(({ identity: [first, , last] }) => mapped.has(first) || mapped.has(last)), 'open');
+  return survey ?? gate ?? go(refills, 'refill');
+}
+
 function resourceStep(route: RoomRoute, from: NativePoint, resources: RoomResources): RoomStep | null {
   const { side, goal } = route.grid, { free, reserve, controls, refills } = resources;
   const paths = walkablePaths(from, route, resources);
@@ -289,17 +359,28 @@ function assessResources(route: RoomRoute, step: RoomStep, before: NativeRows, r
     }
   }
   const next = { ...route, rooms, resources };
+  const spent = resources.reserve === prior.reserve - 1 || !!route.dark && resources.reserve === prior.reserve
+    && prior.reserve === prior.meter.bar[2] - prior.meter.bar[0] + 1;
   if (!step.contact) {
+    if (route.dark && step.probe && result === 'blocked' && same(from, landed) && resources.free === prior.free
+      && (spent || resources.reserve === prior.reserve) && unchangedOutside(before, rows, [prior.meter.bar])) {
+      return { route: { ...next, dark: { ...route.dark, refused: [...route.dark.refused, edge(from, step.at)] } },
+        reason: 'dark_tile_refused_from_observed_position' };
+    }
     if (result !== 'landing' && result !== 'contact') return null;
+    if (route.dark && prior.free !== resources.free) return null;
+    if (route.dark && !route.dark.reached.some(point => same(point, landed))) {
+      next.dark = { ...route.dark, reached: [...route.dark.reached, landed] };
+    }
     next.rooms = rooms.map(room => inBox(landed, room.box) && !room.floor.some(point => same(point, landed))
       ? { ...room, floor: [...room.floor, landed] } : room);
     const pickup = prior.refills.some(point => same(point, landed));
     return pickup
       ? resources.reserve > prior.reserve - 1 && !resources.refills.some(point => same(point, landed))
         ? { route: next, reason: 'refill_consumed_and_action_reserve_increased' } : null
-      : resources.reserve === prior.reserve - 1 ? { route: next, reason: 'confirmed_step_on_remembered_floor' } : null;
+      : spent ? { route: next, reason: step.probe ? 'dark_tile_confirmed_by_movement' : 'confirmed_step_on_remembered_floor' } : null;
   }
-  if (!same(from, landed) || resources.reserve !== prior.reserve - 1) return null;
+  if (!same(from, landed) || !spent) return null;
   const control = prior.controls.find(item => same(item.point, step.target));
   const after = resources.controls.find(item => same(item.point, step.target));
   if (!control || !after || control.active === after.active) return null;

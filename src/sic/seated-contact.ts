@@ -149,7 +149,7 @@ export function createSicVerifyFrameContact(family = verifyFrameContactId): Nati
       const mode = execution?.reasoningMode ?? 'exploration';
       const action = { action_ref: step.direction[0], data: {} };
       const probeControl = roomStep?.contact === true && (roomStep.intent === 'survey' || roomStep.intent === 'open');
-      const probe = !local.refs.length || probeControl;
+      const probe = !local.refs.length || probeControl || roomStep?.probe === true;
       const facts = { eligibleProbe: probe && !local.seated,
         routeSupported: !probe && !local.seated, knownInteraction: local.seated, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
@@ -171,10 +171,12 @@ export function createSicVerifyFrameContact(family = verifyFrameContactId): Nati
         refill: 'Reach the visible refill before the movement reserve runs out',
         release: 'Free a visible capacity unit while keeping the observed map',
         survey: 'Reach the control that reveals the next uncharted room',
-        open: 'Open the gate between two surveyed rooms without reserving capacity',
+        open: roomRoute?.dark ? 'Open the gate for the next passage without reserving lighting capacity'
+          : 'Open the gate between two surveyed rooms without reserving capacity',
         exit: 'Reach the exit through the opened gates and remembered terrain',
       } as const;
       const situation = local.seated ? 'Test the direction into the frame after the piece and frame joined visually'
+        : roomStep?.probe ? 'Test one dark tile on the route to the next visible target'
         : roomStep?.intent ? resourceSituations[roomStep.intent]
         : roomRoute ? roomSituations[roomRoute.phase] : strategy === 'P05' ? 'Check that the direction moves the piece by one tile'
           : 'Approach the frame through the visible surface and revise the route if a step is refused';
@@ -220,7 +222,8 @@ export function createSicVerifyFrameContact(family = verifyFrameContactId): Nati
       const { kind: result, at } = outcome(second, local, step);
       if (proposal.local.roomRoute && proposal.roomStep) {
         const assessment = assessRoomStep(proposal.local.roomRoute, proposal.roomStep, first, second, proposal.local.at, at, result);
-        return { matched: assessment !== null, seal_prefix: true, reason: assessment?.reason ?? 'room_route_prediction_contradicted' };
+        return { matched: proposal.roomStep.probe && assessment ? null : assessment !== null,
+          seal_prefix: true, reason: assessment?.reason ?? 'room_route_prediction_contradicted' };
       }
       const side = local.scene.side;
       const counter = projectedCounterWrite(local.counter, index + 1);
