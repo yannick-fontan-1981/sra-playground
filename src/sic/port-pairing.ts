@@ -9,7 +9,7 @@ import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
-import { measureGeometryControl, observeGeometryControl, type GeometryControl } from './port-geometry-control.ts';
+import { measureGeometryControl, measureSelectedGeometryControl, observeGeometryControl, type GeometryControl } from './port-geometry-control.ts';
 
 export const portPairingId = 'sic_port_pairing';
 export const learnPortPairingId = 'sic_connect_pieces_after_observed_motion';
@@ -110,7 +110,7 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
         : learns && sameLevel && !sameLevel.stopped ? resumeAfterDirection(sameLevel, rows, observation.frame_hash, ref, execution) : null;
       if (prior?.stopped || prior && !prior.reshaped && prior.attempts.length >= 48) return null;
       const model = prior?.model ?? measurePortLayout(observation, rows);
-      if (!model || model.bodies.length > 4 || model.bodies.some(body => body.material.size > 40 || body.ports.size > 8)) return null;
+      if (!model || model.bodies.length > 5 || model.bodies.some(body => body.material.size > 40 || body.ports.size > 8)) return null;
       const control = prior ? prior.control ?? null : measureGeometryControl(rows, model, model.poses);
       const acquired = learns && !prior && !control ? acquiredMotion(model, ref, observation.level_epoch, execution) : null;
       if (learns && !prior && !acquired && !control) return null;
@@ -256,7 +256,11 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
       const next = predicted ? choice.expected! : inferPortPoses(second, model, local.poses, strategy === 'learn_piece_motion' ? null : choice.part);
       let active = local.active, rotate = local.rotate;
       const motion = { ...local.motion };
-      if (next && strategy === 'reveal_piece_connectors') active = selectionChanged(local, choice.part!, first, second) ? choice.part : null;
+      let control = local.control;
+      if (next && strategy === 'reveal_piece_connectors') {
+        active = selectionChanged(local, choice.part!, first, second) ? choice.part : null;
+        if (active !== null) control = measureSelectedGeometryControl(first, second, model, next, active);
+      }
       const moved = next?.flatMap((pose, index) => same(pose, local.poses[index]) ? [] : [index]);
       if (moved?.length === 1) {
         const part = moved[0]!, [oldTurn, x, y] = local.poses[part]!, [turn, nx, ny] = next![part]!;
@@ -265,7 +269,7 @@ export function createSicPortPairing(family = portPairingId): NativeFamily<Propo
         else if ((nx === x) !== (ny === y)) motion[issued.action_ref] = [nx - x, ny - y];
       }
       if (next && active !== null) updatePorts(second, model, next, active);
-      state = { ...local, model, active, motion, rotate, poses: next ?? local.poses,
+      state = { ...local, model, active, motion, rotate, poses: next ?? local.poses, ...(control ? { control } : {}),
         blockedOverlap: local.blockedOverlap || !!choice.overlapping && same(next, local.poses), stopped: !next,
         frame: after.frame_hash, attempts: [...local.attempts, contextKey(before.frame_hash, choice.command.action_ref, choice.part)],
         evidence: [...local.evidence.slice(-3), after.observation_ref] };
