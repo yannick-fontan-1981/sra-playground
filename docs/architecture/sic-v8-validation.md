@@ -2036,4 +2036,12 @@ Le diagnostic depuis la sauvegarde retrouve les cinq pièces, les contrôles app
 
 SIC choisit une partition entièrement atteignable et vérifie chaque position au retour, y compris entre deux commandes d'une série continue. Le rejeu chronologique gagne en **41 commandes et 10,38 s** au niveau 6, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **103 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 144 commandes relèvent de SIC seul. TypeScript et les **47 tests ciblés** passent. Empreinte `3051eefe0e4d0e49933a6b78fa99a43d3872fb20b931fedb3e4652db6c2cc101`. La couverture atteint **554/636 niveaux (87,1 %)**, dont **55/99 niveaux 6 (55,6 %)**.
 
+### HOLE niveau 6, retrouver un contour de la couleur du fond
+
+Un exemple de la légende se fond dans son arrière-plan et laisse quatre cavités visibles. SIC compare l'alignement, l'espacement et les marges avec les exemples à trois et cinq cavités. Les quatre points et le fond observé dans le cadre déduit soutiennent le contour manquant. La mesure identifie 10 contours, 14 cavités et le fond à vérifier.
+
+Au clic 16, deux cavités adjacentes prennent la même couleur. SIC vérifie que chaque région modifiée reçoit intégralement sa couleur attendue et que le reste du champ est préservé. Le rejeu depuis la sauvegarde retrouve les mêmes 27 clics et confirme les retours.
+
+Depuis le niveau 1, le niveau 6 gagne en **27 clics et 23,77 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **49 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 76 commandes relèvent de SIC seul. TypeScript et les **103 tests ciblés** passent. Empreinte `232ee6eee709539c9f0fd59a10383dc8b79901f61bd9ed0cc2d854170165c821`. La couverture atteint **555/636 niveaux (87,3 %)**, dont **56/99 niveaux 6 (56,6 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
