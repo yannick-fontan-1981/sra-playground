@@ -22,17 +22,62 @@ export const SS03_LEVELS: readonly LevelSpec[] = [
   },
   {
     "id": "ss03-02",
-    "title": "Le triple verrou",
+    "title": "La presse latérale",
+    "facing": "N",
     "rows": [
-      "#############",
-      "#...#T.o#...#",
-      "#.o.#.o.#.g.#",
-      "#...#...#...#",
-      "##.###.###D##",
-      "#...........#",
-      "#.b...b..b..#",
-      "#...........#",
-      "#############"
+      "###########",
+      "#......####",
+      "#..o...####",
+      "#....Dbb###",
+      "#..#...####",
+      "#...b..####",
+      "#..o...Dg##",
+      "#...T..####",
+      "###########"
+    ],
+    "circuits": [
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 3
+          },
+          {
+            "x": 7,
+            "y": 3
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 5,
+          "y": 3
+        },
+        "circuit": "presse",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 6
+        },
+        "circuit": "sortie",
+        "direction": "E",
+        "closedWhen": "released"
+      }
     ]
   },
   {

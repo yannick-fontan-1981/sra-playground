@@ -14,7 +14,7 @@ Points de parité à préserver :
 6. Rejouer les huit témoins via le backend réellement intégré et vérifier la parité des images, de la progression et des annulations.
 7. Générer la ligne de galerie à partir des huit véritables images initiales. Conserver les jeux déjà présents dans Custom 4.
 8. Garder les témoins, le solveur, les phases internes et les fichiers de recherche hors des observations et des entrées de l’agent.
-9. Transporter les métadonnées `circuits` et `gates` des niveaux 7 et 8, et l’état `GAME_OVER`. Préserver Undo/Reset après une mort.
-10. Charger l’aide humaine aux pistons aux niveaux 7 et 8, avec le lien de référence vers Heroes and Light pour le niveau 8.
+9. Transporter les métadonnées `circuits` et `gates` des niveaux 2, 7 et 8, et l’état `GAME_OVER`. Préserver Undo/Reset après une mort.
+10. Charger l’aide humaine aux pistons aux niveaux 2, 7 et 8, avec le lien de référence vers Heroes and Light pour le niveau 8.
 
 Suivre la chaîne canonique du dépôt : tests → commit → push GitHub → intégration sur main → publication du Site → vérification du SHA source publié. Ne pas annoncer que SS03 est disponible sur le Site à partir du seul push du laboratoire.

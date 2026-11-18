@@ -149,13 +149,23 @@ try {
   };
   for(let level=1;level<=SS03_LEVELS.length;level++){
     chooseLevel(level);
-    assert.equal($('piston-help').hidden,level!==7&&level!==8,`Piston help visibility on level ${level}`);
+    assert.equal($('piston-help').hidden,![2,7,8].includes(level),`Piston help visibility on level ${level}`);
     assert.equal($('tutorial').hidden,level!==1);
     assert.equal($('defeat').hidden,true);
   }
   assert.ok($('piston-help').textContent.includes('Une file de caisses avance ensemble.'));
   assert.equal($('source-link').href,'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2');
-  report.checks.push('Piston help appears only in levels 7 and 8; level 8 links to the requested Heroes and Light puzzle 2');
+  report.checks.push('Piston help appears only in levels 2, 7 and 8; level 8 links to the requested Heroes and Light puzzle 2');
+
+  chooseLevel(2);
+  assert.equal($('piston-help').hidden,false);
+  assert.equal($('source-link').hidden,true,'The new original room has no obsolete Hauling 18 reference');
+  const mediumWitness=witnesses.find(w=>w.level===2)?.actions;
+  assert.ok(mediumWitness?.length);
+  await replay(mediumWitness);
+  assert.equal(ref.observe().levelsCompleted,1,'The new level is completed by real keyboard input');
+  assert.equal(ref.observe().level,1,'Manual completion returns to the first uncompleted room');
+  report.checks.push('The new medium level 2 displays piston help and its complete directional witness solves through the real interface');
 
   chooseLevel(7);
   const pistonCaptureStart=captures.length;
@@ -194,10 +204,9 @@ try {
   assert.ok([...window.document.querySelectorAll('[data-action]')].every(button=>!button.disabled));
   report.checks.push('Reset during the forced piston phase restores level 7, its counter and playable controls without stale frames');
 
-  // No internal state is injected to manufacture a death scene. The shipped maps were
-  // searched through real directional transitions (depth <=24, at most 50,002 states)
-  // without finding a short GAME_OVER route; engine death/undo tests cover that rule.
-  report.gameOverCoverage={status:'not-exercised-through-level-ui',reason:'No short reachable death route found in the shipped levels; no private state mutation used.'};
+  // Successful witnesses exercise the actual interface; no private state is injected.
+  // Engine tests cover death, Undo and Reset independently.
+  report.gameOverCoverage={status:'not-exercised-through-level-ui',reason:'Fatal UI paths are not exercised in this run; engine tests cover death, Undo and Reset.'};
 
   assert.ok(captures.every(frame=>{
     for(let i=0;i<frame.length;i+=4)if(frame[i]===204&&frame[i+1]===204&&frame[i+2]===204)return false;
