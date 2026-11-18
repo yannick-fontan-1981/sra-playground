@@ -37,7 +37,7 @@ export const LEVEL_INFO = [
   },
   {
     "puzzle": 0,
-    "label": "Création originale · Deux presses, deux boutons en niche.",
+    "label": "Création originale · Deux presses coordonnées et une plaque de maintien.",
     "url": "",
     "piston": true
   },

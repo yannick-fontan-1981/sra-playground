@@ -1,12 +1,14 @@
-# SS03 — La ruse verte · v0.3.0
+# SS03 — La ruse verte · v0.4.0
 
 Laboratoire autonome du troisième jeu Sinking Star : un **Voleur vert**, huit niveaux et un tutoriel chargé dès l’ouverture. La grille compte 20 × 20 cellules de **3 × 3 pixels** dans une image de 64 × 64 pixels.
 
 ## Changements de cette version
 
-Le niveau 2, **La presse latérale**, remplace Le triple verrou par un défi de difficulté moyenne : deux caisses à préparer autour d’un pilier, une presse orientée vers l’est et deux boutons à remplir. Le parcours validé emploie deux poussées ; la seconde avance une file de deux caisses. La presse est indispensable à la résolution. L’aide aux pistons s’affiche dès ce niveau.
+Le niveau 7, **Les deux presses**, demande un peu plus de coordination. Un deuxième bouton est ajouté au circuit de la presse nord : il faut maintenant occuper les deux boutons ensemble pour la faire pousser.
 
-Les sept autres salles, les commandes et les animations sont conservées. Leurs observations sont comparées à la version précédente.
+Le parcours validé réemploie la caisse devenue libre après les poussées de la presse ouest pour tenir la nouvelle plaque. Il compte 54 directions et 18 tractions, contre 42 et 11 auparavant, avec toujours trois caisses et trois poussées de presse. Aucun minimum ni ordre obligatoire entre les presses n’est revendiqué.
+
+L’aide humaine explique les boutons partageant un même circuit. Les sept autres salles sont comparées à leurs observations de v0.3.0.
 
 ## Jouer
 
@@ -32,9 +34,9 @@ npm test
 npm run validate
 ```
 
-Les **47 tests** du moteur et du solveur couvrent les tractions, les portes, les cascades, les collisions, les plateformes, l’annulation et les animations. Les huit témoins rejoués comptent **472 directions, 147 tractions et 10 poussées de piston**, sans action bloquée, décès ni caisse perdue. Ce sont des parcours validés, sans garantie d’optimalité.
+Les **47 tests** du moteur et du solveur couvrent les tractions, les portes, les cascades, les collisions, les plateformes, l’annulation et les animations. Les huit témoins rejoués comptent **484 directions, 154 tractions et 10 poussées de piston**, sans action bloquée, décès ni caisse perdue. Ce sont des parcours validés, sans garantie d’optimalité.
 
-Les sept autres niveaux conservent exactement les observations de v0.2.0, y compris leurs images d’animation et leurs durées.
+Les sept autres niveaux conservent exactement les observations de v0.3.0, y compris leurs images d’animation et leurs durées.
 
 La vérification DOM de l’interface utilise Happy DOM dans une installation distincte :
 
@@ -42,7 +44,7 @@ La vérification DOM de l’interface utilise Happy DOM dans une installation di
 HAPPY_DOM_MODULE=/chemin/vers/happy-dom/lib/index.js node scripts/verify-ui-dom.mjs
 ```
 
-Ses **15 contrôles** exercent les événements, comparent les pixels du canvas et annulent une action pendant la phase de poussée. Ce n’est pas un test visuel dans un vrai navigateur. Le panneau de défaite est couvert par les tests moteur pour son état public, mais pas par un parcours humain fatal dans les huit niveaux. Voir `validation/` pour la portée exacte des contrôles.
+Ses **16 contrôles** exercent les événements, comparent les pixels du canvas et annulent une action pendant la phase de poussée. Ce n’est pas un test visuel dans un vrai navigateur. Le panneau de défaite est couvert par les tests moteur pour son état public, mais pas par un parcours humain fatal dans les huit niveaux. Voir `validation/` pour la portée exacte des contrôles.
 
 ## Origine des niveaux
 

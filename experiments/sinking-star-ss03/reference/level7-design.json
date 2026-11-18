@@ -12,7 +12,7 @@
       "####...o.bD....#",
       "####.o.........#",
       "###b.T.........#",
-      "####.b.........#",
+      "####.b....b....#",
       "####........o..#",
       "#######........#",
       "#######.......D#",
@@ -35,6 +35,10 @@
           {
             "x": 9,
             "y": 2
+          },
+          {
+            "x": 10,
+            "y": 5
           }
         ]
       },
@@ -83,172 +87,154 @@
     ]
   },
   "design": {
-    "kind": "original",
-    "guidePuzzle": null,
-    "concept": "Charger une presse à deux reprises pour pousser une file, puis utiliser une seconde presse orientée autrement.",
-    "zones": [
-      {
-        "name": "Presse ouest",
-        "purpose": "Le premier déclenchement place une caisse dans le couloir ; le second pousse la file de deux vers la niche du bouton."
-      },
-      {
-        "name": "Zone de manœuvre",
-        "purpose": "Contourner les caisses entre les chargements, en évitant de reprendre la caisse déjà déposée."
-      },
-      {
-        "name": "Presse nord",
-        "purpose": "Amener la troisième caisse par le côté puis actionner le piston vers un bouton contre paroi."
-      },
-      {
-        "name": "Sortie",
-        "purpose": "Les deux boutons de niche doivent rester occupés pour traverser la porte finale."
-      }
-    ],
-    "hint": "Une porte fléchée pousse ce qui occupe sa case lorsqu’elle se ferme. Les deux boutons dans les niches ne peuvent pas recevoir une caisse par simple traction."
+    "change": "A second remote button is added to the north-press circuit; both north buttons must be held simultaneously.",
+    "difficulty": "Modest increase from the prior level; the same three crates and two presses are retained.",
+    "newButton": {
+      "x": 10,
+      "y": 5
+    },
+    "northCircuit": "presse-nord",
+    "witnessReuse": "After the two west strokes, retrieve the spare crate and park it on the remote north-circuit button. The hero can then operate the original north button while pulling the final crate into its press.",
+    "constraintProof": "The remote plate is a different cell from the original north button. Only the hero and crates can occupy these two positions (no gate lies on either). Therefore firing the north press requires a crate to provide at least one simultaneous weight; in the verified route it holds the new remote plate.",
+    "pistonsRemainRequired": "The two final exit buttons still sit in three-wall niches and cannot be filled by ordinary pulling. Their positions and the sole gated entrance to the goal are unchanged.",
+    "scope": "Only the added button cell and the north circuit button list change; no extra crate, wall, press or engine rule.",
+    "notClaimed": [
+      "No proof of shortest route",
+      "The west-before-north order is not claimed compulsory",
+      "The specific spare crate identity is not claimed compulsory"
+    ]
   },
   "validation": {
     "complete": true,
-    "actions": 42,
-    "pulls": 11,
+    "actions": 54,
+    "previousActions": 42,
+    "pulls": 18,
+    "previousPulls": 11,
     "pistonStrokes": [
       {
-        "gateIndex": 0,
+        "action": 1,
+        "gate": 0,
+        "direction": "W",
         "movedActors": 1
       },
       {
-        "gateIndex": 0,
+        "action": 11,
+        "gate": 0,
+        "direction": "W",
         "movedActors": 2
       },
       {
-        "gateIndex": 1,
+        "action": 42,
+        "gate": 1,
+        "direction": "N",
         "movedActors": 1
       }
     ],
     "blocked": 0,
     "dead": false,
-    "noPistonAblation": {
-      "provenUnsolvable": true,
-      "method": "geometric-incoming-pull-proof",
-      "explanation": "Chaque bouton de sortie a trois voisins murés. Pour tirer une caisse sur un bouton, il faudrait une case praticable à la fois derrière et devant cette destination ; aucune direction ne satisfait cette condition. Aucun bouton ne porte de caisse au départ et la porte finale est l’unique accès à la cible. Sans poussée de piston, la sortie ne peut donc rester ouverte jusqu’à l’arrivée du Voleur.",
-      "targetProofs": [
-        {
-          "target": {
-            "x": 3,
-            "y": 4
-          },
-          "ordinaryPullCanFill": false,
-          "entrances": [
-            {
-              "direction": "N",
-              "stoneBefore": {
-                "x": 3,
-                "y": 5
-              },
-              "heroAfter": {
-                "x": 3,
-                "y": 3
-              },
-              "possible": false
-            },
-            {
-              "direction": "S",
-              "stoneBefore": {
-                "x": 3,
-                "y": 3
-              },
-              "heroAfter": {
-                "x": 3,
-                "y": 5
-              },
-              "possible": false
-            },
-            {
-              "direction": "W",
-              "stoneBefore": {
-                "x": 4,
-                "y": 4
-              },
-              "heroAfter": {
-                "x": 2,
-                "y": 4
-              },
-              "possible": false
-            },
-            {
-              "direction": "E",
-              "stoneBefore": {
-                "x": 2,
-                "y": 4
-              },
-              "heroAfter": {
-                "x": 4,
-                "y": 4
-              },
-              "possible": false
-            }
-          ]
-        },
-        {
-          "target": {
-            "x": 10,
-            "y": 1
-          },
-          "ordinaryPullCanFill": false,
-          "entrances": [
-            {
-              "direction": "N",
-              "stoneBefore": {
-                "x": 10,
-                "y": 2
-              },
-              "heroAfter": {
-                "x": 10,
-                "y": 0
-              },
-              "possible": false
-            },
-            {
-              "direction": "S",
-              "stoneBefore": {
-                "x": 10,
-                "y": 0
-              },
-              "heroAfter": {
-                "x": 10,
-                "y": 2
-              },
-              "possible": false
-            },
-            {
-              "direction": "W",
-              "stoneBefore": {
-                "x": 11,
-                "y": 1
-              },
-              "heroAfter": {
-                "x": 9,
-                "y": 1
-              },
-              "possible": false
-            },
-            {
-              "direction": "E",
-              "stoneBefore": {
-                "x": 9,
-                "y": 1
-              },
-              "heroAfter": {
-                "x": 11,
-                "y": 1
-              },
-              "possible": false
-            }
-          ]
-        }
+    "cratesPreserved": true,
+    "crateCount": 3,
+    "oldWitness": {
+      "complete": false,
+      "northPistonStrokes": 0,
+      "remotePlateFilled": false
+    },
+    "remotePlateHeldByCrateAtNorthStroke": true,
+    "initialDownPhaseKinds": [
+      "pull",
+      "piston"
+    ],
+    "inactiveNorthProbe": {
+      "actions": [
+        2,
+        4,
+        1,
+        1,
+        1,
+        3,
+        3,
+        2,
+        4,
+        2,
+        2,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        4,
+        1,
+        1,
+        1,
+        1,
+        4,
+        2,
+        2,
+        3,
+        3,
+        1,
+        3,
+        3
       ],
-      "goalEntrances": [
-        "N"
-      ]
+      "heroOnOriginalButton": true,
+      "remoteButtonEmpty": true,
+      "crateOnNorthGate": true,
+      "northCircuitPressed": false,
+      "northGateClosed": false,
+      "pistonFired": false
+    },
+    "activeNorthProbe": {
+      "witnessPrefixLength": 42,
+      "heroOnOriginalButton": true,
+      "remoteButtonHeldByCrate": true,
+      "northCircuitPressed": true,
+      "northGateClosed": true,
+      "pistonFired": true
     }
+  },
+  "previousRelease": {
+    "version": "0.3.0",
+    "sourceCommit": "6f5959b97a851965ae6880cf469a78d125874a4c",
+    "tileChanges": [
+      {
+        "x": 10,
+        "y": 5,
+        "before": ".",
+        "after": "b"
+      }
+    ],
+    "oldProbeActions": [
+      2,
+      4,
+      1,
+      1,
+      1,
+      3,
+      3,
+      2,
+      4,
+      2,
+      2,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      4,
+      1,
+      1,
+      1,
+      1,
+      4,
+      2,
+      2,
+      3,
+      3,
+      1,
+      3,
+      3
+    ]
   }
 }
