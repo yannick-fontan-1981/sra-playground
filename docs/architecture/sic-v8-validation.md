@@ -1886,6 +1886,8 @@ Le contrôle sur `8f8f919a` retrouve les déplacements écran mesurés par les q
 
 Le rejeu depuis la sauvegarde et le rejeu SIC seul depuis le niveau 1 produisent les mêmes commandes et les mêmes retours, avec la même empreinte que la qualification d'origine. Les **47 commandes du niveau 6 prennent 17,36 s** dans le rejeu chronologique. Les cinq tests ciblés sur les plaques et les passages passent.
 
+Le contrôle sur `c8d19e87` précise les liaisons. La plaque haute gauche en `(18,14)` maintient le passage droit. Le passage gauche s'ouvre avec la plaque haute droite en `(42,14)` ou la plaque basse gauche en `(18,42)`. Dans l'essai sans bloc sous la paire, une descente libère les deux plaques hautes et referme les deux passages. Dans le trajet retenu, le bloc maintient la plaque haute gauche à la commande 18. À la commande 35, l'autre pièce atteint la plaque basse et rouvre le passage gauche. La reprise et le rejeu chronologique reproduisent l'empreinte des 210 commandes et retours. Le niveau 6 prend **17,41 s** dans le rejeu chronologique.
+
 ### AR25 niveau 6, conserver les deux axes et les deux pièces
 
 Le rejeu de référence s'arrête au niveau 6 après 112 commandes. L'axe vertical est partiellement masqué. Le détecteur peut maintenant retrouver cette bande à partir de l'autre axe et vérifier la grille reconstruite. Les deux pièces occupent cinq et huit cellules. Une connexité diagonale propose de rattacher les fragments de la seconde pièce. Son premier déplacement confirme la translation de l'ensemble et l'immobilité de l'autre pièce.
