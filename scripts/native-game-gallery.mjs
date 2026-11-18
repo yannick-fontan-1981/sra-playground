@@ -1,10 +1,12 @@
-/** Generate native game's real level previews without Python or third-party image libraries. */
+/** Generate native games' real level previews without Python or third-party image libraries. */
 import { createHash } from 'node:crypto';
 import { deflateSync } from 'node:zlib';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SinkingStarSession } from '../src/games/sinking-star/core.ts';
 import { SS01_LEVELS } from '../src/games/sinking-star/levels.ts';
+import { PushPuzzleSession } from '../experiments/sinking-star-ss02/src/core.ts';
+import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
 
 function crc32(bytes) {
   let crc = 0xffffffff;
@@ -20,22 +22,30 @@ function chunk(type, data) {
   return Buffer.concat([length, name, data, crc]);
 }
 export async function makeNativeGalleryGroup(root) {
-  const session = new SinkingStarSession(SS01_LEVELS), columns = SS01_LEVELS.length;
-  const frames = SS01_LEVELS.map((_, i) => session.selectLevel(i + 1));
-  const width = columns * 64, height = 64, stride = width * 3 + 1, pixels = Buffer.alloc(stride * height);
-  for (let y = 0; y < height; y++) for (let level = 0; level < columns; level++) for (let x = 0; x < 64; x++) {
-    const {frame, palette} = frames[level], hex = palette[frame[y][x]].slice(1), rgb = Number.parseInt(hex, 16);
-    const at = y * stride + 1 + (level * 64 + x) * 3;
-    pixels[at] = rgb >>> 16; pixels[at + 1] = (rgb >>> 8) & 255; pixels[at + 2] = rgb & 255;
-  }
+  const games = [new SinkingStarSession(SS01_LEVELS), new PushPuzzleSession(SS02_LEVELS)].map((session, row) => {
+    const { gameCode: code, levelCount } = session.observe();
+    const frames = Array.from({ length: levelCount }, (_, column) => session.selectLevel(column + 1));
+    return { code, row, levelCount, frames };
+  });
+  const columns = Math.max(...games.map(game => game.levelCount));
+  const rows = games.length, width = columns * 64, height = rows * 64;
+  const stride = width * 3 + 1, pixels = Buffer.alloc(stride * height);
+  for (const { row, frames } of games) frames.forEach(({ frame, palette }, column) => {
+    for (let y = 0; y < 64; y++) for (let x = 0; x < 64; x++) {
+      const rgb = Number.parseInt(palette[frame[y][x]].slice(1), 16);
+      const at = (row * 64 + y) * stride + 1 + (column * 64 + x) * 3;
+      pixels[at] = rgb >>> 16; pixels[at + 1] = (rgb >>> 8) & 255; pixels[at + 2] = rgb & 255;
+    }
+  });
   const header = Buffer.alloc(13);
   header.writeUInt32BE(width); header.writeUInt32BE(height, 4); header[8] = 8; header[9] = 2;
   const png = Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]),chunk('IHDR',header),chunk('IDAT',deflateSync(pixels)),chunk('IEND',Buffer.alloc(0))]);
   const image = '/gallery/custom_4.png';
   await mkdir(resolve(root, 'public/gallery'), {recursive:true});
   await writeFile(resolve(root, `public${image}`), png);
-  return {id:'custom_4',image,width,height,rows:1,columns,sha256:createHash('sha256').update(png).digest('hex'),games:[{
-    code:'SS01',row:0,levelCount:columns,
-    levels:frames.map((o,i)=>({level:i+1,column:i,frameSha256:createHash('sha256').update(Buffer.from(o.frame.flat())).digest('hex')})),
-  }]};
+  return { id: 'custom_4', image, width, height, rows, columns, sha256: createHash('sha256').update(png).digest('hex'),
+    games: games.map(({ frames, ...game }) => ({ ...game, levels: frames.map(({ frame }, column) => ({
+      level: column + 1, column, frameSha256: createHash('sha256').update(Buffer.from(frame.flat())).digest('hex'),
+    })) })),
+  };
 }

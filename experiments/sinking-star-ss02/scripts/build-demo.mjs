@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 const root=new URL('../',import.meta.url);
-const parts=await Promise.all(['core','levels','level-info','browser'].map(name=>readFile(new URL(`dist/${name}.js`,root),'utf8')));
-// These four owned modules have only top-level imports/exports. TypeScript is compiled first.
+const parts=await Promise.all(['core','levels','level-info','tutorial','browser'].map(name=>readFile(new URL(`dist/${name}.js`,root),'utf8')));
+// These modules have only top-level imports/exports. TypeScript is compiled first.
 const bundle=parts.map(s=>s.replace(/^import .*?;\s*$/gm,'').replace(/^export /gm,'')).join('\n');
 const template=await readFile(new URL('index.template.html',root),'utf8');
 if(bundle.includes('</script'))throw new Error('Unsafe inline script boundary');
