@@ -57,6 +57,12 @@ La salle de 11 × 9 cellules contient deux caisses, une presse orientée vers l�
 
 La recherche complète d’états trouve un parcours de 27 directions, huit tractions et deux poussées de presse. Sans piston, les 6 766 états atteignables sont épuisés sans solution ; sans traction, les 40 états atteignables le sont aussi. Les deux caisses sont conservées. La spécification et ces contrôles sont conservés dans `reference/level2-design.json`.
 
+### Niveau 7 · Les deux presses — coordination supplémentaire
+
+La v0.4.0 conserve la topologie, les trois caisses, les positions des portes et les deux niches de sortie. Une seule case de sol devient un bouton, en (10,5), ajouté au circuit de la presse nord. Ses deux boutons doivent être occupés simultanément.
+
+Le témoin de 54 directions réutilise une caisse de la première file comme poids pour ce second bouton, puis active la presse nord avec le Voleur. Les observations atteignables d’une activation à un seul bouton et à deux boutons sont vérifiées dans `scripts/validate-levels.mjs`. `reference/level7-design.json` conserve la modification exacte, les témoins de contrôle et les limites des affirmations de difficulté.
+
 ## Vérification
 
 Les témoins des niveaux 3, 6 et 8 viennent des solutions communautaires ci-dessus. Ceux des créations originales et des deux adaptations ont été trouvés par recherche, puis tous les témoins sont rejoués avec le moteur TypeScript final. Ils prouvent la solvabilité, sans garantie de longueur minimale. `validation/levels-report.json` publie les résultats, dimensions et empreintes des cartes et des témoins.

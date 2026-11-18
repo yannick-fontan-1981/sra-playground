@@ -1,6 +1,6 @@
 {
   "game": "SS03",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "levels": [
     {
       "level": 1,
@@ -239,17 +239,18 @@
         11
       ],
       "stones": 3,
-      "buttons": 4,
+      "buttons": 5,
       "pistonGates": 3,
       "initialWalkingCells": null,
-      "actions": 42,
-      "pulls": 11,
+      "actions": 54,
+      "pulls": 18,
       "pullDirections": [
+        "E",
         "N",
         "S",
         "W"
       ],
-      "releaseMoves": 5,
+      "releaseMoves": 7,
       "stonesUsingBothAxes": 3,
       "pistonStrokes": 3,
       "pistonEvents": [
@@ -266,7 +267,7 @@
           "movedActors": 2
         },
         {
-          "action": 30,
+          "action": 42,
           "gate": 1,
           "direction": "N",
           "movedActors": 1
@@ -277,12 +278,18 @@
       "pullAblationStates": 71,
       "cratesPreserved": true,
       "solved": true,
-      "mapSha256": "63c4eb9ece6d46ead1bad0d4bde17376ea4e05b0c797576d998712106866ab42",
-      "rulesSha256": "8a24f9e050689bad852218dd5a2ca0b39ad84ca599c69c16184e80b3a6994d64",
-      "witnessSha256": "db0c461e005c117645c623999b578ef87064a415b5d272ff01fcfb83c19985be",
+      "mapSha256": "48403d7f6ce67a688304956a430fd296be09c2d90f1aca93c5b2040b69d5a4b6",
+      "rulesSha256": "9d368e64ef7ca0c4325af9577eb6ea436547662b89ebecbd24b65d1f33f41f57",
+      "witnessSha256": "2a50203cf9f7db5812382c8b325847301bd3490e83e8a119458ae414dd3d76d4",
       "pistonsRequired": {
         "method": "two unfillable target niches and one gated exit",
         "verified": true
+      },
+      "additionalPlateConstraint": {
+        "verified": true,
+        "oldRoutePrefix": 30,
+        "singleButtonDoesNotPush": true,
+        "remoteCrateEnablesNorthPiston": true
       }
     },
     {
@@ -361,6 +368,13 @@
       "sha256": "e8933ee0633637d076d10fb20a91da0356ca3e3620908afb87301b6332553bb8"
     },
     {
+      "level": 2,
+      "previousLevel": 2,
+      "actions": 27,
+      "matched": true,
+      "sha256": "eac6a3b3993763b4679670a83175cadd1f021f1e8a6b934038609a2bd01138d3"
+    },
+    {
       "level": 3,
       "previousLevel": 3,
       "actions": 61,
@@ -389,13 +403,6 @@
       "sha256": "b49c0bec312b0a36ff6af060ac423b4b9e5bea56fa69fab7a78159a6b221211e"
     },
     {
-      "level": 7,
-      "previousLevel": 7,
-      "actions": 42,
-      "matched": true,
-      "sha256": "efb4ecffba0388c9336a5450fc8fe8912538608c842663fa5a62abc56a66aa43"
-    },
-    {
       "level": 8,
       "previousLevel": 8,
       "actions": 154,
@@ -403,8 +410,8 @@
       "sha256": "10677ed38f65c544532286402c4285f840e21d5da1867d78bb2b680c89da8f81"
     }
   ],
-  "totalActions": 472,
-  "totalPulls": 147,
+  "totalActions": 484,
+  "totalPulls": 154,
   "totalPistonStrokes": 10,
   "success": true
 }

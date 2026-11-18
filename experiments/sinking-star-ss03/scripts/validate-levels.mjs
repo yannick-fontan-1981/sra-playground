@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
-import {compileLevel,initialState,stepDetailed,doorsOpen,equal,contains,offset,terrainAt,PullPuzzleSession} from '../dist/core.js';
+import {compileLevel,initialState,stepDetailed,doorsOpen,equal,contains,offset,terrainAt,gateClosed,PullPuzzleSession} from '../dist/core.js';
 import {SS03_LEVELS} from '../dist/levels.js';
 import {LEVEL_INFO} from '../dist/level-info.js';
 import {reachable,solve} from './solver.mjs';
@@ -15,7 +15,7 @@ const directions=['N','S','W','E'];
 const number=p=>p.y*20+p.x;
 const hash=value=>createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const session=new PullPuzzleSession(SS03_LEVELS);
-const report={game:'SS03',version:'0.3.0',levels:[],legacyObservationParity:[],totalActions:0,totalPulls:0,totalPistonStrokes:0,success:false};
+const report={game:'SS03',version:'0.4.0',levels:[],legacyObservationParity:[],totalActions:0,totalPulls:0,totalPistonStrokes:0,success:false};
 assert.equal(SS03_LEVELS.length,8);assert.equal(witnesses.length,8);assert.equal(LEVEL_INFO.length,8);
 const conversion={'*':'o','{':'b','[':'D','G':'g'};
 assert.equal(references.levels.filter(l=>l.kind==='transcription').length,2);
@@ -109,6 +109,32 @@ const entrances=directions.map(d=>offset(w7.goal,d)).filter(p=>terrainAt(w7,p)!=
 assert.equal(entrances.length,1);assert.ok(equal(entrances[0],w7.gates.find(g=>g.circuit==='sortie').at));
 report.levels[6].pistonsRequired={method:'two unfillable target niches and one gated exit',verified:true};
 assert.deepEqual(report.levels[6].pistonEvents.map(e=>e.movedActors),[1,2,1]);
+
+// Reach the old trigger through actual inputs: its new remote weight must be present.
+const northIndex=w7.gates.findIndex(g=>g.circuit==='presse-nord');
+const northButtons=w7.circuits.find(c=>c.id==='presse-nord').buttons;
+assert.equal(northButtons.length,2);
+let probe=s7;
+for(const action of presses.previousRelease.oldProbeActions){
+ const detail=stepDetailed(w7,probe,action);probe=detail.state;
+ assert.ok(!probe.failed&&!probe.dead);
+ assert.ok(!detail.phases.some(p=>p.kind==='piston'&&p.gateIndex===northIndex));
+}
+assert.ok(equal(probe.hero,northButtons[0]));
+assert.ok(contains(probe.stones,w7.gates[northIndex].at));
+assert.ok(!contains(probe.stones,northButtons[1]));
+assert.equal(gateClosed(w7,probe,northIndex),false);
+let active=s7,checkedActivation=false;
+for(const action of witnesses[6].actions){
+ const detail=stepDetailed(w7,active,action);active=detail.state;
+ for(const phase of detail.phases)if(phase.kind==='piston'&&phase.gateIndex===northIndex){
+  assert.ok(equal(phase.before.hero,northButtons[0]));
+  assert.ok(contains(phase.before.stones,northButtons[1]));
+  checkedActivation=true;
+ }
+}
+assert.ok(checkedActivation);
+report.levels[6].additionalPlateConstraint={verified:true,oldRoutePrefix:presses.previousRelease.oldProbeActions.length,singleButtonDoesNotPush:true,remoteCrateEnablesNorthPiston:true};
 assert.deepEqual(report.levels[7].pistonEvents.map(e=>[e.action,e.direction,e.movedActors]),[[60,'W',2],[86,'W',3],[112,'W',5],[146,'W',6],[146,'N',1]]);
 assert.equal(report.levels[7].stones,6);
 report.totalActions=report.levels.reduce((n,l)=>n+l.actions,0);
