@@ -1,0 +1,81 @@
+[
+  {
+    "sourceId": "heroes3_1_v3",
+    "sourceGuide": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#énigme-10",
+    "sourcePuzzle": 10,
+    "rows": [
+      "###############",
+      "#...###########",
+      "#.G...........#",
+      "#O..#########.#",
+      "#####......##.#",
+      "###....#.#.##.#",
+      "####.......##O#",
+      "###....###.##.#",
+      "###..B.###.##.#",
+      "###....###....#",
+      "###############"
+    ],
+    "originalWitness": "UUULLRRURRRRRDDLLLLUURRRRDDDDDRRRUUUUUUULLLLLLLLLLL",
+    "originalActions": 51,
+    "notes": "M is monster-clear door; Y Bard on switch; [ yellow door; { yellow switch. PZ variants with exact row topology."
+  },
+  {
+    "sourceId": "heroes3_2_v4",
+    "sourceGuide": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#énigme-11",
+    "sourcePuzzle": 11,
+    "rows": [
+      "############",
+      "#..........#",
+      "#..........#",
+      "#..........#",
+      "####.####..#",
+      "#..#.#.Y#..#",
+      "#..#.#.##..#",
+      "#..#...#G[O#",
+      "#..######..#",
+      "#..........#",
+      "#..........#",
+      "############"
+    ],
+    "originalWitness": "LDDLLUUUURRRRRRDDUUUULLLLLLDRRDRRRRDDDDDLDLLLLLLLUUDDRRRRRRRRUUUUUULLLLLLDDUURRRRRDDDDL",
+    "originalActions": 87,
+    "notes": "M is monster-clear door; Y Bard on switch; [ yellow door; { yellow switch. PZ variants with exact row topology."
+  },
+  {
+    "sourceId": "heroes3_3_v2",
+    "sourceGuide": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#énigme-12",
+    "sourcePuzzle": 12,
+    "rows": [
+      "##############",
+      "#..###########",
+      "#B.....*..####",
+      "#..######.####",
+      "#########.####",
+      "#G#######.####",
+      "#...**.......#",
+      "###########..#",
+      "##############"
+    ],
+    "originalWitness": "RRRRRRRLLLLLLULDRRRRRRRRDDDDLLRRRRDULLLLLRRRRRDULLLLLLLLLLU",
+    "originalActions": 59,
+    "notes": "M is monster-clear door; Y Bard on switch; [ yellow door; { yellow switch. PZ variants with exact row topology."
+  },
+  {
+    "sourceId": "heroes3_4",
+    "sourceGuide": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#énigme-13",
+    "sourcePuzzle": 13,
+    "rows": [
+      "#############",
+      "#O..B..O#####",
+      "#.......#...#",
+      "#...#...M.G.#",
+      "#.......#...#",
+      "#.......#####",
+      "#############"
+    ],
+    "originalWitness": "DRRLLLDDDRRRRUURRR",
+    "originalActions": 18,
+    "notes": "M is monster-clear door; Y Bard on switch; [ yellow door; { yellow switch. PZ variants with exact row topology."
+  }
+]

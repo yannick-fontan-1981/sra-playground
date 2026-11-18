@@ -1,0 +1,422 @@
+{
+  "game": "SS05",
+  "version": "0.1.2",
+  "levels": [
+    {
+      "level": 1,
+      "id": "ss05-01",
+      "title": "L’atelier du chant",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Chant, ancrage, presse, pont et reflet.",
+        "url": "",
+        "piston": true
+      },
+      "dimensions": [
+        20,
+        13
+      ],
+      "floorCells": 73,
+      "waterCells": 185,
+      "initialStones": 2,
+      "initialMonsters": 0,
+      "initialPlatforms": 0,
+      "mirrors": 1,
+      "buttons": 2,
+      "gates": 2,
+      "actions": 32,
+      "songTurns": 3,
+      "stoneMoves": 3,
+      "monsterMoves": 0,
+      "platformMoves": 0,
+      "reflections": 1,
+      "pistonPushes": 1,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 102,
+      "maxFrames": 6,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 1
+      },
+      "mapSha256": "a62c367c280271a16358735b4fcf73ab39f358463ff3adcf1970d25f93e54cf9",
+      "witnessSha256": "82240252f98f5504326427a08f23b423113f62eb8426b696e8df516bddbb1cfd",
+      "observationsSha256": "56caf1e0c6656450e6feaf8b9c8019a1b3323918b0b589f3fb00e0a3be1ed4ec"
+    },
+    {
+      "level": 2,
+      "id": "ss05-02",
+      "title": "Les trois blocs du crochet",
+      "source": {
+        "puzzle": 12,
+        "label": "Grille transcrite · Heroes 3: Bard, Druid · Énigme 12.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-12",
+        "piston": false
+      },
+      "dimensions": [
+        14,
+        9
+      ],
+      "floorCells": 31,
+      "waterCells": 0,
+      "initialStones": 3,
+      "initialMonsters": 0,
+      "initialPlatforms": 0,
+      "mirrors": 0,
+      "buttons": 0,
+      "gates": 0,
+      "actions": 59,
+      "songTurns": 21,
+      "stoneMoves": 22,
+      "monsterMoves": 0,
+      "platformMoves": 0,
+      "reflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 178,
+      "maxFrames": 4,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 9
+      },
+      "mapSha256": "392083131f0390635ccedce8c5a2664ddcc0a52644bfaa1817b6b43ec176999e",
+      "witnessSha256": "7aa9f0aa8cb28a6b1ab3ee1944aef50aefca03e300d9ea74ae798eae88e3e0d6",
+      "observationsSha256": "0957dc535bbcb053deb5107059bfbbf19a79e7b3facae7217ce8ab1bfe008e9c"
+    },
+    {
+      "level": 3,
+      "id": "ss05-03",
+      "title": "La ronde des sentinelles",
+      "source": {
+        "puzzle": 10,
+        "label": "Grille transcrite · Heroes 3: Bard, Druid · Énigme 10.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-10",
+        "piston": false
+      },
+      "dimensions": [
+        15,
+        11
+      ],
+      "floorCells": 62,
+      "waterCells": 0,
+      "initialStones": 0,
+      "initialMonsters": 2,
+      "initialPlatforms": 0,
+      "mirrors": 0,
+      "buttons": 0,
+      "gates": 0,
+      "actions": 51,
+      "songTurns": 16,
+      "stoneMoves": 0,
+      "monsterMoves": 16,
+      "platformMoves": 0,
+      "reflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 2,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 159,
+      "maxFrames": 8,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 38
+      },
+      "mapSha256": "32834411d5028a6fb9fc694b9744570326f040fab1e2fd0fa0fd648048c353c5",
+      "witnessSha256": "c0184d1b359f81616dbbfaaa573e562b78329dcdc46a597604a0653fbc479272",
+      "observationsSha256": "f3d2261219eb41f0df17c19e2b1bedc788787cc616f4f029a3d9f83b51bdbf7f"
+    },
+    {
+      "level": 4,
+      "id": "ss05-04",
+      "title": "La cage en U",
+      "source": {
+        "puzzle": 11,
+        "label": "Grille transcrite · Heroes 3: Bard, Druid · Énigme 11.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-11",
+        "piston": false
+      },
+      "dimensions": [
+        12,
+        12
+      ],
+      "floorCells": 78,
+      "waterCells": 0,
+      "initialStones": 0,
+      "initialMonsters": 1,
+      "initialPlatforms": 0,
+      "mirrors": 0,
+      "buttons": 1,
+      "gates": 0,
+      "actions": 87,
+      "songTurns": 20,
+      "stoneMoves": 0,
+      "monsterMoves": 20,
+      "platformMoves": 0,
+      "reflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 262,
+      "maxFrames": 4,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 43
+      },
+      "mapSha256": "4f9e0357ff4a65f2a76d27c65ffe9c9b21f35e2fe7af31ace87e92af25dc63a8",
+      "witnessSha256": "bc65fb16ba246bcca804d6b6ad352105d169f3875c5eba63d2335dcd0c14021d",
+      "observationsSha256": "32d78eaa71526f09a9d75c3603d5e71f58200751c751be15c5a3c34eee0a4df5"
+    },
+    {
+      "level": 5,
+      "id": "ss05-05",
+      "title": "Rompre le chant",
+      "source": {
+        "puzzle": 1,
+        "label": "Adaptation · Heroes and Mirrors · Énigme 1 : rompre le lien par reflet.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1",
+        "piston": false
+      },
+      "dimensions": [
+        12,
+        10
+      ],
+      "floorCells": 54,
+      "waterCells": 66,
+      "initialStones": 1,
+      "initialMonsters": 0,
+      "initialPlatforms": 0,
+      "mirrors": 1,
+      "buttons": 1,
+      "gates": 0,
+      "actions": 31,
+      "songTurns": 14,
+      "stoneMoves": 14,
+      "monsterMoves": 0,
+      "platformMoves": 0,
+      "reflections": 3,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 94,
+      "maxFrames": 4,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 1
+      },
+      "mapSha256": "f0f4d7bcc398afb027e36a9a4d70db2835e89df07274494d4cc00568ad03bdfa",
+      "witnessSha256": "342efac72dc5b8268fb3a66b393ca5cb1246455f344e141860b2f9dc4eeadfff",
+      "observationsSha256": "ff4c71bc97ff36216a1af419aa4ceadc40c6632fc1bb780cba6565f5922a6806",
+      "mechanismChecks": {
+        "disableReflections": {
+          "status": "unsolvable",
+          "states": 1640
+        }
+      }
+    },
+    {
+      "level": 6,
+      "id": "ss05-06",
+      "title": "Le contretemps des trois îlots",
+      "source": {
+        "puzzle": 2,
+        "label": "Adaptation · Heroes and Mirrors · Énigme 2 : trois îlots, deux miroirs et un bouton déplacé.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-2",
+        "piston": false
+      },
+      "dimensions": [
+        18,
+        11
+      ],
+      "floorCells": 56,
+      "waterCells": 142,
+      "initialStones": 1,
+      "initialMonsters": 0,
+      "initialPlatforms": 0,
+      "mirrors": 2,
+      "buttons": 2,
+      "gates": 0,
+      "actions": 26,
+      "songTurns": 7,
+      "stoneMoves": 7,
+      "monsterMoves": 0,
+      "platformMoves": 0,
+      "reflections": 8,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 79,
+      "maxFrames": 4,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 1
+      },
+      "mapSha256": "bc4a36fdb71a45e8630abc1607532fbbc9ec338dc10a6359133f17ac33f265d2",
+      "witnessSha256": "73c5d5104569a9d19203328752919b3529d046dd6509b43d4024d6e710f2352a",
+      "observationsSha256": "c995889f5e3bce5521697a2dc99203871701c2aaaa3a56cd3941ec32b4677c23",
+      "mechanismChecks": {
+        "disableReflections": {
+          "status": "unsolvable",
+          "states": 397
+        }
+      }
+    },
+    {
+      "level": 7,
+      "id": "ss05-07",
+      "title": "Les écluses en cadence",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Deux canaux, trois presses et des plateformes à guider.",
+        "url": "",
+        "piston": true
+      },
+      "dimensions": [
+        20,
+        19
+      ],
+      "floorCells": 144,
+      "waterCells": 20,
+      "initialStones": 4,
+      "initialMonsters": 1,
+      "initialPlatforms": 0,
+      "mirrors": 0,
+      "buttons": 4,
+      "gates": 4,
+      "actions": 63,
+      "songTurns": 42,
+      "stoneMoves": 15,
+      "monsterMoves": 2,
+      "platformMoves": 32,
+      "reflections": 0,
+      "pistonPushes": 3,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 200,
+      "maxFrames": 9,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 121
+      },
+      "mapSha256": "3b481103a0239fdc16ef566c90947d5d446704c3e68da5598503935d84e45150",
+      "witnessSha256": "1d62bf733825f069c71ba8558de967e4af5eba795e5edbf815e3507c9f46556b",
+      "observationsSha256": "402b730a5757b54bee67ff36b2dd06c95d182b06da28a765db7e0144e9c4f023",
+      "mechanismChecks": {
+        "disablePlatformMotion": {
+          "status": "unsolvable",
+          "states": 121
+        },
+        "disablePlatforms": {
+          "status": "unsolvable",
+          "states": 60
+        },
+        "disablePistons": {
+          "status": "unsolvable",
+          "states": 60
+        }
+      }
+    },
+    {
+      "level": 8,
+      "id": "ss05-08",
+      "title": "La forteresse des trois voix",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Deux sentinelles, deux miroirs et une cascade de presses.",
+        "url": "",
+        "piston": true
+      },
+      "dimensions": [
+        20,
+        20
+      ],
+      "floorCells": 110,
+      "waterCells": 273,
+      "initialStones": 4,
+      "initialMonsters": 2,
+      "initialPlatforms": 0,
+      "mirrors": 2,
+      "buttons": 4,
+      "gates": 7,
+      "actions": 46,
+      "songTurns": 24,
+      "stoneMoves": 15,
+      "monsterMoves": 11,
+      "platformMoves": 4,
+      "reflections": 2,
+      "pistonPushes": 2,
+      "platformsCreated": 2,
+      "monstersRemoved": 1,
+      "blocked": 0,
+      "deaths": 0,
+      "frames": 148,
+      "maxFrames": 9,
+      "solved": true,
+      "songRequired": {
+        "verified": true,
+        "states": 1
+      },
+      "mapSha256": "95c6f01c8655806794a0535773ff6fc9c4a24370804102f3ee2c339161e44b10",
+      "witnessSha256": "33e4a422659bba80b1dd555a091bd25a0874de7a25eecc70bbe582045562cb7b",
+      "observationsSha256": "7087be395fabedd90be9ded92dbfeef921dc19ea7942bbe9f67b0db350423837",
+      "mechanismChecks": {
+        "disableReflections": {
+          "status": "unsolvable",
+          "states": 5574
+        },
+        "disablePlatforms": {
+          "status": "unsolvable",
+          "states": 879
+        },
+        "disablePistons": {
+          "status": "unsolvable",
+          "states": 2785
+        },
+        "disableMonsterSong": {
+          "status": "unsolvable",
+          "states": 1387
+        }
+      }
+    }
+  ],
+  "totals": {
+    "actions": 395,
+    "songTurns": 147,
+    "stoneMoves": 76,
+    "monsterMoves": 49,
+    "platformMoves": 36,
+    "reflections": 14,
+    "pistonPushes": 6,
+    "platformsCreated": 5,
+    "monstersRemoved": 3,
+    "frames": 1222
+  },
+  "success": true,
+  "htmlSha256": "c34359cf1895933bbebeab7094f8be5b7e393109a95e72923dd75fb73d9653e7",
+  "limitations": [
+    "These are validated author witnesses, not autonomous SRA agent runs.",
+    "The tutorial demonstrates its press, but alternative solutions can avoid it.",
+    "The final room has alternative solutions: platform sliding and both mirrors are not individually mandatory.",
+    "The standalone interface is checked with Happy DOM and exact canvas buffers; this is not a native-browser test."
+  ]
+}
