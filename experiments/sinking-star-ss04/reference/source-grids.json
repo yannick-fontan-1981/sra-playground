@@ -1,0 +1,83 @@
+[
+  {
+    "id": "heroes1_8_v2",
+    "source": "https://github.com/joric/ootss/blob/main/scripts/ootss.pz",
+    "sourceBlob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+    "rows": [
+      "#############",
+      "#.......#...#",
+      "#W*.#.......#",
+      "#.......#...#",
+      "######.###.##",
+      "#...#...#...#",
+      "#.G.[.......#",
+      "#...#...#..{#",
+      "#############"
+    ],
+    "solution": "URDRURRRLDRDRRRDDDURDRRRDDDRDLUUURURRRDDDDDRULLLLLLLLL",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-10"
+  },
+  {
+    "id": "heroes1_10_inv_v4_b",
+    "source": "https://github.com/joric/ootss/blob/main/scripts/ootss.pz",
+    "sourceBlob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+    "rows": [
+      "#############",
+      "#.....W.#...#",
+      "#.*.*.*.[.G*#",
+      "#.......#...#",
+      "#.*.*.*.#####",
+      "#.......#####",
+      "#.{.*.*.#####",
+      "#.......#####",
+      "#############"
+    ],
+    "solution": "LLLDDDDLDUURRRULD",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11"
+  },
+  {
+    "id": "heroes2_3_v2",
+    "source": "https://github.com/joric/ootss/blob/main/scripts/ootss.pz",
+    "sourceBlob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+    "rows": [
+      "##############",
+      "#W.#O###O#####",
+      "#...*****...O#",
+      "#...*****....#",
+      "######O###O..#",
+      "#####O##O#...#",
+      "#O..*****....#",
+      "#...**.**....#",
+      "#..O##O#######",
+      "#..###########",
+      "#....O.O....G#",
+      "##..O.O..O...#",
+      "##############"
+    ],
+    "solution": "DDRRURRDRRURDDDDDLLLLULDDDRDDRRRRRRU",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-4"
+  },
+  {
+    "id": "a_wiz_out_of_water",
+    "source": "https://github.com/joric/ootss/blob/main/scripts/ootss.pz",
+    "sourceBlob": "3b8768a5152c34e0f572e7e66251dfadb4cb6d1d",
+    "rows": [
+      "__________________",
+      "_____________...*_",
+      "_____________...._",
+      "_____________...._",
+      "_______.........._",
+      "__...._...._______",
+      "__...._..W._______",
+      "__...._.....______",
+      "__...}..___.______",
+      "__________....____",
+      "__________....____",
+      "__________]]]]____",
+      "__________..G.____",
+      "__________________"
+    ],
+    "solution": "RUURRRUUURDLLLDDLLLDDDRDDRRURDDDLLLLDDDRDDLRDLLUUULDRUULUUURDDULLLLDDDDLLRDRDDD",
+    "guide": null
+  }
+]
