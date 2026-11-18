@@ -24,7 +24,7 @@ Périmètre : `experiments/sinking-star-ss02/` uniquement. Les sources de produc
 et SS01 sont inchangées. Le commit de livraison est indiqué dans le compte rendu
 après vérification de l'arbre distant.
 
-Intégration canonique de SS02 : non. Publication Site de SS02 : non. Version/SHA
+Intégration de SS02 au catalogue et au runtime : non. Publication Site de SS02 : non. Version/SHA
 Site : sans objet pour cette livraison. La synchronisation du site existant n'a
 pas été réévaluée. Aucun résultat autonome du SRA n'est revendiqué.
 
@@ -41,4 +41,8 @@ pas été réévaluée. Aucun résultat autonome du SRA n'est revendiqué.
 
 Comptage de contenu : SS01 et SS02 ont chacun huit niveaux préparés, soit 16/200
 niveaux planifiés (8 % en nombre, pas une estimation de l'effort total). SS02 reste
-au stade laboratoire, contrairement à l'intégration GitHub déjà réalisée pour SS01.
+au stade laboratoire ; SS01 dispose déjà d'un raccordement au runtime du Playground.
+
+La présence de ce dossier sur `main` sauvegarde les sources validées du laboratoire.
+Elle ne rend pas encore SS02 sélectionnable dans Custom 4 : le raccordement du
+backend, des commandes, du tutoriel et de la galerie constitue l'étape suivante.
