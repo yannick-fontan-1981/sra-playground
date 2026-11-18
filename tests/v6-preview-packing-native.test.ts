@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
 import { NativePreviewPacking, PREVIEW_PACKING_STATE_SCHEMA } from '../src/logos-engine/v6-preview-packing.ts';
-import { previewPackingAssignments, previewPackingLimits, PREVIEW_PACKING_LIMITS, PreviewPackingIncomplete } from '../src/logos-engine/v6-preview-packing-calculus.ts';
+import { previewPackingAssignments, previewPackingLimits, PREVIEW_PACKING_LIMITS, PreviewPackingIncomplete, PreviewPackingWork } from '../src/logos-engine/v6-preview-packing-calculus.ts';
 import { previewPackingDictPointSet, previewPackingMeasureScene } from '../src/logos-engine/v6-preview-packing-geometry.ts';
 import type { NativeRecord } from '../src/logos-engine/v6-native-types.ts';
 
@@ -208,6 +208,24 @@ test('finite-domain construction yields and observes cancellation before publish
   await assert.rejects(() => previewPackingAssignments(model, { signal: controller.signal,
     yieldControl: async () => { yields++; controller.abort(); } }), (error: unknown) => error instanceof PreviewPackingIncomplete && error.cause === 'aborted');
   assert.equal(yields, 1);
+});
+
+test('quick checkpoints do not repeatedly wait for a turn of the host scheduler', async () => {
+  let elapsed = 0, yields = 0;
+  const work = new PreviewPackingWork({ now: () => elapsed, yieldControl: async () => { yields++; elapsed += 40; } });
+  work.beginSource();
+  const examine = async (count: number) => {
+    for (let i = 1; i <= count; i++) {
+      work.visit();
+      if (i % 256 === 0) await work.checkpoint();
+    }
+  };
+  await examine(2048);
+  assert.equal(yields, 1);
+  elapsed += 8;
+  await examine(256);
+  assert.equal(yields, 2);
+  assert.equal(work.examined, 2304);
 });
 
 for (const [name, amount] of Object.entries(PREVIEW_PACKING_LIMITS)) test(`a host cannot enlarge the source ${name} budget`, () => {
