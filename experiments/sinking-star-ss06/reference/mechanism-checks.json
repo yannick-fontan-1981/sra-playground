@@ -1,0 +1,34 @@
+[
+  {
+    "level": 2,
+    "option": "disableMirrorMotion",
+    "status": "unsolvable",
+    "states": 2608,
+    "expanded": 2608,
+    "ms": 94
+  },
+  {
+    "level": 2,
+    "option": "disableSelection",
+    "status": "unsolvable",
+    "states": 156,
+    "expanded": 156,
+    "ms": 6
+  },
+  {
+    "level": 7,
+    "option": "disablePlatforms",
+    "status": "unsolvable",
+    "states": 2520,
+    "expanded": 2520,
+    "ms": 103
+  },
+  {
+    "level": 7,
+    "option": "disableWarriorChains",
+    "status": "unsolvable",
+    "states": 2520,
+    "expanded": 2520,
+    "ms": 85
+  }
+]
