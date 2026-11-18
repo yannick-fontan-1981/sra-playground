@@ -310,8 +310,11 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Cue
     let route = linked?.epoch === epoch ? linked : null;
     if (route && (route.stopped || route.lastRef !== ref)) return null;
     if (!route) {
-      if (!resize || !shot || !transfer || witness?.epoch !== epoch - 1
-        || remoteState?.epoch !== epoch - 1 || !remoteState.adaptation || !remoteState.opened) return null;
+      const learned = linked?.epoch === epoch - 1 && !linked.stopped && linked.trips > 1
+        && linked.cleared.length === linked.scene.routes.length ? linked : null;
+      const transferred = learned?.scene.large ?? (witness?.epoch === epoch - 1 && remoteState?.epoch === epoch - 1
+        && remoteState.adaptation && remoteState.opened ? witness : null);
+      if (!resize || !shot || !transfer || !transferred) return null;
       const parts = geometricComponents(rows), input = measureInput(parts, rows.length, true);
       const cards = input ? measureExamples(parts, input) : [];
       if (!input || cards.length < 3) return null;
@@ -322,7 +325,8 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Cue
       const resizing = match(resize.cells), aiming = match(shot.cells), transport = match(transfer.cells);
       if (!resizing || !aiming || !transport || new Set([resizing, aiming, transport]).size !== 3) return null;
       route = measureLinkedCue(rows, input.panel, input.cells, { resize: resizing, launch: aiming, transfer: transport },
-        witness, resize, epoch, ref, [...new Set([...resize.refs, ...shot.refs, ...transfer.refs, ...remoteState.refs])]);
+        transferred, resize, epoch, ref, [...new Set([...resize.refs, ...shot.refs, ...transfer.refs, ...(learned?.refs ?? remoteState?.refs ?? [])])],
+        learned?.scene.routes[0]?.floor);
       if (!route) return null;
     }
     const step = chooseLinkedCue(route, rows, available, remaining);
@@ -354,7 +358,8 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Cue
       steps: [{ action, expected_after: expected?.box ?? null, ...(pointBinding ? { point_binding: pointBinding } : {}) }],
       sicSituationCard: { strategy: selected.id, need: 'Open the passages on the receiving platform', situation, mode, evidence,
         agenda: entries, triggerCard: card, panel: scene.panel, sampleCells: work ? scene.recipes[work].examples : [],
-        actor: pose.box, target: click ?? (step.kind === 'aim' ? target.target : step.kind === 'recover' ? scene.supply : scene.exit),
+        actor: pose.box, target: click ?? (step.kind === 'aim' ? target.target
+          : step.kind === 'recover' ? route.recovery?.box ?? scene.supply ?? target.target : scene.exit),
         addressedRegion: target.target, obstacle: target.barrier, exit: scene.exit, reserveGauge: scene.gauge,
         ...(expected ? { expectedFootprint: expected.box } : {}) },
       question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,

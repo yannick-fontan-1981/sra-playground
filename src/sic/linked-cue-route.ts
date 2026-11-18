@@ -8,9 +8,11 @@ export type CueRecipe = { box: NativeBox; cells: number[]; examples: NativeBox[]
 type Work = 'resize' | 'launch' | 'transfer';
 type Activation = { work: Work; target: number; pending: CueCell[] };
 type Scene = { panel: NativeBox; cells: CueCell[]; recipes: Record<Work, CueRecipe>; routes: RemoteRoute[];
-  gauge: NativeBox; fill: number; supply: NativeBox; small: AimWitness; large: AimWitness; largeAnchor: NativePoint; exit: NativeBox };
+  gauge: NativeBox; fill: number; supply?: NativeBox; small: AimWitness; large: AimWitness; largeAnchor: NativePoint; exit: NativeBox };
+type Recovery = { target: number; box: NativeBox };
 export type LinkedCue = { scene: Scene; pose: AimPose; size: 'small' | 'large'; trips: number; cleared: number[]; replenished: boolean;
-  activation: Activation | null; refs: string[]; epoch: number; lastRef: string; stopped?: boolean };
+  activation: Activation | null; refs: string[]; epoch: number; lastRef: string; stopped?: boolean;
+  recovery?: Recovery; visits?: string[] };
 export type LinkedCueStep = { kind: 'select' | 'copy' | 'apply' | 'aim' | 'recover' | 'exit'; action: NativeCommand;
   work?: Work; target: number; activation?: Activation; click?: NativeBox; expected?: AimPose };
 
@@ -42,7 +44,7 @@ function measuredPose(rows: NativeRows, field: NativeBox, witness: AimWitness): 
 }
 
 export function measureLinkedCue(rows: NativeRows, panel: NativeBox, cells: CueCell[], recipes: Record<Work, CueRecipe>,
-  witness: AimWitness, resize: ResizeWitness, epoch: number, ref: string, refs: string[]): LinkedCue | null {
+  witness: AimWitness, resize: ResizeWitness, epoch: number, ref: string, refs: string[], learnedFloor?: number): LinkedCue | null {
   if (resize.from !== witness.side || resize.side >= witness.side) return null;
   const field: NativeBox = [0, 0, rows[0]!.length - 1, panel[1] - 1], large = { ...witness, epoch };
   const pose = measuredPose(rows, field, large);
@@ -58,15 +60,16 @@ export function measureLinkedCue(rows: NativeRows, panel: NativeBox, cells: CueC
     return ink !== undefined && ink !== large.frontInk && ink !== large.backInk
       && pixelTest(edge, (x, y) => rows[y]?.[x] === ink) ? [ink] : [];
   });
-  const floor = grounds.find(ink => grounds.filter(value => value === ink).length >= 3);
   const gauges = parts.filter(p => p.rectangular && height(p.bbox) === rows.length && width(p.bbox) <= resize.side
     && (p.bbox[0] === 0 || p.bbox[2] === rows[0]!.length - 1));
-  if (exits.length !== 1 || gauges.length !== 1 || floor === undefined) return null;
+  if (exits.length !== 1 || gauges.length !== 1) return null;
   const exit = exits[0]!.bbox, gauge = gauges[0]!, fill = gauge.color;
   const supplies = parts.filter(p => p.rectangular && width(p.bbox) === resize.side && height(p.bbox) === resize.side
     && p.color === fill && covers(field, p.bbox) && !overlaps(p.bbox, gauge.bbox));
-  if (supplies.length !== 1) return null;
-  const supply = supplies[0]!.bbox, small = { ...large, side: resize.side, unit: resize.unit };
+  if (supplies.length > 1) return null;
+  const supply = supplies[0]?.bbox, small = { ...large, side: resize.side, unit: resize.unit };
+  const floor = supply ? grounds.find(ink => grounds.filter(value => value === ink).length >= 3) : learnedFloor;
+  if (floor === undefined || !grounds.includes(floor)) return null;
   const routes: RemoteRoute[] = [];
   for (const rim of parts.filter(p => p.color === recipes.launch.ink && !p.rectangular && width(p.bbox) === size
     && height(p.bbox) === size && covers(field, p.bbox))) {
@@ -77,10 +80,12 @@ export function measureLinkedCue(rows: NativeRows, panel: NativeBox, cells: CueC
     const gates = parts.filter(p => p !== core && p.color === core.color && p.rectangular && covers(field, p.bbox)
       && (width(p.bbox) === size || height(p.bbox) === size));
     if (gates.length !== 1 || routes.some(route => overlaps(route.barrier, gates[0]!.bbox))) return null;
-    routes.push({ target: rim.bbox, core: core.bbox, barrier: gates[0]!.bbox, exit, field, floor, supply, witness: small, offsetAim: true });
+    routes.push({ target: rim.bbox, core: core.bbox, barrier: gates[0]!.bbox, exit, field, floor,
+      ...(supply ? { supply } : {}), witness: small, offsetAim: true });
   }
   if (routes.length < 2) return null;
-  const scene = { panel, cells, recipes, routes, exit, gauge: gauge.bbox, fill, supply, small, large, largeAnchor: [l, t] as const };
+  const scene = { panel, cells, recipes, routes, exit, gauge: gauge.bbox, fill, ...(supply ? { supply } : {}),
+    small, large, largeAnchor: [l, t] as const };
   return { scene, pose, size: 'large', trips: 0, cleared: [], replenished: false, activation: null, refs, epoch, lastRef: ref };
 }
 
@@ -115,11 +120,43 @@ function expectedGrowth(run: LinkedCue): AimPose {
   return { box: square(snap(x, largeAnchor[0]), snap(y, largeAnchor[1]), large.side), heading: run.pose.heading };
 }
 
+function chooseLinkedStage(run: LinkedCue, rows: NativeRows, available: readonly string[], remaining: number): LinkedCueStep | null {
+  const { scene, pose, recovery } = run, witness = scene[run.size];
+  const route = scene.routes[0]!;
+  const move = (kind: 'aim' | 'recover' | 'exit', target: number, plan: NonNullable<ReturnType<typeof aimRoute>>): LinkedCueStep =>
+    ({ kind, target, action: { action_ref: plan.action, data: {} }, expected: plan.pose });
+  const grown = run.size === 'small' ? expectedGrowth(run).box : null;
+  const canGrow = !!grown && covers(route.field, grown) && pixelTest(grown, (x, y) => rows[y]?.[x] === route.floor
+    || contains(pose.box, x, y) || !!recovery && contains(recovery.box, x, y));
+  if (recovery) {
+    const plan = aimRoute(rows, { ...route, witness, supply: recovery.box }, pose, available, 'supply', remaining);
+    if (plan) return move('recover', recovery.target, plan);
+    return canGrow && overlaps(grown, recovery.box) ? openRecipe(run, rows, 'resize') : null;
+  }
+  if (run.cleared.length === scene.routes.length) {
+    const exit = aimRoute(rows, { ...route, witness }, pose, available, 'exit', remaining);
+    if (exit) return move('exit', 0, exit);
+  }
+  const pending = scene.routes.flatMap<{ target: number; plan: ReturnType<typeof aimRoute>; distance: number }>((item, target) => {
+    if (run.cleared.includes(target)) return [];
+    const directed = { ...item, witness };
+    if (hasAimedRay(rows, directed, pose)) return [{ target, plan: null, distance: 0 }];
+    const plan = aimRoute(rows, directed, pose, available, 'aim', remaining);
+    return plan ? [{ target, plan, distance: plan.distance }] : [];
+  }).sort((a, b) => a.distance - b.distance);
+  const next = pending[0];
+  if (next?.plan) return move('aim', next.target, next.plan);
+  if (next) return openRecipe(run, rows, 'launch', next.target);
+  if (run.size === 'small') return canGrow ? openRecipe(run, rows, 'resize') : null;
+  return openRecipe(run, rows, 'transfer');
+}
+
 export function chooseLinkedCue(run: LinkedCue, rows: NativeRows, available: readonly string[], remaining: number): LinkedCueStep | null {
   if (run.stopped || !aimPoseMatches(rows, run.scene[run.size], run.pose)) return null;
   if (run.activation) return useActivation(run.activation);
   const { scene, pose } = run;
   if (!run.trips) return openRecipe(run, rows, run.size === 'large' ? 'resize' : 'transfer');
+  if (!scene.supply) return chooseLinkedStage(run, rows, available, remaining);
   if (run.trips > 1) {
     const exit = aimRoute(rows, { ...scene.routes[0]!, witness: scene.large }, pose, available, 'exit', remaining);
     return exit ? { kind: 'exit', action: { action_ref: exit.action, data: {} }, target: 0, expected: exit.pose } : null;
@@ -150,8 +187,13 @@ export function observeLinkedCue(run: LinkedCue, step: LinkedCueStep, first: Nat
   const state = (updates: Partial<LinkedCue>, reason: string) => ({ run: { ...run, ...updates }, reason });
   if (step.expected) {
     if (!aimPoseMatches(rows, witness, step.expected)) return null;
-    const replenished = step.kind === 'recover' && overlaps(step.expected.box, scene.supply);
+    const supply = scene.supply ?? run.recovery?.box;
+    const replenished = step.kind === 'recover' && !!supply && overlaps(step.expected.box, supply);
     if (replenished && readGauge(rows, scene.gauge, scene.fill) <= readGauge(first, scene.gauge, scene.fill)) return null;
+    if (replenished && run.recovery) {
+      const { recovery: _collected, ...rest } = run;
+      return { run: { ...rest, pose: step.expected }, reason: 'contact_restored_reserve' };
+    }
     return state({ pose: step.expected, replenished: run.replenished || replenished },
       replenished ? 'contact_restored_reserve' : 'linked_route_landing_confirmed');
   }
@@ -168,6 +210,17 @@ export function observeLinkedCue(run: LinkedCue, step: LinkedCueStep, first: Nat
       ? state({ activation: { ...activation, pending: activation.pending.slice(1) } }, 'visible_recipe_cell_changed') : null;
   }
   if (step.work === 'launch') {
+    if (!scene.supply) {
+      const found = geometricComponents(rows).filter(part => part.color === scene.fill && part.rectangular
+        && width(part.bbox) === scene.small.side && height(part.bbox) === scene.small.side && covers(route.target, part.bbox));
+      const box = found.length === 1 ? found[0]!.bbox : null;
+      const opened = (frame: NativeRows) => !!box && pixelTest(route.barrier, (x, y) => frame[y]?.[x] === route.floor)
+        && pixelTest(route.target, (x, y) => frame[y]?.[x] === (contains(box, x, y) ? scene.fill : route.floor));
+      return box && aimPoseMatches(rows, witness, pose) && opened(rows)
+        && remoteFlightObserved(first, frames, pose, { ...route, witness }, opened)
+        ? state({ cleared: [...run.cleared, step.target], visits: [], recovery: { box, target: step.target }, activation: null },
+          'visible_effect_reached_inset_and_removed_its_barrier') : null;
+    }
     return aimPoseMatches(rows, witness, pose) && remoteOpeningObserved(rows, route) && remoteFlightObserved(first, frames, pose, route)
       ? state({ cleared: [...run.cleared, step.target], activation: null }, 'visible_effect_reached_inset_and_removed_its_barrier') : null;
   }
@@ -177,7 +230,20 @@ export function observeLinkedCue(run: LinkedCue, step: LinkedCueStep, first: Nat
   if (step.work === 'resize') {
     const expected = size === 'large' ? expectedGrowth(run).box : pose.box;
     if (size === 'large' ? !same(observed.box, expected) : !covers(expected, observed.box)) return null;
+    if (run.recovery && overlaps(observed.box, run.recovery.box)) {
+      if (readGauge(rows, scene.gauge, scene.fill) <= readGauge(first, scene.gauge, scene.fill)) return null;
+      const { recovery: _collected, ...rest } = run;
+      return { run: { ...rest, size, pose: observed, activation: null }, reason: 'contact_restored_reserve' };
+    }
     return state({ size, pose: observed, activation: null }, 'recipe_changed_footprint_at_same_site');
+  }
+  if (!scene.supply) {
+    const landing = observed.box.join(',');
+    if (Math.max(Math.abs(observed.box[0] - pose.box[0]), Math.abs(observed.box[1] - pose.box[1])) <= witness.unit
+      || run.visits?.includes(landing) || run.cleared.some(index => !pixelTest(scene.routes[index]!.barrier,
+        (x, y) => rows[y]?.[x] === route.floor || contains(observed.box, x, y)))) return null;
+    return state({ pose: observed, trips: run.trips + 1, visits: [...(run.visits ?? []), landing], activation: null },
+      'recipe_landed_on_linked_platform');
   }
   if (Math.max(Math.abs(observed.box[0] - pose.box[0]), Math.abs(observed.box[1] - pose.box[1])) <= witness.unit
     || !run.cleared.every(index => remoteOpeningObserved(rows, scene.routes[index]!))) return null;

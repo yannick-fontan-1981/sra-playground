@@ -181,12 +181,17 @@ export function remoteOpeningObserved(rows: NativeRows, layout: RemoteRoute): bo
   return [layout.target, layout.barrier].every(box => everyPixel(box, (x, y) => rows[y]?.[x] === layout.floor));
 }
 
-export function remoteFlightObserved(first: NativeRows, frames: readonly NativeRows[], actor: AimPose, layout: RemoteRoute): boolean {
+export function remoteFlightObserved(first: NativeRows, frames: readonly NativeRows[], actor: AimPose, layout: RemoteRoute,
+  reachedOpening?: (rows: NativeRows) => boolean): boolean {
   const ray = aimRay(actor, layout.target, layout.offsetAim);
   if (!ray) return false;
+  const distance = Math.abs(ray.last - ray.first);
+  const minFrames = reachedOpening ? Math.min(2, Math.ceil((distance + 1) / layout.witness.unit)) : 2;
   let furthest = -1, advances = 0;
   for (const frame of frames) {
-    if (remoteOpeningObserved(frame, layout)) return advances >= 2 && furthest === Math.abs(ray.last - ray.first);
+    if (reachedOpening ? reachedOpening(frame) : remoteOpeningObserved(frame, layout)) {
+      return advances >= minFrames && furthest === distance;
+    }
     let nearest = Infinity, current = -1;
     everyPixel(ray.box, (x, y) => {
       if (frame[y]?.[x] !== first[y]?.[x]) {
