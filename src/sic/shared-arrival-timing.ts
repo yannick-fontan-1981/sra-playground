@@ -18,6 +18,8 @@ const cardinals: Point[] = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 const permutations = (points: Point[]): Point[][] => points.length === 0 ? [[]]
   : points.flatMap((point, index) => permutations(points.filter((_, i) => i !== index)).map(rest => [point, ...rest]));
 const orders = permutations(cardinals);
+// The planner checks subsets of controls, so cap the wider clocked search at 16,384 configurations.
+const timedGateLimits = { independent: 8, withClocks: 14 };
 const axes = [
   { pips: [1, 7], strips: [0, 2, 3, 5, 6, 8] },
   { pips: [3, 5], strips: [0, 1, 2, 6, 7, 8] },
@@ -72,7 +74,8 @@ export function timedNetwork(scene: ConfiguredScene): TimedNetwork | null {
       nodes.add(position);
     }
   }
-  return pads.size && gates.length && gates.length <= (clocks.size ? 12 : 8) ? { gates, pads, clocks, nodes } : null;
+  const gateLimit = clocks.size ? timedGateLimits.withClocks : timedGateLimits.independent;
+  return pads.size && gates.length && gates.length <= gateLimit ? { gates, pads, clocks, nodes } : null;
 }
 
 function clockCycle(samples: readonly (boolean | null)[]): boolean[] | null {
@@ -261,10 +264,11 @@ function gateEdits(network: TimedNetwork, effects: GateEffects | undefined, reje
 }
 
 export function planTimedArrival(scene: ConfiguredScene, network: TimedNetwork, timing: ArrivalTiming, remaining: number,
-  effects?: GateEffects, rejected: readonly string[] = []) {
+  effects?: GateEffects, rejected: readonly string[] = [], interrupted: () => boolean = () => false) {
   let best: { edits: GateEdit[]; ticks: number[]; matchingOrders: number } | null = null;
   const controls = gateEdits(network, effects, rejected);
   for (let mask = 0; mask < 2 ** controls.length; mask++) {
+    if ((mask & 63) === 0 && interrupted()) return null;
     const edits = controls.filter((_, index) => (mask & (1 << index)) !== 0);
     if (edits.length + 1 > remaining || (best?.matchingOrders === timing.orders.length && edits.length >= best.edits.length)) continue;
     const nodes = new Set(network.nodes);

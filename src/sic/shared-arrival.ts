@@ -106,8 +106,10 @@ export function createSicVerifySharedArrival(): NativeFamily<Proposal> {
       const candidates = differentApproaches
         ? scene.candidates.filter(point => scene.base.has(key(point)) && local.arrivals.some(a => a.visited.includes(key(point)))
           && equal(routeLengths(scene, point))) : [];
+      const interrupted = () => !!execution?.signal?.aborted || (execution?.deadlineMs !== undefined
+        && (execution.now ?? (() => performance.now()))() >= execution.deadlineMs);
       const timedPlan = timed && local.timing
-        ? planTimedArrival(scene, timed, local.timing, remaining, local.transfer ? local.gateEffects ?? {} : undefined, local.rejected) : null;
+        ? planTimedArrival(scene, timed, local.timing, remaining, local.transfer ? local.gateEffects ?? {} : undefined, local.rejected, interrupted) : null;
       const edit = timed ? timedPlan?.edits[0]?.point ?? null
         : !local.edited && !equal(lengths) && candidates.length === 1 ? candidates[0]! : null;
       const command: NativeCommand = edit ? { action_ref: 'ACTION6', data: { x: edit[0], y: edit[1] } } : launch;
