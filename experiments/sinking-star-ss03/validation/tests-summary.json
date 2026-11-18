@@ -1,35 +1,52 @@
 {
   "game": "SS03",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "build": {
     "status": "passed",
     "typescript": "5.9.3"
   },
   "unitTests": {
-    "passed": 31,
+    "passed": 47,
     "failed": 0,
     "command": "npm test"
   },
   "levelReplay": {
     "solved": 8,
-    "actions": 473,
-    "pulls": 159,
+    "actions": 493,
+    "pulls": 156,
+    "pistonStrokes": 8,
     "allRequirePulling": true,
-    "fourUnchangedTranscriptionsVerified": true
+    "cratesLost": 0,
+    "blockedActions": 0,
+    "deaths": 0,
+    "twoHaulingTranscriptionsVerified": true,
+    "lightGridVerified": true,
+    "originalLightWitnessActions": 154
+  },
+  "legacyObservationParity": {
+    "matched": 6,
+    "formerLevel7NowLevel2": true,
+    "scope": "All public observations including every animation pixel and duration across the retained six witness routes"
   },
   "domTests": {
-    "passed": 10,
+    "passed": 14,
     "failed": 0,
-    "visualBrowserTest": false
+    "visualBrowserTest": false,
+    "limitations": []
   },
   "renderInspection": {
     "status": "passed",
-    "initialMaps": 8,
-    "method": "Engine-rendered pixel montage inspected at integer scale"
+    "initialMaps": [
+      2,
+      7,
+      8
+    ],
+    "animationFrames": 6,
+    "method": "Actual engine pixels inspected at integer scale"
   },
   "realBrowser": {
     "status": "not-run",
-    "reason": "Chromium launch blocked by workspace sandbox socket policy"
+    "reason": "Chromium launch was blocked by workspace sandbox socket policy; not retried in v2"
   },
-  "demoSha256": "6b5122e5fbc163f444610171e442ecd14be0135ed5cc287f7927bd40d9cfc2c8"
+  "demoSha256": "8be7ba119c8bfaf9044d658f94e3769d9307424161908cb9756180ecf4b60116"
 }

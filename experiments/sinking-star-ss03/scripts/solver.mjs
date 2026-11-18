@@ -1,11 +1,12 @@
 /** Author-only bounded pull search. No solver or witness is bundled into the demo. */
-import {compileLevel,initialState,stepWorld,equal,offset,planPull,terrainAt,contains} from '../dist/core.js';
+import {compileLevel,initialState,stepWorld,stepDetailed,equal,offset,planPull,terrainAt,contains} from '../dist/core.js';
 const directions=['N','S','W','E'];
 const num=p=>p.y*20+p.x;
 const list=ps=>ps.map(num).sort((a,b)=>a-b).join(',');
 const sameStones=(a,b)=>a.stones.length===b.stones.length&&a.stones.every(p=>contains(b.stones,p));
 /** Directed walking reachability with the stone layout held fixed. Automatic pulls are excluded. */
 export function reachable(w,s){
+ if(w.gates.length)throw new Error('Walking reachability is only valid for levels without piston circuits; use solve() for complete-state search.');
  const map=new Map([[num(s.hero),[]]]),queue=[s.hero];
  for(let i=0;i<queue.length;i++){
   const p=queue[i],path=map.get(num(p));
@@ -19,9 +20,38 @@ export function reachable(w,s){
 }
 /** Do not collapse by the smallest reachable cell: no-pull walking regions can be directed. */
 const key=s=>`${num(s.hero)}|${list(s.stones)}`;
-export function solve(spec,{maxStates=200000,maxMs=15000,disablePull=false,lockDoors=false}={}){
+/** Gate memory and sunk supports can differ even when all actor positions are identical. */
+const pistonKey=s=>`${num(s.hero)}|${list(s.stones)}|${list(s.supports)}|${(s.gateClosed??[]).map(v=>v?1:0).join('')}`;
+function solvePistons(w,{maxStates,maxMs,disablePull,disablePistons}){
+ const started=performance.now(),first=initialState(w);
+ const nodes=[{s:first,parent:-1,action:0,pulls:0,pistonPushes:0}],seen=new Set([pistonKey(first)]);
+ let expanded=0;
+ const limit=()=>({status:'limit',states:seen.size,expanded,ms:performance.now()-started});
+ function route(index){const actions=[];while(nodes[index].parent>=0){actions.push(nodes[index].action);index=nodes[index].parent;}return actions.reverse();}
+ for(let head=0;head<nodes.length;head++){
+  if(performance.now()-started>=maxMs||seen.size>maxStates)return limit();
+  const node=nodes[head];expanded++;
+  if(node.s.complete)return {status:'solved',actions:route(head),pulls:node.pulls,pistonPushes:node.pistonPushes,states:seen.size,expanded,ms:performance.now()-started};
+  if(node.s.dead)continue;
+  for(let action=1;action<=4;action++){
+   if(performance.now()-started>=maxMs)return limit();
+   const detail=stepDetailed(w,node.s,action),after=detail.state;
+   if(after.dead||after.failed)continue;
+   const pulls=detail.phases.filter(p=>p.kind==='pull').length;
+   const pistonPushes=detail.phases.filter(p=>p.kind==='piston').length;
+   if(disablePull&&pulls)continue;
+   if(disablePistons&&detail.phases.some(p=>p.kind==='piston'||p.kind==='crush'))continue;
+   const k=pistonKey(after);if(seen.has(k))continue;
+   if(seen.size>=maxStates)return limit();
+   seen.add(k);nodes.push({s:after,parent:head,action,pulls:node.pulls+pulls,pistonPushes:node.pistonPushes+pistonPushes});
+  }
+ }
+ return {status:'unsolvable',states:seen.size,expanded,ms:performance.now()-started};
+}
+export function solve(spec,{maxStates=200000,maxMs=15000,disablePull=false,disablePistons=false,lockDoors=false}={}){
  let w=compileLevel(spec);
  if(lockDoors)w={...w,terrain:w.terrain.map((t,i)=>w.doors.some(p=>num(p)===i)?'#':t)};
+ if(w.gates.length)return solvePistons(w,{maxStates,maxMs,disablePull,disablePistons});
  const start=initialState(w),nodes=[{s:start,parent:-1,segment:[],pulls:0}],seen=new Set([key(start)]);
  const dry=p=>terrainAt(w,p)==='.'||contains(start.supports,p);
  // Optimistic single-stone pull distances account for walls and the required square ahead of the hero.

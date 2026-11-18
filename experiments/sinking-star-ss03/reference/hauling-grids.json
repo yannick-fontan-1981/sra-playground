@@ -12,42 +12,70 @@
     3,
     4,
     5,
-    6,
-    7,
-    8
+    6
   ],
   "levels": [
     {
       "level": 2,
       "id": "ss03-02",
-      "title": "Le pont à rebours",
-      "guidePuzzle": 5,
-      "sourceId": "heroes1_4.5",
-      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-5",
-      "kind": "transcription",
-      "concept": "Se placer de chaque côté d’une caisse ; tirer pour libérer le passage.",
+      "title": "Le triple verrou",
+      "guidePuzzle": 18,
+      "sourceId": "heroes1_18",
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-18",
+      "kind": "solo-adaptation",
+      "concept": "Descendre trois caisses des chambres hautes puis organiser les trois plaques sans bloquer la remontée.",
       "sourceRows": [
         "#############",
-        "#...#...*...#",
-        "#.T.#...#.G.#",
-        "#...*...#...#",
+        "#...#7.8#...#",
+        "#.*.#.1.#.G.#",
+        "#...#...#...#",
+        "##]###.###]##",
+        "#...#...#...#",
+        "#.}...}...}.#",
+        "#...#...#...#",
         "#############"
       ],
       "rows": [
         "#############",
-        "#...#...o...#",
-        "#.T.#...#.g.#",
-        "#...o...#...#",
+        "#...#T.o#...#",
+        "#.o.#.o.#.g.#",
+        "#...#...#...#",
+        "##.###.###D##",
+        "#...........#",
+        "#.b...b..b..#",
+        "#...........#",
         "#############"
       ],
       "adaptations": [
-        "Topologie et positions de la transcription conservées ; seuls les symboles et couleurs sont convertis au contrat ARC 3×3 px."
+        "Le Voleur sur la cible (5,1) devient l’unique personnage et sa cible est retirée ; la cible du Magicien (7,1) est également retirée.",
+        "Le Magicien (7,1) et le Guerrier (6,2) deviennent deux caisses : trois charges mobiles pour les trois plaques.",
+        "La porte gauche (2,4) devient un passage permanent afin de pouvoir extraire la caisse de la chambre gauche.",
+        "Les quatre cellules (4,5), (8,5), (4,7), (8,7) sont ouvertes pour contourner une caisse laissée sur une plaque.",
+        "La plaque droite se décale de (10,6) à (9,6), pour pouvoir monter vers la porte sans arracher automatiquement sa caisse. Les dispositifs violets de la transcription utilisent la palette rose de la série."
       ],
       "changes": [
         {
-          "x": 8,
+          "x": 5,
           "y": 1,
+          "source": "7",
+          "ss03": "T"
+        },
+        {
+          "x": 7,
+          "y": 1,
+          "source": "8",
+          "ss03": "o"
+        },
+        {
+          "x": 2,
+          "y": 2,
           "source": "*",
+          "ss03": "o"
+        },
+        {
+          "x": 6,
+          "y": 2,
+          "source": "1",
           "ss03": "o"
         },
         {
@@ -57,18 +85,74 @@
           "ss03": "g"
         },
         {
+          "x": 2,
+          "y": 4,
+          "source": "]",
+          "ss03": "."
+        },
+        {
+          "x": 10,
+          "y": 4,
+          "source": "]",
+          "ss03": "D"
+        },
+        {
           "x": 4,
-          "y": 3,
-          "source": "*",
-          "ss03": "o"
+          "y": 5,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 5,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 2,
+          "y": 6,
+          "source": "}",
+          "ss03": "b"
+        },
+        {
+          "x": 6,
+          "y": 6,
+          "source": "}",
+          "ss03": "b"
+        },
+        {
+          "x": 9,
+          "y": 6,
+          "source": ".",
+          "ss03": "b"
+        },
+        {
+          "x": 10,
+          "y": 6,
+          "source": "}",
+          "ss03": "."
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "source": "#",
+          "ss03": "."
+        },
+        {
+          "x": 8,
+          "y": 7,
+          "source": "#",
+          "ss03": "."
         }
       ],
-      "witness": "RDLLURRDRRRRUULLDRRURRRD",
+      "witness": "RLDDRDDDDLUULLLUUDDDDRRRRRURULLUUUDDDDDRRURRUUUU",
       "validation": {
         "won": true,
-        "pulls": 11,
+        "pulls": 17,
         "blocked": 0,
-        "actions": 24
+        "actions": 48,
+        "states": 71561,
+        "status": "solved"
       }
     },
     {
@@ -530,228 +614,6 @@
         "pulls": 17,
         "blocked": 0,
         "actions": 56
-      }
-    },
-    {
-      "level": 7,
-      "id": "ss03-07",
-      "title": "Le triple verrou",
-      "guidePuzzle": 18,
-      "sourceId": "heroes1_18",
-      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-18",
-      "kind": "solo-adaptation",
-      "concept": "Descendre trois caisses des chambres hautes puis organiser les trois plaques sans bloquer la remontée.",
-      "sourceRows": [
-        "#############",
-        "#...#7.8#...#",
-        "#.*.#.1.#.G.#",
-        "#...#...#...#",
-        "##]###.###]##",
-        "#...#...#...#",
-        "#.}...}...}.#",
-        "#...#...#...#",
-        "#############"
-      ],
-      "rows": [
-        "#############",
-        "#...#T.o#...#",
-        "#.o.#.o.#.g.#",
-        "#...#...#...#",
-        "##.###.###D##",
-        "#...........#",
-        "#.b...b..b..#",
-        "#...........#",
-        "#############"
-      ],
-      "adaptations": [
-        "Le Voleur sur la cible (5,1) devient l’unique personnage et sa cible est retirée ; la cible du Magicien (7,1) est également retirée.",
-        "Le Magicien (7,1) et le Guerrier (6,2) deviennent deux caisses : trois charges mobiles pour les trois plaques.",
-        "La porte gauche (2,4) devient un passage permanent afin de pouvoir extraire la caisse de la chambre gauche.",
-        "Les quatre cellules (4,5), (8,5), (4,7), (8,7) sont ouvertes pour contourner une caisse laissée sur une plaque.",
-        "La plaque droite se décale de (10,6) à (9,6), pour pouvoir monter vers la porte sans arracher automatiquement sa caisse. Les dispositifs violets de la transcription utilisent la palette rose de la série."
-      ],
-      "changes": [
-        {
-          "x": 5,
-          "y": 1,
-          "source": "7",
-          "ss03": "T"
-        },
-        {
-          "x": 7,
-          "y": 1,
-          "source": "8",
-          "ss03": "o"
-        },
-        {
-          "x": 2,
-          "y": 2,
-          "source": "*",
-          "ss03": "o"
-        },
-        {
-          "x": 6,
-          "y": 2,
-          "source": "1",
-          "ss03": "o"
-        },
-        {
-          "x": 10,
-          "y": 2,
-          "source": "G",
-          "ss03": "g"
-        },
-        {
-          "x": 2,
-          "y": 4,
-          "source": "]",
-          "ss03": "."
-        },
-        {
-          "x": 10,
-          "y": 4,
-          "source": "]",
-          "ss03": "D"
-        },
-        {
-          "x": 4,
-          "y": 5,
-          "source": "#",
-          "ss03": "."
-        },
-        {
-          "x": 8,
-          "y": 5,
-          "source": "#",
-          "ss03": "."
-        },
-        {
-          "x": 2,
-          "y": 6,
-          "source": "}",
-          "ss03": "b"
-        },
-        {
-          "x": 6,
-          "y": 6,
-          "source": "}",
-          "ss03": "b"
-        },
-        {
-          "x": 9,
-          "y": 6,
-          "source": ".",
-          "ss03": "b"
-        },
-        {
-          "x": 10,
-          "y": 6,
-          "source": "}",
-          "ss03": "."
-        },
-        {
-          "x": 4,
-          "y": 7,
-          "source": "#",
-          "ss03": "."
-        },
-        {
-          "x": 8,
-          "y": 7,
-          "source": "#",
-          "ss03": "."
-        }
-      ],
-      "witness": "RLDDRDDDDLUULLLUUDDDDRRRRRURULLUUUDDDDDRRURRUUUU",
-      "validation": {
-        "won": true,
-        "pulls": 17,
-        "blocked": 0,
-        "actions": 48,
-        "states": 71561,
-        "status": "solved"
-      }
-    },
-    {
-      "level": 8,
-      "id": "ss03-08",
-      "title": "Le grand détour",
-      "guidePuzzle": 7,
-      "sourceId": "heroes1_7_v2",
-      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#énigme-7",
-      "kind": "transcription",
-      "concept": "Convoyer une unique caisse dans un long labyrinthe, en changeant plusieurs fois de côté.",
-      "sourceRows": [
-        "###################",
-        "##########*..######",
-        "#...#........[...##",
-        "#...#....#...#.G.##",
-        "##..#....#####...##",
-        "##..####.#..####[##",
-        "##.......#..T{....#",
-        "##..##...#...##...#",
-        "######...##.#######",
-        "######.###..##...##",
-        "####.............##",
-        "####...############",
-        "###################"
-      ],
-      "rows": [
-        "###################",
-        "##########o..######",
-        "#...#........D...##",
-        "#...#....#...#.g.##",
-        "##..#....#####...##",
-        "##..####.#..####D##",
-        "##.......#..Tb....#",
-        "##..##...#...##...#",
-        "######...##.#######",
-        "######.###..##...##",
-        "####.............##",
-        "####...############",
-        "###################"
-      ],
-      "adaptations": [
-        "Topologie et positions de la transcription conservées ; seuls les symboles et couleurs sont convertis au contrat ARC 3×3 px."
-      ],
-      "changes": [
-        {
-          "x": 10,
-          "y": 1,
-          "source": "*",
-          "ss03": "o"
-        },
-        {
-          "x": 13,
-          "y": 2,
-          "source": "[",
-          "ss03": "D"
-        },
-        {
-          "x": 15,
-          "y": 3,
-          "source": "G",
-          "ss03": "g"
-        },
-        {
-          "x": 16,
-          "y": 5,
-          "source": "[",
-          "ss03": "D"
-        },
-        {
-          "x": 13,
-          "y": 6,
-          "source": "{",
-          "ss03": "b"
-        }
-      ],
-      "witness": "LDDDLDLLLLUURRUUUUUURRRURDLDLULLLDRDDDDLULLLLLURUUULDLURRDDLDDDRURRRRDLDDDDLULDRRURRRRRRRRRRULLDLLLLURUUUULDDRRURRRRRDLLULLLDLDDLDLLLLUURRUUUUUURRRRRRRD",
-      "validation": {
-        "won": true,
-        "pulls": 56,
-        "blocked": 0,
-        "actions": 152
       }
     }
   ]

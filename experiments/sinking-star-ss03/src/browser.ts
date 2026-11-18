@@ -88,15 +88,18 @@ function updateUI(): void {
   $('moves').textContent = `${moves} actions`;
   const victory = observation.state === 'WIN';
   $('victory').hidden = !victory;
-  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-action]')) b.disabled = busy || victory;
+  const gameOver = observation.state === 'GAME_OVER';
+  $('defeat').hidden = !gameOver;
+  for (const b of document.querySelectorAll<HTMLButtonElement>('[data-action]')) b.disabled = busy || victory || gameOver;
   $<HTMLButtonElement>('undo').disabled = !observation.canUndo;
   $('tutorial').hidden = observation.level !== 1;
   const info = LEVEL_INFO[observation.level - 1]!;
   $('source-label').textContent = info.label;
   const link = $<HTMLAnchorElement>('source-link');
-  link.hidden = !info.puzzle;
-  link.href = `https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#${encodeURIComponent('énigme-' + info.puzzle)}`;
+  link.hidden = !info.url;
+  link.href = info.url;
   link.textContent = `Voir l’énigme ${info.puzzle} de référence ↗`;
+  $('piston-help').hidden = !info.piston;
   for (const item of document.querySelectorAll<HTMLElement>('[data-lesson]')) {
     item.classList.toggle('done', learned.has(item.dataset.lesson!));
   }
@@ -123,10 +126,12 @@ async function present(next: Observation): Promise<void> {
   busy = false; paint(next.frame); updateUI();
 }
 function act(action: number): void {
-  if (busy || observation.state === 'WIN') return;
+  if (busy || observation.state !== 'NOT_FINISHED') return;
   const before = observation, next = session.action(action);
   moves++; observeLesson(before,next,action);
-  $('feedback').textContent = next.levelsCompleted > before.levelsCompleted ? 'Niveau terminé !'
+  $('feedback').textContent = next.state === 'GAME_OVER' ? 'Le Voleur a été écrasé. Z annule ; R recommence.'
+    : next.levelsCompleted > before.levelsCompleted ? 'Niveau terminé !'
+    : LEVEL_INFO[before.level-1]!.piston && next.frames.length > 3 ? 'La porte a actionné son piston.'
     : pulled(before,next,action) ? 'Traction réussie : la caisse suit le Voleur.'
     : heroCell(before.frame) === heroCell(next.frame) ? 'Passage bloqué. Le Voleur tire les caisses ; il ne les pousse pas.' : '';
   void present(next);
@@ -141,6 +146,8 @@ function reset(kind: 'undo' | 'reset' | 'restart'): void {
 for (const b of document.querySelectorAll<HTMLButtonElement>('[data-action]')) b.addEventListener('click',()=>{act(Number(b.dataset.action));canvas.focus({preventScroll:true});});
 for (const id of ['undo','reset','restart'] as const) $(id).addEventListener('click',()=>reset(id));
 $('play-again').addEventListener('click',()=>reset('restart'));
+$('undo-defeat').addEventListener('click',()=>reset('undo'));
+$('reset-defeat').addEventListener('click',()=>reset('reset'));
 select.addEventListener('change',()=>{generation++;busy=false;moves=0;learned=new Set();lastPullAction=0;void present(session.selectLevel(Number(select.value)));canvas.focus({preventScroll:true});});
 canvas.addEventListener('keydown',event=>{
   if (event.altKey || event.metaKey) return;

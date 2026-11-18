@@ -1,0 +1,254 @@
+{
+  "game": "SS03",
+  "level": 7,
+  "kind": "original",
+  "spec": {
+    "id": "ss03-07",
+    "title": "Les deux presses",
+    "facing": "S",
+    "rows": [
+      "################",
+      "##########b#..##",
+      "####...o.bD....#",
+      "####.o.........#",
+      "###b.T.........#",
+      "####.b.........#",
+      "####........o..#",
+      "#######........#",
+      "#######.......D#",
+      "##############g#",
+      "################"
+    ],
+    "circuits": [
+      {
+        "id": "presse-ouest",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "presse-nord",
+        "buttons": [
+          {
+            "x": 9,
+            "y": 2
+          }
+        ]
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 4
+          },
+          {
+            "x": 10,
+            "y": 1
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 5,
+          "y": 4
+        },
+        "circuit": "presse-ouest",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 2
+        },
+        "circuit": "presse-nord",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 8
+        },
+        "circuit": "sortie",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "design": {
+    "kind": "original",
+    "guidePuzzle": null,
+    "concept": "Charger une presse à deux reprises pour pousser une file, puis utiliser une seconde presse orientée autrement.",
+    "zones": [
+      {
+        "name": "Presse ouest",
+        "purpose": "Le premier déclenchement place une caisse dans le couloir ; le second pousse la file de deux vers la niche du bouton."
+      },
+      {
+        "name": "Zone de manœuvre",
+        "purpose": "Contourner les caisses entre les chargements, en évitant de reprendre la caisse déjà déposée."
+      },
+      {
+        "name": "Presse nord",
+        "purpose": "Amener la troisième caisse par le côté puis actionner le piston vers un bouton contre paroi."
+      },
+      {
+        "name": "Sortie",
+        "purpose": "Les deux boutons de niche doivent rester occupés pour traverser la porte finale."
+      }
+    ],
+    "hint": "Une porte fléchée pousse ce qui occupe sa case lorsqu’elle se ferme. Les deux boutons dans les niches ne peuvent pas recevoir une caisse par simple traction."
+  },
+  "validation": {
+    "complete": true,
+    "actions": 42,
+    "pulls": 11,
+    "pistonStrokes": [
+      {
+        "gateIndex": 0,
+        "movedActors": 1
+      },
+      {
+        "gateIndex": 0,
+        "movedActors": 2
+      },
+      {
+        "gateIndex": 1,
+        "movedActors": 1
+      }
+    ],
+    "blocked": 0,
+    "dead": false,
+    "noPistonAblation": {
+      "provenUnsolvable": true,
+      "method": "geometric-incoming-pull-proof",
+      "explanation": "Chaque bouton de sortie a trois voisins murés. Pour tirer une caisse sur un bouton, il faudrait une case praticable à la fois derrière et devant cette destination ; aucune direction ne satisfait cette condition. Aucun bouton ne porte de caisse au départ et la porte finale est l’unique accès à la cible. Sans poussée de piston, la sortie ne peut donc rester ouverte jusqu’à l’arrivée du Voleur.",
+      "targetProofs": [
+        {
+          "target": {
+            "x": 3,
+            "y": 4
+          },
+          "ordinaryPullCanFill": false,
+          "entrances": [
+            {
+              "direction": "N",
+              "stoneBefore": {
+                "x": 3,
+                "y": 5
+              },
+              "heroAfter": {
+                "x": 3,
+                "y": 3
+              },
+              "possible": false
+            },
+            {
+              "direction": "S",
+              "stoneBefore": {
+                "x": 3,
+                "y": 3
+              },
+              "heroAfter": {
+                "x": 3,
+                "y": 5
+              },
+              "possible": false
+            },
+            {
+              "direction": "W",
+              "stoneBefore": {
+                "x": 4,
+                "y": 4
+              },
+              "heroAfter": {
+                "x": 2,
+                "y": 4
+              },
+              "possible": false
+            },
+            {
+              "direction": "E",
+              "stoneBefore": {
+                "x": 2,
+                "y": 4
+              },
+              "heroAfter": {
+                "x": 4,
+                "y": 4
+              },
+              "possible": false
+            }
+          ]
+        },
+        {
+          "target": {
+            "x": 10,
+            "y": 1
+          },
+          "ordinaryPullCanFill": false,
+          "entrances": [
+            {
+              "direction": "N",
+              "stoneBefore": {
+                "x": 10,
+                "y": 2
+              },
+              "heroAfter": {
+                "x": 10,
+                "y": 0
+              },
+              "possible": false
+            },
+            {
+              "direction": "S",
+              "stoneBefore": {
+                "x": 10,
+                "y": 0
+              },
+              "heroAfter": {
+                "x": 10,
+                "y": 2
+              },
+              "possible": false
+            },
+            {
+              "direction": "W",
+              "stoneBefore": {
+                "x": 11,
+                "y": 1
+              },
+              "heroAfter": {
+                "x": 9,
+                "y": 1
+              },
+              "possible": false
+            },
+            {
+              "direction": "E",
+              "stoneBefore": {
+                "x": 9,
+                "y": 1
+              },
+              "heroAfter": {
+                "x": 11,
+                "y": 1
+              },
+              "possible": false
+            }
+          ]
+        }
+      ],
+      "goalEntrances": [
+        "N"
+      ]
+    }
+  }
+}

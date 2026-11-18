@@ -49,6 +49,8 @@ try {
   assert.equal($('board').dataset.level,'1');
   assert.equal($('tutorial').open,true);
   assert.equal($('tutorial').hidden,false);
+  assert.equal($('piston-help').hidden,true);
+  assert.equal($('defeat').hidden,true);
   assert.ok(window.document.title.startsWith('SS03'));
   report.checks.push('Exact compiled inline script initializes level 1 and the open tutorial; canvas pixels match the engine');
 
@@ -113,7 +115,8 @@ try {
   await wait(180);equalFrame(ref.observe());
   assert.equal($('tutorial').hidden,true);
   assert.equal($('source-link').hidden,false);
-  assert.ok($('source-link').href.startsWith('https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#'));
+  assert.equal($('source-link').href,'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2');
+  assert.equal($('piston-help').hidden,false);
   $('restart').click();equalFrame(ref.restart());assert.equal($('tutorial').hidden,false);
   report.checks.push('Level selection during an animation cancels stale frames; source reference and return to the tutorial work');
 
@@ -139,6 +142,62 @@ try {
   assert.equal($('tutorial').hidden,true);
   for (const id of ['move','pull','release','place','gate']) assert.ok(window.document.querySelector(`[data-lesson="${id}"]`).classList.contains('done'),`${id} lesson completes through real input and public pixels`);
   report.checks.push('The complete tutorial witness teaches all five lessons and advances automatically to level 2');
+
+  const chooseLevel = level => {
+    $('level').value=String(level);$('level').dispatchEvent(new window.Event('change'));
+    equalFrame(ref.selectLevel(level));
+  };
+  for(let level=1;level<=SS03_LEVELS.length;level++){
+    chooseLevel(level);
+    assert.equal($('piston-help').hidden,level!==7&&level!==8,`Piston help visibility on level ${level}`);
+    assert.equal($('tutorial').hidden,level!==1);
+    assert.equal($('defeat').hidden,true);
+  }
+  assert.ok($('piston-help').textContent.includes('Une file de caisses avance ensemble.'));
+  assert.equal($('source-link').href,'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2');
+  report.checks.push('Piston help appears only in levels 7 and 8; level 8 links to the requested Heroes and Light puzzle 2');
+
+  chooseLevel(7);
+  const pistonCaptureStart=captures.length;
+  key('ArrowDown');const piston=ref.action(2);
+  assert.equal(piston.frames.length,6,'The introductory action must show a pull followed by a piston stroke');
+  assert.deepEqual(piston.frameDurationsMs,[60,80,40,60,80,0]);
+  assert.equal($('board').dataset.busy,'true');
+  assert.equal($('feedback').textContent,'La porte a actionné son piston.');
+  await settled(piston);
+  for(let i=0;i<piston.frames.length;i++)assert.deepEqual(captures[pistonCaptureStart+i],rgba(piston.frames[i]),`Piston presentation image ${i+1}`);
+  report.checks.push('Level 7 down input presents all six exact engine images: three pulling images followed by three piston images');
+
+  $('undo').click();equalFrame(ref.undo());
+  key('ArrowDown');const undoPiston=ref.action(2);
+  const pistonPhaseStart=undoPiston.frameDurationsMs.slice(0,3).reduce((a,b)=>a+b,0);
+  await wait(pistonPhaseStart+30);
+  assert.equal($('board').dataset.busy,'true');
+  assert.deepEqual(pixels,rgba(undoPiston.frames[3]));
+  $('undo').click();equalFrame(ref.undo());
+  await wait(undoPiston.frameDurationsMs.reduce((a,b)=>a+b,0)+30);
+  equalFrame(ref.observe());
+  assert.equal($('board').dataset.busy,'false');
+  assert.equal($('piston-help').hidden,false);
+  report.checks.push('Undo during the forced piston phase restores the exact pre-action scene and cancels all remaining images');
+
+  window.document.querySelector('[data-action="2"]').click();const resetPiston=ref.action(2);
+  await wait(pistonPhaseStart+30);
+  assert.equal($('board').dataset.busy,'true');
+  assert.deepEqual(pixels,rgba(resetPiston.frames[3]));
+  $('reset').click();equalFrame(ref.reset());
+  await wait(resetPiston.frameDurationsMs.reduce((a,b)=>a+b,0)+30);
+  equalFrame(ref.observe());
+  assert.equal($('board').dataset.busy,'false');
+  assert.equal($('moves').textContent,'0 actions');
+  assert.equal($('defeat').hidden,true);
+  assert.ok([...window.document.querySelectorAll('[data-action]')].every(button=>!button.disabled));
+  report.checks.push('Reset during the forced piston phase restores level 7, its counter and playable controls without stale frames');
+
+  // No internal state is injected to manufacture a death scene. The shipped maps were
+  // searched through real directional transitions (depth <=24, at most 50,002 states)
+  // without finding a short GAME_OVER route; engine death/undo tests cover that rule.
+  report.gameOverCoverage={status:'not-exercised-through-level-ui',reason:'No short reachable death route found in the shipped levels; no private state mutation used.'};
 
   assert.ok(captures.every(frame=>{
     for(let i=0;i<frame.length;i+=4)if(frame[i]===204&&frame[i+1]===204&&frame[i+2]===204)return false;
