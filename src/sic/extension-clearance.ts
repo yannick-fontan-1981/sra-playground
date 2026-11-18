@@ -31,7 +31,7 @@ export function extensionButtonMask(rows: NativeRows, [l, t, r, b]: NativeBox, h
   return [r - l + 1, b - t + 1, ...bits].join(',');
 }
 
-function targetPatterns(parts: readonly Part[], rows?: NativeRows) {
+export function targetPatterns(parts: readonly Part[], rows?: NativeRows) {
   const dots = parts.filter(p => p.area === 1).map(p => ({ at: center(p.bbox), ink: p.palette_value }));
   const targets: { at: NativePoint; marks: NativePoint[]; ink: number; filled?: true }[] = [];
   const arms = ([x, y]: NativePoint): NativePoint[] => [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]];

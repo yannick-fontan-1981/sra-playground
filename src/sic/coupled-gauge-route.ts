@@ -1,11 +1,14 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeEntity, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeEntity, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { chooseClearanceRoute, clearanceEdge, clearanceMoved, clearanceObserved, clearanceProject, extensionButtonMask,
   readClearanceLayout, type ClearanceLayout, type ClearanceMove, type ClearanceProjection, type ExtensionWitness } from './extension-clearance.ts';
+import { maximumCommittedActions } from './plan-step.ts';
+import { chooseTurningRoute, initialTurningPose, moveTurningPose, projectTurningPose, readTurningLayout, turningEdge, turningObserved,
+  type TurningLayout, type TurningMove, type TurningPose, type TurnSign } from './turning-extensions.ts';
 
 export const coupledGaugeRouteId = 'sic_route_by_measured_extensions';
 
@@ -53,7 +56,13 @@ type Proposal = NativeProposal & { readonly memory: Memory; readonly step: Step;
 type ClearanceMemory = { epoch: number; layout: ClearanceLayout; lengths: number[]; route: ClearanceMove[];
   blocked: string[]; refs: string[]; lastRef: string; stopped: boolean };
 type ClearanceProposal = NativeProposal & { clearance: ClearanceMemory; expected: ClearanceProjection; move: ClearanceMove; needId: string };
-const isClearance = (proposal: Proposal | ClearanceProposal): proposal is ClearanceProposal => 'clearance' in proposal;
+type TurningMemory = { epoch: number; lastRef: string; layout: TurningLayout; pose: TurningPose; direction: TurnSign | null;
+  hypothesis: TurnSign; route: TurningMove[]; blocked: string[]; refs: string[]; stopped: boolean };
+type TurningStep = { move: TurningMove; before: TurningPose; after: TurningPose };
+type TurningProposal = NativeProposal & { turning: TurningMemory; turns: TurningStep[]; probe: boolean; needId: string };
+type GaugeProposal = Proposal | ClearanceProposal | TurningProposal;
+const isClearance = (proposal: GaugeProposal): proposal is ClearanceProposal => 'clearance' in proposal;
+const isTurning = (proposal: GaugeProposal): proposal is TurningProposal => 'turning' in proposal;
 
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 const sameLayout = (a: Layout, b: Layout) => same(a.marker, b.marker) && a.bodies.length === b.bodies.length &&
@@ -208,11 +217,78 @@ function planStep(memory: Memory): Step | null {
     expected: project(memory.scene.base, memory.measured, movedBy(memory.lengths, move)) };
 }
 
-export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceProposal> {
+export function createSicCoupledGaugeRoute(): NativeFamily<GaugeProposal> {
   let state: Memory | null = null;
   let clearance: ClearanceMemory | null = null;
+  let turning: TurningMemory | null = null;
   let witnessed: ExtensionWitness | null = null;
   let decide: NativeProgramHandle | undefined;
+  async function offerTurning(observation: NativeObservation, rows: NativeRows, remaining: number,
+    execution?: NativeExecution): Promise<TurningProposal | null> {
+    const { level_epoch: epoch, observation_ref: ref, available_action_refs: available } = observation;
+    if (!decide || witnessed?.epoch !== epoch || remaining < 1 || available.length !== 1 || available[0] !== 'ACTION6') return null;
+    const prior = turning?.epoch === epoch ? turning : null;
+    if (prior && (prior.stopped || prior.lastRef !== ref)) return null;
+    const layout = prior?.layout ?? readTurningLayout(rows, observation.entities, witnessed);
+    if (!layout) return null;
+    const current: TurningMemory = prior ?? { epoch, lastRef: ref, layout, pose: initialTurningPose(layout), direction: null,
+      hypothesis: 1, route: [], blocked: [], refs: [], stopped: false };
+    if (!turningObserved(rows, layout, current.pose)) return null;
+    let hypothesis = current.hypothesis;
+    let route = current.route.length <= remaining ? current.route : [];
+    if (!route.length) {
+      route = await chooseTurningRoute(layout, current.pose, hypothesis, current.blocked, remaining, execution);
+      if (!route.length && current.direction === null) {
+        hypothesis = hypothesis === 1 ? -1 : 1;
+        route = await chooseTurningRoute(layout, current.pose, hypothesis, current.blocked, remaining, execution);
+      }
+    }
+    const first = route[0];
+    if (!first) return null;
+    const unknown = current.direction === null ? route.findIndex(move => move.operation === 'turn') : -1;
+    const probe = unknown === 0, strategy = probe ? 'P05' : 'P02', mode = execution?.reasoningMode ?? 'solving';
+    const facts = { repeatSupportedInteraction: !probe, probeNeededInteraction: probe, mode };
+    const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
+    if (decision.result !== strategy) return null;
+    const evidence: [string, ...string[]] = [ref, ...new Set([...witnessed.evidence, ...current.refs].filter(value => value !== ref))];
+    const situation = probe ? 'Measure which bars rotate around the selected pivot'
+      : first.operation === 'turn' ? 'Rotate the linked bars to clear a path around an obstacle'
+        : 'Adjust the length of the linked bars and advance the marker';
+    const objective = { kind: 'align_linked_marker_by_turning_and_extending', scope: ref.split(':revision:', 1)[0]!,
+      subjects: [layout.target.join(',')], parentObjective: 'G_official_completion', satisfactionContract: 'official_progress_after_marker_alignment' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+    const id = coupledGaugeRouteId + ':' + need.id;
+    const actions: NativeCommand[] = [], steps: NativeRecord[] = [], turns: TurningStep[] = [];
+    const count = probe ? 1 : Math.min(maximumCommittedActions, remaining, unknown < 0 ? route.length : unknown);
+    let pose = current.pose;
+    for (const move of route.slice(0, count)) {
+      const button = layout.segments[move.body]!.buttons[move.operation];
+      const point = await ObservedInputDomain.makeLocusWitness(observation, rows, button.at, { reason: situation, evidence });
+      if (!point) break;
+      const [x, y] = button.at, action = { action_ref: 'ACTION6', data: { x, y } };
+      const next = moveTurningPose(pose, move, hypothesis);
+      actions.push(action);
+      steps.push({ action, point_binding: point, expected_after: probe ? null : projectTurningPose(layout, next) });
+      turns.push({ move, before: pose, after: next });
+      pose = next;
+    }
+    if (!actions.length) return null;
+    const projected = projectTurningPose(layout, current.pose), next = projectTurningPose(layout, turns[0]!.after);
+    const button = layout.segments[first.body]!.buttons[first.operation];
+    return { status: 'proposed', kind: coupledGaugeRouteId, turning: { ...current, hypothesis, route }, turns, probe, needId: need.id,
+      actions, steps, binding: { observation_ref: ref, level_epoch: epoch },
+      sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
+        edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+      sicSituationCard: { strategy, need: 'Bring the marker to the visible target', situation, mode, evidence, agenda: [],
+        triggerCard: chooseInteraction, focus: button.box, gauge: projected.parts[first.body]!.box,
+        pivot: dot(projected.parts[first.body]!.pivot), carried: projected.parts.slice(first.body + 1).map(part => part.box),
+        actor: dot(projected.marker), target: dot(layout.target), ...(probe ? {} : { landing: dot(next.marker) }) },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + objective.parentObjective] }],
+      sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent: objective.parentObjective }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: objective.parentObjective, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
   async function offerClearance(observation: NativeObservation, rows: NativeRows, remaining: number,
     execution?: NativeExecution): Promise<ClearanceProposal | null> {
     const { level_epoch: epoch, observation_ref: ref, available_action_refs: actionsAvailable } = observation;
@@ -279,7 +355,8 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
       decide = await registry.registerProgram(chooseInteraction, {}, await interactionModule());
     },
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
-      return group === observedMechanicsGroup ? offerClearance(observation, rows, remaining, execution)
+      return group === observedMechanicsGroup ? await offerClearance(observation, rows, remaining, execution)
+        ?? await offerTurning(observation, rows, remaining, execution)
         : this.propose(observation, rows, inputs, remaining, execution);
     },
     async propose(observation, rows, _inputs, remaining, execution) {
@@ -287,6 +364,8 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
         observation.available_action_refs[0] !== 'ACTION6') return null;
       const clearing = await offerClearance(observation, rows, remaining, execution);
       if (clearing) return clearing;
+      const pivoting = await offerTurning(observation, rows, remaining, execution);
+      if (pivoting) return pivoting;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped) return null;
       const scene = prior?.scene ?? readScene(observation.entities, rows[0]!.length, rows.length);
@@ -343,11 +422,17 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
           preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (isTurning(proposal) && index > 0) {
+        const step = proposal.turns[index];
+        const admitted = !!step && observation.level_epoch === proposal.turning.epoch
+          && turningObserved(packet.frame_rows, proposal.turning.layout, step.before);
+        return { admitted, reason: admitted ? 'linked_pivots_and_marker_still_aligned' : 'linked_extension_context_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'coupled_button_bound' : 'coupled_button_context_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isClearance(proposal)) {
@@ -355,18 +440,46 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
         return { matched, seal_prefix: true, reason: matched ? 'extension_marker_and_attached_bodies_confirmed'
           : 'extension_or_attachment_prediction_contradicted' };
       }
+      if (isTurning(proposal)) {
+        const step = proposal.turns[index]!;
+        if (proposal.probe) return { matched: null, seal_prefix: true, reason: 'compare_quarter_turn_and_carried_bars' };
+        const matched = turningObserved(second, proposal.turning.layout, step.after);
+        return { matched, seal_prefix: !matched || index + 1 >= proposal.turns.length,
+          reason: matched ? 'linked_pivots_lengths_and_marker_confirmed' : 'linked_extension_prediction_contradicted' };
+      }
       const { step, memory } = proposal;
       const layout = readLayout(after.entities, memory.scene);
       const matched = step.expected ? !!layout && sameLayout(layout, step.expected) : null;
       return { matched, seal_prefix: true, reason: 'compare_marker_and_linked_piece_positions' };
     },
-    record(before, after, _action, first, second, proposal) {
-      if (isClearance(proposal)) {
+    record(before, after, _action, first, second, proposal, index) {
+      if (isClearance(proposal) || isTurning(proposal)) {
         if (after.levels_completed > before.levels_completed && witnessed?.epoch === before.level_epoch) {
           witnessed = { ...witnessed, epoch: after.level_epoch,
             evidence: [...witnessed.evidence.slice(-6), after.observation_ref] };
         }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        if (isTurning(proposal)) {
+          const { turning: run } = proposal, step = proposal.turns[index]!;
+          const refs = [...(turning?.epoch === run.epoch ? turning.refs : run.refs).slice(-8), after.observation_ref];
+          const next = { ...run, refs, lastRef: after.observation_ref };
+          if (turningObserved(second, run.layout, step.after)) {
+            turning = { ...next, pose: step.after, direction: proposal.probe ? run.hypothesis : run.direction,
+              route: run.route.slice(index + 1) };
+            return { events: [], ...(proposal.probe ? { reviewEvidence: 'The pivot turned by one quarter-turn and carried the rest of the chain.' } : {}) };
+          }
+          if (proposal.probe) {
+            const hypothesis = run.hypothesis === 1 ? -1 : 1, other = moveTurningPose(step.before, step.move, hypothesis);
+            if (turningObserved(second, run.layout, other)) {
+              turning = { ...next, pose: other, direction: hypothesis, hypothesis, route: [] };
+              return { events: [], reviewEvidence: 'The linked bars turned in the opposite direction from the first prediction.' };
+            }
+          }
+          const remained = turningObserved(second, run.layout, step.before);
+          turning = { ...next, pose: step.before, route: [], stopped: !remained || run.blocked.length >= 48,
+            blocked: remained ? [...run.blocked, turningEdge(step.before, step.move)] : run.blocked };
+          return { events: [] };
+        }
         const { clearance: current, expected, move } = proposal, { layout, lengths } = current;
         const matched = clearanceObserved(second, layout, expected);
         const remained = !matched && clearanceObserved(second, layout, clearanceProject(layout, lengths));
@@ -411,11 +524,12 @@ export function createSicCoupledGaugeRoute(): NativeFamily<Proposal | ClearanceP
       }
       return { events: [] };
     },
-    state: () => ({ state, witnessed, clearance }),
+    state: () => ({ state, witnessed, clearance, ...(turning ? { turning } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as Memory | null);
       witnessed = structuredClone((value.witnessed ?? null) as ExtensionWitness | null);
       clearance = structuredClone((value.clearance ?? null) as ClearanceMemory | null);
+      turning = structuredClone((value.turning ?? null) as TurningMemory | null);
     },
   };
 }
