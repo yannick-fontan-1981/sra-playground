@@ -137,11 +137,22 @@ export function stepWorld(w: World, s: State, actionId: number): State {
 type Sprite = readonly (readonly (number | null)[])[];
 const cross = (c: number): Sprite => [[null,c,null],[c,c,c],[null,c,null]];
 const square = (c: number, middle: number | null = null): Sprite => [[c,c,c],[c,middle,c],[c,c,c]];
+function stampPixels(frame: number[][], p: Point, sprite: Sprite): void {
+  sprite.forEach((row, y) => row.forEach((v, x) => {
+    const px = p.x + x, py = p.y + y;
+    if (v !== null && px >= 2 && px < 62 && py >= 2 && py < 62) frame[py]![px] = v;
+  }));
+}
 function stamp(frame: number[][], p: Point, sprite: Sprite): void {
   if (!inside(p)) return;
-  sprite.forEach((row, y) => row.forEach((v, x) => {if (v !== null) frame[2 + p.y * 3 + y]![2 + p.x * 3 + x] = v;}));
+  stampPixels(frame, {x: 2 + p.x * 3, y: 2 + p.y * 3}, sprite);
 }
-export function renderWorld(w: World, s: State): number[][] {
+function warriorSprite(facing: Direction): Sprite {
+  const hero: (number|null)[][] = [[null,8,null],[8,8,8],[null,8,null]], d = VECTORS[facing];
+  hero[1+d.y]![1+d.x] = 0;
+  return hero;
+}
+function renderScene(w: World, s: State, stones: readonly Point[], hero: Point | null): number[][] {
   const frame = Array.from({length: 64}, () => Array<number>(64).fill(4));
   for (let y = 0; y < 20; y++) for (let x = 0; x < 20; x++) {
     const t = terrainAt(w, {x,y}), c = t === '#' ? 4 : t === '~' ? 9 : 3;
@@ -151,12 +162,14 @@ export function renderWorld(w: World, s: State): number[][] {
   for (const p of w.buttons) stamp(frame, p, cross(7));
   for (const p of w.doors) stamp(frame, p, doorsOpen(w,s) ? [[7,null,7],[null,null,null],[7,null,7]] : square(7,5));
   stamp(frame, w.goal, square(11));
-  for (const p of s.stones) stamp(frame, p, square(13,5));
-  const hero: (number|null)[][] = [[null,8,null],[8,8,8],[null,8,null]], d = VECTORS[s.facing];
-  hero[1+d.y]![1+d.x] = 0; stamp(frame, s.hero, hero);
-  for (const p of w.buttons) if (contains(s.stones,p) || equal(p,s.hero)) stamp(frame,p,[[7,null,7],[null,null,null],[7,null,7]]);
-  if (contains(s.stones,w.goal)) stamp(frame,w.goal,[[11,null,11],[null,null,null],[11,null,11]]);
+  for (const p of stones) stamp(frame, p, square(13,5));
+  if (hero) stamp(frame, hero, warriorSprite(s.facing));
+  for (const p of w.buttons) if (contains(stones,p) || (hero && equal(p,hero))) stamp(frame,p,[[7,null,7],[null,null,null],[7,null,7]]);
+  if (contains(stones,w.goal)) stamp(frame,w.goal,[[11,null,11],[null,null,null],[11,null,11]]);
   return frame;
+}
+export function renderWorld(w: World, s: State): number[][] {
+  return renderScene(w, s, s.stones, s.hero);
 }
 /** Intermediates are presentation only; they never advance game logic. */
 export function transitionFrames(w: World, before: State, after: State, action: number): number[][][] {
@@ -164,12 +177,15 @@ export function transitionFrames(w: World, before: State, after: State, action: 
   if (!direction || after.failed || equal(before.hero,after.hero)) return [renderWorld(w,after)];
   const plan = planPush(w,before,direction);
   if (!plan?.valid) return [renderWorld(w,after)];
-  const pulse = renderWorld(w,before), arrival = renderWorld(w,after);
-  for (const p of plan.stones) stamp(pulse,p,square(0,13));
-  for (const p of plan.destinations) {
-    stamp(arrival,p,plan.sinks && equal(p,plan.to) ? [[10,0,10],[0,10,0],[10,0,10]] : square(13,0));
-  }
-  return [pulse,arrival,renderWorld(w,after)];
+  const stationary = before.stones.filter(p => !contains(plan.stones,p)), d = VECTORS[direction];
+  const frames = [1,2].map(pixels => {
+    const frame = renderScene(w,before,stationary,null);
+    const shifted = (p: Point): Point => ({x: 2 + p.x * 3 + d.x * pixels, y: 2 + p.y * 3 + d.y * pixels});
+    for (const p of plan.stones) stampPixels(frame,shifted(p),square(13,5));
+    stampPixels(frame,shifted(before.hero),warriorSprite(direction));
+    return frame;
+  });
+  return [...frames,renderWorld(w,after)];
 }
 interface Snapshot {index: number; completed: number[]; state: State}
 export class PushPuzzleSession {

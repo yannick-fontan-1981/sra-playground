@@ -4,31 +4,31 @@ export const LEVEL_INFO = [
     "label": "Création originale · Tutoriel complet, aide ouverte au démarrage."
   },
   {
-    "puzzle": 3,
-    "label": "Carte transcrite · Énigme 3 · Guerrier."
-  },
-  {
     "puzzle": 2,
-    "label": "Carte transcrite · Énigme 2 · Guerrier."
+    "label": "Carte transcrite · Énigme 2 · Guerrier. Ancien niveau 3."
   },
   {
-    "puzzle": 6,
-    "label": "Carte transcrite · Énigme 6 · Voleur remplacé par le Guerrier."
+    "puzzle": 0,
+    "label": "Création originale · Digue latérale et changement de côté."
   },
   {
-    "puzzle": 10,
-    "label": "Carte transcrite · Énigme 10 · Magicien remplacé par le Guerrier."
+    "puzzle": 0,
+    "label": "Création originale · Rapatrier une pierre entre deux rives."
   },
   {
-    "puzzle": 11,
-    "label": "Carte transcrite · Énigme 11 · Magicien remplacé par le Guerrier."
+    "puzzle": 0,
+    "label": "Création originale · Port en U et appuis de manœuvre."
+  },
+  {
+    "puzzle": 0,
+    "label": "Création originale · Spirale, paliers et transfert de cargaison."
   },
   {
     "puzzle": 4,
     "label": "Carte transcrite · Énigme 4 · Guerrier."
   },
   {
-    "puzzle": 8,
-    "label": "Carte transcrite · Énigme 8 · Voleur remplacé par le Guerrier."
+    "puzzle": 0,
+    "label": "Création originale · Trois chantiers et réserves limitées."
   }
 ] as const;

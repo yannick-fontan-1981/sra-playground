@@ -1,11 +1,11 @@
 {
   "success": true,
   "command": "npm test",
-  "tests": 58,
-  "passed": 58,
+  "tests": 61,
+  "passed": 61,
   "failed": 0,
   "node": "v24.22.1",
   "compiler": "TypeScript 5.9.3",
   "configuredDevDependency": "TypeScript 5.9.3",
-  "scope": "Standalone SS02 0.3.0; direct directional pushing without preview. No production integration or performance claim."
+  "scope": "Standalone SS02 0.4.0; 3-frame pixel motion and five original aquatic maps. No production integration or performance claim."
 }

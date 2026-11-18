@@ -1,4 +1,4 @@
-# SS02 — spécification 0.3.0
+# SS02 — spécification 0.4.0
 
 ## Présentation
 
@@ -45,9 +45,11 @@ l'observation fournie à un agent.
 
 Le plateau stable ne montre que l'état courant, sans contours de destination
 ni indication anticipée des poussées possibles. Après une poussée réussie, les
-pierres clignotent en blanc à leur départ puis à leur arrivée. Cette animation
-comporte trois images avec délais de 60 et 80 ms avant l'image stable. Les images
-intermédiaires n'ajoutent aucun tour logique.
+pierres et le Guerrier avancent de 1, puis 2, puis 3 pixels dans la direction
+choisie : une cellule de 3×3 pixels est parcourue en trois images. Les sprites
+gardent leurs couleurs, sans clignotement. Les délais sont de 60 et 80 ms avant
+l'image stable finale ; une pierre coulée devient un support avec X cyan sur
+cette dernière image. Les images intermédiaires n'ajoutent aucun tour logique.
 
 Undo restaure aussi les chaînes, supports immergés, portes et changements de
 niveau. Undo, Reset, Restart et changement manuel de niveau invalident une

@@ -1,15 +1,18 @@
-# SS01–SS25 — jalon SS02 / 0.3.0
+# SS01–SS25 — jalon SS02 / 0.4.0
 
 ## Livré dans ce laboratoire
 
-SS02 possède huit niveaux jouables : tutoriel original complet puis sept grilles
-attribuées à Heroes of Hauling. Guerrier rouge, cellules 3×3, chaînes de pierres,
-poussée directement avec les flèches, animation de poussée, eau, supports, boutons,
+SS02 possède huit niveaux jouables : tutoriel original, deux grilles attribuées à
+Heroes of Hauling et cinq nouvelles énigmes aquatiques. L’ancien niveau 3 devient
+le niveau 2 ; les niveaux 3, 4, 5, 6 et 8 sont reconstruits. Guerrier rouge, cellules 3×3, chaînes de pierres,
+poussée directement avec les flèches, mouvement en trois images (1/2/3 pixels),
+eau, supports, boutons,
 portes, Undo, Reset, navigation et VICTORY sont opérationnels. La poussée n’affiche
 aucune prévisualisation et ne demande plus de commande Espace.
 
 Validation : les résultats actualisés de compilation TypeScript, des tests du
-moteur, des huit témoins et du parcours navigateur figurent dans `validation/`.
+moteur, des huit témoins, de la nécessité de l’eau et de l’interface DOM figurent
+dans `validation/`. Le contrôle Chromium est indisponible dans cet environnement.
 Les témoins utilisent uniquement les directions et ne sont pas annoncés minimaux.
 
 ## Sauvegarde et intégration
@@ -19,7 +22,7 @@ Branche : `feat/ss02-warrior-lab-20261117`, base GitHub
 
 Périmètre : `experiments/sinking-star-ss02/` uniquement. Les sources de production
 et SS01 sont inchangées. Le commit de livraison est indiqué dans le compte rendu
-et dans le manifeste du paquet distribué, après vérification de l'arbre distant.
+après vérification de l'arbre distant.
 
 Intégration canonique de SS02 : non. Publication Site de SS02 : non. Version/SHA
 Site : sans objet pour cette livraison. La synchronisation du site existant n'a

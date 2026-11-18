@@ -35,12 +35,20 @@ function heroCell(frame: number[][]): number {
   }
   return -1;
 }
-function pushedCount(after: Observation): number {
+function pushedCount(before: Observation, after: Observation, action: number): number {
   if (after.frames.length < 3) return 0;
-  const pulse = after.frames[0]!;
+  const origin = heroCell(before.frame);
+  if (origin < 0) return 0;
+  const direction = [{x:0,y:-3},{x:0,y:3},{x:-3,y:0},{x:3,y:0}][action-1];
+  if (!direction) return 0;
+  const frame = before.frame;
+  let x = origin % 64 + direction.x, y = Math.floor(origin / 64) + direction.y;
   let count = 0;
-  for (let y = 2; y < 62; y += 3) for (let x = 2; x < 62; x += 3) {
-    if (pulse[y]![x] === 0 && pulse[y]![x+2] === 0 && pulse[y+1]![x+1] === 13 && pulse[y+2]![x] === 0 && pulse[y+2]![x+2] === 0) count++;
+  // Brown edges and a black center identify a movable stone, even on a button.
+  while (x >= 2 && x < 62 && y >= 2 && y < 62 && frame[y+1]![x+1] === 5
+    && frame[y]![x+1] === 13 && frame[y+1]![x] === 13
+    && frame[y+1]![x+2] === 13 && frame[y+2]![x+1] === 13) {
+    count++; x += direction.x; y += direction.y;
   }
   return count;
 }
@@ -52,7 +60,7 @@ function observeLesson(before: Observation, after: Observation, action: number):
     if (f[y]![x] === 10 && f[y]![x+2] === 10 && f[y+1]![x+1] === 10 && f[y+2]![x] === 10 && f[y+2]![x+2] === 10) learned.add('bridge');
     if (f[y]![x] === 7 && f[y]![x+2] === 7 && f[y+2]![x] === 7 && f[y+2]![x+2] === 7 && f[y+1]![x+1] === 3 && f[y]![x+1] === 3) learned.add('gate');
   }
-  if (pushedCount(after) > 1) learned.add('chain');
+  if (pushedCount(before,after,action) > 1) learned.add('chain');
 }
 function updateUI(): void {
   select.value = String(observation.level);
@@ -99,7 +107,7 @@ function act(action: number): void {
   const before = observation, next = session.action(action);
   moves++; observeLesson(before,next,action);
   $('feedback').textContent = next.levelsCompleted > before.levelsCompleted ? 'Niveau terminé !'
-    : pushedCount(next) > 0 ? 'Poussée réussie.'
+    : pushedCount(before,next,action) > 0 ? 'Poussée réussie.'
     : heroCell(before.frame) === heroCell(next.frame) ? 'Passage bloqué : vérifie les obstacles et la fin de la file.' : '';
   void present(next);
 }

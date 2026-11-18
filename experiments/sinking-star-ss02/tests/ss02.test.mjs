@@ -31,7 +31,7 @@ test('a direction turns and pushes immediately, with animation and no destinatio
  const frames=transitionFrames(w,s,next,4);
  assert.equal(frames.length,3);assert.deepEqual(frames.at(-1),renderWorld(w,next));
  assert.ok(frames.every(f=>!f.flat().includes(1)));
- assert.deepEqual(tile(frames[0],next.stones[0]),[[3,3,3],[3,3,3],[3,3,3]]);
+ assert.deepEqual(tile(frames[0],next.stones[0]),[[13,3,3],[13,3,3],[13,3,3]]);
 });
 for(const [direction,action,rows] of [
  ['N',1,['#######','#.....#','#..o..#','#..W.g#','#######']],

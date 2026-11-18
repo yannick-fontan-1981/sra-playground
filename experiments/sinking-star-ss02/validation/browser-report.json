@@ -1,9 +1,8 @@
 {
   "success": false,
-  "status": "blocked",
-  "stage": "browser-launch",
-  "error": "Chromium failed before opening a page: socket() failed: Operation not permitted (1).",
+  "status": "not-run",
+  "reason": "Chromium startup was blocked by socket restrictions in this same environment. Current revision verified through engine tests, a DOM simulator, and rendered frame inspection.",
+  "visualBrowserTest": false,
   "checks": [],
-  "totalActions": 0,
-  "scope": "This revision has no completed real-browser or visual test in this environment; engine witnesses validated separately."
+  "totalActions": 0
 }

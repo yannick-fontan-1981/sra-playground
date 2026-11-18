@@ -1,8 +1,8 @@
 # SS02 — La force rouge
 
 Laboratoire TypeScript autonome pour le Guerrier rouge de la série Sinking Star.
-Huit niveaux : un tutoriel original complet, puis sept cartes issues de transcriptions
-publiques de Heroes of Hauling. Aucun fichier de SS01 ou du runtime de production
+Huit niveaux : un tutoriel original complet, deux cartes issues de transcriptions
+publiques de Heroes of Hauling et cinq nouvelles énigmes aquatiques originales. Aucun fichier de SS01 ou du runtime de production
 n'est modifié par ce laboratoire.
 
 ## Jouer
@@ -14,6 +14,7 @@ Flèches : marcher et pousser une pierre ou une file de pierres d'une case dans
 la direction choisie. La poussée est immédiate, sans prévisualisation ni commande
 séparée. Z / Ctrl+Z : Undo. R : recommencer le niveau. Les boutons à l'écran
 conviennent aussi au tactile. Le tutoriel du niveau 1 est ouvert au démarrage.
+Chaque poussée avance de 1, 2 puis 3 pixels sur trois images ; aucun clignotement.
 
 ## Construire et tester
 
@@ -45,8 +46,8 @@ et du buffer Canvas ne remplace pas une vérification visuelle dans un navigateu
   consignées dans `validation/`. Les parcours utilisent uniquement les quatre directions.
 - Les parcours sont des témoins de solvabilité, pas des solutions minimales.
 - Un mauvais placement peut rendre un niveau insoluble : Undo et Reset sont disponibles.
-- Les niveaux 4, 5, 6 et 8 changent le rôle original en Guerrier ; leurs solutions
-  ne prétendent pas reproduire les solutions du Voleur ou du Magicien.
+- L’ancien niveau 3 devient le niveau 2. Les niveaux 3, 4, 5, 6 et 8 sont
+  reconstruits avec de nouvelles géométries, des plateformes et des accès latéraux.
 - Fidélité vérifiée contre les grilles textuelles attribuées, pas contre chaque
   capture du jeu commercial. Voir `docs/provenance.md`.
 - Le jeu n'est pas encore enregistré comme SS02 dans le catalogue du Playground.
