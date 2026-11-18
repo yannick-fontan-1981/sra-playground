@@ -22,7 +22,9 @@ Empreinte des commandes et retours à l’entrée du niveau `1ca5ba20dc13cf51f53
 
 La commande 6 active l'inverseur visible en `(39,33)`. Le terrain commun quitte le champ entre le départ et l'arrivée. Parmi les 44 images, 24 permettent de lire le plateau et donnent, par leurs recouvrements, un décalage final unique de dix rangées. SIC valide la nouvelle position et poursuit les commandes 7 à 9. Sans ce recalage, la famille de gravité cessait de proposer dès la commande 6.
 
-Après la commande 9, SIC voit la sortie à gauche et un autre inverseur à proximité. Son modèle ne trouve aucun premier pas sûr qui les relie à la position actuelle. L'exploration reprend à la commande 10, avec plusieurs reprises de la famille de gravité entre les commandes 16 et 50. La partie s'achève sur une défaite à la commande 64. La préparation d'appuis avant le premier changement de gravité reste à vérifier.
+Après la commande 9, SIC voit la sortie à gauche et un autre inverseur à proximité. Son modèle ne trouve aucun premier pas sûr qui les relie à la position actuelle. L'exploration reprend à la commande 10, avec plusieurs reprises de la famille de gravité entre les commandes 16 et 50. La partie s'achève sur une défaite à la commande 64. La préparation d'appuis avant le premier changement de gravité reste à intégrer au choix du trajet.
+
+Un essai comparatif hors agent part de la même sauvegarde et active le même inverseur depuis la même position. Sans préparation, le jeu déclare une défaite. Avec les deux appuis solidifiés aux coordonnées écran `(39,51)` et `(45,51)` avant le déplacement, le retour confirme un arrêt sur un appui. Le cadrage descend de trois rangées et la partie reste en cours. Cet essai mesure l'effet des deux appuis ensemble.
 
 ## Action par action
 
