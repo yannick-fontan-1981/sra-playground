@@ -1,6 +1,6 @@
-# Préparation de l’intégration SS05
+# Intégration de SS05 dans Custom 4
 
-Le laboratoire est autonome. Son intégration dans le catalogue Custom 4 et le site relève d’une étape distincte après essai du HTML.
+SS05 — Le Chant Magenta est le cinquième jeu de Custom 4. Le Playground importe le moteur et les huit cartes de la version 0.1.2. L’interface partage avec la démo le tutoriel fondé sur les pixels et utilise les crédits de chaque salle.
 
 ## Contrat à réutiliser
 
@@ -21,3 +21,11 @@ Comparer les observations du backend de production et de la session d’auteur s
 Le solveur et les parcours de `tests/` servent uniquement à la validation. Ils ne sont jamais livrés à l’agent et ne constituent pas une politique spécifique au jeu. Aucun changement de stratégie SRA n’est requis par ce laboratoire.
 
 Conserver les travaux concurrents. Toute future publication suit les règles du dépôt : tests, commit, push, intégration sur main, publication du Site, puis vérification des SHA GitHub et Site. Enregistrer séparément la présence des sources sur main et la présence effective du jeu dans le catalogue publié.
+
+## Vérifications du raccordement
+
+- Les 31 tests du laboratoire, la validation des huit niveaux et les 14 contrôles Happy DOM passent. Le build de production génère 105 jeux et 676 aperçus. Les 22 tests natifs couvrent notamment la parité des 395 actions et des 1 222 images de SS05, les chargements directs, la victoire hors ordre et les commandes après WIN ou GAME_OVER.
+- Chromium a vérifié les six leçons du tutoriel, Espace sans défilement, X et le bouton Reflet. Les captures du canvas concordent avec le moteur pour l’élimination mutuelle des monstres et le combat mortel de L3, le déplacement d’un appui de L7 et les neuf images de la cascade de L8.
+- Undo, Reset, Restart et le changement de niveau ont été exercés pendant l’attaque de L3. Le panneau de défaite apparaît après le dernier rendu. Le reflet mortel de L6, puis Undo et Reset, passent avec les trois commandes de reflet.
+- La campagne Chromium se termine en 395 actions avec le niveau 1 résolu en dernier. Une commande du mode agent atteint le backend natif. Aucune requête Python n’est déclenchée lors du chargement des jeux natifs.
+- Les campagnes SS01 à SS04 terminent dans Chromium. CASC et LS20 se chargent et répondent aux commandes. Les 40 tuiles de Custom 4 correspondent aux observations initiales des cinq moteurs. La galerie ouvre SS05 au niveau choisi et le Playground a été contrôlé à 390 px de large.
