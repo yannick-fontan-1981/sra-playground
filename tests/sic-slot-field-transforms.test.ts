@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
-import { fitDisjointSlotCycles, projectionWithinLimit, radialSlotPermutations } from '../src/sic/slot-field-transforms.ts';
+import { diagonalSlotContours, measureBentSlotCycles, fitDisjointSlotCycles, projectionWithinLimit, radialSlotPermutations } from '../src/sic/slot-field-transforms.ts';
 
 test('one control can advance two disjoint cycles while leaving a connected branch still', () => {
   const positions: NativePoint[] = [[0, 0], [1, 0], [2, 0], [0, 1], [4, 3], [5, 3], [5, 4], [4, 4]];
@@ -23,4 +23,12 @@ test('a nested layout distinguishes movement along rings and spokes and supports
   const operators = permutations.map(permutation => ({ permutation }));
   assert.equal(projectionWithinLimit(new Map([[target, 3]]), operators, 17), true);
   assert.equal(projectionWithinLimit(new Map([[target, 3]]), operators, 16), false);
+});
+
+test('one control can wrap all measured diagonal-to-straight paths onto their target slots', () => {
+  const positions: NativePoint[] = [[0, 0], [1, 1], [2, 2], [2, 3], [2, 4], [6, 0], [7, 1], [8, 2], [8, 3], [8, 4]];
+  const candidate = measureBentSlotCycles(positions, [4, 9]);
+  assert.equal(candidate.length, 2);
+  assert.ok(candidate.some(permutation => permutation[4] === 0 && permutation[9] === 5));
+  assert.ok(diagonalSlotContours(positions).some(contour => contour.join(',') === '0,1,2'));
 });

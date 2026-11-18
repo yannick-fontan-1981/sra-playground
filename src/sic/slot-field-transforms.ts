@@ -109,3 +109,75 @@ export function projectionWithinLimit(targets: ReadonlyMap<number, number>,
   }
   return true;
 }
+
+export function measureBentSlotCycles(positions: readonly NativePoint[], targets: readonly number[]) {
+  if (targets.length < 2) return [];
+  const index = new Map(positions.map((point, i) => [key(point), i]));
+  const distance = ([a, b]: NativePoint, [c, d]: NativePoint) => [a + c, b + d] as NativePoint;
+  const axes = [0, 1] as const;
+  const pitch = axes.map(axis => {
+    const values = [...new Set(positions.map(point => point[axis]))].sort((a, b) => a - b);
+    return Math.min(...values.slice(1).map((value, i) => value - values[i]!));
+  });
+  if (pitch.some(n => !Number.isFinite(n))) return [];
+  const walk = (start: number, vector: NativePoint) => {
+    const result = [start];
+    let position = positions[start]!;
+    for (;;) {
+      position = distance(position, vector);
+      const next = index.get(key(position));
+      if (next === undefined) return result;
+      result.push(next);
+    }
+  };
+  const options: number[][][] = [];
+  for (const axis of axes) for (const sign of [-1, 1]) {
+    if (new Set(targets.map(i => positions[i]![axis])).size !== 1) continue;
+    const inward: NativePoint = axis === 0 ? [sign * pitch[0]!, 0] : [0, sign * pitch[1]!];
+    for (const sideways of [-1, 1]) {
+      const slope: NativePoint = axis === 0 ? [inward[0], sideways * pitch[1]!] : [sideways * pitch[0]!, inward[1]];
+      const paths = targets.map(target => walk(target, inward).flatMap((corner, depth, rail) => {
+        if (!depth) return [];
+        const head = walk(corner, slope);
+        return head.length >= 3 ? [[...head.reverse(), ...rail.slice(0, depth).reverse()]] : [];
+      }));
+      if (!paths.every(path => path.length === 1)) continue;
+      const chains = paths.map(path => path[0]!);
+      const cells = chains.flat();
+      if (new Set(cells).size === cells.length) options.push(chains);
+    }
+  }
+  return options.flatMap(chains => [-1, 1].map(step => {
+    const result = positions.map((_, i) => i);
+    for (const chain of chains) for (const [i, to] of chain.entries()) {
+      result[to] = chain[(i + step + chain.length) % chain.length]!;
+    }
+    return result;
+  }));
+}
+
+export function diagonalSlotContours(positions: readonly NativePoint[]): number[][] {
+  const index = new Map(positions.map((point, i) => [key(point), i]));
+  const pitch = ([0, 1] as const).map(axis => {
+    const coordinates = [...new Set(positions.map(point => point[axis]))].sort((a, b) => a - b);
+    return Math.min(...coordinates.slice(1).map((value, i) => value - coordinates[i]!));
+  });
+  if (pitch.some(n => !Number.isFinite(n))) return [];
+  const [dx, dy] = pitch as [number, number];
+  const result: number[][] = [];
+  for (const horizontal of [-dx, dx]) {
+    for (const [start, [x, y]] of positions.entries()) {
+      if (index.has(key([x - horizontal, y - dy]))) continue;
+      const run = [start];
+      for (let i = 1; ; i++) {
+        const next = index.get(key([x + i * horizontal, y + i * dy]));
+        if (next === undefined) break;
+        run.push(next);
+      }
+      for (let a = 0; a + 3 <= run.length; a++) {
+        for (let b = a + 3; b <= run.length; b++) result.push(run.slice(a, b));
+      }
+    }
+  }
+  return result;
+}

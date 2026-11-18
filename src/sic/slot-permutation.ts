@@ -4,7 +4,7 @@ import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, Nativ
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
-import { fitDisjointSlotCycles, projectionWithinLimit, radialSlotPermutations } from './slot-field-transforms.ts';
+import { diagonalSlotContours, fitDisjointSlotCycles, measureBentSlotCycles, projectionWithinLimit, radialSlotPermutations } from './slot-field-transforms.ts';
 
 export const slotPermutationId = 'sic_slot_permutation';
 export const verifySlotPermutationId = 'sic_verify_slot_permutation';
@@ -19,7 +19,7 @@ type Model = { key: NativePoint; permutations: number[][]; evidence: string; tri
 type State = { layout: string; models: Record<string, Model>; count: number };
 type Board = { positions: NativePoint[]; size: number; targetSlots: number[] };
 type Track = { across: 0 | 1; lanes: number[]; indices: number[]; alternating: number[] };
-type Geometry = { layout: string; tracks: Track[]; rings?: number[][]; radial?: number[][] };
+type Geometry = { layout: string; tracks: Track[]; rings?: number[][]; radial?: number[][]; bent?: number[][]; diagonals?: number[][] };
 type SlotLeg = { control: NativePoint; values: number[]; prediction: number[] | null };
 type Proposal = NativeProposal & { local: State; board: Board; route: SlotLeg[]; needId: string };
 const key = (value: unknown) => JSON.stringify(value);
@@ -104,6 +104,13 @@ function slotContours(positions: readonly NativePoint[], tracks: readonly Track[
 function fitSlotPermutations(before: readonly number[], after: readonly number[], geometry: Geometry,
   positions: readonly NativePoint[], targetSlots: readonly number[]) {
   if (before.length !== after.length || before.every((value, i) => value === after[i])) return [];
+  if (geometry.bent?.length) {
+    geometry.diagonals ??= diagonalSlotContours(positions);
+    const single = fitOrbit(before, after, geometry.diagonals);
+    const coupled = geometry.bent.filter(permutation => permutation.every((source, i) => before[source] === after[i]));
+    const fitted = [...new Map([...single, ...coupled].map(permutation => [key(permutation), permutation])).values()];
+    if (fitted.length) return fitted;
+  }
   geometry.rings ??= slotContours(positions, geometry.tracks);
   const contour = fitOrbit(before, after, geometry.rings);
   if (contour.length && !geometry.radial) return contour;
@@ -145,7 +152,8 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
       const layout = layoutKey(observation.level_epoch, scene);
       if (geometry?.layout !== layout) geometry = { layout, tracks: distributedTracks(positions) };
       const extended = positions.length > 64 || positions.length ** targets.size > maxProjectedStates;
-      if (extended && !(geometry.radial ??= radialSlotPermutations(positions, targetSlots)).length) return null;
+      if (extended && !(geometry.radial ??= radialSlotPermutations(positions, targetSlots)).length
+        && !(geometry.bent ??= measureBentSlotCycles(positions, targetSlots)).length) return null;
       const { tracks } = geometry;
       if (controls.length > (tracks.length ? 32 : 8)) return null;
       let local: State = state?.layout === layout ? state : { layout, models: {}, count: 0 };
