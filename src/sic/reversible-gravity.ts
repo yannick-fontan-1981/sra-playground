@@ -115,11 +115,31 @@ export function gravityTerrain(view: GravityView, rowOrigin: number, prior: Reco
   return terrain;
 }
 
-export function gravityReturn(before: GravityView, after: GravityView, step: GravityStep, memory: GravityHistory) {
+function animationRowShift(before: GravityView, after: GravityView, frames: readonly GravityView[]) {
+  if (!frames.length) return null;
+  const views = [before, ...frames, after];
+  const shifts = views.map(() => new Set<number>());
+  shifts[0]!.add(0);
+  for (let to = 1; to < views.length; to++) {
+    for (let from = 0; from < to; from++) {
+      if (!shifts[from]!.size) continue;
+      const offset = cameraRowShift(views[from]!, views[to]!);
+      if (offset === null) continue;
+      for (const shift of shifts[from]!) shifts[to]!.add(shift + offset);
+      if (shifts[to]!.size > 20) return null;
+    }
+  }
+  const final = shifts.at(-1)!;
+  return final.size === 1 ? [...final][0]! : null;
+}
+
+export function gravityReturn(before: GravityView, after: GravityView, step: GravityStep, memory: GravityHistory,
+  animation?: () => readonly GravityView[]) {
   const predicted = Math.floor(step.landing / before.width);
   const observed = Math.floor(after.at / after.width);
   const expected = step.frontier ? undefined : predicted - observed;
-  const shift = cameraRowShift(before, after, expected) ?? (expected === undefined ? null : cameraRowShift(before, after));
+  const direct = cameraRowShift(before, after, expected) ?? (expected === undefined ? null : cameraRowShift(before, after));
+  const shift = direct ?? (animation ? animationRowShift(before, after, animation()) : null);
   if (shift === null) return null;
   const landing = shift + observed, departure = Math.floor(before.at / before.width);
   const column = step.index % before.width, actorColumn = after.at % after.width;
@@ -130,7 +150,8 @@ export function gravityReturn(before: GravityView, after: GravityView, step: Gra
     || (edited === undefined && (landing - departure) * step.direction > 0));
   const solidified = step.edit === 'solidify' && edited === 'ceiling_solid';
   const inverted = step.edit === 'invert' && (landing - departure) * step.direction > 0;
-  return { shift, landing, removed, solidified, inverted, matched: sameColumn && reached && (removed || solidified)
+  return { shift, landing, removed, solidified, inverted, ...(direct === null ? { alignedThroughAnimation: true } : {}),
+    matched: sameColumn && reached && (removed || solidified)
     && (step.edit !== 'invert' || inverted || memory.inverted && landing === departure) };
 }
 

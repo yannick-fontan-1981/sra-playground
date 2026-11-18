@@ -18,6 +18,21 @@ type ReversibleState = { epoch: number; geometry: Layout; memory: GravityHistory
 type ReversalWitness = { epoch: number; geometry: Layout; direction: GravityHistory['direction']; refs: string[] };
 type ReversibleProposal = NativeProposal & { reversal: ReversibleState; view: GravityView; advance: GravityStep; needId: string };
 type Proposal = ProtectiveProposal | ReversibleProposal;
+
+function observedReversal(proposal: ReversibleProposal, rows: NativeRows, frames: readonly NativeRows[]) {
+  const { reversal, view, advance } = proposal;
+  const read = (frame: NativeRows) => readReversibleGravity(frame, reversal.geometry, reversal.carriesProtection);
+  const next = read(rows);
+  if (!next) return null;
+  const result = gravityReturn(view, next, advance, reversal.memory, () => {
+    const stride = Math.max(1, Math.ceil(frames.length / 64));
+    return frames.flatMap((frame, index) => {
+      const measured = index % stride === 0 ? read(frame) : null;
+      return measured ? [measured] : [];
+    });
+  });
+  return result ? { next, result } : null;
+}
 const isReversible = (proposal: Proposal): proposal is ReversibleProposal => Object.hasOwn(proposal, 'reversal');
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -333,13 +348,13 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
       return { admitted, reason: admitted ? 'gravity_step_bound' : 'gravity_view_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, _index, before, after, _first, second, frames = []) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isReversible(proposal)) {
-        const next = readReversibleGravity(second, proposal.reversal.geometry, proposal.reversal.carriesProtection);
-        const result = next && gravityReturn(proposal.view, next, proposal.advance, proposal.reversal.memory);
-        const reason = result?.matched ? result.inverted ? 'reversed_fall_confirmed_by_terrain_alignment'
+        const result = observedReversal(proposal, second, frames)?.result;
+        const reason = result?.matched ? result.alignedThroughAnimation ? 'gravity_landing_confirmed_through_animation'
+          : result.inverted ? 'reversed_fall_confirmed_by_terrain_alignment'
           : result.solidified ? 'protective_ceiling_solidified_in_reversible_path'
             : proposal.advance.edit ? 'blocking_tile_removed_in_gravity_path'
             : 'gravity_landing_confirmed_by_terrain_alignment' : 'reversible_gravity_projection_contradicted';
@@ -348,7 +363,7 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
       const reason = outcome(proposal, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'gravity_projection_contradicted' };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, _first, second, proposal, _index, frames = []) {
       if (isReversible(proposal) && after.levels_completed > before.levels_completed && proposal.reversal.memory.inverted) {
         reversalWitness = { epoch: after.level_epoch, geometry: proposal.reversal.geometry, direction: proposal.advance.direction,
           refs: [...proposal.reversal.refs.slice(-3), after.observation_ref] };
@@ -356,12 +371,12 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       if (isReversible(proposal)) {
         const { reversal: local, advance, view } = proposal, { memory } = local;
-        const next = readReversibleGravity(second, local.geometry, local.carriesProtection);
-        const result = next && gravityReturn(view, next, advance, memory);
-        if (!next || !result) {
+        const checked = observedReversal(proposal, second, frames);
+        if (!checked) {
           reversal = { ...local, stopped: true };
           return { events: [] };
         }
+        const { next, result } = checked;
         const origin = memory.rowOrigin + result.shift, landing = memory.rowOrigin + result.landing;
         const direction = result.matched ? advance.direction : memory.direction;
         const terrain = { ...memory.terrain };
