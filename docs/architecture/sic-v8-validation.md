@@ -2044,4 +2044,12 @@ Au clic 16, deux cavités adjacentes prennent la même couleur. SIC vérifie que
 
 Depuis le niveau 1, le niveau 6 gagne en **27 clics et 23,77 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **49 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 76 commandes relèvent de SIC seul. TypeScript et les **103 tests ciblés** passent. Empreinte `232ee6eee709539c9f0fd59a10383dc8b79901f61bd9ed0cc2d854170165c821`. La couverture atteint **555/636 niveaux (87,3 %)**, dont **56/99 niveaux 6 (56,6 %)**.
 
+### ELAS niveau 6, reconstruire une grille dont un axe est masqué
+
+Le cadre et les limites de rangée sont visibles, tandis que des pièces interrompent toutes les lignes horizontales. SIC complète les limites de colonne à partir des bords de plusieurs rangées. Il vérifie ensuite l'alternance des cases libres et la forme de chaque pièce. La grille mesurée contient neuf colonnes et huit rangées.
+
+Les commandes 4 et 22 révèlent chacune une pièce sous une pile. La lecture continue lorsque le nombre de pièces visibles dépasse seize. SIC reprend les commandes directionnelles de la partie et vérifie la pièce déplacée, la pièce révélée et le reste de la disposition après chaque retour. Les 107 commandes du niveau 6 correspondent à celles du rejeu depuis la sauvegarde.
+
+Depuis le niveau 1, le niveau 6 gagne en **107 commandes et 46,09 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **79 commandes et les empreintes des retours des quatre premiers niveaux** concordent avec la référence. La nouvelle lecture intervient aussi au niveau 5, qui gagne en **82 commandes** contre 136 auparavant. Les 268 commandes relèvent de SIC seul. TypeScript et les trois tests ciblés passent. Empreinte `60f1961c0557e740671c286ea1fac6f4c1ffb8f48e41cdaa71d9737fd0303782`. La couverture atteint **556/636 niveaux (87,4 %)**, dont **57/99 niveaux 6 (57,6 %)**.
+
 Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
