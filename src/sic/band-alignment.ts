@@ -4,7 +4,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeP
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
-import { findPassage, measurePassage, passageAction, passageBox, passageCommand, passageKey, readPassage, samePassage,
+import { findPassage, measurePassage, passageAction, passageBox, passageCommand, passageKey, passageThresholds, readPassage, samePassage,
   type IntakeLimit, type LegacyPassageLayout, type PassageLayout, type PassageStep, type PassageReading } from './band-passage.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 
@@ -99,15 +99,19 @@ export function createSicVerifyBandTransfer(family = verifyBandTransferId): Nati
     const decision = await decide?.run({ situation: facts }, { signal });
     if (!decision || decision.result !== (probe ? 'P05' : 'P07')) return null;
     const gate = plan.gate === null ? null : layout.controls[plan.gate], strategy = decision.result;
-    const label = control.kind === 'door' ? `Test the passage with ${control.amount / layout.unit} units on each side`
-      : gate?.kind === 'door' ? `Prepare the passage with ${gate.amount / layout.unit} units on each side` : 'Transfer material until the marker aligns with its reference';
+    const preparing = control.kind === 'door' ? control : gate?.kind === 'door' ? gate : null;
+    const thresholds = preparing ? passageThresholds(preparing) : null;
+    const label = thresholds ? `${control.kind === 'door' ? 'Test' : 'Prepare'} the passage with ${
+      thresholds[0].amount === thresholds[1].amount ? thresholds[0].amount / layout.unit + ' units on each side'
+        : thresholds.map(({ amount }) => amount / layout.unit).join(' and ') + ' units in the connected compartments'}`
+      : 'Transfer material until the marker aligns with its reference';
     const needLabel = layout.markers.length === 1 ? 'Move the marker to its reference and align their heights'
       : 'Bring each marker to its reference and match the heights';
     const goal = { kind: 'transport_and_align_band_marker', scope: ref.split(':revision:', 1)[0]!, subjects: ['moving_marker'],
       parentObjective: 'G_official_completion', satisfactionContract: 'observe_official_progress_after_passage_and_alignment' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = `band-passage:${need.id}`;
     const nextDoor = plan.steps.findIndex(step => layout.controls[step.index]!.kind === 'door');
-    const batch = layout.markers.length > 1 && control.kind === 'transfer'
+    const batch = (layout.markers.length > 1 || layout.depths) && control.kind === 'transfer'
       ? plan.steps.slice(0, Math.min(maximumCommittedActions, nextDoor < 0 ? plan.steps.length : nextDoor)) : [move];
     const actions: NativeCommand[] = [], steps: NativeRecord[] = [];
     for (const step of batch) {
@@ -166,7 +170,7 @@ export function createSicVerifyBandTransfer(family = verifyBandTransferId): Nati
       const model = local.model ?? measureBandGeometry(observation, rows, inputs);
       if (known && !local.model) {
         const layout = measurePassage(rows);
-        if (layout && (!model || layout.markers.length > 1)) {
+        if (layout && (!model || layout.markers.length > 1 || layout.depths)) {
           return offerPassage(observation, rows, known, remaining, execution?.reasoningMode ?? 'assimilation', execution?.signal, layout);
         }
       }

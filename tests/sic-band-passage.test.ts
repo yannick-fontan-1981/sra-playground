@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { findPassage, readPassage, samePassage, type PassageLayout } from '../src/sic/band-passage.ts';
+import { findPassage, measurePassage, passageThresholds, readPassage, samePassage, type PassageLayout } from '../src/sic/band-passage.ts';
 
 function layout(): PassageLayout {
   return {
@@ -44,4 +44,37 @@ test('a proved intake limit only applies to the receiving band and its current m
   assert.equal(findPassage(geometry, initial, 'into_clicked', [], 4)?.distance, 1);
   assert.equal(findPassage(geometry, initial, 'into_clicked', [], 4, [{ band: 0, occupant: 0, amount: 2 }]), null);
   assert.equal(findPassage(geometry, initial, 'into_clicked', [], 4, [{ band: 0, occupant: 1, amount: 2 }])?.distance, 1);
+});
+
+test('paired controls and a transverse wall give each side of a door its local threshold', () => {
+  const rows = Array.from({ length: 26 }, () => Array<number>(40).fill(3));
+  const paint = (left: number, top: number, right: number, bottom: number, color: number) => {
+    for (let y = top; y <= bottom; y++) rows[y]!.fill(color, left, right + 1);
+  };
+  paint(0, 0, 1, 10, 0);
+  paint(14, 0, 15, 10, 5);
+  paint(16, 0, 25, 10, 0);
+  paint(0, 13, 13, 25, 0);
+  paint(0, 11, 39, 12, 5);
+  paint(4, 11, 9, 12, 1);
+  paint(20, 11, 25, 12, 1);
+  paint(30, 11, 30, 12, 11);
+  paint(2, 4, 2, 7, 11);
+  paint(3, 4, 3, 7, 4);
+  paint(4, 4, 4, 4, 4);
+  for (const left of [0, 16]) {
+    paint(left, 9, left + 1, 10, 9);
+    paint(left, 13, left + 1, 14, 9);
+  }
+  const transverse = measurePassage(rows);
+  assert.ok(transverse);
+  const initial = readPassage(rows, transverse);
+  assert.deepEqual(initial?.quantities, [2, 10, 14]);
+  assert.deepEqual(transverse.controls.flatMap(control => control.kind === 'door' ? [passageThresholds(control)] : []), [
+    [{ band: 0, amount: 4 }, { band: 2, amount: 4 }],
+    [{ band: 1, amount: 4 }, { band: 2, amount: 20 }],
+  ]);
+  const route = findPassage(transverse, initial!, 'into_clicked', [], 40);
+  const doors = route?.steps.filter(({ index }) => transverse.controls[index]!.kind === 'door');
+  assert.deepEqual(doors?.map(({ next }) => next.carried), [[2], [1]]);
 });
