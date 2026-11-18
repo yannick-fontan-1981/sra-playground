@@ -1920,7 +1920,7 @@ Empreinte jusqu'à la victoire `4a9a756b032008a54b6693e140f65322afe3917802fddf2f
 
 ### CAVA niveau 6, suivre les portes avec les sceaux, le portail et les dalles
 
-La référence s'arrête après 80 commandes au niveau 6, faute de famille applicable. À l'entrée, la mesure retrouve trois sceaux, le portail et quatre destinations éclairées. Le graphe de collecte laisse de côté les portes et les commutateurs. Il ne distingue pas non plus les dalles fragiles des autres motifs répétés. La mesure retrouve les deux groupes de portes, isole la paire de commutateurs, puis réutilise le motif des dalles observé au niveau précédent.
+La référence s'arrête après 80 commandes au niveau 6, faute de famille applicable. À l'entrée, la mesure retrouve trois sceaux, le portail et quatre destinations éclairées. Le graphe de collecte laisse de côté les portes et les commutateurs. Il ne distingue pas non plus les dalles fragiles des autres motifs répétés. La nouvelle mesure retrouve les deux groupes de portes, isole la paire de commutateurs, puis reconnaît le même motif de dalle fragile qu'au niveau précédent.
 
 La recherche distingue les états par la position, les sceaux acquis, les dalles consommées et le groupe de portes ouvert. Elle simule la destination après le portail et le changement de phase sur le commutateur. Au clic 9, le retour confirme la téléportation et la disparition de l'appui quitté. Seuls quatre pixels de terrain subsistent sur cet appui. Au clic 15, le retour confirme l'ouverture de l'autre groupe de portes et les nouveaux sauts accessibles. Le dernier sceau est collecté au clic 19 et la sortie valide le niveau au clic 20.
 
