@@ -72,3 +72,32 @@ test('observe a missing color transition with enough reserve to return before pl
   assert.ok(next);
   assert.equal(chooseOrientedCycleStep(observed, next.state, moves, 8)?.purpose, 'exit');
 });
+
+test('a matching request is confirmed only when its marker disappears after departure', () => {
+  const { rows, state } = cycleFixture();
+  const first = { at: [8, 4] as const, wanted: state.layout.wanted };
+  state.layout.requests = [first, { at: [16, 4], wanted: { ...first.wanted, ink: 11 } }];
+  rows[0]!.fill(15, 1, 5);
+  const enter = { action: 'ACTION4' as const, step: first.at, target: first.at, purpose: 'exit' as const,
+    units: 4, distance: 1, charge: -1 };
+  const onRequest = rows.map(row => row.slice());
+  onRequest[0]![4] = 5;
+  for (let y = 4; y < 8; y++) {
+    onRequest[y]!.fill(3, 4, 8);
+    onRequest[y]!.fill(6, 8, 12);
+  }
+  const entered = observeOrientedCycleStep(rows, onRequest, state, enter);
+  assert.deepEqual(entered?.state.pendingExit, first.at);
+  assert.equal(entered?.state.accepted, undefined);
+  assert.ok(entered);
+  const departed = onRequest.map(row => row.slice());
+  departed[0]![3] = 5;
+  for (let y = 4; y < 8; y++) {
+    departed[y]!.fill(3, 8, 12);
+    departed[y]!.fill(6, 12, 16);
+  }
+  const leave = { ...enter, step: [12, 4] as const, units: 3 };
+  assert.equal(observeOrientedCycleStep(onRequest, departed, entered.state, leave)?.state.accepted?.length, 1);
+  departed[4]![8] = state.layout.exitRim;
+  assert.equal(observeOrientedCycleStep(onRequest, departed, entered.state, leave)?.state.accepted, undefined);
+});
