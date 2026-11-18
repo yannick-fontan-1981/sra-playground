@@ -142,7 +142,8 @@ function transverseLayouts(rows: NativeRows, view: View, parts: Part[]): Passage
   const bases = parts.filter(part => part.rectangular && width(part.box) >= 2 && width(part.box) === height(part.box));
   const address = (color: number, side: number, across: number, base: number) => [color, side, across, base].join(':');
   const byAddress = new Map(bases.map(({ box, color }) => [address(color, width(box), box[0], box[3]), box]));
-  const pairs = new Map<string, { cut: Interval; unit: number; wall: number; buttons: [NativeBox, NativeBox][] }>();
+  type Divider = { cut: Interval; unit: number; wall: number; color: number; buttons: [NativeBox, NativeBox][] };
+  const pairs = new Map<string, Divider>();
   for (const { box, color } of bases) {
     const unit = width(box), u = box[2] + 1, limit = u + unit - 1;
     const peer = byAddress.get(address(color, unit, limit + 1, box[3]));
@@ -150,23 +151,56 @@ function transverseLayouts(rows: NativeRows, view: View, parts: Part[]): Passage
     const wall = pixel(rows, view, u, box[3]);
     if (wall === undefined || wall === color || !Array.from({ length: unit }, (_, i) => pixel(rows, view, u + i, box[3])).every(ink => ink === wall)) continue;
     const signature = key([u, unit, color, wall]);
-    const group = pairs.get(signature) ?? { cut: [u, limit], unit, wall, buttons: [] };
+    const group = pairs.get(signature) ?? { cut: [u, limit], unit, wall, color, buttons: [] };
     group.buttons.push([box, peer]);
     pairs.set(signature, group);
   }
   const layouts: PassageLayout[] = [], bottom = view.depth - 1;
-  for (const { cut, unit, wall, buttons } of pairs.values()) {
+  const combinations = [...pairs.values()].map(divider => [divider]);
+  const matching = new Map<string, Divider[]>();
+  for (const divider of pairs.values()) {
+    const signature = key([divider.unit, divider.wall, divider.color]);
+    const group = matching.get(signature) ?? [];
+    group.push(divider);
+    matching.set(signature, group);
+  }
+  for (const dividers of matching.values()) if (dividers.length >= 2 && dividers.length <= 4) {
+    combinations.push(dividers.sort((a, b) => a.cut[0] - b.cut[0]));
+  }
+  for (const dividers of combinations) {
+    const { unit, wall } = dividers[0]!;
+    const buttons = dividers.flatMap(divider => divider.buttons);
     const stations = [...new Set(buttons.map(([box]) => box[3]))].sort((a, b) => b - a);
-    if (stations.length < 2 || stations.length !== buttons.length || stations[0] !== bottom) continue;
-    const sides: Interval[] = [[0, cut[0] - 1], [cut[1] + 1, view.breadth - 1]], bands: Interval[] = [], depths: Depth[] = [];
+    if (stations.length < 2 || dividers.some(divider => new Set(divider.buttons.map(([box]) => box[3])).size !== divider.buttons.length)) continue;
+    const support = stations[0]!, enclosed = dividers.length > 1;
+    if (!enclosed && support !== bottom) continue;
+    const surround = pixel(rows, view, 0, support);
+    if (enclosed && (surround === wall || surround !== pixel(rows, view, view.breadth - 1, support)
+      || dividers.some(divider => !divider.buttons.some(([button]) => button[3] === support)))) continue;
+    const occupied = Array.from({ length: view.breadth }, (_, u) => pixel(rows, view, u, support) !== surround);
+    const start = enclosed ? occupied.indexOf(true) : 0;
+    const end = enclosed ? occupied.lastIndexOf(true) : view.breadth - 1;
+    const cuts = dividers.map(divider => divider.cut);
+    const sides: Interval[] = [...cuts, [end + 1, end + 1]].map(([l], i) => [i ? cuts[i - 1]![1] + 1 : start, l - 1]);
+    if (sides.some(([l, r]) => l < 0 || r - l + 1 < 2 * unit)) continue;
+    const bands: Interval[] = [], depths: Depth[] = [];
     for (const [left, right] of sides) {
       const across = right - left + 1;
+      let front = 0;
+      if (enclosed) {
+        for (let v = support - 1; v >= 0; v--) {
+          if (Array.from({ length: across }, (_, i) => pixel(rows, view, left + i, v)).every(ink => ink === surround)) {
+            front = v + 1;
+            break;
+          }
+        }
+      }
       // Only a wall behind a paired control establishes a second support on this side.
-      const partitions = stations.slice(1).filter(base => Array.from({ length: unit }, (_, i) => base + i + 1)
+      const partitions = stations.slice(1).filter(base => base > front && Array.from({ length: unit }, (_, i) => base + i + 1)
         .every(v => Array.from({ length: across }, (_, i) => pixel(rows, view, left + i, v)).filter(ink => ink === wall).length * 4 >= across * 3));
-      const supports = [bottom, ...partitions];
+      const supports = [support, ...partitions];
       for (const [index, base] of supports.entries()) {
-        const next = supports[index + 1], top = next === undefined ? 0 : next + unit + 1;
+        const next = supports[index + 1], top = next === undefined ? front : next + unit + 1;
         bands.push([left, right]);
         depths.push({ top, base });
       }
@@ -184,7 +218,8 @@ function transverseLayouts(rows: NativeRows, view: View, parts: Part[]): Passage
     const markersByFill = new Map<number, Marker[]>();
     for (const part of parts) {
       const { box, color } = part;
-      if (!part.rectangular || color === wall || box[0] !== cut[0] || box[2] !== cut[1]
+      const cut = cuts.find(([l, r]) => box[0] === l && box[2] === r);
+      if (!part.rectangular || color === wall || !cut
         || pixel(rows, view, box[0], box[1] - 1) !== wall || pixel(rows, view, box[0], box[3] + 1) !== wall) continue;
       const left = owner(cut[0] - 1, box[1], box[3]), right = owner(cut[1] + 1, box[1], box[3]);
       if (left < 0 || right < 0) continue;
@@ -310,9 +345,15 @@ export const passageKey = ({ quantities, carried }: PassagePosition, action: num
 export const samePassage = (a: PassagePosition, b: PassagePosition | null) =>
   !!b && same(a.carried, b.carried) && same(a.quantities, b.quantities);
 
+export function hasCompoundPassages(layout: PassageLayout): boolean {
+  return !!layout.depths && layout.markers.length >= 3
+    && layout.controls.filter(control => control.kind === 'door').length >= 3;
+}
+
 export function findPassage(layout: PassageLayout, initial: PassageReading, sense: BandSense, rejected: readonly string[],
   remaining: number, limits: readonly IntakeLimit[] = []): PassagePlan | null {
   const { markers } = layout, blocked = new Set(rejected);
+  const stateLimit = markers.length === 1 ? 32_768 : hasCompoundPassages(layout) ? 384_000 : 96_000;
   const initialState = { quantities: initial.quantities, carried: initial.carried };
   type Entry = PassagePosition & { command: number; previous: Entry | null; depth: number; gate: number | null };
   const queue: Entry[] = [{ ...initialState, depth: 0, command: -1, previous: null, gate: null }], seen = new Set([key(initialState)]);
@@ -334,7 +375,7 @@ export function findPassage(layout: PassageLayout, initial: PassageReading, sens
       if (!next || limits.some(({ band, occupant, amount }) => next.carried.indexOf(band) === occupant
         && next.quantities[band]! > quantities[band]! && next.quantities[band]! > amount)
         || seen.has(key(next))) continue;
-      if (queue.length >= (markers.length === 1 ? 32_768 : 96_000)) return null;
+      if (queue.length >= stateLimit) return null;
       seen.add(key(next));
       const gate = entry.gate ?? (next.carried === carried ? null : index);
       queue.push({ ...next, command: index, previous: entry, depth: depth + 1, gate });

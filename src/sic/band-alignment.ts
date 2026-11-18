@@ -4,7 +4,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeP
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
-import { findPassage, measurePassage, passageAction, passageBox, passageCommand, passageKey, passageThresholds, readPassage, samePassage,
+import { findPassage, hasCompoundPassages, measurePassage, passageAction, passageBox, passageCommand, passageKey, passageThresholds, readPassage, samePassage,
   type IntakeLimit, type LegacyPassageLayout, type PassageLayout, type PassageStep, type PassageReading } from './band-passage.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 
@@ -22,8 +22,9 @@ type State = { epoch: number; model: Model | null; sense: BandSense | null; trie
 type TransferWitness = { epoch: number; score: number; sense: BandSense; refs: string[] };
 type IntakeRefusal = IntakeLimit & { donor: number; supply: number; ref: string };
 type PassageState = { epoch: number; layout: PassageLayout; sense: BandSense; refs: string[]; blocked: string[];
-  confirmedDoors: number[]; confirmedSwaps?: number[]; refusals?: IntakeRefusal[] };
-type PassageProposal = { passage: { state: PassageState; current: PassageReading; moves: PassageStep[] } };
+  confirmedDoors: number[]; confirmedSwaps?: number[]; refusals?: IntakeRefusal[];
+  continuation?: { from: PassageStep['next']; steps: PassageStep[] } };
+type PassageProposal = { passage: { state: PassageState; current: PassageReading; moves: PassageStep[]; route?: PassageStep[] } };
 type TransferLeg = { current: number[]; control: number; expected: number[] | null };
 type Proposal = NativeProposal & { needId: string } & (PassageProposal
   | (TransferLeg & { passage?: undefined; model: Model; start: number[]; route?: TransferLeg[]; adopted?: State }));
@@ -87,7 +88,12 @@ export function createSicVerifyBandTransfer(family = verifyBandTransferId): Nati
     const current = readPassage(rows, layout);
     if (!current) return null;
     const limits = observedIntakeLimits(local.refusals ?? []);
-    const plan = findPassage(layout, current, local.sense, local.blocked, remaining, limits);
+    const pending = local.continuation;
+    const retainedSteps = pending && samePassage(pending.from, current) && pending.steps.length <= remaining ? pending.steps : null;
+    const plan = retainedSteps ? {
+      steps: retainedSteps, distance: retainedSteps.length,
+      gate: retainedSteps.find(step => layout.controls[step.index]!.kind === 'door')?.index ?? null,
+    } : findPassage(layout, current, local.sense, local.blocked, remaining, limits);
     if (!plan) return null;
     const move = plan.steps[0]!;
     const control = layout.controls[move.index]!, ref = observation.observation_ref;
@@ -123,7 +129,8 @@ export function createSicVerifyBandTransfer(family = verifyBandTransferId): Nati
     }
     if (!actions.length) return null;
     return { status: 'proposed', kind: verifyBandTransferId, actions, needId: need.id,
-      passage: { state: local, current, moves: batch.slice(0, actions.length) },
+      passage: { state: local, current, moves: batch.slice(0, actions.length),
+        ...(hasCompoundPassages(layout) ? { route: plan.steps } : {}) },
       steps, binding: { observation_ref: ref, level_epoch: observation.level_epoch },
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
         edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
@@ -293,6 +300,9 @@ export function createSicVerifyBandTransfer(family = verifyBandTransferId): Nati
         passage = { ...local, sense: reversed ? opposite : local.sense, refs: [...local.refs.slice(-4), ref], ...newConfirmation,
           ...(refusals.length || local.refusals ? { refusals } : {}),
           blocked: matched || reversed ? local.blocked : [...local.blocked, passageKey(current, move.index)] };
+        const steps = matched ? proposal.passage.route?.slice(index + 1) : null;
+        if (steps?.length) passage.continuation = { from: move.next, steps };
+        else delete passage.continuation;
         return { events: [], ...(door && matched ? { reviewEvidence: swapsMarkers(current, move)
           ? 'The markers swapped compartments while the material quantities stayed constant.'
           : 'The marker changed compartments and all material quantities stayed constant.' } : {}) };
