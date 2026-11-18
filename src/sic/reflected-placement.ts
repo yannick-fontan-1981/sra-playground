@@ -10,11 +10,11 @@ import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
 import type { DirectionalMotion } from './observed-translation.ts';
 import { checkObservedMotion, chooseObservedMotion, observedMotionModule } from './reflected-motion-card.ts';
-import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import {
-  measureOrthogonalReflection, moveOrthogonalContributor, orthogonalBox, orthogonalReflectionBoxes,
+  measureOrthogonalReflection, moveOrthogonalContributor, orthogonalBox, orthogonalFocusKey, orthogonalReflectionBoxes,
   planOrthogonalReflection, reconcileOrthogonalReflection, selectOrthogonalContributor,
-  type OrthogonalWorld,
+  type OrthogonalFocusKey, type OrthogonalWorld,
 } from './orthogonal-reflection.ts';
 
 export const reflectedPlacementId = 'sic_reflected_placement';
@@ -51,7 +51,7 @@ type Plan = { action: NativeCommand; after: NativeRecord | null; attempt: string
 type SingleProposal = NativeProposal & { local: State; plan: Plan; needId: string };
 type OrthogonalState = {
   epoch: number; world: OrthogonalWorld; controls: Control[]; evidence: string[]; stopped: boolean;
-  confirmed: string[]; selections: OrthogonalWorld['focus'][];
+  confirmed: string[]; selections: OrthogonalFocusKey[];
 };
 type OrthogonalProposal = NativeProposal & {
   orthogonal: OrthogonalState; predictions: OrthogonalWorld[]; needId: string;
@@ -221,11 +221,13 @@ function orthogonalProposal(family: string, local: OrthogonalState, ref: string,
   const desired = world.focus !== 'piece' && axes.includes(world.focus) ? world.focus : axes[0]
     ?? (layout.translation.some(Boolean) ? 'piece' : null);
   if (desired === null) return null;
+  const contributor = orthogonalFocusKey(world);
+  const desiredContributor = desired === 'piece' && layout.piece !== undefined ? `piece:${layout.piece}` : desired;
   const predictions: OrthogonalWorld[] = [];
   let command: string, strategy: Strategy, label: string;
   const activeAxis = world.focus === 'piece' ? null : world.focus;
-  if (desired !== world.focus) {
-    if (!available.includes('ACTION5') || local.selections.includes(world.focus)) return null;
+  if (desiredContributor !== contributor) {
+    if (!available.includes('ACTION5') || local.selections.includes(contributor)) return null;
     command = 'ACTION5';
     strategy = 'select_reflected_contributor';
     label = 'Check which contributor receives the selection marker while the layout stays fixed';
@@ -236,7 +238,7 @@ function orthogonalProposal(family: string, local: OrthogonalState, ref: string,
       && control.delta[dim]! * distance > 0 && Math.abs(distance) % Math.abs(control.delta[dim]!) === 0);
     if (!control) return null;
     command = control.action;
-    const confirmed = local.confirmed.includes(JSON.stringify([world.focus, command]));
+    const confirmed = local.confirmed.includes(JSON.stringify([contributor, command]));
     strategy = confirmed ? 'place_reflected_contributor' : 'test_reflected_displacement';
     label = world.focus === 'piece' ? 'Move the selected piece and compare its three projected copies with the marked cells'
       : 'Move the selected axis and check how its reflection changes while the piece stays in place';
@@ -263,7 +265,9 @@ function orthogonalProposal(family: string, local: OrthogonalState, ref: string,
     steps: actions.map((item, i) => ({ action: item, expected_after: predictions[i] ?? null })),
     sicSituationCard: { strategy, need: 'Cover the marked cells with the piece and its three reflected copies',
       situation: label, evidence, mode: strategy === 'place_reflected_contributor' ? 'solving' : 'exploration',
-      body: orthogonalBox(world, world.body), axis, reflections: orthogonalReflectionBoxes(world),
+      body: orthogonalBox(world, world.pieces?.masks[world.pieces.active ?? layout.piece ?? -1] ?? world.body),
+      ...(world.pieces ? { bodies: world.pieces.masks.map(mask => orthogonalBox(world, mask)) } : {}),
+      axis, reflections: orthogonalReflectionBoxes(world),
       target: orthogonalBox(world, world.targets) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + parent] }],
@@ -307,6 +311,12 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
       const module = await observedMotionModule();
       choose = await registry.registerProgram(chooseObservedMotion, {}, module);
       verify = await registry.registerProgram(checkObservedMotion, {}, module);
+    },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (!orthogonal?.world.pieces || orthogonal.epoch !== observation.level_epoch || orthogonal.stopped
+        || !orthogonal.confirmed.length || remaining < 1 || !reconcileOrthogonalReflection(orthogonal.world, rows)) return null;
+      return proposeOrthogonal(orthogonal, observation, remaining, execution);
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       const keys = observation.available_action_refs.filter(action => ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'].includes(action));
@@ -461,10 +471,15 @@ export function createSicReflectedPlacement(family = reflectedPlacementId): Nati
           ? orthogonalReturn(proposal, index, rows) : null;
         const displacement = !!proposal.predictions[index];
         const observed = [...new Set([...local.evidence.slice(-5), after.observation_ref])];
+        const control = world ? JSON.stringify([orthogonalFocusKey(world), command.action_ref]) : null;
         orthogonal = { ...local, world: world ?? local.world, stopped: !world, evidence: observed,
-          confirmed: world && displacement ? [...new Set([...local.confirmed, JSON.stringify([world.focus, command.action_ref])])] : local.confirmed,
-          selections: world && !displacement ? [...local.selections, local.world.focus] : [] };
-        return { events: [] };
+          confirmed: control && displacement ? [...new Set([...local.confirmed, control])] : local.confirmed,
+          selections: world && !displacement ? [...local.selections, orthogonalFocusKey(local.world)] : [] };
+        const confirmedPiece = control && displacement && world?.focus === 'piece' && !!world.pieces
+          && !local.confirmed.includes(control);
+        return { events: [], ...(confirmedPiece ? {
+          reviewEvidence: 'The selected piece moved as a whole, while the other pieces retained their positions.',
+        } : {}) };
       }
       const local = index > 0 && state?.epoch === proposal.local.epoch ? state : proposal.local;
       const { plan } = proposal, world = decodeReflectedWorld(local.world) as World;

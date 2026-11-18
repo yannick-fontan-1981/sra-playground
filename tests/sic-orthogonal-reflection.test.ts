@@ -3,7 +3,7 @@ import test from 'node:test';
 import { reflectCoverPoints, shiftReflectionPoints } from '../src/logos-engine/v6-reflected-cover.ts';
 import { supportPoint } from '../src/logos-engine/v6-support-measurements.ts';
 import {
-  measureOrthogonalReflection, moveOrthogonalContributor, planOrthogonalReflection, reconcileOrthogonalReflection,
+  measureOrthogonalReflection, moveOrthogonalContributor, orthogonalFocusKey, planOrthogonalReflection, reconcileOrthogonalReflection,
   selectOrthogonalContributor, type OrthogonalWorld,
 } from '../src/sic/orthogonal-reflection.ts';
 
@@ -40,7 +40,10 @@ function render(model: OrthogonalWorld) {
   }
   for (const key of model.body) {
     const [x, y] = supportPoint(key);
-    paint(x!, y!, model.direct, focus === 'piece');
+    const selected = focus === 'piece' && (!model.pieces || model.pieces.active !== null
+      && model.pieces.masks[model.pieces.active]!.includes(key));
+    paint(x!, y!, model.direct, selected);
+    if (selected && model.pieces && model.targets.includes(key)) rows[y! * pitch + 1]![x! * pitch + 1] = model.target;
   }
   return rows;
 }
@@ -73,4 +76,21 @@ test('admit a newly visible mark only where the previous layout could have hidde
   const actual = moveOrthogonalContributor(hidden, [0, 1]);
   assert.ok(reconcileOrthogonalReflection(forecast, render(actual), measured)?.targets.includes('5,3'));
   assert.equal(reconcileOrthogonalReflection(forecast, render({ ...actual, targets: [...actual.targets, '0,0'] }), measured), null);
+});
+
+test('verify a diagonally joined piece separately and retain it when its targets hide the selection marks', () => {
+  const first = ['2,2', '3,3', '4,2'], second = ['8,8', '8,9', '9,9'];
+  const firstTarget = shiftReflectionPoints(new Set(first), [0, 1]);
+  const model: OrthogonalWorld = { ...world, axes: [6, 6], focus: 'piece', body: [...first, ...second],
+    pieces: { masks: [first, second], active: 0 },
+    targets: [...new Set([...firstTarget, ...copies(firstTarget, [6, 6]), ...second, ...copies(new Set(second), [6, 6])])] };
+  const measured = measureOrthogonalReflection(render(model), model);
+  assert.ok(measured);
+  assert.equal(orthogonalFocusKey(measured), 'piece:0');
+  assert.ok(planOrthogonalReflection(measured));
+  const predicted = moveOrthogonalContributor(measured, [0, 1]);
+  assert.deepEqual(new Set(predicted.pieces?.masks[0]), firstTarget);
+  assert.deepEqual(new Set(predicted.pieces?.masks[1]), new Set(second));
+  assert.ok(reconcileOrthogonalReflection(predicted, render(predicted), measured));
+  assert.equal(reconcileOrthogonalReflection(predicted, render(measured), measured), null);
 });
