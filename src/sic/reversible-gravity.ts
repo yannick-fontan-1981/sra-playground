@@ -15,6 +15,7 @@ export type GravityHistory = {
   seen: string[];
   denied: string[];
   inverted: boolean;
+  reversedHere?: true;
   terrain: Record<string, Tile>;
 };
 export type GravityStep = { command: NativeCommand; index: number; landing: number; direction: Gravity; frontier: boolean;
@@ -133,13 +134,38 @@ function animationRowShift(before: GravityView, after: GravityView, frames: read
   return final.size === 1 ? [...final][0]! : null;
 }
 
+function rememberedRowShift(after: GravityView, memory: GravityHistory) {
+  const knownRows = new Set(Object.keys(memory.terrain).map(key => Number(key.split(',')[1])));
+  if (!knownRows.size) return null;
+  const { width } = after, height = after.tiles.length / width;
+  const first = Math.min(...knownRows) - height + 3, last = Math.max(...knownRows) - 2;
+  const stable = (tile: Tile | undefined) => tile === 'air' || tile === 'wall' || tile === 'danger' || tile === 'exit';
+  let best: { row: number; matches: number } | null = null, tied = false;
+  for (let row = first; row <= last; row++) {
+    let matches = 0, anchors = 0, contradicted = false;
+    for (let index = 0; index < after.tiles.length; index++) {
+      if (index === after.at) continue;
+      const tile = after.tiles[index]!, prior = memory.terrain[[index % width, row + Math.floor(index / width)].join(',')];
+      if (!stable(tile) || !stable(prior)) continue;
+      if (tile !== prior) { contradicted = true; break; }
+      matches++;
+      if (tile !== 'air') anchors++;
+    }
+    if (contradicted || anchors < 6) continue;
+    if (!best || matches > best.matches) { best = { row, matches }; tied = false; }
+    else if (matches === best.matches) tied = true;
+  }
+  return best && !tied ? best.row - memory.rowOrigin : null;
+}
+
 export function gravityReturn(before: GravityView, after: GravityView, step: GravityStep, memory: GravityHistory,
   animation?: () => readonly GravityView[]) {
   const predicted = Math.floor(step.landing / before.width);
   const observed = Math.floor(after.at / after.width);
   const expected = step.frontier ? undefined : predicted - observed;
   const direct = cameraRowShift(before, after, expected) ?? (expected === undefined ? null : cameraRowShift(before, after));
-  const shift = direct ?? (animation ? animationRowShift(before, after, animation()) : null);
+  const remembered = direct === null && memory.reversedHere ? rememberedRowShift(after, memory) : null;
+  const shift = direct ?? remembered ?? (animation ? animationRowShift(before, after, animation()) : null);
   if (shift === null) return null;
   const landing = shift + observed, departure = Math.floor(before.at / before.width);
   const column = step.index % before.width, actorColumn = after.at % after.width;
@@ -150,7 +176,8 @@ export function gravityReturn(before: GravityView, after: GravityView, step: Gra
     || (edited === undefined && (landing - departure) * step.direction > 0));
   const solidified = step.edit === 'solidify' && edited === 'ceiling_solid';
   const inverted = step.edit === 'invert' && (landing - departure) * step.direction > 0;
-  return { shift, landing, removed, solidified, inverted, ...(direct === null ? { alignedThroughAnimation: true } : {}),
+  return { shift, landing, removed, solidified, inverted,
+    alignedThroughAnimation: direct === null && remembered === null, alignedThroughMemory: remembered !== null,
     matched: sameColumn && reached && (removed || solidified)
     && (step.edit !== 'invert' || inverted || memory.inverted && landing === departure) };
 }
@@ -166,6 +193,16 @@ export function chooseGravityReversal(view: GravityView, memory: GravityHistory,
   const edits = tiles.flatMap((tile, index) => tile === 'removable' || tile === 'inverter' || tile === 'ceiling_open' ? [index] : []);
   if (edits.length > 20) return null;
   const masks = new Map(edits.map((index, bit) => [index, 1 << bit]));
+  // A visible exit behind a single removable gate can require leaving this
+  // corridor when opening it. Preserve the gain in the terrain for the return.
+  let goalGate: number | null = null;
+  if (retainGoal && memory.reversedHere && view.exit !== null
+    && Math.floor(view.exit / width) === Math.floor(view.at / width)) {
+    const interval = Array.from({ length: Math.max(0, Math.abs(view.exit - view.at) - 1) },
+      (_, i) => Math.min(view.at, view.exit!) + i + 1);
+    const blockers = interval.filter(index => tiles[index] !== 'air');
+    if (blockers.length === 1 && tiles[blockers[0]!] === 'inverter') goalGate = blockers[0]!;
+  }
   const read = (index: number, mask: number): Tile | undefined => mask & (masks.get(index) ?? 0)
     ? tiles[index] === 'ceiling_open' ? 'ceiling_solid' : 'air' : tiles[index]
     ?? memory.terrain[[(index % width + width) % width, memory.rowOrigin + Math.floor(index / width)].join(',')];
@@ -181,10 +218,13 @@ export function chooseGravityReversal(view: GravityView, memory: GravityHistory,
       at = advance; clear++;
     }
   }
-  type Node = { at: number; direction: Gravity; mask: number; first: GravityStep | null; depth: number; frontier: boolean };
-  const queue: Node[] = [{ at: view.at, direction: memory.direction, mask: 0, first: null, depth: 0, frontier: false }];
-  const visited = new Set([view.at + '/' + memory.direction + '/0']);
+  type Node = { at: number; direction: Gravity; mask: number; first: GravityStep | null; depth: number;
+    frontier: boolean; protectedLanding: boolean };
+  const queue: Node[] = [{ at: view.at, direction: memory.direction, mask: 0, first: null, depth: 0, frontier: false, protectedLanding: false }];
+  const visited = new Set([[view.at, memory.direction, 0, false].join('/')]);
   let best: { step: GravityStep; value: number } | null = null;
+  let prepared: { step: GravityStep; value: number } | null = null;
+  let opensGoal: GravityStep | null = null;
   for (let i = 0; i < queue.length && i < 5000; i++) {
     const node = queue[i]!;
     if (read(node.at, node.mask) === 'exit' && node.first) return node.first;
@@ -198,6 +238,7 @@ export function chooseGravityReversal(view: GravityView, memory: GravityHistory,
       const restored = invert && node.direction === goalDirection ? 40 : 0;
       const value = novelty + closer * 8 + restored - node.depth - (invert ? 2 : 0);
       if (value > (best?.value ?? 0)) best = { value, step: node.first };
+      if (node.protectedLanding && value > (prepared?.value ?? -Infinity)) prepared = { value, step: node.first };
     }
     if (node.frontier || node.at < 0 || node.at >= tiles.length || node.depth >= Math.min(remaining, 9)) continue;
     const offer = (index: number, mask: number, direction: Gravity, action_ref: string, edit: GravityStep['edit']) => {
@@ -207,13 +248,18 @@ export function chooseGravityReversal(view: GravityView, memory: GravityHistory,
         : { action_ref, data: {} };
       const step = { command, index, landing: arrival.at, direction, frontier: arrival.frontier, edit };
       if (!node.first && memory.denied.includes(gravityAttempt(view, step, memory))) return;
+      if (!node.first && index === goalGate && edit === 'invert') opensGoal = step;
       if (!node.first && edit === 'invert' && !memory.inverted && view.exit === null && arrival.at !== node.at) {
         best = { value: Infinity, step };
       }
-      const id = [arrival.at, direction, mask].join('/');
+      const protectedLanding = node.protectedLanding || (retainGoal && !memory.reversedHere && edit === 'invert' && !arrival.frontier
+        && read(arrival.at + direction * width, mask) === 'ceiling_solid'
+        && read(arrival.at + 2 * direction * width, mask) === 'danger');
+      const id = [arrival.at, direction, mask, protectedLanding].join('/');
       if (visited.has(id)) return;
       visited.add(id);
-      queue.push({ at: arrival.at, direction, mask, first: node.first ?? step, depth: node.depth + 1, frontier: arrival.frontier });
+      queue.push({ at: arrival.at, direction, mask, first: node.first ?? step, depth: node.depth + 1,
+        frontier: arrival.frontier, protectedLanding });
     };
     for (const [action, dx] of [['ACTION3', -1], ['ACTION4', 1]] as const) {
       const x = node.at % width + dx;
@@ -227,5 +273,5 @@ export function chooseGravityReversal(view: GravityView, memory: GravityHistory,
         flip ? 'invert' : tiles[index] === 'ceiling_open' ? 'solidify' : 'remove');
     }
   }
-  return best?.step ?? null;
+  return opensGoal ?? prepared?.step ?? best?.step ?? null;
 }

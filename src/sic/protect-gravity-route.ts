@@ -353,7 +353,8 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isReversible(proposal)) {
         const result = observedReversal(proposal, second, frames)?.result;
-        const reason = result?.matched ? result.alignedThroughAnimation ? 'gravity_landing_confirmed_through_animation'
+        const reason = result?.matched ? result.alignedThroughMemory ? 'gravity_landing_confirmed_by_remembered_terrain'
+          : result.alignedThroughAnimation ? 'gravity_landing_confirmed_through_animation'
           : result.inverted ? 'reversed_fall_confirmed_by_terrain_alignment'
           : result.solidified ? 'protective_ceiling_solidified_in_reversible_path'
             : proposal.advance.edit ? 'blocking_tile_removed_in_gravity_path'
@@ -388,6 +389,7 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
         }
         reversal = { ...local, refs: [...local.refs.slice(-5), after.observation_ref], memory: { ...memory, rowOrigin: origin, direction,
           terrain: gravityTerrain(next, origin, terrain), inverted: memory.inverted || result.inverted,
+          ...(advance.edit === 'invert' && result.matched ? { reversedHere: true } : {}),
           highest: Math.min(memory.highest, landing), lowest: Math.max(memory.lowest, landing),
           seen: [...new Set([...memory.seen, gravityStateKey(next, origin, direction)])],
           denied: result.matched ? memory.denied : [...memory.denied.slice(-16), gravityAttempt(view, advance, memory)] } };

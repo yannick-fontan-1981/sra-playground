@@ -1897,3 +1897,13 @@ La couverture atteint **538/636 niveaux (84,6 %)**, dont **39/99 niveaux 6 (39,4
 La commande 6 déclenche une animation de 44 images. La mesure du terrain ne relie plus directement le plateau de départ au plateau d'arrivée. Le moteur recale les vues intermédiaires qui se recouvrent et vérifie que tous les chemins de mesure aboutissent au même décalage final. Le rejeu de BP35 retrouve dix rangées de décalage et valide la descente. La famille de gravité poursuit son trajet jusqu'à la commande 9 et intervient ensuite de nouveau. Un test couvre le cas où les vues initiale et finale seules ne suffisent pas.
 
 Les 148 commandes des niveaux 1 à 5 conservent leurs empreintes. Le rejeu en SIC seul se termine au niveau 6 sur une défaite après **64 commandes et 52,63 s**. Le [relevé action par action](sic-v8-bp35-level6-actions.md) montre le point où la famille retrouve le suivi du plateau et les explorations suivantes. TypeScript et les **7 tests ciblés** passent. La couverture reste à **538/636 niveaux**, dont **39/99 niveaux 6**.
+
+### BP35 niveau 6, préparer la descente et ouvrir la sortie avant le détour
+
+Hors agent, un rejeu depuis une même pose confirme que solidifier l'appui à `(39,51)` suffit à empêcher la chute dans cette colonne. L'appui voisin à `(45,51)` seul laisse la chute fatale depuis cette même pose. Le planificateur peut maintenant préférer une inversion dont l'atterrissage est protégé par un appui au-dessus d'un danger mesuré. Il distingue la connaissance acquise de l'inversion et le fait de l'avoir exécutée sur le niveau courant.
+
+Dans le parcours choisi par SIC, la commande 5 prépare l'appui de la colonne `x=45`, puis la commande 6 confirme la descente. La commande 8 retire l'inverseur qui barre le couloir de la sortie. L'inversion éloigne momentanément la pièce de la sortie. Le recalage reconnaît les rangées hautes dans le terrain déjà mémorisé et conserve l'ouverture du couloir. Après l'inversion suivante et les déplacements latéraux vérifiés, la commande 42 réutilise ce passage pour atteindre la sortie.
+
+Deux rejeux chronologiques gagnent en **190 commandes SIC seul**, avec les mêmes actions et retours. Les **148 premières commandes** reproduisent les empreintes des niveaux 1 à 5. Le niveau 6 du rejeu final gagne en **42 commandes et 17,60 s**, au budget de 360 s de temps actif et 600 commandes. TypeScript et **12 tests ciblés** passent. La couverture atteint **539/636 niveaux (84,7 %)**, dont **40/99 niveaux 6 (40,4 %)**.
+
+Empreinte jusqu'à la victoire `6a3ba777efdffa0a83df7a8bb41a6fb44d097a52f79b528f136a5487b71da86f`.
