@@ -2524,3 +2524,13 @@ Après la révélation du deuxième jeton, SIC remonte des réceptions possibles
 Les commandes 48 et 107 étendent la carte. La commande 134 aligne les deux jetons et la commande 148 achève la réduction.
 
 Le niveau 7 gagne en **148 commandes et 77,47 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **334 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 482 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 7. Empreinte chronologique `db6d78d65e8c2090c2fbe41d861efab8947509577e28af0f94ee497a9cf8b8c2`. TypeScript et les 31 tests ciblés passent.
+
+### RE86 niveau 7, affecter ensemble les formes, les couleurs et les repères
+
+SIC réutilise les quatre directions et la sélection confirmées au niveau précédent. La scène montre trois pièces dont les couleurs diffèrent de celles des repères. SIC mesure aussi la butée et les sources de couleur. Il conserve les deux branches d'une croix quand elles se décalent et accepte des extrémités masquées au bord de l'image.
+
+Le modèle combine sur chaque trajet les changements de forme et de couleur. Il écarte les affectations incompatibles avec l'étendue des branches ou les proportions atteignables du cadre. Il cherche ensuite une affectation complète dont chaque trajet a une réception compatible. Le cadre va aux repères bleus, la petite croix aux jaunes et la grande croix aux rouges.
+
+Les commandes 33 et 62 changent la sélection. Les retours confirment chaque déplacement et chaque contact. La commande 98 confirme la couverture complète.
+
+Le niveau 7 gagne en **98 commandes et 21,43 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **308 commandes** des six premiers niveaux conservent les empreintes de leurs commandes, retours et animations. Les 406 commandes relèvent de SIC seul. Le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `4c79aa6769101b70ab00632c73d6170c7e9e527b87fc0a4dcff4268183c5d70c`. TypeScript et les quatre tests ciblés passent.
