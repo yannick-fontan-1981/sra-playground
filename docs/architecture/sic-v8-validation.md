@@ -2129,3 +2129,11 @@ SIC reconnaît une voie isolée de douze positions et distingue son porteur des 
 Pendant le troisième trajet, les passages s'ouvrent aux **commandes 18 et 21**. SIC utilise les positions prévues du porteur pour les franchir dans les fenêtres d'ouverture et contrôle chaque retour. Le contact de la **commande 30** déplace le dernier bloc. Le trajet traverse une deuxième fois les passages temporaires et atteint la sortie à la **commande 49**.
 
 Le rejeu chronologique gagne en **49 commandes et 34,22 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **203 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 252 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `8f785e72e1984a62721539a280f0dab39893e947e8a17ed01eb0cbb6875d98d0`. TypeScript et les **12 tests ciblés** passent. La couverture atteint **565/636 niveaux (88,8 %)**, dont **66/99 niveaux 6 (66,7 %)**.
+
+### ISOS niveau 6, borner la croissance par les dimensions de la référence
+
+Le gabarit, les trois faces et la translation du sommet restent compatibles avec les mesures acquises. Le plafond de huit pièces excluait la construction à neuf pièces. SIC dérive les dimensions compatibles avec les échantillonnages de la référence et écarte les branches trop grandes, car aucun ajout de pièce ne réduit l'étendue projetée. Il compare les constructions d'une profondeur avant de générer la suivante et vérifie directement si une face est masquée par une pièce devant elle.
+
+Le premier clic place la pièce de départ. Les clics **2 et 5** étendent les faces latérales et les clics **7 et 8** prolongent la branche latérale. Chaque ajout respecte l'ordre de profondeur des pièces déjà construites. Le **neuvième clic** confirme la victoire.
+
+Le rejeu chronologique gagne en **9 clics et 10,69 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **24 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 33 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `ea3baf915647f9f03c096f4dc90706a06966ef7307f462bd4b9c1263796db9b8`. TypeScript et les **108 tests ciblés** passent. La couverture atteint **566/636 niveaux (89,0 %)**, dont **67/99 niveaux 6 (67,7 %)**.
