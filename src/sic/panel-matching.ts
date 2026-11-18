@@ -108,7 +108,7 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
       let local: State = state?.epoch === observation.level_epoch ? state :
         { epoch: observation.level_epoch, symbols: learned?.symbols ?? [], attempts: [], stopped: false,
           evidence: learned ? [learned.proof] : [], ...(learned?.transport ? { transport: learned.transport } : {}) };
-      if (local.stopped || local.attempts.length >= (local.lattices ? 48 : 16)) return null;
+      if (local.stopped || !local.workshop && local.attempts.length >= (local.lattices ? 48 : 16)) return null;
       let scene = measurePanelService(rows, local.symbols, local.lattices) as Scene | null;
       if (local.workshop || !scene && learned?.lattices && local.transport) {
         const lattices = local.lattices ?? learned?.lattices;

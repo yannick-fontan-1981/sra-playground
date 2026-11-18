@@ -86,8 +86,18 @@ export function planWorkshopTurn(layout: WorkshopLayout, start: WorkshopState, m
     }
   }
   type Node = { state: WorkshopState; depth: number; first?: WorkshopTurn };
-  const pending = new Map<number, Node[]>(), seen = new Map<string, number>();
+  type PendingNode = Node & { estimate: number; work: number };
+  let pending = new Map<number, PendingNode[]>(), prioritizeRemaining = false;
+  const seen = new Map<string, number>();
+  const workRange = maxTurns * start.workers.length + 1;
   const key = (s: WorkshopState) => JSON.stringify(s);
+  function queue(node: PendingNode) {
+    const { depth, estimate, work } = node;
+    const score = prioritizeRemaining ? (depth + 2 * estimate) * workRange + work : depth + estimate;
+    const bucket = pending.get(score);
+    if (bucket) bucket.push(node);
+    else pending.set(score, [node]);
+  }
   function enqueue(node: Node) {
     const address = key(node.state);
     if ((seen.get(address) ?? Infinity) <= node.depth) return;
@@ -101,15 +111,19 @@ export function planWorkshopTurn(layout: WorkshopLayout, start: WorkshopState, m
     }
     const estimate = Math.max(single, Math.ceil(work / start.workers.length));
     if (!Number.isFinite(estimate) || node.depth + estimate > maxTurns) return;
-    const score = node.depth + estimate;
-    const bucket = pending.get(score);
-    if (bucket) bucket.push(node);
-    else pending.set(score, [node]);
+    queue({ ...node, estimate, work });
   }
   enqueue({ state: start, depth: 0 });
   let combinations = 0, interrupted = false;
   for (let steps = 0; pending.size && steps < 20_000; steps++) {
     if (steps % 16 === 0 && shouldStop()) return null;
+    if (steps === 4096) {
+      // Preserve the explored states and prioritize progress when the frontier grows large.
+      const frontier = pending;
+      pending = new Map();
+      prioritizeRemaining = true;
+      for (const bucket of frontier.values()) for (const node of bucket) queue(node);
+    }
     const best = Math.min(...pending.keys()), bucket = pending.get(best)!, node = bucket.pop()!;
     if (!bucket.length) pending.delete(best);
     const { stock, workers, hot } = node.state;

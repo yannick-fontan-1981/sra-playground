@@ -73,8 +73,12 @@ export function measurePanelService(rows: NativeRows, symbols: readonly Pattern[
     byExtent.get(key)!.push(frame);
   }
   const groups = [...byExtent.values()].filter(group => group.length >= 2).map(group => group.sort((a, b) => a.bbox[1] - b.bbox[1]));
-  if (groups.length !== 1) return null;
-  const selectedFrames = groups[0]!, panels: R[] = [];
+  const selectedFrames = groups.length === 1 ? groups[0] : remembered?.length
+    ? groups.find(group => group.length === remembered.length
+      && group.every(frame => remembered.some(item => item.panelId === identity([frame.bbox, frame.color]))))
+    : undefined;
+  if (!selectedFrames) return null;
+  const panels: R[] = [];
   for (const frame of selectedFrames) {
     const box = frame.bbox, [left, top, right, bottom] = box, interior: number[] = [];
     for (let y = top + 1; y < bottom; y++) for (let x = left + 1; x < right; x++) interior.push(rows[y]![x]!);

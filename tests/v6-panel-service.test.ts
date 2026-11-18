@@ -62,6 +62,26 @@ test('all 100 untouched public initial rasters retain original panel admission w
   assert.deepEqual(fixture.initialMeasurements.filter((item: R) => item.scene).map((item: R) => item.game), ['RSWP']);
 });
 
+test('retained panel anchors disambiguate a second group of frames', () => {
+  const rows: number[][] = discovery.games.find((view: R) => view.game === 'RSWP').packet.frame_rows;
+  const measured = measurePanelService(rows, [], [], true);
+  assert.ok(measured);
+  const remembered = measured.panels.map((panel: R) => panel.lattice);
+  const busy = rows.map(row => [...row]);
+  const frameColor = Math.max(...rows.flat()) + 1;
+  for (let y = 0; y < 30; y++) {
+    const row = Array<number>(rows[0]!.length).fill(0);
+    for (const top of [2, 16]) if (top <= y && y < top + 11) {
+      if (y === top || y === top + 10) row.fill(frameColor, 3, 22);
+      else row[3] = row[21] = frameColor;
+    }
+    busy.push(row);
+  }
+  assert.equal(measurePanelService(busy), null);
+  assert.equal(measurePanelService(busy, [], remembered.slice(1), true), null);
+  assert.deepEqual(measurePanelService(busy, [], remembered, true), measured);
+});
+
 for (const item of fixture.patternSetCases as R[]) test(`original nested integer tuple set ${item.id}`, () => {
   const left = new NestedIntegerTupleSet(item.left), right = new NestedIntegerTupleSet(item.right);
   assert.deepEqual([...left], item.constructed);
