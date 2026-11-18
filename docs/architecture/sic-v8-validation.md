@@ -1845,3 +1845,13 @@ Sur les 60 niveaux 6 qui ont un rejeu historique comparable, 58 ont la même emp
 Le témoin DC22 reproduit ses six niveaux en **613 commandes** avec les mêmes empreintes et volumes de graphe. Le niveau 6 gagne en **241 commandes et 336,32 s** pendant la campagne. Le plan à rebours guide **20 commandes à partir de la 162e**, dont 10 clics qui modifient le plateau. Le relevé compte les commandes émises avec l’un des deux libellés exclusifs au plan de pont. Aucune activation n’apparaît sur les 64 autres jeux. PORT utilise les passages appariés au niveau 6 et CGWL le transport vers un cadre. Ils fournissent deux cas pour tester séparément les preuves de transfert et de transport sur lesquelles s’appuie le plan de DC22.
 
 Les contrôles LS20 et GABA gardent leurs empreintes et volumes de graphe jusqu’au niveau 4, en **144 et 239 commandes**. Les **260 tests SIC, agent et runtime** passent après correction de l’attendu du test de recharge à un pas. La série intermédiaire est vide pour ce cas. Les décisions et le code d’exécution restent ceux de `7bb9f152`.
+
+### PORT niveau 6, ouvrir les passages encore sans partenaire
+
+Le rejeu de référence termine le niveau 6 après 182 commandes sans victoire. Les quatre ouvertures actives ont des motifs appariés et les quatre autres ont des motifs uniques, dont un uni. La détection écartait la scène au complet tant que ces ouvertures n'étaient pas appariées. Le premier changement de réseau arrive à la 47e commande. La même difficulté revient lorsque le joueur désactive le réseau.
+
+SIC associe maintenant les nouveaux voyants à leurs ouvertures visibles. Il valide le joueur à partir de l'unique lecture compatible avec les voyants, les bords des ouvertures et le sol aux positions mesurées. Les marques de sortie acquises précédemment confirment les ouvertures sans partenaire. Leur présence maintient le besoin de changer le réseau. SIC rejoint un commutateur par les passages déjà mesurés, puis compare les nouveaux appariements et conserve les visites confirmées.
+
+Depuis le niveau 1, SIC gagne PORT en **110 commandes**, toutes sous autorité SIC seul. Les cinq premiers niveaux reproduisent leurs actions et retours, en 94 commandes. Le niveau 6 gagne en **16 commandes et 6,19 s**, au budget de 360 s de temps actif et 600 commandes. La 4e commande forme deux nouvelles paires avec les quatre ouvertures et change les partenaires des paires initiales. SIC conserve ce réseau jusqu'à la sortie. Le contrôle TypeScript et les **20 tests ciblés** passent. La couverture passe à **535/636 niveaux (84,1 %)**, dont **36/99 niveaux 6 (36,4 %)**.
+
+Empreinte des commandes et retours jusqu'à la victoire `391afec032ca570a17aba6d5355ed3591f720cbe10e35b5651caa38424b72d31`.

@@ -17,7 +17,7 @@ type Frame = { box: NativeBox; point: NativePoint; color: number; area: number }
 type Pair = { key: string; frames: [Frame, Frame] };
 type Switches = { sites: NativePoint[]; badge: NativeBox; statusInk: number; visitedInk: number };
 type Scene = { actor: Part; goal: Frame; pairs: Pair[]; floor: Record<string, NativePoint>; pitch: number; flags: Part[];
-  ground: number; neutral?: true; outlets?: Record<string, Direction>; switches?: Switches };
+  ground: number; neutral?: true; unpaired?: Frame[]; outlets?: Record<string, Direction>; switches?: Switches };
 type OutletWitness = { ink: number; at: string; ref: string };
 type RewriteMemory = { sites: NativePoint[]; visited: string[]; tests: string[] };
 type Memory = { epoch: number; evidence: string[]; traversed: string[]; rejected: string[]; goal: Frame; outlets?: OutletWitness[];
@@ -101,10 +101,19 @@ function measure(rows: NativeRows, priorGoal: Frame | null, parts = geometricCom
 }
 
 function patternedPassages(rows: NativeRows, parts: Part[], known: KnownPassage, priorGoal?: Frame): Scene | null {
-  const { side, actorPaint, ground } = known, pitch = side + 2;
+  const { side, actorPaint } = known;
   const actors = parts.filter(part => part.color === actorPaint && width(part.bbox) === side && solid(part));
-  if (actors.length !== 1) return null;
-  const actor = actors[0]!, [ax, ay] = origin(actor.bbox);
+  if (actors.length !== 1 && !known.outlet) return null;
+  const scenes = actors.flatMap(actor => {
+    const scene = patternedPassageScene(rows, parts, known, actor, priorGoal);
+    return scene ? [scene] : [];
+  });
+  return scenes.length === 1 ? scenes[0]! : null;
+}
+
+function patternedPassageScene(rows: NativeRows, parts: Part[], known: KnownPassage, actor: Part, priorGoal?: Frame): Scene | null {
+  const { side, ground } = known, pitch = side + 2;
+  const [ax, ay] = origin(actor.bbox);
   const onGrid = ([x, y]: NativePoint) => (x - ax) % pitch === 0 && (y - ay) % pitch === 0;
   const pattern = (box: NativeBox) => framePattern(rows, box);
   const allFrames = parts.flatMap(part => {
@@ -112,15 +121,22 @@ function patternedPassages(rows: NativeRows, parts: Part[], known: KnownPassage,
     return frame ? [{ part, frame }] : [];
   });
   const indicators = allFrames.filter(({ frame }) => !onGrid(frame.point) && frame.box[1] > ay
-    && frame.box[1] >= rows.length - pitch * 2 && new Set(pattern(frame.box).split(',')).size > 1);
+    && frame.box[1] >= rows.length - pitch * 2 && (known.outlet || new Set(pattern(frame.box).split(',')).size > 1));
   if (indicators.length < 4 || indicators.length > 16 || indicators.some(({ frame }) => frame.box[1] !== indicators[0]!.frame.box[1])) return null;
   const flags = indicators.map(({ part }) => part);
   const zoneBottom = indicators[0]!.frame.box[1];
-  const groups = new Map<string, Frame[]>();
-  for (const { frame } of indicators) groups.set(pattern(frame.box), []);
-  if (groups.size * 2 !== indicators.length || [...groups.keys()].some(mark => indicators.filter(({ frame }) => pattern(frame.box) === mark).length !== 2)) return null;
+  const groups = new Map<string, { indicators: number; openings: Frame[] }>();
+  for (const { frame } of indicators) {
+    const mark = pattern(frame.box);
+    const group = groups.get(mark) ?? { indicators: 0, openings: [] };
+    group.indicators++;
+    groups.set(mark, group);
+  }
+  if ([...groups.values()].some(group => group.indicators > 2 || (group.indicators === 1 && !known.outlet))) return null;
   for (let y = (ay + pitch - 1) % pitch; y + pitch <= zoneBottom; y += pitch) {
     for (let x = (ax + pitch - 1) % pitch; x + pitch <= rows[0]!.length; x += pitch) {
+      // The controlled piece can obscure a switch and make its interior resemble an opening.
+      if (x + 1 === ax && y + 1 === ay) continue;
       const box: NativeBox = [x, y, x + pitch - 1, y + pitch - 1];
       const group = groups.get(pattern(box));
       if (!group) continue;
@@ -128,16 +144,23 @@ function patternedPassages(rows: NativeRows, parts: Part[], known: KnownPassage,
       const measures = rows.slice(y, y + pitch).flatMap((row, j) => row.slice(x, x + pitch)
         .filter((_, i) => i === 0 || i === pitch - 1 || j === 0 || j === pitch - 1));
       const area = measures.filter(value => value === paint).length;
-      if (area >= 3 * pitch - 2) group.push({ box, point: [x + 1, y + 1], color: paint, area });
+      if (area >= 3 * pitch - 2) group.openings.push({ box, point: [x + 1, y + 1], color: paint, area });
     }
   }
   const pairs: Pair[] = [];
-  for (const frames of groups.values()) {
-    if (frames.length !== 2) return null;
-    const [a, b] = frames as [Frame, Frame];
+  const unpaired: Frame[] = [];
+  for (const { indicators: count, openings } of groups.values()) {
+    if (openings.length !== count) return null;
+    const [a, b] = openings as [Frame, Frame?];
+    if (!b) {
+      unpaired.push(a);
+      continue;
+    }
     pairs.push({ key: [key(a.point), key(b.point)].sort().join('/'), frames: [a, b] });
   }
-  const entrances = new Set(pairs.flatMap(pair => pair.frames.map(frame => key(frame.point))));
+  if (!pairs.length) return null;
+  const openings = [...pairs.flatMap(pair => pair.frames), ...unpaired];
+  const entrances = new Set(openings.map(frame => key(frame.point)));
   const goals = allFrames.map(({ frame }) => frame).filter(frame => onGrid(frame.point) && frame.box[3] < zoneBottom
     && !entrances.has(key(frame.point)) && (priorGoal ? same(frame.point, priorGoal.point) : rows[frame.point[1]]?.[frame.point[0]] === ground));
   if (goals.length !== 1) return null;
@@ -148,13 +171,14 @@ function patternedPassages(rows: NativeRows, parts: Part[], known: KnownPassage,
   tiles.push([ax, ay], goal.point);
   const outlets: Record<string, Direction> = {};
   if (known.outlet) {
-    for (const frame of pairs.flatMap(pair => pair.frames)) {
+    for (const frame of openings) {
       const outlet = readOutlet(rows, frame);
       if (outlet?.ink !== known.outlet.ink) return null;
       outlets[key(frame.point)] = outlet.direction;
     }
   }
   return { actor, goal, pitch, pairs, flags, ground, neutral: true,
+    ...(unpaired.length ? { unpaired } : {}),
     ...(known.outlet ? { outlets } : {}), floor: Object.fromEntries(tiles.map(point => [key(point), point])) };
 }
 
@@ -170,7 +194,8 @@ function readSwitches(rows: NativeRows, parts: Part[], scene: Scene, visitedInk:
   if (!scene.outlets || !scene.flags.length || visitedInk === undefined) return null;
   const { pitch, pairs, goal } = scene, at = origin(scene.actor.bbox);
   const bottom = Math.min(...scene.flags.map(flag => flag.bbox[1]));
-  const blocked = new Set([...pairs.flatMap(pair => pair.frames.map(frame => key(frame.point))), key(goal.point)]);
+  const blocked = new Set([...pairs.flatMap(pair => pair.frames.map(frame => key(frame.point))),
+    ...(scene.unpaired ?? []).map(frame => key(frame.point)), key(goal.point)]);
   const badges = parts.filter(part => part.rectangular && part.bbox[1] >= bottom && width(part.bbox) > pitch
     && height(part.bbox) < pitch && width(part.bbox) <= 3 * pitch);
   const candidates = badges.flatMap(badge => {
@@ -219,7 +244,8 @@ function planSwitchRoute(scene: Scene, memory: Memory, switches: Switches, rewri
       yield { point, visits: through ? 0 : coverage, step: { direction, point, ...(crossing ? { crossing } : {}) } };
     }
   };
-  const steps = searchCoverageRoute<Step>(start, scene.goal.point, visited, (1 << endpoints.length) - 1, at => walk(at));
+  const steps = scene.unpaired?.length ? null
+    : searchCoverageRoute<Step>(start, scene.goal.point, visited, (1 << endpoints.length) - 1, at => walk(at));
   if (steps) {
     const crossing = steps.find(step => step.crossing?.pair.frames.some(frame => !rewrite.visited.includes(key(frame.point))))?.crossing;
     return { steps, target: crossing?.from ?? scene.goal, ...(crossing ? { crossing } : {}) };
@@ -309,13 +335,13 @@ function observedStep(proposal: Proposal, index: number, first: NativeRows, seco
     const [badgeX, badgeY] = switches.badge;
     const altered = switches.sites.some(site => same(site, step.point)) && first[badgeY]![badgeX] !== second[badgeY]![badgeX];
     const groups = new Map<string, string[]>();
-    if (altered) for (const frame of pairs.flatMap(pair => pair.frames)) {
+    if (altered) for (const frame of [...pairs.flatMap(pair => pair.frames), ...(proposal.scene.unpaired ?? [])]) {
       const mark = framePattern(second, frame.box);
       groups.set(mark, [...(groups.get(mark) ?? []), key(frame.point)]);
     }
     const links = [...groups.values()];
-    const rewired = links.length > 0 && links.every(link => link.length === 2)
-      && links.map(link => link.sort().join('/')).sort().join(';') !== topology(pairs);
+    const rewired = links.length > 0 && links.every(link => link.length <= 2)
+      && links.filter(link => link.length === 2).map(link => link.sort().join('/')).sort().join(';') !== topology(pairs);
     return { moved: moved && matched, markers: matched && expected > 0, rewired, altered };
   }
   if (!proposal.scene.neutral || !crossing) return { moved, markers: changed.length > 0 };
@@ -367,6 +393,7 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
       const scene = measure(rows, prior?.goal ?? null, parts) ?? (known ? patternedPassages(rows, parts, known, prior?.goal) : null);
       if (!scene) return null;
       const switches = readSwitches(rows, parts, scene, known?.visitedInk, prior?.rewrite?.sites);
+      if (scene.unpaired?.length && !switches) return null;
       if (prior?.rewrite && !switches) return null;
       if (switches) scene.switches = switches;
       const base = prior ?? { epoch: observation.level_epoch, evidence: scene.neutral && known ? [known.ref, ...(known.outlet?.refs ?? [])] : [],
