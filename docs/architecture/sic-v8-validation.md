@@ -2434,3 +2434,11 @@ Le rejeu de référence épuise sa réserve après 66 commandes. Le plateau cont
 La commande 22 entre sur la première demande avec le motif correspondant. À la commande 23, la pièce quitte la case et le retour confirme que la demande a disparu. SIC peut alors transformer le motif pour servir la demande restante. La dernière commande déclenche la victoire officielle.
 
 Le niveau 7 gagne en **58 commandes et 25,78 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **220 commandes** des six premiers niveaux et leurs retours gardent les mêmes empreintes, animations comprises. Les 278 commandes relèvent de SIC seul. Empreinte chronologique `e0c49b57b5839d7dc6b97d71e69c051af3aeba4c09c1fe90a4718aece472301a`. TypeScript et les six tests ciblés passent.
+
+### SU15 niveau 7, faire avancer la fusion et la transformation en parallèle
+
+Le rejeu de référence s'arrête après 40 clics. Le bandeau demande deux produits du même type. Les fusions mesurées couvrent une demande. Des mobiles visibles et des contacts confirmés au niveau précédent autorisent la recherche d'une contribution partielle pendant que les autres éléments continuent d'évoluer.
+
+SIC dirige la fusion vers le récepteur proche et vérifie les changements observés après chaque clic. Au quatrième clic, il confirme à la fois la fusion prévue et l'apparition d'un deuxième produit dans l'autre zone. Les deux actions suivantes placent les produits dans leurs récepteurs en conservant la protection contre les mobiles.
+
+Le niveau 7 gagne en **six clics et 3,98 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **88 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 94 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `d6af1ad917d92add59e60bc7143e7875fd63cfaeeae7c87b62f926ea049fa4ea`. TypeScript et les deux tests ciblés passent.
