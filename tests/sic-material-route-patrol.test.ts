@@ -44,3 +44,26 @@ test('overlapping patrols retain their different next positions', () => {
   assert.deepEqual(step?.expected, [[0, 3], [2, 3]]);
   assert.equal(step?.next[0]?.length, 2);
 });
+
+test('a hidden patrol stays in the forecast while a different guard is approached from the side', () => {
+  const edges = new Map<string, Set<string>>([
+    ['0,1', new Set(['0,2'])], ['0,2', new Set(['0,1'])],
+    ['0,3', new Set(['0,4'])], ['0,4', new Set(['0,3'])],
+    ['2,0', new Set(['2,1'])], ['2,1', new Set(['2,0', '2,2'])], ['2,2', new Set(['2,1'])],
+  ]);
+  const histogram = [[8, 1]], fixed = [[9, 1]];
+  const graph: AlternatingTopology = { edges, nodes: new Set(edges.keys()), target: [2, 2], pitch: 1, first: 0,
+    guards: [
+      { position: [0, 2], front: [1, 2], bbox: [0, 2, 0, 2], histogram: fixed },
+      { position: [0, 4], front: [0, 3], bbox: [0, 4, 0, 4], histogram },
+      { position: [2, 1], front: [1, 1], bbox: [2, 1, 2, 1], histogram: fixed },
+    ] };
+  const known: PatrolGroupMemory = { histogram, target: graph.target, evidence: ['both-patrols-seen'],
+    formations: [[{ position: [0, 2], delta: [0, 1] }, { position: [0, 4], delta: [0, 1] }]] };
+  const actor: AlternatingActor = { size: 1, bbox: [2, 0, 2, 0], histogram: [[7, 1]] };
+  const controls = { right: [0, 1] } as const;
+  assert.equal(planPatrolGroup(graph, actor, controls, histogram, known, 4), null);
+  const step = planPatrolGroup(graph, actor, controls, histogram, known, 4, [{ size: 1, guard_histogram: fixed }]);
+  assert.deepEqual(step?.capture?.position, [2, 1]);
+  assert.deepEqual(step?.expected, [[0, 1], [0, 3]]);
+});

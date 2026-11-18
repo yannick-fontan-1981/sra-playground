@@ -5,7 +5,7 @@ import type { NativeBox, NativeFamily, NativeProgramHandle, NativeProposal, Nati
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
-import { movedPatrol, observePatrolGroup, observePatrolReturn, planPatrolGroup, planPatrolStep,
+import { movedPatrol, observePatrolGroup, observePatrolReturn, planPatrolGroup, planPatrolStep, recognizesPatrolGroup,
   type PatrolGroupMemory, type PatrolGroupStep, type PatrolMemory, type PatrolStep } from './material-route-patrol.ts';
 
 export const materialRouteId = 'sic_material_route';
@@ -149,9 +149,9 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       const calibration = observedCalibration(graphFacts) ?? local.calibration;
       const topology = local.guardedTransfer && calibration ? alternatingTopology(rows, actor, calibration, local.patrolGroup?.target) : null;
       const multiplePatrols = local.patrolGroup || !!local.patrolProfile && !!topology
-        && topology.guards.length >= 2 && topology.guards.every(guard => same(guard.histogram, local.patrolProfile));
+        && recognizesPatrolGroup(topology, actor.size, local.patrolProfile, local.removals ?? []);
       const patrolGroup = multiplePatrols && topology && local.patrolProfile
-        ? planPatrolGroup(topology, actor, controls, local.patrolProfile, local.patrolGroup, remaining) : null;
+        ? planPatrolGroup(topology, actor, controls, local.patrolProfile, local.patrolGroup, remaining, local.removals) : null;
       if (multiplePatrols && !patrolGroup) return null;
       const conditional = !multiplePatrols && topology && calibration && topology.guards.length
         ? instrumentalAlternatingContact(rows, actor, controls, calibration, local.removals ?? [], remaining) as ContactRoute | null : null;
@@ -186,6 +186,7 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       const choice = strategy === 'P07' ? routeOffer : explore;
       if (!choice) return null;
       const label = patrolGroup ? patrolGroup.learning ? 'Measure several moving patrols from a safe tile'
+        : patrolGroup.capture ? 'Approach the guard from the side while the moving patrols stay clear'
         : 'Use a crossing that stays open across the patrols’ predicted positions'
         : patrol ? patrol.learning ? materialRouteStrategies.measure_patrol_phase
         : patrol.capture ? materialRouteStrategies.test_side_contact : materialRouteStrategies.follow_patrol_phase
@@ -228,6 +229,7 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
             ...(patrol.expected ? { patrolNext: displayBox(asBox(...patrol.expected)) } : {}) } : {}),
           ...(patrolGroup ? { patrols: patrolGroup.positions.map(point => displayBox(asBox(...point))),
             patrolForecast: patrolGroup.expected.map(point => displayBox(asBox(...point))) } : {}),
+          ...(patrolGroup?.capture ? { guard: displayBox(patrolGroup.capture.bbox), front: displayBox(asBox(...patrolGroup.capture.front)) } : {}),
           ...(patrol?.capture ? { guard: displayBox(patrol.capture.bbox), front: displayBox(asBox(...patrol.capture.front)) } : {}),
           ...(conditional ? { guard: displayBox(conditional.guard.bbox), front: displayBox(asBox(...conditional.guard.front)) } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
