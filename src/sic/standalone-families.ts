@@ -119,7 +119,7 @@ export const standalonePlanningGroups = [
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId,
     verifyInventoryTransferId, learnInventoryTransferId, chartRouteId, framedContactId, coupledGaugeRouteId, reproduceCueId, arrangeTurnPostsId, directionalReceptionId, pairedPassageId,
-    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId, translateCoupledPiecesId, learnContactAccessId, verifyCoupledRouteId, verifyOrientedDeliveryId, verifyReferencePlacementId, learnReferencePlacementId, verifyChannelAccessId,
+    remoteSupportRouteId, verifyFrameContactId, verifyProfileTransferId, protectGravityRouteId, translateCoupledPiecesId, learnContactAccessId, verifyConnectedRouteId, verifyCoupledRouteId, verifyOrientedDeliveryId, verifyReferencePlacementId, learnReferencePlacementId, verifyChannelAccessId,
     displayCouplingId, periodicProfileAlignmentId, materialAssemblyId, observedSharedRelationsId, observedPatternLayoutId, verifyReactiveMotionId, switchedSurfaceId, navigateRevealedGridId,
     pivotCargoId, observedActuatorArrangementId, observedRouteInterventionId, observedSurvivalId, learnCorridorAdvanceId, pairedReorientationId, learnPairedReorientationId, observedRailTransfersId, settleMatchingEdgesId, columnAlignmentId, reflectedPlacementId] },
   { id: 'repair_visible_field', families: [reproduceCueId, learnAnimatedCueId, fieldRepairId, verifyContactOrderId, learnContactOrderId, supportTransferId, learnSupportMovesId, learnObservedSupportsId] },

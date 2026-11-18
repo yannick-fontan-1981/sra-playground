@@ -3,6 +3,25 @@ import test from 'node:test';
 import type { AlternatingActor } from '../src/logos-engine/v6-alternating-graph-observation.ts';
 import type { AlternatingTopology } from '../src/logos-engine/v6-alternating-graph-questions.ts';
 import { planPatrolGroup, planPatrolStep, type PatrolGroupMemory, type PatrolMemory } from '../src/sic/material-route-patrol.ts';
+import { planGuardWatch } from '../src/sic/material-route-watch.ts';
+
+test('an unfamiliar guard excludes its adjacent tiles from the immediate move', () => {
+  const edges = new Map<string, Set<string>>([
+    ['3,2', new Set(['3,3', '4,2'])], ['3,3', new Set(['3,2', '2,3', '3,4', '4,3'])],
+    ['2,3', new Set(['3,3'])], ['3,4', new Set(['3,3'])],
+    ['4,2', new Set(['3,2', '4,3'])], ['4,3', new Set(['4,2', '3,3'])],
+  ]);
+  const fixed = [[8, 3], [9, 1]];
+  const actor: AlternatingActor = { size: 2, bbox: [3, 2, 4, 3], histogram: [[4, 3], [5, 1]] };
+  const graph: AlternatingTopology = { nodes: new Set(edges.keys()), edges, target: [3, 4], pitch: 1, first: 0, guards: [
+    { position: [2, 3], front: [3, 3], bbox: [2, 3, 3, 4], histogram: [[6, 3], [7, 1]] },
+    { position: [4, 4], front: [4, 5], bbox: [4, 4, 5, 5], histogram: fixed },
+  ] };
+  const step = planGuardWatch(graph, actor, { right: [0, 1], down: [1, 0], up: [-1, 0] },
+    [{ guard_histogram: fixed, size: 2 }], 5);
+  assert.deepEqual(step?.to, [4, 2]);
+  assert.deepEqual(step?.alternatives, [[2, 3], [3, 3]]);
+});
 
 test('the same player position takes a different route when the patrol phase changes', () => {
   const links = [

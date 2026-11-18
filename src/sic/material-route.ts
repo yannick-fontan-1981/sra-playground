@@ -7,6 +7,8 @@ import { maximumCommittedActions } from './plan-step.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { movedPatrol, observePatrolGroup, observePatrolReturn, planPatrolGroup, planPatrolStep, recognizesPatrolGroup,
   type PatrolGroupMemory, type PatrolGroupStep, type PatrolMemory, type PatrolStep } from './material-route-patrol.ts';
+import { observeGuardWatch, planGuardWatch, type GuardWatch, type GuardWatchStep } from './material-route-watch.ts';
+import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const materialRouteId = 'sic_material_route';
 export const verifyConnectedRouteId = 'sic_verify_connected_route';
@@ -31,10 +33,10 @@ type ContactRoute = { guard: AlternatingGuard; prefix: { action_ref: string; to:
 type State = { epoch: number; size: number; histogram: number[][]; samples: Move[]; edges: Edge[];
   evidence: string[]; lastMoved: string | null; repeat: string | null; count: number; stopped: boolean;
   calibration?: Calibration; pendingContact?: Contact | null; removals?: Removal[]; guardedTransfer?: boolean;
-  patrol?: PatrolMemory; patrolProfile?: number[][]; patrolGroup?: PatrolGroupMemory;
+  patrol?: PatrolMemory; patrolProfile?: number[][]; patrolGroup?: PatrolGroupMemory; guardWatch?: GuardWatch;
   completed?: { readonly nextEpoch: number; readonly score: number; readonly evidence: string } };
 type Choice = { input: string; to: AlternatingBox | null; ordinary: boolean; floor: number | null;
-  guarded?: boolean; contact?: boolean; patrol?: PatrolStep; patrolGroup?: PatrolGroupStep };
+  guarded?: boolean; contact?: boolean; patrol?: PatrolStep; patrolGroup?: PatrolGroupStep; watch?: GuardWatchStep };
 type WalkStep = { actor: AlternatingActor; choice: Choice };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: AlternatingActor; needId: string; walk?: WalkStep[] };
 const order = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
@@ -97,6 +99,12 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
+      if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
+      if (!state?.calibration || !state.removals?.length || !state.patrolGroup && !state.guardWatch && !state.patrolProfile) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal?.choice.watch ? proposal : null;
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       const available = order.filter(input => observation.available_action_refs.includes(input));
       if (remaining < 1 || available.length < 3 || !rows.length) return null;
@@ -147,19 +155,24 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       const frontier = !probe ? frontierStep(local.edges, here, available) : null;
       const graphFacts = Object.keys(controls).length >= 2 ? measureAlternatingGraph(rows, observation, actor, controls, local.evidence, local.lastMoved, true) : null;
       const calibration = observedCalibration(graphFacts) ?? local.calibration;
-      const topology = local.guardedTransfer && calibration ? alternatingTopology(rows, actor, calibration, local.patrolGroup?.target) : null;
+      const topology = local.guardedTransfer && calibration
+        ? alternatingTopology(rows, actor, calibration, local.patrolGroup?.target ?? local.guardWatch?.target) : null;
       const multiplePatrols = local.patrolGroup || !!local.patrolProfile && !!topology
         && recognizesPatrolGroup(topology, actor.size, local.patrolProfile, local.removals ?? []);
       const patrolGroup = multiplePatrols && topology && local.patrolProfile
         ? planPatrolGroup(topology, actor, controls, local.patrolProfile, local.patrolGroup, remaining, local.removals) : null;
       if (multiplePatrols && !patrolGroup) return null;
-      const conditional = !multiplePatrols && topology && calibration && topology.guards.length
+      const watch = !multiplePatrols && topology && local.patrolProfile && local.removals?.length
+        ? planGuardWatch(topology, actor, controls, local.removals, remaining, local.guardWatch) : null;
+      if (local.guardWatch && !watch) return null;
+      const conditional = !multiplePatrols && !watch && topology && calibration && topology.guards.length
         ? instrumentalAlternatingContact(rows, actor, controls, calibration, local.removals ?? [], remaining) as ContactRoute | null : null;
-      const patrol = !multiplePatrols && topology && (local.patrol || !conditional && topology.guards.length > 1)
+      const patrol = !multiplePatrols && !watch && topology && (local.patrol || !conditional && topology.guards.length > 1)
         ? planPatrolStep(topology, actor, controls, local.removals ?? [], local.patrol, remaining) : null;
       if (local.patrol && !patrol) return null;
       const step = conditional?.prefix[0];
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.patrol?.evidence ?? []), ...(local.patrolGroup?.evidence ?? []),
+        ...(local.guardWatch?.evidence ?? []),
         ...(topology ? local.removals?.slice(-3).flatMap(item => item.evidence) ?? [] : [])].filter(item => item !== ref))];
       const route = graphFacts?.alternating_material_first_shortest_action_refs as string[] | undefined;
       const input = step?.action_ref ?? route?.[0], delta = input ? controls[input] : null;
@@ -169,7 +182,8 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       const planned: Choice | null = to && input ? { input, to, floor,
         ordinary: floor !== null && same(alternatingHistogram(rows, to), [[floor, actor.size ** 2]]),
         ...(topology ? { guarded: true, contact: !!step && step.contact_index !== null } : {}) } : null;
-      const timed: Choice | null = patrolGroup ? { input: patrolGroup.input, to: asBox(...patrolGroup.to), floor,
+      const timed: Choice | null = watch ? { input: watch.input, to: asBox(...watch.to), floor, ordinary: false, guarded: true, watch }
+        : patrolGroup ? { input: patrolGroup.input, to: asBox(...patrolGroup.to), floor,
         ordinary: false, guarded: true, patrolGroup }
         : patrol ? { input: patrol.input, to: asBox(...patrol.to), floor, ordinary: false, guarded: true, patrol } : null;
       const learning = patrol?.learning || patrolGroup?.learning;
@@ -185,7 +199,9 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       if (strategy !== 'P07' && strategy !== 'P05') return null;
       const choice = strategy === 'P07' ? routeOffer : explore;
       if (!choice) return null;
-      const label = patrolGroup ? patrolGroup.learning ? 'Measure several moving patrols from a safe tile'
+      const label = watch ? watch.capture ? 'Approach the known guard from the side and keep clear of the other guard'
+        : 'Follow a route that stays clear of the guard’s possible next positions'
+        : patrolGroup ? patrolGroup.learning ? 'Measure several moving patrols from a safe tile'
         : patrolGroup.capture ? 'Approach the guard from the side while the moving patrols stay clear'
         : 'Use a crossing that stays open across the patrols’ predicted positions'
         : patrol ? patrol.learning ? materialRouteStrategies.measure_patrol_phase
@@ -225,6 +241,9 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
         sicSituationCard: { strategy, need: 'Find an accessible route across the connected tiles', situation: label,
           evidence, agenda: [], mode, triggerCard: chooseLanding,
           actor: displayBox(actor.bbox), target: choice.to ? displayBox(choice.to) : null,
+          ...(watch ? { patrol: displayBox(watch.guard.bbox),
+            patrolForecast: watch.alternatives.map(point => displayBox(asBox(...point))) } : {}),
+          ...(watch?.capture ? { guard: displayBox(watch.capture.bbox), front: displayBox(asBox(...watch.capture.front)) } : {}),
           ...(patrol ? { patrol: displayBox(patrol.obstacle.bbox),
             ...(patrol.expected ? { patrolNext: displayBox(asBox(...patrol.expected)) } : {}) } : {}),
           ...(patrolGroup ? { patrols: patrolGroup.positions.map(point => displayBox(asBox(...point))),
@@ -251,6 +270,10 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const { choice, actor } = proposal.walk?.[index] ?? proposal;
       const { local } = proposal;
+      if (choice.watch && choice.floor !== null) {
+        const returned = before.state === after.state && observeGuardWatch(choice.watch, actor, first, second, choice.floor, after.observation_ref);
+        return { matched: !!returned, seal_prefix: true, reason: returned ? returned.reason : 'watched_guard_transition_contradicted' };
+      }
       if (choice.patrolGroup) {
         const matched = before.state === after.state && !!observePatrolGroup(choice.patrolGroup, actor, second, frames, after.observation_ref);
         return { matched, seal_prefix: true, reason: matched ? 'patrol_group_observation_compatible' : 'patrol_group_forecast_contradicted' };
@@ -274,6 +297,13 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { actor, choice } = proposal.walk?.[index] ?? proposal;
+      if (choice.watch && choice.floor !== null) {
+        const returned = observeGuardWatch(choice.watch, actor, first, second, choice.floor, after.observation_ref);
+        state = { ...local, count: local.count + 1, stopped: !returned, ...(returned ? { guardWatch: returned.watch } : {}) };
+        return { events: [], ...(returned?.reason === 'guard_marker_changed_in_place'
+          ? { reviewEvidence: 'The controlled piece moved as predicted. The other guard changed its marker without moving.' }
+          : returned?.reason === 'guard_movement_observed' ? { reviewEvidence: 'The guard also moved. Its possible next tiles will be checked before the next command.' } : {}) };
+      }
       if (choice.patrolGroup) {
         const patrolGroup = observePatrolGroup(choice.patrolGroup, actor, second, frames, after.observation_ref);
         state = { ...local, count: local.count + 1, stopped: !patrolGroup,
