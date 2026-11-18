@@ -2514,3 +2514,13 @@ Le niveau est gagné avec les règles existantes de SIC.
 Le premier rejeu au budget de 360 s s'arrête après 453 commandes du niveau 6. Ses 532 commandes, observations et animations correspondent exactement au préfixe de référence. Le rejeu qualifié reprend le budget de référence d'AS66, soit 720 s de temps actif et 600 commandes par niveau, avec un seul processus.
 
 Le niveau 7 gagne en **25 commandes et 19,35 s**. Les **565 commandes** des six premiers niveaux conservent leurs empreintes, animations comprises. Les 590 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 7. Empreinte chronologique `650a8658a84de54ce833875dcc6689ed310f629e8f57b14ce010dc6ed764098c`.
+
+### LF52 niveau 7, révéler les réceptions puis fermer le dernier triplet
+
+Le premier cadrage montre un seul jeton vert. SIC remesure la grille, les rails et l'auxiliaire avec les commandes et le sens de défilement observés au niveau précédent. Il cherche des réceptions près du prochain bord visible et garde la trace des réceptions testées. Un trajet qui reste dans la même zone ne suffit plus à déclarer la progression.
+
+Après la révélation du deuxième jeton, SIC remonte des réceptions possibles du dernier saut vers les rails qui peuvent y amener un transporteur. La recherche se concentre sur ces rails et vérifie le trajet avec tous les transporteurs connus. Le retour confirme les bords de cadre visibles et les rails que le chargement masquait.
+
+Les commandes 48 et 107 étendent la carte. La commande 134 aligne les deux jetons et la commande 148 achève la réduction.
+
+Le niveau 7 gagne en **148 commandes et 77,47 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **334 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 482 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 7. Empreinte chronologique `db6d78d65e8c2090c2fbe41d861efab8947509577e28af0f94ee497a9cf8b8c2`. TypeScript et les 31 tests ciblés passent.
