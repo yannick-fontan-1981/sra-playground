@@ -2420,3 +2420,9 @@ Le rejeu de référence s'arrête après 80 clics. La lecture de la grille déte
 La recherche tient compte des quantités et des emplacements des trois marqueurs. Elle conserve les étapes suivantes tant que chaque retour confirme le plan. Les clics 12, 24, 38 et 39 franchissent les portes. Au clic 24, deux marqueurs échangent leurs compartiments tandis que les quantités restent identiques. Le dernier transfert aligne les trois hauteurs.
 
 Le niveau 7 gagne en **49 clics et 19,13 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **143 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 192 commandes relèvent de SIC seul. L'empreinte chronologique est `e12ebb632fd8ac8edf61338c721aa5cf37f52f4b9fdbbf0cd4ec7f82d90518e9`. TypeScript et huit tests ciblés passent.
+
+### AR25 niveau 7, réutiliser la couverture par deux pièces et deux axes
+
+Le premier rejeu depuis le niveau 1 gagne sans modification du moteur. La grille distingue deux pièces de neuf et quatorze cellules, et 42 cellules cibles. La recherche de couverture de niveau 6 réutilise les axes et mesure les deux masques sur la nouvelle grille. Les deux premiers déplacements règlent un axe, puis la sélection et neuf déplacements règlent l'autre. Le trajet place ensuite les deux contributeurs. La dernière commande confirme la couverture complète.
+
+Le niveau 7 gagne en **37 commandes et 9,10 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **171 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 208 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `e9eac1b0518c40ba921be7dae6dac994f43e7e177a29efcf3bb44cdc67eefe6b`.

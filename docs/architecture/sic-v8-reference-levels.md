@@ -6,12 +6,12 @@ Le seuil provisoire est le maximum des scores attestés. Le prochain score à at
 
 Premier relevé historique sur les 100 jeux. **80** ont une référence positive retrouvée. Le natif regroupe 0.68 et ses versions historiques. V5 inclut les parcours continus attestés et les niveaux 1 qualifiés. V6 désigne l’agent source. Pour V7, les cinq rapports locaux examinés indiquent zéro partie démarrée, dont un rejeu de retours historiques. La colonne reste ouverte à d’autres archives V7. Certains rapports V6 originaux sont disponibles uniquement dans les archives locales de l’agent.
 
-Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **601 niveaux sur 636 (94,5 %)** sur les 100 jeux de la campagne. SIC seul a terminé **84 jeux** et gagné les **99 niveaux 6**. Les 35 niveaux à qualifier sur les 16 jeux encore ouverts comprennent 15 niveaux 7, 13 niveaux 8, 6 niveaux 9 et 1 niveau 10. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
+Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **602 niveaux sur 636 (94,7 %)** sur les 100 jeux de la campagne. SIC seul a terminé **84 jeux** et gagné les **99 niveaux 6**. Les 34 niveaux à qualifier sur les 16 jeux encore ouverts comprennent 14 niveaux 7, 13 niveaux 8, 6 niveaux 9 et 1 niveau 10. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
 
 | Jeu | Total | Natif | V5 | V6 | V7 | Maximum attesté | Prochain jalon | SIC seul |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | AMZE | 6 | — | — | — | — | — | — | 6 · WIN |
-| AR25 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 6 |
+| AR25 | 8 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AR25/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 7 |
 | AS66 | 9 | [3](../../docs/migration/native-campaigns-v55/baseline-as66/as66-campaign.json.gz) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/AS66/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 6 |
 | BP35 | 9 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/BP35/LVL1/good_run_pseudocode.md) | 0 (archive locale) | — | 1 | 2 | 6 |
 | CASC | 6 | [0](../../docs/migration/native-campaigns-v55/baseline-casc/casc-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/CASC/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
