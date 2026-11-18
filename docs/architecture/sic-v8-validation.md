@@ -2560,3 +2560,7 @@ La sauvegarde montre deux lignes de référence identiques et une seule réserve
 Les 16 clics placent les six littéraux et les deux liens vérifiés. La commande 17 soumet le programme et le retour officiel valide la répétition.
 
 Le niveau 8 gagne en **17 commandes et 11,10 s**. Les **107 commandes** des sept premiers niveaux gardent les mêmes empreintes, animations comprises. Les 124 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 8. Empreinte chronologique `f3277035290297a66c05ed209b7b84e743dc9c06ef151bb27ff3dd5c058dfe8c`. TypeScript et les quatre tests ciblés passent.
+
+### LP85 niveau 8
+
+Les cases visibles forment trois circuits coudés et disjoints. Le fournisseur mesure les diagonales contiguës et leurs prolongements rectilignes, puis confronte les permutations candidates aux retours de clic avant de calculer un trajet. Le rejeu chronologique gagne le niveau 8 en **82 commandes SIC seul et 35,04 s**. Deux démarches d’exploration envoient d’abord 35 clics sans effet chacune. Les 12 commandes suivantes mesurent puis appliquent les permutations visibles. Les 107 commandes des niveaux 1 à 7, leurs retours et leurs animations sont identiques à la référence. La campagne s’arrête à la victoire du niveau 8. Empreinte `81489e6173ef277917d6facc42d8a08a11c33db880ce90638d47a7fb04e1469b`.
