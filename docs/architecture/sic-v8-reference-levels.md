@@ -6,7 +6,7 @@ Le seuil provisoire est le maximum des scores attestés. Le prochain score à at
 
 Premier relevé historique sur les 100 jeux. **80** ont une référence positive retrouvée. Le natif regroupe 0.68 et ses versions historiques. V5 inclut les parcours continus attestés et les niveaux 1 qualifiés. V6 désigne l’agent source. Pour V7, les cinq rapports locaux examinés indiquent zéro partie démarrée, dont un rejeu de retours historiques. La colonne reste ouverte à d’autres archives V7. Certains rapports V6 originaux sont disponibles uniquement dans les archives locales de l’agent.
 
-Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **607 niveaux sur 636 (95,4 %)** sur les 100 jeux de la campagne. SIC seul a terminé **84 jeux** et gagné les **99 niveaux 6**. Les 29 niveaux à qualifier sur les 16 jeux encore ouverts comprennent 9 niveaux 7, 13 niveaux 8, 6 niveaux 9 et 1 niveau 10. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
+Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **608 niveaux sur 636 (95,6 %)** sur les 100 jeux de la campagne. SIC seul a terminé **85 jeux** et gagné les **99 niveaux 6**. Les 28 niveaux à qualifier sur les 15 jeux encore ouverts comprennent 8 niveaux 7, 13 niveaux 8, 6 niveaux 9 et 1 niveau 10. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
 
 | Jeu | Total | Natif | V5 | V6 | V7 | Maximum attesté | Prochain jalon | SIC seul |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -52,7 +52,7 @@ Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau
 | HOLE | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 6 · WIN |
 | HPDL | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 6 · WIN |
 | ISOS | 6 | 1 (rejeu local 0.68) | — | — | — | 1 | 2 | 6 · WIN |
-| KA59 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KA59/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 6 |
+| KA59 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KA59/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 7 · WIN |
 | KATA | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KATA/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
 | KEYD | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/KEYD/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
 | KLOT | 6 | [3](../../docs/migration/lot6b-evidence/development-freeze-01/klot-campaign.json.gz) | — | — | — | 3 | 4 | 6 · WIN |

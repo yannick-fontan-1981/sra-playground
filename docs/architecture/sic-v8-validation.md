@@ -2464,3 +2464,11 @@ Le rejeu de référence s'arrête après 96 clics au niveau 7. SIC réutilise le
 La recherche part des positions compatibles avec les cibles et les raccorde à la configuration courante. SIC mesure la direction de rotation au clic 2 et contrôle les positions visibles à chaque retour. Les clics 38 et 39 raccourcissent temporairement la barre déjà alignée. Les clics 40 et 43 font pivoter l'obstacle, puis les clics 44 et 45 restaurent l'alignement et déclenchent la victoire. Les rotations du trajet respectent l'orientation interdite vers la barre porteuse.
 
 Le niveau 7 gagne en **45 clics et 19,06 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **171 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 216 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `a4dad5be8a83852adba8f3b7d4fa944b7957da28d7187f64bfad23d9787d2415`. TypeScript et les trois tests ciblés passent.
+
+### KA59 niveau 7, préparer une impulsion en passant le contrôle entre deux barres
+
+Le rejeu de référence abandonne après 80 commandes d'exploration. Le modèle périodique attendait un porteur carré. Les deux barres visibles ont maintenant des empreintes distinctes, des ouvertures correspondantes et une marque de sélection transférable. Les six premières commandes mesurent les deux cycles et leurs portées. Les clics de sélection conservent ensuite les phases mesurées.
+
+La recherche remonte des ouvertures vers les positions des poussoirs capables de transférer une charge. Elle vérifie le trajet avec les deux barres, les phases et les collisions. Les commandes 33 et 47 déplacent un poussoir à travers les séparations. L'impulsion de la commande 52 contribue au transfert. La commande 81 place la charge dans son ouverture et la commande 105 rend encore un service de transport avant les placements finaux.
+
+Le niveau 7 gagne en **107 commandes et 30,05 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **204 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 311 commandes relèvent de SIC seul et le score 7 termine le jeu. Empreinte chronologique `f331b565b217adeda84cfc9324b03fa392a740386934533b3758887c131310e1`. TypeScript et les cinq tests ciblés passent.
