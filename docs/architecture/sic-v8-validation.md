@@ -2488,3 +2488,11 @@ Le modèle de référence dépasse sa limite de 20 éléments modifiables à l'e
 SIC privilégie les arrêts sûrs pour découvrir de nouveaux paliers. Aux commandes 4 et 5 il prépare le premier appui puis inverse la chute. Le long défilement de la commande 38 présente deux raccords visuels possibles. Le sens de la chute écarte le décalage apparent de −7 rangées. Le raccord de +19 rangées avec le terrain mémorisé confirme le retour vers la sortie.
 
 Le niveau 7 gagne en **46 commandes et 44,55 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **190 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 236 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `a6d33ad5cf58cf73bf57570bd107d5893c34043344b82139d4ca6b864fd31036`. TypeScript et les cinq tests ciblés passent.
+
+### LS20 niveau 7, revenir à une sortie mémorisée sous visibilité partielle
+
+Le rejeu de référence perd après 66 commandes. SIC transporte les motifs de stations et les effets mesurés au niveau précédent. La carte distingue les cellules observées des zones masquées. La lecture du cadre utilise son fond connu pour conserver la forme et la couleur quand le symbole occupe un coin. Le coût par commande est recalibré à partir du retour de la jauge.
+
+La commande 9 révèle la sortie après un transfert, puis SIC en conserve le motif et la position pendant ses détours. Le plan relie les stations de forme et de couleur aux recharges, mesure les positions successives du rotateur et vérifie les contacts qui déterminent l'orientation. Cinq recharges sont confirmées. SIC revient à la sortie avec le motif complet et la commande 107 termine le jeu.
+
+Le niveau 7 gagne en **107 commandes et 49,46 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **286 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 393 commandes relèvent de SIC seul. Empreinte chronologique `e61ef8392c5dbedaaa9952c27118f43d9b717110b5b0ce7d7a9239258f55c5a3`. TypeScript et les quatre tests ciblés passent.
