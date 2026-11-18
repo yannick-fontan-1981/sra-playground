@@ -2426,3 +2426,11 @@ Le niveau 7 gagne en **49 clics et 19,13 s**, au budget de 360 s de temps actif 
 Le premier rejeu depuis le niveau 1 gagne sans modification du moteur. La grille distingue deux pièces de neuf et quatorze cellules, et 42 cellules cibles. La recherche de couverture de niveau 6 réutilise les axes et mesure les deux masques sur la nouvelle grille. Les deux premiers déplacements règlent un axe, puis la sélection et neuf déplacements règlent l'autre. Le trajet place ensuite les deux contributeurs. La dernière commande confirme la couverture complète.
 
 Le niveau 7 gagne en **37 commandes et 9,10 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **171 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 208 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `e9eac1b0518c40ba921be7dae6dac994f43e7e177a29efcf3bb44cdc67eefe6b`.
+
+### LS19 niveau 7, fermer deux demandes avec des motifs successifs
+
+Le rejeu de référence épuise sa réserve après 66 commandes. Le plateau contient deux demandes distinctes et deux stations de couleur. SIC mesure séparément les motifs demandés et les effets observés à chaque station. Le trajet vers une première demande réserve de quoi rejoindre une recharge ensuite.
+
+La commande 22 entre sur la première demande avec le motif correspondant. À la commande 23, la pièce quitte la case et le retour confirme que la demande a disparu. SIC peut alors transformer le motif pour servir la demande restante. La dernière commande déclenche la victoire officielle.
+
+Le niveau 7 gagne en **58 commandes et 25,78 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **220 commandes** des six premiers niveaux et leurs retours gardent les mêmes empreintes, animations comprises. Les 278 commandes relèvent de SIC seul. Empreinte chronologique `e0c49b57b5839d7dc6b97d71e69c051af3aeba4c09c1fe90a4718aece472301a`. TypeScript et les six tests ciblés passent.
