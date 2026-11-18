@@ -4,7 +4,7 @@ Laboratoire autonome du troisième jeu Sinking Star : un **Voleur vert**, huit n
 
 ## Changements de cette version
 
-Le niveau 2, **La presse latérale**, remplace Le triple verrou par un défi de difficulté moyenne : deux caisses à préparer autour d’un pilier, une presse orientée vers l’est et deux boutons à remplir. Deux poussées sont nécessaires ; la seconde avance une file de deux caisses. L’aide aux pistons s’affiche dès ce niveau.
+Le niveau 2, **La presse latérale**, remplace Le triple verrou par un défi de difficulté moyenne : deux caisses à préparer autour d’un pilier, une presse orientée vers l’est et deux boutons à remplir. Le parcours validé emploie deux poussées ; la seconde avance une file de deux caisses. La presse est indispensable à la résolution. L’aide aux pistons s’affiche dès ce niveau.
 
 Les sept autres salles, les commandes et les animations sont conservées. Leurs observations sont comparées à la version précédente.
 
