@@ -2504,3 +2504,13 @@ Le rejeu de référence s'arrête après 81 commandes au niveau 7. Quand les deu
 Depuis la zone du récepteur, SIC remonte vers le transfert nécessaire. L'accès à sa commande dépend d'un passage tenu ouvert à distance. Pour atteindre le contact qui tient ce passage, SIC mesure d'abord à la commande 3 le déplacement qui libère le trajet du porteur autonome. Son arrivée déclenche le premier transfert à la commande 8. Les commandes 11 et 26 enregistrent les deux contributions. Le second passage se confirme dans les animations de la commande 40, puis la commande 43 termine le jeu.
 
 Le niveau 7 gagne en **43 commandes et 33,50 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **252 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 295 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `389d74c0c13513eb3815a10a71e58a5b3f7df44d17b31d280988afe6b1df89e6`. TypeScript et les cinq tests ciblés passent.
+
+### AS66 niveau 7, atteindre les essais encore ouverts par des retours observés
+
+SIC repère une ouverture candidate et compare les quatre directions dans les états observés. Aux commandes 9 et 10, la stratégie de déplacement couplé compare le mouvement des deux pièces, puis les essais près de l'ouverture reprennent. La commande 22 laisse la grille inchangée. SIC change de direction aux commandes 23 et 24, puis la commande 25 produit la victoire officielle. Le rôle de l'ouverture reste à établir.
+
+Le niveau est gagné avec les règles existantes de SIC.
+
+Le premier rejeu au budget de 360 s s'arrête après 453 commandes du niveau 6. Ses 532 commandes, observations et animations correspondent exactement au préfixe de référence. Le rejeu qualifié reprend le budget de référence d'AS66, soit 720 s de temps actif et 600 commandes par niveau, avec un seul processus.
+
+Le niveau 7 gagne en **25 commandes et 19,35 s**. Les **565 commandes** des six premiers niveaux conservent leurs empreintes, animations comprises. Les 590 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 7. Empreinte chronologique `650a8658a84de54ce833875dcc6689ed310f629e8f57b14ce010dc6ed764098c`.
