@@ -161,13 +161,21 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
 function measureReturn({ local, body, selecting }: Proposal, first: NativeRows, second: NativeRows) {
   const [l, t, r, b] = local.scene.field;
   const painted = new Set(selecting ? [] : body.cells.map(point => point.join(',')));
+  let additionalRegions = 0;
+  if (!selecting) for (const region of local.scene.bodies) {
+    if (region === body || region.target !== body.target
+      || !region.cells.every(point => at(second, point) === body.target)
+      || region.cells.every(point => at(first, point) === body.target)) continue;
+    additionalRegions++;
+    for (const point of region.cells) painted.add(point.join(','));
+  }
   let preserved = true, expectedValueObserved = selecting
     ? activePigment(second, local.scene.wells) === body.target : true;
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
     if (painted.has(`${x},${y}`)) expectedValueObserved &&= second[y]?.[x] === body.target;
     else preserved &&= second[y]?.[x] === first[y]![x];
   }
-  return { preserved, expectedValueObserved };
+  return { preserved, expectedValueObserved, ...(additionalRegions ? { additionalRegions } : {}) };
 }
 
 function returned(proposal: Proposal, first: NativeRows, second: NativeRows) {

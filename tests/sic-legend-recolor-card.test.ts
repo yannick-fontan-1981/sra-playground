@@ -70,3 +70,33 @@ test('palette ink inside a legend symbol describes the matching pocket', () => {
   assert.deepEqual({ region: pockets[0].bbox, example: pockets[0].example, target: pockets[0].target },
     { region: [11, 11, 14, 14], example: [2, 9, 4, 11], target: 5 });
 });
+
+test('aligned pockets reveal an example whose contour shares the legend backdrop', () => {
+  const rows = Array.from({ length: 44 }, () => Array<number>(40).fill(0));
+  for (let y = 0; y < 35; y++) {
+    rows[y]!.fill(1, 0, 5);
+    rows[y]![5] = 4;
+  }
+  rows[35]!.fill(4);
+  function strip(left: number, top: number, count: number, contour: number, pocket: number) {
+    for (let i = 0; i <= count * 2; i++) {
+      rows[top + i]!.fill(contour, left, left + 3);
+      if (i % 2) rows[top + i]![left + 1] = pocket;
+    }
+  }
+  strip(1, 3, 2, 2, 1);
+  strip(1, 11, 3, 1, 7);
+  strip(1, 21, 4, 3, 1);
+  strip(15, 10, 3, 6, 0);
+  for (const [i, color] of [1, 2, 3, 6, 7].entries()) for (let y = 39; y < 42; y++) {
+    rows[y]!.fill(color, 2 + i * 6, 5 + i * 6);
+  }
+  const read = () => measure(rows, { observation_ref: 'visible-pocket-pattern' }, [], { examples: true });
+  const scene = read();
+  assert.deepEqual(scene?.mapping, { 2: 2, 3: 1, 4: 3 });
+  const pockets = scene?.bodies.filter((body: { relation_kind: string }) => body.relation_kind === 'pocket');
+  assert.equal(pockets?.length, 3);
+  assert.ok(pockets.every((body: { target: number }) => body.target === 7));
+  rows[14]![2] = 1;
+  assert.equal(read(), null);
+});

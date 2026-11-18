@@ -145,6 +145,46 @@ function uniformPocketColor(rows: NativeRows, topology: R, palette: ReadonlySet<
   return pixels.size === 1 && hue !== undefined && palette.has(hue) ? hue : null;
 }
 
+type PocketStrip = { bbox: number[]; lane: number; pitch: number; count: number; topMargin: number; bottomMargin: number };
+
+function pocketStrip(example: R, topology: R): PocketStrip | null {
+  const masks = topology.pocket_masks as Point[][];
+  if (masks.length < 2 || masks.some(mask => mask.length !== 1)) return null;
+  const [left, top, right, bottom] = example.bbox as [number, number, number, number];
+  const sites = masks.map(mask => mask[0]!).sort(([a], [b]) => a - b);
+  const [first, lane] = sites[0]!, pitch = sites[1]![0] - first;
+  if (pitch < 2 || 2 * lane !== left + right || sites.some(([y, x], i) => x !== lane || y !== first + pitch * i)) return null;
+  return { bbox: example.bbox, lane, pitch, count: sites.length, topMargin: first - top, bottomMargin: bottom - sites.at(-1)![0] };
+}
+
+/** Paired visible strips constrain the geometry of pockets in a contour that shares the backdrop. */
+function examplesOnBackdrop(rows: NativeRows, samples: R[], topologies: ReadonlyMap<R, R>, backdrop: R) {
+  const strips = samples.flatMap(example => {
+    const strip = pocketStrip(example, topologies.get(example)!);
+    return strip ? [strip] : [];
+  }).sort((a, b) => a.bbox[1]! - b.bbox[1]!);
+  const inferred: { bbox: number[]; dots: R[]; count: number; color: number }[] = [];
+  for (let i = 1; i < strips.length; i++) {
+    const above = strips[i - 1]!, below = strips[i]!, { lane, pitch, topMargin, bottomMargin } = above;
+    if (lane !== below.lane || pitch !== below.pitch || topMargin !== below.topMargin || bottomMargin !== below.bottomMargin
+      || above.bbox[0] !== below.bbox[0] || above.bbox[2] !== below.bbox[2] || Math.abs(above.count - below.count) < 2) continue;
+    const dots = samples.filter(item => item.cells.length === 1 && item.bbox[0] === lane
+      && item.bbox[1] > above.bbox[3]! && item.bbox[1] < below.bbox[1]!).sort((a, b) => a.bbox[1] - b.bbox[1]);
+    if (dots.length <= Math.min(above.count, below.count) || dots.length >= Math.max(above.count, below.count)) continue;
+    const [x, y] = dots[0]!.cells[0] as Point, color = dots[0]!.value as number;
+    if (dots.some((dot, j) => dot.value !== color || dot.bbox[1] !== y + j * pitch)) continue;
+    const left = above.bbox[0]!, right = above.bbox[2]!, top = y - topMargin, bottom = dots.at(-1)!.bbox[1] + bottomMargin;
+    if (top <= above.bbox[3]! || bottom >= below.bbox[1]!) continue;
+    const cavities = new Set(dots.map(dot => key(dot.cells[0])));
+    let matches = true;
+    for (let row = top; row <= bottom; row++) for (let col = left; col <= right; col++) {
+      if (rows[row]?.[col] !== (col === x && cavities.has(key([col, row])) ? color : backdrop.value)) matches = false;
+    }
+    if (matches) inferred.push({ bbox: [left, top, right, bottom], dots, count: dots.length, color });
+  }
+  return inferred;
+}
+
 export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], options?: { examples?: boolean }): R | null {
   if (!rows.length || !rows[0]?.length) return null;
   const height = rows.length, width = rows[0].length, cc = components(rows), groups = new Map<string, R[]>();
@@ -180,9 +220,14 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], opt
           const visibleExamples = options?.examples
             ? samples.filter(component => !component.cells.every((point: number[]) => enclosed.has(key(point)))) : samples;
           if (visibleExamples.length < 2) continue;
+          const legendOuter = legendParts.filter(c => containsCorners(c, lb));
+          const backdrop = options?.examples && legendOuter.length === 1 && palette.has(legendOuter[0]!.value) ? legendOuter[0] : undefined;
+          const inferred = backdrop ? examplesOnBackdrop(rows, visibleExamples, legendTopology, backdrop) : [];
+          const dots = new Set(inferred.flatMap(example => example.dots));
           const mapping: R = {}, examples: R = {}, pocketColors = new Map<string, number | null>();
           let valid = true;
           for (const c of visibleExamples) {
+            if (dots.has(c)) continue;
             const topology = legendTopology.get(c) ?? pockets(c, obs.observation_ref);
             const n = String(topology.pocket_count);
             if (Object.hasOwn(mapping, n) && mapping[n] !== c.value) { valid = false; break; }
@@ -192,6 +237,13 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], opt
               const color = uniformPocketColor(rows, topology, palette);
               pocketColors.set(n, pocketColors.has(n) && pocketColors.get(n) !== color ? null : color);
             }
+          }
+          for (const example of inferred) {
+            const n = String(example.count);
+            if (Object.hasOwn(mapping, n)) { valid = false; break; }
+            mapping[n] = backdrop!.value;
+            examples[n] = example.bbox;
+            pocketColors.set(n, example.color);
           }
           if (!valid) continue;
           const bodies: R[] = [], parts = components(rows, fb), boundary = parts.filter(c => containsCorners(c, fb)), holes = new Set<string>();
@@ -208,9 +260,9 @@ export function measure(rows: NativeRows, obs: R, writes: readonly R[] = [], opt
               relation_kind: 'shell', partial_topology: pk.complete_object_topology === false });
           }
           if (!bodies.length) continue;
-          const legendOuter = legendParts.filter(c => containsCorners(c, lb)), shellsMatch = bodies.every(c => c.value === c.target);
+          const shellsMatch = bodies.every(c => c.value === c.target);
           if (boundary.length === 1 && legendOuter.length === 1 && palette.has(legendOuter[0]!.value)
-            && !Object.values(mapping).includes(legendOuter[0]!.value)) {
+            && (inferred.length || !Object.values(mapping).includes(legendOuter[0]!.value))) {
             bodies.push({ ...boundary[0], target: legendOuter[0]!.value,
               ...(options?.examples ? { example: legendOuter[0]!.bbox } : {}), pocket_count: null, relation_kind: 'surround',
               partial_topology: false, shells_currently_match: shellsMatch, evidence: { source_sample: legendOuter[0],
