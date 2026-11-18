@@ -2097,3 +2097,11 @@ Le rejeu chronologique gagne en **47 commandes et 10,29 s** pour le niveau 6, au
 Lorsque le catalogue complet est reconnu et que le niveau précédent a confirmé l'effet cyclique d'au moins deux clics sur des commandes distinctes, SIC peut proposer le premier test selon l'ordre de la légende actuelle. Au niveau 6, les clics **1, 3 et 9** calibrent les trois commandes. Chaque retour doit confirmer la valeur suivante et l'ajout de la configuration affichée. À partir de la configuration déjà active, les **26 clics** visitent chacun une configuration supplémentaire.
 
 Le rejeu chronologique gagne en **26 clics et 9,37 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **64 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 90 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `80c6811d4aa24dc191d81b44e45949e23dea345b57f40eb5d3ff846703cad585`. TypeScript et les **9 tests ciblés** passent. La couverture atteint **561/636 niveaux (88,2 %)**, dont **62/99 niveaux 6 (62,6 %)**.
+
+### SMLP niveau 6, vérifier les réglages d'un réseau périodique plus large
+
+La perception mesure cinq pièces, treize portes et trois sas périodiques. La limite historique de douze portes excluait le réseau. SIC accepte jusqu'à quatorze portes pour un réseau à sas périodiques, avec au plus 16 384 configurations de commande et contrôle de l'échéance pendant le calcul.
+
+Le premier lancement fournit **91 images**. SIC mesure les fenêtres des sas et prédit une arrivée commune au **battement 24** pour les **huit ordres de trajet** compatibles avec les observations. Il vérifie ensuite les sept réglages. La **commande 6** confirme qu'un clic ferme une porte et en ouvre une autre. Le deuxième lancement fournit **81 images** et valide la victoire.
+
+Le rejeu chronologique gagne en **9 commandes et 33,78 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **50 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 59 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `33d7136b5bea083f7c96ea319990fa6a64258eb902eaf9b583cc658a47719d24`. TypeScript et les **10 tests ciblés** passent. La couverture atteint **562/636 niveaux (88,4 %)**, dont **63/99 niveaux 6 (63,6 %)**.
