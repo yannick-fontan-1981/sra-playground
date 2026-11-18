@@ -2,7 +2,7 @@ import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts
 import { projectPursuit, projectRetreat, pursuitDirections, pursuitPointKey, pursuitStateKey,
   type PursuitDirection, type PursuitState, type PursuitTerrain } from './pursuit-forecast.ts';
 
-export type GripTerrain = PursuitTerrain & { obstacle: number; wall: number; floor: number; fixed: NativePoint[] };
+export type GripTerrain = PursuitTerrain & { obstacle: number; wall: number; floor: number; fixed: NativePoint[]; peerInks?: number[] };
 export type GripState = PursuitState & { held: NativePoint | null };
 type GripInput = PursuitDirection[0] | 'ACTION5';
 export type GripLeg = { input: GripInput; expected: GripState };
@@ -17,7 +17,7 @@ function retreatAfterContact(actor: NativePoint, peers: NativePoint[], obstacles
   const survivors = peers.flatMap(peer => {
     if (!same(peer, actor)) return [peer];
     const escapes = order.map(direction => shift(peer, direction, terrain.pitch));
-    const escape = escapes.find(cell => terrain.cells[pursuitPointKey(cell)] && !has(obstacles, cell));
+    const escape = escapes.find(cell => terrain.cells[pursuitPointKey(cell)] && !has(obstacles, cell) && !has(peers, cell));
     return escape ? [escape] : [];
   });
   return projectRetreat(actor, survivors, obstacles, terrain, order);
@@ -36,7 +36,7 @@ export function readGripState(rows: NativeRows, terrain: GripTerrain, heldInk?: 
     if (ink === terrain.floor) continue;
     if (ink === undefined || !uniform(point, ink)) return null;
     if (ink === terrain.actor) actors.push(point);
-    else if (ink === terrain.peer) peers.push(point);
+    else if (ink === terrain.peer || terrain.peerInks?.includes(ink)) peers.push(point);
     else if (ink === terrain.obstacle) obstacles.push(point);
     else {
       if (held || heldInk !== undefined && ink !== heldInk) return null;
@@ -44,7 +44,7 @@ export function readGripState(rows: NativeRows, terrain: GripTerrain, heldInk?: 
       actualInk = ink;
     }
   }
-  if (actors.length !== 1 || peers.length > 1 || !obstacles.length) return null;
+  if (actors.length !== 1 || peers.length > 3 || !obstacles.length) return null;
   const actor = actors[0]!;
   if (held && Math.abs(held[0] - actor[0]) + Math.abs(held[1] - actor[1]) !== terrain.pitch) return null;
   return { state: { actor, peers: sorted(peers), obstacles: sorted(obstacles), held }, heldInk: actualInk };
@@ -90,7 +90,7 @@ export function planGrippedPursuit(start: GripState, terrain: GripTerrain, order
       const expected = projectGrip(at, terrain, order, direction);
       if (!expected) continue;
       const next: Search = { at: expected, input, parent: i, depth: depth + 1 };
-      if (expected.peers.length < start.peers.length) {
+      if (expected.peers.length === 0) {
         const legs: GripLeg[] = [];
         for (let node = next; node.parent >= 0; node = nodes[node.parent]!) legs.push({ input: node.input, expected: node.at });
         return legs.reverse();

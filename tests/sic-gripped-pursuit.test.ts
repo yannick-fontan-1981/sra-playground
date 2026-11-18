@@ -25,3 +25,16 @@ test('the carried state is read from a distinct observed color and checked again
   rows[0]![0] = 0;
   assert.equal(readGripState(rows, terrain), null);
 });
+
+test('a second reactive sprite occupies the escape cell and the plan reaches both', () => {
+  const rows = [[3, 8], [0, 7], [0, 5], [0, 14], [0, 2]];
+  const terrain = { ...corridor, peerInks: [7, 8], cells: { ...corridor.cells, '1,4': true } };
+  const start = readGripState(rows, terrain)?.state;
+  assert.ok(start);
+  assert.deepEqual(start.peers, [[1, 0], [1, 1]]);
+  assert.equal(planGrippedPursuit(start, terrain, pursuitDirections, new Set(), 1), null);
+
+  const plan = planGrippedPursuit(start, terrain, pursuitDirections, new Set(), 2);
+  assert.deepEqual(plan?.map(leg => leg.input), ['ACTION1', 'ACTION1']);
+  assert.deepEqual(plan?.map(leg => leg.expected.peers), [[[1, 0]], []]);
+});

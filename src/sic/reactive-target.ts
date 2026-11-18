@@ -53,7 +53,7 @@ function permutations(directions: readonly Direction[]): Direction[][] {
   return directions.flatMap(direction => permutations(directions.filter(d => d !== direction)).map(rest => [direction, ...rest]));
 }
 
-function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles, withWalls = false): Layout | null {
+function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles, withWalls = false, retainedGrip?: GripTerrain): Layout | null {
   const candidates: Layout[] = [];
   const boards = parts.filter(p => width(p.bbox) === height(p.bbox) && width(p.bbox) >= 20
     && p.bbox[0] > 0 && p.bbox[1] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[3] < rows.length - 3
@@ -78,6 +78,9 @@ function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles, withWa
         for (const tag of indicators) if (tag.area === size * (size - 1) && ![roles.actor, roles.obstacle, board.color].includes(tag.color)) {
           wallCandidates.set(tag.color, []);
         }
+        if (retainedGrip?.pitch === pitch && ![roles.actor, roles.obstacle, board.color].includes(retainedGrip.wall)) {
+          wallCandidates.set(retainedGrip.wall, []);
+        }
         for (let y = top + 1; y < bottom; y += pitch) for (let x = left + 1; x < right; x += pitch) {
           const ink = rows[y]![x]!, sites = wallCandidates.get(ink);
           if (sites && rows.slice(y, y + size).every(row => row.slice(x, x + size).every(value => value === ink))) sites.push([x, y]);
@@ -88,8 +91,11 @@ function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles, withWa
       const actors = single.filter(p => (!roles || p.color === roles.actor)
         && indicators.some(tag => tag.color === p.color && tag.area === size * (size - 1)));
       if (actors.length !== 1) continue;
-      const actor = actors[0]!, candidatesForPeer = single.filter(p => p !== actor && p.color !== walls[0]?.[0]);
-      if (withWalls && candidatesForPeer.length !== 1) continue;
+      const actor = actors[0]!;
+      const candidatesForPeer = retainedGrip
+        ? pieces.filter(p => ![actor.color, roles?.obstacle, walls[0]?.[0]].includes(p.color))
+        : single.filter(p => p !== actor && p.color !== walls[0]?.[0]);
+      if (withWalls && (candidatesForPeer.length < 1 || candidatesForPeer.length > (retainedGrip ? 3 : 1))) continue;
       const peer = roles && !withWalls ? groups.get(roles.peer)![0]! : candidatesForPeer[0]!;
       const cells: Record<string, boolean> = {};
       for (let y = top + 1; y < bottom; y += pitch) {
@@ -101,7 +107,9 @@ function layoutFor(rows: NativeRows, parts: Part[], roles?: PursuitRoles, withWa
       if (!cells[key(point(actor.bbox))] || !cells[key(point(peer.bbox))] || Object.keys(cells).length > 128) continue;
       const fixed = walls[0]?.[1];
       if (fixed) for (const site of fixed) delete cells[key(site)];
+      const peerInks = [...new Set(candidatesForPeer.map(candidate => candidate.color))];
       const grip = fixed ? { actor: actor.color, peer: peer.color, pitch, size, cells, fixed,
+        ...(peerInks.length > 1 ? { peerInks } : {}),
         obstacle: obstacles[0]!.color, wall: walls[0]![0], floor: board.color } : undefined;
       candidates.push({ actor: actor.color, peer: peer.color, pitch, size, bounds: board.bbox, cells,
         goals: obstacles.map(p => point(p.bbox)), ...(grip ? { grip } : {}) });
@@ -200,14 +208,16 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       if (witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed) {
         if (observation.available_action_refs.includes('ACTION5')) {
           const prior = grip?.epoch === observation.level_epoch ? grip : null;
+          const transferred = grip?.epoch === observation.level_epoch - 1 ? grip.terrain : undefined;
           const hasActiveRoute = pursuit?.epoch === observation.level_epoch || memory?.epoch === observation.level_epoch;
-          const terrain = prior?.terrain ?? (!hasActiveRoute ? layoutFor(rows, parts, witness.roles, true)?.grip : undefined);
-          const observed = terrain && !prior?.blocked && (prior || terrain.peer !== witness.roles.peer)
+          const terrain = prior?.terrain ?? (!hasActiveRoute ? layoutFor(rows, parts, witness.roles, true, transferred)?.grip : undefined);
+          const observed = terrain && !prior?.blocked && (prior || transferred || terrain.peer !== witness.roles.peer)
             ? readGripState(rows, terrain, prior?.heldInk) : null;
           const cached = observed && prior?.at && prior.plan.length <= remaining && gripStateMatches(observed.state, prior.at) ? prior.plan : [];
           const legs = observed && terrain ? cached.length ? cached
             : planGrippedPursuit(observed.state, terrain, witness.order, new Set(prior?.rejected), remaining,
-              () => execution?.signal?.aborted === true) : null;
+              () => !!execution?.signal?.aborted || (execution?.deadlineMs !== undefined
+                && (execution.now ?? (() => performance.now()))() >= execution.deadlineMs)) : null;
           const step = legs?.[0];
           if (step && observed && terrain) {
             const local = prior ?? { epoch: observation.level_epoch, terrain, refs: witness.refs, rejected: [], plan: [], blocked: false };
@@ -218,7 +228,11 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
             const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
             const strategy = toggle ? knownInteraction ? 'P02' : 'P05' : 'P07';
             if (decision?.result !== strategy) return null;
-            const action = { action_ref: step.input, data: {} }, actions = [action], parent = 'G_official_completion';
+            const directionCount = legs.findIndex(leg => leg.input === 'ACTION5');
+            const length = observed.state.peers.length > 1 && !toggle
+              ? Math.min(maximumCommittedActions, directionCount < 0 ? legs.length : directionCount) : 1;
+            const actions = legs.slice(0, length).map(leg => ({ action_ref: leg.input, data: {} }));
+            const parent = 'G_official_completion';
             const situation = toggle ? observed.state.held ? 'Leave the carried stone in a position that restricts retreat'
               : 'Check whether the adjacent stone can move with the actor'
               : observed.state.held ? 'Move while checking both the actor and the carried stone against the walls'
@@ -229,7 +243,8 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
             const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
             const id = 'gripped-pursuit:' + need.id;
             return { status: 'proposed', kind: family, actions, grip: { local, observed: observed.state, legs }, needId: need.id,
-              binding: { observation_ref: ref, level_epoch: observation.level_epoch }, steps: [{ action, expected_after: step.expected }],
+              binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+              steps: actions.map((action, index) => ({ action, expected_after: legs[index]!.expected })),
               sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
                 edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
               sicSituationCard: { strategy, need: 'Reach the fleeing sprite using the available space', situation, evidence, agenda: [], mode,
@@ -382,6 +397,13 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       };
     },
     before(proposal, index, packet, observation) {
+      if (proposal.grip && index > 0) {
+        const { local, legs } = proposal.grip;
+        const actual = readGripState(packet.frame_rows, local.terrain, grip?.heldInk ?? local.heldInk);
+        const admitted = proposal.binding?.level_epoch === observation.level_epoch
+          && !!actual && gripStateMatches(actual.state, legs[index - 1]!.expected);
+        return { admitted, reason: admitted ? 'gripped_pursuit_context_confirmed' : 'gripped_pursuit_context_changed' };
+      }
       const previous = !proposal.crowd && !proposal.grip && proposal.walk?.[index - 1];
       const scene = previous && !proposal.crowd && !proposal.grip && proposal.obstacle !== undefined
         ? readPursuitState(packet.frame_rows, proposal.local.layout, proposal.obstacle) : null;
@@ -395,9 +417,11 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.grip) {
         const { local, legs } = proposal.grip;
-        const actual = readGripState(second, local.terrain, local.heldInk);
-        const matched = !!actual && gripStateMatches(actual.state, legs[0]!.expected);
-        return { matched, seal_prefix: true, reason: matched ? 'gripped_pursuit_forecast_confirmed' : 'gripped_pursuit_response_diverged_replan' };
+        const heldInk = index > 0 ? grip?.heldInk ?? local.heldInk : local.heldInk;
+        const actual = readGripState(second, local.terrain, heldInk);
+        const matched = before.state === after.state && !!actual && gripStateMatches(actual.state, legs[index]!.expected);
+        return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
+          reason: matched ? 'gripped_pursuit_forecast_confirmed' : 'gripped_pursuit_response_diverged_replan' };
       }
       if (proposal.crowd) {
         const { local, obstacle, move } = proposal.crowd;
@@ -418,7 +442,8 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
     },
     record(before, after, _action, first, second, proposal, index) {
       if (proposal.grip) {
-        const { local, observed, legs } = proposal.grip, step = legs[0]!;
+        const { observed, legs } = proposal.grip, step = legs[index]!;
+        const local = index > 0 && grip ? grip : proposal.grip.local;
         if (after.levels_completed > before.levels_completed && witness && !step.expected.peers.length) {
           const { actor, peer, obstacle } = local.terrain;
           witness = { ...witness, epoch: after.level_epoch, score: after.levels_completed, roles: { actor, peer, obstacle },
@@ -429,9 +454,9 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
         const matched = !!actual && gripStateMatches(actual.state, step.expected);
         const heldInk = actual?.heldInk ?? local.heldInk;
         grip = { ...local, ...(actual ? { at: actual.state } : {}), ...(heldInk === undefined ? {} : { heldInk }),
-          plan: matched ? legs.slice(1) : [], blocked: !actual,
+          plan: matched ? legs.slice(index + 1) : [], blocked: !actual,
           refs: [...local.refs.slice(-4), after.observation_ref],
-          rejected: matched ? local.rejected : [...local.rejected.slice(-31), gripTrialKey(observed, step.input)] };
+          rejected: matched ? local.rejected : [...local.rejected.slice(-31), gripTrialKey(legs[index - 1]?.expected ?? observed, step.input)] };
         return { events: [], ...(matched && step.input === 'ACTION5' ? { reviewEvidence: step.expected.held
           ? 'The adjacent stone entered the carried state at the measured offset.' : 'The stone returned to its free state at the intended cell.' } : {}) };
       }
