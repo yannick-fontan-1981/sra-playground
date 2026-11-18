@@ -62,8 +62,8 @@ export function carriedBandInks(rows: NativeRows, body: BodyOnSurface, transport
   }))];
 }
 
-export function readGlyph(rows: NativeRows, box: NativeBox, scale: number): Glyph | null {
-  const [l, t, r, b] = box, ground = rows[t]?.[l];
+export function readGlyph(rows: NativeRows, box: NativeBox, scale: number, knownGround?: number): Glyph | null {
+  const [l, t, r, b] = box, ground = knownGround ?? rows[t]?.[l];
   const points: NativePoint[] = [], colors = new Set<number>();
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
     const color = rows[y]![x]!;

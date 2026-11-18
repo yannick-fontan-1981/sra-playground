@@ -18,6 +18,8 @@ import { carriedBandInks, chooseGlyphRoute, observeGlyphRoute, readGlyphRoute,
   type GlyphRouteMemory, type GlyphRouteState, type GlyphRouteStep } from './managed-glyph-access.ts';
 import { chooseGlyphWorkshopStep, observeGlyphWorkshop, readGlyphWorkshop,
   type GlyphWorkshopState, type GlyphWorkshopStep } from './managed-glyph-workshop.ts';
+import { chooseFogGlyphStep, fogGlyphPrediction, observeFogGlyphStep, readFogGlyphRoute,
+  type FogGlyphCarry, type FogGlyphRoute, type FogGlyphStep } from './fog-glyph-route.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 
 export const framedContactId = 'sic_framed_contact';
@@ -53,7 +55,7 @@ type Proposal = NativeProposal & { action: Direction; plan: Plan | null; target:
   inset: Inset | null; beneath?: number[]; adoptedBody?: Body; needId: string; pair: MorphologyPair | null;
   managed?: ManagedFramedPlan; rotation?: FramedRotation; cycle?: { local: CycleState; step: CycleStep };
   composite?: { local: CompositeCycleState; step: CompositeCycleStep }; glyphRoute?: { local: GlyphRouteState; step: GlyphRouteStep };
-  glyphWorkshop?: { local: GlyphWorkshopState; step: GlyphWorkshopStep } };
+  glyphWorkshop?: { local: GlyphWorkshopState; step: GlyphWorkshopStep }; fogGlyph?: { local: FogGlyphRoute; step: FogGlyphStep } };
 const empty = (epoch = 0): State => ({ epoch, body: null, target: null, surface: null, inset: null, beneath: null,
   trials: [], blocked: [], tested: [], crossed: [], count: 0 });
 const footprint = ([x, y]: NativePoint, pitch: number): NativeBox => [x, y, x + pitch - 1, y + pitch - 1];
@@ -244,10 +246,60 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
   let glyphMemory: GlyphRouteMemory | null = null;
   let glyphRoute: GlyphRouteState | null = null;
   let glyphWorkshop: GlyphWorkshopState | null = null;
+  let fogCarry: { epoch: number; knowledge: FogGlyphCarry } | null = null;
+  let fogGlyph: FogGlyphRoute | null = null;
+  function offerFogGlyph(observation: NativeObservation, rows: NativeRows, available: readonly string[], remaining: number,
+    mode: ReasoningMode = 'solving'): Proposal | null {
+    if (fallback || fogCarry?.epoch !== observation.level_epoch || remaining < 1) return null;
+    const ref = observation.observation_ref;
+    const local = fogGlyph?.epoch === observation.level_epoch ? fogGlyph : readFogGlyphRoute(rows, fogCarry.knowledge, observation.level_epoch, ref);
+    const step = local && chooseFogGlyphStep(local, available, remaining);
+    if (!local || !step) return null;
+    const { pitch } = local.carry.memory;
+    const projection = fogGlyphPrediction(local, step);
+    const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(projection?.refs ?? [])].filter(previous => previous !== ref))];
+    const effectKnown = projection && (step.effect !== 'rotation' || step.rotationConfidence === 1);
+    const probe = !!step.band || !!step.effect && step.effect !== 'charge' && step.effect !== 'transport' && !effectKnown;
+    const interaction = !!step.effect && !probe;
+    const offer = { input: step.action, expected: step.to, evidence };
+    const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: probe ? offer : null,
+      access: probe || interaction ? null : offer, interaction: interaction ? offer : null });
+    if (!selected) return null;
+    const needs = {
+      discover_exit: 'Reveal the matching exit while keeping enough reserve',
+      discover_station: 'Reveal a route to the missing station',
+      shape: 'Prepare the matching shape',
+      color: 'Prepare the matching color',
+      rotation: 'Align the motif with the remembered exit',
+      recharge: 'Restore the reserve to continue the route',
+      exit: 'Return to the remembered exit with the matching motif',
+    };
+    const reason = step.band ? 'Measure the landing beyond the visible transport strip'
+      : step.effect === 'charge' ? 'Collect a recharge recorded on the map' : needs[step.need];
+    const objective = { kind: 'match_pattern_with_partial_visibility', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['remembered_cells', 'remaining_reserve', 'matching_motif'], parentObjective: 'G_official_completion',
+      satisfactionContract: 'official_progress_after_matching_the_remembered_exit' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+    const id = family + ':' + need.id, action = { action_ref: step.action, data: {} };
+    const target = local.target?.box ?? null;
+    return { status: 'proposed', kind: family, action: step.action, plan: null, target, surface: null, inset: null, pair: null,
+      fogGlyph: { local, step }, needId: need.id, binding: { observation_ref: ref, level_epoch: local.epoch }, actions: [action],
+      steps: [{ action, expected_after: { landing: step.band ? null : step.to, glyph: effectKnown ? projection.glyph : null } }],
+      sicSituationCard: { strategy: selected.id, need: needs[step.need], situation: reason, mode, evidence, agenda: entries,
+        triggerCard: card, focus: footprint(local.at, pitch), landing: footprint(step.to, pitch), target,
+        addressedRegion: footprint(step.target, pitch), reserve: local.units, steps: step.distance,
+        carriedGlyph: local.glyph, ...(effectKnown ? { predictedGlyph: projection.glyph } : {}) },
+      question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: reason, relations: ['contributes_to:' + objective.parentObjective] }],
+      sicLocalDecision: { strategy: selected.id, objective: { id, label: navigationPrimitives[selected.id], parent: objective.parentObjective }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: objective.parentObjective, purpose: reason,
+        preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+  }
   function offerGlyphRoute(observation: NativeObservation, rows: NativeRows, available: readonly string[], remaining: number,
     mode: ReasoningMode | undefined,
   ): Proposal | null {
-    if (fallback || glyphMemory?.epoch !== observation.level_epoch - 1 || available.length !== 4 || remaining < 1) return null;
+    if (fallback || available.length !== 4 || remaining < 1) return null;
+    if (glyphMemory?.epoch !== observation.level_epoch - 1) return offerFogGlyph(observation, rows, available, remaining, mode);
     const currentWorkshop = glyphWorkshop?.epoch === observation.level_epoch ? glyphWorkshop : null;
     const local = currentWorkshop ? null : glyphRoute?.epoch === observation.level_epoch ? glyphRoute
       : readGlyphRoute(rows, glyphMemory, observation.level_epoch, transfer?.rotation, glyphRoute?.colorEffects);
@@ -452,6 +504,11 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
           && pixelsAt(second, walk.from, body.pitch).some((pixel, i) => pixel !== prior[i]);
         return { matched, seal_prefix: !matched, reason: matched ? 'declared_bfs_translation_confirmed' : 'declared_bfs_translation_diverged' };
       }
+      if (proposal.fogGlyph && !scored) {
+        const { local, step } = proposal.fogGlyph;
+        const observed = observeFogGlyphStep(second, local, step, after.observation_ref);
+        return { matched: observed?.matched ?? false, seal_prefix: true, reason: observed?.evidence ?? 'partial_map_landing_unresolved' };
+      }
       if (proposal.glyphRoute && !scored) {
         const { local, step } = proposal.glyphRoute;
         const from = step.walk?.[index - 1]?.step;
@@ -496,7 +553,28 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       if (proposal.cycle) proposal = { ...proposal, cycle: {
         local: index > 0 && cycle ? cycle : proposal.cycle.local, step: cycleLeg(proposal.cycle.step, index) } };
       if (after.levels_completed > before.levels_completed) {
-        if (proposal.glyphWorkshop) return { events: [], reviewEvidence: 'All observed exit frames accepted their matching motifs.' };
+        if (proposal.fogGlyph) {
+          const { local } = proposal.fogGlyph;
+          fogCarry = { epoch: after.level_epoch, knowledge: { ...local.carry, shapes: local.shapes, colors: local.colors,
+            memory: { ...local.carry.memory, epoch: before.level_epoch, evidence: after.observation_ref } } };
+          return { events: [], reviewEvidence: 'The matching motif opened the exit retained on the partial map.' };
+        }
+        if (proposal.glyphWorkshop) {
+          const { local } = proposal.glyphWorkshop;
+          const { layout } = local;
+          if (transfer?.rotation) {
+            const { actor, pitch, floor, peerScale, reserve, bandInks, directions, stations, shownBox, display } = layout;
+            const priorReserve = glyphMemory?.reserve;
+            const sameMeter = priorReserve && priorReserve.row === reserve.row && priorReserve.left === reserve.left
+              && priorReserve.right === reserve.right && priorReserve.active === reserve.active && priorReserve.depleted === reserve.depleted;
+            const calibratedReserve = sameMeter ? { ...reserve, cost: Math.max(reserve.cost, priorReserve.cost) } : reserve;
+            fogCarry = { epoch: after.level_epoch, knowledge: {
+              memory: { epoch: before.level_epoch, evidence: after.observation_ref, actor, pitch, floor, peerScale, reserve: calibratedReserve, bandInks, directions },
+              display: { box: shownBox, scale: display.scale }, stations, shapes: local.shapes, colors: local.colors, rotation: transfer.rotation,
+            } };
+          }
+          return { events: [], reviewEvidence: 'All observed exit frames accepted their matching motifs.' };
+        }
         const transitions = proposal.composite?.local.transitions;
         if (proposal.composite && transitions) {
           const { local } = proposal.composite;
@@ -537,6 +615,12 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
         }
       }
       if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
+      if (proposal.fogGlyph) {
+        const { local, step } = proposal.fogGlyph;
+        const observed = observeFogGlyphStep(second, local, step, after.observation_ref);
+        fogGlyph = observed?.state ?? { ...local, stopped: true };
+        return { events: [], ...(observed ? { reviewEvidence: observed.evidence } : {}) };
+      }
       if (proposal.glyphWorkshop) {
         const { local, step } = proposal.glyphWorkshop;
         const current = index > 0 && glyphWorkshop?.epoch === before.level_epoch ? glyphWorkshop : local;
@@ -651,11 +735,11 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       return { events: [] };
     },
     state: () => ({ ...state, transfer, reserveMeter: transfer ? meter.state() : null, gauge, cycleModel, cycle, compositeModel, composite, glyphMemory, glyphRoute,
-      ...(glyphWorkshop ? { glyphWorkshop } : {}) }),
+      ...(glyphWorkshop ? { glyphWorkshop } : {}), ...(fogCarry ? { fogCarry } : {}), ...(fogGlyph ? { fogGlyph } : {}) }),
     restore(value: NativeRecord) {
       const { transfer: savedTransfer, reserveMeter, gauge: savedGauge, cycleModel: savedModel, cycle: savedCycle,
         compositeModel: savedCompositeModel, composite: savedComposite, glyphMemory: savedGlyphMemory, glyphRoute: savedGlyphRoute,
-        glyphWorkshop: savedGlyphWorkshop,
+        glyphWorkshop: savedGlyphWorkshop, fogCarry: savedFogCarry, fogGlyph: savedFogGlyph,
         ...local } = structuredClone(value);
       state = local as State;
       transfer = (savedTransfer ?? null) as Transfer | null;
@@ -667,6 +751,8 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       glyphMemory = (savedGlyphMemory ?? null) as GlyphRouteMemory | null;
       glyphRoute = (savedGlyphRoute ?? null) as GlyphRouteState | null;
       glyphWorkshop = (savedGlyphWorkshop ?? null) as GlyphWorkshopState | null;
+      fogCarry = (savedFogCarry ?? null) as typeof fogCarry;
+      fogGlyph = (savedFogGlyph ?? null) as FogGlyphRoute | null;
       meter = new ObservedMeter();
       if (reserveMeter) meter.restore(reserveMeter as ReturnType<ObservedMeter['state']>);
     },

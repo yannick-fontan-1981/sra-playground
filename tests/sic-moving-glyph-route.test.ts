@@ -1,9 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
-import { chooseGlyphRoute, observeGlyphRoute, type GlyphRouteState, type GlyphRouteStep } from '../src/sic/managed-glyph-access.ts';
+import { chooseGlyphRoute, observeGlyphRoute, readGlyph, type GlyphRouteState, type GlyphRouteStep } from '../src/sic/managed-glyph-access.ts';
 import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
 import { measureGlyphStationCycle, observeGlyphWorkshop, type GlyphWorkshopState } from '../src/sic/managed-glyph-workshop.ts';
+
+test('a glyph occupying the corner keeps its foreground when the display background is known', () => {
+  const rows = [[8, 8, 5, 5], [8, 8, 5, 5], [5, 5, 8, 8], [5, 5, 8, 8]];
+  assert.deepEqual(readGlyph(rows, [0, 0, 3, 3], 2, 5), { ink: 8, mask: '0,0;1,1' });
+});
 
 test('the joint station cycle is measured through occlusion using separated repeats', () => {
   const full: [number, number][][] = Array.from({ length: 6 }, (_, i) => [[i % 2, 0], [0, i % 3]]);
