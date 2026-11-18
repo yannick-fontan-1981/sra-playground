@@ -5,6 +5,8 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { PointSet } from '../src/logos-engine/v6-point-set.ts';
 import { rememberExposedMarkers } from '../src/sic/marker-layers.ts';
 import { nextMarkerMaterialMove } from '../src/sic/marker-material-route.ts';
+import { coversStopMarkers, planStopPlacement, stopEdgeKey, type StopLayout, type StopScene } from '../src/sic/marker-stop-placement.ts';
+import { observeStopPlacement, type StopMemory } from '../src/sic/marker-stop-planning.ts';
 
 function model(): ConstellationModel {
   return { targets: new Map([[9, new PointSet([[2, 2], [3, 2]])], [8, new PointSet([[5, 3], [5, 4]])]]),
@@ -54,4 +56,34 @@ test('two separately controlled bodies can divide a constellation of the same co
     assert.equal(next.key, 'right');
     assert.deepEqual(next.goal, [10, 5]);
   }
+});
+
+test('an obstructed outline can change its span and an obstructed line can stay while the other moves', () => {
+  const layout: StopLayout = { stop: [7, 7, 9, 9], stopColor: 6, cursorColor: 15, markerPixels: [], width: 16, height: 16 };
+  const motion: StopMemory['motion'] = [['up', [0, -1]], ['down', [0, 1]], ['left', [-1, 0]], ['right', [1, 0]]];
+  const frame: StopScene = { active: 0, pieces: [{ color: 8, shape: { kind: 'frame', box: [2, 6, 6, 10] },
+    markers: [[3, 5], [6, 5], [3, 10], [6, 10]] }] };
+  const route = planStopPlacement(layout, frame, motion, [])!;
+  assert.equal(route.length, 1);
+  assert.equal(route[0]!.effect, 'frame:horizontal');
+  assert.ok(coversStopMarkers(route[0]!.expected.pieces[0]!));
+
+  const unchanged = Array.from({ length: 16 }, () => Array<number>(16).fill(0));
+  for (let x = 2; x <= 6; x++) unchanged[6]![x] = unchanged[10]![x] = 8;
+  for (let y = 6; y <= 10; y++) unchanged[y]![2] = unchanged[y]![6] = 8;
+  for (let y = 7; y <= 9; y++) for (let x = 7; x <= 9; x++) unchanged[y]![x] = 6;
+  unchanged[8]![4] = 15;
+  const local: StopMemory = { epoch: 1, layout, scene: frame, motion, selector: 'next', route, refs: [], confirmed: [], rejected: [] };
+  const refuted = observeStopPlacement(local, route[0]!, unchanged, 'contact-did-not-deform');
+  assert.deepEqual(refuted.confirmed, []);
+  assert.deepEqual(refuted.rejected, [stopEdgeKey(frame, 'right')]);
+  assert.notEqual(planStopPlacement(layout, frame, motion, refuted.rejected)?.[0]?.action, 'right');
+
+  const cross: StopScene = { active: 0, pieces: [{ color: 9,
+    shape: { kind: 'cross', horizontal: [3, 6, 11], vertical: [3, 6, 9] }, markers: [[4, 6], [12, 6], [6, 3], [6, 9]] }] };
+  const slide = planStopPlacement(layout, cross, motion, [])!;
+  assert.equal(slide.length, 1);
+  assert.equal(slide[0]!.effect, 'cross:horizontal');
+  assert.deepEqual(slide[0]!.expected.pieces[0]!.shape,
+    { kind: 'cross', horizontal: [4, 6, 12], vertical: [3, 6, 9] });
 });
