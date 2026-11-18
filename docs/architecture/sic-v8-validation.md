@@ -2496,3 +2496,11 @@ Le rejeu de référence perd après 66 commandes. SIC transporte les motifs de s
 La commande 9 révèle la sortie après un transfert, puis SIC en conserve le motif et la position pendant ses détours. Le plan relie les stations de forme et de couleur aux recharges, mesure les positions successives du rotateur et vérifie les contacts qui déterminent l'orientation. Cinq recharges sont confirmées. SIC revient à la sortie avec le motif complet et la commande 107 termine le jeu.
 
 Le niveau 7 gagne en **107 commandes et 49,46 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **286 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 393 commandes relèvent de SIC seul. Empreinte chronologique `e61ef8392c5dbedaaa9952c27118f43d9b717110b5b0ce7d7a9239258f55c5a3`. TypeScript et les quatre tests ciblés passent.
+
+### G50T niveau 7, synchroniser deux transferts distincts
+
+Le rejeu de référence s'arrête après 81 commandes au niveau 7. Quand les deux liaisons sont visibles ensemble, le modèle perd leurs correspondances et ne suit pas le déplacement du porteur autonome. SIC distingue désormais chaque contact, sa paire de cadres et la zone d'animation qui permet de confirmer son effet.
+
+Depuis la zone du récepteur, SIC remonte vers le transfert nécessaire. L'accès à sa commande dépend d'un passage tenu ouvert à distance. Pour atteindre le contact qui tient ce passage, SIC mesure d'abord à la commande 3 le déplacement qui libère le trajet du porteur autonome. Son arrivée déclenche le premier transfert à la commande 8. Les commandes 11 et 26 enregistrent les deux contributions. Le second passage se confirme dans les animations de la commande 40, puis la commande 43 termine le jeu.
+
+Le niveau 7 gagne en **43 commandes et 33,50 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **252 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 295 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `389d74c0c13513eb3815a10a71e58a5b3f7df44d17b31d280988afe6b1df89e6`. TypeScript et les cinq tests ciblés passent.
