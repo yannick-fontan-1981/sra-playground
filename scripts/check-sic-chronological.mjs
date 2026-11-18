@@ -1,6 +1,6 @@
 // Reproduce SIC-only official-game chronology from level 1, stopping at the target victory.
 // Node 22+, repository root: node scripts/check-sic-chronological.mjs LP85 7 result.jsonl 1
-// Arguments: comma-separated games, target (1–7), local result path, budget worker count.
+// Arguments: comma-separated games, target (1–8), local result path, budget worker count.
 // One process runs games sequentially. No source-game logic or oracle is exposed to SIC.
 // Raw observations remain local; per-level prefixes hash actions and official returns.
 import {pathToFileURL} from 'node:url';
@@ -76,7 +76,7 @@ async function run(code,target,parallelWorkers) {
 const { appendFile } = await import('node:fs/promises');
 const target=Number(process.argv[3]);
 const parallelWorkers=Number(process.argv[5]);
-if (!Number.isInteger(target) || target < 1 || target > 7 || !Number.isInteger(parallelWorkers) || parallelWorkers<1) throw new Error('Invalid chronological campaign configuration');
+if (!Number.isInteger(target) || target < 1 || target > 8 || !Number.isInteger(parallelWorkers) || parallelWorkers<1) throw new Error('Invalid chronological campaign configuration');
 for (const code of process.argv[2].split(',')) {
   console.log(JSON.stringify({game:code,target,status:'started'}));
   try {
