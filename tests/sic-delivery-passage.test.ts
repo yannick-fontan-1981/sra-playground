@@ -59,3 +59,48 @@ test('read a receiver with a visible outline and a corner hidden by a framed par
   broken[8]![15] = 1;
   assert.equal(await provider.propose(await observe(broken, 3), broken, [], 80), null);
 });
+
+test('waiting near a delivered part and intercepting a frontal carrier are distinct steps', async () => {
+  const rows = Array.from({ length: 28 }, () => Array<number>(32).fill(1));
+  for (let y = 12; y < 16; y++) for (let x = 8; x < 12; x++) rows[y]![x] = x === 11 ? 0 : 14;
+  for (let y = 16; y < 20; y++) for (let x = 16; x < 20; x++) {
+    rows[y]![x] = x === 16 || x === 19 || y === 16 || y === 19 ? 4 : 9;
+  }
+  for (let y = 16; y < 20; y++) rows[y]!.fill(15, 12, 16);
+  const observe = (frame_rows: number[][], revision: number) => measureNativeObservation({
+    frame_rows, frame_hash: String(revision), level: 2, levels_completed: 1, state: 'NOT_FINISHED',
+    available_action_refs: ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5'],
+  }, revision);
+  const observation = await observe(rows, 1);
+  const provider = createSicVerifyOrientedDelivery();
+  provider.restore({ state: {
+    epoch: observation.level_epoch, color: 14, held: null, invitation: null, free: {}, loaded: {}, tried: [], refs: [], count: 0,
+    geometry: { pitch: 4, phase: [0, 0], background: 1, core: 9, rest_shell: 4, insetFill: 2,
+      targets: [[1, 2]], initial_boxes: [[4, 4]], transferPads: [[4, 4]] },
+    interference: { ink: 15, ref: 'observed-carrier' }, transferEvidence: { part: [4, 4], ref: 'observed-transfer' },
+  } });
+  await provider.attachPrograms?.({
+    registerProgram: async () => ({ run: async () => ({ result: 'P05', receipt: {} }) }),
+  } as unknown as NativeProgramRegistry);
+
+  const pause = await provider.propose(observation, rows, [], 80);
+  assert.ok(pause);
+  assert.equal(pause.actions[0]?.action_ref, 'ACTION5');
+  assert.equal(pause.step.waitForTransport, true);
+  assert.equal(pause.step.intercept, undefined);
+
+  const next = structuredClone(rows);
+  for (let y = 16; y < 20; y++) next[y]!.fill(1, 12, 16);
+  for (let y = 12; y < 16; y++) for (let x = 12; x < 16; x++) {
+    next[y]![x] = x === 12 || x === 15 || y === 12 || y === 15 ? 7 : 15;
+  }
+  const approached = await observe(next, 2);
+  const outcome = await provider.after(pause, 0, observation, approached, rows, next);
+  assert.equal(outcome.reason, 'observed_carrier_rendezvous_turn');
+  await provider.record?.(observation, approached, pause.actions[0]!, rows, next, pause, 0, []);
+  const contact = await provider.propose(approached, next, [], 79);
+  assert.ok(contact);
+  assert.equal(contact.actions[0]?.action_ref, 'ACTION5');
+  assert.equal(contact.step.intercept, true);
+  assert.equal(contact.step.waitForTransport, undefined);
+});
