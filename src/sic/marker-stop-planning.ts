@@ -1,6 +1,6 @@
 import type { NativeExecution, NativeObservation, NativeProgramHandle, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Point } from '../logos-engine/v6-point-set.ts';
-import { coversStopMarkers, measureStopScene, planStopPlacement, stopEdgeKey, stopSceneMatches, stopShapeBox,
+import { assignStopTargets, coversStopMarkers, measureMaterialStopScene, measureStopScene, planStopPlacement, stopEdgeKey, stopSceneMatches, stopShapeBox,
   type StopLayout, type StopScene, type StopStep } from './marker-stop-placement.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -24,7 +24,13 @@ export async function proposeStopPlacement(observation: NativeObservation, rows:
     const stride = [...strides][0]!;
     if (strides.size !== 1 || !stride || vectors.some(([, [x, y]]) => (x === 0) === (y === 0))) return null;
     const measured = measureStopScene(observation, rows, stride);
-    if (measured) local = { ...controls, motion: vectors, ...measured, epoch, confirmed: [], rejected: [], route: [] };
+    if (measured) {
+      local = { ...controls, motion: vectors, ...measured, epoch, confirmed: [], rejected: [], route: [] };
+    } else {
+      const colored = measureMaterialStopScene(observation, rows, stride);
+      const assignment = colored ? assignStopTargets(colored.layout, colored.scene, colored.targets, vectors) : null;
+      if (colored && assignment) local = { ...controls, motion: vectors, layout: colored.layout, ...assignment, epoch, confirmed: [], rejected: [] };
+    }
   }
   if (!local || local.retired || !stopSceneMatches(rows, local.layout, local.scene)) return null;
   const { scene, layout } = local;
@@ -53,9 +59,14 @@ export async function proposeStopPlacement(observation: NativeObservation, rows:
     satisfactionContract: 'official_progress_after_observed_marker_coverage' };
   const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
   const id = 'stop-placement:' + need.id, actions = steps.map(step => ({ action_ref: step.action, data: {} }));
-  const label = probing ? 'Test how the selected piece changes shape at the fixed obstacle'
+  const changesMaterial = steps[0]?.effect?.startsWith('material:');
+  const source = changesMaterial ? layout.materials?.find(region => region.color === steps[0]!.expected.pieces[scene.active]!.color) : undefined;
+  const label = probing ? changesMaterial ? 'Check which color the piece acquires on contact with the source'
+    : 'Test how the selected piece changes shape at the fixed obstacle'
     : selecting ? 'Switch to the next piece after checking marker coverage'
-      : 'Follow the visible route to the required shape and marker position';
+      : layout.materials && scene.pieces[scene.active]!.targetColor !== scene.pieces[scene.active]!.color
+        ? 'Reach the color source for this piece and its assigned markers'
+        : 'Follow the visible route to the required shape and marker position';
   return { status: 'proposed', kind: 'sic_verify_marker_placement', actions, stopMemory: { ...local, route },
     stopSteps: steps, needId: need.id, steps: steps.map((step, i) => ({ action: actions[i]!, expected_after: step.expected })),
     binding: { observation_ref: ref, level_epoch: epoch, levels_completed: observation.levels_completed },
@@ -63,7 +74,7 @@ export async function proposeStopPlacement(observation: NativeObservation, rows:
       edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
     sicSituationCard: { strategy, need: 'Fit the piece to its markers using shape changes observed at contact', mode,
       situation: label, agenda: [], evidence, triggerCard: decision.receipt.workflow,
-      actor: stopShapeBox(scene.pieces[scene.active]!.shape), addressedRegion: layout.stop,
+      actor: stopShapeBox(scene.pieces[scene.active]!.shape), addressedRegion: source?.box ?? layout.stop,
       targets: scene.pieces[scene.active]!.markers.map(([x, y]) => [x - 1, y - 1, x + 1, y + 1]),
       otherSupports: scene.pieces.flatMap((piece, i) => i === scene.active ? [] : [stopShapeBox(piece.shape)]) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,

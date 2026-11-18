@@ -5,7 +5,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { PointSet } from '../src/logos-engine/v6-point-set.ts';
 import { rememberExposedMarkers } from '../src/sic/marker-layers.ts';
 import { nextMarkerMaterialMove } from '../src/sic/marker-material-route.ts';
-import { coversStopMarkers, planStopPlacement, stopEdgeKey, type StopLayout, type StopScene } from '../src/sic/marker-stop-placement.ts';
+import { assignStopTargets, coversStopMarkers, planStopPlacement, stopEdgeKey, type StopLayout, type StopScene } from '../src/sic/marker-stop-placement.ts';
 import { observeStopPlacement, type StopMemory } from '../src/sic/marker-stop-planning.ts';
 
 function model(): ConstellationModel {
@@ -86,4 +86,24 @@ test('an obstructed outline can change its span and an obstructed line can stay 
   assert.equal(slide[0]!.effect, 'cross:horizontal');
   assert.deepEqual(slide[0]!.expected.pieces[0]!.shape,
     { kind: 'cross', horizontal: [4, 6, 12], vertical: [3, 6, 9] });
+});
+
+test('assign deformable bodies jointly and verify a recolor on contact before coverage', () => {
+  const layout: StopLayout = { stop: [7, 7, 9, 9], stopColor: 6, cursorColor: 15, markerPixels: [], width: 16, height: 16,
+    materials: [{ color: 8, box: [3, 5, 3, 5], interior: [3, 5, 3, 5] },
+      { color: 9, box: [1, 2, 1, 2], interior: [1, 2, 1, 2] }] };
+  const motion: StopMemory['motion'] = [['up', [0, -1]], ['down', [0, 1]], ['left', [-1, 0]], ['right', [1, 0]]];
+  const scene: StopScene = { active: 1, pieces: [
+    { color: 10, shape: { kind: 'frame', box: [2, 6, 6, 10] }, markers: [] },
+    { color: 12, shape: { kind: 'cross', horizontal: [1, 3, 5], vertical: [1, 3, 5] }, markers: [] },
+  ] };
+  const plan = assignStopTargets(layout, scene, [
+    { color: 8, markers: [[3, 5], [6, 5], [3, 10], [6, 10]] },
+    { color: 9, markers: [[1, 2], [5, 2], [3, 4]] },
+  ], motion);
+  assert.deepEqual(plan?.scene.pieces.map(piece => piece.targetColor), [8, 9]);
+  assert.equal(plan?.route.length, 1);
+  assert.equal(plan?.route[0]?.effect, 'material:9');
+  assert.equal(plan?.route[0]?.action, 'up');
+  assert.ok(coversStopMarkers(plan!.route[0]!.expected.pieces[1]!));
 });

@@ -116,8 +116,10 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       const epoch = observation.level_epoch;
       const previous = stopMemory?.epoch !== epoch && snapshot?.complete && snapshot.epoch === epoch - 1
         ? measurements(snapshot) : null;
-      const learned: StopControls | null = previous?.selector
-        ? { motion: [...previous.motion], selector: previous.selector, refs: [...previous.refs.values()] } : null;
+      const recentStop = stopMemory?.epoch === epoch - 1 && !stopMemory.retired ? stopMemory : null;
+      const learned: StopControls | null = recentStop
+        ? { motion: recentStop.motion, selector: recentStop.selector, refs: recentStop.refs }
+        : previous?.selector ? { motion: [...previous.motion], selector: previous.selector, refs: [...previous.refs.values()] } : null;
       const stop = await proposeStopPlacement(observation, rows, keys, remaining, stopMemory, learned, decide, execution);
       if (stop) return stop;
       const prior = snapshot?.epoch === observation.level_epoch ? snapshot : null;
