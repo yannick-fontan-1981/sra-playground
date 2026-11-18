@@ -1,5 +1,5 @@
 import { boundedReductionRouteCooperative, mergeReductionScene, packReductionState, reductionLayout, reductionMoved, reductionScan,
-  reductionState, reductionSuccessors, REDUCTION_VECTORS,
+  reductionState, reductionSuccessors, reductionVisibleCells, REDUCTION_VECTORS,
   type ReductionModel, type ReductionOperation, type ReductionPoint, type ReductionScene,
 } from '../logos-engine/v6-reduction-transport.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
@@ -28,7 +28,7 @@ type Supports = { floor: string[]; rails: string[]; edges: string[] };
 type Segment = { purpose: 'solve' | 'reduce' | 'reveal'; path: ReductionOperation[] };
 type State = { epoch: number; model: ReductionModel; controls: Record<string, Motion>; tested: string[];
   selected: ReductionPoint | null; selectedSupports: Supports | null; stopped: boolean; refs: string[]; view?: CarrierView;
-  followVacated?: boolean; segment?: Segment };
+  followVacated?: boolean; segment?: Segment; reveal?: { direction: ReductionPoint; testedLandings: string[] } };
 type Choice = { stage: 'probe' | 'move' | 'select' | 'jump'; command: NativeCommand; effect: Packed | null;
   addressed: ReductionPoint | null; source: ReductionPoint | null; landing: ReductionPoint | null; intermediate?: ReductionPoint;
   carried?: boolean; dock?: boolean };
@@ -50,11 +50,71 @@ function remeasureAuxiliaryLayout(observation: NativeObservation, rows: NativeRo
     && x % pitch === phase[0] && y % pitch === phase[1]);
   const tokens = cells.filter(cell => cell.palette_value === token);
   const others = cells.filter(cell => cell.palette_value !== token);
-  if (tokens.length < 2 || !others.length || new Set(others.map(cell => cell.palette_value)).size !== 1
+  // The earlier witness identifies the token; the matching auxiliary and scanned rail corroborate the layout.
+  if (!tokens.length || !others.length || new Set(others.map(cell => cell.palette_value)).size !== 1
     || !others.every(cell => tokens.some(peg => same(peg.mask, cell.mask)))) return null;
   const model = { floor, token, ring, rail, unit, pitch, phase, width: rows[0]!.length, height: rows.length, auxiliary: others[0]!.palette_value };
   const scan = reductionScan(rows, model);
   return scan.carriers.length && scan.edges.size ? model : null;
+}
+
+function boundaryLandings(model: ReductionModel, view: CarrierView, scene: ReductionScene, reveal: NonNullable<State['reveal']>) {
+  const visible = reductionVisibleCells(model, view.offset), [dx, dy] = reveal.direction;
+  const depth = (cell: string) => {
+    const [x, y] = cell.split(',').map(Number);
+    return x! * dx + y! * dy;
+  };
+  const edge = Math.max(...[...visible].map(depth));
+  const attempted = new Set(reveal.testedLandings);
+  return new Set([...scene.floor, ...scene.rails].filter(cell =>
+    visible.has(cell) && depth(cell) >= edge - 1 && !attempted.has(cell)));
+}
+
+function carrierScopeForPair(scene: ReductionScene, direction: ReductionPoint) {
+  const points = [...scene.pegs].map(cell => cell.split(',').map(Number) as ReductionPoint), [dx, dy] = direction;
+  const depth = ([x, y]: ReductionPoint) => x * dx + y * dy;
+  if (points.length !== 2 || depth(points[0]!) === depth(points[1]!)) return scene;
+  const anchor = depth(points[0]!) > depth(points[1]!) ? points[0]! : points[1]!;
+  const support = (cell: string) => (scene.floor.has(cell) || scene.rails.has(cell)) && !scene.plots?.has(cell);
+  const nearby = new Set<string>();
+  const shifted = ([x, y]: ReductionPoint, [u, v]: ReductionPoint, times: number): string => [x + u * times, y + v * times].join(',');
+  for (const vector of REDUCTION_VECTORS) {
+    for (const roles of [[0, 1, 2], [-1, 0, 1]]) {
+      const triplet = roles.map(step => shifted(anchor, vector, step));
+      if (triplet.every(support)) for (const cell of triplet) if (scene.rails.has(cell)) nearby.add(cell);
+    }
+  }
+  if (!nearby.size) return scene;
+  for (const carrier of scene.carriers) {
+    const cell = carrier.join(',');
+    if (scene.pegs.has(cell) || scene.auxiliaries?.has(cell)) nearby.add(cell);
+  }
+  for (const cell of nearby) {
+    const [x, y] = cell.split(',').map(Number) as ReductionPoint;
+    for (const [dx, dy] of REDUCTION_VECTORS) {
+      const next = [x + dx, y + dy].join(',');
+      if (scene.edges.has(cell + '>' + next)) nearby.add(next);
+    }
+  }
+  const carriers = scene.carriers.filter(cell => nearby.has(cell.join(',')));
+  if (!carriers.length || carriers.length === scene.carriers.length) return scene;
+  const carriedPlots = scene.carriedPlots && new Set([...scene.carriedPlots].filter(cell => nearby.has(cell)));
+  return { ...scene, carriers, ...(carriedPlots ? { carriedPlots } : {}) };
+}
+
+function verifiesReductionPath(scene: ReductionScene, visible: ReadonlySet<string>, path: readonly ReductionOperation[]) {
+  let state = reductionState(scene);
+  for (const step of path) {
+    if (step[0] === 'move') {
+      state = reductionMoved(state, step[1], scene.edges, scene.plots, scene.followVacated);
+    } else {
+      if (!visible.has(step[1].join(',')) || !visible.has(step[2].join(','))) return false;
+      const jump = [...reductionSuccessors(state, scene)].find(([, option]) => same(option, step));
+      if (!jump) return false;
+      state = jump[0];
+    }
+  }
+  return state[0].size === 1;
 }
 
 function readPlot(observation: NativeObservation, model: ReductionModel): ReductionModel['plot'] {
@@ -143,8 +203,8 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       if (previous?.stopped) return null;
       if (previous?.view && previous.refs.at(-1) !== observation.observation_ref) return null;
       const inherited = state?.epoch === observation.level_epoch - 1 ? state : null;
-      const measured = previous?.model ?? reductionLayout(observation, rows)
-        ?? (inherited ? remeasureAuxiliaryLayout(observation, rows, inherited.model) : null);
+      const recognized = previous?.model ?? reductionLayout(observation, rows);
+      const measured = recognized ?? (inherited ? remeasureAuxiliaryLayout(observation, rows, inherited.model) : null);
       if (!measured || measured.unit !== retained.unit || measured.pitch !== retained.pitch || measured.token !== retained.token || measured.rail === null) return null;
       const plot = !previous ? readPlot(observation, measured) : undefined;
       const model = plot ? { ...measured, plot } : measured;
@@ -152,12 +212,19 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       const reuse = recalled?.epoch === observation.level_epoch ? recalled.controls : null;
       const view = previous?.view ?? (reuse && (visible.carriers.length > 1 || visible.plots?.size || visible.auxiliaries?.size)
         ? carrierView(origin, mergeReductionScene(null, visible, model, origin)) : null);
-      const local: State = previous ?? { epoch: observation.level_epoch, model, controls: view && reuse ? reuse : {}, tested: [],
-        ...(view ? { view } : {}),
+      const offset = inherited?.view?.offset;
+      const direction: ReductionPoint | null = offset && (offset[0] === 0) !== (offset[1] === 0)
+        ? [Math.sign(offset[0]), Math.sign(offset[1])] : null;
+      const revealDirection = direction && !recognized && view && visible.pegs.size === 1 && visible.auxiliaries?.size ? direction : null;
+      const local: State = previous ?? { epoch: observation.level_epoch, model: revealDirection ? { ...model, trackCoveredRails: true } : model,
+        controls: view && reuse ? reuse : {}, tested: [],
+        ...(view ? { view } : {}), ...(revealDirection ? { reveal: { direction: revealDirection, testedLandings: [] } } : {}),
         ...(visible.auxiliaries?.size && inherited?.followVacated ? { followVacated: true } : {}),
         selected: null, selectedSupports: null, stopped: false, refs: [] };
       const scanned = view ? unpackCarrierView(view) : visible;
-      const scene = local.followVacated ? { ...scanned, followVacated: true } : scanned, current = packed(scene);
+      const scene = local.followVacated || local.reveal ? { ...scanned,
+        ...(local.followVacated ? { followVacated: true } : {}), ...(local.reveal ? { allowDockTransfer: false } : {}) } : scanned;
+      const current = packed(scene);
       const exploratory = !!view && (!!scene.plots || !!scene.auxiliaries);
       if (!scene.carriers.length || !scene.edges.size || scene.pegs.size < (exploratory ? 1 : 2)) return null;
       const initial = reductionState(scene);
@@ -166,13 +233,23 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       const bounds = extended ? { maximumStates: 65_536, maximumFrontier: 131_072 }
         : { maximumStates: 8192, maximumFrontier: 16384 };
       const retainedSegment = extended && local.segment?.path.length ? local.segment : null;
+      const joinPair = local.reveal && view && scene.pegs.size === 2 ? local.reveal : null;
+      const focused = joinPair && !retainedSegment ? carrierScopeForPair(scene, joinPair.direction) : scene;
+      const scoped = focused === scene ? null
+        : await boundedReductionRouteCooperative(reductionState(focused), focused, budget, bounds, 'join_pair', execution);
+      // A scoped search can ignore unrelated carriers. Check its route against the full scene before using it.
       const result = retainedSegment || exploratory && scene.pegs.size === 1 ? null
-        : await boundedReductionRouteCooperative(initial, scene, budget, bounds, false, execution);
+        : scoped?.path && view && verifiesReductionPath(scene, reductionVisibleCells(model, view.offset), scoped.path) ? scoped
+          : await boundedReductionRouteCooperative(initial, scene, budget, bounds, joinPair ? 'join_pair' : false, execution);
       const partial = !retainedSegment && exploratory && (result?.status === 'exhausted' || extended && result?.status === 'resource_bound')
         ? await boundedReductionRouteCooperative(initial, scene, budget, bounds, 'reduce', execution) : null;
-      const reveal = !retainedSegment && view && (!result || result.status === 'exhausted' || extended && result.status === 'resource_bound') && !partial?.path
-        ? await boundedReductionRouteCooperative(initial, scene, budget, bounds,
-          scene.auxiliaries?.size && scene.carriers.length > 1 ? 'reveal_with_auxiliary' : true, execution) : null;
+      const landings = local.reveal && view && !retainedSegment ? boundaryLandings(model, view, scene, local.reveal) : null;
+      let reveal = !retainedSegment && view && (!result || result.status === 'exhausted' || extended && result.status === 'resource_bound') && !partial?.path
+        ? await boundedReductionRouteCooperative(initial, scene, budget, bounds, landings ? { landings, auxiliary: true }
+          : scene.auxiliaries?.size && scene.carriers.length > 1 ? 'reveal_with_auxiliary' : true, execution) : null;
+      if (landings && reveal?.status === 'exhausted') {
+        reveal = await boundedReductionRouteCooperative(initial, scene, budget, bounds, { landings }, execution);
+      }
       const segment: Segment | null = retainedSegment ?? (result?.path ? { purpose: 'solve', path: result.path }
         : partial?.path ? { purpose: 'reduce', path: partial.path } : reveal?.path ? { purpose: 'reveal', path: reveal.path } : null);
       const operation = segment?.path[0];
@@ -274,12 +351,14 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       const { local: { model, view } } = proposal;
       const choice = proposal.directionalSeries?.[index] ?? proposal.choice;
       if (view) {
-        const next = acquireCarrierView(second, after, model, view, choice.effect);
+        const vector = proposal.local.reveal && choice.stage === 'move' ? proposal.local.controls[choice.command.action_ref]?.vector : undefined;
+        const next = acquireCarrierView(second, after, model, view, choice.effect, vector);
         const selected = choice.stage !== 'select' || visibleSelection(model, choice.addressed!, first, second, view.offset);
         const matched = !next || !selected ? false : next.matches;
-        return { matched, seal_prefix: !proposal.directionalSeries || matched !== true || !!next?.cameraChanged || !!next?.newPegs,
+        return { matched, seal_prefix: !proposal.directionalSeries || matched !== true || !!next?.cameraChanged || !!next?.newPegs || !!next?.enteringCarriers || !!next?.leavingCarriers,
           reason: !next ? 'camera_registration_ambiguous' : !selected || matched === false
-          ? 'tracked_population_or_carrier_motion_refuted' : next.newPegs ? 'camera_registered_and_new_pieces_observed'
+          ? 'tracked_population_or_carrier_motion_refuted' : next.enteringCarriers ? 'carrier_arrived_from_outside_the_observed_rails'
+            : next.leavingCarriers ? 'carrier_left_toward_unobserved_rails' : next.newPegs ? 'camera_registered_and_new_pieces_observed'
             : next.cameraChanged ? 'tracked_population_preserved_across_camera_shift' : 'carrier_and_population_projection_confirmed' };
       }
       const next = packed(reductionScan(second, model));
@@ -299,14 +378,15 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       }
       if (before.level_epoch !== after.level_epoch) return { events: [] };
       if (local.view) {
-        let next = acquireCarrierView(second, after, local.model, local.view, choice.effect);
-        const scene = unpackCarrierView(local.view);
         const vector = local.controls[action.action_ref]?.vector;
+        const motion = local.reveal && choice.stage === 'move' ? vector : undefined;
+        let next = acquireCarrierView(second, after, local.model, local.view, choice.effect, motion);
+        const scene = unpackCarrierView(local.view);
         let learnedVacancy = false;
         if (next?.matches === false && (scene.carriedPlots?.size || scene.auxiliaries?.size) && !local.followVacated && choice.stage === 'move' && vector) {
           const alternative = packReductionState(reductionMoved(reductionState(scene), vector, scene.edges, scene.plots, true));
           if (!same(choice.effect, alternative)) {
-            const acquired = acquireCarrierView(second, after, local.model, local.view, alternative);
+            const acquired = acquireCarrierView(second, after, local.model, local.view, alternative, motion);
             if (acquired?.matches) { next = acquired; learnedVacancy = true; }
           }
         }
@@ -314,10 +394,17 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
           ? choice.addressed : null;
         const direction = choice.stage === 'probe' && next ? fitCarrierMotion(scene, packed(unpackCarrierView(next.view))) : null;
         const { segment, ...retained } = local;
-        const remaining = segment && !learnedVacancy && next?.matches && !next.newPegs
+        const remaining = segment && !learnedVacancy && next?.matches && !next.newPegs && !next.enteringCarriers && !next.leavingCarriers
           && !(segment.purpose === 'reveal' && next.cameraChanged)
           ? choice.stage === 'select' ? segment.path : segment.path.slice(1) : [];
+        const reveal = local.reveal;
+        const testedTargets = reveal && segment?.purpose === 'reveal' && !remaining.length && next?.matches && !next.cameraChanged
+          ? boundaryLandings(local.model, local.view, scene, reveal) : null;
+        const attemptedLanding = testedTargets && next
+          ? [...next.view.memory.pegs, ...(next.view.memory.auxiliaries ?? [])]
+            .filter(cell => testedTargets.has(cell) && !scene.pegs.has(cell) && !scene.auxiliaries?.has(cell)) : [];
         state = { ...retained, selected, model: next?.nextModel ?? local.model, view: next?.view ?? local.view,
+          ...(reveal && attemptedLanding.length ? { reveal: { ...reveal, testedLandings: [...new Set([...reveal.testedLandings, ...attemptedLanding])] } } : {}),
           stopped: !next || next?.matches === false || choice.stage === 'select' && !selected,
           ...(segment && remaining.length ? { segment: { ...segment, path: remaining } } : {}),
           ...(learnedVacancy ? { followVacated: true } : {}),

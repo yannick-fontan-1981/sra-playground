@@ -202,3 +202,19 @@ test('deadline uses the supplied monotonic clock and remains an unknown resource
     { yieldControl: async () => {}, deadlineMs: performance.now() + 30_000 });
   assert.equal(active.status, 'found', 'default clock uses performance time, not an epoch timestamp');
 });
+
+test('a carrier clipped by the viewport still reports its connected rail when the visible rim is intact', () => {
+  const model = { unit: 4, pitch: 6, phase: [0, 0] as ReductionPoint, floor: 1, token: 14, ring: 11, rail: 5,
+    width: 14, height: 14, trackCoveredRails: true };
+  const rows = Array.from({ length: model.height }, () => Array<number>(model.width).fill(0));
+  for (let y = 5; y <= 10; y++) rows[y]![4] = model.ring;
+  rows[8]!.splice(2, 7, 7, 15, model.ring, model.rail, model.rail, model.rail, model.rail);
+
+  const connected = reductionScan(rows, model);
+  assert.deepEqual(connected.carriers, [[0, 1]]);
+  assert.ok(connected.edges.has('0,1>1,1'));
+  assert.ok(connected.edges.has('1,1>0,1'));
+
+  rows[8]![5] = 0;
+  assert.equal(reductionScan(rows, model).edges.has('0,1>1,1'), false, 'an uncovered gap still breaks the rail');
+});

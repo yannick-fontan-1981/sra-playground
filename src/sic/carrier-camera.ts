@@ -25,7 +25,7 @@ export function unpackCarrierView({ memory }: CarrierView): ReductionScene {
 }
 
 export function acquireCarrierView(rows: NativeRows, observation: NativeObservation, model: ReductionModel,
-  view: CarrierView, expectation: CarrierPosition | null) {
+  view: CarrierView, expectation: CarrierPosition | null, motion?: ReductionPoint) {
   const previous = unpackCarrierView(view);
   const aligned = alignReductionScene(rows, observation, model, previous, view.offset);
   if (!aligned) return null;
@@ -33,12 +33,24 @@ export function acquireCarrierView(rows: NativeRows, observation: NativeObservat
   const visible = reductionVisibleCells(nextModel, offset), known = previous.known_cells!;
   const actual = reductionScan(rows, nextModel);
   const registered = mergeReductionScene(null, actual, nextModel, offset);
+  const projectedCarriers = motion && expectation ? new Set(expectation[1].map(key)) : null;
+  const observedCarriers = motion && expectation ? new Set(registered.carriers.map(key)) : null;
+  const entering = new Set(motion && projectedCarriers ? registered.carriers.flatMap(([x, y]) => {
+    const cell = key([x, y]), predecessor = key([x - motion[0], y - motion[1]]);
+    return !projectedCarriers.has(cell) && !known.has(predecessor) ? [cell] : [];
+  }) : []);
+  const leaving = new Set(motion && projectedCarriers && observedCarriers ? previous.carriers.flatMap(([x, y]) => {
+    const cell = key([x, y]), successor = key([x + motion[0], y + motion[1]]);
+    return visible.has(cell) && projectedCarriers.has(cell) && !observedCarriers.has(cell) && !known.has(successor)
+      && !previous.pegs.has(cell) && !previous.auxiliaries?.has(cell) ? [cell] : [];
+  }) : []);
   const check = (positions: Iterable<string>, predicted: ReductionPoint[]) => {
     const projected = new Set(predicted.map(key)), observed = new Set(positions);
     // Newly exposed cells can add pieces. Previously seen and now visible
     // cells must still agree with the transition we chose.
     for (const cell of visible) {
-      if ((known.has(cell) || projected.has(cell)) && projected.has(cell) !== observed.has(cell)) return false;
+      if ((known.has(cell) || projected.has(cell)) && projected.has(cell) !== observed.has(cell)
+        && !(entering.has(cell) && observed.has(cell)) && !(leaving.has(cell) && !observed.has(cell))) return false;
     }
     return true;
   };
@@ -53,5 +65,6 @@ export function acquireCarrierView(rows: NativeRows, observation: NativeObservat
   actual, nextModel, offset) : unpredicted;
   return { nextModel, view: carrierView(offset, scene), matches,
     cameraChanged: key(offset) !== key(view.offset) || key(model.phase) !== key(nextModel.phase),
-    newPegs: [...registered.pegs].filter(cell => !known.has(cell)).length };
+    newPegs: [...registered.pegs].filter(cell => !known.has(cell) || entering.has(cell)).length,
+    enteringCarriers: entering.size, leavingCarriers: leaving.size };
 }

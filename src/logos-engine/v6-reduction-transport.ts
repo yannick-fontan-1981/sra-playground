@@ -17,12 +17,14 @@ export type ReductionModel = {
   ring: number | null; rail: number | null; width: number; height: number;
   plot?: { ink: number; offset: ReductionPoint; mask: readonly (readonly [number, number])[] };
   auxiliary?: number;
+  trackCoveredRails?: boolean;
 };
 export type ReductionScene = {
   floor: Set<string>; pegs: Set<string>; carriers: ReductionPoint[]; rails: Set<string>;
   edges: Set<string>; known_cells?: Set<string>; plots?: Set<string>; carriedPlots?: Set<string>;
   auxiliaries?: Set<string>;
   followVacated?: boolean;
+  allowDockTransfer?: boolean;
 };
 export type ReductionState = [Set<string>, ReductionPoint[], Set<string>?, Set<string>?];
 export type ReductionOperation = ['jump', ReductionPoint, ReductionPoint] | ['move', ReductionPoint];
@@ -138,8 +140,12 @@ export function reductionScan(rows: NativeRows, m: ReductionModel): ReductionSce
       }
       if (countValue(rows, x, y, s, m.token) > s * s / 2) pegs.add(k);
       if (auxiliaries && countValue(rows, x, y, s, m.auxiliary!) > s * s / 2) auxiliaries.add(k);
-      const border = m.ring !== null && x > 0 && y > 0 && x + s < rows[0]!.length && y + s < rows.length
+      const hasFullRim = m.ring !== null && x > 0 && y > 0 && x + s < rows[0]!.length && y + s < rows.length
         && [[x - 1, y - 1], [x + s, y - 1], [x - 1, y + s], [x + s, y + s]].every(([X, Y]) => rows[Y!]![X!] === m.ring);
+      const visibleSide = x === 0 ? x + s : x + s === rows[0]!.length ? x - 1 : null;
+      const hasClippedRim = m.trackCoveredRails && m.ring !== null && visibleSide !== null && y > 0 && y + s < rows.length
+        && rows.slice(y - 1, y + s + 1).every(row => row[visibleSide] === m.ring);
+      const border = hasFullRim || hasClippedRim;
       if (border) { carriers.add(k); rails.add(k); }
       else if (countValue(rows, x, y, s, m.floor) >= s * s / 4) floor.add(k);
       if (m.rail !== null && rows[y + Math.floor(s / 2)]![x + Math.floor(s / 2)] === m.rail) rails.add(k);
@@ -152,7 +158,17 @@ export function reductionScan(rows: NativeRows, m: ReductionModel): ReductionSce
       const q = add(p, v); if (!rails.has(key(q))) continue;
       const x = px + p[0] * pitch + Math.floor(s / 2), y = py + p[1] * pitch + Math.floor(s / 2);
       const permitted = new Set([m.rail, m.ring, m.token, rows[y]![x]!, rows[y + v[1] * pitch]![x + v[0] * pitch]!]);
-      let allowed = true; for (let i = 0; i <= pitch; i++) if (!permitted.has(rows[y + v[1] * i]![x + v[0] * i]!)) { allowed = false; break; }
+      const covered = m.trackCoveredRails ? [p, q].filter(cell => carriers.has(key(cell))) : undefined;
+      let allowed = true;
+      for (let i = 0; i <= pitch; i++) {
+        const X = x + v[0] * i, Y = y + v[1] * i;
+        // The visible rail reaches the rim. Inside a measured carrier, its contents may hide the rail.
+        if (permitted.has(rows[Y]![X]!) || covered?.some(([u, w]) =>
+          X >= px + u * pitch - 1 && X <= px + u * pitch + s
+          && Y >= py + w * pitch - 1 && Y <= py + w * pitch + s)) continue;
+        allowed = false;
+        break;
+      }
       if (allowed) edges.add(edge(p, q));
     }
   }
@@ -206,7 +222,7 @@ export function* reductionSuccessors(current: ReductionState, scene: ReductionSc
   for (const p of sources) for (const vector of REDUCTION_VECTORS) {
     const auxiliaryJump = auxiliaries?.has(key(p));
     const mid = add(p, vector), end = add(mid, vector);
-    const dockTransfer = carrierCells && !supports.has(key(mid)) && !scene.rails.has(key(mid))
+    const dockTransfer = scene.allowDockTransfer !== false && carrierCells && !supports.has(key(mid)) && !scene.rails.has(key(mid))
       && carrierCells.has(key(p)) !== carrierCells.has(key(end));
     const supported = pegs.has(key(mid)) || isPlot(key(mid)) || !auxiliaryJump && auxiliaries?.has(key(mid)) || dockTransfer;
     if (supported && supports.has(key(end)) && !pegs.has(key(end)) && !isPlot(key(end)) && !auxiliaries?.has(key(end))) {
@@ -272,17 +288,61 @@ function checkedReductionBounds(bounds: ReductionSearchBounds): ReductionSearchB
 }
 
 /**
- * Native bounded Dijkstra. Its queue, successors and cost/serial ordering are
+ * The native search defaults to Dijkstra. Its queue, successors and cost/serial ordering are
  * the source order. A resource stop occurs before the map/parent/heap insertion
  * that would exceed a bound. One temporary successor can be inspected to decide
  * whether that insertion is new; it is never retained after a resource stop.
  */
-type ReductionGoal = boolean | 'reduce' | 'reveal_with_auxiliary';
+type ReductionGoal = boolean | 'reduce' | 'reveal_with_auxiliary' | 'join_pair' | { readonly landings: ReadonlySet<string>; readonly auxiliary?: boolean };
+
+function pairReachDistance(scene: ReductionScene) {
+  const cells = new Set([...scene.floor, ...scene.rails]);
+  const neighbors = new Map<string, string[]>();
+  const alignments: [string, string][] = [];
+  for (const from of cells) {
+    const source = point(from), destinations: string[] = [];
+    for (const vector of REDUCTION_VECTORS) {
+      const mid = add(source, vector), end = add(mid, vector), via = key(mid), target = key(end);
+      if (scene.edges.has(edge(source, mid))) destinations.push(via);
+      if (!cells.has(target)) continue;
+      if (cells.has(via) || scene.plots?.has(via)) destinations.push(target);
+      if (cells.has(via) && !scene.plots?.has(via) && !scene.plots?.has(target)) alignments.push([from, via]);
+    }
+    neighbors.set(from, destinations);
+  }
+  const distances = new Map<string, ReadonlyMap<string, number>>();
+  const measure = (start: string): ReadonlyMap<string, number> => {
+    const saved = distances.get(start);
+    if (saved) return saved;
+    const values = new Map([[start, 0]]);
+    for (const [at, length] of values) for (const next of neighbors.get(at) ?? []) {
+      if (!values.has(next)) values.set(next, length + 1);
+    }
+    distances.set(start, values);
+    return values;
+  };
+  const scores = new Map<string, number>();
+  return (tokens: ReadonlySet<string>) => {
+    if (tokens.size !== 2) return 0;
+    const [first, second] = [...tokens].sort() as [string, string];
+    const id = first + '>' + second, saved = scores.get(id);
+    if (saved !== undefined) return saved;
+    const fromFirst = measure(first), fromSecond = measure(second);
+    const distance = (a: ReadonlyMap<string, number>, x: string, b: ReadonlyMap<string, number>, y: string) =>
+      Math.max(a.get(x) ?? Infinity, b.get(y) ?? Infinity);
+    let best = Infinity;
+    for (const [a, b] of alignments) best = Math.min(best, distance(fromFirst, a, fromSecond, b), distance(fromFirst, b, fromSecond, a));
+    const value = Number.isFinite(best) ? best : cells.size;
+    scores.set(id, value);
+    return value;
+  };
+}
 
 function* boundedReductionSearch(current: ReductionState, scene: ReductionScene, limit: number,
   inputBounds: ReductionSearchBounds, goal: ReductionGoal, control?: () => 'deadline' | null): Generator<void, ReductionSearchResult> {
-  type Entry = { cost: number; serial: number; state: ReductionState; key: string };
+  type Entry = { cost: number; rank: number; serial: number; state: ReductionState; key: string };
   const bounds = checkedReductionBounds(inputBounds), heap: Entry[] = [], costs = new Map<string, number>();
+  const estimate = goal === 'join_pair' ? pairReachDistance(scene) : null;
   const parents = new Map<string, { previous: string; action: ReductionOperation }>();
   let serial = 1, insertedEntries = 0, poppedEntries = 0, staleEntries = 0, expandedStates = 0;
   let generatedTransitions = 0, peakFrontierEntries = 0, work = 0;
@@ -294,9 +354,9 @@ function* boundedReductionSearch(current: ReductionState, scene: ReductionScene,
   });
   if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline');
   const start = stateKey(current);
-  heap.push({ cost: 0, serial: 0, state: current, key: start }); costs.set(start, 0);
+  heap.push({ cost: 0, rank: 0, serial: 0, state: current, key: start }); costs.set(start, 0);
   insertedEntries = peakFrontierEntries = 1;
-  const order = (a: Entry, b: Entry) => a.cost - b.cost || a.serial - b.serial;
+  const order = (a: Entry, b: Entry) => a.rank - b.rank || a.cost - b.cost || a.serial - b.serial;
   const push = (value: Entry) => {
     let i = heap.length; heap.push(value);
     while (i > 0) { const parent = Math.floor((i - 1) / 2); if (order(heap[parent]!, value) <= 0) break; heap[i] = heap[parent]!; i = parent; }
@@ -314,17 +374,26 @@ function* boundedReductionSearch(current: ReductionState, scene: ReductionScene,
     const { cost, state: node, key: nodeKey } = pop(); poppedEntries++;
     if (++work % 128 === 0) { yield; if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline'); }
     if (costs.get(nodeKey) !== cost) { staleEntries++; continue; }
-    const frontier = node[1].some(p => (node[0].has(key(p)) || node[3]?.has(key(p)))
-      && REDUCTION_VECTORS.some(v => !scene.known_cells?.has(key(add(add(p, v), v)))));
-    const loadedPair = goal !== 'reveal_with_auxiliary'
-      || node[1].some(p => node[0].has(key(p))) && node[1].some(p => node[3]?.has(key(p)));
-    const exposedLanding = goal === 'reveal_with_auxiliary' && [...node[0]].some(cell =>
-      !current[0].has(cell) && scene.floor.has(cell) && REDUCTION_VECTORS.some(vector => {
-        const next = add(point(cell), vector);
-        return scene.floor.has(key(next)) && !scene.known_cells?.has(key(add(next, vector)));
-      }));
-    const reached = goal === 'reduce' ? node[0].size < current[0].size
-      : goal ? (frontier && loadedPair || exposedLanding) && nodeKey !== start : node[0].size === 1;
+    let reached: boolean;
+    if (typeof goal === 'object') {
+      const pieces = goal.auxiliary ? [...(node[3] ?? [])] : [...node[0], ...(node[3] ?? [])];
+      reached = pieces.some(cell => goal.landings.has(cell) && !current[0].has(cell) && !current[3]?.has(cell));
+    } else if (goal === 'reduce') {
+      reached = node[0].size < current[0].size;
+    } else if (goal === 'join_pair' || !goal) {
+      reached = node[0].size === 1;
+    } else {
+      const frontier = node[1].some(p => (node[0].has(key(p)) || node[3]?.has(key(p)))
+        && REDUCTION_VECTORS.some(v => !scene.known_cells?.has(key(add(add(p, v), v)))));
+      const loadedPair = goal !== 'reveal_with_auxiliary'
+        || node[1].some(p => node[0].has(key(p))) && node[1].some(p => node[3]?.has(key(p)));
+      const exposedLanding = goal === 'reveal_with_auxiliary' && [...node[0]].some(cell =>
+        !current[0].has(cell) && scene.floor.has(cell) && REDUCTION_VECTORS.some(vector => {
+          const next = add(point(cell), vector);
+          return scene.floor.has(key(next)) && !scene.known_cells?.has(key(add(next, vector)));
+        }));
+      reached = (frontier && loadedPair || exposedLanding) && nodeKey !== start;
+    }
     if (reached) {
       const path: ReductionOperation[] = []; let cursor = nodeKey;
       while (cursor !== start) { const parent = parents.get(cursor)!; path.push(parent.action); cursor = parent.previous; }
@@ -342,7 +411,7 @@ function* boundedReductionSearch(current: ReductionState, scene: ReductionScene,
           : requiredFrontierEntries > bounds.maximumFrontier ? 'maximum_frontier' : null;
         if (blocked) return finish('resource_bound', null, blocked, { newState, requiredStates, requiredFrontierEntries, cost: value });
         costs.set(nextKey, value); parents.set(nextKey, { previous: nodeKey, action });
-        push({ cost: value, serial: serial++, state: following, key: nextKey });
+        push({ cost: value, rank: value + 8 * (estimate?.(following[0]) ?? 0), serial: serial++, state: following, key: nextKey });
       }
     }
   }
