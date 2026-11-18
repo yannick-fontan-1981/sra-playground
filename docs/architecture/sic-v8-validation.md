@@ -2472,3 +2472,11 @@ Le rejeu de référence abandonne après 80 commandes d'exploration. Le modèle 
 La recherche remonte des ouvertures vers les positions des poussoirs capables de transférer une charge. Elle vérifie le trajet avec les deux barres, les phases et les collisions. Les commandes 33 et 47 déplacent un poussoir à travers les séparations. L'impulsion de la commande 52 contribue au transfert. La commande 81 place la charge dans son ouverture et la commande 105 rend encore un service de transport avant les placements finaux.
 
 Le niveau 7 gagne en **107 commandes et 30,05 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **204 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 311 commandes relèvent de SIC seul et le score 7 termine le jeu. Empreinte chronologique `f331b565b217adeda84cfc9324b03fa392a740386934533b3758887c131310e1`. TypeScript et les cinq tests ciblés passent.
+
+### SB26 niveau 7, départager les programmes qui produisent le même mot
+
+Le rejeu de référence s'arrête après 80 commandes. La lecture retrouve les trois cadres, le centre déjà rempli et les deux jetons d'appel. Plusieurs répartitions consomment le même stock et produisent exactement le mot demandé.
+
+SIC classe les répartitions valides d'après les correspondances entre jetons littéraux et étiquettes visibles des cadres. Les clics 3 à 4 placent l'appel du cadre intermédiaire et les clics 7 à 8 placent l'appel du cadre intérieur. Les retours confirment les huit placements. La commande 17 soumet le programme et valide l'expansion complète.
+
+Le niveau 7 gagne en **17 commandes et 11,17 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **90 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 107 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `e3e6c4fedeccd870e67062e16a5482a340389effa6977e9424638817c71aaf27`. TypeScript et les trois tests ciblés passent.
