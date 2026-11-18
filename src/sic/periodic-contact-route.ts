@@ -6,13 +6,18 @@ import { createPeriodicPayloadProjection } from './periodic-payload-motion.ts';
 type Axis = 0 | 1;
 type Source = { size: NativePoint; axis: Axis; inks: NativePoint; unmeasuredAxis?: true };
 type Rhythm = { side: Axis; period: number | null; reach: number | null };
-export type PeriodicPose = { actor: number; sources: number[]; phases: number[]; payloads?: number[] };
+export type PeriodicPose = { actor: number; sources: number[]; phases: number[]; payloads?: number[];
+  carriers?: number[]; selected?: number };
 type Payload = { mask: NativePoint[]; ink: number; goal: number };
-export type PeriodicContactMove = { direction: Direction; pose: PeriodicPose; contact: number | null; automatic: number[]; payloadContact?: number };
+type Carrier = { size: NativePoint; goal: number; marks: NativePoint[] };
+export type PeriodicContactMove = { direction: Direction; pose: PeriodicPose; contact: number | null; automatic: number[];
+  payloadContact?: number; carrierContact?: number };
 export type PeriodicContactRoute = {
   epoch: number; step: number; origin: NativePoint; size: NativePoint; field: number[]; goal: number;
   actorInk: number; actorMarker: number; sources: Source[]; calibration: ContactCalibration;
   splits: number[]; rhythms: (Rhythm | null)[]; pose: PeriodicPose; evidence: string[]; payloads?: Payload[];
+  carriers?: Carrier[];
+  planned?: PeriodicContactMove[];
   observedControls: Readonly<Record<string, string>>; stopped: boolean; samples: number;
 };
 
@@ -36,14 +41,40 @@ function boxValues(rows: NativeRows, [l, t, r, b]: NativeBox): number[] {
   return rows.slice(t, b + 1).flatMap(row => row.slice(l, r + 1));
 }
 
+function measuredCarriers(observation: NativeObservation, rows: NativeRows, step: number, ink: number, marker: number) {
+  const candidates = observation.entities.flatMap(part => {
+    const [l, t, r, b] = part.bbox, [w, h] = boxSize(part.bbox);
+    if (part.palette_value !== ink || w % step || h % step || w * h <= step * step || w * h > 4 * step * step) return [];
+    const marks: NativePoint[] = [], inks = new Set<number>();
+    for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
+      const value = rows[y]![x]!;
+      if (value === ink) continue;
+      if (x === l || x === r || y === t || y === b) return [];
+      marks.push([x - l, y - t]);
+      inks.add(value);
+    }
+    if (!marks.length || marks.length >= w * h / 4 || inks.size !== 1) return [];
+    return [{ box: part.bbox, size: [w / step, h / step] as NativePoint, marks, markInk: [...inks][0]! }];
+  }).sort((a, b) => a.size[0] - b.size[0] || a.size[1] - b.size[1]);
+  const active = candidates.filter(body => body.markInk === marker);
+  const idle = new Set(candidates.filter(body => body.markInk !== marker).map(body => body.markInk));
+  return candidates.length >= 2 && candidates.length <= 3 && active.length === 1 && idle.size === 1
+    && new Set(candidates.map(body => body.size.join(','))).size === candidates.length
+    ? { candidates, selected: candidates.indexOf(active[0]!) } : null;
+}
+
 export function measurePeriodicContact(observation: NativeObservation, rows: NativeRows, calibration: ContactCalibration,
   actorInk: number, actorMarker: number, observedControls: Readonly<Record<string, string>>,
   previous?: PeriodicContactRoute): PeriodicContactRoute | null {
   const { pitch: step, band } = calibration;
   const actor = observation.entities.filter(part => part.palette_value === actorInk && boxSize(part.bbox).every(n => n === step)
     && part.area === step * step - 1 && boxValues(rows, part.bbox).every(ink => ink === actorInk || ink === actorMarker));
-  if (step < 2 || actor.length !== 1) return null;
-  const actorBox = actor[0]!.bbox, origin = [actorBox[0] % step, actorBox[1] % step] as const;
+  if (step < 2) return null;
+  const relay = actor.length === 0 && previous && calibratedPeriodicContact(previous)
+    ? measuredCarriers(observation, rows, step, actorInk, actorMarker) : null;
+  if (actor.length !== 1 && !relay) return null;
+  const actorBox = relay ? relay.candidates[relay.selected]!.box : actor[0]!.bbox;
+  const origin = [actorBox[0] % step, actorBox[1] % step] as const;
   const size = [Math.floor((rows[0]!.length - origin[0]) / step), Math.floor((rows.length - origin[1]) / step)] as const;
   const grid = { step, origin, size };
   const cells = Array.from({ length: size[0] * size[1] }, (_, i) => periodicContactBox(grid, i));
@@ -101,38 +132,54 @@ export function measurePeriodicContact(observation: NativeObservation, rows: Nat
     return outline.length >= 3 * step + 4 && inks.size === 1 && ink !== undefined
       && ![floor, band, actorInk, actorMarker, ...sources.flatMap(source => source.source.inks)].includes(ink) ? [{ i, outline }] : [];
   });
-  if (goals.length !== 1) return null;
-  const { i: goal, outline } = goals[0]!;
-  const excluded = new Set(outline.map(point => point.join(',')));
+  if (!relay && goals.length !== 1) return null;
+  const excluded = new Set((relay ? [] : goals[0]!.outline).map(point => point.join(',')));
   const parts = previous ? maskedParts(observation.entities, step, box => cells.some(cell => cell[0] === box[0] && cell[1] === box[1])) : [];
   const targets = parts.flatMap(target => {
     if (target.paint !== floor || target.mask.length <= 1) return [];
     const shape = fittedOutline(observation.entities, target, step);
     return shape ? [{ target, shape }] : [];
   });
-  const payloads = targets.flatMap(({ target, shape }) => {
+  const carrierTargets = relay?.candidates.flatMap(body => {
+    const matching = targets.filter(({ target }) => boxSize(target.box).every((extent, axis) => extent === body.size[axis]! * step)
+      && target.mask.length === body.size[0] * body.size[1]);
+    if (matching.length !== 1) return [];
+    const { target, shape } = matching[0]!;
+    const goal = cells.findIndex(cell => cell[0] === target.box[0] && cell[1] === target.box[1]);
+    return goal >= 0 ? [{ goal, target, shape, body }] : [];
+  });
+  if (relay && carrierTargets?.length !== relay.candidates.length) return null;
+  const carrierPoses = relay?.candidates.map(({ box }) => cells.findIndex(cell => cell[0] === box[0] && cell[1] === box[1]));
+  if (carrierPoses?.some(position => position < 0)) return null;
+  for (const { shape } of carrierTargets ?? []) for (const [x, y] of shape.mask) excluded.add([shape.bbox[0] + x, shape.bbox[1] + y].join(','));
+  const cargoTargets = targets.filter(({ target }) => !carrierTargets?.some(carrier => carrier.target === target));
+  const payloads = cargoTargets.flatMap(({ target, shape }) => {
     const candidates = parts.filter(part => part.signature === target.signature && part.paint !== floor && part.paint !== band
       && part.paint !== actorInk && part.paint !== actorMarker && !sources.some(source => overlaps(source.box, part.box)));
     if (candidates.length !== 1) return [];
     for (const [x, y] of shape.mask) excluded.add([shape.bbox[0] + x, shape.bbox[1] + y].join(','));
     return [{ ...candidates[0]!, target: cells.findIndex(cell => cell[0] === target.box[0] && cell[1] === target.box[1]) }];
   });
-  if (payloads.length !== targets.length
+  if (payloads.length !== cargoTargets.length
     || payloads.some((part, i) => part.target < 0 || payloads.slice(0, i).some(other => overlaps(other.box, part.box)))) return null;
   const payloadCells = new Set(payloads.flatMap(part => part.mask.map(([x, y]) => [part.box[0] + x * step, part.box[1] + y * step].join(','))));
   const field = cells.map(([l, t, r, b]) => {
     const values: number[] = [];
     for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
       if (!excluded.has([x, y].join(','))) values.push(covered(x, y) || contains(actorBox, x, y)
+        || relay?.candidates.some(({ box }) => contains(box, x, y))
         || payloadCells.has([l, t].join(',')) ? floor : rows[y]![x]!);
     }
     return values.every(ink => ink === floor) ? 0 : values.every(ink => ink === band) ? 1 : 2;
   });
   const cell = cells.findIndex(box => box[0] === actorBox[0] && box[1] === actorBox[1]);
+  const goal = relay ? carrierTargets![relay.selected]!.goal : goals[0]!.i;
   return { ...grid, epoch: observation.level_epoch, field, goal, actorInk, actorMarker, calibration, observedControls,
+    ...(relay ? { carriers: carrierTargets!.map(({ body: { size, marks }, goal }) => ({ size, marks, goal })) } : {}),
     sources: sources.map(item => item.source), splits: sources.map(item => item.split), rhythms: sources.map(() => null),
     ...(payloads.length ? { payloads: payloads.map(item => ({ mask: item.mask, ink: item.paint, goal: item.target })) } : {}),
     pose: { actor: cell, sources: sources.map(item => item.at), phases: sources.map(() => 0),
+      ...(relay ? { carriers: carrierPoses!, selected: relay.selected } : {}),
       ...(payloads.length ? { payloads: payloads.map(item => cells.findIndex(cell => cell[0] === item.box[0] && cell[1] === item.box[1])) } : {}) },
     evidence: [calibration.evidence], stopped: false, samples: 0 };
 }
@@ -212,8 +259,29 @@ function payloadsAt(route: PeriodicContactRoute, rows: NativeRows, pose: Periodi
   });
 }
 
+function carrierAt(route: PeriodicContactRoute, rows: NativeRows, at: number, carrier: Carrier, selected: boolean) {
+  const [l, t, r, b] = periodicContactBox(route, at, carrier.size);
+  const [x0, y0] = carrier.marks[0]!;
+  const marker = rows[t + y0]?.[l + x0];
+  if (marker === undefined || marker === route.actorInk || (marker === route.actorMarker) !== selected) return false;
+  if (!carrier.marks.every(([x, y]) => rows[t + y]?.[l + x] === marker)) return false;
+  for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
+    const ink = rows[y]?.[x];
+    if (ink === route.actorInk || carrier.marks.some(([u, v]) => x === l + u && y === t + v)) continue;
+    if (ink !== route.actorMarker || x > l && x < r && y > t && y < b) return false;
+  }
+  return true;
+}
+
+function carriersAt(route: PeriodicContactRoute, rows: NativeRows, pose: PeriodicPose) {
+  return route.carriers?.every((carrier, index) => {
+    const at = pose.carriers?.[index];
+    return at !== undefined && carrierAt(route, rows, at, carrier, index === pose.selected);
+  }) ?? actorAt(route, rows, pose.actor, pose);
+}
+
 export function matchesPeriodicContact(route: PeriodicContactRoute, rows: NativeRows) {
-  return actorAt(route, rows, route.pose.actor) && payloadsAt(route, rows, route.pose) && route.sources.every((source, i) =>
+  return carriersAt(route, rows, route.pose) && payloadsAt(route, rows, route.pose) && route.sources.every((source, i) =>
     readSplit(rows, source, periodicContactBox(route, route.pose.sources[i]!, source.size)) === route.splits[i]);
 }
 
@@ -226,6 +294,11 @@ export function projectPeriodicSnapshot(route: PeriodicContactRoute, move: Perio
 
 export function observePeriodicContact(route: PeriodicContactRoute, rows: NativeRows, frames: readonly NativeRows[],
   evidence: string, prediction?: PeriodicContactMove): PeriodicContactRoute | null {
+  const refs = [...new Set([route.calibration.evidence, ...route.evidence.slice(-5), evidence])];
+  if (route.carriers && prediction?.direction[0] === 'ACTION6') {
+    const projected = { ...route, pose: prediction.pose, evidence: refs };
+    return matchesPeriodicContact(projected, rows) ? projected : null;
+  }
   const sources = prediction?.pose.sources ?? route.pose.sources;
   const known = route.rhythms;
   const rhythms: (Rhythm | null)[] = [], splits: number[] = [], phases: number[] = [];
@@ -258,12 +331,25 @@ export function observePeriodicContact(route: PeriodicContactRoute, rows: Native
   }
   const candidates = prediction ? [prediction.pose.actor] : Array.from({ length: route.field.length }, (_, i) => i);
   const payloads = prediction?.pose.payloads ?? route.pose.payloads;
-  const actor = candidates.filter(at => actorAt(route, rows, at, { actor: at, sources, phases, ...(payloads ? { payloads } : {}) }));
-  if (actor.length !== 1) return null;
-  const pose = { actor: actor[0]!, sources, phases, ...(payloads ? { payloads } : {}) };
+  let pose: PeriodicPose;
+  if (route.carriers) {
+    const selected = prediction?.pose.selected ?? route.pose.selected!;
+    const all = Array.from({ length: route.field.length }, (_, at) => at);
+    const carriers = prediction?.pose.carriers ?? route.carriers.flatMap((carrier, i) => {
+      const possible = all.filter(at => carrierAt(route, rows, at, carrier, selected === i));
+      return possible.length === 1 ? possible : [];
+    });
+    if (carriers.length !== route.carriers.length) return null;
+    pose = { actor: carriers[selected]!, sources, phases, carriers, selected, ...(payloads ? { payloads } : {}) };
+    if (!carriersAt(route, rows, pose)) return null;
+  } else {
+    const actor = candidates.filter(at => actorAt(route, rows, at, { actor: at, sources, phases, ...(payloads ? { payloads } : {}) }));
+    if (actor.length !== 1) return null;
+    pose = { actor: actor[0]!, sources, phases, ...(payloads ? { payloads } : {}) };
+  }
   if (!payloadsAt(route, rows, pose)) return null;
   return { ...route, sources: forms, splits, rhythms, pose, samples: route.samples + Number(!prediction),
-    evidence: [...new Set([route.calibration.evidence, ...route.evidence.slice(-5), evidence])] };
+    evidence: refs };
 }
 
 type CellBox = readonly [left: number, top: number, right: number, bottom: number];
@@ -367,10 +453,10 @@ export function planPeriodicContact(route: PeriodicContactRoute, directions: rea
 export function choosePeriodicSample(route: PeriodicContactRoute, path: readonly PeriodicContactMove[], directions: readonly Direction[]) {
   const first = path[0];
   if (first && first.contact === null && first.payloadContact === undefined) return first;
-  const project = route.payloads ? createPeriodicPayloadProjection(route, false) : contactProjector(route, false);
+  const project = route.payloads || route.carriers ? createPeriodicPayloadProjection(route, false) : contactProjector(route, false);
   const alternatives = directions.flatMap(direction => {
     const move = project(route.pose, direction);
-    return move && move.contact === null && move.payloadContact === undefined
+    return move && move.contact === null && move.payloadContact === undefined && move.carrierContact === undefined
       && Object.hasOwn(route.observedControls, direction[0]) ? [move] : [];
   });
   return alternatives.find(move => move.pose.actor === route.pose.actor) ?? alternatives[0] ?? null;

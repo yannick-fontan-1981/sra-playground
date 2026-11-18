@@ -1,5 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -10,6 +10,7 @@ import { contactBox, identifyContactRoute, identifyMaskedContactRoute, identifyR
 import { calibratedPeriodicContact, choosePeriodicSample, matchesPeriodicContact, measurePeriodicContact, observePeriodicContact,
   periodicContactBox, planPeriodicContact, projectPeriodicSnapshot,
   type PeriodicContactRoute, type PeriodicContactMove } from './periodic-contact-route.ts';
+import { planPeriodicRelay } from './periodic-relay-planner.ts';
 
 export const translateCoupledPiecesId = 'sic_translate_coupled_pieces';
 export const learnContactAccessId = 'sic_learn_contact_access';
@@ -241,18 +242,23 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
   };
 }
 
-function proposePeriodicRoute(id: string, observation: NativeObservation, rows: NativeRows, route: PeriodicContactRoute,
-  remaining: number, mode: ReasoningMode): PeriodicProposal | null {
+async function proposePeriodicRoute(id: string, observation: NativeObservation, rows: NativeRows, route: PeriodicContactRoute,
+  remaining: number, mode: ReasoningMode, execution?: NativeExecution): Promise<PeriodicProposal | null> {
   const timed = calibratedPeriodicContact(route);
   if (route.stopped || !matchesPeriodicContact(route, rows) || !timed && route.samples >= 12) return null;
   const keys = directions.filter(([key]) => observation.available_action_refs.includes(key));
-  const path = route.payloads && !timed ? [] : planPeriodicContact(route, keys, Math.min(remaining, route.payloads ? 96 : 48));
+  const path = route.carriers
+    ? timed ? route.planned?.length ? route.planned
+      : await planPeriodicRelay(route, keys.filter(([key]) => Object.hasOwn(route.observedControls, key)), remaining, execution) : []
+    : route.payloads && !timed ? [] : planPeriodicContact(route, keys, Math.min(remaining, route.payloads ? 96 : 48));
   const first = timed ? path[0] : choosePeriodicSample(route, path, keys);
   if (!first) return null;
-  const contact = first.contact !== null || first.automatic.length > 0 || first.payloadContact !== undefined;
+  const distinctStep = (move: PeriodicContactMove) => move.contact !== null || move.automatic.length > 0
+    || move.payloadContact !== undefined || move.carrierContact !== undefined || move.direction[0] === 'ACTION6';
+  const contact = distinctStep(first);
   const batch = [first];
   if (timed && !contact) for (const move of path.slice(1, Math.min(maximumCommittedActions, remaining))) {
-    if (move.contact !== null || move.automatic.length || move.payloadContact !== undefined) break;
+    if (distinctStep(move)) break;
     batch.push(move);
   }
   const ref = observation.observation_ref;
@@ -263,10 +269,14 @@ function proposePeriodicRoute(id: string, observation: NativeObservation, rows: 
   const choice = resolveNavigationPrimitives({ mode, evidence, probe: !timed ? offer : null,
     access: timed && !contact ? offer : null, interaction: timed && contact ? offer : null });
   if (!choice.selected) return null;
-  const target = periodicContactBox(route, route.goal);
+  const focusCarrier = route.carriers?.[first.carrierContact ?? first.pose.selected!];
+  const target = periodicContactBox(route, focusCarrier?.goal ?? route.goal, focusCarrier?.size);
   const activeSource = first.contact ?? first.automatic[0];
   const box = (source: number, at = route.pose.sources[source]!) => periodicContactBox(route, at, route.sources[source]!.size);
+  const selecting = first.direction[0] === 'ACTION6';
   const reason = !timed ? 'Approach the opening and measure when the moving fronts extend and retract'
+    : selecting ? 'Transfer control to the piece needed for the next step'
+      : first.carrierContact !== undefined ? 'Move the other selectable piece to its next working area'
     : first.contact !== null ? 'Clear the passage by projecting the contacted pusher across the separating band'
       : first.payloadContact !== undefined ? 'Project the shaped payload into the matching opening'
       : first.automatic.length ? 'Use the measured extension to move the controlled piece toward the opening'
@@ -277,12 +287,24 @@ function proposePeriodicRoute(id: string, observation: NativeObservation, rows: 
     satisfactionContract: 'official_progress_after_reaching_the_matching_opening' };
   const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
   const composition = id + ':' + need.id;
-  const actions = batch.map(move => ({ action_ref: move.direction[0], data: {} }));
-  return { status: 'proposed', kind: id, periodicRoute: route, periodicMoves: batch, needId: need.id, actions,
+  const click = selecting ? periodicContactBox(route, first.pose.actor, route.carriers![first.pose.selected!]!.size) : null;
+  const point: NativePoint | null = click ? [Math.floor((click[0] + click[2]) / 2), Math.floor((click[1] + click[3]) / 2)] : null;
+  const witness = point ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason, evidence }) : null;
+  if (selecting && !witness) return null;
+  const data: Record<string, number> = point ? { x: point[0], y: point[1] } : {};
+  const actions = batch.map(move => ({ action_ref: move.direction[0], data: { ...data } }));
+  return { status: 'proposed', kind: id, periodicRoute: route.carriers && timed ? { ...route, planned: path } : route,
+    periodicMoves: batch, needId: need.id, actions,
     binding: { observation_ref: ref, level_epoch: route.epoch },
-    steps: actions.map((action, i) => ({ action, expected_after: timed ? batch[i]!.pose : null })),
+    steps: actions.map((action, i) => ({ action, expected_after: timed ? batch[i]!.pose : null,
+      ...(witness ? { point_binding: witness } : {}) })),
     sicSituationCard: { strategy: choice.selected.id, need: 'Reach the matching opening through periodic contact', situation: reason,
-      evidence, agenda: choice.entries, mode, triggerCard: choice.card, focus: periodicContactBox(route, route.pose.actor), target,
+      evidence, agenda: choice.entries, mode, triggerCard: choice.card,
+      focus: click ?? periodicContactBox(route, route.pose.actor, route.carriers?.[route.pose.selected!]?.size), target,
+      ...(route.carriers ? { carriers: route.carriers.map((body, i) => ({
+        box: periodicContactBox(route, route.pose.carriers![i]!, body.size), goal: periodicContactBox(route, body.goal, body.size),
+        selected: i === route.pose.selected,
+      })) } : {}),
       ...(route.payloads ? { payloads: route.payloads.map((payload, i) => {
         const size = [1 + Math.max(...payload.mask.map(([x]) => x)), 1 + Math.max(...payload.mask.map(([, y]) => y))] as const;
         return { box: periodicContactBox(route, route.pose.payloads![i]!, size), destination: periodicContactBox(route, payload.goal, size),
@@ -317,7 +339,7 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
     async propose(observation, rows, _inputs, remaining, execution): Promise<CoupledProposal | null> {
       if (remaining < 1 || !['ACTION6', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
       const epoch = observation.level_epoch, mode = execution?.reasoningMode ?? 'exploration';
-      if (periodic?.epoch === epoch) return proposePeriodicRoute(id, observation, rows, periodic, remaining, mode);
+      if (periodic?.epoch === epoch) return proposePeriodicRoute(id, observation, rows, periodic, remaining, mode, execution);
       if (route?.epoch === epoch) return proposeContactRoute(id, observation, rows, route, mode);
       const retained = route?.epoch === epoch - 1 && !route.stopped ? route : null;
       if (retained?.scene.fixedCarrier !== undefined || retained?.scene.carriers) {
@@ -331,7 +353,7 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
       if (acquired && periodicMaterial) {
         const scene = measurePeriodicContact(observation, rows, priorPeriodic?.calibration ?? retained!.scene.calibration,
           ...periodicMaterial, acquired.observedControls, priorPeriodic ?? undefined);
-        if (scene) return proposePeriodicRoute(id, observation, rows, scene, remaining, mode);
+        if (scene) return proposePeriodicRoute(id, observation, rows, scene, remaining, mode, execution);
       }
       const prior = state?.epoch === epoch ? state : null;
       const initial = prior ?? measure(rows);
@@ -462,7 +484,7 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
         const prediction = calibratedPeriodicContact(local) ? proposal.periodicMoves[index] : undefined;
         const observed = after.level_epoch === before.level_epoch && after.state === before.state
           ? observePeriodicContact(local, second, frames, after.observation_ref, prediction) : null;
-        periodic = observed ?? { ...local, stopped: true };
+        periodic = observed ? observed.planned ? { ...observed, planned: observed.planned.slice(1) } : observed : { ...local, stopped: true };
         return { events: [] };
       }
       if (isRoute(proposal)) {
