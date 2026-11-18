@@ -1,5 +1,25 @@
 /** Possible source ranks for each output rank of a tool that reorders a profile. */
 export type RankOrder = number[][];
+/** For each rank, true complements its height and null leaves the effect unresolved. */
+export type HeightInversion = (boolean | null)[];
+
+export function projectHeightInversion(values: readonly number[], ranks: HeightInversion, sum: number): number[] | null {
+  if (values.length !== ranks.length || values.some((value, i) => ranks[i] === null && sum - value !== value)) return null;
+  return values.map((value, i) => ranks[i] ? sum - value : value);
+}
+
+export function observeHeightInversion(before: readonly number[], after: readonly number[], sum: number,
+  prior?: HeightInversion): HeightInversion | null {
+  if (before.length !== after.length || prior && before.length !== prior.length) return null;
+  const ranks: HeightInversion = [];
+  for (const [i, original] of before.entries()) {
+    const actual = after[i]!, known = prior?.[i];
+    const unchanged = actual === original, reflected = actual === sum - original;
+    if (!unchanged && !reflected || known === true && !reflected || known === false && !unchanged) return null;
+    ranks.push(known ?? (unchanged && reflected ? null : reflected));
+  }
+  return ranks.includes(true) && (!prior || ranks.some((rank, i) => rank !== prior[i])) ? ranks : null;
+}
 
 function hasBijection(order: RankOrder): boolean {
   const assigned = new Map<number, number>();

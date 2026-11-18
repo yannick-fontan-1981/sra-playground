@@ -5,8 +5,8 @@ import { measureRankedCuts } from '../logos-engine/v5-stem-reliefs.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
-import { describeRankOrder, observeRankOrder, projectRankOrder, resizeRankOrder } from './profile-rank-order.ts';
-import type { RankOrder } from './profile-rank-order.ts';
+import { describeRankOrder, observeHeightInversion, observeRankOrder, projectHeightInversion, projectRankOrder, resizeRankOrder } from './profile-rank-order.ts';
+import type { HeightInversion, RankOrder } from './profile-rank-order.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const profileTransferId = 'sic_profile_transfer';
@@ -35,17 +35,20 @@ type Shift = -1 | 1;
 type Domain = { minimum: number; maximum: number };
 type Proof = { control: string; evidence: string };
 type OrderProof = Proof & { ranks: RankOrder; observations: string[] };
+type InversionProof = Proof & { ranks: HeightInversion };
 type Tool = { band: number; box: NativeBox; shift?: Shift; appearance?: string };
 type Scene = { bands: Band[]; focus: number; held: boolean; marker: NativeBox; tools: Tool[]; receiverAnchor?: ReceiverBinding };
 type State = { epoch: number; count: number; tried: string[]; evidence: string[]; stopped: boolean;
   verified?: Partial<Record<Strategy, Proof>>; shifts?: Partial<Record<Shift, Proof>>;
   used?: string[]; preparing?: true; domain?: Domain; orders?: Record<string, OrderProof>; complements?: Record<string, Proof>;
+  inversions?: Record<string, InversionProof>;
   receiverAnchor?: ReceiverBinding };
 type Transfer = { completed: number; used: string[]; evidence: string[]; toolControl?: string; shifts?: Partial<Record<Shift, Proof>>;
   orders?: Record<string, OrderProof> };
 type Work = { focus: number; held: boolean; profiles: number[][]; acquired: boolean[] };
 type Preparation = { phase: Strategy; command: NativeCommand; target: number; projected: Work; tool?: NativeBox; shift?: Shift;
-  ordering?: { support: string; probe: boolean; transferred?: RankOrder }; complement?: string };
+  ordering?: { support: string; probe: boolean; transferred?: RankOrder; compareHeights?: true };
+  complement?: string; inversion?: string };
 type Proposal = NativeProposal & { local: State; scene: Scene; strategy: Strategy; target: number; attempt: string; needId: string; preparation?: Preparation };
 const equal = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 const empty = (epoch = 0): State => ({ epoch, count: 0, tried: [], evidence: [], stopped: false });
@@ -162,7 +165,7 @@ function measureDomain(scene: Scene): Domain | null {
 }
 
 function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: Transfer, remaining: number, height: number,
-  domain: Domain | null, orders?: State['orders']): Preparation | null {
+  domain: Domain | null, orders?: State['orders'], inversions?: State['inversions']): Preparation | null {
   const commandFor = (ref: string | undefined) => inputs.find(command => command.action_ref === ref);
   const transform = commandFor(prior.toolControl);
   const unknown = domain ? [] : inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref) && !prior.used.includes(command.action_ref));
@@ -173,13 +176,17 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
   const complementaryTool = scene.receiverAnchor && domain && transform && tools.every(tool => !tool.shift)
     ? tools.filter(tool => tool.appearance && !prior.orders?.[tool.appearance]) : [];
   const complement = complementaryTool.length === 1 && domain ? domain.minimum + domain.maximum : null;
+  const compareHeights = complementaryTool.length > 1;
   const complementProfile = (profile: number[]) => profile.map(value => complement! - value);
   function contributes(profile: number[], acquired: boolean[]) {
     const current = heightMultiset(profile), inverse = complement === null ? null : heightMultiset(complementProfile(profile));
     return multisets.some((wanted, i) => !acquired[i] && (wanted === current || wanted === inverse));
   }
   const queue: { current: Work; first: Preparation | null; depth: number }[] = [{ current: workshopState(scene), first: null, depth: 0 }];
-  const seen = new Set([JSON.stringify(queue[0]!.current)]);
+  // Until the next fit, inactive profiles do not constrain the carried profile or its tools.
+  const searchKey = (work: Work) => JSON.stringify(compareHeights && work.held
+    ? [work.focus, work.profiles[work.focus], work.acquired] : work);
+  const seen = new Set([searchKey(queue[0]!.current)]);
   let probe: Preparation | null = null, progress: Preparation | null = null;
   const startingReceipts = queue[0]!.current.acquired;
   const alreadyAcquired = startingReceipts.filter(Boolean).length;
@@ -192,15 +199,15 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
     if (canReorder && !progress && first && current.acquired.filter(Boolean).length > alreadyAcquired) progress = first;
     if (depth >= remaining || queue.length >= (domain ? 8192 : 256)) continue;
     const prepare = (phase: Strategy, command: NativeCommand, target: number, projected: Work, tool?: Tool,
-      ordering?: Preparation['ordering'], complementSupport?: string): Preparation => first ?? { phase, command, target, projected,
+      ordering?: Preparation['ordering'], complementSupport?: string, inversion?: string): Preparation => first ?? { phase, command, target, projected,
       ...(tool ? { tool: tool.box } : {}), ...(tool?.shift ? { shift: tool.shift } : {}), ...(ordering ? { ordering } : {}),
-      ...(complementSupport ? { complement: complementSupport } : {}) };
+      ...(complementSupport ? { complement: complementSupport } : {}), ...(inversion ? { inversion } : {}) };
     const add = (phase: Strategy, command: NativeCommand, target: number, projected: Work, tool?: Tool,
-      ordering?: Preparation['ordering'], complementSupport?: string) => {
-      const id = JSON.stringify(projected);
+      ordering?: Preparation['ordering'], complementSupport?: string, inversion?: string) => {
+      const id = searchKey(projected);
       if (seen.has(id)) return;
       seen.add(id);
-      queue.push({ current: projected, first: prepare(phase, command, target, projected, tool, ordering, complementSupport), depth: depth + 1 });
+      queue.push({ current: projected, first: prepare(phase, command, target, projected, tool, ordering, complementSupport, inversion), depth: depth + 1 });
     };
     const { focus, held, profiles, acquired } = current;
     for (const [next, ref] of [[focus - 1, 'ACTION1'], [focus + 1, 'ACTION2']] as const) {
@@ -210,7 +217,8 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
       if (held) [moved[focus], moved[next]] = [profiles[next]!, profiles[focus]!];
       add(held ? 'carry_profile_to_receiver_band' : 'locate_compatible_profile', command, next, { ...current, focus: next, profiles: moved });
     }
-    if (toggle && (held || !scene.receiverAnchor || contributes(profiles[focus]!, acquired))) {
+    if (toggle && (!compareHeights || !held || depth === 0)
+      && (held || !scene.receiverAnchor || contributes(profiles[focus]!, acquired) || compareHeights)) {
       add(held ? 'release_profile_after_fit' : 'test_profile_carry', toggle, focus, { ...current, held: !held });
     }
     if (!held) continue;
@@ -224,6 +232,19 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
     const tool = available[0]!, shift = tool.shift, profile = profiles[focus]!;
     if (canReorder && transform && !shift) {
       const support = tool.box.join(','), known = orders?.[support];
+      const inversion = inversions?.[support];
+      if (inversion && domain) {
+        const changedProfile = projectHeightInversion(profile, inversion.ranks, domain.minimum + domain.maximum);
+        if (changedProfile) {
+          const target = needed.findIndex((wanted, i) => !acquired[i] && equal(wanted, changedProfile));
+          const changed = [...profiles]; changed[focus] = changedProfile;
+          add('test_framed_profile_tool', transform, target < 0 ? focus : target, { ...current, profiles: changed }, tool,
+            undefined, undefined, support);
+        } else if (!probe) {
+          probe = prepare('test_framed_profile_tool', transform, focus, current, tool, { support, probe: true, compareHeights: true });
+        }
+        continue;
+      }
       if (complement !== null && tool === complementaryTool[0]) {
         const inverted = complementProfile(profile);
         if (!contributes(inverted, acquired)) continue;
@@ -245,7 +266,9 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
       } else if (!probe && new Set(profile).size > 1) {
         const multiset = heightMultiset(profile);
         const target = needed.findIndex((wanted, i) => !acquired[i] && multisets[i] === multiset && !equal(wanted, profile));
-        if (target >= 0) probe = prepare('test_framed_profile_tool', transform, target, current, tool, { support, probe: true });
+        const compare = compareHeights && complementaryTool.includes(tool);
+        if (target >= 0 || compare) probe = prepare('test_framed_profile_tool', transform, target < 0 ? focus : target, current, tool,
+          { support, probe: true, ...(compare ? { compareHeights: true } : {}) });
       }
       continue;
     }
@@ -298,7 +321,7 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
         || bands.filter(candidate => equal(candidate.profile.values, band.receiver.values)).length === 1);
       const needsPreparation = multipleTools || local.preparing || !direct;
       const preparation = acquired && needsPreparation && (!multipleTools || domain)
-        ? prepareProfile(scene, inputs, acquired, remaining, rows.length, domain, local.orders) : null;
+        ? prepareProfile(scene, inputs, acquired, remaining, rows.length, domain, local.orders, local.inversions) : null;
       if (!preparation && needsPreparation) return null;
       const target = preparation?.target ?? (filled(bands[0]!.receiver) ? 1 : 0);
       if (!preparation && filled(bands[target]!.receiver)) return null;
@@ -318,14 +341,15 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       if (!offer?.command) return null;
       const { phase, command } = offer;
       const attempt = JSON.stringify([bands.map(band => [band.profile.values, band.receiver.values]), focus, held, command.action_ref,
-        ...(local.orders ? [Object.entries(local.orders).map(([support, proof]) => [support, proof.ranks])] : [])]);
+        ...(local.orders ? [Object.entries(local.orders).map(([support, proof]) => [support, proof.ranks])] : []),
+        ...(local.inversions ? [Object.entries(local.inversions).map(([support, proof]) => [support, proof.ranks])] : [])]);
       if (local.tried.includes(attempt)) return null;
-      const shift = preparation?.shift, ordering = preparation?.ordering, complement = preparation?.complement;
+      const shift = preparation?.shift, ordering = preparation?.ordering, complement = preparation?.complement, inversion = preparation?.inversion;
       const orderProof = ordering ? local.orders?.[ordering.support] : undefined;
-      const proof = ordering ? orderProof : complement ? local.complements?.[complement]
+      const proof = ordering ? orderProof : complement ? local.complements?.[complement] : inversion ? local.inversions?.[inversion]
         : shift ? local.shifts?.[shift] ?? acquired?.shifts?.[shift] : local.verified?.[phase];
       const reused = ordering ? !ordering.probe && proof?.control === command.action_ref
-        : proof?.control === command.action_ref || !shift && !complement && !!preparation && !!acquired?.used.includes(command.action_ref);
+        : proof?.control === command.action_ref || !shift && !complement && !inversion && !!preparation && !!acquired?.used.includes(command.action_ref);
       const ref = observation.observation_ref;
       const transferredProof = ordering?.transferred && preparation?.tool
         ? scene.tools.find(tool => equal(tool.box, preparation.tool!))?.appearance : undefined;
@@ -339,7 +363,10 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = reused ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
+      const invertedRanks = inversion && local.inversions?.[inversion]?.ranks.flatMap((flipped, i) => flipped ? [i + 1] : []);
       const label = complement ? proof ? 'Apply the measured height complement to every tooth' : 'Test whether the tool complements every tooth height'
+        : invertedRanks ? `Complement the tooth heights at positions ${invertedRanks.join(', ')}`
+        : ordering?.compareHeights ? 'Check which tooth heights the tool changes or reorders'
         : ordering?.probe ? 'Test whether the tool reorders the teeth while preserving their heights'
         : ordering?.transferred ? describeRankOrder(ordering.transferred)
         : orderProof ? describeRankOrder(orderProof.ranks)
@@ -401,8 +428,10 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = proposal.local;
       const next = measure(after, second, false, proposal.scene.receiverAnchor), ordering = proposal.preparation?.ordering;
-      const probedOrder = ordering?.probe ? observeOrderProbe(proposal, next) : null;
-      const confirmed = ordering?.probe ? !!probedOrder : observed(proposal, next);
+      const knownInversion = ordering && local.inversions?.[ordering.support];
+      const probedOrder = ordering?.probe && !knownInversion ? observeOrderProbe(proposal, next) : null;
+      const probedInversion = ordering?.compareHeights && !probedOrder ? observeInversionProbe(proposal, next) : null;
+      const confirmed = ordering?.probe ? !!(probedOrder || probedInversion) : observed(proposal, next);
       const newOrder = probedOrder ?? (confirmed && ordering?.transferred && next
         ? observeRankOrder(proposal.scene.bands[proposal.scene.focus]!.profile.values, next.bands[next.focus]!.profile.values,
           local.orders?.[ordering.support]?.ranks) : null);
@@ -414,6 +443,7 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       state = { ...local, count: local.count + 1, stopped: !confirmed,
         ...(proposal.preparation ? { preparing: true as const } : {}),
         ...(newOrder && ordering ? { orders: { ...local.orders, [ordering.support]: { ...proof, ranks: newOrder, observations } } } : {}),
+        ...(probedInversion && ordering ? { inversions: { ...local.inversions, [ordering.support]: { ...proof, ranks: probedInversion } } } : {}),
         ...(confirmed && complement ? { complements: { ...local.complements, [complement]: proof } } : {}),
         ...(confirmed && shift ? { shifts: { ...local.shifts, [shift]: proof } } : {}),
         ...(confirmed ? { verified: { ...local.verified, [proposal.strategy]: proof },
@@ -430,20 +460,35 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
   };
 }
 
-function observeOrderProbe({ local, scene, preparation }: Proposal, next: Scene | null): RankOrder | null {
-  const ordering = preparation?.ordering;
-  if (!next || !ordering?.probe || next.focus !== scene.focus || !next.held || next.bands.length !== scene.bands.length) return null;
+function isolatedToolChange(scene: Scene, next: Scene | null): { before: number[]; after: number[] } | null {
+  if (!next || next.focus !== scene.focus || !next.held || next.bands.length !== scene.bands.length) return null;
   if (!scene.bands.every((band, i) => equal(band.receiver.values, next.bands[i]!.receiver.values)
     && (i === scene.focus || equal(band.profile.values, next.bands[i]!.profile.values)))) return null;
+  return { before: scene.bands[scene.focus]!.profile.values, after: next.bands[next.focus]!.profile.values };
+}
+
+function observeInversionProbe({ local, scene, preparation }: Proposal, next: Scene | null): HeightInversion | null {
+  const ordering = preparation?.ordering, domain = local.domain, change = isolatedToolChange(scene, next);
+  return ordering?.compareHeights && domain && change
+    ? observeHeightInversion(change.before, change.after, domain.minimum + domain.maximum, local.inversions?.[ordering.support]?.ranks)
+    : null;
+}
+
+function observeOrderProbe({ local, scene, preparation }: Proposal, next: Scene | null): RankOrder | null {
+  const ordering = preparation?.ordering, change = isolatedToolChange(scene, next);
+  if (!ordering?.probe || !change || ordering.compareHeights && equal(change.before, change.after)) return null;
   const prior = local.orders?.[ordering.support]?.ranks;
-  const result = observeRankOrder(scene.bands[scene.focus]!.profile.values, next.bands[next.focus]!.profile.values, prior);
+  const result = observeRankOrder(change.before, change.after, prior);
   return result && (!prior || result.some((ranks, i) => ranks.length < prior[i]!.length)) ? result : null;
 }
 
 function observed(proposal: Proposal, next: Scene | null): boolean {
   if (!next) return false;
   const { strategy, scene, target, preparation } = proposal;
-  if (preparation?.ordering?.probe) return observeOrderProbe(proposal, next) !== null;
+  if (preparation?.ordering?.probe) {
+    const knownInversion = proposal.local.inversions?.[preparation.ordering.support];
+    return !knownInversion && observeOrderProbe(proposal, next) !== null || observeInversionProbe(proposal, next) !== null;
+  }
   if (preparation) return JSON.stringify(workshopState(next)) === JSON.stringify(preparation.projected);
   switch (strategy) {
     case 'locate_compatible_profile': return !next.held && next.focus !== scene.focus;
