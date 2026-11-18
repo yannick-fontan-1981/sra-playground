@@ -105,6 +105,7 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   if (decision.result !== strategy) return null;
   const preparation = recording.preparation;
   const beforeFirstCommit = !!preparation && recording.paths.length === 0;
+  const auxiliary = recording.lane?.points[recording.lane.index];
   const situation = choice.entry ? 'Step into the linked frame on the tick of the recorded activation'
     : pulseProbe ? 'Reach the linked contact and check whether it sends a pulse between the frames'
       : knownInteraction && recording.pendingPulse ? 'Record the timed pulse for a later carrier'
@@ -114,6 +115,7 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
     : beforeFirstCommit && !preparation.event ? 'Reach the contact linked to the solid obstruction and measure what it changes'
     : beforeFirstCommit ? 'Leave the shifted obstruction behind and reach a contact to hold'
     : knownInteraction ? 'Record the measured route that opened the passage'
+    : auxiliary && recording.paths.length === scene.slots.length - 1 ? 'Cross while the independent carrier keeps the relevant passage open'
     : recording.node ? 'Reach another contact while checking the replayed paths'
       : 'Reach the receiver while the recorded contacts keep the passages open';
   const evidence: [string, ...string[]] = [ref, ...new Set([...recording.paths.flatMap(item => item.evidence), ...recording.evidence]
@@ -132,6 +134,7 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
     sicSituationCard: { strategy, need: 'Keep the recorded contacts active while reaching the receiver', situation, evidence, agenda: [],
       mode, triggerCard: chooseLanding, actor: box(from, scene.body.size), target: box(destination, scene.body.size),
       remote: scene.transfer?.channel ?? peerBounds(recording.node?.peer_support ?? []), slots: scene.slots,
+      ...(auxiliary ? { externalCarriers: [box(auxiliary, scene.body.size)] } : {}),
       replayActors: replaySprites(observation, recording), replaySupports: [
         ...openSupports(recording), ...(scene.transfer?.frames.map(point => box(point, scene.body.size)) ?? []),
       ] },
@@ -165,11 +168,11 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
       if (scene.slots.length > 2) {
         let current: Recording | null = null;
         if (recording?.epoch === epoch - 1 && !recording.stopped) {
-          current = beginRecording(scene, epoch, recording.vectors, recording.phase, recording.evidence, rows);
+          current = beginRecording(scene, epoch, recording.vectors, recording.phase, recording.evidence, rows, observation);
         } else if (state?.epoch === epoch - 1 && state.replay && !state.stopped && state.scene.body.quantum === scene.body.quantum) {
           const evidence = [state.phaseEvidence, ...Object.values(state.controlEvidence ?? {}), ...state.evidence]
             .filter((ref): ref is string => !!ref);
-          current = beginRecording(scene, epoch, state.controls, state.replay, [...new Set(evidence)], rows);
+          current = beginRecording(scene, epoch, state.controls, state.replay, [...new Set(evidence)], rows, observation);
         }
         return current && decide ? proposeRecording(observation, rows, current, decide, execution, family) : null;
       }

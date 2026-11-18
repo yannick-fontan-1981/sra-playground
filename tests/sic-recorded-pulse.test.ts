@@ -85,3 +85,44 @@ test('one recording preserves distinct ticks for two obstacle shifts before hold
     [[1, 'first-shift', true], [2, 'second-shift', true]]);
   assert.equal(saved?.paths[0]?.changed.length, 1);
 });
+
+test('track an independent lane operator separately and verify its change to a linked block', () => {
+  const player: NativePoint = [1, 4], auxiliary: NativePoint = [1, 13], switchPosition: NativePoint = [4, 13];
+  const contact: NativePoint = [4, 4], block: NativePoint = [7, 4], otherBlock: NativePoint = [13, 4];
+  const field = Array.from({ length: 17 }, () => Array<number>(20).fill(0));
+  const patch = (rows: number[][], [x, y]: NativePoint, ink: number) => {
+    for (let i = y; i < y + 2; i++) rows[i]!.fill(ink, x, x + 2);
+  };
+  const pixels = ([x, y]: NativePoint): NativePoint[] => [[x, y], [x + 1, y], [x, y + 1], [x + 1, y + 1]];
+  patch(field, player, 9);
+  patch(field, auxiliary, 10);
+  patch(field, switchPosition, 1);
+  patch(field, [7, 13], 1);
+  patch(field, contact, 1);
+  patch(field, block, 7);
+  patch(field, otherBlock, 8);
+  const layout: RecordingScene = { body: { ...scene.body, start: player }, goal: [16, 4], slots: scene.slots, nodes: [
+    { position: contact, peer_support: [[4, 0]] },
+    { position: switchPosition, peer_support: pixels(block) },
+    { position: [10, 4], peer_support: pixels(otherBlock) },
+  ] };
+  const observed = (actor: NativePoint, [x, y]: NativePoint) => {
+    const value = observation(actor);
+    return { ...value, entities: [...value.entities,
+      { bbox: [x, y, x + 1, y + 1], signature: 'independent', mask: scene.body.mask } as NativeObservation['entities'][number]] };
+  };
+  const initial = beginRecording(layout, 1, startRecording().vectors, 'ACTION5', ['start'], field, observed(player, auxiliary));
+  assert.ok(initial);
+  assert.deepEqual(initial.lane?.points, [auxiliary, switchPosition, [7, 13]]);
+  const choice = chooseRecording(observed(player, auxiliary), field, initial);
+  assert.ok(choice);
+  assert.deepEqual(choice.expected, contact);
+
+  const returned = structuredClone(field);
+  returned[0]![4] = 1;
+  patch(returned, block, 1);
+  assert.equal(observeRecording(choice, observed(contact, auxiliary), field, returned), null);
+  const accepted = observeRecording(choice, observed(contact, switchPosition), field, returned);
+  assert.equal(accepted?.lane?.switches[0]?.closed, false);
+  assert.equal(accepted?.pending.length, 1);
+});
