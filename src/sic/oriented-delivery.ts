@@ -1,4 +1,5 @@
 import { orientedCouplingInitial, orientedCouplingScene, orientedCouplingTile } from '../logos-engine/v6-oriented-coupling.ts';
+import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
@@ -13,19 +14,21 @@ export const verifyOrientedDeliveryId = 'sic_verify_oriented_delivery';
 export const learnOrientedDeliveryId = 'sic_learn_oriented_delivery';
 
 type Geometry = { pitch: number; phase: NativePoint; core: number; background: number; rest_shell: number;
-  targets: NativePoint[]; initial_boxes: NativePoint[] };
+  targets: NativePoint[]; initial_boxes: NativePoint[]; insetFill?: number };
 type Scene = { pose: NativePoint; face: NativePoint; face_value: number; boxes: Record<string, number> };
 type Relay = { axis: 0 | 1; line: number; direction: NativePoint; cells: NativePoint[]; carrier: string; evidence: string[] };
 type State = { epoch: number; geometry: Geometry; color: number; held: NativePoint | null; invitation: NativePoint | null;
   free: Record<string, NativePoint>; loaded: Record<string, NativePoint>; tried: string[]; refs: string[]; count: number;
   transports?: readonly Transport[]; sharedEvidence?: string; transportCarriers?: string[];
-  relay?: Relay; sectorNetwork?: SectorNetwork; passage?: DeliveryPassage; waits?: number; stalledWaits?: number; stopped?: boolean };
+  relay?: Relay; sectorNetwork?: SectorNetwork; passage?: DeliveryPassage; waits?: number; stalledWaits?: number; stopped?: boolean;
+  interference?: { ink: number; ref: string }; interceptionRef?: string };
 type Transport = { readonly carrier: string; readonly pose: NativePoint; readonly box: NativePoint;
   readonly sources: readonly string[] };
 type Move = { pose: NativePoint; face: NativePoint; cargo: NativePoint | null };
 type Motion = { input: string; prediction: Move };
 type Intent = 'motion' | 'attach' | 'release';
 type Step = { input: string; intent: Intent; prediction: Move | null; target: NativePoint | null; waitForTransport?: true;
+  intercept?: true;
   route?: Motion[] };
 type WalkStep = { input: string; before: Scene; after: Scene };
 type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string; walk?: WalkStep[] };
@@ -41,6 +44,60 @@ const positions = (scene: Scene) => Object.keys(scene.boxes).map(point).sort(com
 function tileBox(g: Geometry, [x, y]: NativePoint): NativeBox {
   const l = g.phase[0] + x * g.pitch, t = g.phase[1] + y * g.pitch;
   return [l, t, l + g.pitch - 1, t + g.pitch - 1];
+}
+
+function insetReceiver(rows: NativeRows, remembered: Geometry): Geometry | null {
+  const { pitch, phase: [px, py], core, rest_shell } = remembered;
+  const background = rows.flat().reduce((counts, ink) => counts.set(ink, (counts.get(ink) ?? 0) + 1), new Map<number, number>());
+  if ([...background].sort((a, b) => b[1] - a[1])[0]?.[0] !== remembered.background) return null;
+  const boxes: NativePoint[] = [];
+  const onEdge = (x: number, y: number, width: number, height: number) => x === 0 || y === 0 || x === width - 1 || y === height - 1;
+  for (let y = 0; py + (y + 1) * pitch <= rows.length; y++) {
+    for (let x = 0; px + (x + 1) * pitch <= rows[0]!.length; x++) {
+      const tile = orientedCouplingTile(rows, remembered, [x, y])!;
+      if (tile.every((row, dy) => row.every((ink, dx) => ink === (onEdge(dx, dy, pitch, pitch) ? rest_shell : core)))) boxes.push([x, y]);
+    }
+  }
+  if (boxes.length < 2 || boxes.length > 6) return null;
+  const occupied = new Set(boxes.map(key));
+  const candidates = geometricComponents(rows).flatMap(({ color, bbox: [l, t, r, b] }) => {
+    const width = r - l + 1, height = b - t + 1;
+    if (color !== core || width % pitch || height % pitch || (l - px) % pitch || (t - py) % pitch
+      || width < 2 * pitch || height < 2 * pitch || width * height > 12 * pitch * pitch) return [];
+    const left = (l - px) / pitch, top = (t - py) / pitch;
+    const targets: NativePoint[] = [];
+    for (let y = 0; y < height / pitch; y++) for (let x = 0; x < width / pitch; x++) targets.push([left + x, top + y]);
+    const covered = targets.filter(target => occupied.has(key(target)));
+    if (!covered.length || covered.length === targets.length || targets.length < boxes.length) return [];
+    const colors = new Set<number>();
+    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+      if (occupied.has(key([left + Math.floor(x / pitch), top + Math.floor(y / pitch)]))) continue;
+      const ink = rows[t + y]![l + x]!;
+      if (onEdge(x, y, width, height)) {
+        if (ink !== core) return [];
+      } else colors.add(ink);
+    }
+    const fill = [...colors][0];
+    return colors.size === 1 && fill !== core && fill !== remembered.background
+      ? [{ ...remembered, insetFill: fill, targets, initial_boxes: boxes }] : [];
+  });
+  return candidates.length === 1 ? candidates[0]! : null;
+}
+
+function carrierForms(rows: NativeRows, geometry: Geometry, ink: number) {
+  const { pitch } = geometry;
+  return geometricComponents(rows).flatMap(({ color, area, bbox: [l, t] }) => {
+    if (color !== ink || area !== pitch ** 2 && area !== (pitch - 2) ** 2) return [];
+    const inset = area !== pitch ** 2, point: NativePoint = [(l - geometry.phase[0] - Number(inset)) / pitch,
+      (t - geometry.phase[1] - Number(inset)) / pitch];
+    if (!point.every(Number.isInteger)) return [];
+    const tile = orientedCouplingTile(rows, geometry, point);
+    if (!tile) return [];
+    const rim = tile[0]![0]!;
+    const matches = tile.every((row, y) => row.every((value, x) =>
+      value === (inset && (y === 0 || x === 0 || y === pitch - 1 || x === pitch - 1) ? rim : ink)));
+    return matches ? [{ point, inset }] : [];
+  });
 }
 
 function carrierPositions(observation: NativeObservation, local: State): Map<string, NativePoint[]> {
@@ -128,21 +185,43 @@ function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: 
   return null;
 }
 
-function planDelivery(local: State, scene: Scene, rows: NativeRows, commands: Readonly<Record<string, NativePoint>>): Step | null {
-  const { geometry: g, held } = local, parts = positions(scene);
-  const reserved = new Set((local.transports ?? []).filter(item => item.sources.length >= 2).map(item => key(item.box)));
-  const goal = new Set(g.targets.map(key));
-  const floor = new Set([...parts, scene.pose, ...g.targets].map(key));
+function deliveryFloor(g: Geometry, scene: Scene, rows: NativeRows) {
+  const floor = new Set([...positions(scene), scene.pose, ...g.targets].map(key));
   for (let y = 0; y * g.pitch + g.phase[1] + g.pitch <= rows.length; y++) {
     for (let x = 0; x * g.pitch + g.phase[0] + g.pitch <= rows[0]!.length; x++) {
       const cell: NativePoint = [x, y];
-      if (orientedCouplingTile(rows, g, cell)?.every(row => row.every(value => value === g.background))) floor.add(key(cell));
+      const tile = orientedCouplingTile(rows, g, cell)!;
+      const ink = tile[0]![0]!;
+      if ((ink === g.background || ink === g.insetFill) && tile.every(row => row.every(value => value === ink))) floor.add(key(cell));
     }
   }
+  return floor;
+}
+
+function planInterception(local: State, scene: Scene, rows: NativeRows, commands: Readonly<Record<string, NativePoint>>,
+  carrier: ReturnType<typeof carrierForms>[number]): Step | null {
+  const target = carrier.point;
+  if (local.held) return null;
+  if (same(add(scene.pose, scene.face), target)) {
+    if (carrier.inset) return { input: 'ACTION5', intent: 'attach', prediction: null, target, intercept: true };
+    const input = Object.keys(commands).find(input => same(commands[input]!, scene.face));
+    return input ? { input, intent: 'motion', prediction: { pose: scene.pose, face: scene.face, cargo: null }, target } : null;
+  }
+  const fixed = new Set([...positions(scene), target].map(key));
+  const route = shortest({ pose: scene.pose, face: scene.face, cargo: null }, fixed, deliveryFloor(local.geometry, scene, rows),
+    commands, state => same(add(state.pose, state.face), target));
+  return route?.step ? { ...route.step, target } : null;
+}
+
+function planDelivery(local: State, scene: Scene, rows: NativeRows, commands: Readonly<Record<string, NativePoint>>,
+  blockers: readonly NativePoint[] = []): Step | null {
+  const { geometry: g, held } = local, parts = positions(scene);
+  const reserved = new Set((local.transports ?? []).filter(item => item.sources.length >= 2).map(item => key(item.box)));
+  const goal = new Set(g.targets.map(key)), floor = deliveryFloor(g, scene, rows);
   const choices: { step: Step; length: number; index: number; target: NativePoint; face: NativePoint }[] = [];
   for (const [index, part] of parts.entries()) {
     if (held ? !same(held, part) : goal.has(key(part)) || reserved.has(key(part))) continue;
-    const fixed = new Set(parts.filter(other => !same(part, other)).map(key));
+    const fixed = new Set([...parts.filter(other => !same(part, other)), ...blockers].map(key));
     for (const target of g.targets.filter(target => !fixed.has(key(target)))) {
       for (const face of held ? [scene.face] : Object.values(commands)) {
         let start: Move = { pose: scene.pose, face: scene.face, cargo: held };
@@ -414,6 +493,14 @@ function matchesScene(actual: Scene | null, predicted: Scene): boolean {
     && Object.entries(predicted.boxes).every(([position, value]) => actual.boxes[position] === value);
 }
 
+function confirmsInterception(proposal: Proposal, rows: NativeRows, scene: Scene | null): boolean {
+  const { geometry, interference } = proposal.local, target = proposal.step.target;
+  if (!interference || !target || !matchesScene(scene, proposal.scene)) return false;
+  const tile = orientedCouplingTile(rows, geometry, target);
+  return !!tile && tile.every(row => row.every(ink => ink === geometry.background || ink === geometry.insetFill))
+    && carrierForms(rows, geometry, interference.ink).length === 0;
+}
+
 export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryId): NativeFamily<Proposal> {
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
@@ -425,10 +512,11 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       const epoch = observation.level_epoch;
-      if (!(state?.epoch === epoch && (state.relay || state.sectorNetwork || state.passage))
+      if (!(state?.epoch === epoch && (state.relay || state.sectorNetwork || state.passage || state.geometry.insetFill !== undefined))
         && !(state?.epoch === epoch - 1 && state.sharedEvidence)) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal?.local.relay || proposal?.local.sectorNetwork || proposal?.local.passage ? proposal : null;
+      return proposal && (proposal.local.relay || proposal.local.sectorNetwork || proposal.local.passage
+        || proposal.local.geometry.insetFill !== undefined) ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !Object.keys(labels).every(input => observation.available_action_refs.includes(input))
@@ -440,9 +528,11 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const receipt = learns ? execution?.readPriorDirectionalScene?.(earlier => orientedCouplingInitial(earlier) as Geometry | null) : null;
       if (learns && (!receipt || receipt.afterRef !== observation.observation_ref)) return null;
       const ordinary = prior?.geometry ?? receipt?.scene ?? orientedCouplingInitial(rows) as Geometry | null;
-      const divided = !ordinary && !!previous;
-      const geometry = ordinary ?? (divided ? orientedCouplingInitial(rows, true) as Geometry | null : null);
+      const dividedGeometry = !ordinary && previous ? orientedCouplingInitial(rows, true) as Geometry | null : null;
+      const divided = !!dividedGeometry;
+      const geometry = ordinary ?? dividedGeometry ?? (previous ? insetReceiver(rows, previous.geometry) : null);
       if (!geometry || geometry.targets.length > 12 || (!divided && !prior?.sectorNetwork && geometry.initial_boxes.length > 6)) return null;
+      const inset = geometry.insetFill !== undefined;
       const possible = prior ? [prior.color] : [...new Set(rows.flat())].filter(value => ![geometry.core, geometry.background, geometry.rest_shell].includes(value));
       const scenes = possible.flatMap(color => {
         const scene = orientedCouplingScene(rows, geometry, color) as Scene | null;
@@ -460,43 +550,52 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         invitation: shellChanges.length ? ahead : null, free: receipt && delta ? { [receipt.command]: delta } : {}, loaded: {},
         tried: priorScene ? [JSON.stringify([priorScene.scene.pose, priorScene.scene.face, priorScene.scene.boxes, null, priorScene.command])] : [],
         refs: receipt ? [receipt.beforeRef, receipt.afterRef] : [], count: receipt ? 1 : 0 };
-      const relay = prior?.relay ?? (!prior && previous && !divided ? measureRelay(rows, observation, initial, scene, previous) : null);
+      const relay = prior?.relay ?? (!prior && previous && !divided && !inset ? measureRelay(rows, observation, initial, scene, previous) : null);
       const sectorNetwork = prior?.sectorNetwork ?? (divided && previous
         ? measureSectorNetwork(rows, geometry, scene.pose, positions(scene), sectorCarriers(observation, { ...initial, transportCarriers: previous.transportCarriers })) : null);
-      const measurePassage = !prior && !!previous && !relay && !divided;
+      const measurePassage = !prior && !!previous && !relay && !divided && !inset;
       const peers = prior?.passage || measurePassage
         ? sectorCarriers(observation, { ...initial, transportCarriers: previous?.transportCarriers ?? prior?.transportCarriers }) : [];
       const passage = prior?.passage ?? (measurePassage
         ? measureDeliveryPassage(rows, geometry, scene.pose, positions(scene), peers) : null);
       const handsOff = !!relay || !!sectorNetwork || !!passage;
       if (!handsOff && (divided || geometry.targets.length > 6)) return null;
-      const local: State = !prior && handsOff && previous
+      const local: State = !prior && (handsOff || inset) && previous
         ? { ...initial, ...(relay ? { relay } : {}), ...(sectorNetwork ? { sectorNetwork } : {}), ...(passage ? { passage } : {}),
           free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
           transportCarriers: [...(previous.transportCarriers ?? [])] } : initial;
       const commands: Readonly<Record<string, NativePoint>> = { ...labels, ...local.free, ...(local.held ? local.loaded : {}) };
       const reserved = (local.transports ?? []).filter(item => item.sources.length >= 2);
       const invited = same(ahead, local.invitation) && Object.hasOwn(scene.boxes, key(ahead)) && !reserved.some(item => same(item.box, ahead));
-      const unique = (step: Step) => JSON.stringify([scene.pose, scene.face, scene.boxes, local.held, step.input, ...(passage ? [peers] : [])]);
+      const forms = local.interference ? carrierForms(rows, geometry, local.interference.ink) : [];
+      const carrier = forms.length === 1 ? forms[0]! : null;
+      const blockers = inset ? [...externalCarriers(observation, local).values(), ...(carrier ? [carrier.point] : [])] : [];
+      const unique = (step: Step) => JSON.stringify([scene.pose, scene.face, scene.boxes, local.held, step.input,
+        ...(passage ? [peers] : []), ...(carrier ? [carrier.point] : [])]);
       const step: Step | null = sectorNetwork ? planSectorRelay(local, scene, commands)
         : relay ? planRelay(local, scene, rows, commands)
         : passage ? planPassage(local, scene, commands, peers)
         : !local.held && invited && (!local.count || !Object.keys(local.loaded).length)
         ? { input: 'ACTION5', intent: 'attach', prediction: null, target: ahead }
-        : planDelivery(local, scene, rows, commands) ?? allowDelivery(local, scene, rows, commands, reserved, step => local.tried.includes(unique(step)));
+        : (carrier ? planInterception(local, scene, rows, commands, carrier) : null)
+          ?? planDelivery(local, scene, rows, commands, blockers)
+          ?? allowDelivery(local, scene, rows, commands, reserved, step => local.tried.includes(unique(step)));
       if (!step || (!(handsOff && step.waitForTransport) && local.tried.includes(unique(step)))) return null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources)]
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, local.interference?.ref, local.interceptionRef,
+        ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources)]
         .filter((value): value is string => !!value && value !== ref))];
       const known = step.intent === 'motion' ? (local.held ? local.loaded : local.free)[step.input] : null;
       const mode = execution?.reasoningMode ?? 'exploration';
-      const knownInteraction = step.intent !== 'motion' && Object.keys(local.loaded).length > 0;
+      const knownInteraction = !step.intercept && step.intent !== 'motion' && Object.keys(local.loaded).length > 0;
       const facts = { routeSupported: !!known, knownInteraction, eligibleProbe: !known && !knownInteraction, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
       const strategy = known ? 'P07' : knownInteraction ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
       const label = navigationPrimitives[strategy], parent = 'G_official_completion';
-      const situation = sectorNetwork && step.waitForTransport ? 'Give the carriers time to finish deliveries in their sectors'
+      const situation = step.intercept ? 'Test contact with the carrier that removed a part from the receiver'
+        : carrier && !local.held ? 'Approach the carrier that moved a part out of the receiver'
+        : sectorNetwork && step.waitForTransport ? 'Give the carriers time to finish deliveries in their sectors'
         : sectorNetwork && step.intent === 'release' ? 'Leave the part for a carrier in a sector that still has an open target'
         : sectorNetwork && local.held ? 'Take the part to a relay port serving a sector that needs a delivery'
         : step.waitForTransport ? 'Keep the receiving area free while the other carrier completes the observed delivery'
@@ -515,7 +614,8 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const id = 'oriented-delivery:' + need.id, action = { action_ref: step.input, data: {} };
       const prediction = known || handsOff ? step.prediction : null;
       const peer = relay ? externalCarriers(observation, local).get(relay.carrier) : null;
-      const prefix = known && !handsOff && !local.sharedEvidence ? walkPrefix(step, scene, local, remaining) : [];
+      const exclusive = !local.sharedEvidence || (inset && !!local.interceptionRef && !blockers.length);
+      const prefix = known && !handsOff && exclusive ? walkPrefix(step, scene, local, remaining) : [];
       const walk = prefix.length > 1 ? prefix : undefined;
       const actions = walk?.map(step => ({ action_ref: step.input, data: {} })) ?? [action];
       return { status: 'proposed', kind: family, actions,
@@ -535,6 +635,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
           ...(passage ? { receivingTargets: geometry.targets.map(target => tileBox(geometry, target)),
             externalCarriers: peers.map(site => tileBox(geometry, site)) } : {}),
           ...(peer ? { externalCarriers: [tileBox(geometry, peer)] } : {}),
+          ...(carrier ? { externalCarriers: [tileBox(geometry, carrier.point)] } : {}),
           ...(reserved.length ? { externalCarriers: reserved.map(item => tileBox(geometry, item.pose)), reservedParts: reserved.map(item => tileBox(geometry, item.box)) } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
@@ -552,6 +653,12 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
     after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.step.intercept) {
+        const { geometry, color } = proposal.local;
+        const scene = orientedCouplingScene(second, geometry, color) as Scene | null;
+        const matched = confirmsInterception(proposal, second, scene);
+        return { matched, seal_prefix: true, reason: matched ? 'interfering_carrier_removed' : 'contact_effect_unconfirmed' };
+      }
       const walk = proposal.walk?.[index];
       if (walk) {
         const { local } = proposal;
@@ -601,6 +708,24 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const next: State = { ...local, count: local.count + 1, invitation: null, refs: [...local.refs.slice(-5), after.observation_ref],
         tried: [...local.tried, index === 0 ? proposal.attempt : JSON.stringify([old.pose, old.face, old.boxes, local.held, action.action_ref])] };
       if (local.transports?.length || external.transports.length) next.transports = external.transports;
+      if (local.geometry.insetFill !== undefined && !local.interference) {
+        const inReceiver = (site: NativePoint) => local.geometry.targets.some(target => same(target, site));
+        const removed = external.shifts.find(shift => inReceiver(shift.from) && !inReceiver(shift.to));
+        const carrier = removed && external.transports.find(item => same(item.box, removed.to));
+        const body = carrier && after.entities.find(part => part.signature === carrier.carrier);
+        if (body) next.interference = { ink: body.palette_value, ref: after.observation_ref };
+      }
+      if (step.intercept && local.interference) {
+        if (confirmsInterception(proposal, second, scene)) {
+          delete next.interference;
+          next.interceptionRef = after.observation_ref;
+          state = next;
+          return { events: [], reviewEvidence: 'The tested contact removed the carrier that displaced a delivered part.' };
+        }
+        next.stopped = true;
+        state = next;
+        return { events: [] };
+      }
       const confirmedCarriers = external.transports.filter(item => item.sources.length >= 2);
       if (confirmedCarriers.length) {
         next.sharedEvidence ??= after.observation_ref;

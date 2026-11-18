@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
+import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import type { NativePoint, NativeProgramRegistry } from '../src/logos-engine/v6-native-types.ts';
 import { measureDeliveryPassage } from '../src/sic/delivery-passage.ts';
+import { createSicVerifyOrientedDelivery } from '../src/sic/oriented-delivery.ts';
 
 test('delivery passage uses the visible opening and separates the two work areas', () => {
   const targets: NativePoint[] = [[1, 2], [1, 3], [1, 4]];
@@ -23,4 +25,37 @@ test('delivery passage uses the visible opening and separates the two work areas
   const vertical = measureDeliveryPassage(columns, { ...geometry, targets: targets.map(transpose) },
     transpose(actor), parts.map(transpose), [transpose(peer)]);
   assert.deepEqual(vertical?.mouths, [[4, 6], [5, 6]]);
+});
+
+test('read a receiver with a visible outline and a corner hidden by a framed part', async () => {
+  const rows = Array.from({ length: 32 }, () => Array<number>(36).fill(1));
+  for (let y = 8; y < 16; y++) for (let x = 12; x < 20; x++) {
+    rows[y]![x] = x === 12 || x === 19 || y === 8 || y === 15 ? 9 : 2;
+  }
+  for (const [left, top] of [[12, 12], [24, 20]] as const) {
+    for (let y = 0; y < 4; y++) for (let x = 0; x < 4; x++) {
+      rows[top + y]![left + x] = x === 0 || x === 3 || y === 0 || y === 3 ? 4 : 9;
+    }
+  }
+  for (let y = 20; y < 24; y++) rows[y]!.fill(y === 20 ? 0 : 14, 4, 8);
+  const provider = createSicVerifyOrientedDelivery();
+  const observe = (frame_rows: number[][], revision: number) => measureNativeObservation({
+    frame_rows, frame_hash: String(revision), level: 2, levels_completed: 1, state: 'NOT_FINISHED',
+    available_action_refs: ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5'],
+  }, revision);
+  const observation = await observe(rows, 2);
+  provider.restore({ state: { epoch: observation.level_epoch - 1, sharedEvidence: 'prior-transport', transportCarriers: [],
+    geometry: { pitch: 4, phase: [0, 0], background: 1, core: 9, rest_shell: 4, targets: [], initial_boxes: [] },
+    free: { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] }, loaded: {} } });
+  await provider.attachPrograms?.({
+    registerProgram: async () => ({ run: async () => ({ result: 'P07', receipt: {} }) }),
+  } as unknown as NativeProgramRegistry);
+  const proposal = await provider.propose(observation, rows, [], 80);
+  assert.ok(proposal);
+  assert.deepEqual(proposal.local.geometry.targets, [[3, 2], [4, 2], [3, 3], [4, 3]]);
+  assert.equal(proposal.step.intercept, undefined);
+
+  const broken = structuredClone(rows);
+  broken[8]![15] = 1;
+  assert.equal(await provider.propose(await observe(broken, 3), broken, [], 80), null);
 });
