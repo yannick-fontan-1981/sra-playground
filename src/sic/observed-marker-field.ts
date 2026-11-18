@@ -16,6 +16,7 @@ export type MarkerField = {
   initialPreparation?: string[];
   prepared?: { point: NativePoint; values: string[]; evidence: string } | null;
   mobile?: MobileMarker | null;
+  tracksInitialPatrol?: true;
 };
 export type MarkerStep = { target: Target; landing: NativePoint | null; command: NativeCommand; followsMobile?: true };
 type Result = { kind: 'moved' | 'blocked' | 'calibrated' | 'acquired' | 'tested' | 'mode_changed' | 'contradicted'; counter: string[] }
@@ -139,6 +140,16 @@ export function readMarkerField(rows: NativeRows, epoch: number, evidence: strin
       // Markers can occupy only every other cell. Include the visible cursor on that same field.
       if (possibleActors.length === 1) pitch = partPoint(possibleActors[0]!).reduce(
         (spacing, value, i) => gcd(spacing, value - origin[i]!), pitch);
+      if (pitch > extent * 3) {
+        const measured = gcd(gcd(pitch, width(ground.bbox)), height(ground.bbox));
+        if (measured > extent) pitch = measured;
+      }
+      if (pitch > extent * 3) {
+        const tagged = parts.filter(part => part.color === marker.color && part.area === extent ** 2 - 1
+          && width(part.bbox) === extent && height(part.bbox) === extent && inside(ground.bbox, part.bbox));
+        if (tagged.length === 1) pitch = partPoint(tagged[0]!).reduce(
+          (spacing, value, i) => gcd(spacing, value - origin[i]!), pitch);
+      }
     }
     if (pitch <= extent || pitch > extent * 3) continue;
     const indexed = (part: Part) => inside(ground.bbox, part.bbox)
@@ -163,8 +174,10 @@ export function readMarkerField(rows: NativeRows, epoch: number, evidence: strin
     const scene = { ground: ground.bbox, pitch, extent, sites, actorColor: actor.color, markerColor: marker.color,
       calibrator: calibrator?.bbox ?? null, control: control.bbox, counter, ...(preparation ? { preparation } : {}) };
     const initialCounter = counterValues(scene, rows);
+    const mobile = preparation ? readMobileMarker(scene, rows) : null;
     candidates.push({ epoch, scene, at: partPoint(actor), target: null, calibration: null, modeChanges: 0,
       tried: [], blocked: [], evidence, initialCounter, counter: initialCounter, movements, count: 0, stopped: false,
+      ...(mobile ? { tracksInitialPatrol: true, mobile: { tag: mobile.tag, history: [mobile.at], cycle: null } } : {}),
       ...(preparation ? { initialPreparation: blockValues(preparation, rows) } : {}) });
   }
   return candidates.length === 1 ? candidates[0]! : null;
@@ -296,6 +309,7 @@ export function retainMarkerStep(state: MarkerField, step: MarkerStep, result: R
     tried: kind === 'tested' || kind === 'acquired' ? [...state.tried, attempt(state.modeChanges, step.target.point)] : state.tried,
     ...(state.scene.preparation ? { prepared: kind === 'prepared'
       ? { point: step.target.point, values: result.preparation, evidence: ref } : null } : {}),
-    ...(state.scene.preparation && modeChanges > 0 ? { mobile: retainMobileMarker(state, rows, at) } : {}),
+    ...(state.scene.preparation && (modeChanges > 0 || state.tracksInitialPatrol)
+      ? { mobile: retainMobileMarker(kind === 'mode_changed' && state.tracksInitialPatrol ? { ...state, mobile: null } : state, rows, at) } : {}),
   };
 }
