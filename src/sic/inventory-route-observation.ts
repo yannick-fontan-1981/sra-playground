@@ -1,4 +1,4 @@
-import { current_goal_witnesses } from '../logos-engine/v6-inventory-boundary.ts';
+import { complements, current_goal_witnesses } from '../logos-engine/v6-inventory-boundary.ts';
 import { display_matches, normalized, reverse_transfer, world_complements } from '../logos-engine/v6-inventory-contrast.ts';
 import { _unique_action_conditioned_control_centered_grid_candidate, box, detect_components, patch } from '../logos-engine/v6-inventory-measurements.ts';
 import type { NativeBox, NativeObservation, NativePoint, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
@@ -11,7 +11,8 @@ type ActorTemplate = { relativeBox: NativeBox; pixels: NativeRows };
 export type InventoryEvidence = { actor: string; slot: Slot; pitch: number; travel: number[]; scoredPattern: number[];
   controls: Record<string, NativePoint>; meter: Gauge; before: string; after: string; recharge?: number; interaction?: string };
 export type InventoryRouteScene = { map: InventoryRouteMap; actor: string; boxes: NativeBox[];
-  links: Link[]; slot: Slot; slots?: Slot[]; meter: Gauge; moves: { input: string; delta: NativePoint }[]; interaction: string; actorTemplate?: ActorTemplate };
+  links: Link[]; slot: Slot; slots?: Slot[]; meter: Gauge; moves: { input: string; delta: NativePoint }[]; interaction: string; actorTemplate?: ActorTemplate;
+  opaqueSlotInk?: number };
 type GridCell = { row: number; col: number; bbox: { left: number; top: number; right: number; bottom: number };
   palette_values: number[]; pattern_occurrence_count: number };
 
@@ -63,10 +64,29 @@ export function readInventoryReserve(rows: NativeRows, gauge: Gauge): number {
   return end - gauge.x;
 }
 
-export function readInventoryRoute(rows: NativeRows, observation: NativeObservation, memory: InventoryEvidence) {
-  const { slot, meter, interaction, recharge } = memory;
-  if (!interaction || !recharge || !observation.available_action_refs.includes(interaction)
-    || !same(patch(rows, slot.bounds), slot.pixels)) return null;
+function occupiedSlotInk(rows: NativeRows, slot: Slot): number | undefined {
+  const pixels = patch(rows, slot.bounds), last = slot.pixels.length - 1;
+  const ink = pixels[1]?.[1], corner = pixels[0]?.[0];
+  if (last < 2 || pixels.length !== last + 1 || pixels.some(row => row.length !== last + 1)
+    || ink === undefined || corner === undefined || slot.pixels.flat().includes(ink)) return undefined;
+  return pixels.every((row, y) => row.every((value, x) => {
+    const outerX = x === 0 || x === last, outerY = y === 0 || y === last;
+    return value === (outerX && outerY ? corner : outerX || outerY ? slot.pixels[y]![x] : ink);
+  })) ? ink : undefined;
+}
+
+export function readInventoryRoute(rows: NativeRows, observation: NativeObservation, memory: InventoryEvidence, previous?: InventoryRouteScene) {
+  const { meter, interaction, recharge } = memory;
+  let { slot } = memory;
+  if (!interaction || !recharge || !observation.available_action_refs.includes(interaction)) return null;
+  let opaqueSlotInk: number | undefined;
+  if (!same(patch(rows, slot.bounds), slot.pixels)) {
+    const remembered = previous?.slots?.find(candidate => inside(candidate.bounds, slot.bounds));
+    if (!remembered) return null;
+    opaqueSlotInk = occupiedSlotInk(rows, remembered);
+    if (opaqueSlotInk === undefined) return null;
+    slot = remembered;
+  }
   const width = slot.bounds[2] - slot.bounds[0] + 1;
   const frames = observation.entities.filter(entity => {
     const [l, t, r, b] = entity.bbox;
@@ -74,12 +94,12 @@ export function readInventoryRoute(rows: NativeRows, observation: NativeObservat
       && entity.area === 4 * (width - 1) && entity.mask.every(([x, y]) => x === 0 || y === 0 || x === width - 1 || y === width - 1);
   });
   const primary = frames.find(frame => inside(frame.bbox, slot.bounds));
-  if (!primary) return null;
-  const emptyFrame = patch(rows, primary.bbox);
-  const slots = frames.length === 1 ? [slot] : frames.map(({ bbox: bounds }) => ({
+  if (opaqueSlotInk === undefined ? !primary : frames.some(frame => !inside(frame.bbox, slot.bounds))) return null;
+  const emptyFrame = primary ? patch(rows, primary.bbox) : slot.pixels;
+  const slots = frames.length <= 1 ? [slot] : frames.map(({ bbox: bounds }) => ({
     bounds, pixels: patch(rows, bounds), evidence: observation.observation_ref,
   })).sort((a, b) => a.bounds[0] - b.bounds[0]);
-  if (slots.length > 1 && !slots.every(candidate => candidate.bounds[1] === primary.bbox[1]
+  if (slots.length > 1 && !slots.every(candidate => candidate.bounds[1] === primary!.bbox[1]
     && same(candidate.pixels, emptyFrame))) return null;
   const actors = observation.entities.filter(entity => entity.signature === memory.actor);
   if (actors.length !== 1) return null;
@@ -99,11 +119,23 @@ export function readInventoryRoute(rows: NativeRows, observation: NativeObservat
   if (!ordinary) return null;
   const floor = patch(rows, cellBox(ordinary)), initial = cells.find(cell => inside(cellBox(cell), actor));
   if (!initial) return null;
-  const pigmentLinks = world_complements(scope, rows) as Link[];
+  const pigmentLinks = world_complements(scope, rows, opaqueSlotInk !== undefined) as Link[];
   const goalCell = cells.find(cell => same([cell.row, cell.col], goals[0]!.current_cell));
   if (!goalCell) return null;
-  const hasSeparateGates = pigmentLinks.length >= 2 && new Set(pigmentLinks.map(link => pointKey(link.target_cell))).size === pigmentLinks.length;
-  const sharedKeys = slots.length > 1 && hasSeparateGates && !unambiguous(pigmentLinks)
+  const initialCell: NativePoint = [initial.row, initial.col];
+  const carry = opaqueSlotInk === undefined ? [] : (previous?.links ?? []).flatMap(link => {
+    if (link.shapeOnly || pigmentLinks.some(found => found.source_value === link.source_value && same(found.source_mask, link.source_mask))) return [];
+    const targets = complements(scope, rows, link).filter(target => !pigmentLinks.some(found =>
+      same(found.target_cell, [target.target_row, target.target_col])));
+    return targets.length ? [{ link, targets }] : [];
+  });
+  if (opaqueSlotInk !== undefined && carry.length !== 1) return null;
+  for (const { link, targets } of carry) for (const target of targets) pigmentLinks.push({
+    source_cell: initialCell, target_cell: [target.target_row, target.target_col], source_mask: link.source_mask, source_value: link.source_value,
+  });
+  const hasSeparateGates = pigmentLinks.length >= 2 && pigmentLinks.length <= 8
+    && new Set(pigmentLinks.map(link => pointKey(link.target_cell))).size === pigmentLinks.length;
+  const sharedKeys = (slots.length > 1 || carry.length === 1) && hasSeparateGates && !unambiguous(pigmentLinks)
     && pigmentLinks.every(link => pigmentLinks.filter(other => same(link.source_cell, other.source_cell))
       .every(other => link.source_value === other.source_value && same(link.source_mask, other.source_mask)));
   const gates = unambiguous(pigmentLinks) || sharedKeys ? pigmentLinks : shapeComplements(cells, rows, floor, [initial, goalCell]);
@@ -126,16 +158,21 @@ export function readInventoryRoute(rows: NativeRows, observation: NativeObservat
   }
   if (nodes.filter(node => node.charge).length !== 1) return null;
   const id = (at: NativePoint) => nodes.findIndex(node => same(node.at, at));
-  const goal = id(goals[0]!.current_cell), at = id([initial.row, initial.col]);
-  const position: InventoryPosition = { at, held: slots.length === 1 ? null : slots.map(() => null), objects: links.map(link => id(link.source_cell)),
+  const goal = id(goals[0]!.current_cell), at = id(initialCell);
+  const carriedKey = carry.length ? links.findIndex(link => same(link.source_cell, initialCell)) : -1;
+  if (carry.length && carriedKey < 0) return null;
+  const position: InventoryPosition = { at, held: slots.length === 1 ? carriedKey < 0 ? null : carriedKey : slots.map(() => null),
+    objects: links.map((link, index) => index === carriedKey ? -1 : id(link.source_cell)),
     opened: 0, charged: false, energy: readInventoryReserve(rows, meter) };
   const moves = Object.entries(memory.controls).flatMap(([input, delta]) => observation.available_action_refs.includes(input)
     && Math.abs(delta[0]) + Math.abs(delta[1]) === 1 ? [{ input, delta }] : []);
-  if (goal < 0 || at < 0 || position.objects.some(node => node < 0) || new Set(moves.map(move => pointKey(move.delta))).size !== 4) return null;
+  if (goal < 0 || at < 0 || position.objects.some((node, index) => node < 0 && index !== carriedKey)
+    || new Set(moves.map(move => pointKey(move.delta))).size !== 4) return null;
   const scene: InventoryRouteScene = { map: { nodes, goal, recharge, ...(sharedKeys ? { gateKeys, reusable } : {}) },
     actor: memory.actor, boxes, links, slot: slots.length === 1 ? slot : slots[0]!, meter, moves, interaction,
+    ...(opaqueSlotInk === undefined ? {} : { opaqueSlotInk }),
     ...(slots.length > 1 ? { slots } : {}) };
-  if (scene.slots || links.some(link => link.shapeOnly)) {
+  if (scene.slots || opaqueSlotInk !== undefined || links.some(link => link.shapeOnly)) {
     const [left, top] = cellBox(initial);
     scene.actorTemplate = { relativeBox: [actor[0] - left, actor[1] - top, actor[2] - left, actor[3] - top], pixels: patch(rows, actor) };
   }
@@ -143,6 +180,13 @@ export function readInventoryRoute(rows: NativeRows, observation: NativeObservat
 }
 
 function displayReceipt(scene: InventoryRouteScene, held: number): NativeRecord {
+  if (scene.opaqueSlotInk !== undefined) {
+    const [left, top, right, bottom] = scene.slot.bounds;
+    const bounds: NativeBox = [left + 1, top + 1, right - 1, bottom - 1];
+    const display_mask: NativePoint[] = [];
+    for (let y = 0; y <= bounds[3] - bounds[1]; y++) for (let x = 0; x <= bounds[2] - bounds[0]; x++) display_mask.push([x, y]);
+    return { ...scene.links[held]!, display_bbox: bounds, display_mask, display_value: scene.opaqueSlotInk };
+  }
   return { ...scene.links[held]!, display_bbox: scene.slot.bounds };
 }
 
@@ -164,7 +208,8 @@ function observedShapeReceipt(scene: InventoryRouteScene, held: number, rows: Na
 
 function actorOverObject(scene: InventoryRouteScene, position: InventoryPosition, rows: NativeRows): NativeBox | null {
   const template = scene.actorTemplate;
-  if (!template || !position.objects.some((site, index) => site === position.at && (scene.slots || scene.links[index]!.shapeOnly))) return null;
+  if (!template || !position.objects.some((site, index) => site === position.at
+    && (scene.slots || scene.opaqueSlotInk !== undefined || scene.links[index]!.shapeOnly))) return null;
   const [x, y, right, bottom] = template.relativeBox;
   const matches = scene.boxes.flatMap(([l, t], site) => {
     const bounds: NativeBox = [l + x, t + y, l + right, t + bottom];
@@ -180,6 +225,7 @@ export function inventoryPositionMatches(scene: InventoryRouteScene, position: I
   const contents = slotContents(position.held).every((held, index) => {
     const slot = scene.slots?.[index] ?? scene.slot;
     if (held === null) return same(patch(rows, slot.bounds), slot.pixels);
+    if (scene.opaqueSlotInk !== undefined) return occupiedSlotInk(rows, slot) === scene.opaqueSlotInk;
     if (scene.slots || scene.links[held]!.shapeOnly) {
       const receipt = observedShapeReceipt(scene, held, rows, slot);
       return !!receipt && (scene.links[held]!.shapeOnly || receipt.display_value === scene.links[held]!.source_value);

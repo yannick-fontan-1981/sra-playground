@@ -24,9 +24,9 @@ export function transferred_shape(before:R,after:R,first:NativeRows,second:Nativ
  }
  return Object.assign(out,{status:hits.length===1?'unique_corresponding_transfer':hits.length?'ambiguous':'no_matching_transfer',matches:hits});
 }
-export function world_complements(facts:R,rows:NativeRows):R[]{
+export function world_complements(facts:R,rows:NativeRows,allowCellSpanning=false):R[]{
  if((facts.grids??[]).length!==1)return[];const grid=facts.grids[0],h=grid.cell_height,w=grid.cell_width;if(h*w>1024)return[];const out:R[]=[];
- for(const comp of detect_components(rows,8).components){const b=comp.bbox;if(comp.area<=1||comp.area>=h*w||b.width>w||b.height>h||b.width===w&&b.height===h)continue;
+ for(const comp of detect_components(rows,8).components){const b=comp.bbox;if(comp.area<=1||comp.area>=h*w||b.width>w||b.height>h||(!allowCellSpanning&&b.width===w&&b.height===h))continue;
   const sources=grid.cells.filter((c:R)=>enclosed(b,c.bbox));if(sources.length!==1)continue;const rel=comp.relative_pixels.map(([r,c]:number[])=>[c,r]).sort(compare);
   for(const cell of grid.cells){if(same(cell,sources[0]))continue;const box=cell.bbox,l=box.left,t=box.top,mask=new Set<string>();
    for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(rows[t+y]![l+x]===comp.value)mask.add(key([x,y]));if(!mask.size||mask.size+rel.length!==h*w)continue;
@@ -37,7 +37,7 @@ export function world_complements(facts:R,rows:NativeRows):R[]{
  return out.slice(0,8);
 }
 export function display_matches(receipt:R,rows:NativeRows):boolean{
- const [l,t,r,b]=receipt.display_bbox,mask=new Set<string>(receipt.source_mask.map(key)),value=receipt.display_value??receipt.source_value;
+ const [l,t,r,b]=receipt.display_bbox,mask=new Set<string>((receipt.display_mask??receipt.source_mask).map(key)),value=receipt.display_value??receipt.source_value;
  for(let y=t;y<=b;y++)for(let x=l;x<=r;x++)if((rows[y]![x]===value)!==mask.has(key([x-l,y-t])))return false;return true;
 }
 export function reverse_transfer(receipt:R,before:R,after:R,first:NativeRows,second:NativeRows,facts:R):R{

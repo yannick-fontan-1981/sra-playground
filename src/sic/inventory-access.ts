@@ -183,7 +183,8 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
     if (remaining < 1 || observation.available_action_refs.includes('ACTION6')) return null;
     const previous = inventoryRoute?.epoch === observation.level_epoch ? inventoryRoute : null;
     if (previous?.stopped) return null;
-    const measured = !previous && boundary?.epoch === observation.level_epoch ? readInventoryRoute(rows, observation, boundary) : null;
+    const inheritedScene = inventoryRoute?.epoch === observation.level_epoch - 1 ? inventoryRoute.scene : undefined;
+    const measured = !previous && boundary?.epoch === observation.level_epoch ? readInventoryRoute(rows, observation, boundary, inheritedScene) : null;
     const local: RouteState | null = previous ?? (measured && boundary ? { ...measured, epoch: observation.level_epoch, route: [],
       evidence: [boundary.slot.evidence, boundary.before, boundary.after], depositProven: false, stopped: false } : null);
     if (!local) return null;
@@ -221,12 +222,16 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
       subjects: ['carrier', 'temporary_storage', 'complementary_passages', 'reserve'],
       parentObjective: parent, satisfactionContract: 'observe_official_progress_after_bounded_inventory_transfers' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-    const id = 'inventory-access:' + need.id, action = { action_ref: next.input, data: {} }, actions = [action];
+    const id = 'inventory-access:' + need.id;
+    const firstInteraction = route!.findIndex(step => step.kind !== 'walk');
+    const legs = scene.opaqueSlotInk !== undefined && firstInteraction > 0
+      ? route!.slice(0, Math.min(remaining, maximumCommittedActions, firstInteraction)) : [next];
+    const actions = legs.map(step => ({ action_ref: step.input, data: {} }));
     const meter = scene.meter, [l, t, r, b] = scene.slot.bounds;
     const display: NativeBox = [l, t, scene.slots?.at(-1)?.bounds[2] ?? r, b];
     return { status: 'proposed', kind: verifyInventoryTransferId, actions, routeState: { ...local, route: route! }, next, needId: need.id,
       binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-      steps: [{ action, expected_after: scene.map.nodes[next.position.at]!.at }],
+      steps: actions.map((action, index) => ({ action, expected_after: scene.map.nodes[legs[index]!.position.at]!.at })),
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
         instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
       sicSituationCard: { strategy, need: scene.slots ? 'Open the gates with the available inventory slots' : 'Open the gates in order with one inventory slot',
@@ -374,6 +379,14 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (index > 0 && isRoute(proposal)) {
+        const { route, scene, epoch } = proposal.routeState;
+        const position = route[index - 1]!.position;
+        const admitted = epoch === observation.level_epoch
+          && !!inventoryPositionMatches(scene, position, observation, packet.frame_rows)
+          && readInventoryReserve(packet.frame_rows, scene.meter) === position.energy;
+        return { admitted, reason: admitted ? 'inventory_position_and_reserve_confirmed' : 'inventory_context_changed' };
+      }
       if (index > 0 && !isRoute(proposal) && proposal.walk) {
         const { local } = proposal, { meter, scene, receipt } = local, step = proposal.walk[index]!;
         const carrier = observation.entities.find(entity => entity.signature === scene.signature);
@@ -390,11 +403,12 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isRoute(proposal)) {
-        const { scene, position } = proposal.routeState;
-        const observed = verifyInventoryReturn(scene, position, proposal.next, before, after, first, second);
-        const reusable = reusableKeyAt(scene, proposal.next);
+        const { scene, position } = index > 0 && inventoryRoute ? inventoryRoute : proposal.routeState;
+        const next = proposal.routeState.route[index]!;
+        const observed = verifyInventoryReturn(scene, position, next, before, after, first, second);
+        const reusable = reusableKeyAt(scene, next);
         const matched = !!observed && (reusable === null || slotContents(observed.held).includes(reusable));
-        return { matched, seal_prefix: true, reason: matched ? reusable === null ? 'inventory_route_return_observed' : 'inventory_key_retained_after_unlock'
+        return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length, reason: matched ? reusable === null ? 'inventory_route_return_observed' : 'inventory_key_retained_after_unlock'
           : observed && reusable !== null ? 'inventory_key_consumed_after_unlock' : 'inventory_route_return_contradicted' };
       }
       const actor = after.entities.find(entity => entity.signature === proposal.local.scene.signature)?.bbox;
@@ -413,7 +427,8 @@ export function createSicVerifyInventoryTransfer(family = verifyInventoryTransfe
     },
     record(before, after, action, first, second, proposal, index) {
       if (isRoute(proposal)) {
-        const { routeState: local, next } = proposal;
+        const local = index > 0 && inventoryRoute ? inventoryRoute : proposal.routeState;
+        const next = proposal.routeState.route[index]!;
         if (after.levels_completed > before.levels_completed && next.kind === 'finish' && boundary?.epoch === before.level_epoch) {
           boundary = { ...boundary, epoch: after.level_epoch, before: before.observation_ref, after: after.observation_ref };
         }
