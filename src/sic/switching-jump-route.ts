@@ -4,9 +4,9 @@ import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-nati
 export type JumpTile = { box: NativeBox; point: NativePoint; color: number };
 export type JumpMemory = { completed: number; side: number; actorArea: number; goalArea: number; ground: number; highlight: number;
   offsets: NativePoint; ref: string };
-type Gate = { tile: JumpTile; group: number };
+export type JumpGate = { tile: JumpTile; group: number };
 export type SwitchingLayout = { memory: JumpMemory; background: number; cells: JumpTile[]; goal: JumpTile; marker: JumpTile; switches: JumpTile[];
-  gates: Gate[]; actorInk: number; actorMask: NativePoint[] };
+  gates: JumpGate[]; actorInk: number; actorMask: NativePoint[] };
 export type SwitchingScene = { layout: SwitchingLayout; actor: JumpTile; moves: JumpTile[]; phase: number;
   collection: 'remaining' | 'under_piece' | 'confirmed'; };
 export type SwitchingStep = { target: JumpTile; distance: number; phase: number; switches: boolean };
@@ -28,7 +28,7 @@ function* interior(side: number): Generator<NativePoint> {
   for (let y = 1; y < side - 1; y++) for (let x = 1; x < side - 1; x++) yield [x, y];
 }
 
-function gateState(rows: NativeRows, tile: JumpTile, { side, ground, highlight }: JumpMemory, background: number) {
+export function readJumpGate(rows: NativeRows, tile: JumpTile, { side, ground, highlight }: JumpMemory, background: number) {
   const inset = [...interior(side)], edge = side - 2;
   const base = pixel(rows, tile, 0, 0), sides = pixel(rows, tile, 1, 1);
   const isFloor = (ink: number) => ink === ground || ink === highlight;
@@ -41,6 +41,18 @@ function gateState(rows: NativeRows, tile: JumpTile, { side, ground, highlight }
     return { group: base, open: false };
   }
   return null;
+}
+
+export function readJumpPhase(rows: NativeRows, gates: readonly JumpGate[], actor: JumpTile, memory: JumpMemory, background: number) {
+  const at = pointKey(actor.point);
+  const visible = gates.filter(gate => pointKey(gate.tile.point) !== at).map(gate => {
+    const current = readJumpGate(rows, gate.tile, memory, background);
+    return current?.group === gate.group ? current : null;
+  });
+  if (visible.some(gate => !gate)) return null;
+  const open = new Set(visible.flatMap(gate => gate?.open ? [gate.group] : []));
+  if (open.size !== 1 || visible.some(gate => gate && open.has(gate.group) !== gate.open)) return null;
+  return [...open][0]!;
 }
 
 export function readSwitchingLayout(rows: NativeRows, memory: JumpMemory): SwitchingLayout | null {
@@ -68,13 +80,13 @@ export function readSwitchingLayout(rows: NativeRows, memory: JumpMemory): Switc
   }
   if (actorMask.length < side) return null;
 
-  const gates: Gate[] = [], ordinary: JumpTile[] = [actor], markers: JumpTile[] = [];
+  const gates: JumpGate[] = [], ordinary: JumpTile[] = [actor], markers: JumpTile[] = [];
   const marked = new Map<string, JumpTile[]>();
   for (const part of onGrid) {
     const [x, y, r, b] = part.bbox;
     if ((x === ax && y === ay) || (x === gx && y === gy)) continue;
     const tile = readTile(rows, x, y, side);
-    const gate = gateState(rows, tile, memory, background);
+    const gate = readJumpGate(rows, tile, memory, background);
     if (gate) {
       gates.push({ tile, group: gate.group });
       continue;
@@ -112,14 +124,8 @@ export function readSwitchingScene(rows: NativeRows, layout: SwitchingLayout): S
   const actors = cells.filter(tile => actorMask.every(([x, y]) => pixel(rows, tile, x, y) === actorInk));
   if (actors.length !== 1) return null;
   const actor = actors[0]!, at = pointKey(actor.point);
-  const visibleGates = gates.filter(gate => pointKey(gate.tile.point) !== at).map(gate => {
-    const current = gateState(rows, gate.tile, memory, background);
-    return current?.group === gate.group ? current : null;
-  });
-  if (visibleGates.some(gate => !gate)) return null;
-  const open = new Set(visibleGates.flatMap(gate => gate?.open ? [gate.group] : []));
-  if (open.size !== 1 || visibleGates.some(gate => gate && open.has(gate.group) !== gate.open)) return null;
-  const phase = [...open][0]!;
+  const phase = readJumpPhase(rows, gates, actor, memory, background);
+  if (phase === null) return null;
   const moves = cells.filter(tile => tile !== actor && pixel(rows, tile, 0, 0) === memory.highlight);
   const collection = at === pointKey(marker.point) ? 'under_piece'
     : [...interior(memory.side)].every(([x, y]) => pixel(rows, marker, x, y) === pixel(rows, marker, 0, 0)) ? 'confirmed' : 'remaining';

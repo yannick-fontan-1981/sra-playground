@@ -5,8 +5,9 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { searchCoverageRoute } from './coverage-route.ts';
-import { chooseSwitchingJump, observeSwitchingJump, readSwitchingLayout, readSwitchingScene, switchingAttempt,
-  type JumpMemory, type JumpTile, type SwitchingLayout, type SwitchingScene, type SwitchingStep } from './switching-jump-route.ts';
+import { chooseSwitchingJump, observeSwitchingJump, readJumpGate, readJumpPhase, readSwitchingLayout, readSwitchingScene,
+  switchingAttempt, type JumpGate, type JumpMemory, type JumpTile, type SwitchingLayout, type SwitchingScene,
+  type SwitchingStep } from './switching-jump-route.ts';
 
 export const highlightedRouteId = 'sic_highlighted_route';
 export const learnHighlightedRouteId = 'sic_learn_highlighted_route';
@@ -15,10 +16,13 @@ type Part = ReturnType<typeof geometricComponents>[number];
 type Tile = JumpTile;
 type Portal = { ends: [Tile, Tile]; pattern: string; ink: number; mask: NativePoint[] };
 type Supports = { sites: Tile[]; pattern: string; ink: number; mask: NativePoint[]; consumed: string[]; persistent: string[] };
-type Scene = { actor: Tile; goal: Tile; tiles: Tile[]; moves: Tile[]; offsets: NativePoint; seals?: Tile[]; portal?: Portal; supports?: Supports };
+type CollectionGates = { gates: JumpGate[]; switches: Tile[]; groups: number[]; background: number };
+type Scene = { actor: Tile; goal: Tile; tiles: Tile[]; moves: Tile[]; offsets: NativePoint; seals?: Tile[]; portal?: Portal;
+  supports?: Supports; gateLayout?: CollectionGates; phase?: number };
 type Collection = { goals: NativePoint[]; verified: string[]; provisional: string | null };
 type Memory = { epoch: number; ground: number; highlight: number; evidence: string[]; blocked: string[];
-  collection?: Collection; switching?: SwitchingLayout; portal?: Portal; checkedTransfers?: string[]; supports?: Supports };
+  collection?: Collection; switching?: SwitchingLayout; portal?: Portal; checkedTransfers?: string[]; supports?: Supports;
+  gateLayout?: CollectionGates };
 type Proposal = NativeProposal & { scene: Scene; target: Tile; memory: Memory; attempt: string; needId: string;
   switching?: { previous: SwitchingScene; step: SwitchingStep }; arrival?: Tile; route?: Tile[] };
 
@@ -107,6 +111,30 @@ function settledTile(scene: Scene, target: Tile): Tile {
   return ends.find(tile => !same(tile.point, target.point))!;
 }
 
+function measureCollectionGates(rows: NativeRows, model: JumpMemory, parts: Part[], actor: Tile, occupiedRoles: Tile[]): CollectionGates | null {
+  const background = rows[0]?.[0];
+  if (background === undefined) return null;
+  const known = new Set([actor, ...occupiedRoles].map(tile => key(tile.point)));
+  const gates: JumpGate[] = [], marked = new Map<string, Tile[]>();
+  for (const part of parts) {
+    if (part.area === model.side ** 2 || boxWidth(part.bbox) !== model.side || boxHeight(part.bbox) !== model.side) continue;
+    const tile = asTile(part);
+    if (known.has(key(tile.point)) || !aligned(tile, actor, model.side + 1)) continue;
+    const gate = readJumpGate(rows, tile, model, background);
+    if (gate) gates.push({ tile, group: gate.group });
+    else if (tile.color === model.ground || tile.color === model.highlight) {
+      const pattern = terrainPattern(rows, tile.box, model);
+      const matches = marked.get(pattern) ?? [];
+      matches.push(tile);
+      marked.set(pattern, matches);
+    }
+  }
+  const groups = [...new Set(gates.map(gate => gate.group))];
+  if (groups.length !== 2 || gates.length < 4) return null;
+  const candidates = [...marked.values()].filter(sites => sites.length === 2);
+  return candidates.length === 1 ? { gates, switches: candidates[0]!, groups, background } : null;
+}
+
 function measureSupports(rows: NativeRows, model: JumpMemory, onGrid: Part[], actor: Tile, occupiedRoles: readonly Tile[]): Supports | null {
   const addressed = new Set([actor, ...occupiedRoles].map(tile => key(tile.point)));
   const groups = new Map<string, Tile[]>();
@@ -141,7 +169,7 @@ function measureActorOnSupports(rows: NativeRows, { sites, ink, mask }: Supports
 }
 
 function measureCollection(rows: NativeRows, model: JumpMemory, collection?: Collection, retainedPortal?: Portal,
-  retainedSupports?: Supports): Scene | null {
+  retainedSupports?: Supports, retainedGates?: CollectionGates): Scene | null {
   const { side, ground, highlight, actorArea, goalArea, offsets } = model;
   const parts = geometricComponents(rows), pitch = side + 1;
   const tiles = parts.filter(p => (p.color === ground || p.color === highlight) && boxWidth(p.bbox) === side && boxHeight(p.bbox) === side);
@@ -176,7 +204,12 @@ function measureCollection(rows: NativeRows, model: JumpMemory, collection?: Col
   const portal = retainedPortal ?? (!collection ? measurePortal(rows, model, actor, goal, onGrid, seals) : null);
   const endpoints = portal?.ends.filter(tile => !same(tile.point, actor.point)) ?? [];
   if (portal && endpoints.some(tile => terrainPattern(rows, tile.box, model) !== portal.pattern)) return null;
-  const supports = retainedSupports ?? (!collection ? measureSupports(rows, model, onGrid, actor, [goal, ...seals, ...endpoints]) : null);
+  const knownRoles = [goal, ...seals, ...endpoints];
+  const gateLayout = retainedGates ?? (!collection ? measureCollectionGates(rows, model, parts, actor, knownRoles) : null);
+  const phase = gateLayout ? readJumpPhase(rows, gateLayout.gates, actor, model, gateLayout.background) : null;
+  if (gateLayout && phase === null) return null;
+  const gateTiles = gateLayout ? [...gateLayout.gates.map(gate => gate.tile), ...gateLayout.switches] : [];
+  const supports = retainedSupports ?? (!collection ? measureSupports(rows, model, onGrid, actor, [...knownRoles, ...gateTiles]) : null);
   const availableSupports = supports?.sites.flatMap(site => {
     if (same(site.point, actor.point) || supports.consumed.includes(key(site.point))) return [];
     const present = onGrid.find(part => same(center(part.bbox), site.point));
@@ -185,10 +218,22 @@ function measureCollection(rows: NativeRows, model: JumpMemory, collection?: Col
   const plain = onGrid.filter(part => part.area === side * side).map(asTile);
   if (plain.length < 5) return null;
   const all = [...plain, ...seals, actor, goal, ...availableSupports,
-    ...endpoints.map(tile => ({ ...tile, color: rows[tile.box[1]]![tile.box[0]]! }))];
+    ...[...endpoints, ...gateTiles.filter(tile => !same(tile.point, actor.point))]
+      .map(tile => ({ ...tile, color: rows[tile.box[1]]![tile.box[0]]! }))];
   const moves = all.filter(tile => tile.color === highlight);
   if (moves.length < 1 || moves.length > 8 || moves.some(tile => !same(displacement(actor, tile), offsets))) return null;
-  return { actor, goal, tiles: all, moves, offsets, seals, ...(portal ? { portal } : {}), ...(supports ? { supports } : {}) };
+  return { actor, goal, tiles: all, moves, offsets, seals, ...(portal ? { portal } : {}), ...(supports ? { supports } : {}),
+    ...(gateLayout && phase !== null ? { gateLayout, phase } : {}) };
+}
+
+function collectionAttempt(scene: Scene, tile: Tile) {
+  const edge = [key(scene.actor.point), key(tile.point), key(scene.offsets)].join('/');
+  return scene.phase === undefined ? edge : scene.phase + '/' + edge;
+}
+
+function projectedPhase(layout: CollectionGates | undefined, arrival: Tile, phase: number | undefined) {
+  if (!layout?.switches.some(tile => same(tile.point, arrival.point))) return phase;
+  return layout.groups.find(group => group !== phase);
 }
 
 function routeToSeals(scene: Scene, collection: Collection, memory: Memory, remaining: number): Tile | null {
@@ -197,18 +242,21 @@ function routeToSeals(scene: Scene, collection: Collection, memory: Memory, rema
   const supports = new Map(memory.supports?.sites.filter(site => !memory.supports!.persistent.includes(key(site.point)))
     .map((tile, i) => [key(tile.point), 1 << i]) ?? []);
   const acquired = [...collection.verified, collection.provisional].reduce((mask, position) => mask | (position ? bits.get(position) ?? 0 : 0), 0);
-  const route = searchCoverageRoute<Tile>(actor.point, goal.point, acquired, (1 << collection.goals.length) - 1, function* (point, first, spent) {
+  const gateGroup = new Map(scene.gateLayout?.gates.map(gate => [key(gate.tile.point), gate.group]) ?? []);
+  const route = searchCoverageRoute<Tile>(actor.point, goal.point, acquired, (1 << collection.goals.length) - 1, function* (point, first, spent, phase) {
     const source = { point };
     const uses = supports.get(key(point)) ?? 0;
     for (const tile of tiles) {
-      if (!same(displacement(source, tile), offsets)
-        || (first && (!moves.includes(tile) || memory.blocked.includes([key(point), key(tile.point), key(offsets)].join('/'))))) continue;
+      const gate = gateGroup.get(key(tile.point));
+      if (gate !== undefined && gate !== phase || !same(displacement(source, tile), offsets)
+        || (first && (!moves.includes(tile) || memory.blocked.includes(collectionAttempt(scene, tile))))) continue;
       const landing = settledTile(scene, tile);
       if ((spent | uses) & ((supports.get(key(tile.point)) ?? 0) | (supports.get(key(landing.point)) ?? 0))) continue;
-      yield { point: landing.point, visits: bits.get(key(landing.point)) ?? 0, step: tile, uses };
+      yield { point: landing.point, visits: bits.get(key(landing.point)) ?? 0, step: tile, uses,
+        phase: projectedPhase(scene.gateLayout, landing, phase) };
     }
-  });
-  return route && (!scene.portal && !scene.supports || route.length <= remaining) ? route[0]! : null;
+  }, undefined, scene.phase);
+  return route && (!scene.portal && !scene.supports && !scene.gateLayout || route.length <= remaining) ? route[0]! : null;
 }
 
 function assessSupports(previous: Scene, next: Scene, rows: NativeRows, ground: number): Supports | null {
@@ -224,8 +272,8 @@ function assessSupports(previous: Scene, next: Scene, rows: NativeRows, ground: 
   if (!departed) return model;
   if (present.has(source)) return { ...model, persistent: [...new Set([...model.persistent, source])] };
   const [l, t, r, b] = departed.box, background = rows[0]?.[0];
-  if (background === undefined || !rows.slice(t, b + 1).every((row, dy) => row.slice(l, r + 1).every((pixel, dx) =>
-    pixel === background || pixel === ground && (dx === 0 || l + dx === r) && (dy === 0 || t + dy === b)))) return null;
+  const residue = rows.slice(t, b + 1).flatMap(row => row.slice(l, r + 1)).filter(pixel => pixel !== background);
+  if (background === undefined || residue.length > 4 || residue.some(pixel => pixel !== ground)) return null;
   return { ...model, consumed: [...model.consumed, source] };
 }
 
@@ -275,7 +323,7 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const reusable = known?.completed === observation.levels_completed ? known : null;
       const collectionScene = reusable && !prior?.switching
-        ? measureCollection(rows, reusable, prior?.collection, prior?.portal, prior?.supports) : null;
+        ? measureCollection(rows, reusable, prior?.collection, prior?.portal, prior?.supports, prior?.gateLayout) : null;
       const switching = prior?.switching ?? (reusable && !prior && !collectionScene ? readSwitchingLayout(rows, reusable) : null);
       const phased = switching && readSwitchingScene(rows, switching);
       const phasedScene: Scene | null = phased ? { actor: phased.actor, goal: phased.layout.goal, tiles: phased.layout.cells,
@@ -296,8 +344,9 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
         ...(switching ? { switching } : {}),
         ...(collectionScene?.seals ? { collection: { goals: collectionScene.seals.map(seal => seal.point), verified: [], provisional: null } } : {}),
         ...(collectionScene?.portal ? { portal: collectionScene.portal } : {}),
-        ...(collectionScene?.supports ? { supports: collectionScene.supports } : {}) };
-      const attemptFor = (tile: Tile) => phased ? switchingAttempt(phased, tile) : [key(scene.actor.point), key(tile.point), key(scene.offsets)].join('/');
+        ...(collectionScene?.supports ? { supports: collectionScene.supports } : {}),
+        ...(collectionScene?.gateLayout ? { gateLayout: collectionScene.gateLayout } : {}) };
+      const attemptFor = (tile: Tile) => phased ? switchingAttempt(phased, tile) : collectionAttempt(scene, tile);
       const distance = memory.collection || phased ? null : distances(scene);
       const options = distance ? scene.moves.filter(p => distance.has(p) && !memory.blocked.includes(attemptFor(p)))
         .sort((a, b) => distance.get(a)! - distance.get(b)!) : scene.moves;
@@ -355,6 +404,9 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
       const situation = transfer ? 'Use the highlighted entrance and verify where the same piece comes to rest' : step ? step.switches
         ? 'Land on the marked switch and check which highlighted jumps become available'
         : `Choose a highlighted jump on the ${step.distance}-jump route through the current and projected door states`
+        : scene.gateLayout ? projectedPhase(scene.gateLayout, landing, scene.phase) !== scene.phase
+          ? 'Land on the marked switch and check which doors open for the remaining route'
+          : 'Choose a jump that keeps the seals and the exit reachable through the door states'
         : memory.supports ? 'Keep a route through the remaining seals even if marked supports disappear after departure'
         : memory.collection ? scene.seals?.length
         ? 'Choose a highlighted jump on a route through the remaining seals'
@@ -404,9 +456,13 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
         const reason = observeSwitchingJump(second, previous, step);
         return { matched: !!reason, seal_prefix: true, reason: reason ?? 'landing_door_group_or_seal_contradicted' };
       }
-      const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection, proposal.memory.portal, proposal.memory.supports)
+      const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection, proposal.memory.portal,
+        proposal.memory.supports, proposal.memory.gateLayout)
         : measure(second, proposal.memory)?.scene;
-      const matched = !!next && same(next.actor.point, (proposal.route?.[index] ?? proposal.arrival ?? proposal.target).point)
+      const landing = proposal.route?.[index] ?? proposal.arrival ?? proposal.target;
+      const phase = projectedPhase(proposal.scene.gateLayout, landing, proposal.scene.phase);
+      const matched = !!next && same(next.actor.point, landing.point)
+        && next.phase === phase
         && same(next.offsets, proposal.scene.offsets);
       if (next && matched && proposal.memory.collection) {
         const receipt = assessCollection(proposal, next);
@@ -415,6 +471,7 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
           reason: !supports ? 'marked_support_return_changed_unexpectedly'
             : typeof supports !== 'boolean' && supports.consumed.length > proposal.memory.supports!.consumed.length ? 'marked_support_removed_after_departure'
             : proposal.arrival && receipt?.reason === 'landing_and_next_highlights_confirmed' ? 'portal_arrival_and_next_highlights_confirmed'
+            : phase !== proposal.scene.phase && receipt?.reason === 'landing_and_next_highlights_confirmed' ? 'switch_changed_the_open_group_and_updated_highlights'
             : receipt?.reason ?? 'collection_return_changed_unexpectedly' };
       }
       return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
@@ -447,9 +504,12 @@ export function createSicHighlightedRoute(family = highlightedRouteId): NativeFa
           blocked: reason ? memory.blocked : [...memory.blocked, proposal.attempt] };
         return { events: [] };
       }
-      const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection, proposal.memory.portal, proposal.memory.supports)
+      const next = proposal.memory.collection && known ? measureCollection(second, known, proposal.memory.collection, proposal.memory.portal,
+        proposal.memory.supports, proposal.memory.gateLayout)
         : measure(second, proposal.memory)?.scene;
-      const confirmed = !!next && same(next.actor.point, (proposal.arrival ?? target).point) && same(next.offsets, proposal.scene.offsets);
+      const landing = proposal.arrival ?? target;
+      const confirmed = !!next && same(next.actor.point, landing.point) && same(next.offsets, proposal.scene.offsets)
+        && next.phase === projectedPhase(proposal.scene.gateLayout, landing, proposal.scene.phase);
       const receipt = confirmed && next && memory.collection ? assessCollection(proposal, next) : null;
       const supports = confirmed && next ? assessSupports(proposal.scene, next, second, memory.ground) : null;
       const acquired = confirmed && (!memory.supports || !!supports) && (!memory.collection || receipt && receipt.reason !== 'seal_returned_after_departure');

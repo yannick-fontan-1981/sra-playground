@@ -17,3 +17,15 @@ test('revisits a junction with the same seals when a required support is still i
   });
   assert.deepEqual(route, [detour, bend, junction, support, goal]);
 });
+
+test('revisits the same position with the same seals after opening its gate', () => {
+  const start: NativePoint = [0, 0], toggle: NativePoint = [0, 1];
+  const seal: NativePoint = [1, 0], goal: NativePoint = [2, 0];
+  const route = searchCoverageRoute(start, goal, 0, 1, function* (at, _first, _spent, phase) {
+    if (at === toggle) yield { point: start, step: start, visits: 0 };
+    if (at === start && phase === 5) yield { point: toggle, step: toggle, visits: 0, phase: 8 };
+    if (at === start && phase === 8) yield { point: seal, step: seal, visits: 1 };
+    if (at === seal) yield { point: goal, step: goal, visits: 0 };
+  }, undefined, 5);
+  assert.deepEqual(route, [toggle, start, seal, goal]);
+});
