@@ -9,6 +9,7 @@ type Entry = { at: NativePoint; direction: NativePoint };
 
 const key = ([x, y]: NativePoint) => `${x},${y}`;
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
+const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const offset = ([x, y]: NativePoint, [dx, dy]: NativePoint, pitch: number): NativePoint => [x + dx * pitch, y + dy * pitch];
 const directions: readonly NativePoint[] = [[0, -1], [0, 1], [-1, 0], [1, 0]];
 
@@ -83,7 +84,7 @@ function tickModel(board: Board, tiles: ReadonlyMap<string, CascadeTile>, gap: N
 }
 
 export function planParallelCascadeSetup(board: Board, targets: readonly NativePoint[], peers: readonly CascadePeer[],
-  shouldStop: () => boolean): CascadePreparation | null {
+  shouldStop: () => boolean, guardMark?: number): CascadePreparation | null {
   const tiles = new Map(board.tiles.map(tile => [key(tile.at), tile]));
   const occupied = new Set(peers.map(peer => key(peer.at)));
   const blocked = new Set<string>();
@@ -105,7 +106,49 @@ export function planParallelCascadeSetup(board: Board, targets: readonly NativeP
     }
     if (setup) return { setup, reveal: null };
   }
-  return null;
+  const guards = peers.filter(peer => peer.mark === guardMark), relay = peers.find(peer => peer.mark !== guardMark);
+  if (!guards.length || !relay) return null;
+  return reserveCascadeJunctions(board, tiles, targets, guards, relay, shouldStop);
+}
+
+function reserveCascadeJunctions(board: Board, tiles: ReadonlyMap<string, CascadeTile>, targets: readonly NativePoint[],
+  guards: readonly CascadePeer[], relay: CascadePeer, shouldStop: () => boolean): CascadePreparation | null {
+  const targetIds = new Set(targets.map(key));
+  let best: CascadeSetup | null = null, cost = Infinity;
+  for (const { at, junction, direction, hidden } of board.tiles) {
+    if (shouldStop()) return null;
+    if (direction || hidden) continue;
+    const relayId = key(at), gap = junction ? null : at, forced = junction ? at : null;
+    const relayTravel = distance(relay.at, at);
+    const seen = new Map<string, number>();
+    function tryReservations(reservations: string[], free: readonly CascadePeer[], travel: number) {
+      const lower = travel + relayTravel;
+      if (lower >= cost || seen.size >= 800 || shouldStop()) return;
+      const id = reservations.slice().sort().join(':') + '|' + free.map(peer => key(peer.at)).join(':');
+      if ((seen.get(id) ?? Infinity) <= travel) return;
+      seen.set(id, travel);
+      const blocked = new Set(reservations), result = tickModel(board, tiles, gap, blocked, targets, forced);
+      if (result.reached && result.opened.size && (!junction || result.opened.has(relayId))
+        && ![...result.touched].some(cell => tiles.get(cell)!.hidden)) {
+        best = { gap: at, guards: reservations.map(cell => tiles.get(cell)!.at),
+          route: [...result.touched].map(cell => tiles.get(cell)!.at),
+          sharedJunctions: [...result.opened].map(cell => tiles.get(cell)!.at),
+          ...(junction ? { forceJunction: true } : {}) };
+        cost = lower;
+        return;
+      }
+      if (!free.length) return;
+      for (const cell of result.touched) {
+        const tile = tiles.get(cell)!;
+        if (cell === relayId || targetIds.has(cell) || tile.hidden) continue;
+        for (const guard of free) {
+          tryReservations([...reservations, cell], free.filter(peer => peer !== guard), travel + distance(guard.at, tile.at) + board.pitch);
+        }
+      }
+    }
+    tryReservations([], guards, 0);
+  }
+  return best ? { setup: best, reveal: null } : null;
 }
 
 export function planCascadeSetup(board: Board, guards: readonly CascadePeer[], bridge: CascadePeer, shouldStop: () => boolean): CascadePreparation | null {
@@ -117,7 +160,6 @@ export function planCascadeSetup(board: Board, guards: readonly CascadePeer[], b
   const { touched } = tickModel(board, tiles, channel.gap, new Set());
   const eligible = [...touched].filter(id => !trunk.has(id) && !same(tiles.get(id)!.at, bridge.at));
   const movable = guards.map(guard => guard.at);
-  const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
   let best: CascadeSetup | null = null, cost = Infinity, attempts = 0;
   function test(blocked: NativePoint[], used: NativePoint[], from: number, movement: number) {
     if (movement >= cost || attempts >= 2000 || shouldStop()) return;
@@ -141,11 +183,11 @@ export function planCascadeSetup(board: Board, guards: readonly CascadePeer[], b
   return best ? { setup: best, reveal: null } : null;
 }
 
-type Step = { at: NativePoint; index: number };
+type Step = { at: NativePoint; index: number | null };
 type Position = { peers: NativePoint[]; active: number; depth: number; first: Step | null };
 
 export function placeCascadePeers(peers: readonly CascadePeer[], active: number, guardMark: number, prep: CascadePreparation, pitch: number,
-  tiles: readonly CascadeTile[], shouldStop: () => boolean) {
+  tiles: readonly CascadeTile[], shouldStop: () => boolean, canCycleFocus = false) {
   const clear = new Set(tiles.map(tile => key(tile.at)));
   const guardIndices = peers.flatMap((peer, i) => peer.mark === guardMark ? [i] : []);
   const bridgeIndex = peers.findIndex(peer => peer.mark !== guardMark);
@@ -206,6 +248,11 @@ export function placeCascadePeers(peers: readonly CascadePeer[], active: number,
     if (!bucket.length) queue.delete(rank);
     if (seen.get(keyPosition(current)) !== current.depth) continue;
     if (!score(current)) return { step: current.first };
+    if (canCycleFocus) for (const [index, at] of current.peers.entries()) {
+      if (index === current.active) continue;
+      enqueue({ ...current, active: index, depth: current.depth + current.peers.length - 1,
+        first: current.first ?? { at, index: null } });
+    }
     travelToContact(current);
   }
   return null;
