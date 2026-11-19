@@ -4,6 +4,7 @@ import { SS08_LEVELS } from './levels.js';
 import { LEVEL_INFO } from './level-info.js';
 
 const session = new DuoPuzzleSession(SS08_LEVELS);
+const TUTORIAL_LEVEL=4;
 const levelInfo:readonly {label:string;url:string;puzzle?:string|number;piston:boolean;objective?:string}[]=LEVEL_INFO;
 const $ = <T extends HTMLElement>(id: string): T => {
   const node = document.getElementById(id);
@@ -15,7 +16,7 @@ const ctx = canvas.getContext('2d');
 if (!ctx) throw new Error('Canvas 2D is unavailable.');
 const select = $<HTMLSelectElement>('level');
 SS08_LEVELS.forEach((level, i) => select.add(new Option(`${i + 1}. ${level.title}`, String(i + 1))));
-$('tutorial-title').textContent = `Niveau 1 · ${SS08_LEVELS[0]!.title}`;
+$('tutorial-title').textContent = 'Niveau '+TUTORIAL_LEVEL+' · '+SS08_LEVELS[TUTORIAL_LEVEL-1]!.title;
 let observation: Observation = session.observe();
 let generation = 0;
 let busy = false;
@@ -54,7 +55,7 @@ function visiblePieces(frame:number[][]):VisiblePiece[] {
     const arms=[frame[py]![px+1],frame[py+1]![px],frame[py+1]![px+2],frame[py+2]![px+1]];
     const corners=[frame[py]![px],frame[py]![px+2],frame[py+2]![px],frame[py+2]![px+2]];
     if(center===5&&arms.every(c=>c===13))pieces.push({x,y,kind:'stone'});
-    else if(corners.every(c=>c===10))pieces.push({x,y,kind:'support'});
+    else if(center===10&&corners.every(c=>c===10)&&arms.every(c=>c===13))pieces.push({x,y,kind:'support'});
     else if(center===8&&arms.every(c=>c===5))pieces.push({x,y,kind:'monster'});
     // Button corners may cover the diagonal ends; its white center and black back remain visible.
     else if(center===0&&arms.filter(c=>c===5).length>=2)pieces.push({x,y,kind:'mirror'});
@@ -112,8 +113,21 @@ function wizardSwap(before:Observation,after:Observation,action:number):{bent:bo
     :!!companion&&visibleHeroes(frame).some(h=>h.kind==='merchant'&&sameCell(h,hero));
   return exchanged?{bent:hero.x!==later.x&&hero.y!==later.y}:null;
 }
+/** The warning is recognized from its public cyan/red water marks only. */
+function waterRefused(before:Observation,after:Observation,action:number):boolean {
+  if(action<1||action>4||after.frames.length!==6)return false;
+  const hero=visibleHeroes(before.frame).find(h=>h.selected);
+  if(hero?.kind!=='wizard')return false;
+  const [dx,dy]=({1:[0,-1],2:[0,1],3:[-1,0],4:[1,0]} as Record<number,[number,number]>)[action]!;
+  const x=hero.x+dx,y=hero.y+dy;
+  if(x<0||x>=20||y<0||y>=20)return false;
+  const px=2+x*3,py=2+y*3;
+  const crossAt=(frame:number[][],color:number):boolean=>[[0,0],[2,0],[1,1],[0,2],[2,2]].every(([a,b])=>frame[py+b!]![px+a!]===color);
+  const current=visibleHeroes(after.frame).find(h=>h.kind==='wizard');
+  return sameCell(hero,current)&&crossAt(after.frames[0]!,10)&&crossAt(after.frames[2]!,8)&&crossAt(after.frames[4]!,8);
+}
 function observeLesson(before:Observation,after:Observation,action:number):void {
-  if(before.level!==1)return;
+  if(before.level!==TUTORIAL_LEVEL||waterRefused(before,after,action))return;
   const final=actionFrame(before,after),initialHeroes=visibleHeroes(before.frame),currentHeroes=visibleHeroes(final);
   const selected=initialHeroes.find(h=>h.selected),newSelected=currentHeroes.find(h=>h.selected);
   if(action===6&&selected&&newSelected&&selected.kind!==newSelected.kind)learned.add('select');
@@ -162,7 +176,7 @@ function updateUI():void {
   }
   $('selected-role').textContent=selected==='wizard'?'Magicien sélectionné · vise et échange avec une flèche':selected==='merchant'?'Marchand sélectionné · pousse une pièce':'Les deux personnages coopèrent';
   $<HTMLButtonElement>('undo').disabled=!observation.canUndo;
-  $('tutorial').hidden=observation.level!==1;
+  $('tutorial').hidden=observation.level!==TUTORIAL_LEVEL;
   const info=levelInfo[observation.level-1]!;
   $('level-objective').textContent=info.objective??'Fais arriver le Marchand et le Magicien sur les deux contours jaunes.';
   $('source-label').textContent=info.label;
@@ -199,6 +213,7 @@ function act(action:number,data?:Point):void {
   $('feedback').textContent=next.state==='GAME_OVER'?'Un personnage a été perdu. Z annule toute la séquence ; R recommence la salle.'
     :next.levelsCompleted>before.levelsCompleted?'Les deux destinations sont occupées. Salle terminée !'
     :action===6?'Personnage sélectionné. Le décor et les monstres n’avancent pas.'
+    :waterRefused(before,next,action)?'Eau sans appui : le Magicien reste sur place. Crée un appui ou vise une cible pour échanger.'
     :reflected(before,next,action)?'Reflet effectué : priorité au plus proche, échange à distance égale. Les deux héros peuvent le déclencher.'
     :action===5?'Reflet bloqué ou aucun occupant devant les faces blanches. Vérifie les arrivées et tous les miroirs.'
     :wizardSwap(before,next,action)?.bent?'Échange par un rayon dévié : le Magicien et sa cible ont changé de place.'

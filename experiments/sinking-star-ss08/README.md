@@ -1,6 +1,6 @@
 # SS08 — La Double Transposition
 
-Laboratoire autonome du duo **Marchand + Magicien**, destiné au lot Custom 4 de SRA Playground. Huit niveaux, tutoriel au premier lancement, rendu ARC en 64 × 64 pixels et cellules de 3 × 3 pixels.
+Laboratoire autonome du duo **Marchand + Magicien**, destiné au lot Custom 4 de SRA Playground. Huit niveaux, atelier guidé au niveau 4, rendu ARC en 64 × 64 pixels et cellules de 3 × 3 pixels.
 
 ## Jouer et reconstruire
 
@@ -19,11 +19,13 @@ Ouvrir ensuite `dist/SS08-demo.html` dans un navigateur. Le HTML embarque le mot
 - Clic sur un personnage ou Tab : changer de personnage, sans faire avancer le monde.
 - Z : annuler ; R : recommencer.
 
+Depuis la v0.2.0, les quatre premières salles suivent l’ordre ancien 2 → 3 → 4 → 1 ; l’atelier guidé est au niveau 4. Les miroirs passent visuellement au-dessus des boutons. Une tentative du Magicien refusée sur une case d’eau y fait clignoter une croix cyan puis rouge.
+
 Deux destinations doivent être occupées simultanément. Les caisses plongées dans l’eau deviennent des appuis permanents. Les boutons peuvent commander des portes-presses et des plateformes rétractables. Les monstres frappent leurs voisins orthogonaux simultanément.
 
 ## Références de conception
 
-Les sources sont les zones liées depuis [Crossovers](https://sinkingstarwalkthrough.com/fr/crossovers/), conformément à la demande : **Heroes and Mirrors** (30, 32, 31, 19, 25 et 34) et **Heroes and Water** (11). Le tutoriel est une création originale qui enseigne ces mécanismes. Les sept autres cartes sont des adaptations de principes, avec une géométrie et des parcours conçus pour ce duo ; aucune reproduction exacte n’est revendiquée. Chaque fichier `reference/levelN-design.json` contient l’URL, les différences, les étapes et un parcours exécutable.
+Les sources sont les zones liées depuis [Crossovers](https://sinkingstarwalkthrough.com/fr/crossovers/), conformément à la demande : **Heroes and Mirrors** (30, 32, 31, 19, 25 et 34) et **Heroes and Water** (11). L’atelier guidé du niveau 4 est une création originale qui enseigne ces mécanismes. Les sept autres cartes sont des adaptations de principes, avec une géométrie et des parcours conçus pour ce duo ; aucune reproduction exacte n’est revendiquée. Chaque fichier `reference/levelN-design.json` contient l’URL, les différences, les étapes et un parcours exécutable.
 
 ## Validation et séparation des données
 

@@ -165,17 +165,17 @@ report.campaignChecks={levels:8,finalState:'WIN',allWitnessesUseMerchantPushAndW
 // Concrete campaign promises are verified from actual phases and resulting states.
 const mechanisms=[];
 const confirm=(level,description,test)=>{assert.ok(test,'Level '+level+': '+description);mechanisms.push({level,description,verified:true});};
-const tutorial=report.levels[0];
-confirm(1,'The tutorial uses a bent exchange, a movable mirror, a press, three supports and a hydraulic crossing',
+const tutorial=report.levels[3];
+confirm(4,'The tutorial uses a bent exchange, a movable mirror, a press, three supports and a hydraulic crossing',
  tutorial.bentSwaps>=1&&tutorial.mirrorMoves>=1&&tutorial.heroReflections>=1&&tutorial.pistonPushes>=1&&tutorial.platformsCreated>=3&&tutorial.hydraulicPlatforms>=1&&tutorial.hydraulicChanges>=1);
-const relay=report.levels[1],relayRun=runs[1];
-confirm(2,'The bent exchange leaves a crate on the Wizard’s pressure button',
+const relay=report.levels[0],relayRun=runs[0];
+confirm(1,'The bent exchange leaves a crate on the Wizard’s pressure button',
  relay.bentSwaps>=1&&relay.mirrorMoves>=1&&relay.heroReflections>=1&&relayRun.trace.some(t=>t.phases.some(p=>p.kind==='swap'&&relayRun.world.buttons.some(b=>samePoint(b,p.before.heroes[p.before.active].at)&&p.after.stones.some(c=>samePoint(c,b))))));
-const islands=report.levels[2];
-confirm(3,'The island relay exchanges the two heroes and builds its final permanent crossing',
+const islands=report.levels[1];
+confirm(2,'The island relay exchanges the two heroes and builds its final permanent crossing',
  islands.heroSwaps>=2&&islands.wizardSwaps>=3&&islands.platformsCreated>=1&&islands.mirrors===0);
-const scaffolding=report.levels[3],scaffoldRun=runs[3];
-confirm(4,'The transported Merchant builds support beneath a moved mirror and sends heroes through it',
+const scaffolding=report.levels[2],scaffoldRun=runs[2];
+confirm(3,'The transported Merchant builds support beneath a moved mirror and sends heroes through it',
  scaffolding.heroSwaps>=1&&scaffolding.mirrorMoves>=3&&scaffolding.heroReflections>=2&&scaffolding.platformsCreated>=1&&scaffoldRun.trace.some(t=>t.after.mirrors.some(m=>t.after.supports.some(p=>samePoint(p,m.at)))));
 const diagonals=report.levels[4],diagonalRun=runs[4];
 confirm(5,'A moved mirror supplies the weight that controls the temporary platform',
@@ -193,7 +193,7 @@ confirm(8,'The press moves a crate–mirror file, destroys one mirror and permit
  finale.mirrorsDestroyed===1&&finale.platformsCreated===2&&finale.pistonPushes>=1&&finaleRun.trace.some(t=>t.phases.some(p=>p.kind==='piston'&&p.moves.some(m=>m.actor==='stone')&&p.moves.some(m=>m.actor==='mirror'))));
 confirm(8,'Both heroes arrive after the hydraulic platforms retract',
  finaleRun.state.complete&&finaleRun.state.platformActive?.length>0&&finaleRun.state.platformActive.every(active=>!active));
-report.mechanismChecks=mechanisms;
+report.mechanismChecks=mechanisms.sort((a,b)=>a.level-b.level);
 const finaleEvidence=await optionalJson('../reference/level8-mechanisms.json');
 if(finaleEvidence){assert.equal(finaleEvidence.mapSha256,hash(SS08_LEVELS[7]),'Finale mechanism evidence belongs to the current map');report.finaleEvidence=finaleEvidence;}
 

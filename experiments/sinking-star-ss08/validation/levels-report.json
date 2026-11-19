@@ -1,65 +1,10 @@
 {
   "game": "SS08",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "levels": [
     {
       "level": 1,
       "id": "ss08-01",
-      "title": "L’atelier des deux passages",
-      "source": {
-        "puzzle": 30,
-        "label": "Tutoriel original du duo · échange direct, trois appuis, presse isolée, miroir mobile, rayon dévié et passerelle tenue à deux.",
-        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
-        "piston": true,
-        "platform": true,
-        "objective": "Extraire la caisse ; le bouton rose pousse la caisse isolée et construit le second appui. Préparer le miroir, refléter la dernière caisse puis tenir la passerelle pour faire traverser le duo."
-      },
-      "dimensions": [
-        19,
-        14
-      ],
-      "floorCells": 58,
-      "waterCells": 6,
-      "initialStones": 3,
-      "initialSupports": 0,
-      "initialMonsters": 0,
-      "mirrors": 1,
-      "gates": 1,
-      "hydraulicPlatforms": 2,
-      "buttons": 2,
-      "actions": 50,
-      "selections": 5,
-      "merchantPushes": 4,
-      "wizardSwaps": 2,
-      "bentSwaps": 1,
-      "heroSwaps": 0,
-      "chainPushes": 0,
-      "stoneMoves": 7,
-      "mirrorMoves": 1,
-      "reflections": 2,
-      "heroReflections": 1,
-      "pistonPushes": 1,
-      "platformsCreated": 3,
-      "monstersRemoved": 0,
-      "blocked": 0,
-      "deaths": 0,
-      "combatWaves": 0,
-      "mirrorsDestroyed": 0,
-      "cratesCrushed": 0,
-      "simultaneousHeroReflections": 0,
-      "hydraulicChanges": 2,
-      "frames": 151,
-      "maxFrames": 7,
-      "recordedStages": 10,
-      "completionUndo": true,
-      "solved": true,
-      "mapSha256": "21eb40d184f6906763adf8f94e6ed41b9dd0410ccc5f76a5160e5e2aa4ebb555",
-      "witnessSha256": "00db8bbe3e84eef3a23579a8e35625ab2a0a4e61e2a2a2640a289c3c6b8cacb0",
-      "observationsSha256": "65217e0440847f17df8ce3132b9dc23c5899906720f0540bd7017d7207602479"
-    },
-    {
-      "level": 2,
-      "id": "ss08-02",
       "title": "Le relais derrière l’angle",
       "source": {
         "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
@@ -111,13 +56,13 @@
       "recordedStages": 3,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "62f1a56b7125d89f09e274471a9bedf114eb05b4aa37d32bda023ace89f85504",
+      "mapSha256": "0601b6b40891148489da5cee4e3c9d808b4d6305423e0bd6bf0a58cc7bbefc2d",
       "witnessSha256": "f3a61b73ad65ef74ef6c385d390629eda192f990339c85a7075ef8ea7c8df982",
-      "observationsSha256": "7cd5eac798bb68003d3888fe8da6134206e4989a3524e11b8ea2072f6ba0aa4c"
+      "observationsSha256": "0b6c5e6f151d5def5cf5e52fd707a6a9c9a5c7b6df0b093980366ce90ef31ddc"
     },
     {
-      "level": 3,
-      "id": "ss08-03",
+      "level": 2,
+      "id": "ss08-02",
       "title": "Le compte des cinq îles",
       "source": {
         "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
@@ -169,13 +114,13 @@
       "recordedStages": 4,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "e39f7eefcacc7574887027fbd141089e6b584dc0573cc76d42edbf5b7ffd4ee8",
+      "mapSha256": "3648e6ac01b7df161718ea86c8c0a7c908877087127cf95bfe858b7aff66e06e",
       "witnessSha256": "c67b13a330813445abce845e2822751d43893f7227fe167d7019f1291d55f411",
-      "observationsSha256": "dc73e2b3b5bdb00dbaab91dc8081edf9502bc0c62628309947f845d5c18143e1"
+      "observationsSha256": "c8badf34b02e664d8bed56df3482bba21f058ca68ed927a0c4d7a19201d76d3d"
     },
     {
-      "level": 4,
-      "id": "ss08-04",
+      "level": 3,
+      "id": "ss08-03",
       "title": "Le miroir et son échafaudage",
       "source": {
         "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
@@ -227,9 +172,64 @@
       "recordedStages": 5,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "d6074280d5a1113e9f7b31ba4e2da3f88471dcc7210bf7f8263e5cb0428be853",
+      "mapSha256": "bfbee42a4cb4f0f4c1cc28e17fa29ced202c77558787d3fee6c7d48b8a9f7fc1",
       "witnessSha256": "67dc1ea0a6621ff9e1fda4ed20b93f06248d749d7cc560264cfa57534c0f8acc",
-      "observationsSha256": "7591f62519462f7abf366f7913b637687f1770051f1db424b6423c9b081bda7d"
+      "observationsSha256": "14693cac1c7c19a9774de4ef0482eb6eadcdecefb27b77de19960904a1df0c8a"
+    },
+    {
+      "level": 4,
+      "id": "ss08-04",
+      "title": "L’atelier des deux passages",
+      "source": {
+        "puzzle": 30,
+        "label": "Tutoriel original du duo · échange direct, trois appuis, presse isolée, miroir mobile, rayon dévié et passerelle tenue à deux.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+        "piston": true,
+        "platform": true,
+        "objective": "Extraire la caisse ; le bouton rose pousse la caisse isolée et construit le second appui. Préparer le miroir, refléter la dernière caisse puis tenir la passerelle pour faire traverser le duo."
+      },
+      "dimensions": [
+        19,
+        14
+      ],
+      "floorCells": 58,
+      "waterCells": 6,
+      "initialStones": 3,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 2,
+      "buttons": 2,
+      "actions": 50,
+      "selections": 5,
+      "merchantPushes": 4,
+      "wizardSwaps": 2,
+      "bentSwaps": 1,
+      "heroSwaps": 0,
+      "chainPushes": 0,
+      "stoneMoves": 7,
+      "mirrorMoves": 1,
+      "reflections": 2,
+      "heroReflections": 1,
+      "pistonPushes": 1,
+      "platformsCreated": 3,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 2,
+      "frames": 151,
+      "maxFrames": 7,
+      "recordedStages": 10,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
+      "witnessSha256": "00db8bbe3e84eef3a23579a8e35625ab2a0a4e61e2a2a2640a289c3c6b8cacb0",
+      "observationsSha256": "41439b4bedce6b10d18d8799de9016f562fb9320021ed66555dccd9b5b63967e"
     },
     {
       "level": 5,
@@ -287,7 +287,7 @@
       "solved": true,
       "mapSha256": "2019b40e4d36e8d0eb147828ae1cd032879071239e12359bce243a8ad96436e7",
       "witnessSha256": "cf7556c69ec3060931d23efdb082b2e673bf9f848b36f5288caf677ffd533846",
-      "observationsSha256": "c163823bc293b9b60873e9090e6b06812abcdc8cf878c0035050887ad8642186"
+      "observationsSha256": "c4ded86e888af93dbdf7e067f16e8f87e5377ad1a72fa91cdd8d1c2b89a1b242"
     },
     {
       "level": 6,
@@ -481,7 +481,7 @@
   },
   "failureRoutes": [
     {
-      "level": 1,
+      "level": 4,
       "cause": "Le Magicien quitte le bouton vert pendant que le Marchand occupe une plateforme temporaire.",
       "actions": 45,
       "frames": 6,
@@ -519,10 +519,10 @@
   ],
   "necessityEvidence": [
     {
-      "level": 1,
+      "level": 4,
       "boundToCurrentMap": true,
-      "source": "reference/level1-design.json",
-      "specSha256": "21eb40d184f6906763adf8f94e6ed41b9dd0410ccc5f76a5160e5e2aa4ebb555",
+      "source": "reference/level4-design.json",
+      "specSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
       "proofPolicy": "Only exhausted searches prove impossibility. State or time limits are inconclusive; no uniqueness or optimality is claimed.",
       "checks": [
         {
@@ -609,7 +609,7 @@
         }
       },
       "geometry": {
-        "specSha256": "21eb40d184f6906763adf8f94e6ed41b9dd0410ccc5f76a5160e5e2aa4ebb555",
+        "specSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
         "kind": "optimistic-geometric-bound",
         "rightIslandStartsX": 16,
         "lastGapCellX": 15,
@@ -762,10 +762,16 @@
         }
       ],
       "failureWitness": {
-        "path": "ss08-research/failures-candidate.json",
+        "path": "tests/failures.json (level 4)",
         "actionCount": 45,
         "expected": "GAME_OVER",
         "reason": "Leave the green plate while Merchant stands on the first hydraulic platform; retraction drowns him."
+      },
+      "renumbering": {
+        "previousLevel": 1,
+        "currentLevel": 4,
+        "geometryAndActionsUnchanged": true,
+        "note": "La géométrie et les actions sont identiques ; seul l’identifiant de salle a changé. Les preuves de v0.1.0 restent applicables."
       }
     }
   ],
@@ -779,22 +785,22 @@
   "mechanismChecks": [
     {
       "level": 1,
-      "description": "The tutorial uses a bent exchange, a movable mirror, a press, three supports and a hydraulic crossing",
-      "verified": true
-    },
-    {
-      "level": 2,
       "description": "The bent exchange leaves a crate on the Wizard’s pressure button",
       "verified": true
     },
     {
-      "level": 3,
+      "level": 2,
       "description": "The island relay exchanges the two heroes and builds its final permanent crossing",
       "verified": true
     },
     {
-      "level": 4,
+      "level": 3,
       "description": "The transported Merchant builds support beneath a moved mirror and sends heroes through it",
+      "verified": true
+    },
+    {
+      "level": 4,
+      "description": "The tutorial uses a bent exchange, a movable mirror, a press, three supports and a hydraulic crossing",
       "verified": true
     },
     {
@@ -850,7 +856,7 @@
       "Les assertions confirment le mécanisme initial et le parcours de résolution ; elles ne certifient pas l’unicité ni l’optimalité de la solution."
     ]
   },
-  "htmlSha256": "7218cdbddefd731dcf9c1ce481feb95b8f94b2847a3a869f327e477bde6826f2",
+  "htmlSha256": "b3e8024d7203a645598a7ef884c0e79ccccb943710f251fd5d31e3d1b5fb2394",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",

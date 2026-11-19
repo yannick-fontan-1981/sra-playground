@@ -4,22 +4,24 @@
   "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
   "visualBrowserTest": false,
   "checks": [
-    "The complete compiled HTML opens level 1 with both colored heroes, exact engine pixels and its rich tutorial expanded",
-    "Five controls, ten tutorial objectives, distinct reflection previews and explicit directional swap, bent-ray, water, mirror, circuit and monster rules are present",
-    "Five compiled-HTML fixtures exercise first-crate, bent-ray and companion exchanges, fallback walking and black-back obstruction with exact frames and visual Undo",
-    "Compiled HTML with three in-memory room fixtures shows only the nearer hero/crate preview, ignores the farther blocked landing, preserves equal-distance exchanges, and supports exact visual Undo",
+    "The compiled HTML starts on the new level 1; the rich ten-discovery tutorial follows its room to level 4 and Restart explicitly returns to level 1",
+    "Controls and global help distinguish directional swaps, mirror reflections, water warnings, support, circuits and monster combat",
+    "Six compiled-HTML Wizard fixtures cover direct, bent and companion exchanges, ordinary walking, black-back obstruction and water refusal without false movement/support discoveries",
+    "Three compiled-HTML reflection fixtures preserve nearest-source previews, blocked-farther independence, equal-distance exchange and exact visual Undo",
     "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
     "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
-    "Movement uses every frame and duration; directions, reflection and selection are blocked while animating, while Space still prevents scrolling",
+    "All movement frames and durations display; directions, reflection and selection are blocked during animation while Space prevents scrolling",
     "Undo during an animation restores both heroes and cancels stale callbacks",
-    "Reset, level changes and return to tutorial cancel pending animation callbacks and reset the appropriate counters",
-    "8 inspected room(s) display their source attribution and relevant piston/platform help",
-    "8 inspected room(s) keep one orange Merchant, one violet Wizard and two goals; selecting the current hero makes no action or Undo entry",
+    "Reset, level changes and return to level 1 cancel pending animation callbacks and reset counters",
+    "8 inspected rooms display their source attribution and relevant help; rich tutorial appears only in level 4",
+    "Every inspected room retains the orange/violet duo and two goals; reselecting the active hero creates no action or Undo entry",
+    "The real L5 witness keeps each mirror’s white diagonal and black back visible while it holds a button",
+    "The real L8 route shows cyan/clear/red/clear/red/clear in water, repeats unchanged refusal, moves no hero, grants no discovery and permits exact or mid-animation Undo",
     "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
-    "The complete tutorial earns all ten discoveries through public pixels: walking, selection, Merchant push, Wizard swap and bent ray, mirror motion, permanent support, reflection, gate and two goals",
-    "All eight witnesses replay through the actual UI with exact frames and timing; victory needs all rooms and disables direction, reflection and hero selection",
-    "Undo exits final victory and restores progression; Restart returns to the open tutorial with zero completions",
-    "Real reachable defeats display all movement/combat frames before the terminal overlay, block further commands, and support mid-animation Undo plus defeat-panel Undo/Reset"
+    "The rich tutorial in level 4 earns all ten discoveries through its unchanged real witness",
+    "All eight witnesses replay in the new order with exact frames/timing; final victory disables further controls",
+    "Undo exits final victory; Restart returns to the new level 1 with zero completions and the rich tutorial reserved for level 4",
+    "Reordered reachable defeats show every terminal frame before the overlay, block commands and support mid-animation Undo plus panel Undo/Reset"
   ],
   "wizardCoverage": [
     {
@@ -51,6 +53,12 @@
       "exactFrames": 3,
       "publicLessonDetection": true,
       "exactVisualUndo": true
+    },
+    {
+      "case": "water refusal teaches no movement or support",
+      "exactFrames": 6,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
     }
   ],
   "reflectionPriorityCoverage": [
@@ -76,7 +84,62 @@
       "exactVisualUndo": true
     }
   ],
+  "mirrorButtonCoverage": [
+    {
+      "turn": 15,
+      "at": {
+        "x": 8,
+        "y": 10
+      },
+      "facing": "SW",
+      "whiteDiagonal": true,
+      "blackBack": true
+    },
+    {
+      "turn": 22,
+      "at": {
+        "x": 8,
+        "y": 10
+      },
+      "facing": "SW",
+      "whiteDiagonal": true,
+      "blackBack": true
+    },
+    {
+      "turn": 37,
+      "at": {
+        "x": 8,
+        "y": 10
+      },
+      "facing": "SW",
+      "whiteDiagonal": true,
+      "blackBack": true
+    }
+  ],
+  "waterRefusalCoverage": {
+    "level": 8,
+    "prefixActions": 19,
+    "targetCell": {
+      "x": 7,
+      "y": 4
+    },
+    "frames": 6,
+    "frameDurationsMs": [
+      110,
+      70,
+      130,
+      70,
+      130,
+      0
+    ],
+    "repeatedIdenticalWarning": true,
+    "exactUndo": true,
+    "midAnimationUndo": true,
+    "noHeroMotion": true,
+    "noDiscovery": true
+  },
   "tutorialCoverage": {
+    "level": 4,
     "actions": 50,
     "frames": 151,
     "selectionActions": 5,
@@ -95,7 +158,7 @@
   },
   "platformCoverage": {
     "circuitsWithBothVisibleStates": [
-      "1:passerelle",
+      "4:passerelle",
       "5:passerelle",
       "6:retard",
       "8:retour"
@@ -112,7 +175,7 @@
   },
   "defeatCoverage": [
     {
-      "level": 1,
+      "level": 4,
       "cause": "Le Magicien quitte le bouton vert pendant que le Marchand occupe une plateforme temporaire.",
       "actions": 45,
       "frames": 6,

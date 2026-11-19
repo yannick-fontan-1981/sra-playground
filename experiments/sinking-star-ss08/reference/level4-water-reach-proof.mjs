@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import crypto from 'node:crypto';
 import {compileLevel,terrainAt} from '../dist/core.js';
-const {spec}=JSON.parse(fs.readFileSync(new URL('./level1-design.json',import.meta.url),'utf8'));
+const {spec}=JSON.parse(fs.readFileSync(new URL('./level4-design.json',import.meta.url),'utf8'));
 const world=compileLevel(spec),ox=Math.floor((20-spec.rows[0].length)/2),oy=Math.floor((20-spec.rows.length)/2);
 const p=(x,y)=>({x:x+ox,y:y+oy}),key=p=>`${p.x},${p.y}`;
 const fixed=[p(6,4),p(8,6)],thirdCandidates=[p(12,10),p(13,10),p(14,10),p(15,10)];

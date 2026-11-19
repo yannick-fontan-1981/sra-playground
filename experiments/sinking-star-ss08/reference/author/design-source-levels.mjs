@@ -1,23 +1,23 @@
 import {Author,board} from './author.mjs';
 import {writeFileSync} from 'node:fs';
 const source=(zone,n,idea)=>({hub:'https://sinkingstarwalkthrough.com/fr/crossovers/',url:`https://sinkingstarwalkthrough.com/fr/${zone}-solutions/#%C3%A9nigme-${n}`,puzzle:n,idea,kind:'adaptation de principe'});
-function level2(){
+function level1(){
  const b=board(18,12,'~');b.fill(4,2,8,7);b.fill(6,8,8,8);b.fill(12,7,13,9);b.fill(13,5,13,7);b.put(14,5);b.fill(15,3,16,5);b.put(8,3,'~');b.put(8,2,'W');b.put(5,6,'M');b.put(13,8,'o');b.put(15,3,'g');b.put(16,5,'g');
- const spec={id:'ss08-02',title:'Le relais derrière l’angle',rows:b.strings(),mirrors:[{at:{x:7,y:8},facing:'NE'}],circuits:[{id:'relais',buttons:[{x:8,y:2}]}],gates:[{at:{x:14,y:5},circuit:'relais',direction:'E',closedWhen:'released'}]};
+ const spec={id:'ss08-01',title:'Le relais derrière l’angle',rows:b.strings(),mirrors:[{at:{x:7,y:8},facing:'NE'}],circuits:[{id:'relais',buttons:[{x:8,y:2}]}],gates:[{at:{x:14,y:5},circuit:'relais',direction:'E',closedWhen:'released'}]};
  const a=new Author(spec);a.go(6,8,'merchant').act('R').stage('Le Marchand aligne le miroir');a.select('wizard').act('D').stage('Échange coudé : la caisse remplace le Magicien sur le bouton');a.go(12,7);a.go(8,4,'merchant').act('X').stage('Le Marchand rejoint l’îlot sans déplacer la caisse plus éloignée');a.go(15,3);a.go(16,5,'wizard');
- return a.save(new URL('../level2-design.json',import.meta.url),source('heroes-and-mirrors',30,'Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.'),'Géométrie originale compacte à trois îlots ; duo Marchand/Magicien et deux objectifs ; miroir déplacé par le Marchand ; le Magicien dépose la caisse sur son bouton de départ.');
+ return a.save(new URL('../level1-design.json',import.meta.url),source('heroes-and-mirrors',30,'Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.'),'Géométrie originale compacte à trois îlots ; duo Marchand/Magicien et deux objectifs ; miroir déplacé par le Marchand ; le Magicien dépose la caisse sur son bouton de départ.');
+}
+function level2(){
+ const b=board(15,14,'~');b.fill(2,9,4,11);b.fill(2,2,4,4);b.fill(10,2,12,5);b.fill(10,9,12,11);b.fill(6,4,8,7);b.put(3,9,'W');b.put(3,10,'M');b.put(3,3,'o');b.put(11,3,'o');b.put(11,10,'o');b.put(10,4,'o');b.put(12,3,'o');b.put(6,5,'g');b.put(7,7,'g');
+ const spec={id:'ss08-02',title:'Le compte des cinq îles',rows:b.strings()};
+ const a=new Author(spec);a.select('wizard').act('URDL').stage('Premier relais : le Marchand atteint le sud-est');a.act('UURD').stage('Deuxième relais : le Marchand atteint le chantier au nord-est');a.go(11,4,'merchant').act('L').stage('Une poussée change enfin le nombre d’occupants : pont vers le centre');a.go(7,7);a.go(12,10,'wizard').act('U').stage('Dernière caisse gardée pour le retour du Magicien');a.go(6,5);
+ return a.save(new URL('../level2-design.json',import.meta.url),source('heroes-and-water',11,'Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide.'),'Cinq îlots réagencés et deux objectifs sur l’île centrale ; Marchand remplace le Guerrier ; une caisse supplémentaire garde une ancre de retour pour le Magicien. Aucun miroir ni porte : problème de circulation des héros et de réserve de caisses.');
 }
 function level3(){
- const b=board(15,14,'~');b.fill(2,9,4,11);b.fill(2,2,4,4);b.fill(10,2,12,5);b.fill(10,9,12,11);b.fill(6,4,8,7);b.put(3,9,'W');b.put(3,10,'M');b.put(3,3,'o');b.put(11,3,'o');b.put(11,10,'o');b.put(10,4,'o');b.put(12,3,'o');b.put(6,5,'g');b.put(7,7,'g');
- const spec={id:'ss08-03',title:'Le compte des cinq îles',rows:b.strings()};
- const a=new Author(spec);a.select('wizard').act('URDL').stage('Premier relais : le Marchand atteint le sud-est');a.act('UURD').stage('Deuxième relais : le Marchand atteint le chantier au nord-est');a.go(11,4,'merchant').act('L').stage('Une poussée change enfin le nombre d’occupants : pont vers le centre');a.go(7,7);a.go(12,10,'wizard').act('U').stage('Dernière caisse gardée pour le retour du Magicien');a.go(6,5);
- return a.save(new URL('../level3-design.json',import.meta.url),source('heroes-and-water',11,'Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide.'),'Cinq îlots réagencés et deux objectifs sur l’île centrale ; Marchand remplace le Guerrier ; une caisse supplémentaire garde une ancre de retour pour le Magicien. Aucun miroir ni porte : problème de circulation des héros et de réserve de caisses.');
-}
-function level4(){
  const b=board(16,15,'~');b.fill(2,5,6,10);b.fill(10,5,10,6);b.fill(10,8,10,9);b.fill(11,7,12,9);b.fill(10,12,12,13);b.put(3,9,'M');b.put(10,9,'W');b.put(11,7,'o');b.put(10,12,'g');b.put(11,12,'g');
- const spec={id:'ss08-04',title:'Le miroir et son échafaudage',rows:b.strings(),mirrors:[{at:{x:11,y:8},facing:'SW'}]};
+ const spec={id:'ss08-03',title:'Le miroir et son échafaudage',rows:b.strings(),mirrors:[{at:{x:11,y:8},facing:'SW'}]};
  const a=new Author(spec);a.select('wizard').act('L').stage('Le Magicien livre le Marchand dans le chantier isolé');a.go(12,7,'merchant').act('L').stage('Un appui pour le virage du miroir');a.go(12,8).act('L').go(10,9).act('UUU').stage('Le miroir monte dans la seule colonne utile');a.go(10,9).act('X').go(4,6).stage('Le Marchand revient par le reflet intermédiaire');a.go(3,5,'wizard').act('XR').stage('Le Magicien libère la première cible');a.go(3,5,'merchant').act('X');
- return a.save(new URL('../level4-design.json',import.meta.url),source('heroes-and-mirrors',32,'Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie.'),'Passerelle et îlots redessinés ; le Magicien échange avec son partenaire pour livrer le seul pousseur sur le chantier ; un bloc noyé construit le virage ; le miroir sert d’abord au retour puis à la traversée finale des deux héros.');
+ return a.save(new URL('../level3-design.json',import.meta.url),source('heroes-and-mirrors',32,'Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie.'),'Passerelle et îlots redessinés ; le Magicien échange avec son partenaire pour livrer le seul pousseur sur le chantier ; un bloc noyé construit le virage ; le miroir sert d’abord au retour puis à la traversée finale des deux héros.');
 }
 function level5(){
  const b=board(20,12,'~');b.fill(6,5,10,9);b.fill(6,2,6,5);b.fill(6,2,10,2);b.fill(6,1,9,1);b.put(6,4,'~');b.fill(15,8,16,8);b.fill(17,7,18,9);b.put(7,7,'M');b.put(10,2,'W');b.put(10,6,'o');b.put(17,7,'g');b.put(18,9,'g');
@@ -25,4 +25,4 @@ function level5(){
  const a=new Author(spec);a.select('wizard').act('D').go(10,9).stage('La caisse tient le bouton et libère le seul accès latéral');a.go(9,9,'merchant').act('UU').go(10,6).act('L').stage('Le premier miroir maintient le bouton vert : la passerelle se déploie');a.go(6,8).act('RR').stage('Le bon miroir remplace le premier');a.go(9,2).act('X').go(17,7).stage('Première traversée, aucun reflet parasite');a.go(9,2,'wizard').act('X').go(18,9);
  return a.save(new URL('../level5-design.json',import.meta.url),source('heroes-and-mirrors',31,'La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange.'),'Deux miroirs ordinaires orientés différemment remplacent la distinction miroir ordinaire/spécial ; les deux héros doivent sortir ; une caisse extraite par le Magicien conserve le bouton rose et libère l’appui nécessaire pour déplacer le premier miroir. Ce dernier maintient le bouton vert de la passerelle hydraulique ; le second devient le transporteur. Deux destinations nouvelles.');
 }
-for(const n of process.argv.slice(2)){try{({2:level2,3:level3,4:level4,5:level5})[n]();}catch(e){console.error('L'+n,e.stack);process.exitCode=1;}}
+for(const n of process.argv.slice(2)){try{({1:level1,2:level2,3:level3,5:level5})[n]();}catch(e){console.error('L'+n,e.stack);process.exitCode=1;}}

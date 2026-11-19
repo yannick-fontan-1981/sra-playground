@@ -2,7 +2,7 @@
 
 ## Personnages, grille et objectifs
 
-Une campagne de huit cartes. Chaque carte contient exactement un Marchand (`M`, palette 12), un Magicien (`W`, palette 15) et deux destinations. La victoire d’une salle exige les deux destinations occupées simultanément par les héros vivants. Perdre l’un des héros provoque GAME_OVER ; annuler restaure l’action entière.
+Une campagne de huit cartes, ordonnée depuis v0.2.0 comme les anciennes salles 2, 3, 4, 1, 5, 6, 7 et 8. Le lancement commence au nouveau niveau 1 ; l’atelier guidé complet se trouve au niveau 4. Chaque carte contient exactement un Marchand (`M`, palette 12), un Magicien (`W`, palette 15) et deux destinations. La victoire d’une salle exige les deux destinations occupées simultanément par les héros vivants. Perdre l’un des héros provoque GAME_OVER ; annuler restaure l’action entière.
 
 Grille logique de 20 × 20 cases au maximum, centrée dans une image ARC de 64 × 64 pixels. Une case fait exactement 3 × 3 pixels ; l’origine est (2,2). L’agrandissement CSS conserve les pixels nets. La palette reste celle des précédents laboratoires : sol gris, mur gris foncé, eau bleue, caisse marron, appui marron marqué d’un X cyan, bouton + rose, porte carrée rose, destination jaune, miroir blanc à dos noir, monstre noir marqué d’un X rouge.
 
@@ -26,6 +26,8 @@ La visée directionnelle du Magicien peut rebondir sur plusieurs miroirs. Le ref
 
 Pour chaque miroir, les premiers occupants des deux bras de sa face sont comparés par distance **avant** de vérifier leurs arrivées. Le plus proche est choisi ; le plus éloigné reste immobile et son arrivée bloquée ne peut pas annuler celle du plus proche. À distances égales, les deux échangent leurs places. Les trajets sélectionnés sont ensuite vérifiés globalement : arrivée occupée, obstacle ou conflit de destinations refusent l’ensemble. Il n’y a ni duplication, ni fusion de copies.
 
+Un miroir est dessiné au-dessus des repères des boutons et de leur circuit. Sa diagonale blanche et son dos noir restent entièrement visibles lorsqu’il occupe une plaque, y compris pendant une poussée.
+
 Prévisualisation géométrique : + gris clair pour un héros, contour carré gris clair pour une caisse. Aucun aperçu de poussée ni cible directionnelle permanente.
 
 ## Eau, portes et attaques
@@ -39,6 +41,8 @@ Les monstres attaquent leurs voisins orthogonaux simultanément. Deux monstres a
 ## Animation et observations
 
 Les déplacements, poussées, échanges, reflets, mouvements de presse et changements de plateformes produisent trois images. Un combat en produit cinq : préparation, avancée, impact, disparition, résultat. Les séquences peuvent s’enchaîner ; chaque durée est explicite et l’image finale a une durée de 0. L’interface attend le dernier état avant d’afficher victoire ou défaite. Annuler reste possible pendant une animation et restaure toute la cascade.
+
+Quand le Magicien ne trouve aucune cible et que le pas demandé arriverait dans une case d’eau sans appui, le refus affiche une croix X sur cette case : cyan, effacement, rouge, effacement, rouge, effacement. Les durées sont 110, 70, 130, 70, 130 et 0 ms. Cette phase visuelle conserve la position des objets et ne déclenche ni circuit ni combat. La même tentative répétée rejoue l’avertissement, même si l’état logique est identique ; elle n’ajoute alors aucune entrée d’annulation. L’image finale est nette et ne contient plus de croix.
 
 `DuoPuzzleSession` expose les pixels, les actions autorisées, l’état, les compteurs et la progression. Les plans de visée, objets, circuits, parcours et solutions restent hors de l’observation publique. Les outils d’auteur ne sont pas embarqués dans le HTML.
 

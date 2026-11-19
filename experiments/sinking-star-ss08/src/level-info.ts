@@ -1,13 +1,5 @@
 export const LEVEL_INFO=[
   {
-    "puzzle": 30,
-    "label": "Tutoriel original du duo · échange direct, trois appuis, presse isolée, miroir mobile, rayon dévié et passerelle tenue à deux.",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
-    "piston": true,
-    "platform": true,
-    "objective": "Extraire la caisse ; le bouton rose pousse la caisse isolée et construit le second appui. Préparer le miroir, refléter la dernière caisse puis tenir la passerelle pour faire traverser le duo."
-  },
-  {
     "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
     "puzzle": 30,
@@ -39,6 +31,14 @@ export const LEVEL_INFO=[
     "piston": false,
     "platform": false,
     "objective": "Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie."
+  },
+  {
+    "puzzle": 30,
+    "label": "Tutoriel original du duo · échange direct, trois appuis, presse isolée, miroir mobile, rayon dévié et passerelle tenue à deux.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+    "piston": true,
+    "platform": true,
+    "objective": "Extraire la caisse ; le bouton rose pousse la caisse isolée et construit le second appui. Préparer le miroir, refléter la dernière caisse puis tenir la passerelle pour faire traverser le duo."
   },
   {
     "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",

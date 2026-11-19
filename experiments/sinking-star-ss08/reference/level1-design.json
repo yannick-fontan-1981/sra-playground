@@ -1,216 +1,95 @@
 {
   "spec": {
     "id": "ss08-01",
-    "title": "L’atelier des deux passages",
+    "title": "Le relais derrière l’angle",
     "rows": [
-      "###################",
-      "###o..#############",
-      "#.....#############",
-      "#.....#############",
-      "#M.W..~.....#######",
-      "#.....#..#..#######",
-      "########~o#########",
-      "########.#######g.#",
-      "########....####..#",
-      "########....####.g#",
-      "########....~~~~o.#",
-      "########....#######",
-      "###################",
-      "###################"
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~....W~~~~~~~~~",
+      "~~~~....~~~~~~~g.~",
+      "~~~~.....~~~~~~..~",
+      "~~~~.....~~~~...g~",
+      "~~~~.M...~~~~.~~~~",
+      "~~~~.....~~~..~~~~",
+      "~~~~~~...~~~.o~~~~",
+      "~~~~~~~~~~~~..~~~~",
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~"
     ],
-    "facing": "E",
     "mirrors": [
       {
         "at": {
-          "x": 10,
-          "y": 10
+          "x": 7,
+          "y": 8
         },
         "facing": "NE"
       }
     ],
     "circuits": [
       {
-        "id": "presse",
+        "id": "relais",
         "buttons": [
           {
             "x": 8,
-            "y": 4
+            "y": 2
           }
-        ],
-        "color": 7
-      },
-      {
-        "id": "passerelle",
-        "buttons": [
-          {
-            "x": 17,
-            "y": 10
-          }
-        ],
-        "color": 14
+        ]
       }
     ],
     "gates": [
       {
         "at": {
-          "x": 9,
-          "y": 6
-        },
-        "circuit": "presse",
-        "direction": "W",
-        "closedWhen": "pressed"
-      }
-    ],
-    "platforms": [
-      {
-        "at": {
           "x": 14,
-          "y": 10
+          "y": 5
         },
-        "circuit": "passerelle",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 15,
-          "y": 10
-        },
-        "circuit": "passerelle",
-        "activeWhen": "pressed"
+        "circuit": "relais",
+        "direction": "E",
+        "closedWhen": "released"
       }
     ]
   },
-  "commands": "CURCRRRRRRRDDDDDDRRCDDDRRRDRDDDRRRDRXCUURXRRRUUUCU",
+  "commands": "DRDRCDULCUUUURXRUUURRUUCRUURRR",
   "actions": [
     {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
       "id": 6,
       "data": {
-        "x": 12,
-        "y": 24
+        "x": 30,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
       }
     },
     {
       "id": 1
     },
     {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 6,
-        "y": 24
-      }
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 15,
-        "y": 15
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 33,
-        "y": 42
-      }
+      "id": 1
     },
     {
       "id": 1
@@ -228,13 +107,19 @@
       "id": 4
     },
     {
-      "id": 4
-    },
-    {
-      "id": 4
+      "id": 1
     },
     {
       "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 1
@@ -245,536 +130,179 @@
     {
       "id": 6,
       "data": {
-        "x": 54,
-        "y": 42
+        "x": 42,
+        "y": 36
       }
     },
     {
+      "id": 4
+    },
+    {
       "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     }
   ],
   "source": {
-    "puzzle": 30,
-    "label": "Tutoriel original du duo · échange direct, trois appuis, presse isolée, miroir mobile, rayon dévié et passerelle tenue à deux.",
+    "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+    "puzzle": 30,
+    "idea": "Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.",
+    "kind": "adaptation de principe",
+    "label": "Adaptation de Heroes and Mirrors 30 · Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.",
     "piston": true,
-    "platform": true,
-    "objective": "Extraire la caisse ; le bouton rose pousse la caisse isolée et construit le second appui. Préparer le miroir, refléter la dernière caisse puis tenir la passerelle pour faire traverser le duo."
+    "platform": false,
+    "objective": "Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton."
   },
   "metrics": {
-    "actions": 50,
-    "selections": 5,
-    "merchantPushes": 4,
-    "wizardSwaps": 2,
+    "actions": 30,
+    "selections": 3,
+    "merchantPushes": 1,
+    "wizardSwaps": 1,
     "bentSwaps": 1,
     "heroSwaps": 0,
     "chainPushes": 0,
-    "stoneMoves": 7,
+    "stoneMoves": 1,
     "mirrorMoves": 1,
-    "reflections": 2,
+    "reflections": 1,
     "heroReflections": 1,
-    "pistonPushes": 1,
-    "platformsCreated": 3,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
     "monstersRemoved": 0,
     "blocked": 0,
     "deaths": 0
   },
   "stages": [
     {
-      "label": "Le Magicien extrait la caisse de l’alcôve par échange",
-      "turn": 3,
+      "label": "Le Marchand aligne le miroir",
+      "turn": 4,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 1,
-            "y": 7
+            "x": 8,
+            "y": 12
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 4,
-            "y": 4
+            "x": 9,
+            "y": 6
           }
         }
       ],
       "stones": [
         {
-          "x": 3,
-          "y": 7
-        },
-        {
-          "x": 9,
-          "y": 9
-        },
-        {
-          "x": 16,
-          "y": 13
+          "x": 14,
+          "y": 12
         }
       ],
       "supports": [],
       "mirrors": [
         {
           "at": {
-            "x": 10,
-            "y": 13
+            "x": 9,
+            "y": 12
           },
           "facing": "NE"
         }
       ],
       "monsters": [],
       "circuits": {
-        "presse": false,
-        "passerelle": false
+        "relais": true
       }
     },
     {
-      "label": "Le Marchand pousse la caisse dans l’eau et crée le premier appui",
-      "turn": 8,
+      "label": "Échange coudé : la caisse remplace le Magicien sur le bouton",
+      "turn": 6,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 5,
-            "y": 7
+            "x": 8,
+            "y": 12
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 4,
-            "y": 4
+            "x": 14,
+            "y": 12
           }
         }
       ],
       "stones": [
         {
           "x": 9,
-          "y": 9
-        },
-        {
-          "x": 16,
-          "y": 13
+          "y": 6
         }
       ],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        }
-      ],
+      "supports": [],
       "mirrors": [
         {
           "at": {
-            "x": 10,
-            "y": 13
+            "x": 9,
+            "y": 12
           },
           "facing": "NE"
         }
       ],
       "monsters": [],
       "circuits": {
-        "presse": false,
-        "passerelle": false
+        "relais": true
       }
     },
     {
-      "label": "Le bouton rose commande la presse isolée et construit le deuxième appui",
-      "turn": 11,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 8,
-            "y": 7
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 4,
-            "y": 4
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 16,
-          "y": 13
-        }
-      ],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 8,
-          "y": 9
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 10,
-            "y": 13
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "presse": true,
-        "passerelle": false
-      }
-    },
-    {
-      "label": "Le miroir gagne la colonne de traversée",
-      "turn": 19,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 10,
-            "y": 13
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 4,
-            "y": 4
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 16,
-          "y": 13
-        }
-      ],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 8,
-          "y": 9
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 11,
-            "y": 13
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "presse": false,
-        "passerelle": false
-      }
-    },
-    {
-      "label": "Le rayon tourne sur le miroir et échange le Magicien avec la caisse distante",
-      "turn": 35,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 10,
-            "y": 13
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 16,
-            "y": 13
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 11,
-          "y": 11
-        }
-      ],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 8,
-          "y": 9
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 11,
-            "y": 13
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "presse": false,
-        "passerelle": false
-      }
-    },
-    {
-      "label": "Le Magicien maintient les deux plateformes d’arrivée",
-      "turn": 36,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 10,
-            "y": 13
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 17,
-            "y": 13
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 11,
-          "y": 11
-        }
-      ],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 8,
-          "y": 9
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 11,
-            "y": 13
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "presse": false,
-        "passerelle": true
-      }
-    },
-    {
-      "label": "Le reflet envoie la caisse proche dans l’eau : le troisième appui est prêt",
-      "turn": 37,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 10,
-            "y": 13
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 17,
-            "y": 13
-          }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 8,
-          "y": 9
-        },
-        {
-          "x": 13,
-          "y": 13
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 11,
-            "y": 13
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "presse": false,
-        "passerelle": true
-      }
-    },
-    {
-      "label": "Le reflet prend le Marchand proche et laisse le Magicien plus lointain",
-      "turn": 42,
+      "label": "Le Marchand rejoint l’îlot sans déplacer la caisse plus éloignée",
+      "turn": 15,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
             "x": 13,
-            "y": 13
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 17,
-            "y": 13
-          }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 8,
-          "y": 9
-        },
-        {
-          "x": 13,
-          "y": 13
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 11,
-            "y": 13
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "presse": false,
-        "passerelle": true
-      }
-    },
-    {
-      "label": "Le Marchand traverse les trois appuis et atteint sa destination",
-      "turn": 48,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 16,
-            "y": 10
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 17,
-            "y": 13
-          }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
-        },
-        {
-          "x": 8,
-          "y": 9
-        },
-        {
-          "x": 13,
-          "y": 13
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 11,
-            "y": 13
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "presse": false,
-        "passerelle": true
-      }
-    },
-    {
-      "label": "La passerelle se retire : les deux héros sont arrivés",
-      "turn": 50,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 16,
-            "y": 10
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 17,
             "y": 12
           }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 6,
-          "y": 7
         },
         {
-          "x": 8,
-          "y": 9
-        },
-        {
-          "x": 13,
-          "y": 13
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
         }
       ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "supports": [],
       "mirrors": [
         {
           "at": {
-            "x": 11,
-            "y": 13
+            "x": 9,
+            "y": 12
           },
           "facing": "NE"
         }
       ],
       "monsters": [],
       "circuits": {
-        "presse": false,
-        "passerelle": false
+        "relais": true
       }
     }
   ],
-  "adaptation": "Création pédagogique. Le rayon dévié du Magicien reprend le principe de Heroes and Mirrors 30, avec deux personnages, une presse isolée et une passerelle temporaire. La géométrie est originale."
+  "adaptation": "Géométrie originale compacte à trois îlots ; duo Marchand/Magicien et deux objectifs ; miroir déplacé par le Marchand ; le Magicien dépose la caisse sur son bouton de départ."
 }

@@ -9,7 +9,7 @@
 <div class="layout"><section>
 <div class="topline"><span id="progress">0 / 8 terminés</span><span id="moves">0 actions</span></div>
 <div class="board-stage"><canvas id="board" width="64" height="64" tabindex="0" role="application" aria-label="SS08. Flèches : marcher, pousser ou échanger. Cliquer un personnage ou Tab : changer de personnage. 1 : Marchand. 2 : Magicien. Espace ou X : activer les miroirs. Z : annuler. R : recommencer. Maj Tab : quitter la grille.">Canvas requis.</canvas>
-<div id="victory" hidden><strong>VICTORY</strong><span>Les huit salles sont terminées.</span><button id="play-again">Rejouer depuis le tutoriel</button></div>
+<div id="victory" hidden><strong>VICTORY</strong><span>Les huit salles sont terminées.</span><button id="play-again">Repartir du niveau 1</button></div>
 <div id="defeat" hidden><strong id="defeat-title">Un personnage a été perdu</strong><span id="defeat-message">Les deux héros doivent arriver. Annule pour essayer un autre placement.</span><div class="utilities"><button id="undo-defeat">Annuler · Z</button><button id="reset-defeat">Recommencer · R</button></div></div></div>
 <div class="legend">
 <span data-duo-only><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f59e29" d="M1 0h1v3H1zM0 1h3v1H0z"/></svg>Marchand orange</span><span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#9e6bdb" d="M1 0h1v3H1zM0 1h3v1H0z"/></svg>Magicien violet · couleur 15</span>
@@ -31,10 +31,10 @@
 <div id="hero-switch" class="hero-switch" role="group" aria-label="Sélection du personnage"><button class="merchant" data-hero="merchant" aria-pressed="true"><strong>1 · Marchand</strong><small>Pousse devant lui</small></button><button class="wizard" data-hero="wizard" aria-pressed="false"><strong>2 · Magicien</strong><small>Vise et échange</small></button></div>
 <div id="selected-role" class="selected-role" role="status"></div>
 <div class="controls"><div class="arrows"><button class="up" data-action="1" aria-label="Marcher, pousser ou échanger vers le haut">↑</button><button class="left" data-action="3" aria-label="Marcher, pousser ou échanger vers la gauche">←</button><button class="down" data-action="2" aria-label="Marcher, pousser ou échanger vers le bas">↓</button><button class="right" data-action="4" aria-label="Marcher, pousser ou échanger vers la droite">→</button></div><button class="reflect" data-action="5" aria-label="Activer les miroirs avec Espace ou X">◇ Reflet · Espace</button></div>
-<div class="utilities"><button id="undo">Annuler · Z</button><button id="reset">Recommencer · R</button><button id="restart">Retour au tutoriel</button></div>
+<div class="utilities"><button id="undo">Annuler · Z</button><button id="reset">Recommencer · R</button><button id="restart">Repartir du niveau 1</button></div>
 <p class="keys">Flèches : marcher, pousser ou échanger · Espace ou X : reflets.<br><span data-duo-only>Clic sur un héros, Tab ou 1 / 2 : sélectionner.<br></span>Z : annuler · R : recommencer · Maj Tab : quitter la grille.</p>
 <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
-<details open id="tutorial" class="tutorial"><summary><span id="tutorial-title">Niveau 1 · Les deux transpositions</span><span id="lesson-progress" class="lesson-count">0 / 10 découvertes</span></summary><div class="tutorial-content">
+<details open id="tutorial" class="tutorial"><summary><span id="tutorial-title">Niveau 4 · L’atelier des deux passages</span><span id="lesson-progress" class="lesson-count">0 / 10 découvertes</span></summary><div class="tutorial-content">
 <p id="lesson-next"></p><ul class="lessons"><li data-lesson="select">Sélectionner le Magicien violet.</li><li data-lesson="wizard-swap">Extraire la caisse avec un échange.</li><li data-lesson="move">Marcher avec le personnage sélectionné.</li><li data-lesson="merchant-push">Pousser une pièce avec le Marchand.</li><li data-lesson="platform">Créer un nouvel appui dans l’eau.</li><li data-lesson="gate">Actionner la presse avec son bouton.</li><li data-lesson="mirror-motion">Déplacer un miroir pour changer ses axes.</li><li data-lesson="wizard-bend">Dévier la visée du Magicien avec le miroir.</li><li data-lesson="mirror">Activer un reflet avec Espace.</li><li data-lesson="goals">Occuper les deux destinations ensemble.</li></ul>
 <div class="teaching-note"><strong>Prépare l’axe → vise → échange.</strong><br>Le Marchand déplace la caisse ou le miroir. Le Magicien rejoint une cible que la marche ne permet pas d’atteindre. Espace utilise ensuite la géométrie des miroirs pour faire traverser les occupants.</div>
 <p style="margin-top:12px">Les coches suivent tes actions et les changements visibles dans la grille. Elles restent acquises après Annuler ; Recommencer remet le suivi pédagogique à zéro.</p>
@@ -42,6 +42,7 @@
 <details open id="swap-help" class="tutorial"><summary>Le Magicien · une flèche pour échanger</summary><div class="tutorial-content">
 <p><strong>La première cible compte.</strong> Une flèche cherche la première caisse, le premier monstre ou le Marchand dans sa direction. Le Magicien échange instantanément sa place avec cette cible. Sans cible, il tente un pas normal.</p>
 <p><strong>Le rayon traverse l’eau.</strong> Il s’arrête aux murs et aux portes fermées. Les appuis immergés ne sont pas des cibles : marche dessus pour te placer dans un nouvel axe.</p>
+<p>Si un pas vise de l’eau sans appui, un X cyan puis rouge clignote sur cette case. Le Magicien reste en place ; les mécanismes et les monstres ne bougent pas.</p>
 <p><strong>Un miroir peut faire tourner la visée.</strong> Sa face blanche dévie le rayon à angle droit ; son dos noir bloque. Plusieurs miroirs peuvent relayer le rayon. Une boucle ne produit aucun échange.</p>
 <p><strong>Les deux places doivent convenir.</strong> Vérifie l’arrivée du Magicien et ce que la cible laissera derrière elle. Un échange conserve souvent le poids sur un bouton ; un monstre déplacé peut menacer le Marchand.</p>
 <p>La visée n’affiche aucune prévisualisation permanente. Son animation violette montre le trajet de l’échange. <strong>Les flèches transposent ; Espace active les reflets des miroirs.</strong></p>
@@ -74,7 +75,7 @@
 <p>Le coup montre la préparation, l’avancée, l’impact, la désagrégation et le résultat. Annuler reste disponible pendant cette animation.</p>
 </div></details>
 </aside></div>
-<p class="footer">SS08 · Huitième jeu de la série Sinking Star. Un tutoriel sur la poussée, les échanges et les reflets, puis des reprises ou adaptations des <a href="https://sinkingstarwalkthrough.com/fr/crossovers/" target="_blank" rel="noopener noreferrer">zones mixtes d’<em>Order of the Sinking Star</em></a>, avec eau, miroirs, monstres et presses. Chaque niveau indique sa référence et la nature de son adaptation. Version autonome : aucun accès réseau requis pour jouer.</p>
+<p class="footer">SS08 · Huitième jeu de la série Sinking Star. Huit salles sur la poussée, les échanges et les reflets, avec un atelier complet au niveau 4 et des reprises ou adaptations des <a href="https://sinkingstarwalkthrough.com/fr/crossovers/" target="_blank" rel="noopener noreferrer">zones mixtes d’<em>Order of the Sinking Star</em></a>, avec eau, miroirs, monstres et presses. Chaque niveau indique sa référence et la nature de son adaptation. Version autonome : aucun accès réseau requis pour jouer.</p>
 <script>(()=>{'use strict';
 /* SS08_BUNDLE */
 })();</script></main></body></html>

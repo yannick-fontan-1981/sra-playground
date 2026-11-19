@@ -1,6 +1,6 @@
 {
-  "source": "reference/level1-design.json",
-  "specSha256": "21eb40d184f6906763adf8f94e6ed41b9dd0410ccc5f76a5160e5e2aa4ebb555",
+  "source": "reference/level4-design.json",
+  "specSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
   "proofPolicy": "Only exhausted searches prove impossibility. State or time limits are inconclusive; no uniqueness or optimality is claimed.",
   "checks": [
     {
@@ -87,7 +87,7 @@
     }
   },
   "geometry": {
-    "specSha256": "21eb40d184f6906763adf8f94e6ed41b9dd0410ccc5f76a5160e5e2aa4ebb555",
+    "specSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
     "kind": "optimistic-geometric-bound",
     "rightIslandStartsX": 16,
     "lastGapCellX": 15,
@@ -240,9 +240,15 @@
     }
   ],
   "failureWitness": {
-    "path": "ss08-research/failures-candidate.json",
+    "path": "tests/failures.json (level 4)",
     "actionCount": 45,
     "expected": "GAME_OVER",
     "reason": "Leave the green plate while Merchant stands on the first hydraulic platform; retraction drowns him."
+  },
+  "renumbering": {
+    "previousLevel": 1,
+    "currentLevel": 4,
+    "geometryAndActionsUnchanged": true,
+    "note": "La géométrie et les actions sont identiques ; seul l’identifiant de salle a changé. Les preuves de v0.1.0 restent applicables."
   }
 }

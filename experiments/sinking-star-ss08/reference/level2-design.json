@@ -1,57 +1,35 @@
 {
   "spec": {
     "id": "ss08-02",
-    "title": "Le relais derrière l’angle",
+    "title": "Le compte des cinq îles",
     "rows": [
-      "~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~",
-      "~~~~....W~~~~~~~~~",
-      "~~~~....~~~~~~~g.~",
-      "~~~~.....~~~~~~..~",
-      "~~~~.....~~~~...g~",
-      "~~~~.M...~~~~.~~~~",
-      "~~~~.....~~~..~~~~",
-      "~~~~~~...~~~.o~~~~",
-      "~~~~~~~~~~~~..~~~~",
-      "~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~"
-    ],
-    "mirrors": [
-      {
-        "at": {
-          "x": 7,
-          "y": 8
-        },
-        "facing": "NE"
-      }
-    ],
-    "circuits": [
-      {
-        "id": "relais",
-        "buttons": [
-          {
-            "x": 8,
-            "y": 2
-          }
-        ]
-      }
-    ],
-    "gates": [
-      {
-        "at": {
-          "x": 14,
-          "y": 5
-        },
-        "circuit": "relais",
-        "direction": "E",
-        "closedWhen": "released"
-      }
+      "~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~",
+      "~~...~~~~~...~~",
+      "~~.o.~~~~~.oo~~",
+      "~~...~...~o..~~",
+      "~~~~~~g..~...~~",
+      "~~~~~~...~~~~~~",
+      "~~~~~~.g.~~~~~~",
+      "~~~~~~~~~~~~~~~",
+      "~~.W.~~~~~...~~",
+      "~~.M.~~~~~.o.~~",
+      "~~...~~~~~...~~",
+      "~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~"
     ]
   },
-  "commands": "DRDRCDULCUUUURXRUUURRUUCRUURRR",
+  "commands": "CURDLUURDCDLLLDDDLCRUULDDLLLDLL",
   "actions": [
     {
-      "id": 2
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
     },
     {
       "id": 4
@@ -60,17 +38,63 @@
       "id": 2
     },
     {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
       "id": 4
+    },
+    {
+      "id": 2
     },
     {
       "id": 6,
       "data": {
-        "x": 30,
+        "x": 42,
         "y": 21
       }
     },
     {
       "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
     },
     {
       "id": 1
@@ -79,230 +103,246 @@
       "id": 3
     },
     {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 39
-      }
+      "id": 2
     },
     {
-      "id": 1
+      "id": 2
     },
     {
-      "id": 1
+      "id": 3
     },
     {
-      "id": 1
+      "id": 3
     },
     {
-      "id": 1
+      "id": 3
     },
     {
-      "id": 4
+      "id": 2
     },
     {
-      "id": 5
+      "id": 3
     },
     {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 42,
-        "y": 36
-      }
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
+      "id": 3
     }
   ],
   "source": {
     "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
-    "puzzle": 30,
-    "idea": "Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "idea": "Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide.",
     "kind": "adaptation de principe",
-    "label": "Adaptation de Heroes and Mirrors 30 · Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.",
-    "piston": true,
+    "label": "Adaptation de Heroes and Water 11 · Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide.",
+    "piston": false,
     "platform": false,
-    "objective": "Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton."
+    "objective": "Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide."
   },
   "metrics": {
-    "actions": 30,
+    "actions": 31,
     "selections": 3,
     "merchantPushes": 1,
-    "wizardSwaps": 1,
-    "bentSwaps": 1,
-    "heroSwaps": 0,
+    "wizardSwaps": 9,
+    "bentSwaps": 0,
+    "heroSwaps": 2,
     "chainPushes": 0,
-    "stoneMoves": 1,
-    "mirrorMoves": 1,
-    "reflections": 1,
-    "heroReflections": 1,
+    "stoneMoves": 8,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
     "pistonPushes": 0,
-    "platformsCreated": 0,
+    "platformsCreated": 1,
     "monstersRemoved": 0,
     "blocked": 0,
     "deaths": 0
   },
   "stages": [
     {
-      "label": "Le Marchand aligne le miroir",
-      "turn": 4,
+      "label": "Premier relais : le Marchand atteint le sud-est",
+      "turn": 5,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 8,
-            "y": 12
+            "x": 13,
+            "y": 13
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 9,
-            "y": 6
+            "x": 5,
+            "y": 13
           }
         }
       ],
       "stones": [
         {
-          "x": 14,
+          "x": 5,
           "y": 12
+        },
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 6
         }
       ],
       "supports": [],
-      "mirrors": [
-        {
-          "at": {
-            "x": 9,
-            "y": 12
-          },
-          "facing": "NE"
-        }
-      ],
+      "mirrors": [],
       "monsters": [],
-      "circuits": {
-        "relais": true
-      }
+      "circuits": {}
     },
     {
-      "label": "Échange coudé : la caisse remplace le Magicien sur le bouton",
-      "turn": 6,
+      "label": "Deuxième relais : le Marchand atteint le chantier au nord-est",
+      "turn": 9,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 8,
-            "y": 12
+            "x": 13,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 13
+        },
+        {
+          "x": 5,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Une poussée change enfin le nombre d’occupants : pont vers le centre",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 13
+        },
+        {
+          "x": 5,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Dernière caisse gardée pour le retour du Magicien",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 10
           }
         },
         {
           "kind": "wizard",
           "at": {
             "x": 14,
-            "y": 12
+            "y": 6
           }
         }
       ],
       "stones": [
         {
-          "x": 9,
-          "y": 6
-        }
-      ],
-      "supports": [],
-      "mirrors": [
-        {
-          "at": {
-            "x": 9,
-            "y": 12
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "relais": true
-      }
-    },
-    {
-      "label": "Le Marchand rejoint l’îlot sans déplacer la caisse plus éloignée",
-      "turn": 15,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 13,
-            "y": 12
-          }
+          "x": 5,
+          "y": 13
         },
         {
-          "kind": "wizard",
-          "at": {
-            "x": 13,
-            "y": 11
-          }
-        }
-      ],
-      "stones": [
+          "x": 5,
+          "y": 12
+        },
         {
-          "x": 9,
+          "x": 14,
+          "y": 13
+        },
+        {
+          "x": 5,
           "y": 6
         }
       ],
-      "supports": [],
-      "mirrors": [
+      "supports": [
         {
-          "at": {
-            "x": 9,
-            "y": 12
-          },
-          "facing": "NE"
+          "x": 11,
+          "y": 7
         }
       ],
+      "mirrors": [],
       "monsters": [],
-      "circuits": {
-        "relais": true
-      }
+      "circuits": {}
     }
   ],
-  "adaptation": "Géométrie originale compacte à trois îlots ; duo Marchand/Magicien et deux objectifs ; miroir déplacé par le Marchand ; le Magicien dépose la caisse sur son bouton de départ."
+  "adaptation": "Cinq îlots réagencés et deux objectifs sur l’île centrale ; Marchand remplace le Guerrier ; une caisse supplémentaire garde une ancre de retour pour le Magicien. Aucun miroir ni porte : problème de circulation des héros et de réserve de caisses."
 }

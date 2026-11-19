@@ -28,7 +28,7 @@
   ],
   "candidates": [
     {
-      "level": 2,
+      "level": 1,
       "title": "Le relais derrière l’angle",
       "source": {
         "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
@@ -39,10 +39,10 @@
       },
       "adaptation": "Géométrie originale compacte à trois îlots ; duo Marchand/Magicien et deux objectifs ; miroir déplacé par le Marchand ; le Magicien dépose la caisse sur son bouton de départ.",
       "validatedActions": 30,
-      "witnessFile": "level2-design.json"
+      "witnessFile": "level1-design.json"
     },
     {
-      "level": 3,
+      "level": 2,
       "title": "Le compte des cinq îles",
       "source": {
         "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
@@ -53,10 +53,10 @@
       },
       "adaptation": "Cinq îlots réagencés et deux objectifs sur l’île centrale ; Marchand remplace le Guerrier ; une caisse supplémentaire garde une ancre de retour pour le Magicien. Aucun miroir ni porte : problème de circulation des héros et de réserve de caisses.",
       "validatedActions": 31,
-      "witnessFile": "level3-design.json"
+      "witnessFile": "level2-design.json"
     },
     {
-      "level": 4,
+      "level": 3,
       "title": "Le miroir et son échafaudage",
       "source": {
         "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
@@ -67,7 +67,7 @@
       },
       "adaptation": "Passerelle et îlots redessinés ; le Magicien échange avec son partenaire pour livrer le seul pousseur sur le chantier ; un bloc noyé construit le virage ; le miroir sert d’abord au retour puis à la traversée finale des deux héros.",
       "validatedActions": 34,
-      "witnessFile": "level4-design.json"
+      "witnessFile": "level3-design.json"
     },
     {
       "level": 5,
