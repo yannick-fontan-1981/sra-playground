@@ -4,13 +4,15 @@ import { observedCommandKey } from './observed-command-frontier.ts';
 import { measureComponentTranslations } from './observed-translation.ts';
 
 type Move = { delta: NativePoint; ref: string };
-type Grid = { pitch: number; phase: NativePoint; ink: number; floor: number; signature?: string };
+type Grid = { pitch: number; phase: NativePoint; ink: number; floor: number; signature?: string;
+  annotatedMarks?: Readonly<Record<string, readonly number[]>> };
 type Calibration = { grid: Grid; previous: string[]; next: string[]; destination: string; delta: NativePoint };
 export type ObservedTravel = { grid: Grid; actor: string | null; supports: string[]; visited: string[];
   moves: Record<string, Move>; tested: Record<string, number>; altered: string[]; controls: string[];
   completed: string[]; switches: Record<string, string | null>; pendingSelection?: string; refs: string[]; stalled: number };
 export type TravelTrial = { command: NativeCommand; target: NativePoint; evidence: string[];
   purpose: 'approach' | 'contact' | 'switch' | 'select' };
+export type MarkContact = { command: NativeCommand; target: string; expected: string; evidence: string[] };
 
 const key = ([x, y]: NativePoint) => `${x},${y}`;
 const point = (value: string): NativePoint => value.split(',').map(Number) as [number, number];
@@ -24,6 +26,19 @@ function tile(rows: NativeRows, grid: Grid, [x, y]: NativePoint) {
 
 function paletteSignature(pixels: readonly number[]) {
   return [...pixels].sort((a, b) => a - b).join(',');
+}
+
+function corners(pitch: number) {
+  return new Set([0, pitch - 1, pitch * (pitch - 1), pitch * pitch - 1]);
+}
+
+function matchesAnnotatedOverlay(pixels: readonly number[], grid: Grid, cell: string) {
+  const annotation = grid.annotatedMarks?.[cell];
+  if (!annotation || !grid.signature || pixels[Math.floor(pixels.length / 2)] !== grid.ink) return false;
+  const limits = corners(grid.pitch);
+  if (pixels.some((ink, i) => limits.has(i) && ink !== grid.floor && !annotation.includes(ink))) return false;
+  const normalized = pixels.map((ink, i) => limits.has(i) ? grid.floor : ink);
+  return paletteSignature(normalized) === grid.signature;
 }
 
 function dominant(pixels: readonly number[], excluded: number) {
@@ -46,7 +61,7 @@ function read(rows: NativeRows, grid: Grid) {
     for (let x = grid.phase[0]; x + grid.pitch <= rows[0]!.length; x += grid.pitch) {
       const id = key([x, y]), pixels = tile(rows, grid, [x, y]);
       cells.set(id, pixels);
-      if (grid.signature ? pixels.includes(grid.ink) && paletteSignature(pixels) === grid.signature
+      if (grid.signature ? pixels.includes(grid.ink) && (paletteSignature(pixels) === grid.signature || matchesAnnotatedOverlay(pixels, grid, id))
         : pixels.filter(ink => ink === grid.ink).length >= Math.max(2, Math.floor(grid.pitch / 2))) pieces.push(id);
     }
   }
@@ -54,6 +69,21 @@ function read(rows: NativeRows, grid: Grid) {
 }
 
 export { read as readTravelGrid, tile as readTravelCell };
+
+export function annotateTravelMarks(travel: ObservedTravel | undefined, rows: NativeRows): ObservedTravel | undefined {
+  if (!travel?.grid.signature || travel.grid.annotatedMarks || travel.grid.pitch % 2 !== 1) return travel;
+  const { pitch, floor, ink } = travel.grid, half = Math.floor(pitch / 2), center = half * pitch + half;
+  const groups = new Map<number, Record<string, readonly number[]>>();
+  for (const [cell, pixels] of read(rows, travel.grid).cells) {
+    const arm = pixels[half]!, accent = pixels[center]!;
+    if (arm === floor || arm === ink || accent === floor || accent === arm || accent === ink) continue;
+    if (!pixels.every((color, i) => i === center || color === (i % pitch === half || Math.floor(i / pitch) === half ? arm : floor))) continue;
+    const group = groups.get(arm) ?? {};
+    group[cell] = [arm, accent]; groups.set(arm, group);
+  }
+  const repeated = [...groups.values()].filter(group => Object.keys(group).length >= 2);
+  return repeated.length === 1 ? { ...travel, grid: { ...travel.grid, annotatedMarks: repeated[0]! } } : travel;
+}
 
 function calibrateAmongOtherChanges(before: NativeRows, after: NativeRows, lattices: Iterable<Grid>,
   changed: readonly NativePoint[]): Calibration[] {
@@ -142,6 +172,39 @@ function trialKey(cells: ReadonlyMap<string, number[]>, action: string, from: st
   return JSON.stringify([action, from, cells.get(key(target))]);
 }
 
+export function chooseAnnotatedMarkContact(travel: ObservedTravel | undefined, rows: NativeRows,
+  inputs: readonly NativeCommand[]): MarkContact | undefined {
+  if (!travel?.actor || !travel.grid.annotatedMarks) return;
+  const { grid, actor } = travel, { cells, pieces } = read(rows, grid);
+  if (pieces.length !== 1 || pieces[0] !== actor) return;
+  const moves = inputs.flatMap(command => travel.moves[command.action_ref] ? [{ command, ...travel.moves[command.action_ref]! }] : []);
+  const visited = new Set(travel.visited), center = Math.floor(grid.pitch * grid.pitch / 2);
+  const marks = new Set(Object.entries(travel.grid.annotatedMarks).filter(([cell, profile]) =>
+    !visited.has(cell) && cells.get(cell)?.[center] === profile[1]).map(([cell]) => cell));
+  if (!marks.size) return;
+  const queue: { at: string; first?: { command: NativeCommand; expected: string } }[] = [{ at: actor }];
+  const seen = new Set([actor]);
+  for (const { at, first } of queue) {
+    if (first && marks.has(at)) {
+      return { ...first, target: at, evidence: [...new Set([...travel.refs, ...moves.map(move => move.ref)])] };
+    }
+    for (const { command, delta } of moves) {
+      const destination = add(point(at), delta), cell = key(destination), pixels = cells.get(cell);
+      if (!pixels || seen.has(cell) || (travel.tested[trialKey(cells, command.action_ref, at, destination)] ?? 0) < 0) continue;
+      const walkable = pixels.every(ink => ink === grid.floor || ink === grid.ink) &&
+        pixels.filter(ink => ink === grid.floor).length > pixels.length / 2;
+      if (!walkable && !marks.has(cell)) continue;
+      seen.add(cell); queue.push({ at: cell, first: first ?? { command, expected: cell } });
+    }
+  }
+}
+
+export function observedTravelActor(travel: ObservedTravel | undefined, rows: NativeRows): string | undefined {
+  if (!travel) return;
+  const { pieces } = read(rows, travel.grid);
+  return pieces.length === 1 ? pieces[0] : undefined;
+}
+
 export function observeTravel(previous: ObservedTravel | undefined, before: NativeRows, after: NativeRows,
   command: NativeCommand, ref: string): ObservedTravel | undefined {
   const action = command.action_ref;
@@ -150,7 +213,7 @@ export function observeTravel(previous: ObservedTravel | undefined, before: Nati
   const left = first.pieces.filter(cell => !next.pieces.includes(cell)), entered = next.pieces.filter(cell => !first.pieces.includes(cell));
   const changed = [...first.cells].filter(([cell, pixels]) => !first.pieces.includes(cell) && !next.pieces.includes(cell)
     && pixels.some((ink, i) => ink !== next.cells.get(cell)?.[i])).map(([cell]) => cell);
-  if (directional(action) && !left.length && !entered.length && changed.length >= 2) {
+  if (directional(action) && !left.length && !entered.length && changed.length >= 2 && (!grid.annotatedMarks || !first.pieces.length)) {
     const other = learnGrid(before, after, action, ref);
     if (other && other.grid.ink !== grid.ink) return other;
   }

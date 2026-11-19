@@ -567,6 +567,8 @@ export function readNativeResolution(agent: {
     if (subject) subjects.push({ label: 'Piece moved by the previous control', box: subject });
   }
   if (situationCard && family === publicInputExplorationId) {
+    const untestedMark = bounds(card?.untestedMark);
+    if (untestedMark) subjects.push({ label: 'Marked cell to test on contact', box: untestedMark });
     const exchangeActor = bounds(card?.exchangeActor), exchangePartner = bounds(card?.exchangePartner);
     if (exchangeActor) subjects.push({ label: 'Piece initiating the exchange', box: exchangeActor });
     if (exchangePartner) subjects.push({ label: 'Piece that would take its place', box: exchangePartner });
