@@ -1,0 +1,61 @@
+{
+  "levels": [
+    {
+      "level": 5,
+      "complete": true,
+      "metrics": {
+        "actions": 77,
+        "selections": 5,
+        "merchantPushes": 10,
+        "thiefPulls": 4,
+        "heroPulls": 0,
+        "chainPushes": 0,
+        "stoneMoves": 12,
+        "mirrorMoves": 4,
+        "reflections": 2,
+        "heroReflections": 2,
+        "pistonPushes": 1,
+        "platformsCreated": 2,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "combatWaves": 0,
+      "monstersKilledInCombat": 0
+    },
+    {
+      "level": 7,
+      "complete": true,
+      "metrics": {
+        "actions": 88,
+        "selections": 5,
+        "merchantPushes": 4,
+        "thiefPulls": 2,
+        "heroPulls": 0,
+        "chainPushes": 0,
+        "stoneMoves": 7,
+        "mirrorMoves": 2,
+        "reflections": 3,
+        "heroReflections": 3,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "combatWaves": 1,
+      "monstersKilledInCombat": 2
+    }
+  ],
+  "failure": {
+    "level": 7,
+    "cause": "Reflet depuis l’alcôve sans relève du Marchand sur le premier sceau : la porte du palier écrase le Voleur",
+    "commands": "RRRRRUURRRRUUUURRDXCRRRRRRRDDDDDRRRRRRUUX",
+    "actions": 41,
+    "checkedUndo": true,
+    "phases": [
+      "reflect",
+      "crush"
+    ]
+  }
+}

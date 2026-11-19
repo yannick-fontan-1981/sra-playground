@@ -1,0 +1,53 @@
+{
+  "level": 8,
+  "title": "Le pont qu’on ne rend pas",
+  "scope": "Independent deterministic replay, local geometric checks, real hydraulic failure and exact Undo. No exhaustive global uniqueness claim.",
+  "successfulReplay": {
+    "metrics": {
+      "actions": 136,
+      "selections": 8,
+      "merchantPushes": 20,
+      "thiefPulls": 6,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 26,
+      "mirrorMoves": 1,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 3,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "complete": true,
+    "actionsMatch": true
+  },
+  "correctedCounterexample": {
+    "problem": "Before revision, a Thief arriving at (11,4) could pull the reserve crate east, bypassing the press.",
+    "fix": "Added wall (11,4). Wall (10,6) also prevents southern extraction even if a player tries creating a support there.",
+    "wallsVerified": true
+  },
+  "geometry": {
+    "reserve": "Reserve (10,4) has walls N (10,3), W (9,4), E (11,4). Its only exit S (10,5) is hydraulic. Pushing S needs standing on N wall; pulling S needs stepping onto (10,6) wall. Only the south-facing press provides ordinary extraction.",
+    "button": "Button (4,10) is surrounded W/E/S by walls and accessible only from N (4,9). A crate cannot be pushed S onto it because the required stance (4,8) is a wall; pulling S would require the wall (4,11). The sole NE mirror cannot reflect an actor onto this button because its rays would have to pass through the wall west or south of the button.",
+    "bridge": "Three consecutive hydraulic water cells (8..10,5), but only two initial crates on the starting bank. Witness retrieves the third crate with the press and places one crate on each hydraulic cell before release.",
+    "mirror": "Initial mirror (13,15) has a wall immediately north (13,14), empty water east and south, and accessible floor west at (12,15) and (11,15). Witness pulls it west once with the Thief, opening a north ray for the two final reflections.",
+    "initialSupports": "Two existing supports at (12,11) and (12,13) are used for reaching the final mirror."
+  },
+  "failure": {
+    "commands": "CRRDDDDLLRRRUDDDLLDCDDDRCU",
+    "actions": 26,
+    "trigger": "Release emprunt at (4,10) with Merchant on (8,5)",
+    "lastPhases": [
+      "walk",
+      "platform"
+    ],
+    "frames": 6,
+    "gameOver": true,
+    "exactUndo": true,
+    "repeatable": true,
+    "resetWorks": true
+  },
+  "requiredCaveat": "The local checks rule out ordinary crate insertion at the keeper button and ordinary extraction of the reserve without the press. They do not establish the uniqueness or global optimality of the 136-action solution."
+}

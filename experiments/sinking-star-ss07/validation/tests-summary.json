@@ -1,0 +1,65 @@
+{
+  "game": "SS07",
+  "version": "0.1.2",
+  "buildPassed": true,
+  "nodeVersion": "v24.22.3",
+  "engineTests": {
+    "tests": 73,
+    "pass": 73,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "targetedReflectionTestsAdded": 9,
+  "levelValidation": {
+    "passed": true,
+    "levels": 8,
+    "actions": 593,
+    "selections": 39,
+    "merchantPushes": 52,
+    "thiefPulls": 38,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 69,
+    "mirrorMoves": 31,
+    "reflections": 25,
+    "heroReflections": 20,
+    "pistonPushes": 4,
+    "platformsCreated": 14,
+    "monstersRemoved": 2,
+    "combatWaves": 1,
+    "mirrorsDestroyed": 0,
+    "cratesCrushed": 0,
+    "simultaneousHeroReflections": 1,
+    "frames": 1745,
+    "defeatRoutes": 3
+  },
+  "htmlValidation": {
+    "passed": true,
+    "checks": 15,
+    "tutorialObjectives": 9,
+    "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
+    "visualBrowserTest": false
+  },
+  "htmlSha256": "4da97bf0e6b54c45db156b22c0483d4673ca10ccb30129432b8aec04d9b528de",
+  "engineValidationReused": {
+    "sourceVersion": "0.1.1",
+    "reason": "The rule engine and its 73 rule tests are unchanged from the validated v2 source.",
+    "verifiedGitBlobs": {
+      "src/core.ts": "76517f14b828994430dd0d43775da84ad7579426",
+      "tests/duo.test.mjs": "17b8482eb9cbe5598a821680014837911c21e72a"
+    }
+  },
+  "level6GateNecessity": {
+    "provedGateOpeningNecessary": true,
+    "reachableGoalsWithGateClosed": [],
+    "checkedSupportChoices": 294,
+    "includesNoSupportCase": true,
+    "maximumMirrorPositions": 54,
+    "maximumHeroReachableCells": 56
+  },
+  "changedLevels": [
+    6
+  ]
+}

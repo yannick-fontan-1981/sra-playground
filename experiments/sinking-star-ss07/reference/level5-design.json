@@ -1,0 +1,604 @@
+{
+  "spec": {
+    "id": "ss07-05",
+    "title": "La presse des deux rives",
+    "facing": "N",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "####################",
+      "#.......##.........#",
+      "#.......##.........#",
+      "#....##.##..#.#....#",
+      "#....oo.##..#T#....#",
+      "#....##.##.........#",
+      "#.......##.........#",
+      "#...M...~~.........#",
+      "#.......##.........#",
+      "#############~######",
+      "~~~~~~~~~~~~.g...~~~",
+      "~~~~~~~~~~~~..g..~~~",
+      "~~~~~~~~~~~~.....~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 13,
+          "y": 6
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 4
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 5,
+          "y": 5
+        },
+        "circuit": "presse",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CUUCUUUUURRRDDDDLDRCLLDDDRRUDDRCULLLUURRLLUURRRDDDDLDRRRRRRRRRUURRRXDRCRURRRX",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "puzzle": 2,
+    "label": "Adaptation de principe · Heroes and Light 2 : une presse latérale déplace la file que les héros ne peuvent pas pousser ensemble.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2",
+    "piston": true,
+    "platform": false
+  },
+  "metrics": {
+    "actions": 77,
+    "selections": 5,
+    "merchantPushes": 10,
+    "thiefPulls": 4,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 12,
+    "mirrorMoves": 4,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur extrait le miroir et déclenche la presse latérale",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": true
+      }
+    },
+    {
+      "label": "Le Marchand crée le premier appui",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": true
+      }
+    },
+    {
+      "label": "Le miroir revient dans son axe et libère la presse",
+      "turn": 31,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 8
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": false
+      }
+    },
+    {
+      "label": "La seconde caisse prolonge le pont jusqu’à l’autre rive",
+      "turn": 55,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 8
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": false
+      }
+    },
+    {
+      "label": "Le Marchand rejoint la première destination par reflet",
+      "turn": 70,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 8
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": false
+      }
+    },
+    {
+      "label": "Le Voleur rejoint la seconde destination",
+      "turn": 77,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 8
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": false
+      }
+    }
+  ],
+  "adaptation": "La géométrie est nouvelle. La file de six caisses et la cascade de la source deviennent deux caisses enclavées, une presse horizontale et deux rives. Le Voleur tire puis récupère le miroir qui commande la presse ; le Marchand transforme les caisses en deux appuis et les deux héros terminent par reflet. Aucun empilement, clone ou dragon."
+}

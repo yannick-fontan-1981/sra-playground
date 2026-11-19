@@ -1,0 +1,868 @@
+{
+  "spec": {
+    "id": "ss07-07",
+    "title": "La forteresse des deux sceaux",
+    "facing": "E",
+    "rows": [
+      "####################",
+      "############.#######",
+      "#.......#...~......#",
+      "#.......#...~..o...#",
+      "#.T........#.......#",
+      "#.......#...#......#",
+      "#########......#...#",
+      "#.......~.....#.#..#",
+      "#...Mo..~.......#..#",
+      "#.......~.......#..#",
+      "#.......~.....#.#..#",
+      "#.......~m.#########",
+      "#.......~#m###.....#",
+      "#.......~#.###.....#",
+      "##########.........#",
+      "##############..g.g#",
+      "##############.....#",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 12,
+          "y": 4
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 10
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "sceau-haut",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 1
+          }
+        ]
+      },
+      {
+        "id": "sceau-bas",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 15,
+            "y": 8
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 4
+        },
+        "circuit": "sceau-haut",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 14
+        },
+        "circuit": "sceau-haut",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 8
+        },
+        "circuit": "sceau-haut",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 14
+        },
+        "circuit": "sceau-bas",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 11
+        },
+        "circuit": "sceau-bas",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "RRRRRUURRRRUUUURRDXCRRRRRRRDDDDDRRRRRRUUCDXCDCXDLDLDDDDLLLDDDDRRRRDRRCLDLLLDDDDRRRRRRRRD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 9
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "puzzle": 0,
+    "label": "Création originale · Deux sceaux, une presse latérale, deux sentinelles et une relève par reflet.",
+    "url": "",
+    "piston": true,
+    "platform": false
+  },
+  "metrics": {
+    "actions": 88,
+    "selections": 5,
+    "merchantPushes": 4,
+    "thiefPulls": 2,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 7,
+    "mirrorMoves": 2,
+    "reflections": 3,
+    "heroReflections": 3,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand crée l’accès à la forteresse",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "circuits": {
+        "sceau-haut": false,
+        "sceau-bas": false
+      }
+    },
+    {
+      "label": "La caisse reflétée maintient le premier sceau et libère le Voleur",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "circuits": {
+        "sceau-haut": true,
+        "sceau-bas": false
+      }
+    },
+    {
+      "label": "Le Voleur tire le miroir sur le second sceau ; la presse rapproche les sentinelles",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sceau-haut": true,
+        "sceau-bas": true
+      }
+    },
+    {
+      "label": "Le Marchand relève la caisse sur le premier sceau pendant que le Voleur s’échappe par reflet",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sceau-haut": true,
+        "sceau-bas": true
+      }
+    },
+    {
+      "label": "Le Voleur quitte le rayon sans déplacer son miroir",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sceau-haut": true,
+        "sceau-bas": true
+      }
+    },
+    {
+      "label": "Le Marchand revient et laisse de nouveau la caisse sur le sceau",
+      "turn": 47,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sceau-haut": true,
+        "sceau-bas": true
+      }
+    },
+    {
+      "label": "Le Marchand franchit les deux portes et atteint sa destination",
+      "turn": 69,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sceau-haut": true,
+        "sceau-bas": true
+      }
+    },
+    {
+      "label": "Le Voleur rejoint le Marchand dans la salle finale",
+      "turn": 88,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sceau-haut": true,
+        "sceau-bas": true
+      }
+    }
+  ],
+  "adaptation": "Forteresse originale conçue pour le duo Marchand/Voleur. La poussée construit le premier appui ; une caisse reflétée ouvre l’accès du Voleur. Celui-ci extrait un miroir inaccessible à la poussée et le laisse sur le second sceau en quittant son alcôve par reflet. Une presse rapproche les deux monstres, qui se frappent simultanément. Le Marchand prend temporairement la place de la caisse sur le premier bouton pendant ce reflet : sinon la porte du palier se referme sur le Voleur et le pousse contre le mur. Il rend ensuite sa place à la caisse avant la traversée finale. Le premier miroir est calé contre deux murs et ne peut pas être déplacé par poussée."
+}

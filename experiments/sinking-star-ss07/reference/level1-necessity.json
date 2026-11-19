@@ -1,0 +1,326 @@
+{
+  "level": 1,
+  "title": "L’atelier du pas de côté",
+  "checks": [
+    {
+      "option": "disableMerchantPushes",
+      "status": "unsolvable",
+      "states": 8208,
+      "expanded": 8208,
+      "ms": 218,
+      "engineVersion": "0.1.1",
+      "searchBudget": {
+        "maxStates": 100000,
+        "maxMs": 10000
+      },
+      "proofScope": "Exhausted graph under the disabled capability."
+    },
+    {
+      "option": "disableThiefPulls",
+      "status": "unsolvable",
+      "states": 684,
+      "expanded": 684,
+      "ms": 10,
+      "engineVersion": "0.1.1",
+      "searchBudget": {
+        "maxStates": 100000,
+        "maxMs": 10000
+      },
+      "proofScope": "Exhausted graph under the disabled capability."
+    },
+    {
+      "option": "disablePistons",
+      "status": "unsolvable",
+      "states": 15664,
+      "expanded": 15664,
+      "ms": 272,
+      "engineVersion": "0.1.1",
+      "searchBudget": {
+        "maxStates": 100000,
+        "maxMs": 10000
+      },
+      "proofScope": "Exhausted graph under the disabled capability."
+    },
+    {
+      "option": "disablePlatforms",
+      "status": "unsolvable",
+      "states": 13680,
+      "expanded": 13680,
+      "ms": 258,
+      "engineVersion": "0.1.1",
+      "searchBudget": {
+        "maxStates": 100000,
+        "maxMs": 10000
+      },
+      "proofScope": "Exhausted graph under the disabled capability."
+    },
+    {
+      "option": "disableReflections",
+      "status": "limit",
+      "states": 100000,
+      "expanded": 92855,
+      "ms": 1015,
+      "engineVersion": "0.1.0",
+      "historical": true,
+      "checkedUnderCurrentEngine": false,
+      "proofScope": "Historical bounded search from engine 0.1.0; no impossibility claim. The independent topology proof below does not use the reflection rule."
+    }
+  ],
+  "reflectionTopology": {
+    "method": "Optimistic 0/1 terrain shortest path, all gates open and mobile actors ignored",
+    "minimumWaterCells": 3,
+    "availableStones": 2,
+    "goalPaths": [
+      {
+        "goal": {
+          "x": 13,
+          "y": 14
+        },
+        "waterCost": 3,
+        "route": [
+          {
+            "x": 4,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 6,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 7,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 8,
+            "y": 5,
+            "terrain": "~"
+          },
+          {
+            "x": 9,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 9,
+            "y": 6,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 6,
+            "terrain": "."
+          },
+          {
+            "x": 11,
+            "y": 6,
+            "terrain": "."
+          },
+          {
+            "x": 11,
+            "y": 7,
+            "terrain": "~"
+          },
+          {
+            "x": 11,
+            "y": 8,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 8,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 9,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 10,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 11,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 12,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 13,
+            "terrain": "."
+          },
+          {
+            "x": 11,
+            "y": 13,
+            "terrain": "."
+          },
+          {
+            "x": 12,
+            "y": 13,
+            "terrain": "~"
+          },
+          {
+            "x": 13,
+            "y": 13,
+            "terrain": "."
+          },
+          {
+            "x": 13,
+            "y": 14,
+            "terrain": "."
+          }
+        ]
+      },
+      {
+        "goal": {
+          "x": 15,
+          "y": 14
+        },
+        "waterCost": 3,
+        "route": [
+          {
+            "x": 4,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 5,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 6,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 7,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 8,
+            "y": 5,
+            "terrain": "~"
+          },
+          {
+            "x": 9,
+            "y": 5,
+            "terrain": "."
+          },
+          {
+            "x": 9,
+            "y": 6,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 6,
+            "terrain": "."
+          },
+          {
+            "x": 11,
+            "y": 6,
+            "terrain": "."
+          },
+          {
+            "x": 11,
+            "y": 7,
+            "terrain": "~"
+          },
+          {
+            "x": 11,
+            "y": 8,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 8,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 9,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 10,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 11,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 12,
+            "terrain": "."
+          },
+          {
+            "x": 10,
+            "y": 13,
+            "terrain": "."
+          },
+          {
+            "x": 11,
+            "y": 13,
+            "terrain": "."
+          },
+          {
+            "x": 12,
+            "y": 13,
+            "terrain": "~"
+          },
+          {
+            "x": 13,
+            "y": 13,
+            "terrain": "."
+          },
+          {
+            "x": 13,
+            "y": 14,
+            "terrain": "."
+          },
+          {
+            "x": 14,
+            "y": 14,
+            "terrain": "."
+          },
+          {
+            "x": 15,
+            "y": 14,
+            "terrain": "."
+          }
+        ]
+      }
+    ],
+    "reflectionNecessary": true,
+    "argument": "Sans reflet, toutes les positions de héros changent par pas cardinaux, même lors des presses. Une case d’eau doit avoir un appui pour être visitée vivant. Le graphe optimiste exige au moins trois cases d’eau alors que seules deux caisses peuvent produire des appuis fixes ; aucun appui initial ni porte-plateforme n’est présent. La marche ou les presses seules ne peuvent donc atteindre une destination.",
+    "solverLimitIsNotImpossibilityProof": true,
+    "engineVersion": "0.1.1",
+    "reviewNote": "Preserved independent terrain proof: it concerns routes with no reflections and is unaffected by nearest-candidate selection."
+  },
+  "engineVersion": "0.1.1",
+  "recheckedCapabilities": [
+    "disableMerchantPushes",
+    "disableThiefPulls",
+    "disablePistons",
+    "disablePlatforms"
+  ]
+}

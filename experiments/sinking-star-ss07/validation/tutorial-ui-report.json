@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "scope": "tutorial-only",
+  "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "The complete compiled HTML opens level 1 with both colored heroes, exact engine pixels and its rich tutorial expanded",
+    "Five controls, nine tutorial objectives, distinct reflection previews and explicit pulling, release, water, mirror, circuit and monster rules are present",
+    "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
+    "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
+    "Movement uses every frame and duration; directions, reflection and selection are blocked while animating, while Space still prevents scrolling",
+    "Undo during an animation restores both heroes and cancels stale callbacks",
+    "Reset, level changes and return to tutorial cancel pending animation callbacks and reset the appropriate counters",
+    "1 inspected room(s) display their source attribution and relevant piston/platform help",
+    "1 inspected room(s) keep one orange Merchant, one green Thief and two goals; selecting the current hero makes no action or Undo entry",
+    "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
+    "The complete tutorial earns all nine discoveries through public pixels: walking, selection, Merchant push, Thief pull, mirror motion, permanent support, reflection, gate and two goals"
+  ],
+  "tutorialCoverage": {
+    "actions": 59,
+    "frames": 172,
+    "selectionActions": 6,
+    "discoveries": [
+      "move",
+      "select",
+      "merchant-push",
+      "thief-pull",
+      "mirror-motion",
+      "platform",
+      "mirror",
+      "gate",
+      "goals"
+    ]
+  },
+  "sourceVersion": "0.1.0",
+  "historical": true,
+  "currentValidation": "ui-dom-report.json"
+}

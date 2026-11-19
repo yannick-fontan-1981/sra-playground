@@ -1,0 +1,48 @@
+{
+  "sources": [
+    {
+      "ss07Level": 2,
+      "guidePuzzle": 4,
+      "sourceId": "holes",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-4",
+      "imagePath": "images/levels/holes.webp",
+      "imageRepository": "joric/ootss_tileset",
+      "imageRef": "main",
+      "localImageSha256": "0a2950f514532963196def8ba17b9ea560b4b1292f1d2281a905576cc29613bd",
+      "adaptation": "La géométrie de déplacement du Voleur et les 53 commandes source sont conservées dans une reconstruction 2D des cases parcourues. Ajout du Marchand, d’une caisse à immerger et d’une seconde destination. Les limites de terrain non parcourues sont adaptées : ce n’est pas une reproduction certifiée case par case.",
+      "witnessActions": 59,
+      "layoutArchiveUrl": "https://github.com/chenyuyang712/OSS-puzzlewiki/blob/main/data/levels_layout.json.gz",
+      "layoutExtractSha256": "0050873f9f277f23f5c9bd0e044ef5953a187ef2dcf13ecf670b8a15e410dd2c"
+    },
+    {
+      "ss07Level": 3,
+      "guidePuzzle": 5,
+      "sourceId": "double_break",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5",
+      "imagePath": "images/levels/double_break.webp",
+      "imageRepository": "joric/ootss_tileset",
+      "imageRef": "main",
+      "localImageSha256": "39e4dd66467f2d7a3ac05ba76f510da465d487f2ce9cb60b47ec066b89cc7f8a",
+      "adaptation": "Recomposition en duo du mécanisme de double_break : le Marchand aligne le miroir haut, le miroir bas récupère le Voleur puis est tiré sur le bouton. Le Voleur quitte ensuite le bouton par reflet sans reprendre son miroir. Deux portes croisées obligent le Marchand à secourir le Voleur puis le Voleur à libérer le Marchand. La géométrie, les deux destinations et les positions initiales sont adaptées, sans prétention de reproduction case par case.",
+      "witnessActions": 29,
+      "layoutArchiveUrl": "https://github.com/chenyuyang712/OSS-puzzlewiki/blob/main/data/levels_layout.json.gz",
+      "layoutExtractSha256": "ccdb8ab26f46db369c38f61ef792bcccd044c5ae1d0f7408572dc2c72e9dc402"
+    },
+    {
+      "ss07Level": 4,
+      "guidePuzzle": 6,
+      "sourceId": "drop_tool",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6",
+      "imagePath": "images/levels/drop_tool.webp",
+      "imageRepository": "joric/ootss_tileset",
+      "imageRef": "main",
+      "localImageSha256": "75f94a12a99eaf0a27b82b935fb4cb37f2d392c45e62b678ce981be2966355ab",
+      "adaptation": "Recomposition en duo de drop_tool : cinq îlots, quatre caisses, trois appuis créés par reflet et le dernier par poussée du Marchand. Le Voleur extrait les caisses et règle leur axe ; le Marchand déplace le miroir pour viser les deux traversées suivantes. La carte source dépasse 20 cellules et son terrain est réorganisé pour la grille 2D ; ce n’est pas une copie case par case.",
+      "witnessActions": 94,
+      "layoutArchiveUrl": "https://github.com/chenyuyang712/OSS-puzzlewiki/blob/main/data/levels_layout.json.gz",
+      "layoutExtractSha256": "9cf405a2dd4d24e2faf1fa03dbfa50256c1d8afb2af94909214efb9dc539eb8f"
+    }
+  ],
+  "visualReview": "The three initial boards were rendered by the production renderer and inspected before delivery. Different island shapes, legible mechanics, no accidental unsupported actors.",
+  "necessityReview": "See levels234-review.json. L2 and L3 exhaust all reachable states under disabled merchant pushing, thief pulling or reflection. L4 bounded capability searches reach 35000 states; do not report impossibility for those."
+}
