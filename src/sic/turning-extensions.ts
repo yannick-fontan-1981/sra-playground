@@ -1,24 +1,25 @@
 import type { NativeBox, NativeEntity, NativeExecution, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { extensionButtonMask, targetPatterns, type ExtensionWitness } from './extension-clearance.ts';
+import { extensionButtonMask, readClearanceLayout, targetPatterns, type ExtensionWitness } from './extension-clearance.ts';
 
 type Part = Pick<NativeEntity, 'palette_value' | 'bbox' | 'area' | 'rectangular'>;
 type Button = { box: NativeBox; at: NativePoint };
 type Segment = { ink: number; pivot: NativePoint; direction: NativePoint; length: number;
-  buttons: Partial<Record<ExtensionOperation, Button>>; parent?: number | null; mayClip?: boolean };
+  buttons: Partial<Record<ExtensionOperation, Button>>; parent?: number | null; mayClip?: boolean; fixedBox?: NativeBox };
 type Alignment = { body: number; marker: NativePoint; target: NativePoint };
 export type TurningLayout = {
   segments: Segment[]; quantum: number; width: number; field: NativeBox; obstacles: string[];
   floor: number; capInk: number; markerInk: number; marker: NativePoint; target: NativePoint; marks: NativePoint[];
-  alignments?: Alignment[];
+  alignments?: Alignment[]; panels?: NativeBox[];
 };
 export type ExtensionOperation = 'extend' | 'retract' | 'turn';
 export type TurnSign = 1 | -1;
 export type TurningPose = { added: number; turns: number }[];
-export type TurningMove = { body: number; operation: ExtensionOperation; quarterTurns?: number };
-type Position = { box: NativeBox; cap: NativeBox; pivot: NativePoint; turns: number };
+export type TurningMove = { body: number; operation: ExtensionOperation; quarterTurns?: number; receivers?: number[] };
+type Position = { box: NativeBox; cap: NativeBox | null; pivot: NativePoint; turns: number };
 type Projection = { parts: Position[]; marker: NativePoint; markers: NativePoint[] };
 type MaskedPart = { part: Part; mask: string };
 type Controls = { ink: number; buttons: Segment['buttons'] };
+const obstacleInkBase = 256;
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -38,8 +39,8 @@ const quarterTurn = ([x, y]: NativePoint, turns: number): NativePoint => {
 };
 const bound = (a: NativePoint, b: NativePoint): NativeBox =>
   [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[0], b[0]), Math.max(a[1], b[1])];
-const joined = (a: NativeBox, b: NativeBox): NativeBox =>
-  [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3])];
+const joined = (a: NativeBox, b: NativeBox | null): NativeBox => b
+  ? [Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3])] : a;
 const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const buttonAt = (part: Part): Button => ({ box: part.bbox, at: center(part.bbox) });
 const parentOf = (segment: Segment, index: number) => segment.parent === undefined ? index - 1 : segment.parent ?? -1;
@@ -48,7 +49,7 @@ const alignmentsOf = (layout: TurningLayout): readonly Alignment[] =>
 const poseKey = (pose: TurningPose) => pose.map(({ added, turns }) => added + ':' + turns).join(',');
 export const turningEdge = (pose: TurningPose, { body, operation }: TurningMove) => poseKey(pose) + '/' + body + '/' + operation;
 
-export function readTurningLayout(rows: NativeRows, parts: readonly Part[], witness: ExtensionWitness): TurningLayout | null {
+function readExclusiveTurningLayout(rows: NativeRows, parts: readonly Part[], witness: ExtensionWitness): TurningLayout | null {
   const { quantum } = witness, pixels = rows[0]!.length;
   if (quantum < 3 || quantum > 7 || !(quantum % 2) || pixels > 96 || rows.length > 96) return null;
   const buttons = parts.filter(part => part.area >= 4 && width(part.bbox) === quantum && height(part.bbox) === quantum)
@@ -161,6 +162,67 @@ export function readTurningLayout(rows: NativeRows, parts: readonly Part[], witn
   return turningObserved(rows, layout, initialTurningPose(layout)) ? layout : null;
 }
 
+function readSharedTurningLayout(rows: NativeRows, parts: readonly Part[], witness: ExtensionWitness): TurningLayout | null {
+  const measured = readClearanceLayout(rows, parts, witness);
+  if (!measured?.panels || measured.targets.length !== 1) return null;
+  const { bodies, panels, targets, quantum, field, capInk, markerInk } = measured;
+  const roots = bodies.flatMap((root, index) => {
+    if (root.cap || root.parent !== null || width(root.box) !== quantum || height(root.box) !== quantum) return [];
+    const attached = bodies.flatMap((body, i) => {
+      if (!body.cap || body.parent !== null) return [];
+      const { axis, sign, cap } = body, across = 1 - axis;
+      const edge = sign > 0 ? root.box[axis + 2]! + 1 : root.box[axis]! - 1;
+      return cap[axis] === edge && cap[across] === root.box[across] && cap[across + 2] === root.box[across + 2] ? [i] : [];
+    });
+    if (attached.length < 2 || new Set(attached.map(i => bodies[i]!.axis)).size < 2
+      || !attached.some(i => bodies.some((other, j) => j !== i && !attached.includes(j) && other.ink === bodies[i]!.ink && other.buttons))) return [];
+    const buttons = parts.filter(part => part.palette_value === root.ink && part.area >= 4 && !part.rectangular
+      && width(part.bbox) === quantum && height(part.bbox) === quantum && !panels.some(panel => contains(panel, part.bbox)));
+    return buttons.flatMap(button => {
+      const outlines = parts.filter(part => !part.rectangular && contains(part.bbox, button.bbox)
+        && equal(center(part.bbox), center(button.bbox)) && width(part.bbox) >= quantum + 2 && width(part.bbox) <= quantum * 3
+        && height(part.bbox) >= quantum + 2 && height(part.bbox) <= quantum * 3
+        && !panels.some(panel => overlap(panel, part.bbox)));
+      const outer = outlines.find(part => outlines.every(other => contains(part.bbox, other.bbox)));
+      return outer ? [{ index, attached, button: buttonAt(button), panel: outer.bbox }] : [];
+    });
+  });
+  if (roots.length !== 1) return null;
+  const root = roots[0]!, parents = bodies.map((body, i) => root.attached.includes(i) ? root.index : body.parent);
+  const order = parents.flatMap((parent, i) => parent === null ? [i] : []);
+  for (let i = 0; i < order.length; i++) order.push(...parents.flatMap((parent, j) => parent === order[i] ? [j] : []));
+  if (order.length !== bodies.length) return null;
+  const bodyIndex = targets[0]!.body, marker = bodies[bodyIndex]!.marker;
+  if (!marker) return null;
+  const { at: target, marks } = targets[0]!;
+  const pixels = rows[0]!.length, counts = new Map<number, number>();
+  for (const row of rows.slice(0, field[3] + 1)) for (const ink of row) counts.set(ink, (counts.get(ink) ?? 0) + 1);
+  const floor = [...counts].find(([, count]) => count * 2 > pixels * (field[3] + 1))?.[0];
+  if (floor === undefined || floor === capInk || floor === markerInk || bodies.some(body => body.ink === floor)) return null;
+  const obstacles = rows.slice(0, field[3] + 1).map((row, y) => row.map((ink, x) =>
+    ink === floor || marks.some(mark => equal(mark, [x, y]))
+      || bodies.some(body => contains(joined(body.box, body.cap), [x, y, x, y]))
+      ? '.' : String.fromCharCode(obstacleInkBase + ink)).join(''));
+  const segments: Segment[] = order.map((index) => {
+    const body = bodies[index]!, { axis, sign, cap, box, ink } = body, parent = parents[index]!;
+    const direction: NativePoint = axis === 0 ? [sign, 0] : [0, sign];
+    const buttons = body.buttons ? {
+      extend: { box: body.buttons[0].box, at: body.buttons[0].point },
+      retract: { box: body.buttons[1].box, at: body.buttons[1].point },
+    } : index === root.index ? { turn: root.button } : {};
+    return { ink, pivot: cap ? add(center(cap), direction) : center(box), direction, length: axis === 0 ? width(box) : height(box), buttons,
+      parent: parent === null ? null : order.indexOf(parent), ...(cap ? {} : { fixedBox: box }),
+      ...(root.attached.includes(index) ? { mayClip: true } : {}) };
+  });
+  const layout: TurningLayout = { segments, quantum, width: pixels, field, obstacles, floor, capInk, markerInk, marker, target, marks,
+    panels: [...panels, root.panel], alignments: [{ body: order.indexOf(bodyIndex), marker, target }] };
+  return turningObserved(rows, layout, initialTurningPose(layout)) ? layout : null;
+}
+
+export function readTurningLayout(rows: NativeRows, parts: readonly Part[], witness: ExtensionWitness): TurningLayout | null {
+  return readExclusiveTurningLayout(rows, parts, witness) ?? readSharedTurningLayout(rows, parts, witness);
+}
+
 function compactControls(buttons: readonly MaskedPart[], lengths: readonly MaskedPart[], inks: readonly number[],
   witness: ExtensionWitness): Controls[] | null {
   const paired = inks.flatMap(ink => {
@@ -193,7 +255,7 @@ export function initialTurningPose(layout: TurningLayout): TurningPose {
 }
 
 export function moveTurningPose(pose: TurningPose, move: TurningMove, direction: TurnSign): TurningPose {
-  return pose.map((old, i) => i !== move.body ? old : move.operation === 'turn'
+  return pose.map((old, i) => !(move.receivers?.includes(i) ?? (i === move.body)) ? old : move.operation === 'turn'
     ? { ...old, turns: (old.turns + direction * (move.quarterTurns ?? 1)) & 3 }
     : { ...old, added: old.added + (move.operation === 'extend' ? 1 : -1) });
 }
@@ -204,6 +266,11 @@ function projectSegment(layout: TurningLayout, parts: readonly Position[], pose:
   const turns = (local.turns + (parent?.turns ?? 0)) & 3, along = quarterTurn(direction, turns);
   const pivot = previous && parent ? add(parent.pivot, quarterTurn(add(add(base, previous.pivot, -1),
     previous.direction, pose[index]!.added * layout.quantum), parent.turns)) : base;
+  if (segment.fixedBox) {
+    const [l, t, r, b] = segment.fixedBox;
+    return { box: bound(add(pivot, quarterTurn(add([l, t], base, -1), turns)),
+      add(pivot, quarterTurn(add([r, b], base, -1), turns))), cap: null, pivot, turns };
+  }
   const normal: NativePoint = [along[1] * half, along[0] * half], delta = local.added * layout.quantum;
   const far = add(pivot, along, length + delta - 1), back = add(pivot, along, -1);
   return { box: bound(add(pivot, normal, -1), add(far, normal)), cap: bound(add(back, normal, -1), add(back, normal)), pivot, turns };
@@ -234,25 +301,34 @@ export function turningObserved(rows: NativeRows, layout: TurningLayout, pose: T
   if (alignmentsOf(layout).some(({ body }, i) => !contains(parts[body]!.box, dot(markers[i]!)))) return false;
   const map = new Int8Array(layout.width * (layout.field[3] + 1)).fill(-1);
   const index = (x: number, y: number) => y * layout.width + x;
+  const panelMask = layout.panels ? new Uint8Array(map.length) : null;
+  if (panelMask) for (const [l, t, r, b] of layout.panels!) {
+    for (let y = t; y <= b; y++) panelMask.fill(1, index(l, y), index(r, y) + 1);
+  }
   const paint = ([l, t, r, b]: NativeBox, ink: number) => {
     for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) map[index(x, y)] = ink;
   };
   for (const [i, { box, cap }] of parts.entries()) {
-    const body = visibleBox(layout, box, i), hinge = visibleBox(layout, cap, i);
-    if (!body || !hinge) return false;
+    const body = visibleBox(layout, box, i), hinge = cap && visibleBox(layout, cap, i);
+    if (!body || cap && !hinge) return false;
     paint(body, layout.segments[i]!.ink);
-    paint(hinge, layout.capInk);
+    if (hinge) paint(hinge, layout.capInk);
   }
   const markerIndices = new Set(markers.map(point => index(...point))), marks = new Set(layout.marks.map(point => index(...point)));
   for (let y = 0; y <= layout.field[3]; y++) for (let x = 0; x < layout.width; x++) {
     const at = index(x, y), ink = rows[y]?.[x], color = map[at]!;
     if (ink === undefined) return false;
+    if (panelMask?.[at]) continue;
     if (markerIndices.has(at)) {
       if (ink !== layout.markerInk) return false;
     } else if (color >= 0) {
       if (ink !== color && !(marks.has(at) && ink === layout.markerInk)) return false;
-    } else if (marks.has(at) ? ink !== layout.markerInk : layout.obstacles[y]?.[x] === '#'
-      ? ink === layout.floor || ink === layout.capInk || layout.segments.some(part => part.ink === ink) : ink !== layout.floor) return false;
+    } else {
+      const obstacle = layout.obstacles[y]?.[x] ?? '.';
+      if (marks.has(at) ? ink !== layout.markerInk : obstacle === '#'
+        ? ink === layout.floor || ink === layout.capInk || layout.segments.some(part => part.ink === ink)
+        : obstacle === '.' ? ink !== layout.floor : ink !== obstacle.charCodeAt(0) - obstacleInkBase) return false;
+    }
   }
   return true;
 }
@@ -398,15 +474,20 @@ export async function chooseTurningRoute(layout: TurningLayout, start: TurningPo
   const stride = layout.width + 1, sum = new Int16Array(stride * (layout.field[3] + 2));
   for (const [y, row] of layout.obstacles.entries()) for (let x = 0; x < row.length; x++) {
     const at = (y + 1) * stride + x + 1;
-    sum[at] = Number(row[x] === '#') + sum[at - 1]! + sum[at - stride]! - sum[at - stride - 1]!;
+    sum[at] = Number(row[x] !== '.') + sum[at - 1]! + sum[at - stride]! - sum[at - stride - 1]!;
   }
   const clear = ([l, t, r, b]: NativeBox) =>
     sum[(b + 1) * stride + r + 1]! + sum[t * stride + l]! === sum[t * stride + r + 1]! + sum[(b + 1) * stride + l]!;
   const blocked = new Set(rejected), frontier: SearchNode[][] = [], explored = new Map([[poseKey(start), 0]]);
   const operations: ExtensionOperation[] = ['extend', 'retract', 'turn'];
-  const moves = layout.segments.flatMap((segment, body) =>
-    operations.filter(operation => segment.buttons[operation]).map(operation => ({ body, operation })));
-  if (layout.alignments) return routeBetweenPoses(layout, start, direction, moves, clear, remaining, blocked, execution);
+  const moves = layout.segments.flatMap((segment, body) => operations.flatMap(operation => {
+    const button = segment.buttons[operation];
+    if (!button) return [];
+    const receivers = layout.panels && operation !== 'turn' ? layout.segments.flatMap((other, index) =>
+      other.buttons[operation] && equal(button.at, other.buttons[operation]!.at) ? [index] : []) : [body];
+    return receivers[0] === body ? [{ body, operation, ...(receivers.length > 1 ? { receivers } : {}) }] : [];
+  }));
+  if (layout.alignments && !layout.panels) return routeBetweenPoses(layout, start, direction, moves, clear, remaining, blocked, execution);
   const goals = alignmentsOf(layout);
   const estimate = (markers: NativePoint[]) => Math.ceil(Math.max(...goals.map(({ target }, i) =>
     distance(markers[i]!, target))) / layout.quantum);
@@ -442,7 +523,7 @@ export async function chooseTurningRoute(layout: TurningLayout, start: TurningPo
     for (const move of moves) {
       if (blocked.has(turningEdge(node.pose, move))) continue;
       const next = moveTurningPose(node.pose, move, direction);
-      if (layout.segments[move.body]!.length + next[move.body]!.added * layout.quantum < 1) continue;
+      if ((move.receivers ?? [move.body]).some(i => layout.segments[i]!.length + next[i]!.added * layout.quantum < 1)) continue;
       const projected = projectTurningPose(layout, next);
       if (!feasible(projected)) continue;
       const key = poseKey(next), depth = node.depth + 1;

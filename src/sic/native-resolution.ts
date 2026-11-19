@@ -1325,7 +1325,7 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && family === coupledGaugeRouteId) {
-    for (const [field, label] of [['focus', 'Selected button'], ['gauge', 'Extending piece'], ['actor', 'Transported marker'],
+    for (const [field, label] of [['focus', 'Selected button'], ['gauge', card?.operation === 'turn' ? 'Rotating piece' : 'Extending piece'], ['actor', 'Transported marker'],
       ['target', 'Destination marks'], ['obstacle', 'Obstacle'], ['landing', 'Predicted marker position']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
@@ -1333,6 +1333,10 @@ export function readNativeResolution(agent: {
     if (Array.isArray(card?.carried)) for (const item of card.carried) {
       const box = bounds(item);
       if (box) subjects.push({ label: 'Transported piece', box });
+    }
+    if (Array.isArray(card?.sharedReceivers)) for (const item of card.sharedReceivers) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Other bar on the same button', box });
     }
   }
   if (situationCard && (family === seatedContactId || family === verifyFrameContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId)) {

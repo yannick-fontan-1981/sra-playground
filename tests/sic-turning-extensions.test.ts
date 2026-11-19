@@ -53,3 +53,26 @@ test('a linked turn skips the orientation towards its parent while keeping anoth
   assert.deepEqual(projected.markers, [target, reserved]);
   assert.deepEqual(await chooseTurningRoute(mixed, start, -1, [turningEdge(start, move)], 1), []);
 });
+
+test('turning follows physical attachment and extension follows the shared button', async () => {
+  const shared: TurningLayout = { ...layout, panels: [], marker: [20, 4], target: [20, 7], marks: [],
+    alignments: [{ body: 2, marker: [20, 4], target: [20, 7] }],
+    segments: [
+      { ink: 3, fixedBox: [10, 10, 12, 12], pivot: [11, 11], direction: [1, 0], length: 3, parent: null, buttons: { turn: button } },
+      { ink: 4, pivot: [14, 11], direction: [1, 0], length: 2, parent: 0, buttons: { extend: button } },
+      { ink: 4, pivot: [20, 4], direction: [0, 1], length: 2, parent: null, buttons: { extend: button } },
+      { ink: 6, fixedBox: [19, 6, 21, 8], pivot: [20, 7], direction: [0, 1], length: 3, parent: 2, buttons: {} },
+    ] };
+  const start = initialTurningPose(shared), before = projectTurningPose(shared, start);
+  const rotated = projectTurningPose(shared, moveTurningPose(start, { body: 0, operation: 'turn' }, 1));
+  assert.deepEqual(rotated.parts[1]!.box, [10, 7, 12, 8]);
+  assert.deepEqual(rotated.parts.slice(2), before.parts.slice(2));
+
+  const extend = { body: 1, operation: 'extend' as const, receivers: [1, 2] };
+  assert.deepEqual(await chooseTurningRoute(shared, start, 1, [], 1), [extend]);
+  const extended = projectTurningPose(shared, moveTurningPose(start, extend, 1));
+  assert.deepEqual(extended.parts[1]!.box, [14, 10, 18, 12]);
+  assert.deepEqual(extended.parts[2]!.box, [19, 4, 21, 8]);
+  assert.deepEqual(extended.parts[3]!.box, [19, 9, 21, 11]);
+  assert.deepEqual(extended.marker, shared.target);
+});

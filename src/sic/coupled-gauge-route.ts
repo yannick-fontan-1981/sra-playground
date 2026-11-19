@@ -253,7 +253,8 @@ export function createSicCoupledGaugeRoute(): NativeFamily<GaugeProposal> {
     const evidence: [string, ...string[]] = [ref, ...new Set([...witnessed.evidence, ...current.refs].filter(value => value !== ref))];
     const situation = probe ? 'Measure which bars rotate around the selected pivot'
       : first.operation === 'turn' ? 'Rotate the linked bars to clear a path around an obstacle'
-        : 'Adjust the length of the linked bars and advance the marker';
+        : layout.panels ? 'Adjust the shared length control while keeping every linked bar clear'
+          : 'Adjust the length of the linked bars and advance the marker';
     const objective = { kind: 'align_linked_marker_by_turning_and_extending', scope: ref.split(':revision:', 1)[0]!,
       subjects: layout.alignments?.map(({ target }) => target.join(',')) ?? [layout.target.join(',')],
       parentObjective: 'G_official_completion', satisfactionContract: 'official_progress_after_marker_alignment' };
@@ -276,13 +277,15 @@ export function createSicCoupledGaugeRoute(): NativeFamily<GaugeProposal> {
     if (!actions.length) return null;
     const projected = projectTurningPose(layout, current.pose), next = projectTurningPose(layout, turns[0]!.after);
     const button = layout.segments[first.body]!.buttons[first.operation]!;
-    const carries = new Set([first.body]);
+    const carries = new Set(first.receivers ?? [first.body]);
     const carried = projected.parts.flatMap((part, index) => {
+      if (first.receivers?.includes(index)) return [];
       const parent = layout.segments[index]!.parent;
       if (!carries.has(parent === undefined ? index - 1 : parent ?? -1)) return [];
       carries.add(index);
       return [part.box];
     });
+    const sharedReceivers = first.receivers?.filter(index => index !== first.body).map(index => projected.parts[index]!.box);
     const targetIndex = Math.max(0, layout.alignments?.findIndex(({ body }) => carries.has(body)) ?? 0);
     const target = layout.alignments?.[targetIndex]?.target ?? layout.target;
     return { status: 'proposed', kind: coupledGaugeRouteId, turning: { ...current, hypothesis, route }, turns, probe, needId: need.id,
@@ -291,7 +294,8 @@ export function createSicCoupledGaugeRoute(): NativeFamily<GaugeProposal> {
         edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
       sicSituationCard: { strategy, need: 'Bring the marker to the visible target', situation, mode, evidence, agenda: [],
         triggerCard: chooseInteraction, focus: button.box, gauge: projected.parts[first.body]!.box,
-        pivot: dot(projected.parts[first.body]!.pivot), carried,
+        pivot: dot(projected.parts[first.body]!.pivot), carried, operation: first.operation,
+        ...(sharedReceivers?.length ? { sharedReceivers } : {}),
         actor: dot(projected.markers[targetIndex]!), target: dot(target),
         ...(probe ? {} : { landing: dot(next.markers[targetIndex]!) }) },
       question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
