@@ -1,0 +1,682 @@
+{
+  "spec": {
+    "id": "ss07-01",
+    "title": "L’atelier du pas de côté",
+    "rows": [
+      "##################",
+      "########....######",
+      "##oT...~....######",
+      "##.....#....######",
+      "##M....###~~o#####",
+      "##.....##...######",
+      "#########.~#######",
+      "########..~#######",
+      "########..~#######",
+      "########..~~....##",
+      "########...~....##",
+      "##########~~g.g.##",
+      "############....##",
+      "##################"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 10,
+          "y": 10
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "atelier",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 3
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 12,
+          "y": 4
+        },
+        "circuit": "atelier",
+        "direction": "W",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CRDCUURRRRRRDUURCURRRRDRRRDDLLDDDDDLUUURCDDRRDDLLDXCDCDXRDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "puzzle": 0,
+    "label": "Création originale · Extraire une caisse, construire deux appuis, commander une presse latérale et déplacer un miroir pour faire traverser le duo.",
+    "url": "",
+    "piston": true,
+    "platform": false
+  },
+  "metrics": {
+    "actions": 59,
+    "selections": 6,
+    "merchantPushes": 4,
+    "thiefPulls": 2,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 6,
+    "mirrorMoves": 1,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Tirer la caisse hors de son alcôve puis la lâcher par un pas de côté",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 13,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Le Marchand construit le premier appui",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "La plaque commande la presse latérale et construit le second appui",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true
+      }
+    },
+    {
+      "label": "Le Voleur retire le miroir de la rive",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Se placer devant le miroir sans le tirer une seconde fois",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Préparer le deuxième voyageur",
+      "turn": 50,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Le Voleur traverse par reflet sans entraîner le miroir",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Première destination",
+      "turn": 53,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Les deux destinations sont occupées",
+      "turn": 59,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    }
+  ],
+  "adaptation": "Tutoriel original du duo Marchand + Voleur : la caisse en alcôve demande une traction, le premier appui une poussée, le second une presse isolée et le miroir un retrait depuis la rive."
+}

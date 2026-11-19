@@ -1,0 +1,1258 @@
+{
+  "spec": {
+    "id": "ss07-08",
+    "title": "Le pont qu’on ne rend pas",
+    "facing": "E",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~#....M~~~~~~~~~~~~",
+      "~#oT....~~#~~~~~~~~~",
+      "~~#.....~#o#......~~",
+      "~~~.....~~~.......~~",
+      "~~#.....~~#.......~~",
+      "~#o.....~~~.......~~",
+      "~~#.#...~~~.......~~",
+      "~~~#....~~~.......~~",
+      "~~~#.#~~~~~.......~~",
+      "~~~~#~~~~~~~s~~~~~~~",
+      "~~~~~~~~~~~~.~~~~~~~",
+      "~~~~~~~~~~~.s~~~~~~~",
+      "~~~~~~~~~~~..#~~~~..",
+      "~~~~~~~~~~~...~~~~..",
+      "~~~~~~~~~~~~~~~~~~gg",
+      "~~~~~~~~~~~~~~~~~~..",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 13,
+          "y": 15
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "emprunt",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 10
+          }
+        ]
+      },
+      {
+        "id": "reserve",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 14,
+            "y": 8
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 4
+        },
+        "circuit": "reserve",
+        "direction": "S",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "circuit": "emprunt",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 5
+        },
+        "circuit": "emprunt",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 5
+        },
+        "circuit": "emprunt",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CRRDDDDLLRRRUDDDLLDCDDDRRRRDDRRRDUUULLLLLLLULLDRRRRLLUUULLLDDLDRRRRRLDDDLLUULURRRCUCRRRRDDRRRRCRUUUURRRRRRDDDDDRDDDDDLUURUUUUCDLLLXCDCXD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 48
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "puzzle": 0,
+    "label": "Création originale · Emprunter un pont, récupérer la troisième caisse puis convertir ses plateformes en appuis permanents avant de retirer le miroir final.",
+    "url": "",
+    "piston": true,
+    "platform": true
+  },
+  "metrics": {
+    "actions": 136,
+    "selections": 8,
+    "merchantPushes": 20,
+    "thiefPulls": 6,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 26,
+    "mirrorMoves": 1,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 3,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Extraire les deux réserves des alcôves",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": false,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Le Voleur maintient le pont provisoire",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": true,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Traverser puis libérer la troisième caisse par la presse",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": true,
+        "reserve": true
+      }
+    },
+    {
+      "label": "Rapporter la caisse de réserve sur la rive de départ",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": true,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Charger la dernière plateforme",
+      "turn": 53,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": true,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Charger la plateforme centrale",
+      "turn": 69,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": true,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Charger la première plateforme",
+      "turn": 81,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": true,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Retirer le pont provisoire : les trois caisses deviennent des appuis permanents",
+      "turn": 83,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": false,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Récupérer le miroir par son côté accessible",
+      "turn": 118,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": false,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Se placer sur le long rayon sans entraîner le miroir",
+      "turn": 125,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": false,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Premier passage vers l’îlot final",
+      "turn": 131,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": false,
+        "reserve": false
+      }
+    },
+    {
+      "label": "Deuxième passage et deux destinations",
+      "turn": 136,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 19,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "emprunt": false,
+        "reserve": false
+      }
+    }
+  ],
+  "adaptation": "Finale coopérative à trois îlots : le Voleur tient un bouton en coude, le Marchand récupère une caisse distante puis charge trois plateformes, et leur retrait transforme les caisses en pont permanent. Deux appuis anciens donnent accès au miroir de la dernière traversée."
+}

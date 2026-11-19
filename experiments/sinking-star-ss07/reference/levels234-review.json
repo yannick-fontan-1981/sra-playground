@@ -1,0 +1,151 @@
+[
+  {
+    "level": 2,
+    "title": "Les lacunes du miroir",
+    "metrics": {
+      "actions": 59,
+      "selections": 1,
+      "merchantPushes": 1,
+      "thiefPulls": 14,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 14,
+      "reflections": 8,
+      "heroReflections": 8,
+      "pistonPushes": 0,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "solved": true,
+    "checks": [
+      {
+        "option": "disableThiefPulls",
+        "status": "unsolvable",
+        "states": 560,
+        "expanded": 560,
+        "ms": 27,
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disableMerchantPushes",
+        "status": "unsolvable",
+        "states": 8504,
+        "expanded": 8504,
+        "ms": 132,
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disableReflections",
+        "status": "unsolvable",
+        "states": 1160,
+        "expanded": 1160,
+        "ms": 34,
+        "proofScope": "Exhausted graph under the disabled capability."
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "title": "Partir sans reprendre",
+    "metrics": {
+      "actions": 29,
+      "selections": 2,
+      "merchantPushes": 1,
+      "thiefPulls": 1,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 0,
+      "mirrorMoves": 2,
+      "reflections": 3,
+      "heroReflections": 3,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "solved": true,
+    "checks": [
+      {
+        "option": "disableThiefPulls",
+        "status": "unsolvable",
+        "states": 14004,
+        "expanded": 14004,
+        "ms": 322,
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disableMerchantPushes",
+        "status": "unsolvable",
+        "states": 9474,
+        "expanded": 9474,
+        "ms": 174,
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disableReflections",
+        "status": "unsolvable",
+        "states": 46,
+        "expanded": 46,
+        "ms": 0,
+        "proofScope": "Exhausted graph under the disabled capability."
+      }
+    ],
+    "leaveButton": {
+      "walkReleases": true,
+      "reflectionPreserves": true,
+      "afterAction": 13
+    }
+  },
+  {
+    "level": 4,
+    "title": "Les quatre appuis",
+    "metrics": {
+      "actions": 94,
+      "selections": 5,
+      "merchantPushes": 8,
+      "thiefPulls": 7,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 13,
+      "mirrorMoves": 5,
+      "reflections": 3,
+      "heroReflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 4,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "solved": true,
+    "checks": [
+      {
+        "option": "disableThiefPulls",
+        "status": "limit",
+        "states": 35000,
+        "expanded": 22287,
+        "ms": 537,
+        "proofScope": "Search limit; no impossibility claim."
+      },
+      {
+        "option": "disableMerchantPushes",
+        "status": "limit",
+        "states": 35000,
+        "expanded": 20566,
+        "ms": 305,
+        "proofScope": "Search limit; no impossibility claim."
+      },
+      {
+        "option": "disableReflections",
+        "status": "limit",
+        "states": 35000,
+        "expanded": 20039,
+        "ms": 205,
+        "proofScope": "Search limit; no impossibility claim."
+      }
+    ]
+  }
+]

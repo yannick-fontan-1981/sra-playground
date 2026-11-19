@@ -1,0 +1,267 @@
+[
+  {
+    "level": 6,
+    "cause": "Le Marchand se reflète dans l’eau avant que le miroir soit aligné pour la sentinelle",
+    "commands": "DRRRUUURX",
+    "actions": [
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "level": 7,
+    "cause": "Reflet depuis l’alcôve sans relève du Marchand sur le premier sceau : la porte du palier écrase le Voleur",
+    "commands": "RRRRRUURRRRUUUURRDXCRRRRRRRDDDDDRRRRRRUUX",
+    "actions": [
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 9,
+          "y": 18
+        }
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "level": 8,
+    "cause": "Le Voleur quitte le bouton du pont provisoire alors que le Marchand est encore sur une plateforme sans caisse : le Marchand tombe dans l’eau",
+    "commands": "CRRDDDDLLRRRUDDDLLDCDDDRCU",
+    "actions": [
+      {
+        "id": 6,
+        "data": {
+          "x": 12,
+          "y": 12
+        }
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 24,
+          "y": 9
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 15,
+          "y": 33
+        }
+      },
+      {
+        "id": 1
+      }
+    ]
+  }
+]

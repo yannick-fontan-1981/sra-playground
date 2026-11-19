@@ -1,0 +1,823 @@
+{
+  "spec": {
+    "id": "ss07-04",
+    "title": "Les quatre appuis",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~...o.~~~~~",
+      "~~~~~~~~~~.....~~~~~",
+      "~.....o~~~.....~~~~~",
+      "~.....T~~~~~~..~~~~~",
+      "~......~~~~..~#~~~~~",
+      "~......~~~....o#..o~",
+      "~........~...~.~...~",
+      "~..M.....~.....#...~",
+      "~......~~~.....#...~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~...~",
+      "~~~~~~~~~~~~~~~~.gg~",
+      "~~~~~~~~~~~~~~~~...~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "S",
+    "mirrors": [
+      {
+        "at": {
+          "x": 6,
+          "y": 7
+        },
+        "facing": "NE"
+      }
+    ]
+  },
+  "commands": "CDLXDDDRRRURRDRRRRUDLCURRRRRRRXCLUUULUUURRDDRUULLDLLUXDRDDDRRRDRRRRDLCURRRRDRRURRDDDDDDCDRDDLD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "puzzle": 6,
+    "label": "Adaptation · Heroes and Mirrors 6 : quatre appuis à construire en changeant les diagonales du miroir.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6",
+    "piston": false,
+    "platform": false
+  },
+  "metrics": {
+    "actions": 94,
+    "selections": 5,
+    "merchantPushes": 8,
+    "thiefPulls": 7,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 13,
+    "mirrorMoves": 5,
+    "reflections": 3,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 4,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Extraire la première caisse et ouvrir le passage central",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 18,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Voleur extrait la caisse orientale",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 14,
+          "y": 9
+        },
+        {
+          "x": 18,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand pousse le miroir sur le nouvel axe",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 14,
+          "y": 9
+        },
+        {
+          "x": 18,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La deuxième caisse ouvre l’îlot du nord",
+      "turn": 31,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 18,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Deux changements d’axe pour la caisse du nord",
+      "turn": 53,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 5
+        },
+        {
+          "x": 18,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La troisième caisse ouvre l’îlot oriental",
+      "turn": 54,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 18,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Dernière extraction au bord de l’eau",
+      "turn": 69,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 18,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand construit le dernier appui",
+      "turn": 84,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 18,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        },
+        {
+          "x": 18,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Les deux arrivées",
+      "turn": 94,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        },
+        {
+          "x": 18,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": "Recomposition en duo de drop_tool : cinq îlots, quatre caisses, trois appuis créés par reflet et le dernier par poussée du Marchand. Le Voleur extrait les caisses et règle leur axe ; le Marchand déplace le miroir pour viser les deux traversées suivantes. La carte source dépasse 20 cellules et son terrain est réorganisé pour la grille 2D ; ce n’est pas une copie case par case."
+}
