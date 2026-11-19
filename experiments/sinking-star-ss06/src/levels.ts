@@ -295,14 +295,14 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
   },
   {
     "id": "ss06-05",
-    "title": "La caisse condamnée",
+    "title": "La caisse de l’écluse",
     "facing": "E",
     "rows": [
       "~~~~~~~~~~~~~~~",
       "~..~..~~~~~~~~~",
       "~..~..~~~~~~~~~",
       "~M*...~~~~~~~~~",
-      "~..~.#~~......~",
+      "~..~..~~......~",
       "Woo~..~#....g.~",
       "~~~~#.~o......~",
       "~~~~~#~~......~",
@@ -338,7 +338,7 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
           "y": 6
         },
         "circuit": "condamne",
-        "direction": "N",
+        "direction": "S",
         "closedWhen": "released"
       }
     ]

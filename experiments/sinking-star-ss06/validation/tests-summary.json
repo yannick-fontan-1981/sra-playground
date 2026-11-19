@@ -1,6 +1,6 @@
 {
   "game": "SS06",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "command": "npm test",
   "passed": 43,
   "failed": 0,

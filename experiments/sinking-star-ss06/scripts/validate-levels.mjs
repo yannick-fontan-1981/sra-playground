@@ -9,7 +9,7 @@ const json=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8')
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const witnesses=await json('../tests/witnesses.json');
 assert.equal(SS06_LEVELS.length,8);assert.equal(witnesses.length,8);assert.equal(LEVEL_INFO.length,8);
-const session=new DuoPuzzleSession(SS06_LEVELS),report={game:'SS06',version:'0.1.1',levels:[],totals:{},success:false};
+const session=new DuoPuzzleSession(SS06_LEVELS),report={game:'SS06',version:'0.1.2',levels:[],totals:{},success:false};
 const continuous=new Set(['walk','push','reflect','piston']);
 for(const [index,spec] of SS06_LEVELS.entries()){
  const design=await json(`../reference/level${index+1}-design.json`),witness=witnesses[index];
@@ -42,7 +42,7 @@ for(const [index,spec] of SS06_LEVELS.entries()){
 assert.equal(session.observe().state,'WIN');assert.equal(session.observe().levelsCompleted,8);
 assert.ok(report.levels[0].merchantPushes&&report.levels[0].chainPushes&&report.levels[0].platformsCreated&&report.levels[0].pistonPushes&&report.levels[0].heroReflections===2);
 assert.equal(report.levels[1].simultaneousHeroReflections,1);assert.equal(report.levels[7].simultaneousHeroReflections,1);
-assert.equal(report.levels[4].mirrorsDestroyed,0);assert.equal(report.levels[4].cratesCrushed,1);assert.equal(report.levels[5].monstersRemoved,4);
+assert.equal(report.levels[4].mirrorsDestroyed,0);assert.equal(report.levels[4].cratesCrushed,0);assert.equal(report.levels[4].pistonPushes,1);assert.equal(report.levels[4].platformsCreated,3);assert.equal(report.levels[5].monstersRemoved,4);
 for(const level of [1,5])assert.ok(!SS06_LEVELS[level-1].mirrors.some(m=>SS06_LEVELS[level-1].gates.some(g=>m.at.x===g.at.x&&m.at.y===g.at.y)),'No mirror starts on a press in L1/L5');
 assert.ok(report.levels[6].platformsCreated>=2&&report.levels[6].chainPushes&&report.levels[6].pistonPushes);
 assert.ok(report.levels[7].platformsCreated>=2&&report.levels[7].pistonPushes>=2&&report.levels[7].combatWaves);
@@ -57,9 +57,12 @@ for(const f of await json('../tests/failures.json')){
 for(const key of ['actions','selections','merchantPushes','warriorPushes','chainPushes','stoneMoves','mirrorMoves','reflections','heroReflections','pistonPushes','platformsCreated','monstersRemoved','combatWaves','mirrorsDestroyed','cratesCrushed','simultaneousHeroReflections','frames'])report.totals[key]=report.levels.reduce((n,l)=>n+l[key],0);
 if(process.argv.includes('--mechanisms')){
  report.mechanismChecks=[];
- for(const [level,option] of [[1,'disableWarriorChains'],[1,'disablePistons'],[1,'disablePlatforms'],[1,'disableReflections'],[2,'disableMirrorMotion'],[2,'disableSelection'],[5,'disablePistons'],[7,'disablePlatforms'],[7,'disableWarriorChains']]){
+ for(const [level,option] of [[1,'disableWarriorChains'],[1,'disablePistons'],[1,'disablePlatforms'],[1,'disableReflections'],[2,'disableMirrorMotion'],[2,'disableSelection'],[7,'disablePlatforms'],[7,'disableWarriorChains']]){
   const r=solve(SS06_LEVELS[level-1],{[option]:true,maxStates:100000,maxMs:10000});assert.equal(r.status,'unsolvable');report.mechanismChecks.push({level,option,...r});
  }
+ const alternative=await json('../reference/level5-necessity.json'),alternativeReplay=replay(SS06_LEVELS[4],alternative.commands);
+ assert.ok(alternativeReplay.state.complete&&!alternativeReplay.state.dead);assert.equal(alternativeReplay.metrics.blocked,0);assert.equal(alternativeReplay.metrics.pistonPushes,0);assert.ok(alternativeReplay.trace.every(t=>t.phases.every(p=>p.kind!=='crush')));
+ report.mechanismChecks.push(alternative);
  for(const [y,row] of SS06_LEVELS[0].rows.entries())for(const [x,c] of [...row].entries())if(c==='o'){
   const rows=SS06_LEVELS[0].rows.map(r=>[...r]);rows[y][x]='.';
   const r=solve({...SS06_LEVELS[0],rows:rows.map(r=>r.join(''))},{maxStates:100000,maxMs:10000});

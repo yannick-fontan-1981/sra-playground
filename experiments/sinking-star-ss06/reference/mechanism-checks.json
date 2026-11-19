@@ -5,7 +5,7 @@
     "status": "unsolvable",
     "states": 784,
     "expanded": 784,
-    "ms": 19
+    "ms": 18
   },
   {
     "level": 1,
@@ -13,7 +13,7 @@
     "status": "unsolvable",
     "states": 2668,
     "expanded": 2668,
-    "ms": 72
+    "ms": 53
   },
   {
     "level": 1,
@@ -21,7 +21,7 @@
     "status": "unsolvable",
     "states": 784,
     "expanded": 784,
-    "ms": 30
+    "ms": 17
   },
   {
     "level": 1,
@@ -29,7 +29,7 @@
     "status": "unsolvable",
     "states": 5736,
     "expanded": 5736,
-    "ms": 102
+    "ms": 146
   },
   {
     "level": 2,
@@ -37,7 +37,7 @@
     "status": "unsolvable",
     "states": 2608,
     "expanded": 2608,
-    "ms": 92
+    "ms": 77
   },
   {
     "level": 2,
@@ -45,15 +45,7 @@
     "status": "unsolvable",
     "states": 156,
     "expanded": 156,
-    "ms": 4
-  },
-  {
-    "level": 5,
-    "option": "disablePistons",
-    "status": "unsolvable",
-    "states": 42650,
-    "expanded": 42650,
-    "ms": 830
+    "ms": 3
   },
   {
     "level": 7,
@@ -61,7 +53,7 @@
     "status": "unsolvable",
     "states": 2520,
     "expanded": 2520,
-    "ms": 66
+    "ms": 76
   },
   {
     "level": 7,
@@ -69,7 +61,16 @@
     "status": "unsolvable",
     "states": 2520,
     "expanded": 2520,
-    "ms": 69
+    "ms": 53
+  },
+  {
+    "level": 5,
+    "option": "disablePistons",
+    "status": "solved",
+    "method": "replayedWitness",
+    "commands": "XRUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
+    "actions": 42,
+    "note": "Retirer le mur (5,4) autorise le reflet initial de la caisse. Ce parcours termine sans poussée ni écrasement par presse."
   },
   {
     "level": 1,
@@ -81,7 +82,7 @@
     "status": "unsolvable",
     "states": 8076,
     "expanded": 8076,
-    "ms": 138
+    "ms": 287
   },
   {
     "level": 1,
@@ -105,7 +106,7 @@
     "status": "unsolvable",
     "states": 2840,
     "expanded": 2840,
-    "ms": 44
+    "ms": 47
   },
   {
     "level": 1,
@@ -117,6 +118,6 @@
     "status": "unsolvable",
     "states": 5736,
     "expanded": 5736,
-    "ms": 88
+    "ms": 99
   }
 ]

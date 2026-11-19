@@ -25,7 +25,7 @@ export const LEVEL_INFO=[
   },
   {
     "puzzle": 18,
-    "label": "Adaptation de principe · Heroes and Mirrors 18 : écraser la caisse qui bloque le reflet, puis rétablir le passage.",
+    "label": "Adaptation de principe · Heroes and Mirrors 18 : libérer le passage avec une presse ; ici, la caisse devient un appui dans l’eau.",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
     "piston": true
   },

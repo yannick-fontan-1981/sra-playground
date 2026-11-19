@@ -89,7 +89,7 @@ try{
   for(let level=1;level<=SS06_LEVELS.length;level++){choose(level);assert.equal($('piston-help').hidden,!LEVEL_INFO[level-1].piston);assert.equal($('tutorial').hidden,level!==1);assert.equal($('source-link').hidden,!LEVEL_INFO[level-1].url);if(LEVEL_INFO[level-1].url)assert.equal($('source-link').href,LEVEL_INFO[level-1].url);}
   report.checks.push('Every level displays its own source attribution and relevant piston help, with all eight rooms available');
 
-  // The fifth room must visibly start with the condemned crate, not a mirror on its press.
+  // The fifth room starts with a readable crate that the press lowers into water.
   choose(5);
   const fifth=SS06_LEVELS[4],fifthMirrors=[...(fifth.mirrors??[]).map(m=>m.at)];
   fifth.rows.forEach((row,y)=>[...row].forEach((c,x)=>{if('1234'.includes(c))fifthMirrors.push({x,y});}));
@@ -98,7 +98,20 @@ try{
   assert.ok(cratePresses.length>0,'Level 5 starts with a crate on its press');
   const ox=Math.floor((20-fifth.rows[0].length)/2),oy=Math.floor((20-fifth.rows.length)/2),fifthFrame=ref.observe().frame;
   for(const g of cratePresses){const px=2+(g.at.x+ox)*3,py=2+(g.at.y+oy)*3;assert.equal(fifthFrame[py+1][px+1],5);assert.deepEqual([fifthFrame[py][px+1],fifthFrame[py+1][px],fifthFrame[py+1][px+2],fifthFrame[py+2][px+1]],[13,13,13,13],'The initial crate remains visibly brown above the press');}
-  report.checks.push('Level 5 visibly starts with a brown condemned crate on its press and has no initial mirror/press overlap');
+  assert.equal(fifth.rows[4][5],'.','The extra wall above the left mirror is removed');
+  for(const g of cratePresses){assert.equal(g.direction,'S');assert.equal(fifth.rows[g.at.y+1][g.at.x],'~');}
+  await replay(actionsFor(5).slice(0,1));
+  const pressCaptureStart=captures.length;
+  await replay(actionsFor(5).slice(1,2));
+  const pressFrames=captures.slice(pressCaptureStart+3,pressCaptureStart+6);
+  assert.equal(pressFrames.length,3);
+  const colorAt=(frame,x,y)=>{const index=(y*64+x)*4;return '#'+[frame[index],frame[index+1],frame[index+2]].map(v=>v.toString(16).padStart(2,'0')).join('');};
+  for(const g of cratePresses){
+    const px=2+(g.at.x+ox)*3,py=2+(g.at.y+oy)*3;
+    for(let step=1;step<=2;step++)for(let y=0;y<3;y++)for(let x=0;x<3;x++)assert.equal(colorAt(pressFrames[step-1],px+x,py+step+y),PALETTE[x===1&&y===1?5:13],'The crate advances downward by one pixel per animation frame');
+    for(let y=0;y<3;y++)for(let x=0;x<3;x++)assert.equal(colorAt(pressFrames[2],px+x,py+3+y),PALETTE[x===y||x+y===2?10:13],'The crate becomes a brown support with a cyan X directly below the press');
+  }
+  report.checks.push('Level 5 has no extra wall or mirror/press overlap; its brown crate advances downward in three frames into water and becomes a support with a cyan X');
 
   $('restart').click();await settled(ref.restart());
   const reflectionIndex=tutorial.findIndex(a=>normal(a).id===5);assert.ok(reflectionIndex>=0);await replay(tutorial.slice(0,reflectionIndex));

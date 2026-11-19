@@ -1,6 +1,6 @@
 {
   "game": "SS06",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "levels": [
     {
       "level": 1,
@@ -188,15 +188,15 @@
       "solved": true,
       "mapSha256": "4e571816768641d9d8ce8da97711bb1868526a03bad601106caf917bc544c5fa",
       "witnessSha256": "544f36e5065f3c460717b0b3371365c1a75943cc1235720d1f6e17ee34cdc8d4",
-      "observationsSha256": "f63018f4fecdeb2fba15386f74fcd90059b5318484716d63f0116545d3cdbae4"
+      "observationsSha256": "d73649215dbabad00e2daabcf07f7d4b870460eb3e415550f102cdfffcb1abab"
     },
     {
       "level": 5,
       "id": "ss06-05",
-      "title": "La caisse condamnée",
+      "title": "La caisse de l’écluse",
       "source": {
         "puzzle": 18,
-        "label": "Adaptation de principe · Heroes and Mirrors 18 : écraser la caisse qui bloque le reflet, puis rétablir le passage.",
+        "label": "Adaptation de principe · Heroes and Mirrors 18 : libérer le passage avec une presse ; ici, la caisse devient un appui dans l’eau.",
         "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
         "piston": true
       },
@@ -204,7 +204,7 @@
         15,
         12
       ],
-      "floorCells": 65,
+      "floorCells": 66,
       "waterCells": 111,
       "initialStones": 4,
       "initialSupports": 0,
@@ -217,25 +217,25 @@
       "merchantPushes": 1,
       "warriorPushes": 5,
       "chainPushes": 1,
-      "stoneMoves": 8,
+      "stoneMoves": 9,
       "mirrorMoves": 0,
       "reflections": 3,
       "heroReflections": 2,
-      "pistonPushes": 0,
-      "platformsCreated": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 3,
       "monstersRemoved": 0,
       "blocked": 0,
       "deaths": 0,
       "combatWaves": 0,
       "mirrorsDestroyed": 0,
-      "cratesCrushed": 1,
+      "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
-      "frames": 122,
-      "maxFrames": 4,
+      "frames": 124,
+      "maxFrames": 6,
       "solved": true,
-      "mapSha256": "18a50e08303924ca641dbe493d7ee3feb44959c4845ce36a08788074b69ae350",
+      "mapSha256": "025db29bf5cf00932e29725b0f1f35c21aa3ee4c8ac8cb018bfacc4b7db90358",
       "witnessSha256": "a201039cdbd661e6b426a57aa632e8f60a9de5706f157b8ea510bdc74c293adf",
-      "observationsSha256": "3e33308526a527e6ecace952da963e77917f5bd643a8b2022610c9a9b5f1a5a6"
+      "observationsSha256": "ae790a4523189542b2b9173fe18c45296e22dc29f02ce8b76b25a9770a187db3"
     },
     {
       "level": 6,
@@ -385,18 +385,18 @@
     "merchantPushes": 28,
     "warriorPushes": 52,
     "chainPushes": 23,
-    "stoneMoves": 98,
+    "stoneMoves": 99,
     "mirrorMoves": 33,
     "reflections": 29,
     "heroReflections": 16,
-    "pistonPushes": 5,
-    "platformsCreated": 17,
+    "pistonPushes": 6,
+    "platformsCreated": 18,
     "monstersRemoved": 8,
     "combatWaves": 4,
     "mirrorsDestroyed": 0,
-    "cratesCrushed": 1,
+    "cratesCrushed": 0,
     "simultaneousHeroReflections": 2,
-    "frames": 1267
+    "frames": 1269
   },
   "success": true,
   "failureRoutes": [
@@ -422,7 +422,7 @@
       "status": "unsolvable",
       "states": 784,
       "expanded": 784,
-      "ms": 19
+      "ms": 18
     },
     {
       "level": 1,
@@ -430,7 +430,7 @@
       "status": "unsolvable",
       "states": 2668,
       "expanded": 2668,
-      "ms": 72
+      "ms": 53
     },
     {
       "level": 1,
@@ -438,7 +438,7 @@
       "status": "unsolvable",
       "states": 784,
       "expanded": 784,
-      "ms": 30
+      "ms": 17
     },
     {
       "level": 1,
@@ -446,7 +446,7 @@
       "status": "unsolvable",
       "states": 5736,
       "expanded": 5736,
-      "ms": 102
+      "ms": 146
     },
     {
       "level": 2,
@@ -454,7 +454,7 @@
       "status": "unsolvable",
       "states": 2608,
       "expanded": 2608,
-      "ms": 92
+      "ms": 77
     },
     {
       "level": 2,
@@ -462,15 +462,7 @@
       "status": "unsolvable",
       "states": 156,
       "expanded": 156,
-      "ms": 4
-    },
-    {
-      "level": 5,
-      "option": "disablePistons",
-      "status": "unsolvable",
-      "states": 42650,
-      "expanded": 42650,
-      "ms": 830
+      "ms": 3
     },
     {
       "level": 7,
@@ -478,7 +470,7 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 66
+      "ms": 76
     },
     {
       "level": 7,
@@ -486,7 +478,16 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 69
+      "ms": 53
+    },
+    {
+      "level": 5,
+      "option": "disablePistons",
+      "status": "solved",
+      "method": "replayedWitness",
+      "commands": "XRUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
+      "actions": 42,
+      "note": "Retirer le mur (5,4) autorise le reflet initial de la caisse. Ce parcours termine sans poussée ni écrasement par presse."
     },
     {
       "level": 1,
@@ -498,7 +499,7 @@
       "status": "unsolvable",
       "states": 8076,
       "expanded": 8076,
-      "ms": 138
+      "ms": 287
     },
     {
       "level": 1,
@@ -522,7 +523,7 @@
       "status": "unsolvable",
       "states": 2840,
       "expanded": 2840,
-      "ms": 44
+      "ms": 47
     },
     {
       "level": 1,
@@ -534,10 +535,10 @@
       "status": "unsolvable",
       "states": 5736,
       "expanded": 5736,
-      "ms": 88
+      "ms": 99
     }
   ],
-  "htmlSha256": "51a3ce06f8718acc88440ac8f89bab0c8a0513a1eedb088c54f0bee4a678d5b2",
+  "htmlSha256": "f03d0e228a904a22bd5ddde3e869adfecf4374d9cf3f250009999ff3c772c0ad",
   "limitations": [
     "Adaptations are explicit, not certified cell-for-cell copies of the original game.",
     "Witnesses prove solvability, not optimality or autonomous SRA success.",
