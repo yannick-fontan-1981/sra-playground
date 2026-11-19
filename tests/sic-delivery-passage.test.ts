@@ -4,6 +4,20 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import type { NativePoint, NativeProgramRegistry } from '../src/logos-engine/v6-native-types.ts';
 import { measureDeliveryPassage } from '../src/sic/delivery-passage.ts';
 import { createSicVerifyOrientedDelivery } from '../src/sic/oriented-delivery.ts';
+import { measureSectorNetwork } from '../src/sic/sector-delivery.ts';
+
+test('local receivers coexist with a relay to a separate sector that has a carrier', () => {
+  const targets: NativePoint[] = [[1, 1], [5, 1]];
+  const actor: NativePoint = [1, 2];
+  const rows = Array.from({ length: 8 }, () => Array.from({ length: 14 }, (_, x) => x === 7 ? 0 : 1));
+  const geometry = { pitch: 2, phase: [0, 0] as const, background: 1, core: 9, targets };
+  const network = measureSectorNetwork(rows, geometry, actor, [[2, 1]], [[5, 2]]);
+  assert.deepEqual(network?.localTargets, [[1, 1]]);
+  assert.deepEqual(network?.receiving.map(sector => sector.targets), [[[5, 1]]]);
+  assert.ok(network?.receiving[0]?.ports.some(port => port.cell[0] === 3 && port.face[0] === 1));
+  assert.ok(!network?.sending.includes('3,1'));
+  assert.equal(measureSectorNetwork(rows, geometry, actor, [[2, 1]], []), null);
+});
 
 test('delivery passage uses the visible opening and separates the two work areas', () => {
   const targets: NativePoint[] = [[1, 2], [1, 3], [1, 4]];
