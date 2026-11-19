@@ -2686,3 +2686,13 @@ Quand la recherche sur les rails visibles atteint sa borne, SIC suit vers l’in
 Le rejeu gagne en **47 commandes SIC seul** et **99,97 s** avec un worker. Les **662 commandes et retours** des niveaux 1 à 9 ont les mêmes empreintes. La reprise depuis la sauvegarde confirme les 47 retours et reproduit la trajectoire `1f375ce271e1a6727a8640a0ec405b135bcc338544bc06e84793dbaf24688da2` jusqu’à `WIN`.
 
 Le cumul des preuves chronologiques atteint **636 niveaux sur 636** sur les **100 jeux** de la campagne. Les rejeux se sont arrêtés à la victoire du niveau demandé.
+
+## Jalon sic-v8-636-levels
+
+Le 19 novembre 2026, une campagne intégrale a reproduit **636 victoires sur 636** et **100 jeux terminés sur 100** avec SIC seul sur le commit `d70cef9e4563ba7993b1e65e0b87c5e26497db9c`, publié en version 160 du Playground. Le tag annoté fixe cette version comme référence de qualification. [Tag GitHub](https://github.com/yannick-fontan-1981/sra-playground/tree/sic-v8-636-levels)
+
+Le banc `scripts/check-sic-chronological.mjs` charge chaque jeu officiel au niveau 1, conserve les acquis entre les niveaux et s’arrête sur le retour officiel `WIN`. La campagne vérifie l’autorité SIC des **16 031 commandes**. Elle comprend les **13 niveaux 8**, les **six niveaux 9** et le niveau 10 de LF52.
+
+La campagne prend **54 min 54 s** avec quatre workers en priorité basse, dont une période de saturation du CPU par une autre suite de tests. La somme des durées mesurées par niveau est de **3 h 23 min 20 s**. Le budget par niveau est de 600 commandes et de 514,29 s de temps agent actif.
+
+La comparaison des commandes et des images de retour retrouve **635 trajectoires identiques sur 636**. SELE niveau 1 demeure gagnant avec 69 commandes, contre 36 dans la référence historique. Le premier écart apparaît à la commande 12. Un rejeu isolé au budget du profil huit workers reproduit cet écart. Les niveaux 2 à 6 de SELE sont identiques à la référence.

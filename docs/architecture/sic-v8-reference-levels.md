@@ -8,6 +8,8 @@ Premier relevé historique sur les 100 jeux. **80** ont une référence positive
 
 Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **636 niveaux sur 636 (100,0 %)** sur les 100 jeux de la campagne. SIC seul a terminé **100 jeux**. Les **13 niveaux 8** sont validés et **6 niveaux 9 sur 6** sont qualifiés. Les niveaux de la campagne sont tous qualifiés. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
 
+Le jalon `sic-v8-636-levels` fixe la première campagne où les 636 victoires ont été reproduites sur un seul commit. [Protocole et résultats du jalon](sic-v8-validation.md#jalon-sic-v8-636-levels)
+
 | Jeu | Total | Natif | V5 | V6 | V7 | Maximum attesté | Prochain jalon | SIC seul |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | AMZE | 6 | — | — | — | — | — | — | 6 · WIN |
