@@ -32,7 +32,7 @@ type State = { epoch: number; model: ReductionModel; controls: Record<string, Mo
   segment?: Segment; reveal?: { direction: ReductionPoint; testedLandings: string[] } };
 type Choice = { stage: 'probe' | 'move' | 'select' | 'jump'; command: NativeCommand; effect: Packed | null;
   addressed: ReductionPoint | null; source: ReductionPoint | null; landing: ReductionPoint | null; intermediate?: ReductionPoint;
-  carried?: boolean; dock?: boolean; peerTrial?: boolean };
+  carried?: boolean; dock?: boolean; peerTrial?: boolean; reframes?: true };
 type Proposal = NativeProposal & { local: State; choice: Choice; current: Packed; needId: string; directionalSeries?: Choice[] };
 const same = (first: unknown, second: unknown) => JSON.stringify(first) === JSON.stringify(second);
 const packed = (scene: ReductionScene) => packReductionState(reductionState(scene));
@@ -145,6 +145,17 @@ function boxFor(model: ReductionModel, [column, row]: ReductionPoint, offset: Re
   return [x, y, x + model.unit - 1, y + model.unit - 1];
 }
 
+function jumpViewDirection(model: ReductionModel, offset: ReductionPoint, source: ReductionPoint, landing: ReductionPoint): ReductionPoint | null {
+  for (const cell of [source, landing]) {
+    const [left, top, right, bottom] = boxFor(model, cell, offset);
+    if (left < 0) return [-1, 0];
+    if (right >= model.width) return [1, 0];
+    if (top < 0) return [0, -1];
+    if (bottom >= model.height) return [0, 1];
+  }
+  return null;
+}
+
 function visibleSelection(model: ReductionModel, cell: ReductionPoint, first: NativeRows, second: NativeRows, offset = origin): boolean {
   const [left, top, right, bottom] = boxFor(model, cell, offset);
   for (let y = Math.max(0, top - 1); y <= Math.min(first.length - 1, bottom + 1); y++) {
@@ -225,6 +236,8 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
         controls: view && reuse ? reuse : {}, tested: [],
         ...(view ? { view } : {}), ...(revealDirection ? { reveal: { direction: revealDirection, testedLandings: [] } } : {}),
         ...(visible.auxiliaries?.size && inherited?.followVacated ? { followVacated: true } : {}),
+        ...(visible.auxiliaries?.size && inherited?.peerJumpEvidence && inherited.model.auxiliary === model.auxiliary
+          ? { peerJumpEvidence: inherited.peerJumpEvidence } : {}),
         selected: null, selectedSupports: null, stopped: false, refs: [] };
       const scanned = view ? unpackCarrierView(view) : visible;
       const peerJump = !!local.peerJumpEvidence || !!model.trackClippedCarrierRows && !local.peerJumpRefuted;
@@ -239,7 +252,9 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       const extended = mobilePlot || !!scene.auxiliaries?.size;
       const bounds = extended ? { maximumStates: 65_536, maximumFrontier: 131_072 }
         : { maximumStates: 8192, maximumFrontier: 16384 };
-      const retainedSegment = extended && local.segment?.path.length ? local.segment : null;
+      const pending = extended ? local.segment?.path[0] : undefined;
+      const retainedSegment = pending && [...reductionSuccessors(initial, scene)].some(([, next]) => same(next, pending))
+        ? local.segment : null;
       const joinPair = local.reveal && view && scene.pegs.size === 2 ? local.reveal : null;
       const focused = joinPair && !retainedSegment ? carrierScopeForPair(scene, joinPair.direction) : scene;
       const scoped = focused === scene ? null
@@ -259,7 +274,19 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
       }
       const segment: Segment | null = retainedSegment ?? (result?.path ? { purpose: 'solve', path: result.path }
         : partial?.path ? { purpose: 'reduce', path: partial.path } : reveal?.path ? { purpose: 'reveal', path: reveal.path } : null);
-      const operation = segment?.path[0];
+      if (!segment) return null;
+      let operation = segment.path[0];
+      let reframes = false;
+      if (view && operation?.[0] === 'jump') {
+        const vector = jumpViewDirection(model, view.offset, operation[1], operation[2]);
+        if (vector && Object.values(local.controls).some(control => same(control.vector, vector))) {
+          const projected = packReductionState(reductionMoved(initial, vector, scene.edges, scene.plots, scene.followVacated));
+          if (!same(projected, current)) {
+            operation = ['move', vector];
+            reframes = true;
+          }
+        }
+      }
       if (!operation) return null;
       let choice: Choice;
       if (operation[0] === 'move') {
@@ -271,6 +298,7 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
         const effect = known ? packReductionState(reductionMoved(initial, vector, scene.edges, scene.plots, scene.followVacated)) : null;
         choice = { stage: known ? 'move' : 'probe', command: { action_ref: input, data: {} },
           effect, addressed: null, source: null, landing: null,
+          ...(reframes ? { reframes: true } : {}),
           ...(effect?.[2] && !same(effect[2], current[2]) ? { carried: true } : {}) };
       } else {
         const [, source, landing] = operation, selected = same(local.selected, source);
@@ -298,7 +326,8 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
         : choice.dock ? 'verify_dock_transfer' : choice.intermediate ? 'verify_preserved_intermediate'
         : choice.stage === 'select' ? 'select_piece_for_reduction' : 'verify_reduction_landing';
       const ref = observation.observation_ref, parent = 'G_official_completion', label = observedCarrierStrategies[strategy];
-      const situation = choice.peerTrial ? 'Test whether two matching auxiliaries can jump over each other and both stay in play'
+      const situation = choice.reframes ? 'Bring both ends of the pending jump into view'
+        : choice.peerTrial ? 'Test whether two matching auxiliaries can jump over each other and both stay in play'
         : segment.purpose === 'reveal' && scene.auxiliaries?.size
         ? 'Keep the auxiliary within reach and check what the next landing reveals'
         : segment.purpose === 'reveal' ? 'Move a loaded carrier toward the edge of the mapped area and check what the new view reveals'
@@ -405,9 +434,25 @@ export function createSicObservedCarrierReduction(): NativeFamily<Proposal> {
           ? choice.addressed : null;
         const direction = choice.stage === 'probe' && next ? fitCarrierMotion(scene, packed(unpackCarrierView(next.view))) : null;
         const { segment, ...retained } = local;
-        const remaining = segment && !learnedVacancy && next?.matches && !next.newPegs && !next.enteringCarriers && !next.leavingCarriers
-          && !(segment.purpose === 'reveal' && next.cameraChanged)
-          ? choice.stage === 'select' ? segment.path : segment.path.slice(1) : [];
+        const newPlot = next?.matches && next.cameraChanged && !local.model.plot ? readPlot(after, next.nextModel) : undefined;
+        let learnedPlot = false;
+        if (next && newPlot) {
+          const measured = acquireCarrierView(second, after, { ...next.nextModel, plot: newPlot }, next.view, null);
+          if (measured && (measured.view.memory.plots?.length || measured.view.memory.carriedPlots?.length)) {
+            next = { ...next, nextModel: measured.nextModel, view: measured.view };
+            learnedPlot = true;
+          }
+        }
+        let remaining: ReductionOperation[] = [];
+        if (segment && !learnedPlot && !learnedVacancy && next?.matches && !next.newPegs && !next.enteringCarriers && !next.leavingCarriers) {
+          if (choice.reframes) {
+            // The viewport motion did not execute the jump. Downstream carrier moves need a fresh route.
+            const firstMove = segment.path.findIndex(step => step[0] === 'move');
+            if (next.cameraChanged) remaining = firstMove < 0 ? segment.path : segment.path.slice(0, firstMove);
+          } else if (segment.purpose !== 'reveal' || !next.cameraChanged) {
+            remaining = choice.stage === 'select' ? segment.path : segment.path.slice(1);
+          }
+        }
         const reveal = local.reveal;
         const testedTargets = reveal && segment?.purpose === 'reveal' && !remaining.length && next?.matches && !next.cameraChanged
           ? boundaryLandings(local.model, local.view, scene, reveal) : null;
