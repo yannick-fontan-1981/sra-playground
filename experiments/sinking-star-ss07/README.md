@@ -1,6 +1,6 @@
 # SS07 — La Distance Dérobée
 
-Version **0.1.2 · HTML v3**. Laboratoire autonome du septième jeu de la série Sinking Star, destiné au lot **Custom 4** de SRA Playground.
+Version **0.1.2 · HTML v3**. Laboratoire autonome de **La Distance Dérobée**, septième jeu du lot **Custom 4** de SRA Playground.
 
 Le **Marchand orange pousse une pièce**. Le **Voleur vert tire la pièce immédiatement derrière lui lorsqu’il marche vers une case libre**. Changer de côté, laisser un objet sur un bouton et quitter son axe par reflet sont au cœur des huit salles. Les deux personnages doivent occuper les **deux destinations en même temps**.
 
@@ -67,4 +67,4 @@ Le tutoriel fait l’objet de contrôles distincts : supprimer les poussées du 
 - `reference/levelN-design.json`, `tests/witnesses.json` et `scripts/solver.mjs` : conception et validation, exclues du jeu distribué.
 - [Spécification](docs/specification.md), [conception des niveaux](docs/level-design.md), [intégration](docs/integration.md), [feuille de route](docs/roadmap.md).
 
-La version HTML v3 est validée. Le code du jeu correspond au commit `6e83c45e90e42f5483ca0b3d488778b7e940452e` et la PR nº 103 livre ce laboratoire sur `main`. Le raccordement au catalogue et la publication SRA Playground constituent la prochaine étape. Utiliser le [prompt Codex d’intégration](docs/codex-integration-prompt.md), avec le contrat détaillé dans [integration.md](docs/integration.md).
+Le moteur et les huit salles reprennent le jeu du commit `6e83c45e90e42f5483ca0b3d488778b7e940452e`, intégré par la PR nº 103. Le [Playground SS07](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS07#playground) utilise ce moteur TypeScript. Les vérifications du portage figurent dans [integration.md](docs/integration.md).

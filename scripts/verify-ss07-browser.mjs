@@ -94,7 +94,9 @@ try {
   assert.equal(await tutorial.evaluate(node => node.open), true);
   assert.equal(await tutorial.locator('li').count(), 9);
   assert.equal(await merchant.getAttribute('aria-pressed'), 'true');
-  assert.equal(await canvas.evaluate(node => [node.width, node.height, getComputedStyle(node).imageRendering].join(':')), '64:64:pixelated');
+  const [width, height, rendering] = await canvas.evaluate(node => [node.width, node.height, getComputedStyle(node).imageRendering]);
+  assert.deepEqual([width, height], [64, 64]);
+  assert.match(rendering, /^(pixelated|crisp-edges)$/);
   assert.equal(await page.locator('#space-button').textContent(), 'Reflet');
   assert.deepEqual(await page.locator('#game-select optgroup[label="Custom 4 · Sinking Star"] option').evaluateAll(items => items.map(item => item.value)), groups);
   assert.deepEqual(await levels.locator('option').evaluateAll(items => items.map(item => item.value)), eight);

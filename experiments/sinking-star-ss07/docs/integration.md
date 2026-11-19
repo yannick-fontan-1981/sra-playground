@@ -1,6 +1,6 @@
-# Intégration future dans SRA Playground
+# Intégration de SS07 dans SRA Playground
 
-SS07 **La Distance Dérobée**, version **0.1.2 / HTML v3**, est préparé comme septième jeu de **Custom 4 · Sinking Star**. La version HTML v3 est validée, avec le jeu au commit `6e83c45e90e42f5483ca0b3d488778b7e940452e`. La PR nº 103 livre le laboratoire sur `main` ; le raccordement de production suit le [prompt Codex](codex-integration-prompt.md).
+SS07 **La Distance Dérobée** est le septième jeu de **Custom 4 · Sinking Star**. Le portage utilise le moteur et les huit salles de la version **0.1.2 / HTML v3**, validée au commit `6e83c45e90e42f5483ca0b3d488778b7e940452e` et intégrée par la PR nº 103. L’adaptateur natif, le tutoriel partagé avec le laboratoire et la galerie utilisent les mêmes observations publiques.
 
 ## Adaptateur natif
 
@@ -38,10 +38,12 @@ Le statut logique final est connu avant la fin de l’animation. Les panneaux te
 
 ## Vérification du raccordement
 
-Les huit témoins totalisent **593 actions / 1 745 images**. Les rejouer à travers le routeur natif de production et comparer les observations, images, durées, sélections et transitions avec celles du laboratoire. Les 73 tests de règles et les 15 contrôles de l’HTML accompagnent ces parcours.
+Les huit témoins totalisent **593 actions, dont 39 sélections, et 1 745 images**. `tests/custom4-native.test.ts` les rejoue via l’adaptateur et le routeur de production et compare les états, pixels et durées à la session de référence. Les tests vérifient notamment l’échange à distance égale, la priorité du plus proche, le passage de la sentinelle sur le bouton de la porte verte en L6, l’ajout des trois appuis permanents en L8 et Undo pour les défaites L6, L7 et L8. Les 73 tests de règles, la preuve de nécessité de la porte de L6 et les 15 contrôles de l’HTML autonome complètent ce rejeu.
 
 Vérifier particulièrement l’îlot en ligne de L6 et la nécessité de sa porte verte, la traction dans les quatre directions, l’absence de traction après reflet ou presse, l’échec mortel et Undo de L7, les trois plateformes de L8 et leur conversion en trois appuis, la progression hors ordre et les neuf acquisitions de L1. Couvrir aussi le clavier, le clic avec coordonnées CSS converties en pixels, les entrées pendant les animations et l’annulation d’une animation en cours.
 
-Les tests du laboratoire ne remplacent pas l’essai du site intégré dans un navigateur réel. Exécuter le typage, le build, les tests pertinents et les non-régressions de SS01–SS06. Les témoins, solveurs, références d’auteur et plans internes restent hors du bundle agent : ils servent à vérifier le jeu, pas à fournir une politique de résolution au SRA.
+`scripts/verify-ss07-browser.mjs` exerce les commandes dans Chromium, le tutoriel, les interruptions en cours d’animation, les huit vignettes issues de l’atlas et leurs liens. Après le build, démarrer un aperçu Vite sur le port 4174 puis exécuter le script avec Playwright installé ou avec `PLAYWRIGHT_MODULE` pointant vers une installation compatible.
 
-La livraison du laboratoire sur `main` précède son raccordement à l’application. L’intégration de production doit être testée, commitée, poussée et intégrée sur `main` avant publication du Site. Relever ensuite la version publiée et son SHA source, puis vérifier la correspondance GitHub/Site. La présence du laboratoire dans le dépôt ne constitue pas une publication jouable dans le catalogue.
+Les témoins et solveurs restent dans les outils de validation. Les huit parcours vérifient la solvabilité du jeu. Le contrôle agent vérifie une action publique et son interruption.
+
+Le numéro de version Site et son SHA source sont relevés après publication et rapprochés du commit sur `main` suivant la [politique de synchronisation](../../../docs/migration/git-site-sync-policy.md).
