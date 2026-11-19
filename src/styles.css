@@ -528,6 +528,13 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .native-game-tutorial-content li{position:relative;padding-left:16px;margin-block:5px}
 .native-game-tutorial-content li::before{content:'○';position:absolute;left:0}
 .native-game-tutorial-content li.done::before{content:'✓';color:#83cdae}
+#ss06-role-controls{flex-direction:row;flex-wrap:wrap;margin-top:10px}
+#ss06-role-controls button[aria-pressed="true"]{outline:2px solid #ef4141;outline-offset:1px}
+#ss06-role-controls button[data-ss06-hero="merchant"][aria-pressed="true"]{outline-color:#f59e29}
+.ss06-platform-legend{display:flex;flex-wrap:wrap;gap:12px}
+.ss06-platform-legend span{display:inline-flex;align-items:center;gap:5px}
+.ss06-platform-legend i{width:15px;height:15px;background:linear-gradient(#fff,#fff) center/5px 5px no-repeat,#f5a9c8}
+.ss06-platform-legend i.is-retracted{background:linear-gradient(#fff,#fff) center/5px 5px no-repeat,linear-gradient(#2765d3,#2765d3) center/5px 100% no-repeat,linear-gradient(#2765d3,#2765d3) center/100% 5px no-repeat,#f5a9c8}
 .canvas-stage canvas:focus-visible{outline:2px solid var(--yellow);outline-offset:7px}
 .minimal-play-area #fullscreen-button{top:12px;right:12px;background:#285e9e;border-color:#8ab9f3;color:#f5f9ff;border-radius:3px}
 .minimal-play-area #fullscreen-button:hover{background:#3779bf;border-color:#b5d6ff}

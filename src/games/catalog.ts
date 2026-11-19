@@ -1150,6 +1150,9 @@ records.push({code:'SS04',id:'ss04-c4000001',name:'L’Axe violet',group:'custom
 records.push({code:'SS05',id:'ss05-c4000001',name:'Le Chant Magenta',group:'custom_4',family:'sinking_star_song',levels:8,
   description:'Guide the magenta Bard, move nearby objects with the song, and reflect crates and monsters through mirrors.',
   sourcePath:'experiments/sinking-star-ss05/src/levels.ts',availability:'playable'});
+records.push({code:'SS06',id:'ss06-c4000001',name:'Les Ponts Réfléchis',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Combine the Merchant’s single push and the Warrior’s chain push, then guide the Warrior across a bridge controlled by mirrors.',
+  sourcePath:'experiments/sinking-star-ss06/src/levels.ts',availability:'playable'});
 
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,

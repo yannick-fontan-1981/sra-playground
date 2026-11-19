@@ -27,10 +27,14 @@ import { LEVEL_INFO as SS04_LEVEL_INFO } from '../experiments/sinking-star-ss04/
 import { lessonPrompt as wizardPrompt, observeLesson as observeWizardLesson, type WizardLesson } from '../experiments/sinking-star-ss04/src/tutorial.ts';
 import { LEVEL_INFO as SS05_LEVEL_INFO } from '../experiments/sinking-star-ss05/src/level-info.ts';
 import { lessonPrompt as bardPrompt, observeLesson as observeBardLesson, type BardLesson } from '../experiments/sinking-star-ss05/src/tutorial.ts';
+import { LEVEL_INFO as SS06_LEVEL_INFO } from '../experiments/sinking-star-ss06/src/level-info.ts';
+import { actionFeedback as duoFeedback, heroSelection, lessonIds as duoLessonIds, lessonPrompt as duoPrompt, observeLesson as observeDuoLesson, visibleHeroes, type DuoLesson } from '../experiments/sinking-star-ss06/src/tutorial.ts';
+import type { HeroKind } from '../experiments/sinking-star-ss06/src/core.ts';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
-const usesNativeManualControls = (code: string): boolean => code === 'SS05' || isDirectionalNativeGame(code);
+const usesNativeManualControls = (code: string): boolean => code === 'SS05' || code === 'SS06' || isDirectionalNativeGame(code);
+const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || code === 'SS06';
 const fallbackPalette = [
   '#F3F2EB', '#C9CDC8', '#37404B', '#66707B', '#1B2028', '#11161C',
   '#614439', '#E7B9A3', '#F06B65', '#679DEB', '#63D5D6', '#F1CE62',
@@ -185,6 +189,10 @@ app.innerHTML = `
                   <button type="button" id="reset-button" class="utility-button" aria-label="Reset level" title="Reset level (R)">${icon('reset')}<span>Reset</span></button>
                 </div>
               </div>
+              <div id="ss06-role-controls" class="utility-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+                <button type="button" class="utility-button" data-ss06-hero="merchant" aria-pressed="false">Marchand · 1</button>
+                <button type="button" class="utility-button" data-ss06-hero="warrior" aria-pressed="false">Guerrier · 2</button>
+              </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
               <p id="ss02-level-info" class="native-game-level-info" lang="fr" hidden></p>
               <details id="ss02-tutorial" class="native-game-tutorial" lang="fr" open hidden>
@@ -301,6 +309,55 @@ app.innerHTML = `
                   <p>Les monstres attaquent les quatre cases voisines dans les directions cardinales. Deux monstres côte à côte s’éliminent mutuellement, chacun portant encore son attaque pendant cette action.</p>
                 </div>
               </details>
+              <div id="ss06-room-help" lang="fr" hidden>
+                <p id="ss06-objective" class="native-game-level-info"></p>
+                <p class="native-game-level-info"><span id="ss06-source-label"></span> <a id="ss06-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+                <details id="ss06-tutorial" class="native-game-tutorial" open hidden>
+                  <summary>Niveau 1 · L’atelier des deux rives</summary>
+                  <div class="native-game-tutorial-content">
+                    <p id="ss06-lesson-next" aria-live="polite"></p>
+                    <ul>
+                      <li data-ss06-lesson="move">Déplacer le personnage au point blanc.</li>
+                      <li data-ss06-lesson="select">Sélectionner l’autre personnage.</li>
+                      <li data-ss06-lesson="merchant-push">Pousser un objet avec le Marchand.</li>
+                      <li data-ss06-lesson="warrior-push">Pousser une file avec le Guerrier.</li>
+                      <li data-ss06-lesson="platform">Créer un appui dans l’eau.</li>
+                      <li data-ss06-lesson="mirror">Déplacer un occupant par reflet.</li>
+                      <li data-ss06-lesson="gate">Modifier une porte avec un bouton.</li>
+                      <li data-ss06-lesson="goals">Occuper les deux cibles simultanément.</li>
+                    </ul>
+                    <p id="ss06-lesson-progress"></p>
+                  </div>
+                </details>
+                <details class="native-game-tutorial">
+                  <summary>Poussées et reflets</summary>
+                  <div class="native-game-tutorial-content">
+                    <p id="ss06-cooperation-help">Le Marchand pousse un objet. Les deux héros peuvent activer les miroirs et servir de poids. Le premier arrivé peut encore aider son partenaire.</p>
+                    <p>Le Guerrier pousse toute une file si son extrémité est libre. Une caisse envoyée dans l’eau devient un appui marron marqué d’un X cyan.</p>
+                    <p>Espace, X ou le bouton Reflet active tous les miroirs. Le + gris clair montre l’arrivée d’un héros et le contour carré gris clair celle d’une caisse. Un mur, un autre miroir ou une arrivée occupée peut bloquer le reflet.</p>
+                  </div>
+                </details>
+                <details id="ss06-piston-help" class="native-game-tutorial" open hidden>
+                  <summary>La porte qui pousse</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Les boutons d’un même circuit doivent être occupés ensemble. Une porte qui se ferme pousse toute la file dans le sens du repère. Si la file est bloquée, l’occupant sur la porte est écrasé. Z annule la cascade.</p>
+                  </div>
+                </details>
+                <details id="ss06-platform-help" class="native-game-tutorial" open hidden>
+                  <summary>Les portes-plateformes dans l’eau</summary>
+                  <div class="native-game-tutorial-content">
+                    <p class="ss06-platform-legend"><span><i aria-hidden="true"></i> Déployée</span><span><i class="is-retracted" aria-hidden="true"></i> Retirée</span></p>
+                    <p>Le repère central indique le circuit de la plateforme.</p>
+                    <p>Quitte les plateformes qui vont disparaître avant de faire basculer leur bouton. Les reflets permettent de commander les boutons à distance. Les appuis marron marqués d’un X cyan restent en place.</p>
+                  </div>
+                </details>
+                <details class="native-game-tutorial">
+                  <summary>Monstres · distance et rencontre</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Les monstres attaquent les quatre cases voisines après une action réussie. Deux monstres côte à côte s’éliminent mutuellement, chacun portant encore son attaque. Une diagonale ne déclenche pas de combat.</p>
+                  </div>
+                </details>
+              </div>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -548,6 +605,8 @@ const ss02Lessons = new Set<TutorialLesson>();
 const ss03Tutorial = new PullTutorial();
 const ss04Lessons = new Set<WizardLesson>();
 const ss05Lessons = new Set<BardLesson>();
+const ss06Lessons = new Set<DuoLesson>();
+let ss06Solo = false;
 let loading = false;
 let failed = false;
 let selectionGeneration = 0;
@@ -603,10 +662,14 @@ function recordPublicReturn(history: readonly DirectionalReturn[], sessionId: st
     return history;
   }
 }
+function canDispatchAgentAction(): boolean {
+  return ready() && mode === 'agent'
+    && (!usesNativeManualControls(selectedGame.code) || observation?.state === 'NOT_FINISHED');
+}
+
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
-  canDispatch: () => ready() && mode === 'agent'
-    && (!usesNativeManualControls(selectedGame.code) || observation?.state === 'NOT_FINISHED'),
+  canDispatch: canDispatchAgentAction,
   resetLevel: async () => {
     const generation = selectionGeneration;
     busy = true;
@@ -626,7 +689,7 @@ const agent = new BrowserV6Agent({
     return { ...defaultRecoveryPack, maxDepth, maxNodes, solver };
   },
   dispatch: async action => {
-    if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(action.id)) {
+    if (!canDispatchAgentAction() || !observation?.availableActionIds.includes(action.id)) {
       throw new Error('The game changed before the action could be sent.');
     }
     const generation = selectionGeneration;
@@ -890,6 +953,43 @@ function updateNativeRoomHelp(game: 'ss03' | 'ss04' | 'ss05', current: GameObser
   if (prompt.textContent !== text) prompt.textContent = text;
 }
 
+function updateSs06RoomHelp(current: GameObservation | null, canPlay: boolean): void {
+  const info = current ? SS06_LEVEL_INFO[current.level - 1] : undefined;
+  element('#ss06-room-help').hidden = !info;
+  element('#ss06-role-controls').hidden = !info || ss06Solo;
+  if (!info || !current) return;
+  element('#ss06-objective').textContent = ss06Solo
+    ? 'Amène le Guerrier rouge sur l’unique contour jaune.'
+    : 'Amène le Marchand et le Guerrier sur les deux contours jaunes en même temps.';
+  element('#ss06-cooperation-help').hidden = ss06Solo;
+  const selected = visibleHeroes(current.frame).find(hero => hero.selected)?.kind;
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-ss06-hero]')) {
+    button.disabled = !canPlay || ss06Solo || !current.availableActionIds.includes(6);
+    button.setAttribute('aria-pressed', String(button.dataset.ss06Hero === selected));
+  }
+  canvas.setAttribute('aria-label', 'Plateau SS06');
+  element('#keyboard-help').textContent = 'Flèches pour marcher ou pousser. Espace ou X pour les reflets. Z pour annuler. R pour recommencer.'
+    + (ss06Solo ? '' : ' Clique sur un héros ou utilise Tab, 1 pour le Marchand et 2 pour le Guerrier. Maj+Tab quitte la grille.');
+  element('#ss06-source-label').textContent = info.label;
+  const link = element<HTMLAnchorElement>('#ss06-source-link');
+  link.hidden = !info.url;
+  if (info.url) {
+    link.href = info.url;
+    link.textContent = `Voir l’énigme ${info.puzzle} de référence ↗`;
+  }
+  element('#ss06-piston-help').hidden = !info.piston;
+  element('#ss06-platform-help').hidden = !('platform' in info && info.platform);
+  const tutorial = element('#ss06-tutorial');
+  tutorial.hidden = current.level !== 1;
+  for (const item of tutorial.querySelectorAll<HTMLElement>('[data-ss06-lesson]')) {
+    item.classList.toggle('done', ss06Lessons.has(item.dataset.ss06Lesson as DuoLesson));
+  }
+  element('#ss06-lesson-progress').textContent = `${ss06Lessons.size} / ${duoLessonIds.length} découvertes`;
+  const prompt = element('#ss06-lesson-next');
+  const text = duoPrompt(ss06Lessons);
+  if (prompt.textContent !== text) prompt.textContent = text;
+}
+
 function hasNextLevel(current: GameObservation): boolean {
   return current.level < current.levelCount && !(usesNativeManualControls(current.gameCode) && current.state === 'WIN');
 }
@@ -922,7 +1022,9 @@ function updateInterface(): void {
   const nextLevel = Boolean(observation && hasNextLevel(observation));
   const victory = complete && !nextLevel;
   element('#win-overlay').hidden = !ready() || !complete || (mode === 'agent' && !victory);
-  element('#win-title').textContent = victory ? 'VICTORY' : 'Level complete';
+  element('#win-title').textContent = selectedGame.code === 'SS06'
+    ? ss06Solo ? 'Le Guerrier a atteint sa destination' : 'Les deux destinations sont occupées'
+    : victory ? 'VICTORY' : 'Level complete';
   element('#win-continue-label').textContent = nextLevel ? 'Next level' : 'Restart from level 1';
   element<HTMLButtonElement>('#win-continue').disabled = !ready() || Boolean(agentState?.busy);
   element('#runtime-overlay').hidden = !loading && !failed;
@@ -933,17 +1035,25 @@ function updateInterface(): void {
   canvas.setAttribute('aria-busy', String(busy || loading));
   canvas.tabIndex = enabled ? 0 : -1;
   if (selectedGame.code === 'SS02' && mode === 'manual') updateSs02Tutorial();
-  if (selectedGame.code === 'SS03' || selectedGame.code === 'SS04' || selectedGame.code === 'SS05') {
+  if (selectedGame.code === 'SS03' || selectedGame.code === 'SS04' || usesReflectionShortcut(selectedGame.code)) {
     element('#native-defeat').hidden = !ready() || !lost;
+    element('#native-defeat-title').textContent = selectedGame.code === 'SS06'
+      ? ss06Solo ? 'Le Guerrier a été perdu' : 'Un personnage a été perdu'
+      : 'GAME OVER';
     element<HTMLButtonElement>('#native-defeat-undo').disabled = !observation?.canUndo;
-    if (mode === 'manual') updateNativeRoomHelp(selectedGame.code === 'SS05' ? 'ss05' : selectedGame.code === 'SS04' ? 'ss04' : 'ss03', observation);
+    if (mode === 'manual' && selectedGame.code !== 'SS06') {
+      updateNativeRoomHelp(selectedGame.code === 'SS05' ? 'ss05' : selectedGame.code === 'SS04' ? 'ss04' : 'ss03', observation);
+    }
   }
+  if (selectedGame.code === 'SS06') updateSs06RoomHelp(observation, enabled && !complete && !lost);
   updateAgentInterface();
 }
 
 async function present(next: GameObservation, selectedGeneration: number, manualAction = false): Promise<void> {
   if (selectedGeneration !== selectionGeneration || next.gameCode !== selectedGame.code) return;
   const generation = ++presentationGeneration;
+  const previous = observation;
+  const soloBefore = ss06Solo;
   observation = next;
   loading = false;
   failed = false;
@@ -952,7 +1062,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   url.searchParams.set('level', String(next.level));
   if (url.href !== window.location.href) window.history.replaceState(null, '', url);
   const frames = next.frames.length ? next.frames : [next.frame];
-  interruptibleAnimation = manualAction && usesNativeManualControls(next.gameCode) && frames.length > 1;
+  interruptibleAnimation = (manualAction || next.gameCode === 'SS06') && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
   for (let i = 0; i < frames.length; i += 1) {
@@ -965,11 +1075,21 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   }
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);
+  if (next.gameCode === 'SS06' && next.state === 'NOT_FINISHED') {
+    // Read the living roster from the settled image. A lost hero must not turn a duo into a solo.
+    ss06Solo = visibleHeroes(next.frame).length === 1;
+  }
   interruptibleAnimation = false;
   busy = false;
   agent.refresh();
   updateInterface();
-  if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent =
+  if (next.gameCode === 'SS06') {
+    if (next.state === 'GAME_OVER') element('#game-feedback').textContent =
+      `${ss06Solo ? 'Le Guerrier' : 'Un personnage'} a été perdu. Annule ou recommence le niveau.`;
+    else if (previous && next.levelsCompleted > previous.levelsCompleted) element('#game-feedback').textContent =
+      soloBefore ? 'La destination est atteinte.' : 'Les deux destinations sont occupées.';
+    else if (next.state === 'NOT_FINISHED') element('#game-feedback').textContent = '';
+  } else if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent =
     hasNextLevel(next) ? `Level ${next.level} complete.` : 'VICTORY';
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
 }
@@ -1002,6 +1122,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
   if (before.gameCode === 'SS03' && control) ss03Tutorial.reset(control === 'undo');
   if (before.gameCode === 'SS04' && control && control !== 'undo') ss04Lessons.clear();
   if (before.gameCode === 'SS05' && control && control !== 'undo') ss05Lessons.clear();
+  if (before.gameCode === 'SS06' && control && control !== 'undo') ss06Lessons.clear();
   agent.invalidate('Manual play changed the observation. Start a fresh experiment when ready.');
   const generation = selectionGeneration;
   busy = true;
@@ -1013,6 +1134,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS03' && action !== undefined) ss03Tutorial.observe(before, next, action);
     if (next.gameCode === 'SS04' && action !== undefined) observeWizardLesson(ss04Lessons, before, next);
     if (next.gameCode === 'SS05' && action !== undefined) observeBardLesson(ss05Lessons, before, next, action);
+    if (next.gameCode === 'SS06' && action !== undefined) observeDuoLesson(ss06Lessons, before, next, action);
     const presenting = present(next, generation, action !== undefined);
     const presentation = presentationGeneration;
     await presenting;
@@ -1021,7 +1143,8 @@ async function run(operation: () => Promise<GameObservation>, options: {
       manualReturns = action === undefined ? [] : recordPublicReturn(manualReturns, `manual:${generation}`, ++manualSequence, action, before, next);
       updateSicPanel();
     }
-    if (announcement) element('#game-feedback').textContent = announcement;
+    if (next.gameCode === 'SS06' && action !== undefined) element('#game-feedback').textContent = duoFeedback(before, next, action);
+    else if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
   }
@@ -1034,6 +1157,11 @@ function perform(action: number, data?: { x: number; y: number }): void {
 function nextMerchant(): void {
   if (selectedGame.code !== 'SS01' || !observation?.availableActionIds.includes(6) || observation.state === 'WIN') return;
   void run(() => runtime.nextMerchant(), { announcement: 'Merchant selected.' });
+}
+function selectSs06Hero(kind?: HeroKind): void {
+  if (selectedGame.code !== 'SS06' || !ready() || !observation || ss06Solo) return;
+  const target = heroSelection(observation.frame, kind);
+  if (target) perform(6, target);
 }
 function undo(): void {
   if (!observation?.canUndo) return;
@@ -1076,6 +1204,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   const game = getGameByCode(code) ?? defaultGame!;
   const directional = isDirectionalNativeGame(game.code);
   const bard = game.code === 'SS05';
+  const reflection = usesReflectionShortcut(game.code);
   const enteringNativeManualGame = usesNativeManualControls(game.code) && selectedGame.code !== game.code;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
@@ -1087,6 +1216,9 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   ss03Tutorial.reset();
   ss04Lessons.clear();
   ss05Lessons.clear();
+  ss06Lessons.clear();
+  ss06Solo = false;
+  if (game.code === 'SS06') element<HTMLDetailsElement>('#ss06-tutorial').open = true;
   if (game.code === 'SS03' || game.code === 'SS04' || bard) {
     const help = game.code.toLowerCase();
     element<HTMLDetailsElement>(`#${help}-tutorial`).open = true;
@@ -1094,12 +1226,13 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   }
   for (const id of ['ss03-tutorial', 'ss03-level-info', 'ss03-piston-help', 'ss04-tutorial', 'ss04-level-info',
     'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
-    'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'native-defeat']) element(`#${id}`).hidden = true;
+    'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'ss06-room-help', 'ss06-role-controls',
+    'native-defeat']) element(`#${id}`).hidden = true;
   const primaryAction = element<HTMLButtonElement>('#space-button');
   primaryAction.hidden = directional;
-  primaryAction.title = bard ? 'Reflet (Espace ou X)' : 'Space';
-  primaryAction.setAttribute('aria-label', bard ? primaryAction.title : 'Primary action (Space)');
-  element('#space-button span').textContent = bard ? 'Reflet' : 'Space';
+  primaryAction.title = reflection ? 'Reflet (Espace ou X)' : 'Space';
+  primaryAction.setAttribute('aria-label', reflection ? primaryAction.title : 'Primary action (Space)');
+  element('#space-button span').textContent = reflection ? 'Reflet' : 'Space';
   selectedGame = game;
   manualReturns = [];
   manualSequence = 0;
@@ -1185,6 +1318,7 @@ element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {
 });
 canvas.addEventListener('click', (event: MouseEvent) => {
   if (!ready() || mode !== 'manual') return;
+  if (selectedGame.code === 'SS06' && ss06Solo) { focusCanvas(); return; }
   const rect = canvas.getBoundingClientRect();
   const x = Math.max(0, Math.min(canvas.width - 1, Math.floor(((event.clientX - rect.left) / rect.width) * canvas.width)));
   const y = Math.max(0, Math.min(canvas.height - 1, Math.floor(((event.clientY - rect.top) / rect.height) * canvas.height)));
@@ -1192,7 +1326,7 @@ canvas.addEventListener('click', (event: MouseEvent) => {
   focusCanvas();
 });
 canvas.addEventListener('keydown', (event: KeyboardEvent) => {
-  const reflectionShortcut = selectedGame.code === 'SS05' && event.key.toLowerCase() === 'x';
+  const reflectionShortcut = usesReflectionShortcut(selectedGame.code) && event.key.toLowerCase() === 'x';
   if (event.altKey || (event.shiftKey && !reflectionShortcut)) return;
   if (!event.ctrlKey && !event.metaKey && event.key.toLowerCase() === 'c' && selectedGame.code === 'SS01') {
     event.preventDefault(); nextMerchant(); return;
@@ -1203,6 +1337,11 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
     return;
   }
   if (event.ctrlKey || event.metaKey) return;
+  if (selectedGame.code === 'SS06' && !ss06Solo && ['Tab', '1', '2'].includes(event.key)) {
+    event.preventDefault();
+    selectSs06Hero(event.key === '1' ? 'merchant' : event.key === '2' ? 'warrior' : undefined);
+    return;
+  }
   if (event.key.toLowerCase() === 'r') {
     event.preventDefault();
     reset();
@@ -1215,6 +1354,9 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
   perform(action);
 });
 element('#merchant-button').addEventListener('click', () => { nextMerchant(); focusCanvas(); });
+for (const button of document.querySelectorAll<HTMLButtonElement>('[data-ss06-hero]')) {
+  button.addEventListener('click', () => { selectSs06Hero(button.dataset.ss06Hero as HeroKind); focusCanvas(); });
+}
 element('#undo-button').addEventListener('click', () => { undo(); focusCanvas(); });
 element('#reset-button').addEventListener('click', () => { reset(); focusCanvas(); });
 element('#restart-button').addEventListener('click', () => { restart(); focusCanvas(); });
