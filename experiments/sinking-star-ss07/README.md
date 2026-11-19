@@ -67,4 +67,4 @@ Le tutoriel fait l’objet de contrôles distincts : supprimer les poussées du 
 - `reference/levelN-design.json`, `tests/witnesses.json` et `scripts/solver.mjs` : conception et validation, exclues du jeu distribué.
 - [Spécification](docs/specification.md), [conception des niveaux](docs/level-design.md), [intégration](docs/integration.md), [feuille de route](docs/roadmap.md).
 
-Branche de travail : `feat/ss07-duo-lab-20261119`. Cette version est un laboratoire à valider en HTML. Le passage sur `main`, l’ajout au catalogue SRA Playground et la publication du site sont des étapes ultérieures.
+La version HTML v3 est validée. Le code du jeu correspond au commit `6e83c45e90e42f5483ca0b3d488778b7e940452e` et la PR nº 103 livre ce laboratoire sur `main`. Le raccordement au catalogue et la publication SRA Playground constituent la prochaine étape. Utiliser le [prompt Codex d’intégration](docs/codex-integration-prompt.md), avec le contrat détaillé dans [integration.md](docs/integration.md).
