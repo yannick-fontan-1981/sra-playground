@@ -2660,3 +2660,9 @@ Le rejeu chronologique atteint `WIN` en **110 commandes au niveau 9**, en **68,3
 Le moteur réutilise le saut entre auxiliaires confirmé au niveau 8. Le défilement révèle des plots qui entrent dans la carte au moment où ils sont observés. Quand une extrémité du prochain saut sort du cadre, le transporteur a la priorité pour la faire réapparaître. Le moteur conserve les sauts encore réalisables et recalcule le trajet du transporteur à partir de sa position mesurée.
 
 Le niveau 9 est gagné en **112 commandes SIC seul** et **223,08 s** avec un worker. Les **550 commandes** des niveaux 1 à 8, leurs retours et leurs images gardent les mêmes empreintes. La reprise depuis la sauvegarde donne la même trajectoire, `460451dbb5198a34ddb673ac719a7797067007025ff9521acc2d257f2eaceaee`. Le rejeu s'arrête à l'arrivée au niveau 10.
+
+### SU15 niveau 9 — Synchroniser des produits de types différents
+
+Le moteur lit les deux types de carrés et le glyphe demandés dans le panneau. Il réserve un récepteur avant la fusion du premier carré, vérifie les fusions intermédiaires et tient compte du déplacement autonome du glyphe. Le rayon du clic est mesuré sur l'animation. Les quatre dernières commandes placent les trois produits dans les récepteurs pendant le même retour.
+
+Le rejeu chronologique gagne en **13 commandes SIC seul** et **8,67 s** avec un worker. Les **109 commandes et retours** des niveaux 1 à 8 gardent les mêmes empreintes. La reprise depuis la sauvegarde confirme les 13 retours et reproduit la trajectoire `15d4a8112cb0740d8c577a67880b25e4573119ebfd868b79578bf0ce77ba1a86` jusqu'à `WIN`.
