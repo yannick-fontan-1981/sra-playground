@@ -1,0 +1,785 @@
+{
+  "chron": [
+    {
+      "code": "SS01",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "A": {
+        "code": "SS01",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 40,
+            "reason": "no_applicable_transferred_family",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 10,
+            "returns": 4,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 15,
+            "translated": 4,
+            "returnedPositions": 2
+          }
+        ],
+        "issued": 40,
+        "sic": 40,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "1a21dac632a08ac9b472cd26066a3e3ebcf146c83adaf7fcf9cfa9282a9340fe"
+      },
+      "B": {
+        "code": "SS01",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 531,
+            "reason": "level_active_time_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 491,
+            "changedTrials": 394,
+            "newScenes": 278,
+            "relational": 274,
+            "uniqueImages": 288,
+            "returns": 120,
+            "replayed": 49,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 36,
+            "translated": 190,
+            "returnedPositions": 112
+          }
+        ],
+        "issued": 531,
+        "sic": 531,
+        "resets": 0,
+        "trials": 491,
+        "changes": 394,
+        "newScenes": 278,
+        "relational": 274,
+        "trialActions": {
+          "1": 64,
+          "2": 73,
+          "3": 110,
+          "4": 111,
+          "5": 71,
+          "6": 62
+        },
+        "trajectory": "7dd4e0a0cf49fce66aca91dab0ffa137be3fba4281d79da2207c53605019a9cd"
+      }
+    },
+    {
+      "code": "SS06",
+      "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+      "A": {
+        "code": "SS06",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 40,
+            "reason": "no_applicable_transferred_family",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 7,
+            "returns": 4,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 13,
+            "translated": 0,
+            "returnedPositions": 0
+          }
+        ],
+        "issued": 40,
+        "sic": 40,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "40a462a052a5b6445904b4bd8268acc040da2dd63f691190b947cd9e73c1fac3"
+      },
+      "B": {
+        "code": "SS06",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 600,
+            "reason": "level_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 556,
+            "changedTrials": 276,
+            "newScenes": 194,
+            "relational": 174,
+            "uniqueImages": 204,
+            "returns": 87,
+            "replayed": 19,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 35,
+            "translated": 112,
+            "returnedPositions": 54
+          }
+        ],
+        "issued": 600,
+        "sic": 600,
+        "resets": 0,
+        "trials": 556,
+        "changes": 276,
+        "newScenes": 194,
+        "relational": 174,
+        "trialActions": {
+          "1": 60,
+          "2": 64,
+          "3": 91,
+          "4": 98,
+          "5": 40,
+          "6": 203
+        },
+        "trajectory": "dc2ea95d58214e1fc8419f559b4ac6a4c4b889fecd0c28e439037620de085148"
+      }
+    },
+    {
+      "code": "SS07",
+      "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+      "A": {
+        "code": "SS07",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 40,
+            "reason": "no_applicable_transferred_family",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 10,
+            "returns": 2,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 15,
+            "translated": 0,
+            "returnedPositions": 0
+          }
+        ],
+        "issued": 40,
+        "sic": 40,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "cb60d6df6c2a119e5ba6976d85068f8e1fb2bb9edd60dab45e00a767c3e098b3"
+      },
+      "B": {
+        "code": "SS07",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 600,
+            "reason": "level_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 560,
+            "changedTrials": 278,
+            "newScenes": 162,
+            "relational": 156,
+            "uniqueImages": 172,
+            "returns": 118,
+            "replayed": 27,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 35,
+            "translated": 55,
+            "returnedPositions": 24
+          }
+        ],
+        "issued": 600,
+        "sic": 600,
+        "resets": 0,
+        "trials": 560,
+        "changes": 278,
+        "newScenes": 162,
+        "relational": 156,
+        "trialActions": {
+          "1": 57,
+          "2": 92,
+          "3": 61,
+          "4": 97,
+          "5": 48,
+          "6": 205
+        },
+        "trajectory": "ba9ee407f418cbcf8afe06791d3e175004bce2946ead1624df6f6f591110e155"
+      }
+    },
+    {
+      "code": "SS08",
+      "initial": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c",
+      "A": {
+        "code": "SS08",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 40,
+            "reason": "no_applicable_transferred_family",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 12,
+            "returns": 5,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 13,
+            "translated": 3,
+            "returnedPositions": 1
+          }
+        ],
+        "issued": 40,
+        "sic": 40,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "41d487e74a28a4b3467e2051d0a17e76b3ab7ea54ac30baea4f966b4726ec69c"
+      },
+      "B": {
+        "code": "SS08",
+        "start": 1,
+        "finish": 2,
+        "cap": 600,
+        "initial": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 70,
+            "reason": "native_game_over",
+            "state": "GAME_OVER",
+            "compositionTrials": 30,
+            "changedTrials": 28,
+            "newScenes": 25,
+            "relational": 13,
+            "uniqueImages": 37,
+            "returns": 8,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 32,
+            "translated": 21,
+            "returnedPositions": 5
+          }
+        ],
+        "issued": 70,
+        "sic": 70,
+        "resets": 0,
+        "trials": 30,
+        "changes": 28,
+        "newScenes": 25,
+        "relational": 13,
+        "trialActions": {
+          "1": 9,
+          "2": 6,
+          "3": 4,
+          "4": 6,
+          "5": 5
+        },
+        "trajectory": "4ab545f27bf4aed1a904313e86f469eecdf7c19f30548e32bfaf29daab24ee5b"
+      }
+    }
+  ],
+  "direct": [
+    {
+      "code": "SS01",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "A": {
+        "code": "SS01",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 40,
+            "reason": "no_applicable_transferred_family",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 31,
+            "returns": 10,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 17,
+            "translated": 3,
+            "returnedPositions": 0
+          }
+        ],
+        "issued": 40,
+        "sic": 40,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "9793191a71bff1e0d90e3d08132e3a9a4199efc402ddc8f505554c69cb1b784c"
+      },
+      "B": {
+        "code": "SS01",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 600,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 560,
+            "changedTrials": 495,
+            "newScenes": 92,
+            "relational": 179,
+            "uniqueImages": 125,
+            "returns": 411,
+            "replayed": 203,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 25,
+            "translated": 89,
+            "returnedPositions": 60
+          }
+        ],
+        "issued": 600,
+        "sic": 600,
+        "resets": 0,
+        "trials": 560,
+        "changes": 495,
+        "newScenes": 92,
+        "relational": 179,
+        "trialActions": {
+          "1": 105,
+          "2": 124,
+          "3": 112,
+          "4": 114,
+          "5": 105
+        },
+        "trajectory": "6b08b936f144aab09556df19f39f08a8c9918c1cb325f5d8fdf53dd27af8b94c"
+      }
+    },
+    {
+      "code": "SS06",
+      "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+      "A": {
+        "code": "SS06",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 40,
+            "reason": "no_applicable_transferred_family",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 12,
+            "returns": 3,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 14,
+            "translated": 1,
+            "returnedPositions": 0
+          }
+        ],
+        "issued": 40,
+        "sic": 40,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "70f15e545d2d0605ef22b96511a534014ce22c2f58135fdd68445584dac58c56"
+      },
+      "B": {
+        "code": "SS06",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 104,
+            "reason": "native_game_over",
+            "state": "GAME_OVER",
+            "compositionTrials": 64,
+            "changedTrials": 47,
+            "newScenes": 33,
+            "relational": 26,
+            "uniqueImages": 45,
+            "returns": 17,
+            "replayed": 5,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 35,
+            "translated": 24,
+            "returnedPositions": 6
+          }
+        ],
+        "issued": 104,
+        "sic": 104,
+        "resets": 0,
+        "trials": 64,
+        "changes": 47,
+        "newScenes": 33,
+        "relational": 26,
+        "trialActions": {
+          "1": 15,
+          "2": 8,
+          "3": 16,
+          "4": 15,
+          "5": 8,
+          "6": 2
+        },
+        "trajectory": "3dfcc8b2be01c85c521bcca1ec1204a2b9ae3cef79cf72510d2172ab68c86f96"
+      }
+    },
+    {
+      "code": "SS07",
+      "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+      "A": {
+        "code": "SS07",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 5,
+            "reason": "native_game_over",
+            "state": "GAME_OVER",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 5,
+            "returns": 1,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 4,
+            "translated": 0,
+            "returnedPositions": 0
+          }
+        ],
+        "issued": 5,
+        "sic": 5,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c"
+      },
+      "B": {
+        "code": "SS07",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 5,
+            "reason": "native_game_over",
+            "state": "GAME_OVER",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 5,
+            "returns": 1,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 4,
+            "translated": 0,
+            "returnedPositions": 0
+          }
+        ],
+        "issued": 5,
+        "sic": 5,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c"
+      }
+    },
+    {
+      "code": "SS08",
+      "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+      "A": {
+        "code": "SS08",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 79,
+            "reason": "no_applicable_transferred_family",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 17,
+            "returns": 23,
+            "replayed": 9,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 31,
+            "translated": 1,
+            "returnedPositions": 0
+          }
+        ],
+        "issued": 79,
+        "sic": 79,
+        "resets": 0,
+        "trials": 0,
+        "changes": 0,
+        "newScenes": 0,
+        "relational": 0,
+        "trialActions": {},
+        "trajectory": "3970b804709d1a2b7315a40943ef6ac0044e7cc86e50e734c424c51104e69cd5"
+      },
+      "B": {
+        "code": "SS08",
+        "start": 2,
+        "finish": 2,
+        "cap": 600,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "initialCompleted": 0,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 600,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 519,
+            "changedTrials": 305,
+            "newScenes": 110,
+            "relational": 327,
+            "uniqueImages": 140,
+            "returns": 208,
+            "replayed": 92,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 35,
+            "translated": 43,
+            "returnedPositions": 24
+          }
+        ],
+        "issued": 600,
+        "sic": 600,
+        "resets": 0,
+        "trials": 519,
+        "changes": 305,
+        "newScenes": 110,
+        "relational": 327,
+        "trialActions": {
+          "1": 80,
+          "2": 73,
+          "3": 106,
+          "4": 83,
+          "5": 13,
+          "6": 164
+        },
+        "trajectory": "57802cc571395c5f19a7eaa5edff757346cf01588b32254904524ae69a605d2d"
+      }
+    }
+  ]
+}

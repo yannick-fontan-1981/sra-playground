@@ -1,0 +1,2401 @@
+{
+  "summary": {
+    "games": 100,
+    "baselineWins": 66,
+    "candidateWins": 66,
+    "gains": [],
+    "losses": [],
+    "baselineActions": 2734,
+    "candidateActions": 2904,
+    "compositionTrials": 343,
+    "changedTrials": 207,
+    "newScenes": 108,
+    "relational": 136,
+    "gamesWithCompositionTrials": 19,
+    "identicalTrajectories": 81
+  },
+  "rows": [
+    {
+      "code": "AMZE",
+      "initial": "0859ffa1372ea6ac6d27ebb210802441bd8af406bafdba55073752f132375bb7",
+      "baseline": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "db4094d0ff20d649c2877073e36ae0aa7be871f4a140e53509627af3801dfd69"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "db4094d0ff20d649c2877073e36ae0aa7be871f4a140e53509627af3801dfd69"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "AR25",
+      "initial": "dcb73927160522c26e2655d31ead221e6da6aab818037d20388bbf46e9afa1b0",
+      "baseline": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "79a55cb7b2a69f8c21b10535cf8c671246e17841b1ff5f295bff30039653817b"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "79a55cb7b2a69f8c21b10535cf8c671246e17841b1ff5f295bff30039653817b"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "AS66",
+      "initial": "39bddf2920c3e13f28141733944f4c45ff9b67f56c82a0069b7ae8064eeb01c6",
+      "baseline": {
+        "won": true,
+        "actions": 11,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "1791f574a8eb1113e893ba65ebbf9ece4398044cf7394e42382b33cf0a7eefb2"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 11,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "1791f574a8eb1113e893ba65ebbf9ece4398044cf7394e42382b33cf0a7eefb2"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "BP35",
+      "initial": "73ed3968e48e2ac7b6d4a41c2a408abeba6f9ce1c493ad03ce2dd512b0be55bd",
+      "baseline": {
+        "won": false,
+        "actions": 54,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "75bbcaca769378205c776c721c6d8bff86a7722b759b7cb230c3ecf6b13acfa3"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 54,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "75bbcaca769378205c776c721c6d8bff86a7722b759b7cb230c3ecf6b13acfa3"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CASC",
+      "initial": "8c751a15869573d10359498d60bf0d9b344fbdbb71ecf05056fa864ae313a0b1",
+      "baseline": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CATL",
+      "initial": "645b3c0a4e06f24412f2c54de3ba3c15269956e85b62fa87778d892afa269152",
+      "baseline": {
+        "won": true,
+        "actions": 8,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 8,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CATR",
+      "initial": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+      "baseline": {
+        "won": true,
+        "actions": 29,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "34735c23d8869ce9fbbd9fefe28604f9f8f53efb49d3f1d8bf4f20d84639f16b"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 29,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "34735c23d8869ce9fbbd9fefe28604f9f8f53efb49d3f1d8bf4f20d84639f16b"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CAVA",
+      "initial": "3a81cada09d4393d3485a246ad461ef1d6166729c0ac6be0de0c61333c2891a0",
+      "baseline": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "0fbbe16a8f1b47ec732708f4ab9132037bcc972efb781160f952d2143f34a1ad"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "0fbbe16a8f1b47ec732708f4ab9132037bcc972efb781160f952d2143f34a1ad"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CD82",
+      "initial": "824ef203a4308533d58fd0b7207d4bb4396f1ac1b6ed8bf4a5160259c94a6904",
+      "baseline": {
+        "won": true,
+        "actions": 9,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "10cfd4ca1bd7a8fbd1ef29cd82b4c79f7724ef3a742cf0e0a40666657de739cd"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 9,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "10cfd4ca1bd7a8fbd1ef29cd82b4c79f7724ef3a742cf0e0a40666657de739cd"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CGWL",
+      "initial": "5b9f513c36c7067d1ffb90e4c9771a8913b0d80a9fd8c47279f11f16b98b156a",
+      "baseline": {
+        "won": true,
+        "actions": 15,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "5220df2eaf6f89a0e088ad929d4b80e941c428fae787b8d81da5447d3b8c00ab"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 15,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "5220df2eaf6f89a0e088ad929d4b80e941c428fae787b8d81da5447d3b8c00ab"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CLRS",
+      "initial": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+      "baseline": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b6b05608caf1b51cd3f01efc851ad0ede52e638115fc0d7caeba10a95f270e42"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b6b05608caf1b51cd3f01efc851ad0ede52e638115fc0d7caeba10a95f270e42"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CN04",
+      "initial": "76e9c99bc22f6b778aa1edd6bf938de351aedb10016b72f95bb67d75490ba0e7",
+      "baseline": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2ca5cca4d493d40e38003380887a1cb178c887d645fdde548434b2a37b708205"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2ca5cca4d493d40e38003380887a1cb178c887d645fdde548434b2a37b708205"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "COLM",
+      "initial": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+      "baseline": {
+        "won": true,
+        "actions": 20,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "ecd46ae97f9d95dd39739e82e071b5bae820aa1f22db4c50d721996a10ff8fe7"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 20,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "ecd46ae97f9d95dd39739e82e071b5bae820aa1f22db4c50d721996a10ff8fe7"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "COMB",
+      "initial": "a188f019a6b99b2b0e8e6bdb65d91087423c62941d320a2b204edfcb1e1a17fa",
+      "baseline": {
+        "won": true,
+        "actions": 8,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "20b99f9a68d710d8c7bc0927b2b8b9eecc20f6b7f05a8047181dfc9e03e09fdc"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 8,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "20b99f9a68d710d8c7bc0927b2b8b9eecc20f6b7f05a8047181dfc9e03e09fdc"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CONN",
+      "initial": "8582db376241703619ffe1d10270b7cc526be874c62085c23b4f31e89979bee7",
+      "baseline": {
+        "won": true,
+        "actions": 24,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b1436664926e73c63184c7713966ec8cf3e5bd45a6b736356c4ed6f5b8d75f9e"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 24,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b1436664926e73c63184c7713966ec8cf3e5bd45a6b736356c4ed6f5b8d75f9e"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "CRAF",
+      "initial": "2731a599e06fc2a4c77cbcabfd56c7435bb2460502797e671265a1197286578b",
+      "baseline": {
+        "won": false,
+        "actions": 30,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "099059dc573b71807254d9c636581a5ff3c26ac416789a300fd230e6ff3449c8"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "1f78af5bae1f0b81f470287dc8373203a6ef93679325865b787cadea8b57265e"
+      },
+      "trials": 20,
+      "changes": 2,
+      "newScenes": 1,
+      "relational": 0,
+      "trialActions": {
+        "6": 18,
+        "7": 2
+      }
+    },
+    {
+      "code": "CWSE",
+      "initial": "14b234e86cb071c9873aa3c65eb8cc12680afca61839eb31eccd404d5671af8f",
+      "baseline": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "04ac98078024c8e331ffa240036253203a00dcc0c88893084ba6c928bf0d86fb"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "04ac98078024c8e331ffa240036253203a00dcc0c88893084ba6c928bf0d86fb"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "DAME",
+      "initial": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+      "baseline": {
+        "won": false,
+        "actions": 53,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "ce923f936e9a7ff34b323f13535ff3df123c105b4fa26728de1915db075bd546"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "59093af1ed9d4ec32b6058cf1dc0606c27d727b954062981e0d3207833474065"
+      },
+      "trials": 1,
+      "changes": 1,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {
+        "7": 1
+      }
+    },
+    {
+      "code": "DC22",
+      "initial": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+      "baseline": {
+        "won": true,
+        "actions": 24,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "6997cca01a66d05e3db7b9ed9179db941b751ee958dee6a44d4759e42a3c0af8"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 24,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "6997cca01a66d05e3db7b9ed9179db941b751ee958dee6a44d4759e42a3c0af8"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "DICO",
+      "initial": "4c66a07b55379fb40871c5ebf6ed4908fe63b83c977c44d48c75cd73cc13bb55",
+      "baseline": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "935fd2f68db9be830769323777f4ba80424a0c356ff25877816bc6d990acaad7"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "935fd2f68db9be830769323777f4ba80424a0c356ff25877816bc6d990acaad7"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "DNOI",
+      "initial": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+      "baseline": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "014592cae2a8177663fa4474781f23120894cac027a7feee97f62639a67d8cf9"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "014592cae2a8177663fa4474781f23120894cac027a7feee97f62639a67d8cf9"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "ELAS",
+      "initial": "56f3647e10bd9638197258bdfccd3a6050cd3f80c781e70c0f28bb80f9be0c81",
+      "baseline": {
+        "won": true,
+        "actions": 16,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2119845733a0ef81f69633356411c9bfd91b3e746540095b50cd993b1aa673e6"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 16,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2119845733a0ef81f69633356411c9bfd91b3e746540095b50cd993b1aa673e6"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "ESCT",
+      "initial": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+      "baseline": {
+        "won": true,
+        "actions": 16,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 16,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "ETAG",
+      "initial": "bf64cd6cbf5bc15a9b00f0270ceb7ce53217119e180463a4307d97f0c9c9fc2a",
+      "baseline": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "EVAS",
+      "initial": "ceac639fe38e32deec9e52b3735a601e68b464736e3187d5644c2854fbfd3bc5",
+      "baseline": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "af6c7c4e88a7628f637a7aa7e2159823b27d8659c74864042c2ad51c92cda947"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "af6c7c4e88a7628f637a7aa7e2159823b27d8659c74864042c2ad51c92cda947"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "FITE",
+      "initial": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+      "baseline": {
+        "won": true,
+        "actions": 20,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "472df01949bb5eaff7206c68304c47c92c9758156314e0e11ebdd5e0d82c9848"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 20,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "472df01949bb5eaff7206c68304c47c92c9758156314e0e11ebdd5e0d82c9848"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "FOGW",
+      "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+      "baseline": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "4711a8652d6ce194b1d75befd4d2a1bd814000e0ffabe9a2540c9452257e9e8e"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "4711a8652d6ce194b1d75befd4d2a1bd814000e0ffabe9a2540c9452257e9e8e"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "FT09",
+      "initial": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+      "baseline": {
+        "won": false,
+        "actions": 40,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "9f40e1505c859ca8d36761ff7a926204bff770e22e4435cb19b385aec84c7aa4"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "cac7b33cbecb127386fc4c83e48985196d4be1de335e115ad5d71e6219ad8be5"
+      },
+      "trials": 20,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {
+        "6": 20
+      }
+    },
+    {
+      "code": "FUIT",
+      "initial": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "1a0d23b072c258eaa003ef36a96bd143f8d54209ef6de3bb2f3055903f026efa"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "1105163a43ea97dd4549f1dadea85ecae079a36477d9068323e20524dde6596e"
+      },
+      "trials": 27,
+      "changes": 12,
+      "newScenes": 8,
+      "relational": 12,
+      "trialActions": {
+        "1": 3,
+        "2": 9,
+        "3": 2,
+        "4": 3,
+        "5": 3,
+        "7": 7
+      }
+    },
+    {
+      "code": "G50T",
+      "initial": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "e1ace662a42f58f9df3ef049daecccfea1dd33f35ecd01eac96f79f265c28613"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "e1ace662a42f58f9df3ef049daecccfea1dd33f35ecd01eac96f79f265c28613"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GABA",
+      "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "baseline": {
+        "won": true,
+        "actions": 49,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "4c0535fed4795be259cc0651ddc053e32eeabcd9d5fb0a69081d1d51e0170ee2"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 49,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "4c0535fed4795be259cc0651ddc053e32eeabcd9d5fb0a69081d1d51e0170ee2"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GARE",
+      "initial": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+      "baseline": {
+        "won": true,
+        "actions": 11,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 11,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GIGO",
+      "initial": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+      "baseline": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "48b27b2033f9321ea8a90d6eacd08c7b4e530231021287357bc0195e3ca92240"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "48b27b2033f9321ea8a90d6eacd08c7b4e530231021287357bc0195e3ca92240"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GLOB",
+      "initial": "ba5d996decc75763ca4b613ce00433341e5d95f6a656a487341aacbdd92f23ae",
+      "baseline": {
+        "won": true,
+        "actions": 9,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "4b061a7f529ccbf63ceb927261b20f84899b1fe284bf4db6da4ce4e30a6eb398"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 9,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "4b061a7f529ccbf63ceb927261b20f84899b1fe284bf4db6da4ce4e30a6eb398"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GMAP",
+      "initial": "2bcae799f4729d870ad808e3c67aabf045f134537ae6f43086139088b9bbcef7",
+      "baseline": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2965646b168ce1b7f5b9723472b246d71d61d09e1782ba63c58793fa3ca11ef3"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2965646b168ce1b7f5b9723472b246d71d61d09e1782ba63c58793fa3ca11ef3"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GORI",
+      "initial": "b7789fb9ae19a319ec1ea7fc4a2b5d1c2032885c185218e4bdcb3f93bf61207c",
+      "baseline": {
+        "won": true,
+        "actions": 15,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "df11bb6c94d9325a9a689a254ef621916f1c5277cb0dd7ad598e96437bf31242"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 15,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "df11bb6c94d9325a9a689a254ef621916f1c5277cb0dd7ad598e96437bf31242"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GRAV",
+      "initial": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+      "baseline": {
+        "won": true,
+        "actions": 11,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 11,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "GRIL",
+      "initial": "586f549f819870203dd5c0e39249781c696f013f174149462967d1aeefcd224a",
+      "baseline": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "HANO",
+      "initial": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+      "baseline": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "408b29ae198b9fb6c4cd85cff5958c67637634e7ace5c7207b1e5c7f7aac367e"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "408b29ae198b9fb6c4cd85cff5958c67637634e7ace5c7207b1e5c7f7aac367e"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "HOLE",
+      "initial": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+      "baseline": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "012c8aaf2cae6c42b84cff41bc39f11d4d9a76d61fdd2817e600c406ea372ebb"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "012c8aaf2cae6c42b84cff41bc39f11d4d9a76d61fdd2817e600c406ea372ebb"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "HPDL",
+      "initial": "a736549b36c7d3a0374e9634ba3694317e060824f7863219344ea69c4a141586",
+      "baseline": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b53d1e97bb943284ec2969334245d6bba994f0647dc3aac4106ede8e423c4b0b"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b53d1e97bb943284ec2969334245d6bba994f0647dc3aac4106ede8e423c4b0b"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "ISOS",
+      "initial": "2213b32effda75e66db7f38caf14b276feafbd547a28086089e6000a114ffabe",
+      "baseline": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "cfa123ebda88519e2a5678023784a2449be6381ccec41e40b4ade48ef515d39a"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "cfa123ebda88519e2a5678023784a2449be6381ccec41e40b4ade48ef515d39a"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "KA59",
+      "initial": "a5391f47a4b5f63feb8af396ab4b0bbdd2f80a18a0f19ffe6f128765e9d75e2c",
+      "baseline": {
+        "won": true,
+        "actions": 15,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "69617fabeca88d0e43c7e143e2470084e66fd2b0f31139262983666b393f98c7"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 15,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "69617fabeca88d0e43c7e143e2470084e66fd2b0f31139262983666b393f98c7"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "KATA",
+      "initial": "6b968a6e6ad21fd191e6e71b41ec2062fab66dd436551e5c7615bb8a262709de",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "b2abd07c1a647dbdc43dbdfe7d7145cfa88b4a32b7ae8fe4e9848d63be39612d"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "b2abd07c1a647dbdc43dbdfe7d7145cfa88b4a32b7ae8fe4e9848d63be39612d"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "KEYD",
+      "initial": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "398235947cb9ea2847efcbdae980fe7c7bf93153d195d9435c71eaa9d87a69b7"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "000dd93a72d1b336c2351cf6b2c82b5a59f40c8b48d3e6533c7d7cbf09e4fcd7"
+      },
+      "trials": 18,
+      "changes": 18,
+      "newScenes": 10,
+      "relational": 17,
+      "trialActions": {
+        "1": 3,
+        "3": 2,
+        "4": 12,
+        "7": 1
+      }
+    },
+    {
+      "code": "KLOT",
+      "initial": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+      "baseline": {
+        "won": true,
+        "actions": 30,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "5a2f20e21f5f1254102872d5ca30d278252701bb4eb8aec5a442f82f22dcea8f"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 30,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "5a2f20e21f5f1254102872d5ca30d278252701bb4eb8aec5a442f82f22dcea8f"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "LF52",
+      "initial": "8c3509a81bc0b33cdcadefd63b15f8d8259dcfc4f6f12c00a1ff598d849bc4ff",
+      "baseline": {
+        "won": true,
+        "actions": 31,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "136c6a7cff7e921d7610a153d89bf4320d4e0bc5d2f384b95053d7ec82a963a4"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 31,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "136c6a7cff7e921d7610a153d89bf4320d4e0bc5d2f384b95053d7ec82a963a4"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "LIFE",
+      "initial": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+      "baseline": {
+        "won": true,
+        "actions": 26,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2b9779ce96977cfff637d7eec694c362f45017d98677b243a48d4b6754e675cb"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 26,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2b9779ce96977cfff637d7eec694c362f45017d98677b243a48d4b6754e675cb"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "LKEY",
+      "initial": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "d02cfb1289afbaac6dea99518694334e68e4dc78e646c6fc5bb1794b09020045"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "d02cfb1289afbaac6dea99518694334e68e4dc78e646c6fc5bb1794b09020045"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "LOGI",
+      "initial": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+      "baseline": {
+        "won": true,
+        "actions": 16,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "3797729448d2e3d6d720ba051f04ca60f7f6edd592a791f45461226058f1bc4f"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 16,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "3797729448d2e3d6d720ba051f04ca60f7f6edd592a791f45461226058f1bc4f"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "LP85",
+      "initial": "10d339c4ff95d67f9c94ded838ab2080df929551e32ae1443ffa888cd580632a",
+      "baseline": {
+        "won": false,
+        "actions": 48,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "29f4367020cf291d439d05595646aafc618eea14e176d2652afb69e68b2ff5ce"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "873da6225a6e14c030fb200f329b8da6b5cca991af82ee317d306a36cbfe7bb6"
+      },
+      "trials": 4,
+      "changes": 1,
+      "newScenes": 1,
+      "relational": 0,
+      "trialActions": {
+        "6": 4
+      }
+    },
+    {
+      "code": "LS19",
+      "initial": "19e99dde912cee08a4af4335e108a6e015c69930f09e3187badbee1cfce79df0",
+      "baseline": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "LS20",
+      "initial": "f530cf6adb4a6d0fe87baa072ecf62be621169f9ef3b0baf09539904c5f4220f",
+      "baseline": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "28755dc6ddc8ba6922dcd8899d2d3970033e38e916f6df6ab7c4aecf6f471a74"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "28755dc6ddc8ba6922dcd8899d2d3970033e38e916f6df6ab7c4aecf6f471a74"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "M0R0",
+      "initial": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "d797b8ea77f1ad2aded763aaa75cc0bf10cf70209ff6f4e68c4dfce43c50f526"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "d797b8ea77f1ad2aded763aaa75cc0bf10cf70209ff6f4e68c4dfce43c50f526"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "MEMO",
+      "initial": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+      "baseline": {
+        "won": false,
+        "actions": 42,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "3c7ceb9e4968d2c7c9bfbb1daf13767b13fd8df7d6c06b39d37eba7c7a27d871"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "c2a9e800d738938d85fbd4faf75f9577fb72b620d1a50d5a2f75b2455fbf00c9"
+      },
+      "trials": 17,
+      "changes": 13,
+      "newScenes": 0,
+      "relational": 5,
+      "trialActions": {
+        "6": 11,
+        "7": 6
+      }
+    },
+    {
+      "code": "MIND",
+      "initial": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+      "baseline": {
+        "won": false,
+        "actions": 42,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "d7bc75b335da71b5b58a72bd11ef81f3f382109ccffb8b4d3d81651cf076ef1a"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "95122f0ebeff5fbe8f858330668a650757f61c26335b862085511415984f104c"
+      },
+      "trials": 7,
+      "changes": 3,
+      "newScenes": 1,
+      "relational": 2,
+      "trialActions": {
+        "6": 4,
+        "7": 3
+      }
+    },
+    {
+      "code": "MOTO",
+      "initial": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+      "baseline": {
+        "won": true,
+        "actions": 10,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 10,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "ONDE",
+      "initial": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+      "baseline": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "ed596954104e490a2902ebed569251be05b10a68a53334cb5ef055156ea67e10"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "ed596954104e490a2902ebed569251be05b10a68a53334cb5ef055156ea67e10"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "PIPE",
+      "initial": "cc2da57812c48d52f01a6a481ab614622744023eca0d9786e1f8294e63e9adfd",
+      "baseline": {
+        "won": true,
+        "actions": 4,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "9537f4eff9c22c027b3376d3a93cf17b4eb40cbbcb908ddecf23691b0d277c0a"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 4,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "9537f4eff9c22c027b3376d3a93cf17b4eb40cbbcb908ddecf23691b0d277c0a"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "POLA",
+      "initial": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+      "baseline": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "af28e8ed77e7f8213749f03f8665c9e86a7742aa1111586dd84eac30f19dfcd1"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "af28e8ed77e7f8213749f03f8665c9e86a7742aa1111586dd84eac30f19dfcd1"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "PORT",
+      "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+      "baseline": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "7f00821450d8c56c8a8a80fa6cccfada84814c3347fe8cb6e732a05b41427978"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "7f00821450d8c56c8a8a80fa6cccfada84814c3347fe8cb6e732a05b41427978"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "PRTL",
+      "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+      "baseline": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2d4f52bd81c100ce13b0cafc0e2ee2561d106f0a78bef9b84468d3d4b3ef5682"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "2d4f52bd81c100ce13b0cafc0e2ee2561d106f0a78bef9b84468d3d4b3ef5682"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "R11L",
+      "initial": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+      "baseline": {
+        "won": false,
+        "actions": 40,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "0fdec3205abce3c6712ecf89877a6006579ebef4b1c6bde44aef1f5cbe56b0b0"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "5938498ae59c3b98a7b9de45d77b958980c34992acd866c4b42233d985fa77dd"
+      },
+      "trials": 13,
+      "changes": 13,
+      "newScenes": 13,
+      "relational": 0,
+      "trialActions": {
+        "6": 13
+      }
+    },
+    {
+      "code": "RE86",
+      "initial": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "0cd2dea04c46ad16649c177c75292bc32509b4eb2b8f43933f54dc75b596b6c1"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "0cd2dea04c46ad16649c177c75292bc32509b4eb2b8f43933f54dc75b596b6c1"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "RECR",
+      "initial": "9c659d0462f191ba93ee6aa1bb8c433cdca6d890e4f69b81d28b7fa31325ff79",
+      "baseline": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "0c70c2e4be3f093b06a78b8b6bc9aa1724f5a9faaf826143c6d620c3029325a8"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "0c70c2e4be3f093b06a78b8b6bc9aa1724f5a9faaf826143c6d620c3029325a8"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "REGN",
+      "initial": "47aa13d6af55af3e0efd065ed7eacc0793512ef6c920614ef326caa1d92f6662",
+      "baseline": {
+        "won": true,
+        "actions": 2,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b00a56adad8180b9427c0ca84381383b025d051ab96a5c8ec1e9f01a1090c26c"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 2,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b00a56adad8180b9427c0ca84381383b025d051ab96a5c8ec1e9f01a1090c26c"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "REWI",
+      "initial": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+      "baseline": {
+        "won": false,
+        "actions": 59,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "943859d15645cd9df09e965b80ab3b6b3d075ebe7d7740a920306f6f1c73a6cf"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "feb3e631178ec136ed6e1a756f509f1db8f6fd3e8f6a2f22d77c42630046c036"
+      },
+      "trials": 12,
+      "changes": 3,
+      "newScenes": 0,
+      "relational": 2,
+      "trialActions": {
+        "4": 1,
+        "5": 1,
+        "6": 7,
+        "7": 3
+      }
+    },
+    {
+      "code": "RSWP",
+      "initial": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "8bc5046f323ffa8de90799527dc0649afd76377fc5c3ffe1f5fb5df2e2519b94"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "8bc5046f323ffa8de90799527dc0649afd76377fc5c3ffe1f5fb5df2e2519b94"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "S5I5",
+      "initial": "0de899ef426dee32a5ae69f04d75484537ada1c8a01db97fc25b240227139335",
+      "baseline": {
+        "won": false,
+        "actions": 50,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "f4fe920b29a16fae6fae8d9ca18c327a6403791fc0fb5c87fcaed39eaf0638ac"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 50,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "f4fe920b29a16fae6fae8d9ca18c327a6403791fc0fb5c87fcaed39eaf0638ac"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SB26",
+      "initial": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "e5b63921b6ab1c892b811b85b6277aa1a04cbd6b742a290fc2910249b8e9d9d9"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "e5b63921b6ab1c892b811b85b6277aa1a04cbd6b742a290fc2910249b8e9d9d9"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SC25",
+      "initial": "518653148c1631c7757a723e0e9f144e62e09fce58cdd5648881c2a8b4c8211c",
+      "baseline": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b6f368973d4616b4cf6ddb47406d4ccfc6804c44b96c8ec7d6a01eb911206d69"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "b6f368973d4616b4cf6ddb47406d4ccfc6804c44b96c8ec7d6a01eb911206d69"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SELE",
+      "initial": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+      "baseline": {
+        "won": true,
+        "actions": 30,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "c4505af8171c7fba460b476ddfb9cd45ac417b6a76d8f0517853521494167df6"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 30,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "c4505af8171c7fba460b476ddfb9cd45ac417b6a76d8f0517853521494167df6"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SEQN",
+      "initial": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+      "baseline": {
+        "won": true,
+        "actions": 4,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "5283d0eab00c72914b5720848cfaa52b5586e52c632e4c8eb9639f4b9df5b2a1"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 4,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "5283d0eab00c72914b5720848cfaa52b5586e52c632e4c8eb9639f4b9df5b2a1"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SERI",
+      "initial": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "19ee61099e7119ae3a5b3ab7dbf123dda190aeadec5e9be4693531601cd0a473"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "bdf08b336f38340ac7886706127ac6e51e25a380f168ed8309111423427d054a"
+      },
+      "trials": 47,
+      "changes": 38,
+      "newScenes": 11,
+      "relational": 19,
+      "trialActions": {
+        "1": 8,
+        "2": 6,
+        "3": 3,
+        "4": 4,
+        "5": 7,
+        "6": 12,
+        "7": 7
+      }
+    },
+    {
+      "code": "SIGN",
+      "initial": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "175b568e8caed448ea2841d41dd0d95629e34982f1243456c4fdd05fb6adc297"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "0e51f32a026e173a475fbe9880f6bd01f57cac859ceadb770b74052c14d90f72"
+      },
+      "trials": 34,
+      "changes": 23,
+      "newScenes": 14,
+      "relational": 22,
+      "trialActions": {
+        "1": 4,
+        "2": 11,
+        "3": 3,
+        "4": 8,
+        "5": 2,
+        "7": 6
+      }
+    },
+    {
+      "code": "SK48",
+      "initial": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "4746fa1db30ce705c92727bfd1ef0b2fb469b705c730e9839fbc33430a62115b"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "4746fa1db30ce705c92727bfd1ef0b2fb469b705c730e9839fbc33430a62115b"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SKBN",
+      "initial": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+      "baseline": {
+        "won": true,
+        "actions": 22,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "a1324d7a36761a108de431167b117c4134826347377f447efcdbfef65dafedc0"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 22,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "a1324d7a36761a108de431167b117c4134826347377f447efcdbfef65dafedc0"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SMLP",
+      "initial": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+      "baseline": {
+        "won": true,
+        "actions": 47,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "0210be64a6527b68cdb2b9cb78ae7b781aa333b64bc0b32cdc2d6c0610b52c1a"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 47,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "0210be64a6527b68cdb2b9cb78ae7b781aa333b64bc0b32cdc2d6c0610b52c1a"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SNAR",
+      "initial": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+      "baseline": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "fa3033b33140dfefd5e97473583108db0926775dada74ebcbb6316df0bc3050d"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "fa3033b33140dfefd5e97473583108db0926775dada74ebcbb6316df0bc3050d"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SP80",
+      "initial": "0ba719661c41cd3db3499afa4ec373d1ae79386e50c866e2487946b59a255b1b",
+      "baseline": {
+        "won": false,
+        "actions": 30,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "d89092aa9089e65eadd9af2f48c73c2623c48c0827c62589c1cad8eaa4c7acc4"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 30,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "d89092aa9089e65eadd9af2f48c73c2623c48c0827c62589c1cad8eaa4c7acc4"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SPOR",
+      "initial": "ef7046fff5e68e4fe5410037c13726829e2670eccd87b21574aa8de5d518cd1c",
+      "baseline": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "1c56c9bc869b580013d1f87205d1d160221db32767d8525bb98a48dab2eab345"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "1c56c9bc869b580013d1f87205d1d160221db32767d8525bb98a48dab2eab345"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "STCK",
+      "initial": "0aff2f0878f2054d021b294f4972e1450ef08479ba80af7cca138998bc341521",
+      "baseline": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "SU15",
+      "initial": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+      "baseline": {
+        "won": false,
+        "actions": 40,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "ec1531a63d7c1d02910c87fd132418b1cf51b16cdc16e970d403d7ad3b80e438"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "d27d26847af8682b63bc6aee5f64cffa5f3518d5d4f382bbe6fea0c2bce2381f"
+      },
+      "trials": 20,
+      "changes": 7,
+      "newScenes": 7,
+      "relational": 0,
+      "trialActions": {
+        "6": 13,
+        "7": 7
+      }
+    },
+    {
+      "code": "SWCH",
+      "initial": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "cd03e605e9fa17b3e1290d067afe8baa4a05545d3b715bc5c30fdf392bec3f71"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "59a9bc2e20841ea43b14393bee6b14174f63958eb7256cfd73356e85840a7992"
+      },
+      "trials": 9,
+      "changes": 9,
+      "newScenes": 4,
+      "relational": 8,
+      "trialActions": {
+        "3": 8,
+        "7": 1
+      }
+    },
+    {
+      "code": "SYME",
+      "initial": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+      "baseline": {
+        "won": true,
+        "actions": 9,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "7e7a9f390451b705beac8689a7a20c396a6d1870888aa07c73bdc57e17dc8f86"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 9,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "7e7a9f390451b705beac8689a7a20c396a6d1870888aa07c73bdc57e17dc8f86"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "TEQU",
+      "initial": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "e9df03b40dd212f9f49878d89dcc7522439a83a9c8930b583e106b878f639c6c"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "7f9abb9b9136a059dbc8cbb94fa85970eb79feb96b1c3098eb6c12277ee02ddc"
+      },
+      "trials": 27,
+      "changes": 23,
+      "newScenes": 15,
+      "relational": 22,
+      "trialActions": {
+        "1": 3,
+        "2": 5,
+        "3": 1,
+        "4": 11,
+        "5": 4,
+        "7": 3
+      }
+    },
+    {
+      "code": "THER",
+      "initial": "e4949964e4d02658f8a3a275445fa1d2e2e46af5d370cf0269d20527e9215e54",
+      "baseline": {
+        "won": true,
+        "actions": 21,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "f34dc125dead189376cba752f03e6eac52b461d07cecde551a69015b944ac03d"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 21,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "f34dc125dead189376cba752f03e6eac52b461d07cecde551a69015b944ac03d"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "TICT",
+      "initial": "a672cd7ff15e02d16aaaed5a5afaf7fe0e4c0e6577cda214e9edeb950d15a6ae",
+      "baseline": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "a13948626cced0e76c6a47a536754b4ec9fa79743509f1f51eb86b494d75ea1b"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "a13948626cced0e76c6a47a536754b4ec9fa79743509f1f51eb86b494d75ea1b"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "TN36",
+      "initial": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "971d834993630567638eb306e338fea3ad759100fa5401c5f767b7ce82ec6ab5"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "971d834993630567638eb306e338fea3ad759100fa5401c5f767b7ce82ec6ab5"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "TR87",
+      "initial": "bf60e2953965adca1444960d2bf267bab440c2d18234c0a245ce214ea0982174",
+      "baseline": {
+        "won": true,
+        "actions": 22,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "180c353235d77dc3ad6fc9e5ab2a2a4d361c51b5357a1bd1a59665f66e055963"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 22,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "180c353235d77dc3ad6fc9e5ab2a2a4d361c51b5357a1bd1a59665f66e055963"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "TRCP",
+      "initial": "03590df58a79831a29e72b892f3a529280a4eced2dd549b81c7710887a42bda2",
+      "baseline": {
+        "won": false,
+        "actions": 46,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "a0724324611ab33ad9d9718937ce690fb45f0f6ef0029114991123115bcc42e6"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "20f763c25bacbf81e67a8f2244c550da76326fe2b2904c4602743b136908ed3f"
+      },
+      "trials": 5,
+      "changes": 2,
+      "newScenes": 1,
+      "relational": 0,
+      "trialActions": {
+        "6": 3,
+        "7": 2
+      }
+    },
+    {
+      "code": "TRIA",
+      "initial": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+      "baseline": {
+        "won": true,
+        "actions": 20,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "753761db50649dfa2a8a8e06c6d5ac0506a9e16e0e6ee8b0622a53b652b6386f"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 20,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "753761db50649dfa2a8a8e06c6d5ac0506a9e16e0e6ee8b0622a53b652b6386f"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "TU93",
+      "initial": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+      "baseline": {
+        "won": false,
+        "actions": 50,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "ed6a242f2c0be23212d2377d0d06184a95d089e7ad2304892c26db4ea6460755"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 50,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "ed6a242f2c0be23212d2377d0d06184a95d089e7ad2304892c26db4ea6460755"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "UPST",
+      "initial": "97ddaef0e9538cf50e870eac5cda28e075fdc130423b1690323931649dd648a4",
+      "baseline": {
+        "won": true,
+        "actions": 30,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "6f99a32adbe04ab3cf551d9dbf82d8ce7df839b35dfee3099480b5b6e7641b60"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 30,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "6f99a32adbe04ab3cf551d9dbf82d8ce7df839b35dfee3099480b5b6e7641b60"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "VALV",
+      "initial": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+      "baseline": {
+        "won": true,
+        "actions": 25,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "ae953580daeb85198af62abb5833f0d6288d757913fbf7ea1b8fd045e5bd3ece"
+      },
+      "candidate": {
+        "won": true,
+        "actions": 25,
+        "reason": "target_levels_completed",
+        "resets": 0,
+        "trajectory": "ae953580daeb85198af62abb5833f0d6288d757913fbf7ea1b8fd045e5bd3ece"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "VC33",
+      "initial": "fdde551e3fd269f62e14eb380d2244aefb8f8230f3af72741a2d89acbf1fe414",
+      "baseline": {
+        "won": false,
+        "actions": 40,
+        "reason": "no_applicable_transferred_family",
+        "resets": 0,
+        "trajectory": "24b6ca51cf777fadb7c6ee31999e4393692cc26709b344204ae18519351d6947"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 50,
+        "reason": "native_game_over",
+        "resets": 0,
+        "trajectory": "76433c16abc196211b8ae26ce17d86b0076a06b6dba8868b67d6fc57ce79196d"
+      },
+      "trials": 10,
+      "changes": 10,
+      "newScenes": 10,
+      "relational": 0,
+      "trialActions": {
+        "6": 10
+      }
+    },
+    {
+      "code": "VOIS",
+      "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "da5c42c3dbab9fccfd564ab487f5df0d2d5bd527a8e6d97188ec92c45854676e"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "9f218447a843ca4b52f48a4b85b04ceb11dbadfbcb507034eb30356b27829ad4"
+      },
+      "trials": 24,
+      "changes": 15,
+      "newScenes": 9,
+      "relational": 13,
+      "trialActions": {
+        "1": 1,
+        "2": 8,
+        "3": 2,
+        "4": 3,
+        "6": 7,
+        "7": 3
+      }
+    },
+    {
+      "code": "WA30",
+      "initial": "22f3ccd4739a85cebbd807dc32cee300c3e43630d38a8422ccf48e81fba53e82",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "63d8387d1b7d8b1dbdc6e4f04b4c58c43e60398adb6607924ffbd6ab8a66d3a8"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "63d8387d1b7d8b1dbdc6e4f04b4c58c43e60398adb6607924ffbd6ab8a66d3a8"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "WEAV",
+      "initial": "af1b67ae6a394974d223dc41ee8d488064f289215c74bcdb98b97163d42ae550",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "88435d146a46116cff9850312d311bd0143dfb8c22a284d1233fc515a5557c25"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "88435d146a46116cff9850312d311bd0143dfb8c22a284d1233fc515a5557c25"
+      },
+      "trials": 0,
+      "changes": 0,
+      "newScenes": 0,
+      "relational": 0,
+      "trialActions": {}
+    },
+    {
+      "code": "ZIPP",
+      "initial": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+      "baseline": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "976b1a954af93935d8a930c806eb208e7ec0043257669d9c172e8ce32859908b"
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "reason": "session_action_budget",
+        "resets": 0,
+        "trajectory": "dbe1b4e2534f6bf23aae9e88bc2303a58545593619321e657eb7035981a0191b"
+      },
+      "trials": 28,
+      "changes": 14,
+      "newScenes": 3,
+      "relational": 14,
+      "trialActions": {
+        "1": 2,
+        "2": 3,
+        "3": 2,
+        "4": 4,
+        "5": 5,
+        "6": 10,
+        "7": 2
+      }
+    }
+  ]
+}
