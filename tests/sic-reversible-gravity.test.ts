@@ -131,6 +131,7 @@ test('verify a stationary inversion in the animation before the edited cell scro
   const step: GravityStep = { command: { action_ref: 'ACTION6', data: { x: 9, y: 3 } }, index: inverter, landing: at,
     direction: 1, frontier: false, edit: 'invert' };
   assert.equal(gravityReturn(before, after, step, memory, () => [before], true)?.matched, false);
+  assert.equal(gravityReturn(before, after, step, memory, () => [{ ...changed, at: inverter }], true)?.matched, false);
   const confirmed = gravityReturn(before, after, step, memory, () => [before, changed], true);
   assert.deepEqual([confirmed?.shift, confirmed?.removed, confirmed?.matched], [2, true, true]);
 });

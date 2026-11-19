@@ -206,7 +206,9 @@ export function gravityReturn(before: GravityView, after: GravityView, step: Gra
     && edited === undefined && reached && sameColumn
     && frames().some(frame => {
       const offset = cameraRowShift(before, frame);
-      return offset !== null && frame.tiles[step.index - offset * before.width] === 'air';
+      if (offset === null) return false;
+      const target = step.index - offset * before.width;
+      return target !== frame.at && frame.tiles[target] === 'air';
     });
   const removed = step.edit !== 'solidify' && step.edit !== 'open' && (!step.edit || edited === 'air'
     || witnessedRemoval || (edited === undefined && (landing - departure) * step.direction > 0));
