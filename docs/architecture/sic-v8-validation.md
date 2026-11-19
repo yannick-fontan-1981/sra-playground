@@ -2616,3 +2616,11 @@ Le niveau 8 gagne en **54 commandes SIC seul et 44,50 s** au budget de 360 s de 
 La partie reprise depuis la sauvegarde exploite les règles existantes de SIC. Les 32 premières commandes comparent des accès candidats. À la commande 33, l’exploration des directions prend le relais et atteint la victoire à la commande 66. Cette trace établit la réussite et le passage d’une règle à l’autre. Le rôle exact des ouvertures candidates et le modèle de rebond des deux obstacles restent à établir par SIC.
 
 Le niveau 8 gagne en **66 commandes SIC seul et 55,47 s** au budget de 720 s de temps actif et 600 commandes retenu pour la référence AS66, avec un seul processus. Les 66 commandes, retours et animations depuis la sauvegarde correspondent exactement au rejeu chronologique. Les **590 commandes des niveaux 1 à 7** gardent leurs empreintes de référence. Les 656 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. Empreinte `557bae00c0c52f406fe89bb9fcaad550b45dd2a8ad2c30e7231fc0073eeb0aaa`.
+
+### LF52 niveau 8
+
+Le retour permet de reconnaître le transporteur au bord inférieur même si une partie de son contour sort du cadre. SIC réutilise les commandes de déplacement calibrées et vérifie le saut d’un auxiliaire par-dessus un autre. Une fois les deux pièces confirmées après le saut, il réutilise cet effet pour préparer l’accès au rail.
+
+À la commande 34, le défilement révèle que deux plots attribués au sol sont transportés. SIC corrige leur rôle dans la carte et conserve cette relation quand le cadre remonte. Les quatre auxiliaires restent disponibles comme relais. La commande 68 réunit les deux jetons à réduire.
+
+Le niveau 8 gagne en **68 commandes SIC seul et 123,18 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 68 commandes. Les **482 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 550 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 139 vérifications ciblées passent. Empreinte `37086d7751cee447516433471a0d0312c91b5d7910949818c8a94bfea37f1799`.
