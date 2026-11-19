@@ -2564,3 +2564,11 @@ Le niveau 8 gagne en **17 commandes et 11,10 s**. Les **107 commandes** des sept
 ### LP85 niveau 8
 
 Les cases visibles forment trois circuits coudés et disjoints. Le fournisseur mesure les diagonales contiguës et leurs prolongements rectilignes, puis confronte les permutations candidates aux retours de clic avant de calculer un trajet. Le rejeu chronologique gagne le niveau 8 en **82 commandes SIC seul et 35,04 s**. Deux démarches d’exploration envoient d’abord 35 clics sans effet chacune. Les 12 commandes suivantes mesurent puis appliquent les permutations visibles. Les 107 commandes des niveaux 1 à 7, leurs retours et leurs animations sont identiques à la référence. La campagne s’arrête à la victoire du niveau 8. Empreinte `81489e6173ef277917d6facc42d8a08a11c33db880ce90638d47a7fb04e1469b`.
+
+### TU93 niveau 8
+
+Au niveau 7, SIC observe le changement de marqueur du garde sur place, puis onze déplacements qui suivent la trajectoire du personnage avec deux cases de retard. Au niveau 8, le garde occupe l’unique passage vers la sortie. SIC cherche d’abord un trajet complet incluant le retour par une boucle. Il réutilise la distance d’éveil mesurée, suit le garde à chaque retour et écarte les étapes où leurs positions se croiseraient.
+
+La sixième commande confirme le changement de marqueur avant le premier déplacement du poursuivant. La neuvième retire le garde fixe par le côté. Après le détour, la dix-septième commande traverse le passage libéré. La vingt-et-unième atteint la sortie. Les cartes de situation montrent le déplacement choisi, le poursuivant et le passage à dégager.
+
+Le rejeu chronologique gagne le niveau 8 en **21 commandes SIC seul et 11,83 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **154 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de la référence. Les 175 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 98 tests ciblés passent. Empreinte `7ff17404b23f7ff13e45008c4d1ec4e08bc025e2b0b441d3d81e264df7a3401f`.
