@@ -1,0 +1,5267 @@
+{
+  "sourceCount": 100,
+  "sourceTotals": {
+    "controlWins": 66,
+    "candidateWins": 66,
+    "observed": 277,
+    "no_differential": 95,
+    "differential": 19,
+    "control_replicated": 30,
+    "same_effect_at_placement": 13,
+    "prediction_confirmed": 25,
+    "reused_as_predicted": 32,
+    "precondition_failed": 91,
+    "independent_baseline": 9,
+    "change_not_recreated": 5,
+    "matched_origin_restored": 1,
+    "different_effect_at_placement": 3,
+    "inverse_refuted": 1,
+    "baseline_differs": 5,
+    "change_recreated": 2,
+    "derived_prediction_verified": 2
+  },
+  "gains": [],
+  "losses": [],
+  "sources": {
+    "AMZE": {
+      "control": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "AR25": {
+      "control": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "AS66": {
+      "control": {
+        "won": true,
+        "actions": 11,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 1,
+        "reused": 1,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "BP35": {
+      "control": {
+        "won": false,
+        "actions": 54,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 54,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CASC": {
+      "control": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CATL": {
+      "control": {
+        "won": true,
+        "actions": 8,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 8,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CATR": {
+      "control": {
+        "won": true,
+        "actions": 29,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 29,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CAVA": {
+      "control": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CD82": {
+      "control": {
+        "won": true,
+        "actions": 9,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 9,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CGWL": {
+      "control": {
+        "won": true,
+        "actions": 15,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 15,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CLRS": {
+      "control": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CN04": {
+      "control": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "COLM": {
+      "control": {
+        "won": true,
+        "actions": 20,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 20,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "COMB": {
+      "control": {
+        "won": true,
+        "actions": 8,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 8,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CONN": {
+      "control": {
+        "won": true,
+        "actions": 24,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 24,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CRAF": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "CWSE": {
+      "control": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "DAME": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "DC22": {
+      "control": {
+        "won": true,
+        "actions": 24,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 24,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "DICO": {
+      "control": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "DNOI": {
+      "control": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "ELAS": {
+      "control": {
+        "won": true,
+        "actions": 16,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 16,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "ESCT": {
+      "control": {
+        "won": true,
+        "actions": 16,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 16,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "ETAG": {
+      "control": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "EVAS": {
+      "control": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "FITE": {
+      "control": {
+        "won": true,
+        "actions": 20,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 20,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "FOGW": {
+      "control": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "FT09": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "FUIT": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "G50T": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GABA": {
+      "control": {
+        "won": true,
+        "actions": 49,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 49,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GARE": {
+      "control": {
+        "won": true,
+        "actions": 11,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 11,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GIGO": {
+      "control": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GLOB": {
+      "control": {
+        "won": true,
+        "actions": 9,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 9,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GMAP": {
+      "control": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GORI": {
+      "control": {
+        "won": true,
+        "actions": 15,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 15,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GRAV": {
+      "control": {
+        "won": true,
+        "actions": 11,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 11,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "GRIL": {
+      "control": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "HANO": {
+      "control": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "HOLE": {
+      "control": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "HPDL": {
+      "control": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "ISOS": {
+      "control": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "KA59": {
+      "control": {
+        "won": true,
+        "actions": 15,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 15,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "KATA": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "KEYD": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "KLOT": {
+      "control": {
+        "won": true,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "LF52": {
+      "control": {
+        "won": true,
+        "actions": 31,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 31,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "LIFE": {
+      "control": {
+        "won": true,
+        "actions": 26,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 26,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "LKEY": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "LOGI": {
+      "control": {
+        "won": true,
+        "actions": 16,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 16,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "LP85": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "LS19": {
+      "control": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "LS20": {
+      "control": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "M0R0": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "MEMO": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "MIND": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 1,
+        "reused": 1,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "MOTO": {
+      "control": {
+        "won": true,
+        "actions": 10,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 10,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "ONDE": {
+      "control": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "PIPE": {
+      "control": {
+        "won": true,
+        "actions": 4,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 4,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "POLA": {
+      "control": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 7,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "PORT": {
+      "control": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "PRTL": {
+      "control": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 6,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "R11L": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "RE86": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "RECR": {
+      "control": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "REGN": {
+      "control": {
+        "won": true,
+        "actions": 2,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 2,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "REWI": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 5,
+        "reused": 8,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "RSWP": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "S5I5": {
+      "control": {
+        "won": false,
+        "actions": 50,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 50,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SB26": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SC25": {
+      "control": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SELE": {
+      "control": {
+        "won": true,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SEQN": {
+      "control": {
+        "won": true,
+        "actions": 4,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 4,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SERI": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 3,
+        "reused": 6,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SIGN": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SK48": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SKBN": {
+      "control": {
+        "won": true,
+        "actions": 22,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 22,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SMLP": {
+      "control": {
+        "won": true,
+        "actions": 47,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 56,
+        "confirmed": 2,
+        "reused": 3,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SNAR": {
+      "control": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 17,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SP80": {
+      "control": {
+        "won": false,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SPOR": {
+      "control": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 18,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "STCK": {
+      "control": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 3,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SU15": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SWCH": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 1,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "SYME": {
+      "control": {
+        "won": true,
+        "actions": 9,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 9,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "TEQU": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 3,
+        "reused": 5,
+        "derived": 2,
+        "transport": 0,
+        "enabled": 2
+      }
+    },
+    "THER": {
+      "control": {
+        "won": true,
+        "actions": 21,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 21,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "TICT": {
+      "control": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 5,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "TN36": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "TR87": {
+      "control": {
+        "won": true,
+        "actions": 22,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 22,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "TRCP": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "TRIA": {
+      "control": {
+        "won": true,
+        "actions": 20,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 28,
+        "confirmed": 1,
+        "reused": 1,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "TU93": {
+      "control": {
+        "won": false,
+        "actions": 50,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 50,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "UPST": {
+      "control": {
+        "won": true,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 30,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "VALV": {
+      "control": {
+        "won": true,
+        "actions": 25,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": true,
+        "actions": 25,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "VC33": {
+      "control": {
+        "won": false,
+        "actions": 50,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 50,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "VOIS": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 2,
+        "reused": 2,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "WA30": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "WEAV": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    },
+    "ZIPP": {
+      "control": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 0,
+        "reused": 0,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      },
+      "candidate": {
+        "won": false,
+        "actions": 60,
+        "confirmed": 6,
+        "reused": 5,
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0
+      }
+    }
+  },
+  "focus": {
+    "KEYD": {
+      "control": {
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 240,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 198,
+            "changedTrials": 195,
+            "newScenes": 25,
+            "relational": 178
+          }
+        ],
+        "actions": 240,
+        "initial": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+        "trajectory": "dc3033fbf4e0f1910bcbcadae5318787a04f8d93935aba26639ddbc319d89f35",
+        "counts": {},
+        "phases": {},
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0,
+        "newContinuation": 0,
+        "predictedGapUsed": 0,
+        "longReturns": 0,
+        "proofs": []
+      },
+      "candidate": {
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 240,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 11,
+            "changedTrials": 10,
+            "newScenes": 5,
+            "relational": 8
+          }
+        ],
+        "actions": 240,
+        "initial": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+        "trajectory": "cbdff7db186be70f8b81d2afe3325a3e139698f34ad407e87c4a97e4fed8b0b1",
+        "counts": {
+          "no_differential": 46,
+          "observed": 97,
+          "differential": 3,
+          "same_effect_at_placement": 9,
+          "control_replicated": 4,
+          "prediction_confirmed": 3,
+          "independent_baseline": 20,
+          "inverse_refuted": 5,
+          "baseline_differs": 8,
+          "reused_as_predicted": 6,
+          "change_recreated": 2,
+          "derived_prediction_refuted": 2,
+          "change_not_recreated": 1
+        },
+        "phases": {
+          "control": 24,
+          "probe": 25,
+          "position": 27,
+          "positionB": 9,
+          "route": 52,
+          "prepare": 4,
+          "confirmControl": 4,
+          "confirmA": 3,
+          "confirmB": 3,
+          "deriveControl": 28,
+          "inverse": 5,
+          "reuseA": 6,
+          "reuseB": 6,
+          "explore": 5,
+          "deriveA": 3,
+          "deriveB": 2
+        },
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0,
+        "newContinuation": 5,
+        "predictedGapUsed": 0,
+        "longReturns": 0,
+        "proofs": [
+          {
+            "result": "prediction_confirmed",
+            "phase": "confirmB",
+            "revision": 113,
+            "hypothesis": "1|ACTION4|ACTION3",
+            "refs": [
+              36,
+              3,
+              37,
+              80,
+              112
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "reused_as_predicted",
+            "phase": "reuseB",
+            "revision": 146,
+            "hypothesis": "1|ACTION4|ACTION3",
+            "refs": [
+              36,
+              3,
+              37,
+              80,
+              113,
+              145
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "prediction_confirmed",
+            "phase": "confirmB",
+            "revision": 150,
+            "hypothesis": "5|ACTION4|ACTION2",
+            "refs": [
+              116,
+              84,
+              117,
+              128,
+              149
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "derived_prediction_refuted",
+            "phase": "deriveB",
+            "revision": 166,
+            "hypothesis": "5|ACTION4|ACTION2",
+            "refs": [
+              84,
+              116,
+              117,
+              150,
+              35,
+              165
+            ],
+            "trainedSite": "16,8",
+            "testSite": "11,8",
+            "longer": false,
+            "predictedGap": false,
+            "enabledMotion": false,
+            "strictMatch": false,
+            "capability": {
+              "actor": "6a8648d56a04fd5ecafc0cf9467f3fb61d3aaea041e23ffb8b07b0a9cf5a09fe",
+              "bareActor": "6a8648d56a04fd5ecafc0cf9467f3fb61d3aaea041e23ffb8b07b0a9cf5a09fe",
+              "dx": 0,
+              "dy": 5,
+              "newMotion": true
+            }
+          },
+          {
+            "result": "reused_as_predicted",
+            "phase": "reuseB",
+            "revision": 171,
+            "hypothesis": "5|ACTION4|ACTION2",
+            "refs": [
+              116,
+              84,
+              117,
+              128,
+              150,
+              170
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "derived_prediction_refuted",
+            "phase": "deriveB",
+            "revision": 206,
+            "hypothesis": "23|ACTION4|ACTION2",
+            "refs": [
+              31,
+              106,
+              107,
+              202,
+              35,
+              205
+            ],
+            "trainedSite": "16,8",
+            "testSite": "11,8",
+            "longer": false,
+            "predictedGap": false,
+            "enabledMotion": false,
+            "strictMatch": false,
+            "capability": {
+              "actor": "6a8648d56a04fd5ecafc0cf9467f3fb61d3aaea041e23ffb8b07b0a9cf5a09fe",
+              "bareActor": "6a8648d56a04fd5ecafc0cf9467f3fb61d3aaea041e23ffb8b07b0a9cf5a09fe",
+              "dx": 0,
+              "dy": 5,
+              "newMotion": true
+            }
+          }
+        ]
+      }
+    },
+    "SWCH": {
+      "control": {
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 240,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 160,
+            "changedTrials": 154,
+            "newScenes": 93,
+            "relational": 129
+          }
+        ],
+        "actions": 240,
+        "initial": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+        "trajectory": "1273a3b9638efff57fd22a648e062aed8ae9520604f59a32b3a5f1a9265bc6f5",
+        "counts": {},
+        "phases": {},
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0,
+        "newContinuation": 0,
+        "predictedGapUsed": 0,
+        "longReturns": 0,
+        "proofs": []
+      },
+      "candidate": {
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 240,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 17,
+            "changedTrials": 17,
+            "newScenes": 11,
+            "relational": 13
+          }
+        ],
+        "actions": 240,
+        "initial": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+        "trajectory": "1919eeca115f2a52fefc93b8c0c5ac9c05b96996fff6ae5bba6c46e013e23a6c",
+        "counts": {
+          "control_replicated": 6,
+          "no_differential": 13,
+          "observed": 95,
+          "prediction_confirmed": 5,
+          "independent_baseline": 13,
+          "inverse_refuted": 8,
+          "baseline_differs": 23,
+          "reused_as_predicted": 4,
+          "change_not_recreated": 2,
+          "differential": 5,
+          "change_recreated": 4,
+          "derived_prediction_refuted": 4
+        },
+        "phases": {
+          "confirmControl": 6,
+          "control": 5,
+          "probe": 13,
+          "position": 19,
+          "confirmA": 5,
+          "confirmB": 5,
+          "deriveControl": 36,
+          "inverse": 8,
+          "route": 61,
+          "reuseA": 4,
+          "reuseB": 4,
+          "explore": 3,
+          "deriveA": 6,
+          "prepare": 3,
+          "deriveB": 4
+        },
+        "derived": 0,
+        "transport": 0,
+        "enabled": 0,
+        "newContinuation": 3,
+        "predictedGapUsed": 0,
+        "longReturns": 1,
+        "proofs": [
+          {
+            "result": "prediction_confirmed",
+            "phase": "confirmB",
+            "revision": 50,
+            "hypothesis": "0|ACTION1|ACTION3",
+            "refs": [
+              2,
+              15,
+              3,
+              41,
+              49
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "reused_as_predicted",
+            "phase": "reuseB",
+            "revision": 63,
+            "hypothesis": "0|ACTION1|ACTION3",
+            "refs": [
+              2,
+              15,
+              3,
+              41,
+              50,
+              62
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "reused_as_predicted",
+            "phase": "reuseB",
+            "revision": 76,
+            "hypothesis": "0|ACTION1|ACTION3",
+            "refs": [
+              2,
+              15,
+              3,
+              41,
+              50,
+              75
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "prediction_confirmed",
+            "phase": "confirmB",
+            "revision": 113,
+            "hypothesis": "2|ACTION4|ACTION2",
+            "refs": [
+              77,
+              4,
+              78,
+              99,
+              112
+            ],
+            "longer": false,
+            "predictedGap": false
+          },
+          {
+            "result": "derived_prediction_refuted",
+            "phase": "deriveB",
+            "revision": 174,
+            "hypothesis": "0|ACTION1|ACTION3",
+            "refs": [
+              15,
+              2,
+              3,
+              50,
+              119,
+              173
+            ],
+            "trainedSite": "16,19",
+            "testSite": "11,29",
+            "longer": false,
+            "predictedGap": false,
+            "enabledMotion": false,
+            "strictMatch": false,
+            "capability": {
+              "actor": "5017b8e0281b7415b65acfc5df6b7e11548c3c8a451875e322972050304df02c",
+              "bareActor": "5017b8e0281b7415b65acfc5df6b7e11548c3c8a451875e322972050304df02c",
+              "dx": -5,
+              "dy": 0,
+              "newMotion": true
+            }
+          },
+          {
+            "result": "derived_prediction_refuted",
+            "phase": "deriveB",
+            "revision": 184,
+            "hypothesis": "0|ACTION1|ACTION3",
+            "refs": [
+              15,
+              2,
+              3,
+              50,
+              151,
+              183
+            ],
+            "trainedSite": "16,19",
+            "testSite": "11,39",
+            "longer": false,
+            "predictedGap": false,
+            "enabledMotion": false,
+            "strictMatch": false,
+            "capability": {
+              "actor": "5017b8e0281b7415b65acfc5df6b7e11548c3c8a451875e322972050304df02c",
+              "bareActor": "5017b8e0281b7415b65acfc5df6b7e11548c3c8a451875e322972050304df02c",
+              "dx": -5,
+              "dy": 0,
+              "newMotion": true
+            }
+          },
+          {
+            "result": "derived_prediction_refuted",
+            "phase": "deriveB",
+            "revision": 238,
+            "hypothesis": "1|ACTION3|ACTION2",
+            "refs": [
+              145,
+              3,
+              4,
+              191,
+              200,
+              237
+            ],
+            "trainedSite": "16,14",
+            "testSite": "16,24",
+            "longer": true,
+            "localPath": true,
+            "predictedGap": false,
+            "from": "11,24",
+            "to": "16,19",
+            "enabledMotion": false,
+            "strictMatch": false,
+            "capability": {
+              "actor": "2fd81d7ae0c4a69671f2c8ccfa66a2d23dea97d8f1ccaea77f9d65344ab0cd70",
+              "bareActor": "2fd81d7ae0c4a69671f2c8ccfa66a2d23dea97d8f1ccaea77f9d65344ab0cd70",
+              "dx": 0,
+              "dy": 2,
+              "newMotion": true
+            }
+          }
+        ]
+      }
+    }
+  },
+  "targets": {
+    "chron": {
+      "SS01": {
+        "control": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 531,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 491,
+              "changedTrials": 394,
+              "newScenes": 278,
+              "relational": 274,
+              "uniqueImages": 288,
+              "returns": 120,
+              "replayed": 49,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 36,
+              "translated": 190,
+              "returnedPositions": 112
+            }
+          ],
+          "actions": 531,
+          "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+          "trajectory": "7dd4e0a0cf49fce66aca91dab0ffa137be3fba4281d79da2207c53605019a9cd",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 600,
+              "reason": "level_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 20,
+              "changedTrials": 15,
+              "newScenes": 12,
+              "relational": 11,
+              "uniqueImages": 72,
+              "returns": 150,
+              "replayed": 123,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 32,
+              "translated": 106,
+              "returnedPositions": 90
+            }
+          ],
+          "actions": 600,
+          "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+          "trajectory": "9936751538e79a27b6ccccb1f6c9371c357206935b657cda2aefc7cdfb7e9254",
+          "counts": {
+            "observed": 134,
+            "no_differential": 58,
+            "differential": 18,
+            "control_replicated": 20,
+            "prediction_confirmed": 20,
+            "reused_as_predicted": 19,
+            "precondition_failed": 273,
+            "independent_baseline": 3,
+            "change_not_recreated": 3
+          },
+          "phases": {
+            "prepare": 335,
+            "probe": 68,
+            "control": 8,
+            "confirmControl": 20,
+            "confirmA": 20,
+            "confirmB": 20,
+            "reuseA": 19,
+            "reuseB": 19,
+            "explore": 19,
+            "route": 11,
+            "position": 3,
+            "deriveControl": 3,
+            "deriveA": 3
+          },
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 19,
+          "predictedGapUsed": 3,
+          "longReturns": 6,
+          "proofs": [
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 44,
+              "hypothesis": "12|ACTION5|ACTION4",
+              "refs": [
+                40,
+                39,
+                41,
+                42,
+                43
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 46,
+              "hypothesis": "12|ACTION5|ACTION4",
+              "refs": [
+                40,
+                39,
+                41,
+                42,
+                44,
+                45
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 54,
+              "hypothesis": "12|ACTION1|ACTION4",
+              "refs": [
+                47,
+                39,
+                48,
+                52,
+                53
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 59,
+              "hypothesis": "12|ACTION1|ACTION4",
+              "refs": [
+                47,
+                39,
+                48,
+                52,
+                54,
+                58
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 169,
+              "hypothesis": "33|ACTION6:27,18|ACTION6:12,36",
+              "refs": [
+                157,
+                143,
+                166,
+                167,
+                168
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "11,35",
+              "to": "26,17"
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 171,
+              "hypothesis": "33|ACTION6:27,18|ACTION6:12,36",
+              "refs": [
+                157,
+                143,
+                166,
+                167,
+                169,
+                170
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "11,35",
+              "to": "26,17"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 338,
+              "hypothesis": "44|ACTION4|ACTION6:27,18",
+              "refs": [
+                324,
+                313,
+                329,
+                335,
+                337
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "14,26",
+              "to": "26,17"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 395,
+              "hypothesis": "60|ACTION6:26,11|ACTION6:12,27",
+              "refs": [
+                391,
+                388,
+                392,
+                393,
+                394
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "26,12",
+              "to": "11,27"
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 397,
+              "hypothesis": "60|ACTION6:26,11|ACTION6:12,27",
+              "refs": [
+                391,
+                388,
+                392,
+                393,
+                395,
+                396
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "26,12",
+              "to": "11,27"
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 400,
+              "hypothesis": "60|ACTION6:26,11|ACTION6:12,27",
+              "refs": [
+                391,
+                388,
+                392,
+                393,
+                395,
+                399
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "26,12",
+              "to": "11,27"
+            }
+          ]
+        }
+      },
+      "SS06": {
+        "control": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 600,
+              "reason": "level_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 556,
+              "changedTrials": 276,
+              "newScenes": 194,
+              "relational": 174,
+              "uniqueImages": 204,
+              "returns": 87,
+              "replayed": 19,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 35,
+              "translated": 112,
+              "returnedPositions": 54
+            }
+          ],
+          "actions": 600,
+          "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+          "trajectory": "dc2ea95d58214e1fc8419f559b4ac6a4c4b889fecd0c28e439037620de085148",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 600,
+              "reason": "level_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 26,
+              "returns": 128,
+              "replayed": 94,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 30,
+              "translated": 1,
+              "returnedPositions": 0
+            }
+          ],
+          "actions": 600,
+          "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+          "trajectory": "32af3b94c985001cfe384259fdc51d57b8eda0e2304bee866296a46c90ee7b2c",
+          "counts": {
+            "no_differential": 63,
+            "differential": 10,
+            "control_replicated": 11,
+            "observed": 109,
+            "prediction_confirmed": 10,
+            "reused_as_predicted": 14,
+            "precondition_failed": 358
+          },
+          "phases": {
+            "control": 10,
+            "confirmControl": 11,
+            "confirmA": 11,
+            "confirmB": 10,
+            "reuseA": 16,
+            "reuseB": 14,
+            "explore": 14,
+            "route": 15,
+            "probe": 63,
+            "prepare": 411
+          },
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 14,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": [
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 32,
+              "hypothesis": "0|ACTION3|ACTION4",
+              "refs": [
+                27,
+                29,
+                28,
+                30,
+                31
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 34,
+              "hypothesis": "0|ACTION3|ACTION4",
+              "refs": [
+                27,
+                29,
+                28,
+                30,
+                32,
+                33
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 41,
+              "hypothesis": "0|ACTION2|ACTION4",
+              "refs": [
+                35,
+                29,
+                5,
+                39,
+                40
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 45,
+              "hypothesis": "0|ACTION2|ACTION4",
+              "refs": [
+                35,
+                29,
+                5,
+                39,
+                41,
+                44
+              ],
+              "longer": false,
+              "predictedGap": false
+            }
+          ]
+        }
+      },
+      "SS07": {
+        "control": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 600,
+              "reason": "level_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 560,
+              "changedTrials": 278,
+              "newScenes": 162,
+              "relational": 156,
+              "uniqueImages": 172,
+              "returns": 118,
+              "replayed": 27,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 35,
+              "translated": 55,
+              "returnedPositions": 24
+            }
+          ],
+          "actions": 600,
+          "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+          "trajectory": "ba9ee407f418cbcf8afe06791d3e175004bce2946ead1624df6f6f591110e155",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 600,
+              "reason": "level_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 36,
+              "returns": 144,
+              "replayed": 115,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 32,
+              "translated": 2,
+              "returnedPositions": 0
+            }
+          ],
+          "actions": 600,
+          "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+          "trajectory": "30b52ded093b6f75a23c306228a8ac50b9a45891ce5bccb48e4b651edf533d21",
+          "counts": {
+            "observed": 130,
+            "no_differential": 65,
+            "precondition_failed": 310,
+            "differential": 10,
+            "control_replicated": 17,
+            "prediction_confirmed": 13,
+            "reused_as_predicted": 15
+          },
+          "phases": {
+            "prepare": 373,
+            "probe": 66,
+            "control": 9,
+            "confirmControl": 17,
+            "confirmA": 16,
+            "confirmB": 13,
+            "reuseA": 15,
+            "reuseB": 15,
+            "explore": 15,
+            "route": 21
+          },
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 15,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": [
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 80,
+              "hypothesis": "13|ACTION6:15,27|ACTION6:15,18",
+              "refs": [
+                72,
+                69,
+                77,
+                78,
+                79
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 82,
+              "hypothesis": "13|ACTION6:15,27|ACTION6:15,18",
+              "refs": [
+                72,
+                69,
+                77,
+                78,
+                80,
+                81
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 194,
+              "hypothesis": "16|ACTION4|ACTION1",
+              "refs": [
+                108,
+                151,
+                139,
+                188,
+                193
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 206,
+              "hypothesis": "15|ACTION3|ACTION1",
+              "refs": [
+                103,
+                196,
+                151,
+                198,
+                201,
+                205
+              ],
+              "longer": false,
+              "predictedGap": false
+            }
+          ]
+        }
+      },
+      "SS08": {
+        "control": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 70,
+              "reason": "native_game_over",
+              "state": "GAME_OVER",
+              "compositionTrials": 30,
+              "changedTrials": 28,
+              "newScenes": 25,
+              "relational": 13,
+              "uniqueImages": 37,
+              "returns": 8,
+              "replayed": 0,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 32,
+              "translated": 21,
+              "returnedPositions": 5
+            }
+          ],
+          "actions": 70,
+          "initial": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c",
+          "trajectory": "4ab545f27bf4aed1a904313e86f469eecdf7c19f30548e32bfaf29daab24ee5b",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 600,
+              "reason": "level_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 33,
+              "returns": 352,
+              "replayed": 335,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 26,
+              "translated": 272,
+              "returnedPositions": 267
+            }
+          ],
+          "actions": 600,
+          "initial": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c",
+          "trajectory": "33dc9b395d80b13d4d1c9c95d1adf0c8503d83fbd03dd143dd908c176b6443fe",
+          "counts": {
+            "no_differential": 62,
+            "observed": 353,
+            "precondition_failed": 135,
+            "differential": 5,
+            "control_replicated": 6,
+            "prediction_confirmed": 6,
+            "reused_as_predicted": 9
+          },
+          "phases": {
+            "control": 6,
+            "prepare": 188,
+            "probe": 61,
+            "confirmControl": 6,
+            "confirmA": 6,
+            "confirmB": 6,
+            "reuseA": 9,
+            "reuseB": 9,
+            "explore": 9,
+            "route": 22,
+            "position": 254
+          },
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 9,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": [
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 66,
+              "hypothesis": "15|ACTION6:21,36|ACTION6:30,21",
+              "refs": [
+                54,
+                44,
+                63,
+                64,
+                65
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 68,
+              "hypothesis": "15|ACTION6:21,36|ACTION6:30,21",
+              "refs": [
+                54,
+                44,
+                63,
+                64,
+                66,
+                67
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 71,
+              "hypothesis": "15|ACTION6:21,36|ACTION6:30,21",
+              "refs": [
+                54,
+                44,
+                63,
+                64,
+                66,
+                70
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 116,
+              "hypothesis": "14|ACTION6:30,21|ACTION6:21,36",
+              "refs": [
+                63,
+                113,
+                54,
+                114,
+                115
+              ],
+              "longer": false,
+              "predictedGap": false
+            }
+          ]
+        }
+      }
+    },
+    "direct": {
+      "SS01": {
+        "control": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 600,
+              "reason": "session_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 560,
+              "changedTrials": 495,
+              "newScenes": 92,
+              "relational": 179,
+              "uniqueImages": 125,
+              "returns": 411,
+              "replayed": 203,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 25,
+              "translated": 89,
+              "returnedPositions": 60
+            }
+          ],
+          "actions": 600,
+          "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+          "trajectory": "6b08b936f144aab09556df19f39f08a8c9918c1cb325f5d8fdf53dd27af8b94c",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 600,
+              "reason": "session_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 41,
+              "changedTrials": 30,
+              "newScenes": 18,
+              "relational": 25,
+              "uniqueImages": 127,
+              "returns": 420,
+              "replayed": 346,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 25,
+              "translated": 120,
+              "returnedPositions": 102
+            }
+          ],
+          "actions": 600,
+          "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+          "trajectory": "359eddaa5eba0a7ef933ac15c242eb18cbe7025b547e17e4e616139e35f2a4e7",
+          "counts": {
+            "observed": 291,
+            "control_replicated": 53,
+            "prediction_confirmed": 47,
+            "differential": 44,
+            "reused_as_predicted": 43,
+            "no_differential": 6,
+            "different_effect_at_placement": 4,
+            "baseline_differs": 9,
+            "independent_baseline": 11,
+            "change_not_recreated": 12,
+            "matched_origin_restored": 5,
+            "same_effect_at_placement": 1,
+            "change_recreated": 3,
+            "derived_prediction_verified": 3
+          },
+          "phases": {
+            "route": 125,
+            "confirmControl": 53,
+            "confirmA": 47,
+            "confirmB": 47,
+            "control": 6,
+            "reuseA": 43,
+            "reuseB": 43,
+            "explore": 46,
+            "probe": 44,
+            "prepare": 12,
+            "position": 18,
+            "positionB": 5,
+            "deriveControl": 20,
+            "deriveA": 15,
+            "inverse": 5,
+            "deriveB": 3
+          },
+          "derived": 3,
+          "transport": 0,
+          "enabled": 2,
+          "newContinuation": 46,
+          "predictedGapUsed": 3,
+          "longReturns": 12,
+          "proofs": [
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 26,
+              "hypothesis": "2|ACTION5|ACTION2",
+              "refs": [
+                9,
+                4,
+                10,
+                20,
+                25
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 31,
+              "hypothesis": "2|ACTION5|ACTION2",
+              "refs": [
+                9,
+                4,
+                10,
+                20,
+                26,
+                30
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 35,
+              "hypothesis": "2|ACTION5|ACTION2",
+              "refs": [
+                9,
+                4,
+                10,
+                20,
+                26,
+                34
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 46,
+              "hypothesis": "4|ACTION5|ACTION1",
+              "refs": [
+                6,
+                28,
+                7,
+                39,
+                45
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 265,
+              "hypothesis": "41|ACTION1|ACTION5",
+              "refs": [
+                235,
+                192,
+                236,
+                252,
+                264
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "32,14",
+              "to": "29,17"
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 275,
+              "hypothesis": "41|ACTION1|ACTION5",
+              "refs": [
+                235,
+                192,
+                236,
+                252,
+                265,
+                274
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "32,14",
+              "to": "29,17"
+            },
+            {
+              "result": "different_effect_at_placement",
+              "phase": "positionB",
+              "revision": 351,
+              "hypothesis": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6/component:48980349b20de243:0@32,11/32/11/ACTION5",
+              "refs": [
+                337,
+                350
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": false,
+              "from": "32,11",
+              "to": "29,14"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 355,
+              "hypothesis": "54|ACTION4|ACTION5",
+              "refs": [
+                335,
+                304,
+                336,
+                352,
+                354
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "29,17",
+              "to": "35,11"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 359,
+              "hypothesis": "66|ACTION1|ACTION5",
+              "refs": [
+                339,
+                337,
+                303,
+                356,
+                358
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "32,11",
+              "to": "29,14"
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 361,
+              "hypothesis": "54|ACTION4|ACTION5",
+              "refs": [
+                335,
+                304,
+                336,
+                352,
+                355,
+                360
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "29,17",
+              "to": "35,11"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 385,
+              "hypothesis": "70|ACTION4|ACTION5",
+              "refs": [
+                347,
+                346,
+                337,
+                383,
+                384
+              ],
+              "longer": true,
+              "localPath": true,
+              "predictedGap": false,
+              "from": "35,11",
+              "to": "29,17"
+            },
+            {
+              "result": "different_effect_at_placement",
+              "phase": "positionB",
+              "revision": 387,
+              "hypothesis": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6/component:2a0c3d7b914524bf:0@30,14/29/14/ACTION5",
+              "refs": [
+                336,
+                386
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": false,
+              "from": "33,11",
+              "to": "30,14"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 451,
+              "hypothesis": "65|ACTION3|ACTION5",
+              "refs": [
+                386,
+                336,
+                387,
+                445,
+                450
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "33,11",
+              "to": "30,14"
+            },
+            {
+              "result": "derived_prediction_verified",
+              "phase": "deriveB",
+              "revision": 460,
+              "hypothesis": "54|ACTION4|ACTION5",
+              "refs": [
+                304,
+                335,
+                336,
+                355,
+                457,
+                459
+              ],
+              "trainedSite": "29,14",
+              "testSite": "26,14",
+              "longer": true,
+              "localPath": true,
+              "predictedGap": false,
+              "from": "26,17",
+              "to": "32,11",
+              "enabledMotion": true,
+              "strictMatch": true,
+              "capability": {
+                "actor": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6",
+                "bareActor": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6",
+                "dx": 6,
+                "dy": -6,
+                "newMotion": false
+              }
+            },
+            {
+              "result": "derived_prediction_verified",
+              "phase": "deriveB",
+              "revision": 581,
+              "hypothesis": "100|ACTION4|ACTION5",
+              "refs": [
+                464,
+                465,
+                466,
+                578,
+                579,
+                580
+              ],
+              "trainedSite": "29,14",
+              "testSite": "32,14",
+              "longer": false,
+              "predictedGap": false,
+              "enabledMotion": false,
+              "strictMatch": true
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 589,
+              "hypothesis": "108|ACTION1|ACTION5",
+              "refs": [
+                476,
+                474,
+                477,
+                586,
+                588
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "32,12",
+              "to": "26,18"
+            },
+            {
+              "result": "derived_prediction_verified",
+              "phase": "deriveB",
+              "revision": 592,
+              "hypothesis": "65|ACTION3|ACTION5",
+              "refs": [
+                336,
+                386,
+                387,
+                451,
+                477,
+                591
+              ],
+              "trainedSite": "29,17",
+              "testSite": "26,17",
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "30,11",
+              "to": "27,14",
+              "enabledMotion": true,
+              "strictMatch": true,
+              "capability": {
+                "actor": "1945862e6513f262c3225b8718b1151419e166e5ecaa4ab61c03e860ac2d76ba",
+                "bareActor": "1945862e6513f262c3225b8718b1151419e166e5ecaa4ab61c03e860ac2d76ba",
+                "dx": -3,
+                "dy": 3,
+                "newMotion": true
+              }
+            }
+          ]
+        }
+      },
+      "SS06": {
+        "control": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 104,
+              "reason": "native_game_over",
+              "state": "GAME_OVER",
+              "compositionTrials": 64,
+              "changedTrials": 47,
+              "newScenes": 33,
+              "relational": 26,
+              "uniqueImages": 45,
+              "returns": 17,
+              "replayed": 5,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 35,
+              "translated": 24,
+              "returnedPositions": 6
+            }
+          ],
+          "actions": 104,
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "trajectory": "3dfcc8b2be01c85c521bcca1ec1204a2b9ae3cef79cf72510d2172ab68c86f96",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 600,
+              "reason": "session_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 4,
+              "changedTrials": 3,
+              "newScenes": 3,
+              "relational": 0,
+              "uniqueImages": 41,
+              "returns": 87,
+              "replayed": 70,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 30,
+              "translated": 7,
+              "returnedPositions": 3
+            }
+          ],
+          "actions": 600,
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "trajectory": "9ade090a1623e5729d9a5c2ef79617fd33e7f59792f83499273061e7464bd5a6",
+          "counts": {
+            "differential": 6,
+            "control_replicated": 7,
+            "observed": 85,
+            "prediction_confirmed": 7,
+            "reused_as_predicted": 8,
+            "no_differential": 47,
+            "precondition_failed": 400
+          },
+          "phases": {
+            "control": 9,
+            "confirmControl": 7,
+            "confirmA": 7,
+            "confirmB": 7,
+            "reuseA": 8,
+            "reuseB": 8,
+            "explore": 8,
+            "probe": 44,
+            "prepare": 441,
+            "route": 21
+          },
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 8,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": [
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 41,
+              "hypothesis": "10|ACTION6:9,24|ACTION6:39,51",
+              "refs": [
+                36,
+                38,
+                37,
+                39,
+                40
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 43,
+              "hypothesis": "10|ACTION6:9,24|ACTION6:39,51",
+              "refs": [
+                36,
+                38,
+                37,
+                39,
+                41,
+                42
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 53,
+              "hypothesis": "10|ACTION6:9,24|ACTION6:39,51",
+              "refs": [
+                36,
+                38,
+                37,
+                39,
+                41,
+                52
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 129,
+              "hypothesis": "11|ACTION6:39,51|ACTION6:9,24",
+              "refs": [
+                37,
+                126,
+                36,
+                127,
+                128
+              ],
+              "longer": false,
+              "predictedGap": false
+            }
+          ]
+        }
+      },
+      "SS07": {
+        "control": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 5,
+              "reason": "native_game_over",
+              "state": "GAME_OVER",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 5,
+              "returns": 1,
+              "replayed": 0,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 4,
+              "translated": 0,
+              "returnedPositions": 0
+            }
+          ],
+          "actions": 5,
+          "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 5,
+              "reason": "native_game_over",
+              "state": "GAME_OVER",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 5,
+              "returns": 1,
+              "replayed": 0,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 4,
+              "translated": 0,
+              "returnedPositions": 0
+            }
+          ],
+          "actions": 5,
+          "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        }
+      },
+      "SS08": {
+        "control": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 600,
+              "reason": "session_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 519,
+              "changedTrials": 305,
+              "newScenes": 110,
+              "relational": 327,
+              "uniqueImages": 140,
+              "returns": 208,
+              "replayed": 92,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 35,
+              "translated": 43,
+              "returnedPositions": 24
+            }
+          ],
+          "actions": 600,
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "trajectory": "57802cc571395c5f19a7eaa5edff757346cf01588b32254904524ae69a605d2d",
+          "counts": {},
+          "phases": {},
+          "derived": 0,
+          "transport": 0,
+          "enabled": 0,
+          "newContinuation": 0,
+          "predictedGapUsed": 0,
+          "longReturns": 0,
+          "proofs": []
+        },
+        "candidate": {
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 600,
+              "reason": "session_action_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 185,
+              "returns": 337,
+              "replayed": 228,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 31,
+              "translated": 47,
+              "returnedPositions": 24
+            }
+          ],
+          "actions": 600,
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "trajectory": "3dd14f4a763f6ae572f7effc330b2a22cfe02bfb49217d45cce08a2148177851",
+          "counts": {
+            "observed": 175,
+            "control_replicated": 44,
+            "prediction_confirmed": 34,
+            "baseline_differs": 73,
+            "independent_baseline": 80,
+            "change_not_recreated": 65,
+            "reused_as_predicted": 28,
+            "change_recreated": 10,
+            "derived_prediction_verified": 9,
+            "inverse_refuted": 51,
+            "derived_prediction_refuted": 1,
+            "matched_origin_restored": 3
+          },
+          "phases": {
+            "route": 71,
+            "confirmControl": 44,
+            "position": 5,
+            "confirmA": 34,
+            "confirmB": 34,
+            "deriveControl": 153,
+            "deriveA": 75,
+            "reuseA": 28,
+            "reuseB": 28,
+            "explore": 37,
+            "deriveB": 10,
+            "inverse": 54
+          },
+          "derived": 9,
+          "transport": 0,
+          "enabled": 6,
+          "newContinuation": 37,
+          "predictedGapUsed": 2,
+          "longReturns": 6,
+          "proofs": [
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 37,
+              "hypothesis": "6|ACTION3|ACTION2",
+              "refs": [
+                33,
+                32,
+                34,
+                35,
+                36
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 44,
+              "hypothesis": "0|ACTION2|ACTION3",
+              "refs": [
+                3,
+                24,
+                4,
+                30,
+                43
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 63,
+              "hypothesis": "1|ACTION3|ACTION4",
+              "refs": [
+                4,
+                48,
+                6,
+                53,
+                59,
+                62
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 66,
+              "hypothesis": "2|ACTION2|ACTION4",
+              "refs": [
+                34,
+                6,
+                28,
+                41,
+                46,
+                65
+              ],
+              "longer": false,
+              "predictedGap": false
+            },
+            {
+              "result": "derived_prediction_verified",
+              "phase": "deriveB",
+              "revision": 69,
+              "hypothesis": "3|ACTION1|ACTION2",
+              "refs": [
+                39,
+                22,
+                3,
+                61,
+                49,
+                68
+              ],
+              "trainedSite": "19,45",
+              "testSite": "22,45",
+              "longer": false,
+              "predictedGap": false,
+              "enabledMotion": false,
+              "strictMatch": true,
+              "capability": {
+                "actor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bareActor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "dx": 0,
+                "dy": 5,
+                "newMotion": false
+              }
+            },
+            {
+              "result": "derived_prediction_verified",
+              "phase": "deriveB",
+              "revision": 76,
+              "hypothesis": "0|ACTION2|ACTION3",
+              "refs": [
+                24,
+                3,
+                4,
+                44,
+                71,
+                75
+              ],
+              "trainedSite": "18,41",
+              "testSite": "21,41",
+              "longer": false,
+              "predictedGap": false,
+              "enabledMotion": false,
+              "strictMatch": true,
+              "capability": {
+                "actor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bareActor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "dx": -4,
+                "dy": -1,
+                "newMotion": false
+              }
+            },
+            {
+              "result": "derived_prediction_refuted",
+              "phase": "deriveB",
+              "revision": 232,
+              "hypothesis": "0|ACTION2|ACTION3",
+              "refs": [
+                24,
+                3,
+                4,
+                44,
+                228,
+                231
+              ],
+              "trainedSite": "18,41",
+              "testSite": "15,41",
+              "longer": false,
+              "predictedGap": false,
+              "enabledMotion": false,
+              "strictMatch": false,
+              "capability": {
+                "actor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bareActor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "dx": -4,
+                "dy": -1,
+                "newMotion": false
+              }
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 322,
+              "hypothesis": "75|ACTION1|ACTION2",
+              "refs": [
+                318,
+                317,
+                319,
+                320,
+                321
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "15,23",
+              "to": "15,46"
+            },
+            {
+              "result": "derived_prediction_verified",
+              "phase": "deriveB",
+              "revision": 374,
+              "hypothesis": "8|ACTION3|ACTION2",
+              "refs": [
+                50,
+                51,
+                52,
+                57,
+                372,
+                373
+              ],
+              "trainedSite": "21,46",
+              "testSite": "18,25",
+              "longer": true,
+              "localPath": false,
+              "predictedGap": false,
+              "from": "14,24",
+              "to": "15,46",
+              "enabledMotion": true,
+              "strictMatch": false,
+              "capability": {
+                "actor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "bareActor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+                "dx": 1,
+                "dy": 1,
+                "newMotion": true
+              }
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 377,
+              "hypothesis": "75|ACTION1|ACTION2",
+              "refs": [
+                318,
+                317,
+                319,
+                320,
+                322,
+                376
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "15,23",
+              "to": "15,46"
+            },
+            {
+              "result": "reused_as_predicted",
+              "phase": "reuseB",
+              "revision": 380,
+              "hypothesis": "75|ACTION1|ACTION2",
+              "refs": [
+                318,
+                317,
+                319,
+                320,
+                322,
+                379
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "15,23",
+              "to": "15,46"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 467,
+              "hypothesis": "119|ACTION1|ACTION2",
+              "refs": [
+                459,
+                458,
+                460,
+                465,
+                466
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "42,26",
+              "to": "42,46"
+            },
+            {
+              "result": "prediction_confirmed",
+              "phase": "confirmB",
+              "revision": 580,
+              "hypothesis": "168|ACTION1|ACTION2",
+              "refs": [
+                576,
+                565,
+                577,
+                578,
+                579
+              ],
+              "longer": true,
+              "localPath": false,
+              "predictedGap": true,
+              "from": "45,20",
+              "to": "45,46"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "freshControl": {
+    "levels": [
+      {
+        "level": 2,
+        "won": false,
+        "actions": 600,
+        "reason": "session_action_budget",
+        "state": "NOT_FINISHED",
+        "compositionTrials": 560,
+        "changedTrials": 495,
+        "newScenes": 92,
+        "relational": 179,
+        "uniqueImages": 125,
+        "returns": 411,
+        "replayed": 203,
+        "controls": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "pairs": 25,
+        "translated": 89,
+        "returnedPositions": 60
+      }
+    ],
+    "actions": 600,
+    "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+    "trajectory": "6b08b936f144aab09556df19f39f08a8c9918c1cb325f5d8fdf53dd27af8b94c",
+    "counts": {},
+    "phases": {},
+    "derived": 0,
+    "transport": 0,
+    "enabled": 0,
+    "newContinuation": 0,
+    "predictedGapUsed": 0,
+    "longReturns": 0,
+    "proofs": []
+  },
+  "sourceForks": [
+    {
+      "code": "KEYD",
+      "total": 10,
+      "verified": 0,
+      "outcomes": [
+        {
+          "id": "1|ACTION4|ACTION3/21,13",
+          "sourceRevision": 118,
+          "site": "21,13",
+          "trained": "11,8",
+          "matchedPrefix": "19d40cf49a5e12c8",
+          "absent": true,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "1|ACTION4|ACTION3/16,8",
+          "sourceRevision": 132,
+          "site": "16,8",
+          "trained": "11,8",
+          "matchedPrefix": "ec4ba07dc53dfe5e",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "1|ACTION4|ACTION3/21,8",
+          "sourceRevision": 136,
+          "site": "21,8",
+          "trained": "11,8",
+          "matchedPrefix": "1f9cc93c45a2c768",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "5|ACTION4|ACTION2/21,13",
+          "sourceRevision": 151,
+          "site": "21,13",
+          "trained": "16,8",
+          "matchedPrefix": "19d40cf49a5e12c8",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "1|ACTION4|ACTION3/21,18",
+          "sourceRevision": 152,
+          "site": "21,18",
+          "trained": "11,8",
+          "matchedPrefix": "e791d69be2b1b640",
+          "absent": true,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "5|ACTION4|ACTION2/21,8",
+          "sourceRevision": 177,
+          "site": "21,8",
+          "trained": "16,8",
+          "matchedPrefix": "6cbdf1da2cfc9e91",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "5|ACTION4|ACTION2/21,18",
+          "sourceRevision": 189,
+          "site": "21,18",
+          "trained": "16,8",
+          "matchedPrefix": "944517e188c3d1ed",
+          "absent": true,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "23|ACTION4|ACTION2/21,13",
+          "sourceRevision": 203,
+          "site": "21,13",
+          "trained": "16,8",
+          "matchedPrefix": "3ee5535d0429eb4e",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "23|ACTION4|ACTION2/21,8",
+          "sourceRevision": 216,
+          "site": "21,8",
+          "trained": "16,8",
+          "matchedPrefix": "34f4d0f4557d16db",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "23|ACTION4|ACTION2/21,18",
+          "sourceRevision": 229,
+          "site": "21,18",
+          "trained": "16,8",
+          "matchedPrefix": "96f7627414d43018",
+          "absent": true,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        }
+      ]
+    },
+    {
+      "code": "SWCH",
+      "total": 31,
+      "verified": 0,
+      "outcomes": [
+        {
+          "id": "0|ACTION1|ACTION3/11,14",
+          "sourceRevision": 51,
+          "site": "11,14",
+          "trained": "16,19",
+          "matchedPrefix": "a934a8ca328dfc3e",
+          "absent": true,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/16,14",
+          "sourceRevision": 53,
+          "site": "16,14",
+          "trained": "16,19",
+          "matchedPrefix": "22d9a9e27c6fa812",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/21,19",
+          "sourceRevision": 80,
+          "site": "21,19",
+          "trained": "16,19",
+          "matchedPrefix": "c5f4ae3891d84942",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/16,24",
+          "sourceRevision": 82,
+          "site": "16,24",
+          "trained": "16,19",
+          "matchedPrefix": "962f02d89da18f43",
+          "absent": false,
+          "matchesA": true,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/11,24",
+          "sourceRevision": 83,
+          "site": "11,24",
+          "trained": "16,19",
+          "matchedPrefix": "5e8430e1e9c85155",
+          "absent": true,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/21,14",
+          "sourceRevision": 88,
+          "site": "21,14",
+          "trained": "16,19",
+          "matchedPrefix": "a4edbca74594b619",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/21,19",
+          "sourceRevision": 115,
+          "site": "21,19",
+          "trained": "11,14",
+          "matchedPrefix": "c5f4ae3891d84942",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/21,24",
+          "sourceRevision": 116,
+          "site": "21,24",
+          "trained": "16,19",
+          "matchedPrefix": "b8464c1720d427fe",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/16,24",
+          "sourceRevision": 117,
+          "site": "16,24",
+          "trained": "11,14",
+          "matchedPrefix": "962f02d89da18f43",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/16,29",
+          "sourceRevision": 118,
+          "site": "16,29",
+          "trained": "16,19",
+          "matchedPrefix": "2472ab6a401dbdd3",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/11,29",
+          "sourceRevision": 119,
+          "site": "11,29",
+          "trained": "16,19",
+          "matchedPrefix": "5724792fe8067d66",
+          "absent": true,
+          "matchesA": true,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/16,29",
+          "sourceRevision": 121,
+          "site": "16,29",
+          "trained": "11,14",
+          "matchedPrefix": "9dc1ca800640bca4",
+          "absent": false,
+          "matchesA": true,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/16,34",
+          "sourceRevision": 122,
+          "site": "16,34",
+          "trained": "16,19",
+          "matchedPrefix": "05e6d41b110b4154",
+          "absent": false,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/21,24",
+          "sourceRevision": 129,
+          "site": "21,24",
+          "trained": "11,14",
+          "matchedPrefix": "b8464c1720d427fe",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/21,29",
+          "sourceRevision": 130,
+          "site": "21,29",
+          "trained": "16,19",
+          "matchedPrefix": "d1e16bb6d7deec23",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/11,34",
+          "sourceRevision": 133,
+          "site": "11,34",
+          "trained": "16,19",
+          "matchedPrefix": "78f76f115d6129c0",
+          "absent": true,
+          "matchesA": true,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/16,14",
+          "sourceRevision": 145,
+          "site": "16,14",
+          "trained": "11,14",
+          "matchedPrefix": "cee30f07b995551a",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/16,19",
+          "sourceRevision": 146,
+          "site": "16,19",
+          "trained": "11,14",
+          "matchedPrefix": "57f658411e698cd3",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/16,34",
+          "sourceRevision": 149,
+          "site": "16,34",
+          "trained": "11,14",
+          "matchedPrefix": "6698bb5bad895f06",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/16,39",
+          "sourceRevision": 150,
+          "site": "16,39",
+          "trained": "16,19",
+          "matchedPrefix": "0eb21c8133dd75e8",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/11,39",
+          "sourceRevision": 151,
+          "site": "11,39",
+          "trained": "16,19",
+          "matchedPrefix": "d0021e4ff58aaecd",
+          "absent": true,
+          "matchesA": true,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/16,39",
+          "sourceRevision": 153,
+          "site": "16,39",
+          "trained": "11,14",
+          "matchedPrefix": "0897fc4d0395e310",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/16,44",
+          "sourceRevision": 154,
+          "site": "16,44",
+          "trained": "16,19",
+          "matchedPrefix": "fa5f2b3382f15384",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "0|ACTION1|ACTION3/11,44",
+          "sourceRevision": 155,
+          "site": "11,44",
+          "trained": "16,19",
+          "matchedPrefix": "482c038f2e31260e",
+          "absent": true,
+          "matchesA": true,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/11,24",
+          "sourceRevision": 172,
+          "site": "11,24",
+          "trained": "11,14",
+          "matchedPrefix": "5e8430e1e9c85155",
+          "absent": false,
+          "matchesA": true,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "2|ACTION4|ACTION2/11,29",
+          "sourceRevision": 188,
+          "site": "11,29",
+          "trained": "11,14",
+          "matchedPrefix": "846485f006af9b2b",
+          "absent": false,
+          "matchesA": false,
+          "present": true,
+          "status": "not_verified"
+        },
+        {
+          "id": "1|ACTION3|ACTION2/11,14",
+          "sourceRevision": 192,
+          "site": "11,14",
+          "trained": "16,14",
+          "matchedPrefix": "95c6100c344d8637",
+          "absent": false,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "1|ACTION3|ACTION2/16,24",
+          "sourceRevision": 200,
+          "site": "16,24",
+          "trained": "16,14",
+          "matchedPrefix": "a53466d7516fdbea",
+          "absent": true,
+          "matchesA": true,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "1|ACTION3|ACTION2/16,19",
+          "sourceRevision": 214,
+          "site": "16,19",
+          "trained": "16,14",
+          "matchedPrefix": "7c765e3538096486",
+          "absent": false,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "1|ACTION3|ACTION2/11,24",
+          "sourceRevision": 223,
+          "site": "11,24",
+          "trained": "16,14",
+          "matchedPrefix": "89d76d5192573cc0",
+          "absent": true,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        },
+        {
+          "id": "5|ACTION3|ACTION2/11,14",
+          "sourceRevision": 233,
+          "site": "11,14",
+          "trained": "16,14",
+          "matchedPrefix": "63bb8af6c1c802f9",
+          "absent": false,
+          "matchesA": false,
+          "present": false,
+          "status": "not_verified"
+        }
+      ]
+    }
+  ],
+  "ss01GeometryAudit": {
+    "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+    "trajectory": "359eddaa5eba0a7ef933ac15c242eb18cbe7025b547e17e4e616139e35f2a4e7",
+    "identicalTrajectory": true,
+    "actions": 600,
+    "modalBorderColor": 4,
+    "panelColors": [
+      [
+        9,
+        1071
+      ],
+      [
+        3,
+        631
+      ],
+      [
+        10,
+        39
+      ],
+      [
+        11,
+        8
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        0,
+        3
+      ]
+    ],
+    "modalNonborderRegions": [
+      {
+        "id": 0,
+        "area": 1755,
+        "bbox": [
+          11,
+          8,
+          49,
+          52
+        ]
+      }
+    ],
+    "leadingMovingShapes": [
+      {
+        "sig": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6",
+        "count": 28,
+        "ops": {
+          "1": 9,
+          "3": 7,
+          "4": 12,
+          "5": 64
+        },
+        "area": 5,
+        "color": 1,
+        "positions": 12
+      },
+      {
+        "sig": "1945862e6513f262c3225b8718b1151419e166e5ecaa4ab61c03e860ac2d76ba",
+        "count": 14,
+        "ops": {
+          "3": 14,
+          "5": 16
+        },
+        "area": 4,
+        "color": 12,
+        "positions": 12
+      },
+      {
+        "sig": "f8f4b355e08c8496430afc737ba598901c41a5d9209031c2aa7d6d8e6715dccc",
+        "count": 12,
+        "ops": {
+          "4": 12,
+          "5": 17
+        },
+        "area": 4,
+        "color": 12,
+        "positions": 10
+      },
+      {
+        "sig": "48980349b20de2434b43b3d562f7164cbf95fb27522ead52857943cc080a97cd",
+        "count": 4,
+        "ops": {
+          "1": 4
+        },
+        "area": 4,
+        "color": 3,
+        "positions": 2
+      }
+    ],
+    "receipts": [
+      {
+        "actionIndex": 274,
+        "op": 5,
+        "phase": "reuseB",
+        "actor": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6",
+        "from": "32,14",
+        "to": "29,17",
+        "area": 5,
+        "color": 1,
+        "bbox": [
+          32,
+          14,
+          34,
+          16
+        ],
+        "otherMovers": 1,
+        "changedPixels": 57,
+        "oldPositionsOccupiedAfter": 0,
+        "distinctMovedOrigins": 2,
+        "destinationWasOtherMovingObject": false,
+        "surface": {
+          "vacatedColor": 12,
+          "coveredColor": 12,
+          "pixels": 4,
+          "samePublicSurface": false
+        },
+        "rigidity": {
+          "type": "quarterTurn",
+          "count": 1,
+          "distinct": 1
+        },
+        "oldCenter": [
+          33,
+          15
+        ],
+        "newCenter": [
+          30,
+          18
+        ],
+        "departureRegion": {
+          "id": 0,
+          "area": 1755,
+          "bbox": [
+            11,
+            8,
+            49,
+            52
+          ]
+        },
+        "landingRegion": {
+          "id": 0,
+          "area": 1755,
+          "bbox": [
+            11,
+            8,
+            49,
+            52
+          ]
+        },
+        "visibleClusters": [
+          {
+            "omit": [
+              9
+            ],
+            "from": {
+              "id": 730,
+              "size": 171,
+              "box": [
+                20,
+                11,
+                40,
+                22
+              ]
+            },
+            "to": {
+              "id": 730,
+              "size": 171,
+              "box": [
+                20,
+                11,
+                40,
+                22
+              ]
+            }
+          },
+          {
+            "omit": [
+              9,
+              3
+            ],
+            "from": null,
+            "to": null
+          }
+        ],
+        "fullOrdinaryPath": false,
+        "ordinaryPositionCounts": [
+          5,
+          7
+        ],
+        "actorMovementByCommand": {
+          "1": 9,
+          "3": 7,
+          "4": 12,
+          "5": 64
+        },
+        "leadingDirectionalShapeAlsoMoved": true
+      },
+      {
+        "actionIndex": 360,
+        "op": 5,
+        "phase": "reuseB",
+        "actor": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6",
+        "from": "29,17",
+        "to": "35,11",
+        "area": 5,
+        "color": 1,
+        "bbox": [
+          29,
+          17,
+          31,
+          19
+        ],
+        "otherMovers": 1,
+        "changedPixels": 54,
+        "oldPositionsOccupiedAfter": 0,
+        "distinctMovedOrigins": 2,
+        "destinationWasOtherMovingObject": false,
+        "surface": {
+          "vacatedColor": 12,
+          "coveredColor": 12,
+          "pixels": 4,
+          "samePublicSurface": false
+        },
+        "rigidity": {
+          "type": "quarterTurn",
+          "count": 1,
+          "distinct": 1
+        },
+        "oldCenter": [
+          30,
+          18
+        ],
+        "newCenter": [
+          36,
+          12
+        ],
+        "departureRegion": {
+          "id": 0,
+          "area": 1755,
+          "bbox": [
+            11,
+            8,
+            49,
+            52
+          ]
+        },
+        "landingRegion": {
+          "id": 0,
+          "area": 1755,
+          "bbox": [
+            11,
+            8,
+            49,
+            52
+          ]
+        },
+        "visibleClusters": [
+          {
+            "omit": [
+              9
+            ],
+            "from": {
+              "id": 730,
+              "size": 171,
+              "box": [
+                20,
+                11,
+                40,
+                22
+              ]
+            },
+            "to": {
+              "id": 730,
+              "size": 171,
+              "box": [
+                20,
+                11,
+                40,
+                22
+              ]
+            }
+          },
+          {
+            "omit": [
+              9,
+              3
+            ],
+            "from": null,
+            "to": null
+          }
+        ],
+        "fullOrdinaryPath": false,
+        "ordinaryPositionCounts": [
+          7,
+          5
+        ],
+        "actorMovementByCommand": {
+          "1": 9,
+          "3": 7,
+          "4": 12,
+          "5": 64
+        },
+        "leadingDirectionalShapeAlsoMoved": true
+      },
+      {
+        "actionIndex": 591,
+        "op": 5,
+        "phase": "deriveB",
+        "actor": "1945862e6513f262c3225b8718b1151419e166e5ecaa4ab61c03e860ac2d76ba",
+        "from": "30,11",
+        "to": "27,14",
+        "area": 4,
+        "color": 12,
+        "bbox": [
+          30,
+          11,
+          31,
+          13
+        ],
+        "otherMovers": 1,
+        "changedPixels": 63,
+        "oldPositionsOccupiedAfter": 0,
+        "distinctMovedOrigins": 2,
+        "destinationWasOtherMovingObject": false,
+        "surface": {
+          "vacatedColor": 1,
+          "coveredColor": 1,
+          "pixels": 4,
+          "samePublicSurface": false
+        },
+        "rigidity": {
+          "type": "quarterTurn",
+          "count": 1,
+          "distinct": 1
+        },
+        "oldCenter": [
+          30.5,
+          12
+        ],
+        "newCenter": [
+          27.5,
+          15
+        ],
+        "departureRegion": {
+          "id": 0,
+          "area": 1755,
+          "bbox": [
+            11,
+            8,
+            49,
+            52
+          ]
+        },
+        "landingRegion": {
+          "id": 0,
+          "area": 1755,
+          "bbox": [
+            11,
+            8,
+            49,
+            52
+          ]
+        },
+        "visibleClusters": [
+          {
+            "omit": [
+              9
+            ],
+            "from": {
+              "id": 730,
+              "size": 171,
+              "box": [
+                20,
+                11,
+                40,
+                22
+              ]
+            },
+            "to": {
+              "id": 730,
+              "size": 171,
+              "box": [
+                20,
+                11,
+                40,
+                22
+              ]
+            }
+          },
+          {
+            "omit": [
+              9,
+              3
+            ],
+            "from": null,
+            "to": null
+          }
+        ],
+        "fullOrdinaryPath": false,
+        "ordinaryPositionCounts": [
+          2,
+          4
+        ],
+        "actorMovementByCommand": {
+          "3": 14,
+          "5": 16
+        },
+        "leadingDirectionalShapeAlsoMoved": true
+      }
+    ]
+  },
+  "ss01MatchedForks": [
+    {
+      "actionIndex": 459,
+      "A": 4,
+      "B": 5,
+      "origin": "e0fff9ce4bec9b75",
+      "sourceSite": "29,14",
+      "site": "26,14",
+      "preparationMatched": true,
+      "actualBaselineMatchesEpisode": true,
+      "newCapability": false,
+      "verified": true
+    },
+    {
+      "actionIndex": 580,
+      "A": 4,
+      "B": 5,
+      "origin": "7fd62a1ba22a2d11",
+      "sourceSite": "29,14",
+      "site": "32,14",
+      "preparationMatched": true,
+      "actualBaselineMatchesEpisode": true,
+      "newCapability": false,
+      "verified": true
+    },
+    {
+      "actionIndex": 591,
+      "A": 3,
+      "B": 5,
+      "origin": "35e97c6c3a19f500",
+      "sourceSite": "29,17",
+      "site": "26,17",
+      "preparationMatched": true,
+      "actualBaselineMatchesEpisode": true,
+      "newCapability": true,
+      "verified": true
+    }
+  ]
+}

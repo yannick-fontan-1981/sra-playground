@@ -91,6 +91,7 @@ async function run(code, games) {
   const trialActions = {},
     seen = new Set([initial]);
   let levelCoverage;
+  const replayCommands = process.env.SIC_STUDY_RECORD_COMMANDS === '1' ? [] : null;
   const preparation = new Map();
   const collectPreparation = (snapshot) => {
     const event = snapshot.trace?.findLast((e) => e.kind === 'sic_preparation_outcome');
@@ -164,6 +165,8 @@ async function run(code, games) {
       });
       const executionMs = performance.now() - began;
       issued++;
+      if (replayCommands)
+        replayCommands.push(action.id === 6 ? { id: action.id, data: action.data } : { id: action.id });
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
       if (!source) observeCoverage(previous, board, action, nextHash);
@@ -249,6 +252,7 @@ async function run(code, games) {
       relational,
       trialActions,
       trajectory: trajectory.digest('hex'),
+      ...(replayCommands ? { replayCommands } : {}),
       preparation: [...preparation.values()].map(
         ({
           epoch,
