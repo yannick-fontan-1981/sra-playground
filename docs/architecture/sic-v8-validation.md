@@ -2654,3 +2654,9 @@ La mémoire du niveau 8 transmet la matière propagative confirmée. À chaque c
 Un déplacement latéral peut aligner le terrain sur les supports inchangés quand les murs fournissent trop peu de repères. Pour une inversion dont le clic sort du champ, le moteur vérifie aussi son retrait dans une image alignée de l'animation.
 
 Le rejeu chronologique atteint `WIN` en **110 commandes au niveau 9**, en **68,37 s** avec un worker. Les **287 commandes** et leurs retours des niveaux 1 à 8 ont les mêmes empreintes. Depuis la sauvegarde, la famille SIC produit les mêmes 110 commandes et le même résultat final. L'empreinte de la trajectoire est `2bb8a8821410f494a366540b02717f15aa4324f6038e8440742ed5a748419735`. La vérification s'arrête à la victoire du niveau 9.
+
+### LF52 niveau 9 — Rendre le saut accessible avant de poursuivre le trajet
+
+Le moteur réutilise le saut entre auxiliaires confirmé au niveau 8. Le défilement révèle des plots qui entrent dans la carte au moment où ils sont observés. Quand une extrémité du prochain saut sort du cadre, le transporteur a la priorité pour la faire réapparaître. Le moteur conserve les sauts encore réalisables et recalcule le trajet du transporteur à partir de sa position mesurée.
+
+Le niveau 9 est gagné en **112 commandes SIC seul** et **223,08 s** avec un worker. Les **550 commandes** des niveaux 1 à 8, leurs retours et leurs images gardent les mêmes empreintes. La reprise depuis la sauvegarde donne la même trajectoire, `460451dbb5198a34ddb673ac719a7797067007025ff9521acc2d257f2eaceaee`. Le rejeu s'arrête à l'arrivée au niveau 10.
