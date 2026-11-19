@@ -5,23 +5,24 @@ export type MirrorFacing = 'NE'|'NW'|'SE'|'SW';
 export type HeroKind = 'merchant'|'warrior';
 export interface Hero {readonly kind:HeroKind;readonly at:Point;readonly facing:Direction;readonly dead?:boolean}
 export interface MirrorSpec {readonly at:Point;readonly facing:MirrorFacing}
-export interface CircuitSpec {readonly id:string;readonly buttons:readonly Point[]}
+export interface CircuitSpec {readonly id:string;readonly buttons:readonly Point[];readonly color?:number}
 export interface GateSpec {readonly at:Point;readonly circuit:string;readonly direction:Direction;readonly closedWhen:'pressed'|'released'}
+export interface PlatformSpec {readonly at:Point;readonly circuit:string;readonly activeWhen:'pressed'|'released'}
 export interface LevelSpec {
   readonly id:string;readonly title:string;readonly rows:readonly string[];readonly facing?:Direction;
   /** Coordinates before centering the rectangular map in the 20 by 20 grid. */
-  readonly circuits?:readonly CircuitSpec[];readonly gates?:readonly GateSpec[];readonly mirrors?:readonly MirrorSpec[];
+  readonly circuits?:readonly CircuitSpec[];readonly gates?:readonly GateSpec[];readonly mirrors?:readonly MirrorSpec[];readonly platforms?:readonly PlatformSpec[];
 }
 export interface World {
   readonly id:string;readonly title:string;readonly terrain:readonly string[];readonly heroes:readonly Hero[];
   readonly stones:readonly Point[];readonly monsters:readonly Point[];readonly supports:readonly Point[];
   readonly buttons:readonly Point[];readonly doors:readonly Point[];readonly goals:readonly Point[];
-  readonly circuits:readonly CircuitSpec[];readonly gates:readonly GateSpec[];readonly mirrors:readonly MirrorSpec[];
+  readonly circuits:readonly CircuitSpec[];readonly gates:readonly GateSpec[];readonly mirrors:readonly MirrorSpec[];readonly platforms:readonly PlatformSpec[];
 }
 export interface State {
   readonly heroes:readonly Hero[];readonly active:number;readonly stones:readonly Point[];readonly monsters:readonly Point[];
   readonly supports:readonly Point[];readonly mirrors:readonly MirrorSpec[];readonly complete:boolean;readonly failed:boolean;
-  readonly dead:boolean;readonly gateClosed?:readonly boolean[];
+  readonly dead:boolean;readonly gateClosed?:readonly boolean[];readonly platformActive?:readonly boolean[];
 }
 export interface Observation {
   gameCode:string;frame:number[][];frames:number[][][];frameDurationsMs?:number[];
@@ -38,7 +39,7 @@ export const contains=(ps:readonly Point[],p:Point):boolean=>ps.some(q=>equal(q,
 export const offset=(p:Point,d:Direction):Point=>({x:p.x+VECTORS[d].x,y:p.y+VECTORS[d].y});
 export const inside=(p:Point):boolean=>Number.isInteger(p.x)&&Number.isInteger(p.y)&&p.x>=0&&p.y>=0&&p.x<20&&p.y<20;
 export const terrainAt=(w:World,p:Point):string=>inside(p)?w.terrain[p.y*20+p.x]!:'#';
-export const supported=(w:World,s:State,p:Point):boolean=>terrainAt(w,p)==='.'||contains(s.supports,p);
+export const supported=(w:World,s:State,p:Point):boolean=>terrainAt(w,p)==='.'||contains(s.supports,p)||w.platforms.some((a,i)=>equal(a.at,p)&&platformActive(w,s,i));
 export const cellToPixel=(p:Point):Point=>({x:2+p.x*3,y:2+p.y*3});
 export const pixelToCell=(x:number,y:number):Point|null=>Number.isInteger(x)&&Number.isInteger(y)&&x>=2&&x<62&&y>=2&&y<62?{x:Math.floor((x-2)/3),y:Math.floor((y-2)/3)}:null;
 const heroAt=(s:State,p:Point):boolean=>s.heroes.some(h=>!h.dead&&equal(h.at,p));
@@ -51,6 +52,10 @@ export const circuitPressed=(w:World,s:State,id:string):boolean=>{
 export const gateClosed=(w:World,s:State,index:number):boolean=>{
   const g=w.gates[index];return !!g&&(s.gateClosed?.[index]??(circuitPressed(w,s,g.circuit)===(g.closedWhen==='pressed')));
 };
+export const platformActive=(w:World,s:State,index:number):boolean=>{
+  const p=w.platforms[index];return !!p&&(s.platformActive?.[index]??(circuitPressed(w,s,p.circuit)===(p.activeWhen==='pressed')));
+};
+const hydraulicCell=(w:World,p:Point):boolean=>w.platforms.some(a=>equal(a.at,p));
 const blocked=(w:World,s:State,p:Point):boolean=>terrainAt(w,p)==='#'||(contains(w.doors,p)&&!doorsOpen(w,s))||w.gates.some((g,i)=>equal(g.at,p)&&gateClosed(w,s,i));
 const rayBlocked=(w:World,s:State,p:Point):boolean=>blocked(w,s,p)||s.mirrors.some(m=>equal(m.at,p));
 const safeDoors=(w:World,s:State):boolean=>doorsOpen(w,s)||w.doors.every(p=>!weighted(s,p));
@@ -73,9 +78,9 @@ export function compileLevel(spec:LevelSpec):World {
   }));
   if(heroes.length!==2||heroes.filter(h=>h.kind==='merchant').length!==1||goals.length!==2)throw new Error('SS06 requires one Merchant, one Warrior and two destinations.');
   heroes.sort((a,b)=>a.kind==='merchant'?-1:b.kind==='merchant'?1:0);
-  const convert=(p:Point):Point=>{
+  const convert=(p:Point,required='.') :Point=>{
     if(!Number.isInteger(p.x)||!Number.isInteger(p.y)||p.x<0||p.y<0||p.x>=width||p.y>=spec.rows.length)throw new Error('Device coordinates must be inside the source map.');
-    const at={x:p.x+ox,y:p.y+oy};if(terrain[at.y*20+at.x]!=='.')throw new Error('Devices require a floor cell.');return Object.freeze(at);
+    const at={x:p.x+ox,y:p.y+oy};if(terrain[at.y*20+at.x]!==required)throw new Error(required==='~'?'Water platforms require a water cell.':'Devices require a floor cell.');return Object.freeze(at);
   };
   const mirrors=[...drawnMirrors,...(spec.mirrors??[]).map(m=>{
     if(!['NE','NW','SE','SW'].includes(m.facing))throw new Error('Invalid mirror facing.');return Object.freeze({at:convert(m.at),facing:m.facing});
@@ -84,7 +89,8 @@ export function compileLevel(spec:LevelSpec):World {
   const ids=new Set<string>();
   const circuits=(spec.circuits??[]).map(c=>{
     if(!c.id.trim()||ids.has(c.id)||!c.buttons.length)throw new Error('Circuits require unique ids and buttons.');ids.add(c.id);
-    return Object.freeze({id:c.id,buttons:Object.freeze(c.buttons.map(convert))});
+    if(c.color!==undefined&&(!Number.isInteger(c.color)||c.color<0||c.color>15))throw new Error('Circuit colors must be palette indices.');
+    return Object.freeze({id:c.id,buttons:Object.freeze(c.buttons.map(p=>convert(p))),...(c.color!==undefined?{color:c.color}:{})});
   });
   const circuitButtons=circuits.flatMap(c=>c.buttons);
   if(new Set(circuitButtons.map(keyOf)).size!==circuitButtons.length)throw new Error('A button belongs to exactly one circuit.');
@@ -95,20 +101,25 @@ export function compileLevel(spec:LevelSpec):World {
     return Object.freeze({...g,at:convert(g.at)});
   });
   if(new Set(gates.map(g=>keyOf(g.at))).size!==gates.length)throw new Error('Piston positions must be unique.');
+  const platforms=(spec.platforms??[]).map(p=>{
+    if(!ids.has(p.circuit)||!['pressed','released'].includes(p.activeWhen))throw new Error('Invalid water platform circuit or activation mode.');
+    return Object.freeze({...p,at:convert(p.at,'~')});
+  });
+  if(new Set(platforms.map(p=>keyOf(p.at))).size!==platforms.length)throw new Error('Water platform positions must be unique.');
   for(const m of mirrors)if([...heroes.map(h=>h.at),...stones,...monsters,...supports,...goals].some(p=>equal(p,m.at)))throw new Error('A mirror cannot overlap an actor or a destination.');
   const legacyDoors=doors.filter(p=>!gates.some(g=>equal(g.at,p)));
   if(legacyDoors.length&&!buttons.length)throw new Error('Doors require a visible button.');
-  return Object.freeze({id:spec.id,title:spec.title,terrain:Object.freeze(terrain),heroes:Object.freeze(heroes),stones:Object.freeze(stones),monsters:Object.freeze(monsters),supports:Object.freeze(supports),buttons:Object.freeze(buttons),doors:Object.freeze(legacyDoors),goals:Object.freeze(goals),circuits:Object.freeze(circuits),gates:Object.freeze(gates),mirrors:Object.freeze(mirrors)});
+  return Object.freeze({id:spec.id,title:spec.title,terrain:Object.freeze(terrain),heroes:Object.freeze(heroes),stones:Object.freeze(stones),monsters:Object.freeze(monsters),supports:Object.freeze(supports),buttons:Object.freeze(buttons),doors:Object.freeze(legacyDoors),goals:Object.freeze(goals),circuits:Object.freeze(circuits),gates:Object.freeze(gates),mirrors:Object.freeze(mirrors),platforms:Object.freeze(platforms)});
 }
 export function initialState(w:World):State {
   const s:State={heroes:w.heroes.map(h=>({...h,at:{...h.at}})),active:0,stones:w.stones.map(p=>({...p})),monsters:w.monsters.map(p=>({...p})),supports:w.supports.map(p=>({...p})),mirrors:w.mirrors.map(m=>({...m,at:{...m.at}})),complete:false,failed:false,dead:false};
-  if(!w.gates.length)return s;
-  const settled=settleGates(w,{...s,gateClosed:w.gates.map(()=>false)},[]);
+  if(!w.gates.length&&!w.platforms.length)return s;
+  const settled=settleGates(w,{...s,gateClosed:w.gates.map(()=>false),...(w.platforms.length?{platformActive:w.platforms.map(()=>false)}:{})},[]);
   if(!settled.stable||settled.state.dead)throw new Error('Initial piston circuit is unstable or fatal.');return settled.state;
 }
 export interface Motion {readonly actor:'hero'|'stone'|'monster'|'mirror';readonly from:Point;readonly to:Point}
 export interface MotionPhase {
-  readonly kind:'walk'|'push'|'reflect'|'piston'|'crush'|'gate'|'combat';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
+  readonly kind:'walk'|'push'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
   readonly gateIndex?:number;readonly paths?:readonly (readonly Point[])[];
 }
 export interface DetailedStep {readonly state:State;readonly phases:readonly MotionPhase[]}
@@ -145,15 +156,19 @@ export function planReflection(w:World,s:State):ReflectionPlan|null {
   }
   return {moves,paths,mirrorIndices};
 }
+/** Resolve water after position changes. Hydraulic cells wait until their circuits settle. */
+function resolveBuoyancy(w:World,s:State,deferHydraulics:boolean):State {
+  const supports=[...s.supports],stones:Point[]=[];
+  const postponed=(p:Point)=>deferHydraulics&&hydraulicCell(w,p);
+  for(const p of s.stones){if(terrainAt(w,p)==='~'&&!supported(w,{...s,supports},p)&&!postponed(p))supports.push(p);else stones.push(p);}
+  const safe=(p:Point)=>supported(w,{...s,supports},p)||postponed(p);
+  const heroes=s.heroes.map(h=>({...h,dead:!!h.dead||!safe(h.at)}));
+  const monsters=s.monsters.filter(safe),mirrors=s.mirrors.filter(m=>safe(m.at));
+  return {...s,heroes,stones,monsters,supports,mirrors,dead:heroes.some(h=>h.dead),failed:false};
+}
 function applyMotions(w:World,s:State,moves:readonly Motion[]):State {
   const target=(actor:Motion['actor'],p:Point)=>moves.find(m=>m.actor===actor&&equal(m.from,p))?.to??p;
-  const supports=[...s.supports],stones:Point[]=[];
-  for(const p of s.stones){const to=target('stone',p);if(terrainAt(w,to)==='~'&&!contains(supports,to))supports.push(to);else stones.push(to);}
-  const safe=(p:Point)=>terrainAt(w,p)==='.'||contains(supports,p);
-  const heroes=s.heroes.map(h=>{const at=target('hero',h.at);return {...h,at,dead:!!h.dead||!safe(at)};});
-  const monsters=s.monsters.map(p=>target('monster',p)).filter(safe);
-  const mirrors=s.mirrors.map(m=>({...m,at:target('mirror',m.at)})).filter(m=>safe(m.at));
-  return {...s,heroes,stones,monsters,supports,mirrors,dead:heroes.some(h=>h.dead),failed:false};
+  return resolveBuoyancy(w,{...s,heroes:s.heroes.map(h=>({...h,at:target('hero',h.at)})),stones:s.stones.map(p=>target('stone',p)),monsters:s.monsters.map(p=>target('monster',p)),mirrors:s.mirrors.map(m=>({...m,at:target('mirror',m.at)}))},true);
 }
 function moveStep(w:World,s:State,d:Direction):{state:State;moves:Motion[]}|null {
   const hero=s.heroes[s.active]!,to=offset(hero.at,d);if(blocked(w,s,to))return null;
@@ -165,7 +180,7 @@ function moveStep(w:World,s:State,d:Direction):{state:State;moves:Motion[]}|null
   }
   const next=applyMotions(w,s,moves);
   // A deliberate push cannot drown a companion or destroy a mirror. Presses and reflections can.
-  if(next.dead||next.mirrors.length!==s.mirrors.length)return null;
+  if(next.dead||next.mirrors.length!==s.mirrors.length||moves.some(m=>(m.actor==='hero'||m.actor==='mirror')&&hydraulicCell(w,m.to)&&!supported(w,next,m.to)))return null;
   return {state:next,moves};
 }
 function firePiston(w:World,s:State,index:number):{state:State;phase:MotionPhase|null} {
@@ -183,18 +198,26 @@ function firePiston(w:World,s:State,index:number):{state:State;phase:MotionPhase
   }
   const next=applyMotions(w,s,moves);return {state:next,phase:{kind:'piston',before:s,after:next,moves,gateIndex:index}};
 }
+function settlePlatforms(w:World,start:State,phases:MotionPhase[]):State {
+  if(!w.platforms.length)return start;
+  const current=w.platforms.map((_,i)=>platformActive(w,start,i));
+  const desired=w.platforms.map(p=>circuitPressed(w,start,p.circuit)===(p.activeWhen==='pressed'));
+  const state=resolveBuoyancy(w,{...start,platformActive:desired},false);
+  if(desired.some((v,i)=>v!==current[i])||state.stones.length!==start.stones.length||state.monsters.length!==start.monsters.length||state.mirrors.length!==start.mirrors.length||state.heroes.some((h,i)=>!!h.dead!==!!start.heroes[i]!.dead))phases.push({kind:'platform',before:start,after:state,moves:[]});
+  return state;
+}
 function settleGates(w:World,start:State,phases:MotionPhase[]):{state:State;stable:boolean} {
   let state=start;const seen=new Set<string>();
   for(let round=0;round<64;round++){
     const current=w.gates.map((_,i)=>gateClosed(w,state,i));
     const desired=w.gates.map(g=>circuitPressed(w,state,g.circuit)===(g.closedWhen==='pressed'));
-    if(desired.every((v,i)=>v===current[i]))return {state,stable:true};
+    if(desired.every((v,i)=>v===current[i]))return {state:settlePlatforms(w,state,phases),stable:true};
     const key=JSON.stringify([state.heroes,state.stones,state.monsters,state.mirrors,state.supports,current]);
     if(seen.has(key))return {state:start,stable:false};seen.add(key);
     const before=state;state={...state,gateClosed:desired};let fired=false;
     for(let i=0;i<w.gates.length;i++)if(desired[i]&&!current[i]){const r=firePiston(w,state,i);state=r.state;if(r.phase){phases.push(r.phase);fired=true;}}
     if(!fired)phases.push({kind:'gate',before,after:state,moves:[]});
-    if(state.dead)return {state,stable:true};
+    if(state.dead)return {state:settlePlatforms(w,state,phases),stable:true};
   }
   return {state:start,stable:false};
 }
@@ -221,7 +244,7 @@ export function stepDetailed(w:World,s:State,actionId:number,data?:Point):Detail
   if(!safeDoors(w,next))return refusal();
   const phases:MotionPhase[]=[first];
   for(let wave=0;wave<=s.monsters.length+1;wave++){
-    if(w.gates.length){const settled=settleGates(w,next,phases);if(!settled.stable)return refusal();next=settled.state;}
+    if(w.gates.length||w.platforms.length){const settled=settleGates(w,next,phases);if(!settled.stable)return refusal();next=settled.state;}
     const fought=resolveCombat(w,next);if(fought===next)break;
     phases.push({kind:'combat',before:next,after:fought,moves:[]});const removed=fought.monsters.length<next.monsters.length;next=fought;if(!removed)break;
   }
@@ -244,11 +267,12 @@ function heroSprite(h:Hero,selected:boolean):Sprite {
   if(h.dead)return [[c,5,c],[5,8,5],[c,5,c]];return sprite;
 }
 const circuitColors:readonly number[]=[0,10,12,15,2,8,11,14];
-const circuitColor=(w:World,id:string):number=>circuitColors[w.circuits.findIndex(c=>c.id===id)%circuitColors.length]!;
+const circuitColor=(w:World,id:string):number=>w.circuits.find(c=>c.id===id)?.color??circuitColors[w.circuits.findIndex(c=>c.id===id)%circuitColors.length]!;
 function pistonSprite(d:Direction,closed:boolean,accent:number):Sprite {
   const spr:(number|null)[][]=closed?[[7,7,7],[7,5,7],[7,7,7]]:[[7,null,7],[null,null,null],[7,null,7]],tip=VECTORS[d],side={x:-tip.y,y:tip.x};
   spr[1+tip.y]![1+tip.x]=accent;spr[1+side.y]![1+side.x]=accent;spr[1-side.y]![1-side.x]=accent;return spr;
 }
+const platformSprite=(active:boolean,accent:number):Sprite=>active?[[7,7,7],[7,accent,7],[7,7,7]]:[[7,null,7],[null,accent,null],[7,null,7]];
 const supportSprite:Sprite=[[10,13,10],[13,10,13],[10,13,10]];
 const monsterSprite:Sprite=[[8,5,8],[5,8,5],[8,5,8]];
 function mirrorSprite(f:MirrorFacing):Sprite {
@@ -261,6 +285,7 @@ function mirrorSprite(f:MirrorFacing):Sprite {
 function renderScene(w:World,s:State,stones:readonly Point[]=s.stones,monsters:readonly Point[]=s.monsters,heroes:readonly Hero[]=s.heroes,mirrors:readonly MirrorSpec[]=s.mirrors,preview=false):number[][] {
   const f=Array.from({length:64},()=>Array<number>(64).fill(4));
   for(let y=0;y<20;y++)for(let x=0;x<20;x++){const t=terrainAt(w,{x,y}),c=t==='#'?4:t==='~'?9:3;stamp(f,{x,y},[[c,c,c],[c,c,c],[c,c,c]]);}
+  w.platforms.forEach((p,i)=>stamp(f,p.at,platformSprite(platformActive(w,s,i),circuitColor(w,p.circuit))));
   for(const p of s.supports)stamp(f,p,supportSprite);
   for(const p of w.buttons){stamp(f,p,cross(7));const c=w.circuits.find(c=>contains(c.buttons,p));if(c)stamp(f,p,[[null,null,null],[null,circuitColor(w,c.id),null],[null,null,null]]);}
   for(const p of w.doors)stamp(f,p,doorsOpen(w,s)?[[7,null,7],[null,null,null],[7,null,7]]:square(7,5));
@@ -297,6 +322,14 @@ function combatFrames(w:World,phase:MotionPhase):number[][][] {
 }
 function phaseFrames(w:World,phase:MotionPhase):number[][][] {
   if(phase.kind==='combat')return combatFrames(w,phase);
+  if(phase.kind==='platform'){
+    const after=renderScene(w,phase.after);
+    const frames=[1,2].map(rows=>{
+      const frame=renderScene(w,phase.before);
+      for(const p of w.platforms){const at=cellToPixel(p.at);for(let y=3-rows;y<3;y++)for(let x=0;x<3;x++)frame[at.y+y]![at.x+x]=after[at.y+y]![at.x+x]!;}
+      return frame;
+    });return [...frames,renderWorld(w,phase.after)];
+  }
   const before=phase.before,stationaryStones=before.stones.filter(p=>!phase.moves.some(m=>m.actor==='stone'&&equal(m.from,p))),stationaryMonsters=before.monsters.filter(p=>!phase.moves.some(m=>m.actor==='monster'&&equal(m.from,p))),stationaryHeroes=before.heroes.filter(h=>!phase.moves.some(m=>m.actor==='hero'&&equal(m.from,h.at))),stationaryMirrors=before.mirrors.filter(m=>!phase.moves.some(q=>q.actor==='mirror'&&equal(q.from,m.at)));
   if(phase.kind==='reflect'){
     const flash=renderScene(w,before);

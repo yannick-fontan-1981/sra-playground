@@ -35,7 +35,22 @@ const settled=async o=>{await flush();equalFrame(o);assert.equal($('board').data
 const heroes=frame=>{const all=[];for(let y=0;y<20;y++)for(let x=0;x<20;x++){const px=2+x*3,py=2+y*3,c=frame[py+1][px+1],arms=[frame[py][px+1],frame[py+1][px],frame[py+1][px+2],frame[py+2][px+1]];if((c===12||c===8)&&arms.filter(v=>v===c).length>=3)all.push({color:c,selected:arms.includes(0),data:{x:px+1,y:py+1}});}return all;};
 const report={success:false,environment:'Happy DOM, canvas pixel buffer and controlled animation timer queue',visualBrowserTest:false,checks:[]};
 let witnessMode=false,witnessActions=0,witnessFrames=0,selectionActions=0;
-const replay=async actions=>{for(const a of actions){const start=captures.length,waitStart=waits.length;dispatch(a);const next=doRef(a);if(next.frames.length>1&&next.state!=='NOT_FINISHED'){assert.equal($('victory').hidden,true);assert.equal($('defeat').hidden,true);}await settled(next);for(let i=0;i<next.frames.length;i++)assert.deepEqual(captures[start+i],rgba(next.frames[i]),`Engine frame ${i+1}/${next.frames.length}`);assert.deepEqual(waits.slice(waitStart),(next.frameDurationsMs??next.frames.map(()=>70)).slice(0,-1));if(witnessMode){witnessActions++;witnessFrames+=next.frames.length;if(normal(a).id===6)selectionActions++;}}};
+const visiblePlatformStates=new Map();
+const inspectPlatforms=(level,frame)=>{
+  const spec=SS06_LEVELS[level-1],ox=Math.floor((20-spec.rows[0].length)/2),oy=Math.floor((20-spec.rows.length)/2);
+  for(const platform of spec.platforms??[]){
+    const px=2+(platform.at.x+ox)*3,py=2+(platform.at.y+oy)*3;
+    const corners=[frame[py][px],frame[py][px+2],frame[py+2][px],frame[py+2][px+2]];
+    const arms=[frame[py][px+1],frame[py+1][px],frame[py+1][px+2],frame[py+2][px+1]];
+    if(!corners.every(c=>c===7))continue; // An actor or reflection preview may cover the platform.
+    const state=arms.every(c=>c===7)?'active':arms.every(c=>c===9)?'inactive':null;
+    if(!state)continue;
+    const key=`${level}:${platform.circuit}:${platform.at.x},${platform.at.y}`;
+    if(!visiblePlatformStates.has(key))visiblePlatformStates.set(key,new Set());
+    visiblePlatformStates.get(key).add(state);
+  }
+};
+const replay=async actions=>{for(const a of actions){const start=captures.length,waitStart=waits.length;dispatch(a);const next=doRef(a);if(next.frames.length>1&&next.state!=='NOT_FINISHED'){assert.equal($('victory').hidden,true);assert.equal($('defeat').hidden,true);}await settled(next);for(let i=0;i<next.frames.length;i++)assert.deepEqual(captures[start+i],rgba(next.frames[i]),`Engine frame ${i+1}/${next.frames.length}`);assert.deepEqual(waits.slice(waitStart),(next.frameDurationsMs??next.frames.map(()=>70)).slice(0,-1));if(witnessMode){inspectPlatforms(next.level,next.frame);witnessActions++;witnessFrames+=next.frames.length;if(normal(a).id===6)selectionActions++;}}};
 const choose=level=>{$('level').value=String(level);$('level').dispatchEvent(new window.Event('change'));equalFrame(ref.selectLevel(level));};
 const witnesses=JSON.parse(readFileSync(resolve(root,'tests/witnesses.json'),'utf8'));
 const actionsFor=level=>{const actions=witnesses.find(w=>w.level===level)?.actions;assert.ok(actions?.length,`Missing witness ${level}`);return actions;};
@@ -86,32 +101,19 @@ try{
   $('restart').click();await settled(ref.restart());assert.equal($('tutorial').hidden,false);
   report.checks.push('Reset, level changes and return to tutorial cancel pending animation callbacks and reset the appropriate counters');
 
-  for(let level=1;level<=SS06_LEVELS.length;level++){choose(level);assert.equal($('piston-help').hidden,!LEVEL_INFO[level-1].piston);assert.equal($('tutorial').hidden,level!==1);assert.equal($('source-link').hidden,!LEVEL_INFO[level-1].url);if(LEVEL_INFO[level-1].url)assert.equal($('source-link').href,LEVEL_INFO[level-1].url);}
-  report.checks.push('Every level displays its own source attribution and relevant piston help, with all eight rooms available');
+  for(let level=1;level<=SS06_LEVELS.length;level++){choose(level);assert.equal($('piston-help').hidden,!LEVEL_INFO[level-1].piston);const hasPlatforms=!!SS06_LEVELS[level-1].platforms?.length;for(const id of ['platform-help','platform-legend-active','platform-legend-inactive'])assert.equal($(id).hidden,!hasPlatforms);assert.equal($('tutorial').hidden,level!==1);assert.equal($('source-link').hidden,!LEVEL_INFO[level-1].url);if(LEVEL_INFO[level-1].url)assert.equal($('source-link').href,LEVEL_INFO[level-1].url);}
+  report.checks.push('Every level displays its own source attribution and relevant piston/platform help, with all eight rooms available');
 
-  // The fifth room starts with a readable crate that the press lowers into water.
-  choose(5);
-  const fifth=SS06_LEVELS[4],fifthMirrors=[...(fifth.mirrors??[]).map(m=>m.at)];
-  fifth.rows.forEach((row,y)=>[...row].forEach((c,x)=>{if('1234'.includes(c))fifthMirrors.push({x,y});}));
-  assert.ok(fifthMirrors.every(m=>!(fifth.gates??[]).some(g=>g.at.x===m.x&&g.at.y===m.y)),'No level-5 mirror may occupy a press cell initially');
-  const cratePresses=(fifth.gates??[]).filter(g=>'o*'.includes(fifth.rows[g.at.y][g.at.x]));
-  assert.ok(cratePresses.length>0,'Level 5 starts with a crate on its press');
-  const ox=Math.floor((20-fifth.rows[0].length)/2),oy=Math.floor((20-fifth.rows.length)/2),fifthFrame=ref.observe().frame;
-  for(const g of cratePresses){const px=2+(g.at.x+ox)*3,py=2+(g.at.y+oy)*3;assert.equal(fifthFrame[py+1][px+1],5);assert.deepEqual([fifthFrame[py][px+1],fifthFrame[py+1][px],fifthFrame[py+1][px+2],fifthFrame[py+2][px+1]],[13,13,13,13],'The initial crate remains visibly brown above the press');}
-  assert.equal(fifth.rows[4][5],'.','The extra wall above the left mirror is removed');
-  for(const g of cratePresses){assert.equal(g.direction,'S');assert.equal(fifth.rows[g.at.y+1][g.at.x],'~');}
-  await replay(actionsFor(5).slice(0,1));
-  const pressCaptureStart=captures.length;
-  await replay(actionsFor(5).slice(1,2));
-  const pressFrames=captures.slice(pressCaptureStart+3,pressCaptureStart+6);
-  assert.equal(pressFrames.length,3);
-  const colorAt=(frame,x,y)=>{const index=(y*64+x)*4;return '#'+[frame[index],frame[index+1],frame[index+2]].map(v=>v.toString(16).padStart(2,'0')).join('');};
-  for(const g of cratePresses){
-    const px=2+(g.at.x+ox)*3,py=2+(g.at.y+oy)*3;
-    for(let step=1;step<=2;step++)for(let y=0;y<3;y++)for(let x=0;x<3;x++)assert.equal(colorAt(pressFrames[step-1],px+x,py+step+y),PALETTE[x===1&&y===1?5:13],'The crate advances downward by one pixel per animation frame');
-    for(let y=0;y<3;y++)for(let x=0;x<3;x++)assert.equal(colorAt(pressFrames[2],px+x,py+3+y),PALETTE[x===y||x+y===2?10:13],'The crate becomes a brown support with a cyan X directly below the press');
-  }
-  report.checks.push('Level 5 has no extra wall or mirror/press overlap; its brown crate advances downward in three frames into water and becomes a support with a cyan X');
+  // Hydraulic platform rendering is verified from the public pixels of the final room.
+  choose(8);
+  const finalRoom=SS06_LEVELS[7];
+  assert.ok(finalRoom.platforms?.length,'Level 8 introduces hydraulic platforms');
+  assert.equal($('platform-help').hidden,false);
+  inspectPlatforms(8,ref.observe().frame);
+  assert.ok([...visiblePlatformStates.keys()].some(k=>k.startsWith('8:')),'Hydraulic platforms are visible in the initial public image');
+  assert.ok($('platform-help').textContent.includes('Espace'));
+  assert.ok($('platform-help').textContent.includes('Vérifie aussi la case de ton partenaire'));
+  report.checks.push('Level 8 explains deployable water platforms, circuit switching and the safety of both heroes; the eight original tutorial goals are preserved');
 
   $('restart').click();await settled(ref.restart());
   const reflectionIndex=tutorial.findIndex(a=>normal(a).id===5);assert.ok(reflectionIndex>=0);await replay(tutorial.slice(0,reflectionIndex));
@@ -127,7 +129,11 @@ try{
   for(const id of lessonIds)assert.ok(window.document.querySelector(`[data-lesson="${id}"]`).classList.contains('done'),`${id} is learned through actual public pixels and input`);
   report.checks.push('The complete tutorial earns all eight discoveries, including both push strengths, platform, reflection, gate and two simultaneous goals');
   for(let level=2;level<=SS06_LEVELS.length;level++){assert.equal(ref.observe().level,level);const completed=ref.observe().levelsCompleted;await replay(actionsFor(level));assert.equal(ref.observe().levelsCompleted,completed+1);}
-  witnessMode=false;report.witnessCoverage={levels:SS06_LEVELS.length,actions:witnessActions,frames:witnessFrames,selectionActions,allFrameDurationsVerified:true};
+  witnessMode=false;
+  const switchedPlatformCircuits=new Set([...visiblePlatformStates].filter(([,states])=>states.size===2).map(([key])=>key.split(':').slice(0,2).join(':')));
+  assert.ok(switchedPlatformCircuits.size>=2,'Both circuits must visibly deploy and retract water platforms during the level-8 witness');
+  report.platformCoverage={circuitsWithBothVisibleStates:[...switchedPlatformCircuits],visibleCells:visiblePlatformStates.size};
+  report.witnessCoverage={levels:SS06_LEVELS.length,actions:witnessActions,frames:witnessFrames,selectionActions,allFrameDurationsVerified:true};
   assert.equal(witnessActions,witnesses.reduce((n,w)=>n+w.actions.length,0));assert.equal(ref.observe().state,'WIN');assert.equal($('victory').hidden,false);
   assert.ok([...window.document.querySelectorAll('[data-action],[data-hero]')].every(b=>b.disabled));
   count=$('moves').textContent;key('ArrowDown');key('Tab');key('1');assert.equal(key(' '),false);assert.equal($('moves').textContent,count);

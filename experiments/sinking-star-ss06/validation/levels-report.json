@@ -1,6 +1,6 @@
 {
   "game": "SS06",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "levels": [
     {
       "level": 1,
@@ -23,6 +23,7 @@
       "initialMonsters": 0,
       "mirrors": 1,
       "gates": 2,
+      "hydraulicPlatforms": 0,
       "buttons": 1,
       "actions": 35,
       "selections": 2,
@@ -70,6 +71,7 @@
       "initialMonsters": 0,
       "mirrors": 2,
       "gates": 2,
+      "hydraulicPlatforms": 0,
       "buttons": 2,
       "actions": 35,
       "selections": 2,
@@ -117,6 +119,7 @@
       "initialMonsters": 0,
       "mirrors": 1,
       "gates": 14,
+      "hydraulicPlatforms": 0,
       "buttons": 1,
       "actions": 119,
       "selections": 3,
@@ -164,6 +167,7 @@
       "initialMonsters": 0,
       "mirrors": 1,
       "gates": 0,
+      "hydraulicPlatforms": 0,
       "buttons": 0,
       "actions": 35,
       "selections": 2,
@@ -188,54 +192,55 @@
       "solved": true,
       "mapSha256": "4e571816768641d9d8ce8da97711bb1868526a03bad601106caf917bc544c5fa",
       "witnessSha256": "544f36e5065f3c460717b0b3371365c1a75943cc1235720d1f6e17ee34cdc8d4",
-      "observationsSha256": "d73649215dbabad00e2daabcf07f7d4b870460eb3e415550f102cdfffcb1abab"
+      "observationsSha256": "93a2623540e11693c0bdf5184b68f08c5df412538755f73d6cce06b613aa881a"
     },
     {
       "level": 5,
       "id": "ss06-05",
-      "title": "La caisse de l’écluse",
+      "title": "Le rendez-vous des deux ponts",
       "source": {
-        "puzzle": 18,
-        "label": "Adaptation de principe · Heroes and Mirrors 18 : libérer le passage avec une presse ; ici, la caisse devient un appui dans l’eau.",
-        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
+        "puzzle": 0,
+        "label": "Création originale · Deux ateliers séparés, presses à distance et rendez-vous sur trois boutons.",
+        "url": "",
         "piston": true
       },
       "dimensions": [
-        15,
-        12
+        20,
+        20
       ],
-      "floorCells": 66,
-      "waterCells": 111,
-      "initialStones": 4,
-      "initialSupports": 0,
-      "initialMonsters": 0,
-      "mirrors": 1,
-      "gates": 1,
-      "buttons": 1,
-      "actions": 41,
+      "floorCells": 106,
+      "waterCells": 290,
+      "initialStones": 3,
+      "initialSupports": 1,
+      "initialMonsters": 2,
+      "mirrors": 2,
+      "gates": 4,
+      "hydraulicPlatforms": 0,
+      "buttons": 5,
+      "actions": 43,
       "selections": 2,
       "merchantPushes": 1,
-      "warriorPushes": 5,
-      "chainPushes": 1,
-      "stoneMoves": 9,
-      "mirrorMoves": 0,
-      "reflections": 3,
+      "warriorPushes": 6,
+      "chainPushes": 3,
+      "stoneMoves": 10,
+      "mirrorMoves": 1,
+      "reflections": 1,
       "heroReflections": 2,
-      "pistonPushes": 1,
-      "platformsCreated": 3,
-      "monstersRemoved": 0,
+      "pistonPushes": 2,
+      "platformsCreated": 2,
+      "monstersRemoved": 2,
       "blocked": 0,
       "deaths": 0,
-      "combatWaves": 0,
+      "combatWaves": 1,
       "mirrorsDestroyed": 0,
       "cratesCrushed": 0,
-      "simultaneousHeroReflections": 0,
-      "frames": 124,
-      "maxFrames": 6,
+      "simultaneousHeroReflections": 1,
+      "frames": 141,
+      "maxFrames": 11,
       "solved": true,
-      "mapSha256": "025db29bf5cf00932e29725b0f1f35c21aa3ee4c8ac8cb018bfacc4b7db90358",
-      "witnessSha256": "a201039cdbd661e6b426a57aa632e8f60a9de5706f157b8ea510bdc74c293adf",
-      "observationsSha256": "ae790a4523189542b2b9173fe18c45296e22dc29f02ce8b76b25a9770a187db3"
+      "mapSha256": "e5e487b332b05d8888af16215187dbb770b8f5c047b7f88b683654f89e625502",
+      "witnessSha256": "9df65ae9490c14deb3d98780d65cf595dfc6948a238adad9e3732497fac9a6a5",
+      "observationsSha256": "733692d7c07730cbd99e2ef5ed756d8e6d58f215bc6ba5ebcac33359ba37dbb8"
     },
     {
       "level": 6,
@@ -258,6 +263,7 @@
       "initialMonsters": 4,
       "mirrors": 1,
       "gates": 2,
+      "hydraulicPlatforms": 0,
       "buttons": 2,
       "actions": 37,
       "selections": 2,
@@ -305,6 +311,7 @@
       "initialMonsters": 2,
       "mirrors": 1,
       "gates": 2,
+      "hydraulicPlatforms": 0,
       "buttons": 2,
       "actions": 68,
       "selections": 4,
@@ -329,76 +336,86 @@
       "solved": true,
       "mapSha256": "974c37cf025bc9c9d18068475685b0da19145b911bd8b27c5b928f92ec240d9a",
       "witnessSha256": "b0593e19fe65cbde30ca8557070310d8352f5ea14a57059aa0f66148f623fbad",
-      "observationsSha256": "5d1677e2efb51bc2da725de28142c55bbb0d35540930c0a77d56c055cbbf61f0"
+      "observationsSha256": "3034e4734b38e1be826a5131501da3446e8f36a612658a2e70add4b17fd5ae67"
     },
     {
       "level": 8,
       "id": "ss06-08",
-      "title": "Le rendez-vous des deux ponts",
+      "title": "Les deux horloges",
       "source": {
-        "puzzle": 0,
-        "label": "Création originale · Deux ateliers séparés, presses à distance et rendez-vous sur trois boutons.",
-        "url": "",
-        "piston": true
+        "puzzle": 20,
+        "label": "Adaptation · Heroes and Mirrors 20 : verrou vert, retard du premier reflet et passerelle à alternance violette.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-20",
+        "piston": true,
+        "platform": true
       },
       "dimensions": [
         20,
-        20
+        18
       ],
-      "floorCells": 106,
-      "waterCells": 290,
-      "initialStones": 3,
-      "initialSupports": 1,
-      "initialMonsters": 2,
+      "floorCells": 117,
+      "waterCells": 198,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 0,
       "mirrors": 2,
       "gates": 4,
-      "buttons": 5,
-      "actions": 43,
-      "selections": 2,
+      "hydraulicPlatforms": 15,
+      "buttons": 2,
+      "actions": 111,
+      "selections": 12,
       "merchantPushes": 1,
-      "warriorPushes": 6,
-      "chainPushes": 3,
-      "stoneMoves": 10,
-      "mirrorMoves": 1,
-      "reflections": 1,
-      "heroReflections": 2,
+      "warriorPushes": 8,
+      "chainPushes": 2,
+      "stoneMoves": 14,
+      "mirrorMoves": 5,
+      "reflections": 5,
+      "heroReflections": 0,
       "pistonPushes": 2,
-      "platformsCreated": 2,
-      "monstersRemoved": 2,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
       "blocked": 0,
       "deaths": 0,
-      "combatWaves": 1,
+      "combatWaves": 0,
       "mirrorsDestroyed": 0,
       "cratesCrushed": 0,
-      "simultaneousHeroReflections": 1,
-      "frames": 140,
-      "maxFrames": 11,
+      "simultaneousHeroReflections": 0,
+      "frames": 334,
+      "maxFrames": 12,
       "solved": true,
-      "mapSha256": "d2cfed6a130002143a2072b28d4780f390d67176dbfd6254b8b09cc8dfcc3283",
-      "witnessSha256": "9df65ae9490c14deb3d98780d65cf595dfc6948a238adad9e3732497fac9a6a5",
-      "observationsSha256": "c2c8454628535199387d6a6c1b25f7c730634d7ff4cd102e8a7fbfea9776fade"
+      "mapSha256": "450011b441a5e0843bca4c3b8d54ab87f1b679c35c8abec021034ace18f438b4",
+      "witnessSha256": "9d17316e5f06a14321916476343077377ed72a3f28690703f0b47b422e3c838b",
+      "observationsSha256": "8aefffcd976d7904592c651ce351d5db3b5809976abf629e35b2c6dfd8592d9b"
     }
   ],
   "totals": {
-    "actions": 413,
-    "selections": 19,
+    "actions": 483,
+    "selections": 29,
     "merchantPushes": 28,
-    "warriorPushes": 52,
-    "chainPushes": 23,
-    "stoneMoves": 99,
-    "mirrorMoves": 33,
-    "reflections": 29,
-    "heroReflections": 16,
-    "pistonPushes": 6,
-    "platformsCreated": 18,
+    "warriorPushes": 55,
+    "chainPushes": 24,
+    "stoneMoves": 104,
+    "mirrorMoves": 38,
+    "reflections": 31,
+    "heroReflections": 14,
+    "pistonPushes": 7,
+    "platformsCreated": 15,
     "monstersRemoved": 8,
     "combatWaves": 4,
     "mirrorsDestroyed": 0,
     "cratesCrushed": 0,
     "simultaneousHeroReflections": 2,
-    "frames": 1269
+    "frames": 1480
   },
   "success": true,
+  "clockChecks": {
+    "level": 8,
+    "ticks": 5,
+    "greenLatchStable": true,
+    "firstVioletTickDelayed": true,
+    "platforms": 15,
+    "inverseEntryRetracted": true
+  },
   "failureRoutes": [
     {
       "level": 6,
@@ -413,6 +430,13 @@
       "actions": 7,
       "commands": "URDRRUX",
       "passed": true
+    },
+    {
+      "level": 8,
+      "cause": "Rétraction d’une porte-plateforme sous le Guerrier",
+      "actions": 72,
+      "commands": "UCURRDDUULLDDDDRRRRRRDRUCDDLLDDDDRRUCDDLLLLLLLLLLLLLLLLLDDDDRRXRRCDRXCRX",
+      "passed": true
     }
   ],
   "mechanismChecks": [
@@ -422,7 +446,7 @@
       "status": "unsolvable",
       "states": 784,
       "expanded": 784,
-      "ms": 18
+      "ms": 22
     },
     {
       "level": 1,
@@ -430,7 +454,7 @@
       "status": "unsolvable",
       "states": 2668,
       "expanded": 2668,
-      "ms": 53
+      "ms": 119
     },
     {
       "level": 1,
@@ -438,7 +462,7 @@
       "status": "unsolvable",
       "states": 784,
       "expanded": 784,
-      "ms": 17
+      "ms": 41
     },
     {
       "level": 1,
@@ -446,7 +470,7 @@
       "status": "unsolvable",
       "states": 5736,
       "expanded": 5736,
-      "ms": 146
+      "ms": 120
     },
     {
       "level": 2,
@@ -454,7 +478,7 @@
       "status": "unsolvable",
       "states": 2608,
       "expanded": 2608,
-      "ms": 77
+      "ms": 84
     },
     {
       "level": 2,
@@ -470,7 +494,7 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 76
+      "ms": 84
     },
     {
       "level": 7,
@@ -478,16 +502,7 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 53
-    },
-    {
-      "level": 5,
-      "option": "disablePistons",
-      "status": "solved",
-      "method": "replayedWitness",
-      "commands": "XRUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
-      "actions": 42,
-      "note": "Retirer le mur (5,4) autorise le reflet initial de la caisse. Ce parcours termine sans poussée ni écrasement par presse."
+      "ms": 69
     },
     {
       "level": 1,
@@ -499,7 +514,7 @@
       "status": "unsolvable",
       "states": 8076,
       "expanded": 8076,
-      "ms": 287
+      "ms": 302
     },
     {
       "level": 1,
@@ -511,7 +526,7 @@
       "status": "unsolvable",
       "states": 2056,
       "expanded": 2056,
-      "ms": 31
+      "ms": 34
     },
     {
       "level": 1,
@@ -523,7 +538,7 @@
       "status": "unsolvable",
       "states": 2840,
       "expanded": 2840,
-      "ms": 47
+      "ms": 59
     },
     {
       "level": 1,
@@ -535,10 +550,10 @@
       "status": "unsolvable",
       "states": 5736,
       "expanded": 5736,
-      "ms": 99
+      "ms": 96
     }
   ],
-  "htmlSha256": "f03d0e228a904a22bd5ddde3e869adfecf4374d9cf3f250009999ff3c772c0ad",
+  "htmlSha256": "e087cd720361205daefc361d73c2edb085e65654280defb0b5a58065c2497401",
   "limitations": [
     "Adaptations are explicit, not certified cell-for-cell copies of the original game.",
     "Witnesses prove solvability, not optimality or autonomous SRA success.",

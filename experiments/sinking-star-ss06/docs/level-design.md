@@ -1,55 +1,54 @@
-# Conception et validation des huit salles
+# Conception et validation des huit salles — HTML v4
 
-La progression enseigne une combinaison de rôles et non une nouvelle puissance cachée du Marchand : **les deux héros peuvent déclencher les miroirs**. La différence est la force de poussée. Le partenaire est aussi un poids, un occupant qui peut bloquer un trajet et une deuxième destination à atteindre.
-
-Le tutoriel ouvre huit acquis : marcher, sélectionner, pousser une pièce avec le Marchand, pousser une file avec le Guerrier, créer un appui, refléter, changer une porte et occuper les deux cibles. Les coches sont déduites des pixels publics et actions. Elles sont toutes atteintes par le témoin réel du niveau 1.
+Le Marchand pousse une seule pièce ; le Guerrier pousse une file. Les deux peuvent activer les miroirs. Le changement de personnage ne fait pas avancer le monde et les deux destinations doivent être occupées ensemble.
 
 | Niveau | Actions du témoin | Décision centrale |
 |---|---:|---|
-| 1 | 35 | Le Marchand maintient le circuit avec une caisse ; la presse décale une caisse et le miroir ; le Guerrier construit les deux appuis en poussant une file encastrée. |
-| 2 | 35 | Placer les miroirs et libérer la caisse qui masque le rayon sans abandonner les boutons croisés. |
-| 3 | 119 | Fabriquer puis réutiliser l’interrupteur à distance pour deux traversées successives. |
-| 4 | 35 | Alterner la poussée d’une longue file et le reflet de sa caisse de tête ; récupérer ensuite le miroir. |
-| 5 | 41 | Faire pousser la caisse vers le bas dans l’eau, rétablir le bouton, puis refléter les héros sur l’appui proche pour traverser la presse ouverte. |
-| 6 | 37 | Deux positions du miroir provoquent deux combats ; les deux caisses servent ensuite à créer le passage. |
-| 7 | 68 | Utiliser un nouvel appui pour se tenir derrière le miroir ; commander puis relâcher la presse. |
-| 8 | 43 | Préparer les deux salles séparées et réunir caisse et héros sur les trois boutons avant le reflet commun. |
+| 1 | 35 | Maintenir le circuit avec une caisse, déplacer le miroir par une presse distante et construire deux appuis avec la force du Guerrier. |
+| 2 | 35 | Préparer les boutons croisés et faire partir les deux héros ensemble. |
+| 3 | 119 | Construire puis réutiliser un interrupteur à distance pour franchir deux rideaux de polarités opposées. |
+| 4 | 35 | Pousser une longue file et refléter les caisses de tête pour construire le ponton. |
+| 5 | 43 | Ancien niveau 8 : préparer deux ateliers, actionner deux presses et réunir caisse et héros sur trois boutons. |
+| 6 | 37 | Régler deux alignements de monstres puis construire le passage final avec deux caisses. |
+| 7 | 68 | Construire un contournement pour pousser le miroir par son dos, puis utiliser la presse et le combat. |
+| 8 | 111 | Préparer deux horloges avant de quitter les ateliers, ancrer le pont vert et alterner les traversées violettes pour les deux héros. |
 
-Le nombre d’actions n’est pas une mesure de difficulté et les témoins ne sont pas annoncés minimaux.
+Les témoins prouvent la solvabilité. Ils ne sont pas annoncés minimaux ; leur longueur ne mesure pas directement la difficulté.
+
+## Nouveau niveau 8 : Les deux horloges
+
+Le niveau adapte Heroes and Mirrors 20 (`mirror_clocks`). Deux ateliers préparent des effets différents. Le vert doit s’activer au premier reflet et rester actif ; le violet doit rester éteint lors de ce premier reflet puis alterner. Le pont d’entrée est de polarité inverse : il disparaît quand la grande passerelle apparaît.
+
+Dans SS06, le Marchand place le miroir gauche. Le Guerrier libère une file miroir + caisse dans un passage étroit et aligne sa caisse. Les deux héros doivent rejoindre les refuges avant l’activation. Le premier reflet déplace les caisses et déclenche deux presses qui décalent les miroirs : le miroir vert quitte l’axe de sa caisse, tandis que le miroir violet établit son va-et-vient. Ces déplacements remplacent le dédoublement et le bloqueur de la source par des mécanismes déjà visibles dans SS06.
+
+La traversée comprend quinze portes-plateformes : onze liées au vert, dont l’entrée inverse, et quatre au violet, de polarités alternées. Les couches superposées de la source sont adaptées en segments successifs dans une grille 2D. Les deux héros doivent quitter les plateformes violettes avant chaque bascule ; être sur une plateforme qui se rétracte provoque une défaite.
+
+Les cinq reflets du témoin donnent exactement :
+
+| Reflet | Vert | Violet |
+|---|---|---|
+| 1 | Actif | Inactif |
+| 2 | Actif | Actif |
+| 3 | Actif | Inactif |
+| 4 | Actif | Actif |
+| 5 | Actif | Inactif |
+
+La revue indépendante confirme que chaque plateforme violette est un point de coupure du chemin de marche, même si toutes les autres plateformes sont supposées présentes. Un violet fixé actif ou inactif ne donne aucun chemin complet. Un pont direct vers l’îlot final demanderait au moins trois appuis, contre deux caisses disponibles. Cela exclut les raccourcis directs par marche ou construction, sans prétendre énumérer toutes les dispositions possibles des miroirs. Les résultats et une route de noyade de 72 actions sont conservés dans `reference/level8-clock-review.json`.
+
+## Tutoriel et nécessité
+
+Le niveau 1 conserve ses huit acquis mesurés depuis les pixels : marcher, sélectionner, pousser avec chaque rôle, créer un appui, refléter, changer une porte et atteindre les deux cibles. Les explorations exhaustives établissent que la poussée en file, la presse, les appuis, le reflet et chacune des quatre caisses sont nécessaires dans cette carte. La revue par immobilisation de chaque caisse et le contre-exemple de la première version restent dans `reference/level1-independent-review.json`.
+
+Les autres vérifications exhaustives conservées concernent le déplacement du miroir et la sélection dans L2, puis les appuis et la poussée en file dans L7. Le script `validate-levels.mjs --mechanisms` recalcule ces recherches et les suppressions des quatre caisses de L1. Les recherches limitées ne constituent pas des preuves d’impossibilité.
 
 ## Couverture effective
 
-413 actions, 19 changements de personnage, 23 poussées de file, 33 mouvements de miroir, 29 activations de reflet, 18 nouveaux appuis et 8 monstres éliminés. Six poussées effectives de presse ; celle de L5 crée un appui dans l’eau. Aucune caisse écrasée dans les témoins. L3 utilise ses rideaux sans pousser d’occupant dans le témoin.
+483 actions, 29 sélections, 1 480 images, 24 poussées en file, 38 mouvements de miroir, 31 activations de reflet, 15 appuis immergés permanents créés, 7 poussées de presse et 8 monstres éliminés. Le niveau 8 ajoute quinze plateformes hydrauliques contrôlées par deux circuits.
 
-Les niveaux 2 et 8 réalisent un transport simultané des deux héros. L6 montre deux vagues de combat et vérifie aussi deux routes de défaite : coup de monstre et reflet dans l’eau.
+Les 51 tests du moteur couvrent notamment les polarités et circuits AND, le retrait d’un support, la transformation d’une caisse en appui, l’activation simultanée d’un pont d’arrivée, les cascades et Undo. Les 14 contrôles de l’HTML comparent les pixels et durées des huit parcours et trois routes de défaite : deux en L6, une en L8. Les terminaux apparaissent après la dernière image et Undo interrompt correctement l’animation.
 
-## Nécessité et limites
+La validation visuelle exécutable est réalisée sous Happy DOM avec un buffer canvas. Le navigateur Chromium natif de cet exécuteur n’a pas pu démarrer ; aucun essai navigateur natif n’est revendiqué. Les images du nouveau niveau ont été inspectées séparément.
 
-Les vérifications exhaustives conservées dans `reference/mechanism-checks.json` établissent :
-- L2 sans déplacement de miroir : aucune solution, 2 608 états.
-- L2 sans changement de personnage : aucune solution, 156 états.
-- L7 sans création d’appui : aucune solution, 2 520 états.
-- L7 sans poussée de file : aucune solution, 2 520 états.
+## Historique de la réorganisation
 
-D’autres recherches, arrêtées à 50 000 états, sont indéterminées. On ne prétend donc pas que chaque mécanisme observé est indispensable à toutes les solutions. Une solution alternative légale ne constitue pas une erreur de moteur.
-
-Le validateur rejoue les huit salles, compare chaque image et durée de la session avec le moteur, vérifie les identités et l’absence de chevauchement, et contrôle la victoire après les deux cibles. Le contrôle HTML rejoue la même campagne dans l’interface, y compris la sélection, les transitions, Undo pendant les animations et l’apparition différée des panneaux terminaux.
-
-
-## Révision v2 : corrections des niveaux 1 et 5
-
-Le contournement de l’ancien L1 a été reproduit : le Marchand pouvait construire un passage via l’appui initial et déplacer verticalement la caisse de presse. Un témoin de 59 actions terminait sans poussée en file ni intervention de la presse, en laissant les deux caisses du chenal intactes.
-
-Le nouveau L1 supprime ces accès alternatifs. Les deux caisses du chenal sont encastrées latéralement ; elles comblent deux cases d’eau. Une troisième caisse maintient le circuit, et la quatrième transmet la poussée de la presse au miroir situé devant elle. Aucun miroir ne commence sur une presse.
-
-Les recherches exhaustives prouvent l’impossibilité sans file (784 états), sans presse (2 668), sans création d’appui (784), sans reflet (5 736), ou en retirant chacune des quatre caisses (8 076 / 2 056 / 2 840 / 5 736). Une revue indépendante a également maintenu chaque caisse immobile et confirmé l’impossibilité. Les huit acquis du tutoriel restent obtenus par le parcours pédagogique de 35 actions.
-
-Dans la v2 de L5, le miroir sur la presse avait été remplacé par une caisse marron et sa destination de reflet avait été obstruée. Cette ancienne configuration faisait écraser la caisse avant de rétablir le circuit. La recherche sans presse avait épuisé 42 650 états et le témoin terminait en 41 actions. La révision v3 ci-dessous remplace cette configuration.
-
-Les rapports de L1 et le contre-exemple v1 figurent dans `reference/level1-independent-review.json` et `reference/level1-necessity.json`. `scripts/validate-levels.mjs --mechanisms` recalcule les vérifications de suppression des mécanismes et des quatre caisses. Le rapport de L5 décrit toujours la carte de la révision courante.
-
-## Révision v3 : presse vers le bas et mur retiré
-
-La presse de L5 est orientée vers le sud. Elle déplace la caisse de (7,6) à (7,7), dans l’eau, avec trois images d’avancement ; la caisse devient un appui brun avec X cyan. Le mur ajouté en (5,4), au-dessus du miroir sur l’îlot gauche, est supprimé. Le témoin de 41 actions reste valide, avec trois appuis et aucun écrasement. La campagne produit maintenant 1 269 images.
-
-La suppression du mur autorise aussi un reflet initial de la caisse vers (5,4). Ajouter X au début du témoin fournit une solution légale de 42 actions sans poussée de presse. L’ancienne preuve de nécessité de la presse en v2 ne s’applique donc plus à cette carte. Cette solution alternative est conservée dans `reference/level5-necessity.json` et rejouée par la validation des mécanismes. La revue des mouvements et des trois images figure dans `reference/level5-press-review.json`.
+L’ancien niveau 8 devient le niveau 5 : seul son identifiant ordinal change, avec l’image de transition automatique propre à sa nouvelle place. L’ancien niveau 5 est retiré de la campagne. Sa dernière carte et les vérifications v3 sont conservées dans `reference/history/`. Les niveaux 1, 2, 3, 4, 6 et 7 restent identiques.

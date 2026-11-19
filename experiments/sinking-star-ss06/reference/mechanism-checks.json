@@ -5,7 +5,7 @@
     "status": "unsolvable",
     "states": 784,
     "expanded": 784,
-    "ms": 18
+    "ms": 22
   },
   {
     "level": 1,
@@ -13,7 +13,7 @@
     "status": "unsolvable",
     "states": 2668,
     "expanded": 2668,
-    "ms": 53
+    "ms": 119
   },
   {
     "level": 1,
@@ -21,7 +21,7 @@
     "status": "unsolvable",
     "states": 784,
     "expanded": 784,
-    "ms": 17
+    "ms": 41
   },
   {
     "level": 1,
@@ -29,7 +29,7 @@
     "status": "unsolvable",
     "states": 5736,
     "expanded": 5736,
-    "ms": 146
+    "ms": 120
   },
   {
     "level": 2,
@@ -37,7 +37,7 @@
     "status": "unsolvable",
     "states": 2608,
     "expanded": 2608,
-    "ms": 77
+    "ms": 84
   },
   {
     "level": 2,
@@ -53,7 +53,7 @@
     "status": "unsolvable",
     "states": 2520,
     "expanded": 2520,
-    "ms": 76
+    "ms": 84
   },
   {
     "level": 7,
@@ -61,16 +61,7 @@
     "status": "unsolvable",
     "states": 2520,
     "expanded": 2520,
-    "ms": 53
-  },
-  {
-    "level": 5,
-    "option": "disablePistons",
-    "status": "solved",
-    "method": "replayedWitness",
-    "commands": "XRUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
-    "actions": 42,
-    "note": "Retirer le mur (5,4) autorise le reflet initial de la caisse. Ce parcours termine sans poussée ni écrasement par presse."
+    "ms": 69
   },
   {
     "level": 1,
@@ -82,7 +73,7 @@
     "status": "unsolvable",
     "states": 8076,
     "expanded": 8076,
-    "ms": 287
+    "ms": 302
   },
   {
     "level": 1,
@@ -94,7 +85,7 @@
     "status": "unsolvable",
     "states": 2056,
     "expanded": 2056,
-    "ms": 31
+    "ms": 34
   },
   {
     "level": 1,
@@ -106,7 +97,7 @@
     "status": "unsolvable",
     "states": 2840,
     "expanded": 2840,
-    "ms": 47
+    "ms": 59
   },
   {
     "level": 1,
@@ -118,6 +109,6 @@
     "status": "unsolvable",
     "states": 5736,
     "expanded": 5736,
-    "ms": 99
+    "ms": 96
   }
 ]

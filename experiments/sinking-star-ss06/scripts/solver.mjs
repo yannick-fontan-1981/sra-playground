@@ -2,7 +2,7 @@
 import {compileLevel,initialState,stepDetailed} from '../dist/core.js';
 const cell=p=>p.y*20+p.x;
 const positions=ps=>ps.map(cell).sort((a,b)=>a-b).join(',');
-export const stateKey=s=>`${s.heroes.map(h=>`${h.kind}:${cell(h.at)}:${+!!h.dead}`).join(';')}|${s.active}|${positions(s.stones)}|${positions(s.monsters)}|${positions(s.supports)}|${s.mirrors.map(m=>`${cell(m.at)}:${m.facing}`).sort().join(',')}|${(s.gateClosed??[]).map(Number).join('')}`;
+export const stateKey=s=>`${s.heroes.map(h=>`${h.kind}:${cell(h.at)}:${+!!h.dead}`).join(';')}|${s.active}|${positions(s.stones)}|${positions(s.monsters)}|${positions(s.supports)}|${s.mirrors.map(m=>`${cell(m.at)}:${m.facing}`).sort().join(',')}|${(s.gateClosed??[]).map(Number).join('')}|${(s.platformActive??[]).map(Number).join('')}`;
 export function decodeCommand(c,state){
  if(c==='C'){const h=state.heroes[1-state.active];return {id:6,data:{x:3+h.at.x*3,y:3+h.at.y*3}};}
  const id={U:1,D:2,L:3,R:4,X:5}[c];if(!id)throw new Error(`Unknown command ${c}`);return {id};

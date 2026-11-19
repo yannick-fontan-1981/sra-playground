@@ -1,38 +1,79 @@
 {
   "spec": {
     "id": "ss06-05",
-    "title": "La caisse de l’écluse",
-    "facing": "E",
+    "title": "Le rendez-vous des deux ponts",
     "rows": [
-      "~~~~~~~~~~~~~~~",
-      "~..~..~~~~~~~~~",
-      "~..~..~~~~~~~~~",
-      "~M*...~~~~~~~~~",
-      "~..~..~~......~",
-      "Woo~..~#....g.~",
-      "~~~~#.~o......~",
-      "~~~~~#~~......~",
-      "~~~~~~~~....g.~",
-      "~~~~~~~~......~",
-      "~~~~~~~~......~",
-      "~~~~~~~~~~~~~~~"
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~......~~~~......~~~",
+      "~...M..~~~~......~~~",
+      "~...o..~~~~..##...~~",
+      "~......~~~~.Woo..~~~",
+      "~......~~~~..##..s~~",
+      "~......~~~~......~~~",
+      "~~~.~~~~~~~~~~~~~.~~",
+      "~~~.~~~~~~~~~~~~~.~~",
+      "~~~.~..~~~~~~~.~~.~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~.~~~~~~~.~~~~~",
+      "~~~~~~....m....~~~~~",
+      "~~~~~~~~~~.~~~~~~~~~",
+      "~~~~~~~~~~m~~~~~~~~~",
+      "~~~~~~~~.....~~~~~~~",
+      "~~~~~~~~.g.g.~~~~~~~",
+      "~~~~~~~~.....~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
     ],
+    "facing": "S",
     "mirrors": [
       {
         "at": {
           "x": 5,
-          "y": 6
+          "y": 10
         },
-        "facing": "NE"
+        "facing": "SW"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 10
+        },
+        "facing": "SE"
       }
     ],
     "circuits": [
       {
-        "id": "condamne",
+        "id": "aligner",
+        "buttons": [
+          {
+            "x": 15,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "sentinelles",
         "buttons": [
           {
             "x": 2,
-            "y": 3
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "convergence",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 3,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
           }
         ]
       }
@@ -40,34 +81,85 @@
     "gates": [
       {
         "at": {
-          "x": 7,
-          "y": 6
+          "x": 5,
+          "y": 10
         },
-        "circuit": "condamne",
+        "circuit": "aligner",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 13
+        },
+        "circuit": "sentinelles",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 12
+        },
+        "circuit": "convergence",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 12
+        },
+        "circuit": "convergence",
         "direction": "S",
         "closedWhen": "released"
       }
     ]
   },
-  "commands": "RUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
+  "commands": "DLDLRDDDDDCRRRRURDDDDDDXLLLLDDDDRCRRRRDDDDL",
   "source": {
-    "puzzle": 18,
-    "label": "Adaptation de principe · Heroes and Mirrors 18 : libérer le passage avec une presse ; ici, la caisse devient un appui dans l’eau.",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
+    "puzzle": 0,
+    "label": "Création originale · Deux ateliers séparés, presses à distance et rendez-vous sur trois boutons.",
+    "url": "",
     "piston": true
   },
   "actions": [
     {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
       "id": 4
     },
     {
-      "id": 1
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
     },
     {
       "id": 6,
       "data": {
-        "x": 9,
-        "y": 30
+        "x": 39,
+        "y": 18
       }
     },
     {
@@ -86,16 +178,46 @@
       "id": 1
     },
     {
-      "id": 1
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
     },
     {
       "id": 3
     },
     {
-      "id": 5
+      "id": 3
     },
     {
-      "id": 4
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
     },
     {
       "id": 2
@@ -105,88 +227,40 @@
     },
     {
       "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
     },
     {
       "id": 6,
       "data": {
-        "x": 15,
-        "y": 21
+        "x": 21,
+        "y": 42
       }
     },
     {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
       "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
     }
   ]
 }

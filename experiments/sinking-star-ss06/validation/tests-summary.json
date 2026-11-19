@@ -1,8 +1,8 @@
 {
   "game": "SS06",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "command": "npm test",
-  "passed": 43,
+  "passed": 51,
   "failed": 0,
   "skipped": 0,
   "typescriptBuild": "pass",

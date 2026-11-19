@@ -8,7 +8,7 @@ function fixture(o={}) {
   const put=(p,c)=>rows[p[1]][p[0]]=c;
   for(const [k,c] of [['water','~'],['walls','#'],['supports','s'],['stones','o'],['monsters','m'],['buttons','b'],['doors','D']])for(const p of o[k]??[])put(p,c);
   put(o.M??[2,2],'M');put(o.W??[2,6],'W');for(const p of o.goals??[[11,2],[11,6]])put(p,'g');
-  const spec={id:o.id??'fixture',title:'Duo fixture',rows:rows.map(r=>r.join('')),facing:o.facing??'E',mirrors:(o.mirrors??[]).map(([x,y,facing])=>({at:{x,y},facing})),circuits:o.circuits??[],gates:o.gates??[]};
+  const spec={id:o.id??'fixture',title:'Duo fixture',rows:rows.map(r=>r.join('')),facing:o.facing??'E',mirrors:(o.mirrors??[]).map(([x,y,facing])=>({at:{x,y},facing})),circuits:o.circuits??[],gates:o.gates??[],platforms:o.platforms??[]};
   const world=compileLevel(spec),state=initialState(world),at=(x,y)=>({x:x+3,y:y+5});return {spec,world,state,at};
 }
 const select=(w,s,index)=>stepWorld(w,s,6,cellToPixel(s.heroes[index].at));
@@ -165,4 +165,62 @@ test('rejected level selection preserves current pixels, completion and Undo his
   const before=session.observe();assert.equal(before.level,2);assert.equal(before.levelsCompleted,1);assert.equal(before.canUndo,true);
   for(const invalid of [0,3,1.5,NaN]){assert.throws(()=>session.selectLevel(invalid),/Invalid level/);assert.deepEqual(session.observe(),before);}
   const undone=session.undo();assert.equal(undone.level,2);assert.equal(undone.levelsCompleted,1);assert.notDeepEqual(undone.frame,before.frame);
+});
+
+
+test('hydraulic platforms require unique water cells, valid circuits and palette colors',()=>{
+  const base={water:[[5,5]],circuits:[{id:'a',buttons:[{x:3,y:2}],color:14}],platforms:[{at:{x:5,y:5},circuit:'a',activeWhen:'pressed'}]};
+  const f=fixture(base);assert.equal(f.world.platforms.length,1);assert.equal(f.world.circuits[0].color,14);
+  assert.throws(()=>fixture({...base,water:[]}));assert.throws(()=>fixture({...base,platforms:[...base.platforms,...base.platforms]}));
+  assert.throws(()=>fixture({...base,platforms:[{...base.platforms[0],circuit:'missing'}]}));assert.throws(()=>fixture({...base,platforms:[{...base.platforms[0],activeWhen:'never'}]}));
+  for(const color of [-1,16,1.2,NaN])assert.throws(()=>fixture({...base,circuits:[{...base.circuits[0],color}]}));
+});
+
+test('hydraulic bridges obey AND circuits and both polarities with visible circuit markers',()=>{
+  const f=fixture({W:[8,6],water:[[5,5],[6,5]],circuits:[{id:'a',buttons:[{x:3,y:2},{x:9,y:6}],color:14}],platforms:[{at:{x:5,y:5},circuit:'a',activeWhen:'pressed'},{at:{x:6,y:5},circuit:'a',activeWhen:'released'}]});
+  assert.deepEqual(f.state.platformActive,[false,true]);const p=cellToPixel(f.at(5,5)),off=renderWorld(f.world,f.state);assert.equal(off[p.y][p.x],7);assert.equal(off[p.y][p.x+1],9);assert.equal(off[p.y+1][p.x+1],14);
+  let s=stepWorld(f.world,f.state,4);assert.deepEqual(s.platformActive,[false,true]);s=stepWorld(f.world,select(f.world,s,1),4);assert.deepEqual(s.platformActive,[true,false]);
+  const on=renderWorld(f.world,s);assert.equal(on[p.y][p.x+1],7);assert.equal(on[p.y+1][p.x+1],14);
+});
+
+test('retracting a bridge under the inactive hero causes GAME_OVER and Undo restores the full bridge',()=>{
+  const f=fixture({W:[4,5],water:[[5,5]],circuits:[{id:'a',buttons:[{x:3,y:2}]}],platforms:[{at:{x:5,y:5},circuit:'a',activeWhen:'pressed'}]});
+  const absent=stepWorld(f.world,select(f.world,f.state,1),4);assert.equal(absent.failed,true);assert.equal(absent.dead,false);
+  const session=new DuoPuzzleSession([f.spec]),raised=session.action(4);assert.equal(raised.frames.length,6);assert.deepEqual(raised.frameDurationsMs,[60,80,40,60,80,0]);
+  session.nextHero();session.action(4);session.nextHero();const before=session.observe(),fallen=session.action(3);assert.equal(fallen.state,'GAME_OVER');assert.equal(fallen.frames.length,6);assert.deepEqual(fallen.frameDurationsMs,[60,80,40,60,80,0]);assert.deepEqual(session.undo().frame,before.frame);
+});
+
+test('a crate stays movable on a raised bridge and becomes a permanent support when it retracts',()=>{
+  const f=fixture({W:[3,5],stones:[[4,5]],water:[[5,5]],circuits:[{id:'a',buttons:[{x:3,y:2}]}],platforms:[{at:{x:5,y:5},circuit:'a',activeWhen:'pressed'}]});
+  let s=stepWorld(f.world,f.state,4);s=stepWorld(f.world,select(f.world,s,1),4);assert.deepEqual(s.stones,[f.at(5,5)]);assert.equal(s.supports.length,0);
+  s=stepWorld(f.world,select(f.world,s,0),3);assert.deepEqual(s.platformActive,[false]);assert.equal(s.stones.length,0);assert.deepEqual(s.supports,[f.at(5,5)]);
+  const px=cellToPixel(f.at(5,5)),frame=renderWorld(f.world,s);assert.equal(frame[px.y][px.x],10);assert.equal(frame[px.y][px.x+1],13);assert.equal(frame[px.y+1][px.x+1],10);
+  s=stepWorld(f.world,select(f.world,s,1),4);assert.equal(s.failed,false);assert.equal(s.dead,false);assertAt(hero(s,'warrior').at,f.at(5,5));
+});
+
+test('forced mirrors and monsters survive a simultaneous bridge activation, then fall on retraction',()=>{
+  for(const actor of ['mirror','monster']){
+    const f=fixture({...(actor==='mirror'?{mirrors:[[4,5,'NE']]}:{monsters:[[4,5]]}),water:[[5,5]],circuits:[{id:'a',buttons:[{x:3,y:2}]}],gates:[{at:{x:4,y:5},circuit:'a',direction:'E',closedWhen:'pressed'}],platforms:[{at:{x:5,y:5},circuit:'a',activeWhen:'pressed'}]});
+    let s=stepWorld(f.world,f.state,4);assert.equal(s.dead,false);assert.deepEqual(s.platformActive,[true]);assertAt(actor==='mirror'?s.mirrors[0].at:s.monsters[0],f.at(5,5));
+    s=stepWorld(f.world,s,3);assert.equal(s.dead,false);assert.equal(s.mirrors.length+s.monsters.length,0);assert.equal(s.supports.length,0);
+  }
+});
+
+test('a reflection can activate its own landing bridge and release it safely on the return',()=>{
+  const f=fixture({M:[5,3],W:[10,7],stones:[[2,6]],water:[[7,5]],mirrors:[[5,5,'NE'],[2,4,'SE']],circuits:[{id:'a',buttons:[{x:4,y:4}],color:15}],platforms:[{at:{x:7,y:5},circuit:'a',activeWhen:'pressed'}]});
+  const d=stepDetailed(f.world,f.state,5);assert.equal(d.state.dead,false);assert.equal(d.state.failed,false);assertAt(hero(d.state,'merchant').at,f.at(7,5));assert.deepEqual(d.state.platformActive,[true]);assert.deepEqual(d.phases.map(p=>p.kind),['reflect','platform']);
+  const s=stepWorld(f.world,d.state,5);assert.equal(s.dead,false);assertAt(hero(s,'merchant').at,f.at(5,3));assert.deepEqual(s.platformActive,[false]);
+});
+
+test('a press cascade settles the landing bridge before testing water support',()=>{
+  const f=fixture({W:[7,5],stones:[[4,5]],water:[[8,5]],circuits:[{id:'a',buttons:[{x:3,y:2}]},{id:'b',buttons:[{x:5,y:5}]}],gates:[{at:{x:4,y:5},circuit:'a',direction:'E',closedWhen:'pressed'}],platforms:[{at:{x:8,y:5},circuit:'b',activeWhen:'pressed'}]});
+  const d=stepDetailed(f.world,f.state,4);assert.deepEqual(d.state.platformActive,[true]);assert.deepEqual(d.phases.map(p=>p.kind),['walk','piston','platform']);
+  const s=stepWorld(f.world,select(f.world,d.state,1),4);assert.equal(s.failed,false);assert.equal(s.dead,false);assertAt(hero(s,'warrior').at,f.at(8,5));
+});
+
+test('a fatal initial forced landing on an absent bridge rejects the new campaign transactionally',()=>{
+  const valid={id:'valid-water',title:'Valid',rows:['MWgg']};
+  const fatal={id:'fatal-water',title:'Absent bridge',rows:['M~Wgg'],circuits:[{id:'a',buttons:[{x:4,y:0}]}],gates:[{at:{x:0,y:0},circuit:'a',direction:'E',closedWhen:'released'}],platforms:[{at:{x:1,y:0},circuit:'a',activeWhen:'pressed'}]};
+  const world=compileLevel(fatal);assert.throws(()=>initialState(world),/Initial piston circuit/);
+  let session=new DuoPuzzleSession([valid]);session.nextHero();const before=session.observe();assert.throws(()=>{session=new DuoPuzzleSession([valid,fatal]);},/Initial piston circuit/);assert.deepEqual(session.observe(),before);
 });

@@ -148,6 +148,8 @@ function updateUI():void {
   const link=$<HTMLAnchorElement>('source-link');link.hidden=!info.url;link.href=info.url;
   link.textContent=info.puzzle?`Énigme ${info.puzzle} de référence ↗`:'Voir la source ↗';
   $('piston-help').hidden=!info.piston;
+  const hasPlatforms=!!SS06_LEVELS[observation.level-1]!.platforms?.length;
+  for(const id of ['platform-help','platform-legend-active','platform-legend-inactive'])$(id).hidden=!hasPlatforms;
   for(const item of document.querySelectorAll<HTMLElement>('[data-lesson]'))item.classList.toggle('done',learned.has(item.dataset.lesson!));
   $('lesson-progress').textContent=`${lessonIds.filter(id=>learned.has(id)).length} / ${lessonIds.length} découvertes`;
   const next=lessonIds.find(id=>!learned.has(id));

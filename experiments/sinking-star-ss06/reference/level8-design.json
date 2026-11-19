@@ -1,79 +1,62 @@
 {
   "spec": {
     "id": "ss06-08",
-    "title": "Le rendez-vous des deux ponts",
+    "title": "Les deux horloges",
+    "facing": "N",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~",
-      "~......~~~~......~~~",
-      "~...M..~~~~......~~~",
-      "~...o..~~~~..##...~~",
-      "~......~~~~.Woo..~~~",
-      "~......~~~~..##..s~~",
-      "~......~~~~......~~~",
-      "~~~.~~~~~~~~~~~~~.~~",
-      "~~~.~~~~~~~~~~~~~.~~",
-      "~~~.~..~~~~~~~.~~.~~",
-      "~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~.~~~~~~~.~~~~~",
-      "~~~~~~....m....~~~~~",
-      "~~~~~~~~~~.~~~~~~~~~",
-      "~~~~~~~~~~m~~~~~~~~~",
-      "~~~~~~~~.....~~~~~~~",
-      "~~~~~~~~.g.g.~~~~~~~",
-      "~~~~~~~~.....~~~~~~~",
+      "~~~o~~~~~~~~~.~~~~~~",
+      "~~~~.~~~~~###~######",
+      "###~~######........#",
+      "#........##W#.#....#",
+      "#........##.#o#....#",
+      "#........##........#",
+      "#........##........#",
+      "#..M.....##........#",
+      "#..................#",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~.~.~~~~~~~~~~~~~~~~",
+      "~.~.~~~~~~~~~~~~~~.g",
+      "~~~~~~~~~~~~~~~~~~..",
+      "~~~~~~~~~~~~~~~~~~.g",
       "~~~~~~~~~~~~~~~~~~~~"
     ],
-    "facing": "S",
     "mirrors": [
       {
         "at": {
-          "x": 5,
-          "y": 10
+          "x": 3,
+          "y": 8
         },
-        "facing": "SW"
+        "facing": "NE"
       },
       {
         "at": {
-          "x": 14,
-          "y": 10
+          "x": 13,
+          "y": 5
         },
-        "facing": "SE"
+        "facing": "NE"
       }
     ],
     "circuits": [
       {
-        "id": "aligner",
+        "id": "ancrage",
+        "color": 14,
         "buttons": [
           {
-            "x": 15,
-            "y": 5
+            "x": 13,
+            "y": 2
           }
         ]
       },
       {
-        "id": "sentinelles",
-        "buttons": [
-          {
-            "x": 2,
-            "y": 5
-          }
-        ]
-      },
-      {
-        "id": "convergence",
+        "id": "alternance",
+        "color": 15,
         "buttons": [
           {
             "x": 4,
-            "y": 5
-          },
-          {
-            "x": 3,
-            "y": 10
-          },
-          {
-            "x": 17,
-            "y": 10
+            "y": 3
           }
         ]
       }
@@ -81,92 +64,272 @@
     "gates": [
       {
         "at": {
-          "x": 5,
-          "y": 10
+          "x": 3,
+          "y": 7
         },
-        "circuit": "aligner",
+        "circuit": "ancrage",
         "direction": "E",
         "closedWhen": "pressed"
       },
       {
         "at": {
-          "x": 10,
-          "y": 13
+          "x": 13,
+          "y": 7
         },
-        "circuit": "sentinelles",
-        "direction": "S",
+        "circuit": "ancrage",
+        "direction": "E",
         "closedWhen": "pressed"
       },
       {
         "at": {
-          "x": 6,
-          "y": 12
+          "x": 3,
+          "y": 13
         },
-        "circuit": "convergence",
+        "circuit": "alternance",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 14
+        },
+        "circuit": "alternance",
         "direction": "S",
-        "closedWhen": "released"
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 2,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
       },
       {
         "at": {
           "x": 14,
-          "y": 12
+          "y": 14
         },
-        "circuit": "convergence",
-        "direction": "S",
-        "closedWhen": "released"
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "released"
       }
     ]
   },
-  "commands": "DLDLRDDDDDCRRRRURDDDDDDXLLLLDDDDRCRRRRDDDDL",
-  "source": {
-    "puzzle": 0,
-    "label": "Création originale · Deux ateliers séparés, presses à distance et rendez-vous sur trois boutons.",
-    "url": "",
-    "piston": true
-  },
+  "commands": "UCURRDDUULLDDDDRRRRRRDRUCDDLLDDDDRRUCDDLLLLLLLLLLLLLLLLLDDDDRRXRRCDRXCRRRCRRRXCRRRCRRRXCRRRCRRRXCRRRRDDRCRRRRRR",
   "actions": [
     {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
+      "id": 1
     },
     {
       "id": 6,
       "data": {
-        "x": 39,
-        "y": 18
+        "x": 36,
+        "y": 21
       }
     },
     {
+      "id": 1
+    },
+    {
       "id": 4
     },
     {
       "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
     },
     {
       "id": 4
@@ -178,52 +341,92 @@
       "id": 1
     },
     {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
       "id": 4
     },
     {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
+      "id": 4
     },
     {
       "id": 5
     },
     {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
+      "id": 4
     },
     {
       "id": 4
@@ -231,8 +434,129 @@
     {
       "id": 6,
       "data": {
-        "x": 21,
-        "y": 42
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 48
       }
     },
     {
@@ -254,13 +578,388 @@
       "id": 2
     },
     {
-      "id": 2
+      "id": 4
     },
     {
-      "id": 2
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 48
+      }
     },
     {
-      "id": 3
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     }
-  ]
+  ],
+  "source": {
+    "puzzle": 20,
+    "label": "Adaptation · Heroes and Mirrors 20 : verrou vert, retard du premier reflet et passerelle à alternance violette.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-20",
+    "piston": true,
+    "platform": true
+  },
+  "metrics": {
+    "actions": 111,
+    "selections": 12,
+    "merchantPushes": 1,
+    "warriorPushes": 8,
+    "chainPushes": 2,
+    "stoneMoves": 14,
+    "mirrorMoves": 5,
+    "reflections": 5,
+    "heroReflections": 0,
+    "pistonPushes": 2,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Positionner le miroir de l’horloge violette",
+      "turn": 1,
+      "heroes": [
+        {
+          "x": 3,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "green": false,
+      "violet": false,
+      "platformActive": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Le Guerrier pousse la file miroir + caisse",
+      "turn": 7,
+      "heroes": [
+        {
+          "x": 3,
+          "y": 9
+        },
+        {
+          "x": 13,
+          "y": 7
+        }
+      ],
+      "green": false,
+      "violet": false,
+      "platformActive": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Aligner la caisse du verrou vert",
+      "turn": 24,
+      "heroes": [
+        {
+          "x": 3,
+          "y": 9
+        },
+        {
+          "x": 18,
+          "y": 9
+        }
+      ],
+      "green": false,
+      "violet": false,
+      "platformActive": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Réunir les deux héros sur les refuges",
+      "turn": 62,
+      "heroes": [
+        {
+          "x": 3,
+          "y": 14
+        },
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "green": false,
+      "violet": false,
+      "platformActive": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Premier reflet : vert fixé, violet encore éteint",
+      "turn": 63,
+      "heroes": [
+        {
+          "x": 3,
+          "y": 14
+        },
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "green": true,
+      "violet": false,
+      "platformActive": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Bascule violette depuis deux appuis verts",
+      "turn": 69,
+      "heroes": [
+        {
+          "x": 4,
+          "y": 15
+        },
+        {
+          "x": 5,
+          "y": 15
+        }
+      ],
+      "green": true,
+      "violet": true,
+      "platformActive": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "label": "Bascule violette depuis deux appuis verts",
+      "turn": 78,
+      "heroes": [
+        {
+          "x": 7,
+          "y": 15
+        },
+        {
+          "x": 8,
+          "y": 15
+        }
+      ],
+      "green": true,
+      "violet": false,
+      "platformActive": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Bascule violette depuis deux appuis verts",
+      "turn": 87,
+      "heroes": [
+        {
+          "x": 10,
+          "y": 15
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "green": true,
+      "violet": true,
+      "platformActive": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "label": "Bascule violette depuis deux appuis verts",
+      "turn": 96,
+      "heroes": [
+        {
+          "x": 13,
+          "y": 15
+        },
+        {
+          "x": 14,
+          "y": 15
+        }
+      ],
+      "green": true,
+      "violet": false,
+      "platformActive": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Deux destinations",
+      "turn": 111,
+      "heroes": [
+        {
+          "x": 19,
+          "y": 15
+        },
+        {
+          "x": 19,
+          "y": 17
+        }
+      ],
+      "green": true,
+      "violet": false,
+      "platformActive": [
+        false,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false,
+        true
+      ]
+    }
+  ],
+  "adaptation": "Deux héros, deux miroirs préparés par poussée et deux caisses disponibles. Deux presses décalent les miroirs au premier reflet pour remplacer le dédoublement et le bloqueur de la source. Les supports et portes superposés deviennent des segments de plateformes vertes et violettes dans une grille 2D."
 }

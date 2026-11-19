@@ -20,11 +20,13 @@ Les helpers pédagogiques de browser.ts lisent les pixels publics. Extraire des 
 
 Respecter les cellules 3×3, les + orange/rouge, les contours jaunes et la sélection. Le reflet d’un héros est un + gris clair, celui d’une caisse un contour carré gris clair. Les miroirs sont mobiles ; les appuis immergés sont fixes.
 
+Les portes-plateformes du niveau 8 sont déjà gérées dans le moteur : conserver leurs pixels et leur phase `platform` de trois images. Aucun nouvel identifiant d’action ni état sémantique public n’est nécessaire. Reprendre l’aide contextuelle et les deux symboles rose plein / cadre sur eau.
+
 Conserver toutes les images et toutes les durées. Les mouvements ont 3 images, les combats 5 et les cascades combinent les phases. Le statut logique terminal arrive avant la fin visuelle : attendre la dernière image pour afficher les panneaux. Interdire les actions manuelles et de l’agent pendant l’animation et après un terminal. Undo/Reset/Restart/sélection de niveau invalident les anciens callbacks.
 
 ## Validation et livraison
 
-Rejouer les huit témoins via le routeur natif de production, comparer observations/images/durées/transitions et vérifier l’absence de chargement Python. Couvrir les six commandes, les deux décès L6, Undo pendant le combat, les départs conjoints L2/L8, la progression hors ordre et les huit acquis du tutoriel.
+Rejouer les huit témoins via le routeur natif de production, comparer observations/images/durées/transitions et vérifier l’absence de chargement Python. Couvrir les six commandes, les deux décès L6 et la rétraction mortelle L8, Undo pendant le combat, les départs conjoints L2/L5, la progression hors ordre et les huit acquis du tutoriel.
 
 Exécuter les tests pertinents, typage, build et non-régression de SS01–SS05. Faire un essai navigateur réel ; la validation de cette livraison est Happy DOM. Les témoins et solveurs restent des outils d’auteur et ne deviennent jamais une politique du SRA.
 

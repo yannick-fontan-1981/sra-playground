@@ -1,10 +1,10 @@
-# Contrat SS06 0.1.2
+# Contrat SS06 0.2.0
 
 ## Grille et états
 
 Image de 64 × 64 pixels, plateau logique 20 × 20, origine (2,2), cellules 3 × 3. Une salle rectangulaire plus petite est centrée. Palette identique à SS01–SS05 : Marchand 12 orange, Guerrier 8 rouge, eau 9 bleu, sol 3 gris, mur 4 gris foncé, caisses 13 marron, appuis marron et X cyan 10, boutons/portes 7 rose, destinations 11 jaune, miroir blanc 0/dos noir 5, monstres noirs/X rouge.
 
-Une salle contient exactement un Marchand, un Guerrier et deux cibles. Les identités sont conservées lors des poussées et reflets. Un personnage perdu suffit pour GAME_OVER ; toutes les cibles occupées par les deux héros après résolution des presses et combats terminent la salle.
+Une salle contient exactement un Marchand, un Guerrier et deux cibles. Les identités sont conservées lors des poussées et reflets. Un personnage perdu suffit pour GAME_OVER ; toutes les cibles occupées par les deux héros après résolution des presses, plateformes et combats terminent la salle.
 
 Cartes : M Marchand, W Guerrier, o caisse, m monstre, s appui sur eau, b bouton, D porte, * caisse sur bouton, g cible, # mur, ~ eau, . sol. Miroirs explicites ou chiffres 1 NE, 2 SE, 3 SW, 4 NW. Les coordonnées des circuits et miroirs sont relatives à la carte avant centrage.
 
@@ -31,6 +31,16 @@ Un circuit associe une ou plusieurs dalles à des portes. Toutes ses dalles doiv
 `closedWhen: pressed | released` détermine la polarité. Une porte qui se ferme pousse toute la file depuis sa propre case dans la direction indiquée. Si la file est bloquée, seul l’occupant sur la case de la porte est écrasé. Une fermeture ne pousse pas les voisins si sa case est vide.
 
 Les circuits sont recalculés après chaque déplacement forcé et chaque suppression d’occupant. Les cascades se stabilisent ; une oscillation refuse l’action entière. Un état initial instable ou fatal est rejeté dès la création de la campagne.
+
+## Portes-plateformes dans l’eau
+
+`LevelSpec.platforms` contient des objets `{at, circuit, activeWhen: 'pressed' | 'released'}`. Chaque position doit être une case d’eau. Les boutons du circuit restent sur du sol. `CircuitSpec.color` peut définir un indice 0–15 pour le repère du bouton et des dispositifs ; sans valeur, le rendu historique est conservé.
+
+Une plateforme active porte les héros et les objets mobiles. Une plateforme inactive laisse l’eau. Si elle se retire sous un héros, celui-ci tombe ; sous une caisse, elle produit un appui immergé permanent ; sous un miroir ou un monstre, l’objet disparaît. Une caisse posée sur la plateforme active reste mobile. Les appuis permanents restent utilisables même si la plateforme se rétracte.
+
+Les circuits se règlent avant la chute sur les cases hydrauliques : une caisse reflétée sur un bouton peut donc activer le pont sur lequel un héros arrive au même tour. Un pas volontaire sur une plateforme déjà absente est refusé. Les plateformes ne bloquent pas les rayons. Undo restaure leur état et leurs occupants.
+
+Le sprite actif est un carré rose plein avec un centre de circuit ; le sprite inactif conserve les quatre coins roses et laisse voir les quatre bras bleus autour du centre. Le changement utilise une phase `platform` de trois images, durées 60/80/40 ms avant application de la durée finale zéro. `platformActive` reste un état interne et ne figure jamais dans une observation publique.
 
 ## Monstres
 

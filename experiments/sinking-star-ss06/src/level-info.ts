@@ -24,9 +24,9 @@ export const LEVEL_INFO=[
     "piston": false
   },
   {
-    "puzzle": 18,
-    "label": "Adaptation de principe · Heroes and Mirrors 18 : libérer le passage avec une presse ; ici, la caisse devient un appui dans l’eau.",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-18",
+    "puzzle": 0,
+    "label": "Création originale · Deux ateliers séparés, presses à distance et rendez-vous sur trois boutons.",
+    "url": "",
     "piston": true
   },
   {
@@ -42,9 +42,10 @@ export const LEVEL_INFO=[
     "piston": true
   },
   {
-    "puzzle": 0,
-    "label": "Création originale · Deux ateliers séparés, presses à distance et rendez-vous sur trois boutons.",
-    "url": "",
-    "piston": true
+    "puzzle": 20,
+    "label": "Adaptation · Heroes and Mirrors 20 : verrou vert, retard du premier reflet et passerelle à alternance violette.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-20",
+    "piston": true,
+    "platform": true
   }
 ] as const;

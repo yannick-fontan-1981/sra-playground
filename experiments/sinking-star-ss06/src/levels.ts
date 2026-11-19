@@ -295,38 +295,79 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
   },
   {
     "id": "ss06-05",
-    "title": "La caisse de l’écluse",
-    "facing": "E",
+    "title": "Le rendez-vous des deux ponts",
     "rows": [
-      "~~~~~~~~~~~~~~~",
-      "~..~..~~~~~~~~~",
-      "~..~..~~~~~~~~~",
-      "~M*...~~~~~~~~~",
-      "~..~..~~......~",
-      "Woo~..~#....g.~",
-      "~~~~#.~o......~",
-      "~~~~~#~~......~",
-      "~~~~~~~~....g.~",
-      "~~~~~~~~......~",
-      "~~~~~~~~......~",
-      "~~~~~~~~~~~~~~~"
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~......~~~~......~~~",
+      "~...M..~~~~......~~~",
+      "~...o..~~~~..##...~~",
+      "~......~~~~.Woo..~~~",
+      "~......~~~~..##..s~~",
+      "~......~~~~......~~~",
+      "~~~.~~~~~~~~~~~~~.~~",
+      "~~~.~~~~~~~~~~~~~.~~",
+      "~~~.~..~~~~~~~.~~.~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~.~~~~~~~.~~~~~",
+      "~~~~~~....m....~~~~~",
+      "~~~~~~~~~~.~~~~~~~~~",
+      "~~~~~~~~~~m~~~~~~~~~",
+      "~~~~~~~~.....~~~~~~~",
+      "~~~~~~~~.g.g.~~~~~~~",
+      "~~~~~~~~.....~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
     ],
+    "facing": "S",
     "mirrors": [
       {
         "at": {
           "x": 5,
-          "y": 6
+          "y": 10
         },
-        "facing": "NE"
+        "facing": "SW"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 10
+        },
+        "facing": "SE"
       }
     ],
     "circuits": [
       {
-        "id": "condamne",
+        "id": "aligner",
+        "buttons": [
+          {
+            "x": 15,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "sentinelles",
         "buttons": [
           {
             "x": 2,
-            "y": 3
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "convergence",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 3,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
           }
         ]
       }
@@ -334,10 +375,37 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
     "gates": [
       {
         "at": {
-          "x": 7,
-          "y": 6
+          "x": 5,
+          "y": 10
         },
-        "circuit": "condamne",
+        "circuit": "aligner",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 13
+        },
+        "circuit": "sentinelles",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 12
+        },
+        "circuit": "convergence",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 12
+        },
+        "circuit": "convergence",
         "direction": "S",
         "closedWhen": "released"
       }
@@ -491,79 +559,62 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
   },
   {
     "id": "ss06-08",
-    "title": "Le rendez-vous des deux ponts",
+    "title": "Les deux horloges",
+    "facing": "N",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~",
-      "~......~~~~......~~~",
-      "~...M..~~~~......~~~",
-      "~...o..~~~~..##...~~",
-      "~......~~~~.Woo..~~~",
-      "~......~~~~..##..s~~",
-      "~......~~~~......~~~",
-      "~~~.~~~~~~~~~~~~~.~~",
-      "~~~.~~~~~~~~~~~~~.~~",
-      "~~~.~..~~~~~~~.~~.~~",
-      "~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~.~~~~~~~.~~~~~",
-      "~~~~~~....m....~~~~~",
-      "~~~~~~~~~~.~~~~~~~~~",
-      "~~~~~~~~~~m~~~~~~~~~",
-      "~~~~~~~~.....~~~~~~~",
-      "~~~~~~~~.g.g.~~~~~~~",
-      "~~~~~~~~.....~~~~~~~",
+      "~~~o~~~~~~~~~.~~~~~~",
+      "~~~~.~~~~~###~######",
+      "###~~######........#",
+      "#........##W#.#....#",
+      "#........##.#o#....#",
+      "#........##........#",
+      "#........##........#",
+      "#..M.....##........#",
+      "#..................#",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~.~.~~~~~~~~~~~~~~~~",
+      "~.~.~~~~~~~~~~~~~~.g",
+      "~~~~~~~~~~~~~~~~~~..",
+      "~~~~~~~~~~~~~~~~~~.g",
       "~~~~~~~~~~~~~~~~~~~~"
     ],
-    "facing": "S",
     "mirrors": [
       {
         "at": {
-          "x": 5,
-          "y": 10
+          "x": 3,
+          "y": 8
         },
-        "facing": "SW"
+        "facing": "NE"
       },
       {
         "at": {
-          "x": 14,
-          "y": 10
+          "x": 13,
+          "y": 5
         },
-        "facing": "SE"
+        "facing": "NE"
       }
     ],
     "circuits": [
       {
-        "id": "aligner",
+        "id": "ancrage",
+        "color": 14,
         "buttons": [
           {
-            "x": 15,
-            "y": 5
+            "x": 13,
+            "y": 2
           }
         ]
       },
       {
-        "id": "sentinelles",
-        "buttons": [
-          {
-            "x": 2,
-            "y": 5
-          }
-        ]
-      },
-      {
-        "id": "convergence",
+        "id": "alternance",
+        "color": 15,
         "buttons": [
           {
             "x": 4,
-            "y": 5
-          },
-          {
-            "x": 3,
-            "y": 10
-          },
-          {
-            "x": 17,
-            "y": 10
+            "y": 3
           }
         ]
       }
@@ -571,39 +622,161 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
     "gates": [
       {
         "at": {
-          "x": 5,
-          "y": 10
+          "x": 3,
+          "y": 7
         },
-        "circuit": "aligner",
+        "circuit": "ancrage",
         "direction": "E",
         "closedWhen": "pressed"
       },
       {
         "at": {
-          "x": 10,
-          "y": 13
+          "x": 13,
+          "y": 7
         },
-        "circuit": "sentinelles",
-        "direction": "S",
+        "circuit": "ancrage",
+        "direction": "E",
         "closedWhen": "pressed"
       },
       {
         "at": {
-          "x": 6,
-          "y": 12
+          "x": 3,
+          "y": 13
         },
-        "circuit": "convergence",
+        "circuit": "alternance",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 14
+        },
+        "circuit": "alternance",
         "direction": "S",
-        "closedWhen": "released"
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 2,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
       },
       {
         "at": {
           "x": 14,
-          "y": 12
+          "y": 14
         },
-        "circuit": "convergence",
-        "direction": "S",
-        "closedWhen": "released"
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 14
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "activeWhen": "released"
       }
     ]
   }
