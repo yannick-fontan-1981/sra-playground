@@ -2594,3 +2594,11 @@ La première commande révèle un effet différent de l’inversion prévue. Le 
 SIC prépare la montée en conservant un appui devant les dangers. Avant de dépenser le dernier inverseur observé, il cherche un point d’arrêt d’où le couloir de la sortie reste accessible. La commande 36 confirme le changement de gravité. La commande 51 atteint la sortie. Les 51 commandes du rejeu complet sont identiques à celles de l’essai depuis la sauvegarde.
 
 Le niveau 8 gagne en **51 commandes SIC seul et 35,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **236 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 287 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les sept tests ciblés passent. Empreinte `47edecd76a397a7a3472c76f99b25af41033de1db00a3c65876f1c49ef6021ec`.
+
+### S5I5 niveau 8
+
+Deux relations observables structurent le plan. Un bouton de longueur agit sur toutes les barres qui lui correspondent, même si elles sont éloignées. Le bouton de rotation entraîne les barres attachées au pivot. SIC conserve aussi les pièces passives que ces barres déplacent. Les cartes de situation distinguent les récepteurs directs du bouton et les pièces transportées.
+
+Au deuxième clic, SIC vérifie le sens de la rotation. Il tourne ensuite l’assemblage pour libérer successivement les canaux qui déplacent les bloqueurs. Une fois le passage libre, la barre qui porte le marqueur peut s’allonger jusqu’aux repères. Les 36 clics du rejeu complet sont identiques à ceux de l’essai depuis la sauvegarde.
+
+Le niveau 8 gagne en **36 commandes SIC seul et 13,11 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **216 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 252 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 12 tests ciblés passent. Empreinte `c722a6f5f89b9ae5ad6dcf31ae248dd7bf78f2e9ef515f37ff7709999d74db37`.
