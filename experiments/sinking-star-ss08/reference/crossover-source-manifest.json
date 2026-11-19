@@ -1,0 +1,111 @@
+{
+  "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+  "selection": "Zones croisées, conformément à la précision utilisateur. Quatre adaptations de principes distincts ; aucune ne revendique une reproduction exacte des cellules originales.",
+  "guides": [
+    {
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+      "puzzles": [
+        30,
+        31,
+        32,
+        34
+      ],
+      "webRefs": [
+        "turn483941371view0",
+        "turn413990883view0"
+      ]
+    },
+    {
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+      "puzzles": [
+        11
+      ],
+      "webRefs": [
+        "turn483941371view1",
+        "turn413990883view1"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "level": 1,
+      "title": "Le relais derrière l’angle",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+        "puzzle": 30,
+        "idea": "Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.",
+        "kind": "adaptation de principe"
+      },
+      "adaptation": "Géométrie originale compacte à trois îlots ; duo Marchand/Magicien et deux objectifs ; miroir déplacé par le Marchand ; le Magicien dépose la caisse sur son bouton de départ.",
+      "validatedActions": 30,
+      "witnessFile": "level1-design.json"
+    },
+    {
+      "level": 2,
+      "title": "Le compte des cinq îles",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-11",
+        "puzzle": 11,
+        "idea": "Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide.",
+        "kind": "adaptation de principe"
+      },
+      "adaptation": "Cinq îlots réagencés et deux objectifs sur l’île centrale ; Marchand remplace le Guerrier ; une caisse supplémentaire garde une ancre de retour pour le Magicien. Aucun miroir ni porte : problème de circulation des héros et de réserve de caisses.",
+      "validatedActions": 31,
+      "witnessFile": "level2-design.json"
+    },
+    {
+      "level": 3,
+      "title": "Le miroir et son échafaudage",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-32",
+        "puzzle": 32,
+        "idea": "Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie.",
+        "kind": "adaptation de principe"
+      },
+      "adaptation": "Passerelle et îlots redessinés ; le Magicien échange avec son partenaire pour livrer le seul pousseur sur le chantier ; un bloc noyé construit le virage ; le miroir sert d’abord au retour puis à la traversée finale des deux héros.",
+      "validatedActions": 34,
+      "witnessFile": "level3-design.json"
+    },
+    {
+      "level": 5,
+      "title": "La bonne diagonale",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-31",
+        "puzzle": 31,
+        "idea": "La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange.",
+        "kind": "adaptation de principe"
+      },
+      "adaptation": "Deux miroirs ordinaires orientés différemment remplacent la distinction miroir ordinaire/spécial ; les deux héros doivent sortir ; une caisse extraite par le Magicien conserve le bouton rose et libère l’appui nécessaire pour déplacer le premier miroir. Ce dernier maintient le bouton vert de la passerelle hydraulique ; le second devient le transporteur. Deux destinations nouvelles.",
+      "validatedActions": 59,
+      "witnessFile": "level5-design.json"
+    }
+  ],
+  "contractAdaptations": [
+    "Le Marchand pousse les objets et les miroirs ; le Magicien échange mais ne pousse pas.",
+    "Le reflet géométrique est global et prend la cible la plus proche par miroir ; le rayon directionnel du Magicien peut rebondir sur plusieurs faces blanches.",
+    "Les dos de miroirs bloquent les rayons dans SS08 ; absence de dédoublement, de miroir magique distinct, de Clerc ou de Druide."
+  ],
+  "otherIdeasForRoot": [
+    {
+      "puzzle": 34,
+      "zone": "heroes-and-mirrors",
+      "idea": "Boucle optique à quatre miroirs : déplacer le bon coin pour rendre le rayon sortant."
+    },
+    {
+      "puzzle": 20,
+      "zone": "heroes-and-mirrors",
+      "idea": "Alternance de boutons et supports déployables, déjà adapté dans SS06 ; différencier la nouvelle géométrie et le duo."
+    }
+  ],
+  "replay": {
+    "engine": "SS08 dist/core.js construit depuis src/core.ts",
+    "allFourComplete": true,
+    "failedActions": 0,
+    "deaths": 0
+  },
+  "ablation": "Les fichiers levelN-ablation.json distinguent les recherches exhaustives des limites de recherche. Une limite n’est pas une preuve d’impossibilité."
+}

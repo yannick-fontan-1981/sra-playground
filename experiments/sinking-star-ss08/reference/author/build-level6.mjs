@@ -1,0 +1,16 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(19,17);
+fill(3,3,8,11);fill(3,12,8,13);put(4,5,'M');put(8,7,'o');put(7,10,'o');
+fill(9,7,11,7,'~');fill(12,6,14,8);put(13,7,'W');
+fill(9,12,12,12,'~');fill(12,10,14,14);put(12,12,'~');put(14,11,'g');
+put(15,9,'o');put(15,10,'~');fill(16,10,17,14);put(17,13,'g');
+const spec={id:'ss08-06',title:'Le poids du second reflet',rows:strings(),facing:'W',mirrors:[{at:{x:8,y:12},facing:'NE'}],circuits:[{id:'retard',buttons:[{x:13,y:12}],color:7}],gates:[{at:{x:15,y:9},circuit:'retard',direction:'S',closedWhen:'pressed'}],platforms:[{at:{x:11,y:12},circuit:'retard',activeWhen:'pressed'},{at:{x:12,y:12},circuit:'retard',activeWhen:'pressed'}]};
+const a=new Author(spec);
+a.select('wizard').act('L').stage('Le Magicien quitte son îlot en échangeant avec la caisse de la grande terrasse');
+a.go(6,10,'merchant').act('R').act('L').stage('Préparer la caisse proche, sans masquer le Magicien plus loin');
+a.act('X').stage('Premier reflet : la caisse proche crée l’appui, le Magicien reste en place');
+a.act('X').stage('Second reflet : le Magicien arrive sur le bouton, déploie les plateformes et pousse la caisse isolée dans l’eau');
+a.go(8,10).act('X').stage('Le Marchand traverse vers l’appui fixe');
+a.act('RRU').go(14,11).stage('Le Marchand quitte la passerelle avant son retrait');
+a.select('wizard').act('U').go(14,10).act('RR').go(17,13).stage('Le dernier appui permet au Magicien de rejoindre sa destination');
+a.save(new URL('../level6-design.json',import.meta.url),{puzzle:19,label:'Adaptation de Heroes and Mirrors 19 · un premier reflet prépare l’appui, le second actionne le bouton.',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-19',piston:true,platform:true,objective:'Ordonner les deux reflets, maintenir la passerelle puis franchir l’appui créé par la presse.'},'Le retard de Heroes and Mirrors 19 devient une priorité de distance : une caisse proche tombe dans l’eau avant qu’un héros plus éloigné ne rejoigne le bouton. L’empilement original est remplacé par des appuis permanents et deux plateformes hydrauliques, avec un second îlot final accessible uniquement après la presse.');

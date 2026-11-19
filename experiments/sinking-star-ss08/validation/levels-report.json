@@ -1,0 +1,868 @@
+{
+  "game": "SS08",
+  "version": "0.3.0",
+  "levels": [
+    {
+      "level": 1,
+      "id": "ss08-01",
+      "title": "Le relais derrière l’angle",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+        "puzzle": 30,
+        "idea": "Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.",
+        "kind": "adaptation de principe",
+        "label": "Adaptation de Heroes and Mirrors 30 · Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton.",
+        "piston": true,
+        "platform": false,
+        "objective": "Récupérer une caisse avec un échange coudé, puis combiner échange et reflet pour conserver un bouton."
+      },
+      "dimensions": [
+        18,
+        12
+      ],
+      "floorCells": 47,
+      "waterCells": 169,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 30,
+      "selections": 3,
+      "merchantPushes": 1,
+      "wizardSwaps": 1,
+      "bentSwaps": 1,
+      "heroSwaps": 0,
+      "chainPushes": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 1,
+      "reflections": 1,
+      "heroReflections": 1,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 85,
+      "maxFrames": 4,
+      "recordedStages": 3,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "0601b6b40891148489da5cee4e3c9d808b4d6305423e0bd6bf0a58cc7bbefc2d",
+      "witnessSha256": "f3a61b73ad65ef74ef6c385d390629eda192f990339c85a7075ef8ea7c8df982",
+      "observationsSha256": "0b6c5e6f151d5def5cf5e52fd707a6a9c9a5c7b6df0b093980366ce90ef31ddc"
+    },
+    {
+      "level": 2,
+      "id": "ss08-02",
+      "title": "Le compte des cinq îles",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-11",
+        "puzzle": 11,
+        "idea": "Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide.",
+        "kind": "adaptation de principe",
+        "label": "Adaptation de Heroes and Water 11 · Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide.",
+        "piston": false,
+        "platform": false,
+        "objective": "Les échanges conservent le nombre d’occupants des îles : seule la poussée finale crée un passage vers l’île vide."
+      },
+      "dimensions": [
+        15,
+        14
+      ],
+      "floorCells": 51,
+      "waterCells": 159,
+      "initialStones": 5,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 0,
+      "gates": 0,
+      "hydraulicPlatforms": 0,
+      "buttons": 0,
+      "actions": 31,
+      "selections": 3,
+      "merchantPushes": 1,
+      "wizardSwaps": 9,
+      "bentSwaps": 0,
+      "heroSwaps": 2,
+      "chainPushes": 0,
+      "stoneMoves": 8,
+      "mirrorMoves": 0,
+      "reflections": 0,
+      "heroReflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 88,
+      "maxFrames": 4,
+      "recordedStages": 4,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "3648e6ac01b7df161718ea86c8c0a7c908877087127cf95bfe858b7aff66e06e",
+      "witnessSha256": "c67b13a330813445abce845e2822751d43893f7227fe167d7019f1291d55f411",
+      "observationsSha256": "c8badf34b02e664d8bed56df3482bba21f058ca68ed927a0c4d7a19201d76d3d"
+    },
+    {
+      "level": 3,
+      "id": "ss08-03",
+      "title": "Le miroir et son échafaudage",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-32",
+        "puzzle": 32,
+        "idea": "Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie.",
+        "kind": "adaptation de principe",
+        "label": "Adaptation de Heroes and Mirrors 32 · Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie.",
+        "piston": false,
+        "platform": false,
+        "objective": "Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie."
+      },
+      "dimensions": [
+        16,
+        15
+      ],
+      "floorCells": 46,
+      "waterCells": 194,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 0,
+      "hydraulicPlatforms": 0,
+      "buttons": 0,
+      "actions": 34,
+      "selections": 4,
+      "merchantPushes": 5,
+      "wizardSwaps": 1,
+      "bentSwaps": 0,
+      "heroSwaps": 1,
+      "chainPushes": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 4,
+      "reflections": 3,
+      "heroReflections": 3,
+      "pistonPushes": 0,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 95,
+      "maxFrames": 4,
+      "recordedStages": 5,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "bfbee42a4cb4f0f4c1cc28e17fa29ced202c77558787d3fee6c7d48b8a9f7fc1",
+      "witnessSha256": "67dc1ea0a6621ff9e1fda4ed20b93f06248d749d7cc560264cfa57534c0f8acc",
+      "observationsSha256": "14693cac1c7c19a9774de4ef0482eb6eadcdecefb27b77de19960904a1df0c8a"
+    },
+    {
+      "level": 4,
+      "id": "ss08-04",
+      "title": "L’atelier des deux passages",
+      "source": {
+        "puzzle": 30,
+        "label": "Tutoriel original du duo · échange direct, trois appuis, presse isolée, miroir mobile, rayon dévié et passerelle tenue à deux.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+        "piston": true,
+        "platform": true,
+        "objective": "Extraire la caisse ; le bouton rose pousse la caisse isolée et construit le second appui. Préparer le miroir, refléter la dernière caisse puis tenir la passerelle pour faire traverser le duo."
+      },
+      "dimensions": [
+        19,
+        14
+      ],
+      "floorCells": 58,
+      "waterCells": 6,
+      "initialStones": 3,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 2,
+      "buttons": 2,
+      "actions": 50,
+      "selections": 5,
+      "merchantPushes": 4,
+      "wizardSwaps": 2,
+      "bentSwaps": 1,
+      "heroSwaps": 0,
+      "chainPushes": 0,
+      "stoneMoves": 7,
+      "mirrorMoves": 1,
+      "reflections": 2,
+      "heroReflections": 1,
+      "pistonPushes": 1,
+      "platformsCreated": 3,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 2,
+      "frames": 151,
+      "maxFrames": 7,
+      "recordedStages": 10,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
+      "witnessSha256": "00db8bbe3e84eef3a23579a8e35625ab2a0a4e61e2a2a2640a289c3c6b8cacb0",
+      "observationsSha256": "41439b4bedce6b10d18d8799de9016f562fb9320021ed66555dccd9b5b63967e"
+    },
+    {
+      "level": 5,
+      "id": "ss08-05",
+      "title": "La bonne diagonale",
+      "source": {
+        "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-31",
+        "puzzle": 31,
+        "idea": "La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange.",
+        "kind": "adaptation de principe",
+        "label": "Adaptation de Heroes and Mirrors 31 · La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange.",
+        "piston": true,
+        "platform": true,
+        "objective": "La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange."
+      },
+      "dimensions": [
+        20,
+        12
+      ],
+      "floorCells": 43,
+      "waterCells": 197,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 2,
+      "gates": 1,
+      "hydraulicPlatforms": 1,
+      "buttons": 2,
+      "actions": 59,
+      "selections": 3,
+      "merchantPushes": 5,
+      "wizardSwaps": 1,
+      "bentSwaps": 0,
+      "heroSwaps": 0,
+      "chainPushes": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 5,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 1,
+      "frames": 175,
+      "maxFrames": 6,
+      "recordedStages": 4,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "2019b40e4d36e8d0eb147828ae1cd032879071239e12359bce243a8ad96436e7",
+      "witnessSha256": "cf7556c69ec3060931d23efdb082b2e673bf9f848b36f5288caf677ffd533846",
+      "observationsSha256": "c4ded86e888af93dbdf7e067f16e8f87e5377ad1a72fa91cdd8d1c2b89a1b242"
+    },
+    {
+      "level": 6,
+      "id": "ss08-06",
+      "title": "Le poids du second reflet",
+      "source": {
+        "puzzle": 19,
+        "label": "Adaptation de Heroes and Mirrors 19 · un premier reflet prépare l’appui, le second actionne le bouton.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-19",
+        "piston": true,
+        "platform": true,
+        "objective": "Ordonner les deux reflets, maintenir la passerelle puis franchir l’appui créé par la presse."
+      },
+      "dimensions": [
+        19,
+        17
+      ],
+      "floorCells": 100,
+      "waterCells": 8,
+      "initialStones": 3,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 2,
+      "buttons": 1,
+      "actions": 32,
+      "selections": 3,
+      "merchantPushes": 1,
+      "wizardSwaps": 1,
+      "bentSwaps": 0,
+      "heroSwaps": 0,
+      "chainPushes": 0,
+      "stoneMoves": 4,
+      "mirrorMoves": 0,
+      "reflections": 3,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 2,
+      "frames": 101,
+      "maxFrames": 9,
+      "recordedStages": 7,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "790e506fafd729f04e5a79fe59b13a0acb8c34b6c0a2c96e1b348226fe1adfc6",
+      "witnessSha256": "1b134bf62a8abe42743612e45b27b71d2efecbb420b88cd9f91e4889fb5adb9b",
+      "observationsSha256": "0ff372466e0ee12d591d76d64cc89c494665ca498a411b565f109c6da8ece9fa"
+    },
+    {
+      "level": 7,
+      "id": "ss08-07",
+      "title": "Le duel et le retour",
+      "source": {
+        "puzzle": 25,
+        "label": "Adaptation de Heroes and Mirrors 25 · placer deux monstres côte à côte par reflet pour libérer le passage.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-25",
+        "piston": true,
+        "platform": false,
+        "objective": "Faire combattre les monstres, préparer une seconde presse avec le Magicien, puis retourner au bouton par reflet."
+      },
+      "dimensions": [
+        20,
+        18
+      ],
+      "floorCells": 48,
+      "waterCells": 11,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 2,
+      "mirrors": 1,
+      "gates": 2,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 50,
+      "selections": 5,
+      "merchantPushes": 1,
+      "wizardSwaps": 2,
+      "bentSwaps": 0,
+      "heroSwaps": 0,
+      "chainPushes": 0,
+      "stoneMoves": 3,
+      "mirrorMoves": 1,
+      "reflections": 4,
+      "heroReflections": 3,
+      "pistonPushes": 2,
+      "platformsCreated": 2,
+      "monstersRemoved": 2,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 1,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 155,
+      "maxFrames": 11,
+      "recordedStages": 9,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "709ce92815085647b521b98bbcbcbfe32455a134ee76008af5272cd855d7c8c7",
+      "witnessSha256": "73e8c2c431b052ecb59c46dc34c62155099b12dbf9b35eb6ec6679fd3d21bb1c",
+      "observationsSha256": "9034614833a431ace2d1b36c48c75036fbaff16a8dac986eb7626fb417fbb763"
+    },
+    {
+      "level": 8,
+      "id": "ss08-08",
+      "title": "Le rectangle impossible",
+      "source": {
+        "puzzle": 34,
+        "label": "Adaptation de Heroes and Mirrors 34 · défaire un rectangle de miroirs qui enferme la visée du Magicien.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-34",
+        "piston": true,
+        "platform": true,
+        "objective": "Briser la boucle par le bon coin, recycler la caisse poussée et préparer le retour du Marchand."
+      },
+      "dimensions": [
+        20,
+        19
+      ],
+      "floorCells": 45,
+      "waterCells": 25,
+      "initialStones": 3,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 4,
+      "gates": 1,
+      "hydraulicPlatforms": 2,
+      "buttons": 2,
+      "actions": 38,
+      "selections": 3,
+      "merchantPushes": 3,
+      "wizardSwaps": 1,
+      "bentSwaps": 0,
+      "heroSwaps": 0,
+      "chainPushes": 0,
+      "stoneMoves": 5,
+      "mirrorMoves": 1,
+      "reflections": 1,
+      "heroReflections": 1,
+      "pistonPushes": 1,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 1,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 2,
+      "frames": 120,
+      "maxFrames": 6,
+      "recordedStages": 9,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "7221b054c4636d024362bf8d7d7a95a96842a0ab8258635b315d8234a966db79",
+      "witnessSha256": "573be773dc53bfc4e1625a4b62bfa4a46d8a4aae01c9a04e825c2793686c46d0",
+      "observationsSha256": "5cbc0426b032aa15c45ca7a601ff8459e0332785ac2433205de9377d1b25e4bf"
+    }
+  ],
+  "totals": {
+    "actions": 324,
+    "selections": 29,
+    "merchantPushes": 21,
+    "wizardSwaps": 18,
+    "bentSwaps": 2,
+    "heroSwaps": 3,
+    "chainPushes": 0,
+    "stoneMoves": 30,
+    "mirrorMoves": 13,
+    "reflections": 16,
+    "heroReflections": 13,
+    "pistonPushes": 5,
+    "platformsCreated": 11,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0,
+    "combatWaves": 1,
+    "mirrorsDestroyed": 1,
+    "cratesCrushed": 0,
+    "simultaneousHeroReflections": 0,
+    "hydraulicChanges": 7,
+    "frames": 970
+  },
+  "failureRoutes": [
+    {
+      "level": 4,
+      "cause": "Le Magicien quitte le bouton vert pendant que le Marchand occupe une plateforme temporaire.",
+      "actions": 45,
+      "frames": 6,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        60,
+        80,
+        0
+      ],
+      "exactUndo": true,
+      "exactReset": true,
+      "passed": true
+    },
+    {
+      "level": 7,
+      "cause": "Le Marchand approche le monstre qui occupe le bouton vert.",
+      "actions": 6,
+      "frames": 8,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        80,
+        90,
+        100,
+        110,
+        0
+      ],
+      "exactUndo": true,
+      "exactReset": true,
+      "passed": true
+    }
+  ],
+  "necessityEvidence": [
+    {
+      "level": 4,
+      "boundToCurrentMap": true,
+      "source": "reference/level4-design.json",
+      "specSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
+      "proofPolicy": "Only exhausted searches prove impossibility. State or time limits are inconclusive; no uniqueness or optimality is claimed.",
+      "checks": [
+        {
+          "option": "disableWizardSwaps",
+          "status": "unsolvable",
+          "states": 924,
+          "expanded": 924,
+          "ms": 44
+        },
+        {
+          "option": "disableMerchantPushes",
+          "status": "unsolvable",
+          "states": 21252,
+          "expanded": 21252,
+          "ms": 585
+        },
+        {
+          "option": "disablePistons",
+          "status": "unsolvable",
+          "states": 22656,
+          "expanded": 22656,
+          "ms": 558
+        },
+        {
+          "option": "disablePlatforms",
+          "status": "unsolvable",
+          "states": 21252,
+          "expanded": 21252,
+          "ms": 382
+        },
+        {
+          "option": "disableMirrorMotion",
+          "status": "unsolvable",
+          "states": 65520,
+          "expanded": 65520,
+          "ms": 1044
+        },
+        {
+          "option": "disableReflections",
+          "status": "limit",
+          "states": 150000,
+          "expanded": 128183,
+          "ms": 2035
+        },
+        {
+          "option": "disableHeroReflections",
+          "status": "limit",
+          "states": 150000,
+          "expanded": 127090,
+          "ms": 2091
+        },
+        {
+          "option": "removeHydraulicPlatforms",
+          "method": "Same level with platforms: [], all ordinary rules retained.",
+          "status": "limit",
+          "states": 600000,
+          "expanded": 554535,
+          "ms": 8437,
+          "conclusion": "Bounded search alone is inconclusive."
+        }
+      ],
+      "coordinates": "Source map coordinates, before centering: x=0..18, y=0..13.",
+      "witness": {
+        "actions": 50,
+        "blocked": 0,
+        "deaths": 0,
+        "metrics": {
+          "actions": 50,
+          "selections": 5,
+          "merchantPushes": 4,
+          "wizardSwaps": 2,
+          "bentSwaps": 1,
+          "heroSwaps": 0,
+          "chainPushes": 0,
+          "stoneMoves": 7,
+          "mirrorMoves": 1,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 1,
+          "platformsCreated": 3,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "geometry": {
+        "specSha256": "58c1493e09cf32a6c998392aac565cd992feebb2ed1f2848003f2368e796300b",
+        "kind": "optimistic-geometric-bound",
+        "rightIslandStartsX": 16,
+        "lastGapCellX": 15,
+        "maximumReflectableEastX": 14,
+        "cases": [
+          {
+            "extraSupport": null,
+            "optimisticMirrorPositions": 52,
+            "maxEastLandingX": 14,
+            "furthestLandings": [
+              {
+                "mirror": {
+                  "x": 8,
+                  "y": 10
+                },
+                "source": {
+                  "x": 8,
+                  "y": 4
+                },
+                "to": {
+                  "x": 14,
+                  "y": 10
+                }
+              }
+            ]
+          },
+          {
+            "extraSupport": {
+              "x": 12,
+              "y": 10
+            },
+            "optimisticMirrorPositions": 53,
+            "maxEastLandingX": 14,
+            "furthestLandings": [
+              {
+                "mirror": {
+                  "x": 8,
+                  "y": 10
+                },
+                "source": {
+                  "x": 8,
+                  "y": 4
+                },
+                "to": {
+                  "x": 14,
+                  "y": 10
+                }
+              }
+            ]
+          },
+          {
+            "extraSupport": {
+              "x": 13,
+              "y": 10
+            },
+            "optimisticMirrorPositions": 52,
+            "maxEastLandingX": 14,
+            "furthestLandings": [
+              {
+                "mirror": {
+                  "x": 8,
+                  "y": 10
+                },
+                "source": {
+                  "x": 8,
+                  "y": 4
+                },
+                "to": {
+                  "x": 14,
+                  "y": 10
+                }
+              }
+            ]
+          },
+          {
+            "extraSupport": {
+              "x": 14,
+              "y": 10
+            },
+            "optimisticMirrorPositions": 52,
+            "maxEastLandingX": 14,
+            "furthestLandings": [
+              {
+                "mirror": {
+                  "x": 8,
+                  "y": 10
+                },
+                "source": {
+                  "x": 8,
+                  "y": 4
+                },
+                "to": {
+                  "x": 14,
+                  "y": 10
+                }
+              }
+            ]
+          },
+          {
+            "extraSupport": {
+              "x": 15,
+              "y": 10
+            },
+            "optimisticMirrorPositions": 52,
+            "maxEastLandingX": 14,
+            "furthestLandings": [
+              {
+                "mirror": {
+                  "x": 8,
+                  "y": 10
+                },
+                "source": {
+                  "x": 8,
+                  "y": 4
+                },
+                "to": {
+                  "x": 14,
+                  "y": 10
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "hydraulicNecessity": {
+        "status": "structural-proof-with-computed-geometry-bound",
+        "claim": "At least one deployment of the hydraulic bridge is required to finish with both heroes on the right island.",
+        "argument": [
+          "The left room can only be exited across (6,4). Its trapped crate must first be extracted by a Wizard exchange, then pushed into that water cell. It becomes a fixed support, so it cannot later be reused.",
+          "The middle room can only enter the lower room across (8,6). The isolated stone at (9,6) has walls north, south and east. The sole press sends it west into (8,6), where it becomes the second fixed support. It cannot later be reused.",
+          "Only one movable crate remains. It begins on the right island at (16,10). That island initially contains one actor and no hero. Wizard exchanges preserve the total number of actors on each side of a cut: exchanging a hero with an actor on the other side cannot change the island actor count.",
+          "The optimistic geometry enumeration grants the movable NE mirror every connected supported cell, ignores actors and closed gates, and also tries every possible extra permanent support among the four water cells (12..15,10). Even with these relaxations, every mainland-to-east reflection lands at x<=14. Thus neither a hero nor a crate can be reflected directly to island x>=16 or to its last adjacent water cell (15,10).",
+          "Without hydraulics, a walk or push into the island needs support at (15,10). One remaining crate cannot be pushed there from the mainland: it sinks on the first unsupported water cell it enters. It cannot be reflected there by the computed bound. An exchange cannot create support on an empty water cell, because its endpoint must already contain a supported actor.",
+          "Creating (15,10) from the island by pushing its crate west would require both a crate and a pusher already on the island, hence at least two actors there. Before the first non-exchange arrival, that contradicts the invariant island actor count of one. Therefore no non-exchange arrival can increase the island count to the two heroes required for completion without hydraulic deployment."
+        ],
+        "limitations": [
+          "This proves that the bridge mechanism must be deployed at least once; it does not claim that every individual hydraulic tile is mandatory in every solution.",
+          "The two mirror/wizard manipulations in the supplied witness demonstrate a bent swap; no exhaustive necessity claim is made specifically for a bent ray.",
+          "The bounded no-reflection searches hit their state limits and are not presented as exhaustive impossibility proofs."
+        ]
+      },
+      "correctedShortcuts": [
+        {
+          "formerIssue": "A fixed mirror could reflect a spare crate to a stepping stone and allow completion without mirror movement.",
+          "correction": "The lower room north boundary now starts at y=8 except its entry at x=8. Exhaustive no-mirror-motion search is unsolvable."
+        },
+        {
+          "formerIssue": "A long north-arm reflection could land directly on the right island and bypass the hydraulic bridge.",
+          "correction": "The press output and entry moved to x=8; the middle room north edge is y=4. Optimistic mirror reflection reaches at most x=14, short of the last water cell x=15 and island x=16."
+        }
+      ],
+      "failureWitness": {
+        "path": "tests/failures.json (level 4)",
+        "actionCount": 45,
+        "expected": "GAME_OVER",
+        "reason": "Leave the green plate while Merchant stands on the first hydraulic platform; retraction drowns him."
+      },
+      "renumbering": {
+        "previousLevel": 1,
+        "currentLevel": 4,
+        "geometryAndActionsUnchanged": true,
+        "note": "La géométrie et les actions sont identiques ; seul l’identifiant de salle a changé. Les preuves de v0.1.0 restent applicables."
+      }
+    }
+  ],
+  "success": true,
+  "campaignChecks": {
+    "levels": 8,
+    "finalState": "WIN",
+    "allWitnessesUseMerchantPushAndWizardSwap": true,
+    "allCompletionUndosVerified": true
+  },
+  "mechanismChecks": [
+    {
+      "level": 1,
+      "description": "The bent exchange leaves a crate on the Wizard’s pressure button",
+      "verified": true
+    },
+    {
+      "level": 2,
+      "description": "The island relay exchanges the two heroes and builds its final permanent crossing",
+      "verified": true
+    },
+    {
+      "level": 3,
+      "description": "The transported Merchant builds support beneath a moved mirror and sends heroes through it",
+      "verified": true
+    },
+    {
+      "level": 4,
+      "description": "The tutorial uses a bent exchange, a movable mirror, a press, three supports and a hydraulic crossing",
+      "verified": true
+    },
+    {
+      "level": 5,
+      "description": "A moved mirror supplies the weight that controls the temporary platform",
+      "verified": true
+    },
+    {
+      "level": 6,
+      "description": "Successive reflections and the isolated press build two supports around a hydraulic bridge",
+      "verified": true
+    },
+    {
+      "level": 7,
+      "description": "One simultaneous combat removes both monsters and two presses build two permanent supports",
+      "verified": true
+    },
+    {
+      "level": 8,
+      "description": "The Wizard starts trapped by closed north/south targeting loops",
+      "verified": true
+    },
+    {
+      "level": 8,
+      "description": "The press moves a crate–mirror file, destroys one mirror and permits a two-support escape",
+      "verified": true
+    },
+    {
+      "level": 8,
+      "description": "Both heroes arrive after the hydraulic platforms retract",
+      "verified": true
+    }
+  ],
+  "finaleEvidence": {
+    "level": 8,
+    "mapSha256": "7221b054c4636d024362bf8d7d7a95a96842a0ab8258635b315d8234a966db79",
+    "checks": {
+      "wizardInitiallyCannotAct": true,
+      "northAndSouthAreClosedRayLoops": true,
+      "pressMovesCrateAndMirrorInSameFile": true,
+      "exactlyOneMirrorDestroyed": true,
+      "twoPermanentSupportsBuilt": true,
+      "wizardExchangesToUpperIsle": true,
+      "hydraulicPlatformsRetractedAfterArrival": true
+    },
+    "structuralReasoning": [
+      "Le Magicien commence sur le bord d’un rectangle fermé : sa visée nord et sud revient sur lui ; les cases latérales sont bloquées. Le reflet géométrique est conflictuel car deux miroirs choisissent le même héros.",
+      "Le premier bouton est séparé du Marchand par une case d’eau ; la caisse de départ fournit l’appui pour l’atteindre.",
+      "La presse pousse une caisse et le miroir inférieur droit dans la même file. Le miroir coule ; la caisse restante fournit le deuxième appui après une poussée du Marchand.",
+      "La caisse de l’îlot supérieur est hors des destinations géométriques des miroirs fixes. Le Magicien la vise depuis la branche pour accéder au bouton de la passerelle."
+    ],
+    "limitations": [
+      "Les assertions confirment le mécanisme initial et le parcours de résolution ; elles ne certifient pas l’unicité ni l’optimalité de la solution."
+    ]
+  },
+  "htmlSha256": "98f4e078c703bc76f4d4f12502f08d6a20c50262e74a4f24f194c183888042de",
+  "limitations": [
+    "Source adaptations are declared, not certified exact reconstructions.",
+    "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",
+    "Witness use of an ability is not by itself a necessity proof.",
+    "Necessity evidence is recorded separately; state/time limits remain inconclusive.",
+    "Wizard target rays may relay through mirrors; ACTION5 geometric reflections do not.",
+    "HTML interaction QA uses Happy DOM, public canvas pixels and controlled timers; no native browser session is claimed."
+  ]
+}

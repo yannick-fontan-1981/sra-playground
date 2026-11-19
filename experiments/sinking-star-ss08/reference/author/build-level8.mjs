@@ -1,0 +1,17 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(20,19);
+fill(4,4,13,4,'~');fill(4,12,13,12,'~');fill(13,5,13,11,'~');fill(4,4,4,12);put(13,4);put(13,12);put(13,10);
+fill(4,5,9,5);put(4,8,'W');fill(7,1,10,2);put(8,2,'o');put(8,1,'g');put(10,2,'g');put(7,3,'~');put(8,3,'~');
+fill(13,13,13,16);fill(15,13,18,16);put(14,16,'~');put(13,13,'o');put(16,16,'o');put(17,16,'M');
+const spec={id:'ss08-08',title:'Le rectangle impossible',rows:strings(),facing:'W',mirrors:[{at:{x:4,y:4},facing:'SE'},{at:{x:13,y:4},facing:'SW'},{at:{x:13,y:12},facing:'NW'},{at:{x:4,y:12},facing:'NE'}],circuits:[{id:'rupture',buttons:[{x:13,y:16}],color:7},{id:'retour',buttons:[{x:9,y:1}],color:14}],gates:[{at:{x:13,y:13},circuit:'rupture',direction:'N',closedWhen:'pressed'}],platforms:[{at:{x:7,y:4},circuit:'retour',activeWhen:'pressed'},{at:{x:7,y:3},circuit:'retour',activeWhen:'pressed'}]};
+const a=new Author(spec);
+a.act('LL').act('LL').stage('Le Marchand construit le premier pont et atteint le bouton rose');
+a.stage('La presse pousse la file caisse–miroir : le miroir inférieur droit tombe dans l’eau et la boucle se brise');
+a.go(13,14).act('UU').stage('Recycler la caisse éjectée pour construire le second appui');
+a.go(13,15).act('D').stage('Refermer la presse protège la visée du Magicien');
+a.go(8,5,'wizard').act('U').stage('Le Magicien libéré gagne la branche puis échange avec la caisse de l’îlot du haut');
+a.go(9,2).act('U').stage('Le bouton vert prépare une arrivée et un passage au-dessus de l’eau');
+a.go(13,10,'merchant').act('X').stage('Le miroir supérieur droit transporte le Marchand sur la plateforme verte');
+a.act('UU').go(10,2).stage('Le Marchand sort de la passerelle temporaire');
+a.select('wizard').act('L').stage('Les deux personnages rejoignent les destinations, sans maintenir la passerelle');
+a.save(new URL('../level8-design.json',import.meta.url),{puzzle:34,label:'Adaptation de Heroes and Mirrors 34 · défaire un rectangle de miroirs qui enferme la visée du Magicien.',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-34',piston:true,platform:true,objective:'Briser la boucle par le bon coin, recycler la caisse poussée et préparer le retour du Marchand.'},'Le rectangle de quatre miroirs et la nécessité de briser le coin inférieur droit reprennent Heroes and Mirrors 34. Dans SS08, le Marchand construit un accès à une presse latérale, qui pousse une file caisse–miroir ; la caisse fournit ensuite le second appui. Le Magicien active une passerelle après un échange vers l’îlot supérieur. Géométrie adaptée au duo, sans échange direct avec les miroirs et sans empilement.');

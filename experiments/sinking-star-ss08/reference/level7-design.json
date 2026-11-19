@@ -1,0 +1,687 @@
+{
+  "spec": {
+    "id": "ss08-07",
+    "title": "Le duel et le retour",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "##..W.~~~~~~m#######",
+      "##....######.#######",
+      "##M...######.#######",
+      "##....#####o~#######",
+      "##...~~~.m.......#g#",
+      "##....########.#.~.#",
+      "##############...#.#",
+      "##############..o#g#",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 3,
+          "y": 12
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "duel",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 8
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 11
+        },
+        "circuit": "duel",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 13
+        },
+        "circuit": "duel",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CRCDDRXUUUURXCDDDDRRDDRRUDLCXXRRRRRRRRDRRUCURURRDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 42
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "puzzle": 25,
+    "label": "Adaptation de Heroes and Mirrors 25 · placer deux monstres côte à côte par reflet pour libérer le passage.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-25",
+    "piston": true,
+    "platform": false,
+    "objective": "Faire combattre les monstres, préparer une seconde presse avec le Magicien, puis retourner au bouton par reflet."
+  },
+  "metrics": {
+    "actions": 50,
+    "selections": 5,
+    "merchantPushes": 1,
+    "wizardSwaps": 2,
+    "bentSwaps": 0,
+    "heroSwaps": 0,
+    "chainPushes": 0,
+    "stoneMoves": 3,
+    "mirrorMoves": 1,
+    "reflections": 4,
+    "heroReflections": 3,
+    "pistonPushes": 2,
+    "platformsCreated": 2,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le monstre remplace le Magicien sur le bouton vert",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 9,
+          "y": 13
+        }
+      ],
+      "circuits": {
+        "duel": true
+      }
+    },
+    {
+      "label": "Le Marchand règle la diagonale de rencontre",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 9,
+          "y": 13
+        }
+      ],
+      "circuits": {
+        "duel": true
+      }
+    },
+    {
+      "label": "Les monstres s’entretuent dans le seul passage ; le bouton libéré construit le premier pont et ouvre la seconde presse",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "duel": false
+      }
+    },
+    {
+      "label": "Le Marchand rejoint la passerelle libérée",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "duel": false
+      }
+    },
+    {
+      "label": "Le Magicien extrait la caisse bloquée et la dépose sur la presse ouverte",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "duel": false
+      }
+    },
+    {
+      "label": "Retour au bouton : la seconde presse fabrique le pont final",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "duel": true
+      }
+    },
+    {
+      "label": "Nouveau départ du bouton : la presse se rouvre, le pont reste",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "duel": false
+      }
+    },
+    {
+      "label": "Le Marchand franchit le pont final",
+      "turn": 42,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 18,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "duel": false
+      }
+    },
+    {
+      "label": "Les deux destinations sont occupées",
+      "turn": 50,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 18,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "duel": false
+      }
+    }
+  ],
+  "adaptation": "Reprise du principe d’élimination réciproque des gobelins de Heroes and Mirrors 25, sans duplication. Géométrie originale à deux étapes : libérer le bouton construit la sortie de l’îlot du Magicien, mais le pont final exige de charger une seconde presse puis de réactiver le même bouton. La caisse finale est coincée contre trois murs : le Magicien doit l’extraire. Le seul appui de poussée latérale est un mur, donc le second pont exige la presse."
+}

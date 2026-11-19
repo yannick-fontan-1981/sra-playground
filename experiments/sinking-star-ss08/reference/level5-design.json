@@ -1,0 +1,494 @@
+{
+  "spec": {
+    "id": "ss08-05",
+    "title": "La bonne diagonale",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~....~~~~~~~~~~",
+      "~~~~~~....W~~~~~~~~~",
+      "~~~~~~.~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~.....~~~~~~~~~",
+      "~~~~~~....o~~~~~~~~~",
+      "~~~~~~.M...~~~~~~g.~",
+      "~~~~~~.....~~~~....~",
+      "~~~~~~.....~~~~~~.g~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 7,
+          "y": 8
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 8
+        },
+        "facing": "SW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "diagonale",
+        "buttons": [
+          {
+            "x": 10,
+            "y": 2
+          }
+        ]
+      },
+      {
+        "id": "passerelle",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 6
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 6,
+          "y": 4
+        },
+        "circuit": "passerelle",
+        "activeWhen": "pressed"
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 16,
+          "y": 8
+        },
+        "circuit": "diagonale",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDDDDCRDDRUURULDLLLDRRULUULUUURRRXRRUCLLUULUULUUUURRRDXRRDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-31",
+    "puzzle": 31,
+    "idea": "La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange.",
+    "kind": "adaptation de principe",
+    "label": "Adaptation de Heroes and Mirrors 31 · La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange.",
+    "piston": true,
+    "platform": true,
+    "objective": "La diagonale de sortie impose de remplacer le miroir occupant la case utile par un autre miroir et de préparer l’accès avec un échange."
+  },
+  "metrics": {
+    "actions": 59,
+    "selections": 3,
+    "merchantPushes": 5,
+    "wizardSwaps": 1,
+    "bentSwaps": 0,
+    "heroSwaps": 0,
+    "chainPushes": 0,
+    "stoneMoves": 1,
+    "mirrorMoves": 5,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La caisse tient le bouton et libère le seul accès latéral",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 9,
+            "y": 12
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "diagonale": true,
+        "passerelle": false
+      }
+    },
+    {
+      "label": "Le premier miroir maintient le bouton vert : la passerelle se déploie",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "diagonale": true,
+        "passerelle": true
+      }
+    },
+    {
+      "label": "Le bon miroir remplace le premier",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "diagonale": true,
+        "passerelle": true
+      }
+    },
+    {
+      "label": "Première traversée, aucun reflet parasite",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "diagonale": true,
+        "passerelle": true
+      }
+    }
+  ],
+  "adaptation": "Deux miroirs ordinaires orientés différemment remplacent la distinction miroir ordinaire/spécial ; les deux héros doivent sortir ; une caisse extraite par le Magicien conserve le bouton rose et libère l’appui nécessaire pour déplacer le premier miroir. Ce dernier maintient le bouton vert de la passerelle hydraulique ; le second devient le transporteur. Deux destinations nouvelles."
+}

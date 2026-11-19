@@ -1,0 +1,305 @@
+{
+  "success": true,
+  "scope": "full-campaign",
+  "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "The compiled HTML starts on the new level 1; the rich ten-discovery tutorial follows its room to level 4 and Restart explicitly returns to level 1",
+    "Controls and global help distinguish directional swaps, mirror reflections, support, circuits and monster combat",
+    "Seven compiled-HTML Wizard fixtures cover exchanges, walking, obstruction, immediate water refusal and an eight-frame returning loop without false discoveries",
+    "Three compiled-HTML reflection fixtures preserve nearest-source previews, blocked-farther independence, equal-distance exchange and exact visual Undo",
+    "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
+    "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
+    "All movement frames and durations display; directions, reflection and selection are blocked during animation while Space prevents scrolling",
+    "Undo during an animation restores both heroes and cancels stale callbacks",
+    "Reset, level changes and return to level 1 cancel pending animation callbacks and reset counters",
+    "8 inspected rooms display their source attribution and relevant help; rich tutorial appears only in level 4",
+    "Every inspected room retains the orange/violet duo and two goals; reselecting the active hero creates no action or Undo entry",
+    "The real L5 witness keeps each mirror’s white diagonal and black back visible while it holds a button",
+    "Initial L8 Up and Down visibly traverse all four mirrors in opposite orders, return to the fixed Wizard, blink twice, replay and allow mid-animation Undo without false discoveries",
+    "The real L8 invalid water step returns one clean immediate frame, starts no timer, adds no mark, repeats unchanged, moves no hero and supports exact Undo",
+    "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
+    "The rich tutorial in level 4 earns all ten discoveries through its unchanged real witness",
+    "All eight witnesses replay in the new order with exact frames/timing; final victory disables further controls",
+    "Undo exits final victory; Restart returns to the new level 1 with zero completions and the rich tutorial reserved for level 4",
+    "Reordered reachable defeats show every terminal frame before the overlay, block commands and support mid-animation Undo plus panel Undo/Reset"
+  ],
+  "wizardCoverage": [
+    {
+      "case": "first aligned crate",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "white face bends the ray",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "companion is the first target",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "no target walks one cell",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "black back blocks targeting",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "water refusal is immediate and teaches no movement or support",
+      "exactFrames": 1,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "three-mirror loop returns without teaching a move or swap",
+      "exactFrames": 8,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    }
+  ],
+  "reflectionPriorityCoverage": [
+    {
+      "case": "near hero with farther blocked landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "near crate with farther valid landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "equal-distance heroes exchange",
+      "previewVerified": false,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    }
+  ],
+  "mirrorButtonCoverage": [
+    {
+      "turn": 15,
+      "at": {
+        "x": 8,
+        "y": 10
+      },
+      "facing": "SW",
+      "whiteDiagonal": true,
+      "blackBack": true
+    },
+    {
+      "turn": 22,
+      "at": {
+        "x": 8,
+        "y": 10
+      },
+      "facing": "SW",
+      "whiteDiagonal": true,
+      "blackBack": true
+    },
+    {
+      "turn": 37,
+      "at": {
+        "x": 8,
+        "y": 10
+      },
+      "facing": "SW",
+      "whiteDiagonal": true,
+      "blackBack": true
+    }
+  ],
+  "returningLoopCoverage": [
+    {
+      "level": 8,
+      "direction": "N",
+      "origin": {
+        "x": 4,
+        "y": 8
+      },
+      "mirrorOrder": [
+        [
+          4,
+          4
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          4,
+          12
+        ]
+      ],
+      "progressiveSegments": 5,
+      "frames": 9,
+      "frameDurationsMs": [
+        90,
+        90,
+        90,
+        90,
+        100,
+        100,
+        80,
+        100,
+        0
+      ],
+      "whiteBlinksAtOrigin": 2,
+      "unchangedActors": true,
+      "repeatedAnimation": true,
+      "exactUndo": true,
+      "midAnimationUndo": true,
+      "noFalseDiscovery": true
+    },
+    {
+      "level": 8,
+      "direction": "S",
+      "origin": {
+        "x": 4,
+        "y": 8
+      },
+      "mirrorOrder": [
+        [
+          4,
+          12
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          13,
+          4
+        ],
+        [
+          4,
+          4
+        ]
+      ],
+      "progressiveSegments": 5,
+      "frames": 9,
+      "frameDurationsMs": [
+        90,
+        90,
+        90,
+        90,
+        100,
+        100,
+        80,
+        100,
+        0
+      ],
+      "whiteBlinksAtOrigin": 2,
+      "unchangedActors": true,
+      "repeatedAnimation": true,
+      "exactUndo": true,
+      "midAnimationUndo": true,
+      "noFalseDiscovery": true
+    }
+  ],
+  "waterRefusalCoverage": {
+    "level": 8,
+    "prefixActions": 19,
+    "targetCell": {
+      "x": 7,
+      "y": 4
+    },
+    "frames": 1,
+    "immediate": true,
+    "noAnimationTimers": true,
+    "noWaterMarks": true,
+    "repeatedRefusalUnchanged": true,
+    "exactUndo": true,
+    "noHeroMotion": true,
+    "noDiscovery": true
+  },
+  "tutorialCoverage": {
+    "level": 4,
+    "actions": 50,
+    "frames": 151,
+    "selectionActions": 5,
+    "discoveries": [
+      "select",
+      "wizard-swap",
+      "move",
+      "merchant-push",
+      "platform",
+      "gate",
+      "mirror-motion",
+      "wizard-bend",
+      "mirror",
+      "goals"
+    ]
+  },
+  "platformCoverage": {
+    "circuitsWithBothVisibleStates": [
+      "4:passerelle",
+      "5:passerelle",
+      "6:retard",
+      "8:retour"
+    ],
+    "visibleCells": 7,
+    "specifiedPlatformCount": 7
+  },
+  "witnessCoverage": {
+    "levels": 8,
+    "actions": 324,
+    "frames": 970,
+    "selectionActions": 29,
+    "allFrameDurationsVerified": true
+  },
+  "defeatCoverage": [
+    {
+      "level": 4,
+      "cause": "Le Magicien quitte le bouton vert pendant que le Marchand occupe une plateforme temporaire.",
+      "actions": 45,
+      "frames": 6,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        60,
+        80,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    },
+    {
+      "level": 7,
+      "cause": "Le Marchand approche le monstre qui occupe le bouton vert.",
+      "actions": 6,
+      "frames": 8,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        80,
+        90,
+        100,
+        110,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    }
+  ]
+}
