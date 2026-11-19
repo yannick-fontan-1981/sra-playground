@@ -2586,3 +2586,11 @@ La scène contient deux butées semblables, deux cadres qui se recouvrent et une
 À la treizième commande, le contour prévu est confirmé, mais une autre source fournit la couleur. Le retour permet d’identifier cette couleur et de refaire le trajet à partir de la pose observée. SIC mémorise le résultat pour cette pose et cette commande. Le rejeu complet reproduit les 155 commandes du diagnostic depuis la sauvegarde.
 
 Le niveau 8 gagne en **155 commandes SIC seul et 34,86 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **406 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 561 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 14 tests ciblés passent. Empreinte `84051177248408ec33e9ec8107c0a602f3edc80c418aeed0548ea4849b080963`.
+
+### BP35 niveau 8
+
+La première commande révèle un effet différent de l’inversion prévue. Le bloc central disparaît et les quatre cases voisines se remplissent alors que le personnage reste en place. SIC réutilise ce retour pour distinguer la matière qui se propage de l’inverseur. Il prévoit ensuite à la fois la case libérée, les nouveaux appuis et l’arrêt du personnage, et compare ces effets aux retours visibles.
+
+SIC prépare la montée en conservant un appui devant les dangers. Avant de dépenser le dernier inverseur observé, il cherche un point d’arrêt d’où le couloir de la sortie reste accessible. La commande 36 confirme le changement de gravité. La commande 51 atteint la sortie. Les 51 commandes du rejeu complet sont identiques à celles de l’essai depuis la sauvegarde.
+
+Le niveau 8 gagne en **51 commandes SIC seul et 35,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **236 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 287 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les sept tests ciblés passent. Empreinte `47edecd76a397a7a3472c76f99b25af41033de1db00a3c65876f1c49ef6021ec`.
