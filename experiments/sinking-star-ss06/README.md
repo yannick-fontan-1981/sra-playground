@@ -1,6 +1,6 @@
 # SS06 — Les Ponts Réfléchis
 
-Version **0.2.1** — laboratoire autonome du sixième jeu Sinking Star, pour le futur lot Custom 4 de SRA Playground.
+Version **0.2.1** — laboratoire autonome de **Les Ponts Réfléchis**, sixième jeu du lot Custom 4 de SRA Playground.
 
 Dans les niveaux 1 à 7, le Marchand orange et le Guerrier rouge doivent occuper **deux destinations en même temps**. Le Marchand pousse une pièce ; le Guerrier pousse toute une file. Les deux peuvent déclencher les miroirs. Le changement de personnage ne fait pas avancer le monde. Le niveau 8 se joue avec **le Guerrier seul et une cible** : ses deux miroirs de droite permettent de maintenir le circuit vert pendant la traversée.
 
@@ -63,7 +63,7 @@ Le navigateur Chromium de l’exécuteur n’a pas pu démarrer (création de so
 - `src/level-info.ts` : références publiques de chaque salle.
 - `src/browser.ts` / `index.template.html` : interface et tutoriel fondé sur les pixels.
 - `scripts/solver.mjs`, `tests/witnesses.json`, `reference/` : outils d’auteur, exclus du bundle jouable.
-- [docs/integration.md](docs/integration.md) : contrat pour le raccordement futur au Playground.
+- [docs/integration.md](docs/integration.md) : raccordement natif au Playground et vérifications.
 
-La sauvegarde de ce laboratoire sur une branche GitHub ne l’enregistre pas dans le catalogue du site.
+Le [Playground SS06](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS06#playground) utilise ces mêmes huit salles et le même moteur.
 

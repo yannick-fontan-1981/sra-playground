@@ -1,6 +1,11 @@
-# Raccordement futur au SRA Playground
+# Raccordement de SS06 au SRA Playground
 
-Ce laboratoire est le sixième jeu prévu pour **Custom 4 · Sinking Star**. À ce stade, le catalogue de production et la publication Site ne sont pas modifiés.
+**Les Ponts Réfléchis** est le sixième jeu de **Custom 4 · Sinking Star**, après SS05. Le raccordement utilise le laboratoire 0.2.1 / HTML v5, introduit sur `main` par `e90c2ac451e46b8bb9dd5fd63ea2cc799cced9b3` depuis la source `303d3cf2080dc98da3650f2c7171620288bd83e0`.
+
+- Le catalogue, le sélecteur, les liens directs et la galerie proposent les huit niveaux. La galerie génère ses aperçus à partir des observations initiales et affiche l’attribution Steam commune de Custom 4, également présente sous le plateau.
+- L’adaptateur TypeScript importe le moteur et la campagne du laboratoire et relaie les coordonnées d’ACTION6. Le routeur charge SS06 sans Python.
+- Les commandes de rôle, les huit acquis du tutoriel et leurs aides réutilisent les pixels publics. Le tutoriel partagé compile également dans l’HTML autonome. En duo, les deux contours jaunes doivent être occupés. La dernière salle utilise le Guerrier seul.
+- Le mode agent reçoit la même observation publique et les six actions. Les cartes, les témoins et le solveur d’auteur restent hors de son interface de raisonnement.
 
 ## Backend
 
@@ -32,7 +37,11 @@ Conserver toutes les images et toutes les durées. Les mouvements ont 3 images, 
 
 Rejouer les huit témoins via le routeur natif de production, comparer observations/images/durées/transitions et vérifier l’absence de chargement Python. Les parcours totalisent 433 actions et 17 sélections ; L8 comporte 61 actions sans sélection. Couvrir les six commandes, les décès L6 et la rétraction mortelle L8, Undo pendant le combat, les départs conjoints L2/L5, la transition duo → solo et son annulation, la progression hors ordre et les huit acquis du tutoriel.
 
-Exécuter les tests pertinents, typage, build et non-régression de SS01–SS05. Faire un essai navigateur réel ; la validation de cette livraison est Happy DOM. Les témoins et solveurs restent des outils d’auteur et ne deviennent jamais une politique du SRA.
+Le build du Playground vérifie le typage et régénère la galerie. Les 28 tests Custom 4 couvrent le routeur et SS01–SS06. Pour SS06, ils comparent les 433 actions, dont 17 sélections, et les 1 338 images des huit témoins avec les observations et durées du moteur. Les 61 actions de L8 comprennent trois reflets et zéro sélection, avec le vert à `111` et le violet à `101`. Les tests couvrent aussi les trois défaites, Undo et la progression hors ordre.
 
-Terminer par tests → commit → push GitHub → intégration sur main → publication Site → vérification SHA GitHub/Site. Conserver la visibilité existante. Rapporter les commits, la version et le SHA source du Site réellement vérifiés.
+Les 55 tests du moteur et les 15 contrôles Happy DOM de l’HTML autonome passent. L’essai Chromium, dans `scripts/verify-ss06-browser.mjs`, vérifie le tutoriel, les rôles, les quatre façons d’interrompre une animation, le dernier rendu avant le panneau de défaite, le niveau 8, la galerie et le lien de lancement. Après un build et un aperçu Vite sur le port 4174, exécuter `node scripts/verify-ss06-browser.mjs` avec Playwright, ou définir `PLAYWRIGHT_MODULE` vers une installation compatible.
+
+Le rejeu vérifie la solvabilité et la parité du portage. Il ne mesure pas la réussite autonome d’une campagne par le SRA.
+
+La version Site et son SHA source sont relevés après publication et comparés au commit intégré sur `main`, conformément à la [politique de synchronisation](../../../docs/migration/git-site-sync-policy.md). Le [site existant](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS06#playground) conserve ses paramètres d’accès.
 
