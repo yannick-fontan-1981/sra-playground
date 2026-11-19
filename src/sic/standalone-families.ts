@@ -134,4 +134,4 @@ export const standalonePlanningGroups = [
   { id: 'explore_available_inputs', families: [displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, verifyChannelAccessId, compartmentGrowthId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, learnRepeatedCellsId, learnVisibleGroupEffectsId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
 ] as const;
 
-export const standalonePlanningFamilies: readonly string[] = Object.freeze([...new Set(standalonePlanningGroups.flatMap(group => group.families))]);
+export const standalonePlanningFamilies: readonly string[] = Object.freeze([...new Set(standalonePlanningGroups.flatMap(group => group.families)), 'sic_test_observed_compositions']);

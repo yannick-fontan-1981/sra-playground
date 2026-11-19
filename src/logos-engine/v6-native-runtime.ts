@@ -156,6 +156,7 @@ import { exposedViewValues } from './v6-occluded-catalogue-observation.ts';
 import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/reception-access.ts';
 import { createSicVerifyMarkerPlacement } from '../sic/marker-coverage.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
+import { createCompositionTrials, compositionFamily, compositionPrior, cycleGroup, exhaustedGroup } from '../sic/test-observed-compositions.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
@@ -625,7 +626,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     const obligations = (await Promise.all(this.families.map(family => family.preservationObligations?.(this.observation!, this.current!.frame_rows) ?? []))).flat();
     let selected = await this.selectAdmittedFamily(execution, inputs);
     if (this.withdrawPrimaryFamily && !this.withdrawnPrimaryFamily && selected?.proposal.status === 'proposed'
-      && selected.family.id !== publicInputExplorationId) {
+      && selected.family.id !== publicInputExplorationId && selected.family.id !== compositionFamily) {
       const family = selected.family.id;
       const write: NativeStoreWrite = { id: `family_activation:${family}`, kind: 'family_activation', family, value: { enabled: false } };
       const digest = await this.knowledge!.executionDigest([write]);
@@ -2741,13 +2742,17 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const policy = configuration.observed_composition_services.rooted_line_question;
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const now = options.now ?? (() => performance.now());
-    const groups = standalonePlanningGroups;
+    const testCompositions = recovery.solver === 'sic-fallback';
+    const groups = testCompositions ? [{ id: cycleGroup, families: [compositionFamily] }, ...standalonePlanningGroups,
+      { id: exhaustedGroup, families: [compositionFamily] }] : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 177, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 178 : 177,
+      groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior } : {}) };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
+      ...(testCompositions ? [createCompositionTrials()] : []),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),

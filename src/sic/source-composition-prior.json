@@ -1,0 +1,16 @@
+{
+  "new/change_modality": 0.5203,
+  "new/change_target": 0.6229,
+  "new/repeat": 0.8053,
+  "new/resume": 0.6937,
+  "new/switch_control": 0.6597,
+  "return/change_modality": 0.35,
+  "return/change_target": 0.3272,
+  "return/repeat": 0.5467,
+  "return/resume": 0.4583,
+  "return/switch_control": 0.4836,
+  "unchanged/change_modality": 0.4571,
+  "unchanged/change_target": 0.2378,
+  "unchanged/resume": 0.3667,
+  "unchanged/switch_control": 0.5072
+}
