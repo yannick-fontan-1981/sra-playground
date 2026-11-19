@@ -6,7 +6,30 @@ import { assessPressurePlan, choosePressureReserve, observePressureReserve, reta
   type PressurePlan, type PressureReserve } from '../src/sic/observed-pressure-reserve.ts';
 import { annotateTravelMarks, observedTravelActor, observeTravel, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
-test('a proved shortage restores a movable weight, then the other piece becomes the crossing', async () => {
+test('a proved shortage restores a weight when the crossing is observed before gate closure', async () => {
+  await verifyPressureRecovery({
+    opening: [1, 2, 3, 4, 2, 4, 1, 1, 1, 1, 3, 3, 3],
+    trigger: 2,
+    gateClosedAt: 14,
+    crossingAt: 6,
+  });
+});
+
+test('a proved shortage restores a weight when gate closure is observed before the crossing', async () => {
+  await verifyPressureRecovery({
+    opening: [1, 3, 1, 1, 3, 2, 4, 2, 2, 2, 4],
+    trigger: 4,
+    gateClosedAt: 6,
+    crossingAt: 12,
+  });
+});
+
+async function verifyPressureRecovery({ opening, trigger, gateClosedAt, crossingAt }: {
+  opening: readonly number[];
+  trigger: number;
+  gateClosedAt: number;
+  crossingAt: number;
+}) {
   const game = createGameDispatcher(async () => { throw new Error('Expected a native game'); });
   let board = await game.dispatch({ type: 'load', code: 'SS05', level: 1 });
   let travel: ObservedTravel | undefined, model: PressureReserve | undefined, sequence = 0;
@@ -22,15 +45,22 @@ test('a proved shortage restores a movable weight, then the other piece becomes 
     travel = annotateTravelMarks(observeTravel(travel, before, after, command, ref), before);
     model = observePressureReserve(model, travel, before, after, command, ref, plan);
   }
-  for (const action of [1, 2, 3, 4, 2, 4, 1, 1, 1, 1, 3, 3, 3]) {
+  for (const action of opening) {
     await move(input(action));
     assert.equal(model?.shortage, undefined);
   }
-  assert.ok(model?.gate && model.bridge && travel);
+  assert.ok(model?.gate && travel);
   const release = choosePressureReserve(model, travel, picture(board.frame), inputs);
-  assert.ok(release?.goal === 'verify_gate_release');
-  await move(release.command, release);
-  assert.equal(model?.shortage, 'return:14');
+  if (gateClosedAt > crossingAt) {
+    assert.equal(release?.goal, 'verify_gate_release');
+    assert.equal(release?.command.action_ref, input(trigger).action_ref);
+  } else {
+    assert.equal(release, undefined);
+  }
+  await move(input(trigger), release);
+  assert.equal(model?.gate?.closedRef, `return:${gateClosedAt}`);
+  assert.equal(model?.bridge?.ref, `return:${crossingAt}`);
+  assert.equal(model?.shortage, `return:${sequence}`);
 
   board = await game.dispatch({ type: 'reset' });
   model = retainPressureReserve(model!);
@@ -50,4 +80,4 @@ test('a proved shortage restores a movable weight, then the other piece becomes 
   }
   assert.ok(crossed);
   assert.equal(board.levelsCompleted, 1);
-});
+}

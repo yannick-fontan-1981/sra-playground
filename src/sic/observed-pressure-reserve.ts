@@ -144,10 +144,17 @@ export function observePressureReserve(local: PressureReserve | undefined, trave
         result = { ...result, gate: { mark, cell, openRef: ref, ...(closedRef ? { closedRef } : {}) }, refs: [...result.refs.slice(-9), ref] };
       } else if (openBefore && !openAfter && !covered(b, mark) && result.gate?.cell === cell && result.gate.mark === mark) {
         result = { ...result, gate: { ...result.gate, closedRef: ref }, refs: [...result.refs.slice(-9), ref] };
-        if (!result.recovered && result.bridge && result.losses >= result.initialPieces.length && !b.pieces.length) {
-          result = { ...result, shortage: ref };
-        }
       }
+    }
+  }
+  // The gate and crossing may be verified in either order.
+  const gate = result.gate;
+  if (!result.recovered && gate?.closedRef && result.bridge
+    && result.losses >= result.initialPieces.length && !b.pieces.length
+    && !covered(b, gate.mark) && !covered(b, gate.cell)) {
+    const rim = travel.grid.annotatedMarks[gate.mark]?.[0], pixels = second.get(gate.cell);
+    if (rim !== undefined && pixels && edges.every(i => pixels[i] === rim) && pixels[mid] !== travel.grid.floor) {
+      result = { ...result, shortage: ref };
     }
   }
   if (plan && poseKey(plan.expected) !== poseKey(position(result, travel, second) ?? b)) {
