@@ -1,11 +1,12 @@
-import { alignReductionScene, mergeReductionScene, reductionScan, reductionVisibleCells,
-  type ReductionModel, type ReductionPoint, type ReductionScene, type packReductionState } from '../logos-engine/v6-reduction-transport.ts';
+import { alignReductionScene, mergeReductionScene, packReductionState, reductionMoved, reductionScan, reductionState, reductionVisibleCells,
+  type ReductionModel, type ReductionPoint, type ReductionScene } from '../logos-engine/v6-reduction-transport.ts';
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type PackedScene = { floor: string[]; pegs: string[]; carriers: ReductionPoint[]; rails: string[]; edges: string[]; known: string[];
   plots?: string[]; carriedPlots?: string[]; auxiliaries?: string[] };
 export type CarrierView = { offset: ReductionPoint; memory: PackedScene };
 export type CarrierPosition = ReturnType<typeof packReductionState>;
+export type CarrierBoundaryTraffic = { cell: string; inward: ReductionPoint };
 
 const key = (point: ReductionPoint) => point.join(',');
 
@@ -90,5 +91,25 @@ export function acquireCarrierView(rows: NativeRows, observation: NativeObservat
   return { nextModel, view: carrierView(offset, scene), matches,
     cameraChanged: key(offset) !== key(view.offset) || key(model.phase) !== key(nextModel.phase),
     newPegs: [...registered.pegs].filter(cell => !known.has(cell) || entering.has(cell)).length,
-    enteringCarriers: entering.size, leavingCarriers: leaving.size };
+    enteringCarriers: entering.size, leavingCarriers: leaving.size,
+    loadedArrivals: [...entering].filter(cell => registered.auxiliaries?.has(cell)) };
+}
+
+export function reconcileCarrierTraffic(rows: NativeRows, observation: NativeObservation, model: ReductionModel,
+  view: CarrierView, expectation: CarrierPosition | null, motion: ReductionPoint | undefined,
+  traffic: CarrierBoundaryTraffic | undefined, followVacated: boolean | undefined) {
+  const observed = acquireCarrierView(rows, observation, model, view, expectation, motion);
+  if (observed?.matches !== false || !motion || !traffic || key(traffic.inward) !== key([-motion[0], -motion[1]])) return observed;
+  const scene = unpackCarrierView(view), leading = scene.carriers.find(cell => key(cell) === traffic.cell);
+  if (!leading || !scene.auxiliaries?.has(traffic.cell) || scene.pegs.has(traffic.cell)
+    || scene.known_cells?.has(key([leading[0] + motion[0], leading[1] + motion[1]]))) return observed;
+
+  // The incoming lane is measured. On the reverse motion, test whether its leading auxiliary
+  // left view and freed the boundary cell for the following carrier. Verify every visible piece.
+  const current = reductionState(scene);
+  current[1] = current[1].filter(cell => key(cell) !== traffic.cell);
+  current[3]!.delete(traffic.cell);
+  const expected = packReductionState(reductionMoved(current, motion, scene.edges, scene.plots, followVacated));
+  const departure = acquireCarrierView(rows, observation, model, view, expected, motion);
+  return departure?.matches ? { ...departure, leavingCarriers: departure.leavingCarriers + 1 } : observed;
 }

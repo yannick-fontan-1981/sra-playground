@@ -3,7 +3,7 @@ import test from 'node:test';
 import { mergeReductionScene, packReductionState, reductionScan, reductionState, reductionSuccessors,
   type ReductionModel, type ReductionScene } from '../src/logos-engine/v6-reduction-transport.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
-import { acquireCarrierView, carrierView, unpackCarrierView } from '../src/sic/carrier-camera.ts';
+import { acquireCarrierView, carrierView, reconcileCarrierTraffic, unpackCarrierView } from '../src/sic/carrier-camera.ts';
 
 test('a measured auxiliary peer jump preserves both auxiliaries and the population objective', () => {
   const scene: ReductionScene = { floor: new Set(['1,1', '2,1', '3,1']), pegs: new Set(['0,0', '4,0']),
@@ -60,4 +60,41 @@ test('a partially visible plot is reclassified as cargo and survives later clipp
   const stationary = acquireCarrierView(clipped, await observe(clipped, 4), hidden.nextModel, hidden.view, expected);
   assert.ok(stationary?.matches);
   assert.deepEqual(stationary.view.memory.carriedPlots, ['2,3']);
+});
+
+test('a measured incoming lane admits a loaded departure with a following carrier only when the visible state agrees', async () => {
+  const model: ReductionModel = { unit: 2, pitch: 4, phase: [1, 1], width: 18, height: 16,
+    floor: 3, token: 7, ring: 11, rail: 5, auxiliary: 9 };
+  const frame = (carriers: number[], fixedAuxiliary = true) => {
+    const rows = Array.from({ length: model.height }, () => Array<number>(model.width).fill(0));
+    const fill = (x: number, y: number, color: number) => {
+      rows[y]!.fill(color, x, x + 2);
+      rows[y + 1]!.fill(color, x, x + 2);
+    };
+    for (const [x, y] of [[1, 1], [5, 5], [1, 9], [13, 9], [5, 13]] as const) fill(x, y, model.floor);
+    if (fixedAuxiliary) fill(13, 5, model.auxiliary!);
+    for (const row of rows) row[10] = model.rail!;
+    for (const y of carriers.map(cell => 1 + cell * model.pitch)) {
+      for (let dy = -1; dy <= 2; dy++) rows[y + dy]!.fill(model.ring!, 8, 12);
+      fill(9, y, model.auxiliary!);
+    }
+    return rows;
+  };
+  const observe = (rows: number[][]) => measureNativeObservation({
+    frame_rows: rows, frame_hash: 'observed-departure', level: 1, levels_completed: 0, state: 'NOT_FINISHED',
+    available_action_refs: ['ACTION1', 'ACTION2'],
+  }, 2);
+  const before = carrierView([0, 0], mergeReductionScene(null, reductionScan(frame([2, 3]), model), model, [0, 0]));
+  const expected = packReductionState(reductionState(unpackCarrierView(before)));
+  const departed = frame([3]);
+  const next = await observe(departed);
+  assert.equal(reconcileCarrierTraffic(departed, next, model, before, expected, [0, 1], undefined, true)?.matches, false);
+  const traffic = { cell: '2,3', inward: [0, -1] as [number, number] };
+  const verified = reconcileCarrierTraffic(departed, next, model, before, expected, [0, 1], traffic, true);
+  assert.equal(verified?.matches, true);
+  assert.equal(verified?.leavingCarriers, 1);
+  assert.deepEqual(verified?.view.memory.carriers, [[2, 3]]);
+  const unrelatedChange = frame([3], false);
+  assert.equal(reconcileCarrierTraffic(unrelatedChange, await observe(unrelatedChange), model,
+    before, expected, [0, 1], traffic, true)?.matches, false);
 });
