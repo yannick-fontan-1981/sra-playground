@@ -41,9 +41,10 @@ const empty = (epoch = 0): State => ({ epoch, order: null, count: 0, stopped: fa
 const matches = (a: Encounter, b: Encounter | null) => b !== null && a.room === b.room && a.phase === b.phase
   && a.quota === b.quota && JSON.stringify(a.queue) === JSON.stringify(b.queue) && JSON.stringify(a.enemy) === JSON.stringify(b.enemy);
 
-export function createSicOrderedReplenishment(family = orderedReplenishmentId): NativeFamily<Proposal> {
+export function createSicOrderedReplenishment(family = orderedReplenishmentId, transferObservedEncounter = false): NativeFamily<Proposal> {
   const learns = family === learnOrderedReplenishmentId;
   let state = empty();
+  let scored: { epoch: number; interaction: string; refs: string[] } | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -55,9 +56,10 @@ export function createSicOrderedReplenishment(family = orderedReplenishmentId): 
         || !inputs.some(command => command.action_ref === 'ACTION5')) return null;
       const continuation = state.epoch === observation.level_epoch ? state : null;
       const observed = learns && !continuation ? execution?.readEncounterTransition?.() : null;
+      const presence = transferObservedEncounter && scored?.epoch === observation.level_epoch ? scored : null;
       const local = continuation ?? { ...empty(observation.level_epoch),
         ...(observed?.afterRef === observation.observation_ref
-          ? { interactionRef: observed.afterRef, evidence: [observed.beforeRef] } : {}) };
+          ? { interactionRef: observed.afterRef, evidence: [observed.beforeRef] } : presence ? { interactionRef: presence.interaction, evidence: presence.refs } : {}) };
       if (learns && !local.interactionRef) return null;
       if (local.stopped || local.count >= 32) return null;
       const scene = measureOrderedRecruitment(rows, local.order);
@@ -123,6 +125,10 @@ export function createSicOrderedReplenishment(family = orderedReplenishmentId): 
       return { matched, seal_prefix: true, reason: matched ? 'ordered_encounter_confirmed' : 'ordered_encounter_contradicted' };
     },
     record(before, after, _command, _first, second, proposal) {
+      if (transferObservedEncounter && after.levels_completed > before.levels_completed && proposal.local.interactionRef) {
+        scored = { epoch: after.level_epoch, interaction: proposal.local.interactionRef,
+          refs: [...proposal.local.evidence.slice(-4), before.observation_ref, after.observation_ref] };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const scene = measureOrderedRecruitment(second, proposal.order), local = proposal.local;
       const matched = !!scene && matches(orderedRecruitmentSummary(scene) as Encounter, proposal.prediction);
@@ -131,7 +137,11 @@ export function createSicOrderedReplenishment(family = orderedReplenishmentId): 
         evidence: [...local.evidence.slice(-3), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ ...state }),
-    restore(value: NativeRecord) { state = structuredClone(value as State); },
+    state: () => ({ ...state, ...(scored ? { scored } : {}) }),
+    restore(value: NativeRecord) {
+      const { scored: retained, ...local } = structuredClone(value);
+      state = local as State;
+      scored = retained as typeof scored ?? null;
+    },
   };
 }

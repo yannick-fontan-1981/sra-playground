@@ -22,7 +22,7 @@ type Rule = { supports: string[]; contradicted: boolean; changedOrientation?: st
 type Context = { chosen: Occurrence; peers: Occurrence[] };
 type State = { epoch: number; context: Context | null; seen: Appearance[]; rules: Record<string, Rule>;
   calibration: NativeRecord | null; visited: string[]; stopped: boolean; singletonStart?: string };
-type Transfer = { epoch: number; calibration: NativeRecord; rules: Record<string, Rule>; start: string; victory: string };
+export type OccurrenceTransfer = { epoch: number; calibration: NativeRecord; rules: Record<string, Rule>; start: string; victory: string };
 type Prediction = { key: string; candidates: string[]; minimum: number; orientedKey?: string; turned?: string[];
   scaledFrom?: string; resized?: string[] };
 type Proposal = NativeProposal & { local: State; scene: Scene; chosen: Occurrence; predictions: Prediction[]; needId: string;
@@ -136,16 +136,32 @@ function learnOccurrenceChoice(local: State, scene: Scene, chosen: Occurrence, p
     calibration: scene.calibration, visited: [...local.visited, scene.key], ...(singletonStart ? { singletonStart } : {}) };
 }
 
-export function chooseVisibleOccurrence(previous: State | undefined, observation: NativeObservation, rows: NativeRows) {
-  const local = previous ?? empty(observation.level_epoch);
-  const measured = measureOccurrenceScene(rows, observation, local.calibration, occurrenceMeasurement) as Scene | null;
+export function retainOccurrenceChoice(local: State, scene: Scene, victory: NativeObservation): OccurrenceTransfer | null {
+  if (!local.singletonStart) return null;
+  const { indicator_boxes: _previousPositions, ...calibration } = scene.calibration;
+  return { epoch: local.epoch, calibration, rules: local.rules, start: local.singletonStart, victory: victory.observation_ref };
+}
+
+export function chooseVisibleOccurrence(previous: State | undefined, observation: NativeObservation, rows: NativeRows,
+  transfer?: OccurrenceTransfer) {
+  const local = previous ?? { ...empty(observation.level_epoch), calibration: transfer?.calibration ?? null, rules: transfer?.rules ?? {} };
+  let measured = measureOccurrenceScene(rows, observation, local.calibration, occurrenceMeasurement) as Scene | null;
+  if (transfer && !previous && !measured?.occurrences.length) {
+    const scaled = measureOccurrenceScene(rows, observation, local.calibration,
+      { ...occurrenceMeasurement, inferIntegerScale: true }) as Scene | null;
+    if (scaled?.occurrences.length === 1 && (scaled.calibration.foreground_scale ?? 1) > 1) measured = scaled;
+  }
   if (!measured || !hasMeter(measured) || measured.occurrences.length > 16 || local.visited.includes(measured.key)
     || local.visited.length >= 48) return null;
   const scene = identifyShapes(measured), predictions = predict(scene, local);
   const marked = scene.occurrences.filter(part => part.marked);
   const supported = marked.length === 0 ? supportedOccurrenceChoices(local, predictions) : [];
-  const chosen = marked.length === 1 ? marked[0] : singleChoice(scene, supported);
-  return chosen ? { local, scene, chosen, predictions, inferred: supported.length > 0 } : null;
+  const inferred = singleChoice(scene, supported);
+  const start = transfer && !local.context && !marked.length && scene.occurrences.length === 1 ? scene.occurrences[0]! : null;
+  const chosen = marked.length === 1 ? marked[0] : inferred ?? start;
+  const evidence = start ? [transfer!.start, transfer!.victory] : inferred
+    ? [...new Set(supported.flatMap(({ key, scaledFrom }) => [...local.rules[key]!.supports, ...(scaledFrom ? local.rules[scaledFrom]?.supports ?? [] : [])]))] : [];
+  return chosen ? { local, scene, chosen, predictions, inferred: !!inferred, evidence, transferredStart: !!start } : null;
 }
 
 export function observeVisibleOccurrence({ local, scene, chosen, predictions }: NonNullable<ReturnType<typeof chooseVisibleOccurrence>>,
@@ -157,7 +173,7 @@ export function observeVisibleOccurrence({ local, scene, chosen, predictions }: 
 
 export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
   let state = empty();
-  let transfer: Transfer | null = null;
+  let transfer: OccurrenceTransfer | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyOccurrenceChoiceId,
@@ -255,8 +271,7 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
     record(before, after, _command, _first, second, proposal) {
       const { local, scene, chosen, predictions } = proposal;
       if (after.levels_completed > before.levels_completed && local.singletonStart) {
-        const { indicator_boxes: _previousPositions, ...calibration } = scene.calibration;
-        transfer = { epoch: before.level_epoch, calibration, rules: local.rules, start: local.singletonStart, victory: after.observation_ref };
+        transfer = retainOccurrenceChoice(local, scene, after);
         return { events: [], reviewEvidence: 'The occurrence matches advanced the sequence through the end of the level.' };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
@@ -273,7 +288,7 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
     restore(value: NativeRecord) {
       const { transfer: saved, ...episode } = structuredClone(value);
       state = episode as State;
-      transfer = (saved ?? null) as Transfer | null;
+      transfer = (saved ?? null) as OccurrenceTransfer | null;
     },
   };
 }

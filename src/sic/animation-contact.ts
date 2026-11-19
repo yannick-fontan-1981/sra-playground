@@ -70,12 +70,19 @@ async function regulatedProposal(observation: NativeObservation, rows: NativeRow
       preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
 }
 
-export function createSicAnimationContact(family = animationContactId): NativeFamily<Proposal> {
+export function createSicAnimationContact(family = animationContactId, transferObservedContact = false): NativeFamily<Proposal> {
   const learns = family === learnAnimationContactId;
   let state: State | null = null;
   let curve: CurveWitness | null = null;
   return {
     id: family,
+    observePublicOutcome(before, after, command, first, second, frames = []) {
+      if (!learns || !transferObservedContact) return;
+      curve ??= learnCurveWitness(before, after, command, first, second, frames);
+      if (curve && after.levels_completed > before.levels_completed) {
+        curve = { ...curve, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
+      }
+    },
     proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       const current = !learns && mayRegulateContact(curve, observation);
       if ((group === observedMechanicsGroup) !== current) return null;
@@ -83,7 +90,7 @@ export function createSicAnimationContact(family = animationContactId): NativeFa
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      if (!learns && curve && mayRegulateContact(curve, observation)) {
+      if ((!learns || transferObservedContact) && curve && mayRegulateContact(curve, observation)) {
         const choice = chooseRegulatedContact(curve, observation, rows);
         return choice ? regulatedProposal(observation, rows, choice) : null;
       }
@@ -152,7 +159,7 @@ export function createSicAnimationContact(family = animationContactId): NativeFa
         curve = retainRegulatedReturn(curve, proposal.regulated, before, after, first, second, frames);
         return { events: [] };
       }
-      if (!learns && !curve) curve = learnCurveWitness(before, after, command, first, second, frames);
+      if ((!learns || transferObservedContact) && !curve) curve = learnCurveWitness(before, after, command, first, second, frames);
       if (curve && after.levels_completed > before.levels_completed) {
         curve = { ...curve, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
       }

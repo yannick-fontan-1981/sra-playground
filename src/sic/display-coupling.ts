@@ -1,6 +1,6 @@
 import { framedRows, value } from '../logos-engine/v6-coupled-displays.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
@@ -65,7 +65,7 @@ function measure(observation: NativeObservation, rows: NativeRows, spacing: Scor
     visited: [], coupled: false, count: 0, stopped: false, evidence: [] } : null;
 }
 
-function scoreSpacing(proposal: SpacingProposal, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
+function scoreSpacing(proposal: Pick<SpacingProposal, 'local' | 'index' | 'controls' | 'receivers'>, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
   const { local, index, controls, receivers } = proposal, first = local.firstCoupled;
   const analogy = local.spacing;
   const newCoupling = first !== undefined && new Set(receivers).size >= 2;
@@ -91,6 +91,54 @@ function scoreSpacing(proposal: SpacingProposal, after: NativeObservation, frame
     return { ...measurement, period, offset, fromRight, evidence: [...local.evidence, after.observation_ref] };
   }
   return null;
+}
+
+export type DisplayAcquisition = { epoch: number; local: State | null; scored?: ScoredSpacing };
+type DisplayStep = Pick<SpacingProposal, 'local' | 'index' | 'controls' | 'receivers'>;
+
+export function acquireDisplayReturn(previous: DisplayAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows, frames: readonly NativeRows[]): DisplayAcquisition | undefined {
+  if (command.action_ref !== 'ACTION6' || before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return previous;
+  const record = previous?.epoch === before.level_epoch ? previous : {
+    epoch: before.level_epoch, local: measure(before, first, null), ...(previous?.scored ? { scored: previous.scored } : {}),
+  };
+  const { local } = record;
+  if (!local) return record;
+  const { x, y } = command.data;
+  const index = x === undefined || y === undefined ? -1 : local.controls.findIndex(([l, t, r, b]) => x >= l - 1 && x <= r + 1 && y >= t - 1 && y <= b + 1);
+  if (index < 0) return record;
+  const controls = values(first, local.controls), receivers = values(first, local.receivers);
+  if (!controls || !receivers) return record;
+  const step = { local, index, controls, receivers };
+  if (after.levels_completed > before.levels_completed) {
+    const scored = scoreSpacing(step, after, frames);
+    return scored ? { ...record, scored } : record;
+  }
+  if (before.level_epoch !== after.level_epoch || before.state !== after.state) return record;
+  const observed = checkDisplayToggle(step, second);
+  if (!observed) return record;
+  return { ...record, local: { ...local, coupled: true, firstCoupled: local.firstCoupled ?? index,
+    evidence: [...local.evidence.slice(-3), before.observation_ref, after.observation_ref] } };
+}
+
+export function checkDisplayToggle({ local, index, controls, receivers }: DisplayStep, rows: NativeRows) {
+  const next = values(rows, local.controls), outputs = values(rows, local.receivers);
+  return !!next && !!outputs && next.every((ink, i) => i === index ? ink !== controls[i] : ink === controls[i])
+    && outputs.some((ink, i) => ink !== receivers[i]);
+}
+
+export function projectRecalledSwitch(previous: State | undefined, observation: NativeObservation, rows: NativeRows, transfer: DisplayAcquisition) {
+  const { scored } = transfer;
+  if (!scored || scored.score !== observation.levels_completed || scored.epoch !== observation.level_epoch) return null;
+  const local = previous ?? measure(observation, rows, scored);
+  if (!local?.spacing) return null;
+  const controls = values(rows, local.controls), receivers = values(rows, local.receivers);
+  if (!controls || !receivers || new Set(controls).size > 2) return null;
+  const index = controls.map((_, i) => i).sort((a, b) => fromEdge(a, controls.length, scored) - fromEdge(b, controls.length, scored))
+    .find(i => expectedSwitch(i, controls.length, scored) !== (controls[i] !== local.initial));
+  if (index === undefined) return null;
+  return { local, index, controls, receivers, evidence: scored.evidence,
+    novelty: !previous && local.controls.length !== transfer.local?.controls.length };
 }
 
 export function createSicDisplayCoupling(): NativeFamily<Proposal> {

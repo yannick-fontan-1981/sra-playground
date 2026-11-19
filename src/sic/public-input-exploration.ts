@@ -1,4 +1,11 @@
-import { assessFallbackProjection, chooseFallbackProjection, type FallbackProjection, type FallbackProjectionMemory } from './fallback-projections.ts';
+import { acquireCatalogueReturn, type CatalogueAcquisition } from './visible-configuration-coverage.ts';
+import { acquireRelationReturn, type RelationsAcquisition } from './observed-shared-relations.ts';
+import { acquireRevealedNavigation, type NavigationAcquisition } from './navigate-revealed-grid.ts';
+import { acquireRelayReturn, type RelayAcquisition } from './observed-relay-route.ts';
+import { acquireDisplayReturn, type DisplayAcquisition } from './display-coupling.ts';
+import { acquireCompartmentReturn, type CompartmentAcquisition } from './compartment-growth.ts';
+import { acquireCaptureReturn, type CaptureRecollection } from './observed-capture-transfer.ts';
+import { assessFallbackProjection, chooseFallbackProjection, retainFallbackLevelKnowledge, type FallbackLevelTransfer, type FallbackProjection, type FallbackProjectionMemory } from './fallback-projections.ts';
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
@@ -25,7 +32,7 @@ import { chooseJointInput, observeJointInput, type JointProposal, type ObservedJ
 import { chooseReferenceSearch, observeReferenceView, type ReferenceView } from './observed-reference-search.ts';
 import { chooseLinkedTarget, observeLink, type MeasuredLink } from './observed-linked-target.ts';
 import { choosePanelPreparation } from './observed-panel-preparation.ts';
-import { chooseOrderedEntry, observeOrderedEntry, type EntryProposal, type OrderedEntry } from './observed-ordered-entry.ts';
+import { chooseOrderedEntry, observeOrderedEntry, retainOrderedEntry, type EntryProposal, type OrderedEntry, type OrderedEntryTransfer } from './observed-ordered-entry.ts';
 import { chooseVisibleSlotMove, matchesVisibleSlotMove, measureVisibleSlotLayout, slotTransferStrategies,
   type VisibleSlotLayout } from './slot-transfer.ts';
 import { countChangesInside, workspaceClickCandidate } from './workspace-click.ts';
@@ -131,8 +138,21 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   exchange?: ObservedExchange;
   pressureReserve?: PressureReserve;
   fallbackProjection?: FallbackProjectionMemory;
+  fallbackTransfer?: FallbackLevelTransfer;
+  compartmentTransfer?: CompartmentAcquisition;
+  captureTransfer?: CaptureRecollection;
+  displayTransfer?: DisplayAcquisition;
+  relayTransfer?: RelayAcquisition;
+  navigationTransfer?: NavigationAcquisition;
+  relationsTransfer?: RelationsAcquisition;
+  catalogueTransfer?: CatalogueAcquisition;
+  learnedDirections?: Record<string, string>;
+  directionHistory?: ObservedCommandGraph;
+  directionTransfer?: { epoch: number; inputs: string[]; refs: string[] };
+  orderedEntryTransfer?: OrderedEntryTransfer;
   clickFocus?: { accent: number; ref: string };
   jointInput?: ObservedJointInput;
+  jointTransfer?: { epoch: number; measured: ObservedJointInput };
   referenceView?: ReferenceView;
   measuredLink?: MeasuredLink;
   orderedEntry?: OrderedEntry;
@@ -495,6 +515,48 @@ function panelTestKey(command: string, rows: NativeRows, box: NativeBox | null |
 export function createSicPublicInputExploration(fallback = false): NativeFamily<Proposal> {
   let state = initial();
   let decide: NativeProgramHandle | undefined;
+  const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
+  function enterEpoch(epoch: number): void {
+    if (state.epoch === epoch) return;
+    const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer } = state;
+    state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
+      ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
+      ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
+      ...(relayTransfer?.witness ? { relayTransfer } : {}), ...(navigationTransfer?.won ? { navigationTransfer } : {}),
+      ...(relationsTransfer?.witness ? { relationsTransfer } : {}), ...(directionTransfer ? { directionTransfer } : {}),
+      ...(catalogueTransfer?.witness ? { catalogueTransfer } : {}), ...(jointTransfer ? { jointTransfer } : {}) };
+  }
+  async function acquireTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows, frames: readonly NativeRows[]) {
+    if (!fallback) return;
+    const compartment = acquireCompartmentReturn(state.compartmentTransfer, before, after, command, rows, afterRows);
+    const catalogue = /^ACTION6$/.test(command.action_ref) && !before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))
+      && before.frame_hash !== after.frame_hash ? acquireCatalogueReturn(state.catalogueTransfer, before, after, command, rows, afterRows, frames) : undefined;
+    const relations = acquireRelationReturn(state.relationsTransfer, before, after, command, rows, afterRows, frames);
+    const relay = acquireRelayReturn(state.relayTransfer, before, after, command, rows, afterRows, frames);
+    const navigation = acquireRevealedNavigation(state.navigationTransfer, before, after, command, rows, afterRows);
+    const display = acquireDisplayReturn(state.displayTransfer, before, after, command, rows, afterRows, frames);
+    const capture = await acquireCaptureReturn(state.captureTransfer, before, after, command, rows, afterRows);
+    if (compartment) state.compartmentTransfer = compartment;
+    if (capture) state.captureTransfer = capture;
+    if (display) state.displayTransfer = display;
+    if (catalogue) state.catalogueTransfer = catalogue;
+    if (relations) state.relationsTransfer = relations;
+    if (relay) state.relayTransfer = relay;
+    if (navigation) state.navigationTransfer = navigation;
+    if (before.available_action_refs.includes('ACTION6') && /^ACTION[1-4]$/.test(command.action_ref)) {
+      const history = state.directionHistory ??= {};
+      rememberCommandReturn(history, interfaceKey(before), interfaceKey(after), command.action_ref, after.observation_ref, 96);
+    }
+    if (before.available_action_refs.includes('ACTION6') && /^ACTION[1-4]$/.test(command.action_ref)
+      && after.level_epoch === before.level_epoch && before.frame_hash !== after.frame_hash) {
+      state.learnedDirections = { ...state.learnedDirections, [command.action_ref]: after.observation_ref };
+    }
+    const learned = Object.entries(state.learnedDirections ?? {});
+    if (after.levels_completed > before.levels_completed && learned.length >= 3) {
+      state.directionTransfer = { epoch: before.level_epoch, inputs: learned.map(([key]) => key),
+        refs: [...learned.map(([, ref]) => ref), before.observation_ref, after.observation_ref] };
+    }
+  }
   const projectionReturns = new WeakMap<FallbackProjection, ReturnType<typeof assessFallbackProjection>>();
   const family = {
     id: publicInputExplorationId,
@@ -504,7 +566,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
       if (group === projectedPublicEffectsGroup) {
         const proposal = await family.propose(observation, rows, inputs, remaining, execution, true);
-        return proposal?.fallbackProjection ? proposal : null;
+        return proposal?.fallbackProjection || proposal?.entryPlan || proposal?.jointPlan ? proposal : null;
       }
       if (group !== observedPressureRecoveryGroup) return family.propose(observation, rows, inputs, remaining, execution);
       if (state.epoch !== observation.level_epoch || !state.pressureReserve?.gate || !state.pressureReserve.bridge) return null;
@@ -519,7 +581,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const panel = nonPoint.length > 1 && observation.available_action_refs.includes('ACTION6') ? visibleCommandPanel(rows) : null;
       const pressure = !panel ? choosePressureReserve(local.pressureReserve, local.travel, rows, nonPoint) : undefined;
       const pressureKey = pressure?.command.action_ref;
-      const joint = fallback && !panel && !pressure ? chooseJointInput(local.jointInput, rows, nonPoint, remaining) : undefined;
+      const recalledJoint = state.jointTransfer?.epoch === observation.level_epoch - 1 ? state.jointTransfer.measured : undefined;
+      const joint = fallback && !panel && !pressure ? chooseJointInput(local.jointInput ?? recalledJoint, rows, nonPoint, remaining) : undefined;
       const jointKey = joint?.command.action_ref;
       const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows) : undefined;
       const exchangeKey = exchange?.command.action_ref;
@@ -529,10 +592,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const markKey = markTrial?.command.action_ref;
       const travel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
-      const fallbackProjection = fallback && !panel && !pressure
-        ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution) : undefined;
-      if (projectionOnly && !fallbackProjection) return null;
-      const budget = fallbackProjection || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
+      const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness) && !pressure
+        ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state.fallbackTransfer, state.compartmentTransfer, state.captureTransfer, state.displayTransfer, state.relayTransfer, state.navigationTransfer, state.relationsTransfer, state.catalogueTransfer, !!panel) : undefined;
+      const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
       const panelBounds = panel ? { area: panel.area, panel: panel.panel } : undefined;
       const source = explorationKey(observation, rows, panelBounds);
@@ -552,12 +614,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const panelPreparation = fallback && !panel && nonPoint.length === 1 && observation.available_action_refs.includes('ACTION6')
         ? choosePanelPreparation(rows, nonPoint[0]!) : undefined;
       const entry = fallback && !panel && !panelPreparation && nonPoint.length === 1 && observation.available_action_refs.includes('ACTION6')
-        ? await chooseOrderedEntry(local.orderedEntry, observation, rows, nonPoint[0]!, remaining, execution) : undefined;
+        ? await chooseOrderedEntry(local.orderedEntry, observation, rows, nonPoint[0]!, remaining, execution, state.orderedEntryTransfer) : undefined;
       const slotLayout = fallback && !panel && !panelPreparation && !entry && nonPoint.length === 1 && observation.available_action_refs.includes('ACTION6')
         ? local.slotTransfer?.layout ?? measureVisibleSlotLayout(observation, rows) : undefined;
       const slotMove = slotLayout && chooseVisibleSlotMove(rows, slotLayout, nonPoint[0]!);
       const slot = slotMove ? { command: slotMove.command, label: slotTransferStrategies[slotMove.stage],
         box: slotMove.source ?? slotMove.destination ?? slotLayout!.slots[0]!, evidence: local.slotTransfer ? [local.slotTransfer.ref] : [] } : undefined;
+      if (projectionOnly && !fallbackProjection && !(recalledJoint && joint) && !entry?.recurring && !local.orderedEntry?.refs.some(item => !item.includes(':epoch:' + observation.level_epoch + ':'))) return null;
       const projectedTarget = fallbackProjection ?? linkedTarget ?? referenceSearch ?? panelPreparation ?? entry ?? slot;
       const projectionKey = projectedTarget && commandKey(projectedTarget.command);
       if (projectedTarget && projectionKey && !attempted.has(projectionKey)) {
@@ -610,6 +673,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const lastChange = local.lastChange?.destination === source ? local.lastChange : null;
       const deferred = lastChange && canDiversifyDirection ? oppositeDirection[lastChange.action] : undefined;
       const recheck = local.recheck && local.experiments < local.recheck.until ? local.recheck : null;
+      const rememberedDirections = fallback && state.directionTransfer?.epoch === observation.level_epoch - 1
+        && stationaryClicks.length >= 3 ? state.directionTransfer : null;
+      const directionRelook = rememberedDirections && named.length >= 3
+        ? observedCommandFrontier(local.directionHistory ?? {}, interfaceKey(observation), named.filter(key => rememberedDirections.inputs.includes(key)), 1,
+          () => named.filter(key => rememberedDirections.inputs.includes(key)), deferred) : null;
       const measuredControls = recheck && keys.length > named.length
         ? observedCommandFrontier(local.transitions, source, named, 1, () => named, deferred) : null;
       const preferred = trialKey && (trial?.expected === null || !local.transitions[source]?.some(edge => edge.action === trialKey))
@@ -704,9 +772,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         : walk ? commandKey(walk.route[0]!.command) : mechanism ? commandKey(mechanism.motion.footing.command)
           : programming ? commandKey(programming.program.selector.command)
           : terrainStep ? commandKey(terrainStep.command) : unmeasured ?? (terrain ? commandKey(terrain.command) : null);
-      const frontier = projectionOnly ? projected : contextualCommand ? { action: contextualCommand, probe: contextualCommand, depth: walk?.route.length ?? 0, first: null }
+      const frontier = projectionOnly
+        ? projected ?? (recalledJoint && jointKey ? { action: jointKey, probe: jointKey, depth: 0, first: null } : null)
+        : contextualCommand ? { action: contextualCommand, probe: contextualCommand, depth: walk?.route.length ?? 0, first: null }
         : probe ? { action: probe, probe, depth: 0, first: null }
-        : (fallbackProjection ? projected : null) ?? measuredControls ?? preferred ?? projected ?? emphasis ?? workspaceProbe ?? (pressureKey ? { action: pressureKey, probe: pressureKey, depth: 0, first: null } : null)
+        : (fallbackProjection ? projected : null) ?? measuredControls ?? preferred ?? projected ?? directionRelook ?? emphasis ?? workspaceProbe ?? (pressureKey ? { action: pressureKey, probe: pressureKey, depth: 0, first: null } : null)
           ?? (jointKey ? { action: jointKey, probe: jointKey, depth: 0, first: null } : null)
           ?? (exchangeKey ? { action: exchangeKey, probe: exchangeKey, depth: 0, first: null } : null)
           ?? (coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null)
@@ -724,6 +794,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ? recheck.evidence : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
       const selectedFallback = frontier === projected ? fallbackProjection : undefined;
+      const recalledDirection = frontier === directionRelook ? rememberedDirections : null;
+      const selectedEntry = entry && frontier === projected && projectedTarget === entry ? entry : undefined;
       const selectedFocus = frontier === emphasis ? clickFocus : undefined;
       const selectedProjection = frontier === projected ? projectedTarget : undefined;
       const selectedJoint = frontier.action === jointKey ? joint : undefined;
@@ -740,6 +812,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ? [travel.target[0], travel.target[1], travel.target[0] + local.travel.grid.pitch - 1,
           travel.target[1] + local.travel.grid.pitch - 1] : undefined;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
+        ...(recalledDirection?.refs ?? []).filter(item => item !== ref),
         ...(selectedJoint?.evidence ?? []).filter(item => item !== ref),
         ...(selectedProjection?.evidence ?? []).filter(item => item !== ref),
         ...(selectedFocus ? stationaryClicks.map(edge => edge.evidence).filter(item => item !== ref) : []),
@@ -809,7 +882,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         verify_gate_release: 'Leave the control briefly to check whether the gate needs a sustained weight',
       }[selectedPressure.goal];
       const markLabel = selectedMark ? 'Reach an untested marked cell and observe what changes on contact' : undefined;
-      const label = selectedFocus ? 'Test the single outlined control and see where the emphasis moves'
+      const label = recalledDirection ? 'Recheck a previously effective direction after stationary click returns' : selectedFocus ? 'Test the single outlined control and see where the emphasis moves'
         : selectedJoint ? 'Bring the pieces together using their measured joint movements'
           : selectedProjection ? 'label' in selectedProjection ? selectedProjection.label : 'intent' in selectedProjection
             ? selectedProjection.intent === 'place' ? 'Place the active piece using the measured midpoint'
@@ -867,7 +940,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         status: 'proposed', kind: publicInputExplorationId, actions, source, candidates: keys, needId: need.id,
         ...(selectedFallback ? { fallbackProjection: selectedFallback } : {}),
         ...(slotLayout && slotMove && selectedProjection === slot ? { slotPlan: { layout: slotLayout, move: slotMove } } : {}),
-        ...(entry && selectedProjection === entry ? { entryPlan: entry } : {}),
+        ...(selectedEntry ? { entryPlan: selectedEntry } : {}),
         ...(selectedJoint ? { jointPlan: selectedJoint } : {}),
         ...(selectedFocus ? { clickFocus: selectedFocus } : {}),
         ...(selectedPressure ? { pressurePlan: selectedPressure } : {}),
@@ -905,7 +978,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           : opening ? 'Reach the new region opened by the support placement' : 'Learn how to act on the current board'), mode,
           situation: !selectedFallback && !selectedPressure && !selectedMark && !selectedExchange && !selectedCoverage && !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
-            : label, agenda: decision ? [] : entries, evidence: proof, ...(selectedFallback ? { target: selectedFallback.goal } : {}), ...(box ? { addressedRegion: box } : {}),
+            : label, agenda: decision ? [] : entries, evidence: proof, ...(selectedEntry?.recurring ? { priorLevelMechanism: selectedEntry.recurring } : {}),
+          ...(selectedEntry?.novelty ? { newLevelConfiguration: selectedEntry.novelty } : {}),
+          ...(selectedFallback ? { target: selectedFallback.goal,
+            ...(selectedFallback.recurring ? { priorLevelMechanism: selectedFallback.recurring } : {}),
+            ...(selectedFallback.novelty ? { newLevelConfiguration: selectedFallback.novelty } : {}) } : {}), ...(box ? { addressedRegion: box } : {}),
           ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
           ...(clickedControl && probe ? { focus: clickedControl.box } : {}),
           ...(workspaceTrial ? { workspace: workspaceTrial.workspace, example: workspaceTrial.example } : {}),
@@ -937,13 +1014,17 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           evidence: proof, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    observePublicOutcome(before, after, command, rows, afterRows, frames) {
+    async observePublicOutcome(before, after, command, rows, afterRows, frames) {
+      if (fallback) {
+        enterEpoch(before.level_epoch);
+        await acquireTransfer(before, after, command, rows, afterRows, frames ?? []);
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return;
       if ((frames?.length ?? 0) > 1 && /^ACTION[1-4]$/.test(command.action_ref) && before.available_action_refs.includes('ACTION5')) {
         const previous = state.epoch === before.level_epoch ? state.travel : undefined;
         const tracked = annotateTravelMarks(observeTravel(previous, rows, afterRows, command, after.observation_ref), rows);
         if (tracked?.grid.annotatedMarks) {
-          if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
+          enterEpoch(before.level_epoch);
           state.travel = tracked;
           const pressure = observePressureReserve(state.pressureReserve, tracked, rows, afterRows, command, after.observation_ref);
           if (pressure) state.pressureReserve = pressure;
@@ -952,7 +1033,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       if (!before.available_action_refs.includes('ACTION6') || before.available_action_refs.filter(action => /^ACTION[1-5]$/.test(action)).length < 2) return;
       const panel = visibleCommandPanel(rows);
       if (!panel) return;
-      if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
+      enterEpoch(before.level_epoch);
       const source = explorationKey(before, rows, panel), destination = explorationKey(after, afterRows, panel);
       const action = commandKey(command);
       state.options[source] ??= [...before.available_action_refs.filter(key => /^ACTION[1-5]$/.test(key)),
@@ -990,6 +1071,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         projectionReturns.set(proposal.fallbackProjection, result);
         const { matched } = await result;
         return { matched, seal_prefix: true, reason: matched === null ? 'public_mechanism_calibration' : matched ? 'projected_public_effect_observed' : 'projected_public_effect_contradicted' };
+      }
+      if (!scored && proposal.entryPlan && state.orderedEntryTransfer?.epoch === before.level_epoch - 1) {
+        const result = observeOrderedEntry(proposal.entryPlan, before, after, afterRows);
+        entryReturns.set(proposal.entryPlan, result);
+        const next = await result, matched = next.rejected.length === proposal.entryPlan.state.rejected.length;
+        return { matched, seal_prefix: true, reason: matched ? 'ordered_entry_return_verified' : 'ordered_entry_return_contradicted' };
       }
       if (!scored && proposal.slotPlan?.move.expected) {
         const { layout, move } = proposal.slotPlan;
@@ -1071,8 +1158,24 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     async record(before, after, command, rows, afterRows, proposal, index, frames) {
+      if (fallback) {
+        enterEpoch(before.level_epoch);
+        if (proposal.fallbackProjection?.check.kind !== 'capture') await acquireTransfer(before, after, command, rows, afterRows, frames ?? []);
+      }
+      if (fallback && after.levels_completed > before.levels_completed && state.jointInput
+        && Object.keys(state.jointInput.trials).length >= 3) {
+        state.jointTransfer = { epoch: before.level_epoch, measured: { ...state.jointInput, refuted: [] } };
+      }
+      if (fallback && after.levels_completed > before.levels_completed && proposal.entryPlan) {
+        const retained = retainOrderedEntry(proposal.entryPlan, before, after);
+        if (retained) state.orderedEntryTransfer = retained;
+      }
+      if (fallback && after.levels_completed > before.levels_completed && proposal.fallbackProjection) {
+        const retained = retainFallbackLevelKnowledge(proposal.fallbackProjection, before, after, state.fallbackTransfer);
+        if (retained) state.fallbackTransfer = retained;
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
+      enterEpoch(before.level_epoch);
       state.experiments++;
       if (proposal.accessGoal) state.panelAccessGoal = structuredClone(proposal.accessGoal);
       if (proposal.bridgeTarget) {
@@ -1091,7 +1194,10 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         if (memory) state.fallbackProjection = memory;
         else delete state.fallbackProjection;
       }
-      if (proposal.entryPlan) state.orderedEntry = await observeOrderedEntry(proposal.entryPlan, before, after, afterRows);
+      if (proposal.entryPlan) {
+        state.orderedEntry = await (entryReturns.get(proposal.entryPlan)
+          ?? observeOrderedEntry(proposal.entryPlan, before, after, afterRows));
+      }
       if (proposal.slotPlan && matchesVisibleSlotMove(afterRows, proposal.slotPlan.layout, proposal.slotPlan.move)) {
         state.slotTransfer = { layout: proposal.slotPlan.layout, ref: after.observation_ref };
       }
@@ -1110,7 +1216,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const panel = proposal.panel ? visibleCommandPanel(rows) : null;
       if (!proposal.panel && proposal.candidates.filter(key => /^ACTION[1-4]$/.test(key)).length >= 2) {
         if (fallback) {
-          const joint = observeJointInput(state.jointInput, rows, afterRows, command, after.observation_ref, proposal.jointPlan);
+          const joint = observeJointInput(state.jointInput ?? (proposal.jointPlan && state.jointTransfer?.epoch === before.level_epoch - 1
+            ? state.jointTransfer.measured : undefined), rows, afterRows, command, after.observation_ref, proposal.jointPlan);
           if (joint) state.jointInput = joint;
         }
         const previous = state.travel, measured = observeTravel(previous, rows, afterRows, command, after.observation_ref);

@@ -365,7 +365,7 @@ function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: 
   return { epoch, goal, traversed: pair ? [pair.key] : [], rejected: [], evidence: [receipt.beforeRef, ref] };
 }
 
-export function createSicPairedPassage(family = pairedPassageId): NativeFamily<Proposal> {
+export function createSicPairedPassage(family = pairedPassageId, transferObservedPassage = false): NativeFamily<Proposal> {
   const learns = family === learnPairedPassageId;
   let local: Memory | null = null;
   let previous: KnownPassage | null = null;
@@ -377,7 +377,7 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
     },
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
-      if (learns || previous?.completed !== observation.levels_completed || !previous.outlet) return null;
+      if (learns && !transferObservedPassage || previous?.completed !== observation.levels_completed || !previous.outlet) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
       return proposal?.scene.outlets ? proposal : null;
     },
@@ -387,8 +387,8 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
       const ref = observation.observation_ref;
       const prior = local?.epoch === observation.level_epoch ? local
         : learns ? acquireMotion(rows, ref, observation.level_epoch, execution) : null;
-      if (learns && !prior) return null;
       const known = previous?.completed === observation.levels_completed ? previous : null;
+      if (learns && !prior && !(transferObservedPassage && known)) return null;
       const parts = geometricComponents(rows);
       const scene = measure(rows, prior?.goal ?? null, parts) ?? (known ? patternedPassages(rows, parts, known, prior?.goal) : null);
       if (!scene) return null;
@@ -396,7 +396,7 @@ export function createSicPairedPassage(family = pairedPassageId): NativeFamily<P
       if (scene.unpaired?.length && !switches) return null;
       if (prior?.rewrite && !switches) return null;
       if (switches) scene.switches = switches;
-      const base = prior ?? { epoch: observation.level_epoch, evidence: scene.neutral && known ? [known.ref, ...(known.outlet?.refs ?? [])] : [],
+      const base = prior ?? { epoch: observation.level_epoch, evidence: known && (scene.neutral || (transferObservedPassage && scene.actor.color === known.actorPaint && scene.ground === known.ground)) ? [known.ref, ...(known.outlet?.refs ?? [])] : [],
         traversed: [], rejected: [], goal: scene.goal };
       const rewrite = base.rewrite ?? (switches ? { sites: switches.sites, visited: [], tests: [] } : null);
       const memory: Memory = rewrite ? { ...base, rewrite } : base;

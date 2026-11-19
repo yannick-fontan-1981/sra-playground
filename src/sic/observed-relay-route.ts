@@ -51,7 +51,7 @@ function chooseRelay(local: Local, view: RelayScene, rows: NativeRows, witness: 
     direction: mod(current + (forward ? 1 : -1), witness.count) };
 }
 
-function inspectRelayReturn(proposal: Proposal, witness: RelayWitness, first: NativeRows, second: NativeRows): Result {
+function inspectRelayReturn(proposal: Pick<Proposal, 'decision' | 'local'>, witness: RelayWitness, first: NativeRows, second: NativeRows): Result {
   const { decision, local } = proposal, slot = decision.slot;
   const view = readRelayScene(second, local.scene, witness.goalMark);
   if (slot === null || !view || !sameRelayLayout(local.scene, view)) return { valid: false };
@@ -84,6 +84,54 @@ function rememberRelayPhases(state: Local, decision: Decision, returned: Result,
   return { phaseDirections, pendingPhases: { ...state.pendingPhases, [slot]: [] } };
 }
 
+export type RelayAcquisition = { calibration: RelayCalibration; witness?: RelayWitness };
+
+export function acquireRelayReturn(prior: RelayAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  action: NativeCommand, first: NativeRows, second: NativeRows, frames: readonly NativeRows[]): RelayAcquisition | undefined {
+  if (!before.available_action_refs.includes('ACTION6') || !before.available_action_refs.includes('ACTION5')
+    || before.available_action_refs.includes('ACTION1') || before.available_action_refs.includes('ACTION2')) return prior;
+  if (frames.length < 3 && prior?.calibration.epoch !== before.level_epoch) return prior;
+  const measured = recordRelayCalibration(prior?.calibration ?? null, before, after, action, first, second, frames);
+  if (!measured) return prior;
+  const witness = measured.witness ?? prior?.witness;
+  return { calibration: measured.local, ...(witness ? { witness } : {}) };
+}
+
+export function projectRecalledRelay(prior: Local | null, observation: NativeObservation, rows: NativeRows, memory: RelayWitness) {
+  if (memory.epoch !== observation.level_epoch) return null;
+  const previous = prior?.epoch === observation.level_epoch ? prior : null;
+  const view = readRelayScene(rows, previous?.scene, memory.goalMark);
+  if (!view) return null;
+  if (previous?.stopped || previous && !sameRelayLayout(previous.scene, view)) return null;
+  const route = previous?.route ?? planRelayRoute(view, rows, memory);
+  if (!route) return null;
+  const bindings = !previous && view.recoveredGoal ? inferRelayBindings(view, route.source, rows) : {};
+  const directions = Object.fromEntries(Object.keys(bindings).flatMap(index => {
+    const slot = Number(index), { direction } = relayPhase(rows, view.controls[slot]!, memory, memory.phaseDirections);
+    return direction === null ? [] : [[slot, direction]];
+  }));
+  const state: Local = previous ?? { epoch: observation.level_epoch, scene: view, route, bindings,
+    selected: null, directions, seen: {}, facts: [], stopped: false,
+    ...(memory.phaseDirections ? { phaseDirections: memory.phaseDirections } : {}) };
+  const decision = chooseRelay(state, view, rows, memory);
+  if (!decision || !observation.available_action_refs.includes(decision.command.action_ref)) return null;
+  return { state, decision, view, route };
+}
+
+export function observeRecalledRelay(proposal: Pick<Proposal, 'decision' | 'local'>, witness: RelayWitness,
+  first: NativeRows, second: NativeRows, observationRef: string) {
+  const state = proposal.local, decision = proposal.decision, slot = decision.slot;
+  const returned = inspectRelayReturn(proposal, witness, first, second);
+  const next: Local = { ...state, stopped: !returned.valid, facts: [...state.facts.slice(-5), observationRef] };
+  if (!returned.valid || slot === null) return { matched: returned.valid, local: next };
+  next.selected = slot;
+  if (returned.body) next.bindings = { ...state.bindings, [slot]: returned.body };
+  if (returned.direction !== undefined && returned.direction !== null) next.directions = { ...state.directions, [slot]: returned.direction };
+  if (decision.phase) next.seen = { ...state.seen, [slot]: [...(state.seen[slot] ?? []), decision.phase] };
+  Object.assign(next, rememberRelayPhases(state, decision, returned, slot, witness.count));
+  return { matched: returned.valid, local: next };
+}
+
 export function createSicObservedRelayRoute(): NativeFamily<Proposal> {
   let calibration: RelayCalibration | null = null, witness: RelayWitness | null = null, local: Local | null = null;
   return {
@@ -100,22 +148,9 @@ export function createSicObservedRelayRoute(): NativeFamily<Proposal> {
     async propose(observation, rows, _inputs, remaining) {
       const memory = witness;
       if (remaining < 1 || memory?.epoch !== observation.level_epoch) return null;
-      const previous = local?.epoch === observation.level_epoch ? local : null;
-      const view = readRelayScene(rows, previous?.scene, memory.goalMark);
-      if (!view) return null;
-      if (previous?.stopped || previous && !sameRelayLayout(previous.scene, view)) return null;
-      const route = previous?.route ?? planRelayRoute(view, rows, memory);
-      if (!route) return null;
-      const bindings = !previous && view.recoveredGoal ? inferRelayBindings(view, route.source, rows) : {};
-      const directions = Object.fromEntries(Object.keys(bindings).flatMap(index => {
-        const slot = Number(index), { direction } = relayPhase(rows, view.controls[slot]!, memory, memory.phaseDirections);
-        return direction === null ? [] : [[slot, direction]];
-      }));
-      const state: Local = previous ?? { epoch: observation.level_epoch, scene: view, route, bindings,
-        selected: null, directions, seen: {}, facts: [], stopped: false,
-        ...(memory.phaseDirections ? { phaseDirections: memory.phaseDirections } : {}) };
-      const decision = chooseRelay(state, view, rows, memory);
-      if (!decision || !observation.available_action_refs.includes(decision.command.action_ref)) return null;
+      const selected = projectRecalledRelay(local, observation, rows, memory);
+      if (!selected) return null;
+      const { state, decision, view, route } = selected;
       const ref = observation.observation_ref, parent = 'G_official_completion';
       const traceableControl = decision.slot !== null && view.recoveredGoal && state.bindings[decision.slot];
       const label = decision.strategy === 'identify_relay_control' && traceableControl
@@ -159,15 +194,7 @@ export function createSicObservedRelayRoute(): NativeFamily<Proposal> {
         witness = retainScoredRelay(witness, proposal.local.route, before, after, first, frames, proposal.local.phaseDirections, proposal.local.scene) ?? witness;
       }
       if (!witness || before.level_epoch !== after.level_epoch) return { events: [] };
-      const state = proposal.local, decision = proposal.decision, slot = decision.slot;
-      const returned = inspectRelayReturn(proposal, witness, first, second);
-      local = { ...state, stopped: !returned.valid, facts: [...state.facts.slice(-5), after.observation_ref] };
-      if (!returned.valid || slot === null) return { events: [] };
-      local.selected = slot;
-      if (returned.body) local.bindings = { ...state.bindings, [slot]: returned.body };
-      if (returned.direction !== undefined && returned.direction !== null) local.directions = { ...state.directions, [slot]: returned.direction };
-      if (decision.phase) local.seen = { ...state.seen, [slot]: [...(state.seen[slot] ?? []), decision.phase] };
-      Object.assign(local, rememberRelayPhases(state, decision, returned, slot, witness.count));
+      local = observeRecalledRelay(proposal, witness, first, second, after.observation_ref).local;
       return { events: [] };
     },
     state: () => ({ calibration, witness, local }),

@@ -43,7 +43,7 @@ type State = { epoch: number; count: number; tried: string[]; evidence: string[]
   used?: string[]; preparing?: true; domain?: Domain; orders?: Record<string, OrderProof>; complements?: Record<string, Proof>;
   inversions?: Record<string, InversionProof>;
   receiverAnchor?: ReceiverBinding };
-type Transfer = { completed: number; used: string[]; evidence: string[]; toolControl?: string; shifts?: Partial<Record<Shift, Proof>>;
+export type ProfileTransferEvidence = { completed: number; used: string[]; evidence: string[]; toolControl?: string; shifts?: Partial<Record<Shift, Proof>>;
   orders?: Record<string, OrderProof> };
 type Work = { focus: number; held: boolean; profiles: number[][]; acquired: boolean[] };
 type Preparation = { phase: Strategy; command: NativeCommand; target: number; projected: Work; tool?: NativeBox; shift?: Shift;
@@ -155,7 +155,7 @@ export function measureProfileTransfer(observation: NativeObservation, rows: Nat
     ...(receivers.some(receiver => receiver.supportOnly) ? { receiverAnchor: anchor ?? rawBindings[0]! } : {}) };
 }
 
-const workshopState = (scene: Scene): Work => ({ focus: scene.focus, held: scene.held,
+export const workshopState = (scene: Scene): Work => ({ focus: scene.focus, held: scene.held,
   profiles: scene.bands.map(band => band.profile.values),
   acquired: scene.bands.map(band => receiverFilled(band.receiver)) });
 
@@ -164,7 +164,7 @@ function measureDomain(scene: Scene): Domain | null {
   return values.length ? { minimum: Math.min(...values), maximum: Math.max(...values) } : null;
 }
 
-function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: Transfer, remaining: number, height: number,
+export function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: ProfileTransferEvidence, remaining: number, height: number,
   domain: Domain | null, orders?: State['orders'], inversions?: State['inversions']): Preparation | null {
   const commandFor = (ref: string | undefined) => inputs.find(command => command.action_ref === ref);
   const transform = commandFor(prior.toolControl);
@@ -308,7 +308,7 @@ export function directProfileStep(scene: Scene, inputs: readonly NativeCommand[]
 
 export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
   let state = empty();
-  let retained: Transfer | null = null;
+  let retained: ProfileTransferEvidence | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyProfileTransferId,
@@ -461,7 +461,7 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
     restore(value: NativeRecord) {
       const { retained: transfer, ...previous } = value;
       state = structuredClone(previous as State);
-      retained = structuredClone((transfer as Transfer | undefined) ?? null);
+      retained = structuredClone((transfer as ProfileTransferEvidence | undefined) ?? null);
     },
   };
 }

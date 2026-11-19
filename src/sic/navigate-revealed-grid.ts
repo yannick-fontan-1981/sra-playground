@@ -1,5 +1,5 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
@@ -434,6 +434,56 @@ function choose({ grid, last, previousObstacle, consecutiveWaits, motions }: Sta
     return { action: { action_ref: 'ACTION5', data: {} }, kind: 'wait', target, uncertain: true };
   }
   return { action: { action_ref: next.action, data: {} }, kind: 'move', target, uncertain };
+}
+
+export type NavigationAcquisition = { epoch: number; grid: Grid | null; pulse?: string; movement?: string; won?: number };
+export function acquireRevealedNavigation(previous: NavigationAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows): NavigationAcquisition | undefined {
+  if (before.available_action_refs.includes('ACTION6')
+    || !['ACTION5', ...directions.map(([id]) => id)].every(id => before.available_action_refs.includes(id))) return previous;
+  if (previous?.won === before.levels_completed && previous.epoch === before.level_epoch - 1) return previous;
+  const local = previous?.epoch === before.level_epoch ? previous : { epoch: before.level_epoch, grid: measure(first) };
+  const { grid } = local;
+  if (!grid || grid.mechanisms) return local;
+  if (after.levels_completed > before.levels_completed) {
+    return local.movement ? { ...local, won: after.levels_completed } : local;
+  }
+  if (before.level_epoch !== after.level_epoch || before.frame_hash === after.frame_hash) return local;
+  const current = read(first, grid), next = current && read(second, grid, current);
+  if (!current || !next) return local;
+  const pulse = command.action_ref === 'ACTION5' && next.charges < current.charges
+    && Object.keys(next.memory).length > Object.keys(current.memory).length;
+  const movement = directions.some(([input, dx, dy]) => command.action_ref === input && next.position === current.position + grid.columns * dy + dx);
+  return { ...local, ...(pulse ? { pulse: after.observation_ref } : {}), ...(movement ? { movement: after.observation_ref } : {}) };
+}
+
+export function projectRecalledNavigation(transfer: NavigationAcquisition, previous: State | undefined, observation: NativeObservation, rows: NativeRows) {
+  if (!transfer.grid || !transfer.movement || transfer.won !== observation.levels_completed
+    || transfer.epoch !== observation.level_epoch - 1) return null;
+  const grid = previous?.grid ?? measure(rows) ?? measure(rows, transfer.grid);
+  if (!grid || grid.actor !== transfer.grid.actor || grid.tint !== transfer.grid.tint || grid.mechanisms) return null;
+  const last = read(rows, grid, previous?.last);
+  if (!last) return null;
+  const local: State = previous ? { ...previous, last } : { epoch: observation.level_epoch, grid, last, previousObstacle: null,
+    refs: transfer.pulse ? [transfer.pulse, transfer.movement] : [transfer.movement], consecutiveWaits: 0 };
+  const path = route(last, grid), choice = choose(local, path);
+  if (!choice) return null;
+  return { local, choice, box: tile(grid, choice.target), goal: tile(grid, grid.goal),
+    novelty: !previous && (!!grid.multipleSentries !== !!transfer.grid.multipleSentries || grid.size !== transfer.grid.size || grid.pitch !== transfer.grid.pitch) };
+}
+
+export function observeRecalledNavigation({ local, choice }: NonNullable<ReturnType<typeof projectRecalledNavigation>>,
+  rows: NativeRows, ref: string) {
+  const next = read(rows, local.grid, local.last);
+  if (!next) return { matched: false, local, stopped: true };
+  const matched = choice.kind === 'pulse' ? next.charges < local.last.charges && Object.keys(next.memory).length > Object.keys(local.last.memory).length
+    : choice.kind === 'move' ? next.position === choice.target : null;
+  if (choice.kind === 'move' && next.position === local.last.position
+    && !next.obstacles.includes(choice.target) && !next.risk.includes(choice.target)) next.memory[choice.target] = 'wall';
+  return { matched, stopped: false, local: { ...local, last: next,
+    previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
+    ...(local.grid.actorPixels ? { motions: track(local.last, next, local.grid, local.motions) } : {}),
+    refs: [...local.refs.slice(-4), ref], consecutiveWaits: choice.kind === 'wait' ? local.consecutiveWaits + 1 : 0 } };
 }
 
 export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {

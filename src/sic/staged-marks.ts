@@ -94,6 +94,28 @@ export function chooseStagedMarkStep({ preview, layers }: Scene, local: Pick<Sta
   return { ...confirm(reference.box, 'Advance the combined marks toward the reference'), prepared: true };
 }
 
+type MarkEffects = Pick<State, 'depositRef' | 'alignRef' | 'validPaint' | 'resizePixels'>;
+export function measureMarkEffects({ scene, choice, local }: Parameters<typeof checkStagedMarkStep>[0],
+  first: NativeRows, second: NativeRows, ref: string, confirmed: string | null): MarkEffects {
+  const resized = choice.input === 'ACTION2' && confirmed ? readStagedMarks(geometricComponents(second), local.model) : null;
+  return {
+    ...(confirmed === 'new_marked_layer_observed'
+      ? { depositRef: ref, validPaint: first[scene.preview[1]]![scene.preview[0]]! } : {}),
+    ...(confirmed === 'preview_alignment_observed' ? { alignRef: ref } : {}),
+    ...(resized ? { resizePixels: width(scene.preview) - width(resized.preview) } : {}),
+  };
+}
+
+export function retainSpanMeasurements({ model, resizePixels, validPaint, depositRef, alignRef }: { model: Model } & MarkEffects,
+  beforeRef: string, after: { levels_completed: number; observation_ref: string }): SpanMemory | null {
+  if (!resizePixels || validPaint === undefined || !depositRef || !alignRef) return null;
+  const pitch = height(model.reference.box), resize = resizePixels / pitch;
+  return Number.isInteger(resize) && resize > 0 ? {
+    pitch, resize, beamHeight: model.outlineHeight, targetPaint: model.reference.color, barPaint: model.donors[0]!.color, validPaint,
+    completed: after.levels_completed, refs: [depositRef, alignRef, beforeRef, after.observation_ref],
+  } : null;
+}
+
 function containsSignatures(layer: Layer, signatures: ReadonlySet<number>): boolean {
   return [...signatures].every(color => layer.marks.some(mark => mark.color === color));
 }
@@ -242,21 +264,14 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
         return { events: [] };
       }
       const { local, choice, scene } = proposal;
-      if (after.levels_completed > before.levels_completed && local.resizePixels && local.validPaint !== undefined && local.depositRef && local.alignRef) {
-        const pitch = height(local.model.reference.box), resize = local.resizePixels / pitch;
-        if (Number.isInteger(resize) && resize > 0) learned = { pitch, resize, beamHeight: local.model.outlineHeight,
-          targetPaint: local.model.reference.color, barPaint: local.model.donors[0]!.color, validPaint: local.validPaint,
-          completed: after.levels_completed, refs: [local.depositRef, local.alignRef, before.observation_ref, after.observation_ref] };
+      if (after.levels_completed > before.levels_completed) {
+        learned = retainSpanMeasurements(local, before.observation_ref, after) ?? learned;
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const confirmed = checkStagedMarkStep(proposal, second);
-      const resized = choice.input === 'ACTION2' && confirmed ? readStagedMarks(geometricComponents(second), local.model) : null;
       state = { ...local,
         refs: confirmed ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
-        ...(confirmed === 'new_marked_layer_observed'
-          ? { depositRef: after.observation_ref, validPaint: first[scene.preview[1]]![scene.preview[0]]! } : {}),
-        ...(confirmed === 'preview_alignment_observed' ? { alignRef: after.observation_ref } : {}),
-        ...(resized ? { resizePixels: width(scene.preview) - width(resized.preview) } : {}),
+        ...measureMarkEffects(proposal, first, second, after.observation_ref, confirmed),
         resizeRef: choice.input === 'ACTION2' && confirmed ? after.observation_ref : local.resizeRef,
         rejected: confirmed ? local.rejected : [...local.rejected, scene.preview.join(',')] };
       return { events: [] };

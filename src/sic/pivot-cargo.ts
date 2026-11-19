@@ -354,7 +354,7 @@ function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: 
   return { ...options[0]!, epoch, moves: true, interactions: [], failed: false, refs: [receipt.beforeRef, ref] };
 }
 
-export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposal> {
+export function createSicPivotCargo(family = pivotCargoId, transferObservedMotion = false): NativeFamily<Proposal> {
   const learns = family === learnPivotCargoId;
   let state: Memory | null = null;
   let witness: CargoWitness | null = null;
@@ -374,7 +374,8 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
       const ref = observation.observation_ref;
       const trained = witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed ? witness : null;
       const local = state?.epoch === observation.level_epoch ? state
-        : learns ? acquireMotion(rows, ref, observation.level_epoch, execution) : initial(rows, observation.level_epoch, trained);
+        : learns ? (transferObservedMotion && trained ? initial(rows, observation.level_epoch, trained) : null)
+          ?? acquireMotion(rows, ref, observation.level_epoch, execution) : initial(rows, observation.level_epoch, trained);
       const move = local?.steps[0];
       if (!local || local.failed || !move) return null;
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(r => r !== ref)];
@@ -449,7 +450,7 @@ export function createSicPivotCargo(family = pivotCargoId): NativeFamily<Proposa
     record(before, after, _action, first, second, proposal, index) {
       const local = index > 0 && state?.epoch === proposal.local.epoch ? state : proposal.local;
       const move = local.steps[0]!;
-      if (!learns && after.levels_completed > before.levels_completed && local.moves && move.intent === 'drop'
+      if ((!learns || transferObservedMotion) && after.levels_completed > before.levels_completed && local.moves && move.intent === 'drop'
         && move.next.delivered === (1 << local.at.cargo.length) - 1 && local.interactions.includes('attach')) {
         const { actorColor, core, pitch, freeColors, receiverColors } = local.layout;
         const receivers = receiverColors && [...new Map(freeColors.map((cargo, i) => [cargo, { cargo, receiver: receiverColors[i]! }])).values()];

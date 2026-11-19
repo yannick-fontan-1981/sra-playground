@@ -18,14 +18,14 @@ export const invitedCaptureStrategies = {
 type Cell = [number, number];
 type Body = [number, string];
 type Population = Map<string, Body>;
-type Jump = { over: Cell; by: Cell };
+export type CaptureJump = { over: Cell; by: Cell };
 type Move = { target: Cell; focus: Cell; victim: Cell | null; arrival?: Cell };
 type PortalPair = { ends: [Cell, Cell]; marker: Body };
 type ColorGoal = { color: number; swatch: NativeBox; cell: Cell; empty: number[][]; rank: string; confirmed?: true };
-type State = { epoch: number; geometry: NativeRecord; bases: number[]; focus: Cell | null; jumps: Record<string, Jump[]>;
+type State = { epoch: number; geometry: NativeRecord; bases: number[]; focus: Cell | null; jumps: Record<string, CaptureJump[]>;
   tried: string[]; stopped: boolean; evidence: string[]; rayRanks?: string[]; colorGoal?: ColorGoal;
   portals?: PortalPair[]; confirmedEntries?: string[] };
-type Transfer = { epoch: number; mask: Cell[]; pitch: number; jumps: Record<string, Jump[]>; evidence: string[] };
+type Transfer = { epoch: number; mask: Cell[]; pitch: number; jumps: Record<string, CaptureJump[]>; evidence: string[] };
 type Leg = { move: Move; selection: boolean; before: [number, number, ...Body][]; attempt: string };
 type Proposal = NativeProposal & Leg & { local: State; path?: Leg[]; needId: string };
 const key = (value: unknown) => JSON.stringify(value);
@@ -36,7 +36,7 @@ const order = (a: Cell, b: Cell) => a[0] - b[0] || a[1] - b[1];
 const cells = (keys: Iterable<string>) => [...keys].map(value => JSON.parse(value) as Cell);
 const packed = (bodies: Population) => reductionPacked(bodies) as [number, number, ...Body][];
 
-function dominant(pixels: number[][]) {
+export function captureCellInk(pixels: number[][]) {
   const counts = new Map<number, number>();
   for (const row of pixels) for (const color of row) counts.set(color, (counts.get(color) ?? 0) + 1);
   return [...counts].sort((a, b) => b[1] - a[1])[0]![0];
@@ -128,11 +128,11 @@ async function readCaptureScene(rows: NativeRows, state: State): Promise<Reducti
   return scene;
 }
 
-function invitations(scene: ReductionScene, bases: number[]) {
-  return cells([...scene.cells].filter(([cell, pixels]) => !scene.bodies.has(cell) && !bases.includes(dominant(pixels))).map(([cell]) => cell)).sort(order);
+export function captureInvitations(scene: ReductionScene, bases: number[]) {
+  return cells([...scene.cells].filter(([cell, pixels]) => !scene.bodies.has(cell) && !bases.includes(captureCellInk(pixels))).map(([cell]) => cell)).sort(order);
 }
 
-function symmetricJumps(jumps: Jump[]) {
+function symmetricJumps(jumps: CaptureJump[]) {
   const values = jumps.flatMap(({ over, by }) => [false, true].flatMap(swap => [-1, 1].flatMap(x => [-1, 1].map(y => {
     const transform = ([a, b]: Cell): Cell => swap ? [x * b, y * a] : [x * a, y * b];
     return { over: transform(over), by: transform(by) };
@@ -158,7 +158,7 @@ function rayOptions(board: Cell[], population: Population, from: Cell, direction
     .map(({ landing, victim_ref }: { landing: Cell; victim_ref: string }) => ({ target: landing, victim: JSON.parse(victim_ref) as Cell })) : [];
 }
 
-function captureRoute(scene: ReductionScene, state: State, exposed: Cell[], remaining: number) {
+export function deriveCaptureRoute(scene: ReductionScene, state: State, exposed: Cell[], remaining: number) {
   const goal = state.colorGoal;
   const available = new Set(exposed.map(key));
   const templates = new Map(Object.entries(state.jumps).map(([rank, jumps]) => [rank, symmetricJumps(jumps)]));
@@ -219,7 +219,7 @@ function captureRoute(scene: ReductionScene, state: State, exposed: Cell[], rema
   return null;
 }
 
-function captureEffect(proposal: Pick<Proposal, 'before' | 'local' | 'move'>, after: ReductionScene, selected: Cell) {
+export function measureCaptureEffect(proposal: Pick<Proposal, 'before' | 'move'> & { local: Pick<State, 'colorGoal'> }, after: ReductionScene, selected: Cell) {
   const original: Population = new Map(proposal.before.map(([x, y, color, rank]) => [key([x, y]), [color, rank]]));
   const { move } = proposal, goal = proposal.local.colorGoal;
   const landing = move.arrival ?? move.target, selectedBody = original.get(key(selected));
@@ -271,14 +271,14 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
         if (!origin) return null;
         const portals = measurePortals(origin);
         removePortalMarkers(origin, portals);
-        const bases = [...new Set([...origin.cells].filter(([cell]) => !origin.bodies.has(cell)).map(([, pixels]) => dominant(pixels)))];
+        const bases = [...new Set([...origin.cells].filter(([cell]) => !origin.bodies.has(cell)).map(([, pixels]) => captureCellInk(pixels)))];
         const target = cells(origin.bodies.keys()).find(cell => {
           const [x, y] = reductionPoint(origin, cell), half = Math.floor(origin.pitch / 2);
           return Math.abs(x - action.data.x!) <= half && Math.abs(y - action.data.y!) <= half;
         });
         const current = target && await retainedReductionScene(rows, reductionGeometry(origin));
         if (!target || !current || !equal(packed(origin.bodies), packed(removePortalMarkers(current, portals).bodies))) return null;
-        const before = invitations(origin, bases), after = invitations(current, bases);
+        const before = captureInvitations(origin, bases), after = captureInvitations(current, bases);
         return !before.length && after.length ? { current, target, bases, portals } : null;
       }) : null;
       if (learns && !prior && (!adopted || adopted.afterRef !== observation.observation_ref || adopted.levelEpoch !== observation.level_epoch)) return null;
@@ -294,14 +294,14 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       const colorGoal = !prior && previous && ranks.every(rank => previous.jumps[rank]?.length) ? measureColorGoal(rows, scene) : null;
       const reuse = !!previous && (rayRanks.length > 0 || !!colorGoal || portals.length > 0);
       const local: State = prior ?? { epoch: observation.level_epoch, geometry: reductionGeometry(scene),
-        bases: adopted?.scene.bases ?? [...new Set([...scene.cells].filter(([cell]) => !scene.bodies.has(cell)).map(([, pixels]) => dominant(pixels)))],
+        bases: adopted?.scene.bases ?? [...new Set([...scene.cells].filter(([cell]) => !scene.bodies.has(cell)).map(([, pixels]) => captureCellInk(pixels)))],
         focus: adopted?.scene.target ?? null, jumps: reuse ? previous!.jumps : {}, tried: [], stopped: false,
         evidence: adopted ? [adopted.beforeRef, adopted.afterRef] : reuse ? previous!.evidence : [],
         ...(rayRanks.length ? { rayRanks } : {}), ...(colorGoal ? { colorGoal } : {}), ...(portals.length ? { portals } : {}) };
-      const exposed = invitations(scene, local.bases);
+      const exposed = captureInvitations(scene, local.bases);
       const before = packed(scene.bodies);
       const attemptKey = (target: Cell) => key([before, local.focus, target]);
-      const route = Object.keys(local.jumps).length ? captureRoute(scene, local, exposed, remaining) : null;
+      const route = Object.keys(local.jumps).length ? deriveCaptureRoute(scene, local, exposed, remaining) : null;
       if (scene.bodies.size > 8 && !route) return null;
       const offered = local.focus && exposed.find(target => !local.tried.includes(attemptKey(target)));
       const pending = cells(scene.bodies.keys()).sort((a, b) => a[1] - b[1] || a[0] - b[0])
@@ -404,7 +404,7 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       if (index > 0 && proposal.path) {
         const { local } = proposal, leg = proposal.path[index]!, scene = await readCaptureScene(packet.frame_rows, local);
         const admitted = local.epoch === observation.level_epoch && !!scene && equal(packed(scene.bodies), leg.before)
-          && (leg.selection ? scene.bodies.has(key(leg.move.target)) : invitations(scene, local.bases).some(cell => equal(cell, leg.move.target)));
+          && (leg.selection ? scene.bodies.has(key(leg.move.target)) : captureInvitations(scene, local.bases).some(cell => equal(cell, leg.move.target)));
         return { admitted, reason: admitted ? 'capture_board_and_invitation_confirmed' : 'capture_domain_changed' };
       }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
@@ -415,8 +415,8 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const scene = await readCaptureScene(second, proposal.local);
       const leg = proposal.path?.[index] ?? proposal;
-      const matched = !!scene && (leg.selection ? equal(packed(scene.bodies), leg.before) && invitations(scene, proposal.local.bases).length > 0
-        : !!captureEffect({ ...leg, local: proposal.local }, scene, leg.move.focus));
+      const matched = !!scene && (leg.selection ? equal(packed(scene.bodies), leg.before) && captureInvitations(scene, proposal.local.bases).length > 0
+        : !!measureCaptureEffect({ ...leg, local: proposal.local }, scene, leg.move.focus));
       return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
         reason: matched ? 'invitation_or_capture_observed' : 'capture_effect_unconfirmed' };
     },
@@ -429,8 +429,8 @@ export function createSicVerifyCaptureRoute(family = verifyCaptureRouteId): Nati
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const scene = await readCaptureScene(second, local);
-      const effect = !selection && scene ? captureEffect({ ...leg, local }, scene, move.focus) : null;
-      const selected = selection && !!scene && equal(packed(scene.bodies), leg.before) && invitations(scene, local.bases).length > 0;
+      const effect = !selection && scene ? measureCaptureEffect({ ...leg, local }, scene, move.focus) : null;
+      const selected = selection && !!scene && equal(packed(scene.bodies), leg.before) && captureInvitations(scene, local.bases).length > 0;
       const jumps = { ...local.jumps };
       if (effect) jumps[effect.rank] = [...(jumps[effect.rank] ?? []), effect.jump];
       const landing = move.arrival ?? move.target;

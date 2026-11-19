@@ -232,32 +232,61 @@ function terminalFrame(scene: Scene, selected: number, expected: NativePoint[], 
   });
 }
 
+export type RelationsAcquisition = { training?: Training; witness?: Witness };
+
+export function acquireRelationReturn(prior: RelationsAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  action: NativeCommand, first: NativeRows, second: NativeRows, frames: readonly NativeRows[]): RelationsAcquisition | undefined {
+  if (action.action_ref !== 'ACTION6' || before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))
+    || before.frame_hash === after.frame_hash) return prior;
+  const previous = prior?.training?.epoch === before.level_epoch ? prior.training : undefined;
+  const scene = readScene(before.entities, first, previous?.scene);
+  const { x, y } = action.data;
+  if (!scene || x === undefined || y === undefined) return prior;
+  const selected = scene.settings.findIndex(({ switchBox: [l, t, r, b] }) => l <= x && x <= r && t <= y && y <= b);
+  if (selected < 0) return prior;
+  const expected = project(scene.rooms, scene.relations, scene.settings, scene.grid.pitch, 1 << selected);
+  if (after.levels_completed > before.levels_completed) {
+    return previous && terminalFrame(scene, selected, expected, frames)
+      ? { ...prior, witness: { epoch: after.level_epoch, score: after.levels_completed, refs: [...previous.refs, after.observation_ref] } }
+      : prior;
+  }
+  if (after.level_epoch !== before.level_epoch || expected.every((point, i) => same(point, scene.rooms[i]!.position))) return prior;
+  const result = readScene(after.entities, second, scene);
+  return result && confirms(scene, result, selected, expected)
+    ? { ...prior, training: { epoch: before.level_epoch, scene: result, refs: [...(previous?.refs ?? [before.observation_ref]).slice(-3), after.observation_ref] } }
+    : prior;
+}
+
+export function projectRecalledRelation(transfer: RelationsAcquisition, previous: Local | undefined, observation: NativeObservation, rows: NativeRows, remaining: number) {
+  const { witness } = transfer;
+  if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed || previous?.blocked) return null;
+  const scene = readScene(observation.entities, rows, previous?.scene);
+  const selected = scene && nextSetting(scene, remaining);
+  if (!scene || selected === null) return null;
+  const control = scene.settings[selected]!;
+  const expected = project(scene.rooms, scene.relations, scene.settings, scene.grid.pitch, 1 << selected);
+  const target = scene.rooms.find((room, i) => room.destination && !same(room.position, expected[i]!));
+  return { scene, selected, expected, control, target: target?.box ?? control.switchBox,
+    evidence: [...new Set([...witness.refs, ...previous?.refs ?? []])],
+    novelty: !previous && transfer.training?.scene.rooms.length !== scene.rooms.length };
+}
+
+export function observeRecalledRelation(projection: NonNullable<ReturnType<typeof projectRecalledRelation>>, after: NativeObservation, rows: NativeRows) {
+  const result = readScene(after.entities, rows, projection.scene);
+  const matched = confirms(projection.scene, result, projection.selected, projection.expected);
+  return { matched, local: { epoch: after.level_epoch, scene: result ?? projection.scene, blocked: !matched,
+    refs: [...projection.evidence.slice(-4), after.observation_ref] } };
+}
+
 export function createSicObservedSharedRelations(): NativeFamily<Proposal> {
   let training: Training | null = null, witness: Witness | null = null, local: Local | null = null;
   return {
     id: observedSharedRelationsId,
     observePublicOutcome(before, after, action, first, second, frames = []) {
-      if (action.action_ref !== 'ACTION6' || before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))
-        || before.frame_hash === after.frame_hash) return;
-      const previous = training?.epoch === before.level_epoch ? training : null;
-      const scene = readScene(before.entities, first, previous?.scene);
-      if (!scene) return;
-      const { x, y } = action.data;
-      if (x === undefined || y === undefined) return;
-      const selected = scene.settings.findIndex(({ switchBox: [l, t, r, b] }) => l <= x && x <= r && t <= y && y <= b);
-      if (selected < 0) return;
-      const expected = project(scene.rooms, scene.relations, scene.settings, scene.grid.pitch, 1 << selected);
-      if (after.levels_completed > before.levels_completed) {
-        if (previous && terminalFrame(scene, selected, expected, frames)) {
-          witness = { epoch: after.level_epoch, score: after.levels_completed, refs: [...previous.refs, after.observation_ref] };
-        }
-        return;
-      }
-      if (after.level_epoch !== before.level_epoch || expected.every((point, i) => same(point, scene.rooms[i]!.position))) return;
-      const result = readScene(after.entities, second, scene);
-      if (result && confirms(scene, result, selected, expected)) {
-        training = { epoch: before.level_epoch, scene: result, refs: [...(previous?.refs ?? [before.observation_ref]).slice(-3), after.observation_ref] };
-      }
+      const measured = acquireRelationReturn({ ...(training ? { training } : {}), ...(witness ? { witness } : {}) },
+        before, after, action, first, second, frames);
+      training = measured?.training ?? null;
+      witness = measured?.witness ?? null;
     },
     async propose(observation, rows, _inputs, remaining) {
       if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed || remaining < 1

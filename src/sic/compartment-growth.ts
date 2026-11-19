@@ -1,5 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { selectTimedCompartment } from './timed-compartment-growth.ts';
@@ -246,7 +246,7 @@ function learnFeeding(before: Inhabitant[], after: Inhabitant[], ref: string): C
   return starter.length === 1 ? { food: food.color, starter: starter[0]!, activated: activated[0]!, ref } : undefined;
 }
 
-function selectInteraction(layout: CompartmentLayout, rows: NativeRows, model: Reusable): Choice | null {
+export function selectCompartmentInteraction(layout: CompartmentLayout, rows: NativeRows, model: Reusable): Choice | null {
   const contents = readInhabitants(layout, rows);
   const threshold = contents.find(sprite => sprite.color === model.threshold);
   if (!threshold || contents.filter(sprite => sprite.color === model.threshold).length !== 1) return null;
@@ -293,7 +293,7 @@ function clickInterface(observation: NativeObservation): boolean {
     && !observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref));
 }
 
-function assess(proposal: Proposal, before: NativeRows, after: NativeRows): string | null {
+export function assessCompartmentInteraction(proposal: Pick<Proposal, 'local' | 'choice' | 'food' | 'grower' | 'timing'>, before: NativeRows, after: NativeRows): string | null {
   const { layout } = proposal.local;
   const { choice } = proposal;
   const { gate, phase, focus } = choice;
@@ -314,6 +314,44 @@ function assess(proposal: Proposal, before: NativeRows, after: NativeRows): stri
       ? 'growth_observed_after_remote_gate_opening' : null;
   }
   return null;
+}
+
+function observeCompartmentGate(calibration: Calibration, gate: Gate, before: NativeObservation, after: NativeObservation,
+  first: NativeRows, second: NativeRows): { calibration: Calibration; model?: Reusable } {
+  const { layout, feeding, threshold } = calibration, population = readInhabitants(layout, first);
+  if (after.levels_completed > before.levels_completed) {
+    const reference = population.find(sprite => sprite.color === threshold);
+    if (!feeding || !reference) return { calibration };
+    const open = openGates(layout, first), region = gateRegion(reference.room, [...open, gate]);
+    if (gateRegion(reference.room, open).size === region.size) return { calibration };
+    const candidates = population.filter(sprite => sprite.color !== threshold && sprite.area === reference.area && region.has(sprite.room));
+    if (candidates.length !== 1) return { calibration };
+    return { calibration, model: { food: feeding.food, starter: feeding.starter, activated: feeding.activated, grower: candidates[0]!.color,
+      threshold, completed: after.levels_completed, evidence: [feeding.ref, before.observation_ref, after.observation_ref] } };
+  }
+  if (!feeding && openGates(layout, second).includes(gate)) {
+    const observed = learnFeeding(population, readInhabitants(layout, second), after.observation_ref);
+    if (observed) return { calibration: { ...calibration, feeding: observed } };
+  }
+  return { calibration };
+}
+
+export type CompartmentAcquisition = { epoch: number; calibration: Calibration | null; model?: Reusable };
+
+export function acquireCompartmentReturn(prior: CompartmentAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows): CompartmentAcquisition | undefined {
+  if (!clickInterface(before) || command.action_ref !== 'ACTION6' || prior?.model?.completed === before.levels_completed) return prior;
+  let local = prior;
+  if (!local || local.epoch !== before.level_epoch) {
+    const layout = measureCompartments(first), reference = layout && uniqueLargest(readInhabitants(layout, first));
+    local = { epoch: before.level_epoch, calibration: layout && reference ? { layout, threshold: reference.color } : null };
+  }
+  if (!local.calibration) return local;
+  const { layout } = local.calibration, { x, y } = command.data;
+  if (x === undefined || y === undefined) return local;
+  const gate = layout.gates.find(({ point: [gx, gy] }) => Math.abs(gx - x) <= 3 && Math.abs(gy - y) <= 3);
+  if (!gate || openGates(layout, first).includes(gate)) return local;
+  return { ...local, ...observeCompartmentGate(local.calibration, gate, before, after, first, second) };
 }
 
 export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
@@ -343,21 +381,9 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       if (!meter && before.level_epoch === after.level_epoch && openGates(layout, second).includes(gate)) {
         meter = learnMeter(layout, first, second, after.observation_ref);
       }
-      const population = readInhabitants(layout, first);
-      if (after.levels_completed > before.levels_completed) {
-        const { feeding, threshold } = calibration;
-        const boss = population.find(sprite => sprite.color === threshold);
-        const open = openGates(layout, first);
-        if (!feeding || !boss || gateRegion(boss.room, open).size === gateRegion(boss.room, [...open, gate]).size) return;
-        const next = gateRegion(boss.room, [...open, gate]);
-        const candidates = population.filter(sprite => sprite.color !== threshold && sprite.area === boss.area && next.has(sprite.room));
-        if (candidates.length !== 1) return;
-        model = { food: feeding.food, starter: feeding.starter, activated: feeding.activated, grower: candidates[0]!.color,
-          threshold, completed: after.levels_completed, evidence: [feeding.ref, before.observation_ref, after.observation_ref] };
-      } else if (!calibration.feeding && openGates(layout, second).includes(gate)) {
-        const feeding = learnFeeding(population, readInhabitants(layout, second), after.observation_ref);
-        if (feeding) calibration = { ...calibration, feeding };
-      }
+      const acquisition = observeCompartmentGate(calibration, gate, before, after, first, second);
+      calibration = acquisition.calibration;
+      if (acquisition.model) model = acquisition.model;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !model || model.completed !== observation.levels_completed || !clickInterface(observation)) return null;
@@ -367,7 +393,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       const turns = meter && readMeter(rows, meter);
       const timed = model.completed >= 2 && turns !== null
         ? selectTimedCompartment(layout, rows, model, Math.min(turns, remaining), prior?.clockGate, prior?.stagedGrowth) : null;
-      const choice = timed ?? selectInteraction(layout, rows, model);
+      const choice = timed ?? selectCompartmentInteraction(layout, rows, model);
       if (!choice) return null;
       const { point: [x, y] } = choice.gate;
       const ref = observation.observation_ref;
@@ -425,7 +451,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const effect = assess(proposal, first, second);
+      const effect = assessCompartmentInteraction(proposal, first, second);
       return { matched: effect !== null, seal_prefix: true, reason: effect ?? 'compartment_interaction_unconfirmed' };
     },
     record(before, after, _action, first, second, proposal) {
@@ -433,7 +459,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
         model = { ...model, completed: after.levels_completed,
           evidence: [...model.evidence.slice(-4), before.observation_ref, after.observation_ref] };
       } else if (before.level_epoch === after.level_epoch) {
-        const confirmed = assess(proposal, first, second);
+        const confirmed = assessCompartmentInteraction(proposal, first, second);
         const phase = proposal.choice.phase;
         const stagedGrowth = phase === 'stage_growth' || phase === 'advance_growth';
         local = { ...proposal.local, evidence: [...proposal.local.evidence, after.observation_ref].slice(-4),

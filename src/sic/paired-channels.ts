@@ -305,7 +305,7 @@ async function planSeparated(layout: Layout, budget: number, execution?: NativeE
   return best;
 }
 
-async function selectSeparatedLayout(rows: NativeRows, recipes: readonly Recipe[], remaining: number, execution?: NativeExecution) {
+export async function selectSeparatedLayout(rows: NativeRows, recipes: readonly Recipe[], remaining: number, execution?: NativeExecution) {
   async function search(layouts: Layout[], seedLimit: number) {
     let best: { layout: Layout; threads: Thread[] } | null = null, budget = remaining;
     for (const layout of layouts) {
@@ -360,7 +360,7 @@ function mixConfirmed(pair: Pair, tileColor: number, before: NativeRows, after: 
     || tileColor === pair.color && sourcePigmentChanged(source, pair.color, before, after));
 }
 
-function separatedReturn(proposal: Proposal, before: NativeRows, after: NativeRows): boolean {
+function separatedReturn(proposal: Pick<Proposal, 'pair' | 'tile' | 'merging'> & { state: Pick<State, 'layout'> }, before: NativeRows, after: NativeRows): boolean {
   const { layout } = proposal.state;
   if (!layout.pairs.some(pair => pair.other || pair.branches?.length)) return true;
   const { from, other, color } = proposal.pair, pitch = layout.pitch;
@@ -391,13 +391,18 @@ export function nextChannelTile(rows: NativeRows, { layout, threads }: NonNullab
   for (const { pair, clicks } of threads) {
     const closed = clicks.filter(tile => measureTile(rows, ...tile.point, layout.pitch).color === layout.closed);
     if (!closed.length && !endpointReached(rows, pair, layout.pitch)) return null;
-    if (closed.length) return { pair, tile: closed[0]!, completes: closed.length === 1 };
+    if (closed.length) {
+      const tile = closed[0]!, mergeAt = threads.find(thread => thread.pair === pair)?.mergeAt;
+      return { pair, tile, completes: closed.length === 1, ...(mergeAt && key(mergeAt.point) === key(tile.point) ? { merging: true as const } : {}) };
+    }
   }
   return null;
 }
 
-export function matchesChannelOpening(rows: NativeRows, layout: Layout, { pair, tile, completes }: NonNullable<ReturnType<typeof nextChannelTile>>) {
-  return measureTile(rows, ...tile.point, layout.pitch).color !== layout.closed
+export function matchesChannelOpening(before: NativeRows, rows: NativeRows, layout: Layout,
+  step: NonNullable<ReturnType<typeof nextChannelTile>>) {
+  const { pair, tile, completes } = step;
+  return separatedReturn({ ...step, state: { layout } }, before, rows) && measureTile(rows, ...tile.point, layout.pitch).color !== layout.closed
     && (!completes || endpointReached(rows, pair, layout.pitch));
 }
 

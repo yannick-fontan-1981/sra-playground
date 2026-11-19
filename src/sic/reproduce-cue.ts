@@ -294,8 +294,9 @@ function witnessedAim(rows: NativeRows, proposal: Proposal, epoch: number, ref: 
   return aimPoseMatches(rows, candidate, { box: receiver, heading }) ? candidate : null;
 }
 
-export function createSicReproduceCue(family = reproduceCueId): NativeFamily<CueProposal> {
+export function createSicReproduceCue(family = reproduceCueId, transferObservedCue = false): NativeFamily<CueProposal> {
   const learns = family === learnAnimatedCueId;
+  let scoredCue: { epoch: number; refs: string[] } | null = null;
   let state: State | null = null;
   let witness: AimWitness | null = null;
   let remoteState: RemoteState | null = null;
@@ -452,16 +453,17 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Cue
       const opening = await offerLinked(observation, rows, remaining, execution) ?? await offerRemote(observation, rows, remaining, execution);
       if (opening) return opening;
       const supports = (a: string, b: string) => observation.available_action_refs.includes(a) && observation.available_action_refs.includes(b);
-      if (!supports('ACTION3', 'ACTION4') && (learns || !supports('ACTION1', 'ACTION2'))) return null;
+      const comparableCue = transferObservedCue && scoredCue?.epoch === observation.level_epoch ? scoredCue : null;
+      if (!supports('ACTION3', 'ACTION4') && (learns && !comparableCue || !supports('ACTION1', 'ACTION2'))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const readDemonstration = learns && !prior;
+      const readDemonstration = learns && !prior && !comparableCue;
       if (readDemonstration && !execution?.readAnimatedCells) return null;
-      const scene = prior?.scene ?? measure(rows, !learns);
+      const scene = prior?.scene ?? measure(rows, !learns || !!comparableCue);
       if (!scene || (scene.visible?.axis === 1 ? !supports('ACTION1', 'ACTION2') : !supports('ACTION3', 'ACTION4'))) return null;
       const demonstration = readDemonstration ? execution?.readAnimatedCells?.(scene.cells.map(cell => cell.point)) : null;
       if (readDemonstration && (!demonstration || demonstration.afterRef !== observation.observation_ref
         || demonstration.levelEpoch !== observation.level_epoch || !cueSubset(demonstration.cells, scene.cells))) return null;
-      const local = prior ?? { epoch: observation.level_epoch, scene, cues: demonstration?.cells ?? scene.visible?.cells ?? [], refs: demonstration ? [demonstration.beforeRef] : [],
+      const local = prior ?? { epoch: observation.level_epoch, scene, cues: demonstration?.cells ?? scene.visible?.cells ?? [], refs: demonstration ? [demonstration.beforeRef] : scene.visible && comparableCue ? comparableCue.refs : [],
         demonstrationRef: demonstration?.afterRef ?? null,
         prepared: false, receiver: null, horizontal: null, rejected: [] };
       const step = choose(local, rows);
@@ -572,6 +574,9 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Cue
       const bound = cueStep(proposal, index, index > 0 && state?.epoch === proposal.local.epoch ? state : proposal.local);
       const { local, step } = bound;
       if (after.levels_completed > before.levels_completed) {
+        if (transferObservedCue && local.prepared) {
+          scoredCue = { epoch: after.level_epoch, refs: [...local.refs.slice(-4), before.observation_ref, after.observation_ref] };
+        }
         witness = witnessedAim(first, { ...proposal, ...bound }, after.level_epoch, after.observation_ref);
         if (local.resize && local.horizontal && local.prepared) resize = { ...local.resize, unit: Math.abs(local.horizontal),
           refs: [...local.refs.slice(-2), after.observation_ref] };
@@ -595,7 +600,7 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Cue
         rejected: reason ? local.rejected : [...local.rejected, JSON.stringify([step.action, local.receiver, local.cues.length])] };
       return { events: [] };
     },
-    state: () => ({ state, witness, remoteState, resize, shot, transfer, linked }),
+    state: () => ({ state, witness, remoteState, resize, shot, transfer, linked, ...(scoredCue ? { scoredCue } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       witness = structuredClone((value.witness ?? null) as AimWitness | null);
@@ -604,6 +609,7 @@ export function createSicReproduceCue(family = reproduceCueId): NativeFamily<Cue
       shot = structuredClone((value.shot ?? null) as typeof shot);
       transfer = structuredClone((value.transfer ?? null) as typeof transfer);
       linked = structuredClone((value.linked ?? null) as LinkedCue | null);
+      scoredCue = structuredClone((value.scoredCue ?? null) as typeof scoredCue);
     },
   };
 }
