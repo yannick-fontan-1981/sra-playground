@@ -1,0 +1,114 @@
+[
+  {
+    "level": 1,
+    "option": "disableWarriorChains",
+    "status": "unsolvable",
+    "states": 784,
+    "expanded": 784,
+    "ms": 22
+  },
+  {
+    "level": 1,
+    "option": "disablePistons",
+    "status": "unsolvable",
+    "states": 2668,
+    "expanded": 2668,
+    "ms": 119
+  },
+  {
+    "level": 1,
+    "option": "disablePlatforms",
+    "status": "unsolvable",
+    "states": 784,
+    "expanded": 784,
+    "ms": 41
+  },
+  {
+    "level": 1,
+    "option": "disableReflections",
+    "status": "unsolvable",
+    "states": 5736,
+    "expanded": 5736,
+    "ms": 120
+  },
+  {
+    "level": 2,
+    "option": "disableMirrorMotion",
+    "status": "unsolvable",
+    "states": 2608,
+    "expanded": 2608,
+    "ms": 84
+  },
+  {
+    "level": 2,
+    "option": "disableSelection",
+    "status": "unsolvable",
+    "states": 156,
+    "expanded": 156,
+    "ms": 3
+  },
+  {
+    "level": 7,
+    "option": "disablePlatforms",
+    "status": "unsolvable",
+    "states": 2520,
+    "expanded": 2520,
+    "ms": 84
+  },
+  {
+    "level": 7,
+    "option": "disableWarriorChains",
+    "status": "unsolvable",
+    "states": 2520,
+    "expanded": 2520,
+    "ms": 69
+  },
+  {
+    "level": 1,
+    "option": "removeCrate",
+    "at": {
+      "x": 3,
+      "y": 3
+    },
+    "status": "unsolvable",
+    "states": 8076,
+    "expanded": 8076,
+    "ms": 302
+  },
+  {
+    "level": 1,
+    "option": "removeCrate",
+    "at": {
+      "x": 6,
+      "y": 4
+    },
+    "status": "unsolvable",
+    "states": 2056,
+    "expanded": 2056,
+    "ms": 34
+  },
+  {
+    "level": 1,
+    "option": "removeCrate",
+    "at": {
+      "x": 7,
+      "y": 4
+    },
+    "status": "unsolvable",
+    "states": 2840,
+    "expanded": 2840,
+    "ms": 59
+  },
+  {
+    "level": 1,
+    "option": "removeCrate",
+    "at": {
+      "x": 8,
+      "y": 8
+    },
+    "status": "unsolvable",
+    "states": 5736,
+    "expanded": 5736,
+    "ms": 96
+  }
+]

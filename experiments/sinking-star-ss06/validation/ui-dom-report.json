@@ -1,0 +1,92 @@
+{
+  "success": true,
+  "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "The complete compiled HTML opens level 1 with both colored heroes, exact engine pixels and its rich tutorial expanded",
+    "Five controls, eight tutorial objectives, distinct reflection previews and the duo-specific water, mirror, circuit and monster rules are present",
+    "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
+    "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
+    "Movement uses every frame and duration; directions, reflection and selection are blocked while animating, while Space still prevents scrolling",
+    "Undo during an animation restores both heroes and cancels stale callbacks",
+    "Reset, level changes and return to tutorial cancel pending animation callbacks and reset the appropriate counters",
+    "Every level displays its own source attribution and relevant piston/platform help, with all eight rooms available",
+    "Level 8 has one red Warrior and one yellow destination; orange roles and selection instructions disappear, selection keys cannot create an action, Undo works during animation and returning to a duo restores its controls",
+    "Level 8 explains deployable water platforms and circuit switching for its solo Warrior; the eight original duo tutorial goals are preserved",
+    "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
+    "The complete tutorial earns all eight discoveries, including both push strengths, platform, reflection, gate and two simultaneous goals",
+    "All eight witnesses replay through the actual UI with exact frames and timing; victory needs all rooms and disables direction, reflection and hero selection",
+    "Undo exits final victory and restores progression; Restart returns to the open tutorial with zero completions",
+    "Real reachable defeats display all movement/combat frames before the terminal overlay, block further commands, and support mid-animation Undo plus defeat-panel Undo/Reset"
+  ],
+  "platformCoverage": {
+    "circuitsWithBothVisibleStates": [
+      "8:ancrage",
+      "8:alternance"
+    ],
+    "visibleCells": 7,
+    "level8PlatformCount": 7
+  },
+  "witnessCoverage": {
+    "levels": 8,
+    "actions": 433,
+    "frames": 1338,
+    "selectionActions": 17,
+    "allFrameDurationsVerified": true
+  },
+  "defeatCoverage": [
+    {
+      "level": 6,
+      "cause": "Attaque mortelle de monstre",
+      "actions": 7,
+      "frames": 8,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        80,
+        90,
+        100,
+        110,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    },
+    {
+      "level": 6,
+      "cause": "Chute par reflet",
+      "actions": 7,
+      "frames": 9,
+      "frameDurationsMs": [
+        70,
+        90,
+        40,
+        40,
+        80,
+        90,
+        100,
+        110,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    },
+    {
+      "level": 8,
+      "cause": "Retrait de la première plateforme violette sous le Guerrier après blocage du circuit vert",
+      "actions": 52,
+      "frames": 6,
+      "frameDurationsMs": [
+        70,
+        90,
+        40,
+        60,
+        80,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    }
+  ]
+}
