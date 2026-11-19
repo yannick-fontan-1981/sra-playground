@@ -157,8 +157,26 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
   let witness: SurfaceWitness | null = null;
   let mapped: LearnedSurfaces | null = null;
   let decide: NativeProgramHandle | undefined;
+  function rememberCrossing(before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows, scene: Scene) {
+    if (!scene.peer) return;
+    const next = sceneFor(second, scene.model, before.level_epoch);
+    if (!next || next.peer) return;
+    const roles = calibrateSurface(scene.model, first);
+    const a = roles && measureSurface(first, roles), b = roles && measureSurface(second, roles);
+    if (roles && a && b && a.address.floor !== b.address.floor) {
+      ascertained = { epoch: before.level_epoch, roles, ref: after.observation_ref };
+    }
+  }
   return {
     id: family,
+    observePublicOutcome(before, after, command, first, second) {
+      if (!learns || !transferObservedSurface || before.level_epoch !== after.level_epoch || before.frame_hash === after.frame_hash
+        || before.available_action_refs.includes('ACTION6') || !directions.every(([ref]) => before.available_action_refs.includes(ref))
+        || !directions.some(([ref]) => ref === command.action_ref)
+        || ascertained?.epoch === before.level_epoch) return;
+      const scene = sceneFor(first, null, before.level_epoch);
+      if (scene) rememberCrossing(before, after, first, second, scene);
+    },
     async attachPrograms(registry) {
       if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -316,11 +334,7 @@ export function createSicSwitchedSurface(family = switchedSurfaceId, transferObs
           witness = { epoch: after.level_epoch, score: after.levels_completed, roles: prior.roles,
             refs: [prior.ref, before.observation_ref, after.observation_ref] };
         } else if (!prior && scene.peer && next && !next.peer) {
-          const roles = calibrateSurface(scene.model, first);
-          const a = roles && measureSurface(first, roles), b = roles && measureSurface(second, roles);
-          if (roles && a && b && a.address.floor !== b.address.floor) {
-            ascertained = { epoch: before.level_epoch, roles, ref: after.observation_ref };
-          }
+          rememberCrossing(before, after, first, second, scene);
         }
       }
       if (!sameLevel) return { events: [] };

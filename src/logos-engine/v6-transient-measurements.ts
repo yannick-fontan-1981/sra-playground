@@ -4,7 +4,7 @@
  */
 import { supportParts,supportCompare,supportSame,supportKey } from './v6-support-measurements.ts';
 import { symbolicDigest } from './v6-hash.ts';
-import type { NativeRows } from './v6-native-types.ts';
+import type { NativePoint, NativeRows } from './v6-native-types.ts';
 type R=Record<string,any>;
 const gcd=(a:number,b:number):number=>{while(b)[a,b]=[b,a%b];return a;};
 export const transientCenterTwice=(c:R):number[]=>[c.bbox.top+c.bbox.bottom,c.bbox.left+c.bbox.right];
@@ -66,7 +66,7 @@ export function transientQuadratic(values:readonly number[]):number[]{
 }
 
 type CalibratedAim = { point: readonly number[]; observedDirection: readonly number[]; displayOverlay?: string };
-export function ballisticContactClick(track:readonly R[],source:R,peer:R,beforeComponents:readonly R[],rows:NativeRows,avoid:readonly number[]|null=null,velocityScale=1,calibrated?:CalibratedAim):[number[]|null,number[]|null]{
+export function ballisticContactClick(track:readonly R[],source:R,peer:R,beforeComponents:readonly R[],rows:NativeRows,avoid:readonly number[]|null=null,velocityScale=1,calibrated?:CalibratedAim,excludedAims:readonly NativePoint[]=[]):[number[]|null,number[]|null]{
   if(track.length<4||beforeComponents.filter(c=>c.value===peer.value).length!==1)return[null,null];
   const points=track.map(center),[vr,square]=transientQuadratic(points.map(p=>p[0]!)),gravity=2*square!,vc=transientLinearSlope(points.map(p=>p[1]!));
   const observedColumn=calibrated ? calibrated.observedDirection[1]!/Math.hypot(...calibrated.observedDirection) : 0;
@@ -76,7 +76,7 @@ export function ballisticContactClick(track:readonly R[],source:R,peer:R,beforeC
   const height=rows.length,width=rows[0]!.length,background=[...beforeComponents].sort((a,b)=>b.area-a.area)[0]!,excluded=new Set([source.component_id,peer.component_id,background.component_id,calibrated?.displayOverlay]),blocked=new Set<string>(beforeComponents.filter(c=>!excluded.has(c.component_id)&&c.area>1).flatMap(c=>c.pixels.map(supportKey)));
   const fullWidth=beforeComponents.filter(c=>c.bbox.width>=width&&c.bbox.top>Math.floor(height/2)).map(c=>c.bbox.top);let playBottom=fullWidth.length?Math.min(...fullWidth):height;const fill=measureScalarFillDisplay(rows),fillIndex=fill.scalar_fill_index;
   if(fill.scalar_fill_display_present===true&&fill.scalar_fill_orientation==='horizontal'&&Number.isInteger(fillIndex)&&fillIndex>0)playBottom=Math.min(playBottom,fillIndex);
-  const extent=Math.max(...track.map(c=>Math.max(c.bbox.height,c.bbox.width))),radius=Math.min(peer.bbox.height,peer.bbox.width)/2+extent/2;let bestGap:number[]|null=null,bestFlight:number[]|null=null;const seen=new Set<string>();
+  const extent=Math.max(...track.map(c=>Math.max(c.bbox.height,c.bbox.width))),radius=Math.min(peer.bbox.height,peer.bbox.width)/2+extent/2;let bestGap:number[]|null=null,bestFlight:number[]|null=null;const seen=new Set(excludedAims.map(supportKey));
   for(let step=0;step<(calibrated?1:72);step++){const angle=-Math.PI+2*Math.PI*step/72,clickRow=calibrated?.point[0]??transientRound(sc[0]!+Math.sin(angle)*18),clickColumn=calibrated?.point[1]??transientRound(sc[1]!+Math.cos(angle)*18),key=supportKey([clickRow,clickColumn]);if(seen.has(key)||avoid&&supportSame([clickRow,clickColumn],avoid))continue;seen.add(key);
     if(!(clickRow>=0&&clickRow<playBottom&&clickColumn>=0&&clickColumn<width))continue;const dr=clickRow-sc[0]!,dc=clickColumn-sc[1]!,distance=Math.hypot(dr,dc);if(distance<1)continue;
     const ur=dr/distance,uc=dc/distance,toward=dc*(pc[1]!-sc[1]!)>0;let row=sc[0]!+ur*offset,column=sc[1]!+uc*offset,velocityRow=ur*speed;const velocityColumn=uc*speed;let nearest=Infinity,flown=0;const sawAscent=velocityRow<-.05;let sawDescent=false;

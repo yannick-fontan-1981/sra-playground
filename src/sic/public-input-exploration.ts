@@ -1,3 +1,4 @@
+import { acquirePanelService, type PanelServiceAcquisition } from './observed-panel-services.ts';
 import { acquireMarkedOutlet } from './marked-compartment-flow.ts';
 import { acquireInstructionReturn, type SymbolAcquisition } from './symbol-contribution.ts';
 import { observeSymbolPrefix, type SymbolPrefixAcquisition } from './parallel-symbol-prefixes.ts';
@@ -161,6 +162,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   orderedEntryTransfer?: OrderedEntryTransfer;
   clickFocus?: { accent: number; ref: string };
   jointInput?: ObservedJointInput;
+  panelServiceTransfer?: PanelServiceAcquisition;
   jointTransfer?: { epoch: number; measured: ObservedJointInput };
   referenceView?: ReferenceView;
   measuredLink?: MeasuredLink;
@@ -527,18 +529,20 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
   function enterEpoch(epoch: number): void {
     if (state.epoch === epoch) return;
-    const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer, symbolTransfer, programWitness, outletWitness, instructionTransfer } = state;
+    const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer, panelServiceTransfer, symbolTransfer, programWitness, outletWitness, instructionTransfer } = state;
     state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
       ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
       ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
       ...(relayTransfer?.witness ? { relayTransfer } : {}), ...(navigationTransfer?.won ? { navigationTransfer } : {}),
       ...(relationsTransfer?.witness ? { relationsTransfer } : {}), ...(directionTransfer ? { directionTransfer } : {}),
-      ...(catalogueTransfer?.witness ? { catalogueTransfer } : {}), ...(jointTransfer ? { jointTransfer } : {}),
+      ...(catalogueTransfer?.witness ? { catalogueTransfer } : {}), ...(jointTransfer ? { jointTransfer } : {}), ...(panelServiceTransfer?.recall ? { panelServiceTransfer } : {}),
       ...(symbolTransfer?.retained ? { symbolTransfer } : {}), ...(programWitness ? { programWitness } : {}),
       ...(outletWitness ? { outletWitness } : {}), ...(instructionTransfer?.learned ? { instructionTransfer } : {}) };
   }
   async function acquireTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows, frames: readonly NativeRows[]) {
     if (!fallback) return;
+    const services = acquirePanelService(state.panelServiceTransfer, before, after, command, rows, afterRows);
+    if (services) state.panelServiceTransfer = services;
     const compartment = acquireCompartmentReturn(state.compartmentTransfer, before, after, command, rows, afterRows);
     const instruction = acquireInstructionReturn(state.instructionTransfer, before, after, command, rows, afterRows);
     const outlet = after.levels_completed > before.levels_completed
@@ -609,7 +613,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const markKey = markTrial?.command.action_ref;
       const travel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
-      const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness || state.outletWitness || state.catalogueTransfer?.witness) && !pressure
+      const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness || state.outletWitness || state.catalogueTransfer?.witness || state.panelServiceTransfer?.recall) && !pressure
         ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state, !!panel) : undefined;
       const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;

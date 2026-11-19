@@ -84,6 +84,19 @@ export function createSicFacetGrowth(family = facetGrowthId, transferObservedFac
   const cache: FacetCompoundCache = new Map();
   return {
     id: family,
+    observePublicOutcome(before, after, command, first, second) {
+      if (!learns || !transferObservedFacet || command.action_ref !== 'ACTION6') return;
+      if (after.levels_completed > before.levels_completed) {
+        if (portable?.source_epoch === before.level_epoch && portable.up_shift) portable.boundary_ref = after.observation_ref;
+        return;
+      }
+      if (before.level_epoch !== after.level_epoch || before.frame_hash === after.frame_hash) return;
+      const projection = facetProject(before, first);
+      const { x, y } = command.data;
+      if (projection?.offer.kind !== 'probe_congruent_empty_face' || x === undefined || y === undefined
+        || !facetInside([x, y, x, y], projection.offer.support.bbox)) return;
+      portable = acquireFacetSeed(before, after, first, second, projection) ?? portable;
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       const reusable = portable && portable.source_epoch !== observation.level_epoch ? portable : null;

@@ -1,9 +1,10 @@
 import { measurePanelService, panelServiceProjection, remotePanelServiceChoices, type PanelLattice, type RemotePanelServiceChoice } from '../logos-engine/v6-panel-service-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { bestLocalActivity } from './observed-panel-services.ts';
 import type { NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { matchesServiceChain, prepareServiceChain, type ChainReturn, type Panel, type Pattern, type Scene, type Service } from './panel-service-chain.ts';
+import { matchesServiceChain, prepareServiceChain, type ChainReturn, type Panel, type Pattern, type Scene } from './panel-service-chain.ts';
 import { matchesWorkshopState, measureWorkshopLayout, measureWorkshopState, nextWorkshopEdit, planWorkshopTurn,
   type WorkshopLayout, type WorkshopState, type WorkshopTurn } from './stocked-service-turn.ts';
 
@@ -25,15 +26,6 @@ type Proposal = NativeProposal & { local: State; symbols: Pattern[]; expected: N
   outputs?: { panelId: string; value: number }[]; deliveries?: Delivery[]; destinationEdit?: boolean;
   chainEdit?: ChainEditReturn; chainReturn?: ChainReturn; transport?: Pattern; workshopAction?: WorkshopAction };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
-
-function bestLocalActivity(panel: Panel): Service | null {
-  const direct = panel.operators.filter(service => service.kind === 'displayed_receiver' && service.input === panel.material);
-  if (direct.length === 1) return direct[0]!;
-  if (direct.length > 1) return null;
-  const conversion = panel.operators.filter(service => service.kind === 'displayed_rewrite' && service.input === panel.material &&
-    panel.services.some(receiver => receiver.kind === 'displayed_receiver' && service.output === receiver.input));
-  return conversion.length === 1 ? conversion[0]! : null;
-}
 
 function matchedTransfers(scene: Scene): Transfer[] | null {
   if (new Set(scene.panels.map(panel => panel.room_marker)).size !== scene.panels.length) return null;

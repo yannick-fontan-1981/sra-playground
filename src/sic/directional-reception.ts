@@ -34,7 +34,7 @@ type Dial = ExposureDial;
 type Scene = ExposureScene;
 type State = { epoch: number; layout: string; directions: Record<string, NativePoint>; coupled: number[]; tried: string[];
   evidence: string[]; count: number; beam?: { at: NativePoint; actor: NativePoint; direction: NativePoint } };
-type LearnedControls = { completed: number; pitch: number; directions: Record<string, NativePoint>; ref: string };
+type LearnedControls = { completed: number; pitch: number; directions: Record<string, NativePoint>; ref: string; measuredAt?: string };
 type Effect = { kind: 'follow' | 'orient' | 'continue'; actor: NativePoint; body: Site; receiver: Site; direction: NativePoint };
 type Choice = { command: NativeCommand; target?: Site; dial?: Dial; effect?: Effect };
 type Aim = { choice: Choice; scene: Scene; receiver: Site };
@@ -131,7 +131,7 @@ function observeExposure(rows: NativeRows, memory: ExposureMemory, expected: Exp
   return !!next && exposureMatches(memory.board, expected, next);
 }
 
-export function createSicDirectionalReception(family = directionalReceptionId): NativeFamily<Proposal | ExposureProposal> {
+export function createSicDirectionalReception(family = directionalReceptionId, transferObservedReception = false): NativeFamily<Proposal | ExposureProposal> {
   const learns = family === learnDirectionalReceptionId;
   let state: State | null = null;
   let known: LearnedControls | null = null;
@@ -229,16 +229,17 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
       const scene = measureExposedReception(rows) as Scene | null;
       if (!scene || scene.bodies.length > 4 || scene.size[0] * scene.size[1] > 256) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const reusable = !learns && known?.completed === observation.levels_completed && known.pitch === scene.pitch ? known : null;
+      const reusable = (!learns || transferObservedReception) && known?.completed === observation.levels_completed
+        && known.pitch === scene.pitch ? known : null;
       const receipt = learns && !prior ? execution?.readDirectionalMotion?.() : null;
       const movement = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch
         ? motionIntoFootprint(receipt, cellBox(scene, scene.actor)) : null;
       const delta = movement ? [movement[0] / scene.pitch, movement[1] / scene.pitch] as NativePoint : null;
-      if (learns && !prior && (!delta || Math.abs(delta[0]) + Math.abs(delta[1]) !== 1)) return null;
+      if (learns && !prior && !reusable && (!delta || Math.abs(delta[0]) + Math.abs(delta[1]) !== 1)) return null;
       const local: State = prior?.layout === scene.layout ? prior : {
         epoch: observation.level_epoch, layout: scene.layout,
         directions: prior?.directions ?? reusable?.directions ?? (receipt && delta ? { [receipt.command]: delta } : {}),
-        coupled: [], tried: [], evidence: prior?.evidence ?? (reusable ? [reusable.ref] : receipt ? [receipt.beforeRef] : []), count: prior?.count ?? 0,
+        coupled: [], tried: [], evidence: prior?.evidence ?? (reusable ? [reusable.ref, ...(reusable.measuredAt ? [reusable.measuredAt] : [])] : receipt ? [receipt.beforeRef] : []), count: prior?.count ?? 0,
       };
       if (local.count >= 32) return null;
       const key = (action: NativeCommand) => JSON.stringify([observation.frame_hash, action]);
@@ -307,7 +308,9 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Bring the pieces and the receivers into agreement', mode: route ? 'solving' : 'exploration',
           situation: choice.dial && !choice.effect ? 'The piece is in the receiver but has a different color. Test the nearby direction on the dial.' : label,
-          agenda: evaluated?.entries ?? [], evidence, actor: cellBox(scene, scene.actor),
+          agenda: evaluated?.entries ?? [], evidence,
+          ...(reusable?.measuredAt && !prior ? { newLevelConfiguration: 'Compare the previous directional effects with the current pieces and receivers' } : {}),
+          actor: cellBox(scene, scene.actor),
           pieces: (choice.target ? [choice.target] : scene.bodies).map(body => cellBox(scene, body.pos)),
           receivers: scene.slots.map(slot => cellBox(scene, slot.pos)),
           ...(choice.effect ? { landing: cellBox(scene, choice.effect.body.pos) } : {}),
@@ -367,7 +370,8 @@ export function createSicDirectionalReception(family = directionalReceptionId): 
       }
       const local = index > 0 ? state ?? proposal.local : proposal.local;
       if (after.levels_completed > before.levels_completed && Object.keys(local.directions).length) {
-        known = { completed: after.levels_completed, pitch: proposal.scene.pitch, directions: local.directions, ref: after.observation_ref };
+        known = { completed: after.levels_completed, pitch: proposal.scene.pitch, directions: local.directions, ref: after.observation_ref,
+          ...(transferObservedReception ? { measuredAt: local.evidence.at(-1) ?? before.observation_ref } : {}) };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { scene, choice } = proposal.aims?.[index] ?? proposal;

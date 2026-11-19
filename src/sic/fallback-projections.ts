@@ -1,3 +1,4 @@
+import { checkPanelService, projectPanelService, type PanelServiceAcquisition } from './observed-panel-services.ts';
 import { observeRevalidatedPair, projectRevalidatedPair } from './coupled-motion.ts';
 import { checkRecalledOutlet, projectRecalledOutlet, type acquireMarkedOutlet } from './marked-compartment-flow.ts';
 import { observeRecalledInstruction, projectRecalledInstruction, type SymbolAcquisition } from './symbol-contribution.ts';
@@ -47,6 +48,7 @@ type OutletProjection = NonNullable<Awaited<ReturnType<typeof projectRecalledOut
 type InstructionProjection = NonNullable<ReturnType<typeof projectRecalledInstruction>>;
 type PairProjection = NonNullable<ReturnType<typeof projectRevalidatedPair>>;
 type Value =
+  | { kind: 'panel_service'; count: number }
   | { kind: 'pair'; local: PairProjection['local'] }
   | { kind: 'outlet'; attempted: string[] }
   | { kind: 'instruction'; transaction: InstructionProjection['transaction'] }
@@ -79,7 +81,9 @@ export type FallbackLevelTransfer = { epoch: number } & (
   | { kind: 'pattern'; width: number; height: number; refs: string[] }
 );
 
+type PanelServiceProjection = NonNullable<ReturnType<typeof projectPanelService>>;
 type Check =
+  | { kind: 'panel_service'; projection: PanelServiceProjection; count: number }
   | { kind: 'pair'; projection: PairProjection }
   | { kind: 'outlet'; projection: OutletProjection; attempted: string[] }
   | { kind: 'instruction'; projection: InstructionProjection }
@@ -127,6 +131,7 @@ type TransferContext = {
   programWitness?: ProgramWitness;
   outletWitness?: OutletWitness;
   instructionTransfer?: SymbolAcquisition;
+  panelServiceTransfer?: PanelServiceAcquisition;
   jointTransfer?: { epoch: number; measured: Parameters<typeof projectRevalidatedPair>[3] };
 };
 
@@ -136,7 +141,7 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
   if (previous?.retired || execution?.signal?.aborted) return;
   const { fallbackTransfer, compartmentTransfer: compartment, captureTransfer: capture, displayTransfer: display,
     relayTransfer: relay, navigationTransfer: navigation, relationsTransfer: relations, catalogueTransfer: catalogue,
-    symbolTransfer: symbols, programWitness: program, outletWitness: outlet, instructionTransfer: instruction, jointTransfer } = context;
+    symbolTransfer: symbols, programWitness: program, outletWitness: outlet, instructionTransfer: instruction, jointTransfer, panelServiceTransfer } = context;
   const transfer = fallbackTransfer?.epoch === observation.level_epoch - 1 ? fallbackTransfer : undefined;
   const pair = jointTransfer?.epoch === observation.level_epoch - 1 ? jointTransfer.measured : undefined;
   const available = observation.available_action_refs, evidence = previous?.refs ?? [], prior = previous?.value;
@@ -206,6 +211,18 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
       ...(projection.novelty ? { novelty: 'Recompute the shared relations for a different number of rooms' } : {}),
       check: { kind: 'relations', projection } };
   }
+  const panelService = panelServiceTransfer?.recall;
+  if (panelService?.epoch === observation.level_epoch - 1 && (!prior || prior.kind === 'panel_service')
+    && (prior?.count ?? 0) < 18) {
+    const projection = projectPanelService(panelService, observation, rows);
+    if (projection) return { command: projection.command, box: projection.box, goal: projection.goal,
+      objective: 'apply_visible_material_requirements',
+      label: projection.expected ? 'Select the activity matching the displayed material' : 'Apply the activities and verify their effects',
+      evidence: [...new Set([...panelService.refs, ...evidence])],
+      recurring: 'Reuse the confirmed link between selecting a compatible activity and applying it',
+      ...(!prior ? { novelty: 'Compare each panel with its current material and receivers' } : {}),
+      check: { kind: 'panel_service', projection, count: prior?.count ?? 0 } };
+  }
   if (panel) return;
   if (pair && (!prior || prior.kind === 'pair')) {
     const projection = projectRevalidatedPair(observation, rows, remaining, pair, prior?.local);
@@ -213,7 +230,10 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
       label: projection.route ? 'Bring the two pieces together along the route supported by current returns'
         : 'Recheck how both pieces respond in the new layout',
       objective: 'bring_together_measured_coupled_pieces', evidence: projection.local.evidence,
-      recurring: 'Locate the two previously measured coupled pieces', check: { kind: 'pair', projection } };
+      recurring: 'Locate the two previously measured coupled pieces',
+      ...(projection.local.count === 0 && projection.local.pair.size !== pair.size
+        ? { novelty: 'The pieces have changed size. Remeasure each displacement on the current grid.' } : {}),
+      check: { kind: 'pair', projection } };
   }
   if (symbols?.retained && (!prior || prior.kind === 'symbols')) {
     const projection = projectRecalledPrefixes(symbols, observation, rows, inputs, remaining, prior?.local);
@@ -413,6 +433,10 @@ export async function assessFallbackProjection(projection: FallbackProjection, f
   const { check } = projection;
   const refs = [...projection.evidence.slice(-3), after.observation_ref];
   const state = (value: Value, retired = false): FallbackProjectionMemory => ({ value, refs, ...(retired ? { retired: true } : {}) });
+  if (check.kind === 'panel_service') {
+    const matched = checkPanelService(check.projection, second);
+    return { matched, memory: state({ kind: 'panel_service', count: check.count + 1 }, !matched) };
+  }
   if (check.kind === 'pair') {
     const result = observeRevalidatedPair(check.projection, first, second, after);
     return { matched: result.matched, memory: state({ kind: 'pair', local: result.state }, result.state.stopped) };

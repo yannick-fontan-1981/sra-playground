@@ -133,11 +133,12 @@ function prioritizeTrials(tracks: readonly Track[], size: number, controls: Retu
   return novel ?? unmeasured[0];
 }
 
-export function createSicVerifySlotPermutation(family = verifySlotPermutationId): NativeFamily<Proposal> {
+export function createSicVerifySlotPermutation(family = verifySlotPermutationId, transferObservedPermutation = false): NativeFamily<Proposal> {
   const learns = family === learnSlotPermutationId;
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   let geometry: Geometry | null = null;
+  let retained: { epoch: number; refs: string[] } | null = null;
   return {
     id: family,
     async attachPrograms(registry) {
@@ -160,7 +161,8 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
       if (local.count >= 32) return null;
       const values = orbitValues(rows, positions, size);
       if (!values.length || [...targets].every(([i, color]) => values[i] === color)) return null;
-      if (learns && !local.count) {
+      const recalled = transferObservedPermutation && retained?.epoch === observation.level_epoch - 1 ? retained : null;
+      if (learns && !recalled && !local.count) {
         const evidence = await execution?.readPriorClickScene?.((first, previous, action) => {
           const prior = measureOrbitField(previous, visibleControlInputs(previous));
           const point: NativePoint = [action.data.x!, action.data.y!];
@@ -180,7 +182,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
       const path = !extended || projectionWithinLimit(targets, operators.values(), maxProjectedStates)
         ? orbitRoute(values, targets, operators, Math.min(remaining, 32 - local.count)) : null;
       const next = path?.length ? scene.controls.get(key(path[0])) : null;
-      if (learns && !next) return null;
+      if (learns && !recalled && !next) return null;
       const unmeasured = prioritizeTrials(tracks, size, controls, local.models);
       const arrangement = key(values);
       const ambiguous = controls.find(control => {
@@ -189,7 +191,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
           && new Set(model.permutations.map(permutation => key(predict(permutation, values)))).size > 1;
       });
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set(Object.values(local.models).map(model => model.evidence))];
+      const evidence: [string, ...string[]] = [ref, ...new Set([...(recalled?.refs ?? []), ...Object.values(local.models).map(model => model.evidence)])];
       const trial = unmeasured ?? ambiguous;
       const mode = execution?.reasoningMode ?? (next ? 'solving' : 'exploration');
       const facts = { routeSupported: !!next, eligibleProbe: !!trial, knownInteraction: false, mode };
@@ -240,7 +242,9 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
           situation: facts },
         sicSituationCard: { strategy, need: 'Bring the marked slots to their displayed target colors', mode,
           situation,
-          agenda: [], evidence, triggerCard: decision.receipt.workflow, control: control.box, distance: strategy === 'P07' ? path!.length : null,
+          agenda: [], evidence, triggerCard: decision.receipt.workflow,
+          ...(recalled && !local.count ? { newLevelConfiguration: 'Measure the permutations of the controls on the current slot layout' } : {}),
+          control: control.box, distance: strategy === 'P07' ? path!.length : null,
           targets: targetSlots.map(slot), ...(motion.length ? { motion } : {}) },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -267,6 +271,11 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
         : matched ? 'slot_permutation_confirmed' : 'observe_slot_rearrangement' };
     },
     record(before, after, _command, _first, second, proposal, index) {
+      if (transferObservedPermutation && after.levels_completed > before.levels_completed && proposal.route[index]?.prediction) {
+        const proven = Object.values((state?.layout === proposal.local.layout ? state : proposal.local).models)
+          .filter(model => model.permutations.length === 1).map(model => model.evidence);
+        if (proven.length) retained = { epoch: before.level_epoch, refs: [...new Set(proven)].slice(-8) };
+      }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = (index > 0 && state?.layout === proposal.local.layout ? state : null) ?? proposal.local;
       const { positions, size, targetSlots } = proposal.board;
@@ -285,7 +294,10 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId)
       state = { ...local, models: { ...local.models, [key(control)]: model }, count: local.count + 1 };
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, ...(retained ? { retained } : {}) }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      retained = structuredClone((value.retained ?? null) as typeof retained);
+    },
   };
 }

@@ -100,7 +100,8 @@ export function projectRevalidatedPair(observation: NativeObservation, rows: Nat
   if (prior?.stopped || (prior?.count ?? 0) >= 60) return null;
   const available = keys.filter(input => observation.available_action_refs.includes(input));
   if (available.length < 3) return null;
-  const pair = prior?.pair ?? measureCoupledPairs(rows).find(item => item.value === learned.ink && item.size === learned.size);
+  const candidates = prior ? [] : measureCoupledPairs(rows).filter(item => item.value === learned.ink);
+  const pair = prior?.pair ?? (candidates.length === 1 ? candidates[0] : undefined);
   if (!pair || !pairVisible(rows, pair.value, pair.boxes)) return null;
   const local: State = prior ?? { epoch: observation.level_epoch, pair, samples: [], floors: [], count: 0, stopped: false,
     remainingRoute: null, evidence: Object.values(learned.trials).map(trial => trial.ref) };
