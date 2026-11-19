@@ -114,11 +114,58 @@ const checkMirrorButton=async()=>{
   assert.equal(h.learned()['mirror-motion'],true);assert.equal(h.learned().gate,true);return{mirrorAboveButton:true,mirrorMotionLesson:true,gateLesson:true,frames:next.frames.length};
  }finally{await h.close();}
 };
+const checkMirrorInterference=async()=>{
+ const cases=[
+  {name:'blocking mirror alone flashes',M:[5,3],mirrors:[[5,5,'NE'],[6,5,'SE'],[7,1,'NE']],red:[1]},
+  {name:'incompatible destinations flash both mirrors',M:[5,3],mirrors:[[5,5,'NE'],[3,3,'SE'],[7,1,'NE']],red:[0,1]},
+  {name:'mirror hiding the only source flashes',M:[5,1],mirrors:[[5,5,'NE'],[5,3,'SE'],[7,1,'NE']],red:[1]},
+ ];
+ const result=[];
+ for(const f of cases){
+  const spec=makeArena(f.name,[[...f.M,'M'],[2,6,'B']],{mirrors:f.mirrors.map(([x,y,facing])=>({at:{x,y},facing}))}),h=createHarness(spec);
+  try{
+   const before=h.ref.observe(),start=h.captures.length,wait=h.waits.length;
+   assert.equal(h.key(' '),false);const next=h.ref.action(5),count=h.$('moves').textContent;
+   assert.equal(h.board.dataset.busy,'true');assert.equal(next.frames.length,4);
+   assert.ok(h.$('feedback').textContent.includes('les miroirs en conflit clignotent en rouge'));
+   assert.equal(h.learned().mirror,false,'A red refusal must not award the reflection lesson');
+   h.key('ArrowRight');h.key('Tab');h.key('2');h.key('x');h.click(dataAt(spec,2,6));
+   h.window.document.querySelector('[data-action="4"]').click();h.window.document.querySelector('[data-hero="bard"]').click();
+   assert.equal(h.$('moves').textContent,count,'All ordinary inputs are locked during the warning');
+   assert.equal(h.captures.length,start+1);assert.equal(h.$('victory').hidden,true);assert.equal(h.$('defeat').hidden,true);
+   await h.settled(next);
+   assert.deepEqual(next.frameDurationsMs,[110,70,110,0]);assert.deepEqual(h.waits.slice(wait),[110,70,110]);
+   for(let i=0;i<4;i++)assert.deepEqual(h.captures[start+i],rgba(next.frames[i]),f.name+': exact displayed blink frame '+i);
+   for(const [i,[x,y]] of f.mirrors.entries()){
+    const original=tile(before.frame,spec,x,y),red=original.map(row=>row.map(c=>c===0?8:c));
+    for(let frame=0;frame<4;frame++)assert.deepEqual(tile(next.frames[frame],spec,x,y),f.red.includes(i)&&frame%2===0?red:original,f.name+': mirror '+i+' frame '+frame);
+   }
+   assert.deepEqual(next.frame,before.frame);assert.equal(next.state,before.state);assert.equal(next.canUndo,false);
+   assert.equal(h.$('undo').disabled,true);assert.equal(h.learned().mirror,false);assert.equal(h.learned()['bard-song'],false);assert.equal(h.learned()['mirror-motion'],false);
+   const repeated=await h.action(5);assert.deepEqual(repeated,next,'Repeated refused reflection replays all frames without an Undo entry');
+   assert.equal(h.learned().mirror,false);assert.ok(h.$('feedback').textContent.includes('clignotent en rouge'));
+   result.push({case:f.name,redMirrorIndices:f.red,frames:4,exactPixelsAndTiming:true,unrelatedMirrorsUnchanged:true,unchangedFinalFrame:true,repeatedWarning:true,controlsLocked:true,noReflectionLesson:true,noUndoEntry:true});
+  }finally{await h.close();}
+ }
+ const spec=makeArena('Undo during red mirror warning',[[5,2,'M'],[2,6,'B']],{mirrors:[{at:{x:5,y:5},facing:'NE'},{at:{x:6,y:5},facing:'SE'}]}),h=createHarness(spec);
+ try{
+  const before=h.ref.observe();await h.action(2);const moved=h.ref.observe();assert.notDeepEqual(moved.frame,before.frame);assert.equal(moved.canUndo,true);
+  h.key(' ');const warning=h.ref.action(5);assert.equal(warning.frames.length,4);assert.equal(h.board.dataset.busy,'true');
+  await h.advance();assert.equal(h.board.dataset.busy,'true');assert.equal(h.learned().mirror,false);
+  assert.equal(h.key('z'),false);const restored=h.ref.undo(),stopped=h.captures.length;
+  await h.settled(restored);assert.equal(h.captures.length,stopped,'Cancelled warning timers cannot paint stale red frames');
+  assert.deepEqual(restored,before);assert.equal(h.$('undo').disabled,true);assert.equal(h.learned().mirror,false);
+  assert.ok(h.$('feedback').textContent.includes('Dernière action annulée'));
+  result.push({case:'Undo during warning restores previous actual movement',midAnimationUndo:true,exactPreviousState:true,cancelledFramesCannotRepaint:true,noReflectionLesson:true});
+ }finally{await h.close();}
+ return result;
+};
 let h;
 try{
  report.bardCoverage=await checkBardFixtures();report.checks.push('Eleven compiled-HTML Bard cases verify song, radius, walls, selective blocking, partner escort, moving supports, water conversion, refusal, forced Bard motion and reciprocal combat');
  report.reflectionCoverage=await checkReflectionFixtures();report.checks.push('Nearest-source and equal-distance reflection fixtures preserve previews, pixels, no-song behavior and Undo');
  report.mirrorButtonCoverage=await checkMirrorButton();report.checks.push('Moving a mirror onto a button keeps its white diagonal and black back above device markings');
+ report.mirrorInterferenceCoverage=await checkMirrorInterference();report.checks.push('Compiled-HTML mirror refusals blink only the blocking/conflicting mirrors red twice, explain the conflict from public pixels, preserve lessons and Undo, lock commands and cancel stale frames on Undo');
  if(tutorialOnly){
   const design=JSON.parse(readFileSync(resolve(root,'reference/level1-design.json'),'utf8'));h=createHarness(design.spec);
   for(const action of design.actions)await h.action(action);

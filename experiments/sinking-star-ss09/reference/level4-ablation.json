@@ -1,33 +1,118 @@
 {
-  "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+  "mapSha256": "0bc000f94f8a9b2689d40b66a2cac48058c8eb34904c5fc9067191c4b4bc05aa",
+  "scope": "Author searches disable transitions using the named mechanism. Exhausted queues prove necessity; capped searches remain inconclusive.",
   "results": [
     {
+      "mechanism": "reflections",
+      "status": "unsolvable",
+      "states": 24,
+      "expanded": 24,
+      "ms": 5
+    },
+    {
       "mechanism": "merchant-push",
-      "status": "limit",
-      "states": 30000,
-      "expanded": 19930,
-      "ms": 441
+      "status": "unsolvable",
+      "states": 15404,
+      "expanded": 15404,
+      "ms": 331
     },
     {
       "mechanism": "bard-song",
-      "status": "limit",
-      "states": 30000,
-      "expanded": 24567,
-      "ms": 448
-    },
-    {
-      "mechanism": "mirror",
-      "status": "limit",
-      "states": 30000,
-      "expanded": 22346,
-      "ms": 410
+      "status": "unsolvable",
+      "states": 48,
+      "expanded": 48,
+      "ms": 1
     },
     {
       "mechanism": "piston",
-      "status": "limit",
-      "states": 30000,
-      "expanded": 20101,
-      "ms": 474
+      "status": "unsolvable",
+      "states": 96,
+      "expanded": 96,
+      "ms": 2
+    },
+    {
+      "mechanism": "support-creation",
+      "status": "unsolvable",
+      "states": 96,
+      "expanded": 96,
+      "ms": 2
     }
-  ]
+  ],
+  "revision": "SS09 v2 — required launch gate, press bridge, occupied exit corridor and aligned final mirror",
+  "elementAudit": [
+    {
+      "name": "never-open-entry-gate",
+      "status": "unsolvable",
+      "states": 22,
+      "expanded": 22,
+      "ms": 4
+    },
+    {
+      "name": "no-combat",
+      "status": "limit",
+      "states": 150002,
+      "expanded": 143278
+    },
+    {
+      "name": "weighted-monster-remains-at-initial-cell",
+      "status": "unsolvable",
+      "states": 96,
+      "expanded": 96,
+      "ms": 3
+    },
+    {
+      "name": "other-monster-remains-at-initial-cell",
+      "status": "unsolvable",
+      "states": 48,
+      "expanded": 48,
+      "ms": 1
+    },
+    {
+      "name": "no-first-mirror-reflection",
+      "status": "unsolvable",
+      "states": 24,
+      "expanded": 24,
+      "ms": 0
+    },
+    {
+      "name": "no-final-mirror-reflection",
+      "status": "limit",
+      "states": 150001,
+      "expanded": 145407
+    },
+    {
+      "name": "victory-with-surviving-monsters",
+      "status": "limit",
+      "states": 150002,
+      "expanded": 145309
+    }
+  ],
+  "geometricCutsets": [
+    {
+      "element": "Entry button and its gate",
+      "role": "The Bard starts on the isolated floor cell (9,13). The only safe exit is reflection through the gate (11,13), held open by the Merchant on (3,17).",
+      "evidence": "Exhaustive search with the entry gate never open: 22 states, no solution."
+    },
+    {
+      "element": "Crate, red monster button and east-facing press",
+      "role": "The single crate starts loaded on (5,14). The wall at (4,14) prevents a manual east push. Before the bridge exists, the Bard cannot make an eastward move inside its singing radius of the crate. Closing this press puts the crate into water at (6,14).",
+      "evidence": "Exhaustive search forbidding piston events: 96 states, no solution. Forbidding support creation produces the same exhaustive result."
+    },
+    {
+      "element": "Both monsters",
+      "role": "Both occupy the one-cell exit corridor. Each must leave its initial cell or die; the monster on (8,8) also holds the press open. The authored route lures them into a duel.",
+      "evidence": "Keeping the weighted monster at (8,8) exhausts 96 states with no solution; keeping the other at (12,8) exhausts 48. The no-combat search reached its cap; duel uniqueness is not claimed."
+    },
+    {
+      "element": "Final mirror and Merchant push",
+      "role": "The isolated goal island at x=2..3, y=5..6 has no walkable connection. The final NW mirror starts one row too low at (8,7); the Merchant pushes it north to (8,6), aligning a reflection from (8,1) to (3,6). The first mirror cannot reach the goal island.",
+      "evidence": "Exhaustive search forbidding Merchant pushes: 15404 states, no solution. Geometric separation proves that reaching the goal island requires the final mirror; the broad no-final-mirror search is explicitly inconclusive at its cap."
+    }
+  ],
+  "claims": {
+    "everyDeviceHasRequiredOrBlockingRole": true,
+    "allMechanismClaimsUseExhaustiveSearchOrGeometricCutsets": true,
+    "duelIsUniqueSolution": false,
+    "allSearchesExhaustive": false
+  }
 }

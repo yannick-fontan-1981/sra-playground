@@ -85,6 +85,16 @@ function reflected(before:Observation,after:Observation,action:number):boolean {
   return JSON.stringify(visibleHeroes(before.frame).map(h=>[h.kind,h.x,h.y]))!==JSON.stringify(visibleHeroes(final).map(h=>[h.kind,h.x,h.y]))
     || JSON.stringify(visiblePieces(before.frame))!==JSON.stringify(visiblePieces(final));
 }
+/** The refusal signal is read from visible mirror pixels, never private plans. */
+function mirrorInterference(before:Observation,after:Observation,action:number):boolean {
+  if(action!==5||after.frames.length<2)return false;
+  const mirrors=visiblePieces(before.frame).filter(p=>p.kind==='mirror');
+  return mirrors.some(p=>after.frames.some(frame=>{
+    const px=2+p.x*3,py=2+p.y*3;
+    for(let y=0;y<3;y++)for(let x=0;x<3;x++)if(before.frame[py+y]![px+x]===0&&frame[py+y]![px+x]===8)return true;
+    return false;
+  }));
+}
 /** The third public frame ends the voluntary movement, before any forced cascade. */
 function movementView(before:Observation,after:Observation,action:number):{hero:VisibleHero;later:VisibleHero;dx:number;dy:number;frame:number[][]}|null {
   if(action<1||action>4)return null;
@@ -155,7 +165,7 @@ const hints:Record<string,string>={
   platform:'Envoie une caisse dans l’eau : elle devient un appui marron marqué d’un X cyan. Les deux héros peuvent marcher dessus.',
   'support-slide':'Le Barde peut faire glisser un appui d’une case d’eau vers une autre. Un appui occupé par un héros, ou celui sur lequel le Barde va marcher, reste ancré. Il ne remonte pas sur le sol.',
   'mirror-motion':'Le chant laisse les miroirs en place. Utilise le Marchand pour en pousser un ; son orientation reste fixe mais ses axes et les arrivées changent.',
-  mirror:'Le + gris clair montre l’arrivée d’un héros ; le contour gris clair celle d’une caisse. Espace active tous les miroirs sans chant, quel que soit le héros sélectionné.',
+  mirror:'Le + gris clair montre l’arrivée d’un héros ; le contour gris clair celle d’une caisse. Espace active tous les miroirs sans chant. Un miroir qui empêche le reflet clignote en rouge.',
   gate:'Le poids sur un bouton commande sa porte ou sa presse. Le repère indique le sens de poussée. Observe toute la cascade avant de déplacer le poids à nouveau.',
   goals:'Place les deux personnages sur les deux contours jaunes en même temps. Le premier arrivé reste sélectionnable et peut encore aider son partenaire.',
 };
@@ -212,6 +222,7 @@ function act(action:number,data?:Point):void {
     :next.levelsCompleted>before.levelsCompleted?'Les deux destinations sont occupées. Salle terminée !'
     :action===6?'Personnage sélectionné. Le décor et les monstres n’avancent pas.'
     :reflected(before,next,action)?'Reflet effectué : priorité au plus proche, échange à distance égale. Les deux héros peuvent le déclencher.'
+    :mirrorInterference(before,next,action)?'Reflet bloqué : les miroirs en conflit clignotent en rouge. Déplace un miroir ou libère son axe.'
     :action===5?'Reflet bloqué ou aucun occupant devant les faces blanches. Vérifie les arrivées et tous les miroirs.'
     :songView(before,next,action)?.escorted?'Le chant entraîne aussi le Marchand ; ce mouvement ne déclenche aucune poussée supplémentaire.'
     :songView(before,next,action)?.moved.length?`Le chant entraîne ${songView(before,next,action)!.moved.length} pièce(s). ${songView(before,next,action)!.held.length?'Les pièces retenues restent en place.':''}`

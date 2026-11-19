@@ -137,6 +137,61 @@ test('a blocked reflection endpoint cancels the entire global reflection',()=>{
 test('an actor seen by two mirrors with different destinations cannot clone',()=>{
   const f=fixture({M:[5,3],mirrors:[[5,5,'NE'],[3,3,'SE']]});assert.equal(planReflection(f.world,f.state),null);const s=stepWorld(f.world,f.state,5);assert.equal(s.failed,true);assert.equal(s.heroes.length,2);assert.deepEqual(s.heroes,f.state.heroes);
 });
+test('the mirror physically blocking a reflection blinks red twice and leaves every actor in place',()=>{
+  const f=fixture({M:[5,3],mirrors:[[5,5,'NE'],[6,5,'SE'],[11,1,'NE']]}),before=JSON.stringify(f.state),detail=stepDetailed(f.world,f.state,5),session=new DuoPuzzleSession([f.spec]);
+  const initial=session.observe(),view=session.action(5),pixel=cellToPixel(f.at(6,5));
+  assert.equal(detail.state.failed,true);assert.deepEqual(detail.phases,[]);assert.deepEqual(detail.blockedMirrorIndices,[1]);
+  assert.deepEqual({...detail.state,failed:false},f.state);assert.equal(JSON.stringify(f.state),before);
+  assert.equal(view.frames.length,4);assert.deepEqual(view.frameDurationsMs,[110,70,110,0]);
+  assert.deepEqual(view.frames.map(frame=>frame[pixel.y+1][pixel.x+1]),[8,0,8,0]);
+  const diff=[];for(let y=0;y<64;y++)for(let x=0;x<64;x++)if(view.frames[0][y][x]!==initial.frame[y][x])diff.push([x,y]);
+  assert.deepEqual(diff,[[pixel.x+2,pixel.y],[pixel.x+1,pixel.y+1],[pixel.x,pixel.y+2]]);
+  assert.deepEqual(view.frames[1],initial.frame);assert.deepEqual(view.frames.at(-1),view.frame);assert.deepEqual(view.frame,initial.frame);
+  assert.equal(view.state,'NOT_FINISHED');assert.equal(view.canUndo,false);
+  assert.deepEqual(Object.keys(view).sort(),[...Object.keys(initial),'frameDurationsMs'].sort());
+});
+test('a mirror hiding the only source is identified without animating an ordinary empty reflection',()=>{
+  const hidden=fixture({M:[5,1],mirrors:[[5,5,'NE'],[5,3,'SE']]}),d=stepDetailed(hidden.world,hidden.state,5);
+  assert.equal(planReflection(hidden.world,hidden.state),null);assert.deepEqual(d.blockedMirrorIndices,[1]);
+  assert.deepEqual({...d.state,failed:false},hidden.state);assert.equal(transitionFrames(hidden.world,hidden.state,d.state,5).length,4);
+  const empty=fixture({mirrors:[[5,5,'NE'],[5,3,'SE']]}),e=stepDetailed(empty.world,empty.state,5);
+  assert.equal(e.blockedMirrorIndices,undefined);assert.equal(transitionFrames(empty.world,empty.state,e.state,5).length,1);
+});
+test('both interfering mirrors blink for incompatible destinations of one actor, but unrelated mirrors do not',()=>{
+  const f=fixture({M:[5,3],mirrors:[[5,5,'NE'],[3,3,'SE'],[11,1,'NE']]}),d=stepDetailed(f.world,f.state,5);
+  assert.equal(d.state.failed,true);assert.deepEqual(d.blockedMirrorIndices,[0,1]);assert.deepEqual(d.phases,[]);
+  assert.deepEqual(d.state.heroes,f.state.heroes);assert.deepEqual(d.state.mirrors,f.state.mirrors);
+  const frames=transitionFrames(f.world,f.state,d.state,5);
+  for(const [i,m] of f.state.mirrors.entries()){const p=cellToPixel(m.at);assert.equal(frames[0][p.y+1][p.x+1],i<2?8:0);}
+});
+test('mirror transfers competing for one destination identify both sources and remain atomic',()=>{
+  const f=fixture({M:[5,3],B:[9,3],mirrors:[[5,5,'NE'],[9,5,'NW']]}),d=stepDetailed(f.world,f.state,5);
+  assert.equal(planReflection(f.world,f.state),null);assert.deepEqual(d.blockedMirrorIndices,[0,1]);assert.equal(d.state.failed,true);
+  assert.deepEqual(d.state.heroes,f.state.heroes);assert.deepEqual(d.state.mirrors,f.state.mirrors);
+});
+test('an irrelevant mirror beyond the farther arrival cannot veto or flash during a valid near reflection',()=>{
+  const f=fixture({M:[6,3],B:[2,8],stones:[[9,4]],mirrors:[[6,4,'NE'],[6,1,'NE']]}),d=stepDetailed(f.world,f.state,5);
+  assert.equal(d.state.failed,false);assert.equal(d.blockedMirrorIndices,undefined);assertAt(hero(d.state,'merchant').at,f.at(7,4));
+  assert.deepEqual(d.state.stones,f.state.stones);assert.deepEqual(d.phases.map(p=>p.kind),['reflect']);
+  const o=new DuoPuzzleSession([f.spec]).action(5);assert.equal(o.frames.length,3);assert.ok(o.frames.every(frame=>!frame.flat().includes(8)));
+});
+test('refused mirror flashes never tick monsters or hydraulic circuits',()=>{
+  const f=fixture({M:[5,3],monsters:[[3,6]],mirrors:[[5,5,'NE'],[6,5,'SE']],water:[[8,8]],circuits:[{id:'still',buttons:[{x:2,y:6}]}],platforms:[{at:{x:8,y:8},circuit:'still',activeWhen:'pressed'}]}),before=JSON.stringify(f.state),d=stepDetailed(f.world,f.state,5);
+  assert.equal(d.state.failed,true);assert.equal(d.state.dead,false);assert.deepEqual({...d.state,failed:false},f.state);assert.equal(JSON.stringify(f.state),before);
+  assert.deepEqual(d.phases,[]);assert.deepEqual(d.state.platformActive,[true]);assert.equal(d.state.monsters.length,1);
+});
+test('repeated mirror warnings replay their animation without adding Undo history',()=>{
+  const f=fixture({M:[5,2],mirrors:[[5,5,'NE'],[6,5,'SE']]}),session=new DuoPuzzleSession([f.spec]),initial=session.observe();
+  session.action(2);const moved=session.observe();assert.equal(moved.canUndo,true);
+  const first=session.action(5),second=session.action(5);assert.deepEqual(second,first);assert.equal(first.frames.length,4);
+  assert.deepEqual(session.undo(),initial);assert.equal(session.observe().canUndo,false);
+});
+test('walls and closed doors do not cause a false red mirror warning',()=>{
+  for(const obstacle of [{walls:[[7,5]]},{doors:[[7,5]],buttons:[[2,7]]}]){
+    const f=fixture({M:[5,3],mirrors:[[5,5,'NE']],...obstacle}),d=stepDetailed(f.world,f.state,5);
+    assert.equal(d.state.failed,true);assert.equal(d.blockedMirrorIndices,undefined);assert.equal(transitionFrames(f.world,f.state,d.state,5).length,1);
+  }
+});
 test('reflection onto water creates a crate platform but kills an unsupported hero',()=>{
   const crate=fixture({M:[2,2],stones:[[5,3]],water:[[7,5]],mirrors:[[5,5,'NE']]});const s=stepWorld(crate.world,crate.state,5);assert.equal(s.stones.length,0);assert.deepEqual(s.supports,[crate.at(7,5)]);
   const person=fixture({M:[5,3],water:[[7,5]],mirrors:[[5,5,'NE']]});const dead=stepWorld(person.world,person.state,5);assert.equal(dead.dead,true);assert.equal(hero(dead,'merchant').dead,true);assert.equal(hero(dead,'bard').dead,false);

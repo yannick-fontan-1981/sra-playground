@@ -1,4 +1,4 @@
-# SS09 — contrat de jeu 0.1.0
+# SS09 — contrat de jeu 0.1.1
 
 ## Personnages et grille
 
@@ -27,6 +27,8 @@ Les plateformes hydrauliques dépendent de leur circuit. Le retrait réévalue l
 ACTION5 / Espace / X active les reflets sans chant. Un miroir relie les deux bras de sa face blanche, à distance égale. Le premier occupant de chaque bras est comparé par distance avant validation de la destination : seul le plus proche est choisi, ou les deux à égalité. Un candidat éloigné bloqué n’empêche pas le proche de passer. Les trajectoires retenues sont ensuite vérifiées globalement. Les appuis ne sont pas reflétés. Aucun dédoublement n’est ajouté.
 
 La prévisualisation vaut + gris clair pour les héros, contour gris clair pour les caisses. Aucun fantôme de poussée directionnelle. L’aura pointillée magenta est visible lorsque le Barde est sélectionné, sous les glyphes, et suit ses images de déplacement. Les miroirs sont dessinés au-dessus des boutons.
+
+Si un miroir fait refuser une réflexion, sa diagonale clignote rouge, blanc, rouge, blanc (110, 70, 110 puis 0 ms). Un obstacle sur le trajet ou masquant l’unique source est désigné seul ; deux miroirs qui proposent des destinations incompatibles sont désignés ensemble. Les miroirs sans rapport restent blancs. Ce signal conserve les positions, les circuits et les monstres ; il ne consomme aucune étape Undo. Un nouveau déclenchement rejoue le signal. Un miroir éloigné qui n’intervient pas dans le reflet proche ne provoque aucun avertissement.
 
 ## Circuits, presses et monstres
 

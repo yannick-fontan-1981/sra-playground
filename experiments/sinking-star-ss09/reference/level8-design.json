@@ -9,17 +9,17 @@
       "#~~~~~~~....~~~~~g.#",
       "#~~~~~~~....~~~~~.g#",
       "#~~~~~~~....~~~~~..#",
-      "#~....~~~~~.~~~~~~~#",
+      "#~.....~~~~.~~~~~~~#",
       "#~.~~~~~....~~~~~~~#",
       "#~.~~~~#m.m~~~~~~~~#",
       "#~.~~~~~....~~~~~~~#",
-      "#......~~~~~~~~~~~~#",
-      "#......~~~~~~~~~~~~#",
-      "#.M.B..~~~~~~~~~~~~#",
-      "#...o..~~~~~~~~~~~~#",
-      "#......~~~~~~~~~~~~#",
-      "#......~~~~~~~~~~~~#",
-      "#......~~~~~~~~~~~~#",
+      "#.....~~~~~~~~~~~~~#",
+      "#....B~~~~~~~~~~~~~#",
+      "#.Mo..~~~~~~~~~~~~~#",
+      "#...~.~~~~~~~~~~~~~#",
+      "#.....~~~~~~~~~~~~~#",
+      "#.....~~~~~~~~~~~~~#",
+      "#.....~~~~~~~~~~~~~#",
       "####################"
     ],
     "mirrors": [
@@ -45,7 +45,7 @@
         "buttons": [
           {
             "x": 4,
-            "y": 13
+            "y": 12
           }
         ]
       }
@@ -53,8 +53,8 @@
     "gates": [
       {
         "at": {
-          "x": 5,
-          "y": 12
+          "x": 6,
+          "y": 6
         },
         "circuit": "rose",
         "direction": "N",
@@ -62,7 +62,7 @@
       }
     ]
   },
-  "commands": "UUUUUURRLLDDDDDDRRCXDLLLCRXUULLLURRCDDRRRXDRCDDRDDLDDRX",
+  "commands": "UUUUUURRLLDDDDDDRUURRDLCXDLLLCRDXUULLLURRCDDRRRXDRCDDRDDLDDRX",
   "actions": [
     {
       "id": 1
@@ -116,7 +116,22 @@
       "id": 4
     },
     {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
       "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
     },
     {
       "id": 6,
@@ -144,11 +159,14 @@
       "id": 6,
       "data": {
         "x": 15,
-        "y": 42
+        "y": 39
       }
     },
     {
       "id": 4
+    },
+    {
+      "id": 2
     },
     {
       "id": 5
@@ -256,16 +274,16 @@
     "secondaryUrl": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#énigme-28"
   },
   "metrics": {
-    "actions": 55,
+    "actions": 61,
     "selections": 4,
-    "merchantPushes": 4,
+    "merchantPushes": 5,
     "bardSongs": 3,
     "partnerSongs": 0,
     "selectiveSongs": 1,
     "forcedBardMoves": 1,
     "supportMoves": 0,
     "chainPushes": 0,
-    "stoneMoves": 0,
+    "stoneMoves": 1,
     "mirrorMoves": 3,
     "reflections": 4,
     "heroReflections": 4,
@@ -290,15 +308,71 @@
         {
           "kind": "bard",
           "at": {
-            "x": 4,
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Marchand pose la caisse sur le bouton et ouvre la porte qui coupe le rayon.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
             "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 12
           }
         }
       ],
       "stones": [
         {
           "x": 4,
-          "y": 14
+          "y": 13
         }
       ],
       "supports": [],
@@ -333,14 +407,14 @@
       }
     },
     {
-      "label": "Pousser le Barde préserve le poids du bouton : la case de départ reste ouverte.",
-      "turn": 18,
+      "label": "Une poussée du Barde préserve le poids du bouton : la porte qui coupe le rayon reste ouverte.",
+      "turn": 23,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
             "x": 4,
-            "y": 13
+            "y": 12
           }
         },
         {
@@ -354,7 +428,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 14
+          "y": 13
         }
       ],
       "supports": [],
@@ -390,13 +464,13 @@
     },
     {
       "label": "Le Barde détaché sur l’îlot rapproche les monstres et les fait s’éliminer.",
-      "turn": 24,
+      "turn": 29,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
             "x": 4,
-            "y": 13
+            "y": 12
           }
         },
         {
@@ -410,7 +484,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 14
+          "y": 13
         }
       ],
       "supports": [],
@@ -437,7 +511,7 @@
     },
     {
       "label": "Le Marchand rejoint l’îlot et prépare le second relais.",
-      "turn": 35,
+      "turn": 41,
       "heroes": [
         {
           "kind": "merchant",
@@ -457,7 +531,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 14
+          "y": 13
         }
       ],
       "supports": [],
@@ -484,7 +558,7 @@
     },
     {
       "label": "Le Barde gagne le dernier îlot par le bon axe et libère l’arrivée.",
-      "turn": 44,
+      "turn": 50,
       "heroes": [
         {
           "kind": "merchant",
@@ -504,7 +578,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 14
+          "y": 13
         }
       ],
       "supports": [],
@@ -531,7 +605,7 @@
     },
     {
       "label": "Les deux destinations du dernier îlot sont occupées.",
-      "turn": 55,
+      "turn": 61,
       "heroes": [
         {
           "kind": "merchant",
@@ -551,7 +625,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 14
+          "y": 13
         }
       ],
       "supports": [],
@@ -577,5 +651,5 @@
       }
     }
   ],
-  "adaptation": "Le changement de position relative par les îlots et miroirs reprend Heroes and Mirrors 2 ; le déplacement imposé au Barde pour ne pas chanter reprend Heroes and Water 28. Trois îlots, deux miroirs mobiles et un duel inspiré de Heroes 3 13 forment une géométrie originale adaptée au duo."
+  "adaptation": "Le changement de position relative par les îlots et miroirs reprend Heroes and Mirrors 2 ; le déplacement imposé au Barde pour ne pas chanter reprend Heroes and Water 28. Trois îlots, deux miroirs mobiles et un duel inspiré de Heroes 3 13 forment une géométrie originale adaptée au duo. La caisse commence à côté du bouton : il faut la charger pour ouvrir une porte qui coupe tout le rayon du premier miroir. Le bouton jouxte le seul départ sûr, empêchant un monstre de remplacer la caisse sans tuer le héros qui part. Le Marchand pousse ensuite le Barde sans chant pour préserver ce poids."
 }

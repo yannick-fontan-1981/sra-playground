@@ -1,6 +1,6 @@
 {
   "game": "SS09",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "levels": [
     {
       "level": 1,
@@ -17,8 +17,8 @@
         20,
         16
       ],
-      "floorCells": 91,
-      "waterCells": 53,
+      "floorCells": 90,
+      "waterCells": 54,
       "initialStones": 2,
       "initialSupports": 0,
       "initialMonsters": 0,
@@ -54,9 +54,9 @@
       "recordedStages": 6,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "15854346bb27831784ef168476ba65353b2a3a9b8ad74f8860ad3c507d775302",
+      "mapSha256": "628a4cf25fdff7e29fc3ed6e76445eecc9c529ae2f27a507986453e5ff1da762",
       "witnessSha256": "51cbea244b6a9308b9d8145ff778662b9a96f07ed0e6d920d88dc860d0cab468",
-      "observationsSha256": "c7db9f05cd730029eaaea2e6c9c2b7675a4173efd795b7facfe4a971d95a582a"
+      "observationsSha256": "a9ad36b999edb1e02403f5deebae17b0fdb08d9fefc09ebecfa1445b6203f7ae"
     },
     {
       "level": 2,
@@ -170,7 +170,7 @@
       "solved": true,
       "mapSha256": "7fdc6b17e8f00f091fbdf3ba0f950b13d7413b4a3b7244a4658f991cbdb13d5d",
       "witnessSha256": "dd70a1954196b27bca1c65d9b487acfc96228052be98bdfdfbe790cfa97b5f93",
-      "observationsSha256": "0543e5bb03b2e37ad913679285c27c22f73729c2be8cb3172da71ec6d2e195e5"
+      "observationsSha256": "6361cc7360242ae09ebcfbd473e2cf4eb4cbf9eaa567470387c395c531662155"
     },
     {
       "level": 4,
@@ -179,17 +179,17 @@
       "source": {
         "piston": true,
         "platform": false,
-        "label": "Adaptation de Heroes 3: Bard, Druid 13 · conduire deux monstres vers un duel",
+        "label": "Adaptation de Heroes 3: Bard, Druid 13 · un duel dans le passage obligatoire",
         "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-13",
         "puzzle": 13,
-        "objective": "Charger la presse, isoler le Barde, provoquer le duel puis franchir le pont construit par la disparition du monstre."
+        "objective": "Libérer le Barde, vider le couloir des monstres, déclencher le pont du Marchand puis régler le miroir final."
       },
       "dimensions": [
         20,
-        18
+        20
       ],
-      "floorCells": 53,
-      "waterCells": 291,
+      "floorCells": 46,
+      "waterCells": 339,
       "initialStones": 1,
       "initialSupports": 0,
       "initialMonsters": 2,
@@ -197,17 +197,17 @@
       "gates": 2,
       "hydraulicPlatforms": 0,
       "buttons": 2,
-      "actions": 39,
+      "actions": 60,
       "selections": 4,
       "merchantPushes": 1,
       "bardSongs": 3,
       "partnerSongs": 0,
-      "selectiveSongs": 3,
+      "selectiveSongs": 1,
       "forcedBardMoves": 0,
       "supportMoves": 0,
       "chainPushes": 0,
-      "stoneMoves": 2,
-      "mirrorMoves": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 1,
       "reflections": 3,
       "heroReflections": 3,
       "pistonPushes": 1,
@@ -220,14 +220,14 @@
       "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "hydraulicChanges": 0,
-      "frames": 121,
+      "frames": 185,
       "maxFrames": 11,
       "recordedStages": 5,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "4f7a3e6c4a530cb1e7584c3892b2d611666b4dd5de78c46be4aa1ccc61f30999",
-      "witnessSha256": "d8685fdd0cd25a12a94ef39a5e10e6c17ccef248c3c178b618cf0f8fb04a12ae",
-      "observationsSha256": "f89888b5b6beb08fbd12f7eb9f2bdb95a1dc9eb02236acd754fa918284a79570"
+      "mapSha256": "0bc000f94f8a9b2689d40b66a2cac48058c8eb34904c5fc9067191c4b4bc05aa",
+      "witnessSha256": "27edf8a08843674309c90d1ef36a4a73f5e8398431ee8ce769e73643c28c2964",
+      "observationsSha256": "eb0d28cd94d4f5c4e4656e854f3f647dc1d4d86f29aed9e6fffa290ca1ae0f40"
     },
     {
       "level": 5,
@@ -398,7 +398,7 @@
       "solved": true,
       "mapSha256": "934d259f798a00ea6a9b3311a36fa0266b27d4070a4d05c8a0858865d0522788",
       "witnessSha256": "90153620dc6eb56e9f07726c164820c0ef33c208f1ed72cf1baae932afe0091a",
-      "observationsSha256": "0af8ccde960ff7f883bb86abe3de82a246fa71030be72fe4d7201f5fdec07262"
+      "observationsSha256": "b478d71456826321f0546327401a7d0af0bd35f2edd8cc6769bc6d7b878768f5"
     },
     {
       "level": 8,
@@ -417,8 +417,8 @@
         20,
         18
       ],
-      "floorCells": 79,
-      "waterCells": 208,
+      "floorCells": 72,
+      "waterCells": 215,
       "initialStones": 1,
       "initialSupports": 0,
       "initialMonsters": 2,
@@ -426,16 +426,16 @@
       "gates": 1,
       "hydraulicPlatforms": 0,
       "buttons": 1,
-      "actions": 55,
+      "actions": 61,
       "selections": 4,
-      "merchantPushes": 4,
+      "merchantPushes": 5,
       "bardSongs": 3,
       "partnerSongs": 0,
       "selectiveSongs": 1,
       "forcedBardMoves": 1,
       "supportMoves": 0,
       "chainPushes": 0,
-      "stoneMoves": 0,
+      "stoneMoves": 1,
       "mirrorMoves": 3,
       "reflections": 4,
       "heroReflections": 4,
@@ -449,28 +449,28 @@
       "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "hydraulicChanges": 0,
-      "frames": 162,
+      "frames": 181,
       "maxFrames": 8,
-      "recordedStages": 6,
+      "recordedStages": 7,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "58af87962dfe599900a4acf0bd6fe6f69b4789a4e4a20e9459e9f364b1b76c57",
-      "witnessSha256": "fd2f9de4d0b61e0de995bff39e1723b29e84ec6e9b287ffbc096a7c66f99b4c8",
-      "observationsSha256": "defd46fd22e878714a5119d7eface3c9f6ea3b09e28ca89445059c9e01b960c0"
+      "mapSha256": "a52cf69da18672be79ccf3055beb0d7a22f74fd236311d8415912cbd938ea46e",
+      "witnessSha256": "8e468ed0dae1ec070d9ec18adc6ec3aacb2a61d5a2f344bf33249c80d8871fa2",
+      "observationsSha256": "2d4bac69b42ee397f3e516133a6ce1ade6333cd24adcf051d8103cec52bd2266"
     }
   ],
   "totals": {
-    "actions": 411,
+    "actions": 438,
     "selections": 31,
-    "merchantPushes": 23,
+    "merchantPushes": 24,
     "bardSongs": 60,
     "partnerSongs": 28,
-    "selectiveSongs": 24,
+    "selectiveSongs": 22,
     "forcedBardMoves": 6,
     "supportMoves": 20,
     "chainPushes": 0,
     "stoneMoves": 28,
-    "mirrorMoves": 11,
+    "mirrorMoves": 12,
     "reflections": 14,
     "heroReflections": 14,
     "pistonPushes": 4,
@@ -483,13 +483,13 @@
     "cratesCrushed": 0,
     "simultaneousHeroReflections": 0,
     "hydraulicChanges": 2,
-    "frames": 1218
+    "frames": 1301
   },
   "failureRoutes": [
     {
       "level": 8,
-      "cause": "reflet vers l’eau avant de régler le miroir",
-      "actions": 1,
+      "cause": "reflet vers l’eau après ouverture de la porte, avant de régler le miroir",
+      "actions": 4,
       "frames": 3,
       "frameDurationsMs": [
         70,
@@ -503,7 +503,7 @@
     {
       "level": 8,
       "cause": "le Marchand s’approche du monstre avant le duel",
-      "actions": 22,
+      "actions": 31,
       "frames": 8,
       "frameDurationsMs": [
         60,
@@ -575,38 +575,122 @@
     {
       "level": 4,
       "boundToCurrentMap": true,
-      "mapSha256": "4f7a3e6c4a530cb1e7584c3892b2d611666b4dd5de78c46be4aa1ccc61f30999",
-      "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+      "mapSha256": "0bc000f94f8a9b2689d40b66a2cac48058c8eb34904c5fc9067191c4b4bc05aa",
+      "scope": "Author searches disable transitions using the named mechanism. Exhausted queues prove necessity; capped searches remain inconclusive.",
       "results": [
         {
+          "mechanism": "reflections",
+          "status": "unsolvable",
+          "states": 24,
+          "expanded": 24,
+          "ms": 5
+        },
+        {
           "mechanism": "merchant-push",
-          "status": "limit",
-          "states": 30000,
-          "expanded": 19930,
-          "ms": 441
+          "status": "unsolvable",
+          "states": 15404,
+          "expanded": 15404,
+          "ms": 331
         },
         {
           "mechanism": "bard-song",
-          "status": "limit",
-          "states": 30000,
-          "expanded": 24567,
-          "ms": 448
-        },
-        {
-          "mechanism": "mirror",
-          "status": "limit",
-          "states": 30000,
-          "expanded": 22346,
-          "ms": 410
+          "status": "unsolvable",
+          "states": 48,
+          "expanded": 48,
+          "ms": 1
         },
         {
           "mechanism": "piston",
-          "status": "limit",
-          "states": 30000,
-          "expanded": 20101,
-          "ms": 474
+          "status": "unsolvable",
+          "states": 96,
+          "expanded": 96,
+          "ms": 2
+        },
+        {
+          "mechanism": "support-creation",
+          "status": "unsolvable",
+          "states": 96,
+          "expanded": 96,
+          "ms": 2
         }
-      ]
+      ],
+      "revision": "SS09 v2 — required launch gate, press bridge, occupied exit corridor and aligned final mirror",
+      "elementAudit": [
+        {
+          "name": "never-open-entry-gate",
+          "status": "unsolvable",
+          "states": 22,
+          "expanded": 22,
+          "ms": 4
+        },
+        {
+          "name": "no-combat",
+          "status": "limit",
+          "states": 150002,
+          "expanded": 143278
+        },
+        {
+          "name": "weighted-monster-remains-at-initial-cell",
+          "status": "unsolvable",
+          "states": 96,
+          "expanded": 96,
+          "ms": 3
+        },
+        {
+          "name": "other-monster-remains-at-initial-cell",
+          "status": "unsolvable",
+          "states": 48,
+          "expanded": 48,
+          "ms": 1
+        },
+        {
+          "name": "no-first-mirror-reflection",
+          "status": "unsolvable",
+          "states": 24,
+          "expanded": 24,
+          "ms": 0
+        },
+        {
+          "name": "no-final-mirror-reflection",
+          "status": "limit",
+          "states": 150001,
+          "expanded": 145407
+        },
+        {
+          "name": "victory-with-surviving-monsters",
+          "status": "limit",
+          "states": 150002,
+          "expanded": 145309
+        }
+      ],
+      "geometricCutsets": [
+        {
+          "element": "Entry button and its gate",
+          "role": "The Bard starts on the isolated floor cell (9,13). The only safe exit is reflection through the gate (11,13), held open by the Merchant on (3,17).",
+          "evidence": "Exhaustive search with the entry gate never open: 22 states, no solution."
+        },
+        {
+          "element": "Crate, red monster button and east-facing press",
+          "role": "The single crate starts loaded on (5,14). The wall at (4,14) prevents a manual east push. Before the bridge exists, the Bard cannot make an eastward move inside its singing radius of the crate. Closing this press puts the crate into water at (6,14).",
+          "evidence": "Exhaustive search forbidding piston events: 96 states, no solution. Forbidding support creation produces the same exhaustive result."
+        },
+        {
+          "element": "Both monsters",
+          "role": "Both occupy the one-cell exit corridor. Each must leave its initial cell or die; the monster on (8,8) also holds the press open. The authored route lures them into a duel.",
+          "evidence": "Keeping the weighted monster at (8,8) exhausts 96 states with no solution; keeping the other at (12,8) exhausts 48. The no-combat search reached its cap; duel uniqueness is not claimed."
+        },
+        {
+          "element": "Final mirror and Merchant push",
+          "role": "The isolated goal island at x=2..3, y=5..6 has no walkable connection. The final NW mirror starts one row too low at (8,7); the Merchant pushes it north to (8,6), aligning a reflection from (8,1) to (3,6). The first mirror cannot reach the goal island.",
+          "evidence": "Exhaustive search forbidding Merchant pushes: 15404 states, no solution. Geometric separation proves that reaching the goal island requires the final mirror; the broad no-final-mirror search is explicitly inconclusive at its cap."
+        }
+      ],
+      "claims": {
+        "everyDeviceHasRequiredOrBlockingRole": true,
+        "allMechanismClaimsUseExhaustiveSearchOrGeometricCutsets": true,
+        "duelIsUniqueSolution": false,
+        "allSearchesExhaustive": false
+      }
     },
     {
       "level": 5,
@@ -662,6 +746,67 @@
           "ms": 617
         }
       }
+    },
+    {
+      "level": 8,
+      "boundToCurrentMap": true,
+      "mapSha256": "a52cf69da18672be79ccf3055beb0d7a22f74fd236311d8415912cbd938ea46e",
+      "scope": "Searches use the exact movement, chant, mirror, circuit and combat engine. Goal both heroes leave the start island is weaker than WIN; proving it impossible proves WIN impossible.",
+      "checks": [
+        {
+          "name": "Crate removed",
+          "mutation": "Replace the only initial o by floor. Keep both heroes, both monsters, both mirrors, the button and gate.",
+          "goal": "Both heroes x >= 8 (east of the initial island)",
+          "status": "unsolvable",
+          "states": 173874,
+          "expanded": 173874,
+          "ms": 3716
+        },
+        {
+          "name": "Ray gate held shut",
+          "mutation": "Replace gate at source-map (6,6) by a permanent wall and remove its gate device; preserve all other floor, actors, mirrors and the button.",
+          "goal": "At least one hero x >= 8",
+          "status": "unsolvable",
+          "states": 419014,
+          "expanded": 419014,
+          "ms": 7613
+        }
+      ],
+      "geometry": {
+        "gate": [
+          6,
+          6
+        ],
+        "button": [
+          4,
+          12
+        ],
+        "launch": [
+          5,
+          12
+        ],
+        "waterThatPreventsUnadjustedMirrorLaunch": [
+          4,
+          13
+        ],
+        "notes": [
+          "The Merchant must move the first mirror from (4,6) to (5,6). The only safe mainland landing east of this mirror is (11,6).",
+          "The button is adjacent to the only safe first-island launch cell (5,12): substituting a monster for the crate kills the departing hero.",
+          "The button itself reflects to water while aligned with the unadjusted mirror, so the last hero cannot safely leave by teleporting directly from the button.",
+          "A voluntary south step of the Bard from (5,11), after the crate is on its button, drags the crate into water (4,13), removes the weight and shuts the ray gate. A Merchant push preserves the weight."
+        ]
+      },
+      "witness": {
+        "actions": 61,
+        "stoneMoves": 1,
+        "forcedBardMoves": 1,
+        "heroReflections": 4,
+        "complete": true
+      },
+      "limitations": [
+        "These checks establish necessity of the crate and of opening the gate. They do not establish uniqueness or minimum length of the full solution."
+      ],
+      "reproduce": "npm run build && node reference/author/verify-level8-necessity.mjs"
     }
   ],
   "success": true,
@@ -713,7 +858,7 @@
       "verified": true
     }
   ],
-  "htmlSha256": "5102e637dd34a689a78737b852775639c3f4763d36285715336c7741c1d3ee0f",
+  "htmlSha256": "c6810f1b51c580613c04aad8c5753c9359e3daf13154b5dc044c822978e4a09b",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",

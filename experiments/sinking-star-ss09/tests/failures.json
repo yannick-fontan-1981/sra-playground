@@ -1,9 +1,18 @@
 [
   {
     "level": 8,
-    "cause": "reflet vers l’eau avant de régler le miroir",
-    "commands": "X",
+    "cause": "reflet vers l’eau après ouverture de la porte, avant de régler le miroir",
+    "commands": "RURX",
     "actions": [
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
       {
         "id": 5
       }
@@ -12,7 +21,7 @@
   {
     "level": 8,
     "cause": "le Marchand s’approche du monstre avant le duel",
-    "commands": "UUUUUURRLLDDDDDRRRDXDL",
+    "commands": "UUUUUURRLLDDDDCLCDLDRRUURRDDXDL",
     "actions": [
       {
         "id": 1
@@ -57,6 +66,29 @@
         "id": 2
       },
       {
+        "id": 6,
+        "data": {
+          "x": 18,
+          "y": 39
+        }
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 9,
+          "y": 36
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
         "id": 2
       },
       {
@@ -66,7 +98,19 @@
         "id": 4
       },
       {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
         "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
       },
       {
         "id": 2

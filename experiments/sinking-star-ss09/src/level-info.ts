@@ -25,10 +25,10 @@ export const LEVEL_INFO=[
   {
     "piston": true,
     "platform": false,
-    "label": "Adaptation de Heroes 3: Bard, Druid 13 · conduire deux monstres vers un duel",
+    "label": "Adaptation de Heroes 3: Bard, Druid 13 · un duel dans le passage obligatoire",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-13",
     "puzzle": 13,
-    "objective": "Charger la presse, isoler le Barde, provoquer le duel puis franchir le pont construit par la disparition du monstre."
+    "objective": "Libérer le Barde, vider le couloir des monstres, déclencher le pont du Marchand puis régler le miroir final."
   },
   {
     "piston": true,

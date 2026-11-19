@@ -7,6 +7,7 @@
     "Eleven compiled-HTML Bard cases verify song, radius, walls, selective blocking, partner escort, moving supports, water conversion, refusal, forced Bard motion and reciprocal combat",
     "Nearest-source and equal-distance reflection fixtures preserve previews, pixels, no-song behavior and Undo",
     "Moving a mirror onto a button keeps its white diagonal and black back above device markings",
+    "Compiled-HTML mirror refusals blink only the blocking/conflicting mirrors red twice, explain the conflict from public pixels, preserve lessons and Undo, lock commands and cancel stale frames on Undo",
     "The actual HTML opens level 1 with its twelve-discovery tutorial, Merchant/Bard role controls and accurate song/mirror help",
     "Clicks, Tab, numbers and role buttons select without a turn; Shift+Tab exits and outside/selector input is ignored",
     "Animation locks normal commands while Undo, Reset, Restart and room selection cancel old callbacks and restore exact public states",
@@ -123,6 +124,58 @@
     "gateLesson": true,
     "frames": 4
   },
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible destinations flash both mirrors",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "mirror hiding the only source flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "Undo during warning restores previous actual movement",
+      "midAnimationUndo": true,
+      "exactPreviousState": true,
+      "cancelledFramesCannotRepaint": true,
+      "noReflectionLesson": true
+    }
+  ],
   "tutorialCoverage": {
     "level": 1,
     "actions": 47,
@@ -143,16 +196,16 @@
   },
   "witnessCoverage": {
     "levels": 8,
-    "actions": 411,
-    "frames": 1218,
+    "actions": 438,
+    "frames": 1301,
     "selections": 31,
     "allPixelsAndDurationsCompared": true
   },
   "defeatCoverage": [
     {
       "level": 8,
-      "cause": "reflet vers l’eau avant de régler le miroir",
-      "actions": 1,
+      "cause": "reflet vers l’eau après ouverture de la porte, avant de régler le miroir",
+      "actions": 4,
       "frames": 3,
       "midAnimationUndo": true,
       "overlayAfterLastFrame": true
@@ -160,7 +213,7 @@
     {
       "level": 8,
       "cause": "le Marchand s’approche du monstre avant le duel",
-      "actions": 22,
+      "actions": 31,
       "frames": 8,
       "midAnimationUndo": true,
       "overlayAfterLastFrame": true

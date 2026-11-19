@@ -125,14 +125,19 @@ export interface MotionPhase {
   readonly kind:'walk'|'push'|'song'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
   readonly gateIndex?:number;readonly paths?:readonly (readonly Point[])[];
 }
-export interface DetailedStep {readonly state:State;readonly phases:readonly MotionPhase[]}
+export interface DetailedStep {
+  readonly state:State;readonly phases:readonly MotionPhase[];
+  /** Refusal feedback only: no movement, circuit settling or combat tick. */
+  readonly blockedMirrorIndices?:readonly number[];
+}
 export interface ReflectionPlan {readonly moves:readonly Motion[];readonly paths:readonly (readonly Point[])[];readonly mirrorIndices:readonly number[]}
 const actorAt=(s:State,p:Point):Motion['actor']|null=>heroAt(s,p)?'hero':contains(s.stones,p)?'stone':contains(s.monsters,p)?'monster':s.mirrors.some(m=>equal(m.at,p))?'mirror':null;
 const mirrorArms:Readonly<Record<MirrorFacing,readonly [Direction,Direction]>>={NE:['N','E'],NW:['N','W'],SE:['S','E'],SW:['S','W']};
-/** Author-only planner. Public observations contain its rendered pixels only. */
-export function planReflection(w:World,s:State):ReflectionPlan|null {
-  if(s.complete||s.dead)return null;
-  const moves:Motion[]=[],paths:Point[][]=[],mirrorIndices:number[]=[];
+interface ReflectionAttempt {readonly plan:ReflectionPlan|null;readonly blockedMirrorIndices:readonly number[]}
+function reflectionAttempt(w:World,s:State):ReflectionAttempt {
+  const refusal=(indices:readonly number[]=[]):ReflectionAttempt=>({plan:null,blockedMirrorIndices:[...new Set(indices)].sort((a,b)=>a-b)});
+  if(s.complete||s.dead)return refusal();
+  const moves:Motion[]=[],paths:Point[][]=[],mirrorIndices:number[]=[],owners:number[][]=[];
   for(let mi=0;mi<s.mirrors.length;mi++){
     const mirror=s.mirrors[mi]!,arms=mirrorArms[mirror.facing];
     const candidates:{actor:Motion['actor'];from:Point;toDir:Direction;distance:number;path:Point[]}[]=[];
@@ -151,23 +156,49 @@ export function planReflection(w:World,s:State):ReflectionPlan|null {
     for(const {actor,from,toDir,distance,path} of candidates){
       if(distance!==nearest)continue;
       let to=mirror.at;const destinationPath:Point[]=[];
-      for(let d=0;d<distance;d++){to=offset(to,toDir);if(rayBlocked(w,s,to))return null;destinationPath.push(to);}
-      const previous=moves.find(m=>m.actor===actor&&equal(m.from,from));
-      if(previous&&!equal(previous.to,to))return null;
-      if(!previous)moves.push({actor,from,to});paths.push([...path].reverse().concat(destinationPath));if(!mirrorIndices.includes(mi))mirrorIndices.push(mi);
+      for(let d=0;d<distance;d++){
+        to=offset(to,toDir);
+        if(rayBlocked(w,s,to)){const obstruction=s.mirrors.findIndex(m=>equal(m.at,to));return refusal(obstruction<0?[]:[obstruction]);}
+        destinationPath.push(to);
+      }
+      const previousIndex=moves.findIndex(m=>m.actor===actor&&equal(m.from,from)),previous=moves[previousIndex];
+      if(previous&&!equal(previous.to,to))return refusal([...owners[previousIndex]!,mi]);
+      if(!previous){moves.push({actor,from,to});owners.push([mi]);}else owners[previousIndex]!.push(mi);
+      paths.push([...path].reverse().concat(destinationPath));if(!mirrorIndices.includes(mi))mirrorIndices.push(mi);
     }
   }
-  if(!moves.length)return null;
-  const destinations=new Set<string>();
-  for(const move of moves){
-    if(destinations.has(keyOf(move.to)))return null;destinations.add(keyOf(move.to));
-    const occupant=actorAt(s,move.to);if(occupant&&!moves.some(m=>m.actor===occupant&&equal(m.from,move.to)))return null;
+  if(!moves.length){
+    // An intervening mirror can hide the only source. Diagnose it only after
+    // the real planner found no transfer; it must never veto a valid nearer one.
+    const obstructions:number[]=[];
+    for(const mirror of s.mirrors){
+      const candidates:{distance:number;blockers:number[]}[]=[];
+      for(const direction of mirrorArms[mirror.facing]){
+        let at=mirror.at;const blockers:number[]=[];
+        for(let distance=1;distance<20;distance++){
+          at=offset(at,direction);if(blocked(w,s,at))break;
+          const index=s.mirrors.findIndex(m=>equal(m.at,at));
+          if(index>=0){blockers.push(index);continue;}
+          if(actorAt(s,at)){candidates.push({distance,blockers:[...blockers]});break;}
+        }
+      }
+      const nearest=Math.min(...candidates.map(c=>c.distance));
+      for(const c of candidates)if(c.distance===nearest)obstructions.push(...c.blockers);
+    }
+    return refusal(obstructions);
+  }
+  const destinations=new Map<string,number>();
+  for(const [index,move] of moves.entries()){
+    const other=destinations.get(keyOf(move.to));if(other!==undefined)return refusal([...owners[other]!,...owners[index]!]);destinations.set(keyOf(move.to),index);
+    const occupant=actorAt(s,move.to);if(occupant&&!moves.some(m=>m.actor===occupant&&equal(m.from,move.to)))return refusal();
   }
   for(const path of paths)for(const p of path){
-    const occupant=actorAt(s,p);if(occupant&&occupant!=='mirror'&&!moves.some(m=>m.actor===occupant&&equal(m.from,p)))return null;
+    const occupant=actorAt(s,p);if(occupant&&occupant!=='mirror'&&!moves.some(m=>m.actor===occupant&&equal(m.from,p)))return refusal();
   }
-  return {moves,paths,mirrorIndices};
+  return {plan:{moves,paths,mirrorIndices},blockedMirrorIndices:[]};
 }
+/** Author-only planner. Public observations contain its rendered pixels only. */
+export function planReflection(w:World,s:State):ReflectionPlan|null{return reflectionAttempt(w,s).plan;}
 /** Resolve water after position changes. Hydraulic cells wait until their circuits settle. */
 function resolveBuoyancy(w:World,s:State,deferHydraulics:boolean):State {
   const supports=[...s.supports],stones:Point[]=[];
@@ -286,7 +317,11 @@ export function stepDetailed(w:World,s:State,actionId:number,data?:Point):Detail
   const faced:State={...s,heroes:s.heroes.map((h,i)=>i===s.active?{...h,facing:direction}:h),failed:false};
   const refusal=():DetailedStep=>({state:{...faced,failed:true},phases:[]});
   let next:State,first:MotionPhase;
-  if(actionId===5){const plan=planReflection(w,s);if(!plan)return refusal();next=applyMotions(w,faced,plan.moves);first={kind:'reflect',before:s,after:next,moves:plan.moves,paths:plan.paths};}
+  if(actionId===5){
+    const {plan,blockedMirrorIndices}=reflectionAttempt(w,s);
+    if(!plan)return {...refusal(),...(blockedMirrorIndices.length?{blockedMirrorIndices}:{})};
+    next=applyMotions(w,faced,plan.moves);first={kind:'reflect',before:s,after:next,moves:plan.moves,paths:plan.paths};
+  }
   else {
     const result=hero.kind==='bard'?songStep(w,faced,direction):moveStep(w,faced,direction);
     if(!result)return refusal();next=result.state;
@@ -415,6 +450,14 @@ function phaseFrames(w:World,phase:MotionPhase):number[][][] {
   });return [...frames,renderWorld(w,phase.after)];
 }
 function presentation(w:World,detail:DetailedStep):{frames:number[][][];durations:number[]} {
+  if(detail.blockedMirrorIndices?.length){
+    const normal=()=>renderWorld(w,detail.state),red=()=>{
+      const frame=normal();
+      for(const index of detail.blockedMirrorIndices!){const mirror=detail.state.mirrors[index];if(mirror)stamp(frame,mirror.at,mirrorSprite(mirror.facing).map(row=>row.map(pixel=>pixel===0?8:pixel)));}
+      return frame;
+    };
+    return {frames:[red(),normal(),red(),normal()],durations:[110,70,110,0]};
+  }
   if(!detail.phases.length)return {frames:[renderWorld(w,detail.state)],durations:[0]};
   const frames:number[][][]=[],durations:number[]=[];
   for(const phase of detail.phases){const part=phaseFrames(w,phase);frames.push(...part);durations.push(...(phase.kind==='combat'?[80,90,100,110,40]:part.length===3?(phase.kind==='reflect'?[70,90,40]:[60,80,40]):[40]));}
@@ -437,8 +480,9 @@ export class DuoPuzzleSession {
   action(actionId:number,data?:Point):Observation {
     const world=this.worlds[this.index]!,before=this.state,detail=stepDetailed(world,before,actionId,data),next=detail.state;
     const changed=JSON.stringify(next)!==JSON.stringify(before);
-    if(!changed&&!detail.phases.length)return this.observe();
-    if(changed)this.history.push({index:this.index,completed:[...this.completed],state:before});
+    if(!changed&&!detail.phases.length&&!detail.blockedMirrorIndices?.length)return this.observe();
+    // A warning can be replayed, but must not consume an Undo step.
+    if(changed&&!detail.blockedMirrorIndices?.length)this.history.push({index:this.index,completed:[...this.completed],state:before});
     this.state=next;const {frames,durations}=presentation(world,detail);
     if(next.complete){this.completed.add(this.index);const i=this.worlds.findIndex((_,i)=>!this.completed.has(i));if(i!==-1){this.index=i;this.state=initialState(this.worlds[this.index]!);}}
     const observation=this.observe();if(this.state!==next){durations[durations.length-1]=100;frames.push(observation.frame);durations.push(0);}return {...observation,frames,frameDurationsMs:durations};
