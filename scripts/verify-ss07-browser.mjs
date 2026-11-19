@@ -5,20 +5,11 @@ import { SS07_LEVELS } from '../experiments/sinking-star-ss07/src/levels.ts';
 import { visibleHeroes } from '../experiments/sinking-star-ss07/src/tutorial.ts';
 import witnesses from '../experiments/sinking-star-ss07/tests/witnesses.json' with { type: 'json' };
 import failures from '../experiments/sinking-star-ss07/tests/failures.json' with { type: 'json' };
-import { eight, groups, keys, openNativeBrowser, pixelHash, sha } from './native-browser-checks.mjs';
+import { assertNativeObservation, eight, groups, keys, openNativeBrowser, pixelHash, sha } from './native-browser-checks.mjs';
 
 const live = process.argv.includes('--live');
 const origin = new URL(process.env.SS07_TEST_URL ?? 'http://127.0.0.1:4174').origin;
 const { page, pythonRequests, errors, close } = await openNativeBrowser({ origin, game: 'SS07', live, successor: process.argv.includes('--successor') });
-
-function assertObservation(actual, expected) {
-  const { frame: af, frames: as, ...publicData } = actual;
-  const { frame: ef, frames: es, ...referenceData } = expected;
-  assert.deepEqual(publicData, referenceData);
-  assert.equal(sha(Buffer.from(af.flat())), sha(Buffer.from(ef.flat())), 'Settled pixels');
-  assert.equal(as.length, es.length);
-  assert.equal(sha(Buffer.from(as.flat(2))), sha(Buffer.from(es.flat(2))), 'Animation pixels');
-}
 
 function targetCount(frame) {
   let count = 0;
@@ -40,7 +31,7 @@ try {
     && document.querySelector('#game-availability').textContent === 'Ready', minimum, { timeout: 20000 });
   const settled = async (minimum, expected) => {
     await ready(minimum);
-    assertObservation(await page.evaluate(() => window.qa.latest), expected);
+    assertNativeObservation(await page.evaluate(() => window.qa.latest), expected);
     return expected;
   };
   const operate = async (gesture, expected) => {

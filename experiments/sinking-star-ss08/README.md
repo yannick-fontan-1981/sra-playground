@@ -1,6 +1,6 @@
 # SS08 — La Double Transposition
 
-Laboratoire autonome du duo **Marchand + Magicien**, destiné au lot Custom 4 de SRA Playground. Huit niveaux, atelier guidé au niveau 4, rendu ARC en 64 × 64 pixels et cellules de 3 × 3 pixels.
+Laboratoire autonome du duo **Marchand + Magicien** de [SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS08#playground). SS08 est le huitième jeu de Custom 4. La campagne démarre au niveau 1, l’atelier guidé est au niveau 4 et le rendu conserve les 64 × 64 pixels avec des cellules de 3 × 3.
 
 ## Jouer et reconstruire
 
@@ -10,7 +10,7 @@ npm test
 npm run validate
 ```
 
-Ouvrir ensuite `dist/SS08-demo.html` dans un navigateur. Le HTML embarque le moteur, les cartes et l’interface ; il fonctionne hors ligne. Les sources restent dans `experiments/sinking-star-ss08/` ; l’adaptateur SRA et la publication du site constituent une étape d’intégration séparée.
+Ouvrir ensuite `dist/SS08-demo.html` dans un navigateur. Le HTML fonctionne hors ligne. Le Playground réutilise le moteur et les huit cartes du laboratoire v0.3.0, ainsi que les lecteurs de pixels du tutoriel.
 
 - Flèches : déplacer le personnage sélectionné.
 - Marchand orange (12) : pousser un seul occupant vers la case suivante.
@@ -34,6 +34,8 @@ Les sources sont les zones liées depuis [Crossovers](https://sinkingstarwalkthr
 - `tests/duo.test.mjs` : règles et régressions du moteur, dont échanges, rebonds, boucles, pressions, combat et annulation.
 - `scripts/validate-levels.mjs` : rejoue les huit parcours via le moteur et la session publique, valide chaque image et la progression jusqu’à WIN.
 - `scripts/verify-ui-dom.mjs` : exécute le HTML réellement compilé avec Happy DOM, le canvas et des temporisations contrôlées. Pour ce contrôle, fournir `HAPPY_DOM_MODULE` vers le module Happy DOM disponible.
+- `tests/custom4-native.test.ts` à la racine : compare le laboratoire, l’adaptateur et le routeur sur les huit témoins, soit 324 actions, 29 sélections et 970 images.
+- `scripts/verify-ss08-browser.mjs` à la racine : vérifie le tutoriel, les boucles, l’annulation et les aperçus de la galerie dans Chromium. Après le build, utiliser un aperçu Vite sur le port 4174 et Playwright ou `PLAYWRIGHT_MODULE`.
 - `scripts/solver.mjs` et `tests/witnesses.json` : outils d’auteur uniquement ; ils ne sont pas inclus dans le HTML.
 - `reference/*necessity*` / `*ablation*` : recherches et preuves de passages obligés. Une recherche interrompue à sa limite reste explicitement inconclusive.
 

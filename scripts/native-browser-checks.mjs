@@ -11,6 +11,15 @@ export const groups = GAME_CATALOG.filter(game => game.group === 'custom_4').map
 export const eight = Array.from({ length: 8 }, (_, i) => String(i + 1));
 export const keys = { 1: 'ArrowUp', 2: 'ArrowDown', 3: 'ArrowLeft', 4: 'ArrowRight', 5: 'Space' };
 
+export function assertNativeObservation(actual, expected) {
+  const { frame: actualFrame, frames: actualFrames, ...actualData } = actual;
+  const { frame: expectedFrame, frames: expectedFrames, ...expectedData } = expected;
+  assert.deepEqual(actualData, expectedData);
+  assert.equal(sha(Buffer.from(actualFrame.flat())), sha(Buffer.from(expectedFrame.flat())), 'Settled pixels');
+  assert.equal(actualFrames.length, expectedFrames.length);
+  assert.equal(sha(Buffer.from(actualFrames.flat(2))), sha(Buffer.from(expectedFrames.flat(2))), 'Animation pixels');
+}
+
 async function liveHeaders({ origin, game, successor }) {
   const headers = {};
   process.stdin.setEncoding('utf8');
@@ -83,14 +92,17 @@ export async function openNativeBrowser({ origin, game, live, successor = false 
         const victoryHidden = document.querySelector('#win-overlay').hidden;
         qa.paints?.push({ rgba: Array.from(image.data), defeatHidden, victoryHidden });
         const interruption = qa.interruption;
-      if (!interruption || qa.latest.frames.length < (interruption.minFrames ?? 1) || ++interruption.paints !== interruption.at) return;
-        if (interruption.fromAgent) document.querySelector('#manual-tab').click();
+        if (!interruption || qa.latest.frames.length < (interruption.minFrames ?? 1) || ++interruption.paints !== interruption.at) return;
+        if (interruption.fromAgent) {
+          qa.agentStepDisabled = document.querySelector('#agent-step').disabled;
+          document.querySelector('#manual-tab').click();
+        }
         const control = document.querySelector(interruption.selector);
         qa.interruption = null;
         qa.interrupted = { busy: this.canvas.getAttribute('aria-busy'), controlEnabled: !control.disabled };
         this.canvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
         if (control instanceof HTMLSelectElement) {
-          control.value = '8';
+          control.value = String(interruption.level ?? 8);
           control.dispatchEvent(new Event('change', { bubbles: true }));
         } else control.click();
       };
@@ -107,5 +119,5 @@ export async function openNativeBrowser({ origin, game, live, successor = false 
   } catch (error) {
     await browser.close();
     throw error;
-}
+  }
 }
