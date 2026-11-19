@@ -31,13 +31,32 @@ export function acquireCarrierView(rows: NativeRows, observation: NativeObservat
   if (!aligned) return null;
   const [nextModel, offset, unpredicted] = aligned;
   const visible = reductionVisibleCells(nextModel, offset), known = previous.known_cells!;
+  const clippedRow = (layout: ReductionModel, at: ReductionPoint) =>
+    at[1] + (layout.height - layout.unit - layout.phase[1]) / layout.pitch;
+  const previousClip = model.trackClippedCarrierRows ? clippedRow(model, view.offset) : null;
+  const currentClip = model.trackClippedCarrierRows ? clippedRow(nextModel, offset) : null;
   const actual = reductionScan(rows, nextModel);
+  if (expectation && actual.plots && previousClip !== null && currentClip !== null) {
+    const cargo = new Set(expectation[2]?.map(key));
+    for (const [x, y] of expectation[1]) {
+      const at = key([x, y]);
+      if (y !== currentClip || !cargo.has(at)) continue;
+      const previousPosition = motion && key([x - motion[0], y - motion[1]]);
+      const knownCargo = previous.carriedPlots?.has(at) || previousPosition && previous.carriedPlots?.has(previousPosition);
+      if (!knownCargo && currentClip >= previousClip) continue;
+      const cell: ReductionPoint = [x - offset[0], y - offset[1]];
+      if (!actual.plots.delete(key(cell))) continue;
+      actual.carriers.push(cell);
+      (actual.carriedPlots ??= new Set()).add(key(cell));
+    }
+  }
   const registered = mergeReductionScene(null, actual, nextModel, offset);
   const projectedCarriers = motion && expectation ? new Set(expectation[1].map(key)) : null;
   const observedCarriers = motion && expectation ? new Set(registered.carriers.map(key)) : null;
   const entering = new Set(motion && projectedCarriers ? registered.carriers.flatMap(([x, y]) => {
     const cell = key([x, y]), predecessor = key([x - motion[0], y - motion[1]]);
-    return !projectedCarriers.has(cell) && !known.has(predecessor) ? [cell] : [];
+    const newlyUnclipped = y === previousClip && currentClip !== null && y < currentClip;
+    return !projectedCarriers.has(cell) && (!known.has(predecessor) || newlyUnclipped) ? [cell] : [];
   }) : []);
   const leaving = new Set(motion && projectedCarriers && observedCarriers ? previous.carriers.flatMap(([x, y]) => {
     const cell = key([x, y]), successor = key([x + motion[0], y + motion[1]]);
@@ -54,11 +73,16 @@ export function acquireCarrierView(rows: NativeRows, observation: NativeObservat
     }
     return true;
   };
-  const plotsPreserved = !previous.plots || [...visible].every(cell => !known.has(cell)
-    || previous.plots!.has(cell) === !!registered.plots?.has(cell));
+  // Revealing the whole rim can identify a previously visible plot as cargo.
+  const reclassified = model.trackClippedCarrierRows && previous.plots
+    ? [...entering].filter(cell => previous.plots!.has(cell) && registered.carriedPlots?.has(cell)) : [];
+  const fixedPlots = reclassified.length ? new Set([...previous.plots!].filter(cell => !reclassified.includes(cell))) : previous.plots;
+  const plotsPreserved = !fixedPlots || [...visible].every(cell => !known.has(cell)
+    || fixedPlots.has(cell) === !!registered.plots?.has(cell));
   const matches = expectation ? plotsPreserved && check(registered.pegs, expectation[0]) && check(registered.carriers.map(key), expectation[1])
     && check(registered.carriedPlots ?? [], expectation[2] ?? []) && check(registered.auxiliaries ?? [], expectation[3] ?? []) : null;
-  const scene = expectation && matches ? mergeReductionScene({ ...previous, pegs: new Set(expectation[0].map(key)),
+  const scene = expectation && matches ? mergeReductionScene({ ...previous, ...(fixedPlots ? { plots: fixedPlots } : {}),
+    pegs: new Set(expectation[0].map(key)),
     carriers: expectation[1], ...(expectation[2] && (!expectation[3] || previous.carriedPlots || expectation[2].length)
       ? { carriedPlots: new Set(expectation[2].map(key)) } : {}),
     ...(expectation[3] ? { auxiliaries: new Set(expectation[3].map(key)) } : {}) },

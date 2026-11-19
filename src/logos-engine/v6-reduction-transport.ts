@@ -18,6 +18,7 @@ export type ReductionModel = {
   plot?: { ink: number; offset: ReductionPoint; mask: readonly (readonly [number, number])[] };
   auxiliary?: number;
   trackCoveredRails?: boolean;
+  trackClippedCarrierRows?: boolean;
 };
 export type ReductionScene = {
   floor: Set<string>; pegs: Set<string>; carriers: ReductionPoint[]; rails: Set<string>;
@@ -25,6 +26,7 @@ export type ReductionScene = {
   auxiliaries?: Set<string>;
   followVacated?: boolean;
   allowDockTransfer?: boolean;
+  allowAuxiliaryPeerJump?: boolean;
 };
 export type ReductionState = [Set<string>, ReductionPoint[], Set<string>?, Set<string>?];
 export type ReductionOperation = ['jump', ReductionPoint, ReductionPoint] | ['move', ReductionPoint];
@@ -145,7 +147,11 @@ export function reductionScan(rows: NativeRows, m: ReductionModel): ReductionSce
       const visibleSide = x === 0 ? x + s : x + s === rows[0]!.length ? x - 1 : null;
       const hasClippedRim = m.trackCoveredRails && m.ring !== null && visibleSide !== null && y > 0 && y + s < rows.length
         && rows.slice(y - 1, y + s + 1).every(row => row[visibleSide] === m.ring);
-      const border = hasFullRim || hasClippedRim;
+      const hasBottomRim = m.trackClippedCarrierRows && m.ring !== null && y + s === rows.length
+        && x > 0 && x + s < rows[0]!.length && y > 0
+        && rows[y - 1]!.slice(x - 1, x + s + 1).every(ink => ink === m.ring)
+        && rows.slice(y, y + s).every(row => row[x - 1] === m.ring && row[x + s] === m.ring);
+      const border = hasFullRim || hasClippedRim || hasBottomRim;
       if (border) { carriers.add(k); rails.add(k); }
       else if (countValue(rows, x, y, s, m.floor) >= s * s / 4) floor.add(k);
       if (m.rail !== null && rows[y + Math.floor(s / 2)]![x + Math.floor(s / 2)] === m.rail) rails.add(k);
@@ -224,7 +230,8 @@ export function* reductionSuccessors(current: ReductionState, scene: ReductionSc
     const mid = add(p, vector), end = add(mid, vector);
     const dockTransfer = scene.allowDockTransfer !== false && carrierCells && !supports.has(key(mid)) && !scene.rails.has(key(mid))
       && carrierCells.has(key(p)) !== carrierCells.has(key(end));
-    const supported = pegs.has(key(mid)) || isPlot(key(mid)) || !auxiliaryJump && auxiliaries?.has(key(mid)) || dockTransfer;
+    const supported = pegs.has(key(mid)) || isPlot(key(mid))
+      || (!auxiliaryJump || scene.allowAuxiliaryPeerJump) && auxiliaries?.has(key(mid)) || dockTransfer;
     if (supported && supports.has(key(end)) && !pegs.has(key(end)) && !isPlot(key(end)) && !auxiliaries?.has(key(end))) {
       const tokens = new Set(pegs);
       let companions = auxiliaries;
