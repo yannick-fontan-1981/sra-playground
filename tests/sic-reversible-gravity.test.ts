@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { chooseGravityReversal, gravityReturn, gravityStateKey, gravityTerrain,
+import { chooseGravityReversal, gravityReturn, gravityStateKey, gravityTerrain, observeGravityPropagation,
   type GravityHistory, type GravityStep, type GravityView } from '../src/sic/reversible-gravity.ts';
+import { planPropagatingGravity, spreadGravitySupport } from '../src/sic/gravity-propagation-route.ts';
 
 test('protects the actor before reversing toward an offscreen exit', () => {
   const tiles: GravityView['tiles'] = Array(21).fill('wall');
@@ -21,6 +22,39 @@ test('protects the actor before reversing toward an offscreen exit', () => {
   protectedTiles[ceiling] = 'ceiling_solid';
   const reverse = chooseGravityReversal({ ...view, tiles: protectedTiles }, memory, 8, true);
   assert.deepEqual([reverse?.index, reverse?.edit, reverse?.direction, reverse?.landing], [inverter, 'invert', -1, actor]);
+});
+
+test('a removed block with new neighboring supports is distinguished from an inversion', () => {
+  const width = 4, at = 4, edited = 6;
+  const tiles: GravityView['tiles'] = Array(16).fill('air');
+  tiles[edited] = 'inverter';
+  const before: GravityView = { width, tiles, at, origin: [3, 3], pitch: 6, actor: [2, 7, 3, 10],
+    exit: null, inverterInk: 12 };
+  const dropped = [...tiles];
+  dropped[edited] = 'air';
+  assert.equal(observeGravityPropagation(before, { ...before, tiles: dropped }, edited, 0), false);
+  for (const index of [2, 5, 7, 10]) dropped[index] = 'propagating';
+  assert.equal(observeGravityPropagation(before, { ...before, tiles: dropped }, edited, 0), true);
+  dropped[15] = 'propagating';
+  assert.equal(observeGravityPropagation(before, { ...before, tiles: dropped }, edited, 0), false);
+
+  assert.deepEqual(spreadGravitySupport(index => tiles[index], edited, 5, width),
+    [[6, 'air'], [2, 'propagating'], [10, 'propagating'], [7, 'propagating']]);
+});
+
+test('the route prepares a stop before spending an inversion that would pass the exit', () => {
+  const width = 5, at = 7, exit = 23, inverter = 21, seed = 18;
+  const tiles: GravityView['tiles'] = Array(40).fill('wall');
+  for (const cell of [at, 12, 17, 22, 27, 13]) tiles[cell] = 'air';
+  tiles[exit] = 'exit';
+  tiles[inverter] = 'inverter';
+  const view: GravityView = { width, tiles, at, exit, origin: [3, 3], pitch: 6, actor: [14, 7, 15, 10], inverterInk: 8 };
+  const memory: GravityHistory = { direction: -1, rowOrigin: 0, highest: 1, lowest: 1,
+    seen: [gravityStateKey(view, 0, -1)], denied: [], terrain: gravityTerrain(view, 0), inverted: false };
+  assert.equal(planPropagatingGravity(view, memory, 10), null);
+  tiles[seed] = 'propagating';
+  const prepared = planPropagatingGravity(view, { ...memory, terrain: gravityTerrain(view, 0) }, 10);
+  assert.deepEqual([prepared?.index, prepared?.edit, prepared?.direction], [seed, 'spread', -1]);
 });
 
 test('recover a landing from successive visible overlaps across an animated scroll', () => {
