@@ -1,14 +1,16 @@
 import { constellationFocus, measureConstellationLayout, type ConstellationMaterialRegion } from '../logos-engine/v6-constellation-cover.ts';
-import { measureMarkerMaterialRegions } from './marker-material-route.ts';
+import { measureClippedMarkerMaterialRegions, measureMarkerMaterialRegions } from './marker-material-route.ts';
 import { pointKey, type Point } from '../logos-engine/v6-point-set.ts';
 import type { NativeBox, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Segment = readonly [start: number, axis: number, end: number];
 type Shape = { kind: 'frame'; box: NativeBox } | { kind: 'cross'; horizontal: Segment; vertical: Segment };
 type Piece = { color: number; shape: Shape; markers: Point[]; targetColor?: number };
+type StopObstacle = { box: NativeBox; color: number; mask: readonly Point[] };
 export type StopScene = { pieces: Piece[]; active: number };
 export type StopLayout = { stop: NativeBox; stopColor: number; cursorColor: number; markerPixels: string[];
-  width: number; height: number; materials?: readonly ConstellationMaterialRegion[] };
+  width: number; height: number; materials?: readonly ConstellationMaterialRegion[]; obstacles?: StopObstacle[];
+  contactReturns?: Record<string, number> };
 export type StopStep = { action: string; expected: StopScene; effect: string | null };
 
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -128,8 +130,9 @@ function fitOccludedStopShape(pixels: readonly Point[], stride: number, hidden: 
     ? { kind: 'cross', horizontal: [horizontal[0], y, horizontal[1]], vertical: [vertical[0], x, vertical[1]] } : null;
 }
 
-export function measureMaterialStopScene(observation: NativeObservation, rows: NativeRows, stride: number) {
-  const materials = measureMarkerMaterialRegions(observation, rows).sort((a, b) => a.box[1] - b.box[1] || a.box[0] - b.box[0]);
+function measureMaterialStopLayout(observation: NativeObservation, rows: NativeRows, stride: number,
+  materials: ConstellationMaterialRegion[]) {
+  materials.sort((a, b) => a.box[1] - b.box[1] || a.box[0] - b.box[0]);
   if (materials.length < 2) return null;
   const model = measureConstellationLayout(observation, rows, materials);
   if (!model || model.targets.size < 2 || model.targets.size > 4) return null;
@@ -137,12 +140,18 @@ export function measureMaterialStopScene(observation: NativeObservation, rows: N
   const focus = constellationFocus(rows, model);
   if (!focus) return null;
   const ignored = model.excluded.union(model.boundary_overlay);
-  const stops = observation.entities.filter(e => e.palette_value !== model.background && e.palette_value !== model.focus_color
+  const candidates = observation.entities.filter(e => e.palette_value !== model.background && e.palette_value !== model.focus_color
     && e.bbox[2] - e.bbox[0] >= stride && e.bbox[3] - e.bbox[1] >= stride && !e.bbox.includes(0)
-    && e.bbox[2] < model.width - 1 && e.bbox[3] < model.height - 1
-    && framePixels(e.bbox).every(([x, y]) => !ignored.has([x, y]) && rows[y]?.[x] === e.palette_value));
-  if (stops.length !== 1) return null;
-  const stop = stops[0]!, groups = new Map<number, Point[]>();
+    && e.bbox[2] < model.width - 1 && e.bbox[3] < model.height - 1);
+  const stops = candidates.filter(e => framePixels(e.bbox).every(([x, y]) => !ignored.has([x, y]) && rows[y]?.[x] === e.palette_value));
+  const dense = candidates.filter(({ bbox: [l, t, r, b], area, mask }) => area * 3 >= 2 * (r - l + 1) * (b - t + 1)
+    && mask.every(([x, y]) => !ignored.has([x + l, y + t])));
+  const repeated = dense.length >= 2 && dense.length <= 4 && dense.every(e =>
+    e.palette_value === dense[0]!.palette_value && equal(e.mask, dense[0]!.mask));
+  const obstacles = repeated ? dense.map(e => ({ box: e.bbox, color: e.palette_value, mask: e.mask })) : undefined;
+  const stop = repeated ? dense[0] : stops.length === 1 ? stops[0] : null;
+  if (!stop) return null;
+  const groups = new Map<number, Point[]>();
   const markerPixels = [...ignored].map(pointKey), hidden = new Set(markerPixels);
   for (let y = 0; y < model.height; y++) for (let x = 0; x < model.width; x++) {
     const color = rows[y]![x]!;
@@ -162,10 +171,18 @@ export function measureMaterialStopScene(observation: NativeObservation, rows: N
   if (active.length !== 1) return null;
   const scene: StopScene = { pieces, active: active[0]! };
   const layout: StopLayout = { stop: stop.bbox, stopColor: stop.palette_value, cursorColor: model.focus_color, markerPixels,
-    width: model.width, height: model.height, materials };
+    width: model.width, height: model.height, materials, ...(obstacles ? { obstacles } : {}) };
   if (!stopSceneMatches(rows, layout, scene)) return null;
   const targets = [...model.targets].map(([color, points]) => ({ color, markers: [...points] }));
   return { layout, scene, targets };
+}
+
+export function measureMaterialStopScene(observation: NativeObservation, rows: NativeRows, stride: number) {
+  const known = measureMarkerMaterialRegions(observation, rows);
+  const complete = measureMaterialStopLayout(observation, rows, stride, known);
+  if (complete) return complete;
+  const clipped = measureClippedMarkerMaterialRegions(rows, known);
+  return clipped.length ? measureMaterialStopLayout(observation, rows, stride, [...known, ...clipped]) : null;
 }
 
 function shapeCouldCover(shape: Shape, markers: readonly Point[]) {
@@ -229,7 +246,10 @@ export function stopSceneMatches(rows: NativeRows, layout: StopLayout, scene: St
   const focusInk = rows[cursor[1]]?.[cursor[0]];
   const covered = scene.pieces.some((piece, i) => i !== scene.active && piece.color === focusInk && areaOf(piece.shape, cursor));
   if (focusInk !== layout.cursorColor && !covered) return false;
-  if (!framePixels(layout.stop).every(([x, y]) => rows[y]?.[x] === layout.stopColor)) return false;
+  const stopsMatch = layout.obstacles
+    ? layout.obstacles.every(({ box: [l, t], mask, color }) => mask.every(([x, y]) => rows[t + y]?.[l + x] === color))
+    : framePixels(layout.stop).every(([x, y]) => rows[y]?.[x] === layout.stopColor);
+  if (!stopsMatch) return false;
   const ignored = new Set(layout.markerPixels);
   ignored.add(pointKey(cursor));
   for (let y = 0; y < layout.height; y++) for (let x = 0; x < layout.width; x++) {
@@ -243,6 +263,10 @@ export function stopSceneMatches(rows: NativeRows, layout: StopLayout, scene: St
 }
 
 const inPlay = ([l, t, r, b]: NativeBox, layout: StopLayout) => l >= 0 && t >= 0 && r < layout.width && b < layout.height;
+const centerInPlay = ([l, t, r, b]: NativeBox, layout: StopLayout) => Math.round((l + r) / 2) >= 0
+  && Math.round((l + r) / 2) < layout.width && Math.round((t + b) / 2) >= 0 && Math.round((t + b) / 2) < layout.height;
+const touchesStop = (box: NativeBox, layout: StopLayout) => layout.obstacles
+  ? layout.obstacles.some(obstacle => overlaps(box, obstacle.box)) : overlaps(box, layout.stop);
 export const coversStopMarkers = (piece: Piece) => (piece.targetColor === undefined || piece.color === piece.targetColor)
   && piece.markers.every(point => areaOf(piece.shape, point));
 
@@ -252,17 +276,18 @@ function moveShape(shape: Shape, vector: Point, layout: StopLayout): Shape {
     const [l, y, r] = shape.horizontal, [t, x, b] = shape.vertical;
     const nextH = shiftBox([l, y, r, y], vector), nextV = shiftBox([x, t, x, b], vector);
     if (!layout.materials && (!inPlay(nextH, layout) || !inPlay(nextV, layout))) return shape;
-    const centerInPlay = ([a, b, c, d]: NativeBox) => a + c >= 0 && a + c < 2 * layout.width && b + d >= 0 && b + d < 2 * layout.height;
-    const horizontal = (!layout.materials || centerInPlay(nextH)) && !overlaps(nextH, layout.stop)
+    const segmentCenterInPlay = ([a, b, c, d]: NativeBox) => a + c >= 0 && a + c < 2 * layout.width && b + d >= 0 && b + d < 2 * layout.height;
+    const horizontal = (!layout.materials || segmentCenterInPlay(nextH)) && !touchesStop(nextH, layout)
       ? [l + dx, y + dy, r + dx] as const : shape.horizontal;
-    const vertical = (!layout.materials || centerInPlay(nextV)) && !overlaps(nextV, layout.stop)
+    const vertical = (!layout.materials || segmentCenterInPlay(nextV)) && !touchesStop(nextV, layout)
       ? [t + dy, x + dx, b + dy] as const : shape.vertical;
     return among(vertical[1], horizontal[0], horizontal[2]) && among(horizontal[1], vertical[0], vertical[2])
       ? { kind: 'cross', horizontal, vertical } : shape;
   }
   const shifted = shiftBox(shape.box, vector);
-  if (!inPlay(shifted, layout)) return shape;
-  if (!overlaps(shifted, layout.stop)) return { kind: 'frame', box: shifted };
+  const visible = layout.obstacles ? centerInPlay : inPlay;
+  if (!visible(shifted, layout)) return shape;
+  if (!touchesStop(shifted, layout)) return { kind: 'frame', box: shifted };
   const [l, t, r, b] = shape.box;
   const expand = (start: number, end: number) => {
     const span = (end - start) / stride, anchor = start + Math.ceil(span / 2) * stride;
@@ -272,7 +297,7 @@ function moveShape(shape: Shape, vector: Point, layout: StopLayout): Shape {
   const [a, z] = dx ? expand(t, b) : expand(l, r);
   const box: NativeBox = dx ? [l + Math.max(dx, 0), a, r + Math.min(dx, 0), z]
     : [a, t + Math.max(dy, 0), z, b + Math.min(dy, 0)];
-  return box[2] - box[0] >= stride && box[3] - box[1] >= stride && inPlay(box, layout) && !overlaps(box, layout.stop)
+  return box[2] - box[0] >= stride && box[3] - box[1] >= stride && visible(box, layout) && !touchesStop(box, layout)
     ? { kind: 'frame', box } : shape;
 }
 
@@ -284,6 +309,23 @@ function touchesMaterial(shape: Shape, box: NativeBox) {
   const [l, t, r, b] = shape.box;
   return overlaps([l, t, r, t], box) || overlaps([l, b, r, b], box)
     || overlaps([l, t, l, b], box) || overlaps([r, t, r, b], box);
+}
+
+export function reconcileStopMaterial(layout: StopLayout, before: StopScene, step: StopStep, rows: NativeRows) {
+  if (!layout.obstacles || !layout.materials?.length) return null;
+  const piece = step.expected.pieces[before.active]!, old = before.pieces[before.active]!;
+  const sources = layout.materials.filter(region => touchesMaterial(piece.shape, region.box));
+  if (sources.length < 2) return null;
+  const colors = new Set([old.color, ...sources.map(region => region.color)]);
+  colors.delete(piece.color);
+  const candidates = [...colors].map(color => ({ ...step.expected,
+    pieces: step.expected.pieces.map((other, index) => index === before.active ? { ...other, color } : other) }))
+    .filter(scene => stopSceneMatches(rows, layout, scene));
+  if (candidates.length !== 1) return null;
+  const scene = candidates[0]!, actual = scene.pieces[before.active]!.color;
+  const edge = stopEdgeKey(before, step.action);
+  const contactReturns = { ...Object.fromEntries(Object.entries(layout.contactReturns ?? {}).slice(-31)), [edge]: actual };
+  return { scene, layout: { ...layout, contactReturns } };
 }
 
 const shapeKey = (shape: Shape) => shape.kind === 'frame' ? shape.box.join(',') : [...shape.horizontal, ...shape.vertical].join(',');
@@ -322,12 +364,14 @@ export function planStopPlacement(layout: StopLayout, scene: StopScene, vectors:
       return route.reverse();
     }
     for (const [action, vector] of vectors) {
-      if (denied.has(stopMoveKey(scene.active, current.shape, action, piece.targetColor === undefined ? undefined : current.color))) continue;
+      const move = stopMoveKey(scene.active, current.shape, action, piece.targetColor === undefined ? undefined : current.color);
+      if (denied.has(move)) continue;
       const shape = moveShape(current.shape, vector, layout);
       let color = current.color;
       for (const region of layout.materials ?? []) {
         if (region.color !== current.color && touchesMaterial(shape, region.box)) color = region.color;
       }
+      color = layout.contactReturns?.[move] ?? color;
       const key = keyOf(shape, color);
       if (seen.has(key)) continue;
       seen.add(key);

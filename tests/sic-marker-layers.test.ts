@@ -4,7 +4,7 @@ import { ConstellationEvidence, type ConstellationModel } from '../src/logos-eng
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { PointSet } from '../src/logos-engine/v6-point-set.ts';
 import { rememberExposedMarkers } from '../src/sic/marker-layers.ts';
-import { nextMarkerMaterialMove } from '../src/sic/marker-material-route.ts';
+import { measureClippedMarkerMaterialRegions, nextMarkerMaterialMove } from '../src/sic/marker-material-route.ts';
 import { assignStopTargets, coversStopMarkers, planStopPlacement, stopEdgeKey, type StopLayout, type StopScene } from '../src/sic/marker-stop-placement.ts';
 import { observeStopPlacement, type StopMemory } from '../src/sic/marker-stop-planning.ts';
 
@@ -106,4 +106,47 @@ test('assign deformable bodies jointly and verify a recolor on contact before co
   assert.equal(plan?.route[0]?.effect, 'material:9');
   assert.equal(plan?.route[0]?.action, 'up');
   assert.ok(coversStopMarkers(plan!.route[0]!.expected.pieces[1]!));
+});
+
+test('a source clipped by the viewport must match the visible border and a known interior color', () => {
+  const rows = Array.from({ length: 13 }, () => Array<number>(13).fill(0));
+  const paint = (left: number, top: number) => {
+    for (let y = top; y < top + 5; y++) for (let x = Math.max(0, left); x < left + 5; x++) {
+      rows[y]![x] = x === left || x === left + 4 || y === top || y === top + 4 ? 2 : 8;
+    }
+  };
+  paint(5, 2);
+  paint(-3, 7);
+  const known = [{ box: [5, 2, 9, 6] as const, interior: [6, 3, 8, 5] as const, color: 8 }];
+  assert.deepEqual(measureClippedMarkerMaterialRegions(rows, known), [{ box: [0, 7, 1, 11], interior: [0, 8, 0, 10], color: 8 }]);
+  rows[7]![1] = 0;
+  assert.deepEqual(measureClippedMarkerMaterialRegions(rows, known), []);
+});
+
+test('an exact contour return can resolve which of two sources supplied a color', () => {
+  const layout: StopLayout = { stop: [8, 9, 9, 10], stopColor: 6, cursorColor: 15, width: 12, height: 12,
+    obstacles: [{ box: [8, 9, 9, 10], color: 6, mask: [[0, 0], [0, 1], [1, 0], [1, 1]] }],
+    markerPixels: ['2,3', '6,3'],
+    materials: [{ color: 8, box: [2, 3, 2, 3], interior: [2, 3, 2, 3] },
+      { color: 9, box: [6, 3, 6, 3], interior: [6, 3, 6, 3] }] };
+  const scene: StopScene = { active: 0, pieces: [{ color: 12, targetColor: 8, markers: [[2, 3], [6, 3]],
+    shape: { kind: 'frame', box: [2, 4, 6, 8] } }] };
+  const piece = scene.pieces[0]!;
+  const step = { action: 'up', effect: 'material:9', expected: { active: 0,
+    pieces: [{ ...piece, color: 9, shape: { kind: 'frame', box: [2, 3, 6, 7] } as const }] } };
+  const local: StopMemory = { epoch: 1, layout, scene, motion: [['up', [0, -1]]], selector: 'next',
+    route: [step], refs: [], confirmed: [], rejected: [] };
+  const rows = Array.from({ length: 12 }, () => Array<number>(12).fill(0));
+  for (let x = 2; x <= 6; x++) rows[3]![x] = rows[7]![x] = 8;
+  for (let y = 3; y <= 7; y++) rows[y]![2] = rows[y]![6] = 8;
+  rows[3]![6] = 9;
+  rows[5]![4] = 15;
+  for (const [x, y] of layout.obstacles![0]!.mask) rows[9 + y]![8 + x] = 6;
+  const observed = observeStopPlacement(local, step, rows, 'returned-color');
+  assert.equal(observed.scene.pieces[0]?.color, 8);
+  assert.deepEqual(observed.route, []);
+  assert.equal(planStopPlacement(observed.layout, scene, local.motion, [])?.[0]?.expected.pieces[0]?.color, 8);
+
+  rows[7]![4] = 0;
+  assert.equal(observeStopPlacement(local, step, rows, 'contradicted-contour').retired, true);
 });

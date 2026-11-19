@@ -28,6 +28,38 @@ export function measureMarkerMaterialRegions(observation: NativeObservation, row
     .map(({ color, box, interior }) => ({ color, box, interior })) : [];
 }
 
+export function measureClippedMarkerMaterialRegions(rows: NativeRows, known: readonly ConstellationMaterialRegion[]): ConstellationMaterialRegion[] {
+  const reference = known[0];
+  if (!reference) return [];
+  const [x, y, right] = reference.box, side = right - x + 1;
+  const border = rows[y]![x]!, width = rows[0]!.length, height = rows.length;
+  const colors = new Set(known.map(region => region.color));
+  const regions: ConstellationMaterialRegion[] = [];
+  const clip = ([l, t, r, b]: NativeBox): NativeBox => [Math.max(0, l), Math.max(0, t), Math.min(width - 1, r), Math.min(height - 1, b)];
+  function read(l: number, t: number) {
+    const r = l + side - 1, b = t + side - 1;
+    const interior = clip([l + 1, t + 1, r - 1, b - 1]), box = clip([l, t, r, b]);
+    const color = rows[interior[1]]?.[interior[0]];
+    if (color === undefined || !colors.has(color) || color === border) return;
+    for (let row = box[1]; row <= box[3]; row++) for (let column = box[0]; column <= box[2]; column++) {
+      const edge = row === t || row === b || column === l || column === r;
+      if (rows[row]![column] !== (edge ? border : color)) return;
+    }
+    regions.push({ box, interior, color });
+  }
+  for (let missing = 1; missing < side - 1; missing++) {
+    for (let top = 0; top + side <= height; top++) {
+      read(-missing, top);
+      read(width - side + missing, top);
+    }
+    for (let left = 0; left + side <= width; left++) {
+      read(left, -missing);
+      read(left, height - side + missing);
+    }
+  }
+  return regions;
+}
+
 const overlaps = (mask: readonly Point[], [x, y]: Point, [l, t, r, b]: NativeBox) =>
   mask.some(([dx, dy]) => l <= x + dx && x + dx <= r && t <= y + dy && y + dy <= b);
 

@@ -1,6 +1,7 @@
 import type { NativeExecution, NativeObservation, NativeProgramHandle, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Point } from '../logos-engine/v6-point-set.ts';
-import { assignStopTargets, coversStopMarkers, measureMaterialStopScene, measureStopScene, planStopPlacement, stopEdgeKey, stopSceneMatches, stopShapeBox,
+import { assignStopTargets, coversStopMarkers, measureMaterialStopScene, measureStopScene, planStopPlacement,
+  reconcileStopMaterial, stopEdgeKey, stopSceneMatches, stopShapeBox,
   type StopLayout, type StopScene, type StopStep } from './marker-stop-placement.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -100,6 +101,9 @@ export function observeStopPlacement(local: StopMemory, step: StopStep, rows: Na
     if (active >= 0 && active !== scene.active) return { ...local, scene: { ...scene, active }, route: [], refs };
   } else if (stopSceneMatches(rows, layout, scene)) {
     return { ...local, rejected: [...local.rejected, stopEdgeKey(scene, step.action)], route: [], refs };
+  } else {
+    const reconciled = reconcileStopMaterial(layout, scene, step, rows);
+    if (reconciled) return { ...local, ...reconciled, route: [], refs };
   }
   return { ...local, retired: true, route: [], refs };
 }

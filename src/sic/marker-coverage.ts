@@ -274,8 +274,10 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
         const local = index > 0 && stopMemory?.epoch === before.level_epoch ? stopMemory : proposal.stopMemory;
         const step = proposal.stopSteps[index]!;
         stopMemory = observeStopPlacement(local, step, second, after.observation_ref);
-        return { events: [], ...(step.effect && stopProjectionMatches(proposal, index, second)
-          ? { reviewEvidence: 'Contact with the fixed obstacle changed the selected shape and preserved the other pieces.' } : {}) };
+        return { events: [], ...(stopMemory.layout.contactReturns !== local.layout.contactReturns
+          ? { reviewEvidence: 'The contour moved as predicted. The return identifies which source supplied the color.' }
+          : step.effect && stopProjectionMatches(proposal, index, second)
+            ? { reviewEvidence: 'The contact effect was observed and the other pieces kept their positions.' } : {}) };
       }
       const retained = index > 0 && count === proposal.count + index && snapshot?.epoch === before.level_epoch;
       const measured = measurements(retained ? snapshot : proposal.measured);
