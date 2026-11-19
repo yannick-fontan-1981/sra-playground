@@ -2610,3 +2610,9 @@ SIC conserve les effets observés au niveau précédent. Il relit la forme, la c
 Le trajet révèle la station de forme, puis mesure la recoloration et trois contacts avec la station de rotation. Deux recharges donnent la réserve nécessaire pour revenir vers la sortie dont le motif avait été observé à l’entrée.
 
 Le niveau 8 gagne en **54 commandes SIC seul et 44,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Depuis la sauvegarde et en rejeu chronologique, les 54 commandes sont identiques. Les **278 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Le rejeu s’arrête à la victoire du niveau 8. Sur LS20, les **393 commandes des sept niveaux** et leurs retours gardent aussi les empreintes de référence. Empreinte `04353a68c6e193db09d36d861d7dcf6bfe6c6dd8e92cf61b53f8316b84f2ee3c`.
+
+### AS66 niveau 8
+
+La partie reprise depuis la sauvegarde exploite les règles existantes de SIC. Les 32 premières commandes comparent des accès candidats. À la commande 33, l’exploration des directions prend le relais et atteint la victoire à la commande 66. Cette trace établit la réussite et le passage d’une règle à l’autre. Le rôle exact des ouvertures candidates et le modèle de rebond des deux obstacles restent à établir par SIC.
+
+Le niveau 8 gagne en **66 commandes SIC seul et 55,47 s** au budget de 720 s de temps actif et 600 commandes retenu pour la référence AS66, avec un seul processus. Les 66 commandes, retours et animations depuis la sauvegarde correspondent exactement au rejeu chronologique. Les **590 commandes des niveaux 1 à 7** gardent leurs empreintes de référence. Les 656 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. Empreinte `557bae00c0c52f406fe89bb9fcaad550b45dd2a8ad2c30e7231fc0073eeb0aaa`.
