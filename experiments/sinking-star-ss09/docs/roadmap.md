@@ -9,4 +9,4 @@ SS09 « Le Chœur des Miroirs » ajoute le duo Marchand/Barde, huit salles et un
 
 Ces chiffres comptent les laboratoires conçus ; ils ne certifient pas la publication du Site ni la résolution par le SRA.
 
-Prochaine étape : retours sur le HTML, puis livraison sur main et prompt d’intégration native dans Custom 4. La publication doit suivre tests → commit → push GitHub → intégration main → publication Site → vérification GitHub/Site.
+Étape courante : HTML v3 validé, livraison du laboratoire par la PR nº 105 et prompt d’intégration native dans `docs/codex-integration-prompt.md`. Prochaine étape : intégrer SS09 au catalogue Custom 4, vérifier l’interface native et publier le Site. La publication doit suivre tests → commit → push GitHub → intégration main → publication Site → vérification GitHub/Site.
