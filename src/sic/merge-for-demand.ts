@@ -1,12 +1,12 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal,
+import type { NativeBox, NativeEntity, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal,
   NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseContactDemand, contactMobileBox, measureContactDemand, observeContactDemand, type ContactChoice,
   type ContactDemand } from './contact-demand.ts';
-import { chooseMixedDemand, measureMixedDemand, observeMixedDemand, type MixedChoice, type MixedDemand } from './mixed-demand.ts';
+import { calibrateMixedMotion, chooseMixedDemand, measureMixedDemand, observeMixedDemand, type MixedChoice, type MixedDemand } from './mixed-demand.ts';
 
 export const mergeForDemandId = 'sic_merge_to_meet_visible_demand';
 
@@ -518,19 +518,20 @@ export function createSicMergeForDemand(): NativeFamily<Proposal | ContactPropos
         preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
   }
 
-  async function offerMixed(observation: NativeObservation, rows: NativeRows, mode: string, signal?: AbortSignal): Promise<MixedProposal | null> {
+  async function offerMixed(observation: NativeObservation, rows: NativeRows, mode: string, execution?: NativeExecution): Promise<MixedProposal | null> {
     if (!transfer) return null;
     const local = mixed?.epoch === observation.level_epoch ? mixed : measureMixedDemand(observation, rows, transfer);
-    const plan = local && chooseMixedDemand(observation, rows, local, transfer);
+    const shouldStop = () => !!execution?.signal?.aborted || (execution?.now?.() ?? performance.now()) >= (execution?.deadlineMs ?? Infinity);
+    const plan = local && chooseMixedDemand(observation, rows, local, transfer, shouldStop);
     if (!plan) return null;
     const { choice } = plan, delivering = choice.intent === 'deliver_square' || choice.intent === 'deliver_glyph';
     const facts = { knownInteraction: false, routeSupported: delivering, eligibleProbe: !delivering, mode };
-    const decision = await choose?.run({ situation: facts }, { signal });
+    const decision = await choose?.run({ situation: facts }, { signal: execution?.signal });
     const strategy = delivering ? 'P07' : 'P05';
     if (decision?.result !== strategy) return null;
     const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...new Set(
       [...local.refs, ...transfer.recipes.map(recipe => recipe.evidence)].filter(item => item !== ref))];
-    const situation = {
+    const situation = choice.joint ? 'Time the deliveries so all requested products occupy receivers in the same return' : {
       produce_square: 'Test a compatible fusion for the requested square',
       produce_glyph: 'Attract the selected pair while keeping the other mobile outside the field',
       gather_pair: 'Bring one input closer to its partner without disturbing other pieces',
@@ -573,7 +574,7 @@ export function createSicMergeForDemand(): NativeFamily<Proposal | ContactPropos
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const identified = prior?.scene ?? identify(observation, rows[0]!.length, rows.length);
       if (!identified || mixed?.epoch === observation.level_epoch) {
-        const proposal = await offerMixed(observation, rows, execution?.reasoningMode ?? 'exploration', execution?.signal);
+        const proposal = await offerMixed(observation, rows, execution?.reasoningMode ?? 'exploration', execution);
         if (proposal || mixed?.epoch === observation.level_epoch) return proposal;
       }
       if (!identified || contact?.epoch === observation.level_epoch) {
@@ -678,11 +679,12 @@ export function createSicMergeForDemand(): NativeFamily<Proposal | ContactPropos
           : effect ? 'material_approached_destination' : 'expected_material_effect_not_observed';
       return { matched: !!effect, seal_prefix: true, reason };
     },
-    record(before, after, _command, _first, _second, proposal) {
+    record(before, after, _command, _first, _second, proposal, _index, frames) {
       if (isMixedProposal(proposal)) {
         if (!transfer || before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const result = observeMixedDemand(proposal.mixed, proposal.mixedChoice, after, _second, transfer);
-        mixed = result.local;
+        const motion = calibrateMixedMotion(result.local, proposal.mixedChoice, _first, frames, transfer, after);
+        mixed = motion ? { ...result.local, motion } : result.local;
         return { events: [], ...(result.matched && result.reason === 'selected_pair_became_requested_glyph'
           ? { reviewEvidence: 'The selected pair produced the requested glyph and the unselected mobile remained in play.' } : {}) };
       }

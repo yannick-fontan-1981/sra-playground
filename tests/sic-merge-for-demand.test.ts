@@ -4,6 +4,18 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { chooseContactDemand, contactMobileBox, measureContactDemand, observeContactDemand } from '../src/sic/contact-demand.ts';
 import { createSicMergeForDemand } from '../src/sic/merge-for-demand.ts';
 import { chooseMixedDemand, measureMixedDemand, observeMixedDemand } from '../src/sic/mixed-demand.ts';
+import { planJointDelivery } from '../src/sic/joint-demand-route.ts';
+
+test('a joint delivery uses the return in which all three products are accepted', () => {
+  const receivers = [[5, 5, 9, 9], [17, 5, 21, 9], [12, 19, 16, 23]] as const;
+  const step = planJointDelivery([[6, 6, 8, 8], [23, 6, 25, 8], [13, 22, 15, 24]],
+    [1, 1, 30, 30], receivers, { radius: 6, stride: 3, ticks: 4, pursuit: 2 }, () => false, () => false);
+  assert.ok(step);
+  const atReceiver = (x: number, y: number) => receivers.some(([l, t, r, b]) => l <= x && x <= r && t <= y && y <= b);
+  assert.deepEqual(step.affected, [false, true, false]);
+  assert.ok(step.anchors.every((x, i) => i % 2 === 1 || atReceiver(x, step.anchors[i + 1]!)));
+  assert.notDeepEqual(step.anchors.slice(-2), [14, 23]);
+});
 
 test('a diversion records both mobiles without inserting an undefined single-mobile state', async () => {
   const render = (left: number, right: number) => {

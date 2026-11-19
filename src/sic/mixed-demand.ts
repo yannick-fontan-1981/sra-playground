@@ -1,17 +1,20 @@
 import type { NativeBox, NativeEntity, NativeObservation, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { motionAnchor, planJointDelivery, type JointMotion } from './joint-demand-route.ts';
 
 type Item = { ink: number; box: NativeBox; stamp?: string };
 type Shape = { ink: number; stamp: string; box: NativeBox };
 type Calibration = { palette: readonly number[]; radius: { lower: number; upper: number; refs: readonly string[] };
   recipes: readonly { input: number; inputSide: number; output: number; outputSide: number; evidence: string }[];
-  mobileEffect?: { refs: readonly string[] } };
-type Layout = { arena: NativeBox; receivers: NativeBox[]; square: { ink: number; side: number; count: number; box: NativeBox };
-  request: Shape; mobileRanks: number[] };
+  mobileEffect?: { refs: readonly string[]; travel?: number } };
+type SquareDemand = { ink: number; side: number; count: number; box: NativeBox };
+type Layout = { arena: NativeBox; receivers: NativeBox[]; square: SquareDemand;
+  request: Shape; mobileRanks: number[]; requirements?: SquareDemand[] };
 export type MixedDemand = { epoch: number; layout: Layout; glyphWasCentered?: true; squareReceiver?: NativeBox;
-  refs: string[]; attempts: string[] };
+  refs: string[]; attempts: string[]; motion?: JointMotion };
 type Intent = 'produce_square' | 'produce_glyph' | 'gather_pair' | 'redirect_contact' | 'deliver_square' | 'deliver_glyph';
 export type MixedChoice = { point: NativePoint; intent: Intent; focus: Item[]; receiver?: NativeBox; attempt: string;
-  squares: number; glyphs: number; inputs: number; target: NativePoint };
+  squares: number; glyphs: number; inputs: number; target: NativePoint;
+  output?: { ink: number; count: number }; joint?: { anchors: number[]; mobileAffected: boolean } };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
@@ -25,6 +28,7 @@ const item = (e: NativeEntity): Item => ({ ink: e.palette_value, box: e.bbox });
 const pairs = <T>(items: readonly T[]): [T, T][] => items.flatMap((a, i) => items.slice(i + 1).map((b): [T, T] => [a, b]));
 const nearest = (zones: readonly NativeBox[], at: NativePoint) =>
   [...zones].sort((a, b) => distance(center(a), at) - distance(center(b), at))[0];
+const ofDemand = (piece: Item, demand: SquareDemand) => piece.ink === demand.ink && width(piece.box) === demand.side;
 
 function glyphs(rows: NativeRows, [left, top, right, bottom]: NativeBox, inks: readonly number[]): Shape[] {
   const visited = new Set<string>(), shapes: Shape[] = [];
@@ -71,17 +75,75 @@ export function measureMixedDemand(observation: NativeObservation, rows: NativeR
   const mobileRanks = alt[0]!.map(e => e.palette_value);
   const wanted = headerSquares.filter(e => width(e.bbox) > size && palette.includes(e.palette_value));
   if (wanted.length < 2 || wanted.length > 4) return null;
-  const head = wanted[0]!, side = width(head.bbox), ink = head.palette_value;
-  if (!wanted.every(e => e.palette_value === ink && width(e.bbox) === side)) return null;
+  const demands = new Map<string, SquareDemand>();
+  for (const e of wanted) {
+    const ink = e.palette_value, side = width(e.bbox), key = [ink, side].join(',');
+    const demand = demands.get(key);
+    if (demand) demand.count++;
+    else demands.set(key, { ink, side, count: 1, box: e.bbox });
+  }
+  const multiple = demands.size > 1 ? [...demands.values()] : undefined;
+  const stock = multiple ? observation.entities.filter(e => enclosing(arena, e.bbox) && square(e)).map(item) : [];
+  const primary = multiple?.find(demand => pairs(stock).some(([a, b]) =>
+    a.ink === b.ink && width(a.box) === width(b.box) && canProduce(a, demand, known))) ?? [...demands.values()][0]!;
   const marks = glyphs(rows, [Math.max(...alt[0]!.map(e => e.bbox[2])) + 1, 1, columns - 2, fieldTop - 1], mobileRanks);
   if (marks.length !== 1 || mobileRanks.indexOf(marks[0]!.ink) < 1) return null;
   const request = marks[0]!;
   const receivers = observation.entities.filter(e => !e.rectangular && width(e.bbox) === height(e.bbox)
-    && width(e.bbox) > Math.max(side, width(request.box), height(request.box)) && e.area > width(e.bbox) ** 2 / 2
+    && width(e.bbox) > Math.max(...[...demands.values()].map(demand => demand.side), width(request.box), height(request.box)) && e.area > width(e.bbox) ** 2 / 2
     && enclosing(arena, e.bbox) && !palette.includes(e.palette_value) && !mobileRanks.includes(e.palette_value)).map(e => e.bbox);
   if (receivers.length < wanted.length + 1 || receivers.length > 5) return null;
-  return { epoch: observation.level_epoch, layout: { arena, receivers, square: { ink, side, count: wanted.length, box: head.bbox }, request, mobileRanks },
+  return { epoch: observation.level_epoch, layout: { arena, receivers, square: primary, request, mobileRanks,
+    ...(multiple ? { requirements: multiple } : {}) },
     refs: [...known.radius.refs.slice(-3), ...known.mobileEffect.refs.slice(-3)], attempts: [] };
+}
+
+function requestedStock(stock: readonly Item[], requirements: readonly SquareDemand[]) {
+  return requirements.flatMap(demand => stock.filter(piece => ofDemand(piece, demand)).slice(0, demand.count));
+}
+
+export function calibrateMixedMotion(local: MixedDemand, choice: MixedChoice, first: NativeRows,
+  frames: readonly NativeRows[], known: Calibration, observation: NativeObservation): JointMotion | undefined {
+  if (!local.layout.requirements || !frames.length || !known.mobileEffect?.travel) return local.motion;
+  if (local.motion) {
+    if (!choice.joint || choice.joint.mobileAffected) return local.motion;
+    const anchors = frames.flatMap(frame => {
+      const matching = glyphs(frame, local.layout.arena, [local.layout.request.ink])
+        .filter(piece => piece.stamp === local.layout.request.stamp);
+      return matching.length === 1 ? [motionAnchor(matching[0]!.box)] : [];
+    });
+    const rates = anchors.slice(1).map(([x, y], i) => Math.max(Math.abs(x - anchors[i]![0]), Math.abs(y - anchors[i]![1])))
+      .filter(rate => rate > 0 && rate <= local.motion!.stride);
+    const typical = rates.length >= 2 && rates.every(rate => rate === rates[0]) ? rates[0] : undefined;
+    return typical === undefined ? local.motion : { ...local.motion, pursuit: typical };
+  }
+  const [x, y] = choice.point, opening = frames[0]!, visible = [opening[0]!.length, opening.length];
+  let radius: number | null = null, strength = 0;
+  for (let r = Math.max(1, Math.floor(known.radius.lower)); r <= Math.ceil(known.radius.upper); r++) {
+    const counts = new Map<number, number>();
+    let shell = 0;
+    for (let j = Math.max(0, y - r); j < Math.min(visible[1]!, y + r + 1); j++) {
+      for (let i = Math.max(0, x - r); i < Math.min(visible[0]!, x + r + 1); i++) {
+        if (Math.round(Math.hypot(i - x, j - y)) !== r) continue;
+        shell++;
+        const ink = opening[j]![i]!;
+        if (ink !== first[j]?.[i]) counts.set(ink, (counts.get(ink) ?? 0) + 1);
+      }
+    }
+    const count = Math.max(0, ...counts.values());
+    if (count >= 12 && count >= 0.65 * shell && count > strength) {
+      radius = r;
+      strength = count;
+    }
+  }
+  if (radius === null) return undefined;
+  const ticks = Math.max(1, Math.min(8, Math.round(known.mobileEffect.travel / Math.SQRT2)));
+  const largestSide = Math.max(...observation.entities.filter(e => square(e) && enclosing(local.layout.arena, e.bbox)
+    && known.palette.includes(e.palette_value)).map(e => width(e.bbox)), local.layout.square.side);
+  const stride = Math.ceil((known.radius.upper + Math.floor(largestSide / 2)) / ticks);
+  // The more developed requested shape may move farther than its precursor. Recheck its rate in the returns.
+  const pursuit = Math.max(1, local.layout.mobileRanks.indexOf(local.layout.request.ink));
+  return { radius, ticks, stride, pursuit };
 }
 
 function readWorld(observation: NativeObservation, rows: NativeRows, { layout }: MixedDemand, known: Calibration) {
@@ -105,7 +167,8 @@ function segmentGap(at: NativePoint, from: NativePoint, to: NativePoint): number
   return distance(at, [from[0] + step * dx, from[1] + step * dy]);
 }
 
-export function chooseMixedDemand(observation: NativeObservation, rows: NativeRows, local: MixedDemand, known: Calibration) {
+export function chooseMixedDemand(observation: NativeObservation, rows: NativeRows, local: MixedDemand, known: Calibration,
+  shouldStop: () => boolean = () => false) {
   const { layout } = local, { stock, mobs, squares, requested } = readWorld(observation, rows, local, known);
   const { lower, upper } = known.radius, { arena, receivers, square: demand, mobileRanks, request } = layout;
   const [left, top, right, bottom] = arena, tried = new Set(local.attempts);
@@ -124,10 +187,26 @@ export function chooseMixedDemand(observation: NativeObservation, rows: NativeRo
   const deliver = (kind: 'deliver_square' | 'deliver_glyph', piece: Item, receiver: NativeBox, obstacles: Item[]) =>
     offer(kind, [piece], obstacles.filter(p => p !== piece), center(receiver), receiver);
   const all = [...stock, ...mobs], glyph = requested.length === 1 ? requested[0] : undefined;
+  if (layout.requirements && glyph && mobs.length === 1 && local.motion) {
+    const products = requestedStock(stock, layout.requirements);
+    if (products.length === stock.length && products.length === layout.requirements.reduce((sum, demand) => sum + demand.count, 0)) {
+      const pieces = [...products, glyph];
+      const plan = planJointDelivery(pieces.map(piece => piece.box), arena, receivers, local.motion,
+        point => tried.has(key + '>' + point.join(',')), shouldStop);
+      if (!plan) return null;
+      const focusIndex = Math.max(0, plan.affected.indexOf(true)), focus = pieces[focusIndex]!;
+      const choice: MixedChoice = { point: plan.point, intent: focus.stamp ? 'deliver_glyph' : 'deliver_square', focus: [focus],
+        target: [plan.anchors[2 * focusIndex]!, plan.anchors[2 * focusIndex + 1]!],
+        attempt: key + '>' + plan.point.join(','), squares: squares.length, glyphs: requested.length, inputs: 0,
+        joint: { anchors: plan.anchors, mobileAffected: plan.affected.at(-1) ?? false } };
+      return { local, choice };
+    }
+  }
   const supply = pairs(stock).filter(([a, b]) => a.ink === b.ink && width(a.box) === width(b.box) && canProduce(a, demand, known));
   if (squares.length < demand.count && supply.length) {
     for (const group of supply) {
-      const route = nearest(receivers, center(group[0].box));
+      const [a, b] = group.map(piece => center(piece.box));
+      const route = nearest(receivers, layout.requirements ? [(a![0] + b![0]) / 2, (a![1] + b![1]) / 2] : a!);
       const choice = route && offer('produce_square', group, stock.filter(p => !group.includes(p)), center(route), route);
       if (choice) return { local, choice };
     }
@@ -142,7 +221,10 @@ export function chooseMixedDemand(observation: NativeObservation, rows: NativeRo
     if (choice) return { local, choice };
   }
 
-  const earlierInk = mobileRanks[mobileRanks.indexOf(request.ink) - 1];
+  const requestRank = mobileRanks.indexOf(request.ink);
+  const earlierInk = (layout.requirements ? mobileRanks.slice(0, requestRank).reverse()
+    .find(ink => mobs.filter(piece => piece.ink === ink).length >= 2) : undefined) ?? mobileRanks[requestRank - 1];
+  const nextInk = mobileRanks[mobileRanks.indexOf(earlierInk!) + 1];
   const mobileInputs = mobs.filter(p => p.ink === earlierInk);
   if (!glyph) {
     const candidates = pairs(mobileInputs).sort(([a, b], [c, d]) => distance(center(a.box), center(b.box)) - distance(center(c.box), center(d.box)));
@@ -150,7 +232,8 @@ export function chooseMixedDemand(observation: NativeObservation, rows: NativeRo
       const a = center(group[0].box), b = center(group[1].box), middle: NativePoint = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
       const zone = nearest(available, middle);
       const choice = offer('produce_glyph', group, all.filter(p => p !== group[0] && p !== group[1]), zone ? center(zone) : middle, zone);
-      if (choice) return { local, choice };
+      if (choice) return { local, choice: { ...choice, ...(layout.requirements && nextInk !== undefined
+        ? { output: { ink: nextInk, count: mobs.filter(piece => piece.ink === nextInk).length } } : {}) } };
     }
     for (const [a, b] of candidates) for (const [from, partner] of [[a, b], [b, a]] as const) {
       const toward = center(partner.box), choice = offer('gather_pair', [from], all.filter(p => p !== from), toward);
@@ -193,16 +276,24 @@ export function chooseMixedDemand(observation: NativeObservation, rows: NativeRo
 
 export function observeMixedDemand(local: MixedDemand, choice: MixedChoice, observation: NativeObservation, rows: NativeRows, known: Calibration) {
   const { stock, mobs, squares, requested } = readWorld(observation, rows, local, known);
+  const next: MixedDemand = { ...local, refs: [...local.refs.slice(-6), observation.observation_ref],
+    attempts: [...local.attempts.slice(-63), choice.attempt] };
+  if (choice.joint && local.layout.requirements) {
+    const anchors = [...requestedStock(stock, local.layout.requirements), ...requested].flatMap(piece => motionAnchor(piece.box));
+    const matched = anchors.length === choice.joint.anchors.length && anchors.every((axis, i) => axis === choice.joint!.anchors[i]);
+    return { matched, reason: matched ? 'joint_delivery_projection_confirmed' : 'joint_delivery_projection_refuted', local: next };
+  }
   const before = choice.focus[0]!, anchor = center(before.box), { target } = choice;
   const candidates = (before.stamp ? mobs : stock).filter(p => p.ink === before.ink && width(p.box) === width(before.box)
     && (!before.stamp || p.stamp === before.stamp));
   const improved = candidates.some(p => distance(center(p.box), target) < distance(anchor, target));
   const transformed = squares.length > choice.squares;
+  const outputSeen = choice.output ? mobs.filter(p => p.ink === choice.output!.ink).length > choice.output.count : requested.length > choice.glyphs;
   const matched = squares.length >= choice.squares && (choice.intent === 'produce_square' ? transformed
-    : choice.intent === 'produce_glyph' ? requested.length > choice.glyphs && mobs.filter(p => p.ink === before.ink).length === choice.inputs - 2
+    : choice.intent === 'produce_glyph' ? outputSeen && mobs.filter(p => p.ink === before.ink).length === choice.inputs - 2
     : improved || choice.intent === 'redirect_contact' && transformed);
-  const reason = !matched ? 'mixed_demand_projection_not_confirmed' : choice.intent === 'produce_glyph' ? 'selected_pair_became_requested_glyph'
+  const reason = !matched ? 'mixed_demand_projection_not_confirmed' : choice.intent === 'produce_glyph'
+    ? choice.output && choice.output.ink !== local.layout.request.ink ? 'intermediate_glyph_observed' : 'selected_pair_became_requested_glyph'
     : transformed ? 'additional_requested_square_observed' : 'observed_piece_approached_its_target';
-  return { matched, reason, local: { ...local, refs: [...local.refs.slice(-6), observation.observation_ref],
-    attempts: [...local.attempts.slice(-63), choice.attempt] } };
+  return { matched, reason, local: next };
 }
