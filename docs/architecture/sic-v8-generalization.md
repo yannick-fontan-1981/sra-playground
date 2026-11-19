@@ -738,3 +738,26 @@ Sur BP35, G50T et TU93, désactiver P07 au premier trajet confirme que la carte 
 Sur FUIT, désactiver P05 après la première commande rend la main à d'autres fournisseurs. Le niveau reste ouvert après 39 commandes.
 
 Sur `341b6cb1`, **100/100 retraits sont gagnants**, en 1 306 commandes SIC seul. Les 100 parcours normaux reproduisent leurs 1 248 commandes et retours. Les quatre jeux complets reproduisent leurs 268 commandes et retours dans chacune des deux configurations. Le rejeu qualifie les huit derniers cas sur la même version que les 92 premiers.
+
+### Découvrir la traction et réutiliser son effet au niveau suivant
+
+Le témoin `daabd8ac` et le candidat partent d’une session SIC Fallback neuve par jeu, au niveau 1. Le banc conserve la session jusqu’à la victoire au niveau 2, avec un plafond de 600 commandes par niveau et le profil d’un seul worker. Les trois jeux donneurs fournissent des cas de poussée sur des cibles (SKBN), de déplacement solidaire d’une charge (GABA) et de déplacement d’une pièce sélectionnée (KLOT). Avant et après le changement, ils gagnent respectivement en 22 + 10, 49 + 37 et 30 + 31 commandes. Un contrôle supplémentaire sur SS02 L1 conserve la victoire et passe de 38 à 40 commandes avec le test de séparation activé.
+
+| Variante sur SS03 | Première traction observée au L1 | L1 | L2 |
+| --- | ---: | ---: | ---: |
+| Témoin | 55 | Victoire en 102 | Arrêt après 100 |
+| Acquisition et transfert | 6 | Victoire en 47 | Victoire en 51 |
+| Retrait du test de séparation | 55 | Victoire en 102 | Victoire en 51 |
+| Retrait des expériences de transfert au L2 | 6 | Victoire en 47 | Arrêt après 100 |
+
+Le test de séparation utilise une direction déjà mesurée. L’acteur s’éloigne d’un objet et SIC vérifie si cet objet occupe la place libérée tandis qu’un autre exemplaire reste en place. Après la victoire, le moteur retient le mouvement constaté et l’aspect de la destination atteinte. Il retrouve la destination sur la nouvelle scène et vérifie à nouveau la traction au septième retour du L2.
+
+Dans cette scène, la traction seule ne donne pas immédiatement accès à la sortie. SIC essaie un contrôle et observe un changement à distance. Il place une pièce au point qui a réagi et actionne le contrôle. Il voit la pièce rejoindre un autre emplacement. Au 46ᵉ tour du L2, il répète l’opération avec une deuxième pièce alors que le premier emplacement d’arrivée est occupé. Le passage devient accessible. La 51ᵉ commande obtient la victoire. Les 98 commandes des deux niveaux ont une autorité `sicOnly`, sans RESET. L’empreinte des commandes et des retours publics est `3b8132037d7eb0727daa196c6c674910eeb7038c08427dec391779bc2e790c93`.
+
+Les deux retraits ont chacun été exécutés dans une session neuve, en neutralisant uniquement le choix du test de séparation ou le choix des expériences de transfert. Le second retrait se termine avec `no_applicable_transferred_family`, comme le témoin. Deux autres rejeux ont donné 47 + 51 avec un nom de jeu masqué et une permutation de palette, y compris après rotation de toutes les observations d’un quart de tour. La mise au point a utilisé les retours publics de SS03. Ce résultat mesure donc le transfert entre ses niveaux et l’effet de chaque mécanisme. Un autre jeu tenu à l’écart reste nécessaire pour mesurer le transfert à l’aveugle entre jeux.
+
+Rejeu chronologique depuis la racine du dépôt avec Node 24. Le banc utilise le même répartiteur de jeux que le Playground. Le fichier de sortie reçoit un résultat par jeu.
+
+```sh
+node scripts/check-sic-chronological.mjs SS03,SKBN,GABA,KLOT 2 contact-results.jsonl 1 sic-fallback
+```

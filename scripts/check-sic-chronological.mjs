@@ -1,6 +1,6 @@
-// Reproduce SIC-only official-game chronology from level 1, stopping at the target victory.
+// Reproduce a SIC campaign from level 1 through the requested victory on either game backend.
 // Node 22+, repository root: node scripts/check-sic-chronological.mjs LP85 7 result.jsonl 1
-// Arguments: comma-separated games, target (1–10), local result path, budget worker count.
+// Arguments: comma-separated games, target (1–10), local result path, budget worker count, optional sic or sic-fallback.
 // One process runs games sequentially. No source-game logic or oracle is exposed to SIC.
 // Raw observations remain local; per-level prefixes hash actions and official returns.
 import {pathToFileURL} from 'node:url';
@@ -9,7 +9,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 crypto.randomUUID=()=>"98d555fa-6cf9-42fc-b483-9225bfc834d9";
 const load=file=>import(pathToFileURL(resolve(file)));
-const {loadPyodide}=await load('public/vendor/pyodide/pyodide.mjs');
+const {createGameDispatcher}=await load('src/runtime/native-game-dispatcher.ts');
 const {createNativeV6Runtime}=await load('src/logos-engine/v6-native-runtime.ts');
 const {BrowserV6Agent}=await load('src/runtime/v6-agent.ts');
 const {V6AgentService}=await load('src/runtime/v6-agent-service.ts');
@@ -17,32 +17,42 @@ const {defaultRecoveryPack}=await load('src/sic/active-recovery.ts');
 const pinned=resolve('reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6');
 const json=async file=>JSON.parse(await readFile(resolve(pinned,file),'utf8'));
 const declarations={common:await json('laya_proto/common_frontier_policy.drm.json'),strategy:await json('morphology_policy/strategy.drm')};
-const py=await loadPyodide({indexURL:resolve('public/vendor/pyodide'),stdout:()=>{},stderr:()=>{}});
-await py.loadPackage(['numpy','pydantic','typing-extensions']);
-for(const name of ['custom-games.zip','official-games.zip'])py.unpackArchive(new Uint8Array(await readFile(resolve('public/python',name))), 'zip', {extractDir:'/games'});
-for(const name of ['game_bridge.py','official_adapter.py','custom_level_navigation.py'])py.FS.writeFile('/games/'+name,await readFile(resolve('public/python',name),'utf8'));
-py.runPython("import sys\nsys.path.insert(0, '/games')\nfrom game_bridge import dispatch");
-function game(request){
-  py.globals.set('_test_request',JSON.stringify(request));
-  const packet=JSON.parse(py.runPython('dispatch(_test_request)'));
-  if(packet.error)throw new Error(packet.error);
-  return {...packet,gameCode:packet.code??packet.gameCode};
+let legacy;
+async function loadLegacy() {
+  if (legacy) return legacy;
+  const {loadPyodide} = await load('public/vendor/pyodide/pyodide.mjs');
+  const py=await loadPyodide({indexURL:resolve('public/vendor/pyodide'),stdout:()=>{},stderr:()=>{}});
+  await py.loadPackage(['numpy','pydantic','typing-extensions']);
+  for(const name of ['custom-games.zip','official-games.zip'])py.unpackArchive(new Uint8Array(await readFile(resolve('public/python',name))), 'zip', {extractDir:'/games'});
+  for(const name of ['game_bridge.py','official_adapter.py','custom_level_navigation.py'])py.FS.writeFile('/games/'+name,await readFile(resolve('public/python',name),'utf8'));
+  py.runPython("import sys\nsys.path.insert(0, '/games')\nfrom game_bridge import dispatch");
+  function dispatch(request){
+    py.globals.set('_test_request',JSON.stringify(request));
+    const packet=JSON.parse(py.runPython('dispatch(_test_request)'));
+    if(packet.error)throw new Error(packet.error);
+    return {...packet,gameCode:packet.code??packet.gameCode};
+  }
+  legacy = {dispatch};
+  return legacy;
 }
 const metric=values=>{const sorted=[...values].sort((a,b)=>a-b);return {count:sorted.length,median:sorted.length?Math.round(sorted[Math.floor(sorted.length/2)]):null};};
 async function run(code,target,parallelWorkers) {
-  const pack={...defaultRecoveryPack,solver:'sic'};
+  const pack={...defaultRecoveryPack,solver:mode};
+  const games=createGameDispatcher(loadLegacy);
+  const game=request=>games.dispatch(request);
   let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime(declarations,{recovery})));
   const costs={};const transport={request:async operation=>{if(operation.type==='resume') resumes++;const start=performance.now();try{return await service.handle(operation);}finally{const stat=costs[operation.type]??={ms:0,count:0};stat.ms+=performance.now()-start;stat.count++;}},reset:()=>{},dispose:()=>{}};
-  const usage = new Map(), decisions = new Map(), series = new Map(); let resumes=0, priorDispatch=null;const continuedGaps=[], boundaryGaps=[]; let board=game({type:'load',code,level:1}), gameMs=0, first=null; const effects=[]; const pathKinds = new Map();
+  const usage = new Map(), decisions = new Map(), series = new Map(); let resumes=0, priorDispatch=null;const continuedGaps=[], boundaryGaps=[]; let board=await game({type:'load',code,level:1}), gameMs=0, first=null; const effects=[]; const pathKinds = new Map();
   const trajectory=createHash('sha256');
   const start=performance.now();
   const agent=new BrowserV6Agent({transport,targetLevels:target,actionsPerLevel:600,parallelWorkers,
+    ...(mode === 'sic-fallback' ? {resetLevel:async()=>board=await game({type:'reset'})} : {}),
     recoveryConfiguration:()=>pack,getObservation:()=>board,canDispatch:()=>true,onState:()=>{},
     dispatch:async action=>{
       if (board.levelsCompleted >= target || board.level > target) throw new Error('Dispatch past the requested level');
       const issued=performance.now(); if(effects.length%25===0)console.log(JSON.stringify({progress:effects.length,level:board.level})); const plan=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan'); if(plan){const kind=action.id===6?"click":action.id>=1&&action.id<=4?"move":"other"; const types=pathKinds.get(plan.id)??new Set();types.add(kind);pathKinds.set(plan.id,types);series.set(plan.id,(series.get(plan.id)??0)+1);if(priorDispatch){(priorDispatch.plan===plan.id?continuedGaps:boundaryGaps).push(issued-priorDispatch.at);}priorDispatch={plan:plan.id,at:issued};}
       first??=issued-start;
-      const previous=board; board=game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
+      const previous=board; board=await game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);
       const family=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.family??'unbound'; usage.set(family,(usage.get(family)??0)+1); const strategy=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.strategy??'unbound'; decisions.set(strategy,(decisions.get(strategy)??0)+1);
       gameMs+=executionMs;
@@ -62,7 +72,7 @@ async function run(code,target,parallelWorkers) {
     }
     const wall=performance.now()-start;
     const snapshot=agent.snapshot;
-    return {code,target,mode:"sic",parallelWorkers,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
+    return {code,target,mode,parallelWorkers,resumes,gaps:{continued:metric(continuedGaps),boundary:metric(boundaryGaps)},series:[...series.values()].filter(n=>n>1),pathKinds:[...series].filter(([,n])=>n>1).map(([id,n])=>({length:n,type:[...pathKinds.get(id)].sort().join("+")})),effects,decisions:Object.fromEntries(decisions),usage:Object.fromEntries(usage),actions:snapshot.actionCount,levels:board.levelsCompleted,reason:snapshot.reason,status:snapshot.status,
       ...(snapshot.status==='error'?{message:snapshot.message}:{}),authority:snapshot.sicActionCoverage?.sicOnly??0,solverFamilies:snapshot.coverage?.registeredFamilies.length,
       levelStats,
       ...(board.levelsCompleted < target ? { terminalDecisions: snapshot.trace
@@ -74,6 +84,8 @@ async function run(code,target,parallelWorkers) {
   }finally{agent.dispose();}
 }
 const { appendFile } = await import('node:fs/promises');
+const mode=process.argv[6]??'sic';
+if (mode !== 'sic' && mode !== 'sic-fallback') throw new Error('Invalid solver mode');
 const target=Number(process.argv[3]);
 const parallelWorkers=Number(process.argv[5]);
 if (!Number.isInteger(target) || target < 1 || target > 10 || !Number.isInteger(parallelWorkers) || parallelWorkers<1) throw new Error('Invalid chronological campaign configuration');

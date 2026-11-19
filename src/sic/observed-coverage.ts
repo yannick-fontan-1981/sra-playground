@@ -6,6 +6,7 @@ type Cells = ReturnType<typeof readTravelGrid>['cells'];
 type Move = { input: string; delta: NativePoint };
 type Motion = 'push' | 'pull';
 type Layout = { marks: string[]; markInk: number; exit: string; gate: string[] };
+export type CoverageTransfer = { epoch: number; motion: Motion; exitPattern: string; ref: string };
 export type PullStep = { input: string; actor: string; arrangement: string };
 export type CoverageLearning = {
   body?: string; motion?: Motion; layout?: Layout; supports: string[]; water?: string; walls: Record<string, string[]>;
@@ -47,6 +48,15 @@ export function hasObservedCoverage(local: CoverageLearning | undefined, travel:
   if (!local?.layout || !local.body || !travel) return false;
   const bodies = bodiesAt(readTravelGrid(rows, travel.grid).cells, local.body, local.layout);
   return local.layout.marks.every(mark => bodies.includes(mark));
+}
+
+export function rememberCoverageWin(local: CoverageLearning | undefined, travel: ObservedTravel | undefined,
+  rows: NativeRows, command: NativeCommand, epoch: number, ref: string): CoverageTransfer | undefined {
+  const delta = travel?.moves[command.action_ref]?.delta;
+  if (!travel?.actor || !delta || !local?.layout || !local.motion || next(travel.actor, delta) !== local.layout.exit
+    || !hasObservedCoverage(local, travel, rows)) return;
+  const exitPattern = stamp(readTravelCell(rows, travel.grid, at(local.layout.exit)));
+  return { epoch, motion: local.motion, exitPattern, ref };
 }
 
 function measureLayout(cells: Cells, pitch: number, floor: number, bodies: number, motion: Motion): Layout | undefined {

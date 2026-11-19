@@ -24,11 +24,12 @@ import { observedCommandFrontier, observedCommandKey as commandKey, observedComm
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
 import { repeatedInputTargets } from './repeated-input-targets.ts';
-import { annotateTravelMarks, chooseAnnotatedMarkContact, chooseTravelTrial, observedTravelActor, observeTravel,
+import { annotateTravelMarks, chooseAnnotatedMarkContact, chooseSeparationTrial, chooseTravelTrial, observedTravelActor, observeTravel,
   readTravelGrid, type MarkContact, type ObservedTravel } from './observed-travel-frontier.ts';
-import { chooseCoverage, hasObservedCoverage, observeCoverage, observedCoverageDeadlock, retainCoverageAfterReset,
-  type CoverageLearning, type PullStep } from './observed-coverage.ts';
+import { chooseCoverage, hasObservedCoverage, observeCoverage, observedCoverageDeadlock, rememberCoverageWin, retainCoverageAfterReset,
+  type CoverageLearning, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
 import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
+import { checkContactPrediction, chooseContactExperiment, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
 import { assessPressurePlan, choosePressureReserve, observePressureReserve, retainPressureReserve,
   type PressurePlan, type PressureReserve } from './observed-pressure-reserve.ts';
 import { sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
@@ -140,6 +141,9 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   collectionEdit?: readonly [string, string];
   travel?: ObservedTravel;
   coverage?: CoverageLearning;
+  separationTests?: string[];
+  coverageTransfer?: CoverageTransfer;
+  contactMemory?: ContactMemory;
   exchange?: ObservedExchange;
   pressureReserve?: PressureReserve;
   fallbackProjection?: FallbackProjectionMemory;
@@ -171,6 +175,8 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
   coveragePlacement?: true;
+  separationTest?: string;
+  contactExperiment?: ContactExperiment;
   pullRoute?: readonly PullStep[];
   exchangePlan?: ExchangePlan;
   markContact?: MarkContact;
@@ -531,6 +537,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     if (state.epoch === epoch) return;
     const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer, panelServiceTransfer, symbolTransfer, programWitness, outletWitness, instructionTransfer } = state;
     state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
+      ...(state.coverageTransfer?.epoch === epoch - 1 ? { coverageTransfer: state.coverageTransfer } : {}),
       ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
       ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
       ...(relayTransfer?.witness ? { relayTransfer } : {}), ...(navigationTransfer?.won ? { navigationTransfer } : {}),
@@ -541,6 +548,10 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   }
   async function acquireTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows, frames: readonly NativeRows[]) {
     if (!fallback) return;
+    if (after.levels_completed > before.levels_completed) {
+      const win = rememberCoverageWin(state.coverage, state.travel, rows, command, before.level_epoch, after.observation_ref);
+      if (win) state.coverageTransfer = win;
+    }
     const services = acquirePanelService(state.panelServiceTransfer, before, after, command, rows, afterRows);
     if (services) state.panelServiceTransfer = services;
     const compartment = acquireCompartmentReturn(state.compartmentTransfer, before, after, command, rows, afterRows);
@@ -611,8 +622,14 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const coverageKey = coverage?.command.action_ref;
       const markTrial = !panel && !pressure && !exchange && !coverage ? chooseAnnotatedMarkContact(local.travel, rows, nonPoint) : undefined;
       const markKey = markTrial?.command.action_ref;
-      const travel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2
-        ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
+      const canTravel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2;
+      const contactTrial = canTravel && local.contactMemory && local.coverageTransfer && local.coverage && local.travel
+        ? chooseContactExperiment(local.contactMemory, local.coverageTransfer, local.coverage, local.travel, rows) : undefined;
+      const separation = canTravel && fallback && !local.coverage?.motion && observation.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))
+        ? chooseSeparationTrial(local.travel, rows, nonPoint, local.separationTests ?? []) : undefined;
+      const travel = contactTrial ? { command: contactTrial.command, target: contactTrial.actor.split(',').map(Number) as [number, number],
+        purpose: contactTrial.purpose, evidence: contactTrial.evidence, experiment: undefined } : separation
+        ?? (canTravel ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined);
       const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness || state.outletWitness || state.catalogueTransfer?.witness || state.panelServiceTransfer?.recall) && !pressure
         ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state, !!panel) : undefined;
       const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
@@ -677,6 +694,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         candidates.set(workspaceKey, { command: workspaceCommand, box: workspace.box, marker: false, repeated: false });
       }
       const travelKey = travel && commandKey(travel.command);
+      const travelFrontier = travelKey ? { action: travelKey, probe: travelKey, depth: 0, first: null } : null;
       if (travel && travelKey && !candidates.has(travelKey)) {
         candidates.set(travelKey, { command: travel.command, box: null, marker: false, repeated: false });
       }
@@ -803,7 +821,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           ?? (exchangeKey ? { action: exchangeKey, probe: exchangeKey, depth: 0, first: null } : null)
           ?? (coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null)
           ?? (markKey ? { action: markKey, probe: markKey, depth: 0, first: null } : null)
-          ?? (travelKey ? { action: travelKey, probe: travelKey, depth: 0, first: null } : null)
+          ?? travelFrontier
           ?? panelProbe ?? directionalProbe
           ?? observedCommandFrontier(local.transitions, source, keys, budget,
           board => board === source ? keys : local.options[board] ?? [], deferred);
@@ -829,7 +847,10 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         return [x, y, x + radius, y + radius];
       };
       const selectedCoverage = frontier.action === coverageKey ? coverage : undefined;
-      const travelEvidence = !selectedCoverage && travel && frontier.action === travelKey ? travel.evidence : [];
+      const selectedExperiment = frontier === travelFrontier ? contactTrial : undefined;
+      const selectedSeparation = frontier === travelFrontier ? separation : undefined;
+      const travelEvidence = !selectedCoverage && travel && frontier.action === travelKey
+        && (!(contactTrial || separation) || frontier === travelFrontier) ? travel.evidence : [];
       const travelTarget: NativeBox | undefined = travel && local.travel && travelEvidence.length
         ? [travel.target[0], travel.target[1], travel.target[0] + local.travel.grid.pitch - 1,
           travel.target[1] + local.travel.grid.pitch - 1] : undefined;
@@ -916,6 +937,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           : `Cover the visible marks simultaneously using the measured ${selectedCoverage.motion} effect`
         : travelEvidence.length && travel ? {
         approach: 'Use a measured direction to approach a visible landing and test its role',
+        approach_object: 'Reach a position from which moving away can test whether an object follows',
+        separate_object: 'Move away and check whether the adjacent object fills the vacated position',
+        revisit_exit: 'Test access to the destination that gave progress after placement',
+        test_surface: 'Test the effect of entering a new marked surface',
+        couple_effect: 'Operate the observed control with a movable object at the responding site',
+        repeat_transport: 'Repeat the observed remote transport while another object occupies its landing',
+        place_object: 'Test whether leaving an object on a marked surface changes access',
         contact: 'Explore a reachable contact using the movement measured so far',
         switch: 'Test a command from a surface it changed in an earlier return',
         select: 'Test whether a second visible piece can reach a different landing',
@@ -941,9 +969,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         : panelTest && command.action_ref === 'ACTION6' ? 'Test a distinct control on the visible panel'
           : panelTest ? 'Compare a non-point command with the tested panel controls' : publicInputStrategies[selected.id]);
       const goal = { kind: selectedFallback ? selectedFallback.objective : selectedPressure ? selectedPressure.goal : selectedExchange ? selectedExchange.goal
+        : selectedExperiment ? selectedExperiment.purpose : selectedSeparation ? selectedSeparation.purpose
         : selectedMark ? 'test_marked_contact' : selectedCoverage ? selectedCoverage.covered ? 'reach_observed_exit' : 'cover_repeated_marks'
         : opening ? 'reach_projected_region' : 'learn_public_command_effect', scope: ref.split(':revision:', 1)[0]!,
         subjects: selectedFallback ? [`visible_target:${selectedFallback.goal.join(',')}`] : selectedPressure ? [`visible_cell:${selectedPressure.target}`] : selectedExchange ? selectedExchange.subjects.map(cell => `visible_cell:${cell}`)
+          : selectedExperiment ? [`experiment:${selectedExperiment.experiment}`]
+          : selectedSeparation ? [`visible_cell:${selectedSeparation.target.join(',')}`]
           : selectedMark ? [`visible_marker:${selectedMark.target}`]
             : selectedCoverage ? (selectedCoverage.covered ? [selectedCoverage.exit] : selectedCoverage.marks).map(cell => `visible_marker:${cell}`)
           : opening ? [`visible_marker:${opening.peer.join(',')}`] : ['current_public_interface'],
@@ -969,6 +1000,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(selectedMark ? { markContact: selectedMark } : {}),
         ...(selectedExchange ? { exchangePlan: selectedExchange } : {}),
         ...(selectedCoverage && !selectedCoverage.covered ? { coveragePlacement: true as const } : {}),
+        ...(selectedSeparation?.experiment ? { separationTest: selectedSeparation.experiment } : {}),
+        ...(selectedExperiment ? { contactExperiment: selectedExperiment } : {}),
         ...(selectedCoverage?.pullRoute ? { pullRoute: selectedCoverage.pullRoute } : {}),
         ...(panelBounds ? { panel: panelBounds } : {}), ...(panelTest ? { panelTest: testKey(frontier.action) } : {}),
         ...(clickedControl && probe ? { clickedControl } : {}), ...(box && !offer.marker ? { selectedBox: box } : {}),
@@ -996,7 +1029,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
             : programming ? 'test_marker_selector' : terrainStep ? 'advance_measured_terrain'
               : unmeasured ? 'calibrate_at_landing' : terrain ? 'test_terrain_configuration'
               : approach ? 'approach_marker' : comparison ? 'compare_on_marker' : 'recheck' } } } : {}),
-        sicSituationCard: { strategy, need: (selectedFallback ? label : undefined) ?? pressureLabel ?? markLabel ?? exchangeLabel ?? (selectedCoverage ? selectedCoverage.covered ? 'Reach the observed exit' : 'Cover one mark per movable piece'
+        sicSituationCard: { strategy, need: (selectedFallback || selectedExperiment || selectedSeparation ? label : undefined) ?? pressureLabel ?? markLabel ?? exchangeLabel ?? (selectedCoverage ? selectedCoverage.covered ? 'Reach the observed exit' : 'Cover one mark per movable piece'
           : opening ? 'Reach the new region opened by the support placement' : 'Learn how to act on the current board'), mode,
           situation: !selectedFallback && !selectedPressure && !selectedMark && !selectedExchange && !selectedCoverage && !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
@@ -1090,6 +1123,17 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     async after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      if (!scored && proposal.contactExperiment && state.travel && state.coverage) {
+        const matched = checkContactPrediction(proposal.contactExperiment, state.travel, state.coverage, afterRows);
+        return { matched, seal_prefix: true, reason: matched ? 'contact_prediction_observed' : 'contact_prediction_changed' };
+      }
+      if (!scored && proposal.separationTest && state.travel) {
+        const command = proposal.actions[index]!;
+        const returned = observeTravel(state.travel, rows, afterRows, command, after.observation_ref);
+        const coverage = observeCoverage(state.coverage, state.travel, returned, rows, afterRows, command, after.observation_ref);
+        const matched = coverage?.lastPull?.ref === after.observation_ref;
+        return { matched, seal_prefix: true, reason: matched ? 'following_object_observed' : 'following_object_unconfirmed' };
+      }
       if (!scored && proposal.fallbackProjection) {
         const result = assessFallbackProjection(proposal.fallbackProjection, rows, afterRows, before, after);
         projectionReturns.set(proposal.fallbackProjection, result);
@@ -1207,6 +1251,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       enterEpoch(before.level_epoch);
       state.experiments++;
+      if (proposal.separationTest && !state.separationTests?.includes(proposal.separationTest)) {
+        state.separationTests = [...state.separationTests ?? [], proposal.separationTest];
+      }
       if (proposal.accessGoal) state.panelAccessGoal = structuredClone(proposal.accessGoal);
       if (proposal.bridgeTarget) {
         const mechanism = state.animatedPanelControls?.[proposal.bridgeTarget.tool];
@@ -1267,6 +1314,10 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           if (exchange) state.exchange = exchange;
           const coverage = observeCoverage(state.coverage, previous, travel, rows, afterRows, command, after.observation_ref, proposal.pullRoute);
           if (coverage) state.coverage = coverage;
+          if (previous && travel && coverage?.motion && state.coverageTransfer?.epoch === before.level_epoch - 1) {
+            state.contactMemory = observeContactExperiment(state.contactMemory, state.coverageTransfer, coverage, previous, travel,
+              rows, afterRows, command, after.observation_ref, proposal.contactExperiment);
+          }
         }
       }
       if (proposal.panel) {

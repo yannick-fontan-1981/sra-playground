@@ -11,7 +11,7 @@ export type ObservedTravel = { grid: Grid; actor: string | null; supports: strin
   moves: Record<string, Move>; tested: Record<string, number>; altered: string[]; controls: string[];
   completed: string[]; switches: Record<string, string | null>; pendingSelection?: string; refs: string[]; stalled: number };
 export type TravelTrial = { command: NativeCommand; target: NativePoint; evidence: string[];
-  purpose: 'approach' | 'contact' | 'switch' | 'select' };
+  purpose: 'approach' | 'contact' | 'switch' | 'select' | 'approach_object' | 'separate_object'; experiment?: string };
 export type MarkContact = { command: NativeCommand; target: string; expected: string; evidence: string[] };
 
 const key = ([x, y]: NativePoint) => `${x},${y}`;
@@ -170,6 +170,47 @@ function learnGrid(before: NativeRows, after: NativeRows, command: string, ref: 
 
 function trialKey(cells: ReadonlyMap<string, number[]>, action: string, from: string, target: NativePoint) {
   return JSON.stringify([action, from, cells.get(key(target))]);
+}
+
+// A departure from beside a repeated object distinguishes a following object from a
+// stationary one. Reach the experimental position using already measured movement.
+export function chooseSeparationTrial(travel: ObservedTravel | undefined, rows: NativeRows,
+  inputs: readonly NativeCommand[], tested: readonly string[]): TravelTrial | undefined {
+  if (!travel?.actor) return;
+  const { grid, actor } = travel, { cells, pieces } = read(rows, grid);
+  if (!pieces.includes(actor)) return;
+  const moves = inputs.flatMap(command => {
+    const move = travel.moves[command.action_ref];
+    return move ? [{ command, ...move }] : [];
+  });
+  if (!moves.length) return;
+  const supports = new Set(travel.supports);
+  const walkable = (cell: string) => {
+    const pixels = cells.get(cell);
+    return cell === actor || !!pixels && (pixels.every(v => v === grid.floor) || supports.has(pixels.join(',')));
+  };
+  const counts = new Map<string, number>();
+  for (const [cell, pixels] of cells) {
+    if (pieces.includes(cell) || walkable(cell) || pixels.includes(grid.floor) || new Set(pixels).size < 2) continue;
+    const shape = pixels.join(',');
+    counts.set(shape, (counts.get(shape) ?? 0) + 1);
+  }
+  const paths = new Map<string, NativeCommand | null>([[actor, null]]);
+  for (const [cell, first] of paths) {
+    const pos = point(cell);
+    for (const move of moves) {
+      const dest = add(pos, move.delta), ahead = key(dest);
+      if (!walkable(ahead) || travel.tested[trialKey(cells, move.command.action_ref, cell, dest)] === -1) continue;
+      const behind = key([pos[0] - move.delta[0], pos[1] - move.delta[1]]);
+      const pattern = cells.get(behind)?.join(',') ?? '';
+      const experiment = JSON.stringify([pattern, move.command.action_ref]);
+      if ((counts.get(pattern) ?? 0) >= 2 && !tested.includes(experiment)) {
+        return { command: first ?? move.command, target: point(behind), evidence: [...travel.refs, move.ref],
+          purpose: first ? 'approach_object' : 'separate_object', ...(first ? {} : { experiment }) };
+      }
+      if (!paths.has(ahead)) paths.set(ahead, first ?? move.command);
+    }
+  }
 }
 
 export function chooseAnnotatedMarkContact(travel: ObservedTravel | undefined, rows: NativeRows,
