@@ -2578,3 +2578,11 @@ Le rejeu chronologique gagne le niveau 8 en **21 commandes SIC seul et 11,83 s**
 À la cinquième commande, une liaison supplémentaire devient visible sur le rail de la tige verticale. Le retour permet de vérifier la position des tiges et des cubes. SIC conserve les références fixes et actualise les connexions du rail. Une action déjà planifiée peut continuer si sa liaison reste disponible. Si elle disparaît, SIC ferme la série et recalcule sur la géométrie observée.
 
 Le rejeu chronologique gagne le niveau 8 en **42 commandes SIC seul et 11,80 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **300 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de la référence. Les 342 commandes relèvent de SIC seul et le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 124 tests ciblés passent. Empreinte `5105c551d4aa14bcb1026bea7de36846dbc717d320372c9cd7f0843d25909a7b`.
+
+### RE86 niveau 8
+
+La scène contient deux butées semblables, deux cadres qui se recouvrent et une source colorée coupée par le bord. La lecture de son contour visible reprend la géométrie des sources complètes. SIC exclut ce fragment du suivi des pièces. Il cherche les trajets en combinant la forme de passage, les contacts de couleur et la forme nécessaire pour couvrir les quatre repères.
+
+À la treizième commande, le contour prévu est confirmé, mais une autre source fournit la couleur. Le retour permet d’identifier cette couleur et de refaire le trajet à partir de la pose observée. SIC mémorise le résultat pour cette pose et cette commande. Le rejeu complet reproduit les 155 commandes du diagnostic depuis la sauvegarde.
+
+Le niveau 8 gagne en **155 commandes SIC seul et 34,86 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **406 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 561 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 14 tests ciblés passent. Empreinte `84051177248408ec33e9ec8107c0a602f3edc80c418aeed0548ea4849b080963`.

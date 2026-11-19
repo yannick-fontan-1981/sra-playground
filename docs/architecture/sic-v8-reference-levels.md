@@ -6,7 +6,7 @@ Le seuil provisoire est le maximum des scores attestés. Le prochain score à at
 
 Premier relevé historique sur les 100 jeux. **80** ont une référence positive retrouvée. Le natif regroupe 0.68 et ses versions historiques. V5 inclut les parcours continus attestés et les niveaux 1 qualifiés. V6 désigne l’agent source. Pour V7, les cinq rapports locaux examinés indiquent zéro partie démarrée, dont un rejeu de retours historiques. La colonne reste ouverte à d’autres archives V7. Certains rapports V6 originaux sont disponibles uniquement dans les archives locales de l’agent.
 
-Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **621 niveaux sur 636 (97,6 %)** sur les 100 jeux de la campagne. SIC seul a terminé **91 jeux** et gagné les **99 niveaux 6** ainsi que les **18 niveaux 7**. Les 15 niveaux à qualifier sur les 9 jeux encore ouverts comprennent 8 niveaux 8, 6 niveaux 9 et 1 niveau 10. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
+Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **622 niveaux sur 636 (97,8 %)** sur les 100 jeux de la campagne. SIC seul a terminé **92 jeux** et gagné les **99 niveaux 6** ainsi que les **18 niveaux 7**. Les 14 niveaux à qualifier sur les 8 jeux encore ouverts comprennent 7 niveaux 8, 6 niveaux 9 et 1 niveau 10. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
 
 | Jeu | Total | Natif | V5 | V6 | V7 | Maximum attesté | Prochain jalon | SIC seul |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -73,7 +73,7 @@ Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau
 | PORT | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/PORT/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
 | PRTL | 6 | — | — | — | — | — | — | 6 · WIN |
 | R11L | 6 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/R11L/LVL2/good_run_pseudocode.md) | 1 (archive locale) | — | 2 | 3 | 6 · WIN |
-| RE86 | 8 | [3](../../docs/migration/native-campaigns-v54/baseline-re86/re86-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 7 |
+| RE86 | 8 | [3](../../docs/migration/native-campaigns-v54/baseline-re86/re86-campaign.json.gz) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/v5/generalization/FT09_L2_official25_proof.json) | 3 (archive locale) | — | 3 | 4 | 8 · WIN |
 | RECR | 6 | [3](../../docs/migration/lot10c-evidence/development/recr01/recruitment-campaign.json.gz) | — | — | — | 3 | 4 | 6 · WIN |
 | REGN | 6 | — | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/REGN/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
 | REWI | 6 | 1 (rejeu local 0.68) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/REWI/LVL1/good_run_pseudocode.md) | — | — | 1 | 2 | 6 · WIN |
