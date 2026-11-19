@@ -2666,3 +2666,9 @@ Le niveau 9 est gagné en **112 commandes SIC seul** et **223,08 s** avec un wor
 Le moteur lit les deux types de carrés et le glyphe demandés dans le panneau. Il réserve un récepteur avant la fusion du premier carré, vérifie les fusions intermédiaires et tient compte du déplacement autonome du glyphe. Le rayon du clic est mesuré sur l'animation. Les quatre dernières commandes placent les trois produits dans les récepteurs pendant le même retour.
 
 Le rejeu chronologique gagne en **13 commandes SIC seul** et **8,67 s** avec un worker. Les **109 commandes et retours** des niveaux 1 à 8 gardent les mêmes empreintes. La reprise depuis la sauvegarde confirme les 13 retours et reproduit la trajectoire `15d4a8112cb0740d8c577a67880b25e4573119ebfd868b79578bf0ce77ba1a86` jusqu'à `WIN`.
+
+### TU93 niveau 9 — Traverser avec les patrouilles et le poursuivant dans la même prévision
+
+SIC choisit une première case sûre, identifie le déplacement des patrouilles dans le retour et réutilise la poursuite mesurée au niveau précédent. La recherche vérifie ensemble les déplacements simultanés, les prises latérales et la trace suivie par le poursuivant. Deux sprites qui partagent un nœud restent distincts dans la prévision jusqu'à leur réapparition.
+
+Le rejeu gagne en **29 commandes SIC seul** et **13,90 s** avec un worker. Les **175 commandes et retours** des niveaux 1 à 8 ont les mêmes empreintes. La reprise depuis la sauvegarde reproduit les 29 commandes et la trajectoire `136b995cefc793f95bb910457d207b369545c24f5b9b58634345ee6c4a99f035` jusqu'à `WIN`.

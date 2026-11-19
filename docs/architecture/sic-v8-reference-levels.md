@@ -6,7 +6,7 @@ Le seuil provisoire est le maximum des scores attestés. Le prochain score à at
 
 Premier relevé historique sur les 100 jeux. **80** ont une référence positive retrouvée. Le natif regroupe 0.68 et ses versions historiques. V5 inclut les parcours continus attestés et les niveaux 1 qualifiés. V6 désigne l’agent source. Pour V7, les cinq rapports locaux examinés indiquent zéro partie démarrée, dont un rejeu de retours historiques. La colonne reste ouverte à d’autres archives V7. Certains rapports V6 originaux sont disponibles uniquement dans les archives locales de l’agent.
 
-Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **633 niveaux sur 636 (99,5 %)** sur les 100 jeux de la campagne. SIC seul a terminé **97 jeux**. Les **13 niveaux 8** sont validés et **4 niveaux 9 sur 6** sont qualifiés. Il reste 3 niveaux à qualifier sur 3 jeux. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
+Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau-6-planifier-sur-toute-la-file-visible) atteint **634 niveaux sur 636 (99,7 %)** sur les 100 jeux de la campagne. SIC seul a terminé **98 jeux**. Les **13 niveaux 8** sont validés et **5 niveaux 9 sur 6** sont qualifiés. Il reste 2 niveaux à qualifier sur 2 jeux. La collection Custom 4 du Playground est hors du périmètre de cette campagne.
 
 | Jeu | Total | Natif | V5 | V6 | V7 | Maximum attesté | Prochain jalon | SIC seul |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -102,7 +102,7 @@ Le cumul des [rejeux chronologiques qualifiés](sic-v8-validation.md#colm-niveau
 | TR87 | 6 | 1 (rejeu local 0.68) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TR87/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 6 · WIN |
 | TRCP | 6 | — | — | — | — | — | — | 6 · WIN |
 | TRIA | 6 | — | — | — | — | — | — | 6 · WIN |
-| TU93 | 9 | [3](../../docs/migration/native-campaigns-v36/tu93-three-levels.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TU93/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 8 |
+| TU93 | 9 | [3](../../docs/migration/native-campaigns-v36/tu93-three-levels.json) | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/TU93/LVL2/good_run_pseudocode.md) | — | — | 3 | 4 | 9 · WIN |
 | UPST | 6 | — | — | — | — | — | — | 6 · WIN |
 | VALV | 6 | [3](../../docs/migration/native-campaigns-v51/valv-three-levels.json) | [1](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VALV/LVL1/good_run_pseudocode.md) | — | — | 3 | 4 | 6 · WIN |
 | VC33 | 7 | — | [2](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/ce5ed53cb5aafd112776a3d9e38a1b5261453f73/docs/good_run/VC33/LVL2/good_run_pseudocode.md) | 3 (archive locale) | — | 3 | 4 | 7 · WIN |
