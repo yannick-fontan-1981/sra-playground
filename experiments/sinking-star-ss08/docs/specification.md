@@ -42,8 +42,6 @@ Les monstres attaquent leurs voisins orthogonaux simultanément. Deux monstres a
 
 Les déplacements, poussées, échanges, reflets, mouvements de presse et changements de plateformes produisent trois images. Un combat en produit cinq : préparation, avancée, impact, disparition, résultat. Les séquences peuvent s’enchaîner ; chaque durée est explicite et l’image finale a une durée de 0. L’interface attend le dernier état avant d’afficher victoire ou défaite. Annuler reste possible pendant une animation et restaure toute la cascade.
 
-Quand le Magicien ne trouve aucune cible et que le pas demandé arriverait dans une case d’eau sans appui, le refus affiche une croix X sur cette case : cyan, effacement, rouge, effacement, rouge, effacement. Les durées sont 110, 70, 130, 70, 130 et 0 ms. Cette phase visuelle conserve la position des objets et ne déclenche ni circuit ni combat. La même tentative répétée rejoue l’avertissement, même si l’état logique est identique ; elle n’ajoute alors aucune entrée d’annulation. L’image finale est nette et ne contient plus de croix.
-
 `DuoPuzzleSession` expose les pixels, les actions autorisées, l’état, les compteurs et la progression. Les plans de visée, objets, circuits, parcours et solutions restent hors de l’observation publique. Les outils d’auteur ne sont pas embarqués dans le HTML.
 
 ## Sources et portée des adaptations

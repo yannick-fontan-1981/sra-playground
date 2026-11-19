@@ -1,5 +1,11 @@
 # SS08 — historique des modifications
 
+## 0.2.1 — retour au comportement précédent dans l’eau
+
+- Retrait du signal cyan/rouge et du message dédié ajoutés en v0.2.0.
+- Rétablissement du traitement immédiat des actions et de l’annulation qui précédait cet ajout.
+- Ordre des niveaux de v0.2.0 et priorité de dessin du miroir sur les boutons conservés.
+
 ## 0.2.0 — retours sur le HTML v1
 
 - Ordre des niveaux : anciens 2, 3, 4, 1, 5, 6, 7, 8. L’atelier pédagogique suit sa salle au niveau 4 ; le lancement et le redémarrage commencent au nouveau niveau 1.

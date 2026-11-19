@@ -19,7 +19,7 @@ Ouvrir ensuite `dist/SS08-demo.html` dans un navigateur. Le HTML embarque le mot
 - Clic sur un personnage ou Tab : changer de personnage, sans faire avancer le monde.
 - Z : annuler ; R : recommencer.
 
-Depuis la v0.2.0, les quatre premières salles suivent l’ordre ancien 2 → 3 → 4 → 1 ; l’atelier guidé est au niveau 4. Les miroirs passent visuellement au-dessus des boutons. Une tentative du Magicien refusée sur une case d’eau y fait clignoter une croix cyan puis rouge.
+Depuis la v0.2.0, les quatre premières salles suivent l’ordre ancien 2 → 3 → 4 → 1 ; l’atelier guidé est au niveau 4. Les miroirs passent visuellement au-dessus des boutons.
 
 Deux destinations doivent être occupées simultanément. Les caisses plongées dans l’eau deviennent des appuis permanents. Les boutons peuvent commander des portes-presses et des plateformes rétractables. Les monstres frappent leurs voisins orthogonaux simultanément.
 

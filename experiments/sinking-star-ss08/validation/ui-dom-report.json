@@ -5,8 +5,8 @@
   "visualBrowserTest": false,
   "checks": [
     "The compiled HTML starts on the new level 1; the rich ten-discovery tutorial follows its room to level 4 and Restart explicitly returns to level 1",
-    "Controls and global help distinguish directional swaps, mirror reflections, water warnings, support, circuits and monster combat",
-    "Six compiled-HTML Wizard fixtures cover direct, bent and companion exchanges, ordinary walking, black-back obstruction and water refusal without false movement/support discoveries",
+    "Controls and global help distinguish directional swaps, mirror reflections, support, circuits and monster combat",
+    "Six compiled-HTML Wizard fixtures cover direct, bent and companion exchanges, ordinary walking, black-back obstruction and immediate water refusal without false movement/support discoveries",
     "Three compiled-HTML reflection fixtures preserve nearest-source previews, blocked-farther independence, equal-distance exchange and exact visual Undo",
     "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
     "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
@@ -16,7 +16,7 @@
     "8 inspected rooms display their source attribution and relevant help; rich tutorial appears only in level 4",
     "Every inspected room retains the orange/violet duo and two goals; reselecting the active hero creates no action or Undo entry",
     "The real L5 witness keeps each mirror’s white diagonal and black back visible while it holds a button",
-    "The real L8 route shows cyan/clear/red/clear/red/clear in water, repeats unchanged refusal, moves no hero, grants no discovery and permits exact or mid-animation Undo",
+    "The real L8 invalid water step returns one clean immediate frame, starts no timer, adds no mark, repeats unchanged, moves no hero and supports exact Undo",
     "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
     "The rich tutorial in level 4 earns all ten discoveries through its unchanged real witness",
     "All eight witnesses replay in the new order with exact frames/timing; final victory disables further controls",
@@ -55,8 +55,8 @@
       "exactVisualUndo": true
     },
     {
-      "case": "water refusal teaches no movement or support",
-      "exactFrames": 6,
+      "case": "water refusal is immediate and teaches no movement or support",
+      "exactFrames": 1,
       "publicLessonDetection": true,
       "exactVisualUndo": true
     }
@@ -123,18 +123,12 @@
       "x": 7,
       "y": 4
     },
-    "frames": 6,
-    "frameDurationsMs": [
-      110,
-      70,
-      130,
-      70,
-      130,
-      0
-    ],
-    "repeatedIdenticalWarning": true,
+    "frames": 1,
+    "immediate": true,
+    "noAnimationTimers": true,
+    "noWaterMarks": true,
+    "repeatedRefusalUnchanged": true,
     "exactUndo": true,
-    "midAnimationUndo": true,
     "noHeroMotion": true,
     "noDiscovery": true
   },

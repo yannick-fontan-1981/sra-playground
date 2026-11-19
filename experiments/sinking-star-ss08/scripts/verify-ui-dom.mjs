@@ -128,7 +128,7 @@ const checkWizardFixtures=async()=>{
     {name:'companion is the first target',wizard:[2,4],merchant:[6,4],action:4,to:[6,4],swap:true,bent:false},
     {name:'no target walks one cell',wizard:[2,4],merchant:[1,6],action:4,to:[3,4],swap:false,bent:false},
     {name:'black back blocks targeting',wizard:[2,4],merchant:[1,6],stone:[4,2],mirror:[4,4],action:4,to:[3,4],swap:false,bent:false},
-    {name:'water refusal teaches no movement or support',wizard:[2,4],merchant:[1,6],water:[3,4],action:4,to:[2,4],swap:false,bent:false,warning:true},
+    {name:'water refusal is immediate and teaches no movement or support',wizard:[2,4],merchant:[1,6],water:[3,4],action:4,to:[2,4],swap:false,bent:false,blocked:true},
   ];
   for(const fixture of cases){
     const cells=Array.from({length:9},(_,y)=>Array.from({length:9},(_,x)=>x===0||y===0||x===8||y===8?'#':'.'));
@@ -155,16 +155,16 @@ const checkWizardFixtures=async()=>{
       assert.deepEqual(buffer,rgba(fixtureRef.observe().frame));
       const before=new Uint8ClampedArray(buffer),start=painted.length,board=ui.document.getElementById('board');
       const event=new ui.KeyboardEvent('keydown',{key:actionKeys[fixture.action],bubbles:true,cancelable:true});
-      assert.equal(board.dispatchEvent(event),false);assert.equal(board.dataset.busy,'true');
+      assert.equal(board.dispatchEvent(event),false);assert.equal(board.dataset.busy,fixture.blocked?'false':'true');
       const expected=fixtureRef.action(fixture.action);await drain();
-      assert.equal(expected.frames.length,fixture.warning?6:3);assert.equal(board.dataset.busy,'false');
+      assert.equal(expected.frames.length,fixture.blocked?1:3);assert.equal(board.dataset.busy,'false');
       for(let i=0;i<expected.frames.length;i++)assert.deepEqual(painted[start+i],rgba(expected.frames[i]),`${fixture.name} frame ${i}`);
       assert.deepEqual(buffer,rgba(expected.frame));assert.deepEqual(delays,expected.frameDurationsMs.slice(0,-1));
       const violet=heroes(expected.frame).find(h=>h.color===15);
       assert.deepEqual(violet.data,{x:3+(fixture.to[0]+5)*3,y:3+(fixture.to[1]+5)*3});
       assert.equal(ui.document.querySelector('[data-lesson="wizard-swap"]').classList.contains('done'),fixture.swap);
       assert.equal(ui.document.querySelector('[data-lesson="wizard-bend"]').classList.contains('done'),fixture.bent);
-      if(fixture.warning){assert.equal(ui.document.querySelector('[data-lesson="move"]').classList.contains('done'),false);assert.equal(ui.document.querySelector('[data-lesson="platform"]').classList.contains('done'),false);assert.ok(ui.document.getElementById('feedback').textContent.includes('Eau sans appui'));}
+      if(fixture.blocked){assert.equal(ui.document.querySelector('[data-lesson="move"]').classList.contains('done'),false);assert.equal(ui.document.querySelector('[data-lesson="platform"]').classList.contains('done'),false);assert.ok(!ui.document.getElementById('feedback').textContent.includes('Eau sans appui'));assert.equal(delays.length,0);}
       if(fixture.swap)assert.ok(ui.document.getElementById('feedback').textContent.includes(fixture.bent?'rayon dévié':'Transposition'));
       ui.document.getElementById('undo').click();await drain();assert.deepEqual(buffer,before,`${fixture.name}: exact visual Undo`);
       result.push({case:fixture.name,exactFrames:expected.frames.length,publicLessonDetection:true,exactVisualUndo:true});
@@ -203,34 +203,29 @@ const checkActualMirrorButtons=async()=>{
 };
 const checkActualWaterRefusal=async()=>{
  const prefix='LLLLUUUUDDDDCUUURRR',witness=witnesses.find(w=>w.level===8);
- assert.ok(witness.commands.startsWith(prefix),'The water warning route belongs to the real L8 witness');
+ assert.ok(witness.commands.startsWith(prefix),'The invalid water step belongs to the real L8 route');
  choose(8);await replay(witness.actions.slice(0,prefix.length));
  const before=ref.observe(),positions=heroes(before.frame).map(h=>({color:h.color,data:h.data}));
  const lessons=[...window.document.querySelectorAll('[data-lesson]')].map(e=>e.classList.contains('done'));
+ const tile=frame=>frame.slice(14,17).map(row=>row.slice(23,26));
  const perform=async()=>{
   const start=captures.length,waitStart=waits.length;assert.equal(key('ArrowUp'),false);
-  const next=ref.action(1);assert.equal($('board').dataset.busy,'true');await settled(next);
-  assert.equal(next.frames.length,6);assert.deepEqual(next.frameDurationsMs,[110,70,130,70,130,0]);
-  for(let i=0;i<6;i++)assert.deepEqual(captures[start+i],rgba(next.frames[i]),'Water refusal public frame '+i);
-  assert.deepEqual(waits.slice(waitStart),[110,70,130,70,130]);
-  const px=23,py=14,marks=[[0,0],[2,0],[1,1],[0,2],[2,2]];
-  for(const [index,color] of [[0,10],[2,8],[4,8]])for(const [x,y] of marks)assert.equal(next.frames[index][py+y][px+x],color);
-  for(const index of [1,3,5])assert.deepEqual(next.frames[index],next.frame,'Warning clears between blinks');
-  assert.deepEqual(heroes(next.frame).map(h=>({color:h.color,data:h.data})),positions,'Water refusal moves neither hero');
-  assert.equal(next.state,'NOT_FINISHED');assert.ok($('feedback').textContent.includes('Eau sans appui'));
-  assert.deepEqual([...window.document.querySelectorAll('[data-lesson]')].map(e=>e.classList.contains('done')),lessons,'Warning grants no tutorial discovery');
-  return {next,start};
+  const next=ref.action(1);assert.equal($('board').dataset.busy,'false');await settled(next);
+  assert.equal(next.frames.length,1);assert.deepEqual(next.frames[0],next.frame);
+  if(next.frameDurationsMs)assert.deepEqual(next.frameDurationsMs,[0]);
+  assert.deepEqual(captures[start],rgba(next.frame));assert.deepEqual(waits.slice(waitStart),[]);assert.equal(timers.length,0);
+  assert.deepEqual(tile(next.frame),tile(before.frame),'Water cell remains unmarked');
+  assert.deepEqual(heroes(next.frame).map(h=>({color:h.color,data:h.data})),positions,'Refused water step moves neither hero');
+  assert.equal(next.state,'NOT_FINISHED');assert.ok(!$('feedback').textContent.includes('Eau sans appui'));
+  assert.ok($('feedback').textContent.includes('Aucun échange possible'));
+  assert.deepEqual([...window.document.querySelectorAll('[data-lesson]')].map(e=>e.classList.contains('done')),lessons,'Refusal grants no discovery');
+  return next;
  };
- const first=await perform(),again=await perform();assert.deepEqual(again.next.frames,first.next.frames,'Identical refusal visibly replays');
- $('undo').click();const undone=ref.undo();await settled(undone);equalFrame(before);
- key('ArrowUp');ref.action(1);assert.equal($('board').dataset.busy,'true');
- $('undo').click();const canceled=captures.length;await settled(ref.undo());assert.equal(captures.length,canceled,'Undo cancels pending warning frames');equalFrame(before);
- if(process.env.SS08_UI_CAPTURE_DIR){
-  writeFileSync(resolve(process.env.SS08_UI_CAPTURE_DIR,'ss08-level8-water-cyan.rgba'),captures[first.start]);
-  writeFileSync(resolve(process.env.SS08_UI_CAPTURE_DIR,'ss08-level8-water-red.rgba'),captures[first.start+2]);
- }
- return {level:8,prefixActions:prefix.length,targetCell:{x:7,y:4},frames:6,frameDurationsMs:first.next.frameDurationsMs,repeatedIdenticalWarning:true,exactUndo:true,midAnimationUndo:true,noHeroMotion:true,noDiscovery:true};
+ const first=await perform(),again=await perform();assert.deepEqual(again.frame,first.frame,'Repeated refusal remains a clean immediate frame');
+ $('undo').click();await settled(ref.undo());equalFrame(before);
+ return {level:8,prefixActions:prefix.length,targetCell:{x:7,y:4},frames:1,immediate:true,noAnimationTimers:true,noWaterMarks:true,repeatedRefusalUnchanged:true,exactUndo:true,noHeroMotion:true,noDiscovery:true};
 };
+
 try{
   assert.ok(SS08_LEVELS.length>=TUTORIAL_LEVEL,'The rich tutorial is now level 4');
   if(!tutorialOnly)assert.equal(SS08_LEVELS.length,8,'The SS08 release contains eight rooms');
@@ -251,11 +246,11 @@ try{
   assert.ok($('monster-help').textContent.includes('s’éliminent mutuellement'));assert.ok($('piston-help').textContent.includes('ils doivent être occupés ensemble'));
   assert.ok(window.document.body.textContent.includes('Appui dans l’eau · fixe'));
   assert.ok($('swap-help').textContent.includes('La première cible compte'));assert.ok($('swap-help').textContent.includes('Les flèches transposent ; Espace active les reflets'));assert.ok($('swap-help').textContent.includes('aucune prévisualisation permanente'));
-  assert.ok($('swap-help').textContent.includes('un X cyan puis rouge'));
-  report.checks.push('Controls and global help distinguish directional swaps, mirror reflections, water warnings, support, circuits and monster combat');
+  assert.ok(!$('swap-help').textContent.includes('un X cyan puis rouge'));
+  report.checks.push('Controls and global help distinguish directional swaps, mirror reflections, support, circuits and monster combat');
 
   report.wizardCoverage=await checkWizardFixtures();
-  report.checks.push('Six compiled-HTML Wizard fixtures cover direct, bent and companion exchanges, ordinary walking, black-back obstruction and water refusal without false movement/support discoveries');
+  report.checks.push('Six compiled-HTML Wizard fixtures cover direct, bent and companion exchanges, ordinary walking, black-back obstruction and immediate water refusal without false movement/support discoveries');
   report.reflectionPriorityCoverage=await checkReflectionFixtures();
   report.checks.push('Three compiled-HTML reflection fixtures preserve nearest-source previews, blocked-farther independence, equal-distance exchange and exact visual Undo');
 
@@ -308,7 +303,7 @@ try{
    report.mirrorButtonCoverage=await checkActualMirrorButtons();
    report.checks.push('The real L5 witness keeps each mirror’s white diagonal and black back visible while it holds a button');
    report.waterRefusalCoverage=await checkActualWaterRefusal();
-   report.checks.push('The real L8 route shows cyan/clear/red/clear/red/clear in water, repeats unchanged refusal, moves no hero, grants no discovery and permits exact or mid-animation Undo');
+   report.checks.push('The real L8 invalid water step returns one clean immediate frame, starts no timer, adds no mark, repeats unchanged, moves no hero and supports exact Undo');
   }
   $('restart').click();await settled(ref.restart());choose(TUTORIAL_LEVEL);
   const reflectionIndex=tutorial.findIndex(a=>normal(a).id===5);assert.ok(reflectionIndex>=0);await replay(tutorial.slice(0,reflectionIndex));

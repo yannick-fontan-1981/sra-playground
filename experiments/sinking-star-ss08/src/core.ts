@@ -122,8 +122,8 @@ export function initialState(w:World):State {
 }
 export interface Motion {readonly actor:'hero'|'stone'|'monster'|'mirror';readonly from:Point;readonly to:Point}
 export interface MotionPhase {
-  readonly kind:'walk'|'push'|'swap'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat'|'water-refusal';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
-  readonly gateIndex?:number;readonly paths?:readonly (readonly Point[])[];readonly warningCells?:readonly Point[];
+  readonly kind:'walk'|'push'|'swap'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
+  readonly gateIndex?:number;readonly paths?:readonly (readonly Point[])[];
 }
 export interface DetailedStep {readonly state:State;readonly phases:readonly MotionPhase[]}
 export interface ReflectionPlan {readonly moves:readonly Motion[];readonly paths:readonly (readonly Point[])[];readonly mirrorIndices:readonly number[]}
@@ -276,10 +276,7 @@ export function stepDetailed(w:World,s:State,actionId:number,data?:Point):Detail
   if(actionId===6){const p=pixelToCell(data!.x,data!.y),active=p?s.heroes.findIndex(h=>!h.dead&&equal(h.at,p)):-1;return {state:active<0||active===s.active?s:{...s,active,failed:false},phases:[]};}
   const hero=s.heroes[s.active]!,direction=actionId===5?hero.facing:directionIds[actionId]!;
   const faced:State={...s,heroes:s.heroes.map((h,i)=>i===s.active?{...h,facing:direction}:h),failed:false};
-  const refusal=(waterCell?:Point):DetailedStep=>{
-    const state:State={...faced,failed:true};
-    return {state,phases:waterCell?[{kind:'water-refusal',before:s,after:state,moves:[],warningCells:[waterCell]}]:[]};
-  };
+  const refusal=():DetailedStep=>({state:{...faced,failed:true},phases:[]});
   let next:State,first:MotionPhase;
   if(actionId===5){const plan=planReflection(w,s);if(!plan)return refusal();next=applyMotions(w,faced,plan.moves);first={kind:'reflect',before:s,after:next,moves:plan.moves,paths:plan.paths};}
   else {
@@ -288,18 +285,7 @@ export function stepDetailed(w:World,s:State,actionId:number,data?:Point):Detail
     if(aim.plan){
       const plan=aim.plan,moves:Motion[]=[{actor:'hero',from:plan.from,to:plan.to},{actor:plan.target,from:plan.to,to:plan.from}];
       next=applyMotions(w,faced,moves);first={kind:'swap',before:s,after:next,moves,paths:[[plan.from,...plan.path]]};
-    }else{
-      const result=moveStep(w,faced,direction);
-      if(!result){
-        const to=offset(hero.at,direction);
-        // Only the Wizard's actual water-step rejection gets this feedback.
-        // A loop, mirror/wall, valid exchange or later circuit/combat outcome
-        // keeps its own semantics and must not manufacture a water warning.
-        const water=hero.kind==='wizard'&&!blocked(w,faced,to)&&!actorAt(faced,to)&&terrainAt(w,to)==='~'&&!supported(w,faced,to);
-        return refusal(water?to:undefined);
-      }
-      next=result.state;first={kind:result.moves.length>1?'push':'walk',before:s,after:next,moves:result.moves};
-    }
+    }else{const result=moveStep(w,faced,direction);if(!result)return refusal();next=result.state;first={kind:result.moves.length>1?'push':'walk',before:s,after:next,moves:result.moves};}
   }
   if(!safeDoors(w,next))return refusal();
   const phases:MotionPhase[]=[first];
@@ -384,11 +370,6 @@ function combatFrames(w:World,phase:MotionPhase):number[][][] {
 }
 function phaseFrames(w:World,phase:MotionPhase):number[][][] {
   if(phase.kind==='combat')return combatFrames(w,phase);
-  if(phase.kind==='water-refusal')return [10,null,8,null,8,null].map(color=>{
-    const frame=renderWorld(w,phase.after);
-    if(color!==null)for(const at of phase.warningCells??[])stamp(frame,at,[[color,null,color],[null,color,null],[color,null,color]]);
-    return frame;
-  });
   if(phase.kind==='platform'){
     const after=renderScene(w,phase.after);
     const frames=[1,2].map(rows=>{
@@ -419,7 +400,7 @@ function phaseFrames(w:World,phase:MotionPhase):number[][][] {
 function presentation(w:World,detail:DetailedStep):{frames:number[][][];durations:number[]} {
   if(!detail.phases.length)return {frames:[renderWorld(w,detail.state)],durations:[0]};
   const frames:number[][][]=[],durations:number[]=[];
-  for(const phase of detail.phases){const part=phaseFrames(w,phase);frames.push(...part);durations.push(...(phase.kind==='water-refusal'?[110,70,130,70,130,0]:phase.kind==='combat'?[80,90,100,110,40]:part.length===3?((phase.kind==='reflect'||phase.kind==='swap')?[70,90,40]:[60,80,40]):[40]));}
+  for(const phase of detail.phases){const part=phaseFrames(w,phase);frames.push(...part);durations.push(...(phase.kind==='combat'?[80,90,100,110,40]:part.length===3?((phase.kind==='reflect'||phase.kind==='swap')?[70,90,40]:[60,80,40]):[40]));}
   durations[durations.length-1]=0;return {frames,durations};
 }
 export function transitionFrames(w:World,before:State,after:State,action:number,data?:Point):number[][][]{const r=presentation(w,stepDetailed(w,before,action,data));r.frames[r.frames.length-1]=renderWorld(w,after);return r.frames;}
@@ -438,12 +419,8 @@ export class DuoPuzzleSession {
   }
   action(actionId:number,data?:Point):Observation {
     const world=this.worlds[this.index]!,before=this.state,detail=stepDetailed(world,before,actionId,data),next=detail.state;
-    const changed=JSON.stringify(next)!==JSON.stringify(before);
-    if(!changed&&!detail.phases.length)return this.observe();
-    // Repeating a visual refusal replays its feedback without adding an Undo
-    // entry for an identical game state.
-    if(changed)this.history.push({index:this.index,completed:[...this.completed],state:before});
-    this.state=next;const {frames,durations}=presentation(world,detail);
+    if(JSON.stringify(next)===JSON.stringify(before))return this.observe();
+    this.history.push({index:this.index,completed:[...this.completed],state:before});this.state=next;const {frames,durations}=presentation(world,detail);
     if(next.complete){this.completed.add(this.index);const i=this.worlds.findIndex((_,i)=>!this.completed.has(i));if(i!==-1){this.index=i;this.state=initialState(this.worlds[this.index]!);}}
     const observation=this.observe();if(this.state!==next){durations[durations.length-1]=100;frames.push(observation.frame);durations.push(0);}return {...observation,frames,frameDurationsMs:durations};
   }

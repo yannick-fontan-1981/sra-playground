@@ -336,7 +336,7 @@ test('Wizard rays cross water and fixed supports without treating them as exchan
 
 test('without a target the Wizard walks one square and refuses unsupported water',()=>{
   const dry=fixture({W:[3,6]}),a=stepDetailed(dry.world,select(dry.world,dry.state,1),4);assert.equal(a.phases[0].kind,'walk');assertAt(hero(a.state,'wizard').at,dry.at(4,6));
-  const wet=fixture({W:[3,6],water:[[4,6]]}),b=stepDetailed(wet.world,select(wet.world,wet.state,1),4);assert.equal(b.state.failed,true);assert.equal(b.state.dead,false);assert.deepEqual(b.phases.map(p=>p.kind),['water-refusal']);assert.deepEqual(b.phases[0].warningCells,[wet.at(4,6)]);assertAt(hero(b.state,'wizard').at,wet.at(3,6));
+  const wet=fixture({W:[3,6],water:[[4,6]]}),b=stepDetailed(wet.world,select(wet.world,wet.state,1),4);assert.equal(b.state.failed,true);assert.equal(b.state.dead,false);assert.deepEqual(b.phases,[]);assertAt(hero(b.state,'wizard').at,wet.at(3,6));
 });
 
 test('walls, closed doors and closed presses stop the target ray without disabling a free local step',()=>{
@@ -477,58 +477,13 @@ test('the actual level 5 mirror keeps its full diagonal and black back when hold
   for(const m of held)assertMirrorPixels(renderWorld(r.world,r.state),cellToPixel(m.at),m.facing);
 });
 
-test('a Wizard water refusal blinks a cyan X then two red X marks exactly inside the attempted destination',()=>{
-  const f=fixture({W:[3,6],water:[[4,6]]}),before=select(f.world,f.state,1),d=stepDetailed(f.world,before,4),frames=transitionFrames(f.world,before,d.state,4),at=cellToPixel(f.at(4,6));
-  assert.equal(d.state.failed,true);assert.equal(d.state.dead,false);assert.deepEqual(d.phases.map(p=>p.kind),['water-refusal']);assert.deepEqual(d.phases[0].moves,[]);assert.deepEqual(d.phases[0].warningCells,[f.at(4,6)]);assert.deepEqual({...d.state,failed:false},before);
-  assert.equal(frames.length,6);
-  const tile=frame=>frame.slice(at.y,at.y+3).map(row=>row.slice(at.x,at.x+3));
-  assert.deepEqual(tile(frames[0]),[[10,9,10],[9,10,9],[10,9,10]]);
-  for(const i of [2,4])assert.deepEqual(tile(frames[i]),[[8,9,8],[9,8,9],[8,9,8]]);
-  for(const i of [1,3,5])assert.deepEqual(frames[i],renderWorld(f.world,d.state));
-  for(const i of [0,2,4]){
-    const changed=[];for(let y=0;y<64;y++)for(let x=0;x<64;x++)if(frames[i][y][x]!==frames[5][y][x])changed.push({x,y});
-    assert.equal(changed.length,5);assert.ok(changed.every(p=>p.x>=at.x&&p.x<at.x+3&&p.y>=at.y&&p.y<at.y+3));
-  }
-});
-
-test('identical repeated water refusals replay all six frames without stacking Undo states',()=>{
-  const f=fixture({W:[3,6],water:[[4,6]]}),session=new DuoPuzzleSession([f.spec]),start=session.observe();session.nextHero();const before=session.observe(),first=session.action(4);
-  assert.deepEqual(first.frameDurationsMs,[110,70,130,70,130,0]);assert.equal(first.frames.length,6);assert.equal(first.levelsCompleted,0);
-  for(let i=0;i<3;i++){const repeat=session.action(4);assert.deepEqual(repeat.frames,first.frames);assert.deepEqual(repeat.frameDurationsMs,first.frameDurationsMs);assert.equal(repeat.levelsCompleted,0);}
-  assert.deepEqual(session.undo(),before);assert.deepEqual(session.undo(),start);assert.equal(session.observe().canUndo,false);
-  assert.equal(session.observe().frames.length,1,'Undo cancels the transient feedback image');
-});
-
-test('a water warning does not tick monsters, release a button, advance circuits or move any actor',()=>{
-  const f=fixture({W:[3,6],water:[[4,6]],monsters:[[3,2]],circuits:[{id:'held',buttons:[{x:3,y:6}]}],gates:[{at:{x:10,y:5},circuit:'held',direction:'E',closedWhen:'released'}]}),before=select(f.world,f.state,1),d=stepDetailed(f.world,before,4);
-  assert.equal(d.state.failed,true);assert.equal(d.state.dead,false,'adjacent inactive Merchant is not attacked on a refused turn');assert.deepEqual(d.state.monsters,before.monsters);assert.deepEqual(d.state.gateClosed,before.gateClosed);assert.deepEqual(d.state.heroes,before.heroes);assert.deepEqual({...d.state,failed:false},before);assert.deepEqual(d.phases.map(p=>p.kind),['water-refusal']);
-});
-
-test('fixed supports and active hydraulic platforms allow normal Wizard movement without a water warning',()=>{
-  const fixed=fixture({W:[3,6],supports:[[4,6]]}),a=stepDetailed(fixed.world,select(fixed.world,fixed.state,1),4);assert.equal(a.state.failed,false);assert.deepEqual(a.phases.map(p=>p.kind),['walk']);
-  const active=fixture({W:[3,6],water:[[4,6]],circuits:[{id:'bridge',buttons:[{x:2,y:2}]}],platforms:[{at:{x:4,y:6},circuit:'bridge',activeWhen:'pressed'}]}),b=stepDetailed(active.world,select(active.world,active.state,1),4);assert.equal(b.state.failed,false);assert.equal(b.state.dead,false);assert.deepEqual(b.phases.map(p=>p.kind),['walk']);
-  const inactive=fixture({W:[3,6],water:[[4,6]],circuits:[{id:'bridge',buttons:[{x:2,y:7}]}],platforms:[{at:{x:4,y:6},circuit:'bridge',activeWhen:'pressed'}]}),c=stepDetailed(inactive.world,select(inactive.world,inactive.state,1),4);assert.equal(c.state.failed,true);assert.deepEqual(c.phases.map(p=>p.kind),['water-refusal']);assert.deepEqual(c.state.platformActive,[false]);
-});
-
-test('wall, mirror-back and ray-loop refusals do not masquerade as failed water arrivals',()=>{
-  for(const extra of [{walls:[[4,6]]},{mirrors:[[4,6,'NE']]}]){
-    const f=fixture({W:[3,6],...extra}),d=stepDetailed(f.world,select(f.world,f.state,1),4);assert.equal(d.state.failed,true);assert.deepEqual(d.phases,[]);
-  }
-  const loop=fixture({W:[3,3],M:[2,8],water:[[4,3]],mirrors:[[7,3,'SW'],[7,7,'NW'],[3,7,'NE']]}),before=select(loop.world,loop.state,1),d=stepDetailed(loop.world,before,4);assert.equal(traceSwap(loop.world,before,'E').loop,true);assert.equal(d.state.failed,true);assert.deepEqual(d.phases,[],'a ray loop refuses before attempting a local water step');
-  const merchant=fixture({water:[[3,2]]});assert.deepEqual(stepDetailed(merchant.world,merchant.state,4).phases,[]);
-  const empty=fixture({W:[3,6],water:[[4,6]]});assert.deepEqual(stepDetailed(empty.world,select(empty.world,empty.state,1),5).phases,[],'ACTION5 keeps its geometric-reflection behavior');
-});
-
-test('a valid Wizard exchange across water keeps its swap animation rather than a rejection warning',()=>{
-  const f=fixture({W:[3,6],water:[[4,6],[5,6]],stones:[[8,6]]}),before=select(f.world,f.state,1),d=stepDetailed(f.world,before,4);assert.equal(d.state.failed,false);assert.deepEqual(d.phases.map(p=>p.kind),['swap']);assert.equal(transitionFrames(f.world,before,d.state,4).length,3);assertAt(hero(d.state,'wizard').at,f.at(8,6));
-});
-
-test('the actual level 8 inactive-water attempt is reachable and repeats deterministic pixel-only feedback',()=>{
+test('the actual level 8 water attempt keeps the original immediate clean frame and no world tick',()=>{
   const spec=SS08_LEVELS.find(l=>l.id==='ss08-08');assert.ok(spec);
-  const prefix='LLLLUUUUDDDDCUUURRR',r=replayForTest(spec,prefix);assert.equal(r.state.heroes[r.state.active].kind,'wizard');assertAt(r.state.heroes[r.state.active].at,{x:7,y:5});assert.deepEqual(r.state.platformActive,[false,false]);
-  const d=stepDetailed(r.world,r.state,1);assert.equal(d.state.failed,true);assert.equal(d.state.dead,false);assert.deepEqual(d.phases.map(p=>p.kind),['water-refusal']);assert.deepEqual(d.phases[0].warningCells,[{x:7,y:4}]);
-  const session=new DuoPuzzleSession([spec]);for(const {action} of r.details)session.action(action.id,action.data);const before=session.observe(),warning=session.action(1),again=session.action(1);
-  assert.equal(warning.frames.length,6);assert.deepEqual(warning.frameDurationsMs,[110,70,130,70,130,0]);assert.deepEqual(again.frames,warning.frames);assert.deepEqual(warning.frames.at(-1),warning.frame);assert.equal(warning.state,'NOT_FINISHED');assert.equal(warning.levelsCompleted,0);assert.deepEqual(session.undo(),before);
-  const at=cellToPixel({x:7,y:4});for(const [i,color] of [[0,10],[2,8],[4,8]]){assert.equal(warning.frames[i][at.y][at.x],color);assert.equal(warning.frames[i][at.y+1][at.x+1],color);assert.equal(warning.frames[i][at.y+2][at.x+2],color);}
-  for(const key of ['warningCells','phases','world','heroes','failed'])assert.equal(key in warning,false);
+  const r=replayForTest(spec,'LLLLUUUUDDDDCUUURRR'),d=stepDetailed(r.world,r.state,1);
+  assert.equal(d.state.failed,true);assert.equal(d.state.dead,false);assert.deepEqual(d.phases,[]);
+  assert.deepEqual(d.state.heroes.map(h=>h.at),r.state.heroes.map(h=>h.at));assert.deepEqual(d.state.stones,r.state.stones);assert.deepEqual(d.state.gateClosed,r.state.gateClosed);assert.deepEqual(d.state.platformActive,r.state.platformActive);
+  const session=new DuoPuzzleSession([spec]);for(const {action} of r.details)session.action(action.id,action.data);
+  const before=session.observe(),first=session.action(1),repeat=session.action(1);
+  assert.equal(first.frames.length,1);assert.deepEqual(first.frames[0],renderWorld(r.world,d.state));assert.deepEqual(first.frameDurationsMs,[0]);
+  assert.equal(repeat.frames.length,1);assert.deepEqual(repeat.frame,first.frame);assert.equal(repeat.frameDurationsMs,undefined);assert.equal(repeat.levelsCompleted,before.levelsCompleted);assert.equal(repeat.state,'NOT_FINISHED');assert.deepEqual(session.undo(),before);
 });

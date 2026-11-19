@@ -1,6 +1,6 @@
 {
   "game": "SS08",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "levels": [
     {
       "level": 1,
@@ -856,7 +856,7 @@
       "Les assertions confirment le mécanisme initial et le parcours de résolution ; elles ne certifient pas l’unicité ni l’optimalité de la solution."
     ]
   },
-  "htmlSha256": "b3e8024d7203a645598a7ef884c0e79ccccb943710f251fd5d31e3d1b5fb2394",
+  "htmlSha256": "4af768e6e4197c71c8a00c78805d1cc14dd06f0d777436637f16251472c347b3",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",
