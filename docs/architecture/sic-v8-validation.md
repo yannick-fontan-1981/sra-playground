@@ -2672,3 +2672,9 @@ Le rejeu chronologique gagne en **13 commandes SIC seul** et **8,67 s** avec un 
 SIC choisit une première case sûre, identifie le déplacement des patrouilles dans le retour et réutilise la poursuite mesurée au niveau précédent. La recherche vérifie ensemble les déplacements simultanés, les prises latérales et la trace suivie par le poursuivant. Deux sprites qui partagent un nœud restent distincts dans la prévision jusqu'à leur réapparition.
 
 Le rejeu gagne en **29 commandes SIC seul** et **13,90 s** avec un worker. Les **175 commandes et retours** des niveaux 1 à 8 ont les mêmes empreintes. La reprise depuis la sauvegarde reproduit les 29 commandes et la trajectoire `136b995cefc793f95bb910457d207b369545c24f5b9b58634345ee6c4a99f035` jusqu'à `WIN`.
+
+### WA30 niveau 9 — Combiner les relais, les livraisons locales et la coopération
+
+SIC distingue les récepteurs accessibles directement du secteur qui requiert un relais. Après les deux relais et la livraison directe à droite, il réutilise la preuve d'interception d'un porteur connu. La commande 49 le retire tout en préservant la caisse. Lorsque deux porteurs se ressemblent, SIC associe leurs positions successives par un déplacement compatible et vérifie le mouvement conjoint de la caisse. Il laisse le dernier porteur terminer sa livraison.
+
+Le rejeu gagne en **66 commandes SIC seul** et **37,34 s** avec un worker, sur les 70 commandes disponibles. Les **544 commandes et retours** des niveaux 1 à 8 ont les mêmes empreintes. La reprise depuis la sauvegarde confirme les 66 retours et reproduit la trajectoire `03c160463cae68271c8d1a95b3998967cd60e7d6249fcbad0afb2b230974645b` jusqu'à `WIN`.
