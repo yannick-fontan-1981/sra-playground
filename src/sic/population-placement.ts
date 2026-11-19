@@ -188,7 +188,7 @@ function planInMeasuredZone(local: State, controls: Controls, zones: PopulationZ
   return best;
 }
 
-export function createSicVerifyReferencePlacement(family = verifyReferencePlacementId): NativeFamily<Proposal> {
+export function createSicVerifyReferencePlacement(family = verifyReferencePlacementId, transferObservedPlacement = false): NativeFamily<Proposal> {
   const learns = family === learnReferencePlacementId;
   let state: State | null = null;
   let witness: PlacementWitness | null = null;
@@ -213,7 +213,8 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       if (!available.length) return null;
       const prior = state?.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
       if (prior?.stopped) return null;
-      const click = learns && !prior ? await execution?.readPriorClickScene?.((first, _before, command) => {
+      const recall = transferObservedPlacement && witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed;
+      const click = learns && !prior && !recall ? await execution?.readPriorClickScene?.((first, _before, command) => {
         const previous = measureReferencePopulation(first) as Scene | null;
         if (!previous) return null;
         const { x, y } = command.data;
@@ -225,7 +226,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
         const scene = selectionScene(previous, piece.cell, first, rows);
         return scene ? { scene, selection: piece.cell } : null;
       }) : null;
-      if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
+      if (learns && !prior && !recall && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
       const previous = witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed ? witness : null;
       let scene = prior?.scene ?? click?.scene.scene ?? (measureReferencePopulation(rows) as Scene | null)
         ?? (previous?.neighborhood ? measureReferencePopulation(rows, null, { allowSurplus: true }) as Scene | null : null);

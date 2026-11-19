@@ -1,3 +1,7 @@
+import { acquireMarkedOutlet } from './marked-compartment-flow.ts';
+import { acquireInstructionReturn, type SymbolAcquisition } from './symbol-contribution.ts';
+import { observeSymbolPrefix, type SymbolPrefixAcquisition } from './parallel-symbol-prefixes.ts';
+import { learnObservedProgram, type ProgramEdit, type ProgramWitness } from './observed-program-continuation.ts';
 import { acquireCatalogueReturn, type CatalogueAcquisition } from './visible-configuration-coverage.ts';
 import { acquireRelationReturn, type RelationsAcquisition } from './observed-shared-relations.ts';
 import { acquireRevealedNavigation, type NavigationAcquisition } from './navigate-revealed-grid.ts';
@@ -146,6 +150,11 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   navigationTransfer?: NavigationAcquisition;
   relationsTransfer?: RelationsAcquisition;
   catalogueTransfer?: CatalogueAcquisition;
+  symbolTransfer?: SymbolPrefixAcquisition;
+  programWitness?: ProgramWitness;
+  outletWitness?: NonNullable<Awaited<ReturnType<typeof acquireMarkedOutlet>>>;
+  instructionTransfer?: SymbolAcquisition;
+  programEdits?: ProgramEdit[];
   learnedDirections?: Record<string, string>;
   directionHistory?: ObservedCommandGraph;
   directionTransfer?: { epoch: number; inputs: string[]; refs: string[] };
@@ -518,17 +527,23 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
   function enterEpoch(epoch: number): void {
     if (state.epoch === epoch) return;
-    const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer } = state;
+    const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer, symbolTransfer, programWitness, outletWitness, instructionTransfer } = state;
     state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
       ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
       ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
       ...(relayTransfer?.witness ? { relayTransfer } : {}), ...(navigationTransfer?.won ? { navigationTransfer } : {}),
       ...(relationsTransfer?.witness ? { relationsTransfer } : {}), ...(directionTransfer ? { directionTransfer } : {}),
-      ...(catalogueTransfer?.witness ? { catalogueTransfer } : {}), ...(jointTransfer ? { jointTransfer } : {}) };
+      ...(catalogueTransfer?.witness ? { catalogueTransfer } : {}), ...(jointTransfer ? { jointTransfer } : {}),
+      ...(symbolTransfer?.retained ? { symbolTransfer } : {}), ...(programWitness ? { programWitness } : {}),
+      ...(outletWitness ? { outletWitness } : {}), ...(instructionTransfer?.learned ? { instructionTransfer } : {}) };
   }
   async function acquireTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows, frames: readonly NativeRows[]) {
     if (!fallback) return;
     const compartment = acquireCompartmentReturn(state.compartmentTransfer, before, after, command, rows, afterRows);
+    const instruction = acquireInstructionReturn(state.instructionTransfer, before, after, command, rows, afterRows);
+    const outlet = after.levels_completed > before.levels_completed
+      ? await acquireMarkedOutlet(state.outletWitness ?? null, before, after, command, rows) : null;
+    const symbols = observeSymbolPrefix(state.symbolTransfer, before, after, command, rows, afterRows);
     const catalogue = /^ACTION6$/.test(command.action_ref) && !before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))
       && before.frame_hash !== after.frame_hash ? acquireCatalogueReturn(state.catalogueTransfer, before, after, command, rows, afterRows, frames) : undefined;
     const relations = acquireRelationReturn(state.relationsTransfer, before, after, command, rows, afterRows, frames);
@@ -539,6 +554,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     if (compartment) state.compartmentTransfer = compartment;
     if (capture) state.captureTransfer = capture;
     if (display) state.displayTransfer = display;
+    if (outlet) state.outletWitness = outlet;
+    if (instruction) state.instructionTransfer = instruction;
+    if (symbols) state.symbolTransfer = symbols;
     if (catalogue) state.catalogueTransfer = catalogue;
     if (relations) state.relationsTransfer = relations;
     if (relay) state.relayTransfer = relay;
@@ -582,7 +600,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const pressure = !panel ? choosePressureReserve(local.pressureReserve, local.travel, rows, nonPoint) : undefined;
       const pressureKey = pressure?.command.action_ref;
       const recalledJoint = state.jointTransfer?.epoch === observation.level_epoch - 1 ? state.jointTransfer.measured : undefined;
-      const joint = fallback && !panel && !pressure ? chooseJointInput(local.jointInput ?? recalledJoint, rows, nonPoint, remaining) : undefined;
+      const joint = fallback && !panel && !pressure ? chooseJointInput(local.jointInput ?? recalledJoint, rows, nonPoint, remaining, !!recalledJoint) : undefined;
       const jointKey = joint?.command.action_ref;
       const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows) : undefined;
       const exchangeKey = exchange?.command.action_ref;
@@ -592,8 +610,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const markKey = markTrial?.command.action_ref;
       const travel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
-      const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness) && !pressure
-        ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state.fallbackTransfer, state.compartmentTransfer, state.captureTransfer, state.displayTransfer, state.relayTransfer, state.navigationTransfer, state.relationsTransfer, state.catalogueTransfer, !!panel) : undefined;
+      const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness) && !pressure
+        ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state, !!panel) : undefined;
       const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
       const panelBounds = panel ? { area: panel.area, panel: panel.panel } : undefined;
@@ -674,7 +692,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const deferred = lastChange && canDiversifyDirection ? oppositeDirection[lastChange.action] : undefined;
       const recheck = local.recheck && local.experiments < local.recheck.until ? local.recheck : null;
       const rememberedDirections = fallback && state.directionTransfer?.epoch === observation.level_epoch - 1
-        && stationaryClicks.length >= 3 ? state.directionTransfer : null;
+        && (stationaryClicks.length >= 2 || lastChange?.action.startsWith('ACTION6:'))
+        ? state.directionTransfer : null;
       const directionRelook = rememberedDirections && named.length >= 3
         ? observedCommandFrontier(local.directionHistory ?? {}, interfaceKey(observation), named.filter(key => rememberedDirections.inputs.includes(key)), 1,
           () => named.filter(key => rememberedDirections.inputs.includes(key)), deferred) : null;
@@ -978,7 +997,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           : opening ? 'Reach the new region opened by the support placement' : 'Learn how to act on the current board'), mode,
           situation: !selectedFallback && !selectedPressure && !selectedMark && !selectedExchange && !selectedCoverage && !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
-            : label, agenda: decision ? [] : entries, evidence: proof, ...(selectedEntry?.recurring ? { priorLevelMechanism: selectedEntry.recurring } : {}),
+            : label, agenda: decision ? [] : entries, evidence: proof, ...(recalledDirection ? { priorLevelMechanism: 'Test a direction previously observed to change the board',
+            newLevelConfiguration: 'The current interface needs a fresh control check' } : {}),
+          ...(selectedEntry?.recurring ? { priorLevelMechanism: selectedEntry.recurring } : {}),
           ...(selectedEntry?.novelty ? { newLevelConfiguration: selectedEntry.novelty } : {}),
           ...(selectedFallback ? { target: selectedFallback.goal,
             ...(selectedFallback.recurring ? { priorLevelMechanism: selectedFallback.recurring } : {}),
@@ -1162,6 +1183,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         enterEpoch(before.level_epoch);
         if (proposal.fallbackProjection?.check.kind !== 'capture') await acquireTransfer(before, after, command, rows, afterRows, frames ?? []);
       }
+      if (fallback && after.levels_completed > before.levels_completed && command.action_ref !== 'ACTION6') {
+        for (const sample of state.programEdits ?? []) {
+          const program = learnObservedProgram(sample, before, after, command, rows, frames);
+          if (program) { state.programWitness = program; break; }
+        }
+      }
       if (fallback && after.levels_completed > before.levels_completed && state.jointInput
         && Object.keys(state.jointInput.trials).length >= 3) {
         state.jointTransfer = { epoch: before.level_epoch, measured: { ...state.jointInput, refuted: [] } };
@@ -1184,7 +1211,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
       const expected = proposal.collectionTrial?.expected;
       delete state.collectionEdit;
-      if (expected && matchesCollectionEdit(afterRows, expected)) state.collectionEdit = [before.observation_ref, after.observation_ref];
+      if (expected && matchesCollectionEdit(afterRows, expected)) {
+        state.collectionEdit = [before.observation_ref, after.observation_ref];
+        if (fallback && (state.programEdits?.length ?? 0) < 2) state.programEdits = [...state.programEdits ?? [],
+          { before: rows, after: afterRows, epoch: before.level_epoch, evidence: [...state.collectionEdit] }];
+      }
       const source = index === 0 ? proposal.source : explorationKey(before, rows, proposal.panel);
       state.options[source] = proposal.candidates;
       const destination = explorationKey(after, afterRows, proposal.panel), action = commandKey(command);

@@ -1,3 +1,8 @@
+import { observeRevalidatedPair, projectRevalidatedPair } from './coupled-motion.ts';
+import { checkRecalledOutlet, projectRecalledOutlet, type acquireMarkedOutlet } from './marked-compartment-flow.ts';
+import { observeRecalledInstruction, projectRecalledInstruction, type SymbolAcquisition } from './symbol-contribution.ts';
+import { observeRecalledPrefixes, projectRecalledPrefixes, type SymbolPrefixAcquisition } from './parallel-symbol-prefixes.ts';
+import { chooseObservedProgram, verifyObservedProgram, type ProgramChoice, type ProgramWitness } from './observed-program-continuation.ts';
 import { checkRecalledCatalogue, projectRecalledCatalogue, type CatalogueAcquisition } from './visible-configuration-coverage.ts';
 import { observeRecalledRelation, projectRecalledRelation, type RelationsAcquisition } from './observed-shared-relations.ts';
 import { observeRecalledNavigation, projectRecalledNavigation, type NavigationAcquisition } from './navigate-revealed-grid.ts';
@@ -9,7 +14,7 @@ import { measureTraceField, traceFieldCenter } from '../logos-engine/v6-trace-fi
 import type { NativeBox, NativeCommand, NativeExecution, NativeObservation, NativePoint, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { assessCompartmentInteraction, measureCompartments, selectCompartmentInteraction, type CompartmentAcquisition } from './compartment-growth.ts';
 import { observeRecalledCapture, projectRecalledCapture, type CaptureRecollection } from './observed-capture-transfer.ts';
-import { checkDisplayToggle, projectRecalledSwitch, type DisplayAcquisition } from './display-coupling.ts';
+import { observeRecalledSwitch, projectRecalledSwitch, type DisplayAcquisition } from './display-coupling.ts';
 import { observeMarkerStep, projectMarkerStep } from './marker-coverage.ts';
 import { chooseVisibleOccurrence, observeVisibleOccurrence, retainOccurrenceChoice, type OccurrenceTransfer } from './occurrence-recall.ts';
 import { matchesChannelOpening, nextChannelTile, planDistinctChannels, selectSeparatedLayout } from './paired-channels.ts';
@@ -37,7 +42,16 @@ type NavigationProjection = NonNullable<ReturnType<typeof projectRecalledNavigat
 type DisplayProjection = NonNullable<ReturnType<typeof projectRecalledSwitch>>;
 type CaptureProjection = NonNullable<Awaited<ReturnType<typeof projectRecalledCapture>>>;
 type CompartmentCheck = Parameters<typeof assessCompartmentInteraction>[0];
+type OutletWitness = NonNullable<Awaited<ReturnType<typeof acquireMarkedOutlet>>>;
+type OutletProjection = NonNullable<Awaited<ReturnType<typeof projectRecalledOutlet>>>;
+type InstructionProjection = NonNullable<ReturnType<typeof projectRecalledInstruction>>;
+type PairProjection = NonNullable<ReturnType<typeof projectRevalidatedPair>>;
 type Value =
+  | { kind: 'pair'; local: PairProjection['local'] }
+  | { kind: 'outlet'; attempted: string[] }
+  | { kind: 'instruction'; transaction: InstructionProjection['transaction'] }
+  | { kind: 'program' }
+  | { kind: 'symbols'; local: ReturnType<typeof observeRecalledPrefixes>['local'] }
   | { kind: 'catalogue' }
   | { kind: 'relations'; local: ReturnType<typeof observeRecalledRelation>['local'] }
   | { kind: 'relay'; local: RelayProjection['state'] }
@@ -66,6 +80,11 @@ export type FallbackLevelTransfer = { epoch: number } & (
 );
 
 type Check =
+  | { kind: 'pair'; projection: PairProjection }
+  | { kind: 'outlet'; projection: OutletProjection; attempted: string[] }
+  | { kind: 'instruction'; projection: InstructionProjection }
+  | { kind: 'program'; program: ProgramWitness; choice: ProgramChoice }
+  | { kind: 'symbols'; projection: NonNullable<ReturnType<typeof projectRecalledPrefixes>> }
   | { kind: 'catalogue'; projection: NonNullable<ReturnType<typeof projectRecalledCatalogue>> }
   | { kind: 'relations'; projection: RelationProjection }
   | { kind: 'relay'; projection: RelayProjection; witness: NonNullable<RelayAcquisition['witness']> }
@@ -95,10 +114,31 @@ const center = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2
 const rasterSize = (raster: readonly (readonly number[])[]) => ({ width: raster[0]?.length ?? 0, height: raster.length });
 const same = (a: readonly number[], b: readonly number[]) => a.length === b.length && a.every((value, i) => value === b[i]);
 
+type TransferContext = {
+  fallbackTransfer?: FallbackLevelTransfer;
+  compartmentTransfer?: CompartmentAcquisition;
+  captureTransfer?: CaptureRecollection;
+  displayTransfer?: DisplayAcquisition;
+  relayTransfer?: RelayAcquisition;
+  navigationTransfer?: NavigationAcquisition;
+  relationsTransfer?: RelationsAcquisition;
+  catalogueTransfer?: CatalogueAcquisition;
+  symbolTransfer?: SymbolPrefixAcquisition;
+  programWitness?: ProgramWitness;
+  outletWitness?: OutletWitness;
+  instructionTransfer?: SymbolAcquisition;
+  jointTransfer?: { epoch: number; measured: Parameters<typeof projectRevalidatedPair>[3] };
+};
+
 export async function chooseFallbackProjection(previous: FallbackProjectionMemory | undefined, observation: NativeObservation,
-  rows: NativeRows, inputs: readonly NativeCommand[], remaining: number, execution?: NativeExecution, transfer?: FallbackLevelTransfer, compartment?: CompartmentAcquisition, capture?: CaptureRecollection, display?: DisplayAcquisition, relay?: RelayAcquisition, navigation?: NavigationAcquisition, relations?: RelationsAcquisition, catalogue?: CatalogueAcquisition, panel = false): Promise<FallbackProjection | undefined> {
+  rows: NativeRows, inputs: readonly NativeCommand[], remaining: number, execution: NativeExecution | undefined,
+  context: TransferContext, panel = false): Promise<FallbackProjection | undefined> {
   if (previous?.retired || execution?.signal?.aborted) return;
-  if (transfer?.epoch !== observation.level_epoch - 1) transfer = undefined;
+  const { fallbackTransfer, compartmentTransfer: compartment, captureTransfer: capture, displayTransfer: display,
+    relayTransfer: relay, navigationTransfer: navigation, relationsTransfer: relations, catalogueTransfer: catalogue,
+    symbolTransfer: symbols, programWitness: program, outletWitness: outlet, instructionTransfer: instruction, jointTransfer } = context;
+  const transfer = fallbackTransfer?.epoch === observation.level_epoch - 1 ? fallbackTransfer : undefined;
+  const pair = jointTransfer?.epoch === observation.level_epoch - 1 ? jointTransfer.measured : undefined;
   const available = observation.available_action_refs, evidence = previous?.refs ?? [], prior = previous?.value;
   const pointer = available.includes('ACTION6');
   const directions = available.filter(action => /^ACTION[1-4]$/.test(action));
@@ -117,7 +157,37 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
         check: { kind: 'relay', projection, witness: relay.witness } };
     }
   }
+  if (program?.epoch === observation.level_epoch && pointer && (!prior || prior.kind === 'program')) {
+    const now = execution?.now ?? (() => performance.now());
+    const choice = chooseObservedProgram(program, rows, available, remaining, Math.min(execution?.deadlineMs ?? Infinity, now() + 120));
+    if (choice) {
+      const box = choice.region ?? choice.actor ?? choice.display.member_box;
+      const label = choice.kind === 'bind_program_bearer' ? 'Add an earlier operator to identify its current bearer'
+        : choice.kind === 'run_verified_program' ? 'Run the assembled program and compare the return'
+          : 'Add the next operator projected from the current arrangement';
+      return { command: choice.action, box, goal: choice.display.member_box, label, objective: 'compose_supported_program_for_current_layout',
+        evidence: [...new Set([...program.evidence, ...evidence])], recurring: 'Reuse the observed operator effects',
+        ...(!prior ? { novelty: 'Identify the operator bearer and the new arrangement of pieces' } : {}), check: { kind: 'program', program, choice } };
+    }
+  }
   if (panel) return;
+  if (pair && (!prior || prior.kind === 'pair')) {
+    const projection = projectRevalidatedPair(observation, rows, remaining, pair, prior?.local);
+    if (projection) return { command: { action_ref: projection.input, data: {} }, box: projection.box, goal: projection.goal,
+      label: projection.route ? 'Bring the two pieces together along the route supported by current returns'
+        : 'Recheck how both pieces respond in the new layout',
+      objective: 'bring_together_measured_coupled_pieces', evidence: projection.local.evidence,
+      recurring: 'Locate the two previously measured coupled pieces', check: { kind: 'pair', projection } };
+  }
+  if (symbols?.retained && (!prior || prior.kind === 'symbols')) {
+    const projection = projectRecalledPrefixes(symbols, observation, rows, inputs, remaining, prior?.local);
+    if (projection) return { command: projection.command, box: projection.box, goal: projection.local.panels.at(-1)!,
+      label: projection.affected.length > 1 ? 'Extend the matching prefixes with their shared symbol' : 'Extend the next matching prefix',
+      objective: 'complete_current_parallel_symbol_prefixes', evidence: projection.evidence,
+      recurring: 'Reuse the proved correspondence between a command and a symbol',
+      ...(projection.novelty ? { novelty: 'The current symbol groups now advance in parallel' } : {}),
+      check: { kind: 'symbols', projection } };
+  }
   if (navigation && !pointer && (!prior || prior.kind === 'navigation')) {
     const projected = projectRecalledNavigation(navigation, prior?.local, observation, rows);
     if (projected) return { command: projected.choice.action, box: projected.box, goal: projected.goal,
@@ -148,6 +218,25 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
     }
   }
   if (pointer && !directions.length && !available.includes('ACTION5')) {
+    if (outlet && (!prior || prior.kind === 'outlet')) {
+      const attempted = prior?.attempted ?? [], projection = await projectRecalledOutlet(outlet, observation, rows, attempted);
+      if (projection) return { command: click(projection.choice.point), box: projection.choice.box, goal: projection.outlet,
+        label: 'Use the current marked compartment to advance the materials toward the proved outlet',
+        objective: 'move_material_through_marked_compartments', evidence: [...new Set([...projection.evidence, ...evidence])],
+        recurring: 'Reuse the previously scoring outlet after matching the current chambers',
+        ...(projection.novelty ? { novelty: 'Several marked compartments are available in the new layout' } : {}),
+        check: { kind: 'outlet', projection, attempted } };
+    }
+    if (instruction?.learned && (!prior || prior.kind === 'instruction')) {
+      const projection = projectRecalledInstruction(instruction, observation, rows, prior?.transaction);
+      if (projection) return { command: click(projection.step.point), box: projection.step.target, goal: projection.step.target,
+        label: projection.step.intermediate ? 'Test the transformation that supplies a missing intermediate symbol'
+          : 'Use a measured symbol operation toward the current request',
+        objective: 'supply_current_symbol_requests', evidence: [...new Set([...projection.learned.proof, ...evidence])],
+        recurring: 'Reuse confirmed selection and operand effects',
+        ...(projection.step.intermediate ? { novelty: 'The requested result needs an intermediate operand' } : {}),
+        check: { kind: 'instruction', projection } };
+    }
     if (catalogue?.witness && (!prior || prior.kind === 'catalogue')) {
       const projection = projectRecalledCatalogue(catalogue, observation, rows, remaining);
       if (projection) return { command: click(projection.point), box: projection.box, goal: projection.choice.target.box,
@@ -324,6 +413,26 @@ export async function assessFallbackProjection(projection: FallbackProjection, f
   const { check } = projection;
   const refs = [...projection.evidence.slice(-3), after.observation_ref];
   const state = (value: Value, retired = false): FallbackProjectionMemory => ({ value, refs, ...(retired ? { retired: true } : {}) });
+  if (check.kind === 'pair') {
+    const result = observeRevalidatedPair(check.projection, first, second, after);
+    return { matched: result.matched, memory: state({ kind: 'pair', local: result.state }, result.state.stopped) };
+  }
+  if (check.kind === 'outlet') {
+    const matched = checkRecalledOutlet(check.projection, first, second);
+    return { matched, memory: state({ kind: 'outlet', attempted: [...check.attempted, check.projection.attempt] }) };
+  }
+  if (check.kind === 'instruction') {
+    const result = observeRecalledInstruction(check.projection, first, second);
+    return { matched: result.matched, memory: state({ kind: 'instruction', transaction: result.transaction }, !result.matched) };
+  }
+  if (check.kind === 'program') {
+    const matched = verifyObservedProgram(check.choice, check.program, second);
+    return { matched, memory: state({ kind: 'program' }, !matched) };
+  }
+  if (check.kind === 'symbols') {
+    const result = observeRecalledPrefixes(check.projection, second, after.observation_ref);
+    return { matched: result.matched, memory: state({ kind: 'symbols', local: result.local }, result.local.stopped) };
+  }
   if (check.kind === 'catalogue') {
     const matched = checkRecalledCatalogue(check.projection, after, second);
     return { matched, memory: state({ kind: 'catalogue' }, !matched) };
@@ -342,8 +451,8 @@ export async function assessFallbackProjection(projection: FallbackProjection, f
     return { matched: result.matched, memory: state({ kind: 'navigation', local: result.local }, result.stopped) };
   }
   if (check.kind === 'display') {
-    const matched = checkDisplayToggle(check.projection, second);
-    return { matched, memory: state({ kind: 'display', local: check.projection.local }, !matched) };
+    const result = observeRecalledSwitch(check.projection, second);
+    return { matched: result.matched, memory: state({ kind: 'display', local: result.local }) };
   }
   if (check.kind === 'compartment') {
     const matched = !!assessCompartmentInteraction(check.plan, first, second);

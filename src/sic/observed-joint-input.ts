@@ -39,12 +39,12 @@ export function observeJointInput(local: ObservedJointInput | undefined, before:
 }
 
 export function chooseJointInput(local: ObservedJointInput | undefined, rows: NativeRows, inputs: readonly NativeCommand[],
-  remaining: number): JointProposal | undefined {
+  remaining: number, revalidate = false): JointProposal | undefined {
   if (!local || !local.floors.length) return;
   const trials = inputs.flatMap(command => local.trials[command.action_ref] ? [{ command, ...local.trials[command.action_ref]! }] : []);
   const signs = [0, 1].map(axis => new Set(trials.filter(trial => trial.delta[axis]).map(trial =>
     Math.sign(trial.delta[axis]! * trial.partner[axis]!))));
-  if (signs.some(axis => axis.size !== 1) || !signs.some(axis => axis.has(-1))) return;
+  if (signs.some(axis => axis.size !== 1) || !revalidate && !signs.some(axis => axis.has(-1))) return;
   const pair = measureCoupledPairs(rows).find(candidate => candidate.value === local.ink && candidate.size === local.size);
   if (!pair || local.refuted.includes(signature(pair.boxes))) return;
   const controls = Object.fromEntries(trials.map(trial => [trial.command.action_ref, trial.delta]));

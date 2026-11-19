@@ -150,7 +150,7 @@ function calibrateSurface(model: Model, rows: NativeRows): SurfaceRoles | null {
 
 const sprite = ([x, y]: NativePoint): NativeBox => [x + 1, y + 1, x + 2, y + 2];
 
-export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFamily<Proposal> {
+export function createSicSwitchedSurface(family = switchedSurfaceId, transferObservedSurface = false): NativeFamily<Proposal> {
   const learns = family === learnSwitchedSurfaceId;
   let model: Model | null = null;
   let ascertained: { epoch: number; roles: SurfaceRoles; ref: string } | null = null;
@@ -310,7 +310,7 @@ export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFami
       const scene = index > 0 ? sceneFor(first, model ?? proposal.scene.model, before.level_epoch) ?? proposal.scene : proposal.scene;
       const sameLevel = before.level_epoch === after.level_epoch && before.state === after.state;
       const next = sameLevel ? sceneFor(second, scene.model, before.level_epoch) : null;
-      if (!learns) {
+      if (!learns || transferObservedSurface) {
         const prior = ascertained?.epoch === before.level_epoch ? ascertained : null;
         if (after.levels_completed > before.levels_completed && prior && scene.peer && equal(step.at, scene.peer.point)) {
           witness = { epoch: after.level_epoch, score: after.levels_completed, roles: prior.roles,

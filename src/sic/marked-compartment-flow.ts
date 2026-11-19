@@ -91,6 +91,43 @@ function changed(first: NativeRows, second: NativeRows, [left, top, right, botto
   return false;
 }
 
+export async function acquireMarkedOutlet(witness: Witness | null, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows): Promise<Witness | null> {
+  if (after.levels_completed <= before.levels_completed || command.action_ref !== 'ACTION6' || !acceptsPoint(before)) return witness;
+  const { x, y } = command.data;
+  if (typeof x !== 'number' || typeof y !== 'number') return witness;
+  const prior = witness?.epoch === before.level_epoch ? witness : null;
+  const measured = await measureContextualCompartments(first) as Scene | null;
+  const transferred = !measured && prior ? await measureContextualCompartments(first, prior.mark) as Scene | null : null;
+  const scene = measured ?? (transferred && prior && continuationOf(transferred, prior) ? transferred : null);
+  if (!scene) return witness;
+  const candidates = scene.marked.filter(chamber => chamber.filled && contains(chamber.box, [x, y]));
+  if (candidates.length !== 1) return witness;
+  const outlet = candidates[0]!;
+  const repeated = witness?.epoch === before.level_epoch && continuationOf(scene, witness) && sameChamberSite(witness.outlet, outlet.box);
+  return { epoch: after.level_epoch, mark: scene.mark, normal: scene.normal, background: scene.background,
+    chambers: scene.frames.map(chamber => chamber.box), outlet: outlet.box, wins: repeated ? (witness?.wins ?? 1) + 1 : 1,
+    refs: [before.observation_ref, after.observation_ref], ...(scene.marked.length > 1 ? { concurrentDelivery: true } : {}) };
+}
+
+export async function projectRecalledOutlet(witness: Witness, observation: NativeObservation, rows: NativeRows, attempted: readonly string[]) {
+  if (witness.epoch !== observation.level_epoch || !acceptsPoint(observation)) return null;
+  const scene = await measureContextualCompartments(rows, witness.mark) as Scene | null;
+  if (!scene || !continuationOf(scene, witness)) return null;
+  const order = orderTowardOutlet(witness)?.rank;
+  const attemptFor = (chamber: Chamber) => scene.key + ':' + boxKey(chamber.box);
+  const rank = (chamber: Chamber) => Number(chamber.filled > 0)
+    + 4 * Number(chamber.filled > 0 && sameChamberSite(chamber.box, witness.outlet));
+  const choice = scene.marked.filter(chamber => !attempted.includes(attemptFor(chamber)))
+    .sort((a, b) => rank(b) - rank(a) || (order ? order(b) - order(a) : 0) || a.box[0] - b.box[0] || a.box[1] - b.box[1])[0];
+  return choice ? { choice, outlet: witness.outlet, evidence: witness.refs, region: localRegion(choice.box, rows),
+    attempt: attemptFor(choice), novelty: !attempted.length && scene.marked.length > 1 } : null;
+}
+
+export function checkRecalledOutlet({ region }: NonNullable<Awaited<ReturnType<typeof projectRecalledOutlet>>>, first: NativeRows, second: NativeRows) {
+  return changed(first, second, region);
+}
+
 export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
   let witness: Witness | null = null;
   let attempted: string[] = [];
@@ -98,21 +135,9 @@ export function createSicMarkedCompartmentFlow(): NativeFamily<Proposal> {
   return {
     id: markedCompartmentFlowId,
     async observePublicOutcome(before, after, command, first) {
-      if (after.levels_completed <= before.levels_completed || command.action_ref !== 'ACTION6' || !acceptsPoint(before)) return;
-      const { x, y } = command.data;
-      if (typeof x !== 'number' || typeof y !== 'number') return;
-      const prior = witness?.epoch === before.level_epoch ? witness : null;
-      const measured = await measureContextualCompartments(first) as Scene | null;
-      const transferred = !measured && prior ? await measureContextualCompartments(first, prior.mark) as Scene | null : null;
-      const scene = measured ?? (transferred && prior && continuationOf(transferred, prior) ? transferred : null);
-      if (!scene) return;
-      const candidates = scene.marked.filter(chamber => chamber.filled && contains(chamber.box, [x, y]));
-      if (candidates.length !== 1) return;
-      const outlet = candidates[0]!;
-      const repeated = witness?.epoch === before.level_epoch && continuationOf(scene, witness) && sameChamberSite(witness.outlet, outlet.box);
-      witness = { epoch: after.level_epoch, mark: scene.mark, normal: scene.normal, background: scene.background,
-        chambers: scene.frames.map(chamber => chamber.box), outlet: outlet.box, wins: repeated ? (witness?.wins ?? 1) + 1 : 1,
-        refs: [before.observation_ref, after.observation_ref], ...(scene.marked.length > 1 ? { concurrentDelivery: true } : {}) };
+      const observed = await acquireMarkedOutlet(witness, before, after, command, first);
+      if (observed === witness) return;
+      witness = observed;
       attempted = [];
       flow = null;
     },

@@ -77,7 +77,7 @@ function matchesCompound(projection: FacetProjection, first: NativeRows, second:
     && compound.expected_colored_pixels.every(([x, y, value]) => second[y]?.[x] === value);
 }
 
-export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Proposal> {
+export function createSicFacetGrowth(family = facetGrowthId, transferObservedFacet = false): NativeFamily<Proposal> {
   const learns = family === learnFacetGrowthId;
   let state: State | null = null;
   let portable: FacetPortableMethod | null = null;
@@ -86,14 +86,15 @@ export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Propo
     id: family,
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      if (learns && !state && !execution?.readWorkspaceClick) return null;
       const reusable = portable && portable.source_epoch !== observation.level_epoch ? portable : null;
+      const transferred = transferObservedFacet && !!reusable?.boundary_ref && !!reusable.up_shift;
+      if (learns && !state && !transferred && !execution?.readWorkspaceClick) return null;
       const projection = facetCompoundPlan(observation, rows, reusable, cache, compoundSearch, true, layeredSearch) ?? facetProject(observation, rows);
       if (!projection) return null;
       const prior = state?.scope === projection.scope_ref ? state : null;
       const click = learns && !prior && projection.offer.kind === 'probe_visible_cap'
         ? execution?.readWorkspaceClick?.(projection.world) : null;
-      if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch
+      if (learns && !prior && !transferred && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch
         || !facetInside([...click.point, ...click.point], projection.offer.support.bbox))) return null;
       const local = prior ?? { scope: projection.scope_ref, count: 0, stopped: false, rise: null,
         evidence: projection.compound && reusable?.boundary_ref ? [...reusable.evidence, reusable.boundary_ref]

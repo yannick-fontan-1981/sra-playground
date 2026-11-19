@@ -78,7 +78,9 @@ export function createSicAnimationContact(family = animationContactId, transferO
     id: family,
     observePublicOutcome(before, after, command, first, second, frames = []) {
       if (!learns || !transferObservedContact) return;
-      curve ??= learnCurveWitness(before, after, command, first, second, frames);
+      if (!curve || curve.epoch === before.level_epoch && !curve.boundary) {
+        curve = learnCurveWitness(before, after, command, first, second, frames, curve) ?? curve;
+      }
       if (curve && after.levels_completed > before.levels_completed) {
         curve = { ...curve, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
       }
@@ -159,7 +161,9 @@ export function createSicAnimationContact(family = animationContactId, transferO
         curve = retainRegulatedReturn(curve, proposal.regulated, before, after, first, second, frames);
         return { events: [] };
       }
-      if ((!learns || transferObservedContact) && !curve) curve = learnCurveWitness(before, after, command, first, second, frames);
+      if (!curve || transferObservedContact && !curve.boundary && curve.epoch === before.level_epoch) {
+        if (!learns || transferObservedContact) curve = learnCurveWitness(before, after, command, first, second, frames, curve) ?? curve;
+      }
       if (curve && after.levels_completed > before.levels_completed) {
         curve = { ...curve, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
       }

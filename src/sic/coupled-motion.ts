@@ -95,6 +95,38 @@ function transferredControls(state: State) {
     && new Set(controls.map(control => control.second.join(','))).size === keys.length ? controls : null;
 }
 
+export function projectRevalidatedPair(observation: NativeObservation, rows: NativeRows, remaining: number,
+  learned: { ink: number; size: number; floors: number[]; trials: Record<string, { ref: string }> }, prior?: State) {
+  if (prior?.stopped || (prior?.count ?? 0) >= 60) return null;
+  const available = keys.filter(input => observation.available_action_refs.includes(input));
+  if (available.length < 3) return null;
+  const pair = prior?.pair ?? measureCoupledPairs(rows).find(item => item.value === learned.ink && item.size === learned.size);
+  if (!pair || !pairVisible(rows, pair.value, pair.boxes)) return null;
+  const local: State = prior ?? { epoch: observation.level_epoch, pair, samples: [], floors: [], count: 0, stopped: false,
+    remainingRoute: null, evidence: Object.values(learned.trials).map(trial => trial.ref) };
+  const probe = available.find(input => !local.samples.some(sample => sample.input === input));
+  const route = local.remainingRoute?.actions.every(input => available.includes(input)) ? local.remainingRoute
+    : !probe ? routeFromSamples(local, rows, available, remaining) : null;
+  const input = route?.actions[0] ?? probe;
+  if (!input) return null;
+  return { local, input, route, box: displayBox(pair.boxes[0]!), goal: displayBox(pair.boxes[1]!) };
+}
+
+export function observeRevalidatedPair({ local, route, input }: NonNullable<ReturnType<typeof projectRevalidatedPair>>,
+  first: NativeRows, second: NativeRows, after: NativeObservation) {
+  const pair = local.pair, next = measureCoupledPairs(second).filter(item => item.value === pair.value && item.size === pair.size);
+  const match = next.length === 1 ? matchCoupledPair(pair, next[0]!) : null;
+  const expected = route?.expected[0], projected = expected && matchProjection(first, second, pair, expected) ? expected : null;
+  const boxes = projected ?? match?.boxes ?? pair.boxes;
+  const samples = route ? local.samples : [...local.samples,
+    { input, first: match?.deltas[0] ?? [0, 0] as CoupledPairDelta, second: match?.deltas[1] ?? [0, 0] as CoupledPairDelta }];
+  const state: State = { ...local, pair: { ...pair, boxes }, count: local.count + 1, frame: after.frame_hash, samples,
+    floors: [...new Set([...local.floors, ...revealedFloor(pair, boxes, second)])],
+    evidence: [...local.evidence.slice(-6), after.observation_ref], stopped: route ? !projected : !match,
+    remainingRoute: projected && route && route.actions.length > 1 ? { actions: route.actions.slice(1), expected: route.expected.slice(1) } : null };
+  return { matched: route ? !!projected : match ? null : false, state };
+}
+
 export function createSicVerifyCoupledRoute(): NativeFamily<Proposal> {
   let state: State | null = null;
   let auxiliary: AuxiliaryRoute | null = null;

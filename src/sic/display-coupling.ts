@@ -127,6 +127,12 @@ export function checkDisplayToggle({ local, index, controls, receivers }: Displa
     && outputs.some((ink, i) => ink !== receivers[i]);
 }
 
+export function observeRecalledSwitch(projection: NonNullable<ReturnType<typeof projectRecalledSwitch>>, rows: NativeRows) {
+  const { local, index, controls, attempt } = projection, current = values(rows, local.controls);
+  const changedAsSelected = !!current && current.every((ink, i) => i === index ? ink !== controls[i] : ink === controls[i]);
+  return { matched: changedAsSelected, local: { ...local, attempts: [...local.attempts, attempt] } };
+}
+
 export function projectRecalledSwitch(previous: State | undefined, observation: NativeObservation, rows: NativeRows, transfer: DisplayAcquisition) {
   const { scored } = transfer;
   if (!scored || scored.score !== observation.levels_completed || scored.epoch !== observation.level_epoch) return null;
@@ -134,10 +140,18 @@ export function projectRecalledSwitch(previous: State | undefined, observation: 
   if (!local?.spacing) return null;
   const controls = values(rows, local.controls), receivers = values(rows, local.receivers);
   if (!controls || !receivers || new Set(controls).size > 2) return null;
-  const index = controls.map((_, i) => i).sort((a, b) => fromEdge(a, controls.length, scored) - fromEdge(b, controls.length, scored))
-    .find(i => expectedSwitch(i, controls.length, scored) !== (controls[i] !== local.initial));
-  if (index === undefined) return null;
-  return { local, index, controls, receivers, evidence: scored.evidence,
+  const frequency = receivers.map(color => receivers.filter(ink => ink === color).length);
+  const distinct = local.receivers.filter((_, i) => frequency[i] === Math.min(...frequency));
+  const distance = ([l, , r]: NativeBox) => Math.min(...distinct.map(([left, , right]) => Math.abs(l + r - left - right)));
+  const option = controls.map((_, index) => {
+    const attempt = JSON.stringify([index, controls, receivers]);
+    const preferred = expectedSwitch(index, controls.length, scored) !== (controls[index] !== local.initial);
+    return { index, attempt, preferred };
+  }).filter(candidate => !local.attempts.includes(candidate.attempt))
+    .sort((a, b) => Number(b.preferred) - Number(a.preferred)
+      || distance(local.controls[a.index]!) - distance(local.controls[b.index]!) || b.index - a.index)[0];
+  if (!option || local.attempts.length >= 12) return null;
+  return { local, ...option, controls, receivers, evidence: scored.evidence,
     novelty: !previous && local.controls.length !== transfer.local?.controls.length };
 }
 

@@ -102,7 +102,7 @@ function routeState(proposal: Proposal, index: number): State {
   return index === 0 ? proposal.local : { ...proposal.local, at: proposal.path[index - 1]!.at };
 }
 
-export function createSicVerifyFrameContact(family = verifyFrameContactId): NativeFamily<Proposal> {
+export function createSicVerifyFrameContact(family = verifyFrameContactId, transferObservedContact = false): NativeFamily<Proposal> {
   const learns = family === learnFrameAccessId;
   let state: State | null = null;
   let previousWin: { completed: number; side: number; ref: string; usedRoomMap?: boolean } | null = null;
@@ -122,8 +122,9 @@ export function createSicVerifyFrameContact(family = verifyFrameContactId): Nati
       if (remaining < 1 || !directions.every(([ref]) => observation.available_action_refs.includes(ref))
         || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const motion = learns && !prior ? execution?.readPriorDirectionalScene?.(measure) : null;
-      if (learns && !prior && (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch)) return null;
+      const recall = transferObservedContact && previousWin?.completed === observation.levels_completed;
+      const motion = learns && !prior && !recall ? execution?.readPriorDirectionalScene?.(measure) : null;
+      if (learns && !prior && !recall && (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch)) return null;
       const scene = prior?.scene ?? motion?.scene ?? measure(rows);
       if (!scene || (prior?.count ?? 0) >= 36 && !prior?.roomRoute?.resources) return null;
       const start = origin(scene.piece.bbox), goal = origin(scene.frame.bbox);

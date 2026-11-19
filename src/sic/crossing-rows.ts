@@ -95,7 +95,7 @@ function returnAssessment(local: State, choice: Choice, first: NativeRows, secon
   return painted(second, layout, choice.cell) === expected ? 'advanced' : 'refuted';
 }
 
-export function createSicVerifyCrossingRows(family = verifyCrossingRowsId): NativeFamily<Proposal> {
+export function createSicVerifyCrossingRows(family = verifyCrossingRowsId, transferObservedCrossing = false): NativeFamily<Proposal> {
   let state: State | null = null;
   let acquired: Acquired | null = null;
   let decide: NativeProgramHandle | undefined;
@@ -118,7 +118,7 @@ export function createSicVerifyCrossingRows(family = verifyCrossingRowsId): Nati
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       let local = state?.epoch === observation.level_epoch ? state : null;
-      if (!local && family === learnCrossingRowsId) {
+      if (!local && family === learnCrossingRowsId && !(transferObservedCrossing && acquired)) {
         const receipt = execution?.readPriorDirectionalScene?.((earlier, previous) => initial(previous.level_epoch, earlier, null));
         if (!receipt || receipt.afterRef !== observation.observation_ref) return null;
         const { layout } = receipt.scene;
