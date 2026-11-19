@@ -37,7 +37,7 @@ function outline(part: Part) {
     && part.mask.every(([x, y]) => x === 0 || y === 0 || x === w - 1 || y === h - 1);
 }
 
-function measure(parts: Part[], rows: NativeRows): Model | null {
+export function measureStagedMarks(parts: Part[], rows: NativeRows): Model | null {
   const previews = parts.filter(outline);
   if (previews.length !== 1) return null;
   const [preview] = previews, h = height(preview!.bbox);
@@ -56,7 +56,7 @@ function measure(parts: Part[], rows: NativeRows): Model | null {
   return refs.length === 1 ? { reference: refs[0]!, donors: edge, outlineHeight: h } : null;
 }
 
-function read(parts: Part[], model: Model): Scene | null {
+export function readStagedMarks(parts: Part[], model: Model): Scene | null {
   const previews = parts.filter(p => height(p.bbox) === model.outlineHeight && outline(p));
   if (previews.length !== 1) return null;
   const marks = parts.filter(p => p.rectangular && height(p.bbox) === height(model.donors[0]!.mark)
@@ -71,7 +71,7 @@ function read(parts: Part[], model: Model): Scene | null {
   return { preview: previews[0]!.bbox, layers };
 }
 
-function choose({ preview, layers }: Scene, local: State): Choice | null {
+export function chooseStagedMarkStep({ preview, layers }: Scene, local: Pick<State, 'model' | 'resizeRef' | 'rejected'>): Choice | null {
   const { model: { reference, donors }, resizeRef, rejected } = local;
   const contributors = donors.map(d => layers.find(layer => coversX(layer.box, d.mark) && layer.box[1] > d.box[3] && layer.marks.length === 1));
   const missing = donors.filter((_d, i) => !contributors[i]);
@@ -176,12 +176,12 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
         }
       }
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const model = prior?.model ?? measure(parts, rows);
+      const model = prior?.model ?? measureStagedMarks(parts, rows);
       if (!model) return null;
       const local = prior ?? { epoch: observation.level_epoch, model, refs: [], resizeRef: null, rejected: [] };
-      const scene = read(parts, model);
+      const scene = readStagedMarks(parts, model);
       if (!scene) return null;
-      const choice = choose(scene, local);
+      const choice = chooseStagedMarkStep(scene, local);
       if (!choice) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(local.depositRef ? [local.depositRef] : [])].filter(v => v !== ref))];
@@ -224,7 +224,7 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const reason = isSpan(proposal) ? assessSpanStep(proposal.span.layout, proposal.step, proposal.pose, first, second) : check(proposal, second);
+      const reason = isSpan(proposal) ? assessSpanStep(proposal.span.layout, proposal.step, proposal.pose, first, second) : checkStagedMarkStep(proposal, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'stage_effect_not_confirmed' };
     },
     record(before, after, _action, first, second, proposal) {
@@ -249,8 +249,8 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
           completed: after.levels_completed, refs: [local.depositRef, local.alignRef, before.observation_ref, after.observation_ref] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const confirmed = check(proposal, second);
-      const resized = choice.input === 'ACTION2' && confirmed ? read(geometricComponents(second), local.model) : null;
+      const confirmed = checkStagedMarkStep(proposal, second);
+      const resized = choice.input === 'ACTION2' && confirmed ? readStagedMarks(geometricComponents(second), local.model) : null;
       state = { ...local,
         refs: confirmed ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         ...(confirmed === 'new_marked_layer_observed'
@@ -270,8 +270,8 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
   };
 }
 
-function check({ local, scene: before, choice }: MarksProposal, rows: NativeRows): string | null {
-  const after = read(geometricComponents(rows), local.model);
+export function checkStagedMarkStep({ local, scene: before, choice }: { scene: Scene; choice: Choice; local: Pick<State, 'model'> }, rows: NativeRows): string | null {
+  const after = readStagedMarks(geometricComponents(rows), local.model);
   if (!after) return null;
   if (choice.click) return !same(before.preview, after.preview) && coversX(after.preview, choice.target) ? 'preview_alignment_observed' : null;
   if (choice.input === 'ACTION2') {

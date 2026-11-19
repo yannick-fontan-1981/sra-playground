@@ -1,7 +1,7 @@
 import { measureOccurrenceScene } from '../logos-engine/v6-occurrence-scene.ts';
 import { normalizeCodeMask } from '../logos-engine/v6-code-program.ts';
 import { ObservedInputDomain, rotateMask } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseFromFeedback, feedbackChoiceFacts, feedbackChoiceModule } from './feedback-choice-card.ts';
 import { sicNeedId } from './need-identity.ts';
 
@@ -99,6 +99,62 @@ function progress(before: Scene, after: Scene | null) {
   return changed === 1;
 }
 
+function occurrenceEvidence(local: State) {
+  const established = (key: string, minimum: number) => !local.rules[key]?.contradicted
+    && (local.rules[key]?.supports.length ?? 0) >= minimum;
+  const acceptsScale = (key: string) => !local.rules[key]?.contradicted && !!local.rules[key]?.changedScale;
+  return { established, acceptsScale };
+}
+
+function supportedOccurrenceChoices(local: State, predictions: Prediction[]) {
+  const { established, acceptsScale } = occurrenceEvidence(local);
+  const supported = predictions.filter(({ key, minimum, candidates, orientedKey, scaledFrom }) => candidates.length === 1
+    && (scaledFrom ? acceptsScale(key)
+      && (established(key, minimum) || established(scaledFrom, minimum))
+      : !acceptsScale(key + ':scale') && established(key, minimum) && (!orientedKey || local.rules[key]?.changedOrientation)));
+  return supported;
+}
+
+function learnOccurrenceChoice(local: State, scene: Scene, chosen: Occurrence, predictions: Prediction[], after: NativeObservation): State {
+  const rules = { ...local.rules };
+  for (const { key, candidates, turned, resized } of predictions) {
+    const previous = rules[key] ?? { supports: [], contradicted: false };
+    const included = candidates.includes(chosen.id);
+    const unique = included && candidates.length === 1;
+    const changedOrientation = unique && turned?.includes(chosen.id) ? after.observation_ref : previous.changedOrientation;
+    const changedScale = unique && resized?.includes(chosen.id) ? after.observation_ref : previous.changedScale;
+    const confirmedWithScale = predictions.some(candidate => candidate.scaledFrom === key && candidate.resized?.includes(chosen.id));
+    rules[key] = { supports: unique ? [...previous.supports.slice(-2), after.observation_ref] : previous.supports,
+      ...(changedOrientation ? { changedOrientation } : {}),
+      ...(changedScale ? { changedScale } : {}), contradicted: previous.contradicted || (!included && !confirmedWithScale) };
+  }
+  const seen = new Map([...local.seen, ...scene.occurrences].map(({ shape, color, rotationClass, scale, scaledShape, scaledRotationClass }) =>
+    [`${shape}:${color}`, { shape, color, ...(rotationClass ? { rotationClass } : {}),
+      ...(scale && scaledShape && scaledRotationClass ? { scale, scaledShape, scaledRotationClass } : {}) }]));
+  const singletonStart = local.singletonStart ?? (!local.context && scene.occurrences.length === 1 ? after.observation_ref : undefined);
+  return { ...local, rules, context: { chosen, peers: scene.occurrences }, seen: [...seen.values()],
+    calibration: scene.calibration, visited: [...local.visited, scene.key], ...(singletonStart ? { singletonStart } : {}) };
+}
+
+export function chooseVisibleOccurrence(previous: State | undefined, observation: NativeObservation, rows: NativeRows) {
+  const local = previous ?? empty(observation.level_epoch);
+  const measured = measureOccurrenceScene(rows, observation, local.calibration, occurrenceMeasurement) as Scene | null;
+  if (!measured || !hasMeter(measured) || measured.occurrences.length > 16 || local.visited.includes(measured.key)
+    || local.visited.length >= 48) return null;
+  const scene = identifyShapes(measured), predictions = predict(scene, local);
+  const marked = scene.occurrences.filter(part => part.marked);
+  const supported = marked.length === 0 ? supportedOccurrenceChoices(local, predictions) : [];
+  const chosen = marked.length === 1 ? marked[0] : singleChoice(scene, supported);
+  return chosen ? { local, scene, chosen, predictions, inferred: supported.length > 0 } : null;
+}
+
+export function observeVisibleOccurrence({ local, scene, chosen, predictions }: NonNullable<ReturnType<typeof chooseVisibleOccurrence>>,
+  after: NativeObservation, rows: NativeRows) {
+  const next = measureOccurrenceScene(rows, after, scene.calibration, occurrenceMeasurement) as Scene | null;
+  return next && progress(scene, next) && !local.visited.includes(next.key)
+    ? learnOccurrenceChoice(local, scene, chosen, predictions, after) : null;
+}
+
 export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
   let state = empty();
   let transfer: Transfer | null = null;
@@ -124,13 +180,8 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
       const scene = identifyShapes(measured);
       const marked = scene.occurrences.filter(part => part.marked);
       const predictions = predict(scene, local);
-      const established = (key: string, minimum: number) => !local.rules[key]?.contradicted
-        && (local.rules[key]?.supports.length ?? 0) >= minimum;
-      const acceptsScale = (key: string) => !local.rules[key]?.contradicted && !!local.rules[key]?.changedScale;
-      const supported = predictions.filter(({ key, minimum, candidates, orientedKey, scaledFrom }) => candidates.length === 1
-        && (scaledFrom ? acceptsScale(key)
-          && (established(key, minimum) || established(scaledFrom, minimum))
-          : !acceptsScale(key + ':scale') && established(key, minimum) && (!orientedKey || local.rules[key]?.changedOrientation)));
+      const { established } = occurrenceEvidence(local);
+      const supported = supportedOccurrenceChoices(local, predictions);
       const inferred = !marked.length ? singleChoice(scene, supported) : null;
       const turns = !marked.length && !supported.length ? predictions.filter(({ orientedKey, candidates, turned, minimum, key }) =>
         orientedKey && candidates.length === 1 && turned?.length === 1 && !local.rules[key]?.contradicted
@@ -214,24 +265,7 @@ export function createSicVerifyOccurrenceChoice(): NativeFamily<Proposal> {
         state = { ...local, stopped: true };
         return { events: [] };
       }
-      const rules = { ...local.rules };
-      for (const { key, candidates, turned, resized } of predictions) {
-        const previous = rules[key] ?? { supports: [], contradicted: false };
-        const included = candidates.includes(chosen.id);
-        const unique = included && candidates.length === 1;
-        const changedOrientation = unique && turned?.includes(chosen.id) ? after.observation_ref : previous.changedOrientation;
-        const changedScale = unique && resized?.includes(chosen.id) ? after.observation_ref : previous.changedScale;
-        const confirmedWithScale = predictions.some(candidate => candidate.scaledFrom === key && candidate.resized?.includes(chosen.id));
-        rules[key] = { supports: unique ? [...previous.supports.slice(-2), after.observation_ref] : previous.supports,
-          ...(changedOrientation ? { changedOrientation } : {}),
-          ...(changedScale ? { changedScale } : {}), contradicted: previous.contradicted || (!included && !confirmedWithScale) };
-      }
-      const seen = new Map([...local.seen, ...scene.occurrences].map(({ shape, color, rotationClass, scale, scaledShape, scaledRotationClass }) =>
-        [`${shape}:${color}`, { shape, color, ...(rotationClass ? { rotationClass } : {}),
-          ...(scale && scaledShape && scaledRotationClass ? { scale, scaledShape, scaledRotationClass } : {}) }]));
-      const singletonStart = local.singletonStart ?? (!local.context && scene.occurrences.length === 1 ? after.observation_ref : undefined);
-      state = { ...local, rules, context: { chosen, peers: scene.occurrences }, seen: [...seen.values()],
-        calibration: scene.calibration, visited: [...local.visited, scene.key], ...(singletonStart ? { singletonStart } : {}) };
+      state = learnOccurrenceChoice(local, scene, chosen, predictions, after);
       return { events: [], ...(proposal.scaleTest ? { reviewEvidence: 'The visible sequence advanced after selecting an occurrence at a different size' }
         : proposal.rotationTest ? { reviewEvidence: 'The visible sequence advanced after selecting the rotated occurrence' } : {}) };
     },

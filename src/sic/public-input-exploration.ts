@@ -1,6 +1,7 @@
+import { assessFallbackProjection, chooseFallbackProjection, type FallbackProjection, type FallbackProjectionMemory } from './fallback-projections.ts';
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -41,6 +42,7 @@ import { comparePanelSupportAccess } from './panel-access-comparison.ts';
 import { planPanelBridge, type PanelBridgeTarget } from './panel-bridge-planning.ts';
 
 export const publicInputExplorationId = 'sic_public_input_exploration';
+export const projectedPublicEffectsGroup = 'test_projected_public_effect';
 export const observedPressureRecoveryGroup = 'continue_observed_pressure_recovery';
 export const publicInputStrategies = {
   P05: 'Test a direction on the visibly changed piece',
@@ -128,6 +130,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   coverage?: CoverageLearning;
   exchange?: ObservedExchange;
   pressureReserve?: PressureReserve;
+  fallbackProjection?: FallbackProjectionMemory;
   clickFocus?: { accent: number; ref: string };
   jointInput?: ObservedJointInput;
   referenceView?: ReferenceView;
@@ -143,6 +146,7 @@ type Proposal = NativeProposal & { source: string; candidates: string[]; expecte
   pressurePlan?: PressurePlan;
   clickFocus?: ObservedClickFocus;
   jointPlan?: JointProposal;
+  fallbackProjection?: FallbackProjection;
   entryPlan?: EntryProposal;
   slotPlan?: { layout: VisibleSlotLayout; move: NonNullable<ReturnType<typeof chooseVisibleSlotMove>> };
   clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string;
@@ -491,18 +495,23 @@ function panelTestKey(command: string, rows: NativeRows, box: NativeBox | null |
 export function createSicPublicInputExploration(fallback = false): NativeFamily<Proposal> {
   let state = initial();
   let decide: NativeProgramHandle | undefined;
-  return {
+  const projectionReturns = new WeakMap<FallbackProjection, ReturnType<typeof assessFallbackProjection>>();
+  const family = {
     id: publicInputExplorationId,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
-    async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
-      if (group !== observedPressureRecoveryGroup) return this.propose(observation, rows, inputs, remaining, execution);
+    async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
+      if (group === projectedPublicEffectsGroup) {
+        const proposal = await family.propose(observation, rows, inputs, remaining, execution, true);
+        return proposal?.fallbackProjection ? proposal : null;
+      }
+      if (group !== observedPressureRecoveryGroup) return family.propose(observation, rows, inputs, remaining, execution);
       if (state.epoch !== observation.level_epoch || !state.pressureReserve?.gate || !state.pressureReserve.bridge) return null;
-      const proposed = await this.propose(observation, rows, inputs, remaining, execution);
+      const proposed = await family.propose(observation, rows, inputs, remaining, execution);
       return proposed?.pressurePlan ? proposed : null;
     },
-    async propose(observation, rows, inputs, remaining, execution) {
+    async propose(observation, rows, inputs, remaining, execution?: NativeExecution, projectionOnly = false): Promise<Proposal | null> {
       const local = state.epoch === observation.level_epoch ? state : initial(observation.level_epoch);
       if (remaining < 1) return null;
       const ref = observation.observation_ref;
@@ -520,7 +529,10 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const markKey = markTrial?.command.action_ref;
       const travel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
-      const budget = panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
+      const fallbackProjection = fallback && !panel && !pressure
+        ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution) : undefined;
+      if (projectionOnly && !fallbackProjection) return null;
+      const budget = fallbackProjection || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
       const panelBounds = panel ? { area: panel.area, panel: panel.panel } : undefined;
       const source = explorationKey(observation, rows, panelBounds);
@@ -546,7 +558,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const slotMove = slotLayout && chooseVisibleSlotMove(rows, slotLayout, nonPoint[0]!);
       const slot = slotMove ? { command: slotMove.command, label: slotTransferStrategies[slotMove.stage],
         box: slotMove.source ?? slotMove.destination ?? slotLayout!.slots[0]!, evidence: local.slotTransfer ? [local.slotTransfer.ref] : [] } : undefined;
-      const projectedTarget = linkedTarget ?? referenceSearch ?? panelPreparation ?? entry ?? slot;
+      const projectedTarget = fallbackProjection ?? linkedTarget ?? referenceSearch ?? panelPreparation ?? entry ?? slot;
       const projectionKey = projectedTarget && commandKey(projectedTarget.command);
       if (projectedTarget && projectionKey && !attempted.has(projectionKey)) {
         candidates.set(projectionKey, { command: projectedTarget.command, box: projectedTarget.box, marker: false, repeated: false });
@@ -692,9 +704,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         : walk ? commandKey(walk.route[0]!.command) : mechanism ? commandKey(mechanism.motion.footing.command)
           : programming ? commandKey(programming.program.selector.command)
           : terrainStep ? commandKey(terrainStep.command) : unmeasured ?? (terrain ? commandKey(terrain.command) : null);
-      const frontier = contextualCommand ? { action: contextualCommand, probe: contextualCommand, depth: walk?.route.length ?? 0, first: null }
+      const frontier = projectionOnly ? projected : contextualCommand ? { action: contextualCommand, probe: contextualCommand, depth: walk?.route.length ?? 0, first: null }
         : probe ? { action: probe, probe, depth: 0, first: null }
-        : measuredControls ?? preferred ?? projected ?? emphasis ?? workspaceProbe ?? (pressureKey ? { action: pressureKey, probe: pressureKey, depth: 0, first: null } : null)
+        : (fallbackProjection ? projected : null) ?? measuredControls ?? preferred ?? projected ?? emphasis ?? workspaceProbe ?? (pressureKey ? { action: pressureKey, probe: pressureKey, depth: 0, first: null } : null)
           ?? (jointKey ? { action: jointKey, probe: jointKey, depth: 0, first: null } : null)
           ?? (exchangeKey ? { action: exchangeKey, probe: exchangeKey, depth: 0, first: null } : null)
           ?? (coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null)
@@ -711,6 +723,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const verifiedContextChange = !contextualCommand && recheck && !probe && !collectionTrial && !workspaceTrial && named.includes(frontier.action)
         ? recheck.evidence : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
+      const selectedFallback = frontier === projected ? fallbackProjection : undefined;
       const selectedFocus = frontier === emphasis ? clickFocus : undefined;
       const selectedProjection = frontier === projected ? projectedTarget : undefined;
       const selectedJoint = frontier.action === jointKey ? joint : undefined;
@@ -774,14 +787,15 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         compare_public_input: () => offer, revisit_input_frontier: () => offer } });
       if (!selected) return null;
       const { command, box } = selected.plan;
-      const mode = selectedExchange?.goal === 'test_transport' || selectedPressure?.goal === 'verify_gate_release' ? 'exploration'
+      const mode = selectedFallback?.evidence.length ? execution?.reasoningMode ?? 'solving'
+        : selectedExchange?.goal === 'test_transport' || selectedPressure?.goal === 'verify_gate_release' ? 'exploration'
         : selectedPressure || selectedJoint || selectedExchange || selectedCoverage?.pullRoute ? 'solving'
         : verifiedContextChange ? execution?.reasoningMode ?? 'exploration' : 'exploration';
-      const routeSupported = !!frontier.first || !!walk || !!transport?.first;
+      const routeSupported = !!selectedFallback?.evidence.length || !!frontier.first || !!walk || !!transport?.first;
       const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
-      const decision = verifiedContextChange || contextualCommand
+      const decision = selectedFallback || verifiedContextChange || contextualCommand
         ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : undefined;
-      if ((verifiedContextChange || contextualCommand) && decision?.result !== (routeSupported ? 'P07' : 'P05')) return null;
+      if ((selectedFallback || verifiedContextChange || contextualCommand) && decision?.result !== (routeSupported ? 'P07' : 'P05')) return null;
       const strategy = decision ? (routeSupported ? 'P07' : 'P05') : selected.id;
       const exchangeLabel = selectedExchange && {
         test_transport: 'Place a piece on the barrier and test what the control does to it',
@@ -831,15 +845,15 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ? (routeSupported ? publicInputStrategies.P07 : 'Recheck an available control after the visible interface changes')
         : panelTest && command.action_ref === 'ACTION6' ? 'Test a distinct control on the visible panel'
           : panelTest ? 'Compare a non-point command with the tested panel controls' : publicInputStrategies[selected.id]);
-      const goal = { kind: selectedPressure ? selectedPressure.goal : selectedExchange ? selectedExchange.goal
+      const goal = { kind: selectedFallback ? selectedFallback.objective : selectedPressure ? selectedPressure.goal : selectedExchange ? selectedExchange.goal
         : selectedMark ? 'test_marked_contact' : selectedCoverage ? selectedCoverage.covered ? 'reach_observed_exit' : 'cover_repeated_marks'
         : opening ? 'reach_projected_region' : 'learn_public_command_effect', scope: ref.split(':revision:', 1)[0]!,
-        subjects: selectedPressure ? [`visible_cell:${selectedPressure.target}`] : selectedExchange ? selectedExchange.subjects.map(cell => `visible_cell:${cell}`)
+        subjects: selectedFallback ? [`visible_target:${selectedFallback.goal.join(',')}`] : selectedPressure ? [`visible_cell:${selectedPressure.target}`] : selectedExchange ? selectedExchange.subjects.map(cell => `visible_cell:${cell}`)
           : selectedMark ? [`visible_marker:${selectedMark.target}`]
             : selectedCoverage ? (selectedCoverage.covered ? [selectedCoverage.exit] : selectedCoverage.marks).map(cell => `visible_marker:${cell}`)
           : opening ? [`visible_marker:${opening.peer.join(',')}`] : ['current_public_interface'],
         parentObjective: completion,
-        satisfactionContract: selectedPressure ? selectedPressure.goal === 'cross_to_exit' ? 'observe_official_progress' : 'observe_projected_pressure_return'
+        satisfactionContract: selectedFallback ? 'observe_official_progress_after_verified_steps' : selectedPressure ? selectedPressure.goal === 'cross_to_exit' ? 'observe_official_progress' : 'observe_projected_pressure_return'
           : selectedExchange ? selectedExchange.goal === 'reach_exit' ? 'observe_official_progress' : 'observe_transport_return'
           : selectedMark ? 'observe_mark_contact'
             : selectedCoverage ? selectedCoverage.covered ? 'observe_official_progress' : 'observe_simultaneous_superposition'
@@ -851,6 +865,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         : null;
       return {
         status: 'proposed', kind: publicInputExplorationId, actions, source, candidates: keys, needId: need.id,
+        ...(selectedFallback ? { fallbackProjection: selectedFallback } : {}),
         ...(slotLayout && slotMove && selectedProjection === slot ? { slotPlan: { layout: slotLayout, move: slotMove } } : {}),
         ...(entry && selectedProjection === entry ? { entryPlan: entry } : {}),
         ...(selectedJoint ? { jointPlan: selectedJoint } : {}),
@@ -878,7 +893,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
-          situation: { ...facts, stage: uncover ? 'uncover_source_pattern'
+          situation: { ...facts, stage: selectedFallback ? selectedFallback.check.kind : uncover ? 'uncover_source_pattern'
             : transport?.bridge ? 'plan_bridge_from_matched_landing'
             : transport ? (transportMove ? 'test_support_placement' : 'reach_transport_control')
             : alignment ? (mechanismMove ? 'align_panel_mechanism' : 'reach_mechanism_control')
@@ -886,11 +901,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
             : programming ? 'test_marker_selector' : terrainStep ? 'advance_measured_terrain'
               : unmeasured ? 'calibrate_at_landing' : terrain ? 'test_terrain_configuration'
               : approach ? 'approach_marker' : comparison ? 'compare_on_marker' : 'recheck' } } } : {}),
-        sicSituationCard: { strategy, need: pressureLabel ?? markLabel ?? exchangeLabel ?? (selectedCoverage ? selectedCoverage.covered ? 'Reach the observed exit' : 'Cover one mark per movable piece'
+        sicSituationCard: { strategy, need: (selectedFallback ? label : undefined) ?? pressureLabel ?? markLabel ?? exchangeLabel ?? (selectedCoverage ? selectedCoverage.covered ? 'Reach the observed exit' : 'Cover one mark per movable piece'
           : opening ? 'Reach the new region opened by the support placement' : 'Learn how to act on the current board'), mode,
-          situation: !selectedPressure && !selectedMark && !selectedExchange && !selectedCoverage && !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
+          situation: !selectedFallback && !selectedPressure && !selectedMark && !selectedExchange && !selectedCoverage && !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
-            : label, agenda: decision ? [] : entries, evidence: proof, ...(box ? { addressedRegion: box } : {}),
+            : label, agenda: decision ? [] : entries, evidence: proof, ...(selectedFallback ? { target: selectedFallback.goal } : {}), ...(box ? { addressedRegion: box } : {}),
           ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
           ...(clickedControl && probe ? { focus: clickedControl.box } : {}),
           ...(workspaceTrial ? { workspace: workspaceTrial.workspace, example: workspaceTrial.example } : {}),
@@ -968,8 +983,14 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_public_input_bound' : 'public_input_scope_changed' };
     },
-    after(proposal, index, before, after, rows, afterRows) {
+    async after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      if (!scored && proposal.fallbackProjection) {
+        const result = assessFallbackProjection(proposal.fallbackProjection, rows, afterRows, before, after);
+        projectionReturns.set(proposal.fallbackProjection, result);
+        const { matched } = await result;
+        return { matched, seal_prefix: true, reason: matched === null ? 'public_mechanism_calibration' : matched ? 'projected_public_effect_observed' : 'projected_public_effect_contradicted' };
+      }
       if (!scored && proposal.slotPlan?.move.expected) {
         const { layout, move } = proposal.slotPlan;
         const matched = matchesVisibleSlotMove(afterRows, layout, move);
@@ -1064,6 +1085,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const source = index === 0 ? proposal.source : explorationKey(before, rows, proposal.panel);
       state.options[source] = proposal.candidates;
       const destination = explorationKey(after, afterRows, proposal.panel), action = commandKey(command);
+      if (proposal.fallbackProjection) {
+        const { memory } = await (projectionReturns.get(proposal.fallbackProjection)
+          ?? assessFallbackProjection(proposal.fallbackProjection, rows, afterRows, before, after));
+        if (memory) state.fallbackProjection = memory;
+        else delete state.fallbackProjection;
+      }
       if (proposal.entryPlan) state.orderedEntry = await observeOrderedEntry(proposal.entryPlan, before, after, afterRows);
       if (proposal.slotPlan && matchesVisibleSlotMove(afterRows, proposal.slotPlan.layout, proposal.slotPlan.move)) {
         state.slotTransfer = { layout: proposal.slotPlan.layout, ref: after.observation_ref };
@@ -1345,5 +1372,6 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     state: () => ({ ...state }),
     restore(value: NativeRecord) { state = structuredClone(value as State); },
-  };
+  } satisfies NativeFamily<Proposal>;
+  return family;
 }

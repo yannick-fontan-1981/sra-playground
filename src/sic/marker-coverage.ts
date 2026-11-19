@@ -4,7 +4,7 @@ import {
   constellationPlus, ConstellationEvidence, measureConstellationLayout,
 } from '../logos-engine/v6-constellation-cover.ts';
 import { PointSet, type Point } from '../logos-engine/v6-point-set.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { markerAcquisitionRisk, markerContactKey, measureMarkerMaterialRegions, nextMarkerMaterialMove, type MaterialContact } from './marker-material-route.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -68,7 +68,7 @@ function contactObserved(measured: ConstellationEvidence, step: Step, rows: Nati
   return constellationAgreement(rows, model, bodies, step.expected_after, pose, active);
 }
 
-function nextProbe(measured: ConstellationEvidence, rows: NativeRows, cursor: Point, inputs: readonly string[]): Step | null {
+export function nextMarkerProbe(measured: ConstellationEvidence, rows: NativeRows, cursor: Point, inputs: readonly string[]): Step | null {
   const model = measured.model!;
   const untried = (input: string) => !measured.tried.has(JSON.stringify([input, cursor]));
   const unknown = inputs.find(input => !measured.motion.has(input) && input !== measured.selector && untried(input));
@@ -99,6 +99,88 @@ function nextProbe(measured: ConstellationEvidence, rows: NativeRows, cursor: Po
   return input && inputs.includes(input) ? { action: command(input), cursor, mode: 'cycle', expected_after: null } : null;
 }
 
+export function measureMarkerSelection(observation: NativeObservation, rows: NativeRows, snapshot: NativeRecord | null) {
+  const measured = measurements(snapshot);
+  if (!snapshot) {
+    measured.epoch = observation.level_epoch;
+    measured.firstObservation = observation.observation_ref;
+    const regions = measureMarkerMaterialRegions(observation, rows);
+    measured.model = (regions.length ? measureConstellationLayout(observation, rows, regions) : null)
+      ?? measureConstellationLayout(observation, rows);
+    if (measured.model) {
+      const movingColors = measureUnassignedMaterial(observation, rows, measured.model);
+      if (movingColors.length) measured.model.movingColors = movingColors;
+    }
+  }
+  return measured;
+}
+
+export function bindMarkerSelection(measured: ConstellationEvidence, model: NonNullable<ConstellationEvidence['model']>, rows: NativeRows) {
+  const retained = measured.active === null ? null : measured.poses[measured.active]!;
+  const cursor = constellationFocus(rows, model) ?? (measured.complete && retained
+    && constellationCursorAt(rows, model, retained, measured.bodies, measured.poses, measured.active) ? retained : null);
+  if (!cursor) return null;
+  if (!measured.samples.length) measured.samples.push({ focus: cursor, material: constellationMaterial(rows, model) });
+  if (measured.active === null) {
+    const learned = acquireConstellation(measured.samples, model);
+    if (learned) {
+      measured.active = measured.bodies.length;
+      measured.bodies.push(learned);
+      measured.poses.push(cursor);
+    }
+  }
+
+  return cursor;
+}
+
+export async function projectMarkerStep(observation: NativeObservation, rows: NativeRows, keys: readonly string[], snapshot: NativeRecord | null) {
+  const measured = measureMarkerSelection(observation, rows, snapshot), model = measured.model;
+  if (!model || measured.retired) return null;
+  const cursor = bindMarkerSelection(measured, model, rows);
+  if (!cursor) return null;
+  const current = bounds([cursor])!;
+  if (!measured.complete) {
+    const step = nextMarkerProbe(measured, rows, cursor, keys);
+    return step ? { step, measured: measured.state(), actor: current, goal: current } : null;
+  }
+  const active = measured.active;
+  if (active === null || !constellationAgreement(rows, model, measured.bodies, measured.poses, cursor, active)) return null;
+  const quantum = [...measured.motion.values()].flat().reduce((result, value) => gcd(result, Math.abs(value)), 0);
+  if (!quantum) return null;
+  const options = await constellationMechanicalPoseOptions(observation, rows, measured.bodies, measured.poses, model, quantum);
+  const goal = constellationJointGoal(measured.bodies, measured.poses, model, quantum, options);
+  if (!goal || measured.poses.every((pose, i) => samePoint(pose, goal[i]!))) return null;
+  const target = goal[active]!, targetBox = bounds(constellationBodyPixels(measured.bodies[active]!, target))!;
+  const actor = bounds(constellationBodyPixels(measured.bodies[active]!, cursor)) ?? current;
+  const delta = constellationMinus(target, cursor);
+  if (distance(delta) === 0) {
+    const selector = measured.selector;
+    if (!selector || !keys.includes(selector)) return null;
+    const step: Step = { action: command(selector), cursor, mode: 'cycle', poses: measured.poses, expected_after: null };
+    return { step, measured: measured.state(), actor, goal: targetBox };
+  }
+  const move = [...measured.motion].find(([key, vector]) => keys.includes(key)
+    && distance(constellationMinus(delta, vector)) < distance(delta));
+  if (!move) return null;
+  const poses = [...measured.poses];
+  poses[active] = constellationPlus(cursor, move[1]);
+  const hidden = constellationOutside(constellationBodyPixels(measured.bodies[active]!, poses[active]!), model).size;
+  const step: Step = { action: command(move[0]), cursor, mode: 'move', poses: measured.poses, expected_after: poses,
+    unobserved_support_pixels: hidden };
+  return { step, measured: measured.state(), actor, goal: targetBox };
+}
+
+export async function observeMarkerStep(projection: NonNullable<Awaited<ReturnType<typeof projectMarkerStep>>>,
+  before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows) {
+  const measured = measurements(projection.measured), { step } = projection;
+  const packet = { steps: [step] };
+  rememberExposedMarkers(after, second, measured, step.expected_after ?? undefined);
+  const result = await measured.record(before, after, step.action, first, second, packet, 0);
+  measured.events = [];
+  return { matched: !measured.retired && (step.mode === 'move' || !!result.measured_vector || !!result.selection_local_occlusion_observed),
+    retired: measured.retired, snapshot: measured.state() };
+}
+
 export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
   let snapshot: NativeRecord | null = null;
   let count = 0;
@@ -125,33 +207,11 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       const prior = snapshot?.epoch === observation.level_epoch ? snapshot : null;
       const issued = prior ? count : 0;
       const dismissed = prior ? dismissedContacts : [];
-      const measured = measurements(prior);
-      if (!prior) {
-        measured.epoch = observation.level_epoch;
-        measured.firstObservation = observation.observation_ref;
-        const regions = measureMarkerMaterialRegions(observation, rows);
-        measured.model = (regions.length ? measureConstellationLayout(observation, rows, regions) : null)
-          ?? measureConstellationLayout(observation, rows);
-        if (measured.model) {
-          const movingColors = measureUnassignedMaterial(observation, rows, measured.model);
-          if (movingColors.length) measured.model.movingColors = movingColors;
-        }
-      }
+      const measured = measureMarkerSelection(observation, rows, prior);
       const model = measured.model;
       if (!model || measured.retired || !model.movingColors?.length && issued >= 64) return null;
-      const retained = measured.active === null ? null : measured.poses[measured.active]!;
-      const cursor = constellationFocus(rows, model) ?? (measured.complete && retained
-        && constellationCursorAt(rows, model, retained, measured.bodies, measured.poses, measured.active) ? retained : null);
+      const cursor = bindMarkerSelection(measured, model, rows);
       if (!cursor) return null;
-      if (!measured.samples.length) measured.samples.push({ focus: cursor, material: constellationMaterial(rows, model) });
-      if (measured.active === null) {
-        const learned = acquireConstellation(measured.samples, model);
-        if (learned) {
-          measured.active = measured.bodies.length;
-          measured.bodies.push(learned);
-          measured.poses.push(cursor);
-        }
-      }
 
       let step: Step | null = null;
       const route: Step[] = [];
@@ -159,7 +219,7 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       let finalPlacement: NativeBox | null = null;
       let colorSource: NativeBox | undefined;
       const active = measured.active;
-      if (!measured.complete) step = nextProbe(measured, rows, cursor, keys);
+      if (!measured.complete) step = nextMarkerProbe(measured, rows, cursor, keys);
       else if (active !== null && constellationAgreement(rows, model, measured.bodies, measured.poses, cursor, active)) {
         if (model.materialRegions) {
           const next = nextMarkerMaterialMove(measured, keys, dismissed);

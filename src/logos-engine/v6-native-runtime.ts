@@ -41,7 +41,7 @@ import { createSicLearnSupportMoves, learnObservedSupportsId } from '../sic/lear
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects, learnVisibleGroupEffectsId } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
-import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, publicInputExplorationId } from '../sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, projectedPublicEffectsGroup, publicInputExplorationId } from '../sic/public-input-exploration.ts';
 import { createSicRecheckDirectionalControls } from '../sic/recheck-directional-controls.ts';
 import { createSicTrialRepeatedLinearControls } from '../sic/trial-repeated-linear-controls.ts';
 import { acquireQueuedField } from './v6-queued-field-models.ts';
@@ -828,6 +828,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       const offer = async (index: unknown): Promise<FamilyTrial> => {
       if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0 || index >= this.groups.length || !this.planning || !this.current || !this.observation) throw new Error('Invalid native family selection cursor');
       const group = this.groups[index]!;
+      if (group.id === projectedPublicEffectsGroup && !this.withdrawnPrimaryFamily) {
+        return { family: group.id, selected: false };
+      }
       this.check(this.planning.execution); await this.planning.execution.yieldControl(); this.check(this.planning.execution);
       let offered: { family: NativeFamily; proposal: NativeProposal } | null = null;
       for (const [entryIndex, id] of group.families.entries()) {
@@ -2769,10 +2772,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const policy = configuration.observed_composition_services.rooted_line_question;
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const now = options.now ?? (() => performance.now());
-    const groups = standalonePlanningGroups;
+    const groups = recovery.solver === 'sic-fallback'
+      ? [{ id: projectedPublicEffectsGroup, families: [publicInputExplorationId] }, ...standalonePlanningGroups]
+      : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 183, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: recovery.solver === 'sic-fallback' ? 184 : 183, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [

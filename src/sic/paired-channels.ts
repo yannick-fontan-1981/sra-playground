@@ -372,6 +372,35 @@ function separatedReturn(proposal: Proposal, before: NativeRows, after: NativeRo
       measureTile(before, ...tile.point, pitch).color === measureTile(after, ...tile.point, pitch).color));
 }
 
+export function planDistinctChannels(rows: NativeRows, remaining: number) {
+  let selected: { layout: Layout; threads: Thread[] } | null = null;
+  let budget = remaining;
+  for (const layout of layoutFor(rows, [])) {
+    if (layout.pairs.some(pair => pair.other || pair.branches?.length)) continue;
+    const threads = plan(layout, []);
+    if (!threads) continue;
+    const size = threads.reduce((count, thread) => count + thread.clicks.length, 0);
+    if (size > budget) continue;
+    selected = { layout, threads };
+    budget = size - 1;
+  }
+  return selected;
+}
+
+export function nextChannelTile(rows: NativeRows, { layout, threads }: NonNullable<ReturnType<typeof planDistinctChannels>>) {
+  for (const { pair, clicks } of threads) {
+    const closed = clicks.filter(tile => measureTile(rows, ...tile.point, layout.pitch).color === layout.closed);
+    if (!closed.length && !endpointReached(rows, pair, layout.pitch)) return null;
+    if (closed.length) return { pair, tile: closed[0]!, completes: closed.length === 1 };
+  }
+  return null;
+}
+
+export function matchesChannelOpening(rows: NativeRows, layout: Layout, { pair, tile, completes }: NonNullable<ReturnType<typeof nextChannelTile>>) {
+  return measureTile(rows, ...tile.point, layout.pitch).color !== layout.closed
+    && (!completes || endpointReached(rows, pair, layout.pitch));
+}
+
 export function createSicVerifyChannelAccess(): NativeFamily<Proposal> {
   let memory: State | null = null;
   let recipes: Recipe[] = [];

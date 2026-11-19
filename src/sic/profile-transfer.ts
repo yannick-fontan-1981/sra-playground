@@ -54,7 +54,7 @@ const equal = (a: readonly number[], b: readonly number[]) => a.length === b.len
 const empty = (epoch = 0): State => ({ epoch, count: 0, tried: [], evidence: [], stopped: false });
 const horizontalBox = ([t, l, b, r]: readonly number[]): NativeBox => [l!, t!, r!, b!];
 const rowCenter = ({ box }: Part) => (box[1] + box[3]) / 2;
-const filled = ({ values }: Part) => values.every(value => value === 0);
+export const receiverFilled = ({ values }: Part) => values.every(value => value === 0);
 const heightMultiset = (values: readonly number[]) => [...values].sort((a, b) => a - b).join(',');
 const direction = (band: number) => band === 0 ? 'ACTION1' : 'ACTION2';
 const fitFrom = ({ profile, receiver }: Band) => profile.box[2] < receiver.box[0] ? 'ACTION4'
@@ -125,7 +125,7 @@ function completeReceiverBands(rows: NativeRows, bindings: ReceiverBinding[], st
   return bands;
 }
 
-function measure(observation: NativeObservation, rows: NativeRows, includeTools = false, anchor?: ReceiverBinding): Scene | null {
+export function measureProfileTransfer(observation: NativeObservation, rows: NativeRows, includeTools = false, anchor?: ReceiverBinding): Scene | null {
   const [raw, context] = project(observation, rows, geometry);
   const measured = profiles(raw);
   if (measured.length < 2 || measured.length > 6 || !Array.isArray(raw.receiver_bindings)) return null;
@@ -157,7 +157,7 @@ function measure(observation: NativeObservation, rows: NativeRows, includeTools 
 
 const workshopState = (scene: Scene): Work => ({ focus: scene.focus, held: scene.held,
   profiles: scene.bands.map(band => band.profile.values),
-  acquired: scene.bands.map(band => filled(band.receiver)) });
+  acquired: scene.bands.map(band => receiverFilled(band.receiver)) });
 
 function measureDomain(scene: Scene): Domain | null {
   const values = scene.bands.flatMap(({ profile, receiver }) => [...profile.values, ...receiver.values].filter(value => value > 0));
@@ -290,6 +290,22 @@ function prepareProfile(scene: Scene, inputs: readonly NativeCommand[], prior: T
   return progress ?? probe;
 }
 
+export function directProfileStep(scene: Scene, inputs: readonly NativeCommand[], target: number) {
+  const { bands, focus, held } = scene;
+  const source = equal(bands[0]!.profile.values, bands[target]!.receiver.values) ? 0 : 1;
+  const toward = (ref: string) => inputs.find(input => input.action_ref === ref) ?? null;
+  const switchGrip = toward('ACTION5');
+  const side = fitFrom(bands[target]!);
+  const offers: { phase: Strategy; applicable: boolean; command: NativeCommand | null }[] = [
+    { phase: 'release_profile_after_fit', applicable: held && receiverFilled(bands[focus]!.receiver), command: switchGrip },
+    { phase: 'fit_carried_profile', applicable: held && focus === target && source === target && !!side, command: toward(side) },
+    { phase: 'carry_profile_to_receiver_band', applicable: held && focus === source && source !== target, command: toward(direction(target)) },
+    { phase: 'test_profile_carry', applicable: !held && focus === source, command: switchGrip },
+    { phase: 'locate_compatible_profile', applicable: !held && focus !== source, command: toward(direction(source)) },
+  ];
+  return offers.find(offer => offer.applicable && offer.command);
+}
+
 export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
   let state = empty();
   let retained: Transfer | null = null;
@@ -310,34 +326,24 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       const previous = state.epoch === observation.level_epoch ? state : empty(observation.level_epoch);
       if (previous.stopped) return null;
       const acquired = retained?.completed === observation.levels_completed ? retained : null;
-      const scene = measure(observation, rows, acquired !== null, previous.receiverAnchor);
+      const scene = measureProfileTransfer(observation, rows, acquired !== null, previous.receiverAnchor);
       if (!scene) return null;
       const { bands, focus, held } = scene;
       if (previous.count >= Math.max(24, bands.length * 12)) return null;
       const multipleTools = bands.length > 2;
       const domain = multipleTools ? previous.domain ?? measureDomain(scene) : null;
       const local = domain ? { ...previous, domain, ...(scene.receiverAnchor ? { receiverAnchor: scene.receiverAnchor } : {}) } : previous;
-      const direct = bands.every(band => filled(band.receiver)
+      const direct = bands.every(band => receiverFilled(band.receiver)
         || bands.filter(candidate => equal(candidate.profile.values, band.receiver.values)).length === 1);
       const needsPreparation = multipleTools || local.preparing || !direct;
       const preparation = acquired && needsPreparation && (!multipleTools || domain)
         ? prepareProfile(scene, inputs, acquired, remaining, rows.length, domain, local.orders, local.inversions) : null;
       if (!preparation && needsPreparation) return null;
-      const target = preparation?.target ?? (filled(bands[0]!.receiver) ? 1 : 0);
-      if (!preparation && filled(bands[target]!.receiver)) return null;
+      const target = preparation?.target ?? (receiverFilled(bands[0]!.receiver) ? 1 : 0);
+      if (!preparation && receiverFilled(bands[target]!.receiver)) return null;
       const source = preparation ? scene.receiverAnchor && preparation.phase === 'locate_compatible_profile' ? preparation.projected.focus : focus
         : equal(bands[0]!.profile.values, bands[target]!.receiver.values) ? 0 : 1;
-      const toward = (ref: string) => inputs.find(input => input.action_ref === ref) ?? null;
-      const switchGrip = toward('ACTION5');
-      const side = fitFrom(bands[target]!);
-      const offers: { phase: Strategy; applicable: boolean; command: NativeCommand | null }[] = [
-        { phase: 'release_profile_after_fit', applicable: held && filled(bands[focus]!.receiver), command: switchGrip },
-        { phase: 'fit_carried_profile', applicable: held && focus === target && source === target && !!side, command: toward(side) },
-        { phase: 'carry_profile_to_receiver_band', applicable: held && focus === source && source !== target, command: toward(direction(target)) },
-        { phase: 'test_profile_carry', applicable: !held && focus === source, command: switchGrip },
-        { phase: 'locate_compatible_profile', applicable: !held && focus !== source, command: toward(direction(source)) },
-      ];
-      const offer = preparation ?? offers.find(offer => offer.applicable && offer.command);
+      const offer = preparation ?? directProfileStep(scene, inputs, target);
       if (!offer?.command) return null;
       const { phase, command } = offer;
       const attempt = JSON.stringify([bands.map(band => [band.profile.values, band.receiver.values]), focus, held, command.action_ref,
@@ -400,7 +406,7 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const matched = observed(proposal, measure(after, second, false, proposal.scene.receiverAnchor));
+      const matched = observed(proposal, measureProfileTransfer(after, second, false, proposal.scene.receiverAnchor));
       return { matched, seal_prefix: true, reason: matched ? 'profile_transfer_confirmed' : 'profile_transfer_contradicted' };
     },
     record(before, after, command, _first, second, proposal) {
@@ -427,7 +433,7 @@ export function createSicVerifyProfileTransfer(): NativeFamily<Proposal> {
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = proposal.local;
-      const next = measure(after, second, false, proposal.scene.receiverAnchor), ordering = proposal.preparation?.ordering;
+      const next = measureProfileTransfer(after, second, false, proposal.scene.receiverAnchor), ordering = proposal.preparation?.ordering;
       const knownInversion = ordering && local.inversions?.[ordering.support];
       const probedOrder = ordering?.probe && !knownInversion ? observeOrderProbe(proposal, next) : null;
       const probedInversion = ordering?.compareHeights && !probedOrder ? observeInversionProbe(proposal, next) : null;
@@ -490,13 +496,17 @@ function observed(proposal: Proposal, next: Scene | null): boolean {
     return !knownInversion && observeOrderProbe(proposal, next) !== null || observeInversionProbe(proposal, next) !== null;
   }
   if (preparation) return JSON.stringify(workshopState(next)) === JSON.stringify(preparation.projected);
+  return matchesDirectProfileStep(scene, strategy, target, next);
+}
+
+export function matchesDirectProfileStep(scene: Scene, strategy: Strategy, target: number, next: Scene) {
   switch (strategy) {
     case 'locate_compatible_profile': return !next.held && next.focus !== scene.focus;
     case 'test_profile_carry': return next.held && next.focus === scene.focus;
     case 'carry_profile_to_receiver_band': return next.held && next.focus === target
       && equal(next.bands[target]!.profile.values, scene.bands[scene.focus]!.profile.values);
-    case 'fit_carried_profile': return filled(next.bands[target]!.receiver);
-    case 'release_profile_after_fit': return !next.held && next.focus === scene.focus && filled(next.bands[scene.focus]!.receiver);
+    case 'fit_carried_profile': return receiverFilled(next.bands[target]!.receiver);
+    case 'release_profile_after_fit': return !next.held && next.focus === scene.focus && receiverFilled(next.bands[scene.focus]!.receiver);
     case 'test_framed_profile_tool': return false;
   }
 }
