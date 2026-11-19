@@ -1,0 +1,3511 @@
+{
+  "game": "SS07",
+  "level": 6,
+  "title": "Le poids de la sentinelle",
+  "mapSha256": "861dcead7b562c014c3683c4272df1cf5aab0037cee9a12330ca2e1af3148449",
+  "coordinateSystem": "LevelSpec source coordinates before centering; x increases right, y increases down.",
+  "geometry": {
+    "greenGate": {
+      "x": 9,
+      "y": 14
+    },
+    "antiBypassWall": {
+      "x": 10,
+      "y": 13
+    },
+    "finalIsland": {
+      "row": 14,
+      "fromX": 11,
+      "toX": 17
+    },
+    "goals": [
+      {
+        "x": 14,
+        "y": 14
+      },
+      {
+        "x": 16,
+        "y": 14
+      }
+    ],
+    "monsterRelay": {
+      "x": 12,
+      "y": 10
+    }
+  },
+  "method": "Exhaustive support-placement enumeration on a permissive terrain-and-reflection graph; no actor-state BFS.",
+  "model": {
+    "gateForcedClosed": true,
+    "waterCells": 293,
+    "maximumExtraSupports": 1,
+    "supportAvailableFromStart": true,
+    "mirror": "One NE mirror, freely repositionable within its supported terrain component.",
+    "heroMoves": "Independent cardinal walking plus both directions of every unobstructed NE reflection from every allowed mirror position.",
+    "ignoredConstraints": [
+      "Other occupants and their collisions",
+      "Nearest-occupant reflection priority",
+      "Which hero can move the mirror",
+      "Combat",
+      "The work needed to create the chosen support",
+      "Simultaneous goal occupation"
+    ],
+    "retainedConstraints": [
+      "Walls and the permanently closed green gate block movement and rays",
+      "Heroes need supported departure and arrival cells",
+      "The single mirror cannot teleport itself or change its orientation"
+    ],
+    "justification": "The only crate can create at most one permanent support. Granting any water cell as a support from the beginning, free mirror relocation and occupant-free rays includes every legal trajectory while adding many impossible ones. If neither target is reachable in any such graph, no legal solution can keep the green gate closed throughout."
+  },
+  "result": {
+    "provedGateOpeningNecessary": true,
+    "reachableGoalsWithGateClosed": [],
+    "checkedSupportChoices": 294,
+    "includesNoSupportCase": true,
+    "maximumMirrorPositions": 54,
+    "maximumHeroReachableCells": 56
+  },
+  "positiveControls": {
+    "note": "These permissive graph paths check the proof model; they are not claimed to be playable game solutions.",
+    "gateOpened": {
+      "triedSupportChoices": 1,
+      "extraSupport": null,
+      "mirrorPositions": 53,
+      "heroReachableCells": 60,
+      "reflectionEdges": 192,
+      "reachableGoals": [
+        {
+          "x": 14,
+          "y": 14
+        },
+        {
+          "x": 16,
+          "y": 14
+        }
+      ],
+      "abstractPaths": [
+        {
+          "start": {
+            "x": 4,
+            "y": 10
+          },
+          "goal": {
+            "x": 14,
+            "y": 14
+          },
+          "steps": [
+            {
+              "kind": "walk",
+              "from": {
+                "x": 4,
+                "y": 10
+              },
+              "to": {
+                "x": 5,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 5,
+                "y": 10
+              },
+              "to": {
+                "x": 6,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 6,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 9
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 9
+              },
+              "to": {
+                "x": 7,
+                "y": 8
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 8
+              },
+              "to": {
+                "x": 7,
+                "y": 7
+              }
+            },
+            {
+              "kind": "reflect",
+              "from": {
+                "x": 7,
+                "y": 7
+              },
+              "to": {
+                "x": 14,
+                "y": 14
+              },
+              "mirror": {
+                "x": 7,
+                "y": 14
+              }
+            }
+          ]
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": 10
+          },
+          "goal": {
+            "x": 16,
+            "y": 14
+          },
+          "steps": [
+            {
+              "kind": "walk",
+              "from": {
+                "x": 4,
+                "y": 10
+              },
+              "to": {
+                "x": 5,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 5,
+                "y": 10
+              },
+              "to": {
+                "x": 6,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 6,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 9
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 9
+              },
+              "to": {
+                "x": 7,
+                "y": 8
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 8
+              },
+              "to": {
+                "x": 7,
+                "y": 7
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 7
+              },
+              "to": {
+                "x": 7,
+                "y": 6
+              }
+            },
+            {
+              "kind": "reflect",
+              "from": {
+                "x": 7,
+                "y": 6
+              },
+              "to": {
+                "x": 15,
+                "y": 14
+              },
+              "mirror": {
+                "x": 7,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 15,
+                "y": 14
+              },
+              "to": {
+                "x": 16,
+                "y": 14
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "antiBypassWallRemovedButGateClosed": {
+      "triedSupportChoices": 217,
+      "extraSupport": {
+        "x": 11,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 60,
+      "reflectionEdges": 180,
+      "reachableGoals": [
+        {
+          "x": 14,
+          "y": 14
+        },
+        {
+          "x": 16,
+          "y": 14
+        }
+      ],
+      "abstractPaths": [
+        {
+          "start": {
+            "x": 4,
+            "y": 10
+          },
+          "goal": {
+            "x": 14,
+            "y": 14
+          },
+          "steps": [
+            {
+              "kind": "walk",
+              "from": {
+                "x": 4,
+                "y": 10
+              },
+              "to": {
+                "x": 5,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 5,
+                "y": 10
+              },
+              "to": {
+                "x": 6,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 6,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 9
+              }
+            },
+            {
+              "kind": "reflect",
+              "from": {
+                "x": 7,
+                "y": 9
+              },
+              "to": {
+                "x": 11,
+                "y": 13
+              },
+              "mirror": {
+                "x": 7,
+                "y": 13
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 11,
+                "y": 13
+              },
+              "to": {
+                "x": 11,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 11,
+                "y": 14
+              },
+              "to": {
+                "x": 12,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 12,
+                "y": 14
+              },
+              "to": {
+                "x": 13,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 13,
+                "y": 14
+              },
+              "to": {
+                "x": 14,
+                "y": 14
+              }
+            }
+          ]
+        },
+        {
+          "start": {
+            "x": 4,
+            "y": 10
+          },
+          "goal": {
+            "x": 16,
+            "y": 14
+          },
+          "steps": [
+            {
+              "kind": "walk",
+              "from": {
+                "x": 4,
+                "y": 10
+              },
+              "to": {
+                "x": 5,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 5,
+                "y": 10
+              },
+              "to": {
+                "x": 6,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 6,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 10
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 7,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 9
+              }
+            },
+            {
+              "kind": "reflect",
+              "from": {
+                "x": 7,
+                "y": 9
+              },
+              "to": {
+                "x": 11,
+                "y": 13
+              },
+              "mirror": {
+                "x": 7,
+                "y": 13
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 11,
+                "y": 13
+              },
+              "to": {
+                "x": 11,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 11,
+                "y": 14
+              },
+              "to": {
+                "x": 12,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 12,
+                "y": 14
+              },
+              "to": {
+                "x": 13,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 13,
+                "y": 14
+              },
+              "to": {
+                "x": 14,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 14,
+                "y": 14
+              },
+              "to": {
+                "x": 15,
+                "y": 14
+              }
+            },
+            {
+              "kind": "walk",
+              "from": {
+                "x": 15,
+                "y": 14
+              },
+              "to": {
+                "x": 16,
+                "y": 14
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "scope": "Proves that the green gate must open at least once for this exact map. It does not prove a unique solution or the necessity of every object or of the recorded witness.",
+  "cases": [
+    {
+      "extraSupport": null,
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 0
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 1
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 2
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 3
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 56,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 4
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 5
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 190,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 5
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 5
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 5
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 5
+      },
+      "mirrorPositions": 54,
+      "heroReachableCells": 56,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 5
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 56,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 5
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 6
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 6
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 56,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 6
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 7
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 7
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 7
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 8
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 8
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 8
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 9
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 9
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 9
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 10
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 10
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 56,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 10
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 11
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 11
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 186,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 56,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 11
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 12
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 12
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 186,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 12
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 13
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 13
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 13
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 13
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 182,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 13
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 13
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 184,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 13
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 14
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 180,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 14
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 15
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 15
+      },
+      "mirrorPositions": 53,
+      "heroReachableCells": 53,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 15
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 16
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 0,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 1,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 2,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 3,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 4,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 5,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 6,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 7,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 8,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 9,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 10,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 11,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 12,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 13,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 14,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 15,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 16,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 17,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 18,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    },
+    {
+      "extraSupport": {
+        "x": 19,
+        "y": 17
+      },
+      "mirrorPositions": 52,
+      "heroReachableCells": 52,
+      "reflectionEdges": 178,
+      "reachableGoals": []
+    }
+  ]
+}

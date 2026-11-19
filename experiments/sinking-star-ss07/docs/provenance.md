@@ -1,6 +1,6 @@
 # Sources et adaptations SS07
 
-**La Distance Dérobée**, version **0.1.1 / HTML v2**, combine cinq adaptations déclarées et trois créations originales. Les sources ont servi à choisir des mécanismes de traction, de miroir et de presse, puis à construire des salles adaptées au duo Marchand/Voleur et à une grille 2D de 20 × 20 cellules.
+**La Distance Dérobée**, version **0.1.2 / HTML v3**, combine cinq adaptations déclarées et trois créations originales. Les sources ont servi à choisir des mécanismes de traction, de miroir et de presse, puis à construire des salles adaptées au duo Marchand/Voleur et à une grille 2D de 20 × 20 cellules.
 
 Les règles et références sont examinées à partir du guide [Heroes and Mirrors](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/) et de [Heroes and Light](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/). Les données complémentaires utilisées pour identifier les cartes sont l’[export communautaire des dispositions](https://github.com/chenyuyang712/OSS-puzzlewiki/blob/main/data/levels_layout.json.gz), les [parcours communautaires](https://github.com/joric/ootss/blob/main/data/solutions.json) et les [captures par identifiant](https://github.com/joric/ootss_tileset/tree/main/images/levels). Les identifiants techniques ne sont pas les numéros du guide.
 

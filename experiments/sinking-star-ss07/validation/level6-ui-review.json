@@ -1,0 +1,42 @@
+{
+  "version": "0.1.2",
+  "changedLevels": [
+    6
+  ],
+  "unchangedLevels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    7,
+    8
+  ],
+  "level7StrictlyIdenticalToV2": true,
+  "htmlSha256": "4da97bf0e6b54c45db156b22c0483d4673ca10ccb30129432b8aec04d9b528de",
+  "htmlValidation": {
+    "success": true,
+    "checks": 15,
+    "witnessCoverage": {
+      "levels": 8,
+      "actions": 593,
+      "frames": 1745,
+      "selectionActions": 39,
+      "allFrameDurationsVerified": true
+    },
+    "tutorialDiscoveries": 9,
+    "reachableDefeatLevels": [
+      6,
+      7,
+      8
+    ]
+  },
+  "visualInspection": {
+    "source": "Engine initial pixels, enlarged using nearest-neighbor sampling",
+    "horizontalExitRow": true,
+    "twoDestinationsVisible": true,
+    "relayIslandSeparate": true,
+    "entryWallVisible": true,
+    "issueFound": false
+  }
+}

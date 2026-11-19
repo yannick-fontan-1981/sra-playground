@@ -15,10 +15,10 @@
       "~.M.#...~~~~~~~~~~~~",
       "~.......~~~~~~~~~~~~",
       "~...T...~~~~.~~~~~~~",
-      "~.......~~~~......~~",
-      "~........~~~....g.~~",
-      "~~~~~~~o..~~..g...~~",
-      "~~~~~~~...~.......~~",
+      "~.......~~~~~~~~~~~~",
+      "~........~~~~~~~~~~~",
+      "~~~~~~~o..#~~~~~~~~~",
+      "~~~~~~~...~...g.g.~~",
       "~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~"
@@ -56,7 +56,7 @@
       }
     ]
   },
-  "commands": "CRLXULCDDRRRXCDDDRRRRRDDCDDRRDCRUCDRRRRRURRCDRRRUURRRR",
+  "commands": "CRLXULCDDRRRXCDDDRRRRRDDCDDRRDCRUCDRRRRRRRRRCDRRRRR",
   "actions": [
     {
       "id": 6,
@@ -203,7 +203,10 @@
       "id": 4
     },
     {
-      "id": 1
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 4
@@ -231,18 +234,6 @@
       "id": 4
     },
     {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
       "id": 4
     },
     {
@@ -257,7 +248,7 @@
     "platform": false
   },
   "metrics": {
-    "actions": 54,
+    "actions": 51,
     "selections": 7,
     "merchantPushes": 4,
     "thiefPulls": 2,
@@ -546,20 +537,20 @@
     },
     {
       "label": "Les deux héros rejoignent les cibles, le monstre reste sur le bouton",
-      "turn": 54,
+      "turn": 51,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 14,
-            "y": 14
+            "x": 16,
+            "y": 15
           }
         },
         {
           "kind": "thief",
           "at": {
-            "x": 16,
-            "y": 13
+            "x": 14,
+            "y": 15
           }
         }
       ],
@@ -590,5 +581,5 @@
       }
     }
   ],
-  "adaptation": "Le gobelin maintient la porte pendant que les deux héros sortent. Deux reflets et un déplacement opposé du miroir remplacent le parcours source ; un virage étroit impose de combiner traction et poussée pour construire le dernier appui."
+  "adaptation": "Le gobelin maintient la porte pendant que les deux héros sortent. L’îlot de sortie est une unique ligne horizontale ; un mur au-dessus du passage empêche un appui de contournement par reflet. Deux reflets et un déplacement opposé du miroir remplacent le parcours source ; un virage étroit impose de combiner traction et poussée pour construire le dernier appui."
 }

@@ -68,8 +68,8 @@
   },
   "witnessCoverage": {
     "levels": 8,
-    "actions": 596,
-    "frames": 1754,
+    "actions": 593,
+    "frames": 1745,
     "selectionActions": 39,
     "allFrameDurationsVerified": true
   },

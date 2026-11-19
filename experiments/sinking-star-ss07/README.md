@@ -1,14 +1,16 @@
 # SS07 — La Distance Dérobée
 
-Version **0.1.1 · HTML v2**. Laboratoire autonome du septième jeu de la série Sinking Star, destiné au lot **Custom 4** de SRA Playground.
+Version **0.1.2 · HTML v3**. Laboratoire autonome du septième jeu de la série Sinking Star, destiné au lot **Custom 4** de SRA Playground.
 
 Le **Marchand orange pousse une pièce**. Le **Voleur vert tire la pièce immédiatement derrière lui lorsqu’il marche vers une case libre**. Changer de côté, laisser un objet sur un bouton et quitter son axe par reflet sont au cœur des huit salles. Les deux personnages doivent occuper les **deux destinations en même temps**.
 
 **Reflets corrigés en v2 :** chaque miroir ne téléporte que l’élément le plus proche parmi ses deux axes. L’élément plus éloigné reste immobile et une arrivée bloquée pour lui n’empêche pas le plus proche de passer. À distance égale, les deux éléments échangent leurs places. La prévisualisation suit la même règle.
 
+**Niveau 6 resserré en v3 :** l’îlot de sortie devient une seule rangée horizontale avec les deux cibles. Un mur au-dessus du passage ferme le contournement par reflet ; ouvrir la porte verte devient nécessaire. La case isolée servant de relais au monstre est conservée.
+
 ## Jouer
 
-Ouvrir `dist/SS07-demo.html`, produit par la compilation. Le fichier de livraison s’appelle **SS07-demo-v2.html** : il contient le jeu complet et fonctionne hors ligne. Le niveau 1 démarre avec son tutoriel ouvert ; les huit niveaux sont accessibles depuis le sélecteur.
+Ouvrir `dist/SS07-demo.html`, produit par la compilation. Le fichier de livraison s’appelle **SS07-demo-v3.html** : il contient le jeu complet et fonctionne hors ligne. Le niveau 1 démarre avec son tutoriel ouvert ; les huit niveaux sont accessibles depuis le sélecteur.
 
 | Commande | Effet |
 |---|---|
@@ -53,7 +55,7 @@ npm run validate
 HAPPY_DOM_MODULE=/chemin/vers/happy-dom/lib/index.js node scripts/verify-ui-dom.mjs
 ```
 
-La livraison comporte **73 tests de règles**, **596 actions / 1 754 images** dans les huit parcours de validation et **15 contrôles de l’HTML**. Les résultats détaillés sont dans `validation/`. Les parcours sont déterministes et sans action bloquée ni décès ; ils établissent la solvabilité, sans annoncer une solution optimale ni une résolution autonome par le SRA.
+La livraison comporte **73 tests de règles**, **593 actions / 1 745 images** dans les huit parcours de validation et **15 contrôles de l’HTML**. Les résultats détaillés sont dans `validation/`. Les parcours sont déterministes et sans action bloquée ni décès ; ils établissent la solvabilité, sans annoncer une solution optimale ni une résolution autonome par le SRA.
 
 Le tutoriel fait l’objet de contrôles distincts : supprimer les poussées du Marchand, les tractions du Voleur, les presses ou la création d’appuis rend sa résolution impossible dans les recherches terminées. Le reflet est nécessaire par la géométrie : tout trajet terrestre optimiste exige au moins trois cases d’eau, alors que deux caisses seulement peuvent produire des appuis. La limite atteinte par une recherche sans reflets n’est pas utilisée comme preuve d’impossibilité.
 

@@ -1,4 +1,4 @@
-# SS07 — Spécification 0.1.1
+# SS07 — Spécification 0.1.2
 
 ## Contrat de la campagne
 

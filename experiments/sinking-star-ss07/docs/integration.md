@@ -1,6 +1,6 @@
 # Intégration future dans SRA Playground
 
-SS07 **La Distance Dérobée**, version **0.1.1 / HTML v2**, est préparé comme septième jeu de **Custom 4 · Sinking Star**. La branche de laboratoire est `feat/ss07-duo-lab-20261119`. La validation de l’HTML précède le passage sur `main` et la publication du site.
+SS07 **La Distance Dérobée**, version **0.1.2 / HTML v3**, est préparé comme septième jeu de **Custom 4 · Sinking Star**. La branche de laboratoire est `feat/ss07-duo-lab-20261119`. La validation de l’HTML précède le passage sur `main` et la publication du site.
 
 ## Adaptateur natif
 
@@ -38,9 +38,9 @@ Le statut logique final est connu avant la fin de l’animation. Les panneaux te
 
 ## Vérification du raccordement
 
-Les huit témoins totalisent **596 actions / 1 754 images**. Les rejouer à travers le routeur natif de production et comparer les observations, images, durées, sélections et transitions avec celles du laboratoire. Les 73 tests de règles et les 15 contrôles de l’HTML accompagnent ces parcours.
+Les huit témoins totalisent **593 actions / 1 745 images**. Les rejouer à travers le routeur natif de production et comparer les observations, images, durées, sélections et transitions avec celles du laboratoire. Les 73 tests de règles et les 15 contrôles de l’HTML accompagnent ces parcours.
 
-Vérifier particulièrement la traction dans les quatre directions, l’absence de traction après reflet ou presse, l’échec mortel et Undo de L7, les trois plateformes de L8 et leur conversion en trois appuis, la progression hors ordre et les neuf acquisitions de L1. Couvrir aussi le clavier, le clic avec coordonnées CSS converties en pixels, les entrées pendant les animations et l’annulation d’une animation en cours.
+Vérifier particulièrement l’îlot en ligne de L6 et la nécessité de sa porte verte, la traction dans les quatre directions, l’absence de traction après reflet ou presse, l’échec mortel et Undo de L7, les trois plateformes de L8 et leur conversion en trois appuis, la progression hors ordre et les neuf acquisitions de L1. Couvrir aussi le clavier, le clic avec coordonnées CSS converties en pixels, les entrées pendant les animations et l’annulation d’une animation en cours.
 
 Les tests du laboratoire ne remplacent pas l’essai du site intégré dans un navigateur réel. Exécuter le typage, le build, les tests pertinents et les non-régressions de SS01–SS06. Les témoins, solveurs, références d’auteur et plans internes restent hors du bundle agent : ils servent à vérifier le jeu, pas à fournir une politique de résolution au SRA.
 

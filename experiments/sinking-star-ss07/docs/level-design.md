@@ -1,6 +1,6 @@
 # Conception des huit niveaux SS07
 
-Version **0.1.1 / HTML v2**. Les cartes et leurs parcours sont enregistrés dans `reference/level1-design.json` à `level8-design.json`. Chaque salle contient un Marchand, un Voleur et deux destinations. Les solutions ci-dessous sont des témoins d’auteur, sans garantie d’optimalité.
+Version **0.1.2 / HTML v3**. Les cartes et leurs parcours sont enregistrés dans `reference/level1-design.json` à `level8-design.json`. Chaque salle contient un Marchand, un Voleur et deux destinations. Les solutions ci-dessous sont des témoins d’auteur, sans garantie d’optimalité.
 
 | Niveau | Titre | Actions | Poussées Marchand | Tractions Voleur | Reflets | Appuis créés |
 |---|---|---:|---:|---:|---:|---:|
@@ -9,7 +9,7 @@ Version **0.1.1 / HTML v2**. Les cartes et leurs parcours sont enregistrés dans
 | 3 | Partir sans reprendre | 29 | 1 | 1 | 3 | 0 |
 | 4 | Les quatre appuis | 94 | 8 | 7 | 3 | 4 |
 | 5 | La presse des deux rives | 77 | 10 | 4 | 2 | 2 |
-| 6 | Le poids de la sentinelle | 54 | 4 | 2 | 2 | 1 |
+| 6 | Le poids de la sentinelle | 51 | 4 | 2 | 2 | 1 |
 | 7 | La forteresse des deux sceaux | 88 | 4 | 2 | 3 | 1 |
 | 8 | Le pont qu’on ne rend pas | 136 | 20 | 6 | 2 | 3 |
 
@@ -45,6 +45,10 @@ La carte est originale : les six caisses et la cascade de la référence devienn
 
 Adaptation de principe de **Heroes and Mirrors 7**. Les héros déplacent le miroir dans deux sens pour déposer le monstre sur un bouton éloigné. Il maintient alors la porte pendant la sortie. La caisse finale doit franchir un virage : le Voleur la tire hors du cul-de-sac et libère son axe, puis le Marchand la pousse dans l’eau. Le monstre reste vivant sur son bouton ; la résolution ne comporte aucun combat.
 
+En v3, l’îlot de sortie est réduit à la rangée horizontale `y=14`, de `x=11` à `x=17`, avec les cibles en `(14,14)` et `(16,14)` (coordonnées source). La case relais du monstre `(12,10)` reste isolée. Le mur `(10,13)` bloque un contournement qui aurait permis de créer un appui au-dessus de la sortie par reflet. La porte verte `(9,14)` doit désormais être ouverte.
+
+`scripts/verify-level6-gate.mjs` contrôle cette nécessité dans un modèle plus permissif que le jeu : porte maintenue fermée, caisse autorisée à créer un appui sur n’importe quelle eau, miroir librement repositionné dans sa composante terrestre, reflets sans obstruction par les occupants ni priorité de distance. Aucun des 294 cas n’atteint une cible. Les contrôles porte ouverte et mur retiré rendent les cibles accessibles, ce qui vérifie aussi que le contrôle détecte le contournement voulu. Rapport : `reference/level6-gate-necessity.json`.
+
 ## 7 — La forteresse des deux sceaux
 
 Création originale. Un premier appui permet au Marchand d’atteindre la forteresse. Une caisse envoyée par reflet sur le premier sceau libère le Voleur. Le Voleur tire un miroir inaccessible à la poussée sur le second sceau ; la presse rapproche deux monstres qui s’éliminent dans une même phase de combat.
@@ -61,4 +65,4 @@ Le témoin comprend trois plateformes hydrauliques, trois nouveaux appuis issus 
 
 ## Portée de la validation
 
-Les huit replays complets vérifient une arrivée des deux héros sans action bloquée ni mort. Ils totalisent **596 actions / 1 754 images** dans la session publique. Les 73 tests de règles couvrent notamment la traction, les reflets, les presses, les circuits, l’eau, le combat et Undo. La validation ne prétend ni que chaque objet est nécessaire dans toute stratégie possible, ni que le SRA a résolu les salles de façon autonome.
+Les huit replays complets vérifient une arrivée des deux héros sans action bloquée ni mort. Ils totalisent **593 actions / 1 745 images** dans la session publique. Les 73 tests de règles couvrent notamment la traction, les reflets, les presses, les circuits, l’eau, le combat et Undo. La validation ne prétend ni que chaque objet est nécessaire dans toute stratégie possible, ni que le SRA a résolu les salles de façon autonome.

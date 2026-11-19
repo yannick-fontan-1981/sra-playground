@@ -1,6 +1,6 @@
 {
   "game": "SS07",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "levels": [
     {
       "level": 1,
@@ -250,7 +250,7 @@
       "solved": true,
       "mapSha256": "24a8c9276bf01b07df59d2079ec32b1b76dc7f4e9333d07e216c166b87ffa282",
       "witnessSha256": "23f5ad0258191bac4926ca0e8525e70e4c923df7e593a2558a40995b84ac3d44",
-      "observationsSha256": "a90ab80527bc5989918ca1518ef6bc64d5d8eb0617f4544500705cb03709e968"
+      "observationsSha256": "966b8f398ee93454acc6ae8ef3d8cdeec1bfc3f7422827a75775a69b2a105fc6"
     },
     {
       "level": 6,
@@ -267,8 +267,8 @@
         20,
         18
       ],
-      "floorCells": 81,
-      "waterCells": 276,
+      "floorCells": 63,
+      "waterCells": 293,
       "initialStones": 1,
       "initialSupports": 0,
       "initialMonsters": 1,
@@ -276,7 +276,7 @@
       "gates": 1,
       "hydraulicPlatforms": 0,
       "buttons": 1,
-      "actions": 54,
+      "actions": 51,
       "selections": 7,
       "merchantPushes": 4,
       "thiefPulls": 2,
@@ -295,12 +295,12 @@
       "mirrorsDestroyed": 0,
       "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
-      "frames": 150,
+      "frames": 141,
       "maxFrames": 4,
       "solved": true,
-      "mapSha256": "b739e66046637abb590a628727fd4fe81ca44b000a345c2afb8de154d09d9381",
-      "witnessSha256": "d33d4f34ba999340925ac7f8aa13c149437e93c7440a0f0df6ff5e5927760338",
-      "observationsSha256": "c9eb4be53c1d9681dc57a857c8bb2c18479d4cb37dbd54d33057f52cbdc399ee"
+      "mapSha256": "861dcead7b562c014c3683c4272df1cf5aab0037cee9a12330ca2e1af3148449",
+      "witnessSha256": "229ea2d80bec477dffb8709293c56ac6180a77e986e377bcb0617b94f47a0517",
+      "observationsSha256": "b91678d793451c3fa3064a11f96ea2ddad355ffed58ed80ddddf5701f4e85c7d"
     },
     {
       "level": 7,
@@ -404,7 +404,7 @@
     }
   ],
   "totals": {
-    "actions": 596,
+    "actions": 593,
     "selections": 39,
     "merchantPushes": 52,
     "thiefPulls": 38,
@@ -421,7 +421,7 @@
     "mirrorsDestroyed": 0,
     "cratesCrushed": 0,
     "simultaneousHeroReflections": 1,
-    "frames": 1754
+    "frames": 1745
   },
   "success": true,
   "finaleChecks": {
@@ -782,7 +782,7 @@
     ],
     "mapSha256": "d3ce303335c8158d4338f172fe6fe5bedb3928348acf3a3eb4f064a077f115d6"
   },
-  "htmlSha256": "54366ad1020479513a23bf230d1dc6d3dae6ff22f80265d496e757c7a7c4ae68",
+  "htmlSha256": "4da97bf0e6b54c45db156b22c0483d4673ca10ccb30129432b8aec04d9b528de",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",
