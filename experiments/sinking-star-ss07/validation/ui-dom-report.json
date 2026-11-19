@@ -6,6 +6,7 @@
   "checks": [
     "The complete compiled HTML opens level 1 with both colored heroes, exact engine pixels and its rich tutorial expanded",
     "Five controls, nine tutorial objectives, distinct reflection previews and explicit pulling, release, water, mirror, circuit and monster rules are present",
+    "Compiled HTML with three in-memory room fixtures shows only the nearer hero/crate preview, ignores the farther blocked landing, preserves equal-distance exchanges, and supports exact visual Undo",
     "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
     "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
     "Movement uses every frame and duration; directions, reflection and selection are blocked while animating, while Space still prevents scrolling",
@@ -18,6 +19,29 @@
     "All eight witnesses replay through the actual UI with exact frames and timing; victory needs all rooms and disables direction, reflection and hero selection",
     "Undo exits final victory and restores progression; Restart returns to the open tutorial with zero completions",
     "Real reachable defeats display all movement/combat frames before the terminal overlay, block further commands, and support mid-animation Undo plus defeat-panel Undo/Reset"
+  ],
+  "reflectionPriorityCoverage": [
+    {
+      "case": "near hero with farther blocked landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "near crate with farther valid landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "equal-distance heroes exchange",
+      "previewVerified": false,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    }
   ],
   "tutorialCoverage": {
     "actions": 59,

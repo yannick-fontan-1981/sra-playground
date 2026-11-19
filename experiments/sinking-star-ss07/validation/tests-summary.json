@@ -1,16 +1,17 @@
 {
   "game": "SS07",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "buildPassed": true,
   "nodeVersion": "v24.22.3",
   "engineTests": {
-    "tests": 64,
-    "pass": 64,
+    "tests": 73,
+    "pass": 73,
     "fail": 0,
     "cancelled": 0,
     "skipped": 0,
     "todo": 0
   },
+  "targetedReflectionTestsAdded": 9,
   "levelValidation": {
     "passed": true,
     "levels": 8,
@@ -36,10 +37,10 @@
   },
   "htmlValidation": {
     "passed": true,
-    "checks": 14,
+    "checks": 15,
     "tutorialObjectives": 9,
     "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
     "visualBrowserTest": false
   },
-  "htmlSha256": "2a4fdfdc25dfea2c9f123467b27452ac090ec3595012be1469a6d94ea64e496a"
+  "htmlSha256": "54366ad1020479513a23bf230d1dc6d3dae6ff22f80265d496e757c7a7c4ae68"
 }

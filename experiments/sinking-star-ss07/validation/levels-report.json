@@ -1,6 +1,6 @@
 {
   "game": "SS07",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "levels": [
     {
       "level": 1,
@@ -50,7 +50,7 @@
       "solved": true,
       "mapSha256": "d3ce303335c8158d4338f172fe6fe5bedb3928348acf3a3eb4f064a077f115d6",
       "witnessSha256": "6214f898a618df2153bb32bddc4bd3289ea075347cb45ba65b4f65fa6377914d",
-      "observationsSha256": "6653cb7bc3a584610a5da6662bdae030a9763460e737821ae3b7518fbd8ac0e7"
+      "observationsSha256": "10276ff93f03da349d5d7101a1bf9fd41cd13d2450c4234f95178d2c66c2193a"
     },
     {
       "level": 2,
@@ -200,7 +200,7 @@
       "solved": true,
       "mapSha256": "91ab0ffbaacc420fc53869630d8dde624de3cb7936bda335ae644a022b68bff0",
       "witnessSha256": "68d642690ef1448acd51a8261f464ef66392460fb86fac6e7b9510825c679160",
-      "observationsSha256": "a05e4ae42f8431ed62e223c8382139b96aa33585d1dcf3faebe6ad7420d991f9"
+      "observationsSha256": "73317a1deab1101eeb0a77d153d59f018376ed5a5fa446c50c4f529f50a8b215"
     },
     {
       "level": 5,
@@ -400,7 +400,7 @@
       "solved": true,
       "mapSha256": "807d6d4a380668c7dd24d442663116b5bc47f9bfb4b916051943fea4551e10a9",
       "witnessSha256": "abbf023d889eea1956fc9284e82d9d83787a4fb740faf78079f6de1c0ea4e8ca",
-      "observationsSha256": "849037754501a1421a9879f1afaca67d619e0e1b37e28d44cfbb0d920fd08d53"
+      "observationsSha256": "7149a240dbaca8da1cb7e92681174c3b2ce522fea2e6318320a6998e641733e5"
     }
   ],
   "totals": {
@@ -464,35 +464,63 @@
         "status": "unsolvable",
         "states": 8208,
         "expanded": 8208,
-        "ms": 159
+        "ms": 218,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
       },
       {
         "option": "disableThiefPulls",
         "status": "unsolvable",
         "states": 684,
         "expanded": 684,
-        "ms": 10
+        "ms": 10,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
       },
       {
         "option": "disablePistons",
         "status": "unsolvable",
         "states": 15664,
         "expanded": 15664,
-        "ms": 270
+        "ms": 272,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
       },
       {
         "option": "disablePlatforms",
         "status": "unsolvable",
         "states": 13680,
         "expanded": 13680,
-        "ms": 304
+        "ms": 258,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
       },
       {
         "option": "disableReflections",
         "status": "limit",
         "states": 100000,
         "expanded": 92855,
-        "ms": 1015
+        "ms": 1015,
+        "engineVersion": "0.1.0",
+        "historical": true,
+        "checkedUnderCurrentEngine": false,
+        "proofScope": "Historical bounded search from engine 0.1.0; no impossibility claim. The independent topology proof below does not use the reflection rule."
       }
     ],
     "reflectionTopology": {
@@ -741,11 +769,20 @@
       ],
       "reflectionNecessary": true,
       "argument": "Sans reflet, toutes les positions de héros changent par pas cardinaux, même lors des presses. Une case d’eau doit avoir un appui pour être visitée vivant. Le graphe optimiste exige au moins trois cases d’eau alors que seules deux caisses peuvent produire des appuis fixes ; aucun appui initial ni porte-plateforme n’est présent. La marche ou les presses seules ne peuvent donc atteindre une destination.",
-      "solverLimitIsNotImpossibilityProof": true
+      "solverLimitIsNotImpossibilityProof": true,
+      "engineVersion": "0.1.1",
+      "reviewNote": "Preserved independent terrain proof: it concerns routes with no reflections and is unaffected by nearest-candidate selection."
     },
+    "engineVersion": "0.1.1",
+    "recheckedCapabilities": [
+      "disableMerchantPushes",
+      "disableThiefPulls",
+      "disablePistons",
+      "disablePlatforms"
+    ],
     "mapSha256": "d3ce303335c8158d4338f172fe6fe5bedb3928348acf3a3eb4f064a077f115d6"
   },
-  "htmlSha256": "2a4fdfdc25dfea2c9f123467b27452ac090ec3595012be1469a6d94ea64e496a",
+  "htmlSha256": "54366ad1020479513a23bf230d1dc6d3dae6ff22f80265d496e757c7a7c4ae68",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",

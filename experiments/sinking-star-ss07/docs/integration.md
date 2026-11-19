@@ -1,6 +1,6 @@
 # Intégration future dans SRA Playground
 
-SS07 **La Distance Dérobée**, version **0.1.0 / HTML v1**, est préparé comme septième jeu de **Custom 4 · Sinking Star**. La branche de laboratoire est `feat/ss07-duo-lab-20261119`. La validation de l’HTML précède le passage sur `main` et la publication du site.
+SS07 **La Distance Dérobée**, version **0.1.1 / HTML v2**, est préparé comme septième jeu de **Custom 4 · Sinking Star**. La branche de laboratoire est `feat/ss07-duo-lab-20261119`. La validation de l’HTML précède le passage sur `main` et la publication du site.
 
 ## Adaptateur natif
 
@@ -26,6 +26,8 @@ Le tutoriel suit neuf acquisitions à partir des pixels publics : déplacement, 
 
 Conserver la prévisualisation de reflet : **+ gris clair pour le héros, contour carré gris clair pour la caisse**. Les actions directionnelles n’ajoutent aucun fantôme de poussée ou de traction. L’aide sur les plateformes doit apparaître en L8 avec les symboles actif / rétracté et la couleur du circuit.
 
+Pour chaque miroir, conserver la priorité au premier occupant le plus proche parmi ses deux bras. Comparer les distances avant de contrôler les destinations : un candidat plus éloigné est ignoré, y compris si son arrivée est bloquée. Deux candidats à distance égale échangent leurs positions. Le rendu de la prévisualisation et ACTION5 partagent cette sélection ; préserver les contraintes de collision entre les transferts retenus.
+
 Ne pas neutraliser ACTION5 ou ACTION6 dans un prédicat générique de jeu manuel. La disponibilité des commandes, l’animation et l’état terminal sont trois contrôles distincts. Un changement de personnage n’avance pas le monde.
 
 ## Images, durées et annulation
@@ -36,7 +38,7 @@ Le statut logique final est connu avant la fin de l’animation. Les panneaux te
 
 ## Vérification du raccordement
 
-Les huit témoins totalisent **596 actions / 1 754 images**. Les rejouer à travers le routeur natif de production et comparer les observations, images, durées, sélections et transitions avec celles du laboratoire. Les 64 tests de règles et les 14 contrôles de l’HTML accompagnent ces parcours.
+Les huit témoins totalisent **596 actions / 1 754 images**. Les rejouer à travers le routeur natif de production et comparer les observations, images, durées, sélections et transitions avec celles du laboratoire. Les 73 tests de règles et les 15 contrôles de l’HTML accompagnent ces parcours.
 
 Vérifier particulièrement la traction dans les quatre directions, l’absence de traction après reflet ou presse, l’échec mortel et Undo de L7, les trois plateformes de L8 et leur conversion en trois appuis, la progression hors ordre et les neuf acquisitions de L1. Couvrir aussi le clavier, le clic avec coordonnées CSS converties en pixels, les entrées pendant les animations et l’annulation d’une animation en cours.
 

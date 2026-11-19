@@ -70,6 +70,54 @@ const choose=level=>{$('level').value=String(level);$('level').dispatchEvent(new
 const witnesses=JSON.parse(readFileSync(resolve(root,'tests/witnesses.json'),'utf8'));
 const actionsFor=level=>{const actions=witnesses.find(w=>w.level===level)?.actions;assert.ok(actions?.length,`Missing witness ${level}`);return actions;};
 const lessonIds=['move','select','merchant-push','thief-pull','mirror-motion','platform','mirror','gate','goals'];
+/** Keep the compiled engine/UI intact; replace only the session's first room in memory. */
+const checkReflectionFixtures=async()=>{
+  const entry='const session = new DuoPuzzleSession(SS07_LEVELS);';
+  assert.equal(scripts[0].split(entry).length,2,'Exactly one compiled session entry is required for UI fixture data');
+  const cases=[
+    {name:'near hero with farther blocked landing',blockedFar:true,crate:false,tie:false},
+    {name:'near crate with farther valid landing',blockedFar:false,crate:true,tie:false},
+    {name:'equal-distance heroes exchange',blockedFar:false,crate:false,tie:true},
+  ];
+  const result=[];
+  for(const fixture of cases){
+    const cells=Array.from({length:9},(_,y)=>Array.from({length:9},(_,x)=>x===0||y===0||x===8||y===8?'#':'.'));
+    cells[2][4]=fixture.crate?'o':'M';cells[4][fixture.tie?6:7]='T';cells[4][4]='1';
+    if(fixture.crate)cells[6][1]='M';if(fixture.blockedFar)cells[1][4]='#';cells[7][1]='g';cells[7][2]='g';
+    const spec={id:'ss07-reflection-ui',title:fixture.name,rows:cells.map(row=>row.join(''))};
+    const ui=new Window({settings:{enableJavaScriptEvaluation:true}}),pending=[],delays=[];
+    let buffer=new Uint8ClampedArray(64*64*4),id=0;
+    ui.Option=function(text,value){const option=ui.document.createElement('option');option.textContent=text;option.value=value;return option;};
+    ui.HTMLCanvasElement.prototype.getContext=()=>({createImageData:(w,h)=>({data:new Uint8ClampedArray(w*h*4),width:w,height:h}),putImageData:image=>{buffer=new Uint8ClampedArray(image.data);}});
+    ui.setTimeout=(callback,delay=0,...args)=>{const token=++id;pending.push({token,callback,args});delays.push(delay);return token;};
+    ui.clearTimeout=token=>{const i=pending.findIndex(t=>t.token===token);if(i>=0)pending.splice(i,1);};
+    const drain=async()=>{for(let i=0;i<100;i++){await Promise.resolve();if(!pending.length){await Promise.resolve();if(!pending.length)return;}const next=pending.shift();next.callback(...next.args);}throw new Error('Fixture animation did not settle');};
+    const colors=new Map(PALETTE.map((hex,i)=>[parseInt(hex.slice(1),16),i]));
+    const frame=()=>Array.from({length:64},(_,y)=>Array.from({length:64},(_,x)=>{const p=(y*64+x)*4;return colors.get((buffer[p]<<16)|(buffer[p+1]<<8)|buffer[p+2]);}));
+    const tile=(x,y)=>{const f=frame(),px=2+(x+5)*3,py=2+(y+5)*3;return f.slice(py,py+3).map(row=>row.slice(px,px+3));};
+    const heroCells=()=>heroes(frame()).map(h=>({color:h.color,x:(h.data.x-3)/3-5,y:(h.data.y-3)/3-5})).sort((a,b)=>a.color-b.color);
+    try{
+      ui.document.write(html.replace(/<script>[\s\S]*?<\/script>/g,''));
+      ui.eval(scripts[0].replace(entry,`const session = new DuoPuzzleSession([${JSON.stringify(spec)}, ...SS07_LEVELS.slice(1)]);`));
+      const before=new Uint8ClampedArray(buffer),board=ui.document.getElementById('board');
+      if(!fixture.tie){
+        assert.deepEqual(tile(6,4),fixture.crate?[[1,1,1],[1,3,1],[1,1,1]]:[[3,1,3],[1,1,1],[3,1,3]],`${fixture.name}: only the near actor has the correct preview`);
+        const farColor=fixture.blockedFar?4:3;
+        assert.deepEqual(tile(4,1),Array.from({length:3},()=>[farColor,farColor,farColor]),`${fixture.name}: no farther preview`);
+      }
+      const event=new ui.KeyboardEvent('keydown',{key:' ',bubbles:true,cancelable:true});
+      assert.equal(board.dispatchEvent(event),false);assert.equal(board.dataset.busy,'true');
+      await drain();assert.equal(board.dataset.busy,'false');assert.equal(board.dataset.state,'NOT_FINISHED');
+      assert.deepEqual(delays,[70,90],`${fixture.name}: all three teleport frames are timed`);
+      assert.deepEqual(heroCells(),fixture.tie?[{color:12,x:6,y:4},{color:14,x:4,y:2}]:fixture.crate?[{color:12,x:1,y:6},{color:14,x:7,y:4}]:[{color:12,x:6,y:4},{color:14,x:7,y:4}],`${fixture.name}: public hero positions`);
+      if(fixture.crate)assert.deepEqual(tile(6,4),[[13,13,13],[13,5,13],[13,13,13]],'The nearer crate reaches its outlined destination');
+      assert.ok(ui.document.getElementById('feedback').textContent.includes('priorité au plus proche'));
+      ui.document.getElementById('undo').click();await drain();assert.deepEqual(buffer,before,`${fixture.name}: exact visual Undo`);
+      result.push({case:fixture.name,previewVerified:!fixture.tie,publicPositionsVerified:true,teleportFrames:3,exactVisualUndo:true});
+    }finally{await ui.happyDOM.close();}
+  }
+  return result;
+};
 try{
   assert.equal(SS07_LEVELS.length,8,'The SS07 release contains eight rooms');
   ref=new DuoPuzzleSession(SS07_LEVELS);
@@ -83,10 +131,14 @@ try{
   assert.deepEqual([...window.document.querySelectorAll('[data-action]')].map(b=>Number(b.dataset.action)).sort(),[1,2,3,4,5]);
   assert.deepEqual([...window.document.querySelectorAll('[data-lesson]')].map(e=>e.dataset.lesson),lessonIds);
   assert.ok($('mirror-help').textContent.includes('+ gris clair'));assert.ok($('mirror-help').textContent.includes('contour carré gris clair'));
+  assert.ok($('mirror-help').textContent.includes('seul le plus proche du miroir traverse'));assert.ok($('mirror-help').textContent.includes('À la même distance, les deux échangent leurs places'));
   assert.ok($('monster-help').textContent.includes('s’éliminent mutuellement'));assert.ok($('piston-help').textContent.includes('ils doivent être occupés ensemble'));
   assert.ok(window.document.body.textContent.includes('Appui dans l’eau · fixe'));
   assert.ok($('pull-help').textContent.includes('Un pas perpendiculaire'));assert.ok($('pull-help').textContent.includes('Le départ forcé ne tire pas'));
   report.checks.push('Five controls, nine tutorial objectives, distinct reflection previews and explicit pulling, release, water, mirror, circuit and monster rules are present');
+
+  report.reflectionPriorityCoverage=await checkReflectionFixtures();
+  report.checks.push('Compiled HTML with three in-memory room fixtures shows only the nearer hero/crate preview, ignores the farther blocked landing, preserves equal-distance exchanges, and supports exact visual Undo');
 
   let other=heroes(ref.observe().frame).find(h=>!h.selected),count=$('moves').textContent;
   clickPixel(other.data);equalFrame(ref.action(6,other.data));assert.equal($('moves').textContent,count);assert.equal($('board').dataset.selected,'thief');assert.equal(timers.length,0);

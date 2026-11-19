@@ -135,7 +135,7 @@ const hints:Record<string,string>={
   'thief-pull':'Le Voleur vert tire la pièce juste derrière lui quand il avance vers une case libre. Il ne pousse jamais. Place-toi devant la caisse puis éloigne-toi ; un pas de côté permet de la lâcher.',
   'mirror-motion':'Pousse un miroir avec le Marchand ou tire-le avec le Voleur. Son orientation ne change pas, mais ses arrivées changent : observe les marques gris clair.',
   platform:'Une caisse envoyée dans l’eau devient un appui marron avec X cyan. Ce détour peut donner accès au côté nécessaire pour tirer ou pousser une autre pièce.',
-  mirror:'Place les occupants devant la face blanche d’un miroir. Le + gris clair montre l’arrivée d’un héros, le contour carré celle d’une caisse. Espace active tous les miroirs ; ce départ ne tire pas la pièce derrière le Voleur.',
+  mirror:'Le plus proche du miroir traverse ; à la même distance, les deux occupants échangent leurs places. Le + gris clair annonce un héros, le contour carré une caisse. Espace active tous les miroirs sans déclencher la traction du Voleur.',
   gate:'Un + rose réagit au poids d’un héros ou d’un objet. Observe la porte liée : elle peut libérer le passage ou pousser en se fermant. Attention : tirer un objet hors du bouton peut relancer la presse.',
   goals:'Place les deux personnages sur les deux contours jaunes en même temps. Le premier arrivé reste sélectionnable et peut encore aider son partenaire.',
 };
@@ -190,7 +190,7 @@ function act(action:number,data?:Point):void {
   $('feedback').textContent=next.state==='GAME_OVER'?'Un personnage a été perdu. Z annule toute la séquence ; R recommence la salle.'
     :next.levelsCompleted>before.levelsCompleted?'Les deux destinations sont occupées. Salle terminée !'
     :action===6?'Personnage sélectionné. Le décor et les monstres n’avancent pas.'
-    :reflected(before,next,action)?'Reflet simultané : le Voleur quitte sa case sans tirer ce qui était derrière lui.'
+    :reflected(before,next,action)?'Reflet effectué : priorité au plus proche, échange à distance égale. Le Voleur ne tire rien pendant ce départ.'
     :action===5?'Reflet bloqué ou aucun occupant devant les faces blanches. Vérifie les arrivées et tous les miroirs.'
     :pulled(before,next,action)?'Une pièce tirée dans la case quittée par le Voleur. Un pas de côté permet de la lâcher.'
     :pushLength(before,next,action)===1?'Une pièce poussée d’une case par le Marchand.'

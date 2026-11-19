@@ -26,15 +26,25 @@
         "status": "unsolvable",
         "states": 560,
         "expanded": 560,
-        "ms": 27,
+        "ms": 4,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
         "proofScope": "Exhausted graph under the disabled capability."
       },
       {
         "option": "disableMerchantPushes",
         "status": "unsolvable",
-        "states": 8504,
-        "expanded": 8504,
-        "ms": 132,
+        "states": 8516,
+        "expanded": 8516,
+        "ms": 151,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
         "proofScope": "Exhausted graph under the disabled capability."
       },
       {
@@ -42,10 +52,17 @@
         "status": "unsolvable",
         "states": 1160,
         "expanded": 1160,
-        "ms": 34,
+        "ms": 8,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
         "proofScope": "Exhausted graph under the disabled capability."
       }
-    ]
+    ],
+    "engineVersion": "0.1.1",
+    "reviewNote": "Necessity searches rerun after selecting the nearest reflection candidate before checking destinations; equal distances retain exchange."
   },
   {
     "level": 3,
@@ -74,7 +91,12 @@
         "status": "unsolvable",
         "states": 14004,
         "expanded": 14004,
-        "ms": 322,
+        "ms": 237,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
         "proofScope": "Exhausted graph under the disabled capability."
       },
       {
@@ -82,7 +104,12 @@
         "status": "unsolvable",
         "states": 9474,
         "expanded": 9474,
-        "ms": 174,
+        "ms": 169,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
         "proofScope": "Exhausted graph under the disabled capability."
       },
       {
@@ -91,6 +118,11 @@
         "states": 46,
         "expanded": 46,
         "ms": 0,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
         "proofScope": "Exhausted graph under the disabled capability."
       }
     ],
@@ -98,7 +130,9 @@
       "walkReleases": true,
       "reflectionPreserves": true,
       "afterAction": 13
-    }
+    },
+    "engineVersion": "0.1.1",
+    "reviewNote": "Necessity searches rerun after selecting the nearest reflection candidate before checking destinations; equal distances retain exchange."
   },
   {
     "level": 4,
@@ -146,6 +180,10 @@
         "ms": 205,
         "proofScope": "Search limit; no impossibility claim."
       }
-    ]
+    ],
+    "engineVersion": "0.1.0",
+    "historical": true,
+    "checkedUnderCurrentEngine": false,
+    "reviewNote": "Historical bounded necessity searches from engine 0.1.0, not rerun for 0.1.1; limits remain inconclusive."
   }
 ]

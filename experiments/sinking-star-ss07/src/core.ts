@@ -135,17 +135,26 @@ export function planReflection(w:World,s:State):ReflectionPlan|null {
   const moves:Motion[]=[],paths:Point[][]=[],mirrorIndices:number[]=[];
   for(let mi=0;mi<s.mirrors.length;mi++){
     const mirror=s.mirrors[mi]!,arms=mirrorArms[mirror.facing];
+    const candidates:{actor:Motion['actor'];from:Point;toDir:Direction;distance:number;path:Point[]}[]=[];
     for(let side=0;side<2;side++){
       const fromDir=arms[side]!,toDir=arms[1-side]!;let from=mirror.at;const path:Point[]=[mirror.at];
       for(let distance=1;distance<20;distance++){
         from=offset(from,fromDir);if(rayBlocked(w,s,from))break;path.push(from);
         const actor=actorAt(s,from);if(!actor)continue;
-        let to=mirror.at;const destinationPath:Point[]=[];
-        for(let d=0;d<distance;d++){to=offset(to,toDir);if(rayBlocked(w,s,to))return null;destinationPath.push(to);}
-        const previous=moves.find(m=>m.actor===actor&&equal(m.from,from));
-        if(previous&&!equal(previous.to,to))return null;
-        if(!previous)moves.push({actor,from,to});paths.push([...path.reverse(),...destinationPath]);if(!mirrorIndices.includes(mi))mirrorIndices.push(mi);break;
+        candidates.push({actor,from,toDir,distance,path});break;
       }
+    }
+    // Choose by source distance before validating any destination. A farther
+    // actor stays put and its blocked landing must not veto the nearer one.
+    // Equal distances retain the symmetric exchange of the two facing actors.
+    const nearest=Math.min(...candidates.map(c=>c.distance));
+    for(const {actor,from,toDir,distance,path} of candidates){
+      if(distance!==nearest)continue;
+      let to=mirror.at;const destinationPath:Point[]=[];
+      for(let d=0;d<distance;d++){to=offset(to,toDir);if(rayBlocked(w,s,to))return null;destinationPath.push(to);}
+      const previous=moves.find(m=>m.actor===actor&&equal(m.from,from));
+      if(previous&&!equal(previous.to,to))return null;
+      if(!previous)moves.push({actor,from,to});paths.push([...path].reverse().concat(destinationPath));if(!mirrorIndices.includes(mi))mirrorIndices.push(mi);
     }
   }
   if(!moves.length)return null;

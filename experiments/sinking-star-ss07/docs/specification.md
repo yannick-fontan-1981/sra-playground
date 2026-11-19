@@ -1,4 +1,4 @@
-# SS07 — Spécification 0.1.0
+# SS07 — Spécification 0.1.1
 
 ## Contrat de la campagne
 
@@ -26,7 +26,9 @@ Une porte-plateforme occupe une cellule d’eau et suit `activeWhen`. Déployée
 
 ## Miroirs et combat
 
-Un miroir garde son orientation lorsqu’il est poussé ou tiré. Sa face blanche définit deux axes perpendiculaires. Espace / ACTION5 transfère les premiers occupants visibles de ces axes à égale distance de l’autre côté. Tous les miroirs participent à la même action. Murs, portes fermées et autres miroirs interrompent les rayons. Les destinations occupées doivent se libérer dans ce même transfert ; une collision ou un conflit invalide le reflet entier.
+Un miroir garde son orientation lorsqu’il est poussé ou tiré. Sa face blanche définit deux axes perpendiculaires. Pour chaque miroir, on compare la distance du premier occupant visible sur chacun de ses axes. **Seul le plus proche traverse**, vers l’autre axe à la même distance du miroir. L’occupant plus éloigné reste en place pour ce miroir ; son éventuelle arrivée bloquée n’empêche pas le transfert du plus proche. **Si les deux occupants sont à la même distance, ils échangent simultanément leurs places.** Cette règle vaut pour les héros, les caisses et les monstres visibles sur les axes.
+
+Espace / ACTION5 active tous les miroirs dans la même action. Murs, portes fermées et autres miroirs interrompent les rayons. Seuls les trajets et les arrivées des occupants qui partent sont vérifiés. Les destinations occupées doivent se libérer dans ce même transfert ; une collision ou un conflit invalide le reflet entier. Les prévisualisations montrent uniquement ces transferts retenus.
 
 Un départ par reflet est particulièrement utile au Voleur : il peut laisser un miroir sur un bouton sans le tirer. Le transfert simultané de deux occupants est une propriété du reflet ; SS07 n’ajoute aucune action spéciale d’échange de personnages.
 

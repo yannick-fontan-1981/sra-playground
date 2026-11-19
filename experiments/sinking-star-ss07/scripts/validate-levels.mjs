@@ -9,7 +9,8 @@ const json=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8')
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const witnesses=await json('../tests/witnesses.json');
 assert.equal(SS07_LEVELS.length,8);assert.equal(witnesses.length,8);assert.equal(LEVEL_INFO.length,8);
-const session=new DuoPuzzleSession(SS07_LEVELS),report={game:'SS07',version:'0.1.0',levels:[],totals:{},success:false};
+const {version}=await json('../package.json');
+const session=new DuoPuzzleSession(SS07_LEVELS),report={game:'SS07',version,levels:[],totals:{},success:false};
 const continuous=new Set(['walk','push','pull','reflect','piston','platform']);
 for(const [index,spec] of SS07_LEVELS.entries()){
  const design=await json(`../reference/level${index+1}-design.json`),witness=witnesses[index];

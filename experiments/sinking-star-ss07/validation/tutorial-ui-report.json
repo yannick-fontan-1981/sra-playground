@@ -31,5 +31,8 @@
       "gate",
       "goals"
     ]
-  }
+  },
+  "sourceVersion": "0.1.0",
+  "historical": true,
+  "currentValidation": "ui-dom-report.json"
 }

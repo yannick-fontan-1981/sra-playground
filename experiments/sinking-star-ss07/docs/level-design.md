@@ -1,6 +1,6 @@
 # Conception des huit niveaux SS07
 
-Version **0.1.0 / HTML v1**. Les cartes et leurs parcours sont enregistrés dans `reference/level1-design.json` à `level8-design.json`. Chaque salle contient un Marchand, un Voleur et deux destinations. Les solutions ci-dessous sont des témoins d’auteur, sans garantie d’optimalité.
+Version **0.1.1 / HTML v2**. Les cartes et leurs parcours sont enregistrés dans `reference/level1-design.json` à `level8-design.json`. Chaque salle contient un Marchand, un Voleur et deux destinations. Les solutions ci-dessous sont des témoins d’auteur, sans garantie d’optimalité.
 
 | Niveau | Titre | Actions | Poussées Marchand | Tractions Voleur | Reflets | Appuis créés |
 |---|---|---:|---:|---:|---:|---:|
@@ -61,4 +61,4 @@ Le témoin comprend trois plateformes hydrauliques, trois nouveaux appuis issus 
 
 ## Portée de la validation
 
-Les huit replays complets vérifient une arrivée des deux héros sans action bloquée ni mort. Ils totalisent **596 actions / 1 754 images** dans la session publique. Les 64 tests de règles couvrent notamment la traction, les reflets, les presses, les circuits, l’eau, le combat et Undo. La validation ne prétend ni que chaque objet est nécessaire dans toute stratégie possible, ni que le SRA a résolu les salles de façon autonome.
+Les huit replays complets vérifient une arrivée des deux héros sans action bloquée ni mort. Ils totalisent **596 actions / 1 754 images** dans la session publique. Les 73 tests de règles couvrent notamment la traction, les reflets, les presses, les circuits, l’eau, le combat et Undo. La validation ne prétend ni que chaque objet est nécessaire dans toute stratégie possible, ni que le SRA a résolu les salles de façon autonome.

@@ -131,6 +131,67 @@ test('global reflection exchanges both heroes simultaneously and preserves selec
 test('Thief-selected ACTION5 uses the same global mirror operation',()=>{
   const f=fixture({M:[5,3],T:[7,5],mirrors:[[5,5,'NE']]});const a=stepWorld(f.world,f.state,5),b=stepWorld(f.world,select(f.world,f.state,1),5);assert.deepEqual(a.heroes,b.heroes);assert.equal(b.active,1);
 });
+test('each mirror reflects only its nearer front occupant on either arm in every quadrant',()=>{
+  const arms={NE:[[0,-1],[1,0]],NW:[[0,-1],[-1,0]],SE:[[0,1],[1,0]],SW:[[0,1],[-1,0]]};
+  for(const [facing,vectors] of Object.entries(arms))for(const nearArm of [0,1]){
+    const near=vectors[nearArm],far=vectors[1-nearArm];
+    const from=[6+near[0],4+near[1]],distant=[6+3*far[0],4+3*far[1]],to=[6+far[0],4+far[1]];
+    const f=fixture({M:from,T:[2,8],stones:[distant],mirrors:[[6,4,facing]]});
+    const expected={actor:'hero',from:f.at(...from),to:f.at(...to)},plan=planReflection(f.world,f.state),d=stepDetailed(f.world,f.state,5);
+    assert.deepEqual(plan?.moves,[expected],`${facing}: nearer arm ${nearArm}`);
+    assert.equal(d.state.failed,false);assert.equal(d.state.dead,false);assert.deepEqual(d.phases.map(p=>p.kind),['reflect']);
+    assertAt(hero(d.state,'merchant').at,expected.to);assertAt(hero(d.state,'thief').at,hero(f.state,'thief').at);assert.deepEqual(d.state.stones,f.state.stones);
+  }
+});
+test('reflection distance outranks the selected hero and the kind of the nearer actor',()=>{
+  for(const [key,actor] of [['stones','stone'],['monsters','monster']]){
+    const f=fixture({M:[9,4],T:[2,8],[key]:[[6,3]],mirrors:[[6,4,'NE']]}),plan=planReflection(f.world,f.state),d=stepDetailed(f.world,f.state,5);
+    assert.deepEqual(plan?.moves,[{actor,from:f.at(6,3),to:f.at(7,4)}]);
+    assert.equal(d.state.failed,false);assert.equal(d.state.dead,false);assert.deepEqual(d.state[key],[f.at(7,4)]);
+    assert.deepEqual(d.state.heroes.map(h=>h.at),f.state.heroes.map(h=>h.at));assert.equal(d.state.active,0);assert.deepEqual(d.phases.map(p=>p.kind),['reflect']);
+  }
+});
+test('a wall, closed door, closed press or actor at the farther arrival cannot veto the nearer reflection',()=>{
+  const blockers=[
+    {walls:[[6,1]]},
+    {doors:[[6,1]],buttons:[[2,7]]},
+    {circuits:[{id:'closed',buttons:[{x:2,y:7}]}],gates:[{at:{x:6,y:1},circuit:'closed',direction:'S',closedWhen:'released'}]},
+    {stones:[[9,4],[6,1]]},
+  ];
+  for(const blocker of blockers){
+    const f=fixture({M:[6,3],T:[2,8],stones:[[9,4]],mirrors:[[6,4,'NE']],...blocker}),d=stepDetailed(f.world,f.state,5);
+    assert.deepEqual(planReflection(f.world,f.state)?.moves,[{actor:'hero',from:f.at(6,3),to:f.at(7,4)}]);
+    assert.equal(d.state.failed,false);assert.equal(d.state.dead,false);assertAt(hero(d.state,'merchant').at,f.at(7,4));
+    assert.deepEqual(d.state.stones,f.state.stones);assertAt(hero(d.state,'thief').at,hero(f.state,'thief').at);
+  }
+});
+test('a blocked nearer arrival refuses reflection instead of admitting an occupant hidden beyond the obstruction',()=>{
+  const f=fixture({M:[6,3],T:[9,4],walls:[[7,4]],mirrors:[[6,4,'NE']]}),d=stepDetailed(f.world,f.state,5);
+  assert.equal(planReflection(f.world,f.state),null);assert.equal(d.state.failed,true);assert.deepEqual(d.phases,[]);
+  assert.deepEqual(d.state.heroes,f.state.heroes);assert.equal(renderWorld(f.world,f.state).flat().includes(1),false);
+});
+test('nearest-distance selection is local to each mirror, so a second mirror may reflect a farther hero',()=>{
+  const f=fixture({M:[4,3],T:[10,3],stones:[[7,4]],mirrors:[[4,4,'NE'],[10,6,'NW']]}),d=stepDetailed(f.world,f.state,5);
+  assert.deepEqual(planReflection(f.world,f.state)?.moves,[
+    {actor:'hero',from:f.at(4,3),to:f.at(5,4)},
+    {actor:'hero',from:f.at(10,3),to:f.at(7,6)},
+  ]);
+  assert.equal(d.state.failed,false);assert.equal(d.state.dead,false);assertAt(hero(d.state,'merchant').at,f.at(5,4));assertAt(hero(d.state,'thief').at,f.at(7,6));assert.deepEqual(d.state.stones,f.state.stones);
+});
+test('a selected transfer blocked at another mirror still cancels the global action atomically',()=>{
+  const f=fixture({M:[4,3],T:[10,3],stones:[[7,4]],walls:[[7,6]],mirrors:[[4,4,'NE'],[10,6,'NW']]}),d=stepDetailed(f.world,f.state,5);
+  assert.equal(planReflection(f.world,f.state),null);assert.equal(d.state.failed,true);assert.deepEqual(d.phases,[]);
+  assert.deepEqual(d.state.heroes,f.state.heroes);assert.deepEqual(d.state.stones,f.state.stones);
+});
+test('equal-distance hero and crate occupants still exchange simultaneously in all four quadrants',()=>{
+  const cases=[['NE',[6,2],[8,4]],['NW',[6,2],[4,4]],['SE',[6,6],[8,4]],['SW',[6,6],[4,4]]];
+  for(const [facing,M,stone] of cases){
+    const f=fixture({M,T:[2,8],stones:[stone],mirrors:[[6,4,facing]]}),plan=planReflection(f.world,f.state),d=stepDetailed(f.world,f.state,5);
+    assert.equal(plan?.moves.length,2,facing);assert.equal(d.state.failed,false);assert.equal(d.state.dead,false);
+    assertAt(hero(d.state,'merchant').at,f.at(...stone));assert.deepEqual(d.state.stones,[f.at(...M)]);
+    assert.equal(d.state.active,0);assert.equal(d.phases[0].moves.length,2);assert.equal(transitionFrames(f.world,f.state,d.state,5).length,3);
+  }
+});
 test('a blocked reflection endpoint cancels the entire global reflection',()=>{
   const f=fixture({M:[5,3],T:[2,6],mirrors:[[5,5,'NE']],walls:[[7,5]]});assert.equal(planReflection(f.world,f.state),null);const s=stepWorld(f.world,f.state,5);assert.equal(s.failed,true);assert.deepEqual(s.heroes,f.state.heroes);
 });
@@ -173,6 +234,22 @@ test('reflection has three frames and a gray plus for hero destinations',()=>{
 });
 test('crate reflection preview is a gray square outline and directional push has no preview',()=>{
   const f=fixture({stones:[[5,3]],mirrors:[[5,5,'NE']]});const p=cellToPixel(f.at(7,5)),frame=renderWorld(f.world,f.state);assert.equal(frame[p.y][p.x],1);assert.equal(frame[p.y+1][p.x+1],3);assert.equal(frame[p.y+2][p.x+2],1);const push=fixture({stones:[[3,2]]});assert.equal(renderWorld(push.world,push.state).flat().includes(1),false);
+});
+test('public reflection preview shows only the nearer hero plus and matches its animated transfer',()=>{
+  const f=fixture({M:[6,3],T:[2,8],stones:[[9,4]],mirrors:[[6,4,'NE']]}),session=new DuoPuzzleSession([f.spec]),before=session.observe();
+  const tile=(frame,x,y)=>{const p=cellToPixel(f.at(x,y));return frame.slice(p.y,p.y+3).map(row=>row.slice(p.x,p.x+3));};
+  assert.deepEqual(tile(before.frame,7,4),[[3,1,3],[1,1,1],[3,1,3]]);
+  assert.deepEqual(tile(before.frame,6,1),[[3,3,3],[3,3,3],[3,3,3]]);assert.equal(before.frame.flat().filter(c=>c===1).length,5);
+  const state=stepWorld(f.world,f.state,5),after=session.action(5);
+  assertAt(hero(state,'merchant').at,f.at(7,4));assert.deepEqual(state.stones,f.state.stones);assert.equal(after.frames.length,3);
+  assert.deepEqual(after.frame,renderWorld(f.world,state));assert.deepEqual(after.frames.at(-1),after.frame);
+});
+test('public reflection preview shows only the nearer crate outline while the farther hero stays put',()=>{
+  const f=fixture({M:[9,4],T:[2,8],stones:[[6,3]],mirrors:[[6,4,'NE']]}),frame=renderWorld(f.world,f.state);
+  const tile=(x,y)=>{const p=cellToPixel(f.at(x,y));return frame.slice(p.y,p.y+3).map(row=>row.slice(p.x,p.x+3));};
+  assert.deepEqual(tile(7,4),[[1,1,1],[1,3,1],[1,1,1]]);assert.deepEqual(tile(6,1),[[3,3,3],[3,3,3],[3,3,3]]);
+  assert.equal(frame.flat().filter(c=>c===1).length,8);
+  const state=stepWorld(f.world,f.state,5);assert.deepEqual(state.stones,[f.at(7,4)]);assert.deepEqual(state.heroes.map(h=>h.at),f.state.heroes.map(h=>h.at));
 });
 test('combat keeps all five phases after a movement with explicit durations',()=>{
   const f=fixture({M:[4,2],monsters:[[4,3],[5,3]]}),session=new DuoPuzzleSession([f.spec]),obs=session.action(4);assert.equal(obs.state,'GAME_OVER');assert.equal(obs.frames.length,8);assert.deepEqual(obs.frameDurationsMs,[60,80,40,80,90,100,110,0]);assert.deepEqual(obs.frames.at(-1),obs.frame);assert.notDeepEqual(obs.frames[3],obs.frames[4]);assert.notDeepEqual(obs.frames[4],obs.frames[5]);assert.equal(session.action(1).state,'GAME_OVER');
