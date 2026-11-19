@@ -2646,3 +2646,11 @@ Le niveau 8 gagne en **138 commandes SIC seul et 76,28 s** au budget de 360 s de
 SIC mesure deux curseurs, deux types de récepteurs, des bandes de recoloration et une patrouille. Il compare des trajets qui anticipent le déplacement de la patrouille et prévoit l’occupation des deux sièges au même retour. La première occupation à la commande 7 reste provisoire. À la commande 11, un curseur quitte son siège pendant que l’autre se met en position. Le dernier mouvement réunit les deux conditions de victoire.
 
 L’ancienne exploration s’arrête après 516 commandes depuis la même sauvegarde. La nouvelle démarche gagne en **15 commandes SIC seul et 13,51 s** au budget de référence de 720 s de temps actif et 600 commandes avec un seul processus. Les 15 commandes et leurs retours correspondent exactement entre la reprise et le rejeu chronologique. Les **656 commandes des niveaux 1 à 8**, leurs retours et leurs animations gardent les empreintes de référence. TypeScript et les 83 tests ciblés passent. Empreinte `3d6d59e2c4b1234ae5759229362cf4eceae066a9f52391fa4703522801f37d63`.
+
+### BP35 niveau 9 — Reprendre une construction de supports à travers plusieurs inversions
+
+La mémoire du niveau 8 transmet la matière propagative confirmée. À chaque clic, SIC simule l'ouverture et les appuis créés, puis impose un atterrissage vérifiable. Avant de connaître la sortie, il tient compte du trajet jusqu'aux ouvertures visibles dans une barrière dangereuse. Un conduit fermé dans le sens exploré peut justifier un nouveau plan dans l'autre sens si le prochain arrêt est connu.
+
+Un déplacement latéral peut aligner le terrain sur les supports inchangés quand les murs fournissent trop peu de repères. Pour une inversion dont le clic sort du champ, le moteur vérifie aussi son retrait dans une image alignée de l'animation.
+
+Le rejeu chronologique atteint `WIN` en **110 commandes au niveau 9**, en **68,37 s** avec un worker. Les **287 commandes** et leurs retours des niveaux 1 à 8 ont les mêmes empreintes. Depuis la sauvegarde, la famille SIC produit les mêmes 110 commandes et le même résultat final. L'empreinte de la trajectoire est `2bb8a8821410f494a366540b02717f15aa4324f6038e8440742ed5a748419735`. La vérification s'arrête à la victoire du niveau 9.
