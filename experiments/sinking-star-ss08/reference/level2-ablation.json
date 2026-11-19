@@ -1,0 +1,27 @@
+{
+  "level": 2,
+  "interpretation": "unsolvable means exhaustive queue exhaustion under the blocked transition family; limit is inconclusive, solved identifies a concrete shortcut. Filtering swaps does not emulate an alternative walking power.",
+  "checks": [
+    {
+      "flag": "disableMerchantPushes",
+      "status": "limit",
+      "states": 65000,
+      "expanded": 49667,
+      "ms": 1484
+    },
+    {
+      "flag": "disableWizardSwaps",
+      "status": "limit",
+      "states": 65000,
+      "expanded": 53627,
+      "ms": 969
+    },
+    {
+      "flag": "disableReflections",
+      "status": "limit",
+      "states": 65000,
+      "expanded": 50803,
+      "ms": 709
+    }
+  ]
+}

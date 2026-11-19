@@ -1,0 +1,375 @@
+{
+  "spec": {
+    "id": "ss08-04",
+    "title": "Le miroir et son échafaudage",
+    "rows": [
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~",
+      "~~.....~~~.~~~~~",
+      "~~.....~~~.~~~~~",
+      "~~.....~~~~o.~~~",
+      "~~.....~~~...~~~",
+      "~~.M...~~~W..~~~",
+      "~~.....~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~gg.~~~",
+      "~~~~~~~~~~...~~~",
+      "~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 11,
+          "y": 8
+        },
+        "facing": "SW"
+      }
+    ]
+  },
+  "commands": "CLCRRUULRDLDLUUUDDDXDLLCUUUUXRCULX",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "hub": "https://sinkingstarwalkthrough.com/fr/crossovers/",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-32",
+    "puzzle": 32,
+    "idea": "Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie.",
+    "kind": "adaptation de principe",
+    "label": "Adaptation de Heroes and Mirrors 32 · Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie.",
+    "piston": false,
+    "platform": false,
+    "objective": "Déplacer un miroir le long d’une passerelle, utiliser les emplacements de côté et choisir son stationnement final pour garder une sortie."
+  },
+  "metrics": {
+    "actions": 34,
+    "selections": 4,
+    "merchantPushes": 5,
+    "wizardSwaps": 1,
+    "bentSwaps": 0,
+    "heroSwaps": 1,
+    "chainPushes": 0,
+    "stoneMoves": 1,
+    "mirrorMoves": 4,
+    "reflections": 3,
+    "heroReflections": 3,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Magicien livre le Marchand dans le chantier isolé",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 10
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Un appui pour le virage du miroir",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 10
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le miroir monte dans la seule colonne utile",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand revient par le reflet intermédiaire",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien libère la première cible",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": "Passerelle et îlots redessinés ; le Magicien échange avec son partenaire pour livrer le seul pousseur sur le chantier ; un bloc noyé construit le virage ; le miroir sert d’abord au retour puis à la traversée finale des deux héros."
+}

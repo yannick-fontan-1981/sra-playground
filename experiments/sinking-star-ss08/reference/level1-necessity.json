@@ -1,0 +1,56 @@
+{
+  "source": "reference/level1-design.json",
+  "specSha256": "21eb40d184f6906763adf8f94e6ed41b9dd0410ccc5f76a5160e5e2aa4ebb555",
+  "proofPolicy": "Only exhausted searches prove impossibility. State or time limits are inconclusive; no uniqueness or optimality is claimed.",
+  "checks": [
+    {
+      "option": "disableWizardSwaps",
+      "status": "unsolvable",
+      "states": 924,
+      "expanded": 924,
+      "ms": 44
+    },
+    {
+      "option": "disableMerchantPushes",
+      "status": "unsolvable",
+      "states": 21252,
+      "expanded": 21252,
+      "ms": 585
+    },
+    {
+      "option": "disablePistons",
+      "status": "unsolvable",
+      "states": 22656,
+      "expanded": 22656,
+      "ms": 558
+    },
+    {
+      "option": "disablePlatforms",
+      "status": "unsolvable",
+      "states": 21252,
+      "expanded": 21252,
+      "ms": 382
+    },
+    {
+      "option": "disableMirrorMotion",
+      "status": "unsolvable",
+      "states": 65520,
+      "expanded": 65520,
+      "ms": 1044
+    },
+    {
+      "option": "disableReflections",
+      "status": "limit",
+      "states": 150000,
+      "expanded": 128183,
+      "ms": 2035
+    },
+    {
+      "option": "disableHeroReflections",
+      "status": "limit",
+      "states": 150000,
+      "expanded": 127090,
+      "ms": 2091
+    }
+  ]
+}
