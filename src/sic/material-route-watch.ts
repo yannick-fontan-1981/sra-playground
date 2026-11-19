@@ -4,13 +4,27 @@ import type { NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Point = AlternatingPosition;
 type Removal = { guard_histogram: number[][]; size: number };
-export type GuardWatch = { body: number; target: Point; evidence: string[] };
+type FollowingTrace = { distance: number; trail: Point[]; confirmations: number; activation: string };
+export type GuardWatch = { body: number; target: Point; evidence: string[]; following?: FollowingTrace };
 export type GuardWatchStep = { input: string; to: Point; guard: AlternatingGuard; body: number; alternatives: Point[];
-  target: Point; evidence: string[]; capture?: AlternatingGuard };
+  target: Point; evidence: string[]; capture?: AlternatingGuard; sight?: Point[]; following?: FollowingTrace };
 const key = (point: Point) => point.join(',');
 const point = (id: string): Point => id.split(',').map(Number) as unknown as Point;
 const box = ([y, x]: Point, size: number): AlternatingBox => [y, x, y + size - 1, x + size - 1];
 const equal = (left: unknown, right: unknown) => JSON.stringify(left) === JSON.stringify(right);
+
+export function guardSightline(graph: AlternatingTopology, guard: AlternatingGuard, limit: number): Point[] {
+  const [y, x] = guard.position, [dy, dx] = [guard.front[0] - y, guard.front[1] - x];
+  const line: Point[] = [];
+  let previous = guard.position;
+  for (let index = 1; index <= limit; index++) {
+    const next: Point = [y + index * dy, x + index * dx];
+    if (!graph.edges.get(key(previous))?.has(key(next))) break;
+    line.push(next);
+    previous = next;
+  }
+  return line;
+}
 
 /** Keep the immediate step clear of an unfamiliar guard and its possible next positions. */
 export function planGuardWatch(graph: AlternatingTopology, actor: AlternatingActor, controls: Readonly<Record<string, Point>>,
@@ -29,7 +43,14 @@ export function planGuardWatch(graph: AlternatingTopology, actor: AlternatingAct
   const start: Point = [actor.bbox[0], actor.bbox[1]];
   const queue: Search[] = [{ at: start, cleared: 0, depth: 0 }], seen = new Set([key(start) + '/0']);
   for (const state of queue) {
-    if (key(state.at) === key(graph.target)) return state.first ?? null;
+    if (key(state.at) === key(graph.target)) {
+      const first = state.first;
+      if (!first) return null;
+      const sight = guardSightline(graph, guard, 4);
+      const arrival = sight.findIndex(position => key(position) === key(first.to));
+      return { ...first, ...(arrival >= 0 ? { sight: sight.slice(0, arrival + 1) } : {}),
+        ...(watch?.following ? { following: watch.following } : {}) };
+    }
     if (state.depth >= remaining || seen.size >= 2_048) continue;
     const active = fixed.map((candidate, index) => ({ candidate, index })).filter(({ index }) => !(state.cleared & (1 << index)));
     for (const [input, [dy, dx]] of moves) {
@@ -66,6 +87,14 @@ export function observeGuardWatch(step: GuardWatchStep, actor: AlternatingActor,
   }
   const changedMark = !equal(next.histogram, step.guard.histogram);
   const moved = key(position) !== key(step.guard.position);
-  return { watch: { body: step.body, target: step.target, evidence: [...step.evidence.slice(-4), ref] },
+  const previous = step.following;
+  let following: FollowingTrace | undefined;
+  if (moved && previous?.trail.length && key(position) === key(previous.trail[0]!)) {
+    following = { ...previous, trail: [...previous.trail.slice(1), step.to], confirmations: previous.confirmations + 1 };
+  } else if (!moved && changedMark && step.sight && step.sight.length >= 2) {
+    following = { distance: step.sight.length, trail: step.sight, confirmations: 0, activation: ref };
+  }
+  return { watch: { body: step.body, target: step.target, evidence: [...step.evidence.slice(-4), ref],
+    ...(following ? { following } : {}) },
     reason: moved ? 'guard_movement_observed' : changedMark ? 'guard_marker_changed_in_place' : 'guard_remained_in_place' };
 }

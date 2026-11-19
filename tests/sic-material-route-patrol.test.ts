@@ -4,6 +4,7 @@ import type { AlternatingActor } from '../src/logos-engine/v6-alternating-graph-
 import type { AlternatingTopology } from '../src/logos-engine/v6-alternating-graph-questions.ts';
 import { planPatrolGroup, planPatrolStep, type PatrolGroupMemory, type PatrolMemory } from '../src/sic/material-route-patrol.ts';
 import { planGuardWatch } from '../src/sic/material-route-watch.ts';
+import { planGuardDiversion, type GuardDiversion } from '../src/sic/material-route-diversion.ts';
 
 test('an unfamiliar guard excludes its adjacent tiles from the immediate move', () => {
   const edges = new Map<string, Set<string>>([
@@ -85,4 +86,48 @@ test('a hidden patrol stays in the forecast while a different guard is approache
   const step = planPatrolGroup(graph, actor, controls, histogram, known, 4, [{ size: 1, guard_histogram: fixed }]);
   assert.deepEqual(step?.capture?.position, [2, 1]);
   assert.deepEqual(step?.expected, [[0, 1], [0, 3]]);
+});
+
+test('a following guard is drawn out of a cut vertex only when the player can return around it', () => {
+  const links = [
+    ['0,1', '0,2'], ['0,2', '1,2'], ['1,2', '2,2'], ['2,2', '2,1'], ['2,1', '2,0'],
+    ['2,0', '3,0'], ['3,0', '3,1'], ['3,1', '3,2'], ['3,2', '2,2'],
+  ] as const;
+  const edges = new Map<string, Set<string>>();
+  for (const [a, b] of links) {
+    if (!edges.has(a)) edges.set(a, new Set());
+    if (!edges.has(b)) edges.set(b, new Set());
+    edges.get(a)!.add(b);
+    edges.get(b)!.add(a);
+  }
+  const controls = { up: [-1, 0], down: [1, 0], left: [0, -1], right: [0, 1] } as const;
+  const profile = { body: 8, distance: 2, evidence: ['marker changed', 'followed the previous route'] };
+  const guard = { position: [0, 2] as const, front: [1, 2] as const, bbox: [0, 2, 1, 3] as const, histogram: [[8, 3], [9, 1]] };
+  const graph: AlternatingTopology = { nodes: new Set(edges.keys()), edges, target: [0, 1], pitch: 1, first: 0, guards: [guard] };
+  const actor: AlternatingActor = { size: 2, bbox: [3, 1, 4, 2], histogram: [[5, 3], [6, 1]] };
+  assert.equal(planGuardWatch(graph, actor, controls, [], 18), null);
+  const withoutReturn = new Map([...edges].map(([point, neighbours]) => [point, new Set(neighbours)]));
+  withoutReturn.get('3,1')!.delete('3,2');
+  withoutReturn.get('3,2')!.delete('3,1');
+  assert.equal(planGuardDiversion({ ...graph, edges: withoutReturn }, actor, controls, [], profile, 18), null);
+
+  let player = actor, follower = graph.guards[0]!, memory: GuardDiversion | undefined, awakened = 0;
+  for (let remaining = 18; remaining > 0; remaining--) {
+    if (player.bbox[0] === graph.target[0] && player.bbox[1] === graph.target[1]) break;
+    const step = planGuardDiversion({ ...graph, guards: [follower] }, player, controls, [], profile, remaining, memory);
+    assert.ok(step);
+    assert.notDeepEqual(step.to, follower.position);
+    assert.notDeepEqual(step.to, step.expected);
+    if (step.awakening) {
+      awakened++;
+      assert.deepEqual(step.to, [2, 2]);
+      assert.deepEqual(step.expected, [0, 2]);
+    }
+    follower = { ...follower, position: step.expected };
+    const [y, x] = step.to;
+    player = { ...player, bbox: [y, x, y + 1, x + 1] };
+    memory = { target: step.target, passage: step.passage, trail: step.trail, evidence: step.evidence };
+  }
+  assert.equal(awakened, 1);
+  assert.deepEqual(player.bbox.slice(0, 2), graph.target);
 });
