@@ -2624,3 +2624,11 @@ Le retour permet de reconnaître le transporteur au bord inférieur même si une
 À la commande 34, le défilement révèle que deux plots attribués au sol sont transportés. SIC corrige leur rôle dans la carte et conserve cette relation quand le cadre remonte. Les quatre auxiliaires restent disponibles comme relais. La commande 68 réunit les deux jetons à réduire.
 
 Le niveau 8 gagne en **68 commandes SIC seul et 123,18 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 68 commandes. Les **482 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 550 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 139 vérifications ciblées passent. Empreinte `37086d7751cee447516433471a0d0312c91b5d7910949818c8a94bfea37f1799`.
+
+### SU15 niveau 8
+
+SIC lit les deux légendes du bandeau et distingue les deux carrés demandés du glyphe mobile. Il identifie les quatre récepteurs par leur géométrie et vérifie les effets après chaque clic. Les formes et les rangs proviennent des légendes et les commandes de rapprochement réutilisent le rayon mesuré aux niveaux précédents.
+
+Le premier clic vérifie la fusion des deux carrés et le deuxième met le produit en réserve. Le troisième confirme que la paire choisie produit le glyphe affiché et que le mobile écarté reste disponible. SIC dirige ce dernier vers le carré de rang supérieur. Le deuxième carré demandé apparaît à la commande 7. SIC gare ensuite ce carré en préservant le premier et ramène le glyphe vers son récepteur après sa dérive.
+
+Le niveau 8 gagne en **15 clics SIC seul et 8,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 15 clics. Les **94 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 109 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les trois tests de production et de livraison passent. Empreinte `39a57daf7b867bd15ed78ebeef1d127652f71347686ade7e58f832e8a406b576`.
