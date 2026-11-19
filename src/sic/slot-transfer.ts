@@ -1,6 +1,6 @@
 import { measureSlotLayout, readSlotState, type SlotState } from '../logos-engine/v6-slot-substitution.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
@@ -14,7 +14,8 @@ export const slotTransferStrategies = {
   place_selected_token: 'Put the selected token into its matching slot',
   submit_completed_sequence: 'Submit the filled sequence',
 } as const;
-type Layout = { targets: number[]; slots: NativeBox[]; inventory: NativeBox[]; hues: number[]; word: number[]; neutral_borders: number[][] } | PortableSlotLayout;
+export type VisibleSlotLayout = { targets: number[]; slots: NativeBox[]; inventory: NativeBox[]; hues: number[]; word: number[]; neutral_borders: number[][] } | PortableSlotLayout;
+type Layout = VisibleSlotLayout;
 type Stage = 'select_matching_token' | 'place_selected_token' | 'submit_completed_sequence';
 type Move = { stage: Stage; command: NativeCommand; expected: SlotState<SlotValue> | null; source: NativeBox | null; destination: NativeBox | null; call?: true };
 type Witness = Stage | `call:${Stage}`;
@@ -22,6 +23,14 @@ type State = { epoch: number; layout: Layout; evidence: string[]; stopped: boole
 type Proposal = NativeProposal & { local: State; move: Move; needId: string };
 const sameState = (a: SlotState<SlotValue>, b: SlotState<SlotValue> | null) => b !== null && JSON.stringify(a) === JSON.stringify(b);
 const readState = (rows: NativeRows, layout: Layout) => 'portable' in layout ? readPortableSlotState(rows, layout) : readSlotState(rows, layout);
+export const measureVisibleSlotLayout = (observation: NativeObservation, rows: NativeRows): Layout | null =>
+  (measureSlotLayout(observation, rows) as Layout | null) ?? measurePortableSlotLayout(observation, rows);
+export const matchesVisibleSlotMove = (rows: NativeRows, layout: Layout, move: Move): boolean =>
+  move.expected !== null && sameState(move.expected, readState(rows, layout));
+export function chooseVisibleSlotMove(rows: NativeRows, layout: Layout, submit: NativeCommand): Move | null {
+  const state = readState(rows, layout);
+  return state ? transferOffer(layout, state, submit) : null;
+}
 const witness = (move: Move): Witness => move.call ? `call:${move.stage}` : move.stage;
 const point = ([l, t, r, b]: NativeBox): NativePoint => [Math.floor((l + r) / 2), Math.floor((t + b) / 2)];
 const click = (box: NativeBox): NativeCommand => {
@@ -60,13 +69,11 @@ export function createSicSlotTransfer(): NativeFamily<Proposal> {
       if (buttons.length !== 1) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped) return null;
-      const layout = prior?.layout ?? (measureSlotLayout(observation, rows) as Layout | null) ?? measurePortableSlotLayout(observation, rows);
+      const layout = prior?.layout ?? measureVisibleSlotLayout(observation, rows);
       if (!layout) return null;
       const ref = observation.observation_ref;
       const local = prior ?? { epoch: observation.level_epoch, layout, evidence: [ref], stopped: false };
-      const current = readState(rows, layout);
-      if (!current) return null;
-      const move = transferOffer(layout, current, buttons[0]!);
+      const move = chooseVisibleSlotMove(rows, layout, buttons[0]!);
       if (!move) return null;
       const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';

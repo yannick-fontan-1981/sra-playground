@@ -9,7 +9,9 @@ export const verifyLinkedMotionId = 'sic_verify_linked_motion';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Mark = { point: NativePoint; box: NativeBox; color: number };
-type Layout = { side: number; carrierColor: number; carrierMask: string; selectorMask: string; goal: NativePoint; goalBox: NativeBox; ground: number; activeColor: number };
+export type LinkedMarkerLayout = { side: number; carrierColor: number; carrierMask: string; selectorMask: string;
+  goal: NativePoint; goalBox: NativeBox; ground: number; activeColor: number };
+type Layout = LinkedMarkerLayout;
 type Scene = { actor: Mark; active: Mark; passive: Mark };
 type Memory = { epoch: number; layout: Layout; coupling: string | null; switches: string[]; tried: string[]; count: number };
 type Intent = 'measure' | 'select' | 'align';
@@ -46,7 +48,7 @@ export function findLinkedGoal(parts: readonly Pick<Part, 'color' | 'area' | 'bb
   return candidates.size === 1 ? [...candidates.values()][0]! : null;
 }
 
-function readScene(parts: Part[], layout: Layout): Scene | null {
+export function readLinkedMarkerScene(parts: Part[], layout: Layout): Scene | null {
   const actors = parts.filter(p => p.color === layout.carrierColor && JSON.stringify(p.mask) === layout.carrierMask);
   const markers = parts.filter(p => width(p.bbox) === layout.side && height(p.bbox) === layout.side && JSON.stringify(p.mask) === layout.selectorMask);
   const active = markers.filter(p => p.color === layout.activeColor), passive = markers.filter(p => p.color !== layout.activeColor);
@@ -54,7 +56,7 @@ function readScene(parts: Part[], layout: Layout): Scene | null {
     ? { actor: mark(actors[0]!), active: mark(active[0]!), passive: mark(passive[0]!) } : null;
 }
 
-function initial(parts: Part[], rows: NativeRows): Layout | null {
+export function measureLinkedMarkerLayout(parts: Part[], rows: NativeRows): Layout | null {
   const ground = parts.find(p => p.area > rows.length * rows[0]!.length * 0.65);
   if (!ground) return null;
   const options: Layout[] = [];
@@ -113,9 +115,9 @@ export function createSicVerifyLinkedMotion(): NativeFamily<Proposal> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const parts = geometricComponents(rows), prior = memory?.epoch === observation.level_epoch ? memory : null;
-      const layout = prior?.layout ?? initial(parts, rows);
+      const layout = prior?.layout ?? measureLinkedMarkerLayout(parts, rows);
       if (!layout || (prior?.count ?? 0) >= 16) return null;
-      const scene = readScene(parts, layout);
+      const scene = readLinkedMarkerScene(parts, layout);
       if (!scene) return null;
       const local = prior ?? { epoch: observation.level_epoch, layout, coupling: null, switches: [], tried: [], count: 0 };
       const candidate = proposalPoint(rows, scene, local);
@@ -163,7 +165,7 @@ export function createSicVerifyLinkedMotion(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const next = readScene(geometricComponents(second), proposal.local.layout);
+      const next = readLinkedMarkerScene(geometricComponents(second), proposal.local.layout);
       const selected = proposal.intent === 'select';
       const matched = !!next && same(next.actor.point, proposal.prediction) && same(next.active.point, proposal.target)
         && same(next.passive.point, selected ? proposal.scene.active.point : proposal.scene.passive.point);
@@ -172,7 +174,7 @@ export function createSicVerifyLinkedMotion(): NativeFamily<Proposal> {
     record(before, after, _action, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, scene, target, prediction, intent } = proposal;
-      const next = readScene(geometricComponents(second), local.layout);
+      const next = readLinkedMarkerScene(geometricComponents(second), local.layout);
       const moved = !!next && same(next.actor.point, prediction) && same(next.active.point, target);
       memory = { ...local, count: local.count + 1,
         coupling: moved && intent !== 'select' ? after.observation_ref : local.coupling,

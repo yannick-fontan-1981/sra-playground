@@ -19,6 +19,14 @@ import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, typ
 import { assessPressurePlan, choosePressureReserve, observePressureReserve, retainPressureReserve,
   type PressurePlan, type PressureReserve } from './observed-pressure-reserve.ts';
 import { sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
+import { chooseObservedClickFocus, type ObservedClickFocus } from './observed-click-focus.ts';
+import { chooseJointInput, observeJointInput, type JointProposal, type ObservedJointInput } from './observed-joint-input.ts';
+import { chooseReferenceSearch, observeReferenceView, type ReferenceView } from './observed-reference-search.ts';
+import { chooseLinkedTarget, observeLink, type MeasuredLink } from './observed-linked-target.ts';
+import { choosePanelPreparation } from './observed-panel-preparation.ts';
+import { chooseOrderedEntry, observeOrderedEntry, type EntryProposal, type OrderedEntry } from './observed-ordered-entry.ts';
+import { chooseVisibleSlotMove, matchesVisibleSlotMove, measureVisibleSlotLayout, slotTransferStrategies,
+  type VisibleSlotLayout } from './slot-transfer.ts';
 import { countChangesInside, workspaceClickCandidate } from './workspace-click.ts';
 import { commandPanelState, visibleCommandPanel, type VisibleCommandPanel } from './visible-command-panel.ts';
 import { canReachPanelMarker, confirmsPanelTranslation, containsBox, learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, matchingPanelMarker, panelActor,
@@ -41,6 +49,7 @@ export const publicInputStrategies = {
   plan_observed_placement: 'Plan simultaneous placement from a measured interaction',
   test_mark_contact: 'Test the effect of reaching a visible marked cell',
   plan_pressure_reserve: 'Reserve a weight for the gate and use the observed crossing',
+  test_emphasized_control: 'Test the visibly emphasized control after clicks leave the board unchanged',
   test_marked_edit: 'Test the edit suggested by the visible marks',
   test_edited_collection: 'Test the effect of the verified edit',
   test_repeated_target: 'Test a target from a repeated group',
@@ -50,15 +59,17 @@ export const publicInputStrategies = {
   compare_public_input: 'Test an available command on this board',
   revisit_input_frontier: 'Revisit a board with an untested command',
 } as const;
-const order = ['plan_pressure_reserve', 'plan_observed_exchange', 'plan_observed_placement', 'test_mark_contact', 'P05', 'recheck_controls_after_change',
+const order = ['plan_pressure_reserve', 'plan_observed_exchange', 'plan_observed_placement', 'test_mark_contact', 'test_emphasized_control',
+  'P05', 'recheck_controls_after_change',
   'test_marked_edit', 'test_edited_collection', 'test_workspace_target',
   'test_repeated_marker', 'test_repeated_target', 'compare_public_input', 'revisit_input_frontier'] as const;
-const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 11, order: 'FALLBACK', priorities: order,
+const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 12, order: 'FALLBACK', priorities: order,
   strategies: {
     plan_pressure_reserve: [{ fact: 'pressureReserveRoute', expected: true, label: 'Measured coupling and pressure provide a route to preserve a weight and use the crossing' }],
     plan_observed_exchange: [{ fact: 'exchangeRoute', expected: true, label: 'An observed exchange moves the two participants to each other’s previous position' }],
     plan_observed_placement: [{ fact: 'placementRoute', expected: true, label: 'Measured coupled movement permits a route to cover the visible targets' }],
     test_mark_contact: [{ fact: 'markedContactRoute', expected: true, label: 'An untested marked cell is reachable using measured movement' }],
+    test_emphasized_control: [{ fact: 'emphasizedControl', expected: true, label: 'A single outlined control stands out on this board' }],
     P05: [{ fact: 'clickedControl', expected: true, label: 'A click changed a piece after directional commands failed to move it' }],
     recheck_controls_after_change: [{ fact: 'changedControlContext', expected: true, label: 'Previously stationary directions can be rechecked after a visible interface change' }],
     test_marked_edit: [{ fact: 'markedEdit', expected: true, label: 'A visible mark suggests a testable change to the collection' }],
@@ -69,7 +80,7 @@ const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 
     compare_public_input: [{ fact: 'untestedHere', expected: true, label: 'An available illustrated input has no return on this board' }],
     revisit_input_frontier: [{ fact: 'observedRoute', expected: true, label: 'Previously observed returns lead to an untested input' }],
   },
-}, ['pressureReserveRoute', 'exchangeRoute', 'placementRoute', 'markedContactRoute', 'clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'workspaceTarget',
+}, ['pressureReserveRoute', 'exchangeRoute', 'placementRoute', 'markedContactRoute', 'emphasizedControl', 'clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'workspaceTarget',
   'repeatedMarker', 'repeatedTarget', 'untestedHere', 'observedRoute']);
 const explorationLimit = 40;
 const clickLimit = 30;
@@ -117,6 +128,12 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   coverage?: CoverageLearning;
   exchange?: ObservedExchange;
   pressureReserve?: PressureReserve;
+  clickFocus?: { accent: number; ref: string };
+  jointInput?: ObservedJointInput;
+  referenceView?: ReferenceView;
+  measuredLink?: MeasuredLink;
+  orderedEntry?: OrderedEntry;
+  slotTransfer?: { layout: VisibleSlotLayout; ref: string };
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
   coveragePlacement?: true;
@@ -124,6 +141,10 @@ type Proposal = NativeProposal & { source: string; candidates: string[]; expecte
   exchangePlan?: ExchangePlan;
   markContact?: MarkContact;
   pressurePlan?: PressurePlan;
+  clickFocus?: ObservedClickFocus;
+  jointPlan?: JointProposal;
+  entryPlan?: EntryProposal;
+  slotPlan?: { layout: VisibleSlotLayout; move: NonNullable<ReturnType<typeof chooseVisibleSlotMove>> };
   clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string;
   panel?: Pick<VisibleCommandPanel, 'area' | 'panel'>; panelTest?: string;
   panelApproach?: PanelApproach; panelComparison?: PanelMarkerTrial; panelContact?: PanelContactApproach;
@@ -467,7 +488,7 @@ function panelTestKey(command: string, rows: NativeRows, box: NativeBox | null |
   return `${command}:${rows.slice(top, bottom + 1).map(row => row.slice(left, right + 1).join(',')).join('/')}`;
 }
 
-export function createSicPublicInputExploration(): NativeFamily<Proposal> {
+export function createSicPublicInputExploration(fallback = false): NativeFamily<Proposal> {
   let state = initial();
   let decide: NativeProgramHandle | undefined;
   return {
@@ -489,6 +510,8 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const panel = nonPoint.length > 1 && observation.available_action_refs.includes('ACTION6') ? visibleCommandPanel(rows) : null;
       const pressure = !panel ? choosePressureReserve(local.pressureReserve, local.travel, rows, nonPoint) : undefined;
       const pressureKey = pressure?.command.action_ref;
+      const joint = fallback && !panel && !pressure ? chooseJointInput(local.jointInput, rows, nonPoint, remaining) : undefined;
+      const jointKey = joint?.command.action_ref;
       const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows) : undefined;
       const exchangeKey = exchange?.command.action_ref;
       const coverage = !panel && !pressure && !exchange && local.coverage?.body ? chooseCoverage(local.coverage, local.travel, rows) : undefined;
@@ -497,14 +520,40 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const markKey = markTrial?.command.action_ref;
       const travel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
-      const budget = panel || travel || coverage || exchange || markTrial || pressure ? remaining : Math.min(remaining, explorationLimit - local.experiments);
+      const budget = panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
       const panelBounds = panel ? { area: panel.area, panel: panel.panel } : undefined;
       const source = explorationKey(observation, rows, panelBounds);
       const stationaryClicks = (local.transitions[source] ?? []).filter(edge => edge.destination === source && edge.action.startsWith('ACTION6:'));
+      const priorFocus = local.clickFocus?.ref === ref ? local.clickFocus : undefined;
+      const clickFocus = fallback && !nonPoint.length && observation.available_action_refs.includes('ACTION6') && (priorFocus || stationaryClicks.length >= 3)
+        ? chooseObservedClickFocus(observation, rows, priorFocus?.accent) : undefined;
+      const emphasisCommand = clickFocus && { action_ref: 'ACTION6', data: { x: clickFocus.point[0], y: clickFocus.point[1] } };
+      const emphasisKey = emphasisCommand && commandKey(emphasisCommand);
       const stationaryCommand = nonPoint.length === 1
         ? local.transitions[source]?.find(edge => edge.action === nonPoint[0]!.action_ref && edge.destination === source) : undefined;
       const candidates = visibleInputs(observation, rows, inputs, !!stationaryCommand && stationaryClicks.length >= 4);
+      const attempted = new Set(local.transitions[source]?.map(edge => edge.action));
+      const referenceSearch = fallback ? chooseReferenceSearch(local.referenceView, rows, inputs, attempted) : undefined;
+      const linkedTarget = fallback && !nonPoint.length && observation.available_action_refs.includes('ACTION6')
+        ? chooseLinkedTarget(local.measuredLink, rows, attempted) : undefined;
+      const panelPreparation = fallback && !panel && nonPoint.length === 1 && observation.available_action_refs.includes('ACTION6')
+        ? choosePanelPreparation(rows, nonPoint[0]!) : undefined;
+      const entry = fallback && !panel && !panelPreparation && nonPoint.length === 1 && observation.available_action_refs.includes('ACTION6')
+        ? await chooseOrderedEntry(local.orderedEntry, observation, rows, nonPoint[0]!, remaining, execution) : undefined;
+      const slotLayout = fallback && !panel && !panelPreparation && !entry && nonPoint.length === 1 && observation.available_action_refs.includes('ACTION6')
+        ? local.slotTransfer?.layout ?? measureVisibleSlotLayout(observation, rows) : undefined;
+      const slotMove = slotLayout && chooseVisibleSlotMove(rows, slotLayout, nonPoint[0]!);
+      const slot = slotMove ? { command: slotMove.command, label: slotTransferStrategies[slotMove.stage],
+        box: slotMove.source ?? slotMove.destination ?? slotLayout!.slots[0]!, evidence: local.slotTransfer ? [local.slotTransfer.ref] : [] } : undefined;
+      const projectedTarget = linkedTarget ?? referenceSearch ?? panelPreparation ?? entry ?? slot;
+      const projectionKey = projectedTarget && commandKey(projectedTarget.command);
+      if (projectedTarget && projectionKey && !attempted.has(projectionKey)) {
+        candidates.set(projectionKey, { command: projectedTarget.command, box: projectedTarget.box, marker: false, repeated: false });
+      }
+      if (clickFocus && emphasisCommand && emphasisKey) {
+        candidates.set(emphasisKey, { command: emphasisCommand, box: clickFocus.box, marker: false, repeated: false });
+      }
       const named = [...candidates.keys()].filter(key => /^ACTION[1-5]$/.test(key));
       const panelTestKeys = new Map<string, string>();
       const panelKeys = panel?.buttons.map(part => {
@@ -536,7 +585,10 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         candidates.set(travelKey, { command: travel.command, box: null, marker: false, repeated: false });
       }
       const keys = [...candidates.keys()];
-      const attempted = new Set(local.transitions[source]?.map(edge => edge.action));
+      const projected = projectionKey && !attempted.has(projectionKey)
+        ? { action: projectionKey, probe: projectionKey, depth: 0, first: null } : null;
+      const emphasis = emphasisKey && !attempted.has(emphasisKey)
+        ? { action: emphasisKey, probe: emphasisKey, depth: 0, first: null } : null;
       const testKey = (key: string) => panelTestKeys.get(key) ?? key;
       const clickedControl = local.clickedControl?.destination === source ? local.clickedControl : undefined;
       const controlledPiece = local.controlledPiece?.destination === interfaceKey(observation) ? local.controlledPiece : undefined;
@@ -642,7 +694,8 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
           : terrainStep ? commandKey(terrainStep.command) : unmeasured ?? (terrain ? commandKey(terrain.command) : null);
       const frontier = contextualCommand ? { action: contextualCommand, probe: contextualCommand, depth: walk?.route.length ?? 0, first: null }
         : probe ? { action: probe, probe, depth: 0, first: null }
-        : measuredControls ?? preferred ?? workspaceProbe ?? (pressureKey ? { action: pressureKey, probe: pressureKey, depth: 0, first: null } : null)
+        : measuredControls ?? preferred ?? projected ?? emphasis ?? workspaceProbe ?? (pressureKey ? { action: pressureKey, probe: pressureKey, depth: 0, first: null } : null)
+          ?? (jointKey ? { action: jointKey, probe: jointKey, depth: 0, first: null } : null)
           ?? (exchangeKey ? { action: exchangeKey, probe: exchangeKey, depth: 0, first: null } : null)
           ?? (coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null)
           ?? (markKey ? { action: markKey, probe: markKey, depth: 0, first: null } : null)
@@ -658,6 +711,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const verifiedContextChange = !contextualCommand && recheck && !probe && !collectionTrial && !workspaceTrial && named.includes(frontier.action)
         ? recheck.evidence : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
+      const selectedFocus = frontier === emphasis ? clickFocus : undefined;
+      const selectedProjection = frontier === projected ? projectedTarget : undefined;
+      const selectedJoint = frontier.action === jointKey ? joint : undefined;
       const selectedPressure = frontier.action === pressureKey ? pressure : undefined;
       const selectedExchange = frontier.action === exchangeKey ? exchange : undefined;
       const selectedMark = frontier.action === markKey ? markTrial : undefined;
@@ -671,6 +727,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? [travel.target[0], travel.target[1], travel.target[0] + local.travel.grid.pitch - 1,
           travel.target[1] + local.travel.grid.pitch - 1] : undefined;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
+        ...(selectedJoint?.evidence ?? []).filter(item => item !== ref),
+        ...(selectedProjection?.evidence ?? []).filter(item => item !== ref),
+        ...(selectedFocus ? stationaryClicks.map(edge => edge.evidence).filter(item => item !== ref) : []),
         ...(selectedPressure?.evidence ?? []).filter(item => item !== ref),
         ...(selectedMark?.evidence ?? []).filter(item => item !== ref),
         ...(selectedExchange?.evidence ?? []).filter(item => item !== ref),
@@ -694,6 +753,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(opening ? [opening.mechanism.transport!, opening.source.evidence] : []),
         ...(unmeasured ? [local.panelArrival!] : [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+        emphasizedControl: { value: !!selectedFocus, evidence: proof },
         pressureReserveRoute: { value: !!selectedPressure, evidence: proof },
         exchangeRoute: { value: !!selectedExchange, evidence: proof },
         markedContactRoute: { value: !!selectedMark, evidence: proof },
@@ -707,7 +767,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         repeatedTarget: { value: repeatedTarget, evidence: proof },
         untestedHere: { value: frontier.depth === 0, evidence: proof },
         observedRoute: { value: frontier.depth > 0, evidence: proof },
-      }, planners: { plan_pressure_reserve: () => offer, plan_observed_exchange: () => offer, plan_observed_placement: () => offer,
+      }, planners: { test_emphasized_control: () => offer, plan_pressure_reserve: () => offer, plan_observed_exchange: () => offer, plan_observed_placement: () => offer,
         test_mark_contact: () => offer, P05: () => offer,
         recheck_controls_after_change: () => offer, test_marked_edit: () => offer,
         test_edited_collection: () => offer, test_workspace_target: () => offer, test_repeated_marker: () => offer, test_repeated_target: () => offer,
@@ -715,7 +775,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       if (!selected) return null;
       const { command, box } = selected.plan;
       const mode = selectedExchange?.goal === 'test_transport' || selectedPressure?.goal === 'verify_gate_release' ? 'exploration'
-        : selectedPressure || selectedExchange || selectedCoverage?.pullRoute ? 'solving'
+        : selectedPressure || selectedJoint || selectedExchange || selectedCoverage?.pullRoute ? 'solving'
         : verifiedContextChange ? execution?.reasoningMode ?? 'exploration' : 'exploration';
       const routeSupported = !!frontier.first || !!walk || !!transport?.first;
       const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
@@ -735,7 +795,13 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         verify_gate_release: 'Leave the control briefly to check whether the gate needs a sustained weight',
       }[selectedPressure.goal];
       const markLabel = selectedMark ? 'Reach an untested marked cell and observe what changes on contact' : undefined;
-      const label = pressureLabel ?? markLabel ?? exchangeLabel ?? (selectedCoverage ? selectedCoverage.verifyBarrier
+      const label = selectedFocus ? 'Test the single outlined control and see where the emphasis moves'
+        : selectedJoint ? 'Bring the pieces together using their measured joint movements'
+          : selectedProjection ? 'label' in selectedProjection ? selectedProjection.label : 'intent' in selectedProjection
+            ? selectedProjection.intent === 'place' ? 'Place the active piece using the measured midpoint'
+              : selectedProjection.intent === 'switch' ? 'Switch which linked piece can move' : 'Test whether moving the marker moves the linked piece'
+            : selectedProjection.kind === 'match' ? 'Test the unique region that matches the sample' : 'Continue moving the view while the sample stays fixed'
+          : pressureLabel ?? markLabel ?? exchangeLabel ?? (selectedCoverage ? selectedCoverage.verifyBarrier
         ? 'Verify a barrier that could make simultaneous coverage impossible'
         : selectedCoverage.covered ? 'Check access to the exit while the observed marks stay covered'
           : `Cover the visible marks simultaneously using the measured ${selectedCoverage.motion} effect`
@@ -785,6 +851,10 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         : null;
       return {
         status: 'proposed', kind: publicInputExplorationId, actions, source, candidates: keys, needId: need.id,
+        ...(slotLayout && slotMove && selectedProjection === slot ? { slotPlan: { layout: slotLayout, move: slotMove } } : {}),
+        ...(entry && selectedProjection === entry ? { entryPlan: entry } : {}),
+        ...(selectedJoint ? { jointPlan: selectedJoint } : {}),
+        ...(selectedFocus ? { clickFocus: selectedFocus } : {}),
         ...(selectedPressure ? { pressurePlan: selectedPressure } : {}),
         ...(selectedMark ? { markContact: selectedMark } : {}),
         ...(selectedExchange ? { exchangePlan: selectedExchange } : {}),
@@ -900,6 +970,15 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
     },
     after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      if (!scored && proposal.slotPlan?.move.expected) {
+        const { layout, move } = proposal.slotPlan;
+        const matched = matchesVisibleSlotMove(afterRows, layout, move);
+        return { matched, seal_prefix: true, reason: matched ? 'measured_slot_transfer_confirmed' : 'measured_slot_transfer_contradicted' };
+      }
+      if (!scored && proposal.clickFocus) {
+        const matched = before.frame_hash !== after.frame_hash;
+        return { matched, seal_prefix: true, reason: matched ? 'emphasized_click_changed_board' : 'emphasized_click_unchanged' };
+      }
       if (!scored && proposal.pressurePlan && state.pressureReserve && state.travel) {
         const matched = assessPressurePlan(state.pressureReserve, state.travel, afterRows, proposal.pressurePlan);
         if (matched !== undefined) return { matched, seal_prefix: true,
@@ -970,7 +1049,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
               ? 'input_changed_playing_surface' : 'input_left_playing_surface_unchanged') : 'observed_public_input_return',
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
-    record(before, after, command, rows, afterRows, proposal, index, frames) {
+    async record(before, after, command, rows, afterRows, proposal, index, frames) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
       state.experiments++;
@@ -985,8 +1064,28 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const source = index === 0 ? proposal.source : explorationKey(before, rows, proposal.panel);
       state.options[source] = proposal.candidates;
       const destination = explorationKey(after, afterRows, proposal.panel), action = commandKey(command);
+      if (proposal.entryPlan) state.orderedEntry = await observeOrderedEntry(proposal.entryPlan, before, after, afterRows);
+      if (proposal.slotPlan && matchesVisibleSlotMove(afterRows, proposal.slotPlan.layout, proposal.slotPlan.move)) {
+        state.slotTransfer = { layout: proposal.slotPlan.layout, ref: after.observation_ref };
+      }
+      if (proposal.clickFocus && before.frame_hash !== after.frame_hash) {
+        state.clickFocus = { accent: proposal.clickFocus.accent, ref: after.observation_ref };
+      }
+      if (fallback && before.available_action_refs.includes('ACTION6') && !proposal.panel) {
+        if (before.available_action_refs.some(input => /^ACTION[1-4]$/.test(input))) {
+          const view = observeReferenceView(state.referenceView, rows, afterRows, command, after.observation_ref);
+          if (view) state.referenceView = view;
+        } else {
+          const link = observeLink(state.measuredLink, rows, afterRows, command, after.observation_ref);
+          if (link) state.measuredLink = link;
+        }
+      }
       const panel = proposal.panel ? visibleCommandPanel(rows) : null;
       if (!proposal.panel && proposal.candidates.filter(key => /^ACTION[1-4]$/.test(key)).length >= 2) {
+        if (fallback) {
+          const joint = observeJointInput(state.jointInput, rows, afterRows, command, after.observation_ref, proposal.jointPlan);
+          if (joint) state.jointInput = joint;
+        }
         const previous = state.travel, measured = observeTravel(previous, rows, afterRows, command, after.observation_ref);
         const travel = before.available_action_refs.includes('ACTION5') ? annotateTravelMarks(measured, rows) : measured;
         if (travel) state.travel = travel;
