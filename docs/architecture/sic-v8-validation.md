@@ -2572,3 +2572,9 @@ Au niveau 7, SIC observe le changement de marqueur du garde sur place, puis onze
 La sixième commande confirme le changement de marqueur avant le premier déplacement du poursuivant. La neuvième retire le garde fixe par le côté. Après le détour, la dix-huitième commande traverse le passage libéré. La vingt-et-unième atteint la sortie. Les cartes de situation lient le déplacement choisi au poursuivant et au passage à dégager.
 
 Le rejeu chronologique gagne le niveau 8 en **21 commandes SIC seul et 11,83 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **154 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de la référence. Les 175 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 98 tests ciblés passent. Empreinte `7ff17404b23f7ff13e45008c4d1ec4e08bc025e2b0b441d3d81e264df7a3401f`.
+
+### SK48 niveau 8
+
+À la cinquième commande, une liaison supplémentaire devient visible sur le rail de la tige verticale. Le retour permet de vérifier la position des tiges et des cubes. SIC conserve les références fixes et actualise les connexions du rail. Une action déjà planifiée peut continuer si sa liaison reste disponible. Si elle disparaît, SIC ferme la série et recalcule sur la géométrie observée.
+
+Le rejeu chronologique gagne le niveau 8 en **42 commandes SIC seul et 11,80 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **300 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de la référence. Les 342 commandes relèvent de SIC seul et le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 124 tests ciblés passent. Empreinte `5105c551d4aa14bcb1026bea7de36846dbc717d320372c9cd7f0843d25909a7b`.
