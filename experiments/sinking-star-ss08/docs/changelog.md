@@ -1,5 +1,12 @@
 # SS08 — historique des modifications
 
+## 0.3.0 — retour du rayon sur le Magicien
+
+- Une visée qui boucle affiche désormais le trajet de téléportation. Au début du niveau 8, le rayon traverse les quatre miroirs dans l’ordre de la direction choisie, puis revient sur le Magicien.
+- Le Magicien clignote sur sa case de départ ; la boucle ne le déplace pas et ne déclenche ni circuits ni attaques.
+- Répéter la direction rejoue l’animation sans ajouter un état identique à l’historique d’annulation. Annuler interrompt aussi une animation en cours.
+- Les refus liés à l’eau conservent leur traitement immédiat de v0.2.1.
+
 ## 0.2.1 — retour au comportement précédent dans l’eau
 
 - Retrait du signal cyan/rouge et du message dédié ajoutés en v0.2.0.

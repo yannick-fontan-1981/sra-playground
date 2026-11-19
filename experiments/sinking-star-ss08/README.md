@@ -21,6 +21,8 @@ Ouvrir ensuite `dist/SS08-demo.html` dans un navigateur. Le HTML embarque le mot
 
 Depuis la v0.2.0, les quatre premières salles suivent l’ordre ancien 2 → 3 → 4 → 1 ; l’atelier guidé est au niveau 4. Les miroirs passent visuellement au-dessus des boutons.
 
+Depuis la v0.3.0, un rayon qui revient sur le Magicien montre sa boucle de téléportation, puis fait clignoter le personnage sur place. Les quatre miroirs du rectangle initial du niveau 8 sont ainsi parcourus visiblement, dans les deux sens.
+
 Deux destinations doivent être occupées simultanément. Les caisses plongées dans l’eau deviennent des appuis permanents. Les boutons peuvent commander des portes-presses et des plateformes rétractables. Les monstres frappent leurs voisins orthogonaux simultanément.
 
 ## Références de conception

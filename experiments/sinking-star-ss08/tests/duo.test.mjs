@@ -379,7 +379,7 @@ test('a Wizard ray can bounce through multiple mirrors while global reflection s
 
 test('a closed ray loop returning to the Wizard is refused atomically, without a fallback walk',()=>{
   const f=fixture({W:[3,3],M:[2,8],mirrors:[[7,3,'SW'],[7,7,'NW'],[3,7,'NE']]}),before=select(f.world,f.state,1),trace=traceSwap(f.world,before,'E'),d=stepDetailed(f.world,before,4);
-  assert.equal(trace.loop,true);assert.equal(trace.plan,null);assert.equal(d.state.failed,true);assert.deepEqual(d.phases,[]);assert.deepEqual(d.state.heroes.map(h=>h.at),before.heroes.map(h=>h.at));assert.deepEqual(d.state.mirrors,before.mirrors);
+  assert.equal(trace.loop,true);assert.equal(trace.plan,null);assert.equal(d.state.failed,true);assert.deepEqual(d.phases.map(p=>p.kind),['swap-loop']);assert.deepEqual(d.phases[0].moves,[]);assertAt(trace.loopPath[0],before.heroes[1].at);assertAt(trace.loopPath.at(-1),before.heroes[1].at);assert.deepEqual(d.state.heroes.map(h=>h.at),before.heroes.map(h=>h.at));assert.deepEqual(d.state.mirrors,before.mirrors);
 });
 
 test('moving a mirror with the Merchant changes the Wizard exchange ray immediately',()=>{
@@ -486,4 +486,56 @@ test('the actual level 8 water attempt keeps the original immediate clean frame 
   const before=session.observe(),first=session.action(1),repeat=session.action(1);
   assert.equal(first.frames.length,1);assert.deepEqual(first.frames[0],renderWorld(r.world,d.state));assert.deepEqual(first.frameDurationsMs,[0]);
   assert.equal(repeat.frames.length,1);assert.deepEqual(repeat.frame,first.frame);assert.equal(repeat.frameDurationsMs,undefined);assert.equal(repeat.levelsCompleted,before.levelsCompleted);assert.equal(repeat.state,'NOT_FINISHED');assert.deepEqual(session.undo(),before);
+});
+
+test('both initial level 8 directions retain the complete ordered four-mirror ray back to the same Wizard',()=>{
+  const spec=SS08_LEVELS.find(l=>l.id==='ss08-08'),world=compileLevel(spec),initial=initialState(world),state=select(world,initial,1);
+  for(const [direction,action,mirrors] of [
+    ['N',1,[{x:4,y:4},{x:13,y:4},{x:13,y:12},{x:4,y:12}]],
+    ['S',2,[{x:4,y:12},{x:13,y:12},{x:13,y:4},{x:4,y:4}]],
+  ]){
+    const trace=traceSwap(world,state,direction),detail=stepDetailed(world,state,action),path=trace.loopPath;
+    assert.equal(trace.loop,true);assert.equal(trace.plan,null);assert.equal(path.length,35);assertAt(path[0],{x:4,y:8});assertAt(path.at(-1),{x:4,y:8});
+    assert.deepEqual(path.filter(p=>state.mirrors.some(m=>eq(m.at,p))),mirrors);
+    for(let i=1;i<path.length;i++)assert.equal(Math.abs(path[i].x-path[i-1].x)+Math.abs(path[i].y-path[i-1].y),1);
+    assert.deepEqual(detail.phases.map(p=>p.kind),['swap-loop']);assert.deepEqual(detail.phases[0].moves,[]);assert.deepEqual(detail.phases[0].paths,[path]);assert.equal(detail.state.failed,true);assert.equal(detail.state.dead,false);
+    const expected={...state,failed:true,heroes:state.heroes.map((h,i)=>i===state.active?{...h,facing:direction}:h)};assert.deepEqual(detail.state,expected);
+  }
+});
+
+test('level 8 loop frames visit each mirror in order, return along the last segment, then blink twice at the fixed origin',()=>{
+  const spec=SS08_LEVELS.find(l=>l.id==='ss08-08'),world=compileLevel(spec),initial=initialState(world),state=select(world,initial,1);
+  const sample={top:{x:8,y:4},right:{x:13,y:8},bottom:{x:8,y:12},upperLeft:{x:4,y:6},lowerLeft:{x:4,y:10}};
+  for(const [action,samples] of [[1,[sample.upperLeft,sample.top,sample.right,sample.bottom,sample.lowerLeft]],[2,[sample.lowerLeft,sample.bottom,sample.right,sample.top,sample.upperLeft]]]){
+    const detail=stepDetailed(world,state,action),frames=transitionFrames(world,state,detail.state,action),path=detail.phases[0].paths[0],mirrors=path.flatMap(p=>state.mirrors.filter(m=>eq(m.at,p)));
+    assert.equal(frames.length,9);
+    for(let i=0;i<5;i++){
+      const at=cellToPixel(samples[i]);for(let frame=0;frame<5;frame++){if(frame<i)assert.notEqual(frames[frame][at.y+1][at.x+1],15);else assert.equal(frames[frame][at.y+1][at.x+1],15);}
+      for(const m of state.mirrors)assertMirrorPixels(frames[i],cellToPixel(m.at),m.facing);
+      if(i<4){const m=mirrors[i],origin=cellToPixel(m.at);expectedMirrorPixels[m.facing].forEach((row,y)=>row.forEach((c,x)=>{if(c===null)assert.equal(frames[i][origin.y+y][origin.x+x],10);}));}
+    }
+    const origin=cellToPixel(state.heroes[1].at),clean=renderWorld(world,detail.state),plus=[[1,0],[0,1],[1,1],[2,1],[1,2]];
+    for(const i of [5,7]){
+      for(const [x,y] of plus)assert.equal(frames[i][origin.y+y][origin.x+x],0);
+      for(let y=0;y<64;y++)for(let x=0;x<64;x++)if(x<origin.x||x>origin.x+2||y<origin.y||y>origin.y+2)assert.equal(frames[i][y][x],clean[y][x]);
+    }
+    for(const i of [6,8]){assert.deepEqual(frames[i],clean);assert.equal(frames[i][origin.y+1][origin.x+1],15);}
+    assertAt(detail.state.heroes[1].at,state.heroes[1].at);
+  }
+});
+
+test('identical loop attempts replay their nine frames without extra Undo entries or semantic observations',()=>{
+  const spec=SS08_LEVELS.find(l=>l.id==='ss08-08');
+  for(const action of [1,2]){
+    const session=new DuoPuzzleSession([spec]),start=session.observe();session.nextHero();const before=session.observe(),first=session.action(action);
+    assert.equal(first.frames.length,9);assert.deepEqual(first.frameDurationsMs,[90,90,90,90,100,100,80,100,0]);assert.equal(first.frameDurationsMs.reduce((a,b)=>a+b,0),740);assert.deepEqual(first.frames.at(-1),first.frame);
+    for(let i=0;i<2;i++){const repeat=session.action(action);assert.deepEqual(repeat.frames,first.frames);assert.deepEqual(repeat.frameDurationsMs,first.frameDurationsMs);assert.equal(repeat.state,'NOT_FINISHED');assert.equal(repeat.levelsCompleted,0);}
+    for(const key of ['phases','loopPath','paths','heroes','failed'])assert.equal(key in first,false);
+    assert.deepEqual(session.undo(),before);assert.deepEqual(session.undo(),start);assert.equal(session.observe().canUndo,false);
+  }
+});
+
+test('showing a closed ray does not advance adjacent combat, pressure circuits or any actor',()=>{
+  const f=fixture({W:[3,3],M:[2,8],monsters:[[3,8]],mirrors:[[7,3,'SW'],[7,7,'NW'],[3,7,'NE']],circuits:[{id:'held',buttons:[{x:3,y:3}]}],gates:[{at:{x:10,y:5},circuit:'held',direction:'E',closedWhen:'released'}]}),before=select(f.world,f.state,1),d=stepDetailed(f.world,before,4);
+  assert.equal(d.state.failed,true);assert.equal(d.state.dead,false);assert.deepEqual({...d.state,failed:false},before);assert.deepEqual(d.phases.map(p=>p.kind),['swap-loop']);assert.equal(d.phases[0].paths[0].length,17);assert.equal(transitionFrames(f.world,before,d.state,4).length,8);
 });

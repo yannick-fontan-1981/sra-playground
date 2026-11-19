@@ -122,7 +122,7 @@ export function initialState(w:World):State {
 }
 export interface Motion {readonly actor:'hero'|'stone'|'monster'|'mirror';readonly from:Point;readonly to:Point}
 export interface MotionPhase {
-  readonly kind:'walk'|'push'|'swap'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
+  readonly kind:'walk'|'push'|'swap'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat'|'swap-loop';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
   readonly gateIndex?:number;readonly paths?:readonly (readonly Point[])[];
 }
 export interface DetailedStep {readonly state:State;readonly phases:readonly MotionPhase[]}
@@ -192,21 +192,23 @@ const mirrorTurns:Readonly<Record<MirrorFacing,Partial<Record<Direction,Directio
 };
 /** Wizard targeting can bend through several white faces. This is independent of
  * ACTION5's per-mirror geometric reflection, which never relays through a mirror. */
-export function traceSwap(w:World,s:State,direction:Direction):{plan:SwapPlan|null;loop:boolean} {
+export function traceSwap(w:World,s:State,direction:Direction):{plan:SwapPlan|null;loop:boolean;loopPath?:readonly Point[]} {
   const hero=s.heroes[s.active]!;
   if(s.complete||s.dead||hero.kind!=='wizard')return {plan:null,loop:false};
   const path:Point[]=[],seen=new Set<string>();let p=hero.at,d=direction,reflections=0;
+  // Retain the complete ordered circuit for presentation, including its origin.
+  const loop=()=>({plan:null,loop:true,loopPath:[hero.at,...path]});
   for(let i=0;i<1600;i++){
     const key=`${p.x},${p.y},${d}`;
-    if(seen.has(key))return {plan:null,loop:true};seen.add(key);p=offset(p,d);
+    if(seen.has(key))return loop();seen.add(key);p=offset(p,d);
     if(blocked(w,s,p))return {plan:null,loop:false};path.push(p);
     const mirror=s.mirrors.find(m=>equal(m.at,p));
     if(mirror){const turn=mirrorTurns[mirror.facing][d];if(!turn)return {plan:null,loop:false};d=turn;reflections++;continue;}
-    if(equal(p,hero.at))return {plan:null,loop:true};
+    if(equal(p,hero.at))return loop();
     const actor=actorAt(s,p);
     if(actor&&actor!=='mirror')return {plan:{from:hero.at,to:p,target:actor,path,reflections},loop:false};
   }
-  return {plan:null,loop:true};
+  return loop();
 }
 export function planSwap(w:World,s:State,direction:Direction):SwapPlan|null{return traceSwap(w,s,direction).plan;}
 function moveStep(w:World,s:State,d:Direction):{state:State;moves:Motion[]}|null {
@@ -276,12 +278,15 @@ export function stepDetailed(w:World,s:State,actionId:number,data?:Point):Detail
   if(actionId===6){const p=pixelToCell(data!.x,data!.y),active=p?s.heroes.findIndex(h=>!h.dead&&equal(h.at,p)):-1;return {state:active<0||active===s.active?s:{...s,active,failed:false},phases:[]};}
   const hero=s.heroes[s.active]!,direction=actionId===5?hero.facing:directionIds[actionId]!;
   const faced:State={...s,heroes:s.heroes.map((h,i)=>i===s.active?{...h,facing:direction}:h),failed:false};
-  const refusal=():DetailedStep=>({state:{...faced,failed:true},phases:[]});
+  const refusal=(loopPath?:readonly Point[]):DetailedStep=>{
+    const state:State={...faced,failed:true};
+    return {state,phases:loopPath?[{kind:'swap-loop',before:s,after:state,moves:[],paths:[loopPath]}]:[]};
+  };
   let next:State,first:MotionPhase;
   if(actionId===5){const plan=planReflection(w,s);if(!plan)return refusal();next=applyMotions(w,faced,plan.moves);first={kind:'reflect',before:s,after:next,moves:plan.moves,paths:plan.paths};}
   else {
     const aim=hero.kind==='wizard'?traceSwap(w,faced,direction):{plan:null,loop:false};
-    if(aim.loop)return refusal();
+    if(aim.loop)return refusal(aim.loopPath);
     if(aim.plan){
       const plan=aim.plan,moves:Motion[]=[{actor:'hero',from:plan.from,to:plan.to},{actor:plan.target,from:plan.to,to:plan.from}];
       next=applyMotions(w,faced,moves);first={kind:'swap',before:s,after:next,moves,paths:[[plan.from,...plan.path]]};
@@ -370,6 +375,29 @@ function combatFrames(w:World,phase:MotionPhase):number[][][] {
 }
 function phaseFrames(w:World,phase:MotionPhase):number[][][] {
   if(phase.kind==='combat')return combatFrames(w,phase);
+  if(phase.kind==='swap-loop'){
+    const state=phase.after,hero=state.heroes[state.active]!,path=phase.paths?.[0]??[hero.at];
+    const ends=path.flatMap((p,i)=>i>0&&state.mirrors.some(m=>equal(m.at,p))?[i]:[]);
+    if(ends.at(-1)!==path.length-1)ends.push(path.length-1);
+    const frames=ends.map(end=>{
+      const frame=renderWorld(w,state);
+      // Illuminate each complete segment cumulatively, in ray traversal order.
+      for(let i=1;i<=end;i++){
+        const a=path[i-1]!,b=path[i]!,dx=Math.sign(b.x-a.x),dy=Math.sign(b.y-a.y);
+        for(let n=0;n<=3;n++){const x=3+a.x*3+dx*n,y=3+a.y*3+dy*n;if(x>=2&&x<62&&y>=2&&y<62)frame[y]![x]=15;}
+      }
+      // The ray never obscures a white diagonal or the black back. Highlight
+      // only the newly reached mirror's three transparent front-face pixels.
+      for(const m of state.mirrors)stamp(frame,m.at,mirrorSprite(m.facing));
+      const arrival=state.mirrors.find(m=>equal(m.at,path[end]!));
+      if(arrival)stamp(frame,arrival.at,mirrorSprite(arrival.facing).map(row=>row.map(c=>c===null?10:c)));
+      stamp(frame,hero.at,heroSprite(hero,true));return frame;
+    });
+    // Two white pulses at the unchanged origin, separated by its normal violet
+    // cursor. The final clean frame also removes every temporary path pixel.
+    for(const pulse of [true,false,true,false]){const frame=renderWorld(w,state);if(pulse)stamp(frame,hero.at,cross(0));frames.push(frame);}
+    return frames;
+  }
   if(phase.kind==='platform'){
     const after=renderScene(w,phase.after);
     const frames=[1,2].map(rows=>{
@@ -400,7 +428,7 @@ function phaseFrames(w:World,phase:MotionPhase):number[][][] {
 function presentation(w:World,detail:DetailedStep):{frames:number[][][];durations:number[]} {
   if(!detail.phases.length)return {frames:[renderWorld(w,detail.state)],durations:[0]};
   const frames:number[][][]=[],durations:number[]=[];
-  for(const phase of detail.phases){const part=phaseFrames(w,phase);frames.push(...part);durations.push(...(phase.kind==='combat'?[80,90,100,110,40]:part.length===3?((phase.kind==='reflect'||phase.kind==='swap')?[70,90,40]:[60,80,40]):[40]));}
+  for(const phase of detail.phases){const part=phaseFrames(w,phase);frames.push(...part);durations.push(...(phase.kind==='swap-loop'?[...Array<number>(part.length-5).fill(90),100,100,80,100,0]:phase.kind==='combat'?[80,90,100,110,40]:part.length===3?((phase.kind==='reflect'||phase.kind==='swap')?[70,90,40]:[60,80,40]):[40]));}
   durations[durations.length-1]=0;return {frames,durations};
 }
 export function transitionFrames(w:World,before:State,after:State,action:number,data?:Point):number[][][]{const r=presentation(w,stepDetailed(w,before,action,data));r.frames[r.frames.length-1]=renderWorld(w,after);return r.frames;}
@@ -419,8 +447,12 @@ export class DuoPuzzleSession {
   }
   action(actionId:number,data?:Point):Observation {
     const world=this.worlds[this.index]!,before=this.state,detail=stepDetailed(world,before,actionId,data),next=detail.state;
-    if(JSON.stringify(next)===JSON.stringify(before))return this.observe();
-    this.history.push({index:this.index,completed:[...this.completed],state:before});this.state=next;const {frames,durations}=presentation(world,detail);
+    const changed=JSON.stringify(next)!==JSON.stringify(before);
+    if(!changed&&!detail.phases.length)return this.observe();
+    // A repeated closed-ray attempt replays its visual circuit without adding
+    // another Undo entry for an identical logical state.
+    if(changed)this.history.push({index:this.index,completed:[...this.completed],state:before});
+    this.state=next;const {frames,durations}=presentation(world,detail);
     if(next.complete){this.completed.add(this.index);const i=this.worlds.findIndex((_,i)=>!this.completed.has(i));if(i!==-1){this.index=i;this.state=initialState(this.worlds[this.index]!);}}
     const observation=this.observe();if(this.state!==next){durations[durations.length-1]=100;frames.push(observation.frame);durations.push(0);}return {...observation,frames,frameDurationsMs:durations};
   }

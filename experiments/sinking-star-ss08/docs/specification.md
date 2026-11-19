@@ -16,7 +16,7 @@ Grille logique de 20 × 20 cases au maximum, centrée dans une image ARC de 64 �
 
 Le Marchand marche et pousse au maximum un occupant. Une file de deux occupants bloque sa poussée. La marche ou poussée volontaire ne noie pas un héros et ne détruit pas un miroir ; une presse ou un reflet peut le faire.
 
-Le Magicien vise avant de marcher. Il échange sa place avec le premier bloc, monstre ou compagnon rencontré. La visée traverse l’eau et les appuis ; elle est bloquée par les murs, les portes fermées et le dos d’un miroir. La face blanche tourne la visée de 90°. Plusieurs rebonds sont possibles. Si le rayon revient au Magicien ou boucle, l’action est refusée. Sans cible et sans boucle, un pas normal est tenté. Le Magicien ne pousse pas. Une poussée forcée ne provoque pas de nouvel échange automatique.
+Le Magicien vise avant de marcher. Il échange sa place avec le premier bloc, monstre ou compagnon rencontré. La visée traverse l’eau et les appuis ; elle est bloquée par les murs, les portes fermées et le dos d’un miroir. La face blanche tourne la visée de 90°. Plusieurs rebonds sont possibles. Si le rayon revient au Magicien ou boucle, l’action est refusée : le trajet s’anime, puis le Magicien clignote sur sa case sans marcher ni déclencher circuits ou attaques. Sans cible et sans boucle, un pas normal est tenté. Le Magicien ne pousse pas. Une poussée forcée ne provoque pas de nouvel échange automatique.
 
 Un échange est réciproque et conserve l’occupation des deux cases : remplacer un héros par une caisse sur un bouton le maintient donc enfoncé. Un monstre peut ensuite mourir et libérer ce poids.
 
@@ -41,6 +41,8 @@ Les monstres attaquent leurs voisins orthogonaux simultanément. Deux monstres a
 ## Animation et observations
 
 Les déplacements, poussées, échanges, reflets, mouvements de presse et changements de plateformes produisent trois images. Un combat en produit cinq : préparation, avancée, impact, disparition, résultat. Les séquences peuvent s’enchaîner ; chaque durée est explicite et l’image finale a une durée de 0. L’interface attend le dernier état avant d’afficher victoire ou défaite. Annuler reste possible pendant une animation et restaure toute la cascade.
+
+Une boucle de visée fait apparaître progressivement son trajet violet, miroir après miroir, jusqu’au retour au Magicien. Le personnage clignote ensuite sur place avant le retour à l’image normale. Répéter une boucle identique rejoue l’effet sans ajouter de doublon à l’historique. Les refus ordinaires, notamment une arrivée dans l’eau, restent immédiats.
 
 `DuoPuzzleSession` expose les pixels, les actions autorisées, l’état, les compteurs et la progression. Les plans de visée, objets, circuits, parcours et solutions restent hors de l’observation publique. Les outils d’auteur ne sont pas embarqués dans le HTML.
 

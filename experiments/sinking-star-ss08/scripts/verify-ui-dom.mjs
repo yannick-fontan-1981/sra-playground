@@ -129,6 +129,7 @@ const checkWizardFixtures=async()=>{
     {name:'no target walks one cell',wizard:[2,4],merchant:[1,6],action:4,to:[3,4],swap:false,bent:false},
     {name:'black back blocks targeting',wizard:[2,4],merchant:[1,6],stone:[4,2],mirror:[4,4],action:4,to:[3,4],swap:false,bent:false},
     {name:'water refusal is immediate and teaches no movement or support',wizard:[2,4],merchant:[1,6],water:[3,4],action:4,to:[2,4],swap:false,bent:false,blocked:true},
+    {name:'three-mirror loop returns without teaching a move or swap',wizard:[3,3],merchant:[1,6],mirrors:[[7,3,'3'],[7,7,'4'],[3,7,'1']],action:4,to:[3,3],swap:false,bent:false,loop:true},
   ];
   for(const fixture of cases){
     const cells=Array.from({length:9},(_,y)=>Array.from({length:9},(_,x)=>x===0||y===0||x===8||y===8?'#':'.'));
@@ -136,6 +137,7 @@ const checkWizardFixtures=async()=>{
     if(fixture.stone)cells[fixture.stone[1]][fixture.stone[0]]='o';
     if(fixture.mirror)cells[fixture.mirror[1]][fixture.mirror[0]]='1';
     if(fixture.water)cells[fixture.water[1]][fixture.water[0]]='~';
+    if(fixture.mirrors)for(const [x,y,facing] of fixture.mirrors)cells[y][x]=facing;
     cells[7][1]='g';cells[7][2]='g';
     const spec={id:'ss08-wizard-ui',title:fixture.name,rows:cells.map(row=>row.join(''))};
     const ui=new Window({settings:{enableJavaScriptEvaluation:true,suppressInsecureJavaScriptEnvironmentWarning:true}}),pending=[],delays=[],painted=[];
@@ -157,7 +159,7 @@ const checkWizardFixtures=async()=>{
       const event=new ui.KeyboardEvent('keydown',{key:actionKeys[fixture.action],bubbles:true,cancelable:true});
       assert.equal(board.dispatchEvent(event),false);assert.equal(board.dataset.busy,fixture.blocked?'false':'true');
       const expected=fixtureRef.action(fixture.action);await drain();
-      assert.equal(expected.frames.length,fixture.blocked?1:3);assert.equal(board.dataset.busy,'false');
+      assert.equal(expected.frames.length,fixture.loop?8:fixture.blocked?1:3);assert.equal(board.dataset.busy,'false');
       for(let i=0;i<expected.frames.length;i++)assert.deepEqual(painted[start+i],rgba(expected.frames[i]),`${fixture.name} frame ${i}`);
       assert.deepEqual(buffer,rgba(expected.frame));assert.deepEqual(delays,expected.frameDurationsMs.slice(0,-1));
       const violet=heroes(expected.frame).find(h=>h.color===15);
@@ -165,6 +167,7 @@ const checkWizardFixtures=async()=>{
       assert.equal(ui.document.querySelector('[data-lesson="wizard-swap"]').classList.contains('done'),fixture.swap);
       assert.equal(ui.document.querySelector('[data-lesson="wizard-bend"]').classList.contains('done'),fixture.bent);
       if(fixture.blocked){assert.equal(ui.document.querySelector('[data-lesson="move"]').classList.contains('done'),false);assert.equal(ui.document.querySelector('[data-lesson="platform"]').classList.contains('done'),false);assert.ok(!ui.document.getElementById('feedback').textContent.includes('Eau sans appui'));assert.equal(delays.length,0);}
+      if(fixture.loop){assert.equal(ui.document.getElementById('feedback').textContent,'Le rayon revient sur le Magicien : la téléportation le laisse sur place.');for(const lesson of lessonIds.filter(id=>id!=='select'))assert.equal(ui.document.querySelector('[data-lesson="'+lesson+'"]').classList.contains('done'),false,'A visible loop grants no false discovery');}
       if(fixture.swap)assert.ok(ui.document.getElementById('feedback').textContent.includes(fixture.bent?'rayon dévié':'Transposition'));
       ui.document.getElementById('undo').click();await drain();assert.deepEqual(buffer,before,`${fixture.name}: exact visual Undo`);
       result.push({case:fixture.name,exactFrames:expected.frames.length,publicLessonDetection:true,exactVisualUndo:true});
@@ -226,6 +229,62 @@ const checkActualWaterRefusal=async()=>{
  return {level:8,prefixActions:prefix.length,targetCell:{x:7,y:4},frames:1,immediate:true,noAnimationTimers:true,noWaterMarks:true,repeatedRefusalUnchanged:true,exactUndo:true,noHeroMotion:true,noDiscovery:true};
 };
 
+const checkActualReturningLoops=async()=>{
+ const origins={x:4,y:8},mirrors=SS08_LEVELS[7].mirrors,result=[];
+ const cases=[
+  {direction:'N',id:1,key:'ArrowUp',corners:[[4,4],[13,4],[13,12],[4,12]],probes:[[4,6],[8,4],[13,8],[8,12],[4,10]]},
+  {direction:'S',id:2,key:'ArrowDown',corners:[[4,12],[13,12],[13,4],[4,4]],probes:[[4,10],[8,12],[13,8],[8,4],[4,6]]}
+ ];
+ const expectedDurations=[90,90,90,90,100,100,80,100,0];
+ for(const branch of cases){
+  choose(8);
+  const wizard=heroes(ref.observe().frame).find(h=>h.color===15);
+  window.document.querySelector('[data-hero="wizard"]').click();equalFrame(ref.action(6,wizard.data));
+  const before=ref.observe(),positions=heroes(before.frame).map(h=>({color:h.color,data:h.data}));
+  const lessons=[...window.document.querySelectorAll('[data-lesson]')].map(e=>e.classList.contains('done'));
+  const perform=async()=>{
+   const start=captures.length,waitStart=waits.length;assert.equal(key(branch.key),false);
+   const next=ref.action(branch.id);assert.equal($('board').dataset.busy,'true');await settled(next);
+   assert.equal(next.frames.length,9);assert.deepEqual(next.frameDurationsMs,expectedDurations);
+   for(let i=0;i<9;i++)assert.deepEqual(captures[start+i],rgba(next.frames[i]),'Returning loop public frame '+i);
+   assert.deepEqual(waits.slice(waitStart),expectedDurations.slice(0,-1));
+   for(let i=0;i<5;i++){
+    for(let j=0;j<5;j++){
+     const [x,y]=branch.probes[j],px=3+3*x,py=3+3*y;
+     assert.equal(next.frames[i][py][px],j<=i?15:next.frame[py][px],'Loop segments become visible in traversal order');
+    }
+    for(const mirror of mirrors){
+     const px=2+3*mirror.at.x,py=2+3*mirror.at.y,f=mirror.facing;
+     for(let y=0;y<3;y++)for(let x=0;x<3;x++){
+      const diagonal=f==='NW'||f==='SE'?x+y===2:x===y;
+      const back=f==='NE'?y>x:f==='SW'?x>y:f==='NW'?x+y>2:x+y<2;
+      if(diagonal)assert.equal(next.frames[i][py+y][px+x],0,'Progressive ray preserves mirror diagonal');
+      else if(back)assert.equal(next.frames[i][py+y][px+x],5,'Progressive ray preserves mirror black back');
+      else if(i<4&&mirror.at.x===branch.corners[i][0]&&mirror.at.y===branch.corners[i][1])assert.equal(next.frames[i][py+y][px+x],10,'The current mirror front is highlighted');
+     }
+    }
+   }
+   const px=2+3*origins.x,py=2+3*origins.y;
+   for(const i of [5,7]){
+    for(const [x,y] of [[1,0],[0,1],[1,1],[2,1],[1,2]])assert.equal(next.frames[i][py+y][px+x],0,'The Wizard flashes white at the same origin');
+    for(let y=0;y<64;y++)for(let x=0;x<64;x++)if(!(x>=px&&x<px+3&&y>=py&&y<py+3))assert.equal(next.frames[i][y][x],next.frame[y][x],'Only the Wizard cell changes during its blink');
+   }
+   assert.deepEqual(next.frames[6],next.frame);assert.deepEqual(next.frames[8],next.frame);
+   assert.deepEqual(heroes(next.frame).map(h=>({color:h.color,data:h.data})),positions);
+   assert.equal(next.state,'NOT_FINISHED');assert.equal(next.levelsCompleted,before.levelsCompleted);
+   assert.equal($('feedback').textContent,'Le rayon revient sur le Magicien : la téléportation le laisse sur place.');
+   assert.deepEqual([...window.document.querySelectorAll('[data-lesson]')].map(e=>e.classList.contains('done')),lessons,'Loop animation grants no discovery');
+   return next;
+  };
+  const first=await perform(),repeat=await perform();assert.deepEqual(repeat.frames,first.frames,'Repeated closed ray replays the full animation');
+  $('undo').click();await settled(ref.undo());equalFrame(before);
+  key(branch.key);ref.action(branch.id);await advanceTimer();await advanceTimer();
+  $('undo').click();const canceled=captures.length;await settled(ref.undo());assert.equal(captures.length,canceled,'Undo cancels pending ray/blink frames');equalFrame(before);
+  result.push({level:8,direction:branch.direction,origin:origins,mirrorOrder:branch.corners,progressiveSegments:5,frames:9,frameDurationsMs:expectedDurations,whiteBlinksAtOrigin:2,unchangedActors:true,repeatedAnimation:true,exactUndo:true,midAnimationUndo:true,noFalseDiscovery:true});
+ }
+ return result;
+};
+
 try{
   assert.ok(SS08_LEVELS.length>=TUTORIAL_LEVEL,'The rich tutorial is now level 4');
   if(!tutorialOnly)assert.equal(SS08_LEVELS.length,8,'The SS08 release contains eight rooms');
@@ -246,11 +305,11 @@ try{
   assert.ok($('monster-help').textContent.includes('s’éliminent mutuellement'));assert.ok($('piston-help').textContent.includes('ils doivent être occupés ensemble'));
   assert.ok(window.document.body.textContent.includes('Appui dans l’eau · fixe'));
   assert.ok($('swap-help').textContent.includes('La première cible compte'));assert.ok($('swap-help').textContent.includes('Les flèches transposent ; Espace active les reflets'));assert.ok($('swap-help').textContent.includes('aucune prévisualisation permanente'));
-  assert.ok(!$('swap-help').textContent.includes('un X cyan puis rouge'));
+  assert.ok(!$('swap-help').textContent.includes('un X cyan puis rouge'));assert.ok($('swap-help').textContent.includes('Une boucle illumine tout le trajet'));
   report.checks.push('Controls and global help distinguish directional swaps, mirror reflections, support, circuits and monster combat');
 
   report.wizardCoverage=await checkWizardFixtures();
-  report.checks.push('Six compiled-HTML Wizard fixtures cover direct, bent and companion exchanges, ordinary walking, black-back obstruction and immediate water refusal without false movement/support discoveries');
+  report.checks.push('Seven compiled-HTML Wizard fixtures cover exchanges, walking, obstruction, immediate water refusal and an eight-frame returning loop without false discoveries');
   report.reflectionPriorityCoverage=await checkReflectionFixtures();
   report.checks.push('Three compiled-HTML reflection fixtures preserve nearest-source previews, blocked-farther independence, equal-distance exchange and exact visual Undo');
 
@@ -302,6 +361,8 @@ try{
   if(!tutorialOnly){
    report.mirrorButtonCoverage=await checkActualMirrorButtons();
    report.checks.push('The real L5 witness keeps each mirror’s white diagonal and black back visible while it holds a button');
+   report.returningLoopCoverage=await checkActualReturningLoops();
+   report.checks.push('Initial L8 Up and Down visibly traverse all four mirrors in opposite orders, return to the fixed Wizard, blink twice, replay and allow mid-animation Undo without false discoveries');
    report.waterRefusalCoverage=await checkActualWaterRefusal();
    report.checks.push('The real L8 invalid water step returns one clean immediate frame, starts no timer, adds no mark, repeats unchanged, moves no hero and supports exact Undo');
   }

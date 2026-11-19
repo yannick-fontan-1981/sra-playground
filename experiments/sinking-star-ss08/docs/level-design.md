@@ -55,7 +55,7 @@ L’atelier guidé, désormais au niveau 4, a été retravaillé après la déco
 
 Le niveau 2 met en jeu une différence entre échange et transfert : l’échange conserve le nombre d’occupants de chaque île, tandis que le Marchand crée une connexion vers l’île de destination initialement vide. Le niveau 7 vérifie un combat réciproque suivi de deux presses dans son témoin. L’extraction de la seconde caisse par le Magicien et la seconde presse répondent à des contraintes de position ; aucune unicité de la manière d’éliminer les monstres n’est revendiquée.
 
-Le niveau 8 est contrôlé dès son état initial : les rayons nord et sud du Magicien bouclent, les autres actions sont refusées. La presse déplace réellement une file caisse–miroir et détruit le coin inférieur droit ; le témoin termine après le retrait des deux plateformes hydrauliques.
+Le niveau 8 est contrôlé dès son état initial : les rayons nord et sud du Magicien bouclent, les autres actions sont refusées. Depuis v0.3.0, chacun de ces deux rayons anime les quatre miroirs dans son ordre de parcours puis le Magicien clignote sur sa case. La presse déplace réellement une file caisse–miroir et détruit le coin inférieur droit ; le témoin termine après le retrait des deux plateformes hydrauliques.
 
 ## Régénération
 

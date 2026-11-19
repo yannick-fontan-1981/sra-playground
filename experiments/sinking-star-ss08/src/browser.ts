@@ -113,8 +113,25 @@ function wizardSwap(before:Observation,after:Observation,action:number):{bent:bo
     :!!companion&&visibleHeroes(frame).some(h=>h.kind==='merchant'&&sameCell(h,hero));
   return exchanged?{bent:hero.x!==later.x&&hero.y!==later.y}:null;
 }
+/** A returning ray is recognized only from the displayed path and same-cell blink. */
+function returnedRay(before:Observation,after:Observation,action:number):boolean {
+  const count=after.frames.length;
+  if(action<1||action>4||count<5)return false;
+  const hero=visibleHeroes(before.frame).find(h=>h.selected);
+  if(hero?.kind!=='wizard'||!sameCell(hero,visibleHeroes(after.frame).find(h=>h.kind==='wizard')))return false;
+  const px=2+hero.x*3,py=2+hero.y*3;
+  const whitePlus=(frame:number[][]):boolean=>[[1,0],[0,1],[1,1],[2,1],[1,2]].every(([x,y])=>frame[py+y!]![px+x!]===0);
+  if(!whitePlus(after.frames[count-4]!)||!whitePlus(after.frames[count-2]!)||after.frames[count-3]![py+1]![px+1]!==15)return false;
+  let visiblePath=false;
+  for(let y=0;y<64;y++)for(let x=0;x<64;x++){
+    if(x>=px&&x<px+3&&y>=py&&y<py+3)continue;
+    if(before.frame[y]![x]!==after.frame[y]![x])return false;
+    if(after.frames[count-5]![y]![x]===15&&before.frame[y]![x]!==15)visiblePath=true;
+  }
+  return visiblePath;
+}
 function observeLesson(before:Observation,after:Observation,action:number):void {
-  if(before.level!==TUTORIAL_LEVEL)return;
+  if(before.level!==TUTORIAL_LEVEL||returnedRay(before,after,action))return;
   const final=actionFrame(before,after),initialHeroes=visibleHeroes(before.frame),currentHeroes=visibleHeroes(final);
   const selected=initialHeroes.find(h=>h.selected),newSelected=currentHeroes.find(h=>h.selected);
   if(action===6&&selected&&newSelected&&selected.kind!==newSelected.kind)learned.add('select');
@@ -202,6 +219,7 @@ function act(action:number,data?:Point):void {
     :action===6?'Personnage sélectionné. Le décor et les monstres n’avancent pas.'
     :reflected(before,next,action)?'Reflet effectué : priorité au plus proche, échange à distance égale. Les deux héros peuvent le déclencher.'
     :action===5?'Reflet bloqué ou aucun occupant devant les faces blanches. Vérifie les arrivées et tous les miroirs.'
+    :returnedRay(before,next,action)?'Le rayon revient sur le Magicien : la téléportation le laisse sur place.'
     :wizardSwap(before,next,action)?.bent?'Échange par un rayon dévié : le Magicien et sa cible ont changé de place.'
     :wizardSwap(before,next,action)?'Transposition : le Magicien et la première cible ont échangé leurs places.'
     :pushLength(before,next,action)===1?'Une pièce poussée d’une case par le Marchand.'
