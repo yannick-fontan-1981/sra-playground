@@ -94,6 +94,47 @@ test('align a frontier fall with remembered terrain in the direction of travel',
   assert.deepEqual([aligned?.shift, aligned?.landing, aligned?.matched, aligned?.alignedThroughMemory], [10, 12, true, true]);
 });
 
+test('align a lateral move against unchanged supports after a scroll', () => {
+  const width = 4;
+  const terrain = ['....', 'PP.P', '.PP.', 'P..P', 'PP.P', 'P..P', '.PPP', 'P.P.'];
+  const scene = (start: number, at: number): GravityView => ({
+    width, at, origin: [3, 3], pitch: 6, actor: [8, 17, 9, 20], exit: null, inverterInk: null,
+    tiles: [...terrain.slice(start, start + 6).join('')].map(tile => tile === 'P' ? 'propagating' : 'air'),
+  });
+  const before = scene(2, 13), after = scene(0, 14);
+  const memory: GravityHistory = { direction: -1, rowOrigin: 0, highest: 3, lowest: 3, inverted: true,
+    seen: [], denied: [], terrain: gravityTerrain(before, 0) };
+  const step: GravityStep = { command: { action_ref: 'ACTION4', data: {} }, index: 14, landing: 6,
+    direction: -1, frontier: false, edit: null };
+  assert.equal(gravityReturn(before, after, step, memory), null);
+  const aligned = gravityReturn(before, after, step, memory, undefined, true);
+  assert.deepEqual([aligned?.shift, aligned?.landing, aligned?.matched], [-2, 1, true]);
+});
+
+test('verify a stationary inversion in the animation before the edited cell scrolls out of view', () => {
+  const width = 4, at = 18, inverter = 1;
+  const tiles: GravityView['tiles'] = [
+    'wall', 'inverter', 'air', 'air',
+    'wall', 'wall', 'air', 'wall',
+    'wall', 'air', 'air', 'wall',
+    'wall', 'air', 'propagating', 'air',
+    'wall', 'air', 'air', 'air',
+    'wall', 'air', 'propagating', 'wall',
+    'wall', 'wall', 'wall', 'air',
+    'wall', 'wall', 'wall', 'wall',
+  ];
+  const before: GravityView = { width, tiles, at, origin: [3, 3], pitch: 6, actor: [14, 25, 15, 28], exit: null, inverterInk: 8 };
+  const after: GravityView = { ...before, at: at - 2 * width, tiles: [...tiles.slice(2 * width), ...tiles.slice(-2 * width)] };
+  const changed: GravityView = { ...before, tiles: tiles.map((tile, index) => index === inverter ? 'air' : tile) };
+  const memory: GravityHistory = { direction: -1, rowOrigin: 0, highest: 4, lowest: 4, inverted: true,
+    seen: [], denied: [], terrain: gravityTerrain(before, 0) };
+  const step: GravityStep = { command: { action_ref: 'ACTION6', data: { x: 9, y: 3 } }, index: inverter, landing: at,
+    direction: 1, frontier: false, edit: 'invert' };
+  assert.equal(gravityReturn(before, after, step, memory, () => [before], true)?.matched, false);
+  const confirmed = gravityReturn(before, after, step, memory, () => [before, changed], true);
+  assert.deepEqual([confirmed?.shift, confirmed?.removed, confirmed?.matched], [2, true, true]);
+});
+
 test('prepare a landing above a visible hazard before the first inversion of a new board', () => {
   const width = 3, at = 7;
   const tiles: GravityView['tiles'] = [

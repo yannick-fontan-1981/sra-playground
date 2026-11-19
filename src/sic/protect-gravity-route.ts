@@ -18,8 +18,8 @@ type Step = { input: string; at: number; landing: number; edit?: 'on' | 'off' | 
 type State = { epoch: number; layout: Layout; refs: string[]; rejected: string[]; solidVerified: boolean };
 type ProtectiveProposal = NativeProposal & { local: State; scene: Scene; step: Step; attempt: string; needId: string };
 type ReversibleState = { epoch: number; geometry: Layout; memory: GravityHistory; refs: string[]; stopped: boolean;
-  carriesProtection?: true; spreadingInk?: number };
-type ReversalWitness = { epoch: number; geometry: Layout; direction: GravityHistory['direction']; refs: string[] };
+  carriesProtection?: true; spreadingInk?: number; surveyDirection?: GravityHistory['direction'] };
+type ReversalWitness = { epoch: number; geometry: Layout; direction: GravityHistory['direction']; refs: string[]; spreadingInk?: number };
 type ReversibleProposal = NativeProposal & { reversal: ReversibleState; view: GravityView; advance: GravityStep; needId: string };
 type Proposal = ProtectiveProposal | ReversibleProposal;
 
@@ -260,18 +260,21 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
     const geometry = prior?.geometry ?? witnessed?.geometry ?? previous?.layout;
     if (!geometry || prior?.stopped) return null;
     const carriesProtection = prior?.carriesProtection || !!witnessed;
-    const view = readReversibleGravity(rows, geometry, carriesProtection, prior?.spreadingInk);
+    const spreadingInk = prior?.spreadingInk ?? witnessed?.spreadingInk;
+    const view = readReversibleGravity(rows, geometry, carriesProtection, spreadingInk);
     if (!view) return null;
     const worldRow = Math.floor(view.at / view.width);
     const direction = witnessed ? startingGravity(view, witnessed.direction) : -1;
     const base: ReversibleState = prior ?? { epoch, geometry, refs: (witnessed?.refs ?? previous!.refs).slice(-3), stopped: false,
       ...(carriesProtection ? { carriesProtection: true } : {}),
+      ...(spreadingInk === undefined ? {} : { spreadingInk }),
+      ...(witnessed?.spreadingInk === undefined ? {} : { surveyDirection: direction }),
       memory: { rowOrigin: 0, direction, highest: worldRow, lowest: worldRow, inverted: !!witnessed, denied: [],
         seen: [gravityStateKey(view, 0, direction)], terrain: gravityTerrain(view, 0) } };
     const heading = base.memory.supportHeading ?? (carriesProtection && canPlanSupportChain(view) ? base.memory.direction : undefined);
     const local = heading !== undefined && base.memory.supportHeading === undefined
       ? { ...base, memory: { ...base.memory, supportHeading: heading } } : base;
-    const step = local.spreadingInk !== undefined ? planPropagatingGravity(view, local.memory, remaining)
+    const step = local.spreadingInk !== undefined ? planPropagatingGravity(view, local.memory, remaining, local.surveyDirection)
       : heading === undefined ? chooseGravityReversal(view, local.memory, remaining, carriesProtection)
         : planSupportChain(view, local.memory, remaining, heading);
     if (!step) return null;
@@ -397,7 +400,8 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
     record(before, after, _action, _first, second, proposal, _index, frames = []) {
       if (isReversible(proposal) && after.levels_completed > before.levels_completed && proposal.reversal.memory.inverted) {
         reversalWitness = { epoch: after.level_epoch, geometry: proposal.reversal.geometry, direction: proposal.advance.direction,
-          refs: [...proposal.reversal.refs.slice(-3), after.observation_ref] };
+          refs: [...proposal.reversal.refs.slice(-3), after.observation_ref],
+          ...(proposal.reversal.spreadingInk === undefined ? {} : { spreadingInk: proposal.reversal.spreadingInk }) };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       if (isReversible(proposal)) {
@@ -441,6 +445,10 @@ export function createSicProtectGravityRoute(): NativeFamily<Proposal> {
       state = structuredClone(value.state as State | null);
       reversal = structuredClone(value.reversal as ReversibleState | null ?? null);
       reversalWitness = structuredClone((value.reversalWitness as ReversalWitness | undefined) ?? null);
+      if (reversalWitness && reversalWitness.spreadingInk === undefined
+        && reversal?.epoch === reversalWitness.epoch - 1 && reversal.spreadingInk !== undefined) {
+        reversalWitness.spreadingInk = reversal.spreadingInk;
+      }
     },
   };
 }

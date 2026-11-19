@@ -87,7 +87,8 @@ export function readReversibleGravity(rows: NativeRows, geometry: Geometry, carr
   return { origin, pitch, width, tiles, at, actor: bbox, exit, inverterInk };
 }
 
-export function cameraRowShift(before: GravityView, after: GravityView, expected?: number, accepts?: (offset: number) => boolean): number | null {
+export function cameraRowShift(before: GravityView, after: GravityView, expected?: number, accepts?: (offset: number) => boolean,
+  unchangedTerrain = false): number | null {
   if (before.width !== after.width) return null;
   const { width } = before, rows = before.tiles.length / width, nextRows = after.tiles.length / width;
   const shifts = expected !== undefined ? [expected] : Array.from({ length: rows + nextRows - 5 }, (_, i) => 3 - nextRows + i);
@@ -97,12 +98,13 @@ export function cameraRowShift(before: GravityView, after: GravityView, expected
     for (let index = 0; index < before.tiles.length; index++) {
       const other = index - offset * width;
       const a = before.tiles[index], b = after.tiles[other];
-      if (!a || !b || index === before.at || other === after.at || !['wall', 'danger', 'air', 'exit'].includes(a)
-        || !['wall', 'danger', 'air', 'exit'].includes(b)) continue;
+      if (!a || !b || index === before.at || other === after.at) continue;
+      if (!unchangedTerrain && (!['wall', 'danger', 'air', 'exit'].includes(a)
+        || !['wall', 'danger', 'air', 'exit'].includes(b))) continue;
       if (a === b) { matches++; if (a !== 'air') anchors++; }
       else changes++;
     }
-    return anchors >= 6 && changes <= matches * 0.16 ? [{ offset, rank: matches - 6 * changes }] : [];
+    return anchors >= 6 && changes <= (unchangedTerrain ? 0 : matches * 0.16) ? [{ offset, rank: matches - 6 * changes }] : [];
   }).sort((a, b) => b.rank - a.rank);
   return scored.length && (expected !== undefined || scored[0]!.rank !== scored[1]?.rank) ? scored[0]!.offset : null;
 }
@@ -186,17 +188,28 @@ export function gravityReturn(before: GravityView, after: GravityView, step: Gra
   const expected = step.frontier ? undefined : predicted - observed;
   const accepts = step.frontier && memory.supportHeading !== undefined
     ? (offset: number) => (offset + observed - predicted) * step.direction >= 0 : undefined;
-  const direct = cameraRowShift(before, after, expected, accepts) ?? (expected === undefined ? null : cameraRowShift(before, after));
+  const direct = cameraRowShift(before, after, expected, accepts)
+    ?? (expected === undefined ? null : cameraRowShift(before, after))
+    // A lateral command can align against the constructed supports as well.
+    ?? (retainTerrain && !step.edit ? cameraRowShift(before, after, undefined, accepts, true) : null);
   const remembered = direct === null && (memory.reversedHere || retainTerrain) ? rememberedRowShift(after, memory, accepts) : null;
-  const shift = direct ?? remembered ?? (animation ? animationRowShift(before, after, animation(), accepts) : null);
+  let sampled: readonly GravityView[] | undefined;
+  const frames = () => sampled ??= animation?.() ?? [];
+  const shift = direct ?? remembered ?? animationRowShift(before, after, frames(), accepts);
   if (shift === null) return null;
   const landing = shift + observed, departure = Math.floor(before.at / before.width);
   const column = step.index % before.width, actorColumn = after.at % after.width;
   const sameColumn = actorColumn === (step.edit ? before.at % before.width : column);
   const reached = step.frontier ? (landing - predicted) * step.direction >= 0 : landing === predicted;
   const edited = after.tiles[step.index - shift * before.width];
+  const witnessedRemoval = retainTerrain && step.edit === 'invert' && before.tiles[step.index] === 'inverter'
+    && edited === undefined && reached && sameColumn
+    && frames().some(frame => {
+      const offset = cameraRowShift(before, frame);
+      return offset !== null && frame.tiles[step.index - offset * before.width] === 'air';
+    });
   const removed = step.edit !== 'solidify' && step.edit !== 'open' && (!step.edit || edited === 'air'
-    || (edited === undefined && (landing - departure) * step.direction > 0));
+    || witnessedRemoval || (edited === undefined && (landing - departure) * step.direction > 0));
   const solidified = step.edit === 'solidify' && edited === 'ceiling_solid';
   const opened = step.edit === 'open' && edited === 'ceiling_open';
   const inverted = step.edit === 'invert' && (landing - departure) * step.direction > 0;

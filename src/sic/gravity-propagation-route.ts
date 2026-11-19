@@ -17,7 +17,8 @@ export function spreadGravitySupport(read: (index: number) => Tile | undefined, 
 }
 
 /** Search for a safe landing using both the hole and the support created by each proposed click. */
-export function planPropagatingGravity(view: GravityView, memory: GravityHistory, remaining: number): GravityStep | null {
+export function planPropagatingGravity(view: GravityView, memory: GravityHistory, remaining: number,
+  surveyDirection?: Direction): GravityStep | null {
   const { width, tiles } = view;
   const column = (at: number) => (at % width + width) % width;
   const row = (at: number) => Math.floor(at / width);
@@ -33,6 +34,11 @@ export function planPropagatingGravity(view: GravityView, memory: GravityHistory
   let initialSpread = 0n;
   for (const [at, tile] of terrain) if (tile === 'propagating') initialSpread |= bit(at);
   const staticEdits = visible.filter(at => editable.has(tiles[at]!));
+  // A centered edit is more likely to remain observable after the camera scrolls.
+  if (surveyDirection !== undefined) {
+    const centerRow = (tiles.length / width - 1) / 2;
+    staticEdits.sort((a, b) => Math.abs(row(a) - centerRow) - Math.abs(row(b) - centerRow));
+  }
   const goal = view.exit ?? [...terrain].find(([, value]) => value === 'exit')?.[0] ?? null;
   let inverters = 0n;
   for (const [at, tile] of terrain) if (tile === 'inverter') inverters |= bit(at);
@@ -73,29 +79,75 @@ export function planPropagatingGravity(view: GravityView, memory: GravityHistory
     return null;
   }
 
+  const seeds = visible.filter(index => tiles[index] === 'propagating'), roof = view.at + memory.direction * width;
+  const seed = memory.seen.length === 1 && seeds.length === 1 ? seeds[0] : undefined;
+  const chosen = seed ?? (tiles[roof] === 'propagating' ? roof : undefined);
+  if (surveyDirection !== undefined && goal === null && chosen !== undefined) {
+    const index = chosen, changes = spreadGravitySupport(at => read(at, initialSpread, 0n), index, view.at, width);
+    let spread = initialSpread & ~bit(index);
+    for (const [at, tile] of changes) if (tile === 'propagating') spread |= bit(at);
+    const landing = settle(view.at, memory.direction, spread, 0n);
+    const [x, y] = gravityTile(view, index);
+    const step: GravityStep = { command: { action_ref: 'ACTION6', data: { x, y } }, index,
+      landing: landing ?? view.at, direction: memory.direction, frontier: false, edit: 'spread', changes };
+    if (changes.length > 2 && landing !== null && (seed !== undefined || landing !== view.at)
+      && !denied.has(gravityAttempt(view, step, memory))) return step;
+  }
+
   const startRow = row(view.at), heading = memory.direction;
+  const scouting = surveyDirection !== undefined && goal === null;
+  let mission = surveyDirection ?? heading;
+  if (scouting) {
+    const x = column(view.at);
+    const sides = [-1, 1].filter(dx => x + dx >= 0 && x + dx < width);
+    const enclosed = sides.every(dx =>
+      [-2, -1, 0, 1, 2].filter(dy => terrain.get(view.at + dx + dy * width) === 'wall').length >= 3);
+    const capped = [1, 2, 3].some(distance => terrain.get(view.at + distance * mission * width) === 'wall');
+    const opposite = terrain.get(view.at - mission * width);
+    // A capped shaft can expose new terrain in the other direction after a supported reversal.
+    if (enclosed && (capped || heading !== mission) && (opposite === 'air' || opposite === 'propagating')) {
+      mission = -mission as Direction;
+    }
+  } else mission = heading;
+
+  function terrainDistances(starts: number[]) {
+    const queue = [...starts];
+    const distances = new Map(starts.map(at => [at, 0]));
+    for (const at of queue) for (const adjacent of gravityNeighbors(at, width)) {
+      const tile = terrain.get(adjacent);
+      if (!tile || tile === 'wall' || tile === 'danger' || distances.has(adjacent)) continue;
+      distances.set(adjacent, distances.get(at)! + 1);
+      queue.push(adjacent);
+    }
+    return distances;
+  }
+  const reachable = scouting ? terrainDistances([view.at]) : null;
   let gapColumns: number[] = [], barrierRow: number | null = null;
   for (let distance = 1; distance <= 8; distance++) {
-    const y = startRow + heading * distance;
+    const y = startRow + mission * distance;
     const cells = Array.from({ length: width }, (_, x) => terrain.get(y * width + x));
     if (!cells.includes('danger')) continue;
-    gapColumns = cells.flatMap((tile, x) => tile && tile !== 'danger' && tile !== 'wall' ? [x] : []);
+    gapColumns = cells.flatMap((tile, x) =>
+      tile && tile !== 'danger' && tile !== 'wall' && (!reachable || reachable.has(y * width + x)) ? [x] : []);
     if (gapColumns.length) barrierRow = y;
     break;
   }
-  const gapDistance = (at: number) => gapColumns.length ? Math.min(...gapColumns.map(x => Math.abs(x - column(at)))) : 0;
+  const gapDistances = scouting && barrierRow !== null
+    ? terrainDistances(gapColumns.map(x => barrierRow! * width + x)) : null;
+  const gapDistance = (at: number) => gapDistances?.get(at)
+    ?? (gapColumns.length ? Math.min(...gapColumns.map(x => Math.abs(x - column(at)))) : 0);
   const startGap = gapDistance(view.at);
   const goalDistance = (at: number) => goal === null ? 0 : 4 * Math.abs(row(goal) - row(at)) + 3 * Math.abs(column(goal) - column(at));
   const initialGoalDistance = goalDistance(view.at);
   const rank = (at: number, direction: Direction, depth: number) => {
-    const progress = (row(at) - startRow) * heading;
-    const crossed = barrierRow !== null && (row(at) - barrierRow) * heading >= 0;
+    const progress = (row(at) - startRow) * mission;
+    const crossed = barrierRow !== null && (row(at) - barrierRow) * mission >= 0;
     const lateral = crossed ? startGap : startGap - gapDistance(at);
     const knownDirection = direction !== heading || memory.reversedHere;
     const towardGoal = goal !== null && Math.sign(row(goal) - startRow) === direction;
     const closing = initialGoalDistance - goalDistance(at);
     const novelty = visitedPositions.has(gravityStateKey(view, memory.rowOrigin, direction, at)) ? 0 : 3;
-    return (knownDirection && goal !== null ? closing * 4 : progress * 14 + lateral * 3 + Math.max(0, closing))
+    return (knownDirection && goal !== null ? closing * 4 : progress * 14 + lateral * (scouting ? 24 : 3) + Math.max(0, closing))
       + (towardGoal && direction !== heading ? 22 : 0) + novelty - depth;
   };
 
