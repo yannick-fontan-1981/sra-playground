@@ -6,6 +6,7 @@ import { BrowserV6Agent, BrowserV6WorkerClient } from '../src/runtime/v6-agent.t
 import type { V6AgentSnapshot, V6DispatchResult } from '../src/runtime/v6-agent.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
 import { as66Contradiction } from '../src/sic/contradiction-review.ts';
+import { sicObservedCoverageDeadlock } from '../src/logos-engine/v6-native-types.ts';
 import {
   emptyV6Snapshot, nativeV6Action, sameV6Observation, toV6PublicObservation, v6FrameHash, V6AgentError, V6_REFERENCE_COMMIT,
 } from '../src/runtime/v6-agent-protocol.ts';
@@ -88,7 +89,13 @@ class ScriptedTransport implements V6AgentTransport {
         assert.equal(this.ticket, null);
         this.prefixIndex = 0; this.revision += 1;
         result = await this.action();
-      } else result = this.boundary();
+      } else {
+        if (operation.type === 'reset_level') {
+          assert.equal(operation.observation.stepIndex, this.actions);
+          this.observation = operation.observation;
+        }
+        result = this.boundary();
+      }
     }
     return this.hook ? this.hook(operation, result) : result;
   }
@@ -97,8 +104,8 @@ class ScriptedTransport implements V6AgentTransport {
   dispose(): void { this.disposed = true; }
 }
 
-function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6AgentSnapshot) => void) {
-  const context = { current: board(), enabled: true, actions: [] as AgentAction[], snapshots: [] as V6AgentSnapshot[] };
+function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6AgentSnapshot) => void, canReset = false) {
+  const context = { current: board(), enabled: true, actions: [] as AgentAction[], snapshots: [] as V6AgentSnapshot[], resets: 0 };
   let onState: ((snapshot: V6AgentSnapshot) => void) | null = null;
   let dispatch: (action: AgentAction) => Promise<V6DispatchResult> = async action => {
     context.actions.push(action);
@@ -106,6 +113,7 @@ function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6
     return context.current;
   };
   const agent = new BrowserV6Agent({ transport, getObservation: () => context.current, canDispatch: () => context.enabled,
+    ...(canReset ? { resetLevel: async () => { context.resets++; return context.current = board(); } } : {}),
     dispatch: action => dispatch(action), onAcquired, onState: state => { context.snapshots.push(state); onState?.(state); } });
   return { agent, context, transport, setDispatch: (value: typeof dispatch) => { dispatch = value; },
     setOnState: (value: typeof onState) => { onState = value; } };
@@ -168,6 +176,32 @@ test('coordinate clicks flow intact from the authorized ticket to the real host 
   assert.deepEqual(state.context.actions, [{ id: 6, data: { x: 11, y: 63 } }]);
   assert.equal(state.transport.actions, 1);
   assert.equal(state.agent.snapshot.sequence, 1);
+});
+
+test('observed placement deadlock resets the same level and continues with the same sequence', async () => {
+  for (const pauseBeforeReset of [false, true]) {
+    const { agent, context, transport, setOnState } = harness(new ScriptedTransport(), undefined, true);
+    transport.hook = async (operation, result) => operation.type === 'advance' && operation.sequence === 1
+      ? { ...transport.boundary(), kind: 'stopped', phase: 'stopped', reason: sicObservedCoverageDeadlock,
+        snapshot: { ...result.snapshot, canResetLevel: true } }
+      : result;
+    if (pauseBeforeReset) setOnState(snapshot => {
+      if (snapshot.status === 'acting' && snapshot.phase === 'stopped') agent.pause();
+    });
+    await agent.run(2);
+    if (pauseBeforeReset) {
+      assert.equal(agent.snapshot.status, 'paused');
+      assert.equal(context.resets, 0);
+      setOnState(null);
+      await agent.step();
+    }
+    assert.equal(context.resets, 1);
+    assert.equal(agent.snapshot.actionCount, 2);
+    assert.deepEqual(transport.operations.map(operation => [operation.type, operation.sequence]),
+      [['init', 0], ['advance', 1], ['reset_level', 1], ['resume', 1], ['advance', 2]]);
+    assert.equal(new Set(transport.operations.map(operation => operation.sessionId)).size, 1);
+    agent.dispose();
+  }
 });
 
 test('reading the SIC shadow leaves V6 commands and acquisition order identical through a terminal return', async () => {

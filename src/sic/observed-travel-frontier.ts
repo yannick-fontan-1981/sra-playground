@@ -53,6 +53,8 @@ function read(rows: NativeRows, grid: Grid) {
   return { cells, pieces };
 }
 
+export { read as readTravelGrid, tile as readTravelCell };
+
 function calibrateAmongOtherChanges(before: NativeRows, after: NativeRows, lattices: Iterable<Grid>,
   changed: readonly NativePoint[]): Calibration[] {
   const translations = measureComponentTranslations(before, after, part => part.area >= 3 && part.area <= 36);

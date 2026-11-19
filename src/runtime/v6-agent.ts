@@ -11,6 +11,7 @@ import type {
 } from './v6-agent-protocol.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 import { immutableJson } from '../logos-engine/canonical.ts';
+import { sicObservedCoverageDeadlock } from '../logos-engine/v6-native-types.ts';
 
 export { BrowserV6WorkerClient } from './v6-agent-client.ts';
 
@@ -321,7 +322,13 @@ export class BrowserV6Agent {
         const sessionId = this.sessionId;
         if (!expected || !sessionId || !this.pending) throw new V6AgentError('invalid', 'The native V6 transfer has no current state.');
         this.assertFresh(expected, epoch);
-        if (this.pending.kind === 'stopped') { this.finish(this.pending.reason); return; }
+        if (this.pending.kind === 'stopped') {
+          if (this.canRecoverCoverage(this.pending.reason)) {
+            if (await this.acquireLevelReset(epoch, true)) continue;
+            break;
+          }
+          this.finish(this.pending.reason); return;
+        }
         if (this.pending.kind === 'boundary') {
           this.phase = 'planning'; this.state('thinking', 'V6 sealed its action prefix and is planning from the acquired evidence…');
           if (this.stopRequested) break;
@@ -369,10 +376,18 @@ export class BrowserV6Agent {
           else this.state('paused', 'Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.');
           return;
         }
-        if (acquired.kind === 'stopped') { this.finish(acquired.reason); return; }
+        if (acquired.kind === 'stopped') {
+          if (this.canRecoverCoverage(acquired.reason)) {
+            if (!this.stopRequested && await this.acquireLevelReset(epoch, true)) continue;
+            break;
+          }
+          this.finish(acquired.reason); return;
+        }
       }
       if (!this.stillCurrent(epoch)) return;
-      if (this.pending?.kind === 'stopped') { this.finish(this.pending.reason); return; }
+      if (this.pending?.kind === 'stopped' && !this.canRecoverCoverage(this.pending.reason)) {
+        this.finish(this.pending.reason); return;
+      }
       this.state('paused', this.stopRequested ? 'Paused. The current V6 prefix, pending command and acquired evidence are retained.'
         : maxActions === 1 ? 'One action completed. Continue the same V6 plan when ready.'
           : `Batch limit reached: ${applied} actions. The V6 plan and memory are retained.`);
@@ -402,25 +417,38 @@ export class BrowserV6Agent {
         : 'Pausing at the next V6 action boundary. The current computation will finish safely…');
   }
 
-  /** Reset is an explicit host control. The agent resumes only on the next Run. */
+  private canRecoverCoverage(reason: string | null): boolean {
+    return reason === sicObservedCoverageDeadlock && !!this.host.resetLevel && !!this.knowledge.canResetLevel;
+  }
+
+  private async acquireLevelReset(epoch: number, automatic = false): Promise<boolean> {
+    const before = this.observed, sessionId = this.sessionId;
+    if (!before || !sessionId || !this.host.resetLevel || !this.stillCurrent(epoch)) return false;
+    this.assertFresh(before, epoch);
+    this.phase = 'acting';
+    this.state('acting', automatic ? 'Resetting after an observed placement deadlock…' : 'Resetting the current level…');
+    if (!this.stillCurrent(epoch) || automatic && this.stopRequested) return false;
+    this.assertFresh(before, epoch);
+    const returned = await this.host.resetLevel();
+    if (!this.stillCurrent(epoch)) return false;
+    const next = toV6PublicObservation(returned, this.sequence);
+    if (returned.gameCode !== this.gameCode || !sameV6Observation(next, this.host.getObservation())) {
+      throw new V6AgentError('stale', 'The displayed board does not match the level reset.');
+    }
+    this.phase = 'observing';
+    if (!await this.request({ type: 'reset_level', sessionId, sequence: this.sequence, observation: next }, epoch)) return false;
+    this.observed = next;
+    this.requiresNewSession = false;
+    return true;
+  }
+
+  /** A manual reset leaves the agent ready for the next Run. */
   resetLevel(): Promise<void> {
     if (!this.snapshot.canResetLevel) return Promise.resolve();
-    const epoch = this.epoch, sessionId = this.sessionId!, before = this.observed!;
+    const epoch = this.epoch;
     let operation: Promise<void>;
     operation = Promise.resolve().then(async () => {
-      this.assertFresh(before, epoch);
-      this.phase = 'acting';
-      this.state('acting', 'Resetting the current level…');
-      const returned = await this.host.resetLevel!();
-      if (!this.stillCurrent(epoch)) return;
-      const next = toV6PublicObservation(returned, this.sequence);
-      if (returned.gameCode !== this.gameCode || !sameV6Observation(next, this.host.getObservation())) {
-        throw new V6AgentError('stale', 'The displayed board does not match the level reset.');
-      }
-      this.phase = 'observing';
-      if (!await this.request({ type: 'reset_level', sessionId, sequence: this.sequence, observation: next }, epoch)) return;
-      this.observed = next;
-      this.requiresNewSession = false;
+      if (!await this.acquireLevelReset(epoch)) return;
       this.stopRequested = false;
       this.state('paused', 'Level reset. Previous evidence is retained. Run to plan from the reset board.');
     }).catch(error => {

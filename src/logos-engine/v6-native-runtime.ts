@@ -210,7 +210,7 @@ import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 import { hydrateNativeState } from './v6-native-state-graph.ts';
-import { NativeEditRejected } from './v6-native-types.ts';
+import { NativeEditRejected, sicObservedCoverageDeadlock } from './v6-native-types.ts';
 import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
@@ -2224,12 +2224,20 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.rememberLevelStart();
     const next = freeze(structuredClone(packet));
     const measured = freeze(await measureNativeObservation(next, this.actions + this.resetCount + 2, this.sessionId));
+    const recovery = this.reason === sicObservedCoverageDeadlock ? this.reason : undefined;
+    const retained = new Map<string, NativeRecord>();
+    if (recovery) for (const family of this.families) {
+      if (family.requestedStopReason?.(before) !== recovery) continue;
+      const learned = family.stateAfterLevelReset?.(measured, next.frame_rows);
+      if (learned) retained.set(family.id, learned);
+    }
     const writes: NativeStoreWrite[] = this.levelStart!.families.map(node => ({
       id: node.id, kind: 'family_state', family: node.family as string,
-      value: hydrateNativeState(node.value, id => knowledge.memory.nodes[id]?.value),
+      value: retained.get(node.family as string) ?? hydrateNativeState(node.value, id => knowledge.memory.nodes[id]?.value),
     }));
     const receipt = { observation_ref: measured.observation_ref, before_observation_ref: before.observation_ref,
-      level: next.level, levels_completed: next.levels_completed, action_ref: 'RESET', after_packet: next };
+      level: next.level, levels_completed: next.levels_completed, action_ref: 'RESET', after_packet: next,
+      ...(recovery ? { cause: recovery } : {}) };
     writes.push({ id: `reasoning:level-reset:${measured.revision}`, kind: 'component_state', component: 'public_level_reset',
       status: 'observed', value: receipt, evidence: [before.observation_ref, measured.observation_ref] });
     this.check(execution);
@@ -2237,7 +2245,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.current = next; this.observation = measured; this.resetCount++;
     this.prefix = null; this.kind = 'boundary'; this.reason = null;
     this.latestReasoningReturn = null; this.observedQueue = undefined; this.lastClickReturn = null;
-    this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref });
+    this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref,
+      ...(recovery ? { cause: recovery } : {}) });
     return this.output();
   }
 
@@ -2763,7 +2772,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 177, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 178, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [

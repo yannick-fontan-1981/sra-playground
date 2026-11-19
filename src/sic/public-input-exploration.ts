@@ -11,7 +11,8 @@ import { observedCommandFrontier, observedCommandKey as commandKey, observedComm
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
 import { repeatedInputTargets } from './repeated-input-targets.ts';
-import { chooseTravelTrial, observeTravel, type ObservedTravel } from './observed-travel-frontier.ts';
+import { chooseTravelTrial, observeTravel, readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
+import { chooseCoverage, hasObservedCoverage, observeCoverage, observedCoverageDeadlock, retainCoverageAfterReset, type CoverageLearning } from './observed-coverage.ts';
 import { countChangesInside, workspaceClickCandidate } from './workspace-click.ts';
 import { commandPanelState, visibleCommandPanel, type VisibleCommandPanel } from './visible-command-panel.ts';
 import { canReachPanelMarker, confirmsPanelTranslation, containsBox, learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, matchingPanelMarker, panelActor,
@@ -96,8 +97,10 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   panelAccessGoal?: PanelAccessGoal;
   collectionEdit?: readonly [string, string];
   travel?: ObservedTravel;
+  coverage?: CoverageLearning;
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
+  coveragePlacement?: true;
   clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string;
   panel?: Pick<VisibleCommandPanel, 'area' | 'panel'>; panelTest?: string;
   panelApproach?: PanelApproach; panelComparison?: PanelMarkerTrial; panelContact?: PanelContactApproach;
@@ -455,9 +458,11 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const ref = observation.observation_ref;
       const nonPoint = inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref));
       const panel = nonPoint.length > 1 && observation.available_action_refs.includes('ACTION6') ? visibleCommandPanel(rows) : null;
-      const travel = !panel && local.experiments >= 5 && nonPoint.length >= 2
+      const coverage = !panel && local.coverage?.body ? chooseCoverage(local.coverage, local.travel, rows) : undefined;
+      const coverageKey = coverage?.command.action_ref;
+      const travel = !panel && !coverage && local.experiments >= 5 && nonPoint.length >= 2
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
-      const budget = panel || travel ? remaining : Math.min(remaining, explorationLimit - local.experiments);
+      const budget = panel || travel || coverage ? remaining : Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
       const panelBounds = panel ? { area: panel.area, panel: panel.panel } : undefined;
       const source = explorationKey(observation, rows, panelBounds);
@@ -602,7 +607,8 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
           : terrainStep ? commandKey(terrainStep.command) : unmeasured ?? (terrain ? commandKey(terrain.command) : null);
       const frontier = contextualCommand ? { action: contextualCommand, probe: contextualCommand, depth: walk?.route.length ?? 0, first: null }
         : probe ? { action: probe, probe, depth: 0, first: null }
-        : measuredControls ?? preferred ?? workspaceProbe ?? (travelKey ? { action: travelKey, probe: travelKey, depth: 0, first: null } : null)
+        : measuredControls ?? preferred ?? workspaceProbe ?? (coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null)
+          ?? (travelKey ? { action: travelKey, probe: travelKey, depth: 0, first: null } : null)
           ?? panelProbe ?? directionalProbe
           ?? observedCommandFrontier(local.transitions, source, keys, budget,
           board => board === source ? keys : local.options[board] ?? [], deferred);
@@ -614,11 +620,13 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const verifiedContextChange = !contextualCommand && recheck && !probe && !collectionTrial && !workspaceTrial && named.includes(frontier.action)
         ? recheck.evidence : null;
       const repeatedTarget = frontier.depth === 0 && offer.repeated;
-      const travelEvidence = travel && frontier.action === travelKey ? travel.evidence : [];
+      const selectedCoverage = frontier.action === coverageKey ? coverage : undefined;
+      const travelEvidence = !selectedCoverage && travel && frontier.action === travelKey ? travel.evidence : [];
       const travelTarget: NativeBox | undefined = travel && local.travel && travelEvidence.length
         ? [travel.target[0], travel.target[1], travel.target[0] + local.travel.grid.pitch - 1,
           travel.target[1] + local.travel.grid.pitch - 1] : undefined;
       const proof: [string, ...string[]] = [ref, ...(frontier.first ? [frontier.first.evidence] : []),
+        ...(selectedCoverage?.evidence ?? []).filter(item => item !== ref),
         ...travelEvidence.filter(item => item !== ref),
         ...(repeatedTarget && stationaryCommand ? [stationaryCommand.evidence, ...stationaryClicks.slice(-4).map(edge => edge.evidence)] : []),
         ...(clickedControl && probe ? [clickedControl.evidence] : []),
@@ -659,7 +667,11 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : undefined;
       if ((verifiedContextChange || contextualCommand) && decision?.result !== (routeSupported ? 'P07' : 'P05')) return null;
       const strategy = decision ? (routeSupported ? 'P07' : 'P05') : selected.id;
-      const label = travelEvidence.length && travel ? {
+      const label = selectedCoverage ? selectedCoverage.verifyBarrier
+        ? 'Verify a barrier that could make simultaneous coverage impossible'
+        : selectedCoverage.covered ? 'Check access to the exit while the observed marks stay covered'
+          : 'Cover the visible marks simultaneously using the measured push effect'
+        : travelEvidence.length && travel ? {
         approach: 'Use a measured direction to approach a visible landing and test its role',
         contact: 'Explore a reachable contact using the movement measured so far',
         switch: 'Test a command from a surface it changed in an earlier return',
@@ -685,10 +697,13 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? (routeSupported ? publicInputStrategies.P07 : 'Recheck an available control after the visible interface changes')
         : panelTest && command.action_ref === 'ACTION6' ? 'Test a distinct control on the visible panel'
           : panelTest ? 'Compare a non-point command with the tested panel controls' : publicInputStrategies[selected.id];
-      const goal = { kind: opening ? 'reach_projected_region' : 'learn_public_command_effect', scope: ref.split(':revision:', 1)[0]!,
-        subjects: opening ? [`visible_marker:${opening.peer.join(',')}`] : ['current_public_interface'],
+      const goal = { kind: selectedCoverage ? selectedCoverage.covered ? 'reach_observed_exit' : 'cover_repeated_marks'
+        : opening ? 'reach_projected_region' : 'learn_public_command_effect', scope: ref.split(':revision:', 1)[0]!,
+        subjects: selectedCoverage ? (selectedCoverage.covered ? [selectedCoverage.exit] : selectedCoverage.marks).map(cell => `visible_marker:${cell}`)
+          : opening ? [`visible_marker:${opening.peer.join(',')}`] : ['current_public_interface'],
         parentObjective: completion,
-        satisfactionContract: opening ? 'observe_arrival_at_projected_marker' : 'observe_public_return_to_available_input' };
+        satisfactionContract: selectedCoverage ? selectedCoverage.covered ? 'observe_official_progress' : 'observe_simultaneous_superposition'
+          : opening ? 'observe_arrival_at_projected_marker' : 'observe_public_return_to_available_input' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
       const id = `public-input:${need.id}`, actions = walk ? walk.route.map(step => step.command) : [command];
       const witness = command.action_ref === 'ACTION6'
@@ -696,6 +711,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         : null;
       return {
         status: 'proposed', kind: publicInputExplorationId, actions, source, candidates: keys, needId: need.id,
+        ...(selectedCoverage && !selectedCoverage.covered ? { coveragePlacement: true as const } : {}),
         ...(panelBounds ? { panel: panelBounds } : {}), ...(panelTest ? { panelTest: testKey(frontier.action) } : {}),
         ...(clickedControl && probe ? { clickedControl } : {}), ...(box && !offer.marker ? { selectedBox: box } : {}),
         ...(collectionTrial ? { collectionTrial } : {}),
@@ -722,8 +738,9 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
             : programming ? 'test_marker_selector' : terrainStep ? 'advance_measured_terrain'
               : unmeasured ? 'calibrate_at_landing' : terrain ? 'test_terrain_configuration'
               : approach ? 'approach_marker' : comparison ? 'compare_on_marker' : 'recheck' } } } : {}),
-        sicSituationCard: { strategy, need: opening ? 'Reach the new region opened by the support placement' : 'Learn how to act on the current board', mode,
-          situation: !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
+        sicSituationCard: { strategy, need: selectedCoverage ? selectedCoverage.covered ? 'Reach the observed exit' : 'Cover one mark per movable piece'
+          : opening ? 'Reach the new region opened by the support placement' : 'Learn how to act on the current board', mode,
+          situation: !selectedCoverage && !travelTarget && !contextualCommand && deferred && frontier.depth === 0 && frontier.probe !== deferred
             ? 'The last direction changed the board. Test another input before trying its opposite.'
             : label, agenda: decision ? [] : entries, evidence: proof, ...(box ? { addressedRegion: box } : {}),
           ...(decision ? { triggerCard: decision.receipt.workflow } : {}),
@@ -790,6 +807,10 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
     },
     after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      if (!scored && proposal.coveragePlacement && hasObservedCoverage(state.coverage, state.travel, afterRows)) {
+        return { matched: true, seal_prefix: true, reason: 'simultaneous_coverage_observed',
+          sic_need: { id: proposal.needId, status: 'satisfied' } };
+      }
       if (!scored && proposal.transportMove?.expected && proposal.panel) {
         const held = state.animatedPanelControls?.[proposal.transportMove.tool]?.held;
         const moved = held && measurePanelTransport(rows, afterRows, proposal.panel.area, held);
@@ -854,8 +875,12 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const destination = explorationKey(after, afterRows, proposal.panel), action = commandKey(command);
       const panel = proposal.panel ? visibleCommandPanel(rows) : null;
       if (!proposal.panel && proposal.candidates.filter(key => /^ACTION[1-4]$/.test(key)).length >= 2) {
-        const travel = observeTravel(state.travel, rows, afterRows, command, after.observation_ref);
+        const previous = state.travel, travel = observeTravel(previous, rows, afterRows, command, after.observation_ref);
         if (travel) state.travel = travel;
+        if (before.available_action_refs.length === 4 && before.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))) {
+          const coverage = observeCoverage(state.coverage, previous, travel, rows, afterRows, command, after.observation_ref);
+          if (coverage) state.coverage = coverage;
+        }
       }
       if (proposal.panel) {
         const walk = proposal.panelApproach ?? proposal.panelContact;
@@ -929,6 +954,11 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       rememberCommandReturn(state.transitions, source, destination, action, after.observation_ref, proposal.panel ? null : undefined);
       state.lastChange = destination === source ? null : { destination, action, evidence: after.observation_ref };
       const events: NativeRecord[] = motionReceipt ? [{ kind: 'sic_selected_piece_motion', ...motionReceipt }] : [];
+      const coverage = state.coverage, deadlock = coverage?.deadlock;
+      if (coverage?.layout && deadlock?.ref === after.observation_ref) {
+        events.push({ kind: 'sic_coverage_deadlock_observed', pieces: deadlock.bodies, marks: coverage.layout.marks,
+          evidence: [...new Set([...coverage.refs, deadlock.ref])] });
+      }
       let reviewEvidence: string | undefined;
       if (proposal.panel && action.startsWith('ACTION6:')) {
         for (const [tool, item] of Object.entries(state.animatedPanelControls ?? {})) {
@@ -1056,6 +1086,20 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
           evidence: [before.observation_ref, after.observation_ref] });
       }
       return { events, ...(reviewEvidence ? { reviewEvidence } : {}) };
+    },
+    requestedStopReason(observation) {
+      const coverage = state.coverage, proof = coverage?.deadlock;
+      if (!coverage || !proof || proof.ref !== observation.observation_ref) return null;
+      return coverage.recovered.includes(proof.key) ? 'sic_coverage_deadlock_already_recovered' : observedCoverageDeadlock;
+    },
+    stateAfterLevelReset(observation, rows) {
+      if (!state.travel || !state.coverage?.deadlock) return;
+      const { grid, moves, refs } = state.travel;
+      const pieces = readTravelGrid(rows, grid).pieces;
+      if (pieces.length !== 1) return;
+      return { ...initial(observation.level_epoch), coverage: retainCoverageAfterReset(state.coverage),
+        travel: { grid, moves, refs, actor: pieces[0]!, visited: pieces, supports: [], tested: {},
+          altered: [], controls: [], completed: [], switches: {}, stalled: 0 } };
     },
     state: () => ({ ...state }),
     restore(value: NativeRecord) { state = structuredClone(value as State); },

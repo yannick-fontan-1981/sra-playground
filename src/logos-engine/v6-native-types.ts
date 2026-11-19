@@ -181,6 +181,8 @@ export interface NativeProgramRegistry {
  * Python-family boundary, with named public arguments and original proposal keys.
  * Family ports with a different internal signature use a small explicit adapter.
  */
+export const sicObservedCoverageDeadlock = 'sic_observed_coverage_deadlock';
+
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;
   attachPrograms?(registry: NativeProgramRegistry): NativeMaybePromise<void>;
@@ -214,6 +216,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   // execution is native scheduling context, never an extra Python source datum.
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
+  /** Transfer measured rules and recovery exclusions to an actual reset of this level. */
+  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows): NativeRecord | undefined;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
