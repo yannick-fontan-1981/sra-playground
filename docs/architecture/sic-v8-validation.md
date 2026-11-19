@@ -2678,3 +2678,11 @@ Le rejeu gagne en **29 commandes SIC seul** et **13,90 s** avec un worker. Les *
 SIC distingue les récepteurs accessibles directement du secteur qui requiert un relais. Après les deux relais et la livraison directe à droite, il réutilise la preuve d'interception d'un porteur connu. La commande 49 le retire tout en préservant la caisse. Lorsque deux porteurs se ressemblent, SIC associe leurs positions successives par un déplacement compatible et vérifie le mouvement conjoint de la caisse. Il laisse le dernier porteur terminer sa livraison.
 
 Le rejeu gagne en **66 commandes SIC seul** et **37,34 s** avec un worker, sur les 70 commandes disponibles. Les **544 commandes et retours** des niveaux 1 à 8 ont les mêmes empreintes. La reprise depuis la sauvegarde confirme les 66 retours et reproduit la trajectoire `03c160463cae68271c8d1a95b3998967cd60e7d6249fcbad0afb2b230974645b` jusqu'à `WIN`.
+
+### LF52 niveau 10 — Réutiliser les commandes et suivre les chariots au bord du champ
+
+Quand la recherche sur les rails visibles atteint sa borne, SIC suit vers l’intérieur un chariot chargé au bord du champ. Les quatre premiers retours révèlent d’autres chariots sur le même rail. Avec les commandes et la règle de saut apprises au niveau précédent, SIC construit un trajet qui réunit les deux pièces recherchées. À la commande 29, le retour visible concorde avec le départ d’un chariot chargé et le déplacement du suivant vers la place libérée. Le trajet est recalculé à partir de cet état observé.
+
+Le rejeu gagne en **47 commandes SIC seul** et **99,97 s** avec un worker. Les **662 commandes et retours** des niveaux 1 à 9 ont les mêmes empreintes. La reprise depuis la sauvegarde confirme les 47 retours et reproduit la trajectoire `1f375ce271e1a6727a8640a0ec405b135bcc338544bc06e84793dbaf24688da2` jusqu’à `WIN`.
+
+Le cumul des preuves chronologiques atteint **636 niveaux sur 636** sur les **100 jeux** de la campagne. Les rejeux se sont arrêtés à la victoire du niveau demandé.
