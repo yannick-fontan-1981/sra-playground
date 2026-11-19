@@ -1,0 +1,18 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(20,18);
+fill(2,8,5,13);put(5,12,'~');put(2,10,'M');put(4,8,'W');fill(6,8,11,8,'~');
+fill(12,8,12,10);put(12,8,'m');
+fill(6,12,7,12,'~');fill(8,12,16,12);put(9,12,'m');put(11,11,'o');put(12,11,'~');
+fill(14,13,16,15);put(15,13,'#');put(16,15,'o');put(17,13,'~');fill(18,12,18,15);put(18,12,'g');put(18,15,'g');
+const spec={id:'ss08-07',title:'Le duel et le retour',rows:strings(),facing:'E',mirrors:[{at:{x:3,y:12},facing:'NE'}],circuits:[{id:'duel',buttons:[{x:4,y:8}],color:14}],gates:[{at:{x:11,y:11},circuit:'duel',direction:'E',closedWhen:'released'},{at:{x:16,y:13},circuit:'duel',direction:'E',closedWhen:'pressed'}]};
+const a=new Author(spec);
+a.select('wizard').act('R').stage('Le monstre remplace le Magicien sur le bouton vert');
+a.go(2,12,'merchant').act('R').stage('Le Marchand règle la diagonale de rencontre');
+a.act('X').stage('Les monstres s’entretuent dans le seul passage ; le bouton libéré construit le premier pont et ouvre la seconde presse');
+a.go(4,8).act('X').stage('Le Marchand rejoint la passerelle libérée');
+a.go(16,13,'wizard').act('D').go(15,15).stage('Le Magicien extrait la caisse bloquée et la dépose sur la presse ouverte');
+a.select('merchant').act('X').stage('Retour au bouton : la seconde presse fabrique le pont final');
+a.act('X').stage('Nouveau départ du bouton : la presse se rouvre, le pont reste');
+a.go(18,12).stage('Le Marchand franchit le pont final');
+a.go(18,15,'wizard').stage('Les deux destinations sont occupées');
+a.save(new URL('../level7-design.json',import.meta.url),{puzzle:25,label:'Adaptation de Heroes and Mirrors 25 · placer deux monstres côte à côte par reflet pour libérer le passage.',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-25',piston:true,platform:false,objective:'Faire combattre les monstres, préparer une seconde presse avec le Magicien, puis retourner au bouton par reflet.'},'Reprise du principe d’élimination réciproque des gobelins de Heroes and Mirrors 25, sans duplication. Géométrie originale à deux étapes : libérer le bouton construit la sortie de l’îlot du Magicien, mais le pont final exige de charger une seconde presse puis de réactiver le même bouton. La caisse finale est coincée contre trois murs : le Magicien doit l’extraire. Le seul appui de poussée latérale est un mur, donc le second pont exige la presse.');

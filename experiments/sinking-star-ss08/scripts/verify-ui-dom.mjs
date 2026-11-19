@@ -229,6 +229,7 @@ try{
 
   for(let level=1;level<=inspectedLevels;level++){
     choose(level);checkPartyUI();assert.deepEqual(heroes(ref.observe().frame).map(h=>h.color).sort((a,b)=>a-b),[12,15]);assert.equal(goalCount(ref.observe().frame),2);
+    if(process.env.SS08_UI_CAPTURE_DIR)writeFileSync(resolve(process.env.SS08_UI_CAPTURE_DIR,'ss08-level-'+level+'-initial.rgba'),pixels);
     const initial=ref.observe(),countBefore=captures.length,movesBefore=$('moves').textContent;
     const selected=heroes(initial.frame).find(h=>h.selected);clickPixel(selected.data);key(selected.color===12?'1':'2');
     equalFrame(initial);assert.equal(captures.length,countBefore);assert.equal($('moves').textContent,movesBefore);assert.equal(timers.length,0);assert.equal($('undo').disabled,true);

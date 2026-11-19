@@ -1,0 +1,20 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(19,14);
+fill(1,2,5,5);put(3,1,'o');put(4,1);put(5,1);put(3,4,'W');put(1,4,'M');
+put(6,4,'~');fill(7,4,11,5);put(9,5,'#');
+// The press is unreachable on three sides. Its only exit fills the water neck.
+put(9,6,'o');put(8,6,'~');put(8,7);fill(8,8,11,11);
+fill(12,10,15,10,'~');fill(16,7,17,10);put(16,10,'o');put(16,7,'g');put(17,9,'g');
+const spec={id:'ss08-01',title:'L’atelier des deux passages',rows:strings(),facing:'E',mirrors:[{at:{x:10,y:10},facing:'NE'}],circuits:[{id:'presse',buttons:[{x:8,y:4}],color:7},{id:'passerelle',buttons:[{x:17,y:10}],color:14}],gates:[{at:{x:9,y:6},circuit:'presse',direction:'W',closedWhen:'pressed'}],platforms:[{at:{x:14,y:10},circuit:'passerelle',activeWhen:'pressed'},{at:{x:15,y:10},circuit:'passerelle',activeWhen:'pressed'}]};
+const a=new Author(spec);
+a.select('wizard').act('U').act('R').stage('Le Magicien extrait la caisse de l’alcôve par échange');
+a.go(2,4,'merchant').act('RRR').stage('Le Marchand pousse la caisse dans l’eau et crée le premier appui');
+a.go(7,4).act('R').stage('Le bouton rose commande la presse isolée et construit le deuxième appui');
+a.go(9,10).act('R').stage('Le miroir gagne la colonne de traversée');
+a.go(11,8,'wizard').act('D').stage('Le rayon tourne sur le miroir et échange le Magicien avec la caisse distante');
+a.act('R').stage('Le Magicien maintient les deux plateformes d’arrivée');
+a.act('X').stage('Le reflet envoie la caisse proche dans l’eau : le troisième appui est prêt');
+a.go(11,8,'merchant').act('X').stage('Le reflet prend le Marchand proche et laisse le Magicien plus lointain');
+a.act('RRR').go(16,7).stage('Le Marchand traverse les trois appuis et atteint sa destination');
+a.select('wizard').act('U').stage('La passerelle se retire : les deux héros sont arrivés');
+a.save(new URL('../level1-design.json',import.meta.url),{puzzle:30,label:'Tutoriel original du duo · échange direct, trois appuis, presse isolée, miroir mobile, rayon dévié et passerelle tenue à deux.',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30',piston:true,platform:true,objective:'Extraire la caisse ; le bouton rose pousse la caisse isolée et construit le second appui. Préparer le miroir, refléter la dernière caisse puis tenir la passerelle pour faire traverser le duo.'},'Création pédagogique. Le rayon dévié du Magicien reprend le principe de Heroes and Mirrors 30, avec deux personnages, une presse isolée et une passerelle temporaire. La géométrie est originale.');

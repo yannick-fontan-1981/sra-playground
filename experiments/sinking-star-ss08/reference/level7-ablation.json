@@ -1,0 +1,26 @@
+{
+  "checks": [
+    {
+      "flag": "disablePistons",
+      "status": "limit",
+      "states": 150000,
+      "expanded": 131303,
+      "ms": 2669
+    },
+    {
+      "flag": "disableWizardSwaps",
+      "status": "unsolvable",
+      "states": 22972,
+      "expanded": 22972,
+      "ms": 406
+    },
+    {
+      "flag": "disableMerchantPushes",
+      "status": "limit",
+      "states": 150000,
+      "expanded": 119692,
+      "ms": 2447
+    }
+  ],
+  "meaning": "Exhausted queues are proofs for the blocked transitions. Limits are inconclusive."
+}

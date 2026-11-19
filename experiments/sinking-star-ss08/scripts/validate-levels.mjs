@@ -3,7 +3,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
-import {DuoPuzzleSession,PALETTE,compileLevel,initialState,stepDetailed,renderWorld,circuitPressed} from '../dist/core.js';
+import {DuoPuzzleSession,PALETTE,compileLevel,initialState,stepDetailed,renderWorld,circuitPressed,traceSwap} from '../dist/core.js';
 import {SS08_LEVELS} from '../dist/levels.js';
 import {LEVEL_INFO} from '../dist/level-info.js';
 import {replay} from './solver.mjs';
@@ -21,7 +21,7 @@ assert.equal(SS08_LEVELS.length,8,'SS08 ships exactly eight levels');
 assert.equal(witnesses.length,8,'Each level needs an author witness');
 assert.equal(LEVEL_INFO.length,8,'Each level needs public source metadata');
 const worlds=SS08_LEVELS.map(compileLevel),starts=worlds.map(initialState);
-const session=new DuoPuzzleSession(SS08_LEVELS);
+const session=new DuoPuzzleSession(SS08_LEVELS),runs=[];
 const report={game:'SS08',version,levels:[],totals:{},failureRoutes:[],necessityEvidence:[],success:false};
 
 function checkFrame(frame,label){
@@ -101,7 +101,7 @@ for(const [index,spec] of SS08_LEVELS.entries()){
  assert.deepEqual(witness.actions,design.actions,label+': reference and witness actions');
  assert.equal(witness.commands,design.commands);assert.equal(witness.level,level);assert.equal(witness.id,spec.id);
  assert.ok(typeof witness.commands==='string'&&witness.commands.length>0);
- const result=replay(spec,witness.commands),world=worlds[index];
+ const result=replay(spec,witness.commands),world=worlds[index];runs.push(result);
  assert.deepEqual(result.actions,witness.actions,label+': commands decode to the saved pixel actions');
  if(design.metrics)assert.deepEqual(result.metrics,design.metrics,label+': recorded author metrics');
  let state=initialState(world),frames=0,maxFrames=0,combatWaves=0,mirrorsDestroyed=0,cratesCrushed=0,simultaneousHeroReflections=0,hydraulicChanges=0;
@@ -162,13 +162,40 @@ for(const [index,spec] of SS08_LEVELS.entries()){
 
 assert.equal(session.observe().state,'WIN');assert.equal(session.observe().levelsCompleted,8);
 report.campaignChecks={levels:8,finalState:'WIN',allWitnessesUseMerchantPushAndWizardSwap:true,allCompletionUndosVerified:true};
-// The tutorial's advertised lessons are concrete obligations of its real route.
+// Concrete campaign promises are verified from actual phases and resulting states.
+const mechanisms=[];
+const confirm=(level,description,test)=>{assert.ok(test,'Level '+level+': '+description);mechanisms.push({level,description,verified:true});};
 const tutorial=report.levels[0];
-assert.ok(tutorial.bentSwaps>=1&&tutorial.mirrorMoves>=1&&tutorial.reflections>=1&&tutorial.heroReflections>=1);
-assert.ok(tutorial.pistonPushes>=1&&tutorial.platformsCreated>=2&&tutorial.hydraulicPlatforms>=1&&tutorial.hydraulicChanges>=1);
-// L6's delay puzzle deliberately builds one support by reflection and one by its press.
+confirm(1,'The tutorial uses a bent exchange, a movable mirror, a press, three supports and a hydraulic crossing',
+ tutorial.bentSwaps>=1&&tutorial.mirrorMoves>=1&&tutorial.heroReflections>=1&&tutorial.pistonPushes>=1&&tutorial.platformsCreated>=3&&tutorial.hydraulicPlatforms>=1&&tutorial.hydraulicChanges>=1);
+const relay=report.levels[1],relayRun=runs[1];
+confirm(2,'The bent exchange leaves a crate on the Wizard’s pressure button',
+ relay.bentSwaps>=1&&relay.mirrorMoves>=1&&relay.heroReflections>=1&&relayRun.trace.some(t=>t.phases.some(p=>p.kind==='swap'&&relayRun.world.buttons.some(b=>samePoint(b,p.before.heroes[p.before.active].at)&&p.after.stones.some(c=>samePoint(c,b))))));
+const islands=report.levels[2];
+confirm(3,'The island relay exchanges the two heroes and builds its final permanent crossing',
+ islands.heroSwaps>=2&&islands.wizardSwaps>=3&&islands.platformsCreated>=1&&islands.mirrors===0);
+const scaffolding=report.levels[3],scaffoldRun=runs[3];
+confirm(4,'The transported Merchant builds support beneath a moved mirror and sends heroes through it',
+ scaffolding.heroSwaps>=1&&scaffolding.mirrorMoves>=3&&scaffolding.heroReflections>=2&&scaffolding.platformsCreated>=1&&scaffoldRun.trace.some(t=>t.after.mirrors.some(m=>t.after.supports.some(p=>samePoint(p,m.at)))));
+const diagonals=report.levels[4],diagonalRun=runs[4];
+confirm(5,'A moved mirror supplies the weight that controls the temporary platform',
+ diagonals.mirrors>=2&&diagonals.mirrorMoves>=2&&diagonals.hydraulicPlatforms>=1&&diagonalRun.trace.some(t=>diagonalRun.world.platforms.some(platform=>circuitPressed(diagonalRun.world,t.after,platform.circuit)&&diagonalRun.world.circuits.find(c=>c.id===platform.circuit).buttons.some(b=>t.after.mirrors.some(m=>samePoint(b,m.at))))));
 const delay=report.levels[5];
-assert.ok(delay.reflections>=3&&delay.heroReflections>=2&&delay.pistonPushes>=1&&delay.platformsCreated>=2&&delay.hydraulicPlatforms>=2);
+confirm(6,'Successive reflections and the isolated press build two supports around a hydraulic bridge',
+ delay.reflections>=3&&delay.heroReflections>=2&&delay.pistonPushes>=1&&delay.platformsCreated>=2&&delay.hydraulicPlatforms>=2);
+const duel=report.levels[6],duelRun=runs[6];
+confirm(7,'One simultaneous combat removes both monsters and two presses build two permanent supports',
+ duel.monstersRemoved===2&&duel.combatWaves===1&&duel.pistonPushes>=2&&duel.platformsCreated>=2&&duelRun.trace.some(t=>t.phases.some(p=>p.kind==='combat'&&p.before.monsters.length-p.after.monsters.length===2)));
+const finale=report.levels[7],finaleRun=runs[7],initialWizard={...starts[7],active:1};
+confirm(8,'The Wizard starts trapped by closed north/south targeting loops',
+ traceSwap(worlds[7],initialWizard,'N').loop&&traceSwap(worlds[7],initialWizard,'S').loop&&[1,2,3,4,5].every(action=>stepDetailed(worlds[7],initialWizard,action).state.failed));
+confirm(8,'The press moves a crate–mirror file, destroys one mirror and permits a two-support escape',
+ finale.mirrorsDestroyed===1&&finale.platformsCreated===2&&finale.pistonPushes>=1&&finaleRun.trace.some(t=>t.phases.some(p=>p.kind==='piston'&&p.moves.some(m=>m.actor==='stone')&&p.moves.some(m=>m.actor==='mirror'))));
+confirm(8,'Both heroes arrive after the hydraulic platforms retract',
+ finaleRun.state.complete&&finaleRun.state.platformActive?.length>0&&finaleRun.state.platformActive.every(active=>!active));
+report.mechanismChecks=mechanisms;
+const finaleEvidence=await optionalJson('../reference/level8-mechanisms.json');
+if(finaleEvidence){assert.equal(finaleEvidence.mapSha256,hash(SS08_LEVELS[7]),'Finale mechanism evidence belongs to the current map');report.finaleEvidence=finaleEvidence;}
 
 const failures=await json('../tests/failures.json');
 assert.ok(Array.isArray(failures)&&failures.length>0,'At least one reachable campaign defeat is required');

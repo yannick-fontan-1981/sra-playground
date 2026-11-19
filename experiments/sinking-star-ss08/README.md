@@ -5,19 +5,19 @@ Laboratoire autonome du duo **Marchand + Magicien**, destiné au lot Custom 4 de
 ## Jouer et reconstruire
 
 ```bash
-npm ci
+npm install
 npm test
 npm run validate
 ```
 
 Ouvrir ensuite `dist/SS08-demo.html` dans un navigateur. Le HTML embarque le moteur, les cartes et l’interface ; il fonctionne hors ligne. Les sources restent dans `experiments/sinking-star-ss08/` ; l’adaptateur SRA et la publication du site constituent une étape d’intégration séparée.
 
-- Flèches / ZQSD / WASD : déplacer le personnage sélectionné.
+- Flèches : déplacer le personnage sélectionné.
 - Marchand orange (12) : pousser un seul occupant vers la case suivante.
 - Magicien violet (15) : échanger automatiquement avec le premier bloc, monstre ou compagnon visé ; sans cible, marcher. La face blanche d’un miroir dévie la visée, son dos noir la bloque.
 - Espace / X : activer les reflets géométriques des miroirs.
 - Clic sur un personnage ou Tab : changer de personnage, sans faire avancer le monde.
-- Z / Retour arrière : annuler ; R : recommencer.
+- Z : annuler ; R : recommencer.
 
 Deux destinations doivent être occupées simultanément. Les caisses plongées dans l’eau deviennent des appuis permanents. Les boutons peuvent commander des portes-presses et des plateformes rétractables. Les monstres frappent leurs voisins orthogonaux simultanément.
 

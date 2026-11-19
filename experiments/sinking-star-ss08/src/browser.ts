@@ -143,7 +143,7 @@ const hints:Record<string,string>={
   'wizard-bend':'Vise la face blanche d’un miroir avec le Magicien : son rayon tourne à angle droit et cherche une cible sur le nouvel axe. Le dos noir bloque. Une flèche déclenche l’échange ; Espace déclenche les reflets.',
   'mirror-motion':'Pousse un miroir avec le Marchand. Son orientation reste fixe, mais son nouvel emplacement change la visée du Magicien et les arrivées des reflets.',
   platform:'Une caisse envoyée dans l’eau devient un appui marron avec X cyan. Tu peux marcher dessus, mais il ne peut plus servir de cible au Magicien.',
-  mirror:'Sur l’îlot d’arrivée, le Magicien peut maintenir le bouton vert pour déployer la passerelle. Prépare ensuite le reflet du Marchand : le + gris clair indique son arrivée. Espace active les miroirs ; le plus proche traverse.',
+  mirror:'Le Magicien maintient le bouton vert pour déployer la passerelle. Espace envoie d’abord la caisse proche dans l’eau et crée le troisième appui. Prépare ensuite le reflet du Marchand : le + gris clair indique son arrivée.',
   gate:'Le bouton rose commande la presse sous la caisse isolée. Appuie dessus pour envoyer cette caisse dans l’eau et ouvrir le second passage. Le repère d’une presse indique le sens de sa poussée.',
   goals:'Place les deux personnages sur les deux contours jaunes en même temps. Le premier arrivé reste sélectionnable et peut encore aider son partenaire.',
 };

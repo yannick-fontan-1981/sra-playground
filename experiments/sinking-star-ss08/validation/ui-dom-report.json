@@ -1,0 +1,149 @@
+{
+  "success": true,
+  "scope": "full-campaign",
+  "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "The complete compiled HTML opens level 1 with both colored heroes, exact engine pixels and its rich tutorial expanded",
+    "Five controls, ten tutorial objectives, distinct reflection previews and explicit directional swap, bent-ray, water, mirror, circuit and monster rules are present",
+    "Five compiled-HTML fixtures exercise first-crate, bent-ray and companion exchanges, fallback walking and black-back obstruction with exact frames and visual Undo",
+    "Compiled HTML with three in-memory room fixtures shows only the nearer hero/crate preview, ignores the farther blocked landing, preserves equal-distance exchanges, and supports exact visual Undo",
+    "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
+    "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
+    "Movement uses every frame and duration; directions, reflection and selection are blocked while animating, while Space still prevents scrolling",
+    "Undo during an animation restores both heroes and cancels stale callbacks",
+    "Reset, level changes and return to tutorial cancel pending animation callbacks and reset the appropriate counters",
+    "8 inspected room(s) display their source attribution and relevant piston/platform help",
+    "8 inspected room(s) keep one orange Merchant, one violet Wizard and two goals; selecting the current hero makes no action or Undo entry",
+    "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
+    "The complete tutorial earns all ten discoveries through public pixels: walking, selection, Merchant push, Wizard swap and bent ray, mirror motion, permanent support, reflection, gate and two goals",
+    "All eight witnesses replay through the actual UI with exact frames and timing; victory needs all rooms and disables direction, reflection and hero selection",
+    "Undo exits final victory and restores progression; Restart returns to the open tutorial with zero completions",
+    "Real reachable defeats display all movement/combat frames before the terminal overlay, block further commands, and support mid-animation Undo plus defeat-panel Undo/Reset"
+  ],
+  "wizardCoverage": [
+    {
+      "case": "first aligned crate",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "white face bends the ray",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "companion is the first target",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "no target walks one cell",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "black back blocks targeting",
+      "exactFrames": 3,
+      "publicLessonDetection": true,
+      "exactVisualUndo": true
+    }
+  ],
+  "reflectionPriorityCoverage": [
+    {
+      "case": "near hero with farther blocked landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "near crate with farther valid landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "equal-distance heroes exchange",
+      "previewVerified": false,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    }
+  ],
+  "tutorialCoverage": {
+    "actions": 50,
+    "frames": 151,
+    "selectionActions": 5,
+    "discoveries": [
+      "select",
+      "wizard-swap",
+      "move",
+      "merchant-push",
+      "platform",
+      "gate",
+      "mirror-motion",
+      "wizard-bend",
+      "mirror",
+      "goals"
+    ]
+  },
+  "platformCoverage": {
+    "circuitsWithBothVisibleStates": [
+      "1:passerelle",
+      "5:passerelle",
+      "6:retard",
+      "8:retour"
+    ],
+    "visibleCells": 7,
+    "specifiedPlatformCount": 7
+  },
+  "witnessCoverage": {
+    "levels": 8,
+    "actions": 324,
+    "frames": 970,
+    "selectionActions": 29,
+    "allFrameDurationsVerified": true
+  },
+  "defeatCoverage": [
+    {
+      "level": 1,
+      "cause": "Le Magicien quitte le bouton vert pendant que le Marchand occupe une plateforme temporaire.",
+      "actions": 45,
+      "frames": 6,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        60,
+        80,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    },
+    {
+      "level": 7,
+      "cause": "Le Marchand approche le monstre qui occupe le bouton vert.",
+      "actions": 6,
+      "frames": 8,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        80,
+        90,
+        100,
+        110,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    }
+  ]
+}
