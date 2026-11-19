@@ -5,6 +5,25 @@ import type { AlternatingTopology } from '../src/logos-engine/v6-alternating-gra
 import { planPatrolGroup, planPatrolStep, type PatrolGroupMemory, type PatrolMemory } from '../src/sic/material-route-patrol.ts';
 import { planGuardWatch } from '../src/sic/material-route-watch.ts';
 import { planGuardDiversion, type GuardDiversion } from '../src/sic/material-route-diversion.ts';
+import { observeCombinedEncounter, type EncounterMemory } from '../src/sic/material-route-encounter.ts';
+
+test('a patrol can obscure a predicted pursuer while an unrelated stale guard still contradicts the return', () => {
+  const rows = Array.from({ length: 20 }, () => Array<number>(20).fill(0));
+  const paint = (top: number, left: number, ink: number) => {
+    for (let y = top; y < top + 3; y++) rows[y]!.fill(ink, left, left + 3);
+    rows[top + 1]![left + 2] = 15;
+  };
+  paint(2, 8, 4);
+  paint(8, 8, 12);
+  const actor: AlternatingActor = { size: 3, bbox: [2, 2, 4, 4], histogram: [[4, 8], [15, 1]] };
+  const expected: EncounterMemory = { at: [2, 8], target: [14, 8], fixed: [], fixedBodies: [8],
+    patrols: [{ position: [8, 8], heading: [0, 6] }], patrolBody: 12, pursuer: [8, 8], pursuerBody: 13,
+    trigger: [], trail: [[8, 2], [2, 8]], evidence: ['movement'] };
+  const step = { input: 'right', to: expected.at, current: expected, expected, learning: false, measuringPatrols: false };
+  assert.deepEqual(observeCombinedEncounter(step, actor, rows, [], 'return')?.pursuer, [8, 8]);
+  paint(14, 2, 8);
+  assert.equal(observeCombinedEncounter(step, actor, rows, [], 'return'), null);
+});
 
 test('an unfamiliar guard excludes its adjacent tiles from the immediate move', () => {
   const edges = new Map<string, Set<string>>([

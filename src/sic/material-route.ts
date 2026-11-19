@@ -10,6 +10,7 @@ import { movedPatrol, observePatrolGroup, observePatrolReturn, planPatrolGroup, 
 import { observeGuardWatch, planGuardWatch, type GuardWatch, type GuardWatchStep } from './material-route-watch.ts';
 import { observeGuardDiversion, planGuardDiversion, type GuardDiversion, type GuardDiversionStep,
   type PursuitProfile } from './material-route-diversion.ts';
+import { observeCombinedEncounter, planCombinedEncounter, type EncounterMemory, type EncounterStep } from './material-route-encounter.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
 export const materialRouteId = 'sic_material_route';
@@ -36,10 +37,11 @@ type State = { epoch: number; size: number; histogram: number[][]; samples: Move
   evidence: string[]; lastMoved: string | null; repeat: string | null; count: number; stopped: boolean;
   calibration?: Calibration; pendingContact?: Contact | null; removals?: Removal[]; guardedTransfer?: boolean;
   patrol?: PatrolMemory; patrolProfile?: number[][]; patrolGroup?: PatrolGroupMemory; guardWatch?: GuardWatch;
-  pursuitProfile?: PursuitProfile; diversion?: GuardDiversion;
+  pursuitProfile?: PursuitProfile; diversion?: GuardDiversion; encounter?: EncounterMemory;
   completed?: { readonly nextEpoch: number; readonly score: number; readonly evidence: string } };
 type Choice = { input: string; to: AlternatingBox | null; ordinary: boolean; floor: number | null;
-  guarded?: boolean; contact?: boolean; patrol?: PatrolStep; patrolGroup?: PatrolGroupStep; watch?: GuardWatchStep; diversion?: GuardDiversionStep };
+  guarded?: boolean; contact?: boolean; patrol?: PatrolStep; patrolGroup?: PatrolGroupStep; watch?: GuardWatchStep;
+  diversion?: GuardDiversionStep; encounter?: EncounterStep };
 type WalkStep = { actor: AlternatingActor; choice: Choice };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: AlternatingActor; needId: string; walk?: WalkStep[] };
 const order = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
@@ -107,7 +109,7 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       if (!state?.calibration || !state.removals?.length
         || !state.patrolGroup && !state.guardWatch && !state.patrolProfile && !state.pursuitProfile) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal?.choice.watch || proposal?.choice.diversion ? proposal : null;
+      return proposal?.choice.watch || proposal?.choice.diversion || proposal?.choice.encounter ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       const available = order.filter(input => observation.available_action_refs.includes(input));
@@ -166,25 +168,33 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       const graphFacts = Object.keys(controls).length >= 2 ? measureAlternatingGraph(rows, observation, actor, controls, local.evidence, local.lastMoved, true) : null;
       const calibration = observedCalibration(graphFacts) ?? local.calibration;
       const topology = local.guardedTransfer && calibration
-        ? alternatingTopology(rows, actor, calibration, local.patrolGroup?.target ?? local.guardWatch?.target ?? local.diversion?.target) : null;
-      const multiplePatrols = local.patrolGroup || !!local.patrolProfile && !!topology
-        && recognizesPatrolGroup(topology, actor.size, local.patrolProfile, local.removals ?? []);
+        ? alternatingTopology(rows, actor, calibration, local.encounter?.target ?? local.patrolGroup?.target
+          ?? local.guardWatch?.target ?? local.diversion?.target) : null;
+      const shouldStop = () => !!execution?.signal?.aborted
+        || (execution?.now?.() ?? performance.now()) >= (execution?.deadlineMs ?? Infinity);
+      const encounter = topology && local.pursuitProfile && !local.guardWatch && !local.diversion
+        ? planCombinedEncounter(topology, actor, controls, local.pursuitProfile, local.removals ?? [],
+          local.encounter, remaining, shouldStop) : null;
+      if (local.encounter && !encounter) return null;
+      const multiplePatrols = !encounter && (local.patrolGroup || !!local.patrolProfile && !!topology
+        && recognizesPatrolGroup(topology, actor.size, local.patrolProfile, local.removals ?? []));
       const patrolGroup = multiplePatrols && topology && local.patrolProfile
         ? planPatrolGroup(topology, actor, controls, local.patrolProfile, local.patrolGroup, remaining, local.removals) : null;
       if (multiplePatrols && !patrolGroup) return null;
-      const watch = !multiplePatrols && !local.diversion && topology && local.patrolProfile && local.removals?.length
+      const watch = !encounter && !multiplePatrols && !local.diversion && topology && local.patrolProfile && local.removals?.length
         ? planGuardWatch(topology, actor, controls, local.removals, remaining, local.guardWatch) : null;
-      const diversion = !multiplePatrols && !watch && topology && local.pursuitProfile
+      const diversion = !encounter && !multiplePatrols && !watch && topology && local.pursuitProfile
         ? planGuardDiversion(topology, actor, controls, local.removals ?? [], local.pursuitProfile, remaining, local.diversion) : null;
       if ((local.guardWatch || local.diversion) && !watch && !diversion) return null;
-      const conditional = !multiplePatrols && !watch && !diversion && topology && calibration && topology.guards.length
+      const conditional = !encounter && !multiplePatrols && !watch && !diversion && topology && calibration && topology.guards.length
         ? instrumentalAlternatingContact(rows, actor, controls, calibration, local.removals ?? [], remaining) as ContactRoute | null : null;
-      const patrol = !multiplePatrols && !watch && !diversion && topology && (local.patrol || !conditional && topology.guards.length > 1)
+      const patrol = !encounter && !multiplePatrols && !watch && !diversion && topology && (local.patrol || !conditional && topology.guards.length > 1)
         ? planPatrolStep(topology, actor, controls, local.removals ?? [], local.patrol, remaining) : null;
       if (local.patrol && !patrol) return null;
       const step = conditional?.prefix[0];
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(local.patrol?.evidence ?? []), ...(local.patrolGroup?.evidence ?? []),
         ...(local.guardWatch?.evidence ?? []), ...(diversion?.evidence ?? []),
+        ...(encounter ? [...encounter.current.evidence, ...local.pursuitProfile!.evidence] : []),
         ...(topology ? local.removals?.slice(-3).flatMap(item => item.evidence) ?? [] : [])].filter(item => item !== ref))];
       const route = graphFacts?.alternating_material_first_shortest_action_refs as string[] | undefined;
       const input = step?.action_ref ?? route?.[0], delta = input ? controls[input] : null;
@@ -194,12 +204,13 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       const planned: Choice | null = to && input ? { input, to, floor,
         ordinary: floor !== null && same(alternatingHistogram(rows, to), [[floor, actor.size ** 2]]),
         ...(topology ? { guarded: true, contact: !!step && step.contact_index !== null } : {}) } : null;
-      const timed: Choice | null = watch ? { input: watch.input, to: asBox(...watch.to), floor, ordinary: false, guarded: true, watch }
+      const timed: Choice | null = encounter ? { input: encounter.input, to: asBox(...encounter.to), floor, ordinary: false, guarded: true, encounter }
+        : watch ? { input: watch.input, to: asBox(...watch.to), floor, ordinary: false, guarded: true, watch }
         : diversion ? { input: diversion.input, to: asBox(...diversion.to), floor, ordinary: false, guarded: true, diversion }
         : patrolGroup ? { input: patrolGroup.input, to: asBox(...patrolGroup.to), floor,
         ordinary: false, guarded: true, patrolGroup }
         : patrol ? { input: patrol.input, to: asBox(...patrol.to), floor, ordinary: false, guarded: true, patrol } : null;
-      const learning = patrol?.learning || patrolGroup?.learning;
+      const learning = encounter?.learning || patrol?.learning || patrolGroup?.learning;
       const explore: Choice | null = timed && learning ? timed
         : probe && !topology ? { input: probe, to: null, floor: null, ordinary: false } : null;
       const revisit: Choice | null = frontier && !topology ? { input: frontier.input, to: null, floor: null, ordinary: false } : null;
@@ -212,7 +223,10 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       if (strategy !== 'P07' && strategy !== 'P05') return null;
       const choice = strategy === 'P07' ? routeOffer : explore;
       if (!choice) return null;
-      const label = watch ? watch.capture ? 'Approach the known guard from the side and keep clear of the other guard'
+      const label = encounter ? encounter.measuringPatrols ? 'Measure the patrols from a tile clear of all known threats'
+        : encounter.learning ? 'Test side contact while the other patrols and the pursuer stay clear'
+          : 'Use a crossing that stays clear of the patrols, the pursuer and the guards'
+        : watch ? watch.capture ? 'Approach the known guard from the side and keep clear of the other guard'
         : 'Follow a route that stays clear of the guard’s possible next positions'
         : diversion ? diversion.awakening ? 'Draw the pursuing piece away from the passage after finding an escape route'
           : diversion.capture ? 'Remove the fixed guard from the side to open the escape route'
@@ -258,6 +272,9 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
         sicSituationCard: { strategy, need: 'Find an accessible route across the connected tiles', situation: label,
           evidence, agenda: [], mode, triggerCard: chooseLanding,
           actor: displayBox(actor.bbox), target: choice.to ? displayBox(choice.to) : null,
+          ...(encounter ? { patrols: encounter.current.patrols.map(track => displayBox(asBox(...track.position))),
+            patrolForecast: encounter.expected.patrols.map(track => displayBox(asBox(...track.position))),
+            pursuer: displayBox(asBox(...encounter.current.pursuer)), pursuerNext: displayBox(asBox(...encounter.expected.pursuer)) } : {}),
           ...(watch ? { patrol: displayBox(watch.guard.bbox),
             patrolForecast: watch.alternatives.map(point => displayBox(asBox(...point))) } : {}),
           ...(watch?.capture ? { guard: displayBox(watch.capture.bbox), front: displayBox(asBox(...watch.capture.front)) } : {}),
@@ -290,6 +307,10 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const { choice, actor } = proposal.walk?.[index] ?? proposal;
       const { local } = proposal;
+      if (choice.encounter) {
+        const matched = before.state === after.state && !!observeCombinedEncounter(choice.encounter, actor, second, frames, after.observation_ref);
+        return { matched, seal_prefix: true, reason: matched ? 'combined_encounter_forecast_confirmed' : 'combined_encounter_forecast_contradicted' };
+      }
       if (choice.watch && choice.floor !== null) {
         const returned = before.state === after.state && observeGuardWatch(choice.watch, actor, first, second, choice.floor, after.observation_ref);
         return { matched: !!returned, seal_prefix: true, reason: returned ? returned.reason : 'watched_guard_transition_contradicted' };
@@ -322,6 +343,11 @@ export function createSicVerifyConnectedRoute(family = verifyConnectedRouteId): 
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { actor, choice } = proposal.walk?.[index] ?? proposal;
+      if (choice.encounter) {
+        const encounter = observeCombinedEncounter(choice.encounter, actor, second, frames, after.observation_ref);
+        state = { ...local, count: local.count + 1, stopped: !encounter, ...(encounter ? { encounter } : {}) };
+        return { events: [] };
+      }
       if (choice.watch && choice.floor !== null) {
         const returned = observeGuardWatch(choice.watch, actor, first, second, choice.floor, after.observation_ref);
         state = { ...local, count: local.count + 1, stopped: !returned, ...(returned ? { guardWatch: returned.watch } : {}) };
