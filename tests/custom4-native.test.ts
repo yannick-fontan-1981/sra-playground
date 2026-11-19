@@ -25,13 +25,19 @@ import { SS06_LEVELS } from '../experiments/sinking-star-ss06/src/levels.ts';
 import { lessonIds as duoLessonIds, observeLesson as observeDuoLesson, visibleHeroes, type DuoLesson } from '../experiments/sinking-star-ss06/src/tutorial.ts';
 import ss06Witnesses from '../experiments/sinking-star-ss06/tests/witnesses.json' with { type: 'json' };
 import ss06Failures from '../experiments/sinking-star-ss06/tests/failures.json' with { type: 'json' };
+import { createSs07Backend } from '../src/games/sinking-star-ss07.ts';
+import { DuoPuzzleSession as ThiefDuoSession, compileLevel as compileThiefLevel, initialState as initialThiefState, stepDetailed as stepThief } from '../experiments/sinking-star-ss07/src/core.ts';
+import { SS07_LEVELS } from '../experiments/sinking-star-ss07/src/levels.ts';
+import { lessonIds as thiefLessonIds, observeLesson as observeThiefLesson, visibleHeroes as visibleThiefHeroes, type ThiefLesson } from '../experiments/sinking-star-ss07/src/tutorial.ts';
+import ss07Witnesses from '../experiments/sinking-star-ss07/tests/witnesses.json' with { type: 'json' };
+import ss07Failures from '../experiments/sinking-star-ss07/tests/failures.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS06 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS07 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 106);
+  assert.equal(GAME_CATALOG.length, 107);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -56,6 +62,12 @@ test('Custom 4 lists SS01 through SS06 and preserves all four legacy collections
   assert.equal(ss06?.levels, 8);
   assert.equal(ss06?.availability, 'playable');
   assert.match(ss06!.sourceUrl, /experiments\/sinking-star-ss06\/src\/levels\.ts$/);
+  const ss07 = getGameByCode(' ss07 ');
+  assert.equal(ss07?.id, 'ss07-c4000001');
+  assert.equal(ss07?.name, 'La Distance Dérobée');
+  assert.equal(ss07?.levels, 8);
+  assert.equal(ss07?.availability, 'playable');
+  assert.match(ss07!.sourceUrl, /experiments\/sinking-star-ss07\/src\/levels\.ts$/);
 });
 test('SS01 loads natively without invoking the Python loader', async () => {
   let legacyLoads = 0;
@@ -186,10 +198,11 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS04' })).gameCode, 'SS04');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS05' })).gameCode, 'SS05');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS06' })).gameCode, 'SS06');
+  assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS07' })).gameCode, 'SS07');
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS06']) {
+  for (const code of ['CASC', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS07']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -468,7 +481,7 @@ for (const [level, route] of [[3, 'UURRRRRDDDRRRUUUUUU'], [6, 'RRRX']] as const)
   });
 }
 
-type Ss06Action = { id: number; data?: { x: number; y: number } };
+type DuoAction = { id: number; data?: { x: number; y: number } };
 
 test('SS06 preserves public observations, timing and all eight tutorial discoveries through the native dispatcher', async () => {
   const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
@@ -486,7 +499,7 @@ test('SS06 preserves public observations, timing and all eight tutorial discover
     const world = compileDuoLevel(SS06_LEVELS[index]!);
     let state = initialDuoState(world);
     const green: boolean[] = [], violet: boolean[] = [];
-    for (const { id, data } of witness.actions as Ss06Action[]) {
+    for (const { id, data } of witness.actions as DuoAction[]) {
       const before = current;
       const detail = stepDuo(world, state, id, data);
       current = await dispatcher.dispatch({ type: 'action', actionId: id, data });
@@ -567,7 +580,7 @@ test('SS06 supports out-of-order progress and can undo the duo to solo transitio
   let current = await dispatcher.dispatch({ type: 'load', code: 'SS06' });
   for (const level of [2, 3, 4, 5, 6, 1, 7, 8]) {
     assert.deepEqual(await dispatcher.dispatch({ type: 'selectLevel', level }), reference.selectLevel(level));
-    const actions = ss06Witnesses[level - 1]!.actions as Ss06Action[];
+    const actions = ss06Witnesses[level - 1]!.actions as DuoAction[];
     for (const [index, { id, data }] of actions.entries()) {
       const request = { type: 'action', actionId: id, data } as const;
       current = await dispatcher.dispatch(request);
@@ -597,13 +610,167 @@ for (const { level, cause, actions } of ss06Failures) {
     const initial = await dispatcher.dispatch({ type: 'load', code: 'SS06', level });
     assert.deepEqual(initial, reference.selectLevel(level));
     let current = initial, previous = initial;
-    for (const { id, data } of actions as Ss06Action[]) {
+    for (const { id, data } of actions as DuoAction[]) {
       previous = current;
       current = await dispatcher.dispatch({ type: 'action', actionId: id, data });
       assert.deepEqual(current, reference.action(id, data));
     }
     assert.equal(current.state, 'GAME_OVER');
     assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 1 }), reference.observe());
+    const restored = await dispatcher.dispatch({ type: 'undo' });
+    assert.deepEqual(restored, reference.undo());
+    assert.deepEqual(restored.frame, previous.frame);
+    assert.equal(restored.state, 'NOT_FINISHED');
+    assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), initial);
+  });
+}
+
+test('SS07 replays 593 actions through the adapter and the router with all nine tutorial discoveries', async () => {
+  const backend = createSs07Backend();
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new ThiefDuoSession(SS07_LEVELS);
+  const load = { type: 'load', code: 'SS07' } as const;
+  const lessons = new Set<ThiefLesson>();
+  let current = await dispatcher.dispatch(load);
+  assert.deepEqual(current, await backend.dispatch(load));
+  assert.deepEqual(current, reference.observe());
+  const publicKeys = ['gameCode', 'frame', 'frames', 'state', 'availableActionIds', 'canUndo',
+    'canSelectLevel', 'level', 'levelCount', 'levelsCompleted', 'defaultFps', 'palette'].sort();
+  assert.deepEqual(Object.keys(current).sort(), publicKeys);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss07Witnesses) {
+    assert.equal(current.level, level);
+    const world = compileThiefLevel(SS07_LEVELS[level - 1]!);
+    assert.deepEqual(visibleThiefHeroes(current.frame).map(h => h.kind).sort(), ['merchant', 'thief']);
+    assert.equal(world.goals.length, 2);
+    let state = initialThiefState(world);
+    let openedGreenGate = false, builtPermanentBridge = false, raisedBridge = false, combat = false;
+    if (level === 6) assert.deepEqual(state.gateClosed, [true]);
+    if (level === 8) {
+      assert.equal(state.supports.length, 2);
+      assert.deepEqual(state.platformActive, [false, false, false]);
+    }
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const request = { type: 'action', actionId: id, data } as const;
+      const expected = reference.action(id, data);
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(await backend.dispatch(request), expected);
+      assert.deepEqual(current.availableActionIds, [1, 2, 3, 4, 5, 6]);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.ok(current.frames.every(frame => frame.length === 64 && frame.every(row => row.length === 64)));
+      const detail = stepThief(world, state, id, data);
+      const phases = detail.phases.map(phase => phase.kind);
+      if (id === 6) {
+        assert.deepEqual(detail.state.heroes, state.heroes);
+        assert.deepEqual(detail.state.monsters, state.monsters);
+        assert.equal(detail.phases.length, 0);
+        assert.equal(current.frames.length, 1);
+        selections++;
+      }
+      if (id === 5) assert.ok(!phases.includes('pull'));
+      if (level === 6 && state.gateClosed?.[0] && !detail.state.gateClosed?.[0]) {
+        assert.deepEqual(phases, ['reflect', 'gate']);
+        assert.deepEqual(detail.state.monsters, world.circuits.find(c => c.id === 'sentinelle')?.buttons);
+        openedGreenGate = true;
+      }
+      if (level === 7 && phases.includes('combat')) {
+        assert.deepEqual(current.frameDurationsMs, [60, 80, 40, 60, 80, 40, 80, 90, 100, 110, 0]);
+        combat = true;
+      }
+      if (level === 8 && phases.includes('platform')) {
+        if (detail.state.platformActive?.every(Boolean)) raisedBridge = true;
+        else {
+          assert.ok(raisedBridge);
+          assert.deepEqual(detail.state.platformActive, [false, false, false]);
+          assert.equal(detail.state.supports.length - state.supports.length, 3);
+          assert.equal(detail.state.supports.length, 5);
+          for (const { at } of world.platforms) assert.ok(detail.state.supports.some(p => p.x === at.x && p.y === at.y));
+          builtPermanentBridge = true;
+        }
+      }
+      state = detail.state;
+      observeThiefLesson(lessons, before, current, id);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    if (level === 6) assert.ok(openedGreenGate);
+    if (level === 7) assert.ok(combat);
+    if (level === 8) assert.ok(builtPermanentBridge);
+  }
+  assert.deepEqual([actions, selections, frames], [593, 39, 1745]);
+  assert.deepEqual(thiefLessonIds.filter(lesson => lessons.has(lesson)), [...thiefLessonIds]);
+  assert.equal(current.state, 'WIN');
+  for (const id of [1, 5, 6]) {
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: id, data: { x: 3, y: 3 } }), reference.observe());
+  }
+});
+
+test('SS07 level 7 reflects only the near crate when the Merchant stands farther from the mirror', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  await dispatcher.dispatch({ type: 'load', code: 'SS07', level: 7 });
+  for (const { id, data } of ss07Witnesses[6]!.actions.slice(0, 42) as DuoAction[]) {
+    await dispatcher.dispatch({ type: 'action', actionId: id, data });
+  }
+  const at = (frame: number[][], x: number, y: number) => frame[3 + y * 3]![3 + x * 3]!;
+  const equal = await dispatcher.dispatch({ type: 'action', actionId: 5 });
+  assert.equal(at(equal.frames[2]!, 12, 2), 12, 'The Merchant exchanges with the crate at equal distances');
+  await dispatcher.dispatch({ type: 'undo' });
+  const before = await dispatcher.dispatch({ type: 'action', actionId: 4 });
+  assert.equal(at(before.frame, 16, 5), 12);
+  const unequal = await dispatcher.dispatch({ type: 'action', actionId: 5 });
+  const transferred = unequal.frames[2]!;
+  assert.equal(at(transferred, 16, 5), 12, 'The farther Merchant stays on the other axis');
+  assert.equal(at(transferred, 15, 5), 5, 'The closer crate arrives');
+  assert.equal(transferred[3 + 5 * 3]![2 + 15 * 3], 13, 'The destination contains the crate sprite');
+});
+
+test('SS07 validates ACTION6 and bad loads and keeps progress across out-of-order rooms', async () => {
+  const backend = createSs07Backend();
+  const reference = new ThiefDuoSession(SS07_LEVELS);
+  assert.deepEqual(await backend.dispatch({ type: 'load', code: 'SS07', level: 8 }), reference.selectLevel(8));
+  for (const level of [0, 9, 1.5]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS07', level }), /Invalid level/);
+    assert.throws(() => backend.dispatch({ type: 'selectLevel', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: -1, y: 3 }, { x: 3, y: 64 }, { x: 1.5, y: 3 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  const merchant = visibleThiefHeroes(reference.observe().frame).find(h => h.kind === 'merchant')!;
+  const data = { x: 3 + merchant.x * 3, y: 3 + merchant.y * 3 };
+  assert.deepEqual(await backend.dispatch({ type: 'action', actionId: 6, data }), reference.observe());
+  assert.equal(reference.observe().canUndo, false);
+  for (const { id, data } of ss07Witnesses[7]!.actions as DuoAction[]) {
+    assert.deepEqual(await backend.dispatch({ type: 'action', actionId: id, data }), reference.action(id, data));
+  }
+  assert.equal(reference.observe().levelsCompleted, 1);
+  assert.equal(reference.observe().level, 1);
+  assert.deepEqual(await backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.equal(reference.observe().level, 8);
+  assert.equal(reference.observe().levelsCompleted, 0);
+  assert.deepEqual(await backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(await backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+for (const { level, actions } of ss07Failures) {
+  test(`SS07 level ${level} presents the reachable defeat and restores the entire action with Undo`, async () => {
+    const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+    const reference = new ThiefDuoSession(SS07_LEVELS);
+    const initial = await dispatcher.dispatch({ type: 'load', code: 'SS07', level });
+    assert.deepEqual(initial, reference.selectLevel(level));
+    let current = initial, previous = initial;
+    for (const { id, data } of actions as DuoAction[]) {
+      previous = current;
+      current = await dispatcher.dispatch({ type: 'action', actionId: id, data });
+      assert.deepEqual(current, reference.action(id, data));
+    }
+    assert.equal(current.state, 'GAME_OVER');
+    assert.ok(current.frames.length >= 3);
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), reference.observe());
     const restored = await dispatcher.dispatch({ type: 'undo' });
     assert.deepEqual(restored, reference.undo());
     assert.deepEqual(restored.frame, previous.frame);

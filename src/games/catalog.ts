@@ -1153,6 +1153,9 @@ records.push({code:'SS05',id:'ss05-c4000001',name:'Le Chant Magenta',group:'cust
 records.push({code:'SS06',id:'ss06-c4000001',name:'Les Ponts Réfléchis',group:'custom_4',family:'sinking_star_duo',levels:8,
   description:'Combine the Merchant’s single push and the Warrior’s chain push, then guide the Warrior across a bridge controlled by mirrors.',
   sourcePath:'experiments/sinking-star-ss06/src/levels.ts',availability:'playable'});
+records.push({code:'SS07',id:'ss07-c4000001',name:'La Distance Dérobée',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Pair the Merchant’s push with the Thief’s pull and align mirrors to transport the closest occupant.',
+  sourcePath:'experiments/sinking-star-ss07/src/levels.ts',availability:'playable'});
 
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,

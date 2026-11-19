@@ -1,108 +1,17 @@
 /** Exercise the built Playground through its documented controls and public worker observations. */
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
-import { once } from 'node:events';
-import { readFile } from 'node:fs/promises';
-import { pathToFileURL } from 'node:url';
 import { DuoPuzzleSession } from '../experiments/sinking-star-ss06/src/core.ts';
 import { SS06_LEVELS } from '../experiments/sinking-star-ss06/src/levels.ts';
 import { visibleHeroes } from '../experiments/sinking-star-ss06/src/tutorial.ts';
 import witnesses from '../experiments/sinking-star-ss06/tests/witnesses.json' with { type: 'json' };
 import failures from '../experiments/sinking-star-ss06/tests/failures.json' with { type: 'json' };
 
-const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ? pathToFileURL(process.env.PLAYWRIGHT_MODULE).href : 'playwright');
+import { eight, groups, keys, openNativeBrowser, pixelHash, sha } from './native-browser-checks.mjs';
+
 const origin = new URL(process.env.SS06_TEST_URL ?? 'http://127.0.0.1:4174').origin;
 const live = process.argv.includes('--live');
-const sha = bytes => createHash('sha256').update(bytes).digest('hex');
-const pixelHash = (frame, palette) => sha(Buffer.from(frame.flat().flatMap(color => [...Buffer.from(palette[color].slice(1), 'hex'), 255])));
-const groups = ['SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06'];
-const eight = Array.from({ length: 8 }, (_, i) => String(i + 1));
-const keys = { 1: 'ArrowUp', 2: 'ArrowDown', 3: 'ArrowLeft', 4: 'ArrowRight', 5: 'Space' };
-const headers = {};
-if (live) {
-  process.stdin.setEncoding('utf8');
-  if (process.stdin.isTTY) process.stdin.setRawMode(true);
-  console.log('Ready for Site verification credential on stdin (input is hidden).');
-  let input = '';
-  while (!/[\r\n]/.test(input)) {
-    const [chunk] = await once(process.stdin, 'data');
-    if (chunk.includes('\u0003')) process.exit(130);
-    input += chunk;
-  }
-  process.stdin.pause();
-  if (process.stdin.isTTY) process.stdin.setRawMode(false);
-  headers['OAI-Sites-Authorization'] = 'Bearer ' + input.trim();
-  const dist = new URL('../dist/', import.meta.url);
-  const index = (await readFile(new URL('index.html', dist), 'utf8')).match(/src="\/(assets\/index-[^"]+\.js)"/)?.[1];
-  assert.ok(index);
-  const worker = (await readFile(new URL(index, dist), 'utf8')).match(/assets\/game-worker-[\w-]+\.js/)?.[0];
-  assert.ok(worker);
-  const successor = process.argv.includes('--successor');
-  if (!successor) {
-    const home = await fetch(origin + '/?game=SS06', { headers, redirect: 'error', cache: 'no-store' });
-    assert.equal(home.status, 200);
-    assert.equal((await home.text()).match(/src="\/(assets\/index-[^"]+\.js)"/)?.[1], index);
-  }
-  const assets = successor ? [worker, 'gallery/custom_4.png'] : [index, worker, 'gallery/custom_4.png'];
-  for (const asset of assets) {
-    const response = await fetch(origin + '/' + asset, { headers, redirect: 'error', cache: 'no-store' });
-    assert.equal(response.status, 200, asset);
-    assert.equal(sha(Buffer.from(await response.arrayBuffer())), sha(await readFile(new URL(asset, dist))), asset);
-  }
-  console.log('Published browser assets matched the local build');
-}
-
-const browser = await chromium.launch({ headless: true });
-const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, serviceWorkers: 'block' });
+const { page, pythonRequests, errors, close } = await openNativeBrowser({ origin, game: 'SS06', live, successor: process.argv.includes('--successor') });
 try {
-  if (live) await context.route(url => url.origin === origin, async route => {
-    try { await route.fulfill({ response: await route.fetch({ headers: { ...route.request().headers(), ...headers }, maxRedirects: 0 }) }); }
-    catch { await route.abort().catch(() => {}); }
-  });
-  await context.addInitScript(() => {
-    window.qa = { count: 0, latest: null, requests: [] };
-    const OriginalWorker = window.Worker;
-    window.Worker = class extends OriginalWorker {
-      constructor(...args) {
-        super(...args);
-        this.addEventListener('message', event => {
-          const result = event.data?.result;
-          if (!result?.frame || !result.availableActionIds) return;
-          const { code, ...observation } = result;
-          window.qa.latest = { ...observation, gameCode: code ?? observation.gameCode };
-          window.qa.count++;
-        });
-      }
-      postMessage(message, ...args) {
-        if (message?.request) window.qa.requests.push(message.request);
-        super.postMessage(message, ...args);
-      }
-    };
-    const put = CanvasRenderingContext2D.prototype.putImageData;
-    CanvasRenderingContext2D.prototype.putImageData = function (image, ...args) {
-      put.call(this, image, ...args);
-      if (this.canvas.id !== 'game-canvas') return;
-      const qa = window.qa;
-      const defeatHidden = document.querySelector('#native-defeat').hidden;
-      const victoryHidden = document.querySelector('#win-overlay').hidden;
-      qa.paints?.push({ rgba: Array.from(image.data), defeatHidden, victoryHidden });
-      const interruption = qa.interruption;
-      if (!interruption || ++interruption.paints !== interruption.at) return;
-      const control = document.querySelector(interruption.selector);
-      qa.interruption = null;
-      qa.interrupted = { busy: this.canvas.getAttribute('aria-busy'), controlEnabled: !control.disabled };
-      this.canvas.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowUp', bubbles: true }));
-      if (control instanceof HTMLSelectElement) {
-        control.value = '8';
-        control.dispatchEvent(new Event('change', { bubbles: true }));
-      } else control.click();
-    };
-  });
-
-  const pythonRequests = [], errors = [];
-  context.on('request', request => { if (/\/(python|vendor\/pyodide)\//.test(request.url())) pythonRequests.push(new URL(request.url()).pathname); });
-  const page = await context.newPage();
-  page.on('pageerror', error => errors.push(error.message));
   const canvas = page.locator('#game-canvas'), levels = page.locator('#level-select');
   const tutorial = page.locator('#ss06-tutorial'), roles = page.locator('#ss06-role-controls');
   const warrior = roles.locator('[data-ss06-hero="warrior"]');
@@ -295,7 +204,7 @@ try {
     return { naturalWidth, naturalHeight, rgba: Array.from(ctx.getImageData(0, 0, 64, 64).data) };
   });
   const galleryLevel = new DuoPuzzleSession(SS06_LEVELS).selectLevel(8);
-  assert.deepEqual([previewBytes.naturalWidth, previewBytes.naturalHeight], [512, 384]);
+  assert.deepEqual([previewBytes.naturalWidth, previewBytes.naturalHeight], [512, groups.length * 64]);
   assert.equal(sha(Buffer.from(previewBytes.rgba)), pixelHash(galleryLevel.frame, galleryLevel.palette));
   await card.locator('[data-gallery-launch]').click();
   await settled(1, galleryLevel);
@@ -306,6 +215,5 @@ try {
   assert.deepEqual(errors, []);
   console.log('SS06 controls, solo level, gallery launch, mobile layout, Steam credit and native-only loading verified');
 } finally {
-  if (live) await context.unrouteAll({ behavior: 'wait' });
-  await browser.close();
+  await close();
 }
