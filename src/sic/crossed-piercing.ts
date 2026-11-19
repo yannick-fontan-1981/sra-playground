@@ -21,6 +21,17 @@ const orderCubes = (a: Cube, b: Cube) => a.type - b.type || a.at - b.at;
 export const crossedPiercingKey = (pose: CrossedPiercingPose) =>
   String.fromCharCode(...pose.heads.flatMap(({ line, reach }) => [line, reach]), ...keyOfCubes(pose.cubes));
 
+export function sameCrossedRails(first: CrossedPiercingLayout, second: CrossedPiercingLayout): boolean {
+  return first.shafts.length === second.shafts.length
+    && first.shafts.every(({ links }, index) => same(links, second.shafts[index]!.links));
+}
+
+export function crossedRailStepSupported(layout: CrossedPiercingLayout, pose: CrossedPiercingPose, leg?: CrossedPiercingStep): boolean {
+  if (!leg || leg.select) return true;
+  const from = pose.heads[leg.active]!.line, to = leg.pose.heads[leg.active]!.line;
+  return from === to || layout.shafts[leg.active]!.links[Math.min(from, to)] === true;
+}
+
 export function readCrossedPiercing(rows: NativeRows, stride: number, prior?: CrossedPiercingLayout): Scene | null {
   if (stride < 4 || stride > 12 || stride % 2) return null;
   const parts = geometricComponents(rows);
@@ -100,8 +111,7 @@ export function readCrossedPiercing(rows: NativeRows, stride: number, prior?: Cr
     ...(prior?.innerStockOnly ? { innerStockOnly: prior.innerStockOnly } : {}) };
   if (prior && (!same(obstacles, prior.obstacles) || shafts.some((shaft, i) => {
     const current = prior.shafts[i]!;
-    return shaft.axis !== current.axis || !same(shaft.targets, current.targets)
-      || !same(shaft.links, current.links) || !same(shaft.select, current.select);
+    return shaft.axis !== current.axis || !same(shaft.targets, current.targets) || !same(shaft.select, current.select);
   }))) return null;
   return { layout, pose: { heads, cubes: cubes.sort(orderCubes) }, tints, handles };
 }

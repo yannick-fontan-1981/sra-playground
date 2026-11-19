@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureStockedPiercing, planStockedPiercing, predictStockedPiercing, stockedPiercingMoves,
   type StockedPiercingScene } from '../src/sic/stocked-piercing.ts';
-import { observeCrossedStockBoundary, predictCrossedPiercing, type CrossedPiercingLayout } from '../src/sic/crossed-piercing.ts';
+import { crossedRailStepSupported, observeCrossedStockBoundary, predictCrossedPiercing,
+  type CrossedPiercingLayout } from '../src/sic/crossed-piercing.ts';
 
 test('a cube at a crossing moves along the other shaft and stays in place across it', () => {
   const layout: CrossedPiercingLayout = {
@@ -35,6 +36,23 @@ test('a retraction can disclose that cubes cannot enter the guide cells', () => 
   assert.ok(constrained);
   assert.deepEqual(predictCrossedPiercing(constrained, starting, 1, [0, -1]), actual);
   assert.equal(observeCrossedStockBoundary(layout, starting, expected, starting, 1), null);
+});
+
+test('a retained move checks the connection it uses against the observed rail', () => {
+  const layout: CrossedPiercingLayout = {
+    origin: [0, 0], stride: 6, width: 5, height: 5, floor: 0, materials: [1], obstacles: [],
+    shafts: [{ axis: 0, targets: [0], select: [0, 0], links: [false, true, true, false] },
+      { axis: 1, targets: [0], select: [6, 0], links: [false, true, true, true] }],
+  };
+  const pose = { heads: [{ line: 2, reach: 1 }, { line: 3, reach: 0 }], cubes: [{ at: 11, type: 0 }] };
+  const prediction = predictCrossedPiercing(layout, pose, 0, [0, 1]);
+  assert.ok(prediction);
+  const step = { action: 'slide', active: 0, pose: prediction };
+  const withLinks = (links: boolean[]) => ({
+    ...layout, shafts: [{ ...layout.shafts[0]!, links }, layout.shafts[1]!],
+  });
+  assert.equal(crossedRailStepSupported(withLinks([false, true, true, true]), pose, step), true);
+  assert.equal(crossedRailStepSupported(withLinks([false, true, false, true]), pose, step), false);
 });
 
 const scene: StockedPiercingScene = {

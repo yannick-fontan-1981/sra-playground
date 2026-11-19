@@ -15,7 +15,8 @@ import { measureReceivingGuides, type ReceivingGuideLayout } from './receiving-g
 import { maximumCommittedActions } from './plan-step.ts';
 import { measureStockedPiercing, planStockedPiercing, stockedPiercingGeometry, stockedPiercingMoves, stockedPlacementKey,
   type RefusedPiercingStep } from './stocked-piercing.ts';
-import { crossedPiercingKey, observeCrossedStockBoundary, planCrossedPiercing, predictCrossedPiercing, readCrossedPiercing,
+import { crossedPiercingKey, crossedRailStepSupported, observeCrossedStockBoundary, planCrossedPiercing, predictCrossedPiercing,
+  readCrossedPiercing, sameCrossedRails,
   type CrossedPiercingLayout, type CrossedPiercingRefusal, type CrossedPiercingStep } from './crossed-piercing.ts';
 
 export const orderedContactId = 'sic_ordered_contact';
@@ -101,7 +102,9 @@ function crossedOutcome(crossed: NonNullable<ContactProposal['crossed']>, rows: 
   const focusChanged = next?.tints.every((ink, i) => ink !== scene.tints[i]) ?? false;
   const matched = !expected ? null : !!next && crossedPiercingKey(next.pose) === crossedPiercingKey(expected.pose)
     && (expected.select ? focusChanged : equal(next.tints, scene.tints));
-  return { next, matched, focusChanged };
+  const railsChanged = !!next && !sameCrossedRails(scene.layout, next.layout);
+  const nextLegSupported = !!next && crossedRailStepSupported(next.layout, next.pose, path[index + 1]);
+  return { next, matched, focusChanged, railsChanged, nextLegSupported };
 }
 
 export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLineModel>[0], limits: RecoveryPack,
@@ -140,7 +143,8 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
     const proof: [string, ...string[]] = [ref, ...new Set([...effects.flatMap(effect => effect.evidence_refs as string[]),
       ...(local?.refs ?? [])].filter(item => item !== ref))];
     const shouldStop = () => !!execution?.signal?.aborted || (execution?.now ?? performance.now.bind(performance))() >= (execution?.deadlineMs ?? Infinity);
-    const path = active === null ? [] : local?.pose === pose && local.pending.length ? local.pending
+    const path = active === null ? [] : local?.pose === pose && local.pending.length
+      && crossedRailStepSupported(scene.layout, scene.pose, local.pending[0]) ? local.pending
       : planCrossedPiercing(scene.layout, scene.pose, active, directions,
         Math.min(limits.maxDepth, remaining, execution?.remainingLevelActions ?? remaining), shouldStop, local?.refusals) ?? [];
     const probe = active === null ? directions.find(({ action, vector }) => !previous.tried.includes(action)
@@ -330,6 +334,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         const { scene, path } = proposal.crossed;
         const current = readCrossedPiercing(packet.frame_rows, scene.layout.stride, scene.layout);
         const admitted = proposal.binding?.level_epoch === observation.level_epoch && !!current
+          && crossedRailStepSupported(current.layout, current.pose, path[index])
           && equal(current.tints, scene.tints) && crossedPiercingKey(current.pose) === crossedPiercingKey(path[index - 1]!.pose);
         return { admitted, reason: admitted ? 'crossed_supports_bound' : 'crossed_supports_changed' };
       }
@@ -345,9 +350,10 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         const advanced = after.levels_completed > before.levels_completed;
         const outcome = boundary ? null : crossedOutcome(proposal.crossed, newRows, index);
         const matched = advanced ? true : outcome?.matched ?? null;
-        return { matched, seal_prefix: boundary || matched !== true || index + 1 >= proposal.route.length,
+        return { matched, seal_prefix: boundary || matched !== true || !outcome?.nextLegSupported || index + 1 >= proposal.route.length,
           reason: boundary ? 'official_boundary' : matched === null ? 'support_control_awaits_measurement'
-            : matched ? proposal.crossed.path[index]?.select ? 'active_support_switched' : 'crossed_support_projection_confirmed'
+            : matched ? outcome?.railsChanged ? 'crossed_rail_connections_changed'
+              : proposal.crossed.path[index]?.select ? 'active_support_switched' : 'crossed_support_projection_confirmed'
               : 'crossed_support_projection_contradicted',
           ...(advanced ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
       }
@@ -363,7 +369,7 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
       if (proposal.crossed) {
         if (changedLevel(before, after)) return { events: [] };
         const previous = current(before.level_epoch), { scene, path, active } = proposal.crossed;
-        const { next, matched, focusChanged } = crossedOutcome(proposal.crossed, newRows, index);
+        const { next, matched, focusChanged, railsChanged, nextLegSupported } = crossedOutcome(proposal.crossed, newRows, index);
         if (!next) {
           memory = { ...previous, refused: true };
           return { events: [] };
@@ -378,12 +384,14 @@ export function createSicVerifyContactOrder(policy: Parameters<typeof rootedLine
         const refusals = previous.crossed?.refusals ?? [];
         const refs = [...(previous.crossed?.refs ?? []).slice(-4), before.observation_ref, after.observation_ref];
         memory = { ...previous, tried: active === null ? [...previous.tried, command.action_ref] : previous.tried,
-          crossed: { layout: boundary ?? scene.layout, active: chosen, pending: matched ? path.slice(index + 1) : [], refs,
+          crossed: { layout: boundary ? { ...next.layout, innerStockOnly: true } : next.layout, active: chosen,
+            pending: matched && nextLegSupported ? path.slice(index + 1) : [], refs,
             pose: crossedPiercingKey(next.pose),
             refusals: active !== null && matched === false && !boundary ? [...refusals.slice(-23),
               { placement: crossedPiercingKey(previousPose), active, action: command.action_ref }] : refusals } };
         return { events: [], ...(active === null && chosen !== null ? { reviewEvidence: 'Only one of the supports responded to the direction.' }
           : boundary ? { reviewEvidence: 'The support withdrew but the cubes stayed inside the rails. The next plan respects that limit.' }
+          : railsChanged ? { reviewEvidence: 'The visible rail connections changed. The next move is checked against the new connections.' }
           : matched && leg?.select ? { reviewEvidence: 'Both support markings changed while the cubes stayed in place.' } : {}) };
       }
       memory = structuredClone(current(before.level_epoch));
