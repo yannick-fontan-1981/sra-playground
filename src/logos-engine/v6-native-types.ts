@@ -182,6 +182,9 @@ export interface NativeProgramRegistry {
  * Family ports with a different internal signature use a small explicit adapter.
  */
 export const sicObservedCoverageDeadlock = 'sic_observed_coverage_deadlock';
+export const sicObservedWeightShortage = 'sic_observed_weight_shortage';
+export const isSicLevelRecovery = (reason: string | null) =>
+  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage;
 
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;

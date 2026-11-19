@@ -11,7 +11,7 @@ import type {
 } from './v6-agent-protocol.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 import { immutableJson } from '../logos-engine/canonical.ts';
-import { sicObservedCoverageDeadlock } from '../logos-engine/v6-native-types.ts';
+import { isSicLevelRecovery, sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
 
 export { BrowserV6WorkerClient } from './v6-agent-client.ts';
 
@@ -323,7 +323,7 @@ export class BrowserV6Agent {
         if (!expected || !sessionId || !this.pending) throw new V6AgentError('invalid', 'The native V6 transfer has no current state.');
         this.assertFresh(expected, epoch);
         if (this.pending.kind === 'stopped') {
-          if (this.canRecoverCoverage(this.pending.reason)) {
+          if (this.canRecoverLevel(this.pending.reason)) {
             if (await this.acquireLevelReset(epoch, true)) continue;
             break;
           }
@@ -377,7 +377,7 @@ export class BrowserV6Agent {
           return;
         }
         if (acquired.kind === 'stopped') {
-          if (this.canRecoverCoverage(acquired.reason)) {
+          if (this.canRecoverLevel(acquired.reason)) {
             if (!this.stopRequested && await this.acquireLevelReset(epoch, true)) continue;
             break;
           }
@@ -385,7 +385,7 @@ export class BrowserV6Agent {
         }
       }
       if (!this.stillCurrent(epoch)) return;
-      if (this.pending?.kind === 'stopped' && !this.canRecoverCoverage(this.pending.reason)) {
+      if (this.pending?.kind === 'stopped' && !this.canRecoverLevel(this.pending.reason)) {
         this.finish(this.pending.reason); return;
       }
       this.state('paused', this.stopRequested ? 'Paused. The current V6 prefix, pending command and acquired evidence are retained.'
@@ -417,8 +417,8 @@ export class BrowserV6Agent {
         : 'Pausing at the next V6 action boundary. The current computation will finish safely…');
   }
 
-  private canRecoverCoverage(reason: string | null): boolean {
-    return reason === sicObservedCoverageDeadlock && !!this.host.resetLevel && !!this.knowledge.canResetLevel;
+  private canRecoverLevel(reason: string | null): boolean {
+    return isSicLevelRecovery(reason) && !!this.host.resetLevel && !!this.knowledge.canResetLevel;
   }
 
   private async acquireLevelReset(epoch: number, automatic = false): Promise<boolean> {
@@ -426,7 +426,9 @@ export class BrowserV6Agent {
     if (!before || !sessionId || !this.host.resetLevel || !this.stillCurrent(epoch)) return false;
     this.assertFresh(before, epoch);
     this.phase = 'acting';
-    this.state('acting', automatic ? 'Resetting after an observed placement deadlock…' : 'Resetting the current level…');
+    this.state('acting', automatic ? this.pending?.reason === sicObservedWeightShortage
+      ? 'Resetting to recover a movable weight for the observed gate…'
+      : 'Resetting after an observed placement deadlock…' : 'Resetting the current level…');
     if (!this.stillCurrent(epoch) || automatic && this.stopRequested) return false;
     this.assertFresh(before, epoch);
     const returned = await this.host.resetLevel();

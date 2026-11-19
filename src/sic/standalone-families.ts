@@ -5,7 +5,7 @@ import { learnSupportMovesId, learnObservedSupportsId } from './learn-support-mo
 import { subsetExperimentId } from './subset-experiment.ts';
 import { learnScopeEffectsId, learnVisibleGroupEffectsId } from './learn-scope-effects.ts';
 import { cavityAccessId } from './cavity-access.ts';
-import { publicInputExplorationId } from './public-input-exploration.ts';
+import { observedPressureRecoveryGroup, publicInputExplorationId } from './public-input-exploration.ts';
 import { recheckDirectionalControlsId } from './recheck-directional-controls.ts';
 import { trialRepeatedLinearControlsId } from './trial-repeated-linear-controls.ts';
 import { compareAvailableControlsId } from './compare-available-controls.ts';
@@ -116,6 +116,7 @@ import { learnCorrespondenceId, learnRepeatedCellsId } from './learn-corresponde
 import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
+  { id: observedPressureRecoveryGroup, families: [publicInputExplorationId] },
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId,
     verifyInventoryTransferId, learnInventoryTransferId, chartRouteId, framedContactId, coupledGaugeRouteId, reproduceCueId, arrangeTurnPostsId, directionalReceptionId, pairedPassageId,

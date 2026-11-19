@@ -210,7 +210,7 @@ import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 import { hydrateNativeState } from './v6-native-state-graph.ts';
-import { NativeEditRejected, sicObservedCoverageDeadlock } from './v6-native-types.ts';
+import { NativeEditRejected, isSicLevelRecovery } from './v6-native-types.ts';
 import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
@@ -2224,7 +2224,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.rememberLevelStart();
     const next = freeze(structuredClone(packet));
     const measured = freeze(await measureNativeObservation(next, this.actions + this.resetCount + 2, this.sessionId));
-    const recovery = this.reason === sicObservedCoverageDeadlock ? this.reason : undefined;
+    const recovery = isSicLevelRecovery(this.reason) ? this.reason : undefined;
     const retained = new Map<string, NativeRecord>();
     if (recovery) for (const family of this.families) {
       if (family.requestedStopReason?.(before) !== recovery) continue;
@@ -2772,7 +2772,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 181, groups, symmetry, policy, sequence, support, recovery };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: 182, groups, symmetry, policy, sequence, support, recovery };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
