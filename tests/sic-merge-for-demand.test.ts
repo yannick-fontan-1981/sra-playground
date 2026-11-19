@@ -3,6 +3,7 @@ import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { chooseContactDemand, contactMobileBox, measureContactDemand, observeContactDemand } from '../src/sic/contact-demand.ts';
 import { createSicMergeForDemand } from '../src/sic/merge-for-demand.ts';
+import { chooseMixedDemand, measureMixedDemand, observeMixedDemand } from '../src/sic/mixed-demand.ts';
 
 test('a diversion records both mobiles without inserting an undefined single-mobile state', async () => {
   const render = (left: number, right: number) => {
@@ -78,4 +79,46 @@ test('an expanded palette and a matching mobile request support a verified rank 
   assert.equal(returned?.next.world.mobile.visible, 11);
   const hidden = render(false, false);
   assert.equal(measureContactDemand(await observe(hidden, 3), hidden, calibration), null);
+});
+
+test('a mixed request verifies selective fusion and preserves the unselected mobile', async () => {
+  const mark = [[2, 0], [1, 1], [3, 1], [0, 2], [2, 2], [4, 2], [1, 3], [3, 3]];
+  const render = (fused = false, spare = true) => {
+    const rows = Array.from({ length: 48 }, (_, y) => Array<number>(48).fill(y < 8 ? 1 : y === 47 ? 12 : 0));
+    const paint = (x: number, y: number, w: number, h: number, ink: number) => {
+      for (let i = y; i < y + h; i++) rows[i]!.fill(ink, x, x + w);
+    };
+    const glyph = (x: number, y: number, ink: number) => {
+      for (const [dx, dy] of mark) rows[y + dy!]![x + dx!] = ink;
+    };
+    for (const [i, ink] of [3, 6, 10].entries()) paint(2 + i * 4, 1, 2, 2, ink);
+    for (const [i, ink] of [7, 14, 13].entries()) paint(2 + i * 4, 5, 2, 2, ink);
+    paint(24, 2, 3, 3, 6); paint(29, 2, 3, 3, 6); glyph(36, 2, 14);
+    for (const [x, y] of [[3, 11], [37, 11], [3, 37], [37, 37]]) {
+      paint(x! + 1, y!, 5, 7, 9); paint(x!, y! + 1, 7, 5, 9);
+    }
+    paint(5, 39, 3, 3, 6);
+    if (fused) glyph(25, 20, 14);
+    else { glyph(24, 18, 7); glyph(24, 26, 7); }
+    if (spare) glyph(10, 26, 7);
+    return rows;
+  };
+  const observe = (frame_rows: number[][], revision: number) => measureNativeObservation({ frame_rows,
+    frame_hash: String(revision), level: 2, levels_completed: 1, available_action_refs: ['ACTION6'], state: 'NOT_FINISHED' }, revision);
+  const known = { palette: [3, 6, 10], recipes: [],
+    radius: { lower: 6, upper: 8, refs: ['calibrated_field'] }, mobileEffect: { refs: ['motion_observed'] } };
+  const first = render(), before = await observe(first, 1);
+  const local = measureMixedDemand(before, first, known);
+  assert.ok(local);
+  assert.equal(local.layout.square.count, 2);
+  assert.equal(local.layout.request.ink, 14);
+  assert.equal(local.layout.receivers.length, 4);
+  const plan = chooseMixedDemand(before, first, local, known);
+  assert.ok(plan);
+  assert.equal(plan.choice.intent, 'produce_glyph');
+  assert.deepEqual(plan.choice.focus.map(piece => piece.box), [[24, 18, 28, 21], [24, 26, 28, 29]]);
+  const success = render(true);
+  assert.equal(observeMixedDemand(local, plan.choice, await observe(success, 2), success, known).matched, true);
+  const excess = render(true, false);
+  assert.equal(observeMixedDemand(local, plan.choice, await observe(excess, 2), excess, known).matched, false);
 });
