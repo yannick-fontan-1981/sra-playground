@@ -22,11 +22,13 @@ type State = { epoch: number; geometry: Geometry; color: number; held: NativePoi
   transports?: readonly Transport[]; sharedEvidence?: string; transportCarriers?: string[];
   relay?: Relay; sectorNetwork?: SectorNetwork; passage?: DeliveryPassage; waits?: number; stalledWaits?: number; stopped?: boolean;
   interference?: { ink: number; ref: string }; interceptionRef?: string; interceptedInk?: number;
-  rendezvousWaits?: number; transferEvidence?: { part: NativePoint; ref: string } };
+  rendezvousWaits?: number; transferEvidence?: { part: NativePoint; ref: string }; parallel?: ParallelDelivery };
 type Transport = { readonly carrier: string; readonly pose: NativePoint; readonly box: NativePoint;
   readonly sources: readonly string[] };
 type Move = { pose: NativePoint; face: NativePoint; cargo: NativePoint | null };
 type Motion = { input: string; prediction: Move };
+type ParallelDelivery = { ink: number; ref: string; track?: NativePoint; returns: Record<string, Record<string, number>>;
+  probes: Record<string, string[]>; approach: Motion[]; waits: Record<string, number> };
 type Intent = 'motion' | 'attach' | 'release';
 type Step = { input: string; intent: Intent; prediction: Move | null; target: NativePoint | null; waitForTransport?: true;
   intercept?: true;
@@ -39,9 +41,14 @@ const add = ([x, y]: NativePoint, [u, v]: NativePoint): NativePoint => [x + u, y
 const sub = ([x, y]: NativePoint, [u, v]: NativePoint): NativePoint => [x - u, y - v];
 const key = (p: NativePoint) => p.join(',');
 const same = (a: NativePoint | null, b: NativePoint | null) => a === b || !!a && !!b && a[0] === b[0] && a[1] === b[1];
+const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const compare = (a: NativePoint, b: NativePoint) => a[0] - b[0] || a[1] - b[1];
 const point = (value: string): NativePoint => { const [x, y] = value.split(',').map(Number); return [x!, y!]; };
 const positions = (scene: Scene) => Object.keys(scene.boxes).map(point).sort(compare);
+function sceneHeld(scene: Scene): NativePoint | null {
+  const ahead = add(scene.pose, scene.face);
+  return scene.boxes[key(ahead)] === scene.face_value ? ahead : null;
+}
 function tileBox(g: Geometry, [x, y]: NativePoint): NativeBox {
   const l = g.phase[0] + x * g.pitch, t = g.phase[1] + y * g.pitch;
   return [l, t, l + g.pitch - 1, t + g.pitch - 1];
@@ -282,6 +289,109 @@ function planDelivery(local: State, scene: Scene, rows: NativeRows, commands: Re
   }
   choices.sort((a, b) => a.length - b.length || a.index - b.index || compare(a.target, b.target) || compare(a.face, b.face));
   return choices[0]?.step ?? null;
+}
+
+function parallelReceiverGeometry(rows: NativeRows, candidate: Geometry | null, previous: State | null): Geometry | null {
+  if (!candidate || previous?.interceptedInk === undefined || !previous.interceptionRef || previous.geometry.insetFill === undefined
+    || candidate.pitch !== previous.geometry.pitch || candidate.core !== previous.geometry.core
+    || candidate.rest_shell !== previous.geometry.rest_shell || !same(candidate.phase, previous.geometry.phase)
+    || carrierForms(rows, candidate, previous.interceptedInk).length < 2) return null;
+  const fill = previous.geometry.insetFill, occupied = new Set(candidate.initial_boxes.map(key));
+  const empty = candidate.targets.filter(site => !occupied.has(key(site)));
+  if (!empty.length || !empty.every(site => orientedCouplingTile(rows, candidate, site)?.slice(1, -1)
+    .every(row => row.slice(1, -1).every(ink => ink === fill)))) return null;
+  return { ...candidate, insetFill: fill };
+}
+
+function parallelInterception(local: State, scene: Scene, rows: NativeRows, forms: ReturnType<typeof carrierForms>,
+  commands: Readonly<Record<string, NativePoint>>): { step: Step; parallel: ParallelDelivery } | null {
+  const parallel = local.parallel!, ahead = add(scene.pose, scene.face), floor = deliveryFloor(local.geometry, scene, rows);
+  const fixed = new Set([...Object.keys(scene.boxes), ...forms.map(form => key(form.point))]);
+  const start: Move = { pose: scene.pose, face: scene.face, cargo: null };
+  const approach = (target: NativePoint) => shortest(start, fixed, floor, commands, pose => same(add(pose.pose, pose.face), target));
+  const wait: Step = { input: 'ACTION5', intent: 'motion', prediction: start, target: ahead, waitForTransport: true };
+  const contact = (target: NativePoint): Step => ({ input: 'ACTION5', intent: 'attach', prediction: null, target, intercept: true });
+  const options = forms.flatMap(form => {
+    if (same(form.point, ahead) && form.inset) return [{ form, length: 0, step: contact(form.point) }];
+    const route = approach(form.point);
+    if (route?.step) return [{ form, length: route.length, step: { ...route.step, target: form.point } }];
+    const input = same(form.point, ahead) && Object.keys(commands).find(input => same(commands[input]!, scene.face));
+    return input ? [{ form, length: 1, step: { input, intent: 'motion', prediction: start, target: form.point } satisfies Step }] : [];
+  }).sort((a, b) => a.length - b.length);
+  const prior = parallel.track;
+  const form = prior ? [...forms].sort((a, b) => distance(a.point, prior) - distance(b.point, prior))[0] : options[0]?.form;
+  const nearby = form && distance(scene.pose, form.point) <= 6, returns = { ...parallel.returns };
+  if (nearby && prior && distance(form.point, prior) <= 1) {
+    const from = key(prior), to = key(form.point), successors = returns[from] ?? {};
+    returns[from] = { ...successors, [to]: (successors[to] ?? 0) + 1 };
+  }
+  let forecast = form?.point;
+  const predictions: { step: Step; time: number; length: number }[] = [];
+  for (let time = 1; time <= 4 && forecast && nearby; time++) {
+    const successors = Object.entries(returns[key(forecast)] ?? {}).sort(([, a], [, b]) => b - a);
+    const first = successors[0];
+    if (!first || successors.length > 1 && first[1] <= 1 || !floor.has(first[0])) break;
+    forecast = point(first[0]);
+    const target = approach(forecast);
+    if (!target || target.length > time || !target.step && scene.boxes[key(ahead)]) continue;
+    predictions.push({ step: { ...(target.step ?? wait), target: forecast }, time, length: target.length });
+  }
+  predictions.sort((a, b) => a.time - b.time || a.length - b.length);
+  const world = JSON.stringify([scene.pose, scene.face, scene.boxes, forms]), tried = parallel.probes[world] ?? [];
+  const candidate = [...forms.filter(form => same(form.point, ahead)).map(form => contact(form.point)),
+    ...predictions.map(item => item.step), ...options.map(item => item.step)].find(step => !tried.includes(step.input));
+  const fallback = Object.entries(commands).find(([input, delta]) => {
+    const next = key(add(scene.pose, delta));
+    return !tried.includes(input) && floor.has(next) && !fixed.has(next);
+  });
+  const step = candidate ?? (fallback ? { input: fallback[0], intent: 'motion' as const,
+    prediction: { pose: add(scene.pose, fallback[1]), face: fallback[1], cargo: null }, target: null } : null);
+  return step ? { step, parallel: { ...parallel, returns, ...(nearby ? { track: form.point } : {}),
+    probes: { ...parallel.probes, [world]: [...tried, step.input] } } } : null;
+}
+
+function planParallelDelivery(local: State, scene: Scene, rows: NativeRows, observation: NativeObservation,
+  commands: Readonly<Record<string, NativePoint>>): { step: Step; parallel: ParallelDelivery } | null {
+  const parallel = local.parallel!, { geometry, held } = local, forms = carrierForms(rows, geometry, parallel.ink);
+  if (forms.length) return parallelInterception(local, scene, rows, forms, commands);
+  const occupied = [...carrierPositions(observation, local).values()].flat();
+  const targets = new Set(geometry.targets.map(key)), unresolved = Object.keys(scene.boxes).filter(site => !targets.has(site));
+  let approach = parallel.approach, step: Step | null = null;
+  const ahead = add(scene.pose, scene.face), floor = deliveryFloor(geometry, scene, rows);
+  const fixed = new Set([...Object.keys(scene.boxes), ...occupied.map(key)]);
+  const start: Move = { pose: scene.pose, face: scene.face, cargo: held };
+  if (unresolved.length === 1 && !held) {
+    if (!approach.length) {
+      step = planDelivery(local, scene, rows, commands, occupied);
+      if (step?.intent === 'motion' && (step.route?.length ?? 0) > 1) approach = step.route!;
+    }
+    const upcoming = approach[0];
+    if (upcoming) {
+      const raw = add(scene.pose, commands[upcoming.input]!), site = key(raw);
+      const retained = floor.has(site) && !fixed.has(site) ? raw : scene.pose;
+      if (same(retained, upcoming.prediction.pose)) {
+        step = { ...upcoming, intent: 'motion', target: null };
+        approach = approach.slice(1);
+      } else approach = [];
+    }
+  }
+  step ??= planDelivery(local, scene, rows, commands, occupied);
+  if (!step && unresolved.length === 1 && !held) {
+    const target = point(unresolved[0]!);
+    if (same(ahead, target)) step = { input: 'ACTION5', intent: 'attach', prediction: null, target };
+    else {
+      const route = shortest(start, fixed, floor, commands, pose => same(add(pose.pose, pose.face), target));
+      if (route?.step) {
+        step = { ...route.step, target };
+        approach = step.route?.slice(1) ?? [];
+      }
+    }
+  }
+  if (step) return { step, parallel: { ...parallel, approach } };
+  const world = JSON.stringify([scene.pose, scene.face, scene.boxes, occupied]), waited = parallel.waits[world] ?? 0;
+  if (waited >= 4 || scene.boxes[key(ahead)]) return null;
+  return { step: { input: 'ACTION5', intent: 'motion', prediction: start, target: ahead, waitForTransport: true },
+    parallel: { ...parallel, approach, waits: { ...parallel.waits, [world]: waited + 1 } } };
 }
 
 function allowDelivery(local: State, scene: Scene, rows: NativeRows, commands: Readonly<Record<string, NativePoint>>,
@@ -551,7 +661,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       const epoch = observation.level_epoch;
-      if (!(state?.epoch === epoch && (state.relay || state.sectorNetwork || state.passage || state.geometry.insetFill !== undefined))
+      if (!(state?.epoch === epoch && (state.parallel || state.relay || state.sectorNetwork || state.passage || state.geometry.insetFill !== undefined))
         && !(state?.epoch === epoch - 1 && state.sharedEvidence)) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
       return proposal && (proposal.local.relay || proposal.local.sectorNetwork || proposal.local.passage
@@ -562,7 +672,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         || !observation.available_action_refs.includes('ACTION5') || observation.available_action_refs.includes('ACTION6')) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const previous = state?.epoch === observation.level_epoch - 1 && state.sharedEvidence ? state : null;
-      if (prior?.stopped || prior && !prior.passage && prior.count >= (prior.relay || prior.sectorNetwork ? 120 : 70)) return null;
+      if (prior?.stopped || prior && !prior.parallel && !prior.passage && prior.count >= (prior.relay || prior.sectorNetwork ? 120 : 70)) return null;
       const learns = family === learnOrientedDeliveryId && !prior && !previous;
       const receipt = learns ? execution?.readPriorDirectionalScene?.(earlier => orientedCouplingInitial(earlier) as Geometry | null) : null;
       if (learns && (!receipt || receipt.afterRef !== observation.observation_ref)) return null;
@@ -570,8 +680,11 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const dividedGeometry = !ordinary && previous ? orientedCouplingInitial(rows, true) as Geometry | null : null;
       const divided = !!dividedGeometry;
       const corridor = !prior && ordinary && previous ? recoverInsetFromVisibleCorridor(rows, ordinary, previous) : null;
-      const geometry = corridor ?? ordinary ?? dividedGeometry ?? (previous ? insetReceiver(rows, previous.geometry) : null);
-      if (!geometry || geometry.targets.length > 12 || (!divided && !prior?.sectorNetwork && geometry.initial_boxes.length > 6)) return null;
+      const expanded = parallelReceiverGeometry(rows, dividedGeometry, previous);
+      const parallel = prior?.parallel ?? (expanded && previous?.interceptedInk !== undefined && previous.interceptionRef
+        ? { ink: previous.interceptedInk, ref: previous.interceptionRef, returns: {}, probes: {}, approach: [], waits: {} } : null);
+      const geometry = expanded ?? corridor ?? ordinary ?? dividedGeometry ?? (previous ? insetReceiver(rows, previous.geometry) : null);
+      if (!geometry || !parallel && (geometry.targets.length > 12 || (!divided && !prior?.sectorNetwork && geometry.initial_boxes.length > 6))) return null;
       const inset = geometry.insetFill !== undefined;
       const possible = prior ? [prior.color] : [...new Set(rows.flat())].filter(value => ![geometry.core, geometry.background, geometry.rest_shell].includes(value));
       const scenes = possible.flatMap(color => {
@@ -591,7 +704,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         tried: priorScene ? [JSON.stringify([priorScene.scene.pose, priorScene.scene.face, priorScene.scene.boxes, null, priorScene.command])] : [],
         refs: receipt ? [receipt.beforeRef, receipt.afterRef] : [], count: receipt ? 1 : 0 };
       const relay = prior?.relay ?? (!prior && previous && !divided && !inset ? measureRelay(rows, observation, initial, scene, previous) : null);
-      const sectorNetwork = prior?.sectorNetwork ?? (divided && previous
+      const sectorNetwork = prior?.sectorNetwork ?? (!parallel && divided && previous
         ? measureSectorNetwork(rows, geometry, scene.pose, positions(scene), sectorCarriers(observation, { ...initial, transportCarriers: previous.transportCarriers })) : null);
       const measurePassage = !prior && !!previous && !relay && !divided && !inset;
       const peers = prior?.passage || measurePassage
@@ -599,12 +712,13 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const passage = prior?.passage ?? (measurePassage
         ? measureDeliveryPassage(rows, geometry, scene.pose, positions(scene), peers) : null);
       const handsOff = !!relay || !!sectorNetwork || !!passage;
-      if (!handsOff && (divided || geometry.targets.length > 6)) return null;
+      if (!parallel && !handsOff && (divided || geometry.targets.length > 6)) return null;
       const previousInk = corridor && previous?.interceptedInk;
       const predecessor = typeof previousInk === 'number' && previous?.interceptionRef
         && carrierForms(rows, geometry, previousInk).length === 1 ? { ink: previousInk, ref: previous.interceptionRef } : null;
-      const local: State = !prior && (handsOff || inset) && previous
+      let local: State = !prior && (handsOff || inset) && previous
         ? { ...initial, ...(predecessor ? { interference: predecessor } : {}), ...(relay ? { relay } : {}), ...(sectorNetwork ? { sectorNetwork } : {}), ...(passage ? { passage } : {}),
+          ...(parallel ? { parallel } : {}),
           free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
           transportCarriers: [...(previous.transportCarriers ?? [])] } : initial;
       const commands: Readonly<Record<string, NativePoint>> = { ...labels, ...local.free, ...(local.held ? local.loaded : {}) };
@@ -616,7 +730,10 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const unique = (step: Step) => JSON.stringify([scene.pose, scene.face, scene.boxes, local.held, step.input,
         ...(passage ? [peers] : []), ...(carrier ? [carrier.point] : []),
         ...(carrier && geometry.transferPads ? [carrier.inset] : [])]);
-      const step: Step | null = sectorNetwork ? planSectorRelay(local, scene, commands)
+      const coordinated = parallel ? planParallelDelivery(local, scene, rows, observation, commands) : null;
+      if (coordinated) local = { ...local, parallel: coordinated.parallel };
+      const step: Step | null = parallel ? coordinated?.step ?? null
+        : sectorNetwork ? planSectorRelay(local, scene, commands)
         : relay ? planRelay(local, scene, rows, commands)
         : passage ? planPassage(local, scene, commands, peers)
         : !local.held && invited && (!local.count || !Object.keys(local.loaded).length)
@@ -624,9 +741,9 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         : (carrier ? planInterception(local, scene, rows, commands, carrier) : null)
           ?? planDelivery(local, scene, rows, commands, blockers)
           ?? allowDelivery(local, scene, rows, commands, reserved, step => local.tried.includes(unique(step)));
-      if (!step || (!((handsOff || carrier && geometry.transferPads) && step.waitForTransport) && local.tried.includes(unique(step)))) return null;
+      if (!step || (!parallel && !((handsOff || carrier && geometry.transferPads) && step.waitForTransport) && local.tried.includes(unique(step)))) return null;
       const ref = observation.observation_ref;
-      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, local.interference?.ref, local.interceptionRef,
+      const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, local.interference?.ref, local.interceptionRef, parallel?.ref,
         local.transferEvidence?.ref,
         ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources)]
         .filter((value): value is string => !!value && value !== ref))];
@@ -638,7 +755,10 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const strategy = known ? 'P07' : knownInteraction ? 'P02' : 'P05';
       if (decision?.result !== strategy) return null;
       const label = navigationPrimitives[strategy], parent = 'G_official_completion';
-      const situation = step.intercept ? geometry.transferPads ? 'Test contact with the carrier at the observed frontal position'
+      const situation = parallel && step.intercept ? 'Compare contact with the carrier in front while other crates keep moving'
+        : parallel && step.waitForTransport ? 'Leave the approach free while the other carrier completes its movement'
+        : parallel && !local.held && local.parallel?.approach.length ? 'Keep the observed approach open for the last crate'
+        : step.intercept ? geometry.transferPads ? 'Test contact with the carrier at the observed frontal position'
         : 'Test contact with the carrier that removed a part from the receiver'
         : carrier && step.waitForTransport ? 'Keep the approach clear and check whether the carrier moves in front'
         : carrier && !local.held ? geometry.transferPads ? 'Approach the carrier while keeping its route open'
@@ -663,7 +783,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const prediction = known || handsOff ? step.prediction : null;
       const peer = relay ? externalCarriers(observation, local).get(relay.carrier) : null;
       const exclusive = !local.sharedEvidence || (inset && !!local.interceptionRef && !blockers.length);
-      const prefix = known && !handsOff && exclusive ? walkPrefix(step, scene, local, remaining) : [];
+      const prefix = known && !parallel && !handsOff && exclusive ? walkPrefix(step, scene, local, remaining) : [];
       const walk = prefix.length > 1 ? prefix : undefined;
       const actions = walk?.map(step => ({ action_ref: step.input, data: {} })) ?? [action];
       return { status: 'proposed', kind: family, actions,
@@ -678,6 +798,8 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
           triggerCard: decision.receipt.workflow,
           actor: tileBox(geometry, scene.pose), cargo: local.held ? tileBox(geometry, local.held) : invited ? tileBox(geometry, ahead) : null,
           target: step.target ? tileBox(geometry, step.target) : null,
+          ...(parallel ? { receivingTargets: geometry.targets.map(target => tileBox(geometry, target)),
+            externalCarriers: [...carrierPositions(observation, local).values()].flat().map(site => tileBox(geometry, site)) } : {}),
           ...(sectorNetwork ? { receivingTargets: sectorNetwork.receiving.flatMap(sector => sector.targets.map(target => tileBox(geometry, target))),
             externalCarriers: sectorCarriers(observation, local).map(site => tileBox(geometry, site)) } : {}),
           ...(passage ? { receivingTargets: geometry.targets.map(target => tileBox(geometry, target)),
@@ -701,6 +823,21 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
     after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      const parallel = proposal.local.parallel;
+      if (parallel) {
+        const { local, step, scene: old } = proposal, actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
+        const held = actual && sceneHeld(actual);
+        const forms = carrierForms(second, local.geometry, parallel.ink);
+        const matched = !!actual && before.state === after.state && (step.intercept
+          ? step.target && same(actual.pose, old.pose) && same(actual.face, old.face)
+            && !forms.some(form => same(form.point, step.target))
+          : step.intent === 'attach' ? same(held, step.target) : step.intent === 'release' ? !held
+          : step.prediction && same(actual.pose, step.prediction.pose) && same(actual.face, step.prediction.face)
+            && same(held, step.prediction.cargo));
+        return { matched: !!matched, seal_prefix: true, reason: !matched ? 'parallel_delivery_replanned_from_return'
+          : step.intercept ? 'frontal_carrier_contact_observed' : step.waitForTransport ? 'autonomous_delivery_turn_observed'
+          : 'own_pose_and_coupling_remeasured' };
+      }
       if (proposal.step.intercept) {
         const { geometry, color } = proposal.local;
         const scene = orientedCouplingScene(second, geometry, color) as Scene | null;
@@ -756,6 +893,10 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const { step } = proposal;
       const scene = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
       if (!scene) return { events: [] };
+      if (local.parallel) {
+        state = { ...local, held: sceneHeld(scene), count: local.count + 1, refs: [...local.refs.slice(-5), after.observation_ref] };
+        return { events: [] };
+      }
       const delta = sub(scene.pose, old.pose), moved = delta.some(Boolean);
       const changed = Object.keys(old.boxes).filter(key => Object.hasOwn(scene.boxes, key) && old.boxes[key] !== scene.boxes[key]);
       const ahead = add(scene.pose, scene.face);
