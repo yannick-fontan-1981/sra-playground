@@ -45,6 +45,44 @@ test('a separated panel gets a turn between movement probes despite unrelated ch
   assert.notEqual(examples[0]![1], examples[2]![1]);
 });
 
+test('a panel probe keeps its identity when only a different component inside its bounds changes', async () => {
+  const arms = [[27, 4], [24, 7], [30, 7], [27, 10]];
+  const board = (indicator: number, outline: number) => Array.from({ length: 20 }, (_, y) => Array.from({ length: 40 }, (_, x) => {
+    if (x < 20) return x >= 4 && x < 7 && y >= 5 && y < 8 ? 3 : 1;
+    const slot = arms.find(([left, top]) => x >= left! && x < left! + 3 && y >= top! && y < top! + 3);
+    if (!slot) return 2;
+    if (slot !== arms[0]) return x === slot[0] && y === slot[1] ? 8 : 7;
+    return x === slot[0] && y === slot[1] ? indicator : outline;
+  }));
+  const inputs = [1, 2, 3, 4].map(id => ({ action_ref: `ACTION${id}`, data: {} }));
+  const refs = [...inputs.map(input => input.action_ref), 'ACTION6'];
+  const firstRows = board(8, 7), secondRows = board(9, 7), changedRows = board(9, 6);
+  const observe = (frame_rows: number[][], step: number) => measureNativeObservation({
+    frame_rows, frame_hash: `panel-probe-${step}`, level: 1, levels_completed: 0, available_action_refs: refs, state: 'NOT_FINISHED',
+  }, step);
+  const before = await observe(firstRows, 1), after = await observe(secondRows, 2), changed = await observe(changedRows, 3);
+  const family = createSicPublicInputExploration();
+  const initial = await family.propose(before, firstRows, inputs, 20);
+  assert.ok(initial?.panelTest);
+  const click = initial.actions[0]!;
+  assert.deepEqual(click, { action_ref: 'ACTION6', data: { x: 28, y: 5 } });
+  await family.record(before, after, click, firstRows, secondRows, initial, 0, [secondRows]);
+  for (const action of inputs) await family.observePublicOutcome?.(after, after, action, secondRows, secondRows, [secondRows]);
+  const next = await family.propose(after, secondRows, inputs, 20);
+  assert.deepEqual(next?.actions[0], { action_ref: 'ACTION6', data: { x: 25, y: 8 } });
+  const replaced = await family.propose(changed, changedRows, inputs, 20);
+  assert.deepEqual(replaced?.actions[0], click);
+
+  const exploration = createSicPublicInputExploration();
+  for (const action of inputs) await exploration.observePublicOutcome?.(changed, changed, action, changedRows, changedRows, [changedRows]);
+  for (const control of visibleCommandPanel(secondRows)!.buttons) {
+    const [x, y] = componentCenterPoint(control);
+    await exploration.observePublicOutcome?.(after, after, { action_ref: 'ACTION6', data: { x, y } }, secondRows, secondRows, [secondRows]);
+  }
+  const untried = await exploration.propose(after, secondRows, inputs, 20);
+  assert.deepEqual(untried?.actions[0], { action_ref: 'ACTION6', data: { x: 5, y: 6 } });
+});
+
 test('public exploration shares tested panel commands across families and only revisits states with a new test', async () => {
   const arms = [[27, 4], [24, 7], [30, 7], [27, 10]];
   const board = (step: number, shifted = false) => Array.from({ length: 20 }, (_, y) => Array.from({ length: 40 }, (_, x) => {

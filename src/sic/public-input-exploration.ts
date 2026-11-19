@@ -428,6 +428,11 @@ const panelPoint = (part: VisibleCommandPanel['buttons'][number]): NativeCommand
   return { action_ref: 'ACTION6', data: { x, y } };
 };
 
+function panelControlKey(command: string, control: VisibleCommandPanel['buttons'][number]) {
+  // The control's mask excludes other components drawn within its bounding box.
+  return `${command}:control:${JSON.stringify([control.bbox, control.color, control.mask])}`;
+}
+
 function panelTestKey(command: string, rows: NativeRows, box: NativeBox | null | undefined) {
   if (!box || !command.startsWith('ACTION6:')) return command;
   const [left, top, right, bottom] = box;
@@ -457,9 +462,11 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? local.transitions[source]?.find(edge => edge.action === nonPoint[0]!.action_ref && edge.destination === source) : undefined;
       const candidates = visibleInputs(observation, rows, inputs, !!stationaryCommand && stationaryClicks.length >= 4);
       const named = [...candidates.keys()].filter(key => /^ACTION[1-5]$/.test(key));
+      const panelTestKeys = new Map<string, string>();
       const panelKeys = panel?.buttons.map(part => {
         const command = panelPoint(part);
         const key = commandKey(command);
+        panelTestKeys.set(key, panelControlKey(key, part));
         candidates.set(key, { command, box: part.bbox, marker: false, repeated: false });
         return key;
       }) ?? [];
@@ -482,14 +489,14 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       }
       const keys = [...candidates.keys()];
       const attempted = new Set(local.transitions[source]?.map(edge => edge.action));
-      const testKey = (key: string) => panelTestKey(key, rows, candidates.get(key)?.box);
+      const testKey = (key: string) => panelTestKeys.get(key) ?? key;
       const clickedControl = local.clickedControl?.destination === source ? local.clickedControl : undefined;
       const controlledPiece = local.controlledPiece?.destination === interfaceKey(observation) ? local.controlledPiece : undefined;
       const probe = clickedControl?.remaining.find(key => candidates.has(key) && !attempted.has(key));
       const canDiversifyDirection = keys.includes('ACTION5')
         || (keys.some(key => key === 'ACTION1' || key === 'ACTION2') && keys.some(key => key === 'ACTION3' || key === 'ACTION4'));
-      const lastChange = local.lastChange?.destination === source && canDiversifyDirection ? local.lastChange : null;
-      const deferred = lastChange ? oppositeDirection[lastChange.action] : undefined;
+      const lastChange = local.lastChange?.destination === source ? local.lastChange : null;
+      const deferred = lastChange && canDiversifyDirection ? oppositeDirection[lastChange.action] : undefined;
       const recheck = local.recheck && local.experiments < local.recheck.until ? local.recheck : null;
       const measuredControls = recheck && keys.length > named.length
         ? observedCommandFrontier(local.transitions, source, named, 1, () => named, deferred) : null;
@@ -497,12 +504,14 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ? { action: trialKey, probe: trialKey, depth: 0, first: null } : null;
       const workspaceProbe = workspaceKey && !local.transitions[source]?.some(edge => edge.action === workspaceKey)
         ? { action: workspaceKey, probe: workspaceKey, depth: 0, first: null } : null;
-      const pendingButton = panelKeys.find(key => !attempted.has(key) && !local.panelTests?.includes(testKey(key)));
+      const pendingButton = panelKeys.find(key => !attempted.has(key) && !local.panelTests?.includes(testKey(key))
+        && !local.panelTests?.includes(panelTestKey(key, rows, candidates.get(key)?.box)));
       const pendingNonPoint = pendingButton && local.lastPanelInputWasClick
         && !execution?.readDirectionalMotion?.() ? named.find(key => !attempted.has(key) && !local.panelTests?.includes(key)) : undefined;
       const variedInput = pendingNonPoint || pendingButton;
       const panelProbe = variedInput ? { action: variedInput, probe: variedInput, depth: 0, first: null } : null;
-      const directionalProbe = panel && local.lastPanelInputWasClick
+      // Recheck directions first when a click has established a different context.
+      const directionalProbe = panel && local.lastPanelInputWasClick && lastChange?.action.startsWith('ACTION6:')
         ? observedCommandFrontier(local.transitions, source, named, 1, () => named, deferred) : null;
       const marker = local.panelMarker?.observation === ref ? local.panelMarker.trial : undefined;
       const actor = marker && panel && local.panelWalker && panelActor(local.panelWalker, rows, panel.area);
