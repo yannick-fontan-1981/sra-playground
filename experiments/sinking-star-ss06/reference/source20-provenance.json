@@ -1,0 +1,663 @@
+{
+  "sourcePuzzle": 20,
+  "sourceId": "mirror_clocks",
+  "guide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-20",
+  "guideImage": "https://sinkingstarwalkthrough.com/img/crossovers/heroes-and-mirrors/puzzle-20.webp",
+  "inspectedImage": "https://github.com/joric/ootss_tileset/blob/main/images/levels/mirror_clocks.webp",
+  "imageSha256": "cc5a2623ff5dbb032bbd24cc394c500e9a33b37b6538499c61f0d032086c8ede",
+  "layoutSource": "https://github.com/chenyuyang712/OSS-puzzlewiki/blob/main/data/levels_layout.json.gz",
+  "sourceActions": 158,
+  "sourceWitnessStatus": "Community source route, not replayed in SS06; original relies on duplication/vertical supports.",
+  "coordinateRule": "For this camera/view: screen column=rawY-9, screen row=rawX-9. Asset u in record i uses position p in record i+1. Ground and water boundaries are not certified from object extraction.",
+  "screenObjects": [
+    {
+      "asset": "GAME_MIRR_Mirror_Magic_A",
+      "position": [
+        10.0,
+        19.0,
+        0.0
+      ],
+      "rotation": [
+        -1,
+        2,
+        0.707107,
+        0.707107
+      ],
+      "record": 124,
+      "attributes": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "4": -5,
+        "6": -1,
+        "7": 2
+      },
+      "screenAt": {
+        "x": 10,
+        "y": 1
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_MIRR_Mirror_Magic_A",
+      "position": [
+        10.0,
+        11.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 125,
+      "attributes": {},
+      "screenAt": {
+        "x": 2,
+        "y": 1
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_MIRR_Mirror_Magic_A",
+      "position": [
+        10.0,
+        13.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 126,
+      "attributes": {},
+      "screenAt": {
+        "x": 4,
+        "y": 1
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_MIRR_Mirror_Magic_A",
+      "position": [
+        10.0,
+        21.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 610,
+      "attributes": {},
+      "screenAt": {
+        "x": 12,
+        "y": 1
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        16.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 611,
+      "attributes": {
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 7,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        17.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 612,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 8,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        18.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 613,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 9,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        19.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 614,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 10,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        20.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 615,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 11,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        21.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 616,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 12,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+      "position": [
+        19.0,
+        12.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 617,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 3,
+        "y": 10
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+      "position": [
+        19.0,
+        14.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 618,
+      "attributes": {
+        "0": 0,
+        "4": 1156577652241161533,
+        "13": 17873661022179581,
+        "17": 2,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 5,
+        "y": 10
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+      "position": [
+        19.0,
+        16.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 619,
+      "attributes": {
+        "0": 0,
+        "11": -630700980311159555,
+        "13": 17873661022179581,
+        "17": 2,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 7,
+        "y": 10
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Button_C",
+      "position": [
+        12.0,
+        20.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 620,
+      "attributes": {
+        "0": 0,
+        "4": 1156577652241161533,
+        "13": 17873661022179581,
+        "17": 2
+      },
+      "screenAt": {
+        "x": 11,
+        "y": 3
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+      "position": [
+        19.0,
+        18.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 621,
+      "attributes": {
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 9,
+        "y": 10
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+      "position": [
+        19.0,
+        20.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 622,
+      "attributes": {
+        "0": 0,
+        "11": -630700980311159555,
+        "13": 17873661022179581,
+        "17": 2,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 11,
+        "y": 10
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        15.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 623,
+      "attributes": {
+        "0": 0,
+        "4": 1156577652241161533,
+        "13": 17873661022179581,
+        "17": 2,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 6,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Button_D",
+      "position": [
+        12.0,
+        12.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 624,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1
+      },
+      "screenAt": {
+        "x": 3,
+        "y": 3
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "trader",
+      "position": [
+        19.0,
+        10.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 625,
+      "attributes": {
+        "0": 0
+      },
+      "screenAt": {
+        "x": 1,
+        "y": 10
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Exit_A",
+      "position": [
+        19.0,
+        22.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        -0.707107,
+        0.707107
+      ],
+      "record": 627,
+      "attributes": {
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 0,
+        "7": 0
+      },
+      "screenAt": {
+        "x": 13,
+        "y": 10
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Crystal_A",
+      "position": [
+        11.0,
+        12.0,
+        0.0
+      ],
+      "rotation": null,
+      "record": 629,
+      "attributes": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "4": -9,
+        "24": 0
+      },
+      "screenAt": {
+        "x": 3,
+        "y": 2
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Crystal_D",
+      "position": [
+        11.0,
+        20.0,
+        0.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0.707107,
+        0.707107
+      ],
+      "record": 631,
+      "attributes": {
+        "0": -1,
+        "1": -10,
+        "3": 12,
+        "4": 17,
+        "5": 2,
+        "6": 0,
+        "7": 0
+      },
+      "screenAt": {
+        "x": 11,
+        "y": 2
+      },
+      "sourceHeight": 0.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        14.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 632,
+      "attributes": {
+        "1": 4160756741,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 5,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        13.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 633,
+      "attributes": {
+        "4": 5473348871957319691,
+        "12": -1567477850308604419,
+        "17": 1,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 4,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    },
+    {
+      "asset": "GAME_SOKO_Gate_Glyph_D",
+      "position": [
+        19.0,
+        11.0,
+        -1.0
+      ],
+      "rotation": null,
+      "record": 635,
+      "attributes": {
+        "3": 1,
+        "4": 1,
+        "5": 1,
+        "6": 0,
+        "7": 0,
+        "10": 524288
+      },
+      "screenAt": {
+        "x": 2,
+        "y": 10
+      },
+      "sourceHeight": -1.0
+    }
+  ],
+  "observedGeometry": {
+    "enclosures": 2,
+    "mirrors": 4,
+    "crystals": 2,
+    "buttons": 2,
+    "trader": {
+      "x": 1,
+      "y": 10
+    },
+    "exit": {
+      "x": 13,
+      "y": 10
+    },
+    "violetGateCells": [
+      {
+        "x": 3,
+        "y": 10
+      },
+      {
+        "x": 5,
+        "y": 10
+      },
+      {
+        "x": 7,
+        "y": 10
+      },
+      {
+        "x": 9,
+        "y": 10
+      },
+      {
+        "x": 11,
+        "y": 10
+      }
+    ],
+    "violetInitiallyClosedColumns": [
+      5,
+      9
+    ],
+    "greenInitiallyActiveEntry": {
+      "x": 2,
+      "y": 10
+    },
+    "permanentRefugeUnderFirstVioletGate": {
+      "x": 3,
+      "y": 10
+    },
+    "greenMainBridgeColumns": [
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "confidence": "Puzzle identity and initial visible objects inspected. Button polarity inferred jointly from screenshot and guide. Exact floor mask and mirror directions still need SS06 replay validation.",
+  "adaptation": "HTML v5 / 0.2.1 : un Guerrier rouge, une cible, deux caisses et trois miroirs, dont deux dans la salle de droite. Après le premier reflet, le second miroir droit est poussé devant le rayon de retour pour maintenir la caisse verte sur son bouton. Sept plateformes remplacent les supports et portes superposés de la source : quatre vertes et trois violettes. Aucun piston, aucune duplication et aucun délai imposé au premier reflet.",
+  "adaptationVersion": "0.2.1",
+  "adaptationDetails": {
+    "mode": "solo-warrior",
+    "heroes": [
+      "warrior"
+    ],
+    "goals": 1,
+    "stones": 2,
+    "mirrors": 3,
+    "rightRoomMirrors": 2,
+    "gates": 0,
+    "platforms": 7,
+    "greenPlatforms": 4,
+    "violetPlatforms": 3,
+    "coordinateSpace": "Source map before centering in the 20×20 grid.",
+    "rightPrincipalMirror": {
+      "at": {
+        "x": 12,
+        "y": 7
+      },
+      "facing": "NE",
+      "anchoring": "Walls west and south prevent access to the pushing positions needed to displace it."
+    },
+    "rightBlockingMirror": {
+      "initial": {
+        "x": 15,
+        "y": 4
+      },
+      "final": {
+        "x": 12,
+        "y": 4
+      },
+      "facing": "SE",
+      "placement": "Pushed into place after the first reflection; blocks the north ray of the principal mirror."
+    },
+    "witnessActions": 61,
+    "witnessFrames": 192,
+    "selections": 0,
+    "reflections": 3,
+    "reflectionTurns": [
+      18,
+      53,
+      56
+    ],
+    "greenSequence": [
+      true,
+      true,
+      true
+    ],
+    "violetSequence": [
+      true,
+      false,
+      true
+    ],
+    "sourceWitnessReused": false
+  },
+  "adaptationValidation": {
+    "witness": "The 61-action SS06 route has been replayed without refused actions or deaths and reaches the sole Warrior destination.",
+    "independentReview": "reference/level8-clock-review.json",
+    "counterfactual": "Remove the blocking mirror from the witness state after action 52, before the second reflection. The reflection releases the green button and the Warrior falls when its platform retracts.",
+    "scope": "The witness proves solvability. The counterfactual demonstrates the blocker effect at this state on this route; it does not prove global solution uniqueness, universal necessity of the blocker or impossibility of all alternative strategies."
+  }
+}

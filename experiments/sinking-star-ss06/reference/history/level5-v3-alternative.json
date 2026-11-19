@@ -1,0 +1,9 @@
+{
+  "level": 5,
+  "option": "disablePistons",
+  "status": "solved",
+  "method": "replayedWitness",
+  "commands": "XRUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
+  "actions": 42,
+  "note": "Retirer le mur (5,4) autorise le reflet initial de la caisse. Ce parcours termine sans poussée ni écrasement par presse."
+}

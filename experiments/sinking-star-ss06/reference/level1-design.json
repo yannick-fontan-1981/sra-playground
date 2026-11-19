@@ -1,0 +1,183 @@
+{
+  "spec": {
+    "id": "ss06-01",
+    "title": "L’atelier des deux rives",
+    "rows": [
+      "##################",
+      "##################",
+      "#M#.#.############",
+      "#.#o#.####...#####",
+      "#.....oo~~...#####",
+      "#.W...####...#####",
+      "##########.#######",
+      "##########~##....#",
+      "########o..~~....#",
+      "#############....#",
+      "#############g..g#",
+      "##################"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 9,
+          "y": 8
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "atelier",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 2
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 8
+        },
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 6
+        },
+        "circuit": "atelier",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "DDRRUCRRRURRRRRUXRDDCDRRRRRRRUXLLDD",
+  "source": {
+    "puzzle": 0,
+    "label": "Création originale · Poussées complémentaires, deux appuis indispensables, presse distante et traversée par miroir.",
+    "url": "",
+    "piston": true
+  },
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ]
+}

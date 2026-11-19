@@ -1,0 +1,66 @@
+{
+  "game": "SS06",
+  "version": "0.2.1",
+  "command": "npm run build && node --test tests/*.test.mjs",
+  "passed": 55,
+  "failed": 0,
+  "skipped": 0,
+  "typescriptBuild": "pass",
+  "nativeBrowserTest": false,
+  "unchangedLevelDesigns": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "preMapChangeDuoObservationParity": {
+    "tests": 55,
+    "baselineLevels": 8,
+    "identical": true,
+    "levels": [
+      {
+        "level": 1,
+        "observationsSha256": "6e7ca2ab628debde504fe19752f3a83220a37900b8ef6492c80b1e66736ef570",
+        "identical": true
+      },
+      {
+        "level": 2,
+        "observationsSha256": "54a49f0d18fc8bbb6ca3aae922d473a7a8ba2f26aa0dd80b6a0a23e815795b3d",
+        "identical": true
+      },
+      {
+        "level": 3,
+        "observationsSha256": "53c1a1cb0804faa7a142173196c6d7670fa5c9a901a1d1e26ea2aa0872b2ebf9",
+        "identical": true
+      },
+      {
+        "level": 4,
+        "observationsSha256": "93a2623540e11693c0bdf5184b68f08c5df412538755f73d6cce06b613aa881a",
+        "identical": true
+      },
+      {
+        "level": 5,
+        "observationsSha256": "733692d7c07730cbd99e2ef5ed756d8e6d58f215bc6ba5ebcac33359ba37dbb8",
+        "identical": true
+      },
+      {
+        "level": 6,
+        "observationsSha256": "7d55882d27aee0b3d3940f9151464f7f4240779e68d4e5dd87ab7c9938d6e9cd",
+        "identical": true
+      },
+      {
+        "level": 7,
+        "observationsSha256": "3034e4734b38e1be826a5131501da3446e8f36a612658a2e70add4b17fd5ae67",
+        "identical": true
+      },
+      {
+        "level": 8,
+        "observationsSha256": "8aefffcd976d7904592c651ce351d5db3b5809976abf629e35b2c6dfd8592d9b",
+        "identical": true
+      }
+    ]
+  }
+}

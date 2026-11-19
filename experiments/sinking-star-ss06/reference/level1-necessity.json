@@ -1,0 +1,121 @@
+{
+  "geometry": [
+    "Les deux caisses du chenal ne sont accessibles que depuis les extrémités ; les cases au-dessus et au-dessous sont des murs. Une poussée de file du Guerrier est nécessaire pour libérer la première extrémité.",
+    "Le chenal traverse deux cases d’eau : ses deux caisses sont consommées en deux appuis.",
+    "La caisse de transmission de la presse est encastrée et inaccessible à pied. Elle est le seul occupant initial de la case de presse ; sans elle, la fermeture ne déplace pas le miroir.",
+    "Le miroir initial regarde un mur au nord. Son emplacement utile reste inaccessible à pied et exige la poussée distante.",
+    "La caisse du Marchand maintient le bouton qui ouvre la porte placée sur le rayon. Un personnage pourrait le tenir temporairement, mais ne pourrait pas partir en dernier après avoir libéré ce bouton."
+  ],
+  "proofs": {
+    "normal": {
+      "status": "solved",
+      "states": 8072,
+      "expanded": 8066,
+      "ms": 269,
+      "commands": "DDRRUDCURRRRRRRRUXDDRCDLXDD",
+      "state": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 14,
+              "y": 14
+            },
+            "facing": "S",
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 17,
+              "y": 14
+            },
+            "facing": "E",
+            "dead": false
+          }
+        ],
+        "active": 0,
+        "stones": [
+          {
+            "x": 4,
+            "y": 6
+          },
+          {
+            "x": 10,
+            "y": 12
+          }
+        ],
+        "monsters": [],
+        "supports": [
+          {
+            "x": 9,
+            "y": 8
+          },
+          {
+            "x": 10,
+            "y": 8
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 11,
+              "y": 12
+            },
+            "facing": "NE"
+          }
+        ],
+        "complete": true,
+        "failed": false,
+        "dead": false,
+        "gateClosed": [
+          true,
+          false
+        ]
+      }
+    },
+    "withoutWarriorFile": {
+      "status": "unsolvable",
+      "states": 784,
+      "expanded": 784,
+      "ms": 19
+    },
+    "withoutPiston": {
+      "status": "unsolvable",
+      "states": 2668,
+      "expanded": 2668,
+      "ms": 53
+    },
+    "withoutPlatforms": {
+      "status": "unsolvable",
+      "states": 784,
+      "expanded": 784,
+      "ms": 11
+    },
+    "without_merchantCrate": {
+      "status": "unsolvable",
+      "states": 8076,
+      "expanded": 8076,
+      "ms": 202
+    },
+    "without_rearFileCrate": {
+      "status": "unsolvable",
+      "states": 2056,
+      "expanded": 2056,
+      "ms": 31
+    },
+    "without_frontFileCrate": {
+      "status": "unsolvable",
+      "states": 2840,
+      "expanded": 2840,
+      "ms": 43
+    },
+    "without_transmissionCrate": {
+      "status": "unsolvable",
+      "states": 5736,
+      "expanded": 5736,
+      "ms": 87
+    }
+  },
+  "shortestClaim": false
+}

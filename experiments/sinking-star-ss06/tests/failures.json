@@ -1,0 +1,221 @@
+[
+  {
+    "level": 6,
+    "cause": "Attaque mortelle de monstre",
+    "commands": "URRRRRR",
+    "actions": [
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      }
+    ]
+  },
+  {
+    "level": 6,
+    "cause": "Chute par reflet",
+    "commands": "URDRRUX",
+    "actions": [
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "level": 8,
+    "cause": "Retrait de la première plateforme violette sous le Guerrier après blocage du circuit vert",
+    "commands": "UDDRRRRRRRRRRRRRUXUUUULLLLDDDDDLLLLLLLLLLLLDDDDRRRRX",
+    "actions": [
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ]
+  }
+]

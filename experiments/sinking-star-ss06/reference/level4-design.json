@@ -1,0 +1,137 @@
+{
+  "spec": {
+    "id": "ss06-04",
+    "title": "Le ponton chargé",
+    "facing": "E",
+    "rows": [
+      "~~~~~~~~~~~~~~",
+      "~~~gg~~~~~~~~~",
+      "~~~~~~~~~~~~~~",
+      "~Wooooo4.....~",
+      "~M~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~"
+    ]
+  },
+  "commands": "CRXRRXRRXRXRURRRDLLLLLLLXLUURCURRUU",
+  "source": {
+    "puzzle": 21,
+    "label": "Adaptation · Heroes and Mirrors 21 : file de cinq caisses, miroir mobile et ponton.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-21",
+    "piston": false
+  },
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ]
+}
