@@ -12,7 +12,8 @@ import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts
 import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } from './collection-experiment.ts';
 import { repeatedInputTargets } from './repeated-input-targets.ts';
 import { chooseTravelTrial, observeTravel, readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
-import { chooseCoverage, hasObservedCoverage, observeCoverage, observedCoverageDeadlock, retainCoverageAfterReset, type CoverageLearning } from './observed-coverage.ts';
+import { chooseCoverage, hasObservedCoverage, observeCoverage, observedCoverageDeadlock, retainCoverageAfterReset,
+  type CoverageLearning, type PullStep } from './observed-coverage.ts';
 import { countChangesInside, workspaceClickCandidate } from './workspace-click.ts';
 import { commandPanelState, visibleCommandPanel, type VisibleCommandPanel } from './visible-command-panel.ts';
 import { canReachPanelMarker, confirmsPanelTranslation, containsBox, learnPanelDirection, learnPanelTerrain, matchesPanelTerrain, matchingPanelMarker, panelActor,
@@ -30,6 +31,7 @@ export const publicInputExplorationId = 'sic_public_input_exploration';
 export const publicInputStrategies = {
   P05: 'Test a direction on the visibly changed piece',
   P07: 'Follow an observed return to an untested control',
+  plan_observed_placement: 'Plan simultaneous placement from a measured interaction',
   test_marked_edit: 'Test the edit suggested by the visible marks',
   test_edited_collection: 'Test the effect of the verified edit',
   test_repeated_target: 'Test a target from a repeated group',
@@ -39,10 +41,11 @@ export const publicInputStrategies = {
   compare_public_input: 'Test an available command on this board',
   revisit_input_frontier: 'Revisit a board with an untested command',
 } as const;
-const order = ['P05', 'recheck_controls_after_change', 'test_marked_edit', 'test_edited_collection', 'test_workspace_target',
+const order = ['plan_observed_placement', 'P05', 'recheck_controls_after_change', 'test_marked_edit', 'test_edited_collection', 'test_workspace_target',
   'test_repeated_marker', 'test_repeated_target', 'compare_public_input', 'revisit_input_frontier'] as const;
-const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 7, order: 'FALLBACK', priorities: order,
+const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 8, order: 'FALLBACK', priorities: order,
   strategies: {
+    plan_observed_placement: [{ fact: 'placementRoute', expected: true, label: 'Measured coupled movement permits a route to cover the visible targets' }],
     P05: [{ fact: 'clickedControl', expected: true, label: 'A click changed a piece after directional commands failed to move it' }],
     recheck_controls_after_change: [{ fact: 'changedControlContext', expected: true, label: 'Previously stationary directions can be rechecked after a visible interface change' }],
     test_marked_edit: [{ fact: 'markedEdit', expected: true, label: 'A visible mark suggests a testable change to the collection' }],
@@ -53,7 +56,8 @@ const graph = compileStrategyGraph({ id: 'understand_public_controls', version: 
     compare_public_input: [{ fact: 'untestedHere', expected: true, label: 'An available illustrated input has no return on this board' }],
     revisit_input_frontier: [{ fact: 'observedRoute', expected: true, label: 'Previously observed returns lead to an untested input' }],
   },
-}, ['clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'workspaceTarget', 'repeatedMarker', 'repeatedTarget', 'untestedHere', 'observedRoute']);
+}, ['placementRoute', 'clickedControl', 'changedControlContext', 'markedEdit', 'verifiedEdit', 'workspaceTarget',
+  'repeatedMarker', 'repeatedTarget', 'untestedHere', 'observedRoute']);
 const explorationLimit = 40;
 const clickLimit = 30;
 const completion = 'G_official_completion';
@@ -101,6 +105,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
   coveragePlacement?: true;
+  pullRoute?: readonly PullStep[];
   clickedControl?: ClickedControl; collectionTrial?: CollectionTrial; workspaceTrial?: NativeBox; needId: string;
   panel?: Pick<VisibleCommandPanel, 'area' | 'panel'>; panelTest?: string;
   panelApproach?: PanelApproach; panelComparison?: PanelMarkerTrial; panelContact?: PanelContactApproach;
@@ -646,6 +651,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         ...(opening ? [opening.mechanism.transport!, opening.source.evidence] : []),
         ...(unmeasured ? [local.panelArrival!] : [])];
       const { selected, entries } = resolveStrategyGraph({ graph, mode: 'active', facts: {
+        placementRoute: { value: !!selectedCoverage?.pullRoute, evidence: proof },
         clickedControl: { value: !!probe, evidence: proof },
         changedControlContext: { value: !!measuredControls, evidence: proof },
         markedEdit: { value: !!collectionTrial?.expected, evidence: proof },
@@ -655,12 +661,13 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         repeatedTarget: { value: repeatedTarget, evidence: proof },
         untestedHere: { value: frontier.depth === 0, evidence: proof },
         observedRoute: { value: frontier.depth > 0, evidence: proof },
-      }, planners: { P05: () => offer, recheck_controls_after_change: () => offer, test_marked_edit: () => offer,
+      }, planners: { plan_observed_placement: () => offer, P05: () => offer, recheck_controls_after_change: () => offer, test_marked_edit: () => offer,
         test_edited_collection: () => offer, test_workspace_target: () => offer, test_repeated_marker: () => offer, test_repeated_target: () => offer,
         compare_public_input: () => offer, revisit_input_frontier: () => offer } });
       if (!selected) return null;
       const { command, box } = selected.plan;
-      const mode = verifiedContextChange ? execution?.reasoningMode ?? 'exploration' : 'exploration';
+      const mode = selectedCoverage?.pullRoute ? 'solving'
+        : verifiedContextChange ? execution?.reasoningMode ?? 'exploration' : 'exploration';
       const routeSupported = !!frontier.first || !!walk || !!transport?.first;
       const facts = { eligibleProbe: !routeSupported, routeSupported, knownInteraction: false, mode };
       const decision = verifiedContextChange || contextualCommand
@@ -670,7 +677,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       const label = selectedCoverage ? selectedCoverage.verifyBarrier
         ? 'Verify a barrier that could make simultaneous coverage impossible'
         : selectedCoverage.covered ? 'Check access to the exit while the observed marks stay covered'
-          : 'Cover the visible marks simultaneously using the measured push effect'
+          : `Cover the visible marks simultaneously using the measured ${selectedCoverage.motion} effect`
         : travelEvidence.length && travel ? {
         approach: 'Use a measured direction to approach a visible landing and test its role',
         contact: 'Explore a reachable contact using the movement measured so far',
@@ -712,6 +719,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       return {
         status: 'proposed', kind: publicInputExplorationId, actions, source, candidates: keys, needId: need.id,
         ...(selectedCoverage && !selectedCoverage.covered ? { coveragePlacement: true as const } : {}),
+        ...(selectedCoverage?.pullRoute ? { pullRoute: selectedCoverage.pullRoute } : {}),
         ...(panelBounds ? { panel: panelBounds } : {}), ...(panelTest ? { panelTest: testKey(frontier.action) } : {}),
         ...(clickedControl && probe ? { clickedControl } : {}), ...(box && !offer.marker ? { selectedBox: box } : {}),
         ...(collectionTrial ? { collectionTrial } : {}),
@@ -878,7 +886,7 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
         const previous = state.travel, travel = observeTravel(previous, rows, afterRows, command, after.observation_ref);
         if (travel) state.travel = travel;
         if (before.available_action_refs.length === 4 && before.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))) {
-          const coverage = observeCoverage(state.coverage, previous, travel, rows, afterRows, command, after.observation_ref);
+          const coverage = observeCoverage(state.coverage, previous, travel, rows, afterRows, command, after.observation_ref, proposal.pullRoute);
           if (coverage) state.coverage = coverage;
         }
       }
@@ -955,6 +963,11 @@ export function createSicPublicInputExploration(): NativeFamily<Proposal> {
       state.lastChange = destination === source ? null : { destination, action, evidence: after.observation_ref };
       const events: NativeRecord[] = motionReceipt ? [{ kind: 'sic_selected_piece_motion', ...motionReceipt }] : [];
       const coverage = state.coverage, deadlock = coverage?.deadlock;
+      const pull = coverage?.lastPull;
+      if (pull?.ref === after.observation_ref) {
+        events.push({ kind: 'sic_coupled_pull_observed', from: pull.from, to: pull.to, actor: pull.actor,
+          evidence: [before.observation_ref, pull.ref] });
+      }
       if (coverage?.layout && deadlock?.ref === after.observation_ref) {
         events.push({ kind: 'sic_coverage_deadlock_observed', pieces: deadlock.bodies, marks: coverage.layout.marks,
           evidence: [...new Set([...coverage.refs, deadlock.ref])] });
