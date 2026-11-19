@@ -2632,3 +2632,11 @@ SIC lit les deux légendes du bandeau et distingue les deux carrés demandés du
 Le premier clic vérifie la fusion des deux carrés et le deuxième met le produit en réserve. Le troisième confirme que la paire choisie produit le glyphe affiché et que le mobile écarté reste disponible. SIC dirige ce dernier vers le carré de rang supérieur. Le deuxième carré demandé apparaît à la commande 7. SIC gare ensuite ce carré en préservant le premier et ramène le glyphe vers son récepteur après sa dérive.
 
 Le niveau 8 gagne en **15 clics SIC seul et 8,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 15 clics. Les **94 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 109 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les trois tests de production et de livraison passent. Empreinte `39a57daf7b867bd15ed78ebeef1d127652f71347686ade7e58f832e8a406b576`.
+
+### WA30 niveau 8
+
+SIC retrouve les 13 caisses sur la grille et les 17 places réparties sur deux récepteurs. Il conserve l’identité des caisses qui se touchent et réutilise le contour et la commande d’interception confirmés au niveau précédent.
+
+Les retours successifs servent à anticiper où un porteur se présentera. Les contacts aux commandes 21 et 61 retirent les deux porteurs qui perturbaient les livraisons. SIC distingue ensuite la prise du joueur des mouvements autonomes et garde une approche praticable pendant que le dernier transporteur avance. À la commande 137, toutes les caisses occupent une place. La commande 138 laisse le transporteur terminer sa dépose et confirme la victoire.
+
+Le niveau 8 gagne en **138 commandes SIC seul et 76,28 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 138 commandes. Les **406 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 544 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript, les 133 tests de couplage et les huit tests ciblés de livraison et de réconciliation passent. Empreinte `d4d5a73a25a430c179e682797ce4edaf9851ecfdba0fe5160d8ca207e9b3e727`.
