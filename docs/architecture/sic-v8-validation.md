@@ -2602,3 +2602,11 @@ Deux relations observables structurent le plan. Un bouton de longueur agit sur t
 Au deuxième clic, SIC vérifie le sens de la rotation. Il tourne ensuite l’assemblage pour libérer successivement les canaux qui déplacent les bloqueurs. Une fois le passage libre, la barre qui porte le marqueur peut s’allonger jusqu’aux repères. Les 36 clics du rejeu complet sont identiques à ceux de l’essai depuis la sauvegarde.
 
 Le niveau 8 gagne en **36 commandes SIC seul et 13,11 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **216 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 252 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 12 tests ciblés passent. Empreinte `c722a6f5f89b9ae5ad6dcf31ae248dd7bf78f2e9ef515f37ff7709999d74db37`.
+
+### LS19 niveau 8
+
+SIC conserve les effets observés au niveau précédent. Il relit la forme, la couleur et l’orientation du motif séparément et compte les 22 points de réserve aux positions déjà apprises. Les cases de sol partiellement masquées activent la construction progressive de la carte.
+
+Le trajet révèle la station de forme, puis mesure la recoloration et trois contacts avec la station de rotation. Deux recharges donnent la réserve nécessaire pour revenir vers la sortie dont le motif avait été observé à l’entrée.
+
+Le niveau 8 gagne en **54 commandes SIC seul et 44,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Depuis la sauvegarde et en rejeu chronologique, les 54 commandes sont identiques. Les **278 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Le rejeu s’arrête à la victoire du niveau 8. Sur LS20, les **393 commandes des sept niveaux** et leurs retours gardent aussi les empreintes de référence. Empreinte `04353a68c6e193db09d36d861d7dcf6bfe6c6dd8e92cf61b53f8316b84f2ee3c`.
