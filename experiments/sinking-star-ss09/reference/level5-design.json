@@ -1,0 +1,522 @@
+{
+  "spec": {
+    "id": "ss09-05",
+    "title": "Laisser le dernier accord",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~.....~~~",
+      "~~~~~~~~~~~~...M.~~~",
+      "~~~~~~~~~~~~.....~~~",
+      "~~~~~~~~~~~~.....~~~",
+      "~~~~~~~~~~~~.....~~~",
+      "~~~~....~~~~.....~~~",
+      "~~~~.B..~~~~.....~~~",
+      "~~~~o...~~~~~~~~~~~~",
+      "~~~~....~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~...~~~",
+      "~~~~~~~~~~~~~~gg.~~~",
+      "~~~~~~~~~~~~~~...~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "W",
+    "mirrors": [
+      {
+        "at": {
+          "x": 14,
+          "y": 10
+        },
+        "facing": "NW"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 10
+        },
+        "facing": "SW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "detach",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 11
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 13,
+          "y": 7
+        },
+        "circuit": "detach",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "DDDDDLUUUUURRCRRXCDDDDLDLLUUUUURRRCDDDDDDXLDCDDDDLDLLXLLD",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes and Mirrors 1 · quitter le chant en laissant le poids sur son bouton",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1",
+    "puzzle": 1,
+    "objective": "Régler le miroir, maintenir la porte par une caisse, détacher le Barde puis reconfigurer la dernière traversée."
+  },
+  "metrics": {
+    "actions": 57,
+    "selections": 4,
+    "merchantPushes": 2,
+    "bardSongs": 2,
+    "partnerSongs": 0,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 0,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 2,
+    "mirrorMoves": 2,
+    "reflections": 3,
+    "heroReflections": 3,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand règle la première diagonale et dégage l’autre faisceau",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 11
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "detach": false
+      }
+    },
+    {
+      "label": "Le Barde pose la caisse sur le bouton puis se détache par le miroir",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 11
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "detach": true
+      }
+    },
+    {
+      "label": "Le Marchand déplace encore le premier miroir pour libérer l’axe du second",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 11
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 11
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "detach": true
+      }
+    },
+    {
+      "label": "Le poids reste sur l’îlot de départ pendant que le Barde rejoint sa destination",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 11
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 11
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "detach": true
+      }
+    },
+    {
+      "label": "Le Marchand rejoint le Barde sans déplacer son dernier accord",
+      "turn": 57,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 15
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 11
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 11
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "detach": true
+      }
+    }
+  ],
+  "adaptation": "Reprise du détachement de la Barde de son cristal-bouton, avec trois îlots et deux destinations dans une géométrie originale. Le Marchand travaille depuis l’autre rive : il doit déplacer le premier miroir une première fois pour recevoir le Barde, puis à nouveau pour dégager le second axe. La caisse reste inaccessible au Marchand et doit être menée sur son bouton par le chant. Les miroirs gardent la priorité au plus proche de la série SS."
+}

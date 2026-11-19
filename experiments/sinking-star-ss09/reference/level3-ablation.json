@@ -1,0 +1,26 @@
+{
+  "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+  "results": [
+    {
+      "mechanism": "merchant-push",
+      "status": "limit",
+      "states": 30000,
+      "expanded": 27219,
+      "ms": 692
+    },
+    {
+      "mechanism": "bard-song",
+      "status": "unsolvable",
+      "states": 306,
+      "expanded": 306,
+      "ms": 4
+    },
+    {
+      "mechanism": "mirror",
+      "status": "limit",
+      "states": 30000,
+      "expanded": 24168,
+      "ms": 337
+    }
+  ]
+}

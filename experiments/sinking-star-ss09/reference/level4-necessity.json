@@ -1,0 +1,34 @@
+{
+  "mapSha256": "4f7a3e6c4a530cb1e7584c3892b2d611666b4dd5de78c46be4aa1ccc61f30999",
+  "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+  "results": [
+    {
+      "mechanism": "merchant-push",
+      "status": "limit",
+      "states": 30000,
+      "expanded": 19930,
+      "ms": 441
+    },
+    {
+      "mechanism": "bard-song",
+      "status": "limit",
+      "states": 30000,
+      "expanded": 24567,
+      "ms": 448
+    },
+    {
+      "mechanism": "mirror",
+      "status": "limit",
+      "states": 30000,
+      "expanded": 22346,
+      "ms": 410
+    },
+    {
+      "mechanism": "piston",
+      "status": "limit",
+      "states": 30000,
+      "expanded": 20101,
+      "ms": 474
+    }
+  ]
+}

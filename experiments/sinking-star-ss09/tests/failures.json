@@ -1,0 +1,85 @@
+[
+  {
+    "level": 8,
+    "cause": "reflet vers l’eau avant de régler le miroir",
+    "commands": "X",
+    "actions": [
+      {
+        "id": 5
+      }
+    ]
+  },
+  {
+    "level": 8,
+    "cause": "le Marchand s’approche du monstre avant le duel",
+    "commands": "UUUUUURRLLDDDDDRRRDXDL",
+    "actions": [
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      }
+    ]
+  }
+]

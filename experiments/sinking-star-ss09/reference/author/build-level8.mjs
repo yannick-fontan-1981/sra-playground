@@ -1,0 +1,12 @@
+import {Author,board} from './author.mjs';
+const b=board(20,18),{fill,put}=b;
+fill(1,1,18,16,'~');fill(1,10,6,16);fill(2,6,2,10);fill(2,6,5,6);fill(8,3,11,5);put(11,6);fill(8,7,11,7);fill(8,8,10,8);fill(8,9,11,9);put(7,8,'#');fill(17,3,18,5);
+put(2,12,'M');put(4,12,'B');put(4,13,'o');put(8,8,'m');put(10,8,'m');put(17,3,'g');put(18,4,'g');
+const spec={id:'ss09-08',title:'L’archipel du dernier accord',rows:b.strings(),mirrors:[{at:{x:4,y:6},facing:'SE'},{at:{x:9,y:3},facing:'SE'}],circuits:[{id:'rose',color:7,buttons:[{x:4,y:13}]}],gates:[{at:{x:5,y:12},circuit:'rose',direction:'N',closedWhen:'released'}]};
+const a=new Author(spec);
+a.go(3,6,'merchant').act('R').stage('Le Marchand règle le premier miroir sur l’îlot central.').go(3,12).act('R').stage('Pousser le Barde préserve le poids du bouton : la case de départ reste ouverte.');
+a.select('bard').act('XDLLL').stage('Le Barde détaché sur l’îlot rapproche les monstres et les fait s’éliminer.');
+a.select('merchant').go(5,12).act('X').go(8,3).act('RR').stage('Le Marchand rejoint l’îlot et prépare le second relais.');
+a.select('bard').go(11,9).act('X').go(18,4).stage('Le Barde gagne le dernier îlot par le bon axe et libère l’arrivée.');
+a.select('merchant').go(11,9).act('X').stage('Les deux destinations du dernier îlot sont occupées.');
+a.save(new URL('../level8-design.json',import.meta.url),{label:'Adaptation · Heroes and Mirrors 2 / Heroes and Water 28 — changer d’axe sans chanter',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-2',puzzle:2,piston:true,platform:false,objective:'Régler deux miroirs, pousser le Barde sans déplacer son poids, puis ouvrir l’accès par un duel.',secondaryUrl:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#énigme-28'},'Le changement de position relative par les îlots et miroirs reprend Heroes and Mirrors 2 ; le déplacement imposé au Barde pour ne pas chanter reprend Heroes and Water 28. Trois îlots, deux miroirs mobiles et un duel inspiré de Heroes 3 13 forment une géométrie originale adaptée au duo.');

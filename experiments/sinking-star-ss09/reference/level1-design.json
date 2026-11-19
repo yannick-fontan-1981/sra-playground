@@ -1,0 +1,512 @@
+{
+  "spec": {
+    "id": "ss09-01",
+    "title": "Le chantier des deux voix",
+    "rows": [
+      "####################",
+      "####################",
+      "#######~~~~~~......#",
+      "#......~~~~~~....g.#",
+      "#.........~~~....g.#",
+      "#.......~~~~~......#",
+      "#....B..~~~~~......#",
+      "#......o~~~~~#######",
+      "#....o.~~.~~~#######",
+      "#.M....~~~~~~#######",
+      "#......~~~~~~#######",
+      "#......~~~~~~#######",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 7,
+          "y": 4
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "rose",
+        "color": 7,
+        "buttons": [
+          {
+            "x": 3,
+            "y": 10
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 7
+        },
+        "circuit": "rose",
+        "direction": "S",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "RDUUUUUURRRRRLLCRRCLDDDLLLCRRXURRRRCDRRRRRXRRRR",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Atelier original · préparer, chanter, pousser, refléter",
+    "url": "https://sinkingstarwalkthrough.com/fr/north/",
+    "objective": "Construire le passage avec les deux voix, puis envoyer les deux héros sur l’îlot."
+  },
+  "metrics": {
+    "actions": 47,
+    "selections": 4,
+    "merchantPushes": 4,
+    "bardSongs": 2,
+    "partnerSongs": 2,
+    "selectiveSongs": 1,
+    "forcedBardMoves": 2,
+    "supportMoves": 1,
+    "chainPushes": 0,
+    "stoneMoves": 3,
+    "mirrorMoves": 2,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La presse plonge la première caisse et crée un appui.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le Marchand prépare la diagonale du miroir.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le chant entraîne le Marchand, déplace un appui et complète le pont ; le sol retient le premier appui.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Marchand pousse le Barde sur le pont sans déclencher le chant.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Barde traverse le pont puis le miroir.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Les deux héros occupent les deux destinations.",
+      "turn": 47,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    }
+  ],
+  "adaptation": "Tutoriel original du duo. Les principes du chant du Nord sont combinés à un miroir mobile et une presse ; géométrie originale, aucun fac-similé revendiqué."
+}

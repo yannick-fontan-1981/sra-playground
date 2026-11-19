@@ -1,0 +1,581 @@
+{
+  "spec": {
+    "id": "ss09-08",
+    "title": "L’archipel du dernier accord",
+    "rows": [
+      "####################",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~....~~~~~g.#",
+      "#~~~~~~~....~~~~~.g#",
+      "#~~~~~~~....~~~~~..#",
+      "#~....~~~~~.~~~~~~~#",
+      "#~.~~~~~....~~~~~~~#",
+      "#~.~~~~#m.m~~~~~~~~#",
+      "#~.~~~~~....~~~~~~~#",
+      "#......~~~~~~~~~~~~#",
+      "#......~~~~~~~~~~~~#",
+      "#.M.B..~~~~~~~~~~~~#",
+      "#...o..~~~~~~~~~~~~#",
+      "#......~~~~~~~~~~~~#",
+      "#......~~~~~~~~~~~~#",
+      "#......~~~~~~~~~~~~#",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 6
+        },
+        "facing": "SE"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 3
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "rose",
+        "color": 7,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 13
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 5,
+          "y": 12
+        },
+        "circuit": "rose",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "UUUUUURRLLDDDDDDRRCXDLLLCRXUULLLURRCDDRRRXDRCDDRDDLDDRX",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Mirrors 2 / Heroes and Water 28 — changer d’axe sans chanter",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-2",
+    "puzzle": 2,
+    "objective": "Régler deux miroirs, pousser le Barde sans déplacer son poids, puis ouvrir l’accès par un duel.",
+    "secondaryUrl": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#énigme-28"
+  },
+  "metrics": {
+    "actions": 55,
+    "selections": 4,
+    "merchantPushes": 4,
+    "bardSongs": 3,
+    "partnerSongs": 0,
+    "selectiveSongs": 1,
+    "forcedBardMoves": 1,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 3,
+    "reflections": 4,
+    "heroReflections": 4,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand règle le premier miroir sur l’îlot central.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Pousser le Barde préserve le poids du bouton : la case de départ reste ouverte.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le Barde détaché sur l’îlot rapproche les monstres et les fait s’éliminer.",
+      "turn": 24,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le Marchand rejoint l’îlot et prépare le second relais.",
+      "turn": 35,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 11,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le Barde gagne le dernier îlot par le bon axe et libère l’arrivée.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 11,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Les deux destinations du dernier îlot sont occupées.",
+      "turn": 55,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 11,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    }
+  ],
+  "adaptation": "Le changement de position relative par les îlots et miroirs reprend Heroes and Mirrors 2 ; le déplacement imposé au Barde pour ne pas chanter reprend Heroes and Water 28. Trois îlots, deux miroirs mobiles et un duel inspiré de Heroes 3 13 forment une géométrie originale adaptée au duo."
+}

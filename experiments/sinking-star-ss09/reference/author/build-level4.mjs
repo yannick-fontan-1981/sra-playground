@@ -1,0 +1,14 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(20,18,'~');
+fill(2,10,5,14);put(6,11,'.');put(4,9,'.');put(5,9,'.');put(6,9,'.');
+fill(7,8,10,10);fill(8,11,10,11);fill(7,5,13,7,'#');fill(8,6,12,6);
+fill(13,10,15,12);put(14,10,'g');put(14,12,'g');
+put(3,12,'M');put(4,13,'B');put(4,10,'o');put(8,6,'m');put(12,6,'m');
+const spec={id:'ss09-04',title:'Le contrechant du pont',rows:strings(),facing:'N',mirrors:[{at:{x:4,y:9},facing:'SE'},{at:{x:10,y:11},facing:'NE'}],circuits:[{id:'entry',buttons:[{x:3,y:12}],color:10},{id:'duel',buttons:[{x:8,y:6}],color:8}],gates:[{at:{x:5,y:9},circuit:'entry',direction:'W',closedWhen:'released'},{at:{x:5,y:10},circuit:'duel',direction:'E',closedWhen:'released'}]};
+const a=new Author(spec);
+a.go(3,10,'merchant').act('R').go(3,12).stage('Le Marchand charge la presse puis maintient l’accès au miroir');
+a.select('bard').act('XRRULLL').stage('Le Barde cale un monstre contre la butée et attire l’autre : le duel libère la presse');
+a.go(6,11,'merchant').act('UR').go(8,11).stage('La caisse éjectée dans l’eau devient le passage du Marchand');
+a.go(10,8,'bard').act('XRU').stage('Le Barde atteint sa destination par le second miroir');
+a.go(10,8,'merchant').act('XRD').stage('Le Marchand traverse à son tour');
+a.save(new URL('../level4-design.json',import.meta.url),{label:'Adaptation de Heroes 3: Bard, Druid 13 · conduire deux monstres vers un duel',url:'https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-13',puzzle:13,objective:'Charger la presse, isoler le Barde, provoquer le duel puis franchir le pont construit par la disparition du monstre.'},'Le principe du duel commandé à distance est repris dans une topologie originale à trois îlots. Un mur immobilise le monstre qui maintient le bouton ; sa disparition referme une presse latérale chargée par le Marchand et construit le pont de retour. Les deux héros doivent ensuite libérer l’arrivée du dernier miroir à tour de rôle. Aucune condition spéciale de porte « tous les monstres morts » ni duplication n’est ajoutée.');

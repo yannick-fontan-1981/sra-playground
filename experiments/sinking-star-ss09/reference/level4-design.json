@@ -1,0 +1,501 @@
+{
+  "spec": {
+    "id": "ss09-04",
+    "title": "Le contrechant du pont",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~#######~~~~~~",
+      "~~~~~~~#m...m#~~~~~~",
+      "~~~~~~~#######~~~~~~",
+      "~~~~~~~....~~~~~~~~~",
+      "~~~~.......~~~~~~~~~",
+      "~~..o.~....~~.g.~~~~",
+      "~~.....~...~~...~~~~",
+      "~~.M..~~~~~~~.g.~~~~",
+      "~~..B.~~~~~~~~~~~~~~",
+      "~~....~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 9
+        },
+        "facing": "SE"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 11
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "entry",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 12
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "duel",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 6
+          }
+        ],
+        "color": 8
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 5,
+          "y": 9
+        },
+        "circuit": "entry",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 10
+        },
+        "circuit": "duel",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "UURDDLCXRRULLLCURRRURRDCRRRXRUCUUURRXRD",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes 3: Bard, Druid 13 · conduire deux monstres vers un duel",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-13",
+    "puzzle": 13,
+    "objective": "Charger la presse, isoler le Barde, provoquer le duel puis franchir le pont construit par la disparition du monstre."
+  },
+  "metrics": {
+    "actions": 39,
+    "selections": 4,
+    "merchantPushes": 1,
+    "bardSongs": 3,
+    "partnerSongs": 0,
+    "selectiveSongs": 3,
+    "forcedBardMoves": 0,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 2,
+    "mirrorMoves": 0,
+    "reflections": 3,
+    "heroReflections": 3,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand charge la presse puis maintient l’accès au miroir",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 10
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "entry": true,
+        "duel": true
+      }
+    },
+    {
+      "label": "Le Barde cale un monstre contre la butée et attire l’autre : le duel libère la presse",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 10
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "entry": true,
+        "duel": false
+      }
+    },
+    {
+      "label": "La caisse éjectée dans l’eau devient le passage du Marchand",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 10
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "entry": false,
+        "duel": false
+      }
+    },
+    {
+      "label": "Le Barde atteint sa destination par le second miroir",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 10
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "entry": false,
+        "duel": false
+      }
+    },
+    {
+      "label": "Le Marchand traverse à son tour",
+      "turn": 39,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 10
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "entry": false,
+        "duel": false
+      }
+    }
+  ],
+  "adaptation": "Le principe du duel commandé à distance est repris dans une topologie originale à trois îlots. Un mur immobilise le monstre qui maintient le bouton ; sa disparition referme une presse latérale chargée par le Marchand et construit le pont de retour. Les deux héros doivent ensuite libérer l’arrivée du dernier miroir à tour de rôle. Aucune condition spéciale de porte « tous les monstres morts » ni duplication n’est ajoutée."
+}
