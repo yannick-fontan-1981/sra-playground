@@ -24,10 +24,10 @@ const graph = compileStrategyGraph({ id: 'relate_switches_to_indicators', versio
   },
 }, ['untested', 'coupled', 'canRecheck']);
 type ScoredSpacing = { epoch: number; score: number; control: [number, number]; receiver: [number, number];
-  receiverSide: number; period: number; offset: number; fromRight: boolean; evidence: string[] };
+  receiverSide: number; period: number; offset: number; mirrorOffset?: number; fromRight: boolean; evidence: string[] };
 type State = { epoch: number; controls: NativeBox[]; receivers: NativeBox[]; initial: number; attempts: string[]; inert: number[];
   visited: string[]; coupled: boolean; count: number; stopped: boolean; evidence: string[];
-  firstCoupled?: number; spacing?: ScoredSpacing | null };
+  firstCoupled?: number; spacing?: ScoredSpacing | null; reversedSpacing?: true };
 type SpacingProposal = NativeProposal & { cascade?: undefined; local: State; index: number; controls: number[]; receivers: number[]; attempt: string; needId: string;
   sicSituationCard: Record<string, unknown> & { strategy: keyof typeof displayCouplingStrategies } };
 type CascadeState = { epoch: number; layout: Cascade; samples: CascadeReading[]; refs: string[]; blocked: string[]; inconsistent?: true };
@@ -88,7 +88,8 @@ function scoreSpacing(proposal: Pick<SpacingProposal, 'local' | 'index' | 'contr
     if (period < 2 || settings.some((value, i) => (value !== local.initial) !== ((i - active[0]!) % period === 0))) continue;
     const fromRight = first! > (settings.length - 1) / 2;
     const offset = fromRight ? settings.length - 1 - active.at(-1)! : active[0]!;
-    return { ...measurement, period, offset, fromRight, evidence: [...local.evidence, after.observation_ref] };
+    const mirrorOffset = fromRight ? active[0]! : settings.length - 1 - active.at(-1)!;
+    return { ...measurement, period, offset, mirrorOffset, fromRight, evidence: [...local.evidence, after.observation_ref] };
   }
   return null;
 }
@@ -136,22 +137,29 @@ export function observeRecalledSwitch(projection: NonNullable<ReturnType<typeof 
 export function projectRecalledSwitch(previous: State | undefined, observation: NativeObservation, rows: NativeRows, transfer: DisplayAcquisition) {
   const { scored } = transfer;
   if (!scored || scored.score !== observation.levels_completed || scored.epoch !== observation.level_epoch) return null;
-  const local = previous ?? measure(observation, rows, scored);
-  if (!local?.spacing) return null;
+  const initial = previous ?? measure(observation, rows, scored);
+  if (!initial?.spacing) return null;
+  const local = initial;
   const controls = values(rows, local.controls), receivers = values(rows, local.receivers);
   if (!controls || !receivers || new Set(controls).size > 2) return null;
+  const completed = controls.every((ink, i) => (ink !== local.initial) === expectedSwitch(i, controls.length, scored));
+  const reversed = local.reversedSpacing || (completed && scored.mirrorOffset !== undefined
+    && controls.length !== transfer.local?.controls.length);
+  const currentModel = reversed && scored.mirrorOffset !== undefined
+    ? { ...scored, fromRight: !scored.fromRight, offset: scored.mirrorOffset } : scored;
+  const nextLocal: State = reversed ? { ...local, reversedSpacing: true } : local;
   const frequency = receivers.map(color => receivers.filter(ink => ink === color).length);
   const distinct = local.receivers.filter((_, i) => frequency[i] === Math.min(...frequency));
   const distance = ([l, , r]: NativeBox) => Math.min(...distinct.map(([left, , right]) => Math.abs(l + r - left - right)));
   const option = controls.map((_, index) => {
     const attempt = JSON.stringify([index, controls, receivers]);
-    const preferred = expectedSwitch(index, controls.length, scored) !== (controls[index] !== local.initial);
+    const preferred = expectedSwitch(index, controls.length, currentModel) !== (controls[index] !== local.initial);
     return { index, attempt, preferred };
   }).filter(candidate => !local.attempts.includes(candidate.attempt))
     .sort((a, b) => Number(b.preferred) - Number(a.preferred)
       || distance(local.controls[a.index]!) - distance(local.controls[b.index]!) || b.index - a.index)[0];
   if (!option || local.attempts.length >= 12) return null;
-  return { local, ...option, controls, receivers, evidence: scored.evidence,
+  return { local: nextLocal, ...option, controls, receivers, evidence: scored.evidence,
     novelty: !previous && local.controls.length !== transfer.local?.controls.length };
 }
 

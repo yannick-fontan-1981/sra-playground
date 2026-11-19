@@ -170,6 +170,42 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
         ...(!prior ? { novelty: 'Identify the operator bearer and the new arrangement of pieces' } : {}), check: { kind: 'program', program, choice } };
     }
   }
+  if (pointer && outlet && (!prior || prior.kind === 'outlet')) {
+    const attempted = prior?.attempted ?? [], projection = await projectRecalledOutlet(outlet, observation, rows, attempted);
+    if (projection) return { command: click(projection.choice.point), box: projection.choice.box, goal: projection.outlet,
+      label: 'Use the current marked compartment to advance the materials toward the proved outlet',
+      objective: 'move_material_through_marked_compartments', evidence: [...new Set([...projection.evidence, ...evidence])],
+      recurring: 'Reuse the previously scoring outlet after matching the current chambers',
+      ...(projection.novelty ? { novelty: 'Several marked compartments are available in the new layout' } : {}),
+      check: { kind: 'outlet', projection, attempted } };
+  }
+  if (pointer && instruction?.learned && (!prior || prior.kind === 'instruction')) {
+    const projection = projectRecalledInstruction(instruction, observation, rows, prior?.transaction);
+    if (projection) return { command: click(projection.step.point), box: projection.step.target, goal: projection.step.target,
+      label: projection.step.intermediate ? 'Test the transformation that supplies a missing intermediate symbol'
+        : 'Use a measured symbol operation toward the current request',
+      objective: 'supply_current_symbol_requests', evidence: [...new Set([...projection.learned.proof, ...evidence])],
+      recurring: 'Reuse confirmed selection and operand effects',
+      ...(projection.step.intermediate ? { novelty: 'The requested result needs an intermediate operand' } : {}),
+      check: { kind: 'instruction', projection } };
+  }
+  if (pointer && catalogue?.witness && (!prior || prior.kind === 'catalogue')) {
+    const projection = projectRecalledCatalogue(catalogue, observation, rows, remaining);
+    if (projection) return { command: click(projection.point), box: projection.box, goal: projection.choice.target.box,
+      objective: 'visit_all_displayed_combinations', label: projection.novelty ? 'Test the next value of a new factor'
+        : 'Change one factor to reach an unvisited displayed configuration',
+      evidence: projection.evidence, recurring: 'Use the confirmed effect of cycling one factor',
+      ...(projection.novelty ? { novelty: 'This factor has a new set of visible values' } : {}),
+      check: { kind: 'catalogue', projection } };
+  }
+  if (pointer && relations?.witness && (!prior || prior.kind === 'relations')) {
+    const projection = projectRecalledRelation(relations, prior?.local, observation, rows, remaining);
+    if (projection) return { command: click(projection.control.point), box: projection.control.switchBox, goal: projection.target,
+      objective: 'settle_pieces_by_changing_shared_relations', label: 'Adjust the shared relation and check which pieces move',
+      evidence: projection.evidence, recurring: 'Reuse measured coupled motion between rooms',
+      ...(projection.novelty ? { novelty: 'Recompute the shared relations for a different number of rooms' } : {}),
+      check: { kind: 'relations', projection } };
+  }
   if (panel) return;
   if (pair && (!prior || prior.kind === 'pair')) {
     const projection = projectRevalidatedPair(observation, rows, remaining, pair, prior?.local);
@@ -218,42 +254,6 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
     }
   }
   if (pointer && !directions.length && !available.includes('ACTION5')) {
-    if (outlet && (!prior || prior.kind === 'outlet')) {
-      const attempted = prior?.attempted ?? [], projection = await projectRecalledOutlet(outlet, observation, rows, attempted);
-      if (projection) return { command: click(projection.choice.point), box: projection.choice.box, goal: projection.outlet,
-        label: 'Use the current marked compartment to advance the materials toward the proved outlet',
-        objective: 'move_material_through_marked_compartments', evidence: [...new Set([...projection.evidence, ...evidence])],
-        recurring: 'Reuse the previously scoring outlet after matching the current chambers',
-        ...(projection.novelty ? { novelty: 'Several marked compartments are available in the new layout' } : {}),
-        check: { kind: 'outlet', projection, attempted } };
-    }
-    if (instruction?.learned && (!prior || prior.kind === 'instruction')) {
-      const projection = projectRecalledInstruction(instruction, observation, rows, prior?.transaction);
-      if (projection) return { command: click(projection.step.point), box: projection.step.target, goal: projection.step.target,
-        label: projection.step.intermediate ? 'Test the transformation that supplies a missing intermediate symbol'
-          : 'Use a measured symbol operation toward the current request',
-        objective: 'supply_current_symbol_requests', evidence: [...new Set([...projection.learned.proof, ...evidence])],
-        recurring: 'Reuse confirmed selection and operand effects',
-        ...(projection.step.intermediate ? { novelty: 'The requested result needs an intermediate operand' } : {}),
-        check: { kind: 'instruction', projection } };
-    }
-    if (catalogue?.witness && (!prior || prior.kind === 'catalogue')) {
-      const projection = projectRecalledCatalogue(catalogue, observation, rows, remaining);
-      if (projection) return { command: click(projection.point), box: projection.box, goal: projection.choice.target.box,
-        objective: 'visit_all_displayed_combinations', label: projection.novelty ? 'Test the next value of a new factor'
-          : 'Change one factor to reach an unvisited displayed configuration',
-        evidence: projection.evidence, recurring: 'Use the confirmed effect of cycling one factor',
-        ...(projection.novelty ? { novelty: 'This factor has a new set of visible values' } : {}),
-        check: { kind: 'catalogue', projection } };
-    }
-    if (relations?.witness && (!prior || prior.kind === 'relations')) {
-      const projection = projectRecalledRelation(relations, prior?.local, observation, rows, remaining);
-      if (projection) return { command: click(projection.control.point), box: projection.control.switchBox, goal: projection.target,
-        objective: 'settle_pieces_by_changing_shared_relations', label: 'Adjust the shared relation and check which pieces move',
-        evidence: projection.evidence, recurring: 'Reuse measured coupled motion between rooms',
-        ...(projection.novelty ? { novelty: 'Recompute the shared relations for a different number of rooms' } : {}),
-        check: { kind: 'relations', projection } };
-    }
     if ((!prior || prior.kind === 'display') && display?.scored) {
       const projection = projectRecalledSwitch(prior?.local, observation, rows, display);
       if (projection) {

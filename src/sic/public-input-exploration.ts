@@ -544,8 +544,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const outlet = after.levels_completed > before.levels_completed
       ? await acquireMarkedOutlet(state.outletWitness ?? null, before, after, command, rows) : null;
     const symbols = observeSymbolPrefix(state.symbolTransfer, before, after, command, rows, afterRows);
-    const catalogue = /^ACTION6$/.test(command.action_ref) && !before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))
-      && before.frame_hash !== after.frame_hash ? acquireCatalogueReturn(state.catalogueTransfer, before, after, command, rows, afterRows, frames) : undefined;
+    const catalogue = before.available_action_refs.includes('ACTION6') && before.frame_hash !== after.frame_hash ? acquireCatalogueReturn(state.catalogueTransfer, before, after, command, rows, afterRows, frames) : undefined;
     const relations = acquireRelationReturn(state.relationsTransfer, before, after, command, rows, afterRows, frames);
     const relay = acquireRelayReturn(state.relayTransfer, before, after, command, rows, afterRows, frames);
     const navigation = acquireRevealedNavigation(state.navigationTransfer, before, after, command, rows, afterRows);
@@ -610,7 +609,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const markKey = markTrial?.command.action_ref;
       const travel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2
         ? chooseTravelTrial(local.travel, rows, nonPoint, observation.available_action_refs.includes('ACTION6')) : undefined;
-      const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness) && !pressure
+      const fallbackProjection = fallback && (!panel || state.relayTransfer?.witness || state.programWitness || state.outletWitness || state.catalogueTransfer?.witness) && !pressure
         ? await chooseFallbackProjection(local.fallbackProjection, observation, rows, inputs, remaining, execution, state, !!panel) : undefined;
       const budget = fallbackProjection || state.orderedEntryTransfer?.epoch === observation.level_epoch - 1 || panel || travel || coverage || exchange || markTrial || pressure || joint ? remaining : Math.min(remaining, explorationLimit - local.experiments);
       if (budget < 1) return null;
