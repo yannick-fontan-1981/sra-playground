@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { carryOrientedFogGlyph, chooseFogGlyphStep, observeFogGlyphStep, readFogGlyphRoute } from '../src/sic/fog-glyph-route.ts';
 import { chooseOrientedCycleStep, observeOrientedCycleStep, type OrientedCycleState } from '../src/sic/inset-oriented-cycle.ts';
 
 const moves = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
@@ -100,4 +101,44 @@ test('a matching request is confirmed only when its marker disappears after depa
   assert.equal(observeOrientedCycleStep(onRequest, departed, entered.state, leave)?.state.accepted?.length, 1);
   departed[4]![8] = state.layout.exitRim;
   assert.equal(observeOrientedCycleStep(onRequest, departed, entered.state, leave)?.state.accepted, undefined);
+});
+
+test('partial visibility preserves the oriented motif and counts only the learned reserve dots', () => {
+  const { rows, state } = cycleFixture();
+  state.rotation = 1;
+  state.layout.gauge.dots = [1, 3, 5, 7];
+  state.colorEffects = { left: { 10: 11, 12: 13 }, right: { 10: 14, 12: 13 } };
+  rows[0]![3] = 15;
+  rows[0]![5] = 15;
+  rows[15]!.fill(5);
+  rows[16]!.splice(1, 3, 9, 10, 10);
+  state.layout.display.point = [1, 16];
+  for (let y = 4; y < 8; y++) rows[y]!.fill(3, 8, 12);
+  rows[5]![13] = 9;
+  rows[5]![14] = 10;
+  rows[5]![15] = 10;
+  const carry = carryOrientedFogGlyph(state, rows, 'exit-confirmed');
+  assert.ok(carry);
+  assert.deepEqual(carry.oriented?.colors, { 12: 13 });
+  assert.equal(readFogGlyphRoute(rows, carry, 2, 'background-without-occlusion'), null);
+  rows[8]![4] = 3;
+  const fog = readFogGlyphRoute(rows, carry, 2, 'fog-entry');
+  assert.ok(fog);
+  assert.equal(fog.units, 3);
+  assert.deepEqual(fog.target?.at, [12, 4]);
+  assert.deepEqual(fog.target?.glyph, fog.glyph);
+  const step = chooseFogGlyphStep(fog, moves, 8);
+  assert.equal(step?.need, 'exit');
+  assert.deepEqual(step?.to, [8, 4]);
+  assert.ok(step);
+
+  const next = structuredClone(rows);
+  next[0]![5] = 5;
+  for (let y = 4; y < 8; y++) {
+    next[y]!.fill(3, 4, 8);
+    next[y]!.fill(6, 8, 12);
+  }
+  const measured = observeFogGlyphStep(next, fog, step, 'moved');
+  assert.equal(measured?.matched, true);
+  assert.equal(measured.state.units, 2);
 });

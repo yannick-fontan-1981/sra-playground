@@ -2,13 +2,16 @@ import { framedPatterns } from '../logos-engine/v6-geometric-scene.ts';
 import { centeredMorphologyEnclosures } from '../logos-engine/v6-morphology-measurements.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { sampleCycleGlyph } from './inset-composite-route.ts';
 import { cycleMoves } from './inset-cycle-route.ts';
-import { bands, readGlyph, rotated, type Glyph, type GlyphRouteMemory } from './managed-glyph-access.ts';
-import { pixelsAt, pointKey, reserveSteps, type FramedRotation } from './managed-framed-access.ts';
+import { orientedGlyph, type OrientedCycleState } from './inset-oriented-cycle.ts';
+import { bands, readGlyph, rotated, type Glyph as ShapeGlyph, type GlyphRouteMemory } from './managed-glyph-access.ts';
+import { pixelsAt, pointKey, type FramedRotation } from './managed-framed-access.ts';
 
 type Direction = typeof cycleMoves[number][0];
 type Role = 'shape' | 'color' | 'rotation';
-type Tile = 'wall' | 'floor' | 'charge' | 'shape' | 'color' | 'exit';
+type Tile = 'wall' | 'floor' | 'charge' | Role | 'exit';
+type Glyph = ShapeGlyph & { turn?: number };
 type Band = ReturnType<typeof bands>[number];
 type Effect = { from: Glyph; to: Glyph; evidence: string };
 type Target = { at: NativePoint; box: NativeBox; glyph: Glyph; rim: number };
@@ -22,6 +25,8 @@ export type FogGlyphCarry = {
   rotation: FramedRotation;
   shapes: Effect[];
   colors: Effect[];
+  oriented?: { anchor: number; side: number; rim: number; dots: number[];
+    shapes: Record<string, string>; colors: Record<number, number> };
 };
 
 export type FogGlyphRoute = {
@@ -62,22 +67,70 @@ export type FogGlyphStep = Edge & {
 type Route = { at: NativePoint; first: Edge | null; units: number; depth: number; consumed: bigint; spill: number };
 
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
-const match = (a: Glyph, b: Glyph) => a.ink === b.ink && a.mask === b.mask;
+const match = (a: Glyph, b: Glyph) => a.ink === b.ink && a.mask === b.mask && a.turn === b.turn;
 const symmetry = (a: string, b: string) => [0, 1, 2, 3].some(turn => rotated(a, turn) === b);
 const manhattan = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const center = ([l, t, r, b]: NativeBox, pitch: number): NativePoint => [(l + r - pitch + 1) / 2, (t + b - pitch + 1) / 2];
-const activeReservePixels = (rows: NativeRows, reserve: GlyphRouteMemory['reserve']) =>
-  rows[reserve.row]!.slice(reserve.left, reserve.right).filter(ink => ink === reserve.active).length;
+const reserveCells = (rows: NativeRows, { oriented, memory: { reserve } }: FogGlyphCarry) =>
+  oriented ? oriented.dots.map(x => rows[reserve.row]?.[x]) : rows[reserve.row]?.slice(reserve.left, reserve.right) ?? [];
+const glyphKey = ({ ink, mask, turn }: Glyph) => ink + '/' + mask + (turn === undefined ? '' : '/' + turn);
+const turned = (glyph: Glyph, delta: number): Glyph => glyph.turn === undefined
+  ? { ...glyph, mask: rotated(glyph.mask, delta) } : { ...glyph, turn: (glyph.turn + delta + 4) % 4 };
+
+export function carryOrientedFogGlyph(state: OrientedCycleState, rows: NativeRows, evidence: string): FogGlyphCarry | null {
+  const { layout, rotation, transitions, colorEffects } = state;
+  if (rotation === undefined) return null;
+  const { body, pitch, floor, gauge, display, anchorInk, exitRim } = layout;
+  const [x, y] = display.point, size = display.side * display.scale;
+  const { line, dots, active, depleted, perMove, observations } = gauge;
+  if (!dots.length) return null;
+  const observationsByInk = new Map<number, Set<number>>();
+  for (const observed of Object.values(colorEffects ?? {})) for (const [from, to] of Object.entries(observed)) {
+    const ink = Number(from), candidates = observationsByInk.get(ink) ?? new Set<number>();
+    candidates.add(to);
+    observationsByInk.set(ink, candidates);
+  }
+  const colors = Object.fromEntries([...observationsByInk].flatMap(([ink, values]) => values.size === 1 ? [[ink, [...values][0]!]] : []));
+  const stations: FogGlyphCarry['stations'] = [{ role: 'shape', image: layout.patternStation.join(',') },
+    { role: 'rotation', image: layout.orientationStamp.join(',') },
+    ...(layout.colorStations ?? [layout.color]).filter(at => !same(at, state.at)).map(at =>
+      ({ role: 'color' as const, image: pixelsAt(rows, at, pitch).join(',') }))];
+  return {
+    memory: { epoch: state.epoch, evidence, actor: body, pitch, floor, peerScale: 1, bandInks: [],
+      directions: cycleMoves.map(([input]) => input),
+      reserve: { row: line, left: dots[0]!, right: dots.at(-1)! + 1, active, depleted, cost: perMove, samples: observations } },
+    display: { box: [x, y, x + size - 1, y + size - 1], scale: display.scale },
+    stations, rotation: { shape: layout.wanted.mask, peerScale: 1, delta: rotation, station: layout.orientationStamp, evidence },
+    shapes: [], colors: [], oriented: { anchor: anchorInk, side: display.side, rim: exitRim, dots, shapes: transitions.shape, colors },
+  };
+}
+
+function readFogDisplay(rows: NativeRows, { display, oriented }: FogGlyphCarry, hiddenInk: number): Glyph | null {
+  if (!oriented) return readGlyph(rows, display.box, display.scale, hiddenInk);
+  const [x, y] = display.box, ground = rows[y]?.[x - 1];
+  return ground === undefined ? null : orientedGlyph(sampleCycleGlyph(rows, [x, y], oriented.side, display.scale),
+    oriented.side, oriented.anchor, ground);
+}
 
 export function fogGlyphPrediction(local: FogGlyphRoute, step: FogGlyphStep): { glyph: Glyph; refs: string[] } | null {
   const { glyph, shapes, colors, carry } = local;
-  if (step.effect === 'rotation') return { glyph: { ...glyph, mask: rotated(glyph.mask, carry.rotation.delta) }, refs: [carry.rotation.evidence] };
-  const candidates = step.effect === 'shape' ? shapes.flatMap(({ from, to, evidence }) =>
+  if (step.effect === 'rotation') return { glyph: turned(glyph, carry.rotation.delta), refs: [carry.rotation.evidence] };
+  const candidates = carry.oriented && step.effect === 'shape'
+    ? shapes.flatMap(({ from, to, evidence }) => from.ink === to.ink && from.mask === glyph.mask
+      ? [{ glyph: { ...glyph, mask: to.mask }, refs: [evidence] }] : [])
+    : step.effect === 'shape' ? shapes.flatMap(({ from, to, evidence }) =>
     from.ink === to.ink ? [0, 1, 2, 3].flatMap(turn =>
       rotated(from.mask, turn) === glyph.mask ? [{ glyph: { ...glyph, mask: rotated(to.mask, turn) }, refs: [evidence] }] : []) : [])
     : step.effect === 'color' ? colors.flatMap(({ from, to, evidence }) =>
       from.mask === to.mask && from.ink === glyph.ink ? [{ glyph: { ...glyph, ink: to.ink }, refs: [evidence] }] : []) : [];
   const first = candidates[0];
+  if (!first && carry.oriented) {
+    const prediction = step.effect === 'shape' ? carry.oriented.shapes[glyph.mask] : undefined;
+    const ink = step.effect === 'color' ? carry.oriented.colors[glyph.ink] : undefined;
+    if (prediction !== undefined || ink !== undefined) return {
+      glyph: { ...glyph, mask: prediction ?? glyph.mask, ink: ink ?? glyph.ink }, refs: [carry.memory.evidence],
+    };
+  }
   return first && candidates.every(candidate => match(candidate.glyph, first.glyph))
     ? { glyph: first.glyph, refs: [...new Set(candidates.flatMap(candidate => candidate.refs))] } : null;
 }
@@ -91,7 +144,16 @@ function locateActor(rows: NativeRows, { actor, pitch }: GlyphRouteMemory): Nati
 }
 
 function visibleTarget(rows: NativeRows, local: FogGlyphRoute): Target | null {
-  const { carry: { display, memory: { peerScale, pitch } }, at } = local;
+  const { carry: { display, memory: { peerScale, pitch }, oriented }, at } = local;
+  if (oriented) {
+    const peers = local.positions.flatMap(([x, y]) => {
+      const tile = pixelsAt(rows, [x, y], pitch), { rim, side, anchor } = oriented;
+      if (!tile.every((ink, i) => i >= pitch && i % pitch > 0 || ink === rim)) return [];
+      const glyph = orientedGlyph(sampleCycleGlyph(rows, [x + 1, y + 1], side, 1), side, anchor, rim);
+      return glyph ? [{ at: [x, y] as NativePoint, box: [x, y, x + pitch - 1, y + pitch - 1] as NativeBox, glyph, rim }] : [];
+    });
+    return peers.length === 1 ? peers[0]! : null;
+  }
   const parts = geometricComponents(rows);
   const contours = new Set(centeredMorphologyEnclosures(rows, parts, 'eligible_components').map(item => item.box.join(',')));
   const peers = framedPatterns(rows, parts).flatMap(({ bbox: box, scale, color, mask }) => {
@@ -119,14 +181,14 @@ function scanFog(rows: NativeRows, local: FogGlyphRoute, ref: string, rotationCo
       else atlas[key] ??= 'floor';
       continue;
     }
-    if (target && manhattan(point, target.at) === pitch && image.every(ink => ink === floor || ink === target.rim)
+    if (!local.carry.oriented && target && manhattan(point, target.at) === pitch && image.every(ink => ink === floor || ink === target.rim)
       && image.filter(ink => ink === floor).length >= pitch * (pitch - 1)) {
       atlas[key] = 'floor'; continue;
     }
     if (image.includes(hiddenInk)) continue;
     if (image.every(ink => ink === floor)) { atlas[key] = 'floor'; continue; }
     const role = roles.get(image.join(','));
-    if (role === 'rotation') { atlas[key] = 'floor'; rotation.push(point); continue; }
+    if (role === 'rotation') { atlas[key] = local.carry.oriented ? 'rotation' : 'floor'; rotation.push(point); continue; }
     if (role) { atlas[key] = role; continue; }
     const foreground = image.flatMap((ink, i) => ink === floor ? [] : [i]);
     const interior = foreground.length * 2 < image.length && foreground.every(i =>
@@ -151,18 +213,24 @@ export function readFogGlyphRoute(rows: NativeRows, carry: FogGlyphCarry, epoch:
   if (!at || hiddenInk === undefined || hiddenInk === floor || memory.actor.includes(hiddenInk)
     || hiddenInk !== rows[0]?.[width - 1]
     || rows.slice(0, display.box[1]).flat().filter(ink => ink === hiddenInk).length < width * display.box[1] / 3) return null;
-  const glyph = readGlyph(rows, display.box, display.scale, hiddenInk);
-  const units = reserveSteps(rows, reserve);
-  if (!glyph || units < 1 || !rows[reserve.row]?.slice(reserve.left, reserve.right).every(ink => ink === reserve.active || ink === reserve.depleted)) return null;
+  const glyph = readFogDisplay(rows, carry, hiddenInk), observed = reserveCells(rows, carry);
+  const reservePixels = observed.filter(ink => ink === reserve.active).length, units = Math.floor(reservePixels / reserve.cost);
+  if (!glyph || units < 1 || !observed.every(ink => ink === reserve.active || ink === reserve.depleted)) return null;
   const positions: NativePoint[] = [];
-  const firstRow = at[1] % pitch;
+  const alignedRow = at[1] % pitch;
+  const firstRow = carry.oriented && alignedRow <= reserve.row ? alignedRow + pitch : alignedRow;
   const fieldEnd = firstRow + Math.ceil((display.box[1] - firstRow) / pitch) * pitch;
   for (let y = firstRow; y + pitch <= fieldEnd; y += pitch) for (let x = at[0] % pitch; x + pitch <= width; x += pitch)
     positions.push([x, y]);
   if (!positions.some(point => same(point, at))) return null;
+  // A uniform backdrop can surround a fully visible map. Fog cuts through aligned floor tiles.
+  if (carry.oriented && !positions.some(point => {
+    const tile = pixelsAt(rows, point, pitch);
+    return tile.includes(floor) && tile.includes(hiddenInk);
+  })) return null;
   const radius = Math.max(pitch * 2, ...positions.filter(point => !pixelsAt(rows, point, pitch).includes(hiddenInk))
     .map(point => Math.hypot(point[0] - at[0], point[1] - at[1])));
-  return scanFog(rows, { epoch, carry, at, positions, hiddenInk, radius, glyph, units, reservePixels: activeReservePixels(rows, reserve),
+  return scanFog(rows, { epoch, carry, at, positions, hiddenInk, radius, glyph, units, reservePixels,
     atlas: {}, target: null,
     bands: {}, landings: {}, spent: [], visited: [pointKey(at)], tried: [], blocked: [], samples: [], refs: [memory.evidence],
     shapes: carry.shapes, colors: carry.colors, tick: 0 }, ref);
@@ -196,20 +264,21 @@ function rotationAt(model: RotationModel, tick: number): NativePoint {
 }
 
 const effectFor = (tile: Tile | undefined): FogGlyphStep['effect'] =>
-  tile === 'charge' || tile === 'shape' || tile === 'color' ? tile : null;
+  tile === 'charge' || tile === 'shape' || tile === 'color' || tile === 'rotation' ? tile : null;
 const edgeKey = (at: NativePoint, action: Direction) => pointKey(at) + '/' + action;
 
 export function chooseFogGlyphStep(state: FogGlyphRoute, available: readonly string[], remaining: number): FogGlyphStep | null {
   const { at, glyph, target, atlas, positions, bands: strips, landings, units, carry: { memory: { pitch, reserve, directions } } } = state;
-  const capacity = Math.floor((reserve.right - reserve.left) / reserve.cost);
+  const capacity = Math.floor((state.carry.oriented?.dots.length ?? reserve.right - reserve.left) / reserve.cost);
   const valid = new Set(positions.map(pointKey)), blocked = new Set(state.blocked), visited = new Set(state.visited);
   const observed = Object.keys(atlas).length, chargeSites = positions.filter(p => atlas[pointKey(p)] === 'charge');
   const chargeBits = new Map(chargeSites.map((site, i) => [pointKey(site), 1n << BigInt(i)]));
   const move = cycleMoves.filter(([action]) => available.includes(action) && directions.includes(action));
   if (state.stopped || !move.length || units < 1 || remaining < 1) return null;
-  const need: FogGlyphStep['need'] = !target ? 'discover_exit' : !symmetry(glyph.mask, target.glyph.mask) ? 'shape'
-    : glyph.ink !== target.glyph.ink ? 'color' : glyph.mask !== target.glyph.mask ? 'rotation' : 'exit';
-  const models = need === 'rotation' ? modeledRotation(state) : [];
+  const matchingShape = target && (state.carry.oriented ? glyph.mask === target.glyph.mask : symmetry(glyph.mask, target.glyph.mask));
+  const need: FogGlyphStep['need'] = !target ? 'discover_exit' : !matchingShape ? 'shape'
+    : glyph.ink !== target.glyph.ink ? 'color' : !match(glyph, target.glyph) ? 'rotation' : 'exit';
+  const models = need === 'rotation' && !state.carry.oriented ? modeledRotation(state) : [];
   const lastRotation = state.samples.at(-1);
   const rotationConfidence = (point: NativePoint, depth: number) => models.length
     ? models.filter(model => same(rotationAt(model, state.tick + depth), point)).length / models.length : 0;
@@ -246,8 +315,8 @@ export function chooseFogGlyphStep(state: FogGlyphRoute, available: readonly str
       const viable = next.units >= 1;
       if (charge && units < capacity && routeCost < (replenish?.rank ?? Infinity))
         replenish = { rank: routeCost, step: propose(next, 'recharge', edge.to, actualEffect) };
-      const compatibleSite = need === 'exit' ? target && same(edge.to, target.at) : need === 'shape' || need === 'color'
-        ? tile === need && !state.tried.includes(key + '/' + glyph.ink + '/' + glyph.mask) : false;
+      const compatibleSite = need === 'exit' ? target && same(edge.to, target.at)
+        : tile === need && !state.tried.includes(key + '/' + glyphKey(glyph));
       const rotation = need === 'rotation' ? rotationConfidence(edge.to, depth) : 0;
       if (!edge.band && (compatibleSite || rotation > 0) && (need === 'exit' || next.units >= 3)) {
         const rank = routeCost + (rotation > 0 ? 8 * (1 - rotation) : 0);
@@ -257,7 +326,7 @@ export function chooseFogGlyphStep(state: FogGlyphRoute, available: readonly str
             ...(confidence > 0 ? { rotationConfidence: confidence } : {}) } };
         }
       }
-      if (tile === 'exit' && need !== 'exit' || (tile === 'shape' || tile === 'color') && need !== tile && !!target) continue;
+      if (tile === 'exit' && need !== 'exit' || (tile === 'shape' || tile === 'color' || tile === 'rotation') && need !== tile && !!target) continue;
 
       const frontier = edge.band && viable || !edge.wait && viable && !visited.has(key);
       if (frontier && next.units >= 5) {
@@ -282,18 +351,18 @@ export function chooseFogGlyphStep(state: FogGlyphRoute, available: readonly str
 }
 
 export function observeFogGlyphStep(rows: NativeRows, local: FogGlyphRoute, step: FogGlyphStep, ref: string) {
-  const { carry: { display, memory, rotation }, glyph } = local;
-  const at = locateActor(rows, memory), next = readGlyph(rows, display.box, display.scale, local.hiddenInk);
-  const gauge = rows[memory.reserve.row]?.slice(memory.reserve.left, memory.reserve.right);
-  if (!at || !next || !gauge?.every(ink => ink === memory.reserve.active || ink === memory.reserve.depleted)) return null;
-  const pixels = activeReservePixels(rows, memory.reserve), spentPixels = local.reservePixels - pixels;
+  const { carry: { memory, rotation }, glyph } = local;
+  const at = locateActor(rows, memory), next = readFogDisplay(rows, local.carry, local.hiddenInk);
+  const gauge = reserveCells(rows, local.carry);
+  if (!at || !next || !gauge?.length || !gauge.every(ink => ink === memory.reserve.active || ink === memory.reserve.depleted)) return null;
+  const pixels = gauge.filter(ink => ink === memory.reserve.active).length, spentPixels = local.reservePixels - pixels;
   const [dx, dy] = step.band?.vector ?? [0, 0];
   const deltaX = at[0] - step.entry[0], deltaY = at[1] - step.entry[1];
   const transport = !!step.band && deltaX * dy === deltaY * dx && deltaX * dx + deltaY * dy > 0;
   const landed = same(at, step.to), blockedMove = same(at, local.at) && !step.wait && !same(at, step.to);
   if (!transport && !landed && !blockedMove) return null;
   const role = effectFor(local.atlas[pointKey(at)]);
-  const rotatedGlyph = glyph.ink === next.ink && glyph.mask !== next.mask && rotated(glyph.mask, rotation.delta) === next.mask;
+  const rotatedGlyph = !match(glyph, next) && match(turned(glyph, rotation.delta), next);
   const rotationContact = rotatedGlyph && role !== 'shape';
   const change = { from: glyph, to: next, evidence: ref };
   const shapes = role === 'shape' && glyph.mask !== next.mask ? [...local.shapes.slice(-23), change] : local.shapes;
@@ -311,8 +380,8 @@ export function observeFogGlyphStep(rows: NativeRows, local: FogGlyphRoute, step
     visited: local.visited.includes(position) ? local.visited : [...local.visited, position],
     spent: charged ? [...local.spent, position] : local.spent,
     landings: transport ? { ...local.landings, [pointKey(step.entry)]: at } : local.landings,
-    tried: !match(next, glyph) || role !== 'shape' && role !== 'color' ? local.tried
-      : [...local.tried, position + '/' + glyph.ink + '/' + glyph.mask],
+    tried: !match(next, glyph) || role !== 'shape' && role !== 'color' && role !== 'rotation' ? local.tried
+      : [...local.tried, position + '/' + glyphKey(glyph)],
     blocked: blockedMove ? [...local.blocked, edgeKey(local.at, step.action)] : local.blocked,
   }, ref, rotationContact);
   return { state, matched: (landed || transport) && !glyphContradicted,

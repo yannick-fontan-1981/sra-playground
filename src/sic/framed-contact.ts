@@ -18,7 +18,7 @@ import { carriedBandInks, chooseGlyphRoute, observeGlyphRoute, readGlyphRoute,
   type GlyphRouteMemory, type GlyphRouteState, type GlyphRouteStep } from './managed-glyph-access.ts';
 import { chooseGlyphWorkshopStep, observeGlyphWorkshop, readGlyphWorkshop,
   type GlyphWorkshopState, type GlyphWorkshopStep } from './managed-glyph-workshop.ts';
-import { chooseFogGlyphStep, fogGlyphPrediction, observeFogGlyphStep, readFogGlyphRoute,
+import { carryOrientedFogGlyph, chooseFogGlyphStep, fogGlyphPrediction, observeFogGlyphStep, readFogGlyphRoute,
   type FogGlyphCarry, type FogGlyphRoute, type FogGlyphStep } from './fog-glyph-route.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 
@@ -582,6 +582,10 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
           const rotation = hasOrientation(local) && local.rotation ? { advance: local.rotation, stamp: local.layout.orientationStamp } : undefined;
           compositeModel = { epoch: before.level_epoch, ref: after.observation_ref, pitch, body, floor, gauge, fullReserve, exitRim, display,
             patternStation: pixelsAt(first, shape, pitch), observed: { anchorInk, transitions, ...(rotation ? { rotation } : {}) } };
+          if (hasOrientation(local)) {
+            const knowledge = carryOrientedFogGlyph(local, first, after.observation_ref);
+            if (knowledge) fogCarry = { epoch: after.level_epoch, knowledge };
+          }
           return { events: [], ...(hasOrientation(local) ? { reviewEvidence: 'The matched shape, color and orientation opened the exit.' } : {}) };
         }
         if (proposal.glyphRoute) {

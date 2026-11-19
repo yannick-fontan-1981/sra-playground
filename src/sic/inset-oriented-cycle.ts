@@ -4,7 +4,7 @@ import { sameCyclePixels as same, sampleCycleGlyph, type CompositeCycleEvidence,
   type CycleGlyph, type GlyphTransitions } from './inset-composite-route.ts';
 import { pixelsAt, pointKey } from './managed-framed-access.ts';
 
-type OrientedGlyph = CycleGlyph & { turn: number };
+export type OrientedGlyph = CycleGlyph & { turn: number };
 type Request = { at: NativePoint; wanted: OrientedGlyph };
 type Layout = CompositeCycleState['layout'] & { orientation: NativePoint; orientationStamp: number[]; wanted: OrientedGlyph;
   requests?: Request[]; colorStations?: NativePoint[] };
@@ -19,7 +19,7 @@ export function hasOrientation(state: CompositeCycleState): state is OrientedCyc
   return 'orientation' in state.layout;
 }
 
-function orientedGlyph(pixels: number[], side: number, anchor: number, ground: number): OrientedGlyph | null {
+export function orientedGlyph(pixels: number[], side: number, anchor: number, ground: number): OrientedGlyph | null {
   const corner = [0, side - 1, side ** 2 - 1, side * (side - 1)];
   const turn = corner.findIndex(index => pixels[index] === anchor);
   if (turn < 0 || pixels.filter(ink => ink === anchor).length !== 1) return null;
