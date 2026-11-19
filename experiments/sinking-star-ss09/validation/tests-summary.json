@@ -1,0 +1,52 @@
+{
+  "game": "SS09",
+  "version": "0.1.2",
+  "engineTests": 108,
+  "engineFailures": 0,
+  "uiGroups": 11,
+  "campaign": {
+    "actions": 443,
+    "selections": 33,
+    "merchantPushes": 23,
+    "bardSongs": 72,
+    "partnerSongs": 40,
+    "selectiveSongs": 27,
+    "forcedBardMoves": 5,
+    "supportMoves": 23,
+    "chainPushes": 0,
+    "stoneMoves": 33,
+    "mirrorMoves": 12,
+    "reflections": 14,
+    "heroReflections": 14,
+    "pistonPushes": 4,
+    "platformsCreated": 4,
+    "monstersRemoved": 4,
+    "blocked": 0,
+    "deaths": 0,
+    "combatWaves": 2,
+    "mirrorsDestroyed": 0,
+    "cratesCrushed": 0,
+    "simultaneousHeroReflections": 0,
+    "hydraulicChanges": 2,
+    "frames": 1312
+  },
+  "htmlSha256": "11126ef760beb7e542ef9384b9e63d48cb5a1c7860b280374ed2dc827921cb54",
+  "level1TerrainChangesFromV1": [
+    {
+      "x": 9,
+      "y": 8,
+      "from": ".",
+      "to": "~"
+    },
+    {
+      "x": 9,
+      "y": 11,
+      "from": "~",
+      "to": "."
+    }
+  ],
+  "originalStartingShoreRestored": true,
+  "environment": "Node.js engine and level regression tests, Happy DOM, canvas buffers and controlled animation timers",
+  "nativeBrowserTest": false,
+  "success": true
+}

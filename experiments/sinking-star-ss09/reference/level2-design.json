@@ -1,0 +1,305 @@
+{
+  "spec": {
+    "id": "ss09-02",
+    "title": "La sortie sans refrain",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "##...###############",
+      "##...o....##########",
+      "##...########....###",
+      "##.M..B........gg###",
+      "##...########....###",
+      "##...#o...##########",
+      "##...###############",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "duet",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 6
+          },
+          {
+            "x": 8,
+            "y": 10
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "circuit": "duet",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "UURRLDDCRRCRRRRCRRRRR",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes 3: Bard, Druid 14 · quitter deux poids sans les entraîner",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14",
+    "puzzle": 14,
+    "objective": "Aligner les caisses, maintenir les deux boutons puis pousser le Barde sans déclencher son chant."
+  },
+  "metrics": {
+    "actions": 21,
+    "selections": 3,
+    "merchantPushes": 4,
+    "bardSongs": 7,
+    "partnerSongs": 7,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 3,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 5,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand aligne les deux caisses malgré les couloirs séparés",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "duet": false
+      }
+    },
+    {
+      "label": "Le chant place ensemble les deux poids sur les boutons ; le Marchand suit dans l’aura",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "duet": true
+      }
+    },
+    {
+      "label": "Le Marchand pousse le Barde à travers la porte sans déplacer les poids",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "duet": true
+      }
+    },
+    {
+      "label": "Le duo rejoint les destinations après avoir quitté la portée des caisses",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "duet": true
+      }
+    }
+  ],
+  "adaptation": "Géométrie originale en trois couloirs. Les deux créatures-poids de la référence deviennent des caisses ; le Marchand remplace le partenaire et doit d’abord corriger leur décalage. Le Barde ne peut traverser volontairement l’axe de sortie sans déplacer au moins un poids. Les poussées du Marchand permettent de quitter l’aura en conservant le circuit ouvert."
+}

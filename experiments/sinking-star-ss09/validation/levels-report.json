@@ -1,0 +1,870 @@
+{
+  "game": "SS09",
+  "version": "0.1.2",
+  "levels": [
+    {
+      "level": 1,
+      "id": "ss09-01",
+      "title": "Le chantier des deux voix",
+      "source": {
+        "piston": true,
+        "platform": false,
+        "label": "Atelier original · préparer, chanter, pousser, refléter",
+        "url": "https://sinkingstarwalkthrough.com/fr/north/",
+        "objective": "Construire le passage avec les deux voix, puis envoyer les deux héros sur l’îlot."
+      },
+      "dimensions": [
+        20,
+        16
+      ],
+      "floorCells": 91,
+      "waterCells": 53,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 52,
+      "selections": 6,
+      "merchantPushes": 3,
+      "bardSongs": 14,
+      "partnerSongs": 14,
+      "selectiveSongs": 6,
+      "forcedBardMoves": 1,
+      "supportMoves": 4,
+      "chainPushes": 0,
+      "stoneMoves": 8,
+      "mirrorMoves": 2,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 149,
+      "maxFrames": 6,
+      "recordedStages": 9,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "88a4904dc521054b9b23ad840346962bcadee0d3b037a1a62f4973c72cefd2e1",
+      "witnessSha256": "cc6c79cb6c7c443e90ca54f8aec91bb715daef811b72376e0598f2a5fd4a691e",
+      "observationsSha256": "ae642d791b78dfeced92dd5a5c389ee82e9d6be234167783a575638bb2f1b5f2"
+    },
+    {
+      "level": 2,
+      "id": "ss09-02",
+      "title": "La sortie sans refrain",
+      "source": {
+        "piston": true,
+        "platform": false,
+        "label": "Adaptation de Heroes 3: Bard, Druid 14 · quitter deux poids sans les entraîner",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14",
+        "puzzle": 14,
+        "objective": "Aligner les caisses, maintenir les deux boutons puis pousser le Barde sans déclencher son chant."
+      },
+      "dimensions": [
+        20,
+        16
+      ],
+      "floorCells": 50,
+      "waterCells": 0,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 0,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 2,
+      "actions": 21,
+      "selections": 3,
+      "merchantPushes": 4,
+      "bardSongs": 7,
+      "partnerSongs": 7,
+      "selectiveSongs": 0,
+      "forcedBardMoves": 3,
+      "supportMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 5,
+      "mirrorMoves": 0,
+      "reflections": 0,
+      "heroReflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 59,
+      "maxFrames": 4,
+      "recordedStages": 4,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "5d7bf22dd0f92646ae6620520ad30863aa7e12fb82849d8a6eabf8a18b65d645",
+      "witnessSha256": "fed57309b992954d5d37e4f4e3a666db45b26a25928f86bcb0b5902e7d4a6767",
+      "observationsSha256": "9fb0b6e825a0fbcaadf6ef6f92089ecc553c48d61275b304e5b2664856c477b0"
+    },
+    {
+      "level": 3,
+      "id": "ss09-03",
+      "title": "Les trois voix séparées",
+      "source": {
+        "piston": true,
+        "platform": false,
+        "label": "Adaptation de Heroes 3: Bard, Druid 15 · distribuer trois poids sur des boutons séparés",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-15",
+        "puzzle": 15,
+        "objective": "Utiliser les butées et les verrous pour séparer trois caisses, puis orienter la sortie avec le Marchand."
+      },
+      "dimensions": [
+        20,
+        18
+      ],
+      "floorCells": 64,
+      "waterCells": 19,
+      "initialStones": 3,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 3,
+      "hydraulicPlatforms": 0,
+      "buttons": 3,
+      "actions": 63,
+      "selections": 4,
+      "merchantPushes": 1,
+      "bardSongs": 17,
+      "partnerSongs": 12,
+      "selectiveSongs": 12,
+      "forcedBardMoves": 0,
+      "supportMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 9,
+      "mirrorMoves": 1,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 185,
+      "maxFrames": 4,
+      "recordedStages": 6,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "7fdc6b17e8f00f091fbdf3ba0f950b13d7413b4a3b7244a4658f991cbdb13d5d",
+      "witnessSha256": "dd70a1954196b27bca1c65d9b487acfc96228052be98bdfdfbe790cfa97b5f93",
+      "observationsSha256": "6361cc7360242ae09ebcfbd473e2cf4eb4cbf9eaa567470387c395c531662155"
+    },
+    {
+      "level": 4,
+      "id": "ss09-04",
+      "title": "Le contrechant du pont",
+      "source": {
+        "piston": true,
+        "platform": false,
+        "label": "Adaptation de Heroes 3: Bard, Druid 13 · un duel dans le passage obligatoire",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-13",
+        "puzzle": 13,
+        "objective": "Libérer le Barde, vider le couloir des monstres, déclencher le pont du Marchand puis régler le miroir final."
+      },
+      "dimensions": [
+        20,
+        20
+      ],
+      "floorCells": 46,
+      "waterCells": 339,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 2,
+      "mirrors": 2,
+      "gates": 2,
+      "hydraulicPlatforms": 0,
+      "buttons": 2,
+      "actions": 60,
+      "selections": 4,
+      "merchantPushes": 1,
+      "bardSongs": 3,
+      "partnerSongs": 0,
+      "selectiveSongs": 1,
+      "forcedBardMoves": 0,
+      "supportMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 1,
+      "reflections": 3,
+      "heroReflections": 3,
+      "pistonPushes": 1,
+      "platformsCreated": 1,
+      "monstersRemoved": 2,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 1,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 185,
+      "maxFrames": 11,
+      "recordedStages": 5,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "0bc000f94f8a9b2689d40b66a2cac48058c8eb34904c5fc9067191c4b4bc05aa",
+      "witnessSha256": "27edf8a08843674309c90d1ef36a4a73f5e8398431ee8ce769e73643c28c2964",
+      "observationsSha256": "eb0d28cd94d4f5c4e4656e854f3f647dc1d4d86f29aed9e6fffa290ca1ae0f40"
+    },
+    {
+      "level": 5,
+      "id": "ss09-05",
+      "title": "Laisser le dernier accord",
+      "source": {
+        "piston": true,
+        "platform": false,
+        "label": "Adaptation de Heroes and Mirrors 1 · quitter le chant en laissant le poids sur son bouton",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1",
+        "puzzle": 1,
+        "objective": "Régler le miroir, maintenir la porte par une caisse, détacher le Barde puis reconfigurer la dernière traversée."
+      },
+      "dimensions": [
+        20,
+        18
+      ],
+      "floorCells": 60,
+      "waterCells": 300,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 2,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 57,
+      "selections": 4,
+      "merchantPushes": 2,
+      "bardSongs": 2,
+      "partnerSongs": 0,
+      "selectiveSongs": 0,
+      "forcedBardMoves": 0,
+      "supportMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 2,
+      "mirrorMoves": 2,
+      "reflections": 3,
+      "heroReflections": 3,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 165,
+      "maxFrames": 4,
+      "recordedStages": 5,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "927b89f62903361401aeb665449400bf7ef02dbc14e1e596ea9ccedc9dd78ea2",
+      "witnessSha256": "e1edb17381698eef005417496c5f1c825ca3c99db558e6342b8af1d20e86b9dd",
+      "observationsSha256": "0795d1f9e100d112e995e513ddc33d1a42d6281742c46fb4d2ba601c62afd866"
+    },
+    {
+      "level": 6,
+      "id": "ss09-06",
+      "title": "Les trois passages de l’écluse",
+      "source": {
+        "piston": false,
+        "platform": true,
+        "label": "Adaptation de Heroes and Water 27 · guider un appui dans un labyrinthe",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27",
+        "puzzle": 27,
+        "objective": "Guider l’appui dans le canal, construire le pont après son passage et conserver le poids de la passerelle."
+      },
+      "dimensions": [
+        20,
+        18
+      ],
+      "floorCells": 61,
+      "waterCells": 24,
+      "initialStones": 2,
+      "initialSupports": 1,
+      "initialMonsters": 0,
+      "mirrors": 0,
+      "gates": 0,
+      "hydraulicPlatforms": 1,
+      "buttons": 1,
+      "actions": 71,
+      "selections": 4,
+      "merchantPushes": 4,
+      "bardSongs": 19,
+      "partnerSongs": 0,
+      "selectiveSongs": 7,
+      "forcedBardMoves": 0,
+      "supportMoves": 19,
+      "chainPushes": 0,
+      "stoneMoves": 4,
+      "mirrorMoves": 0,
+      "reflections": 0,
+      "heroReflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 1,
+      "frames": 209,
+      "maxFrames": 6,
+      "recordedStages": 7,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "5edf688d374210973018c56041cf9d6ab542786508cd9cd8373f355ea92dc00c",
+      "witnessSha256": "11d126881e6cba2b513cd9024acf3f913f030c877fc2a21a9a85643fce97ab82",
+      "observationsSha256": "4bc7548c925dd3b07cdfacac338a60ac31e8030ddbbb59e9dc4b89e7bb901b5e"
+    },
+    {
+      "level": 7,
+      "id": "ss09-07",
+      "title": "La presse à contretemps",
+      "source": {
+        "piston": true,
+        "platform": true,
+        "label": "Adaptation · Heroes and Light 1 — atteindre un bouton par une presse latérale",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#énigme-1",
+        "puzzle": 1,
+        "objective": "Préparer la seconde caisse entre deux fermetures, puis occuper les deux boutons éloignés."
+      },
+      "dimensions": [
+        18,
+        17
+      ],
+      "floorCells": 75,
+      "waterCells": 1,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 3,
+      "hydraulicPlatforms": 1,
+      "buttons": 3,
+      "actions": 58,
+      "selections": 4,
+      "merchantPushes": 3,
+      "bardSongs": 7,
+      "partnerSongs": 7,
+      "selectiveSongs": 0,
+      "forcedBardMoves": 0,
+      "supportMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 3,
+      "mirrorMoves": 3,
+      "reflections": 0,
+      "heroReflections": 0,
+      "pistonPushes": 2,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 1,
+      "frames": 179,
+      "maxFrames": 10,
+      "recordedStages": 5,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "934d259f798a00ea6a9b3311a36fa0266b27d4070a4d05c8a0858865d0522788",
+      "witnessSha256": "90153620dc6eb56e9f07726c164820c0ef33c208f1ed72cf1baae932afe0091a",
+      "observationsSha256": "b478d71456826321f0546327401a7d0af0bd35f2edd8cc6769bc6d7b878768f5"
+    },
+    {
+      "level": 8,
+      "id": "ss09-08",
+      "title": "L’archipel du dernier accord",
+      "source": {
+        "piston": true,
+        "platform": false,
+        "label": "Adaptation · Heroes and Mirrors 2 / Heroes and Water 28 — changer d’axe sans chanter",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-2",
+        "puzzle": 2,
+        "objective": "Régler deux miroirs, pousser le Barde sans déplacer son poids, puis ouvrir l’accès par un duel.",
+        "secondaryUrl": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#énigme-28"
+      },
+      "dimensions": [
+        20,
+        18
+      ],
+      "floorCells": 72,
+      "waterCells": 215,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 2,
+      "mirrors": 2,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 61,
+      "selections": 4,
+      "merchantPushes": 5,
+      "bardSongs": 3,
+      "partnerSongs": 0,
+      "selectiveSongs": 1,
+      "forcedBardMoves": 1,
+      "supportMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 3,
+      "reflections": 4,
+      "heroReflections": 4,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 2,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 1,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "hydraulicChanges": 0,
+      "frames": 181,
+      "maxFrames": 8,
+      "recordedStages": 7,
+      "completionUndo": true,
+      "solved": true,
+      "mapSha256": "a52cf69da18672be79ccf3055beb0d7a22f74fd236311d8415912cbd938ea46e",
+      "witnessSha256": "8e468ed0dae1ec070d9ec18adc6ec3aacb2a61d5a2f344bf33249c80d8871fa2",
+      "observationsSha256": "2d4bac69b42ee397f3e516133a6ce1ade6333cd24adcf051d8103cec52bd2266"
+    }
+  ],
+  "totals": {
+    "actions": 443,
+    "selections": 33,
+    "merchantPushes": 23,
+    "bardSongs": 72,
+    "partnerSongs": 40,
+    "selectiveSongs": 27,
+    "forcedBardMoves": 5,
+    "supportMoves": 23,
+    "chainPushes": 0,
+    "stoneMoves": 33,
+    "mirrorMoves": 12,
+    "reflections": 14,
+    "heroReflections": 14,
+    "pistonPushes": 4,
+    "platformsCreated": 4,
+    "monstersRemoved": 4,
+    "blocked": 0,
+    "deaths": 0,
+    "combatWaves": 2,
+    "mirrorsDestroyed": 0,
+    "cratesCrushed": 0,
+    "simultaneousHeroReflections": 0,
+    "hydraulicChanges": 2,
+    "frames": 1312
+  },
+  "failureRoutes": [
+    {
+      "level": 8,
+      "cause": "reflet vers l’eau après ouverture de la porte, avant de régler le miroir",
+      "actions": 4,
+      "frames": 3,
+      "frameDurationsMs": [
+        70,
+        90,
+        0
+      ],
+      "exactUndo": true,
+      "exactReset": true,
+      "passed": true
+    },
+    {
+      "level": 8,
+      "cause": "le Marchand s’approche du monstre avant le duel",
+      "actions": 31,
+      "frames": 8,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        80,
+        90,
+        100,
+        110,
+        0
+      ],
+      "exactUndo": true,
+      "exactReset": true,
+      "passed": true
+    }
+  ],
+  "necessityEvidence": [
+    {
+      "level": 2,
+      "boundToCurrentMap": true,
+      "mapSha256": "5d7bf22dd0f92646ae6620520ad30863aa7e12fb82849d8a6eabf8a18b65d645",
+      "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+      "results": [
+        {
+          "mechanism": "merchant-push",
+          "status": "limit",
+          "states": 30000,
+          "expanded": 29393,
+          "ms": 525
+        },
+        {
+          "mechanism": "bard-song",
+          "status": "unsolvable",
+          "states": 2520,
+          "expanded": 2520,
+          "ms": 25
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "boundToCurrentMap": true,
+      "mapSha256": "7fdc6b17e8f00f091fbdf3ba0f950b13d7413b4a3b7244a4658f991cbdb13d5d",
+      "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+      "results": [
+        {
+          "mechanism": "merchant-push",
+          "status": "limit",
+          "states": 30000,
+          "expanded": 27219,
+          "ms": 692
+        },
+        {
+          "mechanism": "bard-song",
+          "status": "unsolvable",
+          "states": 306,
+          "expanded": 306,
+          "ms": 4
+        },
+        {
+          "mechanism": "mirror",
+          "status": "limit",
+          "states": 30000,
+          "expanded": 24168,
+          "ms": 337
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "boundToCurrentMap": true,
+      "mapSha256": "0bc000f94f8a9b2689d40b66a2cac48058c8eb34904c5fc9067191c4b4bc05aa",
+      "scope": "Author searches disable transitions using the named mechanism. Exhausted queues prove necessity; capped searches remain inconclusive.",
+      "results": [
+        {
+          "mechanism": "reflections",
+          "status": "unsolvable",
+          "states": 24,
+          "expanded": 24,
+          "ms": 5
+        },
+        {
+          "mechanism": "merchant-push",
+          "status": "unsolvable",
+          "states": 15404,
+          "expanded": 15404,
+          "ms": 331
+        },
+        {
+          "mechanism": "bard-song",
+          "status": "unsolvable",
+          "states": 48,
+          "expanded": 48,
+          "ms": 1
+        },
+        {
+          "mechanism": "piston",
+          "status": "unsolvable",
+          "states": 96,
+          "expanded": 96,
+          "ms": 2
+        },
+        {
+          "mechanism": "support-creation",
+          "status": "unsolvable",
+          "states": 96,
+          "expanded": 96,
+          "ms": 2
+        }
+      ],
+      "revision": "SS09 v2 — required launch gate, press bridge, occupied exit corridor and aligned final mirror",
+      "elementAudit": [
+        {
+          "name": "never-open-entry-gate",
+          "status": "unsolvable",
+          "states": 22,
+          "expanded": 22,
+          "ms": 4
+        },
+        {
+          "name": "no-combat",
+          "status": "limit",
+          "states": 150002,
+          "expanded": 143278
+        },
+        {
+          "name": "weighted-monster-remains-at-initial-cell",
+          "status": "unsolvable",
+          "states": 96,
+          "expanded": 96,
+          "ms": 3
+        },
+        {
+          "name": "other-monster-remains-at-initial-cell",
+          "status": "unsolvable",
+          "states": 48,
+          "expanded": 48,
+          "ms": 1
+        },
+        {
+          "name": "no-first-mirror-reflection",
+          "status": "unsolvable",
+          "states": 24,
+          "expanded": 24,
+          "ms": 0
+        },
+        {
+          "name": "no-final-mirror-reflection",
+          "status": "limit",
+          "states": 150001,
+          "expanded": 145407
+        },
+        {
+          "name": "victory-with-surviving-monsters",
+          "status": "limit",
+          "states": 150002,
+          "expanded": 145309
+        }
+      ],
+      "geometricCutsets": [
+        {
+          "element": "Entry button and its gate",
+          "role": "The Bard starts on the isolated floor cell (9,13). The only safe exit is reflection through the gate (11,13), held open by the Merchant on (3,17).",
+          "evidence": "Exhaustive search with the entry gate never open: 22 states, no solution."
+        },
+        {
+          "element": "Crate, red monster button and east-facing press",
+          "role": "The single crate starts loaded on (5,14). The wall at (4,14) prevents a manual east push. Before the bridge exists, the Bard cannot make an eastward move inside its singing radius of the crate. Closing this press puts the crate into water at (6,14).",
+          "evidence": "Exhaustive search forbidding piston events: 96 states, no solution. Forbidding support creation produces the same exhaustive result."
+        },
+        {
+          "element": "Both monsters",
+          "role": "Both occupy the one-cell exit corridor. Each must leave its initial cell or die; the monster on (8,8) also holds the press open. The authored route lures them into a duel.",
+          "evidence": "Keeping the weighted monster at (8,8) exhausts 96 states with no solution; keeping the other at (12,8) exhausts 48. The no-combat search reached its cap; duel uniqueness is not claimed."
+        },
+        {
+          "element": "Final mirror and Merchant push",
+          "role": "The isolated goal island at x=2..3, y=5..6 has no walkable connection. The final NW mirror starts one row too low at (8,7); the Merchant pushes it north to (8,6), aligning a reflection from (8,1) to (3,6). The first mirror cannot reach the goal island.",
+          "evidence": "Exhaustive search forbidding Merchant pushes: 15404 states, no solution. Geometric separation proves that reaching the goal island requires the final mirror; the broad no-final-mirror search is explicitly inconclusive at its cap."
+        }
+      ],
+      "claims": {
+        "everyDeviceHasRequiredOrBlockingRole": true,
+        "allMechanismClaimsUseExhaustiveSearchOrGeometricCutsets": true,
+        "duelIsUniqueSolution": false,
+        "allSearchesExhaustive": false
+      }
+    },
+    {
+      "level": 5,
+      "boundToCurrentMap": true,
+      "mapSha256": "927b89f62903361401aeb665449400bf7ef02dbc14e1e596ea9ccedc9dd78ea2",
+      "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+      "results": [
+        {
+          "mechanism": "merchant-push",
+          "status": "limit",
+          "states": 30000,
+          "expanded": 29680,
+          "ms": 514
+        },
+        {
+          "mechanism": "bard-song",
+          "status": "limit",
+          "states": 30000,
+          "expanded": 25443,
+          "ms": 424
+        },
+        {
+          "mechanism": "mirror",
+          "status": "limit",
+          "states": 30000,
+          "expanded": 25808,
+          "ms": 295
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "boundToCurrentMap": true,
+      "mapSha256": "5edf688d374210973018c56041cf9d6ab542786508cd9cd8373f355ea92dc00c",
+      "protocol": "BFS over full logical states, 60000-state/2500-ms caps; limit is inconclusive",
+      "ablations": {
+        "disableMerchantPushes": {
+          "status": "unsolvable",
+          "states": 2712,
+          "expanded": 2712,
+          "ms": 63
+        },
+        "disableBardSong": {
+          "status": "limit",
+          "states": 60000,
+          "expanded": 49703,
+          "ms": 901
+        },
+        "disableSupportMotion": {
+          "status": "limit",
+          "states": 60000,
+          "expanded": 49091,
+          "ms": 617
+        }
+      }
+    },
+    {
+      "level": 8,
+      "boundToCurrentMap": true,
+      "mapSha256": "a52cf69da18672be79ccf3055beb0d7a22f74fd236311d8415912cbd938ea46e",
+      "scope": "Searches use the exact movement, chant, mirror, circuit and combat engine. Goal both heroes leave the start island is weaker than WIN; proving it impossible proves WIN impossible.",
+      "checks": [
+        {
+          "name": "Crate removed",
+          "mutation": "Replace the only initial o by floor. Keep both heroes, both monsters, both mirrors, the button and gate.",
+          "goal": "Both heroes x >= 8 (east of the initial island)",
+          "status": "unsolvable",
+          "states": 173874,
+          "expanded": 173874,
+          "ms": 3716
+        },
+        {
+          "name": "Ray gate held shut",
+          "mutation": "Replace gate at source-map (6,6) by a permanent wall and remove its gate device; preserve all other floor, actors, mirrors and the button.",
+          "goal": "At least one hero x >= 8",
+          "status": "unsolvable",
+          "states": 419014,
+          "expanded": 419014,
+          "ms": 7613
+        }
+      ],
+      "geometry": {
+        "gate": [
+          6,
+          6
+        ],
+        "button": [
+          4,
+          12
+        ],
+        "launch": [
+          5,
+          12
+        ],
+        "waterThatPreventsUnadjustedMirrorLaunch": [
+          4,
+          13
+        ],
+        "notes": [
+          "The Merchant must move the first mirror from (4,6) to (5,6). The only safe mainland landing east of this mirror is (11,6).",
+          "The button is adjacent to the only safe first-island launch cell (5,12): substituting a monster for the crate kills the departing hero.",
+          "The button itself reflects to water while aligned with the unadjusted mirror, so the last hero cannot safely leave by teleporting directly from the button.",
+          "A voluntary south step of the Bard from (5,11), after the crate is on its button, drags the crate into water (4,13), removes the weight and shuts the ray gate. A Merchant push preserves the weight."
+        ]
+      },
+      "witness": {
+        "actions": 61,
+        "stoneMoves": 1,
+        "forcedBardMoves": 1,
+        "heroReflections": 4,
+        "complete": true
+      },
+      "limitations": [
+        "These checks establish necessity of the crate and of opening the gate. They do not establish uniqueness or minimum length of the full solution."
+      ],
+      "reproduce": "npm run build && node reference/author/verify-level8-necessity.mjs"
+    }
+  ],
+  "success": true,
+  "campaignChecks": {
+    "levels": 8,
+    "finalState": "WIN",
+    "allWitnessesUseMerchantPushAndBardSong": true,
+    "allCompletionUndosVerified": true
+  },
+  "mechanismChecks": [
+    {
+      "level": 1,
+      "description": "The tutorial uses both heroes, chorus/partner/blocked members, support creation/sliding, mirror movement/reflection and a lateral press",
+      "verified": true
+    },
+    {
+      "level": 2,
+      "description": "The Merchant moves the Bard without singing to preserve the two weights",
+      "verified": true
+    },
+    {
+      "level": 3,
+      "description": "Three weights are separated and the duo uses the prepared mirror",
+      "verified": true
+    },
+    {
+      "level": 4,
+      "description": "The duet eliminates both monsters and builds the bridge using a press",
+      "verified": true
+    },
+    {
+      "level": 5,
+      "description": "A mirror separates the Bard from the object controlled by the song",
+      "verified": true
+    },
+    {
+      "level": 6,
+      "description": "The moving support changes axis through the canal and the Merchant builds the permanent crossing",
+      "verified": true
+    },
+    {
+      "level": 7,
+      "description": "Two lateral presses place weights on the remote buttons and deploy a crossing",
+      "verified": true
+    },
+    {
+      "level": 8,
+      "description": "Two mobile mirrors relay both heroes, a forced Bard step preserves the weight, and both monsters die in one combat wave",
+      "verified": true
+    }
+  ],
+  "htmlSha256": "11126ef760beb7e542ef9384b9e63d48cb5a1c7860b280374ed2dc827921cb54",
+  "limitations": [
+    "Source adaptations are declared, not certified exact reconstructions.",
+    "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",
+    "Witness use of an ability is not by itself a necessity proof.",
+    "Necessity evidence is recorded separately; state/time limits remain inconclusive.",
+    "The aura and support anchoring follow the declared SS09 adaptation; no cloning, dragons, Druid or cleric abilities are added.",
+    "HTML interaction QA uses Happy DOM, public canvas pixels and controlled timers; no native browser session is claimed."
+  ]
+}

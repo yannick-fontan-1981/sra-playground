@@ -1,0 +1,622 @@
+{
+  "spec": {
+    "id": "ss09-06",
+    "title": "Les trois passages de l’écluse",
+    "rows": [
+      "####################",
+      "####################",
+      "###############....#",
+      "############..~.gg.#",
+      "############.#~....#",
+      "############.#~#####",
+      "####~~~~~~~~~~~#####",
+      "####~#######.#######",
+      "##..~.o......#######",
+      "##..~...############",
+      "##..~..#############",
+      "##..~...############",
+      "##..s.o.############",
+      "##..~...############",
+      "##B.~.M.############",
+      "##..~...############",
+      "####~###############",
+      "####################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "quay",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 10
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 12,
+          "y": 6
+        },
+        "circuit": "quay",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "UUULUURRUCUUUUUUCLLDDDDDRCRRRRRRRRRRUUUUURRRRCUULUUURRRRRRRUUUUURRRURRD",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": true,
+    "label": "Adaptation de Heroes and Water 27 · guider un appui dans un labyrinthe",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27",
+    "puzzle": 27,
+    "objective": "Guider l’appui dans le canal, construire le pont après son passage et conserver le poids de la passerelle."
+  },
+  "metrics": {
+    "actions": 71,
+    "selections": 4,
+    "merchantPushes": 4,
+    "bardSongs": 19,
+    "partnerSongs": 0,
+    "selectiveSongs": 7,
+    "forcedBardMoves": 0,
+    "supportMoves": 19,
+    "chainPushes": 0,
+    "stoneMoves": 4,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand immobilise une caisse contre le mur du bouton et déploie la passerelle",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "quay": true
+      }
+    },
+    {
+      "label": "Le Barde remonte l’appui au-delà du futur pont entre les deux rives",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "quay": true
+      }
+    },
+    {
+      "label": "Le Marchand immerge la seconde caisse après le passage de l’appui mobile",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "quay": true
+      }
+    },
+    {
+      "label": "La butée retient le poids tandis que le Barde transporte l’appui jusqu’au second coude",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "quay": true
+      }
+    },
+    {
+      "label": "L’appui remonte le dernier canal et se cale contre la paroi nord",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "quay": true
+      }
+    },
+    {
+      "label": "Le Barde emprunte l’appui final ; le premier quai reste alimenté",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "quay": true
+      }
+    },
+    {
+      "label": "Le Marchand traverse les deux ouvrages et rejoint la seconde destination",
+      "turn": 71,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "quay": true
+      }
+    }
+  ],
+  "adaptation": "Géométrie originale de deux rives et d’un canal coudé. La référence utilise les murs pour modifier l’écart entre la Barde et le cristal immergé ; SS09 conserve le guidage et les butées, puis ajoute une coopération obligatoire : le Marchand prépare le poids de la passerelle et construit le pont seulement après le passage de l’appui. Les empilements et translations de deux cases du jeu source ne sont pas repris.",
+  "necessity": {
+    "protocol": "BFS over full logical states, 60000-state/2500-ms caps; limit is inconclusive",
+    "ablations": {
+      "disableMerchantPushes": {
+        "status": "unsolvable",
+        "states": 2712,
+        "expanded": 2712,
+        "ms": 63
+      },
+      "disableBardSong": {
+        "status": "limit",
+        "states": 60000,
+        "expanded": 49703,
+        "ms": 901
+      },
+      "disableSupportMotion": {
+        "status": "limit",
+        "states": 60000,
+        "expanded": 49091,
+        "ms": 617
+      }
+    }
+  }
+}

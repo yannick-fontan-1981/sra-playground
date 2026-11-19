@@ -1,0 +1,636 @@
+{
+  "spec": {
+    "id": "ss09-03",
+    "title": "Les trois voix séparées",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "###...o..##.....####",
+      "###########.....####",
+      "##....B....D....####",
+      "##.M.#####.#~~~~~###",
+      "##...#o...##~~~~~###",
+      "##...#####.#~~.g~###",
+      "##.........#~~.g~###",
+      "############~~..~###",
+      "###...o#############",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "W",
+    "mirrors": [
+      {
+        "at": {
+          "x": 14,
+          "y": 5
+        },
+        "facing": "SW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "upper",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 4
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "middle",
+        "buttons": [
+          {
+            "x": 9,
+            "y": 8
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "lower",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 12
+          }
+        ],
+        "color": 8
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 4,
+          "y": 4
+        },
+        "circuit": "upper",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 8
+        },
+        "circuit": "middle",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 12
+        },
+        "circuit": "lower",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CLLLRRRRLLLDDDDRRLLLCUUUURRRRRRRRRUURRRDCUUUURRRRRRRRXRDCLDLLXR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 21
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes 3: Bard, Druid 15 · distribuer trois poids sur des boutons séparés",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-15",
+    "puzzle": 15,
+    "objective": "Utiliser les butées et les verrous pour séparer trois caisses, puis orienter la sortie avec le Marchand."
+  },
+  "metrics": {
+    "actions": 63,
+    "selections": 4,
+    "merchantPushes": 1,
+    "bardSongs": 17,
+    "partnerSongs": 12,
+    "selectiveSongs": 12,
+    "forcedBardMoves": 0,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 9,
+    "mirrorMoves": 1,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La première caisse atteint son bouton ; le mur bloque la caisse centrale",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "upper": true,
+        "middle": false,
+        "lower": false
+      }
+    },
+    {
+      "label": "Le premier verrou retient la caisse pendant que le chant décale celle du milieu à droite",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "upper": true,
+        "middle": true,
+        "lower": false
+      }
+    },
+    {
+      "label": "Le Barde change de couloir et range la troisième caisse ; les trois poids ouvrent la sortie",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "upper": true,
+        "middle": true,
+        "lower": true
+      }
+    },
+    {
+      "label": "Le Marchand descend le miroir pour aligner le dernier îlot",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "upper": true,
+        "middle": true,
+        "lower": true
+      }
+    },
+    {
+      "label": "Le Barde traverse puis dégage l’arrivée du miroir",
+      "turn": 56,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "upper": true,
+        "middle": true,
+        "lower": true
+      }
+    },
+    {
+      "label": "Le Marchand rejoint la seconde destination",
+      "turn": 63,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "upper": true,
+        "middle": true,
+        "lower": true
+      }
+    }
+  ],
+  "adaptation": "Les trois cristaux sur boutons de la référence deviennent trois voix à répartir dans des couloirs isolés. Les portes latérales immobilisent chaque poids placé et rendent possibles les mouvements opposés du chant. La géométrie et les trajets sont originaux ; un miroir mobile ajoute une sortie de duo que le Barde seul ne peut aligner."
+}

@@ -1,0 +1,20 @@
+{
+  "mapSha256": "5d7bf22dd0f92646ae6620520ad30863aa7e12fb82849d8a6eabf8a18b65d645",
+  "scope": "Author searches disabling transitions that use the named mechanism; limits are inconclusive.",
+  "results": [
+    {
+      "mechanism": "merchant-push",
+      "status": "limit",
+      "states": 30000,
+      "expanded": 29393,
+      "ms": 525
+    },
+    {
+      "mechanism": "bard-song",
+      "status": "unsolvable",
+      "states": 2520,
+      "expanded": 2520,
+      "ms": 25
+    }
+  ]
+}

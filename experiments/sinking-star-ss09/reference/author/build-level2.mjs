@@ -1,0 +1,11 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(20,16);
+fill(2,5,4,11);fill(4,6,9,6);fill(4,8,16,8);fill(6,10,9,10);fill(13,7,16,9);
+put(3,8,'M');put(6,8,'B');put(5,6,'o');put(6,10,'o');put(15,8,'g');put(16,8,'g');
+const spec={id:'ss09-02',title:'La sortie sans refrain',rows:strings(),facing:'E',circuits:[{id:'duet',buttons:[{x:8,y:6},{x:8,y:10}],color:14}],gates:[{at:{x:10,y:8},circuit:'duet',direction:'W',closedWhen:'released'}]};
+const a=new Author(spec);
+a.go(4,6,'merchant').act('R').stage('Le Marchand aligne les deux caisses malgré les couloirs séparés');
+a.go(4,8).select('bard').act('RR').stage('Le chant place ensemble les deux poids sur les boutons ; le Marchand suit dans l’aura');
+a.go(7,8,'merchant').act('RRR').stage('Le Marchand pousse le Barde à travers la porte sans déplacer les poids');
+a.select('bard').act('RRRRR').stage('Le duo rejoint les destinations après avoir quitté la portée des caisses');
+a.save(new URL('../level2-design.json',import.meta.url),{label:'Adaptation de Heroes 3: Bard, Druid 14 · quitter deux poids sans les entraîner',url:'https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14',puzzle:14,objective:'Aligner les caisses, maintenir les deux boutons puis pousser le Barde sans déclencher son chant.'},'Géométrie originale en trois couloirs. Les deux créatures-poids de la référence deviennent des caisses ; le Marchand remplace le partenaire et doit d’abord corriger leur décalage. Le Barde ne peut traverser volontairement l’axe de sortie sans déplacer au moins un poids. Les poussées du Marchand permettent de quitter l’aura en conservant le circuit ouvert.');
