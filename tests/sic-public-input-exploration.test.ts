@@ -15,7 +15,39 @@ import { comparePanelSupportAccess } from '../src/sic/panel-access-comparison.ts
 import { dockingDistance, findPanelDock, measureAlignedTool, measurePanelTransport,
   panelTransportPose, unchangedPanelTransport } from '../src/sic/panel-mechanism-probe.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
+import { chooseTravelTrial, observeTravel } from '../src/sic/observed-travel-frontier.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
+
+test('a measured tile displacement gives untried directions a turn after a blocked contact', () => {
+  const board = (at: number, alternate: boolean) => {
+    const rows = Array.from({ length: 9 }, () => Array<number>(15).fill(3));
+    for (let y = 3; y < 6; y++) for (let x = 12; x < 15; x++) {
+      if (x !== 13 || y !== 4) rows[y]![x] = 11;
+    }
+    for (const [x, y] of (alternate ? [[0, 0], [1, 0], [0, 1], [0, 2]] : [[0, 0], [0, 1], [1, 1], [0, 2]])) {
+      rows[3 + y!]![at + x!] = 6;
+    }
+    return rows;
+  };
+  const inputs = [1, 2, 3, 4].map(id => ({ action_ref: `ACTION${id}`, data: {} }));
+  const before = board(3, false), after = board(6, true);
+  const travel = observeTravel(undefined, before, after, inputs[3]!, 'observed-right');
+  assert.ok(travel);
+  assert.deepEqual(travel.moves.ACTION4?.delta, [3, 0]);
+  const firstProbe = chooseTravelTrial(travel, after, inputs, false);
+  assert.equal(firstProbe?.command.action_ref, 'ACTION1');
+  const blocked = observeTravel(travel, after, after, inputs[0]!, 'observed-block');
+  assert.ok(blocked);
+  assert.equal(Object.values(blocked.tested).at(-1), -1);
+  assert.equal(chooseTravelTrial(blocked, after, inputs, false)?.command.action_ref, 'ACTION2');
+
+  const mixedBefore = board(3, false), mixedAfter = board(6, false);
+  mixedBefore[0]![0] = mixedBefore[0]![1] = 6;
+  mixedAfter[0]![3] = mixedAfter[0]![4] = 6;
+  const amongOtherChanges = observeTravel(undefined, mixedBefore, mixedAfter, inputs[3]!, 'observed-among-other-moves');
+  assert.equal(amongOtherChanges?.actor, '6,3');
+  assert.deepEqual(amongOtherChanges?.moves.ACTION4?.delta, [3, 0]);
+});
 
 test('a separated panel gets a turn between movement probes despite unrelated changes in the status strip', async () => {
   const board = (step: number) => Array.from({ length: 18 }, (_, y) => Array.from({ length: 32 }, (_, x) => {
