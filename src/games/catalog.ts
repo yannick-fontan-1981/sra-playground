@@ -1156,6 +1156,9 @@ records.push({code:'SS06',id:'ss06-c4000001',name:'Les Ponts Réfléchis',group:
 records.push({code:'SS07',id:'ss07-c4000001',name:'La Distance Dérobée',group:'custom_4',family:'sinking_star_duo',levels:8,
   description:'Pair the Merchant’s push with the Thief’s pull and align mirrors to transport the closest occupant.',
   sourcePath:'experiments/sinking-star-ss07/src/levels.ts',availability:'playable'});
+records.push({code:'SS08',id:'ss08-c4000001',name:'La Double Transposition',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Pair the Merchant’s push with the Wizard’s directional exchanges and use mirrors to redirect or reflect pieces.',
+  sourcePath:'experiments/sinking-star-ss08/src/levels.ts',availability:'playable'});
 
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,

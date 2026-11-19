@@ -31,13 +31,19 @@ import { SS07_LEVELS } from '../experiments/sinking-star-ss07/src/levels.ts';
 import { lessonIds as thiefLessonIds, observeLesson as observeThiefLesson, visibleHeroes as visibleThiefHeroes, type ThiefLesson } from '../experiments/sinking-star-ss07/src/tutorial.ts';
 import ss07Witnesses from '../experiments/sinking-star-ss07/tests/witnesses.json' with { type: 'json' };
 import ss07Failures from '../experiments/sinking-star-ss07/tests/failures.json' with { type: 'json' };
+import { createSs08Backend } from '../src/games/sinking-star-ss08.ts';
+import { DuoPuzzleSession as WizardDuoSession } from '../experiments/sinking-star-ss08/src/core.ts';
+import { SS08_LEVELS } from '../experiments/sinking-star-ss08/src/levels.ts';
+import { lessonIds as transpositionLessonIds, observeLesson as observeTranspositionLesson, visibleHeroes as visibleTranspositionHeroes, type TranspositionLesson } from '../experiments/sinking-star-ss08/src/tutorial.ts';
+import ss08Witnesses from '../experiments/sinking-star-ss08/tests/witnesses.json' with { type: 'json' };
+import ss08Failures from '../experiments/sinking-star-ss08/tests/failures.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS07 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS08 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 107);
+  assert.equal(GAME_CATALOG.length, 108);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -68,6 +74,12 @@ test('Custom 4 lists SS01 through SS07 and preserves all four legacy collections
   assert.equal(ss07?.levels, 8);
   assert.equal(ss07?.availability, 'playable');
   assert.match(ss07!.sourceUrl, /experiments\/sinking-star-ss07\/src\/levels\.ts$/);
+  const ss08 = getGameByCode(' ss08 ');
+  assert.equal(ss08?.id, 'ss08-c4000001');
+  assert.equal(ss08?.name, 'La Double Transposition');
+  assert.equal(ss08?.levels, 8);
+  assert.equal(ss08?.availability, 'playable');
+  assert.match(ss08!.sourceUrl, /experiments\/sinking-star-ss08\/src\/levels\.ts$/);
 });
 test('SS01 loads natively without invoking the Python loader', async () => {
   let legacyLoads = 0;
@@ -199,10 +211,11 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS05' })).gameCode, 'SS05');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS06' })).gameCode, 'SS06');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS07' })).gameCode, 'SS07');
+  assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS08' })).gameCode, 'SS08');
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS07']) {
+  for (const code of ['CASC', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS08']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -761,6 +774,157 @@ for (const { level, actions } of ss07Failures) {
     const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
     const reference = new ThiefDuoSession(SS07_LEVELS);
     const initial = await dispatcher.dispatch({ type: 'load', code: 'SS07', level });
+    assert.deepEqual(initial, reference.selectLevel(level));
+    let current = initial, previous = initial;
+    for (const { id, data } of actions as DuoAction[]) {
+      previous = current;
+      current = await dispatcher.dispatch({ type: 'action', actionId: id, data });
+      assert.deepEqual(current, reference.action(id, data));
+    }
+    assert.equal(current.state, 'GAME_OVER');
+    assert.ok(current.frames.length >= 3);
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), reference.observe());
+    const restored = await dispatcher.dispatch({ type: 'undo' });
+    assert.deepEqual(restored, reference.undo());
+    assert.deepEqual(restored.frame, previous.frame);
+    assert.equal(restored.state, 'NOT_FINISHED');
+    assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), initial);
+  });
+}
+
+test('SS08 replays 324 actions through the adapter and router with all ten level 4 discoveries', async () => {
+  const backend = createSs08Backend();
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new WizardDuoSession(SS08_LEVELS);
+  const lessons = new Set<TranspositionLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss08 ' });
+  assert.deepEqual(current, await backend.dispatch({ type: 'load', code: 'SS08' }));
+  assert.deepEqual(current, reference.observe());
+  const publicKeys = ['gameCode', 'frame', 'frames', 'state', 'availableActionIds', 'canUndo', 'canSelectLevel',
+    'level', 'levelCount', 'levelsCompleted', 'defaultFps', 'palette'].sort();
+  assert.deepEqual(Object.keys(current).sort(), publicKeys);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss08Witnesses) {
+    assert.equal(current.level, level);
+    assert.deepEqual(visibleTranspositionHeroes(current.frame).map(h => h.kind).sort(), ['merchant', 'wizard']);
+    for (const [turn, { id, data }] of (route as DuoAction[]).entries()) {
+      const before = current;
+      const request = { type: 'action', actionId: id, data } as const;
+      const expected = reference.action(id, data);
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(await backend.dispatch(request), expected);
+      assert.deepEqual(current.availableActionIds, [1, 2, 3, 4, 5, 6]);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.ok(current.frames.every(frame => frame.length === 64 && frame.every(row => row.length === 64)));
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleTranspositionHeroes(frame).map(({ x, y, kind }) => ({ x, y, kind }));
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      if (level === 5 && [15, 22, 37].includes(turn + 1)) {
+        const [x, y] = [2 + 3 * 8, 2 + 3 * 10];
+        const tile = current.frame.slice(y, y + 3).map(row => row.slice(x, x + 3));
+        assert.deepEqual(tile, [[0, 5, 5], [7, 0, 5], [7, 7, 0]], 'The mirror diagonal and back cover the button');
+      }
+      observeTranspositionLesson(lessons, before, current, id);
+      if (level < 4) assert.equal(lessons.size, 0);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    if (level === 4) assert.deepEqual(transpositionLessonIds.filter(lesson => lessons.has(lesson)), [...transpositionLessonIds]);
+  }
+  assert.deepEqual([actions, selections, frames], [324, 29, 970]);
+  assert.equal(current.state, 'WIN');
+  for (const actionId of [1, 5, 6]) {
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId, data: { x: 3, y: 3 } }), reference.observe());
+  }
+});
+
+test('SS08 plays the returning Wizard loop in both directions and repeats without adding Undo entries', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new WizardDuoSession(SS08_LEVELS);
+  const north = [[4, 6], [8, 4], [13, 8], [8, 12], [4, 10]];
+  for (const [actionId, probes] of [[1, north], [2, [...north].reverse()]] as const) {
+    const initial = await dispatcher.dispatch({ type: 'load', code: 'SS08', level: 8 });
+    assert.deepEqual(initial, reference.selectLevel(8));
+    const wizard = visibleTranspositionHeroes(initial.frame).find(hero => hero.kind === 'wizard')!;
+    const data = { x: 3 + 3 * wizard.x, y: 3 + 3 * wizard.y };
+    const selected = await dispatcher.dispatch({ type: 'action', actionId: 6, data });
+    assert.deepEqual(selected, reference.action(6, data));
+    const first = await dispatcher.dispatch({ type: 'action', actionId });
+    assert.deepEqual(first, reference.action(actionId));
+    assert.deepEqual(first.frameDurationsMs, [90, 90, 90, 90, 100, 100, 80, 100, 0]);
+    assert.equal(first.frameDurationsMs!.reduce((sum, duration) => sum + duration), 740);
+    assert.equal(first.frames.length, 9);
+    assert.deepEqual(visibleTranspositionHeroes(first.frame), visibleTranspositionHeroes(selected.frame));
+    assert.equal(first.state, 'NOT_FINISHED');
+    assert.equal(first.levelsCompleted, 0);
+    for (const [y, row] of first.frame.entries()) {
+      for (const [x, pixel] of row.entries()) {
+        if (Math.abs(x - data.x) > 1 || Math.abs(y - data.y) > 1) assert.equal(pixel, selected.frame[y]![x]);
+      }
+    }
+    for (let frame = 0; frame < probes.length; frame++) {
+      for (const [index, [x, y]] of probes.entries()) {
+        const [px, py] = [3 + x! * 3, 3 + y! * 3];
+        assert.equal(first.frames[frame]![py]![px], index <= frame ? 15 : first.frame[py]![px]);
+      }
+    }
+    for (const frame of [5, 7]) {
+      for (const [dx, dy] of [[0, 0], [0, -1], [0, 1], [-1, 0], [1, 0]]) {
+        assert.equal(first.frames[frame]![data.y + dy!]![data.x + dx!], 0);
+      }
+    }
+    for (let repeat = 0; repeat < 2; repeat++) {
+      assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId }), first);
+    }
+    const undone = await dispatcher.dispatch({ type: 'undo' });
+    assert.deepEqual(undone, reference.undo());
+    assert.deepEqual(undone.frame, selected.frame);
+    assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), initial);
+  }
+});
+
+test('SS08 refuses unsupported water immediately without marking it and validates ACTION6 and level loads', async () => {
+  const backend = createSs08Backend();
+  const reference = new WizardDuoSession(SS08_LEVELS);
+  assert.deepEqual(await backend.dispatch({ type: 'load', code: 'SS08', level: 8 }), reference.selectLevel(8));
+  assert.throws(() => backend.dispatch({ type: 'load', code: 'SS08', level: 9 }), /Invalid level/);
+  assert.throws(() => backend.dispatch({ type: 'selectLevel', level: 0 }), /Invalid level/);
+  for (const data of [undefined, { x: -1, y: 3 }, { x: 3, y: 64 }, { x: 1.5, y: 3 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  for (const { id, data } of ss08Witnesses[7]!.actions.slice(0, 19) as DuoAction[]) {
+    assert.deepEqual(await backend.dispatch({ type: 'action', actionId: id, data }), reference.action(id, data));
+  }
+  const before = reference.observe();
+  const water = (frame: number[][]) => frame.slice(14, 17).map(row => row.slice(23, 26));
+  for (let repeat = 0; repeat < 2; repeat++) {
+    const next = await backend.dispatch({ type: 'action', actionId: 1 });
+    assert.deepEqual(next, reference.action(1));
+    assert.equal(next.frames.length, 1);
+    assert.ok(next.frameDurationsMs === undefined || next.frameDurationsMs[0] === 0);
+    assert.deepEqual(water(next.frame), water(before.frame));
+    assert.deepEqual(visibleTranspositionHeroes(next.frame), visibleTranspositionHeroes(before.frame));
+    assert.equal(next.state, 'NOT_FINISHED');
+  }
+  const undone = await backend.dispatch({ type: 'undo' });
+  assert.deepEqual(undone, reference.undo());
+  assert.deepEqual(undone.frame, before.frame);
+  assert.deepEqual(await backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(await backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+for (const { level, actions } of ss08Failures) {
+  test(`SS08 level ${level} presents its reachable defeat and restores the board with Undo`, async () => {
+    const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+    const reference = new WizardDuoSession(SS08_LEVELS);
+    const initial = await dispatcher.dispatch({ type: 'load', code: 'SS08', level });
     assert.deepEqual(initial, reference.selectLevel(level));
     let current = initial, previous = initial;
     for (const { id, data } of actions as DuoAction[]) {

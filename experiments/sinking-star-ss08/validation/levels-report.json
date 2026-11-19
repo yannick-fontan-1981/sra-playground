@@ -856,7 +856,7 @@
       "Les assertions confirment le mécanisme initial et le parcours de résolution ; elles ne certifient pas l’unicité ni l’optimalité de la solution."
     ]
   },
-  "htmlSha256": "98f4e078c703bc76f4d4f12502f08d6a20c50262e74a4f24f194c183888042de",
+  "htmlSha256": "cdbe3457f9a34633181d335f7f5eff4afc5104b848e19513f8c8ff6e66ebfe85",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",
