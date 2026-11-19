@@ -11,10 +11,10 @@
       "#.......~~~~~......#",
       "#....B..~~~~~......#",
       "#......o~~~~~#######",
-      "#....o.~~.~~~#######",
+      "#....o.~~~~~~#######",
       "#.M....~~~~~~#######",
-      "#.....~~~~~~~#######",
-      "#....~~..~~~~#######",
+      "#......~~~~~~#######",
+      "#......~~.~~~#######",
       "####################",
       "####################",
       "####################",
@@ -53,7 +53,7 @@
       }
     ]
   },
-  "commands": "RDUUUUUURRRRRLLCRRCLDDDLLLCRRXURRRRCDRRRRRXRRRR",
+  "commands": "RDUUUUUURRRRRLLCDDDLRRCLDLDDRUCLDRCLULCDDRRRXURCRRXR",
   "actions": [
     {
       "id": 4
@@ -108,45 +108,98 @@
       }
     },
     {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
       "id": 4
     },
     {
       "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 21
-      }
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
     },
     {
       "id": 6,
       "data": {
         "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
         "y": 33
       }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
     },
     {
       "id": 4
@@ -164,32 +217,11 @@
       "id": 4
     },
     {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
       "id": 6,
       "data": {
-        "x": 15,
-        "y": 30
+        "x": 24,
+        "y": 42
       }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
     },
     {
       "id": 4
@@ -199,15 +231,6 @@
     },
     {
       "id": 5
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
     },
     {
       "id": 4
@@ -221,16 +244,16 @@
     "objective": "Construire le passage avec les deux voix, puis envoyer les deux héros sur l’îlot."
   },
   "metrics": {
-    "actions": 47,
-    "selections": 4,
-    "merchantPushes": 4,
-    "bardSongs": 2,
-    "partnerSongs": 2,
-    "selectiveSongs": 1,
-    "forcedBardMoves": 2,
-    "supportMoves": 1,
+    "actions": 52,
+    "selections": 6,
+    "merchantPushes": 3,
+    "bardSongs": 14,
+    "partnerSongs": 14,
+    "selectiveSongs": 6,
+    "forcedBardMoves": 1,
+    "supportMoves": 4,
     "chainPushes": 0,
-    "stoneMoves": 3,
+    "stoneMoves": 8,
     "mirrorMoves": 2,
     "reflections": 2,
     "heroReflections": 2,
@@ -332,33 +355,34 @@
       }
     },
     {
-      "label": "Le chant entraîne le Marchand, déplace un appui et complète le pont ; le sol retient le premier appui.",
-      "turn": 18,
+      "label": "Le Barde descend la caisse et l’appui au fond du bassin ; le Marchand suit le chant.",
+      "turn": 19,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 8,
-            "y": 6
+            "x": 6,
+            "y": 9
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 7,
-            "y": 8
+            "x": 5,
+            "y": 11
           }
         }
       ],
-      "stones": [],
+      "stones": [
+        {
+          "x": 5,
+          "y": 13
+        }
+      ],
       "supports": [
         {
-          "x": 8,
-          "y": 10
-        },
-        {
           "x": 7,
-          "y": 10
+          "y": 13
         }
       ],
       "mirrors": [
@@ -376,8 +400,53 @@
       }
     },
     {
-      "label": "Le Marchand pousse le Barde sur le pont sans déclencher le chant.",
-      "turn": 23,
+      "label": "Le chant décale la caisse vers la gauche mais la rive retient l’appui immergé : un membre bloqué reste en place.",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Barde ramène la caisse puis la décale avec l’appui vers le petit îlot.",
+      "turn": 22,
       "heroes": [
         {
           "kind": "merchant",
@@ -389,20 +458,21 @@
         {
           "kind": "bard",
           "at": {
-            "x": 7,
-            "y": 10
+            "x": 6,
+            "y": 11
           }
         }
       ],
-      "stones": [],
+      "stones": [
+        {
+          "x": 6,
+          "y": 13
+        }
+      ],
       "supports": [
         {
           "x": 8,
-          "y": 10
-        },
-        {
-          "x": 7,
-          "y": 10
+          "y": 13
         }
       ],
       "mirrors": [
@@ -420,33 +490,34 @@
       }
     },
     {
-      "label": "Le Barde traverse le pont puis le miroir.",
+      "label": "Le Marchand remonte le Barde d’une case sans déplacer la caisse ni l’appui.",
       "turn": 30,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 4,
-            "y": 9
+            "x": 6,
+            "y": 11
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 13,
-            "y": 6
+            "x": 6,
+            "y": 10
           }
         }
       ],
-      "stones": [],
+      "stones": [
+        {
+          "x": 6,
+          "y": 13
+        }
+      ],
       "supports": [
         {
           "x": 8,
-          "y": 10
-        },
-        {
-          "x": 7,
-          "y": 10
+          "y": 13
         }
       ],
       "mirrors": [
@@ -464,8 +535,96 @@
       }
     },
     {
-      "label": "Les deux héros occupent les deux destinations.",
-      "turn": 47,
+      "label": "Le Barde reprend son élan : le petit îlot retient le premier appui, tandis que la seconde caisse complète le pont.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 13
+        },
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Barde traverse les deux appuis retenus par l’îlot d’une case puis active le miroir.",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 13
+        },
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Marchand traverse le même pont et les deux héros occupent les deux destinations.",
+      "turn": 52,
       "heroes": [
         {
           "kind": "merchant",
@@ -486,11 +645,11 @@
       "supports": [
         {
           "x": 8,
-          "y": 10
+          "y": 13
         },
         {
           "x": 7,
-          "y": 10
+          "y": 13
         }
       ],
       "mirrors": [
@@ -508,5 +667,5 @@
       }
     }
   ],
-  "adaptation": "Tutoriel original du duo. Les principes du chant du Nord sont combinés à un miroir mobile et une presse. Une butée de sol de deux cases au fond de l’eau retient les deux caisses immergées. Trois cases du coin de la rive sont retirées afin de maintenir deux cases d’eau entre la rive et cette butée : elle ne donne pas un accès à pied gratuit aux axes du miroir. Géométrie originale, aucun fac-similé revendiqué."
+  "adaptation": "Tutoriel original du duo. Le seul îlot d’une case est descendu de (9,8) à (9,11), tout en bas du bassin. Il retient les deux appuis alignés devant lui. Le bord du premier îlot retrouve exactement sa forme originale ; aucune butée supplémentaire n’est ajoutée. Les personnages, caisses, miroir, bouton, presse et destinations gardent leurs positions d’origine. Géométrie originale, aucun fac-similé revendiqué."
 }

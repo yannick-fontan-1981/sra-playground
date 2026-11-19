@@ -1,6 +1,6 @@
 # SS09 — Le Chœur des Miroirs
 
-Laboratoire autonome **Marchand + Barde**, neuvième jeu Sinking Star destiné à Custom 4. Version 0.1.1 / HTML v2 : huit salles, tutoriel riche au niveau 1, pixels 64 × 64 et cellules de 3 × 3.
+Laboratoire autonome **Marchand + Barde**, neuvième jeu Sinking Star destiné à Custom 4. Version 0.1.2 / HTML v3 : huit salles, tutoriel riche au niveau 1, pixels 64 × 64 et cellules de 3 × 3.
 
 ## Jouer et reconstruire
 
@@ -19,7 +19,7 @@ Ouvrir `dist/SS09-demo.html`. Le fichier est autonome et fonctionne hors ligne.
 
 Les deux héros doivent occuper les deux destinations. Le tutoriel suit douze découvertes à partir des seuls pixels publics. L’aura est en pointillés magenta, la prévisualisation d’un héros est un + gris clair, celle d’une caisse un contour gris clair. Le Marchand peut pousser le Barde sans entraîner les poids voisins.
 
-La v2 ajoute une butée de sol au fond de l’eau en L1, un clignotement rouge des miroirs responsables d’un reflet bloqué, une refonte de L4 autour de passages obligatoires et une porte qui coupe réellement le rayon en L8. La caisse et son bouton y maintiennent l’ouverture pendant le départ des deux héros.
+En L1, la v3 descend simplement l’îlot existant d’une seule case de sol tout en bas du bassin, de (9,8) à (9,11), et restaure exactement la rive originale. Le clignotement rouge des miroirs bloquants, la refonte de L4 et la porte sur le rayon de L8 restent ceux de la v2. La caisse et son bouton y maintiennent l’ouverture pendant le départ des deux héros.
 
 ## Sources et portée
 
@@ -27,7 +27,7 @@ Les sept salles suivant le tutoriel adaptent des principes des index [North](htt
 
 ## Validation
 
-Le moteur et les régressions de niveaux possèdent 111 tests. Les huit parcours d’auteur totalisent 438 actions, 31 sélections et 1 301 images, jusqu’à WIN. Le HTML compilé passe onze groupes de vérification, onze cas Barde, trois cas de reflets, quatre cas d’interférence des miroirs et deux défaites réelles. Les douze découvertes du tutoriel sont atteintes.
+Le moteur et les régressions de niveaux possèdent 108 tests. Les huit parcours d’auteur totalisent 443 actions, 33 sélections et 1 312 images, jusqu’à WIN. Le HTML compilé passe onze groupes de vérification, onze cas Barde, trois cas de reflets, quatre cas d’interférence des miroirs et deux défaites réelles. Les douze découvertes du tutoriel sont atteintes. Les trois anciens tests de géométrie L1 ont été retirés avec la butée et la découpe de rive introduites par erreur en v2.
 
 Les parcours attestent la possibilité de terminer, pas une solution unique ou optimale. Les ablations de L4 démontrent la nécessité du chant, de la poussée, des reflets, de la presse et du pont ; les deux monstres occupent le couloir obligatoire. Les déplacer ou les éliminer est nécessaire, sans prétendre que le duel soit l’unique méthode. En L8, les recherches exhaustives démontrent la nécessité de la caisse et de l’ouverture de la porte. Toute recherche plafonnée reste indiquée comme inconclusive. Les preuves sont liées au hash de leur carte ; celles de L8 sont reproductibles avec `node reference/author/verify-level8-necessity.mjs` après build.
 

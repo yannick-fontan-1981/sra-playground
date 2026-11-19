@@ -1,6 +1,6 @@
 {
   "game": "SS09",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "levels": [
     {
       "level": 1,
@@ -17,8 +17,8 @@
         20,
         16
       ],
-      "floorCells": 90,
-      "waterCells": 54,
+      "floorCells": 91,
+      "waterCells": 53,
       "initialStones": 2,
       "initialSupports": 0,
       "initialMonsters": 0,
@@ -26,16 +26,16 @@
       "gates": 1,
       "hydraulicPlatforms": 0,
       "buttons": 1,
-      "actions": 47,
-      "selections": 4,
-      "merchantPushes": 4,
-      "bardSongs": 2,
-      "partnerSongs": 2,
-      "selectiveSongs": 1,
-      "forcedBardMoves": 2,
-      "supportMoves": 1,
+      "actions": 52,
+      "selections": 6,
+      "merchantPushes": 3,
+      "bardSongs": 14,
+      "partnerSongs": 14,
+      "selectiveSongs": 6,
+      "forcedBardMoves": 1,
+      "supportMoves": 4,
       "chainPushes": 0,
-      "stoneMoves": 3,
+      "stoneMoves": 8,
       "mirrorMoves": 2,
       "reflections": 2,
       "heroReflections": 2,
@@ -49,14 +49,14 @@
       "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "hydraulicChanges": 0,
-      "frames": 138,
+      "frames": 149,
       "maxFrames": 6,
-      "recordedStages": 6,
+      "recordedStages": 9,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "628a4cf25fdff7e29fc3ed6e76445eecc9c529ae2f27a507986453e5ff1da762",
-      "witnessSha256": "51cbea244b6a9308b9d8145ff778662b9a96f07ed0e6d920d88dc860d0cab468",
-      "observationsSha256": "a9ad36b999edb1e02403f5deebae17b0fdb08d9fefc09ebecfa1445b6203f7ae"
+      "mapSha256": "88a4904dc521054b9b23ad840346962bcadee0d3b037a1a62f4973c72cefd2e1",
+      "witnessSha256": "cc6c79cb6c7c443e90ca54f8aec91bb715daef811b72376e0598f2a5fd4a691e",
+      "observationsSha256": "ae642d791b78dfeced92dd5a5c389ee82e9d6be234167783a575638bb2f1b5f2"
     },
     {
       "level": 2,
@@ -460,16 +460,16 @@
     }
   ],
   "totals": {
-    "actions": 438,
-    "selections": 31,
-    "merchantPushes": 24,
-    "bardSongs": 60,
-    "partnerSongs": 28,
-    "selectiveSongs": 22,
-    "forcedBardMoves": 6,
-    "supportMoves": 20,
+    "actions": 443,
+    "selections": 33,
+    "merchantPushes": 23,
+    "bardSongs": 72,
+    "partnerSongs": 40,
+    "selectiveSongs": 27,
+    "forcedBardMoves": 5,
+    "supportMoves": 23,
     "chainPushes": 0,
-    "stoneMoves": 28,
+    "stoneMoves": 33,
     "mirrorMoves": 12,
     "reflections": 14,
     "heroReflections": 14,
@@ -483,7 +483,7 @@
     "cratesCrushed": 0,
     "simultaneousHeroReflections": 0,
     "hydraulicChanges": 2,
-    "frames": 1301
+    "frames": 1312
   },
   "failureRoutes": [
     {
@@ -858,7 +858,7 @@
       "verified": true
     }
   ],
-  "htmlSha256": "c6810f1b51c580613c04aad8c5753c9359e3daf13154b5dc044c822978e4a09b",
+  "htmlSha256": "11126ef760beb7e542ef9384b9e63d48cb5a1c7860b280374ed2dc827921cb54",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",

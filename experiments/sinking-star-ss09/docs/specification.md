@@ -1,4 +1,4 @@
-# SS09 — contrat de jeu 0.1.1
+# SS09 — contrat de jeu 0.1.2
 
 ## Personnages et grille
 

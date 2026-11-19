@@ -4,7 +4,7 @@ Le tutoriel L1 est original. L2–L8 reprennent des idées précises des pages N
 
 | Niveau | Titre | Référence et idée | Actions du témoin |
 |---|---|---|---:|
-| 1 | Le chantier des deux voix | Atelier original · préparer, chanter, pousser, refléter | 47 |
+| 1 | Le chantier des deux voix | Atelier original · préparer, chanter, pousser, refléter | 52 |
 | 2 | La sortie sans refrain | Adaptation de Heroes 3: Bard, Druid 14 · quitter deux poids sans les entraîner | 21 |
 | 3 | Les trois voix séparées | Adaptation de Heroes 3: Bard, Druid 15 · distribuer trois poids sur des boutons séparés | 63 |
 | 4 | Le contrechant du pont | Adaptation de Heroes 3: Bard, Druid 13 · un duel dans le passage obligatoire | 60 |
@@ -15,7 +15,7 @@ Le tutoriel L1 est original. L2–L8 reprennent des idées précises des pages N
 
 ## Rôle des mécanismes
 
-L1 enseigne douze événements réels : sélection, marche, poussée, chant, entraînement du partenaire, membre retenu, création et glissement d’appui, déplacement du miroir, reflet, presse et deux destinations. Le Marchand prépare le miroir puis pousse le Barde sur le pont sans déplacer les appuis. La v2 ajoute deux cases de sol au fond du bassin pour retenir les appuis. Trois cases du coin de la rive deviennent de l’eau afin que cette butée ne fournisse pas un accès gratuit aux axes du miroir ; un raccourci concret de 29 actions est conservé comme test de régression.
+L1 enseigne douze événements réels : sélection, marche, poussée, chant, entraînement du partenaire, membre retenu, création et glissement d’appui, déplacement du miroir, reflet, presse et deux destinations. La v3 déplace uniquement l’îlot isolé d’une case, de (9,8) à (9,11), tout en bas du bassin. La rive originale du premier îlot est entièrement restaurée et les deux cases de sol supplémentaires de la v2 sont retirées. Les deux appuis se placent en (7,11) et (8,11), retenus devant l’îlot. Les deux héros suivent ce passage puis utilisent le miroir. Les positions initiales des personnages et dispositifs ne changent pas.
 
 L2 fait sortir le Barde sans déranger deux poids. L3 répartit trois poids avec des butées et verrouillages distincts. L5 détache le Barde d’une caisse par reflet. L6 fait parcourir deux coudes à un appui, avec construction du pont après son passage. L7 exige de charger la seconde presse entre deux fermetures.
 
@@ -29,7 +29,7 @@ La porte coupe le rayon du premier miroir. Le Marchand déplace le miroir, charg
 
 ## Preuves et limites
 
-Les huit témoins réussissent sans refus ni décès : 438 actions, 31 sélections, 1 301 images. Ce sont des preuves de faisabilité, pas d’optimalité ni d’unicité.
+Les huit témoins réussissent sans refus ni décès : 443 actions, 33 sélections, 1 312 images. Ce sont des preuves de faisabilité, pas d’optimalité ni d’unicité.
 
 Les recherches sans chant épuisent 2 520 états en L2 et 306 en L3 ; celle sans poussée du Marchand épuise 2 712 états en L6. En L4, la recherche sans poussée épuise 15 404 états ; sans chant, 48 ; sans reflets, 24 ; sans presse ou sans construction d’appui, 96. Les audits supplémentaires prouvent que la porte d’entrée doit s’ouvrir et que chaque monstre doit quitter sa position initiale ou mourir. La séparation géométrique de l’îlot final exige son miroir.
 

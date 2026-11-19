@@ -178,7 +178,7 @@
   ],
   "tutorialCoverage": {
     "level": 1,
-    "actions": 47,
+    "actions": 52,
     "discoveries": [
       "select",
       "move",
@@ -196,9 +196,9 @@
   },
   "witnessCoverage": {
     "levels": 8,
-    "actions": 438,
-    "frames": 1301,
-    "selections": 31,
+    "actions": 443,
+    "frames": 1312,
+    "selections": 33,
     "allPixelsAndDurationsCompared": true
   },
   "defeatCoverage": [
