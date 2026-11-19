@@ -567,6 +567,13 @@ export function readNativeResolution(agent: {
     if (subject) subjects.push({ label: 'Piece moved by the previous control', box: subject });
   }
   if (situationCard && family === publicInputExplorationId) {
+    const exchangeActor = bounds(card?.exchangeActor), exchangePartner = bounds(card?.exchangePartner);
+    if (exchangeActor) subjects.push({ label: 'Piece initiating the exchange', box: exchangeActor });
+    if (exchangePartner) subjects.push({ label: 'Piece that would take its place', box: exchangePartner });
+    for (const candidate of Array.isArray(card?.exchangeTargets) ? card.exchangeTargets : []) {
+      const target = bounds(candidate);
+      if (target) subjects.push({ label: 'Target used by the exchange plan', box: target });
+    }
     const region = bounds(card?.addressedRegion);
     if (region) subjects.push({ label: 'Visible region tested by the click', box: region });
     const workspace = bounds(card?.workspace), example = bounds(card?.example);
