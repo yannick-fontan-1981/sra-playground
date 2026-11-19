@@ -1,0 +1,67 @@
+{
+  "ACTION1/ACTION2": {
+    "games": 17,
+    "reversingGames": 5,
+    "probability": 0.4108
+  },
+  "ACTION1/ACTION3": {
+    "games": 29,
+    "reversingGames": 1,
+    "probability": 0.2558
+  },
+  "ACTION2/ACTION1": {
+    "games": 6,
+    "reversingGames": 3,
+    "probability": 0.5139
+  },
+  "ACTION2/ACTION7": {
+    "games": 6,
+    "reversingGames": 2,
+    "probability": 0.4
+  },
+  "ACTION3/ACTION4": {
+    "games": 12,
+    "reversingGames": 5,
+    "probability": 0.4296
+  },
+  "ACTION4/ACTION3": {
+    "games": 4,
+    "reversingGames": 2,
+    "probability": 0.5
+  },
+  "ACTION4/ACTION5": {
+    "games": 25,
+    "reversingGames": 1,
+    "probability": 0.2891
+  },
+  "ACTION4/ACTION7": {
+    "games": 3,
+    "reversingGames": 1,
+    "probability": 0.3889
+  },
+  "ACTION6/ACTION1": {
+    "games": 8,
+    "reversingGames": 1,
+    "probability": 0.3375
+  },
+  "ACTION6/ACTION3": {
+    "games": 10,
+    "reversingGames": 1,
+    "probability": 0.3583
+  },
+  "ACTION6/ACTION5": {
+    "games": 6,
+    "reversingGames": 1,
+    "probability": 0.3472
+  },
+  "ACTION6/ACTION6": {
+    "games": 56,
+    "reversingGames": 6,
+    "probability": 0.1803
+  },
+  "ACTION6/ACTION7": {
+    "games": 7,
+    "reversingGames": 4,
+    "probability": 0.4342
+  }
+}

@@ -91,6 +91,12 @@ async function run(code, games) {
   const trialActions = {},
     seen = new Set([initial]);
   let levelCoverage;
+  const preparation = new Map();
+  const collectPreparation = (snapshot) => {
+    const event = snapshot.trace?.findLast((e) => e.kind === 'sic_preparation_outcome');
+    if (event && !preparation.has(event.revision))
+      preparation.set(event.revision, { ...event, actionIndex: issued });
+  };
   function emptyCoverage() {
     return {
       images: new Set([hash(board.frame)]),
@@ -139,7 +145,7 @@ async function run(code, games) {
     parallelWorkers: 4,
     recoveryConfiguration: () => ({ ...defaultRecoveryPack, solver: 'sic-fallback' }),
     canDispatch: () => true,
-    onState() {},
+    onState: collectPreparation,
     getObservation: observation,
     resetLevel: async () => {
       resets++;
@@ -243,6 +249,55 @@ async function run(code, games) {
       relational,
       trialActions,
       trajectory: trajectory.digest('hex'),
+      preparation: [...preparation.values()].map(
+        ({
+          epoch,
+          phase,
+          hypothesis,
+          result,
+          longer,
+          actor,
+          from,
+          to,
+          localPath,
+          revision,
+          refs,
+          trainedSite,
+          testSite,
+          predicted,
+          actual,
+          bareEffect,
+          enabledMotion,
+          strictMatch,
+          actionIndex,
+          precondition,
+          capability,
+          predictedGap,
+        }) => ({
+          level: (epoch ?? 1) + start - 1,
+          phase,
+          hypothesis,
+          result,
+          longer,
+          actor,
+          from,
+          to,
+          localPath,
+          revision,
+          refs,
+          trainedSite,
+          testSite,
+          predicted,
+          actual,
+          bareEffect,
+          enabledMotion,
+          strictMatch,
+          actionIndex,
+          precondition,
+          capability,
+          predictedGap,
+        })
+      ),
       ...(source ? { steps } : {}),
     };
   } finally {

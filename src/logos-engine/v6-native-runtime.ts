@@ -157,6 +157,8 @@ import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/recepti
 import { createSicVerifyMarkerPlacement } from '../sic/marker-coverage.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
 import { createCompositionTrials, compositionFamily, compositionPrior, cycleGroup, exhaustedGroup } from '../sic/test-observed-compositions.ts';
+import { createPreparedEffects, preparedEffectsId } from '../sic/test-prepared-effects.ts';
+import { preparationReturns } from '../sic/preparation-experiments.ts';
 import { decidePlanContinuation } from '../sic/plan-step.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
@@ -626,7 +628,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     const obligations = (await Promise.all(this.families.map(family => family.preservationObligations?.(this.observation!, this.current!.frame_rows) ?? []))).flat();
     let selected = await this.selectAdmittedFamily(execution, inputs);
     if (this.withdrawPrimaryFamily && !this.withdrawnPrimaryFamily && selected?.proposal.status === 'proposed'
-      && selected.family.id !== publicInputExplorationId && selected.family.id !== compositionFamily) {
+      && selected.family.id !== publicInputExplorationId && selected.family.id !== compositionFamily && selected.family.id !== preparedEffectsId) {
       const family = selected.family.id;
       const write: NativeStoreWrite = { id: `family_activation:${family}`, kind: 'family_activation', family, value: { enabled: false } };
       const digest = await this.knowledge!.executionDigest([write]);
@@ -1682,6 +1684,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       // Preserve the former detached-record validation, but release that copy
       // immediately: this collection was read only for its cumulative count.
       freeze(structuredClone(record));
+      if (selectedFamily.id === preparedEffectsId && record?.events.length) this.note(record.events[0] as R);
       if (prefix.sicPlan?.authority === 'sicOnly' && typeof record?.reviewEvidence === 'string') {
         recordedEffects.set(transition.after.observation_ref, record.reviewEvidence);
       }
@@ -2743,16 +2746,16 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const now = options.now ?? (() => performance.now());
     const testCompositions = recovery.solver === 'sic-fallback';
-    const groups = testCompositions ? [{ id: cycleGroup, families: [compositionFamily] }, ...standalonePlanningGroups,
-      { id: exhaustedGroup, families: [compositionFamily] }] : standalonePlanningGroups;
+    const groups = testCompositions ? [{ id: cycleGroup, families: [preparedEffectsId,compositionFamily] }, ...standalonePlanningGroups,
+      { id: exhaustedGroup, families: [preparedEffectsId,compositionFamily] }] : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 178 : 177,
-      groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior } : {}) };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 179 : 177,
+      groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior, preparationReturns } : {}) };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      ...(testCompositions ? [createCompositionTrials()] : []),
+      ...(testCompositions ? [createCompositionTrials(), createPreparedEffects()] : []),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
