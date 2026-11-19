@@ -1,6 +1,6 @@
-# Conception et validation des huit salles — HTML v4
+# Conception et validation des huit salles — HTML v5
 
-Le Marchand pousse une seule pièce ; le Guerrier pousse une file. Les deux peuvent activer les miroirs. Le changement de personnage ne fait pas avancer le monde et les deux destinations doivent être occupées ensemble.
+Les niveaux 1 à 7 conservent le duo Marchand + Guerrier et leurs deux destinations à occuper ensemble. Le Marchand pousse une seule pièce ; le Guerrier pousse une file. Les deux peuvent activer les miroirs. Le changement de personnage ne fait pas avancer le monde. Le niveau 8 se joue avec le seul Guerrier rouge, une seule cible et aucun personnage caché.
 
 | Niveau | Actions du témoin | Décision centrale |
 |---|---:|---|
@@ -11,29 +11,44 @@ Le Marchand pousse une seule pièce ; le Guerrier pousse une file. Les deux peuv
 | 5 | 43 | Ancien niveau 8 : préparer deux ateliers, actionner deux presses et réunir caisse et héros sur trois boutons. |
 | 6 | 37 | Régler deux alignements de monstres puis construire le passage final avec deux caisses. |
 | 7 | 68 | Construire un contournement pour pousser le miroir par son dos, puis utiliser la presse et le combat. |
-| 8 | 111 | Préparer deux horloges avant de quitter les ateliers, ancrer le pont vert et alterner les traversées violettes pour les deux héros. |
+| 8 | 61 | Verrouiller le circuit vert avec le second miroir de droite, puis alterner les plateformes violettes depuis les appuis verts. |
 
-Les témoins prouvent la solvabilité. Ils ne sont pas annoncés minimaux ; leur longueur ne mesure pas directement la difficulté.
+Les témoins prouvent la solvabilité. Ils ne sont pas annoncés minimaux ; leur longueur ne mesure pas directement la difficulté. Les niveaux 1 à 7 sont inchangés par rapport à l’HTML v4.
 
-## Nouveau niveau 8 : Les deux horloges
+## Nouveau niveau 8 : Le verrou vert
 
-Le niveau adapte Heroes and Mirrors 20 (`mirror_clocks`). Deux ateliers préparent des effets différents. Le vert doit s’activer au premier reflet et rester actif ; le violet doit rester éteint lors de ce premier reflet puis alterner. Le pont d’entrée est de polarité inverse : il disparaît quand la grande passerelle apparaît.
+Le niveau adapte le principe de Heroes and Mirrors 20 (`mirror_clocks`) avec un Guerrier, une cible, deux caisses et trois miroirs, dont deux dans la salle de droite. La traversée comporte sept portes-plateformes : quatre vertes servant d’appuis stables et trois violettes de polarités alternées. Il n’y a aucune porte-presse, aucun dédoublement ni délai imposé au premier reflet.
 
-Dans SS06, le Marchand place le miroir gauche. Le Guerrier libère une file miroir + caisse dans un passage étroit et aligne sa caisse. Les deux héros doivent rejoindre les refuges avant l’activation. Le premier reflet déplace les caisses et déclenche deux presses qui décalent les miroirs : le miroir vert quitte l’axe de sa caisse, tandis que le miroir violet établit son va-et-vient. Ces déplacements remplacent le dédoublement et le bloqueur de la source par des mécanismes déjà visibles dans SS06.
+Le miroir de gauche pilote la caisse violette. Le Guerrier commence par remonter ce miroir d’une case pour aligner la caisse et le bouton. Dans la salle de droite, il pousse la seconde caisse dans le rayon du miroir principal. Le premier reflet active alors les deux circuits.
 
-La traversée comprend quinze portes-plateformes : onze liées au vert, dont l’entrée inverse, et quatre au violet, de polarités alternées. Les couches superposées de la source sont adaptées en segments successifs dans une grille 2D. Les deux héros doivent quitter les plateformes violettes avant chaque bascule ; être sur une plateforme qui se rétracte provoque une défaite.
+La préparation décisive intervient **après ce premier reflet** : le Guerrier pousse le second miroir de droite devant le rayon de retour de la caisse verte. La caisse reste ainsi sur son bouton pendant les reflets suivants, tandis que la caisse violette continue son va-et-vient. Il s’agit de la règle générale « un autre miroir arrête le rayon » ; le moteur ne contient aucune exception propre à cette salle.
 
-Les cinq reflets du témoin donnent exactement :
+Les coordonnées suivantes sont celles de la carte source, avant centrage dans la grille logique :
 
-| Reflet | Vert | Violet |
-|---|---|---|
-| 1 | Actif | Inactif |
-| 2 | Actif | Actif |
-| 3 | Actif | Inactif |
-| 4 | Actif | Actif |
-| 5 | Actif | Inactif |
+| Élément | Position et rôle |
+|---|---|
+| Miroir gauche NE | Départ `(4,7)`, poussé vers `(4,6)` pour aligner le violet. |
+| Miroir principal droit NE | `(12,7)`, avec murs à l’ouest et au sud ; ces murs empêchent d’accéder aux positions nécessaires pour le pousser hors de son axe. |
+| Second miroir droit SE | Départ `(15,4)`, poussé vers `(12,4)` après le premier reflet pour couper le rayon nord du miroir principal. |
+| Bouton vert | `(12,2)`, maintenu par la caisse isolée du rayon. |
+| Bouton violet | `(4,2)`, occupé puis libéré à chaque reflet utile. |
+| Traversée | Ligne `y=13` : plateformes vertes en `x=4,6,8,10`, violettes en `x=5,7,9`. |
 
-La revue indépendante confirme que chaque plateforme violette est un point de coupure du chemin de marche, même si toutes les autres plateformes sont supposées présentes. Un violet fixé actif ou inactif ne donne aucun chemin complet. Un pont direct vers l’îlot final demanderait au moins trois appuis, contre deux caisses disponibles. Cela exclut les raccourcis directs par marche ou construction, sans prétendre énumérer toutes les dispositions possibles des miroirs. Les résultats et une route de noyade de 72 actions sont conservés dans `reference/level8-clock-review.json`.
+Les trois reflets du témoin produisent :
+
+| Reflet | Action du témoin | Vert | Violet | Conséquence |
+|---|---:|---|---|---|
+| 1 | 18 | Actif | Actif | Les deux caisses atteignent leurs boutons ; le bloqueur peut ensuite être placé. |
+| 2 | 53 | Actif | Inactif | Le Guerrier reste sur un appui vert et ouvre le passage violet central. |
+| 3 | 56 | Actif | Actif | Le dernier passage violet apparaît ; le Guerrier rejoint la cible. |
+
+Le témoin se termine à l’action 61 sans refus ni mort et n’utilise aucune sélection. Le vert suit donc `1 → 1 → 1`, le violet `1 → 0 → 1`. Le héros n’est pas téléporté dans ce parcours : les reflets commandent les caisses à distance.
+
+### Portée des vérifications
+
+Le témoin complet établit la solvabilité de cette carte avec les règles SS06. La revue indépendante est conservée dans `reference/level8-clock-review.json`. Le contrefactuel retire le miroir bloqueur de l’état atteint après l’action 52, puis active le deuxième reflet : le vert se désactive et le Guerrier tombe lorsque son appui se rétracte. Ce résultat vérifie l’effet du verrou dans cet état précis. Il ne prouve pas que toutes les stratégies alternatives sont impossibles. Aucune preuve globale d’unicité de solution, de nécessité de chaque objet ou d’absence de raccourci n’est revendiquée pour L8.
+
+Les constats de la précédente carte « Les deux horloges » ne sont pas transposables à cette nouvelle géométrie. En particulier, les nombres de plateformes, les délais de bascule, les déplacements de miroirs par presse et les trajets des deux héros de l’HTML v4 ne décrivent plus L8.
 
 ## Tutoriel et nécessité
 
@@ -43,12 +58,14 @@ Les autres vérifications exhaustives conservées concernent le déplacement du 
 
 ## Couverture effective
 
-483 actions, 29 sélections, 1 480 images, 24 poussées en file, 38 mouvements de miroir, 31 activations de reflet, 15 appuis immergés permanents créés, 7 poussées de presse et 8 monstres éliminés. Le niveau 8 ajoute quinze plateformes hydrauliques contrôlées par deux circuits.
+Les huit parcours totalisent **433 actions, 17 sélections et 1 338 images** : 22 poussées en file, 37 mouvements de miroir, 29 activations de reflet, 15 appuis immergés permanents créés, 5 poussées de presse et 8 monstres éliminés. Le niveau 8 contient sept plateformes hydrauliques contrôlées par deux circuits et aucune porte-presse ; son témoin utilise 61 actions et 192 images.
 
-Les 51 tests du moteur couvrent notamment les polarités et circuits AND, le retrait d’un support, la transformation d’une caisse en appui, l’activation simultanée d’un pont d’arrivée, les cascades et Undo. Les 14 contrôles de l’HTML comparent les pixels et durées des huit parcours et trois routes de défaite : deux en L6, une en L8. Les terminaux apparaissent après la dernière image et Undo interrompt correctement l’animation.
+Les **55 tests du moteur** couvrent notamment les polarités et circuits AND, le retrait d’un support, la transformation d’une caisse en appui, l’activation simultanée d’un pont d’arrivée, les cascades et Undo. Les quatre tests ajoutés pour v5 couvrent le contrat solo explicite, la poussée de file et la victoire du seul Guerrier, la sélection sans tour ni historique, ainsi que la progression duo → solo et son annulation. Les empreintes complètes d’observations des huit anciennes cartes sont identiques sous le nouveau moteur, ce qui vérifie la conservation des comportements duo.
 
-La validation visuelle exécutable est réalisée sous Happy DOM avec un buffer canvas. Le navigateur Chromium natif de cet exécuteur n’a pas pu démarrer ; aucun essai navigateur natif n’est revendiqué. Les images du nouveau niveau ont été inspectées séparément.
+Les **15 contrôles de l’HTML** vérifient les pixels, durées, transitions et routes de défaite. Les terminaux apparaissent après la dernière image et Undo interrompt correctement l’animation. La validation visuelle exécutable est réalisée sous Happy DOM avec un buffer canvas. Le navigateur Chromium natif de cet exécuteur n’a pas pu démarrer ; aucun essai navigateur natif n’est revendiqué.
 
 ## Historique de la réorganisation
 
-L’ancien niveau 8 devient le niveau 5 : seul son identifiant ordinal change, avec l’image de transition automatique propre à sa nouvelle place. L’ancien niveau 5 est retiré de la campagne. Sa dernière carte et les vérifications v3 sont conservées dans `reference/history/`. Les niveaux 1, 2, 3, 4, 6 et 7 restent identiques.
+En v4, l’ancien niveau 8 est devenu le niveau 5 : seul son identifiant ordinal a changé, avec l’image de transition automatique propre à sa nouvelle place. L’ancien niveau 5 a été retiré de la campagne ; sa dernière carte et les vérifications v3 sont conservées dans `reference/history/`.
+
+La révision v5 remplace uniquement le niveau 8. Les niveaux 1 à 7, leurs règles et leurs témoins restent inchangés. Le nouveau mode solo est explicite dans la spécification de L8 ; le mode duo reste la valeur par défaut du moteur.

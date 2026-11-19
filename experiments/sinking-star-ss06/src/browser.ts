@@ -34,6 +34,9 @@ function paint(frame: number[][]): void {
 type HeroKind='merchant'|'warrior';
 type VisibleHero=Point & {kind:HeroKind;selected:boolean};
 type VisiblePiece=Point & {kind:'stone'|'monster'|'support'|'mirror'};
+// Keep the public, living roster for each room: a death animation must not
+// turn a duo room into a solo room merely because one glyph has disappeared.
+const roomRosters=new Map<number,HeroKind[]>();
 const sameCell=(a:Point|undefined,b:Point|undefined):boolean=>!!a&&!!b&&a.x===b.x&&a.y===b.y;
 /** All tutorial tracking and role selection are derived from the public image. */
 function visibleHeroes(frame:number[][]):VisibleHero[] {
@@ -135,12 +138,29 @@ function updateUI():void {
   const terminal=observation.state!=='NOT_FINISHED';
   $('victory').hidden=observation.state!=='WIN'||busy;
   $('defeat').hidden=observation.state!=='GAME_OVER'||busy;
-  const selected=visibleHeroes(observation.frame).find(h=>h.selected)?.kind;
+  const heroes=visibleHeroes(observation.frame);
+  if(observation.state==='NOT_FINISHED'&&heroes.length)roomRosters.set(observation.level,heroes.map(h=>h.kind));
+  const roster=roomRosters.get(observation.level)??heroes.map(h=>h.kind);
+  const solo=roster.length===1;
+  const selected=heroes.find(h=>h.selected)?.kind;
   for(const b of document.querySelectorAll<HTMLButtonElement>('[data-action],[data-hero]')){
-    b.disabled=busy||terminal;
-    if(b.dataset.hero)b.setAttribute('aria-pressed',String(b.dataset.hero===selected));
+    const absent=!!b.dataset.hero&&!roster.includes(b.dataset.hero as HeroKind);
+    b.disabled=busy||terminal||absent;
+    if(b.dataset.hero){b.hidden=absent;b.setAttribute('aria-pressed',String(b.dataset.hero===selected));}
   }
-  $('selected-role').textContent=selected==='warrior'?'Guerrier sélectionné · pousse une file':selected==='merchant'?'Marchand sélectionné · pousse un objet':'Les deux personnages coopèrent';
+  $('hero-switch').hidden=solo;
+  for(const el of document.querySelectorAll<HTMLElement>('[data-duo-only]'))el.hidden=solo;
+  $('role-rules').classList.toggle('solo',solo);
+  $('campaign-subtitle').textContent=solo?'Guerrier rouge · Une destination et des passages à construire.':'Marchand + Guerrier · Deux forces, deux destinations, un passage à construire.';
+  $('level-objective').textContent=solo?'Amène le Guerrier rouge sur l’unique contour jaune.':'Fais arriver le Marchand et le Guerrier sur les deux contours jaunes.';
+  $('goal-label').textContent=solo?'Destination · une à atteindre':'Destination · deux à occuper';
+  $('roles-title').textContent=solo?'La force du Guerrier':'La même flèche, deux forces';
+  $('roles-help').textContent=solo?'Le Guerrier active tous les miroirs avec Espace ou X. Prépare ses appuis et la position des objets avant de déclencher le reflet.':'Les deux peuvent activer les miroirs avec Espace. Changer de personnage ne consomme pas de tour : prépare leurs positions, puis déclenche le mécanisme au bon moment.';
+  $('goal-rule').textContent=solo?'Le Guerrier doit rejoindre l’unique contour jaune pour terminer la salle.':'Le premier héros arrivé ne disparaît pas. Les deux contours jaunes doivent être occupés simultanément pour terminer la salle.';
+  $('defeat-title').textContent=solo?'Le Guerrier a été perdu':'Un personnage a été perdu';
+  $('defeat-message').textContent=solo?'Le Guerrier doit atteindre sa destination. Annule pour essayer un autre placement.':'Les deux héros doivent arriver. Annule pour essayer un autre placement.';
+  $('selected-role').textContent=selected==='warrior'?'Guerrier sélectionné · pousse une file':selected==='merchant'?'Marchand sélectionné · pousse un objet':solo?'Guerrier rouge · pousse une file':'Les deux personnages coopèrent';
+  canvas.setAttribute('aria-label',`SS06. Flèches : déplacer ou pousser. ${solo?'Guerrier rouge, un seul personnage.':'Cliquer un personnage ou Tab : changer de personnage. 1 : Marchand. 2 : Guerrier.'} Espace ou X : activer les miroirs. Z : annuler. R : recommencer. Maj Tab : quitter la grille.`);
   $<HTMLButtonElement>('undo').disabled=!observation.canUndo;
   $('tutorial').hidden=observation.level!==1;
   const info=LEVEL_INFO[observation.level-1]!;
@@ -175,14 +195,15 @@ function act(action:number,data?:Point):void {
   observeLesson(before,next,action);
   const selected=visibleHeroes(before.frame).find(h=>h.selected),final=visibleHeroes(actionFrame(before,next)).find(h=>h.kind===selected?.kind);
   const changed=selected&&!sameCell(selected,final);
-  $('feedback').textContent=next.state==='GAME_OVER'?'Un personnage a été perdu. Z annule toute la séquence ; R recommence la salle.'
-    :next.levelsCompleted>before.levelsCompleted?'Les deux destinations sont occupées. Salle terminée !'
+  const solo=visibleHeroes(before.frame).length===1;
+  $('feedback').textContent=next.state==='GAME_OVER'?`${solo?'Le Guerrier':'Un personnage'} a été perdu. Z annule toute la séquence ; R recommence la salle.`
+    :next.levelsCompleted>before.levelsCompleted?solo?'La destination est atteinte. Salle terminée !':'Les deux destinations sont occupées. Salle terminée !'
     :action===6?'Personnage sélectionné. Le décor et les monstres n’avancent pas.'
     :reflected(before,next,action)?'Reflet simultané : vérifie la nouvelle position de chaque personnage.'
     :action===5?'Reflet bloqué ou aucun occupant devant les faces blanches. Vérifie les arrivées et tous les miroirs.'
     :pushLength(before,next,action)>=2?'Le Guerrier pousse toute la file d’un seul pas.'
     :pushLength(before,next,action)===1?'Objet poussé d’une case.'
-    :!changed?'Ce déplacement est bloqué. Change de côté ou de personnage.':'';
+    :!changed?solo?'Ce déplacement est bloqué. Change de côté.':'Ce déplacement est bloqué. Change de côté ou de personnage.':'';
   void present(next);
 }
 function selectHero(kind?:HeroKind):void {

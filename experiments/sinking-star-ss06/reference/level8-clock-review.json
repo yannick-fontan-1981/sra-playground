@@ -1,469 +1,215 @@
 {
-  "specSha256": "450011b441a5e0843bca4c3b8d54ab87f1b679c35c8abec021034ace18f438b4",
-  "witness": {
-    "actions": 111,
-    "solved": true,
-    "metrics": {
-      "actions": 111,
-      "selections": 12,
-      "merchantPushes": 1,
-      "warriorPushes": 8,
-      "chainPushes": 2,
-      "stoneMoves": 14,
-      "mirrorMoves": 5,
-      "reflections": 5,
-      "heroReflections": 0,
-      "pistonPushes": 2,
-      "platformsCreated": 0,
-      "monstersRemoved": 0,
-      "blocked": 0,
-      "deaths": 0
-    }
+  "review": "Independent candidate L8 execution and local mechanism review",
+  "result": "passed",
+  "sourceMapOffset": {
+    "x": 0,
+    "y": 2
   },
-  "clockPattern": [
+  "completed": true,
+  "actions": 61,
+  "selections": 0,
+  "heroCount": 1,
+  "goalCount": 1,
+  "platforms": {
+    "green": 4,
+    "violet": 3,
+    "total": 7
+  },
+  "presses": 0,
+  "reflections": [
     {
-      "turn": 63,
+      "turn": 18,
       "green": true,
-      "violet": false,
-      "heroes": [
+      "violet": true,
+      "hero": {
+        "x": 17,
+        "y": 8
+      },
+      "mirrors": [
         {
-          "kind": "merchant",
           "at": {
-            "x": 3,
-            "y": 13
-          }
-        },
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 3,
-            "y": 14
-          }
-        }
-      ],
-      "pistonMoves": [
-        {
-          "actor": "mirror",
-          "from": {
-            "x": 3,
-            "y": 8
-          },
-          "to": {
             "x": 4,
-            "y": 8
-          }
+            "y": 6
+          },
+          "facing": "NE"
         },
         {
-          "actor": "mirror",
-          "from": {
-            "x": 13,
-            "y": 8
+          "at": {
+            "x": 12,
+            "y": 7
           },
-          "to": {
-            "x": 14,
-            "y": 8
-          }
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 4
+          },
+          "facing": "SE"
         }
       ]
     },
     {
-      "turn": 69,
+      "turn": 53,
       "green": true,
-      "violet": true,
-      "heroes": [
+      "violet": false,
+      "hero": {
+        "x": 6,
+        "y": 13
+      },
+      "mirrors": [
         {
-          "kind": "merchant",
           "at": {
             "x": 4,
-            "y": 14
-          }
+            "y": 6
+          },
+          "facing": "NE"
         },
         {
-          "kind": "warrior",
           "at": {
-            "x": 5,
-            "y": 14
-          }
-        }
-      ],
-      "pistonMoves": []
-    },
-    {
-      "turn": 78,
-      "green": true,
-      "violet": false,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 7,
-            "y": 14
-          }
+            "x": 12,
+            "y": 7
+          },
+          "facing": "NE"
         },
         {
-          "kind": "warrior",
           "at": {
-            "x": 8,
-            "y": 14
-          }
+            "x": 12,
+            "y": 4
+          },
+          "facing": "SE"
         }
-      ],
-      "pistonMoves": []
+      ]
     },
     {
-      "turn": 87,
+      "turn": 56,
       "green": true,
       "violet": true,
-      "heroes": [
+      "hero": {
+        "x": 8,
+        "y": 13
+      },
+      "mirrors": [
         {
-          "kind": "merchant",
           "at": {
-            "x": 10,
-            "y": 14
-          }
+            "x": 4,
+            "y": 6
+          },
+          "facing": "NE"
         },
         {
-          "kind": "warrior",
           "at": {
-            "x": 11,
-            "y": 14
-          }
-        }
-      ],
-      "pistonMoves": []
-    },
-    {
-      "turn": 96,
-      "green": true,
-      "violet": false,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 13,
-            "y": 14
-          }
+            "x": 12,
+            "y": 7
+          },
+          "facing": "NE"
         },
         {
-          "kind": "warrior",
           "at": {
-            "x": 14,
-            "y": 14
-          }
+            "x": 12,
+            "y": 4
+          },
+          "facing": "SE"
         }
-      ],
-      "pistonMoves": []
+      ]
     }
   ],
-  "firstReflectionReadyHeroes": true,
-  "firstReflectionMovesTwoMirrors": true,
-  "staticRouteAnalysis": {
-    "method": "Optimistic four-neighbor graph: fixed floor and all potential platform cells; ignores solid actors and gates. This proves each violet platform is a cut vertex for walking, not that every possible reflected solution uses the same witness.",
-    "violetCutVertices": [
-      {
-        "at": {
-          "x": 6,
-          "y": 14
+  "greenAtReflections": "111",
+  "violetAtReflections": "101",
+  "primaryMirror": {
+    "source": {
+      "x": 12,
+      "y": 7
+    },
+    "facing": "NE",
+    "unchangedEveryTurn": true,
+    "immobility": "West/south destinations are walls; east/north pushes require standing on those same walls."
+  },
+  "secondaryMirror": {
+    "initialSource": {
+      "x": 15,
+      "y": 4
+    },
+    "finalSource": {
+      "x": 12,
+      "y": 4
+    },
+    "facing": "SE",
+    "blocksGreenReturn": true,
+    "greenButtonIsBehindBlackBack": true
+  },
+  "localWithoutSecondary": {
+    "preparedAtTurn": 27,
+    "greenReleasesOnNextReflection": true,
+    "greenCrateReturnsTo": {
+      "x": 17,
+      "y": 7
+    },
+    "withoutSecondaryAtTurn52ReflectionKillsWarrior": true,
+    "proofScope": "One-object removal from the prepared state, not an exhaustive global solver."
+  },
+  "shortcuts": {
+    "ordinaryBridge": {
+      "optimisticMinimumWaterCells": 3,
+      "stonesAvailable": 2,
+      "insufficient": true,
+      "exampleMinimumWaterCells": [
+        {
+          "x": 13,
+          "y": 10
         },
-        "bothGoalsReachable": false
+        {
+          "x": 13,
+          "y": 11
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "proofScope": "Terrain graph with movable collisions ignored and hydraulic support excluded."
+    },
+    "fixedHydraulicPhases": [
+      {
+        "green": false,
+        "violet": false,
+        "minimumMissingCells": 3,
+        "walkOnlyRoute": false
       },
       {
-        "at": {
-          "x": 9,
-          "y": 14
-        },
-        "bothGoalsReachable": false
+        "green": false,
+        "violet": true,
+        "minimumMissingCells": 3,
+        "walkOnlyRoute": false
       },
-      {
-        "at": {
-          "x": 12,
-          "y": 14
-        },
-        "bothGoalsReachable": false
-      },
-      {
-        "at": {
-          "x": 15,
-          "y": 14
-        },
-        "bothGoalsReachable": false
-      }
-    ],
-    "fixedClockConnectivity": [
       {
         "green": true,
         "violet": false,
-        "bothGoalsReachable": false
+        "minimumMissingCells": 2,
+        "walkOnlyRoute": false
       },
       {
         "green": true,
         "violet": true,
-        "bothGoalsReachable": false
+        "minimumMissingCells": 1,
+        "walkOnlyRoute": false
       }
     ],
-    "crateBypassLowerBound": {
-      "method": "Minimum count of water cells from any workshop floor to goals while excluding hydraulic platform cells. Actors and gates ignored.",
-      "waterCellsRequired": [
-        3,
-        3
-      ],
-      "initialCrates": 2
-    }
+    "proofScope": "Rules out direct walking in any fixed circuit phase and a two-stone ordinary bridge. Does not claim global uniqueness or optimality."
   },
-  "fatalRoute": {
-    "cause": "Retrait de la plateforme violette sous le Guerrier",
-    "commands": "UCURRDDUULLDDDDRRRRRRDRUCDDLLDDDDRRUCDDLLLLLLLLLLLLLLLLLDDDDRRXRRCDRXCRX",
-    "actions": [
-      {
-        "id": 1
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 36,
-          "y": 21
-        }
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 12,
-          "y": 30
-        }
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 57,
-          "y": 30
-        }
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 12,
-          "y": 45
-        }
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 18,
-          "y": 48
-        }
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      }
-    ],
-    "commandCount": 72,
-    "ending": "GAME_OVER",
-    "deaths": 1,
-    "blocked": 0,
-    "undoRestores": true,
-    "phaseKinds": [
-      "reflect",
-      "gate",
-      "platform"
-    ]
-  },
-  "limits": [
-    "No global exhaustive search of all moving-mirror arrangements performed.",
-    "Cut-vertex and water-budget analysis establishes no direct walking/crate bridge shortcut; it does not rule out every creative reflected route."
-  ]
+  "failure": {
+    "file": "tests/failures.json",
+    "actions": 52,
+    "source": {
+      "x": 5,
+      "y": 13
+    },
+    "centered": {
+      "x": 5,
+      "y": 15
+    },
+    "greenPreserved": true,
+    "violetReleased": true,
+    "undoRestoredEntireObservation": true
+  }
 }

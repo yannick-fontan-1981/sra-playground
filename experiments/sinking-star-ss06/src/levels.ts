@@ -559,42 +559,48 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
   },
   {
     "id": "ss06-08",
-    "title": "Les deux horloges",
+    "title": "Le verrou vert",
+    "mode": "solo-warrior",
     "facing": "N",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~",
-      "~~~o~~~~~~~~~.~~~~~~",
-      "~~~~.~~~~~###~######",
-      "###~~######........#",
-      "#........##W#.#....#",
-      "#........##.#o#....#",
+      "~~~~.~~~~~~~.~~~~~~~",
+      "####~#######~#######",
       "#........##........#",
-      "#........##........#",
-      "#..M.....##........#",
+      "#........##.~......#",
+      "#.......o##.~......#",
+      "#........###.......#",
+      "#...W....##.#....o.#",
       "#..................#",
       "~.~~~~~~~~~~~~~~~~~~",
       "~.~~~~~~~~~~~~~~~~~~",
-      "~.~.~~~~~~~~~~~~~~~~",
-      "~.~.~~~~~~~~~~~~~~.g",
-      "~~~~~~~~~~~~~~~~~~..",
-      "~~~~~~~~~~~~~~~~~~.g",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~...~~~~~~~..g.~~~~~",
+      "~~~~~~~~~~~....~~~~~",
       "~~~~~~~~~~~~~~~~~~~~"
     ],
     "mirrors": [
       {
         "at": {
-          "x": 3,
-          "y": 8
+          "x": 4,
+          "y": 7
         },
         "facing": "NE"
       },
       {
         "at": {
-          "x": 13,
-          "y": 5
+          "x": 12,
+          "y": 7
         },
         "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 4
+        },
+        "facing": "SE"
       }
     ],
     "circuits": [
@@ -603,7 +609,7 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
         "color": 14,
         "buttons": [
           {
-            "x": 13,
+            "x": 12,
             "y": 2
           }
         ]
@@ -614,134 +620,17 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
         "buttons": [
           {
             "x": 4,
-            "y": 3
+            "y": 2
           }
         ]
       }
     ],
-    "gates": [
-      {
-        "at": {
-          "x": 3,
-          "y": 7
-        },
-        "circuit": "ancrage",
-        "direction": "E",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 13,
-          "y": 7
-        },
-        "circuit": "ancrage",
-        "direction": "E",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 3,
-          "y": 13
-        },
-        "circuit": "alternance",
-        "direction": "N",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 3,
-          "y": 14
-        },
-        "circuit": "alternance",
-        "direction": "S",
-        "closedWhen": "pressed"
-      }
-    ],
+    "gates": [],
     "platforms": [
       {
         "at": {
-          "x": 2,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "released"
-      },
-      {
-        "at": {
           "x": 4,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 5,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 7,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 8,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 10,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 11,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 13,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 14,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 16,
-          "y": 14
-        },
-        "circuit": "ancrage",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 17,
-          "y": 14
+          "y": 13
         },
         "circuit": "ancrage",
         "activeWhen": "pressed"
@@ -749,34 +638,50 @@ export const SS06_LEVELS:readonly LevelSpec[]=[
       {
         "at": {
           "x": 6,
-          "y": 14
+          "y": 13
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 13
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 13
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 13
         },
         "circuit": "alternance",
         "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 13
+        },
+        "circuit": "alternance",
+        "activeWhen": "released"
       },
       {
         "at": {
           "x": 9,
-          "y": 14
-        },
-        "circuit": "alternance",
-        "activeWhen": "released"
-      },
-      {
-        "at": {
-          "x": 12,
-          "y": 14
+          "y": 13
         },
         "circuit": "alternance",
         "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 15,
-          "y": 14
-        },
-        "circuit": "alternance",
-        "activeWhen": "released"
       }
     ]
   }

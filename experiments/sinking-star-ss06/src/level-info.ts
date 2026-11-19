@@ -43,9 +43,9 @@ export const LEVEL_INFO=[
   },
   {
     "puzzle": 20,
-    "label": "Adaptation · Heroes and Mirrors 20 : verrou vert, retard du premier reflet et passerelle à alternance violette.",
+    "label": "Adaptation · Heroes and Mirrors 20 : deux miroirs verrouillent le circuit vert, puis le Guerrier alterne les passages violets.",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-20",
-    "piston": true,
+    "piston": false,
     "platform": true
   }
 ] as const;

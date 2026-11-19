@@ -1,4 +1,4 @@
-/** Deterministic two-hero puzzles. No browser, solver, agent or network dependency. */
+/** Deterministic puzzles for a duo or one Warrior. No browser, solver, agent or network dependency. */
 export type Point = Readonly<{x:number;y:number}>;
 export type Direction = 'N'|'S'|'W'|'E';
 export type MirrorFacing = 'NE'|'NW'|'SE'|'SW';
@@ -10,6 +10,8 @@ export interface GateSpec {readonly at:Point;readonly circuit:string;readonly di
 export interface PlatformSpec {readonly at:Point;readonly circuit:string;readonly activeWhen:'pressed'|'released'}
 export interface LevelSpec {
   readonly id:string;readonly title:string;readonly rows:readonly string[];readonly facing?:Direction;
+  /** The historical contract remains the default; solo rooms opt in explicitly. */
+  readonly mode?:'duo'|'solo-warrior';
   /** Coordinates before centering the rectangular map in the 20 by 20 grid. */
   readonly circuits?:readonly CircuitSpec[];readonly gates?:readonly GateSpec[];readonly mirrors?:readonly MirrorSpec[];readonly platforms?:readonly PlatformSpec[];
 }
@@ -66,6 +68,7 @@ export function compileLevel(spec:LevelSpec):World {
   const width=spec.rows[0]?.length??0;
   if(!spec.id.trim()||!spec.title.trim()||!width||width>20||!spec.rows.length||spec.rows.length>20||spec.rows.some(r=>r.length!==width))throw new Error('A nonempty rectangular map of at most 20×20 cells is required.');
   if(spec.facing!==undefined&&!Object.hasOwn(VECTORS,spec.facing))throw new Error('Invalid facing.');
+  if(spec.mode!==undefined&&spec.mode!=='duo'&&spec.mode!=='solo-warrior')throw new Error('Invalid hero mode.');
   const ox=Math.floor((20-width)/2),oy=Math.floor((20-spec.rows.length)/2),terrain=Array<string>(400).fill('#');
   const heroes:Hero[]=[],stones:Point[]=[],monsters:Point[]=[],supports:Point[]=[],buttons:Point[]=[],doors:Point[]=[],goals:Point[]=[],drawnMirrors:MirrorSpec[]=[];
   spec.rows.forEach((r,y)=>[...r].forEach((c,x)=>{
@@ -76,7 +79,9 @@ export function compileLevel(spec:LevelSpec):World {
     if(c==='b'||c==='*')buttons.push(p);if(c==='D')doors.push(p);if(c==='g')goals.push(p);
     if(mirrorDigits[c])drawnMirrors.push(Object.freeze({at:p,facing:mirrorDigits[c]!}));
   }));
-  if(heroes.length!==2||heroes.filter(h=>h.kind==='merchant').length!==1||goals.length!==2)throw new Error('SS06 requires one Merchant, one Warrior and two destinations.');
+  if(spec.mode==='solo-warrior'){
+    if(heroes.length!==1||heroes[0]?.kind!=='warrior'||goals.length!==1)throw new Error('A solo room requires exactly one Warrior and one destination.');
+  }else if(heroes.length!==2||heroes.filter(h=>h.kind==='merchant').length!==1||goals.length!==2)throw new Error('SS06 requires one Merchant, one Warrior and two destinations.');
   heroes.sort((a,b)=>a.kind==='merchant'?-1:b.kind==='merchant'?1:0);
   const convert=(p:Point,required='.') :Point=>{
     if(!Number.isInteger(p.x)||!Number.isInteger(p.y)||p.x<0||p.y<0||p.x>=width||p.y>=spec.rows.length)throw new Error('Device coordinates must be inside the source map.');

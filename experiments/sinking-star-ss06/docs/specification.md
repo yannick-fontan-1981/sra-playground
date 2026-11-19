@@ -1,10 +1,12 @@
-# Contrat SS06 0.2.0
+# Contrat SS06 0.2.1
 
 ## Grille et états
 
 Image de 64 × 64 pixels, plateau logique 20 × 20, origine (2,2), cellules 3 × 3. Une salle rectangulaire plus petite est centrée. Palette identique à SS01–SS05 : Marchand 12 orange, Guerrier 8 rouge, eau 9 bleu, sol 3 gris, mur 4 gris foncé, caisses 13 marron, appuis marron et X cyan 10, boutons/portes 7 rose, destinations 11 jaune, miroir blanc 0/dos noir 5, monstres noirs/X rouge.
 
-Une salle contient exactement un Marchand, un Guerrier et deux cibles. Les identités sont conservées lors des poussées et reflets. Un personnage perdu suffit pour GAME_OVER ; toutes les cibles occupées par les deux héros après résolution des presses, plateformes et combats terminent la salle.
+`LevelSpec.mode` accepte `duo` ou `solo-warrior`. En l’absence de ce champ, le contrat reste `duo` : exactement un Marchand, un Guerrier et deux cibles. Le mode `solo-warrior` exige exactement un Guerrier, aucun Marchand et une cible ; un mode inconnu est rejeté. Seul le niveau 8 utilise le mode solo dans cette campagne. Les niveaux 1 à 7 conservent leur contrat duo.
+
+Les identités sont conservées lors des poussées et reflets. Un personnage perdu suffit pour GAME_OVER ; toutes les cibles occupées après résolution des presses, plateformes et combats terminent la salle. Le mode solo n’ajoute aucun personnage caché ni champ sémantique à l’observation publique.
 
 Cartes : M Marchand, W Guerrier, o caisse, m monstre, s appui sur eau, b bouton, D porte, * caisse sur bouton, g cible, # mur, ~ eau, . sol. Miroirs explicites ou chiffres 1 NE, 2 SE, 3 SW, 4 NW. Les coordonnées des circuits et miroirs sont relatives à la carte avant centrage.
 
@@ -12,7 +14,7 @@ Cartes : M Marchand, W Guerrier, o caisse, m monstre, s appui sur eau, b bouton,
 
 ACTION1/2/3/4 = N/S/W/E. Le Marchand pousse une seule entité ; le Guerrier pousse une file contiguë de caisses, monstres, miroirs ou de son partenaire. Une destination bloquée refuse la transaction. La direction du héros sélectionné peut changer lors d’un refus.
 
-ACTION6 reçoit des coordonnées entières de pixels (x,y) entre 0 et 63. Il sélectionne le héros touché ; il ne déclenche ni marche, ni combat, ni presse. Le premier personnage sélectionné au chargement est le Marchand. ACTION6 reste une action de l’historique et Undo peut l’annuler.
+ACTION6 reçoit des coordonnées entières de pixels (x,y) entre 0 et 63. Il sélectionne le héros touché ; il ne déclenche ni marche, ni combat, ni presse. Le personnage sélectionné au chargement est le Marchand en duo, le Guerrier en solo. Un changement effectif de personnage entre dans l’historique et Undo peut l’annuler. Cliquer le personnage déjà actif ou une case vide ne change rien et n’ajoute aucune entrée. `nextHero()` est donc sans effet en solo, y compris sur l’historique Undo.
 
 Une marche volontaire sur de l’eau sans appui est refusée. Une caisse qui y entre devient un appui fixe ; un monstre y disparaît. Les déplacements forcés par presse ou reflet peuvent faire tomber un héros. Une presse peut détruire un miroir en l’envoyant dans l’eau ; une poussée volontaire du miroir vers l’eau sans appui est refusée.
 
@@ -44,7 +46,7 @@ Le sprite actif est un carré rose plein avec un centre de circuit ; le sprite i
 
 ## Monstres
 
-Les monstres restent immobiles hors poussées/reflets/presses. Après une action réussie et le règlement des presses, tous les contacts cardinaux sont résolus simultanément. Deux monstres voisins s’éliminent ; un monstre qui meurt frappe encore pendant cette vague. Les deux héros, y compris celui non sélectionné, sont vulnérables. Les pertes peuvent libérer un bouton et déclencher une nouvelle fermeture. Les refus de mouvement et les sélections ne déclenchent pas de combat.
+Les monstres restent immobiles hors poussées/reflets/presses. Après une action réussie et le règlement des presses, tous les contacts cardinaux sont résolus simultanément. Deux monstres voisins s’éliminent ; un monstre qui meurt frappe encore pendant cette vague. Tous les héros présents, y compris le partenaire non sélectionné en duo, sont vulnérables. Les pertes peuvent libérer un bouton et déclencher une nouvelle fermeture. Les refus de mouvement et les sélections ne déclenchent pas de combat.
 
 ## Présentation
 
@@ -54,7 +56,7 @@ L’état logique est déjà final lors de la lecture de l’animation. L’hôt
 
 ## Session
 
-`DuoPuzzleSession(levels, gameCode='SS06')` : observe, action(id,data?), nextHero, undo, reset, restart, selectLevel. Le constructeur valide toutes les salles avant d’accepter la campagne ; les opérations de chargement calculent leur état avant mutation.
+`DuoPuzzleSession(levels, gameCode='SS06')` : observe, action(id,data?), nextHero, undo, reset, restart, selectLevel. Ce nom public reste inchangé ; une campagne peut mélanger des salles duo et solo. Le constructeur valide toutes les salles avant d’accepter la campagne ; les opérations de chargement calculent leur état avant mutation.
 
 Les observations publiques fournissent seulement pixels, palette, commandes et progression. Elles n’exposent ni état sémantique, ni plan de reflet, ni solution. ACTION1–6 restent listées même en terminal : l’hôte doit bloquer les envois.
 

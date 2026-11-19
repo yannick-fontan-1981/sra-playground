@@ -21,6 +21,41 @@ test('compiler centers exactly one Merchant, one Warrior and two destinations',(
 test('compiler rejects missing roles, destinations, ragged maps and invalid devices',()=>{
   const f=fixture();assert.throws(()=>compileLevel({...f.spec,rows:f.spec.rows.map(r=>r.replace('W','.'))}));assert.throws(()=>compileLevel({...f.spec,rows:f.spec.rows.map(r=>r.replaceAll('g','.'))}));assert.throws(()=>compileLevel({...f.spec,rows:['MWgg','...']}));assert.throws(()=>fixture({mirrors:[[2,2,'NE']]}));assert.throws(()=>fixture({mirrors:[[3,3,'BAD']]}));assert.throws(()=>fixture({gates:[{at:{x:3,y:3},direction:'E',closedWhen:'pressed',circuit:'absent'}]}));
 });
+test('solo rooms explicitly require one Warrior and one destination while duo remains the default',()=>{
+  const solo={id:'solo-contract',title:'Solo contract',mode:'solo-warrior',rows:['#####','#W.g#','#####']};
+  const world=compileLevel(solo);assert.deepEqual(world.heroes.map(h=>h.kind),['warrior']);assert.equal(world.goals.length,1);assert.equal(initialState(world).active,0);
+  assert.throws(()=>compileLevel({...solo,mode:undefined}),/one Merchant, one Warrior and two destinations/);
+  for(const rows of [['M.g'],['MWgg'],['WWg'],['Wgg'],['W..']])assert.throws(()=>compileLevel({...solo,rows}),/exactly one Warrior and one destination/);
+  for(const mode of ['solo','unknown',null,0])assert.throws(()=>compileLevel({...solo,mode}),/Invalid hero mode/);
+  const duo=fixture();assert.deepEqual(compileLevel({...duo.spec,mode:'duo'}),duo.world);
+});
+test('a solo Warrior keeps chain pushing and wins with the only destination',()=>{
+  const spec={id:'solo-push',title:'Solo push',mode:'solo-warrior',rows:['########','#Woo...#','#....g.#','########']};
+  const world=compileLevel(spec),initial=initialState(world),pushed=stepDetailed(world,initial,4);
+  assert.equal(pushed.phases[0].kind,'push');assert.equal(pushed.phases[0].moves.length,3);assert.equal(pushed.state.heroes.length,1);assert.equal(pushed.state.heroes[0].kind,'warrior');
+  const session=new DuoPuzzleSession([spec]),before=session.observe();assert.equal(before.frame.flat().includes(12),false);assert.equal(before.frame.flat().includes(8),true);
+  let observation;for(const action of [4,4,2,4,4])observation=session.action(action);
+  assert.equal(observation.state,'WIN');assert.equal(observation.levelsCompleted,1);assert.deepEqual(observation.availableActionIds,[1,2,3,4,5,6]);
+  for(const key of ['heroes','active','mode','goals','solution','world'])assert.equal(key in observation,false);
+  const undone=session.undo();assert.equal(undone.state,'NOT_FINISHED');assert.equal(undone.levelsCompleted,0);assert.equal(session.action(4).state,'WIN');
+});
+test('solo selection never ticks or adds Undo history, including after a movement',()=>{
+  const spec={id:'solo-selection',title:'Solo selection',mode:'solo-warrior',rows:['#######','#W..g.#','#######']};
+  const world=compileLevel(spec),initial=initialState(world),self=cellToPixel(initial.heroes[0].at),session=new DuoPuzzleSession([spec]),before=session.observe();
+  assert.equal(stepWorld(world,initial,6,self),initial);assert.deepEqual(stepDetailed(world,initial,6,self).phases,[]);
+  assert.deepEqual(session.nextHero(),before);assert.deepEqual(session.action(6,self),before);assert.deepEqual(session.action(6,{x:0,y:0}),before);assert.equal(session.observe().canUndo,false);
+  session.action(4);const moved=session.observe();assert.equal(moved.canUndo,true);assert.deepEqual(session.nextHero(),moved);assert.deepEqual(session.action(6,{x:0,y:0}),moved);
+  assert.deepEqual(session.undo(),before);assert.equal(session.observe().canUndo,false);
+});
+test('mixed campaigns transition between duo and solo rooms and Undo restores either state',()=>{
+  const duo=fixture({id:'mixed-duo',M:[10,2],W:[10,6]}),solo={id:'mixed-solo',title:'Solo finish',mode:'solo-warrior',rows:['#####','#W.g#','#####']};
+  const session=new DuoPuzzleSession([duo.spec,solo]);session.action(4);session.nextHero();const beforeTransition=session.observe();
+  let observation=session.action(4);assert.equal(observation.level,2);assert.equal(observation.levelsCompleted,1);assert.equal(observation.frame.flat().includes(12),false);
+  assert.deepEqual(session.undo(),beforeTransition);session.action(4);session.action(4);const beforeWin=session.observe();assert.equal(beforeWin.level,2);
+  observation=session.action(4);assert.equal(observation.state,'WIN');assert.equal(observation.levelsCompleted,2);
+  assert.deepEqual(session.undo(),beforeWin);assert.equal(session.action(4).state,'WIN');
+  observation=session.selectLevel(1);assert.equal(observation.level,1);assert.equal(observation.levelsCompleted,1);assert.equal(observation.frame.flat().includes(12),true);assert.equal(observation.frame.flat().includes(8),true);
+});
 test('compiler accepts movable mirror digits with exact face mapping',()=>{
   const f=fixture();const rows=f.spec.rows.map((r,i)=>i===4?r.slice(0,4)+'1234'+r.slice(8):r);const w=compileLevel({...f.spec,rows});assert.deepEqual(w.mirrors.map(m=>m.facing),['NE','SE','SW','NW']);
 });

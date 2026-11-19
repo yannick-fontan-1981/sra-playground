@@ -597,5 +597,67 @@
     ]
   },
   "confidence": "Puzzle identity and initial visible objects inspected. Button polarity inferred jointly from screenshot and guide. Exact floor mask and mirror directions still need SS06 replay validation.",
-  "adaptation": "Deux héros, deux miroirs préparés par poussée et deux caisses disponibles. Deux presses décalent les miroirs au premier reflet pour remplacer le dédoublement et le bloqueur de la source. Les supports et portes superposés deviennent des segments de plateformes vertes et violettes dans une grille 2D."
+  "adaptation": "HTML v5 / 0.2.1 : un Guerrier rouge, une cible, deux caisses et trois miroirs, dont deux dans la salle de droite. Après le premier reflet, le second miroir droit est poussé devant le rayon de retour pour maintenir la caisse verte sur son bouton. Sept plateformes remplacent les supports et portes superposés de la source : quatre vertes et trois violettes. Aucun piston, aucune duplication et aucun délai imposé au premier reflet.",
+  "adaptationVersion": "0.2.1",
+  "adaptationDetails": {
+    "mode": "solo-warrior",
+    "heroes": [
+      "warrior"
+    ],
+    "goals": 1,
+    "stones": 2,
+    "mirrors": 3,
+    "rightRoomMirrors": 2,
+    "gates": 0,
+    "platforms": 7,
+    "greenPlatforms": 4,
+    "violetPlatforms": 3,
+    "coordinateSpace": "Source map before centering in the 20×20 grid.",
+    "rightPrincipalMirror": {
+      "at": {
+        "x": 12,
+        "y": 7
+      },
+      "facing": "NE",
+      "anchoring": "Walls west and south prevent access to the pushing positions needed to displace it."
+    },
+    "rightBlockingMirror": {
+      "initial": {
+        "x": 15,
+        "y": 4
+      },
+      "final": {
+        "x": 12,
+        "y": 4
+      },
+      "facing": "SE",
+      "placement": "Pushed into place after the first reflection; blocks the north ray of the principal mirror."
+    },
+    "witnessActions": 61,
+    "witnessFrames": 192,
+    "selections": 0,
+    "reflections": 3,
+    "reflectionTurns": [
+      18,
+      53,
+      56
+    ],
+    "greenSequence": [
+      true,
+      true,
+      true
+    ],
+    "violetSequence": [
+      true,
+      false,
+      true
+    ],
+    "sourceWitnessReused": false
+  },
+  "adaptationValidation": {
+    "witness": "The 61-action SS06 route has been replayed without refused actions or deaths and reaches the sole Warrior destination.",
+    "independentReview": "reference/level8-clock-review.json",
+    "counterfactual": "Remove the blocking mirror from the witness state after action 52, before the second reflection. The reflection releases the green button and the Warrior falls when its platform retracts.",
+    "scope": "The witness proves solvability. The counterfactual demonstrates the blocker effect at this state on this route; it does not prove global solution uniqueness, universal necessity of the blocker or impossibility of all alternative strategies."
+  }
 }

@@ -1,6 +1,6 @@
 {
   "game": "SS06",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "levels": [
     {
       "level": 1,
@@ -336,42 +336,42 @@
       "solved": true,
       "mapSha256": "974c37cf025bc9c9d18068475685b0da19145b911bd8b27c5b928f92ec240d9a",
       "witnessSha256": "b0593e19fe65cbde30ca8557070310d8352f5ea14a57059aa0f66148f623fbad",
-      "observationsSha256": "3034e4734b38e1be826a5131501da3446e8f36a612658a2e70add4b17fd5ae67"
+      "observationsSha256": "3103c979f26a69939cb827cccd4fe485f59938b481ba1f67023726b417d79a65"
     },
     {
       "level": 8,
       "id": "ss06-08",
-      "title": "Les deux horloges",
+      "title": "Le verrou vert",
       "source": {
         "puzzle": 20,
-        "label": "Adaptation · Heroes and Mirrors 20 : verrou vert, retard du premier reflet et passerelle à alternance violette.",
+        "label": "Adaptation · Heroes and Mirrors 20 : deux miroirs verrouillent le circuit vert, puis le Guerrier alterne les passages violets.",
         "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-20",
-        "piston": true,
+        "piston": false,
         "platform": true
       },
       "dimensions": [
         20,
-        18
+        16
       ],
-      "floorCells": 117,
-      "waterCells": 198,
+      "floorCells": 110,
+      "waterCells": 168,
       "initialStones": 2,
       "initialSupports": 0,
       "initialMonsters": 0,
-      "mirrors": 2,
-      "gates": 4,
-      "hydraulicPlatforms": 15,
+      "mirrors": 3,
+      "gates": 0,
+      "hydraulicPlatforms": 7,
       "buttons": 2,
-      "actions": 111,
-      "selections": 12,
-      "merchantPushes": 1,
-      "warriorPushes": 8,
-      "chainPushes": 2,
-      "stoneMoves": 14,
-      "mirrorMoves": 5,
-      "reflections": 5,
+      "actions": 61,
+      "selections": 0,
+      "merchantPushes": 0,
+      "warriorPushes": 5,
+      "chainPushes": 0,
+      "stoneMoves": 5,
+      "mirrorMoves": 4,
+      "reflections": 3,
       "heroReflections": 0,
-      "pistonPushes": 2,
+      "pistonPushes": 0,
       "platformsCreated": 0,
       "monstersRemoved": 0,
       "blocked": 0,
@@ -380,41 +380,56 @@
       "mirrorsDestroyed": 0,
       "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
-      "frames": 334,
-      "maxFrames": 12,
+      "frames": 192,
+      "maxFrames": 6,
       "solved": true,
-      "mapSha256": "450011b441a5e0843bca4c3b8d54ab87f1b679c35c8abec021034ace18f438b4",
-      "witnessSha256": "9d17316e5f06a14321916476343077377ed72a3f28690703f0b47b422e3c838b",
-      "observationsSha256": "8aefffcd976d7904592c651ce351d5db3b5809976abf629e35b2c6dfd8592d9b"
+      "mapSha256": "8718ca8e7801dc58bd0efa7bc291d7dcee898c592c5642acdb2b542dcab360a2",
+      "witnessSha256": "72d236c3857602301efd70836cc6cdcea8c825b096de47292cb76998fa8c4cf9",
+      "observationsSha256": "eac0004597b53b939c63214321ab7d85b3f7d12e6461fb4d25e911cf51a12059"
     }
   ],
   "totals": {
-    "actions": 483,
-    "selections": 29,
-    "merchantPushes": 28,
-    "warriorPushes": 55,
-    "chainPushes": 24,
-    "stoneMoves": 104,
-    "mirrorMoves": 38,
-    "reflections": 31,
+    "actions": 433,
+    "selections": 17,
+    "merchantPushes": 27,
+    "warriorPushes": 52,
+    "chainPushes": 22,
+    "stoneMoves": 95,
+    "mirrorMoves": 37,
+    "reflections": 29,
     "heroReflections": 14,
-    "pistonPushes": 7,
+    "pistonPushes": 5,
     "platformsCreated": 15,
     "monstersRemoved": 8,
     "combatWaves": 4,
     "mirrorsDestroyed": 0,
     "cratesCrushed": 0,
     "simultaneousHeroReflections": 2,
-    "frames": 1480
+    "frames": 1338
   },
   "success": true,
   "clockChecks": {
     "level": 8,
-    "ticks": 5,
+    "ticks": 3,
+    "greenStates": [
+      true,
+      true,
+      true
+    ],
+    "violetStates": [
+      true,
+      false,
+      true
+    ],
     "greenLatchStable": true,
-    "firstVioletTickDelayed": true,
-    "platforms": 15,
-    "inverseEntryRetracted": true
+    "platforms": 7,
+    "gates": 0,
+    "heroes": 1,
+    "goals": 1,
+    "rightMirrors": 2,
+    "physicalMirrorBlocker": true,
+    "removeBlockerReleasesGreen": true,
+    "removeBlockerKillsHeroOnGreenSupport": true
   },
   "failureRoutes": [
     {
@@ -433,9 +448,9 @@
     },
     {
       "level": 8,
-      "cause": "Rétraction d’une porte-plateforme sous le Guerrier",
-      "actions": 72,
-      "commands": "UCURRDDUULLDDDDRRRRRRDRUCDDLLDDDDRRUCDDLLLLLLLLLLLLLLLLLDDDDRRXRRCDRXCRX",
+      "cause": "Retrait de la première plateforme violette sous le Guerrier après blocage du circuit vert",
+      "actions": 52,
+      "commands": "UDDRRRRRRRRRRRRRUXUUUULLLLDDDDDLLLLLLLLLLLLDDDDRRRRX",
       "passed": true
     }
   ],
@@ -446,7 +461,7 @@
       "status": "unsolvable",
       "states": 784,
       "expanded": 784,
-      "ms": 22
+      "ms": 20
     },
     {
       "level": 1,
@@ -454,7 +469,7 @@
       "status": "unsolvable",
       "states": 2668,
       "expanded": 2668,
-      "ms": 119
+      "ms": 83
     },
     {
       "level": 1,
@@ -462,7 +477,7 @@
       "status": "unsolvable",
       "states": 784,
       "expanded": 784,
-      "ms": 41
+      "ms": 51
     },
     {
       "level": 1,
@@ -470,7 +485,7 @@
       "status": "unsolvable",
       "states": 5736,
       "expanded": 5736,
-      "ms": 120
+      "ms": 101
     },
     {
       "level": 2,
@@ -478,7 +493,7 @@
       "status": "unsolvable",
       "states": 2608,
       "expanded": 2608,
-      "ms": 84
+      "ms": 73
     },
     {
       "level": 2,
@@ -494,7 +509,7 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 84
+      "ms": 68
     },
     {
       "level": 7,
@@ -502,7 +517,7 @@
       "status": "unsolvable",
       "states": 2520,
       "expanded": 2520,
-      "ms": 69
+      "ms": 62
     },
     {
       "level": 1,
@@ -514,7 +529,7 @@
       "status": "unsolvable",
       "states": 8076,
       "expanded": 8076,
-      "ms": 302
+      "ms": 308
     },
     {
       "level": 1,
@@ -526,7 +541,7 @@
       "status": "unsolvable",
       "states": 2056,
       "expanded": 2056,
-      "ms": 34
+      "ms": 35
     },
     {
       "level": 1,
@@ -538,7 +553,7 @@
       "status": "unsolvable",
       "states": 2840,
       "expanded": 2840,
-      "ms": 59
+      "ms": 57
     },
     {
       "level": 1,
@@ -550,10 +565,10 @@
       "status": "unsolvable",
       "states": 5736,
       "expanded": 5736,
-      "ms": 96
+      "ms": 99
     }
   ],
-  "htmlSha256": "e087cd720361205daefc361d73c2edb085e65654280defb0b5a58065c2497401",
+  "htmlSha256": "28505c0ab6acf00fac42ee9a3ddd18bbccfdf78f84226b52eb5073ffced3aa67",
   "limitations": [
     "Adaptations are explicit, not certified cell-for-cell copies of the original game.",
     "Witnesses prove solvability, not optimality or autonomous SRA success.",

@@ -33,6 +33,19 @@ const rgba=frame=>Uint8ClampedArray.from(frame.flatMap(r=>r.flatMap(c=>{const rg
 const equalFrame=o=>assert.deepEqual(pixels,rgba(o.frame));
 const settled=async o=>{await flush();equalFrame(o);assert.equal($('board').dataset.busy,'false');};
 const heroes=frame=>{const all=[];for(let y=0;y<20;y++)for(let x=0;x<20;x++){const px=2+x*3,py=2+y*3,c=frame[py+1][px+1],arms=[frame[py][px+1],frame[py+1][px],frame[py+1][px+2],frame[py+2][px+1]];if((c===12||c===8)&&arms.filter(v=>v===c).length>=3)all.push({color:c,selected:arms.includes(0),data:{x:px+1,y:py+1}});}return all;};
+const goalCount=frame=>{let count=0;for(let y=0;y<20;y++)for(let x=0;x<20;x++){const px=2+x*3,py=2+y*3;if([frame[py][px],frame[py][px+2],frame[py+2][px],frame[py+2][px+2]].every(c=>c===11))count++;}return count;};
+const checkPartyUI=solo=>{
+  assert.equal($('hero-switch').hidden,solo);
+  assert.equal(window.document.querySelector('[data-hero="merchant"]').hidden,solo);
+  for(const node of window.document.querySelectorAll('[data-duo-only]'))assert.equal(node.hidden,solo);
+  assert.equal($('goal-label').textContent,solo?'Destination · une à atteindre':'Destination · deux à occuper');
+  assert.equal($('goal-rule').textContent.includes('Les deux contours'),!solo);
+  assert.equal($('defeat-message').textContent.includes('Les deux héros'),!solo);
+  assert.equal($('roles-help').textContent.includes('Changer de personnage'),!solo);
+  assert.equal($('board').getAttribute('aria-label').includes('1 : Marchand'),!solo);
+  assert.equal($('role-rules').classList.contains('solo'),solo);
+  if(solo){assert.ok($('level-objective').textContent.includes('l’unique contour jaune'));assert.ok($('selected-role').textContent.includes('Guerrier'));assert.ok(!$('campaign-subtitle').textContent.includes('Marchand'));}
+};
 const report={success:false,environment:'Happy DOM, canvas pixel buffer and controlled animation timer queue',visualBrowserTest:false,checks:[]};
 let witnessMode=false,witnessActions=0,witnessFrames=0,selectionActions=0;
 const visiblePlatformStates=new Map();
@@ -61,6 +74,7 @@ try{
   assert.equal(scripts.length,1);window.eval(scripts[0]);equalFrame(ref.observe());
   assert.equal($('board').dataset.level,'1');assert.equal($('tutorial').open,true);assert.equal($('tutorial').hidden,false);assert.equal($('victory').hidden,true);assert.equal($('defeat').hidden,true);
   assert.ok(window.document.title.startsWith('SS06'));assert.deepEqual(heroes(ref.observe().frame).map(h=>h.color).sort((a,b)=>a-b),[8,12]);
+  checkPartyUI(false);assert.equal(goalCount(ref.observe().frame),2);
   if(process.env.SS06_UI_CAPTURE_DIR){mkdirSync(process.env.SS06_UI_CAPTURE_DIR,{recursive:true});writeFileSync(resolve(process.env.SS06_UI_CAPTURE_DIR,'ss06-ui-initial.rgba'),pixels);}
   report.checks.push('The complete compiled HTML opens level 1 with both colored heroes, exact engine pixels and its rich tutorial expanded');
 
@@ -108,12 +122,30 @@ try{
   choose(8);
   const finalRoom=SS06_LEVELS[7];
   assert.ok(finalRoom.platforms?.length,'Level 8 introduces hydraulic platforms');
+  checkPartyUI(true);assert.deepEqual(heroes(ref.observe().frame).map(h=>h.color),[8]);assert.equal(goalCount(ref.observe().frame),1);
+  assert.equal($('board').dataset.selected,'warrior');
+  const soloInitial=ref.observe(),soloCaptures=captures.length,soloMoves=$('moves').textContent;
+  for(const value of ['Tab','1','2'])assert.equal(key(value),false);
+  clickPixel(heroes(soloInitial.frame)[0].data);
+  for(const button of window.document.querySelectorAll('[data-hero]'))button.click();
+  equalFrame(soloInitial);assert.equal(captures.length,soloCaptures);assert.equal($('moves').textContent,soloMoves);assert.equal(timers.length,0);assert.equal($('undo').disabled,true);
+  assert.equal(key('Tab',{shiftKey:true}),true);
+  const soloActions=actionsFor(8),soloProbe=new DuoPuzzleSession(SS06_LEVELS);soloProbe.selectLevel(8);let soloAnimation=-1;
+  assert.ok(soloActions.every(a=>normal(a).id!==6),'The solo witness never needs a hero-selection action');
+  for(let i=0;i<soloActions.length;i++){const a=normal(soloActions[i]),next=soloProbe.action(a.id,a.data);if(next.frames.length>1){soloAnimation=i;break;}}
+  assert.ok(soloAnimation>=0);await replay(soloActions.slice(0,soloAnimation));const soloBefore=ref.observe();
+  dispatch(soloActions[soloAnimation]);doRef(soloActions[soloAnimation]);assert.equal($('board').dataset.busy,'true');
+  key('z');await settled(ref.undo());equalFrame(soloBefore);checkPartyUI(true);
+  choose(7);checkPartyUI(false);assert.equal(heroes(ref.observe().frame).length,2);assert.equal(goalCount(ref.observe().frame),2);
+  choose(8);checkPartyUI(true);
+  report.checks.push('Level 8 has one red Warrior and one yellow destination; orange roles and selection instructions disappear, selection keys cannot create an action, Undo works during animation and returning to a duo restores its controls');
   assert.equal($('platform-help').hidden,false);
   inspectPlatforms(8,ref.observe().frame);
   assert.ok([...visiblePlatformStates.keys()].some(k=>k.startsWith('8:')),'Hydraulic platforms are visible in the initial public image');
   assert.ok($('platform-help').textContent.includes('Espace'));
-  assert.ok($('platform-help').textContent.includes('Vérifie aussi la case de ton partenaire'));
-  report.checks.push('Level 8 explains deployable water platforms, circuit switching and the safety of both heroes; the eight original tutorial goals are preserved');
+  assert.ok($('platform-help').textContent.includes('Quitte la série qui va disparaître'));
+  assert.equal($('platform-help').querySelector('[data-duo-only]').hidden,true);
+  report.checks.push('Level 8 explains deployable water platforms and circuit switching for its solo Warrior; the eight original duo tutorial goals are preserved');
 
   $('restart').click();await settled(ref.restart());
   const reflectionIndex=tutorial.findIndex(a=>normal(a).id===5);assert.ok(reflectionIndex>=0);await replay(tutorial.slice(0,reflectionIndex));
@@ -131,16 +163,21 @@ try{
   for(let level=2;level<=SS06_LEVELS.length;level++){assert.equal(ref.observe().level,level);const completed=ref.observe().levelsCompleted;await replay(actionsFor(level));assert.equal(ref.observe().levelsCompleted,completed+1);}
   witnessMode=false;
   const switchedPlatformCircuits=new Set([...visiblePlatformStates].filter(([,states])=>states.size===2).map(([key])=>key.split(':').slice(0,2).join(':')));
-  assert.ok(switchedPlatformCircuits.size>=2,'Both circuits must visibly deploy and retract water platforms during the level-8 witness');
-  report.platformCoverage={circuitsWithBothVisibleStates:[...switchedPlatformCircuits],visibleCells:visiblePlatformStates.size};
+  const expectedPlatformCircuits=new Set(finalRoom.platforms.map(platform=>`8:${platform.circuit}`));
+  for(const circuit of expectedPlatformCircuits)assert.ok(switchedPlatformCircuits.has(circuit),`${circuit} must visibly deploy and retract water platforms during the level-8 witness`);
+  const finalRoomVisibleCells=[...visiblePlatformStates.keys()].filter(key=>key.startsWith('8:')).length;
+  assert.equal(finalRoomVisibleCells,finalRoom.platforms.length,'Every specified level-8 platform must be visible at some point');
+  report.platformCoverage={circuitsWithBothVisibleStates:[...switchedPlatformCircuits],visibleCells:visiblePlatformStates.size,level8PlatformCount:finalRoom.platforms.length};
   report.witnessCoverage={levels:SS06_LEVELS.length,actions:witnessActions,frames:witnessFrames,selectionActions,allFrameDurationsVerified:true};
   assert.equal(witnessActions,witnesses.reduce((n,w)=>n+w.actions.length,0));assert.equal(ref.observe().state,'WIN');assert.equal($('victory').hidden,false);
+  checkPartyUI(true);assert.equal($('feedback').textContent,'La destination est atteinte. Salle terminée !');
   assert.ok([...window.document.querySelectorAll('[data-action],[data-hero]')].every(b=>b.disabled));
   count=$('moves').textContent;key('ArrowDown');key('Tab');key('1');assert.equal(key(' '),false);assert.equal($('moves').textContent,count);
   report.checks.push('All eight witnesses replay through the actual UI with exact frames and timing; victory needs all rooms and disables direction, reflection and hero selection');
 
   $('undo').click();await settled(ref.undo());assert.equal($('victory').hidden,true);assert.equal(ref.observe().levelsCompleted,SS06_LEVELS.length-1);
   $('restart').click();await settled(ref.restart());assert.equal(ref.observe().level,1);assert.equal(ref.observe().levelsCompleted,0);assert.equal($('tutorial').hidden,false);
+  checkPartyUI(false);
   report.checks.push('Undo exits final victory and restores progression; Restart returns to the open tutorial with zero completions');
 
   const failurePath=resolve(root,'tests/failures.json');
@@ -155,6 +192,8 @@ try{
     const from=captures.length,waitFrom=waits.length;dispatch(last);failed=doRef(last);
     for(let i=0;i<failed.frames.length;i++){if(i)await advanceTimer();assert.deepEqual(captures[from+i],rgba(failed.frames[i]));assert.equal($('defeat').hidden,i<failed.frames.length-1);}
     await settled(failed);assert.deepEqual(waits.slice(waitFrom),failed.frameDurationsMs.slice(0,-1));
+    const soloFailure=heroes(before.frame).length===1;checkPartyUI(soloFailure);
+    assert.equal($('defeat-title').textContent,soloFailure?'Le Guerrier a été perdu':'Un personnage a été perdu');
     count=$('moves').textContent;key('ArrowLeft');key('Tab');key('2');assert.equal(key(' '),false);assert.equal($('moves').textContent,count);
     $('undo-defeat').click();await settled(ref.undo());equalFrame(before);dispatch(last);doRef(last);await flush();$('reset-defeat').click();await settled(ref.reset());assert.equal($('defeat').hidden,true);
     report.defeatCoverage.push({level:fatal.level,cause:fatal.cause,actions:fatal.actions.length,frames:failed.frames.length,frameDurationsMs:failed.frameDurationsMs,midAnimationUndo:true,overlayAfterLastFrame:true});

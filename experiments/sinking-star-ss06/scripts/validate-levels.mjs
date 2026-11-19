@@ -9,7 +9,7 @@ const json=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8')
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const witnesses=await json('../tests/witnesses.json');
 assert.equal(SS06_LEVELS.length,8);assert.equal(witnesses.length,8);assert.equal(LEVEL_INFO.length,8);
-const session=new DuoPuzzleSession(SS06_LEVELS),report={game:'SS06',version:'0.2.0',levels:[],totals:{},success:false};
+const session=new DuoPuzzleSession(SS06_LEVELS),report={game:'SS06',version:'0.2.1',levels:[],totals:{},success:false};
 const continuous=new Set(['walk','push','reflect','piston','platform']);
 for(const [index,spec] of SS06_LEVELS.entries()){
  const design=await json(`../reference/level${index+1}-design.json`),witness=witnesses[index];
@@ -29,7 +29,8 @@ for(const [index,spec] of SS06_LEVELS.entries()){
   for(const key of ['hero','heroes','active','stones','monsters','mirrors','gates','platforms','platformActive','circuits','plan','phases','solution','witness'])assert.ok(!(key in o));
   const actorCells=[...state.heroes.filter(h=>!h.dead).map(h=>h.at),...state.stones,...state.monsters,...state.mirrors.map(m=>m.at)].map(p=>p.y*20+p.x);
   assert.equal(new Set(actorCells).size,actorCells.length,`${spec.id} overlapping solid actors`);
-  assert.equal(state.heroes.length,2);assert.deepEqual(state.heroes.map(h=>h.kind),['merchant','warrior']);
+  const expectedKinds=spec.mode==='solo-warrior'?['warrior']:['merchant','warrior'];
+  assert.equal(state.heroes.length,expectedKinds.length);assert.deepEqual(state.heroes.map(h=>h.kind),expectedKinds);assert.equal(world.goals.length,expectedKinds.length);
   if(action.id===6){assert.equal(detail.phases.length,0);assert.deepEqual(state.heroes,before.heroes);assert.deepEqual(state.stones,before.stones);assert.deepEqual(state.monsters,before.monsters);}
   combatWaves+=detail.phases.filter(p=>p.kind==='combat').length;mirrorsDestroyed+=before.mirrors.length-state.mirrors.length;
   cratesCrushed+=detail.phases.filter(p=>p.kind==='crush').reduce((n,p)=>n+p.before.stones.length-p.after.stones.length,0);
@@ -46,15 +47,23 @@ assert.equal(report.levels[5].monstersRemoved,4);
 for(const level of [1,8])assert.ok(!SS06_LEVELS[level-1].mirrors.some(m=>SS06_LEVELS[level-1].gates.some(g=>m.at.x===g.at.x&&m.at.y===g.at.y)),'No mirror starts on a press in L1/L8');
 assert.ok(report.levels[6].platformsCreated>=2&&report.levels[6].chainPushes&&report.levels[6].pistonPushes);
 assert.ok(report.levels[4].platformsCreated>=2&&report.levels[4].pistonPushes>=2&&report.levels[4].combatWaves);
-assert.ok(report.levels[7].chainPushes>=1&&report.levels[7].pistonPushes===2);
+assert.equal(SS06_LEVELS[7].mode,'solo-warrior');assert.equal(report.levels[7].selections,0);assert.equal(report.levels[7].gates,0);assert.equal(report.levels[7].mirrors,3);
 const clock=replay(SS06_LEVELS[7],witnesses[7].commands);
 const ticks=clock.trace.filter(t=>t.action.id===5);
-assert.deepEqual(ticks.map(t=>circuitPressed(clock.world,t.after,'ancrage')),[true,true,true,true,true]);
-assert.deepEqual(ticks.map(t=>circuitPressed(clock.world,t.after,'alternance')),[false,true,false,true,false]);
-assert.equal(clock.world.platforms.length,15);
-assert.equal(initialState(clock.world).platformActive[0],true);
-assert.ok(ticks.every(t=>t.after.platformActive[0]===false&&t.after.platformActive.slice(1,11).every(Boolean)));
-report.clockChecks={level:8,ticks:5,greenLatchStable:true,firstVioletTickDelayed:true,platforms:15,inverseEntryRetracted:true};
+assert.deepEqual(ticks.map(t=>circuitPressed(clock.world,t.after,'ancrage')),[true,true,true]);
+assert.deepEqual(ticks.map(t=>circuitPressed(clock.world,t.after,'alternance')),[true,false,true]);
+assert.equal(clock.world.platforms.length,7);assert.equal(clock.world.goals.length,1);assert.equal(clock.state.heroes.length,1);
+assert.equal(initialState(clock.world).platformActive[0],false);
+assert.ok(ticks.every(t=>t.after.platformActive.slice(0,4).every(Boolean)));
+const centered=p=>({x:p.x+Math.floor((20-SS06_LEVELS[7].rows[0].length)/2),y:p.y+Math.floor((20-SS06_LEVELS[7].rows.length)/2)});
+assert.deepEqual(clock.state.mirrors[1],{at:centered({x:12,y:7}),facing:'NE'});
+assert.deepEqual(clock.state.mirrors[2],{at:centered({x:12,y:4}),facing:'SE'});
+// Counterfactual from the same bridge state: removing the blocking mirror releases
+// the green crate, retracts its support and kills the Warrior at the next reflection.
+const unlocked=structuredClone(ticks[1].before);unlocked.mirrors.splice(2,1);
+const unlockedTick=stepDetailed(clock.world,unlocked,5);
+assert.equal(circuitPressed(clock.world,unlockedTick.state,'ancrage'),false);assert.equal(unlockedTick.state.dead,true);
+report.clockChecks={level:8,ticks:3,greenStates:[true,true,true],violetStates:[true,false,true],greenLatchStable:true,platforms:7,gates:0,heroes:1,goals:1,rightMirrors:2,physicalMirrorBlocker:true,removeBlockerReleasesGreen:true,removeBlockerKillsHeroOnGreenSupport:true};
 report.failureRoutes=[];
 for(const f of await json('../tests/failures.json')){
  const r=replay(SS06_LEVELS[f.level-1],f.actions);assert.ok(r.state.dead);assert.equal(r.metrics.blocked,0);
