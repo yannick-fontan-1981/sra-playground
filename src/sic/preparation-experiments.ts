@@ -1,3 +1,4 @@
+import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {newOccupancyMemory,occupancyView,occupancyForms,observePoses,offerOccupancy,finishOccupancy,type OccupancyMemory,type OccupancyTrial} from './occupancy-programs.ts';
 import {newTerritorialMemory,offerTerritory,recordTerritory,type TerritorialMemory,type TerritorialTrial} from './pursue-territory.ts';
 import {offerActivation,recordActivation,type Activation,type ActivationReceipt} from './latent-response.ts';
@@ -93,6 +94,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'witnessedPreview'
     | 'occupancy'
     | 'territorialAccess'
     | 'activateResponse'
@@ -144,6 +146,7 @@ export type Experiment = {
   frame?:FrameTrial;
   activation?:Activation;
   territorial?:TerritorialTrial;
+  witnessedPreview?:ReadOffer;
   occupancy?:OccupancyTrial;
   instrument?:SiteTrial;
   retained?:RetainedTrial;
@@ -185,6 +188,7 @@ export type Outcome = {
   frame?:Record<string,unknown>;
   activation?:Record<string,unknown>;
   territorial?:Record<string,unknown>;
+  witnessedPreview?:Record<string,unknown>;
   occupancy?:Record<string,unknown>;
   instrument?:Record<string,unknown>;
   retained?:Record<string,unknown>;
@@ -195,6 +199,8 @@ export type Outcome = {
 export type Memory = {
   activations?:ActivationReceipt[];
   territory?:TerritorialMemory;
+  previewLearning?:PreviewLearning;
+  previewCarry?:PreviewCarry|null;
   occupancy?:OccupancyMemory;
   epoch: number;
   delayed: DelayedMemory;
@@ -411,7 +417,8 @@ function selectEstablishedExperiment(
   late: boolean,
   rows?: NativeRows
 ): Experiment | null {
-  const s = m.scenes.indexOf(sceneKey(o)),
+  const retained = Object.keys(m.previewLearning?.bindings ?? {}).length > 0;
+  const s = retained ? sceneIndex(m, o) : m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
@@ -419,6 +426,12 @@ function selectEstablishedExperiment(
   const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
+  if(rows&&m.previewLearning&&!m.occupancy?.active){
+    const read=offerWitnessedPreview(m.previewLearning,o,visualLayout(o,rows),available);
+    if(read&&(read.basis==='observed_in_previous_level'||free&&m.recurrences>0)){
+      return {phase:'witnessedPreview',origin:s,a:read.command,b:read.command,rule:'subject_reaches_visible_indicator',refs:[],witnessedPreview:read};
+    }
+  }
   if(rows&&m.occupancy&&(m.occupancy.active||free&&!m.territory?.active&&m.recurrences>0)){
     const plan=offerOccupancy(m.occupancy,s,available,rows[0]!.length,rows.length);if(plan)return plan;
   }
@@ -757,7 +770,7 @@ export function selectExperiment(
   m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
 ): Experiment | null {
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if (!rows || established?.frame || established?.territorial || established?.occupancy) return established;
+  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
   const recent=m.delayed.history.slice(-8);
@@ -908,6 +921,10 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.witnessedPreview&&m.previewLearning){
+    const detail=checkWitnessedPreview(m.previewLearning,x.witnessedPreview,b,a,visualLayout(b,rows),visualLayout(a,next),op);
+    return {...out,result:'preview_'+detail.status,witnessedPreview:detail};
+  }
   if(x.occupancy){
     const won=a.levels_completed>b.levels_completed||a.state==='WIN';
     const detail=finishOccupancy(occupancy,x.occupancy,occupancyView(a,next),!won&&b.state===a.state&&b.level_epoch===a.level_epoch,won,a.revision,occupancyForms(a,next),op);

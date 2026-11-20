@@ -77,7 +77,7 @@ export function occupancyForms(o: NativeObservation, rows: NativeRows) {
   occupancyView(o, rows);
   return observedForms.get(o)!;
 }
-function family(e: NativeEntity) {
+export function poseRole(e: NativeEntity) {
   let id = signatures.get(e.signature);
   if (!id) {
     id = symbolicDigest(poseFamilyKey(e)).slice(0, 24);
@@ -92,14 +92,14 @@ export function occupancyView(o: NativeObservation, rows: NativeRows): PoseView 
     max = (rows.length * rows[0]!.length) / 12;
   for (const e of o.entities) {
     if (e.area > max) continue;
-    const k = family(e),
+    const k = poseRole(e),
       b = e.bbox;
     groups.set(k, groups.has(k) ? null : [b[0] + b[2], b[1] + b[3]]);
   }
   const forms: Record<string, string> = {};
   for (const e of o.entities) {
     if (e.area <= max) {
-      const role = family(e);
+      const role = poseRole(e);
       if (groups.get(role)) forms[role] = e.signature;
     }
   }

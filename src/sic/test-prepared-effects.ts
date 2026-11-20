@@ -1,3 +1,4 @@
+import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
@@ -25,6 +26,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  witnessedPreview:'Test whether this subject reaches the indicated site using its witnessed action',
   occupancy:'Test where a prepared part allows another part to arrive and act',
   territorialAccess:'Test an access to a region beyond the measured walking boundary',
   activateResponse:'Test what a command can move after another component was repositioned',
@@ -68,6 +70,10 @@ const labels: Record<Experiment['phase'], string> = {
 };
 export function createPreparedEffects(): NativeFamily<Offer> {
   let m = initialMemory(0);
+  function enter(o:NativeObservation){
+    if(m.epoch===o.level_epoch)return;
+    const carry=m.previewCarry;m=initialMemory(o.level_epoch);m.previewLearning=acceptPreviewCarry(carry,o);
+  }
   function acquire(
     b: NativeObservation,
     a: NativeObservation,
@@ -76,7 +82,12 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     next: NativeRows,
     x?: Experiment
   ) {
-    if (m.epoch !== b.level_epoch) m = initialMemory(b.level_epoch);
+    enter(b);
+    const learning=m.previewLearning??=newPreviewLearning(),boundary=carryPreviewBindings(learning,b,a);
+    if(boundary)m.previewCarry=boundary;
+    if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
+      observePreviewBindings(learning,b,a,visualLayout(b,rows),visualLayout(a,next),observedCommandKey(cmd));
+    }
     if (!x && (b.level_epoch !== a.level_epoch || b.state !== a.state)) return null;
     return recordExperiment(m, b, a, cmd, rows, next, x);
   }
@@ -84,7 +95,8 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     id: preparedEffectsId,
     propose: () => null,
     async proposeInGroup(group, o, rows, inputs, remaining) {
-      if (remaining < 1 || m.epoch !== o.level_epoch || !m.turns) return null;
+      enter(o);
+      if (remaining < 1 || !m.turns&&!Object.keys(m.previewLearning?.bindings??{}).length) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
@@ -93,13 +105,14 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       if (!experiment) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : labels[phase],
         parent = 'G_official_completion';
       const evidence = [
         ref,
+        ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
         ...experiment.refs.map(
           (r) =>
             ref.split(':revision:', 1)[0] +
@@ -112,9 +125,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const question = {
         kind: 'test_prepared_effect',
         scope: ref.split(':revision:', 1)[0]!,
-        subjects: experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
+        subjects: experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
         parentObjective: parent,
-        satisfactionContract: experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
+        satisfactionContract: experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
       const equation = experiment.equation?.claim;
       const capability = equation
@@ -162,6 +175,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
+        ...(experiment.witnessedPreview ? {witnessedPreviewForecast:experiment.witnessedPreview} : {}),
         ...(experiment.occupancy ? {occupancyForecast:experiment.occupancy} : {}),
         ...(experiment.occupancy?.preview ? {morphologicalPreview:experiment.occupancy.preview} : {}),
         ...(experiment.territorial ? {territoryForecast:experiment.territorial} : {}),

@@ -177,6 +177,7 @@ async function run(code, games) {
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
+      const previewReadSeal=plan?.witnessedPreviewForecast?hash(plan.witnessedPreviewForecast):null;
       const occupancySeal=plan?.occupancyForecast?hash(plan.occupancyForecast):null;
       const territorySeal=plan?.territoryForecast?hash(plan.territoryForecast):null;
       const activationSeal=plan?.activationForecast?hash(plan.activationForecast):null;
@@ -196,7 +197,7 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
@@ -306,6 +307,7 @@ async function run(code, games) {
           frame,
           activation,
           territorial,
+          witnessedPreview,
           occupancy,
           retained,
           transfer,
@@ -358,6 +360,7 @@ async function run(code, games) {
           predictedGap,
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
+          ...(witnessedPreview ? {witnessedPreview} : {}),
           ...(occupancy ? {occupancy} : {}),
           ...(territorial ? {territorial} : {}),
           ...(activation ? {activation} : {}),
