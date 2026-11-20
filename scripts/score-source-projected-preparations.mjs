@@ -7,6 +7,10 @@ import { sourceReplay, hash, op } from './sic-study-source-replay.mjs';
 import { publicParts } from './source-transfer-demonstration.mjs';
 const [env, dir, sealPath, output, cohort] = process.argv.slice(2),
   engine = await sourceBackend(resolve(env));
+const split = process.argv.find((arg) => arg.startsWith('--shorter-shard='))?.split('=')[1] ?? '0/1';
+const [part, total] = split.split('/').map(Number);
+if (!Number.isInteger(part) || !Number.isInteger(total) || part < 0 || part >= total)
+  throw Error('Invalid shorter-path shard');
 const programs = JSON.parse(
   await readFile(new URL('../docs/architecture/sic-source-seven-programs.json', import.meta.url), 'utf8')
 );
@@ -141,6 +145,7 @@ for (const row of JSON.parse(await readFile(sealPath, 'utf8'))) {
         withoutSetup: 0,
         first: null,
       };
+      if (total > 1) short.partition = split;
       example.shorter = short;
       const alternatives = new Set();
       const matched = { layouts: 0, identifiable: 0, forecasts: 0, distinctArrivals: 0, examples: [] };
@@ -171,10 +176,14 @@ for (const row of JSON.parse(await readFile(sealPath, 'utf8'))) {
               if (eq(target, actual)) matched.forecasts++;
               if (!eq(actual, arrived)) matched.distinctArrivals++;
             }
-            if (matched.examples.length < 3) matched.examples.push({ word, reference, target, actual });
+            if (total > 1 || matched.examples.length < 3)
+              matched.examples.push({ frame: hash(b), word, reference, target, actual });
           }
         }
-        if (active(b) && word.length < short.maxLength) for (const cmd of cmds(b)) await scan([...word, cmd]);
+        if (active(b) && word.length < short.maxLength) {
+          const commands = cmds(b).filter((_, index) => word.length > 0 || index % total === part);
+          for (const command of commands) await scan([...word, command]);
+        }
       }
       await scan([]);
     }
