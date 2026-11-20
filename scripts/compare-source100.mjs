@@ -268,6 +268,7 @@ async function run(code, games) {
         ({
           epoch,
           access,
+          equation,
           phase,
           hypothesis,
           result,
@@ -313,6 +314,7 @@ async function run(code, games) {
           capability,
           predictedGap,
           ...(access ? {access} : {}),
+          ...(equation ? {equation} : {}),
         })
       ),
       ...(source ? { steps } : {}),

@@ -16,9 +16,12 @@ import {
 import { sicNeedId } from './need-identity.ts';
 import { exhaustedGroup } from './test-observed-compositions.ts';
 export const preparedEffectsId = 'sic_test_prepared_effects';
+import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  capabilityUse: 'Exercise the predicted new access furnished by the invented capability',
+  capabilityStep: 'Test a new capability derived from witnessed operators',
   accessContinue: 'Exercise an untested command at the predicted destination',
   accessSetup: 'Arrange the measured bodies for a predicted destination',
   accessTrigger: 'Test the destination derived from this spatial configuration',
@@ -102,6 +105,21 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         parentObjective: parent,
         satisfactionContract: 'compare_the_public_effect_of_B_after_each_preparation',
       };
+      const equation = experiment.equation?.claim;
+      const capability = equation
+        ? {
+            unknown: 'effect of the proposed program',
+            kind: equation.kind,
+            roles: equation.roles,
+            initial: equation.initial,
+            goal: equation.goal,
+            derived_effect: equation.effect,
+            control: equation.control,
+            program: equation.program,
+            opportunity: equation.opportunity,
+            choices: experiment.equation!.choices,
+          }
+        : null;
       const imagined = experiment.access
         ? {
             chosen: {
@@ -130,6 +148,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(imagined ? { spatial_forecast: imagined } : {}),
+        ...(capability ? { capability_equation: capability } : {}),
         steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: o.level_epoch },
         sicSituationCard: {
@@ -147,6 +166,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
           reason: label,
           hypothesis_refs: evidence,
           ...(imagined ? { spatial_forecast: imagined } : {}),
+          ...(capability ? { capability_equation: capability } : {}),
         },
         route_refs: evidence,
         sicLocalDecision: { strategy: phase, objective: { id: need.id, label, parent }, need },
@@ -188,6 +208,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     restore(value) {
       m = structuredClone(value as typeof m);
       m.space ??= newSpatialMemory();
+      m.equations ??= freshCapabilities();
     },
   };
 }

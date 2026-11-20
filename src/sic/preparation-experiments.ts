@@ -30,6 +30,13 @@ import {
   type AccessCard,
 } from './spatial-access.ts';
 
+import {
+  freshCapabilities,
+  proposeCapability,
+  recordCapability,
+  type CapabilityMemory,
+  type CapabilityTrial,
+} from './derive-capabilities.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -81,6 +88,8 @@ export type Experiment = {
     | 'deriveB'
     | 'carry'
     | 'carryB'
+    | 'capabilityUse'
+    | 'capabilityStep'
     | 'accessContinue'
     | 'accessSetup'
     | 'accessTrigger';
@@ -95,6 +104,7 @@ export type Experiment = {
   refs: number[];
   placement?: Placement;
   derive?: Derivation;
+  equation?: CapabilityTrial;
   access?: { card: AccessCard; step: number; alternatives: Record<string, unknown>[] };
 };
 export type Outcome = {
@@ -119,10 +129,12 @@ export type Outcome = {
   capability?: Derivation['capability'];
   strictMatch?: boolean;
   access?: Record<string, unknown>;
+  equation?: Record<string, unknown>;
 };
 export type Memory = {
   epoch: number;
   space: SpatialMemory;
+  equations: CapabilityMemory;
   scenes: string[];
   revisionScene: Record<number, number>;
   edges: Edge[];
@@ -143,6 +155,7 @@ export type Memory = {
 export const initialMemory = (epoch: number): Memory => ({
   epoch,
   space: newSpatialMemory(),
+  equations: freshCapabilities(),
   scenes: [],
   revisionScene: {},
   edges: [],
@@ -315,6 +328,10 @@ export function selectExperiment(
   const s = m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
+  if (rows && (m.equations.active || (!m.pending && !m.space.active))) {
+    const capability = proposeCapability(m, o, rows, available, s);
+    if (capability) return capability;
+  }
   if (rows && (!m.pending || m.space.active)) {
     const access = proposeAccess(m, o, rows, available, s);
     if (access) return access;
@@ -556,7 +573,14 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
-  if(!x?.access){m.space.active=null;m.space.continuation=null;}
+  if (!x?.equation) {
+    m.equations.active = null;
+    m.equations.follow = null;
+  }
+  if (!x?.access) {
+    m.space.active = null;
+    m.space.continuation = null;
+  }
   observeFloor(m.space.floor, b, a, next, effect.moves);
   for (const move of effect.moves) delete m.blocked[[move.actor, ...move.from.split(','), op].join('/')];
   updatePlacement(m, b, a, op, x);
@@ -629,6 +653,10 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if (x.equation) {
+    const { result, detail } = recordCapability(m, x, a, b);
+    return { ...out, result, equation: detail };
+  }
   if (x.access) {
     const { result, detail } = recordAccess(m, x, b, a);
     return { ...out, result, access: detail };
