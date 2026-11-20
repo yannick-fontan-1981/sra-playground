@@ -58,6 +58,18 @@
         "SMLP",
         "TRIA"
       ]
+    },
+    "v11": {
+      "games": 100,
+      "wins": 65,
+      "gained": [
+        "CGWL",
+        "VOIS"
+      ],
+      "lost": [
+        "SMLP",
+        "TRIA"
+      ]
     }
   },
   "ss01Level2": {
@@ -420,6 +432,167 @@
         "actions": 447,
         "controlImages": 119,
         "candidateImages": 145
+      }
+    },
+    "v11": {
+      "candidate": "104a9739213cb195715509a7b5afcd90f160bada",
+      "actions": 595,
+      "images": 166,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "reason": "level_active_time_budget",
+      "projection": {
+        "issued": 17,
+        "observed": 11,
+        "verifiedLanding": 0,
+        "verifiedContinuation": 0,
+        "refuted": 11
+      },
+      "frontier": {
+        "routes": 38,
+        "newProbes": 53,
+        "arrivals": 6,
+        "continuations": 3,
+        "subsequentUses": 0
+      },
+      "openings": {
+        "proposed": 14,
+        "placements": 1,
+        "transported": 0,
+        "matchedControl": 0,
+        "subsequentUses": 0
+      },
+      "alternatives": {
+        "tried": 9,
+        "moved": 0,
+        "exact": 0,
+        "matchedPreparation": 0
+      },
+      "conditions": {
+        "selected": 3,
+        "completedPlacements": 0,
+        "observedPreparations": 1,
+        "tested": 1,
+        "moved": 1,
+        "exact": 1,
+        "fixedOriginExact": 0,
+        "used": 1,
+        "official": 0,
+        "reused": 0,
+        "boardPrograms": 0,
+        "boardTested": 0,
+        "boardExact": 0,
+        "boardUsed": 0,
+        "boardNoRelativeExact": 0,
+        "boardNoRelativeUsed": 0,
+        "boardSameOffsetExact": 0,
+        "boardSameOffsetUsed": 0,
+        "reconsidered": 0,
+        "reconsideredExact": 0,
+        "reconsideredUsed": 0,
+        "reuseUsed": 0
+      },
+      "delayed": {
+        "issued": 89,
+        "preparedAccess": 0,
+        "exactPredictions": 0,
+        "followingMovements": 0
+      },
+      "repertoires": {
+        "calibrations": 0,
+        "calibrationChanged": 0,
+        "probes": 1,
+        "measurable": 1,
+        "changed": 0,
+        "newMotion": 0,
+        "revised": 0,
+        "used": 0
+      },
+      "independentRegionCrossings": 0,
+      "trajectory": "ae8008834941e4c942a516b7728c75b3e89f7ab8de1270e481f1ae92753dad83",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "controlRepeat": {
+        "candidate": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+        "actions": 635,
+        "images": 154,
+        "won": false,
+        "state": "NOT_FINISHED",
+        "reason": "level_active_time_budget",
+        "projection": {
+          "issued": 0,
+          "observed": 0,
+          "verifiedLanding": 0,
+          "verifiedContinuation": 0,
+          "refuted": 0
+        },
+        "frontier": {
+          "routes": 0,
+          "newProbes": 0,
+          "arrivals": 0,
+          "continuations": 0,
+          "subsequentUses": 0
+        },
+        "openings": {
+          "proposed": 0,
+          "placements": 0,
+          "transported": 0,
+          "matchedControl": 0,
+          "subsequentUses": 0
+        },
+        "alternatives": {
+          "tried": 0,
+          "moved": 0,
+          "exact": 0,
+          "matchedPreparation": 0
+        },
+        "conditions": {
+          "selected": 0,
+          "completedPlacements": 0,
+          "observedPreparations": 0,
+          "tested": 0,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        "delayed": {
+          "issued": 0,
+          "preparedAccess": 0,
+          "exactPredictions": 0,
+          "followingMovements": 0
+        },
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        },
+        "independentRegionCrossings": 0,
+        "trajectory": "6b497892c084e64bf3a6e94ac8dc15c42df9cd85baa592f7cf2a57a4e21edb00",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+      },
+      "matchedPrefix": {
+        "actions": 595,
+        "controlImages": 147,
+        "candidateImages": 166
       }
     }
   },
@@ -1135,6 +1308,20 @@
         "continued": 4,
         "boardActivated": 2,
         "boardContinued": 2
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -1177,6 +1364,20 @@
         "continued": 10,
         "boardActivated": 2,
         "boardContinued": 1
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 3,
+          "measurable": 3,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -1219,6 +1420,20 @@
         "continued": 2,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -1261,6 +1476,20 @@
         "continued": 7,
         "boardActivated": 5,
         "boardContinued": 2
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -1303,6 +1532,20 @@
         "continued": 6,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -1345,6 +1588,20 @@
         "continued": 8,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 2,
+          "measurable": 2,
+          "changed": 2,
+          "newMotion": 1,
+          "revised": 1,
+          "used": 1
+        }
       }
     },
     {
@@ -1387,6 +1644,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     }
   ],
@@ -3878,6 +4149,20 @@
         "continued": 7,
         "boardActivated": 3,
         "boardContinued": 3
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -3912,6 +4197,20 @@
         "continued": 10,
         "boardActivated": 2,
         "boardContinued": 1
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 3,
+          "measurable": 3,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -3946,6 +4245,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": true,
+        "actions": 13,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -3980,6 +4293,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": true,
+        "actions": 9,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -4014,6 +4341,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": true,
+        "actions": 74,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -4048,6 +4389,20 @@
         "continued": 8,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 2,
+          "measurable": 2,
+          "changed": 2,
+          "newMotion": 1,
+          "revised": 1,
+          "used": 1
+        }
       }
     },
     {
@@ -4082,6 +4437,20 @@
         "continued": 1,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 1,
+          "measurable": 1,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     }
   ],
@@ -4603,6 +4972,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": true,
+        "actions": 12,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -4632,6 +5015,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": true,
+        "actions": 13,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -4665,6 +5062,20 @@
         "continued": 4,
         "boardActivated": 1,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -4694,6 +5105,20 @@
         "continued": 1,
         "boardActivated": 2,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -4727,6 +5152,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     },
     {
@@ -4756,6 +5195,20 @@
         "continued": 0,
         "boardActivated": 0,
         "boardContinued": 0
+      },
+      "candidateV11": {
+        "won": false,
+        "actions": 120,
+        "repertoires": {
+          "calibrations": 0,
+          "calibrationChanged": 0,
+          "probes": 0,
+          "measurable": 0,
+          "changed": 0,
+          "newMotion": 0,
+          "revised": 0,
+          "used": 0
+        }
       }
     }
   ],
@@ -10767,5 +11220,1025 @@
         }
       ]
     }
+  },
+  "controlledCompositionsV11": {
+    "lower": {
+      "gamesAndLevels": 100,
+      "eligible": 99,
+      "measured": 4709,
+      "wins": 388,
+      "essentialWins": 54,
+      "positive": 608,
+      "positiveWins": 35,
+      "selectedEssential": 26,
+      "tiedBest": 137,
+      "bestWins": 9,
+      "partial": {
+        "probes": 1202,
+        "measured": 1191,
+        "changed": 480,
+        "newMotion": 314,
+        "wins": 60,
+        "necessary": 31
+      },
+      "partialIdle": {
+        "probes": 735,
+        "measured": 726,
+        "changed": 159,
+        "newMotion": 159,
+        "wins": 29,
+        "necessary": 4
+      },
+      "partialDiverse": {
+        "probes": 1021,
+        "measured": 1011,
+        "changed": 371,
+        "newMotion": 243,
+        "wins": 46,
+        "necessary": 22
+      },
+      "forecast": {
+        "forecasts": 340,
+        "measured": 310,
+        "exact": 190,
+        "enabled": 250,
+        "wins": 28,
+        "essential": 25,
+        "exactAndWon": 7
+      },
+      "unseen": {
+        "forecasts": 314,
+        "measured": 287,
+        "exact": 169,
+        "enabled": 232,
+        "wins": 25,
+        "essential": 22,
+        "exactAndWon": 7
+      },
+      "equalDuration": {
+        "selectedWins": 31,
+        "rectangle": 31,
+        "cross": 20,
+        "differentMotion": 4,
+        "differentDisplacement": 23,
+        "differentArrival": 12
+      },
+      "equation": {
+        "entries": 99,
+        "discordant": {
+          "forecasts": 57,
+          "measured": 57,
+          "exact": 37,
+          "baselineExact": 13,
+          "necessaryWin": 24,
+          "games": 11
+        },
+        "freshMovingResponse": {
+          "forecasts": 10,
+          "measured": 10,
+          "exact": 1,
+          "baselineExact": 3,
+          "necessaryWin": 0,
+          "games": 7
+        },
+        "outsideBareMenu": {
+          "forecasts": 8,
+          "measured": 8,
+          "exact": 1,
+          "baselineExact": 3,
+          "necessaryWin": 0,
+          "games": 6
+        },
+        "awakened": {
+          "forecasts": 2,
+          "measured": 2,
+          "exact": 1,
+          "baselineExact": 1,
+          "necessaryWin": 0,
+          "games": 1
+        },
+        "reoriented": {
+          "forecasts": 6,
+          "measured": 6,
+          "exact": 0,
+          "baselineExact": 0,
+          "necessaryWin": 0,
+          "games": 4
+        },
+        "byGame": {
+          "CGWL": {
+            "forecasts": 1,
+            "measured": 1,
+            "exact": 0,
+            "baselineExact": 1,
+            "necessaryWin": 0,
+            "games": 1
+          },
+          "COMB": {
+            "forecasts": 2,
+            "measured": 2,
+            "exact": 0,
+            "baselineExact": 0,
+            "necessaryWin": 0,
+            "games": 1
+          },
+          "ETAG": {
+            "forecasts": 1,
+            "measured": 1,
+            "exact": 0,
+            "baselineExact": 0,
+            "necessaryWin": 0,
+            "games": 1
+          },
+          "FITE": {
+            "forecasts": 1,
+            "measured": 1,
+            "exact": 0,
+            "baselineExact": 0,
+            "necessaryWin": 0,
+            "games": 1
+          },
+          "KLOT": {
+            "forecasts": 2,
+            "measured": 2,
+            "exact": 0,
+            "baselineExact": 0,
+            "necessaryWin": 0,
+            "games": 1
+          },
+          "MEMO": {
+            "forecasts": 2,
+            "measured": 2,
+            "exact": 1,
+            "baselineExact": 1,
+            "necessaryWin": 0,
+            "games": 1
+          },
+          "TEQU": {
+            "forecasts": 1,
+            "measured": 1,
+            "exact": 0,
+            "baselineExact": 1,
+            "necessaryWin": 0,
+            "games": 1
+          }
+        },
+        "examples": [
+          {
+            "code": "MEMO",
+            "level": 1,
+            "a": "ACTION6:13,21",
+            "b": "ACTION6:13,40",
+            "role": "c1a6aac75c61adf5179bdbe44a7f9785a1caa5f3405d0e865ef29c61ede90897",
+            "origin": [
+              11,
+              19
+            ],
+            "prepared": [
+              30,
+              8
+            ],
+            "bare": [
+              0,
+              0
+            ],
+            "predicted": [
+              11,
+              19
+            ],
+            "actual": [
+              11,
+              19
+            ],
+            "measured": true,
+            "exact": true,
+            "baselineExact": false,
+            "newVector": true,
+            "unprobedEndpoint": true,
+            "activated": true,
+            "predictedMotion": true,
+            "reoriented": false,
+            "necessaryWin": false,
+            "calibrations": [
+              "ACTION6:13,21",
+              "ACTION6:16,21",
+              "ACTION7"
+            ],
+            "changedPartner": true
+          }
+        ]
+      }
+    },
+    "upper": {
+      "gamesAndLevels": 18,
+      "eligible": 18,
+      "measured": 1299,
+      "wins": 20,
+      "essentialWins": 20,
+      "positive": 215,
+      "positiveWins": 16,
+      "selectedEssential": 16,
+      "tiedBest": 47,
+      "bestWins": 2,
+      "partial": {
+        "probes": 481,
+        "measured": 477,
+        "changed": 199,
+        "newMotion": 130,
+        "wins": 13,
+        "necessary": 13
+      },
+      "partialIdle": {
+        "probes": 318,
+        "measured": 316,
+        "changed": 60,
+        "newMotion": 60,
+        "wins": 0,
+        "necessary": 0
+      },
+      "partialDiverse": {
+        "probes": 432,
+        "measured": 429,
+        "changed": 183,
+        "newMotion": 123,
+        "wins": 13,
+        "necessary": 13
+      },
+      "forecast": {
+        "forecasts": 101,
+        "measured": 99,
+        "exact": 38,
+        "enabled": 58,
+        "wins": 1,
+        "essential": 1,
+        "exactAndWon": 0
+      },
+      "unseen": {
+        "forecasts": 97,
+        "measured": 95,
+        "exact": 34,
+        "enabled": 54,
+        "wins": 1,
+        "essential": 1,
+        "exactAndWon": 0
+      },
+      "equalDuration": {
+        "selectedWins": 13,
+        "rectangle": 13,
+        "cross": 8,
+        "differentMotion": 11,
+        "differentDisplacement": 11,
+        "differentArrival": 11
+      },
+      "equation": {
+        "entries": 18,
+        "discordant": {
+          "forecasts": 8,
+          "measured": 8,
+          "exact": 0,
+          "baselineExact": 8,
+          "necessaryWin": 0,
+          "games": 1
+        },
+        "freshMovingResponse": {
+          "forecasts": 0,
+          "measured": 0,
+          "exact": 0,
+          "baselineExact": 0,
+          "necessaryWin": 0,
+          "games": 0
+        },
+        "outsideBareMenu": {
+          "forecasts": 0,
+          "measured": 0,
+          "exact": 0,
+          "baselineExact": 0,
+          "necessaryWin": 0,
+          "games": 0
+        },
+        "awakened": {
+          "forecasts": 0,
+          "measured": 0,
+          "exact": 0,
+          "baselineExact": 0,
+          "necessaryWin": 0,
+          "games": 0
+        },
+        "reoriented": {
+          "forecasts": 0,
+          "measured": 0,
+          "exact": 0,
+          "baselineExact": 0,
+          "necessaryWin": 0,
+          "games": 0
+        },
+        "byGame": {},
+        "examples": []
+      }
+    },
+    "examples": [
+      {
+        "code": "GRAV",
+        "level": 2,
+        "program": [
+          "ACTION1",
+          "ACTION3",
+          "ACTION2"
+        ],
+        "rectangle": true,
+        "cross": true,
+        "differentMotion": true,
+        "differentDisplacement": true,
+        "differentArrival": true,
+        "actor": "1dbcdaae2aa3a86685260e3fde8dfbcb93b63e27f99dcde46ac3e57b7d239cb6",
+        "origin": [
+          52,
+          40
+        ],
+        "prepared": [
+          52,
+          24
+        ],
+        "direct": [
+          12,
+          40
+        ],
+        "arrival": [
+          8,
+          24
+        ],
+        "calibration": "ACTION6:31,4",
+        "beforeD": [
+          52,
+          24
+        ],
+        "afterD": [
+          52,
+          24
+        ],
+        "alternativeA": "ACTION3",
+        "alternativeB": "ACTION1",
+        "otherPrepared": [
+          12,
+          40
+        ],
+        "otherArrival": [
+          12,
+          40
+        ]
+      },
+      {
+        "code": "PRTL",
+        "level": 1,
+        "program": [
+          "ACTION3",
+          "ACTION3",
+          "ACTION3"
+        ],
+        "rectangle": true,
+        "cross": false,
+        "differentMotion": true,
+        "differentDisplacement": true,
+        "differentArrival": true,
+        "actor": "1408b81c579a363e6849c7cd8f20048093a91b9c1ee42c5638e28a5c2235dbc7",
+        "origin": [
+          11,
+          51
+        ],
+        "prepared": [
+          6,
+          51
+        ],
+        "direct": [
+          6,
+          51
+        ],
+        "arrival": [
+          56,
+          51
+        ],
+        "calibration": "ACTION4",
+        "beforeD": [
+          15,
+          51
+        ],
+        "afterD": [
+          11,
+          51
+        ],
+        "alternativeA": "ACTION1",
+        "alternativeB": "ACTION1",
+        "otherPrepared": [
+          11,
+          38
+        ],
+        "otherArrival": [
+          6,
+          31
+        ]
+      },
+      {
+        "code": "KLOT",
+        "level": 1,
+        "program": [
+          "ACTION6:43,38",
+          "ACTION3",
+          "ACTION2"
+        ],
+        "rectangle": true,
+        "cross": false,
+        "differentMotion": true,
+        "differentDisplacement": true,
+        "differentArrival": true,
+        "actor": "38c017ccbbd77f4ef6639fa5660a234b1f34fdf26d88e0b256e764bfb0dcf6cc",
+        "origin": [
+          16,
+          27
+        ],
+        "prepared": [
+          32,
+          35
+        ],
+        "direct": [
+          16,
+          27
+        ],
+        "arrival": [
+          24,
+          35
+        ],
+        "calibration": "ACTION2",
+        "beforeD": [
+          16,
+          35
+        ],
+        "afterD": [
+          32,
+          35
+        ],
+        "alternativeA": "ACTION1",
+        "alternativeB": "ACTION1",
+        "otherPrepared": [
+          16,
+          27
+        ],
+        "otherArrival": [
+          16,
+          27
+        ]
+      }
+    ],
+    "autonomous": {
+      "sourceWins": 65,
+      "upperWins": 5,
+      "sourceControls": {
+        "calibrations": 0,
+        "calibrationChanged": 0,
+        "probes": 15,
+        "measurable": 15,
+        "changed": 0,
+        "newMotion": 0,
+        "revised": 0,
+        "used": 0
+      },
+      "upperControls": {
+        "calibrations": 0,
+        "calibrationChanged": 0,
+        "probes": 6,
+        "measurable": 6,
+        "changed": 2,
+        "newMotion": 1,
+        "revised": 1,
+        "used": 1
+      },
+      "revisedUse": [
+        {
+          "phase": "frontierProbe",
+          "result": "projection_refuted",
+          "actionIndex": 61,
+          "frontier": {
+            "place": {
+              "actor": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "bare": null,
+              "context": [
+                "6b0e76693b4fbb9566d7a38d992dcf601ed9d0c02a26c6f03a289d5d284dcbcc@53,13",
+                "c89d0ec3d507f262698434d82a2d8263b3a989b035dc5c0e1ae1351b38412e93@53,5"
+              ],
+              "from": [
+                48,
+                8
+              ],
+              "newArrival": true,
+              "newUse": true,
+              "opening": {
+                "controlRef": 45,
+                "destination": [
+                  53,
+                  9
+                ],
+                "mover": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+                "placement": [
+                  52,
+                  8
+                ],
+                "traveler": "c89d0ec3d507f262698434d82a2d8263b3a989b035dc5c0e1ae1351b38412e93",
+                "trigger": "ACTION2",
+                "without": [
+                  53,
+                  5
+                ]
+              },
+              "placementChanged": false,
+              "preparationRef": null,
+              "reference": null,
+              "referenceEvidence": [],
+              "target": null
+            },
+            "repertoire": {
+              "actor": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "bare": {
+                "ref": 35,
+                "to": [
+                  52,
+                  4
+                ]
+              },
+              "calibration": {
+                "after": [
+                  4,
+                  8
+                ],
+                "bareEffect": [
+                  -44,
+                  4
+                ],
+                "bareRef": 50,
+                "before": [
+                  4,
+                  8
+                ],
+                "op": "ACTION6:6,10",
+                "preparedEffect": [
+                  -44,
+                  0
+                ],
+                "preparedRef": 46
+              },
+              "origin": [
+                48,
+                4
+              ],
+              "prepared": [
+                48,
+                8
+              ],
+              "setup": {
+                "from": [
+                  53,
+                  9
+                ],
+                "moved": "6b0e76693b4fbb9566d7a38d992dcf601ed9d0c02a26c6f03a289d5d284dcbcc",
+                "op": "ACTION2",
+                "ref": 44,
+                "to": [
+                  53,
+                  13
+                ]
+              }
+            },
+            "controlled": {
+              "actual": [
+                52,
+                4
+              ],
+              "changed": true,
+              "moved": true
+            },
+            "revisedUse": {
+              "role": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "op": "ACTION2",
+              "from": [
+                52,
+                4
+              ],
+              "to": [
+                52,
+                8
+              ],
+              "ref": 21
+            },
+            "target": 20,
+            "probe": "ACTION6:54,6",
+            "arrival": {
+              "from": [
+                48,
+                8
+              ],
+              "op": "ACTION6:54,6",
+              "ref": 35,
+              "role": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "to": [
+                52,
+                8
+              ]
+            },
+            "use": {
+              "from": [
+                53,
+                5
+              ],
+              "op": "ACTION2",
+              "ref": 47,
+              "role": "c89d0ec3d507f262698434d82a2d8263b3a989b035dc5c0e1ae1351b38412e93",
+              "to": [
+                53,
+                9
+              ]
+            },
+            "after": {
+              "from": [
+                53,
+                9
+              ],
+              "op": "ACTION6:10,10",
+              "ref": 38,
+              "role": "c89d0ec3d507f262698434d82a2d8263b3a989b035dc5c0e1ae1351b38412e93",
+              "to": [
+                57,
+                9
+              ]
+            },
+            "routeTo": null,
+            "actualScene": 14
+          }
+        },
+        {
+          "phase": "frontierUse",
+          "result": "continuation_verified",
+          "actionIndex": 62,
+          "frontier": {
+            "repertoire": {
+              "actor": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "bare": {
+                "ref": 35,
+                "to": [
+                  52,
+                  4
+                ]
+              },
+              "calibration": {
+                "after": [
+                  4,
+                  8
+                ],
+                "bareEffect": [
+                  -44,
+                  4
+                ],
+                "bareRef": 50,
+                "before": [
+                  4,
+                  8
+                ],
+                "op": "ACTION6:6,10",
+                "preparedEffect": [
+                  -44,
+                  0
+                ],
+                "preparedRef": 46
+              },
+              "origin": [
+                48,
+                4
+              ],
+              "prepared": [
+                48,
+                8
+              ],
+              "setup": {
+                "from": [
+                  53,
+                  9
+                ],
+                "moved": "6b0e76693b4fbb9566d7a38d992dcf601ed9d0c02a26c6f03a289d5d284dcbcc",
+                "op": "ACTION2",
+                "ref": 44,
+                "to": [
+                  53,
+                  13
+                ]
+              }
+            },
+            "controlled": null,
+            "revisedUse": null,
+            "target": 20,
+            "probe": "ACTION6:54,6",
+            "arrival": {
+              "from": [
+                48,
+                8
+              ],
+              "op": "ACTION6:54,6",
+              "ref": 35,
+              "role": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "to": [
+                52,
+                8
+              ]
+            },
+            "use": {
+              "from": [
+                52,
+                4
+              ],
+              "op": "ACTION2",
+              "ref": 21,
+              "role": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "to": [
+                52,
+                8
+              ]
+            },
+            "routeTo": null,
+            "actualScene": 23
+          }
+        }
+      ]
+    }
+  },
+  "sourceDistantArrivalsV11": {
+    "lower": {
+      "entries": 100,
+      "counts": {
+        "predictions": 1001,
+        "measurable": 966,
+        "distant": 16,
+        "offered": 197,
+        "offeredMeasurable": 187,
+        "offeredDistant": 2,
+        "nearestExact": 1,
+        "topThreeExact": 1,
+        "newEndpointExact": 1
+      },
+      "matched": [
+        {
+          "code": "PRTL",
+          "level": 1,
+          "step": 5,
+          "cmd": "ACTION3",
+          "origin": [
+            6,
+            51
+          ],
+          "ordinary": [
+            -5,
+            0
+          ],
+          "actual": [
+            56,
+            51
+          ],
+          "offered": [
+            [
+              56,
+              51
+            ]
+          ],
+          "rank": 1
+        }
+      ]
+    },
+    "upper": {
+      "entries": 18,
+      "counts": {
+        "predictions": 170,
+        "measurable": 166,
+        "distant": 1,
+        "offered": 0,
+        "offeredMeasurable": 0,
+        "offeredDistant": 0,
+        "nearestExact": 0,
+        "topThreeExact": 0,
+        "newEndpointExact": 0
+      },
+      "matched": []
+    },
+    "cold": {
+      "entries": 18,
+      "counts": {
+        "predictions": 1482,
+        "measurable": 1449,
+        "distant": 33,
+        "offered": 85,
+        "offeredMeasurable": 85,
+        "offeredDistant": 1,
+        "nearestExact": 0,
+        "topThreeExact": 0,
+        "newEndpointExact": 0
+      },
+      "matched": []
+    },
+    "prospective": [
+      {
+        "code": "FOGW",
+        "level": 1,
+        "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+        "plans": 8,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "FOGW",
+        "level": 2,
+        "initial": "38e108c1df1b50268a10427a7abfa718fc452c5fb3d967a645c38c6249bc659f",
+        "plans": 4,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "FOGW",
+        "level": 3,
+        "initial": "f5ad78c3623d4d8a899105518044e022a65c9e3ae310517dcd9490779a6880da",
+        "plans": 4,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "PORT",
+        "level": 1,
+        "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+        "plans": 0,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "PORT",
+        "level": 2,
+        "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+        "plans": 0,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "PORT",
+        "level": 3,
+        "initial": "010027d9f888ce69c302485bddd6af3c566a55503c2093a7fac332f85aa97dde",
+        "plans": 0,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "PRTL",
+        "level": 1,
+        "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+        "plans": 5,
+        "reached": 1,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "PRTL",
+        "level": 2,
+        "initial": "486da49e69a50992fb7f94524e55683663ac30e568f3888e9c86046baf0d0773",
+        "plans": 2,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      },
+      {
+        "code": "PRTL",
+        "level": 3,
+        "initial": "95455d86035a4adb6954de917fdc6387f58da3814e5488e96f243ec5c9ba35fb",
+        "plans": 11,
+        "reached": 0,
+        "exact": 0,
+        "continued": 0,
+        "wins": 0
+      }
+    ],
+    "additionalAutonomous": [
+      {
+        "code": "PRTL",
+        "level": 2,
+        "actions": 120,
+        "won": false,
+        "counts": {
+          "predictions": 104,
+          "measurable": 103,
+          "distant": 11,
+          "offered": 0,
+          "offeredMeasurable": 0,
+          "offeredDistant": 0,
+          "nearestExact": 0,
+          "topThreeExact": 0,
+          "newEndpointExact": 0
+        },
+        "matched": []
+      },
+      {
+        "code": "PORT",
+        "level": 2,
+        "actions": 120,
+        "won": false,
+        "counts": {
+          "predictions": 141,
+          "measurable": 139,
+          "distant": 0,
+          "offered": 0,
+          "offeredMeasurable": 0,
+          "offeredDistant": 0,
+          "nearestExact": 0,
+          "topThreeExact": 0,
+          "newEndpointExact": 0
+        },
+        "matched": []
+      },
+      {
+        "code": "FOGW",
+        "level": 2,
+        "actions": 120,
+        "won": false,
+        "counts": {
+          "predictions": 200,
+          "measurable": 142,
+          "distant": 21,
+          "offered": 8,
+          "offeredMeasurable": 8,
+          "offeredDistant": 8,
+          "nearestExact": 0,
+          "topThreeExact": 0,
+          "newEndpointExact": 0
+        },
+        "matched": []
+      },
+      {
+        "code": "PRTL",
+        "level": 3,
+        "actions": 120,
+        "won": false,
+        "counts": {
+          "predictions": 96,
+          "measurable": 96,
+          "distant": 5,
+          "offered": 7,
+          "offeredMeasurable": 7,
+          "offeredDistant": 0,
+          "nearestExact": 0,
+          "topThreeExact": 0,
+          "newEndpointExact": 0
+        },
+        "matched": []
+      },
+      {
+        "code": "PORT",
+        "level": 3,
+        "actions": 120,
+        "won": false,
+        "counts": {
+          "predictions": 124,
+          "measurable": 119,
+          "distant": 5,
+          "offered": 13,
+          "offeredMeasurable": 12,
+          "offeredDistant": 5,
+          "nearestExact": 0,
+          "topThreeExact": 0,
+          "newEndpointExact": 0
+        },
+        "matched": []
+      },
+      {
+        "code": "FOGW",
+        "level": 3,
+        "actions": 120,
+        "won": false,
+        "counts": {
+          "predictions": 228,
+          "measurable": 151,
+          "distant": 21,
+          "offered": 19,
+          "offeredMeasurable": 16,
+          "offeredDistant": 7,
+          "nearestExact": 0,
+          "topThreeExact": 0,
+          "newEndpointExact": 0
+        },
+        "matched": []
+      }
+    ]
   }
 }

@@ -1,7 +1,8 @@
+import { measureReachableSites } from './measure-reachable-site-transfers.mjs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
-import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import { measureNativeObservation, ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { hash, op } from './sic-study-source-replay.mjs';
 import { add, diff, length, geometryIndex, alternatives } from './source-corresponding-sites.mjs';
@@ -48,6 +49,8 @@ async function audit(code, level) {
   const win = (b) => b.level > level || b.levelsCompleted > root.levelsCompleted || b.state === 'WIN';
   const active = (b) => !win(b) && b.state !== 'GAME_OVER';
   const cache = new Map();
+  const approach = process.env.SIC_SOURCE_MEASURED_APPROACH;
+  const mixed = approach === 'mixed' || approach === 'stratified';
   async function measure(b) {
     if (!active(b)) return null;
     const key = hash(b);
@@ -63,17 +66,43 @@ async function audit(code, level) {
         },
         1
       );
-      cache.set(key, geometryIndex(obs.entities, b.frame));
+      const geometry = geometryIndex(obs.entities, b.frame);
+      if (mixed) {
+        const locations = new ObservedInputDomain(16)
+          .candidates(obs)
+          .filter((k) => k.action_ref === 'ACTION6')
+          .map((k) => k.action_ref + ':' + k.data.x + ',' + k.data.y);
+        geometry.buttons = [
+          ...b.availableActionIds.filter((id) => id !== 6).map((id) => 'ACTION' + id),
+          ...locations,
+        ];
+      }
+      cache.set(key, geometry);
     }
     return cache.get(key);
   }
   const initial = await measure(root),
-    buttons = root.availableActionIds.filter((n) => n >= 1 && n <= 4).map((n) => 'ACTION' + n);
+    buttons =
+      initial.buttons ?? root.availableActionIds.filter((n) => n >= 1 && n <= 4).map((n) => 'ACTION' + n);
   const singles = new Map();
   for (const k of buttons) {
     open();
     const b = act(k);
     singles.set(k, await measure(b));
+  }
+  if (mixed || approach === '1') {
+    const reachable = await measureReachableSites({
+      open,
+      act,
+      active,
+      win,
+      measure,
+      root,
+      buttons,
+      singles,
+      stratified: approach === 'stratified',
+    });
+    return { code, level, available: true, initial: hash(root), reachable };
   }
   const ranked = new Map();
   for (const [role, body] of initial.ids) {

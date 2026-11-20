@@ -33,6 +33,15 @@ if (cohort === 'lower') {
       word: seq.map((v) => 'ACTION' + v.replace('@', ':')),
     });
   }
+} else if (cohort === 'recorded') {
+  for (const file of process.argv.slice(7)) {
+    const rows = (await readFile(file, 'utf8')).trim().split('\n').map(JSON.parse);
+    for (const run of rows) {
+      if (!allowed.has(run.code) || run.issued !== run.steps?.length || run.issued !== run.sic || run.resets)
+        throw Error('Unverified source rollout');
+      cases.push({ run, word: run.steps.map(op) });
+    }
+  }
 } else throw Error('Invalid source cohort');
 async function audit({ run, word }) {
   if (!allowed.has(run.code)) throw Error('Outside source corpus');
@@ -139,6 +148,12 @@ async function audit({ run, word }) {
   }
   if (!run.steps && !(board.level > run.start || board.levelsCompleted > completed || board.state === 'WIN'))
     throw Error('Reference did not win');
+  if (
+    run.steps &&
+    (board.level > run.start || board.levelsCompleted > completed || board.state === 'WIN') !==
+      run.levels[0].won
+  )
+    throw Error('Official result mismatch');
   return { code: run.code, level: run.start, counts, examples };
 }
 const results = [];
