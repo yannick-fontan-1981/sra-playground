@@ -1,0 +1,275 @@
+{
+  "frozenV22": {
+    "control": {
+      "tag": "sic-projected-affordances-source100-control-v1",
+      "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+      "files": 2401,
+      "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca"
+    },
+    "candidate": {
+      "tag": "sic-projected-affordances-source100-candidate-v22",
+      "sha": "456be4fd8713cfab058f5e7a4127546c9da4bd02",
+      "files": 2447,
+      "digest": "0aeeb9d5181f11754a21168d3552875e1372b3f8c4c1a913eb65be5db09e4f94"
+    }
+  },
+  "frozenV23": {
+    "control": {
+      "tag": "sic-projected-affordances-source100-control-v1",
+      "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+      "files": 2401,
+      "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca",
+      "export": "projection-v22-eval-control"
+    },
+    "candidate": {
+      "tag": "sic-projected-affordances-source100-candidate-v23",
+      "sha": "09ccf9040d0235553fd05bf5c3faeb0a2713b926",
+      "files": 2447,
+      "digest": "a815a1d913b04318efd585b1df01ac53a96cb52bb2636b48e73685dbf178f8eb",
+      "export": "projection-v23-eval-candidate"
+    }
+  },
+  "environment": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "direct": {
+    "SS01": {
+      "control": {
+        "issued": 579,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "c8ba139235f913e9c6a27b4a61660b61e137ec1af2c64235cec4e3fa67c5bc64",
+        "interventions": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v22": {
+        "issued": 505,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "a68f0edad7a4d29f3f60e9c1af16f5908162da17261897902aea4b54471ce26f",
+        "interventions": {
+          "issued": 35,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 35,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v23": {
+        "issued": 533,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "90222597bd99679deb077646b0a7b098529d36e1e78ac2b4ee73f29b8454232b",
+        "interventions": {
+          "issued": 35,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 35,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      }
+    },
+    "SS06": {
+      "control": {
+        "issued": 751,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "a03cff0d9c74480a7700d8b015c6d29ee5fee5d6975c2456151073d34e7be543",
+        "interventions": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v22": {
+        "issued": 451,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "d555c71a60d803376db27f997580d64b5b7f811a37e0eb76bf1543e07c7b23c0",
+        "interventions": {
+          "issued": 2,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 2,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v23": {
+        "issued": 470,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "3c2d97870a061a6a382170f0c00141f75048a0b93339eaf987a9da89f4728305",
+        "interventions": {
+          "issued": 2,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 2,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      }
+    },
+    "SS07": {
+      "control": {
+        "issued": 5,
+        "won": false,
+        "reason": "native_game_over",
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "interventions": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v22": {
+        "issued": 28,
+        "won": false,
+        "reason": "native_game_over",
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "8506eb171ecac5d6b2a311fcd05e642af904b679ee5eb321f194c8bcf8c4f2f1",
+        "interventions": {
+          "issued": 17,
+          "inherited": 0,
+          "realized": 2,
+          "contradicted": 15,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v23": {
+        "issued": 41,
+        "won": false,
+        "reason": "native_game_over",
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "8472c00dd0d390b5431ade7f12492d6c289386bb1486373690b7f24190e99cfa",
+        "interventions": {
+          "issued": 21,
+          "inherited": 0,
+          "realized": 1,
+          "contradicted": 20,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      }
+    },
+    "SS08": {
+      "control": {
+        "issued": 791,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "9ba2eb0933060f000d6476dc2a58558a4c77a2dccbff942776a264e64069a09f",
+        "interventions": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v22": {
+        "issued": 927,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "7f7a08ff380086e0912d3864b4d71c5b20e45b71575efb619229cac944d946c3",
+        "interventions": {
+          "issued": 32,
+          "inherited": 0,
+          "realized": 8,
+          "contradicted": 24,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      },
+      "v23": {
+        "issued": 664,
+        "won": false,
+        "reason": "level_active_time_budget",
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "a5db1fd7938cd163e950c08424e855a1cd036c1b6d89d37028e5bb543beab6af",
+        "interventions": {
+          "issued": 32,
+          "inherited": 0,
+          "realized": 8,
+          "contradicted": 24,
+          "unobserved": 0,
+          "inapplicable": 0
+        }
+      }
+    }
+  },
+  "chronological": {
+    "v22": {
+      "issued": 422,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "trajectory": "56021c88cc7fe40f577147bcd59ade594e4b45b71a1520c856b4bfcfcc8b09d0",
+      "interventions": {
+        "issued": 253,
+        "inherited": 0,
+        "realized": 229,
+        "contradicted": 23,
+        "unobserved": 1,
+        "inapplicable": 0
+      }
+    },
+    "v23": {
+      "issued": 441,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "trajectory": "00de0ecccff709387ab6bc7b3579f416c02e54dc1162aaf797321deeed3da1a1",
+      "interventions": {
+        "issued": 261,
+        "inherited": 0,
+        "realized": 237,
+        "contradicted": 23,
+        "unobserved": 1,
+        "inapplicable": 0
+      }
+    }
+  },
+  "sourceRegression": {
+    "v19": {
+      "lowerTrials": 100,
+      "lowerWins": 51,
+      "upperTrials": 18,
+      "upperWins": 5
+    },
+    "v20": {
+      "lowerTrials": 100,
+      "lowerWins": 50,
+      "upperTrials": 18,
+      "upperWins": 5
+    },
+    "v21": {
+      "lowerTrials": 100,
+      "lowerWins": 50,
+      "upperTrials": 18,
+      "upperWins": 5
+    }
+  }
+}

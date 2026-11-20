@@ -1,11 +1,16 @@
 // Post-freeze diagnostic. The learner only receives rendered public frames and commands.
-import { readFile, writeFile } from 'node:fs/promises';
+import { open, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 const [env, solver, prefix, output, ...autonomousRuns] = process.argv.slice(2);
 const mod = (root, p) => import(pathToFileURL(join(resolve(root), p)).href);
-const { measureNativeObservation } = await mod(solver, 'src/logos-engine/v6-native-observer.ts'),
+const { symbolicDigest } = await mod(solver, 'src/logos-engine/v6-hash.ts');
+const { poseFamilyKey } = await mod(solver, 'src/sic/pose-families.ts');
+const { measureNativeObservation, geometricComponents } = await mod(
+    solver,
+    'src/logos-engine/v6-native-observer.ts'
+  ),
   { createPreparedEffects } = await mod(solver, 'src/sic/test-prepared-effects.ts');
 const {
   compileLevel,
@@ -25,7 +30,7 @@ const { SS01_LEVELS } = await mod(env, 'src/games/sinking-star/levels.ts'),
   { routes } = await mod(env, 'tests/ss01-routes.ts');
 const digest = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex'),
   hash = (b) => digest(b.frame).slice(0, 16);
-const recorded = JSON.parse((await readFile(prefix, 'utf8')).trim().split('\n')[0]),
+const recorded = JSON.parse((await readFile(prefix, 'utf8')).trim()),
   word = (recorded.publicPrefix ?? recorded.replayCommands).slice(0, 210);
 const pair = (p) => (p ? [p.x, p.y] : null),
   same = (a, b) => a && b && a.x === b.x && a.y === b.y;
@@ -38,11 +43,24 @@ const local = (p, l) =>
     : null;
 const at = (xy) => pixelToCell(Math.floor(xy[0] / 2), Math.floor(xy[1] / 2));
 const command = (q, data) => ({ action_ref: 'ACTION' + q, data: data ?? {} });
+const archive = await open(resolve(solver) + '.zip');
+let candidate;
+try {
+  const tail = Buffer.alloc(62);
+  const stat = await archive.stat();
+  await archive.read(tail, 0, 62, stat.size - 62);
+  if (tail.readUInt32LE(0) !== 0x06054b50 || tail.readUInt16LE(20) !== 40)
+    throw Error('Expected immutable Git archive');
+  candidate = tail.subarray(22).toString('ascii');
+  if (!/^[0-9a-f]{40}$/.test(candidate)) throw Error('Missing archive commit');
+} finally {
+  await archive.close();
+}
 const result = {
   publicPrefix: word.map(({ id, data, from, to }) => ({ id, ...(id === 6 ? { data } : {}), from, to })),
   at210: null,
   guided: { l1: [], l2: [], distinctBindings: 0 },
-  candidate: '456be4fd8713cfab058f5e7a4127546c9da4bd02',
+  candidate,
 };
 const read = (b, n, scope) =>
   measureNativeObservation(
@@ -71,10 +89,22 @@ function truth(world, state, z, board, l, w) {
     prev &&
     same(marker, prev.to) &&
     (() => {
-      const xy = cellToPixel(marker);
-      for (let y = xy.y; y < xy.y + 3; y++)
-        for (let x = xy.x; x < xy.x + 3; x++) if (bare[y][x] !== board.frame[y][x]) return true;
-      return false;
+      const pieces = geometricComponents(board.frame).filter(
+        (e) =>
+          e.bbox[0] + e.bbox[2] === geometricMark[0] &&
+          e.bbox[1] + e.bbox[3] === geometricMark[1] &&
+          e.area <= (board.frame.length * board.frame[0].length) / 12
+      );
+      const mark = pieces.find(
+        (e) => symbolicDigest(poseFamilyKey({ ...e, palette_value: e.color })).slice(0, 24) === w.indicator
+      );
+      return mark
+        ? mark.mask.filter(([dx, dy]) => {
+            const x = mark.bbox[0] + dx,
+              y = mark.bbox[1] + dy;
+            return bare[y][x] !== board.frame[y][x];
+          }).length
+        : 0;
     })();
   return {
     from: local(state.hero, l),
@@ -85,6 +115,7 @@ function truth(world, state, z, board, l, w) {
     landedOnValidMark: !!prev && same(prev.to, z.hero) && !same(state.hero, z.hero),
     subjectMatches: w ? !!same(at(w.from), state.hero) : null,
     markMatches: w ? !!markerInk : null,
+    indicatorChangedPixels: w ? Number(markerInk || 0) : null,
   };
 }
 async function campaign(name) {
@@ -177,7 +208,8 @@ async function campaign(name) {
         if (t.markMatches && t.subjectMatches && t.landedOnValidMark && value.result === 'realized')
           receipt.firstCorrectRead ??= value;
       }
-      if (t.landedOnValidMark) receipt.physicalActivations.push({ step: k + 1, from: t.from, to: t.to });
+      if (q === 5 && t.landedOnValidMark)
+        receipt.physicalActivations.push({ step: k + 1, from: t.from, to: t.to });
       if (next.level !== 2 || next.levelsCompleted > 1) {
         receipt.won = true;
         receipt.stop = 'official_boundary';
@@ -304,7 +336,7 @@ async function campaign(name) {
     for (const b of Object.values(mem.previewLearning?.bindings ?? {}))
       for (const w of b.witnesses) {
         if (w.before !== obs.observation_ref || w.after !== after.observation_ref) continue;
-        const physical = truth(world, state, z, board, l, w);
+        const physical = truth(world, state, z, board, l, { ...w, indicator: b.indicator });
         if (physical.subjectMatches && physical.markMatches && same(at(w.arrived), z.hero))
           matches.push({
             relation: b.relation,
@@ -316,6 +348,7 @@ async function campaign(name) {
             after: w.after,
             command: w.command,
             observedPeerCount: w.peers.length,
+            indicatorChangedPixels: physical.indicatorChangedPixels,
             from: local(at(w.from), l),
             indicated: local(at(w.indicated), l),
             arrival: local(at(w.arrived), l),
@@ -367,6 +400,11 @@ for (const file of autonomousRuns) {
       level: run.start,
       actions: 0,
       forecastCount: 0,
+      validOpportunities: 0,
+      firstValid: null,
+      byCommandAtValid: {},
+      issuedActivations: 0,
+      mirrorMoves: [],
       physicalTransfers: 0,
       exactNamedTransfers: 0,
       wrongSubjectCount: 0,
@@ -388,7 +426,28 @@ for (const file of autonomousRuns) {
       throw Error('Autonomous return mismatch');
     const v = truth(w, s, z, b, run.start, f);
     facts.actions++;
-    if (v.landedOnValidMark) facts.physicalTransfers++;
+    if (c.id === 5) facts.issuedActivations++;
+    if (v.indicated) {
+      facts.validOpportunities++;
+      facts.byCommandAtValid[c.id] = (facts.byCommandAtValid[c.id] ?? 0) + 1;
+      facts.firstValid ??= {
+        action: i + 1,
+        from: v.from,
+        marked: v.indicated,
+        issued: c.id,
+        phase: events.get(i + 1)?.phase ?? null,
+      };
+    }
+    for (const [j, mirror] of s.mirrors.entries()) {
+      if (!same(mirror, z.mirrors[j]))
+        facts.mirrorMoves.push({
+          action: i + 1,
+          from: local(mirror, run.start),
+          to: local(z.mirrors[j], run.start),
+          issued: c.id,
+        });
+    }
+    if (c.id === 5 && v.landedOnValidMark) facts.physicalTransfers++;
     if (f) {
       facts.forecastCount++;
       if (c.previewReadSeal !== digest(f)) throw Error('Autonomous forecast unavailable before action');

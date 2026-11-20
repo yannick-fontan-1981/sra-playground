@@ -1,0 +1,674 @@
+{
+  "sources": 100,
+  "levels": 118,
+  "retrospective": [
+    {
+      "code": "VOIS",
+      "level": 1,
+      "i": 49,
+      "w": 9,
+      "root": "1c098b19f5d0efad",
+      "a": "ACTION2",
+      "q": "ACTION5",
+      "actor": 2,
+      "indicator": 22,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        22,
+        46
+      ],
+      "newMark": [
+        22,
+        54
+      ],
+      "direct": [
+        22,
+        46
+      ],
+      "prepared": [
+        22,
+        54
+      ],
+      "changed": true,
+      "earlierShifts": [
+        {
+          "j": 7,
+          "delta": [
+            0,
+            8
+          ]
+        },
+        {
+          "j": 12,
+          "delta": [
+            0,
+            8
+          ]
+        },
+        {
+          "j": 15,
+          "delta": [
+            0,
+            8
+          ]
+        },
+        {
+          "j": 35,
+          "delta": [
+            0,
+            8
+          ]
+        }
+      ],
+      "imagined": [
+        22,
+        54
+      ],
+      "simulatedBeforeA": true,
+      "uses": []
+    },
+    {
+      "code": "VOIS",
+      "level": 1,
+      "i": 49,
+      "w": 9,
+      "root": "1c098b19f5d0efad",
+      "a": "ACTION2",
+      "q": "ACTION5",
+      "actor": 2,
+      "indicator": 23,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        22,
+        46
+      ],
+      "newMark": [
+        22,
+        54
+      ],
+      "direct": [
+        22,
+        46
+      ],
+      "prepared": [
+        22,
+        54
+      ],
+      "changed": true,
+      "earlierShifts": [
+        {
+          "j": 7,
+          "delta": [
+            0,
+            8
+          ]
+        },
+        {
+          "j": 12,
+          "delta": [
+            0,
+            8
+          ]
+        },
+        {
+          "j": 15,
+          "delta": [
+            0,
+            8
+          ]
+        },
+        {
+          "j": 35,
+          "delta": [
+            0,
+            8
+          ]
+        }
+      ],
+      "imagined": [
+        22,
+        54
+      ],
+      "simulatedBeforeA": true,
+      "uses": []
+    },
+    {
+      "code": "VOIS",
+      "level": 1,
+      "i": 48,
+      "w": 9,
+      "root": "b0190b2e218a3de5",
+      "a": "ACTION3",
+      "q": "ACTION5",
+      "actor": 2,
+      "indicator": 22,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "newMark": [
+        22,
+        46
+      ],
+      "direct": [
+        30,
+        46
+      ],
+      "prepared": [
+        22,
+        46
+      ],
+      "changed": true,
+      "earlierShifts": [
+        {
+          "j": 6,
+          "delta": [
+            -8,
+            0
+          ]
+        },
+        {
+          "j": 11,
+          "delta": [
+            -8,
+            0
+          ]
+        },
+        {
+          "j": 16,
+          "delta": [
+            -8,
+            0
+          ]
+        }
+      ],
+      "imagined": [
+        22,
+        46
+      ],
+      "simulatedBeforeA": true,
+      "uses": []
+    },
+    {
+      "code": "VOIS",
+      "level": 1,
+      "i": 48,
+      "w": 9,
+      "root": "b0190b2e218a3de5",
+      "a": "ACTION3",
+      "q": "ACTION5",
+      "actor": 2,
+      "indicator": 23,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "newMark": [
+        22,
+        46
+      ],
+      "direct": [
+        30,
+        46
+      ],
+      "prepared": [
+        22,
+        46
+      ],
+      "changed": true,
+      "earlierShifts": [
+        {
+          "j": 6,
+          "delta": [
+            -8,
+            0
+          ]
+        },
+        {
+          "j": 11,
+          "delta": [
+            -8,
+            0
+          ]
+        },
+        {
+          "j": 16,
+          "delta": [
+            -8,
+            0
+          ]
+        }
+      ],
+      "imagined": [
+        22,
+        46
+      ],
+      "simulatedBeforeA": true,
+      "uses": []
+    }
+  ],
+  "prospective": [
+    {
+      "i": 15,
+      "root": "b0190b2e218a3de5",
+      "p": 2,
+      "r": 22,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "imagined": [
+        22,
+        46
+      ],
+      "a": "ACTION3",
+      "q": "ACTION5",
+      "writeRef": 6,
+      "readRef": 9,
+      "readOrigin": [
+        86,
+        46
+      ],
+      "readMark": [
+        30,
+        46
+      ],
+      "code": "VOIS",
+      "level": 1,
+      "writeExact": true,
+      "directAt": [
+        30,
+        46
+      ],
+      "landed": [
+        22,
+        46
+      ],
+      "pAfter": [
+        86,
+        46
+      ],
+      "markAfter": [
+        22,
+        46
+      ],
+      "redirected": true,
+      "uses": []
+    },
+    {
+      "i": 15,
+      "root": "b0190b2e218a3de5",
+      "p": 2,
+      "r": 22,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "imagined": [
+        30,
+        54
+      ],
+      "a": "ACTION2",
+      "q": "ACTION5",
+      "writeRef": 7,
+      "readRef": 9,
+      "readOrigin": [
+        86,
+        46
+      ],
+      "readMark": [
+        30,
+        46
+      ],
+      "code": "VOIS",
+      "level": 1,
+      "writeExact": true,
+      "directAt": [
+        30,
+        46
+      ],
+      "landed": [
+        30,
+        54
+      ],
+      "pAfter": [
+        86,
+        46
+      ],
+      "markAfter": [
+        30,
+        54
+      ],
+      "redirected": true,
+      "uses": []
+    },
+    {
+      "i": 15,
+      "root": "b0190b2e218a3de5",
+      "p": 2,
+      "r": 22,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "imagined": [
+        38,
+        46
+      ],
+      "a": "ACTION4",
+      "q": "ACTION5",
+      "writeRef": 8,
+      "readRef": 9,
+      "readOrigin": [
+        86,
+        46
+      ],
+      "readMark": [
+        30,
+        46
+      ],
+      "code": "VOIS",
+      "level": 1,
+      "writeExact": true,
+      "directAt": [
+        30,
+        46
+      ],
+      "landed": [
+        38,
+        46
+      ],
+      "pAfter": [
+        86,
+        46
+      ],
+      "markAfter": [
+        38,
+        46
+      ],
+      "redirected": true,
+      "uses": []
+    },
+    {
+      "i": 15,
+      "root": "b0190b2e218a3de5",
+      "p": 2,
+      "r": 23,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "imagined": [
+        22,
+        46
+      ],
+      "a": "ACTION3",
+      "q": "ACTION5",
+      "writeRef": 6,
+      "readRef": 9,
+      "readOrigin": [
+        86,
+        46
+      ],
+      "readMark": [
+        30,
+        46
+      ],
+      "code": "VOIS",
+      "level": 1,
+      "writeExact": true,
+      "directAt": [
+        30,
+        46
+      ],
+      "landed": [
+        22,
+        46
+      ],
+      "pAfter": [
+        86,
+        46
+      ],
+      "markAfter": [
+        22,
+        46
+      ],
+      "redirected": true,
+      "uses": []
+    },
+    {
+      "i": 15,
+      "root": "b0190b2e218a3de5",
+      "p": 2,
+      "r": 23,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "imagined": [
+        30,
+        54
+      ],
+      "a": "ACTION2",
+      "q": "ACTION5",
+      "writeRef": 7,
+      "readRef": 9,
+      "readOrigin": [
+        86,
+        46
+      ],
+      "readMark": [
+        30,
+        46
+      ],
+      "code": "VOIS",
+      "level": 1,
+      "writeExact": true,
+      "directAt": [
+        30,
+        46
+      ],
+      "landed": [
+        30,
+        54
+      ],
+      "pAfter": [
+        86,
+        46
+      ],
+      "markAfter": [
+        30,
+        54
+      ],
+      "redirected": true,
+      "uses": []
+    },
+    {
+      "i": 15,
+      "root": "b0190b2e218a3de5",
+      "p": 2,
+      "r": 23,
+      "origin": [
+        86,
+        46
+      ],
+      "oldMark": [
+        30,
+        46
+      ],
+      "imagined": [
+        38,
+        46
+      ],
+      "a": "ACTION4",
+      "q": "ACTION5",
+      "writeRef": 8,
+      "readRef": 9,
+      "readOrigin": [
+        86,
+        46
+      ],
+      "readMark": [
+        30,
+        46
+      ],
+      "code": "VOIS",
+      "level": 1,
+      "writeExact": true,
+      "directAt": [
+        30,
+        46
+      ],
+      "landed": [
+        38,
+        46
+      ],
+      "pAfter": [
+        86,
+        46
+      ],
+      "markAfter": [
+        38,
+        46
+      ],
+      "redirected": true,
+      "uses": []
+    },
+    {
+      "i": 36,
+      "root": "5b84323e865a94cb",
+      "p": 11,
+      "r": 24,
+      "origin": [
+        78,
+        36
+      ],
+      "oldMark": [
+        68,
+        36
+      ],
+      "imagined": [
+        58,
+        26
+      ],
+      "a": "ACTION5",
+      "q": "ACTION3",
+      "writeRef": 31,
+      "readRef": 34,
+      "readOrigin": [
+        98,
+        36
+      ],
+      "readMark": [
+        88,
+        36
+      ],
+      "code": "GABA",
+      "level": 1,
+      "writeExact": false,
+      "directAt": [
+        68,
+        36
+      ],
+      "landed": [
+        68,
+        36
+      ],
+      "pAfter": [
+        78,
+        36
+      ],
+      "markAfter": [
+        68,
+        36
+      ],
+      "redirected": false,
+      "uses": []
+    },
+    {
+      "i": 37,
+      "root": "ba53a64e103b8995",
+      "p": 11,
+      "r": 24,
+      "origin": [
+        68,
+        36
+      ],
+      "oldMark": [
+        58,
+        36
+      ],
+      "imagined": [
+        48,
+        26
+      ],
+      "a": "ACTION5",
+      "q": "ACTION3",
+      "writeRef": 31,
+      "readRef": 34,
+      "readOrigin": [
+        98,
+        36
+      ],
+      "readMark": [
+        88,
+        36
+      ],
+      "code": "GABA",
+      "level": 1,
+      "writeExact": false,
+      "directAt": [
+        58,
+        36
+      ],
+      "landed": [
+        58,
+        36
+      ],
+      "pAfter": [
+        68,
+        36
+      ],
+      "markAfter": [
+        58,
+        36
+      ],
+      "redirected": false,
+      "uses": []
+    }
+  ]
+}

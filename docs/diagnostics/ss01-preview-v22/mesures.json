@@ -1495,7 +1495,8 @@
       ],
       "landedOnValidMark": true,
       "subjectMatches": null,
-      "markMatches": null
+      "markMatches": null,
+      "indicatorChangedPixels": null
     },
     "controls": [
       {
@@ -1575,6 +1576,7 @@
         "after": "test-q210:epoch:1:revision:211:frame:6b01b7095169e1c1",
         "command": "ACTION5",
         "observedPeerCount": 0,
+        "indicatorChangedPixels": 5,
         "from": [
           6,
           9
@@ -1621,7 +1623,8 @@
           ],
           "landedOnValidMark": true,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "matches": [
           {
@@ -1634,6 +1637,7 @@
             "after": "test-guided:epoch:1:revision:4:frame:524c8d76b270a202",
             "command": "ACTION5",
             "observedPeerCount": 0,
+            "indicatorChangedPixels": 5,
             "from": [
               6,
               12
@@ -1678,7 +1682,8 @@
           ],
           "landedOnValidMark": true,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "matches": []
       }
@@ -1721,7 +1726,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -1768,7 +1774,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -1808,7 +1815,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -1855,7 +1863,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -1895,7 +1904,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -1942,7 +1952,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -1985,7 +1996,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": false,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2035,7 +2047,8 @@
           ],
           "landedOnValidMark": true,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -2071,7 +2084,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -2115,7 +2129,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2165,7 +2180,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -2201,7 +2217,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -2245,7 +2262,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2295,7 +2313,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -2331,7 +2350,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -2375,7 +2395,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2425,7 +2446,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -2461,7 +2483,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -2505,7 +2528,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2555,7 +2579,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -2591,7 +2616,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -2632,7 +2658,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2679,7 +2706,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -2719,7 +2747,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2766,7 +2795,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -2809,7 +2839,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2859,7 +2890,8 @@
           ],
           "landedOnValidMark": true,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -2895,7 +2927,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -2939,7 +2972,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -2989,7 +3023,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -3025,7 +3060,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -3069,7 +3105,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3119,7 +3156,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -3155,7 +3193,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -3196,7 +3235,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3243,7 +3283,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -3283,7 +3324,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3330,7 +3372,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -3370,7 +3413,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3417,7 +3461,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -3457,7 +3502,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3504,7 +3550,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -3547,7 +3594,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3597,7 +3645,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -3633,7 +3682,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -3677,7 +3727,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3727,7 +3778,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -3763,7 +3815,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -3807,7 +3860,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3857,7 +3911,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -3893,7 +3948,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -3937,7 +3993,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -3987,7 +4044,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -4023,7 +4081,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -4067,7 +4126,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -4117,7 +4177,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -4153,7 +4214,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -4194,7 +4256,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -4241,7 +4304,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -4281,7 +4345,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -4328,7 +4393,8 @@
           "indicated": null,
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         }
       },
       {
@@ -4371,7 +4437,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -4421,7 +4488,8 @@
           ],
           "landedOnValidMark": true,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -4457,7 +4525,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -4501,7 +4570,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -4551,7 +4621,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -4587,7 +4658,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       },
@@ -4631,7 +4703,8 @@
             ],
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           },
           "rivals": [
             {
@@ -4681,7 +4754,8 @@
           ],
           "landedOnValidMark": false,
           "subjectMatches": null,
-          "markMatches": null
+          "markMatches": null,
+          "indicatorChangedPixels": null
         },
         "isolated": {
           "op": 5,
@@ -4717,7 +4791,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         }
       }
@@ -4758,7 +4833,8 @@
             "indicated": null,
             "landedOnValidMark": false,
             "subjectMatches": true,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           }
         },
         "firstCorrectRead": null,
@@ -4811,7 +4887,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": false,
-            "markMatches": false
+            "markMatches": false,
+            "indicatorChangedPixels": 0
           }
         },
         "firstCorrectRead": {
@@ -4845,7 +4922,8 @@
             ],
             "landedOnValidMark": true,
             "subjectMatches": true,
-            "markMatches": true
+            "markMatches": true,
+            "indicatorChangedPixels": 5
           }
         },
         "physicalActivations": [
@@ -5179,6 +5257,26 @@
       "level": 1,
       "actions": 422,
       "forecastCount": 253,
+      "validOpportunities": 17,
+      "firstValid": {
+        "action": 363,
+        "from": [
+          6,
+          9
+        ],
+        "marked": [
+          9,
+          6
+        ],
+        "issued": 6,
+        "phase": "witnessedPreview"
+      },
+      "byCommandAtValid": {
+        "2": 3,
+        "6": 14
+      },
+      "issuedActivations": 6,
+      "mirrorMoves": [],
       "physicalTransfers": 0,
       "exactNamedTransfers": 0,
       "wrongSubjectCount": 129,
@@ -5191,6 +5289,36 @@
       "level": 2,
       "actions": 505,
       "forecastCount": 35,
+      "validOpportunities": 0,
+      "firstValid": null,
+      "byCommandAtValid": {},
+      "issuedActivations": 25,
+      "mirrorMoves": [
+        {
+          "action": 49,
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            9,
+            3
+          ],
+          "issued": 4
+        },
+        {
+          "action": 50,
+          "from": [
+            9,
+            3
+          ],
+          "to": [
+            10,
+            3
+          ],
+          "issued": 4
+        }
+      ],
       "physicalTransfers": 0,
       "exactNamedTransfers": 0,
       "wrongSubjectCount": 1,
