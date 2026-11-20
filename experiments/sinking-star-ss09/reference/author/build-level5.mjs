@@ -1,0 +1,12 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(20,18,'~');
+fill(4,9,7,12);fill(12,4,16,10);fill(14,13,16,15);
+put(5,10,'B');put(4,11,'o');put(15,5,'M');put(15,14,'g');put(14,14,'g');
+const spec={id:'ss09-05',title:'Laisser le dernier accord',rows:strings(),facing:'W',mirrors:[{at:{x:14,y:10},facing:'NW'},{at:{x:16,y:10},facing:'SW'}],circuits:[{id:'detach',buttons:[{x:6,y:11}],color:14}],gates:[{at:{x:13,y:7},circuit:'detach',direction:'S',closedWhen:'released'}]};
+const a=new Author(spec);
+a.go(15,10,'merchant').act('L').go(16,5).stage('Le Marchand règle la première diagonale et dégage l’autre faisceau');
+a.select('bard').act('RRX').stage('Le Barde pose la caisse sur le bouton puis se détache par le miroir');
+a.go(14,10,'merchant').act('L').go(16,5).stage('Le Marchand déplace encore le premier miroir pour libérer l’axe du second');
+a.select('bard').act('DDDDDDXLD').stage('Le poids reste sur l’îlot de départ pendant que le Barde rejoint sa destination');
+a.go(13,10,'merchant').act('XLLD').stage('Le Marchand rejoint le Barde sans déplacer son dernier accord');
+a.save(new URL('../level5-design.json',import.meta.url),{label:'Adaptation de Heroes and Mirrors 1 · quitter le chant en laissant le poids sur son bouton',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1',puzzle:1,objective:'Régler le miroir, maintenir la porte par une caisse, détacher le Barde puis reconfigurer la dernière traversée.'},'Reprise du détachement de la Barde de son cristal-bouton, avec trois îlots et deux destinations dans une géométrie originale. Le Marchand travaille depuis l’autre rive : il doit déplacer le premier miroir une première fois pour recevoir le Barde, puis à nouveau pour dégager le second axe. La caisse reste inaccessible au Marchand et doit être menée sur son bouton par le chant. Les miroirs gardent la priorité au plus proche de la série SS.');

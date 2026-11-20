@@ -1,3 +1,4 @@
+import { maximumCommittedActions } from './plan-step.ts';
 import { exactJointPath, jointLayers, jointStatePair, measureJointTransport, type JointScene } from '../logos-engine/v6-joint-transport.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -25,8 +26,8 @@ const directions: Readonly<Record<string, NativePoint>> = {
 };
 type Geometry = { scale: number; offset: NativePoint; floor: NativePoint[]; targets: NativePoint[] };
 type Occupancy = ReturnType<typeof jointStatePair>;
-type Proposal = NativeProposal & { geometry: Geometry; predicted: Occupancy; context: string; needId: string;
-  push: boolean; usesRetainedAppearance?: boolean };
+type TransportLeg = { before: Occupancy; predicted: Occupancy; push: boolean };
+type Proposal = NativeProposal & { geometry: Geometry; route: TransportLeg[]; needId: string; usesRetainedAppearance?: boolean };
 type State = { epoch: number; geometry: Geometry | null; evidence: readonly string[]; refuted: string[];
   appearance?: TransportAppearance; usesRetainedAppearance?: boolean; pushRef?: string; inputRefs?: Record<string, string> };
 type Transfer = { completed: number; appearance: TransportAppearance; evidence: string[]; inputRefs: Record<string, string> };
@@ -49,6 +50,8 @@ const measureWithAppearance = (rows: NativeRows, remembered: Geometry | null, ap
 };
 const sameGeometry = (a: Geometry, b: Geometry) => a.scale === b.scale && equal(a.offset, b.offset)
   && equal(a.floor, b.floor) && equal(a.targets, b.targets);
+const contextKey = (geometry: Geometry, current: Occupancy) =>
+  JSON.stringify([geometry.scale, geometry.offset, geometry.floor, geometry.targets, current]);
 const sprite = ({ scale, offset: [ox, oy] }: Geometry, [x, y]: NativePoint): NativeBox => {
   const left = x * scale + ox, top = y * scale + oy;
   return [left, top, left + scale - 1, top + scale - 1];
@@ -69,7 +72,7 @@ export function createSicTransportContact(family = transportContactId): NativeFa
       const scene = direct ?? (transfer ? measureWithAppearance(rows, local.geometry, transfer.appearance) : null);
       if (!scene || scene.floor.size > 100 || scene.boxes.size > 5) return null;
       const usesRetainedAppearance = !direct;
-      const geometry = layers(scene), current = jointStatePair(scene), context = JSON.stringify([geometry.scale, geometry.offset, geometry.floor, geometry.targets, current]);
+      const geometry = layers(scene), current = jointStatePair(scene), context = contextKey(geometry, current);
       if (local.refuted.includes(context) || (local.geometry && !sameGeometry(local.geometry, geometry))) return null;
       const receipt = learns && !local.geometry ? execution?.readDirectionalMotion?.() : null;
       const observed = receipt?.afterRef === observation.observation_ref && receipt.levelEpoch === observation.level_epoch ? receipt : null;
@@ -117,9 +120,19 @@ export function createSicTransportContact(family = transportContactId): NativeFa
         satisfactionContract: 'observe_official_progress_after_joint_occupation' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
       const id = `${learns ? family : 'transport'}:${need.id}`, commands = [command];
-      return { status: 'proposed', kind: family, actions: commands, geometry, predicted, context, needId: need.id, push,
+      const legs: TransportLeg[] = [{ before: current, predicted, push }];
+      if (local.geometry && (!push || local.pushRef)) for (const [input, pushing, [next, boxes]] of route.slice(1, maximumCommittedActions)) {
+        const previous = legs.at(-1)!.predicted;
+        const nextCommand = actions.find(candidate => candidate.action_ref === input);
+        if (!nextCommand || pushing && !local.pushRef || local.refuted.includes(contextKey(geometry, previous))) break;
+        const occupied: Occupancy = [next, [...boxes].map(key => key.split(',').map(Number) as [number, number])
+          .sort(([ax, ay], [bx, by]) => ax - bx || ay - by)];
+        legs.push({ before: previous, predicted: occupied, push: pushing });
+        commands.push(nextCommand);
+      }
+      return { status: 'proposed', kind: family, actions: commands, geometry, route: legs, needId: need.id,
         ...(usesRetainedAppearance ? { usesRetainedAppearance: true } : {}),
-        steps: [{ action: command, expected_after: predicted }],
+        steps: commands.map((action, index) => ({ action, expected_after: legs[index]!.predicted })),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Test whether the bodies can occupy the matching sites',
           mode: learns ? mode : local.evidence.length ? 'solving' : 'exploration', situation: label, agenda: primitive?.entries ?? normal.entries, evidence, distance: route.length,
@@ -131,19 +144,23 @@ export function createSicTransportContact(family = transportContactId): NativeFa
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: objective, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions: commands, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const scene = index === 0 ? null : proposal.usesRetainedAppearance && retained
+        ? measureWithAppearance(packet.frame_rows, proposal.geometry, retained.appearance) : measure(packet.frame_rows, proposal.geometry.targets);
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : proposal.binding?.level_epoch === observation.level_epoch && !!scene && sameGeometry(layers(scene), proposal.geometry)
+          && equal(jointStatePair(scene), proposal.route[index]!.before);
       return { admitted, reason: admitted ? 'current_transport_scope_bound' : 'transport_scope_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       const scored = after.levels_completed > before.levels_completed;
       const scene = scored ? null : proposal.usesRetainedAppearance && retained
         ? measureWithAppearance(second, proposal.geometry, retained.appearance) : measure(second, proposal.geometry.targets);
-      const matched = scored ? null : !!scene && sameGeometry(layers(scene), proposal.geometry) && equal(jointStatePair(scene), proposal.predicted);
-      return { matched, seal_prefix: true, reason: scored ? 'official_boundary' : matched ? 'observed_joint_occupation' : 'joint_occupation_contradicted',
+      const matched = scored ? null : !!scene && sameGeometry(layers(scene), proposal.geometry) && equal(jointStatePair(scene), proposal.route[index]!.predicted);
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.route.length, reason: scored ? 'official_boundary' : matched ? 'observed_joint_occupation' : 'joint_occupation_contradicted',
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
-    record(before, after, command, first, second, proposal) {
+    record(before, after, command, first, second, proposal, index) {
       if (after.levels_completed > before.levels_completed && state.appearance && state.pushRef && state.inputRefs) {
         retained = { completed: after.levels_completed, appearance: state.appearance,
           evidence: [state.pushRef, ...state.evidence.slice(-3), after.observation_ref], inputRefs: state.inputRefs };
@@ -152,21 +169,22 @@ export function createSicTransportContact(family = transportContactId): NativeFa
       if (state.epoch !== before.level_epoch) state = empty(before.level_epoch);
       const scene = proposal.usesRetainedAppearance && retained
         ? measureWithAppearance(second, proposal.geometry, retained.appearance) : measure(second, proposal.geometry.targets);
-      if (scene && sameGeometry(layers(scene), proposal.geometry) && equal(jointStatePair(scene), proposal.predicted)) {
+      const leg = proposal.route[index]!;
+      if (scene && sameGeometry(layers(scene), proposal.geometry) && equal(jointStatePair(scene), leg.predicted)) {
         const firstMatch = !state.geometry;
         state.geometry = layers(scene);
         state.usesRetainedAppearance = proposal.usesRetainedAppearance === true;
         state.evidence = [...state.evidence.slice(-3), after.observation_ref];
         state.inputRefs = { ...state.inputRefs, [command.action_ref]: after.observation_ref };
-        if (proposal.push) state.pushRef = after.observation_ref;
+        if (leg.push) state.pushRef = after.observation_ref;
         const earlier = !firstMatch ? null : proposal.usesRetainedAppearance && retained
           ? measureWithAppearance(first, proposal.geometry, retained.appearance) : measure(first, proposal.geometry.targets);
         const known = earlier ? rememberTransportAppearance(first, earlier) : state.appearance;
         state.appearance = rememberTransportAppearance(second, scene, known);
-        if (firstMatch && proposal.usesRetainedAppearance && proposal.push) return {
+        if (firstMatch && proposal.usesRetainedAppearance && leg.push) return {
           events: [], reviewEvidence: 'The new grid shows the player and one body moving together by one cell after contact.',
         };
-      } else state.refuted.push(proposal.context);
+      } else state.refuted.push(contextKey(proposal.geometry, leg.before));
       return { events: [] };
     },
     state: () => ({ ...state, ...(retained ? { retained } : {}) }),

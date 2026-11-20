@@ -1,0 +1,8 @@
+{
+  "success": false,
+  "status": "not-run",
+  "reason": "Chromium startup was blocked by socket restrictions in this same environment. Current revision verified through engine tests, a DOM simulator, and rendered frame inspection.",
+  "visualBrowserTest": false,
+  "checks": [],
+  "totalActions": 0
+}

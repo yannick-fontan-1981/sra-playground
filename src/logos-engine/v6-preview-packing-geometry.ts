@@ -33,7 +33,7 @@ export function previewPackingDictPointSet(keys: readonly Cell[]): PointSet {
   return result;
 }
 
-export function previewPackingMeasureScene(rows: NativeRows): Scene | null {
+export function previewPackingMeasureScene(rows: NativeRows, includeLowerReserve = false): Scene | null {
   validateRows(rows);
   const parts = geometricComponents(rows), background = majority(rows.flat())[0];
   const squares = parts.filter(p => p.rectangular && p.bbox[2] - p.bbox[0] === p.bbox[3] - p.bbox[1]
@@ -84,9 +84,11 @@ export function previewPackingMeasureScene(rows: NativeRows): Scene | null {
       const inside = groups.filter(g => g.cells.every(p => boardKeys.has(pointKey(p))));
       const occupied = new Set(inside.flatMap(g => g.cells.map(pointKey)));
       const residualSize = board.length - occupied.size;
-      const outside = groups.filter(g => g.cells.every(p => !boardKeys.has(pointKey(p)))
-        && Math.min(...g.cells.map(p => p[0])) < h / q && g.cells.length <= residualSize);
-      if (!outside.length || outside.reduce((sum, g) => sum + g.cells.length, 0) !== residualSize) continue;
+      const reserve = groups.filter(g => g.cells.every(p => !boardKeys.has(pointKey(p))) && g.cells.length <= residualSize);
+      const beside = reserve.filter(g => Math.min(...g.cells.map(p => p[0])) < h / q);
+      const fits = (group: typeof reserve) => group.length > 0 && group.reduce((sum, g) => sum + g.cells.length, 0) === residualSize;
+      const outside = fits(beside) ? beside : includeLowerReserve && fits(reserve) ? reserve : null;
+      if (!outside) continue;
       const pieces = [...inside, ...outside].map(({ color, cells }, i): PreviewPackingPiece => {
         const [mask, anchor] = previewPackingNormalized(cells);
         return { id: `piece:${i}`, color, mask, anchor, movable: !cells.every(p => boardKeys.has(pointKey(p))) };

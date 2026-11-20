@@ -5,12 +5,46 @@ import { createHash } from 'node:crypto';
 import { CompositionEngine, NativeEngine, NativeModelUnavailableError, NativeSrcBridge, NeutralEngine,
   operationAdmission, validateBundle } from '../src/logos-engine/v6-composition-engine.ts';
 import { NativeReasoningMemory, TREE_SHA256 } from '../src/logos-engine/v6-reasoning-memory.ts';
+import type { ReasoningWindow } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { nativeProgramDescriptions } from '../src/logos-engine/v6-src-program.ts';
+import { canonical, immutableJson } from '../src/logos-engine/canonical.ts';
+import { splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 
 const fixture = JSON.parse(await readFile(new URL('./fixtures/v6-composition-engine-reference.json', import.meta.url), 'utf8'));
 const constructors = { Engine: NativeEngine, CompositionEngine, NeutralEngine };
 type Sample = Record<string, any>;
+
+test('composition checkpoints share unchanged content while preserving detached public snapshots', () => {
+  const engine = new NativeEngine(new NativeReasoningMemory());
+  const window = (key: string): ReasoningWindow => ({ current: { key, address: '/test', line: 1,
+    navigation_excerpt: key, excerpt_only: true }, neighbors: [], remaining_neighbors: 0, adjacency_is_not_permission: true });
+  engine.windows.set('one', window('one'));
+  engine.windows.set('two', window('two'));
+  engine.last_result = { detail: { count: 1 }, weight: -0, values: Array.from({ length: 10_000 }, (_, i) => i % 16) };
+  const first = engine.nativeCheckpoint();
+  assert.deepEqual(first, engine.state());
+  const originalGraph = splitNativeState(engine.state(), 'test:composition');
+  assert.equal(canonical(splitNativeState(first, 'test:composition')), canonical(originalGraph));
+  assert.equal(engine.nativeCheckpoint(), first);
+  engine.windows.get('one')!.current.navigation_excerpt = 'updated';
+  engine.last_result.detail.count = 2;
+  const second = engine.nativeCheckpoint();
+  assert.deepEqual(second, engine.state());
+  assert.notEqual(second.windows[0], first.windows[0]);
+  assert.equal(second.windows[1], first.windows[1]);
+  assert.equal(first.windows[0]![1].current.navigation_excerpt, 'one');
+  assert.equal(first.last_result!.detail.count, 1);
+  assert.equal(second.last_result!.values, first.last_result!.values);
+  const fragments = new Map(originalGraph.fragments.map(fragment => [fragment.id, fragment.value]));
+  const prior = { prior: { root: originalGraph.root, readFragment: (id: string) => fragments.get(id) } };
+  assert.equal(canonical(splitNativeState(second, 'test:composition', prior)),
+    canonical(splitNativeState(engine.state(), 'test:composition', prior)));
+  const detached = engine.state();
+  detached.windows[1]![1].current.navigation_excerpt = 'external';
+  assert.equal(engine.windows.get('two')!.current.navigation_excerpt, 'two');
+  assert.equal(engine.nativeCheckpoint(), second);
+});
 
 function setup(sample: Sample) {
   const memory = new NativeReasoningMemory({ clock: () => 1234 }); memory.importCatalog();
@@ -55,13 +89,29 @@ for (const sample of fixture.prepareCases) test(`V6 prepare/source/epoch admissi
   assert.deepEqual(request, sample.request);
 });
 
-for (const sample of fixture.callbackCases) test(`V6 pure callback/negative guard parity: ${sample.id}`, () => {
+for (const inputShape of ['mutable', 'closed'] as const)
+for (const sample of fixture.callbackCases) test(`V6 pure callback/negative guard parity (${inputShape}): ${sample.id}`, () => {
   const { engine, memory } = setup(sample); engine.prepare(sample.request);
-  const args = structuredClone(sample.arguments), before = memory.state();
+  const args = inputShape === 'closed' ? immutableJson(sample.arguments) as any[] : structuredClone(sample.arguments), before = memory.state();
   const method = (engine as unknown as Record<string, (...args: any[]) => unknown>)[sample.method]!;
   checkOutcome(() => method.apply(engine, args), sample.outcome);
   assert.deepEqual(args, sample.arguments, 'source callbacks must not mutate supplied session or choice');
   assert.deepEqual(memory.state(), before, 'pure callbacks have no memory or game write boundary');
+});
+
+test('native callbacks reuse a closed read-only request and detach fields they write', () => {
+  const engine = new NativeEngine(new NativeReasoningMemory());
+  const raw = { request: { policy: 'code_only', candidates: ['OP01'], state: { rows: [[1, 2], [3, 4]] } },
+    phase: 'choice', trace: [{ kind: 'previous' }], model_calls: [] };
+  const closed = immutableJson(raw);
+  const result = engine.src_context(closed);
+  assert.equal(result.request, closed.request);
+  assert.notEqual(result.trace, closed.trace);
+  result.trace.push({ kind: 'next' });
+  assert.equal(closed.trace.length, 1);
+  const detached = engine.src_context(raw);
+  detached.request.state.rows[0][0] = 9;
+  assert.equal(raw.request.state.rows[0]![0], 1);
 });
 
 for (const sample of fixture.validationCases) test(`V6 composition contract validation parity: ${sample.id}`, () => {

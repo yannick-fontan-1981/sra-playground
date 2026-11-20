@@ -67,13 +67,13 @@ export function copyNativeValue<T>(value: T): T {
  * internal to native persistence; public source-compatible APIs still clone.
  * There is no aggregate size cap: the state graph fragments large histories.
  */
-export function retainNativeJson<T>(value: T): T {
+export function retainNativeJson<T>(value: T, previous?: T): T {
   // At the root, a retained value has already passed the complete depth and
   // property contract. Descendant reuse below still checks its stored height
   // against the insertion depth before accepting an existing immutable tree.
-  if (value !== null && typeof value === 'object' && retained.has(value)) return value;
+  if (previous === undefined && value !== null && typeof value === 'object' && retained.has(value)) return value;
   const ancestors = new WeakSet<object>();
-  function visit(input: unknown, depth: number): { value: unknown; height: number; shared: boolean } {
+  function visit(input: unknown, depth: number, previous?: unknown): { value: unknown; height: number; shared: boolean } {
     if (depth > 128) throw new TypeError('Native retained state nesting exceeds its contract');
     if (input === null || typeof input === 'boolean') return { value: input, height: 0, shared: true };
     if (typeof input === 'number') {
@@ -82,12 +82,16 @@ export function retainNativeJson<T>(value: T): T {
     }
     if (typeof input === 'string') { assertUnicode(input); return { value: input, height: 0, shared: true }; }
     if (typeof input !== 'object') throw new TypeError('Native retained state requires explicit JSON values');
+    const array = Array.isArray(input);
+    const prior = previous !== null && typeof previous === 'object' && retained.has(previous)
+      && Array.isArray(previous) === array
+      && Object.getPrototypeOf(previous) === (array ? Array.prototype : Object.prototype)
+      ? previous as Record<string, unknown> : undefined;
     const known = retained.get(input);
     if (known !== undefined) {
       if (depth + known > 128) throw new TypeError('Native retained state nesting exceeds its contract');
-      return { value: input, height: known, shared: true };
+      if (!prior || prior === input) return { value: input, height: known, shared: true };
     }
-    const array = Array.isArray(input);
     if ((!array && !isJsonObject(input)) || Object.getOwnPropertySymbols(input).length) throw new TypeError('Native retained state requires plain JSON objects');
     if (ancestors.has(input)) throw new TypeError('Cyclic native retained state');
     ancestors.add(input);
@@ -107,18 +111,24 @@ export function retainNativeJson<T>(value: T): T {
           if (fields.some(([key], i) => key !== String(i))) throw new TypeError('Sparse or decorated native arrays are unsupported');
         }
       } else normalizeDescriptorOrder(fields);
+      const priorKeys = prior && Object.keys(prior);
+      let unchanged = !!priorKeys && priorKeys.length === fields.length
+        && fields.every(([key], index) => priorKeys[index] === key);
       let height = 0, shared = Object.isFrozen(input);
       const entries = fields.map(([key, descriptor]) => {
         assertUnicode(key);
         if (!('value' in descriptor) || !descriptor.enumerable) throw new TypeError('Native retained state requires enumerable data properties');
-        const child = visit(descriptor.value, depth + 1);
+        const child = visit(descriptor.value, depth + 1, prior?.[key]);
         height = Math.max(height, child.height + 1); shared &&= child.shared;
+        unchanged &&= Object.is(child.value, prior![key]);
         return [key, child.value] as const;
       });
-      const result = shared ? input : Object.freeze(array ? entries.map(([, item]) => item) : Object.fromEntries(entries));
+      const reuse = unchanged && (!shared || Object.getPrototypeOf(input) === Object.getPrototypeOf(prior));
+      const result = reuse ? prior! : shared ? input
+        : Object.freeze(array ? entries.map(([, item]) => item) : Object.fromEntries(entries));
       retained.set(result, height);
       return { value: result, height, shared };
     } finally { ancestors.delete(input); }
   }
-  return visit(value, 0).value as T;
+  return visit(value, 0, previous).value as T;
 }

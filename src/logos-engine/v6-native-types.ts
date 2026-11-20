@@ -131,10 +131,11 @@ export interface NativeExecution {
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
+  readonly panelFrontier?: import('../sic/public-input-exploration.ts').PanelFrontier;
   readonly observedQueue?: ReturnType<typeof import('./v6-queued-field-models.ts').acquireQueuedField>;
   readonly readEncounterTransition?: () => { readonly beforeRef: string; readonly afterRef: string } | null;
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
-  readonly readPriorDirectionalScene?: <T>(project: (rows: NativeRows) => T | null) => {
+  readonly readPriorDirectionalScene?: <T>(project: (rows: NativeRows, observation: NativeObservation) => T | null) => {
     readonly beforeRef: string;
     readonly afterRef: string;
     readonly levelEpoch: number;
@@ -157,6 +158,7 @@ export interface NativeExecution {
   } | null>;
   readonly readClickRegions?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionEvidence | null;
   readonly readClickRegionChanges?: (boxes: readonly NativeBox[]) => import('../sic/observed-click-regions.ts').ClickRegionChanges | null;
+  readonly readControlledClickRegions?: () => readonly NativeBox[];
   readonly readPriorFramedRows?: () => NativeBox[][] | null;
   readonly readClickMarker?: () => import('../sic/observed-click-regions.ts').ClickMarkerEvidence | null;
   readonly readWorkspaceClick?: (workspace: NativeBox) => import('../sic/workspace-click.ts').WorkspaceClickEvidence | null;
@@ -179,6 +181,11 @@ export interface NativeProgramRegistry {
  * Python-family boundary, with named public arguments and original proposal keys.
  * Family ports with a different internal signature use a small explicit adapter.
  */
+export const sicObservedCoverageDeadlock = 'sic_observed_coverage_deadlock';
+export const sicObservedWeightShortage = 'sic_observed_weight_shortage';
+export const isSicLevelRecovery = (reason: string | null) =>
+  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage;
+
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;
   attachPrograms?(registry: NativeProgramRegistry): NativeMaybePromise<void>;
@@ -196,11 +203,13 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
    * A recognized interface may stop its remaining group without stopping later groups. */
   sourceGroupStop?(group: string, entry: string | null, observation: NativeObservation): NativeRecord | null;
   preservationObligations?(observation: NativeObservation, rows: NativeRows): NativeMaybePromise<readonly NativeRecord[]>;
+  /** Public regions with a measured click role coupled to another part of the board. */
+  controlledClickRegions?(observation: NativeObservation, rows: NativeRows): readonly NativeBox[];
   bind?(proposal: P, domain: ObservedInputDomain): NativeMaybePromise<void>;
   before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation,
     execution?: NativeExecution): NativeMaybePromise<NativeBeforeResult>;
   after(proposal: P, index: number, before: NativeObservation, after: NativeObservation,
-    firstRows: NativeRows, secondRows: NativeRows): NativeMaybePromise<NativeAfterResult>;
+    firstRows: NativeRows, secondRows: NativeRows, frames?: readonly NativeRows[]): NativeMaybePromise<NativeAfterResult>;
   record(before: NativeObservation, after: NativeObservation, command: NativeCommand,
     firstRows: NativeRows, secondRows: NativeRows, proposal: P, index: number,
     frames: readonly NativeRows[], execution?: NativeExecution): NativeMaybePromise<NativeRecordResult>;
@@ -210,6 +219,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   // execution is native scheduling context, never an extra Python source datum.
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
+  /** Transfer measured rules and recovery exclusions to an actual reset of this level. */
+  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows): NativeRecord | undefined;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;

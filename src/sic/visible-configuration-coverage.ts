@@ -140,6 +140,62 @@ function confirmsClosingVisit(scene: Catalogue, choice: Choice, rows: NativeRows
   return scene.cards.every(card => hasBorder(rows, card.box, card === choice.target ? active.border : visitedBorder));
 }
 
+export type CatalogueAcquisition = { learned?: Calibration; witness?: Witness };
+
+export function acquireCatalogueReturn(previousState: CatalogueAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows, frames: readonly NativeRows[]): CatalogueAcquisition | undefined {
+  const learned = previousState?.learned, witness = previousState?.witness;
+  const calibration = learned?.epoch === before.level_epoch ? learned : null;
+  const knownBorder = calibration?.visitedBorder ?? (witness?.epoch === before.level_epoch ? witness.visitedBorder : null);
+  const current = readCatalogue(before, first, knownBorder);
+  if (!current) return previousState;
+  const previous = calibration?.factors ?? [];
+  if (after.levels_completed > before.levels_completed) {
+    if (knownBorder === null || previous.length < 2 || current.visited.length !== current.cards.length - 1) return previousState;
+    const choice = chooseConfiguration(current);
+    if (choice && key(choice.expected) === key(choice.target.values) &&
+      (inputTargets(command, current.factors[choice.factor]!.box) || frames.some(frame => confirmsClosingVisit(current, choice, frame, knownBorder)))) {
+      return { ...previousState, witness: { epoch: after.level_epoch, factors: previous, visitedBorder: knownBorder, boundary: after.observation_ref } };
+    }
+    return previousState;
+  }
+  let next = before.level_epoch === after.level_epoch ? readCatalogue(after, second, knownBorder) : null;
+  if (!next) return previousState;
+  const currentValues = next.current;
+  const differences = current.current.flatMap((value, index) => value === currentValues[index] ? [] : [index]);
+  if (differences.length !== 1) return previousState;
+  const priorCard = next.cards.find(card => key(card.values) === key(current.current));
+  if (!priorCard || next.cards.find(card => key(card.values) === key(currentValues))?.border === priorCard.border) return previousState;
+  const border = knownBorder ?? priorCard.border;
+  if (knownBorder === null) next = readCatalogue(after, second, border);
+  if (!next) return previousState;
+  const index = differences[0]!, factor = current.factors[index]!;
+  if (next.current[index] !== nextValue(factor, factor.active) || !verifyChange(current, next, next.current)) return previousState;
+  return { ...previousState, learned: { epoch: before.level_epoch, visitedBorder: border, factors: [...previous.filter(entry => key(entry.values) !== key(factor.values)),
+    { values: factor.values, input: command.action_ref, ref: after.observation_ref }] } };
+}
+
+export function projectRecalledCatalogue(transfer: CatalogueAcquisition, observation: NativeObservation, rows: NativeRows, remaining: number) {
+  const { witness } = transfer;
+  if (witness?.epoch !== observation.level_epoch) return null;
+  const scene = readCatalogue(observation, rows, witness.visitedBorder);
+  if (!scene || scene.cards.length - scene.visited.length > remaining) return null;
+  const reused = witness.factors.filter(known => scene.factors.some(factor => key(factor.values) === key(known.values)));
+  if (reused.length < 2 && witness.factors.filter(known => known.input === 'ACTION6').length < 2) return null;
+  const choice = chooseConfiguration(scene);
+  if (!choice) return null;
+  const factor = scene.factors[choice.factor]!;
+  const proof = [...new Set([...witness.factors, ...transfer.learned?.factors ?? []].map(item => item.ref))];
+  return { scene, choice, border: witness.visitedBorder, box: factor.box, point: center(factor.box), evidence: [...proof, witness.boundary],
+    novelty: ![...witness.factors, ...transfer.learned?.factors ?? []].some(known => key(known.values) === key(factor.values)) };
+}
+
+export function checkRecalledCatalogue({ scene, choice, border }: NonNullable<ReturnType<typeof projectRecalledCatalogue>>,
+  after: NativeObservation, rows: NativeRows) {
+  const next = readCatalogue(after, rows, border);
+  return !!next && verifyChange(scene, next, choice.expected);
+}
+
 export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> {
   let learned: Calibration | null = null;
   let witness: Witness | null = null;
@@ -147,41 +203,18 @@ export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> 
   return {
     id: visibleConfigurationCoverageId,
     observePublicOutcome(before, after, command, first, second, frames = []) {
-      const calibration = learned?.epoch === before.level_epoch ? learned : null;
-      const knownBorder = calibration?.visitedBorder ?? (witness?.epoch === before.level_epoch ? witness.visitedBorder : null);
-      const current = readCatalogue(before, first, knownBorder);
-      if (!current) return;
-      const previous = calibration?.factors ?? [];
-      if (after.levels_completed > before.levels_completed) {
-        if (knownBorder === null || previous.length < 2 || current.visited.length !== current.cards.length - 1) return;
-        const choice = chooseConfiguration(current);
-        if (choice && key(choice.expected) === key(choice.target.values) &&
-          (inputTargets(command, current.factors[choice.factor]!.box) || frames.some(frame => confirmsClosingVisit(current, choice, frame, knownBorder)))) {
-          witness = { epoch: after.level_epoch, factors: previous, visitedBorder: knownBorder, boundary: after.observation_ref };
-        }
-        return;
-      }
-      let next = before.level_epoch === after.level_epoch ? readCatalogue(after, second, knownBorder) : null;
-      if (!next) return;
-      const currentValues = next.current;
-      const differences = current.current.flatMap((value, index) => value === currentValues[index] ? [] : [index]);
-      if (differences.length !== 1) return;
-      const priorCard = next.cards.find(card => key(card.values) === key(current.current));
-      if (!priorCard || next.cards.find(card => key(card.values) === key(currentValues))?.border === priorCard.border) return;
-      const border = knownBorder ?? priorCard.border;
-      if (knownBorder === null) next = readCatalogue(after, second, border);
-      if (!next) return;
-      const index = differences[0]!, factor = current.factors[index]!;
-      if (next.current[index] !== nextValue(factor, factor.active) || !verifyChange(current, next, next.current)) return;
-      learned = { epoch: before.level_epoch, visitedBorder: border, factors: [...previous.filter(entry => key(entry.values) !== key(factor.values)),
-        { values: factor.values, input: command.action_ref, ref: after.observation_ref }] };
+      const retained = acquireCatalogueReturn({ ...(learned ? { learned } : {}), ...(witness ? { witness } : {}) },
+        before, after, command, first, second, frames);
+      learned = retained?.learned ?? null;
+      witness = retained?.witness ?? null;
     },
     async propose(observation, rows, _inputs, remaining) {
       if (remaining < 1 || witness?.epoch !== observation.level_epoch || stopped === observation.level_epoch) return null;
       const current = readCatalogue(observation, rows, witness.visitedBorder);
       if (!current) return null;
       const transferable = witness.factors.filter(known => current.factors.some(factor => key(factor.values) === key(known.values)));
-      if (transferable.length < 2) return null;
+      const clickEvidence = witness.factors.filter(known => known.input === 'ACTION6');
+      if (transferable.length < 2 && clickEvidence.length < 2) return null;
       if (current.cards.length - current.visited.length > remaining) return null;
       const choice = chooseConfiguration(current);
       if (!choice) return null;
@@ -191,7 +224,8 @@ export function createSicVisibleConfigurationCoverage(): NativeFamily<Proposal> 
       const known = observations.some(entry => key(entry.values) === key(factor.values));
       const strategy = known ? 'cover_next_configuration' : 'test_visible_factor_cycle', label = visibleConfigurationStrategies[strategy];
       const ref = observation.observation_ref, parent = 'G_official_completion';
-      const evidence: [string, ...string[]] = [ref, ...new Set([witness.boundary, ...observations.map(entry => entry.ref)].filter(item => item !== ref))];
+      const support = transferable.length >= 2 ? observations : [...clickEvidence, ...observations];
+      const evidence: [string, ...string[]] = [ref, ...new Set([witness.boundary, ...support.map(entry => entry.ref)].filter(item => item !== ref))];
       const [x, y] = center(factor.box), action = { action_ref: 'ACTION6', data: { x, y } }, actions = [action];
       const pointBinding = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
       const goal = { kind: 'cover_displayed_tuple_catalogue', scope: ref.split(':revision:', 1)[0]!,

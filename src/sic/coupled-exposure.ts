@@ -20,7 +20,7 @@ const stateKey = ({ actor, facing, pieces }: ExposureState) => [actor, facing, .
 export function readExposureBoard(scene: ExposureScene, photo: Pick<ExposureColors, 'shadow' | 'lit'>,
   retained?: CouplingColors): [ExposureBoard, ExposureState] | null {
   const { size: [width, height], slots, bodies, actor, dial, walls } = scene;
-  if (bodies.length < 3 || bodies.length > (retained ? 6 : 5) || slots.length !== bodies.length || dial.length !== exposureBearings.length) return null;
+  if (bodies.length < 3 || bodies.length > (retained ? 8 : 5) || slots.length !== bodies.length || dial.length !== exposureBearings.length) return null;
   const linked = retained ? [retained.linked] : [...new Set(bodies.filter(b => b.color !== photo.shadow).map(b => b.color))];
   const released = retained ? [retained.released] : [...new Set(slots.filter(slot => slot.color !== linked[0] && slot.color !== photo.shadow).map(slot => slot.color))];
   if (linked.length !== 1 || released.length !== 1 || !bodies.some(b => b.color === photo.shadow)
@@ -247,6 +247,39 @@ export async function planExposure(board: ExposureBoard, start: ExposureState, a
     }
     return best;
   }
+  const groupEstimates = [false, true].map(linked => {
+    const receivers = board.goals.flatMap((goal, index) => isLinked(goal.color) === linked ? [index] : []);
+    const cache = new Map<string, number>();
+    return (pieces: readonly Piece[]) => {
+      const group = pieces.filter(piece => isLinked(piece.color) === linked);
+      if (group.length !== receivers.length) return Infinity;
+      const identity = group.map(piece => piece.cell * 16 + piece.color).sort((a, b) => a - b).join(',');
+      const known = cache.get(identity);
+      if (known !== undefined) return known;
+      const costs = receivers.map(receiver => group.map(body => {
+        const goal = board.goals[receiver]!, distance = distances[receiver]![body.cell]!, recolor = Number(goal.color !== body.color);
+        if (Number.isFinite(distance)) return distance + recolor;
+        const [x, y] = exposurePoint(body.cell, board.width), [gx, gy] = exposurePoint(goal.cell, board.width);
+        return 8 + Math.abs(x - gx) + Math.abs(y - gy) + recolor;
+      }));
+      const sizes = 1 << group.length, values = new Float64Array(sizes).fill(Infinity);
+      values[0] = 0;
+      for (let mask = 0; mask < sizes - 1; mask++) {
+        let assigned = 0;
+        for (let subset = mask; subset; subset &= subset - 1) assigned++;
+        for (let i = 0; i < group.length; i++) {
+          const bit = 1 << i;
+          if (!(mask & bit)) values[mask | bit] = Math.min(values[mask | bit]!, values[mask]! + costs[assigned]![i]!);
+        }
+      }
+      const value = values[sizes - 1]!;
+      if (cache.size < 200_000) cache.set(identity, value);
+      return value;
+    };
+  });
+  const estimated = start.pieces.length > 6
+    ? (pieces: readonly Piece[]) => groupEstimates[0]!(pieces) + groupEstimates[1]!(pieces)
+    : (pieces: readonly Piece[]) => estimates(0, pieces, 0);
   const queue = new ExposureQueue(), first = stateKey(start), costs = new Map([[first, 0]]);
   queue.push({ score: 0, depth: 0, parent: null, action: -1, state: start, key: first });
   for (let work = 0; queue.values.length && work < 200_000; work++) {
@@ -266,7 +299,7 @@ export async function planExposure(board: ExposureBoard, start: ExposureState, a
     for (const action of actions) {
       const state = project(current.state, action), key = stateKey(state);
       if ((costs.get(key) ?? Infinity) <= depth) continue;
-      const estimate = estimates(0, state.pieces, 0);
+      const estimate = estimated(state.pieces);
       if (!Number.isFinite(estimate)) continue;
       costs.set(key, depth);
       queue.push({ score: depth + 4 * estimate, depth, parent: current, action, state, key });

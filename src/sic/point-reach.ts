@@ -20,7 +20,7 @@ const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const inside = ([l, t, r, b]: NativeBox, [x, y]: NativePoint) => x >= l && x <= r && y >= t && y <= b;
 const square = (p: Part, n: number) => width(p.bbox) === n && height(p.bbox) === n && p.area === n ** 2;
 
-function layoutFor(rows: NativeRows, parts: Part[]): Layout | null {
+export function measurePointReach(rows: NativeRows, parts: Part[]): Layout | null {
   const frameWidth = rows[0]?.length ?? 0;
   const candidates: Layout[] = [];
   for (const field of parts.filter(p => width(p.bbox) === frameWidth && p.area > frameWidth * rows.length * 0.65)) {
@@ -41,17 +41,17 @@ function layoutFor(rows: NativeRows, parts: Part[]): Layout | null {
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
-function at(parts: Part[], layout: Layout): NativePoint | null {
+export function pointReachActor(parts: Part[], layout: Layout): NativePoint | null {
   const found = parts.filter(p => p.color === layout.color && square(p, layout.side) && inside(layout.field, center(p.bbox)));
   return found.length === 1 ? center(found[0]!.bbox) : null;
 }
 
-function reserveOf(rows: NativeRows, layout: Layout): number {
+export function pointReachReserve(rows: NativeRows, layout: Layout): number {
   const [l, y, r] = layout.reserve;
   return rows[y]!.slice(l, r + 1).filter(p => p === layout.reserveColor).length;
 }
 
-function nextPoint(actor: NativePoint, local: Memory): NativePoint | null {
+export function pointReachStep(actor: NativePoint, local: Pick<Memory, 'layout' | 'radius' | 'blocked'>): NativePoint | null {
   const { goal, field, side } = local.layout;
   const [x, y] = actor, [gx, gy] = center(goal);
   const dx = gx - x, dy = gy - y;
@@ -78,12 +78,12 @@ export function createSicVerifyPointAccess(): NativeFamily<Proposal> {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const prior = memory?.epoch === observation.level_epoch ? memory : null;
-      const parts = geometricComponents(rows), layout = prior?.layout ?? layoutFor(rows, parts);
+      const parts = geometricComponents(rows), layout = prior?.layout ?? measurePointReach(rows, parts);
       if (!layout) return null;
       const local = prior ?? { epoch: observation.level_epoch, layout, evidence: [], radius: 0, blocked: [], unitCost: null };
-      const actor = at(parts, layout), reserve = reserveOf(rows, layout);
+      const actor = pointReachActor(parts, layout), reserve = pointReachReserve(rows, layout);
       if (!actor || reserve < (local.unitCost ?? 1)) return null;
-      const target = nextPoint(actor, local);
+      const target = pointReachStep(actor, local);
       if (!target) return null;
 
       const ref = observation.observation_ref;
@@ -126,18 +126,18 @@ export function createSicVerifyPointAccess(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const actual = at(geometricComponents(second), proposal.local.layout);
+      const actual = pointReachActor(geometricComponents(second), proposal.local.layout);
       const arrived = !!actual && same(actual, proposal.target);
-      const spent = proposal.reserve - reserveOf(second, proposal.local.layout);
+      const spent = proposal.reserve - pointReachReserve(second, proposal.local.layout);
       return { matched: arrived && (proposal.local.unitCost === null || spent === proposal.local.unitCost), seal_prefix: true,
         reason: arrived ? 'point_landing_observed' : spent > 0 ? 'point_refused_and_reserve_spent' : 'point_landing_missing' };
     },
     record(before, after, _action, _first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, actor, target, reserve } = proposal;
-      const actual = at(geometricComponents(second), local.layout), arrived = !!actual && same(actual, target);
+      const actual = pointReachActor(geometricComponents(second), local.layout), arrived = !!actual && same(actual, target);
       const distance = Math.hypot(actor[0] - target[0], actor[1] - target[1]);
-      const cost = reserve - reserveOf(second, local.layout);
+      const cost = reserve - pointReachReserve(second, local.layout);
       memory = { ...local, radius: arrived ? Math.max(local.radius, distance) : local.radius,
         unitCost: cost > 0 ? cost : local.unitCost, evidence: [...local.evidence.slice(-4), after.observation_ref],
         blocked: arrived ? local.blocked : rememberRouteRefusal(local.blocked, actor, target.join(','), after.observation_ref) };

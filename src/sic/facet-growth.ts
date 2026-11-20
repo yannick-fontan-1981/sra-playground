@@ -38,6 +38,7 @@ const compoundSearch: FacetCompoundConfiguration = {
   maximum_sample_denominator: 8,
   sample_offsets: [-0.5, 0, 0.5],
 };
+const layeredSearch = { maximumUnits: 10, maximumStates: 256_000 };
 const sameShape = (a: FacetProjection['offer']['support'], b: FacetProjection['offer']['support']) =>
   JSON.stringify(facetShape(a)) === JSON.stringify(facetShape(b));
 
@@ -76,23 +77,37 @@ function matchesCompound(projection: FacetProjection, first: NativeRows, second:
     && compound.expected_colored_pixels.every(([x, y, value]) => second[y]?.[x] === value);
 }
 
-export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Proposal> {
+export function createSicFacetGrowth(family = facetGrowthId, transferObservedFacet = false): NativeFamily<Proposal> {
   const learns = family === learnFacetGrowthId;
   let state: State | null = null;
   let portable: FacetPortableMethod | null = null;
   const cache: FacetCompoundCache = new Map();
   return {
     id: family,
+    observePublicOutcome(before, after, command, first, second) {
+      if (!learns || !transferObservedFacet || command.action_ref !== 'ACTION6') return;
+      if (after.levels_completed > before.levels_completed) {
+        if (portable?.source_epoch === before.level_epoch && portable.up_shift) portable.boundary_ref = after.observation_ref;
+        return;
+      }
+      if (before.level_epoch !== after.level_epoch || before.frame_hash === after.frame_hash) return;
+      const projection = facetProject(before, first);
+      const { x, y } = command.data;
+      if (projection?.offer.kind !== 'probe_congruent_empty_face' || x === undefined || y === undefined
+        || !facetInside([x, y, x, y], projection.offer.support.bbox)) return;
+      portable = acquireFacetSeed(before, after, first, second, projection) ?? portable;
+    },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      if (learns && !state && !execution?.readWorkspaceClick) return null;
       const reusable = portable && portable.source_epoch !== observation.level_epoch ? portable : null;
-      const projection = facetCompoundPlan(observation, rows, reusable, cache, compoundSearch, true) ?? facetProject(observation, rows);
+      const transferred = transferObservedFacet && !!reusable?.boundary_ref && !!reusable.up_shift;
+      if (learns && !state && !transferred && !execution?.readWorkspaceClick) return null;
+      const projection = facetCompoundPlan(observation, rows, reusable, cache, compoundSearch, true, layeredSearch) ?? facetProject(observation, rows);
       if (!projection) return null;
       const prior = state?.scope === projection.scope_ref ? state : null;
       const click = learns && !prior && projection.offer.kind === 'probe_visible_cap'
         ? execution?.readWorkspaceClick?.(projection.world) : null;
-      if (learns && !prior && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch
+      if (learns && !prior && !transferred && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch
         || !facetInside([...click.point, ...click.point], projection.offer.support.bbox))) return null;
       const local = prior ?? { scope: projection.scope_ref, count: 0, stopped: false, rise: null,
         evidence: projection.compound && reusable?.boundary_ref ? [...reusable.evidence, reusable.boundary_ref]
@@ -111,7 +126,13 @@ export function createSicFacetGrowth(family = facetGrowthId): NativeFamily<Propo
       }, planners: { test_matching_surface: () => command, measure_visible_extension: () => command, repeat_verified_extension: () => command,
         extend_visible_side_toward_reference: () => command, repeat_verified_side_extension: () => command } });
       if (!selected) return null;
-      const strategy = selected.id, label = facetGrowthStrategies[strategy], parent = 'G_official_completion';
+      const strategy = selected.id, compound = projection.compound, parent = 'G_official_completion';
+      const destinations = compound?.solution.placements;
+      const current = compound?.prefix ?? 0, destination = destinations?.[current];
+      const covered = !!destination && compound?.solution.paint_order?.some((index, order, paintOrder) =>
+        index < current && order < paintOrder.indexOf(current) && destinations![index]!.every((value, axis) => value === destination[axis]));
+      const label = covered ? 'Add a piece in front of an earlier piece using a face that is still visible'
+        : facetGrowthStrategies[strategy];
       const goal = { kind: 'match_reference_form', scope: projection.scope_ref, subjects: ['bounded_workspace', 'visible_reference'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_matching_the_visible_form' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };

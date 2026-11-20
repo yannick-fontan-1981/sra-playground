@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
-import { exposureBearings, exposureRules, readExposureBoard, type ExposureScene } from '../src/sic/coupled-exposure.ts';
+import { exposureBearings, exposureRules, planExposure, readExposureBoard, type ExposureScene } from '../src/sic/coupled-exposure.ts';
 
 test('a retained coupling can propagate a push after contact creates a new linked pair', () => {
   const linked = 2, released = 6, shadow = 3, lit = 10;
@@ -27,4 +27,18 @@ test('a retained coupling can propagate a push after contact creates a new linke
   assert.deepEqual(project(first, 4).pieces.slice(0, 4), [
     { cell: 27, color: lit }, { cell: 28, color: linked }, { cell: 29, color: linked }, { cell: 75, color: linked },
   ]);
+});
+
+test('the search keeps both families of receivers in an eight-piece arrangement', async () => {
+  const linked = 2, released = 6, shadow = 3, lit = 10;
+  const bodies = [
+    { pos: [2, 2], color: shadow }, { pos: [4, 5], color: shadow }, { pos: [5, 6], color: shadow }, { pos: [6, 7], color: shadow },
+    { pos: [7, 5], color: linked }, { pos: [8, 6], color: linked }, { pos: [9, 7], color: linked }, { pos: [10, 8], color: released },
+  ] as ExposureScene['bodies'];
+  const scene: ExposureScene = { origin: [0, 0], size: [15, 11], pitch: 4, actor: [1, 2], bodies,
+    slots: [{ pos: [3, 2], color: shadow }, ...bodies.slice(1)],
+    dial: exposureBearings.map((vector, i) => ({ point: [i, 0] as NativePoint, vector, active: i === 0 })),
+    walls: [], actor_color: 15, layout: 'test' };
+  const [board, start] = readExposureBoard(scene, { shadow, lit }, { linked, released })!;
+  assert.deepEqual(await planExposure(board, start, [0, 1, 2, 3], 2), [3]);
 });

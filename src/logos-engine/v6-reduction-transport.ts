@@ -16,12 +16,19 @@ export type ReductionModel = {
   unit: number; pitch: number; phase: ReductionPoint; floor: number; token: number;
   ring: number | null; rail: number | null; width: number; height: number;
   plot?: { ink: number; offset: ReductionPoint; mask: readonly (readonly [number, number])[] };
+  auxiliary?: number;
+  trackCoveredRails?: boolean;
+  trackClippedCarrierRows?: boolean;
 };
 export type ReductionScene = {
   floor: Set<string>; pegs: Set<string>; carriers: ReductionPoint[]; rails: Set<string>;
-  edges: Set<string>; known_cells?: Set<string>; plots?: Set<string>;
+  edges: Set<string>; known_cells?: Set<string>; plots?: Set<string>; carriedPlots?: Set<string>;
+  auxiliaries?: Set<string>;
+  followVacated?: boolean;
+  allowDockTransfer?: boolean;
+  allowAuxiliaryPeerJump?: boolean;
 };
-export type ReductionState = [Set<string>, ReductionPoint[]];
+export type ReductionState = [Set<string>, ReductionPoint[], Set<string>?, Set<string>?];
 export type ReductionOperation = ['jump', ReductionPoint, ReductionPoint] | ['move', ReductionPoint];
 export interface ReductionSearchBounds {
   readonly maximumStates: number;
@@ -125,6 +132,7 @@ export function reductionScan(rows: NativeRows, m: ReductionModel): ReductionSce
   const s = m.unit, pitch = m.pitch, [px, py] = m.phase, plot = m.plot;
   const floor = new Set<string>(), pegs = new Set<string>(), rails = new Set<string>(), carriers = new Set<string>();
   const plots = plot ? new Set<string>() : null;
+  const auxiliaries = m.auxiliary === undefined ? null : new Set<string>();
   for (let y = py; y <= rows.length - s; y += pitch) {
     if (y < 1) continue;
     for (let x = px; x <= rows[0]!.length - s; x += pitch) {
@@ -133,8 +141,17 @@ export function reductionScan(rows: NativeRows, m: ReductionModel): ReductionSce
         plots!.add(k);
       }
       if (countValue(rows, x, y, s, m.token) > s * s / 2) pegs.add(k);
-      const border = m.ring !== null && x > 0 && y > 0 && x + s < rows[0]!.length && y + s < rows.length
+      if (auxiliaries && countValue(rows, x, y, s, m.auxiliary!) > s * s / 2) auxiliaries.add(k);
+      const hasFullRim = m.ring !== null && x > 0 && y > 0 && x + s < rows[0]!.length && y + s < rows.length
         && [[x - 1, y - 1], [x + s, y - 1], [x - 1, y + s], [x + s, y + s]].every(([X, Y]) => rows[Y!]![X!] === m.ring);
+      const visibleSide = x === 0 ? x + s : x + s === rows[0]!.length ? x - 1 : null;
+      const hasClippedRim = m.trackCoveredRails && m.ring !== null && visibleSide !== null && y > 0 && y + s < rows.length
+        && rows.slice(y - 1, y + s + 1).every(row => row[visibleSide] === m.ring);
+      const hasBottomRim = m.trackClippedCarrierRows && m.ring !== null && y + s === rows.length
+        && x > 0 && x + s < rows[0]!.length && y > 0
+        && rows[y - 1]!.slice(x - 1, x + s + 1).every(ink => ink === m.ring)
+        && rows.slice(y, y + s).every(row => row[x - 1] === m.ring && row[x + s] === m.ring);
+      const border = hasFullRim || hasClippedRim || hasBottomRim;
       if (border) { carriers.add(k); rails.add(k); }
       else if (countValue(rows, x, y, s, m.floor) >= s * s / 4) floor.add(k);
       if (m.rail !== null && rows[y + Math.floor(s / 2)]![x + Math.floor(s / 2)] === m.rail) rails.add(k);
@@ -147,37 +164,87 @@ export function reductionScan(rows: NativeRows, m: ReductionModel): ReductionSce
       const q = add(p, v); if (!rails.has(key(q))) continue;
       const x = px + p[0] * pitch + Math.floor(s / 2), y = py + p[1] * pitch + Math.floor(s / 2);
       const permitted = new Set([m.rail, m.ring, m.token, rows[y]![x]!, rows[y + v[1] * pitch]![x + v[0] * pitch]!]);
-      let allowed = true; for (let i = 0; i <= pitch; i++) if (!permitted.has(rows[y + v[1] * i]![x + v[0] * i]!)) { allowed = false; break; }
+      const covered = m.trackCoveredRails ? [p, q].filter(cell => carriers.has(key(cell))) : undefined;
+      let allowed = true;
+      for (let i = 0; i <= pitch; i++) {
+        const X = x + v[0] * i, Y = y + v[1] * i;
+        // The visible rail reaches the rim. Inside a measured carrier, its contents may hide the rail.
+        if (permitted.has(rows[Y]![X]!) || covered?.some(([u, w]) =>
+          X >= px + u * pitch - 1 && X <= px + u * pitch + s
+          && Y >= py + w * pitch - 1 && Y <= py + w * pitch + s)) continue;
+        allowed = false;
+        break;
+      }
       if (allowed) edges.add(edge(p, q));
     }
   }
-  return { floor, pegs, carriers: sorted(carriers), rails, edges, ...(plots ? { plots } : {}) };
+  const carriedPlots = plots ? new Set([...plots].filter(cell => carriers.has(cell))) : null;
+  if (carriedPlots?.size) for (const cell of carriedPlots) plots!.delete(cell);
+  return { floor, pegs, carriers: sorted(carriers), rails, edges, ...(plots ? { plots } : {}),
+    ...(carriedPlots?.size ? { carriedPlots } : {}), ...(auxiliaries ? { auxiliaries } : {}) };
 }
 
-export const reductionState = (scene: ReductionScene): ReductionState => [new Set(scene.pegs), scene.carriers.map(p => [...p])];
-export const packReductionState = (current: ReductionState): [ReductionPoint[], ReductionPoint[]] => [sorted(current[0]), current[1].map(p => [...p])];
+export function reductionState(scene: ReductionScene): ReductionState {
+  const state: ReductionState = [new Set(scene.pegs), scene.carriers.map(p => [...p])];
+  if (scene.carriedPlots) state[2] = new Set(scene.carriedPlots);
+  if (scene.auxiliaries) {
+    state[2] ??= new Set();
+    state[3] = new Set(scene.auxiliaries);
+  }
+  return state;
+}
+export function packReductionState(current: ReductionState): [ReductionPoint[], ReductionPoint[], ReductionPoint[]?, ReductionPoint[]?] {
+  const packed: [ReductionPoint[], ReductionPoint[], ReductionPoint[]?, ReductionPoint[]?] = [sorted(current[0]), current[1].map(p => [...p])];
+  if (current[2]) packed[2] = sorted(current[2]);
+  if (current[3]) { packed[2] ??= []; packed[3] = sorted(current[3]); }
+  return packed;
+}
 const stateKey = (current: ReductionState): string => JSON.stringify(packReductionState(current));
-export function reductionMoved(current: ReductionState, vector: ReductionPoint, edges: Set<string>, plots?: ReadonlySet<string>): ReductionState {
-  const [pegs, carriers] = current, next = carriers.map(p => [...p] as ReductionPoint), tokens = new Set(pegs), oldCarriers = new Set(carriers.map(key));
-  for (const [index, p] of carriers.entries()) {
+export function reductionMoved(current: ReductionState, vector: ReductionPoint, edges: Set<string>, plots?: ReadonlySet<string>,
+  followVacated = false): ReductionState {
+  const [pegs, carriers, cargo, auxiliaries] = current, next = carriers.map(p => [...p] as ReductionPoint), tokens = new Set(pegs), oldCarriers = new Set(carriers.map(key));
+  const movedPlots = cargo && new Set(cargo);
+  const companions = auxiliaries && new Set(auxiliaries);
+  const dot = ([x, y]: ReductionPoint) => x * vector[0] + y * vector[1];
+  const order = followVacated ? [...carriers.entries()].sort((a, b) => dot(b[1]) - dot(a[1])) : carriers.entries();
+  for (const [index, p] of order) {
     const q = add(p, vector), k = key(q);
-    if (edges.has(edge(p, q)) && !oldCarriers.has(k) && !tokens.has(k) && !plots?.has(k)) {
+    if (edges.has(edge(p, q)) && !oldCarriers.has(k) && !tokens.has(k) && !plots?.has(k) && !companions?.has(k)) {
       next[index] = q; if (tokens.has(key(p))) { tokens.delete(key(p)); tokens.add(k); }
+      if (movedPlots?.delete(key(p))) movedPlots.add(k);
+      if (companions?.delete(key(p))) companions.add(k);
+      if (followVacated) { oldCarriers.delete(key(p)); oldCarriers.add(k); }
     }
   }
-  return [tokens, next.sort(compare)];
+  next.sort(compare);
+  if (companions) return [tokens, next, movedPlots ?? new Set(), companions];
+  return movedPlots ? [tokens, next, movedPlots] : [tokens, next];
 }
 export function* reductionSuccessors(current: ReductionState, scene: ReductionScene): Generator<[ReductionState, ReductionOperation, number]> {
-  const [pegs, carriers] = current, supports = new Set([...scene.floor, ...carriers.map(key)]);
-  for (const p of sorted(pegs)) for (const vector of REDUCTION_VECTORS) {
+  const [pegs, carriers, cargo, auxiliaries] = current, supports = new Set([...scene.floor, ...carriers.map(key)]);
+  const isPlot = (at: string) => !!scene.plots?.has(at) || !!cargo?.has(at);
+  const sources = [...sorted(pegs), ...(auxiliaries ? sorted(auxiliaries) : [])];
+  const carrierCells = auxiliaries && new Set(carriers.map(key));
+  for (const p of sources) for (const vector of REDUCTION_VECTORS) {
+    const auxiliaryJump = auxiliaries?.has(key(p));
     const mid = add(p, vector), end = add(mid, vector);
-    if ((pegs.has(key(mid)) || scene.plots?.has(key(mid))) && supports.has(key(end)) && !pegs.has(key(end)) && !scene.plots?.has(key(end))) {
-      const tokens = new Set(pegs); tokens.delete(key(p)); tokens.delete(key(mid)); tokens.add(key(end));
-      yield [[tokens, carriers], ['jump', p, end], 2];
+    const dockTransfer = scene.allowDockTransfer !== false && carrierCells && !supports.has(key(mid)) && !scene.rails.has(key(mid))
+      && carrierCells.has(key(p)) !== carrierCells.has(key(end));
+    const supported = pegs.has(key(mid)) || isPlot(key(mid))
+      || (!auxiliaryJump || scene.allowAuxiliaryPeerJump) && auxiliaries?.has(key(mid)) || dockTransfer;
+    if (supported && supports.has(key(end)) && !pegs.has(key(end)) && !isPlot(key(end)) && !auxiliaries?.has(key(end))) {
+      const tokens = new Set(pegs);
+      let companions = auxiliaries;
+      if (auxiliaryJump) {
+        companions = new Set(auxiliaries); companions.delete(key(p)); companions.add(key(end));
+      } else { tokens.delete(key(p)); tokens.delete(key(mid)); tokens.add(key(end)); }
+      const following: ReductionState = companions ? [tokens, carriers, cargo ?? new Set(), companions]
+        : cargo ? [tokens, carriers, cargo] : [tokens, carriers];
+      yield [following, ['jump', p, end], 2];
     }
   }
   for (const vector of REDUCTION_VECTORS) {
-    const next = reductionMoved(current, vector, scene.edges, scene.plots);
+    const next = reductionMoved(current, vector, scene.edges, scene.plots, scene.followVacated);
     if (stateKey(next) !== stateKey(current)) yield [next, ['move', [...vector]], 1];
   }
 }
@@ -203,7 +270,8 @@ export function reductionRoute(current: ReductionState, scene: ReductionScene, l
   };
   while (heap.length) {
     const { cost, state: node, key: nodeKey } = pop(); if (costs.get(nodeKey) !== cost) continue;
-    const frontier = node[1].some(p => node[0].has(key(p)) && REDUCTION_VECTORS.some(v => !scene.known_cells?.has(key(add(add(p, v), v)))));
+    const frontier = node[1].some(p => (node[0].has(key(p)) || node[3]?.has(key(p)))
+      && REDUCTION_VECTORS.some(v => !scene.known_cells?.has(key(add(add(p, v), v)))));
     if (reveal ? frontier && nodeKey !== start : node[0].size === 1) {
       const result: ReductionOperation[] = []; let cursor = nodeKey;
       while (cursor !== start) { const parent = parents.get(cursor)!; result.push(parent.action); cursor = parent.previous; }
@@ -227,15 +295,61 @@ function checkedReductionBounds(bounds: ReductionSearchBounds): ReductionSearchB
 }
 
 /**
- * Native bounded Dijkstra. Its queue, successors and cost/serial ordering are
+ * The native search defaults to Dijkstra. Its queue, successors and cost/serial ordering are
  * the source order. A resource stop occurs before the map/parent/heap insertion
  * that would exceed a bound. One temporary successor can be inspected to decide
  * whether that insertion is new; it is never retained after a resource stop.
  */
+type ReductionGoal = boolean | 'reduce' | 'reveal_with_auxiliary' | 'join_pair' | { readonly landings: ReadonlySet<string>; readonly auxiliary?: boolean };
+
+function pairReachDistance(scene: ReductionScene) {
+  const cells = new Set([...scene.floor, ...scene.rails]);
+  const neighbors = new Map<string, string[]>();
+  const alignments: [string, string][] = [];
+  for (const from of cells) {
+    const source = point(from), destinations: string[] = [];
+    for (const vector of REDUCTION_VECTORS) {
+      const mid = add(source, vector), end = add(mid, vector), via = key(mid), target = key(end);
+      if (scene.edges.has(edge(source, mid))) destinations.push(via);
+      if (!cells.has(target)) continue;
+      if (cells.has(via) || scene.plots?.has(via)) destinations.push(target);
+      if (cells.has(via) && !scene.plots?.has(via) && !scene.plots?.has(target)) alignments.push([from, via]);
+    }
+    neighbors.set(from, destinations);
+  }
+  const distances = new Map<string, ReadonlyMap<string, number>>();
+  const measure = (start: string): ReadonlyMap<string, number> => {
+    const saved = distances.get(start);
+    if (saved) return saved;
+    const values = new Map([[start, 0]]);
+    for (const [at, length] of values) for (const next of neighbors.get(at) ?? []) {
+      if (!values.has(next)) values.set(next, length + 1);
+    }
+    distances.set(start, values);
+    return values;
+  };
+  const scores = new Map<string, number>();
+  return (tokens: ReadonlySet<string>) => {
+    if (tokens.size !== 2) return 0;
+    const [first, second] = [...tokens].sort() as [string, string];
+    const id = first + '>' + second, saved = scores.get(id);
+    if (saved !== undefined) return saved;
+    const fromFirst = measure(first), fromSecond = measure(second);
+    const distance = (a: ReadonlyMap<string, number>, x: string, b: ReadonlyMap<string, number>, y: string) =>
+      Math.max(a.get(x) ?? Infinity, b.get(y) ?? Infinity);
+    let best = Infinity;
+    for (const [a, b] of alignments) best = Math.min(best, distance(fromFirst, a, fromSecond, b), distance(fromFirst, b, fromSecond, a));
+    const value = Number.isFinite(best) ? best : cells.size;
+    scores.set(id, value);
+    return value;
+  };
+}
+
 function* boundedReductionSearch(current: ReductionState, scene: ReductionScene, limit: number,
-  inputBounds: ReductionSearchBounds, goal: boolean | 'reduce', control?: () => 'deadline' | null): Generator<void, ReductionSearchResult> {
-  type Entry = { cost: number; serial: number; state: ReductionState; key: string };
+  inputBounds: ReductionSearchBounds, goal: ReductionGoal, control?: () => 'deadline' | null): Generator<void, ReductionSearchResult> {
+  type Entry = { cost: number; rank: number; serial: number; state: ReductionState; key: string };
   const bounds = checkedReductionBounds(inputBounds), heap: Entry[] = [], costs = new Map<string, number>();
+  const estimate = goal === 'join_pair' ? pairReachDistance(scene) : null;
   const parents = new Map<string, { previous: string; action: ReductionOperation }>();
   let serial = 1, insertedEntries = 0, poppedEntries = 0, staleEntries = 0, expandedStates = 0;
   let generatedTransitions = 0, peakFrontierEntries = 0, work = 0;
@@ -247,9 +361,9 @@ function* boundedReductionSearch(current: ReductionState, scene: ReductionScene,
   });
   if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline');
   const start = stateKey(current);
-  heap.push({ cost: 0, serial: 0, state: current, key: start }); costs.set(start, 0);
+  heap.push({ cost: 0, rank: 0, serial: 0, state: current, key: start }); costs.set(start, 0);
   insertedEntries = peakFrontierEntries = 1;
-  const order = (a: Entry, b: Entry) => a.cost - b.cost || a.serial - b.serial;
+  const order = (a: Entry, b: Entry) => a.rank - b.rank || a.cost - b.cost || a.serial - b.serial;
   const push = (value: Entry) => {
     let i = heap.length; heap.push(value);
     while (i > 0) { const parent = Math.floor((i - 1) / 2); if (order(heap[parent]!, value) <= 0) break; heap[i] = heap[parent]!; i = parent; }
@@ -267,8 +381,26 @@ function* boundedReductionSearch(current: ReductionState, scene: ReductionScene,
     const { cost, state: node, key: nodeKey } = pop(); poppedEntries++;
     if (++work % 128 === 0) { yield; if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline'); }
     if (costs.get(nodeKey) !== cost) { staleEntries++; continue; }
-    const frontier = node[1].some(p => node[0].has(key(p)) && REDUCTION_VECTORS.some(v => !scene.known_cells?.has(key(add(add(p, v), v)))));
-    const reached = goal === 'reduce' ? node[0].size < current[0].size : goal ? frontier && nodeKey !== start : node[0].size === 1;
+    let reached: boolean;
+    if (typeof goal === 'object') {
+      const pieces = goal.auxiliary ? [...(node[3] ?? [])] : [...node[0], ...(node[3] ?? [])];
+      reached = pieces.some(cell => goal.landings.has(cell) && !current[0].has(cell) && !current[3]?.has(cell));
+    } else if (goal === 'reduce') {
+      reached = node[0].size < current[0].size;
+    } else if (goal === 'join_pair' || !goal) {
+      reached = node[0].size === 1;
+    } else {
+      const frontier = node[1].some(p => (node[0].has(key(p)) || node[3]?.has(key(p)))
+        && REDUCTION_VECTORS.some(v => !scene.known_cells?.has(key(add(add(p, v), v)))));
+      const loadedPair = goal !== 'reveal_with_auxiliary'
+        || node[1].some(p => node[0].has(key(p))) && node[1].some(p => node[3]?.has(key(p)));
+      const exposedLanding = goal === 'reveal_with_auxiliary' && [...node[0]].some(cell =>
+        !current[0].has(cell) && scene.floor.has(cell) && REDUCTION_VECTORS.some(vector => {
+          const next = add(point(cell), vector);
+          return scene.floor.has(key(next)) && !scene.known_cells?.has(key(add(next, vector)));
+        }));
+      reached = (frontier && loadedPair || exposedLanding) && nodeKey !== start;
+    }
     if (reached) {
       const path: ReductionOperation[] = []; let cursor = nodeKey;
       while (cursor !== start) { const parent = parents.get(cursor)!; path.push(parent.action); cursor = parent.previous; }
@@ -286,7 +418,7 @@ function* boundedReductionSearch(current: ReductionState, scene: ReductionScene,
           : requiredFrontierEntries > bounds.maximumFrontier ? 'maximum_frontier' : null;
         if (blocked) return finish('resource_bound', null, blocked, { newState, requiredStates, requiredFrontierEntries, cost: value });
         costs.set(nextKey, value); parents.set(nextKey, { previous: nodeKey, action });
-        push({ cost: value, serial: serial++, state: following, key: nextKey });
+        push({ cost: value, rank: value + 8 * (estimate?.(following[0]) ?? 0), serial: serial++, state: following, key: nextKey });
       }
     }
   }
@@ -295,14 +427,14 @@ function* boundedReductionSearch(current: ReductionState, scene: ReductionScene,
 
 /** Complete within the supplied primitive-cost limit, or explicitly unknown. */
 export function boundedReductionRoute(current: ReductionState, scene: ReductionScene, limit: number,
-  bounds: ReductionSearchBounds, goal: boolean | 'reduce' = false): ReductionSearchResult {
+  bounds: ReductionSearchBounds, goal: ReductionGoal = false): ReductionSearchResult {
   const search = boundedReductionSearch(current, scene, limit, bounds, goal);
   let result = search.next(); while (!result.done) result = search.next(); return result.value;
 }
 
 /** Cooperative scheduling changes neither insertion order nor physical action count. */
 export async function boundedReductionRouteCooperative(current: ReductionState, scene: ReductionScene, limit: number,
-  bounds: ReductionSearchBounds, goal: boolean | 'reduce' = false, execution?: NativeExecution): Promise<ReductionSearchResult> {
+  bounds: ReductionSearchBounds, goal: ReductionGoal = false, execution?: NativeExecution): Promise<ReductionSearchResult> {
   const control = (): 'deadline' | null => {
     if (execution?.signal?.aborted) throw new DOMException('Reduction search aborted', 'AbortError');
     return execution?.deadlineMs !== undefined && (execution.now ?? performance.now.bind(performance))() >= execution.deadlineMs ? 'deadline' : null;
@@ -317,7 +449,9 @@ export function translatedReductionScene(scene: ReductionScene, offset: Reductio
   const shift = (values: Set<string>) => new Set([...values].map(value => key(add(point(value), offset))));
   return { floor: shift(scene.floor), pegs: shift(scene.pegs), rails: shift(scene.rails), carriers: scene.carriers.map(p => add(p, offset)).sort(compare),
     edges: new Set([...scene.edges].map(value => { const [a, b] = value.split('>'); return edge(add(point(a!), offset), add(point(b!), offset)); })),
-    ...(scene.plots ? { plots: shift(scene.plots) } : {}) };
+    ...(scene.plots ? { plots: shift(scene.plots) } : {}),
+    ...(scene.carriedPlots ? { carriedPlots: shift(scene.carriedPlots) } : {}),
+    ...(scene.auxiliaries ? { auxiliaries: shift(scene.auxiliaries) } : {}) };
 }
 export function reductionVisibleCells(m: ReductionModel, offset: ReductionPoint): Set<string> {
   const values = new Set<string>(), [px, py] = m.phase;
@@ -331,7 +465,11 @@ export function mergeReductionScene(previous: ReductionScene | null, local: Redu
   return { floor: new Set([...previous.floor, ...next.floor]), rails: new Set([...previous.rails, ...next.rails]), edges: new Set([...previous.edges, ...next.edges]),
     known_cells: new Set([...(previous.known_cells ?? []), ...seen]), pegs: new Set([...previous.pegs].filter(p => !seen.has(p)).concat([...next.pegs])),
     carriers: sorted(new Set(previous.carriers.map(key).filter(p => !seen.has(p)).concat(next.carriers.map(key)))),
-    ...(previous.plots || next.plots ? { plots: new Set([...(previous.plots ?? []), ...(next.plots ?? [])]) } : {}) };
+    ...(previous.plots || next.plots ? { plots: new Set([...(previous.plots ?? []), ...(next.plots ?? [])]) } : {}),
+    ...(previous.carriedPlots || next.carriedPlots ? { carriedPlots: new Set(
+      [...(previous.carriedPlots ?? [])].filter(cell => !seen.has(cell)).concat([...(next.carriedPlots ?? [])])) } : {}),
+    ...(previous.auxiliaries || next.auxiliaries ? { auxiliaries: new Set(
+      [...(previous.auxiliaries ?? [])].filter(cell => !seen.has(cell)).concat([...(next.auxiliaries ?? [])])) } : {}) };
 }
 export function alignReductionScene(rows: NativeRows, _observation: R, m: ReductionModel, previous: ReductionScene, offset: ReductionPoint): [ReductionModel, ReductionPoint, ReductionScene] | null {
   const model = structuredClone(m), phases: string[] = [], unit = m.unit;
@@ -549,7 +687,8 @@ export class ReductionTransport {
     const [newModel, newOffset, newScene] = aligned, next = reductionState(newScene);
     const event: R = { ref, mode, status: 'observed_response', before_population: old[0].size, after_population: next[0].size, camera_offset: newOffset };
     if (mode === 'calibrate') {
-      const k = command.action_ref, trial: [string, [ReductionPoint[], ReductionPoint[]]] = [k, packReductionState(old)]; this.tested.set(JSON.stringify(trial), trial);
+      const k = command.action_ref, [pegs, carriers] = packReductionState(old);
+      const trial: [string, [ReductionPoint[], ReductionPoint[]]] = [k, [pegs, carriers]]; this.tested.set(JSON.stringify(trial), trial);
       const fits = REDUCTION_VECTORS.filter(v => stateKey(reductionMoved(old, v, this.scene!.edges)) === stateKey(next) && stateKey(old) !== stateKey(next));
       if (fits.length === 1) { this.motion[k] = [...fits[0]!]; this.refs[k] = ref; } event.compatible_control_vectors = fits.map(v => [...v]);
     } else {

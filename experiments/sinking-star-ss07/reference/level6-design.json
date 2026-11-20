@@ -1,0 +1,585 @@
+{
+  "spec": {
+    "id": "ss07-06",
+    "title": "Le poids de la sentinelle",
+    "facing": "E",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~m~~~~~~~~~~~~~~",
+      "~~~~~~.~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~...#...~~~~~~~~~~~~",
+      "~...#...~~~~~~~~~~~~",
+      "~.M.#...~~~~~~~~~~~~",
+      "~.......~~~~~~~~~~~~",
+      "~...T...~~~~.~~~~~~~",
+      "~.......~~~~~~~~~~~~",
+      "~........~~~~~~~~~~~",
+      "~~~~~~~o..#~~~~~~~~~",
+      "~~~~~~~...~...g.g.~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 6,
+          "y": 10
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "sentinelle",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 4
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 14
+        },
+        "circuit": "sentinelle",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRLXULCDDRRRXCDDDRRRRRDDCDDRRDCRUCDRRRRRRRRRCDRRRRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "puzzle": 7,
+    "label": "Adaptation de principe · Heroes and Mirrors 7 : confier le bouton au monstre et déplacer le miroir pour retrouver le bon axe.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-7",
+    "piston": false,
+    "platform": false
+  },
+  "metrics": {
+    "actions": 51,
+    "selections": 7,
+    "merchantPushes": 4,
+    "thiefPulls": 2,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 4,
+    "mirrorMoves": 2,
+    "reflections": 2,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Reculer le miroir pour atteindre la sentinelle",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "circuits": {
+        "sentinelle": false
+      }
+    },
+    {
+      "label": "Déposer le monstre sur la rive éloignée",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 12,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sentinelle": false
+      }
+    },
+    {
+      "label": "Décaler la diagonale puis confier le bouton au monstre",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "sentinelle": true
+      }
+    },
+    {
+      "label": "Présenter la caisse au virage",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "sentinelle": true
+      }
+    },
+    {
+      "label": "Tirer la caisse hors du cul-de-sac puis libérer son axe",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "sentinelle": true
+      }
+    },
+    {
+      "label": "Construire l’appui de sortie",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 10,
+          "y": 15
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "sentinelle": true
+      }
+    },
+    {
+      "label": "Les deux héros rejoignent les cibles, le monstre reste sur le bouton",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 10,
+          "y": 15
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 11
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "sentinelle": true
+      }
+    }
+  ],
+  "adaptation": "Le gobelin maintient la porte pendant que les deux héros sortent. L’îlot de sortie est une unique ligne horizontale ; un mur au-dessus du passage empêche un appui de contournement par reflet. Deux reflets et un déplacement opposé du miroir remplacent le parcours source ; un virage étroit impose de combiner traction et poussée pour construire le dernier appui."
+}

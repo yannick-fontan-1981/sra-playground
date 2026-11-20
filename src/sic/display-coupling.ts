@@ -1,6 +1,6 @@
 import { framedRows, value } from '../logos-engine/v6-coupled-displays.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
@@ -24,10 +24,10 @@ const graph = compileStrategyGraph({ id: 'relate_switches_to_indicators', versio
   },
 }, ['untested', 'coupled', 'canRecheck']);
 type ScoredSpacing = { epoch: number; score: number; control: [number, number]; receiver: [number, number];
-  receiverSide: number; period: number; offset: number; fromRight: boolean; evidence: string[] };
+  receiverSide: number; period: number; offset: number; mirrorOffset?: number; fromRight: boolean; evidence: string[] };
 type State = { epoch: number; controls: NativeBox[]; receivers: NativeBox[]; initial: number; attempts: string[]; inert: number[];
   visited: string[]; coupled: boolean; count: number; stopped: boolean; evidence: string[];
-  firstCoupled?: number; spacing?: ScoredSpacing | null };
+  firstCoupled?: number; spacing?: ScoredSpacing | null; reversedSpacing?: true };
 type SpacingProposal = NativeProposal & { cascade?: undefined; local: State; index: number; controls: number[]; receivers: number[]; attempt: string; needId: string;
   sicSituationCard: Record<string, unknown> & { strategy: keyof typeof displayCouplingStrategies } };
 type CascadeState = { epoch: number; layout: Cascade; samples: CascadeReading[]; refs: string[]; blocked: string[]; inconsistent?: true };
@@ -65,7 +65,7 @@ function measure(observation: NativeObservation, rows: NativeRows, spacing: Scor
     visited: [], coupled: false, count: 0, stopped: false, evidence: [] } : null;
 }
 
-function scoreSpacing(proposal: SpacingProposal, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
+function scoreSpacing(proposal: Pick<SpacingProposal, 'local' | 'index' | 'controls' | 'receivers'>, after: NativeObservation, frames: readonly NativeRows[]): ScoredSpacing | null {
   const { local, index, controls, receivers } = proposal, first = local.firstCoupled;
   const analogy = local.spacing;
   const newCoupling = first !== undefined && new Set(receivers).size >= 2;
@@ -88,9 +88,79 @@ function scoreSpacing(proposal: SpacingProposal, after: NativeObservation, frame
     if (period < 2 || settings.some((value, i) => (value !== local.initial) !== ((i - active[0]!) % period === 0))) continue;
     const fromRight = first! > (settings.length - 1) / 2;
     const offset = fromRight ? settings.length - 1 - active.at(-1)! : active[0]!;
-    return { ...measurement, period, offset, fromRight, evidence: [...local.evidence, after.observation_ref] };
+    const mirrorOffset = fromRight ? active[0]! : settings.length - 1 - active.at(-1)!;
+    return { ...measurement, period, offset, mirrorOffset, fromRight, evidence: [...local.evidence, after.observation_ref] };
   }
   return null;
+}
+
+export type DisplayAcquisition = { epoch: number; local: State | null; scored?: ScoredSpacing };
+type DisplayStep = Pick<SpacingProposal, 'local' | 'index' | 'controls' | 'receivers'>;
+
+export function acquireDisplayReturn(previous: DisplayAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows, frames: readonly NativeRows[]): DisplayAcquisition | undefined {
+  if (command.action_ref !== 'ACTION6' || before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return previous;
+  const record = previous?.epoch === before.level_epoch ? previous : {
+    epoch: before.level_epoch, local: measure(before, first, null), ...(previous?.scored ? { scored: previous.scored } : {}),
+  };
+  const { local } = record;
+  if (!local) return record;
+  const { x, y } = command.data;
+  const index = x === undefined || y === undefined ? -1 : local.controls.findIndex(([l, t, r, b]) => x >= l - 1 && x <= r + 1 && y >= t - 1 && y <= b + 1);
+  if (index < 0) return record;
+  const controls = values(first, local.controls), receivers = values(first, local.receivers);
+  if (!controls || !receivers) return record;
+  const step = { local, index, controls, receivers };
+  if (after.levels_completed > before.levels_completed) {
+    const scored = scoreSpacing(step, after, frames);
+    return scored ? { ...record, scored } : record;
+  }
+  if (before.level_epoch !== after.level_epoch || before.state !== after.state) return record;
+  const observed = checkDisplayToggle(step, second);
+  if (!observed) return record;
+  return { ...record, local: { ...local, coupled: true, firstCoupled: local.firstCoupled ?? index,
+    evidence: [...local.evidence.slice(-3), before.observation_ref, after.observation_ref] } };
+}
+
+export function checkDisplayToggle({ local, index, controls, receivers }: DisplayStep, rows: NativeRows) {
+  const next = values(rows, local.controls), outputs = values(rows, local.receivers);
+  return !!next && !!outputs && next.every((ink, i) => i === index ? ink !== controls[i] : ink === controls[i])
+    && outputs.some((ink, i) => ink !== receivers[i]);
+}
+
+export function observeRecalledSwitch(projection: NonNullable<ReturnType<typeof projectRecalledSwitch>>, rows: NativeRows) {
+  const { local, index, controls, attempt } = projection, current = values(rows, local.controls);
+  const changedAsSelected = !!current && current.every((ink, i) => i === index ? ink !== controls[i] : ink === controls[i]);
+  return { matched: changedAsSelected, local: { ...local, attempts: [...local.attempts, attempt] } };
+}
+
+export function projectRecalledSwitch(previous: State | undefined, observation: NativeObservation, rows: NativeRows, transfer: DisplayAcquisition) {
+  const { scored } = transfer;
+  if (!scored || scored.score !== observation.levels_completed || scored.epoch !== observation.level_epoch) return null;
+  const initial = previous ?? measure(observation, rows, scored);
+  if (!initial?.spacing) return null;
+  const local = initial;
+  const controls = values(rows, local.controls), receivers = values(rows, local.receivers);
+  if (!controls || !receivers || new Set(controls).size > 2) return null;
+  const completed = controls.every((ink, i) => (ink !== local.initial) === expectedSwitch(i, controls.length, scored));
+  const reversed = local.reversedSpacing || (completed && scored.mirrorOffset !== undefined
+    && controls.length !== transfer.local?.controls.length);
+  const currentModel = reversed && scored.mirrorOffset !== undefined
+    ? { ...scored, fromRight: !scored.fromRight, offset: scored.mirrorOffset } : scored;
+  const nextLocal: State = reversed ? { ...local, reversedSpacing: true } : local;
+  const frequency = receivers.map(color => receivers.filter(ink => ink === color).length);
+  const distinct = local.receivers.filter((_, i) => frequency[i] === Math.min(...frequency));
+  const distance = ([l, , r]: NativeBox) => Math.min(...distinct.map(([left, , right]) => Math.abs(l + r - left - right)));
+  const option = controls.map((_, index) => {
+    const attempt = JSON.stringify([index, controls, receivers]);
+    const preferred = expectedSwitch(index, controls.length, currentModel) !== (controls[index] !== local.initial);
+    return { index, attempt, preferred };
+  }).filter(candidate => !local.attempts.includes(candidate.attempt))
+    .sort((a, b) => Number(b.preferred) - Number(a.preferred)
+      || distance(local.controls[a.index]!) - distance(local.controls[b.index]!) || b.index - a.index)[0];
+  if (!option || local.attempts.length >= 12) return null;
+  return { local: nextLocal, ...option, controls, receivers, evidence: scored.evidence,
+    novelty: !previous && local.controls.length !== transfer.local?.controls.length };
 }
 
 export function createSicDisplayCoupling(): NativeFamily<Proposal> {
@@ -120,22 +190,25 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
     const box = layout.controls[choice.index]!;
     const [left, top, right, bottom] = box, x = Math.floor((left + right) / 2), y = Math.floor((top + bottom) / 2);
     const command = { action_ref: 'ACTION6', data: { x, y } }, actions = [command];
-    const label = 'Compare the switch, intermediate signals, and final lamp';
+    const receivers = layout.terminals?.map(terminal => terminal.lamp) ?? [layout.lamp];
+    const label = layout.terminals ? 'Compare the switch, gate signals, and all terminal lamps' : 'Compare the switch, intermediate signals, and final lamp';
     const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x, y], { reason: label, evidence });
     if (!witness) return null;
     const parent = 'G_official_completion';
-    const objective = { kind: 'activate_observed_signal_cascade', scope: ref.split(':revision:', 1)[0]!, subjects: ['final_lamp'],
+    const objective = { kind: 'activate_observed_signal_cascade', scope: ref.split(':revision:', 1)[0]!, subjects: [layout.terminals ? 'terminal_lamps' : 'final_lamp'],
       parentObjective: parent, satisfactionContract: 'observe_official_progress_after_preparing_joint_inputs' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `signal-cascade:${need.id}`;
     const situation = choice.distance > 1 ? `Prepare an untested setting in ${choice.distance} switch changes and compare the intermediate signals.`
-      : 'Test the new switch setting and compare the intermediate signals with the final lamp.';
+      : layout.terminals ? 'Test the new switch setting and compare its effect on every terminal lamp.'
+        : 'Test the new switch setting and compare the intermediate signals with the final lamp.';
     return { status: 'proposed', kind: displayCouplingId, actions, needId: need.id, cascade: { local, current, choice },
       steps: [{ action: command, expected_after: { setting: choice.setting }, point_binding: witness }],
       binding: { observation_ref: ref, level_epoch: observation.level_epoch },
       sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
         edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
-      sicSituationCard: { strategy: 'P05', need: 'Combine switch settings that activate the final lamp', mode, situation, agenda: [], evidence,
-        triggerCard: decision.receipt.workflow, control: box, receivers: [layout.lamp], cascadeGates: layout.gates.map(gate => gate.box),
+      sicSituationCard: { strategy: 'P05', need: layout.terminals ? 'Find one setting that activates all terminal lamps'
+        : 'Combine switch settings that activate the final lamp', mode, situation, agenda: [], evidence,
+        triggerCard: decision.receipt.workflow, control: box, receivers, cascadeGates: layout.gates.map(gate => gate.box),
         distance: choice.distance, logicAlternatives: choice.hypotheses },
       question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -219,11 +292,13 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
     record(before, after, _command, _first, second, proposal, _index, frames) {
       if (proposal.cascade) {
         const ref = after.observation_ref;
-        if (after.levels_completed > before.levels_completed) return { events: [], reviewEvidence: 'The joint switch setting activated the final lamp.' };
+        if (after.levels_completed > before.levels_completed) return { events: [], reviewEvidence: proposal.cascade.local.layout.terminals
+          ? 'The joint switch setting activated every terminal lamp.' : 'The joint switch setting activated the final lamp.' };
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const { local, current, choice } = proposal.cascade, returned = readCascade(second, local.layout);
         const prior = returned ? local.samples.find(sample => sample.setting === returned.setting) : null;
-        const inconsistent = !returned || !!prior && (prior.lamp !== returned.lamp || JSON.stringify([prior.active, prior.ports]) !== JSON.stringify([returned.active, returned.ports]));
+        const inconsistent = !returned || !!prior && JSON.stringify([prior.lamp, prior.lamps, prior.active, prior.ports])
+          !== JSON.stringify([returned.lamp, returned.lamps, returned.active, returned.ports]);
         const matched = returned?.setting === choice.setting;
         cascade = { ...local, samples: returned && !prior ? [...local.samples, returned] : local.samples,
           refs: [...local.refs.slice(-5), ref], blocked: matched ? local.blocked : [...local.blocked, `${current.setting}:${choice.index}`],
@@ -231,7 +306,9 @@ export function createSicDisplayCoupling(): NativeFamily<Proposal> {
         if (!returned || !matched || inconsistent) return { events: [] };
         const gates = returned.active.filter((active, i) => active !== current.active[i]).length;
         const ports = returned.ports.reduce((sum, row, index) => sum + row.filter((value, j) => value !== current.ports[index]![j]).length, 0);
-        const lamp = returned.lamp === current.lamp ? 'The final lamp held its state.' : 'The final lamp changed.';
+        const lamps = returned.lamps?.filter((ink, index) => ink !== current.lamps?.[index]).length;
+        const lamp = lamps !== undefined ? `Terminal lamps changed state (${lamps}).`
+          : returned.lamp === current.lamp ? 'The final lamp held its state.' : 'The final lamp changed.';
         const reviewEvidence = gates ? `Intermediate components changed state (${gates}). ${lamp}`
           : ports ? `Inputs of intermediate components changed (${ports}). ${lamp}` : 'The switch changed. SIC retained the new joint setting.';
         return { events: [], reviewEvidence };

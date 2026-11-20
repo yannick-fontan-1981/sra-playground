@@ -515,6 +515,30 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 /* Keep the square board's height independent of the adjacent control panel. */
 .minimal-play-area .board-column{align-self:start;padding:29px 38px;background:#0d1117;justify-content:center}
 .minimal-play-area .canvas-stage{width:min(100%,384px);margin:0;background:#040608;box-shadow:0 0 0 5px #265b9b,0 0 0 8px #14283f}
+.board-source-credit{max-width:48ch;margin:18px 0 0;color:var(--muted);font-size:16px;line-height:1.5;text-align:center}
+.board-source-credit a{color:#b2d5ff;text-decoration:underline;text-underline-offset:3px}
+.native-game-level-info{margin:12px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.native-game-level-info a{color:#b2d5ff;text-decoration:underline}
+.native-game-tutorial{margin-top:12px;border:1px solid #38516d;border-radius:4px;background:#132136}
+.native-game-tutorial summary{padding:10px;cursor:pointer;color:var(--ink);font-weight:650;font-size:14px}
+.native-game-tutorial-content{padding:0 10px 10px;color:var(--muted);font-size:14px;line-height:1.5}
+.native-game-tutorial-content p,.native-game-tutorial-content ul{margin:0}
+.native-game-tutorial-content p+p{margin-top:8px}
+.native-game-tutorial-content ul{list-style:none;padding:0;margin-block:9px}
+.native-game-tutorial-content li{position:relative;padding-left:16px;margin-block:5px}
+.native-game-tutorial-content li::before{content:'○';position:absolute;left:0}
+.native-game-tutorial-content li.done::before{content:'✓';color:#83cdae}
+.duo-role-controls{flex-direction:row;flex-wrap:wrap;margin-top:10px}
+.duo-role-controls button[aria-pressed="true"]{outline:2px solid #ef4141;outline-offset:1px}
+.duo-role-controls button:is([data-ss06-hero="merchant"],[data-ss07-hero="merchant"],[data-ss08-hero="merchant"],[data-ss09-hero="merchant"])[aria-pressed="true"]{outline-color:#f59e29}
+.duo-role-controls button:is([data-ss07-hero="thief"],[data-ss10-hero="thief"])[aria-pressed="true"]{outline-color:#50b848}
+.duo-role-controls button[data-ss08-hero="wizard"][aria-pressed="true"]{outline-color:#9e6bdb}
+.duo-role-controls button[data-ss09-hero="bard"][aria-pressed="true"]{outline-color:#e03bca}
+#ss07-platform-help{--platform-circuit:#50b848}
+.duo-platform-legend{display:flex;flex-wrap:wrap;gap:12px}
+.duo-platform-legend span{display:inline-flex;align-items:center;gap:5px}
+.duo-platform-legend i{width:15px;height:15px;background:linear-gradient(var(--platform-circuit,#fff) 0 0) center/5px 5px no-repeat,#f5a9c8}
+.duo-platform-legend i.is-retracted{background:linear-gradient(var(--platform-circuit,#fff) 0 0) center/5px 5px no-repeat,linear-gradient(#2765d3,#2765d3) center/5px 100% no-repeat,linear-gradient(#2765d3,#2765d3) center/100% 5px no-repeat,#f5a9c8}
 .canvas-stage canvas:focus-visible{outline:2px solid var(--yellow);outline-offset:7px}
 .minimal-play-area #fullscreen-button{top:12px;right:12px;background:#285e9e;border-color:#8ab9f3;color:#f5f9ff;border-radius:3px}
 .minimal-play-area #fullscreen-button:hover{background:#3779bf;border-color:#b5d6ff}

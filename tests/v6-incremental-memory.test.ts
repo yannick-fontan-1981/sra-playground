@@ -3,7 +3,40 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
-import { assessRetainedTransition, validateRetainedEmpiricalRule } from '../src/logos-engine/v6-transition-learning.ts';
+
+test('new trace records share unchanged JSON evidence while keeping their identity, clock and detached public state', () => {
+  let clock = 10;
+  const memory = new NativeReasoningMemory({ clock: () => clock++ });
+  const body = { observation: { rows: [[1, 2], [3, 4]] }, command: 'ACTION1' };
+  memory.nativeTrace('episode', 'decision', body);
+  body.command = 'ACTION2'; memory.nativeTrace('episode', 'decision', body);
+  const entries = memory.nativeCheckpoint().traces;
+  const [first, second] = entries.map(entry => entry.record);
+  assert.equal(first!.body.observation, second!.body.observation);
+  assert.equal(first!.body.command, 'ACTION1'); assert.equal(second!.body.command, 'ACTION2');
+  assert.deepEqual(entries.map(entry => [entry.record.id, entry.record.created]), [[1, 10], [2, 11]]);
+  assert.ok(entries[1]!.version > entries[0]!.version);
+  body.observation.rows[0]![0] = 9;
+  assert.equal(first!.body.observation.rows[0][0], 1);
+  const exported = memory.dynamicState(); exported.traces[0]!.body.observation.rows[0][0] = 8;
+  assert.equal(memory.nativeCheckpoint().traces[0]!.record.body.observation.rows[0][0], 1);
+});
+
+test('non-JSON structured-clone traces retain their original source API', () => {
+  const memory = new NativeReasoningMemory({ clock: () => 1 });
+  const cyclic: any = { optional: undefined, map: new Map([['key', 2]]) }; cyclic.self = cyclic;
+  memory.trace('episode', 'diagnostic', cyclic);
+  const body = memory.dynamicState().traces[0]!.body;
+  assert.equal(body.self, body); assert.equal(body.optional, undefined);
+  assert.deepEqual(body.map, cyclic.map); assert.notEqual(body.map, cyclic.map);
+  const shared = { value: 1 };
+  memory.trace('episode', 'aliases', { a: shared, b: shared });
+  memory.trace('episode', 'aliases', { a: { value: 1 }, b: { value: 1 } });
+  const traces = memory.dynamicState().traces;
+  assert.equal(traces[1]!.body.a, traces[1]!.body.b);
+  assert.notEqual(traces[2]!.body.a, traces[2]!.body.b);
+});
+import { assessRetainedTransition, constructEmpiricalRule, validateEmpiricalRule, validateRetainedEmpiricalRule } from '../src/logos-engine/v6-transition-learning.ts';
 import { hydrateNativeState, splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { symbolicDigest } from '../src/logos-engine/v6-hash.ts';
 
@@ -29,6 +62,24 @@ test('native fact deltas share retained branches while public reads and snapshot
   memory.put('episode', 'rule', { sourceEdit: true }, 'explicit-revision', 3);
   assert.deepEqual(memory.nativeGet('episode', 'rule').value, { sourceEdit: true });
   assert.equal(second.value.condition.points[0][0], 2, 'older immutable snapshots stay valid');
+});
+
+test('equivalent native fact values share content while their new evidence and revision are retained', () => {
+  const memory = new NativeReasoningMemory();
+  const value = { rows: [[1, 2], [3, 4]], weight: -0 };
+  memory.nativePut('episode', 'view', value, 'observed:1', 1);
+  const first = memory.nativeGet('episode', 'view');
+  const revision = memory.nativeCheckpoint().revision;
+  const next = structuredClone(value);
+  memory.nativePut('episode', 'view', next, 'observed:2', 2);
+  const second = memory.nativeGet('episode', 'view');
+  assert.notEqual(second, first);
+  assert.equal(second.value, first.value);
+  assert.equal(second.evidence, 'observed:2');
+  assert.equal(second.revision, 2);
+  assert.ok(memory.nativeCheckpoint().revision > revision);
+  next.rows[0]![0] = 9;
+  assert.equal(second.value.rows[0][0], 1);
 });
 
 test('a shallow frozen container cannot conceal a mutable descendant from retained ownership', () => {
@@ -79,6 +130,21 @@ for (const row of fixture.cases.filter((item: any) => ['validate_empirical_rule'
     assert.deepEqual(args, row.args, 'the retained prior and observed inputs are unchanged');
   });
 }
+
+test('repeated inapplicable returns retain the whole immutable rule and preserve detached validation', async () => {
+  const before = retainNativeJson({ observation_ref: 'before', entities: [] });
+  const after = retainNativeJson({ observation_ref: 'after', entities: [] });
+  const learned = await constructEmpiricalRule(before, after, { action_ref: 'ACTION1' });
+  const otherAction = { action_ref: 'ACTION2' };
+  const first = await validateRetainedEmpiricalRule(learned, before, after, otherAction);
+  assert.deepEqual(first.last_validation, { status: 'not_applicable' });
+  assert.equal(await validateRetainedEmpiricalRule(first, before, after, otherAction), first);
+
+  const detached = await validateEmpiricalRule(first, before, after, otherAction);
+  assert.deepEqual(detached, first);
+  assert.notEqual(detached, first);
+  assert.notEqual(detached.conditions, first.conditions);
+});
 
 test('incremental state encoding preserves canonical fragment identities and complete exports', () => {
   const branch = retainNativeJson({

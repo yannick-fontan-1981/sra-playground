@@ -2,6 +2,7 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { assessMarkerStep, markerDirections, nextMarkerStep, readMarkerField, retainMarkerStep,
   type MarkerField, type MarkerStep } from './observed-marker-field.ts';
 import { assessRendezvous, nextRendezvousStep, readRendezvousField, retainRendezvous,
@@ -9,6 +10,7 @@ import { assessRendezvous, nextRendezvousStep, readRendezvousField, retainRendez
 
 export const markedLatticeId = 'sic_marked_lattice';
 export const verifyMarkedLatticeId = 'sic_verify_marked_lattice';
+export const learnMarkedLatticeId = 'sic_learn_marked_lattice';
 export const markedLatticeStrategies = {
   acquire_marked_lattice_motion: 'Test how the cursor moves on the marked surface',
   approach_unvisited_marker: 'Move toward the nearest marker still awaiting a test',
@@ -17,7 +19,8 @@ export const markedLatticeStrategies = {
 
 type State = { epoch: number; field: NativeBox; color: number; pitch: number; markers: NativeBox[];
   at: NativePoint; visited: number[]; count: number; evidence: string[]; stopped: boolean; movements?: string[] };
-type LegacyProposal = NativeProposal & { local: State; landing: NativePoint | null; target: number; needId: string };
+type MarkerLeg = { from: NativePoint; landing: NativePoint; command: NativeCommand };
+type LegacyProposal = NativeProposal & { local: State; landing: NativePoint | null; walk?: MarkerLeg[]; target: number; needId: string };
 type FieldProposal = NativeProposal & { field: MarkerField; step: MarkerStep; needId: string };
 type PatrolProposal = NativeProposal & { patrol: RendezvousField; rendezvous: RendezvousStep; needId: string };
 type Proposal = LegacyProposal | FieldProposal | PatrolProposal;
@@ -64,14 +67,15 @@ function measure(rows: NativeRows, epoch: number): State | null {
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
-export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
+export function createSicVerifyMarkedLattice(family = verifyMarkedLatticeId): NativeFamily<Proposal> {
+  const learns = family === learnMarkedLatticeId;
   let state: State | null = null;
   let measured: MarkerField | null = null;
   let patrol: RendezvousField | null = null;
   let transfer: Transfer | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyMarkedLatticeId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -82,7 +86,24 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
         return step ? rendezvousProposal(observation, patrol, step, decide, execution) : null;
       }
       const current = measured?.epoch === observation.level_epoch ? measured : null;
-      const local = current ? null : state?.epoch === observation.level_epoch ? state : measure(rows, observation.level_epoch);
+      const previous = state?.epoch === observation.level_epoch ? state : null;
+      let local = current ? null : previous ?? (learns ? null : measure(rows, observation.level_epoch));
+      if (learns && !previous && !current && !transfer) {
+        const motion = execution?.readPriorDirectionalScene?.(first => {
+          const scene = measure(first, observation.level_epoch);
+          const direction = markerDirections.find(([, dx, dy]) => {
+            if (!scene) return false;
+            const at: NativePoint = [scene.at[0] + dx * scene.pitch, scene.at[1] + dy * scene.pitch];
+            return inside(at, scene.field) && observed({ local: scene, landing: at, target: 0 }, first, rows);
+          });
+          return scene && direction ? { scene, direction } : null;
+        });
+        if (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch
+          || motion.scene.direction[0] !== motion.command) return null;
+        const { scene, direction: [, dx, dy] } = motion.scene;
+        local = { ...scene, at: [scene.at[0] + dx * scene.pitch, scene.at[1] + dy * scene.pitch],
+          evidence: [motion.beforeRef, motion.afterRef], movements: [motion.command], count: 1 };
+      }
       if (!local) {
         if (!transfer || transfer.completed !== observation.levels_completed) return null;
         const field = current ?? readMarkerField(rows, observation.level_epoch, transfer.evidence, transfer.movements);
@@ -101,13 +122,13 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
       const target = ordered(local.markers, local.at).find(marker => !local.visited.includes(marker.i));
       if (!target) return null;
       const onTarget = distance(local.at, target.at) === 0;
-      const moves = markerDirections.flatMap(([action, dx, dy]) => {
+      const approach = (from: NativePoint) => markerDirections.flatMap(([action, dx, dy]) => {
         const command = inputs.find(input => input.action_ref === action);
-        const landing: NativePoint = [x + dx * pitch, y + dy * pitch];
-        return command && inside(landing, local.field) && distance(landing, target.at) < distance(local.at, target.at)
-          ? [{ command, landing }] : [];
+        const landing: NativePoint = [from[0] + dx * pitch, from[1] + dy * pitch];
+        return command && inside(landing, local!.field) && distance(landing, target.at) < distance(from, target.at)
+          ? [{ command, landing, from }] : [];
       });
-      const move = moves[0] ?? null;
+      const move = approach(local.at)[0] ?? null;
       const command: NativeCommand | null = onTarget ? inputs.find(input => input.action_ref === 'ACTION5') ?? null : move?.command ?? null;
       if (!command) return null;
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
@@ -123,10 +144,22 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
       const goal = { kind: 'test_repeated_markers_in_reachable_order', scope: ref.split(':revision:', 1)[0]!, subjects: ['cursor_and_visible_markers'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_marker_contacts' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `marked-lattice:${need.id}`, actions = [command];
-      return { status: 'proposed', kind: verifyMarkedLatticeId, actions, local, target: target.i,
+      const walk: MarkerLeg[] = [];
+      if (routeSupported && move) {
+        let at = local.at;
+        while (walk.length < Math.min(remaining, maximumCommittedActions, 32 - local.count)) {
+          if (ordered(local.markers, at).find(marker => !local!.visited.includes(marker.i))?.i !== target.i) break;
+          const leg = approach(at)[0];
+          if (!leg || !local.movements?.includes(leg.command.action_ref)) break;
+          walk.push(leg);
+          at = leg.landing;
+        }
+      }
+      const id = `marked-lattice:${need.id}`, actions = walk.length > 1 ? walk.map(step => step.command) : [command];
+      return { status: 'proposed', kind: family, actions, local, target: target.i, ...(walk.length > 1 ? { walk } : {}),
         landing: onTarget ? null : move!.landing, needId: need.id,
-        steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        steps: actions.map((action, index) => ({ action, expected_after: walk[index]?.landing ?? null })),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -140,11 +173,17 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !isPatrolProposal(proposal) && !isFieldProposal(proposal) && proposal.walk) {
+        const { from: [x, y], landing: [nx, ny] } = proposal.walk[index]!, { local } = proposal;
+        const admitted = local.epoch === observation.level_epoch && packet.frame_rows[y]?.[x] === local.color
+          && packet.frame_rows[ny]?.[nx] !== local.color;
+        return { admitted, reason: admitted ? 'marked_lattice_step_still_visible' : 'marked_lattice_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'marked_lattice_bound' : 'marked_lattice_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isPatrolProposal(proposal)) {
@@ -157,10 +196,12 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
         return { matched: result.kind === 'tested' ? null : result.kind !== 'contradicted' && result.kind !== 'blocked',
           seal_prefix: true, reason: `marker_field_${result.kind}` };
       }
-      const matched = observed(proposal, first, second);
-      return { matched, seal_prefix: true, reason: matched ? 'marked_lattice_return_observed' : 'marked_lattice_return_contradicted' };
+      const leg = proposal.walk?.[index];
+      const matched = observed(leg ? { ...proposal, local: { ...proposal.local, at: leg.from }, landing: leg.landing } : proposal, first, second);
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'marked_lattice_return_observed' : 'marked_lattice_return_contradicted' };
     },
-    record(before, after, command, first, second, proposal) {
+    record(before, after, command, first, second, proposal, index) {
       if (after.levels_completed > before.levels_completed) {
         const local = isPatrolProposal(proposal) ? proposal.patrol : isFieldProposal(proposal) ? proposal.field : proposal.local;
         const preparation = isPatrolProposal(proposal) && proposal.rendezvous.finish ? after.observation_ref
@@ -179,10 +220,12 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
       }
       if (isFieldProposal(proposal)) {
         const result = assessMarkerStep(proposal.field, proposal.step, first, second);
-        measured = retainMarkerStep(proposal.field, proposal.step, result, after.observation_ref);
+        measured = retainMarkerStep(proposal.field, proposal.step, result, after.observation_ref, second);
         return { events: [] };
       }
-      const { local, landing, target } = proposal, matched = observed(proposal, first, second);
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const { target } = proposal, landing = proposal.walk?.[index]?.landing ?? proposal.landing;
+      const matched = observed({ local, landing, target }, first, second);
       state = { ...local, at: landing ?? local.at, visited: matched && !landing ? [...local.visited, target] : local.visited,
         stopped: !matched, count: local.count + 1, evidence: [...local.evidence.slice(-4), after.observation_ref],
         ...(matched && landing ? { movements: [...new Set([...(local.movements ?? []), command.action_ref])] } : {}) };
@@ -198,7 +241,7 @@ export function createSicVerifyMarkedLattice(): NativeFamily<Proposal> {
   };
 }
 
-function observed({ local, landing, target }: LegacyProposal, first: NativeRows, second: NativeRows): boolean {
+function observed({ local, landing, target }: Pick<LegacyProposal, 'local' | 'landing' | 'target'>, first: NativeRows, second: NativeRows): boolean {
   const [x, y] = local.at;
   if (landing) return first[landing[1]]?.[landing[0]] !== local.color && second[landing[1]]?.[landing[0]] === local.color
     && second[y]?.[x] !== local.color;
@@ -223,7 +266,8 @@ async function fieldProposal(observation: Parameters<NativeFamily['propose']>[0]
   const strategy = routeSupported ? 'P07' : 'P05';
   if (decision?.result !== strategy) return null;
   const label = field.prepared ? 'Keep the cursor on the prepared marker and test the next activation'
-    : target.kind === 'calibration' ? 'Test the distinct control while the counter is still empty'
+    : step.followsMobile ? 'Observe the moving marker and approach its next verified pause'
+      : target.kind === 'calibration' ? 'Test the distinct control while the counter is still empty'
     : target.kind === 'mode' ? 'Check whether the remaining acquisitions require a different visible group'
       : 'Approach the visible candidate and verify whether it fills the counter';
   const parent = 'G_official_completion';

@@ -1,0 +1,432 @@
+{
+  "spec": {
+    "id": "ss07-03",
+    "title": "Partir sans reprendre",
+    "rows": [
+      "~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~",
+      "~....~~~~~~...~",
+      "~.M...~~~...g.~",
+      "~...~~~~~~~.g.~",
+      "~~~.~~~~~~~...~",
+      "~~~.~.~~~~~~~~~",
+      "~~~...~~~~~~~~~",
+      "~~~~~..~~~~~~~~",
+      "~~~~~..~~T~~~~~",
+      "~~~~~..~~~~~~~~",
+      "~~~~~..~~~~~~~~",
+      "~~~~~..~~~~~~~~",
+      "~~~~~.~~~~~~~~~",
+      "~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 4
+        },
+        "facing": "SE"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 10
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "id": "secours",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 3,
+            "y": 4
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 4
+        },
+        "circuit": "sortie",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 7
+        },
+        "circuit": "sortie",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 13
+        },
+        "circuit": "secours",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRLCXUURUUULUXRRDRCDDDDRRXRRR",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 36
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "puzzle": 5,
+    "label": "Adaptation · Heroes and Mirrors 5 : un miroir maintient le bouton, le second permet de quitter la traction.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5",
+    "piston": true,
+    "platform": false
+  },
+  "metrics": {
+    "actions": 29,
+    "selections": 2,
+    "merchantPushes": 1,
+    "thiefPulls": 1,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 2,
+    "reflections": 3,
+    "heroReflections": 3,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand aligne le miroir de sortie",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 11
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sortie": false,
+        "secours": false
+      }
+    },
+    {
+      "label": "Le miroir du bas récupère le Voleur",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 11
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sortie": false,
+        "secours": true
+      }
+    },
+    {
+      "label": "Le Voleur tire le miroir sur le bouton",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sortie": true,
+        "secours": true
+      }
+    },
+    {
+      "label": "Sortir par reflet maintient le bouton",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sortie": true,
+        "secours": true
+      }
+    },
+    {
+      "label": "Le Marchand rejoint la seconde cible",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "sortie": true,
+        "secours": false
+      }
+    }
+  ],
+  "adaptation": "Recomposition en duo du mécanisme de double_break : le Marchand aligne le miroir haut, le miroir bas récupère le Voleur puis est tiré sur le bouton. Le Voleur quitte ensuite le bouton par reflet sans reprendre son miroir. Deux portes croisées obligent le Marchand à secourir le Voleur puis le Voleur à libérer le Marchand. La géométrie, les deux destinations et les positions initiales sont adaptées, sans prétention de reproduction case par case."
+}

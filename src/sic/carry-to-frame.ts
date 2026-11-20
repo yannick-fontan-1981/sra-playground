@@ -2,10 +2,12 @@ import { center, correspondence, find_body, intersects, moved_core, near } from 
 import { distance, shift } from '../logos-engine/v6-object-binding-planning.ts';
 import type { NativeBox, NativeCommand, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
+import { bindTranslationLanding, maximumCommittedActions, sameLandingPixels, type MeasuredLanding } from './plan-step.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { chooseTransport, transportModule } from './transport-motion-card.ts';
 import { assessDelivery, nextDeliveryStep, startRecoveredDelivery, type Crossing, type DeliveryModel,
   type DeliveryState, type DeliveryStep } from './sequential-ferry.ts';
+import { measureGuardedFerry, observeGuardedFerry, planGuardedFerry, type GuardedFerry } from './guarded-ferry.ts';
 
 export const carryToFrameId = 'sic_carry_to_frame';
 export const learnCarryToFrameId = 'sic_learn_transport_from_motion';
@@ -38,9 +40,13 @@ type Strategy = typeof soloStrategies[number];
 type Pair = { object: { bbox: NativeBox; palette_value: number; area: number }; frame: { bbox: NativeBox; interior_bbox: NativeBox } };
 type State = { epoch: number; pair: Pair; actor: string | null; controls: Record<string, NativePoint>; held: NativeBox | null;
   movedTogether: boolean; interaction: string | null; tried: string[]; evidence: string[]; frame: string; stopped: boolean };
-type SingleProposal = NativeProposal & { local: State; actor: NativeBox | null; subject: NativeBox; strategy: Strategy; needId: string; attempt: string };
+type ApproachLeg = { from: NativeBox; to: NativeBox; landing: MeasuredLanding };
+type SingleProposal = NativeProposal & { local: State; actor: NativeBox | null; subject: NativeBox; strategy: Strategy;
+  needId: string; attempt: string; walk?: ApproachLeg[] };
 type MultiProposal = NativeProposal & { deliveries: DeliveryState; actor: NativeBox; transfer: DeliveryStep; needId: string };
-type Proposal = SingleProposal | MultiProposal;
+type GuardedProposal = NativeProposal & { guarded: GuardedFerry; needId: string };
+type Proposal = SingleProposal | MultiProposal | GuardedProposal;
+const isGuarded = (proposal: Proposal): proposal is GuardedProposal => 'guarded' in proposal;
 const isMulti = (proposal: Proposal): proposal is MultiProposal => 'deliveries' in proposal;
 const unit: Readonly<Record<string, NativePoint>> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
@@ -98,12 +104,43 @@ function multipleProposal(family: string, observation: NativeObservation, delive
       preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
 }
 
+function guardedProposal(family: string, observation: NativeObservation, run: GuardedFerry, remaining: number): GuardedProposal | null {
+  if (run.stopped || run.frame !== observation.frame_hash) return null;
+  const plan = run.plan.length && run.plan.length <= remaining ? run.plan : planGuardedFerry(run, remaining);
+  const leg = plan?.[0], actor = find_body(observation, run.ferry.model.actor) as NativeEntity | null;
+  if (!plan || !leg || !actor || !observation.available_action_refs.includes(leg.input)) return null;
+  const ref = observation.observation_ref, parent = 'G_official_completion';
+  const evidence: [string, ...string[]] = [ref, ...run.refs.filter(item => item !== ref)];
+  const strategies = { move: 'move_to_next_pickup', cross: 'cross_with_cargo', take: 'verify_pickup', release: 'deposit_in_receiver' } as const;
+  const strategy = strategies[leg.role];
+  const index = run.at.held ?? leg.expect.held;
+  const cargo = index === null ? null : run.ferry.cargo[index];
+  const label = leg.role === 'take' && run.at.bank === 1 ? 'Take back the passenger already on the receiving bank'
+    : leg.role === 'release' && run.at.bank === 0 ? 'Set down the passenger to free the carrier for another crossing'
+      : carryToFrameStrategies[strategy];
+  const objective = { kind: 'deliver_passengers_with_observed_safety_constraints', scope: ref.split(':revision:', 1)[0]!,
+    subjects: run.ferry.cargo.map(item => item.berths[1].join(',')), parentObjective: parent,
+    satisfactionContract: 'official_progress_after_reversible_ferry_deliveries' };
+  const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = family + ':' + need.id;
+  const action = { action_ref: leg.input, data: {} }, actions = [action];
+  return { status: 'proposed', kind: family, guarded: { ...run, plan }, needId: need.id, actions,
+    steps: [{ action, expected_after: leg.expect }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    sicSituationCard: { strategy, need: 'Transport the passengers while preserving safe combinations', situation: label, mode: 'solving',
+      evidence, agenda: [], actor: actor.bbox, ...(cargo ? { object: run.heldBox ?? cargo.berths[run.at.bank], frame: cargo.berths[leg.expect.bank] } : {}) },
+    question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
+    sicLocalDecision: { strategy, objective: { id, label, parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
+      preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+}
+
 export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Proposal> {
   const learns = family === learnCarryToFrameId;
   let state: State | null = null;
   let measuredCrossing: { epoch: number; crossing: Crossing; ref: string } | null = null;
   let previousDelivery: DeliveryModel | null = null;
   let multiple: { epoch: number; deliveries: DeliveryState } | null = null;
+  let guarded: GuardedFerry | null = null;
   let choose: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -115,6 +152,12 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       const prior = state?.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
       if (prior?.stopped || (prior?.tried.length ?? 0) >= 36) return null;
       if (previousDelivery?.completed === observation.levels_completed) {
+        const guardedRun = guarded?.epoch === observation.level_epoch ? guarded
+          : !prior && multiple?.epoch !== observation.level_epoch ? measureGuardedFerry(observation, rows, previousDelivery, guarded) : null;
+        if (guardedRun) {
+          const proposal = guardedProposal(family, observation, guardedRun, remaining);
+          if (proposal) return proposal;
+        }
         const deliveries = multiple?.epoch === observation.level_epoch ? multiple.deliveries
           : startRecoveredDelivery(observation, rows, previousDelivery);
         if (deliveries) {
@@ -173,10 +216,30 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
       const goal = { kind: 'deliver_fitting_object', scope: ref.split(':revision:', 1)[0]!, subjects: ['matching_object', 'receiving_frame'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_or_object_retained_in_the_frame' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `carry-to-frame:${need.id}`, actions = [command];
+      const id = `carry-to-frame:${need.id}`;
+      const walk: ApproachLeg[] = [];
+      const delta = local.controls[action];
+      if (strategy === 'approach_matching_object' && actor && delta) {
+        let from = actor;
+        while (!near(from, subject) && walk.length < Math.min(remaining, maximumCommittedActions)) {
+          const direction = moves.filter(input => local.controls[input]).sort((a, b) =>
+            distance(center(shift(from, local.controls[a]!)), center(target))
+              - distance(center(shift(from, local.controls[b]!)), center(target)))[0];
+          const [left, top, right, bottom] = from, [dx, dy] = delta;
+          const to: NativeBox = [left + dx, top + dy, right + dx, bottom + dy];
+          if (direction !== action || distance(center(to), center(subject)) >= distance(center(from), center(subject))) break;
+          const landing = bindTranslationLanding(rows, actor, from, to);
+          if (!landing) break;
+          walk.push({ from, to, landing });
+          from = to;
+        }
+      }
+      const actions = walk.length > 1 ? walk.map(() => command) : [command];
       return { status: 'proposed', kind: family, actions, local, actor, subject, strategy, needId: need.id,
+        ...(walk.length > 1 ? { walk } : {}),
         attempt: JSON.stringify([observation.frame_hash, command.action_ref]),
-        steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        steps: actions.map((action, index) => ({ action, expected_after: walk[index]?.to ?? null })),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation } } : {}),
         sicSituationCard: { strategy, need: 'Bring the object to the frame that matches it', mode: learned ? 'solving' : 'exploration',
@@ -188,20 +251,50 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !isMulti(proposal) && !isGuarded(proposal) && proposal.walk) {
+        const { local } = proposal, leg = proposal.walk[index]!;
+        const actor = local.actor && find_body(observation, local.actor) as NativeEntity | null;
+        const admitted = local.epoch === observation.level_epoch && !!actor && equal(actor.bbox, leg.from)
+          && objectCandidates(observation, local.pair).some(object => equal(object.bbox, proposal.subject))
+          && sameLandingPixels(leg.landing, packet.frame_rows);
+        return { admitted, reason: admitted ? 'approach_landing_and_object_confirmed' : 'transport_context_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'transport_context_bound' : 'transport_context_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isGuarded(proposal)) {
+        const proof = observeGuardedFerry(proposal.guarded, proposal.guarded.plan[0]!, after, second, []);
+        return { matched: !!proof, seal_prefix: true, reason: proof?.reason ?? 'check_ferry_return_for_a_contradiction' };
+      }
       if (isMulti(proposal)) {
         const proof = assessDelivery(proposal.deliveries, proposal.transfer, after, first, second, proposal.actor);
         return { matched: proof !== null, seal_prefix: true, reason: proof?.reason ?? 'delivery_return_contradicted' };
       }
-      return { matched: null, seal_prefix: true, reason: 'observe_completed_motion_or_transport_interaction' };
+      const leg = proposal.walk?.[index];
+      const motion = leg && actorMotion({ ...proposal, actor: leg.from }, before, after);
+      const matched = leg ? !!motion && equal(motion.bbox, leg.to)
+        && objectCandidates(after, proposal.local.pair).some(object => equal(object.bbox, proposal.subject)) : null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'approach_translation_confirmed' : 'observe_completed_motion_or_transport_interaction' };
     },
-    record(before, after, command, first, second, proposal) {
+    record(before, after, command, first, second, proposal, index, frames) {
+      if (isGuarded(proposal)) {
+        const { guarded: run } = proposal;
+        if (after.levels_completed > before.levels_completed) {
+          previousDelivery = { ...run.ferry.model, completed: after.levels_completed,
+            evidence: [...new Set([...run.refs, before.observation_ref, after.observation_ref])] };
+          return { events: [] };
+        }
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const proof = observeGuardedFerry(run, run.plan[0]!, after, second, frames ?? []);
+        guarded = proof?.run ?? { ...run, stopped: true };
+        const learned = proof?.reason === 'animated_reset_identified_an_unsafe_pair';
+        return { events: [], ...(learned ? { reviewEvidence: 'The animated reset identified two passengers that cannot be left together unattended.' } : {}) };
+      }
       if (isMulti(proposal)) {
         if (after.levels_completed > before.levels_completed) {
           const { model } = proposal.deliveries;
@@ -214,7 +307,10 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
         }
         return { events: [] };
       }
-      const { local, strategy } = proposal;
+      const local = (index > 0 && state?.frame === before.frame_hash ? state : null) ?? proposal.local;
+      const { strategy } = proposal;
+      if (index > 0 && proposal.walk) proposal = { ...proposal, local, actor: proposal.walk[index]!.from,
+        attempt: JSON.stringify([before.frame_hash, command.action_ref]) };
       if (after.levels_completed > before.levels_completed && strategy === 'test_delivery_at_frame'
         && local.actor && local.interaction && measuredCrossing?.epoch === before.level_epoch) {
         previousDelivery = { actor: local.actor, crossing: measuredCrossing.crossing, motion: local.controls, interaction: local.interaction,
@@ -253,12 +349,13 @@ export function createSicCarryToFrame(family = carryToFrameId): NativeFamily<Pro
         frame: after.frame_hash, tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state, measuredCrossing, previousDelivery, multiple }),
+    state: () => ({ state, measuredCrossing, previousDelivery, multiple, guarded }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       measuredCrossing = structuredClone((value.measuredCrossing as typeof measuredCrossing | undefined) ?? null);
       previousDelivery = structuredClone((value.previousDelivery as DeliveryModel | undefined) ?? null);
       multiple = structuredClone((value.multiple as typeof multiple | undefined) ?? null);
+      guarded = structuredClone((value.guarded as GuardedFerry | undefined) ?? null);
     },
   };
 }

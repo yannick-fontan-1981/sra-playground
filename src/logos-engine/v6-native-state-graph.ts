@@ -1,5 +1,5 @@
 /** Lossless native state graphs; immutable fragments are ordinary versioned V7 nodes. */
-import { assertUnicode, compareUnicode, immutableJson, isJsonObject, isOwnedImmutableJson } from './canonical.ts';
+import { assertUnicode, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord, isJsonObject, isOwnedImmutableJson } from './canonical.ts';
 import { sha256Bytes, symbolicDigest } from './v6-hash.ts';
 import type { JsonObject, JsonValue } from './ir.ts';
 import { BoundedWeakCache } from './bounded-weak-cache.ts';
@@ -40,7 +40,13 @@ const fragmentsByNode = new WeakMap<object, { fragment: NativeStateFragment; ref
 // Height and all referenced fragments accompany the cached representation so
 // reuse preserves both the nesting bound and a complete export to a new store.
 const frozenStateNodes = new WeakMap<object, { limit: number; value: Sized; height: number; fragments: readonly NativeStateFragment[] }>();
+const validatedFrozenSources = new WeakSet<object>();
 const NO_FRAGMENTS: readonly NativeStateFragment[] = Object.freeze([]);
+
+/** A complete encode, including a check of every descendant, certified this source. */
+export function isValidatedFrozenNativeState(input: unknown): input is object {
+  return input !== null && typeof input === 'object' && validatedFrozenSources.has(input);
+}
 
 interface HydratedFragment { readonly value: JsonValue; readonly height: number }
 // Reuse only terminal fragments: composite references still traverse the actual
@@ -65,7 +71,23 @@ function freezeHydrated<T extends object>(value: T): T {
 // their identities instead of recopying every unchanged encoded descendant.
 // Raw caller values still go through visitRaw; the complete canonical digest
 // before a Kernel commit still checks full size, depth and portable scalars.
-function ownedEncoded<T extends Encoded>(node: T): T { return immutableJson(node) as T; }
+type EncodedEnvelope = Exclude<Encoded, Scalar | EncodedCollection<'object'>>;
+
+function ownedEncoded<T extends EncodedEnvelope>(node: T): T {
+  let fields: readonly (readonly [string, JsonValue])[];
+  switch (node.kind) {
+    case 'float64': fields = [['kind', node.kind], ['bits', node.bits]]; break;
+    case 'ref': fields = [['kind', node.kind], ['id', node.id]]; break;
+    case 'array': fields = [['kind', node.kind], ['items', immutableJsonArray(node.items as readonly JsonValue[])]]; break;
+    case 'concat': case 'merge': fields = [['kind', node.kind], ['parts', immutableJsonArray(node.parts as readonly JsonValue[])]]; break;
+  }
+  return immutableJsonRecord(fields) as T;
+}
+
+function encodedMembers(children: readonly (readonly [string, Sized])[]): EncodedCollection<'object'> {
+  const members = immutableJsonRecord(children.map(([name, child]) => [name, child.node as JsonValue] as const));
+  return immutableJsonRecord([['kind', 'object'], ['members', members]]) as EncodedCollection<'object'>;
+}
 
 /**
  * The encoder below has already checked every raw value and creates this closed
@@ -159,15 +181,15 @@ export function splitNativeState(value: unknown, component: string, options: Spl
     while (3 + parts.reduce((n, part) => n + part.cost, 0) > bound) {
       const next: Sized[] = []; let group: Sized[] = [], cost = 3;
       for (const part of parts) {
-        if (cost + part.cost > bound && group.length) { next.push(fragment(ownedEncoded({ kind, parts: Object.freeze(group.map(p => p.node)) }))); group = []; cost = 3; }
+        if (cost + part.cost > bound && group.length) { next.push(fragment(ownedEncoded({ kind, parts: group.map(p => p.node) }))); group = []; cost = 3; }
         group.push(part); cost += part.cost;
       }
-      if (group.length) next.push(fragment(ownedEncoded({ kind, parts: Object.freeze(group.map(p => p.node)) })));
+      if (group.length) next.push(fragment(ownedEncoded({ kind, parts: group.map(p => p.node) })));
       parts = next;
     }
     const reusable = previous != null && typeof previous === 'object' && previous.kind === kind
       && previous.parts.length === parts.length && parts.every((part, index) => sameEncoded(part.node, previous.parts[index]));
-    return { node: reusable ? previous : ownedEncoded({ kind, parts: Object.freeze(parts.map(p => p.node)) }),
+    return { node: reusable ? previous : ownedEncoded({ kind, parts: parts.map(p => p.node) }),
       cost: 3 + parts.reduce((n, p) => n + p.cost, 0) };
   };
   const visitRaw = (input: unknown, depth: number, previous?: Encoded): Sized => {
@@ -234,7 +256,7 @@ export function splitNativeState(value: unknown, component: string, options: Spl
         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
         if (cost <= bound) {
           const node = priorArray?.items.length === children.length && children.every((child, i) => sameEncoded(child.node, priorArray.items[i]))
-            ? priorArray : ownedEncoded({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
+            ? priorArray : ownedEncoded({ kind: 'array' as const, items: children.map(child => child.node) });
           const pixelMatrix = input.length > 0 && input.every(row => Array.isArray(row) && row.length > 0 && row.every(v => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0 && v <= 255));
           if (pixelMatrix && cost >= 512) {
             return fragment(node);
@@ -245,7 +267,7 @@ export function splitNativeState(value: unknown, component: string, options: Spl
         const appendGroup = (): void => {
           const candidate = priorAt?.get(start);
           const reusable = candidate?.items.length === group.length && group.every((child, i) => sameEncoded(child.node, candidate.items[i]));
-          groups.push(fragment(reusable ? candidate : ownedEncoded({ kind: 'array', items: Object.freeze(group.map(child => child.node)) })));
+          groups.push(fragment(reusable ? candidate : ownedEncoded({ kind: 'array', items: group.map(child => child.node) })));
           start += group.length;
           group = []; groupCost = 3;
         };
@@ -271,7 +293,7 @@ export function splitNativeState(value: unknown, component: string, options: Spl
       if (cost <= bound) {
         const node = priorObject && Object.keys(priorObject.members).length === children.length
           && children.every(([name, child]) => Object.hasOwn(priorObject.members, name) && sameEncoded(child.node, priorObject.members[name]))
-          ? priorObject : ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(children.map(([name, child]) => [name, child.node]))) });
+          ? priorObject : encodedMembers(children);
         return { node, cost };
       }
       const groups: Sized[] = []; let group: (readonly [string, Sized])[] = [], groupCost = 3;
@@ -279,8 +301,7 @@ export function splitNativeState(value: unknown, component: string, options: Spl
         const candidate = priorAt?.get(group[0]![0]);
         const reusable = candidate && Object.keys(candidate.members).length === group.length
           && group.every(([name, child]) => Object.hasOwn(candidate.members, name) && sameEncoded(child.node, candidate.members[name]));
-        groups.push(fragment(reusable ? candidate : ownedEncoded({ kind: 'object',
-          members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) })));
+        groups.push(fragment(reusable ? candidate : encodedMembers(group)));
         group = []; groupCost = 3;
       };
       for (const [name, original] of children) {
@@ -326,6 +347,10 @@ export function splitNativeState(value: unknown, component: string, options: Spl
   const root = prior?.root.component === component && encoded.node === prior.root.root ? prior.root
     : immutableJson({ profile: NATIVE_STATE_GRAPH_PROFILE, component, root: encoded.node as JsonValue }) as NativeStateGraphRoot;
   ownedRoots.add(root);
+  if (value !== null && typeof value === 'object'
+      && (measured.get(value)?.immutable || frozenStateNodes.get(value)?.limit === limit)) {
+    validatedFrozenSources.add(value);
+  }
   return Object.freeze({ root, fragments: Object.freeze([...fragments.values()]) });
 }
 

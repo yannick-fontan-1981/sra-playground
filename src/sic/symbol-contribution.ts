@@ -1,7 +1,7 @@
 import { FrameGrid, measureConcentricFrames, type ConcentricFrame } from '../logos-engine/v5-concentric-frames.ts';
 import { measureDiagramCandidate, measureDiagramRows, measureDiagramTransition } from '../logos-engine/v5-symbolic-diagrams.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseInteraction, interactionModule } from './observed-interaction-card.ts';
@@ -57,6 +57,50 @@ function guideAt(frame: FrameGrid, observation: NativeObservation, appearance: n
 
 function isInstruction(value: unknown): value is VisibleInstruction {
   return typeof value === 'string' && Object.hasOwn(visibleInstructionRules, value);
+}
+
+export type SymbolAcquisition = { epoch: number; appearance: number | null; examples: SymbolExamples; learned?: SymbolWorkspaceEvidence };
+
+export function acquireInstructionReturn(prior: SymbolAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows): SymbolAcquisition | undefined {
+  if (command.action_ref !== 'ACTION6' || before.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))
+    || before.frame_hash === after.frame_hash) return prior;
+  const { x, y } = command.data;
+  if (x === undefined || y === undefined) return prior;
+  const local = prior?.epoch === before.level_epoch ? prior : { epoch: before.level_epoch, appearance: null, examples: {} };
+  const grid = new FrameGrid(first), guide = guideAt(grid, before, local.appearance);
+  if (!guide || !atCenter(guide, x, y)) return prior;
+  const facts = measureDiagramCandidate(grid, { point: guide.center }, guide.outer_value);
+  const options: [VisibleInstruction, boolean][] = [
+    ['select_indicated_symbol', facts.diagram_point_full_symbol_count === 1 && facts.diagram_tight_white_center_count === 0],
+    ['load_indicated_operand', facts.diagram_point_equal_pair_center_count === 1 && facts.diagram_tight_white_center_count === 1],
+    ['apply_indicated_transformation', facts.diagram_point_branch_value_square_count === 1 && facts.diagram_equal_pair_matches_left_group_count === 1],
+    ['deliver_matching_symbol', facts.diagram_point_hollow_matches_tight_value_count === 1],
+  ];
+  const supported = options.filter(([strategy, eligible]) => eligible && (after.levels_completed > before.levels_completed
+    ? strategy === 'deliver_matching_symbol'
+    : observed({ strategy, actions: [command], appearance: guide.outer_value, guide: frameBox(guide) }, first, second)));
+  if (supported.length !== 1) return prior;
+  const examples = rememberSymbolExample(local.examples, supported[0]![0], [x, y], first, after.observation_ref);
+  if (after.levels_completed > before.levels_completed) {
+    const learned = consolidateSymbolWorkspace(examples, guide.outer_value);
+    return learned ? { ...local, appearance: guide.outer_value, examples, learned } : prior;
+  }
+  return { ...local, appearance: guide.outer_value, examples };
+}
+
+export function projectRecalledInstruction(memory: SymbolAcquisition, observation: NativeObservation, rows: NativeRows, prior?: SymbolTransaction) {
+  const { learned } = memory;
+  if (!learned || memory.epoch !== observation.level_epoch - 1) return null;
+  const grid = new FrameGrid(rows), transaction = prior ?? rebindSymbolWorkspace(grid, learned);
+  const step = transaction && nextSymbolStep(grid, transaction);
+  return transaction && step ? { step, transaction, learned } : null;
+}
+
+export function observeRecalledInstruction({ step, transaction, learned }: NonNullable<ReturnType<typeof projectRecalledInstruction>>,
+  first: NativeRows, second: NativeRows) {
+  const matched = !!verifySymbolStep(step, transaction.workspace, first, second, learned.selectionOutline);
+  return { matched, transaction: matched ? advanceSymbolTransaction(transaction, step) : transaction };
 }
 
 export function createSicSymbolContribution(): NativeFamily<Proposal> {
@@ -179,7 +223,7 @@ function confirmedEffect(proposal: Proposal, first: NativeRows, second: NativeRo
   return observed(proposal, first, second) ? 'symbol_contribution_observed' : null;
 }
 
-function observed({ strategy, actions, appearance, guide }: Proposal, first: NativeRows, second: NativeRows): boolean {
+function observed({ strategy, actions, appearance, guide }: Pick<Proposal, 'strategy' | 'actions' | 'appearance' | 'guide'>, first: NativeRows, second: NativeRows): boolean {
   const after = new FrameGrid(second);
   const { x, y } = actions[0]!.data;
   const frames = measureConcentricFrames(after);

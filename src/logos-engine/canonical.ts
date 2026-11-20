@@ -1,5 +1,6 @@
 import type { JsonObject, JsonValue } from './ir.ts';
 import { BoundedWeakCache } from './bounded-weak-cache.ts';
+import { ShardedWeakSet } from './sharded-weak-set.ts';
 
 /**
  * Portable V7 scalar contract for this first browser port.
@@ -14,7 +15,7 @@ import { BoundedWeakCache } from './bounded-weak-cache.ts';
  */
 export const PORTABLE_SCALAR_DOMAIN = 'strings, booleans and safe integers (no negative zero); structural null';
 
-const immutableObjects = new WeakSet<object>();
+const immutableObjects = new ShardedWeakSet();
 // Only deeply immutable, fully validated trees enter this cache. Size and
 // height are retained so reuse cannot evade the original structural limits.
 // Historical V7 nodes deliberately remain alive. Weak keys alone therefore do
@@ -24,6 +25,11 @@ const immutableObjects = new WeakSet<object>();
 const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; height: number }>(16 * 1024 * 1024, 4096);
 const MAX_DEPTH = 128;
 export const MAX_JSON_NODES = 1_000_000;
+const validUnicode = new Set<string>();
+const unicodeCacheUnits = 4 * 1024 * 1024;
+const unicodeCacheEntries = 4096;
+let validatedUnicodeUnits = 0;
+const surrogateUnits = /[\ud800-\udfff]/;
 
 /** Read-only ownership test; a foreign or merely frozen object is not certified. */
 export function isOwnedImmutableJson(value: unknown): boolean {
@@ -79,14 +85,25 @@ export function compareUnicode(left: string, right: string): number {
 }
 
 export function assertUnicode(value: string): void {
-  for (let index = 0; index < value.length; index += 1) {
-    const unit = value.charCodeAt(index);
-    if (unit >= 0xd800 && unit <= 0xdbff) {
-      const next = value.charCodeAt(++index);
-      if (!(next >= 0xdc00 && next <= 0xdfff)) throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
-    } else if (unit >= 0xdc00 && unit <= 0xdfff) {
-      throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
+  if (validUnicode.has(value)) return;
+  if (surrogateUnits.test(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      const unit = value.charCodeAt(index);
+      if (unit >= 0xd800 && unit <= 0xdbff) {
+        const next = value.charCodeAt(++index);
+        if (!(next >= 0xdc00 && next <= 0xdfff)) throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
+      } else if (unit >= 0xdc00 && unit <= 0xdfff) {
+        throw new TypeError('Lone Unicode surrogate is outside the portable JSON domain');
+      }
     }
+  }
+  if (value.length <= unicodeCacheUnits) {
+    if (validUnicode.size >= unicodeCacheEntries || validatedUnicodeUnits + value.length > unicodeCacheUnits) {
+      validUnicode.clear();
+      validatedUnicodeUnits = 0;
+    }
+    validUnicode.add(value);
+    validatedUnicodeUnits += value.length;
   }
 }
 
@@ -168,6 +185,37 @@ export function immutableJson(value: unknown): JsonValue {
     return result;
   }
   return visit(value, 0);
+}
+
+/** Constructors for encoder-owned containers. Children must be scalars or
+ * already closed by this module: this is not an alternative raw JSON ingress. */
+function closedJsonChild(value: JsonValue): JsonValue {
+  if (value === null || typeof value === 'boolean') return value;
+  if (typeof value === 'string') { assertUnicode(value); return value; }
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (value !== null && typeof value === 'object' && immutableObjects.has(value)) return value;
+  throw new TypeError('A constructed JSON container requires validated children');
+}
+
+export function immutableJsonArray(children: Iterable<JsonValue>): readonly JsonValue[] {
+  const result: JsonValue[] = [];
+  for (const value of children) {
+    if (result.length + 2 > MAX_JSON_NODES) throw new TypeError('JSON size/nesting limit exceeded');
+    result.push(closedJsonChild(value));
+  }
+  Object.freeze(result); immutableObjects.add(result); return result;
+}
+
+export function immutableJsonRecord(children: Iterable<readonly [string, JsonValue]>): JsonObject {
+  const entries: [string, JsonValue][] = [];
+  for (const [name, value] of children) {
+    if (entries.length + 2 > MAX_JSON_NODES) throw new TypeError('JSON size/nesting limit exceeded');
+    entries.push([stringValue(name, 'JSON member'), closedJsonChild(value)]);
+  }
+  entries.sort(([a], [b]) => compareUnicode(a, b));
+  if (entries.some(([name], index) => index > 0 && name === entries[index - 1]![0])) throw new TypeError('Duplicate constructed JSON member');
+  const result = Object.fromEntries(entries) as JsonObject;
+  Object.freeze(result); immutableObjects.add(result); return result;
 }
 
 /** Only the new entries require ingress validation. The record and its keys

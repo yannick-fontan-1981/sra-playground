@@ -1,0 +1,64 @@
+{
+  "success": true,
+  "environment": "Chromium, Playwright, file:// standalone HTML",
+  "htmlSha256": "b55ac1d1f1239e22c7c80f2e8bdf66b96991acae8dca0e4997a6d2f9145a7eec",
+  "checks": [
+    "Initial level1 tutorial is open; pixel click, Tab,1/2 and hero buttons select without incrementing movement counter; Shift+Tab exits canvas.",
+    "All eight witnesses finish through real keyboard/pixel events; all final canvas frames match native reference RGBA byte-for-byte and all animation-frame hashes agree.",
+    "All twelve level1 tutorial discoveries are earned by its real winning route; final campaign shows VICTORY and8/8.",
+    "Reachable defeat route displays GAME_OVER, disables play, and supports panel Undo and Reset with exact restoration.",
+    "Normal three-frame movement renders1/2/3pixel advances with real delays; commands are locked while busy; Undo,Reset and level selection cancel stale animations.",
+    "Death overlay waits for the real teleport animation; mid-animation Undo restores the living frame and no stale death repaint occurs.",
+    "375px mobile layout has no horizontal overflow and scaled canvas pixel selection, movement and Reset work."
+  ],
+  "campaign": {
+    "levels": 8,
+    "actions": 503,
+    "frames": 1463,
+    "selections": 44,
+    "finalFramesComparedByteForByte": 503
+  },
+  "networkRequests": [],
+  "consoleErrors": [],
+  "pageErrors": [],
+  "screenshots": [
+    "validation/visual/desktop-initial.png",
+    "validation/visual/mobile-375.png"
+  ],
+  "chromiumVersion": "157.0.4341.60",
+  "tutorial": {
+    "actions": 57,
+    "discoveries": [
+      "move",
+      "select",
+      "warrior-push",
+      "chain",
+      "thief-pull",
+      "single-pull",
+      "release",
+      "mirror-motion",
+      "platform",
+      "mirror",
+      "gate",
+      "goals"
+    ],
+    "count": 12
+  },
+  "normalAnimation": {
+    "frames": 3,
+    "intervalsMs": [
+      63.200000047683716,
+      86.79999995231628
+    ],
+    "expectedDelayMs": [
+      60,
+      80
+    ]
+  },
+  "mobile": {
+    "viewport": 375,
+    "document": 375,
+    "body": 375,
+    "canvas": 329
+  }
+}

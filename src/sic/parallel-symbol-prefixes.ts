@@ -120,13 +120,71 @@ function readStrips(rows: NativeRows, panels: NativeBox[], model: Retained): Str
   return found.every((row): row is Strip => row !== null) ? found : null;
 }
 
-function confirmedRanks(proposal: Proposal, rows: NativeRows): number[] | null {
+function confirmedRanks(proposal: Pick<Proposal, 'local' | 'layout' | 'previous' | 'affected'>, rows: NativeRows): number[] | null {
   const view = readStrips(rows, proposal.local.panels, proposal.layout);
   if (!view) return null;
   const { previous, affected } = proposal;
   const ranks = view.map(({ rank }) => rank);
   return ranks.every((rank, i) => affected.includes(i) ? rank === previous[i]! + 1
     : previous[i] === view[i]!.cells.length ? rank === previous[i] : rank === previous[i] || rank === 0) ? ranks : null;
+}
+
+export type SymbolPrefixAcquisition = { calibration: Calibration | null; retained: Retained | null };
+
+export function observeSymbolPrefix(prior: SymbolPrefixAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows): SymbolPrefixAcquisition | undefined {
+  if (!directional(command.action_ref) || !symbolInterface(before)) return prior;
+  let calibration = prior?.calibration ?? null, retained = prior?.retained ?? null;
+  const panels = strips(before);
+  if (panels.length !== 1) return prior;
+  const panel = panels[0]!, at = focus(first, panel);
+  if (!at) return prior;
+  const layout = { offset: (at.x - panel[0] - 1) % (at.extent + 1) + 1, inset: at.y - panel[1], extent: at.extent };
+  const clear = first[at.y]?.[at.x];
+  if (clear === undefined) return prior;
+  const learned = calibration?.epoch === before.level_epoch ? calibration
+    : { epoch: before.level_epoch, layout, clear, filled: null, commands: {} };
+  if (clear !== learned.clear || layout.extent !== learned.layout.extent || layout.offset !== learned.layout.offset || layout.inset !== learned.layout.inset) return prior;
+  const from = readStrip(first, panel, layout, clear, learned.filled);
+  const cell = from?.cells[from.rank];
+  if (!from || !cell) return prior;
+  const advanced = after.levels_completed > before.levels_completed && from.rank === from.cells.length - 1;
+  const view = advanced ? null : readStrip(second, panel, layout, clear, learned.filled);
+  if (!advanced && (!view || view.rank !== from.rank + 1)) return prior;
+  const previous = learned.commands[command.action_ref];
+  if (previous && previous.glyph !== cell.value) {
+    return { calibration: null, retained };
+  }
+  calibration = { ...learned, filled: learned.filled ?? view?.cells[from.rank]?.backing ?? null,
+    commands: { ...learned.commands, [command.action_ref]: { glyph: cell.value, ref: after.observation_ref } } };
+  const inputs = supportedInputs(before);
+  if (advanced && calibration.filled !== null && inputs.every(id => calibration!.commands[id])
+    && new Set(inputs.map(id => calibration!.commands[id]!.glyph)).size === inputs.length) {
+    retained = { ...calibration, completed: after.levels_completed, boundary: after.observation_ref };
+  }
+  return { calibration, retained };
+}
+
+export function projectRecalledPrefixes(memory: SymbolPrefixAcquisition, observation: NativeObservation, rows: NativeRows,
+  inputs: readonly NativeCommand[], remaining: number, previous?: State) {
+  const layout = memory.retained;
+  if (!layout || layout.completed !== observation.levels_completed || previous?.stopped || !symbolInterface(observation)) return null;
+  const panels = previous?.panels ?? strips(observation);
+  if (panels.length < 2 || panels.length > 4) return null;
+  const view = readStrips(rows, panels, layout);
+  const command = view && nextCommand(view, layout, inputs, remaining);
+  if (!view || !command) return null;
+  const proof = layout.commands[command.action_ref]!, { next: projected, affected } = predictedRanks(view, proof.glyph);
+  const local = previous ?? { epoch: observation.level_epoch, panels, refs: [], stopped: false };
+  return { command, layout, local, affected, projected, previous: view.map(({ rank }) => rank),
+    box: view[affected[0]!]!.cells[view[affected[0]!]!.rank]!.box, evidence: [proof.ref, layout.boundary, ...local.refs],
+    novelty: !previous };
+}
+
+export function observeRecalledPrefixes(projection: NonNullable<ReturnType<typeof projectRecalledPrefixes>>, rows: NativeRows, ref: string) {
+  const ranks = confirmedRanks(projection, rows);
+  return { matched: !!ranks && same(ranks, projection.projected),
+    local: { ...projection.local, refs: [...projection.local.refs.slice(-3), ref], stopped: !ranks } };
 }
 
 export function createSicVerifyParallelSymbolPrefixes(): NativeFamily<Proposal> {
@@ -138,35 +196,9 @@ export function createSicVerifyParallelSymbolPrefixes(): NativeFamily<Proposal> 
     id: parallelSymbolPrefixesId,
     async attachPrograms(registry) { choose = await registry.registerProgram(chooseLanding, {}, await landingModule()); },
     observePublicOutcome(before, after, command, first, second) {
-      if (!directional(command.action_ref) || !symbolInterface(before)) return;
-      const panels = strips(before);
-      if (panels.length !== 1) return;
-      const panel = panels[0]!, at = focus(first, panel);
-      if (!at) return;
-      const layout = { offset: (at.x - panel[0] - 1) % (at.extent + 1) + 1, inset: at.y - panel[1], extent: at.extent };
-      const clear = first[at.y]?.[at.x];
-      if (clear === undefined) return;
-      const learned = calibration?.epoch === before.level_epoch ? calibration
-        : { epoch: before.level_epoch, layout, clear, filled: null, commands: {} };
-      if (clear !== learned.clear || layout.extent !== learned.layout.extent || layout.offset !== learned.layout.offset || layout.inset !== learned.layout.inset) return;
-      const from = readStrip(first, panel, layout, clear, learned.filled);
-      const cell = from?.cells[from.rank];
-      if (!from || !cell) return;
-      const advanced = after.levels_completed > before.levels_completed && from.rank === from.cells.length - 1;
-      const view = advanced ? null : readStrip(second, panel, layout, clear, learned.filled);
-      if (!advanced && (!view || view.rank !== from.rank + 1)) return;
-      const previous = learned.commands[command.action_ref];
-      if (previous && previous.glyph !== cell.value) {
-        calibration = null;
-        return;
-      }
-      calibration = { ...learned, filled: learned.filled ?? view?.cells[from.rank]?.backing ?? null,
-        commands: { ...learned.commands, [command.action_ref]: { glyph: cell.value, ref: after.observation_ref } } };
-      const inputs = supportedInputs(before);
-      if (advanced && calibration.filled !== null && inputs.every(id => calibration!.commands[id])
-        && new Set(inputs.map(id => calibration!.commands[id]!.glyph)).size === inputs.length) {
-        retained = { ...calibration, completed: after.levels_completed, boundary: after.observation_ref };
-      }
+      const receipt = observeSymbolPrefix({ calibration, retained }, before, after, command, first, second);
+      calibration = receipt?.calibration ?? null;
+      retained = receipt?.retained ?? null;
     },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || !retained || retained.completed !== observation.levels_completed || !symbolInterface(observation)) return null;

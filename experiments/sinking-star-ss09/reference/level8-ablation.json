@@ -1,0 +1,23 @@
+{
+  "level": 8,
+  "mapSha256": "a52cf69da18672be79ccf3055beb0d7a22f74fd236311d8415912cbd938ea46e",
+  "purpose": "Concrete contrast at the prepared launch, not a uniqueness proof.",
+  "setupCommands": "UUUUUURRLLDDDDDDRUURR",
+  "voluntaryBardStep": {
+    "commands": "UUUUUURRLLDDDDDDRUURRCDX",
+    "validSong": true,
+    "crateFallsIntoWater": true,
+    "buttonReleased": true,
+    "gateClosed": true,
+    "reflectionRefused": true
+  },
+  "merchantPush": {
+    "command": "D",
+    "crateStaysOnButton": true,
+    "gateRemainsOpen": true,
+    "heroSafe": true
+  },
+  "limitations": [
+    "Other full routes are not excluded by this local comparison; global crate and gate necessity are checked separately in level8-necessity.json."
+  ]
+}

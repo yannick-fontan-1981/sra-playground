@@ -1,0 +1,214 @@
+{
+  "game": "SS03",
+  "level": 8,
+  "kind": "transcription",
+  "spec": {
+    "title": "Le train des six caisses",
+    "rows": [
+      "#####g...",
+      "....###o.",
+      "oT..###..",
+      "....###.#",
+      ".o......#",
+      "...#..o.#",
+      "####....#",
+      "........o",
+      ".o.......",
+      "........."
+    ],
+    "circuits": [
+      {
+        "id": "A",
+        "buttons": [
+          {
+            "x": 1,
+            "y": 4
+          }
+        ]
+      },
+      {
+        "id": "B",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 5
+          }
+        ]
+      }
+    ],
+    "id": "ss03-08",
+    "facing": "S",
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 4
+        },
+        "circuit": "B",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 4
+        },
+        "circuit": "A",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 0
+        },
+        "circuit": "A",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "source": {
+    "level": "multipush_for_me2",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2",
+    "screenshot": "https://github.com/joric/ootss_tileset/blob/main/images/levels/multipush_for_me2.webp",
+    "layout": "https://github.com/chenyuyang712/OSS-puzzlewiki/blob/main/data/levels_layout.json.gz",
+    "coordinateConversion": "x=11-rawX; y=rawY-4. Each instance u (asset/UI) belongs with p of the next instance because exporter splits at fd20 mid entity. Floor cells from TER_TILE assets at z=0.",
+    "verified": [
+      "67 floor cells in 9x10 bounding box",
+      "hero",
+      "goal",
+      "six initial crates",
+      "two initial weighted buttons",
+      "three gate positions",
+      "blue pushes W, yellow pushes N",
+      "circuit modes from walkthrough",
+      "green exit gate pushes N; recovered serialized direction code1, same as yellow N, from malformed compact integer"
+    ],
+    "uncertain": [],
+    "coordinateEvidence": {
+      "layoutFile": "multipush_for_me2-layout.json",
+      "floorTileCount": 67,
+      "layoutDeclaredInstances": 655,
+      "layoutFoundInstances": 655,
+      "assetPositionRecords": {
+        "switchA": {
+          "uiIndex": 640,
+          "positionIndex": 641,
+          "raw": [
+            10,
+            8,
+            0
+          ]
+        },
+        "blue": {
+          "uiIndex": 641,
+          "positionIndex": 642,
+          "raw": [
+            4,
+            8,
+            0
+          ]
+        },
+        "switchB": {
+          "uiIndex": 642,
+          "positionIndex": 643,
+          "raw": [
+            5,
+            9,
+            0
+          ]
+        },
+        "green": {
+          "uiIndex": 643,
+          "positionIndex": 644,
+          "raw": [
+            5,
+            4,
+            0
+          ]
+        },
+        "goal": {
+          "uiIndex": 644,
+          "positionIndex": 645,
+          "raw": [
+            6,
+            4,
+            0
+          ]
+        },
+        "hero": {
+          "uiIndex": 652,
+          "positionIndex": 653,
+          "raw": [
+            10,
+            6,
+            0
+          ]
+        },
+        "yellow": {
+          "uiIndex": 653,
+          "positionIndex": 654,
+          "raw": [
+            8,
+            8,
+            0
+          ]
+        }
+      },
+      "gateDirections": {
+        "calibration": {
+          "1": "N, established for yellow by the screenshot and the reference sequence",
+          "3": "W, established for blue by the walkthrough, screenshot and reference sequence"
+        },
+        "blue": {
+          "positionRecord": 642,
+          "field": 17,
+          "storedValue": 3,
+          "direction": "W"
+        },
+        "yellow": {
+          "positionRecord": 654,
+          "field": 17,
+          "storedValue": 1,
+          "direction": "N"
+        },
+        "green": {
+          "positionRecord": 644,
+          "corruptedContainerField": 13,
+          "storedDecimal": 72057594038981117,
+          "storedHex": "0x01000000001011fd",
+          "littleEndianBytes": "fd 11 10 00 00 00 00 01",
+          "decodedFieldHeader": {
+            "marker": "fd",
+            "fieldIdHex": "11",
+            "fieldIdDecimal": 17,
+            "kindHex": "10",
+            "metaUint32": 0,
+            "intValueLowByte": 1
+          },
+          "directionCode": 1,
+          "direction": "N",
+          "recoveryExplanation": "The parser consumed the next fd11 int field header as an int64 value of fd0d. Kind10 fields have shape fd,fieldId,10,zero u32,int32. The preserved eight bytes contain the complete fd11 header and low byte01 of the small direction enum. This matches the yellow gate direction code1; blue code3 is exposed directly. High zero bytes of the small enum are not separately preserved in compact export.",
+          "visualCorroboration": "The open green frame has a small point at its upper edge in the original screenshot.",
+          "notFromGuide": "The walkthrough establishes activation/inversion and the blue/yellow moves, but does not state the green gate push direction."
+        }
+      }
+    },
+    "validation": {
+      "originalSequenceLength": 154,
+      "complete": true,
+      "failedMoves": 0,
+      "deaths": 0,
+      "pistonActions": [
+        60,
+        86,
+        112,
+        146
+      ],
+      "report": "replay-source-154.json"
+    },
+    "corroboratingGuide": "https://gamewikistation.com/games/order-of-the-sinking-star/guides/sideways-gates/#six-crystal-train"
+  },
+  "sourceSolution": "DURDRDLDLUURRDRDRDRDLUULURRRDLLLULUULRDLDDLUURRDRDRRRUUUDDDLRDDLDLUUURRDUUUUUURDDLDDDLLRRDDRDLLUURUUUUUURDDLDDDLLRRDDDLLLLLRRRRRRULUUUUUUURDDLDDDLRUUUUULL"
+}

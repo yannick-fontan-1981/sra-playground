@@ -1,0 +1,12 @@
+import {Author,board} from './author.mjs';
+const b=board(18,17),{fill,put}=b;
+fill(1,9,5,14);fill(5,9,9,9);fill(7,6,7,9);fill(9,4,10,4);fill(9,6,10,6);put(9,7);put(6,12);put(7,12,'~');fill(8,11,15,14);
+put(5,9,'M');put(4,12,'B');put(9,4,'o');put(9,7,'o');put(14,12,'g');put(14,13,'g');
+const spec={id:'ss09-07',title:'La presse à contretemps',rows:b.strings(),mirrors:[{at:{x:6,y:9},facing:'NE'}],circuits:[{id:'rose',color:7,buttons:[{x:8,y:9}]},{id:'verte',color:14,buttons:[{x:10,y:4},{x:10,y:6}]}],gates:[{at:{x:9,y:4},circuit:'rose',direction:'E',closedWhen:'pressed'},{at:{x:9,y:6},circuit:'rose',direction:'E',closedWhen:'pressed'},{at:{x:6,y:12},circuit:'verte',direction:'W',closedWhen:'released'}],platforms:[{at:{x:7,y:12},circuit:'verte',activeWhen:'pressed'}]};
+const a=new Author(spec);
+a.act('RRR').stage('Le miroir ouvre le couloir ; la première fermeture range la caisse du haut.').go(3,13);
+a.select('bard').go(7,9).act('U').stage('Le Barde place la caisse du bas dans la presse ouverte, à travers le mur.');
+a.select('merchant').go(7,9).act('R').stage('La seconde fermeture pousse la caisse sur le second bouton vert et déploie la passerelle.').go(14,12);
+a.select('bard').go(14,13).stage('Le Barde franchit la porte et la plateforme.');
+a.select('merchant').go(14,12).stage('Le Marchand rejoint la seconde destination sans faire chanter le Barde.');
+a.save(new URL('../level7-design.json',import.meta.url),{label:'Adaptation · Heroes and Light 1 — atteindre un bouton par une presse latérale',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#énigme-1',puzzle:1,piston:true,platform:true,objective:'Préparer la seconde caisse entre deux fermetures, puis occuper les deux boutons éloignés.'},'Principe de la pression latérale vers un bouton inaccessible repris de Heroes and Light 1. Deux presses partagent leur déclencheur, le chant place la seconde caisse à distance et un miroir mobile ouvre le poste de commande. Le relais à deux boutons et la plateforme sont une adaptation originale pour Marchand/Barde.');

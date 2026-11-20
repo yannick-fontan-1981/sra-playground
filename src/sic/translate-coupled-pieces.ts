@@ -1,11 +1,16 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import type { ReasoningMode } from './reasoning-mode.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
 import { contactBox, identifyContactRoute, identifyMaskedContactRoute, identifyRelayContactRoute, observeContactRoute, planContacts, selectionPoint,
   type ContactCalibration, type ContactRoute, type ContactRouteMove } from './rectangular-contact-route.ts';
+import { calibratedPeriodicContact, choosePeriodicSample, matchesPeriodicContact, measurePeriodicContact, observePeriodicContact,
+  periodicContactBox, planPeriodicContact, projectPeriodicSnapshot,
+  type PeriodicContactRoute, type PeriodicContactMove } from './periodic-contact-route.ts';
+import { planPeriodicRelay } from './periodic-relay-planner.ts';
 
 export const translateCoupledPiecesId = 'sic_translate_coupled_pieces';
 export const learnContactAccessId = 'sic_learn_contact_access';
@@ -24,10 +29,13 @@ type Move = { input: string; click?: NativePoint; position: Position; contact?: 
 type ContactEffect = { input: string; offset: NativePoint; evidence: string; from: NativePoint; to: NativePoint };
 type State = { epoch: number; model: Model; position: Position; refs: string[]; attempts: Record<string, number>;
   controls?: Record<string, string>; contacts?: ContactEffect[]; launch?: ContactCalibration; motionEvidence?: Record<string, string> };
-type Proposal = NativeProposal & { local: State; move: Move; needId: string; attempt: string };
+type Proposal = NativeProposal & { local: State; move: Move; walk?: Move[]; needId: string; attempt: string;
+  focusValues?: readonly number[] };
 type RouteProposal = NativeProposal & { contactRoute: ContactRoute; contactMove: ContactRouteMove; needId: string };
-type CoupledProposal = Proposal | RouteProposal;
+type PeriodicProposal = NativeProposal & { periodicRoute: PeriodicContactRoute; periodicMoves: PeriodicContactMove[]; needId: string };
+type CoupledProposal = Proposal | RouteProposal | PeriodicProposal;
 const isRoute = (proposal: CoupledProposal): proposal is RouteProposal => Object.hasOwn(proposal, 'contactRoute');
+const isPeriodic = (proposal: CoupledProposal): proposal is PeriodicProposal => Object.hasOwn(proposal, 'periodicRoute');
 
 const eq = ([x, y]: NativePoint, [a, b]: NativePoint) => x === a && y === b;
 const label = (p: NativePoint) => p.join(',');
@@ -78,21 +86,26 @@ function measure(rows: NativeRows): { model: Model; position: Position } | null 
   return layouts.length === 1 ? layouts[0]! : null;
 }
 
-function choose({ model, position, attempts, contacts }: State): Move | null {
+function choose({ model, position, attempts, contacts }: State): Move[] | null {
   const { pitch, domain, divider, targets } = model;
   const domainKeys = new Set(domain.map(label));
-  const queue: { position: Position; first: Move | null }[] = [{ position, first: null }];
+  type Node = { position: Position; from?: { parent: Node; move: Move } };
+  const queue: Node[] = [{ position }];
   const seen = new Set([key(position)]);
   const half = Math.floor(pitch / 2);
   for (let i = 0; i < queue.length && i < 14000; i++) {
-    const { position: p, first } = queue[i]!;
-    if (targets.every(goal => p.pieces.some(piece => eq(piece, goal)))) return first;
+    const node = queue[i]!, p = node.position;
+    if (targets.every(goal => p.pieces.some(piece => eq(piece, goal)))) {
+      const path: Move[] = [];
+      for (let entry = node; entry.from; entry = entry.from.parent) path.push(entry.from.move);
+      return path.reverse();
+    }
     const offer = (move: Move) => {
       const k = key(move.position);
       const tried = attempts[key(p) + '>' + k] ?? 0;
-      if (seen.has(k) || !first && tried >= (move.contact === undefined ? 1 : 2)) return;
+      if (seen.has(k) || !node.from && tried >= (move.contact === undefined ? 1 : 2)) return;
       seen.add(k);
-      queue.push({ position: move.position, first: first ?? move });
+      queue.push({ position: move.position, from: { parent: node, move } });
     };
     const m = p.selected, other = 1 - m;
     const click = (selected: number) => offer({ input: 'ACTION6', click: advance(p.pieces[selected]!, half, half), position: { ...p, selected } });
@@ -127,7 +140,7 @@ function choose({ model, position, attempts, contacts }: State): Move | null {
   return null;
 }
 
-function returned(rows: NativeRows, proposal: Proposal): Position | null {
+function returned(rows: NativeRows, proposal: Pick<Proposal, 'local' | 'move'>): Position | null {
   const { local: { model, position }, move } = proposal;
   const { pitch, color, domain } = model;
   const at = (x:number,y:number) => rows[y]?.[x];
@@ -156,6 +169,17 @@ function returned(rows: NativeRows, proposal: Proposal): Position | null {
     if (at(...move.click) === at(otherX + half, otherY + half)) return null;
   }
   return { pieces, selected: move.position.selected };
+}
+
+function focusValues(rows: NativeRows, position: Position, pitch: number): number[] {
+  const half = Math.floor(pitch / 2);
+  return position.pieces.map(([x, y]) => rows[y + half]![x + half]!);
+}
+
+function leg(proposal: Proposal, index: number): Pick<Proposal, 'local' | 'move'> {
+  const position = proposal.walk?.[index - 1]?.position;
+  return { local: position ? { ...proposal.local, position } : proposal.local,
+    move: proposal.walk?.[index] ?? proposal.move };
 }
 
 async function proposeContactRoute(id: string, observation: NativeObservation, rows: NativeRows, initial: ContactRoute,
@@ -218,28 +242,118 @@ async function proposeContactRoute(id: string, observation: NativeObservation, r
   };
 }
 
+async function proposePeriodicRoute(id: string, observation: NativeObservation, rows: NativeRows, route: PeriodicContactRoute,
+  remaining: number, mode: ReasoningMode, execution?: NativeExecution): Promise<PeriodicProposal | null> {
+  const timed = calibratedPeriodicContact(route);
+  if (route.stopped || !matchesPeriodicContact(route, rows) || !timed && route.samples >= 12) return null;
+  const keys = directions.filter(([key]) => observation.available_action_refs.includes(key));
+  const path = route.carriers
+    ? timed ? route.planned?.length ? route.planned
+      : await planPeriodicRelay(route, keys.filter(([key]) => Object.hasOwn(route.observedControls, key)), remaining, execution) : []
+    : route.payloads && !timed ? [] : planPeriodicContact(route, keys, Math.min(remaining, route.payloads ? 96 : 48));
+  const first = timed ? path[0] : choosePeriodicSample(route, path, keys);
+  if (!first) return null;
+  const distinctStep = (move: PeriodicContactMove) => move.contact !== null || move.automatic.length > 0
+    || move.payloadContact !== undefined || move.carrierContact !== undefined || move.direction[0] === 'ACTION6';
+  const contact = distinctStep(first);
+  const batch = [first];
+  if (timed && !contact) for (const move of path.slice(1, Math.min(maximumCommittedActions, remaining))) {
+    if (distinctStep(move)) break;
+    batch.push(move);
+  }
+  const ref = observation.observation_ref;
+  const evidence: [string, ...string[]] = [ref, ...new Set([...route.evidence,
+    ...(route.observedControls[first.direction[0]] ? [route.observedControls[first.direction[0]]!] : [])].filter(value => value !== ref))];
+  const aim = periodicContactBox(route, first.pose.actor);
+  const offer = { input: first.direction[0], expected: [aim[0], aim[1]] as NativePoint, evidence };
+  const choice = resolveNavigationPrimitives({ mode, evidence, probe: !timed ? offer : null,
+    access: timed && !contact ? offer : null, interaction: timed && contact ? offer : null });
+  if (!choice.selected) return null;
+  const focusCarrier = route.carriers?.[first.carrierContact ?? first.pose.selected!];
+  const target = periodicContactBox(route, focusCarrier?.goal ?? route.goal, focusCarrier?.size);
+  const activeSource = first.contact ?? first.automatic[0];
+  const box = (source: number, at = route.pose.sources[source]!) => periodicContactBox(route, at, route.sources[source]!.size);
+  const selecting = first.direction[0] === 'ACTION6';
+  const reason = !timed ? 'Approach the opening and measure when the moving fronts extend and retract'
+    : selecting ? 'Transfer control to the piece needed for the next step'
+      : first.carrierContact !== undefined ? 'Move the other selectable piece to its next working area'
+    : first.contact !== null ? 'Clear the passage by projecting the contacted pusher across the separating band'
+      : first.payloadContact !== undefined ? 'Project the shaped payload into the matching opening'
+      : first.automatic.length ? 'Use the measured extension to move the controlled piece toward the opening'
+        : 'Follow the route that reaches the opening between the measured extensions';
+  const parent = 'G_official_completion';
+  const objective = { kind: 'reach_opening_with_periodic_contacts', scope: ref.split(':revision:', 1)[0]!,
+    subjects: ['controlled_piece', 'moving_fronts', 'matching_opening'], parentObjective: parent,
+    satisfactionContract: 'official_progress_after_reaching_the_matching_opening' };
+  const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+  const composition = id + ':' + need.id;
+  const click = selecting ? periodicContactBox(route, first.pose.actor, route.carriers![first.pose.selected!]!.size) : null;
+  const point: NativePoint | null = click ? [Math.floor((click[0] + click[2]) / 2), Math.floor((click[1] + click[3]) / 2)] : null;
+  const witness = point ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason, evidence }) : null;
+  if (selecting && !witness) return null;
+  const data: Record<string, number> = point ? { x: point[0], y: point[1] } : {};
+  const actions = batch.map(move => ({ action_ref: move.direction[0], data: { ...data } }));
+  return { status: 'proposed', kind: id, periodicRoute: route.carriers && timed ? { ...route, planned: path } : route,
+    periodicMoves: batch, needId: need.id, actions,
+    binding: { observation_ref: ref, level_epoch: route.epoch },
+    steps: actions.map((action, i) => ({ action, expected_after: timed ? batch[i]!.pose : null,
+      ...(witness ? { point_binding: witness } : {}) })),
+    sicSituationCard: { strategy: choice.selected.id, need: 'Reach the matching opening through periodic contact', situation: reason,
+      evidence, agenda: choice.entries, mode, triggerCard: choice.card,
+      focus: click ?? periodicContactBox(route, route.pose.actor, route.carriers?.[route.pose.selected!]?.size), target,
+      ...(route.carriers ? { carriers: route.carriers.map((body, i) => ({
+        box: periodicContactBox(route, route.pose.carriers![i]!, body.size), goal: periodicContactBox(route, body.goal, body.size),
+        selected: i === route.pose.selected,
+      })) } : {}),
+      ...(route.payloads ? { payloads: route.payloads.map((payload, i) => {
+        const size = [1 + Math.max(...payload.mask.map(([x]) => x)), 1 + Math.max(...payload.mask.map(([, y]) => y))] as const;
+        return { box: periodicContactBox(route, route.pose.payloads![i]!, size), destination: periodicContactBox(route, payload.goal, size),
+          placed: route.pose.payloads![i] === payload.goal };
+      }) } : {}),
+      ...(first.contact === null ? {} : { projected: box(first.contact, first.pose.sources[first.contact]) }),
+      timedSources: route.sources.map((_, i) => ({ box: box(i), active: activeSource === i,
+        phase: route.rhythms[i] ? route.pose.phases[i] : null, period: route.rhythms[i]?.period ?? null })) },
+    question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+    compositions: [{ id: composition, observed: false, open_question: reason, relations: ['contributes_to:' + parent] }],
+    sicLocalDecision: { strategy: choice.selected.id, objective: { id: composition, label: navigationPrimitives[choice.selected.id], parent }, need },
+    bundle_template: { operation_key: 'OP18', composition_ref: composition, objective_ref: parent, purpose: reason,
+      preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: composition } } };
+}
+
 export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): NativeFamily<CoupledProposal> {
   const learns = id === learnContactAccessId;
   let state: State | null = null;
   let route: ContactRoute | null = null;
+  let periodic: PeriodicContactRoute | null = null;
   return {
     id,
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       const epoch = observation.level_epoch;
-      if (!route || (route.epoch !== epoch - 1 && (route.epoch !== epoch || route.scene.fixedCarrier === undefined && !route.scene.carriers))) return null;
+      const recurring = periodic && (periodic.epoch === epoch || periodic.epoch === epoch - 1);
+      if (!recurring && (!route || (route.epoch !== epoch - 1 && (route.epoch !== epoch || route.scene.fixedCarrier === undefined && !route.scene.carriers)))) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal && isRoute(proposal)
-        && (proposal.contactRoute.scene.fixedCarrier !== undefined || proposal.contactRoute.scene.carriers) ? proposal : null;
+      return proposal && (isPeriodic(proposal) || isRoute(proposal)
+        && (proposal.contactRoute.scene.fixedCarrier !== undefined || proposal.contactRoute.scene.carriers)) ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution): Promise<CoupledProposal | null> {
       if (remaining < 1 || !['ACTION6', ...directions.map(([id]) => id)].every(id => observation.available_action_refs.includes(id))) return null;
       const epoch = observation.level_epoch, mode = execution?.reasoningMode ?? 'exploration';
+      if (periodic?.epoch === epoch) return proposePeriodicRoute(id, observation, rows, periodic, remaining, mode, execution);
       if (route?.epoch === epoch) return proposeContactRoute(id, observation, rows, route, mode);
       const retained = route?.epoch === epoch - 1 && !route.stopped ? route : null;
       if (retained?.scene.fixedCarrier !== undefined || retained?.scene.carriers) {
         const relay = identifyRelayContactRoute(observation, rows, retained);
         if (relay) return proposeContactRoute(id, observation, rows, relay, mode);
+      }
+      const priorPeriodic = periodic?.epoch === epoch - 1 && !periodic.stopped ? periodic : null;
+      const periodicMaterial = priorPeriodic ? [priorPeriodic.actorInk, priorPeriodic.actorMarker] as const
+        : retained?.scene.carrierInk === undefined ? null : [retained.scene.carrierInk, retained.scene.selectedInk] as const;
+      const acquired = priorPeriodic ?? retained;
+      if (acquired && periodicMaterial) {
+        const scene = measurePeriodicContact(observation, rows, priorPeriodic?.calibration ?? retained!.scene.calibration,
+          ...periodicMaterial, acquired.observedControls, priorPeriodic ?? undefined);
+        if (scene) return proposePeriodicRoute(id, observation, rows, scene, remaining, mode, execution);
       }
       const prior = state?.epoch === epoch ? state : null;
       const initial = prior ?? measure(rows);
@@ -255,7 +369,7 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
         return fresh ? proposeContactRoute(id, observation, rows, fresh, mode) : null;
       }
       const local = prior ?? { ...initial, epoch: observation.level_epoch, refs: [], attempts: {}, ...(learns ? { controls: {}, contacts: [] } : {}) };
-      const move = choose(local);
+      const path = choose(local), move = path?.[0];
       if (!move) return null;
       const ref = observation.observation_ref;
       const control = local.controls?.[move.input];
@@ -281,10 +395,20 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
         ? 'Test whether directed contact carries the blocked piece across the separator' : 'Move the controlled piece toward a target or contact position';
       const box = ([x,y]: NativePoint) => [x, y, x + local.model.pitch - 1, y + local.model.pitch - 1];
       const attempt = key(local.position) + '>' + key(move.position);
+      const visibleFocus = focusValues(rows, local.position, local.model.pitch), walk: Move[] = [];
+      if (!probe && new Set(visibleFocus).size === local.position.pieces.length) {
+        for (const step of path!.slice(0, Math.min(remaining, maximumCommittedActions))) {
+          if (step.click || step.contact !== undefined || !local.motionEvidence?.[step.input]) break;
+          walk.push(step);
+        }
+      }
+      const actions = walk.length > 1 ? walk.map(step => ({ action_ref: step.input, data: {} })) : [action];
       return {
         status: 'proposed', kind: id, local, move, needId: need.id, attempt,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action],
-        steps: [{ action, expected_after: move.position.pieces, ...(witness ? { point_binding: witness } : {}) }],
+        ...(walk.length > 1 ? { walk, focusValues: visibleFocus } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: (walk[index] ?? move).position.pieces,
+          ...(witness ? { point_binding: witness } : {}) })),
         sicSituationCard: { strategy: selected.id, need: 'Place the pieces in the matching openings', situation, evidence, agenda: entries, mode,
           triggerCard: card, focus: box(local.position.pieces[move.position.selected]!),
           related: box(local.position.pieces[1 - move.position.selected]!), target: box(local.model.targets.find(goal => !local.position.pieces.some(p => eq(p, goal)))!),
@@ -294,16 +418,44 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
         compositions: [{ id: composition, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy: selected.id, objective: { id: composition, label: navigationPrimitives[selected.id], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: composition, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: composition } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: composition } },
       };
     },
-    before(proposal, index, _packet, current) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
-      return { admitted, reason: admitted ? 'piece_move_bound' : 'piece_layout_changed' };
+    before(proposal, index, packet, current) {
+      if (index === 0) {
+        const admitted = proposal.binding?.observation_ref === current.observation_ref;
+        return { admitted, reason: admitted ? 'piece_move_bound' : 'piece_layout_changed' };
+      }
+      if (isPeriodic(proposal)) {
+        const previous = proposal.periodicMoves[index - 1];
+        const local = proposal.periodicRoute;
+        const admitted = !!previous && local.epoch === current.level_epoch
+          && matchesPeriodicContact(projectPeriodicSnapshot(local, previous), packet.frame_rows);
+        return { admitted, reason: admitted ? 'positions_and_actuator_phases_confirmed' : 'timed_contact_context_changed' };
+      }
+      if (!isRoute(proposal) && proposal.walk) {
+        const previous = leg(proposal, index - 1), position = previous.move.position;
+        const observed = returned(packet.frame_rows, previous);
+        const values = focusValues(packet.frame_rows, position, previous.local.model.pitch);
+        const admitted = current.level_epoch === previous.local.epoch && !!observed && key(position) === key(observed)
+          && values.every((value, i) => value === proposal.focusValues?.[i]);
+        return { admitted, reason: admitted ? 'retained_focus_and_piece_positions_confirmed' : 'piece_layout_changed' };
+      }
+      return { admitted: false, reason: 'piece_layout_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, first, second, frames) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isPeriodic(proposal)) {
+        const initial = proposal.periodicRoute;
+        const local = index > 0 ? projectPeriodicSnapshot(initial, proposal.periodicMoves[index - 1]!) : initial;
+        const prediction = calibratedPeriodicContact(local) ? proposal.periodicMoves[index] : undefined;
+        const observed = after.level_epoch === before.level_epoch && after.state === before.state
+          && observePeriodicContact(local, second, frames ?? [], after.observation_ref, prediction);
+        return { matched: observed ? prediction ? true : null : false, seal_prefix: !observed || !prediction,
+          reason: !observed ? 'periodic_contact_projection_contradicted'
+            : prediction ? 'compare_step_contact_and_periodic_response' : 'measure_actuator_phases_and_actual_controlled_pose' };
+      }
       if (isRoute(proposal)) {
         const result = observeContactRoute(second, proposal.contactRoute, proposal.contactMove, after.observation_ref);
         const matched = result?.position === proposal.contactMove.position;
@@ -314,11 +466,27 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
               : proposal.contactMove.contact === null ? 'carrier_moved_and_cargo_preserved' : 'cargo_translated_and_carrier_held_position';
         return { matched, seal_prefix: true, reason };
       }
-      const result = returned(second, proposal);
-      const matched = result !== null && (key(result) === key(proposal.move.position) || proposal.move.contact !== undefined && key(result) !== key(proposal.local.position));
-      return { matched, seal_prefix: true, reason: matched ? 'piece_positions_observed' : 'piece_projection_unconfirmed' };
+      const step = leg(proposal, index), result = returned(second, step);
+      const matched = result !== null && (key(result) === key(step.move.position) || step.move.contact !== undefined && key(result) !== key(step.local.position));
+      const side = step.local.model.pitch, selected = step.local.position.selected;
+      const boxes = index + 1 < proposal.actions.length ? [step.local.position.pieces[selected]!, step.move.position.pieces[selected]!]
+        .map(([x, y]): NativeBox => [x, y, x + side - 1, y + side - 1]) : [];
+      const stable = boxes.length > 0 && unchangedOutside(first, second, boxes);
+      return { matched, seal_prefix: !matched || !stable, reason: matched ? 'piece_positions_observed' : 'piece_projection_unconfirmed' };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index, frames) {
+      if (isPeriodic(proposal)) {
+        const local = index > 0 && periodic?.epoch === before.level_epoch ? periodic : proposal.periodicRoute;
+        if (after.levels_completed > before.levels_completed) {
+          periodic = { ...local, evidence: [...local.evidence.slice(-5), after.observation_ref] };
+          return { events: [], reviewEvidence: 'The measured phase route reached the opening and advanced the level.' };
+        }
+        const prediction = calibratedPeriodicContact(local) ? proposal.periodicMoves[index] : undefined;
+        const observed = after.level_epoch === before.level_epoch && after.state === before.state
+          ? observePeriodicContact(local, second, frames, after.observation_ref, prediction) : null;
+        periodic = observed ? observed.planned ? { ...observed, planned: observed.planned.slice(1) } : observed : { ...local, stopped: true };
+        return { events: [] };
+      }
       if (isRoute(proposal)) {
         if (after.levels_completed > before.levels_completed) {
           route = { ...proposal.contactRoute, position: proposal.contactMove.position, path: [],
@@ -330,9 +498,11 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, move } = proposal, result = returned(second, proposal);
+      const step = leg(proposal, index), local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? step.local;
+      const { move } = step, result = returned(second, { local, move });
+      const attempt = index === 0 ? proposal.attempt : key(local.position) + '>' + key(move.position);
       state = { ...local, position: result ?? local.position, refs: result ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
-        attempts: result && key(result) === key(move.position) ? local.attempts : { ...local.attempts, [proposal.attempt]: (local.attempts[proposal.attempt] ?? 0) + 1 } };
+        attempts: result && key(result) === key(move.position) ? local.attempts : { ...local.attempts, [attempt]: (local.attempts[attempt] ?? 0) + 1 } };
       if (!result || move.click) return { events: [] };
       const selected = local.position.selected, peer = 1 - selected;
       if (move.contact === undefined && eq(result.pieces[peer]!, local.position.pieces[peer]!)
@@ -357,10 +527,11 @@ export function createSicTranslateCoupledPieces(id = translateCoupledPiecesId): 
       }
       return { events: [] };
     },
-    state: () => ({ state, ...(route ? { route } : {}) }),
+    state: () => ({ state, ...(route ? { route } : {}), ...(periodic ? { periodic } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       route = structuredClone(value.route as ContactRoute | undefined) ?? null;
+      periodic = structuredClone(value.periodic as PeriodicContactRoute | undefined) ?? null;
     },
   };
 }

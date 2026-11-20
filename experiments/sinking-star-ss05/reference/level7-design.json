@@ -1,0 +1,217 @@
+{
+  "spec": {
+    "id": "ss05-07",
+    "title": "Les écluses en cadence",
+    "rows": [
+      "####################",
+      "####################",
+      "#######...#.########",
+      "#######...b.########",
+      "####o~#...#.########",
+      "#####~#.....########",
+      "#####~#.....##.....#",
+      "#####~#...o.##.....#",
+      "#####~#...b.~......#",
+      "#####~#..#..~#.....#",
+      "#####~#.#b..~#..B..#",
+      "#....~#..#..~#.....#",
+      "#.g..~#...o.~#...b.#",
+      "#.#..~#....#~#.....#",
+      "#..m.~....#o~#.....#",
+      "#....#######~#.....#",
+      "#....#######~#.....#",
+      "##############.....#",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "ecluse-est",
+        "buttons": [
+          {
+            "x": 17,
+            "y": 12
+          }
+        ]
+      },
+      {
+        "id": "deux-notes",
+        "buttons": [
+          {
+            "x": 10,
+            "y": 3
+          },
+          {
+            "x": 9,
+            "y": 10
+          },
+          {
+            "x": 10,
+            "y": 8
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 14
+        },
+        "circuit": "ecluse-est",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 4
+        },
+        "circuit": "deux-notes",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "circuit": "deux-notes",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 14
+        },
+        "circuit": "deux-notes",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "actions": [
+    2,
+    2,
+    4,
+    2,
+    2,
+    3,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3,
+    3,
+    3,
+    2,
+    2,
+    2,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    2,
+    2,
+    2,
+    2,
+    3,
+    2,
+    4,
+    1,
+    1,
+    3,
+    1,
+    1,
+    3,
+    3,
+    3,
+    3,
+    1,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    3,
+    3,
+    3,
+    1,
+    1,
+    3,
+    3
+  ],
+  "actionsString": "DDRDDLLLUUUUUULLLDDDLUUUUUURDDDDLDRUULUULLLLUUDDDDDDDDDDLLLUULL",
+  "metrics": {
+    "actions": 63,
+    "songTurns": 42,
+    "stoneMoves": 15,
+    "monsterMoves": 2,
+    "platformMoves": 32,
+    "reflections": 0,
+    "pistonPushes": 3,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "complete": true,
+  "source": {
+    "type": "original",
+    "inspiration": "Bard water platforms and remote choreography from Heroes 3, with two mandatory lateral presses and separate canal landings."
+  },
+  "ablations": {
+    "disablePlatformMotion": {
+      "status": "unsolvable",
+      "states": 121,
+      "expanded": 121,
+      "ms": 20.120055000000008
+    },
+    "disablePistons": {
+      "status": "unsolvable",
+      "states": 60,
+      "expanded": 60,
+      "ms": 2.75683699999999
+    },
+    "disablePlatforms": {
+      "status": "unsolvable",
+      "states": 60,
+      "expanded": 60,
+      "ms": 1.8858039999999932
+    },
+    "disableMonsterSong": {
+      "status": "limit",
+      "states": 100000,
+      "expanded": 83704,
+      "ms": 2189.690596
+    }
+  },
+  "design": {
+    "theme": "Deux canaux à franchir à des hauteurs différentes",
+    "sequence": [
+      "La première presse distante envoie un bloc dans le canal est.",
+      "Remonter cette plateforme jusqu’au débarcadère au nord.",
+      "Dans la salle centrale, immobiliser deux caisses sur deux boutons dans des niches.",
+      "Le Barde rejoint le troisième bouton : une presse le décale et son propre poids maintient le circuit fermé ; la deuxième presse injecte la seconde plateforme.",
+      "Descendre la seconde plateforme dans le canal ouest jusqu’au débarcadère sud.",
+      "Guider la sentinelle sous le mur de sa niche, puis la contourner jusqu’à la cible."
+    ],
+    "mirrors": 0,
+    "shortestClaim": false,
+    "mandatoryMechanisms": "Platform motion, piston pushes, and platform creation are necessary if their ablations exhaust; monster-song ablation is only conclusive if exhaustive."
+  }
+}

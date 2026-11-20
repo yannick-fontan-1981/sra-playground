@@ -13,17 +13,51 @@ const centerX = ([l, , r]: NativeBox) => (l + r) / 2;
 const cell = (rows: NativeRows, [x, y]: NativePoint) => rows[y]?.[x];
 const near = (a: number, b: number, pitch: number) => 0 < a - b && a - b <= pitch + 1;
 
+function sharedSignalLink(rows: NativeRows, boxes: RailWindow[], to: number, pitch: number): Link | null {
+  const { signal_marker: marker, unit } = boxes[to]!;
+  if (!marker) return null;
+  const { point: [x, bottom], ink } = marker;
+  const matches = new Map<number, Link>();
+  for (let y = bottom + 1; near(y, bottom, pitch + unit); y++) {
+    const row = rows[y];
+    if (!row || row[x] !== ink) continue;
+    let left = x, right = x;
+    while (row[left - 1] === ink) left--;
+    while (row[right + 1] === ink) right++;
+    const nodes = boxes.map((box, index) => ({ box, index, x: centerX(box.bbox) }))
+      .filter(node => node.box.bbox[3] === bottom && node.x >= left && node.x <= right)
+      .sort((a, b) => a.x - b.x);
+    if (nodes.length < 3 || nodes[0]!.x !== left || nodes.at(-1)!.x !== right) continue;
+    const emitters = nodes.filter(node => !node.box.signal_marker);
+    const root = emitters[0];
+    if (emitters.length !== 1 || !root || (root.x !== left && root.x !== right)) continue;
+    if (nodes.some(node => node !== root && node.box.signal_marker?.ink !== ink)) continue;
+    const at = nodes.findIndex(node => node.index === to);
+    const from = nodes[at + Math.sign(root.x - x)];
+    if (at < 0 || !from) continue;
+    matches.set(from.index, { from: from.index, to, box: [Math.min(x, from.x), y, Math.max(x, from.x), y] });
+  }
+  return matches.size === 1 ? matches.values().next().value! : null;
+}
+
 function measureLinks(rows: NativeRows, boxes: RailWindow[], pitch: number): Link[] | null {
   const parts = geometricComponents(rows), links: Link[] = [];
   for (const [to, box] of boxes.entries()) {
     const marker = box.signal_marker;
     if (!marker) continue;
+    const chained = sharedSignalLink(rows, boxes, to, pitch);
+    if (chained) { links.push(chained); continue; }
     const [x, bottom] = marker.point;
-    const matches = boxes.flatMap(({ bbox }, from) => {
+    const matches = boxes.flatMap(({ bbox, unit }, from) => {
       if (from === to) return [];
       const sourceX = centerX(bbox);
-      return parts.filter(({ color, bbox: [l, t, r, b] }) => color === marker.ink && l === Math.min(sourceX, x)
-        && r === Math.max(sourceX, x) && near(t, Math.min(bottom, bbox[3]), pitch) && b > Math.max(bottom, bbox[3]))
+      const left = Math.min(sourceX, x), right = Math.max(sourceX, x);
+      if (boxes.some(({ signal_marker: signal }) => signal?.ink === marker.ink && signal.point[1] === bottom
+        && signal.point[0] > left && signal.point[0] < right)) return [];
+      // A selection preview can cover the vertical stubs while leaving the full horizontal link visible.
+      return parts.filter(({ color, bbox: [l, t, r, b] }) => color === marker.ink && l === left
+        && r === right && b > Math.max(bottom, bbox[3])
+        && near(t, Math.min(bottom, bbox[3]), pitch + (t === b ? unit : 0)))
         .map(part => ({ from, to, box: part.bbox }));
     });
     if (matches.length !== 1) return null;
@@ -36,19 +70,19 @@ function measurePath(rows: NativeRows, boxes: RailWindow[], pitch: number): Nati
   const seed = boxes[0]!, [left, , , bottom] = seed.bbox, { base, unit } = seed;
   const points = new Map<string, NativePoint>(), width = rows[0]!.length, height = rows.length;
   const corners = [[-1, -1], [1, -1], [-1, 1], [1, 1]] as const;
+  const covered = ([x, y]: NativePoint) => boxes.some(({ bbox: [l, t, r, b] }) => l <= x && x <= r && t <= y && y <= b);
   for (let y = bottom + unit + 1; y < height - 1; y += pitch) {
     for (let x = (left + unit) % pitch || pitch; x < width - 1; x += pitch) {
       if (cell(rows, [x, y]) === base || !corners.every(([dx, dy]) => cell(rows, [x + dx, y + dy]) === base)) continue;
-      if (boxes.some(({ bbox: [l, t, r, b] }) => l <= x && x <= r && t <= y && y <= b)) continue;
       const point: NativePoint = [x, y];
+      if (covered(point)) continue;
       points.set(key(point), point);
     }
   }
   const neighbours = ([x, y]: NativePoint) => ([[x - pitch, y], [x + pitch, y], [x, y - pitch], [x, y + pitch]] as const)
     .filter(point => points.has(key(point)));
-  const endpoints = [...points.values()].filter(point => neighbours(point).length === 1);
-  if (endpoints.length !== 2 || [...points.values()].some(point => neighbours(point).length > 2)) return null;
-  const endcaps = endpoints.filter(([x, y]) => {
+  const visibleEnds = [...points.values()].filter(point => neighbours(point).length === 1);
+  const endcaps = visibleEnds.filter(([x, y]) => {
     const neighbour = neighbours([x, y])[0]!;
     if (neighbour[1] !== y) return false;
     const direction = Math.sign(x - neighbour[0]), end = x + direction * seed.unit;
@@ -57,13 +91,44 @@ function measurePath(rows: NativeRows, boxes: RailWindow[], pitch: number): Nati
       [-2, -1, 0, 1, 2].every(offset => cell(rows, [end, y + offset]) === ink);
   });
   if (endcaps.length !== 1) return null;
-  const path = [endpoints.find(point => point !== endcaps[0])!];
+  const endcap = endcaps[0]!;
+  // Fill only gaps with visible rail on both sides and receiver pixels covering the intervening centers.
+  const bridgeEnds = visibleEnds.filter(point => point !== endcap);
+  const visibleArm = (tip: NativePoint, dx: number, dy: number) => {
+    for (let i = 1; i < pitch; i++) {
+      const point: NativePoint = [tip[0] + i * dx, tip[1] + i * dy];
+      if (covered(point)) break;
+      if (cell(rows, point) === cell(rows, tip)) return true;
+    }
+    return false;
+  };
+  const bridges = bridgeEnds.map(tip => bridgeEnds.flatMap((end, index) => {
+    const x = end[0] - tip[0], y = end[1] - tip[1], distance = Math.abs(x) + Math.abs(y);
+    if ((x && y) || distance <= pitch || cell(rows, tip) !== cell(rows, end)) return [];
+    const dx = Math.sign(x), dy = Math.sign(y);
+    if (!visibleArm(tip, dx, dy) || !visibleArm(end, -dx, -dy)) return [];
+    const hidden: NativePoint[] = [];
+    for (let i = pitch; i < distance; i += pitch) {
+      const point: NativePoint = [tip[0] + i * dx, tip[1] + i * dy];
+      if (!covered(point)) return [];
+      hidden.push(point);
+    }
+    return [{ index, hidden }];
+  }));
+  for (const [index, candidates] of bridges.entries()) {
+    const bridge = candidates[0];
+    if (candidates.length !== 1 || !bridge || bridge.index <= index || bridges[bridge.index]!.length !== 1) continue;
+    for (const point of bridge.hidden) points.set(key(point), point);
+  }
+  const endpoints = [...points.values()].filter(point => neighbours(point).length === 1);
+  if (endpoints.length !== 2 || !endpoints.includes(endcap) || [...points.values()].some(point => neighbours(point).length > 2)) return null;
+  const path = [endpoints.find(point => point !== endcap)!];
   while (path.length < points.size) {
     const next = neighbours(path.at(-1)!).find(point => key(point) !== (path.length < 2 ? '' : key(path.at(-2)!)));
     if (!next) return null;
     path.push(next);
   }
-  return key(path.at(-1)!) === key(endcaps[0]!) ? path : null;
+  return key(path.at(-1)!) === key(endcap) ? path : null;
 }
 
 export function measureLinkedWindows(rows: NativeRows, boxes: RailWindow[]): LinkedWindows | null {
@@ -94,6 +159,8 @@ export function measureLinkedWindows(rows: NativeRows, boxes: RailWindow[]): Lin
 
 export function linkedWindowCoverage(rail: LinkedWindows, colors: readonly number[], paint: readonly boolean[],
   settings: WindowSettings): [boolean, NativeRecord[]] {
+  const captureCapacity = settings.reduce((total, [size], index) => total + (paint[index] ? 0 : size), 0);
+  if (captureCapacity < colors.length) return [false, []];
   const ref = (index: number) => `receiver:${index}`, event = 'visible_receiver_signal';
   const receivers: WindowReceiverD[] = settings.map(([size, filter, output], i) => ({
     receiver_ref: ref(i), first_rank_at_beat_zero: 1 - rail.positions[i]! - size, window_size: size,
@@ -118,4 +185,35 @@ export function linkedWindowCoverage(rail: LinkedWindows, colors: readonly numbe
     if (state.spent_for_run_refs.length === receivers.length) break;
   }
   return [false, []];
+}
+
+export function linkedWindowProjection(rail: LinkedWindows, colors: readonly number[], paint: readonly boolean[]) {
+  const amounts = new Array<number>(16).fill(0);
+  for (const color of colors) amounts[color] = amounts[color]! + 1;
+
+  function canCoverPigments(settings: WindowSettings): boolean {
+    if (colors.length > 30 || settings.some(([size, filter, output], index) =>
+      size > 30 || filter === null || (paint[index] && output === null))) return true;
+    const captures = new Array<number>(16).fill(1);
+    const painters: WindowSettings = [];
+    for (const [index, [size, filter, output]] of settings.entries()) {
+      if (paint[index]) painters.push([size, filter, output]);
+      else captures[filter!] = captures[filter!]! | (captures[filter!]! << size);
+    }
+    if (painters.length > 8) return true;
+    // Each window fires at most once. A launch must be able to balance each pigment before timing is considered.
+    for (let mask = 0; mask < 1 << painters.length; mask++) {
+      const balance = amounts.slice();
+      for (const [index, [size, filter, output]] of painters.entries()) {
+        if ((mask & (1 << index)) === 0) continue;
+        balance[filter!] = balance[filter!]! - size;
+        balance[output!] = balance[output!]! + size;
+      }
+      if (balance.every((count, ink) => count >= 0 && count <= colors.length && (captures[ink]! & (1 << count)) !== 0)) return true;
+    }
+    return false;
+  }
+
+  return (_scene: unknown, settings: WindowSettings): [boolean, NativeRecord[]] =>
+    canCoverPigments(settings) ? linkedWindowCoverage(rail, colors, paint, settings) : [false, []];
 }

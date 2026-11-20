@@ -179,7 +179,7 @@ export class NativeCompositionAuthority {
     return [...writes, { id: 'reasoning:memory', kind: 'component_state', component: 'native_reasoning_memory',
       value: index,
       relations: [{ relation: 'uses_catalog', target: 'reasoning:catalog' }] },
-    { id: 'reasoning:bridge', kind: 'component_state', component: 'composition_bridge', value: this.bridge.state(),
+    { id: 'reasoning:bridge', kind: 'component_state', component: 'composition_bridge', value: this.bridge.nativeCheckpoint(),
       relations: [{ relation: 'reads', target: 'reasoning:memory' }, { relation: 'executes', target: 'program:prototype.laya_router.route' }] }];
   }
   private async checkpoint(statement: string, extra: NativeStoreWrite[] = []): Promise<void> {

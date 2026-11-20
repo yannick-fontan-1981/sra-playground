@@ -1,0 +1,278 @@
+{
+  "spec": {
+    "id": "SS04-07",
+    "title": "Les deux digues",
+    "rows": [
+      "#################",
+      "#.......######g##",
+      "#.b.....######D##",
+      "#.......#.......#",
+      "#.......#.......#",
+      "#.......#.......#",
+      "#.......#.......#",
+      "#~#~~~~~~~~~~~~~#",
+      "#...D.......D...#",
+      "#.b.....#.......#",
+      "#...o.W.#..o....#",
+      "#.m....b........#",
+      "#.....o.......b.#",
+      "#################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 2
+        },
+        "facing": "SW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "presse-ouest",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "id": "presse-est",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 12
+          }
+        ]
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 7,
+            "y": 11
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 4,
+          "y": 8
+        },
+        "circuit": "presse-ouest",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 8
+        },
+        "circuit": "presse-est",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 2
+        },
+        "circuit": "sortie",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "actions": [
+    1,
+    1,
+    3,
+    3,
+    2,
+    3,
+    1,
+    3,
+    4,
+    2,
+    4,
+    2,
+    2,
+    4,
+    1,
+    1,
+    1,
+    1,
+    3,
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3,
+    1,
+    3,
+    4,
+    4,
+    1,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    1,
+    3,
+    1,
+    1,
+    4,
+    2,
+    2,
+    2,
+    4,
+    4,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    3,
+    1,
+    3,
+    1,
+    1,
+    1,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    4,
+    1,
+    1
+  ],
+  "metrics": {
+    "actions": 79,
+    "swaps": 6,
+    "reflectedSwaps": 1,
+    "monsterSwaps": 1,
+    "pistonPushes": 2,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "validation": {
+    "complete": true,
+    "dead": false
+  },
+  "ablations": {
+    "disableSwap": {
+      "status": "unsolvable",
+      "states": 63,
+      "expanded": 63,
+      "ms": 8.003034
+    },
+    "disablePlatforms": {
+      "status": "limit",
+      "states": 30000,
+      "expanded": 17332,
+      "ms": 501.52542400000004
+    },
+    "disablePistons": {
+      "status": "limit",
+      "states": 30000,
+      "expanded": 17333,
+      "ms": 480.9643
+    },
+    "disableMonsterSwap": {
+      "status": "limit",
+      "states": 30000,
+      "expanded": 20259,
+      "ms": 782.8341870000002
+    },
+    "disableReflections": {
+      "status": "limit",
+      "states": 30000,
+      "expanded": 17316,
+      "ms": 474.02250100000015
+    }
+  },
+  "designNotes": {
+    "sourceType": "original",
+    "objective": "Build two separate northward water crossings, import a weight via the west mirror, and use the monster as the second weight for the north-east exit.",
+    "difficulty": "Complex; bounded waypoint search found a 79-action witness. It is not claimed shortest.",
+    "stages": [
+      {
+        "actions": 8,
+        "task": "Place a crate on the west press and trigger it to form the first water support."
+      },
+      {
+        "actions": 6,
+        "task": "Reserve a second crate at (4,12) for the upper mirror."
+      },
+      {
+        "actions": 14,
+        "task": "Cross the west bridge and reach the upper west exit plate at (2,2)."
+      },
+      {
+        "actions": 1,
+        "task": "Look east: the SW mirror turns the ray south and trades the hero with the reserved crate."
+      },
+      {
+        "actions": 15,
+        "task": "Reposition the last crate onto the east press at (12,8)."
+      },
+      {
+        "actions": 4,
+        "task": "Trigger the second press to create the second support at (12,7)."
+      },
+      {
+        "actions": 9,
+        "task": "Swap the stationary monster onto the lower exit plate at (7,11), avoiding its cardinal neighbours."
+      },
+      {
+        "actions": 22,
+        "task": "Route around the weighted monster, cross the east bridge and walk through the now-open exit gate."
+      }
+    ],
+    "necessities": [
+      {
+        "mechanism": "Two water supports",
+        "proof": "A water band separates the lower workshop from two northern rooms, with a wall between the upper rooms. Neither upper room has an initial movable actor. An exchange only permutes existing actor positions, so it cannot put the first actor into either empty upper room. Each room must therefore be entered through a new support. The only press delivery points are (4,7) and (12,7). The west room contains one required exit plate; the east room contains the exit."
+      },
+      {
+        "mechanism": "Two lateral press strokes",
+        "proof": "The Magician cannot push. The only gates bordering the two water cells are north-facing presses at (4,8) and (12,8). They are the only way to deliver a crate into each water cell."
+      },
+      {
+        "mechanism": "At least one monster exchange",
+        "proof": "The two supports permanently consume two of three crates. The exit circuit then needs two simultaneous weights on separate floor plates, while the hero must be at the exit. One crate plus the monster are the only remaining movable weights. The stationary monster begins on neither plate and on neither press, so at least one exchange with it is required."
+      },
+      {
+        "mechanism": "Reflection",
+        "proof": "The witness uses the west mirror for a one-swap import of a reserved lower-room crate onto the upper plate. The mirror is useful; its independent necessity is not claimed. Bounded no-reflection search reaching a limit is not a proof of impossibility."
+      }
+    ]
+  }
+}

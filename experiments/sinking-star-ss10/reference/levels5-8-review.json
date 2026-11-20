@@ -1,0 +1,74 @@
+{
+  "scope": "Current level/witness review for version 0.2.0. No new exhaustive necessity search is claimed. Historical searches for previous geometry are retained in archive/ss10-v1-levels5-8-review.json.",
+  "levels": [
+    {
+      "level": 6,
+      "witness": {
+        "actions": 93,
+        "selections": 9,
+        "warriorPushes": 18,
+        "thiefPulls": 13,
+        "partnerMoves": 2,
+        "chainPushes": 2,
+        "stoneMoves": 22,
+        "mirrorMoves": 7,
+        "reflections": 2,
+        "heroReflections": 2,
+        "pistonPushes": 0,
+        "platformsCreated": 2,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "checks": [],
+      "specSha256": "e4af043e203d8d6f45f5f14564267b8ce5932db14dd62de1788fb31b3f7b8b17",
+      "note": "Former level 8 moved to slot 6 with its 93-action witness; the previous level 6 is removed."
+    },
+    {
+      "level": 7,
+      "witness": {
+        "actions": 69,
+        "selections": 9,
+        "warriorPushes": 3,
+        "thiefPulls": 10,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 19,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 3,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "checks": [],
+      "specSha256": "ad714a67a28663315047a4695fd86d34c43a900eedc99f49165d9edb1d0f5154",
+      "note": "Validated press accent is white (color 0). Current witness retains the three loads and crate reuse."
+    },
+    {
+      "level": 8,
+      "witness": {
+        "actions": 214,
+        "selections": 21,
+        "warriorPushes": 37,
+        "thiefPulls": 26,
+        "partnerMoves": 1,
+        "chainPushes": 0,
+        "stoneMoves": 62,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 5,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "checks": [],
+      "specSha256": "7aadbf1ae32997cafea77ec2b7c8caf53f5eb5dec8c4fd99cdee8e27d96a0283",
+      "note": "Terrain and initial five-crate layout transcribed from Heroes and Water puzzle 3; all five supports are built in the witness on the source coordinates."
+    }
+  ]
+}

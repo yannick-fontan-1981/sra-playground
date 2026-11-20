@@ -4,7 +4,7 @@ import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
 import {
   ReductionTransport, boundedReductionRoute, boundedReductionRouteCooperative,
-  reductionLayout, reductionScan, reductionState, mergeReductionScene,
+  reductionLayout, reductionScan, reductionState, reductionSuccessors, mergeReductionScene,
 } from '../src/logos-engine/v6-reduction-transport.ts';
 import type { ReductionPoint, ReductionScene } from '../src/logos-engine/v6-reduction-transport.ts';
 import { measureNativeObservation, ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
@@ -41,6 +41,28 @@ for (const item of reference.geometry) test(`bounded source public geometry reta
   const result = boundedReductionRoute(reductionState(merged), merged, 16, bounds);
   assert.equal(result.status, item.path === null ? 'exhausted' : 'found');
   assert.deepEqual(result.path, item.path); assert.equal(result.bound, null);
+});
+
+test('an auxiliary rides its carrier and remains after supporting a jump toward an unseen area', () => {
+  const terrain: ReductionScene = {
+    floor: new Set(['3,0', '4,0', '5,0', '6,0']),
+    pegs: new Set(['3,0']), auxiliaries: new Set(['3,2']), carriers: [[3,2]],
+    rails: new Set(['3,2', '4,2']), edges: new Set(['3,2>4,2']),
+    known_cells: new Set(Array.from({ length: 7 }, (_, x) =>
+      Array.from({ length: 5 }, (_, y) => `${x},${y - 2}`)).flat()),
+  };
+  const start = reductionState(terrain);
+  const result = boundedReductionRoute(start, terrain, 5, bounds, 'reveal_with_auxiliary');
+  assert.deepEqual(result.path, [['move', [1,0]], ['jump', [4,2], [4,0]], ['jump', [3,0], [5,0]]]);
+  let current = start;
+  for (const operation of result.path!) {
+    const following = [...reductionSuccessors(current, terrain)]
+      .find(([, candidate]) => JSON.stringify(candidate) === JSON.stringify(operation));
+    assert.ok(following);
+    current = following[0];
+  }
+  assert.deepEqual([...current[0]], ['5,0']);
+  assert.deepEqual([...current[3]!], ['4,0']);
 });
 
 test('invalid resource profiles are rejected before any search', () => {
@@ -179,4 +201,20 @@ test('deadline uses the supplied monotonic clock and remains an unknown resource
   const active = await boundedReductionRouteCooperative(reductionState(simple), simple, 2, bounds, false,
     { yieldControl: async () => {}, deadlineMs: performance.now() + 30_000 });
   assert.equal(active.status, 'found', 'default clock uses performance time, not an epoch timestamp');
+});
+
+test('a carrier clipped by the viewport still reports its connected rail when the visible rim is intact', () => {
+  const model = { unit: 4, pitch: 6, phase: [0, 0] as ReductionPoint, floor: 1, token: 14, ring: 11, rail: 5,
+    width: 14, height: 14, trackCoveredRails: true };
+  const rows = Array.from({ length: model.height }, () => Array<number>(model.width).fill(0));
+  for (let y = 5; y <= 10; y++) rows[y]![4] = model.ring;
+  rows[8]!.splice(2, 7, 7, 15, model.ring, model.rail, model.rail, model.rail, model.rail);
+
+  const connected = reductionScan(rows, model);
+  assert.deepEqual(connected.carriers, [[0, 1]]);
+  assert.ok(connected.edges.has('0,1>1,1'));
+  assert.ok(connected.edges.has('1,1>0,1'));
+
+  rows[8]![5] = 0;
+  assert.equal(reductionScan(rows, model).edges.has('0,1>1,1'), false, 'an uncovered gap still breaks the rail');
 });

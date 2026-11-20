@@ -15,6 +15,7 @@ export interface ConstellationModel extends ConstellationRecord {
   targets: Map<number, PointSet>; marker_rows: Map<number, readonly ConstellationRecord[]>; background: number; excluded: PointSet; boundary_overlay: PointSet;
   marker_raster: Map<string, { point: Point; value: number }>; ring_widths: number[]; focus_color: number; focus_occlusion: PointSet; width: number; height: number;
   materialRegions?: readonly ConstellationMaterialRegion[];
+  movingColors?: readonly number[];
 }
 export const CONSTELLATION_NEIGHBORS: readonly Point[] = [-1, 0, 1].flatMap(x => [-1, 0, 1].flatMap(y => x || y ? [[x, y] as Point] : []));
 const keyOf = (value: unknown): string => JSON.stringify(value);
@@ -73,7 +74,7 @@ export function constellationCursorAt(rows: NativeRows, model: ConstellationMode
 }
 export function constellationMaterial(rows: NativeRows, model: ConstellationModel): Map<number, PointSet> {
   const result = new Map<number, PointSet>(), excluded = model.excluded.union(model.boundary_overlay);
-  const colors = new Set([...model.targets.keys(), ...(model.materialRegions ?? []).map(region => region.color)]);
+  const colors = new Set([...model.targets.keys(), ...(model.materialRegions ?? []).map(region => region.color), ...(model.movingColors ?? [])]);
   for (const color of colors) { const pixels = new PointSet(); rows.forEach((row, y) => row.forEach((value, x) => { if (value === color && !excluded.has([x, y])) pixels.add([x, y]); })); result.set(color, pixels); } return result;
 }
 export function* constellationComponents(points: PointSet): IterableIterator<PointSet> {

@@ -5,7 +5,7 @@ import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
 import { measureRadialPorts, radialAtGeometry, radialAssemblyModel, selectedRadialOccurrence, rotateRadialPorts } from '../src/logos-engine/v6-radial-port-observation.ts';
 import { RadialPortMemory, radialPortBefore, radialPortAfter, commonRadialPortProposal, bindRadialPort } from '../src/logos-engine/v6-radial-port-access.ts';
-import { assemblePorts, type PortModel } from '../src/logos-engine/v6-port-assembly.ts';
+import { assemblePorts, constrainedPortAssembly, type PortModel } from '../src/logos-engine/v6-port-assembly.ts';
 import { PointSet, comparePoints } from '../src/logos-engine/v6-point-set.ts';
 import { ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
 
@@ -14,6 +14,21 @@ const root = new URL('../', import.meta.url);
 const fixture = JSON.parse(gunzipSync(await readFile(new URL('fixtures/v6-radial-port-reference.json.gz', import.meta.url))).toString()) as R;
 const clone = <T>(value: T): T => structuredClone(value);
 const hash = (value: Uint8Array): string => createHash('sha256').update(value).digest('hex');
+
+test('the fixed-domain search observes its node and cancellation budgets', () => {
+  const [geometry, current] = radialAssemblyModel({ shape: [2, 2], cells: [
+    { grid: [0, 0], ports: [1] }, { grid: [1, 0], ports: [2, 3] },
+    { grid: [0, 1], ports: [1] }, { grid: [1, 1], ports: [0, 3] },
+  ] });
+  const model = geometry as PortModel;
+  assert.ok(constrainedPortAssembly(model, current, null, null));
+  assert.equal(constrainedPortAssembly(model, current, null, null, { maxVisits: 0, shouldStop: () => false }), null);
+  assert.equal(model.search_nodes, 0);
+  let polls = 0;
+  assert.equal(constrainedPortAssembly(model, current, null, null, { maxVisits: 16, shouldStop: () => ++polls === 3 }), null);
+  assert.equal(model.search_nodes, 1);
+});
+
 const restored = (events: readonly R[] = []): RadialPortMemory => {
   const memory = new RadialPortMemory();
   for (const event of events) memory.applyEvent(clone(event));

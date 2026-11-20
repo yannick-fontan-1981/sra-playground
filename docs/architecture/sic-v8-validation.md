@@ -1182,3 +1182,1517 @@ Planning propose **SIC** et **SIC Fallback**. En Fallback, la sélection repère
 - Sur **BP35 niveau 2**, deux clics en **(20, 32)** provoquent le contact avec le piège violet et `GAME_OVER`. RESET restaure l’image d’entrée du niveau 2 et la victoire du niveau 1. Le rejeu de ce contact sur le moteur officiel, avec le contrôleur SIC, conserve le retour fatal dans la même session.
 
 Le typage TypeScript et **38 tests** du contrôleur, du moteur et des frontières d’acquisition passent. L’[audit des actions continues](sic-v8-continuous-actions-audit.md) couvre les 100 premiers niveaux.
+
+### Revalidation des 100 niveaux 2 après les séries continues
+
+Les 100 jeux sont rejoués en SIC seul depuis le niveau 1. Le contrôleur s’arrête à la victoire du niveau 2. Le commit `805de790` obtient 97 victoires au niveau 2. Sur `969014e7`, les 100 jeux gagnent, avec 2 873 commandes sous autorité SIC. Les 97 parcours déjà gagnants retrouvent la même empreinte de commandes, observations et images d’animation.
+
+| Jeu | Correction du transfert ou de la réconciliation | Commandes au niveau 2 | Temps actif du niveau 2 |
+| --- | --- | ---: | ---: |
+| BP35 | Le clic sous le sprite reste une ouverture de support lorsqu’il termine une série. Le défilement confirme le changement de terrain. | 47 | 47,06 s |
+| CAVA | Le moteur mesure la pièce et le repère dans l’image qui précède le dernier saut. La victoire transmet le saut au nouveau terrain. | 12 | 9,62 s |
+| POLA | L’animation de victoire établit le quart de tour et ses conditions. Le niveau 2 vérifie le retournement de la paire sur sa propre disposition. | 3 | 1,69 s |
+
+Les temps proviennent de la même campagne à huit processus. POLA est aussi vérifié en SIC Fallback sur les deux niveaux après retrait de la famille principale. Le contrôle TypeScript et les 49 tests ciblés passent.
+
+### Revalidation des 100 niveaux 3 après les séries continues
+
+Sur le code `969014e7`, les 100 jeux gagnent le niveau 3 en SIC seul en partant du niveau 1. La campagne s’arrête à la victoire cible pour chaque jeu. L’empreinte des commandes, des observations et des animations jusqu’au niveau 2 correspond pour les 100 jeux à la campagne précédente.
+
+Les parcours totalisent 4 965 commandes sous autorité SIC, dont 2 092 au niveau 3.
+
+### Revalidation des 100 niveaux 4 après les séries continues
+
+La campagne sur `969014e7` obtient 99 victoires au niveau 4. ELAS reste bloqué devant une pièce cachée. Un déplacement observé au niveau 2 faisait apparaître une autre couleur sous la pièce déplacée. La miniature était relue différemment après cette révélation et le mouvement était écarté des acquis. La correction vérifie la grille, la sélection, le déplacement et les cases préservées. Elle transmet les quatre directions mesurées dès que le nouveau motif demande une pièce absente des dessus de pile.
+
+Sur `26cb728e`, les 100 jeux gagnent le niveau 4 en SIC seul. ELAS gagne en 46 commandes et 25,54 s au niveau 4 pendant la campagne à huit processus. Les 99 autres parcours gardent leur empreinte. Toutes les commandes, observations et animations des trois premiers niveaux concordent avec la campagne de niveau 3.
+
+La campagne dure environ **12 min 01 s à huit processus**, d’après le premier lancement et la dernière écriture de résultat. Chaque jeu part du niveau 1 et s’arrête à la victoire du niveau 4. La campagne totalise 7 147 commandes sous autorité SIC, dont 2 182 au niveau 4. Le contrôle TypeScript et les 49 tests ciblés passent.
+
+### CAVA niveau 5 et appuis consommables
+
+CAVA gagne le niveau 5 en **15 sauts et 18,72 s de temps actif** lors du rejeu depuis le niveau 1, avec le réglage de huit processus. Les 63 commandes sont exécutées sous autorité SIC. L’empreinte des commandes, observations et images d’animation jusqu’à la victoire du niveau 4 correspond à la campagne `26cb728e`. PORT, qui partage la recherche de trajets couvrant plusieurs objectifs, reproduit lui aussi son parcours en 77 commandes jusqu’au niveau 4.
+
+La recherche suit la position, les sceaux acquis et les appuis utilisés. Elle prépare un trajet qui reste praticable si un appui marqué disparaît au départ. Les retours confirment si le motif reste visible ou si l’appui est devenu indisponible. SIC suit la silhouette du sprite quand elle recouvre le motif du support et recalcule le trajet sur le terrain observé. Le contrôle TypeScript et les 50 tests ciblés passent.
+
+### BP35 niveau 5 et retour vers une sortie hors champ
+
+BP35 gagne le niveau 5 en **32 commandes et 19,08 s de temps actif** lors du rejeu depuis le niveau 1, avec le réglage de huit processus. Les 148 commandes relèvent de SIC seul. Jusqu’à la victoire du niveau 4, les 116 commandes, observations et images d’animation concordent avec la référence `26cb728e`. BP35 est le seul jeu ayant exécuté cette famille au cours de la campagne des niveaux 1 à 4.
+
+SIC transmet la preuve d’inversion de gravité entre niveaux et relit le terrain à l’arrivée. Il mémorise la sortie quand la caméra suit le détour vers le bas. Il utilise un second inverseur pour reprendre la direction de la sortie après avoir préparé un plafond sous le danger. Le contrôle TypeScript et les 50 tests ciblés passent. Un test vérifie que le plan protège d’abord le sprite lorsqu’une inversion immédiate le ferait traverser un danger.
+
+### GABA niveau 5 et placements alternatifs des charges
+
+GABA gagne le niveau 5 en **106 commandes et 29,62 s de temps actif**, avec le réglage de huit processus. Le rejeu part du niveau 1. Les commandes, observations et images d’animation des 239 premières commandes concordent avec `26cb728e`. Les 345 commandes relèvent de SIC seul. GABA est le seul jeu à avoir exécuté cette famille pendant la campagne des niveaux 1 à 4.
+
+SIC reconstitue la grille et vérifie les compatibilités charge–récepteur apprises aux niveaux précédents. Si la recherche ordinaire échoue, il examine davantage de placements et limite le nombre de positions du porteur essayées pour une même occupation du récepteur. Il peut ainsi comparer les livraisons qui laissent des cellules libres différentes pour les charges suivantes. Le contrôle TypeScript et les 48 tests ciblés passent.
+
+### Arrêts sur budget au niveau 5 et rendez-vous de SIGN
+
+La première campagne `26cb728e` couvre les 99 jeux qui ont un niveau 5. Elle donne 36 victoires, 49 arrêts faute de famille applicable, 7 fins de partie et 7 arrêts sur budget. Dans ces sept derniers cas, la plus grande part des commandes sert à explorer un passage dont le rôle reste incertain.
+
+La comparaison des passages supposés cède la main après 32 commandes lorsque quatre directions sont disponibles. Les trajectoires confirmées et les traversées synchronisées restent admissibles. Dans l’essai où seule cette limite change, chaque jeu termine encore au niveau 4 et signale l’absence de famille applicable au niveau 5.
+
+| Jeu | Comparaisons du passage avant → après | Commandes totales au niveau 5 avant → après |
+| --- | ---: | ---: |
+| DC22 | 196 → 32 | 196 → 112 |
+| ESCT | 376 → 32 | 440 → 176 |
+| FOGW | 508 → 32 | 512 → 116 |
+| SIGN | 233 → 32 | 284 → 163 |
+| SNAR | 348 → 32 | 355 → 112 |
+| SWCH | 494 → 32 | 568 → 183 |
+| TRIA | 189 → 32 | 248 → 128 |
+
+Les sept parcours jusqu’à la victoire du niveau 4 conservent l’empreinte de leurs commandes, observations et animations. CN04 et WA30 retrouvent leur niveau 4 à l’identique. AS66, FITE et THER retrouvent leur niveau 5 à l’identique.
+
+Après la correction du rendez-vous, **SIGN gagne le niveau 5 en 53 commandes et 36,26 s de temps actif** pendant un rejeu complet depuis le niveau 1 avec le réglage de huit processus. Les 194 commandes relèvent de SIC seul. Les 141 premières et leurs retours concordent avec la référence jusqu’au niveau 4. Les observations de deux cycles concordants permettent de viser une pause de la cible mobile après le changement de mode. Les deux activations sont contrôlées par la préparation et le compteur d’acquisitions. Le contrôle TypeScript et les 35 tests ciblés passent.
+
+### SWCH niveau 5 et départ sans carte éclairée
+
+**SWCH gagne le niveau 5 en 48 commandes et 20,03 s de temps actif**, avec le réglage de huit processus. Les 151 commandes du rejeu relèvent de SIC seul. Les 103 commandes, observations et animations jusqu’à la victoire du niveau 4 reproduisent la référence `26cb728e`. SWCH est le seul jeu à avoir exécuté cette famille pendant la campagne des niveaux 1 à 4.
+
+Quand la carte initiale est encore inconnue, SIC peut tester le seul levier d’éclairage adjacent si la réserve et la capacité sont lisibles. Le retour doit confirmer à la fois l’apparition du plan de la salle et la dépense d’une unité. Avant le premier passage, le plan utilise la première recharge accessible pour financer la prochaine reconnaissance. Après l’ouverture du premier passage, il peut ouvrir une porte depuis une salle cartographiée même si la salle suivante est encore sombre. Chaque mouvement, recharge ou ouverture est réconcilié avec la carte et la réserve observées. Le contrôle TypeScript et les 38 tests ciblés passent.
+
+### DC22 niveau 5, diversité des essais et positions du support porté
+
+Après un tour des directions, une comparaison de passages cède la main si la même scène revient ou si un panneau séparé offre d’autres commandes à tester. En mode exploration, SIC fait alterner les commandes encore inconnues et les candidats du panneau. Il compare le terrain et le panneau pour déterminer si l’essai apporte un retour différent. Une variation sur la seule bande d’état ne crée pas un nouveau terrain. Quand un clic produit une translation de forme et de couleur concordantes, SIC garde les deux poses et leur déplacement.
+
+Sur DC22, le premier bouton du panneau est essayé à la **5e commande** du niveau 5 et les **neuf candidats avant la 22e**. Après épuisement de ces comparaisons sur la même scène, SIC évite le second passage consacré aux directions. Le niveau 5 reste à gagner. Le rejeu s’arrête après **72 commandes**, contre 112 sur `b07dd17a`, et conserve les 187 commandes, observations et animations des niveaux 1 à 4. TRIA gagne de nouveau ses quatre premiers niveaux en 63 commandes contre 57 auparavant. Le contrôle TypeScript et les 41 tests ciblés passent.
+
+Dans un essai séparé, la prise modifie la silhouette de la pince. Le clic de transport suivant translate la pince et le support de quatre pixels sans déplacer le curseur. Avec le curseur sur un îlot fixe, la vérification exhaustive des quatre directions dans chaque pose donne **10 poses accessibles, 18 translations et 22 butées**. En ne retenant pour la calibration que les 16 premiers retours et les pixels du rail visibles à ce stade, une seule projection des poses reste compatible. Elle retrouve les 10 poses vérifiées séparément.
+
+La table donne le coin supérieur gauche du support en pixels. Les ouvertures sont évaluées dans la configuration de portes observée pendant cet essai.
+
+| Pose du support | Effet sur les accès |
+| --- | --- |
+| (20, 10) | Relie l’îlot central au palier supérieur. |
+| (16, 10) | Aucun lien entre îlots. |
+| (12, 10) | Aucun lien entre îlots. |
+| (8, 10) | Aucun lien entre îlots. |
+| (8, 14) | Aucun lien entre îlots. |
+| (8, 18) | Aucun lien entre îlots. |
+| (8, 22) | Touche un îlot sans le relier à un autre. |
+| (12, 22) | Aucun lien entre îlots. |
+| (16, 22) | Aucun lien entre îlots. |
+| (20, 22) | Relie le secteur de départ à l’îlot central après ouverture du passage par le panneau. |
+
+Les deux traversées sont ensuite confirmées sur le jeu. Le curseur rejoint l’îlot central en 12 mouvements après l’ouverture du passage, y reste pendant les neuf déplacements du support et rejoint le palier supérieur en neuf mouvements. La dérivation du rail, le placement du support et le choix de l’ouverture ont été testés hors du solveur autonome.
+
+Le rejeu de régression de `161c7c9e` s’arrête à la victoire du niveau 4 pour chacun des 100 jeux. Les 400 niveaux sont gagnés sous autorité SIC seule. Les commandes, observations et animations concordent pour 98 parcours. SELE et TRIA gagnent chacun avec six commandes de plus.
+
+#### Qualification du niveau 5 pour `main`
+
+SIC confirme la prise lorsque la pince et le support se déplacent ensemble et que le curseur reste sur place. Il compare les translations et les butées avec le rail visible, puis utilise la projection lorsque les mesures désignent une seule disposition. Le trajet combine les positions du curseur, les poses du support et les cycles de terrain observés. Un retour animé qui montre la perte de l’appui invalide le changement depuis cet emplacement, même si la dernière image restitue le curseur.
+
+Le rejeu standard depuis le niveau 1 gagne le niveau 5 en **185 commandes et 166,48 s de temps mural**, avec le budget du lot configuré pour huit workers. Les 372 commandes relèvent de SIC seul. Les 187 commandes et retours des niveaux 1 à 4 concordent avec la référence `26cb728e` (empreinte `87e1c51418d91b86058950faeac3bbb2dd173f92191a3def59b435a0d2d72cbe`). La permutation de palette conserve les commandes et les effets géométriques jusqu’à la victoire. Empreinte du rejeu standard complet `58c84f6d809d7558184d9a844e5a1058874644183e7f7bf25e5861ea07918509`.
+
+Le traitement du retour de la 168ᵉ commande du niveau 5 a pris 1,37 s dans le rejeu standard de qualification. Le ralentissement intermittent observé dans les premiers essais ne s’est pas reproduit. Sa cause reste indéterminée. Le contrôle TypeScript et 39 tests ciblés passent.
+
+### TRIA niveau 5, réutilisation partielle des commandes
+
+Le motif comporte sept pièces. SIC reconnaît la grille et les panneaux à partir des retours publics. Il réutilise les déplacements déjà mesurés pour les commandes dont le panneau et la catégorie de pièce concordent, même si d’autres commandes deviennent visibles. Les déplacements candidats sont toujours contrôlés sur les positions occupées et le retour confirme le placement après chaque clic. La borne d’énumération des affectations est appliquée aux permutations par catégorie.
+
+**TRIA gagne le niveau 5 en 23 clics et 14,20 s de temps mural** lors du rejeu complet avec le réglage de huit processus. Les 86 commandes relèvent de SIC seul. Les 63 commandes et retours jusqu’au niveau 4 reproduisent le rejeu de référence après l’exploration alternée. Le contrôle TypeScript et les 97 tests ciblés passent.
+
+### FOGW niveau 5, réceptions successives
+
+FOGW gagne le niveau 5 en **38 commandes et 15,33 s de temps mural** lors du rejeu complet avec le réglage de huit processus. Les 124 commandes relèvent de SIC seul. Les 86 premières commandes, observations et animations reproduisent la référence jusqu’au niveau 4. FOGW est le seul jeu à avoir exécuté la famille de réception pendant la campagne des niveaux 1 à 4.
+
+SIC réutilise les déplacements mesurés et le marquage des supports déjà observés. Deux badges distincts et deux supports actifs ouvrent une séquence de réceptions. Le premier essai de traversée échoue à la 2e commande. SIC reconnaît le retour à la scène initiale et évite la même case à cet instant. À la 20e commande, un badge change de couleurs en conservant sa forme alors que le porteur occupe un support. Son apparence reste identique après le départ du porteur à la commande suivante. SIC rejoint alors le second support et obtient la victoire officielle.
+
+### SNAR niveau 5, éjecteurs, porte et patrouilles
+
+SNAR gagne le niveau 5 en **35 commandes et 13,32 s de temps mural** lors du rejeu complet avec le réglage de huit processus. Les 134 commandes relèvent de SIC seul. Les 99 premières commandes, observations et animations reproduisent la référence jusqu’au niveau 4. SNAR est le seul jeu à avoir exécuté cette famille de navigation pendant la campagne des niveaux 1 à 4.
+
+SIC distingue les cadres fléchés des obstacles déjà connus et mesure l’état de la porte. Il observe son ouverture après une impulsion et confirme deux points d’arrivée à partir des images de déplacement sur les cadres. Il suit séparément les patrouilles et les obstacles sur rails. Lorsqu’une séquence récente de positions a déjà été suivie d’une même position, cette dernière sert à évaluer la prochaine traversée. SIC se retire avant l’arrivée d’une patrouille, attend à côté du passage et y revient après son départ.
+
+### ESCT niveau 5, interception et ouverture d’une autre route
+
+ESCT gagne le niveau 5 en **17 commandes et 5,60 s de temps mural** lors d’un rejeu complet avec le réglage de huit processus. Les **93 commandes** relèvent de SIC seul. Les 76 commandes, observations et animations des niveaux 1 à 4 reproduisent l’empreinte du socle `403ee231`. Le rejeu s’arrête à la victoire du niveau 5. Empreinte `dbbc34afa6e7e28d81068cb69b5ddd15ca9b2441223b92d576ccf0edfc4cfaa2`.
+
+Quand le prochain mouvement annoncé éloigne le convoyé de la sortie et que la pression visible a augmenté depuis le niveau précédent, SIC cherche un point de rencontre. À la 5e commande, le convoyé reste en place et le rival n’atteint pas sa case. Le mur est encore masqué et redevient visible quand le curseur quitte la case. SIC ouvre un passage qui évite les cases déjà traversées, attend l’indice du convoyé vers cette ouverture, puis libère le convoyé et ferme le passage derrière lui. Chaque commande est réconciliée avec le retour avant de poursuivre.
+
+### SU15 niveau 5, fabrication sous la pression de plusieurs mobiles
+
+SU15 gagne le niveau 5 en **20 clics et 11,71 s de temps mural** lors du rejeu complet réglé pour huit processus. Les **77 commandes** relèvent de SIC seul. Les 57 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `05a93fbf`. Le rejeu s’arrête à la victoire du niveau 5. Empreinte `30090798de9499077f83cab074a931ce29ce51ded7747627db160b380e7313e2`. La permutation de palette reproduit la victoire, les 77 commandes et les mesures de changement des images comparées.
+
+SIC réutilise les recettes et les déplacements mesurés au niveau précédent pour estimer les fusions nécessaires et prévoir la menace des deux mobiles. Il fabrique deux pièces intermédiaires à partir du stock déjà assez avancé et sélectionne 13 clics de protection. Il réévalue les deux positions après chaque clic, y compris quand l’écart attendu est contredit. Lors du rapprochement, le retour confirme le déplacement utile alors que du stock excédentaire change aussi. Les cartes de situation montrent les deux mobiles et la matière réservée.
+
+### R11L niveau 5, construction des signatures par contact
+
+R11L gagne le niveau 5 en **19 clics et 7,48 s de temps mural** lors du rejeu complet réglé pour huit processus. Les **71 commandes** relèvent de SIC seul. Les 52 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `2401953e`. Le rejeu s’arrête à la victoire du niveau 5. Empreinte `6a3565579a681a88b9cd59a56b276bdd31c7f090f2265c2b61b5cba19c0b965a`. La permutation de palette reproduit les 71 commandes et les mesures de changement des images comparées.
+
+À partir des couleurs et de leur emplacement dans chaque cible, SIC trouve les pièces qui complètent les signatures des balises. Il déplace les ancres dont la moyenne amène la balise au contact. Les clics 1, 4, 9 et 14 ajoutent chacun une partie de la signature. La réconciliation vérifie les couleurs acquises, celles qui devaient rester et la position de l’autre balise. Les cartes de situation montrent la pièce à atteindre, la balise et la cible finale.
+
+### FT09 niveau 5, effets groupés et contraintes de couleur
+
+FT09 gagne le niveau 5 en **21 clics et 6,21 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 62 commandes relèvent de SIC seul. Les 41 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `26a8acdf`. La permutation de palette reproduit la victoire, les 62 commandes et les mesures de changement des images comparées. Empreinte `11113beda5d9a15645af0bdd565fda610465c97c646bd54813e7aedbdd91da5d`.
+
+Deux clics mesurent un effet groupé et un effet local. Le premier change cinq cellules, dont la cellule cliquée. Le solveur combine les effets sur toutes les cellules contraintes, y compris celles déjà correctes. La cellule sans contrainte peut changer tant que les fenêtres restent intactes. Le groupe suivant confirme un effet réduit à quatre cellules devant une fenêtre protégée. Une série continue de 16 clics est réconciliée étape par étape. Le réparateur de symétrie reconnaît les fenêtres protégées et évite le clic sans effet observé dans le premier rejeu complet du correctif. Les rejeux de SYME et DNOI retrouvent leurs empreintes de référence jusqu’à la victoire du niveau 4.
+
+### MEMO niveau 5, correspondance entre tailles
+
+MEMO gagne le niveau 5 en **10 clics et 4,97 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 50 commandes relèvent de SIC seul. Les 40 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `100b580f`. La permutation de palette reproduit la victoire, les 50 commandes et les mesures de changement des images comparées. Empreinte `9ec6ec4b8ecf4b36a44de87388afe88d0cf4a910adc0f66293af69ffbc8c96ef`.
+
+SIC vérifie que les fragments du premier motif agrandi s’alignent sur la même grille et que chaque bloc de pixels est complet. Il compare ensuite le masque réduit en conservant les trous. Après le premier clic sur le seul motif visible, les clics 2 et 3 vérifient le changement de taille avec un puis plusieurs motifs de référence. Les sept derniers choix réutilisent des correspondances confirmées. Au huitième choix, deux règles portant sur la scène précédente concordent après normalisation, alors que l’ensemble des motifs plus anciens laisse plusieurs candidats.
+
+### MIND niveau 5, comparaison bornée de cinq valeurs
+
+MIND gagne le niveau 5 en **18 commandes et 8,94 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 69 commandes relèvent de SIC seul. Les 51 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `6eb8bae3`. Empreinte `92f4417e31aab2a43dd3f53313cd204c6a36b2f19d5f231a9643c8b80bb47a26`. La permutation de palette reproduit la victoire, les 69 commandes et les mesures de changement des images comparées.
+
+SIC compare 52 formes d’essai distinctes au premier choix. L’évaluation regroupe les codes dont les valeurs encore interchangeables produisent le même retour, en comptant tous les codes représentés. Un essai est écarté dès que son pire retour dépasse celui du meilleur essai déjà évalué. Le test à cinq positions retrouve le score minimax et le choix exhaustifs dans la limite d’évaluation précédente. Les deux premiers retours réduisent les 3 125 hypothèses à 10 puis à une seule. SIC conserve un essai pendant la saisie tant que le préfixe constaté, la palette et les révélations concordent.
+
+### LOGI niveau 5, sorties simultanées
+
+LOGI gagne le niveau 5 en **5 clics et 3,49 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 21 commandes relèvent de SIC seul. Les 16 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `d80628f9`. Empreinte `6e4d0a4230d616292d2780c67c6e9ca6679990159e7da7249ac77be4f6a0617a`. La permutation de palette reproduit les 21 commandes et les mesures de changement des images comparées.
+
+SIC repère trois portes au même étage et rattache chacune à une lampe. Il observe la propagation depuis les cinq interrupteurs et élimine les connexions et les tables de vérité incompatibles. Le choix évalue les trois sorties sur le même réglage des entrées partagées. Le cinquième clic confirme l’activation simultanée et la victoire. Plusieurs modèles des portes restent compatibles avec les observations. Les cartes montrent les trois lampes et les portes observées.
+
+### VALV niveau 5, branche d’évacuation et jauge de stockage
+
+VALV gagne le niveau 5 en **13 clics et 8,80 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 42 commandes relèvent de SIC seul. Les 29 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `903ce856`. Empreinte `b5fe2436fe80342609a0504b8665b55cc3bd3ef229c8df1590b8d4e50fe4a2dc`. La permutation de palette reproduit les 42 commandes et les mesures de changement des images comparées.
+
+SIC rattache la grille à une vanne et ferme cette branche en vérifiant la préservation du stock et des bassins. Il ouvre ensuite les deux arrivées restantes avant de charger la tour. Aux clics 5, 7, 10 et 12, le stock diminue, la hauteur visible de la tour reste stable et la branche demeure isolée. Les images du 13e clic confirment la libération vers les quatre bassins et la victoire. La carte de situation montre la grille, la commande et les champs dont SIC vérifie l’état.
+
+### TU93 niveau 5, prévision de quatre patrouilles
+
+TU93 gagne le niveau 5 en **29 commandes et 12,67 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 112 commandes relèvent de SIC seul. Les 83 commandes, observations et animations des niveaux 1 à 4 reproduisent les empreintes du socle `bf2defb8`. Empreinte `bd17a810e7e541510cdee18178c850915382d3ec28db0fed527cdf367c3a9588`. La permutation de palette reproduit les 112 commandes et les mesures de changement des images comparées.
+
+Le premier déplacement `P05` confirme l’ordre des mouvements et départage les sens compatibles avec les marques visibles. Les 28 déplacements `P07` utilisent la position et le sens des quatre patrouilles pour chercher un passage. SIC vérifie l’occupation avant et après le prochain mouvement, y compris près de la sortie. Quand deux sprites seulement sont visibles, le modèle conserve quatre trajectoires compatibles avec le retour. Les cartes montrent les positions observées et les positions prévues au tour suivant.
+
+### TICT niveau 5, transfert sur des grilles encore incomplètes
+
+TICT gagne le niveau 5 en **12 clics et 3,74 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 41 commandes relèvent de SIC seul. Les 22 commandes, observations et animations des niveaux 1 à 3 reproduisent les empreintes du socle `648ebe81`. Le niveau 4 passe de 13 à 7 clics. La permutation de palette reproduit les 41 commandes et les mesures de changement des images comparées. Empreinte `e611a40fdc91a5440f32a48370760eef37ce5c3a0268e37b774fe21cca2a6dc7`.
+
+SIC réutilise la signature connue des cases libres sur une grille de mêmes dimensions, même quand la taille des cases change et que les marques restent à observer. Le premier retour doit confirmer la marque déposée et la réponse. Une grille remplie peut devenir inactive pendant le même retour qui place les deux marques. SIC vérifie alors si une seule grille indépendante avec des cases libres est visible et y reporte le besoin de compléter une ligne.
+
+### LP85 niveau 5, permutation le long d’une chaîne de cases
+
+LP85 gagne le niveau 5 en **18 clics et 3,88 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 74 commandes relèvent de SIC seul. Les 56 commandes, observations et animations des quatre premiers niveaux reproduisent les empreintes du socle `e390f442`. La permutation de palette reproduit les 74 commandes et les mesures de changement des images comparées. Empreinte `fc8681ef397db75c1f3421e4b61bc60df2ec40ad4104420f9c63ed8c9b5ef6bb`.
+
+SIC mesure le pas des cases et vérifie que leurs voisines forment une seule chaîne sans embranchement. Il compare les deux sens de rotation le long de cette chaîne, avec retour d’une extrémité à l’autre, au retour public du clic. Sur LP85, cette hypothèse explique la permutation des 21 cases que les contours précédents ne couvraient pas. Deux clics `P05` mesurent les deux effets utiles. Une série de 16 clics `P07` atteint les deux cibles, avec vérification du plateau après chaque clic.
+
+### VC33 niveau 5, permutation de marqueurs et limite de réception
+
+VC33 gagne le niveau 5 en **65 clics et 18,03 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 123 commandes relèvent de SIC seul. Les 58 commandes, observations et animations des quatre premiers niveaux reproduisent l’empreinte du socle `c06d30a9`. La permutation de palette reproduit les 123 commandes et les mesures de changement des images comparées. Empreinte `ea73a76ab49037c9826b0e4a3bb971446cb03acec6279c557e8c9b798a8d5449`.
+
+SIC suit deux marqueurs distincts et les quantités des quatre compartiments. Il confirme trois portes en `P05`, dont une qui échange les deux marqueurs en conservant les quantités. Les transferts `P07` sont groupés avant la prochaine porte et chaque retour est vérifié. Trois refus, dont deux avec des compartiments donneurs différents, étayent une limite de réception de 39 pixels pour le compartiment et le marqueur concernés. SIC conserve les autres transferts, déplace le marqueur dans le compartiment extérieur et termine en alignant les deux hauteurs.
+
+### VOIS niveau 5, deux pièces pour compléter les voisinages
+
+VOIS gagne le niveau 5 en **37 commandes et 10,17 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 126 commandes relèvent de SIC seul. Les 89 commandes, observations et animations des quatre premiers niveaux reproduisent l’empreinte du socle `0346c33c`. La permutation de palette reproduit les 126 commandes et les mesures de changement des images comparées. Empreinte `f6a8a07f9c16c89da97eb39bd320afad78165cb73d9b1f0839cca8c587edd668`.
+
+La référence montre quatre positions et le plateau contient six pièces. SIC compare les combinaisons de deux positions adjacentes aux relations observées précédemment entre directions occupées et couleurs. Il retient une position à gauche du coin supérieur gauche et une autre au-dessus du coin supérieur droit. Il vérifie qu’un ordre de placement conserve un accès à toutes les destinations. Douze commandes relèvent de `P05` et 25 de `P07`. Les cartes montrent les deux positions d’appui et distinguent les voisins dont la couleur devrait changer de ceux dont un retour confirme le changement.
+
+### HOLE niveau 5, couleurs des contours et des cavités
+
+HOLE gagne le niveau 5 en **19 clics et 14,62 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 49 commandes relèvent de SIC seul. Les 30 commandes, observations et animations des quatre premiers niveaux reproduisent l’empreinte du socle `0e23b814`. La permutation de palette reproduit les 49 commandes et les mesures de changement des images comparées. Empreinte `0a851b0541f517d62f432073eb3c65fbb169e23ef321ba1ec789642949724f8f`.
+
+SIC distingue le fond visible à l’intérieur d’un symbole de la légende du symbole lui-même. Il identifie le côté légende par la taille des exemples correspondants et associe chaque contour au nombre de cavités observées. Lorsque les cavités d’un exemple portent toutes la même teinte disponible dans la palette, SIC propose cette teinte pour une cavité correspondante dont le support est visible en entier. Il vérifie la peinture et le reste du champ après chaque clic. Sur HOLE, le jeu confirme la victoire après six cavités repeintes.
+
+### SMLP niveau 5, attente sur place et admission périodique
+
+SMLP gagne le niveau 5 en **6 commandes et 7,56 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 50 commandes relèvent de SIC seul. Les 44 commandes, observations et animations des quatre premiers niveaux reproduisent l’empreinte du socle `f5fea956`. La permutation de palette reproduit les 50 commandes et les mesures de changement des images comparées. Empreinte `52c782d45a6883a6ccc361cd0ef6dc2cdb56b06418fd020d00d50e3e62da0672`.
+
+Le premier lancement produit 124 images. SIC y mesure trois images par battement, une pause de deux battements après l’entrée sur un ralentisseur et deux sas de périodes quatre et six. Il recalcule chaque date d’arrivée en appliquant les pauses après l’entrée et les fenêtres des sas avant l’entrée. Deux trajectoires restent partiellement masquées. Les portions visibles des quatre trajets conservent trois ordres de déplacement compatibles. Après quatre clics, dont un qui bascule deux portes, les trois ordres prédisent une arrivée commune au battement 26. Le dernier lancement confirme la victoire en 87 images.
+
+### TN36 niveau 5, orientation et couleur dans le programme
+
+TN36 gagne le niveau 5 en **21 commandes et 6,71 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 69 commandes relèvent de SIC seul. Les 48 commandes, observations et animations des quatre premiers niveaux reproduisent l’empreinte du socle `8bcde044`. La permutation de palette reproduit les 69 commandes et les mesures de changement des images comparées. Empreinte `73ea781e96f2792d744cf6d041afd22b148744d7942c6ec454c3c216e3adb4c5`.
+
+SIC déduit du réceptacle la position, le format 8 × 8, la rotation d’un quart de tour et la couleur attendue. Il suit les surbrillances de cinq démonstrations et sépare les effets de descente, de taille, de rotation et de couleur. Quinze clics modifient le programme, dont quatorze en série continue avec le lancement final. La suite retenue tourne le mobile, le fait descendre trois fois, l’agrandit puis le recolore. Le changement de couleur mesuré sur le démonstrateur est confirmé sur le mobile réel par la victoire après une seule exécution.
+
+### DAME niveau 5, prises avec arrivée à distance
+
+DAME gagne le niveau 5 en **11 clics et 1,80 s de temps mural** lors du rejeu complet réglé pour huit processus. Les 51 commandes relèvent de SIC seul. Les 40 commandes, observations et animations des quatre premiers niveaux reproduisent l’empreinte du socle `c92a7de9`. La permutation de palette reproduit les 51 commandes et les mesures de changement des images comparées. Empreinte `17bbfaa17897d8ecce28916623d20a830e3a024c73b51ce93ea70a26ee319e45`.
+
+SIC distingue les deux anneaux de terrain des huit pions. Il combine la règle de prise apprise avec une hypothèse de passage entre les deux anneaux. Le quatrième clic `P05` vérifie la disparition de la victime, le déplacement du pion vers l’anneau distant et la préservation des autres pièces. SIC reprend alors à la sortie confirmée et exécute les sept clics restants en série continue. La carte montre séparément le pion, la victime, la case cliquée et la sortie.
+
+### LIFE niveau 5, production de porteurs par les sources
+
+Une source candidate est un motif à cadre répété distinct des réceptacles. SIC vérifie à chaque activation que deux porteurs apparaissent à proximité, que les réceptacles restent intacts et que le reste de la matière suivie ne change pas. Le calibre de 5 × 5 observé précédemment permet de retrouver les porteurs dont le bord se fond dans le décor. SIC traite les trois sources successivement et réutilise la correspondance entre noyaux, orientations et cadres pour les six dépôts.
+
+Le niveau 5 est gagné en **33 commandes et 16,38 s** dans le lot configuré pour huit workers. Les 106 commandes relèvent de SIC seul. Les 73 commandes et retours des niveaux 1 à 4 concordent avec `270a909b`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `052e4b965ceb43b44078c1387a90af1cc723d5118955fcdb5db9c44e97c50ac4`.
+
+### GIGO niveau 5, salles fragmentées par leurs passages
+
+Quand les composants connexes ne suffisent pas à identifier la disposition, SIC réunit les fragments de même couleur et vérifie les bords des cadres ainsi que leur emboîtement. Deux salles ont ainsi plusieurs fragments de mur séparés par des ouvertures. Les sept salles mobiles réutilisent la recherche de liaison par placements successifs et la vérification des murs après chaque commande.
+
+Le niveau 5 est gagné en **19 commandes et 17,85 s** dans le lot configuré pour huit workers. Les 54 commandes relèvent de SIC seul. Les 35 commandes et retours des niveaux 1 à 4 concordent avec `03079749`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `9680b951842ea9530b2a8037cc4f29007cbf2af2d1c5c46807f6ec9216be61d0`.
+
+### KEYD niveau 5, capacité de l’inventaire et réutilisation d’une clé
+
+SIC reconnaît deux emplacements vides à partir du cadre observé et associe une clé à deux découpes compatibles. Le premier franchissement teste la conservation de la clé à la commande 9. La recharge rend 18 unités au lieu des 22 prévues, et SIC recalcule la suite. La seconde clé occupe la place libre à la commande 18 et disparaît au verrou à la commande 21. La commande suivante réutilise la première clé avec la preuve du franchissement précédent. Aucun dépôt n’est nécessaire sur ce trajet.
+
+Le niveau 5 est gagné en **26 commandes et 9,04 s** dans le lot configuré pour huit workers. Les 122 commandes relèvent de SIC seul. Les 96 commandes et retours des niveaux 1 à 4 concordent avec `4f58377e`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `4c5b4f63ffe264660475813478f879323b95a401d6aed3a5e40891154782de24`.
+
+### ISOS niveau 5, construire avec une pièce ensuite masquée
+
+Quand la comparaison plane échoue, SIC exploite les trois déplacements de faces dont la somme projetée est nulle. Il distingue la position logique de chaque pièce, projette les faces par profondeur et ne choisit que des pixels dont le port appartient encore à la pièce visée. La solution compatible utilise sept pièces et deux origines projetées identiques. La quatrième pièce fournit un port au cinquième clic, puis la dernière passe devant elle. Les six retours intermédiaires confirment la projection colorée et le septième valide le niveau.
+
+Le niveau 5 est gagné en **7 clics et 5,76 s** dans le lot configuré pour huit workers. Les 24 commandes relèvent de SIC seul. Les 17 commandes et retours des niveaux 1 à 4 concordent avec `5db3a887`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `ed3c7c728839d5c496d4d0172a75a127e77218c113378e0d7997ee749dd1f695`.
+
+### S5I5 niveau 5, dégagement temporaire et restauration d’un alignement
+
+SIC reconnaît une cible déjà occupée et reconstitue la barre visible de part et d’autre de la marque. Le deuxième marqueur se déplace selon deux axes, dont l’un est transmis par une barre parente. La recherche vérifie les collisions et l’alignement conjoint des cibles sur toute la suite de commandes. La carte de décision montre l’alignement temporairement défait à la commande 6 et restauré à la commande 28.
+
+Le niveau 5 est gagné en **28 clics et 8,91 s** dans le lot configuré pour huit workers. Les 146 commandes relèvent de SIC seul. Les 118 commandes et retours des niveaux 1 à 4 concordent avec `d68d768a`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `1f465776d7f30821752d18bacda8980a1c6b1870a4586918dd1ae07240c50250`.
+
+### CLRS niveau 5, distinguer la sélection du blanc composé
+
+SIC traite les pixels masqués par le cadre comme inconnus dans la projection du panneau, puis vérifie les masques révélés par les déplacements. Il suit la position du point de sélection pour l’écarter de la comparaison des couleurs composées. Il confirme successivement le vert et le bleu, puis utilise deux translations pour relire le panneau rouge tronqué. Le dernier quart de tour complète le magenta et les six pixels blancs qui demandent les trois couches.
+
+Le niveau 5 est gagné en **14 commandes et 6,34 s** dans le lot configuré pour huit workers. Les 60 commandes relèvent de SIC seul. Les 46 commandes et retours des niveaux 1 à 4 concordent avec `4baeadf6`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `58f0269e9d6c7c13e14262ee77314c80c6b95e1f85fdc53a277732649f27068a`.
+
+### SELE niveau 5, retrouver la cible et suivre les fils des relais
+
+SIC retrouve la cible à partir de son motif intérieur déjà observé, même quand le fil touche l’extérieur de son enveloppe. Il compare les chemins de pixels visibles pour associer les cinq contrôleurs aux relais, puis distingue un vrai changement de sélection d’un changement de couleur du fil. Deux relais sont déjà correctement orientés. Le premier est sélectionné une fois pour confirmer sa phase, le second est conservé directement. Les trois autres demandent chacun trois crans, avant le lancement à travers les cinq relais.
+
+Le niveau 5 est gagné en **14 commandes et 5,12 s** dans le lot configuré pour huit workers. Les 96 commandes relèvent de SIC seul. Les 82 commandes et retours des niveaux 1 à 4 concordent avec `9ed8bb61`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `89574335060867d64dc7a686b446b5f5a1b832286ad4147d6abfe0bcf9e8e63a`.
+
+### CASC niveau 5, distribuer une arrivée depuis une jonction occupée
+
+SIC distingue la première jonction, ouverte par deux arrivées simultanées, de la seconde qui reçoit une seule arrivée. Il déduit que le relais doit occuper la seconde jonction pour distribuer la réaction sur deux branches. Deux sélections changent le focus sans déplacer les bloqueurs. Quatre déplacements placent le relais, puis trois rafales atteignent les trois cibles. Dans l’essai comparatif, le domino précédant la cible est s’amorce à la deuxième rafale avec le relais. Sans relais, il reste inactif et la troisième rafale réinitialise le niveau.
+
+Le niveau 5 est gagné en **9 commandes et 5,38 s** dans le lot configuré pour huit workers. Les 71 commandes relèvent de SIC seul. Les 62 commandes et retours des niveaux 1 à 4 concordent avec `6a08c97f`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `0e9043486b0acc17465e2f417b39210b046fc8a6b7f7a6364bf2eafc99233d8a`.
+
+### LKEY niveau 5, choisir les profils utiles et confirmer le complément de hauteur
+
+SIC distingue les deux serrures des supports centraux qui servent au passage et aux outils. Il compare les hauteurs nécessaires et concentre la recherche sur les deux profils qui peuvent les fournir. Les motifs des outils permettent de réutiliser le miroir et le décalage vérifiés sur quatre dents, puis de confirmer leur effet sur cinq dents. Un troisième essai confirme le complément des hauteurs. La première serrure reste ouverte quand le profil qui l’a ouverte change de rangée.
+
+Le niveau 5 est gagné en **24 commandes et 9,28 s** dans le lot configuré pour huit workers. Les trois essais relèvent de `P05` et les 21 autres commandes de `P02`. Les 87 commandes relèvent de SIC seul. Les 63 commandes et retours des niveaux 1 à 4 concordent avec `9ffa8818`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `a3b55cf61222cf911f0b1d440a00aa7886b948398b7a87202e7b9a3e10f9117e`.
+
+### KATA niveau 5, inventorier la réserve sous le cadre
+
+SIC retrouve les deux pièces sous le cadre lorsque la réserve latérale couvre seulement une partie de la surface à remplir. Les quatre pièces mobiles couvrent exactement les vingt cases libres. Le solveur compare deux partitions atteignables par les commandes déjà vérifiées et conserve un emplacement pour la barre. Un essai séparé montre que la rotation est refusée à la hauteur de départ de la pièce du bas. Une montée d’une case laisse la place à la troisième ligne du masque tourné.
+
+Le niveau 5 est gagné en **34 commandes et 8,75 s** dans le lot configuré pour huit workers. Les 103 commandes relèvent de SIC seul. Les 69 commandes et retours des niveaux 1 à 4 concordent avec `23275f47`. La permutation de palette reproduit les commandes et les retours comparés sur les cinq niveaux. Empreinte `b18fe017024893cd258964f1077f0e7e5fe41f4d0f446792b6f228b9739f7680`.
+
+### LS20 niveau 5, anticiper le déplacement de la station de rotation
+
+SIC retrouve le motif de la station déjà appris et observe deux cycles de quatre déplacements sur trois cases. Le modèle distingue les deux passages par la case médiane. Il compose le cycle avec les trajets forcés, les changements de forme et de couleur, ainsi que les réserves. SIC vérifie la phase après chaque déplacement en série. Aux commandes 36 et 37, la rotation du motif confirme le contact alors que la station est masquée par la pièce.
+
+Le niveau 5 est gagné en **48 commandes et 13,28 s** lors du rejeu complet. Les 192 commandes relèvent de SIC seul. Les 144 premières commandes et retours concordent avec la référence. La permutation de palette conserve les commandes et effets géométriques des cinq niveaux. LS19 reproduit ses 173 commandes et retours jusqu’à la victoire du niveau 5. Empreinte du rejeu LS20 `8e87218811f5398f19da154312cc56e3f08f2eb0fc3565bdc516e45814b2790a`.
+
+### SK48 niveau 5, assembler un ordre avec des cubes interchangeables
+
+SIC conserve les six positions des cubes et lit le motif rouge–bleu–rouge avec ses deux occurrences du rouge. Il transfère les mouvements mesurés de la tige et distingue une poussée, une traversée et un blocage de la tige entière par le carré plein. Le séparateur reste lisible lorsque la jauge se vide. Le modèle retrouve l’état géométrique observé pour les 172 retours qui précèdent la victoire dans un rejeu indépendant.
+
+Le niveau 5 est gagné en **33 commandes et 8,40 s** en rejeu SIC seul, avec deux séries vérifiées de 16 commandes. Les 151 commandes des cinq niveaux relèvent de SIC. Les 118 premières commandes et leurs retours concordent avec la référence `d7e35bfb03ea55e703ef46d5ebfd84f077309fae125e5dff949851cc460460b8`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et 82 tests ciblés passent. Empreinte du rejeu complet `84ce53eb311113316065e29e8e82d6254b8f992eec64f5de3b1cd066f459192d`.
+
+### RSWP niveau 5, réserver les caisses pendant le refroidissement
+
+SIC réutilise les grilles des panneaux et le contrôle de transport du niveau précédent. Il lit les panneaux dont aucune matière n’est encore sélectionnée, compte les caisses dans leurs emplacements et compose les travaux à partir des stocks présents au début du tour. Une transformation conserve sa place, une livraison ajoute un emplacement occupé et un four chaud ne brûle aucune caisse. Après chaque application, SIC compare les quantités, la salle de chaque ouvrier et la disponibilité de chaque four.
+
+Le niveau 5 est gagné en **30 commandes, dont six tours, et 17,06 s**. Les 60 commandes relèvent de SIC seul. Les 30 commandes et retours des niveaux 1 à 4 concordent avec la référence `565788ba4d9be48b86e7a6c9e4174e3595a3e1bf778c926b2d71d44bf9252d35`. La permutation de palette reproduit les commandes et effets géométriques. Le contrôle TypeScript et 69 tests ciblés passent. Empreinte du rejeu complet `4b122ce71cbb1ab1aa480931f1af3def7036062e3fa5d01bdeb27ab6dcc56da5`.
+
+### PRTL niveau 5, maintenir chaque ouverture au moment utile
+
+SIC associe les commandes de portail déjà vérifiées à l’ouverture au sol et à l’ouverture murale. Il reconnaît le cube porté par la marque au centre du sprite. Le personnage presse la première plaque en gardant le cube, puis les deux portails sont placés pendant que le volet permet le tir. Le retour confirme que la paire reste visible après fermeture du volet. De l’autre côté, SIC attend l’atterrissage et dépose le cube sur la plaque de sortie. Il vérifie que le cube et le passage ouvert restent en place pendant le départ du personnage.
+
+Le niveau 5 est gagné en **19 commandes et 10,03 s**. Les 63 commandes relèvent de SIC seul. Les 44 commandes et retours des niveaux 1 à 4 concordent avec la référence `5af8e587dcf4fa87ec52b0f35ce03125540f6297c0254641724d0f8c53f22cfd`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et les 28 tests ciblés passent. Empreinte du rejeu complet `5c5da30661831e7ffa91a1fe020913e76d19c4f11441d4bc109a8b9e9316dda0`.
+
+### TEQU niveau 5, reconnaître un appui étroit et garder la poutre fantôme en vue
+
+SIC reconstitue l’appui central d’une cellule en associant le marqueur à sa bordure. Le fond entre les cases de stock sert de référence pour compter les unités, y compris quand une case est à moitié pleine. Si le contour de la poutre fantôme rejoint une barre de même couleur, la largeur choisie et le périmètre visible permettent de retrouver sa position. Le plan relie les deux fondations et atteint la cible avec huit poutres. Chaque pose confirme la hauteur et la consommation d’une unité.
+
+Le niveau 5 est gagné en **15 commandes et 6,04 s**. Les 82 commandes relèvent de SIC seul. Les 67 commandes et retours des niveaux 1 à 4 concordent avec la référence `46ebc530f70601b01970450d10aa38fe1dc8825e4a49307867b2d2a83ee1ab8c`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et les 12 tests ciblés passent. Empreinte du rejeu complet `55479d4b1712d69a9b53d5344138b2c6dd3edf0b7d78e0c03630a1be4e78cbac`.
+
+### SB26 niveau 5, réutiliser la même définition à deux emplacements
+
+SIC conserve séparément le nombre de jetons physiques et la longueur de la séquence développée. Les deux jetons d’appel occupent chacun un emplacement, puis développent la même définition de trois valeurs. La définition est remplie une seule fois et son contenu est revérifié à chaque occurrence. Une référence circulaire interromprait le développement.
+
+Le niveau 5 est gagné en **17 commandes et 9,05 s**. Les 71 commandes relèvent de SIC seul. Les 54 commandes et retours des niveaux 1 à 4 concordent avec la référence `14dd5cc328147b2b0bdf13b2d7ee26d419c590cb847d28403d883b5bc6db8dbe`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et les 10 tests ciblés passent. Empreinte du rejeu complet `2b4fbd9abf98a36cb76087f2381110c7ce59f9879525a5503aa22a1b3f2d868a`.
+
+### SERI niveau 5, retrouver le cadre et combiner deux rythmes
+
+Quand un marqueur touche le cadre de même couleur, SIC vérifie le périmètre directement dans le retour. La carte manquante reste au quatrième rang. La règle des barres revient toutes les trois cartes et celle du marqueur toutes les deux. Une seule proposition satisfait les deux rythmes sur la ligne entière. Le retour confirme la carte et préserve celles déjà remplies.
+
+Le niveau 5 est gagné en **4 clics et 1,64 s**. Les 20 commandes relèvent de SIC seul. Les 16 commandes et retours des niveaux 1 à 4 concordent avec la référence `a58316949bc07b7ba831f456eb9b3fdf2a5c39afaf944fe61cb7fdf49e866302`. La permutation de palette conserve les commandes et les effets géométriques. Le contrôle TypeScript et 22 tests ciblés passent. Empreinte du rejeu complet `2cea533e9779d07a0d14e30da3c8b1e5ca0600cbd7d97689959acfc4bfe7271b`.
+
+### PIPE niveau 5, proportionner le budget de rotation à la grille
+
+SIC soumet les 25 tuiles au solveur de raccords. La recherche impose la réciprocité des ouvertures, la connexité et l’absence de cycle. Le budget des rotations est calculé à partir du nombre de tuiles, et la recherche s’arrête sur sa limite de nœuds ou l’échéance du niveau. Après chaque clic, SIC vérifie la rotation et la stabilité des autres tuiles avant de poursuivre la série.
+
+Le niveau 5 est gagné en **19 clics et 7,25 s**, avec 13 tuiles réorientées. Les 60 commandes relèvent de SIC seul. Les 41 commandes et retours des niveaux 1 à 4 concordent avec la référence `f9fb4cceadbcee9c4319fa851699f515632b75dfaf99bc7e5c22f8ef8cd52299`. La permutation de palette reproduit les commandes et effets géométriques. Le contrôle TypeScript et les 408 tests ciblés passent. Empreinte du rejeu complet `ef7d73a271a90abe507c0e288ed33e6b157cd32530dc845e36eba5fb990b6b6a`.
+
+### AR25 niveau 5, composer deux axes de réflexion
+
+SIC réutilise le pas de la grille et les déplacements mesurés au niveau précédent. Les bandes perpendiculaires et leur marqueur permettent de distinguer les deux axes de la pièce. Le plan calcule les images selon chaque axe et leur composition, puis cherche un déplacement qui recouvre les cases cibles visibles. Un changement de focus et le premier mouvement dans une direction sont contrôlés isolément. Chaque retour d'une série continue est comparé à la projection. Une nouvelle case cible compatible avec une occultation antérieure interrompt la série pour réévaluer le placement.
+
+Le niveau 5 est gagné en **28 commandes et 5,91 s** dans le rejeu configuré pour huit workers. Quatre séries continues de 3, 4, 9 et 6 commandes suivent les mesures. Les 118 commandes relèvent de SIC seul. Les 90 commandes et retours des niveaux 1 à 4 concordent avec `392e28c0`. La permutation de palette reproduit le trajet et les effets géométriques. En SIC Fallback, avec `sic_reflected_placement` retirée, la carte SRC de coordination du mouvement pilote les 28 commandes du niveau 5 et reproduit l'empreinte complète `66bf9418598aa609e79b900fd8c77436d16dcbee64db29ac471f8ef099087cbd`. Le contrôle TypeScript et les 16 tests ciblés passent.
+
+### STCK niveau 5, projeter la réponse d’une pile adverse sur un terrain incertain
+
+SIC distingue deux cases intérieures au motif répété du bord du plateau et des emplacements encore masqués. Il projette le programme visible de la pile adverse après celui de la pile contrôlée. Pour les cases marquées, il compare une hypothèse de blocage à une hypothèse de disparition de la pile qui entre. Il écarte les programmes qui exposent la pile contrôlée dans l’une ou l’autre hypothèse. Les sprites de la pile contrôlée, de la pile adverse et des cases sont présentés avec le motif de la décision.
+
+Le programme retenu répète deux fois le même déplacement. Le premier lancement confirme les deux positions prévues. Au second, la pile adverse entre sur l’une des cases marquées avant la victoire officielle. Le niveau 5 est gagné en **6 commandes et 2,48 s** dans le rejeu configuré pour huit workers. Les 39 commandes relèvent de SIC seul. Les 33 commandes et retours des niveaux 1 à 4 reproduisent la référence `8af99931`. La permutation de palette conserve le parcours et les effets géométriques des cinq niveaux. Empreinte standard `b7e57c5839ae3351c8de590037526b23b356cd06861a6138e46dcedb10ff8ddb`. Le contrôle TypeScript et 283 tests ciblés passent.
+
+### KA59 niveau 5, composer les pas, les projections et la phase des poussoirs
+
+Les premiers retours permettent de mesurer deux cycles de trois et six pas. La bande de remplissage repère la phase et les images de l'extension donnent sa portée. Dans un essai séparé à la même pose de départ, une flèche bloquée laisse le vert en place et fait avancer les deux phases. Un clic sur le grand poussoir laisse les phases et la scène identiques. Le plan tient compte du pas volontaire avant la poussée automatique.
+
+La quatrième commande montre la poussée qui ramène le vert dans le couloir. À la huitième, le vert garde sa position pendant que la projection déplace le grand poussoir de 27 pixels. SIC passe ensuite par le haut pour rejoindre l'ouverture. Les positions et les phases sont comparées à chaque retour des deux séries continues de trois et douze commandes.
+
+Le niveau 5 est gagné en **20 commandes et 3,87 s** dans le rejeu configuré pour huit workers. Les 153 commandes relèvent de SIC seul. Les 133 commandes et retours des niveaux 1 à 4 concordent avec `c4effa25`. La permutation de palette reproduit le parcours et les effets géométriques. Empreinte complète `1b066f038778d3a31483ba604a7a63d39394265ceca2ecb094066e9644c965f0`. Le contrôle TypeScript et 217 tests ciblés passent.
+
+### SP80 niveau 5, diviser un flux et changer la direction d’un front
+
+SIC lit le sens de chaque source à partir de son capuchon et l'incidence de chaque réceptacle à partir de son ouverture. Il déduit une pose candidate du coude en alignant sa concavité sur une source et sur l'ouverture latérale. Il ajoute les barres à partir des fronts prévus et recalcule le contour de l'ensemble à chaque ajout. La recherche conserve les placements dont les contours laissent les quatre voies disponibles et vérifie que chaque pièce peut rejoindre sa pose en gardant libres les approches des ouvertures.
+
+Le rejeu vérifie les déplacements et la sélection après chaque commande, avec des séries de 2, 8 et 6 translations. La libération gagne le niveau. Les **52 cellules** de la projection apparaissent dans les images. Sur quatre images successives, le front monte jusqu'au coude, puis se propage sur deux cases latérales avant de rejoindre son ouverture.
+
+Le niveau 5 est gagné en **21 commandes et 5,28 s** dans le rejeu configuré pour huit workers. Les 75 commandes relèvent de SIC seul. Les 54 commandes et retours des niveaux 1 à 4 concordent avec `0e659168`. La permutation de palette conserve le trajet et les effets géométriques. Empreinte du rejeu `84032209fe614ea4a5fa528f3ce9be514402f9525851dcf2480ca5448b6dce7e`. Le contrôle TypeScript et les 292 tests ciblés passent.
+
+### TR87 niveau 5, synthétiser un dictionnaire à partir d’un exemple fixe
+
+Le curseur encadre les côtés du dictionnaire. Les deux mots de l'exemple restent fixes. SIC associe les longueurs des côtés aux segments des deux mots. Un côté double porte une seule variable de phase. La mesure d'édition confirme que ses deux glyphes changent ensemble. La synthèse retrouve deux affectations qui expliquent entièrement l'exemple et le trajet retient celle qui conserve les deux entrées déjà correctes.
+
+SIC réutilise le rôle des commandes acquises au niveau précédent et mesure les cycles propres aux glyphes du nouveau dictionnaire. Le contrôle de chaque pas compare le curseur, les côtés éditables et les deux mots fixes. Deux séries continues de deux et cinq commandes suivent les mesures.
+
+Le niveau 5 est gagné en **29 commandes et 12,04 s** dans le rejeu configuré pour huit workers. Les 150 commandes relèvent de SIC seul. Les 121 commandes et retours des niveaux 1 à 4 concordent avec `2257614e`. La permutation de palette reproduit le parcours et les effets géométriques. Empreinte du rejeu `9970a2fb14c4cf1605275fe476a23d821d895f0b40dee50c2ed5fbaf4564866e`. Le contrôle TypeScript et les 111 tests ciblés passent.
+
+### LF52 niveau 5, déplacer le milieu d’un saut
+
+SIC distingue le plot fixe, le plot porté et le transporteur vide. Il peut placer un plot au milieu d'un saut tout en réservant une autre case pour l'atterrissage. Le retour de la septième commande réfute le blocage supposé du second transporteur. Le modèle révisé vérifie que celui-ci avance sur la case libérée par le premier. Les changements de cadrage conservent les positions déjà suivies et ajoutent un puis trois jetons révélés.
+
+Le trajet comprend seize sauts, dont six utilisent un plot porté. Onze sauts gardent le nombre de jetons, et cinq en retirent un. Huit séries continues de déplacement vont jusqu'à neuf commandes. Chaque pas compare les poses, les charges et le cadrage. Le changement de vue scelle la série pour intégrer les éléments révélés.
+
+Le niveau 5 est gagné en **99 commandes et 117,13 s** dans le rejeu configuré pour huit workers. Le temps mesuré des reprises de décision est de 92,50 s. Les 243 commandes relèvent de SIC seul. Les 144 commandes et retours des niveaux 1 à 4 concordent avec `9072b10e`. La permutation de palette conserve le parcours et les effets géométriques. Empreinte complète `9fea2b91a85fd68bda4a22bb20bf63bca34baa959c654992f0678c3a22661c84`. Le contrôle TypeScript et les 148 tests ciblés passent.
+
+### M0R0 niveau 5, maintenir les passages avec des commandes communes
+
+Les quatre premières commandes remesurent les déplacements des deux mobiles. Elles confirment l'inversion relative des flèches horizontales. Les plaques isolées et les bandes de même apparence proposent trois relations. Les retours confirment l'ouverture à l'arrivée sur une plaque et la fermeture au départ du dernier mobile qui l'occupe.
+
+Le plan cherche les deux positions conjointement. Il prévoit les quatre traversées qui utilisent un mobile retenu sur sa plaque pendant que l'autre avance. La recherche écarte la fermeture sur un occupant et attend l'ouverture avant d'autoriser l'entrée. Le test compare à chaque commande les deux positions et les passages liés. Sept séries continues de deux à dix commandes préservent ces vérifications et se scellent aux changements de porte.
+
+Le niveau 5 est gagné en **49 commandes et 13,69 s** dans le rejeu configuré pour huit workers. Les 163 commandes relèvent de SIC seul. Les 114 commandes et retours des niveaux 1 à 4 concordent avec `fd2457e6`. La permutation de palette conserve le parcours et les effets géométriques. Empreinte complète `268518470ced21b331a1591ec79263a3b4dadf15984124d5d347049f843b70a8`. Le contrôle TypeScript et les 228 tests ciblés passent.
+
+
+### UPST niveau 5, retrouver les pièces et les ouvertures en bord de plateau
+
+La détection retrouve vingt pièces et vingt et une portes lorsque le bord de la grille réduit la largeur d’une colonne. Une porte déjà ouverte relie visuellement deux sols. La répétition du motif des portes fermées permet de les séparer et de rétablir la connexion dans le graphe. Les seuils de la détection initiale restent ceux utilisés lorsque les pièces ordinaires suffisent.
+
+SIC réutilise les rôles des occupants et le compteur appris pendant les quatre premiers niveaux. Le plan choisit les ouvertures à partir des pièces, des occupants et du budget observés. Quatorze clics sont confirmés par le changement de porte et la dépense d’un tour. Le quinzième déclenche la victoire officielle.
+
+Le rejeu depuis le niveau 1 gagne le niveau 5 en **15 clics et 12,19 s** avec le budget configuré pour huit workers. Les 70 commandes relèvent de SIC seul. Les 55 commandes et retours des niveaux 1 à 4 reproduisent la référence `f374b80d`. La permutation de palette reproduit les 70 commandes et leurs effets géométriques. Empreinte complète `113283a516f24076615c4da606641b87779380ce0357cec955fd3828915e735d`. Le contrôle TypeScript et les 33 tests ciblés passent.
+
+
+### G50T niveau 5, combiner plusieurs effets dans un enregistrement
+
+Deux contacts sont reliés à des obstacles pleins. SIC vérifie séparément leurs translations aux pas 1 et 7 et leur persistance après le départ. Au pas 9, l’acteur atteint un troisième contact qui ouvre un passage tant qu’il l’occupe. Le premier enregistrement conserve les deux changements persistants avec leurs propres pas ainsi que le maintien depuis la position finale. Le retour au départ est vérifié sur les obstacles et le bandeau.
+
+Le deuxième acteur exploite ces ouvertures et mesure une impulsion au pas 15. Le dernier trajet dérive une entrée dans le cadre au même pas. La 41ᵉ commande du niveau confirme l’animation et la sortie dans l’autre cadre. La recherche vérifie la position des acteurs rejoués et les pixels visibles des changements attendus.
+
+G50T gagne le niveau 5 en **50 commandes et 34,64 s** dans le rejeu réglé pour huit workers. Les 203 commandes relèvent de SIC seul. Les 153 commandes et retours des niveaux 1 à 4 reproduisent la référence `b613eab1`. La permutation de palette reproduit les commandes et les effets géométriques. Empreinte complète `6416074c7e9ae53b92d7eabcfa006867e703f9cd4fee6aa610c8999c9b3576cd`. Le contrôle TypeScript et les trois tests d’enregistrement passent. La suite SIC passe 176 tests sur 177. Le test de réserve du cycle orienté échoue aussi sur la référence.
+
+
+### WA30 niveau 5, livrer par un passage étroit et changer de prise
+
+Le planificateur mesure un passage de deux cases entre la zone du joueur et celle du porteur auxiliaire. Pour chaque déplacement chargé, il vérifie que la case du joueur et celle de la caisse sont libres. Il dépose cinq caisses à l’entrée du passage et suit leurs positions jusqu’à livraison. Le porteur auxiliaire livre cinq caisses, dont une déjà près du passage à l’entrée du niveau. Le joueur reprend la caisse restante et la livre. Le réceptacle admet huit positions pour six caisses. La victoire officielle confirme le nombre nécessaire.
+
+Dans un essai séparé, la dernière caisse est déjà chargée à gauche du joueur après 99 commandes. Les positions remplies empêchent l’insertion avec ce décalage. SIC choisit un dépôt temporaire, calcule une approche par le dessus, reprend la caisse et termine en 11 commandes, avec vérification du porteur et de la caisse à chaque retour.
+
+Le rejeu complet gagne le niveau 5 en **113 commandes et 31,72 s** avec le réglage de huit workers. Les 316 commandes relèvent de SIC seul. Les 203 commandes et retours des niveaux 1 à 4 reproduisent la référence `3ad1925e`. La permutation de palette reproduit les 316 commandes et leurs effets géométriques. Empreinte complète `785fac99f96e4a4317520e5a6fab5b3b312dd8f0f78fdb6310302d2ad5187189`. Le contrôle TypeScript et les 177 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### CN04 niveau 5, vérifier un changement de géométrie avant l’assemblage
+
+SIC repère une cellule alignée sur la grille, contiguë à une seule pièce et distincte des connecteurs déjà visibles. Le premier clic transforme la pièce. Les retours successifs confirment que les autres pièces gardent leur forme et leur position. La cellule réapparaît à un nouvel emplacement jusqu’au quatrième clic. Sur la pièce modifiée, le nombre de connecteurs passe de trois à sept. À la disparition de la cellule, le modèle géométrique concorde avec l’image entière.
+
+SIC révèle ensuite les autres connecteurs et cherche un assemblage en appariant les positions des connecteurs et en vérifiant que les parties solides restent disjointes. Il contrôle les retours des parcours de translation et s’arrête sur la victoire officielle.
+
+Le rejeu complet gagne le niveau 5 en **55 commandes et 19,86 s** avec le réglage de huit workers. Les 191 commandes relèvent de SIC seul. Les 136 commandes et retours des niveaux 1 à 4 reproduisent la référence `280a62d1`. La permutation de palette reproduit les 191 commandes et leurs effets géométriques. Empreinte complète `5b825d9793a7d32646aee38390b3da8628ea3bae4122c0481c2092e1aa4cbab7`. Le contrôle TypeScript et les 178 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### SC25 niveau 5, préparer une plate-forme depuis une autre
+
+SIC reconnaît dans les trois cartes les motifs dont il a déjà observé le changement de taille, le transfert et le tir. Il rapproche chacun des deux blocs de la bande distante qui partage la couleur de son centre. Deux essais séparés depuis l’îlot de départ vérifient que la même recette de transfert conduit à la branche des blocs avec la petite empreinte et à la plate-forme de sortie avec la grande.
+
+Dans le rejeu autonome, SIC vérifie la réduction à la 5ᵉ commande et la première arrivée à la 9ᵉ. Il cherche une ligne de tir qui atteint le bloc par une voie continue, même lorsque l’autre voie est obstruée. Les animations des commandes 20 et 28 confirment séparément que le projectile atteint son bloc et que la bande correspondante disparaît. Le contact de recharge augmente la jauge. SIC calcule ensuite l’alignement de la grande empreinte, confirme l’agrandissement à la commande 35, puis la seconde arrivée à la commande 39. La montée traverse les passages ouverts et déclenche la victoire.
+
+Le rejeu complet gagne le niveau 5 en **45 commandes et 15,32 s** avec le réglage de huit workers. Les 106 commandes relèvent de SIC seul. Les 61 commandes et retours des niveaux 1 à 4 reproduisent la référence `d98a4889`. La permutation de palette reproduit les 106 commandes et leurs effets géométriques. Empreinte complète `1b88de8cea871a0787acb9a146c3b17fcb87b333c11b2d766cb7c59cd9b08417`. Le contrôle TypeScript et les 179 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### RE86 niveau 5, retenir les repères et répartir une même couleur
+
+À l’entrée du niveau, six repères bleus et deux repères rouges sont lisibles. SIC inclut dans ses mesures une troisième pièce dont la couleur courante diffère de celles des sources. Les déplacements d’identification exposent deux autres cadres rouges. SIC vérifie le contour et le centre de chacun, puis conserve ces repères si une pièce les masque de nouveau.
+
+La recherche associe les pièces aux repères selon les silhouettes et les poses accessibles avec les déplacements mesurés. Deux pièces peuvent se partager la couverture des repères d’une même couleur. SIC confirme les trois recolorations en vérifiant le déplacement et la conservation des autres silhouettes. Le X et la croix deviennent bleus et couvrent deux groupes distincts. Le losange rouge couvre les quatre repères rouges, dont les deux révélés.
+
+Le rejeu complet gagne le niveau 5 en **76 commandes et 48,32 s** avec le réglage de huit workers. Les 262 commandes relèvent de SIC seul. Les 186 commandes et retours des niveaux 1 à 4 reproduisent la référence `2ba965df`. La permutation de palette reproduit les 262 commandes et leurs effets géométriques. Empreinte complète `eb68659e5d01a422805b66c61adb3ecd6e4d12ffa52354a3333ad138ea109108`. Le contrôle TypeScript et les 181 tests SIC exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### GMAP niveau 5, passer par les salles cartographiques et relire l’inventaire
+
+La carte passe de six à onze salles à la commande 4, puis à dix-sept salles à la commande 9. Lorsqu’un fragment confirme une salle de cartographie, SIC garde ce rôle dans les coordonnées du nouveau fragment. Il peut repasser par cette salle avec la clé. Les salles ayant déjà révélé un fragment sont retirées des candidats à la sortie, même si elles partagent son annotation.
+
+À chacune des deux prises de clé, le retour dans la salle cartographique masque le cadre de l’emplacement occupé. SIC conserve son emplacement mesuré et lit la clé à cette position. Les animations des commandes 7 et 13 confirment que les clés disparaissent au moment où les bords correspondants s’ouvrent. Le premier passage ouvert reste acquis après le second raccordement.
+
+Le rejeu complet gagne le niveau 5 en **14 commandes et 6,33 s** avec le réglage de huit workers. Les 52 commandes relèvent de SIC seul. Les 38 commandes et retours des niveaux 1 à 4 reproduisent la référence `624119e0`. La permutation de palette reproduit les 52 commandes et leurs effets géométriques. Empreinte complète `b351ef56bedd09cece423b3a639f0f6537b015bd13adfdc75a63a839afda3d06`. TypeScript et les 334 tests SIC et cartographie exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### FUIT niveau 5, fermer la retraite avec une pierre transportée
+
+SIC remesure la grille, distingue les murs fixes des pierres et relocalise le sprite à intercepter malgré son changement de couleur. La règle de fuite acquise aux niveaux précédents reste compatible avec les déplacements ordinaires. Un essai direct montre qu’une tentative de capture dont un voisin reste libre laisse le sprite s’échapper. La recherche doit donc rendre la retraite impossible au moment du contact.
+
+SIC calcule le trajet en tenant compte de la case de la pierre attachée en plus de celle de l’acteur. Il vérifie la première attache à la commande 19, le dépôt à la commande 21 et une nouvelle attache à la commande 23. Le dépôt restreint le déplacement du sprite. La dernière pierre voyage avec l’acteur et ferme la case de retraite lors du contact final. Le suffixe calculé est gardé tant que les positions relues concordent avec le retour précédent.
+
+Le rejeu complet gagne le niveau 5 en **26 commandes et 10,80 s** avec le réglage de huit workers. Les 164 commandes relèvent de SIC seul. Les 138 commandes et retours des niveaux 1 à 4 reproduisent la référence `1c77ad44`. La permutation de palette reproduit les 164 commandes et leurs effets géométriques. Empreinte complète `b33079dcb9794d9bfd268aba9c5aeecf2bad25bff74690c001fbe6356168436e`. TypeScript et les 711 tests SIC et poursuite exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### CGWL niveau 5, reprendre un passager et apprendre les paires incompatibles
+
+SIC lit les deux passagers au départ et le passager déjà présent dans son cadre sur la rive d’arrivée. Le plan explore des configurations où chaque passager peut changer de rive ou être porté. Un dépôt confirmé reste réversible. La recherche réutilise les déplacements et le franchissement mesurés aux niveaux précédents. La portée lue sur le contour du porteur sert d’hypothèse de protection.
+
+Les retours animés aux commandes 12 et 29 restaurent l’état initial. Dans chaque cas, une seule paire est libre sur une même rive dans la configuration essayée. SIC mémorise d’abord la paire loup–chèvre, puis la paire chèvre–chou. Après le second retour, un plan de 32 commandes ramène la chèvre sur la rive de départ, livre le chou et reprend la chèvre pour terminer. SIC vérifie les positions après chaque commande et conserve les passagers temporairement masqués par le porteur ou sa charge.
+
+Le rejeu complet gagne le niveau 5 en **61 commandes et 23,03 s** avec le réglage de huit workers, y compris les deux retours animés. Les 124 commandes relèvent de SIC seul. Les 63 commandes et retours des niveaux 1 à 4 reproduisent la référence `d64c07d3`. La permutation de palette reproduit les 124 commandes et leurs effets géométriques. Empreinte complète `11a54092f2d728d63fcec4de779f1cb5a9c24905c9f22129b49a6b04084ff5d5`. TypeScript et les 303 tests SIC et liaison d’objet exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+
+### CWSE niveau 5, planifier les deux machines de la grille élargie
+
+SIC mesure une grille de 15 × 11 et huit caisses. Il réutilise les couleurs observées pour l’exposition, l’ombre, le couplage et le détachement. Un rejeu direct du témoin de 63 commandes vérifie le modèle sur tout le parcours, y compris le tour où le curseur est bloqué alors que le faisceau déplace les caisses.
+
+La recherche calcule séparément l’affectation des deux familles de caisses à leurs récepteurs compatibles. Elle réutilise le coût déjà calculé quand une famille ne change pas. Elle cherche toujours un état où les huit récepteurs sont exacts et garde dans le modèle la possibilité de déplacer une caisse déjà en place. Sur l’essai isolé, le calcul d’un plan de 36 commandes passe de 11,43 s à 1,58 s par rapport à la recherche qui recalcule l’affectation complète.
+
+Le rejeu complet gagne le niveau 5 en **36 commandes et 21,90 s** avec le réglage de huit workers. Les 115 commandes relèvent de SIC seul. Les 79 commandes et retours des niveaux 1 à 4 reproduisent la référence `5602744c`. La permutation de palette reproduit les 115 commandes et leurs effets géométriques. Empreinte complète `22abd8a14cc5269dfe153c97fd5543ff9f11fc3db8e99474e254edb0a2cbd697`. TypeScript et les 316 tests SIC et réception par exposition exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+### HPDL niveau 5, reconstituer le rail et coordonner les modules
+
+Le sixième module masque deux centres du rail. SIC restitue ces centres quand deux extrémités alignées portent des traces de rail concordantes et que les cases intermédiaires sont couvertes. Le tracé final doit former une seule chaîne. Pendant un réglage, l’aperçu de capacité peut masquer les extrémités verticales du signal. Le segment horizontal complet permet encore d’identifier les deux modules reliés.
+
+SIC mesure six modules sur 51 positions et compare 864 configurations. Une seule couvre les 13 wagons dans la simulation. Deux modules peignent les wagons avant deux captures en aval. Deux autres captures doivent se produire au même battement pour que le signal permette la seconde. Chaque clic est confronté au champ observé et le lancement est validé par le changement d’état officiel.
+
+Le rejeu complet gagne le niveau 5 en **11 commandes et 22,99 s** avec le réglage de huit workers. Les 34 commandes relèvent de SIC seul. Les 23 premières commandes et retours reproduisent la référence `3e78247c`. La permutation de palette conserve les 34 commandes et leurs effets géométriques. Empreinte complète `a0602bcceebc7de12ea90d0f8392f241b9a7afc4568af2e8fbd2f6e4884d436e`. TypeScript et les 366 tests SIC et fenêtre exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+### TRCP niveau 5, affecter neuf sources avant les creusements irréversibles
+
+SIC reconnaît les marqueurs bicolores par leur empreinte commune. La grille de 15 × 15 contient neuf sources, six poches et cinq réseaux à former. Trois recettes observées aux niveaux précédents réduisent les affectations compatibles au nombre de 24. Pour départager les affectations de même niveau de preuve, SIC compare d’abord les constructions par trajets courts et vérifie que les réseaux restent séparés dans la réserve de 56 creusements.
+
+Le cyan, le violet et l’orange réutilisent des mélanges observés. Le violet alimente deux poches. Au creusement 32, P05 vérifie le nouveau mélange marron lors de la jonction. La réserve est de deux creusements à la victoire.
+
+Le rejeu complet gagne le niveau 5 en **54 creusements et 57,93 s** avec le réglage de huit workers. Les 191 commandes relèvent de SIC seul. Les 137 premières commandes et leurs retours reproduisent la référence `efe921a8`. La permutation de palette conserve les 191 commandes et leurs effets géométriques. Empreinte complète `90db94afaf57262abd444926464e538b5dd176c372345707033c46d1edc661bd`. TypeScript et les 291 tests SIC et recoloration exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+Les rejeux qualifiés, cumulés sur les versions de la campagne, couvrent les 100 jeux jusqu’au niveau 4 et les 99 jeux qui ont un niveau 5. Le cumul est de **499 niveaux sur 636**.
+
+### TRCP niveau 6, confirmer le pigment même si le marqueur reste dominant
+
+SIC mesure une grille de 17 × 17, dix sources et sept poches. Il réutilise les quatre mélanges observés aux niveaux précédents et planifie six circuits séparés. Les mélanges orange, cyan, violet et rose sont confirmés aux creusements 4, 20, 25 et 40. Le violet alimente deux poches.
+
+Le passage du creusement 40 prend le pigment attendu. Quatre pixels deviennent roses dans chacune des sources, tandis que cinq pixels blancs restent visibles sur l'une d'elles. La confirmation mesure alors la substitution du pigment d'origine sur les pixels modifiés et vérifie le pigment dominant du nouveau passage ainsi que la stabilité des terminaux des autres circuits. Le test de régression couvre une source sans substitution et une substitution partiellement contradictoire.
+
+Le rejeu complet gagne le niveau 6 en **49 creusements sur 60 et 154,21 s** avec le réglage de huit workers. Les 240 commandes relèvent de SIC seul. Les 191 premières commandes et leurs retours reproduisent la référence `be620853`. La permutation de palette conserve les 240 commandes et leurs effets géométriques. Empreinte complète `1c53787c2212bea706f3c34761b6fe5f452a762a0daf111faede3d7930d28a55`. TypeScript et les 293 tests SIC et recoloration exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+### HPDL niveau 6, mesurer une cascade et éliminer les réglages incompatibles
+
+La forme mesurée sur les modules voisins permet de retrouver le contour du module qui partage des pixels avec le rail. Le segment de signal continu passe par trois centres alignés. Deux modules portent un récepteur et le troisième se situe à l’extrémité. SIC suit les deux liaisons adjacentes depuis cette source. Quand un réglage vérifié masque l’un des repères, SIC conserve sa position antérieure et vérifie à nouveau le segment du signal et le tracé du rail.
+
+Sur les huit modules et les 18 wagons observés, le domaine contient 279 936 réglages. Le filtre par conservation des pigments ne retient que 12 réglages pour une simulation des battements. Une seule simulation couvre le train. Le premier signal arrive quand le premier récepteur capture son groupe. Le deuxième récepteur capture et relaie le signal pendant le même battement, puis le peintre recolore son groupe pour une capture en aval.
+
+Le rejeu complet gagne le niveau 6 en **20 commandes et 67,35 s** avec le réglage de huit workers. Les 54 commandes relèvent de SIC seul. Les 34 premières commandes et leurs retours reproduisent la qualification du niveau 5. La permutation de palette conserve les 54 commandes et leurs effets géométriques. Empreinte complète `08163cf885f8d1190aff44dc452a0371fe491974fd30a56fba9abae96c1b2e65`. TypeScript et les 370 tests SIC et fenêtre exécutés passent. Le test du cycle orienté déjà identifié en échec sur la référence a été écarté de cette série.
+
+### DC22 niveau 6, partager les essais et chercher une commande nouvelle
+
+Sur un plateau avec un panneau séparé, SIC conserve les commandes réellement essayées par les différentes familles dans une mémoire commune du niveau. Cette mémoire associe chaque commande à son état visible de départ et à son retour, y compris lorsque le plateau ne change pas. Le bandeau d’état en dehors du plateau et du panneau ne crée pas artificiellement un nouvel essai. Une transition déjà observée peut être rejouée pour atteindre un état où une commande reste à tester. Une transition qui a donné plusieurs retours cesse de servir de trajet prévisible. Lorsque les quatre directions ont été comparées sans obtenir un trajet utilisable, l’exploration du panneau peut prendre le relais. Les tests de clic et de déplacement se partagent alors les essais disponibles.
+
+Sur le vrai plateau du niveau 6 chargé directement, la référence `9055832f` répète quatre fois une paire commande et état visible dans ses 18 premières commandes. Le premier clic arrive à la commande 15 et aucun clic ne modifie le plateau dans cette fenêtre. Avec la mémoire partagée, les **32 premières commandes** en SIC et en SIC Fallback ne répètent aucune de ces paires. Le premier clic arrive à la commande 5 en SIC et à la commande 1 en Fallback. Le clic qui pivote la plateforme arrive respectivement aux commandes 7 et 3. Le test Fallback retire la famille initiale `sic_cavity_access`. Chaque commande relève de SIC seul. Ce test vérifie la diversification des commandes et la découverte d’un effet observable. La victoire du niveau 6 reste à qualifier en rejeu autonome.
+
+### DC22 niveau 6, déplacer la pièce pour tester un autre effet du même contrôle
+
+SIC mesure la translation du sprite, la commande qui la produit et le sol découvert par le déplacement. Quand un clic modifie le plateau sans déplacer la pièce, les dalles bicolores qui partagent la couleur du bouton deviennent des hypothèses à tester. La recherche emprunte les cases du sol déjà mesuré et garde la position attendue du sprite à chaque étape. Le clic depuis la dalle est un nouvel essai, lié à l’observation qui confirme l’arrivée.
+
+Sur le niveau 6 chargé directement, P07 prépare une série de six déplacements jusqu’à la dalle `(18,48)`. P05 reteste le bouton qui avait fait pivoter la plateforme. Le curseur arrive en `(32,52)`. La téléportation se produit à la commande **14 en SIC** et **13 en SIC Fallback**. Le Fallback retire `sic_cavity_access` et les six déplacements partagent une seule série dans chacun des deux modes. En essai séparé depuis l’arrivée, deux contacts sur le bord de l’îlot font apparaître une commande orange. Son clic immédiat laisse le plateau inchangé dans les deux cas. Il reste à faire proposer automatiquement le contact puis à trouver les conditions qui donnent un effet à cette commande.
+
+### DC22 niveau 6, explorer l’arrivée et relier une commande à sa réponse animée
+
+Après avoir observé le déplacement par le portail, SIC cherche un contact inédit entre le sol accessible et un objet visible. La série s’interrompt si le déplacement prévu échoue ou si le panneau change. Le contact à `(34,48)` révèle la commande orange à la commande **17 en SIC** et **16 en SIC Fallback**. Dans les deux modes, le test suivant s’appuie sur le panneau nouvellement observé.
+
+Ce clic laisse l’état final identique. Les images 3 et 5 montrent la même variation temporaire de 48 pixels entre `(22,30)` et `(29,37)`. SIC retient les deux images et la zone de la pièce associée à la commande. La comparaison peut être relancée quand une configuration de cette zone encore inédite est observée. La liaison au sprite est acquise. La bonne configuration pour un effet durable et la victoire autonome du niveau restent à vérifier.
+
+### DC22 niveau 6, atteindre les sélecteurs du portail
+
+SIC ajoute un sol à ses trajets après avoir vérifié le déplacement du curseur dessus. Une empreinte hétérogène reste utilisable à la position où elle a été observée et tant que ses pixels concordent. Les commandes qui ont transformé le terrain offrent un nouvel essai quand la zone concernée présente une configuration inédite. Le groupe de quatre petits boutons est reconnu par leurs empreintes adjacentes et leurs couleurs distinctes. En SIC, leur apparition est observée à la commande 65 et chaque bouton est testé aux commandes 66 à 69.
+
+Les retours distinguent le motif initial du motif obtenu. Plusieurs boutons font avancer la même suite de motifs. SIC relie un motif à une destination candidate quand un seul autre damier porte la même paire de couleurs. Le retour autonome du haut du plateau jusqu’au portail reste à résoudre. Une recherche séparée trouve un trajet de 30 commandes dans le vrai jeu depuis le dernier essai du sélecteur choisi. Quatre clics alternent avec la marche. Chacun transforme la case suivante en sol traversable.
+
+Le trajet séparé confirme l’arrivée à `(34,58)`. En déplaçant la pince, les quatre premières tentatives d’accrochage produisent un clignotement réversible. À la cinquième configuration, le clic modifie durablement la forme de la pince. La commande suivante translate la pince et les deux parties visibles du support de quatre pixels. Ce transport a été vérifié hors de la boucle de décision autonome.
+
+### DC22 niveau 6, composer la marche avec les changements mesurés du sol
+
+SIC garde les retours observés d’une commande lorsque le curseur ne masque pas le terrain modifié. Si une même configuration produit deux retours différents, le trajet cesse de réutiliser cette transition. La recherche évalue ensemble la position du curseur et la configuration du terrain. Elle vérifie que le sol restera accessible sous le curseur avant de proposer un changement.
+
+En SIC seul, le trajet autonome utilise une série de marche depuis l’îlot des sélecteurs, alterne marche et changements du sol, puis rejoint le portail. La **103e commande** envoie le curseur à `(34,58)`. En se déplaçant sur cet îlot, SIC fait apparaître des flèches distinctes et mesure leurs premières translations de la pince. Le choix autonome de l’alignement de la pince et la victoire du niveau restent à valider.
+
+### DC22 niveau 6, vérifier la prise et le transport du support
+
+Le clignotement réversible donne une empreinte de la pince. Deux parties alignées de même forme et séparées par un espace compatible indiquent un alignement à tester. SIC mesure les translations produites par les flèches et mémorise la case où chaque flèche devient utilisable. Il choisit un déplacement mesuré qui rapproche la pince de l’alignement, puis vérifie sur le retour réel l’effet du bouton de prise.
+
+Le rejeu autonome sur le vrai plateau confirme la prise à la **126e commande**. À la **134e commande**, la flèche activée depuis une autre case translate la pince et les deux parties du support de quatre pixels dans la même direction. Les 151 commandes du lot relèvent de SIC seul. Ce résultat couvre l’alignement et le premier transport observé. Il reste à planifier les positions successives qui permettent de rejoindre la sortie.
+
+Un essai séparé part de ce premier transport. Dans cette configuration, il vérifie **19 positions de la pince**, reliées par **44 déplacements**, puis retrouve le placement du support près du passage du haut en douze déplacements de la pince. Après retour par le portail et changement du motif, le curseur arrive sur le damier du haut. Les 24 déplacements suivants déclenchent la victoire officielle. La séquence a été rejouée linéairement sur le vrai niveau. Le choix de ces dernières commandes reste à intégrer à SIC.
+
+### DC22 niveau 6, comparer les positions du support dans la boucle SIC
+
+Après le premier transport conjoint confirmé, SIC mémorise les retours par position de la pince et du support, commande et case d'activation. Une réponse inchangée ferme cet essai à cette position. Un déplacement confirmé peut être réutilisé par P07 pour rejoindre une position qui offre encore un essai P05. Si le retour diffère du déplacement mémorisé, la liaison devient incertaine et cesse de servir au trajet. Ce choix passe avant les essais de boutons qui changent d'apparence pendant la marche.
+
+Le sol révélé en quittant une case occupée conserve son empreinte et sa preuve de passage. À distance égale, le trajet privilégie une empreinte déjà occupée et encore identique. Cela permet de réutiliser le damier central pour changer de commande d'activation.
+
+Sur le vrai niveau 6 chargé directement, **347 commandes sur 347 relèvent de SIC seul**. Le graphe retient **19 positions**, **42 déplacements confirmés** et **25 retours stationnaires**, avec **zéro contradiction**. La pince atteint la position `[19,7,24,12]` et le support la position `[12,8,31,11]`, près du passage du haut. Ce placement est découvert par les essais et leurs retours publics. Le lot s'arrête sur le budget de temps du niveau. La couverture reste **533/636, soit 83,8 %**, avec **34/99 niveaux 6** qualifiés. Il reste à choisir le placement pour le passage qu'il ouvre, puis à composer le retour par le portail et le trajet vers la sortie dans la boucle SIC.
+
+Le checkout préparé pour main gagne les **15 niveaux 1 à 5 de DC22, LS20 et GABA**. Les commandes et les empreintes de chaque préfixe sont identiques aux références vérifiées avant le lot. Les totaux sont respectivement **372, 192 et 345 commandes**. Les **19 tests ciblés** passent. L'essai Fallback retire `sic_cavity_access` et confirme les 24 premières commandes sous autorité SIC seul. La comparaison complète des placements en Fallback reste à qualifier.
+
+### DC22 niveau 6, conserver une destination et franchir le passage ouvert
+
+SIC compare les sols fixes atteignables depuis une destination encore inexplorée avec le support dans sa position observée et avec ses pixels occupés bloqués. Les empreintes inédites sur la pièce restent des hypothèses. Un gain d'accès donne un objectif de nouvelle région. Cet objectif conserve la destination pendant le retour par le portail et la programmation du motif. Le contrôle d'une paire de marques peut être essayé dans le sens du retour. Une marche sur le sol mesuré découvre le motif masqué par le curseur avant de choisir les sélecteurs qui conduisent à la destination visée.
+
+Le suivi vérifie le départ de pixels du curseur, l'apparition de ses pixels dans l'empreinte du déplacement mesuré et la stabilité des pixels qui le masquent. Il garde l'empreinte partiellement visible pour la commande suivante. La découverte des contacts peut prolonger son domaine vers le sol connu qui dépasse la composante du fond du plateau.
+
+Le runtime complet gagne le **niveau 6 chargé directement en 399 commandes SIC seul sur 399**. Deux processus frais, dont un sur le checkout préparé pour main, reproduisent les mêmes commandes et les mêmes décomptes de pixels modifiés. Empreinte de cette séquence réduite `e1d557e343ae1e11a107443acfe144025f068c8d6f62dc0961ade4dc44e392eb`. Les **22 tests ciblés** passent. LS20 et GABA gagnent chacun leurs niveaux 1 à 5, en **192 et 345 commandes**, avec les empreintes de chaque préfixe identiques aux références.
+
+La qualification chronologique jusqu'au niveau 6 reste à terminer. Un premier essai s'arrête sur le budget de temps au niveau 5 après 347 commandes cumulées. Un second gagne cinq niveaux en 372 commandes, puis le diagnostic est interrompu après dépassement du budget au niveau 6, après 191 commandes de ce niveau. Un profil ciblé attribue environ 91 % des échantillons à la validation JSON immuable dans la publication du graphe. Ce second essai comporte une instrumentation de profilage. La couverture qualifiée reste **533/636, soit 83,8 %**, avec **34/99 niveaux 6**. La prochaine étape consiste à réduire le coût de cette publication et à qualifier le parcours chronologique normal. Le parcours complet en Fallback reste aussi à vérifier.
+
+### Partager les preuves entre les points de reprise et les nouvelles traces
+
+La publication garde ses transactions atomiques, ses versions, ses causes et son journal complet. Elle peut rendre la main au système pendant les écritures. Les points de reprise natifs réutilisent leurs sous-arbres validés ; les API publiques `state()` gardent leurs copies indépendantes. Les petites enveloppes de l'encodeur sont construites à partir d'enfants déjà fermés. Un cache borné réutilise les validations Unicode réussies.
+
+Les traces et retours successifs ont souvent des identifiants distincts. Leur dernier graphe du même composant fournit désormais un candidat de comparaison, même quand le nouvel identifiant n'a pas de version antérieure. Chaque source nouvelle reste contrôlée. Le cache de comparaison est limité à 64 flux et n'est publié qu'après acceptation de la transaction. Les tests vérifient le partage d'une ligne d'image inchangée, le remplacement de la ligne modifiée, les mêmes octets encodés, la même hydratation et le rejet atomique d'un accesseur.
+
+Le rejeu normal de DC22, source `f01a937c`, donne ces temps avec un worker. Les gains comparent un précédent rejeu normal, source `710cf918`, sur la même machine. Ce sont des mesures uniques, sans comparaison de panneau affiché ou masqué.
+
+| Niveau DC22 | Commandes | Temps du niveau | Gain observé |
+| --- | ---: | ---: | ---: |
+| 1 | 22 | 9,601 s | 5,1 % |
+| 2 | 44 | 17,582 s | 6,8 % |
+| 3 | 45 | 14,163 s | 4,1 % |
+| 4 | 76 | 34,937 s | 3,2 % |
+| 5 | 185 | 130,297 s | 25,0 % |
+
+Ces cinq niveaux gardent les mêmes empreintes des commandes et retours officiels, ainsi que les mêmes nombres de nœuds et de deltas. Le niveau 6 s'arrête naturellement sur `level_active_time_budget` : **225 commandes en 365,534 s**, sans victoire. Les **597 commandes** du parcours complet relèvent de SIC seul. Le dépassement observé inclut la fin du traitement en cours. Le budget reste de 360 s et 600 commandes par niveau, avec un worker.
+
+Le lot suivant ajoute `nativeTrace` au port de mémoire du moteur : il ferme les preuves JSON avant l'horloge et partage les éléments inchangés entre traces. L'API historique `trace` conserve son comportement `structuredClone`, notamment les cycles, les Maps et les références répétées ou distinctes. Un essai artificiel de 200 traces donne les mêmes contenus canoniques, avec 7,13 Mo retenus par l'API historique contre 0,51 Mo par le chemin natif. Son coût CPU augmente toutefois de 76 à 262 ms. Cette mesure de mémoire ne prouve pas un gain global en jeu.
+
+Sur cette dernière version, **LS20 et GABA gagnent chacun leurs niveaux 1 à 4**, en 144 et 239 commandes, avec les huit empreintes de préfixe identiques aux références. Les **276 tests ciblés** passent, ainsi que TypeScript. La règle Git `/reference/v6/** -text` conserve aussi les octets des sources épinglées sur Windows ; leurs contrôles d'intégrité passent.
+
+Les [preuves réduites](sic-v8-checkpoint-sharing-evidence.json) distinguent le code mesuré sur DC22 du dernier code vérifié sur les deux jeux de contrôle. Le script `scripts/check-sic-chronological.mjs` rend le parcours reproductible depuis le niveau 1, avec arrêt à la victoire demandée. La couverture reste **533/636, soit 83,8 %**, avec **34/99 niveaux 6**. Prochaine étape : mesurer le parcours chronologique DC22 complet avec `nativeTrace`, puis poursuivre la réduction du coût restant si le niveau 6 dépasse encore son budget.
+
+### Réutilisation des requêtes entre rappels SRC
+
+Les rappels qui lisent une requête déjà fermée par l’interpréteur SRC réutilisent cet objet et détachent les champs de session qu’ils écrivent. La reprise de navigation garde une copie complète pour modifier la requête. Les appels avec une session mutable conservent aussi leur copie indépendante.
+
+Le code `5e09b4e1` a été rejoué avec un worker via `scripts/check-sic-chronological.mjs`, par rapport à `21e2ce9f`. DC22 gagne les niveaux 1 à 5 en **372 commandes**, avec les mêmes empreintes de parcours, nombres de nœuds et nombres de deltas. Les temps par niveau sont **9,54 s, 22,83 s, 16,27 s, 33,58 s et 136,60 s**. Le niveau 6 s’arrête sur le budget actif de 360 s après **208 commandes**, contre **201** sur la référence. Les **573 commandes communes** concordent, de même que les résumés de leurs retours et des décisions qui les autorisent. Les 580 commandes du nouveau parcours relèvent de SIC seul. Le niveau 6 reste à qualifier.
+
+Les quatre premiers niveaux de **LS20** et **GABA** reproduisent leurs empreintes de parcours et leurs volumes de graphe respectifs, en **144 et 239 commandes SIC seul**. Les **290 tests ciblés**, le contrôle TypeScript et le build Vite passent. La couverture qualifiée reste à **533/636 niveaux (83,8 %)**. Le prochain profil du niveau 6 doit séparer le coût de la réconciliation de celui de la publication du graphe.
+
+### Coûts de réconciliation et de publication sur DC22 niveau 6
+
+Le profil mesure la réconciliation dans `seal`, publication exclue. Il attribue à la publication les transactions `NativeKnowledgeStore.commit`, pendant et hors de `seal`. Après 203 commandes du niveau 6 sur `22e96443`, le moteur a consommé **349,7 s** de temps actif, dont **68,4 s** de réconciliation et **197,3 s** de publication. L’encodage représente **112,9 s** de la publication. La matérialisation de l’index et du journal en représente **8,2 s**. Le reste du temps actif inclut les autres traitements du moteur.
+
+Le lot `5785f6e5` réutilise un état profondément immuable déjà accepté par le même nœud et encode les membres de chaque objet sans construire de conteneur intermédiaire. La transaction continue de publier les nouvelles révisions et preuves. Les tests couvrent notamment un changement d’identifiant, une modification sous un objet seulement gelé en surface et une collision avec un fragment de la transaction.
+
+Le rejeu profilé à six minutes gagne les cinq premiers niveaux, avec les mêmes empreintes et volumes du graphe. Au niveau 5, le compteur passe de **75 779 à 8 268 appels à l’encodeur**. Le niveau 6 atteint **199 commandes** avant le budget actif, et les **571 commandes communes** concordent avec le rejeu de référence, ainsi que leurs retours et décisions résumés. Ces mesures ont partiellement chevauché le diagnostic étendu. Elles prouvent un retrait de travail répétitif, sans isoler un gain de temps en jeu.
+
+Les **208 premières commandes** du niveau 6 dans le rejeu de référence depuis le niveau 1 sont aussi celles du parcours de **399 commandes gagnant en chargement direct**, y compris les coordonnées des clics. Le parcours chronologique arrive toutefois avec **70 907 deltas** déjà présents. Un diagnostic à budget étendu a observé un jalon à **253 commandes en 451,9 s de temps actif**, puis aucune progression observable avant l’arrêt externe au-delà de **20 minutes** passées au niveau 6. Il ne détermine pas un budget suffisant pour gagner. Le budget de production reste de 360 s par niveau avec un worker. Une suite de profilage par commande doit localiser le traitement qui ne rend pas la main.
+
+LS20 et GABA gagnent chacun leurs quatre premiers niveaux en **144 et 239 commandes SIC seul**, avec les mêmes empreintes et volumes du graphe. Les **291 tests ciblés**, TypeScript et le build Vite passent.
+
+Un rejeu de contrôle sans instrumentation ni autre rejeu simultané retrouve les cinq mêmes victoires, avec **9,44 s, 18,16 s, 15,03 s, 33,50 s et 127,92 s** par niveau. Le gain observé au niveau 5 est de **6,4 %** contre 136,60 s sur `22e96443`. Au niveau 6, le contrôle reproduit l’arrêt après **199 commandes** sous le même budget, contre **208** sur `22e96443`. Les **571 commandes communes**, leurs retours résumés et leurs décisions concordent. La baisse du nombre d’encodages n’a donc pas amélioré la progression du niveau 6 sur ces deux essais. La couverture reste **533/636 niveaux (83,8 %)**.
+
+La prochaine étape est de localiser l’appel long au moyen de jalons écrits avant l’entrée dans chaque traitement. Pour la fenêtre de mémoire active, l’épisode de contact est déjà réinitialisé à chaque victoire. Il faut cibler les événements rejoués aux changements de niveau et le graphe d’exploration cumulatif. Tester en observation une fenêtre sur le niveau courant et le précédent, avec rôles, mécanismes et conditions consolidés pour les niveaux plus anciens. L’historique reste disponible si une preuve ancienne est nécessaire.
+
+### Arrêt localisé après la commande 264 et fenêtre active du graphe
+
+Le diagnostic chronologique instrumenté sur `0830e3b0` reproduit les **264 premières commandes du niveau 6 du parcours direct** et leurs différences de pixels, coordonnées de clic comprises. La dernière commande déplace le curseur vers la droite et le jeu renvoie une image avec 22 pixels modifiés. L’appel suivant `NativeCompositionAuthority.checkpoint → NativeKnowledgeStore.commit` ne retourne plus. La sonde a arrêté le processus après **131,2 s** passées dans cet appel. Les **7 370 échantillons CPU** des 110 dernières secondes ont tous `canonical.ts:159 visit → immutableJson` dans leur ascendance. Le champ traité lors de cette validation reste à identifier. L’essai étendu sert au diagnostic et ne qualifie pas une victoire.
+
+La recherche de trajets indexe maintenant les transitions par source pour le niveau courant et le précédent, au lieu de balayer toutes les transitions à chaque étape du parcours. Une demande liée à un niveau plus ancien reconstruit ponctuellement l’index de ce niveau à partir du graphe conservé. Le test de restauration vérifie que les trajets anciens et leurs références de preuve concordent sans ajouter de delta. Ce changement porte sur la recherche de trajets du graphe d’exploration. Les autres registres de raisonnement conservent leur portée.
+
+À **360 s avec un worker**, DC22 gagne les niveaux 1 à 5 avec les mêmes empreintes et volumes de graphe. Au niveau 6, le rejeu termine sur le budget après **180 commandes**. Ses **552 commandes cumulées** et leurs retours résumés correspondent à la portion commune de la référence. Les **180 retours du niveau 6** correspondent aussi pixel par pixel au parcours direct. Le rejeu chevauche le diagnostic étendu. La différence de longueur avec la référence à 199 commandes ne mesure donc pas l’effet de la fenêtre sur la vitesse. **LS20 et GABA** reproduisent les niveaux 1 à 4, en **144 et 239 commandes SIC seul**.
+
+La couverture reste de **533/636 niveaux (83,8 %)** dans la campagne de référence. La prochaine investigation doit relever le nœud et le champ remis à `immutableJson` pour l’appel bloqué, puis vérifier la correction au budget normal.
+
+### DC22 niveau 6, publier les preuves et viser la pose qui ouvre le passage
+
+Les adresses V8 du profil de l'arrêt se résolvent vers `WeakSetPrototypeAdd`. La position dans le code compilé correspond à `immutableObjects.add(result)`, l'ajout d'une identité déjà fermée au registre du JSON immuable. Le coût exceptionnel apparaît donc à l'intérieur de la table faible globale, après la lecture du plateau. Les tables sont maintenant limitées à 262 144 insertions chacune. Les anciens objets encore vivants restent reconnus par identité et les structures étrangères passent toujours par la validation.
+
+Avec le correctif seul, en diagnostic au budget étendu, DC22 démarre au niveau 1 et gagne six niveaux en **771 commandes SIC seul**. Le niveau 6 passe la commande 264 et gagne en **399 commandes et 787,20 s**. Ses actions, coordonnées de clic et différences de pixels sont identiques au parcours direct précédemment gagné. Ce dépassement du traitement bloqué est distinct de la qualification au budget de six minutes.
+
+La recherche de pont part d'un repère joignable par un code de portail observé. Elle évalue quelles poses du support ouvrent du sol fixe à partir de cette destination, puis remonte les déplacements du rail jusqu'à la pose courante. Pour le prochain déplacement, elle rejoint la case qui autorise sa commande. Les mouvements mesurés gardent leurs preuves et un mouvement seulement projeté doit être confronté au retour réel. Les butées connues ne deviennent pas des déplacements. La pose et les portions de rail déjà vues restent disponibles sous les pièces mobiles. Le dispositif de transfert et d'orientation du portail utilise ensuite les retours déjà observés, avec comparaison de l'accès sur la pose effectivement atteinte.
+
+En chargement direct, le nouveau plan vise le support à partir de la **162e commande**, atteint le damier jaune à la **189e** et gagne à la **241e**, toutes sous autorité SIC seul. Le rejeu de référence atteignait ce damier à la 347e commande et gagnait à la 399e. Les décisions de pose et de transfert s'appuient sur les observations du niveau. L'oracle reste un outil de comparaison hors exécution.
+
+Sur `67345956`, le rejeu normal part du niveau 1, garde le budget de **360 s et 600 commandes par niveau avec un worker**, puis gagne DC22 en **613 commandes SIC seul**. Les cinq premiers niveaux gardent leurs empreintes et volumes de graphe de référence, en **372 commandes**. Le niveau 6 reproduit la séquence du chargement direct, clics compris, en **241 commandes et 241,62 s**. Empreinte chronologique des actions et retours officiels jusqu'à la victoire `8e43ddf3546adf9bfcc2290b83fdb71842cc272c5b195f6f6135c8cbae564be5`. La première commande modifiée par le nouveau plan est la **166e du niveau 6** par rapport au rejeu chronologique étendu avec le seul correctif de publication.
+
+DC22 niveau 6 rejoint la couverture qualifiée. Le total passe à **534/636 niveaux (84,0 %)**, dont **35/99 niveaux 6**.
+
+LS20 et GABA reproduisent leurs niveaux 1 à 4 en **144 et 239 commandes SIC seul**, avec les mêmes empreintes et volumes du graphe à chaque niveau. Les **369 tests ciblés**, TypeScript et le build Vite passent.
+
+### Campagne des 64 niveaux 6 restants
+
+Sur `7bb9f152`, quatre processus ont rejoué les **64 jeux dont le niveau 6 restait à qualifier**. Chaque partie démarre au niveau 1 en mode SIC seul. Le budget par niveau est fixé à **360 s de temps actif et 600 commandes**, comme pour la qualification de DC22. La campagne, témoin DC22 compris, a duré **51 min 48 s**. Pour reproduire un jeu avec le même budget, exécuter `node scripts/check-sic-chronological.mjs CODE 6 resultat.jsonl 1` à la racine avec Node 22 ou supérieur. Le [relevé par jeu](sic-v8-level6-campaign-7bb9f152.json) contient les empreintes et un temps mesuré par niveau.
+
+Les 64 jeux reproduisent leurs cinq premières victoires et les empreintes des commandes et retours officiels. Aucun ne gagne le niveau 6. La couverture reste à **534/636 niveaux (84,0 %)**, dont **35/99 niveaux 6 (35,4 %)**. HANO compte quatre niveaux.
+
+| Arrêt au niveau 6 | Jeux | Détail |
+| --- | ---: | --- |
+| Aucune proposition applicable | 54 | Dans 53 cas, l’exploration publique avait produit au moins un changement visible |
+| Défaite déclarée par le jeu | 5 | BP35, COMB, LS19, TU93, WA30 |
+| Temps actif | 3 | CASC, KLOT, RSWP |
+| Plafond de commandes | 1 | COLM |
+| Limite de mesure des contours | 1 | M0R0, même erreur qu’au rejeu précédent, avant la première commande du niveau |
+
+Sur les 60 niveaux 6 qui ont un rejeu historique comparable, 58 ont la même empreinte finale. Les deux autres, CASC et KLOT, reproduisent les commandes et résumés de retours de la portion commune. Leurs anciens essais utilisaient le budget indexé sur huit workers et leur parcours actuel se termine plus tôt sur le temps.
+
+Le témoin DC22 reproduit ses six niveaux en **613 commandes** avec les mêmes empreintes et volumes de graphe. Le niveau 6 gagne en **241 commandes et 336,32 s** pendant la campagne. Le plan à rebours guide **20 commandes à partir de la 162e**, dont 10 clics qui modifient le plateau. Le relevé compte les commandes émises avec l’un des deux libellés exclusifs au plan de pont. Aucune activation n’apparaît sur les 64 autres jeux. PORT utilise les passages appariés au niveau 6 et CGWL le transport vers un cadre. Ils fournissent deux cas pour tester séparément les preuves de transfert et de transport sur lesquelles s’appuie le plan de DC22.
+
+Les contrôles LS20 et GABA gardent leurs empreintes et volumes de graphe jusqu’au niveau 4, en **144 et 239 commandes**. Les **260 tests SIC, agent et runtime** passent après correction de l’attendu du test de recharge à un pas. La série intermédiaire est vide pour ce cas. Les décisions et le code d’exécution restent ceux de `7bb9f152`.
+
+### PORT niveau 6, ouvrir les passages encore sans partenaire
+
+Le rejeu de référence termine le niveau 6 après 182 commandes sans victoire. Les quatre ouvertures actives ont des motifs appariés et les quatre autres ont des motifs uniques, dont un uni. La détection écartait la scène au complet tant que ces ouvertures n'étaient pas appariées. Le premier changement de réseau arrive à la 47e commande. La même difficulté revient lorsque le joueur désactive le réseau.
+
+SIC associe maintenant les nouveaux voyants à leurs ouvertures visibles. Il valide le joueur à partir de l'unique lecture compatible avec les voyants, les bords des ouvertures et le sol aux positions mesurées. Les marques de sortie acquises précédemment confirment les ouvertures sans partenaire. Leur présence maintient le besoin de changer le réseau. SIC rejoint un commutateur par les passages déjà mesurés, puis compare les nouveaux appariements et conserve les visites confirmées.
+
+Depuis le niveau 1, SIC gagne PORT en **110 commandes**, toutes sous autorité SIC seul. Les cinq premiers niveaux reproduisent leurs actions et retours, en 94 commandes. Le niveau 6 gagne en **16 commandes et 6,19 s**, au budget de 360 s de temps actif et 600 commandes. La 4e commande forme deux nouvelles paires avec les quatre ouvertures et change les partenaires des paires initiales. SIC conserve ce réseau jusqu'à la sortie. Le contrôle TypeScript et les **20 tests ciblés** passent. La couverture passe à **535/636 niveaux (84,1 %)**, dont **36/99 niveaux 6 (36,4 %)**.
+
+Empreinte des commandes et retours jusqu'à la victoire `391afec032ca570a17aba6d5355ed3591f720cbe10e35b5651caa38424b72d31`.
+
+### CGWL niveau 6, retenir les incompatibilités en changeant la disposition
+
+Le rejeu de référence confirme la prise à la 3e commande. La traversée à la 7e commande produit une animation de retour à l'entrée. La famille de transport cesse alors de proposer et le reste des 87 commandes n'atteint pas la victoire. Au niveau 5, SIC avait pourtant appris deux paires incompatibles. L'identification de la traversée sous contraintes exigeait la présence d'un passager sur la rive d'arrivée. Au niveau 6 les trois commencent sur la rive de départ.
+
+Quand le champ d'interaction et l'ensemble des passagers concordent avec les observations du niveau précédent, SIC retrouve les paires incompatibles indépendamment de leur ordre et relit les rives de départ. Il choisit d'abord le passager commun aux deux incompatibilités. Après le premier dépôt, il revient à vide, puis ramène temporairement ce même passager pour livrer le dernier. Les prises, positions et dépôts sont vérifiés sur chaque retour. Les incompatibilités apprises conservent les références de leurs animations de retour.
+
+SIC seul gagne **CGWL en 164 commandes** depuis le niveau 1. Les cinq premières victoires gardent leurs empreintes en 124 commandes. Le niveau 6 gagne en **40 commandes et 22,14 s**, au budget de 360 s de temps actif et 600 commandes. Le diagnostic accéléré rejoue les 124 commandes publiques d'entrée et restaure la famille de transport. Il retrouve la même empreinte jusqu'à la victoire que la partie complète. TypeScript et 20 tests ciblés passent. La couverture passe à **536/636 niveaux (84,3 %)**, dont **37/99 niveaux 6 (37,4 %)**.
+
+Empreinte des commandes et retours jusqu'à la victoire `af3e68af8b592ba176982c2e6a04b78a712406fcf0620bd5a95f34a97bf46572`.
+
+### M0R0 niveau 6, rendre l'exploration possible
+
+Les **873 composantes** du plateau incluent seulement **13** composantes capables de servir de contour ou de témoin d'intérieur centré. En SIC, les détecteurs éliminent les composantes trop fines avant d'appliquer les limites de la mesure. La mesure originale conserve le domaine natif. Le test de régression met le même contour sur un fond de damier à pixels isolés. TypeScript et les **38 tests ciblés** passent.
+
+Les niveaux 1 à 5 conservent leurs empreintes en **163 commandes**. Au niveau 6, SIC passe l'erreur d'entrée, exécute **80 commandes en 54,72 s** et s'arrête faute de proposition applicable. Les quatre premières directions produisent des déplacements conjoints mesurables. Parmi les 80 retours, 54 modifient l'image, sans déboucher sur un plan émis par la famille de trajet conjoint. Le [relevé action par action](sic-v8-m0r0-level6-actions.md) précise la décision, le retour et les positions des deux pièces quand leur appariement est unique. La couverture reste à **536/636 niveaux (84,3 %)**, dont **37/99 niveaux 6 (37,4 %)**.
+
+### M0R0 niveau 6, tenir une plaque avec un bloc mobile
+
+Un essai depuis la sauvegarde confirme les ouvertures et leur réversibilité. Deux commandes vers le haut placent les pièces aux coordonnées écran `(18,14)` et `(42,14)`. Les deux passages à hauteur 30 s'ouvrent. Une commande vers le bas dégage les plaques et referme les deux passages.
+
+SIC réutilise la connaissance des plaques acquise au niveau précédent et remesure les déplacements des deux pièces avec quatre commandes. Le calcul avec les deux pièces seules ne trouve aucun trajet. La capacité de déplacer le bloc, observée au niveau 4, est retrouvée sur son sprite aligné. Le calcul cherche alors où placer le bloc pour retenir une pièce. Il vérifie chaque retour, y compris le changement de contrôle, la pose du bloc et l'ouverture des passages.
+
+Dans le rejeu gagnant, la **commande 6** ouvre les deux passages. La **commande 12** fait franchir le passage gauche au bloc. La **commande 16** le place en `(18,18)`, sous la pièce gauche. À la **commande 18**, cette pièce reste sur sa plaque en `(18,14)` et seule la pièce droite descend. Le passage gauche se referme et le passage droit reste ouvert. La pièce droite y entre à la **commande 21**.
+
+Le niveau 6 gagne en **47 commandes et 18,08 s** au budget de 360 s de temps actif et 600 commandes. Les 163 commandes des cinq premiers niveaux gardent les mêmes empreintes. Les **210 commandes** du parcours relèvent de SIC seul et deux rejeux chronologiques produisent la même empreinte `d52f4f1d457c15cef26f2e207f68d5aa33b6df93ca2d756f9a095580200dfa53`. TypeScript et les **151 tests ciblés** passent. La couverture atteint **537/636 niveaux (84,4 %)**, dont **38/99 niveaux 6 (38,4 %)**.
+
+Le contrôle sur `8f8f919a` retrouve les déplacements écran mesurés par les quatre premières commandes. Vers le haut et le bas, les deux pièces se déplacent ensemble de quatre pixels. Vers la gauche, la pièce gauche se déplace de quatre pixels à gauche et la pièce droite de quatre à droite. Vers la droite, ces déplacements s'inversent. En conservant les mêmes mesures et le même budget, le calcul avec les deux pièces seules ne trouve aucun trajet. Avec le bloc mobile, il trouve 43 commandes après la mesure. Chaque retour confirme la position des pièces, celle du bloc et l'état attendu des passages jusqu'à la victoire.
+
+Le rejeu depuis la sauvegarde et le rejeu SIC seul depuis le niveau 1 produisent les mêmes commandes et les mêmes retours, avec la même empreinte que la qualification d'origine. Les **47 commandes du niveau 6 prennent 17,36 s** dans le rejeu chronologique. Les cinq tests ciblés sur les plaques et les passages passent.
+
+Le contrôle sur `c8d19e87` précise les liaisons. La plaque haute gauche en `(18,14)` maintient le passage droit. Le passage gauche s'ouvre avec la plaque haute droite en `(42,14)` ou la plaque basse gauche en `(18,42)`. Dans l'essai sans bloc sous la paire, une descente libère les deux plaques hautes et referme les deux passages. Dans le trajet retenu, le bloc maintient la plaque haute gauche à la commande 18. À la commande 35, l'autre pièce atteint la plaque basse et rouvre le passage gauche. La reprise et le rejeu chronologique reproduisent l'empreinte des 210 commandes et retours. Le niveau 6 prend **17,41 s** dans le rejeu chronologique.
+
+### AR25 niveau 6, conserver les deux axes et les deux pièces
+
+Le rejeu de référence s'arrête au niveau 6 après 112 commandes. L'axe vertical est partiellement masqué. Le détecteur peut maintenant retrouver cette bande à partir de l'autre axe et vérifier la grille reconstruite. Les deux pièces occupent cinq et huit cellules. Une connexité diagonale propose de rattacher les fragments de la seconde pièce. Son premier déplacement confirme la translation de l'ensemble et l'immobilité de l'autre pièce.
+
+SIC associe chaque cible aux positions équivalentes par réflexion, puis calcule où placer les deux axes et les deux pièces. Il vérifie la sélection au changement de contributeur. Quand la pièce de cinq cellules couvre sa cible, les marques de cette cible masquent les repères de sélection. SIC vérifie le recouvrement de toute la pièce avant de poursuivre. Les commandes 1 à 13 règlent les axes, les commandes 14 à 33 sélectionnent puis placent la première pièce, et les commandes 34 à 53 font de même pour la seconde.
+
+Une première version gagnait en 63 commandes. Dix clics d'exploration interrompaient le trajet déjà confirmé. La réutilisation du plan passe maintenant avant ces clics lorsque la disposition complète concorde encore avec les observations. Le rejeu final gagne le niveau 6 en **53 commandes et 9,89 s** au budget de 360 s de temps actif et 600 commandes. Les **171 commandes** relèvent de SIC seul et les 118 commandes des cinq premiers niveaux ont les mêmes empreintes que le rejeu de référence. La commande qui gagne le niveau 6 termine l'essai. TypeScript et les **13 tests ciblés** passent.
+
+La couverture atteint **538/636 niveaux (84,6 %)**, dont **39/99 niveaux 6 (39,4 %)**. Empreinte des commandes et retours `6d8d9d68d4878ec66a46cf326a465870ad4c1bea2814449c0667bad473173e1d`.
+
+### BP35 niveau 6, recaler la caméra pendant une inversion
+
+La commande 6 déclenche une animation de 44 images. La mesure du terrain ne relie plus directement le plateau de départ au plateau d'arrivée. Le moteur recale les vues intermédiaires qui se recouvrent et vérifie que tous les chemins de mesure aboutissent au même décalage final. Le rejeu de BP35 retrouve dix rangées de décalage et valide la descente. La famille de gravité poursuit son trajet jusqu'à la commande 9 et intervient ensuite de nouveau. Un test couvre le cas où les vues initiale et finale seules ne suffisent pas.
+
+Les 148 commandes des niveaux 1 à 5 conservent leurs empreintes. Le rejeu en SIC seul se termine au niveau 6 sur une défaite après **64 commandes et 52,63 s**. Le [relevé action par action](sic-v8-bp35-level6-actions.md) montre le point où la famille retrouve le suivi du plateau et les explorations suivantes. TypeScript et les **7 tests ciblés** passent. La couverture reste à **538/636 niveaux**, dont **39/99 niveaux 6**.
+
+### BP35 niveau 6, préparer la descente et ouvrir la sortie avant le détour
+
+Hors agent, un rejeu depuis une même pose confirme que solidifier l'appui à `(39,51)` suffit à empêcher la chute dans cette colonne. L'appui voisin à `(45,51)` seul laisse la chute fatale depuis cette même pose. Le planificateur peut maintenant préférer une inversion dont l'atterrissage est protégé par un appui au-dessus d'un danger mesuré. Il distingue la connaissance acquise de l'inversion et le fait de l'avoir exécutée sur le niveau courant.
+
+Dans le parcours choisi par SIC, la commande 5 prépare l'appui de la colonne `x=45`, puis la commande 6 confirme la descente. La commande 8 retire l'inverseur qui barre le couloir de la sortie. L'inversion éloigne momentanément la pièce de la sortie. Le recalage reconnaît les rangées hautes dans le terrain déjà mémorisé et conserve l'ouverture du couloir. Après l'inversion suivante et les déplacements latéraux vérifiés, la commande 42 réutilise ce passage pour atteindre la sortie.
+
+Deux rejeux chronologiques gagnent en **190 commandes SIC seul**, avec les mêmes actions et retours. Les **148 premières commandes** reproduisent les empreintes des niveaux 1 à 5. Le niveau 6 du rejeu final gagne en **42 commandes et 17,60 s**, au budget de 360 s de temps actif et 600 commandes. TypeScript et **12 tests ciblés** passent. La couverture atteint **539/636 niveaux (84,7 %)**, dont **40/99 niveaux 6 (40,4 %)**.
+
+Empreinte jusqu'à la victoire `6a3ba777efdffa0a83df7a8bb41a6fb44d097a52f79b528f136a5487b71da86f`.
+
+### CASC niveau 6, réserver une jonction avant de lancer les rafales
+
+La référence atteint le budget du niveau 6 après 427 commandes. Depuis la même entrée, les déplacements de la référence couvrent une des trois cibles. Le plan se fonde alors sur les deux cibles visibles et répète des rafales qui reviennent aux mêmes configurations. Un essai hors agent confirme qu'une disposition préparée avec deux bloqueurs peut servir les trois cibles.
+
+SIC mesure le plateau avant de déplacer les curseurs. Quand aucun trajet sans protection ne dessert toutes les cibles, il simule les arrivées en bloquant des cases qui reçoivent une impulsion. Il compare les dispositions selon leurs déplacements estimés. Ici, un seul bloqueur suffit à préserver une jonction pour deux arrivées simultanées. Le continuateur peut alors distribuer la propagation depuis une autre jonction. SIC vérifie les changements de focus avant de poursuivre la préparation. Si une rafale ramène le plateau à une configuration déjà essayée, la famille cède la main à l'agenda.
+
+Le rejeu depuis le niveau 1 gagne CASC en **93 commandes SIC seul**. Les **71 premières commandes** reproduisent les actions et retours des niveaux 1 à 5. Au niveau 6, SIC prépare le bloqueur et le continuateur en 19 commandes, puis gagne à la troisième rafale. Le niveau se termine en **22 commandes et 15,79 s** au budget de 360 s de temps actif et 600 commandes. TypeScript et les **3 tests ciblés** passent. La couverture atteint **540/636 niveaux (84,9 %)**, dont **41/99 niveaux 6 (41,4 %)**.
+
+Empreinte jusqu'à la victoire `4a9a756b032008a54b6693e140f65322afe3917802fddf2f6a9ad44d244e987e`.
+
+### CAVA niveau 6, suivre les portes avec les sceaux, le portail et les dalles
+
+La référence s'arrête après 80 commandes au niveau 6, faute de famille applicable. À l'entrée, la mesure retrouve trois sceaux, le portail et quatre destinations éclairées. Le graphe de collecte laisse de côté les portes et les commutateurs. Il ne distingue pas non plus les dalles fragiles des autres motifs répétés. La nouvelle mesure retrouve les deux groupes de portes, isole la paire de commutateurs, puis reconnaît le même motif de dalle fragile qu'au niveau précédent.
+
+La recherche distingue les états par la position, les sceaux acquis, les dalles consommées et le groupe de portes ouvert. Elle simule la destination après le portail et le changement de phase sur le commutateur. Au clic 9, le retour confirme la téléportation et la disparition de l'appui quitté. Seuls quatre pixels de terrain subsistent sur cet appui. Au clic 15, le retour confirme l'ouverture de l'autre groupe de portes et les nouveaux sauts accessibles. Le dernier sceau est collecté au clic 19 et la sortie valide le niveau au clic 20.
+
+Le rejeu depuis le niveau 1 gagne en **83 commandes SIC seul**. Les **63 premières commandes** et leurs retours reproduisent ceux des niveaux 1 à 5. Le niveau 6 gagne en **20 clics et 14,94 s** au budget de 360 s de temps actif et 600 commandes. L'essai depuis la sauvegarde reproduit les 20 clics et chaque retour attendu. TypeScript et les **2 tests de parcours avec état** passent. PORT reproduit à l'identique les **16 commandes** et leurs retours depuis sa sauvegarde du niveau 6 jusqu'à la victoire. La couverture atteint **541/636 niveaux (85,1 %)**, dont **42/99 niveaux 6 (42,4 %)**.
+
+Empreinte jusqu'à la victoire `646ba852a78bb4657e1a894d612fd5a0bde8008643a4ac96ce5bb08ae8525c65`.
+
+### WEAV niveau 6, préserver les pastilles qui commandent les lignes
+
+La commande 25 obtient la couleur demandée au croisement de la première colonne et de la dernière ligne. Au clic 26, la réparation locale interprète une pastille de cette colonne comme une case à corriger par symétrie. Le retour montre que ce clic recolore le croisement déjà correct. La partie termine les deux axes avec 15 croisements corrects sur 16, puis s'arrête après 113 commandes au niveau 6. Un essai hors agent retire ce seul clic et gagne avec les 40 commandes restantes.
+
+Après un déplacement confirmé sur une ligne, SIC mesure à nouveau les pastilles à partir de la grille et de la référence conservées. La réparation locale écarte les surfaces qui correspondent à ces commandes. Le filtre se limite aux modèles actifs et revalidés sur l'observation courante. Les autres stratégies gardent accès aux commandes. Les jeux de réparation par clic conservent la même règle de symétrie.
+
+Le rejeu depuis le niveau 1 gagne en **199 commandes SIC seul**. Les **159 premières commandes** et leurs retours gardent leurs empreintes. Le niveau 6 se termine en **40 commandes et 20,36 s** au budget de 360 s de temps actif et 600 commandes. Les coordonnées et commandes correspondent exactement au rejeu de référence après retrait du clic fautif. DNOI gagne toujours son premier niveau en trois clics de réparation locale. TypeScript et les **85 tests ciblés** passent. La couverture atteint **542/636 niveaux (85,2 %)**, dont **43/99 niveaux 6 (43,4 %)**.
+
+Empreinte jusqu'à la victoire `edfe272676670067ceab7237f32bad22a26aa779a47be0b2e6733c650682595f`.
+
+### TU93 niveau 6, combiner les prises latérales et les patrouilles
+
+La référence se termine sur une défaite après 39 commandes au niveau 6. Depuis sa sauvegarde d'entrée, la mesure reconnaît deux patrouilles mobiles et six gardes dont la prise latérale a été observée à des niveaux précédents. SIC explore maintenant les positions du mobile avec les phases des patrouilles et les gardes déjà pris. Il vérifie qu'une destination reste libre avant et après le mouvement des patrouilles. Après une prise, il attend que le mobile quitte la case et que celle-ci soit visible pour confirmer le retour au terrain.
+
+À la troisième commande, les images de transition montrent qu'une patrouille avance derrière un garde fixe. SIC conserve la trajectoire masquée tant qu'elle concorde avec la position de ce garde et les patrouilles visibles. Elle redevient visible au retour suivant. Les commandes 10, 13, 18, 19, 21 et 22 exécutent les prises latérales. La commande 28 atteint la sortie et le test s'arrête à cette victoire.
+
+Le rejeu depuis le niveau 1 gagne en **140 commandes SIC seul**. Les **112 premières commandes** et leurs retours sont identiques à la référence. Le niveau 6 gagne en **28 commandes et 13,20 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit les 28 commandes. TypeScript et les **3 tests ciblés** passent. La couverture atteint **543/636 niveaux (85,4 %)**, dont **44/99 niveaux 6 (44,4 %)**.
+
+Empreinte jusqu'à la victoire `794c0b9f3587303f39673d59e866d3142fb7e780794e5c1b202225c94d78aa0d`.
+
+### VC33 niveau 6, préparer un passage à partir de deux origines distinctes
+
+La référence s'arrête après 40 clics d'exploration. La mesure supposait que les compartiments s'alignaient sur un support commun. SIC retrouve maintenant les boutons appariés de part et d'autre d'une paroi et mesure la profondeur disponible à partir des supports visibles. Il associe chaque bouton aux deux compartiments qu'il relie. La recherche réserve aussi l'espace de la silhouette au-dessus du liquide.
+
+Le premier passage demande 2 unités de chaque côté. Le second demande 10 unités dans le compartiment transversal et 2 à destination pour que les surfaces arrivent à la même position. Les clics 5 et 14 vérifient ces deux déplacements du marqueur en conservant les quantités. Les transferts entre les portes s'exécutent en séries de clics dont chaque retour est vérifié. Le clic 20 atteint la hauteur de la référence.
+
+Le rejeu depuis le niveau 1 gagne en **143 commandes SIC seul**. Les **123 commandes des niveaux 1 à 5** et leurs retours reproduisent les empreintes de la référence. Le niveau 6 gagne en **20 clics et 6,59 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit ces 20 clics. TypeScript et les **3 tests ciblés** passent. La couverture atteint **544/636 niveaux (85,5 %)**, dont **45/99 niveaux 6 (45,5 %)**.
+
+Empreinte jusqu'à la victoire `8206e09d3aaf46c2bb51f794cad89d804c841d67ac30a162f720c12989e064c7`.
+
+### FT09 niveau 6, dériver les effets d'une marque directionnelle
+
+La référence s'arrête après 40 clics d'exploration. La mesure antérieure cherchait des cases uniformes pour retrouver la grille. SIC utilise désormais les contours répétés des 22 cases marquées lorsque la mesure régulière échoue. La règle acquise au niveau précédent fournit les contraintes des fenêtres. Les marques suggèrent quelles cases voisines peuvent changer avec la case cliquée.
+
+Le premier clic vérifie en P05 que les deux cases prévues changent et que les fenêtres restent intactes. SIC combine ensuite les effets pour corriger le champ et projette les couleurs intermédiaires. Les **12 corrections P02** forment une seule série de clics, avec vérification des cases et des références avant chaque envoi et contrôle de l'empreinte après chaque retour.
+
+Le rejeu depuis le niveau 1 gagne en **75 commandes SIC seul**. Les **62 premières commandes** et leurs retours sont identiques à la référence. Le niveau 6 gagne en **13 clics et 3,20 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde retrouve les mêmes 13 commandes. TypeScript et les **181 tests ciblés** passent. La couverture atteint **545/636 niveaux (85,7 %)**, dont **46/99 niveaux 6 (46,5 %)**.
+
+Empreinte jusqu'à la victoire `40f02e926de47cbfa120ca39d0e78c4c0a51de0ae9dfa039389564be36d8dbb9`.
+
+### VALV niveau 6, amorcer le relais avant de charger la tour
+
+La référence s'arrête après 42 clics au niveau 6. Les essais contrôlés depuis la sauvegarde distinguent les deux branches. Les vannes d'entrée fermées empêchent la pompe d'agir. La branche gauche amorce puis restitue son stock sans charger la tour. La branche droite amorce en trois pompages. Le pompage suivant modifie la tour.
+
+SIC reconnaît le contour du relais appris et sa vanne en amont de la tour. Il isole le drain, ouvre ce relais et ouvre le récepteur restant. Les trois premiers pompages diminuent le stock et modifient le relais alors que la tour et les récepteurs restent inchangés. SIC distingue ces retours de la charge de la tour. Il vérifie l'isolement du drain et de la branche concurrente pendant le pompage. Le dernier clic alimente les trois récepteurs et gagne le niveau.
+
+Le rejeu depuis le niveau 1 gagne en **57 commandes SIC seul**. Les **42 commandes des niveaux 1 à 5** et leurs retours reproduisent les empreintes de la référence. Le niveau 6 gagne en **15 clics et 10,77 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde reproduit les 15 clics. TypeScript et les **2 tests ciblés** passent. La couverture atteint **546/636 niveaux (85,8 %)**, dont **47/99 niveaux 6 (47,5 %)**.
+
+Empreinte jusqu'à la victoire `3679e26e7b98a7acd4abd3f322750cad1dc5acec61550673ee1fc829ae1da50a`.
+
+### R11L niveau 6, retrouver les ancres et vérifier les ressources partiellement masquées
+
+La référence s'arrête après 43 clics au niveau 6. Les pixels de l'ancre active touchent ceux de la balise voisine, si bien que les deux formes appartiennent à la même composante. SIC réapplique le masque appris aux contours visibles. Il retient la partition dont les moyennes correspondent aux deux balises. Les ressources visibles permettent de composer les signatures de deux des trois cibles.
+
+Les clics 2, 3 et 6 construisent la première signature et le clic 9 confirme son arrivée. SIC préserve les ancres encore visibles du groupe livré dans les trajets de collecte. Les clics 13, 16 et 21 complètent la seconde signature. Quand une ancre masque une partie d'une ressource, les pixels visibles doivent rester compatibles avec la signature mesurée. Le retour doit confirmer le nouvel apport et la préservation des couleurs précédentes. Le clic 26 confirme la victoire.
+
+Le rejeu depuis le niveau 1 gagne en **97 commandes SIC seul**. Les **71 commandes des niveaux 1 à 5** et leurs retours gardent les empreintes de la référence. Le niveau 6 gagne en **26 clics et 12,58 s** au budget de 360 s de temps actif et 600 commandes. Le diagnostic depuis la sauvegarde retrouve les mêmes clics et confirme les 26 retours. TypeScript et le test ciblé passent. La couverture atteint **547/636 niveaux (86,0 %)**, dont **48/99 niveaux 6 (48,5 %)**.
+
+### SU15 niveau 6, transformer le carré et synchroniser les livraisons
+
+Le rejeu de référence s'arrête après 46 commandes au niveau 6. Le nuancier affiche six rangs et prolonge les quatre rangs déjà mesurés. Le bandeau demande un carré et un autre mobile, identifié par son motif. SIC réutilise la mesure de portée des clics et le déplacement du mobile. Les clics 1 et 3 rapprochent les pièces. Les clics 2 et 4, hors de portée des deux pièces, laissent le mobile poursuivre sa course. Chacun confirme un recul et une baisse de rang du carré, tandis que le mobile reste visible.
+
+Après obtention du carré demandé, SIC projette l'entrée des deux pièces dans les récepteurs pendant la même animation. Il recalcule le trajet à partir des positions observées après chaque clic. La carte montre les deux pièces et leurs récepteurs. Quatre sondes `P05` précèdent sept commandes `P07`.
+
+Depuis le niveau 1, les **77 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Le niveau 6 gagne en **11 clics et 6,90 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les 88 commandes relèvent de SIC. Le diagnostic depuis la sauvegarde retrouve les mêmes clics. Le rejeu s'arrête à la victoire du niveau 6. TypeScript et les deux tests ciblés passent. Empreinte `ba758812c6a55f5ca6d050212b974e1d77072301839755bc566676119fd3ad48`. La couverture atteint **548/636 niveaux (86,2 %)**, dont **49/99 niveaux 6 (49,5 %)**.
+
+### MIND niveau 6, comparer les codes après l'ajout d'une valeur
+
+À l'entrée du niveau, SIC reconnaît les deux rangées, leur pas et la commande de validation grâce au niveau précédent. La sixième valeur élargit le domaine initial de 3 125 à 7 776 codes et dépasse la limite de 4 096. La famille de comparaison admet désormais jusqu'à 8 192 candidats, avec les mêmes limites de **65 536 évaluations** et **256 formes d'essai**. Le regroupement par symétrie compare 52 formes au premier choix. Le test avec six valeurs reproduit le choix, le score et le nombre de partitions du calcul exhaustif.
+
+Dans le rejeu chronologique, les trois premières soumissions réduisent les possibilités de **7 776 à 104, puis à 12 et à 2**. La quatrième gagne le jeu. Les **69 commandes et les empreintes des retours des niveaux 1 à 5** concordent avec la référence. Le niveau 6 gagne en **24 commandes et 13,27 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les 93 commandes relèvent de SIC. TypeScript et les **47 tests ciblés** passent. Empreinte `7a9cac0f1e17d2904152b04479b45764a0834dff75c3426db1e90333f2785001`. La couverture atteint **549/636 niveaux (86,3 %)**, dont **50/99 niveaux 6 (50,5 %)**.
+
+### RSWP niveau 6, planifier le traitement de neuf caisses
+
+SIC retrouve les trois panneaux, le contrôle de transport et les stocks depuis les observations du niveau précédent. La recherche initiale atteint sa limite sans proposer de tour. La recherche choisit désormais une priorité qui favorise les états où il reste moins de travail après 4 096 états examinés. Elle réutilise les états déjà explorés et garde les limites de tours et d'états. Quand un second ensemble de contours apparaît, le détecteur rattache les panneaux à leurs cadres déjà confirmés par leur position et leur couleur.
+
+SIC contrôle les réservations pendant la saisie et vérifie les quantités, la salle de chaque ouvrier et le refroidissement des fours après chaque tour. À la commande 46, une caisse utilisable reste dans chaque salle et les trois fours sont prêts. La commande 50 valide le neuvième tour et gagne le jeu. Le rejeu depuis la sauvegarde confirme les mêmes 50 commandes et leurs retours.
+
+Le rejeu chronologique gagne en **50 commandes et 36,48 s** au niveau 6, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **60 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 110 commandes relèvent de SIC. TypeScript et les **62 tests ciblés** passent, dont la comparaison des 100 rasters initiaux et un cas avec deux ensembles de cadres. Empreinte `4fb20580a611b668663c3bac9fdb83ffb0454a6541c53edb59572be442d5659d`. La couverture atteint **550/636 niveaux (86,5 %)**, dont **51/99 niveaux 6 (51,5 %)**.
+
+### LP85 niveau 6, distinguer les décalages sur les rayons et les anneaux
+
+Le plateau contient 75 cases et trois cibles. SIC mesure trois groupes de cases disposés en anneaux régulièrement espacés. Sept essais `P05` identifient les décalages sur les rayons, les décalages le long des anneaux et l'échange des trois cibles avec leurs voisines. Des clics distincts depuis la sauvegarde reproduisent chacun de ces effets sur d'autres dispositions.
+
+La recherche remonte depuis les cases marquées. Elle borne les combinaisons à partir des cases reliées à chaque cible par les permutations mesurées. Dans ce niveau, chaque cible est reliée aux 24 cases d'un seul groupe. Le produit borne la recherche à **15 625 configurations** sous la limite de 32 768. SIC effectue **13 clics continus `P07`** avec vérification des permutations sur le plateau entier après chaque retour. Le dernier échange livre les trois couleurs.
+
+Le rejeu chronologique gagne le niveau 6 en **20 clics et 7,53 s**, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **74 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 94 commandes relèvent de SIC. Le rejeu s'arrête à la victoire du niveau 6. TypeScript et les **50 tests ciblés** passent. Empreinte `4ad804933315cc6f4a02e13a870507fe4fe735e676a5c527765a8e5b732219de`. La couverture atteint **551/636 niveaux (86,6 %)**, dont **52/99 niveaux 6 (52,5 %)**.
+
+### POLA niveau 6, préparer les alignements qui permettent un arrêt sur la cible
+
+Un essai depuis la sauvegarde montre une pièce qui traverse la cible pendant l'attraction et la quitte avant l'arrêt. SIC évalue désormais les alignements à partir desquels une paire pourrait s'arrêter sur la cible. Ces alignements orientent la recherche. Chaque déplacement projeté tient compte des cinq pièces et les retours vérifient les positions et orientations avant de poursuivre.
+
+La commande 2 mesure le quart de tour en sens inverse. SIC compare les deux rotations possibles au retour et retient celle qui explique la disposition stabilisée. À la commande 13 du rejeu gagnant, deux pièces orientées dans le même sens s'arrêtent au-dessus de la cible. À la commande 15, la dernière pièce s'oriente dans le même sens, remonte dans la colonne et s'arrête sur la cible, juste sous les deux autres.
+
+Le rejeu chronologique gagne le niveau 6 en **15 commandes et 5,86 s** avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **25 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 40 commandes relèvent de SIC seul. TypeScript et les deux tests ciblés passent. Empreinte `3e6790dc0350e699729577d778dc31011e019d86014f086f9b67bc47b429e472`. La couverture atteint **552/636 niveaux (86,8 %)**, dont **53/99 niveaux 6 (53,5 %)**.
+
+### MEMO niveau 6, lire les indicateurs sous un motif
+
+Les huit premiers clics du rejeu de référence avaient confirmé les correspondances entre motifs. Le neuvième fait apparaître un motif qui couvre le bord de deux indicateurs. L'ancienne lecture exigeait un rectangle visible complet et perdait alors la mesure de progression. SIC peut désormais lire la couleur sur les rangées visibles d'un indicateur calibré. Il exige une majorité de rangées intactes et vérifie que les pixels différents appartiennent à un motif qui dépasse du cadre.
+
+La mesure confirme le neuvième retour, puis le dixième clic remporte le jeu. Le rejeu depuis la sauvegarde retrouve les mêmes clics et les dix retours concordent. Le rejeu chronologique gagne en **10 clics et 6,21 s** avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **50 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 60 commandes relèvent de SIC seul. TypeScript et les **43 tests ciblés** passent. Empreinte `07bdf38a8695e76c7c529246c227239f9bd089dfe53b732945fe94f8823d4968`. La couverture atteint **553/636 niveaux (86,9 %)**, dont **54/99 niveaux 6 (54,5 %)**.
+
+### KATA niveau 6, terminer le calcul de partition dans le budget
+
+Le diagnostic depuis la sauvegarde retrouve les cinq pièces, les contrôles appris et les huit partitions possibles. Le rejeu normal s'arrêtait après 57 commandes d'exploration. La trace d'entrée montre que la recherche de partition atteignait sa limite de deux secondes en attendant les reprises de l'ordonnanceur. Les points de contrôle gardent leurs vérifications d'annulation et d'échéance. Le calcul espace les pauses selon le temps écoulé et le nombre d'opérations effectuées.
+
+SIC choisit une partition entièrement atteignable et vérifie chaque position au retour, y compris entre deux commandes d'une série continue. Le rejeu chronologique gagne en **41 commandes et 10,38 s** au niveau 6, avec un seul processus et le budget de 360 s de temps actif et 600 commandes. Les **103 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 144 commandes relèvent de SIC seul. TypeScript et les **47 tests ciblés** passent. Empreinte `3051eefe0e4d0e49933a6b78fa99a43d3872fb20b931fedb3e4652db6c2cc101`. La couverture atteint **554/636 niveaux (87,1 %)**, dont **55/99 niveaux 6 (55,6 %)**.
+
+### HOLE niveau 6, retrouver un contour de la couleur du fond
+
+Un exemple de la légende se fond dans son arrière-plan et laisse quatre cavités visibles. SIC compare l'alignement, l'espacement et les marges avec les exemples à trois et cinq cavités. Les quatre points et le fond observé dans le cadre déduit soutiennent le contour manquant. La mesure identifie 10 contours, 14 cavités et le fond à vérifier.
+
+Au clic 16, deux cavités adjacentes prennent la même couleur. SIC vérifie que chaque région modifiée reçoit intégralement sa couleur attendue et que le reste du champ est préservé. Le rejeu depuis la sauvegarde retrouve les mêmes 27 clics et confirme les retours.
+
+Depuis le niveau 1, le niveau 6 gagne en **27 clics et 23,77 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **49 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 76 commandes relèvent de SIC seul. TypeScript et les **103 tests ciblés** passent. Empreinte `232ee6eee709539c9f0fd59a10383dc8b79901f61bd9ed0cc2d854170165c821`. La couverture atteint **555/636 niveaux (87,3 %)**, dont **56/99 niveaux 6 (56,6 %)**.
+
+### ELAS niveau 6, reconstruire une grille dont un axe est masqué
+
+Le cadre et les limites de rangée sont visibles, tandis que des pièces interrompent toutes les lignes horizontales. SIC complète les limites de colonne à partir des bords de plusieurs rangées. Il vérifie ensuite l'alternance des cases libres et la forme de chaque pièce. La grille mesurée contient neuf colonnes et huit rangées.
+
+Les commandes 4 et 22 révèlent chacune une pièce sous une pile. La lecture continue lorsque le nombre de pièces visibles dépasse seize. SIC reprend les commandes directionnelles de la partie et vérifie la pièce déplacée, la pièce révélée et le reste de la disposition après chaque retour. Les 107 commandes du niveau 6 correspondent à celles du rejeu depuis la sauvegarde.
+
+Depuis le niveau 1, le niveau 6 gagne en **107 commandes et 46,09 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **79 commandes et les empreintes des retours des quatre premiers niveaux** concordent avec la référence. La nouvelle lecture intervient aussi au niveau 5, qui gagne en **82 commandes** contre 136 auparavant. Les 268 commandes relèvent de SIC seul. TypeScript et les trois tests ciblés passent. Empreinte `60f1961c0557e740671c286ea1fac6f4c1ffb8f48e41cdaa71d9737fd0303782`. La couverture atteint **556/636 niveaux (87,4 %)**, dont **57/99 niveaux 6 (57,6 %)**.
+
+### GIGO niveau 6, mesurer les murs d'un pixel derrière un marqueur plus large
+
+L'essai depuis la sauvegarde confirme qu'une commande horizontale déplace la salle sélectionnée et ses salles internes d'un pixel. L'ouverture dans le cadre extérieur mesure un pixel et s'aligne sur le centre du marqueur de sortie. SIC mesure ce cadre et réunit les fragments des huit salles mobiles. Les géométries déjà reconnues gardent leur ordre de recherche.
+
+SIC calcule cinq placements successifs et vérifie les murs après chaque sélection ou déplacement. À la commande 14, la dernière salle aligne son ouverture et le chemin entre la source et la sortie devient continu. Les **14 commandes et leurs retours** concordent avec le rejeu depuis la sauvegarde.
+
+Le rejeu depuis le niveau 1 gagne le niveau 6 en **14 commandes et 14,93 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **54 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 68 commandes relèvent de SIC seul. TypeScript et le test du cadre fin avec un marqueur externe passent. Empreinte `f97a9f4150d20964882f6605706892510f4635092fd834cde6c2d5ae940310fa`. La couverture atteint **557/636 niveaux (87,6 %)**, dont **58/99 niveaux 6 (58,6 %)**.
+
+### VOIS niveau 6, placer l'appui hors du contour comparé
+
+Le plateau contient neuf pièces et la référence comporte huit positions occupées. Un essai depuis la sauvegarde reproduit les huit couleurs dans le premier cadre. La neuvième pièce y occupe la case qui doit rester vide, et le jeu reste au niveau 6. SIC mesure les trois zones par les bordures entre cases et compare les translations qui contiennent toutes les positions demandées. Il exige que les pièces d'appui restent hors du contour comparé.
+
+La zone qui exclut sa case centrale permet de placer l'appui entre les quatre voisines tout en reproduisant la référence. SIC réutilise les relations entre voisins et couleurs, puis vérifie chaque déplacement. Le rejeu depuis la sauvegarde retrouve les mêmes **66 commandes** et confirme leurs retours.
+
+Le rejeu chronologique gagne le niveau 6 en **66 commandes et 19,82 s** avec un seul processus, au budget de 360 s de temps actif et 600 commandes. Les **126 commandes et les empreintes des retours des cinq premiers niveaux** concordent avec la référence. Les 192 commandes relèvent de SIC seul. TypeScript et les **59 tests ciblés** passent. Empreinte `9eabae388d78cfc6a83f7c5da8c670135688b69309416e8be7e01772f07b2a84`. La couverture atteint **558/636 niveaux (87,7 %)**, dont **59/99 niveaux 6 (59,6 %)**.
+
+Empreinte jusqu'à la victoire `9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092`.
+
+### DAME niveau 6, composer recoloration et téléportation
+
+Le plateau présente neuf pièces du même rang et deux repères appariés. La limite précédente de huit pièces écartait le calcul. Avec la seule limite relevée, un trajet réduit la population à une pièce qui garde sa couleur de départ. Le jeu remet alors le plateau à son état initial.
+
+SIC associe le repère encadré au-dessus du plateau à la seule case qui porte la teinte correspondante. Il réutilise les sauts observés précédemment et compose une arrivée sur la case de recoloration avec des prises et un passage par les repères appariés. Au-delà de huit pièces, SIC doit calculer un trajet complet avant de l'engager. Le deuxième clic confirme la recoloration et le sixième confirme l'arrivée distante. Le masque du sprite distingue la pièce de son repère quand leurs teintes coïncident. Le dernier clic fait ressortir la pièce recolorée et valide la victoire.
+
+Le rejeu chronologique gagne en **14 clics et 4,58 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un processus. Les **51 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 65 commandes relèvent de SIC seul. Le rejeu depuis la sauvegarde reproduit l'empreinte `d256314cd4cc2950e999bc9204ea6e35e5eacca329b6f80e70ed069c3cad3156`. TypeScript et les **143 tests ciblés** passent. La couverture atteint **559/636 niveaux (87,9 %)**, dont **60/99 niveaux 6 (60,6 %)**.
+
+### LS19 niveau 6, vérifier une transition avant de dépenser la réserve
+
+Le rejeu de référence s'arrête sur une défaite après 66 commandes. La première commande révèle la station de forme sous la pièce, mais la couleur de départ n'a aucune transition confirmée. Le planificateur exigeait un trajet prédit jusqu'à la sortie pour proposer un contact.
+
+Quand le calcul ne peut pas compléter le trajet, SIC peut proposer un contact de forme ou de couleur encore inconnu si la propriété correspondante reste à aligner. Il conserve assez de réserve pour parcourir le segment d'approche en sens inverse et vérifie séparément l'effet au contact. La **commande 6** établit la transition de couleur. Les **commandes 10 et 12** confirment les changements de forme et les **commandes 22, 24 et 26** la rotation. Les recharges aux commandes **15, 30 et 37** reflètent le budget nécessaire pour rejoindre la sortie. Les segments de marche gardent la vérification des cases et de la réserve à chaque pas.
+
+Le rejeu chronologique gagne en **47 commandes et 10,29 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **173 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 220 commandes relèvent de SIC seul. Le rejeu depuis la sauvegarde retrouve les mêmes commandes et retours avec l'empreinte `5e2b3528be4e13dba658f4dae6de604f02338993221c4e5b6f5bbc81661d1255`. TypeScript et les **112 tests ciblés** passent. La couverture atteint **560/636 niveaux (88,1 %)**, dont **61/99 niveaux 6 (61,6 %)**.
+
+### COMB niveau 6, réutiliser le cycle des commandes après un changement de palette
+
+À l'entrée du niveau, la perception retrouve les trois commandes, leurs légendes et les 27 configurations du catalogue. Les valeurs de ces commandes diffèrent de celles du niveau précédent. La stratégie exigeait deux correspondances exactes de palettes avant de proposer un clic. Le rejeu de référence dépense alors 67 commandes directionnelles avant la défaite.
+
+Lorsque le catalogue complet est reconnu et que le niveau précédent a confirmé l'effet cyclique d'au moins deux clics sur des commandes distinctes, SIC peut proposer le premier test selon l'ordre de la légende actuelle. Au niveau 6, les clics **1, 3 et 9** calibrent les trois commandes. Chaque retour doit confirmer la valeur suivante et l'ajout de la configuration affichée. À partir de la configuration déjà active, les **26 clics** visitent chacun une configuration supplémentaire.
+
+Le rejeu chronologique gagne en **26 clics et 9,37 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **64 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 90 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `80c6811d4aa24dc191d81b44e45949e23dea345b57f40eb5d3ff846703cad585`. TypeScript et les **9 tests ciblés** passent. La couverture atteint **561/636 niveaux (88,2 %)**, dont **62/99 niveaux 6 (62,6 %)**.
+
+### SMLP niveau 6, vérifier les réglages d'un réseau périodique plus large
+
+La perception mesure cinq pièces, treize portes et trois sas périodiques. La limite historique de douze portes excluait le réseau. SIC accepte jusqu'à quatorze portes pour un réseau à sas périodiques, avec au plus 16 384 configurations de commande et contrôle de l'échéance pendant le calcul.
+
+Le premier lancement fournit **91 images**. SIC mesure les fenêtres des sas et prédit une arrivée commune au **battement 24** pour les **huit ordres de trajet** compatibles avec les observations. Il vérifie ensuite les sept réglages. La **commande 6** confirme qu'un clic ferme une porte et en ouvre une autre. Le deuxième lancement fournit **81 images** et valide la victoire.
+
+Le rejeu chronologique gagne en **9 commandes et 33,78 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **50 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 59 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `33d7136b5bea083f7c96ea319990fa6a64258eb902eaf9b583cc658a47719d24`. TypeScript et les **10 tests ciblés** passent. La couverture atteint **562/636 niveaux (88,4 %)**, dont **63/99 niveaux 6 (63,6 %)**.
+
+### WA30 niveau 6, retrouver un réceptacle masqué et interrompre un retrait
+
+Le modèle précédent exigeait un réceptacle plein. Une caisse masque un angle du nouveau réceptacle, dont le contour et l'intérieur sont de couleurs différentes. SIC réutilise le pas et le motif des caisses appris au niveau 5. Il vérifie le contour visible et le remplissage intérieur, en n'autorisant une partie du contour à manquer qu'à l'emplacement d'une caisse reconnue.
+
+La **commande 5** confirme que le porteur autonome a sorti une caisse du réceptacle. SIC suit son déplacement, attend une forme de contact visible et teste l'interaction à la **commande 16**. Le retour confirme la disparition du porteur et le maintien des positions du joueur et des caisses. SIC ramène les deux caisses aux **commandes 26 et 48**. Après l'arrêt du porteur, **25 déplacements** sont confirmés dans des séries rapides lors du rejeu depuis la sauvegarde. La série qui suit le premier dépôt est interrompue sur un retour différent de la prédiction, puis recalculée.
+
+Le rejeu chronologique gagne en **48 commandes et 15,03 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **316 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 364 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `d3c19cdc58d7cef23fda199233f663eeebab56ae80b8d498b0070a4c29434fdc`. TypeScript et les **10 tests ciblés** passent. La couverture atteint **563/636 niveaux (88,5 %)**, dont **64/99 niveaux 6 (64,6 %)**.
+
+### FUIT niveau 6, compter l'autre sprite parmi les obstacles à la retraite
+
+Le repère de couleur des murs disparaît au niveau 6. SIC reprend la teinte des murs confirmée au niveau 5 et remesure les **24 cases de mur** sur la grille courante. La scène comporte huit pierres et deux sprites réactifs de couleurs différentes. Le modèle de transport conserve leurs positions distinctes et vise les deux interceptions.
+
+La **commande 24** confirme l'attache de la pierre. Au premier contact, la pierre ferme une case et le deuxième sprite occupe l'autre case de retraite. La **commande 25** atteint ainsi le premier sprite et la **commande 26** atteint le second. Les déplacements s'exécutent en séries de **16, 7 et 2**, avec contrôle des positions et de la pierre transportée à chaque retour. La commande d'attache est vérifiée séparément.
+
+Le rejeu chronologique gagne en **26 commandes et 3,89 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **164 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 190 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `09f84326619a118550f6deca315697fdae7aa11ed64998dfb9d162c4cd9c99ab`. TypeScript et les **11 tests ciblés** passent. La couverture atteint **564/636 niveaux (88,7 %)**, dont **65/99 niveaux 6 (65,7 %)**.
+
+### G50T niveau 6, synchroniser les enregistrements avec un porteur autonome
+
+SIC reconnaît une voie isolée de douze positions et distingue son porteur des sprites rejoués. Le plan précédent exigeait d'atteindre d'abord les contacts reliés aux blocs, alors que deux de ces contacts appartiennent à la voie isolée. Les enregistrements aux **commandes 4 et 10** maintiennent les deux accès nécessaires au porteur. Son retour à la position de départ est vérifié à chaque enregistrement.
+
+Pendant le troisième trajet, les passages s'ouvrent aux **commandes 18 et 21**. SIC utilise les positions prévues du porteur pour les franchir dans les fenêtres d'ouverture et contrôle chaque retour. Le contact de la **commande 30** déplace le dernier bloc. Le trajet traverse une deuxième fois les passages temporaires et atteint la sortie à la **commande 49**.
+
+Le rejeu chronologique gagne en **49 commandes et 34,22 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **203 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 252 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `8f785e72e1984a62721539a280f0dab39893e947e8a17ed01eb0cbb6875d98d0`. TypeScript et les **12 tests ciblés** passent. La couverture atteint **565/636 niveaux (88,8 %)**, dont **66/99 niveaux 6 (66,7 %)**.
+
+### ISOS niveau 6, borner la croissance par les dimensions de la référence
+
+Le gabarit, les trois faces et la translation du sommet restent compatibles avec les mesures acquises. Le plafond de huit pièces excluait la construction à neuf pièces. SIC dérive les dimensions compatibles avec les échantillonnages de la référence et écarte les branches trop grandes, car aucun ajout de pièce ne réduit l'étendue projetée. Il compare les constructions d'une profondeur avant de générer la suivante et vérifie directement si une face est masquée par une pièce devant elle.
+
+Le premier clic place la pièce de départ. Les clics **2 et 5** étendent les faces latérales et les clics **7 et 8** prolongent la branche latérale. Chaque ajout respecte l'ordre de profondeur des pièces déjà construites. Le **neuvième clic** confirme la victoire.
+
+Le rejeu chronologique gagne en **9 clics et 10,69 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **24 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 33 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `ea3baf915647f9f03c096f4dc90706a06966ef7307f462bd4b9c1263796db9b8`. TypeScript et les **108 tests ciblés** passent. La couverture atteint **566/636 niveaux (89,0 %)**, dont **67/99 niveaux 6 (67,7 %)**.
+
+### KEYD niveau 6, vérifier les objets d'un inventaire opaque
+
+Le niveau s'ouvre avec un emplacement occupé. Le cadre conservé permet de reconnaître l'indicateur, qui masque la forme portée. SIC cherche quelle forme apprise complète les verrous visibles et vérifie le dépôt de la clé à la **commande 5**. La mesure accepte aussi une clé ajourée dont le contour atteint les quatre côtés de sa case.
+
+La **commande 10** montre qu'un verrou consomme une clé dont le plan prévoyait la conservation. SIC conserve l'état acquis et recalcule. La recharge de la **commande 19** laisse **16 unités** au lieu des 20 prévues et provoque un nouveau calcul. Les marches sans interaction se font en séries vérifiées, dont la plus longue comprend six déplacements. Les commandes **30 et 31** ouvrent le dernier verrou et atteignent la sortie.
+
+Le rejeu chronologique gagne en **31 commandes et 11,88 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **122 commandes** et les retours des niveaux 1 à 5 concordent avec la référence. Les 153 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `c62b1a59130ce9841ca5237b33b1925c56e4cfbaf7aee8de293f6e2608542514`. TypeScript et les **213 tests ciblés** passent. La couverture atteint **567/636 niveaux (89,2 %)**, dont **68/99 niveaux 6 (68,7 %)**.
+
+### LF52 niveau 6, emmener le jeton auxiliaire et découvrir la suite du plateau
+
+SIC remesure la grille et les rails à partir du terrain, puis distingue le jeton auxiliaire par sa forme et sa couleur. La commande 2 confirme qu'il peut sauter par-dessus un jeton vert en le conservant. Les deux transporteurs se touchent et chaque contour est retrouvé sur sa case. SIC embarque le vert à la commande 20 et l'auxiliaire à la commande 22, puis suit les deux pendant le défilement. Les sauts entre un transporteur et le sol fixe sont vérifiés au retour.
+
+La commande 43 réutilise l'auxiliaire comme appui et révèle trois jetons verts supplémentaires. La commande 91 déclenche la victoire officielle. Les mouvements compatibles avec les mêmes rails s'enchaînent en séries vérifiées, interrompues si la caméra bouge ou si de nouveaux jetons apparaissent.
+
+Le rejeu chronologique gagne en **91 commandes et 56,12 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **243 commandes** et les retours des niveaux 1 à 5 reproduisent les empreintes de la campagne précédente. Les 334 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `0b495c4f4d710f633d2bffd3e652d4227c8f9504a5672bc8caf7bef9e87d4939`. TypeScript et les **144 tests ciblés** passent. La couverture atteint **568/636 niveaux (89,3 %)**, dont **69/99 niveaux 6 (69,7 %)**.
+
+### LKEY niveau 6, distinguer les effets des outils sur les dents
+
+Les deux nouveaux outils changent les hauteurs. Au premier essai, la **commande 4** transforme `[4,1,2,4,3]` en `[1,4,3,1,2]`. Le modèle précédent cherchait une permutation et rejetait ce retour. SIC compare maintenant le réordonnancement et le complément de chaque dent dans la plage mesurée. La **commande 6** confirme un complément limité aux positions 1, 3 et 5. Les autres profils et les serrures conservent leurs contours pendant chacun de ces essais.
+
+SIC prépare un profil à la fois et compare les trajets selon le profil tenu et les outils accessibles. Il vérifie la position du curseur, les contours et l'état des serrures après chaque commande. Le décalage appris sur un niveau précédent complète les deux nouveaux effets. Les commandes **11 et 30** ajustent les deux serrures.
+
+Le rejeu chronologique gagne en **30 commandes et 12,80 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **87 commandes** et retours des niveaux 1 à 5 reproduisent la référence. Les 117 commandes relèvent de SIC seul. La sauvegarde d'entrée reproduit l'empreinte `e7887e25bb1d8f3c1ddaa32107649b79dad963ef642f320ddd8aea5dd14978a5`. TypeScript et les **171 tests ciblés** passent. La couverture atteint **569/636 niveaux (89,5 %)**, dont **70/99 niveaux 6 (70,7 %)**.
+
+### LS20 niveau 6, conserver assez de réserve pour les deux sorties
+
+SIC retrouve deux cadres qui demandent chacun une forme, une orientation et une couleur. Après seize commandes, deux passages observés permettent de mesurer un cycle commun de huit déplacements pour les trois stations. Le modèle tient compte des passages où la pièce masque une station. La première sortie disparaît à la **commande 41** avec 19 déplacements en réserve. Les recharges confirmées aux commandes **18, 48 et 66** permettent de poursuivre la recherche pour la seconde sortie, atteinte à la **commande 94**.
+
+SIC compare les trajets qui conservent une sortie déjà validée et permettent d'atteindre les objectifs restants. Il réutilise les effets observés, puis vérifie le débit de réserve, le motif et le cycle des stations au retour de chaque déplacement. L'essai depuis la sauvegarde enchaîne **11 séries** sur des zones dégagées, jusqu'à **sept déplacements** par série. Un test de sauvegarde vérifie aussi l'état publié avant que la période des stations soit connue.
+
+Le rejeu chronologique gagne en **94 commandes et 37,03 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **192 commandes** et les retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 286 commandes relèvent de SIC seul. Le rejeu et la sauvegarde d'entrée produisent l'empreinte `e1723b549c1947acc6b4fedbcab81a4bc7c7a91debdb4f9c52cd33168d7b45c4`. TypeScript et les **131 tests ciblés** passent. La couverture atteint **570/636 niveaux (89,6 %)**, dont **71/99 niveaux 6 (71,7 %)**.
+
+### SK48 niveau 6, assembler deux ordres avec des tiges perpendiculaires
+
+SIC reprend le pas et les directions mesurés, puis lit les deux rails et l'ordre de cubes associé à chacun. La **commande 1** identifie la tige active par son déplacement. À la **commande 4**, le clic sur la référence de l'autre tige change les deux repères de sélection et conserve la position des cubes. Le calcul compare la longueur et la position des deux tiges ainsi que les poussées à leur croisement. La référence lue à l'entrée reste disponible lorsque les repères de réussite couvrent une partie de ses cubes.
+
+La reprise depuis la sauvegarde confirme **14 changements de tige**, **12 séries** de deux à huit déplacements et la victoire à la **commande 69**. La permutation des couleurs reproduit les commandes et les retours en rejouant sur le même environnement.
+
+Le rejeu chronologique gagne en **69 commandes et 24,47 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **151 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 220 commandes relèvent de SIC seul. Le rejeu et la sauvegarde d'entrée produisent l'empreinte `01405517fe7bd665623f6e4f907e222803e57baac009b59c5a9bb73a37e2c6dd`. TypeScript et les **61 tests ciblés** passent. La couverture atteint **571/636 niveaux (89,8 %)**, dont **72/99 niveaux 6 (72,7 %)**.
+
+### SNAR niveau 6, traverser les rails et préserver les passages ouverts
+
+Les deux apparences de patrouilleurs sont suivies séparément des murs sur rails. SIC lit le sens visible sur les murs et mesure leur cadence avec les déplacements observés. Il peut attendre sur place par un déplacement bloqué vérifié quand une impulsion serait consommée. Les images intermédiaires permettent de distinguer un passage bloqué d'un déplacement provoqué ensuite par un mur.
+
+L'impulsion **5** ouvre le premier passage. La **commande 7** confirme la traversée de la porte et l'arrivée après l'éjection. L'impulsion **8** révèle la zone suivante. SIC conserve ensuite la dernière impulsion pendant la traversée haute. La **commande 26** confirme l'éjection vers l'autre côté de la porte ouverte et la **commande 29** atteint la sortie. L'essai depuis la sauvegarde vérifie deux séries de deux déplacements et atteint la victoire dès la première tentative, avec une impulsion disponible.
+
+Le rejeu chronologique gagne en **29 commandes et 11,28 s** pour le niveau 6, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **134 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 163 commandes relèvent de SIC seul. Le rejeu et la sauvegarde d'entrée produisent l'empreinte `40b06f85374db265048d2038dc306694100f2092255abc2059fea4e09f79169b`. TypeScript et les **29 tests ciblés** passent. La couverture atteint **572/636 niveaux (89,9 %)**, dont **73/99 niveaux 6 (73,7 %)**.
+
+### SP80 niveau 6, utiliser une source mobile avec deux coudes
+
+SIC reprend la grille et les translations confirmées au niveau précédent. La marque au centre de la barre signale une seconde source mobile. Le calcul projette les deux fronts, les coudes et les réceptacles, puis vérifie que les placements nécessaires sont accessibles. Les retours confirment chaque déplacement avant la propagation.
+
+Le niveau 6 gagne en **35 commandes et 11,82 s**, sous le budget de 360 s de temps actif et 600 commandes avec un seul processus. Quatre séries vérifiées regroupent 3, 13, 5 et 9 commandes. Les 24 images de propagation confirment les 39 cellules prévues et l'arrivée dans les quatre réceptacles. Les **75 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 110 commandes relèvent de SIC seul. Le rejeu et la sauvegarde d'entrée produisent l'empreinte `afe10293f9b166c9dcbfb7803e8418cbc55082c4ef99fdc5b37d7ae9384f9153`. TypeScript et les **29 tests ciblés** passent. La couverture atteint **573/636 niveaux (90,1 %)**, dont **74/99 niveaux 6 (74,7 %)**.
+
+### PRTL niveau 6, laisser deux charges sur les plaques de sortie
+
+SIC réutilise les commandes de portail, le contrôle de prise et la silhouette de la charge vérifiés au niveau précédent. Il repère les compartiments, le côté accessible de chaque ouverture et les plaques voisines du passage fermé. La pose d'un portail utilise les surfaces visibles et conserve l'extrémité utile quand elle est déjà en place.
+
+La **commande 6** transporte la première caisse. La **commande 10** la laisse sur la plaque droite. Le passage est encore fermé. À la **commande 17**, le personnage emprunte un lien direct vers le compartiment de la seconde caisse, puis le portail au sol la ramène dans la salle de sortie à la **commande 26**. La **commande 29** confirme que les deux charges occupent leur plaque et que le passage est ouvert. Les cinq dernières commandes conduisent à la victoire en conservant les appuis.
+
+Le niveau 6 gagne en **34 commandes et 19,20 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **63 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 97 commandes relèvent de SIC seul. La reprise depuis la sauvegarde, avec permutation de palette à la perception, et le rejeu chronologique reproduisent l'empreinte `e2fb19c4c8320bc446b5683245d26cbd20189b42590f33f7ebb7291565d8ea7a` et s'arrêtent à la victoire du niveau 6. TypeScript et les **40 tests ciblés** passent. La couverture atteint **574/636 niveaux (90,3 %)**, dont **75/99 niveaux 6 (75,8 %)**.
+
+### GABA niveau 6, séparer les charges au retour de l'attachement
+
+Le rejeu sans correction s'arrête après 93 commandes. La projection du premier attachement rassemble quatre cases de même couleur sur un même contour. À la **commande 9**, seule la case adjacente passe à la couleur portée. Les trois autres cases, le porteur et le terrain ne changent pas. SIC vérifie ce retour, distingue les deux charges et abandonne le trajet projeté pour la charge supposée unique.
+
+Les deux charges conservent le récepteur déjà appris pour leur couleur. Le nouveau plan part de la charge réellement attachée et tient compte des cellules qu'occupent les livraisons précédentes. Les dépôts sont validés aux commandes **19, 34, 40, 70 et 100**. L'exécution confirme onze séries de déplacements, de treize commandes au maximum.
+
+Le niveau 6 gagne en **100 commandes et 26,82 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **345 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 445 commandes relèvent de SIC seul. La reprise depuis la sauvegarde, avec les contrôles d'admission et de retour, et le rejeu chronologique reproduisent l'empreinte `2dfe7ee9e77500b8e12d961a91486f08e4c2d6633a775151f974661fffcc932e`. TypeScript et les **38 tests ciblés** passent. La couverture atteint **575/636 niveaux (90,4 %)**, dont **76/99 niveaux 6 (76,8 %)**.
+
+### STCK niveau 6, recomposer un tour avec plusieurs répondants
+
+Le rejeu de référence lie la pile contrôlée à l'éditeur au premier clic puis s'arrête sans plan après 86 commandes au niveau 6. SIC peut maintenant comparer les ordres de réponse des piles et les effets possibles des cases encore masquées. Le calcul cherche un programme qui réduit les piles adverses et revient au site d'édition, sans traverser de case incertaine avec la pile contrôlée. Il vérifie les retours avant de recalculer le tour suivant. La recherche couvre jusqu'à quatre répondants et n'essaie pas de composer plus de huit cartes.
+
+Aux **commandes 2 à 10**, SIC retire la carte de repérage et compose un programme de huit cartes. La **commande 11** fait passer la plus haute pile de dix à six cartes dans une animation de 91 images. La **commande 12** la réduit à deux cartes et les trois autres piles disparaissent. La **commande 13** gagne en réutilisant le même programme. Les retours des deux premiers tours confirment le retour à l'éditeur et les situations projetées pour les piles restantes.
+
+Le niveau 6 gagne en **13 commandes et 6,98 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **39 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 52 commandes relèvent de SIC seul. Le rejeu chronologique et la reprise depuis la sauvegarde produisent l'empreinte `0bd97295549c6521a5970dbc1d6122867f9f05b210abe05d4fb3487e4c64761e`. TypeScript et les **274 tests ciblés** passent. La couverture atteint **576/636 niveaux (90,6 %)**, dont **77/99 niveaux 6 (77,8 %)**.
+
+### KA59 niveau 6, réutiliser un poussoir après le placement d'une charge
+
+Les trois poussoirs sont de couleur uniforme à l'entrée. SIC retrouve leurs rectangles avec les dimensions et les teintes acquises au niveau précédent. Six commandes directionnelles bloquées mesurent les phases sans déplacement du porteur. Les premiers retours distinguent le sens de remplissage. L'extension du sixième confirme le cycle de six commandes et la portée de trois cases. La croix et sa cavité sont associées par leur masque public.
+
+La **commande 9** décale le poussoir inférieur vers la gauche. À la **commande 18**, son extension fait franchir la bande au porteur. Les **commandes 29 et 31** placent la croix dans son logement. La **commande 36** utilise l'extension d'un poussoir supérieur pour revenir sous la bande. La **commande 40** replace le poussoir inférieur à droite. La **commande 48** confirme le second franchissement. La croix reste en place jusqu'à la victoire. La réconciliation vérifie les positions, le contour de la croix et les trois phases, y compris quand des marques de contact masquent une partie du porteur.
+
+Le niveau 6 gagne en **51 commandes et 14,96 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Sept séries continues contiennent jusqu'à dix commandes. Les **153 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 204 commandes relèvent de SIC seul. La reprise depuis la sauvegarde, avec et sans permutation de palette à la perception, reproduit l'empreinte chronologique `681d7cdb884787d2e31cb8d0e8117b7f50224341f9c23c923331bf642478b9bb`. TypeScript et les **30 tests ciblés** passent. La couverture atteint **577/636 niveaux (90,7 %)**, dont **78/99 niveaux 6 (78,8 %)**.
+
+### KLOT niveau 6, préserver la marge de la réserve
+
+Le rejeu initial de `6080f2a5` gagne en 20 commandes. La première flèche consomme une unité de réserve avant que SIC produise le trajet. Depuis la sauvegarde, la recherche avec les pauses de l'interface atteint sa limite de 4 s après 316 pauses, sans proposition. Le calcul des mêmes masques sans ces attentes trouve le trajet. La cadence des pauses suit maintenant le temps écoulé, par tranches de 10 ms, tandis que les contrôles d'annulation et de délai restent ceux de la recherche.
+
+Avec cet ajustement, la première proposition arrive depuis la sauvegarde en **662 ms**, après 39 pauses. SIC démarre par une sélection et exécute la même suite de **7 sélections et 12 translations** que dans la victoire à 20 commandes. Il conserve une unité de réserve. Le blocage de l'insertion partielle reste vérifié jusqu'au dernier déplacement, et trois séries regroupent respectivement trois, deux et trois translations.
+
+Le niveau 6 gagne en **19 commandes et 8,85 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **81 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 100 commandes relèvent de SIC seul. La reprise depuis la sauvegarde et le rejeu chronologique produisent l'empreinte `807f9bf3b61077499cc88a3bece0298d9b5cdd920dfbbc04f08848dbc556639c`. TypeScript et les **71 tests ciblés** passent. La couverture atteint **578/636 niveaux (90,9 %)**, dont **79/99 niveaux 6 (79,8 %)**.
+
+### SIGN niveau 6, apprendre le rendez-vous propre à chaque mode
+
+Les pastilles fixes et le curseur sont espacés de huit pixels à l'entrée alors que les déplacements suivent une grille de quatre pixels. SIC retrouve le pas avec les dimensions visibles du plateau ou le repère mobile marqué, puis vérifie l'alignement des cases accessibles. Il suit la pastille mobile dès le premier mode. Quand le mode change, la marque visuelle peut rester identique et appartenir à une autre trajectoire. SIC reprend alors la mesure du cycle et conserve les acquisitions déjà validées.
+
+La **commande 7** confirme la calibration. La **commande 24** valide une cible fixe. Les commandes **51 et 52** préparent et valident le premier rendez-vous, lors d'une pause de deux phases au même emplacement. La **commande 63** change de mode et conserve les deux acquisitions. La **commande 67** valide la cible fixe du second mode. Les commandes **80 et 81** exploitent la pause de la seconde trajectoire et confirment la victoire. Chaque acquisition est vérifiée par le compteur ou par la progression officielle.
+
+Le niveau 6 gagne en **81 commandes et 64,87 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Le rejeu de référence s'arrêtait après 179 commandes. Les **194 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 275 commandes relèvent de SIC seul. La reprise depuis la sauvegarde, avec et sans permutation de palette à la perception, reproduit l'empreinte chronologique `f45cb74e08caa3a03dcc4e9904fffb93a8518357d4bff56c2e88272dfc89c7e2`. TypeScript et les **30 tests ciblés** passent. La couverture atteint **579/636 niveaux (91,0 %)**, dont **80/99 niveaux 6 (80,8 %)**.
+
+### CLRS niveau 6, ajuster l'union de deux panneaux de même couleur
+
+Le rejeu de référence aligne le vert et le bleu dans ses neuf premières commandes. À la **commande 12**, la mesure cesse de correspondre à la projection d'un panneau rouge unique. SIC distingue désormais les deux contours rouges dans les pixels simples et composés du même canal. Il les sélectionne séparément et déplace chacun hors du bord ou du cadre pour mesurer sa forme. Les retours vérifient que l'autre panneau reste en place et que les couches déjà alignées sont conservées.
+
+Après les mesures des **commandes 10 à 15**, SIC compare les poses dont l'union égale le canal rouge de la référence. La recherche autorise une contribution commune sur un même pixel. Dans le trajet retenu, un panneau fournit 27 pixels et l'autre complète les deux pixels manquants. Les **commandes 20 et 24** confirment les placements utiles jusqu'à la victoire. Le calcul de ce trajet traite deux panneaux d'un même canal après l'alignement des autres couches.
+
+Le niveau 6 gagne en **24 commandes et 16,77 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Le rejeu de référence s'arrêtait après 92 commandes. Les **60 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 84 commandes relèvent de SIC seul. La reprise depuis la sauvegarde avec permutation de palette à la perception reproduit l'empreinte chronologique `4aed1452c9c8ed2fa5d672736b94ccffb12119ad625fb66cfe31d25692ad00ea`. TypeScript et les **28 tests ciblés** passent. La couverture atteint **580/636 niveaux (91,2 %)**, dont **81/99 niveaux 6 (81,8 %)**.
+
+### TRIA niveau 6, lire une pièce sous un repère de destination
+
+SIC réutilise les déplacements des panneaux mesurés au niveau précédent et vérifie leur composition sur un motif de neuf pièces. À la **commande 28**, la sélection change sans déplacer les pièces. Le repère de destination dessine quatre coins sur une autre pièce, dont les pixels intérieurs conservent sa couleur. La lecture de découverte rejette cette case mixte. La grille déjà confirmée permet désormais de relire le motif exact des quatre coins. La lecture vérifie la sélection, la légende et la population des pièces avant d'admettre la suite.
+
+La **commande 29** déplace la pièce sélectionnée vers sa destination et libère la dernière approche. Les **commandes 30 à 32** sélectionnent puis déplacent la dernière pièce. La victoire confirme le motif entier. Les retours vérifient les 31 premiers clics, dont celui qui déclenche le repère, puis la progression officielle valide le dernier.
+
+Le niveau 6 gagne en **32 clics et 15,97 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. La référence s'arrêtait après 144 commandes. Les **86 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 118 commandes relèvent de SIC seul. Le rejeu après fusion de SS03 et la reprise avec permutation de palette à la perception reproduisent l'empreinte `ee6654ecec192bc46362ae14ad6c0be0f5e55aa03bdb1188007a1d21dee882ad`. TypeScript, les **121 tests ciblés** et les **14 tests Custom 4** passent. La couverture de référence atteint **581/636 niveaux (91,4 %)**, dont **82/99 niveaux 6 (82,8 %)**.
+
+
+### SC25 niveau 6, relier les impacts aux nouveaux accès
+
+Le moteur de référence commence par mesurer les directions et s'arrête après 84 commandes. Le parcours confirmé reprend les recettes de taille, de tir et de transfert du niveau précédent. Il reconnaît le sol appris sur les bords visibles de l'acteur et relie les deux cibles à leurs barrières par la couleur du centre.
+
+La **commande 5** réduit l'empreinte et la **commande 9** confirme la première arrivée. Aux **commandes 16 et 33**, l'animation montre le projectile traverser l'intervalle, puis disparaissent la cible et sa barrière. Un carré de la couleur de la jauge apparaît dans chaque cible. Le contact augmente la réserve aux **commandes 19 et 36**. La **commande 24** rétablit la grande empreinte. Les **commandes 28 et 40** confirment deux autres arrivées. Le premier tir couvre tout le très court intervalle en une image. La vérification exige la trace du départ jusqu'à la cible et l'ouverture de la barrière.
+
+Le niveau 6 gagne en **47 commandes et 18,79 s** au budget de 360 s de temps actif et 600 commandes avec un processus. Les **106 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 153 commandes relèvent de SIC seul. La reprise depuis la sauvegarde et le rejeu chronologique reproduisent l'empreinte `6743f1973788f1eede609cadb43601837687215dfa6f384f2158dfe5aa7d05fd`. TypeScript et les **165 tests ciblés** passent. La couverture atteint **582/636 niveaux (91,5 %)**, dont **83/99 niveaux 6 (83,8 %)**.
+
+### S5I5 niveau 6, prendre en compte les pivots de la chaîne
+
+Le moteur de référence commence par tester une zone sans commande reconnue et s'arrête après 80 clics. La mesure des extensions reste valable, mais les nouveaux boutons pivotent une barre et les barres qui la suivent. SIC associe chaque bouton à sa barre, repère le pivot au bord du capuchon et reconstitue la chaîne par les contacts visibles. Les hypothèses de rotation et d'extension sont évaluées contre les obstacles observés et le repère à atteindre.
+
+La **commande 1** mesure un quart de tour de la barre intermédiaire. La barre suivante pivote avec elle, et la précédente reste fixe. SIC utilise le même motif de bouton pour planifier les rotations suivantes. Après chaque clic, il vérifie les orientations, les capuchons, les positions et le marqueur. Les **commandes 2 à 17**, puis **18 à 25**, forment deux séries continues. La dernière extension atteint le centre de la cible et déclenche la victoire officielle.
+
+Le niveau 6 gagne en **25 clics et 5,74 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **146 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 171 commandes relèvent de SIC seul. La reprise avec permutation de palette à la perception reproduit l'empreinte chronologique `ad4b5d82d846d1921737515849c9fa6a25afe621fd560025ccf612f1fdf9cf6f`. TypeScript et les **28 tests ciblés** passent. La couverture atteint **583/636 niveaux (91,7 %)**, dont **84/99 niveaux 6 (84,8 %)**.
+
+### SWCH niveau 6, traverser une salle sans éclairage
+
+Le moteur de référence commence par avancer vers la sortie et s'arrête après 125 commandes. La mesure cherchait trois commandes d'éclairage et deux unités de capacité. Le niveau présente deux commandes, deux portes et une seule unité. Les portes permettent de repérer une salle dont aucun levier d'éclairage n'est visible.
+
+Les **commandes 1 et 2** révèlent puis masquent la salle de départ. SIC garde le plan et récupère la capacité. Les **commandes 5 et 14** confirment les recharges. Les **commandes 7 et 30** vérifient l'ouverture des passages. Les **commandes 17 et 18** relèvent la carte autour de la sortie et rendent la capacité de nouveau disponible. Chaque pas exploratoire a un objectif visible et attend son retour. Les sept refus de mouvement sont enregistrés à l'endroit de l'essai, après vérification que seules les valeurs de réserve peuvent avoir changé. Les passages confirmés restent utilisables après extinction.
+
+Le niveau 6 gagne en **47 commandes et 27,21 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **151 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 198 commandes relèvent de SIC seul. La reprise depuis la sauvegarde, avec et sans permutation de palette à la perception, reproduit l'empreinte `f56ccebadc1cf91f371ed680b44e7075a52447e40c4cd38fee9c10405ada7b77`. TypeScript et les **7 tests ciblés** passent. La couverture atteint **584/636 niveaux (91,8 %)**, dont **85/99 niveaux 6 (85,9 %)**.
+
+### FOGW niveau 6, réactiver les supports après un franchissement refusé
+
+Le moteur de référence commence par sonder un accès sans reconnaître les demandes et s'arrête après 116 commandes. Les deux badges visibles et les supports inactifs coexistent. SIC utilise le contact appris pour mettre un support à disposition de chaque demande, puis revient au suivi indépendant des réceptions.
+
+À la **commande 2**, le corps activable se déplace. La **commande 3** le fait disparaître et confirme deux supports actifs. Les **commandes 7 et 27** rétablissent la scène de départ. SIC réactive les supports et mémorise la position et l'instant des franchissements refusés tant que le même état d'activation est retrouvé. À la **commande 25**, un premier badge change. Son état persiste à la **commande 26** puis disparaît au retour à l'entrée. SIC l'obtient de nouveau à la **commande 45** et confirme sa persistance à la **commande 46**. La **commande 63** termine la seconde réception et déclenche la victoire officielle.
+
+Le niveau 6 gagne en **63 commandes et 27,06 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **124 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 187 commandes relèvent de SIC seul. La reprise depuis la sauvegarde sous permutation de palette reproduit l'empreinte chronologique `74b6c88d6b5da30d5698d3c2ea718f5b6fb0e9bdb8797ba33e7d500af0305065`. TypeScript et les **166 tests ciblés** passent. La couverture atteint **585/636 niveaux (92,0 %)**, dont **86/99 niveaux 6 (86,9 %)**.
+
+### CATL niveau 6, composer deux conditions visibles
+
+Le moteur de référence lit les exemples mais son catalogue de conditions isolées est contredit. Il remet la sélection à l'exploration publique et s'arrête après 115 commandes. SIC appelle désormais le moteur de composition existant après cette contradiction complète. Les **6 400** expressions du catalogue binaire ET/OU sont examinées. Deux expressions reproduisent les vingt exemples et donnent le même label pour chacune des huit propositions observées.
+
+À la **commande 1**, SIC examine les deux groupes, le motif à classer et le bouton du label convenu. Les **commandes 2 à 8** réutilisent les mesures des mêmes exemples et relisent la nouvelle proposition. Le panneau précise que l'accord vaut pour le catalogue testé. Le retour de chaque clic fournit le prochain motif ou la clôture officielle. Le huitième clic termine la collection.
+
+Le niveau 6 gagne en **8 clics et 4,41 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **40 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 48 commandes relèvent de SIC seul. La reprise depuis la sauvegarde, avec et sans permutation de palette, reproduit l'empreinte `af1f95da9d4c8f1b78b2fd1124321b7dddf89c7e5296a10ccb11a94e49f17bd4`. TypeScript et les **622 tests ciblés** passent. La couverture atteint **586/636 niveaux (92,1 %)**, dont **87/99 niveaux 6 (87,9 %)**.
+
+### GORI niveau 6, retrouver un arc hors des portails
+
+Le moteur de référence conserve le modèle du mouvement, mais l'attache au niveau précédent, terminé par une autre famille. Le niveau 6 commence donc par échantillonner les commandes et s'arrête après 81 actions. La reconnaissance de la source, de la cible et du format de jauge permet désormais une nouvelle projection. Les paires d'ovales perpendiculaires sont traitées comme des régions à éviter pour rechercher un arc direct. Un rejeu local distinct confirme qu'un projectile qui traverse ces portails change de direction.
+
+Les **commandes 1 et 2** vérifient la hausse de la jauge, de 25 à 27 puis 29 unités affichées. SIC évalue plusieurs relations entre cette jauge et la vitesse autour du modèle conservé. Il ne soumet le tir que si les projections testées atteignent toutes la cible. La **commande 3** gagne. Le centre du projectile est suivi sur **25 images**, à au moins deux pixels des cadres des portails visibles.
+
+Le niveau 6 gagne en **3 commandes et 1,24 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **43 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 46 commandes relèvent de SIC seul. La reprise depuis la sauvegarde sous permutation de palette reproduit l'empreinte chronologique `42300732e791649c4f0644baa828503be1239d5129dd795174dd6f85f6617639`. TypeScript et les **164 tests ciblés** passent. La couverture atteint **587/636 niveaux (92,3 %)**, dont **88/99 niveaux 6 (88,9 %)**.
+
+### GRIL niveau 6, comparer toutes les formes après un déplacement
+
+Le moteur de référence ne reconnaît pas la rangée de modèles et s'arrête après 82 commandes. La lecture des cases s'appuie désormais sur leurs fonds alignés et sur le sélecteur encadré. Le plan conserve les modèles et leur position mesurée pour chaque forme. Les recouvrements visibles imposent des contraintes d'ordre entre les couches. Chaque nouvelle vue permet de rejeter un modèle s'il contredit une présence, du fond nouvellement visible ou l'ordre déjà établi.
+
+Les **commandes 1 à 4** relèvent les quatre catalogues en plus du premier qui est déjà affiché. À la **commande 5**, le cyan est identifié et quatre variantes du corail et du bleu sont aussi écartées, alors que ces deux formes restent immobiles. La commande **16** écarte une variante du bleu et une du jaune grâce à un autre déplacement du cyan. À la **commande 23**, un seul modèle reste compatible pour chacune des cinq formes. SIC vérifie le marquage de chaque choix jusqu'à la clôture officielle à la **commande 32**.
+
+Le niveau 6 gagne en **32 commandes (12 translations et 20 clics) et 20,39 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **39 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 71 commandes relèvent de SIC seul. La reprise sous permutation de palette reproduit l'empreinte `f3cf0118d86b7539d10fd6cdf9c976905bd169f133b228cb42b64ac012b9f62a`. La lecture de secours ne crée aucune nouvelle sélection sur les 100 observations initiales archivées. TypeScript et les **63 tests ciblés** passent. La couverture atteint **588/636 niveaux (92,5 %)**, dont **89/99 niveaux 6 (89,9 %)**.
+
+### GMAP niveau 6, raccorder une carte aux cases jointives
+
+Le moteur de référence suit le trajet utile jusqu'à la **commande 14**. Le troisième fragment réduit l'espacement de six à cinq pixels. Les bordures des cases couvrent alors les traits de liaison. Le lecteur ne reconnaît pas le fragment et l'exploration finit à 444 commandes sans victoire.
+
+Les repères du départ et de la position, ainsi que les salles communes, permettent d'enregistrer la carte de **22 salles** et de conserver les liaisons déjà mesurées. Les nouvelles adjacences restent des hypothèses de déplacement. La couleur visible sur le bord droit identifie une liaison associée à la clé bleue du nouveau fragment. La **commande 15** obtient cette clé. La **commande 16** ramène SIC dans la salle cartographique. L'animation montre la clé disparaître et le bord droit s'ouvrir. La **commande 17** confirme la sortie.
+
+Le niveau 6 gagne en **17 commandes et 8,22 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **52 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence. Les 69 commandes relèvent de SIC seul. La reprise depuis la sauvegarde sous permutation de palette reproduit l'empreinte chronologique `cea526e2d85a7b93147a0de7ade55c55814344b4a069ca0921edb143ee4683f2`. TypeScript et les **154 tests ciblés** passent. La couverture atteint **589/636 niveaux (92,6 %)**, dont **90/99 niveaux 6 (90,9 %)**.
+
+### ESCT niveau 6, libérer le rail occupé avant l'interception
+
+La référence ouvre le passage à la **commande 7**. Dès la **commande 8**, le contour quitte ce passage pour aller fermer une case du rail. Cette fermeture, puis la cage maintenue sur le même rail, bloquent la voie. Le porteur est intercepté à la **commande 25**. Le rejeu de référence s'arrête après 176 commandes au niveau 6 sans victoire. Un essai depuis la sauvegarde confirme que refermer le premier passage derrière le porteur laisse le risque d'interception sur la voie finale.
+
+SIC réutilise l'intervention avec les murs après avoir validé une route protégée au niveau précédent. Si davantage de rivaux sont visibles et que la route annoncée avance vers la sortie, SIC repère les rivaux sur les rails qui y mènent. Aux **commandes 19 et 20**, il laisse le rival entrer sur le rail, puis rejoint sa case. La **commande 21** l'immobilise. L'effet sur le mur reste incertain sous le sprite. La **commande 22** rouvre le rail et confirme la disparition du rival. Le porteur atteint la sortie à la **commande 25**.
+
+Le niveau 6 gagne en **25 commandes et 12,03 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **93 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Les 118 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Depuis la sauvegarde, la permutation de palette reproduit l'empreinte chronologique `584a3a2a32ddc4c234992e59a9e4442e182e7170c44223dfb21b082be53c8ada`. TypeScript et les **1 842 tests ciblés** passent. La couverture atteint **590/636 niveaux (92,8 %)**, dont **91/99 niveaux 6 (91,9 %)**.
+
+### CN04 niveau 6, suivre les pièces quand les connecteurs se déplacent
+
+Le modèle de référence mesurait cinq pièces puis écartait le plateau à cause de sa limite de quatre pièces. Le repli dépensait 116 commandes sans victoire. En ouvrant la recherche à cinq pièces, on observe deux contrôles qui apparaissent chacun après une sélection. Le second partage visuellement la pièce en deux régions.
+
+SIC conserve les empreintes des pièces immobiles et rattache chaque région modifiée à l'emprise de la pièce sélectionnée ou au contrôle cliqué. Les **commandes 11 à 15** mesurent la croissance d'une pièce de deux à six connecteurs. Les **commandes 18 à 20** mesurent le changement d'espacement des trois connecteurs de l'autre pièce. Le solveur apparie ensuite les connecteurs sur les géométries observées et vérifie les retours des déplacements jusqu'à la victoire.
+
+Le niveau 6 gagne en **49 commandes et 36,61 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **191 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Sur les 49 commandes du niveau 6, 45 relèvent de l'assemblage et quatre de la vérification directionnelle de SIC. Les 240 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Empreinte chronologique `9e71d73eb2dbe22346cc0c9e2837c16d83a75ffabffff44046682f5f2bac8965`. Depuis la sauvegarde, la famille d'assemblage seule conserve ses 45 commandes et leurs retours sous permutation de palette, avec l'empreinte `f68e75f71a6835f9e79b3d94c9220df977428d27f50968dbfeb670f9982f0b53`. TypeScript et les **112 tests ciblés** passent. La couverture atteint **591/636 niveaux (92,9 %)**, dont **92/99 niveaux 6 (92,9 %)**.
+
+### TR87 niveau 6, composer les deux tables de traduction
+
+Le lecteur trouve douze côtés éditables et deux mots fixes. Le solveur de référence ne peut pas associer les deux étages et s'arrête sans victoire après 84 commandes. Le premier essai sur un côté à deux glyphes distincts montre qu'une même commande les transforme simultanément, tandis que les autres côtés et les deux mots restent stables.
+
+SIC réutilise les déplacements et les éditions élémentaires observés au niveau précédent. Il vérifie l'effet sur les paires distinctes avant de les inclure dans un trajet, puis mesure le cycle des glyphes du dernier étage. La synthèse relie les deux tables par les glyphes intermédiaires et conserve les dictionnaires accessibles qui produisent le mot attendu. À partir de la **commande 29**, le rejeu exécute le trajet d'édition et vérifie chaque côté et le curseur jusqu'à la victoire à la **commande 49**.
+
+Le niveau 6 gagne en **49 commandes et 18,03 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **150 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Les 199 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Empreinte chronologique `da1a1431f1d20b498106ee42a92a3aaef12ac2d2b10c1b90a8475209f4e27628`. Depuis la sauvegarde, le planificateur de traduction seul gagne en 45 commandes et conserve l'empreinte `109406527f8fc12b047d1d7abe5abcadab79e7891c82392612f0712e93e37513` sous permutation de palette. Le parcours circulaire porte la décision la plus lente de ce rejeu de 9,68 s à 18 ms. TypeScript et les **107 tests ciblés** passent. La couverture atteint **592/636 niveaux (93,1 %)**, dont **93/99 niveaux 6 (93,9 %)**.
+
+### RE86 niveau 6, utiliser les contacts pour atteindre la forme requise
+
+Les repères demandent des silhouettes qu'une translation rigide ne peut pas obtenir. Le solveur de référence alterne des sondes et s'arrête après 88 commandes sans victoire. SIC réutilise les directions et la sélection mesurées au niveau précédent. Il recherche des trajectoires où un contact réduit une dimension du cadre et augmente l'autre, ou retient une branche de la croix pendant que l'autre se déplace.
+
+Aux **commandes 4 et 16**, le retour confirme le changement du cadre après un contact horizontal. La **commande 20** sélectionne la croix une fois le cadre placé. Les **commandes 26 et 30** vérifient séparément ses décalages horizontal et vertical. SIC garde les contacts inédits unitaires et vérifie chaque retour. Les **16 dernières commandes** sont libérées en une seule série vérifiée.
+
+Le niveau 6 gagne en **46 commandes et 10,89 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **262 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Les 308 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Depuis la sauvegarde, la permutation de palette reproduit l'empreinte chronologique `ecdc7e52f6ca6ae415e44366b3d5aacd4b5109a3c9daa8986a35a719061bc62a`. TypeScript et les **106 tests ciblés** passent. La couverture atteint **593/636 niveaux (93,2 %)**, dont **94/99 niveaux 6 (94,9 %)**.
+
+### SPOR niveau 6, alimenter les lots en respectant les réserves
+
+À la victoire du niveau 5, deux compartiments sont signalés. Le lecteur de référence perd le témoin de sortie et le niveau suivant s'arrête après 80 commandes sans victoire. SIC transfère le compartiment rempli qui contient le point du clic gagnant. Le marquage précédemment confirmé permet de retrouver cette sortie au milieu d'autres cadres. Le transfert seul livre deux doses, mais répète ensuite des chargements et laisse vieillir des produits intermédiaires.
+
+SIC réserve une seule injection de chaque source par lot, traite le contenu disponible avant les indicateurs d'attente et lance la production finale quand ses entrées sont réunies. Pendant ce lancement, il peut préparer le lot suivant. À la **commande 11**, le compartiment en cours de production masque temporairement son cadre. Le retour de l'attente confirme sa progression sans consommer une source. Les livraisons ont lieu aux **commandes 3, 16 et 29**.
+
+Le niveau 6 gagne en **29 commandes et 20,83 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **91 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Les 120 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Depuis la sauvegarde, la permutation de palette reproduit l'empreinte chronologique `e2ac05dbfb582f6564ee6324f568ab08d44485d16501b2d593ede1f484f83712`. TypeScript et les **125 tests ciblés** passent. La couverture atteint **594/636 niveaux (93,4 %)**, dont **95/99 niveaux 6 (96,0 %)**.
+
+### TN36 niveau 6, chaîner deux programmes via une dalle de reprise
+
+Les murs séparent le sol en plusieurs groupes. Le lecteur de référence ne retrouve pas le plateau et s'arrête après 80 commandes sans victoire. SIC vérifie la taille, l'alignement et les deux couleurs alternées de la grille précédente sur l'image courante. Il remesure les cases traversables, la cible et les dalles à motif distinctif sur cette grille.
+
+Après **quatre démonstrations**, SIC dispose des déplacements nécessaires et recherche une chaîne de programmes bornés par le nombre de colonnes. La **commande 13** exécute quatre déplacements à droite et deux vers le haut. Le retour confirme que la programmation reste intacte et que la pièce conserve sa position sur la dalle. SIC réécrit les bits nécessaires depuis ce nouveau départ et la **commande 25** atteint la cible. Les deux séries de réécriture et d'exécution comptent huit et douze commandes.
+
+Le niveau 6 gagne en **25 commandes et 8,42 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **69 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Les 94 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Depuis la sauvegarde, la permutation de palette reproduit l'empreinte chronologique `19267c3263ee4c966ba782834b6e0ff35a9b2c0cdf5f3c89133af87633abc7e4`. TypeScript et les **165 tests ciblés** passent. La couverture atteint **595/636 niveaux (93,6 %)**, dont **96/99 niveaux 6 (97,0 %)**.
+
+### UPST niveau 6, retrouver les rangées basses et leurs portes
+
+Le lecteur de référence trouve 14 pièces et 13 portes et manque le compartiment de l'adversaire de 21 pixels. L'exploration finit après 80 commandes sans victoire. SIC reconstitue les intervalles de sol répétés dans les deux axes. Il accepte les rangées plus courtes si les séparations visibles et le motif des portes raccordent le graphe. Le lecteur retrouve **25 pièces et 28 portes**.
+
+Ce graphe permet de réutiliser les tailles, les rôles et le compteur de tours appris jusque-là. La **commande 6** amène un rouge à 21 pixels. Plus loin, un autre rouge grandit jusqu'au même palier à la **commande 15**. Le rejeu avec l'agenda complet contient ensuite une sonde de repère stable, puis la **commande 17** ouvre la rencontre gagnante. Rejoué seul depuis la sauvegarde, le planificateur des portes gagne en 16 clics et conserve la même suite sous permutation de palette.
+
+Le niveau 6 gagne en **17 commandes et 13,81 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **70 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Les 87 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Empreinte chronologique `c2f53c13e239a7311f896d8bd108ea5486a14afbcbab3daf904559b4ba2ae781`. Empreinte de la reprise par le planificateur des portes `e9641f8ce0f6341ca63399f3d428dd421980979bc0df9467ea586627570d926a`. TypeScript et les **126 tests ciblés** passent. La couverture atteint **596/636 niveaux (93,7 %)**, dont **97/99 niveaux 6 (98,0 %)**.
+
+### GRAV niveau 6, prévoir les glissements avec et sans colle
+
+Le lecteur de référence perd le plateau lorsque des caisses libres touchent leur bord de couleur. Le planificateur suppose que tout contact correspondant immobilise la caisse. Le rejeu échoue après 119 commandes. SIC lit les deux états du bouton de colle, la direction active et les marques qui distinguent les caisses libres des caisses fixées.
+
+Le rejeu du niveau 5 établit la désactivation par commande et la réactivation par clic. Après la victoire, SIC transfère les deux observations. La **commande 4** du niveau 6 désactive la colle et les caisses se stabilisent sous la gravité déjà active. La **commande 7** vérifie la réactivation par la commande directe, dont le retour confirme que la colle est active et que les marques des caisses concordent. Le trajet garde une série de six commandes avant cette vérification et une série de trois après.
+
+Le niveau 6 gagne en **10 commandes et 2,57 s** au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **95 commandes** et retours des niveaux 1 à 5 reproduisent les empreintes de référence, animations comprises. Les 105 commandes relèvent de SIC seul, avec arrêt à la victoire du niveau 6. Depuis la sauvegarde, la permutation de palette reproduit l'empreinte chronologique `7719138c72cdb930e8975d35912ea7a0e960c2f780de111b0346413356698304`. TypeScript et les **105 tests ciblés** passent. La couverture atteint **597/636 niveaux (93,9 %)**, dont **98/99 niveaux 6 (99,0 %)**.
+
+### COLM niveau 6, planifier sur toute la file visible
+
+Le rejeu de référence épuise ses 600 commandes en répétant des dépôts après le retour du plateau à son état de départ. Jusqu'à six groupes sont visibles. La recherche précédente évaluait trois dépôts au plus et pouvait écarter un placement qui prépare une cascade ultérieure.
+
+SIC retrouve la palette, le pas de la grille et le nombre de pièces du niveau précédent. Le score officiel confirme que ce niveau a été gagné. SIC reprend les déplacements, les permutations et les hypothèses de fermeture comme prédictions à vérifier sur le nouveau plateau. La recherche compare les cascades sur les groupes visibles et choisit une première préparation qui reste utile sous les modèles encore compatibles. Les commandes 6, 9, 12, 15, 19 et 21 déposent les six groupes. Chaque dépôt déclenche une nouvelle lecture du plateau. La dernière commande donne la victoire officielle.
+
+Le rejeu depuis le niveau 1 reproduit les 180 commandes des niveaux 1 à 5 et leurs cinq empreintes, animations comprises. Le niveau 6 gagne en **21 commandes et 7,48 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les 201 commandes relèvent de SIC seul. La plus longue série du niveau 6 compte six commandes. L'empreinte chronologique est `d050d9013b41dd8fb56e4b0323cfc0e3ab0c3fc904ff68a98cb5c6ec3ae1f01e`. L'essai depuis la sauvegarde avec une permutation de palette reproduit cette empreinte. TypeScript et les 171 tests ciblés passent.
+
+Le relevé cumulé des rejeux chronologiques couvre **598/636 niveaux (94,0 %)**. Les **99 jeux qui ont un niveau 6** l'ont gagné en SIC seul. HANO se termine au niveau 4. Les 38 niveaux suivants se situent au niveau 7 ou au-delà.
+
+### LP85 niveau 7, composer les rotations d'un même contrôle
+
+Le rejeu de référence s'arrête après 55 clics au niveau 7. Les deux premiers retours mesurent une rotation verticale sur trois emplacements. Le troisième clic déplace douze contenus à la fois sur deux zones séparées de la grille. Le lecteur d'une seule rotation écarte ce retour.
+
+Quand aucune permutation existante n'explique le retour, SIC cherche une rotation dans chaque composante de la grille ayant changé. Il réunit ces rotations uniquement si chacune explique son retour de manière unique, puis vérifie la prédiction après chaque clic. La recherche de trajet peut déplacer temporairement un contenu dans la branche verticale pendant que le bouton commun tourne les deux autres zones.
+
+Le rejeu SIC seul conserve les six empreintes des **94 commandes** précédentes, animations comprises. Le niveau 7 gagne en **13 clics et 3,93 s**, dont trois sondes et dix clics planifiés, avec 360 s de temps actif et 600 commandes au plus par niveau sur un seul worker. Empreinte chronologique `f0d21ea155e19b3ffd354463aba91674e2fe421457bc5c50b954f5e25f16af3d`. TypeScript et les deux tests de transformation passent. L'exécution s'arrête à la victoire du niveau 7.
+
+### TN36 niveau 7, franchir un passage avant son activation
+
+Le rejeu de référence s'arrête après 104 clics. Les démonstrations établissent les quatre déplacements, puis le programme vide confirme que six instructions successives peuvent laisser la pièce en place. SIC admet cette instruction neutre dans la recherche quand aucun programme de déplacements n'atteint la cible ni une reprise utile.
+
+Le premier essai de montée est interrompu et le départ est restauré. Dans les images du programme, une bande apparaît à la troisième instruction sur la zone où le déplacement prévoyait de poser la pièce. SIC associe les cellules de cette bande aux seules instructions où elle apparaît. À la commande 26, le détour atteint une première dalle. À la commande 34, le deuxième programme traverse la bande à la deuxième instruction et atteint la dalle opposée. Le dernier programme contourne le mur et atteint la cible.
+
+Le niveau 7 gagne en **40 clics et 15,27 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **94 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 134 commandes relèvent de SIC seul et le parcours s'arrête à la victoire. Empreinte chronologique `a86219035b1f6b97c67f5cd19003993a36a46853c91ecf8cc7830500896d0e9b`. TypeScript et les 67 tests ciblés passent.
+
+### VC33 niveau 7, combiner plusieurs passages autour d'un compartiment commun
+
+Le rejeu de référence s'arrête après 80 clics. La lecture de la grille détecte maintenant les paires de commandes le long de plusieurs séparateurs, puis distingue les supports à partir des cloisons visibles. Elle trouve cinq compartiments, huit commandes de transfert et trois portes. Un compartiment peut céder du liquide même si aucune porte ne permet à un marqueur de le rejoindre.
+
+La recherche tient compte des quantités et des emplacements des trois marqueurs. Elle conserve les étapes suivantes tant que chaque retour confirme le plan. Les clics 12, 24, 38 et 39 franchissent les portes. Au clic 24, deux marqueurs échangent leurs compartiments tandis que les quantités restent identiques. Le dernier transfert aligne les trois hauteurs.
+
+Le niveau 7 gagne en **49 clics et 19,13 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **143 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 192 commandes relèvent de SIC seul. L'empreinte chronologique est `e12ebb632fd8ac8edf61338c721aa5cf37f52f4b9fdbbf0cd4ec7f82d90518e9`. TypeScript et huit tests ciblés passent.
+
+### AR25 niveau 7, réutiliser la couverture par deux pièces et deux axes
+
+Le premier rejeu depuis le niveau 1 gagne sans modification du moteur. La grille distingue deux pièces de neuf et quatorze cellules, et 42 cellules cibles. La recherche de couverture de niveau 6 réutilise les axes et mesure les deux masques sur la nouvelle grille. Les deux premiers déplacements règlent un axe, puis la sélection et neuf déplacements règlent l'autre. Le trajet place ensuite les deux contributeurs. La dernière commande confirme la couverture complète.
+
+Le niveau 7 gagne en **37 commandes et 9,10 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **171 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 208 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `e9eac1b0518c40ba921be7dae6dac994f43e7e177a29efcf3bb44cdc67eefe6b`.
+
+### LS19 niveau 7, fermer deux demandes avec des motifs successifs
+
+Le rejeu de référence épuise sa réserve après 66 commandes. Le plateau contient deux demandes distinctes et deux stations de couleur. SIC mesure séparément les motifs demandés et les effets observés à chaque station. Le trajet vers une première demande réserve de quoi rejoindre une recharge ensuite.
+
+La commande 22 entre sur la première demande avec le motif correspondant. À la commande 23, la pièce quitte la case et le retour confirme que la demande a disparu. SIC peut alors transformer le motif pour servir la demande restante. La dernière commande déclenche la victoire officielle.
+
+Le niveau 7 gagne en **58 commandes et 25,78 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **220 commandes** des six premiers niveaux et leurs retours gardent les mêmes empreintes, animations comprises. Les 278 commandes relèvent de SIC seul. Empreinte chronologique `e0c49b57b5839d7dc6b97d71e69c051af3aeba4c09c1fe90a4718aece472301a`. TypeScript et les six tests ciblés passent.
+
+### SU15 niveau 7, faire avancer la fusion et la transformation en parallèle
+
+Le rejeu de référence s'arrête après 40 clics. Le bandeau demande deux produits du même type. Les fusions mesurées couvrent une demande. Des mobiles visibles et des contacts confirmés au niveau précédent autorisent la recherche d'une contribution partielle pendant que les autres éléments continuent d'évoluer.
+
+SIC dirige la fusion vers le récepteur proche et vérifie les changements observés après chaque clic. Au quatrième clic, il confirme à la fois la fusion prévue et l'apparition d'un deuxième produit dans l'autre zone. Les deux actions suivantes placent les produits dans leurs récepteurs en conservant la protection contre les mobiles.
+
+Le niveau 7 gagne en **six clics et 3,98 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **88 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 94 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `d6af1ad917d92add59e60bc7143e7875fd63cfaeeae7c87b62f926ea049fa4ea`. TypeScript et les deux tests ciblés passent.
+
+### SK48 niveau 7, apprendre où s'arrête le déplacement des cubes
+
+Le rejeu de référence se termine en défaite après 254 commandes. La commande 1 identifie la tige active et le clic 4 change de tige. La première contradiction arrive à la commande 35. Le modèle prévoyait que le premier cube et les suivants reculeraient avec la tige. La tige recule, mais les cubes restent à l'intérieur de la grille.
+
+SIC compare le retour au modèle où les cases de la glissière sont fermées aux cubes. Cette nouvelle projection reproduit les positions mesurées. Il abandonne le reste du plan, recalcule à partir du plateau courant et vérifie les 45 commandes restantes. Le cube commun finit à l'intersection et contribue aux deux ordres.
+
+Le niveau 7 gagne en **80 commandes et 31,20 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **220 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 300 commandes relèvent de SIC seul. Empreinte chronologique `c0e5aec2efae32f8cdacd7d7f568a388696317cdddb7246935c114d30f09057f`. TypeScript et les cinq tests ciblés passent.
+
+### TU93 niveau 7, distinguer le réveil du garde de son déplacement
+
+La référence se termine après sept commandes. Depuis la sauvegarde, la deuxième commande confirme le déplacement du personnage et le changement de repère du garde resté sur place. La troisième révèle son déplacement. SIC suit le garde à partir du corps encore visible et exclut sa case et ses voisines sur la prochaine commande. Il recalcule après chaque retour et réutilise la prise latérale du garde déjà connu à la commande 10.
+
+Le niveau 7 gagne en **14 commandes et 5,79 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **140 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 154 commandes relèvent de SIC seul. Empreinte chronologique `946da7394ccd7748358afea97a15d20a7003b7a15b1c14986e3806dfb80d2548`. TypeScript et les quatre tests ciblés passent.
+
+### S5I5 niveau 7, composer un trajet avec des barres aux commandes différentes
+
+Le rejeu de référence s'arrête après 96 clics au niveau 7. SIC réutilise les formes de boutons et le pas d'allongement attestés aux niveaux précédents. Le panneau visible rattache les commandes disponibles à chaque barre. La géométrie distingue les articulations de la chaîne, la barre indépendante qui dégage un passage et la barre déjà alignée sur sa cible.
+
+La recherche part des positions compatibles avec les cibles et les raccorde à la configuration courante. SIC mesure la direction de rotation au clic 2 et contrôle les positions visibles à chaque retour. Les clics 38 et 39 raccourcissent temporairement la barre déjà alignée. Les clics 40 et 43 font pivoter l'obstacle, puis les clics 44 et 45 restaurent l'alignement et déclenchent la victoire. Les rotations du trajet respectent l'orientation interdite vers la barre porteuse.
+
+Le niveau 7 gagne en **45 clics et 19,06 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **171 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 216 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `a4dad5be8a83852adba8f3b7d4fa944b7957da28d7187f64bfad23d9787d2415`. TypeScript et les trois tests ciblés passent.
+
+### KA59 niveau 7, préparer une impulsion en passant le contrôle entre deux barres
+
+Le rejeu de référence abandonne après 80 commandes d'exploration. Le modèle périodique attendait un porteur carré. Les deux barres visibles ont maintenant des empreintes distinctes, des ouvertures correspondantes et une marque de sélection transférable. Les six premières commandes mesurent les deux cycles et leurs portées. Les clics de sélection conservent ensuite les phases mesurées.
+
+La recherche remonte des ouvertures vers les positions des poussoirs capables de transférer une charge. Elle vérifie le trajet avec les deux barres, les phases et les collisions. Les commandes 33 et 47 déplacent un poussoir à travers les séparations. L'impulsion de la commande 52 contribue au transfert. La commande 81 place la charge dans son ouverture et la commande 105 rend encore un service de transport avant les placements finaux.
+
+Le niveau 7 gagne en **107 commandes et 30,05 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **204 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 311 commandes relèvent de SIC seul et le score 7 termine le jeu. Empreinte chronologique `f331b565b217adeda84cfc9324b03fa392a740386934533b3758887c131310e1`. TypeScript et les cinq tests ciblés passent.
+
+### SB26 niveau 7, départager les programmes qui produisent le même mot
+
+Le rejeu de référence s'arrête après 80 commandes. La lecture retrouve les trois cadres, le centre déjà rempli et les deux jetons d'appel. Plusieurs répartitions consomment le même stock et produisent exactement le mot demandé.
+
+SIC classe les répartitions valides d'après les correspondances entre jetons littéraux et étiquettes visibles des cadres. Les clics 3 à 4 placent l'appel du cadre intermédiaire et les clics 7 à 8 placent l'appel du cadre intérieur. Les retours confirment les huit placements. La commande 17 soumet le programme et valide l'expansion complète.
+
+Le niveau 7 gagne en **17 commandes et 11,17 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **90 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 107 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `e3e6c4fedeccd870e67062e16a5482a340389effa6977e9424638817c71aaf27`. TypeScript et les trois tests ciblés passent.
+
+### BP35 niveau 7, enchaîner les appuis et les inversions
+
+Le modèle de référence dépasse sa limite de 20 éléments modifiables à l'entrée du niveau et le rejeu s'arrête après 82 commandes. En limitant l'analyse du terrain à la zone accessible, les inverseurs isolés par la paroi forment une réserve d'actions équivalentes. Le modèle garde séparément les appuis solidifiés ou rouverts qui modifient les prochains arrêts.
+
+SIC privilégie les arrêts sûrs pour découvrir de nouveaux paliers. Aux commandes 4 et 5 il prépare le premier appui puis inverse la chute. Le long défilement de la commande 38 présente deux raccords visuels possibles. Le sens de la chute écarte le décalage apparent de −7 rangées. Le raccord de +19 rangées avec le terrain mémorisé confirme le retour vers la sortie.
+
+Le niveau 7 gagne en **46 commandes et 44,55 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **190 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 236 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `a6d33ad5cf58cf73bf57570bd107d5893c34043344b82139d4ca6b864fd31036`. TypeScript et les cinq tests ciblés passent.
+
+### LS20 niveau 7, revenir à une sortie mémorisée sous visibilité partielle
+
+Le rejeu de référence perd après 66 commandes. SIC transporte les motifs de stations et les effets mesurés au niveau précédent. La carte distingue les cellules observées des zones masquées. La lecture du cadre utilise son fond connu pour conserver la forme et la couleur quand le symbole occupe un coin. Le coût par commande est recalibré à partir du retour de la jauge.
+
+La commande 9 révèle la sortie après un transfert, puis SIC en conserve le motif et la position pendant ses détours. Le plan relie les stations de forme et de couleur aux recharges, mesure les positions successives du rotateur et vérifie les contacts qui déterminent l'orientation. Cinq recharges sont confirmées. SIC revient à la sortie avec le motif complet et la commande 107 termine le jeu.
+
+Le niveau 7 gagne en **107 commandes et 49,46 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **286 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 393 commandes relèvent de SIC seul. Empreinte chronologique `e61ef8392c5dbedaaa9952c27118f43d9b717110b5b0ce7d7a9239258f55c5a3`. TypeScript et les quatre tests ciblés passent.
+
+### G50T niveau 7, synchroniser deux transferts distincts
+
+Le rejeu de référence s'arrête après 81 commandes au niveau 7. Quand les deux liaisons sont visibles ensemble, le modèle perd leurs correspondances et ne suit pas le déplacement du porteur autonome. SIC distingue désormais chaque contact, sa paire de cadres et la zone d'animation qui permet de confirmer son effet.
+
+Depuis la zone du récepteur, SIC remonte vers le transfert nécessaire. L'accès à sa commande dépend d'un passage tenu ouvert à distance. Pour atteindre le contact qui tient ce passage, SIC mesure d'abord à la commande 3 le déplacement qui libère le trajet du porteur autonome. Son arrivée déclenche le premier transfert à la commande 8. Les commandes 11 et 26 enregistrent les deux contributions. Le second passage se confirme dans les animations de la commande 40, puis la commande 43 termine le jeu.
+
+Le niveau 7 gagne en **43 commandes et 33,50 s**, au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **252 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 295 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `389d74c0c13513eb3815a10a71e58a5b3f7df44d17b31d280988afe6b1df89e6`. TypeScript et les cinq tests ciblés passent.
+
+### AS66 niveau 7, atteindre les essais encore ouverts par des retours observés
+
+SIC repère une ouverture candidate et compare les quatre directions dans les états observés. Aux commandes 9 et 10, la stratégie de déplacement couplé compare le mouvement des deux pièces, puis les essais près de l'ouverture reprennent. La commande 22 laisse la grille inchangée. SIC change de direction aux commandes 23 et 24, puis la commande 25 produit la victoire officielle. Le rôle de l'ouverture reste à établir.
+
+Le niveau est gagné avec les règles existantes de SIC.
+
+Le premier rejeu au budget de 360 s s'arrête après 453 commandes du niveau 6. Ses 532 commandes, observations et animations correspondent exactement au préfixe de référence. Le rejeu qualifié reprend le budget de référence d'AS66, soit 720 s de temps actif et 600 commandes par niveau, avec un seul processus.
+
+Le niveau 7 gagne en **25 commandes et 19,35 s**. Les **565 commandes** des six premiers niveaux conservent leurs empreintes, animations comprises. Les 590 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 7. Empreinte chronologique `650a8658a84de54ce833875dcc6689ed310f629e8f57b14ce010dc6ed764098c`.
+
+### LF52 niveau 7, révéler les réceptions puis fermer le dernier triplet
+
+Le premier cadrage montre un seul jeton vert. SIC remesure la grille, les rails et l'auxiliaire avec les commandes et le sens de défilement observés au niveau précédent. Il cherche des réceptions près du prochain bord visible et garde la trace des réceptions testées. Un trajet qui reste dans la même zone ne suffit plus à déclarer la progression.
+
+Après la révélation du deuxième jeton, SIC remonte des réceptions possibles du dernier saut vers les rails qui peuvent y amener un transporteur. La recherche se concentre sur ces rails et vérifie le trajet avec tous les transporteurs connus. Le retour confirme les bords de cadre visibles et les rails que le chargement masquait.
+
+Les commandes 48 et 107 étendent la carte. La commande 134 aligne les deux jetons et la commande 148 achève la réduction.
+
+Le niveau 7 gagne en **148 commandes et 77,47 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **334 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 482 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 7. Empreinte chronologique `db6d78d65e8c2090c2fbe41d861efab8947509577e28af0f94ee497a9cf8b8c2`. TypeScript et les 31 tests ciblés passent.
+
+### RE86 niveau 7, affecter ensemble les formes, les couleurs et les repères
+
+SIC réutilise les quatre directions et la sélection confirmées au niveau précédent. La scène montre trois pièces dont les couleurs diffèrent de celles des repères. SIC mesure aussi la butée et les sources de couleur. Il conserve les deux branches d'une croix quand elles se décalent et accepte des extrémités masquées au bord de l'image.
+
+Le modèle combine sur chaque trajet les changements de forme et de couleur. Il écarte les affectations incompatibles avec l'étendue des branches ou les proportions atteignables du cadre. Il cherche ensuite une affectation complète dont chaque trajet a une réception compatible. Le cadre va aux repères bleus, la petite croix aux jaunes et la grande croix aux rouges.
+
+Les commandes 33 et 62 changent la sélection. Les retours confirment chaque déplacement et chaque contact. La commande 98 confirme la couverture complète.
+
+Le niveau 7 gagne en **98 commandes et 21,43 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **308 commandes** des six premiers niveaux conservent les empreintes de leurs commandes, retours et animations. Les 406 commandes relèvent de SIC seul. Le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `4c79aa6769101b70ab00632c73d6170c7e9e527b87fc0a4dcff4268183c5d70c`. TypeScript et les quatre tests ciblés passent.
+
+### WA30 niveau 7, laisser libre la case du rendez-vous
+
+La couleur dominante remplit l'extérieur de la scène. SIC remesure le contour des deux places, le remplissage du réceptacle et le sol accessible depuis le porteur. Il conserve l'identité de la caisse qui vient d'être transportée sur la plage grise.
+
+Le premier rejeu du modèle de poursuite confirme les mouvements du joueur, puis s'épuise après 16 commandes. Le joueur occupe la case nécessaire au déplacement du porteur autonome. SIC garde cette case libre quand le porteur peut y arriver et qu'une caisse vient d'atteindre la plage de transfert.
+
+Les commandes 9 et 10 servent à attendre et observer. La commande 11 neutralise le porteur dont le contour est visible devant le joueur. Les retours confirment la reprise des deux caisses et leur dépôt à la commande 42.
+
+Le niveau 7 gagne en **42 commandes et 16,24 s**, au budget de 360 s de temps actif et 600 commandes avec un seul processus. Les **364 commandes** des six premiers niveaux gardent les mêmes empreintes, animations comprises. Les 406 commandes relèvent de SIC seul. Le rejeu s'arrête à la victoire du niveau 7. Empreinte chronologique `1bb4206796fa8521f9a361e9d76419861fa31595c2cadcb8303ab03e1ef91722`. TypeScript et les trois tests ciblés passent.
+
+Les 18 niveaux 7 sont qualifiés en SIC seul sur les 18 jeux qui en ont un. Les 20 niveaux encore à qualifier se répartissent en 13 niveaux 8, 6 niveaux 9 et 1 niveau 10.
+
+### AR25 niveau 8, conserver les contributeurs alignés
+
+La sauvegarde d'entrée retrouve les 208 commandes attestées jusqu'au niveau 7. SIC reprend les déplacements mesurés et place les deux axes avant de déplacer les pièces. Les retours confirment séparément le placement des contributeurs et de leurs reflets. AR25 gagne avec le solveur existant.
+
+Le niveau 8 gagne en **47 commandes et 11,99 s**. Les **208 commandes** des sept premiers niveaux gardent les mêmes empreintes, animations comprises. Les 255 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 8. Empreinte chronologique `943997fc739b7cbe9c9361daacf563489df89aebd5ac2ed638de23a1d57a7a90`.
+
+### SB26 niveau 8, fermer deux appels pour produire la répétition
+
+La sauvegarde montre deux lignes de référence identiques et une seule réserve de littéraux. SIC vérifie que les deux appels reproduisent toutes les valeurs affichées et ramènent le curseur logique au début. À égalité de correspondance avec les étiquettes, il privilégie les appels de fin de programme qui évitent de suspendre des instructions.
+
+Les 16 clics placent les six littéraux et les deux liens vérifiés. La commande 17 soumet le programme et le retour officiel valide la répétition.
+
+Le niveau 8 gagne en **17 commandes et 11,10 s**. Les **107 commandes** des sept premiers niveaux gardent les mêmes empreintes, animations comprises. Les 124 commandes relèvent de SIC seul et le rejeu s'arrête à la victoire du niveau 8. Empreinte chronologique `f3277035290297a66c05ed209b7b84e743dc9c06ef151bb27ff3dd5c058dfe8c`. TypeScript et les quatre tests ciblés passent.
+
+### LP85 niveau 8
+
+Les cases visibles forment trois circuits coudés et disjoints. Le fournisseur mesure les diagonales contiguës et leurs prolongements rectilignes, puis confronte les permutations candidates aux retours de clic avant de calculer un trajet. Le rejeu chronologique gagne le niveau 8 en **82 commandes SIC seul et 35,04 s**. Deux démarches d’exploration envoient d’abord 35 clics sans effet chacune. Les 12 commandes suivantes mesurent puis appliquent les permutations visibles. Les 107 commandes des niveaux 1 à 7, leurs retours et leurs animations sont identiques à la référence. La campagne s’arrête à la victoire du niveau 8. Empreinte `81489e6173ef277917d6facc42d8a08a11c33db880ce90638d47a7fb04e1469b`.
+
+### TU93 niveau 8
+
+Au niveau 7, SIC observe le changement de marqueur du garde sur place, puis onze déplacements qui suivent la trajectoire du personnage avec deux cases de retard. Au niveau 8, le garde occupe l’unique passage vers la sortie. SIC cherche d’abord un trajet complet incluant le retour par une boucle. Il réutilise la distance d’éveil mesurée, suit le garde à chaque retour et écarte les étapes où leurs positions se croiseraient.
+
+La sixième commande confirme le changement de marqueur avant le premier déplacement du poursuivant. La neuvième retire le garde fixe par le côté. Après le détour, la dix-huitième commande traverse le passage libéré. La vingt-et-unième atteint la sortie. Les cartes de situation lient le déplacement choisi au poursuivant et au passage à dégager.
+
+Le rejeu chronologique gagne le niveau 8 en **21 commandes SIC seul et 11,83 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **154 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de la référence. Les 175 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 98 tests ciblés passent. Empreinte `7ff17404b23f7ff13e45008c4d1ec4e08bc025e2b0b441d3d81e264df7a3401f`.
+
+### SK48 niveau 8
+
+À la cinquième commande, une liaison supplémentaire devient visible sur le rail de la tige verticale. Le retour permet de vérifier la position des tiges et des cubes. SIC conserve les références fixes et actualise les connexions du rail. Une action déjà planifiée peut continuer si sa liaison reste disponible. Si elle disparaît, SIC ferme la série et recalcule sur la géométrie observée.
+
+Le rejeu chronologique gagne le niveau 8 en **42 commandes SIC seul et 11,80 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **300 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de la référence. Les 342 commandes relèvent de SIC seul et le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 124 tests ciblés passent. Empreinte `5105c551d4aa14bcb1026bea7de36846dbc717d320372c9cd7f0843d25909a7b`.
+
+### RE86 niveau 8
+
+La scène contient deux butées semblables, deux cadres qui se recouvrent et une source colorée coupée par le bord. La lecture de son contour visible reprend la géométrie des sources complètes. SIC exclut ce fragment du suivi des pièces. Il cherche les trajets en combinant la forme de passage, les contacts de couleur et la forme nécessaire pour couvrir les quatre repères.
+
+À la treizième commande, le contour prévu est confirmé, mais une autre source fournit la couleur. Le retour permet d’identifier cette couleur et de refaire le trajet à partir de la pose observée. SIC mémorise le résultat pour cette pose et cette commande. Le rejeu complet reproduit les 155 commandes du diagnostic depuis la sauvegarde.
+
+Le niveau 8 gagne en **155 commandes SIC seul et 34,86 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **406 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 561 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 14 tests ciblés passent. Empreinte `84051177248408ec33e9ec8107c0a602f3edc80c418aeed0548ea4849b080963`.
+
+### BP35 niveau 8
+
+La première commande révèle un effet différent de l’inversion prévue. Le bloc central disparaît et les quatre cases voisines se remplissent alors que le personnage reste en place. SIC réutilise ce retour pour distinguer la matière qui se propage de l’inverseur. Il prévoit ensuite à la fois la case libérée, les nouveaux appuis et l’arrêt du personnage, et compare ces effets aux retours visibles.
+
+SIC prépare la montée en conservant un appui devant les dangers. Avant de dépenser le dernier inverseur observé, il cherche un point d’arrêt d’où le couloir de la sortie reste accessible. La commande 36 confirme le changement de gravité. La commande 51 atteint la sortie. Les 51 commandes du rejeu complet sont identiques à celles de l’essai depuis la sauvegarde.
+
+Le niveau 8 gagne en **51 commandes SIC seul et 35,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **236 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 287 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les sept tests ciblés passent. Empreinte `47edecd76a397a7a3472c76f99b25af41033de1db00a3c65876f1c49ef6021ec`.
+
+### S5I5 niveau 8
+
+Deux relations observables structurent le plan. Un bouton de longueur agit sur toutes les barres qui lui correspondent, même si elles sont éloignées. Le bouton de rotation entraîne les barres attachées au pivot. SIC conserve aussi les pièces passives que ces barres déplacent. Les cartes de situation distinguent les récepteurs directs du bouton et les pièces transportées.
+
+Au deuxième clic, SIC vérifie le sens de la rotation. Il tourne ensuite l’assemblage pour libérer successivement les canaux qui déplacent les bloqueurs. Une fois le passage libre, la barre qui porte le marqueur peut s’allonger jusqu’aux repères. Les 36 clics du rejeu complet sont identiques à ceux de l’essai depuis la sauvegarde.
+
+Le niveau 8 gagne en **36 commandes SIC seul et 13,11 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Les **216 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 252 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 12 tests ciblés passent. Empreinte `c722a6f5f89b9ae5ad6dcf31ae248dd7bf78f2e9ef515f37ff7709999d74db37`.
+
+### LS19 niveau 8
+
+SIC conserve les effets observés au niveau précédent. Il relit la forme, la couleur et l’orientation du motif séparément et compte les 22 points de réserve aux positions déjà apprises. Les cases de sol partiellement masquées activent la construction progressive de la carte.
+
+Le trajet révèle la station de forme, puis mesure la recoloration et trois contacts avec la station de rotation. Deux recharges donnent la réserve nécessaire pour revenir vers la sortie dont le motif avait été observé à l’entrée.
+
+Le niveau 8 gagne en **54 commandes SIC seul et 44,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. Depuis la sauvegarde et en rejeu chronologique, les 54 commandes sont identiques. Les **278 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Le rejeu s’arrête à la victoire du niveau 8. Sur LS20, les **393 commandes des sept niveaux** et leurs retours gardent aussi les empreintes de référence. Empreinte `04353a68c6e193db09d36d861d7dcf6bfe6c6dd8e92cf61b53f8316b84f2ee3c`.
+
+### AS66 niveau 8
+
+La partie reprise depuis la sauvegarde exploite les règles existantes de SIC. Les 32 premières commandes comparent des accès candidats. À la commande 33, l’exploration des directions prend le relais et atteint la victoire à la commande 66. Cette trace établit la réussite et le passage d’une règle à l’autre. Le rôle exact des ouvertures candidates et le modèle de rebond des deux obstacles restent à établir par SIC.
+
+Le niveau 8 gagne en **66 commandes SIC seul et 55,47 s** au budget de 720 s de temps actif et 600 commandes retenu pour la référence AS66, avec un seul processus. Les 66 commandes, retours et animations depuis la sauvegarde correspondent exactement au rejeu chronologique. Les **590 commandes des niveaux 1 à 7** gardent leurs empreintes de référence. Les 656 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. Empreinte `557bae00c0c52f406fe89bb9fcaad550b45dd2a8ad2c30e7231fc0073eeb0aaa`.
+
+### LF52 niveau 8
+
+Le retour permet de reconnaître le transporteur au bord inférieur même si une partie de son contour sort du cadre. SIC réutilise les commandes de déplacement calibrées et vérifie le saut d’un auxiliaire par-dessus un autre. Une fois les deux pièces confirmées après le saut, il réutilise cet effet pour préparer l’accès au rail.
+
+À la commande 34, le défilement révèle que deux plots attribués au sol sont transportés. SIC corrige leur rôle dans la carte et conserve cette relation quand le cadre remonte. Les quatre auxiliaires restent disponibles comme relais. La commande 68 réunit les deux jetons à réduire.
+
+Le niveau 8 gagne en **68 commandes SIC seul et 123,18 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 68 commandes. Les **482 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 550 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les 139 vérifications ciblées passent. Empreinte `37086d7751cee447516433471a0d0312c91b5d7910949818c8a94bfea37f1799`.
+
+### SU15 niveau 8
+
+SIC lit les deux légendes du bandeau et distingue les deux carrés demandés du glyphe mobile. Il identifie les quatre récepteurs par leur géométrie et vérifie les effets après chaque clic. Les formes et les rangs proviennent des légendes et les commandes de rapprochement réutilisent le rayon mesuré aux niveaux précédents.
+
+Le premier clic vérifie la fusion des deux carrés et le deuxième met le produit en réserve. Le troisième confirme que la paire choisie produit le glyphe affiché et que le mobile écarté reste disponible. SIC dirige ce dernier vers le carré de rang supérieur. Le deuxième carré demandé apparaît à la commande 7. SIC gare ensuite ce carré en préservant le premier et ramène le glyphe vers son récepteur après sa dérive.
+
+Le niveau 8 gagne en **15 clics SIC seul et 8,50 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 15 clics. Les **94 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 109 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript et les trois tests de production et de livraison passent. Empreinte `39a57daf7b867bd15ed78ebeef1d127652f71347686ade7e58f832e8a406b576`.
+
+### WA30 niveau 8
+
+SIC retrouve les 13 caisses sur la grille et les 17 places réparties sur deux récepteurs. Il conserve l’identité des caisses qui se touchent et réutilise le contour et la commande d’interception confirmés au niveau précédent.
+
+Les retours successifs servent à anticiper où un porteur se présentera. Les contacts aux commandes 21 et 61 retirent les deux porteurs qui perturbaient les livraisons. SIC distingue ensuite la prise du joueur des mouvements autonomes et garde une approche praticable pendant que le dernier transporteur avance. À la commande 137, toutes les caisses occupent une place. La commande 138 laisse le transporteur terminer sa dépose et confirme la victoire.
+
+Le niveau 8 gagne en **138 commandes SIC seul et 76,28 s** au budget de 360 s de temps actif et 600 commandes avec un seul worker. La reprise depuis la sauvegarde et le rejeu complet produisent les mêmes 138 commandes. Les **406 commandes des niveaux 1 à 7**, leurs retours et leurs animations gardent les empreintes de référence. Les 544 commandes relèvent de SIC seul. Le rejeu s’arrête à la victoire du niveau 8. TypeScript, les 133 tests de couplage et les huit tests ciblés de livraison et de réconciliation passent. Empreinte `d4d5a73a25a430c179e682797ce4edaf9851ecfdba0fe5160d8ca207e9b3e727`.
+
+### AS66 niveau 9
+
+SIC mesure deux curseurs, deux types de récepteurs, des bandes de recoloration et une patrouille. Il compare des trajets qui anticipent le déplacement de la patrouille et prévoit l’occupation des deux sièges au même retour. La première occupation à la commande 7 reste provisoire. À la commande 11, un curseur quitte son siège pendant que l’autre se met en position. Le dernier mouvement réunit les deux conditions de victoire.
+
+L’ancienne exploration s’arrête après 516 commandes depuis la même sauvegarde. La nouvelle démarche gagne en **15 commandes SIC seul et 13,51 s** au budget de référence de 720 s de temps actif et 600 commandes avec un seul processus. Les 15 commandes et leurs retours correspondent exactement entre la reprise et le rejeu chronologique. Les **656 commandes des niveaux 1 à 8**, leurs retours et leurs animations gardent les empreintes de référence. TypeScript et les 83 tests ciblés passent. Empreinte `3d6d59e2c4b1234ae5759229362cf4eceae066a9f52391fa4703522801f37d63`.
+
+### BP35 niveau 9 — Reprendre une construction de supports à travers plusieurs inversions
+
+La mémoire du niveau 8 transmet la matière propagative confirmée. À chaque clic, SIC simule l'ouverture et les appuis créés, puis impose un atterrissage vérifiable. Avant de connaître la sortie, il tient compte du trajet jusqu'aux ouvertures visibles dans une barrière dangereuse. Un conduit fermé dans le sens exploré peut justifier un nouveau plan dans l'autre sens si le prochain arrêt est connu.
+
+Un déplacement latéral peut aligner le terrain sur les supports inchangés quand les murs fournissent trop peu de repères. Pour une inversion dont le clic sort du champ, le moteur vérifie aussi son retrait dans une image alignée de l'animation.
+
+Le rejeu chronologique atteint `WIN` en **110 commandes au niveau 9**, en **68,37 s** avec un worker. Les **287 commandes** et leurs retours des niveaux 1 à 8 ont les mêmes empreintes. Depuis la sauvegarde, la famille SIC produit les mêmes 110 commandes et le même résultat final. L'empreinte de la trajectoire est `2bb8a8821410f494a366540b02717f15aa4324f6038e8440742ed5a748419735`. La vérification s'arrête à la victoire du niveau 9.
+
+### LF52 niveau 9 — Rendre le saut accessible avant de poursuivre le trajet
+
+Le moteur réutilise le saut entre auxiliaires confirmé au niveau 8. Le défilement révèle des plots qui entrent dans la carte au moment où ils sont observés. Quand une extrémité du prochain saut sort du cadre, le transporteur a la priorité pour la faire réapparaître. Le moteur conserve les sauts encore réalisables et recalcule le trajet du transporteur à partir de sa position mesurée.
+
+Le niveau 9 est gagné en **112 commandes SIC seul** et **223,08 s** avec un worker. Les **550 commandes** des niveaux 1 à 8, leurs retours et leurs images gardent les mêmes empreintes. La reprise depuis la sauvegarde donne la même trajectoire, `460451dbb5198a34ddb673ac719a7797067007025ff9521acc2d257f2eaceaee`. Le rejeu s'arrête à l'arrivée au niveau 10.
+
+### SU15 niveau 9 — Synchroniser des produits de types différents
+
+Le moteur lit les deux types de carrés et le glyphe demandés dans le panneau. Il réserve un récepteur avant la fusion du premier carré, vérifie les fusions intermédiaires et tient compte du déplacement autonome du glyphe. Le rayon du clic est mesuré sur l'animation. Les quatre dernières commandes placent les trois produits dans les récepteurs pendant le même retour.
+
+Le rejeu chronologique gagne en **13 commandes SIC seul** et **8,67 s** avec un worker. Les **109 commandes et retours** des niveaux 1 à 8 gardent les mêmes empreintes. La reprise depuis la sauvegarde confirme les 13 retours et reproduit la trajectoire `15d4a8112cb0740d8c577a67880b25e4573119ebfd868b79578bf0ce77ba1a86` jusqu'à `WIN`.
+
+### TU93 niveau 9 — Traverser avec les patrouilles et le poursuivant dans la même prévision
+
+SIC choisit une première case sûre, identifie le déplacement des patrouilles dans le retour et réutilise la poursuite mesurée au niveau précédent. La recherche vérifie ensemble les déplacements simultanés, les prises latérales et la trace suivie par le poursuivant. Deux sprites qui partagent un nœud restent distincts dans la prévision jusqu'à leur réapparition.
+
+Le rejeu gagne en **29 commandes SIC seul** et **13,90 s** avec un worker. Les **175 commandes et retours** des niveaux 1 à 8 ont les mêmes empreintes. La reprise depuis la sauvegarde reproduit les 29 commandes et la trajectoire `136b995cefc793f95bb910457d207b369545c24f5b9b58634345ee6c4a99f035` jusqu'à `WIN`.
+
+### WA30 niveau 9 — Combiner les relais, les livraisons locales et la coopération
+
+SIC distingue les récepteurs accessibles directement du secteur qui requiert un relais. Après les deux relais et la livraison directe à droite, il réutilise la preuve d'interception d'un porteur connu. La commande 49 le retire tout en préservant la caisse. Lorsque deux porteurs se ressemblent, SIC associe leurs positions successives par un déplacement compatible et vérifie le mouvement conjoint de la caisse. Il laisse le dernier porteur terminer sa livraison.
+
+Le rejeu gagne en **66 commandes SIC seul** et **37,34 s** avec un worker, sur les 70 commandes disponibles. Les **544 commandes et retours** des niveaux 1 à 8 ont les mêmes empreintes. La reprise depuis la sauvegarde confirme les 66 retours et reproduit la trajectoire `03c160463cae68271c8d1a95b3998967cd60e7d6249fcbad0afb2b230974645b` jusqu'à `WIN`.
+
+### LF52 niveau 10 — Réutiliser les commandes et suivre les chariots au bord du champ
+
+Quand la recherche sur les rails visibles atteint sa borne, SIC suit vers l’intérieur un chariot chargé au bord du champ. Les quatre premiers retours révèlent d’autres chariots sur le même rail. Avec les commandes et la règle de saut apprises au niveau précédent, SIC construit un trajet qui réunit les deux pièces recherchées. À la commande 29, le retour visible concorde avec le départ d’un chariot chargé et le déplacement du suivant vers la place libérée. Le trajet est recalculé à partir de cet état observé.
+
+Le rejeu gagne en **47 commandes SIC seul** et **99,97 s** avec un worker. Les **662 commandes et retours** des niveaux 1 à 9 ont les mêmes empreintes. La reprise depuis la sauvegarde confirme les 47 retours et reproduit la trajectoire `1f375ce271e1a6727a8640a0ec405b135bcc338544bc06e84793dbaf24688da2` jusqu’à `WIN`.
+
+Le cumul des preuves chronologiques atteint **636 niveaux sur 636** sur les **100 jeux** de la campagne. Les rejeux se sont arrêtés à la victoire du niveau demandé.
+
+## Jalon sic-v8-636-levels
+
+Le 19 novembre 2026, une campagne intégrale a reproduit **636 victoires sur 636** et **100 jeux terminés sur 100** avec SIC seul sur le commit `d70cef9e4563ba7993b1e65e0b87c5e26497db9c`, publié en version 160 du Playground. Le tag annoté fixe cette version comme référence de qualification. [Tag GitHub](https://github.com/yannick-fontan-1981/sra-playground/tree/sic-v8-636-levels)
+
+Le banc `scripts/check-sic-chronological.mjs` charge chaque jeu officiel au niveau 1, conserve les acquis entre les niveaux et s’arrête sur le retour officiel `WIN`. La campagne vérifie l’autorité SIC des **16 031 commandes**. Elle comprend les **13 niveaux 8**, les **six niveaux 9** et le niveau 10 de LF52.
+
+La campagne prend **54 min 54 s** avec quatre workers en priorité basse, dont une période de saturation du CPU par une autre suite de tests. La somme des durées mesurées par niveau est de **3 h 23 min 20 s**. Le budget par niveau est de 600 commandes et de 514,29 s de temps agent actif.
+
+La comparaison des commandes et des images de retour retrouve **635 trajectoires identiques sur 636**. SELE niveau 1 demeure gagnant avec 69 commandes, contre 36 dans la référence historique. Le premier écart apparaît à la commande 12. Un rejeu isolé au budget du profil huit workers reproduit cet écart. Les niveaux 2 à 6 de SELE sont identiques à la référence.

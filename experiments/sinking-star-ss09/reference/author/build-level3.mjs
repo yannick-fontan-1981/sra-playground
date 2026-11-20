@@ -1,0 +1,15 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(20,18);
+fill(2,6,10,10);fill(3,4,8,4);fill(3,12,6,12);
+fill(5,7,9,9,'#');fill(6,8,9,8);put(10,8,'#');fill(11,4,15,6);put(11,6,'D');
+fill(12,7,16,11,'~');fill(14,9,15,11);put(15,9,'g');put(15,10,'g');
+put(3,7,'M');put(6,6,'B');put(6,4,'o');put(6,8,'o');put(6,12,'o');
+const spec={id:'ss09-03',title:'Les trois voix séparées',rows:strings(),facing:'W',mirrors:[{at:{x:14,y:5},facing:'SW'}],circuits:[{id:'upper',buttons:[{x:3,y:4}],color:10},{id:'middle',buttons:[{x:9,y:8}],color:14},{id:'lower',buttons:[{x:3,y:12}],color:8}],gates:[{at:{x:4,y:4},circuit:'upper',direction:'E',closedWhen:'pressed'},{at:{x:8,y:8},circuit:'middle',direction:'W',closedWhen:'pressed'},{at:{x:4,y:12},circuit:'lower',direction:'E',closedWhen:'pressed'}]};
+const a=new Author(spec);
+a.select('bard').act('LLL').stage('La première caisse atteint son bouton ; le mur bloque la caisse centrale');
+a.act('RRRR').stage('Le premier verrou retient la caisse pendant que le chant décale celle du milieu à droite');
+a.act('LLLDDDDRRLLL').stage('Le Barde change de couloir et range la troisième caisse ; les trois poids ouvrent la sortie');
+a.go(14,4,'merchant').act('D').stage('Le Marchand descend le miroir pour aligner le dernier îlot');
+a.go(11,6,'bard').act('XRD').stage('Le Barde traverse puis dégage l’arrivée du miroir');
+a.go(11,6,'merchant').act('XR').stage('Le Marchand rejoint la seconde destination');
+a.save(new URL('../level3-design.json',import.meta.url),{label:'Adaptation de Heroes 3: Bard, Druid 15 · distribuer trois poids sur des boutons séparés',url:'https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-15',puzzle:15,objective:'Utiliser les butées et les verrous pour séparer trois caisses, puis orienter la sortie avec le Marchand.'},'Les trois cristaux sur boutons de la référence deviennent trois voix à répartir dans des couloirs isolés. Les portes latérales immobilisent chaque poids placé et rendent possibles les mouvements opposés du chant. La géométrie et les trajets sont originaux ; un miroir mobile ajoute une sortie de duo que le Barde seul ne peut aligner.');

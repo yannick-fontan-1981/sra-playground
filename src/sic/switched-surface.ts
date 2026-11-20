@@ -1,9 +1,10 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { blockedRouteStep, rememberRouteRefusal, type RouteRefusals } from './route-refusals.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 import { emptySurfaceMemory, measureSurface, planAcrossSurfaces, rememberSurface, rememberSurfaceStep,
   sameSurfaceAddress, surfaceDirections, surfacePoint,
@@ -22,7 +23,7 @@ type Step = { direction: Direction; at: NativePoint; floor: boolean };
 type SurfaceWitness = { epoch: number; score: number; roles: SurfaceRoles; refs: string[] };
 type LearnedSurfaces = { epoch: number; memory: SurfaceMemory; refs: string[] };
 type Transfer = { view: SurfaceView; plan: SurfacePlan; local: LearnedSurfaces; roles: SurfaceRoles };
-type Proposal = NativeProposal & ({ scene: Scene; step: Step; needId: string; transfer?: never }
+type Proposal = NativeProposal & ({ scene: Scene; step: Step; walk?: Step[]; needId: string; transfer?: never }
   | { transfer: Transfer; needId: string });
 const point = ([x, y]: NativeBox): NativePoint => [x, y];
 const key = (a: NativePoint) => a.join(',');
@@ -96,7 +97,12 @@ function acquiredScene(rows: NativeRows, ref: string, epoch: number, execution: 
   return { ...next, model };
 }
 
-function pickStep(rows: NativeRows, scene: Scene): Step | null {
+function floorAt(rows: NativeRows, [x, y]: NativePoint, ground: number): boolean {
+  const surrounds = [rows[y - 1]?.[x], rows[y + 2]?.[x], rows[y]?.[x - 1], rows[y]?.[x + 2]];
+  return underlay(rows, [x, y], 2) === ground || surrounds.filter(color => color === ground).length >= 3;
+}
+
+function pickPath(rows: NativeRows, scene: Scene): Step[] | null {
   const { model, actor, peer, ground, context } = scene;
   const { pitch, blocked } = model;
   const start = actor.point, target = peer?.point ?? model.peer.point;
@@ -105,35 +111,33 @@ function pickStep(rows: NativeRows, scene: Scene): Step | null {
     if (blockedRouteStep(blocked, p, direction[0], context)) return [];
     const at = shift(p, direction, pitch);
     if (!peer && model.entry && equal(p, model.entry.gate) && equal(at, model.entry.outside)) return [];
-    const tile = underlay(rows, at, 2);
     const [x, y] = at;
-    const surrounds = [rows[y - 1]?.[x], rows[y + 2]?.[x], rows[y]?.[x - 1], rows[y]?.[x + 2]];
-    const floor = tile === ground || surrounds.filter(color => color === ground).length >= 3;
+    const floor = floorAt(rows, at, ground);
     if (!rows[y + 1] || x < 0 || x + 1 >= rows[y + 1]!.length) return [];
     return [{ direction, at, floor }];
   });
-  if (peer && distance(start, target) === pitch) return options(start).find(s => equal(s.at, target)) ?? null;
+  if (peer && distance(start, target) === pitch) return options(start).filter(s => equal(s.at, target)).slice(0, 1);
   if (peer) {
-    return options(start).filter(s => isGate(s.at)).sort((a, b) => distance(a.at, target) - distance(b.at, target))[0] ?? null;
+    return options(start).filter(s => isGate(s.at)).sort((a, b) => distance(a.at, target) - distance(b.at, target)).slice(0, 1);
   }
 
   const exits = model.gates.filter(g => distance(g, target) === pitch && (!model.entry || !equal(model.entry.gate, g)));
   const towardExit = (p: NativePoint) => Math.min(...exits.map(g => distance(p, g)));
-  const queue: { at: NativePoint; first: Step | null }[] = [{ at: start, first: null }];
+  const queue: { at: NativePoint; steps: Step[] }[] = [{ at: start, steps: [] }];
   const seen = new Set([key(start)]);
   for (const entry of queue) {
     const next = options(entry.at).filter(s => !seen.has(key(s.at)) && (s.floor || isGate(s.at)));
     next.sort((a, b) => towardExit(a.at) - towardExit(b.at) || distance(a.at, target) - distance(b.at, target));
     for (const step of next) {
-      const first = entry.first ?? step;
-      if (exits.some(g => equal(g, step.at)) && equal(shift(step.at, step.direction, pitch), target)) return first;
+      const steps = [...entry.steps, step];
+      if (exits.some(g => equal(g, step.at)) && equal(shift(step.at, step.direction, pitch), target)) return steps;
       if (!step.floor || isGate(step.at)) continue;
       seen.add(key(step.at));
-      queue.push({ at: step.at, first });
+      queue.push({ at: step.at, steps });
     }
   }
   return options(start).sort((a, b) => Number(isGate(a.at)) - Number(isGate(b.at))
-    || Number(b.floor) - Number(a.floor) || towardExit(a.at) - towardExit(b.at))[0] ?? null;
+    || Number(b.floor) - Number(a.floor) || towardExit(a.at) - towardExit(b.at)).slice(0, 1);
 }
 
 function calibrateSurface(model: Model, rows: NativeRows): SurfaceRoles | null {
@@ -146,15 +150,33 @@ function calibrateSurface(model: Model, rows: NativeRows): SurfaceRoles | null {
 
 const sprite = ([x, y]: NativePoint): NativeBox => [x + 1, y + 1, x + 2, y + 2];
 
-export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFamily<Proposal> {
+export function createSicSwitchedSurface(family = switchedSurfaceId, transferObservedSurface = false): NativeFamily<Proposal> {
   const learns = family === learnSwitchedSurfaceId;
   let model: Model | null = null;
   let ascertained: { epoch: number; roles: SurfaceRoles; ref: string } | null = null;
   let witness: SurfaceWitness | null = null;
   let mapped: LearnedSurfaces | null = null;
   let decide: NativeProgramHandle | undefined;
+  function rememberCrossing(before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows, scene: Scene) {
+    if (!scene.peer) return;
+    const next = sceneFor(second, scene.model, before.level_epoch);
+    if (!next || next.peer) return;
+    const roles = calibrateSurface(scene.model, first);
+    const a = roles && measureSurface(first, roles), b = roles && measureSurface(second, roles);
+    if (roles && a && b && a.address.floor !== b.address.floor) {
+      ascertained = { epoch: before.level_epoch, roles, ref: after.observation_ref };
+    }
+  }
   return {
     id: family,
+    observePublicOutcome(before, after, command, first, second) {
+      if (!learns || !transferObservedSurface || before.level_epoch !== after.level_epoch || before.frame_hash === after.frame_hash
+        || before.available_action_refs.includes('ACTION6') || !directions.every(([ref]) => before.available_action_refs.includes(ref))
+        || !directions.some(([ref]) => ref === command.action_ref)
+        || ascertained?.epoch === before.level_epoch) return;
+      const scene = sceneFor(first, null, before.level_epoch);
+      if (scene) rememberCrossing(before, after, first, second, scene);
+    },
     async attachPrograms(registry) {
       if (learns) decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -210,7 +232,7 @@ export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFami
       const scene = learns && !prior ? acquiredScene(rows, ref, observation.level_epoch, execution)
         : sceneFor(rows, prior, observation.level_epoch);
       if (!scene || scene.model.count >= 24) return null;
-      const step = pickStep(rows, scene);
+      const path = pickPath(rows, scene), step = path?.[0];
       if (!step) return null;
       const memory = scene.model;
       const evidence: [string, ...string[]] = [ref, ...memory.refs.filter(value => value !== ref)];
@@ -238,9 +260,17 @@ export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFami
       const situation = contact ? 'Test contact with the visible target'
         : strategy === 'P05' ? 'Test access through the visible opening'
           : 'Use the current surface to reach the last observed target position';
+      const walk: Step[] = [];
+      if (routeSupported && !scene.peer) for (const leg of path!.slice(0, Math.min(remaining, maximumCommittedActions, 24 - memory.count))) {
+        if (!leg.floor || memory.gates.some(gate => equal(gate, leg.at))) break;
+        walk.push(leg);
+      }
+      const actions = walk.length > 1 ? walk.map(leg => ({ action_ref: leg.direction[0], data: {} })) : [action];
       return {
         status: 'proposed', kind: family, scene, step, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [action], steps: [{ action, expected_after: step.at }],
+        ...(walk.length > 1 ? { walk } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps: actions.map((action, index) => ({ action, expected_after: walk[index]?.at ?? step.at })),
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Reach the target through the available surface', situation, evidence, agenda: navigation?.entries ?? [],
@@ -250,14 +280,20 @@ export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFami
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !proposal.transfer && proposal.walk) {
+        const { scene, walk } = proposal, current = sceneFor(packet.frame_rows, scene.model, observation.level_epoch);
+        const admitted = scene.model.epoch === observation.level_epoch && !!current && current.context === scene.context
+          && equal(current.actor.point, walk[index - 1]!.at) && floorAt(packet.frame_rows, walk[index]!.at, current.ground);
+        return { admitted, reason: admitted ? 'measured_surface_path_open' : 'alternate_surface_context_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'alternate_surface_step_bound' : 'alternate_surface_context_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.transfer) {
@@ -269,11 +305,13 @@ export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFami
           ? 'passage_and_arrival_surface_observed' : matched ? 'observed_surface_step' : 'record_surface_prediction_difference' };
       }
       const next = sceneFor(second, proposal.scene.model, before.level_epoch);
-      const matched = !!next && equal(next.actor.point, proposal.step.at);
-      return { matched, seal_prefix: true, reason: !matched ? 'surface_refused_predicted_step'
+      const step = proposal.walk?.[index] ?? proposal.step;
+      const matched = !!next && equal(next.actor.point, step.at);
+      return { matched, seal_prefix: !matched || next?.context !== proposal.scene.context || index + 1 >= proposal.actions.length,
+        reason: !matched ? 'surface_refused_predicted_step'
         : next?.context !== proposal.scene.context ? 'piece_moved_and_surface_changed' : 'piece_at_predicted_tile' };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index) {
       if (proposal.transfer) {
         if (after.levels_completed > before.levels_completed && witness) {
           witness = { ...witness, epoch: after.level_epoch, score: after.levels_completed,
@@ -286,20 +324,17 @@ export function createSicSwitchedSurface(family = switchedSurfaceId): NativeFami
           refs: [...local.refs.slice(-6), after.observation_ref] };
         return { events: [], ...(next && next.address.floor !== view.address.floor ? { reviewEvidence: 'A passage changed the visible surface' } : {}) };
       }
-      const { scene, step } = proposal;
+      const step = proposal.walk?.[index] ?? proposal.step;
+      const scene = index > 0 ? sceneFor(first, model ?? proposal.scene.model, before.level_epoch) ?? proposal.scene : proposal.scene;
       const sameLevel = before.level_epoch === after.level_epoch && before.state === after.state;
       const next = sameLevel ? sceneFor(second, scene.model, before.level_epoch) : null;
-      if (!learns) {
+      if (!learns || transferObservedSurface) {
         const prior = ascertained?.epoch === before.level_epoch ? ascertained : null;
         if (after.levels_completed > before.levels_completed && prior && scene.peer && equal(step.at, scene.peer.point)) {
           witness = { epoch: after.level_epoch, score: after.levels_completed, roles: prior.roles,
             refs: [prior.ref, before.observation_ref, after.observation_ref] };
         } else if (!prior && scene.peer && next && !next.peer) {
-          const roles = calibrateSurface(scene.model, first);
-          const a = roles && measureSurface(first, roles), b = roles && measureSurface(second, roles);
-          if (roles && a && b && a.address.floor !== b.address.floor) {
-            ascertained = { epoch: before.level_epoch, roles, ref: after.observation_ref };
-          }
+          rememberCrossing(before, after, first, second, scene);
         }
       }
       if (!sameLevel) return { events: [] };

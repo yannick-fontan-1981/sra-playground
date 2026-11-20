@@ -1,5 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { selectTimedCompartment } from './timed-compartment-growth.ts';
@@ -16,7 +16,7 @@ function inside([x, y]: NativePoint, [l, t, r, b]: NativeBox): boolean {
   return x >= l && x <= r && y >= t && y <= b;
 }
 
-function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): CompartmentLayout {
+function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows, minimumSide = 8, maximumRooms = 16): CompartmentLayout {
   const { rooms, floor, gates } = layout;
   const sample = ({ point: [x, y], axis: [dx, dy] }: Gate, offset: number) => rows[y + dx * offset]?.[x + dy * offset];
   const styles = gates.flatMap(gate => {
@@ -28,7 +28,7 @@ function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): Com
   const boxes = rooms.flatMap(({ box: [l, t, r, b] }) => {
     const partitions: { gate: Gate; boxes: NativeBox[] }[] = [];
     for (const [dx, dy] of [[1, 0], [0, 1]] as const) {
-      for (let y = t + 8 * dy; y <= b - 8 * dy; y++) for (let x = l + 8 * dx; x <= r - 8 * dx; x++) {
+      for (let y = t + minimumSide * dy; y <= b - minimumSide * dy; y++) for (let x = l + minimumSide * dx; x <= r - minimumSide * dx; x++) {
         const gate: Gate = { point: [x, y], axis: [dx, dy], rooms: [-1, -1] };
         if (![-2, -1, 0, 1, 2].every(offset => sample(gate, offset) === floor)) continue;
         const style = styles.find(({ wall, shoulder }) => sample(gate, -4) === wall && sample(gate, 4) === wall
@@ -45,7 +45,7 @@ function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): Com
     apertures.push(partitions[0]!.gate);
     return partitions[0]!.boxes;
   });
-  if (!apertures.length || boxes.length > 16) return layout;
+  if (!apertures.length || boxes.length > maximumRooms) return layout;
   const separated = boxes.map((box, index) => ({ box, index }));
   const connected = [...gates, ...apertures].flatMap((gate): Gate[] => {
     const [x, y] = gate.point, [dx, dy] = gate.axis;
@@ -59,12 +59,16 @@ function includeOpenPartitions(layout: CompartmentLayout, rows: NativeRows): Com
 
 export function measureCompartments(rows: NativeRows): CompartmentLayout | null {
   const parts = geometricComponents(rows);
+  const complete = (layout: CompartmentLayout, side?: number, limit?: number) => {
+    const separated = includeOpenPartitions(layout, rows, side, limit);
+    return completeCompartmentLattice(separated, rows, parts) ?? separated;
+  };
   const rectangles = parts.filter(({ bbox: [l, t, r, b] }) =>
     l > 0 && t > 0 && r < (rows[0]?.length ?? 0) - 1 && b < rows.length - 1
     && r - l >= 7 && b - t >= 7);
   const interior = rectangles.filter(({ bbox: [l, t, r, b], area }) => area * 5 >= (r - l + 1) * (b - t + 1) * 4);
   const layouts = compartmentLayouts(rows, parts, interior);
-  if (layouts.length) return layouts.length === 1 ? includeOpenPartitions(layouts[0]!, rows) : null;
+  if (layouts.length) return layouts.length === 1 ? complete(layouts[0]!) : null;
   // Occupants can hide part of the floor. Recover a candidate only when its corners
   // are visible and the same gate markers still connect the whole layout.
   const occupied = rectangles.filter(part => {
@@ -75,14 +79,69 @@ export function measureCompartments(rows: NativeRows): CompartmentLayout | null 
       && area * 4 >= (r - l + 1) * (b - t + 1) * 3;
   });
   const recovered = compartmentLayouts(rows, parts, occupied);
-  return recovered.length === 1 ? includeOpenPartitions(recovered[0]!, rows) : null;
+  if (recovered.length) return recovered.length === 1 ? complete(recovered[0]!) : null;
+  const clipped = parts.filter(({ bbox: [l, t, r, b], area }) =>
+    l > 0 && t > 0 && r === (rows[0]?.length ?? 0) - 2 && b < rows.length - 1
+    && r - l >= 4 && r - l < 7 && b - t >= 7 && area * 5 >= (r - l + 1) * (b - t + 1) * 4);
+  if (!clipped.length) return null;
+  const extended = compartmentLayouts(rows, parts, [...occupied, ...clipped], 32);
+  return extended.length === 1 ? complete(extended[0]!, 5, 32) : null;
 }
 
-function compartmentLayouts(rows: NativeRows, parts: ReturnType<typeof geometricComponents>, interior: ReturnType<typeof geometricComponents>): CompartmentLayout[] {
+function completeCompartmentLattice(layout: CompartmentLayout, rows: NativeRows,
+  parts: ReturnType<typeof geometricComponents>): CompartmentLayout | null {
+  const { floor } = layout;
+  const regions = parts.filter(({ color, bbox: [l, t, r, b], area }) => color === floor && l > 0 && t > 0
+    && r < rows[0]!.length - 1 && b < rows.length - 1 && r - l >= 4 && b - t >= 4
+    && area * 3 >= (r - l + 1) * (b - t + 1) * 2);
+  const spans = (axis: 0 | 1) => {
+    const groups = new Map<string, { start: number; end: number; positions: Set<number> }>();
+    for (const { bbox } of regions) {
+      const start = bbox[axis], end = bbox[axis + 2]!, key = start + ',' + end;
+      const span = groups.get(key) ?? { start, end, positions: new Set<number>() };
+      span.positions.add(bbox[1 - axis]!);
+      groups.set(key, span);
+    }
+    return [...groups.values()].filter(span => span.positions.size >= 2).sort((a, b) => a.start - b.start);
+  };
+  const columns = spans(0), bands = spans(1), count = columns.length * bands.length;
+  const consecutive = (values: ReturnType<typeof spans>) => values.length > 1
+    && values.slice(1).every(({ start }, i) => start === values[i]!.end + 2);
+  if (count <= layout.rooms.length || count > 32 || !consecutive(columns) || !consecutive(bands)) return null;
+  const rooms: Room[] = bands.flatMap(({ start: t, end: b }, row) => columns.map(({ start: l, end: r }, col) =>
+    ({ box: [l, t, r, b], index: row * columns.length + col })));
+  if (rooms.some(({ box: [l, t, r, b] }) => {
+    const visible = rows.slice(t, b + 1).flatMap(row => row.slice(l, r + 1)).filter(ink => ink === floor).length;
+    return visible * 3 < (r - l + 1) * (b - t + 1) * 2;
+  })) return null;
+  const at = ({ point: [x, y], axis: [dx, dy] }: Gate, i: number) => rows[y + i * dx]?.[x + i * dy];
+  const styles = layout.gates.flatMap(gate => {
+    const mark = at(gate, 0), rim = at(gate, 1);
+    return mark !== undefined && rim !== undefined && mark !== floor && rim !== floor && mark !== rim
+      && [-2, -1, 2].every(i => at(gate, i) === rim) ? [{ mark, rim }] : [];
+  });
+  if (!styles.length) return null;
+  const gates = rooms.flatMap(({ box: [l, t, r, b], index }) => {
+    const col = index % columns.length, row = Math.floor(index / columns.length);
+    const scan = (start: number, end: number, axis: NativePoint, next: number) =>
+      Array.from({ length: end - start + 1 }, (_, i): Gate => ({
+        point: axis[0] ? [r + 1, start + i] : [start + i, b + 1], axis, rooms: [index, next],
+      })).filter(gate => styles.some(({ mark, rim }) => at(gate, 0) === mark && [-2, -1, 1, 2].every(i => at(gate, i) === rim))
+        || layout.gates.some(prior => prior.point.every((value, i) => value === gate.point[i])
+          && prior.axis.every((value, i) => value === gate.axis[i])));
+    return [...(col + 1 < columns.length ? scan(t, b, [1, 0], index + 1) : []),
+      ...(row + 1 < bands.length ? scan(l, r, [0, 1], index + columns.length) : [])];
+  });
+  if (gates.length > rooms.length * 2 || gateRegion(0, gates).size !== rooms.length) return null;
+  return { floor, rooms, gates };
+}
+
+function compartmentLayouts(rows: NativeRows, parts: ReturnType<typeof geometricComponents>, interior: ReturnType<typeof geometricComponents>,
+  maximumRooms = 16): CompartmentLayout[] {
   const floors = [...new Set(interior.map(part => part.color))];
   return floors.flatMap(floor => {
     const rooms = interior.filter(part => part.color === floor).map((part, index) => ({ box: part.bbox, index }));
-    if (rooms.length < 3 || rooms.length > 16) return [];
+    if (rooms.length < 3 || rooms.length > maximumRooms) return [];
     const byMarker = new Map<string, Gate[]>();
     for (const part of parts) {
       if (part.area !== 1 || part.color === floor) continue;
@@ -187,7 +246,7 @@ function learnFeeding(before: Inhabitant[], after: Inhabitant[], ref: string): C
   return starter.length === 1 ? { food: food.color, starter: starter[0]!, activated: activated[0]!, ref } : undefined;
 }
 
-function selectInteraction(layout: CompartmentLayout, rows: NativeRows, model: Reusable): Choice | null {
+export function selectCompartmentInteraction(layout: CompartmentLayout, rows: NativeRows, model: Reusable): Choice | null {
   const contents = readInhabitants(layout, rows);
   const threshold = contents.find(sprite => sprite.color === model.threshold);
   if (!threshold || contents.filter(sprite => sprite.color === model.threshold).length !== 1) return null;
@@ -234,7 +293,7 @@ function clickInterface(observation: NativeObservation): boolean {
     && !observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref));
 }
 
-function assess(proposal: Proposal, before: NativeRows, after: NativeRows): string | null {
+export function assessCompartmentInteraction(proposal: Pick<Proposal, 'local' | 'choice' | 'food' | 'grower' | 'timing'>, before: NativeRows, after: NativeRows): string | null {
   const { layout } = proposal.local;
   const { choice } = proposal;
   const { gate, phase, focus } = choice;
@@ -255,6 +314,44 @@ function assess(proposal: Proposal, before: NativeRows, after: NativeRows): stri
       ? 'growth_observed_after_remote_gate_opening' : null;
   }
   return null;
+}
+
+function observeCompartmentGate(calibration: Calibration, gate: Gate, before: NativeObservation, after: NativeObservation,
+  first: NativeRows, second: NativeRows): { calibration: Calibration; model?: Reusable } {
+  const { layout, feeding, threshold } = calibration, population = readInhabitants(layout, first);
+  if (after.levels_completed > before.levels_completed) {
+    const reference = population.find(sprite => sprite.color === threshold);
+    if (!feeding || !reference) return { calibration };
+    const open = openGates(layout, first), region = gateRegion(reference.room, [...open, gate]);
+    if (gateRegion(reference.room, open).size === region.size) return { calibration };
+    const candidates = population.filter(sprite => sprite.color !== threshold && sprite.area === reference.area && region.has(sprite.room));
+    if (candidates.length !== 1) return { calibration };
+    return { calibration, model: { food: feeding.food, starter: feeding.starter, activated: feeding.activated, grower: candidates[0]!.color,
+      threshold, completed: after.levels_completed, evidence: [feeding.ref, before.observation_ref, after.observation_ref] } };
+  }
+  if (!feeding && openGates(layout, second).includes(gate)) {
+    const observed = learnFeeding(population, readInhabitants(layout, second), after.observation_ref);
+    if (observed) return { calibration: { ...calibration, feeding: observed } };
+  }
+  return { calibration };
+}
+
+export type CompartmentAcquisition = { epoch: number; calibration: Calibration | null; model?: Reusable };
+
+export function acquireCompartmentReturn(prior: CompartmentAcquisition | undefined, before: NativeObservation, after: NativeObservation,
+  command: NativeCommand, first: NativeRows, second: NativeRows): CompartmentAcquisition | undefined {
+  if (!clickInterface(before) || command.action_ref !== 'ACTION6' || prior?.model?.completed === before.levels_completed) return prior;
+  let local = prior;
+  if (!local || local.epoch !== before.level_epoch) {
+    const layout = measureCompartments(first), reference = layout && uniqueLargest(readInhabitants(layout, first));
+    local = { epoch: before.level_epoch, calibration: layout && reference ? { layout, threshold: reference.color } : null };
+  }
+  if (!local.calibration) return local;
+  const { layout } = local.calibration, { x, y } = command.data;
+  if (x === undefined || y === undefined) return local;
+  const gate = layout.gates.find(({ point: [gx, gy] }) => Math.abs(gx - x) <= 3 && Math.abs(gy - y) <= 3);
+  if (!gate || openGates(layout, first).includes(gate)) return local;
+  return { ...local, ...observeCompartmentGate(local.calibration, gate, before, after, first, second) };
 }
 
 export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
@@ -284,21 +381,9 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       if (!meter && before.level_epoch === after.level_epoch && openGates(layout, second).includes(gate)) {
         meter = learnMeter(layout, first, second, after.observation_ref);
       }
-      const population = readInhabitants(layout, first);
-      if (after.levels_completed > before.levels_completed) {
-        const { feeding, threshold } = calibration;
-        const boss = population.find(sprite => sprite.color === threshold);
-        const open = openGates(layout, first);
-        if (!feeding || !boss || gateRegion(boss.room, open).size === gateRegion(boss.room, [...open, gate]).size) return;
-        const next = gateRegion(boss.room, [...open, gate]);
-        const candidates = population.filter(sprite => sprite.color !== threshold && sprite.area === boss.area && next.has(sprite.room));
-        if (candidates.length !== 1) return;
-        model = { food: feeding.food, starter: feeding.starter, activated: feeding.activated, grower: candidates[0]!.color,
-          threshold, completed: after.levels_completed, evidence: [feeding.ref, before.observation_ref, after.observation_ref] };
-      } else if (!calibration.feeding && openGates(layout, second).includes(gate)) {
-        const feeding = learnFeeding(population, readInhabitants(layout, second), after.observation_ref);
-        if (feeding) calibration = { ...calibration, feeding };
-      }
+      const acquisition = observeCompartmentGate(calibration, gate, before, after, first, second);
+      calibration = acquisition.calibration;
+      if (acquisition.model) model = acquisition.model;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !model || model.completed !== observation.levels_completed || !clickInterface(observation)) return null;
@@ -308,7 +393,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
       const turns = meter && readMeter(rows, meter);
       const timed = model.completed >= 2 && turns !== null
         ? selectTimedCompartment(layout, rows, model, Math.min(turns, remaining), prior?.clockGate, prior?.stagedGrowth) : null;
-      const choice = timed ?? selectInteraction(layout, rows, model);
+      const choice = timed ?? selectCompartmentInteraction(layout, rows, model);
       if (!choice) return null;
       const { point: [x, y] } = choice.gate;
       const ref = observation.observation_ref;
@@ -366,7 +451,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const effect = assess(proposal, first, second);
+      const effect = assessCompartmentInteraction(proposal, first, second);
       return { matched: effect !== null, seal_prefix: true, reason: effect ?? 'compartment_interaction_unconfirmed' };
     },
     record(before, after, _action, first, second, proposal) {
@@ -374,7 +459,7 @@ export function createSicVerifyCompartmentGrowth(): NativeFamily<Proposal> {
         model = { ...model, completed: after.levels_completed,
           evidence: [...model.evidence.slice(-4), before.observation_ref, after.observation_ref] };
       } else if (before.level_epoch === after.level_epoch) {
-        const confirmed = assess(proposal, first, second);
+        const confirmed = assessCompartmentInteraction(proposal, first, second);
         const phase = proposal.choice.phase;
         const stagedGrowth = phase === 'stage_growth' || phase === 'advance_growth';
         local = { ...proposal.local, evidence: [...proposal.local.evidence, after.observation_ref].slice(-4),

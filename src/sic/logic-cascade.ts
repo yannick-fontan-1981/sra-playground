@@ -2,8 +2,10 @@ import { framedRows, value } from '../logos-engine/v6-coupled-displays.ts';
 import type { NativeBox, NativeObservation, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Gate = { box: NativeBox; cell: NativePoint; ports: NativePoint[]; output: NativePoint };
-export type Cascade = { controls: NativeBox[]; initial: number; gates: Gate[]; lamp: NativeBox; off: number; terminal: number };
-export type CascadeReading = { setting: number; active: boolean[]; ports: number[][]; lamp: number; controlInks: number[] };
+type Terminal = { gate: number; lamp: NativeBox };
+export type Cascade = { controls: NativeBox[]; initial: number; gates: Gate[]; lamp: NativeBox; off: number; terminal: number;
+  terminals?: Terminal[] };
+export type CascadeReading = { setting: number; active: boolean[]; ports: number[][]; lamp: number; lamps?: number[]; controlInks: number[] };
 export type CascadeChoice = { index: number; setting: number; distance: number; hypotheses: number };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -53,12 +55,24 @@ export function measureLogicCascade(observation: NativeObservation, rows: Native
         && cell[1] >= other.box[1] && cell[1] <= other.box[3]))) continue;
       gates.sort((a, b) => b.box[1] - a.box[1] || a.box[0] - b.box[0]);
       const last = gates.at(-1)!;
-      if (gates.at(-2)?.box[1] === last.box[1] || new Set(gates.map(gate => gate.box[1])).size < 2) continue;
-      const lamps = observation.entities.filter(entity => entity.rectangular && entity.bbox[1] > 0 && entity.bbox[0] > 0
-        && entity.bbox[3] + 2 < last.box[1] && entity.bbox[2] + 1 < columns && Math.abs(midpoint(entity.bbox) - last.cell[0]) <= Math.floor(size / 2)
+      const stages = new Set(gates.map(gate => gate.box[1]));
+      const lampsAbove = (gate: Gate) => observation.entities.filter(entity => entity.rectangular && entity.bbox[1] > 0 && entity.bbox[0] > 0
+        && entity.bbox[3] + 2 < gate.box[1] && entity.bbox[2] + 1 < columns && Math.abs(midpoint(entity.bbox) - gate.cell[0]) <= Math.floor(size / 2)
         && width(entity.bbox) >= size && height(entity.bbox) >= 2 && entity.palette_value === initial
         && rim(rows, entity.bbox[0] - 1, entity.bbox[1] - 1, entity.bbox[2] + 1, entity.bbox[3] + 1) !== null);
       const off = at(rows, last.cell);
+      if (stages.size === 1) {
+        const terminals = gates.flatMap((gate, index) => {
+          const lamps = lampsAbove(gate);
+          return lamps.length === 1 ? [{ gate: index, lamp: lamps[0]!.bbox }] : [];
+        });
+        if (terminals.length !== gates.length || new Set(terminals.map(({ lamp }) => lamp.join(','))).size !== terminals.length
+          || new Set(terminals.map(({ lamp }) => lamp[1])).size !== 1 || gates.some(gate => at(rows, gate.cell) !== off)) continue;
+        layouts.push({ controls, initial, gates, off, lamp: terminals[0]!.lamp, terminal: terminals[0]!.gate, terminals });
+        continue;
+      }
+      if (gates.at(-2)?.box[1] === last.box[1]) continue;
+      const lamps = lampsAbove(last);
       if (lamps.length !== 1 || new Set(gates.map(g => at(rows, g.cell))).size !== 2) continue;
       layouts.push({ controls, initial, gates, off, lamp: lamps[0]!.bbox, terminal: gates.length - 1 });
     }
@@ -68,10 +82,15 @@ export function measureLogicCascade(observation: NativeObservation, rows: Native
 
 export function readCascade(rows: NativeRows, cascade: Cascade): CascadeReading | null {
   const controlInks = cascade.controls.map(box => value(rows, box)), lamp = value(rows, cascade.lamp);
-  if (lamp === null || controlInks.some(ink => ink === null) || new Set(controlInks.filter(ink => ink !== cascade.initial)).size > 1) return null;
+  const lamps = cascade.terminals?.map(terminal => value(rows, terminal.lamp));
+  if (lamp === null || lamps?.some(ink => ink === null) || controlInks.some(ink => ink === null)
+    || new Set(controlInks.filter(ink => ink !== cascade.initial)).size > 1) return null;
   const setting = controlInks.reduce<number>((mask, ink, i) => ink === cascade.initial ? mask : mask | (1 << i), 0);
-  return { setting, active: cascade.gates.map(gate => at(rows, gate.cell) !== cascade.off),
-    ports: cascade.gates.map(gate => gate.ports.map(port => at(rows, port))), lamp, controlInks: controlInks as number[] };
+  const active = cascade.gates.map(gate => at(rows, gate.cell) !== cascade.off);
+  if (lamps && cascade.terminals?.some(({ gate }, i) => active[gate] !== (lamps[i] !== cascade.initial))) return null;
+  return { setting, active,
+    ports: cascade.gates.map(gate => gate.ports.map(port => at(rows, port))), lamp,
+    ...(lamps ? { lamps: lamps as number[] } : {}), controlInks: controlInks as number[] };
 }
 
 type Hypothesis = { feeds: number[]; truth: number; weight: number };
@@ -124,6 +143,7 @@ function estimate(models: readonly Hypothesis[], probabilities: readonly number[
 export function chooseCascade(rows: NativeRows, layout: Cascade, samples: readonly CascadeReading[], current: CascadeReading,
   blocked: readonly string[], remaining: number): CascadeChoice | null {
   const models = layout.gates.map((_, index) => gateHypotheses(rows, layout, samples, index));
+  const terminals = layout.terminals?.map(terminal => terminal.gate) ?? [layout.terminal];
   const visited = new Set(samples.map(sample => sample.setting));
   const goals: { setting: number; distance: number; score: number }[] = [];
   for (let setting = 0; setting < 1 << layout.controls.length; setting++) {
@@ -131,7 +151,8 @@ export function chooseCascade(rows: NativeRows, layout: Cascade, samples: readon
     if (!distance || distance > remaining || visited.has(setting)) continue;
     const probabilities = layout.controls.map((_, index) => Number(on(setting, index)));
     for (const local of models) probabilities.push(estimate(local, probabilities));
-    const probability = probabilities[layout.controls.length + layout.terminal]!;
+    // Evaluate every terminal on the same switch setting so a shared source is never assigned independently.
+    const probability = terminals.reduce((joint, gate) => joint * probabilities[layout.controls.length + gate]!, 1);
     goals.push({ setting, distance, score: probability - 0.12 * (distance - 1) });
   }
   goals.sort((a, b) => b.score - a.score || a.distance - b.distance || a.setting - b.setting);
@@ -143,7 +164,7 @@ export function chooseCascade(rows: NativeRows, layout: Cascade, samples: readon
     });
     candidates.sort((a, b) => Number(a.seen) - Number(b.seen) || a.index - b.index);
     const next = candidates[0];
-    if (next) return { ...next, distance: goal.distance, hypotheses: models[layout.terminal]!.length };
+    if (next) return { ...next, distance: goal.distance, hypotheses: terminals.reduce((total, gate) => total + models[gate]!.length, 0) };
   }
   return null;
 }

@@ -1,4 +1,5 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { measuredMetricScene } from '../logos-engine/v6-metric-composition.ts';
 import type { NativeBox, NativeCommand, NativeEntity, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseStackStep, readStackExample, type PatternExample, type PatternGrid as Grid, type PatternPiece as Piece,
@@ -21,6 +22,7 @@ type Scene = { grid: Grid; preview: Preview[]; pieces: Piece[]; goals: Record<nu
 type Moves = Record<string, NativePoint>;
 type Training = { epoch: number; scene: Scene; controls: Moves; refs: string[] };
 type Witness = { epoch: number; score: number; controls: Moves; refs: string[] };
+type MetricControlProof = { floor: string; score: number; moves: Record<string, { delta: NativePoint; refs: string[] }> };
 type Local = { epoch: number; scene: Scene; refs: string[]; contradicted: boolean };
 type OrdinaryProposal = NativeProposal & { scene: Scene; piece: Piece; destination: NativePoint | null; covered?: Piece; refs: string[]; needId: string };
 type StackedLayout = { epoch: number; grid: Grid; goals: PatternExample[]; piles: PatternPiles; refs: string[]; stopped: boolean };
@@ -60,7 +62,23 @@ function crossingGrid(horizontal: Scan, vertical: Scan, boundary: NativeBox): Gr
   return { boundary, xs, ys, floor };
 }
 
-function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows, repeatedColors = false): Grid | null {
+function gridFromTileEdges(scan: Scan, axis: 0 | 1, rows: NativeRows, boundary: NativeBox): Grid | null {
+  const other = axis === 0 ? 1 : 0;
+  const start = boundary[other]! + 1, end = boundary[other + 2]!, edges = [start];
+  const tileStarts = scan.edges.slice(0, -1);
+  const at = (line: number, position: number) => axis === 1 ? rows[line]?.[position] : rows[position]?.[line];
+  for (let i = start + 1; i < end; i++) {
+    if (tileStarts.some(line => at(line, i) !== at(line, i - 1))) edges.push(i);
+  }
+  edges.push(end);
+  if (edges.length < 4 || edges.length > 15 || edges.slice(1).some((edge, i) => edge - edges[i]! < 3)) return null;
+  const sample = edges.slice(1).findIndex(edge => edge > scan.line);
+  if (sample < 0) return null;
+  const floor: NativePoint = sample % 2 === 0 ? scan.colors : [scan.colors[1], scan.colors[0]];
+  return { boundary, xs: axis === 0 ? scan.edges : edges, ys: axis === 1 ? scan.edges : edges, floor };
+}
+
+export function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows, repeatedColors = false): Grid | null {
   const read = repeatedColors ? readTopPieces : readPieces;
   const borders = entities.filter(entity => {
     const [width, height] = size(entity.bbox);
@@ -84,7 +102,16 @@ function gridFromBorder(entities: readonly NativeEntity[], rows: NativeRows, rep
     if (grid) distinct.set(JSON.stringify([grid.xs, grid.ys, grid.floor]), grid);
   }
   const consistent = [...distinct.values()].filter(grid => read(rows, grid) !== null);
-  return consistent.length === 1 ? consistent[0]! : null;
+  if (consistent.length) return consistent.length === 1 ? consistent[0]! : null;
+
+  // Tile borders stay uniform along their edges, even when no full floor scan is exposed.
+  distinct.clear();
+  for (const [axis, scans] of [[0, horizontal], [1, vertical]] as const) for (const scan of scans) {
+    const grid = gridFromTileEdges(scan, axis, rows, boundary);
+    if (grid) distinct.set(JSON.stringify([grid.xs, grid.ys, grid.floor]), grid);
+  }
+  const recovered = [...distinct.values()].filter(grid => read(rows, grid) !== null);
+  return recovered.length === 1 ? recovered[0]! : null;
 }
 
 function cells(grid: Grid): NativePoint[] {
@@ -111,7 +138,7 @@ function readTopPieces(rows: NativeRows, grid: Grid): Piece[] | null {
       pieces.push({ color: ink, cell, selected });
     }
   }
-  if (!pieces.length || pieces.length > 16 || pieces.filter(piece => piece.selected).length > 1) return null;
+  if (!pieces.length || pieces.filter(piece => piece.selected).length > 1) return null;
   return pieces;
 }
 
@@ -229,14 +256,47 @@ function updatePiles(proposal: StackProposal, observed: Piece[]) {
 export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
   let training: Training | null = null, witness: Witness | null = null, local: Local | null = null;
   let stacked: StackedLayout | null = null;
+  let metricControls: MetricControlProof | null = null;
 
-  async function offerStack(observation: NativeObservation, rows: NativeRows, retained: Witness): Promise<StackProposal | null> {
+  function observeMetricControls(before: NativeObservation, after: NativeObservation, action: NativeCommand,
+    first: NativeRows, second: NativeRows) {
+    if (!before.available_action_refs.includes('ACTION5')) return;
+    const measured = measuredMetricScene(first);
+    if (!measured || measured.selected === null) return;
+    const floor = [...measured.background].sort().join(',');
+    const prior = metricControls?.floor === floor ? metricControls : null;
+    if (after.levels_completed > before.levels_completed) {
+      if (prior) metricControls = { ...prior, score: after.levels_completed };
+      return;
+    }
+    if (before.level_epoch !== after.level_epoch) return;
+    const next = measuredMetricScene(second);
+    if (!next || next.selected === null || next.grid_ref !== measured.grid_ref
+      || [...next.background].sort().join(',') !== floor) return;
+    const from: number = measured.selected, to: number = next.selected;
+    const ink: string = measured.fills[from];
+    if (next.fills[to] !== ink || next.fills[from] === ink
+      || !measured.fills.every((fill: string, index: number) => index === from || index === to || next.fills[index] === fill)) return;
+    const width: number = measured.xs.length - 1;
+    const delta: NativePoint = [to % width - from % width, Math.floor(to / width) - Math.floor(from / width)];
+    if (Math.abs(delta[0]) + Math.abs(delta[1]) !== 1) return;
+    const old = prior?.moves[action.action_ref];
+    const moves = old && !same(old.delta, delta) ? {} : prior?.moves ?? {};
+    metricControls = { floor, score: before.levels_completed, moves: { ...moves,
+      [action.action_ref]: { delta, refs: [before.observation_ref, after.observation_ref] } } };
+  }
+
+  async function offerStack(observation: NativeObservation, rows: NativeRows, retained: Witness,
+    learnedFloor?: string): Promise<StackProposal | null> {
     const prior = stacked?.epoch === observation.level_epoch ? stacked : null;
     if (prior?.stopped) return null;
     const grid = prior?.grid ?? gridFromBorder(observation.entities, rows, true), pieces = grid && readTopPieces(rows, grid);
     if (!grid || !pieces) return null;
     const goals = prior?.goals ?? readStackExample(grid, rows, observation.entities, pieces);
     if (!goals) return null;
+    if (learnedFloor && ([...grid.floor].sort().join(',') !== learnedFloor
+      || !goals.some(goal => goals.filter(item => item.color === goal.color).length
+        > pieces.filter(piece => piece.color === goal.color).length))) return null;
     const stack = prior ?? { epoch: observation.level_epoch, grid, goals, refs: [], stopped: false,
       piles: Object.fromEntries(pieces.map(piece => [key(piece.cell), { colors: [piece.color], unknownBelow: true }])) };
     if (Object.keys(stack.piles).length !== pieces.length || pieces.some(piece => stack.piles[key(piece.cell)]?.colors[0] !== piece.color)) return null;
@@ -274,6 +334,7 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
     id: observedPatternLayoutId,
     observePublicOutcome(before, after, action, first, second, frames = []) {
       if (!direction.test(action.action_ref) || !before.available_action_refs.includes('ACTION6') || before.frame_hash === after.frame_hash) return;
+      if (!witness || witness.epoch < before.level_epoch) observeMetricControls(before, after, action, first, second);
       const prior = training?.epoch === before.level_epoch ? training : null;
       const scene = prior?.scene ?? readScene(before, first);
       if (!scene) return;
@@ -303,8 +364,19 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
       training = { epoch: before.level_epoch, scene, controls, refs: [...new Set([...(prior?.refs ?? []).slice(-3), before.observation_ref, after.observation_ref])] };
     },
     async propose(observation, rows, _inputs, remaining) {
-      if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed || remaining < 1
-        || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
+      if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed) {
+        if (!metricControls || !observation.levels_completed || metricControls.score !== observation.levels_completed
+          || !observation.available_action_refs.includes('ACTION5')) return null;
+        const moves = Object.entries(metricControls.moves);
+        if (moves.length !== 4 || new Set(moves.map(([, move]) => key(move.delta))).size !== 4) return null;
+        const retained = { epoch: observation.level_epoch, score: observation.levels_completed,
+          controls: Object.fromEntries(moves.map(([input, move]) => [input, move.delta])),
+          refs: [...new Set(moves.flatMap(([, move]) => move.refs))] };
+        const proposal = await offerStack(observation, rows, retained, metricControls.floor);
+        if (proposal) witness = retained;
+        return proposal;
+      }
       if (stacked?.epoch === observation.level_epoch) return offerStack(observation, rows, witness);
       const prior = local?.epoch === observation.level_epoch ? local : null;
       if (prior?.contradicted) return null;
@@ -385,12 +457,13 @@ export function createSicObservedPatternLayout(): NativeFamily<Proposal> {
         refs: [...proposal.refs.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ training, witness, local, ...(stacked ? { stacked } : {}) }),
+    state: () => ({ training, witness, local, ...(stacked ? { stacked } : {}), ...(metricControls ? { metricControls } : {}) }),
     restore(value: NativeRecord) {
       training = structuredClone((value.training as Training | undefined) ?? null);
       witness = structuredClone((value.witness as Witness | undefined) ?? null);
       local = structuredClone((value.local as Local | undefined) ?? null);
       stacked = structuredClone((value.stacked as StackedLayout | undefined) ?? null);
+      metricControls = structuredClone((value.metricControls as MetricControlProof | undefined) ?? null);
     },
   };
 }

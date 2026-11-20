@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "environment": "happy-dom with a canvas pixel buffer stub",
+  "visualBrowserTest": false,
+  "checks": [
+    "Exact compiled inline script initializes level 1 and the open tutorial; canvas pixels match the engine",
+    "Only four directional controls; no preview lesson or Space instruction",
+    "Space leaves both game pixels and action counter unchanged",
+    "Directional keyboard input moves the Warrior and updates the movement lesson",
+    "A second directional key pushes the chain directly, animates, and completes the chain lesson",
+    "Undo during a directional push cancels pending animation frames",
+    "Direction button pushes; Reset during animation restores the initial pixels and counter",
+    "Level selection and return to the tutorial restore matching engine pixels",
+    "All captured stable and animation frames contain no light-gray preview pixels"
+  ]
+}

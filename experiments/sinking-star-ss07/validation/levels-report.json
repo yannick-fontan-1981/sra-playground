@@ -1,0 +1,793 @@
+{
+  "game": "SS07",
+  "version": "0.1.2",
+  "levels": [
+    {
+      "level": 1,
+      "id": "ss07-01",
+      "title": "L’atelier du pas de côté",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Extraire une caisse, construire deux appuis, commander une presse latérale et déplacer un miroir pour faire traverser le duo.",
+        "url": "",
+        "piston": true,
+        "platform": false
+      },
+      "dimensions": [
+        18,
+        14
+      ],
+      "floorCells": 62,
+      "waterCells": 11,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 59,
+      "selections": 6,
+      "merchantPushes": 4,
+      "thiefPulls": 2,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 6,
+      "mirrorMoves": 1,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "frames": 172,
+      "maxFrames": 6,
+      "solved": true,
+      "mapSha256": "d3ce303335c8158d4338f172fe6fe5bedb3928348acf3a3eb4f064a077f115d6",
+      "witnessSha256": "6214f898a618df2153bb32bddc4bd3289ea075347cb45ba65b4f65fa6377914d",
+      "observationsSha256": "10276ff93f03da349d5d7101a1bf9fd41cd13d2450c4234f95178d2c66c2193a"
+    },
+    {
+      "level": 2,
+      "id": "ss07-02",
+      "title": "Les lacunes du miroir",
+      "source": {
+        "puzzle": 4,
+        "label": "Adaptation · Heroes and Mirrors 4 : tirer le miroir autour des trous et quitter son axe par reflet.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-4",
+        "piston": false,
+        "platform": false
+      },
+      "dimensions": [
+        12,
+        11
+      ],
+      "floorCells": 36,
+      "waterCells": 96,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 0,
+      "hydraulicPlatforms": 0,
+      "buttons": 0,
+      "actions": 59,
+      "selections": 1,
+      "merchantPushes": 1,
+      "thiefPulls": 14,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 1,
+      "mirrorMoves": 14,
+      "reflections": 8,
+      "heroReflections": 8,
+      "pistonPushes": 0,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "frames": 176,
+      "maxFrames": 4,
+      "solved": true,
+      "mapSha256": "de01d21c0c3840199d335098c613b6c5a333c53353a1b7ffc3f9da159feded55",
+      "witnessSha256": "26a5f89ede2abe3b7f0803e6ad7034edc9cedec51b78750d5bb5dd58ba359beb",
+      "observationsSha256": "b0922e5b87ecf4290ca151c79d36d77937d095eda4632de930eb464784baa6f9"
+    },
+    {
+      "level": 3,
+      "id": "ss07-03",
+      "title": "Partir sans reprendre",
+      "source": {
+        "puzzle": 5,
+        "label": "Adaptation · Heroes and Mirrors 5 : un miroir maintient le bouton, le second permet de quitter la traction.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5",
+        "piston": true,
+        "platform": false
+      },
+      "dimensions": [
+        15,
+        17
+      ],
+      "floorCells": 44,
+      "waterCells": 211,
+      "initialStones": 0,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 2,
+      "gates": 3,
+      "hydraulicPlatforms": 0,
+      "buttons": 2,
+      "actions": 29,
+      "selections": 2,
+      "merchantPushes": 1,
+      "thiefPulls": 1,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 0,
+      "mirrorMoves": 2,
+      "reflections": 3,
+      "heroReflections": 3,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "frames": 89,
+      "maxFrames": 4,
+      "solved": true,
+      "mapSha256": "cdbd5a3d1dbbfd0ff88e9c5686c2fd4f1582adbfd9f688487799a00cb2986889",
+      "witnessSha256": "d4556eb27cbf0f36256303231f2aaa0f4d1815abc19efc56318f7aa2e4bdf991",
+      "observationsSha256": "234d6f77c4ec6967b1f382945863d9468234cf446e718112274a6f1be8a5349e"
+    },
+    {
+      "level": 4,
+      "id": "ss07-04",
+      "title": "Les quatre appuis",
+      "source": {
+        "puzzle": 6,
+        "label": "Adaptation · Heroes and Mirrors 6 : quatre appuis à construire en changeant les diagonales du miroir.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6",
+        "piston": false,
+        "platform": false
+      },
+      "dimensions": [
+        20,
+        16
+      ],
+      "floorCells": 105,
+      "waterCells": 211,
+      "initialStones": 4,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 0,
+      "hydraulicPlatforms": 0,
+      "buttons": 0,
+      "actions": 94,
+      "selections": 5,
+      "merchantPushes": 8,
+      "thiefPulls": 7,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 13,
+      "mirrorMoves": 5,
+      "reflections": 3,
+      "heroReflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 4,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "frames": 273,
+      "maxFrames": 4,
+      "solved": true,
+      "mapSha256": "91ab0ffbaacc420fc53869630d8dde624de3cb7936bda335ae644a022b68bff0",
+      "witnessSha256": "68d642690ef1448acd51a8261f464ef66392460fb86fac6e7b9510825c679160",
+      "observationsSha256": "73317a1deab1101eeb0a77d153d59f018376ed5a5fa446c50c4f529f50a8b215"
+    },
+    {
+      "level": 5,
+      "id": "ss07-05",
+      "title": "La presse des deux rives",
+      "source": {
+        "puzzle": 2,
+        "label": "Adaptation de principe · Heroes and Light 2 : une presse latérale déplace la file que les héros ne peuvent pas pousser ensemble.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2",
+        "piston": true,
+        "platform": false
+      },
+      "dimensions": [
+        20,
+        16
+      ],
+      "floorCells": 135,
+      "waterCells": 108,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 77,
+      "selections": 5,
+      "merchantPushes": 10,
+      "thiefPulls": 4,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 12,
+      "mirrorMoves": 4,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "frames": 226,
+      "maxFrames": 6,
+      "solved": true,
+      "mapSha256": "24a8c9276bf01b07df59d2079ec32b1b76dc7f4e9333d07e216c166b87ffa282",
+      "witnessSha256": "23f5ad0258191bac4926ca0e8525e70e4c923df7e593a2558a40995b84ac3d44",
+      "observationsSha256": "966b8f398ee93454acc6ae8ef3d8cdeec1bfc3f7422827a75775a69b2a105fc6"
+    },
+    {
+      "level": 6,
+      "id": "ss07-06",
+      "title": "Le poids de la sentinelle",
+      "source": {
+        "puzzle": 7,
+        "label": "Adaptation de principe · Heroes and Mirrors 7 : confier le bouton au monstre et déplacer le miroir pour retrouver le bon axe.",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-7",
+        "piston": false,
+        "platform": false
+      },
+      "dimensions": [
+        20,
+        18
+      ],
+      "floorCells": 63,
+      "waterCells": 293,
+      "initialStones": 1,
+      "initialSupports": 0,
+      "initialMonsters": 1,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 0,
+      "buttons": 1,
+      "actions": 51,
+      "selections": 7,
+      "merchantPushes": 4,
+      "thiefPulls": 2,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 4,
+      "mirrorMoves": 2,
+      "reflections": 2,
+      "heroReflections": 0,
+      "pistonPushes": 0,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "frames": 141,
+      "maxFrames": 4,
+      "solved": true,
+      "mapSha256": "861dcead7b562c014c3683c4272df1cf5aab0037cee9a12330ca2e1af3148449",
+      "witnessSha256": "229ea2d80bec477dffb8709293c56ac6180a77e986e377bcb0617b94f47a0517",
+      "observationsSha256": "b91678d793451c3fa3064a11f96ea2ddad355ffed58ed80ddddf5701f4e85c7d"
+    },
+    {
+      "level": 7,
+      "id": "ss07-07",
+      "title": "La forteresse des deux sceaux",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Deux sceaux, une presse latérale, deux sentinelles et une relève par reflet.",
+        "url": "",
+        "piston": true,
+        "platform": false
+      },
+      "dimensions": [
+        20,
+        18
+      ],
+      "floorCells": 191,
+      "waterCells": 9,
+      "initialStones": 2,
+      "initialSupports": 0,
+      "initialMonsters": 2,
+      "mirrors": 2,
+      "gates": 5,
+      "hydraulicPlatforms": 0,
+      "buttons": 2,
+      "actions": 88,
+      "selections": 5,
+      "merchantPushes": 4,
+      "thiefPulls": 2,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 7,
+      "mirrorMoves": 2,
+      "reflections": 3,
+      "heroReflections": 3,
+      "pistonPushes": 1,
+      "platformsCreated": 1,
+      "monstersRemoved": 2,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 1,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 1,
+      "frames": 264,
+      "maxFrames": 11,
+      "solved": true,
+      "mapSha256": "ca204252ab2596551e68709344a2b9fecb5e667bc410fb950f7d829cf3d52df1",
+      "witnessSha256": "efdb61a6226926029bcf083b696de4eaf7ee54ecd612ff7ca6abe3d8f9fd3ae6",
+      "observationsSha256": "715fb49a3d27e70d571b905f1e5d41688284f5520367f0c2ac30f9d934d3d522"
+    },
+    {
+      "level": 8,
+      "id": "ss07-08",
+      "title": "Le pont qu’on ne rend pas",
+      "source": {
+        "puzzle": 0,
+        "label": "Création originale · Emprunter un pont, récupérer la troisième caisse puis convertir ses plateformes en appuis permanents avant de retirer le miroir final.",
+        "url": "",
+        "piston": true,
+        "platform": true
+      },
+      "dimensions": [
+        20,
+        20
+      ],
+      "floorCells": 105,
+      "waterCells": 279,
+      "initialStones": 3,
+      "initialSupports": 2,
+      "initialMonsters": 0,
+      "mirrors": 1,
+      "gates": 1,
+      "hydraulicPlatforms": 3,
+      "buttons": 2,
+      "actions": 136,
+      "selections": 8,
+      "merchantPushes": 20,
+      "thiefPulls": 6,
+      "heroPulls": 0,
+      "chainPushes": 0,
+      "stoneMoves": 26,
+      "mirrorMoves": 1,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 3,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0,
+      "combatWaves": 0,
+      "mirrorsDestroyed": 0,
+      "cratesCrushed": 0,
+      "simultaneousHeroReflections": 0,
+      "frames": 404,
+      "maxFrames": 6,
+      "solved": true,
+      "mapSha256": "807d6d4a380668c7dd24d442663116b5bc47f9bfb4b916051943fea4551e10a9",
+      "witnessSha256": "abbf023d889eea1956fc9284e82d9d83787a4fb740faf78079f6de1c0ea4e8ca",
+      "observationsSha256": "7149a240dbaca8da1cb7e92681174c3b2ce522fea2e6318320a6998e641733e5"
+    }
+  ],
+  "totals": {
+    "actions": 593,
+    "selections": 39,
+    "merchantPushes": 52,
+    "thiefPulls": 38,
+    "heroPulls": 0,
+    "chainPushes": 0,
+    "stoneMoves": 69,
+    "mirrorMoves": 31,
+    "reflections": 25,
+    "heroReflections": 20,
+    "pistonPushes": 4,
+    "platformsCreated": 14,
+    "monstersRemoved": 2,
+    "combatWaves": 1,
+    "mirrorsDestroyed": 0,
+    "cratesCrushed": 0,
+    "simultaneousHeroReflections": 1,
+    "frames": 1745
+  },
+  "success": true,
+  "finaleChecks": {
+    "level": 8,
+    "temporaryPlatforms": 3,
+    "simultaneousPermanentSupports": 3,
+    "initialSupports": 2,
+    "thiefReleasesButton": true,
+    "provedSolvable": true
+  },
+  "failureRoutes": [
+    {
+      "level": 6,
+      "cause": "Le Marchand se reflète dans l’eau avant que le miroir soit aligné pour la sentinelle",
+      "actions": 9,
+      "commands": "DRRRUUURX",
+      "passed": true
+    },
+    {
+      "level": 7,
+      "cause": "Reflet depuis l’alcôve sans relève du Marchand sur le premier sceau : la porte du palier écrase le Voleur",
+      "actions": 41,
+      "commands": "RRRRRUURRRRUUUURRDXCRRRRRRRDDDDDRRRRRRUUX",
+      "passed": true
+    },
+    {
+      "level": 8,
+      "cause": "Le Voleur quitte le bouton du pont provisoire alors que le Marchand est encore sur une plateforme sans caisse : le Marchand tombe dans l’eau",
+      "actions": 26,
+      "commands": "CRRDDDDLLRRRUDDDLLDCDDDRCU",
+      "passed": true
+    }
+  ],
+  "tutorialNecessity": {
+    "level": 1,
+    "title": "L’atelier du pas de côté",
+    "checks": [
+      {
+        "option": "disableMerchantPushes",
+        "status": "unsolvable",
+        "states": 8208,
+        "expanded": 8208,
+        "ms": 218,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disableThiefPulls",
+        "status": "unsolvable",
+        "states": 684,
+        "expanded": 684,
+        "ms": 10,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disablePistons",
+        "status": "unsolvable",
+        "states": 15664,
+        "expanded": 15664,
+        "ms": 272,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disablePlatforms",
+        "status": "unsolvable",
+        "states": 13680,
+        "expanded": 13680,
+        "ms": 258,
+        "engineVersion": "0.1.1",
+        "searchBudget": {
+          "maxStates": 100000,
+          "maxMs": 10000
+        },
+        "proofScope": "Exhausted graph under the disabled capability."
+      },
+      {
+        "option": "disableReflections",
+        "status": "limit",
+        "states": 100000,
+        "expanded": 92855,
+        "ms": 1015,
+        "engineVersion": "0.1.0",
+        "historical": true,
+        "checkedUnderCurrentEngine": false,
+        "proofScope": "Historical bounded search from engine 0.1.0; no impossibility claim. The independent topology proof below does not use the reflection rule."
+      }
+    ],
+    "reflectionTopology": {
+      "method": "Optimistic 0/1 terrain shortest path, all gates open and mobile actors ignored",
+      "minimumWaterCells": 3,
+      "availableStones": 2,
+      "goalPaths": [
+        {
+          "goal": {
+            "x": 13,
+            "y": 14
+          },
+          "waterCost": 3,
+          "route": [
+            {
+              "x": 4,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 5,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 6,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 7,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 8,
+              "y": 5,
+              "terrain": "~"
+            },
+            {
+              "x": 9,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 9,
+              "y": 6,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 6,
+              "terrain": "."
+            },
+            {
+              "x": 11,
+              "y": 6,
+              "terrain": "."
+            },
+            {
+              "x": 11,
+              "y": 7,
+              "terrain": "~"
+            },
+            {
+              "x": 11,
+              "y": 8,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 8,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 9,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 10,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 11,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 12,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 13,
+              "terrain": "."
+            },
+            {
+              "x": 11,
+              "y": 13,
+              "terrain": "."
+            },
+            {
+              "x": 12,
+              "y": 13,
+              "terrain": "~"
+            },
+            {
+              "x": 13,
+              "y": 13,
+              "terrain": "."
+            },
+            {
+              "x": 13,
+              "y": 14,
+              "terrain": "."
+            }
+          ]
+        },
+        {
+          "goal": {
+            "x": 15,
+            "y": 14
+          },
+          "waterCost": 3,
+          "route": [
+            {
+              "x": 4,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 5,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 6,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 7,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 8,
+              "y": 5,
+              "terrain": "~"
+            },
+            {
+              "x": 9,
+              "y": 5,
+              "terrain": "."
+            },
+            {
+              "x": 9,
+              "y": 6,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 6,
+              "terrain": "."
+            },
+            {
+              "x": 11,
+              "y": 6,
+              "terrain": "."
+            },
+            {
+              "x": 11,
+              "y": 7,
+              "terrain": "~"
+            },
+            {
+              "x": 11,
+              "y": 8,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 8,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 9,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 10,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 11,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 12,
+              "terrain": "."
+            },
+            {
+              "x": 10,
+              "y": 13,
+              "terrain": "."
+            },
+            {
+              "x": 11,
+              "y": 13,
+              "terrain": "."
+            },
+            {
+              "x": 12,
+              "y": 13,
+              "terrain": "~"
+            },
+            {
+              "x": 13,
+              "y": 13,
+              "terrain": "."
+            },
+            {
+              "x": 13,
+              "y": 14,
+              "terrain": "."
+            },
+            {
+              "x": 14,
+              "y": 14,
+              "terrain": "."
+            },
+            {
+              "x": 15,
+              "y": 14,
+              "terrain": "."
+            }
+          ]
+        }
+      ],
+      "reflectionNecessary": true,
+      "argument": "Sans reflet, toutes les positions de héros changent par pas cardinaux, même lors des presses. Une case d’eau doit avoir un appui pour être visitée vivant. Le graphe optimiste exige au moins trois cases d’eau alors que seules deux caisses peuvent produire des appuis fixes ; aucun appui initial ni porte-plateforme n’est présent. La marche ou les presses seules ne peuvent donc atteindre une destination.",
+      "solverLimitIsNotImpossibilityProof": true,
+      "engineVersion": "0.1.1",
+      "reviewNote": "Preserved independent terrain proof: it concerns routes with no reflections and is unaffected by nearest-candidate selection."
+    },
+    "engineVersion": "0.1.1",
+    "recheckedCapabilities": [
+      "disableMerchantPushes",
+      "disableThiefPulls",
+      "disablePistons",
+      "disablePlatforms"
+    ],
+    "mapSha256": "d3ce303335c8158d4338f172fe6fe5bedb3928348acf3a3eb4f064a077f115d6"
+  },
+  "htmlSha256": "d597762fb3e968aebce3386718664134e06208328375b57611ac9e343456629f",
+  "limitations": [
+    "Source adaptations are declared, not certified exact reconstructions.",
+    "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",
+    "Limited searches are inconclusive and are not impossibility proofs.",
+    "The engine is two-dimensional: no vertical stacking, clones, dragons or mirror-to-mirror relay.",
+    "HTML tests run in Happy DOM with canvas pixels and controlled timers; no native browser session is claimed."
+  ]
+}

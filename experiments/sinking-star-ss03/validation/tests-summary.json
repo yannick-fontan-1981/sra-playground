@@ -1,0 +1,81 @@
+{
+  "game": "SS03",
+  "version": "0.4.0",
+  "build": {
+    "status": "passed",
+    "typescript": "5.9.3"
+  },
+  "unitTests": {
+    "passed": 47,
+    "failed": 0,
+    "command": "node --test tests/*.test.mjs"
+  },
+  "levelReplay": {
+    "solved": 8,
+    "actions": 484,
+    "pulls": 154,
+    "pistonStrokes": 10,
+    "allRequirePulling": true,
+    "cratesLost": 0,
+    "blockedActions": 0,
+    "deaths": 0
+  },
+  "revisedLevel7": {
+    "actions": 54,
+    "previousActions": 42,
+    "pulls": 18,
+    "pistonStrokes": 3,
+    "cratesPreserved": 3,
+    "constraint": {
+      "verified": true,
+      "oldRoutePrefix": 30,
+      "singleButtonDoesNotPush": true,
+      "remoteCrateEnablesNorthPiston": true
+    },
+    "tileChanges": [
+      {
+        "x": 10,
+        "y": 5,
+        "before": ".",
+        "after": "b"
+      }
+    ]
+  },
+  "previousReleaseObservationParity": {
+    "version": "0.3.0",
+    "matchedLevels": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "scope": "Full public observations, animation pixels and durations on complete witness routes"
+  },
+  "domTests": {
+    "passed": 16,
+    "failed": 0,
+    "visualBrowserTest": false,
+    "gameOverCoverage": {
+      "status": "not-exercised-through-level-ui",
+      "reason": "Fatal UI paths are not exercised in this run; engine tests cover death, Undo and Reset."
+    }
+  },
+  "renderInspection": {
+    "status": "passed",
+    "level": 7,
+    "states": [
+      "previous release initial",
+      "new initial",
+      "both north buttons occupied after action 42"
+    ],
+    "method": "Actual game pixels inspected at integer scale"
+  },
+  "realBrowser": {
+    "status": "not-run",
+    "reason": "No Chromium test in this update; prior launch was blocked by workspace sandbox socket policy"
+  },
+  "demoSha256": "8ef3e416803f6fa24e2c06c325417720be36f4315159491767806807b8a4c9e4"
+}

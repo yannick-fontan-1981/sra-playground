@@ -4,6 +4,7 @@ import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativePoi
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import type { RouteInterventionWitness } from './observed-route-intervention.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 
@@ -36,7 +37,7 @@ type Pose = { box: NativeBox; color: number };
 type State = { epoch: number; actor: Pose; target: Pose; frame: Pose; locus: NativeBox; count: number;
   bound: boolean; opened: boolean; turned: boolean; lastDirection: string | null; evidence: string[]; wall?: number };
 type Move = { command: NativeCommand; landing: NativeBox | null };
-type Proposal = NativeProposal & { strategy: Strategy; local: State; move: Move; needId: string; turnMarker: NativeBox | null };
+type Proposal = NativeProposal & { strategy: Strategy; local: State; route: Move[]; needId: string; turnMarker: NativeBox | null };
 const directions = [
   ['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0],
 ] as const;
@@ -192,10 +193,21 @@ export function createSicOutlineService(family = outlineServiceId,
       const goal = { kind: 'verify_marked_body_and_matching_outline', scope: ref.split(':revision:', 1)[0]!,
         subjects: [local.target.box.join(',')], parentObjective: parent, satisfactionContract: 'observe_official_progress_after_marked_contact' };
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-      const id = `outline-service:${need.id}`, actions = [move.command];
-      return { status: 'proposed', kind: family, actions, strategy, local, move, needId: need.id,
+      const id = `outline-service:${need.id}`, route = [move];
+      if (strategy === 'approach_framed_locus' && move.command.action_ref === local.lastDirection) {
+        let at = move.landing;
+        while (at && !same(at, local.locus) && route.length < Math.min(remaining, maximumCommittedActions, 32 - local.count)) {
+          const next = stepTowards(rows, inputs, at, local.locus, local.lastDirection);
+          if (!next?.landing || next.command.action_ref !== local.lastDirection) break;
+          route.push(next);
+          at = next.landing;
+        }
+      }
+      const actions = route.map(leg => leg.command);
+      return { status: 'proposed', kind: family, actions, strategy, local, route, needId: need.id,
         turnMarker: strategy === 'test_marker_turn' ? companion?.marker ?? null : null,
-        steps: [{ action: move.command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        steps: route.map(leg => ({ action: leg.command, expected_after: leg.landing })),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy: selectedStrategy, need: 'Find how the marked body can reach its matching outline',
@@ -209,18 +221,26 @@ export function createSicOutlineService(family = outlineServiceId,
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0) {
+        const { local } = proposal, at = proposal.route[index - 1]!.landing!;
+        const admitted = local.epoch === observation.level_epoch && perimeterMatch(packet.frame_rows, at, local.actor.color) >= 0.5
+          && outlineSameBox(packet.frame_rows, local.frame.box, local.frame.color);
+        return { admitted, reason: admitted ? 'outline_and_receiving_frame_retained' : 'outline_or_receiving_frame_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'outline_observation_bound' : 'outline_observation_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       const scored = after.levels_completed > before.levels_completed;
       if (scored) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { local, move, strategy, turnMarker } = proposal;
+      const { local, strategy, turnMarker } = proposal, move = proposal.route[index]!;
       if (move.landing) {
-        const matched = measuredTranslation(first, second, local.actor, move.landing);
-        return { matched, seal_prefix: true, reason: matched ? 'outline_translation_observed' : 'outline_translation_contradicted' };
+        const actor = { ...local.actor, box: proposal.route[index - 1]?.landing ?? local.actor.box };
+        const matched = measuredTranslation(first, second, actor, move.landing);
+        return { matched, seal_prefix: !matched || index + 1 >= proposal.route.length,
+          reason: matched ? 'outline_translation_observed' : 'outline_translation_contradicted' };
       }
       if (strategy === 'test_framed_operator') {
         const matched = frameOpened(second, local);
@@ -232,8 +252,9 @@ export function createSicOutlineService(family = outlineServiceId,
       }
       return { matched: null, seal_prefix: true, reason: 'merged_outline_did_not_score' };
     },
-    record(before, after, command, first, second, proposal) {
-      const { local, move, strategy } = proposal, [pitch] = size(local.actor.box);
+    record(before, after, command, first, second, proposal, index) {
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const { strategy } = proposal, move = proposal.route[index]!, [pitch] = size(local.actor.box);
       if (after.levels_completed > before.levels_completed && local.opened && local.turned && local.wall !== undefined) {
         learnRoute?.({ epoch: after.level_epoch, score: after.levels_completed, actor: local.actor.color, carrier: local.target.color,
           wall: local.wall, pitch, refs: [...local.evidence, after.observation_ref] });

@@ -3,17 +3,20 @@ import { measureScalarFillDisplay, orderedTransientComponentPathFacts } from '..
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { supportKey, supportParts } from '../logos-engine/v6-support-measurements.ts';
 import type { NativeBox, NativeCommand, NativeObservation, NativePoint, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { revalidatedDirectArc } from './revalidated-transient-arc.ts';
 
 type Model = NonNullable<ReturnType<typeof acquireTransientCurve>>;
 type Adjustment = { delta: number; evidence: string };
 type Impact = { point: NativePoint; count: number; obstacle: NativeBox; evidence: string; displayOverlay?: string };
 export type CurveWitness = { model: Model; epoch: number | null; controls: Record<string, Adjustment>; attempted: string[];
-  boundary?: string; impact?: Impact };
+  boundary?: string; impact?: Impact; revalidated?: true; unconfirmedAim?: { count: number; point: NativePoint } };
 export const regulatedContactStrategies = {
   measure_trajectory_adjustment: 'Test how an available command changes the visible magnitude',
   raise_trajectory_clearance: 'Raise the observed magnitude to seek a contact that clears the visible obstacles',
   test_regulated_contact: 'Test a contact projected from the observed motion and current magnitude',
   verify_relocated_source: 'Test the trajectory of the newly located source',
+  extend_trajectory_measurement: 'Test an aim that could reveal a longer trajectory for calibration',
+  compare_nearby_trajectory: 'Test a nearby aim at the same magnitude after the projected contact failed',
   prepare_obstacle_clearance: 'Adjust the magnitude of the trajectory that hit the obstacle',
   test_obstacle_clearance: 'Repeat the same aim after the projected path clears the obstacle',
 } as const;
@@ -21,8 +24,27 @@ type Strategy = keyof typeof regulatedContactStrategies;
 export type RegulatedChoice = {
   strategy: Strategy; action: NativeCommand; source: NativeBox; peer: NativeBox; meter: NativeBox; projected: NativePoint | null;
   count: number; expectedSign: number | null; shot: string | null; evidence: string[];
-  sourceCandidate?: string; impact?: Impact;
+  sourceCandidate?: string; impact?: Impact; avoidedPortals?: NativeBox[];
 };
+
+const nearbyAimOffsets = [1, -1, 2, -2, 3, -3].map(step => step * (2 * Math.PI / 72));
+
+function nextNearbyAim(origin: NativeBox, reference: NativePoint, peer: NativeBox, rows: NativeRows,
+  attempted: readonly NativePoint[], lowerLimit: number): NativePoint | undefined {
+  const x = (origin[0] + origin[2]) / 2, y = (origin[1] + origin[3]) / 2;
+  const angle = Math.atan2(reference[1] - y, reference[0] - x);
+  const radius = Math.hypot(reference[0] - x, reference[1] - y);
+  const towardPeer = Math.sign((peer[0] + peer[2]) / 2 - x);
+  return nearbyAimOffsets.map(offset => [
+    Math.round(x + Math.cos(angle + offset) * radius), Math.round(y + Math.sin(angle + offset) * radius),
+  ] as NativePoint).find(([col, row]) => row >= 0 && row < lowerLimit && col >= 0 && col < (rows[row]?.length ?? 0)
+    && Math.sign(col - x) === towardPeer && !attempted.some(([r, c]) => col === c && row === r));
+}
+
+export function mayRegulateContact(witness: CurveWitness | null, observation: NativeObservation): boolean {
+  return !!witness && (witness.epoch === observation.level_epoch
+    || !!witness.boundary && witness.epoch === observation.level_epoch - 1);
+}
 
 function measureImpact(model: Model, facts: NativeRecord, first: NativeRows, second: NativeRows,
   animationStart: NativeRows, command: NativeCommand, evidence: string): Impact | null {
@@ -60,17 +82,44 @@ export function learnCurveWitness(before: NativeObservation, after: NativeObserv
   return { model, epoch: null, controls: {}, attempted: [], ...(impact ? { impact } : {}) };
 }
 
-export function chooseRegulatedContact(witness: CurveWitness, observation: NativeObservation, rows: NativeRows): RegulatedChoice | null {
+export function chooseRegulatedContact(witness: CurveWitness, observation: NativeObservation, rows: NativeRows, recalibrateObservedTrajectory = false): RegulatedChoice | null {
   const available = observation.available_action_refs;
-  if (witness.epoch !== observation.level_epoch || !available.includes('ACTION6')) return null;
+  if (!mayRegulateContact(witness, observation) || !available.includes('ACTION6')) return null;
   const fill = measureScalarFillDisplay(rows), count = fill.scalar_fill_count as number;
   if (!matchingTransientDisplay(witness.model.fill, fill) || count < 1) return null;
-  const current = projectTransientCurve(witness.model, rows, count);
+  const newContext = witness.epoch !== observation.level_epoch;
+  if (newContext || witness.revalidated) {
+    if (fill.scalar_fill_orientation !== 'horizontal') return null;
+    const arc = revalidatedDirectArc(witness.model, rows, count, fill.scalar_fill_index, newContext ? [] : witness.attempted);
+    if (!arc) return null;
+    const evidence = [...new Set([...(witness.model.evidence as string[]), ...(witness.boundary ? [witness.boundary] : []),
+      ...Object.values(witness.controls).map(entry => entry.evidence)])];
+    const meter: NativeBox = [fill.scalar_fill_start, fill.scalar_fill_index, fill.scalar_fill_end, fill.scalar_fill_index];
+    const view = { source: arc.source, peer: arc.peer, meter, count, evidence, avoidedPortals: arc.portals };
+    if (arc.point) {
+      const [x, y] = arc.point;
+      return { ...view, strategy: 'test_regulated_contact', action: { action_ref: 'ACTION6', data: { x, y } },
+        projected: arc.point, expectedSign: null, shot: [count, x, y].join(',') };
+    }
+    if (count >= fill.scalar_fill_span) return null;
+    const opposites: Readonly<Record<string, string>> = { ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3' };
+    const increase = !newContext ? Object.entries(witness.controls).find(([input, control]) => control.delta > 0 && available.includes(input))?.[0] : null;
+    const adjustment = Object.entries(witness.controls).find(([input, control]) => control.delta < 0 &&
+      available.includes(opposites[input]!) && (newContext || !witness.controls[opposites[input]!]));
+    const input = increase ?? (adjustment && opposites[adjustment[0]]);
+    return input ? { ...view, strategy: increase ? 'raise_trajectory_clearance' : 'measure_trajectory_adjustment',
+      action: { action_ref: input, data: {} }, projected: null, expectedSign: increase ? 1 : null, shot: null } : null;
+  }
+  const excludedAims = recalibrateObservedTrajectory ? witness.attempted.flatMap(shot => {
+    const [magnitude, x, y] = shot.split(',').map(Number);
+    return magnitude === count && x !== undefined && y !== undefined ? [[y, x] as NativePoint] : [];
+  }) : undefined;
+  const current = projectTransientCurve(witness.model, rows, count, { excludedAims });
   const role = current.reason === 'current_source_peer_not_unique' && witness.model.acquisition_epoch !== observation.level_epoch
     ? transientSourceRoleProbe(witness.model, rows) : null;
   const sourceCandidate = role?.source_candidate as string | undefined;
-  const project = (magnitude: number) => sourceCandidate ? projectTransientCurve(witness.model, rows, magnitude, { sourceCandidate })
-    : projectTransientCurve(witness.model, rows, magnitude);
+  const project = (magnitude: number) => sourceCandidate ? projectTransientCurve(witness.model, rows, magnitude, { sourceCandidate, excludedAims: magnitude === count ? excludedAims : undefined })
+    : projectTransientCurve(witness.model, rows, magnitude, { excludedAims: magnitude === count ? excludedAims : undefined });
   const projection = sourceCandidate ? project(count) : current;
   if (projection.status !== 'measured') return null;
   const positive = Object.entries(witness.controls).filter(([input, entry]) => entry.delta > 0 && available.includes(input));
@@ -109,6 +158,22 @@ export function chooseRegulatedContact(witness: CurveWitness, observation: Nativ
     }
   }
   if (impact) return null;
+  const missed = witness.unconfirmedAim;
+  if (excludedAims && missed?.count === count) {
+    const aboveMeter = fill.scalar_fill_orientation === 'horizontal' ? fill.scalar_fill_index : rows.length;
+    const alternative = nextNearbyAim(view.source, missed.point, view.peer, rows, excludedAims, aboveMeter);
+    if (alternative) {
+      const [x, y] = alternative;
+      return { ...view, strategy: 'compare_nearby_trajectory', action: { action_ref: 'ACTION6', data: { x, y } },
+        projected: alternative, expectedSign: null, shot: [count, x, y].join(','), ...(sourceCandidate ? { sourceCandidate } : {}) };
+    }
+  }
+  const disclosure = projection.curve_disclosure as NativePoint | null;
+  if (recalibrateObservedTrajectory && increase && witness.model.track.length < 8 && !witness.attempted.length && disclosure) {
+    const [y, x] = disclosure;
+    return { ...view, strategy: 'extend_trajectory_measurement', action: { action_ref: 'ACTION6', data: { x, y } },
+      projected: [x, y], expectedSign: null, shot: [count, x, y].join(','), ...(sourceCandidate ? { sourceCandidate } : {}) };
+  }
   const input = increase?.[0] ?? available.find(action => /^ACTION[1-4]$/.test(action) && !witness.controls[action]);
   if (!input) return null;
   const strategy = increase ? 'raise_trajectory_clearance' : 'measure_trajectory_adjustment';
@@ -128,16 +193,29 @@ export function measureRegulatedAdjustment(choice: RegulatedChoice, first: Nativ
 }
 
 export function retainRegulatedReturn(witness: CurveWitness, choice: RegulatedChoice, before: NativeObservation,
-  after: NativeObservation, first: NativeRows, second: NativeRows, frames: readonly NativeRows[]): CurveWitness {
+  after: NativeObservation, first: NativeRows, second: NativeRows, frames: readonly NativeRows[], recalibrateObservedTrajectory = false): CurveWitness {
   if (after.levels_completed > before.levels_completed) {
-    const { impact: _impact, ...retained } = witness;
+    const { impact: _impact, revalidated: _revalidated, unconfirmedAim: _aim, ...retained } = witness;
     return { ...retained, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
   }
+  if (choice.avoidedPortals && witness.epoch !== before.level_epoch) {
+    const { impact: _impact, ...retained } = witness;
+    witness = { ...retained, epoch: before.level_epoch, revalidated: true, attempted: [] };
+  }
   if (choice.shot) {
-    const measurement = learnCurveWitness(before, after, choice.action, first, second, frames, witness, choice.sourceCandidate);
+    let measurement = learnCurveWitness(before, after, choice.action, first, second, frames, witness, choice.sourceCandidate);
+    if (choice.strategy === 'extend_trajectory_measurement' && !measurement) {
+      // A late impact can obscure the moving component. Keep the longest unambiguous launch prefix.
+      const minimum = Math.max(8, witness.model.track.length + 1);
+      for (let length = Math.min(16, frames.length - 1); length >= minimum && !measurement; length--) {
+        measurement = learnCurveWitness(before, after, choice.action, first, second, frames.slice(0, length), witness, choice.sourceCandidate);
+      }
+    }
     const { impact: _impact, ...retained } = witness;
     return { ...retained, ...(measurement ? { model: measurement.model } : {}), ...(measurement?.impact ? { impact: measurement.impact } : {}),
-      attempted: [...witness.attempted, choice.shot] };
+      attempted: [...witness.attempted, choice.shot],
+      ...(recalibrateObservedTrajectory && choice.strategy === 'test_regulated_contact' && choice.projected && witness.unconfirmedAim?.count !== choice.count
+        ? { unconfirmedAim: { count: choice.count, point: choice.projected } } : {}) };
   }
   const delta = measureRegulatedAdjustment(choice, first, second);
   return { ...witness, controls: { ...witness.controls, [choice.action.action_ref]: { delta: delta ?? 0, evidence: after.observation_ref } } };

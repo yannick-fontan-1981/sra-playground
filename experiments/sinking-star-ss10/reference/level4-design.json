@@ -1,0 +1,377 @@
+{
+  "spec": {
+    "id": "ss10-04",
+    "title": "Le miroir désenclavé",
+    "rows": [
+      "###############",
+      "##..m.~~~~~~~~#",
+      "##W...~~~b.#g~#",
+      "##....~~~..#.~#",
+      "##1T..~.m..D.~#",
+      "##~~~.~~~o.#.~#",
+      "##~~~~~~~..#g~#",
+      "#~~~~~~~~~~~~~#",
+      "###############"
+    ],
+    "facing": "E"
+  },
+  "commands": "CRRDXCURRXRRRDDLUUUDRRRUUCUUUULXRRRRRDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation de Heroes and Mirrors 4 · tirer le miroir puis quitter son axe",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-4",
+    "puzzle": 4,
+    "objective": "Sortir le miroir de sa niche, refléter le monstre proche pour dégager la traversée, puis laisser le Guerrier verrouiller la porte ouverte."
+  },
+  "metrics": {
+    "actions": 39,
+    "selections": 3,
+    "warriorPushes": 3,
+    "thiefPulls": 2,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 3,
+    "mirrorMoves": 2,
+    "reflections": 3,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur tire le miroir hors du bord puis quitte son rayon de côté",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "circuits": {}
+    },
+    {
+      "label": "Le monstre le plus proche rejoint son adversaire : le passage est libéré",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier utilise la diagonale libérée pour gagner l’autre îlot",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La poussée termine le placement du poids sur le bouton contre le bord nord",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Voleur rejoint à son tour l’entrepôt sans déplacer le miroir",
+      "turn": 39,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": "Adaptation libre du placement de miroir et du départ par reflet enseignés dans Heroes and Mirrors 4. La géométrie originale ajoute le Guerrier, deux destinations, un poids contre un bord et un duel de monstres. Le miroir commence contre une paroi qui empêche la poussée vers l’est ; la traction du Voleur le décale. Le monstre à trois cases est prioritaire sur celui à quatre cases et les deux s’éliminent après son reflet. Le Guerrier finit ensuite la caisse sur un bouton au bord nord, inaccessible à la traction finale."
+}

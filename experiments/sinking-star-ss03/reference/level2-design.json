@@ -1,0 +1,125 @@
+{
+  "spec": {
+    "id": "ss03-02",
+    "title": "La presse latérale",
+    "facing": "N",
+    "rows": [
+      "###########",
+      "#......####",
+      "#..o...####",
+      "#....Dbb###",
+      "#..#...####",
+      "#...b..####",
+      "#..o...Dg##",
+      "#...T..####",
+      "###########"
+    ],
+    "circuits": [
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 3
+          },
+          {
+            "x": 7,
+            "y": 3
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 5,
+          "y": 3
+        },
+        "circuit": "presse",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 6
+        },
+        "circuit": "sortie",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "validation": {
+    "actions": 27,
+    "pulls": 8,
+    "pistonEvents": [
+      {
+        "action": 16,
+        "gate": 0,
+        "movedActors": 1
+      },
+      {
+        "action": 22,
+        "gate": 0,
+        "movedActors": 2
+      }
+    ],
+    "complete": true,
+    "blocked": 0,
+    "dead": false,
+    "cratesPreserved": true,
+    "noPistonAblation": {
+      "status": "unsolvable",
+      "states": 6766,
+      "expanded": 6766,
+      "ms": 80.62451100000001
+    },
+    "noPullAblation": {
+      "status": "unsolvable",
+      "states": 40,
+      "expanded": 40,
+      "ms": 2.565859000000003
+    },
+    "geometricProof": {
+      "target": {
+        "x": 7,
+        "y": 3
+      },
+      "incomingPulls": [
+        {
+          "direction": "N",
+          "possible": false
+        },
+        {
+          "direction": "S",
+          "possible": false
+        },
+        {
+          "direction": "W",
+          "possible": false
+        },
+        {
+          "direction": "E",
+          "possible": false
+        }
+      ],
+      "initiallyEmpty": true
+    }
+  },
+  "design": {
+    "difficulty": "medium",
+    "intent": "Deux caisses doivent être chargées successivement dans une presse orientée vers l’est, puis envoyées ensemble sur les deux boutons de sortie. Un pilier central impose de changer de côté pour préparer les tractions.",
+    "requiredPiston": "Le bouton final en (7,3) se trouve dans une niche à trois parois : aucune traction ne peut y déposer une caisse. Les deux boutons doivent rester occupés pour rejoindre la porte de sortie. La recherche exhaustive sans poussée confirme l’insolubilité.",
+    "teaching": "Le joueur prépare les caisses avant d’actionner la presse : le premier mouvement ne déclenche pas de piston. La seconde poussée montre la transmission à une file de deux caisses."
+  }
+}

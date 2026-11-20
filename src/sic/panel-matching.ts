@@ -1,9 +1,12 @@
 import { measurePanelService, panelServiceProjection, remotePanelServiceChoices, type PanelLattice, type RemotePanelServiceChoice } from '../logos-engine/v6-panel-service-observation.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
+import { bestLocalActivity } from './observed-panel-services.ts';
 import type { NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { choosePreparedConfiguration, preparedConfigurationFacts, preparedConfigurationModule } from './prepared-configuration-card.ts';
 import { sicNeedId } from './need-identity.ts';
-import { matchesServiceChain, prepareServiceChain, type ChainReturn, type Panel, type Pattern, type Scene, type Service } from './panel-service-chain.ts';
+import { matchesServiceChain, prepareServiceChain, type ChainReturn, type Panel, type Pattern, type Scene } from './panel-service-chain.ts';
+import { matchesWorkshopState, measureWorkshopLayout, measureWorkshopState, nextWorkshopEdit, planWorkshopTurn,
+  type WorkshopLayout, type WorkshopState, type WorkshopTurn } from './stocked-service-turn.ts';
 
 export const panelMatchingId = 'sic_panel_matching';
 export const verifyPanelConfigurationId = 'sic_verify_matching_panel_configuration';
@@ -14,22 +17,15 @@ export const panelMatchingStrategies = {
 type Transfer = RemotePanelServiceChoice & { panel: Panel };
 type Delivery = { panelId: string; material: number; roomMarker: number };
 type State = { epoch: number; symbols: Pattern[]; attempts: string[]; stopped: boolean; evidence: string[];
-  verifiedEditRef?: string; verifiedTransferEditRef?: string; transport?: Pattern; lattices?: PanelLattice[] };
-type LearnedSymbols = { completed: number; symbols: Pattern[]; proof: string; transport?: Pattern };
+  verifiedEditRef?: string; verifiedTransferEditRef?: string; transport?: Pattern; lattices?: PanelLattice[];
+  workshop?: WorkshopLayout; workshopTurn?: WorkshopTurn };
+type LearnedSymbols = { completed: number; symbols: Pattern[]; proof: string; transport?: Pattern; lattices?: PanelLattice[] };
 type ChainEditReturn = { panelId: string; row: number; col?: number; previous: NativeRecord[] };
+type WorkshopAction = { expected: WorkshopState; edit?: { panel: number; row: number; col: number; pause: boolean } };
 type Proposal = NativeProposal & { local: State; symbols: Pattern[]; expected: NativeRecord[] | null; attempt: string; needId: string;
   outputs?: { panelId: string; value: number }[]; deliveries?: Delivery[]; destinationEdit?: boolean;
-  chainEdit?: ChainEditReturn; chainReturn?: ChainReturn; transport?: Pattern };
+  chainEdit?: ChainEditReturn; chainReturn?: ChainReturn; transport?: Pattern; workshopAction?: WorkshopAction };
 const equal = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
-
-function bestLocalActivity(panel: Panel): Service | null {
-  const direct = panel.operators.filter(service => service.kind === 'displayed_receiver' && service.input === panel.material);
-  if (direct.length === 1) return direct[0]!;
-  if (direct.length > 1) return null;
-  const conversion = panel.operators.filter(service => service.kind === 'displayed_rewrite' && service.input === panel.material &&
-    panel.services.some(receiver => receiver.kind === 'displayed_receiver' && service.output === receiver.input));
-  return conversion.length === 1 ? conversion[0]! : null;
-}
 
 function matchedTransfers(scene: Scene): Transfer[] | null {
   if (new Set(scene.panels.map(panel => panel.room_marker)).size !== scene.panels.length) return null;
@@ -76,6 +72,19 @@ function observedChain(proposal: Proposal, rows: NativeRows): boolean {
   return !!panel?.cells.some(cell => cell.row === edit.row && cell.col === edit.col && cell.outline === panel.selection_color);
 }
 
+function observedWorkshop(proposal: Proposal, rows: NativeRows): boolean {
+  const { local, workshopAction } = proposal;
+  if (!workshopAction || !local.workshop || !local.lattices) return false;
+  const scene = measurePanelService(rows, local.symbols, local.lattices, true) as Scene | null;
+  if (!scene || !matchesWorkshopState(measureWorkshopState(rows, scene, local.workshop), workshopAction.expected)) return false;
+  const edit = workshopAction.edit;
+  if (!edit) return true;
+  const panel = scene.panels[edit.panel];
+  if (!panel) return false;
+  return edit.pause ? !panel.activity_controls.some(cell => cell.outline === panel.selection_color)
+    : panel.cells.some(cell => cell.row === edit.row && cell.col === edit.col && cell.outline === panel.selection_color);
+}
+
 export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
   let state: State | null = null;
   let retained: LearnedSymbols | null = null;
@@ -91,8 +100,59 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
       let local: State = state?.epoch === observation.level_epoch ? state :
         { epoch: observation.level_epoch, symbols: learned?.symbols ?? [], attempts: [], stopped: false,
           evidence: learned ? [learned.proof] : [], ...(learned?.transport ? { transport: learned.transport } : {}) };
-      if (local.stopped || local.attempts.length >= (local.lattices ? 48 : 16)) return null;
+      if (local.stopped || !local.workshop && local.attempts.length >= (local.lattices ? 48 : 16)) return null;
       let scene = measurePanelService(rows, local.symbols, local.lattices) as Scene | null;
+      if (local.workshop || !scene && learned?.lattices && local.transport) {
+        const lattices = local.lattices ?? learned?.lattices;
+        if (!lattices?.length || !local.transport) return null;
+        const measured = measurePanelService(rows, local.symbols, lattices, true) as Scene | null;
+        if (!measured) return null;
+        const layout = local.workshop ?? measureWorkshopLayout(rows, measured, lattices[0]!.unit);
+        const stock = layout && measureWorkshopState(rows, measured, layout);
+        if (!layout || !stock) return null;
+        const now = execution?.now ?? (() => performance.now());
+        const turn = local.workshopTurn ?? planWorkshopTurn(layout, stock, Math.min(12, remaining),
+          () => !!execution?.signal?.aborted || now() >= (execution?.deadlineMs ?? Infinity));
+        if (!turn) return null;
+        const edit = nextWorkshopEdit(measured, layout, stock, turn, local.transport);
+        if (edit === undefined) return null;
+        const point = edit?.cell.point, command: NativeCommand = point ? { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } }
+          : { action_ref: 'ACTION5', data: {} };
+        const attempt = JSON.stringify([stock, panelServiceProjection(measured), command]);
+        if (local.attempts.includes(attempt)) return null;
+        const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
+        const mode = execution?.reasoningMode ?? 'solving', reuseEdit = !!point && !!local.verifiedEditRef;
+        const facts = preparedConfigurationFacts(mode, { pendingWithKnownEdit: reuseEdit, pendingWithUntestedEdit: !!point && !reuseEdit,
+          readyForFirstApplication: !point });
+        const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
+        const strategy = reuseEdit ? 'P02' : 'P05';
+        if (decision?.result !== strategy) return null;
+        const goal = { kind: 'schedule_counted_stock_with_cooling', scope: ref.split(':revision:', 1)[0]!, subjects: ['measured_workshop_stock'],
+          parentObjective: 'G_official_completion', satisfactionContract: 'official_progress_after_consuming_the_materials' };
+        const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = 'panel-matching:' + need.id;
+        const job = edit && turn.jobs[edit.panel], label = !edit ? 'Run the reserved jobs and compare the remaining stock and furnace readiness'
+          : edit.pause ? 'Pause this worker to leave the reserved crates available'
+            : edit.cell.col === 0 ? 'Select the material reserved for this worker'
+              : job?.kind === 'move' ? 'Prepare the transfer to a room with a free slot'
+                : job?.kind === 'rewrite' ? 'Prepare the local recipe' : 'Select the furnace that can accept the reserved crate';
+        const binding = point && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence });
+        const next = { ...local, lattices, workshop: layout, workshopTurn: turn };
+        return { status: 'proposed', kind: verifyPanelConfigurationId, actions: [command], local: next, symbols: local.symbols,
+          expected: null, attempt, needId: need.id,
+          workshopAction: { expected: edit ? stock : turn.expected, ...(edit ? { edit: { panel: edit.panel,
+            row: edit.cell.row, col: edit.cell.col, pause: edit.pause } } : {}) },
+          binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+          steps: [{ action: command, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
+          sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
+            edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
+          sicSituationCard: { strategy, need: 'Use the available crates and schedule the next jobs', mode, situation: label,
+            agenda: [], evidence, triggerCard: decision.receipt.workflow, panels: measured.panels.map(panel => panel.bbox) },
+          question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+          sicLocalDecision: { strategy, objective: { id, label, parent: goal.parentObjective }, need },
+          compositions: [{ id, observed: false, open_question: label, relations: ['contributes_to:' + goal.parentObjective] }],
+          bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: goal.parentObjective, purpose: label,
+            evidence, preconditions: {}, preserve_refs: [], actions: [command], outcome_guard: { path: ['value'], contains: id } } };
+      }
       if (!scene || scene.panels.length < 2 || scene.panels.length > 6) return null;
       const choices = scene.panels.map(panel => {
         const service = bestLocalActivity(panel);
@@ -200,6 +260,10 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (proposal.workshopAction) {
+        const matched = observedWorkshop(proposal, second);
+        return { matched, seal_prefix: true, reason: matched ? 'workshop_reservation_observed' : 'workshop_reservation_contradicted' };
+      }
       if (proposal.chainEdit || proposal.chainReturn) {
         const matched = observedChain(proposal, second);
         return { matched, seal_prefix: true, reason: matched
@@ -215,11 +279,22 @@ export function createSicVerifyPanelConfiguration(): NativeFamily<Proposal> {
     record(before, after, _command, _first, second, proposal) {
       if (after.levels_completed > before.levels_completed) {
         retained = { completed: after.levels_completed, symbols: proposal.symbols, proof: after.observation_ref,
-          ...(proposal.local.transport ? { transport: proposal.local.transport } : {}) };
+          ...(proposal.local.transport ? { transport: proposal.local.transport } : {}),
+          ...(proposal.local.lattices ? { lattices: proposal.local.lattices } : {}) };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, symbols } = proposal;
+      if (proposal.workshopAction) {
+        const matched = observedWorkshop(proposal, second), isEdit = !!proposal.workshopAction.edit;
+        const { workshopTurn, ...base } = local;
+        const recovered = !matched && !isEdit && before.frame_hash !== after.frame_hash && local.workshop && local.lattices
+          ? measurePanelService(second, local.symbols, local.lattices, true) as Scene | null : null;
+        const canReplan = recovered && local.workshop && measureWorkshopState(second, recovered, local.workshop);
+        state = { ...base, attempts: [...local.attempts, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref],
+          stopped: !matched && !canReplan, ...(matched && isEdit && workshopTurn ? { workshopTurn, verifiedEditRef: after.observation_ref } : {}) };
+        return { events: [], ...(matched && !isEdit ? { reviewEvidence: 'The return confirms the exact crate counts, worker rooms and furnace cooldowns.' } : {}) };
+      }
       const chainVerified = proposal.chainEdit || proposal.chainReturn ? observedChain(proposal, second) : null;
       const verifiedEdit = proposal.chainEdit ? !!chainVerified : !!proposal.expected && measuredMatch(proposal, second);
       const application = proposal.deliveries || proposal.outputs ? observedApplication(proposal, second) : null;

@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { canonical } from '../src/logos-engine/canonical.ts';
 import { Kernel } from '../src/logos-engine/kernel.ts';
 import { decodeNativeState, encodeNativeState, NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
-import { hydrateNativeState, isNativeStateGraph } from '../src/logos-engine/v6-native-state-graph.ts';
+import { hydrateNativeState, isNativeStateGraph, splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { NativeV6Runtime } from '../src/logos-engine/v6-native-runtime.ts';
 import type { NativeFamily, NativeGraphEdit, NativeRecord } from '../src/logos-engine/v6-native-types.ts';
@@ -19,6 +19,55 @@ import type { GameObservation } from '../src/runtime/browser-games.ts';
 const WORKFLOW = 'v6.composition_strategy.choose';
 const CAUSE = { workflow: 'test.store', step: 'test', statement: 'write' };
 const NO_WAIT = { yieldControl: async () => {} };
+
+test('a published frozen source is reused only for its current root and still records provenance changes', async () => {
+  const store = new NativeKnowledgeStore('test:published-source', 'test');
+  const rows = Object.freeze(Array.from({ length: 48 }, () => Object.freeze(Array<number>(48).fill(1))));
+  const data = Object.freeze({ rows, value: -0 });
+  const write = (id: string, value: unknown, evidence: string[] = []) =>
+    ({ id, kind: 'component_state' as const, component: 'test', value, evidence });
+  const first = await store.commit([write('state', data)], CAUSE);
+  const root = first.get('state')!.node.value;
+  const revision = store.revision;
+  const changed = await store.commit([write('state', data, ['new-evidence'])], CAUSE);
+  assert.equal(changed.get('state')!.node.value, root);
+  assert.deepEqual(store.node('state').evidence, ['new-evidence']);
+  assert.equal(store.revision, revision + 1);
+  await store.commit([write('other-state', data)], CAUSE);
+  assert.equal((store.node('other-state').value as any).component, 'other-state');
+  const mutable = { value: 1 }, shallow = Object.freeze({ child: mutable });
+  await store.commit([write('state', shallow)], CAUSE);
+  mutable.value = 2;
+  await store.commit([write('state', shallow)], CAUSE);
+  assert.deepEqual(store.value('state'), { child: { value: 2 } });
+  await store.commit([write('state', data)], CAUSE);
+  assert.equal(canonical(store.node('state').value), canonical(root));
+  assert.ok(Object.is((store.value('state') as any).value, -0));
+});
+
+test('successive trace identities share unchanged evidence without changing typed graph bytes or hydration', async () => {
+  const store = new NativeKnowledgeStore('test:trace-stream', 'test');
+  const first = { id: 1, created: 0.125, body: { rows: Array.from({ length: 64 }, (_, y) => Array.from({ length: 64 }, (_, x) => (x + y) % 4)), command: 'ACTION1' } };
+  const second = structuredClone(first); second.id = 2; second.created = 0.25; second.body.command = 'ACTION2'; second.body.rows[1]![0] = 7;
+  const write = (id: string, value: unknown) => ({ id, kind: 'component_state' as const, component: 'native_reasoning_trace', value });
+  await store.commit([write('trace:1', first)], CAUSE);
+  const previous = store.memory;
+  await store.commit([write('trace:2', second)], CAUSE);
+  const a = store.node('trace:1').value as any, b = store.node('trace:2').value as any;
+  const rowsA = (store.node(a.root.members.body.members.rows.id).value as any).node;
+  const rowsB = (store.node(b.root.members.body.members.rows.id).value as any).node;
+  assert.equal(rowsB.items[0], rowsA.items[0]);
+  assert.notEqual(rowsB.items[1], rowsA.items[1]);
+  const expected = splitNativeState(second, 'trace:2');
+  assert.equal(canonical(b), canonical(expected.root));
+  for (const fragment of expected.fragments) assert.equal(canonical(store.node(fragment.id).value), canonical(fragment.value));
+  assert.deepEqual(store.value('trace:1'), first); assert.deepEqual(store.value('trace:2'), second);
+  assert.equal(previous.nodes['trace:1'], store.node('trace:1'));
+  const accepted = store.memory;
+  const invalid = Object.defineProperty({ ...second }, 'body', { enumerable: true, get: () => second.body });
+  await assert.rejects(store.commit([write('trace:3', invalid)], CAUSE), /data properties/);
+  assert.equal(store.memory, accepted);
+});
 
 test('native Float64 leaves round-trip fractional evidence, negative zero and reserved object keys', () => {
   const value = { confidence: 0.125, negative: -0, large: 2 ** 60, plain: 7,
@@ -73,6 +122,55 @@ test('native store commits actual V7 revisions and rolls back a failed multi-nod
   assert.equal(store.memory.deltas[1]!.previous, first.chain);
   assert.notEqual(store.graphChain, first.chain);
   assert.ok(Object.isFrozen(store.memory.nodes));
+});
+
+test('cooperative publication keeps the same graph and stays atomic across host turns', async () => {
+  const baseline = new NativeKnowledgeStore('cooperative-source', 'cooperative-scope');
+  let yielded = 0;
+  let cooperative: NativeKnowledgeStore;
+  cooperative = new NativeKnowledgeStore('cooperative-source', 'cooperative-scope', undefined, async () => {
+    yielded++;
+    assert.equal(cooperative.memory, published);
+    await assert.rejects(cooperative.commit([], CAUSE), /already active/);
+    await new Promise(resolve => setTimeout(resolve, 0));
+  });
+  let published = cooperative.memory;
+  const records = Array.from({ length: 80 }, (_, index) => ({
+    id: `component:${index}`, kind: 'component_state' as const, component: 'test', value: { index },
+  }));
+  const frames = Array.from({ length: 70 }, (_, frame) => Array.from({ length: 32 }, (_, y) =>
+    Array.from({ length: 32 }, (_, x) => (frame + x + y) % 71)));
+  const writes = [...records, { id: 'component:frames', kind: 'component_state' as const,
+    component: 'test', value: { frames } }];
+  await baseline.commit(writes, CAUSE);
+  await cooperative.commit(writes, CAUSE);
+  assert.ok(yielded >= 2);
+  assert.equal(canonical(cooperative.memory), canonical(baseline.memory));
+  assert.deepEqual(cooperative.stateValue('component:frames'), { frames });
+  published = cooperative.memory;
+  await assert.rejects(cooperative.commit([
+    ...records.map(record => ({ ...record, value: { index: -1 } })),
+    { id: 'invalid', kind: 'family_state', value: {} },
+  ], CAUSE), /Logos contract/);
+  assert.equal(cooperative.memory, published);
+});
+
+test('a rejected publication yield rolls back and releases the store for the next transaction', async () => {
+  let fail = true;
+  const store = new NativeKnowledgeStore('yield-source', 'yield-scope', undefined, async () => {
+    if (fail) {
+      fail = false;
+      throw new Error('host_yield_failed');
+    }
+  });
+  const original = store.memory;
+  const writes = Array.from({ length: 80 }, (_, index) => ({
+    id: `component:${index}`, kind: 'component_state' as const, component: 'test', value: { index },
+  }));
+  await assert.rejects(store.commit(writes, CAUSE), /host_yield_failed/);
+  assert.equal(store.memory, original);
+  await store.commit([writes[0]!], CAUSE);
+  assert.deepEqual(store.stateValue(writes[0]!.id), { index: 0 });
 });
 
 test('native state fragments retain an entire large episode and reuse immutable frames across revisions', async () => {

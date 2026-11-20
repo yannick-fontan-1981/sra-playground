@@ -1,7 +1,7 @@
 import { measureOrderedSupportScene, measureSupportBand, orderedSupportSelectionMatches,
   type MaterialBand, type OrderedSupportScene } from '../logos-engine/v6-ordered-support.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
@@ -18,6 +18,12 @@ type Offer = NativeProposal & { local: State; move: Move; member: MaterialBand; 
 const signature = (state: number[][]) => JSON.stringify(state);
 const same = (a: unknown, b: unknown) => JSON.stringify(a) === JSON.stringify(b);
 const center = ([l,t,r,b]: NativeBox): NativePoint => [Math.floor((l+r)/2), Math.floor((t+b)/2)];
+
+function supportClick(scene: Scene, index: number): NativeCommand {
+  const point = 'contacts' in scene ? scene.contacts[index]! : scene.geometry.supports[index]!.point;
+  const [x, y] = 'contacts' in scene ? point : [point[1], point[0]];
+  return { action_ref: 'ACTION6', data: { x, y } };
+}
 
 function nextTransfer(scene: Scene, local: State): Move | null {
   const { configuration, target } = scene;
@@ -82,10 +88,7 @@ export function createSicLearnSupportMoves(family = learnSupportMovesId): Native
       const evidence: [string, ...string[]] = [ref, ...local.effects.filter(value => value !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';
       const receiver = scene.structural_supports[move.destination]!.bbox;
-      const index = phase === 'select' ? move.source : move.destination;
-      const point = 'contacts' in scene ? scene.contacts[index]! : scene.geometry.supports[index]!.point;
-      const [x, y] = 'contacts' in scene ? point : [point[1], point[0]];
-      const action = { action_ref: 'ACTION6', data: { x, y } };
+      const action = supportClick(scene, phase === 'select' ? move.source : move.destination);
       const offer = { input: action.action_ref, expected: center(receiver), evidence };
       const known = local.effects.length >= 2;
       const legacy = fromObservedSupports ? null : resolveNavigationPrimitives({ mode, evidence, probe: known ? null : offer,
@@ -97,8 +100,21 @@ export function createSicLearnSupportMoves(family = learnSupportMovesId): Native
       const strategy = fromObservedSupports ? primitive : legacy?.selected?.id;
       if (!strategy) return null;
       const purpose = phase === 'select' ? 'Test or reuse selection of the exposed piece' : 'Check the deposit on a support with enough room';
-      const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [x,y], { reason: purpose, evidence });
+      const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, [action.data.x!, action.data.y!], { reason: purpose, evidence });
       if (!witness) return null;
+      const actions = [action];
+      const steps = [{ action, point_binding: witness, expected_after: phase === 'deposit' ? move.expected : null }];
+      if (known && phase === 'select' && remaining > 1) {
+        const deposit = supportClick(scene, move.destination);
+        try {
+          const receiverWitness = await ObservedInputDomain.makeLocusWitness(observation, rows, [deposit.data.x!, deposit.data.y!],
+            { reason: 'Deposit the selected piece on the verified support', evidence });
+          if (receiverWitness) {
+            actions.push(deposit);
+            steps.push({ action: deposit, point_binding: receiverWitness, expected_after: move.expected });
+          }
+        } catch (error) { if (!(error instanceof TypeError)) throw error; }
+      }
       const parent = 'G_official_completion';
       const objective = { kind: 'move_exposed_pieces_to_receiving_support', scope: ref.split(':revision:',1)[0]!,
         subjects: ['exposed_piece', 'receiving_support'], parentObjective: parent, satisfactionContract: 'official_progress_after_verified_deposits' };
@@ -108,7 +124,7 @@ export function createSicLearnSupportMoves(family = learnSupportMovesId): Native
         status: 'proposed', kind: family, local, move, member, phase, key: layout, needId: need.id,
         scene,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        actions: [action], steps: [{ action, point_binding: witness, expected_after: phase === 'deposit' ? move.expected : null }],
+        actions, steps,
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts } } : {}),
@@ -119,22 +135,27 @@ export function createSicLearnSupportMoves(family = learnSupportMovesId): Native
         compositions: [{ id, observed: false, open_question: purpose, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose,
-          preconditions: {}, preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
     before(offer, index, _packet, current) {
-      const admitted = index === 0 && offer.binding?.observation_ref === current.observation_ref;
+      const admitted = index === 0 ? offer.binding?.observation_ref === current.observation_ref
+        : index === 1 && offer.actions.length > 1 && offer.binding?.level_epoch === current.level_epoch;
       return { admitted, reason: admitted ? 'support_control_bound' : 'support_scene_changed' };
     },
-    async after(offer, _index, before, after, first, second) {
+    async after(offer, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: offer.needId, status: 'satisfied' } };
-      const matched = offer.phase === 'select' ? orderedSupportSelectionMatches(first, second, offer) : await deposited(offer, second);
-      return { matched, seal_prefix: true, reason: matched ? offer.phase === 'select' ? 'exposed_member_selected' : 'deposit_observed' : 'support_projection_refuted' };
+      const selection = index === 0 && offer.phase === 'select';
+      const matched = selection ? orderedSupportSelectionMatches(first, second, offer) : await deposited(offer, second);
+      return { matched, seal_prefix: !matched || index + 1 >= offer.actions.length,
+        reason: matched ? selection ? 'exposed_member_selected' : 'deposit_observed' : 'support_projection_refuted' };
     },
-    async record(before, after, _command, first, second, offer) {
+    async record(before, after, _command, first, second, offer, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, move, phase, key } = offer;
+      const { move, key } = offer;
+      const local = (index > 0 && state?.selected?.frameHash === before.frame_hash ? state : null) ?? offer.local;
+      const phase = index > 0 ? 'deposit' : offer.phase;
       const matched = phase === 'select' ? orderedSupportSelectionMatches(first, second, offer) : await deposited(offer, second);
       state = { ...local,
         selected: phase === 'select' && matched ? { member: offer.member, source: move.source, key, frameHash: after.frame_hash, scene: offer.scene } : null,

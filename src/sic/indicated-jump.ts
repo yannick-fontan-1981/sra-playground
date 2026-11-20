@@ -17,6 +17,7 @@ const same = (a: NativePoint, b: NativePoint) => distance(a, b) === 0;
 const middle = ([l, t, r, b]: NativeBox): NativePoint => [(l + r) / 2, (t + b) / 2];
 const size = ([l, t, r, b]: NativeBox): NativePoint => [r - l + 1, b - t + 1];
 const key = ([x, y]: NativePoint) => x + ',' + y;
+const attemptKey = (actor: Arrow, point: NativePoint) => [key(actor.point), key(actor.face), key(point)].join('/');
 const square = (p: Component) => p.bbox[2] - p.bbox[0] === p.bbox[3] - p.bbox[1];
 const within = ([l, t, r, b]: NativeBox, [x, y]: NativePoint) => l <= x && x <= r && t <= y && y <= b;
 const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : a;
@@ -118,7 +119,7 @@ export function createSicIndicatedJump(family = indicatedJumpId): NativeFamily<P
       const unique = marked.length === 1 ? marked[0] : null;
       const candidates = unique ? unique[1].map(arrow => arrow.point) : [];
       if (inRay(scene.actor, scene.terminal, scene.pitch) && (local.highlight !== null || !candidates.length)) candidates.push(scene.terminal);
-      const attempt = (point: NativePoint) => [key(scene.actor.point), key(scene.actor.face), key(point)].join('/');
+      const attempt = (point: NativePoint) => attemptKey(scene.actor, point);
       const available = candidates.filter(point => !local.tried.includes(attempt(point)));
       available.sort((a, b) => pathLength(scene, a) - pathLength(scene, b) || distance(a, scene.actor.point) - distance(b, scene.actor.point));
       const point = available[0];
@@ -142,10 +143,21 @@ export function createSicIndicatedJump(family = indicatedJumpId): NativeFamily<P
       const id = 'indicated-jump:' + need.id, action = { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } }, actions = [action];
       const focus = [...scene.arrows].find(arrow => same(arrow.point, point))?.box ?? [point[0], point[1], point[0], point[1]];
       const [x, y] = scene.terminal;
+      const steps = [{ action, expected_after: local.refs.length ? point : null, point_binding: pointBinding }];
+      const nextArrow = scene.arrows.find(arrow => same(arrow.point, point));
+      const terminalAttempt = nextArrow && attemptKey(nextArrow, scene.terminal);
+      if (strategy === 'P07' && remaining > 1 && local.count < 23 && local.highlight !== null && nextArrow
+        && inRay(nextArrow, scene.terminal, scene.pitch) && !local.tried.includes(terminalAttempt!)) {
+        const terminal = { action_ref: 'ACTION6', data: { x, y } };
+        const witness = await ObservedInputDomain.makeLocusWitness(observation, rows, scene.terminal,
+          { reason: 'Terminal aligned with the arrow at the projected landing', evidence });
+        actions.push(terminal);
+        steps.push({ action: terminal, expected_after: scene.terminal, point_binding: witness });
+      }
       const situation = strategy === 'P05' ? 'Test one marked destination along the current arrow' : 'Use the measured jump effect and the current arrows to choose the next destination';
       return { status: 'proposed', kind: family, actions, local: { ...local, highlight: unique?.[0] ?? local.highlight }, scene, point, needId: need.id,
         attempt: attempt(point), binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-        steps: [{ action, expected_after: local.refs.length ? point : null, point_binding: pointBinding }],
+        steps,
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Reach the distinct marker by following the visible arrows', situation, evidence,
@@ -157,22 +169,35 @@ export function createSicIndicatedJump(family = indicatedJumpId): NativeFamily<P
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index === 1 && proposal.actions.length === 2) {
+        const next = measure(packet.frame_rows, proposal.local.ring);
+        const admitted = proposal.local.epoch === observation.level_epoch && !!next
+          && same(next.actor.point, proposal.point) && same(next.terminal, proposal.scene.terminal)
+          && next.pitch === proposal.scene.pitch && inRay(next.actor, next.terminal, next.pitch)
+          && !proposal.local.tried.includes(attemptKey(next.actor, next.terminal));
+        return { admitted, reason: admitted ? 'terminal_in_verified_arrow_ray' : 'indicated_jump_context_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_indicator_and_click_bound' : 'indicated_jump_context_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const next = measure(second, proposal.local.ring);
-      const matched = proposal.local.refs.length ? !!next && same(next.actor.point, proposal.point) : null;
-      return { matched, seal_prefix: true, reason: 'compare_observed_indicator_position' };
+      const target = index === 0 ? proposal.point : proposal.scene.terminal;
+      const matched = proposal.local.refs.length ? !!next && same(next.actor.point, target) : null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length, reason: 'compare_observed_indicator_position' };
     },
-    record(before, after, _action, _first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local } = proposal, next = measure(second, local.ring);
-      const moved = next && same(next.actor.point, proposal.point) && !same(proposal.scene.actor.point, next.actor.point);
-      state = { ...local, count: local.count + 1, tried: [...local.tried, proposal.attempt],
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const next = measure(second, local.ring);
+      const from = index === 0 ? proposal.scene.actor : measure(first, local.ring)?.actor;
+      const target = index === 0 ? proposal.point : proposal.scene.terminal;
+      const moved = from && next && same(next.actor.point, target) && !same(from.point, next.actor.point);
+      const attempt = from ? attemptKey(from, target) : proposal.attempt;
+      state = { ...local, count: local.count + 1, tried: [...local.tried, attempt],
         refs: moved ? [...local.refs.slice(-5), after.observation_ref] : local.refs };
       return { events: [] };
     },

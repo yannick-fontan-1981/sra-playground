@@ -1,3 +1,5 @@
+import { GAME_CATALOG } from './games/catalog.ts';
+const customGameCount = GAME_CATALOG.filter(game => game.group !== 'official').length;
 const sourceUrl = 'https://github.com/yannick-fontan-1981/sra-playground';
 
 /** SRA is the project identity; ARC-AGI-3 is its interactive research setting. */
@@ -28,7 +30,7 @@ export function renderSiteHeader(active: 'motivation' | 'playground' | 'gallery'
       <nav aria-label="Main navigation">
         <a${active === 'motivation' ? ' class="nav-active" aria-current="page"' : ''} href="/motivation.html">Motivation</a>
         <a${active === 'playground' ? ' class="nav-active" aria-current="page"' : ''} href="${active === 'playground' ? '#playground' : '/'}">Playground</a>
-        <a${active === 'gallery' ? ' class="nav-active" aria-current="page"' : ''} href="/gallery.html">75 New Games</a>
+        <a${active === 'gallery' ? ' class="nav-active" aria-current="page"' : ''} href="/gallery.html">${customGameCount} New Games</a>
         <a${active === 'lab' ? ' class="nav-active" aria-current="page"' : ''} href="/reasoning-lab.html">Reasoning Lab</a>
         <a${active === 'arc-agi-3' ? ' class="nav-active" aria-current="page"' : ''} href="/arc-agi-3.html" aria-label="What is ARC-AGI-3?">ARC-AGI-3</a>
         <a${active === 'symbolic-reasoning' ? ' class="nav-active" aria-current="page"' : ''} href="/symbolic-reasoning.html">Symbolic Reasoning</a>

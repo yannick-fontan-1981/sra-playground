@@ -172,7 +172,9 @@ export function assemblePorts(model: PortModel, current: readonly PortPose[], ac
   };
   for (let anchor = 0; anchor < count; anchor++) visit(new Map([[anchor, current[anchor]!]]), 0); return bestPose;
 }
-export function constrainedPortAssembly(model: PortModel, current: readonly PortPose[], _active: number | null, rotationSign: number | null): readonly PortPose[] | null {
+export function constrainedPortAssembly(model: PortModel, current: readonly PortPose[], _active: number | null, rotationSign: number | null,
+  budget?: { maxVisits: number; shouldStop: () => boolean }): readonly PortPose[] | null {
+  if (budget?.shouldStop()) return null;
   let domains: Map<string, PortPose>[] = model.pose_domains.map((domain: readonly PortPose[]) => new Map(domain.map(pose => [keyOf(pose), pose]))); const count = domains.length;
   const projected = new Map<string, readonly [PointSet, PointSet]>(), owners = new Map<string, { point: Point; ids: Set<number> }>();
   domains.forEach((domain, i) => { for (const [key, pose] of domain) { const projection = placedPorts(model, i, pose); projected.set(`${i}:${key}`, projection);
@@ -181,11 +183,13 @@ export function constrainedPortAssembly(model: PortModel, current: readonly Port
   const interfaces = new Map<string, { a: number; b: number; shared: PointSet }>();
   for (const { point, ids } of owners.values()) if (ids.size === 2) { const [a, b] = [...ids].sort((a, b) => a - b), key = `${a},${b}`;
     if (!interfaces.has(key)) interfaces.set(key, { a: a!, b: b!, shared: new PointSet() }); interfaces.get(key)!.shared.add(point); }
-  let best: readonly PortPose[] | null = null, bestCost: number | null = null, nodes = 0;
+  let best: readonly PortPose[] | null = null, bestCost: number | null = null, nodes = 0, stopped = false;
   const cost = (index: number, pose: PortPose) => rotationSign ? modulo((pose[0] - current[index]![0]) * rotationSign, 4) : Math.min(modulo(pose[0] - current[index]![0], 4), modulo(current[index]![0] - pose[0], 4));
   const visit = (ds: Map<string, PortPose>[]): void => {
+    if (budget && (nodes >= budget.maxVisits || budget.shouldStop())) { stopped = true; return; }
     nodes++;
     for (;;) { let changed = false;
+      if (budget?.shouldStop()) { stopped = true; return; }
       for (let i = 0; i < ds.length; i++) { const domain = ds[i]!; let valid = new Map([...domain].filter(([key]) => [...projected.get(`${i}:${key}`)![1]].every(point => owners.get(pointKey(point))!.ids.size === 2)));
         for (const { a, b, shared } of interfaces.values()) { if (i !== a && i !== b) continue; const j = i === a ? b : a;
           valid = new Map([...valid].filter(([key, pose]) => [...ds[j]!].some(([otherKey, other]) => projected.get(`${i}:${key}`)![1].intersection(shared).equals(projected.get(`${j}:${otherKey}`)![1].intersection(shared)) && compatiblePorts(model, i, pose, new Map([[j, other]]))))); }
@@ -196,7 +200,10 @@ export function constrainedPortAssembly(model: PortModel, current: readonly Port
     const lower = ds.reduce((sum, domain, i) => sum + Math.min(...[...domain.values()].map(pose => cost(i, pose))), 0); if (bestCost !== null && lower >= bestCost) return;
     const todo = ds.flatMap((domain, i) => domain.size > 1 ? [i] : []);
     if (todo.length) { const i = todo.sort((a, b) => ds[a]!.size - ds[b]!.size)[0]!;
-      for (const pose of [...ds[i]!.values()].sort((a, b) => cost(i, a) - cost(i, b) || compare(a, b))) { const branch = ds.map(domain => new Map(domain)); branch[i] = new Map([[keyOf(pose), pose]]); visit(branch); } return; }
+      for (const pose of [...ds[i]!.values()].sort((a, b) => cost(i, a) - cost(i, b) || compare(a, b))) {
+        if (stopped) break;
+        const branch = ds.map(domain => new Map(domain)); branch[i] = new Map([[keyOf(pose), pose]]); visit(branch);
+      } return; }
     const poses = ds.map(domain => [...domain.values()][0]!), counts = new Map<string, number>();
     poses.forEach((pose, i) => { for (const point of projected.get(`${i}:${keyOf(pose)}`)![1]) counts.set(pointKey(point), (counts.get(pointKey(point)) ?? 0) + 1); });
     if (!counts.size || [...counts.values()].some(value => value !== 2)) return;

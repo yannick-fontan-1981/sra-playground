@@ -5,6 +5,8 @@ import test from 'node:test';
 import { gunzipSync } from 'node:zlib';
 import { crossedPrefixGeometry, crossedPrefixMeasureControls, crossedPrefixReferencePresent,
   crossedPrefixCell, crossedPrefixSlot, crossedPrefixInputCandidates } from '../src/logos-engine/v6-crossed-prefix-observation.ts';
+import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import { createSicVerifyCrossingRows } from '../src/sic/crossing-rows.ts';
 
 type R = Record<string, any>;
 const fixture: R = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/v6-crossed-prefix-reference.json.gz', import.meta.url))).toString());
@@ -145,6 +147,24 @@ test('point candidates are sorted unique measured addresses and unavailable poin
   assert.deepEqual(inputs.map(input => [input.data.x, input.data.y]),
     inputs.map(input => [input.data.x, input.data.y]).sort((a, b) => a[0]! - b[0]! || a[1]! - b[1]!));
   assert.deepEqual(crossedPrefixInputCandidates([], ['ACTION1']), [], 'Source does not measure geometry without ACTION6');
+});
+
+test('only the current measured swatches protect clicks after a prefix has advanced', async () => {
+  const rows = raster(), layout = crossedPrefixGeometry(rows)!;
+  const family = createSicVerifyCrossingRows();
+  const observation = await measureNativeObservation({
+    frame_rows: rows, frame_hash: 'swatches', level: 2, levels_completed: 1, state: 'NOT_FINISHED',
+    available_action_refs: ['ACTION1', 'ACTION6'],
+  }, 1);
+  assert.deepEqual(family.controlledClickRegions!(observation, rows), []);
+  const controller = layout.controllers[0]!;
+  family.restore({ state: { epoch: 2, layout, progress: { [controller.key]: 1 } } });
+  const boxes = family.controlledClickRegions!(observation, rows);
+  assert.equal(boxes.length, 12);
+  assert.deepEqual(boxes.find(([left, top]) => left === 6 && top === 13), [6, 13, 7, 13]);
+  assert.deepEqual(family.controlledClickRegions!({ ...observation, level_epoch: 3 }, rows), []);
+  rows[2]![2] = 8;
+  assert.deepEqual(family.controlledClickRegions!(observation, rows), []);
 });
 
 test('reference guard checks every retained reference pixel and refuses a truncated raster address', () => {

@@ -1,0 +1,79 @@
+{
+  "level": 5,
+  "designFile": "reference/level5-design.json",
+  "designSha256": "44081543eaf56e084b5cd533c08fa7964fe10844c1ee9ec15c0b52bf8603651f",
+  "specSha256": "78ebd7c4649aedf36c846a6d94828ba63d6a298bb3d390146895779eaed5a059",
+  "limits": {
+    "maxStates": 250000,
+    "maxMs": 5000
+  },
+  "note": "Queue exhaustion proves impossibility. A limit is inconclusive. Closed-gate counterfactual changes its circuit to require both destinations occupied, leaving it closed before victory.",
+  "witness": {
+    "actions": 17,
+    "complete": true,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "previousBypasses": [
+    {
+      "label": "previous-no-pull-bypass",
+      "commands": "LLULDUUXUUUULRCDDDLLXR",
+      "complete": false,
+      "blocked": 2,
+      "deaths": 1,
+      "firstRefusal": 5
+    },
+    {
+      "label": "previous-gate-bypass",
+      "commands": "LULDLCDDDLULDRX",
+      "complete": false,
+      "blocked": 2,
+      "deaths": 0,
+      "firstRefusal": 9
+    }
+  ],
+  "results": [
+    {
+      "label": "no-warrior-push",
+      "status": "unsolvable",
+      "states": 2108,
+      "expanded": 2108,
+      "ms": 64
+    },
+    {
+      "label": "no-thief-pull",
+      "status": "unsolvable",
+      "states": 7202,
+      "expanded": 7202,
+      "ms": 148
+    },
+    {
+      "label": "no-reflection",
+      "status": "unsolvable",
+      "states": 32580,
+      "expanded": 32580,
+      "ms": 449
+    },
+    {
+      "label": "no-mirror-0",
+      "status": "unsolvable",
+      "states": 7652,
+      "expanded": 7652,
+      "ms": 98
+    },
+    {
+      "label": "no-mirror-1",
+      "status": "unsolvable",
+      "states": 2248,
+      "expanded": 2248,
+      "ms": 119
+    },
+    {
+      "label": "gate-closed-until-victory",
+      "status": "unsolvable",
+      "states": 33600,
+      "expanded": 33600,
+      "ms": 591
+    }
+  ]
+}

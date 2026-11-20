@@ -1,0 +1,21 @@
+{
+  "game": "SS10",
+  "version": "0.3.0",
+  "coreTests": 87,
+  "corePassed": 87,
+  "strictTypeScript": true,
+  "winningLevels": 8,
+  "actions": 503,
+  "selections": 44,
+  "frames": 1463,
+  "tutorialDiscoveries": 12,
+  "htmlSha256": "b55ac1d1f1239e22c7c80f2e8bdf66b96991acae8dca0e4997a6d2f9145a7eec",
+  "compiledHtmlDomVerification": true,
+  "nativeBrowserVerified": true,
+  "finale": {
+    "initialCrates": 5,
+    "initialSupports": 0,
+    "permanentSupports": 5,
+    "independentlyRequiredCuts": 5
+  }
+}

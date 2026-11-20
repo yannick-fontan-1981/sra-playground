@@ -1,6 +1,6 @@
 /** Bounded visible-stencil composition from pinned V6 facet_examples/stencils.py.
  * Every rational sampling alternative and the incomplete-search result survive. */
-import { facetLexicographic, facetPointKey, type FacetPoint } from './v6-facet-examples-geometry.ts';
+import { facetLexicographic, facetPointKey, type FacetPoint, type FacetTriple } from './v6-facet-examples-geometry.ts';
 import type { NativeRows } from './v6-native-types.ts';
 
 export type FacetImage = Map<string, number>;
@@ -15,6 +15,7 @@ export interface FacetSamplingComparison {
 }
 export interface FacetStencilSolution {
   placements: FacetPoint[]; actions: FacetStencilAction[]; comparisons: FacetSamplingComparison[];
+  paint_order?: number[];
 }
 export interface FacetSearchResult {
   status: 'bounded_incomplete' | 'compatible_minimal_within_model' | 'no_compatible_composition';
@@ -31,6 +32,13 @@ export function facetRender(stamp: NativeRows, placements: readonly (readonly [n
   }
   return out;
 }
+export function facetRenderPrefix(stamp: NativeRows, solution: FacetStencilSolution, prefix: number,
+  background: number, anchor: FacetPoint = [0, 0]): FacetImage {
+  const placements = solution.paint_order
+    ? solution.paint_order.filter(index => index < prefix).map(index => solution.placements[index]!)
+    : solution.placements.slice(0, prefix);
+  return facetRender(stamp, placements.map(([x, y]) => [x + anchor[0], y + anchor[1]]), background);
+}
 export function facetBounds(points: Iterable<readonly [number, number]>): [number, number, number, number] {
   let left = Infinity, top = Infinity, right = -Infinity, bottom = -Infinity;
   for (const [x, y] of points) { left = Math.min(left, x); top = Math.min(top, y); right = Math.max(right, x); bottom = Math.max(bottom, y); }
@@ -42,6 +50,13 @@ const gcd = (first: number, second: number): number => {
   return first;
 };
 
+function fitsSampledSize(width: number, height: number, referenceWidth: number, referenceHeight: number,
+  numerator: number, denominator: number, maximumExtra: number) {
+  const extraWidth = Math.floor(width * numerator / denominator) - referenceWidth;
+  const extraHeight = Math.floor(height * numerator / denominator) - referenceHeight;
+  return extraWidth >= 0 && extraWidth <= maximumExtra && extraHeight >= 0 && extraHeight <= maximumExtra;
+}
+
 export function facetCompare(reference: NativeRows, image: ReadonlyMap<string, number>, stamp: NativeRows,
   placements: readonly (readonly [number, number])[], background: number, palette: readonly number[],
   maxDenominator = 8, sampleOffsets: readonly number[] = [-0.5, 0, 0.5], allowTrimmedContour = false): FacetSamplingComparison[] {
@@ -51,9 +66,7 @@ export function facetCompare(reference: NativeRows, image: ReadonlyMap<string, n
   const width = r - l + 1, height = b - t + 1, ratios = new Map<string, FacetPoint>();
   // Fraction reduces equal rationals before the source sorts them by value.
   for (let d = 1; d <= maxDenominator; d++) for (let n = 1; n <= d; n++) {
-    const extraWidth = Math.floor(width * n / d) - rw, extraHeight = Math.floor(height * n / d) - rh;
-    const maximumExtra = allowTrimmedContour ? 1 : 0;
-    if (extraWidth < 0 || extraHeight < 0 || extraWidth > maximumExtra || extraHeight > maximumExtra) continue;
+    if (!fitsSampledSize(width, height, rw, rh, n, d, allowTrimmedContour ? 1 : 0)) continue;
     const divisor = gcd(n, d), ratio: FacetPoint = [n / divisor, d / divisor];
     ratios.set(`${ratio[0]}/${ratio[1]}`, ratio);
   }
@@ -124,6 +137,101 @@ export function facetCandidates(reference: NativeRows, stamp: NativeRows, faces:
     }
     if (results.length) return { status: 'compatible_minimal_within_model', examined, solutions: results,
       model_limit: 'No hidden duplicate origins; new stencil overlays measured visible support.' };
+    states = following;
+  }
+  return { status: 'no_compatible_composition', examined, solutions: [] };
+}
+
+export function facetLayeredCandidates(reference: NativeRows, stamp: NativeRows, faces: readonly FacetFace[],
+  steps: ReadonlyMap<number, FacetPoint>, background: number, palette: readonly number[],
+  maxUnits: number, maxStates: number, maxDenominator: number, sampleOffsets: readonly number[],
+  workspace: FacetPoint): FacetSearchResult {
+  type Extent = [number, number, number, number];
+  type State = { units: FacetTriple[]; placements: FacetPoint[]; actions: FacetStencilAction[]; extent: Extent };
+  const ports = faces.filter(face => steps.has(face.value)).sort((a, b) => facetLexicographic(a.point, b.point));
+  // Exactly three distinct extrusion axes projecting to a closed triangle give
+  // a viewing ray. Moving along all three axes returns to the same image origin.
+  const displacements = ports.map(face => steps.get(face.value)!);
+  const [a, b, c] = displacements;
+  if (ports.length !== 3 || !a || !b || !c || a[0] * b[1] === a[1] * b[0]
+    || a[0] + b[0] + c[0] !== 0 || a[1] + b[1] + c[1] !== 0) {
+    return { status: 'no_compatible_composition', examined: 0, solutions: [] };
+  }
+  const stencil = stamp.flatMap((row, y) => row.flatMap((value, x) => value === background ? [] : [{ x, y, value }]));
+  const stampWidth = stamp[0]!.length, stampHeight = stamp.length;
+  const [xStride, yStride] = ([0, 1] as const).map(axis => displacements.reduce((stride, shift) => gcd(stride, Math.abs(shift[axis])), 0));
+  const finalSizes = new Set<string>(), heightLimit = Array<number>(workspace[0] + 2).fill(0);
+  const referenceWidth = reference[0]!.length, referenceHeight = reference.length;
+  for (let width = stampWidth; width <= workspace[0]; width += xStride!) {
+    for (let height = stampHeight; height <= workspace[1]; height += yStride!) {
+      for (let d = 1; d <= maxDenominator; d++) for (let n = 1; n <= d; n++) {
+        if (fitsSampledSize(width, height, referenceWidth, referenceHeight, n, d, 1)) {
+          finalSizes.add(facetPointKey(width, height));
+          heightLimit[width] = height;
+        }
+      }
+    }
+  }
+  // Adding a unit can expand the rendered extent but cannot shrink it.
+  for (let width = workspace[0]; width >= stampWidth; width--) {
+    heightLimit[width] = Math.max(heightLimit[width]!, heightLimit[width + 1]!);
+  }
+  const unitKey = ([a, b, c]: FacetTriple) => (a * maxUnits + b) * maxUnits + c;
+  const depth = ([a, b, c]: FacetTriple) => a + b + c;
+  const paintOrder = (units: FacetTriple[]) => units.map((_, index) => index)
+    .sort((i, j) => depth(units[i]!) - depth(units[j]!) || facetLexicographic(units[i]!, units[j]!));
+  const facePixels = ports.map(face => {
+    const distance = ([x, y]: FacetPoint) => (x - face.point[0]) ** 2 + (y - face.point[1]) ** 2;
+    return face.pixels.filter(([x, y]) => stamp[y]?.[x] !== undefined && stamp[y]![x] !== background)
+      .sort((a, b) => distance(a) - distance(b));
+  });
+  let states: State[] = [{ units: [[0, 0, 0]], placements: [[0, 0]], actions: [], extent: [0, 0, 0, 0] }];
+  let examined = 0;
+  for (let count = 1; count <= maxUnits && states.length; count++) {
+    const solutions: FacetStencilSolution[] = [];
+    for (const { units, placements, actions, extent: [left, top, right, bottom] } of states) {
+      if (examined >= maxStates) return { status: 'bounded_incomplete', examined, solutions };
+      examined++;
+      if (!finalSizes.has(facetPointKey(right - left + stampWidth, bottom - top + stampHeight))) continue;
+      const paint_order = paintOrder(units), image: FacetImage = new Map();
+      for (const index of paint_order) {
+        const [dx, dy] = placements[index]!;
+        for (const { x, y, value } of stencil) image.set(facetPointKey(x + dx, y + dy), value);
+      }
+      const comparisons = facetCompare(reference, image, stamp, placements, background, palette, maxDenominator, sampleOffsets, true);
+      if (comparisons.length) solutions.push({ placements, actions, comparisons, paint_order });
+    }
+    if (solutions.length) return { status: 'compatible_minimal_within_model', examined, solutions,
+      model_limit: 'Distinct logical origins can share one projected origin; later checks verify each visible effect.' };
+    if (count === maxUnits) break;
+    const following: State[] = [], seen = new Set<string>();
+    for (const { units, placements, actions, extent: [left, top, right, bottom] } of states) {
+      const occupied = units.map(unitKey), order = paintOrder(units);
+      for (const [index, origin] of placements.entries()) for (const [axis, face] of ports.entries()) {
+        const unit = [...units[index]!] as FacetTriple;
+        unit[axis] = unit[axis]! + 1;
+        const id = unitKey(unit);
+        if (occupied.includes(id)) continue;
+        const key = [...occupied, id].sort((a, b) => a - b).join(',');
+        if (seen.has(key)) continue;
+        const offset = displacements[axis]!, destination: FacetPoint = [origin[0] + offset[0], origin[1] + offset[1]];
+        const extent: Extent = [Math.min(left, destination[0]), Math.min(top, destination[1]),
+          Math.max(right, destination[0]), Math.max(bottom, destination[1])];
+        const width = extent[2] - extent[0] + stampWidth, height = extent[3] - extent[1] + stampHeight;
+        if (height > (heightLimit[width] ?? 0)) continue;
+        const front = order.slice(order.indexOf(index) + 1);
+        const pixel = facePixels[axis]!.find(([x, y]) => front.every(other => {
+          const [dx, dy] = placements[other]!;
+          const ink = stamp[origin[1] + y - dy]?.[origin[0] + x - dx];
+          return ink === undefined || ink === background;
+        }));
+        if (!pixel) continue;
+        seen.add(key);
+        const action: FacetStencilAction = { owner_origin: origin, port_value: face.value, offset, destination,
+          point: [origin[0] + pixel[0], origin[1] + pixel[1]] };
+        following.push({ units: [...units, unit], placements: [...placements, destination], actions: [...actions, action], extent });
+      }
+    }
     states = following;
   }
   return { status: 'no_compatible_composition', examined, solutions: [] };

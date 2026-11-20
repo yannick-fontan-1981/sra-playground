@@ -1,3 +1,4 @@
+import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
@@ -104,15 +105,20 @@ export function createPreparedEffects(): NativeFamily<Offer> {
   return {
     id: preparedEffectsId,
     propose: () => null,
+    proposeInSubquestion(_group, entry, observation, rows, inputs, remaining, execution) {
+      return this.proposeInGroup!(entry, observation, rows, inputs, remaining, execution);
+    },
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
       if (remaining < 1 || !m.turns&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
+      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m)) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
       const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows);
-      if (!experiment) return null;
+      if (!experiment || (group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
       const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);

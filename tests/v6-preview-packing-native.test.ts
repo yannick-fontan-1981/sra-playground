@@ -3,8 +3,8 @@ import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import test from 'node:test';
 import { NativePreviewPacking, PREVIEW_PACKING_STATE_SCHEMA } from '../src/logos-engine/v6-preview-packing.ts';
-import { previewPackingAssignments, previewPackingLimits, PREVIEW_PACKING_LIMITS, PreviewPackingIncomplete } from '../src/logos-engine/v6-preview-packing-calculus.ts';
-import { previewPackingDictPointSet } from '../src/logos-engine/v6-preview-packing-geometry.ts';
+import { previewPackingAssignments, previewPackingLimits, PREVIEW_PACKING_LIMITS, PreviewPackingIncomplete, PreviewPackingWork } from '../src/logos-engine/v6-preview-packing-calculus.ts';
+import { previewPackingDictPointSet, previewPackingMeasureScene } from '../src/logos-engine/v6-preview-packing-geometry.ts';
 import type { NativeRecord } from '../src/logos-engine/v6-native-types.ts';
 
 const fixture = JSON.parse(gunzipSync(readFileSync(new URL('./fixtures/v6-preview-packing/reference.json.gz', import.meta.url))).toString('utf8'));
@@ -37,6 +37,29 @@ test('CPython dictionary construction preserves the source five-cell pop order',
   const table = previewPackingDictPointSet([[0, 0], [0, 1], [0, 2], [0, 3], [0, 4]]), result = [];
   while (table.size) result.push(table.pop());
   assert.deepEqual(result, [[0, 1], [0, 2], [0, 4], [0, 0], [0, 3]]);
+});
+
+test('a lower reserve piece completes the measured area when the side reserve is short', () => {
+  const rows = clone(initial.public.frame_rows) as number[][];
+  const scene = previewPackingMeasureScene(rows)!;
+  const piece = scene.pieces.find(item => item.movable)!;
+  const [top, left] = scene.offset, { q } = scene;
+  const lower = Math.max(...scene.board.map(([row]) => row)) + 1;
+  for (const [row, column] of piece.mask) {
+    const x = left + (piece.anchor[1] + column) * q;
+    const before = top + (piece.anchor[0] + row) * q;
+    const after = top + (lower + row) * q;
+    for (let dy = 0; dy < q; dy++) {
+      rows[before + dy]!.fill(scene.background, x, x + q);
+      rows[after + dy]!.fill(piece.color, x, x + q);
+    }
+  }
+
+  assert.equal(previewPackingMeasureScene(rows), null);
+  const measured = previewPackingMeasureScene(rows, true);
+  assert.ok(measured);
+  assert.deepEqual(measured.pieces.find(item => item.color === piece.color)?.anchor, [lower, piece.anchor[1]]);
+  assert.equal(measured.pieces.reduce((area, item) => area + item.mask.length, 0), measured.board.length);
 });
 
 test('native checkpoint restoration preserves a learned multi-action source decision', async () => {
@@ -185,6 +208,24 @@ test('finite-domain construction yields and observes cancellation before publish
   await assert.rejects(() => previewPackingAssignments(model, { signal: controller.signal,
     yieldControl: async () => { yields++; controller.abort(); } }), (error: unknown) => error instanceof PreviewPackingIncomplete && error.cause === 'aborted');
   assert.equal(yields, 1);
+});
+
+test('quick checkpoints do not repeatedly wait for a turn of the host scheduler', async () => {
+  let elapsed = 0, yields = 0;
+  const work = new PreviewPackingWork({ now: () => elapsed, yieldControl: async () => { yields++; elapsed += 40; } });
+  work.beginSource();
+  const examine = async (count: number) => {
+    for (let i = 1; i <= count; i++) {
+      work.visit();
+      if (i % 256 === 0) await work.checkpoint();
+    }
+  };
+  await examine(2048);
+  assert.equal(yields, 1);
+  elapsed += 8;
+  await examine(256);
+  assert.equal(yields, 2);
+  assert.equal(work.examined, 2304);
 });
 
 for (const [name, amount] of Object.entries(PREVIEW_PACKING_LIMITS)) test(`a host cannot enlarge the source ${name} budget`, () => {

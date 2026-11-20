@@ -1,0 +1,60 @@
+{
+  "level": 8,
+  "mapSha256": "a52cf69da18672be79ccf3055beb0d7a22f74fd236311d8415912cbd938ea46e",
+  "scope": "Searches use the exact movement, chant, mirror, circuit and combat engine. Goal both heroes leave the start island is weaker than WIN; proving it impossible proves WIN impossible.",
+  "checks": [
+    {
+      "name": "Crate removed",
+      "mutation": "Replace the only initial o by floor. Keep both heroes, both monsters, both mirrors, the button and gate.",
+      "goal": "Both heroes x >= 8 (east of the initial island)",
+      "status": "unsolvable",
+      "states": 173874,
+      "expanded": 173874,
+      "ms": 3716
+    },
+    {
+      "name": "Ray gate held shut",
+      "mutation": "Replace gate at source-map (6,6) by a permanent wall and remove its gate device; preserve all other floor, actors, mirrors and the button.",
+      "goal": "At least one hero x >= 8",
+      "status": "unsolvable",
+      "states": 419014,
+      "expanded": 419014,
+      "ms": 7613
+    }
+  ],
+  "geometry": {
+    "gate": [
+      6,
+      6
+    ],
+    "button": [
+      4,
+      12
+    ],
+    "launch": [
+      5,
+      12
+    ],
+    "waterThatPreventsUnadjustedMirrorLaunch": [
+      4,
+      13
+    ],
+    "notes": [
+      "The Merchant must move the first mirror from (4,6) to (5,6). The only safe mainland landing east of this mirror is (11,6).",
+      "The button is adjacent to the only safe first-island launch cell (5,12): substituting a monster for the crate kills the departing hero.",
+      "The button itself reflects to water while aligned with the unadjusted mirror, so the last hero cannot safely leave by teleporting directly from the button.",
+      "A voluntary south step of the Bard from (5,11), after the crate is on its button, drags the crate into water (4,13), removes the weight and shuts the ray gate. A Merchant push preserves the weight."
+    ]
+  },
+  "witness": {
+    "actions": 61,
+    "stoneMoves": 1,
+    "forcedBardMoves": 1,
+    "heroReflections": 4,
+    "complete": true
+  },
+  "limitations": [
+    "These checks establish necessity of the crate and of opening the gate. They do not establish uniqueness or minimum length of the full solution."
+  ],
+  "reproduce": "npm run build && node reference/author/verify-level8-necessity.mjs"
+}

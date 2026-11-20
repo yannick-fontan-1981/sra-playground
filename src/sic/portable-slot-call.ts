@@ -33,54 +33,93 @@ function orderedRow<T extends { box: NativeBox }>(cells: T[]): T[] {
     box[1] === sorted[0]!.box[1] && box[0] === sorted[0]!.box[0] + pitch * i) ? sorted : [];
 }
 
-function uniqueExpansion(word: readonly number[], programs: readonly Program[], tokens: readonly Token[]): Map<Cell, SlotValue> | null {
+function preferredExpansion(word: readonly number[], programs: readonly Program[], tokens: readonly Token[], repeated: boolean): Map<Cell, SlotValue> | null {
   const calls = new Map<Call, Program>();
   for (const token of tokens) {
     if (typeof token.value !== 'string') continue;
     const linked = programs.find(program => token.value === `call:${program.label}`);
-    if (!linked || calls.has(token.value)) return null;
+    if (!linked) return null;
     calls.set(token.value, linked);
   }
   const roots = programs.filter(program => !calls.has(`call:${program.label}`));
-  if (roots.length !== 1 || calls.size === 0) return null;
+  const cyclic = roots.length === 0 && repeated;
+  const ordered = [...programs].sort((a, b) => a.cells[0]!.box[1] - b.cells[0]!.box[1]);
+  const root = cyclic && ordered[0]!.cells[0]!.box[1] < ordered[1]!.cells[0]!.box[1] ? ordered[0] : roots[0];
+  if (!root || !cyclic && roots.length !== 1 || !calls.size) return null;
   const counts = new Map<SlotValue, number>();
   for (const { value } of tokens) counts.set(value, (counts.get(value) ?? 0) + 1);
   const literals = programs.flatMap(program => program.cells.flatMap(cell => cell.fixed === null ? [] : [cell.fixed]));
   literals.push(...tokens.flatMap(token => typeof token.value === 'number' ? [token.value] : []));
-  if (literals.length !== word.length || [...literals].sort().join(',') !== [...word].sort().join(',')) return null;
+  const availableLiterals = [...word];
+  for (const literal of literals) {
+    const index = availableLiterals.indexOf(literal);
+    if (index < 0) return null;
+    availableLiterals.splice(index, 1);
+  }
 
   const assignments = new Map<Cell, SlotValue>();
   let solution: Map<Cell, SlotValue> | null = null;
-  let ambiguous = false, budget = 8192;
-  function visit(pending: readonly Cell[], offset: number) {
-    if (ambiguous || --budget < 0) return;
-    const [cell, ...rest] = pending;
-    if (!cell) {
-      if (offset === word.length && [...counts.values()].every(count => count === 0)) {
-        if (solution) ambiguous = true;
-        else solution = new Map(assignments);
+  let ambiguous = false, preference = -1, budget = 8192;
+  type ExpansionCell = { cell: Cell; ancestry: readonly Program[] };
+  const branch = new Set<string>();
+  const locations = new Map(programs.flatMap(program => program.cells).map((cell, i) => [cell, i]));
+  const start = root.cells.map(cell => ({ cell, ancestry: [root] }));
+  const signature = (pending: readonly ExpansionCell[]) => pending.map(({ cell }) => locations.get(cell)).join(',');
+  const beginning = signature(start);
+  function visit(pending: readonly ExpansionCell[], offset: number) {
+    if (--budget < 0) return;
+    const [current, ...rest] = pending;
+    const cursor = cyclic ? signature(pending) : '';
+    const loopClosed = cyclic && offset === word.length && cursor === beginning;
+    if (!current || loopClosed) {
+      if (offset === word.length && (!cyclic || loopClosed) && [...counts.values()].every(count => count === 0)) {
+        // The expansion must match the reference first. For equally valid
+        // programs, prefer keeping literals with their visible frame label.
+        const literalMatches = programs.reduce((total, program) => total
+          + program.cells.filter(cell => assignments.get(cell) === program.label).length, 0);
+        const tailCalls = cyclic ? programs.filter(program => typeof assignments.get(program.cells.at(-1)!) === 'string').length : 0;
+        const score = literalMatches * (programs.length + 1) + tailCalls;
+        if (score > preference) {
+          solution = new Map(assignments);
+          preference = score;
+          ambiguous = false;
+        } else if (score === preference) ambiguous = true;
       }
       return;
     }
-    if (cell.fixed !== null) {
-      if (cell.fixed === word[offset]) visit(rest, offset + 1);
-      return;
+    const step = offset + ':' + cursor;
+    if (cyclic && (pending.length > 64 || branch.has(step))) return;
+    if (cyclic) branch.add(step);
+    const { cell, ancestry } = current;
+    const expand = (value: SlotValue) => {
+      if (typeof value === 'number') {
+        if (value === word[offset]) visit(rest, offset + 1);
+        return;
+      }
+      const linked = calls.get(value)!;
+      if (ancestry.includes(linked) && (!cyclic || rest.length > 0)) return;
+      const nested = [...ancestry, linked];
+      visit([...linked.cells.map(child => ({ cell: child, ancestry: nested })), ...rest], offset);
+    };
+    const placed = cell.fixed ?? assignments.get(cell);
+    if (placed !== undefined) {
+      expand(placed);
+    } else {
+      const choices: SlotValue[] = [...calls.keys()];
+      if (offset < word.length) choices.unshift(word[offset]!);
+      for (const value of choices) {
+        const count = counts.get(value) ?? 0;
+        if (!count) continue;
+        counts.set(value, count - 1);
+        assignments.set(cell, value);
+        expand(value);
+        assignments.delete(cell);
+        counts.set(value, count);
+      }
     }
-    const choices: SlotValue[] = [...calls.keys()];
-    if (offset < word.length) choices.unshift(word[offset]!);
-    for (const value of choices) {
-      const count = counts.get(value) ?? 0;
-      if (!count) continue;
-      const linked = typeof value === 'string' ? calls.get(value)! : null;
-      counts.set(value, count - 1);
-      assignments.set(cell, value);
-      if (linked) visit([...linked.cells, ...rest], offset);
-      else visit(rest, offset + 1);
-      assignments.delete(cell);
-      counts.set(value, count);
-    }
+    if (cyclic) branch.delete(step);
   }
-  visit(roots[0]!.cells, 0);
+  visit(start, 0);
   return budget < 0 || ambiguous ? null : solution;
 }
 
@@ -97,10 +136,17 @@ export function measurePortableSlotLayout(observation: NativeObservation, rows: 
     references.set(key, row);
   }
   const layouts: PortableSlotLayout[] = [];
-  for (const reference of references.values()) {
-    const ordered = orderedRow(reference);
-    if (ordered.length < 3) continue;
-    const first = ordered[0]!.box, size = width(first) - 2, word = ordered.map(entity => entity.hue);
+  const rowsOfRings = [...references.values()].map(orderedRow).filter(row => row.length >= 3)
+    .sort((a, b) => a[0]!.box[1] - b[0]!.box[1]);
+  const used = new Set<typeof rings>();
+  for (const ordered of rowsOfRings) {
+    if (used.has(ordered)) continue;
+    const first = ordered[0]!.box, size = width(first) - 2;
+    const repeated = rowsOfRings.filter(row => row !== ordered && row.length === ordered.length && row.every(({ box, hue }, i) =>
+      box[0] === ordered[i]!.box[0] && width(box) === width(ordered[i]!.box) && hue === ordered[i]!.hue));
+    const aligned = repeated.length === 1 && repeated[0]![0]!.box[1] > first[3] ? repeated[0]! : null;
+    if (aligned) used.add(aligned);
+    const word = [...ordered, ...(aligned ?? [])].map(entity => entity.hue);
     if (new Set(word).size < 2) continue;
     const inventoryRows = new Map<number, Token[]>();
     for (const { box, hue, area } of entities) {
@@ -142,7 +188,7 @@ export function measurePortableSlotLayout(observation: NativeObservation, rows: 
       if (programs.length < 2 || new Set(programs.map(program => program.label)).size !== programs.length) continue;
       const cells = programs.flatMap(program => program.cells);
       if (cells.filter(cell => cell.fixed === null).length !== tokens.length) continue;
-      const plan = uniqueExpansion(word, programs, tokens);
+      const plan = preferredExpansion(word, programs, tokens, aligned !== null);
       if (!plan || plan.size !== tokens.length) continue;
       const orderedCells = [...plan.keys(), ...cells.filter(cell => cell.fixed !== null)];
       layouts.push({ portable: true, tokens, cells: orderedCells, inventory: tokens.map(token => token.box),

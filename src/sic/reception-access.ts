@@ -2,21 +2,29 @@ import { measureReceptionService, receptionServiceCarriers, receptionServicePath
 import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
 import { chooseReceptionActivation, crossingRestoredStart, recordReceptionActivation, startReceptionActivation,
   type ReceptionActivation, type ReceptionActivationStep, type ReceptionMemory } from './reception-activation.ts';
+import { chooseReceptionSequence, receptionSequenceReturn, recordReceptionSequence, startReceptionSequence,
+  type ReceptionSequence, type ReceptionSequenceStep } from './reception-sequence.ts';
 
 export const receptionAccessId = 'sic_reception_access';
 export const learnReceptionAccessId = 'sic_learn_reception_access';
 export const receptionAccessStrategies = navigationPrimitives;
-type Scene = { pitch: number; cells: NativePoint[]; target: { anchor: NativePoint; color: number }; counterparts: { request_bbox: NativeBox; body_bbox: NativeBox }[] };
+type Scene = { pitch: number; background: number; cells: NativePoint[]; target: { anchor: NativePoint; color: number };
+  support_candidates: { anchor: NativePoint }[]; counterparts: { request_bbox: NativeBox; body_bbox: NativeBox }[] };
 type State = { epoch: number; count: number; scene: Scene; controls: Record<string, NativePoint>; trials: string[]; waits: number;
   last: { action: string; from: NativePoint | null } | null; evidence: string[]; stopped: boolean };
 type Choice = { action: string; expected: NativePoint | null };
-type ReceptionProposal = NativeProposal & { local: State; choice: Choice; attempt: string; from: NativePoint | null; wait: boolean; needId: string };
+type Leg = { action_ref: string; from: NativePoint; to: NativePoint };
+type ReceptionProposal = NativeProposal & { local: State; choice: Choice; attempt: string; from: NativePoint | null; wait: boolean; needId: string;
+  route?: readonly Leg[] };
 type ActivationProposal = NativeProposal & { activation: ReceptionActivation; step: ReceptionActivationStep; needId: string };
-type Proposal = ReceptionProposal | ActivationProposal;
+type SequenceProposal = NativeProposal & { sequence: ReceptionSequence; step: ReceptionSequenceStep; needId: string };
+type Proposal = ReceptionProposal | ActivationProposal | SequenceProposal;
 const isActivation = (proposal: Proposal): proposal is ActivationProposal => 'activation' in proposal;
+const isSequence = (proposal: Proposal): proposal is SequenceProposal => 'sequence' in proposal;
 const hints: Readonly<Record<string, NativePoint>> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const opposite: Readonly<Record<string, string>> = { ACTION1: 'ACTION2', ACTION2: 'ACTION1', ACTION3: 'ACTION4', ACTION4: 'ACTION3' };
 const equal = (a: NativePoint | null, b: NativePoint | null) => a === b || !!a && !!b && a[0] === b[0] && a[1] === b[1];
@@ -28,10 +36,54 @@ function carrier(rows: NativeRows, scene: Scene): NativePoint | null {
   return bodies.length === 1 ? bodies[0]!.anchor as NativePoint : null;
 }
 
+function admitsLanding(rows: NativeRows, scene: Scene, to: NativePoint): boolean {
+  if (equal(to, scene.target.anchor)) return true;
+  if (!scene.cells.some(cell => equal(cell, to)) || scene.support_candidates.some(support => equal(support.anchor, to))) return false;
+  const [x, y] = to;
+  let floor = 0;
+  for (let dy = 0; dy < scene.pitch; dy++) for (let dx = 0; dx < scene.pitch; dx++) {
+    if (rows[y + dy]?.[x + dx] === scene.background) floor++;
+  }
+  return floor >= Math.floor(scene.pitch ** 2 / 2);
+}
+
 export function createSicReceptionAccess(family = receptionAccessId): NativeFamily<Proposal> {
   let state: State | null = null;
   let remembered: (ReceptionMemory & { epoch: number }) | null = null;
   let activation: ReceptionActivation | null = null;
+  let sequence: ReceptionSequence | null = null;
+
+  function offerSequence(local: ReceptionSequence, step: ReceptionSequenceStep, ref: string,
+    mode: Parameters<typeof resolveNavigationPrimitives>[0]['mode']): SequenceProposal | null {
+    const parent = 'G_official_completion';
+    const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(item => item !== ref)];
+    const input = { input: step.input, expected: step.to, evidence };
+    const { selected, entries, card } = resolveNavigationPrimitives({ mode, evidence, probe: null,
+      interaction: step.hold ? input : null, access: step.hold ? null : input });
+    if (!selected) return null;
+    const situation = step.hold ? 'Hold the carrier at the support until a request badge changes'
+      : local.receipts.length ? 'Keep the observed receipt and travel to another support'
+        : 'Approach an active support for one of the outstanding requests';
+    const goal = { kind: 'serve_separate_reception_requests', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['visible_requests', 'carrier', 'active_supports'], parentObjective: parent,
+      satisfactionContract: 'observe_each_request_and_official_completion' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
+    const id = family + ':' + need.id, pitch = local.layout.pitch;
+    const action = { action_ref: step.input, data: {} }, actions = [action];
+    return { status: 'proposed', kind: family, sequence: local, step, needId: need.id, actions,
+      binding: { observation_ref: ref, level_epoch: local.epoch }, steps: [{ action, expected_after: step.to }],
+      sicSituationCard: { strategy: selected.id, need: 'Serve the remaining reception requests', mode, triggerCard: card,
+        situation, agenda: entries, evidence, actor: local.visible ? box(local.at, pitch) : null,
+        target: box(step.support, pitch), next: box(step.to, pitch),
+        requests: local.badges.map((badge, index) => ({ box: badge.box,
+          status: local.receipts.some(receipt => receipt.badge === index && receipt.confirmed) ? 'confirmed'
+            : local.receipts.some(receipt => receipt.badge === index) ? 'observed' : 'pending' })) },
+      question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
+      sicLocalDecision: { strategy: selected.id, objective: { id, label: situation, parent }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
 
   function offerActivation(observation: Parameters<NativeFamily['propose']>[0], rows: NativeRows, keys: string[],
     remaining: number, mode: Parameters<typeof resolveNavigationPrimitives>[0]['mode']): ActivationProposal | null {
@@ -56,16 +108,18 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       hold: 'Keep the carrier at the activated support while the moving request approaches',
     }[step.stage];
     const objective = { kind: local.target ? 'reach_activated_reception' : 'activate_reception_by_contact', scope: ref.split(':revision:', 1)[0]!,
-      subjects: ['visible_request', 'contact_device', 'reception_support'], parentObjective: parent,
+      subjects: [local.requests ? 'visible_requests' : 'visible_request', 'contact_device', 'reception_support'], parentObjective: parent,
       satisfactionContract: 'official_progress_after_activation_and_reception' };
     const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = 'reception-activation:' + need.id;
     const command = { action_ref: step.input, data: {} }, actions = [command], pitch = local.layout.pitch;
     return { status: 'proposed', kind: family, actions, activation: local, step, needId: need.id,
       steps: [{ action: command, expected_after: step.to }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-      sicSituationCard: { strategy: selected.id, need: 'Make a support available for the visible request', mode,
+      sicSituationCard: { strategy: selected.id, need: local.requests ? 'Activate a support for each visible request'
+        : 'Make a support available for the visible request', mode,
         triggerCard: card, situation, agenda: entries, evidence, actor: local.visible ? box(local.at, pitch) : null,
         target: local.target ? box(local.target, pitch) : null, device: local.device ? box(local.device, pitch) : null,
-        next: box(step.to, pitch), request: local.layout.requests[0] },
+        next: box(step.to, pitch), ...(local.requests ? { requests: local.requests.map(box => ({ box, status: 'pending' })) }
+          : { request: local.layout.requests[0] }) },
       question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
       sicLocalDecision: { strategy: selected.id, objective: { id, label: situation, parent }, need },
@@ -79,6 +133,15 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       const keys = observation.available_action_refs.filter(action => hints[action]);
       if (remaining < 1 || keys.length < 2 || observation.available_action_refs.includes('ACTION6')) return null;
       const mode = execution?.reasoningMode ?? 'exploration';
+      if (family === receptionAccessId && remembered?.epoch === observation.level_epoch
+        && (activation?.epoch !== observation.level_epoch || activation.ready)) {
+        const local = sequence?.epoch === observation.level_epoch ? sequence
+          : startReceptionSequence(rows, observation.level_epoch, observation.frame_hash, remembered);
+        if (local) {
+          const step = chooseReceptionSequence(local, remembered, keys, remaining);
+          return step ? offerSequence(local, step, observation.observation_ref, mode) : null;
+        }
+      }
       if (activation?.epoch === observation.level_epoch) return offerActivation(observation, rows, keys, remaining, mode);
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 48) return null;
@@ -130,10 +193,14 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       const objective = { kind: 'reach_support_for_visible_request', scope: ref.split(':revision:', 1)[0]!, subjects: ['visible_request', 'carrier', 'distinct_support'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_arrival_at_the_candidate_support' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence }, id = `${family === receptionAccessId ? 'reception-access' : family}:${need.id}`;
-      const command = { action_ref: choice.action, data: {} }, actions = [command];
+      const command = { action_ref: choice.action, data: {} };
+      const route = strategy === 'P07' ? (path as Leg[]).slice(0, Math.min(maximumCommittedActions, 48 - local.count)) : [];
+      const actions = route.length > 1 ? route.map(leg => ({ action_ref: leg.action_ref, data: {} })) : [command];
       return { status: 'proposed', kind: family, actions, local, choice, attempt: key(choice.action), from,
+        ...(actions.length > 1 ? { route } : {}),
         wait: strategy === 'P02', needId: need.id,
-        steps: [{ action: command, expected_after: null }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+        steps: actions.map((action, index) => ({ action, expected_after: route[index]?.to ?? null })),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: { strategy, need: 'Bring the carrier to the support for the visible request', mode, triggerCard: card,
           situation, agenda: entries, evidence, actor: from ? box(from, scene.pitch) : null, target: box(target, scene.pitch),
           request: scene.counterparts[0]!.request_bbox },
@@ -143,13 +210,29 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: label,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && !isActivation(proposal) && !isSequence(proposal) && proposal.route) {
+        const { local, route } = proposal, leg = route[index]!;
+        const current = measureReceptionService(packet.frame_rows, local.scene) as Scene | null;
+        const admitted = local.epoch === observation.level_epoch && !!current && current.pitch === local.scene.pitch
+          && current.counterparts.length === 1 && equal(current.target.anchor, local.scene.target.anchor)
+          && current.target.color === local.scene.target.color && equal(carrier(packet.frame_rows, current), leg.from)
+          && admitsLanding(packet.frame_rows, current, leg.to)
+          && !local.trials.includes(JSON.stringify([leg.from, current.target.anchor, leg.action_ref]));
+        return { admitted, reason: admitted ? 'carrier_and_next_landing_confirmed' : 'carrier_or_support_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'current_carrier_and_support_bound' : 'carrier_or_support_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isSequence(proposal)) {
+        const { reset, position } = receptionSequenceReturn(proposal.sequence, proposal.step, second, after.frame_hash);
+        const matched = reset ? false : position ? equal(position, proposal.step.to) : null;
+        return { matched, seal_prefix: true, reason: reset ? 'crossing_restored_start'
+          : matched ? 'carrier_projection_observed' : 'carrier_position_unconfirmed' };
+      }
       if (isActivation(proposal)) {
         const { activation: local, step } = proposal;
         const reset = crossingRestoredStart(local, step, after.frame_hash);
@@ -159,10 +242,27 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
         return { matched, seal_prefix: true, reason: reset ? 'crossing_restored_start' : matched ? 'carrier_projection_observed'
           : 'carrier_position_unconfirmed' };
       }
-      const matched = proposal.choice.expected ? equal(carrier(second, proposal.local.scene), proposal.choice.expected) : null;
-      return { matched, seal_prefix: true, reason: matched ? 'carrier_projection_observed' : 'compare_carrier_and_support_return' };
+      const expected = proposal.route?.[index]?.to ?? proposal.choice.expected;
+      const matched = expected ? equal(carrier(second, proposal.local.scene), expected) : null;
+      return { matched, seal_prefix: !matched || index + 1 >= proposal.actions.length,
+        reason: matched ? 'carrier_projection_observed' : 'compare_carrier_and_support_return' };
     },
-    record(before, after, issued, _first, second, proposal) {
+    record(before, after, issued, _first, second, proposal, index) {
+      if (isSequence(proposal)) {
+        if (after.levels_completed > before.levels_completed && remembered) {
+          remembered = { ...remembered, epoch: after.level_epoch,
+            evidence: [...proposal.sequence.evidence.slice(-4), before.observation_ref, after.observation_ref] };
+          return { events: [], reviewEvidence: 'The remaining reception completed the level.' };
+        }
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const result = recordReceptionSequence(proposal.sequence, proposal.step, second, after.frame_hash, after.observation_ref);
+        sequence = result.next;
+        if (activation?.ready && after.frame_hash === proposal.sequence.inactiveEntry?.hash) {
+          activation = { ...activation, ready: false, device: activation.firstDevice, at: activation.start,
+            target: null, tick: 0, activation: 0, visible: true, evidence: sequence.evidence };
+        }
+        return { events: [], ...(result.evidence ? { reviewEvidence: result.evidence } : {}) };
+      }
       if (isActivation(proposal)) {
         if (after.levels_completed > before.levels_completed && remembered && proposal.activation.target) {
           remembered = { ...remembered, epoch: after.level_epoch,
@@ -174,30 +274,43 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
         if (before.level_epoch !== after.level_epoch || before.state !== after.state || !remembered) return { events: [] };
         const result = recordReceptionActivation(proposal.activation, proposal.step, second, after.frame_hash, after.observation_ref, remembered);
         activation = result.next;
+        if (activation.ready) {
+          const next = startReceptionSequence(second, after.level_epoch, after.frame_hash, remembered);
+          if (next) {
+            const sameActivation = sequence?.epoch === after.level_epoch && sequence.initialHash === next.initialHash;
+            sequence = { ...next, inactiveEntry: { hash: activation.initialHash, at: activation.start }, evidence: activation.evidence,
+              failures: sameActivation ? sequence!.failures : [], blocked: sameActivation ? sequence!.blocked : [] };
+          } else {
+            activation = { ...activation, ready: false };
+          }
+        }
         return { events: [], ...(result.evidence ? { reviewEvidence: result.evidence } : {}) };
       }
-      if (after.levels_completed > before.levels_completed && equal(proposal.from, proposal.local.scene.target.anchor)) {
-        const { local } = proposal;
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const from = proposal.route?.[index]?.from ?? proposal.from;
+      if (after.levels_completed > before.levels_completed && equal(from, local.scene.target.anchor)) {
         remembered = { epoch: after.level_epoch, pitch: local.scene.pitch, supportInk: local.scene.target.color,
           controls: { ...(remembered?.pitch === local.scene.pitch ? remembered.controls : {}), ...local.controls },
           evidence: [...local.evidence.slice(-4), before.observation_ref, after.observation_ref] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, from, wait } = proposal, position = carrier(second, local.scene), controls = { ...local.controls };
+      const { wait } = proposal, position = carrier(second, local.scene), controls = { ...local.controls };
       if (from && position) {
         const delta: NativePoint = [position[0] - from[0], position[1] - from[1]];
         if (Math.abs(delta[0]) + Math.abs(delta[1]) === local.scene.pitch && (delta[0] === 0 || delta[1] === 0)) controls[issued.action_ref] = delta;
       }
-      state = { ...local, count: local.count + 1, controls, trials: equal(from, position) || !position ? [...local.trials, proposal.attempt] : local.trials, waits: local.waits + Number(wait),
+      const attempt = index === 0 ? proposal.attempt : JSON.stringify([from, local.scene.target.anchor, issued.action_ref]);
+      state = { ...local, count: local.count + 1, controls, trials: equal(from, position) || !position ? [...local.trials, attempt] : local.trials, waits: local.waits + Number(wait),
         last: { action: issued.action_ref, from }, stopped: wait && !equal(position, local.scene.target.anchor),
         evidence: [...local.evidence.slice(-4), after.observation_ref] };
       return { events: [] };
     },
-    state: () => ({ state, ...(remembered ? { remembered } : {}), ...(activation ? { activation } : {}) }),
+    state: () => ({ state, ...(remembered ? { remembered } : {}), ...(activation ? { activation } : {}), ...(sequence ? { sequence } : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       remembered = structuredClone((value.remembered as typeof remembered) ?? null);
       activation = structuredClone((value.activation as typeof activation) ?? null);
+      sequence = structuredClone((value.sequence as typeof sequence) ?? null);
     },
   };
 }

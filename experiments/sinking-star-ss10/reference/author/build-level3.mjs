@@ -1,0 +1,14 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(15,13,'~');
+fill(0,0,14,0,'#');fill(0,12,14,12,'#');fill(0,0,0,12,'#');fill(14,0,14,12,'#');
+fill(1,2,5,6);fill(7,2,11,6);fill(7,9,11,11);
+put(2,2,'o');put(7,4,'o');put(10,2,'o');put(4,6,'W');put(3,3,'T');put(9,10,'g');put(10,10,'g');
+const spec={id:'ss10-03',title:'L’appui du prochain pont',rows:strings(),facing:'E'};
+const a=new Author(spec);
+a.go(2,3,'thief').act('DD').go(3,5).stage('Le Voleur extrait le seul bloc disponible sur l’île de départ');
+a.go(1,4,'warrior').act('RRRR').stage('Le premier bloc devient l’appui qui permet d’aborder le suivant par la gauche');
+a.act('RRR').go(9,3).act('DDD').stage('Le Guerrier fait pivoter le deuxième bloc vers la première case du pont sud');
+a.go(10,3,'thief').act('DD').go(11,5).stage('La dernière réserve est tirée depuis le bord nord');
+a.go(11,4,'warrior').act('L').go(9,3).act('DDDD').stage('Le premier appui sud permet de pousser le dernier bloc une case plus loin');
+a.go(9,10).go(10,10,'thief').stage('Les deux héros traversent les trois appuis construits');
+a.save(new URL('../level3-design.json',import.meta.url),{label:'Adaptation de Heroes and Water 3 · chaque bloc prépare la position suivante',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3',puzzle:3,objective:'Construire trois appuis dans le bon ordre et utiliser le premier pour aborder la caisse suivante du bon côté.'},'Adaptation du relais Guerrier/Voleur décrit dans Heroes and Water 3. La géométrie est reconstruite en trois îles avec trois blocs plutôt que les cinq cristaux de la référence : extraction par traction, création d’un point d’appui latéral, puis prolongement d’un pont sur deux cases. Le bloc au bord ouest de l’île centrale ne peut être poussé vers l’est qu’après la construction du premier appui. Les trois blocs sont consommés dans les trois cases d’eau du trajet retenu.');

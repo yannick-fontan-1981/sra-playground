@@ -10,6 +10,7 @@ export const learnNestedPassageId = 'sic_connect_openings_after_observed_motion'
 
 const dirs = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 type Part = ReturnType<typeof geometricComponents>[number];
+type WallBounds = Pick<Part, 'bbox' | 'color'>;
 type Room = { width: number; height: number; parent: number; walls: NativePoint[]; color: number };
 type Position = { rooms: NativePoint[]; selected: number };
 type Layout = { origin: NativePoint; pitch: number; rooms: Room[]; source: { room: number; point: NativePoint }; exit: NativePoint; highlight: number };
@@ -26,6 +27,7 @@ const within = ([l, t, r, b]: NativeBox, [x, y]: NativePoint) => x >= l && x <= 
 const width = ([l, , r]: NativeBox) => r - l + 1;
 const height = ([, t, , b]: NativeBox) => b - t + 1;
 const contains = (a: NativeBox, b: NativeBox) => within(a, [b[0], b[1]]) && within(a, [b[2], b[3]]);
+const intersects = ([l, t, r, b]: NativeBox, [x, y, u, v]: NativeBox) => l <= u && x <= r && t <= v && y <= b;
 const positionKey = (p: Position) => p.selected + '/' + p.rooms.map(key).join(';');
 
 function boxFor(layout: Layout, p: Position, index: number): NativeBox {
@@ -59,16 +61,35 @@ function markedExit(root: Part, parts: Part[], pitch: number): NativePoint | nul
   return exits.length === 1 ? exits[0]! : null;
 }
 
-function measure(rows: NativeRows): { layout: Layout; position: Position } | null {
-  const parts = geometricComponents(rows);
+function joinWallFragments(parts: Part[]): WallBounds[] {
+  const byColor = new Map<number, WallBounds>();
+  for (const part of parts) {
+    // The source marker can contain isolated pixels painted with a wall color.
+    if (part.area <= 1) continue;
+    const prior = byColor.get(part.color);
+    if (!prior) {
+      byColor.set(part.color, part);
+      continue;
+    }
+    const [l, t, r, b] = prior.bbox, [x, y, u, v] = part.bbox;
+    byColor.set(part.color, {
+      color: part.color,
+      bbox: [Math.min(l, x), Math.min(t, y), Math.max(r, u), Math.max(b, v)],
+    });
+  }
+  return [...byColor.values()];
+}
+
+function measure(rows: NativeRows, parts = geometricComponents(rows), splitWalls = false,
+  allowThinExternalExit = false): { layout: Layout; position: Position } | null {
   const candidates = parts.filter(p => p.area > width(p.bbox) + height(p.bbox) && p.area < 750
     && width(p.bbox) > 30 && height(p.bbox) > 20
     && p.bbox[0] > 0 && p.bbox[2] < rows[0]!.length - 1 && p.bbox[1] > 0 && p.bbox[3] < rows.length - 4);
   const goals = parts.filter(p => p.area === 9 && width(p.bbox) === 3 && height(p.bbox) === 3 && (p.bbox[0] === 0 || p.bbox[2] === rows[0]!.length - 1));
   if (goals.length > 1) return null;
   const goal = goals[0], goalY = goal ? goal.bbox[1] + 1 : null;
-  const painted = (part: Part, x: number, y: number) => rows[y]?.[x] === part.color;
-  const isFrame = (part: Part, pitch: number) => {
+  const painted = (part: WallBounds, x: number, y: number) => rows[y]?.[x] === part.color;
+  const isFrame = (part: WallBounds, pitch: number) => {
     const bounds = part.bbox;
     if (width(bounds) % pitch || height(bounds) % pitch || width(bounds) < pitch * 4 || height(bounds) < pitch * 4) return false;
     const [l, t, r, b] = bounds;
@@ -78,7 +99,7 @@ function measure(rows: NativeRows): { layout: Layout; position: Position } | nul
   };
   const layouts = [];
   for (const root of candidates) for (const pitch of [2, 3, 4, 1]) {
-    if (pitch > 1 && root.area <= 180 || pitch === 1 && goal) continue;
+    if (pitch > 1 && root.area <= 180 || pitch === 1 && goal && !allowThinExternalExit) continue;
     if (!isFrame(root, pitch)) continue;
     const origin: NativePoint = [root.bbox[0], root.bbox[1]];
     let exit: NativePoint | null;
@@ -89,10 +110,13 @@ function measure(rows: NativeRows): { layout: Layout; position: Position } | nul
     if (!exit) continue;
     const background = rows[origin[1] + pitch]?.[origin[0] + pitch];
     if (background === undefined || background === root.color) continue;
-    const enclosed = parts.filter(p => p.color !== root.color && p.color !== background && contains(root.bbox, p.bbox)
-      && (p.bbox[0] - origin[0]) % pitch === 0 && (p.bbox[1] - origin[1]) % pitch === 0 && isFrame(p, pitch))
+    const innerParts = parts.filter(p => p.color !== root.color && p.color !== background && contains(root.bbox, p.bbox));
+    const enclosed = (splitWalls ? joinWallFragments(innerParts) : innerParts)
+      .filter(p => (p.bbox[0] - origin[0]) % pitch === 0 && (p.bbox[1] - origin[1]) % pitch === 0 && isFrame(p, pitch))
       .sort((a, b) => width(b.bbox) * height(b.bbox) - width(a.bbox) * height(a.bbox));
-    if (enclosed.length < 2 || enclosed.length > 5 || new Set(enclosed.map(p => p.color)).size !== enclosed.length) continue;
+    if (enclosed.length < 2 || !splitWalls && enclosed.length > 5 || new Set(enclosed.map(p => p.color)).size !== enclosed.length) continue;
+    if (splitWalls && enclosed.some((room, i) => enclosed.slice(i + 1).some(other =>
+      intersects(room.bbox, other.bbox) && !contains(room.bbox, other.bbox)))) continue;
     const rectangles = [root, ...enclosed];
     if (painted(root, origin[0] + exit[0] * pitch, origin[1] + exit[1] * pitch)) continue;
     const position: Position = { rooms: rectangles.map(p => [(p.bbox[0] - origin[0]) / pitch, (p.bbox[1] - origin[1]) / pitch]), selected: 1 };
@@ -121,7 +145,10 @@ function measure(rows: NativeRows): { layout: Layout; position: Position } | nul
   }
   const multiscale = layouts.filter(candidate => candidate.layout.pitch > 1);
   const eligible = multiscale.length ? multiscale : layouts;
-  return eligible.length === 1 ? eligible[0]! : null;
+  if (eligible.length === 1) return eligible[0]!;
+  if (eligible.length) return null;
+  if (!splitWalls) return measure(rows, parts, true);
+  return goal && !allowThinExternalExit ? measure(rows, parts, true, true) : null;
 }
 
 function connected(layout: Layout, position: Position): boolean {

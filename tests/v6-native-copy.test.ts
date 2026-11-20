@@ -10,6 +10,46 @@ function hydrated<T>(value: T): T {
   return hydrateNativeState(split.root, id => fragments.get(id)) as T;
 }
 
+test('retained checkpoints compare mutable input and reuse validated unchanged branches', () => {
+  const source = { stable: { values: [-0, 0.5, 'é𝄞'] }, changing: { count: 1 } };
+  const first = retainNativeJson(source);
+  const nextInput = structuredClone(source);
+  nextInput.changing.count = 2;
+  const second = retainNativeJson(nextInput, first);
+  assert.notEqual(second, first);
+  assert.equal(second.stable, first.stable);
+  assert.notEqual(second.changing, first.changing);
+  assert.equal(first.changing.count, 1);
+  assert.equal(second.changing.count, 2);
+  assert.ok(Object.is(second.stable.values[0], -0));
+  assert.equal(retainNativeJson(structuredClone(nextInput), second), second);
+  const independentlyClosed = retainNativeJson(structuredClone(nextInput));
+  assert.equal(retainNativeJson(independentlyClosed), independentlyClosed);
+  assert.equal(retainNativeJson(independentlyClosed, second), second);
+  const frozenRows = retainNativeJson({ stable: Object.freeze({ values: Object.freeze([-0, 0.5, 'é𝄞']) }),
+    changing: Object.freeze({ count: 2 }) }, second);
+  assert.equal(frozenRows.stable, second.stable);
+  nextInput.stable.values[0] = 0;
+  const third = retainNativeJson(nextInput, second);
+  assert.notEqual(third.stable, second.stable);
+  assert.ok(Object.is(second.stable.values[0], -0));
+});
+
+test('checkpoint comparison preserves member order and validates input independently of the prior value', () => {
+  const first = retainNativeJson({ a: 1, b: 2 });
+  const reversed = retainNativeJson({ b: 2, a: 1 }, first);
+  assert.deepEqual(Object.keys(reversed), ['b', 'a']);
+  assert.notEqual(reversed, first);
+  const invalid = Object.defineProperty({}, 'a', { enumerable: true, get() { throw new Error('getter_executed'); } });
+  assert.throws(() => retainNativeJson(invalid, first), /enumerable data/);
+  const foreign = Object.freeze({ a: { count: 1 } });
+  const value = { a: { count: 1 } };
+  const retained = retainNativeJson(value, foreign);
+  assert.notEqual(retained, foreign);
+  foreign.a.count = 9;
+  assert.equal(retained.a.count, 1);
+});
+
 test('trusted detached copies preserve scalar representation, member order and literal special keys', context => {
   const input = Object.fromEntries([
     ['__proto__', { evidence: [-0, 0.5, 1e30, 'é𝄞'] }],

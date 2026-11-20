@@ -18,10 +18,10 @@ export function stationaryCommandEvidence(graph: ObservedCommandGraph, source: s
   return commands.length >= 2 && receipts.length === commands.length ? receipts.map(edge => edge.evidence) : null;
 }
 
-export function rememberCommandReturn(graph: ObservedCommandGraph, source: string, destination: string,
-  action: string, evidence: string): void {
+export function rememberCommandReturn(graph: ObservedCommandGraph, source: string, destination: string | null,
+  action: string, evidence: string, maximumStates: number | null = 384): void {
   if (!Object.hasOwn(graph, source)) {
-    if (Object.keys(graph).length >= 384) return;
+    if (maximumStates !== null && Object.keys(graph).length >= maximumStates) return;
     graph[source] = [];
   }
   const edges = graph[source]!;

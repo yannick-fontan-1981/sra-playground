@@ -21,7 +21,7 @@ const graph = compileStrategyGraph({ id: 'match_region_topology_to_visible_legen
 }, ['needsColor', 'ready']);
 
 type Region = { bbox: NativeBox; cells: NativePoint[]; value: number };
-type Body = Region & { target: number; partial_topology: boolean; relation_kind: 'shell' | 'surround';
+type Body = Region & { target: number; partial_topology: boolean; relation_kind: 'shell' | 'surround' | 'pocket';
   pocket_count: number | null; example?: NativeBox };
 type Scene = { field: NativeBox; legend: NativeBox; wells: Region[]; bodies: Body[]; reduced_examples?: true };
 type State = { epoch: number; scene: Scene; active: number | null; count: number; stopped: boolean; evidence: string[] };
@@ -65,7 +65,7 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
       const prior = state?.epoch === observation.level_epoch ? state : null;
       if (prior?.stopped || (prior?.count ?? 0) >= 32) return null;
       const scene = prior?.scene ?? (measure(rows, observation, [], { examples: true }) as Scene | null);
-      if (!scene || scene.bodies.length > 12) return null;
+      if (!scene || scene.bodies.length > 32 || scene.bodies.filter(body => body.relation_kind !== 'pocket').length > 12) return null;
       const active = activePigment(rows, scene.wells);
       const local = prior ?? { epoch: observation.level_epoch, scene, active, count: 0, stopped: false, evidence: [] };
       const unfinished = scene.bodies.filter(body => !body.cells.every(point => at(rows, point) === body.target));
@@ -106,7 +106,8 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
         needsColor: { value: selecting, evidence }, ready: { value: !selecting, evidence },
       }, planners: { acquire_legend_pigment: () => command, apply_legend_pigment: () => command } }).entries;
       const label = legendRecolorStrategies[strategy], parent = 'G_official_completion';
-      const topology = body.relation_kind === 'surround' ? 'The surrounding regions of the example and the field correspond.'
+      const topology = body.relation_kind === 'pocket' ? 'The corresponding example shows a single color inside its pockets.'
+        : body.relation_kind === 'surround' ? 'The surrounding regions of the example and the field correspond.'
         : body.partial_topology ? `${body.pocket_count} closed pockets are visible. The contour meets the field edge.`
           : `The region has ${body.pocket_count} enclosed pockets.`;
       const layout = scene.reduced_examples ? 'The smaller matching examples mark the legend. ' : '';
@@ -120,7 +121,7 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(srcDecision ? { sicSrcDecision: srcDecision } : {}),
         sicSituationCard: { strategy, need: 'Give each region the color of its matching example',
-          mode: selecting || body.partial_topology || body.relation_kind === 'surround' ? 'exploration' : 'solving',
+          mode: selecting || body.partial_topology || body.relation_kind !== 'shell' ? 'exploration' : 'solving',
           situation: `${layout}${topology} ${label}.`, agenda: entries, evidence,
           region: body.bbox, legend: scene.legend, example: body.example ?? null, swatch: selecting ? site.bbox : null },
         question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -160,13 +161,21 @@ export function createSicLegendRecolor(family = legendRecolorId): NativeFamily<P
 function measureReturn({ local, body, selecting }: Proposal, first: NativeRows, second: NativeRows) {
   const [l, t, r, b] = local.scene.field;
   const painted = new Set(selecting ? [] : body.cells.map(point => point.join(',')));
+  let additionalRegions = 0;
+  if (!selecting) for (const region of local.scene.bodies) {
+    if (region === body || region.target !== body.target
+      || !region.cells.every(point => at(second, point) === body.target)
+      || region.cells.every(point => at(first, point) === body.target)) continue;
+    additionalRegions++;
+    for (const point of region.cells) painted.add(point.join(','));
+  }
   let preserved = true, expectedValueObserved = selecting
     ? activePigment(second, local.scene.wells) === body.target : true;
   for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) {
     if (painted.has(`${x},${y}`)) expectedValueObserved &&= second[y]?.[x] === body.target;
     else preserved &&= second[y]?.[x] === first[y]![x];
   }
-  return { preserved, expectedValueObserved };
+  return { preserved, expectedValueObserved, ...(additionalRegions ? { additionalRegions } : {}) };
 }
 
 function returned(proposal: Proposal, first: NativeRows, second: NativeRows) {

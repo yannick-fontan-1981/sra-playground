@@ -33,14 +33,15 @@ export class PreviewPackingIncomplete extends Error {
   }
 }
 
-/** Source visits keep their exact node count. Native work checkpoints merely
- * allow cancellation/deadlines and yield every 256 units; they grant no action. */
+/** Source visits keep their exact node count. Checkpoints bound the time spent
+ * without yielding and keep cancellation checks independent of scheduling. */
 export class PreviewPackingWork {
   examined = 0; work = 0;
   readonly limits: Readonly<PreviewPackingLimits>;
   readonly execution?: NativeExecution;
   private sourceStarted: number | null = null;
   private lastYieldWork = 0;
+  private lastYieldAt: number | null = null;
   constructor(execution?: NativeExecution, limits: Partial<PreviewPackingLimits> = {}) {
     this.execution = execution; this.limits = Object.freeze(previewPackingLimits(limits));
     if (execution?.deadlineMs !== undefined && !Number.isFinite(execution.deadlineMs)) throw new TypeError('Invalid PreviewPacking deadline');
@@ -62,9 +63,12 @@ export class PreviewPackingWork {
   tick(): void { this.work++; if (this.work % 256 === 0) this.check(); }
   async checkpoint(force = false): Promise<void> {
     this.check();
-    if (force || this.work - this.lastYieldWork >= 256) {
+    const units = this.work - this.lastYieldWork;
+    if (this.execution && (force || units >= 16_384
+      || units >= 256 && (this.lastYieldAt === null || this.now() - this.lastYieldAt >= 8))) {
       this.lastYieldWork = this.work;
-      if (this.execution) await this.execution.yieldControl();
+      await this.execution.yieldControl();
+      this.lastYieldAt = this.now();
       this.check();
     }
   }

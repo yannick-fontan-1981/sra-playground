@@ -3,6 +3,7 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgram
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { checkLinkedSupport, chooseLinkedSupport, measureLinkedSupports, type LinkedSupports } from './linked-support-route.ts';
 
 export const linkOpeningsId = 'sic_link_openings';
 export const learnLinkOpeningsId = 'sic_test_visible_opening_controls';
@@ -12,14 +13,18 @@ type Endpoint = { box: NativeBox; point: NativePoint; button: NativeBox; color: 
 type RelayLeg = { pair: [Endpoint, Endpoint]; departure: NativeBox; arrival: NativeBox; floor: number };
 type LinkedLoad = { button: NativeBox; idle: number; source: NativeBox; pixels: NativeRows;
   standing: NativeBox; plate: NativeBox; gate: NativeBox; passage: number };
+type PlateLink = Pick<LinkedLoad, 'button' | 'idle' | 'pixels' | 'passage'> & {
+  departure: NativeBox; receiving: NativeBox; firingPlate: NativeBox; exitPlate: NativeBox;
+  shutter: NativeBox; closed: NativeRows; exitGate: NativeBox; floor: number;
+};
 type FallLink = { departure: NativeBox; arrival: NativeBox; shelf: NativeBox; landing: NativeBox; releaseDirection: number };
 type Scene = { endpoints: Endpoint[]; actorColor: number; actorMask: string; goal: NativeBox; goalColor?: number; goalMask?: string;
-  footGap?: number; relay?: [RelayLeg, RelayLeg]; load?: LinkedLoad; flight?: FallLink };
+  footGap?: number; relay?: [RelayLeg, RelayLeg]; load?: LinkedLoad; flight?: FallLink; plateLink?: PlateLink; supports?: LinkedSupports };
 type State = { epoch: number; scene: Scene; refs: string[]; selected: number | null; walkRef: string | null; crossed: boolean; rejected: string[];
   leg?: number; settleRef?: string; held?: boolean; stationed?: NativeBox; redirection?: { entry: NativeBox; release: NativeBox } };
 type PriorLink = { completed: number; scene: Scene; proof: string };
 type Choice = { kind: 'select' | 'place' | 'walk' | 'settle' | 'take' | 'drop'; input: string; target: NativeBox; index: number; reason: string;
-  point?: NativePoint; direction?: number };
+  point?: NativePoint; direction?: number; destination?: number };
 type Proposal = NativeProposal & { local: State; choice: Choice; actor: NativeBox; needId: string; attempt: string };
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -181,11 +186,202 @@ function matchesPixels(rows: NativeRows, [l, t]: NativePoint, pixels: NativeRows
   return pixels.every((row, y) => row.every((ink, x) => ink === rows[t + y]?.[l + x]));
 }
 
-function loadAt(parts: Part[], rows: NativeRows, load: LinkedLoad): NativeBox[] {
+function loadAt(parts: Part[], rows: NativeRows, load: Pick<LinkedLoad, 'button' | 'pixels'>): NativeBox[] {
   const size = load.pixels.length * load.pixels[0]!.length;
   return parts.filter(p => p.area === size - 1 && p.bbox[1] > load.button[3]
     && width(p.bbox) === load.pixels[0]!.length && height(p.bbox) === load.pixels.length
     && matchesPixels(rows, [p.bbox[0], p.bbox[1]], load.pixels)).map(p => p.bbox);
+}
+
+function region(rows: NativeRows, [left, top, right, bottom]: NativeBox): NativeRows {
+  return rows.slice(top, bottom + 1).map(row => row.slice(left, right + 1));
+}
+
+function discoverLinkedSupports(parts: Part[], rows: NativeRows, previous: Scene, measured: PlateLink): Scene | null {
+  const goals = parts.filter(p => p.color === previous.goalColor && p.bbox[1] > measured.button[3]
+    && height(p.bbox) === height(previous.goal) && width(p.bbox) >= 3 && width(p.bbox) <= height(p.bbox));
+  if (goals.length !== 1 || !previous.footGap) return null;
+  const goal = goals[0]!.bbox;
+  const supports = measureLinkedSupports(rows, parts, { buttons: previous.endpoints.map(({ button, color }) => ({ button, color })),
+    span: height(previous.endpoints[0]!.box), actorInk: previous.actorColor, actorMask: previous.actorMask,
+    goal, footGap: previous.footGap, floorInk: measured.passage, use: measured.button, idle: measured.idle, cube: measured.pixels });
+  return supports ? { ...previous, goal, supports } : null;
+}
+
+function discoverPlateLink(parts: Part[], rows: NativeRows, previous: Scene): Scene | null {
+  const standing = actor(parts, previous), gap = previous.footGap;
+  if (!standing || !gap || previous.endpoints.length !== 2) return null;
+  const goals = parts.filter(part => part.color === previous.goalColor && silhouette(part) === previous.goalMask);
+  if (goals.length !== 1) return null;
+  const goal = goals[0]!.bbox, [startX] = center(standing), [targetX] = center(goal);
+  const passage = rows[standing[1]]?.[standing[0] - 1];
+  if (passage === undefined || standing[3] + gap !== goal[3] + 1) return null;
+  const span = Math.max(...previous.endpoints.map(endpoint => Math.max(width(endpoint.box), height(endpoint.box))));
+  const rooms = parts.filter(part => part.color === passage && part.area > span * span
+    && part.bbox[1] > previous.endpoints[0]!.button[3] + 4);
+  const departure = rooms.find(part => contains(part.bbox, center(standing)))?.bbox;
+  const exitRoom = rooms.find(part => contains(part.bbox, center(goal)))?.bbox;
+  const direction = Math.sign(targetX - startX);
+  if (!departure || !exitRoom || !direction) return null;
+  const between = (x: number, a: number, b: number) => (x - a) * direction > 0 && (b - x) * direction > 0;
+  const middle = rooms.filter(part => part.bbox !== departure && part.bbox !== exitRoom
+    && between(center(part.bbox)[0], startX, targetX));
+  if (middle.length !== 1) return null;
+  const receiving = middle[0]!.bbox, floor = standing[3] + gap;
+  const plates = parts.filter(part => part.rectangular && height(part.bbox) === 1 && part.bbox[1] === floor - 1
+    && part.area >= width(standing) && between(center(part.bbox)[0], startX, targetX));
+  const firing = plates.filter(part => contains(departure, center(part.bbox)));
+  const final = plates.filter(part => contains(receiving, center(part.bbox)) && part.color === firing[0]?.color);
+  if (firing.length !== 1 || final.length !== 1) return null;
+  const gateBetween = (a: NativeBox, b: NativeBox): NativeBox => {
+    const [left, right] = a[0] < b[0] ? [a[2] + 1, b[0] - 1] : [b[2] + 1, a[0] - 1];
+    return [left, standing[1] - height(standing), right, standing[3]];
+  };
+  const shutter = gateBetween(departure, receiving), exitGate = gateBetween(receiving, exitRoom);
+  if ([shutter, exitGate].some(box => width(box) < 1 || width(box) >= span || gateClear(rows, box, passage))) return null;
+  const buttons = previous.endpoints.map(endpoint => parts.filter(part => part.color === endpoint.color
+    && part.bbox[1] > 0 && part.bbox[3] < rows.length / 8 && silhouette(part) === endpoint.buttonMask));
+  if (buttons.some(matches => matches.length !== 1)) return null;
+  const releases = parts.filter(part => part.rectangular && width(part.bbox) === 1 && height(part.bbox) === span
+    && part.bbox[0] >= exitGate[0] && part.bbox[0] <= exitGate[2] && part.bbox[3] < floor - height(standing)
+    && contains(receiving, [part.bbox[0] - direction, center(part.bbox)[1]]));
+  const pairs: [NativeBox, NativeBox][] = [];
+  for (const release of releases) {
+    const scan = rows[floor]!;
+    for (let x = departure[0]; x + span - 1 <= departure[2]; x++) {
+      const end = x + span - 1;
+      if (scan[x - 1] === release.color || scan[end + 1] === release.color
+        || !scan.slice(x, end + 1).every(ink => ink === release.color)) continue;
+      pairs.push([[x, floor, end, floor], release.bbox]);
+    }
+  }
+  if (pairs.length !== 1) return null;
+  const handles = parts.filter(part => part.bbox[1] > 0 && part.bbox[3] < rows.length / 8
+    && part.area === 2 * (width(part.bbox) + height(part.bbox) - 2) && !part.rectangular);
+  const loads = parts.flatMap(part => {
+    const [x, y] = center(part.bbox), w = width(part.bbox), h = height(part.bbox);
+    if (w < 3 || h < 3 || w > span || h > span || part.area !== w * h - 1 || !contains(departure, [x, y])
+      || Math.abs(x - startX) > span || part.bbox[3] !== floor - 1) return [];
+    const pixels = region(rows, part.bbox);
+    return handles.filter(handle => {
+      const [cx, cy] = center(handle.bbox);
+      return width(handle.bbox) >= w + 2 && height(handle.bbox) >= h + 2
+        && matchesPixels(rows, [cx - Math.floor(w / 2), cy - Math.floor(h / 2)], pixels);
+    }).map(handle => ({ button: handle.bbox, idle: handle.color, pixels }));
+  });
+  if (loads.length !== 1) return null;
+  const endpoints = pairs[0]!.map((box, index) => {
+    const button = buttons[index]![0]!;
+    return { box, point: center(box), button: button.bbox, color: button.color, buttonMask: silhouette(button) };
+  });
+  return { ...previous, goal, endpoints, plateLink: { ...loads[0]!, passage, departure, receiving,
+    firingPlate: firing[0]!.bbox, exitPlate: final[0]!.bbox, shutter, closed: region(rows, shutter), exitGate, floor } };
+}
+
+function loadedActor(parts: Part[], rows: NativeRows, scene: Scene): NativeBox | null {
+  const plain = actor(parts, scene);
+  if (plain) return plain;
+  const load = scene.plateLink!, pixels = load.pixels, badge = pixels[Math.floor(pixels.length / 2)]![Math.floor(pixels[0]!.length / 2)];
+  const body = scene.actorMask.split(';').map(token => token.split(',').map(Number));
+  const maxX = Math.max(...body.map(point => point[0]!)), maxY = Math.max(...body.map(point => point[1]!));
+  if (badge === undefined || badge === scene.actorColor || body.length < 4) return null;
+  const poses: NativeBox[] = [];
+  for (const mark of parts.filter(part => part.color === badge && part.area === 1 && part.bbox[1] > load.button[3] + 4)) {
+    for (const reflected of [false, true]) {
+      const mask = body.map(([x, y]) => [reflected ? maxX - x! : x!, y!]);
+      for (const [x, y] of mask) {
+        const left = mark.bbox[0] - x!, top = mark.bbox[1] - y!;
+        if (!mask.every(([dx, dy]) => rows[top + dy!]?.[left + dx!] === (dx === x && dy === y ? badge : scene.actorColor))) continue;
+        const box: NativeBox = [left, top, left + maxX, top + maxY];
+        const occupied = new Set(mask.map(point => point.join(',')));
+        if (region(rows, box).every((row, dy) => row.every((ink, dx) => ink !== scene.actorColor || occupied.has(dx + ',' + dy)))
+          && !poses.some(item => sameBounds(item, box))) poses.push(box);
+      }
+    }
+  }
+  return poses.length === 1 ? poses[0]! : null;
+}
+
+function shutterChanged(rows: NativeRows, link: PlateLink) {
+  return !matchesPixels(rows, [link.shutter[0], link.shutter[1]], link.closed);
+}
+
+function visibleExitPassage(rows: NativeRows, link: PlateLink, [l, t, r, b]: NativeBox) {
+  const [left, top, right, bottom] = link.exitGate;
+  let visible = 0;
+  for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+    if (x >= l && x <= r && y >= t - 1 && y <= b + 1) continue;
+    if (rows[y]?.[x] !== link.passage) return false;
+    visible++;
+  }
+  return visible > 0;
+}
+
+function plateLinkChoice(local: State, rows: NativeRows, controlled: NativeBox, partList: Part[]): Choice | null {
+  const { scene, crossed, held, stationed, selected } = local, link = scene.plateLink!;
+  const [x] = center(controlled);
+  const walk = (target: NativeBox, reason: string): Choice | null => {
+    const direction = Math.sign(center(target)[0] - x);
+    return direction ? { kind: 'walk', input: direction < 0 ? 'ACTION3' : 'ACTION4', direction, target, index: 0, reason } : null;
+  };
+  if (stationed) return visibleExitPassage(rows, link, controlled)
+    ? walk(scene.goal, 'Keep the cube on the exit plate while crossing the open passage') : null;
+  if (!crossed && !contains(link.departure, center(controlled))) return null;
+  if (!held) {
+    const cargo = loadAt(partList, rows, link);
+    return cargo.length === 1 && Math.abs(center(cargo[0]!)[0] - x) <= Math.max(width(controlled), width(cargo[0]!)) + 2
+      ? { kind: 'take', input: 'ACTION6', point: center(link.button), target: cargo[0]!, index: 0,
+        reason: 'Pick up the nearby cube and keep it available for the exit plate' } : null;
+  }
+  if (crossed) {
+    if (controlled[3] + scene.footGap! < link.floor) return {
+      kind: 'settle', input: 'ACTION2', index: 1, target: link.exitPlate, reason: 'Let the redirected sprite land while keeping the cube',
+    };
+    if (!gateClear(rows, link.exitGate, link.passage) || !contains(link.exitPlate, [x, link.floor - 1])) {
+      return walk(link.exitPlate, 'Carry the cube to the plate that opens the exit passage');
+    }
+    return { kind: 'drop', input: 'ACTION6', point: center(link.button), index: 1, target: link.exitPlate,
+      reason: 'Leave the cube on the exit plate so it can replace the sprite as a weight' };
+  }
+  const pending = scene.endpoints.findIndex(endpoint => !placed(rows, endpoint));
+  if (pending < 0) return walk(scene.endpoints[0]!.box, 'Leave the firing plate and use the retained portal pair');
+  if (!shutterChanged(rows, link) || !contains(link.firingPlate, [x, link.floor - 1])) {
+    return walk(link.firingPlate, 'Press the firing plate with the sprite to uncover the shot');
+  }
+  const endpoint = scene.endpoints[pending]!;
+  return selected === pending ? { kind: 'place', input: 'ACTION6', point: endpoint.point, target: endpoint.box, index: pending,
+    reason: 'Place the opening while the firing plate holds the shutter open' }
+    : { kind: 'select', input: 'ACTION6', point: center(endpoint.button), target: endpoint.button, index: pending,
+      reason: 'Select the control for the other end of the link' };
+}
+
+function plateLinkReturn(proposal: Proposal, before: NativeRows, after: NativeRows): { reason: string; stationed?: NativeBox } | null {
+  const { local, choice, actor: first } = proposal, { scene } = local, link = scene.plateLink!, parts = geometricComponents(after);
+  const cargo = loadAt(parts, after, link);
+  const idle = after[link.button[1]]?.[link.button[0]] === link.idle;
+  const second = idle ? actor(parts, scene) : loadedActor(parts, after, scene);
+  if (!second) return null;
+  if (choice.kind === 'take') return !idle && !cargo.length && sameBounds(first, second) ? { reason: 'cube_pickup_observed' } : null;
+  if (choice.kind === 'drop') {
+    const [cube] = cargo;
+    return idle && cargo.length === 1 && cube && gateClear(after, link.exitGate, link.passage)
+      && contains(link.exitPlate, [center(cube)[0], cube[3]]) && first[3] - second[3] === height(cube)
+      ? { reason: 'cube_holds_exit_plate', stationed: cube } : null;
+  }
+  if (choice.kind === 'select' || choice.kind === 'place') {
+    const reason = !idle && sameBounds(first, second) && shutterChanged(after, link) && checked(proposal, before, after);
+    return reason ? { reason } : null;
+  }
+  if (local.stationed) return cargo.some(box => sameBounds(box, local.stationed!)) && visibleExitPassage(after, link, second)
+    && Math.sign(center(second)[0] - center(first)[0]) === choice.direction ? { reason: 'cube_stays_on_exit_plate' } : null;
+  if (idle) return null;
+  const paired = scene.endpoints.every(endpoint => placed(after, endpoint));
+  if (!paired && scene.endpoints.every(endpoint => placed(before, endpoint))) return null;
+  if (!local.crossed && paired && contains(link.receiving, center(second))) return { reason: 'linked_crossing_observed' };
+  if (choice.kind === 'settle') return paired && second[3] > first[3] ? { reason: 'carried_cube_landing_observed' } : null;
+  if (Math.sign(center(second)[0] - center(first)[0]) !== choice.direction) return null;
+  if (shutterChanged(before, link) && !shutterChanged(after, link) && paired) return { reason: 'portal_pair_survives_shutter_closure' };
+  return { reason: 'approach_displacement_observed' };
 }
 
 function discoverLoad(parts: Part[], rows: NativeRows, previous: Scene): Scene | null {
@@ -519,15 +715,19 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const transfer = retained?.completed === observation.levels_completed ? retained : null;
       const scene = prior?.scene ?? discover(parts, rows)
         ?? (transfer ? discoverRelay(parts, rows, transfer.scene) ?? discoverLoad(parts, rows, transfer.scene)
-          ?? discoverFallLink(parts, rows, transfer.scene) : null);
+          ?? discoverFallLink(parts, rows, transfer.scene) ?? discoverPlateLink(parts, rows, transfer.scene)
+          ?? (state?.scene.plateLink ? discoverLinkedSupports(parts, rows, transfer.scene, state.scene.plateLink) : null) : null);
       if (!scene) return null;
       const setup = scene.endpoints.map(endpoint => endpointKey(rows, endpoint));
       const selectedIndex = setup.filter(Boolean).length === 1 ? setup.indexOf(true) : null;
       const local: State = prior ?? { epoch: observation.level_epoch, scene, selected: selectedIndex,
-        refs: (scene.relay || scene.load || scene.flight) && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
-      const controlled = local.held ? scene.load!.standing : actor(parts, scene);
+        refs: (scene.relay || scene.load || scene.flight || scene.plateLink || scene.supports) && transfer ? [transfer.proof] : [], walkRef: null, crossed: false, rejected: [] };
+      const support = scene.supports ? chooseLinkedSupport(rows, scene.supports) : null;
+      const controlled = scene.supports ? support?.actor
+        : local.held ? scene.plateLink ? loadedActor(parts, rows, scene) : scene.load!.standing : actor(parts, scene);
       if (!controlled) return null;
-      const choice = scene.load ? loadChoice(local, rows, controlled, parts)
+      const choice = scene.supports ? support?.choice : scene.plateLink ? plateLinkChoice(local, rows, controlled, parts)
+        : scene.load ? loadChoice(local, rows, controlled, parts)
         : scene.relay ? relayChoice(local, rows, controlled) : scene.flight ? fallChoice(local, rows, controlled) : choose(local, rows, controlled);
       if (!choice || !observation.available_action_refs.includes(choice.input)) return null;
       const attempt = JSON.stringify([choice.kind, choice.index, choice.input, controlled, local.selected, ...(scene.relay ? [local.leg ?? 0] : [])]);
@@ -548,10 +748,11 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const witness = choice.point ? await ObservedInputDomain.makeLocusWitness(observation, rows, choice.point, { reason: choice.reason, evidence }) : null;
       if (choice.point && !witness) return null;
       const parent = 'G_official_completion';
-      const objective = { kind: scene.load ? 'delegate_support_to_transferred_load'
+      const objective = { kind: scene.supports ? 'transport_loads_to_persistent_supports' : scene.plateLink ? 'place_a_link_and_delegate_exit_support' : scene.load ? 'delegate_support_to_transferred_load'
         : scene.relay ? 'replace_links_along_the_route_to_exit' : scene.flight ? 'redirect_fall_into_exit_compartment'
           : 'link_opposite_openings_to_reach_exit', scope: ref.split(':revision:', 1)[0]!,
-        subjects: scene.load ? ['visible_openings', 'actor', 'load', 'support', 'passage', 'exit'] : ['visible_openings', 'control_symbols', 'actor', 'exit'],
+        subjects: scene.load || scene.plateLink || scene.supports ? ['visible_openings', 'actor', 'load', 'support', 'passage', 'exit']
+          : ['visible_openings', 'control_symbols', 'actor', 'exit'],
         parentObjective: parent, satisfactionContract: 'official_progress_after_crossing' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = linkOpeningsId + ':' + need.id;
@@ -562,7 +763,9 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
         steps: [{ action, expected_after: choice.target, ...(witness ? { point_binding: witness } : {}) }],
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
-        sicSituationCard: { strategy, need: scene.load ? 'Keep the passage open after leaving the occupied support'
+        sicSituationCard: { strategy, need: scene.supports ? 'Keep all required plates occupied while leaving for the exit'
+          : scene.plateLink ? 'Prepare the link and keep a weight for the exit plate'
+          : scene.load ? 'Keep the passage open after leaving the occupied support'
           : scene.relay ? 'Link each reachable compartment on the way to the exit'
           : scene.flight ? 'Reach the exit platform by linking the fall to the wall opening'
           : 'Link the two openings and reach the exit', situation: choice.reason, evidence,
@@ -570,9 +773,14 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
           actor: controlled, target: choice.target, exit: scene.goal,
           ...(scene.load ? { load: loadAt(parts, rows, scene.load)[0] ?? null, loadControl: scene.load.button,
             support: scene.load.plate, passage: scene.load.gate } : {}),
+          ...(scene.plateLink ? { load: loadAt(parts, rows, scene.plateLink)[0] ?? null, loadControl: scene.plateLink.button,
+            support: local.crossed ? scene.plateLink.exitPlate : scene.plateLink.firingPlate,
+            passage: local.crossed ? scene.plateLink.exitGate : scene.plateLink.shutter } : {}),
           ...(scene.flight ? { support: local.crossed ? scene.flight.landing : scene.flight.shelf,
             ...(local.redirection ? { redirection: local.redirection } : {}) } : {}),
-          openings: (scene.relay?.flatMap(leg => leg.pair) ?? scene.endpoints).map(endpoint => endpoint.box) },
+          ...(scene.supports && support ? { supports: scene.supports.plates, supportOccupied: support.occupied,
+            loads: support.cubes, passage: scene.supports.gate, passageOpen: support.open, loadControl: scene.supports.use } : {}),
+          openings: (scene.supports?.panels ?? scene.relay?.flatMap(leg => leg.pair) ?? scene.endpoints).map(endpoint => endpoint.box) },
         question: { reason: choice.reason, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: choice.reason, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -587,7 +795,9 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const reason = proposal.local.scene.load ? loadReturn(proposal, first, second)?.reason
+      const reason = proposal.local.scene.supports ? checkLinkedSupport(proposal.local.scene.supports, proposal.choice, first, second)
+        : proposal.local.scene.plateLink ? plateLinkReturn(proposal, first, second)?.reason
+        : proposal.local.scene.load ? loadReturn(proposal, first, second)?.reason
         : proposal.local.scene.relay ? relayReturn(proposal, first, second)
         : proposal.local.scene.flight ? fallReturn(proposal, first, second) : checked(proposal, first, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'opening_effect_not_confirmed' };
@@ -596,17 +806,19 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
       const { local, choice } = proposal;
       if (after.levels_completed > before.levels_completed) {
         if (retained && (local.scene.relay && local.crossed || local.scene.load && local.stationed
-          || local.scene.flight && local.crossed)) retained = {
+          || local.scene.flight && local.crossed || local.scene.plateLink && local.stationed || local.scene.supports)) retained = {
           ...retained, completed: after.levels_completed, proof: after.observation_ref,
         };
-        if (!local.scene.relay && !local.scene.load && !local.scene.flight && local.crossed && local.walkRef) retained = {
+        if (!local.scene.relay && !local.scene.load && !local.scene.flight && !local.scene.plateLink && !local.scene.supports && local.crossed && local.walkRef) retained = {
           completed: after.levels_completed, scene: local.scene, proof: after.observation_ref,
         };
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const loadEffect = local.scene.load ? loadReturn(proposal, first, second) : null;
-      const reason = local.scene.load ? loadEffect?.reason
+      const loadEffect = local.scene.plateLink ? plateLinkReturn(proposal, first, second)
+        : local.scene.load ? loadReturn(proposal, first, second) : null;
+      const reason = local.scene.supports ? checkLinkedSupport(local.scene.supports, choice, first, second)
+        : local.scene.load || local.scene.plateLink ? loadEffect?.reason
         : local.scene.relay ? relayReturn(proposal, first, second)
         : local.scene.flight ? fallReturn(proposal, first, second) : checked(proposal, first, second);
       const redirection = local.scene.flight && local.settleRef && reason === 'linked_crossing_observed'
@@ -622,7 +834,15 @@ export function createSicLinkOpenings(family = linkOpeningsId): NativeFamily<Pro
         ...(loadEffect?.stationed ? { held: false, stationed: loadEffect.stationed } : {}),
         refs: reason ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         rejected: reason ? local.rejected : [...local.rejected, proposal.attempt] };
-      return { events: [], ...(redirection ? {
+      return { events: [], ...(reason === 'portal_pair_survives_shutter_closure' ? {
+        reviewEvidence: 'Both openings remain visible after the firing shutter closes.',
+      } : reason === 'cube_holds_exit_plate' ? {
+        reviewEvidence: 'The cube replaced the moving sprite on the plate and the exit passage stayed open.',
+      } : reason === 'loads_hold_exit_passage_open' ? {
+        reviewEvidence: 'The loads occupy every required plate and the exit passage is visibly open.',
+      } : reason === 'load_holds_required_support' ? {
+        reviewEvidence: 'The deposited load remains on the plate as the sprite leaves to retrieve the next load.',
+      } : redirection ? {
         reviewEvidence: 'The intermediate frames show vertical descent into one opening and horizontal movement away from the other.',
       } : {}) };
     },

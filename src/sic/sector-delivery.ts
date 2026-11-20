@@ -4,7 +4,7 @@ import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts
 type Geometry = { pitch: number; phase: NativePoint; core: number; background: number; targets: NativePoint[] };
 type Port = { cell: NativePoint; face: NativePoint };
 type Sector = { cells: string[]; targets: NativePoint[]; ports: Port[] };
-export type SectorNetwork = { sending: string[]; receiving: Sector[] };
+export type SectorNetwork = { sending: string[]; receiving: Sector[]; localTargets?: NativePoint[] };
 
 const directions: readonly NativePoint[] = [[0, -1], [0, 1], [-1, 0], [1, 0]];
 const add = ([x, y]: NativePoint, [dx, dy]: NativePoint): NativePoint => [x + dx, y + dy];
@@ -35,8 +35,10 @@ export function measureSectorNetwork(rows: NativeRows, geometry: Geometry, actor
     }
     components.push(cells);
   }
-  const home = groups.get(key(actor))!, receivers = [...new Set(targets.map(target => groups.get(key(target))!))];
-  if (receivers.length < 2 || receivers.includes(home)) return null;
+  const home = groups.get(key(actor))!;
+  const localTargets = targets.filter(target => groups.get(key(target)) === home);
+  const receivers = [...new Set(targets.map(target => groups.get(key(target))!))].filter(sector => sector !== home);
+  if (!receivers.length || receivers.length < 2 && !localTargets.length) return null;
   const receiving: Sector[] = [];
   for (const sector of receivers) {
     if (!carriers.some(carrier => groups.get(key(carrier)) === sector)) return null;
@@ -49,5 +51,6 @@ export function measureSectorNetwork(rows: NativeRows, geometry: Geometry, actor
   }
   const distinctPorts = receiving.map((sector, index) => ({ ...sector,
     ports: sector.ports.filter(port => !receiving.some((other, i) => i !== index && other.ports.some(candidate => key(candidate.cell) === key(port.cell)))) }));
-  return distinctPorts.every(sector => sector.ports.length) ? { sending: components[home]!, receiving: distinctPorts } : null;
+  return distinctPorts.every(sector => sector.ports.length) ? { sending: components[home]!, receiving: distinctPorts,
+    ...(localTargets.length ? { localTargets } : {}) } : null;
 }

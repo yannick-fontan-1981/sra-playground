@@ -1,0 +1,85 @@
+{
+  "source": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
+  "image": "https://sinkingstarwalkthrough.com/img/crossovers/heroes-and-water/puzzle-03.webp",
+  "video": "https://www.youtube.com/watch?v=aFdVFlHRNNk&t=25s",
+  "visibleStartFrameSeconds": 30,
+  "coordinateSystem": "x=0 at the left goal; y=0 at the top row of the large island. The shipped map adds a one-cell water border.",
+  "legend": {
+    ".": "floor or wooden walkway",
+    "~": "water",
+    "#": "solid hedge",
+    "g": "destination"
+  },
+  "terrainRows": [
+    "~~~~~......",
+    "~~~~~......",
+    "~~~~~......",
+    "~~.........",
+    "~~.~#......",
+    "~~~~.###~~~",
+    "g~...~g~~~~"
+  ],
+  "heroes": {
+    "warrior": {
+      "x": 8,
+      "y": 4
+    },
+    "thief": {
+      "x": 6,
+      "y": 4
+    }
+  },
+  "crates": [
+    {
+      "x": 6,
+      "y": 1
+    },
+    {
+      "x": 7,
+      "y": 1
+    },
+    {
+      "x": 8,
+      "y": 1
+    },
+    {
+      "x": 9,
+      "y": 1
+    },
+    {
+      "x": 10,
+      "y": 1
+    }
+  ],
+  "intendedSupports": [
+    {
+      "x": 1,
+      "y": 3
+    },
+    {
+      "x": 2,
+      "y": 2
+    },
+    {
+      "x": 2,
+      "y": 5
+    },
+    {
+      "x": 5,
+      "y": 6
+    },
+    {
+      "x": 1,
+      "y": 6
+    }
+  ],
+  "supportDirections": [
+    "W",
+    "N",
+    "S",
+    "E",
+    "W"
+  ],
+  "imageInterpretation": "The guide screenshot is an intermediate state: four crystals are already submerged and only the fifth remains mobile. Initial placements are taken from the public video storyboard at 0:30, before any of the five crystals is displaced.",
+  "scope": "Cell topology and five-crate construction sequence transcribed from visual sources; sprites, rendering, controls and movement resolution use the SS10 rules."
+}

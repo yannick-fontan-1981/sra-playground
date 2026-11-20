@@ -1,0 +1,222 @@
+{
+  "success": true,
+  "scope": "full-campaign",
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Eleven compiled-HTML Bard cases verify song, radius, walls, selective blocking, partner escort, moving supports, water conversion, refusal, forced Bard motion and reciprocal combat",
+    "Nearest-source and equal-distance reflection fixtures preserve previews, pixels, no-song behavior and Undo",
+    "Moving a mirror onto a button keeps its white diagonal and black back above device markings",
+    "Compiled-HTML mirror refusals blink only the blocking/conflicting mirrors red twice, explain the conflict from public pixels, preserve lessons and Undo, lock commands and cancel stale frames on Undo",
+    "The actual HTML opens level 1 with its twelve-discovery tutorial, Merchant/Bard role controls and accurate song/mirror help",
+    "Clicks, Tab, numbers and role buttons select without a turn; Shift+Tab exits and outside/selector input is ignored",
+    "Animation locks normal commands while Undo, Reset, Restart and room selection cancel old callbacks and restore exact public states",
+    "All eight rooms display the duo, two goals, level-specific sources and platform/press help; only level 1 has the tutorial",
+    "All eight campaign witnesses replay through the compiled HTML with exact frames and durations; all twelve tutorial lessons and Space/button/X equivalence pass",
+    "WIN disables actions, Undo exits final victory and Restart restores the whole campaign at level 1",
+    "Actual reachable defeats show all terminal frames before the panel, block controls and support mid-animation Undo and panel Undo/Reset"
+  ],
+  "bardCoverage": [
+    {
+      "case": "near crate follows one step",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "song crosses an intervening wall",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "diagonal corner is within radius two",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "blocked member stays while another follows",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "inactive Merchant joins without extra pushing",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "sunken support slides over water",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "sung crate becomes a support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "blocked Bard cancels the complete song",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "out of range crate does not follow",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes Bard without a song",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "song brings monsters into reciprocal combat",
+      "frames": 8,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noSong": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square outline",
+      "teleportFrames": 3,
+      "preview": true,
+      "noSong": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange both heroes",
+      "teleportFrames": 3,
+      "preview": true,
+      "noSong": true,
+      "exactUndo": true
+    }
+  ],
+  "mirrorButtonCoverage": {
+    "mirrorAboveButton": true,
+    "mirrorMotionLesson": true,
+    "gateLesson": true,
+    "frames": 4
+  },
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible destinations flash both mirrors",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "mirror hiding the only source flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "Undo during warning restores previous actual movement",
+      "midAnimationUndo": true,
+      "exactPreviousState": true,
+      "cancelledFramesCannotRepaint": true,
+      "noReflectionLesson": true
+    }
+  ],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 52,
+    "discoveries": [
+      "select",
+      "move",
+      "merchant-push",
+      "bard-song",
+      "partner-song",
+      "selective-song",
+      "platform",
+      "support-slide",
+      "mirror-motion",
+      "mirror",
+      "gate",
+      "goals"
+    ]
+  },
+  "witnessCoverage": {
+    "levels": 8,
+    "actions": 443,
+    "frames": 1312,
+    "selections": 33,
+    "allPixelsAndDurationsCompared": true
+  },
+  "defeatCoverage": [
+    {
+      "level": 8,
+      "cause": "reflet vers l’eau après ouverture de la porte, avant de régler le miroir",
+      "actions": 4,
+      "frames": 3,
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    },
+    {
+      "level": 8,
+      "cause": "le Marchand s’approche du monstre avant le duel",
+      "actions": 31,
+      "frames": 8,
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    }
+  ]
+}

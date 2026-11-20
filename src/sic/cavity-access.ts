@@ -6,9 +6,12 @@ import { sicNeedId } from './need-identity.ts';
 import { acquireTemporalOpening, intersectsBox, movingOpeningMask, planTemporalCavity } from './temporal-cavity.ts';
 import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGraph } from './observed-command-frontier.ts';
 import { pairedOpenings } from './paired-opening.ts';
+import { visibleCommandPanel } from './visible-command-panel.ts';
+import { chooseJointSlide, observeJointSlide, readJointSlide, slideBox, type JointSlide, type JointSlideStep } from './joint-slide.ts';
 
 export const cavityAccessId = 'sic_cavity_access';
 const objective = 'G_official_completion';
+const slotComparisonsPerDirection = 8;
 export const cavityStrategies = {
   follow_timed_slide: 'Time a slide around a moving obstacle',
   follow_measured_slide: 'Follow a measured slide',
@@ -32,9 +35,10 @@ type Stop = { claim_ref: string; local_row_pitch: number; local_column_pitch: nu
 type State = { epoch: number; body: readonly [number, number, number] | null; floor: number | null;
   directions: Record<string, Displacement>; recent: Displacement | null; tried: string[]; packet: readonly NativeRows[]; stop: Stop | null;
   motion: ReturnType<typeof acquireTemporalOpening>; motionEvidence: readonly string[]; transitions: ObservedCommandGraph;
-  slots: readonly NativeBox[]; slotEvidence: string | null };
+  slots: readonly NativeBox[]; slotEvidence: string | null; slotChecks?: number;
+  lastSlotReturn?: string; lastRepeatedSlotReturn?: string };
 type Proposal = NativeProposal & { key: string; needId: string; expectedStop?: NativePoint; expectedFrame?: string;
-  slots?: readonly NativeBox[] };
+  slots?: readonly NativeBox[]; comparesSlot?: true; joint?: { local: JointSlide; step: JointSlideStep } };
 const empty: State = { epoch: 0, body: null, floor: null, directions: {}, recent: null, tried: [], packet: [], stop: null,
   motion: null, motionEvidence: [], transitions: {}, slots: [], slotEvidence: null };
 
@@ -100,12 +104,42 @@ function measureAccess(state: State, observation: NativeObservation, rows: Nativ
 
 export function createSicCavityAccess(): NativeFamily<Proposal> {
   let state: State = structuredClone(empty);
+  let joint: JointSlide | null = null, rejectedJointEpoch: number | null = null;
   return {
     id: cavityAccessId,
     propose(observation, rows, inputs, remaining) {
       const options = inputs.filter(command => /^ACTION[1-4]$/.test(command.action_ref));
       if (remaining < 1 || options.length < 2) return null;
+      const ref = observation.observation_ref;
       const components = supportParts(rows);
+      const shared = joint?.epoch === observation.level_epoch ? joint
+        : rejectedJointEpoch !== observation.level_epoch ? readJointSlide(rows, observation, components) : null;
+      const jointStep = shared && chooseJointSlide(shared, remaining);
+      const jointAction = jointStep && options.find(command => command.action_ref === jointStep.input);
+      if (shared && jointStep && jointAction) {
+        const proof: [string, ...string[]] = [ref, ...shared.refs.filter(value => value !== ref)];
+        const situation = jointStep.temporarilyVacatesSeat ? 'Leave the first seat temporarily so both pieces can finish together'
+          : 'Check where both pieces stop and how the moving obstacle changes';
+        const goal = { kind: 'occupy_compatible_openings_simultaneously', scope: ref.split(':revision:', 1)[0]!,
+          subjects: ['controlled_pieces', 'colored_seat', 'generic_seat', 'moving_obstacle'], parentObjective: objective,
+          satisfactionContract: 'observe_official_progress_after_both_seats_are_occupied' };
+        const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof }, id = `cavity:${need.id}`;
+        const strategy = 'follow_timed_slide', actions = [jointAction];
+        return { status: 'proposed', kind: cavityAccessId, actions,
+          steps: [{ action: jointAction, expected_after: jointStep.next }], joint: { local: shared, step: jointStep },
+          key: observation.frame_hash + ':' + jointAction.action_ref, needId: need.id,
+          binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+          sicSituationCard: { strategy, need: 'Bring both pieces to their compatible seats on the same return',
+            situation, mode: shared.refs.length === 1 ? 'exploration' : 'solving', agenda: [], evidence: proof,
+            controlledPieces: shared.world.pieces.map(piece => slideBox(shared, piece.at)),
+            slots: [slideBox(shared, shared.board.colored.at), slideBox(shared, shared.board.open)],
+            movingObstacle: slideBox(shared, shared.world.patrol.at), remainingCommands: jointStep.distance },
+          compositions: [{ id, observed: false, open_question: situation, relations: [`contributes_to:${objective}`] }],
+          question: { reason: situation, hypothesis_refs: proof }, route_refs: proof,
+          sicLocalDecision: { strategy, objective: { id, label: situation, parent: objective }, need },
+          bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: objective, purpose: situation,
+            evidence: proof, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
+      }
       const openings = rectangularOpenComplements(components).map(([, box]) => box);
       const local = state.epoch === observation.level_epoch ? state : empty;
       const visibleFit = openings.some(box => box.width > 1 && box.height > 1 && components.some(part => part.area === box.width * box.height
@@ -115,7 +149,6 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       const slots = local.slotEvidence ? local.slots : shouldLookForSlots ? pairedOpenings(rows, components) : [];
       if (!visibleFit && !slots.length) return null;
       const body = local.body && bodyOutsideMask(rows, local.body, local.motion);
-      const ref = observation.observation_ref;
       const directions = Object.values(local.directions);
       const measured = body?.length === 1 && local.floor !== null ? measureAccess(local, observation, rows, body[0]!.bbox) : null;
       const path: string[] = measured?.open_cavity_conditional_route_action_refs?.length ? measured.open_cavity_conditional_route_action_refs
@@ -134,7 +167,16 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
             return attempts(a.action_ref) - attempts(b.action_ref);
           })[0]
           : undefined);
-      const frontier = !timed && !known && !untested && ((box && local.motionEvidence.length) || slots.length)
+      // A slot inferred from a visual arrangement may have no mechanical role. Hand off after
+      // a bounded comparison when there is still no measured route or timed slide to follow.
+      const otherInput = observation.available_action_refs.some(action => /^ACTION[56]$/.test(action));
+      if (!timed && !known && testedEveryDirection && observation.available_action_refs.includes('ACTION6')
+        && visibleCommandPanel(rows)) return null;
+      const shareExploration = !!slots.length && testedEveryDirection && otherInput && local.lastSlotReturn === ref
+        && local.lastRepeatedSlotReturn === ref;
+      const canCompare = slots.length ? (local.slotChecks ?? 0) < slotComparisonsPerDirection * options.length
+        : box && local.motionEvidence.length;
+      const frontier = !timed && !known && !untested && canCompare && !shareExploration
         ? observedCommandFrontier(local.transitions, observation.frame_hash, options.map(command => command.action_ref), remaining) : null;
       const contrast = options.find(command => command.action_ref === frontier?.action);
       const proof: [string, ...string[]] = [ref, ...new Set([...directions.map(direction => direction.ref), ...(local.stop ? [local.stop.claim_ref] : []),
@@ -177,6 +219,7 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
         ...(strategy === 'follow_timed_slide' && temporal ? { expectedStop: temporal.stop } : {}),
         ...(frontier?.first?.destination ? { expectedFrame: frontier.first.destination } : {}),
         ...(slots.length && !local.slotEvidence ? { slots } : {}),
+        ...(strategy === 'compare_access_to_slot' ? { comparesSlot: true } : {}),
         key: key(command.action_ref), needId: need.id, binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${objective}`] }],
         question: { reason: label, hypothesis_refs: proof }, route_refs: proof,
@@ -190,6 +233,13 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
     },
     after(proposal, _index, before, after, _first, second) {
       const scored = after.levels_completed > before.levels_completed;
+      if (proposal.joint) {
+        const { local, step } = proposal.joint;
+        const matched = scored || before.level_epoch === after.level_epoch && !!observeJointSlide(second, local, step, after);
+        return { matched, seal_prefix: true, reason: scored ? 'official_boundary'
+          : matched ? 'joint_slide_and_patrol_confirmed' : 'joint_slide_projection_refuted',
+          ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
+      }
       const boxes = proposal.expectedStop && state.body ? bodyOutsideMask(second, state.body, state.motion) : [];
       const matched = scored ? null : proposal.expectedFrame ? after.frame_hash === proposal.expectedFrame
         : proposal.expectedStop && boxes.length === 1
@@ -200,11 +250,25 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     record(before, after, command, first, second, proposal, _index, frames) {
+      if (proposal.joint) {
+        if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
+        joint = observeJointSlide(second, proposal.joint.local, proposal.joint.step, after);
+        if (!joint) rejectedJointEpoch = before.level_epoch;
+        return { events: [], ...(joint && proposal.joint.step.temporarilyVacatesSeat
+          ? { reviewEvidence: 'The first piece left its seat while the other advanced. Both placements remain in the plan.' } : {}) };
+      }
       if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
       if (state.epoch !== before.level_epoch) state = { ...structuredClone(empty), epoch: before.level_epoch };
       if (proposal.slots?.length) {
         state.slots = proposal.slots;
         state.slotEvidence = before.observation_ref;
+      }
+      if (proposal.comparesSlot) {
+        state.slotChecks = (state.slotChecks ?? 0) + 1;
+        state.lastSlotReturn = after.observation_ref;
+        if (after.frame_hash === before.frame_hash || Object.hasOwn(state.transitions, after.frame_hash)) {
+          state.lastRepeatedSlotReturn = after.observation_ref;
+        }
       }
       state.tried.push(proposal.key);
       rememberCommandReturn(state.transitions, before.frame_hash, after.frame_hash, command.action_ref, after.observation_ref);
@@ -243,7 +307,12 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       }
       return { events: [{ kind: 'sic_observed_slide', command: command.action_ref, delta, direction, observation: after.observation_ref }] };
     },
-    state: () => ({ ...state }),
-    restore(value: NativeRecord) { state = structuredClone(value as State); },
+    state: () => ({ ...state, ...(joint ? { joint } : {}), ...(rejectedJointEpoch === null ? {} : { rejectedJointEpoch }) }),
+    restore(value: NativeRecord) {
+      const { joint: savedJoint, rejectedJointEpoch: rejected, ...legacy } = value;
+      state = structuredClone(legacy as State);
+      joint = structuredClone((savedJoint as JointSlide | undefined) ?? null);
+      rejectedJointEpoch = typeof rejected === 'number' ? rejected : null;
+    },
   };
 }

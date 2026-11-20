@@ -15,7 +15,7 @@ export const SOURCE_REPOSITORY = 'https://github.com/yannick-fontan-1981/sra-pla
 export const SOURCE_COMMIT = '212d8d426f07eea2b6797c2bb647545767488a96';
 export const PUBLIC_SOURCE_BASE = `${SOURCE_REPOSITORY}/blob/main/reference/sra/${SOURCE_COMMIT.slice(0, 12)}`;
 
-export type GameGroup = 'official' | 'custom' | 'custom_2' | 'custom_3';
+export type GameGroup = 'official' | 'custom' | 'custom_2' | 'custom_3' | 'custom_4';
 export type GameAvailability = 'playable' | 'port-pending';
 
 export interface GameCatalogEntry {
@@ -1134,10 +1134,43 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
   }
 ];
 
+// Custom 4 is an incremental native collection; only completed games are registered.
+records.push({code:'SS01',id:'ss01-c4000001',name:'Sinking Star — Mirror Isles',group:'custom_4',family:'sinking_star_mirrors',levels:8,
+  description:'Guide Merchants across islands using movable mirrors, reflected crates and sunken supports. Two Merchants and two goals in levels 1 and 8.',
+  sourcePath:'src/games/sinking-star/levels.ts',availability:'playable'});
+records.push({code:'SS02',id:'ss02-c4000001',name:'La force rouge',group:'custom_4',family:'sinking_star_push',levels:8,
+  description:'Guide the red Warrior, push chains of stones, build bridges and hold buttons to open gates.',
+  sourcePath:'experiments/sinking-star-ss02/src/levels.ts',availability:'playable'});
+records.push({code:'SS03',id:'ss03-c4000001',name:'La ruse verte',group:'custom_4',family:'sinking_star_pull',levels:8,
+  description:'Guide the green Thief, pull crates and coordinate buttons to trigger piston gates.',
+  sourcePath:'experiments/sinking-star-ss03/src/levels.ts',availability:'playable'});
+records.push({code:'SS04',id:'ss04-c4000001',name:'L’Axe violet',group:'custom_4',family:'sinking_star_swap',levels:8,
+  description:'Guide the violet Wizard, swap with visible crates or monsters, and reflect your aim with fixed mirrors.',
+  sourcePath:'experiments/sinking-star-ss04/src/levels.ts',availability:'playable'});
+records.push({code:'SS05',id:'ss05-c4000001',name:'Le Chant Magenta',group:'custom_4',family:'sinking_star_song',levels:8,
+  description:'Guide the magenta Bard, move nearby objects with the song, and reflect crates and monsters through mirrors.',
+  sourcePath:'experiments/sinking-star-ss05/src/levels.ts',availability:'playable'});
+records.push({code:'SS06',id:'ss06-c4000001',name:'Les Ponts Réfléchis',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Combine the Merchant’s single push and the Warrior’s chain push, then guide the Warrior across a bridge controlled by mirrors.',
+  sourcePath:'experiments/sinking-star-ss06/src/levels.ts',availability:'playable'});
+records.push({code:'SS07',id:'ss07-c4000001',name:'La Distance Dérobée',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Pair the Merchant’s push with the Thief’s pull and align mirrors to transport the closest occupant.',
+  sourcePath:'experiments/sinking-star-ss07/src/levels.ts',availability:'playable'});
+records.push({code:'SS08',id:'ss08-c4000001',name:'La Double Transposition',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Pair the Merchant’s push with the Wizard’s directional exchanges and use mirrors to redirect or reflect pieces.',
+  sourcePath:'experiments/sinking-star-ss08/src/levels.ts',availability:'playable'});
+records.push({code:'SS09',id:'ss09-c4000001',name:'Le Chœur des Miroirs',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Pair the Merchant’s push with the Bard’s song to move crates, monsters and supports, then cross with mirrors.',
+  sourcePath:'experiments/sinking-star-ss09/src/levels.ts',availability:'playable'});
+records.push({code:'SS10',id:'ss10-c4000001',name:'L’Entrepôt Réversible',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Push chains of crates with the Warrior, pull them with the Thief, and build crossings with permanent supports.',
+  sourcePath:'experiments/sinking-star-ss10/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'
     ? `https://three.arcprize.org/api/games/${entry.id}/source`
+    : entry.group === 'custom_4' ? `${SOURCE_REPOSITORY}/blob/main/${entry.sourcePath}`
     : `${PUBLIC_SOURCE_BASE}/${entry.sourcePath}`,
 }));
 

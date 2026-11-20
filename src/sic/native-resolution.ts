@@ -567,6 +567,17 @@ export function readNativeResolution(agent: {
     if (subject) subjects.push({ label: 'Piece moved by the previous control', box: subject });
   }
   if (situationCard && family === publicInputExplorationId) {
+    const pressureTarget = bounds(card?.pressureTarget);
+    if (pressureTarget) subjects.push({ label: 'Target of the pressure and crossing plan', box: pressureTarget });
+    const untestedMark = bounds(card?.untestedMark);
+    if (untestedMark) subjects.push({ label: 'Marked cell to test on contact', box: untestedMark });
+    const exchangeActor = bounds(card?.exchangeActor), exchangePartner = bounds(card?.exchangePartner);
+    if (exchangeActor) subjects.push({ label: 'Piece initiating the exchange', box: exchangeActor });
+    if (exchangePartner) subjects.push({ label: 'Piece that would take its place', box: exchangePartner });
+    for (const candidate of Array.isArray(card?.exchangeTargets) ? card.exchangeTargets : []) {
+      const target = bounds(candidate);
+      if (target) subjects.push({ label: 'Target used by the exchange plan', box: target });
+    }
     const region = bounds(card?.addressedRegion);
     if (region) subjects.push({ label: 'Visible region tested by the click', box: region });
     const workspace = bounds(card?.workspace), example = bounds(card?.example);
@@ -575,6 +586,23 @@ export function readNativeResolution(agent: {
     const focus = bounds(card?.focus), moved = bounds(record(card?.lastControlledMotion)?.to);
     if (focus) subjects.push({ label: 'Piece whose control is being tested', box: focus });
     if (moved) subjects.push({ label: 'Piece moved by the tested direction', box: moved });
+    const marker = bounds(card?.marker), control = bounds(card?.control);
+    if (marker) subjects.push({ label: 'Marker reached to vary the test conditions', box: marker });
+    if (control && !region) subjects.push({ label: 'Panel control previously observed to change the board', box: control });
+    const peer = bounds(card?.projectedPeer);
+    if (peer) subjects.push({ label: 'Candidate destination with the matching marker', box: peer });
+    const support = bounds(card?.affectedSupport);
+    if (support) subjects.push({ label: 'Terrain being reconfigured', box: support });
+    const contact = bounds(card?.contact);
+    if (contact) subjects.push({ label: 'Contact at the edge of the known floor', box: contact });
+    const animated = bounds(card?.animatedMechanism);
+    const dock = bounds(card?.dockingSupport);
+    if (dock) subjects.push({ label: 'Support used as an alignment candidate', box: dock });
+    if (animated) {
+      const frames = Array.isArray(card?.animatedMechanismFrames) ? card.animatedMechanismFrames.filter(Number.isSafeInteger) : [];
+      subjects.push({ label: frames.length ? `Piece that reacted in frames ${frames.join(', ')}` : 'Piece that reacted during the earlier test',
+        box: animated });
+    }
   }
   if (situationCard && (family === trialRepeatedLinearControlsId || family === recheckDirectionalControlsId)) {
     const target = bounds(card?.addressedRegion);
@@ -692,6 +720,10 @@ export function readNativeResolution(agent: {
     if (actor) subjects.push({ label: 'Piece carrying the current program', box: actor });
     const destination = bounds(card?.contactDestination);
     if (destination) subjects.push({ label: 'Unfamiliar tile in the proposed trial', box: destination });
+    if (Array.isArray(card?.markedTerrain)) for (const tile of card.markedTerrain) {
+      const box = bounds(tile);
+      if (box) subjects.push({ label: 'Interior tile with an unverified effect', box });
+    }
     if (Array.isArray(card?.affected)) for (const target of card.affected) {
       const box = bounds(target);
       if (box) subjects.push({ label: 'Piece in the projected interaction', box });
@@ -727,11 +759,19 @@ export function readNativeResolution(agent: {
     if (target) subjects.push({ label: 'Cell selected to satisfy the visible quota', box: target });
   }
   if (situationCard && family === observedCarrierReductionId) {
+    const cargo = Array.isArray(card?.carriedIntermediates) ? card.carriedIntermediates.flatMap(item => {
+      const box = bounds(item);
+      return box ? [box] : [];
+    }) : [];
+    const intermediate = bounds(card?.intermediate);
+    const carried = (box: NativeBox) => cargo.some(other => other.every((value, i) => value === box[i]));
     for (const [field, label] of [['carrier', 'Measured carrier'], ['source', 'Piece chosen for the jump'],
-      ['intermediate', 'Fixed intermediate'], ['landing', 'Projected landing']] as const) {
+      ['intermediate', intermediate && carried(intermediate) ? 'Carried intermediate in this jump' : 'Fixed intermediate'],
+      ['landing', 'Projected landing']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    for (const box of cargo) if (!intermediate?.every((value, i) => value === box[i])) subjects.push({ label: 'Intermediate on a carrier', box });
   }
   if (situationCard && family === observedLinePlacementId) {
     const target = bounds(card?.target);
@@ -928,6 +968,8 @@ export function readNativeResolution(agent: {
   if (situationCard && (family === branchAlignmentId || family === verifyBranchAlignmentId)) {
     const contributor = bounds(card?.contributor);
     if (contributor) subjects.push({ label: 'Selected contributor', box: contributor });
+    const turn = bounds(card?.turningContributor);
+    if (turn && !contributor?.every((value, i) => value === turn[i])) subjects.push({ label: 'Corner that turns the flow', box: turn });
     if (Array.isArray(card?.goals)) for (const goal of card.goals) {
       const box = bounds(goal);
       if (box) subjects.push({ label: 'Receiving opening', box });
@@ -935,7 +977,7 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && (family === invitedCaptureId || family === verifyCaptureRouteId)) {
     for (const [field, label] of [['focus', 'Selected piece'], ['terrain', 'Terrain used to change color'], ['swatch', 'Color requested'],
-      ['target', 'Next cell'], ['victim', 'Piece to capture']] as const) {
+      ['target', card?.portalExit ? 'Entry to click' : 'Next cell'], ['portalExit', 'Paired exit'], ['victim', 'Piece to capture']] as const) {
       const box = bounds(card?.[field]);
       if (box && !subjects.some(subject => subject.box.every((value, i) => value === box[i]))) subjects.push({ label, box });
     }
@@ -1013,16 +1055,23 @@ export function readNativeResolution(agent: {
       const box = bounds(store);
       if (box) subjects.push({ label: 'Stored supply', box });
     }
+    if (Array.isArray(card?.lossOutlets)) for (const outlet of card.lossOutlets) {
+      const box = bounds(outlet);
+      if (box) subjects.push({ label: 'Grated outlet', box });
+    }
     if (Array.isArray(card?.fields)) for (const field of card.fields) {
       const box = bounds(field);
       if (box) subjects.push({ label: 'Compared field', box });
     }
   }
   if (situationCard && (family === glyphEditingId || family === verifySequenceEditsId)) {
-    for (const [field, label] of [['source', 'Source symbols'], ['editable', 'Editable symbols'], ['active', 'Focused symbol']] as const) {
+    const fixed = bounds(card?.fixedExample);
+    for (const [field, label] of [['source', fixed ? 'Fixed input word' : 'Source symbols'], ['editable', 'Editable symbols'],
+      ['active', fixed ? 'Focused rule side' : 'Focused symbol']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (fixed) subjects.push({ label: 'Fixed output word', box: fixed });
   }
   if (situationCard && family === parallelSymbolPrefixesId) {
     for (const [field, label] of [['targets', 'Symbol advanced by this command'], ['panels', 'Symbol group']] as const) {
@@ -1136,6 +1185,11 @@ export function readNativeResolution(agent: {
       const landing = bounds(record(contact)?.to);
       if (landing) subjects.push({ label: 'Previously observed contact landing', box: landing });
     }
+    if (Array.isArray(card?.timedSources)) for (const source of card.timedSources) {
+      const actuator = record(source);
+      const box = bounds(actuator?.box);
+      if (box) subjects.push({ label: actuator?.active ? 'Pusher involved in this step' : 'Pusher with its own cycle', box });
+    }
   }
   if (situationCard && (family === nestedPassageId || family === learnNestedPassageId)) {
     for (const [field, label] of [['room', 'Selected room'], ['source', 'Source'], ['exit', 'Exit opening']] as const) {
@@ -1205,7 +1259,7 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === linkedGroupRouteId) {
     for (const [field, label] of [['actor', 'Derived body'], ['active', 'Selected anchor'], ['focus', 'Click target'],
-      ['goal', 'Destination'], ['landing', 'Predicted body position']] as const) {
+      ['goal', 'Destination'], ['landing', 'Predicted body position'], ['pickup', 'Piece supplying missing colors']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
@@ -1225,14 +1279,19 @@ export function readNativeResolution(agent: {
   if (situationCard && family === mergeForDemandId) {
     const mobile = bounds(card?.autonomous);
     if (mobile) subjects.push({ label: 'Mobile approaching the material', box: mobile });
+    if (Array.isArray(card?.autonomousMobiles)) for (const item of card.autonomousMobiles) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Mobile near the work area', box });
+    }
     for (const [field, label] of [['actor', card?.protectiveClick ? 'Material to protect' : 'Material moved'], ['partner', 'Other merge input'], ['focus', 'Click target'],
-      ['demand', 'Product requested'], ['receptor', 'Delivery receiver']] as const) {
+      ['demand', 'Product requested'], ['mobileRequest', 'Requested mobile'],
+      ['receptor', 'Delivery receiver'], ['otherReceiver', 'Receiver for the mobile']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
     if (Array.isArray(card?.reserved)) for (const item of card.reserved) {
       const box = bounds(item);
-      if (box) subjects.push({ label: 'Reserved for another delivery', box });
+      if (box) subjects.push({ label: card.protectiveClick ? 'Material reserved for the requested product' : 'Reserved for another delivery', box });
     }
   }
   if (situationCard && family === compartmentGrowthId) {
@@ -1277,7 +1336,7 @@ export function readNativeResolution(agent: {
     }
   }
   if (situationCard && family === coupledGaugeRouteId) {
-    for (const [field, label] of [['focus', 'Selected button'], ['gauge', 'Extending piece'], ['actor', 'Transported marker'],
+    for (const [field, label] of [['focus', 'Selected button'], ['gauge', card?.operation === 'turn' ? 'Rotating piece' : 'Extending piece'], ['actor', 'Transported marker'],
       ['target', 'Destination marks'], ['obstacle', 'Obstacle'], ['landing', 'Predicted marker position']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
@@ -1285,6 +1344,10 @@ export function readNativeResolution(agent: {
     if (Array.isArray(card?.carried)) for (const item of card.carried) {
       const box = bounds(item);
       if (box) subjects.push({ label: 'Transported piece', box });
+    }
+    if (Array.isArray(card?.sharedReceivers)) for (const item of card.sharedReceivers) {
+      const box = bounds(item);
+      if (box) subjects.push({ label: 'Other bar on the same button', box });
     }
   }
   if (situationCard && (family === seatedContactId || family === verifyFrameContactId || family === switchedSurfaceId || family === learnSwitchedSurfaceId)) {
@@ -1367,6 +1430,12 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    for (const [field, label] of [['patrols', 'Visible patrol position'], ['patrolForecast', 'Possible patrol position on the next move']] as const) {
+      if (Array.isArray(card?.[field])) for (const item of card[field]) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
+    }
   }
   if (situationCard && (family === coupledMotionId || family === verifyCoupledRouteId)) {
     for (const [field, label] of [['members', 'Controlled piece'], ['nextMembers', 'Projected position']] as const) {
@@ -1376,9 +1445,15 @@ export function readNativeResolution(agent: {
       }
     }
     for (const [field, label] of [['auxiliary', 'Auxiliary in focus'], ['nextAuxiliary', 'Projected auxiliary position'],
-      ['parking', 'Side pocket']] as const) {
+      ['parking', 'Side pocket'], ['pressureHolder', 'Piece holding the plate']] as const) {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
+    }
+    for (const [field, label] of [['pressurePlates', 'Pressure plate'], ['pressureGates', 'Passage linked to the plate']] as const) {
+      if (Array.isArray(card?.[field])) for (const item of card[field]) {
+        const box = bounds(item);
+        if (box) subjects.push({ label, box });
+      }
     }
   }
   if (situationCard && (family === materialAssemblyId || family === learnMaterialAssemblyId)) {
@@ -1396,6 +1471,12 @@ export function readNativeResolution(agent: {
       const box = bounds(card?.[field]);
       if (box) subjects.push({ label, box });
     }
+    if (Array.isArray(card?.reflections)) {
+      for (const reflection of card.reflections) {
+        const box = bounds(reflection);
+        if (box) subjects.push({ label: 'Reflected piece', box });
+      }
+    }
   }
   if (situationCard && (family === animationContactId || family === learnAnimationContactId)) {
     for (const [field, label] of [['point', 'Aim point'], ['source', card?.sourceCandidate ? 'Candidate source' : 'Observed source'],
@@ -1406,7 +1487,12 @@ export function readNativeResolution(agent: {
   }
   if (situationCard && family === windowRelationId) {
     const cell = bounds(card?.cell);
-    if (cell) subjects.push({ label: 'Cell that disagrees with the examples', box: cell });
+    const affected = Array.isArray(card?.affected) ? card.affected : null;
+    if (cell) subjects.push({ label: affected ? 'Control clicked' : 'Cell that disagrees with the examples', box: cell });
+    for (const item of affected ?? []) {
+      const box = bounds(item);
+      if (box && !cell?.every((value, i) => value === box[i])) subjects.push({ label: 'Other cell in the predicted effect', box });
+    }
     if (Array.isArray(card?.references)) for (const reference of card.references) {
       const box = bounds(reference);
       if (box) subjects.push({ label: 'Example window', box });
@@ -1476,6 +1562,12 @@ export function readNativeResolution(agent: {
     if (Array.isArray(card?.predictedNeighbors)) for (const neighbor of card.predictedNeighbors) {
       const box = bounds(neighbor);
       if (box) subjects.push({ label: 'Neighbor expected to change color', box });
+    }
+    if (Array.isArray(card?.supportPositions)) for (const position of card.supportPositions) {
+      const box = bounds(position), target = bounds(card?.target);
+      if (box && (!target || box.some((coordinate, axis) => coordinate !== target[axis]))) {
+        subjects.push({ label: 'Supporting position beside the reference', box });
+      }
     }
   }
   if (situationCard && (family === chartRouteId || family === learnChartRouteId)) {

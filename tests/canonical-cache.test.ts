@@ -1,7 +1,59 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { canonical, compareUnicode, immutableJson } from '../src/logos-engine/canonical.ts';
+import { assertUnicode, canonical, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord } from '../src/logos-engine/canonical.ts';
 import { digest } from '../src/logos-engine/canonical.ts';
+import { ShardedWeakSet } from '../src/logos-engine/sharded-weak-set.ts';
+
+test('weak identity shards still recognize live objects from every earlier generation', () => {
+  const owned = new ShardedWeakSet(2);
+  const values = Array.from({ length: 17 }, (_, index) => Object.freeze({ index }));
+  values.forEach(value => owned.add(value));
+  for (const value of [...values].reverse()) {
+    assert.equal(owned.has(value), true);
+    assert.equal(owned.has(Object.freeze({ ...value })), false);
+  }
+});
+
+test('constructed containers preserve canonical bytes, ownership and closed child identities', () => {
+  const child = immutableJson({ retained: [1, true, null, 'é𝄞'] });
+  const array = immutableJsonArray([child, 2]);
+  const record = immutableJsonRecord([['\u{10000}', array], ['\ue000', child], ['__proto__', false]]);
+  const expected = immutableJson(Object.fromEntries([['\u{10000}', [child, 2]], ['\ue000', child], ['__proto__', false]]));
+  assert.equal(canonical(record), canonical(expected));
+  assert.equal(immutableJson(record), record);
+  assert.equal(array[0], child);
+  assert.equal(record['\ue000'], child);
+  assert.ok(Object.isFrozen(array)); assert.ok(Object.isFrozen(record));
+  assert.throws(() => { (array as unknown[])[0] = null; }, TypeError);
+});
+
+test('constructed containers cannot certify foreign objects or invalid scalar children', () => {
+  for (const value of [{ mutable: true }, Object.freeze({ frozen: true }), [], undefined, Infinity, '\ud800']) {
+    assert.throws(() => immutableJsonArray([value as never]), TypeError);
+    assert.throws(() => immutableJsonRecord([['value', value as never]]), TypeError);
+  }
+  assert.throws(() => immutableJsonRecord([['\udfff', true]]), TypeError);
+  assert.throws(() => immutableJsonRecord([['same', true], ['same', false]]), /Duplicate/);
+  // Ingress still preserves finite metadata numbers; canonical hashing retains
+  // its separate portable-number restriction.
+  assert.throws(() => canonical(immutableJsonArray([0.5])), /Portable/);
+});
+
+test('Unicode validation reuse keeps exact strings and rejects malformed surrogates after cache turnover', () => {
+  const valid = 'é𝄞\u0000終';
+  const invalid = [valid + '\ud800', '\udfff' + valid, '\ud800a', '\ud800\ud800', '\udfff\udfff'];
+  for (const value of ['', 'ASCII', valid, valid.repeat(100)]) {
+    assert.doesNotThrow(() => assertUnicode(value));
+    assert.doesNotThrow(() => assertUnicode(value));
+  }
+  for (const value of invalid) assert.throws(() => assertUnicode(value), /Lone Unicode surrogate/);
+  for (let index = 0; index < 5000; index++) assertUnicode(`entry-${index}-終`);
+  for (const value of invalid) {
+    assert.throws(() => assertUnicode(value), /Lone Unicode surrogate/);
+    assert.throws(() => immutableJson({ value }), /Lone Unicode surrogate/);
+  }
+  assert.equal(canonical(valid), JSON.stringify(valid));
+});
 
 test('canonical reuse sees changed mutable descendants of shallowly frozen parents', () => {
   const member = { count: 1 }, shallow = Object.freeze({ member });

@@ -37,7 +37,13 @@ async function programProposal(observation: NativeObservation, rows: NativeRows,
   const ref = observation.observation_ref, parent = 'G_official_completion';
   const evidence: [string, ...string[]] = [ref, ...witness.evidence.filter(value => value !== ref)];
   const label = choice.contactTrial?.destination ? 'Test whether the new operator moves a neighbouring piece toward the unfamiliar tile'
-    : markedCollectionStrategies[choice.kind];
+    : choice.roundBase ? choice.kind === 'run_verified_program'
+      ? 'Compare the respondent turns and verify the return to the editing site'
+      : 'Prepare a round that reduces a respondent stack and returns to the editing site'
+    : choice.markedTerrain ? choice.kind === 'run_verified_program'
+      ? 'Run the program and compare the response to the projected route past the unfamiliar tiles'
+      : 'Prepare a program that leaves the controlled stack on measured support while the other stack approaches an unfamiliar tile'
+      : markedCollectionStrategies[choice.kind];
   const objective = { kind: 'compose_publicly_observed_operators', scope: ref.split(':revision:', 1)[0]!,
     subjects: ['ordered_program', 'controlled_piece', 'reachable_surface'], parentObjective: parent,
     satisfactionContract: 'official_progress_after_public_program_projection' };
@@ -50,9 +56,11 @@ async function programProposal(observation: NativeObservation, rows: NativeRows,
       ...(pointBinding ? { point_binding: pointBinding } : {}) }],
     binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     sicSituationCard: { strategy: choice.kind, need: 'Reach the remaining pieces with the observed program operators',
-      mode: choice.kind === 'bind_program_bearer' ? 'assimilation' : choice.respondentProbe || choice.contactTrial ? 'exploration' : 'solving',
+      mode: choice.kind === 'bind_program_bearer' ? 'assimilation'
+        : choice.respondentProbe || choice.contactTrial || choice.markedTerrain ? 'exploration' : 'solving',
       situation: label, agenda: [], evidence,
       members: choice.sceneMembers, addressedRegion: choice.region, actor: choice.actor, affected: choice.affected,
+      ...(choice.markedTerrain ? { markedTerrain: choice.markedTerrain, terrainEffect: 'unverified' } : {}),
       ...(choice.contactTrial?.destination ? { contactDestination: choice.contactTrial.destination } : {}) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
     compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${parent}`] }],
@@ -153,12 +161,13 @@ export function createSicMarkedCollection(): NativeFamily<Proposal> {
       if (proposal.followUp && local.program) {
         const choice = proposal.followUp, matched = verifyObservedProgram(choice, local.program, second);
         const retained = matched && (local.program.continued || choice.kind === 'run_verified_program')
-          ? { word: choice.word, display: choice.display } : undefined;
+          ? { word: choice.word, display: choice.display, ...(choice.roundBase ? { roundBase: choice.roundBase } : {}) } : undefined;
         const respondents = matched && choice.respondentProbe
           ? learnRespondentContext(choice, local.program, first, second, frames, after.observation_ref) : null;
         state = { ...local, count: local.count + 1, stopped: !matched || !!choice.respondentProbe && !respondents,
           ...(retained ? { retained } : {}), ...(choice.scheduled ? { scheduled: choice.scheduled } : {}),
           ...(respondents ? { respondents, program: { ...local.program, evidence: [...local.program.evidence, ...respondents.evidence] } } : {}) };
+        if (choice.roundBase && !choice.scheduled?.length) delete state.scheduled;
         return { events: [] };
       }
       const confirmed = proposal.expected !== null && matchesCollectionEdit(second, proposal.expected);

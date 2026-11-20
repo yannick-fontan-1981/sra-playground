@@ -1,0 +1,843 @@
+{
+  "spec": {
+    "id": "ss08-08",
+    "title": "Le rectangle impossible",
+    "rows": [
+      "####################",
+      "#######.g..#########",
+      "#######.o.g#########",
+      "#######~~###########",
+      "####.~~~~~~~~.######",
+      "####......###~######",
+      "####.########~######",
+      "####.########~######",
+      "####W########~######",
+      "####.########~######",
+      "####.########.######",
+      "####.########~######",
+      "####.~~~~~~~~.######",
+      "#############o#....#",
+      "#############.#....#",
+      "#############.#....#",
+      "#############.~.oM.#",
+      "####################",
+      "####################"
+    ],
+    "facing": "W",
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 4
+        },
+        "facing": "SE"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 4
+        },
+        "facing": "SW"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 12
+        },
+        "facing": "NW"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 12
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "rupture",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "color": 7
+      },
+      {
+        "id": "retour",
+        "buttons": [
+          {
+            "x": 9,
+            "y": 1
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 13,
+          "y": 13
+        },
+        "circuit": "rupture",
+        "direction": "N",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 7,
+          "y": 4
+        },
+        "circuit": "retour",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 3
+        },
+        "circuit": "retour",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "LLLLUUUUDDDDCUUURRRRURUCUUUUUUXUURRRCL",
+  "actions": [
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 6
+      }
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "puzzle": 34,
+    "label": "Adaptation de Heroes and Mirrors 34 · défaire un rectangle de miroirs qui enferme la visée du Magicien.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-34",
+    "piston": true,
+    "platform": true,
+    "objective": "Briser la boucle par le bon coin, recycler la caisse poussée et préparer le retour du Marchand."
+  },
+  "metrics": {
+    "actions": 38,
+    "selections": 3,
+    "merchantPushes": 3,
+    "wizardSwaps": 1,
+    "bentSwaps": 0,
+    "heroSwaps": 0,
+    "chainPushes": 0,
+    "stoneMoves": 5,
+    "mirrorMoves": 1,
+    "reflections": 1,
+    "heroReflections": 1,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand construit le premier pont et atteint le bouton rose",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": true,
+        "retour": false
+      }
+    },
+    {
+      "label": "La presse pousse la file caisse–miroir : le miroir inférieur droit tombe dans l’eau et la boucle se brise",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": true,
+        "retour": false
+      }
+    },
+    {
+      "label": "Recycler la caisse éjectée pour construire le second appui",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": false,
+        "retour": false
+      }
+    },
+    {
+      "label": "Refermer la presse protège la visée du Magicien",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": true,
+        "retour": false
+      }
+    },
+    {
+      "label": "Le Magicien libéré gagne la branche puis échange avec la caisse de l’îlot du haut",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": true,
+        "retour": false
+      }
+    },
+    {
+      "label": "Le bouton vert prépare une arrivée et un passage au-dessus de l’eau",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": true,
+        "retour": true
+      }
+    },
+    {
+      "label": "Le miroir supérieur droit transporte le Marchand sur la plateforme verte",
+      "turn": 31,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": false,
+        "retour": true
+      }
+    },
+    {
+      "label": "Le Marchand sort de la passerelle temporaire",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": false,
+        "retour": true
+      }
+    },
+    {
+      "label": "Les deux personnages rejoignent les destinations, sans maintenir la passerelle",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 16
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 4
+          },
+          "facing": "SE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 4
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 4,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rupture": false,
+        "retour": false
+      }
+    }
+  ],
+  "adaptation": "Le rectangle de quatre miroirs et la nécessité de briser le coin inférieur droit reprennent Heroes and Mirrors 34. Dans SS08, le Marchand construit un accès à une presse latérale, qui pousse une file caisse–miroir ; la caisse fournit ensuite le second appui. Le Magicien active une passerelle après un échange vers l’îlot supérieur. Géométrie adaptée au duo, sans échange direct avec les miroirs et sans empilement."
+}

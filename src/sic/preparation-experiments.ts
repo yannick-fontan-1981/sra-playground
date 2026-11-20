@@ -1,3 +1,4 @@
+import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
 import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
@@ -215,6 +216,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  returnHistory?: ReturnHistory;
   activations?:ActivationReceipt[];
   territory?:TerritorialMemory;
   previewLearning?:PreviewLearning;
@@ -890,7 +892,8 @@ export function recordExperiment(
   updatePlacement(m, b, a, op, x);
   m.revisionScene[b.revision] = s;
   m.revisionScene[a.revision] = t;
-  if (t !== s && m.seenAt[t] !== undefined) m.recurrences++;
+  const returned = t !== s && m.seenAt[t] !== undefined;
+  if (returned) m.recurrences++;
   m.seenAt[s] = m.turns;
   m.seenAt[t] = m.turns;
   const mark = changedMark(b, a, rows);
@@ -919,6 +922,8 @@ export function recordExperiment(
   for (const e of b.entities) if (!e.identity_ambiguous) tracked.add(e.signature);
   const anchors = witnessAnchors(b, rows, new Set([...tracked, ...marks]), marks);
   let index = m.edges.findIndex((e) => e.s === s && e.cmd === op);
+  const repeated = t !== s && index >= 0 && m.edges[index]!.stable && m.edges[index]!.t === t;
+  recordReturn(m.returnHistory ??= { repeatedChanges: 0, recent: [] }, repeated, returned);
   if (index < 0) {
     frontier.lastEdge=m.turns;
     index = m.edges.length;

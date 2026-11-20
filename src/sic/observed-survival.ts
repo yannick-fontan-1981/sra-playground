@@ -3,6 +3,7 @@ import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativePro
 import { sicNeedId } from './need-identity.ts';
 
 export const observedSurvivalId = 'sic_preserve_room_to_survive';
+export const learnCorridorAdvanceId = 'sic_learn_corridor_advance';
 
 const moves = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION3', -1, 0], ['ACTION4', 1, 0]] as const;
 const key = ([x, y]: NativePoint) => `${x},${y}`;
@@ -15,7 +16,9 @@ type Horizon = { row: number; start: number; spacing: number; pending: number; c
 type Context = { epoch: number; arena: Arena; horizon: Horizon | null; rounds: number; wins: number; refs: string[] };
 type Scene = { actor: NativePoint; rivals: NativePoint[]; open: Set<string> };
 type Move = { action: typeof moves[number][0]; to: NativePoint };
-type Proposal = NativeProposal & { move: Move; needId: string; turns: number };
+type CorridorStep = { actor: NativePoint; rival: NativePoint; to: NativePoint; rivalNext: NativePoint };
+type Proposal = NativeProposal & { move: Move; needId: string; turns: number;
+  corridor?: { arena: Arena; steps: CorridorStep[] } };
 type Part = ReturnType<typeof geometricComponents>[number];
 
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -122,8 +125,27 @@ function box({ bounds: [l, t], pitch }: Arena, [x, y]: NativePoint): NativeBox {
   return [l + x * pitch, t + y * pitch, l + (x + 1) * pitch - 1, t + (y + 1) * pitch - 1];
 }
 
-export function createSicObservedSurvival(): NativeFamily<Proposal> {
+function corridorSteps(prior: Scene, current: Scene, [, dx, dy]: typeof moves[number]): CorridorStep[] {
+  if (prior.rivals.length !== 1 || current.rivals.length !== 1) return [];
+  const advance = ([x, y]: NativePoint): NativePoint => [x + dx, y + dy];
+  const retreat = ([x, y]: NativePoint): NativePoint => [x - dx, y - dy];
+  let actor = current.actor, rival = current.rivals[0]!;
+  if (!same(advance(prior.actor), actor) || !same(retreat(prior.rivals[0]!), rival)) return [];
+  const steps: CorridorStep[] = [];
+  while (steps.length < 2) {
+    const to = advance(actor), rivalNext = retreat(rival);
+    if (!current.open.has(key(to)) || !current.open.has(key(rivalNext)) || distance(to, rivalNext) < 2
+      || distance(to, rivalNext) !== distance(actor, rival) - 2) break;
+    steps.push({ actor, rival, to, rivalNext });
+    actor = to;
+    rival = rivalNext;
+  }
+  return steps;
+}
+
+export function createSicObservedSurvival(family = observedSurvivalId): NativeFamily<Proposal> {
   let context: Context | null = null;
+  let animatedApproach: string | null = null;
   function observe(before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows) {
     const current = context?.epoch === before.level_epoch ? context : null;
     if (after.levels_completed > before.levels_completed) {
@@ -146,13 +168,59 @@ export function createSicObservedSurvival(): NativeFamily<Proposal> {
       refs: [...(current?.refs ?? [before.observation_ref]).slice(-4), after.observation_ref] };
   }
   return {
-    id: observedSurvivalId,
+    id: family,
     observePublicOutcome(before, after, command, first, second, frames = []) {
       if (frames.length < 4 || before.available_action_refs.includes('ACTION6') || !moves.some(([input]) => input === command.action_ref)) return;
+      if (family === learnCorridorAdvanceId) {
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return;
+        const arena = measureArena(first), prior = arena && readRoom(first, arena), current = arena && readRoom(second, arena);
+        const direction = moves.find(([input]) => input === command.action_ref)!;
+        if (arena && prior && current && corridorSteps(prior, current, direction).length === 2
+          && frames.some(rows => {
+            const intermediate = readRoom(rows, arena);
+            if (!intermediate || intermediate.rivals.length !== 1) return false;
+            return same(intermediate.actor, current.actor) && same(intermediate.rivals[0]!, prior.rivals[0]!);
+          })) animatedApproach = after.observation_ref;
+        return;
+      }
       observe(before, after, first, second);
     },
-    propose(observation, rows, inputs, remaining) {
-      if (!context || context.epoch !== observation.level_epoch || context.wins < 2 || !context.horizon || remaining < 1) return null;
+    propose(observation, rows, inputs, remaining, execution) {
+      if (remaining < 1) return null;
+      if (!context || context.epoch !== observation.level_epoch || context.wins < 2 || !context.horizon) {
+        if (remaining < 2 || observation.available_action_refs.includes('ACTION6')) return null;
+        if (family === learnCorridorAdvanceId && animatedApproach !== observation.observation_ref) return null;
+        const receipt = execution?.readPriorDirectionalScene?.(first => {
+          const arena = measureArena(first), scene = arena && readRoom(first, arena);
+          return arena && scene ? { arena, scene } : null;
+        });
+        if (!receipt || receipt.afterRef !== observation.observation_ref) return null;
+        const { arena, scene: prior } = receipt.scene, scene = readRoom(rows, arena);
+        const direction = moves.find(([input]) => input === receipt.command);
+        const action = inputs.find(input => input.action_ref === receipt.command);
+        if (!direction || !action || !scene) return null;
+        const steps = corridorSteps(prior, scene, direction);
+        if (steps.length !== 2) return null;
+        const ref = observation.observation_ref, parent = 'G_official_completion';
+        const evidence: [string, string] = [ref, receipt.beforeRef];
+        const objective = { kind: 'maintain_separation_in_visible_corridor', scope: ref.split(':revision:', 1)[0]!,
+          subjects: ['moving_body', 'opposing_body'], parentObjective: parent, satisfactionContract: 'both_landings_keep_an_open_gap' };
+        const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+        const id = `survival:${need.id}`, reason = 'Advance while the two measured trajectories stay separated by an open cell';
+        const actions = steps.map(() => action);
+        return { status: 'proposed', kind: family, actions, corridor: { arena, steps },
+          move: { action: direction[0], to: steps[0]!.to }, needId: need.id, turns: steps.length,
+          binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+          steps: steps.map(step => ({ action, expected_after: { actor: step.to, rival: step.rivalNext } })),
+          sicSituationCard: { strategy: 'P07', mode: 'solving', need: 'Keep enough space to react on the next turn',
+            situation: reason, evidence, agenda: [], controlledPiece: box(arena, scene.actor),
+            addressedRegion: box(arena, steps.at(-1)!.to), nearestRival: box(arena, scene.rivals[0]!) },
+          question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+          compositions: [{ id, observed: false, open_question: reason, relations: [`contributes_to:${parent}`] }],
+          sicLocalDecision: { strategy: 'P07', objective: { id, label: reason, parent }, need },
+          bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: reason,
+            preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+      }
       const { arena, refs, horizon } = context, scene = readRoom(rows, arena), turns = roundsLeft(rows, horizon);
       if (!scene || turns === null || turns < 1) return null;
       const move = survivalMove(scene, turns), action = inputs.find(input => input.action_ref === move?.action);
@@ -177,13 +245,25 @@ export function createSicObservedSurvival(): NativeFamily<Proposal> {
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: reason,
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
-    before(proposal, index, _packet, observation) {
-      const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
+    before(proposal, index, packet, observation) {
+      const step = proposal.corridor?.steps[index];
+      const scene = step && proposal.corridor && readRoom(packet.frame_rows, proposal.corridor.arena);
+      const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
+        : !!step && !!scene && scene.rivals.length === 1 && same(scene.actor, step.actor)
+          && same(scene.rivals[0]!, step.rival) && scene.open.has(key(step.to)) && scene.open.has(key(step.rivalNext))
+          && proposal.binding?.level_epoch === observation.level_epoch;
       return { admitted, reason: admitted ? 'survival_room_bound' : 'survival_room_changed' };
     },
-    after(proposal, _index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      const corridor = proposal.corridor, step = corridor?.steps[index];
+      if (corridor && step) {
+        const scene = readRoom(second, corridor.arena);
+        const matched = !!scene && scene.rivals.length === 1 && same(scene.actor, step.to) && same(scene.rivals[0]!, step.rivalNext);
+        return { matched, seal_prefix: !matched || index + 1 === corridor.steps.length,
+          reason: matched ? 'both_corridor_landings_confirmed' : 'corridor_projection_changed' };
+      }
       const scene = context && readRoom(second, context.arena);
       const matched = !!scene && same(scene.actor, proposal.move.to) && !!context?.horizon
         && roundsLeft(second, context.horizon) === proposal.turns - 1;
@@ -193,7 +273,10 @@ export function createSicObservedSurvival(): NativeFamily<Proposal> {
       observe(before, after, first, second);
       return { events: [] };
     },
-    state: () => ({ context }),
-    restore(value: NativeRecord) { context = structuredClone((value.context as Context | null | undefined) ?? null); },
+    state: () => ({ context, ...(family === learnCorridorAdvanceId ? { animatedApproach } : {}) }),
+    restore(value: NativeRecord) {
+      context = structuredClone((value.context as Context | null | undefined) ?? null);
+      animatedApproach = (value.animatedApproach as string | null | undefined) ?? null;
+    },
   };
 }

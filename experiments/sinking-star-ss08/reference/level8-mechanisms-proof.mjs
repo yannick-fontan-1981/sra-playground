@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import assert from 'node:assert/strict';
+import {compileLevel,initialState,stepDetailed,traceSwap} from '../dist/core.js';
+import {replay} from '../scripts/solver.mjs';
+const d=JSON.parse(readFileSync(new URL('./level8-design.json',import.meta.url)));const w=compileLevel(d.spec),s=initialState(w),selected={...s,active:1};
+assert.equal(traceSwap(w,selected,'N').loop,true);assert.equal(traceSwap(w,selected,'S').loop,true);
+assert.ok([1,2,3,4,5].every(id=>stepDetailed(w,selected,id).state.failed));
+const r=replay(d.spec,d.commands);const breakStep=r.trace.find(t=>t.after.mirrors.length<t.before.mirrors.length);assert.ok(breakStep);assert.equal(breakStep.before.mirrors.length,4);assert.equal(breakStep.after.mirrors.length,3);assert.ok(breakStep.phases.some(p=>p.kind==='piston'&&p.moves.some(m=>m.actor==='mirror')&&p.moves.some(m=>m.actor==='stone')));
+assert.equal(r.metrics.platformsCreated,2);assert.equal(r.metrics.wizardSwaps,1);assert.ok(r.state.complete);assert.ok(r.state.platformActive.every(x=>!x));
+const report={level:8,mapSha256:createHash('sha256').update(JSON.stringify(d.spec)).digest('hex'),checks:{wizardInitiallyCannotAct:true,northAndSouthAreClosedRayLoops:true,pressMovesCrateAndMirrorInSameFile:true,exactlyOneMirrorDestroyed:true,twoPermanentSupportsBuilt:true,wizardExchangesToUpperIsle:true,hydraulicPlatformsRetractedAfterArrival:true},structuralReasoning:['Le Magicien commence sur le bord d’un rectangle fermé : sa visée nord et sud revient sur lui ; les cases latérales sont bloquées. Le reflet géométrique est conflictuel car deux miroirs choisissent le même héros.','Le premier bouton est séparé du Marchand par une case d’eau ; la caisse de départ fournit l’appui pour l’atteindre.','La presse pousse une caisse et le miroir inférieur droit dans la même file. Le miroir coule ; la caisse restante fournit le deuxième appui après une poussée du Marchand.','La caisse de l’îlot supérieur est hors des destinations géométriques des miroirs fixes. Le Magicien la vise depuis la branche pour accéder au bouton de la passerelle.'],limitations:['Les assertions confirment le mécanisme initial et le parcours de résolution ; elles ne certifient pas l’unicité ni l’optimalité de la solution.']};
+writeFileSync(new URL('./level8-mechanisms.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report.checks));

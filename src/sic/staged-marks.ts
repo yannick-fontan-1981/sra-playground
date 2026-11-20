@@ -37,7 +37,7 @@ function outline(part: Part) {
     && part.mask.every(([x, y]) => x === 0 || y === 0 || x === w - 1 || y === h - 1);
 }
 
-function measure(parts: Part[], rows: NativeRows): Model | null {
+export function measureStagedMarks(parts: Part[], rows: NativeRows): Model | null {
   const previews = parts.filter(outline);
   if (previews.length !== 1) return null;
   const [preview] = previews, h = height(preview!.bbox);
@@ -56,7 +56,7 @@ function measure(parts: Part[], rows: NativeRows): Model | null {
   return refs.length === 1 ? { reference: refs[0]!, donors: edge, outlineHeight: h } : null;
 }
 
-function read(parts: Part[], model: Model): Scene | null {
+export function readStagedMarks(parts: Part[], model: Model): Scene | null {
   const previews = parts.filter(p => height(p.bbox) === model.outlineHeight && outline(p));
   if (previews.length !== 1) return null;
   const marks = parts.filter(p => p.rectangular && height(p.bbox) === height(model.donors[0]!.mark)
@@ -71,7 +71,7 @@ function read(parts: Part[], model: Model): Scene | null {
   return { preview: previews[0]!.bbox, layers };
 }
 
-function choose({ preview, layers }: Scene, local: State): Choice | null {
+export function chooseStagedMarkStep({ preview, layers }: Scene, local: Pick<State, 'model' | 'resizeRef' | 'rejected'>): Choice | null {
   const { model: { reference, donors }, resizeRef, rejected } = local;
   const contributors = donors.map(d => layers.find(layer => coversX(layer.box, d.mark) && layer.box[1] > d.box[3] && layer.marks.length === 1));
   const missing = donors.filter((_d, i) => !contributors[i]);
@@ -92,6 +92,28 @@ function choose({ preview, layers }: Scene, local: State): Choice | null {
   }
   if (rejected.includes(preview.join(','))) return null;
   return { ...confirm(reference.box, 'Advance the combined marks toward the reference'), prepared: true };
+}
+
+type MarkEffects = Pick<State, 'depositRef' | 'alignRef' | 'validPaint' | 'resizePixels'>;
+export function measureMarkEffects({ scene, choice, local }: Parameters<typeof checkStagedMarkStep>[0],
+  first: NativeRows, second: NativeRows, ref: string, confirmed: string | null): MarkEffects {
+  const resized = choice.input === 'ACTION2' && confirmed ? readStagedMarks(geometricComponents(second), local.model) : null;
+  return {
+    ...(confirmed === 'new_marked_layer_observed'
+      ? { depositRef: ref, validPaint: first[scene.preview[1]]![scene.preview[0]]! } : {}),
+    ...(confirmed === 'preview_alignment_observed' ? { alignRef: ref } : {}),
+    ...(resized ? { resizePixels: width(scene.preview) - width(resized.preview) } : {}),
+  };
+}
+
+export function retainSpanMeasurements({ model, resizePixels, validPaint, depositRef, alignRef }: { model: Model } & MarkEffects,
+  beforeRef: string, after: { levels_completed: number; observation_ref: string }): SpanMemory | null {
+  if (!resizePixels || validPaint === undefined || !depositRef || !alignRef) return null;
+  const pitch = height(model.reference.box), resize = resizePixels / pitch;
+  return Number.isInteger(resize) && resize > 0 ? {
+    pitch, resize, beamHeight: model.outlineHeight, targetPaint: model.reference.color, barPaint: model.donors[0]!.color, validPaint,
+    completed: after.levels_completed, refs: [depositRef, alignRef, beforeRef, after.observation_ref],
+  } : null;
 }
 
 function containsSignatures(layer: Layer, signatures: ReadonlySet<number>): boolean {
@@ -160,9 +182,10 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
       if (remaining < 1 || !['ACTION5','ACTION6','ACTION2'].every(id => observation.available_action_refs.includes(id))) return null;
       const parts = geometricComponents(rows);
       if (learned?.completed === observation.levels_completed) {
-        const pose = readSpanPose(parts, learned.pitch, learned.beamHeight, learned.validPaint);
+        const prior = planning?.epoch === observation.level_epoch ? planning : null;
+        const pose = readSpanPose(parts, learned.pitch, learned.beamHeight, learned.validPaint,
+          prior ? { rows, slots: prior.layout.slots } : undefined);
         if (pose) {
-          const prior = planning?.epoch === observation.level_epoch ? planning : null;
           const layout = prior?.layout ?? measureSpan(rows, parts, learned, pose);
           const centered = prior?.plan ?? (layout && planSpan(layout, pose));
           const plan = centered ?? (layout && learned.confirmedSpan && planSpan(layout, pose, true));
@@ -175,12 +198,12 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
         }
       }
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const model = prior?.model ?? measure(parts, rows);
+      const model = prior?.model ?? measureStagedMarks(parts, rows);
       if (!model) return null;
       const local = prior ?? { epoch: observation.level_epoch, model, refs: [], resizeRef: null, rejected: [] };
-      const scene = read(parts, model);
+      const scene = readStagedMarks(parts, model);
       if (!scene) return null;
-      const choice = choose(scene, local);
+      const choice = chooseStagedMarkStep(scene, local);
       if (!choice) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, ...(local.depositRef ? [local.depositRef] : [])].filter(v => v !== ref))];
@@ -223,7 +246,7 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const reason = isSpan(proposal) ? assessSpanStep(proposal.span.layout, proposal.step, proposal.pose, first, second) : check(proposal, second);
+      const reason = isSpan(proposal) ? assessSpanStep(proposal.span.layout, proposal.step, proposal.pose, first, second) : checkStagedMarkStep(proposal, second);
       return { matched: !!reason, seal_prefix: true, reason: reason ?? 'stage_effect_not_confirmed' };
     },
     record(before, after, _action, first, second, proposal) {
@@ -241,21 +264,14 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
         return { events: [] };
       }
       const { local, choice, scene } = proposal;
-      if (after.levels_completed > before.levels_completed && local.resizePixels && local.validPaint !== undefined && local.depositRef && local.alignRef) {
-        const pitch = height(local.model.reference.box), resize = local.resizePixels / pitch;
-        if (Number.isInteger(resize) && resize > 0) learned = { pitch, resize, beamHeight: local.model.outlineHeight,
-          targetPaint: local.model.reference.color, barPaint: local.model.donors[0]!.color, validPaint: local.validPaint,
-          completed: after.levels_completed, refs: [local.depositRef, local.alignRef, before.observation_ref, after.observation_ref] };
+      if (after.levels_completed > before.levels_completed) {
+        learned = retainSpanMeasurements(local, before.observation_ref, after) ?? learned;
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const confirmed = check(proposal, second);
-      const resized = choice.input === 'ACTION2' && confirmed ? read(geometricComponents(second), local.model) : null;
+      const confirmed = checkStagedMarkStep(proposal, second);
       state = { ...local,
         refs: confirmed ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
-        ...(confirmed === 'new_marked_layer_observed'
-          ? { depositRef: after.observation_ref, validPaint: first[scene.preview[1]]![scene.preview[0]]! } : {}),
-        ...(confirmed === 'preview_alignment_observed' ? { alignRef: after.observation_ref } : {}),
-        ...(resized ? { resizePixels: width(scene.preview) - width(resized.preview) } : {}),
+        ...measureMarkEffects(proposal, first, second, after.observation_ref, confirmed),
         resizeRef: choice.input === 'ACTION2' && confirmed ? after.observation_ref : local.resizeRef,
         rejected: confirmed ? local.rejected : [...local.rejected, scene.preview.join(',')] };
       return { events: [] };
@@ -269,8 +285,8 @@ export function createSicVerifyCombinedMarks(): NativeFamily<Proposal> {
   };
 }
 
-function check({ local, scene: before, choice }: MarksProposal, rows: NativeRows): string | null {
-  const after = read(geometricComponents(rows), local.model);
+export function checkStagedMarkStep({ local, scene: before, choice }: { scene: Scene; choice: Choice; local: Pick<State, 'model'> }, rows: NativeRows): string | null {
+  const after = readStagedMarks(geometricComponents(rows), local.model);
   if (!after) return null;
   if (choice.click) return !same(before.preview, after.preview) && coversX(after.preview, choice.target) ? 'preview_alignment_observed' : null;
   if (choice.input === 'ACTION2') {

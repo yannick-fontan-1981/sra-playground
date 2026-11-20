@@ -25,12 +25,35 @@ function outline(part: Part) {
   return part.area === 2 * (w + h - 2) && part.mask.every(([x, y]) => x === 0 || x === w - 1 || y === 0 || y === h - 1);
 }
 
-export function readSpanPose(parts: Part[], pitch: number, beamHeight: number, validPaint: number): SpanPose | null {
+function borderColor(rows: NativeRows, [left, top, right, bottom]: NativeBox) {
+  const color = rows[top]?.[left];
+  if (color === undefined) return undefined;
+  for (let x = left; x <= right; x++) if (rows[top]?.[x] !== color || rows[bottom]?.[x] !== color) return undefined;
+  for (let y = top + 1; y < bottom; y++) if (rows[y]?.[left] !== color || rows[y]?.[right] !== color) return undefined;
+  return color;
+}
+
+export function readSpanPose(parts: Part[], pitch: number, beamHeight: number, validPaint: number,
+  fallback?: { rows: NativeRows; slots: readonly Slot[] }): SpanPose | null {
   const options = parts.filter(part => height(part.bbox) === beamHeight && width(part.bbox) >= beamHeight && aligned(part.bbox, pitch) && outline(part));
-  if (options.length !== 1) return null;
-  const { bbox, color } = options[0]!;
-  const { x, y, w } = fromPixels(bbox, pitch);
-  return { box: bbox, x, y, w, valid: color === validPaint };
+  if (options.length === 1) {
+    const { bbox, color } = options[0]!;
+    const { x, y, w } = fromPixels(bbox, pitch);
+    return { box: bbox, x, y, w, valid: color === validPaint };
+  }
+  if (!fallback) return null;
+  const { rows, slots } = fallback, selected = slots.filter(slot => borderColor(rows, slot.box) === validPaint);
+  if (selected.length !== 1) return null;
+  // The invalid preview can touch a fixed bar of the same ink. Its border is still drawn last.
+  const w = selected[0]!.width, pixels = w * pitch, firstSlot = slots[0]!.box[1], poses: SpanPose[] = [];
+  for (let t = 0; t + beamHeight <= firstSlot; t += pitch) for (let l = 0; l + pixels <= rows[0]!.length; l += pitch) {
+    const box: NativeBox = [l, t, l + pixels - 1, t + beamHeight - 1];
+    const color = borderColor(rows, box);
+    if (color === undefined) continue;
+    const interior = rows.slice(t + 1, box[3]).flatMap(row => row.slice(l + 1, box[2]));
+    if (interior.every(ink => ink !== color)) poses.push({ box, x: l / pitch, y: t / pitch, w, valid: color === validPaint });
+  }
+  return poses.length === 1 ? poses[0]! : null;
 }
 
 export function spanStock(rows: NativeRows, slot: Slot): number {
@@ -50,9 +73,10 @@ export function measureSpan(rows: NativeRows, parts: Part[], memory: SpanMemory,
   const bars = parts.filter(part => part.color === barPaint && height(part.bbox) === pitch && part.bbox[3] < pose.box[1] && aligned(part.bbox, pitch))
     .map(part => fromPixels(part.bbox, pitch));
   if (bars.length < 2) return null;
-  const plates = parts.filter(part => part.color === targetPaint && height(part.bbox) === pitch / 2 && width(part.bbox) >= pitch
+  const plates = parts.filter(part => part.color === targetPaint && height(part.bbox) === pitch / 2
     && part.bbox[1] % pitch === 0 && (part.bbox[2] + 1) % pitch === 0);
-  const edge = plates.filter(part => part.bbox[0] === 0 || part.bbox[2] === rows[0]!.length - 1).sort((a, b) => a.bbox[0] - b.bbox[0]);
+  const edge = plates.filter(part => width(part.bbox) >= pitch
+    && (part.bbox[0] === 0 || part.bbox[2] === rows[0]!.length - 1)).sort((a, b) => a.bbox[0] - b.bbox[0]);
   if (edge.length !== 2 || edge[0]!.bbox[1] !== edge[1]!.bbox[1] || pose.box[3] >= edge[0]!.bbox[1]) return null;
   const platform = (part: Part, left = part.bbox[0]) => fromPixels([left, part.bbox[1], part.bbox[2], part.bbox[1] + pitch - 1], pitch);
   const bases: [Rect, Rect] = [platform(edge[0]!), platform(edge[1]!)];
@@ -71,6 +95,9 @@ export function measureSpan(rows: NativeRows, parts: Part[], memory: SpanMemory,
   if (frames.length < 2 || frames.length > 4 || selected < 0 || frames.filter(part => part.color === validPaint).length !== 1
     || frames.some((part, i) => width(part.bbox) !== width(frames[0]!.bbox) || part.bbox[1] !== frames[0]!.bbox[1]
       || i > 0 && part.bbox[0] - frames[i - 1]!.bbox[2] !== 2)) return null;
+  const separators = new Set(frames.slice(0, -1).flatMap(({ bbox: [, t, r, b] }) =>
+    rows.slice(t + 1, b).map(row => row[r + 1]!)));
+  const panelBacking = separators.size === 1 ? [...separators][0] : undefined;
   const slots: Slot[] = frames.map(({ bbox }, i) => {
     const colors = new Map<number, number>();
     for (let y = bbox[1] + 1; y < bbox[3]; y++) for (let x = bbox[0] + 1; x < bbox[2]; x++) {
@@ -78,7 +105,7 @@ export function measureSpan(rows: NativeRows, parts: Part[], memory: SpanMemory,
       colors.set(color, (colors.get(color) ?? 0) + 1);
     }
     const ranks = [...colors].sort((a, b) => b[1] - a[1]);
-    return { box: bbox, width: pose.w + (i - selected) * memory.resize, backing: ranks[0]![0] };
+    return { box: bbox, width: pose.w + (i - selected) * memory.resize, backing: panelBacking ?? ranks[0]![0] };
   });
   const stock = slots.map(slot => spanStock(rows, slot));
   if (slots[0]!.width < h || slots.at(-1)!.width > boardWidth || stock.some(value => value <= 0)) return null;
@@ -240,7 +267,8 @@ export function nextSpanStep(layout: SpanLayout, pose: SpanPose, beam: Beam, cli
 }
 
 export function assessSpanStep(layout: SpanLayout, step: SpanStep, pose: SpanPose, before: NativeRows, after: NativeRows): string | null {
-  const current = readSpanPose(geometricComponents(after), layout.pitch, layout.h * layout.pitch, layout.validPaint);
+  const current = readSpanPose(geometricComponents(after), layout.pitch, layout.h * layout.pitch, layout.validPaint,
+    { rows: after, slots: layout.slots });
   if (!current) return null;
   const consumed = layout.slots.map(slot => spanStock(before, slot) - spanStock(after, slot));
   if (step.kind === 'place') {

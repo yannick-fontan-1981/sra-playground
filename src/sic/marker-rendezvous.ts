@@ -1,6 +1,6 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { markerDirections, readCounter, readPreparationBlocks } from './observed-marker-field.ts';
+import { findMarkerCycle, markerDirections, readCounter, readPreparationBlocks } from './observed-marker-field.ts';
 
 type Scene = { sites: string[]; pitch: number; actorColor: number; groundColor: number; markerColor: number; tag: number; size: number;
   fixed: NativePoint[]; counter: NativeBox[]; preparation: NativeBox[] };
@@ -102,17 +102,6 @@ function read(field: RendezvousField, rows: NativeRows): Readout | null {
     prepared: different(field.initialPreparation, measureBlocks(scene.preparation, rows)) };
 }
 
-function findCycle(history: NativePoint[]): Cycle | null {
-  for (let period = 2; period <= 12 && history.length >= 2 * period; period++) {
-    const positions = history.slice(-period);
-    const earlier = history.slice(-2 * period, -period);
-    if (new Set(positions.map(key)).size >= 2 && positions.every((value, i) => same(value, earlier[i]!))) {
-      return { positions, phase: period - 1 };
-    }
-  }
-  return null;
-}
-
 type Travel = { command: NativeCommand; landing: NativePoint | null };
 function reach(field: RendezvousField, inputs: readonly NativeCommand[], timed: boolean) {
   const cycle = timed ? field.cycle : null, period = cycle?.positions.length ?? 1;
@@ -177,7 +166,7 @@ export function retainRendezvous(field: RendezvousField, step: RendezvousStep, r
   const history = observed.moving ? [...field.history.slice(-23), observed.moving] : field.history;
   const old = field.cycle, next = old ? (old.phase + 1) % old.positions.length : 0;
   const cycle = old && observed.moving && same(observed.moving, old.positions[next]!)
-    ? { ...old, phase: next } : findCycle(history);
+    ? { ...old, phase: next } : findMarkerCycle(history);
   return { ...field, at: observed.at, history, cycle, counter: observed.counter, count: field.count + 1,
     fixedTested: step.kind === 'fixed' && (kind === 'tested' || kind === 'acquired') ? [...field.fixedTested, key(step.target)] : field.fixedTested,
     ...(step.kind === 'mobile' && kind === 'acquired' ? { mobileAcquired: true } : {}),

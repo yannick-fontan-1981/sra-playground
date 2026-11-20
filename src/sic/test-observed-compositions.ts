@@ -151,6 +151,9 @@ export function createCompositionTrials(): NativeFamily<Offer> {
   return {
     id: compositionFamily,
     propose: () => null,
+    proposeInSubquestion(_group, entry, observation, rows, inputs, remaining, execution) {
+      return this.proposeInGroup!(entry, observation, rows, inputs, remaining, execution);
+    },
     async proposeInGroup(group, observation, rows, inputs, remaining) {
       if (state.epoch !== observation.level_epoch || !state.history.length || remaining < 1) return null;
       const history = state.history;

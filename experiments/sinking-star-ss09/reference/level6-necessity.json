@@ -1,0 +1,24 @@
+{
+  "mapSha256": "5edf688d374210973018c56041cf9d6ab542786508cd9cd8373f355ea92dc00c",
+  "protocol": "BFS over full logical states, 60000-state/2500-ms caps; limit is inconclusive",
+  "ablations": {
+    "disableMerchantPushes": {
+      "status": "unsolvable",
+      "states": 2712,
+      "expanded": 2712,
+      "ms": 63
+    },
+    "disableBardSong": {
+      "status": "limit",
+      "states": 60000,
+      "expanded": 49703,
+      "ms": 901
+    },
+    "disableSupportMotion": {
+      "status": "limit",
+      "states": 60000,
+      "expanded": 49091,
+      "ms": 617
+    }
+  }
+}

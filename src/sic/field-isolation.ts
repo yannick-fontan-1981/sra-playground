@@ -26,6 +26,7 @@ export const fieldIsolationStrategies = {
   activate_verified_relay: 'Open the access to the previously verified relay',
   enable_pending_receiver: 'Open access to a receiver with visible room',
   protect_saturated_receiver: 'Isolate the filled receiver before delivering again',
+  close_possible_loss: 'Close the branch leading to the grate and check that the contents are preserved',
   deliver_observed_supply: 'Deliver from the measured supply to the open fields',
   charge_storage: 'Add supply and check where it accumulates',
   test_release: 'Test whether the full chamber releases to the prepared receivers',
@@ -87,7 +88,7 @@ async function supplyProposal(
   if (!choice) return null;
   const strategies = { open_relay: 'activate_verified_relay', open_receiver: 'enable_pending_receiver',
     protect_receiver: 'protect_saturated_receiver', deliver: 'deliver_observed_supply',
-    charge_storage: 'charge_storage', test_release: 'test_release', release_store: 'release_stored_supply' } as const;
+    charge_storage: 'charge_storage', test_release: 'test_release', release_store: 'release_stored_supply', close_loss: 'close_possible_loss' } as const;
   const strategy = strategies[choice.kind], label = fieldIsolationStrategies[strategy], parent = 'G_official_completion';
   const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...refs.filter(value => value !== ref)];
   const { point: [x, y], bbox } = choice.target, action = { action_ref: 'ACTION6', data: { x, y } };
@@ -100,6 +101,7 @@ async function supplyProposal(
     sicSituationCard: { strategy, need: 'Supply all receivers and preserve those already filled',
       mode: choice.kind === 'test_release' || choice.kind === 'release_store' ? 'exploration' : 'solving',
       situation: label, agenda: [], evidence, control: bbox, fields: layout.receivers.map(receiver => receiver.box),
+      ...(layout.lossOutlets ? { lossOutlets: layout.lossOutlets.map(outlet => outlet.box) } : {}),
       ...(layout.stored ? { stores: layout.stores.map(store => store.box) }
         : { relay: layout.relay.box, reserve: layout.stock.box, buffered: layout.buffered === true }) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -205,11 +207,13 @@ export function createSicFieldIsolation(family = fieldIsolationId): NativeFamily
             return { events: [], reviewEvidence: `observed_storage_release_into_${receivers}_receivers` };
           }
         }
-        if (before.level_epoch === after.level_epoch && before.state === after.state) {
-          distribution = { ...prior, refs,
-            stopped: supplyOutcome(proposal.choice, prior.layout, first, second) === null };
-        }
-        return { events: [] };
+        if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+        const received = supplyOutcome(proposal.choice, prior.layout, first, second);
+        distribution = { ...prior, refs, stopped: received === null };
+        return { events: [], ...(received === 'upstream_relay_primed_before_storage'
+          ? { reviewEvidence: 'The source decreased and the inlet relay changed while the store and receivers stayed unchanged.' }
+          : received === 'stock_decreased_without_resolved_storage_rise'
+            ? { reviewEvidence: 'The source decreased while the visible storage height held and the outlet stayed isolated.' } : {}) };
       }
       const { local, target } = proposal, { phase } = local;
       if (after.levels_completed > before.levels_completed && phase === 'serve') {

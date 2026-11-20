@@ -61,6 +61,7 @@ export class NativeReasoningMemory {
   private nativeRevision = 0;
   private factVersions = new Map<string, number>();
   private traceVersions = new Map<number, number>();
+  private traceComparisons = new Map<string, ReasoningTrace>();
   constructor(options: { clock?: () => number } = {}) { this.clock = options.clock ?? (() => Date.now() / 1000); }
   private available(): void { if (this.closed) throw new Error('Reasoning memory is closed'); }
   close(): void { this.closed = true; }
@@ -116,12 +117,26 @@ export class NativeReasoningMemory {
   /** Preserve unchanged immutable branches when a native fact receives a delta. */
   nativePut(episode: string, key: string, value: any, evidence = 'fixture', revision = 1): void {
     this.available(); const id = JSON.stringify([episode, key]);
-    this.facts.set(id, retainNativeJson({ episode, key, value, evidence, revision }));
+    this.facts.set(id, retainNativeJson({ episode, key, value, evidence, revision }, this.facts.get(id)));
     this.factVersions.set(id, ++this.nativeRevision);
   }
   trace(episode: string, kind: string, value: any): void {
     this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;
     this.traces.push(freezeOwned({ id, episode, kind, body: copy(value), created: this.clock() }));
+    this.traceVersions.set(id, ++this.nativeRevision);
+  }
+  /** Native persistence consumes explicit JSON, whose unchanged evidence can
+   * be shared before the source clone boundary. The public trace API above
+   * retains its complete structured-clone behavior, including object aliases. */
+  nativeTrace(episode: string, kind: string, value: any): void {
+    this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;
+    const stream = JSON.stringify([episode, kind]);
+    const previous = this.traceComparisons.get(stream);
+    const body = retainNativeJson(value, previous?.body);
+    const record = retainNativeJson({ id, episode, kind, body, created: this.clock() }, previous);
+    this.traceComparisons.delete(stream); this.traceComparisons.set(stream, record);
+    if (this.traceComparisons.size > 64) this.traceComparisons.delete(this.traceComparisons.keys().next().value!);
+    this.traces.push(record);
     this.traceVersions.set(id, ++this.nativeRevision);
   }
   seedArchive(tokenizer: { encode(text: string, options: { add_special_tokens: false }): readonly unknown[] }, minimumTokens = 100_000): { records: number; tokens: number; synthetic: true } {
@@ -162,6 +177,7 @@ export class NativeReasoningMemory {
     });
   }
   private markRestoredTables(): void {
+    this.traceComparisons.clear();
     this.factVersions.clear(); this.traceVersions.clear(); ++this.nativeRevision;
     for (const [id, fact] of this.facts) { freezeOwned(fact); this.factVersions.set(id, ++this.nativeRevision); }
     for (const trace of this.traces) { freezeOwned(trace); this.traceVersions.set(trace.id, ++this.nativeRevision); }

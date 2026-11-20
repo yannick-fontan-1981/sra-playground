@@ -4,10 +4,13 @@ import {
   constellationPlus, ConstellationEvidence, measureConstellationLayout,
 } from '../logos-engine/v6-constellation-cover.ts';
 import { PointSet, type Point } from '../logos-engine/v6-point-set.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { markerAcquisitionRisk, markerContactKey, measureMarkerMaterialRegions, nextMarkerMaterialMove, type MaterialContact } from './marker-material-route.ts';
 import { sicNeedId } from './need-identity.ts';
+import { measureUnassignedMaterial, rememberExposedMarkers } from './marker-layers.ts';
+import { isStopProposal, observeStopPlacement, proposeStopPlacement, stopProjectionMatches,
+  type StopControls, type StopMemory, type StopProposal } from './marker-stop-planning.ts';
 
 export const markerCoverageId = 'sic_marker_coverage';
 export const verifyMarkerPlacementId = 'sic_verify_marker_placement';
@@ -28,7 +31,8 @@ const phaseLabels = {
 type Step = { action: NativeCommand; cursor: Point; mode: 'acquire' | 'calibrate' | 'cycle' | 'move';
   poses?: readonly Point[]; expected_after: readonly Point[] | null; acquisition_focus_projection?: Point; unobserved_support_pixels?: number;
   materialContact?: MaterialContact };
-type Proposal = NativeProposal & { steps: readonly [Step]; measured: NativeRecord; count: number; needId: string; dismissedContacts?: readonly string[] };
+type RigidProposal = NativeProposal & { steps: readonly Step[]; measured: NativeRecord; count: number; needId: string; dismissedContacts?: readonly string[] };
+type Proposal = RigidProposal | StopProposal;
 
 const command = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 const samePoint = (a: Point, b: Point) => a[0] === b[0] && a[1] === b[1];
@@ -64,7 +68,7 @@ function contactObserved(measured: ConstellationEvidence, step: Step, rows: Nati
   return constellationAgreement(rows, model, bodies, step.expected_after, pose, active);
 }
 
-function nextProbe(measured: ConstellationEvidence, rows: NativeRows, cursor: Point, inputs: readonly string[]): Step | null {
+export function nextMarkerProbe(measured: ConstellationEvidence, rows: NativeRows, cursor: Point, inputs: readonly string[]): Step | null {
   const model = measured.model!;
   const untried = (input: string) => !measured.tried.has(JSON.stringify([input, cursor]));
   const unknown = inputs.find(input => !measured.motion.has(input) && input !== measured.selector && untried(input));
@@ -95,10 +99,93 @@ function nextProbe(measured: ConstellationEvidence, rows: NativeRows, cursor: Po
   return input && inputs.includes(input) ? { action: command(input), cursor, mode: 'cycle', expected_after: null } : null;
 }
 
+export function measureMarkerSelection(observation: NativeObservation, rows: NativeRows, snapshot: NativeRecord | null) {
+  const measured = measurements(snapshot);
+  if (!snapshot) {
+    measured.epoch = observation.level_epoch;
+    measured.firstObservation = observation.observation_ref;
+    const regions = measureMarkerMaterialRegions(observation, rows);
+    measured.model = (regions.length ? measureConstellationLayout(observation, rows, regions) : null)
+      ?? measureConstellationLayout(observation, rows);
+    if (measured.model) {
+      const movingColors = measureUnassignedMaterial(observation, rows, measured.model);
+      if (movingColors.length) measured.model.movingColors = movingColors;
+    }
+  }
+  return measured;
+}
+
+export function bindMarkerSelection(measured: ConstellationEvidence, model: NonNullable<ConstellationEvidence['model']>, rows: NativeRows) {
+  const retained = measured.active === null ? null : measured.poses[measured.active]!;
+  const cursor = constellationFocus(rows, model) ?? (measured.complete && retained
+    && constellationCursorAt(rows, model, retained, measured.bodies, measured.poses, measured.active) ? retained : null);
+  if (!cursor) return null;
+  if (!measured.samples.length) measured.samples.push({ focus: cursor, material: constellationMaterial(rows, model) });
+  if (measured.active === null) {
+    const learned = acquireConstellation(measured.samples, model);
+    if (learned) {
+      measured.active = measured.bodies.length;
+      measured.bodies.push(learned);
+      measured.poses.push(cursor);
+    }
+  }
+
+  return cursor;
+}
+
+export async function projectMarkerStep(observation: NativeObservation, rows: NativeRows, keys: readonly string[], snapshot: NativeRecord | null) {
+  const measured = measureMarkerSelection(observation, rows, snapshot), model = measured.model;
+  if (!model || measured.retired) return null;
+  const cursor = bindMarkerSelection(measured, model, rows);
+  if (!cursor) return null;
+  const current = bounds([cursor])!;
+  if (!measured.complete) {
+    const step = nextMarkerProbe(measured, rows, cursor, keys);
+    return step ? { step, measured: measured.state(), actor: current, goal: current } : null;
+  }
+  const active = measured.active;
+  if (active === null || !constellationAgreement(rows, model, measured.bodies, measured.poses, cursor, active)) return null;
+  const quantum = [...measured.motion.values()].flat().reduce((result, value) => gcd(result, Math.abs(value)), 0);
+  if (!quantum) return null;
+  const options = await constellationMechanicalPoseOptions(observation, rows, measured.bodies, measured.poses, model, quantum);
+  const goal = constellationJointGoal(measured.bodies, measured.poses, model, quantum, options);
+  if (!goal || measured.poses.every((pose, i) => samePoint(pose, goal[i]!))) return null;
+  const target = goal[active]!, targetBox = bounds(constellationBodyPixels(measured.bodies[active]!, target))!;
+  const actor = bounds(constellationBodyPixels(measured.bodies[active]!, cursor)) ?? current;
+  const delta = constellationMinus(target, cursor);
+  if (distance(delta) === 0) {
+    const selector = measured.selector;
+    if (!selector || !keys.includes(selector)) return null;
+    const step: Step = { action: command(selector), cursor, mode: 'cycle', poses: measured.poses, expected_after: null };
+    return { step, measured: measured.state(), actor, goal: targetBox };
+  }
+  const move = [...measured.motion].find(([key, vector]) => keys.includes(key)
+    && distance(constellationMinus(delta, vector)) < distance(delta));
+  if (!move) return null;
+  const poses = [...measured.poses];
+  poses[active] = constellationPlus(cursor, move[1]);
+  const hidden = constellationOutside(constellationBodyPixels(measured.bodies[active]!, poses[active]!), model).size;
+  const step: Step = { action: command(move[0]), cursor, mode: 'move', poses: measured.poses, expected_after: poses,
+    unobserved_support_pixels: hidden };
+  return { step, measured: measured.state(), actor, goal: targetBox };
+}
+
+export async function observeMarkerStep(projection: NonNullable<Awaited<ReturnType<typeof projectMarkerStep>>>,
+  before: NativeObservation, after: NativeObservation, first: NativeRows, second: NativeRows) {
+  const measured = measurements(projection.measured), { step } = projection;
+  const packet = { steps: [step] };
+  rememberExposedMarkers(after, second, measured, step.expected_after ?? undefined);
+  const result = await measured.record(before, after, step.action, first, second, packet, 0);
+  measured.events = [];
+  return { matched: !measured.retired && (step.mode === 'move' || !!result.measured_vector || !!result.selection_local_occlusion_observed),
+    retired: measured.retired, snapshot: measured.state() };
+}
+
 export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
   let snapshot: NativeRecord | null = null;
   let count = 0;
   let dismissedContacts: readonly string[] = [];
+  let stopMemory: StopMemory | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
     id: verifyMarkerPlacementId,
@@ -108,40 +195,31 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
     async propose(observation, rows, inputs, remaining, execution) {
       const keys = inputs.filter(input => !Object.keys(input.data ?? {}).length && input.action_ref !== 'ACTION7').map(input => input.action_ref);
       if (remaining < 1 || keys.length < 3) return null;
+      const epoch = observation.level_epoch;
+      const previous = stopMemory?.epoch !== epoch && snapshot?.complete && snapshot.epoch === epoch - 1
+        ? measurements(snapshot) : null;
+      const recentStop = stopMemory?.epoch === epoch - 1 && !stopMemory.retired ? stopMemory : null;
+      const learned: StopControls | null = recentStop
+        ? { motion: recentStop.motion, selector: recentStop.selector, refs: recentStop.refs }
+        : previous?.selector ? { motion: [...previous.motion], selector: previous.selector, refs: [...previous.refs.values()] } : null;
+      const stop = await proposeStopPlacement(observation, rows, keys, remaining, stopMemory, learned, decide, execution);
+      if (stop) return stop;
       const prior = snapshot?.epoch === observation.level_epoch ? snapshot : null;
       const issued = prior ? count : 0;
       const dismissed = prior ? dismissedContacts : [];
-      if (issued >= 64) return null;
-      const measured = measurements(prior);
-      if (!prior) {
-        measured.epoch = observation.level_epoch;
-        measured.firstObservation = observation.observation_ref;
-        const regions = measureMarkerMaterialRegions(observation, rows);
-        measured.model = (regions.length ? measureConstellationLayout(observation, rows, regions) : null)
-          ?? measureConstellationLayout(observation, rows);
-      }
+      const measured = measureMarkerSelection(observation, rows, prior);
       const model = measured.model;
-      if (!model || measured.retired) return null;
-      const retained = measured.active === null ? null : measured.poses[measured.active]!;
-      const cursor = constellationFocus(rows, model) ?? (measured.complete && retained
-        && constellationCursorAt(rows, model, retained, measured.bodies, measured.poses, measured.active) ? retained : null);
+      if (!model || measured.retired || !model.movingColors?.length && issued >= 64) return null;
+      const cursor = bindMarkerSelection(measured, model, rows);
       if (!cursor) return null;
-      if (!measured.samples.length) measured.samples.push({ focus: cursor, material: constellationMaterial(rows, model) });
-      if (measured.active === null) {
-        const learned = acquireConstellation(measured.samples, model);
-        if (learned) {
-          measured.active = measured.bodies.length;
-          measured.bodies.push(learned);
-          measured.poses.push(cursor);
-        }
-      }
 
       let step: Step | null = null;
+      const route: Step[] = [];
       let destination: NativeBox | null = null;
       let finalPlacement: NativeBox | null = null;
       let colorSource: NativeBox | undefined;
       const active = measured.active;
-      if (!measured.complete) step = nextProbe(measured, rows, cursor, keys);
+      if (!measured.complete) step = nextMarkerProbe(measured, rows, cursor, keys);
       else if (active !== null && constellationAgreement(rows, model, measured.bodies, measured.poses, cursor, active)) {
         if (model.materialRegions) {
           const next = nextMarkerMaterialMove(measured, keys, dismissed);
@@ -168,13 +246,23 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
             if (measured.selector && keys.includes(measured.selector)) step = { action: command(measured.selector), cursor, mode: 'cycle',
               poses: measured.poses, expected_after: null };
           } else {
-            const move = [...measured.motion].find(([key, vector]) => keys.includes(key) && distance(constellationMinus(delta, vector)) < distance(delta));
-            if (move) {
-              const next = [...measured.poses];
-              next[active] = constellationPlus(cursor, move[1]);
-              step = { action: command(move[0]), cursor, mode: 'move', poses: measured.poses, expected_after: next,
-                unobserved_support_pixels: constellationOutside(constellationBodyPixels(measured.bodies[active]!, next[active]!), model).size };
+            let poses = measured.poses;
+            let at = cursor;
+            for (let i = 0; i < Math.min(remaining, 64 - issued, 16); i++) {
+              const offset = constellationMinus(goal[active]!, at);
+              const move = [...measured.motion].find(([key, vector]) => keys.includes(key)
+                && distance(constellationMinus(offset, vector)) < distance(offset));
+              if (!move) break;
+              const next = [...poses];
+              next[active] = constellationPlus(at, move[1]);
+              const hidden = constellationOutside(constellationBodyPixels(measured.bodies[active]!, next[active]!), model).size;
+              if (hidden && route.length) break;
+              route.push({ action: command(move[0]), cursor: at, mode: 'move', poses, expected_after: next, unobserved_support_pixels: hidden });
+              if (hidden) break;
+              poses = next;
+              at = next[active]!;
             }
+            step = route[0] ?? null;
           }
         }
       }
@@ -194,8 +282,9 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
         subjects: ['selected_piece', 'other_pieces', 'compatible_markers'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_observed_marker_coverage' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = 'marker-coverage:' + need.id, actions = [step.action];
-      return { status: 'proposed', kind: verifyMarkerPlacementId, actions, steps: [step], measured: measured.state(), count: issued, needId: need.id,
+      const id = 'marker-coverage:' + need.id, steps = route.length ? route : [step];
+      const actions = steps.map(leg => leg.action);
+      return { status: 'proposed', kind: verifyMarkerPlacementId, actions, steps, measured: measured.state(), count: issued, needId: need.id,
         dismissedContacts: dismissed,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch, levels_completed: observation.levels_completed },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -214,22 +303,46 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (isStopProposal(proposal)) {
+        const admitted = proposal.stopMemory.epoch === observation.level_epoch && (index === 0
+          ? proposal.binding?.observation_ref === observation.observation_ref
+          : stopProjectionMatches(proposal, index - 1, packet.frame_rows));
+        return { admitted, reason: admitted ? 'visible_contact_route_bound' : 'visible_contact_route_changed' };
+      }
       const result = measurements(proposal.measured).before(proposal, index, packet, observation);
       return { admitted: result.admitted, reason: result.reason };
     },
     after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isStopProposal(proposal)) {
+        const matched = before.level_epoch === after.level_epoch && before.state === after.state
+          && stopProjectionMatches(proposal, index, second);
+        return { matched, seal_prefix: !matched || index + 1 === proposal.stopSteps.length,
+          reason: matched ? 'observed_shape_and_marker_pose' : 'shape_or_marker_pose_changed' };
+      }
       const measured = measurements(proposal.measured), step = proposal.steps[index]!;
+      rememberExposedMarkers(after, second, measured, step.expected_after ?? undefined);
       if (contactObserved(measured, step, second)) return { matched: true, seal_prefix: true, reason: 'observed_material_change_with_preserved_supports' };
       const result = measured.after(proposal, index, before, after, first, second);
       if (step.materialContact?.expected && result.matched) return { matched: false, seal_prefix: true, reason: 'material_contact_without_color_change' };
-      return { matched: result.matched, seal_prefix: true, reason: result.reason };
+      return { matched: result.matched, seal_prefix: result.seal_prefix, reason: result.reason };
     },
     async record(before, after, command, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const measured = measurements(proposal.measured);
+      if (isStopProposal(proposal)) {
+        const local = index > 0 && stopMemory?.epoch === before.level_epoch ? stopMemory : proposal.stopMemory;
+        const step = proposal.stopSteps[index]!;
+        stopMemory = observeStopPlacement(local, step, second, after.observation_ref);
+        return { events: [], ...(stopMemory.layout.contactReturns !== local.layout.contactReturns
+          ? { reviewEvidence: 'The contour moved as predicted. The return identifies which source supplied the color.' }
+          : step.effect && stopProjectionMatches(proposal, index, second)
+            ? { reviewEvidence: 'The contact effect was observed and the other pieces kept their positions.' } : {}) };
+      }
+      const retained = index > 0 && count === proposal.count + index && snapshot?.epoch === before.level_epoch;
+      const measured = measurements(retained ? snapshot : proposal.measured);
       const step = proposal.steps[index]!, contact = step.materialContact;
+      rememberExposedMarkers(after, second, measured, step.expected_after ?? undefined);
       dismissedContacts = proposal.dismissedContacts ?? [];
       if (contact && measured.active !== null) {
         if (contactObserved(measured, step, second)) {
@@ -242,14 +355,15 @@ export function createSicVerifyMarkerPlacement(): NativeFamily<Proposal> {
       await measured.record(before, after, command, first, second, proposal, index);
       measured.events = [];
       snapshot = measured.state();
-      count = proposal.count + 1;
+      count = proposal.count + index + 1;
       return { events: [] };
     },
-    state: () => ({ snapshot, count, dismissedContacts }),
+    state: () => ({ snapshot, count, dismissedContacts, ...(stopMemory ? { stopMemory } : {}) }),
     restore(value) {
       snapshot = structuredClone(value.snapshot as NativeRecord | null ?? null);
       count = typeof value.count === 'number' ? value.count : 0;
       dismissedContacts = Array.isArray(value.dismissedContacts) ? value.dismissedContacts as string[] : [];
+      stopMemory = structuredClone(value.stopMemory as StopMemory | undefined) ?? null;
     },
   };
 }

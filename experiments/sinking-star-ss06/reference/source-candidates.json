@@ -1,0 +1,601 @@
+[
+  {
+    "sourcePuzzle": 16,
+    "sourceId": "flip_flop_v2",
+    "title": "Un bouton à distance, deux portes opposées",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-16",
+    "image": "https://github.com/joric/ootss_tileset/blob/main/images/levels/flip_flop_v2.webp",
+    "objects": [
+      {
+        "asset": "GAME_SOKO_Exit_A",
+        "position": [
+          21.0,
+          0.0,
+          0.0
+        ],
+        "sourceRecord": 160,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          11.0,
+          3.0,
+          0.0
+        ],
+        "sourceRecord": 165,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Button_D",
+        "position": [
+          7.0,
+          0.0,
+          0.0
+        ],
+        "sourceRecord": 166,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_MIRR_Mirror_Magic_A",
+        "position": [
+          7.0,
+          -3.0,
+          0.0
+        ],
+        "sourceRecord": 168,
+        "rotation": [
+          0,
+          0,
+          0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "GAME_SOKO_Crystal_D",
+        "position": [
+          13.0,
+          5.0,
+          0.0
+        ],
+        "sourceRecord": 169,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          11.0,
+          2.0,
+          0.0
+        ],
+        "sourceRecord": 170,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          11.0,
+          1.0,
+          0.0
+        ],
+        "sourceRecord": 171,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          11.0,
+          0.0,
+          0.0
+        ],
+        "sourceRecord": 172,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          11.0,
+          -1.0,
+          0.0
+        ],
+        "sourceRecord": 173,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          11.0,
+          -2.0,
+          0.0
+        ],
+        "sourceRecord": 498,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          17.0,
+          -1.0,
+          0.0
+        ],
+        "sourceRecord": 499,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          17.0,
+          3.0,
+          0.0
+        ],
+        "sourceRecord": 500,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          17.0,
+          1.0,
+          0.0
+        ],
+        "sourceRecord": 501,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          17.0,
+          0.0,
+          0.0
+        ],
+        "sourceRecord": 502,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          17.0,
+          2.0,
+          0.0
+        ],
+        "sourceRecord": 503,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          17.0,
+          -2.0,
+          0.0
+        ],
+        "sourceRecord": 504,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          11.0,
+          -3.0,
+          0.0
+        ],
+        "sourceRecord": 505,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          17.0,
+          -3.0,
+          0.0
+        ],
+        "sourceRecord": 506,
+        "rotation": null
+      },
+      {
+        "asset": "trader",
+        "position": [
+          8.0,
+          2.0,
+          0.0
+        ],
+        "sourceRecord": 508,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      }
+    ],
+    "sourceWitness": "LLDDDDDRRURRDXUUUXLLRRRRUURUURUULDDDLLLLLDDDXUULURRLDDXRRUXLLDDDDDRUUUURDXRRRRRRXRRRRR",
+    "sourceActions": 86,
+    "sourceWitnessStatus": "Community source route; NOT replayed in SS06.",
+    "principle": "La caisse maintient le bouton et le miroir fait alterner sa présence. Deux murs de portes ont des polarités opposées.",
+    "adaptation": "Ajouter le Guerrier, une deuxième cible et une file de deux blocs pour justifier sa force. Garder un seul miroir mobile. Le plan de sol ci-dessous est une reconstruction 2D adaptée, pas une transcription certifiée.",
+    "coordinateRule": "Raw x increases right; raw y increases up. Asset u of record i belongs to position p of record i+1. Heights retained in source objects; ignored only in declared 2D adaptations.",
+    "gridStatus": "Object coordinates extracted; floor boundaries reconstructed visually and not certified exact.",
+    "imageSha256": "f165a90ba63c0e0b5c032c502faf6a6b59c25511fcbb429ef9222a8e6ef12fd7"
+  },
+  {
+    "sourcePuzzle": 17,
+    "sourceId": "two_for_one",
+    "title": "Les boutons croisés",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-17",
+    "image": "https://github.com/joric/ootss_tileset/blob/main/images/levels/two_for_one.webp",
+    "objects": [
+      {
+        "asset": "GAME_SOKO_Exit_A",
+        "position": [
+          10.0,
+          15.0,
+          0.0
+        ],
+        "sourceRecord": 220,
+        "rotation": null
+      },
+      {
+        "asset": "thief",
+        "position": [
+          5.0,
+          15.0,
+          0.0
+        ],
+        "sourceRecord": 225,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_C_Down",
+        "position": [
+          8.0,
+          16.0,
+          0.0
+        ],
+        "sourceRecord": 226,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_MIRR_Mirror_Magic_A",
+        "position": [
+          13.0,
+          6.0,
+          0.0
+        ],
+        "sourceRecord": 227,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "GAME_MIRR_Mirror_Magic_A",
+        "position": [
+          10.0,
+          15.0,
+          0.0
+        ],
+        "sourceRecord": 228,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Exit_A",
+        "position": [
+          13.0,
+          6.0,
+          0.0
+        ],
+        "sourceRecord": 229,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Button_D",
+        "position": [
+          18.0,
+          9.0,
+          0.0
+        ],
+        "sourceRecord": 230,
+        "rotation": null
+      },
+      {
+        "asset": "trader",
+        "position": [
+          18.0,
+          6.0,
+          0.0
+        ],
+        "sourceRecord": 382,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Button_C",
+        "position": [
+          5.0,
+          11.0,
+          0.0
+        ],
+        "sourceRecord": 385,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Gate_Glyph_D_Down",
+        "position": [
+          15.0,
+          5.0,
+          0.0
+        ],
+        "sourceRecord": 386,
+        "rotation": null
+      }
+    ],
+    "sourceWitness": "DDDDCLLDLLUULDXRRRRRLLLXCRUURUUURRRULDLLLLLDDRDDDXDCLU",
+    "sourceActions": 54,
+    "sourceWitnessStatus": "Community source route; NOT replayed in SS06.",
+    "principle": "Deux héros sur deux îlots maintiennent chacun le bouton nécessaire à la sortie de l’autre. Les départs doivent être coordonnés par les miroirs.",
+    "adaptation": "Remplacer le Voleur par le Guerrier. Repositionner ses miroirs pour permettre leur poussée, car leur retrait initial exige une traction dans la source. Déplacer les cibles initialement sous les miroirs pour satisfaire le contrat de grille SS06.",
+    "coordinateRule": "Raw x increases right; raw y increases up. Asset u of record i belongs to position p of record i+1. Heights retained in source objects; ignored only in declared 2D adaptations.",
+    "gridStatus": "Object coordinates extracted; floor boundaries reconstructed visually and not certified exact.",
+    "imageSha256": "5bd33591925f6f104160f5004debcfd39a324afc57984617124b1e2b7360b401"
+  },
+  {
+    "sourcePuzzle": 21,
+    "sourceId": "mirror_hallway_v2",
+    "title": "Le ponton chargé",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-21",
+    "image": "https://github.com/joric/ootss_tileset/blob/main/images/levels/mirror_hallway_v2.webp",
+    "objects": [
+      {
+        "asset": "warrior",
+        "position": [
+          1.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 270,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Exit_A",
+        "position": [
+          3.0,
+          9.0,
+          0.0
+        ],
+        "sourceRecord": 271,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_MIRR_Mirror_Magic_A",
+        "position": [
+          7.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 274,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "GAME_SOKO_Crystal_D",
+        "position": [
+          2.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 275,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Crystal_A",
+        "position": [
+          3.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 276,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Crystal_B",
+        "position": [
+          4.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 277,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Crystal_D",
+        "position": [
+          5.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 278,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Crystal_A",
+        "position": [
+          6.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 279,
+        "rotation": null
+      }
+    ],
+    "sourceWitness": "RXRRXRRXRXRURRRDLLLLLLLXLUU",
+    "sourceActions": 27,
+    "sourceWitnessStatus": "Community source route; NOT replayed in SS06.",
+    "principle": "Une file de cinq caisses et un miroir sur une seule rangée. Pousser puis refléter construit l’accès derrière le miroir et le pont de sortie.",
+    "adaptation": "Ajouter le Marchand et une deuxième destination. Remplacer les piles de caisses à plusieurs hauteurs par des appuis simples répartis sur plusieurs cases; recalculer un témoin SS06.",
+    "coordinateRule": "Raw x increases right; raw y increases up. Asset u of record i belongs to position p of record i+1. Heights retained in source objects; ignored only in declared 2D adaptations.",
+    "gridStatus": "Visible initial two-dimensional row and objects reconstructed; floor at x=12 is outer-end interpretation. Not a faithful rules reproduction because source uses vertical stacks.",
+    "imageSha256": "f79155c5d50845a2e5580ba12686352f60afcb93f4d6ff7029859d5f524f5e68",
+    "sourceRows": [
+      "~~~~~~~~~~~~~~",
+      "~~~g~~~~~~~~~~",
+      "~~~~~~~~~~~~~~",
+      "~Wooooo4.....~",
+      "~~~~~~~~~~~~~~"
+    ],
+    "sourceRowsLegend": {
+      "~": "water",
+      ".": "floor",
+      "W": "warrior",
+      "o": "crystal",
+      "4": "NW-facing mirror (inferred from source first reflection)",
+      "g": "destination"
+    },
+    "sourceRowsConversion": "x=rawX; y=10-rawY; one row x=1..12 at rawY=7, target raw(3,9). Mirror orientation inferred, source stacking rules not represented."
+  },
+  {
+    "sourcePuzzle": 22,
+    "sourceId": "the_swappers",
+    "title": "Le départ simultané",
+    "guide": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#énigme-22",
+    "image": "https://github.com/joric/ootss_tileset/blob/main/images/levels/the_swappers.webp",
+    "objects": [
+      {
+        "asset": "warrior",
+        "position": [
+          13.0,
+          10.0,
+          0.0
+        ],
+        "sourceRecord": 7,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "soko1_dragon",
+        "position": [
+          5.0,
+          10.0,
+          0.0
+        ],
+        "sourceRecord": 8,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "soko1_dragon",
+        "position": [
+          7.0,
+          10.0,
+          0.0
+        ],
+        "sourceRecord": 9,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "soko1_dragon",
+        "position": [
+          9.0,
+          10.0,
+          0.0
+        ],
+        "sourceRecord": 10,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "soko1_dragon",
+        "position": [
+          11.0,
+          10.0,
+          0.0
+        ],
+        "sourceRecord": 11,
+        "rotation": [
+          -0.0,
+          -0.0,
+          -0.707107,
+          0.707107
+        ]
+      },
+      {
+        "asset": "GAME_MIRR_Mirror_Magic_A",
+        "position": [
+          3.0,
+          9.0,
+          0.0
+        ],
+        "sourceRecord": 12,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_MIRR_Mirror_Magic_A",
+        "position": [
+          3.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 13,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Exit_A",
+        "position": [
+          2.0,
+          7.0,
+          0.0
+        ],
+        "sourceRecord": 14,
+        "rotation": null
+      },
+      {
+        "asset": "GAME_SOKO_Exit_A",
+        "position": [
+          2.0,
+          9.0,
+          0.0
+        ],
+        "sourceRecord": 15,
+        "rotation": null
+      },
+      {
+        "asset": "trader",
+        "position": [
+          10.0,
+          6.0,
+          0.0
+        ],
+        "sourceRecord": 724,
+        "rotation": null
+      }
+    ],
+    "sourceWitness": "DDDLXCUXXXCLLCLL",
+    "sourceActions": 16,
+    "sourceWitnessStatus": "Community source route; NOT replayed in SS06.",
+    "principle": "Le Guerrier et le Marchand doivent se placer dans la même colonne et quitter ensemble la partie droite pour ne pas se bloquer.",
+    "adaptation": "Le moteur SS06 ne relaie pas les rayons à travers les miroirs. Recomposer le départ simultané avec deux miroirs indépendants et une presse/circuit. Ne pas copier les dragons en monstres de contact sans changer leur emplacement.",
+    "coordinateRule": "Raw x increases right; raw y increases up. Asset u of record i belongs to position p of record i+1. Heights retained in source objects; ignored only in declared 2D adaptations.",
+    "gridStatus": "Object coordinates extracted; floor boundaries reconstructed visually and not certified exact.",
+    "imageSha256": "6e87d19f4c7a30de5245978f47faff57abe79c3842b85da1823a75bad51dd650"
+  }
+]

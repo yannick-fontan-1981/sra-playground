@@ -1,0 +1,7 @@
+{
+  "game": "SS03",
+  "status": "not-run",
+  "visualBrowserTest": false,
+  "reason": "The available Chromium cannot launch in this workspace because the sandbox rejects its required socket operation. No browser screenshot or visual-browser pass is claimed.",
+  "alternative": "The standalone HTML is evaluated by Happy DOM with a canvas pixel buffer. UI events, animation frames, cancellations and the tutorial witness are validated in ui-dom-report.json. Engine renders are inspected separately."
+}

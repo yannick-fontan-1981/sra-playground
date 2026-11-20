@@ -9,12 +9,15 @@ import { sicNeedId } from './need-identity.ts';
 export const linkedGroupRouteId = 'sic_route_by_linked_groups';
 
 type Scene = { readonly side: number; readonly mask: readonly NativePoint[]; readonly activeColor: number; readonly band: number;
-  readonly selectorColors: readonly number[]; readonly barriers: readonly number[]; readonly patterned?: true };
+  readonly selectorColors: readonly number[]; readonly barriers: readonly number[]; readonly patterned?: true;
+  readonly pickups?: readonly Pickup[] };
 type BodyPixel = readonly [x: number, y: number, ink: number];
+type Pickup = { readonly point: NativePoint; readonly box: NativeBox; readonly quarters: readonly number[] };
 type Group = { readonly color: number; readonly goal: NativePoint; readonly target: NativeBox; readonly marks: readonly NativePoint[];
   readonly bodyMask?: readonly NativePoint[]; readonly bodyPattern?: readonly BodyPixel[];
   readonly anchors: readonly NativePoint[]; readonly confirmedAt: string | null; readonly contactAt: string | null;
-  readonly contactColor: number | null };
+  readonly contactColor: number | null; readonly pickups?: readonly Pickup[]; readonly pickupRef?: string };
+type Configuration = { scene: Scene; groups: readonly Group[] };
 type Move = { readonly index: number; readonly point: NativePoint };
 type Memory = { readonly epoch: number; readonly scene: Scene; readonly groups: readonly Group[]; readonly focus: number | null;
   readonly route: readonly Move[]; readonly denied: readonly string[]; readonly stopped: boolean };
@@ -46,9 +49,12 @@ function body(observation: NativeObservation, side: number, color: number): Nati
   return undefined;
 }
 
-type GroupCandidate = Pick<Group, 'color' | 'bodyMask' | 'bodyPattern' | 'goal' | 'target' | 'marks'>
+type GroupCandidate = Pick<Group, 'color' | 'bodyMask' | 'bodyPattern' | 'goal' | 'target' | 'marks' | 'pickups'>
   & { subsets: (readonly NativePoint[])[] };
 type PatternTarget = Pick<Group, 'goal' | 'target' | 'marks'> & { quarters: number[] };
+type Carrier = { point: NativePoint; color: number; mask: readonly NativePoint[] };
+type AnchorLayout = { side: number; mask: readonly NativePoint[]; anchors: NativePoint[]; selectorColors: number[];
+  carrierMask?: readonly NativePoint[] };
 const quarter = (x: number, y: number, cx: number, cy: number) => Number(x > cx) + 2 * Number(y > cy);
 
 function patternTargets(entities: readonly NativeEntity[], radius: number): PatternTarget[] {
@@ -103,19 +109,118 @@ function patternedCandidates(entities: readonly NativeEntity[], rows: NativeRows
   return [...candidates.values()].filter((candidate): candidate is GroupCandidate => candidate !== null);
 }
 
-function identify(observation: NativeObservation, rows: NativeRows, allowPattern: boolean): { scene: Scene; groups: readonly Group[] } | null {
-  const { entities } = observation;
-  const bands = entities.filter(part => span(part.bbox, 0) === 1 && span(part.bbox, 1) === rows.length && part.area === rows.length);
-  if (bands.length !== 1) return null;
-  const activeColor = bands[0]!.palette_value, width = rows[0]!.length, height = rows.length;
-  const parts = entities.map(part => ({ ...part, color: part.palette_value }));
+function uniformQuarters(pattern: readonly BodyPixel[], radius: number): number[] | null {
+  const colors = Array.from({ length: 4 }, () => new Set<number>());
+  for (const [x, y, ink] of pattern) {
+    if (x !== radius && y !== radius) colors[quarter(x, y, radius, radius)]!.add(ink);
+  }
+  return colors.every(color => color.size === 1) ? colors.map(color => [...color][0]!) : null;
+}
+
+function visiblePattern(rows: NativeRows, [x, y]: NativePoint, mask: readonly NativePoint[], radius: number): BodyPixel[] {
+  return mask.map(([dx, dy]) => [dx, dy, rows[y - radius + dy]?.[x - radius + dx] ?? -1]);
+}
+
+function inferredCarriers(rows: NativeRows, side: number, anchors: readonly NativePoint[], mask: readonly NativePoint[],
+  ground: number): Carrier[] {
+  const radius = (side - 1) / 2, carriers = new Map<string, Carrier>();
+  for (let bits = 1; bits < 1 << anchors.length; bits++) {
+    const subset = anchors.filter((_, i) => bits & 1 << i);
+    if (subset.length < 2 || subset.length > 4) continue;
+    const point = centroid(subset), [x, y] = point, color = rows[y]?.[x];
+    if (color === undefined || color === ground || anchors.some(anchor => same(anchor, point))) continue;
+    if (mask.every(([u, v]) => rows[y - radius + v]?.[x - radius + u] === color)) {
+      carriers.set(key(point), { point, color, mask });
+    }
+  }
+  return [...carriers.values()];
+}
+
+function pickupCandidates(entities: readonly NativeEntity[], rows: NativeRows, side: number, anchors: readonly NativePoint[],
+  carrierMask?: readonly NativePoint[]) {
+  const radius = (side - 1) / 2, targets = patternTargets(entities, radius + 1);
+  const ground = entities.reduce((best, part) => part.area > best.area ? part : best).palette_value;
+  const shapes = carrierMask ? inferredCarriers(rows, side, anchors, carrierMask, ground)
+    : entities.filter(part => square(part, side) && part.area === side ** 2 - 4)
+      .map(part => ({ color: part.palette_value, mask: part.mask, point: center(part.bbox) }));
+  const neutralColors = [...new Set(shapes.map(part => part.color))].filter(color => shapes.filter(part => part.color === color).length >= 2);
+  if (neutralColors.length !== 1) return null;
+  const neutral = neutralColors[0]!, carriers = shapes.filter(part => part.color === neutral);
+  if (carriers.length > 4 || targets.length < carriers.length) return null;
+  const mask = carriers[0]!.mask, signature = JSON.stringify(mask);
+  if (carriers.some(part => JSON.stringify(part.mask) !== signature)) return null;
+  const pickups: Pickup[] = [];
+  for (let y = radius; y < rows.length - radius; y++) for (let x = radius; x < rows[y]!.length - radius; x++) {
+    const point: NativePoint = [x, y];
+    const pattern = visiblePattern(rows, point, mask, radius);
+    if (pattern.some(([, , ink]) => ink === ground || ink < 0)) continue;
+    const quarters = uniformQuarters(pattern, radius);
+    if (quarters?.includes(neutral) && quarters.some(color => color !== neutral)) pickups.push({ point, box: areaBox(point, radius), quarters });
+  }
+  if (pickups.length < 2 || pickups.length > 12) return null;
+  const solutions = targets.flatMap(target => {
+    const options = pickups.filter(pickup => pickup.quarters.every((color, i) => color === neutral || color === target.quarters[i]));
+    for (let bits = 1; bits < 1 << options.length; bits++) {
+      const pieces = options.filter((_, i) => bits & 1 << i);
+      if (target.quarters.every((color, i) => color === neutral || pieces.some(pickup => pickup.quarters[i] === color))) {
+        return [{ ...target, pickups: pieces }];
+      }
+    }
+    return [];
+  });
+  if (solutions.length !== carriers.length || new Set(solutions.flatMap(target => target.pickups.map(pickup => key(pickup.point)))).size
+    !== solutions.reduce((sum, target) => sum + target.pickups.length, 0)) return null;
+  const free = [...solutions];
+  const candidates = carriers.map(part => {
+    const origin = part.point, subsets: NativePoint[][] = [];
+    for (let bits = 1; bits < 1 << anchors.length; bits++) {
+      const subset = anchors.filter((_, i) => bits & 1 << i);
+      if (subset.length >= 2 && subset.length <= 4 && same(centroid(subset), origin)) subsets.push(subset);
+    }
+    const gap = (point: NativePoint) => Math.hypot(point[0] - origin[0], point[1] - origin[1]);
+    free.sort((a, b) => Math.min(...a.pickups.map(pickup => gap(pickup.point))) - Math.min(...b.pickups.map(pickup => gap(pickup.point))));
+    const target = free.shift()!;
+    return { ...target, subsets, pickups: [...target.pickups].sort((a, b) => gap(a.point) - gap(b.point)), color: neutral,
+      bodyMask: mask, bodyPattern: visiblePattern(rows, origin, mask, radius) };
+  });
+  return { candidates, pickups };
+}
+
+function* anchorLayouts(entities: readonly NativeEntity[], rows: NativeRows, band: NativeEntity, previous?: Memory): Generator<AnchorLayout> {
+  const activeColor = band.palette_value;
   for (const active of entities.filter(part => part.palette_value === activeColor)) {
     const side = span(active.bbox, 0);
     if (side < 3 || side > 7 || side % 2 === 0 || !square(active, side) || active.area !== 4 * (side - 2)) continue;
     const mask = JSON.stringify(active.mask);
     const selectors = entities.filter(part => square(part, side) && JSON.stringify(part.mask) === mask);
     if (selectors.length < 4 || selectors.length > 10 || selectors.filter(part => part.palette_value === activeColor).length !== 1) continue;
-    const anchors = selectors.map(part => center(part.bbox));
+    yield { side, mask: active.mask, anchors: selectors.map(part => center(part.bbox)),
+      selectorColors: [...new Set(selectors.map(part => part.palette_value))] };
+  }
+  if (!previous) return;
+  const { side, mask } = previous.scene, footprint = JSON.stringify(mask);
+  const carrierMask = previous.groups.find(group => group.bodyMask?.length === side ** 2 - 4)?.bodyMask;
+  if (!carrierMask || !previous.groups.every(group => JSON.stringify(group.bodyMask) === JSON.stringify(carrierMask))) return;
+  const inactive = entities.filter(part => part.palette_value !== activeColor && square(part, side) && JSON.stringify(part.mask) === footprint);
+  if (inactive.length < 3 || inactive.length > 9) return;
+  const anchors = inactive.map(part => center(part.bbox)), selectorColors = [...new Set([...inactive.map(part => part.palette_value), activeColor])];
+  const radius = (side - 1) / 2;
+  for (let y = radius; y < rows.length - radius; y++) for (let x = radius; x < rows[y]!.length - radius; x++) {
+    if (Math.abs(x - band.bbox[0]) <= radius || anchors.some(anchor => same(anchor, [x, y]))) continue;
+    // A same-color neighbor may merge with the selected ring. Its measured pixels still have to be present.
+    if (!mask.every(([dx, dy]) => rows[y - radius + dy]![x - radius + dx] === activeColor)) continue;
+    yield { side, mask, anchors: [...anchors, [x, y]], selectorColors, carrierMask };
+  }
+}
+
+function identify(observation: NativeObservation, rows: NativeRows, allowPattern: boolean, previous?: Memory): Configuration | null {
+  const { entities } = observation;
+  const bands = entities.filter(part => span(part.bbox, 0) === 1 && span(part.bbox, 1) === rows.length && part.area === rows.length);
+  if (bands.length !== 1) return null;
+  const band = bands[0]!, activeColor = band.palette_value, width = rows[0]!.length, height = rows.length;
+  const parts = entities.map(part => ({ ...part, color: part.palette_value }));
+  let recovered: Configuration | null = null;
+  for (const { side, mask, anchors, selectorColors, carrierMask } of anchorLayouts(entities, rows, band, previous)) {
     let candidates: GroupCandidate[] = parts.flatMap(part => {
       if (!square(part, side) || part.area < side * (side - 1)) return [];
       const goal = findLinkedGoal(parts, part);
@@ -130,8 +235,15 @@ function identify(observation: NativeObservation, rows: NativeRows, allowPattern
       }
       return [{ color: part.color, bodyMask: part.mask, goal: goal.point, target: goal.box, marks, subsets }];
     });
-    const patterned = candidates.length < 2 || candidates.length > 4 || new Set(candidates.map(group => group.color)).size !== candidates.length;
-    if (patterned && allowPattern) candidates = patternedCandidates(entities, rows, side, anchors);
+    const patterned = !!carrierMask || candidates.length < 2 || candidates.length > 4 || new Set(candidates.map(group => group.color)).size !== candidates.length;
+    let pickups: readonly Pickup[] | undefined;
+    if (patterned && allowPattern) {
+      candidates = carrierMask ? [] : patternedCandidates(entities, rows, side, anchors);
+      if (candidates.length < 2) {
+        const composition = pickupCandidates(entities, rows, side, anchors, carrierMask);
+        if (composition) ({ candidates, pickups } = composition);
+      }
+    }
     if (candidates.length < 2 || candidates.length > 4 || patterned && !allowPattern
       || new Set(candidates.map(group => key(group.goal))).size !== candidates.length) continue;
     const partitions: Group[][] = [];
@@ -141,11 +253,11 @@ function identify(observation: NativeObservation, rows: NativeRows, allowPattern
         if (used.size === anchors.length) partitions.push(groups);
         return;
       }
-      const { color, bodyMask, bodyPattern, goal, target, marks, subsets } = candidates[groups.length]!;
+      const { color, bodyMask, bodyPattern, goal, target, marks, subsets, pickups: pieces } = candidates[groups.length]!;
       for (const subset of subsets) {
         if (subset.some(point => used.has(point))) continue;
         assign([...groups, { color, ...(bodyMask ? { bodyMask } : {}), ...(bodyPattern ? { bodyPattern } : {}),
-          goal, target, marks, anchors: subset, confirmedAt: null, contactAt: null, contactColor: null }],
+          goal, target, marks, ...(pieces ? { pickups: pieces } : {}), anchors: subset, confirmedAt: null, contactAt: null, contactColor: null }],
           new Set([...used, ...subset]));
       }
     };
@@ -155,14 +267,17 @@ function identify(observation: NativeObservation, rows: NativeRows, allowPattern
     for (const part of parts) populations.set(part.color, (populations.get(part.color) ?? 0) + part.area);
     const barriers = [...populations].sort((a, b) => b[1] - a[1]).slice(1)
       .filter(([color, count]) => count >= Math.min(width, height) * 2 && color !== activeColor &&
-        !selectors.some(part => part.palette_value === color)
+        !selectorColors.includes(color)
         && !candidates.some(group => group.color === color || group.bodyPattern?.some(([, , ink]) => ink === color)))
       .map(([color]) => color);
-    const selectorColors = [...new Set(selectors.map(part => part.palette_value))];
-    return { scene: { side, mask: active.mask, activeColor, band: bands[0]!.bbox[0], selectorColors, barriers, ...(patterned ? { patterned: true } : {}) },
+    const layout: Configuration = { scene: { side, mask, activeColor, band: band.bbox[0], selectorColors, barriers,
+      ...(patterned ? { patterned: true } : {}), ...(pickups ? { pickups } : {}) },
       groups: partitions[0]!.sort((a, b) => a.anchors.length - b.anchors.length) };
+    if (!carrierMask) return layout;
+    if (recovered) return null;
+    recovered = layout;
   }
-  return null;
+  return recovered;
 }
 
 function matchesScene(observation: NativeObservation, rows: NativeRows, local: Memory, points: readonly NativePoint[],
@@ -201,11 +316,38 @@ function matchesScene(observation: NativeObservation, rows: NativeRows, local: M
   });
 }
 
+function pickupMatchesSource(rows: NativeRows, local: Memory, pickup: Pickup, mask: readonly NativePoint[], radius: number) {
+  const { scene } = local, visible = new Set<number>(), anchors = local.groups.flatMap(group => group.anchors);
+  const matches = visiblePattern(rows, pickup.point, mask, radius).every(([u, v, ink]) => {
+    if (u === radius || v === radius) return true;
+    const section = quarter(u, v, radius, radius);
+    if (ink === pickup.quarters[section]) { visible.add(section); return true; }
+    if (!scene.selectorColors.includes(ink)) return false;
+    const [x, y] = pickup.point;
+    return anchors.some(([a, b]) => scene.mask.some(([dx, dy]) => a + dx === x + u && b + dy === y + v)
+      && hasAnchor(rows, scene, [a, b], [ink]));
+  });
+  return matches && visible.size === pickup.quarters.length;
+}
+
 function verifyMove(proposal: Proposal, observation: NativeObservation, first: NativeRows, second: NativeRows) {
   const { local, index, move, selecting, prediction } = proposal;
   const group = local.groups[index]!;
   const points = selecting ? group.anchors : moveAnchor(group.anchors, move);
-  const touching = !selecting && same(prediction, group.goal);
+  const pickup = group.pickups?.[0], mask = group.bodyMask;
+  if (pickup && mask && group.bodyPattern && !selecting && same(prediction, pickup.point)) {
+    const radius = (local.scene.side - 1) / 2;
+    const beforeColors = uniformQuarters(group.bodyPattern, radius);
+    const acquired = visiblePattern(second, prediction, mask, radius);
+    const actualColors = uniformQuarters(acquired, radius);
+    const expected = beforeColors && pickup.quarters.map((color, i) => color === group.color ? beforeColors[i] : color);
+    const groups = local.groups.map((item, i) => i === index ? { ...item, bodyPattern: acquired } : item);
+    const matched = !!beforeColors && !!expected && !!actualColors && pickupMatchesSource(first, local, pickup, mask, radius)
+      && expected.every((color, i) => color === actualColors[i]) && expected.some((color, i) => color !== beforeColors[i])
+      && matchesScene(observation, second, { ...local, groups }, points, index, points[move.index]);
+    return { points, matched, contactColor: null, acquired: matched ? acquired : null };
+  }
+  const touching = !selecting && !pickup && same(prediction, group.goal);
   const geometry = matchesScene(observation, second, local, points, index, points[move.index], touching);
   if (!touching) return { points, matched: geometry, contactColor: null };
   const [x, y] = group.marks[0]!;
@@ -217,12 +359,15 @@ function verifyMove(proposal: Proposal, observation: NativeObservation, first: N
 
 function planRoute(rows: NativeRows, local: Memory, groupIndex: number, active: NativePoint | undefined): readonly Move[] {
   const group = local.groups[groupIndex]!;
+  const pickup = group.pickups?.[0], goal = pickup?.point ?? group.goal;
   const { barriers, side, band } = local.scene, radius = (side - 1) / 2, width = rows[0]!.length, height = rows.length;
   const startX = band === 0 ? radius + 1 : radius;
   const protectedPoints = local.groups.flatMap((item, i) => {
     if (i === groupIndex) return [];
     return item.contactAt ? [centroid(item.anchors)] : [...item.anchors, centroid(item.anchors)];
   });
+  const observableCompletedAnchors = local.scene.pickups ? local.groups.flatMap(item => item.contactAt ? item.anchors : [])
+    .filter(anchor => hasAnchor(rows, local.scene, anchor, local.scene.selectorColors)) : [];
   const avoid = new Set(barriers);
   const safe = new Uint8Array(width * height);
   for (let y = radius; y < height - radius; y++) for (let x = startX; x < width - radius; x++) {
@@ -236,18 +381,20 @@ function planRoute(rows: NativeRows, local: Memory, groupIndex: number, active: 
     if (admissible) safe[y * width + x] = 1;
   }
   const valid = ([x, y]: NativePoint) => x >= 0 && x < width && y >= 0 && y < height && safe[y * width + x] === 1;
-  if (!valid(group.goal)) return [];
+  if (!valid(goal)) return [];
   const overlaps = ([x, y]: NativePoint, [a, b]: NativePoint) => Math.max(Math.abs(x - a), Math.abs(y - b)) <= 2 * radius;
   const trajectory = ([x, y]: NativePoint, [a, b]: NativePoint) => {
     const length = Math.max(Math.abs(a - x), Math.abs(b - y), 1);
     for (let i = 0; i <= length; i++) {
-      if (!valid([Math.round(x + (a - x) * i / length), Math.round(y + (b - y) * i / length)])) return false;
+      const point: NativePoint = [Math.round(x + (a - x) * i / length), Math.round(y + (b - y) * i / length)];
+      if (!valid(point) || local.scene.pickups?.some(other => !same(pickup?.point, other.point)
+        && same(other.point, point) && !same([x, y], point))) return false;
     }
     return true;
   };
   const distance = new Int32Array(width * height).fill(-1);
-  const fringe = [group.goal];
-  distance[group.goal[1] * width + group.goal[0]] = 0;
+  const fringe = [goal];
+  distance[goal[1] * width + goal[0]] = 0;
   for (let i = 0; i < fringe.length; i++) {
     const [x, y] = fringe[i]!, depth = distance[y * width + x]!;
     for (const [a, b] of [[x + 1, y], [x - 1, y], [x, y + 1], [x, y - 1]] as const) {
@@ -272,14 +419,20 @@ function planRoute(rows: NativeRows, local: Memory, groupIndex: number, active: 
     for (const state of wave) for (const index of state.anchors.keys()) {
       const actor = centroid(state.anchors), current = state.anchors[index]!;
       const others = state.anchors.filter((_, i) => i !== index), count = state.anchors.length;
-      const exact = group.goal.map((p, axis) => p * count + Math.floor(count / 2) - others.reduce((sum, point) => sum + point[axis]!, 0));
+      const exact = goal.map((p, axis) => p * count + Math.floor(count / 2) - others.reduce((sum, point) => sum + point[axis]!, 0));
       const inverse: NativePoint = [exact[0]!, exact[1]!];
-      for (const point of [inverse, ...grid]) {
+      const compatible = local.scene.pickups ? Array.from({ length: count * count }, (_, offset): NativePoint =>
+        [inverse[0] - Math.floor(count / 2) + offset % count, inverse[1] - Math.floor(count / 2) + Math.floor(offset / count)])
+        .filter(point => !same(point, inverse)) : [];
+      for (const point of [inverse, ...compatible, ...grid]) {
         const move = { index, point };
         if (!valid(point) || same(point, current) || denied.has(deniedKey(state.anchors, move)) ||
-          others.some(other => overlaps(point, other)) || protectedPoints.some(other => overlaps(point, other))) continue;
+          others.some(other => overlaps(point, other)) || protectedPoints.some(other => overlaps(point, other))
+          || observableCompletedAnchors.some(other => same(point, other))) continue;
         const anchors = moveAnchor(state.anchors, move), landing = centroid(anchors);
         if (!valid(landing) || protectedPoints.some(other => overlaps(landing, other)) || !trajectory(actor, landing)) continue;
+        if (local.scene.pickups?.some(other => overlaps(landing, other.point)
+          && !(same(pickup?.point, other.point) && same(landing, other.point)))) continue;
         const remaining = distance[landing[1] * width + landing[0]]!;
         if (remaining < 0) continue;
         if (remaining === 0) return [...state.steps, move];
@@ -309,7 +462,7 @@ export function createSicLinkedGroupRoute(): NativeFamily<Proposal> {
       let local = state?.epoch === observation.level_epoch ? state : null;
       const retained = transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
       if (!local) {
-        const configuration = identify(observation, rows, !!retained);
+        const configuration = identify(observation, rows, !!retained, retained && state?.epoch === retained.epoch ? state : undefined);
         if (!configuration) return null;
         local = { ...configuration, epoch: observation.level_epoch, focus: null, route: [], denied: [], stopped: false };
       }
@@ -329,6 +482,7 @@ export function createSicLinkedGroupRoute(): NativeFamily<Proposal> {
       const point = selecting ? anchor : move.point;
       const coordinates = selecting ? group.anchors : moveAnchor(group.anchors, move);
       const prediction = centroid(coordinates);
+      const pickup = group.pickups?.[0];
       const mode = execution?.reasoningMode ?? 'exploration', supported = !selecting && !!group.confirmedAt;
       const strategy = supported ? 'P07' : 'P05';
       const facts = { eligibleProbe: !supported, routeSupported: supported, knownInteraction: false, mode };
@@ -336,9 +490,10 @@ export function createSicLinkedGroupRoute(): NativeFamily<Proposal> {
       if (decision.result !== strategy) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...(scene.patterned && retained ? [retained.ref] : []),
-        ...local.groups.flatMap(other => [other.confirmedAt, other.contactAt])]
+        ...local.groups.flatMap(other => [other.confirmedAt, other.contactAt, other.pickupRef])]
         .filter((item): item is string => !!item && item !== ref))];
       const situation = selecting ? 'Select one anchor while preserving the other groups'
+        : pickup ? 'Bring the carrier to the piece whose colors complete part of the destination pattern'
         : supported ? 'Move an anchor along a route supported by the observed centroid'
           : scene.patterned ? 'Test the route to the target whose color positions match the carrier'
             : 'Test how the selected anchor changes its group centroid';
@@ -360,7 +515,7 @@ export function createSicLinkedGroupRoute(): NativeFamily<Proposal> {
           situation, evidence, agenda: [], mode, triggerCard: decision.receipt.workflow, goal: group.target,
           actor: areaBox(centroid(group.anchors), radius), active: areaBox(anchor, radius), focus: areaBox(point, radius),
           landing: areaBox(prediction, radius), related: group.anchors.filter(p => !same(p, anchor)).map(p => areaBox(p, radius)),
-          preserved: local.groups.filter(p => !!p.contactAt).map(p => p.target) },
+          preserved: local.groups.filter(p => !!p.contactAt).map(p => p.target), ...(pickup ? { pickup: pickup.box } : {}) },
         question: { reason: situation, hypothesis_refs: evidence }, route_refs: evidence,
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
@@ -375,9 +530,10 @@ export function createSicLinkedGroupRoute(): NativeFamily<Proposal> {
     after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const { matched, contactColor } = verifyMove(proposal, after, first, second);
+      const { matched, contactColor, acquired } = verifyMove(proposal, after, first, second);
       const contact = contactColor !== null;
-      const reason = contact ? 'linked_group_contact_observed' : 'compare_both_linked_groups_after_click';
+      const reason = contact ? 'linked_group_contact_observed' : acquired ? 'partial_signature_added_and_previous_colors_preserved'
+        : 'compare_both_linked_groups_after_click';
       return { matched, seal_prefix: true, reason,
         ...(contact ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
     },
@@ -388,14 +544,15 @@ export function createSicLinkedGroupRoute(): NativeFamily<Proposal> {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, index, move, selecting } = proposal;
       const group = local.groups[index]!;
-      const { points, matched, contactColor } = verifyMove(proposal, after, first, second);
+      const { points, matched, contactColor, acquired } = verifyMove(proposal, after, first, second);
       const touching = contactColor !== null;
       if (matched && selecting) state = local;
       else if (matched) {
         const ref = after.observation_ref;
         const groups = local.groups.map((item, i) => i === index
-          ? { ...item, anchors: points, confirmedAt: ref, contactAt: touching ? ref : null, contactColor } : item);
-        state = { ...local, groups, route: touching ? [] : local.route.slice(1), focus: touching ? null : index };
+          ? { ...item, anchors: points, confirmedAt: ref, contactAt: touching ? ref : null, contactColor,
+            ...(acquired ? { bodyPattern: acquired, pickups: item.pickups!.slice(1), pickupRef: ref } : {}) } : item);
+        state = { ...local, groups, route: touching || acquired ? [] : local.route.slice(1), focus: touching ? null : index };
       } else if (!selecting && local.denied.length < 8 && matchesScene(after, second, local, [], -1)) {
         state = { ...local, denied: [...local.denied, deniedKey(group.anchors, move)], route: [] };
       } else state = { ...local, stopped: true };

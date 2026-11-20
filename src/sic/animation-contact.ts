@@ -4,7 +4,7 @@ import type { NativeEntity, NativeFamily, NativeObservation, NativePoint, Native
 import { measureAnimatedContact, type AnimatedContact } from './observed-animation.ts';
 import { sicNeedId } from './need-identity.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
-import { chooseRegulatedContact, learnCurveWitness, measureRegulatedAdjustment, regulatedContactStrategies, retainRegulatedReturn,
+import { chooseRegulatedContact, learnCurveWitness, mayRegulateContact, measureRegulatedAdjustment, regulatedContactStrategies, retainRegulatedReturn,
   type CurveWitness, type RegulatedChoice } from './regulated-transient-contact.ts';
 
 export const animationContactId = 'sic_animation_contact';
@@ -41,9 +41,11 @@ function hasUniquePairBelowAim(entities: readonly NativeEntity[], [x, y]: Native
   return pairs.length === 1;
 }
 
-async function regulatedProposal(observation: NativeObservation, rows: NativeRows, choice: RegulatedChoice): Promise<Proposal | null> {
+async function regulatedProposal(observation: NativeObservation, rows: NativeRows, choice: RegulatedChoice, family: string): Promise<Proposal | null> {
   const ref = observation.observation_ref, parent = 'G_official_completion';
-  const label = regulatedContactStrategies[choice.strategy], action = choice.action, actions = [action];
+  const label = choice.avoidedPortals && choice.shot ? 'Test an arc that reaches the target while avoiding the perpendicular portals'
+    : regulatedContactStrategies[choice.strategy];
+  const action = choice.action, actions = [action];
   const evidence: [string, ...string[]] = [ref, ...choice.evidence.filter(value => value !== ref)];
   const pointBinding = choice.projected && await ObservedInputDomain.makeLocusWitness(observation, rows, choice.projected, { reason: label, evidence });
   if (choice.projected && !pointBinding) return null;
@@ -52,12 +54,13 @@ async function regulatedProposal(observation: NativeObservation, rows: NativeRow
     satisfactionContract: 'official_progress_after_regulated_trajectory' };
   const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
   const id = 'animation-contact:' + need.id;
-  return { status: 'proposed', kind: animationContactId, regulated: choice, actions, needId: need.id,
+  return { status: 'proposed', kind: family, regulated: choice, actions, needId: need.id,
     binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     steps: [{ action, ...(pointBinding ? { point_binding: pointBinding } : {}), expected_after: null }],
     sicSituationCard: { strategy: choice.strategy, need: 'Find a trajectory that reaches the stationary piece',
-      situation: label, evidence, agenda: [], mode: choice.shot ? 'solving' : 'exploration',
+      situation: label, evidence, agenda: [], mode: choice.shot && !['extend_trajectory_measurement', 'compare_nearby_trajectory'].includes(choice.strategy) ? 'solving' : 'exploration',
       source: choice.source, peer: choice.peer, meter: choice.meter, point: choice.projected ? [...choice.projected, ...choice.projected] : null,
+      ...(choice.avoidedPortals ? { avoidedPortals: choice.avoidedPortals } : {}),
       ...(choice.sourceCandidate ? { sourceCandidate: true } : {}),
       ...(choice.impact ? { obstacle: choice.impact.obstacle } : {}) },
     question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
@@ -67,22 +70,31 @@ async function regulatedProposal(observation: NativeObservation, rows: NativeRow
       preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
 }
 
-export function createSicAnimationContact(family = animationContactId): NativeFamily<Proposal> {
+export function createSicAnimationContact(family = animationContactId, transferObservedContact = false): NativeFamily<Proposal> {
   const learns = family === learnAnimationContactId;
   let state: State | null = null;
   let curve: CurveWitness | null = null;
   return {
     id: family,
+    observePublicOutcome(before, after, command, first, second, frames = []) {
+      if (!learns || !transferObservedContact) return;
+      if (!curve || curve.epoch === before.level_epoch && !curve.boundary) {
+        curve = learnCurveWitness(before, after, command, first, second, frames, curve) ?? curve;
+      }
+      if (curve && after.levels_completed > before.levels_completed) {
+        curve = { ...curve, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
+      }
+    },
     proposeInGroup(group, observation, rows, inputs, remaining, execution) {
-      const current = !learns && curve?.epoch === observation.level_epoch;
+      const current = !learns && mayRegulateContact(curve, observation);
       if ((group === observedMechanicsGroup) !== current) return null;
       return this.propose(observation, rows, inputs, remaining, execution);
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
-      if (!learns && curve?.epoch === observation.level_epoch) {
-        const choice = chooseRegulatedContact(curve, observation, rows);
-        return choice ? regulatedProposal(observation, rows, choice) : null;
+      if ((!learns || transferObservedContact) && curve && mayRegulateContact(curve, observation)) {
+        const choice = chooseRegulatedContact(curve, observation, rows, transferObservedContact);
+        return choice ? regulatedProposal(observation, rows, choice, family) : null;
       }
       const previous = state?.epoch === observation.level_epoch ? state : null;
       const receipt = learns && previous?.evidence.at(-1) !== observation.observation_ref ? execution?.readAnimatedContact?.() : null;
@@ -136,6 +148,9 @@ export function createSicAnimationContact(family = animationContactId): NativeFa
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (proposal.regulated) {
+        if (proposal.regulated.strategy === 'extend_trajectory_measurement') {
+          return { matched: null, seal_prefix: true, reason: 'remeasure_trajectory_from_ordered_frames' };
+        }
         if (proposal.regulated.shot) return { matched: false, seal_prefix: true, reason: 'projected_trajectory_did_not_complete_contact' };
         const delta = measureRegulatedAdjustment(proposal.regulated, first, second);
         const matched = delta !== null && delta !== 0
@@ -146,10 +161,12 @@ export function createSicAnimationContact(family = animationContactId): NativeFa
     },
     record(before, after, command, first, second, proposal, _index, frames) {
       if (proposal.regulated && curve) {
-        curve = retainRegulatedReturn(curve, proposal.regulated, before, after, first, second, frames);
+        curve = retainRegulatedReturn(curve, proposal.regulated, before, after, first, second, frames, transferObservedContact);
         return { events: [] };
       }
-      if (!learns && !curve) curve = learnCurveWitness(before, after, command, first, second, frames);
+      if (!curve || transferObservedContact && !curve.boundary && curve.epoch === before.level_epoch) {
+        if (!learns || transferObservedContact) curve = learnCurveWitness(before, after, command, first, second, frames, curve) ?? curve;
+      }
       if (curve && after.levels_completed > before.levels_completed) {
         curve = { ...curve, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
       }

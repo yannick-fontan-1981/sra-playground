@@ -1,29 +1,59 @@
-import { configuredCrosses, configuredRoute, configuredTrajectories, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
+import { configuredCrosses, configuredDistances, configuredPatch, configuredRoute, configuredTrajectories, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
 
 type Point = [number, number];
 type Gate = { point: Point; open: boolean; mark: string };
 type GateEdit = { point: Point; toggles: Point[] };
 export type GateEffects = Readonly<Record<string, Point[]>>;
-export type TimedNetwork = { gates: Gate[]; pads: Map<string, string>; nodes: Set<string> };
-export type ArrivalTiming = { orders: Point[][]; delays: Record<string, number>; observed: (number | null)[] };
+type ClockMark = { point: Point; mark: string };
+export type TimedNetwork = { gates: Gate[]; pads: Map<string, string>; clocks: Map<string, ClockMark>; nodes: Set<string> };
+export type ArrivalTiming = { orders: Point[][]; delays: Record<string, number>; observed: (number | null)[];
+  clocks?: Record<string, boolean[]> };
 const key = (point: Point) => point.join(',');
+const oneStep = (from: string, to: string, pitch: number) => {
+  const [x, y] = from.split(',').map(Number) as Point, [u, v] = to.split(',').map(Number) as Point;
+  return Math.abs(x - u) + Math.abs(y - v) === pitch;
+};
 const cardinals: Point[] = [[1, 0], [-1, 0], [0, 1], [0, -1]];
 const permutations = (points: Point[]): Point[][] => points.length === 0 ? [[]]
   : points.flatMap((point, index) => permutations(points.filter((_, i) => i !== index)).map(rest => [point, ...rest]));
 const orders = permutations(cardinals);
+// The planner checks subsets of controls, so cap the wider clocked search at 16,384 configurations.
+const timedGateLimits = { independent: 8, withClocks: 14 };
 const axes = [
   { pips: [1, 7], strips: [0, 2, 3, 5, 6, 8] },
   { pips: [3, 5], strips: [0, 1, 2, 6, 7, 8] },
 ];
 
+function clockAppearance(scene: ConfiguredScene, patch: readonly number[]) {
+  const center = patch[4]!;
+  if (scene.background.has(center)) return null;
+  for (const [axis, { pips, strips }] of axes.entries()) {
+    const pip = patch[pips[0]!]!;
+    if (pip !== patch[pips[1]!]) continue;
+    if (pip !== center && !scene.background.has(pip) && strips.every(index => patch[index] === scene.floor)) {
+      return { mark: axis + '/' + pip, open: true };
+    }
+    if (scene.background.has(pip) && pip !== scene.floor && strips.every(index => patch[index] === center)) {
+      return { mark: axis + '/' + center, open: false };
+    }
+  }
+  return null;
+}
+
 export function timedNetwork(scene: ConfiguredScene): TimedNetwork | null {
   if (scene.actors.length < 3) return null;
-  const gates: Gate[] = [], pads = new Map<string, string>(), nodes = new Set(scene.base);
+  const gates: Gate[] = [], pads = new Map<string, string>(), clocks = new Map<string, ClockMark>(), nodes = new Set(scene.base);
   const occupied = new Set([key(scene.target), ...scene.actors.map(([, x, y]) => key([x, y]))]);
   for (const [position, cell] of scene.cells) {
     if (occupied.has(position)) continue;
     const patch: number[] = cell.patch.flat();
+    const clock = clockAppearance(scene, patch);
+    if (clock) {
+      clocks.set(position, { point: cell.point, mark: clock.mark });
+      nodes.add(position);
+      continue;
+    }
     const center = patch[4]!;
     for (const [axis, { pips, strips }] of axes.entries()) {
       const open = cell.open && patch[pips[0]!] === patch[pips[1]!] && !scene.background.has(patch[pips[0]!]!)
@@ -44,7 +74,95 @@ export function timedNetwork(scene: ConfiguredScene): TimedNetwork | null {
       nodes.add(position);
     }
   }
-  return pads.size && gates.length && gates.length <= 8 ? { gates, pads, nodes } : null;
+  const gateLimit = clocks.size ? timedGateLimits.withClocks : timedGateLimits.independent;
+  return pads.size && gates.length && gates.length <= gateLimit ? { gates, pads, clocks, nodes } : null;
+}
+
+function clockCycle(samples: readonly (boolean | null)[]): boolean[] | null {
+  for (let period = 2; period * 2 <= samples.length; period++) {
+    const phases = Array<boolean | undefined>(period).fill(undefined), hits = Array<number>(period).fill(0);
+    const consistent = samples.every((sample, time) => {
+      if (sample === null) return true;
+      const phase = time % period;
+      if (phases[phase] !== undefined && phases[phase] !== sample) return false;
+      phases[phase] = sample;
+      hits[phase]!++;
+      return true;
+    });
+    if (consistent && hits.every(hit => hit >= 2) && phases.includes(true) && phases.includes(false)) return phases as boolean[];
+  }
+  return null;
+}
+
+function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pick<ArrivalTiming, 'delays' | 'clocks'>): number[] | null {
+  const ticks = [0];
+  for (let i = 1; i < path.length; i++) {
+    const pad = network.pads.get(key(path[i - 1]!)), dwell = pad ? timing.delays[pad] : 0;
+    if (dwell === undefined) return null;
+    let attempted = ticks[i - 1]! + dwell + 1;
+    const destination = key(path[i]!), cycle = timing.clocks?.[destination];
+    if (network.clocks.has(destination)) {
+      if (!cycle?.includes(true)) return null;
+      while (!cycle[attempted % cycle.length]) attempted++;
+    }
+    ticks.push(attempted);
+  }
+  return ticks;
+}
+
+function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, frames: readonly NativeRows[], baseline: number,
+  paths: ReturnType<typeof configuredTrajectories>, inherited?: Readonly<Record<string, number>>): ArrivalTiming | null {
+  const last = Math.max(...[...paths.values()].map(([, times]) => times.at(-1)!));
+  const ticks = frames.slice(0, last + 1).filter((_, index) => index % baseline === 0);
+  const clocks: Record<string, boolean[]> = {};
+  for (const [id, { point, mark }] of network.clocks) {
+    const cycle = clockCycle(ticks.map(frame => {
+      const appearance = clockAppearance(scene, configuredPatch(frame, point).flat());
+      return appearance?.mark === mark ? appearance.open : null;
+    }));
+    if (!cycle) return null;
+    clocks[id] = cycle;
+  }
+  const [pitch, left, top] = scene.grid;
+  const positions = ticks.map(frame => configuredCrosses(frame)
+    .filter(([, x, y]) => x % pitch === left && y % pitch === top));
+  const traces = scene.actors.map(([color]) => positions.map(frame => {
+    const matches = frame.filter(([ink]) => ink === color);
+    return matches.length === 1 ? key([matches[0]![1], matches[0]![2]]) : null;
+  }));
+  const observedDelays: Record<string, number> = {};
+  for (const trace of traces) {
+    for (let start = 1; start < trace.length; start++) {
+      const landed = trace[start], previous = trace[start - 1];
+      const pad = landed && network.pads.get(landed);
+      if (!landed || !pad || !previous || !oneStep(previous, landed, pitch)) continue;
+      let next = start + 1;
+      while (trace[next] === landed) next++;
+      const nextPosition = trace[next];
+      if (!nextPosition || !oneStep(landed, nextPosition, pitch) || network.clocks.has(nextPosition)) continue;
+      const dwell = next - start - 1;
+      if (Object.hasOwn(observedDelays, pad) && observedDelays[pad] !== dwell) return null;
+      observedDelays[pad] = dwell;
+    }
+  }
+  const delays = { ...inherited, ...observedDelays };
+  const distances = configuredDistances(network.nodes, scene.target, pitch);
+  const compatible = orders.filter(order => scene.actors.every(([, x, y], i) => {
+    const path = configuredRoute(network.nodes, [x, y], scene.target, order, pitch, distances);
+    const dates = path && arrivalTicks(path, network, { delays, clocks });
+    if (!path || !dates || traces[i]!.filter(Boolean).length < 2) return false;
+    let position = 0;
+    return traces[i]!.every((observed, tick) => {
+      while (position + 1 < dates.length && dates[position + 1]! <= tick) position++;
+      return observed === null || observed === key(path[position]!);
+    });
+  }));
+  if (!compatible.length) return null;
+  const observed = scene.actors.map(([color]) => {
+    const frame = paths.get(color)?.[1].at(-1);
+    return frame === undefined ? null : frame / baseline;
+  });
+  return { orders: compatible, delays, observed, clocks };
 }
 
 function visiblePrefixes(scene: ConfiguredScene, frames: readonly NativeRows[]): Map<number, Point[]> {
@@ -81,7 +199,7 @@ export function measureArrivalTiming(scene: ConfiguredScene, network: TimedNetwo
   inherited?: Readonly<Record<string, number>>): ArrivalTiming | null {
   const paths = configuredTrajectories(scene, frames);
   const partial = paths.size !== scene.actors.length;
-  if (!paths.size || partial && !inherited) return null;
+  if (!paths.size || partial && !inherited && !network.clocks.size) return null;
   const intervals = new Map<number, number>();
   for (const [, times] of paths.values()) {
     for (let i = 1; i < times.length; i++) {
@@ -91,6 +209,7 @@ export function measureArrivalTiming(scene: ConfiguredScene, network: TimedNetwo
   }
   const baseline = [...intervals].sort((a, b) => b[1] - a[1] || a[0] - b[0])[0]?.[0];
   if (!baseline) return null;
+  if (network.clocks.size) return measureClockedTiming(scene, network, frames, baseline, paths, inherited);
   const delays: Record<string, number> = {};
   for (const [path, times] of paths.values()) {
     for (let i = 0; i < times.length - 1; i++) {
@@ -145,10 +264,11 @@ function gateEdits(network: TimedNetwork, effects: GateEffects | undefined, reje
 }
 
 export function planTimedArrival(scene: ConfiguredScene, network: TimedNetwork, timing: ArrivalTiming, remaining: number,
-  effects?: GateEffects, rejected: readonly string[] = []) {
+  effects?: GateEffects, rejected: readonly string[] = [], interrupted: () => boolean = () => false) {
   let best: { edits: GateEdit[]; ticks: number[]; matchingOrders: number } | null = null;
   const controls = gateEdits(network, effects, rejected);
   for (let mask = 0; mask < 2 ** controls.length; mask++) {
+    if ((mask & 63) === 0 && interrupted()) return null;
     const edits = controls.filter((_, index) => (mask & (1 << index)) !== 0);
     if (edits.length + 1 > remaining || (best?.matchingOrders === timing.orders.length && edits.length >= best.edits.length)) continue;
     const nodes = new Set(network.nodes);
@@ -157,21 +277,12 @@ export function planTimedArrival(scene: ConfiguredScene, network: TimedNetwork, 
       if (nodes.has(id)) nodes.delete(id);
       else nodes.add(id);
     }
-    const ticks = new Set<number>();
+    const ticks = new Set<number>(), distances = configuredDistances(nodes, scene.target, scene.grid[0]);
     let matchingOrders = 0;
     for (const order of timing.orders) {
       const arrivals = scene.actors.map(([, x, y]) => {
-        const path = configuredRoute(nodes, [x, y], scene.target, order, scene.grid[0]);
-        if (!path) return null;
-        let tick = path.length - 1;
-        for (const point of path.slice(0, -1)) {
-          const pad = network.pads.get(key(point));
-          if (!pad) continue;
-          const dwell = timing.delays[pad];
-          if (dwell === undefined) return null;
-          tick += dwell;
-        }
-        return tick;
+        const path = configuredRoute(nodes, [x, y], scene.target, order, scene.grid[0], distances);
+        return path ? arrivalTicks(path, network, timing)?.at(-1) ?? null : null;
       });
       const first = arrivals[0];
       if (first != null && arrivals.every(tick => tick === first)) {

@@ -35,13 +35,13 @@ import { compileRecoveryPack, isRecoveryStop } from '../sic/active-recovery.ts';
 import { nativePlanReceipt } from '../sic/native-plan-receipt.ts';
 import { buildVictoryReview, victoryReviewNodeId, type SicVictoryReview } from '../sic/victory-review.ts';
 import { createSicFieldRepair } from '../sic/field-repair.ts';
-import { createSicVerifyContactOrder } from '../sic/ordered-contact.ts';
+import { createSicVerifyContactOrder, learnContactOrderId } from '../sic/ordered-contact.ts';
 import { createSicSupportTransfer } from '../sic/support-transfer.ts';
 import { createSicLearnSupportMoves, learnObservedSupportsId } from '../sic/learn-support-moves.ts';
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects, learnVisibleGroupEffectsId } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
-import { createSicPublicInputExploration, currentControlledMotion, publicInputExplorationId } from '../sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, projectedPublicEffectsGroup, publicInputExplorationId } from '../sic/public-input-exploration.ts';
 import { createSicRecheckDirectionalControls } from '../sic/recheck-directional-controls.ts';
 import { createSicTrialRepeatedLinearControls } from '../sic/trial-repeated-linear-controls.ts';
 import { acquireQueuedField } from './v6-queued-field-models.ts';
@@ -51,11 +51,14 @@ import { createSicCompareAvailableControls } from '../sic/compare-available-cont
 import { createSicFramedContact, learnPatternAccessId } from '../sic/framed-contact.ts';
 import { measureDirectionalMotion, type DirectionalMotion } from '../sic/observed-translation.ts';
 import { createSicTransportContact, learnTransportAccessId } from '../sic/transport-contact.ts';
-import { createSicVerifyBandTransfer } from '../sic/band-alignment.ts';
+import { createSicVerifyBandTransfer, learnBandTransferId } from '../sic/band-alignment.ts';
 import { createSicVerifySharedArrival } from '../sic/shared-arrival.ts';
 import { createSicOutlineService, learnOutlineServiceId, outlineServiceId } from '../sic/outline-service.ts';
 import { createSicObservedRouteIntervention } from '../sic/observed-route-intervention.ts';
-import { createSicObservedSurvival } from '../sic/observed-survival.ts';
+import { createSicObservedSurvival, learnCorridorAdvanceId } from '../sic/observed-survival.ts';
+import { createSicMetricComposition, learnMetricCompositionId } from '../sic/metric-composition.ts';
+import { createSicVisibleReduction, learnVisibleReductionId } from '../sic/visible-reduction.ts';
+import { createSicPairedReorientation, learnPairedReorientationId } from '../sic/paired-reorientation.ts';
 import { createSicObservedRailTransfers } from '../sic/observed-rail-transfers.ts';
 import { createSicColumnAlignment } from '../sic/column-alignment.ts';
 import { createSicSettleMatchingEdges } from '../sic/settle-matching-edges.ts';
@@ -74,21 +77,21 @@ import { createSicObservedActuatorArrangement } from '../sic/observed-actuator-a
 import { createSicSlotTransfer } from '../sic/slot-transfer.ts';
 import { createSicRemoteSupportRoute, learnRemoteAccessId } from '../sic/remote-support-route.ts';
 import { createSicVerifyOccurrenceChoice } from '../sic/occurrence-recall.ts';
-import { createSicVerifySlotPermutation } from '../sic/slot-permutation.ts';
+import { createSicVerifySlotPermutation, learnSlotPermutationId } from '../sic/slot-permutation.ts';
 import { createSicSurfaceCopy, learnSurfaceCopyId } from '../sic/surface-copy.ts';
-import { createSicVerifyProgramConfiguration } from '../sic/code-route.ts';
+import { createSicVerifyProgramConfiguration, learnProgramConfigurationId } from '../sic/code-route.ts';
 import { createSicVerifyProfileTransfer } from '../sic/profile-transfer.ts';
 import { createSicOrderedReplenishment, learnOrderedReplenishmentId } from '../sic/ordered-replenishment.ts';
 import { createSicProgramOrigin, learnProgramOriginId } from '../sic/program-origin.ts';
-import { createSicVerifyPreviewPlacement } from '../sic/preview-placement.ts';
+import { createSicVerifyPreviewPlacement, learnPreviewPlacementId } from '../sic/preview-placement.ts';
 import { createSicSymbolContribution } from '../sic/symbol-contribution.ts';
-import { createSicVerifyMarkedLattice } from '../sic/marked-lattice.ts';
+import { createSicVerifyMarkedLattice, learnMarkedLatticeId } from '../sic/marked-lattice.ts';
 import { createSicQueuedPlacement, learnQueuedPlacementId } from '../sic/queued-placement.ts';
 import { createSicLegendRecolor, matchExampleId } from '../sic/legend-recolor.ts';
 import { createSicVerifyPatternChoice } from '../sic/visual-pattern.ts';
 import { createSicFacetGrowth, learnFacetGrowthId } from '../sic/facet-growth.ts';
 import { createSicChartRoute, learnChartRouteId } from '../sic/chart-route.ts';
-import { createSicVerifyReferencePlacement } from '../sic/population-placement.ts';
+import { createSicVerifyReferencePlacement, learnReferencePlacementId } from '../sic/population-placement.ts';
 import { createSicCarryToFrame, learnCarryToFrameId } from '../sic/carry-to-frame.ts';
 import { createSicPortPairing, learnPortPairingId } from '../sic/port-pairing.ts';
 import { createSicDisplayCoupling } from '../sic/display-coupling.ts';
@@ -96,30 +99,30 @@ import { createSicPeriodicProfileAlignment } from '../sic/periodic-profile-align
 import { createSicContrastControls, contrastProbeId } from '../sic/contrast-controls.ts';
 import { createSicFollowStableReference } from '../sic/framed-search.ts';
 import { createSicFramedReception, learnFramedReceptionId } from '../sic/framed-reception.ts';
-import { createSicWindowRelation } from '../sic/window-relation.ts';
+import { createSicWindowRelation, learnWindowRelationId } from '../sic/window-relation.ts';
 import { createSicAnimationContact, learnAnimationContactId } from '../sic/animation-contact.ts';
 import { coordinateObservedMotionId, createSicReflectedPlacement } from '../sic/reflected-placement.ts';
 import { createSicMaterialAssembly, learnMaterialAssemblyId } from '../sic/material-assembly.ts';
 import { createSicVerifyCoupledRoute } from '../sic/coupled-motion.ts';
-import { createSicVerifyConnectedRoute } from '../sic/material-route.ts';
-import { createSicVerifyInventoryTransfer } from '../sic/inventory-access.ts';
-import { createSicVerifyRemoteReplay } from '../sic/replay-access.ts';
-import { createSicVerifyOrientedDelivery } from '../sic/oriented-delivery.ts';
+import { createSicVerifyConnectedRoute, learnConnectedRouteId } from '../sic/material-route.ts';
+import { createSicVerifyInventoryTransfer, learnInventoryTransferId } from '../sic/inventory-access.ts';
+import { createSicVerifyRemoteReplay, learnRemoteReplayId } from '../sic/replay-access.ts';
+import { createSicVerifyOrientedDelivery, learnOrientedDeliveryId } from '../sic/oriented-delivery.ts';
 import { createSicIndicatedJump, learnIndicatedJumpId } from '../sic/indicated-jump.ts';
 import { createSicHighlightedRoute, learnHighlightedRouteId } from '../sic/highlighted-route.ts';
 import { createSicPairedPassage, learnPairedPassageId } from '../sic/paired-passage.ts';
-import { createSicVerifyFrameContact } from '../sic/seated-contact.ts';
+import { createSicVerifyFrameContact, learnFrameAccessId } from '../sic/seated-contact.ts';
 import { createSicSwitchedSurface, learnSwitchedSurfaceId } from '../sic/switched-surface.ts';
-import { createSicVerifyGaugeEffect } from '../sic/marked-gauge.ts';
+import { createSicVerifyGaugeEffect, learnGaugeEffectId } from '../sic/marked-gauge.ts';
 import { createSicCoupledGaugeRoute } from '../sic/coupled-gauge-route.ts';
 import { createSicMergeForDemand } from '../sic/merge-for-demand.ts';
 import { createSicLinkedGroupRoute } from '../sic/linked-group-route.ts';
-import { createSicVerifyReactiveMotion } from '../sic/reactive-target.ts';
+import { createSicVerifyReactiveMotion, learnReactiveMotionId } from '../sic/reactive-target.ts';
 import { createSicVerifyChannelAccess } from '../sic/paired-channels.ts';
 import { createSicVerifyCompartmentGrowth } from '../sic/compartment-growth.ts';
 import { createSicVerifyPointAccess } from '../sic/point-reach.ts';
 import { createSicVerifyLinkedMotion } from '../sic/linked-midpoint.ts';
-import { createSicVerifyRemovableSupport } from '../sic/excavate-descent.ts';
+import { createSicVerifyRemovableSupport, learnRemovableSupportId } from '../sic/excavate-descent.ts';
 import { createSicProtectGravityRoute } from '../sic/protect-gravity-route.ts';
 import { createSicGatedCascade, learnCascadeId } from '../sic/gated-cascade.ts';
 import { createSicLayeredFit, learnLayeredFitId } from '../sic/layered-fit.ts';
@@ -144,22 +147,23 @@ import { createSicFieldIsolation, learnFieldIsolationId, measureClickFields, typ
 import { createSicDirectionalReception, learnDirectionalReceptionId } from '../sic/directional-reception.ts';
 import { createSicWindowCoverage, learnWindowCoverageId } from '../sic/window-coverage.ts';
 import { createSicVerifyPanelConfiguration } from '../sic/panel-matching.ts';
-import { createSicVerifyCrossingRows } from '../sic/crossing-rows.ts';
+import { createSicVerifyCrossingRows, learnCrossingRowsId } from '../sic/crossing-rows.ts';
 import { createSicVerifyParallelSymbolPrefixes } from '../sic/parallel-symbol-prefixes.ts';
 import { createSicVerifyTraceCoverage } from '../sic/trace-coverage.ts';
 import { createSicRadialConnection, learnRadialConnectionId } from '../sic/radial-connection.ts';
-import { createSicVerifyCaptureRoute } from '../sic/invited-capture.ts';
-import { createSicVerifyBranchAlignment } from '../sic/branch-alignment.ts';
+import { createSicVerifyCaptureRoute, learnCaptureRouteId } from '../sic/invited-capture.ts';
+import { createSicVerifyBranchAlignment, learnBranchAlignmentId } from '../sic/branch-alignment.ts';
 import { createSicVerifyOrderedFeedback } from '../sic/feedback-trial.ts';
 import { createSicCatalogueComparison, revealedExampleId } from '../sic/catalogue-comparison.ts';
 import { exposedViewValues } from './v6-occluded-catalogue-observation.ts';
 import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/reception-access.ts';
 import { createSicVerifyMarkerPlacement } from '../sic/marker-coverage.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
-import { createCompositionTrials, compositionFamily, compositionPrior, cycleGroup, exhaustedGroup } from '../sic/test-observed-compositions.ts';
+import { createCompositionTrials, compositionFamily, compositionPrior } from '../sic/test-observed-compositions.ts';
 import { createPreparedEffects, preparedEffectsId } from '../sic/test-prepared-effects.ts';
 import { preparationReturns } from '../sic/preparation-experiments.ts';
-import { decidePlanContinuation } from '../sic/plan-step.ts';
+import { decidePlanContinuation, maximumCommittedActions } from '../sic/plan-step.ts';
+import { planningGroupsWithExperiments } from '../sic/experiment-selection-groups.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
@@ -206,10 +210,11 @@ import { nativeProgramDescriptions } from './v6-src-program.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
 import { arrayValue, immutableJson, objectValue, stringValue } from './canonical.ts';
 import { NativeKnowledgeStore, NATIVE_STORE_PROFILE } from './v6-knowledge-store.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 import { hydrateNativeState } from './v6-native-state-graph.ts';
-import { NativeEditRejected } from './v6-native-types.ts';
+import { NativeEditRejected, isSicLevelRecovery } from './v6-native-types.ts';
 import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
@@ -297,8 +302,12 @@ const CONTACT_SCOPE_NODE = 'native_contact_probe_scope:animated_contact';
 const CALLER_COMPONENTS = ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters'] as const;
 const CALLER_PROVIDERS = ['goal_access', 'pre_score_contact', 'scored_local_rewrite', 'factored_material_return', 'conditional_transit',
   'attention_parent_return', 'returned_branch_contrast', 'information_goal', 'acquire_control_for_target', 'view', 'view_continuity', 'observed_frontier'] as const;
+const retainedFamilyCheckpoints = new WeakMap<NativeFamily, NativeRecord>();
 function familyCheckpoint(family: NativeFamily): NativeRecord {
-  return family.nativeState && family.restoreNative ? family.nativeState() : family.state();
+  if (family.nativeState && family.restoreNative) return family.nativeState();
+  const state = retainNativeJson(family.state(), retainedFamilyCheckpoints.get(family));
+  retainedFamilyCheckpoints.set(family, state);
+  return state;
 }
 function freeze<T>(value: T): T {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
@@ -574,7 +583,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.levelActiveTimeMs = v6LevelActiveTimeMs(input.budgets.parallelWorkers);
     this.initialized = true; this.sessionId = input.sessionId; this.current = freeze(structuredClone(input.observation)); this.budgets = freeze(structuredClone(input.budgets));
     await this.timed(this.current.level, async () => {
-      this.knowledge = new NativeKnowledgeStore(this.sourceDigest, this.sessionId);
+      this.knowledge = new NativeKnowledgeStore(this.sourceDigest, this.sessionId, undefined, execution.yieldControl);
       await this.knowledge.commit(this.families.flatMap(family => [
         { id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: familyCheckpoint(family),
           relations: [{ relation: 'controlled_by', target: `family_activation:${family.id}` }] },
@@ -704,7 +713,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         }
         proposal = protectedReplacement as NativeProposal;
       }
-      if (!Array.isArray(proposal.actions) || proposal.actions.length < 1 || proposal.actions.length > Math.min(16, this.remaining())
+      if (!Array.isArray(proposal.actions) || proposal.actions.length < 1 || proposal.actions.length > Math.min(maximumCommittedActions, this.remaining())
         || !Array.isArray(proposal.steps) || proposal.steps.length !== proposal.actions.length) throw new Error(`Invalid committed prefix from ${family.id}`);
       await family.bind?.(proposal, this.domain);
       for (const step of proposal.steps) if (step.locus_witness && !step.point_binding) step.point_binding = structuredClone(step.locus_witness);
@@ -792,9 +801,14 @@ export class NativeV6Runtime implements NativeV6Backend {
     } : null;
     const reasoning = situation ? { ...situation, ...selectReasoningMode(situation) } : null;
     const motionState = this.adaptiveReasoning && this.knowledge?.memory.nodes[`family_state:${publicInputExplorationId}`];
-    const motion = motionState ? currentControlledMotion(objectValue(this.knowledge!.value(motionState.id)), this.observation) : undefined;
+    const exploration = motionState ? objectValue(this.knowledge!.value(motionState.id)) : undefined;
+    const motion = exploration ? currentControlledMotion(exploration, this.observation) : undefined;
+    const panelFrontier = exploration && currentPanelFrontier(exploration, this.observation);
+    const observation = this.observation, rows = this.current.frame_rows;
+    let controlledClickRegions: readonly NativeBox[] | undefined;
     this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}),
       ...(motion ? { observedControlledMotion: motion } : {}),
+      ...(panelFrontier ? { panelFrontier } : {}),
       ...(this.readDirectionalMotion ? { readDirectionalMotion: this.readDirectionalMotion } : {}),
       ...(this.observedQueue?.ref === this.observation?.observation_ref ? { observedQueue: this.observedQueue.model } : {}),
       ...(this.readEncounterTransition ? { readEncounterTransition: this.readEncounterTransition } : {}),
@@ -804,6 +818,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.readPriorDirectionalScene ? { readPriorDirectionalScene: this.readPriorDirectionalScene } : {}),
       ...(this.readClickRegions ? { readClickRegions: this.readClickRegions } : {}),
       ...(this.readClickRegionChanges ? { readClickRegionChanges: this.readClickRegionChanges } : {}),
+      readControlledClickRegions: () => controlledClickRegions ??= this.families.flatMap(family =>
+        family.controlledClickRegions && objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true
+          ? family.controlledClickRegions(observation, rows) : []),
       ...(this.readPriorFramedRows ? { readPriorFramedRows: this.readPriorFramedRows } : {}),
       ...(this.readClickMarker ? { readClickMarker: this.readClickMarker } : {}),
       ...(this.readWorkspaceClick ? { readWorkspaceClick: this.readWorkspaceClick } : {}),
@@ -815,6 +832,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       const offer = async (index: unknown): Promise<FamilyTrial> => {
       if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0 || index >= this.groups.length || !this.planning || !this.current || !this.observation) throw new Error('Invalid native family selection cursor');
       const group = this.groups[index]!;
+      if (group.id === projectedPublicEffectsGroup && !this.withdrawnPrimaryFamily) {
+        return { family: group.id, selected: false };
+      }
       this.check(this.planning.execution); await this.planning.execution.yieldControl(); this.check(this.planning.execution);
       let offered: { family: NativeFamily; proposal: NativeProposal } | null = null;
       for (const [entryIndex, id] of group.families.entries()) {
@@ -1491,7 +1511,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     await this.timed(first.level, async () => {
       this.observation = freeze(await measureNativeObservation(this.current!, this.actions + this.resetCount + 1, this.sessionId));
       const after = this.observation;
-      let result = await prefix.family.after(prefix.proposal, prefix.index, before, after, first.frame_rows, this.current!.frame_rows);
+      let result = await prefix.family.after(prefix.proposal, prefix.index, before, after,
+        first.frame_rows, this.current!.frame_rows, this.current!.frame_packet);
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
       const previousQueue = this.observedQueue?.ref === before.observation_ref ? this.observedQueue.model : null;
       this.observedQueue = undefined;
@@ -1524,7 +1545,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           ? receipt ??= freeze(measureDirectionalMotion(first.frame_rows, rows, context)) : null;
         this.readPriorDirectionalScene = project => {
           if (this.observation?.observation_ref !== context.afterRef) return null;
-          const scene = project(first.frame_rows);
+          const scene = project(first.frame_rows, before);
           return scene === null ? null : freeze({ ...context, scene });
         };
         this.readDirectionalView = (field, focus, references) => {
@@ -2211,12 +2232,20 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.rememberLevelStart();
     const next = freeze(structuredClone(packet));
     const measured = freeze(await measureNativeObservation(next, this.actions + this.resetCount + 2, this.sessionId));
+    const recovery = isSicLevelRecovery(this.reason) ? this.reason : undefined;
+    const retained = new Map<string, NativeRecord>();
+    if (recovery) for (const family of this.families) {
+      if (family.requestedStopReason?.(before) !== recovery) continue;
+      const learned = family.stateAfterLevelReset?.(measured, next.frame_rows);
+      if (learned) retained.set(family.id, learned);
+    }
     const writes: NativeStoreWrite[] = this.levelStart!.families.map(node => ({
       id: node.id, kind: 'family_state', family: node.family as string,
-      value: hydrateNativeState(node.value, id => knowledge.memory.nodes[id]?.value),
+      value: retained.get(node.family as string) ?? hydrateNativeState(node.value, id => knowledge.memory.nodes[id]?.value),
     }));
     const receipt = { observation_ref: measured.observation_ref, before_observation_ref: before.observation_ref,
-      level: next.level, levels_completed: next.levels_completed, action_ref: 'RESET', after_packet: next };
+      level: next.level, levels_completed: next.levels_completed, action_ref: 'RESET', after_packet: next,
+      ...(recovery ? { cause: recovery } : {}) };
     writes.push({ id: `reasoning:level-reset:${measured.revision}`, kind: 'component_state', component: 'public_level_reset',
       status: 'observed', value: receipt, evidence: [before.observation_ref, measured.observation_ref] });
     this.check(execution);
@@ -2224,7 +2253,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.current = next; this.observation = measured; this.resetCount++;
     this.prefix = null; this.kind = 'boundary'; this.reason = null;
     this.latestReasoningReturn = null; this.observedQueue = undefined; this.lastClickReturn = null;
-    this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref });
+    this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref,
+      ...(recovery ? { cause: recovery } : {}) });
     return this.output();
   }
 
@@ -2424,7 +2454,8 @@ function nativeCallerFamilies(getCaller: () => NativeCallerCoordinator, meterFor
       bind: proposal => getCaller().bind(proposal),
       unacquiredInquiryWitness: (proposal, observation) => getCaller().unacquiredInquiryWitness(proposal, observation),
       before: async (proposal, index, publicPacket, observation) => await getCaller().before(proposal, index, publicPacket, observation) as { admitted: boolean; reason: string },
-      after: (...args) => getCaller().after(...args) as NativeAfterResult,
+      after: (proposal, index, before, after, first, second) =>
+        getCaller().after(proposal, index, before, after, first, second) as NativeAfterResult,
       // Goal/View/Frontier acquisition is universal and ordered by the common
       // caller; a selected provider must not replay it a second time.
       record: () => ({ events: [] }),
@@ -2514,6 +2545,7 @@ function subquestionFamily(family: NativeFamily<any>, field: string, subquestion
     ...(family.groundedInquiryWitness ? { groundedInquiryWitness: (...args: Parameters<NonNullable<NativeFamily['groundedInquiryWitness']>>) => family.groundedInquiryWitness!(...args) } : {}),
     ...(family.currentRequiredServiceWitness ? { currentRequiredServiceWitness: (...args: Parameters<NonNullable<NativeFamily['currentRequiredServiceWitness']>>) => family.currentRequiredServiceWitness!(...args) } : {}),
     ...(family.preservationObligations ? { preservationObligations: (...args: Parameters<NonNullable<NativeFamily['preservationObligations']>>) => family.preservationObligations!(...args) } : {}),
+    ...(family.controlledClickRegions ? { controlledClickRegions: (...args: Parameters<NonNullable<NativeFamily['controlledClickRegions']>>) => family.controlledClickRegions!(...args) } : {}),
     ...(family.retainedSuccessWitness ? { retainedSuccessWitness: (...args: Parameters<NonNullable<NativeFamily['retainedSuccessWitness']>>) => family.retainedSuccessWitness!(...args) } : {}),
     ...(family.acquiredContinuationWitness ? { acquiredContinuationWitness: (...args: Parameters<NonNullable<NativeFamily['acquiredContinuationWitness']>>) => family.acquiredContinuationWitness!(...args) } : {}),
     ...(family.unacquiredInquiryWitness ? { unacquiredInquiryWitness: (...args: Parameters<NonNullable<NativeFamily['unacquiredInquiryWitness']>>) => family.unacquiredInquiryWitness!(...args) } : {}),
@@ -2746,31 +2778,30 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const now = options.now ?? (() => performance.now());
     const testCompositions = recovery.solver === 'sic-fallback';
-    const groups = testCompositions ? [{ id: cycleGroup, families: [preparedEffectsId,compositionFamily] }, ...standalonePlanningGroups,
-      { id: exhaustedGroup, families: [preparedEffectsId,compositionFamily] }] : standalonePlanningGroups;
+    const groups = testCompositions ? planningGroupsWithExperiments(standalonePlanningGroups) : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 181 : 177,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 189 : 183,
       groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior, preparationReturns } : {}) };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
       ...(testCompositions ? [createCompositionTrials(), createPreparedEffects()] : []),
-      createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
+      createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
-      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(),
+      createSicSubsetExperiment(), createSicLearnScopeEffects(), createSicLearnScopeEffects(learnVisibleGroupEffectsId), createSicFramedContact(), createSicFramedContact(learnPatternAccessId), createSicReceptionAccess(learnReceptionAccessId), createSicTransportContact(learnTransportAccessId), createSicVerifyCombinedMarks(), createSicTransportContact(), createSicVerifyBandTransfer(), createSicVerifyBandTransfer(learnBandTransferId),
       createSicVerifySharedArrival(), createSicOutlineService(outlineServiceId, routeIntervention.learn),
-      createSicOutlineService(learnOutlineServiceId, routeIntervention.learn), routeIntervention, createSicObservedSurvival(), createSicObservedRailTransfers(),
+      createSicOutlineService(learnOutlineServiceId, routeIntervention.learn), routeIntervention, createSicObservedSurvival(), createSicObservedSurvival(learnCorridorAdvanceId), createSicMetricComposition(), createSicMetricComposition(learnMetricCompositionId), createSicVisibleReduction(), createSicVisibleReduction(learnVisibleReductionId), createSicPairedReorientation(), createSicPairedReorientation(learnPairedReorientationId), createSicObservedRailTransfers(),
       createSicSettleMatchingEdges(), createSicColumnAlignment(),
       createSicLabeledSequence(sequence, now), createSicLabeledSequence(sequence, now, learnLabeledSequenceId),
       createSicMarkedCollection(), createSicVisibleConfigurationCoverage(), createSicMarkedCompartmentFlow(), createSicObservedRelayRoute(), createSicObservedPrefixQuotas(),
       createSicObservedCarrierReduction(), createSicObservedLinePlacement(), createSicObservedPolePair(), createSicObservedSharedRelations(),
       createSicObservedPatternLayout(), createSicObservedActuatorArrangement(),
       createSicSlotTransfer(), createSicRemoteSupportRoute(), createSicRemoteSupportRoute(learnRemoteAccessId), createSicVerifyOccurrenceChoice(),
-      createSicVerifySlotPermutation(), createSicSurfaceCopy(), createSicSurfaceCopy(learnSurfaceCopyId), createSicVerifyProgramConfiguration(), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicVerifyProfileTransfer(),
-      createSicOrderedReplenishment(), createSicOrderedReplenishment(learnOrderedReplenishmentId), createSicVerifyPreviewPlacement(), createSicSymbolContribution(), createSicVerifyMarkedLattice(),
-      createSicQueuedPlacement(), createSicQueuedPlacement(learnQueuedPlacementId), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVerifyPatternChoice(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId), createSicChartRoute(), createSicChartRoute(learnChartRouteId), createSicVerifyReferencePlacement(), createSicCarryToFrame(), createSicCarryToFrame(learnCarryToFrameId), createSicPortPairing(), createSicPortPairing(learnPortPairingId), createSicFollowStableReference(), createSicVerifySequenceEdits(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicDirectionalReception(learnDirectionalReceptionId), createSicWindowCoverage(), createSicWindowCoverage(learnWindowCoverageId), createSicVerifyPanelConfiguration(), createSicVerifyCrossingRows(), createSicVerifyTraceCoverage(), createSicRadialConnection(), createSicRadialConnection(learnRadialConnectionId), createSicVerifyCaptureRoute(), createSicVerifyBranchAlignment(), createSicVerifyOrderedFeedback(), createSicCatalogueComparison(), createSicCatalogueComparison(revealedExampleId), createSicReceptionAccess(), createSicVerifyMarkerPlacement(), createSicFramedReception(), createSicFramedReception(learnFramedReceptionId), createSicWindowRelation(), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId), createSicReflectedPlacement(), createSicReflectedPlacement(coordinateObservedMotionId), createSicMaterialAssembly(), createSicMaterialAssembly(learnMaterialAssemblyId), createSicTranslateCoupledPieces(), createSicVerifyCoupledRoute(), createSicVerifyConnectedRoute(), createSicVerifyInventoryTransfer(), createSicVerifyRemoteReplay(), createSicVerifyOrientedDelivery(), createSicIndicatedJump(), createSicIndicatedJump(learnIndicatedJumpId), createSicHighlightedRoute(), createSicHighlightedRoute(learnHighlightedRouteId), createSicPairedPassage(), createSicPairedPassage(learnPairedPassageId), createSicVerifyFrameContact(), createSicSwitchedSurface(), createSicSwitchedSurface(learnSwitchedSurfaceId), createSicVerifyGaugeEffect(), createSicCoupledGaugeRoute(), createSicVerifyReactiveMotion(), createSicVerifyChannelAccess(), createSicVerifyCompartmentGrowth(), createSicVerifyPointAccess(), createSicMergeForDemand(), createSicVerifyLinkedMotion(), createSicLinkedGroupRoute(), createSicVerifyRemovableSupport(), createSicProtectGravityRoute(), createSicGatedCascade(), createSicGatedCascade(learnCascadeId), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicLitRoute(learnLitRouteId), createSicPivotCargo(), createSicPivotCargo(learnPivotCargoId), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicNestedPassage(learnNestedPassageId), createSicLinkOpenings(), createSicLinkOpenings(learnLinkOpeningsId), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicArrangeTurnPosts(learnTurnPostsId), createSicCavityAccess(), createSicLearnCorrespondence(), createSicLearnCorrespondence(learnRepeatedCellsId), createSicCompareAvailableControls(), createSicPublicInputExploration(), createSicRecheckDirectionalControls(), createSicTrialRepeatedLinearControls(), createSicContrastControls(contrastProbeId),
+      createSicVerifySlotPermutation(), createSicVerifySlotPermutation(learnSlotPermutationId, recovery.solver === 'sic-fallback'), createSicSurfaceCopy(), createSicSurfaceCopy(learnSurfaceCopyId), createSicVerifyProgramConfiguration(), createSicVerifyProgramConfiguration(learnProgramConfigurationId), createSicProgramOrigin(), createSicProgramOrigin(learnProgramOriginId), createSicVerifyProfileTransfer(),
+      createSicOrderedReplenishment(), createSicOrderedReplenishment(learnOrderedReplenishmentId, recovery.solver === 'sic-fallback'), createSicVerifyPreviewPlacement(), createSicVerifyPreviewPlacement(learnPreviewPlacementId), createSicSymbolContribution(), createSicVerifyMarkedLattice(), createSicVerifyMarkedLattice(learnMarkedLatticeId),
+      createSicQueuedPlacement(), createSicQueuedPlacement(learnQueuedPlacementId), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVerifyPatternChoice(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId, recovery.solver === 'sic-fallback'), createSicChartRoute(), createSicChartRoute(learnChartRouteId), createSicVerifyReferencePlacement(), createSicVerifyReferencePlacement(learnReferencePlacementId, recovery.solver === 'sic-fallback'), createSicCarryToFrame(), createSicCarryToFrame(learnCarryToFrameId), createSicPortPairing(), createSicPortPairing(learnPortPairingId), createSicFollowStableReference(), createSicVerifySequenceEdits(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicDirectionalReception(learnDirectionalReceptionId, recovery.solver === 'sic-fallback'), createSicWindowCoverage(), createSicWindowCoverage(learnWindowCoverageId), createSicVerifyPanelConfiguration(), createSicVerifyCrossingRows(), createSicVerifyCrossingRows(learnCrossingRowsId, recovery.solver === 'sic-fallback'), createSicVerifyTraceCoverage(), createSicRadialConnection(), createSicRadialConnection(learnRadialConnectionId), createSicVerifyCaptureRoute(), createSicVerifyCaptureRoute(learnCaptureRouteId), createSicVerifyBranchAlignment(), createSicVerifyBranchAlignment(learnBranchAlignmentId), createSicVerifyOrderedFeedback(), createSicCatalogueComparison(), createSicCatalogueComparison(revealedExampleId), createSicReceptionAccess(), createSicVerifyMarkerPlacement(), createSicFramedReception(), createSicFramedReception(learnFramedReceptionId), createSicWindowRelation(), createSicWindowRelation(learnWindowRelationId), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId, recovery.solver === 'sic-fallback'), createSicReflectedPlacement(), createSicReflectedPlacement(coordinateObservedMotionId), createSicMaterialAssembly(), createSicMaterialAssembly(learnMaterialAssemblyId), createSicTranslateCoupledPieces(), createSicVerifyCoupledRoute(), createSicVerifyConnectedRoute(), createSicVerifyConnectedRoute(learnConnectedRouteId), createSicVerifyInventoryTransfer(), createSicVerifyInventoryTransfer(learnInventoryTransferId), createSicVerifyRemoteReplay(), createSicVerifyRemoteReplay(learnRemoteReplayId), createSicVerifyOrientedDelivery(), createSicVerifyOrientedDelivery(learnOrientedDeliveryId), createSicIndicatedJump(), createSicIndicatedJump(learnIndicatedJumpId), createSicHighlightedRoute(), createSicHighlightedRoute(learnHighlightedRouteId), createSicPairedPassage(), createSicPairedPassage(learnPairedPassageId, recovery.solver === 'sic-fallback'), createSicVerifyFrameContact(), createSicVerifyFrameContact(learnFrameAccessId, recovery.solver === 'sic-fallback'), createSicSwitchedSurface(), createSicSwitchedSurface(learnSwitchedSurfaceId, recovery.solver === 'sic-fallback'), createSicVerifyGaugeEffect(), createSicVerifyGaugeEffect(learnGaugeEffectId), createSicCoupledGaugeRoute(), createSicVerifyReactiveMotion(), createSicVerifyReactiveMotion(learnReactiveMotionId), createSicVerifyChannelAccess(), createSicVerifyCompartmentGrowth(), createSicVerifyPointAccess(), createSicMergeForDemand(), createSicVerifyLinkedMotion(), createSicLinkedGroupRoute(), createSicVerifyRemovableSupport(), createSicVerifyRemovableSupport(learnRemovableSupportId), createSicProtectGravityRoute(), createSicGatedCascade(), createSicGatedCascade(learnCascadeId), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicLitRoute(learnLitRouteId), createSicPivotCargo(), createSicPivotCargo(learnPivotCargoId, recovery.solver === 'sic-fallback'), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicNestedPassage(learnNestedPassageId), createSicLinkOpenings(), createSicLinkOpenings(learnLinkOpeningsId), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId, recovery.solver === 'sic-fallback'), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicArrangeTurnPosts(learnTurnPostsId), createSicCavityAccess(), createSicLearnCorrespondence(), createSicLearnCorrespondence(learnRepeatedCellsId), createSicCompareAvailableControls(), createSicPublicInputExploration(recovery.solver === 'sic-fallback'), createSicRecheckDirectionalControls(), createSicTrialRepeatedLinearControls(), createSicContrastControls(contrastProbeId),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', withdrawPrimaryFamily: recovery.solver === 'sic-fallback',
       adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,

@@ -38,7 +38,7 @@ export function matchingTransientDisplay(first: R, second: R): boolean {
       'scalar_fill_prefix_value', 'scalar_fill_suffix_value'].every(field => first[field] === second[field]);
 }
 
-export function projectTransientCurve(model:R,rows:NativeRows, projectedFill?: number, options?:{sourceCandidate?:string;aim?:NativePoint;displayOverlay?:string}):R{
+export function projectTransientCurve(model:R,rows:NativeRows, projectedFill?: number, options?:{sourceCandidate?:string;aim?:NativePoint;displayOverlay?:string;excludedAims?:readonly NativePoint[]}):R{
   const current=supportParts(rows),sources=current.filter(c=>options?.sourceCandidate?c.component_id===options.sourceCandidate:transientSignature(c)===model.source_signature),peers=current.filter(c=>transientSignature(c)===model.peer_signature);if(sources.length!==1||peers.length!==1)return{status:'unknown',reason:'current_source_peer_not_unique'};
   const fill=measureScalarFillDisplay(rows), base=model.fill.scalar_fill_count;
   const compatible=projectedFill===undefined ? fill.scalar_fill_display_present && fill.scalar_fill_count===base
@@ -47,7 +47,7 @@ export function projectTransientCurve(model:R,rows:NativeRows, projectedFill?: n
   const source=sources[0]!,peer=peers[0]!,delta=transientCenterTwice(source).map((a,i)=>a-model.source_center_twice[i]);if(!options?.sourceCandidate&&delta.some(v=>v%2))return{status:'unknown',reason:'nonintegral_retained_support_translation'};const[dy,dx]=delta.map(v=>v/2);
   const track=model.track.map((raw:R)=>{const c=hydrate(raw);return{...c,pixels:c.pixels.map(([y,x]:number[])=>[y!+dy!,x!+dx!]),bbox:{...c.bbox,top:c.bbox.top+dy!,left:c.bbox.left+dx!,bottom:c.bbox.bottom+dy!,right:c.bbox.right+dx!}};});
   const aim=options?.aim&&{point:[options.aim[1],options.aim[0]],observedDirection:model.aim_delta_twice,displayOverlay:options.displayOverlay};
-  const[contact,disclosure]=ballisticContactClick(track,source,peer,current,rows,null,projectedFill===undefined?1:projectedFill/base,aim);
+  const[contact,disclosure]=ballisticContactClick(track,source,peer,current,rows,null,projectedFill===undefined?1:projectedFill/base,aim,options?.excludedAims);
   const box=(body:R)=>[body.bbox.left,body.bbox.top,body.bbox.right,body.bbox.bottom];
   return{status:'measured',contact_solution:contact,curve_disclosure:disclosure,source_ref:source.component_id,peer_ref:peer.component_id,model_ref:model.model_ref,acquisition_epoch:model.acquisition_epoch,scope:'Old measured curve translated to current recognized source; current terrain and peer recomputed. Model utility and terminal role remain hypotheses.',
     ...(projectedFill===undefined?{}:{source_box:box(source),peer_box:box(peer),velocity_ratio:projectedFill/base})};

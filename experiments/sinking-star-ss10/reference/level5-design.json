@@ -1,0 +1,317 @@
+{
+  "spec": {
+    "id": "ss10-05",
+    "title": "Les deux diagonales du relais",
+    "rows": [
+      "~~~~~~~~~~~~~~",
+      "~~~g~~~~.g~~~~",
+      "~~~~~~~~~~~~~~",
+      "~~.~..~~~~~~~~",
+      "~~..T.~~....~~",
+      "~~....~.....~~",
+      "~~....~~...W~~",
+      "~~~~~~~~#...~~",
+      "~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~"
+    ],
+    "facing": "W",
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 3
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 6
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "ancre",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 5
+          }
+        ],
+        "color": 7
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 5
+        },
+        "circuit": "ancre",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "LLCDDLULDRXRCULLX",
+  "actions": [
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes and Mirrors 5 · laisser le miroir sur son bouton",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5",
+    "puzzle": 5,
+    "objective": "Extraire un miroir par traction, régler la réception par poussée et laisser deux diagonales conduire les héros à deux îlots distincts."
+  },
+  "metrics": {
+    "actions": 17,
+    "selections": 2,
+    "warriorPushes": 2,
+    "thiefPulls": 3,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 5,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier règle la diagonale d’arrivée du Voleur.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait le miroir et le place sur le bouton sans pouvoir le pousser.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": true
+      }
+    },
+    {
+      "label": "Le reflet libère le Voleur, qui laisse le miroir maintenir la porte.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": true
+      }
+    },
+    {
+      "label": "Le Guerrier emprunte la seconde diagonale vers sa destination isolée.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": true
+      }
+    }
+  ],
+  "adaptation": "Géométrie originale à quatre îlots et deux destinations isolées. Le principe du miroir conservé sur un bouton et de la sortie par reflet vient de Heroes and Mirrors 5. Le Guerrier ajouté doit déplacer le miroir récepteur ; le Voleur seul peut extraire le miroir du bord nord et le décaler sur le bouton. Deux destinations différentes remplacent la sortie unique du guide."
+}

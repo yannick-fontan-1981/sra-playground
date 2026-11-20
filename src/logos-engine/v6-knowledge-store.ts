@@ -6,12 +6,14 @@ import { executeWorkflow, validateCompiledModule } from './interpreter.ts';
 import type { CompiledModule, ExecutionOptions, JsonObject, JsonValue, Primitive } from './ir.ts';
 import { NativeSrcProgram, V6_NATIVE_PROGRAM_REFERENCE } from './v6-src-program.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
-import { hydrateNativeState, isNativeStateGraph, splitNativeState, type NativeStateGraphRoot } from './v6-native-state-graph.ts';
+import { hydrateNativeState, isNativeStateGraph, isValidatedFrozenNativeState, splitNativeState, type NativeStateGraphRoot } from './v6-native-state-graph.ts';
 
 const FLOAT = '$v6_float64';
 const OBJECT = '$v6_object';
 export const NATIVE_STORE_PROFILE = 'v6.native-state.v2/fragmented-float64-be';
 const GRAPH_STATE_KINDS = new Set(['family_state', 'prefix_evidence', 'component_state', 'reasoning_catalog', 'transition_evidence']);
+const publicationWriteQuantum = 64;
+const publicationTurnMs = 16;
 
 /**
  * Keep V7 canonical integers unchanged. Fractional numbers and negative zero
@@ -98,10 +100,17 @@ export class NativeKnowledgeStore {
   private busy = false;
   private callbacks = new Map<string, Readonly<Record<string, Primitive>>>();
   private hydrated = new Map<string, { node: KnowledgeNode; fragments: readonly KnowledgeNode[]; value: JsonValue }>();
-  private lastPublicTransition: NativeStateGraphRoot | undefined;
+  private comparisonRoots = new Map<string, NativeStateGraphRoot>();
+  private readonly publishedSources = new WeakMap<object, NativeStateGraphRoot>();
+  // Host turns let temporary weak-cache targets be collected while the
+  // transaction's complete publication remains staged.
+  private readonly yieldControl: (() => Promise<void>) | undefined;
+  private writesSinceYield = 0;
+  private lastYieldAt = 0;
 
-  constructor(sourceDigest: string, scope: string, maxNodes = 16_384) {
+  constructor(sourceDigest: string, scope: string, maxNodes = 16_384, yieldControl?: () => Promise<void>) {
     this.scope = scope;
+    this.yieldControl = yieldControl;
     this.kernel = new Kernel({
       node_fields: ['id', 'kind', 'revision', 'status', 'scope', 'origin', 'evidence', 'relations', 'value'],
       kinds: { program: ['definition'], family_state: ['family'], family_activation: ['family'], prefix_evidence: ['family'],
@@ -147,24 +156,39 @@ export class NativeKnowledgeStore {
     try {
       const staged = this.kernel.beginTransaction(this.state);
       const accepted = new Map<string, { source: unknown; node: KnowledgeNode }>();
-      let lastPublicTransition = this.lastPublicTransition;
+      const comparisonRoots = new Map(this.comparisonRoots);
       for (const write of writes) {
         // Fragment before the ordinary V7 JSON boundary: a complete observed
         // episode can exceed one million values without any individual node
         // exceeding the declared structural limit. Old fragments are immutable
         // and content-addressed, so repeated frames/evidence are shared.
         const source = write.value;
+        const currentValue = staged.node(write.id)?.value;
         let storedValue: JsonValue;
         if (GRAPH_STATE_KINDS.has(write.kind)) {
-          // Consecutive public transitions have distinct identities and often
-          // share most of their visual evidence. Reuse the last closed root
-          // as a comparison for this stream only, including within a batch.
-          const publicTransition = write.kind === 'transition_evidence' && write.component === 'public_transition';
-          const root = staged.node(write.id)?.value ?? (publicTransition ? lastPublicTransition : undefined);
-          const graph = splitNativeState(source, write.id, isNativeStateGraph(root)
+          // Appended traces and public returns have distinct identities, but
+          // often repeat closed evidence. A component's last root is only a
+          // comparison candidate: the new raw source is still fully checked.
+          const stream = write.component && (write.kind === 'component_state' || write.kind === 'transition_evidence')
+            ? `${write.kind}:${write.component}` : undefined;
+          const root = currentValue ?? (stream ? comparisonRoots.get(stream) : undefined);
+          const published = isValidatedFrozenNativeState(source) ? this.publishedSources.get(source) : undefined;
+          // Fragments of this exact root were accepted by this store and
+          // remain in its append-only graph. Other owners or revisions still
+          // traverse the complete encoder, even with the same frozen input.
+          const graph = published && currentValue === published ? null : splitNativeState(source, write.id, isNativeStateGraph(root)
             ? { prior: { root, readFragment: id => staged.node(id)?.value } } : undefined);
-          if (publicTransition) lastPublicTransition = graph.root;
-          for (const fragment of graph.fragments) {
+          const encoded = graph?.root ?? published!;
+          if (this.yieldControl && performance.now() - this.lastYieldAt >= publicationTurnMs) {
+            this.writesSinceYield = 0;
+            await this.yieldControl();
+            this.lastYieldAt = performance.now();
+          }
+          if (stream) {
+            comparisonRoots.delete(stream); comparisonRoots.set(stream, encoded);
+            if (comparisonRoots.size > 64) comparisonRoots.delete(comparisonRoots.keys().next().value!);
+          }
+          for (const fragment of graph?.fragments ?? []) {
             const existing = staged.node(fragment.id);
             if (existing) {
               if (existing.kind !== 'state_fragment' || existing.scope !== this.scope) throw new TypeError('Native fragment identity is already bound to another kind or scope');
@@ -175,8 +199,13 @@ export class NativeKnowledgeStore {
               origin: { source_digest: this.kernel.sourceDigest, store_profile: NATIVE_STORE_PROFILE, ...cause },
               evidence: [], relations: [], component: 'native_state_fragments', value: fragment.value,
             }) as JsonObject, cause);
+            if (this.yieldControl && ++this.writesSinceYield >= publicationWriteQuantum) {
+              this.writesSinceYield = 0;
+              await this.yieldControl();
+              this.lastYieldAt = performance.now();
+            }
           }
-          storedValue = immutableJson(graph.root);
+          storedValue = encoded;
         } else storedValue = encodeNativeState(source);
         const previous = staged.node(write.id);
         if (previous && (previous.kind !== write.kind || previous.scope !== this.scope)) throw new TypeError('Native node identity cannot change kind or scope');
@@ -184,7 +213,10 @@ export class NativeKnowledgeStore {
         // Share only the already closed payload when its full typed encoding is
         // unchanged. This keeps source values, Float64 bits and canonical graph
         // bytes exact while avoiding a fresh hydration of passive family state.
-        if (previous?.value !== undefined && equal(previous.value, storedValue)) storedValue = previous.value;
+        // A current node payload already passed its Kernel hash. Exact identity
+        // needs no second canonical encoding; different values keep the full
+        // typed comparison, including a newly encoded caller input.
+        if (previous?.value !== undefined && (previous.value === storedValue || equal(previous.value, storedValue))) storedValue = previous.value;
         const definition = previous?.definition ?? write.definition;
         const node = {
           id: write.id, kind: write.kind, revision: previous?.revision ?? 0, status: write.status ?? previous?.status ?? 'retained', scope: this.scope,
@@ -195,10 +227,20 @@ export class NativeKnowledgeStore {
           ...(definition === undefined ? {} : { definition }),
         };
         await staged.commit(immutableJson(node) as JsonObject, cause);
+        if (this.yieldControl && ++this.writesSinceYield >= publicationWriteQuantum) {
+          this.writesSinceYield = 0;
+          await this.yieldControl();
+          this.lastYieldAt = performance.now();
+        }
         accepted.set(node.id, { source, node: staged.node(node.id)! });
       }
       this.state = staged.finish();
-      this.lastPublicTransition = lastPublicTransition;
+      this.comparisonRoots = comparisonRoots;
+      for (const { source, node } of accepted.values()) {
+        if (GRAPH_STATE_KINDS.has(node.kind) && isValidatedFrozenNativeState(source) && isNativeStateGraph(node.value)) {
+          this.publishedSources.set(source, node.value);
+        }
+      }
       return accepted;
     } finally { this.busy = false; }
   }

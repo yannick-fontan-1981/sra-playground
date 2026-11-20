@@ -3,6 +3,8 @@ import type { NativeBox, NativeCommand, NativePoint, NativeRows } from '../logos
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Target = { point: NativePoint; kind: 'calibration' | 'marker' | 'mode' };
+type MarkerCycle = { positions: NativePoint[]; phase: number };
+type MobileMarker = { tag: string; history: NativePoint[]; cycle: MarkerCycle | null };
 type Scene = {
   ground: NativeBox; pitch: number; sites: string[]; extent: number; actorColor: number;
   markerColor: number; calibrator: NativeBox | null; control: NativeBox; counter: NativeBox[]; preparation?: NativeBox[];
@@ -13,8 +15,10 @@ export type MarkerField = {
   initialCounter: string[]; counter: string[]; movements: string[]; count: number; stopped: boolean;
   initialPreparation?: string[];
   prepared?: { point: NativePoint; values: string[]; evidence: string } | null;
+  mobile?: MobileMarker | null;
+  tracksInitialPatrol?: true;
 };
-export type MarkerStep = { target: Target; landing: NativePoint | null; command: NativeCommand };
+export type MarkerStep = { target: Target; landing: NativePoint | null; command: NativeCommand; followsMobile?: true };
 type Result = { kind: 'moved' | 'blocked' | 'calibrated' | 'acquired' | 'tested' | 'mode_changed' | 'contradicted'; counter: string[] }
   | { kind: 'prepared'; counter: string[]; preparation: string[] };
 
@@ -33,6 +37,42 @@ const sameCounter = (a: string[], b: string[]) => a.every((block, i) => block ==
 const changedCounter = (base: string[], next: string[]) => next.filter((block, i) => block !== base[i]).length;
 const edge = (at: NativePoint, id: string) => key(at) + ':' + id;
 const attempt = (phase: number, point: NativePoint) => phase + ':' + key(point);
+
+export function findMarkerCycle(history: NativePoint[]): MarkerCycle | null {
+  for (let period = 2; period <= 12 && history.length >= 2 * period; period++) {
+    const positions = history.slice(-period);
+    const earlier = history.slice(-2 * period, -period);
+    if (new Set(positions.map(key)).size >= 2 && positions.every((position, i) => same(position, earlier[i]!))) {
+      return { positions, phase: period - 1 };
+    }
+  }
+  return null;
+}
+
+function readMobileMarker(scene: Scene, rows: NativeRows) {
+  const candidates = scene.sites.flatMap(site => {
+    const at = site.split(',').map(Number) as [number, number];
+    const pixels = rect(rows, boxAt(at, scene.extent)).flat();
+    const different = pixels.flatMap((value, i) => value === scene.markerColor ? [] : [i]);
+    return different.length === 1 ? [{ at, tag: different[0] + ':' + pixels[different[0]!] }] : [];
+  });
+  return candidates.length === 1 ? candidates[0]! : null;
+}
+
+function retainMobileMarker(state: MarkerField, rows: NativeRows, actor: NativePoint): MobileMarker | null {
+  const observed = readMobileMarker(state.scene, rows);
+  const previous = state.mobile, cycle = previous?.cycle;
+  const nextPhase = cycle ? (cycle.phase + 1) % cycle.positions.length : 0;
+  const next = cycle?.positions[nextPhase];
+  if (!observed) return previous && cycle && next && same(next, actor)
+    ? { ...previous, cycle: { ...cycle, phase: nextPhase } } : null;
+  const sameTag = previous?.tag === observed.tag;
+  if (previous && cycle && next && sameTag && same(next, observed.at)) {
+    return { ...previous, cycle: { ...cycle, phase: nextPhase } };
+  }
+  const history = [...(sameTag && !cycle ? previous!.history.slice(-23) : []), observed.at];
+  return { tag: observed.tag, history, cycle: findMarkerCycle(history) };
+}
 const square = (part: Part) => part.rectangular && width(part.bbox) === height(part.bbox);
 const gcd = (a: number, b: number): number => b ? gcd(b, a % b) : Math.abs(a);
 
@@ -100,6 +140,16 @@ export function readMarkerField(rows: NativeRows, epoch: number, evidence: strin
       // Markers can occupy only every other cell. Include the visible cursor on that same field.
       if (possibleActors.length === 1) pitch = partPoint(possibleActors[0]!).reduce(
         (spacing, value, i) => gcd(spacing, value - origin[i]!), pitch);
+      if (pitch > extent * 3) {
+        const measured = gcd(gcd(pitch, width(ground.bbox)), height(ground.bbox));
+        if (measured > extent) pitch = measured;
+      }
+      if (pitch > extent * 3) {
+        const tagged = parts.filter(part => part.color === marker.color && part.area === extent ** 2 - 1
+          && width(part.bbox) === extent && height(part.bbox) === extent && inside(ground.bbox, part.bbox));
+        if (tagged.length === 1) pitch = partPoint(tagged[0]!).reduce(
+          (spacing, value, i) => gcd(spacing, value - origin[i]!), pitch);
+      }
     }
     if (pitch <= extent || pitch > extent * 3) continue;
     const indexed = (part: Part) => inside(ground.bbox, part.bbox)
@@ -124,8 +174,10 @@ export function readMarkerField(rows: NativeRows, epoch: number, evidence: strin
     const scene = { ground: ground.bbox, pitch, extent, sites, actorColor: actor.color, markerColor: marker.color,
       calibrator: calibrator?.bbox ?? null, control: control.bbox, counter, ...(preparation ? { preparation } : {}) };
     const initialCounter = counterValues(scene, rows);
+    const mobile = preparation ? readMobileMarker(scene, rows) : null;
     candidates.push({ epoch, scene, at: partPoint(actor), target: null, calibration: null, modeChanges: 0,
       tried: [], blocked: [], evidence, initialCounter, counter: initialCounter, movements, count: 0, stopped: false,
+      ...(mobile ? { tracksInitialPatrol: true, mobile: { tag: mobile.tag, history: [mobile.at], cycle: null } } : {}),
       ...(preparation ? { initialPreparation: blockValues(preparation, rows) } : {}) });
   }
   return candidates.length === 1 ? candidates[0]! : null;
@@ -138,6 +190,31 @@ function markerPoints(scene: Scene, rows: NativeRows): NativePoint[] {
 
 function locateActor(scene: Scene, rows: NativeRows, point: NativePoint): boolean {
   return rect(rows, boxAt(point, scene.extent)).every(row => row.length === scene.extent && row.every(value => value === scene.actorColor));
+}
+
+type MarkerTravel = Pick<MarkerStep, 'command' | 'landing'>;
+type MarkerMove = { command: NativeCommand; x: number; y: number };
+
+function approachMobileMarker(state: MarkerField, moves: MarkerMove[], sites: Set<string>, press: NativeCommand): MarkerStep | null {
+  const cycle = state.mobile?.cycle;
+  if (!cycle) return null;
+  type Node = { at: NativePoint; phase: number; first: MarkerTravel | null };
+  const queue: Node[] = [{ at: state.at, phase: cycle.phase, first: null }];
+  const seen = new Set([key(state.at) + '/' + cycle.phase]);
+  for (const node of queue) {
+    const phase = (node.phase + 1) % cycle.positions.length;
+    if (same(node.at, cycle.positions[node.phase]!) && same(node.at, cycle.positions[phase]!)) {
+      return { target: { point: node.at, kind: 'marker' }, followsMobile: true,
+        ...(node.first ?? { command: press, landing: null }) };
+    }
+    for (const move of moves) {
+      const landing: NativePoint = [node.at[0] + move.x, node.at[1] + move.y], id = key(landing) + '/' + phase;
+      if (!sites.has(key(landing)) || seen.has(id) || state.blocked.includes(edge(node.at, move.command.action_ref))) continue;
+      seen.add(id);
+      queue.push({ at: landing, phase, first: node.first ?? { command: move.command, landing } });
+    }
+  }
+  return null;
 }
 
 export function nextMarkerStep(state: MarkerField, rows: NativeRows, inputs: readonly NativeCommand[]): MarkerStep | null {
@@ -161,18 +238,26 @@ export function nextMarkerStep(state: MarkerField, rows: NativeRows, inputs: rea
   }
   let target = retained && nodes.has(key(retained.point)) ? retained : null;
   if (!target && !state.calibration && scene.calibrator) target = { kind: 'calibration', point: [scene.calibrator[0], scene.calibrator[1]] };
+  const operation = inputs.find(command => command.action_ref === 'ACTION5');
   if (!target) {
     const marker = markerPoints(scene, rows).filter(point => nodes.has(key(point)) && !state.tried.includes(attempt(state.modeChanges, point)))
       .sort((a, b) => nodes.get(key(a))!.distance - nodes.get(key(b))!.distance || a[1] - b[1] || a[0] - b[0])[0];
     if (marker) target = { kind: 'marker', point: marker };
-    else if (state.modeChanges < 3 && changedCounter(state.initialCounter, state.counter) < scene.counter.length) {
-      target = { kind: 'mode', point: [scene.control[0], scene.control[1]] };
+    else if (changedCounter(state.initialCounter, state.counter) < scene.counter.length) {
+      if (state.mobile && operation) {
+        const rendezvous = approachMobileMarker(state, moves, sites, operation);
+        if (rendezvous) return rendezvous;
+        if (!state.mobile.cycle && state.mobile.history.length < 24) {
+          const sample = queue.find(node => node.first && !state.mobile!.history.some(at => same(at, node.point)));
+          if (sample?.first) return { ...sample.first, target: { point: state.mobile.history.at(-1)!, kind: 'marker' }, followsMobile: true };
+        }
+      }
+      if (state.modeChanges < 3) target = { kind: 'mode', point: [scene.control[0], scene.control[1]] };
     }
   }
   if (!target) return null;
   const path = nodes.get(key(target.point));
   if (!path) return null;
-  const operation = inputs.find(command => command.action_ref === 'ACTION5');
   return path.first ? { target, ...path.first } : operation ? { target, command: operation, landing: null } : null;
 }
 
@@ -208,19 +293,23 @@ export function assessMarkerStep(state: MarkerField, step: MarkerStep, first: Na
   return { kind: 'contradicted', counter };
 }
 
-export function retainMarkerStep(state: MarkerField, step: MarkerStep, result: Result, ref: string): MarkerField {
+export function retainMarkerStep(state: MarkerField, step: MarkerStep, result: Result, ref: string, rows: NativeRows): MarkerField {
   const { kind, counter } = result;
   const traveling = kind === 'moved' || kind === 'blocked';
+  const at = kind === 'moved' ? step.landing! : state.at;
+  const modeChanges = state.modeChanges + Number(kind === 'mode_changed');
   return {
     ...state, counter, count: state.count + 1, stopped: kind === 'contradicted',
     evidence: [...state.evidence.slice(-5), ref],
-    at: kind === 'moved' ? step.landing! : state.at, target: traveling || kind === 'prepared' ? step.target : null,
+    at, target: traveling && !step.followsMobile || kind === 'prepared' ? step.target : null,
     movements: kind === 'moved' ? [...new Set([...state.movements, step.command.action_ref])] : state.movements,
     blocked: kind === 'blocked' ? [...state.blocked, edge(state.at, step.command.action_ref)] : state.blocked,
     calibration: kind === 'calibrated' ? ref : state.calibration,
-    modeChanges: state.modeChanges + Number(kind === 'mode_changed'),
+    modeChanges,
     tried: kind === 'tested' || kind === 'acquired' ? [...state.tried, attempt(state.modeChanges, step.target.point)] : state.tried,
     ...(state.scene.preparation ? { prepared: kind === 'prepared'
       ? { point: step.target.point, values: result.preparation, evidence: ref } : null } : {}),
+    ...(state.scene.preparation && (modeChanges > 0 || state.tracksInitialPatrol)
+      ? { mobile: retainMobileMarker(kind === 'mode_changed' && state.tracksInitialPatrol ? { ...state, mobile: null } : state, rows, at) } : {}),
   };
 }

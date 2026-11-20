@@ -1,0 +1,678 @@
+{
+  "spec": {
+    "id": "ss06-08",
+    "title": "Le verrou vert",
+    "mode": "solo-warrior",
+    "facing": "N",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~.~~~~~~~.~~~~~~~",
+      "####~#######~#######",
+      "#........##........#",
+      "#........##.~......#",
+      "#.......o##.~......#",
+      "#........###.......#",
+      "#...W....##.#....o.#",
+      "#..................#",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~.~~~~~~~~~~~~~~~~~~",
+      "~...~~~~~~~..g.~~~~~",
+      "~~~~~~~~~~~....~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 4,
+          "y": 7
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 7
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 4
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "ancrage",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 2
+          }
+        ]
+      },
+      {
+        "id": "alternance",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      }
+    ],
+    "gates": [],
+    "platforms": [
+      {
+        "at": {
+          "x": 4,
+          "y": 13
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 13
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 13
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 13
+        },
+        "circuit": "ancrage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 13
+        },
+        "circuit": "alternance",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 13
+        },
+        "circuit": "alternance",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 13
+        },
+        "circuit": "alternance",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "UDDRRRRRRRRRRRRRUXUUUULLLLDDDDDLLLLLLLLLLLLDDDDRRRRRXRRXRRRRR",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "puzzle": 20,
+    "label": "Adaptation · Heroes and Mirrors 20 : deux miroirs verrouillent le circuit vert, puis le Guerrier alterne les passages violets.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-20",
+    "piston": false,
+    "platform": true
+  },
+  "metrics": {
+    "actions": 61,
+    "selections": 0,
+    "merchantPushes": 0,
+    "warriorPushes": 5,
+    "chainPushes": 0,
+    "stoneMoves": 5,
+    "mirrorMoves": 4,
+    "reflections": 3,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Aligner le miroir de l’atelier gauche",
+      "turn": 1,
+      "hero": {
+        "x": 4,
+        "y": 9
+      },
+      "green": false,
+      "violet": false,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "label": "Placer la caisse dans le rayon vert",
+      "turn": 17,
+      "hero": {
+        "x": 17,
+        "y": 10
+      },
+      "green": false,
+      "violet": false,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "label": "Premier reflet : les deux boutons sont actifs",
+      "turn": 18,
+      "hero": {
+        "x": 17,
+        "y": 10
+      },
+      "green": true,
+      "violet": true,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Le second miroir coupe le retour du vert",
+      "turn": 27,
+      "hero": {
+        "x": 13,
+        "y": 7
+      },
+      "green": true,
+      "violet": true,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Atteindre le premier appui sûr",
+      "turn": 52,
+      "hero": {
+        "x": 6,
+        "y": 15
+      },
+      "green": true,
+      "violet": true,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Vert maintenu, violet relâché",
+      "turn": 53,
+      "hero": {
+        "x": 6,
+        "y": 15
+      },
+      "green": true,
+      "violet": false,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        true,
+        true,
+        true,
+        true,
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "label": "Vert maintenu, violet réactivé",
+      "turn": 56,
+      "hero": {
+        "x": 8,
+        "y": 15
+      },
+      "green": true,
+      "violet": true,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    },
+    {
+      "label": "Destination du Guerrier",
+      "turn": 61,
+      "hero": {
+        "x": 13,
+        "y": 15
+      },
+      "green": true,
+      "violet": true,
+      "mirrors": [
+        {
+          "at": {
+            "x": 4,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "platformActive": [
+        true,
+        true,
+        true,
+        true,
+        true,
+        false,
+        true
+      ]
+    }
+  ],
+  "adaptation": "Un Guerrier et une cible. Un miroir à gauche pilote le violet ; deux miroirs à droite coupent physiquement le retour de la caisse verte. Sept plateformes, aucun piston ni retard imposé au premier reflet."
+}

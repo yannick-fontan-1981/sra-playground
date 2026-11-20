@@ -96,6 +96,18 @@ export function relativeArrangementCell(rows: NativeRows, x: number, y: number, 
   return { value, marker: exceptions.length ? pixel(rows, center[0], center[1]) : null, point: center };
 }
 
+function arrangementGuideMark(rows: NativeRows, x: number, y: number, size: number): RelativeArrangementCellValue | null {
+  if (size < 3) return null;
+  const mid = Math.floor(size / 2), edge = size - 1, point: RelativeArrangementPoint = [x + mid, y + mid];
+  const value = pixel(rows, ...point), ink = pixel(rows, x, y);
+  if (value === ink) return null;
+  for (let dy = 0; dy < size; dy++) for (let dx = 0; dx < size; dx++) {
+    const corner = (dx === 0 || dx === edge) && (dy === 0 || dy === edge);
+    if (pixel(rows, x + dx, y + dy) !== (corner ? ink : value)) return null;
+  }
+  return { value, point, marker: null };
+}
+
 export function relativeArrangementPads(obs: NativeObservation, rows: NativeRows, board: NativeBox, size: number): RelativeArrangementPad[] {
   const [l, t, r, b] = board, tiles = new Map<string, { pos: RelativeArrangementPoint; cell: RelativeArrangementCellValue }>();
   for (const entity of obs.entities) {
@@ -134,24 +146,33 @@ export function relativeArrangementPads(obs: NativeObservation, rows: NativeRows
   return groups.sort((a, b) => lexical(a.origin, b.origin));
 }
 
-export function relativeArrangementProject(obs: NativeObservation, rows: NativeRows): RelativeArrangementLayout | null {
+export function relativeArrangementProject(obs: NativeObservation, rows: NativeRows,
+  measured?: Pick<RelativeArrangementLayout, 'board' | 'size'>): RelativeArrangementLayout | null {
   const frames = relativeArrangementRectangles(obs), candidates: RelativeArrangementLayout[] = [];
   for (const board of frames) {
     const [l, t, r, b] = board, innerw = r - l - 1, innerh = b - t - 1;
-    const sizes = countValues(obs.entities.filter(entity => {
+    if (measured && !samePoint(board, measured.board)) continue;
+    const sizes = measured ? null : firstMode(countValues(obs.entities.filter(entity => {
       const [x, y, xx, yy] = entity.bbox;
       return x > l && y > t && xx < r && yy < b && xx - x === yy - y && entity.area === (xx - x + 1) ** 2;
-    }).map(entity => entity.bbox[2] - entity.bbox[0] + 1));
-    const mode = firstMode(sizes);
-    if (mode === null) continue;
-    const [size, count] = mode;
-    if (size < 2 || innerw % size || innerh % size || Math.min(Math.floor(innerw / size), Math.floor(innerh / size)) < 3 || count < 6) continue;
+    }).map(entity => entity.bbox[2] - entity.bbox[0] + 1)));
+    const size = measured?.size ?? sizes?.[0];
+    if (size === undefined || size < 2 || innerw % size || innerh % size
+      || Math.min(Math.floor(innerw / size), Math.floor(innerh / size)) < 3 || !measured && (sizes?.[1] ?? 0) < 6) continue;
     const width = Math.floor(innerw / size), height = Math.floor(innerh / size), cells: RelativeArrangementCell[] = [];
     let valid = true;
+    let guided: RelativeArrangementCell | null = null;
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
-      const value = relativeArrangementCell(rows, l + 1 + x * size, t + 1 + y * size, size);
-      if (value === null) { valid = false; break; }
-      cells.push({ xy: [x, y], ...value });
+      const left = l + 1 + x * size, top = t + 1 + y * size;
+      const value = relativeArrangementCell(rows, left, top, size);
+      if (value) cells.push({ xy: [x, y], ...value });
+      else {
+        const overlay: RelativeArrangementCellValue | null = measured && !guided ? arrangementGuideMark(rows, left, top, size) : null;
+        if (!overlay) { valid = false; break; }
+        const cell: RelativeArrangementCell = { xy: [x, y], ...overlay };
+        guided = cell;
+        cells.push(cell);
+      }
     }
     if (!valid) continue;
     const phase = [0, 1].map(p => firstMode(countValues(cells.filter(c => (c.xy[0] + c.xy[1]) % 2 === p).map(c => c.value)))!);
@@ -168,10 +189,11 @@ export function relativeArrangementProject(obs: NativeObservation, rows: NativeR
       }
       if (features.length < 2) continue;
       const values = new Set(features.map(feature => feature.value)), objects = cells.filter(cell => values.has(cell.value));
+      if (guided && !values.has(guided.value)) continue;
       const objectCounts = countValues(objects.map(obj => obj.value)), featureCounts = countValues(features.map(feature => feature.value));
       if (objectCounts.size !== featureCounts.size || [...objectCounts].some(([value, count]) => featureCounts.get(value) !== count)) continue;
       const selected = objects.filter(obj => obj.marker !== null), controls = relativeArrangementPads(obs, rows, board, size);
-      if (selected.length > 1 || !controls.length) continue;
+      if (selected.length > 1 || guided && selected.length !== 1 || !controls.length) continue;
       candidates.push({ board, size, shape: [width, height], terrain: [...terrain].sort((a, b) => a - b), objects,
         legend: { box, features }, selected: selected[0] ?? null, pads: controls,
         observation_ref: obs.observation_ref, level_epoch: obs.level_epoch, frame_hash: obs.frame_hash,

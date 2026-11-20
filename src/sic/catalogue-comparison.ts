@@ -2,10 +2,12 @@ import { catalogueFieldPixels, catalogueStructure, exposedCatalogueValues, fitOc
   measureOccludedCatalogue } from '../logos-engine/v6-occluded-catalogue-observation.ts';
 import type { JsonObject } from '../logos-engine/ir.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { sicNeedId } from './need-identity.ts';
 import { checkRevealedExample, chooseRevealedExample, revealedExampleModule, revealedExampleOperations } from './revealed-example-card.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
+import { readSlottedCatalogue, type SlottedCatalogue } from './catalogue-slots.ts';
+import { chooseJointCatalogue, observeCatalogueSubject, recordJointCatalogue, type JointCatalogue, type JointCatalogueAction } from './joint-catalogue-views.ts';
 
 export const catalogueComparisonId = 'sic_catalogue_comparison';
 export const revealedExampleId = 'sic_resolve_observed_ambiguity';
@@ -29,7 +31,10 @@ type State = { epoch: number; field: NativeBox; backgrounds: number[]; submitted
   views: string[]; tried: string[]; stopped: boolean; evidence: string[] };
 type Choice = { action: NativeCommand; sprite: NativeBox | null; target: number | null };
 type Strategy = keyof typeof catalogueComparisonStrategies;
-type Proposal = NativeProposal & { local: State; scene: Scene; asked: Choice; attempt: string; strategy: Strategy; needId: string; candidateCount: number };
+type SingleCatalogueProposal = NativeProposal & { local: State; scene: Scene; asked: Choice; attempt: string; strategy: Strategy; needId: string; candidateCount: number };
+type JointProposal = NativeProposal & { joint: JointCatalogue; slotted: SlottedCatalogue; choice: JointCatalogueAction; attempt: string; needId: string };
+type Proposal = SingleCatalogueProposal | JointProposal;
+const isJoint = (proposal: Proposal): proposal is JointProposal => 'joint' in proposal;
 const key = (value: unknown) => JSON.stringify(value);
 const same = (a: unknown, b: unknown) => key(a) === key(b);
 const directions = ['ACTION3', 'ACTION4', 'ACTION1', 'ACTION2'];
@@ -45,8 +50,48 @@ function fits(rows: NativeRows, scene: Scene, state: State) {
 export function createSicCatalogueComparison(family = catalogueComparisonId): NativeFamily<Proposal> {
   const declarative = family === revealedExampleId;
   let state: State | null = null;
+  let joint: JointCatalogue | null = null;
   let choose: NativeProgramHandle | undefined;
   let verify: NativeProgramHandle | undefined;
+  async function offerJoint(observation: NativeObservation, rows: NativeRows, remaining: number): Promise<JointProposal | null> {
+    const { level_epoch: epoch, observation_ref: ref, frame_hash: frameHash, available_action_refs: available } = observation;
+    const prior = joint?.epoch === epoch ? joint : null;
+    if (prior && (prior.stopped || prior.lastRef !== ref)) return null;
+    const slotted = readSlottedCatalogue(rows);
+    if (!slotted) return null;
+    const local = observeCatalogueSubject(prior ?? { epoch, lastRef: ref, subjects: [], submitted: [], step: null,
+      tried: [], evidence: [], stopped: false }, slotted, rows);
+    if (!local) return null;
+    const choice = chooseJointCatalogue(local, slotted, rows, frameHash, available, remaining);
+    if (!choice) return null;
+    const strategy = { select: 'change_catalogue_subject', move: 'seek_distinguishing_view', submit: 'test_unique_catalogue_match' }[choice.kind];
+    const reason = choice.kind === 'move' ? 'Move a shape where the available views can distinguish remaining models'
+      : choice.kind === 'submit' ? 'Submit the shape supported by the collected views' : 'Read or select the catalogue for this shape';
+    const evidence: [string, ...string[]] = [ref, ...local.evidence.filter(value => value !== ref)];
+    const action = choice.action, actions = [action];
+    const binding = choice.kind === 'move' ? null : await ObservedInputDomain.makeLocusWitness(
+      observation, rows, [action.data.x!, action.data.y!], { reason, evidence });
+    if (!binding && choice.kind !== 'move') return null;
+    const objective = { kind: 'reconstruct_occluded_catalogue_across_views', scope: ref.split(':revision:', 1)[0]!,
+      subjects: ['partial_field', 'catalogue_shapes'], parentObjective: 'G_official_completion',
+      satisfactionContract: 'official_progress_after_all_compatible_shapes_submitted' };
+    const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
+    const id = `catalogue-comparison:${need.id}`;
+    const active = local.subjects.find(subject => subject.palette === slotted.palette)!;
+    return { status: 'proposed', kind: family, joint: local, slotted, choice, needId: need.id, actions,
+      attempt: key([frameHash, action]), binding: { observation_ref: ref, level_epoch: epoch },
+      steps: [{ action, expected_after: null, ...(binding ? { point_binding: binding } : {}) }],
+      sicSituationCard: { strategy, need: 'Identify each shape from the available catalogue views',
+        mode: choice.kind === 'submit' ? 'solving' : 'exploration', situation: reason, agenda: [], evidence,
+        field: slotted.field, choice: choice.box, cards: active.options.map(option => slotted.cards[option.card]!.bbox),
+        subjects: local.subjects.map(subject => ({ palette: subject.palette, alternatives: subject.options.length })),
+        ...(choice.revealed ? { potentiallyRevealedSubjects: choice.revealed } : {}) },
+      question: { reason, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: reason, relations: ['contributes_to:' + objective.parentObjective] }],
+      sicLocalDecision: { strategy, objective: { id, label: reason, parent: objective.parentObjective }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: objective.parentObjective, purpose: reason,
+        preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
   return {
     id: family,
     async attachPrograms(registry) {
@@ -58,8 +103,9 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6') || execution?.signal?.aborted) return null;
       if (declarative && (!choose || (!state && !execution?.readDirectionalView))) return null;
+      if (!declarative && joint?.epoch === observation.level_epoch) return offerJoint(observation, rows, remaining);
       const scene = measureOccludedCatalogue(rows) as Scene | null;
-      if (!scene || scene.cards.length > 8) return null;
+      if (!scene || scene.cards.length > 8) return declarative ? null : offerJoint(observation, rows, remaining);
       const prior = state?.epoch === observation.level_epoch && same(state.field, scene.field) ? state : null;
       const acquisition = declarative && !prior ? execution?.readDirectionalView?.(scene.field, scene.palette,
         [...scene.cards.map(card => card.bbox), ...scene.controls.map(control => control.bbox)]) : null;
@@ -126,6 +172,11 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
     async after(proposal, _index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if (isJoint(proposal)) {
+        const result = recordJointCatalogue(proposal.joint, proposal.slotted, readSlottedCatalogue(second), first, second,
+          proposal.choice, after.observation_ref, proposal.attempt);
+        return { matched: result.matched, seal_prefix: true, reason: result.reason };
+      }
       if (verify && proposal.strategy !== 'test_unique_catalogue_match') {
         const { local, scene } = proposal;
         const returned = measureOccludedCatalogue(second) as Scene | null;
@@ -146,6 +197,19 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
     },
     record(before, after, issued, first, second, proposal) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
+      if (isJoint(proposal)) {
+        const result = recordJointCatalogue(proposal.joint, proposal.slotted, readSlottedCatalogue(second), first, second,
+          proposal.choice, after.observation_ref, proposal.attempt);
+        joint = result.local;
+        const reduced = result.matched && proposal.choice.kind === 'move'
+          ? proposal.joint.subjects.flatMap(subject => {
+            const current = result.local.subjects.find(item => item.palette === subject.palette);
+            return current && current.options.length < subject.options.length ? [subject.options.length - current.options.length] : [];
+          }) : [];
+        return { events: [], ...(reduced.length ? {
+          reviewEvidence: `The translation ruled out ${reduced.reduce((total, count) => total + count, 0)} models across ${reduced.length} shapes.`,
+        } : {}) };
+      }
       const { local, scene, strategy } = proposal;
       const current = measureOccludedCatalogue(second) as Scene | null;
       const next = { ...local, tried: [...local.tried, proposal.attempt], evidence: [...local.evidence.slice(-4), after.observation_ref] };
@@ -160,7 +224,10 @@ export function createSicCatalogueComparison(family = catalogueComparisonId): Na
       state = next;
       return { events: [] };
     },
-    state: () => ({ state }),
-    restore(value: NativeRecord) { state = structuredClone(value.state as State | null); },
+    state: () => ({ state, ...(joint ? { joint } : {}) }),
+    restore(value: NativeRecord) {
+      state = structuredClone(value.state as State | null);
+      joint = structuredClone((value.joint as JointCatalogue | undefined) ?? null);
+    },
   };
 }

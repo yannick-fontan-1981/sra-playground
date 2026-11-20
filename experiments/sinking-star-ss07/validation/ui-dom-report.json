@@ -1,0 +1,121 @@
+{
+  "success": true,
+  "scope": "full-campaign",
+  "environment": "Happy DOM, canvas pixel buffer and controlled animation timer queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "The complete compiled HTML opens level 1 with both colored heroes, exact engine pixels and its rich tutorial expanded",
+    "Five controls, nine tutorial objectives, distinct reflection previews and explicit pulling, release, water, mirror, circuit and monster rules are present",
+    "Compiled HTML with three in-memory room fixtures shows only the nearer hero/crate preview, ignores the farther blocked landing, preserves equal-distance exchanges, and supports exact visual Undo",
+    "Canvas clicks, Tab, number keys and role buttons select through ACTION6 without a game tick or movement-counter increment; Shift+Tab exits",
+    "Out-of-canvas clicks are ignored and keys in the level selector do not dispatch game actions",
+    "Movement uses every frame and duration; directions, reflection and selection are blocked while animating, while Space still prevents scrolling",
+    "Undo during an animation restores both heroes and cancels stale callbacks",
+    "Reset, level changes and return to tutorial cancel pending animation callbacks and reset the appropriate counters",
+    "8 inspected room(s) display their source attribution and relevant piston/platform help",
+    "8 inspected room(s) keep one orange Merchant, one green Thief and two goals; selecting the current hero makes no action or Undo entry",
+    "Space, X and the Reflet button perform the same real reflection and preserve every teleport frame",
+    "The complete tutorial earns all nine discoveries through public pixels: walking, selection, Merchant push, Thief pull, mirror motion, permanent support, reflection, gate and two goals",
+    "All eight witnesses replay through the actual UI with exact frames and timing; victory needs all rooms and disables direction, reflection and hero selection",
+    "Undo exits final victory and restores progression; Restart returns to the open tutorial with zero completions",
+    "Real reachable defeats display all movement/combat frames before the terminal overlay, block further commands, and support mid-animation Undo plus defeat-panel Undo/Reset"
+  ],
+  "reflectionPriorityCoverage": [
+    {
+      "case": "near hero with farther blocked landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "near crate with farther valid landing",
+      "previewVerified": true,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    },
+    {
+      "case": "equal-distance heroes exchange",
+      "previewVerified": false,
+      "publicPositionsVerified": true,
+      "teleportFrames": 3,
+      "exactVisualUndo": true
+    }
+  ],
+  "tutorialCoverage": {
+    "actions": 59,
+    "frames": 172,
+    "selectionActions": 6,
+    "discoveries": [
+      "move",
+      "select",
+      "merchant-push",
+      "thief-pull",
+      "mirror-motion",
+      "platform",
+      "mirror",
+      "gate",
+      "goals"
+    ]
+  },
+  "platformCoverage": {
+    "circuitsWithBothVisibleStates": [
+      "8:emprunt"
+    ],
+    "visibleCells": 3,
+    "specifiedPlatformCount": 3
+  },
+  "witnessCoverage": {
+    "levels": 8,
+    "actions": 593,
+    "frames": 1745,
+    "selectionActions": 39,
+    "allFrameDurationsVerified": true
+  },
+  "defeatCoverage": [
+    {
+      "level": 6,
+      "cause": "Le Marchand se reflète dans l’eau avant que le miroir soit aligné pour la sentinelle",
+      "actions": 9,
+      "frames": 3,
+      "frameDurationsMs": [
+        70,
+        90,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    },
+    {
+      "level": 7,
+      "cause": "Reflet depuis l’alcôve sans relève du Marchand sur le premier sceau : la porte du palier écrase le Voleur",
+      "actions": 41,
+      "frames": 4,
+      "frameDurationsMs": [
+        70,
+        90,
+        40,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    },
+    {
+      "level": 8,
+      "cause": "Le Voleur quitte le bouton du pont provisoire alors que le Marchand est encore sur une plateforme sans caisse : le Marchand tombe dans l’eau",
+      "actions": 26,
+      "frames": 6,
+      "frameDurationsMs": [
+        60,
+        80,
+        40,
+        60,
+        80,
+        0
+      ],
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    }
+  ]
+}

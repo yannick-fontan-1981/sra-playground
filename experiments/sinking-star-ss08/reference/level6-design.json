@@ -1,0 +1,557 @@
+{
+  "spec": {
+    "id": "ss08-06",
+    "title": "Le poids du second reflet",
+    "rows": [
+      "###################",
+      "###################",
+      "###################",
+      "###......##########",
+      "###......##########",
+      "###.M....##########",
+      "###......###...####",
+      "###.....o~~~.W.####",
+      "###......###...####",
+      "###......######o###",
+      "###....o.###...~..#",
+      "###......###..g#..#",
+      "###......~~~~..#..#",
+      "###......###...#.g#",
+      "############...#..#",
+      "###################",
+      "###################"
+    ],
+    "facing": "W",
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 12
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "retard",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 12
+          }
+        ],
+        "color": 7
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 15,
+          "y": 9
+        },
+        "circuit": "retard",
+        "direction": "S",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 11,
+          "y": 12
+        },
+        "circuit": "retard",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 12
+        },
+        "circuit": "retard",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CLCDDDDDRRRLXXRRXRRURRCUURRRDDDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "puzzle": 19,
+    "label": "Adaptation de Heroes and Mirrors 19 · un premier reflet prépare l’appui, le second actionne le bouton.",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-19",
+    "piston": true,
+    "platform": true,
+    "objective": "Ordonner les deux reflets, maintenir la passerelle puis franchir l’appui créé par la presse."
+  },
+  "metrics": {
+    "actions": 32,
+    "selections": 3,
+    "merchantPushes": 1,
+    "wizardSwaps": 1,
+    "bentSwaps": 0,
+    "heroSwaps": 0,
+    "chainPushes": 0,
+    "stoneMoves": 4,
+    "mirrorMoves": 0,
+    "reflections": 3,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Magicien quitte son îlot en échangeant avec la caisse de la grande terrasse",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 15,
+          "y": 10
+        },
+        {
+          "x": 7,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": false
+      }
+    },
+    {
+      "label": "Préparer la caisse proche, sans masquer le Magicien plus loin",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 15,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": false
+      }
+    },
+    {
+      "label": "Premier reflet : la caisse proche crée l’appui, le Magicien reste en place",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 15,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": false
+      }
+    },
+    {
+      "label": "Second reflet : le Magicien arrive sur le bouton, déploie les plateformes et pousse la caisse isolée dans l’eau",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": true
+      }
+    },
+    {
+      "label": "Le Marchand traverse vers l’appui fixe",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": true
+      }
+    },
+    {
+      "label": "Le Marchand quitte la passerelle avant son retrait",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": true
+      }
+    },
+    {
+      "label": "Le dernier appui permet au Magicien de rejoindre sa destination",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": false
+      }
+    }
+  ],
+  "adaptation": "Le retard de Heroes and Mirrors 19 devient une priorité de distance : une caisse proche tombe dans l’eau avant qu’un héros plus éloigné ne rejoigne le bouton. L’empilement original est remplacé par des appuis permanents et deux plateformes hydrauliques, avec un second îlot final accessible uniquement après la presse."
+}

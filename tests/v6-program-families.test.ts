@@ -7,11 +7,34 @@ import { SurfaceProgram, surfaceCrop, surfaceInside, measureSurfaceLayout, obser
 import { CodeProgram, codeInputAt, measureCodeScene, codePosition, codeBits, moveCodePosition, physicalCodePaths,
   encodeCodeWord, decodeCodeWord } from '../src/logos-engine/v6-code-program.ts';
 import { BandTransfer, measureBandGeometry, bandQuantities, bandEffect, findBandPath } from '../src/logos-engine/v6-band-transfer.ts';
-import { ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
+import { measureNativeObservation, ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
 
 const reference = JSON.parse(await readFile(new URL('./fixtures/v6-program-families-reference.json', import.meta.url), 'utf8'));
 const plain = (value: unknown) => JSON.parse(JSON.stringify(value));
 const classes = { surface: SurfaceProgram, code: CodeProgram, band: BandTransfer };
+
+test('measure a split program board using the visible parity of its previous lattice', async () => {
+  const scene = reference.scenes['code:initial'];
+  const lattice = measureCodeScene(scene.observation, scene.rows, scene.inputs)!;
+  const rows: number[][] = structuredClone(scene.rows);
+  const [left, top] = lattice.origin, size = lattice.size;
+  for (let y = top + 2 * size; y < top + 3 * size; y++) {
+    rows[y]!.fill(6, left, left + 5 * size);
+  }
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    rows[top + 4 * size + y]![left + 4 * size + x] = (x + y) % 2 ? lattice.floor[0] : lattice.hue;
+  }
+  const observe = () => measureNativeObservation({ frame_rows: rows, frame_hash: 'split-board',
+    level: 2, levels_completed: 1, available_action_refs: ['ACTION6'], state: 'NOT_FINISHED' }, 1);
+  const observation = await observe();
+  assert.equal(measureCodeScene(observation, rows, scene.inputs), null);
+  const recovered = measureCodeScene(observation, rows, scene.inputs, false, false,
+    { origin: lattice.origin, size, shape: lattice.shape, floor: lattice.floor })!;
+  assert.deepEqual(recovered.goal, lattice.goal);
+  assert.deepEqual(recovered.restarts, [[4, 4]]);
+  assert.equal(recovered.allowed.some(([, y]: number[]) => y === 2), false);
+  assert.ok(recovered.allowed.some(([x, y]: number[]) => x === 4 && y === 4));
+});
 
 async function executeCase(sample: any): Promise<unknown> {
   const a = sample.arguments, scene = reference.scenes[a.scene];

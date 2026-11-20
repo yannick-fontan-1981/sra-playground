@@ -1,0 +1,10 @@
+{
+  "game": "SS05",
+  "version": "0.1.2",
+  "command": "npm test",
+  "passed": 31,
+  "failed": 0,
+  "skipped": 0,
+  "typescriptBuild": "pass",
+  "nativeBrowserTest": false
+}

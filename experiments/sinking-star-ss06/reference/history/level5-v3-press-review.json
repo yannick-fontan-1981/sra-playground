@@ -1,0 +1,124 @@
+{
+  "changes": [
+    "Gate direction N to S",
+    "Wall at map (5,4) removed"
+  ],
+  "witnessRetained": true,
+  "solved": true,
+  "metrics": {
+    "actions": 41,
+    "selections": 2,
+    "merchantPushes": 1,
+    "warriorPushes": 5,
+    "chainPushes": 1,
+    "stoneMoves": 9,
+    "mirrorMoves": 0,
+    "reflections": 3,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 3,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "crushCount": 0,
+  "pressTurns": [
+    {
+      "turn": 2,
+      "command": "U",
+      "move": [
+        {
+          "actor": "stone",
+          "from": {
+            "x": 9,
+            "y": 10
+          },
+          "to": {
+            "x": 9,
+            "y": 11
+          }
+        }
+      ],
+      "addedSupports": [
+        {
+          "x": 9,
+          "y": 11
+        }
+      ]
+    }
+  ],
+  "animation": {
+    "turnFrames": 6,
+    "pistonFrames": 3,
+    "frameDurationsMs": [
+      60,
+      80,
+      40,
+      60,
+      80,
+      0
+    ],
+    "spriteTranslatedByPixels": [
+      1,
+      2
+    ],
+    "finalSupportSprite": [
+      [
+        10,
+        13,
+        10
+      ],
+      [
+        13,
+        10,
+        13
+      ],
+      [
+        10,
+        13,
+        10
+      ]
+    ]
+  },
+  "initialReflection": {
+    "possible": true,
+    "crateMove": {
+      "actor": "stone",
+      "from": {
+        "x": 9,
+        "y": 10
+      },
+      "to": {
+        "x": 7,
+        "y": 8
+      }
+    }
+  },
+  "necessity": {
+    "status": "limit",
+    "states": 300000,
+    "expanded": 184475,
+    "ms": 4435
+  },
+  "alternative": {
+    "commands": "XRUCRRRRUULXRDDRXRRRRRRUCLDDDRRRRXRRRRRRDD",
+    "metrics": {
+      "actions": 42,
+      "selections": 2,
+      "merchantPushes": 1,
+      "warriorPushes": 5,
+      "chainPushes": 1,
+      "stoneMoves": 9,
+      "mirrorMoves": 0,
+      "reflections": 4,
+      "heroReflections": 2,
+      "pistonPushes": 0,
+      "platformsCreated": 2,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "explanation": "Reflect the press crate first onto the newly freed floor at map (5,4), then follow the original witness. The press closes empty."
+  },
+  "necessityClaim": "Not necessary: a legal 42-action witness succeeds without any press push or crush"
+}

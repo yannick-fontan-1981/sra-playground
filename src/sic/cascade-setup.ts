@@ -2,13 +2,14 @@ import type { NativePoint } from '../logos-engine/v6-native-types.ts';
 
 export type CascadeTile = { at: NativePoint; direction?: NativePoint; color?: number; junction?: boolean; hidden?: boolean };
 export type CascadePeer = { at: NativePoint; mark: number };
-export type CascadeSetup = { route: NativePoint[]; guards: NativePoint[]; gap: NativePoint; sharedJunctions?: NativePoint[] };
+export type CascadeSetup = { route: NativePoint[]; guards: NativePoint[]; gap: NativePoint; sharedJunctions?: NativePoint[]; forceJunction?: true };
 export type CascadePreparation = { setup: CascadeSetup; reveal: null } | { setup: null; reveal: NativePoint; route: NativePoint[] };
 type Board = { pitch: number; tiles: CascadeTile[]; sources: NativePoint[]; target: NativePoint };
 type Entry = { at: NativePoint; direction: NativePoint };
 
 const key = ([x, y]: NativePoint) => `${x},${y}`;
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
+const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
 const offset = ([x, y]: NativePoint, [dx, dy]: NativePoint, pitch: number): NativePoint => [x + dx * pitch, y + dy * pitch];
 const directions: readonly NativePoint[] = [[0, -1], [0, 1], [-1, 0], [1, 0]];
 
@@ -39,7 +40,7 @@ function throughChannel(board: Board, tiles: ReadonlyMap<string, CascadeTile>) {
 }
 
 function tickModel(board: Board, tiles: ReadonlyMap<string, CascadeTile>, gap: NativePoint | null, blocked: ReadonlySet<string>,
-  targets: readonly NativePoint[] = [board.target]) {
+  targets: readonly NativePoint[] = [board.target], forced: NativePoint | null = null) {
   let pending: Entry[] = board.sources.flatMap(at => {
     const direction = tiles.get(key(at))?.direction;
     return direction && !blocked.has(key(at)) ? [{ at, direction }] : [];
@@ -70,7 +71,7 @@ function tickModel(board: Board, tiles: ReadonlyMap<string, CascadeTile>, gap: N
         continue;
       }
       const { at } = hits[0]!, tile = tiles.get(id)!;
-      if (tile.junction && !opened.has(id) && hits.length > 1) {
+      if (tile.junction && !opened.has(id) && (hits.length > 1 || forced && same(at, forced))) {
         opened.add(id);
         for (const direction of directions) send(at, direction);
       } else {
@@ -83,24 +84,71 @@ function tickModel(board: Board, tiles: ReadonlyMap<string, CascadeTile>, gap: N
 }
 
 export function planParallelCascadeSetup(board: Board, targets: readonly NativePoint[], peers: readonly CascadePeer[],
-  shouldStop: () => boolean): CascadePreparation | null {
+  shouldStop: () => boolean, guardMark?: number): CascadePreparation | null {
   const tiles = new Map(board.tiles.map(tile => [key(tile.at), tile]));
   const occupied = new Set(peers.map(peer => key(peer.at)));
   const blocked = new Set<string>();
-  if (tickModel(board, tiles, null, blocked, targets).reached) return null;
-  const candidates: CascadeSetup[] = [];
-  for (const { at, direction, junction, hidden } of board.tiles) {
-    if (shouldStop()) return null;
-    if (direction || junction || hidden || occupied.has(key(at))) continue;
-    const result = tickModel(board, tiles, at, blocked, targets);
-    if (!result.reached || !result.opened.size) continue;
-    const route = [...result.touched].map(id => tiles.get(id)!.at);
-    if (route.some(point => tiles.get(key(point))!.hidden)) continue;
-    const sharedJunctions = [...result.opened].map(id => tiles.get(id)!.at);
-    candidates.push({ route, gap: at, guards: [], sharedJunctions });
-    if (candidates.length > 1) return null;
+  const baseline = tickModel(board, tiles, null, blocked, targets);
+  if (baseline.reached) return null;
+  for (const forceJunction of [false, true]) {
+    let setup: CascadeSetup | null = null;
+    for (const { at, direction, junction, hidden } of board.tiles) {
+      if (shouldStop()) return null;
+      if (direction || !!junction !== forceJunction || hidden || occupied.has(key(at))) continue;
+      if (forceJunction && baseline.opened.has(key(at))) continue;
+      const result = tickModel(board, tiles, forceJunction ? null : at, blocked, targets, forceJunction ? at : null);
+      if (!result.reached || !result.opened.size || forceJunction && !result.opened.has(key(at))) continue;
+      const route = [...result.touched].map(id => tiles.get(id)!.at);
+      if (route.some(point => tiles.get(key(point))!.hidden)) continue;
+      if (setup) return null;
+      const sharedJunctions = [...result.opened].map(id => tiles.get(id)!.at);
+      setup = { route, gap: at, guards: [], sharedJunctions, ...(forceJunction ? { forceJunction: true } : {}) };
+    }
+    if (setup) return { setup, reveal: null };
   }
-  return candidates[0] ? { setup: candidates[0], reveal: null } : null;
+  const guards = peers.filter(peer => peer.mark === guardMark), relay = peers.find(peer => peer.mark !== guardMark);
+  if (!guards.length || !relay) return null;
+  return reserveCascadeJunctions(board, tiles, targets, guards, relay, shouldStop);
+}
+
+function reserveCascadeJunctions(board: Board, tiles: ReadonlyMap<string, CascadeTile>, targets: readonly NativePoint[],
+  guards: readonly CascadePeer[], relay: CascadePeer, shouldStop: () => boolean): CascadePreparation | null {
+  const targetIds = new Set(targets.map(key));
+  let best: CascadeSetup | null = null, cost = Infinity;
+  for (const { at, junction, direction, hidden } of board.tiles) {
+    if (shouldStop()) return null;
+    if (direction || hidden) continue;
+    const relayId = key(at), gap = junction ? null : at, forced = junction ? at : null;
+    const relayTravel = distance(relay.at, at);
+    const seen = new Map<string, number>();
+    function tryReservations(reservations: string[], free: readonly CascadePeer[], travel: number) {
+      const lower = travel + relayTravel;
+      if (lower >= cost || seen.size >= 800 || shouldStop()) return;
+      const id = reservations.slice().sort().join(':') + '|' + free.map(peer => key(peer.at)).join(':');
+      if ((seen.get(id) ?? Infinity) <= travel) return;
+      seen.set(id, travel);
+      const blocked = new Set(reservations), result = tickModel(board, tiles, gap, blocked, targets, forced);
+      if (result.reached && result.opened.size && (!junction || result.opened.has(relayId))
+        && ![...result.touched].some(cell => tiles.get(cell)!.hidden)) {
+        best = { gap: at, guards: reservations.map(cell => tiles.get(cell)!.at),
+          route: [...result.touched].map(cell => tiles.get(cell)!.at),
+          sharedJunctions: [...result.opened].map(cell => tiles.get(cell)!.at),
+          ...(junction ? { forceJunction: true } : {}) };
+        cost = lower;
+        return;
+      }
+      if (!free.length) return;
+      for (const cell of result.touched) {
+        const tile = tiles.get(cell)!;
+        if (cell === relayId || targetIds.has(cell) || tile.hidden) continue;
+        for (const guard of free) {
+          tryReservations([...reservations, cell], free.filter(peer => peer !== guard), travel + distance(guard.at, tile.at) + board.pitch);
+        }
+      }
+    }
+    tryReservations([], guards, 0);
+  }
+  return best ? { setup: best, reveal: null } : null;
 }
 
 export function planCascadeSetup(board: Board, guards: readonly CascadePeer[], bridge: CascadePeer, shouldStop: () => boolean): CascadePreparation | null {
@@ -112,7 +160,6 @@ export function planCascadeSetup(board: Board, guards: readonly CascadePeer[], b
   const { touched } = tickModel(board, tiles, channel.gap, new Set());
   const eligible = [...touched].filter(id => !trunk.has(id) && !same(tiles.get(id)!.at, bridge.at));
   const movable = guards.map(guard => guard.at);
-  const distance = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) + Math.abs(a[1] - b[1]);
   let best: CascadeSetup | null = null, cost = Infinity, attempts = 0;
   function test(blocked: NativePoint[], used: NativePoint[], from: number, movement: number) {
     if (movement >= cost || attempts >= 2000 || shouldStop()) return;
@@ -136,11 +183,11 @@ export function planCascadeSetup(board: Board, guards: readonly CascadePeer[], b
   return best ? { setup: best, reveal: null } : null;
 }
 
-type Step = { at: NativePoint; index: number };
+type Step = { at: NativePoint; index: number | null };
 type Position = { peers: NativePoint[]; active: number; depth: number; first: Step | null };
 
 export function placeCascadePeers(peers: readonly CascadePeer[], active: number, guardMark: number, prep: CascadePreparation, pitch: number,
-  tiles: readonly CascadeTile[], shouldStop: () => boolean) {
+  tiles: readonly CascadeTile[], shouldStop: () => boolean, canCycleFocus = false) {
   const clear = new Set(tiles.map(tile => key(tile.at)));
   const guardIndices = peers.flatMap((peer, i) => peer.mark === guardMark ? [i] : []);
   const bridgeIndex = peers.findIndex(peer => peer.mark !== guardMark);
@@ -201,6 +248,11 @@ export function placeCascadePeers(peers: readonly CascadePeer[], active: number,
     if (!bucket.length) queue.delete(rank);
     if (seen.get(keyPosition(current)) !== current.depth) continue;
     if (!score(current)) return { step: current.first };
+    if (canCycleFocus) for (const [index, at] of current.peers.entries()) {
+      if (index === current.active) continue;
+      enqueue({ ...current, active: index, depth: current.depth + current.peers.length - 1,
+        first: current.first ?? { at, index: null } });
+    }
     travelToContact(current);
   }
   return null;

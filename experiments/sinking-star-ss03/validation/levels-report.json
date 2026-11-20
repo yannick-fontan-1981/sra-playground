@@ -1,0 +1,417 @@
+{
+  "game": "SS03",
+  "version": "0.4.0",
+  "levels": [
+    {
+      "level": 1,
+      "id": "ss03-01",
+      "title": "L’atelier du Voleur",
+      "guidePuzzle": 0,
+      "sourceUrl": "",
+      "dimensions": [
+        17,
+        13
+      ],
+      "stones": 3,
+      "buttons": 3,
+      "pistonGates": 0,
+      "initialWalkingCells": 82,
+      "actions": 54,
+      "pulls": 13,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 5,
+      "stonesUsingBothAxes": 2,
+      "pistonStrokes": 0,
+      "pistonEvents": [],
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "pullAblationStates": 1,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "1117ee12621d7e873f2d402d09b94fdb04177899816a654be91bcf98f6dd91bc",
+      "rulesSha256": "8e0f2b4c3e7ad7130c38a93fa65e22a903c3927985833c8188a164658ca02481",
+      "witnessSha256": "f31a951c5a31766eeab6ffa23babfe95e196742e5195b70e8d9b02b29e136e1c"
+    },
+    {
+      "level": 2,
+      "id": "ss03-02",
+      "title": "La presse latérale",
+      "guidePuzzle": 0,
+      "sourceUrl": "",
+      "dimensions": [
+        11,
+        9
+      ],
+      "stones": 2,
+      "buttons": 3,
+      "pistonGates": 2,
+      "initialWalkingCells": null,
+      "actions": 27,
+      "pulls": 8,
+      "pullDirections": [
+        "E",
+        "N",
+        "S"
+      ],
+      "releaseMoves": 4,
+      "stonesUsingBothAxes": 2,
+      "pistonStrokes": 2,
+      "pistonEvents": [
+        {
+          "action": 16,
+          "gate": 0,
+          "direction": "E",
+          "movedActors": 1
+        },
+        {
+          "action": 22,
+          "gate": 0,
+          "direction": "E",
+          "movedActors": 2
+        }
+      ],
+      "allButtonsOccupiedByStones": false,
+      "pullsRequired": true,
+      "pullAblationStates": 40,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "52f863d895c0b29b76dc1edf360cabd6d2c1df6818cafa933506ecd743881654",
+      "rulesSha256": "28c324c7cd007d6cfa825030f5a0e5d7a543ba2233d67476907442f6f4fb507a",
+      "witnessSha256": "72b7728391c8e8454d1b8e950874e8fe0ccfdf2f141d46c88e2d06c2063094d0",
+      "pistonsRequired": {
+        "method": "exhaustive complete-state search with piston motion disabled",
+        "verified": true,
+        "states": 6766
+      }
+    },
+    {
+      "level": 3,
+      "id": "ss03-03",
+      "title": "Les deux entrepôts",
+      "guidePuzzle": 6,
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-6",
+      "dimensions": [
+        13,
+        9
+      ],
+      "stones": 7,
+      "buttons": 1,
+      "pistonGates": 0,
+      "initialWalkingCells": 9,
+      "actions": 61,
+      "pulls": 19,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 9,
+      "stonesUsingBothAxes": 2,
+      "pistonStrokes": 0,
+      "pistonEvents": [],
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "pullAblationStates": 1,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "75973e1769090512679a144edb048c82c352572502a196c12024d93bf3c245a7",
+      "rulesSha256": "f6ed9763e161748840782324744cdb4a2d161469f2c7aca585b13eb066f55de4",
+      "witnessSha256": "52af1400029d822a84dfc9e1f2f7009c704c32f6d70c67fa822dd32e10ed8a87"
+    },
+    {
+      "level": 4,
+      "id": "ss03-04",
+      "title": "Le relais des deux terrasses",
+      "guidePuzzle": 14,
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-14",
+      "dimensions": [
+        12,
+        9
+      ],
+      "stones": 2,
+      "buttons": 2,
+      "pistonGates": 0,
+      "initialWalkingCells": 9,
+      "actions": 40,
+      "pulls": 13,
+      "pullDirections": [
+        "E",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 6,
+      "stonesUsingBothAxes": 1,
+      "pistonStrokes": 0,
+      "pistonEvents": [],
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "pullAblationStates": 1,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "4a2f5bccd5bea80aede57ca94398df60e524e16a7d1abbeaf6fe0b8626c61979",
+      "rulesSha256": "1b7c5bcdf365dc9ff645eaa545622a4d25c9cf77c11c20c035f92073af6b4f59",
+      "witnessSha256": "30d470fdcc64d1d4e110fb051f382d4b0a9e9f68408659bea94192b7572c7b9c"
+    },
+    {
+      "level": 5,
+      "id": "ss03-05",
+      "title": "Les alcôves de la cathédrale",
+      "guidePuzzle": 15,
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-15",
+      "dimensions": [
+        13,
+        9
+      ],
+      "stones": 2,
+      "buttons": 2,
+      "pistonGates": 0,
+      "initialWalkingCells": 33,
+      "actions": 38,
+      "pulls": 13,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 6,
+      "stonesUsingBothAxes": 2,
+      "pistonStrokes": 0,
+      "pistonEvents": [],
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "pullAblationStates": 1,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "97263d8aa01e53c3354fe7c35ee8635c6a9f3021493ada094e787b2c9aa86e5b",
+      "rulesSha256": "5acd41b54933eb89800a396d44400932833540c905c27598e6a42e371cefbef0",
+      "witnessSha256": "a5a927291d652ad88df9edfa486391a39445a6ea84436c32482f288220cc321c"
+    },
+    {
+      "level": 6,
+      "id": "ss03-06",
+      "title": "Trois amarres",
+      "guidePuzzle": 8,
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-8",
+      "dimensions": [
+        9,
+        8
+      ],
+      "stones": 3,
+      "buttons": 3,
+      "pistonGates": 0,
+      "initialWalkingCells": 1,
+      "actions": 56,
+      "pulls": 17,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 10,
+      "stonesUsingBothAxes": 3,
+      "pistonStrokes": 0,
+      "pistonEvents": [],
+      "allButtonsOccupiedByStones": true,
+      "pullsRequired": true,
+      "pullAblationStates": 1,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "5bb7156d8221b1b0c89dbd8cbfcc3232a5cbb7dfb6d6eaddc2faf1515578f46b",
+      "rulesSha256": "672cc19af26080217b15a71f9da40af79a31ca9a1e8322ebb4377c1436d17023",
+      "witnessSha256": "e5fbc78b8ef5483d019738454bb8ef90826a1ed4f93bf63ffc4618ba1c241507"
+    },
+    {
+      "level": 7,
+      "id": "ss03-07",
+      "title": "Les deux presses",
+      "guidePuzzle": 0,
+      "sourceUrl": "",
+      "dimensions": [
+        16,
+        11
+      ],
+      "stones": 3,
+      "buttons": 5,
+      "pistonGates": 3,
+      "initialWalkingCells": null,
+      "actions": 54,
+      "pulls": 18,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 7,
+      "stonesUsingBothAxes": 3,
+      "pistonStrokes": 3,
+      "pistonEvents": [
+        {
+          "action": 1,
+          "gate": 0,
+          "direction": "W",
+          "movedActors": 1
+        },
+        {
+          "action": 11,
+          "gate": 0,
+          "direction": "W",
+          "movedActors": 2
+        },
+        {
+          "action": 42,
+          "gate": 1,
+          "direction": "N",
+          "movedActors": 1
+        }
+      ],
+      "allButtonsOccupiedByStones": false,
+      "pullsRequired": true,
+      "pullAblationStates": 71,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "48403d7f6ce67a688304956a430fd296be09c2d90f1aca93c5b2040b69d5a4b6",
+      "rulesSha256": "9d368e64ef7ca0c4325af9577eb6ea436547662b89ebecbd24b65d1f33f41f57",
+      "witnessSha256": "2a50203cf9f7db5812382c8b325847301bd3490e83e8a119458ae414dd3d76d4",
+      "pistonsRequired": {
+        "method": "two unfillable target niches and one gated exit",
+        "verified": true
+      },
+      "additionalPlateConstraint": {
+        "verified": true,
+        "oldRoutePrefix": 30,
+        "singleButtonDoesNotPush": true,
+        "remoteCrateEnablesNorthPiston": true
+      }
+    },
+    {
+      "level": 8,
+      "id": "ss03-08",
+      "title": "Le train des six caisses",
+      "guidePuzzle": 2,
+      "sourceUrl": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2",
+      "dimensions": [
+        9,
+        10
+      ],
+      "stones": 6,
+      "buttons": 2,
+      "pistonGates": 3,
+      "initialWalkingCells": null,
+      "actions": 154,
+      "pulls": 53,
+      "pullDirections": [
+        "E",
+        "N",
+        "S",
+        "W"
+      ],
+      "releaseMoves": 19,
+      "stonesUsingBothAxes": 6,
+      "pistonStrokes": 5,
+      "pistonEvents": [
+        {
+          "action": 60,
+          "gate": 0,
+          "direction": "W",
+          "movedActors": 2
+        },
+        {
+          "action": 86,
+          "gate": 0,
+          "direction": "W",
+          "movedActors": 3
+        },
+        {
+          "action": 112,
+          "gate": 0,
+          "direction": "W",
+          "movedActors": 5
+        },
+        {
+          "action": 146,
+          "gate": 0,
+          "direction": "W",
+          "movedActors": 6
+        },
+        {
+          "action": 146,
+          "gate": 1,
+          "direction": "N",
+          "movedActors": 1
+        }
+      ],
+      "allButtonsOccupiedByStones": false,
+      "pullsRequired": true,
+      "pullAblationStates": 16,
+      "cratesPreserved": true,
+      "solved": true,
+      "mapSha256": "24fe8adb7da83348e5a2fad0b90733e20d4313314237dca5969e64eb549d3b68",
+      "rulesSha256": "79499f7e3c40e309f5508dfce4d92bdb6451420360cd8fe23cefed75f8cfeca6",
+      "witnessSha256": "7dfeb300924f31b4508d1fb880305aa7d2ca5f98d971c58d194c0bafdb4c69e3"
+    }
+  ],
+  "legacyObservationParity": [
+    {
+      "level": 1,
+      "previousLevel": 1,
+      "actions": 54,
+      "matched": true,
+      "sha256": "e8933ee0633637d076d10fb20a91da0356ca3e3620908afb87301b6332553bb8"
+    },
+    {
+      "level": 2,
+      "previousLevel": 2,
+      "actions": 27,
+      "matched": true,
+      "sha256": "eac6a3b3993763b4679670a83175cadd1f021f1e8a6b934038609a2bd01138d3"
+    },
+    {
+      "level": 3,
+      "previousLevel": 3,
+      "actions": 61,
+      "matched": true,
+      "sha256": "98e12658f805443781faa75eda674bc8bf45b987bae8a352a5499120b4f9e8c0"
+    },
+    {
+      "level": 4,
+      "previousLevel": 4,
+      "actions": 40,
+      "matched": true,
+      "sha256": "30f58f677553cfa48ef172eec57e45b2a28133e95e3c00af6f77e2b0d6fee695"
+    },
+    {
+      "level": 5,
+      "previousLevel": 5,
+      "actions": 38,
+      "matched": true,
+      "sha256": "28c52bb99a3d6a9e0e9bce9426d6c24fd36bd334a7856b048d71b5011e3ea127"
+    },
+    {
+      "level": 6,
+      "previousLevel": 6,
+      "actions": 56,
+      "matched": true,
+      "sha256": "b49c0bec312b0a36ff6af060ac423b4b9e5bea56fa69fab7a78159a6b221211e"
+    },
+    {
+      "level": 8,
+      "previousLevel": 8,
+      "actions": 154,
+      "matched": true,
+      "sha256": "10677ed38f65c544532286402c4285f840e21d5da1867d78bb2b680c89da8f81"
+    }
+  ],
+  "totalActions": 484,
+  "totalPulls": 154,
+  "totalPistonStrokes": 10,
+  "success": true
+}

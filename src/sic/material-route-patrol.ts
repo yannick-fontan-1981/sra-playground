@@ -9,6 +9,13 @@ type Removal = { guard_histogram: number[][]; size: number };
 export type PatrolMemory = { histogram: number[][]; position: Point; delta: Point; reversed: boolean; evidence: string[] };
 export type PatrolStep = { input: string; to: Point; obstacle: AlternatingGuard; alternatives: Point[];
   expected: Point | null; learning: boolean; capture?: AlternatingGuard };
+type Track = { position: Point; delta: Point };
+type Formation = Track[];
+type GuardedPatrolRoute = { guards: AlternatingGuard[]; awaitingClear: AlternatingGuard[]; floor: number };
+export type PatrolGroupMemory = { histogram: number[][]; formations: Formation[]; target: Point; evidence: string[];
+  guardedRoute?: GuardedPatrolRoute };
+export type PatrolGroupStep = { input: string; to: Point; current: PatrolGroupMemory; next: Formation[];
+  positions: Point[]; expected: Point[]; learning: boolean; capture?: AlternatingGuard };
 
 const key = ([row, col]: Point) => row + ',' + col;
 const point = (id: string): Point => id.split(',').map(Number) as unknown as Point;
@@ -20,6 +27,11 @@ const adjacent = (graph: AlternatingTopology, a: Point, b: Point) => graph.edges
 const box = ([row, col]: Point, size: number): AlternatingBox => [row, col, row + size - 1, col + size - 1];
 const canRemove = (guard: AlternatingGuard, size: number, removals: readonly Removal[]) =>
   removals.some(removal => removal.size === size && histogramMatches(removal.guard_histogram, guard.histogram));
+
+export function recognizesPatrolGroup(graph: AlternatingTopology, size: number, histogram: number[][], removals: readonly Removal[]) {
+  return graph.guards.filter(guard => histogramMatches(guard.histogram, histogram)).length >= 2
+    && graph.guards.every(guard => histogramMatches(guard.histogram, histogram) || canRemove(guard, size, removals));
+}
 
 function advance(graph: AlternatingTopology, position: Point, delta: Point) {
   const forward = add(position, delta);
@@ -111,4 +123,115 @@ export function observePatrolReturn(step: PatrolStep, actor: AlternatingActor, a
   const reversed = !!previous && (previous.reversed || same(previous.delta, opposite));
   return { histogram: step.obstacle.histogram, position: at, delta, reversed,
     evidence: [...(previous?.evidence.slice(-4) ?? []), ref] };
+}
+
+const trackKey = ({ position, delta }: Track) => key(position) + ':' + key(delta);
+const formationKey = (formation: Formation) => formation.map(trackKey).sort().join('/');
+const distinctFormations = (formations: Formation[]) => [...new Map(formations.map(item => [formationKey(item), item])).values()];
+const positionsOf = (formations: readonly Formation[]): Point[] => [...new Map(formations.flat().map(track => [key(track.position), track.position])).values()];
+const occupancy = (positions: readonly Point[]) => [...new Set(positions.map(key))].sort().join('/');
+
+function seedFormations(graph: AlternatingTopology, guards: readonly AlternatingGuard[]): Formation[] {
+  let formations: Formation[] = [[]];
+  for (const guard of guards) {
+    const delta = subtract(guard.front, guard.position), opposite = subtract(guard.position, guard.front);
+    const alternatives = [delta, opposite].flatMap(direction => advance(graph, guard.position, direction)
+      ? [{ position: guard.position, delta: direction }] : []);
+    formations = formations.flatMap(formation => alternatives.map(track => [...formation, track]));
+  }
+  return distinctFormations(formations);
+}
+
+function visibleFormation(formation: Formation, occluders: ReadonlySet<string>) {
+  return occupancy(formation.filter(track => !occluders.has(key(track.position))).map(track => track.position));
+}
+
+export function planPatrolGroup(graph: AlternatingTopology, actor: AlternatingActor, controls: Controls, histogram: number[][],
+  known: PatrolGroupMemory | undefined, remaining: number, removals: readonly Removal[] = []): PatrolGroupStep | null {
+  const moving = graph.guards.filter(guard => histogramMatches(guard.histogram, histogram));
+  if (!known && (moving.length < 2 || moving.length > 6)) return null;
+  if (known && !same(known.target, graph.target)) return null;
+  const stationary = graph.guards.filter(guard => !histogramMatches(guard.histogram, histogram));
+  if (stationary.some(guard => !canRemove(guard, actor.size, removals))) return null;
+  const guards = [...new Map([...(known?.guardedRoute?.guards ?? []), ...stationary].map(guard => [key(guard.position), guard])).values()];
+  if (guards.length > 8) return null;
+  const formations = known?.formations ?? seedFormations(graph, moving);
+  const occluded = new Set(stationary.map(guard => key(guard.position)));
+  const visible = occupancy(moving.map(guard => guard.position));
+  if (!formations.length || formations.some(formation => visibleFormation(formation, occluded) !== visible)) return null;
+  const base = known ?? { histogram, formations, target: graph.target, evidence: [] };
+  const current = guards.length || known?.guardedRoute
+    ? { ...base, guardedRoute: { floor: graph.first, guards, awaitingClear: known?.guardedRoute?.awaitingClear ?? [] } } : base;
+  const moves = Object.entries(controls).sort(([a], [b]) => a.localeCompare(b));
+  const horizon = Math.min(remaining, 96);
+  const phases = [{ formations, blocked: new Set(positionsOf(formations).map(key)) }];
+  for (let index = 0; index < horizon; index++) {
+    const forecast = phases[index]!.formations.map(formation => formation.map(track => advance(graph, track.position, track.delta)));
+    if (forecast.some(formation => formation.some(track => !track))) break;
+    const next = distinctFormations(forecast as Formation[]);
+    phases.push({ formations: next, blocked: new Set(positionsOf(next).map(key)) });
+  }
+  if (phases.length < 2) return null;
+  const start: Point = [actor.bbox[0], actor.bbox[1]];
+  const next = phases[1]!.formations;
+  const initial = { position: start, time: 0, removed: 0, first: null as PatrolGroupStep | null };
+  const queue = [initial], seen = new Set([key(start) + '/0']);
+  const distances = distancesFromGoal(graph);
+  let probe: PatrolGroupStep | null = null;
+  for (let index = 0; index < queue.length && index < 16_384; index++) {
+    const turn = queue[index]!;
+    if (same(turn.position, graph.target)) return turn.first;
+    const after = phases[turn.time + 1];
+    if (!after) continue;
+    const before = phases[turn.time]!;
+    const active = guards.flatMap((guard, i) => turn.removed & (1 << i) ? [] : [{ guard, bit: 1 << i }]);
+    for (const [input, delta] of moves) {
+      const to = add(turn.position, delta), id = key(to);
+      if (!adjacent(graph, turn.position, to) || before.blocked.has(id) || after.blocked.has(id)
+        || active.some(({ guard }) => same(to, guard.front))) continue;
+      const contact = active.find(({ guard }) => same(to, guard.position));
+      if (contact && same(turn.position, contact.guard.front)) continue;
+      const removed = turn.removed | (contact?.bit ?? 0);
+      const first = turn.first ?? { input, to, current, next, positions: positionsOf(formations), expected: positionsOf(next), learning: !known,
+        ...(contact ? { capture: contact.guard } : {}) };
+      if (turn.time === 0 && (!probe || (distances.get(id) ?? Infinity) < (distances.get(key(probe.to)) ?? Infinity))) probe = first;
+      const time = turn.time + 1, state = id + '/' + time + (guards.length ? '/' + removed : '');
+      if (seen.has(state)) continue;
+      seen.add(state);
+      queue.push({ position: to, time, removed, first });
+    }
+  }
+  return probe && next.length > 1 ? { ...probe, learning: true } : null;
+}
+
+function visiblePatrols(rows: NativeRows, actor: AlternatingActor, histogram: number[][]): Point[] {
+  return alternatingOverlays(rows).flatMap(candidate => candidate.size === actor.size && histogramMatches(candidate.histogram, histogram)
+    ? [[candidate.bbox[0], candidate.bbox[1]] as Point] : []);
+}
+
+export function observePatrolGroup(step: PatrolGroupStep, actor: AlternatingActor, rows: NativeRows,
+  frames: readonly NativeRows[], ref: string): PatrolGroupMemory | null {
+  const landed = (frame: NativeRows) => histogramMatches(alternatingHistogram(frame, box(step.to, actor.size)), actor.histogram);
+  if (!landed(rows)) return null;
+  const { current } = step;
+  if (!current.evidence.length && !frames.some(frame => landed(frame)
+    && occupancy(visiblePatrols(frame, actor, current.histogram)) === occupancy(step.positions))) return null;
+  const observed = occupancy(visiblePatrols(rows, actor, current.histogram));
+  const guarded = current.guardedRoute;
+  const occluded = new Set(guarded?.guards.filter(guard =>
+    histogramMatches(alternatingHistogram(rows, guard.bbox), guard.histogram)).map(guard => key(guard.position)));
+  // Overlaid walkers are one visible sprite but retain both directions in every compatible formation.
+  const formations = step.next.filter(formation => visibleFormation(formation, occluded) === observed);
+  if (!formations.length) return null;
+  const result = { ...current, formations, evidence: [...current.evidence.slice(-4), ref] };
+  if (!guarded) return result;
+  const covered = new Set([key(step.to), ...positionsOf(formations).map(key)]);
+  const guards = guarded.guards.filter(guard => !step.capture || !same(guard.position, step.capture.position));
+  if (guards.some(guard => !covered.has(key(guard.position))
+    && !histogramMatches(alternatingHistogram(rows, guard.bbox), guard.histogram))) return null;
+  const awaitingClear = [...guarded.awaitingClear, ...(step.capture ? [step.capture] : [])];
+  if (awaitingClear.some(guard => !covered.has(key(guard.position))
+    && !histogramMatches(alternatingHistogram(rows, guard.bbox), [[guarded.floor, actor.size ** 2]]))) return null;
+  return { ...result, guardedRoute: { ...guarded, guards,
+    awaitingClear: awaitingClear.filter(guard => covered.has(key(guard.position))) } };
 }

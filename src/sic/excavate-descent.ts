@@ -3,9 +3,11 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgram
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const excavateDescentId = 'sic_excavate_descent';
 export const verifyRemovableSupportId = 'sic_verify_removable_support';
+export const learnRemovableSupportId = 'sic_learn_removable_support';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Layout = { pitch: number; phaseX: number; phaseY: number; actorColor: number; blockColor: number; wallColor: number; airColor: number };
@@ -14,7 +16,7 @@ type Scene = { actor: Part; at: NativePoint; goal: Part | null; tiles: Record<st
 type Step = { action: NativeCommand; at: NativePoint };
 type Plan = { score: number; steps: Step[]; drop: boolean };
 type State = { epoch: number; layout: Layout; rejected: string[]; refs: string[]; removalRef: string | null; movementRef?: string };
-type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; drop: boolean; needId: string };
+type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; drop: boolean; needId: string; burst?: Step[] };
 
 const key = (p: NativePoint) => p.join(',');
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -130,7 +132,7 @@ function route(scene: Scene, local: State): Plan | null {
   return options.find(p => !local.rejected.includes(signature(p.steps[0]!))) ?? null;
 }
 
-function resultOf(first: NativeRows, second: NativeRows, proposal: Proposal) {
+function resultOf(first: NativeRows, second: NativeRows, proposal: Pick<Proposal, 'local' | 'step' | 'scene' | 'drop'>) {
   const { layout } = proposal.local;
   const measured = sceneFor(second, geometricComponents(second), layout);
   if (!measured) return { matched: false, reason: 'excavation_or_motion_unverified' };
@@ -148,11 +150,22 @@ function resultOf(first: NativeRows, second: NativeRows, proposal: Proposal) {
   return { matched, reason: matched ? 'lateral_displacement_observed' : next[0] === old[0] ? 'lateral_move_refused' : 'lateral_displacement_diverged' };
 }
 
-export function createSicVerifyRemovableSupport(): NativeFamily<Proposal> {
+function liveLeg(proposal: Proposal, index: number, rows: NativeRows) {
+  if (index === 0) return proposal;
+  const scene = sceneFor(rows, geometricComponents(rows), proposal.local.layout);
+  if (!scene || !proposal.burst) return null;
+  const step = proposal.burst[index]!;
+  const drop = step.action.action_ref === 'ACTION6' && step.at[0] === scene.at[0]
+    && step.at[1] === scene.at[1] - proposal.local.layout.pitch;
+  return { local: proposal.local, scene, step, drop };
+}
+
+export function createSicVerifyRemovableSupport(family = verifyRemovableSupportId): NativeFamily<Proposal> {
+  const learns = family === learnRemovableSupportId;
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   return {
-    id: verifyRemovableSupportId,
+    id: family,
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
@@ -160,11 +173,20 @@ export function createSicVerifyRemovableSupport(): NativeFamily<Proposal> {
       if (remaining < 1 || !['ACTION3', 'ACTION4', 'ACTION6'].every(ref => observation.available_action_refs.includes(ref))
         || ['ACTION1', 'ACTION2', 'ACTION5'].some(ref => observation.available_action_refs.includes(ref))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      const parts = geometricComponents(rows), layout = prior?.layout ?? initial(rows, parts);
+      const motion = learns && !prior ? execution?.readPriorDirectionalScene?.(previous => {
+        const parts = geometricComponents(previous), layout = initial(previous, parts);
+        const scene = layout && sceneFor(previous, parts, layout);
+        return scene ? { layout: layout!, at: scene.at } : null;
+      }) : null;
+      if (learns && !prior && (!motion || motion.afterRef !== observation.observation_ref || motion.levelEpoch !== observation.level_epoch)) return null;
+      const parts = geometricComponents(rows), layout = prior?.layout ?? motion?.scene.layout ?? initial(rows, parts);
       if (!layout) return null;
       const scene = sceneFor(rows, parts, layout);
       if (!scene) return null;
-      const local = prior ?? { epoch: observation.level_epoch, layout, rejected: [], refs: [], removalRef: null };
+      const dx = motion?.command === 'ACTION4' ? layout.pitch : motion?.command === 'ACTION3' ? -layout.pitch : 0;
+      if (motion && (!dx || scene.at[0] !== motion.scene.at[0] + dx || scene.at[1] !== motion.scene.at[1])) return null;
+      const local: State = prior ?? { epoch: observation.level_epoch, layout, rejected: [], refs: motion ? [motion.beforeRef] : [], removalRef: null,
+        ...(motion ? { movementRef: motion.afterRef } : {}) };
       const plan = route(scene, local);
       if (!plan) return null;
       const step = plan.steps[0]!, pointCommand = step.action.action_ref === 'ACTION6';
@@ -185,14 +207,27 @@ export function createSicVerifyRemovableSupport(): NativeFamily<Proposal> {
         subjects: ['controlled_piece', 'removable_support', 'lower_route'], parentObjective: parent,
         satisfactionContract: 'official_progress_after_descent_or_contact' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
-      const id = verifyRemovableSupportId + ':' + need.id, [x, y] = step.at;
+      const id = family + ':' + need.id, [x, y] = step.at;
       const situation = pointCommand ? 'Remove a blocking tile and check whether the view follows a drop'
         : scene.goal ? 'Move through the current corridor toward access to the visible marker'
           : 'Follow the measured lateral control toward a visible opening';
+      const burst = [step], actions = [step.action];
+      const steps = [{ action: step.action, expected_after: step.at, ...(witness ? { point_binding: witness } : {}) }];
+      if (routeSupported && !plan.drop) for (const next of plan.steps.slice(1, Math.min(remaining, maximumCommittedActions))) {
+        const click = next.action.action_ref === 'ACTION6';
+        if (click && !local.removalRef) break;
+        const point = click ? await ObservedInputDomain.makeLocusWitness(observation, rows, next.at,
+          { reason: 'Observed blocking tile at the end of the measured corridor', evidence }) : null;
+        burst.push(next);
+        actions.push(next.action);
+        steps.push({ action: next.action, expected_after: next.at, ...(point ? { point_binding: point } : {}) });
+        if (click) break;
+      }
       return {
-        status: 'proposed', kind: verifyRemovableSupportId, local, scene, step, drop: plan.drop, needId: need.id,
-        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions: [step.action],
-        steps: [{ action: step.action, expected_after: step.at, ...(witness ? { point_binding: witness } : {}) }],
+        status: 'proposed', kind: family, local, scene, step, drop: plan.drop, needId: need.id,
+        ...(burst.length > 1 ? { burst } : {}),
+        binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
+        steps,
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
@@ -202,21 +237,34 @@ export function createSicVerifyRemovableSupport(): NativeFamily<Proposal> {
         compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
         sicLocalDecision: { strategy, objective: { id, label: navigationPrimitives[strategy], parent }, need },
         bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation,
-          preconditions: {}, preserve_refs: [], evidence, actions: [step.action], outcome_guard: { path: ['value'], contains: id } },
+          preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } },
       };
     },
-    before(proposal, index, _packet, observation) {
+    before(proposal, index, packet, observation) {
+      if (index > 0 && proposal.burst) {
+        const leg = liveLeg(proposal, index, packet.frame_rows), previous = proposal.burst[index - 1]!.at;
+        const tile = leg?.scene.tiles[key(leg.step.at)];
+        const admitted = proposal.local.epoch === observation.level_epoch && !!leg && key(leg.scene.at) === key(previous)
+          && (leg.step.action.action_ref === 'ACTION6' ? tile === 'block' : tile === 'air' || tile === 'target')
+          && Object.keys(leg.scene.tiles).every(key => leg.scene.tiles[key] === proposal.scene.tiles[key]);
+        return { admitted, reason: admitted ? 'descent_corridor_and_target_retained' : 'descent_observation_changed' };
+      }
       const admitted = index === 0 && proposal.binding?.observation_ref === observation.observation_ref;
       return { admitted, reason: admitted ? 'descent_step_bound' : 'descent_observation_changed' };
     },
-    after(proposal, _index, before, after, first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      return { ...resultOf(first, second, proposal), seal_prefix: true };
+      const leg = liveLeg(proposal, index, first);
+      const result = leg ? resultOf(first, second, leg) : { matched: false, reason: 'descent_observation_changed' };
+      return { ...result, seal_prefix: !result.matched || index + 1 >= proposal.actions.length };
     },
-    record(before, after, _action, first, second, proposal) {
+    record(before, after, _action, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const { local, step } = proposal, matched = resultOf(first, second, proposal).matched;
+      const leg = liveLeg(proposal, index, first);
+      if (!leg) return { events: [] };
+      const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
+      const { step } = leg, matched = resultOf(first, second, leg).matched;
       state = { ...local, refs: matched ? [...local.refs.slice(-4), after.observation_ref] : local.refs,
         removalRef: matched && step.action.action_ref === 'ACTION6' ? after.observation_ref : local.removalRef,
         ...(matched && step.action.action_ref !== 'ACTION6' ? { movementRef: after.observation_ref } : {}),

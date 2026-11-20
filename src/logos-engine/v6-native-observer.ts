@@ -345,6 +345,12 @@ export class ObservedInputDomain {
       projection_bbox: [x, y, x, y], projected_rows_digest: await rowsDigest([[value]]),
       scope: 'source_derived_locus_on_observed_pixel', reason: provenance.reason, evidence: [...provenance.evidence] };
   }
+  static async projectLocusWitness(witness: LocusWitness, paletteValue: number): Promise<LocusWitness> {
+    if (witness.scope !== 'source_derived_locus_on_observed_pixel' || !Number.isSafeInteger(paletteValue)) {
+      throw new TypeError('A projected click needs an observed locus and a predicted palette value');
+    }
+    return { ...witness, palette_value: paletteValue, projected_rows_digest: await rowsDigest([[paletteValue]]) };
+  }
   bindProposal(proposal: { actions: readonly MeasuredCommand[]; steps: { expected_before: { level_epoch: number; frame_hash: string }; point_binding?: LocusWitness }[] }): void {
     if (proposal.actions.length !== proposal.steps.length) throw new TypeError('Actions and steps must have equal lengths');
     for (let i = 0; i < proposal.actions.length; i++) {

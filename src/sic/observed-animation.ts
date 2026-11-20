@@ -57,3 +57,26 @@ export function measureAnimatedCells(before: NativeRows, after: NativeRows, fram
   const strongest = changes.reduce((best, cells) => cells.length > best.length ? cells : best, [] as number[]);
   return changes.every(cells => cells.every(cell => strongest.includes(cell))) ? strongest : [];
 }
+
+/** Localize one repeated transient change whose pixels return to their initial state. */
+export function measureReturningAnimation(before: NativeRows, after: NativeRows, frames: readonly NativeRows[],
+  [left, top, right, bottom]: NativeBox) {
+  const regions = new Map<string, { box: NativeBox; frames: number[] }>();
+  for (const [index, frame] of frames.entries()) {
+    let l = right + 1, t = bottom + 1, r = left - 1, b = top - 1;
+    const changed: number[] = [];
+    for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+      const initial = before[y]?.[x], transient = frame[y]?.[x];
+      if (initial === undefined || transient === undefined || initial === transient || initial !== after[y]?.[x]) continue;
+      l = Math.min(l, x); r = Math.max(r, x); t = Math.min(t, y); b = Math.max(b, y);
+      changed.push((y - top) * (right - left + 1) + x - left);
+    }
+    if (!changed.length) continue;
+    const key = changed.join(',');
+    const region = regions.get(key);
+    if (region) region.frames.push(index + 1);
+    else regions.set(key, { box: [l, t, r, b], frames: [index + 1] });
+  }
+  const repeated = [...regions.values()].filter(region => region.frames.length >= 2);
+  return repeated.length === 1 ? repeated[0] : undefined;
+}
