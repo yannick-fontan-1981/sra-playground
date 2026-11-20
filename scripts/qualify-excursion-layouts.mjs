@@ -41,7 +41,7 @@ export async function qualifyExcursionLayouts({
     negative = layouts.filter((r) => r.no && !r.yes);
   if (!positive.length || !negative.length || layouts.some((r) => r.yes && r.no)) return null;
   const point = origin.split(',').map(Number);
-  const offset = (layout, i) => layout[i].split(',').map((v, j) => point[j] - Number(v));
+  const offset = (layout, i, anchor = point) => layout[i].split(',').map((v, j) => anchor[j] - Number(v));
   const rules = positive[0].layout.map((_, i) =>
     separateMotion(
       positive.map((r) => offset(r.layout, i)),
@@ -58,14 +58,45 @@ export async function qualifyExcursionLayouts({
     confirmed: 0,
     actualSuccess: 0,
   });
+  const knownLayouts = new Set(layouts.map((r) => r.layout.join('/')));
+  const baseline = layouts.reduce((n, r) => n + r.yes - r.no, 0) > 0;
+  function predict(layout, reference) {
+    const votes = rules.flatMap((rs, i) =>
+      rs.map((r) => {
+        const v = offset(layout, i, reference)[r.axis];
+        return ((r.signOnly ? Math.sign(v) : v) === r.value) === r.onMatch;
+      })
+    );
+    return votes.every(Boolean) ? true : votes.every((v) => !v) ? false : null;
+  }
+  function record(t, prediction, actual) {
+    t.eligible++;
+    t.actualSuccess += Number(actual);
+    if (prediction === null) return;
+    t.predicted++;
+    t.correct += Number(prediction === actual);
+    t.baselineCorrect += Number(baseline === actual);
+    t.positive += Number(prediction);
+    t.confirmed += Number(prediction && actual);
+  }
   async function test(words) {
     const seen = new Set(images),
       seenWords = new Set(tested),
-      seenLayouts = new Set(layouts.map((r) => r.layout.join('/')));
+      seenLayouts = new Set(knownLayouts);
+    const seenJoint = new Set(),
+      seenShiftedFrames = new Set(images);
     const all = bucket(),
       newFrames = bucket(),
       newLayouts = bucket();
-    const baseline = layouts.reduce((n, r) => n + r.yes - r.no, 0) > 0;
+    const shifted = {
+      all: bucket(),
+      newFrames: bucket(),
+      newJoint: bucket(),
+      newPeerLocations: bucket(),
+      absoluteOnSameJoints: bucket(),
+      firstConfirmed: null,
+      firstRefuted: null,
+    };
     let ordersTested = 0;
     for (const word of words) {
       const wordKey = word.join('/');
@@ -74,35 +105,36 @@ export async function qualifyExcursionLayouts({
       ordersTested++;
       const start = await prepare(word);
       if (!start) continue;
-      const votes = rules.flatMap((rs, i) =>
-        rs.map((r) => {
-          const v = offset(start.layout, i)[r.axis];
-          return ((r.signOnly ? Math.sign(v) : v) === r.value) === r.onMatch;
-        })
-      );
-      const prediction = votes.every(Boolean) ? true : votes.every((v) => !v) ? false : null;
-      const actual = await outcome(start.board);
+      const moved = start.origin !== origin,
+        key = start.layout.join('/');
+      const reference = start.origin.split(',').map(Number);
+      const prediction = predict(start.layout, reference),
+        absolute = predict(start.layout, point);
+      const actual = await outcome(start.board, reference, point);
       if (actual === null) continue;
-      const frameNew = !seen.has(start.key),
-        layoutNew = !seenLayouts.has(start.layout.join('/'));
-      seen.add(start.key);
-      seenLayouts.add(start.layout.join('/'));
-      for (const t of [
-        all,
-        ...(frameNew ? [newFrames] : []),
-        ...(frameNew && layoutNew ? [newLayouts] : []),
-      ]) {
-        t.eligible++;
-        t.actualSuccess += Number(actual);
-        if (prediction === null) continue;
-        t.predicted++;
-        t.correct += Number(prediction === actual);
-        t.baselineCorrect += Number(baseline === actual);
-        t.positive += Number(prediction);
-        t.confirmed += Number(prediction && actual);
+      if (moved) {
+        record(shifted.all, prediction, actual);
+        if (!seenShiftedFrames.has(start.key)) record(shifted.newFrames, prediction, actual);
+        seenShiftedFrames.add(start.key);
+        const joint = start.origin + '/' + key;
+        if (seenJoint.has(joint)) continue;
+        seenJoint.add(joint);
+        record(shifted.newJoint, prediction, actual);
+        record(shifted.absoluteOnSameJoints, absolute, actual);
+        if (!knownLayouts.has(key)) record(shifted.newPeerLocations, prediction, actual);
+        if (prediction === true) {
+          const id = actual ? 'firstConfirmed' : 'firstRefuted';
+          shifted[id] ??= { word, origin: start.origin, layout: start.layout, absolute };
+        }
+      } else {
+        record(all, prediction, actual);
+        if (!seen.has(start.key)) record(newFrames, prediction, actual);
+        if (!seen.has(start.key) && !seenLayouts.has(key)) record(newLayouts, prediction, actual);
+        seen.add(start.key);
+        seenLayouts.add(key);
       }
     }
-    return { ordersTested, all, newFrames, newLayouts };
+    return { ordersTested, all, newFrames, newLayouts, shifted };
   }
   return { ...(await test(orders(placement))), substitutions: await test(substitutions(tested, vocabulary)) };
 }

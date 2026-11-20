@@ -215,17 +215,20 @@ async function audit(run) {
         const board = execute(restore(begin), word);
         if (!board || win(board) || board.state === 'GAME_OVER') return null;
         const { key, poses: parts } = await poses(board);
-        if (parts.get(actor) !== history[begin].poses.get(actor) || !partners.every((id) => parts.has(id)))
-          return null;
-        return { board, key, layout: partners.map((id) => parts.get(id)) };
+        if (!parts.has(actor) || !partners.every((id) => parts.has(id))) return null;
+        return { board, key, origin: parts.get(actor), layout: partners.map((id) => parts.get(id)) };
       },
-      outcome: async (board) => {
+      outcome: async (board, reference, original) => {
         const q = execute(board, suffix);
         if (!q) return null;
         if (destination === 'WIN') return win(q);
         if (win(q) || q.state === 'GAME_OVER') return false;
         const at = (await poses(q)).poses.get(actor);
-        return at ? at === destination : null;
+        const translated = destination
+          .split(',')
+          .map((v, i) => Number(v) + reference[i] - original[i])
+          .join();
+        return at ? at === translated : null;
       },
     });
   }
