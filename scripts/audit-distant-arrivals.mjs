@@ -65,6 +65,14 @@ async function audit({ run, word }) {
     topThreeExact: 0,
     newEndpointExact: 0,
   };
+  let births = new Map();
+  const activated = Object.fromEntries(
+    ['one', 'both', 'independent'].map((k) => [k, { trials: 0, exact: 0, distant: 0 }])
+  );
+  const sites = (s, b) =>
+    s.parts
+      .filter((e) => e.area <= (b.frame.length * b.frame[0].length) / 12)
+      .map((e) => e.geometry + '@' + e.position.join());
   async function observe(b) {
     const key = hash(b);
     if (!cache.has(key)) {
@@ -117,6 +125,29 @@ async function audit({ run, word }) {
         counts.offeredMeasurable += Number(!!options.length);
         counts.offeredDistant += Number(distant && !!options.length);
         const rank = options.findIndex((o) => o.landing.join() === actual.join());
+        for (const kind of Object.keys(activated)) {
+          const eligible = options.filter((o) => {
+            const candidates = before.parts.filter(
+              (s) =>
+                s.position.join() === o.entry.join() &&
+                before.groups.get(s.geometry).some((t) => t.position.join() === o.exit.join())
+            );
+            return candidates.some((s) => {
+              const entry = births.get(s.geometry + '@' + o.entry.join()),
+                exit = births.get(s.geometry + '@' + o.exit.join());
+              return kind === 'one'
+                ? !!(entry || exit)
+                : kind === 'both'
+                  ? !!(entry && exit)
+                  : !!(entry && exit && entry !== exit);
+            });
+          });
+          if (eligible.length) {
+            activated[kind].trials++;
+            activated[kind].exact += Number(eligible[0].landing.join() === actual.join());
+            activated[kind].distant += Number(distant);
+          }
+        }
         counts.nearestExact += Number(rank === 0);
         counts.topThreeExact += Number(rank >= 0);
         counts.newEndpointExact += Number(rank >= 0 && !seenBody.has(id + '/' + actual.join()));
@@ -143,6 +174,18 @@ async function audit({ run, word }) {
         history.set(k, h);
       }
     }
+    const liveAfter =
+      next ??
+      (after.level === run.start &&
+      after.levelsCompleted === completed &&
+      after.state !== 'WIN' &&
+      after.state !== 'GAME_OVER'
+        ? await observe(after)
+        : null);
+    if (liveAfter) {
+      const old = new Set(sites(before, board));
+      births = new Map(sites(liveAfter, after).map((k) => [k, old.has(k) ? (births.get(k) ?? 0) : i + 1]));
+    } else births.clear();
     seen.add(before.key + '/' + cmd);
     board = after;
   }
@@ -154,7 +197,7 @@ async function audit({ run, word }) {
       run.levels[0].won
   )
     throw Error('Official result mismatch');
-  return { code: run.code, level: run.start, counts, examples };
+  return { code: run.code, level: run.start, counts, activated, examples };
 }
 const results = [];
 for (const [i, c] of cases.entries()) if (i % shards === shard) results.push(await audit(c));

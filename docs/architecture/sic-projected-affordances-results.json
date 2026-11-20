@@ -13105,5 +13105,2673 @@
         }
       ]
     }
+  },
+  "configurableTransfersV12": {
+    "inversePlacement": {
+      "all": {
+        "code": "PRTL",
+        "status": "measured",
+        "bindings": [
+          {
+            "at": 0,
+            "kind": "address",
+            "adds": false,
+            "removesOnOmission": false,
+            "distance": 57
+          },
+          {
+            "at": 1,
+            "kind": "address",
+            "adds": false,
+            "removesOnOmission": false,
+            "distance": 85
+          },
+          {
+            "at": 2,
+            "kind": "address",
+            "adds": true,
+            "removesOnOmission": true,
+            "distance": 2
+          },
+          {
+            "at": 3,
+            "kind": "button",
+            "adds": false,
+            "removesOnOmission": false,
+            "distance": null
+          }
+        ],
+        "at": 2,
+        "anchorDelta": [
+          -1,
+          -1
+        ],
+        "setDigest": "68eb6900b01454b9642911728e9ab69d111a6aff4e6b6d0b431949bfc4a0f9f9",
+        "top": {
+          "trials": 12,
+          "unchangedActor": 12,
+          "placed": 0,
+          "exact": 0,
+          "nextExact": 0,
+          "won": 3,
+          "exactWon": 0
+        },
+        "tallies": {
+          "trials": 3161,
+          "unchangedActor": 3161,
+          "placed": 0,
+          "exact": 0,
+          "nextExact": 0,
+          "won": 29,
+          "exactWon": 0
+        },
+        "space": "all",
+        "observedLandings": {
+          "56,51": 29,
+          "4,51": 3132
+        },
+        "observedGeometry": {
+          "4,49/59,49": 29,
+          "4,49": 3132
+        },
+        "distinctPlacements": 0,
+        "distinctArrivals": 0
+      },
+      "same-colour": {
+        "code": "PRTL",
+        "status": "measured",
+        "bindings": [
+          {
+            "at": 0,
+            "kind": "address",
+            "adds": false,
+            "removesOnOmission": false,
+            "distance": 57
+          },
+          {
+            "at": 1,
+            "kind": "address",
+            "adds": false,
+            "removesOnOmission": false,
+            "distance": 85
+          },
+          {
+            "at": 2,
+            "kind": "address",
+            "adds": true,
+            "removesOnOmission": true,
+            "distance": 2
+          },
+          {
+            "at": 3,
+            "kind": "button",
+            "adds": false,
+            "removesOnOmission": false,
+            "distance": null
+          }
+        ],
+        "at": 2,
+        "anchorDelta": [
+          -1,
+          -1
+        ],
+        "setDigest": "38825937b665e6feb5fcd2b4c8db6376f088f3415da2144809fb395e208b13a5",
+        "top": {
+          "trials": 12,
+          "unchangedActor": 12,
+          "placed": 0,
+          "exact": 0,
+          "nextExact": 0,
+          "won": 6,
+          "exactWon": 0
+        },
+        "tallies": {
+          "trials": 33,
+          "unchangedActor": 33,
+          "placed": 0,
+          "exact": 0,
+          "nextExact": 0,
+          "won": 7,
+          "exactWon": 0
+        },
+        "space": "same-colour",
+        "observedLandings": {
+          "56,51": 7,
+          "4,51": 26
+        },
+        "observedGeometry": {
+          "4,49/59,49": 7,
+          "4,49": 26
+        },
+        "distinctPlacements": 0,
+        "distinctArrivals": 0
+      }
+    },
+    "activationSelection": {
+      "lower": {
+        "one": {
+          "trials": 170,
+          "exact": 1,
+          "distant": 2
+        },
+        "both": {
+          "trials": 84,
+          "exact": 1,
+          "distant": 1
+        },
+        "independent": {
+          "trials": 25,
+          "exact": 1,
+          "distant": 1
+        }
+      },
+      "upper": {
+        "one": {
+          "trials": 0,
+          "exact": 0,
+          "distant": 0
+        },
+        "both": {
+          "trials": 0,
+          "exact": 0,
+          "distant": 0
+        },
+        "independent": {
+          "trials": 0,
+          "exact": 0,
+          "distant": 0
+        }
+      }
+    },
+    "sourcePrefixExperiments": {
+      "lower": {
+        "entries": 100,
+        "proposals": 16,
+        "withMultipleDestinations": 9,
+        "outcomes": [
+          {
+            "code": "VOIS",
+            "level": 1,
+            "after": 32,
+            "observed": "b0190b2e218a3de5fbac1e2d7d7acfe1c04238987476bc31dfcf5c5ea2cbc20a",
+            "entry": [
+              14,
+              22
+            ],
+            "exit": [
+              42,
+              22
+            ],
+            "destination": [
+              43,
+              27
+            ],
+            "following": [
+              43,
+              31
+            ],
+            "program": [
+              "ACTION6:43,23",
+              "ACTION2",
+              "ACTION2"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  43,
+                  23
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ZIPP",
+            "level": 1,
+            "after": 4,
+            "observed": "5bee3284f584432e65783265aa66db25afcb4932e8c41237a04ccd177cea44ec",
+            "entry": [
+              46,
+              26
+            ],
+            "exit": [
+              14,
+              10
+            ],
+            "destination": [
+              29,
+              9
+            ],
+            "following": [
+              45,
+              9
+            ],
+            "program": [
+              "ACTION4",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_prepare_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  45,
+                  25
+                ]
+              },
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  45,
+                  25
+                ]
+              }
+            ]
+          },
+          {
+            "code": "KEYD",
+            "level": 1,
+            "after": 4,
+            "observed": "1170d009d536facb5e5060b705ba6c78b3d72a7c5f4ed715f8688a30a6a4067a",
+            "entry": [
+              20,
+              7
+            ],
+            "exit": [
+              50,
+              7
+            ],
+            "destination": [
+              56,
+              8
+            ],
+            "following": [
+              61,
+              8
+            ],
+            "program": [
+              "ACTION4",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_prepare_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  21,
+                  8
+                ]
+              },
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  21,
+                  8
+                ]
+              }
+            ]
+          },
+          {
+            "code": "KLOT",
+            "level": 1,
+            "after": 16,
+            "observed": "bdcbfc6a3db0b888f47a1a51e5fc5e36ae3402fc5b95fa130edad68a4af9592d",
+            "entry": [
+              9,
+              20
+            ],
+            "exit": [
+              25,
+              44
+            ],
+            "destination": [
+              16,
+              43
+            ],
+            "following": [
+              8,
+              43
+            ],
+            "program": [
+              "ACTION3",
+              "ACTION3",
+              "ACTION3"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  16,
+                  19
+                ]
+              }
+            ]
+          },
+          {
+            "code": "ESCT",
+            "level": 1,
+            "after": 1,
+            "observed": "444228522872040105810da8e02842ff053d8c9a084583eb0c7ad399b8b95dc5",
+            "entry": [
+              26,
+              20
+            ],
+            "exit": [
+              46,
+              16
+            ],
+            "destination": [
+              47,
+              13
+            ],
+            "following": [
+              47,
+              9
+            ],
+            "program": [
+              "ACTION1",
+              "ACTION1",
+              "ACTION1"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_prepare_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  27,
+                  21
+                ]
+              },
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": null
+              }
+            ]
+          },
+          {
+            "code": "FITE",
+            "level": 1,
+            "after": 4,
+            "observed": "025a7ed1b1cbe8dfb2fd2822a116a3fcf7647829fd3d907bc82687a24a26b5cc",
+            "entry": [
+              39,
+              25
+            ],
+            "exit": [
+              29,
+              30
+            ],
+            "destination": [
+              30,
+              31
+            ],
+            "following": [
+              35,
+              31
+            ],
+            "program": [
+              "ACTION4",
+              "ACTION4",
+              "ACTION4",
+              "ACTION4",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_prepare_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  20,
+                  26
+                ]
+              },
+              {
+                "stage": "approach",
+                "result": "configured_approach_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  25,
+                  26
+                ]
+              }
+            ]
+          },
+          {
+            "code": "DC22",
+            "level": 1,
+            "after": 20,
+            "observed": "4376b6d8c29db33e4771e3cfbcf17e3402a9cdca04ccc46e55a2a1df277c8be5",
+            "entry": [
+              18,
+              20
+            ],
+            "exit": [
+              18,
+              30
+            ],
+            "destination": [
+              20,
+              32
+            ],
+            "following": [
+              20,
+              30
+            ],
+            "program": [
+              "ACTION1",
+              "ACTION1"
+            ],
+            "verdict": [
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  20,
+                  22
+                ]
+              }
+            ]
+          },
+          {
+            "code": "KA59",
+            "level": 1,
+            "after": 4,
+            "observed": "56777d75d1c727d07bdd3ab5d8ee14b48cdb8fee451dca3ca10fd20ded3ecfca",
+            "entry": [
+              21,
+              30
+            ],
+            "exit": [
+              30,
+              30
+            ],
+            "destination": [
+              34,
+              31
+            ],
+            "following": [
+              37,
+              31
+            ],
+            "program": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  25,
+                  31
+                ]
+              }
+            ]
+          },
+          {
+            "code": "POLA",
+            "level": 1,
+            "after": 4,
+            "observed": "9b0807ab222368bf87841060fd312be10da781a31ba2b69a11a27a630d22aaea",
+            "entry": [
+              10,
+              24
+            ],
+            "exit": [
+              30,
+              56
+            ],
+            "destination": [
+              26,
+              57
+            ],
+            "following": [
+              21,
+              57
+            ],
+            "program": [
+              "ACTION3",
+              "ACTION3",
+              "ACTION3"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  16,
+                  25
+                ]
+              }
+            ]
+          },
+          {
+            "code": "G50T",
+            "level": 1,
+            "after": 2,
+            "observed": "c9321e6cf1e0bb6d78d61488ddd377ab7acd4017a3957ce53b9d9311bd8a77b8",
+            "entry": [
+              16,
+              22
+            ],
+            "exit": [
+              2,
+              2
+            ],
+            "destination": [
+              0,
+              6
+            ],
+            "following": [
+              0,
+              12
+            ],
+            "program": [
+              "ACTION2",
+              "ACTION2",
+              "ACTION2"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_prepare_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  14,
+                  20
+                ]
+              },
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  14,
+                  26
+                ]
+              }
+            ]
+          },
+          {
+            "code": "GABA",
+            "level": 1,
+            "after": 5,
+            "observed": "96529430224d2603a4fc71a5fc2310453b3a9605c2e273bddd9e63bd16740358",
+            "entry": [
+              52,
+              21
+            ],
+            "exit": [
+              12,
+              36
+            ],
+            "destination": [
+              12,
+              31
+            ],
+            "following": [
+              12,
+              26
+            ],
+            "program": [
+              "ACTION1",
+              "ACTION1",
+              "ACTION1",
+              "ACTION1"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_prepare_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  52,
+                  26
+                ]
+              },
+              {
+                "stage": "approach",
+                "result": "configured_approach_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  52,
+                  21
+                ]
+              }
+            ]
+          },
+          {
+            "code": "SNAR",
+            "level": 1,
+            "after": 7,
+            "observed": "7228eedda2d6d0eafedf7fdeb7c7851711195677df9d99bcf2e69ff45331a0b8",
+            "entry": [
+              29,
+              30
+            ],
+            "exit": [
+              23,
+              48
+            ],
+            "destination": [
+              24,
+              43
+            ],
+            "following": [
+              24,
+              37
+            ],
+            "program": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": null
+              }
+            ]
+          },
+          {
+            "code": "FOGW",
+            "level": 1,
+            "after": 1,
+            "observed": "01876ad4252ddcfddf421445596af908e49b1282de1e3363c663e3b3665957c2",
+            "entry": [
+              24,
+              57
+            ],
+            "exit": [
+              22,
+              26
+            ],
+            "destination": [
+              20,
+              26
+            ],
+            "following": [
+              24,
+              26
+            ],
+            "program": [
+              "ACTION1",
+              "ACTION1",
+              "ACTION1",
+              "ACTION1",
+              "ACTION1"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  10,
+                  57
+                ]
+              }
+            ]
+          },
+          {
+            "code": "WEAV",
+            "level": 1,
+            "after": 29,
+            "observed": "7707235a82511766a004f2e64cc0502006d0fee93f7d2be4a9c9f20090a0205d",
+            "entry": [
+              20,
+              26
+            ],
+            "exit": [
+              37,
+              20
+            ],
+            "destination": [
+              41,
+              18
+            ],
+            "following": [
+              47,
+              18
+            ],
+            "program": [
+              "ACTION1",
+              "ACTION1"
+            ],
+            "verdict": [
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  18,
+                  24
+                ]
+              }
+            ]
+          },
+          {
+            "code": "PRTL",
+            "level": 1,
+            "after": 4,
+            "observed": "fff8f2591ac63d877adc58b1b70cbd0094960ade25b2dc6c1f1f583d6b98312a",
+            "entry": [
+              4,
+              49
+            ],
+            "exit": [
+              59,
+              49
+            ],
+            "destination": [
+              56,
+              51
+            ],
+            "following": [
+              51,
+              51
+            ],
+            "program": [
+              "ACTION3",
+              "ACTION3"
+            ],
+            "verdict": [
+              {
+                "stage": "cross",
+                "result": "configured_cross_verified",
+                "matched": true,
+                "official": false,
+                "actual": [
+                  56,
+                  51
+                ]
+              },
+              {
+                "stage": "use",
+                "result": "official_completion",
+                "matched": false,
+                "official": true,
+                "actual": [
+                  11,
+                  51
+                ]
+              }
+            ]
+          },
+          {
+            "code": "RE86",
+            "level": 1,
+            "after": 21,
+            "observed": "4276c3883dd25e5692e5e5749ae45799291062d619a09e3e152cc40b5885457f",
+            "entry": [
+              37,
+              42
+            ],
+            "exit": [
+              51,
+              63
+            ],
+            "destination": [
+              53,
+              63
+            ],
+            "following": [
+              56,
+              63
+            ],
+            "program": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "cross",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  39,
+                  42
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "upper": {
+        "entries": 18,
+        "proposals": 2,
+        "withMultipleDestinations": 1,
+        "outcomes": [
+          {
+            "code": "POLA",
+            "level": 3,
+            "after": 3,
+            "observed": "cc5f58907f367135dcd4ca0c5637763c3b97f4255f76085e6ce67a1ca01f7f30",
+            "entry": [
+              25,
+              29
+            ],
+            "exit": [
+              30,
+              56
+            ],
+            "destination": [
+              36,
+              57
+            ],
+            "following": [
+              41,
+              57
+            ],
+            "program": [
+              "ACTION4",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "official_completion",
+                "matched": false,
+                "official": true,
+                "actual": null
+              }
+            ]
+          },
+          {
+            "code": "POLA",
+            "level": 5,
+            "after": 6,
+            "observed": "8b8bc3195015a10fc10493df0a329f2ace68ebbda827c871e0296de88d286aaf",
+            "entry": [
+              30,
+              56
+            ],
+            "exit": [
+              35,
+              24
+            ],
+            "destination": [
+              31,
+              23
+            ],
+            "following": [
+              31,
+              33
+            ],
+            "program": [
+              "ACTION6:26,25",
+              "ACTION4",
+              "ACTION4",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "verdict": [
+              {
+                "stage": "prepare",
+                "result": "configured_transfer_refuted",
+                "matched": false,
+                "official": false,
+                "actual": [
+                  26,
+                  25
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "sourceDemonstration": {
+      "shape": [
+        {
+          "code": "PRTL",
+          "level": 1,
+          "status": "evaluated",
+          "breadth": [
+            1,
+            1,
+            1
+          ],
+          "counters": {
+            "calibrations": 4,
+            "catalogue": 1,
+            "planned": 1,
+            "arrivedAtTrigger": 1,
+            "executed": 1,
+            "exact": 1,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 1
+          },
+          "seal": "fcf473a1c9b6c8c900c93b010646c90fae45079341a54d552bedb0641ba30a7d",
+          "distinctExact": 1,
+          "examples": [
+            {
+              "goal": [
+                56,
+                51
+              ],
+              "reached": true,
+              "sites": true,
+              "exact": true,
+              "won": true,
+              "to": [
+                56,
+                51
+              ],
+              "entry": [
+                4,
+                49
+              ],
+              "exit": [
+                59,
+                49
+              ],
+              "from": [
+                6,
+                51
+              ],
+              "after": [
+                51,
+                51
+              ],
+              "observedAfter": null,
+              "setup": [
+                "ACTION6:3,50",
+                "ACTION6:20,3",
+                "ACTION6:60,50"
+              ],
+              "approach": [
+                "ACTION3"
+              ],
+              "cmd": "ACTION3",
+              "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+              "prepared": "fff8f2591ac63d877adc58b1b70cbd0094960ade25b2dc6c1f1f583d6b98312a",
+              "landed": "82afd4940d5c438a43f298e4a3939d8f1736aadb7e628bc6702112566b7eac79"
+            }
+          ]
+        },
+        {
+          "code": "PRTL",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            1,
+            1,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            1,
+            1,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GARE",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        }
+      ],
+      "localEffect": [
+        {
+          "code": "PRTL",
+          "level": 1,
+          "status": "evaluated",
+          "breadth": [
+            2,
+            2,
+            4
+          ],
+          "counters": {
+            "calibrations": 4,
+            "catalogue": 1,
+            "planned": 1,
+            "arrivedAtTrigger": 1,
+            "executed": 1,
+            "exact": 1,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 1
+          },
+          "seal": "35f213d8660d88accb099c1d7fe68aab29ac9ab3aa564ef55e10942f31d005ca",
+          "distinctExact": 1,
+          "examples": [
+            {
+              "goal": [
+                56,
+                51
+              ],
+              "reached": true,
+              "sites": true,
+              "exact": true,
+              "won": true,
+              "to": [
+                56,
+                51
+              ],
+              "entry": [
+                4,
+                49
+              ],
+              "exit": [
+                59,
+                49
+              ],
+              "from": [
+                6,
+                51
+              ],
+              "after": [
+                51,
+                51
+              ],
+              "observedAfter": null,
+              "setup": [
+                "ACTION6:3,50",
+                "ACTION6:20,3",
+                "ACTION6:60,50"
+              ],
+              "approach": [
+                "ACTION3"
+              ],
+              "cmd": "ACTION3",
+              "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+              "prepared": "fff8f2591ac63d877adc58b1b70cbd0094960ade25b2dc6c1f1f583d6b98312a",
+              "landed": "82afd4940d5c438a43f298e4a3939d8f1736aadb7e628bc6702112566b7eac79"
+            }
+          ]
+        },
+        {
+          "code": "PRTL",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            1,
+            2,
+            1
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            1,
+            2,
+            1
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [
+            1,
+            1,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            2,
+            3,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            2,
+            3,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [
+            2,
+            3,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [
+            3,
+            5,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GARE",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            1,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            3,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [
+            4,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [
+            4,
+            6,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            2,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            2,
+            1,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [
+            2,
+            2,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [
+            0,
+            0,
+            0
+          ],
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        }
+      ],
+      "recombinations": [
+        {
+          "code": "PRTL",
+          "level": 1,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 28,
+            "commands": 1064,
+            "observations": 28
+          },
+          "counters": {
+            "calibrations": 8,
+            "catalogue": 1,
+            "planned": 1,
+            "arrivedAtTrigger": 1,
+            "executed": 1,
+            "exact": 1,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 1
+          },
+          "seal": "ad73a3d201284d039a2b21089c0a67c3787a2119b203005255a918cd8c24524e",
+          "distinctExact": 1,
+          "examples": [
+            {
+              "goal": [
+                56,
+                51
+              ],
+              "reached": true,
+              "sites": true,
+              "exact": true,
+              "won": true,
+              "to": [
+                56,
+                51
+              ],
+              "entry": [
+                4,
+                49
+              ],
+              "exit": [
+                59,
+                49
+              ],
+              "from": [
+                6,
+                51
+              ],
+              "after": [
+                51,
+                51
+              ],
+              "observedAfter": null,
+              "setup": [
+                "ACTION6:3,50",
+                "ACTION6:20,3",
+                "ACTION6:60,50"
+              ],
+              "approach": [
+                "ACTION3"
+              ],
+              "cmd": "ACTION3",
+              "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+              "prepared": "fff8f2591ac63d877adc58b1b70cbd0094960ade25b2dc6c1f1f583d6b98312a",
+              "landed": "82afd4940d5c438a43f298e4a3939d8f1736aadb7e628bc6702112566b7eac79"
+            }
+          ]
+        },
+        {
+          "code": "PRTL",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 28,
+            "commands": 986,
+            "observations": 28
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 28,
+            "commands": 1026,
+            "observations": 28
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 4,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 12,
+            "commands": 444,
+            "observations": 12
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 5,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 16,
+            "commands": 608,
+            "observations": 16
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 34,
+            "commands": 112,
+            "observations": 34
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 11,
+            "commands": 36,
+            "observations": 11
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 2,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 48,
+            "commands": 192,
+            "observations": 63
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 3,
+          "status": "evaluated",
+          "breadth": [],
+          "search": {
+            "expanded": 48,
+            "commands": 192,
+            "observations": 63
+          },
+          "counters": {
+            "calibrations": 0,
+            "catalogue": 0,
+            "planned": 0,
+            "arrivedAtTrigger": 0,
+            "executed": 0,
+            "exact": 0,
+            "ordinaryExact": 0,
+            "continued": 0,
+            "won": 0
+          },
+          "seal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "distinctExact": 0,
+          "examples": []
+        }
+      ]
+    }
   }
 }
