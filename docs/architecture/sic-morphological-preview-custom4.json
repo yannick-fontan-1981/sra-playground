@@ -1,0 +1,546 @@
+{
+  "20": {
+    "frozen": {
+      "control": {
+        "tag": "sic-projected-affordances-source100-control-v1",
+        "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+        "files": 2401,
+        "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca"
+      },
+      "candidate": {
+        "tag": "sic-projected-affordances-source100-candidate-v20",
+        "sha": "16319899c2135bd1addc7bc83c35ffec4f5cba3d",
+        "files": 2445,
+        "digest": "d1f1149979e5ab5c923215039ddb226dee7e05c830ed27ee913d7af4de66609b"
+      }
+    },
+    "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+    "reserved": "SS09 L2",
+    "levels": [
+      {
+        "code": "SS01",
+        "level": 2,
+        "commonPrefix": 596,
+        "distinctAtCommonPrefix": [
+          148,
+          122
+        ],
+        "arms": {
+          "control": {
+            "issued": 708,
+            "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+            "trajectory": "bbb8609a9e3e833d1ee61763f375d08b0cd9daa34dd60564cf1480d268373b19",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          },
+          "candidate": {
+            "issued": 596,
+            "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+            "trajectory": "32e6d701f2d61f5c8bbff33f53217b2c77d3f728ae3eba984ae0e649e2538fa9",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 9,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 9,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          }
+        }
+      },
+      {
+        "code": "SS06",
+        "level": 2,
+        "commonPrefix": 555,
+        "distinctAtCommonPrefix": [
+          40,
+          67
+        ],
+        "arms": {
+          "control": {
+            "issued": 608,
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "trajectory": "0f4c357fee5510b41a9c8510fb9991f20aa8ccfc7ad54d902c6b833689bcaee6",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          },
+          "candidate": {
+            "issued": 555,
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "trajectory": "bc648ebc7fe16e067a8934e8d7bde20558903b617419fe13e21ee39780775eb2",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          }
+        }
+      },
+      {
+        "code": "SS07",
+        "level": 2,
+        "commonPrefix": 5,
+        "distinctAtCommonPrefix": [
+          5,
+          5
+        ],
+        "arms": {
+          "control": {
+            "issued": 5,
+            "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+            "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          },
+          "candidate": {
+            "issued": 6,
+            "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+            "trajectory": "f50383483a541c9249d235bfb0f9a9e6ba197fbb0aa4364ad865ce2a3a37484c",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 1,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 1,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          }
+        }
+      },
+      {
+        "code": "SS08",
+        "level": 2,
+        "commonPrefix": 688,
+        "distinctAtCommonPrefix": [
+          272,
+          29
+        ],
+        "arms": {
+          "control": {
+            "issued": 688,
+            "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+            "trajectory": "b7cdaa425f8b9f250aef46ca184f4c6594be16b5151f7037a97a061c99a6e802",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          },
+          "candidate": {
+            "issued": 816,
+            "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+            "trajectory": "f9f5055444d93534f6ffd2d24150db5f9eded147ddc4fcf9b931a95f30970849",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 4,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 4,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            }
+          }
+        }
+      }
+    ]
+  },
+  "21": {
+    "frozen": {
+      "control": {
+        "tag": "sic-projected-affordances-source100-control-v1",
+        "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+        "files": 2401,
+        "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca"
+      },
+      "candidate": {
+        "tag": "sic-projected-affordances-source100-candidate-v21",
+        "sha": "1b77e11a90ea99efde83e683da4f5941de2c2e6c",
+        "files": 2446,
+        "digest": "0e626a7e6e4e4c7bf49481bdeb56dbf009cc6700eb9936dcc3c4aa88f93cd717"
+      }
+    },
+    "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+    "reserved": "SS09 L2",
+    "levels": [
+      {
+        "code": "SS01",
+        "level": 2,
+        "commonPrefix": 575,
+        "distinctAtCommonPrefix": [
+          141,
+          122
+        ],
+        "arms": {
+          "control": {
+            "issued": 695,
+            "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+            "trajectory": "04f8301b3fd631b563fd79ba8113a7db2fb41151ec09875234f5a4852f38d05d",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 0,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 0,
+              "unobserved": 0,
+              "inapplicable": 0
+            }
+          },
+          "candidate": {
+            "issued": 575,
+            "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+            "trajectory": "636b638178faaab193a2a29ba59983431c68c88f13e297782c24cf3ffdcbfcb2",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 9,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 9,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 9,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 7,
+              "unobserved": 2,
+              "inapplicable": 0
+            }
+          }
+        }
+      },
+      {
+        "code": "SS06",
+        "level": 2,
+        "commonPrefix": 589,
+        "distinctAtCommonPrefix": [
+          40,
+          68
+        ],
+        "arms": {
+          "control": {
+            "issued": 643,
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "trajectory": "38f46d196e240a30d666c115c5481aba9e6d54aaebc2a2d261d28a84570bf57b",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 0,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 0,
+              "unobserved": 0,
+              "inapplicable": 0
+            }
+          },
+          "candidate": {
+            "issued": 589,
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "trajectory": "7f5b37a5eb5dccafea64db427f3385e68a9e4edd5cf91a4c7a09020bd440c6a8",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 0,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 0,
+              "unobserved": 0,
+              "inapplicable": 0
+            }
+          }
+        }
+      },
+      {
+        "code": "SS07",
+        "level": 2,
+        "commonPrefix": 5,
+        "distinctAtCommonPrefix": [
+          5,
+          5
+        ],
+        "arms": {
+          "control": {
+            "issued": 5,
+            "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+            "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 0,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 0,
+              "unobserved": 0,
+              "inapplicable": 0
+            }
+          },
+          "candidate": {
+            "issued": 6,
+            "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+            "trajectory": "f50383483a541c9249d235bfb0f9a9e6ba197fbb0aa4364ad865ce2a3a37484c",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 1,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 1,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 1,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 1,
+              "unobserved": 0,
+              "inapplicable": 0
+            }
+          }
+        }
+      },
+      {
+        "code": "SS08",
+        "level": 2,
+        "commonPrefix": 642,
+        "distinctAtCommonPrefix": [
+          254,
+          29
+        ],
+        "arms": {
+          "control": {
+            "issued": 642,
+            "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+            "trajectory": "aa8757c3e586c7366457d1bc101e778637cc4ab999291ba99aa159fd41aca951",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 0,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 0,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 0,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 0,
+              "unobserved": 0,
+              "inapplicable": 0
+            }
+          },
+          "candidate": {
+            "issued": 749,
+            "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+            "trajectory": "21aea638d40cdb386160cd48bac5c492dc01b8c315ab09d4dc2449dc45b85898",
+            "cap": 1200,
+            "parallelWorkers": 4,
+            "won": false,
+            "level": 2,
+            "occupancy": {
+              "programs": 4,
+              "placements": 0,
+              "placementsExact": 0,
+              "arrivals": 4,
+              "arrivalsExact": 0,
+              "newToSubject": 0,
+              "preparedArrivals": 0,
+              "equalLengthPreparationNeeded": 0,
+              "uses": 0,
+              "usesExact": 0
+            },
+            "morphologicalPreviews": {
+              "issued": 4,
+              "multiple": 0,
+              "pose": 0,
+              "controlled": 0,
+              "realized": 0,
+              "contradicted": 4,
+              "unobserved": 0,
+              "inapplicable": 0
+            }
+          }
+        }
+      }
+    ]
+  }
+}
