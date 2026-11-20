@@ -389,7 +389,10 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
         newUse,
       };
       if (!best || score > best.score)
-        best = { score, question: { target, probe: op, arrival: moves ? first.p : null, use, after, place } };
+        best = {
+          score,
+          question: { target, probe: op, arrival: moves ? first.p : null, use, ...(after ? { after } : {}), place },
+        };
     }
     return best;
   };

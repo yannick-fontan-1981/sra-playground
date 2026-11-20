@@ -4,6 +4,7 @@ import type { NativeObservation, NativeEntity } from '../src/logos-engine/v6-nat
 import { initialMemory, type Edge } from '../src/sic/preparation-experiments.ts';
 import { recordFrontier } from '../src/sic/experimental-frontier.ts';
 import { placeExperiments } from '../src/sic/place-experiments.ts';
+import { splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 
 const rows = Array.from({ length: 3 }, () => Array(25).fill(0));
 function observation(poses: Record<string, number>): NativeObservation {
@@ -74,6 +75,7 @@ test('prefers an unmeasured location to repeating the same spatial control under
   assert.ok(score(3, 'east')!.score > score(0, 'east')!.score);
   assert.deepEqual(score(3, 'east')!.question.arrival?.to, [4, 1]);
   assert.deepEqual(score(3, 'east')!.question.use?.to, [5, 1]);
+  assert.doesNotThrow(() => splitNativeState(score(3, 'east')!.question, 'frontier'));
 });
 test('a witnessed exchange projects the transported traveler and its subsequent use at a new separation', () => {
   const m = initialMemory(1);
