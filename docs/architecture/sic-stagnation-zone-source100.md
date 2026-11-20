@@ -1,0 +1,19 @@
+# Quand une action locale cesse de faire progresser la partie
+
+SIC conserve la connaissance morphologique selon laquelle une commande envoie un sujet sur une marque. Pour choisir la prochaine action, il évalue séparément le résultat accessible depuis l’arrivée. Le premier essai d’une action dans une configuration reste informatif.
+
+Une transition publique reçoit le tag `stagnation_same_zone` quand la même commande a déjà produit la même image et le même répertoire de commandes depuis la même situation. SIC identifie le sujet et vérifie qu’il reste sur place ou qu’un trajet ordinaire relie les deux positions. Ce trajet peut avoir été effectivement parcouru, ou être prévu à partir des déplacements et du sol observés. La trace distingue ces deux bases. SIC conserve les références des commandes qui les étayent.
+
+Un niveau franchi, une nouvelle commande disponible, l’agrandissement mesurable de la zone praticable ou une autre opération dont l’effet est débloqué à l’arrivée écartent ce tag. Lorsqu’une commande locale constitue une étape vérifiable vers une manipulation déjà choisie, SIC poursuit le programme. Un résultat identique dans l’image publique donne une mesure des possibilités observées. Des variables invisibles peuvent encore différencier deux états physiques.
+
+## Priorité de l’expérience
+
+Quand une lecture isolée reconduirait à un retour classé stagnant, SIC examine les transformations possibles des objets. Il utilise les déplacements déjà observés, les positions d’où le sujet peut entrer en contact avec une pièce, et les relations spatiales entre sujet, repère et marque. Il peut également tester une première poussée encore hypothétique. Pour chaque emplacement proposé, il cherche de quel côté le sujet pourrait ensuite se placer, quelles cases deviendraient accessibles et si une manœuvre de retour serait possible. Une marque dépendante du sujet demande une preuve de déplacement indépendant pour devenir elle-même la pièce à manipuler.
+
+Si une relation d’arrivée observée permet de prévoir une ouverture, le programme indique l’emplacement du repère, le point de départ, la destination et une continuation éventuelle. Il vérifie chaque pas sur les images publiques. Une erreur sur le sujet, la pièce ou le déplacement arrête la composition. Une activation qui dépend de la marque exige aussi que celle-ci soit visible à la destination annoncée.
+
+## Épreuves sources et gel
+
+Les 118 traces couvrent les 100 jeux sources et 18 niveaux supérieurs. L’enregistrement des retours publics répétés a retenu 110 situations dans 26 niveaux avant d’y soumettre des alternatives. Les essais autonomes supplémentaires mesurent les décisions prises par SIC avec un plafond de 90 commandes au L1 et de 70 aux niveaux supérieurs. Dans SKBN L1, deux interventions aboutissent au déplacement annoncé d’une pièce de (47,41) à (47,57), en coordonnées doublées de l’observateur. Dans SWCH L1, une intervention déplace la pièce de (32,38) à (42,38). Trois contrôles, qui répètent la commande dépriorisée depuis l’état de départ du programme pendant le même nombre de commandes, manquent ces placements. Ces mouvements mesurent un changement de configuration. Une victoire ou une nouvelle zone exige une vérification supplémentaire.
+
+Le témoin conserve le tag `sic-projected-affordances-source100-control-v1`. Le candidat expérimental est figé sous `sic-projected-affordances-source100-candidate-v25` avant les essais sur SS01, SS06, SS07 et SS08 L2. L’environnement est `f4d28aee9ebbb35533bb97a26968efd22887473d`. SS09 L2 reste réservé. Le transfert se mesure en départ direct et en campagne SS01 depuis le L1. L’essai guidé après les trois pas publics de SS01 L2 mesure à part le choix de l’expérience. Le blocage de la version précédente était connu de l’expérimentateur. Les critères et le choix des manipulations utilisent les observations des jeux sources.

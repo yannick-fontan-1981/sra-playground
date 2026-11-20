@@ -6,6 +6,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceReplay } from './sic-study-source-replay.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
+import {zoneProgressAudit} from './verify-zone-progress.mjs';
 import {unreadIndicatorAudit} from './verify-unread-indicators.mjs';
 import {witnessedPreviewAudit} from './verify-witnessed-previews.mjs';
 import {occupancyAudit} from './verify-native-occupancy.mjs';
@@ -52,7 +53,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator || e.mechanism || e.localRepeat)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -119,7 +120,7 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator || e.mechanism || e.localRepeat
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
@@ -127,6 +128,7 @@ const audit=contextAudit(run,hash,partsAt,commandKey);
 const frames=inverseFrameAudit(run,hash,partsAt,cache,commandKey);
 const words=wordAudit(run,partsAt,cache,commandKey,hash);
 const territories=territoryAudit(run,hash,partsAt,cache,commandKey);
+const progress=zoneProgressAudit(run,hash,partsAt,cache,commandKey);
 const unread=unreadIndicatorAudit(run,hash,partsAt,cache,commandKey);
 const reads=witnessedPreviewAudit(run,hash,partsAt,cache,commandKey);
 const occupancy=occupancyAudit(run,hash,partsAt,cache,commandKey,reads.witness);
@@ -135,6 +137,7 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
   const action = commandKey(cmd);
   const priorState = board.state;
+  const priorBoard=board;
   if (needPositionHistory) await partsAt(board, cmd.from, i + 1);
   const input = [cmd.from, board.level, board.state, board.availableActionIds.join(','), action].join('/');
   const prior = witnessed.get(input) ?? new Set();
@@ -149,9 +152,11 @@ for (const [i, cmd] of run.replayCommands.entries()) {
     ...(cmd.id === 6 ? { data: cmd.data } : {}),
   });
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
+  await progress.checkTag(cmd,i,priorBoard,board);
   const event = events.get(i + 1);
-  if ((cmd.indicatorProbeSeal&&!event?.unreadIndicator)||(cmd.previewReadSeal&&!event?.witnessedPreview)||(cmd.occupancySeal&&!event?.occupancy)||(cmd.territorySeal&&!event?.territorial)||(cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
+  if ((cmd.mechanismSeal&&!event?.mechanism)||(cmd.indicatorProbeSeal&&!event?.unreadIndicator)||(cmd.previewReadSeal&&!event?.witnessedPreview)||(cmd.occupancySeal&&!event?.occupancy)||(cmd.territorySeal&&!event?.territorial)||(cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
   if (!event) continue;
+  if(event.mechanism){await progress.record(event,cmd,i,board,priorBoard);continue;}
   if(event.unreadIndicator){await unread.record(event,cmd,i,board,priorState);continue;}
   if(event.witnessedPreview){await reads.record(event,cmd,i,board,priorState);continue;}
   if(event.occupancy){await occupancy.record(event,cmd,i,board,priorState);continue;}
@@ -691,6 +696,7 @@ await territories.compare(reopen,dispatchCommand);
 await words.compare(reopen,dispatchCommand);
 await activations.compare(reopen,dispatchCommand);
 await occupancy.compare(reopen,dispatchCommand);
+await progress.compare(reopen,dispatchCommand);
 console.log(
   JSON.stringify({
     code: run.code,
@@ -713,6 +719,7 @@ console.log(
     instrument:audit.sites,
     transport:audit.transports,
     retained:audit.retained,
+    zoneProgress:progress.results,mechanismExamples:progress.examples,
     unreadIndicators:unread.results,
     witnessedPreviews:reads.results,
     occupancy:occupancy.results,occupancyExamples:occupancy.examples,

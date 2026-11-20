@@ -1,4 +1,6 @@
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
+import {newLocalProgress,measureLocalRepeat,knownLocalRepeat,repeatKey,type LocalProgress,type ZoneRepeat} from './local-progress.ts';
+import {offerMechanism,finishMechanism,type MechanismTrial} from './reconfigure-local-mechanism.ts';
 import {offerUnreadIndicator,measureUnreadIndicator,type IndicatorMemory,type IndicatorTest} from './probe-unread-indicators.ts';
 import {newOccupancyMemory,occupancyView,occupancyForms,observePoses,poseRole,offerOccupancy,offerPreparedPreview,finishOccupancy,type OccupancyMemory,type OccupancyTrial} from './occupancy-programs.ts';
 import {inTerritory,newTerritorialMemory,offerTerritory,recordTerritory,type TerritorialMemory,type TerritorialTrial} from './pursue-territory.ts';
@@ -95,6 +97,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'reconfigureMechanism'
     | 'unreadIndicator'
     | 'witnessedPreview'
     | 'occupancy'
@@ -148,6 +151,7 @@ export type Experiment = {
   frame?:FrameTrial;
   activation?:Activation;
   territorial?:TerritorialTrial;
+  mechanism?:MechanismTrial;
   unreadIndicator?:IndicatorTest;
   witnessedPreview?:ReadOffer;
   occupancy?:OccupancyTrial;
@@ -191,6 +195,8 @@ export type Outcome = {
   frame?:Record<string,unknown>;
   activation?:Record<string,unknown>;
   territorial?:Record<string,unknown>;
+  localRepeat?:ZoneRepeat;
+  mechanism?:Record<string,unknown>;
   unreadIndicator?:Record<string,unknown>;
   witnessedPreview?:Record<string,unknown>;
   occupancy?:Record<string,unknown>;
@@ -205,6 +211,7 @@ export type Memory = {
   territory?:TerritorialMemory;
   previewLearning?:PreviewLearning;
   previewCarry?:PreviewCarry|null;
+  localProgress?:LocalProgress;
   indicators?:IndicatorMemory;
   occupancy?:OccupancyMemory;
   epoch: number;
@@ -432,18 +439,23 @@ function selectEstablishedExperiment(
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
   const read=rows&&m.previewLearning&&!m.occupancy?.active?offerWitnessedPreview(m.previewLearning,o,visualLayout(o,rows),available):null;
+  const priorRepeat=read?knownLocalRepeat(m,s,read.command):null;
+  const stagnant=priorRepeat??(m.localProgress?.last?.returnScene===s?m.localProgress.last:null);
   if(rows&&m.occupancy&&!m.occupancy.active&&!m.territory?.active){
     const goal=m.territory?.goal,actor=goal&&o.entities.find(e=>!e.identity_ambiguous&&e.signature===goal.actor);
     const frontier=actor&&goal?{role:poseRole(actor),homeSize:goal.homeSize,outsideSize:goal.outsideSize,contains:(at:[number,number])=>{
       const x=(at[0]-actor.bbox[2]+actor.bbox[0])/2,y=(at[1]-actor.bbox[3]+actor.bbox[1])/2;
       return Number.isInteger(x)&&Number.isInteger(y)&&inTerritory(goal,[x,y]);
     }}:undefined;
-    const redirected=free&&offerPreparedPreview(m.occupancy,s,available,rows[0]!.length,rows.length,frontier,m.previewLearning?{epoch:o.level_epoch,memory:m.previewLearning}:undefined);
+    const redirected=(free||!!stagnant)&&!m.localProgress?.active&&offerPreparedPreview(m.occupancy,s,available,rows[0]!.length,rows.length,frontier,m.previewLearning?{epoch:o.level_epoch,memory:m.previewLearning}:undefined);
+    if(redirected&&(!stagnant||redirected.occupancy?.plan.preparedPreview?.alternatives[0]?.opensMeasuredRegion))return redirected;
+    const mechanism=offerMechanism(m,s,o,rows,available,stagnant);
+    if(mechanism)return mechanism;
     if(redirected)return redirected;
     const unread=read?.basis!=='observed_in_previous_level'&&offerUnreadIndicator(m,s,o,available,(id,site)=>frontier?.role===id&&frontier.contains(site)&&!frontier.contains(m.occupancy!.layouts[s]![id]!));
     if(unread)return unread;
   }
-  if(read&&(read.basis==='observed_in_previous_level'||free&&m.recurrences>0)){
+  if(read&&!priorRepeat&&(read.basis==='observed_in_previous_level'||free&&m.recurrences>0)){
       return {phase:'witnessedPreview',origin:s,a:read.command,b:read.command,rule:'subject_reaches_visible_indicator',refs:[],witnessedPreview:read};
   }
   if(rows&&m.occupancy&&(m.occupancy.active||free&&!m.territory?.active&&m.recurrences>0)){
@@ -784,7 +796,7 @@ export function selectExperiment(
   m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
 ): Experiment | null {
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.unreadIndicator || established?.witnessedPreview) return established;
+  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
   const recent=m.delayed.history.slice(-8);
@@ -816,6 +828,13 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  const progress=m.localProgress??=newLocalProgress();
+  if(!x?.mechanism)progress.active=null;
+  const preparing=x?.mechanism||x?.occupancy&&x.occupancy.index+1<x.occupancy.plan.steps.length||x?.territorial&&x.territorial.cursor+1<x.territorial.plan.program.length;
+  const localRepeat=preparing?null:measureLocalRepeat(m,s,t,b,a,rows,next,op,x?.witnessedPreview?.actor);
+  progress.last=localRepeat;
+  if(localRepeat)progress.repeats[repeatKey(s,op)]=localRepeat;
+  else delete progress.repeats[repeatKey(s,op)];
   const occupancy=m.occupancy??=newOccupancyMemory();
   if(!x?.occupancy)occupancy.active=null;
   if(m.indicators&&!x?.unreadIndicator)m.indicators.pending=null;
@@ -919,6 +938,7 @@ export function recordExperiment(
   if (!x) return null;
   m.lastTrial = m.turns;
   const out: Outcome = {
+    ...(localRepeat?{localRepeat}:{}),
     predictedGap: x.predictedGap === true,
     phase: x.phase,
     hypothesis: x.rule,
@@ -936,6 +956,7 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.mechanism){const detail=finishMechanism(m,x.mechanism,b,a,rows,next,op);return {...out,result:detail.won?'mechanism_completion':detail.matched?'mechanism_step_confirmed':'mechanism_step_refuted',mechanism:detail};}
   if(x.unreadIndicator){
     const detail=measureUnreadIndicator(m,x.unreadIndicator,b,a,occupancyView(b,rows),occupancyView(a,next),op);
     return {...out,result:'indicator_'+detail.status,unreadIndicator:detail};
