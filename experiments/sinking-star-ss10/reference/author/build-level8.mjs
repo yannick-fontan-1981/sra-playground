@@ -1,16 +1,48 @@
+import {readFileSync} from 'node:fs';
 import {Author,board} from './author.mjs';
-const {put,fill,strings}=board(19,17,'~');
-fill(1,8,7,13);fill(10,10,14,13);fill(11,5,11,9);fill(10,5,11,7);fill(12,6,14,6);fill(12,7,13,7);put(12,8,'.');fill(11,2,12,3);put(11,4,'#');
-put(2,11,'W');put(3,9,'T');put(3,8,'o');put(5,8,'o');put(11,10,'o');put(11,9,'m');put(11,6,'m');put(11,2,'g');put(12,2,'g');
-const spec={id:'ss10-08',title:'Le dernier changement de sens',rows:strings(),facing:'E',mirrors:[{at:{x:13,y:6},facing:'NW'}],circuits:[{id:'cle',buttons:[{x:14,y:6}],color:7}],platforms:[{at:{x:12,y:4},circuit:'cle',activeWhen:'pressed'}]};
-const a=new Author(spec);
-a.select('thief').act('DD').act('R').go(2,10,'warrior').act('RRRRR').stage('Premier appui : le Voleur extrait la caisse du bord, le Guerrier ouvre l’accès à l’eau.');
-a.go(5,9,'thief').act('DD').act('L').go(4,10,'warrior').act('RRRR').stage('Second appui : les deux caisses permettent maintenant de contourner le dernier chargement.');
-a.go(11,11).act('UUUUU').go(10,5).stage('Le Guerrier avance derrière la caisse : les deux monstres se frappent, puis la caisse atteint la butée nord.');
-a.go(12,6,'thief').act('LLDRD').go(12,7).act('R').stage('Le Voleur dégage le miroir du rail et le gare dans la baie latérale.');
-a.go(11,6).act('DL').stage('Le Voleur récupère la caisse sous le mur et rabat le miroir derrière lui.');
-a.go(10,6,'warrior').act('RRR').stage('La même caisse devient la clé de la plateforme d’arrivée.');
-a.go(11,6,'thief').act('U').go(10,5).stage('Le Voleur remonte le miroir, sans pouvoir le pousser vers sa dernière case.');
-a.go(10,6,'warrior').act('R').act('LXULU').stage('Le Guerrier règle la dernière diagonale, franchit le reflet et libère l’arrivée.');
-a.go(10,6,'thief').act('XUU').stage('Le Voleur rejoint le Guerrier sur les deux destinations finales.');
-a.save(new URL('../level8-design.json',import.meta.url),{label:'Synthèse adaptée de Heroes and Water 3–4 et Heroes and Mirrors 6',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3',puzzle:3,objective:'Construire deux appuis, provoquer un duel derrière une caisse, puis garer et replacer le miroir pour transformer la caisse de combat en clé du dernier reflet.'},'Géométrie originale. Le relais poussée/traction pour construire des appuis vient de Heroes and Water 3 ; le duel de deux monstres est adapté de Heroes and Water 4 (https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-4). Le réglage du miroir selon la diagonale et le choix des trous à combler viennent de Heroes and Mirrors 6 (https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6). Deux caisses servent au pont ; la troisième sert d’abord de protection contre les monstres puis maintient la plateforme finale. Le miroir doit sortir du rail avant la livraison de cette caisse, puis revenir sur le rail par traction et poussée.');
+
+// The visual-source coordinates omit the surrounding water border.
+const grid=JSON.parse(readFileSync(new URL('../heroes-and-water-03-grid.json',import.meta.url),'utf8'));
+const {put,strings}=board(grid.terrainRows[0].length+2,grid.terrainRows.length+2,'~');
+grid.terrainRows.forEach((row,y)=>[...row].forEach((cell,x)=>put(x+1,y+1,cell)));
+for(const p of grid.crates)put(p.x+1,p.y+1,'o');
+put(grid.heroes.warrior.x+1,grid.heroes.warrior.y+1,'W');
+put(grid.heroes.thief.x+1,grid.heroes.thief.y+1,'T');
+const spec={id:'ss10-08',title:'Les cinq points d’appui',rows:strings(),facing:'W'};
+const a=new Author(spec),go=(x,y,kind)=>a.go(x+1,y+1,kind);
+
+go(6,0,'warrior').act('DD');go(7,3).act('LLLLL');
+a.stage('Premier appui à gauche : le Guerrier amène une caisse sur la passerelle et la pousse au-delà du coude.');
+
+go(2,4,'warrior');go(7,2,'thief').act('DD');go(8,4);go(6,3).act('LLLLL');
+a.select('warrior').act('U');
+a.stage('Deuxième appui en haut : le Guerrier attend sous le coude pendant que le Voleur tire la caisse depuis le premier appui.');
+
+a.act('U');go(8,2,'thief').act('DD');go(9,4);go(7,3).act('LLLLLL');
+a.select('warrior').act('DD');
+a.stage('Troisième appui vers le bas : depuis le nouvel appui supérieur, le Guerrier comble le trou qui donne accès à la passerelle inférieure.');
+
+go(3,3,'warrior');go(4,6,'thief');go(9,0,'warrior').act('DD');go(10,3).act('LLLLLLL');
+go(2,4,'thief').act('DDRR');go(2,4,'warrior').act('D');
+go(3,6,'thief').act('RU');go(2,6,'warrior').act('RR');
+a.stage('Quatrième appui à droite : le Voleur reçoit la caisse par le bas, la tire latéralement puis se gare dans la niche pour laisser pousser le Guerrier.');
+
+go(9,0,'warrior');go(9,1,'thief').act('L');go(4,6,'thief');
+a.select('warrior').act('DD');go(10,3).act('LLLLLLL');
+go(2,4,'thief').act('DDRR');go(2,4,'warrior').act('D');
+go(3,6,'thief').act('RU');go(2,6,'warrior').act('RRR');
+a.stage('La dernière caisse est garée provisoirement sur la destination droite pour ménager assez de place aux deux héros.');
+
+a.select('thief').act('DL');a.select('warrior').act('U');
+a.stage('Échange de places : le Voleur tire le Guerrier vers la gauche, puis le Guerrier occupe la niche latérale.');
+
+a.select('thief').act('RRLLLU');a.select('warrior').act('DLL');
+a.stage('Cinquième appui à gauche : le Voleur ramène la caisse devant le Guerrier, puis libère le passage pour la poussée finale.');
+go(0,6,'warrior');go(6,6,'thief');
+a.stage('Les deux héros rejoignent les deux destinations au bout des cinq appuis construits.');
+
+a.save(new URL('../level8-design.json',import.meta.url),{
+  label:'Reprise de Heroes and Water · énigme 3 · les cinq points d’appui',
+  url:grid.source,puzzle:3,
+  objective:'Construire les cinq appuis dans les directions gauche, haut, bas, droite puis gauche, et échanger les positions des héros pour livrer la dernière caisse.'
+},'Topologie des cellules, cinq caisses et positions initiales des deux héros relevées dans la capture et les storyboards publics de Heroes and Water 3 (Postmode, départ vers 0:25 ; disposition initiale visible à 0:30). La capture du guide montre une étape intermédiaire après quatre appuis : elle n’a pas été interprétée comme un départ avec quatre plateformes déjà construites. Les planches et le grand dallage deviennent du sol gris, les haies solides des murs gris foncé et les deux dalles orange des destinations jaunes. Une couronne d’eau d’une cellule conserve l’eau autour de la salle. Aucun miroir, bouton, porte ou monstre n’est ajouté. Les règles, sprites 3×3 et animations sont ceux du duo SS10.');

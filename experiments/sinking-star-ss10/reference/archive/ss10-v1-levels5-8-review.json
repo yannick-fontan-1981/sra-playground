@@ -1,0 +1,116 @@
+{
+  "scope": "Counterfactual searches: exhausted queues prove impossibility; capped searches are inconclusive.",
+  "levels": [
+    {
+      "level": 6,
+      "witness": {
+        "actions": 62,
+        "selections": 7,
+        "warriorPushes": 6,
+        "thiefPulls": 11,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 17,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 2,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "checks": [
+        {
+          "label": "without-warrior-push",
+          "status": "limit",
+          "states": 100000,
+          "expanded": 86196,
+          "ms": 1547
+        },
+        {
+          "label": "without-thief-pull",
+          "status": "limit",
+          "states": 100000,
+          "expanded": 93022,
+          "ms": 1276
+        },
+        {
+          "label": "without-hydraulics",
+          "status": "unsolvable",
+          "states": 17776,
+          "expanded": 17776,
+          "ms": 197
+        }
+      ],
+      "specSha256": "2cc802202dfddee697a445daa8422c78a19884dca1bcbd293eac140b7c547987"
+    },
+    {
+      "level": 7,
+      "witness": {
+        "actions": 69,
+        "selections": 9,
+        "warriorPushes": 3,
+        "thiefPulls": 10,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 19,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 3,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "checks": [
+        {
+          "label": "without-warrior-push",
+          "status": "limit",
+          "states": 100000,
+          "expanded": 70874,
+          "ms": 1280
+        },
+        {
+          "label": "without-thief-pull",
+          "status": "limit",
+          "states": 100000,
+          "expanded": 97721,
+          "ms": 1656
+        },
+        {
+          "label": "without-press-push",
+          "status": "limit",
+          "states": 100000,
+          "expanded": 72095,
+          "ms": 1240
+        }
+      ],
+      "specSha256": "e0d6e8a10dba3d9d476a189595660e6ebc3a6f8020fb37dfdf6a8afdb0b0dc0b"
+    },
+    {
+      "level": 8,
+      "witness": {
+        "actions": 93,
+        "selections": 9,
+        "warriorPushes": 18,
+        "thiefPulls": 13,
+        "partnerMoves": 2,
+        "chainPushes": 2,
+        "stoneMoves": 22,
+        "mirrorMoves": 7,
+        "reflections": 2,
+        "heroReflections": 2,
+        "pistonPushes": 0,
+        "platformsCreated": 2,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "checks": [],
+      "specSha256": "647dc0c85b44f0bf968df93355be1a0b734e0cbff6c71dc44dafb9f643cd38e3",
+      "note": "Final revision removes the walkable cell at source coordinate (12,5); the two-cell water gap now requires reflection onto the weighted landing platform. The redundant arrival gate is omitted. The 93-action witness was replayed successfully. Earlier capped searches concerned the previous map and are not retained as current evidence."
+    }
+  ]
+}

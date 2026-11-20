@@ -39,12 +39,12 @@ export const LEVEL_INFO=[
     "objective": "Extraire un miroir par traction, régler la réception par poussée et laisser deux diagonales conduire les héros à deux îlots distincts."
   },
   {
-    "piston": true,
+    "piston": false,
     "platform": true,
-    "label": "Adaptation de Heroes and Water 6 · faire couler les charges du pont provisoire",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-6",
-    "puzzle": 6,
-    "objective": "Charger puis abaisser des plateformes, créer deux appuis durables et réutiliser le pont pour convoyer une dernière caisse."
+    "label": "Synthèse adaptée de Heroes and Water 3–4 et Heroes and Mirrors 6",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
+    "puzzle": 3,
+    "objective": "Construire deux appuis, provoquer un duel derrière une caisse, puis garer et replacer le miroir pour transformer la caisse de combat en clé du dernier reflet."
   },
   {
     "piston": true,
@@ -56,10 +56,10 @@ export const LEVEL_INFO=[
   },
   {
     "piston": false,
-    "platform": true,
-    "label": "Synthèse adaptée de Heroes and Water 3–4 et Heroes and Mirrors 6",
+    "platform": false,
+    "label": "Reprise de Heroes and Water · énigme 3 · les cinq points d’appui",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
     "puzzle": 3,
-    "objective": "Construire deux appuis, provoquer un duel derrière une caisse, puis garer et replacer le miroir pour transformer la caisse de combat en clé du dernier reflet."
+    "objective": "Construire les cinq appuis dans les directions gauche, haut, bas, droite puis gauche, et échanger les positions des héros pour livrer la dernière caisse."
   }
 ] as const;

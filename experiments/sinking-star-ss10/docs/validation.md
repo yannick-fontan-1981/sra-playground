@@ -1,56 +1,45 @@
-# SS10 — Validation de la version HTML
+# SS10 — Validation de la version 0.2.0
 
-## Bouton et porte-presse rose-blanc du niveau 7 — 20 novembre 2026
-
-L'accent du circuit `presse` passe du rose (7) au blanc (0) : bouton rose à centre blanc et porte-presse rose avec marques blanches. Le générateur, la référence du niveau et les données compilées utilisent la même couleur.
-
-- Compilation TypeScript stricte réussie et sprites inspectés visuellement.
-- Parcours gagnant du niveau 7 rejoué : **69 actions et 206 images**.
-- Comparaison avec la couleur précédente à chaque action : états, mouvements et effets identiques ; seules les deux cellules du bouton et de la porte-presse comportent des pixels modifiés, exclusivement du rose vers le blanc.
-
-Empreinte du HTML livré : `e9cf7cba9cd42f6b76bf9dd5ef2e611e008bc7781127b4efd474014b194e64a1`.
-
-## Correction du socle des miroirs — 20 novembre 2026
-
-L'avertissement de réflexion impossible colore désormais en rouge les pixels noirs du socle (5 → 8), en conservant la diagonale blanche (0). Les deux clignotements et les règles de réflexion sont inchangés.
-
-- Compilation TypeScript stricte et **87 tests du moteur réussis** après correction.
-- Vérification ciblée au niveau 5 : depuis Recommencer, `LLUULCDX` (`C` = Tab, `X` = Espace) provoque deux destinations incompatibles pour le Guerrier.
-- Les deux miroirs responsables sont signalés : leurs six pixels de socle alternent rouge/noir/rouge/noir ; leurs six pixels de diagonale restent blancs. Aucun autre pixel ni aucune position ne change.
-
-Empreinte du HTML corrigé : `565a6a1612a7c641fe5b59a8e862898705b33e3782e845529fc0f68179922584`.
-
-Les résultats détaillés ci-dessous concernent la validation initiale v1. Cette correction visuelle a fait l'objet du contrôle ciblé ci-dessus ; elle ne modifie aucune carte ni aucune règle.
-
-## Résultats de la validation initiale v1
+## Résultats de la livraison
 
 - Compilation TypeScript stricte et **87 tests du moteur réussis**.
-- Huit témoins gagnants : **475 actions**, dont **44 sélections**, et **1 392 images**.
-- Aucun refus et aucun décès dans ces huit parcours ; les deux capacités sont utilisées dans chaque salle.
+- Huit parcours gagnants : **627 actions**, dont **58 sélections**, et **1 807 images**.
+- Aucun refus et aucun décès dans ces huit parcours ; poussée et traction sont utilisées dans chaque salle.
 - Tutoriel : **12 découvertes sur 12**, acquises sur son parcours de 57 actions.
 - Exécution du HTML compilé avec Happy DOM : chaque image RGBA et chaque durée d’animation comparées au moteur de référence.
 - Clic, Tab, 1/2, boutons de rôle, flèches, Espace/X, Annuler, Recommencer, retour au tutoriel et navigation entre les salles vérifiés.
 - Interruptions d’animations, victoire finale, annulation de victoire et défaite atteignable en 24 actions vérifiées.
-- Aucun appel réseau et aucune erreur JavaScript dans ce contrôle d’interface.
+- Aucun appel réseau et aucune erreur JavaScript dans le contrôle d’interface.
 
-Empreinte du HTML vérifié : `04ef7943e45206aa7d7cccfb2b7ff125941df1b14a8bb54b7decab4ac2efd3b0`.
+Empreinte du HTML vérifié : `cfad02b0336ebe019eae60dcb8668a237c16dcc5a73bc9dc7e60679bfaaef845`.
 
-Les rapports reproductibles sont `validation/levels-report.json`, `validation/ui-dom-report.json` et `validation/tests-summary.json`.
+Rapports de cette version : `validation/levels-report.json`, `validation/ui-dom-report.json` et `validation/tests-summary.json`.
 
-## Nécessité et revue des cartes
+## Réagencement final des niveaux 6 et 8
 
-Le niveau 5 a fait l’objet d’une correction après deux raccourcis trouvés par une revue indépendante. Sur sa carte finale, la recherche exhaustive établit l’impossibilité sans poussée (2 108 états), sans traction (7 202), sans reflet (32 580), sans premier miroir (7 652), sans second miroir (2 248), ou sans jamais ouvrir la porte (33 600).
+Le niveau 6 reprend l’ancien niveau 8, **Le dernier changement de sens**, avec sa carte et son parcours de **93 actions**. Son miroir donne accès à la plateforme finale ; l’ancienne porte redondante reste retirée.
 
-D’autres recherches exhaustives confirment notamment la traction du tutoriel (35 140 états), la traction du niveau 2 (7 080), la poussée du niveau 3 (13 248), les deux pouvoirs et le reflet du niveau 4, et les plateformes hydrauliques du niveau 6 (17 776). Les rapports de nécessité précisent les recherches qui atteignent leur limite. Une limite ne prouve pas l’impossibilité.
+Le niveau 8, **Les cinq points d’appui**, reprend la grille de Heroes and Water, énigme 3. Le terrain et les placements des cinq caisses, des deux héros et des deux destinations ont été comparés cellule par cellule au relevé `reference/heroes-and-water-03-grid.json`. Le cadrage comprend une couronne d’eau autour de la grille utile. Les cinq caisses commencent mobiles ; aucun appui n’est déjà créé.
 
-Au niveau 8, le passage à pied a été coupé pour que la réflexion donne accès à la plateforme finale ; la porte redondante a été retirée.
+Le parcours de **214 actions** crée exactement les cinq appuis du relevé, avec **37 poussées, 26 tractions et un déplacement du partenaire**. Aucun refus, décès ou modification du terrain source n’est nécessaire. Les nombres d’actions sont des témoins de solvabilité, pas des records d’optimalité.
 
-Au niveau 7, une quatrième caisse a été supprimée : les trois charges servent au convoyeur puis une charge doit être récupérée et réutilisée pour la sortie. Le parcours final de cette révision compte 69 actions.
+## Corrections visuelles conservées
 
-Les témoins prouvent la solvabilité ; ils ne prouvent ni optimalité ni unicité. L’élimination des monstres du niveau 4 fonctionne dans le témoin, mais son caractère obligatoire n’est pas affirmé.
+- Reflet impossible : les pixels noirs du socle du miroir (5) clignotent en rouge (8), tandis que la diagonale reste blanche (0). Le cas `LLUULCDX` du niveau 5 (`C` = Tab, `X` = Espace) identifie les deux miroirs responsables sans consommer de tour ni ajouter d’entrée Annuler.
+- Niveau 7 : l’accent du circuit `presse` est blanc (0). Son bouton est rose à centre blanc et sa porte-presse rose avec marques blanches. Le parcours de 69 actions reste gagnant ; la comparaison des rendus avant/après ce changement était limitée aux deux cellules concernées.
+
+## Nécessité et historique des cartes
+
+La carte du niveau 5 est inchangée depuis la revue exhaustive : impossibilité sans poussée (2 108 états), sans traction (7 202), sans reflet (32 580), sans premier miroir (7 652), sans second miroir (2 248), ou sans jamais ouvrir la porte (33 600).
+
+Les autres recherches conservées concernent notamment la traction du tutoriel, la traction du niveau 2, la poussée du niveau 3, les deux pouvoirs et le reflet du niveau 4. Une recherche arrivée à sa limite ne prouve pas l’impossibilité.
+
+Les résultats de recherche de l’ancien niveau 6 sont archivés dans `reference/archive/ss10-v1-levels5-8-review.json` : ils ne sont pas attribués à la nouvelle carte. La revue courante des niveaux 6 à 8 précise les témoins et empreintes des cartes actuelles. Aucune nouvelle preuve exhaustive de nécessité n’est revendiquée pour le nouveau niveau 8.
+
+Les témoins ne prouvent ni optimalité ni unicité. L’élimination des monstres du niveau 4 fonctionne dans le témoin, mais son caractère obligatoire n’est pas affirmé.
 
 ## Limite du contrôle visuel
 
-Chromium installé ne démarre pas : l’environnement refuse une opération de socket (EPERM) avant tout chargement de page. Le rapport `validation/browser-report.json` conserve cette tentative sur la construction précédente. Aucun test visuel de navigateur natif ou de mise en page mobile n’est revendiqué. La planche des huit grilles a été examinée à partir des pixels du moteur ; elle ne remplace pas une vérification CSS dans un navigateur.
+L’essai de Chromium conservé dans `validation/browser-report.json` échoue au lancement : l’environnement refuse une opération de socket (EPERM) avant tout chargement de page. Aucun test visuel de navigateur natif ou de mise en page mobile n’est revendiqué. Les nouvelles grilles 6 et 8 ont été examinées à partir des pixels du moteur ; cela ne remplace pas une vérification CSS dans un navigateur.
 
-Le script `scripts/verify-browser.mjs` est fourni pour exécuter le même contrôle dans un environnement où Chromium peut démarrer.
+Le script `scripts/verify-browser.mjs` est fourni pour exécuter le contrôle dans un environnement où Chromium peut démarrer.
