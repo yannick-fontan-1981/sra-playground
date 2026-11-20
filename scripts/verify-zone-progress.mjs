@@ -140,7 +140,8 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
     verified.add(t.revision);
   }
   const named = (frame, p, max) => {
-    const actor = unique(positions(frame, p.p, max)),
+    const actors=positions(frame,p.p,max),others=p.actorPeers??[];
+    const actor=actors.length===others.length+1&&others.every(v=>actors.some(x=>eq(v,x)))?unique(actors.filter(z=>!others.some(v=>eq(v,z)))):null,
       group = positions(frame, p.c, max),
       remaining = group.filter((e) => !p.fixed.some((f) => eq(e, f)));
     const site =
@@ -201,7 +202,7 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
     require(eq(before.actor, step.p) && eq(before.site, step.c), 'preparation origin');
     if (step.stage === 'read' && p.indicator)
       require(positions(cmd.from, p.indicator, max).some((v) =>
-        eq(v, step.to)
+        eq(v, [step.to[0]+(p.indicatorOffset?.[0]??0),step.to[1]+(p.indicatorOffset?.[1]??0)])
       ), 'visible predicted indication');
     await partsAt(board, cmd.to, i + 2);
     const actual = named(cmd.to, p, limit(board)),

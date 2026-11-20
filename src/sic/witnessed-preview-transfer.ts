@@ -2,10 +2,18 @@ import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-ty
 import { same, diff, type XY } from './access-terrain.ts';
 import { poseRole } from './occupancy-programs.ts';
 
+import {
+  rememberMotion,
+  stationaryPivots,
+  type PartMotion,
+  type WitnessGeometry,
+} from './controlled-parts.ts';
+
 type Body = { at: XY; box: readonly number[]; form: string };
 export type VisualLayout = Record<string, Body[]>;
 type Gesture = { op: string; point?: 'indicator' | 'subject' };
 export type PreviewWitness = {
+  geometry?: WitnessGeometry;
   before: string;
   after: string;
   epoch: number;
@@ -54,6 +62,7 @@ export type ReadOffer = {
   calibration?: PredictiveEvidence;
 };
 export type PreviewLearning = {
+  partMotion?: Record<string, PartMotion>;
   bindings: Record<string, WitnessedBinding>;
   lastActor: Record<string, XY>;
   seen: Record<string, number>;
@@ -63,6 +72,7 @@ export type PreviewLearning = {
   motion: Record<string, Record<string, number>>;
 };
 export type PreviewCarry = {
+  partMotion?: Record<string, PartMotion>;
   scope: string;
   fromEpoch: number;
   completed: number;
@@ -138,6 +148,7 @@ export function observePreviewBindings(
     const motion = moved(parts, after[actor] ?? []);
     if (!motion) continue;
     learned.lastActor[actor] = motion.to.at;
+    rememberMotion(learned, actor, motion.from.at, motion.to.at, command, b, a);
     const vector = diff(motion.to.at, motion.from.at),
       motors = (learned.motion[actor] ??= {});
     const z = JSON.stringify([command, vector]);
@@ -185,6 +196,7 @@ export function observePreviewBindings(
         indicatorForm: r.form,
         subjectForm: motion.to.form,
         indicatorChanged: !member(after[indicator] ?? [], r.at),
+        geometry: { pivots: stationaryPivots(actor, indicator, motion.from.at, motion.to.at, before, after) },
       };
       binding.witnesses.push(witness);
       // Keep a bounded, diverse set. Preserve the first observation from each still represented epoch when possible.
@@ -213,12 +225,19 @@ export function carryPreviewBindings(
     fromEpoch: b.level_epoch,
     completed: a.levels_completed,
     bindings: structuredClone(learned.bindings),
+    partMotion: Object.fromEntries(
+      Object.entries(learned.partMotion ?? {})
+        .filter(([id]) => Object.values(learned.bindings).some((x) => x.actor === id))
+        .map(([id, m]) => [id, { axes: structuredClone(m.axes), sites: {}, substrate: {} }])
+    ),
   };
 }
 export function acceptPreviewCarry(c: PreviewCarry | null | undefined, o: NativeObservation) {
   const learned = newPreviewLearning();
-  if (c && scope(o) === c.scope && o.level_epoch === c.fromEpoch + 1 && o.levels_completed === c.completed)
+  if (c && scope(o) === c.scope && o.level_epoch === c.fromEpoch + 1 && o.levels_completed === c.completed) {
     learned.bindings = structuredClone(c.bindings);
+    learned.partMotion = structuredClone(c.partMotion ?? {});
+  }
   return learned;
 }
 function visibleReadings(

@@ -24,6 +24,7 @@ export type ZoneRepeat = {
   returnScene: number;
 };
 export type LocalProgress = {
+  afterPlacement?: { cause: ZoneRepeat; frame: string; actor: string; part: string };
   last: ZoneRepeat | null;
   repeats: Record<string, ZoneRepeat>;
   attempts: Record<string, number>;

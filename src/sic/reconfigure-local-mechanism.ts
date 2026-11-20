@@ -2,7 +2,7 @@ import type { NativeObservation, NativeRows, NativeEntity } from '../logos-engin
 import { add, diff, same, size, type XY } from './access-terrain.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
 import { poseRole } from './occupancy-programs.ts';
-import { motorsFor, zoneFloor, type ZoneRepeat, type Motor } from './local-progress.ts';
+import { motorsFor, zoneFloor, type ZoneRepeat } from './local-progress.ts';
 import {
   reachablePreviewConfigurations,
   type ProbePattern,
@@ -10,7 +10,12 @@ import {
 } from './reachable-preview-configurations.ts';
 import { contactEvidence } from './contact-aspirations.ts';
 import type { Experiment, Memory } from './preparation-experiments.ts';
+import { pathToContact } from './mechanism-contact-routes.ts';
+import { plansForWitnessedSubjects } from './plan-witnessed-mechanism.ts';
 export type MechanismPlan = {
+  actorPeers?: XY[];
+  indicatorOffset?: XY;
+  witnessRefs?: string[];
   p: string;
   c: string;
   fixed: XY[];
@@ -49,7 +54,11 @@ function named(o: NativeObservation, rows: NativeRows, p: MechanismPlan) {
     parts = v[p.c] ?? [],
     rest = parts.filter((b) => !p.fixed.some((x) => same(x, b.at)));
   return {
-    actor: actors.length === 1 ? actors[0]!.at : null,
+    actor:
+      actors.length === (p.actorPeers?.length ?? 0) + 1 &&
+      (p.actorPeers ?? []).every((v) => actors.some((z) => same(z.at, v)))
+        ? (actors.find((z) => !(p.actorPeers ?? []).some((v) => same(z.at, v)))?.at ?? null)
+        : null,
     site:
       parts.length === p.fixed.length + 1 &&
       p.fixed.every((x) => parts.some((e) => same(x, e.at))) &&
@@ -73,7 +82,9 @@ function offer(
   if (
     step.stage === 'read' &&
     t.plan.indicator &&
-    !visualLayout(o, rows)[t.plan.indicator]?.some((r) => same(r.at, step.to))
+    !visualLayout(o, rows)[t.plan.indicator]?.some((r) =>
+      same(r.at, add(step.to, t.plan.indicatorOffset ?? [0, 0]))
+    )
   )
     return null;
   return {
@@ -85,57 +96,6 @@ function offer(
     refs: [...new Set([t.cause.previous, t.cause.revision, ...t.plan.support])],
     mechanism: t,
   };
-}
-function pathToContact(from: XY, c: XY, motors: Motor[], open: (at: XY) => boolean) {
-  const queue = [from],
-    parents = new Map<string, LayoutStep>(),
-    result: { path: LayoutStep[]; possible: number; opened: number; recoverable: boolean }[] = [];
-  for (const p of queue)
-    for (const motor of motors) {
-      const to = add(p, motor.d);
-      if (same(c, to)) {
-        const placed = add(to, motor.d);
-        if (!open(placed)) continue;
-
-        const steps: LayoutStep[] = [];
-        let v = p;
-        while (!same(v, from)) {
-          const step = parents.get(k(v))!;
-          steps.push(step);
-          v = step.p;
-        }
-        steps.reverse();
-        result.push({
-          path: [...steps, { op: motor.op, stage: 'write', p, c, to, placed }],
-          possible: 0,
-          opened: 0,
-          recoverable: false,
-        });
-        continue;
-      }
-      if (!open(to) || same(to, from) || parents.has(k(to))) continue;
-      parents.set(k(to), { op: motor.op, stage: 'move', p, c, to, placed: c });
-      queue.push(to);
-    }
-  const home = new Set(queue.map(k));
-  for (const option of result) {
-    const placed = option.path.at(-1)!.placed,
-      accessible = new Set([k(c)]),
-      after = [c];
-    for (const position of after)
-      for (const motor of motors) {
-        const next = add(position, motor.d);
-        if (!same(next, placed) && open(next) && !accessible.has(k(next))) {
-          accessible.add(k(next));
-          after.push(next);
-        }
-      }
-    const possible = motors.filter((m) => accessible.has(k(diff(placed, m.d))) && open(add(placed, m.d)));
-    option.possible = possible.length;
-    option.recoverable = possible.some((m) => same(add(placed, m.d), c));
-    option.opened = after.filter((p) => !same(p, c) && !home.has(k(p))).length;
-  }
-  return result;
 }
 function priorSite(m: Memory, scene: number, c: NativeEntity, fixed: XY[]): XY | null {
   const single = m.occupancy?.layouts[scene]?.[poseRole(c)];
@@ -180,8 +140,25 @@ export function offerMechanism(
 ): Experiment | null {
   const memory = m.localProgress;
   if (!memory || !m.occupancy) return null;
-  if (memory.active) return offer(memory.active, s, available, o, rows);
+  if (memory.active) {
+    const next = offer(memory.active, s, available, o, rows);
+    if (next) return next;
+    memory.active = null;
+  }
+  const follow = memory.afterPlacement?.frame === o.frame_hash ? memory.afterPlacement : null;
+  if (!cause && !follow) return null;
+  if (!cause && follow) {
+    const access = plansForWitnessedSubjects(m, o, rows, available).filter(
+      ({ plan }) => plan.p === follow.actor && plan.c === follow.part && plan.arrival
+    );
+    return access.length ? choose(access, follow.cause, s, available, o, rows) : null;
+  }
   if (!cause) return null;
+  const grounded = plansForWitnessedSubjects(m, o, rows, available);
+  if (grounded.length) {
+    const choice = choose(grounded, cause, s, available, o, rows);
+    if (choice) return choice;
+  }
   const occ = m.occupancy,
     p = cause.actor,
     from = occ.layouts[s]?.[p],
@@ -495,6 +472,16 @@ export function offerMechanism(
         );
     }
   }
+  return choose(options, cause, s, available, o, rows);
+}
+function choose(
+  options: { plan: MechanismPlan; rank: number }[],
+  cause: ZoneRepeat,
+  s: number,
+  available: Set<string>,
+  o: NativeObservation,
+  rows: NativeRows
+) {
   options.sort((a, b) => b.rank - a.rank);
   for (const { plan } of options) {
     const trial = {
@@ -545,6 +532,9 @@ export function finishMechanism(
     state.attempts[
       JSON.stringify(['failed_contact', t.plan.p, t.plan.c, t.plan.fixed, step.p, step.c, step.op])
     ] = a.revision;
+  if (matched && !won && step.stage === 'write' && t.plan.actorPeers !== undefined) {
+    state.afterPlacement = { cause: t.cause, frame: a.frame_hash, actor: t.plan.p, part: t.plan.c };
+  }
   state.active = matched && !won && t.index + 1 < t.plan.steps.length ? { ...t, index: t.index + 1 } : null;
   return { trial: t, stage: step.stage, matched, won, actual, continued: !!state.active };
 }

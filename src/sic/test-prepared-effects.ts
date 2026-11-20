@@ -71,6 +71,7 @@ const labels: Record<Experiment['phase'], string> = {
   carry: 'Move the changed object while preserving its measured state',
   carryB: 'Test the transported change against the control from this destination',
 };
+import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(): NativeFamily<Offer> {
   let m = initialMemory(0);
   function enter(o:NativeObservation){
@@ -89,7 +90,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     const learning=m.previewLearning??=newPreviewLearning(),boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
-      observePreviewBindings(learning,b,a,visualLayout(b,rows),visualLayout(a,next),observedCommandKey(cmd));
+      const before=visualLayout(b,rows),after=visualLayout(a,next);
+      observePreviewBindings(learning,b,a,before,after,observedCommandKey(cmd));
+      exposedUnderParts(learning,b,a,rows,next,before,after);
     }
     if (!x && (b.level_epoch !== a.level_epoch || b.state !== a.state)) return null;
     return recordExperiment(m, b, a, cmd, rows, next, x);
@@ -117,6 +120,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         ref,
         ...(experiment.occupancy?.plan.preparedPreview?.priorRead?[experiment.occupancy.plan.preparedPreview.priorRead.before,experiment.occupancy.plan.preparedPreview.priorRead.after]:[]),
         ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
+        ...(experiment.mechanism?.plan.witnessRefs??[]),
         ...experiment.refs.map(
           (r) =>
             ref.split(':revision:', 1)[0] +
