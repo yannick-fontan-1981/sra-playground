@@ -278,3 +278,19 @@ Une dernière expérience part d’une commande A dont un retour U a déjà ét�
 Le rejeu des 16 prédictions exactes confirme les préparations et les témoins B seul et A suivi de U. Aucun bouton sans coordonnées ne reproduit seul les couples obtenus. Supprimer A tout en conservant B et U change l’issue mesurée dans les 16 cas. Les deux rôles restent identifiables dans 15 de ces témoins. Une validation sur les commandes tenues à part étalonne d’abord la relation avec ACTION1. Dans VOIS L1, elle retrouve trois nouvelles destinations sur trois pour les autres directions. Dans GIGO L5, quatre des huit prévisions restantes sont exactes et elles décrivent une même nouvelle destination. Ces essais indiquent ce qu’un premier contrôle positif permet de réutiliser et mesurent aussi le coût d’une recherche fondée sur la seule proximité.
 
 La prochaine capacité à éprouver en autonomie est le transfert de plusieurs commandes après une seule calibration positive. Les cycles observés dans les 100 traces permettent à l’agent de chercher une commande de retour, et les suppressions permettent de vérifier que la préparation change effectivement le bénéficiaire du mouvement. Le test décisif reste l’usage de cette capacité pour ouvrir un accès et gagner une partie figée de SS01 L2.
+
+## Quatorzième série · Une composition décisive au niveau 3
+
+| Épreuve | Témoin v1 | Candidat v14 |
+| --- | ---: | ---: |
+| 100 entrées sources au L1 | 65 victoires | 57 victoires |
+| 18 entrées L2–L5 des sept jeux sources | 7 victoires | 8 victoires |
+| SS01 L2 | 0 victoire | 0 victoire |
+
+GRAV L3 est le gain. SIC termine en 53 commandes. À partir de la commande 47, le programme choisi comprend une préparation, un opérande et le début du trajet de retour. Le moteur valide le niveau pendant ce retour. Au rejeu des 128 sous-séquences possibles des sept commandes effectivement émises, deux gagnent. Toutes deux exigent les positions 1, 2, 4, 5, 6 et 7 de cette séquence. Le préfixe est identique dans chaque branche. Parmi les autres entrées supérieures, SIC gagne GARE L2, GIGO L2–L4, GRAV L2 et POLA L2–L3. Par rapport à la v13, CGWL L1 est la perte sur les sources.
+
+Sur SS01 L2, le témoin émet 956 commandes et voit 170 images. La v14 émet 825 commandes et voit 108 images. Les deux parties épuisent le budget de temps actif. À 825 commandes, le témoin avait vu 166 images. La mesure géométrique commune ne détecte aucun passage entre régions dans les deux parties. Le moteur indépendant reprend chaque essai juste avant B pour exécuter C seul. Dans deux des 74 essais, le voyageur reste sur place avec C seul et se déplace sous C depuis la position préparée par B. Il s’agit de deux dispositions distinctes. Aucune destination annoncée pour ces 74 essais n’est exacte. Aucun essai ne débouche sur un usage vérifié. Les 79 expériences de retour spatial et les 11 prédictions de configuration persistante ne retrouvent pas leur arrivée prévue.
+
+La qualification sur les 100 sources a comparé 662 triplets. Les 67 différences d’arrivée apparentes du voyageur se réduisent à un cas où B a changé son point de départ et où C produit ensuite un nouveau déplacement. Dans ZIPP, C seul laisse le voyageur en `(29,25)`. B l’amène en `(13,25)`, puis C l’amène en `(13,9)`. Dans AS66, un triplet gagne et chacune des trois suppressions empêche cette victoire. La vérification séparée sur les commandes déjà présentes dans les archives, sans intervention ajoutée, couvre 2 904 commandes initiales et 1 531 aux niveaux supérieurs. Les décomptes par expérience et les empreintes des parties figurent dans le fichier de résultats.
+
+Le candidat `1cfdcfcbbbaa22a6813c42ad4f934be27e1b065e` et le témoin `7f2cb3eb29a4bd7640c3c38b71107af86b521ad5` étaient publiés avant les essais sur SS01. Les 118 parties sources et les deux parties cibles ont été rejouées. Les scores sources du témoin proviennent des parties archivées. SS09 L2 reste réservé.

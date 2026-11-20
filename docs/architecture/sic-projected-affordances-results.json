@@ -26764,5 +26764,3546 @@
         }
       ]
     }
+  },
+  "spatialInterventionsV14": {
+    "candidateTag": "sic-projected-affordances-source100-candidate-v14",
+    "controlTag": "sic-projected-affordances-source100-control-v1",
+    "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+    "ss09Reserved": true,
+    "ss01PreviouslyEvaluated": true,
+    "sourceOnly": {
+      "literalTraces": {
+        "original": {
+          "levels": 100,
+          "actions": 2904,
+          "counts": {
+            "paired": 134,
+            "withApproachControl": 70,
+            "dormantCommandAwakened": 13,
+            "changedMotion": 47,
+            "unblocked": 3,
+            "relocated": 38,
+            "official": 2
+          },
+          "examples": [
+            {
+              "code": "SERI",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 2,
+                  "exercise": 3,
+                  "b": "ACTION1",
+                  "c": "ACTION2",
+                  "alone": 40,
+                  "from": [
+                    53,
+                    34
+                  ],
+                  "afterBind": [
+                    53,
+                    23
+                  ],
+                  "aloneTo": [
+                    53,
+                    1
+                  ],
+                  "after": [
+                    53,
+                    34
+                  ],
+                  "approach": {
+                    "index": 0,
+                    "control": 0,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 2,
+                  "exercise": 3,
+                  "b": "ACTION1",
+                  "c": "ACTION2",
+                  "alone": 40,
+                  "from": [
+                    1,
+                    36
+                  ],
+                  "afterBind": [
+                    1,
+                    25
+                  ],
+                  "aloneTo": [
+                    1,
+                    3
+                  ],
+                  "after": [
+                    1,
+                    36
+                  ],
+                  "approach": {
+                    "index": 0,
+                    "control": 0,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 6,
+                  "exercise": 7,
+                  "b": "ACTION3",
+                  "c": "ACTION2",
+                  "alone": 40,
+                  "from": [
+                    37,
+                    50
+                  ],
+                  "afterBind": [
+                    17,
+                    50
+                  ],
+                  "aloneTo": [
+                    37,
+                    50
+                  ],
+                  "after": [
+                    37,
+                    50
+                  ],
+                  "approach": {
+                    "index": 2,
+                    "control": 41,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 17,
+                  "exercise": 18,
+                  "b": "ACTION2",
+                  "c": "ACTION1",
+                  "alone": 1,
+                  "from": [
+                    53,
+                    1
+                  ],
+                  "afterBind": [
+                    53,
+                    12
+                  ],
+                  "aloneTo": [
+                    53,
+                    34
+                  ],
+                  "after": [
+                    53,
+                    1
+                  ],
+                  "approach": {
+                    "index": 13,
+                    "control": 2,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            },
+            {
+              "code": "REWI",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 56,
+                  "exercise": 57,
+                  "b": "ACTION6:5,56",
+                  "c": "ACTION7",
+                  "alone": 51,
+                  "from": [
+                    34,
+                    47
+                  ],
+                  "afterBind": [
+                    38,
+                    47
+                  ],
+                  "aloneTo": [
+                    34,
+                    47
+                  ],
+                  "after": [
+                    34,
+                    47
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 56,
+                  "exercise": 57,
+                  "b": "ACTION6:5,56",
+                  "c": "ACTION7",
+                  "alone": 51,
+                  "from": [
+                    5,
+                    33
+                  ],
+                  "afterBind": [
+                    11,
+                    33
+                  ],
+                  "aloneTo": [
+                    5,
+                    33
+                  ],
+                  "after": [
+                    5,
+                    33
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 56,
+                  "exercise": 57,
+                  "b": "ACTION6:5,56",
+                  "c": "ACTION7",
+                  "alone": 51,
+                  "from": [
+                    59,
+                    33
+                  ],
+                  "afterBind": [
+                    2,
+                    33
+                  ],
+                  "aloneTo": [
+                    59,
+                    33
+                  ],
+                  "after": [
+                    59,
+                    33
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 56,
+                  "exercise": 57,
+                  "b": "ACTION6:5,56",
+                  "c": "ACTION7",
+                  "alone": 51,
+                  "from": [
+                    25,
+                    33
+                  ],
+                  "afterBind": [
+                    6,
+                    33
+                  ],
+                  "aloneTo": [
+                    25,
+                    33
+                  ],
+                  "after": [
+                    25,
+                    33
+                  ],
+                  "approach": null
+                }
+              ]
+            },
+            {
+              "code": "MEMO",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 44,
+                  "exercise": 45,
+                  "b": "ACTION6:35,30",
+                  "c": "ACTION7",
+                  "alone": 46,
+                  "from": [
+                    35,
+                    29
+                  ],
+                  "afterBind": [
+                    51,
+                    21
+                  ],
+                  "aloneTo": [
+                    35,
+                    29
+                  ],
+                  "after": [
+                    35,
+                    29
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 44,
+                  "exercise": 45,
+                  "b": "ACTION6:35,30",
+                  "c": "ACTION7",
+                  "alone": 46,
+                  "from": [
+                    30,
+                    28
+                  ],
+                  "afterBind": [
+                    46,
+                    20
+                  ],
+                  "aloneTo": [
+                    30,
+                    28
+                  ],
+                  "after": [
+                    30,
+                    28
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 44,
+                  "exercise": 45,
+                  "b": "ACTION6:35,30",
+                  "c": "ACTION7",
+                  "alone": 46,
+                  "from": [
+                    31,
+                    33
+                  ],
+                  "afterBind": [
+                    47,
+                    25
+                  ],
+                  "aloneTo": [
+                    31,
+                    33
+                  ],
+                  "after": [
+                    31,
+                    33
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 44,
+                  "exercise": 45,
+                  "b": "ACTION6:35,30",
+                  "c": "ACTION7",
+                  "alone": 46,
+                  "from": [
+                    28,
+                    26
+                  ],
+                  "afterBind": [
+                    44,
+                    18
+                  ],
+                  "aloneTo": [
+                    28,
+                    26
+                  ],
+                  "after": [
+                    28,
+                    26
+                  ],
+                  "approach": null
+                }
+              ]
+            },
+            {
+              "code": "CLRS",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 10,
+                  "exercise": 11,
+                  "b": "ACTION6:24,8",
+                  "c": "ACTION2",
+                  "alone": 2,
+                  "from": [
+                    24,
+                    4
+                  ],
+                  "afterBind": [
+                    24,
+                    4
+                  ],
+                  "aloneTo": [
+                    24,
+                    4
+                  ],
+                  "after": [
+                    24,
+                    9
+                  ],
+                  "approach": null
+                }
+              ]
+            },
+            {
+              "code": "SIGN",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 17,
+                  "exercise": 18,
+                  "b": "ACTION4",
+                  "c": "ACTION7",
+                  "alone": 19,
+                  "from": [
+                    11,
+                    11
+                  ],
+                  "afterBind": [
+                    16,
+                    11
+                  ],
+                  "aloneTo": [
+                    11,
+                    11
+                  ],
+                  "after": [
+                    11,
+                    11
+                  ],
+                  "approach": {
+                    "index": 14,
+                    "control": 3,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 46,
+                  "exercise": 47,
+                  "b": "ACTION2",
+                  "c": "ACTION7",
+                  "alone": 19,
+                  "from": [
+                    11,
+                    11
+                  ],
+                  "afterBind": [
+                    11,
+                    16
+                  ],
+                  "aloneTo": [
+                    11,
+                    11
+                  ],
+                  "after": [
+                    11,
+                    11
+                  ],
+                  "approach": null
+                }
+              ]
+            },
+            {
+              "code": "ZIPP",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 16,
+                  "exercise": 17,
+                  "b": "ACTION6:16,28",
+                  "c": "ACTION7",
+                  "alone": 33,
+                  "from": [
+                    13,
+                    9
+                  ],
+                  "afterBind": [
+                    13,
+                    25
+                  ],
+                  "aloneTo": [
+                    13,
+                    9
+                  ],
+                  "after": [
+                    13,
+                    9
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 18,
+                  "exercise": 19,
+                  "b": "ACTION4",
+                  "c": "ACTION5",
+                  "alone": 20,
+                  "from": [
+                    13,
+                    9
+                  ],
+                  "afterBind": [
+                    29,
+                    9
+                  ],
+                  "aloneTo": [
+                    13,
+                    9
+                  ],
+                  "after": [
+                    13,
+                    9
+                  ],
+                  "approach": {
+                    "index": 16,
+                    "control": 3,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 21,
+                  "exercise": 22,
+                  "b": "ACTION2",
+                  "c": "ACTION1",
+                  "alone": 1,
+                  "from": [
+                    13,
+                    9
+                  ],
+                  "afterBind": [
+                    13,
+                    25
+                  ],
+                  "aloneTo": [
+                    13,
+                    9
+                  ],
+                  "after": [
+                    13,
+                    9
+                  ],
+                  "approach": {
+                    "index": 18,
+                    "control": 25,
+                    "bareDormant": true
+                  }
+                },
+                {
+                  "bind": 27,
+                  "exercise": 28,
+                  "b": "ACTION4",
+                  "c": "ACTION2",
+                  "alone": 26,
+                  "from": [
+                    29,
+                    9
+                  ],
+                  "afterBind": [
+                    45,
+                    9
+                  ],
+                  "aloneTo": [
+                    29,
+                    9
+                  ],
+                  "after": [
+                    45,
+                    25
+                  ],
+                  "approach": {
+                    "index": 22,
+                    "control": 17,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            },
+            {
+              "code": "FUIT",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 27,
+                  "exercise": 28,
+                  "b": "ACTION2",
+                  "c": "ACTION7",
+                  "alone": 26,
+                  "from": [
+                    23,
+                    17
+                  ],
+                  "afterBind": [
+                    28,
+                    17
+                  ],
+                  "aloneTo": [
+                    23,
+                    17
+                  ],
+                  "after": [
+                    23,
+                    17
+                  ],
+                  "approach": {
+                    "index": 23,
+                    "control": 13,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 27,
+                  "exercise": 28,
+                  "b": "ACTION2",
+                  "c": "ACTION7",
+                  "alone": 26,
+                  "from": [
+                    8,
+                    7
+                  ],
+                  "afterBind": [
+                    8,
+                    12
+                  ],
+                  "aloneTo": [
+                    8,
+                    7
+                  ],
+                  "after": [
+                    8,
+                    7
+                  ],
+                  "approach": {
+                    "index": 23,
+                    "control": 13,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            },
+            {
+              "code": "KEYD",
+              "level": 1,
+              "examples": [
+                {
+                  "bind": 55,
+                  "exercise": 56,
+                  "b": "ACTION3",
+                  "c": "ACTION4",
+                  "alone": 34,
+                  "from": [
+                    21,
+                    8
+                  ],
+                  "afterBind": [
+                    16,
+                    8
+                  ],
+                  "aloneTo": [
+                    21,
+                    8
+                  ],
+                  "after": [
+                    21,
+                    8
+                  ],
+                  "approach": {
+                    "index": 51,
+                    "control": 1,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 55,
+                  "exercise": 56,
+                  "b": "ACTION3",
+                  "c": "ACTION4",
+                  "alone": 34,
+                  "from": [
+                    20,
+                    7
+                  ],
+                  "afterBind": [
+                    15,
+                    7
+                  ],
+                  "aloneTo": [
+                    20,
+                    7
+                  ],
+                  "after": [
+                    20,
+                    7
+                  ],
+                  "approach": {
+                    "index": 51,
+                    "control": 1,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "sevenUpper": {
+          "levels": 18,
+          "actions": 1531,
+          "counts": {
+            "paired": 268,
+            "withApproachControl": 202,
+            "dormantCommandAwakened": 33,
+            "changedMotion": 381,
+            "relocated": 180,
+            "differentSites": 60,
+            "anticipated": 22,
+            "unblocked": 3
+          },
+          "examples": [
+            {
+              "code": "CWSE",
+              "level": 2,
+              "examples": [
+                {
+                  "bind": 29,
+                  "exercise": 30,
+                  "b": "ACTION4",
+                  "c": "ACTION3",
+                  "alone": 28,
+                  "from": [
+                    15,
+                    13
+                  ],
+                  "afterBind": [
+                    20,
+                    13
+                  ],
+                  "aloneTo": [
+                    15,
+                    13
+                  ],
+                  "after": [
+                    15,
+                    13
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 29,
+                  "exercise": 30,
+                  "b": "ACTION4",
+                  "c": "ACTION3",
+                  "alone": 28,
+                  "from": [
+                    16,
+                    12
+                  ],
+                  "afterBind": [
+                    21,
+                    12
+                  ],
+                  "aloneTo": [
+                    16,
+                    12
+                  ],
+                  "after": [
+                    16,
+                    12
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 29,
+                  "exercise": 30,
+                  "b": "ACTION4",
+                  "c": "ACTION3",
+                  "alone": 28,
+                  "from": [
+                    15,
+                    17
+                  ],
+                  "afterBind": [
+                    20,
+                    17
+                  ],
+                  "aloneTo": [
+                    15,
+                    17
+                  ],
+                  "after": [
+                    15,
+                    17
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 29,
+                  "exercise": 30,
+                  "b": "ACTION4",
+                  "c": "ACTION3",
+                  "alone": 28,
+                  "from": [
+                    16,
+                    13
+                  ],
+                  "afterBind": [
+                    21,
+                    13
+                  ],
+                  "aloneTo": [
+                    16,
+                    13
+                  ],
+                  "after": [
+                    16,
+                    13
+                  ],
+                  "approach": null
+                }
+              ]
+            },
+            {
+              "code": "GRAV",
+              "level": 2,
+              "examples": [
+                {
+                  "bind": 2,
+                  "exercise": 3,
+                  "b": "ACTION3",
+                  "c": "ACTION2",
+                  "alone": 40,
+                  "from": [
+                    30,
+                    1
+                  ],
+                  "afterBind": [
+                    1,
+                    30
+                  ],
+                  "aloneTo": [
+                    30,
+                    60
+                  ],
+                  "after": [
+                    30,
+                    60
+                  ],
+                  "approach": {
+                    "index": 0,
+                    "control": 50,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 2,
+                  "exercise": 3,
+                  "b": "ACTION3",
+                  "c": "ACTION2",
+                  "alone": 40,
+                  "from": [
+                    40,
+                    8
+                  ],
+                  "afterBind": [
+                    24,
+                    8
+                  ],
+                  "aloneTo": [
+                    40,
+                    48
+                  ],
+                  "after": [
+                    24,
+                    52
+                  ],
+                  "approach": {
+                    "index": 0,
+                    "control": 50,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 33,
+                  "exercise": 34,
+                  "b": "ACTION1",
+                  "c": "ACTION3",
+                  "alone": 51,
+                  "from": [
+                    40,
+                    40
+                  ],
+                  "afterBind": [
+                    40,
+                    12
+                  ],
+                  "aloneTo": [
+                    12,
+                    40
+                  ],
+                  "after": [
+                    8,
+                    12
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 33,
+                  "exercise": 34,
+                  "b": "ACTION1",
+                  "c": "ACTION3",
+                  "alone": 51,
+                  "from": [
+                    40,
+                    20
+                  ],
+                  "afterBind": [
+                    40,
+                    8
+                  ],
+                  "aloneTo": [
+                    12,
+                    20
+                  ],
+                  "after": [
+                    24,
+                    8
+                  ],
+                  "approach": null
+                }
+              ]
+            },
+            {
+              "code": "POLA",
+              "level": 2,
+              "examples": [
+                {
+                  "bind": 32,
+                  "exercise": 33,
+                  "b": "ACTION5",
+                  "c": "ACTION4",
+                  "alone": 23,
+                  "from": [
+                    29,
+                    24
+                  ],
+                  "afterBind": [
+                    29,
+                    24
+                  ],
+                  "aloneTo": [
+                    29,
+                    24
+                  ],
+                  "after": [
+                    24,
+                    24
+                  ],
+                  "approach": {
+                    "index": 30,
+                    "control": 18,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            },
+            {
+              "code": "CATR",
+              "level": 2,
+              "examples": [
+                {
+                  "bind": 91,
+                  "exercise": 92,
+                  "b": "ACTION6:42,47",
+                  "c": "ACTION6:21,47",
+                  "alone": 120,
+                  "from": [
+                    20,
+                    51
+                  ],
+                  "afterBind": [
+                    41,
+                    51
+                  ],
+                  "aloneTo": [
+                    20,
+                    51
+                  ],
+                  "after": [
+                    20,
+                    51
+                  ],
+                  "approach": {
+                    "index": 88,
+                    "control": 72,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 91,
+                  "exercise": 92,
+                  "b": "ACTION6:42,47",
+                  "c": "ACTION6:21,47",
+                  "alone": 120,
+                  "from": [
+                    13,
+                    43
+                  ],
+                  "afterBind": [
+                    34,
+                    43
+                  ],
+                  "aloneTo": [
+                    13,
+                    43
+                  ],
+                  "after": [
+                    13,
+                    43
+                  ],
+                  "approach": {
+                    "index": 88,
+                    "control": 72,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 91,
+                  "exercise": 92,
+                  "b": "ACTION6:42,47",
+                  "c": "ACTION6:21,47",
+                  "alone": 120,
+                  "from": [
+                    41,
+                    50
+                  ],
+                  "afterBind": [
+                    20,
+                    50
+                  ],
+                  "aloneTo": [
+                    41,
+                    50
+                  ],
+                  "after": [
+                    41,
+                    50
+                  ],
+                  "approach": {
+                    "index": 88,
+                    "control": 72,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 91,
+                  "exercise": 92,
+                  "b": "ACTION6:42,47",
+                  "c": "ACTION6:21,47",
+                  "alone": 120,
+                  "from": [
+                    34,
+                    43
+                  ],
+                  "afterBind": [
+                    13,
+                    43
+                  ],
+                  "aloneTo": [
+                    34,
+                    43
+                  ],
+                  "after": [
+                    34,
+                    43
+                  ],
+                  "approach": {
+                    "index": 88,
+                    "control": 72,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            },
+            {
+              "code": "MOTO",
+              "level": 2,
+              "examples": [
+                {
+                  "bind": 24,
+                  "exercise": 25,
+                  "b": "ACTION6:14,6",
+                  "c": "ACTION6:18,6",
+                  "alone": 43,
+                  "from": [
+                    5,
+                    9
+                  ],
+                  "afterBind": [
+                    9,
+                    9
+                  ],
+                  "aloneTo": [
+                    13,
+                    9
+                  ],
+                  "after": [
+                    13,
+                    9
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 24,
+                  "exercise": 25,
+                  "b": "ACTION6:14,6",
+                  "c": "ACTION6:18,6",
+                  "alone": 43,
+                  "from": [
+                    8,
+                    4
+                  ],
+                  "afterBind": [
+                    12,
+                    4
+                  ],
+                  "aloneTo": [
+                    16,
+                    4
+                  ],
+                  "after": [
+                    16,
+                    4
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 24,
+                  "exercise": 25,
+                  "b": "ACTION6:14,6",
+                  "c": "ACTION6:18,6",
+                  "alone": 43,
+                  "from": [
+                    13,
+                    9
+                  ],
+                  "afterBind": [
+                    17,
+                    9
+                  ],
+                  "aloneTo": [
+                    21,
+                    9
+                  ],
+                  "after": [
+                    21,
+                    9
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 35,
+                  "exercise": 36,
+                  "b": "ACTION6:22,6",
+                  "c": "ACTION6:10,6",
+                  "alone": 114,
+                  "from": [
+                    49,
+                    9
+                  ],
+                  "afterBind": [
+                    17,
+                    9
+                  ],
+                  "aloneTo": [
+                    5,
+                    9
+                  ],
+                  "after": [
+                    5,
+                    9
+                  ],
+                  "approach": {
+                    "index": 30,
+                    "control": 79,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            },
+            {
+              "code": "GARE",
+              "level": 3,
+              "examples": [
+                {
+                  "bind": 5,
+                  "exercise": 6,
+                  "b": "ACTION6:9,13",
+                  "c": "ACTION6:4,13",
+                  "alone": 59,
+                  "from": [
+                    22,
+                    11
+                  ],
+                  "afterBind": [
+                    12,
+                    11
+                  ],
+                  "aloneTo": [
+                    7,
+                    11
+                  ],
+                  "after": [
+                    7,
+                    11
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 5,
+                  "exercise": 6,
+                  "b": "ACTION6:9,13",
+                  "c": "ACTION6:4,13",
+                  "alone": 59,
+                  "from": [
+                    17,
+                    11
+                  ],
+                  "afterBind": [
+                    7,
+                    11
+                  ],
+                  "aloneTo": [
+                    2,
+                    11
+                  ],
+                  "after": [
+                    2,
+                    11
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 5,
+                  "exercise": 6,
+                  "b": "ACTION6:9,13",
+                  "c": "ACTION6:4,13",
+                  "alone": 59,
+                  "from": [
+                    43,
+                    11
+                  ],
+                  "afterBind": [
+                    33,
+                    11
+                  ],
+                  "aloneTo": [
+                    28,
+                    11
+                  ],
+                  "after": [
+                    28,
+                    11
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 7,
+                  "exercise": 8,
+                  "b": "ACTION6:9,23",
+                  "c": "ACTION6:4,23",
+                  "alone": 47,
+                  "from": [
+                    38,
+                    22
+                  ],
+                  "afterBind": [
+                    28,
+                    22
+                  ],
+                  "aloneTo": [
+                    23,
+                    22
+                  ],
+                  "after": [
+                    23,
+                    22
+                  ],
+                  "approach": {
+                    "index": 4,
+                    "control": 49,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            },
+            {
+              "code": "GRAV",
+              "level": 3,
+              "examples": [
+                {
+                  "bind": 2,
+                  "exercise": 3,
+                  "b": "ACTION3",
+                  "c": "ACTION2",
+                  "alone": 54,
+                  "from": [
+                    30,
+                    1
+                  ],
+                  "afterBind": [
+                    1,
+                    30
+                  ],
+                  "aloneTo": [
+                    30,
+                    60
+                  ],
+                  "after": [
+                    30,
+                    60
+                  ],
+                  "approach": {
+                    "index": 0,
+                    "control": 61,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 44,
+                  "exercise": 45,
+                  "b": "ACTION4",
+                  "c": "ACTION6:31,0",
+                  "alone": 80,
+                  "from": [
+                    36,
+                    44
+                  ],
+                  "afterBind": [
+                    52,
+                    44
+                  ],
+                  "aloneTo": [
+                    36,
+                    8
+                  ],
+                  "after": [
+                    52,
+                    36
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 53,
+                  "exercise": 54,
+                  "b": "ACTION1",
+                  "c": "ACTION2",
+                  "alone": 89,
+                  "from": [
+                    28,
+                    12
+                  ],
+                  "afterBind": [
+                    28,
+                    8
+                  ],
+                  "aloneTo": [
+                    28,
+                    48
+                  ],
+                  "after": [
+                    28,
+                    48
+                  ],
+                  "approach": null
+                },
+                {
+                  "bind": 53,
+                  "exercise": 54,
+                  "b": "ACTION1",
+                  "c": "ACTION2",
+                  "alone": 89,
+                  "from": [
+                    28,
+                    28
+                  ],
+                  "afterBind": [
+                    28,
+                    12
+                  ],
+                  "aloneTo": [
+                    28,
+                    52
+                  ],
+                  "after": [
+                    28,
+                    52
+                  ],
+                  "approach": null
+                }
+              ]
+            },
+            {
+              "code": "CATR",
+              "level": 3,
+              "examples": [
+                {
+                  "bind": 78,
+                  "exercise": 79,
+                  "b": "ACTION6:21,55",
+                  "c": "ACTION6:42,55",
+                  "alone": 82,
+                  "from": [
+                    20,
+                    50
+                  ],
+                  "afterBind": [
+                    41,
+                    50
+                  ],
+                  "aloneTo": [
+                    20,
+                    50
+                  ],
+                  "after": [
+                    20,
+                    50
+                  ],
+                  "approach": {
+                    "index": 74,
+                    "control": 74,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 78,
+                  "exercise": 79,
+                  "b": "ACTION6:21,55",
+                  "c": "ACTION6:42,55",
+                  "alone": 82,
+                  "from": [
+                    41,
+                    50
+                  ],
+                  "afterBind": [
+                    20,
+                    50
+                  ],
+                  "aloneTo": [
+                    41,
+                    50
+                  ],
+                  "after": [
+                    41,
+                    50
+                  ],
+                  "approach": {
+                    "index": 74,
+                    "control": 74,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 78,
+                  "exercise": 79,
+                  "b": "ACTION6:21,55",
+                  "c": "ACTION6:42,55",
+                  "alone": 82,
+                  "from": [
+                    13,
+                    43
+                  ],
+                  "afterBind": [
+                    34,
+                    43
+                  ],
+                  "aloneTo": [
+                    13,
+                    43
+                  ],
+                  "after": [
+                    13,
+                    43
+                  ],
+                  "approach": {
+                    "index": 74,
+                    "control": 74,
+                    "bareDormant": false
+                  }
+                },
+                {
+                  "bind": 78,
+                  "exercise": 79,
+                  "b": "ACTION6:21,55",
+                  "c": "ACTION6:42,55",
+                  "alone": 82,
+                  "from": [
+                    34,
+                    43
+                  ],
+                  "afterBind": [
+                    13,
+                    43
+                  ],
+                  "aloneTo": [
+                    34,
+                    43
+                  ],
+                  "after": [
+                    34,
+                    43
+                  ],
+                  "approach": {
+                    "index": 74,
+                    "control": 74,
+                    "bareDormant": false
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "forkedSiteExperiments": {
+        "original": {
+          "levels": 100,
+          "matchedPrograms": {
+            "routes": 169,
+            "sites": 77,
+            "pairs": 662,
+            "activeOperand": 68,
+            "changedControl": 161,
+            "newDriverMotion": 67,
+            "newRecipient": 3,
+            "requiresAll": 1,
+            "won": 12,
+            "requiresBoth": 1,
+            "relocatedDriver": 1,
+            "evenWhenSilent": 2
+          },
+          "witnesses": [
+            {
+              "code": "AS66",
+              "level": 1,
+              "observations": [
+                {
+                  "j": 2,
+                  "a": "ACTION2",
+                  "b": "ACTION3",
+                  "c": "ACTION2",
+                  "official": true
+                }
+              ]
+            },
+            {
+              "code": "ZIPP",
+              "level": 1,
+              "observations": [
+                {
+                  "j": 3,
+                  "a": "ACTION4",
+                  "b": "ACTION3",
+                  "c": "ACTION1",
+                  "awakened": true,
+                  "site": [
+                    29,
+                    25
+                  ],
+                  "target": [
+                    24,
+                    19
+                  ],
+                  "bare": [
+                    29,
+                    25
+                  ],
+                  "after": [
+                    13,
+                    9
+                  ],
+                  "directTarget": [
+                    24,
+                    19
+                  ],
+                  "placedTarget": [
+                    24,
+                    19
+                  ],
+                  "exact": false,
+                  "bDriver": [
+                    13,
+                    25
+                  ],
+                  "bRecipient": [
+                    24,
+                    19
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "sevenUpper": {
+          "levels": 18,
+          "matchedPrograms": {
+            "routes": 43,
+            "sites": 14,
+            "pairs": 170,
+            "activeOperand": 13,
+            "changedControl": 28,
+            "newDriverMotion": 10
+          },
+          "witnesses": []
+        }
+      },
+      "retainedImageExperiments": {
+        "levels": 100,
+        "groups": {
+          "agreementNew": {
+            "trials": 122,
+            "changed": 60,
+            "exact": 10,
+            "differentBare": 75,
+            "revived": 19,
+            "won": 3,
+            "laterWins": 3
+          },
+          "all": {
+            "trials": 516,
+            "changed": 242,
+            "differentBare": 264,
+            "revived": 146,
+            "exact": 183,
+            "won": 5,
+            "laterWins": 8
+          },
+          "compatibleNew": {
+            "trials": 122,
+            "changed": 60,
+            "exact": 10,
+            "differentBare": 75,
+            "revived": 19,
+            "won": 3,
+            "laterWins": 3
+          },
+          "inactiveBare": {
+            "trials": 31,
+            "changed": 13,
+            "differentBare": 13,
+            "revived": 4,
+            "exact": 8
+          },
+          "newConfiguration": {
+            "trials": 200,
+            "changed": 120,
+            "differentBare": 133,
+            "won": 4,
+            "revived": 60,
+            "exact": 10,
+            "laterWins": 3
+          }
+        },
+        "novelExact": {
+          "SB26": 2,
+          "LKEY": 8
+        }
+      }
+    },
+    "autonomous": {
+      "original": {
+        "levels": 100,
+        "won": 57,
+        "comparedWithV13": {
+          "CGWL/1": false
+        },
+        "instrument": {
+          "actions": 235,
+          "plans": 89,
+          "placements": 45,
+          "binds": 48,
+          "exercised": 47,
+          "independent": 47,
+          "exact": 12,
+          "uses": 12,
+          "reuse": 4,
+          "reuseExact": 3,
+          "relocatedDriver": 6,
+          "relocatedRecipient": 3,
+          "distinctOpenings": 6,
+          "exactUses": 8,
+          "contacts": 5,
+          "official": 1,
+          "relocatedUse": 1
+        },
+        "transport": {
+          "actions": 115,
+          "plans": 47,
+          "returned": 40
+        },
+        "retained": {
+          "actions": 33,
+          "probes": 27,
+          "forecasts": 5,
+          "landings": 5,
+          "exact": 1,
+          "uses": 1
+        },
+        "entries": [
+          {
+            "code": "AMZE",
+            "level": 1,
+            "initial": "0859ffa1372ea6ac6d27ebb210802441bd8af406bafdba55073752f132375bb7",
+            "trajectory": "db4094d0ff20d649c2877073e36ae0aa7be871f4a140e53509627af3801dfd69",
+            "actions": 3,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CATR",
+            "level": 1,
+            "initial": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+            "trajectory": "34735c23d8869ce9fbbd9fefe28604f9f8f53efb49d3f1d8bf4f20d84639f16b",
+            "actions": 29,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "COLM",
+            "level": 1,
+            "initial": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+            "trajectory": "ecd46ae97f9d95dd39739e82e071b5bae820aa1f22db4c50d721996a10ff8fe7",
+            "actions": 20,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "DC22",
+            "level": 1,
+            "initial": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+            "trajectory": "c47e4af6efb87f286f3df20f771af132da1761e97577d380d710f0bd07ee70ca",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "EVAS",
+            "level": 1,
+            "initial": "ceac639fe38e32deec9e52b3735a601e68b464736e3187d5644c2854fbfd3bc5",
+            "trajectory": "af6c7c4e88a7628f637a7aa7e2159823b27d8659c74864042c2ad51c92cda947",
+            "actions": 3,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GABA",
+            "level": 1,
+            "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+            "trajectory": "2c44613fd5e216435e33f51f592f66694cffb120b22a379bf193c22fa76c081c",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 21,
+              "plans": 10,
+              "placements": 3,
+              "binds": 8,
+              "exercised": 7,
+              "independent": 7
+            },
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GRAV",
+            "level": 1,
+            "initial": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+            "trajectory": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa",
+            "actions": 11,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "KA59",
+            "level": 1,
+            "initial": "a5391f47a4b5f63feb8af396ab4b0bbdd2f80a18a0f19ffe6f128765e9d75e2c",
+            "trajectory": "d156066b8f6488b0cead1c6824cfd990f5591b2b9f133e765e84118bcba1c75e",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "LKEY",
+            "level": 1,
+            "initial": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+            "trajectory": "507061a5cabb94619e9b69762562eb560666488d9636b3df154809c8d77ff629",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 7,
+              "plans": 2,
+              "placements": 1,
+              "binds": 2,
+              "exercised": 2,
+              "exact": 1,
+              "uses": 1,
+              "reuse": 1,
+              "reuseExact": 1,
+              "independent": 2,
+              "relocatedDriver": 2,
+              "relocatedRecipient": 2,
+              "distinctOpenings": 2
+            },
+            "retained": {
+              "actions": 2,
+              "probes": 2
+            },
+            "transport": {
+              "actions": 4,
+              "plans": 2,
+              "returned": 1
+            }
+          },
+          {
+            "code": "MEMO",
+            "level": 1,
+            "initial": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "trajectory": "8f13c95fc20c81d06c23ab5eac5a867efacd67d4801b6e38e866c8144e9469af",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "PORT",
+            "level": 1,
+            "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+            "trajectory": "7f00821450d8c56c8a8a80fa6cccfada84814c3347fe8cb6e732a05b41427978",
+            "actions": 17,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "REWI",
+            "level": 1,
+            "initial": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+            "trajectory": "8fe4da729b2019466756310c91195d48a8a440ef214822b859f13120d704e1d2",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SEQN",
+            "level": 1,
+            "initial": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+            "trajectory": "5283d0eab00c72914b5720848cfaa52b5586e52c632e4c8eb9639f4b9df5b2a1",
+            "actions": 4,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SNAR",
+            "level": 1,
+            "initial": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+            "trajectory": "1874cb32d64355e48b101690e518ba8f01bd40e555182786fbb8bb39945553fb",
+            "actions": 20,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SYME",
+            "level": 1,
+            "initial": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+            "trajectory": "7e7a9f390451b705beac8689a7a20c396a6d1870888aa07c73bdc57e17dc8f86",
+            "actions": 9,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "TRCP",
+            "level": 1,
+            "initial": "03590df58a79831a29e72b892f3a529280a4eced2dd549b81c7710887a42bda2",
+            "trajectory": "ed6b7af03d912e48fd3ecf97e6da57752a394869850295a69e7fbd347cc94464",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "VOIS",
+            "level": 1,
+            "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+            "trajectory": "70930e101922c69d704caeed1c466e5d0c8c9ba92fb5fabf13cc5377c1342900",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 21,
+              "plans": 9,
+              "binds": 6,
+              "exercised": 6,
+              "exact": 6,
+              "uses": 6,
+              "exactUses": 6,
+              "independent": 6
+            },
+            "retained": {
+              "actions": 1,
+              "probes": 1
+            },
+            "transport": {
+              "actions": 2,
+              "plans": 1,
+              "returned": 1
+            }
+          },
+          {
+            "code": "AR25",
+            "level": 1,
+            "initial": "dcb73927160522c26e2655d31ead221e6da6aab818037d20388bbf46e9afa1b0",
+            "trajectory": "79a55cb7b2a69f8c21b10535cf8c671246e17841b1ff5f295bff30039653817b",
+            "actions": 17,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CAVA",
+            "level": 1,
+            "initial": "3a81cada09d4393d3485a246ad461ef1d6166729c0ac6be0de0c61333c2891a0",
+            "trajectory": "0fbbe16a8f1b47ec732708f4ab9132037bcc972efb781160f952d2143f34a1ad",
+            "actions": 7,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "COMB",
+            "level": 1,
+            "initial": "a188f019a6b99b2b0e8e6bdb65d91087423c62941d320a2b204edfcb1e1a17fa",
+            "trajectory": "20b99f9a68d710d8c7bc0927b2b8b9eecc20f6b7f05a8047181dfc9e03e09fdc",
+            "actions": 8,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "DICO",
+            "level": 1,
+            "initial": "4c66a07b55379fb40871c5ebf6ed4908fe63b83c977c44d48c75cd73cc13bb55",
+            "trajectory": "935fd2f68db9be830769323777f4ba80424a0c356ff25877816bc6d990acaad7",
+            "actions": 5,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "FITE",
+            "level": 1,
+            "initial": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+            "trajectory": "6996348f349912a277c9d4213e4a1881b60da633aa29cc360b738f57bb4a4526",
+            "actions": 14,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GARE",
+            "level": 1,
+            "initial": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+            "trajectory": "28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09",
+            "actions": 11,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GRIL",
+            "level": 1,
+            "initial": "586f549f819870203dd5c0e39249781c696f013f174149462967d1aeefcd224a",
+            "trajectory": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e",
+            "actions": 5,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "KATA",
+            "level": 1,
+            "initial": "6b968a6e6ad21fd191e6e71b41ec2062fab66dd436551e5c7615bb8a262709de",
+            "trajectory": "b2abd07c1a647dbdc43dbdfe7d7145cfa88b4a32b7ae8fe4e9848d63be39612d",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "LOGI",
+            "level": 1,
+            "initial": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+            "trajectory": "3797729448d2e3d6d720ba051f04ca60f7f6edd592a791f45461226058f1bc4f",
+            "actions": 16,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "MIND",
+            "level": 1,
+            "initial": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+            "trajectory": "b2f85bfadef7de5a7ad2c10e4329bc7b5827d87bf51c126a7782ce6e973313e6",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {
+              "actions": 6,
+              "plans": 2,
+              "returned": 1
+            }
+          },
+          {
+            "code": "PRTL",
+            "level": 1,
+            "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+            "trajectory": "2d4f52bd81c100ce13b0cafc0e2ee2561d106f0a78bef9b84468d3d4b3ef5682",
+            "actions": 6,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "RSWP",
+            "level": 1,
+            "initial": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+            "trajectory": "8bc5046f323ffa8de90799527dc0649afd76377fc5c3ffe1f5fb5df2e2519b94",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SERI",
+            "level": 1,
+            "initial": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+            "trajectory": "47020056254e1168b96146ab83a7b6fdea1987b5254bd4b12247cb9494c9c4d5",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 19,
+              "plans": 6,
+              "placements": 4,
+              "binds": 4,
+              "exercised": 4,
+              "independent": 4
+            },
+            "retained": {},
+            "transport": {
+              "actions": 17,
+              "plans": 10,
+              "returned": 9
+            }
+          },
+          {
+            "code": "SP80",
+            "level": 1,
+            "initial": "0ba719661c41cd3db3499afa4ec373d1ae79386e50c866e2487946b59a255b1b",
+            "trajectory": "d89092aa9089e65eadd9af2f48c73c2623c48c0827c62589c1cad8eaa4c7acc4",
+            "actions": 30,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "TEQU",
+            "level": 1,
+            "initial": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+            "trajectory": "2aa8a45b0298dc61204485df9e10a879a106b5c20c76b6974e966b0f1854e258",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 23,
+              "plans": 6,
+              "placements": 4,
+              "contacts": 1,
+              "binds": 6,
+              "exercised": 6,
+              "exact": 3,
+              "uses": 3,
+              "exactUses": 1,
+              "reuse": 2,
+              "reuseExact": 2,
+              "independent": 6,
+              "relocatedDriver": 2,
+              "distinctOpenings": 1
+            },
+            "retained": {
+              "actions": 2,
+              "probes": 2
+            },
+            "transport": {
+              "actions": 16,
+              "plans": 7,
+              "returned": 6
+            }
+          },
+          {
+            "code": "TRIA",
+            "level": 1,
+            "initial": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+            "trajectory": "082047a49ae38ab25f9c75a3d7023b41da3524a8631cbe83503176be2b9defe0",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "WA30",
+            "level": 1,
+            "initial": "22f3ccd4739a85cebbd807dc32cee300c3e43630d38a8422ccf48e81fba53e82",
+            "trajectory": "63d8387d1b7d8b1dbdc6e4f04b4c58c43e60398adb6607924ffbd6ab8a66d3a8",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "AS66",
+            "level": 1,
+            "initial": "39bddf2920c3e13f28141733944f4c45ff9b67f56c82a0069b7ae8064eeb01c6",
+            "trajectory": "3bd7435a1268a69b71790c464aedc14b7f723b56eebd882271781fe7f644aedb",
+            "actions": 15,
+            "won": true,
+            "instrument": {
+              "actions": 6,
+              "plans": 2,
+              "placements": 1,
+              "contacts": 1,
+              "binds": 1,
+              "exercised": 1,
+              "independent": 1,
+              "official": 1
+            },
+            "retained": {
+              "actions": 1,
+              "probes": 1
+            },
+            "transport": {}
+          },
+          {
+            "code": "CD82",
+            "level": 1,
+            "initial": "824ef203a4308533d58fd0b7207d4bb4396f1ac1b6ed8bf4a5160259c94a6904",
+            "trajectory": "10cfd4ca1bd7a8fbd1ef29cd82b4c79f7724ef3a742cf0e0a40666657de739cd",
+            "actions": 9,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CONN",
+            "level": 1,
+            "initial": "8582db376241703619ffe1d10270b7cc526be874c62085c23b4f31e89979bee7",
+            "trajectory": "b1436664926e73c63184c7713966ec8cf3e5bd45a6b736356c4ed6f5b8d75f9e",
+            "actions": 24,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "DNOI",
+            "level": 1,
+            "initial": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+            "trajectory": "014592cae2a8177663fa4474781f23120894cac027a7feee97f62639a67d8cf9",
+            "actions": 3,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "FOGW",
+            "level": 1,
+            "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+            "trajectory": "bf5af35da0a9cdff32d6339a2dbf2dd48d9469ba1cda9796b8cee4598f0a73f3",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GIGO",
+            "level": 1,
+            "initial": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+            "trajectory": "48b27b2033f9321ea8a90d6eacd08c7b4e530231021287357bc0195e3ca92240",
+            "actions": 7,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "HANO",
+            "level": 1,
+            "initial": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+            "trajectory": "408b29ae198b9fb6c4cd85cff5958c67637634e7ace5c7207b1e5c7f7aac367e",
+            "actions": 6,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "KEYD",
+            "level": 1,
+            "initial": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+            "trajectory": "20fb95825ec7a99ecf92608f3c82a59ae8b8f8661a0696c8788277b5ba43ce2a",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 8,
+              "plans": 8
+            },
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "LP85",
+            "level": 1,
+            "initial": "10d339c4ff95d67f9c94ded838ab2080df929551e32ae1443ffa888cd580632a",
+            "trajectory": "4a8903f2a440dbfd102d5b33232a6b74741f7ea693d852251fd82110e824179e",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "MOTO",
+            "level": 1,
+            "initial": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+            "trajectory": "98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b",
+            "actions": 10,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "R11L",
+            "level": 1,
+            "initial": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+            "trajectory": "5938498ae59c3b98a7b9de45d77b958980c34992acd866c4b42233d985fa77dd",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "S5I5",
+            "level": 1,
+            "initial": "0de899ef426dee32a5ae69f04d75484537ada1c8a01db97fc25b240227139335",
+            "trajectory": "f4fe920b29a16fae6fae8d9ca18c327a6403791fc0fb5c87fcaed39eaf0638ac",
+            "actions": 50,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SIGN",
+            "level": 1,
+            "initial": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+            "trajectory": "5b1c70862e249e4034b9edf989d9ee810a69f16e3e6ce9015403260421b0957e",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 23,
+              "plans": 8,
+              "placements": 15
+            },
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SPOR",
+            "level": 1,
+            "initial": "ef7046fff5e68e4fe5410037c13726829e2670eccd87b21574aa8de5d518cd1c",
+            "trajectory": "1c56c9bc869b580013d1f87205d1d160221db32767d8525bb98a48dab2eab345",
+            "actions": 18,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "THER",
+            "level": 1,
+            "initial": "e4949964e4d02658f8a3a275445fa1d2e2e46af5d370cf0269d20527e9215e54",
+            "trajectory": "f34dc125dead189376cba752f03e6eac52b461d07cecde551a69015b944ac03d",
+            "actions": 21,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "TU93",
+            "level": 1,
+            "initial": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+            "trajectory": "ed6a242f2c0be23212d2377d0d06184a95d089e7ad2304892c26db4ea6460755",
+            "actions": 50,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "WEAV",
+            "level": 1,
+            "initial": "af1b67ae6a394974d223dc41ee8d488064f289215c74bcdb98b97163d42ae550",
+            "trajectory": "b1cf2ac97d6afbd10468761f7c2317da046cd53b7c9b0bc8dc7056b8e3513519",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "BP35",
+            "level": 1,
+            "initial": "73ed3968e48e2ac7b6d4a41c2a408abeba6f9ce1c493ad03ce2dd512b0be55bd",
+            "trajectory": "75bbcaca769378205c776c721c6d8bff86a7722b759b7cb230c3ecf6b13acfa3",
+            "actions": 54,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CGWL",
+            "level": 1,
+            "initial": "5b9f513c36c7067d1ffb90e4c9771a8913b0d80a9fd8c47279f11f16b98b156a",
+            "trajectory": "0f3bd868a9e41c449aa7d84fdf250acf9d6dd6919be2164323d342d63b653a74",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 19,
+              "plans": 8,
+              "placements": 1,
+              "binds": 4,
+              "exercised": 4,
+              "independent": 4
+            },
+            "retained": {
+              "actions": 1,
+              "probes": 1
+            },
+            "transport": {
+              "actions": 12,
+              "plans": 6,
+              "returned": 5
+            }
+          },
+          {
+            "code": "CRAF",
+            "level": 1,
+            "initial": "2731a599e06fc2a4c77cbcabfd56c7435bb2460502797e671265a1197286578b",
+            "trajectory": "7a622ef75fa00a34b4aa0eff60970b914b2e5863ef0af15dcae6765b30d94c78",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "ELAS",
+            "level": 1,
+            "initial": "56f3647e10bd9638197258bdfccd3a6050cd3f80c781e70c0f28bb80f9be0c81",
+            "trajectory": "2119845733a0ef81f69633356411c9bfd91b3e746540095b50cd993b1aa673e6",
+            "actions": 16,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "FT09",
+            "level": 1,
+            "initial": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+            "trajectory": "0d88a1b9e8f9d5be658e9722a3c7dbc402b1d5d5f8476ce7a2ef5a1fd4541576",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GLOB",
+            "level": 1,
+            "initial": "ba5d996decc75763ca4b613ce00433341e5d95f6a656a487341aacbdd92f23ae",
+            "trajectory": "4b061a7f529ccbf63ceb927261b20f84899b1fe284bf4db6da4ce4e30a6eb398",
+            "actions": 9,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "HOLE",
+            "level": 1,
+            "initial": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+            "trajectory": "012c8aaf2cae6c42b84cff41bc39f11d4d9a76d61fdd2817e600c406ea372ebb",
+            "actions": 5,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "KLOT",
+            "level": 1,
+            "initial": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+            "trajectory": "d88dd77b26f38a69e2444bb456dc0a8d7839408901bf55df7d6e849686a016ab",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "LS19",
+            "level": 1,
+            "initial": "19e99dde912cee08a4af4335e108a6e015c69930f09e3187badbee1cfce79df0",
+            "trajectory": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c",
+            "actions": 5,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "ONDE",
+            "level": 1,
+            "initial": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+            "trajectory": "ed596954104e490a2902ebed569251be05b10a68a53334cb5ef055156ea67e10",
+            "actions": 7,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "RE86",
+            "level": 1,
+            "initial": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f",
+            "trajectory": "4120dfb12d07a48ff1af32b50740e476836569bd2bcb138294a96cfa39a99489",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SB26",
+            "level": 1,
+            "initial": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+            "trajectory": "7844a7213971c8848a9c3c77340fee8313564c2ce765e3898a47437621662151",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {
+              "actions": 1,
+              "probes": 1
+            },
+            "transport": {}
+          },
+          {
+            "code": "SK48",
+            "level": 1,
+            "initial": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+            "trajectory": "a4d515e609096005a3b0a40a397ccfb9e7f51f312367725d0b1c7a206fb60a36",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 15,
+              "plans": 3,
+              "placements": 3,
+              "binds": 3,
+              "exercised": 3,
+              "independent": 3
+            },
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "STCK",
+            "level": 1,
+            "initial": "0aff2f0878f2054d021b294f4972e1450ef08479ba80af7cca138998bc341521",
+            "trajectory": "f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97",
+            "actions": 3,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "TICT",
+            "level": 1,
+            "initial": "a672cd7ff15e02d16aaaed5a5afaf7fe0e4c0e6577cda214e9edeb950d15a6ae",
+            "trajectory": "a13948626cced0e76c6a47a536754b4ec9fa79743509f1f51eb86b494d75ea1b",
+            "actions": 5,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "UPST",
+            "level": 1,
+            "initial": "97ddaef0e9538cf50e870eac5cda28e075fdc130423b1690323931649dd648a4",
+            "trajectory": "6f99a32adbe04ab3cf551d9dbf82d8ce7df839b35dfee3099480b5b6e7641b60",
+            "actions": 30,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "ZIPP",
+            "level": 1,
+            "initial": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+            "trajectory": "7b9ba98318f6a0ebece3b0b4db52611dc802056b26779ff7c3b2c2135d69d561",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 13,
+              "plans": 6,
+              "contacts": 1,
+              "binds": 3,
+              "exercised": 3,
+              "exact": 1,
+              "uses": 1,
+              "reuse": 1,
+              "independent": 3,
+              "relocatedDriver": 1,
+              "relocatedRecipient": 1,
+              "distinctOpenings": 2
+            },
+            "retained": {
+              "actions": 9,
+              "probes": 6,
+              "forecasts": 3,
+              "landings": 3
+            },
+            "transport": {
+              "actions": 18,
+              "plans": 9,
+              "returned": 9
+            }
+          },
+          {
+            "code": "CASC",
+            "level": 1,
+            "initial": "8c751a15869573d10359498d60bf0d9b344fbdbb71ecf05056fa864ae313a0b1",
+            "trajectory": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8",
+            "actions": 6,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CLRS",
+            "level": 1,
+            "initial": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+            "trajectory": "fd8294e31cec42df57dcf067cb058451d0c829935b7616d4a5c5bd0b644ff356",
+            "actions": 20,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CWSE",
+            "level": 1,
+            "initial": "14b234e86cb071c9873aa3c65eb8cc12680afca61839eb31eccd404d5671af8f",
+            "trajectory": "04ac98078024c8e331ffa240036253203a00dcc0c88893084ba6c928bf0d86fb",
+            "actions": 6,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "ESCT",
+            "level": 1,
+            "initial": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+            "trajectory": "5b02aa275eeef9e16e5d79ee6149347d698aabe3ed591f6ae78ecb48b5e75b41",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 15,
+              "plans": 7,
+              "placements": 1,
+              "binds": 2,
+              "exercised": 2,
+              "independent": 2
+            },
+            "retained": {
+              "actions": 1,
+              "probes": 1
+            },
+            "transport": {
+              "actions": 18,
+              "plans": 4,
+              "returned": 4
+            }
+          },
+          {
+            "code": "FUIT",
+            "level": 1,
+            "initial": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+            "trajectory": "75dfc17678c76208a933f5b57913db4a8c203d0525e298f8f7068cf34bf7709d",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 22,
+              "plans": 7,
+              "placements": 8,
+              "binds": 6,
+              "exercised": 6,
+              "exact": 1,
+              "uses": 1,
+              "exactUses": 1,
+              "independent": 6,
+              "relocatedDriver": 1,
+              "relocatedUse": 1,
+              "distinctOpenings": 1
+            },
+            "retained": {
+              "actions": 5,
+              "probes": 4,
+              "forecasts": 1,
+              "landings": 1
+            },
+            "transport": {}
+          },
+          {
+            "code": "GMAP",
+            "level": 1,
+            "initial": "2bcae799f4729d870ad808e3c67aabf045f134537ae6f43086139088b9bbcef7",
+            "trajectory": "2965646b168ce1b7f5b9723472b246d71d61d09e1782ba63c58793fa3ca11ef3",
+            "actions": 5,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "HPDL",
+            "level": 1,
+            "initial": "a736549b36c7d3a0374e9634ba3694317e060824f7863219344ea69c4a141586",
+            "trajectory": "b53d1e97bb943284ec2969334245d6bba994f0647dc3aac4106ede8e423c4b0b",
+            "actions": 7,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "LF52",
+            "level": 1,
+            "initial": "8c3509a81bc0b33cdcadefd63b15f8d8259dcfc4f6f12c00a1ff598d849bc4ff",
+            "trajectory": "136c6a7cff7e921d7610a153d89bf4320d4e0bc5d2f384b95053d7ec82a963a4",
+            "actions": 31,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "LS20",
+            "level": 1,
+            "initial": "f530cf6adb4a6d0fe87baa072ecf62be621169f9ef3b0baf09539904c5f4220f",
+            "trajectory": "28755dc6ddc8ba6922dcd8899d2d3970033e38e916f6df6ab7c4aecf6f471a74",
+            "actions": 18,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "PIPE",
+            "level": 1,
+            "initial": "cc2da57812c48d52f01a6a481ab614622744023eca0d9786e1f8294e63e9adfd",
+            "trajectory": "9537f4eff9c22c027b3376d3a93cf17b4eb40cbbcb908ddecf23691b0d277c0a",
+            "actions": 4,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "RECR",
+            "level": 1,
+            "initial": "9c659d0462f191ba93ee6aa1bb8c433cdca6d890e4f69b81d28b7fa31325ff79",
+            "trajectory": "0c70c2e4be3f093b06a78b8b6bc9aa1724f5a9faaf826143c6d620c3029325a8",
+            "actions": 3,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SC25",
+            "level": 1,
+            "initial": "518653148c1631c7757a723e0e9f144e62e09fce58cdd5648881c2a8b4c8211c",
+            "trajectory": "b6f368973d4616b4cf6ddb47406d4ccfc6804c44b96c8ec7d6a01eb911206d69",
+            "actions": 17,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SKBN",
+            "level": 1,
+            "initial": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+            "trajectory": "a1324d7a36761a108de431167b117c4134826347377f447efcdbfef65dafedc0",
+            "actions": 22,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SU15",
+            "level": 1,
+            "initial": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+            "trajectory": "cd9d227f90f78b32708557488ab320003a7c6f9cd6d2ed50b144908ed53725db",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "TN36",
+            "level": 1,
+            "initial": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+            "trajectory": "971d834993630567638eb306e338fea3ad759100fa5401c5f767b7ce82ec6ab5",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "VALV",
+            "level": 1,
+            "initial": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+            "trajectory": "ae953580daeb85198af62abb5833f0d6288d757913fbf7ea1b8fd045e5bd3ece",
+            "actions": 25,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CATL",
+            "level": 1,
+            "initial": "645b3c0a4e06f24412f2c54de3ba3c15269956e85b62fa87778d892afa269152",
+            "trajectory": "7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996",
+            "actions": 8,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CN04",
+            "level": 1,
+            "initial": "76e9c99bc22f6b778aa1edd6bf938de351aedb10016b72f95bb67d75490ba0e7",
+            "trajectory": "2ca5cca4d493d40e38003380887a1cb178c887d645fdde548434b2a37b708205",
+            "actions": 18,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "DAME",
+            "level": 1,
+            "initial": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+            "trajectory": "6f12a88b4a47d82c4e83a3006f09f59ef9ee655dbf3089a13c3b1c10fbecd9b3",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {
+              "actions": 3,
+              "probes": 3
+            },
+            "transport": {
+              "actions": 2,
+              "plans": 2
+            }
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "initial": "bf64cd6cbf5bc15a9b00f0270ceb7ce53217119e180463a4307d97f0c9c9fc2a",
+            "trajectory": "fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf",
+            "actions": 7,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "G50T",
+            "level": 1,
+            "initial": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+            "trajectory": "60eda6f9d041d470580fc8518c9d3646f6ef0e91bc807689920ca685e2521cb9",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GORI",
+            "level": 1,
+            "initial": "b7789fb9ae19a319ec1ea7fc4a2b5d1c2032885c185218e4bdcb3f93bf61207c",
+            "trajectory": "df11bb6c94d9325a9a689a254ef621916f1c5277cb0dd7ad598e96437bf31242",
+            "actions": 15,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "ISOS",
+            "level": 1,
+            "initial": "2213b32effda75e66db7f38caf14b276feafbd547a28086089e6000a114ffabe",
+            "trajectory": "cfa123ebda88519e2a5678023784a2449be6381ccec41e40b4ade48ef515d39a",
+            "actions": 3,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "LIFE",
+            "level": 1,
+            "initial": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+            "trajectory": "2b9779ce96977cfff637d7eec694c362f45017d98677b243a48d4b6754e675cb",
+            "actions": 26,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "M0R0",
+            "level": 1,
+            "initial": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+            "trajectory": "d797b8ea77f1ad2aded763aaa75cc0bf10cf70209ff6f4e68c4dfce43c50f526",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "POLA",
+            "level": 1,
+            "initial": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+            "trajectory": "51740efcc751d7acf60cec630c85abc13e89b6b1682848813c4cdbb40563b426",
+            "actions": 58,
+            "won": true,
+            "instrument": {
+              "actions": 2,
+              "plans": 1,
+              "binds": 1,
+              "exercised": 1,
+              "independent": 1
+            },
+            "retained": {
+              "actions": 5,
+              "probes": 3,
+              "forecasts": 1,
+              "landings": 1,
+              "exact": 1,
+              "uses": 1
+            },
+            "transport": {
+              "actions": 2,
+              "plans": 1,
+              "returned": 1
+            }
+          },
+          {
+            "code": "REGN",
+            "level": 1,
+            "initial": "47aa13d6af55af3e0efd065ed7eacc0793512ef6c920614ef326caa1d92f6662",
+            "trajectory": "b00a56adad8180b9427c0ca84381383b025d051ab96a5c8ec1e9f01a1090c26c",
+            "actions": 2,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SELE",
+            "level": 1,
+            "initial": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+            "trajectory": "c4505af8171c7fba460b476ddfb9cd45ac417b6a76d8f0517853521494167df6",
+            "actions": 30,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "SMLP",
+            "level": 1,
+            "initial": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+            "trajectory": "1c62c2817b7d6b178b398133cfab7950bd5a15c7f545d14fc8502e7ba921faa4",
+            "actions": 60,
+            "won": false,
+            "instrument": {},
+            "retained": {
+              "actions": 2,
+              "probes": 2
+            },
+            "transport": {}
+          },
+          {
+            "code": "SWCH",
+            "level": 1,
+            "initial": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+            "trajectory": "edacb4ec2872751e9e0f6090023e4190d7851f21982830d7aa4de8a7cdf7414b",
+            "actions": 60,
+            "won": false,
+            "instrument": {
+              "actions": 21,
+              "plans": 6,
+              "placements": 4,
+              "contacts": 2,
+              "binds": 2,
+              "exercised": 2,
+              "independent": 2
+            },
+            "retained": {},
+            "transport": {
+              "actions": 18,
+              "plans": 3,
+              "returned": 3
+            }
+          },
+          {
+            "code": "TR87",
+            "level": 1,
+            "initial": "bf60e2953965adca1444960d2bf267bab440c2d18234c0a245ce214ea0982174",
+            "trajectory": "180c353235d77dc3ad6fc9e5ab2a2a4d361c51b5357a1bd1a59665f66e055963",
+            "actions": 22,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "VC33",
+            "level": 1,
+            "initial": "fdde551e3fd269f62e14eb380d2244aefb8f8230f3af72741a2d89acbf1fe414",
+            "trajectory": "76433c16abc196211b8ae26ce17d86b0076a06b6dba8868b67d6fc57ce79196d",
+            "actions": 50,
+            "won": false,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          }
+        ]
+      },
+      "sevenUpper": {
+        "levels": 18,
+        "won": 8,
+        "comparedWithV13": {
+          "GRAV/3": true
+        },
+        "instrument": {
+          "actions": 183,
+          "plans": 70,
+          "placements": 28,
+          "binds": 53,
+          "exercised": 52,
+          "exact": 6,
+          "uses": 6,
+          "exactUses": 2,
+          "independent": 52,
+          "relocatedDriver": 3,
+          "distinctOpenings": 3,
+          "contacts": 2,
+          "reuse": 5,
+          "reuseExact": 2,
+          "relocatedRecipient": 2
+        },
+        "transport": {
+          "actions": 150,
+          "plans": 37,
+          "returned": 33,
+          "imageExact": 8,
+          "official": 1
+        },
+        "retained": {
+          "actions": 52,
+          "probes": 40,
+          "forecasts": 3,
+          "landings": 3
+        },
+        "entries": [
+          {
+            "code": "CWSE",
+            "level": 2,
+            "initial": "b45351fb835ead51df61a751f17a154dd3b484720e3ae0258bf8a2f0ba25930c",
+            "trajectory": "88e33f7d2a17e93e8191e064a5a68d61ba2759f9856e378b8d338ca41fa55317",
+            "actions": 120,
+            "won": false,
+            "instrument": {
+              "actions": 46,
+              "plans": 16,
+              "placements": 12,
+              "binds": 13,
+              "exercised": 13,
+              "exact": 2,
+              "uses": 2,
+              "exactUses": 1,
+              "independent": 13,
+              "relocatedDriver": 1,
+              "distinctOpenings": 1
+            },
+            "retained": {
+              "actions": 3,
+              "probes": 3
+            },
+            "transport": {}
+          },
+          {
+            "code": "GARE",
+            "level": 2,
+            "initial": "c87e72bce526c6fe7af25084005bc6ecce41c25896824f00810267c418b05d82",
+            "trajectory": "851a6b841b6a025cd590612c0cb80d771a18cc2a1bca1fa3b867d0d65caf91c3",
+            "actions": 13,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GIGO",
+            "level": 2,
+            "initial": "4efd450236b14467a56ec27214c23529f7bd981e935b590875ca4cad91962d8a",
+            "trajectory": "b313824269f9eb159465d317041ee7e87d8a256064543901e85e69a224b5146d",
+            "actions": 9,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GRAV",
+            "level": 2,
+            "initial": "35bbf85c6e247ff4dc855af310d24b9712eb7857b53cff5edae7da98848c954f",
+            "trajectory": "1d2be2d2102de93d91ad8caf29b77a1f30fd6353fe75a2303c69974dce7fa9ea",
+            "actions": 30,
+            "won": true,
+            "instrument": {
+              "actions": 2,
+              "plans": 1,
+              "binds": 1,
+              "exercised": 1,
+              "independent": 1
+            },
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "POLA",
+            "level": 2,
+            "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+            "trajectory": "328737d80898650274c2f099e35a17364f66a04a7dceffda125d44dd702bae47",
+            "actions": 10,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {
+              "actions": 2,
+              "plans": 1,
+              "returned": 1
+            }
+          },
+          {
+            "code": "CATR",
+            "level": 2,
+            "initial": "0381adcb6fd6155f03f43bd6350b9e19fa5ff373e8dadca077b7354c2d3fceac",
+            "trajectory": "bd1a8bd8aaf51b2e2971e1525bf0b26280b11cc7cfeff89961e6afaafec2d2e7",
+            "actions": 120,
+            "won": false,
+            "instrument": {
+              "actions": 7,
+              "plans": 4,
+              "binds": 4,
+              "exercised": 3,
+              "independent": 3
+            },
+            "retained": {
+              "actions": 5,
+              "probes": 5
+            },
+            "transport": {
+              "actions": 9,
+              "plans": 3,
+              "returned": 3
+            }
+          },
+          {
+            "code": "MOTO",
+            "level": 2,
+            "initial": "d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+            "trajectory": "7656fe1f0257dcb652abfb97a332e7f4bb5c2e5018f0b291cb8a8d198a60a139",
+            "actions": 120,
+            "won": false,
+            "instrument": {
+              "actions": 25,
+              "plans": 10,
+              "placements": 2,
+              "contacts": 1,
+              "binds": 8,
+              "exercised": 8,
+              "exact": 3,
+              "uses": 3,
+              "exactUses": 1,
+              "reuse": 5,
+              "reuseExact": 2,
+              "independent": 8,
+              "relocatedDriver": 2,
+              "relocatedRecipient": 2,
+              "distinctOpenings": 2
+            },
+            "retained": {
+              "actions": 19,
+              "probes": 8,
+              "forecasts": 2,
+              "landings": 2
+            },
+            "transport": {}
+          },
+          {
+            "code": "GARE",
+            "level": 3,
+            "initial": "a88fda3980a83ded6676f0849877da360916aae88373f5b27a8b86f1266d4bda",
+            "trajectory": "58f4ec256d8b9e6895c767e6bee80978f83a2a9d85cdbb34e89025530b104e22",
+            "actions": 120,
+            "won": false,
+            "instrument": {},
+            "retained": {
+              "actions": 5,
+              "probes": 4,
+              "forecasts": 1,
+              "landings": 1
+            },
+            "transport": {
+              "actions": 41,
+              "plans": 11,
+              "returned": 11,
+              "imageExact": 6
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 3,
+            "initial": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+            "trajectory": "f2d05f11e778b1378917558ca51920eb2a3aef06795d26dd946c608c3f10ecb8",
+            "actions": 12,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GRAV",
+            "level": 3,
+            "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+            "trajectory": "86db06d801fed6b39ab0f86a3aada0d4dbd17e8ca5378ece2785dd454d5ce7c9",
+            "actions": 53,
+            "won": true,
+            "instrument": {
+              "actions": 12,
+              "plans": 3,
+              "placements": 2,
+              "binds": 3,
+              "exercised": 3,
+              "independent": 3
+            },
+            "retained": {},
+            "transport": {
+              "actions": 7,
+              "plans": 1,
+              "official": 1
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 3,
+            "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+            "trajectory": "53e692dd64f75ed556984cd1889a4ee70b0a55707d5ae1b8ec98eef16ccb009b",
+            "actions": 56,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "CATR",
+            "level": 3,
+            "initial": "ce1fda4d59a5bad94c080babf49f5ee077fe767b78d9e18ebc5496c6b5513f5c",
+            "trajectory": "89c235cefc41584a09b7bae5d0213faac441b52c9a129f34b4c0b37b5d0215a1",
+            "actions": 120,
+            "won": false,
+            "instrument": {},
+            "retained": {
+              "actions": 7,
+              "probes": 7
+            },
+            "transport": {
+              "actions": 20,
+              "plans": 6,
+              "returned": 5,
+              "imageExact": 2
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 4,
+            "initial": "b203d5554e4b0e600aaf268d39c5d4ff05f51e29eb3a34e1ba76acc6b005389c",
+            "trajectory": "9a250649b9530a0949667a7dc5cb8a759afdbef5647989ca038542d3efbb9715",
+            "actions": 13,
+            "won": true,
+            "instrument": {},
+            "retained": {},
+            "transport": {}
+          },
+          {
+            "code": "GRAV",
+            "level": 4,
+            "initial": "3ef9d5b1501678728b4e4f78fb5ac9153f4c912631c5f8581cd9ac0055ec2819",
+            "trajectory": "3bebdf9c635e94bf99d3435f0085646a42ee97186248ddd0af6827c1970f9a33",
+            "actions": 120,
+            "won": false,
+            "instrument": {
+              "actions": 26,
+              "plans": 7,
+              "placements": 5,
+              "binds": 6,
+              "exercised": 6,
+              "independent": 6
+            },
+            "retained": {},
+            "transport": {
+              "actions": 4,
+              "plans": 1,
+              "returned": 1
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 4,
+            "initial": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5",
+            "trajectory": "7b10ca13f467e81ec4d6144708742a526867dd648709e4bb0b35ccbd1c7c324c",
+            "actions": 120,
+            "won": false,
+            "instrument": {},
+            "retained": {
+              "actions": 4,
+              "probes": 4
+            },
+            "transport": {}
+          },
+          {
+            "code": "GIGO",
+            "level": 5,
+            "initial": "c604a060286c7e40b44997ae13b1073ded87415d0e588cee82a987c02ff1d979",
+            "trajectory": "b937edf86c0438c7f2f703402070eb1bdfc36a130d29b5738bf79cc24c01ad38",
+            "actions": 120,
+            "won": false,
+            "instrument": {
+              "actions": 34,
+              "plans": 14,
+              "placements": 4,
+              "binds": 12,
+              "exercised": 12,
+              "exact": 1,
+              "uses": 1,
+              "independent": 12
+            },
+            "retained": {
+              "actions": 9,
+              "probes": 9
+            },
+            "transport": {
+              "actions": 16,
+              "plans": 7,
+              "returned": 6
+            }
+          },
+          {
+            "code": "GRAV",
+            "level": 5,
+            "initial": "1569271335c09e35750e90a45210ccbc337e632d5af4a7f076701f5dd440c413",
+            "trajectory": "67ed69742da388b9006ee58e9e3f0ded39ed176b9cff948b6a5ab31634d41d6a",
+            "actions": 120,
+            "won": false,
+            "instrument": {
+              "actions": 17,
+              "plans": 5,
+              "placements": 3,
+              "contacts": 1,
+              "binds": 3,
+              "exercised": 3,
+              "independent": 3
+            },
+            "retained": {},
+            "transport": {
+              "actions": 47,
+              "plans": 5,
+              "returned": 4
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 5,
+            "initial": "b593a73ddce4884f068c3f7f530b5945ca6ee2174b2c8ce6870dd4283d7fb4f0",
+            "trajectory": "c7068a2e29de0f3f034295a28d92e8e1beb1a81b4fb2df0eae79882b5f1f0642",
+            "actions": 120,
+            "won": false,
+            "instrument": {
+              "actions": 14,
+              "plans": 10,
+              "binds": 3,
+              "exercised": 3,
+              "independent": 3
+            },
+            "retained": {},
+            "transport": {
+              "actions": 4,
+              "plans": 2,
+              "returned": 2
+            }
+          }
+        ],
+        "GRAV3Ablation": {
+          "code": "GRAV",
+          "level": 3,
+          "begin": 47,
+          "end": 53,
+          "origin": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+          "word": [
+            "ACTION1",
+            "ACTION4",
+            "ACTION3",
+            "ACTION2",
+            "ACTION4",
+            "ACTION6:31,2",
+            "ACTION6:2,31"
+          ],
+          "subsets": 128,
+          "winning": 2,
+          "minimum": 6,
+          "minimalPrograms": [
+            [
+              0,
+              1,
+              3,
+              4,
+              5,
+              6
+            ]
+          ],
+          "necessaryPositions": [
+            0,
+            1,
+            3,
+            4,
+            5,
+            6
+          ],
+          "singleDeletionWins": [
+            2
+          ]
+        }
+      }
+    },
+    "ss01L2": {
+      "control": {
+        "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "da7af84eab8d45c454af4ce20c74f86e38f6efb978607da90a8478ea9288349a",
+        "issued": 956,
+        "images": 170,
+        "won": false,
+        "levelsCompleted": 0,
+        "finalLevel": 2,
+        "state": "NOT_FINISHED",
+        "reason": "level_active_time_budget",
+        "displacements": 217,
+        "crossings": 0,
+        "instrument": {
+          "actions": 0,
+          "plans": 0,
+          "placements": 0,
+          "contacts": 0,
+          "binds": 0,
+          "exercised": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "reuse": 0,
+          "reuseExact": 0,
+          "independent": 0,
+          "newDriver": 0,
+          "newRecipient": 0,
+          "independentExact": 0,
+          "independentUse": 0,
+          "dependentWins": 0,
+          "relocatedDriver": 0,
+          "relocatedRecipient": 0,
+          "relocatedUse": 0,
+          "distinctOpenings": 0,
+          "official": 0
+        },
+        "transport": {
+          "actions": 0,
+          "plans": 0,
+          "returned": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "imageExact": 0,
+          "official": 0
+        },
+        "retained": {
+          "actions": 0,
+          "probes": 0,
+          "forecasts": 0,
+          "landings": 0,
+          "exact": 0,
+          "uses": 0,
+          "awakened": 0,
+          "exactUses": 0,
+          "official": 0
+        }
+      },
+      "candidate": {
+        "sha": "1cfdcfcbbbaa22a6813c42ad4f934be27e1b065e",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "a1fba473bf6cc5add17166184ac6ab74fccdce74b2e8657b2c984482687a553f",
+        "issued": 825,
+        "images": 108,
+        "won": false,
+        "levelsCompleted": 0,
+        "finalLevel": 2,
+        "state": "NOT_FINISHED",
+        "reason": "level_active_time_budget",
+        "displacements": 95,
+        "crossings": 0,
+        "instrument": {
+          "actions": 206,
+          "plans": 96,
+          "placements": 1,
+          "contacts": 0,
+          "binds": 75,
+          "exercised": 74,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "reuse": 5,
+          "reuseExact": 0,
+          "independent": 74,
+          "newDriver": 0,
+          "newRecipient": 0,
+          "independentExact": 0,
+          "independentUse": 0,
+          "dependentWins": 0,
+          "relocatedDriver": 2,
+          "relocatedRecipient": 0,
+          "relocatedUse": 0,
+          "distinctOpenings": 2,
+          "official": 0
+        },
+        "transport": {
+          "actions": 293,
+          "plans": 79,
+          "returned": 79,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "imageExact": 0,
+          "official": 0
+        },
+        "retained": {
+          "actions": 83,
+          "probes": 40,
+          "forecasts": 11,
+          "landings": 11,
+          "exact": 0,
+          "uses": 0,
+          "awakened": 0,
+          "exactUses": 0,
+          "official": 0
+        }
+      },
+      "matchedCommands": 825,
+      "imagesAtMatchedCommands": {
+        "control": 166,
+        "candidate": 108
+      }
+    },
+    "software": {
+      "typecheck": true,
+      "sicTests": 152,
+      "passed": 151,
+      "preexistingFailure": "oriented-cycle recharge walk field"
+    }
   }
 }
