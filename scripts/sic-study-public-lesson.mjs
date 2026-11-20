@@ -6,11 +6,12 @@ const hash = (rows) => createHash('sha256').update(JSON.stringify(rows)).digest(
 export async function publicLesson(games, code, start, file, solver) {
   const packed = JSON.parse(await readFile(file, 'utf8'));
   const record = packed.lesson ?? packed;
-  if (record.code !== code || record.endLevel !== start || start < 2) throw Error('Wrong public lesson');
+  const adjacent=record.endLevel===start;
+  if (record.code !== code || start<2 || record.endLevel<2 || (!adjacent && !(record.endLevel<start && record.transferTo===start))) throw Error('Wrong public lesson');
   const history = [];
-  let board = await games.dispatch({ type: 'load', code, level: start - 1 });
+  let board = await games.dispatch({ type: 'load', code, level: record.endLevel - 1 });
   for (const c of record.commands) {
-    if (board.level !== start - 1 || c.from !== hash(board.frame))
+    if (board.level !== record.endLevel - 1 || c.from !== hash(board.frame))
       throw Error('Unauthenticated lesson origin');
     const next = await games.dispatch({
       type: 'action',
@@ -21,8 +22,13 @@ export async function publicLesson(games, code, start, file, solver) {
     history.push({ b: board, n: next, c });
     board = next;
   }
-  if (board.level !== start || !history.length || board.levelsCompleted !== history[0].b.levelsCompleted + 1)
+  if (board.level !== record.endLevel || !history.length || board.levelsCompleted !== history[0].b.levelsCompleted + 1)
     throw Error('Lesson did not reach the official boundary');
+  const boundary=board;
+  if(!adjacent) {
+    board=await games.dispatch({type:'selectLevel',level:start});
+    if(board.level!==start)throw Error('Public level selection failed');
+  }
   const { measureNativeObservation } = await import(
     pathToFileURL(join(resolve(solver), 'src/logos-engine/v6-native-observer.ts')).href
   );
@@ -34,8 +40,8 @@ export async function publicLesson(games, code, start, file, solver) {
         {
           frame_rows: x.frame,
           frame_hash: hash(x.frame),
-          level: x.level - start + 1,
-          levels_completed: x.levelsCompleted - board.levelsCompleted,
+          level: x.level - record.endLevel + 1,
+          levels_completed: x.levelsCompleted - boundary.levelsCompleted,
           state: x.state,
           available_action_refs: x.availableActionIds.map((n) => 'ACTION' + n),
         },
@@ -54,7 +60,7 @@ export async function publicLesson(games, code, start, file, solver) {
       );
       o = a;
     }
-    await learner.proposeInGroup('test_compositions_after_recurrent_returns', o, board.frame, [], 0);
+    await learner.proposeInGroup('test_compositions_after_recurrent_returns', o, boundary.frame, [], 0);
   }
   return {
     board,

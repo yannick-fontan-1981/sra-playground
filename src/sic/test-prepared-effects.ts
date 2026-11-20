@@ -1,3 +1,4 @@
+import {nextLocalLevel,stalledLocal} from './prospective-local-use.ts';
 import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
@@ -27,6 +28,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
   testMechanismMobility:'Test an untried control for moving a persistent part after a repeated return',
   reconfigureMechanism:'Test whether moving a mechanism opens access beyond a stagnant return',
@@ -79,7 +81,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
-    const carry=m.previewCarry;m=initialMemory(o.level_epoch);m.previewLearning=acceptPreviewCarry(carry,o);
+    const carry=m.previewCarry,local=m.localCarry;m=initialMemory(o.level_epoch);m.localCapacity=nextLocalLevel(local);m.previewLearning=acceptPreviewCarry(carry,o);
   }
   function acquire(
     b: NativeObservation,
@@ -92,6 +94,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     enter(b);
     const learning=m.previewLearning??=newPreviewLearning();
     if(a.levels_completed>b.levels_completed){const contacts=completionContacts(learning,b,a,visualLayout(b,rows),observedCommandKey(cmd));if(contacts.length)learning.terminal=contacts;}
+    if(a.levels_completed>b.levels_completed&&m.localCapacity)m.localCarry=nextLocalLevel(m.localCapacity);
     const boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
@@ -110,24 +113,27 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     },
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
-      if (remaining < 1 || !m.turns&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
+      if (remaining < 1 || !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
-      if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m)) return null;
+      const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity && stalledLocal(m.localCapacity,o.frame_hash);
+      if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows);
+      const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows,localOpportunity);
+      if(localOpportunity&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity)return null;
       if (!experiment || (group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const evidence = [
         ref,
+        ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
         ...(experiment.occupancy?.plan.preparedPreview?.priorRead?[experiment.occupancy.plan.preparedPreview.priorRead.before,experiment.occupancy.plan.preparedPreview.priorRead.after]:[]),
         ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
         ...(experiment.mechanism?.plan.witnessRefs??[]),
@@ -193,6 +199,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         kind: preparedEffectsId,
         actions: [command],
         experiment,
+        ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
         ...(experiment.terminalContact?{terminalContactForecast:experiment.terminalContact}:{}),
         ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),

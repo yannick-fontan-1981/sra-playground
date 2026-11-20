@@ -1,3 +1,4 @@
+import { assessLocal, localCommand, newLocalMemory, observeLocal, proposeLocal, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
 import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
@@ -100,6 +101,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'localCapacity'
     | 'seekTerminalContact'
     | 'testMechanismMobility'
     | 'reconfigureMechanism'
@@ -149,6 +151,7 @@ export type Experiment = {
   prepEffect?: string;
   purpose?: string;
   refs: number[];
+  localCapacity?: LocalForecast;
   delayed?: DelayedTrial;
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
@@ -173,6 +176,7 @@ export type Experiment = {
   access?: { card: AccessCard; step: number; alternatives: Record<string, unknown>[] };
 };
 export type Outcome = {
+  localCapacity?: ReturnType<typeof assessLocal>;
   precondition?: string;
   predictedGap?: boolean;
   phase: string;
@@ -216,6 +220,8 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  localCapacity?: LocalMemory;
+  localCarry?: LocalMemory;
   returnHistory?: ReturnHistory;
   activations?:ActivationReceipt[];
   territory?:TerritorialMemory;
@@ -805,9 +811,26 @@ export function experimentCommand(x: Experiment) {
   return first.includes(x.phase) ? x.a : x.b;
 }
 export function selectExperiment(
-  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
+  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows, localOpportunity=false
 ): Experiment | null {
+  const local=m.localCapacity;
+  function bindLocal(plan:LocalForecast):Experiment {
+    return {phase:'localCapacity',origin:m.scenes.indexOf(sceneKey(o)),a:plan.a,b:localCommand(plan),
+      rule:'translated_public_effect',localCapacity:plan,refs:[]};
+  }
+  if(local && rows && local.pending && local.expect===o.frame_hash) return bindLocal(local.pending);
+  if(local?.retained?.state===o.frame_hash && rows){
+    const revision=proposeLocal(local,o,rows,true);
+    if(revision?.revised)return bindLocal(revision);
+  }
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
+  if(local && rows && localOpportunity && stalledLocal(local,o.frame_hash)
+      && !established?.mechanism && !established?.terminalContact && !established?.witnessedPreview
+      && !m.frames?.active && !m.occupancy?.active && !m.territory?.active && !m.pending
+      && !m.space.active && !m.equations.active && !m.condition && !m.projection.active && !m.delayed.active){
+    const plan=proposeLocal(local,o,rows,true);
+    if(plan && (plan.controlRef || plan.siteC))return bindLocal(plan);
+  }
   if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.terminalContact || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
@@ -817,6 +840,7 @@ export function selectExperiment(
   const cmd=established?experimentCommand( established ):null;
   const knownStep=cmd&&m.edges.some(e=>e.s===scene&&e.cmd===cmd&&e.stable);
   if(replaceable&&(knownStep||(!established&&late)||repeated>=Math.ceil(recent.length/2)&&recent.length>=4)){
+    if(local){const plan=proposeLocal(local,o,rows,true);if(plan)return bindLocal(plan);}
     const opportunity=offerFrame(m,o,rows,scene,available,'opportunity');
     if(opportunity)return opportunity;
     const activation=offerActivation(m,o,rows,scene,available);
@@ -838,6 +862,9 @@ export function recordExperiment(
     t = sceneIndex(m, a),
     op = observedCommandKey(cmd),
     effect = measureEffect(b, a, rows, next);
+  const local=m.localCapacity??=newLocalMemory();
+  if(!x?.localCapacity){delete local.pending;delete local.expect;}
+  observeLocal(local,b,a,rows,next,op);
   const previous = m.edges[m.previous];
   m.turns++;
   const progress=m.localProgress??=newLocalProgress();
@@ -968,6 +995,10 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if(x.localCapacity) {
+    const receipt=assessLocal(local,x.localCapacity,b,a,rows,next);
+    return {...out,result:'local_capacity_'+receipt.stage+(receipt.matches?'_matched':'_refuted'),localCapacity:receipt};
+  }
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
     return {...out,result,condition:detail};

@@ -22,6 +22,7 @@ export function hasExperimentOpportunity(m: Memory): boolean {
 }
 
 export function mayPursueWitnessedEffect(m: Memory): boolean {
+  if(m.localCapacity?.pending||m.localCapacity?.retained)return true;
   // Give the current strategy a chance to continue after opening a new public state.
   if (m.turns && m.frontier.lastScene === m.turns && m.lastTrial !== m.turns) return false;
   return !!m.localProgress?.active || !!m.previewLearning?.terminal?.length
@@ -30,6 +31,7 @@ export function mayPursueWitnessedEffect(m: Memory): boolean {
 }
 
 export function witnessedObjective(x: Experiment): boolean {
+  if (x.localCapacity && x.localCapacity.stage!=='control')return true;
   if (x.terminalContact || x.witnessedPreview?.basis === 'observed_in_previous_level') return true;
   const trial = x.mechanism;
   return !!trial?.plan.arrival && (trial.cause.tag === 'projected_access_limit' || trial.index > 0);

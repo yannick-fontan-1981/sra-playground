@@ -186,6 +186,8 @@ async function run(code, games) {
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
+      const localCapacity=plan?.localCapacityForecast?structuredClone(plan.localCapacityForecast):null;
+      const localSeal=localCapacity?hash(localCapacity):null;
       const mobilitySeal=plan?.mobilityForecast?hash(plan.mobilityForecast):null;
       const mechanismSeal=plan?.mechanismForecast?hash(plan.mechanismForecast):null;
       const indicatorProbeSeal=plan?.indicatorProbeForecast?hash(plan.indicatorProbeForecast):null;
@@ -209,7 +211,7 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(localSeal?{localCapacity,localSeal}:{}), ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
