@@ -31,3 +31,7 @@ Le replay indépendant `verify-native-occupancy.mjs` relit les positions et les 
 | ZIPP L1 | 70 | 10 | 3 | 7 | 0 | 0 |
 
 Les 14 annonces à plusieurs sujets de VOIS se réalisent intégralement. Aucun de ces cinq essais n’a produit une prévision portant sur une orientation. Cette possibilité est vérifiée par un test déterministe. Ces essais mesurent des effets locaux. Le compteur officiel reste à zéro sur les cinq parties. Les empreintes des trajectoires figurent dans [les résultats](sic-morphological-preview-results.json).
+
+## Comparaison du candidat figé
+
+Le candidat v21 reprend les mêmes budgets, le même moteur et les mêmes entrées au L2 que le [protocole v20](sic-source-control-occupancy-freeze.md). Le témoin est le tag `sic-projected-affordances-source100-control-v1`. Le tag candidat est `sic-projected-affordances-source100-candidate-v21`. Les deux exports et leurs références distantes sont vérifiés avant l’essai. Le résultat principal est la victoire officielle autonome. Le rejeu compte séparément les prévisions morphologiques et leurs réalisations. SS09 L2 reste réservé.
