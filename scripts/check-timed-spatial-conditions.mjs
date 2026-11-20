@@ -1,7 +1,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { sourceBackend } from './sic-study-source-games.mjs';
-import { sourceReplay } from './sic-study-source-replay.mjs';
+import { sourceReplay,hash } from './sic-study-source-replay.mjs';
 import { publicParts } from './source-transfer-demonstration.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
 const [env, dir, output] = process.argv.slice(2),
@@ -48,7 +48,7 @@ for (let shard = 0; shard < 5; shard++) {
         const play = (word) => {
           let b = rep.restore(selection.write);
           for (const k of word) {
-            if (b.state !== root.state || rep.win(b)) return null;
+            if (b.state !== root.state || rep.win(b)||!b.availableActionIds.includes(Number(k.slice(6).split(':')[0]))) return null;
             b = rep.act(k);
           }
           return b;
@@ -56,6 +56,7 @@ for (let shard = 0; shard < 5; shard++) {
         const rounds = [];
         let words = [[]];
         for (let n = 0; n <= 4; n++) {
+          const measured=new Map();
           const slots = t.origins.map(() => ({
             images: new Set(),
             count: 0,
@@ -70,23 +71,31 @@ for (let shard = 0; shard < 5; shard++) {
               p = at(state.parts, selection.role),
               a = at(state.parts, reference);
             const ix = t.origins.findIndex(([x, y]) => eq(p, x) && eq(a, y));
-            if (ix < 0) continue;
-            const slot = slots[ix];
-            slot.count++;
-            const h = state.hash ?? JSON.stringify(b.frame);
-            if (slot.images.has(h) || slot.images.size >= 5) continue;
-            slot.images.add(h);
+            if(!p||!a||!b.availableActionIds.includes(Number(row.q.slice(6).split(':')[0])))continue;
+            const slot=slots[ix],h=hash(b);
+            if(slot)slot.count++;
+            if(measured.has(h))continue;
             const result = rep.act(row.q),
               next =
                 rep.win(result) || result.state !== root.state
                   ? null
                   : at((await inspect(result)).parts, selection.role);
             const d = next ? [next[0] - p[0], next[1] - p[1]] : null;
+            measured.set(h,{p,r:a,d,word,win:rep.win(result)});
+            if(!slot||slot.images.size>=5)continue;
+            slot.images.add(h);
             slot.actual.push(d);
             slot.witnesses.push(word);
             slot.correct += Number(eq(d, t.ds[ix]) || (!d && rep.win(result) === t.wins[ix] && !t.ds[ix]));
           }
-          rounds.push({ length: n, slots: slots.map(({ images, ...v }) => ({ ...v, images: images.size })) });
+          const sample=[...measured.values()];
+          const comparisons={samePatient:0,samePatientDifferent:0,sameMarker:0,sameMarkerDifferent:0,samePair:0,samePairDifferent:0,examples:[]};
+          for(let i=0;i<sample.length;i++)for(let j=0;j<i;j++){const a=sample[i],b=sample[j];if(!a.d||!b.d)continue;
+            const patient=eq(a.p,b.p),marker=eq(a.r,b.r),kind=patient&&marker?'samePair':patient?'samePatient':marker?'sameMarker':null;
+            if(!kind)continue;comparisons[kind]++;if(!eq(a.d,b.d)){comparisons[kind+'Different']++;
+              if(comparisons.examples.length<4)comparisons.examples.push({kind,a,b});}
+          }
+          rounds.push({ length: n,images:sample.length,responses:[...new Set(sample.map(v=>JSON.stringify(v.d)))],comparisons,slots: slots.map(({ images, ...v }) => ({ ...v, images: images.size })) });
           if (n < 4) words = words.flatMap((w) => keys.map((k) => [...w, k]));
         }
         reports.push({

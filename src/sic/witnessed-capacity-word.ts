@@ -3,7 +3,7 @@ import { point, type XY } from './access-terrain.ts';
 import type { Role } from './exchange-roles.ts';
 import type { WordEffect } from './conditional-word-search.ts';
 
-function after(m: Memory, e: Edge, role: Role): XY | null {
+export function observedPositionAfter(m: Memory, e: Edge, role: Role): XY | null {
   const all = m.frames?.duplicates?.[e.t]?.[role.signature];
   if (all && all.length === role.fixed.length + 1 && role.fixed.every((p) => all.includes(p))) {
     const v = all.find((p) => !role.fixed.includes(p));
@@ -58,12 +58,12 @@ export function witnessedWord(
     if (!valid) continue;
     const final = m.edges[history[start + word.length - 1]!]!;
     return {
-      patient: after(m, final, patient),
-      marker: after(m, final, site),
+      patient: observedPositionAfter(m, final, patient),
+      marker: observedPositionAfter(m, final, site),
       frame: rootFrame,
       entered: false,
       win: false,
-      afterFirst: prepared ? { p: after(m, first, patient), r: after(m, first, site) } : null,
+      afterFirst: prepared ? { p: observedPositionAfter(m, first, patient), r: observedPositionAfter(m, first, site) } : null,
       ref: revision - history.length + start + word.length,
     };
   }
