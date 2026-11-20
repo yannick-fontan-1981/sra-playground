@@ -42,6 +42,7 @@ export function contextAudit(run, hash, partsAt, commandKey) {
     relocatedDriver: 0,
     relocatedRecipient: 0,
     relocatedUse: 0,
+    distinctOpenings: 0,
     official: 0,
   };
   const transports = {
@@ -152,6 +153,7 @@ export function contextAudit(run, hash, partsAt, commandKey) {
     }
   }
   async function branches(open, dispatch) {
+    const openings = new Set();
     for (const c of checks) {
       let b = await open();
       if (hash(b.frame) !== run.initial) fail('Counterfactual initial state diverged', 0);
@@ -189,6 +191,20 @@ export function contextAudit(run, hash, partsAt, commandKey) {
       );
       sites.relocatedDriver += Number(!!relocated[0]);
       sites.relocatedRecipient += Number(!!relocated[1]);
+      for (let j = 0; j < 2; j++)
+        if (gained[j] || relocated[j]) {
+          openings.add(
+            JSON.stringify([
+              c.p.roles[j].signature,
+              c.p.operand,
+              c.p.control.op,
+              from[j],
+              c.before[j],
+              c.after[j],
+            ])
+          );
+        }
+      sites.distinctOpenings = openings.size;
       sites.independent++;
       sites.newDriver += Number(!!gained[0]);
       sites.newRecipient += Number(!!gained[1]);
