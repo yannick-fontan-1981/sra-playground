@@ -294,3 +294,38 @@ Sur SS01 L2, le témoin émet 956 commandes et voit 170 images. La v14 émet 825
 La qualification sur les 100 sources a comparé 662 triplets. Les 67 différences d’arrivée apparentes du voyageur se réduisent à un cas où B a changé son point de départ et où C produit ensuite un nouveau déplacement. Dans ZIPP, C seul laisse le voyageur en `(29,25)`. B l’amène en `(13,25)`, puis C l’amène en `(13,9)`. Dans AS66, un triplet gagne et chacune des trois suppressions empêche cette victoire. La vérification séparée sur les commandes déjà présentes dans les archives, sans intervention ajoutée, couvre 2 904 commandes initiales et 1 531 aux niveaux supérieurs. Les décomptes par expérience et les empreintes des parties figurent dans le fichier de résultats.
 
 Le candidat `1cfdcfcbbbaa22a6813c42ad4f934be27e1b065e` et le témoin `7f2cb3eb29a4bd7640c3c38b71107af86b521ad5` étaient publiés avant les essais sur SS01. Les 118 parties sources et les deux parties cibles ont été rejouées. Les scores sources du témoin proviennent des parties archivées. SS09 L2 reste réservé.
+
+## Quinzième série · Choisir une destination et calculer où placer un objet
+
+SIC envisage que la destination d’une commande puisse dépendre d’un objet mobile. Il compare les repères du monde, du voyageur et des autres objets visibles, séparément pour chaque axe. Une relation mesurée dans deux dispositions différentes peut être utilisée dans les deux sens. Pour atteindre une cible visible, SIC soustrait le décalage observé, calcule le nombre entier de déplacements qui placeraient le mécanisme au bon endroit, puis annonce le placement, l’arrivée et l’usage suivant. Le moteur peut réfuter chacune de ces prévisions.
+
+### Une expérience avec deux avenirs possibles
+
+Dans VOIS L1, au même préfixe 16, le voyageur est en `(42,22)` et un objet en `(14,22)`. La commande seule conduit le voyageur en `(14,22)`. SIC a proposé les deux autres destinations avant de les essayer.
+
+| Préparation | Voyageur après préparation | Destination annoncée | Destination mesurée avec la même commande |
+| --- | --- | --- | --- |
+| Déplacer l’objet trois fois à droite | (42,22) | (26,22) | (26,22) |
+| Déplacer l’objet quatre fois à droite | (42,22) | (30,22) | (30,22) |
+
+Sur les préfixes des 100 traces initiales, 24 des 36 essais produisent l’arrivée annoncée, avec un déplacement vérifié du mécanisme et un résultat différent lorsqu’on retire la préparation ou la commande finale. Ils couvrent 16 dispositions distinctes dans VOIS et PORT. Neuf situations admettent au moins deux destinations. Huit suites produisent aussi l’effet suivant annoncé, qui disparaît dans les deux branches de contrôle. Sur huit exemples examinés séparément, aucun chemin de longueur un ou deux parmi les commandes déjà connues et omettant le geste préparatoire ne reproduit l’arrivée identifiable. Cette recherche exclut les branches terminales ou devenues visuellement ambiguës.
+
+En partie autonome, dans PORT L1, SIC déplace le repère de `(19,35)` à `(19,39)`. La commande seule aurait conduit en `(25,35)`. Après préparation, le voyageur arrive comme prévu en `(25,39)`, puis atteint `(23,45)` avec la commande suivante. Dans VOIS L1, SIC calcule une préparation de cinq gestes. Le moteur accorde la victoire au cinquième, à la commande 50, pendant le placement. Sur les 32 sous-séquences possibles, seule la série complète gagne depuis ce préfixe.
+
+### Mesure aux niveaux supérieurs et sur Custom 4
+
+| Épreuve en autonomie | Témoin v1 | v14 | v15 |
+| --- | ---: | ---: | ---: |
+| 100 niveaux sources initiaux | 65 | 57 | 58 |
+| 18 entrées L2–L5 des sept jeux | 7 | 8 | 8 |
+| SS01 L2 | 0 | 0 | 0 |
+
+Aux niveaux supérieurs, le candidat gagne GARE L2, GIGO L2 à L4, GRAV L2 et L3, et POLA L2 et L3. CATR L2–L3, CWSE L2, MOTO L2, GARE L3, GIGO L5, GRAV et POLA L4–L5 restent ouverts dans cette série. GRAV L3 conserve la victoire en 53 commandes décrite dans la série précédente. La v15 regagne VOIS L1 par rapport à la v14.
+
+Sur les trajectoires déjà jouées des 18 niveaux, la prévision produite avant d'observer chaque transition retrouve 677 des 805 destinations d’objets qui ont effectivement bougé, contre 448 pour la répétition du dernier déplacement. Elle prévoit aussi à tort un mouvement dans 171 des 235 cas immobiles. Sur tous les rôles identifiables, elle obtient donc 741/1 040 contre 659/1 040 pour l’exemple antérieur le plus proche. Dans MOTO L2, elle retrouve 102/102 arrivées en mouvement contre 37/102 pour le dernier déplacement. Un geste peut déplacer plusieurs objets. Sur les 100 entrées initiales, l’exemple le plus proche reste meilleur sur l’ensemble des cas identifiables, avec 482/548 contre 450/548.
+
+Lorsqu’on demande au modèle de *provoquer* une arrivée aux niveaux supérieurs, 8 préparations sur 121 atteignent le placement annoncé. Trois arrivées coïncident avec la prévision, et aucune chaîne ne satisfait les contrôles de suppression. Dans les 18 parties autonomes, SIC engage 19 expériences de repère mobile et aucune n’atteint son placement prévu. Connaître la réponse à une commande et savoir fabriquer les circonstances pour l’obtenir sont ici deux mesures distinctes.
+
+Pour SS01 L2, le témoin et le candidat ont été exportés de leurs balises publiées avant l’essai. La v15 émet 825 commandes et le témoin 959. À budget égal de 825 commandes, ils rencontrent respectivement 108 et 166 images distinctes. Aucun passage entre régions n’est détecté. La v15 suit exactement la trajectoire de la v14 et ne propose aucun placement avec le nouveau raisonnement. SS01 avait déjà servi dans les séries antérieures. SS09 L2 reste la confirmation réservée.
+
+Les 118 parties sources de la v15 et les deux parties de SS01 ont été rejouées à partir de leurs commandes. Les scores sources du témoin proviennent des archives. Balise candidate `sic-projected-affordances-source100-candidate-v15`, commit `53b18cc02cc8dfc9cb78fbecdb9c9fead193da41`. Témoin `7f2cb3eb29a4bd7640c3c38b71107af86b521ad5`. La compilation TypeScript passe. Sur 155 tests SIC, 154 passent et le test préexistant du champ `walk` dans la recharge d’un cycle orienté échoue.
