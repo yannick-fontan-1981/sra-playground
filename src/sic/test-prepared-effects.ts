@@ -18,8 +18,10 @@ import { exhaustedGroup } from './test-observed-compositions.ts';
 export const preparedEffectsId = 'sic_test_prepared_effects';
 import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
+import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  projection: 'Test a projected arrangement, arrival and subsequent action',
   capabilityUse: 'Exercise the predicted new access furnished by the invented capability',
   capabilityStep: 'Test a new capability derived from witnessed operators',
   accessContinue: 'Exercise an untested command at the predicted destination',
@@ -120,7 +122,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
             choices: experiment.equation!.choices,
           }
         : null;
-      const imagined = experiment.access
+      const projected = experiment.projection?.plan;
+      const imagined = projected ? { roles: projected.roles, placement: projected.steps[projected.arrival]!.from,
+        arrival: projected.steps[projected.arrival]!.to, continuation: projected.steps.at(-1), goals: projected.goals, alternatives: experiment.projection?.alternatives ?? [] } : experiment.access
         ? {
             chosen: {
               actor: experiment.access.card.law.actor,
@@ -207,6 +211,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     state: () => m,
     restore(value) {
       m = structuredClone(value as typeof m);
+      m.projection ??= newProjectionMemory();
       m.space ??= newSpatialMemory();
       m.equations ??= freshCapabilities();
     },

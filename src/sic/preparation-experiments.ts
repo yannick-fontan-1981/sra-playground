@@ -37,6 +37,7 @@ import {
   type CapabilityMemory,
   type CapabilityTrial,
 } from './derive-capabilities.ts';
+import { newProjectionMemory, proposeProjection, recordProjection, type Trial, type ProjectionMemory } from './projected-affordances.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -70,6 +71,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'projection'
     | 'prepare'
     | 'probe'
     | 'control'
@@ -102,6 +104,7 @@ export type Experiment = {
   prepEffect?: string;
   purpose?: string;
   refs: number[];
+  projection?: Trial;
   placement?: Placement;
   derive?: Derivation;
   equation?: CapabilityTrial;
@@ -130,9 +133,11 @@ export type Outcome = {
   strictMatch?: boolean;
   access?: Record<string, unknown>;
   equation?: Record<string, unknown>;
+  projection?: Record<string, unknown>;
 };
 export type Memory = {
   epoch: number;
+  projection: ProjectionMemory;
   space: SpatialMemory;
   equations: CapabilityMemory;
   scenes: string[];
@@ -154,6 +159,7 @@ export type Memory = {
 };
 export const initialMemory = (epoch: number): Memory => ({
   epoch,
+  projection: newProjectionMemory(),
   space: newSpatialMemory(),
   equations: freshCapabilities(),
   scenes: [],
@@ -328,6 +334,10 @@ export function selectExperiment(
   const s = m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
+  if (rows && (m.projection.active || (!m.pending && !m.equations.active && !m.space.active))) {
+    const projection = proposeProjection(m, o, rows, available, s);
+    if (projection) return projection;
+  }
   if (rows && (m.equations.active || (!m.pending && !m.space.active))) {
     const capability = proposeCapability(m, o, rows, available, s);
     if (capability) return capability;
@@ -573,6 +583,7 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  if (!x?.projection) m.projection.active = null;
   if (!x?.equation) {
     m.equations.active = null;
     m.equations.follow = null;
@@ -653,6 +664,10 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if (x.projection) {
+    const { result, detail } = recordProjection(m, x.projection, b, a);
+    return { ...out, result, projection: detail };
+  }
   if (x.equation) {
     const { result, detail } = recordCapability(m, x, a, b);
     return { ...out, result, equation: detail };
