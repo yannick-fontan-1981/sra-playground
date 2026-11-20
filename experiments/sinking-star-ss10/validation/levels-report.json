@@ -1,6 +1,6 @@
 {
   "game": "SS10",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "levels": [
     {
       "level": 1,
@@ -377,7 +377,7 @@
       "solved": true,
       "mapSha256": "ad714a67a28663315047a4695fd86d34c43a900eedc99f49165d9edb1d0f5154",
       "witnessSha256": "4ef99b26ff357daeef2b140f627661eedaea22f1e442b779d7fb9819c74646a0",
-      "observationsSha256": "e717353a03fe9f784db3f5981807446e9a6733cf9175f312e18417a87d8dcb38"
+      "observationsSha256": "b2877527983c32f683a73b4b23f15dc9421aa1e89fefe827a2a506a11e5979f9"
     },
     {
       "level": 8,
@@ -386,17 +386,16 @@
       "source": {
         "piston": false,
         "platform": false,
-        "label": "Reprise de Heroes and Water · énigme 3 · les cinq points d’appui",
-        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
-        "puzzle": 3,
-        "objective": "Construire les cinq appuis dans les directions gauche, haut, bas, droite puis gauche, et échanger les positions des héros pour livrer la dernière caisse."
+        "label": "Création originale · Relayer cinq caisses dans une traversée en chicane",
+        "url": "",
+        "objective": "Construire un appui à chacune des cinq coupures. Extraire les caisses des bords avec le Voleur puis les pousser dans l’eau avec le Guerrier."
       },
       "dimensions": [
         13,
-        9
+        15
       ],
-      "floorCells": 40,
-      "waterCells": 73,
+      "floorCells": 84,
+      "waterCells": 5,
       "initialStones": 5,
       "initialSupports": 0,
       "initialMonsters": 0,
@@ -404,13 +403,13 @@
       "gates": 0,
       "hydraulicPlatforms": 0,
       "buttons": 0,
-      "actions": 214,
-      "selections": 21,
-      "warriorPushes": 37,
-      "thiefPulls": 26,
-      "partnerMoves": 1,
+      "actions": 90,
+      "selections": 7,
+      "warriorPushes": 15,
+      "thiefPulls": 5,
+      "partnerMoves": 0,
       "chainPushes": 0,
-      "stoneMoves": 62,
+      "stoneMoves": 20,
       "mirrorMoves": 0,
       "reflections": 0,
       "heroReflections": 0,
@@ -424,24 +423,24 @@
       "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
       "hydraulicChanges": 0,
-      "frames": 600,
+      "frames": 256,
       "maxFrames": 3,
-      "recordedStages": 8,
+      "recordedStages": 6,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "7aadbf1ae32997cafea77ec2b7c8caf53f5eb5dec8c4fd99cdee8e27d96a0283",
-      "witnessSha256": "45e0a024bedb5e3199fb597e87a132f749ab1273d4f0331aed49a420944a368e",
-      "observationsSha256": "d1b883b358e8a881d40deba0c7f032d442b1346de924c4a583011d21165ab3ce"
+      "mapSha256": "ce7bc6654033e563e0ce300c03b647d0e34b8336713360c12e50d622bea3e86f",
+      "witnessSha256": "2b86b22063d3bf4baf4485056ab1032c906fcff9852dafd7e383e992d4a38795",
+      "observationsSha256": "f690c76e4a8f6bf69f2ebf134a56b3edf987d4ce1deace40fae876d50d6a662c"
     }
   ],
   "totals": {
-    "actions": 627,
-    "selections": 58,
-    "warriorPushes": 92,
-    "thiefPulls": 71,
-    "partnerMoves": 3,
+    "actions": 503,
+    "selections": 44,
+    "warriorPushes": 70,
+    "thiefPulls": 50,
+    "partnerMoves": 2,
     "chainPushes": 4,
-    "stoneMoves": 153,
+    "stoneMoves": 111,
     "mirrorMoves": 16,
     "reflections": 9,
     "heroReflections": 8,
@@ -455,7 +454,7 @@
     "cratesCrushed": 0,
     "simultaneousHeroReflections": 0,
     "hydraulicChanges": 2,
-    "frames": 1807
+    "frames": 1463
   },
   "failureRoutes": [
     {
@@ -693,7 +692,13 @@
     "twoHeroReflections": true,
     "lateralPress": true
   },
-  "htmlSha256": "cfad02b0336ebe019eae60dcb8668a237c16dcc5a73bc9dc7e60679bfaaef845",
+  "finaleChecks": {
+    "initialCrates": 5,
+    "initialSupports": 0,
+    "permanentSupports": 5,
+    "independentlyRequiredCuts": 5
+  },
+  "htmlSha256": "b55ac1d1f1239e22c7c80f2e8bdf66b96991acae8dca0e4997a6d2f9145a7eec",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",

@@ -3,128 +3,31 @@
     "id": "ss10-08",
     "title": "Les cinq points d’appui",
     "rows": [
-      "~~~~~~~~~~~~~",
-      "~~~~~~......~",
-      "~~~~~~.ooooo~",
-      "~~~~~~......~",
-      "~~~.........~",
-      "~~~.~#.T.W..~",
-      "~~~~~.###~~~~",
-      "~g~...~g~~~~~",
-      "~~~~~~~~~~~~~"
+      "#############",
+      "#.o.###....##",
+      "#....#..o..##",
+      "#W...~.....##",
+      "#..T.#....###",
+      "#########~###",
+      "###...##...##",
+      "##....~....##",
+      "##...o#..o###",
+      "###~#########",
+      "##...###...##",
+      "##....~..g..#",
+      "##.o..#...g.#",
+      "###...##...##",
+      "#############"
     ],
-    "facing": "W"
+    "facing": "E"
   },
-  "commands": "UULLLUURDDRDLLLLLDCUURDDRLLULLLLLCUUCRRRRURRRDDRLLULLLLLLCDDURCRDDDRRCRRUUURRRRDDRDLLLLLLLCLLUUDDRRCLDDCLRUCDRRLLUUURRRUUURRRRCDLLUUURRRUURRRRLDDLLLLLLDDDRRCDDRDLLLLLLLCLLUUDDRRCLDDCLRUCDRRRCDLCUCRRLLLUCDLLLLCDRRRR",
+  "commands": "CUULDDCRRRRRURRURDDDDDRCURRRRDRRRDDDUCDLLLLLUCDLLLLLDLLCDLLDDDDRDDLULURRRRRRRCRDDDRRRRDRRR",
   "actions": [
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 33,
-        "y": 33
-      }
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
     {
       "id": 6,
       "data": {
         "x": 21,
-        "y": 33
+        "y": 21
       }
     },
     {
@@ -132,28 +35,95 @@
     },
     {
       "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
     },
     {
       "id": 6,
       "data": {
         "x": 18,
-        "y": 30
+        "y": 21
       }
     },
     {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
       "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
     },
     {
       "id": 4
@@ -171,39 +141,15 @@
       "id": 2
     },
     {
-      "id": 4
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
+      "id": 2
     },
     {
       "id": 1
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
     },
     {
       "id": 6,
       "data": {
-        "x": 21,
+        "x": 42,
         "y": 27
       }
     },
@@ -211,10 +157,123 @@
       "id": 2
     },
     {
-      "id": 2
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
     },
     {
       "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 4
@@ -223,7 +282,7 @@
       "id": 6,
       "data": {
         "x": 18,
-        "y": 30
+        "y": 33
       }
     },
     {
@@ -245,34 +304,6 @@
       "id": 4
     },
     {
-      "id": 6,
-      "data": {
-        "x": 24,
-        "y": 30
-      }
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
       "id": 4
     },
     {
@@ -280,459 +311,6 @@
     },
     {
       "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 39
-      }
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 24,
-        "y": 30
-      }
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 39
-      }
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 21,
-        "y": 36
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 36
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 42,
-        "y": 21
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 39
-      }
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 24,
-        "y": 30
-      }
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 39
-      }
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 21,
-        "y": 36
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 36
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 39
-      }
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 24,
-        "y": 39
-      }
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 36
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 21,
-        "y": 36
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
     },
     {
       "id": 4
@@ -747,19 +325,18 @@
   "source": {
     "piston": false,
     "platform": false,
-    "label": "Reprise de Heroes and Water · énigme 3 · les cinq points d’appui",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
-    "puzzle": 3,
-    "objective": "Construire les cinq appuis dans les directions gauche, haut, bas, droite puis gauche, et échanger les positions des héros pour livrer la dernière caisse."
+    "label": "Création originale · Relayer cinq caisses dans une traversée en chicane",
+    "url": "",
+    "objective": "Construire un appui à chacune des cinq coupures. Extraire les caisses des bords avec le Voleur puis les pousser dans l’eau avec le Guerrier."
   },
   "metrics": {
-    "actions": 214,
-    "selections": 21,
-    "warriorPushes": 37,
-    "thiefPulls": 26,
-    "partnerMoves": 1,
+    "actions": 90,
+    "selections": 7,
+    "warriorPushes": 15,
+    "thiefPulls": 5,
+    "partnerMoves": 0,
     "chainPushes": 0,
-    "stoneMoves": 62,
+    "stoneMoves": 20,
     "mirrorMoves": 0,
     "reflections": 0,
     "heroReflections": 0,
@@ -771,93 +348,46 @@
   },
   "stages": [
     {
-      "label": "Premier appui à gauche : le Guerrier amène une caisse sur la passerelle et la pousse au-delà du coude.",
-      "turn": 17,
+      "label": "Le Voleur extrait la caisse de la rive nord et le Guerrier ouvre le passage est.",
+      "turn": 10,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 6,
-            "y": 9
-          }
-        },
-        {
-          "kind": "thief",
-          "at": {
-            "x": 10,
-            "y": 10
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 11,
-          "y": 7
-        },
-        {
-          "x": 12,
-          "y": 7
-        },
-        {
-          "x": 13,
-          "y": 7
-        },
-        {
-          "x": 14,
-          "y": 7
-        }
-      ],
-      "supports": [
-        {
-          "x": 5,
-          "y": 9
-        }
-      ],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {}
-    },
-    {
-      "label": "Deuxième appui en haut : le Guerrier attend sous le coude pendant que le Voleur tire la caisse depuis le premier appui.",
-      "turn": 35,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 6,
-            "y": 9
+            "x": 7,
+            "y": 5
           }
         },
         {
           "kind": "thief",
           "at": {
             "x": 5,
-            "y": 9
+            "y": 6
           }
         }
       ],
       "stones": [
         {
+          "x": 11,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
           "x": 12,
-          "y": 7
+          "y": 10
         },
         {
-          "x": 13,
-          "y": 7
-        },
-        {
-          "x": 14,
-          "y": 7
+          "x": 6,
+          "y": 14
         }
       ],
       "supports": [
         {
-          "x": 5,
-          "y": 9
-        },
-        {
-          "x": 6,
-          "y": 8
+          "x": 8,
+          "y": 5
         }
       ],
       "mirrors": [],
@@ -865,7 +395,101 @@
       "circuits": {}
     },
     {
-      "label": "Troisième appui vers le bas : depuis le nouvel appui supérieur, le Guerrier comble le trou qui donne accès à la passerelle inférieure.",
+      "label": "Le Guerrier aligne la deuxième caisse avant de la pousser vers le sud.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Voleur remonte la caisse du bassin central, puis le Guerrier ouvre le passage ouest.",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La traction sépare la caisse de la paroi droite. La poussée ouvre le passage sud.",
       "turn": 60,
       "heroes": [
         {
@@ -879,126 +503,32 @@
           "kind": "thief",
           "at": {
             "x": 5,
-            "y": 9
+            "y": 10
           }
         }
       ],
       "stones": [
         {
-          "x": 13,
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 12,
           "y": 7
         },
         {
-          "x": 14,
-          "y": 7
-        }
-      ],
-      "supports": [
-        {
-          "x": 5,
-          "y": 9
-        },
-        {
-          "x": 6,
-          "y": 8
-        },
-        {
-          "x": 6,
-          "y": 11
-        }
-      ],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {}
-    },
-    {
-      "label": "Quatrième appui à droite : le Voleur reçoit la caisse par le bas, la tire latéralement puis se gare dans la niche pour laisser pousser le Guerrier.",
-      "turn": 111,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 8,
-            "y": 12
-          }
-        },
-        {
-          "kind": "thief",
-          "at": {
-            "x": 8,
-            "y": 11
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 14,
-          "y": 7
-        }
-      ],
-      "supports": [
-        {
-          "x": 5,
-          "y": 9
-        },
-        {
-          "x": 6,
-          "y": 8
-        },
-        {
-          "x": 6,
-          "y": 11
-        },
-        {
           "x": 9,
-          "y": 12
-        }
-      ],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {}
-    },
-    {
-      "label": "La dernière caisse est garée provisoirement sur la destination droite pour ménager assez de place aux deux héros.",
-      "turn": 190,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 9,
-            "y": 12
-          }
-        },
-        {
-          "kind": "thief",
-          "at": {
-            "x": 8,
-            "y": 11
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 10,
-          "y": 12
-        }
-      ],
-      "supports": [
-        {
-          "x": 5,
           "y": 9
         },
         {
           "x": 6,
-          "y": 8
-        },
-        {
-          "x": 6,
           "y": 11
-        },
-        {
-          "x": 9,
-          "y": 12
         }
       ],
       "mirrors": [],
@@ -1006,80 +536,37 @@
       "circuits": {}
     },
     {
-      "label": "Échange de places : le Voleur tire le Guerrier vers la gauche, puis le Guerrier occupe la niche latérale.",
-      "turn": 195,
+      "label": "Le Guerrier ramène la dernière caisse sur la bonne ligne et comble le passage est.",
+      "turn": 73,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
             "x": 8,
-            "y": 11
+            "y": 13
           }
         },
         {
           "kind": "thief",
           "at": {
-            "x": 7,
-            "y": 12
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 10,
-          "y": 12
-        }
-      ],
-      "supports": [
-        {
-          "x": 5,
-          "y": 9
-        },
-        {
-          "x": 6,
-          "y": 8
-        },
-        {
-          "x": 6,
-          "y": 11
-        },
-        {
-          "x": 9,
-          "y": 12
-        }
-      ],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {}
-    },
-    {
-      "label": "Cinquième appui à gauche : le Voleur ramène la caisse devant le Guerrier, puis libère le passage pour la poussée finale.",
-      "turn": 206,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 6,
-            "y": 12
-          }
-        },
-        {
-          "kind": "thief",
-          "at": {
-            "x": 6,
-            "y": 11
+            "x": 5,
+            "y": 10
           }
         }
       ],
       "stones": [],
       "supports": [
         {
-          "x": 5,
-          "y": 9
+          "x": 8,
+          "y": 5
         },
         {
-          "x": 6,
-          "y": 8
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
         },
         {
           "x": 6,
@@ -1087,11 +574,7 @@
         },
         {
           "x": 9,
-          "y": 12
-        },
-        {
-          "x": 5,
-          "y": 12
+          "y": 13
         }
       ],
       "mirrors": [],
@@ -1099,33 +582,37 @@
       "circuits": {}
     },
     {
-      "label": "Les deux héros rejoignent les deux destinations au bout des cinq appuis construits.",
-      "turn": 214,
+      "label": "Les deux destinations sont occupées.",
+      "turn": 90,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 4,
-            "y": 12
+            "x": 12,
+            "y": 13
           }
         },
         {
           "kind": "thief",
           "at": {
-            "x": 10,
-            "y": 12
+            "x": 13,
+            "y": 14
           }
         }
       ],
       "stones": [],
       "supports": [
         {
-          "x": 5,
-          "y": 9
+          "x": 8,
+          "y": 5
         },
         {
-          "x": 6,
-          "y": 8
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
         },
         {
           "x": 6,
@@ -1133,11 +620,7 @@
         },
         {
           "x": 9,
-          "y": 12
-        },
-        {
-          "x": 5,
-          "y": 12
+          "y": 13
         }
       ],
       "mirrors": [],
@@ -1145,5 +628,9 @@
       "circuits": {}
     }
   ],
-  "adaptation": "Topologie des cellules, cinq caisses et positions initiales des deux héros relevées dans la capture et les storyboards publics de Heroes and Water 3 (Postmode, départ vers 0:25 ; disposition initiale visible à 0:30). La capture du guide montre une étape intermédiaire après quatre appuis : elle n’a pas été interprétée comme un départ avec quatre plateformes déjà construites. Les planches et le grand dallage deviennent du sol gris, les haies solides des murs gris foncé et les deux dalles orange des destinations jaunes. Une couronne d’eau d’une cellule conserve l’eau autour de la salle. Aucun miroir, bouton, porte ou monstre n’est ajouté. Les règles, sprites 3×3 et animations sont ceux du duo SS10."
+  "adaptation": {
+    "kind": "original",
+    "design": "Six secteurs en chicane, cinq coupures d’une case et cinq caisses réparties côté départ de chaque coupure.",
+    "proof": "On peut isoler chaque coupure en autorisant les quatre autres. Même sans les contraintes de déplacement des caisses, retirer une seule liaison coupe l’accès aux deux destinations."
+  }
 }

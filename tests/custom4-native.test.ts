@@ -43,13 +43,19 @@ import { SS09_LEVELS } from '../experiments/sinking-star-ss09/src/levels.ts';
 import { heroSelection as chorusHeroSelection, lessonIds as chorusLessonIds, observeLesson as observeChorusLesson, visibleHeroes as visibleChorusHeroes, type ChorusLesson } from '../experiments/sinking-star-ss09/src/tutorial.ts';
 import ss09Witnesses from '../experiments/sinking-star-ss09/tests/witnesses.json' with { type: 'json' };
 import ss09Failures from '../experiments/sinking-star-ss09/tests/failures.json' with { type: 'json' };
+import { createSs10Backend } from '../src/games/sinking-star-ss10.ts';
+import { DuoPuzzleSession as WarehouseDuoSession, compileLevel as compileWarehouseLevel } from '../experiments/sinking-star-ss10/src/core.ts';
+import { SS10_LEVELS } from '../experiments/sinking-star-ss10/src/levels.ts';
+import { heroSelection as warehouseHeroSelection, lessonIds as warehouseLessonIds, observeLesson as observeWarehouseLesson, visibleHeroes as visibleWarehouseHeroes, type WarehouseLesson } from '../experiments/sinking-star-ss10/src/tutorial.ts';
+import ss10Witnesses from '../experiments/sinking-star-ss10/tests/witnesses.json' with { type: 'json' };
+import ss10Failures from '../experiments/sinking-star-ss10/tests/failures.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS09 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS10 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 109);
+  assert.equal(GAME_CATALOG.length, 110);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -93,6 +99,13 @@ test('Custom 4 lists SS01 through SS09 and preserves all four legacy collections
   assert.equal(ss09?.levels, 8);
   assert.equal(ss09?.availability, 'playable');
   assert.match(ss09!.sourceUrl, /experiments\/sinking-star-ss09\/src\/levels\.ts$/);
+  const ss10 = getGameByCode(' ss10 ');
+  assert.equal(ss10?.id, 'ss10-c4000001');
+  assert.equal(ss10?.name, 'L’Entrepôt Réversible');
+  assert.equal(ss10?.family, 'sinking_star_duo');
+  assert.equal(ss10?.levels, 8);
+  assert.equal(ss10?.availability, 'playable');
+  assert.match(ss10!.sourceUrl, /experiments\/sinking-star-ss10\/src\/levels\.ts$/);
 });
 test('SS01 loads natively without invoking the Python loader', async () => {
   let legacyLoads = 0;
@@ -226,10 +239,11 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS07' })).gameCode, 'SS07');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS08' })).gameCode, 'SS08');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS09' })).gameCode, 'SS09');
+  assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS10' })).gameCode, 'SS10');
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS09']) {
+  for (const code of ['CASC', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -1099,5 +1113,158 @@ for (const [index, { level, actions }] of ss09Failures.entries()) {
     assert.deepEqual(restored.frame, previous.frame);
     assert.equal(restored.state, 'NOT_FINISHED');
     assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), initial);
+  });
+}
+
+test('SS10 matches the laboratory in all eight rooms and records twelve tutorial discoveries', async () => {
+  const backend = createSs10Backend();
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new WarehouseDuoSession(SS10_LEVELS);
+  const lessons = new Set<WarehouseLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss10 ' });
+  assert.deepEqual(current, await backend.dispatch({ type: 'load', code: 'SS10' }));
+  assert.deepEqual(current, reference.observe());
+  const publicKeys = Object.keys(current);
+  const pressWorld = compileWarehouseLevel(SS10_LEVELS[6]!);
+  assert.deepEqual(Object.fromEntries(pressWorld.circuits.map(({ id, color }) => [id, color])), { presse: 0, pont: 14, sortie: 15 });
+  const button = pressWorld.circuits.find(circuit => circuit.id === 'presse')!.buttons[0]!;
+  const gate = pressWorld.gates.find(item => item.circuit === 'presse')!.at;
+  const tile = (frame: number[][], at: { x: number; y: number }) =>
+    frame.slice(2 + 3 * at.y, 5 + 3 * at.y).map(row => row.slice(2 + 3 * at.x, 5 + 3 * at.x));
+  let actions = 0, selections = 0, frames = 0;
+  let whiteButton = false, whiteGate = false;
+  for (const { level, actions: route } of ss10Witnesses) {
+    assert.equal(current.level, level);
+    assert.deepEqual(visibleWarehouseHeroes(current.frame).map(hero => hero.kind).sort(), ['thief', 'warrior']);
+    assert.equal(visibleWarehouseHeroes(current.frame).find(hero => hero.selected)?.kind, 'warrior');
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const request = { type: 'action', actionId: id, data } as const;
+      const expected = reference.action(id, data);
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(await backend.dispatch(request), expected);
+      assert.deepEqual(current.availableActionIds, [1, 2, 3, 4, 5, 6]);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.ok(current.frames.every(frame => frame.length === 64 && frame.every(row => row.length === 64)));
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleWarehouseHeroes(frame).map(({ x, y, kind }) => ({ x, y, kind }));
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      if (level === 7) {
+        for (const frame of current.frames) {
+          const b = tile(frame, button), g = tile(frame, gate);
+          whiteButton ||= b[1]![1] === 0 && [b[0]![1], b[1]![0], b[1]![2], b[2]![1]].every(value => value === 7);
+          whiteGate ||= [g[0]![0], g[0]![2], g[2]![0], g[2]![2]].every(value => value === 7)
+            && [g[0]![1], g[1]![0], g[1]![2], g[2]![1]].filter(value => value === 0).length === 3;
+        }
+      }
+      observeWarehouseLesson(lessons, before, current, id);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    if (level === 1) assert.deepEqual(warehouseLessonIds.filter(lesson => lessons.has(lesson)), [...warehouseLessonIds]);
+  }
+  assert.ok(whiteButton && whiteGate);
+  assert.equal(SS10_LEVELS[5]!.title, 'Le dernier changement de sens');
+  assert.deepEqual([actions, selections, frames], [503, 44, 1463]);
+  assert.equal(current.state, 'WIN');
+  const finale = compileWarehouseLevel(SS10_LEVELS[7]!);
+  assert.equal(finale.stones.length, 5);
+  const water = finale.terrain.flatMap((terrain, index) => terrain === '~' ? [{ x: index % 20, y: Math.floor(index / 20) }] : []);
+  assert.equal(water.length, 5);
+  for (const at of water) assert.deepEqual(tile(current.frame, at), [[10, 13, 10], [13, 10, 13], [10, 13, 10]]);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), reference.observe());
+  assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), reference.undo());
+});
+
+test('SS10 level 5 flashes only the backing of two blocking mirrors and replays the warning without new Undo', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new WarehouseDuoSession(SS10_LEVELS);
+  let current = await dispatcher.dispatch({ type: 'load', code: 'SS10', level: 5 });
+  assert.deepEqual(current, reference.selectLevel(5));
+  for (const command of 'LLUULCD') {
+    const actionId = { L: 3, U: 1, D: 2, C: 6 }[command]!;
+    const data = actionId === 6 ? warehouseHeroSelection(current.frame) : undefined;
+    current = await dispatcher.dispatch({ type: 'action', actionId, data });
+    assert.deepEqual(current, reference.action(actionId, data));
+  }
+  const before = reference.observe();
+  const warning = await dispatcher.dispatch({ type: 'action', actionId: 5 });
+  assert.deepEqual(warning, reference.action(5));
+  assert.deepEqual(warning.frameDurationsMs, [110, 70, 110, 0]);
+  assert.equal(warning.frames.length, 4);
+  assert.deepEqual(warning.frames[0], warning.frames[2]);
+  assert.deepEqual(warning.frames[1], before.frame);
+  assert.deepEqual(warning.frame, before.frame);
+  const tiles = new Set<number>();
+  for (let y = 0; y < 64; y++) for (let x = 0; x < 64; x++) {
+    if (warning.frames[0]![y]![x] === before.frame[y]![x]) continue;
+    assert.deepEqual([before.frame[y]![x], warning.frames[0]![y]![x]], [5, 8]);
+    tiles.add(Math.floor((y - 2) / 3) * 20 + Math.floor((x - 2) / 3));
+  }
+  assert.equal(tiles.size, 2);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), warning);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), reference.reset());
+});
+
+test('SS10 validates ACTION6, preserves the adapter on bad loads and restores out-of-order completion', async () => {
+  const backend = createSs10Backend();
+  const reference = new WarehouseDuoSession(SS10_LEVELS);
+  const initial = await backend.dispatch({ type: 'load', code: 'SS10', level: 8 });
+  assert.deepEqual(initial, reference.selectLevel(8));
+  for (const level of [0, 9, 1.5]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS10', level }), /Invalid level/);
+    assert.throws(() => backend.dispatch({ type: 'selectLevel', level }), /Invalid level/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS10 action/);
+  assert.throws(() => backend.dispatch({ type: 'nextMerchant' }), /ACTION6/);
+  for (const data of [undefined, { x: -1, y: 3 }, { x: 3, y: 64 }, { x: 1.5, y: 3 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  const data = warehouseHeroSelection(initial.frame, 'thief');
+  assert.ok(data);
+  const selectThief = { type: 'action', actionId: 6, data } as const;
+  const selected = await backend.dispatch(selectThief);
+  assert.deepEqual(selected, reference.action(6, data));
+  assert.deepEqual(await backend.dispatch(selectThief), reference.observe());
+  assert.deepEqual(await backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(await backend.dispatch(selectThief), selected);
+  assert.deepEqual(await backend.dispatch({ type: 'reset' }), reference.reset());
+  for (const { id, data } of ss10Witnesses[7]!.actions as DuoAction[]) {
+    assert.deepEqual(await backend.dispatch({ type: 'action', actionId: id, data }), reference.action(id, data));
+  }
+  assert.deepEqual([reference.observe().level, reference.observe().levelsCompleted], [1, 1]);
+  const undone = await backend.dispatch({ type: 'undo' });
+  assert.deepEqual(undone, reference.undo());
+  assert.deepEqual([undone.level, undone.levelsCompleted], [8, 0]);
+  assert.deepEqual(await backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+for (const { level, actions } of ss10Failures) {
+  test(`SS10 level ${level} retains its reachable defeat and Undo returns to the last safe state`, async () => {
+    const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+    const reference = new WarehouseDuoSession(SS10_LEVELS);
+    let current = await dispatcher.dispatch({ type: 'load', code: 'SS10', level });
+    let previous = current;
+    assert.deepEqual(current, reference.selectLevel(level));
+    for (const { id, data } of actions as DuoAction[]) {
+      previous = current;
+      current = await dispatcher.dispatch({ type: 'action', actionId: id, data });
+      assert.deepEqual(current, reference.action(id, data));
+    }
+    assert.equal(current.state, 'GAME_OVER');
+    assert.ok(current.frames.length > 1);
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), reference.observe());
+    const restored = await dispatcher.dispatch({ type: 'undo' });
+    assert.deepEqual(restored, reference.undo());
+    assert.deepEqual(restored.frame, previous.frame);
+    assert.equal(restored.state, 'NOT_FINISHED');
   });
 }

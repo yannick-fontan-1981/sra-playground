@@ -1,17 +1,16 @@
 # SS10 — L’Entrepôt Réversible
 
-**Guerrier rouge + Voleur vert · 8 niveaux · version 0.2.0**
+**Guerrier rouge + Voleur vert · 8 niveaux · version 0.3.0**
 
-Laboratoire autonome destiné au dixième jeu du lot Custom 4 de SRA Playground.
+Laboratoire autonome du dixième jeu du lot Custom 4. [Jouer à SS10 dans le Playground](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS10#playground)
 Le tutoriel concentre douze découvertes : marche, sélection, poussée simple et en
 chaîne, traction, séparation des caisses, lâcher latéral, déplacement du miroir,
 appuis dans l’eau, reflet, bouton/presse et deux destinations simultanées.
 
 Le Guerrier pousse une file complète ; le Voleur tire une seule pièce adjacente.
-Chaque niveau possède un parcours gagnant enregistré. Les six adaptations et la reprise du dernier niveau
-utilisent des problèmes décrits dans les index [Nord](https://sinkingstarwalkthrough.com/fr/north/)
+Chaque niveau possède un parcours gagnant enregistré. Les six adaptations reprennent des principes décrits dans les index [Nord](https://sinkingstarwalkthrough.com/fr/north/)
 et [Zones mixtes](https://sinkingstarwalkthrough.com/fr/crossovers/).
-Les références et changements sont détaillés dans [la provenance](docs/provenance.md).
+La finale originale fait traverser cinq coupures d’eau en chicane en transformant les cinq caisses en appuis. Les références sont détaillées dans [la provenance](docs/provenance.md).
 
 ## Jouer
 
@@ -55,14 +54,7 @@ reproductible des cartes sont conservés dans `reference/author/`.
 
 ## Intégration
 
-La livraison intègre les corrections du socle des miroirs et du circuit rose-blanc
-du niveau 7, puis le déplacement de l’ancien niveau 8 au niveau 6 et la reprise
-de Heroes and Water 3 en dernier niveau. L’utilisateur a demandé l’intégration
-du laboratoire sur `main`. Le [prompt Codex de raccordement](docs/integration-prompt.md)
-décrit l’étape suivante : enregistrer SS10 dans le catalogue natif et publier le Site. Le
-raccordement natif devra conserver la parité des images, des actions, du tutoriel,
-d’Annuler et de la progression. Le nom prévu est **L’Entrepôt Réversible**, code **SS10**,
-collection **Custom 4**, avec huit niveaux.
+Le Playground utilise le même moteur TypeScript et les mêmes cartes, avec le Guerrier en rôle 1 et le Voleur en rôle 2. Le tutoriel du Site partage les lecteurs de pixels du HTML autonome. Les [résultats de validation](docs/validation.md) couvrent le raccordement natif, les corrections de rendu et la finale originale.
 
 Les résultats des témoins établissent la solvabilité. Les contrôles de nécessité
 sont séparés et précisent quelles recherches ont réellement épuisé les états.

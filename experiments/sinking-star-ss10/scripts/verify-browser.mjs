@@ -14,7 +14,7 @@ const htmlPath=resolve(root,'dist/SS10-demo.html');
 const witnesses=JSON.parse(readFileSync(resolve(root,'tests/witnesses.json'),'utf8'));
 const failures=JSON.parse(readFileSync(resolve(root,'tests/failures.json'),'utf8'));
 const lessonIds=['move','select','warrior-push','chain','thief-pull','single-pull','release','mirror-motion','platform','mirror','gate','goals'];
-const report={success:false,environment:'Native /usr/bin/chromium, Playwright, file:// standalone HTML',htmlSha256:createHash('sha256').update(readFileSync(htmlPath)).digest('hex'),checks:[],campaign:{levels:0,actions:0,frames:0,selections:0,finalFramesComparedByteForByte:0},networkRequests:[],consoleErrors:[],pageErrors:[],screenshots:[]};
+const report={success:false,environment:'Chromium, Playwright, file:// standalone HTML',htmlSha256:createHash('sha256').update(readFileSync(htmlPath)).digest('hex'),checks:[],campaign:{levels:0,actions:0,frames:0,selections:0,finalFramesComparedByteForByte:0},networkRequests:[],consoleErrors:[],pageErrors:[],screenshots:[]};
 const rgb=PALETTE.map(c=>parseInt(c.slice(1),16));
 const rgba=frame=>Uint8Array.from(frame.flatMap(row=>row.flatMap(c=>[rgb[c]>>>16,(rgb[c]>>>8)&255,rgb[c]&255,255])));
 function digest(data){let h=2166136261;for(const x of data){h^=x;h=Math.imul(h,16777619);}return(h>>>0).toString(16);}

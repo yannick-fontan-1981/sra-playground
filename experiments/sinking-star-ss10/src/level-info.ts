@@ -57,9 +57,8 @@ export const LEVEL_INFO=[
   {
     "piston": false,
     "platform": false,
-    "label": "Reprise de Heroes and Water · énigme 3 · les cinq points d’appui",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
-    "puzzle": 3,
-    "objective": "Construire les cinq appuis dans les directions gauche, haut, bas, droite puis gauche, et échanger les positions des héros pour livrer la dernière caisse."
+    "label": "Création originale · Relayer cinq caisses dans une traversée en chicane",
+    "url": "",
+    "objective": "Construire un appui à chacune des cinq coupures. Extraire les caisses des bords avec le Voleur puis les pousser dans l’eau avec le Guerrier."
   }
 ] as const;

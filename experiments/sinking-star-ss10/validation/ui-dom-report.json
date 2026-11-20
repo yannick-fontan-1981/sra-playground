@@ -1,6 +1,6 @@
 {
   "success": true,
-  "htmlSha256": "cfad02b0336ebe019eae60dcb8668a237c16dcc5a73bc9dc7e60679bfaaef845",
+  "htmlSha256": "b55ac1d1f1239e22c7c80f2e8bdf66b96991acae8dca0e4997a6d2f9145a7eec",
   "scope": "full-campaign",
   "environment": "Happy DOM running actual compiled standalone HTML, canvas RGBA buffers and controlled animation timers",
   "visualBrowserTest": false,
@@ -45,9 +45,9 @@
       7,
       8
     ],
-    "actions": 627,
-    "frames": 1807,
-    "selections": 58,
+    "actions": 503,
+    "frames": 1463,
+    "selections": 44,
     "allPixelsAndDurationsCompared": true
   },
   "defeatCoverage": [

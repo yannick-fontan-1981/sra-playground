@@ -84,7 +84,9 @@ try{
   for(let level=1;level<=8;level++){
    if(skipLevel5&&level===5)continue;
    await h.choose(level);const initial=ref.observe();assert.deepEqual(heroes(initial.frame).map(p=>p.color).sort((a,b)=>a-b),[8,14]);assert.equal(goalCount(initial.frame),2);assert.equal($('tutorial').hidden,level!==1);
-   assert.equal($('piston-help').hidden,!LEVEL_INFO[level-1].piston);assert.equal($('source-link').href,new URL(LEVEL_INFO[level-1].url).href);
+   const source=LEVEL_INFO[level-1];
+   assert.equal($('piston-help').hidden,!source.piston);assert.equal($('source-link').hidden,!source.url);
+   if(source.url)assert.equal($('source-link').href,new URL(source.url).href);
    for(const id of ['platform-help','platform-legend-active','platform-legend-inactive'])assert.equal($(id).hidden,!SS10_LEVELS[level-1].platforms?.length);
   }
   report.checks.push('Each checked room displays both heroes,two goals,its own source and the correct press/platform help.');

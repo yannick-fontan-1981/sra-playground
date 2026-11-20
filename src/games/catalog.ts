@@ -1162,6 +1162,9 @@ records.push({code:'SS08',id:'ss08-c4000001',name:'La Double Transposition',grou
 records.push({code:'SS09',id:'ss09-c4000001',name:'Le Chœur des Miroirs',group:'custom_4',family:'sinking_star_duo',levels:8,
   description:'Pair the Merchant’s push with the Bard’s song to move crates, monsters and supports, then cross with mirrors.',
   sourcePath:'experiments/sinking-star-ss09/src/levels.ts',availability:'playable'});
+records.push({code:'SS10',id:'ss10-c4000001',name:'L’Entrepôt Réversible',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Push chains of crates with the Warrior, pull them with the Thief, and build crossings with permanent supports.',
+  sourcePath:'experiments/sinking-star-ss10/src/levels.ts',availability:'playable'});
 
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
