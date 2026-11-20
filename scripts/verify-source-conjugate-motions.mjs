@@ -70,7 +70,8 @@ for (const file of files)
       soleRestored = 0;
     const direct = new Map(),
       endpoints = new Set(),
-      jointEndpoints = new Set();
+      jointEndpoints = new Set(),
+      configurations = [];
     for (const h of row.conjugates) {
       const origin = await pose(first, h.roles),
         actualDirect = await pose(execute([h.d]), h.roles);
@@ -129,6 +130,12 @@ for (const file of files)
           break;
         }
       }
+      configurations.push({
+        positions: plan.p,
+        writes: plan.writes.length,
+        commands: plan.word.length,
+        result: wins(b) ? 'official_completion' : ok ? 'exact' : 'refuted',
+      });
       if (wins(b)) won++;
       else if (ok) {
         joint++;
@@ -162,6 +169,7 @@ for (const file of files)
       ],
       conjugateSeal: row.conjugateSeal,
       jointSeal: row.jointSeal,
+      ...(row.uniqueGoals ? { configurations } : {}),
     });
   }
 await writeFile(out, JSON.stringify(reports));

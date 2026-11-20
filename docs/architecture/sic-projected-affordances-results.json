@@ -20419,5 +20419,6350 @@
         }
       ]
     }
+  },
+  "placedExchangeV13": {
+    "candidateTag": "sic-projected-affordances-source100-candidate-v13",
+    "controlTag": "sic-projected-affordances-source100-control-v1",
+    "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+    "ss09Reserved": true,
+    "autonomous": {
+      "original": {
+        "cases": 100,
+        "won": 58,
+        "changesFromV12": {
+          "VOIS/1": "lost"
+        },
+        "exchanges": {
+          "plans": 11,
+          "placements": 7,
+          "triggers": 7,
+          "arrivals": 7,
+          "uses": 7,
+          "exactUses": 5,
+          "official": 0,
+          "destinations": 7,
+          "exclusionUses": 0
+        },
+        "entries": [
+          {
+            "code": "AMZE",
+            "level": 1,
+            "won": true,
+            "actions": 3,
+            "initial": "0859ffa1372ea6ac6d27ebb210802441bd8af406bafdba55073752f132375bb7",
+            "trajectory": "db4094d0ff20d649c2877073e36ae0aa7be871f4a140e53509627af3801dfd69",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CATR",
+            "level": 1,
+            "won": true,
+            "actions": 29,
+            "initial": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+            "trajectory": "34735c23d8869ce9fbbd9fefe28604f9f8f53efb49d3f1d8bf4f20d84639f16b",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "COLM",
+            "level": 1,
+            "won": true,
+            "actions": 20,
+            "initial": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+            "trajectory": "ecd46ae97f9d95dd39739e82e071b5bae820aa1f22db4c50d721996a10ff8fe7",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "DC22",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+            "trajectory": "c47e4af6efb87f286f3df20f771af132da1761e97577d380d710f0bd07ee70ca",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "EVAS",
+            "level": 1,
+            "won": true,
+            "actions": 3,
+            "initial": "ceac639fe38e32deec9e52b3735a601e68b464736e3187d5644c2854fbfd3bc5",
+            "trajectory": "af6c7c4e88a7628f637a7aa7e2159823b27d8659c74864042c2ad51c92cda947",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GABA",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+            "trajectory": "0ba48a0322c100f15deaa15ccfec23b45e4813dc993ace7d1f872e875bd9f8a2",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GRAV",
+            "level": 1,
+            "won": true,
+            "actions": 11,
+            "initial": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+            "trajectory": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "KA59",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "a5391f47a4b5f63feb8af396ab4b0bbdd2f80a18a0f19ffe6f128765e9d75e2c",
+            "trajectory": "d156066b8f6488b0cead1c6824cfd990f5591b2b9f133e765e84118bcba1c75e",
+            "exchanges": {
+              "plans": 5,
+              "placements": 2,
+              "triggers": 2,
+              "arrivals": 2,
+              "uses": 2,
+              "exactUses": 0,
+              "official": 0,
+              "destinations": 2,
+              "exclusionUses": 0
+            }
+          },
+          {
+            "code": "LKEY",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+            "trajectory": "c12090962573496829bc0e15dc960f9b7d9e1db9230b39d972392c32fc3547e0",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "MEMO",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "trajectory": "8f13c95fc20c81d06c23ab5eac5a867efacd67d4801b6e38e866c8144e9469af",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "PORT",
+            "level": 1,
+            "won": true,
+            "actions": 17,
+            "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+            "trajectory": "7f00821450d8c56c8a8a80fa6cccfada84814c3347fe8cb6e732a05b41427978",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "REWI",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+            "trajectory": "8fe4da729b2019466756310c91195d48a8a440ef214822b859f13120d704e1d2",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SEQN",
+            "level": 1,
+            "won": true,
+            "actions": 4,
+            "initial": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+            "trajectory": "5283d0eab00c72914b5720848cfaa52b5586e52c632e4c8eb9639f4b9df5b2a1",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SNAR",
+            "level": 1,
+            "won": true,
+            "actions": 20,
+            "initial": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+            "trajectory": "1874cb32d64355e48b101690e518ba8f01bd40e555182786fbb8bb39945553fb",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SYME",
+            "level": 1,
+            "won": true,
+            "actions": 9,
+            "initial": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+            "trajectory": "7e7a9f390451b705beac8689a7a20c396a6d1870888aa07c73bdc57e17dc8f86",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "TRCP",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "03590df58a79831a29e72b892f3a529280a4eced2dd549b81c7710887a42bda2",
+            "trajectory": "ed6b7af03d912e48fd3ecf97e6da57752a394869850295a69e7fbd347cc94464",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "VOIS",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+            "trajectory": "63e07c9230aec13df432f39be1c3c0aa872e0a756368467e7a098d069780a34b",
+            "exchanges": {
+              "plans": 6,
+              "placements": 5,
+              "triggers": 5,
+              "arrivals": 5,
+              "uses": 5,
+              "exactUses": 5,
+              "official": 0,
+              "destinations": 5,
+              "exclusionUses": 0
+            }
+          },
+          {
+            "code": "AR25",
+            "level": 1,
+            "won": true,
+            "actions": 17,
+            "initial": "dcb73927160522c26e2655d31ead221e6da6aab818037d20388bbf46e9afa1b0",
+            "trajectory": "79a55cb7b2a69f8c21b10535cf8c671246e17841b1ff5f295bff30039653817b",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CAVA",
+            "level": 1,
+            "won": true,
+            "actions": 7,
+            "initial": "3a81cada09d4393d3485a246ad461ef1d6166729c0ac6be0de0c61333c2891a0",
+            "trajectory": "0fbbe16a8f1b47ec732708f4ab9132037bcc972efb781160f952d2143f34a1ad",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "COMB",
+            "level": 1,
+            "won": true,
+            "actions": 8,
+            "initial": "a188f019a6b99b2b0e8e6bdb65d91087423c62941d320a2b204edfcb1e1a17fa",
+            "trajectory": "20b99f9a68d710d8c7bc0927b2b8b9eecc20f6b7f05a8047181dfc9e03e09fdc",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "DICO",
+            "level": 1,
+            "won": true,
+            "actions": 5,
+            "initial": "4c66a07b55379fb40871c5ebf6ed4908fe63b83c977c44d48c75cd73cc13bb55",
+            "trajectory": "935fd2f68db9be830769323777f4ba80424a0c356ff25877816bc6d990acaad7",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "FITE",
+            "level": 1,
+            "won": true,
+            "actions": 14,
+            "initial": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+            "trajectory": "6996348f349912a277c9d4213e4a1881b60da633aa29cc360b738f57bb4a4526",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GARE",
+            "level": 1,
+            "won": true,
+            "actions": 11,
+            "initial": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+            "trajectory": "28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GRIL",
+            "level": 1,
+            "won": true,
+            "actions": 5,
+            "initial": "586f549f819870203dd5c0e39249781c696f013f174149462967d1aeefcd224a",
+            "trajectory": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "KATA",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "6b968a6e6ad21fd191e6e71b41ec2062fab66dd436551e5c7615bb8a262709de",
+            "trajectory": "b2abd07c1a647dbdc43dbdfe7d7145cfa88b4a32b7ae8fe4e9848d63be39612d",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "LOGI",
+            "level": 1,
+            "won": true,
+            "actions": 16,
+            "initial": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+            "trajectory": "3797729448d2e3d6d720ba051f04ca60f7f6edd592a791f45461226058f1bc4f",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "MIND",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+            "trajectory": "e6fd3ba851163709aa76c36b09951a598c3925f9064a04d1775418bc7d70ab57",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "PRTL",
+            "level": 1,
+            "won": true,
+            "actions": 6,
+            "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+            "trajectory": "2d4f52bd81c100ce13b0cafc0e2ee2561d106f0a78bef9b84468d3d4b3ef5682",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "RSWP",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+            "trajectory": "8bc5046f323ffa8de90799527dc0649afd76377fc5c3ffe1f5fb5df2e2519b94",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SERI",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+            "trajectory": "fcecb72a75fff9d9dc9a3f73ab2c46c6f2af59b35f30ed1702ae5f3c74ee31de",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SP80",
+            "level": 1,
+            "won": false,
+            "actions": 30,
+            "initial": "0ba719661c41cd3db3499afa4ec373d1ae79386e50c866e2487946b59a255b1b",
+            "trajectory": "d89092aa9089e65eadd9af2f48c73c2623c48c0827c62589c1cad8eaa4c7acc4",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "TEQU",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+            "trajectory": "7f60291057c952f21ebe743bdab047237125ef533ecd68ded47a91f2d87b8163",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "TRIA",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+            "trajectory": "082047a49ae38ab25f9c75a3d7023b41da3524a8631cbe83503176be2b9defe0",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "WA30",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "22f3ccd4739a85cebbd807dc32cee300c3e43630d38a8422ccf48e81fba53e82",
+            "trajectory": "63d8387d1b7d8b1dbdc6e4f04b4c58c43e60398adb6607924ffbd6ab8a66d3a8",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "AS66",
+            "level": 1,
+            "won": true,
+            "actions": 13,
+            "initial": "39bddf2920c3e13f28141733944f4c45ff9b67f56c82a0069b7ae8064eeb01c6",
+            "trajectory": "2d76ec1eb85f7cbf087d35b893937cb7fe907929ac4d84a3631ee611ac3a8f65",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CD82",
+            "level": 1,
+            "won": true,
+            "actions": 9,
+            "initial": "824ef203a4308533d58fd0b7207d4bb4396f1ac1b6ed8bf4a5160259c94a6904",
+            "trajectory": "10cfd4ca1bd7a8fbd1ef29cd82b4c79f7724ef3a742cf0e0a40666657de739cd",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CONN",
+            "level": 1,
+            "won": true,
+            "actions": 24,
+            "initial": "8582db376241703619ffe1d10270b7cc526be874c62085c23b4f31e89979bee7",
+            "trajectory": "b1436664926e73c63184c7713966ec8cf3e5bd45a6b736356c4ed6f5b8d75f9e",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "DNOI",
+            "level": 1,
+            "won": true,
+            "actions": 3,
+            "initial": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+            "trajectory": "014592cae2a8177663fa4474781f23120894cac027a7feee97f62639a67d8cf9",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "FOGW",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+            "trajectory": "bf5af35da0a9cdff32d6339a2dbf2dd48d9469ba1cda9796b8cee4598f0a73f3",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 1,
+            "won": true,
+            "actions": 7,
+            "initial": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+            "trajectory": "48b27b2033f9321ea8a90d6eacd08c7b4e530231021287357bc0195e3ca92240",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "HANO",
+            "level": 1,
+            "won": true,
+            "actions": 6,
+            "initial": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+            "trajectory": "408b29ae198b9fb6c4cd85cff5958c67637634e7ace5c7207b1e5c7f7aac367e",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "KEYD",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+            "trajectory": "fd94a4f4a568764714352fcec410f304423f4c7878a23b62b5f4a8c049d08651",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "LP85",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "10d339c4ff95d67f9c94ded838ab2080df929551e32ae1443ffa888cd580632a",
+            "trajectory": "4a8903f2a440dbfd102d5b33232a6b74741f7ea693d852251fd82110e824179e",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "MOTO",
+            "level": 1,
+            "won": true,
+            "actions": 10,
+            "initial": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+            "trajectory": "98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "R11L",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+            "trajectory": "5938498ae59c3b98a7b9de45d77b958980c34992acd866c4b42233d985fa77dd",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "S5I5",
+            "level": 1,
+            "won": false,
+            "actions": 50,
+            "initial": "0de899ef426dee32a5ae69f04d75484537ada1c8a01db97fc25b240227139335",
+            "trajectory": "f4fe920b29a16fae6fae8d9ca18c327a6403791fc0fb5c87fcaed39eaf0638ac",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SIGN",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+            "trajectory": "f3eb2ccc8c9340ca861ec12c5446ae9f169a5c47a00aff4a86edcf6b10df1461",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SPOR",
+            "level": 1,
+            "won": true,
+            "actions": 18,
+            "initial": "ef7046fff5e68e4fe5410037c13726829e2670eccd87b21574aa8de5d518cd1c",
+            "trajectory": "1c56c9bc869b580013d1f87205d1d160221db32767d8525bb98a48dab2eab345",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "THER",
+            "level": 1,
+            "won": true,
+            "actions": 21,
+            "initial": "e4949964e4d02658f8a3a275445fa1d2e2e46af5d370cf0269d20527e9215e54",
+            "trajectory": "f34dc125dead189376cba752f03e6eac52b461d07cecde551a69015b944ac03d",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "TU93",
+            "level": 1,
+            "won": false,
+            "actions": 50,
+            "initial": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+            "trajectory": "ed6a242f2c0be23212d2377d0d06184a95d089e7ad2304892c26db4ea6460755",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "WEAV",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "af1b67ae6a394974d223dc41ee8d488064f289215c74bcdb98b97163d42ae550",
+            "trajectory": "b1cf2ac97d6afbd10468761f7c2317da046cd53b7c9b0bc8dc7056b8e3513519",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "BP35",
+            "level": 1,
+            "won": false,
+            "actions": 54,
+            "initial": "73ed3968e48e2ac7b6d4a41c2a408abeba6f9ce1c493ad03ce2dd512b0be55bd",
+            "trajectory": "75bbcaca769378205c776c721c6d8bff86a7722b759b7cb230c3ecf6b13acfa3",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CGWL",
+            "level": 1,
+            "won": true,
+            "actions": 25,
+            "initial": "5b9f513c36c7067d1ffb90e4c9771a8913b0d80a9fd8c47279f11f16b98b156a",
+            "trajectory": "88181b1c25afa1e76a56e26dea271a60db78c2d527489ddd363d6c60565bd635",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CRAF",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "2731a599e06fc2a4c77cbcabfd56c7435bb2460502797e671265a1197286578b",
+            "trajectory": "7a622ef75fa00a34b4aa0eff60970b914b2e5863ef0af15dcae6765b30d94c78",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "ELAS",
+            "level": 1,
+            "won": true,
+            "actions": 16,
+            "initial": "56f3647e10bd9638197258bdfccd3a6050cd3f80c781e70c0f28bb80f9be0c81",
+            "trajectory": "2119845733a0ef81f69633356411c9bfd91b3e746540095b50cd993b1aa673e6",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "FT09",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+            "trajectory": "0d88a1b9e8f9d5be658e9722a3c7dbc402b1d5d5f8476ce7a2ef5a1fd4541576",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GLOB",
+            "level": 1,
+            "won": true,
+            "actions": 9,
+            "initial": "ba5d996decc75763ca4b613ce00433341e5d95f6a656a487341aacbdd92f23ae",
+            "trajectory": "4b061a7f529ccbf63ceb927261b20f84899b1fe284bf4db6da4ce4e30a6eb398",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "HOLE",
+            "level": 1,
+            "won": true,
+            "actions": 5,
+            "initial": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+            "trajectory": "012c8aaf2cae6c42b84cff41bc39f11d4d9a76d61fdd2817e600c406ea372ebb",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "KLOT",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+            "trajectory": "d88dd77b26f38a69e2444bb456dc0a8d7839408901bf55df7d6e849686a016ab",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "LS19",
+            "level": 1,
+            "won": true,
+            "actions": 5,
+            "initial": "19e99dde912cee08a4af4335e108a6e015c69930f09e3187badbee1cfce79df0",
+            "trajectory": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "ONDE",
+            "level": 1,
+            "won": true,
+            "actions": 7,
+            "initial": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+            "trajectory": "ed596954104e490a2902ebed569251be05b10a68a53334cb5ef055156ea67e10",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "RE86",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f",
+            "trajectory": "4120dfb12d07a48ff1af32b50740e476836569bd2bcb138294a96cfa39a99489",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SB26",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+            "trajectory": "7844a7213971c8848a9c3c77340fee8313564c2ce765e3898a47437621662151",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SK48",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+            "trajectory": "4746fa1db30ce705c92727bfd1ef0b2fb469b705c730e9839fbc33430a62115b",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "STCK",
+            "level": 1,
+            "won": true,
+            "actions": 3,
+            "initial": "0aff2f0878f2054d021b294f4972e1450ef08479ba80af7cca138998bc341521",
+            "trajectory": "f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "TICT",
+            "level": 1,
+            "won": true,
+            "actions": 5,
+            "initial": "a672cd7ff15e02d16aaaed5a5afaf7fe0e4c0e6577cda214e9edeb950d15a6ae",
+            "trajectory": "a13948626cced0e76c6a47a536754b4ec9fa79743509f1f51eb86b494d75ea1b",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "UPST",
+            "level": 1,
+            "won": true,
+            "actions": 30,
+            "initial": "97ddaef0e9538cf50e870eac5cda28e075fdc130423b1690323931649dd648a4",
+            "trajectory": "6f99a32adbe04ab3cf551d9dbf82d8ce7df839b35dfee3099480b5b6e7641b60",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "ZIPP",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+            "trajectory": "39d54d5a6ac4b9158d5bc6e21909bd48b79f651511654493f6c56b8c10744a81",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CASC",
+            "level": 1,
+            "won": true,
+            "actions": 6,
+            "initial": "8c751a15869573d10359498d60bf0d9b344fbdbb71ecf05056fa864ae313a0b1",
+            "trajectory": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CLRS",
+            "level": 1,
+            "won": true,
+            "actions": 20,
+            "initial": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+            "trajectory": "fd8294e31cec42df57dcf067cb058451d0c829935b7616d4a5c5bd0b644ff356",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CWSE",
+            "level": 1,
+            "won": true,
+            "actions": 6,
+            "initial": "14b234e86cb071c9873aa3c65eb8cc12680afca61839eb31eccd404d5671af8f",
+            "trajectory": "04ac98078024c8e331ffa240036253203a00dcc0c88893084ba6c928bf0d86fb",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "ESCT",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+            "trajectory": "6a2067b62e868c3dd60fa80a8849a9ceb8ad63d0b7d86c520a0e8e21cd3dace9",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "FUIT",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+            "trajectory": "22d7783c086a85f95814cd806352c9ded8526714e911177b376e9081d111a358",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GMAP",
+            "level": 1,
+            "won": true,
+            "actions": 5,
+            "initial": "2bcae799f4729d870ad808e3c67aabf045f134537ae6f43086139088b9bbcef7",
+            "trajectory": "2965646b168ce1b7f5b9723472b246d71d61d09e1782ba63c58793fa3ca11ef3",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "HPDL",
+            "level": 1,
+            "won": true,
+            "actions": 7,
+            "initial": "a736549b36c7d3a0374e9634ba3694317e060824f7863219344ea69c4a141586",
+            "trajectory": "b53d1e97bb943284ec2969334245d6bba994f0647dc3aac4106ede8e423c4b0b",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "LF52",
+            "level": 1,
+            "won": true,
+            "actions": 31,
+            "initial": "8c3509a81bc0b33cdcadefd63b15f8d8259dcfc4f6f12c00a1ff598d849bc4ff",
+            "trajectory": "136c6a7cff7e921d7610a153d89bf4320d4e0bc5d2f384b95053d7ec82a963a4",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "LS20",
+            "level": 1,
+            "won": true,
+            "actions": 18,
+            "initial": "f530cf6adb4a6d0fe87baa072ecf62be621169f9ef3b0baf09539904c5f4220f",
+            "trajectory": "28755dc6ddc8ba6922dcd8899d2d3970033e38e916f6df6ab7c4aecf6f471a74",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "PIPE",
+            "level": 1,
+            "won": true,
+            "actions": 4,
+            "initial": "cc2da57812c48d52f01a6a481ab614622744023eca0d9786e1f8294e63e9adfd",
+            "trajectory": "9537f4eff9c22c027b3376d3a93cf17b4eb40cbbcb908ddecf23691b0d277c0a",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "RECR",
+            "level": 1,
+            "won": true,
+            "actions": 3,
+            "initial": "9c659d0462f191ba93ee6aa1bb8c433cdca6d890e4f69b81d28b7fa31325ff79",
+            "trajectory": "0c70c2e4be3f093b06a78b8b6bc9aa1724f5a9faaf826143c6d620c3029325a8",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SC25",
+            "level": 1,
+            "won": true,
+            "actions": 17,
+            "initial": "518653148c1631c7757a723e0e9f144e62e09fce58cdd5648881c2a8b4c8211c",
+            "trajectory": "b6f368973d4616b4cf6ddb47406d4ccfc6804c44b96c8ec7d6a01eb911206d69",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SKBN",
+            "level": 1,
+            "won": true,
+            "actions": 22,
+            "initial": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+            "trajectory": "a1324d7a36761a108de431167b117c4134826347377f447efcdbfef65dafedc0",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SU15",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+            "trajectory": "cd9d227f90f78b32708557488ab320003a7c6f9cd6d2ed50b144908ed53725db",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "TN36",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+            "trajectory": "971d834993630567638eb306e338fea3ad759100fa5401c5f767b7ce82ec6ab5",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "VALV",
+            "level": 1,
+            "won": true,
+            "actions": 25,
+            "initial": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+            "trajectory": "ae953580daeb85198af62abb5833f0d6288d757913fbf7ea1b8fd045e5bd3ece",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CATL",
+            "level": 1,
+            "won": true,
+            "actions": 8,
+            "initial": "645b3c0a4e06f24412f2c54de3ba3c15269956e85b62fa87778d892afa269152",
+            "trajectory": "7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CN04",
+            "level": 1,
+            "won": true,
+            "actions": 18,
+            "initial": "76e9c99bc22f6b778aa1edd6bf938de351aedb10016b72f95bb67d75490ba0e7",
+            "trajectory": "2ca5cca4d493d40e38003380887a1cb178c887d645fdde548434b2a37b708205",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "DAME",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+            "trajectory": "40d039455e47078865d31bbeebca130e63993ca6616744f7f30e7d7c5c7281be",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "won": true,
+            "actions": 7,
+            "initial": "bf64cd6cbf5bc15a9b00f0270ceb7ce53217119e180463a4307d97f0c9c9fc2a",
+            "trajectory": "fa59891322e73aeb1069b27230f36be95d4245bd53e3f195965b5f93c5ec4eaf",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "G50T",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+            "trajectory": "60eda6f9d041d470580fc8518c9d3646f6ef0e91bc807689920ca685e2521cb9",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GORI",
+            "level": 1,
+            "won": true,
+            "actions": 15,
+            "initial": "b7789fb9ae19a319ec1ea7fc4a2b5d1c2032885c185218e4bdcb3f93bf61207c",
+            "trajectory": "df11bb6c94d9325a9a689a254ef621916f1c5277cb0dd7ad598e96437bf31242",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "ISOS",
+            "level": 1,
+            "won": true,
+            "actions": 3,
+            "initial": "2213b32effda75e66db7f38caf14b276feafbd547a28086089e6000a114ffabe",
+            "trajectory": "cfa123ebda88519e2a5678023784a2449be6381ccec41e40b4ade48ef515d39a",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "LIFE",
+            "level": 1,
+            "won": true,
+            "actions": 26,
+            "initial": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+            "trajectory": "2b9779ce96977cfff637d7eec694c362f45017d98677b243a48d4b6754e675cb",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "M0R0",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+            "trajectory": "d797b8ea77f1ad2aded763aaa75cc0bf10cf70209ff6f4e68c4dfce43c50f526",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 1,
+            "won": true,
+            "actions": 23,
+            "initial": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+            "trajectory": "2a923b2d7369a2ee420b801c5cf446a623c96a5f58a5e1ec33bea36aa0b8b817",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "REGN",
+            "level": 1,
+            "won": true,
+            "actions": 2,
+            "initial": "47aa13d6af55af3e0efd065ed7eacc0793512ef6c920614ef326caa1d92f6662",
+            "trajectory": "b00a56adad8180b9427c0ca84381383b025d051ab96a5c8ec1e9f01a1090c26c",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SELE",
+            "level": 1,
+            "won": true,
+            "actions": 30,
+            "initial": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+            "trajectory": "c4505af8171c7fba460b476ddfb9cd45ac417b6a76d8f0517853521494167df6",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SMLP",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+            "trajectory": "47df19d9462a881f15cb7b32a858cca79107613f768e476e2fb4c1141ea646af",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "SWCH",
+            "level": 1,
+            "won": false,
+            "actions": 60,
+            "initial": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+            "trajectory": "2cd8dc6d166ee4689671a966eee7ea0fbe216e181ebacb88587a09ba4046c801",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "TR87",
+            "level": 1,
+            "won": true,
+            "actions": 22,
+            "initial": "bf60e2953965adca1444960d2bf267bab440c2d18234c0a245ce214ea0982174",
+            "trajectory": "180c353235d77dc3ad6fc9e5ab2a2a4d361c51b5357a1bd1a59665f66e055963",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "VC33",
+            "level": 1,
+            "won": false,
+            "actions": 50,
+            "initial": "fdde551e3fd269f62e14eb380d2244aefb8f8230f3af72741a2d89acbf1fe414",
+            "trajectory": "76433c16abc196211b8ae26ce17d86b0076a06b6dba8868b67d6fc57ce79196d",
+            "exchanges": {
+              "plans": 0
+            }
+          }
+        ],
+        "VOISFirstDivergence": {
+          "action": 14,
+          "v12Command": 2,
+          "v13Command": 4,
+          "v13Outcome": "placed_prepare_verified",
+          "v12ActionsToWin": 49
+        }
+      },
+      "sevenUpper": {
+        "cases": 18,
+        "won": 7,
+        "changesFromV12": {},
+        "exchanges": {
+          "plans": 0,
+          "placements": 0,
+          "triggers": 0,
+          "arrivals": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "official": 0,
+          "destinations": 0,
+          "exclusionUses": 0
+        },
+        "entries": [
+          {
+            "code": "CWSE",
+            "level": 2,
+            "won": false,
+            "actions": 120,
+            "initial": "b45351fb835ead51df61a751f17a154dd3b484720e3ae0258bf8a2f0ba25930c",
+            "trajectory": "b0b5637ebfb8b9778c963b6d930762e536e30a8ce4971667cb034be744e9bb64",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GARE",
+            "level": 2,
+            "won": true,
+            "actions": 13,
+            "initial": "c87e72bce526c6fe7af25084005bc6ecce41c25896824f00810267c418b05d82",
+            "trajectory": "851a6b841b6a025cd590612c0cb80d771a18cc2a1bca1fa3b867d0d65caf91c3",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 2,
+            "won": true,
+            "actions": 9,
+            "initial": "4efd450236b14467a56ec27214c23529f7bd981e935b590875ca4cad91962d8a",
+            "trajectory": "b313824269f9eb159465d317041ee7e87d8a256064543901e85e69a224b5146d",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GRAV",
+            "level": 2,
+            "won": true,
+            "actions": 62,
+            "initial": "35bbf85c6e247ff4dc855af310d24b9712eb7857b53cff5edae7da98848c954f",
+            "trajectory": "32b06aaa824a77881b5829c393a71ad721c55603642a46cef40e0b8b46cd30bd",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 2,
+            "won": true,
+            "actions": 46,
+            "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+            "trajectory": "f8f0533726d19357d46a470bfae64a91c07cfcfd8a7a1f82cf559735ec37804e",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CATR",
+            "level": 2,
+            "won": false,
+            "actions": 120,
+            "initial": "0381adcb6fd6155f03f43bd6350b9e19fa5ff373e8dadca077b7354c2d3fceac",
+            "trajectory": "3b359a485b27fdbee7139cbc59cf5fca8b35d5a375801c88da7fa1087468196e",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "MOTO",
+            "level": 2,
+            "won": false,
+            "actions": 120,
+            "initial": "d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+            "trajectory": "43cd9fd0b7928acde7e25c39e0ad125a053123b43dfa4b998efafc23f5449c84",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GARE",
+            "level": 3,
+            "won": false,
+            "actions": 120,
+            "initial": "a88fda3980a83ded6676f0849877da360916aae88373f5b27a8b86f1266d4bda",
+            "trajectory": "1c4f3bdadc07aafeaffbc76f01dc8dd8850ccae379ed243bafd99ef91f7a56d9",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 3,
+            "won": true,
+            "actions": 12,
+            "initial": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+            "trajectory": "f2d05f11e778b1378917558ca51920eb2a3aef06795d26dd946c608c3f10ecb8",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GRAV",
+            "level": 3,
+            "won": false,
+            "actions": 120,
+            "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+            "trajectory": "deb4b53176b6d88d85970b1a5e9d1e5c19b8478fa449c1afc7359468f883d9f0",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 3,
+            "won": true,
+            "actions": 56,
+            "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+            "trajectory": "53e692dd64f75ed556984cd1889a4ee70b0a55707d5ae1b8ec98eef16ccb009b",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "CATR",
+            "level": 3,
+            "won": false,
+            "actions": 120,
+            "initial": "ce1fda4d59a5bad94c080babf49f5ee077fe767b78d9e18ebc5496c6b5513f5c",
+            "trajectory": "65eca2917d49723d11bc184134142b0f8a087de1e0554fe117c2ed387ff36090",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 4,
+            "won": true,
+            "actions": 13,
+            "initial": "b203d5554e4b0e600aaf268d39c5d4ff05f51e29eb3a34e1ba76acc6b005389c",
+            "trajectory": "9a250649b9530a0949667a7dc5cb8a759afdbef5647989ca038542d3efbb9715",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GRAV",
+            "level": 4,
+            "won": false,
+            "actions": 120,
+            "initial": "3ef9d5b1501678728b4e4f78fb5ac9153f4c912631c5f8581cd9ac0055ec2819",
+            "trajectory": "6adfddbc5a9aff66fbdeeaea48bfae3abfccf08e1f6283663edb322b9010ded7",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 4,
+            "won": false,
+            "actions": 120,
+            "initial": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5",
+            "trajectory": "91b6ddc4c16623dfc5ede2ede3a536f06afa7c815210ca9541e655bc49476fb7",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 5,
+            "won": false,
+            "actions": 120,
+            "initial": "c604a060286c7e40b44997ae13b1073ded87415d0e588cee82a987c02ff1d979",
+            "trajectory": "10e7b92c30fdb716911ff6661ec59124a67f9a022f47ac03c94337b3d07aaff0",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "GRAV",
+            "level": 5,
+            "won": false,
+            "actions": 120,
+            "initial": "1569271335c09e35750e90a45210ccbc337e632d5af4a7f076701f5dd440c413",
+            "trajectory": "c499be0036ad7fff40864241e2ad81eb61815b6e311c997fbbd16091ebe12041",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "POLA",
+            "level": 5,
+            "won": false,
+            "actions": 120,
+            "initial": "b593a73ddce4884f068c3f7f530b5945ca6ee2174b2c8ce6870dd4283d7fb4f0",
+            "trajectory": "0a089491083ff703d4fa08222520b4f7c510b575ccaa4234878945ce3c4b671d",
+            "exchanges": {
+              "plans": 0
+            }
+          }
+        ]
+      },
+      "extraUpper": {
+        "cases": 8,
+        "won": 0,
+        "changesFromV12": {},
+        "exchanges": {
+          "plans": 38,
+          "placements": 46,
+          "triggers": 24,
+          "arrivals": 4,
+          "uses": 4,
+          "exactUses": 3,
+          "official": 0,
+          "destinations": 4,
+          "exclusionUses": 3
+        },
+        "entries": [
+          {
+            "code": "VOIS",
+            "level": 2,
+            "won": false,
+            "actions": 120,
+            "initial": "96f2c80ac547316aa363b0ef44029561cb7845c410c1b393f174dcd999e5f2f4",
+            "trajectory": "4b3e778d13f0033e4d8fcfb408570c6f867b0bc3a82bd1b41fe216cc1943c13b",
+            "exchanges": {
+              "plans": 11,
+              "placements": 14,
+              "triggers": 6,
+              "arrivals": 2,
+              "uses": 2,
+              "exactUses": 2,
+              "official": 0,
+              "destinations": 2,
+              "exclusionUses": 2
+            }
+          },
+          {
+            "code": "KA59",
+            "level": 2,
+            "won": false,
+            "actions": 120,
+            "initial": "9cd4a8a69390918248a77300f0b6c4fc867af648d593db8c2d9e4bd9d74bc7c9",
+            "trajectory": "d7c178a323ebbf6310aef52fcb8f230a1d7239dce9c4ee69862399358da6e427",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "VOIS",
+            "level": 3,
+            "won": false,
+            "actions": 120,
+            "initial": "b2a003412a98e0de36870c4b6bbb779e46ca8fc499015397d8cdd7cd15933623",
+            "trajectory": "be4df8a8dbf816d6a8a3fafca9d81a651048f8b06a5b59ede7103cf368375349",
+            "exchanges": {
+              "plans": 6,
+              "placements": 7,
+              "triggers": 2,
+              "arrivals": 1,
+              "uses": 1,
+              "exactUses": 0,
+              "official": 0,
+              "destinations": 1,
+              "exclusionUses": 0
+            }
+          },
+          {
+            "code": "KA59",
+            "level": 3,
+            "won": false,
+            "actions": 100,
+            "initial": "c9a9fae1f8ce340cc7e9d748d9fe84331e01450aaab94b4b8b3e083ebaedb8ca",
+            "trajectory": "816e52a894eb38aa93d7116c4ecee9873b7c678d6a19bebc48a7a947f2f7cf14",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "VOIS",
+            "level": 4,
+            "won": false,
+            "actions": 120,
+            "initial": "f2d24e488d9132c3f2758284ea41575a0da85a5e026238f9229da63169d2e3f0",
+            "trajectory": "0d6a049ddd49e7f8b74cff64f20ad23f6684b0fb76b8674d1b6e97d4c706e785",
+            "exchanges": {
+              "plans": 13,
+              "placements": 13,
+              "triggers": 9,
+              "arrivals": 1,
+              "uses": 1,
+              "exactUses": 1,
+              "official": 0,
+              "destinations": 1,
+              "exclusionUses": 1
+            }
+          },
+          {
+            "code": "KA59",
+            "level": 4,
+            "won": false,
+            "actions": 120,
+            "initial": "c228108c7a90c50118350fa4c705a7d3cd1b484b0df5e77550d203ea664e051e",
+            "trajectory": "56c062b34f1a828299ca9a2fcbf0a2c38b593aa5e80421c718f006c018419482",
+            "exchanges": {
+              "plans": 0
+            }
+          },
+          {
+            "code": "VOIS",
+            "level": 5,
+            "won": false,
+            "actions": 120,
+            "initial": "132633e3ef351f97ca69d9081a14361b9245edefdfff76073b2d505230ecb10c",
+            "trajectory": "e811ec332ed8913d089c4adf031da000bafc61a870e21670c72af0173147ed54",
+            "exchanges": {
+              "plans": 8,
+              "placements": 12,
+              "triggers": 7,
+              "arrivals": 0,
+              "uses": 0,
+              "exactUses": 0,
+              "official": 0,
+              "destinations": 0,
+              "exclusionUses": 0
+            }
+          },
+          {
+            "code": "KA59",
+            "level": 5,
+            "won": false,
+            "actions": 100,
+            "initial": "22570613d17500b9ab45e8c9a3ae836faf7fc7fe207cc38e2ae6bd81603ec2d3",
+            "trajectory": "9d01a32a2f5479c89c688c8231ceef41f06808c523664921b446b4d08471cd9d",
+            "exchanges": {
+              "plans": 0
+            }
+          }
+        ]
+      }
+    },
+    "ss01L2": {
+      "control": {
+        "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "459f6970f462571fc6e10112f99cface84f7dbc36acd457584951fc340fc6436",
+        "actions": 961,
+        "won": false,
+        "images": 170,
+        "exchanges": {
+          "plans": 0,
+          "placements": 0,
+          "triggers": 0,
+          "arrivals": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "official": 0,
+          "destinations": 0,
+          "exclusionUses": 0
+        },
+        "crossings": 0,
+        "reason": "level_active_time_budget"
+      },
+      "candidate": {
+        "sha": "2a8a9a240f56ff4c0f49e2e3fba9ed4b66d8feae",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "6b33792677ff3f5ea54eaed7d229b196c86d92e9253d1dda4d4d4a87899b0fb5",
+        "actions": 910,
+        "won": false,
+        "images": 187,
+        "exchanges": {
+          "plans": 0,
+          "placements": 0,
+          "triggers": 0,
+          "arrivals": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "official": 0,
+          "destinations": 0,
+          "exclusionUses": 0
+        },
+        "crossings": 0,
+        "reason": "level_active_time_budget"
+      },
+      "matchedActions": 910,
+      "imagesAtMatchedActions": {
+        "control": 168,
+        "candidate": 187
+      }
+    },
+    "softwareChecks": {
+      "typecheck": true,
+      "sicPassed": 148,
+      "sicTotal": 149,
+      "alsoFailsOnReference": "a capsule is reachable only while a unit of reserve remains on arrival"
+    },
+    "publicCommandPeriods": {
+      "games": 100,
+      "reports": [
+        {
+          "code": "VOIS",
+          "rings": [
+            {
+              "op": "ACTION5",
+              "period": 2,
+              "root": "b0190b2e218a3de5fbac1e2d7d7acfe1c04238987476bc31dfcf5c5ea2cbc20a",
+              "prefix": 5,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "code": "SERI",
+          "rings": [
+            {
+              "op": "ACTION1",
+              "period": 4,
+              "root": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+              "prefix": 0,
+              "exact": true
+            },
+            {
+              "op": "ACTION2",
+              "period": 4,
+              "root": "ecb82401fd941035ae76c18eb221f854d1df5f44e2813f20324960ee91633705",
+              "prefix": 2,
+              "exact": true
+            }
+          ]
+        },
+        {
+          "code": "RSWP",
+          "rings": [
+            {
+              "op": "ACTION5",
+              "period": 3,
+              "root": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+              "prefix": 0,
+              "exact": true
+            }
+          ]
+        }
+      ]
+    },
+    "autonomousAblations": [
+      {
+        "code": "VOIS",
+        "level": 2,
+        "status": "complete",
+        "domain": "all unaddressed controls except trigger",
+        "start": 69,
+        "trigger": "ACTION5",
+        "depth": 3,
+        "words": 156,
+        "unresolved": 71,
+        "landingShape": 0,
+        "useShape": 0,
+        "bothShapes": 0,
+        "traveler": 0,
+        "used": 1,
+        "goal": [
+          22,
+          2
+        ],
+        "final": [
+          38,
+          6
+        ],
+        "initial": [
+          [
+            38,
+            10
+          ],
+          [
+            22,
+            6
+          ]
+        ],
+        "setup": [
+          "ACTION1"
+        ],
+        "arrival": [
+          [
+            22,
+            2
+          ],
+          [
+            38,
+            10
+          ]
+        ],
+        "follow": "ACTION1",
+        "after": [
+          [
+            22,
+            2
+          ],
+          [
+            38,
+            6
+          ]
+        ],
+        "omitTrigger": [
+          [
+            38,
+            10
+          ],
+          [
+            22,
+            2
+          ]
+        ],
+        "omitSetup": [
+          [
+            22,
+            6
+          ],
+          [
+            38,
+            6
+          ]
+        ],
+        "firstLanding": null,
+        "firstUse": null,
+        "firstPair": null,
+        "firstWin": null,
+        "root": "266c002d2452e07134f49b9e85e90042e2a7e1b70310f66a6ab4b01a946c91cf"
+      },
+      {
+        "code": "VOIS",
+        "level": 4,
+        "status": "complete",
+        "domain": "all unaddressed controls except trigger",
+        "start": 38,
+        "trigger": "ACTION5",
+        "depth": 3,
+        "words": 156,
+        "unresolved": 71,
+        "landingShape": 0,
+        "useShape": 0,
+        "bothShapes": 0,
+        "traveler": 0,
+        "used": 1,
+        "goal": [
+          18,
+          14
+        ],
+        "final": [
+          38,
+          14
+        ],
+        "initial": [
+          [
+            38,
+            10
+          ],
+          [
+            18,
+            10
+          ]
+        ],
+        "setup": [
+          "ACTION2"
+        ],
+        "arrival": [
+          [
+            18,
+            14
+          ],
+          [
+            38,
+            10
+          ]
+        ],
+        "follow": "ACTION2",
+        "after": [
+          [
+            18,
+            14
+          ],
+          [
+            38,
+            14
+          ]
+        ],
+        "omitTrigger": [
+          [
+            38,
+            10
+          ],
+          [
+            18,
+            18
+          ]
+        ],
+        "omitSetup": [
+          [
+            18,
+            10
+          ],
+          [
+            38,
+            14
+          ]
+        ],
+        "firstLanding": null,
+        "firstUse": null,
+        "firstPair": null,
+        "firstWin": null,
+        "root": "f83a06584fc9944840ff8b668722859d3ce3bbcc4028fdf2083d0520491aa8a1"
+      }
+    ],
+    "conjugatedCapacity": {
+      "method": "source-only branched calibration and independently replayed forecasts",
+      "upperVOIS": {
+        "hypotheses": 32,
+        "verified": 32,
+        "distinct": 16,
+        "novelAmongButtons": 32,
+        "requiresReturn": 32,
+        "proposedJoint": 96,
+        "joint": 92,
+        "distinctJoint": 47,
+        "wins": 0,
+        "terminal": 0
+      },
+      "bySourceLevel": [
+        {
+          "code": "VOIS",
+          "level": 2,
+          "root": "849492d5d061f58140851e5d59dcac9b49a52af5c625a1b390842a82a539a3fe",
+          "inspected": 1,
+          "calibrations": 10,
+          "mirrors": 2,
+          "reversible": 2,
+          "separable": 8,
+          "conjugateSeal": "250ae475215ddabbab8942b79b008eaa7c2b1b6879ab529e2579b0395382a48c",
+          "jointSeal": "89a15e88f13a209b980af55435f1dc50698f7f3304867b73074408776372209c",
+          "options": 160,
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 22,
+          "distinctJoint": 11,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            3
+          ],
+          "example": {
+            "roles": [
+              {
+                "signature": "0aa3c99436a0a4b3c4b8247cef80e6d1e4bff18655bee1689b0455af377bacd4",
+                "fixed": [
+                  "22,30",
+                  "38,30"
+                ]
+              },
+              {
+                "signature": "26fa09fa1957c8e33171c39601ccba6cb0229e1acba035ac5d6b2a31f953c7e7",
+                "fixed": []
+              }
+            ],
+            "t": "ACTION5",
+            "d": "ACTION1",
+            "p": [
+              [
+                38,
+                10
+              ],
+              [
+                22,
+                10
+              ]
+            ],
+            "direct": [
+              [
+                38,
+                10
+              ],
+              [
+                22,
+                6
+              ]
+            ],
+            "activeMember": 1,
+            "undo": [
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "inverseWitness": true,
+            "passive": 0,
+            "delta": [
+              0,
+              -4
+            ],
+            "word": [
+              "ACTION5",
+              "ACTION1",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "middle": [
+              [
+                22,
+                10
+              ],
+              [
+                38,
+                6
+              ]
+            ],
+            "prediction": [
+              [
+                38,
+                6
+              ],
+              [
+                22,
+                10
+              ]
+            ]
+          }
+        },
+        {
+          "code": "VOIS",
+          "level": 3,
+          "root": "abace7f8139fd5593d850ce254e0f871d71a0529e486091bd96edc3ae52cc457",
+          "inspected": 1,
+          "calibrations": 10,
+          "mirrors": 2,
+          "reversible": 2,
+          "separable": 8,
+          "conjugateSeal": "68d18579be70793306a3ee724621d581785800072d9ce1f250d6d3b282664165",
+          "jointSeal": "efbf43362646d12ef7884b886cb25d7d23640638bb1057a04e739dc9ef814ace",
+          "options": 156,
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 22,
+          "distinctJoint": 11,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            6
+          ],
+          "example": {
+            "roles": [
+              {
+                "signature": "0aa3c99436a0a4b3c4b8247cef80e6d1e4bff18655bee1689b0455af377bacd4",
+                "fixed": [
+                  "14,22",
+                  "22,34",
+                  "38,34",
+                  "42,10",
+                  "46,22"
+                ]
+              },
+              {
+                "signature": "26fa09fa1957c8e33171c39601ccba6cb0229e1acba035ac5d6b2a31f953c7e7",
+                "fixed": []
+              }
+            ],
+            "t": "ACTION5",
+            "d": "ACTION1",
+            "p": [
+              [
+                30,
+                10
+              ],
+              [
+                18,
+                10
+              ]
+            ],
+            "direct": [
+              [
+                30,
+                10
+              ],
+              [
+                18,
+                6
+              ]
+            ],
+            "activeMember": 1,
+            "undo": [
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "inverseWitness": true,
+            "passive": 0,
+            "delta": [
+              0,
+              -4
+            ],
+            "word": [
+              "ACTION5",
+              "ACTION1",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "middle": [
+              [
+                18,
+                10
+              ],
+              [
+                30,
+                6
+              ]
+            ],
+            "prediction": [
+              [
+                30,
+                6
+              ],
+              [
+                18,
+                10
+              ]
+            ]
+          }
+        },
+        {
+          "code": "VOIS",
+          "level": 4,
+          "root": "d5309470e0e0423dbfda9a936b574d7a0b6480e630a42e3ea04bb6dc6095538b",
+          "inspected": 1,
+          "calibrations": 10,
+          "mirrors": 2,
+          "reversible": 2,
+          "separable": 8,
+          "conjugateSeal": "bd038b1a8f2f146ed29e832cac6241bcf50f2427b07d3b62a0430ad6cb4bd1b4",
+          "jointSeal": "57d3b74a4866030235d3a4f87f8e694b173fe292c81cafbfc1c75af06cbd03f4",
+          "options": 160,
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 24,
+          "distinctJoint": 12,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            4
+          ],
+          "example": {
+            "roles": [
+              {
+                "signature": "0aa3c99436a0a4b3c4b8247cef80e6d1e4bff18655bee1689b0455af377bacd4",
+                "fixed": [
+                  "14,22",
+                  "30,34",
+                  "46,22"
+                ]
+              },
+              {
+                "signature": "26fa09fa1957c8e33171c39601ccba6cb0229e1acba035ac5d6b2a31f953c7e7",
+                "fixed": []
+              }
+            ],
+            "t": "ACTION5",
+            "d": "ACTION1",
+            "p": [
+              [
+                38,
+                10
+              ],
+              [
+                18,
+                10
+              ]
+            ],
+            "direct": [
+              [
+                38,
+                10
+              ],
+              [
+                18,
+                6
+              ]
+            ],
+            "activeMember": 1,
+            "undo": [
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "inverseWitness": true,
+            "passive": 0,
+            "delta": [
+              0,
+              -4
+            ],
+            "word": [
+              "ACTION5",
+              "ACTION1",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "middle": [
+              [
+                18,
+                10
+              ],
+              [
+                38,
+                6
+              ]
+            ],
+            "prediction": [
+              [
+                38,
+                6
+              ],
+              [
+                18,
+                10
+              ]
+            ]
+          }
+        },
+        {
+          "code": "VOIS",
+          "level": 5,
+          "root": "9a67c0666e1356b4385f9a434596ce972b1eec3eed477957351d0bfd988362ea",
+          "inspected": 1,
+          "calibrations": 10,
+          "mirrors": 2,
+          "reversible": 2,
+          "separable": 8,
+          "conjugateSeal": "fd9908bb3a2f686373d44429c03757e058092f2fd50564c378a0786c1dff6a89",
+          "jointSeal": "79fcd9d3a5347766c8ce604137455a8e0feee6fd8a051d8f8febcfa7f8a99eb8",
+          "options": 140,
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 24,
+          "distinctJoint": 13,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            5
+          ],
+          "example": {
+            "roles": [
+              {
+                "signature": "0aa3c99436a0a4b3c4b8247cef80e6d1e4bff18655bee1689b0455af377bacd4",
+                "fixed": [
+                  "10,22",
+                  "30,38",
+                  "42,6",
+                  "50,22"
+                ]
+              },
+              {
+                "signature": "26fa09fa1957c8e33171c39601ccba6cb0229e1acba035ac5d6b2a31f953c7e7",
+                "fixed": []
+              }
+            ],
+            "t": "ACTION5",
+            "d": "ACTION1",
+            "p": [
+              [
+                30,
+                6
+              ],
+              [
+                18,
+                6
+              ]
+            ],
+            "direct": [
+              [
+                30,
+                6
+              ],
+              [
+                18,
+                2
+              ]
+            ],
+            "activeMember": 1,
+            "undo": [
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "inverseWitness": true,
+            "passive": 0,
+            "delta": [
+              0,
+              -4
+            ],
+            "word": [
+              "ACTION5",
+              "ACTION1",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5",
+              "ACTION5"
+            ],
+            "middle": [
+              [
+                18,
+                6
+              ],
+              [
+                30,
+                2
+              ]
+            ],
+            "prediction": [
+              [
+                30,
+                2
+              ],
+              [
+                18,
+                6
+              ]
+            ]
+          }
+        },
+        {
+          "code": "KA59",
+          "level": 2,
+          "root": "9cd4a8a69390918248a77300f0b6c4fc867af648d593db8c2d9e4bd9d74bc7c9",
+          "inspected": 8,
+          "calibrations": 9,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "KA59",
+          "level": 3,
+          "root": "c9a9fae1f8ce340cc7e9d748d9fe84331e01450aaab94b4b8b3e083ebaedb8ca",
+          "inspected": 8,
+          "calibrations": 8,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "KA59",
+          "level": 4,
+          "root": "c228108c7a90c50118350fa4c705a7d3cd1b484b0df5e77550d203ea664e051e",
+          "inspected": 8,
+          "calibrations": 9,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "KA59",
+          "level": 5,
+          "root": "22570613d17500b9ab45e8c9a3ae836faf7fc7fe207cc38e2ae6bd81603ec2d3",
+          "inspected": 8,
+          "calibrations": 10,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "VOIS",
+          "level": 1,
+          "root": "c88b13eac59a331afeebc70c83c124beaab0d770ab58926c8f84275df89e0a20",
+          "inspected": 1,
+          "calibrations": 10,
+          "mirrors": 4,
+          "reversible": 4,
+          "separable": 12,
+          "conjugateSeal": "e743e05d13ddab2624604c02d94e69aa71b48325d11dd1e4149752f3d850a69b",
+          "jointSeal": "e7bc7d9ba746109dbb1189d5a5f0db173cf5f4d309b7db8c49882654c326e121",
+          "options": 160,
+          "hypotheses": 12,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 22,
+          "distinctJoint": 12,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            1
+          ],
+          "example": {
+            "roles": [
+              {
+                "signature": "0aa3c99436a0a4b3c4b8247cef80e6d1e4bff18655bee1689b0455af377bacd4",
+                "fixed": []
+              },
+              {
+                "signature": "26fa09fa1957c8e33171c39601ccba6cb0229e1acba035ac5d6b2a31f953c7e7",
+                "fixed": []
+              }
+            ],
+            "t": "ACTION5",
+            "d": "ACTION1",
+            "p": [
+              [
+                42,
+                22
+              ],
+              [
+                26,
+                22
+              ]
+            ],
+            "direct": [
+              [
+                42,
+                22
+              ],
+              [
+                26,
+                18
+              ]
+            ],
+            "activeMember": 1,
+            "undo": [
+              "ACTION5"
+            ],
+            "inverseWitness": true,
+            "passive": 0,
+            "delta": [
+              0,
+              -4
+            ],
+            "word": [
+              "ACTION5",
+              "ACTION1",
+              "ACTION5"
+            ],
+            "middle": [
+              [
+                26,
+                22
+              ],
+              [
+                42,
+                18
+              ]
+            ],
+            "prediction": [
+              [
+                42,
+                18
+              ],
+              [
+                26,
+                22
+              ]
+            ]
+          }
+        },
+        {
+          "code": "PIPE",
+          "level": 1,
+          "root": "8bda0f4737f18af9f6e2da27bf78306efe9e1248fb794c5199be34962836d9f5",
+          "inspected": 8,
+          "calibrations": 13,
+          "mirrors": 2,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "LOGI",
+          "level": 1,
+          "root": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+          "inspected": 2,
+          "calibrations": 7,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "REWI",
+          "level": 1,
+          "root": "0b714aa8042c9738eea3e0fae820420afc748711b2bc0421714bcb28547d3681",
+          "inspected": 4,
+          "calibrations": 9,
+          "mirrors": 4,
+          "reversible": 4,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "CWSE",
+          "level": 1,
+          "root": "d95932e4cc8015d46bcd3256376889551ab67f704cc3c549d9916961abf5042e",
+          "inspected": 8,
+          "calibrations": 13,
+          "mirrors": 1,
+          "reversible": 1,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "COLM",
+          "level": 1,
+          "root": "c4261bf20122834feea5b779a3df252c0aa24dc96d52ff0234c3f49af7defa37",
+          "inspected": 8,
+          "calibrations": 6,
+          "mirrors": 4,
+          "reversible": 4,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "root": "eb1b8a9d5391c318b131d4dd3be5ac309e94b93897080048288cd79b1dafe7be",
+          "inspected": 8,
+          "calibrations": 11,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "HOLE",
+          "level": 1,
+          "root": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+          "inspected": 8,
+          "calibrations": 13,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "DAME",
+          "level": 1,
+          "root": "05387af3b38e4ec8cd043e42dd5c3d27d5ad83a6d7dd7abbd07164ebea54edf2",
+          "inspected": 8,
+          "calibrations": 7,
+          "mirrors": 2,
+          "reversible": 1,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "SK48",
+          "level": 1,
+          "root": "c40f87083cbf5fe8087e68da6c32b0fb19f2c4e78e023d18a2244d201ef979f9",
+          "inspected": 8,
+          "calibrations": 10,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "SERI",
+          "level": 1,
+          "root": "7c1e5b1428a81d1a942797eac082d62c8d7d604cc08820c90f0d272aef6b5ebe",
+          "inspected": 8,
+          "calibrations": 12,
+          "mirrors": 10,
+          "reversible": 10,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "root": "9112f582299668f7c03806c9991fac45504b2fbdec1f5da74d1c19f42cb63282",
+          "inspected": 8,
+          "calibrations": 6,
+          "mirrors": 7,
+          "reversible": 5,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "root": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+          "inspected": 8,
+          "calibrations": 4,
+          "mirrors": 4,
+          "reversible": 4,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GRAV",
+          "level": 1,
+          "root": "05b569241b1ab0e6dc6bea6f7772cc27799fee73e18f36e2cfeb8307c5cb2b04",
+          "inspected": 8,
+          "calibrations": 11,
+          "mirrors": 3,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "THER",
+          "level": 1,
+          "root": "80f5c53178acc7ba2d4637e1b0147979852705530ec1525b2a1b67e2c1f97e5f",
+          "inspected": 8,
+          "calibrations": 13,
+          "mirrors": 4,
+          "reversible": 4,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "root": "b45351fb835ead51df61a751f17a154dd3b484720e3ae0258bf8a2f0ba25930c",
+          "inspected": 8,
+          "calibrations": 12,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GIGO",
+          "level": 2,
+          "root": "4efd450236b14467a56ec27214c23529f7bd981e935b590875ca4cad91962d8a",
+          "inspected": 8,
+          "calibrations": 12,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "POLA",
+          "level": 2,
+          "root": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "inspected": 5,
+          "calibrations": 10,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "root": "d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+          "inspected": 6,
+          "calibrations": 12,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GIGO",
+          "level": 3,
+          "root": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+          "inspected": 8,
+          "calibrations": 12,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "POLA",
+          "level": 3,
+          "root": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "inspected": 5,
+          "calibrations": 10,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GIGO",
+          "level": 4,
+          "root": "b203d5554e4b0e600aaf268d39c5d4ff05f51e29eb3a34e1ba76acc6b005389c",
+          "inspected": 8,
+          "calibrations": 12,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "POLA",
+          "level": 4,
+          "root": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5",
+          "inspected": 5,
+          "calibrations": 10,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "root": "a1c732e19f0cea4252ef5b30ccfc671565ff672de2cc88a37046e92329d92421",
+          "inspected": 8,
+          "calibrations": 12,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GARE",
+          "level": 2,
+          "root": "c87e72bce526c6fe7af25084005bc6ecce41c25896824f00810267c418b05d82",
+          "inspected": 1,
+          "calibrations": 7,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "root": "cd98f76f2d57d49ef026ef264410e5a3b429f47754a5ea82dc7757ac4ccb19f6",
+          "inspected": 8,
+          "calibrations": 11,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "CATR",
+          "level": 2,
+          "root": "0381adcb6fd6155f03f43bd6350b9e19fa5ff373e8dadca077b7354c2d3fceac",
+          "inspected": 1,
+          "calibrations": 7,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "root": "a88fda3980a83ded6676f0849877da360916aae88373f5b27a8b86f1266d4bda",
+          "inspected": 1,
+          "calibrations": 7,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "root": "0558c76dbed93aa95dc0042696675d4077651f2bcc03677f487499a534938764",
+          "inspected": 8,
+          "calibrations": 11,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "root": "ce1fda4d59a5bad94c080babf49f5ee077fe767b78d9e18ebc5496c6b5513f5c",
+          "inspected": 1,
+          "calibrations": 7,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "root": "96e00b18756ebee55b308cbb5a8ca76dc5413db0a1cbe65eb6d8a36fea1e0762",
+          "inspected": 8,
+          "calibrations": 11,
+          "mirrors": 3,
+          "reversible": 3,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "root": "c604a060286c7e40b44997ae13b1073ded87415d0e588cee82a987c02ff1d979",
+          "inspected": 8,
+          "calibrations": 12,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "root": "b593a73ddce4884f068c3f7f530b5945ca6ee2174b2c8ce6870dd4283d7fb4f0",
+          "inspected": 5,
+          "calibrations": 10,
+          "mirrors": 0,
+          "reversible": 0,
+          "separable": 0,
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "options": 0,
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": []
+        }
+      ],
+      "longerUpperVOIS": {
+        "hypotheses": 32,
+        "verified": 32,
+        "distinct": 16,
+        "novelAmongButtons": 32,
+        "requiresReturn": 32,
+        "proposedJoint": 96,
+        "joint": 38,
+        "distinctJoint": 38,
+        "wins": 0,
+        "terminal": 0
+      },
+      "longerSites": [
+        {
+          "code": "VOIS",
+          "level": 2,
+          "root": "849492d5d061f58140851e5d59dcac9b49a52af5c625a1b390842a82a539a3fe",
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 16,
+          "distinctJoint": 16,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            3
+          ],
+          "conjugateSeal": "250ae475215ddabbab8942b79b008eaa7c2b1b6879ab529e2579b0395382a48c",
+          "jointSeal": "28b3e8bef3e6ac7633f9f1340d3cb770ae25bd09e91bcc77d2c9504c14f1388a",
+          "configurations": [
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  22
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 24,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 24,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  22
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 24,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  26
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 28,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 28,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 7,
+              "commands": 19,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 7,
+              "commands": 19,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  22
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 7,
+              "commands": 23,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 7,
+              "commands": 23,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  22,
+                  10
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 24,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  22,
+                  10
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 24,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 6,
+              "commands": 18,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  22,
+                  10
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 7,
+              "commands": 23,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  18
+                ],
+                [
+                  30,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  30,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  18
+                ],
+                [
+                  34,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  34,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  22
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  22
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  22
+                ],
+                [
+                  34,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "exact"
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 3,
+          "root": "abace7f8139fd5593d850ce254e0f871d71a0529e486091bd96edc3ae52cc457",
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 5,
+          "distinctJoint": 5,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            6
+          ],
+          "conjugateSeal": "68d18579be70793306a3ee724621d581785800072d9ce1f250d6d3b282664165",
+          "jointSeal": "66a49a494d1805aaacfa925fa484421bc69a7a3c2d3926d26727d51cc94c664e",
+          "configurations": [
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  34,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  18
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  18
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 36,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  22
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 36,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  22
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 36,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 7,
+              "commands": 21,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  18,
+                  10
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  18,
+                  10
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 29,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 7,
+              "commands": 28,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 7,
+              "commands": 28,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 6,
+              "commands": 20,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  18,
+                  10
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 7,
+              "commands": 28,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  14
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  14
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  14
+                ],
+                [
+                  34,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 22,
+              "result": "refuted"
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 4,
+          "root": "d5309470e0e0423dbfda9a936b574d7a0b6480e630a42e3ea04bb6dc6095538b",
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 5,
+          "distinctJoint": 5,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            4
+          ],
+          "conjugateSeal": "bd038b1a8f2f146ed29e832cac6241bcf50f2427b07d3b62a0430ad6cb4bd1b4",
+          "jointSeal": "815e6ce33bd39ae265c444802b06b83602fb46d5fee14661fdb81ae9361a2758",
+          "configurations": [
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 28,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  22,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 28,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  22
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 28,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  14
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 28,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  30,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 28,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  18
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 18,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 18,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  10
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 18,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  22,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 33,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  18
+                ],
+                [
+                  22,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 33,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  26,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 33,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  18
+                ],
+                [
+                  26,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 33,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  22
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  10
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  22
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  10
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 23,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  42,
+                  14
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 18,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  46,
+                  10
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 18,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  18,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 33,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  18
+                ],
+                [
+                  18,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 33,
+              "result": "refuted"
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 5,
+          "root": "9a67c0666e1356b4385f9a434596ce972b1eec3eed477957351d0bfd988362ea",
+          "hypotheses": 8,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 12,
+          "distinctJoint": 12,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            5
+          ],
+          "conjugateSeal": "fd9908bb3a2f686373d44429c03757e058092f2fd50564c378a0786c1dff6a89",
+          "jointSeal": "fcf2a96f010d521aa96b154b20b87d3b504b02e7e24c33d8e5378855eca29158",
+          "configurations": [
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  22,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  26,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  30,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  14
+                ],
+                [
+                  34,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 20,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  22,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  14
+                ],
+                [
+                  22,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  22,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  14
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  26,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  18
+                ],
+                [
+                  30,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  14
+                ],
+                [
+                  30,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  14
+                ],
+                [
+                  30,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 26,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  22,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  18
+                ],
+                [
+                  22,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  22,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  22,
+                  14
+                ],
+                [
+                  22,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  14
+                ],
+                [
+                  22,
+                  18
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  26,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  18
+                ],
+                [
+                  26,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  34,
+                  18
+                ],
+                [
+                  26,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  38,
+                  14
+                ],
+                [
+                  26,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  22,
+                  14
+                ],
+                [
+                  26,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 32,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  22,
+                  14
+                ]
+              ],
+              "writes": 8,
+              "commands": 38,
+              "result": "exact"
+            }
+          ]
+        },
+        {
+          "code": "KA59",
+          "level": 2,
+          "root": "9cd4a8a69390918248a77300f0b6c4fc867af648d593db8c2d9e4bd9d74bc7c9",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "KA59",
+          "level": 3,
+          "root": "c9a9fae1f8ce340cc7e9d748d9fe84331e01450aaab94b4b8b3e083ebaedb8ca",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "KA59",
+          "level": 4,
+          "root": "c228108c7a90c50118350fa4c705a7d3cd1b484b0df5e77550d203ea664e051e",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "KA59",
+          "level": 5,
+          "root": "22570613d17500b9ab45e8c9a3ae836faf7fc7fe207cc38e2ae6bd81603ec2d3",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "VOIS",
+          "level": 1,
+          "root": "c88b13eac59a331afeebc70c83c124beaab0d770ab58926c8f84275df89e0a20",
+          "hypotheses": 12,
+          "verified": 8,
+          "distinct": 4,
+          "novelAmongButtons": 8,
+          "requiresReturn": 8,
+          "proposedJoint": 24,
+          "joint": 15,
+          "distinctJoint": 15,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [
+            1
+          ],
+          "conjugateSeal": "e743e05d13ddab2624604c02d94e69aa71b48325d11dd1e4149752f3d850a69b",
+          "jointSeal": "778612a28630fb21bde18a0173a4df5da77d6f6ded971c0fff46506cf2948d61",
+          "configurations": [
+            {
+              "positions": [
+                [
+                  26,
+                  26
+                ],
+                [
+                  30,
+                  26
+                ]
+              ],
+              "writes": 7,
+              "commands": 17,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  26
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 6,
+              "commands": 16,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  30,
+                  26
+                ]
+              ],
+              "writes": 5,
+              "commands": 11,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 5,
+              "commands": 13,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 5,
+              "commands": 13,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  22
+                ],
+                [
+                  30,
+                  26
+                ]
+              ],
+              "writes": 6,
+              "commands": 14,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 4,
+              "commands": 10,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  26,
+                  42
+                ]
+              ],
+              "writes": 8,
+              "commands": 14,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  30,
+                  38
+                ]
+              ],
+              "writes": 8,
+              "commands": 14,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  26,
+                  38
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  30,
+                  34
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  22
+                ],
+                [
+                  26,
+                  26
+                ]
+              ],
+              "writes": 5,
+              "commands": 13,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  22,
+                  38
+                ]
+              ],
+              "writes": 8,
+              "commands": 14,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  18,
+                  34
+                ]
+              ],
+              "writes": 8,
+              "commands": 14,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  14,
+                  30
+                ]
+              ],
+              "writes": 8,
+              "commands": 14,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  26
+                ],
+                [
+                  26,
+                  34
+                ]
+              ],
+              "writes": 8,
+              "commands": 18,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  26
+                ],
+                [
+                  30,
+                  30
+                ]
+              ],
+              "writes": 8,
+              "commands": 18,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  10,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 14,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  26,
+                  22
+                ],
+                [
+                  30,
+                  22
+                ]
+              ],
+              "writes": 7,
+              "commands": 15,
+              "result": "refuted"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  22
+                ],
+                [
+                  6,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 14,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  22,
+                  34
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  18,
+                  30
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  14,
+                  26
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            },
+            {
+              "positions": [
+                [
+                  30,
+                  26
+                ],
+                [
+                  10,
+                  22
+                ]
+              ],
+              "writes": 8,
+              "commands": 16,
+              "result": "exact"
+            }
+          ]
+        },
+        {
+          "code": "DAME",
+          "level": 1,
+          "root": "d35d14cb649e4032f93026968bf46420b7db157fb4b4c2172c9ab110c59dfda1",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "PIPE",
+          "level": 1,
+          "root": "8bda0f4737f18af9f6e2da27bf78306efe9e1248fb794c5199be34962836d9f5",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "SK48",
+          "level": 1,
+          "root": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "LOGI",
+          "level": 1,
+          "root": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "SERI",
+          "level": 1,
+          "root": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "REWI",
+          "level": 1,
+          "root": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "root": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "CWSE",
+          "level": 1,
+          "root": "d95932e4cc8015d46bcd3256376889551ab67f704cc3c549d9916961abf5042e",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "root": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "COLM",
+          "level": 1,
+          "root": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "GRAV",
+          "level": 1,
+          "root": "4af5e2c6a000b7c8bd5778492ee7f499c953e952f3f6e529e067c48e50d07c8e",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "root": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "THER",
+          "level": 1,
+          "root": "80f5c53178acc7ba2d4637e1b0147979852705530ec1525b2a1b67e2c1f97e5f",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        },
+        {
+          "code": "HOLE",
+          "level": 1,
+          "root": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+          "hypotheses": 0,
+          "verified": 0,
+          "distinct": 0,
+          "novelAmongButtons": 0,
+          "requiresReturn": 0,
+          "proposedJoint": 0,
+          "joint": 0,
+          "distinctJoint": 0,
+          "wins": 0,
+          "terminal": 0,
+          "calibratedReturnLengths": [],
+          "conjugateSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "jointSeal": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "configurations": []
+        }
+      ]
+    },
+    "readdressingWithoutAnObservedSwap": {
+      "original": {
+        "games": 100,
+        "witnessedReversibleEdges": 296,
+        "gamesWithEdges": 30,
+        "restoredContexts": 125,
+        "forecasts": 711,
+        "visible": 637,
+        "exact": 8,
+        "exactGames": [
+          "VOIS"
+        ]
+      },
+      "upper": {
+        "games": 18,
+        "witnessedReversibleEdges": 429,
+        "gamesWithEdges": 14,
+        "restoredContexts": 79,
+        "forecasts": 810,
+        "visible": 721,
+        "exact": 8,
+        "exactGames": [
+          "GIGO"
+        ]
+      },
+      "positiveAblations": [
+        {
+          "code": "VOIS",
+          "level": 1,
+          "index": 5,
+          "root": "b0190b2e218a3de5fbac1e2d7d7acfe1c04238987476bc31dfcf5c5ea2cbc20a",
+          "setup": "ACTION5",
+          "inverse": [
+            "ACTION5"
+          ],
+          "seal": "b7bea3eed76710094f541dcf3c81e36be78814fc04b001dd19b48169036f5ae7",
+          "receipts": [
+            {
+              "op": "ACTION1",
+              "source": [
+                14,
+                22
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                42,
+                18
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  42,
+                  22
+                ],
+                "s": [
+                  14,
+                  18
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  42,
+                  18
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION1",
+              "source": [
+                15,
+                23
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                42,
+                18
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  43,
+                  23
+                ],
+                "s": [
+                  14,
+                  18
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  43,
+                  19
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION2",
+              "source": [
+                14,
+                22
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                42,
+                26
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  42,
+                  22
+                ],
+                "s": [
+                  14,
+                  26
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  42,
+                  26
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION2",
+              "source": [
+                15,
+                23
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                42,
+                26
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  43,
+                  23
+                ],
+                "s": [
+                  14,
+                  26
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  43,
+                  27
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION3",
+              "source": [
+                14,
+                22
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                38,
+                22
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  42,
+                  22
+                ],
+                "s": [
+                  10,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  38,
+                  22
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION3",
+              "source": [
+                15,
+                23
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                38,
+                22
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  43,
+                  23
+                ],
+                "s": [
+                  10,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  39,
+                  23
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION4",
+              "source": [
+                14,
+                22
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                46,
+                22
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  42,
+                  22
+                ],
+                "s": [
+                  18,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  46,
+                  22
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION4",
+              "source": [
+                15,
+                23
+              ],
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                46,
+                22
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  43,
+                  23
+                ],
+                "s": [
+                  18,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  47,
+                  23
+                ],
+                "s": [
+                  14,
+                  22
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "noSingleButton": true
+            }
+          ],
+          "calibration": "ACTION1",
+          "reuseSeal": "f1d380ba3ff6d3c7805db129692e4dbba71b4df2f33198e1e5bb3b3c8b4a914c",
+          "reused": [
+            {
+              "op": "ACTION2",
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                42,
+                26
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION2",
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                42,
+                26
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION3",
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                38,
+                22
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION3",
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                38,
+                22
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION4",
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                46,
+                22
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION4",
+              "target": [
+                42,
+                22
+              ],
+              "destination": [
+                46,
+                22
+              ],
+              "matched": true
+            }
+          ]
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "index": 6,
+          "root": "78472fa25f496c42814427f7aee54b8c523172a127c39fca83a3527d40c1ec1c",
+          "setup": "ACTION6:31,18",
+          "inverse": [
+            "ACTION6:28,29"
+          ],
+          "seal": "5b22cf1f1b374fa3c529b4b372a12474cba84c67909722285a0794ace4efea02",
+          "receipts": [
+            {
+              "op": "ACTION1",
+              "source": [
+                16,
+                29
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                9
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  16,
+                  28
+                ],
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": null,
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION1",
+              "source": [
+                32,
+                30
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                9
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  32,
+                  29
+                ],
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  32,
+                  30
+                ],
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION1",
+              "source": [
+                18,
+                31
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                9
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  18,
+                  30
+                ],
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  18,
+                  31
+                ],
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION1",
+              "source": [
+                29,
+                31
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                9
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  29,
+                  30
+                ],
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  29,
+                  31
+                ],
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION2",
+              "source": [
+                16,
+                29
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "requiredPreparation": false,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": null,
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": null,
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION2",
+              "source": [
+                32,
+                30
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  32,
+                  31
+                ],
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  32,
+                  30
+                ],
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION2",
+              "source": [
+                18,
+                31
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  18,
+                  32
+                ],
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  18,
+                  31
+                ],
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            },
+            {
+              "op": "ACTION2",
+              "source": [
+                29,
+                31
+              ],
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "requiredPreparation": true,
+              "requiredPreparationForVisibleEndpoint": true,
+              "withoutPreparation": {
+                "a": [
+                  29,
+                  32
+                ],
+                "s": [
+                  16,
+                  10
+                ],
+                "match": false,
+                "visible": true,
+                "root": false
+              },
+              "withoutRestoration": {
+                "a": [
+                  29,
+                  31
+                ],
+                "s": null,
+                "match": false,
+                "visible": false,
+                "root": false
+              },
+              "noSingleButton": true
+            }
+          ],
+          "calibration": "ACTION1",
+          "reuseSeal": "9ecef4d83902c908514247faded8c2f8b4ddb823f695a170cac1b928279a9ca6",
+          "reused": [
+            {
+              "op": "ACTION2",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION2",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION2",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION2",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                16,
+                11
+              ],
+              "matched": true
+            },
+            {
+              "op": "ACTION4",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                17,
+                10
+              ],
+              "matched": false
+            },
+            {
+              "op": "ACTION4",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                17,
+                10
+              ],
+              "matched": false
+            },
+            {
+              "op": "ACTION4",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                17,
+                10
+              ],
+              "matched": false
+            },
+            {
+              "op": "ACTION4",
+              "target": [
+                16,
+                10
+              ],
+              "destination": [
+                17,
+                10
+              ],
+              "matched": false
+            }
+          ]
+        }
+      ]
+    }
   }
 }
