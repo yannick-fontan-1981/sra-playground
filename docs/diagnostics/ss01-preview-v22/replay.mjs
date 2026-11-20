@@ -208,6 +208,7 @@ async function campaign(name) {
         stagnation: [],
         mechanisms: [],
         explainedBindings: [],
+        terminalContacts: [],
         mobility: [],
         territory: [],
         counts: {},
@@ -241,6 +242,8 @@ async function campaign(name) {
         q = Number(act.action_ref.slice(6)),
         f = proposal.experiment.witnessedPreview,
         seal = f ? digest(f) : null,
+        mechanism=proposal.experiment.mechanism,mechanismSeal=mechanism?digest(mechanism):null,
+        goal=proposal.experiment.terminalContact,goalSeal=goal?digest(goal):null,
         mobility = proposal.experiment.mobilityProbe,
         mobilitySeal = mobility ? digest(mobility) : null,
         z = stepWorld(world, s, q, act.data),
@@ -253,7 +256,6 @@ async function campaign(name) {
       }
       const prevEdge=current.occupancy?.edges.find(e=>e.s===oldScene&&e.op===opKey&&!e.unstable);
       const repeat=!!prevEdge&&prevEdge.t===newScene;
-      const mechanism=proposal.experiment.mechanism,mechanismSeal=mechanism?digest(mechanism):null;
       const priorTag=current.localProgress?.last;
       const reason=repeat?explainLocalChoice(current,oldScene,newScene,opKey,o,b.frame,f?.actor):null;
       await learner.after(proposal, 0, o, n, b.frame, next.frame);
@@ -262,14 +264,15 @@ async function campaign(name) {
         phase = proposal.experiment.phase;
       const tag=acquired.events[0]?.localRepeat,here=island(world,z.hero),move=s.mirrors.findIndex((p,j)=>!same(p,z.mirrors[j]));
       receipt.zoneByStep.push(here);
+      if(goal){const result=acquired.events[0].terminalContact;if(digest(result.trial)!==goalSeal)throw Error('Unsealed terminal contact');receipt.terminalContacts.push({step:k+1,seal:goalSeal,site:local(at(goal.site),2),destination:local(at(goal.goal),2),actor:local(at(goal.from),2),actualFrom:local(s.hero,2),actualAfter:local(z.hero,2),namesSubject:same(at(goal.from),s.hero),namesExit:world.goals.some(g=>same(g,at(goal.goal))),distance:goal.distance,issued:q,matched:result.matched,won:result.won,official:next.levelsCompleted});}
       if(mobility)receipt.mobility.push({step:k+1,...physicalMobility(mobility,acquired.events[0].mobilityProbe,s,z,2,mobilitySeal)});
-      receipt.decisions.push({step:k+1,frame:hash(b),to:hash(next),q,phase,repeat,reason,priorTag:priorTag?.revision??null,knownReads:!!f});
+      receipt.decisions.push({step:k+1,frame:hash(b),to:hash(next),q,...(q===6?{data:act.data}:{}),phase,repeat,reason,priorTag:priorTag?.revision??null,knownReads:!!f});
       if(tag)receipt.stagnation.push({step:k+1,q,subjectAt:local(at(tag.from),2),subjectAfter:local(at(tag.to),2),connection:tag.connection,physicalSubject:same(at(tag.from),s.hero),prior:tag.previous});
       if(move>=0)receipt.mirrorMoves.push({step:k+1,phase,from:local(s.mirrors[move],2),to:local(z.mirrors[move],2)});
       if(mechanism){
         const out=acquired.events[0].mechanism;if(digest(out.trial)!==mechanismSeal)throw Error('Unsealed mechanism experiment');
         const step=mechanism.plan.steps[mechanism.index],site=at(step.c);
-        receipt.mechanisms.push({step:k+1,stage:step.stage,aim:mechanism.plan.basis,reason:mechanism.cause.tag,matched:out.matched,site:local(site,2),namesMirror:s.mirrors.some(p=>same(site,p)),namedSubject:same(at(step.p),s.hero),actualMirrorMoved:move>=0,areaBefore:island(world,s.hero),start:local(at(mechanism.plan.start),2),placement:local(at(mechanism.plan.placed),2),launch:mechanism.plan.launch?local(at(mechanism.plan.launch),2):null,arrivalRegion:mechanism.plan.arrival?island(world,at(mechanism.plan.arrival)):null,access:mechanism.plan.arrival?local(at(mechanism.plan.arrival),2):null});
+        receipt.mechanisms.push({step:k+1,seal:mechanismSeal,stage:step.stage,aim:mechanism.plan.basis,reason:mechanism.cause.tag,matched:out.matched,site:local(site,2),namesMirror:s.mirrors.some(p=>same(site,p)),namedSubject:same(at(step.p),s.hero),actualMirrorMoved:move>=0,areaBefore:island(world,s.hero),start:local(at(mechanism.plan.start),2),placement:local(at(mechanism.plan.placed),2),launch:mechanism.plan.launch?local(at(mechanism.plan.launch),2):null,arrivalRegion:mechanism.plan.arrival?island(world,at(mechanism.plan.arrival)):null,access:mechanism.plan.arrival?local(at(mechanism.plan.arrival),2):null});
       }
       receipt.counts[phase] = (receipt.counts[phase] ?? 0) + 1;
       receipt.actions++;
@@ -292,6 +295,7 @@ async function campaign(name) {
       if (q === 5 && t.landedOnValidMark)
         receipt.physicalActivations.push({ step: k + 1, from: t.from, to: t.to });
       if (next.level !== 2 || next.levelsCompleted > 1) {
+        receipt.officialScore=next.levelsCompleted;
         receipt.won = true;
         receipt.stop = 'official_boundary';
         break;
@@ -452,6 +456,7 @@ async function campaign(name) {
       retainedBinding = structuredClone(mem.previewCarry?.bindings[witnessedRule] ?? null);
       result.guided.identifiedRuleRetained = !!retainedBinding;
     }
+    if(name==='guided'&&l===1)(result.guided.publicLesson??=[]).push({id:q,...(q===6?{data}:{}),from:hash(board),to:hash(next)});
     history.push({ q, data, l });
     board = next;
     obs = after;
@@ -474,7 +479,11 @@ for (const file of autonomousRuns) {
   const run = JSON.parse((await readFile(file, 'utf8')).trim()),
     w = compileLevel(SS01_LEVELS[run.start - 1]),
     game = new SinkingStarSession(SS01_LEVELS);
-  if (run.start !== 1) game.selectLevel(run.start);
+  if(run.observedPriorLevelActions){
+    const lesson=result.guided.publicLesson;
+    if(lesson.length!==run.observedPriorLevelActions)throw Error('Wrong lesson length');
+    for(const cmd of lesson){if(hash(game.observe())!==cmd.from||hash(game.action(cmd.id,cmd.data))!==cmd.to)throw Error('Different demonstration');}
+  } else if (run.start !== 1) game.selectLevel(run.start);
   const events = new Map(run.preparation.map((e) => [e.actionIndex, e])),
     sites = new Set(),
     facts = {

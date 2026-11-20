@@ -33,6 +33,24 @@ const engine = sourceCode
       throw Error('Unexpected backend');
     });
 const hash = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex');
+const lessonFrames=new Map();
+if(run.observedPriorLevelActions&&!process.env.SIC_STUDY_OBSERVED_LESSON)throw Error('Set SIC_STUDY_OBSERVED_LESSON to the recorded public lesson');
+const packedLesson=run.observedPriorLevelActions?JSON.parse(readFileSync(process.env.SIC_STUDY_OBSERVED_LESSON,'utf8')):null;
+const lesson=packedLesson?.lesson??packedLesson;
+if(lesson&&(lesson.code!==run.code||lesson.endLevel!==run.start||lesson.commands.length!==run.observedPriorLevelActions))throw Error('Wrong observed lesson');
+if(lesson)run.publicLesson=lesson.commands;
+async function openNativeBoard(){
+  let b=await engine.dispatch({type:'load',code:run.code,level:lesson?run.start-1:run.start});
+  if(!lesson)return b;
+  for(const c of lesson.commands){
+    if(hash(b.frame).slice(0,16)!==c.from||b.level!==run.start-1)throw Error('Wrong lesson origin');
+    lessonFrames.set(c.from,b);
+    b=await engine.dispatch({type:'action',actionId:c.id,...(c.id===6?{data:c.data}:{})});
+    if(hash(b.frame).slice(0,16)!==c.to)throw Error('Wrong lesson outcome');
+    lessonFrames.set(c.to,b);
+  }
+  return b;
+}
 const openBoard = async () => sourceCode
   ? sourceReplay(
       engine,
@@ -41,7 +59,7 @@ const openBoard = async () => sourceCode
       ),
       run
     ).restore(0)
-  : await engine.dispatch({ type: 'load', code: run.code, level: run.start });
+  : await openNativeBoard();
 let board=await openBoard();
 if (board.level !== run.start && board.canSelectLevel)
   board = await engine.dispatch({ type: 'selectLevel', level: run.start });
@@ -119,6 +137,7 @@ async function partsAt(board, key, revision) {
   }
   return cache.get(key);
 }
+if(lesson)for(const [frame,b] of lessonFrames)await partsAt(b,frame,1);
 const needPositionHistory = run.preparation.some(
   (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator || e.terminalContact || e.mechanism || e.localRepeat || e.mobilityProbe
 );

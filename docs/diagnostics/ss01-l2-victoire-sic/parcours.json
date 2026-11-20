@@ -1,0 +1,1574 @@
+{
+  "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "frozen": {
+    "control": {
+      "tag": "sic-projected-affordances-source100-control-v1",
+      "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+      "files": 2401,
+      "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca",
+      "export": "projection-v22-eval-control"
+    },
+    "candidate": {
+      "tag": "sic-projected-affordances-source100-candidate-v30",
+      "sha": "124a8322c73bff333dac919c8a62e8b29318076c",
+      "files": 2458,
+      "digest": "c4fd95d5d59ab3258a54ae46533704b5b452ff8d7fa372f3a0c815f1aa23faa9",
+      "export": "projection-v30-eval-candidate"
+    }
+  },
+  "game": "SS01",
+  "target": 2,
+  "protocol": {
+    "lesson": "19 public commands from level 1",
+    "evaluation": "native sic-fallback selector from official level entry",
+    "resets": 0,
+    "priorScore": 1,
+    "finalScore": 2
+  },
+  "lesson": {
+    "code": "SS01",
+    "endLevel": 2,
+    "commands": [
+      {
+        "id": 2,
+        "from": "c62141ed0108269b",
+        "to": "ffe6af720196bf37"
+      },
+      {
+        "id": 4,
+        "from": "ffe6af720196bf37",
+        "to": "294910b031277dcf"
+      },
+      {
+        "id": 5,
+        "from": "294910b031277dcf",
+        "to": "524c8d76b270a202"
+      },
+      {
+        "id": 1,
+        "from": "524c8d76b270a202",
+        "to": "a8dca95d07481b81"
+      },
+      {
+        "id": 4,
+        "from": "a8dca95d07481b81",
+        "to": "cd995f61c1f617b5"
+      },
+      {
+        "id": 4,
+        "from": "cd995f61c1f617b5",
+        "to": "b3ad8baff14534e2"
+      },
+      {
+        "id": 4,
+        "from": "b3ad8baff14534e2",
+        "to": "dd743dc0215fa273"
+      },
+      {
+        "id": 4,
+        "from": "dd743dc0215fa273",
+        "to": "7bde207587269d47"
+      },
+      {
+        "id": 4,
+        "from": "7bde207587269d47",
+        "to": "10c16d4b103e61d6"
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 12,
+          "y": 39
+        },
+        "from": "10c16d4b103e61d6",
+        "to": "37961cc42f3e1e54"
+      },
+      {
+        "id": 1,
+        "from": "37961cc42f3e1e54",
+        "to": "62152c6b12dee132"
+      },
+      {
+        "id": 4,
+        "from": "62152c6b12dee132",
+        "to": "52ccebe04acf22fc"
+      },
+      {
+        "id": 4,
+        "from": "52ccebe04acf22fc",
+        "to": "4972171717fd8065"
+      },
+      {
+        "id": 5,
+        "from": "4972171717fd8065",
+        "to": "8fff64f44ba3f050"
+      },
+      {
+        "id": 2,
+        "from": "8fff64f44ba3f050",
+        "to": "9194b7483e18dc37"
+      },
+      {
+        "id": 2,
+        "from": "9194b7483e18dc37",
+        "to": "9ca4fa3147af239c"
+      },
+      {
+        "id": 4,
+        "from": "9ca4fa3147af239c",
+        "to": "59c194b201071c07"
+      },
+      {
+        "id": 4,
+        "from": "59c194b201071c07",
+        "to": "62dc30aaf9a0ab5a"
+      },
+      {
+        "id": 4,
+        "from": "62dc30aaf9a0ab5a",
+        "to": "b03a285600cc3e33"
+      }
+    ]
+  },
+  "actions": [
+    {
+      "n": 1,
+      "id": 4,
+      "from": "b03a285600cc3e33",
+      "to": "db2a683b59e5eae4",
+      "phase": "witnessedPreview",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"524c84acc9ad5eca57fd7923\",\"8a38ca314eac876b094f582b\",\"ACTION4\",null]",
+        "actor": "524c84acc9ad5eca57fd7923",
+        "indicator": "8a38ca314eac876b094f582b",
+        "gesture": {
+          "op": "ACTION4"
+        },
+        "command": "ACTION4",
+        "from": [
+          54,
+          31
+        ],
+        "indicated": [
+          84,
+          60
+        ],
+        "peers": [],
+        "before": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:1:revision:1:frame:b03a285600cc3e33",
+        "epoch": 1,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "after": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:0:revision:10:frame:10c16d4b103e61d6",
+          "arrived": [
+            101,
+            30
+          ],
+          "arrivedBox": [
+            50,
+            14,
+            51,
+            16
+          ],
+          "before": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:0:revision:9:frame:7bde207587269d47",
+          "command": "ACTION4",
+          "epoch": 0,
+          "from": [
+            95,
+            30
+          ],
+          "fromBox": [
+            47,
+            14,
+            48,
+            16
+          ],
+          "geometry": {
+            "pivots": [
+              {
+                "at": [
+                  57,
+                  36
+                ],
+                "role": "955458d83dd69373ad962b0b"
+              },
+              {
+                "at": [
+                  36,
+                  78
+                ],
+                "role": "108685dd7d698e3b6699b03f"
+              },
+              {
+                "at": [
+                  25,
+                  72
+                ],
+                "role": "8541aac56a10c9ac0f28ec63"
+              },
+              {
+                "at": [
+                  41,
+                  72
+                ],
+                "role": "f0137b4ab8e13053a765976d"
+              }
+            ]
+          },
+          "indicated": [
+            102,
+            30
+          ],
+          "indicatorChanged": true,
+          "indicatorForm": "c21417b2303973ff1afac20a1b03dfeab976ee46b2c40dd310c9fc86f9149ac8",
+          "peers": [],
+          "subjectForm": "f8f4b355e08c8496430afc737ba598901c41a5d9209031c2aa7d6d8e6715dccc"
+        },
+        "calibration": {
+          "hit": 0,
+          "lastMiss": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:0:revision:19:frame:62dc30aaf9a0ab5a",
+          "lastRival": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:0:revision:17:frame:9ca4fa3147af239c",
+          "miss": 4,
+          "rivalHit": 0,
+          "rivalMiss": 5
+        }
+      },
+      "commitment": "b386093868936eed3eb849f2fccbb9732b91f01a7001aaf4b56590c1f66b18b7"
+    },
+    {
+      "n": 2,
+      "id": 2,
+      "from": "db2a683b59e5eae4",
+      "to": "c4c08fb3fd84d124",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 0,
+      "commitment": "b923689878beda7981dd24645d1ff0c744ad5df914dc00f91105bac6bf73b8b2",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 3,
+      "id": 4,
+      "from": "c4c08fb3fd84d124",
+      "to": "f72ad9ca262d9dcf",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 1,
+      "commitment": "f08b1ee9f5a3db6a73f585fd1cb4c9193f7b46c6dec651c48b5822fa006244e4",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 4,
+      "id": 4,
+      "from": "f72ad9ca262d9dcf",
+      "to": "c487bed503f92e7e",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 2,
+      "commitment": "aab7070e1b5a3ab03b5a7983001de51cb26d08b0bf93878110d78b16b5e32e9b",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 5,
+      "id": 1,
+      "from": "c487bed503f92e7e",
+      "to": "1453b4ebf5d079dc",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 3,
+      "commitment": "003ba7eb2b9ed19b450653ec1b9f362cb5cefeda14b18e85d721cf90c76de999",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 6,
+      "id": 3,
+      "from": "1453b4ebf5d079dc",
+      "to": "34529fcb1b42f6fa",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 4,
+      "commitment": "8c1610c589cb21e1d792921911d5507a6113012b698e43f4974bce82bc03cebe",
+      "stage": "write",
+      "matched": true
+    },
+    {
+      "n": 7,
+      "id": 3,
+      "from": "34529fcb1b42f6fa",
+      "to": "4e1d08ff612197da",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 5,
+      "commitment": "8ae02b1be5bb1f02557215d72cc2fd276294863197bfa88bcf93bfb41edead76",
+      "stage": "write",
+      "matched": true
+    },
+    {
+      "n": 8,
+      "id": 3,
+      "from": "4e1d08ff612197da",
+      "to": "53e6bfc0d59af613",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 6,
+      "commitment": "a0155ccf2f8d95a7aec298ee580de98853a396144c815475b6ebcf60da29e610",
+      "stage": "write",
+      "matched": true
+    },
+    {
+      "n": 9,
+      "id": 4,
+      "from": "53e6bfc0d59af613",
+      "to": "cb06bbdd53a14f11",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 7,
+      "commitment": "d5bad1f51af6604acb9f151028634e199a48c416033d3e463101687312edbd66",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 10,
+      "id": 4,
+      "from": "cb06bbdd53a14f11",
+      "to": "b4faf4772d575b42",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 8,
+      "commitment": "8fafc88d7555c88e760624a3d5db82f2e238e4ac988f6060c7a927ad3e0483d6",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 11,
+      "id": 4,
+      "from": "b4faf4772d575b42",
+      "to": "49a28fc160080075",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 9,
+      "commitment": "3d0b575204c238440ed884024934a15451f0aa4199bd3770c671f1836e864538",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 12,
+      "id": 4,
+      "from": "49a28fc160080075",
+      "to": "3d0a991a8d6e6bb6",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 10,
+      "commitment": "d552677e2c3bbfd6ee5fa43e59a6dc805638a1513bc2d138479866ebd2f8f810",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 13,
+      "id": 5,
+      "from": "3d0a991a8d6e6bb6",
+      "to": "e124a5454022ff41",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 11,
+      "commitment": "1d5350559c62f2128086870b69c6b02e524f6b5ac0e3ba427772032944b8a544",
+      "stage": "read",
+      "matched": true
+    },
+    {
+      "n": 14,
+      "id": 4,
+      "from": "e124a5454022ff41",
+      "to": "7f142231c2e6dde7",
+      "phase": "reconfigureMechanism",
+      "template": 0,
+      "index": 12,
+      "commitment": "4858a83e2e26a34ab29e2312cf8f198fdf837ef65a4176460a23e2fa5cbe76c3",
+      "stage": "use",
+      "matched": true
+    },
+    {
+      "n": 15,
+      "id": 2,
+      "from": "7f142231c2e6dde7",
+      "to": "cceaad6646300bc9",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 0,
+      "commitment": "4d113f428d0642bfa6a8c3d9b4fd18a8d6987179728ad8173c9ecd873f4f5e05",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 16,
+      "id": 2,
+      "from": "cceaad6646300bc9",
+      "to": "3b3d9ffbb0fb0cd0",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 1,
+      "commitment": "68543b1fb9a5f0e7a1e55a38bf3f0cd8b4525d18f79e5a2ae8bd6f6516df26c6",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 17,
+      "id": 2,
+      "from": "3b3d9ffbb0fb0cd0",
+      "to": "e76ef809e1283b4f",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 2,
+      "commitment": "3e4b3bf75ff455e2d8c9096aeb5588067d3ceda39aac755bd41dec710ad2d05b",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 18,
+      "id": 2,
+      "from": "e76ef809e1283b4f",
+      "to": "dc5a13be9019cce3",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 3,
+      "commitment": "3fb286743edfbfdab35ad7534e59f2e1dc96e913f89f2055036d0c0d02c4c53f",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 19,
+      "id": 3,
+      "from": "dc5a13be9019cce3",
+      "to": "90f2992ec61a07fa",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 4,
+      "commitment": "d6e2baa94f23ff65456754af97590cc2d4d000ae86be367409625cde308e0649",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 20,
+      "id": 3,
+      "from": "90f2992ec61a07fa",
+      "to": "eea977ea3404c8b9",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 5,
+      "commitment": "277861ec478361b3ed21f6dc6e9e7678607555b6b469f1581486393773693588",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 21,
+      "id": 1,
+      "from": "eea977ea3404c8b9",
+      "to": "5e7f94e38773579e",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 6,
+      "commitment": "35ad955dbc9abf8993458f3982502c841896f3a0e4ae38c102e67e14a2a42c98",
+      "stage": "write",
+      "matched": true
+    },
+    {
+      "n": 22,
+      "id": 1,
+      "from": "5e7f94e38773579e",
+      "to": "8866082ef6725eb0",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 7,
+      "commitment": "8739b20aa4fad19daad28b51eb8104da0135bbc3e3fe293cb50aed49934e8e64",
+      "stage": "write",
+      "matched": true
+    },
+    {
+      "n": 23,
+      "id": 1,
+      "from": "8866082ef6725eb0",
+      "to": "d9c455ddfe147dcc",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 8,
+      "commitment": "e2d5b3f97481b4dfb315441e2ef02733c6f59ffb809d77de0c7330924f8fc2b5",
+      "stage": "write",
+      "matched": true
+    },
+    {
+      "n": 24,
+      "id": 1,
+      "from": "d9c455ddfe147dcc",
+      "to": "a010acca3ff97c26",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 9,
+      "commitment": "7fbfe01620aa129dc7fee97bf9445e4b75a34b892221152ac07264a0cff7d078",
+      "stage": "write",
+      "matched": true
+    },
+    {
+      "n": 25,
+      "id": 2,
+      "from": "a010acca3ff97c26",
+      "to": "23b6d74c5f265838",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 10,
+      "commitment": "14885434f755fcaff4f0edc88f98800706682c33f5bb46a4a1062fc2e476cf96",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 26,
+      "id": 2,
+      "from": "23b6d74c5f265838",
+      "to": "b46ec1a142e7d3fd",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 11,
+      "commitment": "ef1b2a5a2c3537b394b29ba11f727c7765befc6b1889509ea32220c29c60708d",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 27,
+      "id": 2,
+      "from": "b46ec1a142e7d3fd",
+      "to": "101d53c880f8c870",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 12,
+      "commitment": "bf7594b0ce7832dfd1a1ba97a425c29a635c44465e227906d4630c94b78628b7",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 28,
+      "id": 2,
+      "from": "101d53c880f8c870",
+      "to": "13a14f16755e603d",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 13,
+      "commitment": "a010ed06df37b36d1ea78978706a90cfce667930231a899ac5947d2fb6de5fe1",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 29,
+      "id": 2,
+      "from": "13a14f16755e603d",
+      "to": "e8a2d76366a6824d",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 14,
+      "commitment": "354199e75e38bb9ac6ff824d79d2204d050e42c68b26629e9cdc68a3cef292e7",
+      "stage": "move",
+      "matched": true
+    },
+    {
+      "n": 30,
+      "id": 5,
+      "from": "e8a2d76366a6824d",
+      "to": "423d2338fab7c1a3",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 15,
+      "commitment": "25c39bfd4c6678a03748c436727810c2a626a32a3bbc0def0afc9028cf271ab2",
+      "stage": "read",
+      "matched": true
+    },
+    {
+      "n": 31,
+      "id": 4,
+      "from": "423d2338fab7c1a3",
+      "to": "acf2ce36e445a23a",
+      "phase": "reconfigureMechanism",
+      "template": 1,
+      "index": 16,
+      "commitment": "757e5731938de3b7e17fd640c23da75ee64f5595a799749837a53a6eb07d2b4a",
+      "stage": "use",
+      "matched": true
+    },
+    {
+      "n": 32,
+      "id": 2,
+      "from": "acf2ce36e445a23a",
+      "to": "772e2a88d111ccdb",
+      "phase": "seekTerminalContact",
+      "forecast": {
+        "witness": {
+          "actor": "524c84acc9ad5eca57fd7923",
+          "after": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:1:revision:20:frame:b03a285600cc3e33",
+          "at": [
+            90,
+            48
+          ],
+          "before": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:0:revision:19:frame:62dc30aaf9a0ab5a",
+          "destination": [
+            89,
+            48
+          ],
+          "from": [
+            83,
+            48
+          ],
+          "marker": "ebac49ed7585b4fb744f9560",
+          "offset": [
+            1,
+            0
+          ],
+          "peers": 0,
+          "pitch": [
+            6,
+            6
+          ],
+          "q": "ACTION4",
+          "support": 10
+        },
+        "from": [
+          83,
+          54
+        ],
+        "to": [
+          83,
+          60
+        ],
+        "goal": [
+          83,
+          60
+        ],
+        "site": [
+          84,
+          60
+        ],
+        "peers": [],
+        "fixed": [],
+        "pitch": [
+          6,
+          6
+        ],
+        "op": "ACTION2",
+        "distance": 1,
+        "before": "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:1:revision:32:frame:acf2ce36e445a23a",
+        "key": "[\"acf2ce36e445a23a\",\"524c84acc9ad5eca57fd7923\",\"ebac49ed7585b4fb744f9560\",[84,60],\"ACTION2\"]"
+      },
+      "commitment": "e8de8fd007dc7bec2dc50906c51155e031f695b782b7af68c54ecefdf2984642"
+    }
+  ],
+  "templates": [
+    {
+      "plan": {
+        "pitch": [
+          6,
+          6
+        ],
+        "controlEvidence": [
+          {
+            "op": "ACTION4",
+            "d": [
+              6,
+              0
+            ],
+            "basis": "pooled",
+            "support": 11
+          },
+          {
+            "op": "ACTION2",
+            "d": [
+              0,
+              6
+            ],
+            "basis": "pooled",
+            "support": 3
+          },
+          {
+            "op": "ACTION1",
+            "d": [
+              0,
+              -6
+            ],
+            "basis": "pooled",
+            "support": 2
+          },
+          {
+            "op": "ACTION3",
+            "d": [
+              -6,
+              0
+            ],
+            "basis": "untested",
+            "support": 0
+          }
+        ],
+        "p": "524c84acc9ad5eca57fd7923",
+        "c": "0ab58a635d9b5fa7dd8ddc40",
+        "actorPeers": [],
+        "indicatorOffset": [
+          1,
+          0
+        ],
+        "witnessRefs": [
+          "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:0:revision:3:frame:294910b031277dcf",
+          "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:0:revision:4:frame:524c8d76b270a202"
+        ],
+        "fixed": [
+          [
+            41,
+            77
+          ]
+        ],
+        "start": [
+          59,
+          30
+        ],
+        "initialC": [
+          65,
+          29
+        ],
+        "support": [],
+        "home": 18,
+        "placed": [
+          47,
+          29
+        ],
+        "launch": [
+          77,
+          30
+        ],
+        "arrival": [
+          47,
+          60
+        ],
+        "use": [
+          53,
+          60
+        ],
+        "indicator": "d74c41540e5c4c1135206209",
+        "projectionBasis": "fitted_symmetry",
+        "steps": [
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              59,
+              30
+            ],
+            "c": [
+              65,
+              29
+            ],
+            "to": [
+              59,
+              36
+            ],
+            "placed": [
+              65,
+              29
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "move",
+            "p": [
+              59,
+              36
+            ],
+            "c": [
+              65,
+              29
+            ],
+            "to": [
+              65,
+              36
+            ],
+            "placed": [
+              65,
+              29
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "move",
+            "p": [
+              65,
+              36
+            ],
+            "c": [
+              65,
+              29
+            ],
+            "to": [
+              71,
+              36
+            ],
+            "placed": [
+              65,
+              29
+            ]
+          },
+          {
+            "op": "ACTION1",
+            "stage": "move",
+            "p": [
+              71,
+              36
+            ],
+            "c": [
+              65,
+              29
+            ],
+            "to": [
+              71,
+              30
+            ],
+            "placed": [
+              65,
+              29
+            ]
+          },
+          {
+            "op": "ACTION3",
+            "stage": "write",
+            "p": [
+              71,
+              30
+            ],
+            "c": [
+              65,
+              29
+            ],
+            "to": [
+              65,
+              30
+            ],
+            "placed": [
+              59,
+              29
+            ]
+          },
+          {
+            "op": "ACTION3",
+            "stage": "write",
+            "p": [
+              65,
+              30
+            ],
+            "c": [
+              59,
+              29
+            ],
+            "to": [
+              59,
+              30
+            ],
+            "placed": [
+              53,
+              29
+            ]
+          },
+          {
+            "op": "ACTION3",
+            "stage": "write",
+            "p": [
+              59,
+              30
+            ],
+            "c": [
+              53,
+              29
+            ],
+            "to": [
+              53,
+              30
+            ],
+            "placed": [
+              47,
+              29
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "move",
+            "p": [
+              53,
+              30
+            ],
+            "c": [
+              47,
+              29
+            ],
+            "to": [
+              59,
+              30
+            ],
+            "placed": [
+              47,
+              29
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "move",
+            "p": [
+              59,
+              30
+            ],
+            "c": [
+              47,
+              29
+            ],
+            "to": [
+              65,
+              30
+            ],
+            "placed": [
+              47,
+              29
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "move",
+            "p": [
+              65,
+              30
+            ],
+            "c": [
+              47,
+              29
+            ],
+            "to": [
+              71,
+              30
+            ],
+            "placed": [
+              47,
+              29
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "move",
+            "p": [
+              71,
+              30
+            ],
+            "c": [
+              47,
+              29
+            ],
+            "to": [
+              77,
+              30
+            ],
+            "placed": [
+              47,
+              29
+            ]
+          },
+          {
+            "op": "ACTION5",
+            "stage": "read",
+            "p": [
+              77,
+              30
+            ],
+            "c": [
+              47,
+              29
+            ],
+            "to": [
+              47,
+              60
+            ],
+            "placed": [
+              47,
+              29
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "use",
+            "p": [
+              47,
+              60
+            ],
+            "c": [
+              47,
+              29
+            ],
+            "to": [
+              53,
+              60
+            ],
+            "placed": [
+              47,
+              29
+            ]
+          }
+        ],
+        "key": "[\"[\\\"524c84acc9ad5eca57fd7923\\\",\\\"d74c41540e5c4c1135206209\\\",\\\"ACTION5\\\",\\\"0ab58a635d9b5fa7dd8ddc40\\\",[65,29]]\",[59,30],[47,29],[77,30],[47,60],\"ACTION2\"]",
+        "basis": "move_to_change_access",
+        "otherSurface": true,
+        "otherSetups": 13,
+        "opensCells": 5,
+        "recoverable": false
+      },
+      "index": 0,
+      "cause": {
+        "tag": "projected_access_limit",
+        "frame": "db2a683b59e5eae4",
+        "revision": 2,
+        "op": "ACTION5",
+        "actor": "524c84acc9ad5eca57fd7923",
+        "from": [
+          59,
+          30
+        ],
+        "reachable": 18,
+        "arrival": [
+          47,
+          60
+        ]
+      },
+      "options": [
+        {
+          "site": "0ab58a635d9b5fa7dd8ddc40",
+          "initial": [
+            65,
+            29
+          ],
+          "placed": [
+            47,
+            29
+          ],
+          "launch": [
+            77,
+            30
+          ],
+          "arrival": [
+            47,
+            60
+          ],
+          "steps": 13,
+          "opensCells": 5,
+          "recoverable": false
+        }
+      ]
+    },
+    {
+      "plan": {
+        "pitch": [
+          6,
+          6
+        ],
+        "controlEvidence": [
+          {
+            "op": "ACTION4",
+            "d": [
+              6,
+              0
+            ],
+            "basis": "pooled",
+            "support": 18
+          },
+          {
+            "op": "ACTION2",
+            "d": [
+              0,
+              6
+            ],
+            "basis": "pooled",
+            "support": 4
+          },
+          {
+            "op": "ACTION1",
+            "d": [
+              0,
+              -6
+            ],
+            "basis": "pooled",
+            "support": 3
+          },
+          {
+            "op": "ACTION3",
+            "d": [
+              -6,
+              0
+            ],
+            "basis": "pooled",
+            "support": 3
+          }
+        ],
+        "p": "524c84acc9ad5eca57fd7923",
+        "c": "0ab58a635d9b5fa7dd8ddc40",
+        "actorPeers": [],
+        "indicatorOffset": [
+          1,
+          0
+        ],
+        "witnessRefs": [
+          "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:1:revision:13:frame:3d0a991a8d6e6bb6",
+          "sra-v6-bf3e55d6-71f9-463b-a14b-bd87e6f04335:epoch:1:revision:14:frame:e124a5454022ff41"
+        ],
+        "fixed": [
+          [
+            47,
+            29
+          ]
+        ],
+        "start": [
+          53,
+          60
+        ],
+        "initialC": [
+          41,
+          77
+        ],
+        "support": [],
+        "home": 35,
+        "placed": [
+          41,
+          53
+        ],
+        "launch": [
+          41,
+          90
+        ],
+        "arrival": [
+          77,
+          54
+        ],
+        "use": [
+          83,
+          54
+        ],
+        "indicator": "d74c41540e5c4c1135206209",
+        "projectionBasis": "translated_witness",
+        "steps": [
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              53,
+              60
+            ],
+            "c": [
+              41,
+              77
+            ],
+            "to": [
+              53,
+              66
+            ],
+            "placed": [
+              41,
+              77
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              53,
+              66
+            ],
+            "c": [
+              41,
+              77
+            ],
+            "to": [
+              53,
+              72
+            ],
+            "placed": [
+              41,
+              77
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              53,
+              72
+            ],
+            "c": [
+              41,
+              77
+            ],
+            "to": [
+              53,
+              78
+            ],
+            "placed": [
+              41,
+              77
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              53,
+              78
+            ],
+            "c": [
+              41,
+              77
+            ],
+            "to": [
+              53,
+              84
+            ],
+            "placed": [
+              41,
+              77
+            ]
+          },
+          {
+            "op": "ACTION3",
+            "stage": "move",
+            "p": [
+              53,
+              84
+            ],
+            "c": [
+              41,
+              77
+            ],
+            "to": [
+              47,
+              84
+            ],
+            "placed": [
+              41,
+              77
+            ]
+          },
+          {
+            "op": "ACTION3",
+            "stage": "move",
+            "p": [
+              47,
+              84
+            ],
+            "c": [
+              41,
+              77
+            ],
+            "to": [
+              41,
+              84
+            ],
+            "placed": [
+              41,
+              77
+            ]
+          },
+          {
+            "op": "ACTION1",
+            "stage": "write",
+            "p": [
+              41,
+              84
+            ],
+            "c": [
+              41,
+              77
+            ],
+            "to": [
+              41,
+              78
+            ],
+            "placed": [
+              41,
+              71
+            ]
+          },
+          {
+            "op": "ACTION1",
+            "stage": "write",
+            "p": [
+              41,
+              78
+            ],
+            "c": [
+              41,
+              71
+            ],
+            "to": [
+              41,
+              72
+            ],
+            "placed": [
+              41,
+              65
+            ]
+          },
+          {
+            "op": "ACTION1",
+            "stage": "write",
+            "p": [
+              41,
+              72
+            ],
+            "c": [
+              41,
+              65
+            ],
+            "to": [
+              41,
+              66
+            ],
+            "placed": [
+              41,
+              59
+            ]
+          },
+          {
+            "op": "ACTION1",
+            "stage": "write",
+            "p": [
+              41,
+              66
+            ],
+            "c": [
+              41,
+              59
+            ],
+            "to": [
+              41,
+              60
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              41,
+              60
+            ],
+            "c": [
+              41,
+              53
+            ],
+            "to": [
+              41,
+              66
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              41,
+              66
+            ],
+            "c": [
+              41,
+              53
+            ],
+            "to": [
+              41,
+              72
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              41,
+              72
+            ],
+            "c": [
+              41,
+              53
+            ],
+            "to": [
+              41,
+              78
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              41,
+              78
+            ],
+            "c": [
+              41,
+              53
+            ],
+            "to": [
+              41,
+              84
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          },
+          {
+            "op": "ACTION2",
+            "stage": "move",
+            "p": [
+              41,
+              84
+            ],
+            "c": [
+              41,
+              53
+            ],
+            "to": [
+              41,
+              90
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          },
+          {
+            "op": "ACTION5",
+            "stage": "read",
+            "p": [
+              41,
+              90
+            ],
+            "c": [
+              41,
+              53
+            ],
+            "to": [
+              77,
+              54
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          },
+          {
+            "op": "ACTION4",
+            "stage": "use",
+            "p": [
+              77,
+              54
+            ],
+            "c": [
+              41,
+              53
+            ],
+            "to": [
+              83,
+              54
+            ],
+            "placed": [
+              41,
+              53
+            ]
+          }
+        ],
+        "key": "[\"[\\\"524c84acc9ad5eca57fd7923\\\",\\\"d74c41540e5c4c1135206209\\\",\\\"ACTION5\\\",\\\"0ab58a635d9b5fa7dd8ddc40\\\",[41,77]]\",[53,60],[41,53],[41,90],[77,54],\"ACTION2\"]",
+        "basis": "move_to_change_access",
+        "otherSurface": true,
+        "otherSetups": 28,
+        "opensCells": 5,
+        "recoverable": false
+      },
+      "index": 0,
+      "cause": {
+        "tag": "projected_access_limit",
+        "frame": "7f142231c2e6dde7",
+        "revision": 15,
+        "op": "ACTION5",
+        "actor": "524c84acc9ad5eca57fd7923",
+        "from": [
+          53,
+          60
+        ],
+        "reachable": 35,
+        "arrival": [
+          77,
+          54
+        ]
+      },
+      "options": [
+        {
+          "site": "0ab58a635d9b5fa7dd8ddc40",
+          "initial": [
+            41,
+            77
+          ],
+          "placed": [
+            41,
+            53
+          ],
+          "launch": [
+            41,
+            90
+          ],
+          "arrival": [
+            77,
+            54
+          ],
+          "steps": 17,
+          "opensCells": 5,
+          "recoverable": false
+        }
+      ]
+    }
+  ],
+  "uniquePublicImages": 33,
+  "trajectory": "78028e7fd57df5407040ce8345d1627099ccdc957be1aa8b457ef77d29cb634e",
+  "nativeReplay": {
+    "actions": 32,
+    "zoneProgress": {
+      "tagged": 0,
+      "witnessedWalk": 0,
+      "modeledSubstrate": 0,
+      "closedCycles": 0,
+      "mobilityTests": 0,
+      "mobilityMoved": 0,
+      "mobilityRivalCompared": 0,
+      "mobilitySelective": 0,
+      "programs": 2,
+      "listed": 2,
+      "predictedCrossings": 2,
+      "attemptedWrites": 7,
+      "confirmedWrites": 7,
+      "arrivals": 2,
+      "uses": 2,
+      "official": 0,
+      "terminalSteps": 1,
+      "terminalWins": 1,
+      "comparedWrites": 7,
+      "changedAgainstRepetition": 7
+    },
+    "won": true
+  }
+}

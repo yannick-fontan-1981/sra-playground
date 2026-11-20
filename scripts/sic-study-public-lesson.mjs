@@ -4,7 +4,8 @@ import { pathToFileURL } from 'node:url';
 import { createHash } from 'node:crypto';
 const hash = (rows) => createHash('sha256').update(JSON.stringify(rows)).digest('hex').slice(0, 16);
 export async function publicLesson(games, code, start, file, solver) {
-  const record = JSON.parse(await readFile(file, 'utf8'));
+  const packed = JSON.parse(await readFile(file, 'utf8'));
+  const record = packed.lesson ?? packed;
   if (record.code !== code || record.endLevel !== start || start < 2) throw Error('Wrong public lesson');
   const history = [];
   let board = await games.dispatch({ type: 'load', code, level: start - 1 });

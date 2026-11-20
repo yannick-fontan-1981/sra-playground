@@ -24,13 +24,13 @@ export function witnessedPreviewAudit(run, hash, partsAt, cache, commandKey) {
   }
   function witness(w, actor, indicator, latestRevision) {
     const prior = ref(w.before),
-      later = ref(w.after);
+      later = ref(w.after), historical=prior.epoch===0&&run.publicLesson?run.publicLesson:run.replayCommands;
     assert(
       later.rev === prior.rev + 1 &&
-        later.rev <= latestRevision &&
-        run.replayCommands[prior.rev - 1]?.from === prior.frame &&
-        run.replayCommands[prior.rev - 1]?.to === later.frame &&
-        commandKey(run.replayCommands[prior.rev - 1]) === w.command,
+        (historical===run.publicLesson?later.rev<=historical.length+1:later.rev<=latestRevision) &&
+        historical[prior.rev - 1]?.from === prior.frame &&
+        historical[prior.rev - 1]?.to === later.frame &&
+        commandKey(historical[prior.rev - 1]) === w.command,
       'historical command'
     );
     const starts = get(prior.frame, actor),

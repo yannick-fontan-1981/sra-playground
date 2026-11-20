@@ -1,0 +1,542 @@
+{
+  "environment": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "frozen": {
+    "25": {
+      "tag": "sic-projected-affordances-source100-candidate-v25",
+      "sha": "4709b749938aa2b1c3d16fb187784bee3fb2ac0f",
+      "files": 2452,
+      "digest": "38056ae79206b27adadd970ab1e3ea1e11f1ab47e6beb285a8279c5d4a110f74",
+      "export": "projection-v25-eval-candidate"
+    },
+    "26": {
+      "tag": "sic-projected-affordances-source100-candidate-v26",
+      "sha": "820f2e9edcf9591a1aa0de9abc361fe95acbcf1b",
+      "files": 2453,
+      "digest": "c9feba660a54b5a4e2944b42180e0f3c03d5e0485bcb04c2574bee242bbed154",
+      "export": "projection-v26-eval-candidate"
+    },
+    "27": {
+      "tag": "sic-projected-affordances-source100-candidate-v27",
+      "sha": "a04a30dd3ea43207f434c052d2366a8f720b09a4",
+      "files": 2456,
+      "digest": "4c2a010ddb24335de18de90f4192352668c256bc21d1596e4e21865f601098b9",
+      "export": "projection-v27-eval-candidate"
+    },
+    "28": {
+      "tag": "sic-projected-affordances-source100-candidate-v28",
+      "sha": "cde1b32a7174518f7a37d74638ec304927d5430c",
+      "files": 2457,
+      "digest": "7996e9ba7a7b361bea3b9c34f893aa66a8dd03c0a276317b9e99065921e01fce",
+      "export": "projection-v28-eval-candidate"
+    },
+    "29": {
+      "tag": "sic-projected-affordances-source100-candidate-v29",
+      "sha": "c87a11bf7cb6b457145d02e86151099e8415b640",
+      "files": 2457,
+      "digest": "63450cc0d24ddcbaf776d53bbd995c1343a42b4ebefb4e8f83f1b1aea50ab3d1",
+      "export": "projection-v29-eval-candidate"
+    },
+    "30": {
+      "tag": "sic-projected-affordances-source100-candidate-v30",
+      "sha": "124a8322c73bff333dac919c8a62e8b29318076c",
+      "files": 2458,
+      "digest": "c4fd95d5d59ab3258a54ae46533704b5b452ff8d7fa372f3a0c815f1aa23faa9",
+      "export": "projection-v30-eval-candidate"
+    }
+  },
+  "control": {
+    "tag": "sic-projected-affordances-source100-control-v1",
+    "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+    "files": 2401,
+    "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca",
+    "export": "projection-v22-eval-control"
+  },
+  "reserved": "SS09 L2",
+  "warm": {
+    "control": {
+      "commands": 718,
+      "won": false,
+      "priorLevelCommands": 19,
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "trajectory": "5c0d9ea586c1b4bf71501bd53333f3570b53fcc896ec870374a207ecbed6d4cb",
+      "distinctPublicImages": 162,
+      "returns": 453,
+      "stoppingReason": "level_active_time_budget"
+    },
+    "v29": {
+      "commands": 185,
+      "won": true,
+      "priorLevelCommands": 19,
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "trajectory": "da1e25a95591f97451e3dc2fe17dff911f6c9b0a4986f6a03a80a6567e56f259",
+      "distinctPublicImages": 68,
+      "returns": 106,
+      "stoppingReason": "target_levels_completed"
+    },
+    "v30": {
+      "commands": 32,
+      "won": true,
+      "priorLevelCommands": 19,
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "trajectory": "78028e7fd57df5407040ce8345d1627099ccdc957be1aa8b457ef77d29cb634e",
+      "distinctPublicImages": 33,
+      "returns": 0,
+      "stoppingReason": "target_levels_completed"
+    }
+  },
+  "cold": {
+    "SS01": {
+      "control": {
+        "commands": 579,
+        "won": false,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "c8ba139235f913e9c6a27b4a61660b61e137ec1af2c64235cec4e3fa67c5bc64"
+      },
+      "v28": {
+        "commands": 469,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "c25cc0350ef970090d69d22beccc46789de3bfb6f000ba1b6c6e4c83d537ca5c",
+        "distinctPublicImages": 82,
+        "returns": 340,
+        "stoppingReason": "level_active_time_budget"
+      },
+      "v29": {
+        "commands": 542,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "e2d589c5609965644de8d6bfd747f379c850db882c3fcb6f3d61fdbc606aae2f",
+        "distinctPublicImages": 87,
+        "returns": 406,
+        "stoppingReason": "level_active_time_budget"
+      },
+      "v30": {
+        "commands": 539,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "b4780919ff570ebe9b3f8ac1ec74f04cff65dbcf88a2759a1437cd94ba26c1d5",
+        "distinctPublicImages": 87,
+        "returns": 403,
+        "stoppingReason": "level_active_time_budget"
+      }
+    },
+    "SS06": {
+      "control": {
+        "commands": 751,
+        "won": false,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "a03cff0d9c74480a7700d8b015c6d29ee5fee5d6975c2456151073d34e7be543"
+      },
+      "v28": {
+        "commands": 468,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "71fc4fe534b0685b92ae792ee749f0a37b5fe8f509604abbb0a63aafcd9a2268",
+        "distinctPublicImages": 81,
+        "returns": 106,
+        "stoppingReason": "level_active_time_budget"
+      },
+      "v29": {
+        "commands": 537,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "b37a050d454e73fcd58faf482de739294940322fc81d09ae7895b6c523694380",
+        "distinctPublicImages": 91,
+        "returns": 156,
+        "stoppingReason": "level_active_time_budget"
+      },
+      "v30": {
+        "commands": 530,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "138d7eeb4ff4175066df7a655c700e6ed7a5efadb10d15abfaa2cf882f3ee728",
+        "distinctPublicImages": 91,
+        "returns": 149,
+        "stoppingReason": "level_active_time_budget"
+      }
+    },
+    "SS07": {
+      "control": {
+        "commands": 5,
+        "won": false,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c"
+      },
+      "v28": {
+        "commands": 47,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "c56b68716c816042702ee85b9aef89679a015e51be2f2812a94000a0da0d23cf",
+        "distinctPublicImages": 17,
+        "returns": 21,
+        "stoppingReason": "native_game_over"
+      },
+      "v29": {
+        "commands": 47,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "c56b68716c816042702ee85b9aef89679a015e51be2f2812a94000a0da0d23cf",
+        "distinctPublicImages": 17,
+        "returns": 21,
+        "stoppingReason": "native_game_over"
+      },
+      "v30": {
+        "commands": 47,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "c56b68716c816042702ee85b9aef89679a015e51be2f2812a94000a0da0d23cf",
+        "distinctPublicImages": 17,
+        "returns": 21,
+        "stoppingReason": "native_game_over"
+      }
+    },
+    "SS08": {
+      "control": {
+        "commands": 791,
+        "won": false,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "9ba2eb0933060f000d6476dc2a58558a4c77a2dccbff942776a264e64069a09f"
+      },
+      "v28": {
+        "commands": 617,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "602c49d0eece03aee3edfec9c7c33316b9876f5b3279b9d3fcdb164273d8a2e6",
+        "distinctPublicImages": 39,
+        "returns": 352,
+        "stoppingReason": "level_active_time_budget"
+      },
+      "v29": {
+        "commands": 705,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "0a4ea3aca1e2eec0422d8eab729c3b328717757f24ccee152b80fb8f2e104300",
+        "distinctPublicImages": 39,
+        "returns": 411,
+        "stoppingReason": "level_active_time_budget"
+      },
+      "v30": {
+        "commands": 712,
+        "won": false,
+        "priorLevelCommands": 0,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "4c4ece821ae8f305bfe63c49d2ec250e29aec04f9e7f8fb0ddd6aa468b953080",
+        "distinctPublicImages": 39,
+        "returns": 414,
+        "stoppingReason": "level_active_time_budget"
+      }
+    }
+  },
+  "campaign": {
+    "v28": {
+      "commands": 462,
+      "won": false,
+      "priorLevelCommands": 0,
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "trajectory": "b1de43ded2547435bc9be07d9b5551e523697c189b16d872e3f9738cf46dfd39",
+      "distinctPublicImages": 128,
+      "returns": 281,
+      "stoppingReason": "level_active_time_budget"
+    },
+    "v29": {
+      "commands": 523,
+      "won": false,
+      "priorLevelCommands": 0,
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "trajectory": "8e6c094824a0b31537b80f5c5ecbd1ff1454c96442f0c5a8a4616a46326dd000",
+      "distinctPublicImages": 144,
+      "returns": 321,
+      "stoppingReason": "level_active_time_budget"
+    },
+    "v30": {
+      "commands": 520,
+      "won": false,
+      "priorLevelCommands": 0,
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "trajectory": "f7571df1280ca146cafc317a251f49e1231f32ca556b4644e0456eb34c0de20b",
+      "distinctPublicImages": 142,
+      "returns": 320,
+      "stoppingReason": "level_active_time_budget"
+    }
+  },
+  "ablation": [
+    {
+      "omitted": [
+        6,
+        7,
+        8
+      ],
+      "won": false,
+      "score": 1,
+      "regions": [
+        "haut"
+      ]
+    },
+    {
+      "omitted": [
+        21,
+        22,
+        23,
+        24
+      ],
+      "won": false,
+      "score": 1,
+      "regions": [
+        "haut",
+        "gauche"
+      ]
+    }
+  ],
+  "physical": {
+    "commands": 32,
+    "score": 2,
+    "distinctImages": 33,
+    "regions": [
+      "haut",
+      "gauche",
+      "droite"
+    ],
+    "forecasts": [
+      {
+        "n": 2,
+        "reachable": 18,
+        "proposed": 13,
+        "method": "fitted_symmetry",
+        "site": [
+          8,
+          3
+        ],
+        "placed": [
+          5,
+          3
+        ],
+        "launch": [
+          10,
+          3
+        ],
+        "arrival": [
+          5,
+          8
+        ],
+        "continuation": [
+          6,
+          8
+        ],
+        "cause": "projected_access_limit"
+      },
+      {
+        "n": 15,
+        "reachable": 35,
+        "proposed": 28,
+        "method": "translated_witness",
+        "site": [
+          4,
+          11
+        ],
+        "placed": [
+          4,
+          7
+        ],
+        "launch": [
+          4,
+          13
+        ],
+        "arrival": [
+          10,
+          7
+        ],
+        "continuation": [
+          11,
+          7
+        ],
+        "cause": "projected_access_limit"
+      }
+    ],
+    "localControls": [
+      {
+        "n": 13,
+        "expected": 5,
+        "alternatives": [
+          {
+            "q": 1,
+            "arrived": [
+              10,
+              3
+            ],
+            "region": "haut",
+            "score": 1
+          },
+          {
+            "q": 2,
+            "arrived": [
+              10,
+              4
+            ],
+            "region": "haut",
+            "score": 1
+          },
+          {
+            "q": 3,
+            "arrived": [
+              9,
+              3
+            ],
+            "region": "haut",
+            "score": 1
+          },
+          {
+            "q": 4,
+            "arrived": [
+              10,
+              3
+            ],
+            "region": "haut",
+            "score": 1
+          },
+          {
+            "q": 5,
+            "arrived": [
+              5,
+              8
+            ],
+            "region": "gauche",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "n": 30,
+        "expected": 5,
+        "alternatives": [
+          {
+            "q": 1,
+            "arrived": [
+              4,
+              12
+            ],
+            "region": "gauche",
+            "score": 1
+          },
+          {
+            "q": 2,
+            "arrived": [
+              4,
+              14
+            ],
+            "region": "gauche",
+            "score": 1
+          },
+          {
+            "q": 3,
+            "arrived": [
+              3,
+              13
+            ],
+            "region": "gauche",
+            "score": 1
+          },
+          {
+            "q": 4,
+            "arrived": [
+              5,
+              13
+            ],
+            "region": "gauche",
+            "score": 1
+          },
+          {
+            "q": 5,
+            "arrived": [
+              10,
+              7
+            ],
+            "region": "droite",
+            "score": 1
+          }
+        ]
+      },
+      {
+        "n": 32,
+        "expected": 2,
+        "alternatives": [
+          {
+            "q": 1,
+            "arrived": [
+              11,
+              6
+            ],
+            "region": "droite",
+            "score": 1
+          },
+          {
+            "q": 2,
+            "arrived": [
+              11,
+              8
+            ],
+            "region": "droite",
+            "score": 2
+          },
+          {
+            "q": 3,
+            "arrived": [
+              10,
+              7
+            ],
+            "region": "droite",
+            "score": 1
+          },
+          {
+            "q": 4,
+            "arrived": [
+              12,
+              7
+            ],
+            "region": "droite",
+            "score": 1
+          },
+          {
+            "q": 5,
+            "arrived": [
+              4,
+              14
+            ],
+            "region": "gauche",
+            "score": 1
+          }
+        ]
+      }
+    ]
+  },
+  "warmCommonPrefix_v29_v30": 31,
+  "source": {
+    "games": 100,
+    "upperLevels": 18,
+    "replayedSourceLevels": 118,
+    "closedCycleRoots": 73,
+    "closedCycleLevels": 19,
+    "untriedControlTests": 25,
+    "movingNamedPartsDistinctFromRepetition": 8,
+    "controlledPeerForecasts": 451,
+    "exactPositions": 237,
+    "activeAndVisibleReferenceForecasts": 509,
+    "exactReferenceArrivals": 375,
+    "withSameRayForecasts": 511,
+    "withSameRayExact": 377,
+    "levelsWithOfficialCompletion": 73,
+    "terminalContactCandidateLevels": 20,
+    "terminalLevelsWithFailingRival": 20,
+    "canonicalTests": 378
+  }
+}
