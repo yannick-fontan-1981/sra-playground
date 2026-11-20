@@ -29,7 +29,9 @@ const events = new Map(
 );
 const witnessed = new Map();
 const states = new Set([run.initial.slice(0, 16)]);
-const frontier = { routes: 0, newProbes: 0, arrivals: 0, continuations: 0 };
+const frontier = { routes: 0, newProbes: 0, arrivals: 0, continuations: 0, subsequentUses: 0 };
+const openings = { proposed: 0, placements: 0, transported: 0, matchedControl: 0, subsequentUses: 0 };
+const controlled = new Set();
 const counts = { issued: 0, observed: 0, verifiedLanding: 0, verifiedContinuation: 0, refuted: 0 };
 const cache = new Map();
 const delayed = { issued: 0, preparedAccess: 0, exactPredictions: 0, followingMovements: 0 };
@@ -51,13 +53,13 @@ async function partsAt(board, key, revision) {
   }
   return cache.get(key);
 }
-const needDelayed = run.preparation.some((e) => e.delayed);
+const needPositionHistory = run.preparation.some((e) => e.delayed || e.frontier?.place);
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
   const action = commandKey(cmd);
-  if (needDelayed) await partsAt(board, cmd.from, i + 1);
+  if (needPositionHistory) await partsAt(board, cmd.from, i + 1);
   const input = [cmd.from, board.level, board.state, board.availableActionIds.join(','), action].join('/');
   const prior = witnessed.get(input) ?? new Set();
   const wasTried = prior.size > 0;
@@ -143,13 +145,53 @@ for (const [i, cmd] of run.replayCommands.entries()) {
       if (action !== f.probe || wasTried) throw Error('Claimed new probe is not fresh at ' + i);
       frontier.newProbes++;
     }
-    if (['arrival_verified', 'continuation_verified'].includes(event.result)) {
-      const expected = event.phase === 'frontierUse' ? f.use : f.arrival;
-      const seen = parts.find((e) => e.signature === expected.role && !e.identity_ambiguous);
-      if (action !== expected.op || seen?.position.join() !== expected.to.join())
-        throw Error('Claimed forecast differs from the independently replayed observation at ' + i);
-      if (event.phase === 'frontierUse') frontier.continuations++;
-      else frontier.arrivals++;
+    const opening = f.place?.opening;
+    if (opening && event.phase === 'frontierProbe') openings.proposed++;
+    if (['arrival_verified', 'continuation_verified', 'subsequent_use_verified'].includes(event.result)) {
+      const expected =
+        event.phase === 'frontierConsequence' ? f.after : event.phase === 'frontierUse' ? f.use : f.arrival;
+      if (action !== expected.op || location(parts, expected.role) !== expected.to.join())
+        throw Error('False spatial prediction at ' + i);
+      if (f.place && location(cache.get(cmd.from), expected.role) !== expected.from.join())
+        throw Error('False origin of a spatial prediction at ' + i);
+      if (event.phase === 'frontierConsequence') {
+        frontier.subsequentUses++;
+        if (controlled.has(i - 1)) openings.subsequentUses++;
+      } else if (event.phase === 'frontierUse') {
+        frontier.continuations++;
+        if (opening) {
+          const prep = run.replayCommands[i - 1],
+            prior = events.get(i);
+          if (
+            prior?.result !== 'arrival_verified' ||
+            prior.frontier?.place?.opening?.traveler !== opening.traveler ||
+            !prep ||
+            commandKey(prep) !== f.probe ||
+            location(cache.get(prep.from), expected.role) !== expected.from.join() ||
+            location(cache.get(prep.to), opening.mover) !== opening.placement.join()
+          )
+            throw Error('Unmatched placement for transfer at ' + i);
+          openings.transported++;
+          if (opening.controlRef !== null) {
+            const id = i + opening.controlRef - event.revision,
+              bare = run.replayCommands[id];
+            if (
+              id < 0 ||
+              id >= i - 1 ||
+              bare.from !== prep.from ||
+              commandKey(bare) !== action ||
+              location(cache.get(bare.to), expected.role) !== opening.without.join() ||
+              opening.without.join() === expected.to.join()
+            )
+              throw Error('Unreproducible bare control at ' + i);
+            controlled.add(i);
+            openings.matchedControl++;
+          }
+        }
+      } else {
+        frontier.arrivals++;
+        if (opening) openings.placements++;
+      }
     }
     continue;
   }
@@ -182,6 +224,7 @@ console.log(
     distinctImages: states.size,
     projections: counts,
     frontier,
+    openings,
     delayed,
   })
 );

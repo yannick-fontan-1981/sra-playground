@@ -73,7 +73,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
-    | 'frontierRoute' | 'frontierProbe' | 'frontierUse'
+    | 'frontierRoute' | 'frontierProbe' | 'frontierUse' | 'frontierConsequence'
     | 'delayedProbe'
     | 'projection'
     | 'prepare'
@@ -379,7 +379,7 @@ export function selectExperiment(
     const stalled = m.turns - frontier.lastEdge >= 4 ||
       m.turns - frontier.lastScene >= Math.max(12, 2 * available.size);
     if (frontier.question || frontier.follow || (!m.projection.active && (frontier.exploring || stalled))) {
-      const search = selectFrontier(m, s, available, firstRoutes(m, s, m.scenes.length));
+      const search = selectFrontier(m, s, available, firstRoutes(m, s, m.scenes.length), o, rows);
       if (search) return search;
     }
     if (rows && (m.projection.active || (!m.pending && !m.equations.active && !m.space.active))) {
@@ -720,8 +720,10 @@ export function recordExperiment(
   }
   if(x.frontier){
     if(!newScene)frontier.exploring=true;
+    const position = (o: NativeObservation, id: string) =>
+      o.entities.find(e => !e.identity_ambiguous && e.signature === id)?.position.join() ?? null;
     const {result,detail}=recordFrontier(m,x.frontier,edge,a.levels_completed>b.levels_completed||a.state==='WIN',
-      id=>a.entities.find(e=>!e.identity_ambiguous&&e.signature===id)?.position.join()??null);
+      id => position(a,id), id => position(b,id));
     return {...out,result,frontier:detail};
   }
   if (x.projection) {

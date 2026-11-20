@@ -26,6 +26,7 @@ const labels: Record<Experiment['phase'], string> = {
   delayedProbe: 'Test a matched control program after moving or changing its preparation',
   frontierRoute:'Return along witnessed edges to an unanswered experiment',
   frontierProbe:'Try a previously unmeasured control at its selected configuration',
+  frontierConsequence: 'Exercise the use made available by the prepared landing',
   frontierUse:'Test the predicted continuation of the newly measured transition',
   projection: 'Test a projected arrangement, arrival and subsequent action',
   capabilityUse: 'Exercise the predicted new access furnished by the invented capability',
