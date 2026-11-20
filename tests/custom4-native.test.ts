@@ -1172,13 +1172,18 @@ test('SS10 matches the laboratory in all eight rooms and records twelve tutorial
   }
   assert.ok(whiteButton && whiteGate);
   assert.equal(SS10_LEVELS[5]!.title, 'Le dernier changement de sens');
-  assert.deepEqual([actions, selections, frames], [503, 44, 1463]);
+  assert.deepEqual([actions, selections, frames], [627, 58, 1807]);
   assert.equal(current.state, 'WIN');
-  const finale = compileWarehouseLevel(SS10_LEVELS[7]!);
+  const finaleSpec = SS10_LEVELS[7]!;
+  assert.deepEqual([finaleSpec.rows[0]!.length, finaleSpec.rows.length], [13, 9]);
+  const finale = compileWarehouseLevel(finaleSpec);
   assert.equal(finale.stones.length, 5);
-  const water = finale.terrain.flatMap((terrain, index) => terrain === '~' ? [{ x: index % 20, y: Math.floor(index / 20) }] : []);
-  assert.equal(water.length, 5);
-  for (const at of water) assert.deepEqual(tile(current.frame, at), [[10, 13, 10], [13, 10, 13], [10, 13, 10]]);
+  const ox = Math.floor((20 - finaleSpec.rows[0]!.length) / 2), oy = Math.floor((20 - finaleSpec.rows.length) / 2);
+  const supports = [[2, 4], [3, 3], [3, 6], [6, 7], [2, 7]].map(([x, y]) => ({ x: x! + ox, y: y! + oy }));
+  for (const at of supports) {
+    assert.equal(finale.terrain[at.y * 20 + at.x], '~');
+    assert.deepEqual(tile(current.frame, at), [[10, 13, 10], [13, 10, 13], [10, 13, 10]]);
+  }
   assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), reference.observe());
   assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), reference.undo());
 });

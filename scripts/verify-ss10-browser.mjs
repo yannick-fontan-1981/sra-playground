@@ -87,10 +87,11 @@ try {
     return settled(1, ref.selectLevel(level));
   };
   const spec = SS10_LEVELS[7];
+  assert.deepEqual([spec.rows[0].length, spec.rows.length], [13, 9]);
+  assert.equal(spec.rows.join('').split('o').length - 1, 5);
   const ox = Math.floor((20 - spec.rows[0].length) / 2), oy = Math.floor((20 - spec.rows.length) / 2);
-  const finaleWater = spec.rows.flatMap((row, y) => [...row].flatMap((tile, x) =>
-    tile === '~' ? [[2 + 3 * (x + ox), 2 + 3 * (y + oy)]] : []));
-  assert.equal(finaleWater.length, 5);
+  const finaleSupports = [[2, 4], [3, 3], [3, 6], [6, 7], [2, 7]].map(([x, y]) =>
+    [2 + 3 * (x + ox), 2 + 3 * (y + oy)]);
   const opening = await visit();
   await assertDuo(opening);
   assert.equal(await page.locator('#manual-tab').getAttribute('aria-selected'), 'true');
@@ -149,7 +150,7 @@ try {
         const observed = await action(step);
         if (final) {
           await assertPaints(observed);
-          for (const [x, y] of finaleWater) {
+          for (const [x, y] of finaleSupports) {
             const data = await canvas.evaluate((node, [x, y]) => Array.from(node.getContext('2d').getImageData(x, y, 3, 3).data), [x, y]);
             assert.equal(sha(Buffer.from(data)), pixelHash([[10, 13, 10], [13, 10, 13], [10, 13, 10]], observed.palette));
           }
@@ -282,9 +283,9 @@ try {
     assert.equal(await tutorial.isVisible(), level === 1);
     if (level === 6) assert.equal(SS10_LEVELS[level - 1].title, 'Le dernier changement de sens');
     if (level === 8) {
-      assert.match(await page.locator('#ss10-source-label').textContent(), /Création originale/);
-      assert.match(await page.locator('#ss10-objective').textContent(), /cinq coupures/);
-      for (const [x, y] of finaleWater) assert.equal(observed.frame[y + 1][x + 1], 9);
+      assert.match(await page.locator('#ss10-source-label').textContent(), /Heroes and Water.*énigme 3/);
+      assert.match(await page.locator('#ss10-objective').textContent(), /cinq appuis/);
+      for (const [x, y] of finaleSupports) assert.equal(observed.frame[y + 1][x + 1], 9);
     }
   }
   await page.goto(origin + (live ? '/gallery' : '/gallery.html'));

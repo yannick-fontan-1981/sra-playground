@@ -164,40 +164,16 @@ const tutorial=report.levels[0];
 assert.ok(tutorial.chainPushes>=1&&tutorial.thiefPulls>=1&&tutorial.platformsCreated===3&&tutorial.mirrorMoves>=1&&tutorial.heroReflections===2&&tutorial.pistonPushes>=1);
 report.tutorialMechanisms={chainPush:true,singlePull:true,threePermanentSupports:true,mirrorMotion:true,twoHeroReflections:true,lateralPress:true};
 
-// Verify the finale's five cuts in an optimistic model that ignores all actors
-// and allows free walking over every water cell except the one under test.
+// The saved Heroes and Water 3 witness constructs five permanent supports.
+// Water outside that route remains water; it is not the previous five-cut chicane.
 const finale = runs[7];
-const start = starts[7];
-const { terrain, goals } = finale.world;
-const cuts = terrain.flatMap((cell, index) => cell === '~' ? [index] : []);
-const cellId = ({ x, y }) => y * 20 + x;
-assert.equal(start.stones.length, 5);
-assert.equal(start.supports.length, 0);
-assert.equal(cuts.length, 5);
+assert.equal(starts[7].stones.length, 5);
+assert.equal(starts[7].supports.length, 0);
+assert.equal(finale.state.supports.length, 5);
+assert.equal(finale.state.stones.length, 0);
 assert.equal(finale.world.mirrors.length, 0);
 assert.equal(finale.world.platforms.length, 0);
-assert.deepEqual(finale.state.supports.map(cellId).sort((a, b) => a - b), cuts);
-assert.equal(finale.state.stones.length, 0);
-
-function canReachGoals(origin, excluded) {
- const visited = new Set([cellId(origin)]);
- const queue = [...visited];
- for (const index of queue) {
-  const x = index % 20, y = Math.floor(index / 20);
-  for (const [nx, ny] of [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]]) {
-   const next = cellId({ x: nx, y: ny });
-   if (nx < 0 || nx >= 20 || ny < 0 || ny >= 20 || visited.has(next) || next === excluded || terrain[next] === '#') continue;
-   visited.add(next);
-   queue.push(next);
-  }
- }
- return goals.filter(goal => visited.has(cellId(goal))).length;
-}
-for (const hero of start.heroes) {
- assert.equal(canReachGoals(hero.at), 2);
- for (const cut of cuts) assert.equal(canReachGoals(hero.at, cut), 0);
-}
-report.finaleChecks = { initialCrates: 5, initialSupports: 0, permanentSupports: 5, independentlyRequiredCuts: 5 };
+report.finaleChecks = { initialCrates: 5, initialSupports: 0, permanentSupports: 5 };
 
 const failures=await json('../tests/failures.json');
 assert.ok(Array.isArray(failures)&&failures.length>0,'At least one reachable campaign defeat is required');

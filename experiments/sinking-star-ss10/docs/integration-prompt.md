@@ -2,7 +2,7 @@
 
 ## Référence validée
 
-Le laboratoire se trouve dans `experiments/sinking-star-ss10/`, version **0.3.0**. La campagne conserve « Le dernier changement de sens » en position 6 et se termine par une finale originale à cinq appuis. Utiliser le `main` actualisé contenant cette version et ses rapports.
+Le laboratoire se trouve dans `experiments/sinking-star-ss10/`, version **0.3.1**. La campagne conserve « Le dernier changement de sens » en position 6 et se termine par la reprise de Heroes and Water 3 conservée dans `reference/author/build-level8.mjs`. Utiliser le `main` actualisé contenant cette version et ses rapports.
 
 Au moment de la préparation, `main` à `07bb91ef97247d5c1ea26de8519873424f0d0f89` raccordait SS01–SS08. SS09 était présent comme laboratoire. Recontrôler le catalogue au démarrage pour préserver les intégrations intervenues depuis.
 
@@ -13,7 +13,7 @@ Intègre nativement SS10 — L’Entrepôt Réversible dans SRA-Playground, depu
 
 Lis AGENTS.md, docs/migration/git-site-sync-policy.md et les documents du laboratoire experiments/sinking-star-ss10/ : README.md, docs/specification.md, docs/validation.md et docs/provenance.md.
 
-Le laboratoire version 0.3.0 est la source de vérité. Le niveau 6 s’intitule « Le dernier changement de sens ». Le niveau 8 « Les cinq points d’appui » est la chicane originale définie dans reference/level8-design.json par reference/author/build-level8.mjs.
+Le laboratoire version 0.3.1 est la source de vérité. Le niveau 6 s’intitule « Le dernier changement de sens ». Le niveau 8 « Les cinq points d’appui » reprend la carte définie dans reference/author/build-level8.mjs, conservé sans modification, et propagée dans reference/level8-design.json et les données jouables.
 
 Enregistre le jeu :
 - code SS10 ; id ss10-c4000001 ;
@@ -56,7 +56,7 @@ L’agent doit uniquement recevoir les observations publiques. Les solveurs, par
 
 Valide :
 - npm test et npm run validate dans experiments/sinking-star-ss10/ ;
-- la parité laboratoire/dispatcher natif sur les 8 parcours actuels de tests/witnesses.json : 503 actions, 44 sélections, 1 463 images et leurs durées ;
+- la parité laboratoire/dispatcher natif sur les 8 parcours actuels de tests/witnesses.json : 627 actions, 58 sélections, 1 807 images (référence de validation antérieure, non rejouée pour cette publication) et leurs durées ;
 - les douze découvertes du tutoriel et la sélection ACTION6 ;
 - Annuler, Reset, Restart, progression, victoire et défaite ;
 - les deux corrections visuelles aux niveaux 5 et 7 ;
