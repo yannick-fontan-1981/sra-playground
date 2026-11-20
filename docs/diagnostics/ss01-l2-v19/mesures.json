@@ -1,0 +1,7052 @@
+{
+  "meta": {
+    "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+    "candidate": "fc74c10aec27dd9e1f58ab3d97e9d919c8e4e942",
+    "control": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+    "coordinate": "1-based local level rectangle, x right, y down"
+  },
+  "world": {
+    "l1": {
+      "title": "Deux Marchands, deux destinations",
+      "merchants": [
+        [
+          5,
+          11
+        ],
+        [
+          4,
+          13
+        ]
+      ],
+      "goals": [
+        [
+          17,
+          5
+        ],
+        [
+          15,
+          8
+        ]
+      ],
+      "mirrors": [
+        {
+          "place": [
+            6,
+            6
+          ],
+          "face": "SE"
+        }
+      ],
+      "reference": {
+        "events": [
+          {
+            "n": 3,
+            "from": [
+              6,
+              12
+            ],
+            "to": [
+              12,
+              6
+            ],
+            "m": [
+              6,
+              6
+            ],
+            "occupied": false,
+            "changed": true
+          },
+          {
+            "n": 14,
+            "from": [
+              6,
+              12
+            ],
+            "to": [
+              12,
+              6
+            ],
+            "m": [
+              6,
+              6
+            ],
+            "occupied": false,
+            "changed": true
+          }
+        ],
+        "roundTrip": [
+          [
+            6,
+            12
+          ],
+          [
+            12,
+            6
+          ],
+          [
+            6,
+            12
+          ]
+        ],
+        "completed": 1
+      },
+      "exchange": {
+        "before": [
+          [
+            6,
+            12
+          ],
+          [
+            12,
+            6
+          ]
+        ],
+        "after": [
+          [
+            12,
+            6
+          ],
+          [
+            6,
+            12
+          ]
+        ]
+      },
+      "waterReflection": {
+        "from": [
+          6,
+          11
+        ],
+        "prospect": [
+          11,
+          6
+        ],
+        "valid": false,
+        "actual": [
+          6,
+          11
+        ]
+      }
+    },
+    "l2": {
+      "start": [
+        6,
+        3
+      ],
+      "goals": [
+        [
+          11,
+          8
+        ]
+      ],
+      "mirrors": [
+        {
+          "place": [
+            8,
+            3
+          ],
+          "face": "SE"
+        },
+        {
+          "place": [
+            4,
+            11
+          ],
+          "face": "SE"
+        }
+      ],
+      "land": {
+        "haut": 19,
+        "gauche": 37,
+        "droite": 18
+      },
+      "fixedReach": 18,
+      "fixedX": [
+        {
+          "from": [
+            8,
+            4
+          ],
+          "to": [
+            9,
+            3
+          ],
+          "d": 1
+        },
+        {
+          "from": [
+            8,
+            5
+          ],
+          "to": [
+            10,
+            3
+          ],
+          "d": 2
+        },
+        {
+          "from": [
+            9,
+            3
+          ],
+          "to": [
+            8,
+            4
+          ],
+          "d": 1
+        },
+        {
+          "from": [
+            10,
+            3
+          ],
+          "to": [
+            8,
+            5
+          ],
+          "d": 2
+        }
+      ],
+      "reachableUpperPlacements": 19,
+      "crossingPlacements": [
+        {
+          "at": [
+            5,
+            3
+          ],
+          "crossings": [
+            {
+              "from": [
+                9,
+                3
+              ],
+              "to": [
+                5,
+                7
+              ]
+            },
+            {
+              "from": [
+                10,
+                3
+              ],
+              "to": [
+                5,
+                8
+              ]
+            }
+          ],
+          "eastmost": 10
+        },
+        {
+          "at": [
+            4,
+            4
+          ],
+          "crossings": [
+            {
+              "from": [
+                6,
+                4
+              ],
+              "to": [
+                4,
+                6
+              ]
+            },
+            {
+              "from": [
+                7,
+                4
+              ],
+              "to": [
+                4,
+                7
+              ]
+            },
+            {
+              "from": [
+                8,
+                4
+              ],
+              "to": [
+                4,
+                8
+              ]
+            },
+            {
+              "from": [
+                9,
+                4
+              ],
+              "to": [
+                4,
+                9
+              ]
+            },
+            {
+              "from": [
+                10,
+                4
+              ],
+              "to": [
+                4,
+                10
+              ]
+            }
+          ],
+          "eastmost": 10
+        },
+        {
+          "at": [
+            5,
+            4
+          ],
+          "crossings": [
+            {
+              "from": [
+                8,
+                4
+              ],
+              "to": [
+                5,
+                7
+              ]
+            },
+            {
+              "from": [
+                9,
+                4
+              ],
+              "to": [
+                5,
+                8
+              ]
+            },
+            {
+              "from": [
+                10,
+                4
+              ],
+              "to": [
+                5,
+                9
+              ]
+            }
+          ],
+          "eastmost": 10
+        },
+        {
+          "at": [
+            6,
+            4
+          ],
+          "crossings": [
+            {
+              "from": [
+                10,
+                4
+              ],
+              "to": [
+                6,
+                8
+              ]
+            }
+          ],
+          "eastmost": 10
+        }
+      ],
+      "witness": [
+        2,
+        4,
+        4,
+        5,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        5,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        5,
+        1,
+        4,
+        4
+      ],
+      "events": [
+        {
+          "i": 5,
+          "a": 3,
+          "from": [
+            9,
+            3
+          ],
+          "to": [
+            8,
+            3
+          ],
+          "mirror": [
+            [
+              8,
+              3
+            ],
+            [
+              7,
+              3
+            ]
+          ],
+          "region": "haut",
+          "complete": false
+        },
+        {
+          "i": 6,
+          "a": 3,
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            7,
+            3
+          ],
+          "mirror": [
+            [
+              7,
+              3
+            ],
+            [
+              6,
+              3
+            ]
+          ],
+          "region": "haut",
+          "complete": false
+        },
+        {
+          "i": 7,
+          "a": 3,
+          "from": [
+            7,
+            3
+          ],
+          "to": [
+            6,
+            3
+          ],
+          "mirror": [
+            [
+              6,
+              3
+            ],
+            [
+              5,
+              3
+            ]
+          ],
+          "region": "haut",
+          "complete": false
+        },
+        {
+          "i": 11,
+          "a": 5,
+          "from": [
+            9,
+            3
+          ],
+          "to": [
+            5,
+            7
+          ],
+          "mirror": null,
+          "region": "gauche",
+          "complete": false
+        },
+        {
+          "i": 18,
+          "a": 1,
+          "from": [
+            4,
+            12
+          ],
+          "to": [
+            4,
+            11
+          ],
+          "mirror": [
+            [
+              4,
+              11
+            ],
+            [
+              4,
+              10
+            ]
+          ],
+          "region": "gauche",
+          "complete": false
+        },
+        {
+          "i": 19,
+          "a": 1,
+          "from": [
+            4,
+            11
+          ],
+          "to": [
+            4,
+            10
+          ],
+          "mirror": [
+            [
+              4,
+              10
+            ],
+            [
+              4,
+              9
+            ]
+          ],
+          "region": "gauche",
+          "complete": false
+        },
+        {
+          "i": 24,
+          "a": 5,
+          "from": [
+            4,
+            14
+          ],
+          "to": [
+            9,
+            9
+          ],
+          "mirror": null,
+          "region": "droite",
+          "complete": false
+        },
+        {
+          "i": 27,
+          "a": 4,
+          "from": [
+            10,
+            8
+          ],
+          "to": [
+            11,
+            8
+          ],
+          "mirror": null,
+          "region": "droite",
+          "complete": true
+        }
+      ],
+      "witnessOfficial": 1,
+      "reachableStates": {
+        "upper": 341,
+        "withEscape": 197
+      },
+      "samePrefix": {
+        "actions": 54,
+        "firstDifferent": 55,
+        "actual": 3,
+        "alternative": [
+          5,
+          3,
+          3,
+          3,
+          4,
+          4,
+          4,
+          4,
+          5,
+          2,
+          2,
+          2,
+          2,
+          3,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          5,
+          1,
+          4,
+          4
+        ],
+        "events": [
+          {
+            "at": 55,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "m": [
+              [
+                8,
+                3
+              ],
+              [
+                4,
+                11
+              ]
+            ]
+          },
+          {
+            "at": 63,
+            "from": [
+              10,
+              3
+            ],
+            "to": [
+              5,
+              8
+            ],
+            "m": [
+              [
+                5,
+                3
+              ],
+              [
+                4,
+                11
+              ]
+            ]
+          },
+          {
+            "at": 75,
+            "from": [
+              4,
+              14
+            ],
+            "to": [
+              9,
+              9
+            ],
+            "m": [
+              [
+                5,
+                3
+              ],
+              [
+                4,
+                9
+              ]
+            ]
+          },
+          {
+            "at": 78,
+            "from": [
+              10,
+              8
+            ],
+            "to": [
+              11,
+              8
+            ],
+            "m": [
+              [
+                5,
+                3
+              ],
+              [
+                4,
+                9
+              ]
+            ]
+          }
+        ],
+        "official": 1
+      }
+    }
+  },
+  "runs": {
+    "candidate": {
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "trajectory": "27c2f30daa77cee568a0be3cecd7b2be10b5eeefad48ad8e5ed032e4cb1d3693",
+      "resets": 0,
+      "start": 2,
+      "sourcePrefixActions": 0,
+      "issued": 596,
+      "official": 0,
+      "finalLevel": 2,
+      "reason": [
+        [
+          2,
+          "level_active_time_budget",
+          false
+        ]
+      ],
+      "hist": {
+        "2": {
+          "tracking": {
+            "translations": 300,
+            "matched": 59,
+            "rotationsWithoutTravel": 195,
+            "firstMismatch": {
+              "n": 3,
+              "a": 2,
+              "from": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "facing": [
+                "W",
+                "S"
+              ],
+              "before": "1945862e65",
+              "after": "23afe889b2",
+              "match": false
+            },
+            "firstChangedShape": {
+              "n": 2,
+              "a": 3,
+              "from": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "facing": [
+                "N",
+                "W"
+              ],
+              "before": "17acd4dc94",
+              "after": "1945862e65",
+              "match": false
+            },
+            "firstMatched": {
+              "n": 1,
+              "a": 1,
+              "from": [
+                6,
+                3
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "facing": [
+                "N",
+                "N"
+              ],
+              "before": "17acd4dc94",
+              "after": "17acd4dc94",
+              "match": true
+            },
+            "orientations": {
+              "N": {
+                "17acd4dc94": 1
+              },
+              "W": {
+                "1945862e65": 1
+              },
+              "S": {
+                "23afe889b2": 1
+              },
+              "E": {
+                "f8f4b355e0": 1
+              }
+            },
+            "head": [
+              {
+                "n": 1,
+                "a": 1,
+                "from": [
+                  6,
+                  3
+                ],
+                "to": [
+                  6,
+                  2
+                ],
+                "facing": [
+                  "N",
+                  "N"
+                ],
+                "before": "17acd4dc94",
+                "after": "17acd4dc94",
+                "match": true
+              },
+              {
+                "n": 2,
+                "a": 3,
+                "from": [
+                  6,
+                  2
+                ],
+                "to": [
+                  6,
+                  2
+                ],
+                "facing": [
+                  "N",
+                  "W"
+                ],
+                "before": "17acd4dc94",
+                "after": "1945862e65",
+                "match": false
+              },
+              {
+                "n": 3,
+                "a": 2,
+                "from": [
+                  6,
+                  2
+                ],
+                "to": [
+                  6,
+                  3
+                ],
+                "facing": [
+                  "W",
+                  "S"
+                ],
+                "before": "1945862e65",
+                "after": "23afe889b2",
+                "match": false
+              },
+              {
+                "n": 4,
+                "a": 4,
+                "from": [
+                  6,
+                  3
+                ],
+                "to": [
+                  7,
+                  3
+                ],
+                "facing": [
+                  "S",
+                  "E"
+                ],
+                "before": "23afe889b2",
+                "after": "f8f4b355e0",
+                "match": false
+              },
+              {
+                "n": 5,
+                "a": 5,
+                "from": [
+                  7,
+                  3
+                ],
+                "to": [
+                  7,
+                  3
+                ],
+                "facing": [
+                  "E",
+                  "E"
+                ],
+                "before": "f8f4b355e0",
+                "after": "f8f4b355e0",
+                "match": false
+              }
+            ]
+          },
+          "selectedSwitches": 0,
+          "goalOccupancyMax": 0,
+          "globalTransfers": 6,
+          "firstGlobal": {
+            "n": 557,
+            "movements": [
+              {
+                "selected": true,
+                "from": [
+                  6,
+                  3
+                ],
+                "to": [
+                  7,
+                  2
+                ]
+              }
+            ]
+          },
+          "firstOccupiedGoal": null,
+          "firstLost": {
+            "n": 172,
+            "at": [
+              8,
+              4
+            ],
+            "m": [
+              8,
+              3
+            ],
+            "chosen": 1,
+            "alternatives": [
+              {
+                "op": 1,
+                "h": [
+                  8,
+                  3
+                ],
+                "m": [
+                  8,
+                  2
+                ],
+                "escape": false
+              },
+              {
+                "op": 2,
+                "h": [
+                  8,
+                  5
+                ],
+                "m": [
+                  8,
+                  3
+                ],
+                "escape": true
+              },
+              {
+                "op": 3,
+                "h": [
+                  7,
+                  4
+                ],
+                "m": [
+                  8,
+                  3
+                ],
+                "escape": true
+              },
+              {
+                "op": 4,
+                "h": [
+                  9,
+                  4
+                ],
+                "m": [
+                  8,
+                  3
+                ],
+                "escape": true
+              },
+              {
+                "op": 5,
+                "h": [
+                  9,
+                  3
+                ],
+                "m": [
+                  8,
+                  3
+                ],
+                "escape": true
+              }
+            ],
+            "descendantStates": 72,
+            "descendantRegions": [
+              "haut"
+            ],
+            "descendantMirrorPoses": [
+              "8,2",
+              "7,2",
+              "9,2",
+              "6,2"
+            ]
+          },
+          "initialFeasibleX": 6,
+          "initialFeasibleByAction": {
+            "1": 1,
+            "3": 3,
+            "4": 2
+          },
+          "actions": 596,
+          "position": 18,
+          "initialLayout": 11,
+          "regions": [
+            "haut"
+          ],
+          "pushed": [
+            {
+              "n": 172,
+              "a": 1,
+              "at": [
+                8,
+                4
+              ],
+              "to": [
+                8,
+                3
+              ],
+              "old": [
+                8,
+                3
+              ],
+              "now": [
+                8,
+                2
+              ],
+              "mi": 0,
+              "phase": "transportControl",
+              "hyp": "driver_at_recipient",
+              "eligibleNext": false
+            },
+            {
+              "n": 368,
+              "a": 3,
+              "at": [
+                9,
+                2
+              ],
+              "to": [
+                8,
+                2
+              ],
+              "old": [
+                8,
+                2
+              ],
+              "now": [
+                7,
+                2
+              ],
+              "mi": 0,
+              "phase": "explore",
+              "hyp": "57|ACTION4|ACTION1",
+              "eligibleNext": false
+            },
+            {
+              "n": 369,
+              "a": 3,
+              "at": [
+                8,
+                2
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "old": [
+                7,
+                2
+              ],
+              "now": [
+                6,
+                2
+              ],
+              "mi": 0,
+              "phase": "territorialAccess",
+              "hyp": "ordinary_limit",
+              "eligibleNext": false
+            }
+          ],
+          "teleports": [
+            {
+              "n": 557,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "S→E",
+              "phase": "territorialAccess",
+              "hyp": "select_and_move"
+            },
+            {
+              "n": 565,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "S→E",
+              "phase": "territorialAccess",
+              "hyp": "revisit_capacity"
+            },
+            {
+              "n": 576,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "S→E",
+              "phase": "territorialAccess",
+              "hyp": "revisit_capacity"
+            },
+            {
+              "n": 592,
+              "at": [
+                7,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "E→S",
+              "phase": "conditionSetup",
+              "hyp": "test_motion_after_solving_a_spatial_condition"
+            },
+            {
+              "n": 593,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "S→E",
+              "phase": "territorialAccess",
+              "hyp": "select_and_move"
+            },
+            {
+              "n": 595,
+              "at": [
+                7,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "E→S",
+              "phase": "territorialAccess",
+              "hyp": "capacity_word"
+            }
+          ],
+          "distancePairs": {
+            "S→E/1": 4,
+            "E→S/1": 2
+          },
+          "validOpportunity": {
+            "1": 27,
+            "2": 16,
+            "3": 20,
+            "4": 11,
+            "5": 6
+          },
+          "chosenAtOpportunity": {},
+          "touches": 18,
+          "failedPushes": 15,
+          "failedExamples": [
+            {
+              "n": 370,
+              "at": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "a": 3,
+              "phase": "territorialAccess"
+            },
+            {
+              "n": 373,
+              "at": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "a": 3,
+              "phase": "delayedProbe"
+            },
+            {
+              "n": 381,
+              "at": [
+                6,
+                3
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "a": 1,
+              "phase": "transportControl"
+            },
+            {
+              "n": 547,
+              "at": [
+                6,
+                3
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "a": 1,
+              "phase": "transportControl"
+            }
+          ],
+          "head": [
+            {
+              "n": 1,
+              "a": 1,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 2,
+              "a": 3,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 3,
+              "a": 2,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 4,
+              "a": 4,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                7,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 5,
+              "a": 5,
+              "at": [
+                7,
+                3
+              ],
+              "to": [
+                7,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 6,
+              "a": 1,
+              "at": [
+                7,
+                3
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 7,
+              "a": 3,
+              "at": [
+                7,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 8,
+              "a": 5,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 9,
+              "a": 2,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 10,
+              "a": 2,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                6,
+                4
+              ],
+              "phase": "transportControl"
+            },
+            {
+              "n": 11,
+              "a": 4,
+              "at": [
+                6,
+                4
+              ],
+              "to": [
+                7,
+                4
+              ],
+              "phase": "transportControl"
+            },
+            {
+              "n": 12,
+              "a": 5,
+              "at": [
+                7,
+                4
+              ],
+              "to": [
+                7,
+                4
+              ],
+              "phase": "transportControl"
+            }
+          ],
+          "firstWater": {
+            "n": 2,
+            "at": [
+              6,
+              2
+            ],
+            "water": [
+              5,
+              2
+            ],
+            "a": 3
+          },
+          "firstWalk": {
+            "n": 1,
+            "at": [
+              6,
+              3
+            ],
+            "to": [
+              6,
+              2
+            ],
+            "a": 1
+          },
+          "firstOnEachAxis": {
+            "S→E": {
+              "n": 557,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "S→E",
+              "phase": "territorialAccess",
+              "hyp": "select_and_move"
+            },
+            "E→S": {
+              "n": 592,
+              "at": [
+                7,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 1,
+              "axis": "E→S",
+              "phase": "conditionSetup",
+              "hyp": "test_motion_after_solving_a_spatial_condition"
+            }
+          },
+          "landedOnGoal": [],
+          "firstReach": {
+            "6,3": 1,
+            "6,2": 2,
+            "7,3": 5,
+            "7,2": 7,
+            "6,4": 11,
+            "7,4": 12,
+            "5,4": 30,
+            "5,3": 33,
+            "4,4": 43,
+            "8,4": 55,
+            "9,4": 58,
+            "8,3": 173,
+            "7,5": 176,
+            "9,3": 337,
+            "9,2": 338,
+            "10,3": 348,
+            "10,4": 357,
+            "8,2": 369
+          },
+          "layouts": 4,
+          "firstValid": {
+            "n": 55,
+            "at": [
+              8,
+              4
+            ],
+            "m": [
+              8,
+              3
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "a": 3
+          },
+          "firstReady": null,
+          "firstMirrorAlignment": null,
+          "firstActualTeleport": {
+            "n": 557,
+            "at": [
+              6,
+              3
+            ],
+            "to": [
+              7,
+              2
+            ],
+            "m": [
+              6,
+              2
+            ],
+            "d": 1,
+            "axis": "S→E",
+            "phase": "territorialAccess",
+            "hyp": "select_and_move"
+          },
+          "mirrorEntered": [
+            {
+              "i": 1,
+              "place": [
+                8,
+                3
+              ]
+            },
+            {
+              "i": 173,
+              "place": [
+                8,
+                2
+              ]
+            },
+            {
+              "i": 369,
+              "place": [
+                7,
+                2
+              ]
+            },
+            {
+              "i": 370,
+              "place": [
+                6,
+                2
+              ]
+            }
+          ],
+          "activate": 45,
+          "failedActivations": 39,
+          "waterBumps": 242,
+          "stepsTaken": 294,
+          "choices": {
+            "1": 149,
+            "2": 171,
+            "3": 150,
+            "4": 81,
+            "5": 45
+          },
+          "territorial": [
+            {
+              "n": 369,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  14,
+                  31,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  3
+                ],
+                "cells": [
+                  "7,3"
+                ]
+              },
+              "trackedMark": null,
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 0,
+              "kind": "ordinary_limit",
+              "basis": "substrate",
+              "stage": "approach",
+              "player": [
+                8,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                7,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": null,
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 16,
+              "out": 22,
+              "homeMatches": 15,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [],
+              "siteSig": null,
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": true
+            },
+            {
+              "n": 370,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": null,
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 1,
+              "kind": "ordinary_limit",
+              "basis": "substrate",
+              "stage": "approach",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": null,
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 16,
+              "out": 22,
+              "homeMatches": 15,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [],
+              "siteSig": null,
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 372,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "failed_stroke",
+              "stage": "interact",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": [
+                6,
+                2
+              ],
+              "ideal": null,
+              "foothold": [
+                5,
+                3
+              ],
+              "home": 1,
+              "out": 3,
+              "homeMatches": 1,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": 371,
+              "alternatives": [
+                [
+                  5,
+                  3
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 375,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "failed_stroke",
+              "stage": "interact",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": [
+                6,
+                2
+              ],
+              "ideal": null,
+              "foothold": [
+                5,
+                3
+              ],
+              "home": 1,
+              "out": 3,
+              "homeMatches": 1,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": 374,
+              "alternatives": [
+                [
+                  5,
+                  3
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 378,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "failed_stroke",
+              "stage": "interact",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": [
+                6,
+                2
+              ],
+              "ideal": null,
+              "foothold": [
+                5,
+                3
+              ],
+              "home": 1,
+              "out": 3,
+              "homeMatches": 1,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": 374,
+              "alternatives": [
+                [
+                  5,
+                  3
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 382,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": null,
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "ordinary_limit",
+              "basis": "substrate",
+              "stage": "challenge",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                5,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": null,
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 17,
+              "out": 24,
+              "homeMatches": 16,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ]
+              ],
+              "siteSig": null,
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 401,
+              "a": 2,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "f8f4b355e0"
+              ],
+              "cursor": 0,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "interact",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                6,
+                4
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 17,
+              "out": 24,
+              "homeMatches": 16,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 402,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  32,
+                  11,
+                  34,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  8,
+                  2
+                ],
+                "cells": [
+                  "8,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 1,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "displace",
+              "player": [
+                6,
+                4
+              ],
+              "next": [
+                5,
+                4
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 17,
+              "out": 24,
+              "homeMatches": 16,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 544,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "failed_stroke",
+              "stage": "interact",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": [
+                6,
+                2
+              ],
+              "ideal": null,
+              "foothold": [
+                5,
+                3
+              ],
+              "home": 8,
+              "out": 3,
+              "homeMatches": 7,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": 374,
+              "alternatives": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 548,
+              "a": 4,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "interact",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                7,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 549,
+              "a": 3,
+              "tracked": null,
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "f8f4b355e0"
+              ],
+              "cursor": 1,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "displace",
+              "player": [
+                7,
+                3
+              ],
+              "next": [
+                6,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 554,
+              "a": 4,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  32,
+                  11,
+                  34,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  8,
+                  2
+                ],
+                "cells": [
+                  "8,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 10,
+                "box": [
+                  29,
+                  12,
+                  31,
+                  12
+                ],
+                "area": 3,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "interact",
+              "player": [
+                6,
+                4
+              ],
+              "next": [
+                7,
+                4
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                7,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                6,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                8,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "2ff6905bb7",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 555,
+              "a": 3,
+              "tracked": null,
+              "trackedMark": null,
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "f8f4b355e0"
+              ],
+              "cursor": 1,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "displace",
+              "player": [
+                7,
+                4
+              ],
+              "next": [
+                6,
+                4
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                7,
+                2
+              ],
+              "actualFeature": [
+                7,
+                2
+              ],
+              "ideal": [
+                6,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                8,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "2ff6905bb7",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 557,
+              "a": 5,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "interact",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 558,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 1,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "displace",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 560,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "capacity_word",
+              "basis": "substrate",
+              "stage": "capacity_input",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 561,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 1,
+              "kind": "capacity_word",
+              "basis": "substrate",
+              "stage": "capacity_read",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 565,
+              "a": 5,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "revisit_capacity",
+              "basis": "substrate",
+              "stage": "capacity_return",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 566,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "capacity_word",
+              "basis": "substrate",
+              "stage": "capacity_input",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 567,
+              "a": 2,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 1,
+              "kind": "capacity_word",
+              "basis": "substrate",
+              "stage": "capacity_read",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 576,
+              "a": 5,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "revisit_capacity",
+              "basis": "substrate",
+              "stage": "capacity_return",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 577,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "capacity_word",
+              "basis": "substrate",
+              "stage": "capacity_input",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 578,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 1,
+              "kind": "capacity_word",
+              "basis": "substrate",
+              "stage": "capacity_read",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 581,
+              "a": 4,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 0,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "interact",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                7,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 582,
+              "a": 3,
+              "tracked": null,
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "f8f4b355e0"
+              ],
+              "cursor": 1,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "displace",
+              "player": [
+                7,
+                3
+              ],
+              "next": [
+                6,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": [
+                6,
+                2
+              ],
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 586,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "failed_stroke",
+              "stage": "interact",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": null,
+              "foothold": [
+                5,
+                3
+              ],
+              "home": 8,
+              "out": 3,
+              "homeMatches": 7,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": 374,
+              "alternatives": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 588,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "failed_stroke",
+              "stage": "interact",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": null,
+              "foothold": [
+                5,
+                3
+              ],
+              "home": 8,
+              "out": 3,
+              "homeMatches": 7,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": 374,
+              "alternatives": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 591,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  28,
+                  11,
+                  28,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "failed_stroke",
+              "stage": "interact",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": null,
+              "foothold": [
+                5,
+                3
+              ],
+              "home": 8,
+              "out": 3,
+              "homeMatches": 7,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": 374,
+              "alternatives": [
+                [
+                  6,
+                  2
+                ],
+                [
+                  6,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 593,
+              "a": 5,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 0,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "interact",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            },
+            {
+              "n": 594,
+              "a": 3,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  30,
+                  11,
+                  30,
+                  11
+                ],
+                "area": 1,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "17acd4dc94"
+              ],
+              "cursor": 1,
+              "kind": "select_and_move",
+              "basis": "substrate",
+              "stage": "displace",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                7,
+                2
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": [
+                6,
+                2
+              ],
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 595,
+              "a": 5,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  26,
+                  14,
+                  28,
+                  16
+                ],
+                "area": 5,
+                "anchor": [
+                  6,
+                  3
+                ],
+                "cells": [
+                  "6,3"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 0,
+              "kind": "capacity_word",
+              "basis": "substrate",
+              "stage": "capacity_read",
+              "player": [
+                7,
+                2
+              ],
+              "next": [
+                6,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": null,
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                6,
+                3
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 596,
+              "a": 1,
+              "tracked": {
+                "color": 1,
+                "box": [
+                  29,
+                  11,
+                  31,
+                  13
+                ],
+                "area": 5,
+                "anchor": [
+                  7,
+                  2
+                ],
+                "cells": [
+                  "7,2"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  27,
+                  12,
+                  27,
+                  12
+                ],
+                "area": 1,
+                "anchor": [
+                  6,
+                  2
+                ],
+                "cells": [
+                  "6,2"
+                ]
+              },
+              "disappears": true,
+              "coincides": true,
+              "realVisible": [
+                "1945862e65"
+              ],
+              "cursor": 0,
+              "kind": "revisit_capacity",
+              "basis": "substrate",
+              "stage": "capacity_return",
+              "player": [
+                6,
+                3
+              ],
+              "next": [
+                6,
+                3
+              ],
+              "semanticMirror": [
+                6,
+                2
+              ],
+              "targetFeature": null,
+              "actualFeature": [
+                6,
+                2
+              ],
+              "ideal": [
+                5,
+                2
+              ],
+              "foothold": [
+                4,
+                6
+              ],
+              "home": 18,
+              "out": 24,
+              "homeMatches": 17,
+              "gactor": "7327e7df66",
+              "actorStart": [
+                7,
+                2
+              ],
+              "knownLimit": null,
+              "alternatives": [
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ],
+                [
+                  5,
+                  3
+                ],
+                [
+                  6,
+                  2
+                ],
+                [
+                  5,
+                  2
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": false,
+              "success": true,
+              "changedMirror": false
+            }
+          ]
+        }
+      }
+    },
+    "control": {
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "trajectory": "cc4f46a34be229ca58cc6f7a381d994034d8c22bd260139ad1ecf1aeeaddcbd5",
+      "resets": 0,
+      "start": 2,
+      "sourcePrefixActions": 0,
+      "issued": 655,
+      "official": 0,
+      "finalLevel": 2,
+      "reason": [
+        [
+          2,
+          "level_active_time_budget",
+          false
+        ]
+      ],
+      "hist": {
+        "2": {
+          "tracking": {
+            "translations": 293,
+            "matched": 60,
+            "rotationsWithoutTravel": 98,
+            "firstMismatch": {
+              "n": 3,
+              "a": 2,
+              "from": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "facing": [
+                "W",
+                "S"
+              ],
+              "before": "1945862e65",
+              "after": "23afe889b2",
+              "match": false
+            },
+            "firstChangedShape": {
+              "n": 2,
+              "a": 3,
+              "from": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "facing": [
+                "N",
+                "W"
+              ],
+              "before": "17acd4dc94",
+              "after": "1945862e65",
+              "match": false
+            },
+            "firstMatched": {
+              "n": 1,
+              "a": 1,
+              "from": [
+                6,
+                3
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "facing": [
+                "N",
+                "N"
+              ],
+              "before": "17acd4dc94",
+              "after": "17acd4dc94",
+              "match": true
+            },
+            "orientations": {
+              "N": {
+                "17acd4dc94": 1
+              },
+              "W": {
+                "1945862e65": 1
+              },
+              "S": {
+                "23afe889b2": 1
+              },
+              "E": {
+                "f8f4b355e0": 1
+              }
+            },
+            "head": [
+              {
+                "n": 1,
+                "a": 1,
+                "from": [
+                  6,
+                  3
+                ],
+                "to": [
+                  6,
+                  2
+                ],
+                "facing": [
+                  "N",
+                  "N"
+                ],
+                "before": "17acd4dc94",
+                "after": "17acd4dc94",
+                "match": true
+              },
+              {
+                "n": 2,
+                "a": 3,
+                "from": [
+                  6,
+                  2
+                ],
+                "to": [
+                  6,
+                  2
+                ],
+                "facing": [
+                  "N",
+                  "W"
+                ],
+                "before": "17acd4dc94",
+                "after": "1945862e65",
+                "match": false
+              },
+              {
+                "n": 3,
+                "a": 2,
+                "from": [
+                  6,
+                  2
+                ],
+                "to": [
+                  6,
+                  3
+                ],
+                "facing": [
+                  "W",
+                  "S"
+                ],
+                "before": "1945862e65",
+                "after": "23afe889b2",
+                "match": false
+              },
+              {
+                "n": 4,
+                "a": 4,
+                "from": [
+                  6,
+                  3
+                ],
+                "to": [
+                  7,
+                  3
+                ],
+                "facing": [
+                  "S",
+                  "E"
+                ],
+                "before": "23afe889b2",
+                "after": "f8f4b355e0",
+                "match": false
+              },
+              {
+                "n": 5,
+                "a": 5,
+                "from": [
+                  7,
+                  3
+                ],
+                "to": [
+                  7,
+                  3
+                ],
+                "facing": [
+                  "E",
+                  "E"
+                ],
+                "before": "f8f4b355e0",
+                "after": "f8f4b355e0",
+                "match": false
+              }
+            ]
+          },
+          "selectedSwitches": 0,
+          "goalOccupancyMax": 0,
+          "globalTransfers": 8,
+          "firstGlobal": {
+            "n": 191,
+            "movements": [
+              {
+                "selected": true,
+                "from": [
+                  7,
+                  5
+                ],
+                "to": [
+                  9,
+                  3
+                ]
+              }
+            ]
+          },
+          "firstOccupiedGoal": null,
+          "firstLost": {
+            "n": 229,
+            "at": [
+              7,
+              4
+            ],
+            "m": [
+              7,
+              3
+            ],
+            "chosen": 1,
+            "alternatives": [
+              {
+                "op": 1,
+                "h": [
+                  7,
+                  3
+                ],
+                "m": [
+                  7,
+                  2
+                ],
+                "escape": false
+              },
+              {
+                "op": 2,
+                "h": [
+                  7,
+                  5
+                ],
+                "m": [
+                  7,
+                  3
+                ],
+                "escape": true
+              },
+              {
+                "op": 3,
+                "h": [
+                  6,
+                  4
+                ],
+                "m": [
+                  7,
+                  3
+                ],
+                "escape": true
+              },
+              {
+                "op": 4,
+                "h": [
+                  8,
+                  4
+                ],
+                "m": [
+                  7,
+                  3
+                ],
+                "escape": true
+              },
+              {
+                "op": 5,
+                "h": [
+                  8,
+                  3
+                ],
+                "m": [
+                  7,
+                  3
+                ],
+                "escape": true
+              }
+            ],
+            "descendantStates": 72,
+            "descendantRegions": [
+              "haut"
+            ],
+            "descendantMirrorPoses": [
+              "7,2",
+              "6,2",
+              "8,2",
+              "9,2"
+            ]
+          },
+          "initialFeasibleX": 5,
+          "initialFeasibleByAction": {
+            "3": 3,
+            "4": 2
+          },
+          "actions": 655,
+          "position": 19,
+          "initialLayout": 11,
+          "regions": [
+            "haut"
+          ],
+          "pushed": [
+            {
+              "n": 128,
+              "a": 3,
+              "at": [
+                9,
+                3
+              ],
+              "to": [
+                8,
+                3
+              ],
+              "old": [
+                8,
+                3
+              ],
+              "now": [
+                7,
+                3
+              ],
+              "mi": 0,
+              "phase": "positionB",
+              "hyp": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6/component:2a0c3d7b914524bf:0@33,17/32/17/ACTION3",
+              "eligibleNext": false
+            },
+            {
+              "n": 229,
+              "a": 1,
+              "at": [
+                7,
+                4
+              ],
+              "to": [
+                7,
+                3
+              ],
+              "old": [
+                7,
+                3
+              ],
+              "now": [
+                7,
+                2
+              ],
+              "mi": 0,
+              "phase": "accessSetup",
+              "hyp": "stride/7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6//ACTION5/-6,6/",
+              "eligibleNext": false
+            },
+            {
+              "n": 332,
+              "a": 3,
+              "at": [
+                8,
+                2
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "old": [
+                7,
+                2
+              ],
+              "now": [
+                6,
+                2
+              ],
+              "mi": 0,
+              "phase": "capabilityStep",
+              "hyp": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6|ACTION3|ACTION1|ACTION4|-3,0",
+              "eligibleNext": false
+            }
+          ],
+          "teleports": [
+            {
+              "n": 191,
+              "at": [
+                7,
+                5
+              ],
+              "to": [
+                9,
+                3
+              ],
+              "m": [
+                7,
+                3
+              ],
+              "d": 2,
+              "axis": "S→E",
+              "phase": null,
+              "hyp": null
+            },
+            {
+              "n": 283,
+              "at": [
+                9,
+                2
+              ],
+              "to": [
+                7,
+                4
+              ],
+              "m": [
+                7,
+                2
+              ],
+              "d": 2,
+              "axis": "E→S",
+              "phase": "accessTrigger",
+              "hyp": "stride/7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6//ACTION5/-6,6/"
+            },
+            {
+              "n": 322,
+              "at": [
+                7,
+                4
+              ],
+              "to": [
+                9,
+                2
+              ],
+              "m": [
+                7,
+                2
+              ],
+              "d": 2,
+              "axis": "S→E",
+              "phase": "accessTrigger",
+              "hyp": "stride/7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6//ACTION5/6,-6/"
+            },
+            {
+              "n": 334,
+              "at": [
+                8,
+                2
+              ],
+              "to": [
+                6,
+                4
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 2,
+              "axis": "E→S",
+              "phase": "accessTrigger",
+              "hyp": "stride/7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6//ACTION5/-6,6/"
+            },
+            {
+              "n": 396,
+              "at": [
+                6,
+                4
+              ],
+              "to": [
+                8,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 2,
+              "axis": "S→E",
+              "phase": "accessTrigger",
+              "hyp": "stride/f8f4b355e08c8496430afc737ba598901c41a5d9209031c2aa7d6d8e6715dccc//ACTION5/-6,6/"
+            },
+            {
+              "n": 499,
+              "at": [
+                6,
+                4
+              ],
+              "to": [
+                8,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 2,
+              "axis": "S→E",
+              "phase": "confirmB",
+              "hyp": "93|ACTION4|ACTION5"
+            },
+            {
+              "n": 532,
+              "at": [
+                8,
+                2
+              ],
+              "to": [
+                6,
+                4
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 2,
+              "axis": "E→S",
+              "phase": "accessSetup",
+              "hyp": "stride/7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6//ACTION5/6,-6/"
+            },
+            {
+              "n": 601,
+              "at": [
+                8,
+                2
+              ],
+              "to": [
+                6,
+                4
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "d": 2,
+              "axis": "E→S",
+              "phase": "confirmControl",
+              "hyp": "85|ACTION1|ACTION5"
+            }
+          ],
+          "distancePairs": {
+            "S→E/2": 4,
+            "E→S/2": 4
+          },
+          "validOpportunity": {
+            "1": 10,
+            "2": 7,
+            "3": 14,
+            "4": 30,
+            "5": 8
+          },
+          "chosenAtOpportunity": {},
+          "touches": 4,
+          "failedPushes": 1,
+          "failedExamples": [
+            {
+              "n": 529,
+              "at": [
+                7,
+                2
+              ],
+              "m": [
+                6,
+                2
+              ],
+              "a": 3,
+              "phase": "position"
+            }
+          ],
+          "head": [
+            {
+              "n": 1,
+              "a": 1,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 2,
+              "a": 3,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 3,
+              "a": 2,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 4,
+              "a": 4,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                7,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 5,
+              "a": 5,
+              "at": [
+                7,
+                3
+              ],
+              "to": [
+                7,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 6,
+              "a": 1,
+              "at": [
+                7,
+                3
+              ],
+              "to": [
+                7,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 7,
+              "a": 3,
+              "at": [
+                7,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 8,
+              "a": 5,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                2
+              ],
+              "phase": null
+            },
+            {
+              "n": 9,
+              "a": 2,
+              "at": [
+                6,
+                2
+              ],
+              "to": [
+                6,
+                3
+              ],
+              "phase": null
+            },
+            {
+              "n": 10,
+              "a": 2,
+              "at": [
+                6,
+                3
+              ],
+              "to": [
+                6,
+                4
+              ],
+              "phase": null
+            },
+            {
+              "n": 11,
+              "a": 4,
+              "at": [
+                6,
+                4
+              ],
+              "to": [
+                7,
+                4
+              ],
+              "phase": null
+            },
+            {
+              "n": 12,
+              "a": 1,
+              "at": [
+                7,
+                4
+              ],
+              "to": [
+                7,
+                3
+              ],
+              "phase": null
+            }
+          ],
+          "firstWater": {
+            "n": 2,
+            "at": [
+              6,
+              2
+            ],
+            "water": [
+              5,
+              2
+            ],
+            "a": 3
+          },
+          "firstWalk": {
+            "n": 1,
+            "at": [
+              6,
+              3
+            ],
+            "to": [
+              6,
+              2
+            ],
+            "a": 1
+          },
+          "firstOnEachAxis": {
+            "S→E": {
+              "n": 191,
+              "at": [
+                7,
+                5
+              ],
+              "to": [
+                9,
+                3
+              ],
+              "m": [
+                7,
+                3
+              ],
+              "d": 2,
+              "axis": "S→E",
+              "phase": null,
+              "hyp": null
+            },
+            "E→S": {
+              "n": 283,
+              "at": [
+                9,
+                2
+              ],
+              "to": [
+                7,
+                4
+              ],
+              "m": [
+                7,
+                2
+              ],
+              "d": 2,
+              "axis": "E→S",
+              "phase": "accessTrigger",
+              "hyp": "stride/7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6//ACTION5/-6,6/"
+            }
+          },
+          "landedOnGoal": [],
+          "firstReach": {
+            "6,3": 1,
+            "6,2": 2,
+            "7,3": 5,
+            "7,2": 7,
+            "6,4": 11,
+            "7,4": 12,
+            "5,3": 36,
+            "8,2": 104,
+            "9,2": 108,
+            "9,3": 124,
+            "10,3": 125,
+            "8,3": 129,
+            "9,4": 131,
+            "10,4": 133,
+            "8,4": 173,
+            "8,5": 174,
+            "7,5": 190,
+            "5,4": 248,
+            "4,4": 337
+          },
+          "layouts": 4,
+          "firstValid": {
+            "n": 124,
+            "at": [
+              9,
+              3
+            ],
+            "m": [
+              8,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ],
+            "a": 4
+          },
+          "firstReady": null,
+          "firstMirrorAlignment": null,
+          "firstActualTeleport": {
+            "n": 191,
+            "at": [
+              7,
+              5
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "m": [
+              7,
+              3
+            ],
+            "d": 2,
+            "axis": "S→E",
+            "phase": null,
+            "hyp": null
+          },
+          "mirrorEntered": [
+            {
+              "i": 1,
+              "place": [
+                8,
+                3
+              ]
+            },
+            {
+              "i": 129,
+              "place": [
+                7,
+                3
+              ]
+            },
+            {
+              "i": 230,
+              "place": [
+                7,
+                2
+              ]
+            },
+            {
+              "i": 333,
+              "place": [
+                6,
+                2
+              ]
+            }
+          ],
+          "activate": 144,
+          "failedActivations": 136,
+          "waterBumps": 225,
+          "stepsTaken": 285,
+          "choices": {
+            "1": 106,
+            "2": 137,
+            "3": 134,
+            "4": 134,
+            "5": 144
+          },
+          "territorial": []
+        }
+      }
+    },
+    "chronological": {
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "trajectory": "5a3dc8fdaa45254474f46fe6b7393a0737415f6410adc4933385e26ffdebfabf",
+      "resets": 0,
+      "start": 1,
+      "sourcePrefixActions": 0,
+      "issued": 807,
+      "official": 0,
+      "finalLevel": 1,
+      "reason": [
+        [
+          1,
+          "level_active_time_budget",
+          false
+        ]
+      ],
+      "hist": {
+        "1": {
+          "tracking": {
+            "translations": 337,
+            "matched": 107,
+            "rotationsWithoutTravel": 63,
+            "firstMismatch": {
+              "n": 2,
+              "a": 3,
+              "from": [
+                5,
+                10
+              ],
+              "to": [
+                4,
+                10
+              ],
+              "facing": [
+                "N",
+                "W"
+              ],
+              "before": "17acd4dc94",
+              "after": "1945862e65",
+              "match": false
+            },
+            "firstChangedShape": {
+              "n": 2,
+              "a": 3,
+              "from": [
+                5,
+                10
+              ],
+              "to": [
+                4,
+                10
+              ],
+              "facing": [
+                "N",
+                "W"
+              ],
+              "before": "17acd4dc94",
+              "after": "1945862e65",
+              "match": false
+            },
+            "firstMatched": {
+              "n": 1,
+              "a": 1,
+              "from": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                10
+              ],
+              "facing": [
+                "N",
+                "N"
+              ],
+              "before": "17acd4dc94",
+              "after": "17acd4dc94",
+              "match": true
+            },
+            "orientations": {
+              "N": {
+                "17acd4dc94": 1
+              },
+              "W": {
+                "1945862e65": 1
+              },
+              "S": {
+                "23afe889b2": 1
+              },
+              "E": {
+                "f8f4b355e0": 1
+              }
+            },
+            "head": [
+              {
+                "n": 1,
+                "a": 1,
+                "from": [
+                  5,
+                  11
+                ],
+                "to": [
+                  5,
+                  10
+                ],
+                "facing": [
+                  "N",
+                  "N"
+                ],
+                "before": "17acd4dc94",
+                "after": "17acd4dc94",
+                "match": true
+              },
+              {
+                "n": 2,
+                "a": 3,
+                "from": [
+                  5,
+                  10
+                ],
+                "to": [
+                  4,
+                  10
+                ],
+                "facing": [
+                  "N",
+                  "W"
+                ],
+                "before": "17acd4dc94",
+                "after": "1945862e65",
+                "match": false
+              },
+              {
+                "n": 3,
+                "a": 2,
+                "from": [
+                  4,
+                  10
+                ],
+                "to": [
+                  4,
+                  11
+                ],
+                "facing": [
+                  "W",
+                  "S"
+                ],
+                "before": "1945862e65",
+                "after": "23afe889b2",
+                "match": false
+              },
+              {
+                "n": 4,
+                "a": 4,
+                "from": [
+                  4,
+                  11
+                ],
+                "to": [
+                  5,
+                  11
+                ],
+                "facing": [
+                  "S",
+                  "E"
+                ],
+                "before": "23afe889b2",
+                "after": "f8f4b355e0",
+                "match": false
+              },
+              {
+                "n": 5,
+                "a": 5,
+                "from": [
+                  5,
+                  11
+                ],
+                "to": [
+                  5,
+                  11
+                ],
+                "facing": [
+                  "E",
+                  "E"
+                ],
+                "before": "f8f4b355e0",
+                "after": "f8f4b355e0",
+                "match": false
+              }
+            ]
+          },
+          "selectedSwitches": 14,
+          "goalOccupancyMax": 1,
+          "globalTransfers": 1,
+          "firstGlobal": {
+            "n": 210,
+            "movements": [
+              {
+                "selected": true,
+                "from": [
+                  6,
+                  9
+                ],
+                "to": [
+                  9,
+                  6
+                ]
+              }
+            ]
+          },
+          "firstOccupiedGoal": 618,
+          "firstLost": null,
+          "initialFeasibleX": 0,
+          "initialFeasibleByAction": {},
+          "actions": 807,
+          "position": 49,
+          "initialLayout": 49,
+          "regions": [],
+          "pushed": [],
+          "teleports": [
+            {
+              "n": 210,
+              "at": [
+                6,
+                9
+              ],
+              "to": [
+                9,
+                6
+              ],
+              "m": [
+                6,
+                6
+              ],
+              "d": 3,
+              "axis": "S→E",
+              "phase": "activateResponse",
+              "hyp": "test_for_motion_after_an_independent_placement"
+            }
+          ],
+          "distancePairs": {
+            "S→E/3": 1
+          },
+          "validOpportunity": {
+            "1": 13,
+            "2": 12,
+            "3": 2,
+            "4": 7,
+            "5": 1,
+            "6": 9
+          },
+          "chosenAtOpportunity": {},
+          "touches": 0,
+          "failedPushes": 0,
+          "failedExamples": [],
+          "head": [
+            {
+              "n": 1,
+              "a": 1,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                10
+              ],
+              "phase": null
+            },
+            {
+              "n": 2,
+              "a": 3,
+              "at": [
+                5,
+                10
+              ],
+              "to": [
+                4,
+                10
+              ],
+              "phase": null
+            },
+            {
+              "n": 3,
+              "a": 2,
+              "at": [
+                4,
+                10
+              ],
+              "to": [
+                4,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 4,
+              "a": 4,
+              "at": [
+                4,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 5,
+              "a": 5,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 6,
+              "a": 6,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 7,
+              "a": 6,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 8,
+              "a": 6,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 9,
+              "a": 6,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 10,
+              "a": 6,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 11,
+              "a": 6,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            },
+            {
+              "n": 12,
+              "a": 6,
+              "at": [
+                5,
+                11
+              ],
+              "to": [
+                5,
+                11
+              ],
+              "phase": null
+            }
+          ],
+          "firstWater": {
+            "n": 20,
+            "at": [
+              7,
+              11
+            ],
+            "water": [
+              8,
+              11
+            ],
+            "a": 4
+          },
+          "firstWalk": {
+            "n": 1,
+            "at": [
+              5,
+              11
+            ],
+            "to": [
+              5,
+              10
+            ],
+            "a": 1
+          },
+          "firstOnEachAxis": {
+            "S→E": {
+              "n": 210,
+              "at": [
+                6,
+                9
+              ],
+              "to": [
+                9,
+                6
+              ],
+              "m": [
+                6,
+                6
+              ],
+              "d": 3,
+              "axis": "S→E",
+              "phase": "activateResponse",
+              "hyp": "test_for_motion_after_an_independent_placement"
+            }
+          },
+          "landedOnGoal": [
+            618,
+            654,
+            670,
+            672,
+            675,
+            684,
+            690,
+            696,
+            703,
+            731,
+            735,
+            770,
+            774,
+            777,
+            780,
+            785,
+            789,
+            799,
+            802
+          ],
+          "firstReach": {
+            "5,11": 1,
+            "5,10": 2,
+            "4,10": 3,
+            "4,11": 4,
+            "4,13": 16,
+            "6,11": 19,
+            "7,11": 20,
+            "5,13": 23,
+            "6,13": 33,
+            "7,10": 93,
+            "7,9": 118,
+            "6,10": 134,
+            "6,9": 135,
+            "7,12": 164,
+            "6,12": 168,
+            "5,12": 171,
+            "4,12": 172,
+            "3,12": 174,
+            "5,9": 189,
+            "9,6": 211,
+            "9,5": 213,
+            "9,4": 214,
+            "10,4": 217,
+            "11,4": 219,
+            "12,4": 226,
+            "13,4": 228,
+            "14,4": 235,
+            "15,4": 238,
+            "16,4": 239,
+            "14,5": 253,
+            "15,5": 255,
+            "16,5": 256,
+            "13,5": 309,
+            "17,4": 440,
+            "14,6": 450,
+            "15,6": 567,
+            "16,6": 568,
+            "17,6": 569,
+            "17,7": 570,
+            "6,14": 593,
+            "5,14": 594,
+            "7,13": 598,
+            "7,14": 599,
+            "7,15": 600,
+            "17,8": 602,
+            "17,5": 619,
+            "6,15": 707,
+            "16,7": 746,
+            "16,8": 747
+          },
+          "layouts": 1,
+          "firstValid": {
+            "n": 134,
+            "at": [
+              6,
+              10
+            ],
+            "m": [
+              6,
+              6
+            ],
+            "to": [
+              10,
+              6
+            ],
+            "a": 1
+          },
+          "firstReady": null,
+          "firstMirrorAlignment": null,
+          "firstActualTeleport": {
+            "n": 210,
+            "at": [
+              6,
+              9
+            ],
+            "to": [
+              9,
+              6
+            ],
+            "m": [
+              6,
+              6
+            ],
+            "d": 3,
+            "axis": "S→E",
+            "phase": "activateResponse",
+            "hyp": "test_for_motion_after_an_independent_placement"
+          },
+          "mirrorEntered": [],
+          "activate": 38,
+          "failedActivations": 37,
+          "waterBumps": 150,
+          "stepsTaken": 336,
+          "choices": {
+            "1": 178,
+            "2": 92,
+            "3": 79,
+            "4": 138,
+            "5": 38,
+            "6": 282
+          },
+          "territorial": [
+            {
+              "n": 727,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  20,
+                  52,
+                  21
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  51,
+                  22,
+                  51,
+                  22
+                ],
+                "area": 1,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                7
+              ],
+              "next": [
+                17,
+                7
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                7
+              ],
+              "actualFeature": [
+                17,
+                7
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                7
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  8
+                ],
+                [
+                  17,
+                  8
+                ],
+                [
+                  6,
+                  10
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 763,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  20,
+                  52,
+                  21
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  51,
+                  22,
+                  51,
+                  22
+                ],
+                "area": 1,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                7
+              ],
+              "next": [
+                17,
+                7
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                7
+              ],
+              "actualFeature": [
+                17,
+                7
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                7
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  8
+                ],
+                [
+                  17,
+                  8
+                ],
+                [
+                  6,
+                  10
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 765,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  23,
+                  52,
+                  24
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  8
+                ],
+                "cells": [
+                  "17,8"
+                ]
+              },
+              "trackedMark": {
+                "color": 11,
+                "box": [
+                  50,
+                  14,
+                  52,
+                  16
+                ],
+                "area": 8,
+                "anchor": [
+                  17,
+                  5
+                ],
+                "cells": [
+                  "17,5"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                8
+              ],
+              "next": [
+                17,
+                8
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                5
+              ],
+              "actualFeature": [
+                17,
+                5
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                8
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  9
+                ],
+                [
+                  17,
+                  9
+                ]
+              ],
+              "siteSig": "586f1e6279",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 767,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  23,
+                  52,
+                  24
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  8
+                ],
+                "cells": [
+                  "17,8"
+                ]
+              },
+              "trackedMark": {
+                "color": 11,
+                "box": [
+                  50,
+                  14,
+                  52,
+                  16
+                ],
+                "area": 8,
+                "anchor": [
+                  17,
+                  5
+                ],
+                "cells": [
+                  "17,5"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                8
+              ],
+              "next": [
+                17,
+                8
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                5
+              ],
+              "actualFeature": [
+                17,
+                5
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                8
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  9
+                ],
+                [
+                  17,
+                  9
+                ]
+              ],
+              "siteSig": "586f1e6279",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 772,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  17,
+                  52,
+                  18
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  6
+                ],
+                "cells": [
+                  "17,6"
+                ]
+              },
+              "trackedMark": {
+                "color": 11,
+                "box": [
+                  50,
+                  14,
+                  52,
+                  16
+                ],
+                "area": 8,
+                "anchor": [
+                  17,
+                  5
+                ],
+                "cells": [
+                  "17,5"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                6
+              ],
+              "next": [
+                17,
+                6
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                5
+              ],
+              "actualFeature": [
+                17,
+                5
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                6
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  7
+                ],
+                [
+                  17,
+                  7
+                ]
+              ],
+              "siteSig": "586f1e6279",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 788,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  17,
+                  52,
+                  18
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  6
+                ],
+                "cells": [
+                  "17,6"
+                ]
+              },
+              "trackedMark": {
+                "color": 11,
+                "box": [
+                  50,
+                  14,
+                  52,
+                  16
+                ],
+                "area": 8,
+                "anchor": [
+                  17,
+                  5
+                ],
+                "cells": [
+                  "17,5"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                6
+              ],
+              "next": [
+                17,
+                6
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                5
+              ],
+              "actualFeature": [
+                17,
+                5
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                6
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  7
+                ],
+                [
+                  17,
+                  7
+                ]
+              ],
+              "siteSig": "586f1e6279",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 792,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  20,
+                  52,
+                  21
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  51,
+                  22,
+                  51,
+                  22
+                ],
+                "area": 1,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                7
+              ],
+              "next": [
+                17,
+                7
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                7
+              ],
+              "actualFeature": [
+                17,
+                7
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                7
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  8
+                ],
+                [
+                  17,
+                  8
+                ],
+                [
+                  6,
+                  10
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            },
+            {
+              "n": 794,
+              "a": 6,
+              "tracked": {
+                "color": 12,
+                "box": [
+                  50,
+                  20,
+                  52,
+                  21
+                ],
+                "area": 4,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "trackedMark": {
+                "color": 0,
+                "box": [
+                  51,
+                  22,
+                  51,
+                  22
+                ],
+                "area": 1,
+                "anchor": [
+                  17,
+                  7
+                ],
+                "cells": [
+                  "17,7"
+                ]
+              },
+              "disappears": false,
+              "coincides": false,
+              "realVisible": [
+                "23afe889b2"
+              ],
+              "cursor": 0,
+              "kind": "contact",
+              "basis": "translated_orbit",
+              "stage": "approach",
+              "player": [
+                17,
+                7
+              ],
+              "next": [
+                17,
+                7
+              ],
+              "semanticMirror": [
+                6,
+                6
+              ],
+              "targetFeature": [
+                17,
+                7
+              ],
+              "actualFeature": [
+                17,
+                7
+              ],
+              "ideal": null,
+              "foothold": [
+                15,
+                8
+              ],
+              "home": 9,
+              "out": 3,
+              "homeMatches": null,
+              "gactor": "23afe889b2",
+              "actorStart": [
+                17,
+                7
+              ],
+              "knownLimit": 715,
+              "alternatives": [
+                [
+                  17,
+                  8
+                ],
+                [
+                  17,
+                  8
+                ],
+                [
+                  6,
+                  10
+                ]
+              ],
+              "siteSig": "6661afe7e9",
+              "actorIsHero": true,
+              "success": false,
+              "changedMirror": false
+            }
+          ],
+          "physicalActivation": {
+            "n": 210,
+            "actual": [
+              [
+                6,
+                9
+              ],
+              [
+                9,
+                6
+              ]
+            ],
+            "subjectBefore": [
+              6,
+              13
+            ],
+            "subjectAfter": [
+              6,
+              13
+            ],
+            "color": 12,
+            "otherMerchants": [
+              [
+                6,
+                13
+              ]
+            ],
+            "moved": false,
+            "verdict": "activation_unconfirmed"
+          }
+        }
+      }
+    }
+  }
+}
