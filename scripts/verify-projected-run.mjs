@@ -24,11 +24,47 @@ if (
   board.levelsCompleted !== run.initialCompleted
 )
   throw Error('Initial observation differs');
-const events = new Map(run.preparation.filter((e) => e.projection).map((e) => [e.actionIndex, e]));
+const events = new Map(
+  run.preparation.filter((e) => e.projection || e.frontier || e.delayed).map((e) => [e.actionIndex, e])
+);
+const witnessed = new Map();
+const states = new Set([run.initial.slice(0, 16)]);
+const frontier = { routes: 0, newProbes: 0, arrivals: 0, continuations: 0 };
 const counts = { issued: 0, observed: 0, verifiedLanding: 0, verifiedContinuation: 0, refuted: 0 };
 const cache = new Map();
+const delayed = { issued: 0, preparedAccess: 0, exactPredictions: 0, followingMovements: 0 };
+const commandKey = (cmd) => 'ACTION' + cmd.id + (cmd.id === 6 ? ':' + cmd.data.x + ',' + cmd.data.y : '');
+async function partsAt(board, key, revision) {
+  if (!cache.has(key)) {
+    const o = await measureNativeObservation(
+      {
+        frame_rows: board.frame,
+        frame_hash: key,
+        level: board.level,
+        levels_completed: board.levelsCompleted,
+        state: board.state,
+        available_action_refs: board.availableActionIds.map((v) => 'ACTION' + v),
+      },
+      revision
+    );
+    cache.set(key, o.entities);
+  }
+  return cache.get(key);
+}
+const needDelayed = run.preparation.some((e) => e.delayed);
+const location = (parts, role) =>
+  parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
+  const action = commandKey(cmd);
+  if (needDelayed) await partsAt(board, cmd.from, i + 1);
+  const input = [cmd.from, board.level, board.state, board.availableActionIds.join(','), action].join('/');
+  const prior = witnessed.get(input) ?? new Set();
+  const wasTried = prior.size > 0;
+  const wasSeen = prior.has(cmd.to);
+  prior.add(cmd.to);
+  witnessed.set(input, prior);
+  states.add(cmd.to);
   board = await engine.dispatch({
     type: 'action',
     actionId: cmd.id,
@@ -38,31 +74,85 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   const event = events.get(i + 1);
   if (!event) continue;
   const p = event.projection;
-  counts.issued++;
-  const action = 'ACTION' + cmd.id + (cmd.id === 6 ? ':' + cmd.data.x + ',' + cmd.data.y : '');
-  if (p.program[p.index] !== action) throw Error('Unbound experiment command at ' + i);
+  if (p) counts.issued++;
+  if (p && p.program[p.index] !== action) throw Error('Unbound experiment command at ' + i);
   if (event.result === 'official_completion') {
     if (board.levelsCompleted === run.initialCompleted && board.state !== 'WIN')
       throw Error('False claimed completion');
     continue;
   }
-  const key = cmd.to + board.state + board.level;
-  if (!cache.has(key))
-    cache.set(
-      key,
-      await measureNativeObservation(
-        {
-          frame_rows: board.frame,
-          frame_hash: cmd.to,
-          level: board.level,
-          levels_completed: board.levelsCompleted,
-          state: board.state,
-          available_action_refs: board.availableActionIds.map((v) => 'ACTION' + v),
-        },
-        i + 1
+  const parts = await partsAt(board, cmd.to, i + 2);
+  if (event.delayed) {
+    const t = event.delayed,
+      actual = location(parts, t.role),
+      before = location(cache.get(cmd.from), t.role);
+    const base = t.baseline[t.step],
+      first = i - t.step - (t.follow ? 1 : 0);
+    if (action !== (t.follow ?? base.op) || before !== t.before || actual !== t.after)
+      throw Error('Delayed observation mismatch at ' + i);
+    let lastControl = null;
+    for (const step of t.baseline) {
+      const at = i + step.ref - event.revision;
+      if (at < 0 || at >= first) throw Error('Future control evidence at ' + i);
+      const past = run.replayCommands[at];
+      if (
+        commandKey(past) !== step.op ||
+        (lastControl && lastControl.to !== past.from) ||
+        location(cache.get(past.from), t.role) !== step.from ||
+        location(cache.get(past.to), t.role) !== step.to
       )
-    );
-  const parts = cache.get(key).entities;
+        throw Error('Delayed baseline mismatch at ' + i);
+      lastControl = past;
+    }
+    if (t.preparedImmediately) {
+      const prep = run.replayCommands[first - 1],
+        witness = run.replayCommands[i + t.prepRef - event.revision];
+      if (
+        !prep ||
+        !witness ||
+        commandKey(prep) !== t.prep ||
+        prep.from !== witness.from ||
+        prep.to !== witness.to ||
+        prep.from !== run.replayCommands[i + t.baseline[0].ref - event.revision].from
+      )
+        throw Error('Mismatched preparation at ' + i);
+    }
+    if (
+      event.result === 'delayed_access_observed' &&
+      (!t.preparedImmediately || before !== base.from || actual === before || actual === base.to)
+    )
+      throw Error('False access claim at ' + i);
+    if (
+      t.predictedMatched === true &&
+      (t.follow || t.step !== t.baseline.length - 1 || actual !== t.predicted)
+    )
+      throw Error('False forecast at ' + i);
+    delayed.issued++;
+    delayed.preparedAccess += Number(event.result === 'delayed_access_observed');
+    delayed.exactPredictions += Number(t.predictedMatched === true);
+    delayed.followingMovements += Number(event.result === 'delayed_followup_moved');
+    continue;
+  }
+  if (event.frontier) {
+    const f = event.frontier;
+    if (event.phase === 'frontierRoute' && event.result === 'route_verified') {
+      if (!wasSeen) throw Error('Claimed route lacks an earlier public transition at ' + i);
+      frontier.routes++;
+    }
+    if (event.phase === 'frontierProbe') {
+      if (action !== f.probe || wasTried) throw Error('Claimed new probe is not fresh at ' + i);
+      frontier.newProbes++;
+    }
+    if (['arrival_verified', 'continuation_verified'].includes(event.result)) {
+      const expected = event.phase === 'frontierUse' ? f.use : f.arrival;
+      const seen = parts.find((e) => e.signature === expected.role && !e.identity_ambiguous);
+      if (action !== expected.op || seen?.position.join() !== expected.to.join())
+        throw Error('Claimed forecast differs from the independently replayed observation at ' + i);
+      if (event.phase === 'frontierUse') frontier.continuations++;
+      else frontier.arrivals++;
+    }
+    continue;
+  }
   const positions = p.roles.map(
     (id) => parts.find((e) => !e.identity_ambiguous && e.signature === id)?.position
   );
@@ -89,6 +179,9 @@ console.log(
     finalLevel: board.level,
     state: board.state,
     won,
+    distinctImages: states.size,
     projections: counts,
+    frontier,
+    delayed,
   })
 );

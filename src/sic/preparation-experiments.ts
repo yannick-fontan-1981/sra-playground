@@ -1,3 +1,4 @@
+import { newDelayedMemory, selectDelayed, recordDelayed, type DelayedTrial, type DelayedMemory } from './distinguishing-suffix.ts';
 import type {
   NativeCommand,
   NativeEntity,
@@ -73,6 +74,7 @@ type Rule = {
 export type Experiment = {
   phase:
     | 'frontierRoute' | 'frontierProbe' | 'frontierUse'
+    | 'delayedProbe'
     | 'projection'
     | 'prepare'
     | 'probe'
@@ -106,6 +108,7 @@ export type Experiment = {
   prepEffect?: string;
   purpose?: string;
   refs: number[];
+  delayed?: DelayedTrial;
   frontier?: FrontierTrial;
   projection?: Trial;
   placement?: Placement;
@@ -136,11 +139,13 @@ export type Outcome = {
   strictMatch?: boolean;
   access?: Record<string, unknown>;
   equation?: Record<string, unknown>;
+  delayed?: Record<string, unknown>;
   frontier?: Record<string, unknown>;
   projection?: Record<string, unknown>;
 };
 export type Memory = {
   epoch: number;
+  delayed: DelayedMemory;
   frontier:FrontierMemory;
   projection: ProjectionMemory;
   space: SpatialMemory;
@@ -164,6 +169,7 @@ export type Memory = {
 };
 export const initialMemory = (epoch: number): Memory => ({
   epoch,
+  delayed: newDelayedMemory(),
   frontier:newFrontierMemory(),
   projection: newProjectionMemory(),
   space: newSpatialMemory(),
@@ -342,6 +348,12 @@ export function selectExperiment(
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
+  const ongoingPlan = frontier.question || frontier.follow || m.projection.active || m.equations.active ||
+    m.space.active || (m.pending && m.pending.phase !== 'explore');
+  if (m.delayed.active || !ongoingPlan) {
+    const experiment = selectDelayed(m, o, s, available);
+    if (experiment) return experiment;
+  }
   if(frontier.question || frontier.follow || (!m.projection.active && (frontier.exploring || m.turns-frontier.lastEdge>=4 || m.turns-frontier.lastScene>=Math.max(12,2*available.size)))) {
     const search=selectFrontier(m,s,available,firstRoutes(m,s,m.scenes.length));
     if(search)return search;
@@ -664,6 +676,9 @@ export function recordExperiment(
   if (edge.t !== t || edge.effect.key !== effect.key) edge.stable = false;
   if (previous?.t === s && !m.chains.some((c) => c.first === m.previous && c.second === index))
     m.chains.push({ first: m.previous, second: index });
+  m.delayed.history.push(index);
+  if (m.delayed.history.length > 256) m.delayed.history.shift();
+  if (!x?.delayed) m.delayed.active = null;
   m.previous = index;
   m.pending = null;
   if (!x) return null;
@@ -681,6 +696,11 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if (x.delayed) {
+    const won = a.levels_completed > b.levels_completed || a.state === 'WIN';
+    const { result, detail } = recordDelayed(m, x.delayed, edge, b, a, won);
+    return { ...out, result, delayed: detail };
+  }
   if(x.frontier){
     if(!newScene)frontier.exploring=true;
     const {result,detail}=recordFrontier(m,x.frontier,edge,a.levels_completed>b.levels_completed||a.state==='WIN',

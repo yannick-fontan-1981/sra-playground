@@ -272,6 +272,7 @@ async function run(code, games) {
           equation,
           projection,
           frontier,
+          delayed,
           phase,
           hypothesis,
           result,
@@ -319,6 +320,7 @@ async function run(code, games) {
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
           ...(projection ? {projection} : {}),
+          ...(delayed ? { delayed } : {}),
           ...(frontier ? {frontier} : {}),
         })
       ),

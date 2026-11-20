@@ -1,0 +1,365 @@
+{
+  "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "sourceControlWins": 65,
+  "source": {
+    "v1": {
+      "games": 100,
+      "wins": 66,
+      "gained": [
+        "VOIS"
+      ],
+      "lost": []
+    },
+    "v4": {
+      "games": 100,
+      "wins": 66,
+      "gained": [
+        "CGWL",
+        "SWCH",
+        "VOIS"
+      ],
+      "lost": [
+        "SMLP",
+        "TRIA"
+      ]
+    }
+  },
+  "ss01Level2": {
+    "control": {
+      "actions": 668,
+      "images": 156,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "projection": {
+        "issued": 0,
+        "observed": 0,
+        "verifiedLanding": 0,
+        "verifiedContinuation": 0,
+        "refuted": 0
+      },
+      "frontier": {},
+      "trajectory": "2b1b987d84b9500c191c7c590952c5dbffccbb2ab495cd3e52ac0c91eb2f2b06",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    },
+    "v1": {
+      "actions": 679,
+      "images": 166,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "projection": {
+        "issued": 25,
+        "observed": 12,
+        "verifiedLanding": 9,
+        "verifiedContinuation": 0,
+        "refuted": 8
+      },
+      "frontier": {},
+      "trajectory": "c1929824787ef15660206c9b8b6214e9d68971e8be339ff12225ae411ac52680",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    },
+    "v2": {
+      "actions": 1062,
+      "images": 170,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "projection": {
+        "issued": 30,
+        "observed": 17,
+        "verifiedLanding": 11,
+        "verifiedContinuation": 0,
+        "refuted": 5
+      },
+      "frontier": {},
+      "trajectory": "77b3d5ad6c8716039ab9c1ff38729d687b289747995b72cc620d4b4d3585f4b9",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    },
+    "v3": {
+      "actions": 1123,
+      "images": 149,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "projection": {
+        "issued": 10,
+        "observed": 7,
+        "verifiedLanding": 0,
+        "verifiedContinuation": 0,
+        "refuted": 5
+      },
+      "frontier": {},
+      "trajectory": "93a67d53b6258017b6491a916e30f7759679138f0a58f0745fdef2aa4590d4ca",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    },
+    "v4": {
+      "actions": 720,
+      "images": 140,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "projection": {
+        "issued": 0,
+        "observed": 0,
+        "verifiedLanding": 0,
+        "verifiedContinuation": 0,
+        "refuted": 0
+      },
+      "frontier": {
+        "routes": 51,
+        "newProbes": 176,
+        "arrivals": 16,
+        "continuations": 6
+      },
+      "trajectory": "b98d269fcf7ad5da56020fc2e5d768e00402ba833ee092486da3573bf78b6c2f",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    }
+  },
+  "upperLevels": [
+    {
+      "code": "CATR",
+      "level": 2,
+      "entry": "chronological",
+      "confirmed": true,
+      "length": 4,
+      "ablations": 3,
+      "noSetupMotion": 0,
+      "detectedDelay": {
+        "None": 3
+      }
+    },
+    {
+      "code": "CATR",
+      "level": 3,
+      "entry": "chronological",
+      "confirmed": true,
+      "length": 5,
+      "ablations": 4,
+      "noSetupMotion": 0,
+      "detectedDelay": {
+        "None": 4
+      }
+    },
+    {
+      "code": "CWSE",
+      "level": 2,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 5,
+      "ablations": 4,
+      "noSetupMotion": 0,
+      "detectedDelay": {
+        "2": 1,
+        "1": 1,
+        "None": 2
+      }
+    },
+    {
+      "code": "GARE",
+      "level": 2,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 8,
+      "ablations": 7,
+      "noSetupMotion": 0,
+      "detectedDelay": {
+        "None": 4,
+        "2": 2,
+        "1": 1
+      }
+    },
+    {
+      "code": "GARE",
+      "level": 3,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 3,
+      "ablations": 2,
+      "noSetupMotion": 0,
+      "detectedDelay": {
+        "None": 2
+      }
+    },
+    {
+      "code": "GIGO",
+      "level": 2,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 9,
+      "ablations": 8,
+      "noSetupMotion": 2,
+      "detectedDelay": {
+        "None": 7,
+        "1": 1
+      }
+    },
+    {
+      "code": "GIGO",
+      "level": 3,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 9,
+      "ablations": 8,
+      "noSetupMotion": 2,
+      "detectedDelay": {
+        "2": 1,
+        "None": 6,
+        "1": 1
+      }
+    },
+    {
+      "code": "GIGO",
+      "level": 4,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 11,
+      "ablations": 10,
+      "noSetupMotion": 2,
+      "detectedDelay": {
+        "None": 8,
+        "1": 2
+      }
+    },
+    {
+      "code": "GIGO",
+      "level": 5,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 17,
+      "ablations": 16,
+      "noSetupMotion": 4,
+      "detectedDelay": {
+        "None": 13,
+        "3": 1,
+        "1": 2
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 2,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 10,
+      "ablations": 9,
+      "noSetupMotion": 1,
+      "detectedDelay": {
+        "5": 1,
+        "4": 1,
+        "3": 1,
+        "2": 1,
+        "1": 1,
+        "None": 4
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 3,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 6,
+      "ablations": 5,
+      "noSetupMotion": 0,
+      "detectedDelay": {
+        "4": 1,
+        "3": 1,
+        "None": 3
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 4,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 8,
+      "ablations": 7,
+      "noSetupMotion": 0,
+      "detectedDelay": {
+        "2": 1,
+        "None": 6
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 5,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 10,
+      "ablations": 9,
+      "noSetupMotion": 2,
+      "detectedDelay": {
+        "None": 7,
+        "5": 1,
+        "4": 1
+      }
+    },
+    {
+      "code": "MOTO",
+      "level": 2,
+      "entry": "chronological",
+      "confirmed": true,
+      "length": 7,
+      "ablations": 6,
+      "noSetupMotion": 2,
+      "detectedDelay": {
+        "1": 3,
+        "None": 3
+      }
+    },
+    {
+      "code": "POLA",
+      "level": 2,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 3,
+      "ablations": 2,
+      "noSetupMotion": 2,
+      "detectedDelay": {
+        "None": 2
+      }
+    },
+    {
+      "code": "POLA",
+      "level": 3,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 4,
+      "ablations": 3,
+      "noSetupMotion": 2,
+      "detectedDelay": {
+        "None": 2,
+        "1": 1
+      }
+    },
+    {
+      "code": "POLA",
+      "level": 4,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 7,
+      "ablations": 6,
+      "noSetupMotion": 3,
+      "detectedDelay": {
+        "None": 5,
+        "1": 1
+      }
+    },
+    {
+      "code": "POLA",
+      "level": 5,
+      "entry": "direct",
+      "confirmed": true,
+      "length": 9,
+      "ablations": 8,
+      "noSetupMotion": 3,
+      "detectedDelay": {
+        "None": 5,
+        "1": 1,
+        "3": 1,
+        "2": 1
+      }
+    }
+  ],
+  "originalSourceProbe": {
+    "ineligible": 20,
+    "None": 75,
+    "3": 3,
+    "4": 1,
+    "1": 1
+  }
+}

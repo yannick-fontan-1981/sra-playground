@@ -1,3 +1,4 @@
+import { newDelayedMemory } from './distinguishing-suffix.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
   NativeFamily,
@@ -22,6 +23,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  delayedProbe: 'Test a matched control program after moving or changing its preparation',
   frontierRoute:'Return along witnessed edges to an unanswered experiment',
   frontierProbe:'Try a previously unmeasured control at its selected configuration',
   frontierUse:'Test the predicted continuation of the newly measured transition',
@@ -156,6 +158,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(imagined ? { spatial_forecast: imagined } : {}),
+        ...(experiment.delayed ? { conditional_program: experiment.delayed } : {}),
         ...(experiment.frontier ? { reachable_experiment: experiment.frontier } : {}),
         ...(capability ? { capability_equation: capability } : {}),
         steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
@@ -216,6 +219,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     state: () => m,
     restore(value) {
       m = structuredClone(value as typeof m);
+      m.delayed ??= newDelayedMemory();
       m.frontier ??= {...newFrontierMemory(),lastEdge:m.turns,lastScene:m.turns};
       m.projection ??= newProjectionMemory();
       m.space ??= newSpatialMemory();
