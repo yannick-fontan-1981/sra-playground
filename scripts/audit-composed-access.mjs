@@ -131,6 +131,91 @@ async function audit(run, event = run.preparation.find((e) => e.result === 'cond
     }
     checks.push({ key, extended, matches, unknown, distinct: matches === 0 && unknown === 0 });
   }
+  let initialForecast = null;
+  if (allBoard && plan.reconsideredRef) {
+    const initial = run.preparation.find((e) => e.actionIndex === first + 1)?.condition;
+    const old = initial?.plan;
+    if (
+      old &&
+      initial.index === 0 &&
+      !old.alreadyPlaced &&
+      old.actor === plan.actor &&
+      old.partner === plan.partner &&
+      [...old.preparation, old.trigger, old.use].every(Boolean) &&
+      [...old.preparation, old.trigger, old.use].map((s) => s.op).join('/') === word.join('/')
+    ) {
+      const rejected = run.preparation.find(
+        (e) =>
+          e.revision === plan.reconsideredRef &&
+          e.result === 'condition_refuted' &&
+          e.condition?.plan.key === old.key
+      );
+      if (!rejected || rejected.actionIndex < first + 1 || rejected.actionIndex >= event.actionIndex)
+        throw Error('Missing failed prediction before repair');
+      initialForecast = {
+        declaredBeforePreparation: true,
+        plannedPartner: old.preparation.at(-1).to,
+        actualPartner: plan.preparation.at(-1).to,
+        plannedDeparture: old.trigger.from,
+        plannedArrival: old.trigger.to,
+        plannedUse: old.use.to,
+        confirmedArrival: old.trigger.to.join() === plan.trigger.to.join(),
+        confirmedUse: old.use.to.join() === endpoint,
+        correctionAction: rejected.actionIndex,
+        rules:
+          old.frame?.rules.map((r) => ({
+            axis: r.axis,
+            low: r.low,
+            high: r.high,
+            subject: r.from === null ? 'actor' : 'partner',
+            reference: r.to === null ? 'board' : 'partner',
+          })) ?? [],
+      };
+    }
+  }
+  let shorterWalks = null;
+  if (initialForecast && !matched.length && !missing && !terminal && word.length <= 4) {
+    let b = restore(0),
+      priorEndpoint = (await position(b)) === endpoint;
+    for (const cmd of run.steps.slice(0, first)) {
+      b = act(op(cmd));
+      if ((await position(b)) === endpoint) priorEndpoint = true;
+    }
+    const buttons = restore(first)
+      .availableActionIds.filter((id) => id >= 1 && id <= 4)
+      .map((id) => 'ACTION' + id);
+    const queue = [[]],
+      controls = { tested: 0, matched: 0, unknown: 0, terminal: 0 };
+    for (const keys of queue) {
+      const board = await play(keys);
+      controls.tested++;
+      if (!board) controls.unknown++;
+      else if (win(board) || board.state === 'GAME_OVER') controls.terminal++;
+      else {
+        const at = await position(board);
+        if (!at) controls.unknown++;
+        else if (at === endpoint) controls.matched++;
+      }
+      if (keys.length + 1 < word.length) for (const k of buttons) queue.push([...keys, k]);
+    }
+    function* orders(remaining) {
+      if (!remaining.length) {
+        yield [];
+        return;
+      }
+      for (const k of new Set(remaining)) {
+        const rest = remaining.slice();
+        rest.splice(rest.indexOf(k), 1);
+        for (const suffix of orders(rest)) yield [k, ...suffix];
+      }
+    }
+    const permutations = [];
+    for (const keys of orders(word)) {
+      const board = await play(keys);
+      permutations.push({ keys, at: board ? await state(board) : null });
+    }
+    shorterWalks = { buttons, priorEndpoint, ...controls, permutations };
+  }
   return {
     ...result,
     completed: true,
@@ -138,6 +223,8 @@ async function audit(run, event = run.preparation.find((e) => e.result === 'cond
     word,
     alreadyPlaced: plan.alreadyPlaced ?? 0,
     endpoint,
+    ...(initialForecast ? { initialForecast } : {}),
+    ...(shorterWalks ? { shorterWalks } : {}),
     ...(allBoard
       ? {
           origin: plan.origin,
