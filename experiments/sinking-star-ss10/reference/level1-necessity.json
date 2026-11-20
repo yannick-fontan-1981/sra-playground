@@ -1,0 +1,122 @@
+{
+  "level": "ss10-01",
+  "title": "L’atelier du contrepoids",
+  "mapSha256": "4926fbe1748854bb23aa0cbd6dec0bb0df9399d49c0d74e2bda266b3b77d6f39",
+  "mapSha256Encoding": "SHA-256 of JSON.stringify(spec), UTF-8",
+  "witness": {
+    "commands": "UUUURRRRRRLLLLDDDDLCRRRRULLLDLLRRRUCDDLDRRRRRRRXRCDRRRRRX",
+    "complete": true,
+    "metrics": {
+      "actions": 57,
+      "selections": 3,
+      "warriorPushes": 7,
+      "thiefPulls": 7,
+      "partnerMoves": 0,
+      "chainPushes": 2,
+      "stoneMoves": 15,
+      "mirrorMoves": 2,
+      "reflections": 2,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 3,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    }
+  },
+  "budget": {
+    "maxStates": 200000,
+    "maxMs": 8000
+  },
+  "ablations": [
+    {
+      "name": "warrior_push",
+      "flags": {
+        "disablePush": true
+      },
+      "status": "limit",
+      "states": 200000,
+      "expanded": 131405,
+      "ms": 2401,
+      "claim": "Inconclusive: bounded search reached a limit."
+    },
+    {
+      "name": "thief_pull",
+      "flags": {
+        "disablePull": true
+      },
+      "status": "unsolvable",
+      "states": 35140,
+      "expanded": 35140,
+      "ms": 529,
+      "claim": "Impossible under this restriction: queue exhausted."
+    },
+    {
+      "name": "press",
+      "flags": {
+        "disablePistons": true
+      },
+      "status": "limit",
+      "states": 200000,
+      "expanded": 135224,
+      "ms": 2331,
+      "claim": "Inconclusive: bounded search reached a limit."
+    },
+    {
+      "name": "mirror_motion",
+      "flags": {
+        "disableMirrorMotion": true
+      },
+      "status": "limit",
+      "states": 200000,
+      "expanded": 128583,
+      "ms": 2198,
+      "claim": "Inconclusive: bounded search reached a limit."
+    },
+    {
+      "name": "reflection",
+      "flags": {
+        "disableReflections": true
+      },
+      "status": "limit",
+      "states": 200000,
+      "expanded": 128486,
+      "ms": 1944,
+      "claim": "Inconclusive: bounded search reached a limit."
+    },
+    {
+      "name": "new_supports",
+      "flags": {
+        "disablePlatforms": true
+      },
+      "status": "limit",
+      "states": 200000,
+      "expanded": 135557,
+      "ms": 2107,
+      "claim": "Inconclusive: bounded search reached a limit."
+    }
+  ],
+  "structuralReview": {
+    "status": "reviewed",
+    "coordinates": "source-map coordinates before centering",
+    "notes": [
+      "The right destination island is floor only at x=15..18,y=5; targets are (17,5) and (18,5). A solid wall at x=12 except y=5 prevents all off-row reflection or walking entries.",
+      "The press crate starts at (6,4), with wall at (5,4) and unsupported water on its north/east/south sides. Neither hero can take a legal initial pushing or pulling stance that removes it. The press is its initial release mechanism, creating the permanent support at (6,5).",
+      "A manual substitute for the press could first consume a free crate to build support at (6,3), then let the Warrior push the press crate south. This is not ruled out as a local action: it consumes an additional crate, leaving insufficient material for the two lower launch supports. The audit therefore does not claim that the press crate is inaccessible in every reachable state.",
+      "The bottom crate at (1,12) is against the west and south walls. The Warrior cannot move it out of that corner; the Thief can extract it by eastward traction. The second crate at (2,12) initially blocks the extraction position and must be moved first.",
+      "The rightward walking gap after the upper pier spans four water cells x=11..14 at y=5. There are only three crates in the entire room, and the press crate is consumed as support at (6,5). Pulling the mirror out of its corridor does not provide enough material for a walking bridge.",
+      "The initial mirror at (8,5) cannot use a southern source because (8,6) is a wall. The neighboring rail positions x=7 and x=9 are likewise blocked immediately south. The useful rail endpoint is (10,5).",
+      "With the mirror at (10,5), the isolated floor (10,12) reflects to (17,5). Reaching that launch from the left island requires both water cells (8,12) and (9,12) to receive a crate. The witness uses both remaining crates for these fixed supports.",
+      "Pulling the mirror back onto the left island no longer yields the earlier shortcut from (4,2) to (14,2): the x=12 wall interrupts that ray. Leftward mirror positions on row5 also lack a long enough southern floor ray to reach x=15 directly.",
+      "These are structural observations and witness checks, not a claim that every legal strategy or shortest solution has been exhaustively enumerated. Exhaustive necessity is claimed only where an ablation reports unsolvable after queue exhaustion."
+    ]
+  },
+  "supersededBypasses": [
+    {
+      "map": "Earlier right island spanning multiple rows",
+      "commands": "UCUUURUUUURRRLLLLDCURUUUUDDDDDDDDDXDRRRCDDDDDRDXDDRRR",
+      "effect": "Both lower crates remained untouched; mirror moved to (4,2).",
+      "blockedInCurrentMap": "Reflection path crosses solid wall at (12,2); right island floor also restricted to y=5."
+    }
+  ]
+}

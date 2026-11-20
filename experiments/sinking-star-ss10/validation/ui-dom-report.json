@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "htmlSha256": "04ef7943e45206aa7d7cccfb2b7ff125941df1b14a8bb54b7decab4ac2efd3b0",
+  "scope": "full-campaign",
+  "environment": "Happy DOM running actual compiled standalone HTML, canvas RGBA buffers and controlled animation timers",
+  "visualBrowserTest": false,
+  "nativeBrowserAttempt": "Chromium launch denied by environment socket EPERM; see browser-report.json",
+  "checks": [
+    "Standalone HTML opens level1 with the correct Warrior/Thief roles and twelve-discovery tutorial.",
+    "Pixelclick,Tab,1/2 and hero buttons select without a movement count; Shift+Tab is not trapped and invalid canvas/selector input is ignored.",
+    "Animation blocks ordinary commands; Undo,Reset,Restart and level selection cancel stale callbacks and restore exact public pixels.",
+    "Each checked room displays both heroes,two goals,its own source and the correct press/platform help.",
+    "All checked witnesses replay through the compiled HTML; every canvas paint and requested delay matches the reference, all twelve lessons are earned, and Space/button/X reflections agree.",
+    "Final VICTORY disables gameplay; Undo exits victory and Restart clears campaign progress and tutorial counters.",
+    "Reachable defeat waits for all frames,locks controls,and supports mid-animation Undo plus panel Undo/Reset."
+  ],
+  "errors": [],
+  "networkRequests": [],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 57,
+    "discoveries": [
+      "move",
+      "select",
+      "warrior-push",
+      "chain",
+      "thief-pull",
+      "single-pull",
+      "release",
+      "mirror-motion",
+      "platform",
+      "mirror",
+      "gate",
+      "goals"
+    ]
+  },
+  "witnessCoverage": {
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "actions": 475,
+    "frames": 1392,
+    "selections": 44,
+    "allPixelsAndDurationsCompared": true
+  },
+  "defeatCoverage": [
+    {
+      "level": 1,
+      "cause": "Miroir déplacé sur un axe dont l’arrivée est dans l’eau",
+      "actions": 24,
+      "frames": 3,
+      "midAnimationUndo": true,
+      "overlayAfterLastFrame": true
+    }
+  ]
+}

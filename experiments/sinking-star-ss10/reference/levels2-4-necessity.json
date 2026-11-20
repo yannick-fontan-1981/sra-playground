@@ -1,0 +1,78 @@
+{
+  "note": "Queue exhaustion proves impossibility; a limit remains inconclusive.",
+  "results": [
+    {
+      "level": 2,
+      "label": "no-warrior-push",
+      "status": "limit",
+      "states": 250000,
+      "expanded": 188238,
+      "ms": 2387
+    },
+    {
+      "level": 2,
+      "label": "no-thief-pull",
+      "status": "unsolvable",
+      "states": 7080,
+      "expanded": 7080,
+      "ms": 67
+    },
+    {
+      "level": 3,
+      "label": "no-warrior-push",
+      "status": "unsolvable",
+      "states": 13248,
+      "expanded": 13248,
+      "ms": 120
+    },
+    {
+      "level": 3,
+      "label": "no-thief-pull",
+      "status": "limit",
+      "states": 250000,
+      "expanded": 201191,
+      "ms": 2087
+    },
+    {
+      "level": 4,
+      "label": "no-warrior-push",
+      "status": "unsolvable",
+      "states": 18156,
+      "expanded": 18156,
+      "ms": 237
+    },
+    {
+      "level": 4,
+      "label": "no-thief-pull",
+      "status": "unsolvable",
+      "states": 264,
+      "expanded": 264,
+      "ms": 4
+    },
+    {
+      "level": 4,
+      "label": "no-reflection",
+      "status": "unsolvable",
+      "states": 17504,
+      "expanded": 17504,
+      "ms": 170
+    },
+    {
+      "level": 4,
+      "label": "monsters-retained",
+      "status": "limit",
+      "states": 250000,
+      "expanded": 203237,
+      "ms": 2603
+    },
+    {
+      "level": 4,
+      "label": "monsters-retained-pruned-monotone-count",
+      "status": "limit",
+      "states": 300003,
+      "expanded": 241888,
+      "ms": 3716,
+      "commands": ""
+    }
+  ]
+}

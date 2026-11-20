@@ -1,0 +1,490 @@
+{
+  "spec": {
+    "id": "ss10-03",
+    "title": "L’appui du prochain pont",
+    "rows": [
+      "###############",
+      "#~~~~~~~~~~~~~#",
+      "#.o...~...o.~~#",
+      "#..T..~.....~~#",
+      "#.....~o....~~#",
+      "#.....~.....~~#",
+      "#...W.~.....~~#",
+      "#~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~#",
+      "#~~~~~~.....~~#",
+      "#~~~~~~..gg.~~#",
+      "#~~~~~~.....~~#",
+      "###############"
+    ],
+    "facing": "E"
+  },
+  "commands": "CLDDRCLLULURRRRRRRURDDDCURRRRURRRDDRCUUURRDLULDDDDDDDCDLLDDDRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 21
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation de Heroes and Water 3 · chaque bloc prépare la position suivante",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
+    "puzzle": 3,
+    "objective": "Construire trois appuis dans le bon ordre et utiliser le premier pour aborder la caisse suivante du bon côté."
+  },
+  "metrics": {
+    "actions": 62,
+    "selections": 5,
+    "warriorPushes": 14,
+    "thiefPulls": 4,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 18,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 3,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur extrait le seul bloc disponible sur l’île de départ",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 12,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le premier bloc devient l’appui qui permet d’aborder le suivant par la gauche",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 7
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier fait pivoter le deuxième bloc vers la première case du pont sud",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La dernière réserve est tirée depuis le bord nord",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le premier appui sud permet de pousser le dernier bloc une case plus loin",
+      "turn": 50,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Les deux héros traversent les trois appuis construits",
+      "turn": 62,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": "Adaptation du relais Guerrier/Voleur décrit dans Heroes and Water 3. La géométrie est reconstruite en trois îles avec trois blocs plutôt que les cinq cristaux de la référence : extraction par traction, création d’un point d’appui latéral, puis prolongement d’un pont sur deux cases. Le bloc au bord ouest de l’île centrale ne peut être poussé vers l’est qu’après la construction du premier appui. Les trois blocs sont consommés dans les trois cases d’eau du trajet retenu."
+}

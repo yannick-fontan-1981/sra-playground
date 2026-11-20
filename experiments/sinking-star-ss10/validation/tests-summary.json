@@ -1,0 +1,16 @@
+{
+  "game": "SS10",
+  "version": "0.1.0",
+  "coreTests": 87,
+  "corePassed": 87,
+  "strictTypeScript": true,
+  "winningLevels": 8,
+  "actions": 475,
+  "selections": 44,
+  "frames": 1392,
+  "tutorialDiscoveries": 12,
+  "htmlSha256": "04ef7943e45206aa7d7cccfb2b7ff125941df1b14a8bb54b7decab4ac2efd3b0",
+  "compiledHtmlDomVerification": true,
+  "nativeBrowserVerified": false,
+  "nativeBrowserLimitation": "Chromium process launch denied by the environment (socket EPERM), before page load."
+}

@@ -1,0 +1,16 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(19,17,'~');
+fill(1,8,7,13);fill(10,10,14,13);fill(11,5,11,9);fill(10,5,11,7);fill(12,6,14,6);fill(12,7,13,7);put(12,8,'.');fill(11,2,12,3);put(11,4,'#');
+put(2,11,'W');put(3,9,'T');put(3,8,'o');put(5,8,'o');put(11,10,'o');put(11,9,'m');put(11,6,'m');put(11,2,'g');put(12,2,'g');
+const spec={id:'ss10-08',title:'Le dernier changement de sens',rows:strings(),facing:'E',mirrors:[{at:{x:13,y:6},facing:'NW'}],circuits:[{id:'cle',buttons:[{x:14,y:6}],color:7}],platforms:[{at:{x:12,y:4},circuit:'cle',activeWhen:'pressed'}]};
+const a=new Author(spec);
+a.select('thief').act('DD').act('R').go(2,10,'warrior').act('RRRRR').stage('Premier appui : le Voleur extrait la caisse du bord, le Guerrier ouvre l’accès à l’eau.');
+a.go(5,9,'thief').act('DD').act('L').go(4,10,'warrior').act('RRRR').stage('Second appui : les deux caisses permettent maintenant de contourner le dernier chargement.');
+a.go(11,11).act('UUUUU').go(10,5).stage('Le Guerrier avance derrière la caisse : les deux monstres se frappent, puis la caisse atteint la butée nord.');
+a.go(12,6,'thief').act('LLDRD').go(12,7).act('R').stage('Le Voleur dégage le miroir du rail et le gare dans la baie latérale.');
+a.go(11,6).act('DL').stage('Le Voleur récupère la caisse sous le mur et rabat le miroir derrière lui.');
+a.go(10,6,'warrior').act('RRR').stage('La même caisse devient la clé de la plateforme d’arrivée.');
+a.go(11,6,'thief').act('U').go(10,5).stage('Le Voleur remonte le miroir, sans pouvoir le pousser vers sa dernière case.');
+a.go(10,6,'warrior').act('R').act('LXULU').stage('Le Guerrier règle la dernière diagonale, franchit le reflet et libère l’arrivée.');
+a.go(10,6,'thief').act('XUU').stage('Le Voleur rejoint le Guerrier sur les deux destinations finales.');
+a.save(new URL('../level8-design.json',import.meta.url),{label:'Synthèse adaptée de Heroes and Water 3–4 et Heroes and Mirrors 6',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3',puzzle:3,objective:'Construire deux appuis, provoquer un duel derrière une caisse, puis garer et replacer le miroir pour transformer la caisse de combat en clé du dernier reflet.'},'Géométrie originale. Le relais poussée/traction pour construire des appuis vient de Heroes and Water 3 ; le duel de deux monstres est adapté de Heroes and Water 4 (https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-4). Le réglage du miroir selon la diagonale et le choix des trous à combler viennent de Heroes and Mirrors 6 (https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6). Deux caisses servent au pont ; la troisième sert d’abord de protection contre les monstres puis maintient la plateforme finale. Le miroir doit sortir du rail avant la livraison de cette caisse, puis revenir sur le rail par traction et poussée.');

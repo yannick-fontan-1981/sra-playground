@@ -1,0 +1,14 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(15,11);
+fill(1,2,10,8);fill(5,2,5,4,'#');fill(5,6,5,8,'#');
+fill(11,5,13,5);fill(12,4,13,6);
+put(1,2,'#');put(10,2,'#');put(2,2,'o');put(9,2,'o');
+put(3,7,'W');put(3,3,'T');put(1,8,'b');put(10,8,'b');put(11,5,'D');put(13,4,'g');put(13,6,'g');
+const spec={id:'ss10-02',title:'Les deux réserves',rows:strings(),facing:'E'};
+const a=new Author(spec);
+a.go(2,3,'thief').act('D').go(3,4).stage('Le Voleur libère le poids coincé contre le bord nord');
+a.go(2,2,'warrior').act('DDDDD').go(3,8).act('L').stage('Le Guerrier cale le premier poids sur le bouton en fond de réserve');
+a.go(9,3,'thief').act('DDDDD').go(8,8).go(8,7).stage('Le second poids quitte sa niche ; le Voleur ménage le côté de poussée');
+a.go(9,6,'warrior').act('D').go(8,8).act('R').stage('Les deux boutons restent occupés : la porte commune est ouverte');
+a.go(13,4,'thief').go(13,6,'warrior').stage('Les deux héros rejoignent chacun une destination');
+a.save(new URL('../level2-design.json',import.meta.url),{label:'Adaptation de Heroes of Hauling 16 · laisser les poids derrière soi',url:'https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-16',puzzle:16,objective:'Extraire les caisses avec le Voleur, puis les caler sur les deux boutons avec le Guerrier.'},'Géométrie originale à deux réserves reliées par un étranglement. Le principe de la référence est conservé : des poids doivent maintenir la porte pendant que les deux héros la franchissent. Deux caisses initialement contre le bord nord imposent une extraction par traction ; les boutons en fond de salle imposent une finition par poussée. La référence ne fait pas l’objet d’une reproduction case par case.');

@@ -1,0 +1,617 @@
+{
+  "spec": {
+    "id": "ss10-06",
+    "title": "La cale et le pont provisoire",
+    "rows": [
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~g.g~~~",
+      "~~~~~~~~~~...~~~",
+      "~~~~....~~~.~~~~",
+      "~~~~W...~~.To~~~",
+      "~~~~....~~...~~~",
+      "~~~~....~~..o~~~",
+      "~~~~..o.~~~~~~~~",
+      "~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "W",
+    "circuits": [
+      {
+        "id": "cale",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 4
+          }
+        ],
+        "color": 7
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 6
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 4
+        },
+        "circuit": "sortie",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 8,
+          "y": 6
+        },
+        "circuit": "cale",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 6
+        },
+        "circuit": "cale",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "circuit": "cale",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "UCLDRDLULLLCDUCRRRRULDLLULCDCDDLUULCDRRRRRRRUUUULCDRRRRRURUURU",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation de Heroes and Water 6 · faire couler les charges du pont provisoire",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-6",
+    "puzzle": 6,
+    "objective": "Charger puis abaisser des plateformes, créer deux appuis durables et réutiliser le pont pour convoyer une dernière caisse."
+  },
+  "metrics": {
+    "actions": 62,
+    "selections": 7,
+    "warriorPushes": 6,
+    "thiefPulls": 11,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 17,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur dépose le premier bloc sur la cale tenue par le Guerrier.",
+      "turn": 11,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 11
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cale": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "En quittant le bouton, le Guerrier transforme le premier bloc en appui permanent.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 11
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cale": false,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur se dégage par la passerelle latérale pour laisser le second bloc au-dessus du trou restant.",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cale": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le second appui remplace le pont provisoire.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cale": false,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la dernière caisse du bord sud.",
+      "turn": 35,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cale": false,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Guerrier convoie la dernière caisse jusqu’au bouton inaccessible à la traction.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cale": false,
+        "sortie": true
+      }
+    },
+    {
+      "label": "Les deux héros quittent ensemble les trois îlots.",
+      "turn": 62,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cale": false,
+        "sortie": true
+      }
+    }
+  ],
+  "adaptation": "Le principe des caisses tirées sur un bloc hydraulique puis coulées est repris de Heroes and Water 6. Géométrie originale avec deux héros distincts, deux chargements et une voie de dégagement latérale. La porte finale demande une caisse poussée contre la rive, ce que le Voleur ne peut pas faire. Dans SS10, rallumer une plateforme ne détruit pas un appui déjà créé : cette règle simplifiée est conservée de la série SS."
+}

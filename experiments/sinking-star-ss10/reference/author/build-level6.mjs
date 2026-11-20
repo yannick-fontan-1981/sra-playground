@@ -1,0 +1,14 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(16,11,'~');
+fill(4,4,7,8);fill(10,5,12,7);fill(10,2,12,3);put(11,4,'.');
+put(4,5,'W');put(11,5,'T');put(12,5,'o');put(12,7,'o');put(6,8,'o');put(10,2,'g');put(12,2,'g');
+const spec={id:'ss10-06',title:'La cale et le pont provisoire',rows:strings(),facing:'W',circuits:[{id:'cale',buttons:[{x:4,y:4}],color:7},{id:'sortie',buttons:[{x:12,y:6}],color:14}],gates:[{at:{x:11,y:4},circuit:'sortie',direction:'N',closedWhen:'released'}],platforms:[{at:{x:8,y:6},circuit:'cale',activeWhen:'pressed'},{at:{x:9,y:6},circuit:'cale',activeWhen:'pressed'},{at:{x:8,y:5},circuit:'cale',activeWhen:'pressed'}]};
+const a=new Author(spec);
+a.act('U').select('thief').act('L').go(11,6).act('DL').go(10,6).act('LLL').stage('Le Voleur dépose le premier bloc sur la cale tenue par le Guerrier.');
+a.select('warrior').act('D').stage('En quittant le bouton, le Guerrier transforme le premier bloc en appui permanent.');
+a.act('U').go(11,6,'thief').act('U').go(10,6).act('LLU L').stage('Le Voleur se dégage par la passerelle latérale pour laisser le second bloc au-dessus du trou restant.');
+a.select('warrior').act('D').stage('Le second appui remplace le pont provisoire.');
+a.go(6,7,'thief').act('UU').act('L').stage('Le Voleur extrait la dernière caisse du bord sud.');
+a.go(5,6,'warrior').act('RRRRRR').stage('Le Guerrier convoie la dernière caisse jusqu’au bouton inaccessible à la traction.');
+a.go(10,2).go(12,2,'thief').stage('Les deux héros quittent ensemble les trois îlots.');
+a.save(new URL('../level6-design.json',import.meta.url),{label:'Adaptation de Heroes and Water 6 · faire couler les charges du pont provisoire',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-6',puzzle:6,objective:'Charger puis abaisser des plateformes, créer deux appuis durables et réutiliser le pont pour convoyer une dernière caisse.'},'Le principe des caisses tirées sur un bloc hydraulique puis coulées est repris de Heroes and Water 6. Géométrie originale avec deux héros distincts, deux chargements et une voie de dégagement latérale. La porte finale demande une caisse poussée contre la rive, ce que le Voleur ne peut pas faire. Dans SS10, rallumer une plateforme ne détruit pas un appui déjà créé : cette règle simplifiée est conservée de la série SS.');
