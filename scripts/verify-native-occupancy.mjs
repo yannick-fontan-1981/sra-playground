@@ -5,8 +5,18 @@ import { poseFamilyKey } from '../src/sic/pose-families.ts';
 const delta = (a, b) => [a[0] - b[0], a[1] - b[1]];
 const moved = (a, b) => a && b && !equal(a, b);
 
-export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
+export function occupancyAudit(run, hash, partsAt, cache, commandKey, witness) {
   const results = {
+    projectedWrites: {
+      programs: 0,
+      options: 0,
+      writesExact: 0,
+      arrivalsExact: 0,
+      redirectedAgainstDirect: 0,
+      intoModeledRegion: 0,
+      usesExact: 0,
+      changedNextMotion: 0,
+    },
     programs: 0,
     prepared: 0,
     placements: 0,
@@ -99,7 +109,67 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
         w = view(c.to);
       return { op: commandKey(c), a: v.get(p.p), b: v.get(p.r), z: w.get(p.p), r: w.get(p.r) };
     };
-    check(step.refs.length > 0 && step.refs.every((v) => p.refs.includes(v)), 'evidence list');
+    if (p.preparedPreview && index === 0) {
+      const d = p.preparedPreview,
+        alt = d.alternatives;
+      check(
+        step.stage === 'place' &&
+          equal(step.p, step.nextP) &&
+          equal(d.direct, p.marker) &&
+          alt.length > 0 &&
+          equal(alt[0].arrival, p.landing),
+        'committed preparation'
+      );
+      for (const option of alt) {
+        const write = historical(option.writeRef),
+          prior = d.priorRead;
+        if (option.readRef === null)
+          check(
+            prior && witness(prior, p.p, p.r, first + 1) < e.level - run.start + 1,
+            'inherited read provenance'
+          );
+        const read =
+          option.readRef === null
+            ? { op: prior.command, a: prior.from, b: prior.indicated, z: prior.arrived }
+            : historical(option.readRef);
+        check(
+          write.op === option.write &&
+            equal(write.a, write.z) &&
+            write.b &&
+            write.r &&
+            equal(delta(write.r, write.b), delta(option.indicator, p.marker)),
+          'alternate write evidence'
+        );
+        check(
+          read.op === option.read &&
+            moved(read.a, read.z) &&
+            equal(read.z, read.b) &&
+            equal(option.indicator, option.arrival),
+          'alternate read evidence'
+        );
+        if (option.use) {
+          const y = historical(option.useRef);
+          check(
+            y.a && y.z && equal(delta(y.z, y.a), delta(option.use, option.arrival)),
+            'alternate use evidence'
+          );
+        }
+      }
+      if (d.directBasis === 'witnessed_at_this_pose') {
+        const earlier = d.priorRead;
+        const read =
+          alt[0].readRef === null ? { a: earlier.from, b: earlier.indicated } : historical(alt[0].readRef);
+        check(equal(read.a, p.origin) && equal(read.b, p.marker), 'matched direct witness');
+      }
+      results.projectedWrites.programs++;
+      results.projectedWrites.options += alt.length;
+      results.projectedWrites.intoModeledRegion += Number(alt[0].opensMeasuredRegion === true);
+    }
+    check(
+      (step.refs.length > 0 || (step.stage === 'occupy' && p.preparedPreview?.priorRead)) &&
+        step.refs.every((v) => p.refs.includes(v)),
+      'evidence list'
+    );
     for (const ref of step.refs) {
       const h = historical(ref);
       if (step.stage === 'place')
@@ -240,7 +310,7 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
         const outcome =
           official || board.state !== priorState
             ? 'inapplicable'
-            : !at || (equal(at,pred.at) && pred.form !== null && !form)
+            : !at || (equal(at, pred.at) && pred.form !== null && !form)
               ? 'unobserved'
               : equal(at, pred.at) && (pred.form === null || pred.form === form)
                 ? 'realized'
@@ -264,10 +334,12 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
     if (step.stage === 'place') {
       results.placements++;
       results.placementsExact += Number(matched);
+      if (p.preparedPreview) results.projectedWrites.writesExact += Number(matched);
     }
     if (step.stage === 'occupy') {
       results.arrivals++;
       results.arrivalsExact += Number(matched);
+      if (p.preparedPreview) results.projectedWrites.arrivalsExact += Number(matched);
       if (matched) {
         results.preparedArrivals += Number(index > 0);
         let commandSite = false,
@@ -302,6 +374,7 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
     if (step.stage === 'use') {
       results.uses++;
       results.usesExact += Number(matched);
+      if (p.preparedPreview) results.projectedWrites.usesExact += Number(matched);
       if (matched) branches.push({ first, i, p, kind: 'use', z });
     }
     results.completePrograms += Number(matched && index === p.steps.length - 1);
@@ -331,6 +404,13 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
         const control = await dispatch(history[i]);
         results.comparedUses++;
         results.useChanged += Number(Boolean(moved(await pos(control, p.p), z)));
+        if (p.preparedPreview) {
+          await restore(first);
+          const direct = await pos(await dispatch(history[i - 1]), p.p);
+          const end = direct ? await pos(await dispatch(history[i]), p.p) : null;
+          if (direct && end && !equal(delta(end, direct), delta(z, p.landing)))
+            results.projectedWrites.changedNextMotion++;
+        }
         continue;
       }
       const initial = await restore(i);
@@ -350,6 +430,12 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
         const start = await restore(first),
           bare = await dispatch(history[i]);
         results.omittedPreparations++;
+        if (
+          p.preparedPreview &&
+          equal(await pos(bare, p.p), p.preparedPreview.direct) &&
+          !equal(z, p.preparedPreview.direct)
+        )
+          results.projectedWrites.redirectedAgainstDirect++;
         results.preparationNeeded += Number(Boolean(moved(await pos(bare, p.p), z)));
         let matched = false,
           different = false;

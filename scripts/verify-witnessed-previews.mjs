@@ -22,31 +22,20 @@ export function witnessedPreviewAudit(run, hash, partsAt, cache, commandKey) {
     assert(match, 'observation reference');
     return { epoch: +match[1], rev: +match[2], frame: match[3] };
   }
-  async function record(event, cmd, i, board, priorState) {
-    const out = event.witnessedPreview,
-      f = out.forecast,
-      w = f.witness,
-      prior = ref(w.before),
-      later = ref(w.after),
-      now = ref(f.before);
-    assert(
-      hash(f) === cmd.previewReadSeal &&
-        commandKey(cmd) === f.command &&
-        now.rev === i + 1 &&
-        now.frame === cmd.from,
-      'pre-action commitment'
-    );
+  function witness(w, actor, indicator, latestRevision) {
+    const prior = ref(w.before),
+      later = ref(w.after);
     assert(
       later.rev === prior.rev + 1 &&
-        later.rev <= now.rev &&
+        later.rev <= latestRevision &&
         run.replayCommands[prior.rev - 1]?.from === prior.frame &&
         run.replayCommands[prior.rev - 1]?.to === later.frame &&
         commandKey(run.replayCommands[prior.rev - 1]) === w.command,
       'historical command'
     );
-    const starts = get(prior.frame, f.actor),
-      ends = get(later.frame, f.actor),
-      mark = get(prior.frame, f.indicator);
+    const starts = get(prior.frame, actor),
+      ends = get(later.frame, actor),
+      mark = get(prior.frame, indicator);
     assert(
       has(starts, w.from) &&
         has(mark, w.indicated) &&
@@ -57,6 +46,22 @@ export function witnessedPreviewAudit(run, hash, partsAt, cache, commandKey) {
         w.peers.every((p) => has(starts, p) && has(ends, p)),
       'observed subject and indicated site'
     );
+    return prior.epoch;
+  }
+  async function record(event, cmd, i, board, priorState) {
+    const out = event.witnessedPreview,
+      f = out.forecast,
+      w = f.witness,
+      prior = ref(w.before),
+      now = ref(f.before);
+    assert(
+      hash(f) === cmd.previewReadSeal &&
+        commandKey(cmd) === f.command &&
+        now.rev === i + 1 &&
+        now.frame === cmd.from,
+      'pre-action commitment'
+    );
+    witness(w, f.actor, f.indicator, now.rev);
     assert(
       get(cmd.from, f.indicator).some((e) => eq(pos(e), f.indicated)) && has(get(cmd.from, f.actor), f.from),
       'new binding'
@@ -97,5 +102,5 @@ export function witnessedPreviewAudit(run, hash, partsAt, cache, commandKey) {
     results.issued++;
     results[status]++;
   }
-  return { results, record };
+  return { results, record, witness };
 }

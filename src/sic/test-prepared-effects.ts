@@ -26,6 +26,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  unreadIndicator:'Test a command while the possible arrival of this subject is displayed',
   witnessedPreview:'Test whether this subject reaches the indicated site using its witnessed action',
   occupancy:'Test where a prepared part allows another part to arrive and act',
   territorialAccess:'Test an access to a region beyond the measured walking boundary',
@@ -105,13 +106,14 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       if (!experiment) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
-        label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : labels[phase],
+        label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const evidence = [
         ref,
+        ...(experiment.occupancy?.plan.preparedPreview?.priorRead?[experiment.occupancy.plan.preparedPreview.priorRead.before,experiment.occupancy.plan.preparedPreview.priorRead.after]:[]),
         ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
         ...experiment.refs.map(
           (r) =>
@@ -125,9 +127,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const question = {
         kind: 'test_prepared_effect',
         scope: ref.split(':revision:', 1)[0]!,
-        subjects: experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
+        subjects: experiment.unreadIndicator ? [experiment.unreadIndicator.cue.p,experiment.unreadIndicator.cue.r,b] : experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
         parentObjective: parent,
-        satisfactionContract: experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
+        satisfactionContract: experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
       const equation = experiment.equation?.claim;
       const capability = equation
@@ -175,6 +177,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
+        ...(experiment.unreadIndicator ? {indicatorProbeForecast:experiment.unreadIndicator} : {}),
         ...(experiment.witnessedPreview ? {witnessedPreviewForecast:experiment.witnessedPreview} : {}),
         ...(experiment.occupancy ? {occupancyForecast:experiment.occupancy} : {}),
         ...(experiment.occupancy?.preview ? {morphologicalPreview:experiment.occupancy.preview} : {}),

@@ -7,6 +7,7 @@ import {
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { poseFamilyKey } from './pose-families.ts';
 import { same, add, diff, size, type XY } from './access-terrain.ts';
+import {choosePreparedPreviewArrival,type PreparedPreview,type PreviewFrontier,type EarlierReads} from './prepared-preview-arrivals.ts';
 import type { Experiment } from './preparation-experiments.ts';
 
 export type PoseView = Record<string, XY>;
@@ -23,6 +24,7 @@ export type OccupancyStep = {
   refs: number[];
 };
 export type OccupancyProgram = {
+  preparedPreview?:PreparedPreview;
   p: string;
   r: string;
   origin: XY;
@@ -439,6 +441,10 @@ function proposal(
     }
   }
   return best;
+}
+export function offerPreparedPreview(m:OccupancyMemory,scene:number,available:Set<string>,w:number,h:number,frontier?:PreviewFrontier,earlier?:EarlierReads):Experiment|null {
+  const plan=choosePreparedPreviewArrival(m,scene,available,w,h,frontier,earlier);if(!plan)return null;
+  const op=plan.steps[0]!.op;return {phase:'occupancy',origin:scene,a:op,b:op,rule:'relocate_indicator_then_read',refs:plan.refs,occupancy:{plan,index:0}};
 }
 export function offerOccupancy(
   m: OccupancyMemory,

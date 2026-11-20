@@ -6,6 +6,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceReplay } from './sic-study-source-replay.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
+import {unreadIndicatorAudit} from './verify-unread-indicators.mjs';
 import {witnessedPreviewAudit} from './verify-witnessed-previews.mjs';
 import {occupancyAudit} from './verify-native-occupancy.mjs';
 import {wordAudit} from './verify-territorial-words.mjs';
@@ -51,7 +52,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -118,7 +119,7 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
@@ -126,8 +127,9 @@ const audit=contextAudit(run,hash,partsAt,commandKey);
 const frames=inverseFrameAudit(run,hash,partsAt,cache,commandKey);
 const words=wordAudit(run,partsAt,cache,commandKey,hash);
 const territories=territoryAudit(run,hash,partsAt,cache,commandKey);
+const unread=unreadIndicatorAudit(run,hash,partsAt,cache,commandKey);
 const reads=witnessedPreviewAudit(run,hash,partsAt,cache,commandKey);
-const occupancy=occupancyAudit(run,hash,partsAt,cache,commandKey);
+const occupancy=occupancyAudit(run,hash,partsAt,cache,commandKey,reads.witness);
 const activations=activationAudit(run,hash,partsAt,cache,commandKey);
 for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
@@ -148,8 +150,9 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   });
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
   const event = events.get(i + 1);
-  if ((cmd.previewReadSeal&&!event?.witnessedPreview)||(cmd.occupancySeal&&!event?.occupancy)||(cmd.territorySeal&&!event?.territorial)||(cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
+  if ((cmd.indicatorProbeSeal&&!event?.unreadIndicator)||(cmd.previewReadSeal&&!event?.witnessedPreview)||(cmd.occupancySeal&&!event?.occupancy)||(cmd.territorySeal&&!event?.territorial)||(cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
   if (!event) continue;
+  if(event.unreadIndicator){await unread.record(event,cmd,i,board,priorState);continue;}
   if(event.witnessedPreview){await reads.record(event,cmd,i,board,priorState);continue;}
   if(event.occupancy){await occupancy.record(event,cmd,i,board,priorState);continue;}
   if(event.territorial){await territories.record(event,cmd,i,board,priorState);await words.record(event,i,cmd,board,priorState);continue;}
@@ -710,6 +713,7 @@ console.log(
     instrument:audit.sites,
     transport:audit.transports,
     retained:audit.retained,
+    unreadIndicators:unread.results,
     witnessedPreviews:reads.results,
     occupancy:occupancy.results,occupancyExamples:occupancy.examples,
     territories:territories.stats,
