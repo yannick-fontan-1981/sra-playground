@@ -6,6 +6,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceReplay } from './sic-study-source-replay.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
+import {territoryAudit} from './verify-native-territory.mjs';
 import {activationAudit} from './verify-native-activation.mjs';
 import { inverseFrameAudit } from './verify-native-inverse-frames.mjs';
 import { contextAudit } from './verify-context-events.mjs';
@@ -47,7 +48,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -114,12 +115,13 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 const audit=contextAudit(run,hash,partsAt,commandKey);
 const frames=inverseFrameAudit(run,hash,partsAt,cache,commandKey);
+const territories=territoryAudit(run,hash,partsAt,cache,commandKey);
 const activations=activationAudit(run,hash,partsAt,cache,commandKey);
 for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
@@ -140,8 +142,9 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   });
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
   const event = events.get(i + 1);
-  if ((cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
+  if ((cmd.territorySeal&&!event?.territorial)||(cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
   if (!event) continue;
+  if(event.territorial){await territories.record(event,cmd,i,board,priorState);continue;}
   if(event.activation){await activations.record(event,cmd,i,board);continue;}
   if (event.frame){await frames.record(event,cmd,i,board);continue;}
   if (event.retained){audit.retainedEvent(event,cmd,i,board);continue;}
@@ -673,6 +676,7 @@ const reopen=async()=>{
 const dispatchCommand=cmd=>engine.dispatch({type:'action',actionId:cmd.id,...(cmd.id===6?{data:cmd.data}:{})});
 await audit.branches(reopen,dispatchCommand);
 await frames.compare(reopen,dispatchCommand);
+await territories.compare(reopen,dispatchCommand);
 await activations.compare(reopen,dispatchCommand);
 console.log(
   JSON.stringify({
@@ -696,6 +700,8 @@ console.log(
     instrument:audit.sites,
     transport:audit.transports,
     retained:audit.retained,
+    territories:territories.stats,
+    territoryExamples:territories.examples,
     activations:activations.stats,
     activationExamples:activations.examples,
     responseFrames:frames.stats,

@@ -1,3 +1,4 @@
+import {newTerritorialMemory,offerTerritory,recordTerritory,type TerritorialMemory,type TerritorialTrial} from './pursue-territory.ts';
 import {offerActivation,recordActivation,type Activation,type ActivationReceipt} from './latent-response.ts';
 import {
   newFrameMemory,
@@ -91,6 +92,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'territorialAccess'
     | 'activateResponse'
     | 'inverseFrame'
     | 'instrumentSite'
@@ -139,6 +141,7 @@ export type Experiment = {
   projection?: Trial;
   frame?:FrameTrial;
   activation?:Activation;
+  territorial?:TerritorialTrial;
   instrument?:SiteTrial;
   retained?:RetainedTrial;
   transport?:ContextTrial;
@@ -178,6 +181,7 @@ export type Outcome = {
   projection?: Record<string, unknown>;
   frame?:Record<string,unknown>;
   activation?:Record<string,unknown>;
+  territorial?:Record<string,unknown>;
   instrument?:Record<string,unknown>;
   retained?:Record<string,unknown>;
   transport?:Record<string,unknown>;
@@ -186,6 +190,7 @@ export type Outcome = {
 };
 export type Memory = {
   activations?:ActivationReceipt[];
+  territory?:TerritorialMemory;
   epoch: number;
   delayed: DelayedMemory;
   frontier:FrontierMemory;
@@ -225,6 +230,7 @@ export const initialMemory = (epoch: number): Memory => ({
   projection: newProjectionMemory(),
   instrument: newInstrumentMemory(),
   frames:newFrameMemory(),
+  territory:newTerritorialMemory(),
   retained:newRetainedMemory(),
   contexts: newContextMemory(),
   exchanges: newExchangeMemory(),
@@ -408,6 +414,9 @@ function selectEstablishedExperiment(
   const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
+  if(rows&&(m.territory?.active||free)){
+    const intent=offerTerritory(m,o,rows,s,available);if(intent)return intent;
+  }
   if(rows&&free&&returnedToPlacement(m)){
     const experiment=offerFrame(m,o,rows,s,available,'opportunity')??offerActivation(m,o,rows,s,available);
     if(experiment)return experiment;
@@ -740,7 +749,7 @@ export function selectExperiment(
   m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
 ): Experiment | null {
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if (!rows || established?.frame) return established;
+  if (!rows || established?.frame || established?.territorial) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
   const recent=m.delayed.history.slice(-8);
@@ -775,6 +784,8 @@ export function recordExperiment(
   m.instrument ??= newInstrumentMemory();
   if(!x?.instrument)m.instrument.active=null;
   m.frames??=newFrameMemory();
+  m.territory??=newTerritorialMemory();
+  if(!x?.territorial)m.territory.active=null;
   rememberDuplicatePoses(m.frames, s, b);
   rememberDuplicatePoses(m.frames, t, a);
   if(!x?.frame)m.frames.active=null;
@@ -885,6 +896,7 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.territorial){const {result,detail}=recordTerritory(m,x.territorial,b,a);return {...out,result,territorial:detail};}
   if(x.activation){const {result,detail}=recordActivation(m,x.activation,b,a);return {...out,result,activation:detail};}
   if(x.frame){const {result,detail}=recordFrame(m,x.frame,b,a);return {...out,result,frame:detail};}
   if(x.retained){const {result,detail}=recordRetained(m,x.retained,b,a,rows,next,t);return {...out,result,retained:detail};}
