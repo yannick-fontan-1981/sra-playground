@@ -15,7 +15,7 @@ import {
   visualLayout,
 } from '../src/sic/witnessed-preview-transfer.ts';
 import { sourceBackend } from './sic-study-source-games.mjs';
-const [env, study, selection, shard, output] = process.argv.slice(2);
+const [env, study, selection, shard, output, research] = process.argv.slice(2);
 const programs = JSON.parse(
   await readFile(new URL('../docs/architecture/sic-source-seven-programs.json', import.meta.url), 'utf8')
 );
@@ -63,6 +63,11 @@ for (const code of chosen.filter((_, i) => i % parts === idx)) {
   const report = { code, observed: 0, scored: 0, byLevel: {}, tests: [] },
     history = [],
     tried = new Set();
+  const competition =
+    research === 'competition'
+      ? (await import('./source-preview-competition.mjs')).previewCompetition()
+      : null;
+  if (competition) report.competition = competition.rows;
   reports.push(report);
   let o = await read(b, i, code),
     layout = visualLayout(o, b.frame);
@@ -123,11 +128,13 @@ for (const code of chosen.filter((_, i) => i % parts === idx)) {
       if (!step) break;
       if (step.from && o.frame_hash.slice(0, 16) !== step.from)
         throw Error('Divergent archived source at ' + code + '/' + i);
+      const prospective = competition?.pre(learned, o, layout, step.q);
       const next = act(step.q),
         after = await read(next, ++i, code),
         post = visualLayout(after, next.frame);
       if (step.to && after.frame_hash.slice(0, 16) !== step.to)
         throw Error('Divergent archived return ' + code + '/' + i);
+      if (competition) competition.post(prospective, o, after, layout, post);
       history.push(step.q);
       report.observed++;
       report.byLevel[l + 1].steps++;

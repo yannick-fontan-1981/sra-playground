@@ -1,0 +1,804 @@
+{
+  "sourceGames": 100,
+  "transitions": 2985,
+  "sameCommandForecasts": 410,
+  "ambiguous": 314,
+  "sourceGamesWithCompetition": 26,
+  "scores": {
+    "base": {
+      "contradicted": 259,
+      "unobserved": 27,
+      "realized": 15,
+      "inapplicable": 13
+    },
+    "calibrated": {
+      "contradicted": 215,
+      "realized": 67,
+      "unobserved": 19,
+      "inapplicable": 13
+    },
+    "independent": {
+      "contradicted": 215,
+      "realized": 68,
+      "unobserved": 18,
+      "inapplicable": 13
+    }
+  },
+  "byGame": {
+    "AMZE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "AR25": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "AS66": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "BP35": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CASC": {
+      "base": {
+        "unobserved": 1,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "unobserved": 1,
+        "inapplicable": 1
+      },
+      "independent": {
+        "unobserved": 1,
+        "inapplicable": 1
+      }
+    },
+    "CATL": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CATR": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CAVA": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CD82": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CGWL": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CLRS": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CN04": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "COLM": {
+      "base": {
+        "contradicted": 5,
+        "unobserved": 2,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 5,
+        "unobserved": 2,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 5,
+        "unobserved": 2,
+        "inapplicable": 1
+      }
+    },
+    "COMB": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CONN": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CRAF": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "CWSE": {
+      "base": {
+        "contradicted": 3,
+        "realized": 1
+      },
+      "calibrated": {
+        "contradicted": 3,
+        "realized": 1
+      },
+      "independent": {
+        "contradicted": 3,
+        "realized": 1
+      }
+    },
+    "DAME": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "DC22": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "DICO": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "DNOI": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "ELAS": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "ESCT": {
+      "base": {
+        "contradicted": 3,
+        "unobserved": 4,
+        "realized": 1,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 2,
+        "realized": 5,
+        "unobserved": 1,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 2,
+        "realized": 4,
+        "unobserved": 2,
+        "inapplicable": 1
+      }
+    },
+    "ETAG": {
+      "base": {
+        "contradicted": 2,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 2,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 2,
+        "inapplicable": 1
+      }
+    },
+    "EVAS": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "FITE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "FOGW": {
+      "base": {
+        "contradicted": 13,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 11,
+        "realized": 2,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 11,
+        "realized": 2,
+        "inapplicable": 1
+      }
+    },
+    "FT09": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "FUIT": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "G50T": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "GABA": {
+      "base": {
+        "contradicted": 34,
+        "unobserved": 4
+      },
+      "calibrated": {
+        "contradicted": 23,
+        "realized": 12,
+        "unobserved": 3
+      },
+      "independent": {
+        "contradicted": 26,
+        "realized": 10,
+        "unobserved": 2
+      }
+    },
+    "GARE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "GIGO": {
+      "base": {
+        "realized": 3,
+        "contradicted": 2
+      },
+      "calibrated": {
+        "realized": 3,
+        "contradicted": 2
+      },
+      "independent": {
+        "realized": 3,
+        "contradicted": 2
+      }
+    },
+    "GLOB": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "GMAP": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "GORI": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "GRAV": {
+      "base": {
+        "contradicted": 13,
+        "realized": 1,
+        "inapplicable": 3
+      },
+      "calibrated": {
+        "contradicted": 10,
+        "realized": 3,
+        "inapplicable": 3,
+        "unobserved": 1
+      },
+      "independent": {
+        "contradicted": 10,
+        "realized": 3,
+        "inapplicable": 3,
+        "unobserved": 1
+      }
+    },
+    "GRIL": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "HANO": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "HOLE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "HPDL": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "ISOS": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "KA59": {
+      "base": {
+        "contradicted": 2,
+        "unobserved": 1,
+        "realized": 1
+      },
+      "calibrated": {
+        "contradicted": 2,
+        "unobserved": 1,
+        "realized": 1
+      },
+      "independent": {
+        "contradicted": 2,
+        "unobserved": 1,
+        "realized": 1
+      }
+    },
+    "KATA": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "KEYD": {
+      "base": {
+        "contradicted": 35
+      },
+      "calibrated": {
+        "contradicted": 34,
+        "realized": 1
+      },
+      "independent": {
+        "contradicted": 34,
+        "realized": 1
+      }
+    },
+    "KLOT": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "LF52": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "LIFE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "LKEY": {
+      "base": {
+        "contradicted": 1
+      },
+      "calibrated": {
+        "contradicted": 1
+      },
+      "independent": {
+        "contradicted": 1
+      }
+    },
+    "LOGI": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "LP85": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "LS19": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "LS20": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "M0R0": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "MEMO": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "MIND": {
+      "base": {
+        "contradicted": 1,
+        "realized": 1
+      },
+      "calibrated": {
+        "contradicted": 2
+      },
+      "independent": {
+        "contradicted": 2
+      }
+    },
+    "MOTO": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "ONDE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "PIPE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "POLA": {
+      "base": {
+        "unobserved": 4
+      },
+      "calibrated": {
+        "unobserved": 4
+      },
+      "independent": {
+        "unobserved": 4
+      }
+    },
+    "PORT": {
+      "base": {
+        "contradicted": 12,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 12,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 12,
+        "inapplicable": 1
+      }
+    },
+    "PRTL": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "R11L": {
+      "base": {
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "inapplicable": 1
+      },
+      "independent": {
+        "inapplicable": 1
+      }
+    },
+    "RE86": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "RECR": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "REGN": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "REWI": {
+      "base": {
+        "contradicted": 8,
+        "realized": 1
+      },
+      "calibrated": {
+        "contradicted": 7,
+        "realized": 2
+      },
+      "independent": {
+        "realized": 6,
+        "contradicted": 3
+      }
+    },
+    "RSWP": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "S5I5": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SB26": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SC25": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SELE": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SEQN": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SERI": {
+      "base": {
+        "contradicted": 27,
+        "unobserved": 6,
+        "realized": 1
+      },
+      "calibrated": {
+        "contradicted": 27,
+        "unobserved": 4,
+        "realized": 3
+      },
+      "independent": {
+        "contradicted": 28,
+        "unobserved": 3,
+        "realized": 3
+      }
+    },
+    "SIGN": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SK48": {
+      "base": {
+        "contradicted": 12
+      },
+      "calibrated": {
+        "contradicted": 7,
+        "realized": 5
+      },
+      "independent": {
+        "contradicted": 7,
+        "realized": 5
+      }
+    },
+    "SKBN": {
+      "base": {
+        "contradicted": 5,
+        "unobserved": 4,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 8,
+        "realized": 1,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 8,
+        "realized": 1,
+        "inapplicable": 1
+      }
+    },
+    "SMLP": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SNAR": {
+      "base": {
+        "contradicted": 12,
+        "realized": 1,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 10,
+        "realized": 3,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 10,
+        "realized": 3,
+        "inapplicable": 1
+      }
+    },
+    "SP80": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SPOR": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "STCK": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SU15": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SWCH": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "SYME": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "TEQU": {
+      "base": {
+        "contradicted": 11
+      },
+      "calibrated": {
+        "contradicted": 9,
+        "realized": 2
+      },
+      "independent": {
+        "contradicted": 9,
+        "realized": 2
+      }
+    },
+    "THER": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "TICT": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "TN36": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "TR87": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "TRCP": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "TRIA": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "TU93": {
+      "base": {
+        "contradicted": 30,
+        "realized": 1,
+        "inapplicable": 1
+      },
+      "calibrated": {
+        "contradicted": 13,
+        "realized": 18,
+        "inapplicable": 1
+      },
+      "independent": {
+        "contradicted": 13,
+        "realized": 18,
+        "inapplicable": 1
+      }
+    },
+    "UPST": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "VALV": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "VC33": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "VOIS": {
+      "base": {
+        "realized": 1,
+        "contradicted": 7
+      },
+      "calibrated": {
+        "realized": 1,
+        "contradicted": 7
+      },
+      "independent": {
+        "realized": 1,
+        "contradicted": 7
+      }
+    },
+    "WA30": {
+      "base": {},
+      "calibrated": {},
+      "independent": {}
+    },
+    "WEAV": {
+      "base": {
+        "unobserved": 1,
+        "contradicted": 16
+      },
+      "calibrated": {
+        "unobserved": 2,
+        "contradicted": 14,
+        "realized": 1
+      },
+      "independent": {
+        "unobserved": 2,
+        "contradicted": 14,
+        "realized": 1
+      }
+    },
+    "ZIPP": {
+      "base": {
+        "realized": 2,
+        "contradicted": 5
+      },
+      "calibrated": {
+        "realized": 3,
+        "contradicted": 4
+      },
+      "independent": {
+        "realized": 3,
+        "contradicted": 4
+      }
+    }
+  },
+  "upper": {
+    "base": {
+      "contradicted": 17,
+      "realized": 5,
+      "inapplicable": 3,
+      "unobserved": 4
+    },
+    "calibrated": {
+      "contradicted": 14,
+      "realized": 7,
+      "inapplicable": 3,
+      "unobserved": 5
+    },
+    "independent": {
+      "contradicted": 14,
+      "realized": 7,
+      "inapplicable": 3,
+      "unobserved": 5
+    }
+  }
+}
