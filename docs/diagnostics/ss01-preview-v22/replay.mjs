@@ -75,6 +75,25 @@ const read = (b, n, scope) =>
     n,
     scope
   );
+function island(world, position) {
+  if(!position||world.tiles[position.y*20+position.x]!=='.')return 'hors_sol';
+  const cells = [position], seen = new Set([position.y * 20 + position.x]);
+  for (const p of cells) for (const [dx,dy] of [[0,1],[0,-1],[1,0],[-1,0]]) {
+    const x = p.x + dx, y = p.y + dy, k = y * 20 + x;
+    if (x < 0 || y < 0 || x >= 20 || y >= 20 || world.tiles[k] !== '.' || seen.has(k)) continue;
+    seen.add(k);
+    cells.push({x,y});
+  }
+  return seen.has(world.start.y * 20 + world.start.x) ? 'haut' : seen.has(world.goal.y * 20 + world.goal.x) ? 'droite' : 'gauche';
+}
+function physicalMobility(test, measurement, before, after, level, seal) {
+  if (digest(measurement.test) !== seal) throw Error('Unsealed mobility experiment');
+  const targets = test.sites.flatMap((site, j) => {
+    const mirror = before.mirrors.findIndex(p => same(at(site.at), p));
+    return mirror < 0 ? [] : [{target:local(before.mirrors[mirror],level), after:local(after.mirrors[mirror],level), outcome:measurement.outcomes[j].status, moved:!same(before.mirrors[mirror],after.mirrors[mirror])}];
+  });
+  return {command:test.op, namedSubject:same(at(test.from),before.hero), siteCount:test.sites.length, mirrors:targets};
+}
 function truth(world, state, z, board, l, w) {
   const prev = reflectionPreviews(world, state).find(
     (p) => p.kind === 'merchant' && same(p.from, state.hero) && p.valid
@@ -118,6 +137,37 @@ function truth(world, state, z, board, l, w) {
     indicatorChangedPixels: w ? Number(markerInk || 0) : null,
   };
 }
+const groundedModule=await mod(solver,'src/sic/controlled-parts.ts').catch(()=>null);
+const groundedPlanner=await mod(solver,'src/sic/plan-witnessed-mechanism.ts').catch(()=>null);
+function diagnoseBinding(m,o,rows,state,enabled,confirmed) {
+  const mem=m.previewLearning,rule=mem.bindings[confirmed],motion=rule&&mem.partMotion?.[rule.actor],board=visualLayout(o,rows),here=board[rule?.actor]??[],centres=Object.entries(board).filter(([id,b])=>b.some(z=>state.mirrors.some(v=>same(at(z.at),v))));
+  if(!groundedModule||!rule||!motion)return null;
+  const active=here.length===1?here[0]?.at:mem.lastActor[rule.actor],motors=groundedModule.controlledStrokes(motion,new Set(enabled),rule.gesture.op);
+  const dx=motors.find(x=>x.d[0]),dy=motors.find(x=>x.d[1]),pitch=dx&&dy?[Math.abs(dx.d[0]),Math.abs(dy.d[1])]:null;
+  const offered=groundedPlanner.plansForWitnessedSubjects(m,o,rows,new Set(enabled)).map(x=>x.plan);
+  return {actorCorrect:active&&same(at(active),state.hero),motors:motors.map(z=>[z.op,z.d]),floor:{...motion.substrate},axisVotes:Object.fromEntries(Object.entries(motion.axes).map(([q,options])=>[q,Object.values(options).map(v=>[v.d.join(),v.count]).sort((a,b)=>b[1]-a[1]).slice(0,4)])),sites:Object.keys(motion.sites).length,witnesses:rule.witnesses.length,knownC:centres.map(([id,parts])=>({id,instances:parts.length,hits:rule.witnesses.filter(w=>w.geometry?.pivots.some(c=>c.role===id)).length,samples:pitch&&active?groundedModule.anchoredSamples(rule.witnesses,id,active,pitch).length:0})),ranked:offered.length,namesMirror:offered.filter(s=>state.mirrors.some(v=>same(at(s.initialC),v))).length,correctPair:offered.filter(z=>same(at(z.start),state.hero)&&state.mirrors.some(v=>same(at(z.initialC),v))).length,crossings:offered.filter(z=>z.arrival).length};
+}
+const zoneModule=await mod(solver,'src/sic/local-progress.ts').catch(()=>null);
+function explainLocalChoice(mem,s,t,q,o,rows,focus){
+ if(!zoneModule||!mem.occupancy?.layouts[t])return null;
+ const oc=mem.occupancy,old=oc.layouts[s],after=oc.layouts[t],cases=[];
+ const repeat=oc.edges.find(e=>e.s===s&&e.t===t&&e.op===q&&!e.unstable);if(!repeat)return null;
+ for(const u of oc.edges){
+  const bare=oc.observed[s+'/'+u.op];if(u.s!==t||u.unstable||u.op===q||bare===undefined||bare<0)continue;
+  for(const [id,pos] of Object.entries(after)){
+   const y=oc.layouts[u.t][id],d=oc.layouts[bare][id];if(y&&y.join()!==pos.join()&&d&&old[id]?.join()===d.join())cases.push({id,op:u.op,from:local(at(pos),2),to:local(at(y),2)});
+  }
+ }
+ const options=Object.keys(old).filter(p=>oc.visited[p]&&after[p]).map(p=>{
+  const motors=zoneModule.motorsFor(oc,p,q),n=new Set(motors.map(v=>v.d.join())).size,still=old[p].join()===after[p].join();
+  return {p,still,motors,score:n>=2||still?Object.keys(oc.visited[p]).length*Math.max(1,Math.min(n,4)):0};
+ }).filter(v=>v.score).sort((a,b)=>Number(a.still)-Number(b.still)||Number(b.p===focus)-Number(a.p===focus)||b.score-a.score);
+ const chosen=options[0];if(!chosen)return {cases,actor:null};
+ const terrain=zoneModule.zoneFloor(oc,chosen.p,o,rows,chosen.motors,old[chosen.p]);
+ const reachable=new Set([old[chosen.p].join()]);let prior=-1;while(prior!==reachable.size){prior=reachable.size;for(const e of oc.edges){if(e.unstable||e.op===q)continue;const u=oc.layouts[e.s][chosen.p],v=oc.layouts[e.t][chosen.p];
+ if(u&&v&&reachable.has(u.join())&&chosen.motors.some(m=>m.op===e.op&&m.d[0]===v[0]-u[0]&&m.d[1]===v[1]-u[1]))reachable.add(v.join());}}
+ return {cases,actor:chosen.p,from:local(at(old[chosen.p]),2),to:local(at(after[chosen.p]),2),terrain:terrain.component.has(after[chosen.p].join()),floor:terrain.floor,walk:reachable.has(after[chosen.p].join()),motors:chosen.motors.map(m=>m.op)};
+}
 async function campaign(name) {
   const game = new SinkingStarSession(SS01_LEVELS),
     family = createPreparedEffects(),
@@ -152,11 +202,19 @@ async function campaign(name) {
         firstL1Read: null,
         firstCorrectRead: null,
         physicalActivations: [],
+        decisions: [],
+        mirrorMoves: [],
+        zoneByStep: [],
+        stagnation: [],
+        mechanisms: [],
+        explainedBindings: [],
+        mobility: [],
         territory: [],
         counts: {},
         won: false,
       };
     const visited = new Set();
+
     for (let k = 0; k < 160; k++) {
       const available = b.availableActionIds.filter((v) => v !== 6).map((v) => command(v));
       const proposal =
@@ -183,13 +241,36 @@ async function campaign(name) {
         q = Number(act.action_ref.slice(6)),
         f = proposal.experiment.witnessedPreview,
         seal = f ? digest(f) : null,
+        mobility = proposal.experiment.mobilityProbe,
+        mobilitySeal = mobility ? digest(mobility) : null,
         z = stepWorld(world, s, q, act.data),
         next = session.action(q, act.data),
         n = await read(next, o.revision + 1, scope);
+      const current=learner.state(),sceneKey=(ob)=>ob.frame_hash+'|'+[...ob.available_action_refs].sort().join(','),oldScene=current.scenes.indexOf(sceneKey(o)),newScene=current.scenes.indexOf(sceneKey(n)),opKey=q===6?'ACTION6:'+act.data.x+','+act.data.y:'ACTION'+q;
+      if(groundedModule&&k<85&&[1,5,10,15,25,40,55,65,75].includes(k+1)){
+        const facts=diagnoseBinding(current,o,b.frame,s,o.available_action_refs,witnessedRule);
+        if(facts)receipt.explainedBindings.push({step:k+1,...facts});
+      }
+      const prevEdge=current.occupancy?.edges.find(e=>e.s===oldScene&&e.op===opKey&&!e.unstable);
+      const repeat=!!prevEdge&&prevEdge.t===newScene;
+      const mechanism=proposal.experiment.mechanism,mechanismSeal=mechanism?digest(mechanism):null;
+      const priorTag=current.localProgress?.last;
+      const reason=repeat?explainLocalChoice(current,oldScene,newScene,opKey,o,b.frame,f?.actor):null;
       await learner.after(proposal, 0, o, n, b.frame, next.frame);
       const acquired = await learner.record(o, n, act, b.frame, next.frame, proposal, 0, []);
       const t = truth(world, s, z, b, 2, f),
         phase = proposal.experiment.phase;
+      const tag=acquired.events[0]?.localRepeat,here=island(world,z.hero),move=s.mirrors.findIndex((p,j)=>!same(p,z.mirrors[j]));
+      receipt.zoneByStep.push(here);
+      if(mobility)receipt.mobility.push({step:k+1,...physicalMobility(mobility,acquired.events[0].mobilityProbe,s,z,2,mobilitySeal)});
+      receipt.decisions.push({step:k+1,frame:hash(b),to:hash(next),q,phase,repeat,reason,priorTag:priorTag?.revision??null,knownReads:!!f});
+      if(tag)receipt.stagnation.push({step:k+1,q,subjectAt:local(at(tag.from),2),subjectAfter:local(at(tag.to),2),connection:tag.connection,physicalSubject:same(at(tag.from),s.hero),prior:tag.previous});
+      if(move>=0)receipt.mirrorMoves.push({step:k+1,phase,from:local(s.mirrors[move],2),to:local(z.mirrors[move],2)});
+      if(mechanism){
+        const out=acquired.events[0].mechanism;if(digest(out.trial)!==mechanismSeal)throw Error('Unsealed mechanism experiment');
+        const step=mechanism.plan.steps[mechanism.index],site=at(step.c);
+        receipt.mechanisms.push({step:k+1,stage:step.stage,aim:mechanism.plan.basis,reason:mechanism.cause.tag,matched:out.matched,site:local(site,2),namesMirror:s.mirrors.some(p=>same(site,p)),namedSubject:same(at(step.p),s.hero),actualMirrorMoved:move>=0,areaBefore:island(world,s.hero),start:local(at(mechanism.plan.start),2),placement:local(at(mechanism.plan.placed),2),launch:mechanism.plan.launch?local(at(mechanism.plan.launch),2):null,arrivalRegion:mechanism.plan.arrival?island(world,at(mechanism.plan.arrival)):null,access:mechanism.plan.arrival?local(at(mechanism.plan.arrival),2):null});
+      }
       receipt.counts[phase] = (receipt.counts[phase] ?? 0) + 1;
       receipt.actions++;
       visited.add(local(z.hero, 2).join());
@@ -405,6 +486,10 @@ for (const file of autonomousRuns) {
       byCommandAtValid: {},
       issuedActivations: 0,
       mirrorMoves: [],
+      mobility: [],
+      mechanism: [],
+      stagnation: [],
+      islands: {},
       physicalTransfers: 0,
       exactNamedTransfers: 0,
       transfers: [],
@@ -455,6 +540,17 @@ for (const file of autonomousRuns) {
     facts.maxSimultaneousGoals=Math.max(facts.maxSimultaneousGoals,goalCount);
     if(goalCount)facts.firstGoal??=i+1;
     const event=events.get(i+1),probe=event?.unreadIndicator,test=probe?.test;
+    if(run.start===2){const name=island(w,z.hero);facts.islands[name]=(facts.islands[name]??0)+1;}
+    const mobility=event?.mobilityProbe, trial=event?.mechanism?.trial,tag=event?.localRepeat;
+    if(mobility){
+      facts.mobility.push({action:i+1,...physicalMobility(mobility.test,mobility,s,z,run.start,c.mobilitySeal)});
+    }
+    if(trial){
+      if(digest(trial)!==c.mechanismSeal)throw Error('Unsealed autonomous mechanism experiment');
+      const step=trial.plan.steps[trial.index],site=at(step.c),j=s.mirrors.findIndex(p=>same(p,site));
+      facts.mechanism.push({action:i+1,stage:step.stage,reason:trial.cause.tag,matched:event.mechanism.matched,namesMirror:j>=0,namedSubject:same(at(step.p),s.hero),actualMirrorMoved:j>=0&&!same(s.mirrors[j],z.mirrors[j]),site:local(site,run.start),placement:local(at(trial.plan.placed),run.start),launch:trial.plan.launch?local(at(trial.plan.launch),run.start):null,arrival:trial.plan.arrival?local(at(trial.plan.arrival),run.start):null,arrivalRegion:run.start===2&&trial.plan.arrival?island(w,at(trial.plan.arrival)):null});
+    }
+    if(tag)facts.stagnation.push({action:i+1,tag:tag.tag,physicalTransfer:c.id===5&&v.landedOnValidMark});
     if(test){
       if(c.indicatorProbeSeal!==digest(test))throw Error('Missing pre-action indicator commitment');
       const check=truth(w,s,z,b,run.start,{from:test.cue.origin,indicated:test.cue.site,indicator:test.cue.r});

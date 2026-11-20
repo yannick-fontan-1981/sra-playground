@@ -1,0 +1,1256 @@
+{
+  "environment": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "control": {
+    "tag": "sic-projected-affordances-source100-control-v1",
+    "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+    "files": 2401,
+    "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca",
+    "export": "projection-v22-eval-control"
+  },
+  "reserve": "SS09 L2",
+  "sourceTraceCount": 118,
+  "coldControl": {
+    "SS01": {
+      "commands": 579,
+      "won": false,
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "trajectory": "c8ba139235f913e9c6a27b4a61660b61e137ec1af2c64235cec4e3fa67c5bc64"
+    },
+    "SS06": {
+      "commands": 751,
+      "won": false,
+      "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+      "trajectory": "a03cff0d9c74480a7700d8b015c6d29ee5fee5d6975c2456151073d34e7be543"
+    },
+    "SS07": {
+      "commands": 5,
+      "won": false,
+      "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+      "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c"
+    },
+    "SS08": {
+      "commands": 791,
+      "won": false,
+      "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+      "trajectory": "9ba2eb0933060f000d6476dc2a58558a4c77a2dccbff942776a264e64069a09f"
+    }
+  },
+  "guidedV24": {
+    "entry": "after_three_public_demonstration_moves",
+    "commands": 69,
+    "physicalTransfers": 31,
+    "distinctLandings": 6,
+    "territory": [
+      "9,3",
+      "10,3",
+      "8,5",
+      "8,4",
+      "9,4",
+      "10,4",
+      "8,3",
+      "7,4"
+    ],
+    "stop": "family_abstained",
+    "won": false,
+    "firstCorrectRead": {
+      "op": 5,
+      "step": 1,
+      "from_": [
+        8,
+        4
+      ],
+      "mark": [
+        9,
+        3
+      ],
+      "actual": [
+        9,
+        3
+      ]
+    }
+  },
+  "versions": {
+    "25": {
+      "candidate": {
+        "tag": "sic-projected-affordances-source100-candidate-v25",
+        "sha": "4709b749938aa2b1c3d16fb187784bee3fb2ac0f",
+        "files": 2452,
+        "digest": "38056ae79206b27adadd970ab1e3ea1e11f1ab47e6beb285a8279c5d4a110f74",
+        "export": "projection-v25-eval-candidate"
+      },
+      "sourceTests": 371,
+      "guided": {
+        "commands": 66,
+        "stop": "family_abstained",
+        "won": false,
+        "knownReplayedTeleports": 22,
+        "transfers": 31,
+        "transfersAt66": 31,
+        "taggedAt66": 10,
+        "transfersTagged": 0,
+        "allTagged": 10,
+        "cells": 8,
+        "islands": [
+          "haut"
+        ],
+        "movementTests": 0,
+        "movementTestsNamingMirror": 0,
+        "plannedSteps": 0,
+        "plannedWrites": 0,
+        "plannedStepsNamingMirror": 0,
+        "correctSubjectSteps": 0,
+        "correctPushes": 0,
+        "projectedAccess": 0,
+        "physicalMirrorMoves": [
+          {
+            "step": 56,
+            "phase": "occupancy",
+            "from": [
+              8,
+              3
+            ],
+            "to": [
+              7,
+              3
+            ]
+          }
+        ],
+        "firstPlan": null,
+        "physicalPushInPlan": [],
+        "correctRead": true
+      },
+      "cold": {
+        "SS01": {
+          "commands": 606,
+          "won": false,
+          "trajectory": "ae813dece8787e79bc0c0112dc017779ea9b081f7729bae94d05589b7c0bb131",
+          "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 606,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 5,
+              "changedTrials": 5,
+              "newScenes": 4,
+              "relational": 3,
+              "uniqueImages": 87,
+              "returns": 449,
+              "replayed": 344,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 25,
+              "translated": 77,
+              "returnedPositions": 57
+            }
+          ],
+          "zone": {
+            "tagged": 63,
+            "witnessedWalk": 63,
+            "modeledSubstrate": 0,
+            "closedCycles": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "SS06": {
+          "commands": 581,
+          "won": false,
+          "trajectory": "3bce0daab61be0013e1c1b2371bb6f64e2333263e07cb80c01de5a968213a9e5",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 581,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 8,
+              "changedTrials": 6,
+              "newScenes": 6,
+              "relational": 2,
+              "uniqueImages": 68,
+              "returns": 113,
+              "replayed": 86,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 35,
+              "translated": 10,
+              "returnedPositions": 3
+            }
+          ],
+          "zone": {
+            "tagged": 24,
+            "witnessedWalk": 24,
+            "modeledSubstrate": 0,
+            "closedCycles": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "SS07": {
+          "commands": 41,
+          "won": false,
+          "trajectory": "9c2146a21db3d4f74c331e194573d18260fcf023bb61894e68309faded873190",
+          "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 41,
+              "reason": "native_game_over",
+              "state": "GAME_OVER",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 12,
+              "returns": 19,
+              "replayed": 15,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 10,
+              "translated": 0,
+              "returnedPositions": 0
+            }
+          ],
+          "zone": {
+            "tagged": 6,
+            "witnessedWalk": 6,
+            "modeledSubstrate": 0,
+            "closedCycles": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "SS08": {
+          "commands": 803,
+          "won": false,
+          "trajectory": "2e12e1067dc8dc2a70e6f879b4c95c5ce2b238a1a2550fc760e46f704c465e03",
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 803,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 29,
+              "returns": 533,
+              "replayed": 484,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 30,
+              "translated": 26,
+              "returnedPositions": 17
+            }
+          ],
+          "zone": {
+            "tagged": 109,
+            "witnessedWalk": 109,
+            "modeledSubstrate": 0,
+            "closedCycles": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "campaign": {
+          "commands": 529,
+          "won": false,
+          "trajectory": "6e95367f4968a0498750c717e96e226850ef58bd8202bdd015b47a3ff2b43047",
+          "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 529,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 2,
+              "changedTrials": 2,
+              "newScenes": 2,
+              "relational": 0,
+              "uniqueImages": 151,
+              "returns": 292,
+              "replayed": 207,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 32,
+              "translated": 360,
+              "returnedPositions": 325
+            }
+          ],
+          "zone": {
+            "tagged": 11,
+            "witnessedWalk": 9,
+            "modeledSubstrate": 2,
+            "closedCycles": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        }
+      },
+      "physical": [
+        {
+          "level": 1,
+          "commands": 529,
+          "cells": 31,
+          "islands": {},
+          "transfers": 18,
+          "validActivations": 40,
+          "tagged": 11,
+          "targetedSteps": 0,
+          "movementProbes": 0,
+          "movementProbesNamingMirror": 0,
+          "movementProbesMovingNamedMirror": 0,
+          "correctPushes": 0,
+          "mirrorMoves": [],
+          "simultaneousGoals": 0,
+          "won": false
+        },
+        {
+          "level": 2,
+          "commands": 606,
+          "cells": 18,
+          "islands": {
+            "haut": 606
+          },
+          "transfers": 0,
+          "validActivations": 0,
+          "tagged": 63,
+          "targetedSteps": 0,
+          "movementProbes": 0,
+          "movementProbesNamingMirror": 0,
+          "movementProbesMovingNamedMirror": 0,
+          "correctPushes": 0,
+          "mirrorMoves": [
+            {
+              "action": 49,
+              "from": [
+                8,
+                3
+              ],
+              "to": [
+                9,
+                3
+              ],
+              "issued": 4
+            },
+            {
+              "action": 50,
+              "from": [
+                9,
+                3
+              ],
+              "to": [
+                10,
+                3
+              ],
+              "issued": 4
+            }
+          ],
+          "simultaneousGoals": 0,
+          "won": false
+        }
+      ]
+    },
+    "26": {
+      "candidate": {
+        "tag": "sic-projected-affordances-source100-candidate-v26",
+        "sha": "820f2e9edcf9591a1aa0de9abc361fe95acbcf1b",
+        "files": 2453,
+        "digest": "c9feba660a54b5a4e2944b42180e0f3c03d5e0485bcb04c2574bee242bbed154",
+        "export": "projection-v26-eval-candidate"
+      },
+      "sourceTests": 373,
+      "guided": {
+        "commands": 160,
+        "stop": "action_cap",
+        "won": false,
+        "knownReplayedTeleports": 14,
+        "transfers": 27,
+        "transfersAt66": 27,
+        "taggedAt66": 12,
+        "transfersTagged": 6,
+        "allTagged": 22,
+        "cells": 11,
+        "islands": [
+          "haut"
+        ],
+        "movementTests": 16,
+        "movementTestsNamingMirror": 0,
+        "plannedSteps": 10,
+        "plannedWrites": 10,
+        "plannedStepsNamingMirror": 0,
+        "correctSubjectSteps": 0,
+        "correctPushes": 0,
+        "projectedAccess": 0,
+        "physicalMirrorMoves": [
+          {
+            "step": 51,
+            "phase": "reconfigureMechanism",
+            "from": [
+              8,
+              3
+            ],
+            "to": [
+              8,
+              2
+            ]
+          },
+          {
+            "step": 73,
+            "phase": "instrumentSite",
+            "from": [
+              8,
+              2
+            ],
+            "to": [
+              9,
+              2
+            ]
+          }
+        ],
+        "firstPlan": {
+          "step": 11,
+          "stage": "write",
+          "aim": "test_displacement",
+          "site": [
+            8,
+            4
+          ],
+          "namesMirror": false,
+          "namedSubject": false,
+          "matched": false,
+          "actualMirrorMoved": false,
+          "access": null
+        },
+        "physicalPushInPlan": [
+          {
+            "step": 51,
+            "stage": "write",
+            "aim": "test_displacement",
+            "site": [
+              8,
+              4
+            ],
+            "namesMirror": false,
+            "namedSubject": false,
+            "matched": false,
+            "actualMirrorMoved": true,
+            "access": null
+          }
+        ],
+        "correctRead": true
+      },
+      "cold": {
+        "SS01": {
+          "commands": 573,
+          "won": false,
+          "trajectory": "32b2c55ca434b33a6b883916a0baa694dfed5b70c25723c4390a8c2c3e2068bc",
+          "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 573,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 9,
+              "changedTrials": 8,
+              "newScenes": 6,
+              "relational": 3,
+              "uniqueImages": 88,
+              "returns": 435,
+              "replayed": 287,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 25,
+              "translated": 38,
+              "returnedPositions": 21
+            }
+          ],
+          "zone": {
+            "tagged": 94,
+            "witnessedWalk": 62,
+            "modeledSubstrate": 0,
+            "closedCycles": 32,
+            "mobilityTests": 54,
+            "mobilityMoved": 1,
+            "mobilityRivalCompared": 1,
+            "mobilitySelective": 1,
+            "programs": 12,
+            "listed": 38,
+            "predictedCrossings": 0,
+            "attemptedWrites": 1,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "SS06": {
+          "commands": 556,
+          "won": false,
+          "trajectory": "a3c1498d4aca9cf302494ccf29dbb0050e8d6c165e777ff8ea774a102106b4f7",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 556,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 11,
+              "changedTrials": 5,
+              "newScenes": 4,
+              "relational": 2,
+              "uniqueImages": 97,
+              "returns": 158,
+              "replayed": 105,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 36,
+              "translated": 22,
+              "returnedPositions": 6
+            }
+          ],
+          "zone": {
+            "tagged": 35,
+            "witnessedWalk": 26,
+            "modeledSubstrate": 0,
+            "closedCycles": 9,
+            "mobilityTests": 30,
+            "mobilityMoved": 1,
+            "mobilityRivalCompared": 1,
+            "mobilitySelective": 1,
+            "programs": 6,
+            "listed": 18,
+            "predictedCrossings": 0,
+            "attemptedWrites": 4,
+            "confirmedWrites": 1,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 1,
+            "changedAgainstRepetition": 1
+          }
+        },
+        "SS07": {
+          "commands": 47,
+          "won": false,
+          "trajectory": "c56b68716c816042702ee85b9aef89679a015e51be2f2812a94000a0da0d23cf",
+          "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 47,
+              "reason": "native_game_over",
+              "state": "GAME_OVER",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 17,
+              "returns": 21,
+              "replayed": 13,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 12,
+              "translated": 1,
+              "returnedPositions": 0
+            }
+          ],
+          "zone": {
+            "tagged": 4,
+            "witnessedWalk": 4,
+            "modeledSubstrate": 0,
+            "closedCycles": 0,
+            "mobilityTests": 8,
+            "mobilityMoved": 0,
+            "mobilityRivalCompared": 0,
+            "mobilitySelective": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "SS08": {
+          "commands": 775,
+          "won": false,
+          "trajectory": "0dc11967a76111a9684d8b0a25e3556eee9f3bbf83f96e24f0959008f4bf73e6",
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 775,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 39,
+              "returns": 454,
+              "replayed": 403,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 29,
+              "translated": 14,
+              "returnedPositions": 6
+            }
+          ],
+          "zone": {
+            "tagged": 147,
+            "witnessedWalk": 113,
+            "modeledSubstrate": 0,
+            "closedCycles": 34,
+            "mobilityTests": 19,
+            "mobilityMoved": 0,
+            "mobilityRivalCompared": 0,
+            "mobilitySelective": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "campaign": {
+          "commands": 549,
+          "won": false,
+          "trajectory": "dee7ce3ed4585d5458a128ed1fce91aacfce7d66d3e2b60f644b22ea9ca5b2d7",
+          "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 549,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 10,
+              "changedTrials": 8,
+              "newScenes": 7,
+              "relational": 0,
+              "uniqueImages": 152,
+              "returns": 338,
+              "replayed": 218,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 35,
+              "translated": 278,
+              "returnedPositions": 268
+            }
+          ],
+          "zone": {
+            "tagged": 70,
+            "witnessedWalk": 9,
+            "modeledSubstrate": 4,
+            "closedCycles": 57,
+            "mobilityTests": 53,
+            "mobilityMoved": 0,
+            "mobilityRivalCompared": 0,
+            "mobilitySelective": 0,
+            "programs": 48,
+            "listed": 506,
+            "predictedCrossings": 0,
+            "attemptedWrites": 48,
+            "confirmedWrites": 12,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 12,
+            "changedAgainstRepetition": 12
+          }
+        }
+      },
+      "physical": [
+        {
+          "level": 1,
+          "commands": 549,
+          "cells": 20,
+          "islands": {},
+          "transfers": 1,
+          "validActivations": 4,
+          "tagged": 70,
+          "targetedSteps": 48,
+          "movementProbes": 53,
+          "movementProbesNamingMirror": 53,
+          "movementProbesMovingNamedMirror": 0,
+          "correctPushes": 0,
+          "mirrorMoves": [],
+          "simultaneousGoals": 0,
+          "won": false
+        },
+        {
+          "level": 2,
+          "commands": 573,
+          "cells": 18,
+          "islands": {
+            "haut": 573
+          },
+          "transfers": 0,
+          "validActivations": 0,
+          "tagged": 94,
+          "targetedSteps": 12,
+          "movementProbes": 54,
+          "movementProbesNamingMirror": 50,
+          "movementProbesMovingNamedMirror": 0,
+          "correctPushes": 0,
+          "mirrorMoves": [
+            {
+              "action": 28,
+              "from": [
+                8,
+                3
+              ],
+              "to": [
+                8,
+                4
+              ],
+              "issued": 2
+            },
+            {
+              "action": 29,
+              "from": [
+                8,
+                4
+              ],
+              "to": [
+                8,
+                5
+              ],
+              "issued": 2
+            }
+          ],
+          "simultaneousGoals": 0,
+          "won": false
+        }
+      ]
+    },
+    "27": {
+      "candidate": {
+        "tag": "sic-projected-affordances-source100-candidate-v27",
+        "sha": "a04a30dd3ea43207f434c052d2366a8f720b09a4",
+        "files": 2456,
+        "digest": "4c2a010ddb24335de18de90f4192352668c256bc21d1596e4e21865f601098b9",
+        "export": "projection-v27-eval-candidate"
+      },
+      "sourceTests": 374,
+      "guided": {
+        "commands": 80,
+        "stop": "family_abstained",
+        "won": false,
+        "knownReplayedTeleports": 17,
+        "transfers": 32,
+        "transfersAt66": 26,
+        "taggedAt66": 12,
+        "transfersTagged": 7,
+        "allTagged": 13,
+        "cells": 11,
+        "islands": [
+          "haut"
+        ],
+        "movementTests": 8,
+        "movementTestsNamingMirror": 0,
+        "plannedSteps": 13,
+        "plannedWrites": 13,
+        "plannedStepsNamingMirror": 0,
+        "correctSubjectSteps": 1,
+        "correctPushes": 0,
+        "projectedAccess": 0,
+        "physicalMirrorMoves": [
+          {
+            "step": 57,
+            "phase": "reconfigureMechanism",
+            "from": [
+              8,
+              3
+            ],
+            "to": [
+              8,
+              2
+            ]
+          }
+        ],
+        "firstPlan": {
+          "step": 11,
+          "stage": "write",
+          "aim": "test_displacement",
+          "site": [
+            8,
+            4
+          ],
+          "namesMirror": false,
+          "namedSubject": false,
+          "matched": false,
+          "actualMirrorMoved": false,
+          "access": null
+        },
+        "physicalPushInPlan": [
+          {
+            "step": 57,
+            "stage": "write",
+            "aim": "test_displacement",
+            "site": [
+              8,
+              4
+            ],
+            "namesMirror": false,
+            "namedSubject": false,
+            "matched": false,
+            "actualMirrorMoved": true,
+            "access": null
+          }
+        ],
+        "correctRead": true
+      },
+      "cold": {
+        "SS01": {
+          "commands": 561,
+          "won": false,
+          "trajectory": "db1a63c62059e6bf9b712161758c64b6f90fa94008e68d53bc9b15741fe5332c",
+          "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 561,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 9,
+              "changedTrials": 8,
+              "newScenes": 6,
+              "relational": 3,
+              "uniqueImages": 88,
+              "returns": 423,
+              "replayed": 278,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 25,
+              "translated": 38,
+              "returnedPositions": 21
+            }
+          ],
+          "zone": {
+            "tagged": 91,
+            "witnessedWalk": 60,
+            "modeledSubstrate": 0,
+            "closedCycles": 31,
+            "mobilityTests": 52,
+            "mobilityMoved": 1,
+            "mobilityRivalCompared": 1,
+            "mobilitySelective": 1,
+            "programs": 12,
+            "listed": 38,
+            "predictedCrossings": 0,
+            "attemptedWrites": 1,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "SS06": {
+          "commands": 555,
+          "won": false,
+          "trajectory": "23392d59950c4c66c3245a5fa6f60969635c97a1acaea158667ff38aa2b59528",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 555,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 11,
+              "changedTrials": 5,
+              "newScenes": 4,
+              "relational": 2,
+              "uniqueImages": 96,
+              "returns": 158,
+              "replayed": 105,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 36,
+              "translated": 22,
+              "returnedPositions": 6
+            }
+          ],
+          "zone": {
+            "tagged": 35,
+            "witnessedWalk": 26,
+            "modeledSubstrate": 0,
+            "closedCycles": 9,
+            "mobilityTests": 29,
+            "mobilityMoved": 1,
+            "mobilityRivalCompared": 1,
+            "mobilitySelective": 1,
+            "programs": 6,
+            "listed": 18,
+            "predictedCrossings": 0,
+            "attemptedWrites": 4,
+            "confirmedWrites": 1,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 1,
+            "changedAgainstRepetition": 1
+          }
+        },
+        "SS07": {
+          "commands": 47,
+          "won": false,
+          "trajectory": "c56b68716c816042702ee85b9aef89679a015e51be2f2812a94000a0da0d23cf",
+          "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 47,
+              "reason": "native_game_over",
+              "state": "GAME_OVER",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 17,
+              "returns": 21,
+              "replayed": 13,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5
+              ],
+              "pairs": 12,
+              "translated": 1,
+              "returnedPositions": 0
+            }
+          ],
+          "zone": {
+            "tagged": 4,
+            "witnessedWalk": 4,
+            "modeledSubstrate": 0,
+            "closedCycles": 0,
+            "mobilityTests": 8,
+            "mobilityMoved": 0,
+            "mobilityRivalCompared": 0,
+            "mobilitySelective": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "SS08": {
+          "commands": 744,
+          "won": false,
+          "trajectory": "384b07f7539520b42a6a2a1bfa6015ee253621e9ae2ea560a35d2ef73b448ac3",
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "levels": [
+            {
+              "level": 2,
+              "won": false,
+              "actions": 744,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 0,
+              "changedTrials": 0,
+              "newScenes": 0,
+              "relational": 0,
+              "uniqueImages": 39,
+              "returns": 435,
+              "replayed": 384,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 29,
+              "translated": 14,
+              "returnedPositions": 6
+            }
+          ],
+          "zone": {
+            "tagged": 137,
+            "witnessedWalk": 106,
+            "modeledSubstrate": 0,
+            "closedCycles": 31,
+            "mobilityTests": 19,
+            "mobilityMoved": 0,
+            "mobilityRivalCompared": 0,
+            "mobilitySelective": 0,
+            "programs": 0,
+            "listed": 0,
+            "predictedCrossings": 0,
+            "attemptedWrites": 0,
+            "confirmedWrites": 0,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 0,
+            "changedAgainstRepetition": 0
+          }
+        },
+        "campaign": {
+          "commands": 539,
+          "won": false,
+          "trajectory": "e9a3766f9102d7b4ba8a6d33a13fc791125fcce5fe64437adaba9fd8e50547da",
+          "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+          "levels": [
+            {
+              "level": 1,
+              "won": false,
+              "actions": 539,
+              "reason": "level_active_time_budget",
+              "state": "NOT_FINISHED",
+              "compositionTrials": 10,
+              "changedTrials": 8,
+              "newScenes": 7,
+              "relational": 0,
+              "uniqueImages": 148,
+              "returns": 333,
+              "replayed": 214,
+              "controls": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+              ],
+              "pairs": 35,
+              "translated": 271,
+              "returnedPositions": 261
+            }
+          ],
+          "zone": {
+            "tagged": 68,
+            "witnessedWalk": 9,
+            "modeledSubstrate": 4,
+            "closedCycles": 55,
+            "mobilityTests": 53,
+            "mobilityMoved": 0,
+            "mobilityRivalCompared": 0,
+            "mobilitySelective": 0,
+            "programs": 46,
+            "listed": 482,
+            "predictedCrossings": 0,
+            "attemptedWrites": 46,
+            "confirmedWrites": 12,
+            "arrivals": 0,
+            "uses": 0,
+            "official": 0,
+            "comparedWrites": 12,
+            "changedAgainstRepetition": 12
+          }
+        }
+      },
+      "physical": [
+        {
+          "level": 1,
+          "commands": 539,
+          "cells": 20,
+          "islands": {},
+          "transfers": 1,
+          "validActivations": 4,
+          "tagged": 68,
+          "targetedSteps": 46,
+          "movementProbes": 53,
+          "movementProbesNamingMirror": 53,
+          "movementProbesMovingNamedMirror": 0,
+          "correctPushes": 0,
+          "mirrorMoves": [],
+          "simultaneousGoals": 0,
+          "won": false
+        },
+        {
+          "level": 2,
+          "commands": 561,
+          "cells": 18,
+          "islands": {
+            "haut": 561
+          },
+          "transfers": 0,
+          "validActivations": 0,
+          "tagged": 91,
+          "targetedSteps": 12,
+          "movementProbes": 52,
+          "movementProbesNamingMirror": 48,
+          "movementProbesMovingNamedMirror": 0,
+          "correctPushes": 0,
+          "mirrorMoves": [
+            {
+              "action": 28,
+              "from": [
+                8,
+                3
+              ],
+              "to": [
+                8,
+                4
+              ],
+              "issued": 2
+            },
+            {
+              "action": 29,
+              "from": [
+                8,
+                4
+              ],
+              "to": [
+                8,
+                5
+              ],
+              "issued": 2
+            }
+          ],
+          "simultaneousGoals": 0,
+          "won": false
+        }
+      ]
+    }
+  }
+}
