@@ -211,8 +211,47 @@ for (const r of rows) {
         onlineUse,
       };
     }
+    let orderControl = null,
+      oneStep = null;
+    if (hit && mode === 'online') {
+      let originBoard = await rewind(n);
+      const ids = originBoard.availableActionIds;
+      const middle = q.kind === 'product' ? 2 : 1;
+      const sameCommands = [...q.program.slice(0, middle), ...q.program.slice(middle + 1), q.program[middle]];
+      let end = originBoard,
+        completed = true;
+      for (const cmd of sameCommands) {
+        end = await act(cmd);
+        if (end.state !== initialState || end.level !== initialLevel) {
+          completed = false;
+          break;
+        }
+      }
+      const controlledPose = await pose(end);
+      orderControl = {
+        program: sameCommands,
+        actual: controlledPose,
+        completed,
+        distinct: completed && controlledPose.every(Boolean) && !same(controlledPose, q.goal),
+      };
+      const ops = new Set(ids.filter((i) => i !== 6).map((i) => 'ACTION' + i));
+      if (ids.includes(6)) for (const past of steps.slice(0, n)) if (past.id === 6) ops.add(name(past));
+      const matching = [],
+        unresolved = [];
+      for (const cmd of ops) {
+        await rewind(n);
+        const stop = await act(cmd),
+          p = await pose(stop);
+        if (stop.level !== initialLevel || stop.state !== initialState || !p.every(Boolean))
+          unresolved.push(cmd);
+        else if (same(p, q.goal)) matching.push(cmd);
+      }
+      oneStep = { examined: [...ops], matching, unresolved, allDiscrete: !ids.includes(6) };
+    }
     checks.push({
       action: n + 1,
+      orderControl,
+      oneStep,
       opportunity,
       kind: q.kind,
       roles: q.roles,
