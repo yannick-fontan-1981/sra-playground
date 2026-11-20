@@ -1,6 +1,7 @@
 import type { NativeEntity, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Experiment, Memory } from './preparation-experiments.ts';
 import { point, same, terrain, type XY } from './access-terrain.ts';
+import { allocateHorizon, contactAspirations } from './contact-aspirations.ts';
 import { supportProjection } from './projected-support.ts';
 import {
   equalLayout,
@@ -11,7 +12,15 @@ import {
   type Roles,
 } from './projected-motion.ts';
 
-type Step = { interaction?: Destination; op: string; from: Layout; to: Layout; refs: number[] };
+type Control = { role: string; held: string; from: Layout; expected: Layout };
+type Step = {
+  control?: Control;
+  interaction?: Destination;
+  op: string;
+  from: Layout;
+  to: Layout;
+  refs: number[];
+};
 type Destination = { role: string; feature: string; position: XY };
 export type Prospect = {
   roles: Roles;
@@ -132,6 +141,7 @@ function catalogue(
       ])
     );
   });
+  const aspire = contactAspirations(bodies, features, models, reached, initial);
   const startRegions = floors.map((f, i) => f.region(initial[i]!));
   const seenRegions = floors.map((f, i) => new Set([...reached[i]!].map((k) => f.region(point(k)))));
   const evaluations = new Map<string, { score: number; goals: Destination[]; region: boolean }>();
@@ -183,6 +193,17 @@ function catalogue(
   const originScore = interest(initial).score;
   const plans: Prospect[] = [];
   function nominate(plan: Prospect) {
+    const end = plan.steps.at(-1)!;
+    plan.score += aspire(end.to).reward;
+    // Find the transformation that actually depends on the placement while leaving
+    // at least one following action to exercise its effect.
+    for (let i = plan.arrival; i >= 0; i--) {
+      if (plan.steps[i]!.control) {
+        plan.arrival = i;
+        plan.score += 24;
+        break;
+      }
+    }
     if (plans.length === 5 && plans[4]!.score >= plan.score) return;
     const dest = plan.steps[plan.arrival]!;
     const index = plans.findIndex(
@@ -203,7 +224,15 @@ function catalogue(
     { p: initial, path: [], uncertainty: 0 },
   ];
   const visited = new Set([layoutId(initial)]);
-  for (let index = 0; index < queue.length && index < 1800; index++) {
+  let depth = 0;
+  for (let index = 0; index < queue.length && index < 2200; index++) {
+    if (queue[index]!.path.length !== depth) {
+      depth = queue[index]!.path.length;
+      const layer = queue.splice(index);
+      const keep = new Set(allocateHorizon(layer, aspire, 64));
+      for (const n of layer) if (!keep.has(n)) visited.delete(layoutId(n.p));
+      queue.push(...keep);
+    }
     const n = queue[index]!;
     if (n.path.length) {
       const dest = interest(n.p);
@@ -271,7 +300,29 @@ function catalogue(
       for (const { pose: after, cost } of variants) {
         if (equalLayout(n.p, after) || after.some((p, i) => !inside(p, bodies[i]!))) continue;
         const uncertainty = n.uncertainty + cost;
-        const step = { op: model.op, from: n.p, to: after, refs: actual ? [receipts.get(id)!] : model.refs },
+        let control: Control | undefined;
+        if (n.path.length) {
+          for (const i of [0, 1]) {
+            const j = 1 - i;
+            if (same(n.p[j]!, initial[j]!) || same(n.p[i]!, after[i]!)) continue;
+            const arm: Layout = [n.p[0], n.p[1]];
+            arm[j] = initial[j]!;
+            const known = measured.get(key(roles, arm, model.op));
+            if (known === null) continue;
+            const bare = known ?? supports.get(model.op)!(arm);
+            if (!same(bare[i]!, after[i]!)) {
+              control = { role: roles[i]!, held: roles[j]!, from: arm, expected: bare };
+              break;
+            }
+          }
+        }
+        const step: Step = {
+            op: model.op,
+            from: n.p,
+            to: after,
+            refs: actual ? [receipts.get(id)!] : model.refs,
+            ...(control ? { control } : {}),
+          },
           path = [...n.path, step];
         const dest = interest(n.p),
           later = interest(after),
@@ -286,7 +337,12 @@ function catalogue(
           const change = land.from.some((p, i) => !same(p, n.p[i]!));
           if (
             change &&
-            (dest.region || later.region || newContact || joint || later.score > originScore + 4)
+            (dest.region ||
+              later.region ||
+              newContact ||
+              joint ||
+              later.score > originScore + 4 ||
+              aspire(after).reward > 8)
           ) {
             const score =
               (dest.score + later.score) / 2 +
@@ -307,7 +363,7 @@ function catalogue(
           }
         }
         const k = layoutId(after);
-        if (!visited.has(k) && path.length < 18 && queue.length < 4500) {
+        if (!visited.has(k) && path.length < 36 && queue.length < 4800) {
           visited.add(k);
           queue.push({ p: after, path, uncertainty });
         }
@@ -345,7 +401,7 @@ export function proposeProjection(
       alternatives: choices.slice(1, 4).map((c) => ({
         placement: c.steps[c.arrival]!.from,
         arrival: c.steps[c.arrival]!.to,
-        after: c.steps.at(-1)!.to,
+        after: c.steps[c.arrival + 1]!.to,
         score: c.score,
       })),
     };
@@ -383,9 +439,11 @@ export function recordProjection(m: Memory, x: Trial, b: NativeObservation, a: N
         ? 'projection_refuted'
         : index === plan.arrival
           ? 'arrival_verified'
-          : index === plan.steps.length - 1
+          : index === plan.arrival + 1
             ? 'continuation_verified'
-            : 'placement_verified';
+            : index > plan.arrival + 1
+              ? 'subsequent_step_verified'
+              : 'placement_verified';
   const id = key(plan.roles, step.from, step.op);
   m.projection.attempted[id] = (m.projection.attempted[id] ?? 0) + 1;
   if (!index) m.projection.plans++;
@@ -399,8 +457,9 @@ export function recordProjection(m: Memory, x: Trial, b: NativeObservation, a: N
       roles: plan.roles,
       placement: plan.steps[plan.arrival]!.from,
       destination: plan.steps[plan.arrival]!.to,
-      subsequent: plan.steps.at(-1)!.interaction ?? plan.steps.at(-1)!.to,
-      continuation: plan.steps.at(-1)!.op,
+      subsequent: plan.steps[plan.arrival + 1]!.interaction ?? plan.steps[plan.arrival + 1]!.to,
+      control: plan.steps[plan.arrival]!.control ?? null,
+      continuation: plan.steps[plan.arrival + 1]!.op,
       goals: plan.goals,
       region: plan.region,
       program: plan.steps.map((s) => s.op),

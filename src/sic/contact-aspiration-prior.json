@@ -1,0 +1,84 @@
+{
+  "movement": {
+    "games": 14,
+    "features": {
+      "contact": {
+        "wins": 11,
+        "expected": 9.1429
+      },
+      "unique": {
+        "wins": 9,
+        "expected": 7.3452
+      },
+      "openShape": {
+        "wins": 8,
+        "expected": 4.6786
+      },
+      "centered": {
+        "wins": 8,
+        "expected": 4.7476
+      },
+      "similarArea": {
+        "wins": 7,
+        "expected": 3.4976
+      },
+      "sameExtent": {
+        "wins": 4,
+        "expected": 1.6476
+      },
+      "square": {
+        "wins": 9,
+        "expected": 5.4667
+      },
+      "larger": {
+        "wins": 8,
+        "expected": 7.7452
+      },
+      "smaller": {
+        "wins": 2,
+        "expected": 1.9333
+      }
+    }
+  },
+  "point": {
+    "games": 29,
+    "features": {
+      "contact": {
+        "wins": 28,
+        "expected": 27.1433
+      },
+      "unique": {
+        "wins": 22,
+        "expected": 19.7124
+      },
+      "openShape": {
+        "wins": 20,
+        "expected": 16.9115
+      },
+      "centered": {
+        "wins": 25,
+        "expected": 23.3543
+      },
+      "similarArea": {
+        "wins": 4,
+        "expected": 3.2645
+      },
+      "sameExtent": {
+        "wins": 3,
+        "expected": 2.7265
+      },
+      "square": {
+        "wins": 18,
+        "expected": 13.2025
+      },
+      "larger": {
+        "wins": 27,
+        "expected": 26.0617
+      },
+      "smaller": {
+        "wins": 0,
+        "expected": 0
+      }
+    }
+  }
+}

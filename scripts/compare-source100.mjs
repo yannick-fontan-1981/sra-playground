@@ -330,7 +330,7 @@ async function run(code, games) {
 const catalogue = source
   ? (await load(solverRoot, 'src/games/catalog.ts')).GAME_CATALOG.map((game) => game.code).sort()
   : cohort.split(',');
-if (source && (catalogue.length !== 100 || start !== 1 || finish !== 1)) throw Error('Invalid source cohort');
+if (source && (catalogue.length !== 100 || (cohort === 'source' && (start !== 1 || finish !== 1)))) throw Error('Invalid source cohort');
 const selected = cohort.startsWith('source:') ? cohort.slice(7).split(',') : catalogue;
 if (selected.some((code) => !catalogue.includes(code))) throw Error('Game outside cohort');
 const [index, shards] = shardArg.split('/').map(Number);

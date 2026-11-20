@@ -124,7 +124,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         : null;
       const projected = experiment.projection?.plan;
       const imagined = projected ? { roles: projected.roles, placement: projected.steps[projected.arrival]!.from,
-        arrival: projected.steps[projected.arrival]!.to, continuation: projected.steps.at(-1), goals: projected.goals, alternatives: experiment.projection?.alternatives ?? [] } : experiment.access
+        arrival: projected.steps[projected.arrival]!.to, continuation: projected.steps[projected.arrival+1], control: projected.steps[projected.arrival]!.control ?? null, goals: projected.goals, alternatives: experiment.projection?.alternatives ?? [] } : experiment.access
         ? {
             chosen: {
               actor: experiment.access.card.law.actor,

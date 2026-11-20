@@ -7,6 +7,8 @@ import {
   type Layout,
   type Sample,
 } from '../src/sic/projected-motion.ts';
+import { contactAspirations, allocateHorizon } from '../src/sic/contact-aspirations.ts';
+import type { NativeEntity } from '../src/logos-engine/v6-native-types.ts';
 import { recordProjection, newProjectionMemory } from '../src/sic/projected-affordances.ts';
 import type { NativeObservation } from '../src/logos-engine/v6-native-types.ts';
 import { initialMemory } from '../src/sic/preparation-experiments.ts';
@@ -164,4 +166,66 @@ test('transfers an unused control direction only at a scale witnessed by this ro
     ]
   );
   assert.ok(!controls.some((m) => m.op === 'ACTION5'));
+});
+
+test('plans backwards from a distant use while only the preparatory role is moving', () => {
+  const piece = (id: string, x: number) =>
+    ({
+      id,
+      signature: id,
+      position: [x, 0],
+      bbox: [x, 0, x, 0],
+      area: 1,
+      identity_ambiguous: false,
+    }) as NativeEntity;
+  const at: Layout = [
+    [0, 0],
+    [2, 0],
+  ];
+  const swap = fitMotion('activate', [
+    sample(
+      at,
+      [
+        [2, 0],
+        [0, 0],
+      ],
+      1
+    ),
+  ]);
+  const slide = fitMotion('slide', [
+    sample(
+      at,
+      [
+        [0, 0],
+        [3, 0],
+      ],
+      2
+    ),
+  ]);
+  const rank = contactAspirations(
+    [piece('user', 0), piece('mechanism', 2)],
+    [piece('target', 20)],
+    [swap, slide],
+    [new Set(['0,0']), new Set(['2,0'])],
+    at
+  );
+  const near: Layout = [
+    [0, 0],
+    [19, 0],
+  ];
+  assert.ok(rank(near).dist[0]! < rank(at).dist[0]!);
+  assert.ok(rank(near).reward > rank(at).reward);
+});
+test('separate goals retain search paths when aggregate reward favors one direction', () => {
+  const nodes = Array.from({ length: 20 }, (_, x) => ({
+    p: [
+      [x, 0],
+      [0, 1],
+    ] as Layout,
+    uncertainty: 0,
+  }));
+  const kept = allocateHorizon(nodes, (p) => ({ dist: [p[0][0], 19 - p[0][0]], reward: p[0][0] }), 8);
+  assert.ok(kept.includes(nodes[0]!));
+  assert.ok(kept.includes(nodes[19]!));
+  assert.equal(kept.length, 8);
 });
