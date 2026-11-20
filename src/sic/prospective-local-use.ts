@@ -195,11 +195,36 @@ function locations(board: Picture) {
 }
 const attemptKey = (p: LocalForecast) => JSON.stringify([p.origin, p.a, p.b, p.site, p.siteB, p.afterB]);
 export function stalledLocal(m: LocalMemory, hash: string): boolean {
-  if (!m.laws.length) return false;
+  if (!m.laws.length || m.steps.length < 4 || m.steps.at(-1)?.to !== hash) return false;
+  // Starting A/B/C consumes up to three turns. Yield while any of the last three
+  // commands is still opening a new public state. Repeating a witnessed edge or
+  // an ineffective command then supplies the concrete limitation to investigate.
+  const prefix = m.steps.slice(0, -3);
+  const seen = new Set(prefix.flatMap(step => [step.from, step.to]));
   const recent = m.steps.slice(-3);
-  return (
-    recent.some((s) => s.from === s.to && s.to === hash) || m.steps.slice(0, -1).some((s) => s.from === hash)
-  );
+  if (!recent.every(step => seen.has(step.to))) return false;
+  return recent.some(step => step.from === step.to || prefix.some(previous =>
+    previous.from === step.from && previous.op === step.op && previous.to === step.to));
+}
+// An early experiment may displace exploration only for a witnessed blocked control.
+// Discard a proposed destination if another known two-step path already produces it.
+export function demonstratedLimit(m: LocalMemory, p: LocalForecast): boolean {
+  const control = direct(m, p.origin, p.b);
+  if (!control || control.to !== p.origin) return false;
+  let frontier = [p.origin];
+  const seen = new Set(frontier);
+  for (let depth = 0; depth < 2; depth++) {
+    const next: string[] = [];
+    for (const state of frontier) for (const step of m.steps) {
+      if (step.from !== state || (depth === 0 && step.op === p.a) || seen.has(step.to)) continue;
+      seen.add(step.to);
+      const image = read(m, step.to);
+      if (image && localPatch(image, p.siteB) === p.afterB) return false;
+      next.push(step.to);
+    }
+    frontier = next;
+  }
+  return true;
 }
 export function proposeLocal(
   m: LocalMemory,

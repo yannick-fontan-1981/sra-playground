@@ -1,4 +1,4 @@
-import { assessLocal, localCommand, newLocalMemory, observeLocal, proposeLocal, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
+import { assessLocal, demonstratedLimit, localCommand, newLocalMemory, observeLocal, proposeLocal, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
 import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
@@ -829,7 +829,7 @@ export function selectExperiment(
       && !m.frames?.active && !m.occupancy?.active && !m.territory?.active && !m.pending
       && !m.space.active && !m.equations.active && !m.condition && !m.projection.active && !m.delayed.active){
     const plan=proposeLocal(local,o,rows,true);
-    if(plan && (plan.controlRef || plan.siteC))return bindLocal(plan);
+    if(plan && demonstratedLimit(local,plan))return bindLocal(plan);
   }
   if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.terminalContact || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
@@ -840,7 +840,10 @@ export function selectExperiment(
   const cmd=established?experimentCommand( established ):null;
   const knownStep=cmd&&m.edges.some(e=>e.s===scene&&e.cmd===cmd&&e.stable);
   if(replaceable&&(knownStep||(!established&&late)||repeated>=Math.ceil(recent.length/2)&&recent.length>=4)){
-    if(local){const plan=proposeLocal(local,o,rows,true);if(plan)return bindLocal(plan);}
+    if(local && stalledLocal(local,o.frame_hash)){
+      const plan=proposeLocal(local,o,rows,true);
+      if(plan&&((late&&!established)||demonstratedLimit(local,plan)))return bindLocal(plan);
+    }
     const opportunity=offerFrame(m,o,rows,scene,available,'opportunity');
     if(opportunity)return opportunity;
     const activation=offerActivation(m,o,rows,scene,available);

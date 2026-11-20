@@ -3,6 +3,8 @@ import test from 'node:test';
 import type { NativeObservation } from '../src/logos-engine/v6-native-types.ts';
 import {
   assessLocal,
+  demonstratedLimit,
+  stalledLocal,
   newLocalMemory,
   nextLocalLevel,
   observeLocal,
@@ -132,4 +134,24 @@ test('refuting B preserves the confirmed A and allows another B at the retained 
       .matches
   );
   assert.ok(m.facts?.length);
+});
+
+
+test('a return only warrants an early experiment after prior transitions close the same space', () => {
+  const m = newLocalMemory();
+  for (let i = 0; i < 3; i++) {
+    observeLocal(m, observation('t'+i), observation('t'+(i+1)), scene(2,i).frame, scene(2,i+1).frame, ops[i]!);
+  }
+  const p = proposeLocal(m, observation('here'), scene(15,0).frame, true)!;
+  assert.ok(p);
+  assert.equal(demonstratedLimit(m,p),false);
+  const unchanged=scene(15,0).frame, ready=scene(15,2).frame;
+  observeLocal(m, observation('here'), observation('here'), unchanged, unchanged, p.b);
+  assert.equal(stalledLocal(m,'here'),false);
+  assert.equal(demonstratedLimit(m,p),true);
+  for(let k=0;k<3;k++)observeLocal(m,observation('here'),observation('here'),unchanged,unchanged,p.b);
+  assert.equal(stalledLocal(m,'here'),true);
+  observeLocal(m,observation('here'),observation('reachable'),unchanged,ready,'ACTION5');
+  assert.equal(demonstratedLimit(m,p),false);
+  assert.equal(stalledLocal(m,'reachable'),false);
 });
