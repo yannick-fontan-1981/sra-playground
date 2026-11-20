@@ -37,7 +37,7 @@ if (group === 'lower') {
       actor: e.actor,
     });
   }
-} else if (group === 'upper') {
+} else if (group === 'upper' || group === 'upper-motion') {
   for (const e of published.upperLevels) {
     if (!e.confirmed) throw Error('Unconfirmed source program');
     const seq = programs.niveaux_supérieurs
@@ -122,6 +122,91 @@ function record(s, forecast, y) {
   s.confirmed += Number(forecast && y);
   s.missed += Number(!forecast && y);
 }
+async function intermediate(c) {
+  const run = c.run,
+    seq = [...c.prefix, ...c.word, ...c.suffix];
+  const { openEntry, act, win } = sourceReplay(engine, programs, run);
+  const active = (b) => b && !win(b) && b.state !== 'GAME_OVER';
+  const poses = new Map();
+  async function parts(b) {
+    if (!active(b)) return {};
+    const k = hash(b);
+    if (!poses.has(k)) {
+      const o = await measureNativeObservation(
+        {
+          frame_rows: b.frame,
+          frame_hash: k,
+          level: 1,
+          levels_completed: 0,
+          state: b.state,
+          available_action_refs: b.availableActionIds.map((id) => 'ACTION' + id),
+        },
+        1
+      );
+      poses.set(
+        k,
+        Object.fromEntries(
+          o.entities
+            .filter((e) => !e.identity_ambiguous && e.area < (b.frame.length * b.frame[0].length) / 4)
+            .map((e) => [e.signature, e.position])
+        )
+      );
+    }
+    return poses.get(k);
+  }
+  let b = openEntry().b;
+  const path = [await parts(b)];
+  for (const k of seq) {
+    if (!active(b)) throw Error('Premature source win');
+    b = act(k);
+    path.push(await parts(b));
+  }
+  if (!win(b)) throw Error('Unverified sequence');
+  let best = null;
+  for (let i = 1; i < seq.length - 1; i++)
+    for (let depth = 1; depth <= Math.min(i, 4); depth++) {
+      const begin = i - depth,
+        from = path[begin],
+        before = path[i],
+        after = path[i + 1];
+      b = openEntry().b;
+      for (const k of seq.slice(0, begin)) b = act(k);
+      if (!b.availableActionIds.includes(Number(seq[i].split(':')[0].slice(6)))) continue;
+      const bare = await parts(act(seq[i]));
+      for (const [actor, pos] of Object.entries(before)) {
+        if (!from[actor] || !after[actor] || !bare[actor] || !dist(pos, after[actor])) continue;
+        const delta = after[actor].map((v, j) => v - pos[j]),
+          control = bare[actor].map((v, j) => v - from[actor][j]);
+        if (
+          delta.join() === control.join() ||
+          !Object.keys(before).some((peer) => peer !== actor && from[peer] && dist(before[peer], from[peer]))
+        )
+          continue;
+        const following =
+          i + 2 === seq.length ? 'WIN' : path[i + 2][actor]?.map((v, j) => v - after[actor][j]);
+        if (!following || (following !== 'WIN' && following.every((v) => !v))) continue;
+        const priority =
+          Number(!dist(from[actor], pos)) * 4 +
+          Number(!dist(from[actor], bare[actor])) * 2 +
+          Number(following === 'WIN');
+        if (!best || priority > best.priority)
+          best = {
+            priority,
+            run,
+            prefix: seq.slice(0, begin),
+            word: seq.slice(begin, i),
+            suffix: [seq[i]],
+            destination: after[actor].join(),
+            actor,
+            follow: { key: seq[i + 1], effect: following },
+            sameOrigin: !dist(from[actor], pos),
+            inactiveBare: !dist(from[actor], bare[actor]),
+          };
+      }
+    }
+  return best;
+}
+
 async function audit(c) {
   const { run, word, suffix, destination } = c;
   if (!GAME_CATALOG.some((g) => g.code === run.code)) throw Error('Not a source entry');
@@ -360,6 +445,18 @@ async function audit(c) {
         unseenImage: !samples.has(ready.key),
         unseenJoint: !knownJoint.has(j),
       };
+    if (p === selected && y && c.follow) {
+      // consequence left the source engine just after B.
+      let b = await prepare(p.w);
+      const landed = step(b.b, suffix[0]);
+      const before = (await positions(landed))[actor],
+        end = step(landed, c.follow.key);
+      const after = active(end) ? (await positions(end))[actor] : null;
+      selection.follow =
+        c.follow.effect === 'WIN'
+          ? !!end && win(end)
+          : !!before && !!after && after.every((v, i) => v - before[i] === c.follow.effect[i]);
+    }
     if (seen.has(ready.key)) continue;
     seen.add(ready.key);
     if (p.l) {
@@ -380,9 +477,30 @@ async function audit(c) {
         partners: primary.map((id) => ready.l.objects[id]),
       };
   }
+  if (selection?.works) {
+    const w = selection.word,
+      words = new Map();
+    for (let mask = 0; mask < (1 << w.length) - 1; mask++) {
+      const sub = w.filter((_, i) => mask & (1 << i));
+      words.set(sub.join('/'), sub);
+    }
+    const result = { count: words.size, unknown: 0, alsoWork: 0, shortest: null, bare: null };
+    for (const sub of words.values()) {
+      const ready = await prepare(sub),
+        y = ready ? await consequence(ready) : null;
+      if (!sub.length) result.bare = y;
+      if (y === null) result.unknown++;
+      if (y) {
+        result.alsoWork++;
+        if (!result.shortest || result.shortest.length > sub.length) result.shortest = sub;
+      }
+    }
+    selection.omissions = result;
+  }
   return {
     ...result,
     source: destination === 'WIN' ? 'official' : 'role displacement',
+    ...(c.follow ? { follow: c.follow, sameOrigin: c.sameOrigin, inactiveBare: c.inactiveBare } : {}),
     role: actor,
     primary,
     trainingWords: train.length,
@@ -401,7 +519,18 @@ async function audit(c) {
 }
 const [index, n] = shard.split('/').map(Number),
   results = [];
-for (const c of cases.filter((_, i) => i % n === index)) results.push(await audit(c));
+for (const c of cases.filter((_, i) => i % n === index)) {
+  const experiment = group === 'upper-motion' ? await intermediate(c) : c;
+  results.push(
+    experiment
+      ? await audit(experiment)
+      : {
+          code: c.run.code,
+          level: c.run.start,
+          excluded: 'no differential movement followed by another movement or victory',
+        }
+  );
+}
 await writeFile(output, JSON.stringify(results));
 console.log(
   JSON.stringify({ entries: results.length, modeled: results.filter((r) => r.models?.landmarks).length })
