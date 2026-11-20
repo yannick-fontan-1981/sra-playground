@@ -1,0 +1,2206 @@
+{
+  "frozen": {
+    "control": {
+      "tag": "sic-projected-affordances-source100-control-v1",
+      "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+      "files": 2401,
+      "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca"
+    },
+    "candidate": {
+      "tag": "sic-projected-affordances-source100-candidate-v18",
+      "sha": "411e364072db978da897df0375d48b4bfcaecc48",
+      "files": 2436,
+      "digest": "f7a4165514328d540ffa8e8c6999d834a742318c131e123282544e60e85b6b40"
+    }
+  },
+  "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "ss09Reserved": true,
+  "targetPreviouslyEvaluated": true,
+  "tests": {
+    "passed": 163,
+    "total": 164,
+    "typecheck": true,
+    "preExistingFailure": "oriented-cycle recharge optional walk array"
+  },
+  "autonomous": {
+    "original": {
+      "levels": 100,
+      "won": 52,
+      "changesFromV17": {
+        "PORT/1": false,
+        "SNAR/1": true,
+        "AR25/1": false,
+        "CLRS/1": false,
+        "ESCT/1": false
+      },
+      "territories": {
+        "plans": 122,
+        "actions": 326,
+        "withKnownLimit": 96,
+        "limitsTested": 24,
+        "displacementTests": 49,
+        "entries": 3,
+        "previouslyUnvisitedEntries": 3,
+        "uses": 3,
+        "entryNeedsPreparation": 3,
+        "limitsHeld": 14,
+        "placements": 19,
+        "official": 1
+      },
+      "kinds": {
+        "ordinary_limit": 26,
+        "select_and_move": 24,
+        "contact": 42,
+        "reopen_limit": 13,
+        "imagined_transport": 17
+      },
+      "entries": [
+        {
+          "code": "AMZE",
+          "level": 1,
+          "initial": "0859ffa1372ea6ac6d27ebb210802441bd8af406bafdba55073752f132375bb7",
+          "trajectory": "db4094d0ff20d649c2877073e36ae0aa7be871f4a140e53509627af3801dfd69",
+          "actions": 3,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 1,
+          "initial": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+          "trajectory": "34735c23d8869ce9fbbd9fefe28604f9f8f53efb49d3f1d8bf4f20d84639f16b",
+          "actions": 29,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "COLM",
+          "level": 1,
+          "initial": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+          "trajectory": "f93d2843bf298edc3e310edde770bf68d5da8a46763790bc4897b7e91e43a22b",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "DC22",
+          "level": 1,
+          "initial": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+          "trajectory": "0dc64d75e28bf3c81d66942f1574d9b72741b453485f207158381262d35a9552",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 10,
+            "actions": 41,
+            "withKnownLimit": 9,
+            "limitsTested": 1,
+            "displacementTests": 9,
+            "entries": 1,
+            "previouslyUnvisitedEntries": 1,
+            "uses": 1,
+            "entryNeedsPreparation": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "select_and_move": 9
+          },
+          "examples": [
+            {
+              "action": 11,
+              "kind": "ordinary_limit",
+              "stage": "challenge",
+              "from": [
+                10,
+                34
+              ],
+              "to": [
+                10,
+                32
+              ],
+              "home": 10,
+              "target": 4,
+              "foothold": [
+                10,
+                32
+              ],
+              "knownLimit": false,
+              "previouslyUnvisited": true,
+              "placed": false,
+              "withoutPreparation": [
+                10,
+                34
+              ],
+              "sameOrigin": false,
+              "dependent": true
+            }
+          ]
+        },
+        {
+          "code": "EVAS",
+          "level": 1,
+          "initial": "ceac639fe38e32deec9e52b3735a601e68b464736e3187d5644c2854fbfd3bc5",
+          "trajectory": "af6c7c4e88a7628f637a7aa7e2159823b27d8659c74864042c2ad51c92cda947",
+          "actions": 3,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GABA",
+          "level": 1,
+          "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+          "trajectory": "2c44613fd5e216435e33f51f592f66694cffb120b22a379bf193c22fa76c081c",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 1,
+          "initial": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+          "trajectory": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa",
+          "actions": 11,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "KA59",
+          "level": 1,
+          "initial": "a5391f47a4b5f63feb8af396ab4b0bbdd2f80a18a0f19ffe6f128765e9d75e2c",
+          "trajectory": "17e9347f1f6bb685ea5754b5aae9ebfb489f0d61f05a3676a358c36dd08ebd18",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 6,
+            "actions": 19,
+            "withKnownLimit": 5,
+            "limitsTested": 1,
+            "limitsHeld": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "contact": 5
+          },
+          "examples": []
+        },
+        {
+          "code": "LKEY",
+          "level": 1,
+          "initial": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+          "trajectory": "0cac5d97042e9c872058f7801757220da2f96e58ed879464bd51fbcbe0c0c5f5",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "MEMO",
+          "level": 1,
+          "initial": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+          "trajectory": "8f13c95fc20c81d06c23ab5eac5a867efacd67d4801b6e38e866c8144e9469af",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+          "trajectory": "228c7a558a5dc86228a5576889a447f2a119d5896ce47a041e036f3336c0bf9c",
+          "actions": 60,
+          "won": false,
+          "v17Won": true,
+          "territories": {
+            "plans": 12,
+            "actions": 40,
+            "withKnownLimit": 10,
+            "limitsTested": 2,
+            "limitsHeld": 2,
+            "displacementTests": 7,
+            "entries": 1,
+            "previouslyUnvisitedEntries": 1,
+            "uses": 1,
+            "entryNeedsPreparation": 1
+          },
+          "kinds": {
+            "ordinary_limit": 2,
+            "contact": 2,
+            "select_and_move": 8
+          },
+          "examples": [
+            {
+              "action": 16,
+              "kind": "contact",
+              "stage": "land",
+              "from": [
+                27,
+                15
+              ],
+              "to": [
+                43,
+                15
+              ],
+              "home": 53,
+              "target": 53,
+              "foothold": [
+                35,
+                19
+              ],
+              "knownLimit": true,
+              "previouslyUnvisited": true,
+              "placed": false,
+              "withoutPreparation": [
+                23,
+                11
+              ],
+              "sameOrigin": false,
+              "dependent": true
+            }
+          ]
+        },
+        {
+          "code": "REWI",
+          "level": 1,
+          "initial": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+          "trajectory": "8fe4da729b2019466756310c91195d48a8a440ef214822b859f13120d704e1d2",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SEQN",
+          "level": 1,
+          "initial": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+          "trajectory": "5283d0eab00c72914b5720848cfaa52b5586e52c632e4c8eb9639f4b9df5b2a1",
+          "actions": 4,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "initial": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+          "trajectory": "eb856cb60e7b2020e5bb6dff63ea9fe639c46aa298ee008c66e769cabc6dd515",
+          "actions": 21,
+          "won": true,
+          "v17Won": false,
+          "territories": {
+            "plans": 1,
+            "actions": 2,
+            "limitsTested": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "SYME",
+          "level": 1,
+          "initial": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+          "trajectory": "7e7a9f390451b705beac8689a7a20c396a6d1870888aa07c73bdc57e17dc8f86",
+          "actions": 9,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "TRCP",
+          "level": 1,
+          "initial": "03590df58a79831a29e72b892f3a529280a4eced2dd549b81c7710887a42bda2",
+          "trajectory": "ed6b7af03d912e48fd3ecf97e6da57752a394869850295a69e7fbd347cc94464",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "VOIS",
+          "level": 1,
+          "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+          "trajectory": "77ee5ae82db191709757b4d194f6bae6f91b3cc2c0732d1bf8404dd78266a099",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "AR25",
+          "level": 1,
+          "initial": "dcb73927160522c26e2655d31ead221e6da6aab818037d20388bbf46e9afa1b0",
+          "trajectory": "86a8115faf441737c63520068b5be542f01a133d0a562a8538c2a334b6e6d59b",
+          "actions": 60,
+          "won": false,
+          "v17Won": true,
+          "territories": {
+            "plans": 2,
+            "actions": 19,
+            "limitsTested": 2,
+            "entries": 1,
+            "previouslyUnvisitedEntries": 1,
+            "uses": 1,
+            "entryNeedsPreparation": 1
+          },
+          "kinds": {
+            "ordinary_limit": 2
+          },
+          "examples": [
+            {
+              "action": 36,
+              "kind": "ordinary_limit",
+              "stage": "challenge",
+              "from": [
+                27,
+                42
+              ],
+              "to": [
+                30,
+                42
+              ],
+              "home": 168,
+              "target": 163,
+              "foothold": [
+                30,
+                42
+              ],
+              "knownLimit": false,
+              "previouslyUnvisited": true,
+              "placed": false,
+              "withoutPreparation": [
+                27,
+                42
+              ],
+              "sameOrigin": false,
+              "dependent": true
+            }
+          ]
+        },
+        {
+          "code": "CAVA",
+          "level": 1,
+          "initial": "3a81cada09d4393d3485a246ad461ef1d6166729c0ac6be0de0c61333c2891a0",
+          "trajectory": "0fbbe16a8f1b47ec732708f4ab9132037bcc972efb781160f952d2143f34a1ad",
+          "actions": 7,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "COMB",
+          "level": 1,
+          "initial": "a188f019a6b99b2b0e8e6bdb65d91087423c62941d320a2b204edfcb1e1a17fa",
+          "trajectory": "20b99f9a68d710d8c7bc0927b2b8b9eecc20f6b7f05a8047181dfc9e03e09fdc",
+          "actions": 8,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "DICO",
+          "level": 1,
+          "initial": "4c66a07b55379fb40871c5ebf6ed4908fe63b83c977c44d48c75cd73cc13bb55",
+          "trajectory": "935fd2f68db9be830769323777f4ba80424a0c356ff25877816bc6d990acaad7",
+          "actions": 5,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "FITE",
+          "level": 1,
+          "initial": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+          "trajectory": "6996348f349912a277c9d4213e4a1881b60da633aa29cc360b738f57bb4a4526",
+          "actions": 14,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GARE",
+          "level": 1,
+          "initial": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+          "trajectory": "28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09",
+          "actions": 11,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GRIL",
+          "level": 1,
+          "initial": "586f549f819870203dd5c0e39249781c696f013f174149462967d1aeefcd224a",
+          "trajectory": "49a513dfb37eaa93918ae558e9f58e8805c02ba465d111877b1c5b9d49e4290e",
+          "actions": 5,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "KATA",
+          "level": 1,
+          "initial": "6b968a6e6ad21fd191e6e71b41ec2062fab66dd436551e5c7615bb8a262709de",
+          "trajectory": "b2abd07c1a647dbdc43dbdfe7d7145cfa88b4a32b7ae8fe4e9848d63be39612d",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "LOGI",
+          "level": 1,
+          "initial": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+          "trajectory": "3797729448d2e3d6d720ba051f04ca60f7f6edd592a791f45461226058f1bc4f",
+          "actions": 16,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "MIND",
+          "level": 1,
+          "initial": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+          "trajectory": "1e82fa2e0d1b964a097627688dd036be897704b7f48b02e86fafb2492b4d2ac1",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 1,
+          "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+          "trajectory": "2d4f52bd81c100ce13b0cafc0e2ee2561d106f0a78bef9b84468d3d4b3ef5682",
+          "actions": 6,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "RSWP",
+          "level": 1,
+          "initial": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+          "trajectory": "8bc5046f323ffa8de90799527dc0649afd76377fc5c3ffe1f5fb5df2e2519b94",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SERI",
+          "level": 1,
+          "initial": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+          "trajectory": "47020056254e1168b96146ab83a7b6fdea1987b5254bd4b12247cb9494c9c4d5",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SP80",
+          "level": 1,
+          "initial": "0ba719661c41cd3db3499afa4ec373d1ae79386e50c866e2487946b59a255b1b",
+          "trajectory": "d89092aa9089e65eadd9af2f48c73c2623c48c0827c62589c1cad8eaa4c7acc4",
+          "actions": 30,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "initial": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+          "trajectory": "2aa8a45b0298dc61204485df9e10a879a106b5c20c76b6974e966b0f1854e258",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "TRIA",
+          "level": 1,
+          "initial": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+          "trajectory": "082047a49ae38ab25f9c75a3d7023b41da3524a8631cbe83503176be2b9defe0",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "WA30",
+          "level": 1,
+          "initial": "22f3ccd4739a85cebbd807dc32cee300c3e43630d38a8422ccf48e81fba53e82",
+          "trajectory": "63d8387d1b7d8b1dbdc6e4f04b4c58c43e60398adb6607924ffbd6ab8a66d3a8",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "AS66",
+          "level": 1,
+          "initial": "39bddf2920c3e13f28141733944f4c45ff9b67f56c82a0069b7ae8064eeb01c6",
+          "trajectory": "3bd7435a1268a69b71790c464aedc14b7f723b56eebd882271781fe7f644aedb",
+          "actions": 15,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CD82",
+          "level": 1,
+          "initial": "824ef203a4308533d58fd0b7207d4bb4396f1ac1b6ed8bf4a5160259c94a6904",
+          "trajectory": "10cfd4ca1bd7a8fbd1ef29cd82b4c79f7724ef3a742cf0e0a40666657de739cd",
+          "actions": 9,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CONN",
+          "level": 1,
+          "initial": "8582db376241703619ffe1d10270b7cc526be874c62085c23b4f31e89979bee7",
+          "trajectory": "b1436664926e73c63184c7713966ec8cf3e5bd45a6b736356c4ed6f5b8d75f9e",
+          "actions": 24,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "DNOI",
+          "level": 1,
+          "initial": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+          "trajectory": "014592cae2a8177663fa4474781f23120894cac027a7feee97f62639a67d8cf9",
+          "actions": 3,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+          "trajectory": "d21605ffcf3b4854483982f7eb162efeca12314decb37e721d17e76e60d80563",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 1,
+          "initial": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+          "trajectory": "4edbfa3be4e3c1561f36786636de6ec9a88f3baca33b8c3fde532bc583ef1378",
+          "actions": 9,
+          "won": true,
+          "v17Won": true,
+          "territories": {
+            "plans": 2,
+            "actions": 2
+          },
+          "kinds": {
+            "ordinary_limit": 2
+          },
+          "examples": []
+        },
+        {
+          "code": "HANO",
+          "level": 1,
+          "initial": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+          "trajectory": "408b29ae198b9fb6c4cd85cff5958c67637634e7ace5c7207b1e5c7f7aac367e",
+          "actions": 6,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "KEYD",
+          "level": 1,
+          "initial": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+          "trajectory": "ea859a4fc7b187d306b38437f2e05d07118dd01b6ff5db1412a96142eeadd092",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 11,
+            "actions": 30,
+            "withKnownLimit": 10,
+            "limitsTested": 1,
+            "limitsHeld": 1,
+            "displacementTests": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "contact": 9,
+            "select_and_move": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "LP85",
+          "level": 1,
+          "initial": "10d339c4ff95d67f9c94ded838ab2080df929551e32ae1443ffa888cd580632a",
+          "trajectory": "4a8903f2a440dbfd102d5b33232a6b74741f7ea693d852251fd82110e824179e",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "MOTO",
+          "level": 1,
+          "initial": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+          "trajectory": "98a56abea338db79bc4866a2dfc57e255cb74902ce4528bf1f85685e29926a9b",
+          "actions": 10,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "R11L",
+          "level": 1,
+          "initial": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+          "trajectory": "5938498ae59c3b98a7b9de45d77b958980c34992acd866c4b42233d985fa77dd",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "S5I5",
+          "level": 1,
+          "initial": "0de899ef426dee32a5ae69f04d75484537ada1c8a01db97fc25b240227139335",
+          "trajectory": "f4fe920b29a16fae6fae8d9ca18c327a6403791fc0fb5c87fcaed39eaf0638ac",
+          "actions": 50,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SIGN",
+          "level": 1,
+          "initial": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+          "trajectory": "0e1986da9797d4f5cdc88c7d8811e8975446fb35f0c04d33b3baed33ee05e8c4",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 9,
+            "actions": 33,
+            "withKnownLimit": 8,
+            "limitsTested": 2,
+            "limitsHeld": 2,
+            "displacementTests": 5
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "reopen_limit": 3,
+            "select_and_move": 5
+          },
+          "examples": []
+        },
+        {
+          "code": "SPOR",
+          "level": 1,
+          "initial": "ef7046fff5e68e4fe5410037c13726829e2670eccd87b21574aa8de5d518cd1c",
+          "trajectory": "1c56c9bc869b580013d1f87205d1d160221db32767d8525bb98a48dab2eab345",
+          "actions": 18,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "THER",
+          "level": 1,
+          "initial": "e4949964e4d02658f8a3a275445fa1d2e2e46af5d370cf0269d20527e9215e54",
+          "trajectory": "f34dc125dead189376cba752f03e6eac52b461d07cecde551a69015b944ac03d",
+          "actions": 21,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "TU93",
+          "level": 1,
+          "initial": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+          "trajectory": "c8887f26436f1d7e4e42f22810e3ee40010f3aadaae87c7075263485385de8dd",
+          "actions": 50,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 15,
+            "actions": 22,
+            "withKnownLimit": 12,
+            "limitsTested": 4,
+            "limitsHeld": 3
+          },
+          "kinds": {
+            "ordinary_limit": 3,
+            "reopen_limit": 8,
+            "contact": 4
+          },
+          "examples": []
+        },
+        {
+          "code": "WEAV",
+          "level": 1,
+          "initial": "af1b67ae6a394974d223dc41ee8d488064f289215c74bcdb98b97163d42ae550",
+          "trajectory": "2a3b4107557f11aa4de8b7df36a9719ef9fe5482297b30f8847d11d58b4a93a3",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "BP35",
+          "level": 1,
+          "initial": "73ed3968e48e2ac7b6d4a41c2a408abeba6f9ce1c493ad03ce2dd512b0be55bd",
+          "trajectory": "75bbcaca769378205c776c721c6d8bff86a7722b759b7cb230c3ecf6b13acfa3",
+          "actions": 54,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CGWL",
+          "level": 1,
+          "initial": "5b9f513c36c7067d1ffb90e4c9771a8913b0d80a9fd8c47279f11f16b98b156a",
+          "trajectory": "90c7d9cfa3e5f71f0e059eea3a8a4b70f218bdef15be1623e6c39a79973d3f4f",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 11,
+            "actions": 23,
+            "withKnownLimit": 11,
+            "displacementTests": 12,
+            "placements": 12
+          },
+          "kinds": {
+            "imagined_transport": 7,
+            "contact": 4
+          },
+          "examples": []
+        },
+        {
+          "code": "CRAF",
+          "level": 1,
+          "initial": "2731a599e06fc2a4c77cbcabfd56c7435bb2460502797e671265a1197286578b",
+          "trajectory": "7a622ef75fa00a34b4aa0eff60970b914b2e5863ef0af15dcae6765b30d94c78",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "ELAS",
+          "level": 1,
+          "initial": "56f3647e10bd9638197258bdfccd3a6050cd3f80c781e70c0f28bb80f9be0c81",
+          "trajectory": "2119845733a0ef81f69633356411c9bfd91b3e746540095b50cd993b1aa673e6",
+          "actions": 16,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "FT09",
+          "level": 1,
+          "initial": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+          "trajectory": "0d88a1b9e8f9d5be658e9722a3c7dbc402b1d5d5f8476ce7a2ef5a1fd4541576",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GLOB",
+          "level": 1,
+          "initial": "ba5d996decc75763ca4b613ce00433341e5d95f6a656a487341aacbdd92f23ae",
+          "trajectory": "4b061a7f529ccbf63ceb927261b20f84899b1fe284bf4db6da4ce4e30a6eb398",
+          "actions": 9,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "HOLE",
+          "level": 1,
+          "initial": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+          "trajectory": "012c8aaf2cae6c42b84cff41bc39f11d4d9a76d61fdd2817e600c406ea372ebb",
+          "actions": 5,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "KLOT",
+          "level": 1,
+          "initial": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+          "trajectory": "7a14d9287db9d8e4a8459fa1ff51020ec6279e5112bed19efdb9ccfcfed66d99",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "LS19",
+          "level": 1,
+          "initial": "19e99dde912cee08a4af4335e108a6e015c69930f09e3187badbee1cfce79df0",
+          "trajectory": "873ad01cc34d5b61e4b7435c6da535142bb5a7c785a4a97d88d548b252313c6c",
+          "actions": 5,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "ONDE",
+          "level": 1,
+          "initial": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+          "trajectory": "ed596954104e490a2902ebed569251be05b10a68a53334cb5ef055156ea67e10",
+          "actions": 7,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "RE86",
+          "level": 1,
+          "initial": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f",
+          "trajectory": "4120dfb12d07a48ff1af32b50740e476836569bd2bcb138294a96cfa39a99489",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SB26",
+          "level": 1,
+          "initial": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+          "trajectory": "7844a7213971c8848a9c3c77340fee8313564c2ce765e3898a47437621662151",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SK48",
+          "level": 1,
+          "initial": "e4bbd31c5eaa4d7b7639cb3467234f506ef19f6221b357062f7f70a79936c8f2",
+          "trajectory": "a4d515e609096005a3b0a40a397ccfb9e7f51f312367725d0b1c7a206fb60a36",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "STCK",
+          "level": 1,
+          "initial": "0aff2f0878f2054d021b294f4972e1450ef08479ba80af7cca138998bc341521",
+          "trajectory": "f9726f143394f14c8e9b761ac54f0a956db11222209e899d938afcdb117e6b97",
+          "actions": 3,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "TICT",
+          "level": 1,
+          "initial": "a672cd7ff15e02d16aaaed5a5afaf7fe0e4c0e6577cda214e9edeb950d15a6ae",
+          "trajectory": "a13948626cced0e76c6a47a536754b4ec9fa79743509f1f51eb86b494d75ea1b",
+          "actions": 5,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "UPST",
+          "level": 1,
+          "initial": "97ddaef0e9538cf50e870eac5cda28e075fdc130423b1690323931649dd648a4",
+          "trajectory": "6f99a32adbe04ab3cf551d9dbf82d8ce7df839b35dfee3099480b5b6e7641b60",
+          "actions": 30,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "ZIPP",
+          "level": 1,
+          "initial": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+          "trajectory": "7b9ba98318f6a0ebece3b0b4db52611dc802056b26779ff7c3b2c2135d69d561",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CASC",
+          "level": 1,
+          "initial": "8c751a15869573d10359498d60bf0d9b344fbdbb71ecf05056fa864ae313a0b1",
+          "trajectory": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8",
+          "actions": 6,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CLRS",
+          "level": 1,
+          "initial": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+          "trajectory": "e7156a80ca9d00fa7051111be9c6cb36ca9f4136316899345eeee5208c65f106",
+          "actions": 36,
+          "won": false,
+          "v17Won": true,
+          "territories": {
+            "plans": 2,
+            "actions": 13,
+            "limitsTested": 2
+          },
+          "kinds": {
+            "ordinary_limit": 2
+          },
+          "examples": []
+        },
+        {
+          "code": "CWSE",
+          "level": 1,
+          "initial": "14b234e86cb071c9873aa3c65eb8cc12680afca61839eb31eccd404d5671af8f",
+          "trajectory": "04ac98078024c8e331ffa240036253203a00dcc0c88893084ba6c928bf0d86fb",
+          "actions": 6,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "ESCT",
+          "level": 1,
+          "initial": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+          "trajectory": "e41c06d87c6cfbacb6af8910a298cec62c1827c2a854f861bc41715e736304f3",
+          "actions": 60,
+          "won": false,
+          "v17Won": true,
+          "territories": {
+            "plans": 21,
+            "actions": 31,
+            "withKnownLimit": 18,
+            "limitsTested": 1,
+            "displacementTests": 14,
+            "placements": 7
+          },
+          "kinds": {
+            "ordinary_limit": 3,
+            "contact": 8,
+            "imagined_transport": 10
+          },
+          "examples": []
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "initial": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+          "trajectory": "2ecce9e23b0f2d0e143a75f48e9da8a9cc51beddbd7b11f5c40acf2b82a25960",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GMAP",
+          "level": 1,
+          "initial": "2bcae799f4729d870ad808e3c67aabf045f134537ae6f43086139088b9bbcef7",
+          "trajectory": "2965646b168ce1b7f5b9723472b246d71d61d09e1782ba63c58793fa3ca11ef3",
+          "actions": 5,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "HPDL",
+          "level": 1,
+          "initial": "a736549b36c7d3a0374e9634ba3694317e060824f7863219344ea69c4a141586",
+          "trajectory": "b53d1e97bb943284ec2969334245d6bba994f0647dc3aac4106ede8e423c4b0b",
+          "actions": 7,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "LF52",
+          "level": 1,
+          "initial": "8c3509a81bc0b33cdcadefd63b15f8d8259dcfc4f6f12c00a1ff598d849bc4ff",
+          "trajectory": "136c6a7cff7e921d7610a153d89bf4320d4e0bc5d2f384b95053d7ec82a963a4",
+          "actions": 31,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "LS20",
+          "level": 1,
+          "initial": "f530cf6adb4a6d0fe87baa072ecf62be621169f9ef3b0baf09539904c5f4220f",
+          "trajectory": "129e3b9c2b2d988ee5bcbfbe93edc6bf1516b34e4942f06be9b9577db9fe86db",
+          "actions": 22,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "PIPE",
+          "level": 1,
+          "initial": "cc2da57812c48d52f01a6a481ab614622744023eca0d9786e1f8294e63e9adfd",
+          "trajectory": "9537f4eff9c22c027b3376d3a93cf17b4eb40cbbcb908ddecf23691b0d277c0a",
+          "actions": 4,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "RECR",
+          "level": 1,
+          "initial": "9c659d0462f191ba93ee6aa1bb8c433cdca6d890e4f69b81d28b7fa31325ff79",
+          "trajectory": "0c70c2e4be3f093b06a78b8b6bc9aa1724f5a9faaf826143c6d620c3029325a8",
+          "actions": 3,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SC25",
+          "level": 1,
+          "initial": "518653148c1631c7757a723e0e9f144e62e09fce58cdd5648881c2a8b4c8211c",
+          "trajectory": "b6f368973d4616b4cf6ddb47406d4ccfc6804c44b96c8ec7d6a01eb911206d69",
+          "actions": 17,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "initial": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+          "trajectory": "4cfc2df7655bf1fc3ce3d2377699b36dda604e5556e67d451bf5ad431abb664c",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 2,
+            "actions": 6,
+            "limitsTested": 2
+          },
+          "kinds": {
+            "ordinary_limit": 2
+          },
+          "examples": []
+        },
+        {
+          "code": "SU15",
+          "level": 1,
+          "initial": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+          "trajectory": "cd9d227f90f78b32708557488ab320003a7c6f9cd6d2ed50b144908ed53725db",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "TN36",
+          "level": 1,
+          "initial": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+          "trajectory": "971d834993630567638eb306e338fea3ad759100fa5401c5f767b7ce82ec6ab5",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "VALV",
+          "level": 1,
+          "initial": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+          "trajectory": "ae953580daeb85198af62abb5833f0d6288d757913fbf7ea1b8fd045e5bd3ece",
+          "actions": 25,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CATL",
+          "level": 1,
+          "initial": "645b3c0a4e06f24412f2c54de3ba3c15269956e85b62fa87778d892afa269152",
+          "trajectory": "7d52d817584ee80c6a9228ec50c442c86f2a695bf11c020b56a9926b3df29996",
+          "actions": 8,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CN04",
+          "level": 1,
+          "initial": "76e9c99bc22f6b778aa1edd6bf938de351aedb10016b72f95bb67d75490ba0e7",
+          "trajectory": "2ca5cca4d493d40e38003380887a1cb178c887d645fdde548434b2a37b708205",
+          "actions": 18,
+          "won": true,
+          "v17Won": true,
+          "territories": {
+            "plans": 1,
+            "actions": 3,
+            "official": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "DAME",
+          "level": 1,
+          "initial": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+          "trajectory": "0d98866cbdcccd4315e7e595cfc6a83e72fa165bc7820883217dde76905be4cf",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "ETAG",
+          "level": 1,
+          "initial": "bf64cd6cbf5bc15a9b00f0270ceb7ce53217119e180463a4307d97f0c9c9fc2a",
+          "trajectory": "aa700e5390a4f5f7932e52406f40aafdf7ee02235d19ec3c7f6a815413a486c7",
+          "actions": 10,
+          "won": true,
+          "v17Won": true,
+          "territories": {
+            "plans": 3,
+            "actions": 3,
+            "limitsTested": 3,
+            "limitsHeld": 3
+          },
+          "kinds": {
+            "ordinary_limit": 3
+          },
+          "examples": []
+        },
+        {
+          "code": "G50T",
+          "level": 1,
+          "initial": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+          "trajectory": "9e0a74d79b9051ea8a1205498c9d3437e9630bfce1417e68595c6588fc804e37",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 12,
+            "actions": 35,
+            "withKnownLimit": 11,
+            "limitsTested": 1,
+            "limitsHeld": 1,
+            "displacementTests": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "contact": 10,
+            "select_and_move": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "GORI",
+          "level": 1,
+          "initial": "b7789fb9ae19a319ec1ea7fc4a2b5d1c2032885c185218e4bdcb3f93bf61207c",
+          "trajectory": "df11bb6c94d9325a9a689a254ef621916f1c5277cb0dd7ad598e96437bf31242",
+          "actions": 15,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "ISOS",
+          "level": 1,
+          "initial": "2213b32effda75e66db7f38caf14b276feafbd547a28086089e6000a114ffabe",
+          "trajectory": "cfa123ebda88519e2a5678023784a2449be6381ccec41e40b4ade48ef515d39a",
+          "actions": 3,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "LIFE",
+          "level": 1,
+          "initial": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+          "trajectory": "2b9779ce96977cfff637d7eec694c362f45017d98677b243a48d4b6754e675cb",
+          "actions": 26,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "M0R0",
+          "level": 1,
+          "initial": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+          "trajectory": "d797b8ea77f1ad2aded763aaa75cc0bf10cf70209ff6f4e68c4dfce43c50f526",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 1,
+          "initial": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+          "trajectory": "51740efcc751d7acf60cec630c85abc13e89b6b1682848813c4cdbb40563b426",
+          "actions": 58,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "REGN",
+          "level": 1,
+          "initial": "47aa13d6af55af3e0efd065ed7eacc0793512ef6c920614ef326caa1d92f6662",
+          "trajectory": "b00a56adad8180b9427c0ca84381383b025d051ab96a5c8ec1e9f01a1090c26c",
+          "actions": 2,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SELE",
+          "level": 1,
+          "initial": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+          "trajectory": "c4505af8171c7fba460b476ddfb9cd45ac417b6a76d8f0517853521494167df6",
+          "actions": 30,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SMLP",
+          "level": 1,
+          "initial": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+          "trajectory": "1c62c2817b7d6b178b398133cfab7950bd5a15c7f545d14fc8502e7ba921faa4",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "SWCH",
+          "level": 1,
+          "initial": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+          "trajectory": "e19e2b6b6afae2124f78673fa91b71cd3418526c149c9bc801236be5e2581482",
+          "actions": 60,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 2,
+            "actions": 4,
+            "withKnownLimit": 2,
+            "limitsTested": 1,
+            "limitsHeld": 1
+          },
+          "kinds": {
+            "reopen_limit": 2
+          },
+          "examples": []
+        },
+        {
+          "code": "TR87",
+          "level": 1,
+          "initial": "bf60e2953965adca1444960d2bf267bab440c2d18234c0a245ce214ea0982174",
+          "trajectory": "180c353235d77dc3ad6fc9e5ab2a2a4d361c51b5357a1bd1a59665f66e055963",
+          "actions": 22,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "VC33",
+          "level": 1,
+          "initial": "fdde551e3fd269f62e14eb380d2244aefb8f8230f3af72741a2d89acbf1fe414",
+          "trajectory": "76433c16abc196211b8ae26ce17d86b0076a06b6dba8868b67d6fc57ce79196d",
+          "actions": 50,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        }
+      ]
+    },
+    "sevenUpper": {
+      "levels": 18,
+      "won": 6,
+      "changesFromV17": {
+        "GIGO/2": false,
+        "POLA/3": false
+      },
+      "territories": {
+        "plans": 51,
+        "actions": 113,
+        "withKnownLimit": 12,
+        "displacementTests": 19,
+        "placements": 3,
+        "limitsTested": 1,
+        "limitsHeld": 1
+      },
+      "kinds": {
+        "contact": 7,
+        "ordinary_limit": 17,
+        "imagined_transport": 9,
+        "select_and_move": 18
+      },
+      "entries": [
+        {
+          "code": "CWSE",
+          "level": 2,
+          "initial": "b45351fb835ead51df61a751f17a154dd3b484720e3ae0258bf8a2f0ba25930c",
+          "trajectory": "bc5510b3099fc2183726da7fc0954a9c2c022f6ec987eb77e7c0599767fd4317",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 1,
+            "actions": 1,
+            "withKnownLimit": 1
+          },
+          "kinds": {
+            "contact": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "GARE",
+          "level": 2,
+          "initial": "c87e72bce526c6fe7af25084005bc6ecce41c25896824f00810267c418b05d82",
+          "trajectory": "851a6b841b6a025cd590612c0cb80d771a18cc2a1bca1fa3b867d0d65caf91c3",
+          "actions": 13,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 2,
+          "initial": "4efd450236b14467a56ec27214c23529f7bd981e935b590875ca4cad91962d8a",
+          "trajectory": "4710ac56adcbfaa152e244c9817d318b389296f9c884ec94213080d972564125",
+          "actions": 120,
+          "won": false,
+          "v17Won": true,
+          "territories": {
+            "plans": 8,
+            "actions": 9,
+            "withKnownLimit": 7,
+            "displacementTests": 7,
+            "placements": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "imagined_transport": 7
+          },
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "initial": "35bbf85c6e247ff4dc855af310d24b9712eb7857b53cff5edae7da98848c954f",
+          "trajectory": "1d2be2d2102de93d91ad8caf29b77a1f30fd6353fe75a2303c69974dce7fa9ea",
+          "actions": 30,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 2,
+          "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "trajectory": "328737d80898650274c2f099e35a17364f66a04a7dceffda125d44dd702bae47",
+          "actions": 10,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 2,
+          "initial": "0381adcb6fd6155f03f43bd6350b9e19fa5ff373e8dadca077b7354c2d3fceac",
+          "trajectory": "8cf9333fd350af349cd485819b3de4ba91fe7d922924f94f6bebee357af6f5ea",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "initial": "d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+          "trajectory": "9190c5812f22ef7e442ed1c6c5774ab635fd9cabc2dba45b5ef8edd9258bf483",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 14,
+            "actions": 57,
+            "displacementTests": 10,
+            "placements": 1
+          },
+          "kinds": {
+            "ordinary_limit": 2,
+            "select_and_move": 12
+          },
+          "examples": []
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "initial": "a88fda3980a83ded6676f0849877da360916aae88373f5b27a8b86f1266d4bda",
+          "trajectory": "9888eebed3c1cd4f14decbbf9bce3ef8b0277c88361215cce1514c153af96062",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 3,
+          "initial": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+          "trajectory": "c312046a9541dab2edabb08058e8f34671bb035417e435b6b6572a84b22076d1",
+          "actions": 13,
+          "won": true,
+          "v17Won": true,
+          "territories": {
+            "plans": 1,
+            "actions": 1
+          },
+          "kinds": {
+            "ordinary_limit": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+          "trajectory": "5b142f859bd917ccb4a4fa5653d525bac8e551dafc9444362fa0c86f6444517e",
+          "actions": 52,
+          "won": true,
+          "v17Won": true,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 3,
+          "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "trajectory": "ca97a3a3bd9c7e7b8399fc547d87d05b03bc34c655cd4b9de080aa3a744cb275",
+          "actions": 120,
+          "won": false,
+          "v17Won": true,
+          "territories": {
+            "plans": 4,
+            "actions": 7,
+            "withKnownLimit": 3
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "contact": 3
+          },
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "initial": "ce1fda4d59a5bad94c080babf49f5ee077fe767b78d9e18ebc5496c6b5513f5c",
+          "trajectory": "7b913f017447a719d9eb694a9231b4eb1245a3f2128cc59075f779fcc0d01104",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 4,
+          "initial": "b203d5554e4b0e600aaf268d39c5d4ff05f51e29eb3a34e1ba76acc6b005389c",
+          "trajectory": "31cb819d52c93ff56e47a1fd3215f6e3a6f17dd8216ee6d56e37de92b0bac189",
+          "actions": 15,
+          "won": true,
+          "v17Won": true,
+          "territories": {
+            "plans": 2,
+            "actions": 2
+          },
+          "kinds": {
+            "ordinary_limit": 1,
+            "select_and_move": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "initial": "3ef9d5b1501678728b4e4f78fb5ac9153f4c912631c5f8581cd9ac0055ec2819",
+          "trajectory": "ea3cf8cf637283bf28ba31fbeed41688c02e32b4afb27094748f2380c73065a9",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 3,
+            "actions": 3,
+            "withKnownLimit": 1,
+            "limitsTested": 1,
+            "limitsHeld": 1,
+            "displacementTests": 1
+          },
+          "kinds": {
+            "ordinary_limit": 2,
+            "imagined_transport": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 4,
+          "initial": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5",
+          "trajectory": "7b10ca13f467e81ec4d6144708742a526867dd648709e4bb0b35ccbd1c7c324c",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "initial": "c604a060286c7e40b44997ae13b1073ded87415d0e588cee82a987c02ff1d979",
+          "trajectory": "6377604b2b5bca3ecab82d2e2f98f150cbbcdb5a2dd4d802a1f0c8510f57477a",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 12,
+            "actions": 27,
+            "displacementTests": 1,
+            "placements": 1
+          },
+          "kinds": {
+            "ordinary_limit": 6,
+            "select_and_move": 5,
+            "imagined_transport": 1
+          },
+          "examples": []
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "initial": "1569271335c09e35750e90a45210ccbc337e632d5af4a7f076701f5dd440c413",
+          "trajectory": "ea92c3c48b20cb04d7780b12bccb165e2cd250042e7fa7e84bce82cb0ddb95ba",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {
+            "plans": 6,
+            "actions": 6
+          },
+          "kinds": {
+            "ordinary_limit": 3,
+            "contact": 3
+          },
+          "examples": []
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "initial": "b593a73ddce4884f068c3f7f530b5945ca6ee2174b2c8ce6870dd4283d7fb4f0",
+          "trajectory": "d2c87907de55f04efab4d097c593f7c58e0e43de139ff97a8bd85c4c9720a1a2",
+          "actions": 120,
+          "won": false,
+          "v17Won": false,
+          "territories": {},
+          "kinds": {},
+          "examples": []
+        }
+      ]
+    }
+  },
+  "custom": {
+    "SS01": {
+      "control": {
+        "actions": 654,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "233aae022fa1a1aa8a04b346980daf930642642b0facdfc4949aaf4973d422fe",
+        "won": false,
+        "final": "NOT_FINISHED",
+        "level": 2,
+        "official": 0,
+        "reason": "level_active_time_budget",
+        "distinctImages": 155,
+        "crossings": 0,
+        "measuredMoves": 88,
+        "territories": {
+          "plans": 0,
+          "actions": 0,
+          "withKnownLimit": 0,
+          "limitsTested": 0,
+          "limitsHeld": 0,
+          "displacementTests": 0,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 0,
+        "kinds": {},
+        "geometry": {},
+        "examples": [],
+        "activations": {
+          "tested": 0,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "candidate": {
+        "actions": 592,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "4b656ce70a234e8e0a240bf71c394c8cb20c6ffd7bd9fc8fdeead650da4bbbe7",
+        "won": false,
+        "final": "NOT_FINISHED",
+        "level": 2,
+        "official": 0,
+        "reason": "level_active_time_budget",
+        "distinctImages": 95,
+        "crossings": 0,
+        "measuredMoves": 83,
+        "territories": {
+          "plans": 16,
+          "actions": 25,
+          "withKnownLimit": 6,
+          "limitsTested": 1,
+          "limitsHeld": 0,
+          "displacementTests": 8,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 3,
+        "kinds": {
+          "ordinary_limit": 2,
+          "contact": 6,
+          "select_and_move": 8
+        },
+        "geometry": {
+          "substrate": 10,
+          "failed_stroke": 6
+        },
+        "examples": [],
+        "activations": {
+          "tested": 5,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "commonBudget": 592,
+      "imagesAtCommonBudget": {
+        "control": 145,
+        "candidate": 95
+      }
+    },
+    "SS06": {
+      "control": {
+        "actions": 566,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "ec0c1e15a6e2958727c0d997849ec90db357208aac530717bce7b692e19709b3",
+        "won": false,
+        "final": "NOT_FINISHED",
+        "level": 2,
+        "official": 0,
+        "reason": "level_active_time_budget",
+        "distinctImages": 40,
+        "crossings": 0,
+        "measuredMoves": 7,
+        "territories": {
+          "plans": 0,
+          "actions": 0,
+          "withKnownLimit": 0,
+          "limitsTested": 0,
+          "limitsHeld": 0,
+          "displacementTests": 0,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 0,
+        "kinds": {},
+        "geometry": {},
+        "examples": [],
+        "activations": {
+          "tested": 0,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "candidate": {
+        "actions": 532,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "05e3f814c13e9ba9f2d84823e01060ee7d196ccec0b5479fa28c12fb0db91716",
+        "won": false,
+        "final": "NOT_FINISHED",
+        "level": 2,
+        "official": 0,
+        "reason": "level_active_time_budget",
+        "distinctImages": 67,
+        "crossings": 0,
+        "measuredMoves": 19,
+        "territories": {
+          "plans": 0,
+          "actions": 0,
+          "withKnownLimit": 0,
+          "limitsTested": 0,
+          "limitsHeld": 0,
+          "displacementTests": 0,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 0,
+        "kinds": {},
+        "geometry": {},
+        "examples": [],
+        "activations": {
+          "tested": 0,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "commonBudget": 532,
+      "imagesAtCommonBudget": {
+        "control": 39,
+        "candidate": 67
+      }
+    },
+    "SS07": {
+      "control": {
+        "actions": 5,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "won": false,
+        "final": "GAME_OVER",
+        "level": 2,
+        "official": 0,
+        "reason": "native_game_over",
+        "distinctImages": 5,
+        "crossings": 0,
+        "measuredMoves": 0,
+        "territories": {
+          "plans": 0,
+          "actions": 0,
+          "withKnownLimit": 0,
+          "limitsTested": 0,
+          "limitsHeld": 0,
+          "displacementTests": 0,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 0,
+        "kinds": {},
+        "geometry": {},
+        "examples": [],
+        "activations": {
+          "tested": 0,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "candidate": {
+        "actions": 5,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "won": false,
+        "final": "GAME_OVER",
+        "level": 2,
+        "official": 0,
+        "reason": "native_game_over",
+        "distinctImages": 5,
+        "crossings": 0,
+        "measuredMoves": 0,
+        "territories": {
+          "plans": 0,
+          "actions": 0,
+          "withKnownLimit": 0,
+          "limitsTested": 0,
+          "limitsHeld": 0,
+          "displacementTests": 0,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 0,
+        "kinds": {},
+        "geometry": {},
+        "examples": [],
+        "activations": {
+          "tested": 0,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "commonBudget": 5,
+      "imagesAtCommonBudget": {
+        "control": 5,
+        "candidate": 5
+      }
+    },
+    "SS08": {
+      "control": {
+        "actions": 715,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "a0fdcd28070e694359d9ede2f6e1c18e0f6d544c15effaf6bac7bc7a4d12a903",
+        "won": false,
+        "final": "NOT_FINISHED",
+        "level": 2,
+        "official": 0,
+        "reason": "level_active_time_budget",
+        "distinctImages": 280,
+        "crossings": 130,
+        "measuredMoves": 648,
+        "territories": {
+          "plans": 0,
+          "actions": 0,
+          "withKnownLimit": 0,
+          "limitsTested": 0,
+          "limitsHeld": 0,
+          "displacementTests": 0,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 0,
+        "kinds": {},
+        "geometry": {},
+        "examples": [],
+        "activations": {
+          "tested": 0,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "candidate": {
+        "actions": 898,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "f85c4951e75ea59da246a44e6aabb98dc20a169af47b346a8838fe4f168936f8",
+        "won": false,
+        "final": "NOT_FINISHED",
+        "level": 2,
+        "official": 0,
+        "reason": "level_active_time_budget",
+        "distinctImages": 29,
+        "crossings": 0,
+        "measuredMoves": 707,
+        "territories": {
+          "plans": 241,
+          "actions": 409,
+          "withKnownLimit": 129,
+          "limitsTested": 20,
+          "limitsHeld": 8,
+          "displacementTests": 50,
+          "placements": 0,
+          "reopened": 0,
+          "entries": 0,
+          "previouslyUnvisitedEntries": 0,
+          "uses": 0,
+          "entryNeedsPreparation": 0,
+          "preparedAtSamePose": 0,
+          "official": 0
+        },
+        "goals": 21,
+        "kinds": {
+          "ordinary_limit": 18,
+          "reopen_limit": 14,
+          "contact": 145,
+          "select_and_move": 37,
+          "relocate": 27
+        },
+        "geometry": {
+          "substrate": 241
+        },
+        "examples": [],
+        "activations": {
+          "tested": 18,
+          "motion": 0,
+          "unlocked": 0,
+          "changed": 0,
+          "reuses": 0,
+          "exactReuses": 0,
+          "controlledReuses": 0,
+          "win": 0,
+          "necessaryWin": 0
+        }
+      },
+      "commonBudget": 715,
+      "imagesAtCommonBudget": {
+        "control": 280,
+        "candidate": 29
+      }
+    }
+  }
+}
