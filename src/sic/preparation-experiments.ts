@@ -1,3 +1,4 @@
+import {newOccupancyMemory,occupancyView,observePoses,offerOccupancy,finishOccupancy,type OccupancyMemory,type OccupancyTrial} from './occupancy-programs.ts';
 import {newTerritorialMemory,offerTerritory,recordTerritory,type TerritorialMemory,type TerritorialTrial} from './pursue-territory.ts';
 import {offerActivation,recordActivation,type Activation,type ActivationReceipt} from './latent-response.ts';
 import {
@@ -92,6 +93,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'occupancy'
     | 'territorialAccess'
     | 'activateResponse'
     | 'inverseFrame'
@@ -142,6 +144,7 @@ export type Experiment = {
   frame?:FrameTrial;
   activation?:Activation;
   territorial?:TerritorialTrial;
+  occupancy?:OccupancyTrial;
   instrument?:SiteTrial;
   retained?:RetainedTrial;
   transport?:ContextTrial;
@@ -182,6 +185,7 @@ export type Outcome = {
   frame?:Record<string,unknown>;
   activation?:Record<string,unknown>;
   territorial?:Record<string,unknown>;
+  occupancy?:Record<string,unknown>;
   instrument?:Record<string,unknown>;
   retained?:Record<string,unknown>;
   transport?:Record<string,unknown>;
@@ -191,6 +195,7 @@ export type Outcome = {
 export type Memory = {
   activations?:ActivationReceipt[];
   territory?:TerritorialMemory;
+  occupancy?:OccupancyMemory;
   epoch: number;
   delayed: DelayedMemory;
   frontier:FrontierMemory;
@@ -414,6 +419,9 @@ function selectEstablishedExperiment(
   const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
+  if(rows&&m.occupancy&&(m.occupancy.active||free&&!m.territory?.active&&m.recurrences>0)){
+    const plan=offerOccupancy(m.occupancy,s,available,rows[0]!.length,rows.length);if(plan)return plan;
+  }
   if(rows&&(m.territory?.active||m.territory?.words?.primed?.ref===o.revision||m.territory?.words?.resume===o.revision||free)){
     const intent=offerTerritory(m,o,rows,s,available);if(intent)return intent;
   }
@@ -749,7 +757,7 @@ export function selectExperiment(
   m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
 ): Experiment | null {
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if (!rows || established?.frame || established?.territorial) return established;
+  if (!rows || established?.frame || established?.territorial || established?.occupancy) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
   const recent=m.delayed.history.slice(-8);
@@ -781,6 +789,10 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  const occupancy=m.occupancy??=newOccupancyMemory();
+  if(!x?.occupancy)occupancy.active=null;
+  if(b.state===a.state&&b.level_epoch===a.level_epoch&&a.levels_completed===b.levels_completed)
+    observePoses(occupancy,s,t,occupancyView(b,rows),occupancyView(a,next),op,a.revision);
   m.instrument ??= newInstrumentMemory();
   if(!x?.instrument)m.instrument.active=null;
   m.frames??=newFrameMemory();
@@ -896,6 +908,11 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.occupancy){
+    const won=a.levels_completed>b.levels_completed||a.state==='WIN';
+    const detail=finishOccupancy(occupancy,x.occupancy,occupancyView(a,next),!won&&b.state===a.state&&b.level_epoch===a.level_epoch,won,a.revision);
+    return {...out,result:won?'occupancy_completion':detail.matched?'occupancy_confirmed':'occupancy_refuted',occupancy:detail};
+  }
   if(x.territorial){const {result,detail}=recordTerritory(m,x.territorial,b,a);return {...out,result,territorial:detail};}
   if(x.activation){const {result,detail}=recordActivation(m,x.activation,b,a);return {...out,result,activation:detail};}
   if(x.frame){const {result,detail}=recordFrame(m,x.frame,b,a);return {...out,result,frame:detail};}

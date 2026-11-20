@@ -25,6 +25,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  occupancy:'Test where a prepared part allows another part to arrive and act',
   territorialAccess:'Test an access to a region beyond the measured walking boundary',
   activateResponse:'Test what a command can move after another component was repositioned',
   inverseFrame:'Place a learned reference to reach a predicted destination and continue from it',
@@ -92,7 +93,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       if (!experiment) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : labels[phase],
@@ -161,6 +162,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
+        ...(experiment.occupancy ? {occupancyForecast:experiment.occupancy} : {}),
         ...(experiment.territorial ? {territoryForecast:experiment.territorial} : {}),
         ...(experiment.activation ? {activationForecast:experiment.activation} : {}),
         ...(experiment.frame ? {frameForecast:experiment.frame} : {}),
