@@ -206,6 +206,7 @@ async function audit(run) {
     swaps = { tested: tested.size, wrongOrigin, unknown, capability, layouts: [...layouts.values()] };
     swaps.validation = await qualifyExcursionLayouts({
       placement,
+      vocabulary: new Set([...actions(restore(begin)), ...placement]),
       tested,
       layouts: swaps.layouts,
       images,
