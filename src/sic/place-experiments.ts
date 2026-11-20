@@ -10,7 +10,14 @@ type Control = {
   deltas: Map<string, { sample: Sample; count: number }>;
   exchange: Map<string, { ref: number; offset: XY; support: number[]; reciprocal: boolean }>;
 };
-type Actor = { id: string; poses: Set<string>; ops: Map<string, Control>; stride: number; extent: XY };
+type Actor = {
+  id: string;
+  poses: Set<string>;
+  ops: Map<string, Control>;
+  stride: number;
+  extent: XY;
+  arrivals: Map<string, Map<string, { count: number; sample: Sample }>>;
+};
 type Target = { id: string; at: XY; extent: XY; nearest: number; signature: string; ambiguous: boolean };
 type Opening = {
   mover: string;
@@ -76,12 +83,14 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
         id,
         poses,
         ops: new Map(),
+        arrivals: new Map(),
         stride: Infinity,
         extent: [e.bbox[2] - e.bbox[0] + 1, e.bbox[3] - e.bbox[1] + 1],
       };
     });
   if (!actors.length) return null;
   const evidence = new Map<number, Edge>();
+  const incoming = new Map<number, Edge[]>();
   const states = new Map<number, Sites>();
   const mapAt = (s: number) => {
     let v = states.get(s);
@@ -93,6 +102,11 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
   };
   for (const e of stable) {
     evidence.set(e.s, e);
+    if (e.s !== e.t) {
+      const paths = incoming.get(e.t) ?? [];
+      paths.push(e);
+      incoming.set(e.t, paths);
+    }
     const before = mapAt(e.s),
       after = mapAt(e.t);
     for (const actor of actors) {
@@ -110,6 +124,11 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
       prior.push(sample);
       c.at.set(start, prior);
       if (!move) continue;
+      const ends = actor.arrivals.get(start) ?? new Map<string, { count: number; sample: Sample }>();
+      const endVote = ends.get(end) ?? { count: 0, sample };
+      endVote.count++;
+      ends.set(end, endVote);
+      actor.arrivals.set(start, ends);
       const dk = [move.dx, move.dy].join(),
         v = c.deltas.get(dk) ?? { sample, count: 0 };
       v.count++;
@@ -204,7 +223,8 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
     a: Actor,
     op: string,
     from: XY,
-    at: Sites
+    at: Sites,
+    reached?: number
   ): {
     p: Prediction;
     peer: string | null;
@@ -227,6 +247,51 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
         samples.some((s) => s.edge.anchors[b.id] && s.edge.anchors[b.id]!.at !== at.get(b.id))
       );
     const rebound = [...c.exchange.entries()].find(([peer]) => at.has(peer));
+    // The actor has moved from this place before, even if this input has never moved it.
+    // A changed preparation makes the alternative worth testing. A real control remains evidence.
+    if (!c.deltas.size && samples.length && !samples.some((s) => s.edge.s === reached)) {
+      const preparation =
+        reached === undefined
+          ? null
+          : incoming
+              .get(reached)
+              ?.find(
+                (edge) =>
+                  edge.anchors[a.id]?.at === from.join() &&
+                  edge.visibleAfter?.includes(a.id) &&
+                  !edge.effect.moves.some((v) => v.actor === a.id) &&
+                  samples.some((s) => s.edge.s === edge.s)
+              );
+      if (changed || preparation) {
+        const options = a.arrivals.get(from.join());
+        const other =
+          options &&
+          [...options.values()].sort((x, y) => y.count - x.count || x.sample.edge.ref - y.sample.edge.ref)[0]
+            ?.sample;
+        if (other) {
+          const control = samples.find((s) => s.edge.s === preparation?.s) ?? samples[0]!;
+          return {
+            p: {
+              role: a.id,
+              op,
+              from,
+              to: point(other.to),
+              ref: other.edge.ref,
+              alternative: {
+                observedWith: other.edge.cmd,
+                inactiveRef: control.edge.ref,
+                preparationRef: preparation?.ref ?? null,
+              },
+            },
+            peer: null,
+            samples,
+            changed: true,
+            bare: control,
+            known: false,
+          };
+        }
+      }
+    }
     let to: XY,
       ref: number,
       peer: string | null = null;
@@ -292,7 +357,7 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
     for (const a of actors) {
       const origin = at.get(a.id);
       if (!origin) continue;
-      const first = transfer(a, op, point(origin), at);
+      const first = transfer(a, op, point(origin), at, target);
       if (!first) continue;
       const land = first.p.to,
         moves = origin !== land.join();
@@ -324,7 +389,7 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
           const start = at.get(traveler.id);
           if (traveler === a || !start || projected.get(traveler.id) !== start) continue;
           const preparation = transfer(traveler, op, point(start), at);
-          if (preparation && preparation.p.to.join() !== start) continue;
+          if (preparation && !preparation.p.alternative && preparation.p.to.join() !== start) continue;
           for (const [trigger, c] of traveler.ops) {
             if (!c.exchange.has(a.id) && !c.at.has(start)) continue;
             const bare = transfer(traveler, trigger, point(start), at);
@@ -391,7 +456,14 @@ export function placeExperiments(m: Memory, live: NativeObservation, rows: Nativ
       if (!best || score > best.score)
         best = {
           score,
-          question: { target, probe: op, arrival: moves ? first.p : null, use, ...(after ? { after } : {}), place },
+          question: {
+            target,
+            probe: op,
+            arrival: moves ? first.p : null,
+            use,
+            ...(after ? { after } : {}),
+            place,
+          },
         };
     }
     return best;

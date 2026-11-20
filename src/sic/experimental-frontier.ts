@@ -3,7 +3,14 @@ import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-ty
 import type { Edge, Experiment, Memory } from './preparation-experiments.ts';
 import { add, point, type XY } from './access-terrain.ts';
 
-export type Prediction = { role: string; from: XY; to: XY; op: string; ref: number };
+export type Prediction = {
+  role: string;
+  from: XY;
+  to: XY;
+  op: string;
+  ref: number;
+  alternative?: { observedWith: string; inactiveRef: number; preparationRef: number | null };
+};
 export type FrontierQuestion = {
   place?: PlaceClaim;
   after?: Prediction;
@@ -90,6 +97,9 @@ export function selectFrontier(
           q.arrival?.ref,
           q.use?.ref,
           q.after?.ref,
+          ...[q.arrival, q.use, q.after].flatMap((p) =>
+            p?.alternative ? [p.alternative.inactiveRef, p.alternative.preparationRef ?? undefined] : []
+          ),
           q.place?.opening?.controlRef ?? undefined,
           q.place?.bare?.ref,
           q.place?.preparationRef ?? undefined,

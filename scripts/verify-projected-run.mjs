@@ -31,6 +31,7 @@ const witnessed = new Map();
 const states = new Set([run.initial.slice(0, 16)]);
 const frontier = { routes: 0, newProbes: 0, arrivals: 0, continuations: 0, subsequentUses: 0 };
 const openings = { proposed: 0, placements: 0, transported: 0, matchedControl: 0, subsequentUses: 0 };
+const alternatives = { tried: 0, moved: 0, exact: 0, matchedPreparation: 0 };
 const controlled = new Set();
 const counts = { issued: 0, observed: 0, verifiedLanding: 0, verifiedContinuation: 0, refuted: 0 };
 const cache = new Map();
@@ -147,9 +148,56 @@ for (const [i, cmd] of run.replayCommands.entries()) {
     }
     const opening = f.place?.opening;
     if (opening && event.phase === 'frontierProbe') openings.proposed++;
+    const expected =
+      event.phase === 'frontierProbe'
+        ? f.arrival
+        : event.phase === 'frontierUse'
+          ? f.use
+          : event.phase === 'frontierConsequence'
+            ? f.after
+            : null;
+    if (expected?.alternative) {
+      const a = expected.alternative,
+        role = expected.role,
+        origin = expected.from.join(),
+        destination = expected.to.join();
+      const prior = (ref) => {
+        const at = i + ref - event.revision;
+        if (!Number.isInteger(at) || at < 0 || at >= i) throw Error('Invalid alternative evidence at ' + i);
+        return run.replayCommands[at];
+      };
+      const donor = prior(expected.ref),
+        inactive = prior(a.inactiveRef);
+      if (
+        a.observedWith === action ||
+        commandKey(donor) !== a.observedWith ||
+        commandKey(inactive) !== action ||
+        location(cache.get(donor.from), role) !== origin ||
+        location(cache.get(donor.to), role) !== destination ||
+        location(cache.get(inactive.from), role) !== origin ||
+        location(cache.get(inactive.to), role) !== origin
+      )
+        throw Error('Unreproducible alternative at ' + i);
+      alternatives.tried++;
+      const actual = location(parts, role);
+      if (location(cache.get(cmd.from), role) === origin && actual && actual !== origin) {
+        alternatives.moved++;
+        if (actual === destination) alternatives.exact++;
+      }
+      if (a.preparationRef !== null) {
+        const setup = prior(a.preparationRef);
+        if (
+          setup.from !== inactive.from ||
+          setup.to !== cmd.from ||
+          setup.from === setup.to ||
+          location(cache.get(setup.from), role) !== origin ||
+          location(cache.get(setup.to), role) !== origin
+        )
+          throw Error('Unreproducible preparation for alternative at ' + i);
+        if (actual === destination) alternatives.matchedPreparation++;
+      }
+    }
     if (['arrival_verified', 'continuation_verified', 'subsequent_use_verified'].includes(event.result)) {
-      const expected =
-        event.phase === 'frontierConsequence' ? f.after : event.phase === 'frontierUse' ? f.use : f.arrival;
       if (action !== expected.op || location(parts, expected.role) !== expected.to.join())
         throw Error('False spatial prediction at ' + i);
       if (f.place && location(cache.get(cmd.from), expected.role) !== expected.from.join())
@@ -225,6 +273,7 @@ console.log(
     projections: counts,
     frontier,
     openings,
+    alternatives,
     delayed,
   })
 );

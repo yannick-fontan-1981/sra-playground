@@ -7,28 +7,34 @@ import { GAME_CATALOG } from '../src/games/catalog.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { initialMemory, recordExperiment, sceneKey } from '../src/sic/preparation-experiments.ts';
 import { selectFrontier } from '../src/sic/experimental-frontier.ts';
-const [environment, controlDir, directory, output, condition] = process.argv.slice(2);
+const [environment, controlDir, directory, output, condition, upperFile] = process.argv.slice(2);
 const { selectFrontier: control } = await import(
   pathToFileURL(join(resolve(controlDir), 'src/sic/experimental-frontier.ts'))
 );
 const engine = await sourceBackend(resolve(environment));
-const records = (
-  await Promise.all(
-    Array.from({ length: 8 }, (_, i) => readFile(join(directory, 'source-final-' + i + '.jsonl'), 'utf8'))
-  )
-).flatMap((t) => t.trim().split('\n').map(JSON.parse));
+const records = upperFile
+  ? (await readFile(upperFile, 'utf8')).trim().split('\n').map(JSON.parse)
+  : (
+      await Promise.all(
+        Array.from({ length: 8 }, (_, i) => readFile(join(directory, 'source-final-' + i + '.jsonl'), 'utf8'))
+      )
+    ).flatMap((t) => t.trim().split('\n').map(JSON.parse));
 if (
-  records
-    .map((r) => r.code)
-    .sort()
-    .join() !==
-  GAME_CATALOG.map((g) => g.code)
+  (upperFile ? records.map((r) => r.code + '/' + r.start) : records.map((r) => r.code)).sort().join() !==
+  (upperFile
+    ? ['CATR/3', 'CWSE/2', 'GARE/3', 'GIGO/5', 'GRAV/5', 'MOTO/2', 'POLA/5']
+    : GAME_CATALOG.map((g) => g.code)
+  )
     .sort()
     .join()
 )
   throw Error('Wrong cohort');
+const programs = upperFile
+  ? JSON.parse(
+      await readFile(new URL('../docs/architecture/sic-source-seven-programs.json', import.meta.url), 'utf8')
+    )
+  : null;
 const hash = (b) => createHash('sha256').update(JSON.stringify(b.frame)).digest('hex').slice(0, 16);
-const win = (b) => b.level > 1 || b.state === 'WIN';
 function action(cmd) {
   const [id, coords] = cmd.split(':');
   const [x, y] = coords ? coords.split(',').map(Number) : [];
@@ -56,6 +62,30 @@ function routes(m, s) {
 }
 const results = [];
 for (const g of records) {
+  const level = g.start ?? 1;
+  function loadEntry() {
+    let b = engine.dispatch({ type: 'load', code: g.code, level: g.sourcePrefixActions ? 1 : level });
+    if (g.sourcePrefixActions) {
+      let count = 0;
+      for (let i = 1; i < level; i++) {
+        if (b.level !== i) throw Error('Divergent lower level');
+        const seq =
+          i === 1
+            ? programs.niveau_1[g.code].suite_gagnante
+            : programs.niveaux_supérieurs.find((r) => r.code === g.code && r.l === i).seq;
+        for (const cmd of seq) {
+          b = act('ACTION' + cmd.replace('@', ':'));
+          count++;
+        }
+      }
+      if (count !== g.sourcePrefixActions) throw Error('Divergent lower-level program');
+    } else if (b.level !== level && b.canSelectLevel) {
+      b = engine.dispatch({ type: 'selectLevel', level });
+    }
+    if (b.level !== level || hash(b) !== g.initial.slice(0, 16)) throw Error('Divergent entry');
+    return b;
+  }
+  const win = (b) => b.level > level || b.state === 'WIN';
   const m = initialMemory(1),
     clicks = new Set(),
     knownPos = new Map(),
@@ -63,7 +93,7 @@ for (const g of records) {
     seenImages = new Set(),
     cache = new Map();
   let chosen = null;
-  let board = engine.dispatch({ type: 'load', code: g.code, level: 1 });
+  let board = loadEntry();
   async function obs(b, i) {
     const h = hash(b);
     if (!cache.has(h))
@@ -73,9 +103,9 @@ for (const g of records) {
           {
             frame_rows: b.frame,
             frame_hash: h,
-            level: b.level,
+            level: b.level - level + 1,
             state: b.state,
-            levels_completed: b.levelsCompleted,
+            levels_completed: b.levelsCompleted - g.initialCompleted,
             available_action_refs: b.availableActionIds.map((n) => 'ACTION' + n),
           },
           i
@@ -113,13 +143,15 @@ for (const g of records) {
     const s = m.scenes.indexOf(sceneKey(to)),
       ops = choices(board),
       paths = routes(m, s);
-    const baseline = control(m, s, ops, paths)?.frontier?.question,
+    const baseline = control(m, s, ops, paths, to, board.frame)?.frontier?.question,
       newer = selectFrontier(m, s, ops, paths, to, board.frame)?.frontier?.question;
     if (!baseline || !newer?.place) continue;
     if (
       condition === 'opening'
         ? !newer.place.opening
-        : baseline.target === newer.target && baseline.probe === newer.probe
+        : condition === 'alternative'
+          ? !newer.arrival?.alternative && !newer.use?.alternative
+          : baseline.target === newer.target && baseline.probe === newer.probe
     )
       continue;
     chosen = { i: i + 1, baseline, newer, paths };
@@ -127,7 +159,7 @@ for (const g of records) {
   }
   if (!chosen) continue;
   async function arm(q, omit = false) {
-    let b = engine.dispatch({ type: 'load', code: g.code, level: 1 });
+    let b = loadEntry();
     for (const s of g.steps.slice(0, chosen.i)) {
       b = engine.dispatch({ type: 'action', actionId: s.a, ...(s.a === 6 ? { data: s.data } : {}) });
       if (hash(b) !== s.to) throw Error('Unreplayable prefix');
@@ -211,9 +243,13 @@ for (const g of records) {
     bare = chosen.newer.place.opening ? await arm(chosen.newer, true) : null;
   results.push({
     game: g.code,
+    level,
     prefix: chosen.i,
     control: await arm(chosen.baseline),
     candidate: evaluated,
+    ...(condition === 'alternative'
+      ? { alternativeProgram: [chosen.newer.arrival, chosen.newer.use, chosen.newer.after ?? null] }
+      : {}),
     ...(bare
       ? {
           bare,

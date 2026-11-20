@@ -13,7 +13,9 @@ const word = src.niveaux_supérieurs.find((r) => r.code === code && r.l === leve
 if (!word || word.length < 3) throw Error('No verified source program');
 const entry = entries.find((r) => r.code === code && r.level === level && r.confirmed);
 if (!entry) throw Error('Missing source entry');
-const start = word.slice(0, -3),
+const compose = process.argv[8] === 'compose';
+if (compose && word.length < 4) throw Error('Two preparations require four recorded commands');
+const start = word.slice(0, compose ? -4 : -3),
   [setup, transport, use] = word.slice(-3);
 const commands = [
   ...new Set([
@@ -75,79 +77,99 @@ async function parts(b) {
   }
   return cache.get(k);
 }
-if (!won(replay([setup, transport, use]))) throw Error('Reference program failed');
-const base = replay([]),
-  unprepared = replay([transport]),
-  first = await parts(base),
-  bare = unprepared ? await parts(unprepared) : new Map();
-const represented = new Map();
-for (const prep of [
-  [],
-  ...commands.map((c) => [c]),
-  ...commands.flatMap((a) => commands.map((b) => [a, b])),
-]) {
-  const state = replay(prep);
-  if (!state || won(state) || state.state === 'GAME_OVER') continue;
-  const id = key(state);
-  if (!represented.has(id)) represented.set(id, prep);
-}
-const baseWin = won(replay([transport, use])),
-  ref = await parts(replay([setup]));
-const catalogue = [];
-for (const [state, prep] of represented) {
-  const b = replay(prep);
-  if (!legal(b, transport)) continue;
-  const prepared = await parts(b),
-    after = act(transport);
-  if (won(after) || after.state === 'GAME_OVER') continue;
-  const landing = await parts(after),
-    changes = [];
-  for (const [actor, from] of prepared) {
-    const end = landing.get(actor),
-      bareTo = bare.get(actor);
-    if (
-      unprepared && !won(unprepared) &&
-      unprepared.state !== 'GAME_OVER' &&
-      first.get(actor) === from &&
-      end !== undefined &&
-      bareTo !== undefined &&
-      end !== from &&
-      end !== bareTo
-    )
-      changes.push({ actor, from, bareTo, after: end });
-  }
-  const placements = [...prepared]
-    .filter(([id, at]) => first.has(id) && first.get(id) !== at)
-    .map(([id, at]) => ({ role: id, from: first.get(id), at }));
-  const winners = [];
-  for (const c of commands) {
-    if (!legal(after, c)) continue;
-    const registered = replay([...prep, transport]);
-    if (key(registered) !== key(after)) throw Error('Unstable landing');
-    if (won(act(c))) winners.push(c);
-  }
-  catalogue.push({
-    state,
-    prep,
-    placements,
-    unseenPlacement: placements.some((p) => ref.has(p.role) && ref.get(p.role) !== p.at),
-    changedLanding: changes,
-    winners,
+if (!won(replay(word.slice(start.length)))) throw Error('Reference program failed');
+if (compose || process.argv[8] === 'inverse') {
+  const { studyInversePlacements } = await import('./study-inverse-source-placements.mjs');
+  const result = await studyInversePlacements({
+    commands,
+    replay,
+    parts,
+    key,
+    won,
+    legal,
+    act,
+    transport,
+    use,
+    compose,
   });
+  await writeFile(output, JSON.stringify({ code, level, transport, use, ...result }) + '\n');
+} else await catalogue();
+
+async function catalogue() {
+  const base = replay([]),
+    unprepared = replay([transport]),
+    first = await parts(base),
+    bare = unprepared ? await parts(unprepared) : new Map();
+  const represented = new Map();
+  for (const prep of [
+    [],
+    ...commands.map((c) => [c]),
+    ...commands.flatMap((a) => commands.map((b) => [a, b])),
+  ]) {
+    const state = replay(prep);
+    if (!state || won(state) || state.state === 'GAME_OVER') continue;
+    const id = key(state);
+    if (!represented.has(id)) represented.set(id, prep);
+  }
+  const baseWin = won(replay([transport, use])),
+    ref = await parts(replay([setup]));
+  const catalogue = [];
+  for (const [state, prep] of represented) {
+    const b = replay(prep);
+    if (!legal(b, transport)) continue;
+    const prepared = await parts(b),
+      after = act(transport);
+    if (won(after) || after.state === 'GAME_OVER') continue;
+    const landing = await parts(after),
+      changes = [];
+    for (const [actor, from] of prepared) {
+      const end = landing.get(actor),
+        bareTo = bare.get(actor);
+      if (
+        unprepared &&
+        !won(unprepared) &&
+        unprepared.state !== 'GAME_OVER' &&
+        first.get(actor) === from &&
+        end !== undefined &&
+        bareTo !== undefined &&
+        end !== from &&
+        end !== bareTo
+      )
+        changes.push({ actor, from, bareTo, after: end });
+    }
+    const placements = [...prepared]
+      .filter(([id, at]) => first.has(id) && first.get(id) !== at)
+      .map(([id, at]) => ({ role: id, from: first.get(id), at }));
+    const winners = [];
+    for (const c of commands) {
+      if (!legal(after, c)) continue;
+      const registered = replay([...prep, transport]);
+      if (key(registered) !== key(after)) throw Error('Unstable landing');
+      if (won(act(c))) winners.push(c);
+    }
+    catalogue.push({
+      state,
+      prep,
+      placements,
+      unseenPlacement: placements.some((p) => ref.has(p.role) && ref.get(p.role) !== p.at),
+      changedLanding: changes,
+      winners,
+    });
+  }
+  const result = {
+    code,
+    level,
+    setup,
+    transport,
+    use,
+    controls: commands.length,
+    baseWin,
+    states: catalogue.length,
+    catalogued: catalogue.filter((s) => s.winners.length).length,
+    alternativeOnly: catalogue.filter((s) => s.winners.length && !s.winners.includes(use)).length,
+    matchedNewAccess: catalogue.filter((s) => s.changedLanding.length && s.winners.length).length,
+    catalogue: catalogue.filter((s) => s.winners.length || s.changedLanding.length),
+  };
+  await writeFile(output, JSON.stringify(result) + '\n');
+  console.log(JSON.stringify({ ...result, catalogue: undefined }));
 }
-const result = {
-  code,
-  level,
-  setup,
-  transport,
-  use,
-  controls: commands.length,
-  baseWin,
-  states: catalogue.length,
-  catalogued: catalogue.filter((s) => s.winners.length).length,
-  alternativeOnly: catalogue.filter((s) => s.winners.length && !s.winners.includes(use)).length,
-  matchedNewAccess: catalogue.filter((s) => s.changedLanding.length && s.winners.length).length,
-  catalogue: catalogue.filter((s) => s.winners.length || s.changedLanding.length),
-};
-await writeFile(output, JSON.stringify(result) + '\n');
-console.log(JSON.stringify({ ...result, catalogue: undefined }));

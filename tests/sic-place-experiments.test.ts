@@ -90,6 +90,23 @@ test('a witnessed exchange projects the transported traveler and its subsequent 
   assert.deepEqual(q.use?.to, [13, 1]);
   assert.equal(q.place?.reference, 'marker');
 });
+
+test('tests a previously ineffective input for motion demonstrated by another input after preparation', () => {
+  const m = initialMemory(1);
+  m.edges = [
+    edge(0, 0, 'test', { traveler: 2, marker: 8 }, { traveler: 2, marker: 8 }),
+    edge(0, 1, 'carry', { traveler: 2, marker: 8 }, { traveler: 6, marker: 8 }),
+    edge(0, 2, 'prepare', { traveler: 2, marker: 8 }, { traveler: 2, marker: 9 }),
+  ];
+  const rank = placeExperiments(m, observation({ traveler: 2, marker: 9 }), rows, 2)!;
+  const q = rank(2, 'test')!.question;
+  assert.deepEqual(q.arrival?.to, [6, 1]);
+  assert.equal(q.arrival?.alternative?.observedWith, 'carry');
+  assert.equal(q.arrival?.alternative?.inactiveRef, m.edges[0]!.ref);
+  assert.equal(q.arrival?.alternative?.preparationRef, m.edges[2]!.ref);
+  assert.equal(rank(0, 'test')!.question.arrival, null);
+  assert.doesNotThrow(() => splitNativeState(q, 'frontier'));
+});
 test('a bare no-op and a measured preparation remain distinct from a predicted opening', () => {
   const m = initialMemory(1);
   m.edges = [
