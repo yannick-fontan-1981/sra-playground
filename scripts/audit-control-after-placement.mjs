@@ -252,6 +252,39 @@ async function audit({ run, word, won }) {
     }
     return { probes, measured, changed, newMotion, wins, necessary };
   }
+  if (process.env.SIC_SOURCE_FORK_TABLES) {
+    const mobile = new Set();
+    function notice(before, after) {
+      if (!before || !after) return;
+      for (const [id, p] of before) if (after.has(id) && pos(after.get(id)) !== pos(p)) mobile.add(id);
+    }
+    for (const [a, state] of baseline) {
+      notice(startPos, state);
+      for (const to of forks.get(a)?.values() ?? []) notice(state, to);
+    }
+    const roles = [...mobile].sort();
+    const row = (state) => (state ? roles.map((id) => state.get(id) ?? null) : null);
+    const matrix = buttons.map((a) => buttons.map((b) => row(forks.get(a)?.get(b))));
+    const words = (list) => list.map((c) => [buttons.indexOf(c.a), buttons.indexOf(c.b)]);
+    await writeFile(
+      join(process.env.SIC_SOURCE_FORK_TABLES, run.code + '-' + run.start + '.json'),
+      JSON.stringify({
+        code: run.code,
+        level: run.start,
+        origin,
+        buttons,
+        roles,
+        root: row(startPos),
+        setups: buttons.map((a) => row(baseline.get(a))),
+        images: buttons.map((a) => hashes.get(a) ?? null),
+        matrix,
+        measured: words(measured),
+        wins: words(winning),
+        essential: words(essential),
+        probe,
+      })
+    );
+  }
   const hit = (set) => set.reduce((n, x) => n + Number(winning.includes(x)), 0);
   return {
     ...result,
@@ -283,5 +316,11 @@ async function audit({ run, word, won }) {
   };
 }
 const rows = [];
-for (const [i, c] of cases.entries()) if (i % shards === shard) rows.push(await audit(c));
+for (const [i, c] of cases.entries())
+  if (
+    i % shards === shard &&
+    (!process.env.SIC_SOURCE_CASES ||
+      process.env.SIC_SOURCE_CASES.split(',').includes(c.run.code + '/' + c.run.start))
+  )
+    rows.push(await audit(c));
 await writeFile(output, JSON.stringify(rows));
