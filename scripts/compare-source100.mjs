@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
@@ -82,6 +83,8 @@ async function run(code, games) {
   } else if (board.level !== start && board.canSelectLevel)
     board = await games.dispatch({ type: 'selectLevel', level: start });
   if (board.level !== start) throw Error('Backend did not start at requested level: ' + board.level);
+  const lesson=process.env.SIC_STUDY_OBSERVED_LESSON?await publicLesson(games,code,start,process.env.SIC_STUDY_OBSERVED_LESSON,solverRoot):null;
+  if(lesson)board=lesson.board;
   const initialCompleted = board.levelsCompleted,
     initial = hash(board.frame);
   // A fresh V6 campaign starts at ordinal one. In the isolated test only,
@@ -95,7 +98,7 @@ async function run(code, games) {
           levelCount: board.levelCount - start + 1,
           levelsCompleted: board.levelsCompleted - initialCompleted,
         };
-  const service = new V6AgentService((recovery) => createNativeV6Runtime(declarations, { recovery }));
+  const service = new V6AgentService(async(recovery) => {const backend=await createNativeV6Runtime(declarations,{recovery});return lesson?lesson.wrap(backend):backend;});
   const transport = { request: (operation) => service.handle(operation), reset() {}, dispose() {} };
   const trajectory = createHash('sha256'),
     levels = [],
@@ -177,6 +180,7 @@ async function run(code, games) {
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
+      const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
       const mobilitySeal=plan?.mobilityForecast?hash(plan.mobilityForecast):null;
       const mechanismSeal=plan?.mechanismForecast?hash(plan.mechanismForecast):null;
       const indicatorProbeSeal=plan?.indicatorProbeForecast?hash(plan.indicatorProbeForecast):null;
@@ -200,7 +204,7 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
@@ -287,6 +291,7 @@ async function run(code, games) {
       initial,
       initialCompleted,
       ...(prefixFile ? { sourcePrefixActions: entryActions } : {}),
+      ...(lesson?{observedPriorLevelActions:lesson.length}:{}),
       levels,
       issued,
       sic,
@@ -310,7 +315,7 @@ async function run(code, games) {
           frame,
           activation,
           territorial,
-          mobilityProbe,mechanism,localRepeat,
+          terminalContact,mobilityProbe,mechanism,localRepeat,
           unreadIndicator,
           witnessedPreview,
           occupancy,
@@ -365,7 +370,7 @@ async function run(code, games) {
           predictedGap,
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
-          ...(mobilityProbe?{mobilityProbe}:{}), ...(mechanism?{mechanism}:{}), ...(localRepeat?{localRepeat}:{}),
+          ...(terminalContact?{terminalContact}:{}), ...(mobilityProbe?{mobilityProbe}:{}), ...(mechanism?{mechanism}:{}), ...(localRepeat?{localRepeat}:{}),
           ...(unreadIndicator ? {unreadIndicator} : {}),
           ...(witnessedPreview ? {witnessedPreview} : {}),
           ...(occupancy ? {occupancy} : {}),

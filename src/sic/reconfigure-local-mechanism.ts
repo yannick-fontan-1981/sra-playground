@@ -618,6 +618,8 @@ export function finishMechanism(
       revision: a.revision,
     };
   }
+  if (matched && !won && step.stage === 'read' && t.plan.otherSurface && actual.actor)
+    state.foreignArrival = { actor: t.plan.p, at: actual.actor, revision: a.revision };
   state.active = matched && !won && t.index + 1 < t.plan.steps.length ? { ...t, index: t.index + 1 } : null;
   return { trial: t, stage: step.stage, matched, won, actual, continued: !!state.active };
 }

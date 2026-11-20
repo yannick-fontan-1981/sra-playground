@@ -1,4 +1,5 @@
 import test from 'node:test';
+import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
 import { spatialControls, cellMatches } from '../src/sic/calibrate-spatial-controls.ts';
 import assert from 'node:assert/strict';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
@@ -146,4 +147,56 @@ test('common pitch calibrates varying sprite centres and keeps an untested inver
   assert.ok(!next.motors.some((m) => m.op === guessed.op && m.d.join() === guessed.d.join()));
   assert.ok(cellMatches([21, 23], [20, 24], trial.pitch));
   assert.equal(cellMatches([24, 24], [20, 24], trial.pitch), false);
+});
+
+test('a visible terminal contact is carried across an official level change and re-tested on the next board', async () => {
+  const f = createPreparedEffects(),
+    piece: XY = [5, 7],
+    peer: XY = [17, 9],
+    goal: XY = [8, 5],
+    inputs = controls.map((action_ref) => ({ action_ref, data: {} }));
+  let b = await frame(1, 1, [3, 5], piece, goal, peer),
+    rev = 1;
+  for (const [p, q] of [
+    [[4, 5], 'MOVE_A'],
+    [[5, 5], 'MOVE_A'],
+    [[5, 6], 'MOVE_C'],
+    [[5, 5], 'MOVE_D'],
+    [[6, 5], 'MOVE_A'],
+    [[7, 5], 'MOVE_A'],
+  ] as [XY, string][]) {
+    const a = await frame(1, ++rev, p, piece, goal, peer);
+    await f.observePublicOutcome!(b.o, a.o, { action_ref: q, data: {} }, b.rows, a.rows);
+    b = a;
+  }
+  const entry = await frame(2, ++rev, [3, 6], piece, [6, 6], peer);
+  await f.observePublicOutcome!(b.o, entry.o, { action_ref: 'MOVE_A', data: {} }, b.rows, entry.rows);
+  let live = entry;
+  const first = await frame(2, ++rev, [4, 6], piece, [6, 6], peer);
+  await f.observePublicOutcome!(live.o, first.o, { action_ref: 'MOVE_A', data: {} }, live.rows, first.rows);
+  live = first;
+  const plans = [];
+  for (const [n, p] of [
+    [2, [5, 6]],
+    [3, [3, 4]],
+  ] as [number, XY][]) {
+    const z = await f.proposeInGroup!(
+      'test_compositions_after_recurrent_returns',
+      live.o,
+      live.rows,
+      inputs,
+      12
+    );
+    assert.ok(z?.terminalContactForecast);
+    plans.push(z.terminalContactForecast);
+    const next = await frame(n, ++rev, p, piece, n === 3 ? null : [6, 6], peer);
+    const rec = await f.record!(live.o, next.o, z.actions[0]!, live.rows, next.rows, z, 0, []);
+    assert.ok((rec.events[0] as any).terminalContact.matched);
+    live = next;
+  }
+  assert.deepEqual(
+    plans.map((p: any) => p.distance),
+    [2, 1]
+  );
+  assert.equal(plans[0].witness.after, entry.o.observation_ref);
 });

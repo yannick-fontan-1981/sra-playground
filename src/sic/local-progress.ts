@@ -35,6 +35,7 @@ export type AccessLimit = {
 };
 export type MechanismReason = ZoneRepeat | AccessLimit;
 export type LocalProgress = {
+  foreignArrival?: { actor: string; at: XY; revision: number };
   realizedPlacement?: {
     cause: MechanismReason;
     actor: string;

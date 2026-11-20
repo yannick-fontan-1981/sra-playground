@@ -26,6 +26,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
   testMechanismMobility:'Test an untried control for moving a persistent part after a repeated return',
   reconfigureMechanism:'Test whether moving a mechanism opens access beyond a stagnant return',
   unreadIndicator:'Test a command while the possible arrival of this subject is displayed',
@@ -71,6 +72,7 @@ const labels: Record<Experiment['phase'], string> = {
   carry: 'Move the changed object while preserving its measured state',
   carryB: 'Test the transported change against the control from this destination',
 };
+import {completionContacts} from './terminal-contact.ts';
 import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(): NativeFamily<Offer> {
   let m = initialMemory(0);
@@ -87,7 +89,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     x?: Experiment
   ) {
     enter(b);
-    const learning=m.previewLearning??=newPreviewLearning(),boundary=carryPreviewBindings(learning,b,a);
+    const learning=m.previewLearning??=newPreviewLearning();
+    if(a.levels_completed>b.levels_completed){const contacts=completionContacts(learning,b,a,visualLayout(b,rows),observedCommandKey(cmd));if(contacts.length)learning.terminal=contacts;}
+    const boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
       const before=visualLayout(b,rows),after=visualLayout(a,next);
@@ -102,7 +106,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     propose: () => null,
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
-      if (remaining < 1 || !m.turns&&!Object.keys(m.previewLearning?.bindings??{}).length) return null;
+      if (remaining < 1 || !m.turns&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
@@ -121,6 +125,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         ...(experiment.occupancy?.plan.preparedPreview?.priorRead?[experiment.occupancy.plan.preparedPreview.priorRead.before,experiment.occupancy.plan.preparedPreview.priorRead.after]:[]),
         ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
         ...(experiment.mechanism?.plan.witnessRefs??[]),
+        ...(experiment.terminalContact?[experiment.terminalContact.witness.before,experiment.terminalContact.witness.after]:[]),
         ...experiment.refs.map(
           (r) =>
             ref.split(':revision:', 1)[0] +
@@ -133,7 +138,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const question = {
         kind: 'test_prepared_effect',
         scope: ref.split(':revision:', 1)[0]!,
-        subjects: experiment.mobilityProbe ? [experiment.mobilityProbe.actor,...experiment.mobilityProbe.sites.map(s=>s.role),b] : experiment.mechanism ? [experiment.mechanism.plan.p,experiment.mechanism.plan.c,b] : experiment.unreadIndicator ? [experiment.unreadIndicator.cue.p,experiment.unreadIndicator.cue.r,b] : experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
+        subjects: experiment.terminalContact?[experiment.terminalContact.witness.actor,experiment.terminalContact.witness.marker,experiment.terminalContact.op]:experiment.mobilityProbe ? [experiment.mobilityProbe.actor,...experiment.mobilityProbe.sites.map(s=>s.role),b] : experiment.mechanism ? [experiment.mechanism.plan.p,experiment.mechanism.plan.c,b] : experiment.unreadIndicator ? [experiment.unreadIndicator.cue.p,experiment.unreadIndicator.cue.r,b] : experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
         parentObjective: parent,
         satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
@@ -183,6 +188,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
+        ...(experiment.terminalContact?{terminalContactForecast:experiment.terminalContact}:{}),
         ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),
         ...(experiment.mechanism ? {mechanismForecast:experiment.mechanism} : {}),
         ...(experiment.unreadIndicator ? {indicatorProbeForecast:experiment.unreadIndicator} : {}),

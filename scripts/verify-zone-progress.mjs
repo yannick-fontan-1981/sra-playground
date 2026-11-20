@@ -23,6 +23,7 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
     arrivals: 0,
     uses: 0,
     official: 0,
+    terminalSteps:0,terminalWins:0,
     comparedWrites: 0,
     changedAgainstRepetition: 0,
   };
@@ -152,6 +153,19 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
         : null;
     return { actor, site };
   };
+  async function terminal(e,cmd,i,board,prior){
+    const m=e.terminalContact,t=m.trial,w=t.witness;require(cmd.terminalContactSeal===hash(t)&&t.op===commandKey(cmd)&&t.before.endsWith(':revision:'+(i+1)+':frame:'+cmd.from),'terminal forecast');
+    const near=(x,y)=>!!x&&x.every((u,j)=>Math.abs(u-y[j])*2<t.pitch[j]);
+    const roles={p:w.actor,c:w.marker,actorPeers:t.peers,fixed:t.fixed};
+    const before=named(cmd.from,roles,limit(prior));
+    require(near(before.actor,t.from)&&eq(before.site,t.site),'terminal contact origin');
+    const won=board.levelsCompleted>prior.levelsCompleted||board.state==='WIN';
+    await partsAt(board,cmd.to,i+2);
+    const after=positions(cmd.to,w.actor,limit(board)),rest=after.filter(z=>!t.peers.some(v=>near(z,v)));
+    const actual=rest.length===1&&after.length===t.peers.length+1&&t.peers.every(v=>after.some(z=>near(z,v)))?rest[0]:null;
+    require(won===m.won&&eq(won?null:actual,m.actual)&&m.matched===(won||near(actual,t.to)),'terminal outcome');
+    results.terminalSteps++;if(won)results.terminalWins++;
+  }
   async function mobility(e, cmd, i, board, prior) {
     const out = e.mobilityProbe,
       t = out.test,
@@ -280,5 +294,5 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
       if (!eq(rival.site, v.at)) results.changedAgainstRepetition++;
     }
   }
-  return { results, examples, checkTag, record, mobility, compare };
+  return { results, examples, checkTag, record, mobility, terminal, compare };
 }

@@ -1,4 +1,5 @@
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
+import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
 import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
 import {newLocalProgress,measureLocalRepeat,observeVacatedSites,knownLocalRepeat,repeatKey,type LocalProgress,type ZoneRepeat} from './local-progress.ts';
 import {offerMechanism,finishMechanism,type MechanismTrial} from './reconfigure-local-mechanism.ts';
@@ -98,6 +99,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'seekTerminalContact'
     | 'testMechanismMobility'
     | 'reconfigureMechanism'
     | 'unreadIndicator'
@@ -153,6 +155,7 @@ export type Experiment = {
   frame?:FrameTrial;
   activation?:Activation;
   territorial?:TerritorialTrial;
+  terminalContact?:TerminalTrial;
   mobilityProbe?:MobilityProbe;
   mechanism?:MechanismTrial;
   unreadIndicator?:IndicatorTest;
@@ -199,6 +202,7 @@ export type Outcome = {
   activation?:Record<string,unknown>;
   territorial?:Record<string,unknown>;
   localRepeat?:ZoneRepeat;
+  terminalContact?:Record<string,unknown>;
   mobilityProbe?:Record<string,unknown>;
   mechanism?:Record<string,unknown>;
   unreadIndicator?:Record<string,unknown>;
@@ -433,10 +437,11 @@ function selectEstablishedExperiment(
   late: boolean,
   rows?: NativeRows
 ): Experiment | null {
-  const retained = Object.keys(m.previewLearning?.bindings ?? {}).length > 0;
+  const retained = Object.keys(m.previewLearning?.bindings ?? {}).length > 0 || !!m.previewLearning?.terminal?.length;
   const s = retained ? sceneIndex(m, o) : m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
+  if(rows&&m.previewLearning?.terminal?.length){const goal=offerTerminalContact(m,s,o,rows,available);if(goal)return goal;}
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
   const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
@@ -801,7 +806,7 @@ export function selectExperiment(
   m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
 ): Experiment | null {
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
+  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.terminalContact || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
   const recent=m.delayed.history.slice(-8);
@@ -963,6 +968,7 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.terminalContact&&m.previewLearning){const detail=measureTerminalContact(m.previewLearning,x.terminalContact,b,a,op,visualLayout(a,next));return {...out,result:detail.won?'terminal_contact_official':detail.matched?'terminal_contact_approach':'terminal_contact_refuted',terminalContact:detail};}
   if(x.mobilityProbe){const detail=measureMobility(x.mobilityProbe,b,a,next,op);return {...out,result:detail.won?'mobility_completion':detail.moved?'mobility_observed':'mobility_unconfirmed',mobilityProbe:detail};}
   if(x.mechanism){const detail=finishMechanism(m,x.mechanism,b,a,rows,next,op);return {...out,result:detail.won?'mechanism_completion':detail.matched?'mechanism_step_confirmed':'mechanism_step_refuted',mechanism:detail};}
   if(x.unreadIndicator){

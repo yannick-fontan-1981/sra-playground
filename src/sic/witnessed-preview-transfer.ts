@@ -63,7 +63,11 @@ export type ReadOffer = {
   witness: PreviewWitness;
   calibration?: PredictiveEvidence;
 };
+import type { TerminalContact } from './terminal-contact.ts';
 export type PreviewLearning = {
+  terminal?: TerminalContact[];
+  goalAttempts?: Record<string, number>;
+  visitedContacts?: Record<string, number>;
   partMotion?: Record<string, PartMotion>;
   bindings: Record<string, WitnessedBinding>;
   lastActor: Record<string, XY>;
@@ -74,6 +78,7 @@ export type PreviewLearning = {
   motion: Record<string, Record<string, number>>;
 };
 export type PreviewCarry = {
+  terminal?: TerminalContact[];
   partMotion?: Record<string, PartMotion>;
   scope: string;
   fromEpoch: number;
@@ -254,7 +259,7 @@ export function carryPreviewBindings(
   if (
     scope(a) !== scope(b) ||
     a.levels_completed !== b.levels_completed + 1 ||
-    !Object.keys(learned.bindings).length
+    (!Object.keys(learned.bindings).length && !learned.terminal?.length)
   )
     return null;
   return {
@@ -262,9 +267,14 @@ export function carryPreviewBindings(
     fromEpoch: b.level_epoch,
     completed: a.levels_completed,
     bindings: structuredClone(learned.bindings),
+    ...(learned.terminal?.length ? { terminal: structuredClone(learned.terminal) } : {}),
     partMotion: Object.fromEntries(
       Object.entries(learned.partMotion ?? {})
-        .filter(([id]) => Object.values(learned.bindings).some((x) => x.actor === id))
+        .filter(
+          ([id]) =>
+            Object.values(learned.bindings).some((x) => x.actor === id) ||
+            learned.terminal?.some((x) => x.actor === id)
+        )
         .map(([id, m]) => [
           id,
           {
@@ -281,6 +291,7 @@ export function acceptPreviewCarry(c: PreviewCarry | null | undefined, o: Native
   const learned = newPreviewLearning();
   if (c && scope(o) === c.scope && o.level_epoch === c.fromEpoch + 1 && o.levels_completed === c.completed) {
     learned.bindings = structuredClone(c.bindings);
+    if (c.terminal?.length) learned.terminal = structuredClone(c.terminal);
     learned.partMotion = structuredClone(c.partMotion ?? {});
   }
   return learned;

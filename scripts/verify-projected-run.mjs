@@ -53,7 +53,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator || e.mechanism || e.localRepeat || e.mobilityProbe)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator || e.terminalContact || e.mechanism || e.localRepeat || e.mobilityProbe)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -120,7 +120,7 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator || e.mechanism || e.localRepeat || e.mobilityProbe
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame || e.activation || e.territorial || e.occupancy || e.witnessedPreview || e.unreadIndicator || e.terminalContact || e.mechanism || e.localRepeat || e.mobilityProbe
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
@@ -156,6 +156,7 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   const event = events.get(i + 1);
   if ((cmd.mobilitySeal&&!event?.mobilityProbe)||(cmd.mechanismSeal&&!event?.mechanism)||(cmd.indicatorProbeSeal&&!event?.unreadIndicator)||(cmd.previewReadSeal&&!event?.witnessedPreview)||(cmd.occupancySeal&&!event?.occupancy)||(cmd.territorySeal&&!event?.territorial)||(cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
   if (!event) continue;
+  if(event.terminalContact){await progress.terminal(event,cmd,i,board,priorBoard);continue;}
   if(event.mobilityProbe){await progress.mobility(event,cmd,i,board,priorBoard);continue;}
   if(event.mechanism){await progress.record(event,cmd,i,board,priorBoard);continue;}
   if(event.unreadIndicator){await unread.record(event,cmd,i,board,priorState);continue;}
