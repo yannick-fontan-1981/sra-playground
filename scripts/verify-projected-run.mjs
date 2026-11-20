@@ -3,19 +3,35 @@ import { readFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import { sourceBackend } from './sic-study-source-games.mjs';
+import { sourceReplay } from './sic-study-source-replay.mjs';
+import { GAME_CATALOG } from '../src/games/catalog.ts';
 
-const [environment, file] = process.argv.slice(2);
-const run = JSON.parse(readFileSync(file, 'utf8').trim());
+const [environment, file, sourceCode] = process.argv.slice(2);
+const recorded = readFileSync(file, 'utf8').trim().split('\n').map(JSON.parse);
+const selected = sourceCode ? recorded.filter((r) => r.code === sourceCode) : recorded;
+if (selected.length !== 1 || (sourceCode && !GAME_CATALOG.some((g) => g.code === sourceCode)))
+  throw Error('Expected one matching run');
+const run = selected[0];
 if (!run.replayCommands || run.replayCommands.length !== run.issued || run.sic !== run.issued || run.resets)
   throw Error('Expected a complete SIC-only trajectory without external resets');
-const { createGameDispatcher } = await import(
-  pathToFileURL(join(resolve(environment), 'src/runtime/native-game-dispatcher.ts'))
-);
-const engine = createGameDispatcher(() => {
-  throw Error('Unexpected backend');
-});
+const engine = sourceCode
+  ? await sourceBackend(resolve(environment))
+  : (
+      await import(pathToFileURL(join(resolve(environment), 'src/runtime/native-game-dispatcher.ts')))
+    ).createGameDispatcher(() => {
+      throw Error('Unexpected backend');
+    });
 const hash = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex');
-let board = await engine.dispatch({ type: 'load', code: run.code, level: run.start });
+let board = sourceCode
+  ? sourceReplay(
+      engine,
+      JSON.parse(
+        readFileSync(new URL('../docs/architecture/sic-source-seven-programs.json', import.meta.url), 'utf8')
+      ),
+      run
+    ).restore(0)
+  : await engine.dispatch({ type: 'load', code: run.code, level: run.start });
 if (board.level !== run.start && board.canSelectLevel)
   board = await engine.dispatch({ type: 'selectLevel', level: run.start });
 if (
@@ -49,7 +65,13 @@ const conditions = {
   boardTested: 0,
   boardExact: 0,
   boardUsed: 0,
+  boardNoRelativeExact: 0,
+  boardNoRelativeUsed: 0,
+  boardSameOffsetExact: 0,
+  boardSameOffsetUsed: 0,
   reconsidered: 0,
+  reconsideredExact: 0,
+  reconsideredUsed: 0,
   reuseUsed: 0,
 };
 const controlled = new Set();
@@ -255,6 +277,24 @@ for (const [i, cmd] of run.replayCommands.entries()) {
     conditions.used += Number(want === 'condition_used');
     conditions.boardExact += Number(want === 'condition_activated' && !!plan.frame);
     conditions.boardUsed += Number(want === 'condition_used' && !!plan.frame);
+    if (plan.frame && (want === 'condition_activated' || want === 'condition_used')) {
+      const initialPeer = at(initial, partner).split(',').map(Number);
+      const delta = (a, b) => a.map((v, j) => v - b[j]);
+      const oldOffset = delta(plan.origin, initialPeer);
+      const newOffset = delta(plan.trigger.from, plan.preparation.at(-1).to);
+      const votes = (ds) =>
+        plan.rules.filter(
+          (r) => ((r.signOnly ? Math.sign(ds[r.axis]) : ds[r.axis]) === r.value) === r.onMatch
+        ).length;
+      const qualified =
+        plan.rules.length > 0 && votes(oldOffset) === 0 && votes(newOffset) * 2 > plan.rules.length;
+      const continuation = want === 'condition_used';
+      if (!qualified) conditions[continuation ? 'boardNoRelativeUsed' : 'boardNoRelativeExact']++;
+      if (oldOffset.join() === newOffset.join())
+        conditions[continuation ? 'boardSameOffsetUsed' : 'boardSameOffsetExact']++;
+    }
+    conditions.reconsideredExact += Number(want === 'condition_activated' && !!plan.reconsideredRef);
+    conditions.reconsideredUsed += Number(want === 'condition_used' && !!plan.reconsideredRef);
     conditions.fixedOriginExact += Number(want === 'condition_activated' && before === origin);
     conditions.reuseUsed += Number(want === 'condition_used' && !!plan.reuseRef);
     continue;

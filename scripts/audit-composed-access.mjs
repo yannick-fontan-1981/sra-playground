@@ -8,13 +8,15 @@ import { sourceBackend } from './sic-study-source-games.mjs';
 // Reproduce the first complete, agent-chosen placement per source entry. Two identical
 // visible endpoints can still have different futures, so each intervention gets a fresh world.
 const [environment, output, ...files] = process.argv.slice(2);
+const allBoard = files[0] === '--all-board';
+if (allBoard) files.shift();
 if (!files.length) throw Error('Expected source trajectories');
 const catalogue = new Set(GAME_CATALOG.map((g) => g.code));
 const engine = await sourceBackend(resolve(environment));
 const programs = JSON.parse(
   await readFile(new URL('../docs/architecture/sic-source-seven-programs.json', import.meta.url), 'utf8')
 );
-async function audit(run) {
+async function audit(run, event = run.preparation.find((e) => e.result === 'condition_used')) {
   if (
     !catalogue.has(run.code) ||
     !run.steps ||
@@ -34,7 +36,6 @@ async function audit(run) {
   const final = restore(run.steps.length);
   if (win(final) !== result.won || final.state !== run.levels[0].state)
     throw Error('Divergent official result');
-  const event = run.preparation.find((e) => e.result === 'condition_used');
   if (!event) return result;
   const { plan, index } = event.condition;
   const first = event.actionIndex - 1 - index;
@@ -137,6 +138,15 @@ async function audit(run) {
     word,
     alreadyPlaced: plan.alreadyPlaced ?? 0,
     endpoint,
+    ...(allBoard
+      ? {
+          origin: plan.origin,
+          partnerInitial: plan.preparation[0].from,
+          departure: plan.trigger.from,
+          partnerPrepared: plan.preparation.at(-1).to,
+          arrival: plan.trigger.to,
+        }
+      : {}),
     shorter: words.size,
     matches: matched.length,
     shortest: matched.length ? Math.min(...matched.map((s) => s.length)) : null,
@@ -150,7 +160,12 @@ async function audit(run) {
 const results = [];
 for (const file of files) {
   const rows = (await readFile(file, 'utf8')).trim().split('\n').map(JSON.parse);
-  for (const row of rows) results.push(await audit(row));
+  for (const row of rows) {
+    if (allBoard) {
+      for (const e of row.preparation.filter((e) => e.result === 'condition_used' && e.condition?.plan.frame))
+        results.push(await audit(row, e));
+    } else results.push(await audit(row));
+  }
 }
 await writeFile(output, JSON.stringify(results));
 console.log(
