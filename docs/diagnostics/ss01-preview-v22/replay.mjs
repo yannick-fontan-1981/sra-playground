@@ -407,6 +407,10 @@ for (const file of autonomousRuns) {
       mirrorMoves: [],
       physicalTransfers: 0,
       exactNamedTransfers: 0,
+      transfers: [],
+      probeChecks: [],
+      maxSimultaneousGoals: 0,
+      firstGoal: null,
       wrongSubjectCount: 0,
       firstNamed: null,
       uniqueNamedSites: [],
@@ -447,7 +451,19 @@ for (const file of autonomousRuns) {
           issued: c.id,
         });
     }
-    if (c.id === 5 && v.landedOnValidMark) facts.physicalTransfers++;
+    const goalCount=w.goals.filter(g=>[z.hero,...z.others].some(p=>same(p,g))).length;
+    facts.maxSimultaneousGoals=Math.max(facts.maxSimultaneousGoals,goalCount);
+    if(goalCount)facts.firstGoal??=i+1;
+    const event=events.get(i+1),probe=event?.unreadIndicator,test=probe?.test;
+    if(test){
+      if(c.indicatorProbeSeal!==digest(test))throw Error('Missing pre-action indicator commitment');
+      const check=truth(w,s,z,b,run.start,{from:test.cue.origin,indicated:test.cue.site,indicator:test.cue.r});
+      facts.probeChecks.push({action:i+1,issued:c.id,word:test.word,status:probe.status,from:check.from,marked:check.indicated,arrived:check.to,subjectMatches:check.subjectMatches,markMatches:check.markMatches});
+    }
+    if(c.id===5&&v.landedOnValidMark){
+      facts.physicalTransfers++;
+      facts.transfers.push({action:i+1,phase:event?.phase??null,from:v.from,arrived:v.to,other:v.stationaryMerchantAfter,exactRead:!!(f&&m.status==='realized'&&v.subjectMatches&&v.markMatches),exactProbe:!!(probe&&probe.status==='realized'&&facts.probeChecks.at(-1).subjectMatches&&facts.probeChecks.at(-1).markMatches)});
+    }
     if (f) {
       facts.forecastCount++;
       if (c.previewReadSeal !== digest(f)) throw Error('Autonomous forecast unavailable before action');

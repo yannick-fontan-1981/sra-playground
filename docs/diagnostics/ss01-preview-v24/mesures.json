@@ -1,0 +1,2239 @@
+{
+  "frozen": {
+    "control": {
+      "tag": "sic-projected-affordances-source100-control-v1",
+      "sha": "7f2cb3eb29a4bd7640c3c38b71107af86b521ad5",
+      "files": 2401,
+      "digest": "788e4cb6076fca981af79a49b4df4abe35cd89d4df52b6318b9ca1fa14b5a5ca",
+      "export": "projection-v22-eval-control"
+    },
+    "candidate": {
+      "tag": "sic-projected-affordances-source100-candidate-v24",
+      "sha": "d5d6e1d46287cce7ce4f00ddfc780e531ef9d88b",
+      "files": 2449,
+      "digest": "9f35c8dc42f54259cf57ce84b322fc13af92a35665f2c00c42e7e394e4a7e9be",
+      "export": "projection-v24-eval-candidate"
+    }
+  },
+  "environment": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "sourceStudy": {
+    "situations": {
+      "eligibleStates": 87,
+      "selected": 78,
+      "registeredGeometry": 77,
+      "events": {
+        "contradicted": 94,
+        "inapplicable": 4,
+        "unobserved": 12,
+        "realized": 4
+      },
+      "arrivals": [
+        {
+          "game": "G50T",
+          "level": 1,
+          "sourceStep": 5,
+          "commands": [
+            "ACTION2",
+            "ACTION4",
+            "ACTION1",
+            "ACTION3",
+            "ACTION5"
+          ]
+        },
+        {
+          "game": "CWSE",
+          "level": 1,
+          "sourceStep": 4,
+          "commands": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION4",
+            "ACTION3",
+            "ACTION5",
+            "ACTION7"
+          ]
+        },
+        {
+          "game": "FITE",
+          "level": 1,
+          "sourceStep": 12,
+          "commands": [
+            "ACTION1",
+            "ACTION2"
+          ]
+        },
+        {
+          "game": "ZIPP",
+          "level": 1,
+          "sourceStep": 4,
+          "commands": [
+            "ACTION3"
+          ]
+        }
+      ]
+    },
+    "sourceCampaigns": {
+      "VOIS": {
+        "commands": 70,
+        "won": false,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 70,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0
+          }
+        ],
+        "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+        "trajectory": "2277340ea5e8d5cfc32fe650707b6c15113e4ee2a715a3ef81bb3723b6f3a9bf",
+        "read": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 0,
+          "started": 0,
+          "preserved": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 29,
+          "options": 70,
+          "writesExact": 29,
+          "arrivalsExact": 28,
+          "redirectedAgainstDirect": 28,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      },
+      "G50T": {
+        "commands": 70,
+        "won": false,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 70,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0
+          }
+        ],
+        "initial": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+        "trajectory": "b9d9bfd2f9a36e21608f691288e50d321b9381ac016ca4c81e45356a8ed2cc64",
+        "read": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 9,
+          "started": 3,
+          "preserved": 6,
+          "realized": 1,
+          "contradicted": 8,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 1
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      },
+      "CWSE": {
+        "commands": 70,
+        "won": false,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 70,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 1,
+            "changedTrials": 1,
+            "newScenes": 0,
+            "relational": 0
+          }
+        ],
+        "initial": "14b234e86cb071c9873aa3c65eb8cc12680afca61839eb31eccd404d5671af8f",
+        "trajectory": "784daa0d4546fe7c2b00cc2aee7161ed82fe4ed6ac2a36c018655a66d7a6f25e",
+        "read": {
+          "issued": 20,
+          "inherited": 0,
+          "realized": 5,
+          "contradicted": 15,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 6,
+          "started": 1,
+          "preserved": 5,
+          "realized": 1,
+          "contradicted": 5,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 1
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      },
+      "FITE": {
+        "commands": 12,
+        "won": true,
+        "levels": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 12,
+            "reason": "target_levels_completed",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0
+          }
+        ],
+        "initial": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+        "trajectory": "4639ce723ae50e827c1f8adc49b7afcdfcde0b303aa56184e03553a978bf447b",
+        "read": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 2,
+          "started": 1,
+          "preserved": 1,
+          "realized": 1,
+          "contradicted": 1,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      },
+      "ZIPP": {
+        "commands": 70,
+        "won": false,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 70,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0
+          }
+        ],
+        "initial": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+        "trajectory": "aa3c10b033c3dd601606abb7b46f95a653bd2a64ee7e466201a31e77bdbcb0f7",
+        "read": {
+          "issued": 64,
+          "inherited": 0,
+          "realized": 3,
+          "contradicted": 61,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 1,
+          "started": 1,
+          "preserved": 0,
+          "realized": 1,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 1
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      },
+      "upper-CWSE": {
+        "commands": 70,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 70,
+            "reason": "session_action_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0
+          }
+        ],
+        "initial": "f172436b7a7b73f1cf3f0f2a3cd35116acc7325401f6c27a8079e676cd3ce768",
+        "trajectory": "2f5e3eee607eab73979f4d14347a0f33a5aafd18d79faea6eeecac19e50e0059",
+        "read": {
+          "issued": 36,
+          "inherited": 0,
+          "realized": 14,
+          "contradicted": 22,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 0,
+          "started": 0,
+          "preserved": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      },
+      "upper-GRAV": {
+        "commands": 45,
+        "won": true,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 45,
+            "reason": "target_levels_completed",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0
+          }
+        ],
+        "initial": "b4a6e958d17e1fcb6594834df4d110d417c244f406add4267d06f298ed93c63e",
+        "trajectory": "a1906b92a2d0d6166a96b4c4a507a30e77619e9ee63c14d1abcfa3c1634fc35f",
+        "read": {
+          "issued": 17,
+          "inherited": 0,
+          "realized": 1,
+          "contradicted": 11,
+          "unobserved": 4,
+          "inapplicable": 1
+        },
+        "indicators": {
+          "issued": 15,
+          "started": 15,
+          "preserved": 1,
+          "realized": 0,
+          "contradicted": 7,
+          "unobserved": 8,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      }
+    },
+    "controlledSequence": {
+      "code": "G50T",
+      "level": 1,
+      "i": 5,
+      "root": "9bb17844cc3a57c9",
+      "origin": [
+        12,
+        4
+      ],
+      "mark": [
+        4,
+        4
+      ],
+      "q": "ACTION5",
+      "sequence": [
+        "ACTION2",
+        "ACTION4",
+        "ACTION1",
+        "ACTION3"
+      ],
+      "direct": {
+        "word": [],
+        "preserved": true,
+        "before": "9bb17844cc3a57c9",
+        "end": "2a3bc6a0d9bbddb4",
+        "arrived": [
+          12,
+          4
+        ],
+        "hit": false
+      },
+      "shortest": {
+        "word": [
+          "ACTION2"
+        ],
+        "preserved": true,
+        "before": "af3bb95d3135e37c",
+        "end": "0e1cd0b30fbb12b3",
+        "arrived": [
+          4,
+          4
+        ],
+        "hit": true
+      },
+      "rival": {
+        "word": [
+          "ACTION1"
+        ],
+        "preserved": true,
+        "before": "2a3bc6a0d9bbddb4",
+        "end": "2a3bc6a0d9bbddb4",
+        "arrived": [
+          12,
+          4
+        ],
+        "hit": false
+      },
+      "matchedAbsent": null,
+      "tests": 32,
+      "positive": 18,
+      "distinctEnds": 3
+    },
+    "nativeVOISComparisons": {
+      "preparationNeeded": 28,
+      "equalLengthPreparationNeeded": 28,
+      "newToCommand": 28,
+      "newToSubject": 28
+    }
+  },
+  "target": {
+    "SS01": {
+      "control": {
+        "commands": 579,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 579,
+            "reason": "level_active_time_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 34,
+            "changedTrials": 26,
+            "newScenes": 16,
+            "relational": 18,
+            "uniqueImages": 141,
+            "returns": 354,
+            "replayed": 278,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 25,
+            "translated": 62,
+            "returnedPositions": 41
+          }
+        ],
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "c8ba139235f913e9c6a27b4a61660b61e137ec1af2c64235cec4e3fa67c5bc64",
+        "read": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {},
+        "redirected": {}
+      },
+      "candidate": {
+        "commands": 658,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 658,
+            "reason": "level_active_time_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 4,
+            "changedTrials": 3,
+            "newScenes": 2,
+            "relational": 1,
+            "uniqueImages": 90,
+            "returns": 500,
+            "replayed": 392,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 25,
+            "translated": 54,
+            "returnedPositions": 34
+          }
+        ],
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "97f1d79167db15dd5da3ea9d3b85a66d6f08857842e97f97dba9536c14046bae",
+        "read": {
+          "issued": 38,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 38,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 6,
+          "started": 4,
+          "preserved": 2,
+          "realized": 0,
+          "contradicted": 6,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      }
+    },
+    "SS06": {
+      "control": {
+        "commands": 751,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 751,
+            "reason": "level_active_time_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 4,
+            "changedTrials": 3,
+            "newScenes": 3,
+            "relational": 0,
+            "uniqueImages": 43,
+            "returns": 147,
+            "replayed": 125,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 32,
+            "translated": 9,
+            "returnedPositions": 3
+          }
+        ],
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "a03cff0d9c74480a7700d8b015c6d29ee5fee5d6975c2456151073d34e7be543",
+        "read": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {},
+        "redirected": {}
+      },
+      "candidate": {
+        "commands": 617,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 617,
+            "reason": "level_active_time_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 8,
+            "changedTrials": 6,
+            "newScenes": 6,
+            "relational": 2,
+            "uniqueImages": 81,
+            "returns": 122,
+            "replayed": 91,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 36,
+            "translated": 14,
+            "returnedPositions": 4
+          }
+        ],
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "trajectory": "caca0c797e39631234ee7043159b78a98fbeb4bbe5476b2dba15736e74bc61b5",
+        "read": {
+          "issued": 27,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 26,
+          "unobserved": 1,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 3,
+          "started": 3,
+          "preserved": 0,
+          "realized": 0,
+          "contradicted": 2,
+          "unobserved": 1,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      }
+    },
+    "SS07": {
+      "control": {
+        "commands": 5,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 5,
+            "reason": "native_game_over",
+            "state": "GAME_OVER",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 5,
+            "returns": 1,
+            "replayed": 0,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 4,
+            "translated": 0,
+            "returnedPositions": 0
+          }
+        ],
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "read": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {},
+        "redirected": {}
+      },
+      "candidate": {
+        "commands": 25,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 25,
+            "reason": "native_game_over",
+            "state": "GAME_OVER",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 9,
+            "returns": 8,
+            "replayed": 5,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ],
+            "pairs": 8,
+            "translated": 0,
+            "returnedPositions": 0
+          }
+        ],
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "trajectory": "2a1568663f5ffab734a353b5fdfea7dfb624d4cb9cb703c6b5e5ebfbf990303f",
+        "read": {
+          "issued": 17,
+          "inherited": 0,
+          "realized": 3,
+          "contradicted": 14,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 0,
+          "started": 0,
+          "preserved": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 1,
+          "options": 1,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      }
+    },
+    "SS08": {
+      "control": {
+        "commands": 791,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 791,
+            "reason": "level_active_time_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 5,
+            "changedTrials": 2,
+            "newScenes": 1,
+            "relational": 2,
+            "uniqueImages": 308,
+            "returns": 348,
+            "replayed": 217,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 33,
+            "translated": 61,
+            "returnedPositions": 26
+          }
+        ],
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "9ba2eb0933060f000d6476dc2a58558a4c77a2dccbff942776a264e64069a09f",
+        "read": {
+          "issued": 0,
+          "inherited": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {},
+        "redirected": {}
+      },
+      "candidate": {
+        "commands": 853,
+        "won": false,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 853,
+            "reason": "level_active_time_budget",
+            "state": "NOT_FINISHED",
+            "compositionTrials": 0,
+            "changedTrials": 0,
+            "newScenes": 0,
+            "relational": 0,
+            "uniqueImages": 29,
+            "returns": 547,
+            "replayed": 500,
+            "controls": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "pairs": 32,
+            "translated": 14,
+            "returnedPositions": 5
+          }
+        ],
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "trajectory": "e18b1135e6008ac4909405f82d70d2a98a59131b7d8efc87167d594ce2414620",
+        "read": {
+          "issued": 32,
+          "inherited": 0,
+          "realized": 8,
+          "contradicted": 24,
+          "unobserved": 0,
+          "inapplicable": 0
+        },
+        "indicators": {
+          "issued": 0,
+          "started": 0,
+          "preserved": 0,
+          "realized": 0,
+          "contradicted": 0,
+          "unobserved": 0,
+          "inapplicable": 0,
+          "nonordinaryRealized": 0
+        },
+        "redirected": {
+          "programs": 0,
+          "options": 0,
+          "writesExact": 0,
+          "arrivalsExact": 0,
+          "redirectedAgainstDirect": 0,
+          "intoModeledRegion": 0,
+          "usesExact": 0,
+          "changedNextMotion": 0
+        }
+      }
+    }
+  },
+  "campaignFromL1": {
+    "commands": 574,
+    "won": false,
+    "levels": [
+      {
+        "level": 1,
+        "won": false,
+        "actions": 574,
+        "reason": "level_active_time_budget",
+        "state": "NOT_FINISHED",
+        "compositionTrials": 2,
+        "changedTrials": 2,
+        "newScenes": 2,
+        "relational": 0,
+        "uniqueImages": 163,
+        "returns": 322,
+        "replayed": 229,
+        "controls": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "pairs": 33,
+        "translated": 400,
+        "returnedPositions": 364
+      }
+    ],
+    "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+    "trajectory": "3767adfc472c8e43a1f54741672e5aca69384b2ea37c76cd7ecc8571b68f71a4",
+    "read": {
+      "issued": 323,
+      "inherited": 0,
+      "realized": 270,
+      "contradicted": 51,
+      "unobserved": 2,
+      "inapplicable": 0
+    },
+    "indicators": {
+      "issued": 16,
+      "started": 9,
+      "preserved": 7,
+      "realized": 1,
+      "contradicted": 12,
+      "unobserved": 3,
+      "inapplicable": 0,
+      "nonordinaryRealized": 1
+    },
+    "redirected": {
+      "programs": 0,
+      "options": 0,
+      "writesExact": 0,
+      "arrivalsExact": 0,
+      "redirectedAgainstDirect": 0,
+      "intoModeledRegion": 0,
+      "usesExact": 0,
+      "changedNextMotion": 0
+    }
+  },
+  "observedL1": {
+    "before": [
+      6,
+      9
+    ],
+    "mark": [
+      9,
+      6
+    ],
+    "after": [
+      9,
+      6
+    ],
+    "peersBefore": [
+      [
+        6,
+        13
+      ]
+    ],
+    "peersAfter": [
+      [
+        6,
+        13
+      ]
+    ],
+    "matchedWitnesses": 1,
+    "controls": [
+      {
+        "q": 1,
+        "to": [
+          6,
+          9
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 2,
+        "to": [
+          6,
+          10
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 3,
+        "to": [
+          5,
+          9
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 4,
+        "to": [
+          7,
+          9
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 5,
+        "to": [
+          9,
+          6
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      }
+    ]
+  },
+  "guided": {
+    "officialL1": 1,
+    "retained": true,
+    "isolatedTrials": 16,
+    "isolatedExact": 16,
+    "distinctIsolatedLandings": 15,
+    "closedLoops": [
+      {
+        "entry": "official_level_entry",
+        "commands": 2,
+        "physicalTransfers": 0,
+        "distinctLandings": 0,
+        "territory": [
+          "7,3",
+          "8,3"
+        ],
+        "stop": "family_abstained",
+        "won": false,
+        "firstCorrectRead": null
+      },
+      {
+        "entry": "after_three_public_demonstration_moves",
+        "commands": 69,
+        "physicalTransfers": 31,
+        "distinctLandings": 6,
+        "territory": [
+          "9,3",
+          "10,3",
+          "8,5",
+          "8,4",
+          "9,4",
+          "10,4",
+          "8,3",
+          "7,4"
+        ],
+        "stop": "family_abstained",
+        "won": false,
+        "firstCorrectRead": {
+          "op": 5,
+          "step": 1,
+          "from_": [
+            8,
+            4
+          ],
+          "mark": [
+            9,
+            3
+          ],
+          "actual": [
+            9,
+            3
+          ]
+        }
+      }
+    ]
+  },
+  "physicalAutonomous": [
+    {
+      "level": 1,
+      "actions": 574,
+      "forecastCount": 323,
+      "validOpportunities": 58,
+      "firstValid": {
+        "action": 363,
+        "from": [
+          6,
+          9
+        ],
+        "marked": [
+          9,
+          6
+        ],
+        "issued": 1,
+        "phase": "unreadIndicator"
+      },
+      "byCommandAtValid": {
+        "1": 4,
+        "2": 3,
+        "3": 5,
+        "4": 3,
+        "5": 28,
+        "6": 15
+      },
+      "issuedActivations": 47,
+      "mirrorMoves": [],
+      "physicalTransfers": 28,
+      "exactNamedTransfers": 4,
+      "transfers": [
+        {
+          "action": 483,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            9
+          ],
+          "arrived": [
+            9,
+            6
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 484,
+          "phase": "witnessedPreview",
+          "from": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 485,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            9
+          ],
+          "arrived": [
+            9,
+            6
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": true,
+          "exactProbe": false
+        },
+        {
+          "action": 486,
+          "phase": "witnessedPreview",
+          "from": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": true,
+          "exactProbe": false
+        },
+        {
+          "action": 487,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            9
+          ],
+          "arrived": [
+            9,
+            6
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 488,
+          "phase": "witnessedPreview",
+          "from": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 489,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            9
+          ],
+          "arrived": [
+            9,
+            6
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 490,
+          "phase": "witnessedPreview",
+          "from": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 491,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            9
+          ],
+          "arrived": [
+            9,
+            6
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 492,
+          "phase": "witnessedPreview",
+          "from": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 501,
+          "phase": "occupancy",
+          "from": [
+            6,
+            9
+          ],
+          "arrived": [
+            9,
+            6
+          ],
+          "other": [
+            [
+              6,
+              11
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 517,
+          "phase": "occupancy",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 522,
+          "phase": "witnessedPreview",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": true,
+          "exactProbe": false
+        },
+        {
+          "action": 523,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": true,
+          "exactProbe": false
+        },
+        {
+          "action": 524,
+          "phase": "witnessedPreview",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 525,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 526,
+          "phase": "witnessedPreview",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 527,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 535,
+          "phase": "occupancy",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 536,
+          "phase": "witnessedPreview",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 537,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 538,
+          "phase": "witnessedPreview",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 539,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 547,
+          "phase": "occupancy",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 552,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 553,
+          "phase": "witnessedPreview",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 554,
+          "phase": "witnessedPreview",
+          "from": [
+            6,
+            12
+          ],
+          "arrived": [
+            12,
+            6
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        },
+        {
+          "action": 555,
+          "phase": "witnessedPreview",
+          "from": [
+            12,
+            6
+          ],
+          "arrived": [
+            6,
+            12
+          ],
+          "other": [
+            [
+              9,
+              8
+            ]
+          ],
+          "exactRead": false,
+          "exactProbe": false
+        }
+      ],
+      "probeChecks": [
+        {
+          "action": 363,
+          "issued": 1,
+          "word": [
+            "ACTION1"
+          ],
+          "status": "contradicted",
+          "from": [
+            6,
+            9
+          ],
+          "marked": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "subjectMatches": false,
+          "markMatches": true
+        },
+        {
+          "action": 364,
+          "issued": 4,
+          "word": [
+            "ACTION1",
+            "ACTION4"
+          ],
+          "status": "contradicted",
+          "from": [
+            6,
+            9
+          ],
+          "marked": [
+            9,
+            6
+          ],
+          "arrived": [
+            7,
+            9
+          ],
+          "subjectMatches": false,
+          "markMatches": true
+        },
+        {
+          "action": 380,
+          "issued": 4,
+          "word": [
+            "ACTION4"
+          ],
+          "status": "contradicted",
+          "from": [
+            6,
+            9
+          ],
+          "marked": [
+            9,
+            6
+          ],
+          "arrived": [
+            7,
+            9
+          ],
+          "subjectMatches": false,
+          "markMatches": true
+        },
+        {
+          "action": 410,
+          "issued": 1,
+          "word": [
+            "ACTION1"
+          ],
+          "status": "unobserved",
+          "from": [
+            6,
+            9
+          ],
+          "marked": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "subjectMatches": false,
+          "markMatches": true
+        },
+        {
+          "action": 412,
+          "issued": 1,
+          "word": [
+            "ACTION1"
+          ],
+          "status": "contradicted",
+          "from": [
+            6,
+            10
+          ],
+          "marked": [
+            10,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 414,
+          "issued": 3,
+          "word": [
+            "ACTION3"
+          ],
+          "status": "unobserved",
+          "from": [
+            6,
+            10
+          ],
+          "marked": [
+            10,
+            6
+          ],
+          "arrived": [
+            5,
+            10
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 457,
+          "issued": 1,
+          "word": [
+            "ACTION1"
+          ],
+          "status": "unobserved",
+          "from": [
+            6,
+            9
+          ],
+          "marked": [
+            9,
+            6
+          ],
+          "arrived": [
+            6,
+            9
+          ],
+          "subjectMatches": false,
+          "markMatches": true
+        },
+        {
+          "action": 465,
+          "issued": 1,
+          "word": [
+            "ACTION1"
+          ],
+          "status": "contradicted",
+          "from": [
+            7,
+            10
+          ],
+          "marked": null,
+          "arrived": [
+            7,
+            9
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 468,
+          "issued": 2,
+          "word": [
+            "ACTION2"
+          ],
+          "status": "contradicted",
+          "from": [
+            7,
+            10
+          ],
+          "marked": null,
+          "arrived": [
+            7,
+            11
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 469,
+          "issued": 1,
+          "word": [
+            "ACTION2",
+            "ACTION1"
+          ],
+          "status": "contradicted",
+          "from": [
+            7,
+            11
+          ],
+          "marked": null,
+          "arrived": [
+            7,
+            10
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 470,
+          "issued": 3,
+          "word": [
+            "ACTION2",
+            "ACTION1",
+            "ACTION3"
+          ],
+          "status": "contradicted",
+          "from": [
+            7,
+            10
+          ],
+          "marked": null,
+          "arrived": [
+            6,
+            10
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 472,
+          "issued": 1,
+          "word": [
+            "ACTION1"
+          ],
+          "status": "contradicted",
+          "from": [
+            6,
+            11
+          ],
+          "marked": null,
+          "arrived": [
+            6,
+            10
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 473,
+          "issued": 2,
+          "word": [
+            "ACTION1",
+            "ACTION2"
+          ],
+          "status": "contradicted",
+          "from": [
+            6,
+            10
+          ],
+          "marked": null,
+          "arrived": [
+            6,
+            11
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 474,
+          "issued": 3,
+          "word": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION3"
+          ],
+          "status": "contradicted",
+          "from": [
+            6,
+            11
+          ],
+          "marked": null,
+          "arrived": [
+            5,
+            11
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 475,
+          "issued": 4,
+          "word": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION3",
+            "ACTION4"
+          ],
+          "status": "contradicted",
+          "from": [
+            5,
+            11
+          ],
+          "marked": null,
+          "arrived": [
+            6,
+            11
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        },
+        {
+          "action": 476,
+          "issued": 5,
+          "word": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION3",
+            "ACTION4",
+            "ACTION5"
+          ],
+          "status": "realized",
+          "from": [
+            6,
+            11
+          ],
+          "marked": null,
+          "arrived": [
+            6,
+            11
+          ],
+          "subjectMatches": false,
+          "markMatches": false
+        }
+      ],
+      "maxSimultaneousGoals": 0,
+      "firstGoal": null,
+      "wrongSubjectCount": 169,
+      "firstNamed": {
+        "action": 485,
+        "from": [
+          6,
+          9
+        ],
+        "marked": [
+          9,
+          6
+        ],
+        "arrived": [
+          9,
+          6
+        ],
+        "other": [
+          [
+            6,
+            11
+          ]
+        ]
+      },
+      "uniqueNamedSites": [
+        "9,6",
+        "6,9",
+        "6,12",
+        "12,6"
+      ],
+      "official": false,
+      "visitedCells": 32
+    },
+    {
+      "level": 2,
+      "actions": 658,
+      "forecastCount": 38,
+      "validOpportunities": 0,
+      "firstValid": null,
+      "byCommandAtValid": {},
+      "issuedActivations": 55,
+      "mirrorMoves": [
+        {
+          "action": 49,
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            9,
+            3
+          ],
+          "issued": 4
+        },
+        {
+          "action": 50,
+          "from": [
+            9,
+            3
+          ],
+          "to": [
+            10,
+            3
+          ],
+          "issued": 4
+        }
+      ],
+      "physicalTransfers": 0,
+      "exactNamedTransfers": 0,
+      "transfers": [],
+      "probeChecks": [
+        {
+          "action": 85,
+          "issued": 5,
+          "word": [
+            "ACTION5"
+          ],
+          "status": "contradicted",
+          "from": [
+            10,
+            4
+          ],
+          "marked": null,
+          "arrived": [
+            10,
+            4
+          ],
+          "subjectMatches": true,
+          "markMatches": false
+        },
+        {
+          "action": 86,
+          "issued": 3,
+          "word": [
+            "ACTION5",
+            "ACTION3"
+          ],
+          "status": "contradicted",
+          "from": [
+            10,
+            4
+          ],
+          "marked": null,
+          "arrived": [
+            9,
+            4
+          ],
+          "subjectMatches": true,
+          "markMatches": false
+        },
+        {
+          "action": 146,
+          "issued": 3,
+          "word": [
+            "ACTION3"
+          ],
+          "status": "contradicted",
+          "from": [
+            10,
+            4
+          ],
+          "marked": null,
+          "arrived": [
+            9,
+            4
+          ],
+          "subjectMatches": true,
+          "markMatches": false
+        },
+        {
+          "action": 150,
+          "issued": 1,
+          "word": [
+            "ACTION1"
+          ],
+          "status": "contradicted",
+          "from": [
+            10,
+            4
+          ],
+          "marked": null,
+          "arrived": [
+            10,
+            4
+          ],
+          "subjectMatches": true,
+          "markMatches": false
+        },
+        {
+          "action": 159,
+          "issued": 4,
+          "word": [
+            "ACTION4"
+          ],
+          "status": "contradicted",
+          "from": [
+            10,
+            4
+          ],
+          "marked": null,
+          "arrived": [
+            10,
+            4
+          ],
+          "subjectMatches": true,
+          "markMatches": false
+        },
+        {
+          "action": 160,
+          "issued": 2,
+          "word": [
+            "ACTION4",
+            "ACTION2"
+          ],
+          "status": "contradicted",
+          "from": [
+            10,
+            4
+          ],
+          "marked": null,
+          "arrived": [
+            10,
+            4
+          ],
+          "subjectMatches": true,
+          "markMatches": false
+        }
+      ],
+      "maxSimultaneousGoals": 0,
+      "firstGoal": null,
+      "wrongSubjectCount": 1,
+      "firstNamed": null,
+      "uniqueNamedSites": [],
+      "official": false,
+      "visitedCells": 18
+    }
+  ]
+}
