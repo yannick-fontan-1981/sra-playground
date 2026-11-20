@@ -4,6 +4,7 @@ import { GAME_CATALOG } from '../src/games/catalog.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { hash, op, sourceReplay } from './sic-study-source-replay.mjs';
+import { qualifyExcursionLayouts } from './qualify-excursion-layouts.mjs';
 
 // The first excursion is chosen before observing either reachable set.
 // Compare every word of length <= 2 over the same public control vocabulary.
@@ -144,7 +145,8 @@ async function audit(run) {
   if (capability) {
     const [destination, suffix] = capability,
       tested = new Set(),
-      layouts = new Map();
+      layouts = new Map(),
+      images = new Set();
     let wrongOrigin = 0,
       unknown = 0;
     function execute(b, word) {
@@ -171,6 +173,7 @@ async function audit(run) {
           continue;
         }
         const { poses: parts } = await poses(b);
+        images.add(hash(b));
         if (parts.get(actor) !== history[begin].poses.get(actor)) {
           wrongOrigin++;
           continue;
@@ -201,6 +204,29 @@ async function audit(run) {
         layouts.set(k, cell);
       }
     swaps = { tested: tested.size, wrongOrigin, unknown, capability, layouts: [...layouts.values()] };
+    swaps.validation = await qualifyExcursionLayouts({
+      placement,
+      tested,
+      layouts: swaps.layouts,
+      images,
+      origin: history[begin].poses.get(actor),
+      prepare: async (word) => {
+        const board = execute(restore(begin), word);
+        if (!board || win(board) || board.state === 'GAME_OVER') return null;
+        const { key, poses: parts } = await poses(board);
+        if (parts.get(actor) !== history[begin].poses.get(actor) || !partners.every((id) => parts.has(id)))
+          return null;
+        return { board, key, layout: partners.map((id) => parts.get(id)) };
+      },
+      outcome: async (board) => {
+        const q = execute(board, suffix);
+        if (!q) return null;
+        if (destination === 'WIN') return win(q);
+        if (win(q) || q.state === 'GAME_OVER') return false;
+        const at = (await poses(q)).poses.get(actor);
+        return at ? at === destination : null;
+      },
+    });
   }
   return {
     ...result,
