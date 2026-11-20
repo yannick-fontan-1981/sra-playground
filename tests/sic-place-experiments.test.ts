@@ -70,6 +70,62 @@ function edge(
   };
 }
 
+test('moving both roles can enable a command while their mutual offset stays fixed', () => {
+  const m = initialMemory(1),
+    at = (traveler: number, marker: number) => ({ traveler, marker });
+  m.edges = [
+    edge(0, 0, 'trigger', at(6, 8), at(6, 8)),
+    edge(3, 3, 'trigger', at(7, 9), at(7, 9)),
+    edge(4, 4, 'trigger', at(6, 9), at(6, 9)),
+    edge(5, 6, 'trigger', at(8, 10), at(10, 10)),
+    edge(7, 8, 'trigger', at(8, 11), at(10, 11)),
+    edge(9, 10, 'trigger', at(9, 11), at(11, 11)),
+    edge(15, 16, 'carry', at(6, 8), at(8, 10)),
+    edge(6, 11, 'use', at(10, 10), at(11, 10)),
+  ];
+  const p = conditionalPlacements(
+    m,
+    observation(at(6, 8)),
+    rows,
+    0,
+    new Set(['carry', 'trigger', 'use']),
+    {}
+  )!;
+  assert.ok(p.frame);
+  assert.equal(p.preparation[0]?.op, 'carry');
+  assert.equal(p.trigger.op, 'trigger');
+  assert.deepEqual(p.trigger.from, [8, 1]);
+  assert.deepEqual(p.trigger.to, [10, 1]);
+  assert.equal(p.use?.op, 'use');
+  assert.doesNotThrow(() => splitNativeState(p, 'frontier'));
+  const before = observation(at(6, 8)),
+    actual = observation(at(9, 11));
+  actual.revision = before.revision + 1;
+  const index = m.edges.push(edge(0, 12, 'carry', at(6, 8), at(9, 11))) - 1;
+  m.delayed.history.push(index);
+  assert.equal(
+    placementReceipt(m, { plan: p, index: 0, scene: 0 }, 12, before, actual).result,
+    'condition_refuted'
+  );
+  const retry = conditionalPlacements(
+    m,
+    actual,
+    rows,
+    12,
+    new Set(['carry', 'trigger', 'use']),
+    m.attempts,
+    m.reconsiderPlacement!
+  )!;
+  assert.equal(retry.reconsideredRef, actual.revision);
+  assert.equal(retry.alreadyPlaced, 1);
+  assert.deepEqual(retry.trigger.from, [9, 1]);
+  assert.deepEqual(retry.trigger.to, [11, 1]);
+  assert.equal(
+    placementOffer({ plan: retry, index: 1, scene: 12 }, actual, new Set(['trigger']))?.phase,
+    'conditionTrigger'
+  );
+});
+
 test('solves for a partner placement two moves away and verifies the controlled transport and use', () => {
   const m = initialMemory(1);
   const at = (traveler: number, marker: number) => ({ traveler, marker });

@@ -45,6 +45,11 @@ const conditions = {
   used: 0,
   official: 0,
   reused: 0,
+  boardPrograms: 0,
+  boardTested: 0,
+  boardExact: 0,
+  boardUsed: 0,
+  reconsidered: 0,
   reuseUsed: 0,
 };
 const controlled = new Set();
@@ -131,6 +136,21 @@ for (const [i, cmd] of run.replayCommands.entries()) {
       throw Error('No active contrast at ' + i);
     if (index === start) {
       conditions.selected++;
+      if (plan.reconsideredRef) {
+        const source = i + plan.reconsideredRef - event.revision;
+        const rejected = events.get(source + 1);
+        if (
+          source !== i - 1 ||
+          !start ||
+          rejected?.result !== 'condition_refuted' ||
+          rejected.condition?.plan.actor !== actor ||
+          rejected.condition?.plan.partner !== partner ||
+          rejected.condition?.plan.trigger.op !== plan.trigger.op ||
+          rejected.condition.index >= rejected.condition.plan.preparation.length
+        )
+          throw Error('Unmatched reconsidered placement at ' + i);
+        conditions.reconsidered++;
+      }
       if (start) conditions.observedPreparations++;
       const count = (a, b) =>
         plan.rules.filter((r) => {
@@ -138,7 +158,24 @@ for (const [i, cmd] of run.replayCommands.entries()) {
           return ((r.signOnly ? Math.sign(value) : value) === r.value) === r.onMatch;
         }).length;
       const initialPeer = at(initial, partner);
-      if (
+      if (plan.frame) {
+        if (!initialPeer || !plan.frame.rules.length || !plan.frame.rules.some((r) => r.to === null))
+          throw Error('Unbound board rule');
+        const accepts = (a, p) =>
+          plan.frame.rules.every((r) => {
+            if ((r.from !== null && r.from !== partner) || (r.to !== null && r.to !== partner))
+              throw Error('Unknown board reference');
+            const value = (r.from === null ? a : p)[r.axis] - (r.to === null ? 0 : p[r.axis]);
+            return (r.low === null || value >= r.low) && (r.high === null || value <= r.high);
+          });
+        if (
+          accepts(plan.origin, initialPeer.split(',').map(Number)) ||
+          !accepts(plan.trigger.from, plan.preparation.at(-1).to) ||
+          plan.agreement.some((n) => n !== plan.frame.rules.length)
+        )
+          throw Error('Invalid world-coordinate prediction at ' + i);
+        conditions.boardPrograms++;
+      } else if (
         !initialPeer ||
         !plan.rules.length ||
         count(plan.origin, initialPeer.split(',').map(Number)) !== 0 ||
@@ -184,6 +221,7 @@ for (const [i, cmd] of run.replayCommands.entries()) {
       if (at(cmd.from, partner) !== plan.preparation.at(-1).to.join() || before !== plan.trigger.from.join())
         throw Error('Trigger origin differs at ' + i);
       conditions.tested++;
+      conditions.boardTested += Number(!!plan.frame);
       conditions.moved += Number(
         actual !== null && actual !== before && event.result !== 'official_completion'
       );
@@ -215,6 +253,8 @@ for (const [i, cmd] of run.replayCommands.entries()) {
     conditions.completedPlacements += Number(want === 'condition_placed' && index === n - 1);
     conditions.exact += Number(want === 'condition_activated');
     conditions.used += Number(want === 'condition_used');
+    conditions.boardExact += Number(want === 'condition_activated' && !!plan.frame);
+    conditions.boardUsed += Number(want === 'condition_used' && !!plan.frame);
     conditions.fixedOriginExact += Number(want === 'condition_activated' && before === origin);
     conditions.reuseUsed += Number(want === 'condition_used' && !!plan.reuseRef);
     continue;

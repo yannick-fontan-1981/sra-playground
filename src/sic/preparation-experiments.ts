@@ -40,7 +40,7 @@ import {
 } from './derive-capabilities.ts';
 import { newProjectionMemory, proposeProjection, recordProjection, type Trial, type ProjectionMemory } from './projected-affordances.ts';
 import {newFrontierMemory,selectFrontier,recordFrontier,type FrontierMemory,type FrontierTrial} from './experimental-frontier.ts';
-import {conditionalPlacements,placementOffer,placementReceipt,type ConditionalTrial,type LearnedPlacement} from './conditional-placements.ts';
+import {conditionalPlacements,placementOffer,placementReceipt,type ConditionalTrial,type LearnedPlacement,type ReconsiderPlacement} from './conditional-placements.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -152,6 +152,7 @@ export type Memory = {
   delayed: DelayedMemory;
   frontier:FrontierMemory;
   condition?: ConditionalTrial | null;
+  reconsiderPlacement?: ReconsiderPlacement | null;
   conditionLearned?: Record<string,LearnedPlacement>;
   projection: ProjectionMemory;
   space: SpatialMemory;
@@ -357,6 +358,14 @@ export function selectExperiment(
   if(m.condition?.scene===s) {
     const continuing=placementOffer(m.condition,o,available);
     if(continuing) return continuing;
+  }
+  const repair=m.reconsiderPlacement;
+  if(rows && repair?.scene===s && repair.ref===o.revision) {
+    const plan=conditionalPlacements(m,o,rows,s,available,m.attempts,repair);
+    if(plan) {
+      const offer=placementOffer({plan,index:plan.alreadyPlaced??0,scene:s},o,available);
+      if(offer)return offer;
+    }
   }
   const pending = m.pending;
   if (pending?.phase === 'explore') {
@@ -643,6 +652,7 @@ export function recordExperiment(
   m.turns++;
   const frontier=m.frontier;
   if(!x?.condition)m.condition=null;
+  if(m.reconsiderPlacement)m.reconsiderPlacement=null;
   const newScene=m.seenAt[t]===undefined && t!==s;
   if(newScene){frontier.lastScene=m.turns;frontier.exploring=false;}
   if(!x?.frontier){frontier.question=null;frontier.follow=null;}

@@ -232,7 +232,7 @@ async function audit(c) {
       if (learn) {
         const next = await positions(b),
           key = beforeKey + '/' + k;
-        if (!edges.has(key)) edges.set(key, { k, from: p, to: next });
+        if (!edges.has(key)) edges.set(key, { k, from: p, to: next, target: hash(b) });
         p = next;
       }
     }
@@ -282,14 +282,32 @@ async function audit(c) {
   }
   function imagine(keys) {
     let current = start;
+    let image = hash(initial);
     for (const k of keys) {
+      const exact = image === null ? null : edges.get(image + '/' + k);
+      if (exact) {
+        current = exact.to;
+        image = exact.target;
+        continue;
+      }
+      image = null;
       const prior = byCommand.get(k);
       if (!prior?.length) return null;
+      const roles = [actor, ...primary];
+      if (!roles.every((id) => current[id])) return null;
+      const contextual = prior
+        .filter((e) => roles.every((id) => e.from[id] && e.to[id]))
+        .map((e) => ({
+          edge: e,
+          distance: roles.reduce((n, id) => n + dist(current[id], e.from[id]), 0),
+        }));
+      const near = Math.min(...contextual.map((x) => x.distance));
+      const context = contextual.filter((x) => x.distance === near).map((x) => x.edge);
       const next = {};
       for (const [id, at] of Object.entries(current)) {
         let nearest = Infinity;
         const ends = new Map();
-        for (const e of prior) {
+        for (const e of context) {
           const from = e.from[id],
             to = e.to[id];
           if (!from || !to) continue;
@@ -300,9 +318,12 @@ async function audit(c) {
             ends.clear();
           }
           const end = at.map((v, i) => v + to[i] - from[i]);
-          ends.set(end.join(), end);
+          const p = ends.get(end.join()) ?? { end, n: 0 };
+          p.n++;
+          ends.set(end.join(), p);
         }
-        if (ends.size === 1) next[id] = ends.values().next().value;
+        const vs = [...ends.values()].sort((a, b) => b.n - a.n);
+        if (vs.length && vs[0].n * 2 > vs.reduce((n, v) => n + v.n, 0)) next[id] = vs[0].end;
       }
       current = next;
     }
@@ -310,7 +331,7 @@ async function audit(c) {
   }
   const plans = test.map((w) => {
     const l = imagine(w);
-    return { w, l, forecast: l ? predictSpatialCapability(models.landmarks, l) : null };
+    return { w, l, forecast: l ? predictSpatialCapability(models.board, l) : null };
   });
   const selected =
     plans.find((p) => p.forecast && !knownJoint.has(joint(p.l))) ?? plans.find((p) => p.forecast);

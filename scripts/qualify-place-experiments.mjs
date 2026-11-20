@@ -19,9 +19,11 @@ import {
 } from '../src/sic/conditional-placements.ts';
 import { selectFrontier } from '../src/sic/experimental-frontier.ts';
 const [environment, controlDir, directory, output, condition, upperFile] = process.argv.slice(2);
-const { selectFrontier: control } = await import(
-  pathToFileURL(join(resolve(controlDir), 'src/sic/experimental-frontier.ts'))
-);
+const conditional = condition === 'conditional-model' || condition === 'conditional-policy';
+const control = conditional
+  ? null
+  : (await import(pathToFileURL(join(resolve(controlDir), 'src/sic/experimental-frontier.ts'))))
+      .selectFrontier;
 const engine = await sourceBackend(resolve(environment));
 const records = upperFile
   ? (await readFile(upperFile, 'utf8')).trim().split('\n').map(JSON.parse)
@@ -153,7 +155,7 @@ for (const g of records) {
     if (m.turns < 4 || m.recurrences < 2 || !knownPos.size) continue;
     const s = m.scenes.indexOf(sceneKey(to)),
       ops = choices(board);
-    if (condition === 'conditional-model' || condition === 'conditional-policy') {
+    if (conditional) {
       const plan =
         condition === 'conditional-model'
           ? conditionalPlacements(m, to, board.frame, s, ops, m.attempts)
@@ -305,6 +307,7 @@ for (const g of records) {
       trigger: plan.trigger,
       use: plan.use,
       hypotheses: plan.rules,
+      ...(plan.frame ? { frame: plan.frame } : {}),
       agreement: plan.agreement,
       alternatives: plan.alternatives,
       outcomes,

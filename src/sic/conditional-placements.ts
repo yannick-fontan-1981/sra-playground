@@ -1,6 +1,11 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Edge, Experiment, Memory } from './preparation-experiments.ts';
 import { add, diff, point, same, size, type XY } from './access-terrain.ts';
+import {
+  fitSpatialCapability,
+  predictSpatialCapability,
+  type SpatialCapability,
+} from './spatial-capability.ts';
 
 type Condition = { axis: 0 | 1; signOnly: boolean; value: number; onMatch: boolean };
 export type PlacementStep = {
@@ -21,6 +26,7 @@ export type ConditionalPlacement = {
   origin: XY;
   without: number;
   rules: Condition[];
+  frame?: SpatialCapability;
   support: number[];
   preparation: PlacementStep[];
   trigger: PlacementStep;
@@ -28,6 +34,7 @@ export type ConditionalPlacement = {
   agreement: [number, number];
   alreadyPlaced?: number;
   reuseRef?: number;
+  reconsideredRef?: number;
   alternatives?: {
     partner: string;
     location: XY;
@@ -40,7 +47,16 @@ export type ConditionalPlacement = {
   }[];
 };
 export type ConditionalTrial = { plan: ConditionalPlacement; index: number; scene: number };
+export type ReconsiderPlacement = {
+  originScene: number;
+  scene: number;
+  actor: string;
+  partner: string;
+  trigger: string;
+  ref: number;
+};
 type Sample = { edge: Edge; start: XY; end: XY; partner: XY };
+const pairLayout = (actor: XY, peer: string, at: XY) => ({ actor, objects: { [peer]: at } });
 const read = (edge: Edge, id: string) => {
   const anchor = edge.anchors[id];
   if (!anchor || !edge.visibleAfter?.includes(id)) return null;
@@ -238,12 +254,18 @@ function candidatesForInput(list: JointSample[], at: SearchNode) {
     if (!exact.every((s) => same(s.a.to, x.a.to) && same(s.p.to, x.p.to))) return null;
     return { a: x.a.to, p: x.p.to, ref: x.edge.ref, other: x.edge.ref };
   }
+  if (!list.length) return null;
+  // Translate the two displacements from the same observed neighbourhood.
+  // Choosing each donor independently can splice two incompatible configurations.
+  const distances = list.map((s) => size(diff(s.a.from, at.a)) + size(diff(s.p.from, at.p)));
+  const nearest = Math.min(...distances),
+    near = list.filter((_, i) => distances[i] === nearest);
   const a = learnDestination(
-    list.map((s) => ({ ...s.a, ref: s.edge.ref })),
+    near.map((s) => ({ ...s.a, ref: s.edge.ref })),
     at.a
   );
   const p = learnDestination(
-    list.map((s) => ({ ...s.p, ref: s.edge.ref })),
+    near.map((s) => ({ ...s.p, ref: s.edge.ref })),
     at.p
   );
   return a && p ? { a: a.to, p: p.to, ref: p.ref, other: a.ref } : null;
@@ -268,15 +290,21 @@ export function conditionalPlacements(
   rows: NativeRows,
   scene: number,
   available: Set<string>,
-  tried: Record<string, number>
+  tried: Record<string, number>,
+  reconsider?: ReconsiderPlacement
 ): ConditionalPlacement | null {
   const prefix = recentPaths(m, scene);
   const edges = m.edges.filter(
     (e) => e.stable && e.effect.key !== 'completion' && !e.effect.key.startsWith('terminal:')
   );
-  const reuse = reusePlacement(m, o, rows, scene, available, edges);
+  const reuse = reconsider ? null : reusePlacement(m, o, rows, scene, available, edges);
   if (reuse) return reuse;
-  const local = edges.filter((e) => (e.s === scene || prefix.has(e.s)) && available.has(e.cmd));
+  const local = edges.filter(
+    (e) =>
+      (e.s === scene || prefix.has(e.s)) &&
+      available.has(e.cmd) &&
+      (!reconsider || (e.s === reconsider.originScene && prefix.has(e.s) && e.cmd === reconsider.trigger))
+  );
   if (!local.length) return null;
   const live = new Map(
     o.entities
@@ -308,11 +336,14 @@ export function conditionalPlacements(
     active: Sample[];
     inactive: Sample[];
     rules: Condition[];
+    frame: SpatialCapability | null;
     weight: number;
   };
   const choices: Explanation[] = [];
+  const frames = new Map<string, SpatialCapability | null>();
   for (const bare of local)
     for (const actor of movedBy.get(bare.cmd) ?? []) {
+      if (reconsider && actor !== reconsider.actor) continue;
       const idle = read(bare, actor),
         entity = live.get(actor);
       if (!entity || !idle || !same(idle.from, idle.to)) continue;
@@ -324,6 +355,7 @@ export function conditionalPlacements(
             size(diff(point(bare.anchors[b.signature]!.at), idle.from))
       );
       for (const peer of peers.slice(0, 12)) {
+        if (reconsider && peer.signature !== reconsider.partner) continue;
         const partner = peer.signature,
           initial = point(bare.anchors[partner]!.at);
         const measured: Sample[] = [];
@@ -338,14 +370,50 @@ export function conditionalPlacements(
           active.map((x) => diff(x.start, x.partner)),
           inactive.map((x) => diff(x.start, x.partner))
         );
-        if (!rules.length || votes(rules, diff(idle.from, initial))) continue;
+        const frameKey = [actor, partner, bare.cmd].join('/');
+        if (!frames.has(frameKey)) {
+          let frame: SpatialCapability | null = null;
+          if (active.length >= 2 && inactive.length >= 2 && mobile.has(partner)) {
+            const examples = measured.map((s) => ({
+              layout: pairLayout(s.start, partner, s.partner),
+              outcome: !same(s.start, s.end),
+            }));
+            const model = fitSpatialCapability(examples, [partner], 'board');
+            if (
+              model &&
+              model.rules.some((r) => r.to === null) &&
+              model.sensitivity >= 0.75 &&
+              model.specificity >= 0.75
+            )
+              frame = model;
+          }
+          frames.set(frameKey, frame);
+        }
+        const frame = frames.get(frameKey) ?? null;
+        if (
+          frame
+            ? predictSpatialCapability(frame, pairLayout(idle.from, partner, initial)) !== false
+            : !rules.length || votes(rules, diff(idle.from, initial))
+        )
+          continue;
         const diversity = (xs: Sample[]) => new Set(xs.map((s) => diff(s.start, s.partner).join())).size;
         const weight =
           Math.min(3, Math.min(active.length, inactive.length)) +
           Math.min(2, diversity(active) + diversity(inactive) - 2) +
           Number(active.some((s) => same(s.start, idle.from))) +
           Number(mobile.has(partner));
-        choices.push({ bare, actor, partner, origin: idle.from, initial, active, inactive, rules, weight });
+        choices.push({
+          bare,
+          actor,
+          partner,
+          origin: idle.from,
+          initial,
+          active,
+          inactive,
+          rules,
+          frame,
+          weight,
+        });
       }
     }
   const ranked = new Map<string, Candidate>(),
@@ -353,7 +421,7 @@ export function conditionalPlacements(
   const usesByPair = new Map<string, Map<string, UseProjection[]>>();
   const predictedByPair = new Map<string, Map<string, ReturnType<typeof candidatesForInput>>>();
   for (const c of choices.sort((a, b) => b.weight - a.weight).slice(0, 12)) {
-    const { bare, actor, partner, origin, initial, active, inactive, rules } = c,
+    const { bare, actor, partner, origin, initial, active, inactive, rules, frame } = c,
       ps = prefix.get(bare.s);
     const ae = extentOf(live.get(actor)!),
       pe = extentOf(live.get(partner)!);
@@ -417,9 +485,14 @@ export function conditionalPlacements(
         if (!ps || steps.length < ps.length)
           queue.push({ a: predicted.a, p: predicted.p, scene: next, steps, inferred });
         if (ps && (steps.length !== ps.length || next !== scene)) continue;
-        const offset = diff(predicted.a, predicted.p),
-          agreement = votes(rules, offset);
-        if (agreement * 2 <= rules.length || (next !== null && known.has(next + '/' + bare.cmd))) continue;
+        const offset = diff(predicted.a, predicted.p);
+        const total = frame?.rules.length ?? rules.length;
+        const agreement = frame
+          ? predictSpatialCapability(frame, pairLayout(predicted.a, partner, predicted.p))
+            ? total
+            : 0
+          : votes(rules, offset);
+        if (agreement * 2 <= total || (next !== null && known.has(next + '/' + bare.cmd))) continue;
         const distance = (s: Sample) => size(diff(offset, diff(s.start, s.partner)));
         const donor = active.reduce((a, b) => (distance(a) <= distance(b) ? a : b));
         const relative =
@@ -462,7 +535,7 @@ export function conditionalPlacements(
         );
         const anchored = same(origin, predicted.a) && !same(initial, predicted.p);
         const score =
-          (4 * agreement) / rules.length +
+          (4 * agreement) / total +
           Math.min(3, c.weight) +
           (follow?.distinct ? 7 : 0) +
           (use ? 1 : 0) +
@@ -483,7 +556,9 @@ export function conditionalPlacements(
             origin,
             without: bare.ref,
             ...(ps ? { alreadyPlaced: ps.length } : {}),
+            ...(reconsider ? { reconsideredRef: reconsider.ref } : {}),
             rules,
+            ...(frame ? { frame } : {}),
             support: [
               ...new Set([
                 bare.ref,
@@ -495,7 +570,7 @@ export function conditionalPlacements(
             preparation: steps,
             trigger: { op: bare.cmd, role: actor, from: predicted.a, to: landing, ref: donor.edge.ref },
             use,
-            agreement: [agreement, rules.length],
+            agreement: [agreement, total],
           },
         });
       }
@@ -576,10 +651,27 @@ export function placementReceipt(
             : 'condition_used';
   if (result === 'condition_placed' || (result === 'condition_activated' && plan.use))
     m.condition = { plan, index: index + 1, scene: dest };
+  if (
+    result === 'condition_refuted' &&
+    index < n &&
+    location(after, plan.actor) &&
+    location(after, plan.partner) &&
+    (location(after, plan.actor) !== location(before, plan.actor) ||
+      location(after, plan.partner) !== location(before, plan.partner))
+  ) {
+    m.reconsiderPlacement = {
+      originScene: plan.scene,
+      scene: dest,
+      actor: plan.actor,
+      partner: plan.partner,
+      trigger: plan.trigger.op,
+      ref: after.revision,
+    };
+  }
   if (result === 'condition_activated' && !plan.reuseRef) {
     const learned = (m.conditionLearned ??= {});
     if (!learned[plan.key]) {
-      const { alternatives, ...recipe } = plan;
+      const { alternatives, reconsideredRef, ...recipe } = plan;
       learned[plan.key] = { plan: recipe, landingScene: dest, ref: after.revision };
       const keys = Object.keys(learned);
       if (keys.length > 32) delete learned[keys[0]!];
