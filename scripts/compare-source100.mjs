@@ -59,8 +59,27 @@ function changeSummary(before, after, click) {
   return { pixels, near, width: pixels ? right - left + 1 : 0, height: pixels ? bottom - top + 1 : 0 };
 }
 async function run(code, games) {
-  let board = await games.dispatch({ type: 'load', code, level: start });
-  if (board.level !== start && board.canSelectLevel)
+  const prefixFile = process.env.SIC_STUDY_PUBLIC_PREFIX;
+  if (prefixFile && !source) throw Error('Archived entry programs are only admitted for source studies');
+  let board = await games.dispatch({ type: 'load', code, level: prefixFile ? 1 : start });
+  let entryActions = 0;
+  if (prefixFile) {
+    const programs = JSON.parse(await readFile(prefixFile, 'utf8'));
+    for (let level = 1; level < start; level++) {
+      const word = level === 1
+        ? programs.niveau_1[code]?.suite_gagnante
+        : programs.niveaux_supérieurs.find(row => row.code === code && row.l === level)?.seq;
+      if (board.level !== level || !word) throw Error('Missing verified prefix for ' + code + '/' + level);
+      for (const command of word) {
+        const [op, coordinates] = command.split('@');
+        const [x, y] = coordinates ? coordinates.split(',').map(Number) : [];
+        board = await games.dispatch({
+          type: 'action', actionId: Number(op), ...(coordinates ? { data: { x, y } } : {})
+        });
+        entryActions++;
+      }
+    }
+  } else if (board.level !== start && board.canSelectLevel)
     board = await games.dispatch({ type: 'selectLevel', level: start });
   if (board.level !== start) throw Error('Backend did not start at requested level: ' + board.level);
   const initialCompleted = board.levelsCompleted,
@@ -254,6 +273,7 @@ async function run(code, games) {
       ...(process.env.SIC_STUDY_WORKERS ? {parallelWorkers:Number(process.env.SIC_STUDY_WORKERS)} : {}),
       initial,
       initialCompleted,
+      ...(prefixFile ? { sourcePrefixActions: entryActions } : {}),
       levels,
       issued,
       sic,

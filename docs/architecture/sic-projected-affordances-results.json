@@ -109,6 +109,60 @@
       },
       "trajectory": "b98d269fcf7ad5da56020fc2e5d768e00402ba833ee092486da3573bf78b6c2f",
       "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    },
+    "v5": {
+      "actions": 1069,
+      "images": 149,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "projection": {
+        "issued": 0,
+        "observed": 0,
+        "verifiedLanding": 0,
+        "verifiedContinuation": 0,
+        "refuted": 0
+      },
+      "frontier": {
+        "routes": 126,
+        "newProbes": 210,
+        "arrivals": 28,
+        "continuations": 18
+      },
+      "delayed": {
+        "issued": 308,
+        "preparedAccess": 0,
+        "exactPredictions": 1,
+        "followingMovements": 1
+      },
+      "trajectory": "e08a1e04cfecf0032bd2db3fea1baf3bf3ca0fbdea2cb9667a37b89a728a5aee",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    },
+    "v6": {
+      "actions": 1012,
+      "images": 162,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "projection": {
+        "issued": 0,
+        "observed": 0,
+        "verifiedLanding": 0,
+        "verifiedContinuation": 0,
+        "refuted": 0
+      },
+      "frontier": {
+        "routes": 114,
+        "newProbes": 225,
+        "arrivals": 24,
+        "continuations": 2
+      },
+      "delayed": {
+        "issued": 38,
+        "preparedAccess": 0,
+        "exactPredictions": 0,
+        "followingMovements": 0
+      },
+      "trajectory": "87ec33079fa88021a3e0b2e33af379494b9db127b92ea4d12d65c511a7365aaa",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
     }
   },
   "upperLevels": [
@@ -727,6 +781,662 @@
         "allExecuted": 0
       },
       "formerlyUnpredicted": []
+    }
+  ],
+  "upperComposition": {
+    "programs": 18,
+    "single": 94,
+    "acceptedSingles": 19,
+    "double": {
+      "P1": 21,
+      "P0": 0,
+      "N1": 1,
+      "N0": 173
+    },
+    "winningDoublesFullyExecuted": 21,
+    "triple": {
+      "tested": 13,
+      "won": 13,
+      "allExecuted": 13
+    },
+    "comparableFinalLayouts": 34,
+    "novelFinalLayouts": 0,
+    "examples": []
+  },
+  "sourceComposition": {
+    "programs": 66,
+    "single": 238,
+    "acceptedSingles": 145,
+    "double": {
+      "P1": 144,
+      "P0": 0,
+      "N1": 4,
+      "N0": 139
+    },
+    "winningDoublesFullyExecuted": 105,
+    "triple": {
+      "tested": 71,
+      "won": 71,
+      "allExecuted": 38
+    },
+    "comparableFinalLayouts": 141,
+    "novelFinalLayouts": 1,
+    "examples": [
+      {
+        "code": "DICO",
+        "swaps": [
+          1,
+          3
+        ],
+        "command": "6@25,38",
+        "visible": 1,
+        "comparable": true,
+        "novel": true,
+        "poseHash": "df9d96cf9d7da833"
+      }
+    ]
+  },
+  "upperAutonomous": [
+    {
+      "code": "CATR",
+      "level": 3,
+      "entryPrefixActions": 7,
+      "initial": "ce1fda4d59a5bad94c080babf49f5ee077fe767b78d9e18ebc5496c6b5513f5c",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV6": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "CWSE",
+      "level": 2,
+      "entryPrefixActions": 0,
+      "initial": "b45351fb835ead51df61a751f17a154dd3b484720e3ae0258bf8a2f0ba25930c",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV6": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "GARE",
+      "level": 3,
+      "entryPrefixActions": 0,
+      "initial": "a88fda3980a83ded6676f0849877da360916aae88373f5b27a8b86f1266d4bda",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV6": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "GIGO",
+      "level": 5,
+      "entryPrefixActions": 0,
+      "initial": "c604a060286c7e40b44997ae13b1073ded87415d0e588cee82a987c02ff1d979",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV6": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 5,
+      "entryPrefixActions": 0,
+      "initial": "1569271335c09e35750e90a45210ccbc337e632d5af4a7f076701f5dd440c413",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV6": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "MOTO",
+      "level": 2,
+      "entryPrefixActions": 5,
+      "initial": "d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV6": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "POLA",
+      "level": 5,
+      "entryPrefixActions": 0,
+      "initial": "b593a73ddce4884f068c3f7f530b5945ca6ee2174b2c8ce6870dd4283d7fb4f0",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV6": {
+        "won": false,
+        "actions": 120
+      }
+    }
+  ],
+  "sourceOpeningCatalogues": [
+    {
+      "code": "CATR",
+      "level": 3,
+      "setup": "6@46,51",
+      "transport": "6@21,55",
+      "use": "6@17,51",
+      "controls": 10,
+      "baseWin": false,
+      "states": 54,
+      "catalogued": 2,
+      "alternativeOnly": 1,
+      "matchedNewAccess": 0,
+      "newPlacementWithMatchedArrivalAndUse": 0,
+      "examples": [],
+      "winningConfigurations": [
+        {
+          "state": "47c60a597c6b9974ef535c9e",
+          "prep": [
+            "6@17,51"
+          ],
+          "winners": [
+            "6@46,51"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "416bdddfd3ff54e29dc7b685",
+          "prep": [
+            "6@46,51"
+          ],
+          "winners": [
+            "6@17,51"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        }
+      ]
+    },
+    {
+      "code": "CWSE",
+      "level": 2,
+      "setup": "4",
+      "transport": "6@61,55",
+      "use": "5",
+      "controls": 4,
+      "baseWin": false,
+      "states": 7,
+      "catalogued": 4,
+      "alternativeOnly": 0,
+      "matchedNewAccess": 0,
+      "newPlacementWithMatchedArrivalAndUse": 0,
+      "examples": [],
+      "winningConfigurations": [
+        {
+          "state": "2cee1b67c3b22d45c0e12415",
+          "prep": [
+            "4"
+          ],
+          "winners": [
+            "4",
+            "5"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        },
+        {
+          "state": "ebda05c95e2ec559fc802cec",
+          "prep": [
+            "4",
+            "4"
+          ],
+          "winners": [
+            "4",
+            "5"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "c05765557735b253e6eedf6a",
+          "prep": [
+            "4",
+            "6@49,55"
+          ],
+          "winners": [
+            "4",
+            "5"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "fdd4d25aeb944f17f0b9a0be",
+          "prep": [
+            "4",
+            "6@61,55"
+          ],
+          "winners": [
+            "4",
+            "5"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        }
+      ]
+    },
+    {
+      "code": "GARE",
+      "level": 2,
+      "setup": "6@21,13",
+      "transport": "6@59,13",
+      "use": "6@11,13",
+      "controls": 12,
+      "baseWin": false,
+      "states": 23,
+      "catalogued": 6,
+      "alternativeOnly": 0,
+      "matchedNewAccess": 5,
+      "newPlacementWithMatchedArrivalAndUse": 0,
+      "examples": [
+        {
+          "state": "418b8f4960d945dc9dbf3a5c",
+          "prep": [
+            "6@21,13"
+          ],
+          "placements": [
+            {
+              "role": "6df44736c09f139d221b9a5ad650b1cfafefcff8e273189f6c39fc3e0fcc639b",
+              "from": "48,12",
+              "at": "33,22"
+            }
+          ],
+          "unseenPlacement": false,
+          "changedLanding": [
+            {
+              "actor": "fd131d9e1d21561a72752d9d38adc5480af3734025bb91444a9b4ecd13a5f37b",
+              "from": "52,1",
+              "bareTo": "52,1",
+              "after": "52,11"
+            },
+            {
+              "actor": "0c961396166230f56d2dee49a44bbce7014c64d83ff75c347d668d6623fb7906",
+              "from": "53,2",
+              "bareTo": "53,2",
+              "after": "53,12"
+            }
+          ],
+          "winners": [
+            "6@11,13"
+          ]
+        }
+      ],
+      "winningConfigurations": [
+        {
+          "state": "418b8f4960d945dc9dbf3a5c",
+          "prep": [
+            "6@21,13"
+          ],
+          "winners": [
+            "6@11,13"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": true
+        },
+        {
+          "state": "e39af09e8e8677ccd03ea17b",
+          "prep": [
+            "6@21,13",
+            "6@54,13"
+          ],
+          "winners": [
+            "6@11,13"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": true
+        },
+        {
+          "state": "d105eef4d3de0b44ba07e087",
+          "prep": [
+            "6@21,13",
+            "6@11,13"
+          ],
+          "winners": [
+            "6@11,13"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": true
+        },
+        {
+          "state": "6a808acbacd9acec9d156e01",
+          "prep": [
+            "6@21,13",
+            "6@6,13"
+          ],
+          "winners": [
+            "6@11,13"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": true
+        },
+        {
+          "state": "2934a1ca2209ca5743aa6d2c",
+          "prep": [
+            "6@21,13",
+            "6@44,13"
+          ],
+          "winners": [
+            "6@11,13"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": true
+        },
+        {
+          "state": "0042b35752a0d28f42fde953",
+          "prep": [
+            "6@21,13",
+            "6@59,13"
+          ],
+          "winners": [
+            "6@11,13"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        }
+      ]
+    },
+    {
+      "code": "GIGO",
+      "level": 3,
+      "setup": "2",
+      "transport": "2",
+      "use": "4",
+      "controls": 15,
+      "baseWin": false,
+      "states": 7,
+      "catalogued": 2,
+      "alternativeOnly": 0,
+      "matchedNewAccess": 0,
+      "newPlacementWithMatchedArrivalAndUse": 0,
+      "examples": [],
+      "winningConfigurations": [
+        {
+          "state": "e69bb8912713446900f45c74",
+          "prep": [
+            "2"
+          ],
+          "winners": [
+            "4"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        },
+        {
+          "state": "18028ddd5c2487081151056d",
+          "prep": [
+            "2",
+            "2"
+          ],
+          "winners": [
+            "4"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        }
+      ]
+    },
+    {
+      "code": "GRAV",
+      "level": 3,
+      "setup": "4",
+      "transport": "1",
+      "use": "3",
+      "controls": 10,
+      "baseWin": false,
+      "states": 13,
+      "catalogued": 4,
+      "alternativeOnly": 0,
+      "matchedNewAccess": 0,
+      "newPlacementWithMatchedArrivalAndUse": 0,
+      "examples": [],
+      "winningConfigurations": [
+        {
+          "state": "937dae86bbfcd36c60d3f518",
+          "prep": [
+            "4"
+          ],
+          "winners": [
+            "6@2,29",
+            "3"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        },
+        {
+          "state": "3b5a697855d3ac5a98d963a7",
+          "prep": [
+            "4",
+            "4"
+          ],
+          "winners": [
+            "6@2,29",
+            "3"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        },
+        {
+          "state": "9859e31238551428c0c7212f",
+          "prep": [
+            "4",
+            "6@31,2"
+          ],
+          "winners": [
+            "6@2,29",
+            "3"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "bf788031597c43a941ebaf14",
+          "prep": [
+            "4",
+            "2"
+          ],
+          "winners": [
+            "6@2,29",
+            "3"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        }
+      ]
+    },
+    {
+      "code": "MOTO",
+      "level": 2,
+      "setup": "6@54,30",
+      "transport": "6@54,10",
+      "use": "5",
+      "controls": 11,
+      "baseWin": false,
+      "states": 28,
+      "catalogued": 4,
+      "alternativeOnly": 0,
+      "matchedNewAccess": 1,
+      "newPlacementWithMatchedArrivalAndUse": 0,
+      "examples": [
+        {
+          "state": "ac4c980682c37245969d43da",
+          "prep": [
+            "6@54,30"
+          ],
+          "placements": [
+            {
+              "role": "c89d0ec3d507f262698434d82a2d8263b3a989b035dc5c0e1ae1351b38412e93",
+              "from": "53,37",
+              "at": "57,25"
+            }
+          ],
+          "unseenPlacement": false,
+          "changedLanding": [
+            {
+              "actor": "3edc2c3a517b5bc5714de42347b82cb1414147415aa23756070179460bc8c971",
+              "from": "52,28",
+              "bareTo": "52,28",
+              "after": "52,8"
+            }
+          ],
+          "winners": [
+            "5"
+          ]
+        }
+      ],
+      "winningConfigurations": [
+        {
+          "state": "ac4c980682c37245969d43da",
+          "prep": [
+            "6@54,30"
+          ],
+          "winners": [
+            "5"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": true
+        },
+        {
+          "state": "5ab1e93aff81aaa3d9fcd68b",
+          "prep": [
+            "6@54,30",
+            "6@22,42"
+          ],
+          "winners": [
+            "5"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "78369dd34357af174e6807f9",
+          "prep": [
+            "6@54,30",
+            "6@30,18"
+          ],
+          "winners": [
+            "5"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "a33b05ac55297393886d5818",
+          "prep": [
+            "6@54,30",
+            "6@54,10"
+          ],
+          "winners": [
+            "5"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        }
+      ]
+    },
+    {
+      "code": "POLA",
+      "level": 4,
+      "setup": "4",
+      "transport": "6@31,40",
+      "use": "4",
+      "controls": 10,
+      "baseWin": false,
+      "states": 14,
+      "catalogued": 5,
+      "alternativeOnly": 0,
+      "matchedNewAccess": 0,
+      "newPlacementWithMatchedArrivalAndUse": 0,
+      "examples": [],
+      "winningConfigurations": [
+        {
+          "state": "0915f92176f53ae3310ed099",
+          "prep": [
+            "4"
+          ],
+          "winners": [
+            "4"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        },
+        {
+          "state": "6464c3ed930b4267581add7e",
+          "prep": [
+            "4",
+            "5"
+          ],
+          "winners": [
+            "4"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "90f9ab3784043a2575d9f816",
+          "prep": [
+            "4",
+            "6@26,25"
+          ],
+          "winners": [
+            "4"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        },
+        {
+          "state": "f1f3349c88531c6ef4e1b483",
+          "prep": [
+            "4",
+            "6@16,30"
+          ],
+          "winners": [
+            "4"
+          ],
+          "observedNewPlacement": false,
+          "changedLanding": false
+        },
+        {
+          "state": "0daa6123e750ad230f1dabc9",
+          "prep": [
+            "4",
+            "6@31,40"
+          ],
+          "winners": [
+            "4"
+          ],
+          "observedNewPlacement": true,
+          "changedLanding": false
+        }
+      ]
     }
   ]
 }
