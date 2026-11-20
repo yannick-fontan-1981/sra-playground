@@ -21,6 +21,7 @@ const records = (
     files.split(',').map(async (f) => (await readFile(f, 'utf8')).trim().split(/\r?\n/).map(JSON.parse))
   )
 ).flat();
+const pairedRevision=process.env.SIC_STUDY_MATCHED_REVISION==='1';
 const level = Number(levelText),
   run = records.find((r) => r.code === code && r.start === level);
 assert.ok(run && run.sic === run.issued && !run.resets);
@@ -65,7 +66,7 @@ function branch(i, keys) {
 }
 const checked = [],
   seen = new Set();
-async function measure(i, base, p, revision = false) {
+async function measure(i, base, p, revision = false, returnToRoot = false) {
   assert.ok(separation(p.site, p.trainedSite) >= 3);
   const seal = digest(p);
   await appendFile(out + '.journal', JSON.stringify({ kind: 'forecast', i, seal, p }) + '\n');
@@ -104,6 +105,7 @@ async function measure(i, base, p, revision = false) {
     enabled,
     use,
     revision,
+    returnToRoot,
     selective: alternatives?.selective ?? false,
     selectiveUse: extraUse?.selective ?? false,
     prior: p.ref.startsWith('public:1:'),
@@ -141,14 +143,28 @@ for (let i = 0; i < run.steps.length; i++) {
           va.frame,
           vab.frame
         );
-        const alternative = proposeLocal(forkMemory, obs(vab, i + 2, 2), vab.frame, true);
+        if(pairedRevision){
+          const candidates=[...new Set([...b.availableActionIds.filter(id=>id!==6&&id!==7).map(id=>'ACTION'+id),...run.steps.slice(0,i).filter(c=>c.a===6).map(op)])].slice(0,12);
+          for(const key of candidates){
+            if(key===p.b)continue;
+            const observed=branch(i,[key]);
+            if(observed)observeLocal(forkMemory,obs(b,i,2),obs(observed,i+1,2),b.frame,observed.frame,key);
+          }
+        }
+        let alternative=proposeLocal(forkMemory,obs(vab,i+2,2),vab.frame,true);
+        let returned=false;
+        if(pairedRevision&&!alternative?.revised){
+          alternative=proposeLocal(forkMemory,obs(b,i,2),b.frame,true);
+          returned=true;
+        }
         if (
           alternative?.revised &&
           alternative.origin === p.origin &&
+          separation(alternative.site,p.site)===0 && alternative.firstAfter===p.firstAfter &&
           alternative.a === p.a &&
           alternative.b !== p.b
         )
-          await measure(i, b, alternative, true);
+          await measure(i, b, alternative, true, returned);
       }
       b = replay.restore(i);
     }
@@ -164,6 +180,7 @@ const summary = {
   code,
   level,
   priorActions,
+  ...(pairedRevision?{matchedRevision:true,verifiedAfterReturn:checked.filter(x=>x.returnToRoot&&x.enabled).length}:{}),
   roots: seen.size,
   forecasts: checked.length,
   verified: checked.filter((x) => x.enabled).length,
