@@ -5,7 +5,18 @@ import { createHash } from 'node:crypto';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
-import { initialMemory, recordExperiment, sceneKey } from '../src/sic/preparation-experiments.ts';
+import {
+  initialMemory,
+  recordExperiment,
+  sceneKey,
+  selectExperiment,
+} from '../src/sic/preparation-experiments.ts';
+import {
+  conditionalPlacements,
+  placementOffer,
+  placementReceipt,
+  placementStep,
+} from '../src/sic/conditional-placements.ts';
 import { selectFrontier } from '../src/sic/experimental-frontier.ts';
 const [environment, controlDir, directory, output, condition, upperFile] = process.argv.slice(2);
 const { selectFrontier: control } = await import(
@@ -141,8 +152,19 @@ for (const g of records) {
     board = next;
     if (m.turns < 4 || m.recurrences < 2 || !knownPos.size) continue;
     const s = m.scenes.indexOf(sceneKey(to)),
-      ops = choices(board),
-      paths = routes(m, s);
+      ops = choices(board);
+    if (condition === 'conditional-model' || condition === 'conditional-policy') {
+      const plan =
+        condition === 'conditional-model'
+          ? conditionalPlacements(m, to, board.frame, s, ops, m.attempts)
+          : selectExperiment(m, to, [...ops].map(action), true, board.frame)?.condition?.plan;
+      if (plan) {
+        chosen = { i: i + 1, plan };
+        break;
+      }
+      continue;
+    }
+    const paths = routes(m, s);
     const baseline = control(m, s, ops, paths, to, board.frame)?.frontier?.question,
       newer = selectFrontier(m, s, ops, paths, to, board.frame)?.frontier?.question;
     if (!baseline || !newer?.place) continue;
@@ -158,6 +180,143 @@ for (const g of records) {
     break;
   }
   if (!chosen) continue;
+  if (chosen.plan) {
+    const plan = chosen.plan;
+    function restore(prefix = chosen.i) {
+      let b = loadEntry();
+      for (const s of g.steps.slice(0, prefix)) {
+        b = engine.dispatch({ type: 'action', actionId: s.a, ...(s.a === 6 ? { data: s.data } : {}) });
+        if (hash(b) !== s.to) throw Error('Divergent conditional source prefix');
+      }
+      return b;
+    }
+    const pos = (o, role) =>
+      o.entities.find((e) => e.signature === role && !e.identity_ambiguous)?.position.join() ?? null;
+    const bare = restore(chosen.i - (plan.alreadyPlaced ?? 0)),
+      beforeBare = await obs(bare, 1),
+      bareReturn = act(plan.trigger.op);
+    const inactive =
+      !win(bareReturn) &&
+      bareReturn.state === bare.state &&
+      pos(beforeBare, plan.actor) === plan.origin.join() &&
+      pos(await obs(bareReturn, 2), plan.actor) === plan.origin.join();
+    if (!inactive) throw Error('Inactive control not reproduced');
+    let b = restore(chosen.i - (plan.alreadyPlaced ?? 0));
+    const outcomes = [];
+    for (let index = 0; index < plan.preparation.length + 1 + Number(!!plan.use); index++) {
+      const trial = { plan, index, scene: 0 },
+        before = await obs(b, index + 1),
+        step = placementStep(trial);
+      if (
+        !b.availableActionIds.includes(+step.op.split(':')[0].slice(6)) ||
+        !placementOffer(trial, before, new Set([step.op]))
+      )
+        break;
+      b = act(step.op);
+      const after = await obs(b, index + 2);
+      const { result } = placementReceipt(m, trial, 0, before, after);
+      outcomes.push({ op: step.op, result, predicted: step.to, observed: pos(after, step.role) });
+      if (
+        result === 'condition_refuted' ||
+        result === 'condition_terminal' ||
+        result === 'official_completion'
+      )
+        break;
+    }
+    const passed = win(b),
+      endpoint = !passed ? pos(await obs(b, 0), plan.actor) : null;
+    function physical(commands) {
+      let raw = restore(chosen.i - (plan.alreadyPlaced ?? 0));
+      for (const op of commands) {
+        if (
+          win(raw) ||
+          raw.state === 'GAME_OVER' ||
+          !raw.availableActionIds.includes(+op.split(':')[0].slice(6))
+        )
+          return null;
+        raw = act(op);
+      }
+      return raw;
+    }
+    const omissions = {};
+    if (plan.use) {
+      const suffix = plan.use.op;
+      for (const [key, word] of Object.entries({
+        useOnly: [suffix],
+        withoutPreparation: [plan.trigger.op, suffix],
+        withoutTrigger: [...plan.preparation.map((x) => x.op), suffix],
+      })) {
+        const raw = physical(word);
+        omissions[key] = raw
+          ? {
+              won: win(raw),
+              at: win(raw) || raw.state === 'GAME_OVER' ? null : pos(await obs(raw, 0), plan.actor),
+            }
+          : null;
+      }
+    }
+    const full = outcomes.some((s) => s.result === 'condition_used');
+    const differentUse = !!(
+      full &&
+      endpoint &&
+      Object.values(omissions).length === 3 &&
+      Object.values(omissions).every((s) => s && !s.won && s.at && s.at !== endpoint)
+    );
+    let shorter = null;
+    if (full && endpoint) {
+      const word = [...plan.preparation.map((p) => p.op), plan.trigger.op, plan.use.op],
+        tested = new Set();
+      let same = 0,
+        unmeasured = 0,
+        terminal = 0;
+      for (let mask = 0; mask < (1 << word.length) - 1; mask++) {
+        const sub = word.filter((_, i) => mask & (1 << i)),
+          k = sub.join('/');
+        if (tested.has(k)) continue;
+        tested.add(k);
+        const raw = physical(sub);
+        if (!raw) {
+          unmeasured++;
+          continue;
+        }
+        if (win(raw) || raw.state === 'GAME_OVER') {
+          terminal++;
+          continue;
+        }
+        const place = pos(await obs(raw, 0), plan.actor);
+        if (!place) unmeasured++;
+        else if (place === endpoint) same++;
+      }
+      shorter = {
+        tested: tested.size,
+        same,
+        unmeasured,
+        terminal,
+        unique: same === 0 && unmeasured === 0 && terminal === 0,
+      };
+    }
+    results.push({
+      game: g.code,
+      level,
+      prefix: chosen.i,
+      inactive,
+      alreadyPlaced: plan.alreadyPlaced ?? 0,
+      preparation: plan.preparation,
+      trigger: plan.trigger,
+      use: plan.use,
+      hypotheses: plan.rules,
+      agreement: plan.agreement,
+      alternatives: plan.alternatives,
+      outcomes,
+      won: passed,
+      endpoint,
+      omissions,
+      differentUse,
+      shorter,
+      novelUse: !!(full && endpoint && !knownPos.get(plan.actor)?.has(endpoint)),
+    });
+    continue;
+  }
   async function arm(q, omit = false) {
     let b = loadEntry();
     for (const s of g.steps.slice(0, chosen.i)) {
@@ -267,18 +426,31 @@ for (const g of records) {
   });
 }
 await writeFile(output, JSON.stringify(results) + '\n');
-console.log(
-  JSON.stringify({
-    games: results.length,
-    arms: Object.fromEntries(
-      ['control', 'candidate'].map((k) => [
-        k,
-        Object.fromEntries(
-          ['novelImage', 'won', 'newPose', 'arrived', 'continued', 'novelContinuation', 'followingWon'].map(
-            (metric) => [metric, results.filter((r) => r[k][metric]).length]
-          )
-        ),
-      ])
-    ),
-  })
-);
+if (condition?.startsWith('conditional-')) {
+  console.log(
+    JSON.stringify({
+      games: results.length,
+      placed: results.filter(
+        (r) => r.outcomes.filter((s) => s.result === 'condition_placed').length === r.preparation.length
+      ).length,
+      activated: results.filter((r) => r.outcomes.some((s) => s.result === 'condition_activated')).length,
+      used: results.filter((r) => r.outcomes.some((s) => s.result === 'condition_used')).length,
+      won: results.filter((r) => r.won).length,
+    })
+  );
+} else
+  console.log(
+    JSON.stringify({
+      games: results.length,
+      arms: Object.fromEntries(
+        ['control', 'candidate'].map((k) => [
+          k,
+          Object.fromEntries(
+            ['novelImage', 'won', 'newPose', 'arrived', 'continued', 'novelContinuation', 'followingWon'].map(
+              (metric) => [metric, results.filter((r) => r[k][metric]).length]
+            )
+          ),
+        ])
+      ),
+    })
+  );

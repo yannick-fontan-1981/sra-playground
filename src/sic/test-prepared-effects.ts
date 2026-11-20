@@ -23,6 +23,9 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  conditionSetup: 'Place a partner where the observed spatial conditions predict a motion',
+  conditionTrigger: 'Compare the predicted motion with the inactive control at the original placement',
+  conditionUse: 'Test the predicted use of the newly reached location',
   delayedProbe: 'Test a matched control program after moving or changing its preparation',
   frontierRoute:'Return along witnessed edges to an unanswered experiment',
   frontierProbe:'Try a previously unmeasured control at its selected configuration',
@@ -161,6 +164,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         ...(imagined ? { spatial_forecast: imagined } : {}),
         ...(experiment.delayed ? { conditional_program: experiment.delayed } : {}),
         ...(experiment.frontier ? { reachable_experiment: experiment.frontier } : {}),
+        ...(experiment.condition ? { conditional_placement: experiment.condition } : {}),
         ...(capability ? { capability_equation: capability } : {}),
         steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: o.level_epoch },

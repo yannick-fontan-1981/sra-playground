@@ -40,6 +40,7 @@ import {
 } from './derive-capabilities.ts';
 import { newProjectionMemory, proposeProjection, recordProjection, type Trial, type ProjectionMemory } from './projected-affordances.ts';
 import {newFrontierMemory,selectFrontier,recordFrontier,type FrontierMemory,type FrontierTrial} from './experimental-frontier.ts';
+import {conditionalPlacements,placementOffer,placementReceipt,type ConditionalTrial,type LearnedPlacement} from './conditional-placements.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -73,6 +74,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'conditionSetup' | 'conditionTrigger' | 'conditionUse'
     | 'frontierRoute' | 'frontierProbe' | 'frontierUse' | 'frontierConsequence'
     | 'delayedProbe'
     | 'projection'
@@ -110,6 +112,7 @@ export type Experiment = {
   refs: number[];
   delayed?: DelayedTrial;
   frontier?: FrontierTrial;
+  condition?: ConditionalTrial;
   projection?: Trial;
   placement?: Placement;
   derive?: Derivation;
@@ -141,12 +144,15 @@ export type Outcome = {
   equation?: Record<string, unknown>;
   delayed?: Record<string, unknown>;
   frontier?: Record<string, unknown>;
+  condition?: Record<string, unknown>;
   projection?: Record<string, unknown>;
 };
 export type Memory = {
   epoch: number;
   delayed: DelayedMemory;
   frontier:FrontierMemory;
+  condition?: ConditionalTrial | null;
+  conditionLearned?: Record<string,LearnedPlacement>;
   projection: ProjectionMemory;
   space: SpatialMemory;
   equations: CapabilityMemory;
@@ -348,6 +354,10 @@ export function selectExperiment(
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
+  if(m.condition?.scene===s) {
+    const continuing=placementOffer(m.condition,o,available);
+    if(continuing) return continuing;
+  }
   const pending = m.pending;
   if (pending?.phase === 'explore') {
     const fresh = [...available].find((op) => !m.edges.some((e) => e.s === s && e.cmd === op));
@@ -372,6 +382,13 @@ export function selectExperiment(
   if (!reuseReady) {
     const ongoingPlan = frontier.question || frontier.follow || m.projection.active ||
       m.equations.active || m.space.active || (pending && pending.phase !== 'explore');
+    if(rows && !ongoingPlan && !m.delayed.active && m.recurrences>=2) {
+      const plan=conditionalPlacements(m,o,rows,s,available,m.attempts);
+      if(plan) {
+        const proposal=placementOffer({plan,index:plan.alreadyPlaced??0,scene:s},o,available);
+        if(proposal) return proposal;
+      }
+    }
     if (m.delayed.active || !ongoingPlan) {
       const experiment = selectDelayed(m, o, s, available);
       if (experiment) return experiment;
@@ -625,6 +642,7 @@ export function recordExperiment(
   const previous = m.edges[m.previous];
   m.turns++;
   const frontier=m.frontier;
+  if(!x?.condition)m.condition=null;
   const newScene=m.seenAt[t]===undefined && t!==s;
   if(newScene){frontier.lastScene=m.turns;frontier.exploring=false;}
   if(!x?.frontier){frontier.question=null;frontier.follow=null;}
@@ -713,6 +731,10 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if(x.condition) {
+    const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
+    return {...out,result,condition:detail};
+  }
   if (x.delayed) {
     const won = a.levels_completed > b.levels_completed || a.state === 'WIN';
     const { result, detail } = recordDelayed(m, x.delayed, edge, b, a, won);

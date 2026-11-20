@@ -5,6 +5,11 @@ import { initialMemory, type Edge } from '../src/sic/preparation-experiments.ts'
 import { recordFrontier } from '../src/sic/experimental-frontier.ts';
 import { placeExperiments } from '../src/sic/place-experiments.ts';
 import { splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
+import {
+  conditionalPlacements,
+  placementOffer,
+  placementReceipt,
+} from '../src/sic/conditional-placements.ts';
 
 const rows = Array.from({ length: 3 }, () => Array(25).fill(0));
 function observation(poses: Record<string, number>): NativeObservation {
@@ -64,6 +69,67 @@ function edge(
     },
   };
 }
+
+test('solves for a partner placement two moves away and verifies the controlled transport and use', () => {
+  const m = initialMemory(1);
+  const at = (traveler: number, marker: number) => ({ traveler, marker });
+  m.edges = [
+    edge(0, 0, 'trigger', at(6, 10), at(6, 10)),
+    edge(10, 10, 'trigger', at(2, 5), at(2, 5)),
+    edge(11, 12, 'trigger', at(2, 4), at(6, 4)),
+    edge(12, 13, 'use', at(6, 4), at(7, 4)),
+    edge(20, 21, 'trigger', at(3, 5), at(7, 5)),
+    edge(21, 22, 'use', at(7, 5), at(8, 5)),
+    edge(0, 1, 'left', at(6, 10), at(6, 9)),
+  ];
+  const available = new Set(['left', 'trigger', 'use']);
+  const plan = conditionalPlacements(m, observation(at(6, 10)), rows, 0, available, {})!;
+  assert.deepEqual(
+    plan.preparation.map((s) => s.to),
+    [
+      [9, 1],
+      [8, 1],
+    ]
+  );
+  assert.deepEqual(plan.trigger.to, [10, 1]);
+  assert.deepEqual(plan.use?.to, [11, 1]);
+  const positions = [at(6, 10), at(6, 9), at(6, 8), at(10, 8), at(11, 8)].map(observation);
+  for (const [index, result] of [
+    'condition_placed',
+    'condition_placed',
+    'condition_activated',
+    'condition_used',
+  ].entries()) {
+    const trial = { plan, index, scene: index };
+    assert.ok(placementOffer(trial, positions[index]!, available));
+    assert.equal(
+      placementReceipt(m, trial, index + 1, positions[index]!, positions[index + 1]!).result,
+      result
+    );
+    assert.doesNotThrow(() => splitNativeState(trial, 'conditional'));
+  }
+  assert.equal(m.condition, null);
+  assert.ok(m.conditionLearned?.[plan.key]);
+  m.edges.push(edge(3, 4, 'trigger', at(10, 8), at(6, 8)));
+  m.edges.push(edge(30, 31, 'newUse', at(13, 8), at(15, 8)));
+  const reuse = conditionalPlacements(
+    m,
+    positions[0]!,
+    rows,
+    0,
+    new Set([...available, 'newUse']),
+    m.attempts
+  )!;
+  assert.equal(reuse.reuseRef, m.conditionLearned![plan.key]!.ref);
+  assert.equal(reuse.use?.op, 'newUse');
+  assert.deepEqual(reuse.use?.to, [12, 1]);
+  const first = { plan, index: 0, scene: 0 };
+  assert.equal(
+    placementReceipt(m, first, 1, positions[0]!, observation(at(5, 9))).result,
+    'condition_refuted'
+  );
+  assert.equal(m.condition, null);
+});
 test('prefers an unmeasured location to repeating the same spatial control under a new image', () => {
   const m = initialMemory(1);
   m.edges = [

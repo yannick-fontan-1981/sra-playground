@@ -25,13 +25,28 @@ if (
 )
   throw Error('Initial observation differs');
 const events = new Map(
-  run.preparation.filter((e) => e.projection || e.frontier || e.delayed).map((e) => [e.actionIndex, e])
+  run.preparation
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition)
+    .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
 const states = new Set([run.initial.slice(0, 16)]);
 const frontier = { routes: 0, newProbes: 0, arrivals: 0, continuations: 0, subsequentUses: 0 };
 const openings = { proposed: 0, placements: 0, transported: 0, matchedControl: 0, subsequentUses: 0 };
 const alternatives = { tried: 0, moved: 0, exact: 0, matchedPreparation: 0 };
+const conditions = {
+  selected: 0,
+  completedPlacements: 0,
+  observedPreparations: 0,
+  tested: 0,
+  moved: 0,
+  exact: 0,
+  fixedOriginExact: 0,
+  used: 0,
+  official: 0,
+  reused: 0,
+  reuseUsed: 0,
+};
 const controlled = new Set();
 const counts = { issued: 0, observed: 0, verifiedLanding: 0, verifiedContinuation: 0, refuted: 0 };
 const cache = new Map();
@@ -54,7 +69,7 @@ async function partsAt(board, key, revision) {
   }
   return cache.get(key);
 }
-const needPositionHistory = run.preparation.some((e) => e.delayed || e.frontier?.place);
+const needPositionHistory = run.preparation.some((e) => e.delayed || e.frontier?.place || e.condition);
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 for (const [i, cmd] of run.replayCommands.entries()) {
@@ -76,6 +91,134 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
   const event = events.get(i + 1);
   if (!event) continue;
+  if (event.condition) {
+    const { plan, index, actual, held } = event.condition,
+      n = plan.preparation.length,
+      first = i - index;
+    const start = plan.alreadyPlaced ?? 0,
+      decision = first + start;
+    if (first < 0 || decision > i || n < 1 || index < start || index > n + 1)
+      throw Error('Invalid conditional episode at ' + i);
+    const expected = [...plan.preparation, plan.trigger, plan.use][index];
+    if (!expected || action !== expected.op) throw Error('Unbound conditional step at ' + i);
+    const here = await partsAt(board, cmd.to, i + 2);
+    const at = (key, id) => location(cache.get(key), id),
+      actor = plan.actor,
+      partner = plan.partner,
+      origin = plan.origin.join();
+    if (actual !== location(here, expected.role)) throw Error('Incorrect conditional position at ' + i);
+    const pastAt = (ref) => {
+      const at = i + ref - event.revision;
+      if (at < 0 || at >= decision) throw Error('Future conditional evidence at ' + i);
+      return run.replayCommands[at];
+    };
+    const bare = pastAt(plan.without),
+      initial = run.replayCommands[first].from;
+    if (
+      bare.from !== initial ||
+      commandKey(bare) !== plan.trigger.op ||
+      at(bare.from, actor) !== origin ||
+      at(bare.to, actor) !== origin
+    )
+      throw Error('Unmatched inactive control at ' + i);
+    const known = pastAt(plan.trigger.ref);
+    if (
+      commandKey(known) !== plan.trigger.op ||
+      !at(known.from, actor) ||
+      !at(known.to, actor) ||
+      at(known.from, actor) === at(known.to, actor)
+    )
+      throw Error('No active contrast at ' + i);
+    if (index === start) {
+      conditions.selected++;
+      if (start) conditions.observedPreparations++;
+      const count = (a, b) =>
+        plan.rules.filter((r) => {
+          const value = a[r.axis] - b[r.axis];
+          return ((r.signOnly ? Math.sign(value) : value) === r.value) === r.onMatch;
+        }).length;
+      const initialPeer = at(initial, partner);
+      if (
+        !initialPeer ||
+        !plan.rules.length ||
+        count(plan.origin, initialPeer.split(',').map(Number)) !== 0 ||
+        count(plan.trigger.from, plan.preparation.at(-1).to) !== plan.agreement[0] ||
+        plan.agreement[1] !== plan.rules.length
+      )
+        throw Error('Invalid spatial separation at ' + i);
+      if (plan.reuseRef) {
+        const from = i + plan.reuseRef - event.revision;
+        const old = events.get(from + 1);
+        if (
+          from < 0 ||
+          from >= decision ||
+          old?.result !== 'condition_activated' ||
+          old.condition?.plan.actor !== actor ||
+          old.condition.plan.partner !== partner ||
+          old.condition.plan.trigger.to.join() !== plan.trigger.to.join()
+        )
+          throw Error('Missing verified conditional recipe at ' + i);
+        conditions.reused++;
+      }
+    }
+    for (let j = 0; j < Math.min(index, n); j++) {
+      const past = run.replayCommands[first + j],
+        setup = plan.preparation[j];
+      if (
+        commandKey(past) !== setup.op ||
+        at(past.from, actor) !== setup.actorFrom.join() ||
+        at(past.to, actor) !== setup.actorTo.join() ||
+        at(past.from, partner) !== setup.from.join() ||
+        at(past.to, partner) !== setup.to.join()
+      )
+        throw Error('Unreproduced preparation at ' + i);
+    }
+    const before = at(cmd.from, expected.role),
+      match = before === expected.from.join() && actual === expected.to.join();
+    const stationary =
+      index >= n ||
+      (at(cmd.from, actor) === expected.actorFrom.join() &&
+        location(here, actor) === expected.actorTo.join());
+    if (held !== stationary) throw Error('Incorrect controlled role at ' + i);
+    if (index === n) {
+      if (at(cmd.from, partner) !== plan.preparation.at(-1).to.join() || before !== plan.trigger.from.join())
+        throw Error('Trigger origin differs at ' + i);
+      conditions.tested++;
+      conditions.moved += Number(
+        actual !== null && actual !== before && event.result !== 'official_completion'
+      );
+    }
+    if (index === n + 1) {
+      const prior = events.get(i);
+      if (prior?.condition?.plan?.key !== plan.key || prior?.result !== 'condition_activated')
+        throw Error('Unconfirmed access before use at ' + i);
+    }
+    if (event.result === 'official_completion') {
+      if (board.levelsCompleted === run.initialCompleted && board.state !== 'WIN')
+        throw Error('False conditional victory');
+      conditions.official++;
+      continue;
+    }
+    if (event.result === 'condition_terminal') {
+      if (board.state === 'NOT_FINISHED') throw Error('False terminal condition');
+      continue;
+    }
+    const want =
+      match && stationary
+        ? index < n
+          ? 'condition_placed'
+          : index === n
+            ? 'condition_activated'
+            : 'condition_used'
+        : 'condition_refuted';
+    if (event.result !== want) throw Error('False conditional receipt at ' + i);
+    conditions.completedPlacements += Number(want === 'condition_placed' && index === n - 1);
+    conditions.exact += Number(want === 'condition_activated');
+    conditions.used += Number(want === 'condition_used');
+    conditions.fixedOriginExact += Number(want === 'condition_activated' && before === origin);
+    conditions.reuseUsed += Number(want === 'condition_used' && !!plan.reuseRef);
+    continue;
+  }
   const p = event.projection;
   if (p) counts.issued++;
   if (p && p.program[p.index] !== action) throw Error('Unbound experiment command at ' + i);
@@ -274,6 +417,7 @@ console.log(
     frontier,
     openings,
     alternatives,
+    conditions,
     delayed,
   })
 );
