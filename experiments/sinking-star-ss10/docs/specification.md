@@ -1,6 +1,6 @@
 # SS10 — Règles du duo Guerrier / Voleur
 
-Version 0.3.0. Huit salles, deux héros et deux destinations par salle. La grille logique
+Version 0.3.1. Huit salles, deux héros et deux destinations par salle. La grille logique
 utilise au maximum 20 × 20 cellules de 3 × 3 pixels, centrées dans une image de 64 × 64.
 La palette à seize couleurs est celle de la série Sinking Star.
 

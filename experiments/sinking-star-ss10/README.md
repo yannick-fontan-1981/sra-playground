@@ -1,6 +1,6 @@
 # SS10 — L’Entrepôt Réversible
 
-**Guerrier rouge + Voleur vert · 8 niveaux · version 0.3.0**
+**Guerrier rouge + Voleur vert · 8 niveaux · version 0.3.1**
 
 Laboratoire autonome du dixième jeu du lot Custom 4. [Jouer à SS10 dans le Playground](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS10#playground)
 Le tutoriel concentre douze découvertes : marche, sélection, poussée simple et en
@@ -10,7 +10,7 @@ appuis dans l’eau, reflet, bouton/presse et deux destinations simultanées.
 Le Guerrier pousse une file complète ; le Voleur tire une seule pièce adjacente.
 Chaque niveau possède un parcours gagnant enregistré. Les six adaptations reprennent des principes décrits dans les index [Nord](https://sinkingstarwalkthrough.com/fr/north/)
 et [Zones mixtes](https://sinkingstarwalkthrough.com/fr/crossovers/).
-La finale originale fait traverser cinq coupures d’eau en chicane en transformant les cinq caisses en appuis. Les références sont détaillées dans [la provenance](docs/provenance.md).
+La finale reprend la carte de Heroes and Water, énigme 3, conservée dans `reference/author/build-level8.mjs`, avec cinq caisses à transformer en appuis. Les références sont détaillées dans [la provenance](docs/provenance.md).
 
 ## Jouer
 
@@ -54,7 +54,7 @@ reproductible des cartes sont conservés dans `reference/author/`.
 
 ## Intégration
 
-Le Playground utilise le même moteur TypeScript et les mêmes cartes, avec le Guerrier en rôle 1 et le Voleur en rôle 2. Le tutoriel du Site partage les lecteurs de pixels du HTML autonome. Les [résultats de validation](docs/validation.md) couvrent le raccordement natif, les corrections de rendu et la finale originale.
+Le Playground utilise le même moteur TypeScript et les mêmes cartes, avec le Guerrier en rôle 1 et le Voleur en rôle 2. Le tutoriel du Site partage les lecteurs de pixels du HTML autonome. Les [notes de validation](docs/validation.md) distinguent les contrôles antérieurs de cette publication.
 
 Les résultats des témoins établissent la solvabilité. Les contrôles de nécessité
 sont séparés et précisent quelles recherches ont réellement épuisé les états.
