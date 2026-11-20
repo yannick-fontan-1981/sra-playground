@@ -6,6 +6,11 @@ import { GAME_CATALOG } from '../src/games/catalog.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 
 const [environment, output, ...files] = process.argv.slice(2);
+const stopping = files[0] === '--stopping';
+if (stopping) files.shift();
+const createAudit = stopping
+  ? (await import('./audit-source-stopping-surfaces.mjs')).sourceStoppingAudit
+  : null;
 const traces = (
   await Promise.all(files.map(async (f) => (await readFile(f, 'utf8')).trim().split('\n').map(JSON.parse)))
 ).flat();
@@ -29,6 +34,8 @@ for (const r of traces) {
   let board = engine.dispatch({ type: 'load', code: r.code, level: 1 });
   const scenes = {},
     edges = [];
+  const audit = createAudit?.(),
+    extents = {};
   async function scene(board, expected) {
     const digest = hash(board.frame);
     if (digest !== expected) throw Error('Frame mismatch ' + r.code);
@@ -47,6 +54,9 @@ for (const r of traces) {
       scenes[digest] = Object.fromEntries(
         obs.entities.filter((e) => !e.identity_ambiguous).map((e) => [e.signature, [...e.position, e.area]])
       );
+      if (audit)
+        for (const e of obs.entities)
+          extents[e.signature] = [e.bbox[2] - e.bbox[0] + 1, e.bbox[3] - e.bbox[1] + 1];
     }
   }
   for (const step of r.steps) {
@@ -61,21 +71,24 @@ for (const r of traces) {
       board.state === after.state &&
       board.level === after.level &&
       board.levelsCompleted === after.levelsCompleted
-    )
+    ) {
       edges.push([
         step.from,
         step.a === 6 ? 'ACTION6:' + step.data.x + ',' + step.data.y : 'ACTION' + step.a,
         step.to,
       ]);
+      if (audit)
+        audit.observe(board.frame, scenes[step.from], scenes[step.to], extents, edges.at(-1)[1], step.from);
+    }
     board = after;
   }
-  result.push({ code: r.code, scenes, edges });
+  result.push(audit ? { code: r.code, ...audit.totals() } : { code: r.code, scenes, edges });
 }
 await writeFile(output, JSON.stringify(result));
 console.log(
   JSON.stringify({
     games: traces.length,
     steps: traces.reduce((n, r) => n + r.steps.length, 0),
-    scenes: result.reduce((n, r) => n + Object.keys(r.scenes).length, 0),
+    ...(stopping ? {} : { scenes: result.reduce((n, r) => n + Object.keys(r.scenes).length, 0) }),
   })
 );

@@ -52,9 +52,41 @@ CATR L3 fournit une expérience croisée. Depuis le même préfixe, préparer pa
 
 GARE L2 et MOTO L2 fournissent respectivement cinq et une dispositions où B déplace un rôle reconnaissable depuis la même origine que dans la partie sans préparation et où une suite gagne. Sur MOTO L2, le rôle atteint (52, 8) depuis (52, 28) et la commande 5 gagne ensuite. Dans cette énumération, aucune disposition ne combine les trois mesures de placement mobile différent de la préparation gagnante de référence, de déplacement différentiel sous B et de victoire ensuite. Ce catalogue est une intervention de laboratoire sur les jeux sources. Il reste indépendant du solveur figé.
 
+## Quand deux préparations ouvrent une capacité
+
+Sur GARE L3, nous avons fixé les deux dernières commandes d’un programme gagnant, puis cherché d’autres façons de les rendre efficaces. Deux préparations consistaient à agir aux points A (11, 13) et D (44, 13). Depuis l’entrée officielle, nous avons rejoué les cinq variantes suivantes. La dernière commande et celle qui la précède sont communes aux cinq parties.
+
+| Préparation | Position du rôle avant la suite | Victoire avec la suite |
+| --- | --- | --- |
+| Aucune | (38, 2) | Non |
+| A | (38, 2) | Non |
+| D | (38, 2) | Non |
+| A puis D | (38, 32) | Oui |
+| D puis A | (38, 2) | Non |
+
+Le rôle part de la même position lorsque D agit seul ou après A. D n’avait jamais produit ce mouvement dans l’essai isolé. Sur les 18 niveaux, avec une préparation simple gagnante de référence, 326 couples de commandes individuellement insuffisantes produisent une image encore inédite pour les contrôles simples. Deux couples de GARE L3 donnent la victoire sur une même nouvelle image. Le vecteur des positions mobiles suivies correspond à une configuration gagnante déjà connue. La sélection fondée sur les coordonnées des succès simples s’est abstenue sur GARE L3.
+
+Nous avons ensuite remonté d’un geste dans les 16 programmes assez longs. À cette origine, aucune des commandes isolées du répertoire ne rend les deux derniers gestes gagnants. Parmi les 619 couples menant à une image nouvelle pour les essais simples, 36 rendent la suite gagnante. Dans 29 cas répartis sur 13 niveaux, inverser les deux commandes donne une défaite sur une branche comparable. Le choix de ces préfixes assure l’existence d’au moins un programme gagnant dans le répertoire. Un classement qui favorisait deux préparations modifiant des mouvements différents dans la suite a émis dix premiers choix. Les dix ont échoué. Ces tests mesurent des interventions depuis des préfixes connus.
+
+Sur GRAV L2, l’ordre 4 puis 1 place un rôle en (52, 24). L’ordre inverse le place en (52, 12). Depuis l’entrée du test, 4 seul le place en (52, 40) et 1 seul en (40, 12), depuis (40, 40). La suite 3 puis 2 gagne seulement après 4 puis 1 parmi ces cinq essais. Le calcul par addition prédirait (52, 12) dans les deux ordres.
+
+## Prévoir où se termine le mouvement
+
+Nous avons projeté le même mouvement rectiligne dans une autre rangée ou colonne. Un premier modèle copie le déplacement déjà observé. Un second identifie les motifs de pixels que le bord du mobile a traversés dans la première trajectoire. Dans la nouvelle configuration, il prédit un arrêt au premier motif différent et projette ce bord sur le pas spatial lorsque plusieurs longueurs de déplacement permettent d’estimer ce pas. Les prévisions des couples de commandes sont établies avant de jouer ces couples.
+
+Sur les 16 niveaux supérieurs, 88 des 89 arrivées proposées sont mesurables. Le modèle du passage libre et du pas spatial en retrouve 63, contre 51 par addition. Parmi les 39 désaccords mesurables, leurs nombres d’arrivées exactes sont 16 et 4. Les 16 succès propres au premier modèle viennent de GRAV L2, L4 et L5. Dans l’exemple de GRAV L2, il situe effectivement le rôle en (52, 24). La même prédiction appliquée à un deuxième rôle de la scène échoue. Sur les traces chronologiques ordinaires des 100 jeux, l’addition retrouve 56 arrivées sur 75 mesurables, contre 23 pour le passage libre. Ces règles ont été étudiées après le gel de la v8.
+
+Un sélecteur part de l’addition. Chaque autre position de départ déjà testée du même rôle dispose d’une voix si l’un des modèles a mieux prédit ses arrivées. Lorsque le passage libre recueille davantage de voix, le sélecteur l’utilise pour la nouvelle prévision. Il retrouve 59 des 75 arrivées mesurables des traces ordinaires, avec six choix du passage libre. Sur les niveaux supérieurs, il en retrouve 53 sur 88, avec huit choix du passage libre. Ce sont des mesures de prévision hors ligne. La règle a été élaborée à partir des sources et évaluée sur ce corpus de développement.
+
+## Ce que SIC prévoit et vérifie par lui-même
+
+Sur 14 préfixes sources où les classements des v6 et v7 diffèrent et où la v7 annonce un déplacement, le premier essai découvre une position nouvelle dans 6 jeux pour la v7 et dans 1 pour la v6. Deux continuations annoncées vers une position nouvelle se vérifient, sur SIGN et VOIS. Dans une sélection distincte, huit jeux donnent un premier programme à trois commandes. VOIS est le seul où la chaîne entière se vérifie. Depuis le préfixe de 14 gestes, SIC propose 2 pour déplacer le repère de (42, 22) à (42, 26), puis 5 pour transporter le voyageur de (14, 22) à (42, 26), puis 5 pour revenir à (14, 22). Sans la préparation, le premier 5 conduit à (42, 22). Cette intervention ne termine pas le niveau.
+
+Sur les 100 journaux, une commande encore incapable de déplacer un rôle peut parfois reproduire un déplacement appris avec une autre commande. Quand l’origine a déjà été éprouvée sous une autre commande, 13 mouvements surviennent sur 428 résultats mesurables. La destination la plus fréquente de l’autre commande en prédit 12. Dans la v8, SIC propose ce transfert comme une expérience. Sur les premiers programmes sources éligibles, dix au L1 et six aux niveaux supérieurs, le mouvement emprunté n’a jamais été confirmé. Certaines préparations ont échoué avant que ce mouvement puisse être essayé.
+
 ## Comparaison des candidats figés
 
-Entrée directe SS01 L2, agent neuf, même moteur et budgets. Le temps actif a limité tous les essais avant 1 200 commandes, avec une charge machine variable. Le nombre d’images distinctes inclut l’image initiale. Le témoin et les candidats ont tous terminé dans l’état officiel `NOT_FINISHED`.
+Entrée directe SS01 L2, agent neuf, même moteur et budgets. Le temps actif a limité les essais achevés avant 1 200 commandes, avec une charge machine variable. Le nombre d’images distinctes inclut l’image initiale. La v7 initiale s’est interrompue sur une erreur de sérialisation. Les essais complets du tableau ont terminé dans l’état officiel `NOT_FINISHED`.
 
 | Version | Actions | Images distinctes | Arrivées vérifiées par la famille de projection | Continuations vérifiées par la même famille | Victoire |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -65,11 +97,17 @@ Entrée directe SS01 L2, agent neuf, même moteur et budgets. Le temps actif a l
 | v4 09db632a | 720 | 140 | 0 | 0 | Non |
 | v5 9edafd77 | 1 069 | 149 | 0 | 0 | Non |
 | v6 913683dc | 1 012 | 162 | 0 | 0 | Non |
+| v7.1 da4943d0 | 548 | 174 | 0 | 0 | Non |
+| v8 5cf88d3a | 609 | 179 | 0 | 0 | Non |
 
 Dans la v4, la famille d’exploration des expériences restantes a vérifié 51 retours sur des transitions antérieures, essayé 176 nouvelles paires image-commande, vérifié 16 arrivées prédites et 6 mouvements suivants. Un rejeu indépendant contrôle chaque empreinte d’image, la nouveauté de chaque essai déclaré, le rôle suivi et sa position. Le contrôle géométrique par deux segmentations n’a confirmé aucun franchissement de région sur ces trajectoires. SS01 avait déjà été étudié. Les variantes successives constituent des essais supplémentaires. SS09 L2 reste réservé.
 
 Dans la v5, 308 actions relèvent des comparaisons de futurs. Un pronostic exact est reproduit et aucun accès supplémentaire après une préparation immédiatement exécutée n’est certifié. La v6 rétablit la priorité d’une réutilisation vérifiée. Son rejeu reproduit 225 nouvelles paires image-commande, 24 arrivées et 2 continuations de la famille d’exploration. Les 38 actions de comparaison de futurs ne certifient aucune nouvelle capacité spatiale. Aucun franchissement de région n’est confirmé dans ces deux essais. Le témoin et la v6 échouent aussi à 120 commandes sur chacun de GRAV L5, GARE L3, POLA L5, CWSE L2, CATR L3, GIGO L5 et MOTO L2. Les observations initiales ont les mêmes empreintes dans chaque paire. Les préfixes chronologiques de CATR et MOTO servent exclusivement à atteindre l’entrée, avant la création des deux agents neufs.
 
 Sur les 100 L1 à 60 gestes, le témoin gagne 65 fois. La v1 gagne 66 fois avec VOIS en plus. La v4 gagne aussi 66 fois. Elle ajoute VOIS, SWCH et CGWL et perd SMLP et TRIA. Sur les sept L2 sources en entrée directe à 120 gestes, la v2 gagne GARE en 13 gestes, GIGO en 9 et GRAV en 44. Les victoires reproduites par les interventions sur 18 niveaux concernent les programmes archivés.
+
+Sur SS01 L2, la famille qui choisit une commande encore inexplorée dans une configuration accessible obtient cinq arrivées et une continuation vérifiées pour la v7.1, puis trois arrivées et deux continuations pour la v8. Dans les programmes qui préparent le déplacement d’un autre rôle, la v7.1 vérifie trois placements sur dix propositions. La v8 en vérifie zéro sur 28 propositions. Les huit essais effectivement consacrés à une commande jusque-là inopérante ne déplacent pas le rôle choisi. Les deux rejeux géométriques confirment zéro franchissement de région. SS09 L2 demeure en réserve.
+
+Sur les 100 L1 sources, la v7.1 et le témoin gagnent chacun 65 niveaux. La v7.1 ajoute CGWL et VOIS et perd SMLP et TRIA. Sur chacun des sept jeux sources au L2 à 120 gestes, la v8 et le témoin gagnent GRAV, GARE et GIGO. GRAV demande 49 gestes à la v8 et 105 au témoin. Les deux gagnent GARE en 13 gestes et GIGO en 9. Aucun gain de niveau n’est observé sur ces sept L2. Sur les sept entrées difficiles allant du L2 au L5 déjà utilisées par la v6, la v7.1 et la v8 échouent également à 120 gestes. Les premières observations concordent avec celles du témoin. La suite SIC compte 140 tests réussis sur 141 pour la v8. L’assertion déjà en échec sur le cycle orienté attend un objet sans le champ `walk` que le moteur renvoie vide.
 
 Les mesures par variante, les empreintes des trajectoires et les résultats par niveau figurent dans [les données agrégées](sic-projected-affordances-results.json). Les commandes sources nécessaires pour reproduire les suppressions figurent dans [les 18 programmes et leurs entrées](sic-source-seven-programs.json). Les conditions de gel sont consignées dans [le protocole](sic-projected-affordances-protocol.md).

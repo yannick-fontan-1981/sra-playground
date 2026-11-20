@@ -13,7 +13,8 @@ const word = src.niveaux_supérieurs.find((r) => r.code === code && r.l === leve
 if (!word || word.length < 3) throw Error('No verified source program');
 const entry = entries.find((r) => r.code === code && r.level === level && r.confirmed);
 if (!entry) throw Error('Missing source entry');
-const compose = process.argv[8] === 'compose';
+const stopping = process.argv[8] === 'stopping';
+const compose = process.argv[8] === 'compose' || stopping;
 if (compose && word.length < 4) throw Error('Two preparations require four recorded commands');
 const start = word.slice(0, compose ? -4 : -3),
   [setup, transport, use] = word.slice(-3);
@@ -56,6 +57,7 @@ function replay(extra) {
   return b;
 }
 const cache = new Map();
+const extents = new Map();
 async function parts(b) {
   const k = key(b);
   if (!cache.has(k)) {
@@ -74,11 +76,24 @@ async function parts(b) {
       k,
       new Map(o.entities.filter((e) => !e.identity_ambiguous).map((e) => [e.signature, e.position.join()]))
     );
+    if (stopping)
+      extents.set(
+        k,
+        new Map(
+          o.entities
+            .filter((e) => !e.identity_ambiguous)
+            .map((e) => [e.signature, [e.bbox[2] - e.bbox[0] + 1, e.bbox[3] - e.bbox[1] + 1]])
+        )
+      );
   }
   return cache.get(k);
 }
 if (!won(replay(word.slice(start.length)))) throw Error('Reference program failed');
-if (compose || process.argv[8] === 'inverse') {
+if (stopping) {
+  const { qualifyStoppingSurfaces } = await import('./qualify-source-stopping-surfaces.mjs');
+  const data = await qualifyStoppingSurfaces({ commands, replay, parts, extents, key, won, legal });
+  await writeFile(output, JSON.stringify({ code, level, ...data }) + '\n');
+} else if (compose || process.argv[8] === 'inverse') {
   const { studyInversePlacements } = await import('./study-inverse-source-placements.mjs');
   const result = await studyInversePlacements({
     commands,
