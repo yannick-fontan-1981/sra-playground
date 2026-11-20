@@ -228,7 +228,15 @@ export function carryPreviewBindings(
     partMotion: Object.fromEntries(
       Object.entries(learned.partMotion ?? {})
         .filter(([id]) => Object.values(learned.bindings).some((x) => x.actor === id))
-        .map(([id, m]) => [id, { axes: structuredClone(m.axes), sites: {}, substrate: {} }])
+        .map(([id, m]) => [
+          id,
+          {
+            axes: structuredClone(m.axes),
+            displacements: structuredClone(m.displacements ?? m.axes),
+            sites: {},
+            substrate: {},
+          },
+        ])
     ),
   };
 }

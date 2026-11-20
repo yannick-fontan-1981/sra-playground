@@ -1,7 +1,9 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { add, diff, same, size, type XY } from './access-terrain.ts';
+import { spatialControls, surfaceFromVisits } from './calibrate-spatial-controls.ts';
 import { pathToContact } from './mechanism-contact-routes.ts';
-import { aligned, anchoredSamples, controlledStrokes } from './controlled-parts.ts';
+import type { Motor } from './local-progress.ts';
+import { aligned, anchoredSamples, controlledStrokes, type PartMotion } from './controlled-parts.ts';
 import { reachablePreviewConfigurations, type LayoutStep } from './reachable-preview-configurations.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
 import type { Memory } from './preparation-experiments.ts';
@@ -13,7 +15,7 @@ export function plansForWitnessedSubjects(
   o: NativeObservation,
   rows: NativeRows,
   available: Set<string>
-) {
+): { plan: MechanismPlan; rank: number }[] {
   const learning = m.previewLearning,
     layout = visualLayout(o, rows),
     plans: { plan: MechanismPlan; rank: number }[] = [];
@@ -22,7 +24,7 @@ export function plansForWitnessedSubjects(
   for (const b of Object.values(learning.bindings).sort(
     (a, b) => (b.calibration?.hit ?? 0) - (a.calibration?.hit ?? 0)
   )) {
-    const stats = learning.partMotion[b.actor],
+    const stats: PartMotion | undefined = learning.partMotion[b.actor],
       bodies = layout[b.actor],
       q = b.gesture.op;
     if (!stats || !bodies?.length || !available.has(q) || b.gesture.point) continue;
@@ -31,15 +33,29 @@ export function plansForWitnessedSubjects(
     if (!body) continue;
     const p = body.at,
       peers = bodies.filter((x) => x !== body).map((x) => x.at),
-      motors = controlledStrokes(stats, available, q),
+      strict = controlledStrokes(stats, available, q),
+      calibrated: ReturnType<typeof spatialControls> =
+        strict.length >= 4
+          ? null
+          : spatialControls(stats, available, q, m.localProgress?.attempts ?? {}, o.frame_hash, b.actor),
+      motors: Motor[] = calibrated?.motors ?? strict,
       horizontal = motors.find((x) => x.d[0]),
       vertical = motors.find((x) => x.d[1]);
     if (!horizontal || !vertical) continue;
     const pitch: XY = [size(horizontal.d), size(vertical.d)];
     const ranked = Object.entries(stats.substrate).sort((a, b) => b[1] - a[1]);
-    if (!ranked[0] || ranked[0][1] * 2 <= ranked.reduce((n, x) => n + x[1], 0)) continue;
-    const ground = Number(ranked[0][0]),
-      remaining = new Set(peers.map(key));
+    const known = surfaceFromVisits(
+      stats.sites,
+      rows,
+      p,
+      pitch,
+      bodies.map((x) => x.at)
+    );
+    const ground =
+      known ??
+      (ranked[0] && ranked[0][1] * 2 > ranked.reduce((n, x) => n + x[1], 0) ? Number(ranked[0][0]) : null);
+    if (ground === null) continue;
+    const remaining = new Set(peers.map(key));
     const open = (at: XY) => {
       if (
         at[0] < 0 ||
@@ -116,6 +132,17 @@ export function plansForWitnessedSubjects(
           .reverse()
           .find((w) => w.geometry?.pivots.some((z) => z.role === role))!;
         const common = {
+          pitch,
+          ...(calibrated
+            ? {
+                controlEvidence: calibrated.motors.map((z) => ({
+                  op: z.op,
+                  d: z.d,
+                  basis: z.basis,
+                  support: z.support,
+                })),
+              }
+            : {}),
           p: b.actor,
           c: role,
           actorPeers: peers,
@@ -172,10 +199,20 @@ export function plansForWitnessedSubjects(
           stateLimit: Math.min(4096, rows.length * rows[0]!.length * 2),
           attempted: denied,
         });
+        const knownSites = new Set(
+          Object.keys(stats.sites).map((k) => key(aligned(k.split(',').map(Number) as XY, p, pitch)))
+        );
         for (const variant of calc.configurations.slice(0, 12)) {
           const steps = variant.steps.map(real),
             placement = add(variant.placed, offset);
-          const attempt = JSON.stringify([k, p, placement, variant.launch, variant.arrival]);
+          const attempt = JSON.stringify([
+            k,
+            p,
+            placement,
+            variant.launch,
+            variant.arrival,
+            calibrated ? steps[0]!.op : null,
+          ]);
           if (failures[attempt] !== undefined) continue;
           plans.push({
             plan: {
@@ -194,7 +231,12 @@ export function plansForWitnessedSubjects(
               opensCells: variant.gain,
               recoverable: false,
             },
-            rank: 96 + confidence + Math.min(6, variant.gain) - Math.log2(1 + steps.length),
+            rank:
+              96 +
+              confidence +
+              6 * Number(!knownSites.has(key(variant.arrival))) +
+              Math.min(6, variant.gain) -
+              Math.log2(1 + steps.length),
           });
         }
       }

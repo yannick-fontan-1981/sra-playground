@@ -2,7 +2,7 @@ import type { NativeObservation, NativeRows, NativeEntity } from '../logos-engin
 import { add, diff, same, size, type XY } from './access-terrain.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
 import { poseRole } from './occupancy-programs.ts';
-import { motorsFor, zoneFloor, type ZoneRepeat } from './local-progress.ts';
+import { motorsFor, zoneFloor, type ZoneRepeat, type MechanismReason } from './local-progress.ts';
 import {
   reachablePreviewConfigurations,
   type ProbePattern,
@@ -12,7 +12,10 @@ import { contactEvidence } from './contact-aspirations.ts';
 import type { Experiment, Memory } from './preparation-experiments.ts';
 import { pathToContact } from './mechanism-contact-routes.ts';
 import { plansForWitnessedSubjects } from './plan-witnessed-mechanism.ts';
+import { cellMatches } from './calibrate-spatial-controls.ts';
 export type MechanismPlan = {
+  pitch?: XY;
+  controlEvidence?: { op: string; d: XY; basis: string; support: number }[];
   actorPeers?: XY[];
   indicatorOffset?: XY;
   witnessRefs?: string[];
@@ -45,7 +48,12 @@ type Option = {
   opensCells: number;
   recoverable: boolean;
 };
-export type MechanismTrial = { plan: MechanismPlan; index: number; cause: ZoneRepeat; options: Option[] };
+export type MechanismTrial = {
+  plan: MechanismPlan;
+  index: number;
+  cause: MechanismReason;
+  options: Option[];
+};
 const point = (e: NativeEntity): XY => [e.bbox[0] + e.bbox[2], e.bbox[1] + e.bbox[3]];
 const k = (p: XY) => p.join();
 function named(o: NativeObservation, rows: NativeRows, p: MechanismPlan) {
@@ -67,8 +75,8 @@ function named(o: NativeObservation, rows: NativeRows, p: MechanismPlan) {
         : null,
   };
 }
-function atCurrent(s: LayoutStep, loc: ReturnType<typeof named>) {
-  return !!(loc.actor && loc.site && same(loc.actor, s.p) && same(loc.site, s.c));
+function atCurrent(s: LayoutStep, loc: ReturnType<typeof named>, pitch?: XY) {
+  return !!(loc.site && cellMatches(loc.actor, s.p, pitch) && cellMatches(loc.site, s.c, pitch));
 }
 function offer(
   t: MechanismTrial,
@@ -78,12 +86,12 @@ function offer(
   rows: NativeRows
 ): Experiment | null {
   const step = t.plan.steps[t.index];
-  if (!step || !available.has(step.op) || !atCurrent(step, named(o, rows, t.plan))) return null;
+  if (!step || !available.has(step.op) || !atCurrent(step, named(o, rows, t.plan), t.plan.pitch)) return null;
   if (
     step.stage === 'read' &&
     t.plan.indicator &&
     !visualLayout(o, rows)[t.plan.indicator]?.some((r) =>
-      same(r.at, add(step.to, t.plan.indicatorOffset ?? [0, 0]))
+      cellMatches(r.at, add(step.to, t.plan.indicatorOffset ?? [0, 0]), t.plan.pitch)
     )
   )
     return null;
@@ -92,8 +100,17 @@ function offer(
     origin: s,
     a: step.op,
     b: step.op,
-    rule: 'test_moving_a_mechanism_to_expand_access_after_a_stagnant_return',
-    refs: [...new Set([t.cause.previous, t.cause.revision, ...t.plan.support])],
+    rule:
+      t.cause.tag === 'projected_access_limit'
+        ? 'test_a_placement_that_opens_a_region_beyond_current_controls'
+        : 'test_moving_a_mechanism_to_expand_access_after_a_stagnant_return',
+    refs: [
+      ...new Set([
+        ...(t.cause.tag === 'projected_access_limit' ? [] : [t.cause.previous]),
+        t.cause.revision,
+        ...t.plan.support,
+      ]),
+    ],
     mechanism: t,
   };
 }
@@ -146,7 +163,50 @@ export function offerMechanism(
     memory.active = null;
   }
   const follow = memory.afterPlacement?.frame === o.frame_hash ? memory.afterPlacement : null;
-  if (!cause && !follow) return null;
+  const calibrating = memory.calibration?.frame === o.frame_hash ? memory.calibration : null;
+  if (!cause && calibrating) {
+    const next = plansForWitnessedSubjects(m, o, rows, available).filter(
+      ({ plan }) => plan.p === calibrating.actor && plan.c === calibrating.part
+    );
+    if (next.length) {
+      const proposal = choose(next, calibrating.cause, s, available, o, rows);
+      if (proposal) return proposal;
+    }
+  }
+  if (!cause && !follow) {
+    const learned = m.previewLearning;
+    if (
+      !learned ||
+      !Object.values(learned.bindings).some(
+        (b) => b.witnesses.length >= 2 || b.witnesses.some((w) => w.epoch !== o.level_epoch)
+      )
+    )
+      return null;
+    const opening = plansForWitnessedSubjects(m, o, rows, available).filter(
+      ({ plan }) => plan.arrival && plan.home > 1
+    );
+    if (!opening.length) return null;
+    const best = opening.reduce((a, b) => (a.rank >= b.rank ? a : b)).plan;
+    const command = best.steps.find((z) => z.stage === 'read')!.op;
+    const reason: MechanismReason = {
+      tag: 'projected_access_limit',
+      frame: o.frame_hash,
+      revision: o.revision,
+      op: command,
+      actor: best.p,
+      from: best.start,
+      reachable: best.home,
+      arrival: best.arrival!,
+    };
+    return choose(
+      opening.filter((z) => z.plan === best),
+      reason,
+      s,
+      available,
+      o,
+      rows
+    );
+  }
   if (!cause && follow) {
     const access = plansForWitnessedSubjects(m, o, rows, available).filter(
       ({ plan }) => plan.p === follow.actor && plan.c === follow.part && plan.arrival
@@ -476,7 +536,7 @@ export function offerMechanism(
 }
 function choose(
   options: { plan: MechanismPlan; rank: number }[],
-  cause: ZoneRepeat,
+  cause: MechanismReason,
   s: number,
   available: Set<string>,
   o: NativeObservation,
@@ -521,13 +581,26 @@ export function finishMechanism(
     live = b.state === a.state && a.level_epoch === b.level_epoch;
   const matched = !!(
     live &&
-    atCurrent(step, before) &&
+    atCurrent(step, before, t.plan.pitch) &&
     op === step.op &&
     actual.actor &&
-    same(actual.actor, step.to) &&
-    (step.stage === 'read' || step.stage === 'use' || (actual.site && same(actual.site, step.placed)))
+    cellMatches(actual.actor, step.to, t.plan.pitch) &&
+    (step.stage === 'read' ||
+      step.stage === 'use' ||
+      (actual.site && cellMatches(actual.site, step.placed, t.plan.pitch)))
   );
   state.attempts[t.plan.key] = a.revision;
+  const control = t.plan.controlEvidence?.find((z) => z.op === op);
+  if (live && !won && control?.basis === 'untested' && step.stage !== 'read' && step.stage !== 'use')
+    state.calibration = { cause: t.cause, frame: a.frame_hash, actor: t.plan.p, part: t.plan.c };
+  if (
+    live &&
+    control &&
+    control.basis === 'untested' &&
+    actual.actor &&
+    !cellMatches(actual.actor, step.to, t.plan.pitch)
+  )
+    state.attempts[JSON.stringify(['direction', b.frame_hash, t.plan.p, op, control.d])] = a.revision;
   if (step.stage === 'write' && live && !matched)
     state.attempts[
       JSON.stringify(['failed_contact', t.plan.p, t.plan.c, t.plan.fixed, step.p, step.c, step.op])

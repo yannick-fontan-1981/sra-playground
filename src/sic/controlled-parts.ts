@@ -6,6 +6,7 @@ import type { Motor } from './local-progress.ts';
 type Stroke = { d: XY; count: number; last: string; first: string };
 export type PartMotion = {
   axes: Record<string, Record<string, Stroke>>;
+  displacements?: Record<string, Record<string, Stroke>>;
   sites: Record<string, number>;
   substrate: Record<string, number>;
 };
@@ -25,6 +26,12 @@ export function rememberMotion(
   m.sites[to.join()] = a.revision;
   if (q.startsWith('ACTION6:')) return;
   const d = diff(to, from);
+  const raw = ((m.displacements ??= {})[q] ??= {}),
+    all = (raw[d.join()] ??= { d, count: 0, first: b.observation_ref, last: '' });
+  if (all.last !== b.frame_hash) {
+    all.count++;
+    all.last = b.frame_hash;
+  }
   if ((d[0] === 0) === (d[1] === 0)) return;
   const histogram = (m.axes[q] ??= {}),
     v = (histogram[d.join()] ??= { d, count: 0, first: b.observation_ref, last: '' });

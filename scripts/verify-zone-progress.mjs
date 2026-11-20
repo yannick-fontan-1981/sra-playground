@@ -32,7 +32,7 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
   };
   for (const e of run.preparation)
     for (const proof of [e.localRepeat, e.mechanism?.trial.cause, e.mobilityProbe?.test.cause])
-      if (proof) {
+      if (proof && proof.tag!=='projected_access_limit') {
         const old = needed.get(proof.revision);
         require(!old || eq(old, proof), 'unique local return');
         needed.set(proof.revision, proof);
@@ -197,20 +197,21 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
       step &&
       commandKey(cmd) === step.op &&
       t.cause.revision <= i + 1 &&
-      verified.has(t.cause.revision), 'prospective experiment and cause');
+      (t.cause.tag==='projected_access_limit'?t.cause.reachable>1&&run.replayCommands[t.cause.revision-1]?.from===t.cause.frame:verified.has(t.cause.revision)), 'prospective experiment and cause');
+    const within=(u,v)=>!!u && (p.pitch?u.every((x,j)=>Math.abs(x-v[j])*2<p.pitch[j]):eq(u,v));
     const before = named(cmd.from, p, max);
-    require(eq(before.actor, step.p) && eq(before.site, step.c), 'preparation origin');
+    require(within(before.actor, step.p) && within(before.site, step.c), 'preparation origin');
     if (step.stage === 'read' && p.indicator)
       require(positions(cmd.from, p.indicator, max).some((v) =>
-        eq(v, [step.to[0]+(p.indicatorOffset?.[0]??0),step.to[1]+(p.indicatorOffset?.[1]??0)])
+        within(v, [step.to[0]+(p.indicatorOffset?.[0]??0),step.to[1]+(p.indicatorOffset?.[1]??0)])
       ), 'visible predicted indication');
     await partsAt(board, cmd.to, i + 2);
     const actual = named(cmd.to, p, limit(board)),
       live = board.level === prior.level && board.state === prior.state;
     const matched = !!(
       live &&
-      eq(actual.actor, step.to) &&
-      (step.stage === 'read' || step.stage === 'use' || eq(actual.site, step.placed))
+      within(actual.actor, step.to) &&
+      (step.stage === 'read' || step.stage === 'use' || within(actual.site, step.placed))
     );
     const won = board.levelsCompleted > prior.levelsCompleted || board.state === 'WIN';
     require(eq(actual, m.actual) &&
@@ -226,7 +227,7 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
       results.attemptedWrites++;
       if (matched) {
         results.confirmedWrites++;
-        branches.push({ i: i - t.index, length: t.index + 1, cause: t.cause.op, plan: p, at: step.placed });
+        branches.push({ i: i - t.index, length: t.index + 1, cause: t.cause.op, plan: p, at: actual.site });
       }
     }
     if (matched && step.stage === 'read') results.arrivals++;

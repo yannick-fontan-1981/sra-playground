@@ -452,7 +452,7 @@ function selectEstablishedExperiment(
       return Number.isInteger(x)&&Number.isInteger(y)&&inTerritory(goal,[x,y]);
     }}:undefined;
     const redirected=(free||!!stagnant)&&!m.localProgress?.active&&offerPreparedPreview(m.occupancy,s,available,rows[0]!.length,rows.length,frontier,m.previewLearning?{epoch:o.level_epoch,memory:m.previewLearning}:undefined);
-    if(redirected&&(!stagnant||redirected.occupancy?.plan.preparedPreview?.alternatives[0]?.opensMeasuredRegion))return redirected;
+    if(redirected&&redirected.occupancy?.plan.preparedPreview?.alternatives[0]?.opensMeasuredRegion)return redirected;
     const mechanism=offerMechanism(m,s,o,rows,available,stagnant);
     if(mechanism)return mechanism;
     if(redirected)return redirected;

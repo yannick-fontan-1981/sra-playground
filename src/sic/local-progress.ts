@@ -23,8 +23,20 @@ export type ZoneRepeat = {
   sourceScene: number;
   returnScene: number;
 };
+export type AccessLimit = {
+  tag: 'projected_access_limit';
+  frame: string;
+  revision: number;
+  op: string;
+  actor: string;
+  from: XY;
+  reachable: number;
+  arrival: XY;
+};
+export type MechanismReason = ZoneRepeat | AccessLimit;
 export type LocalProgress = {
-  afterPlacement?: { cause: ZoneRepeat; frame: string; actor: string; part: string };
+  calibration?: { cause: MechanismReason; frame: string; actor: string; part: string };
+  afterPlacement?: { cause: MechanismReason; frame: string; actor: string; part: string };
   last: ZoneRepeat | null;
   repeats: Record<string, ZoneRepeat>;
   attempts: Record<string, number>;
