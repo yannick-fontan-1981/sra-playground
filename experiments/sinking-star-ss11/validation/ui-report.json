@@ -1,6 +1,6 @@
 {
   "artifact": "dist/SS11-demo.html",
-  "htmlSha256": "dc0f34aeadbb408ccf4a5fde2290c0da9282292801a5ec6670ef57cd0615171b",
+  "htmlSha256": "92cd832b303165c22735f9510b6cdc02a30211a903e8ca37a1163225c32a92dc",
   "environment": "Happy DOM with a minimal Canvas 2D pixel-write recorder",
   "status": "passed",
   "checks": [

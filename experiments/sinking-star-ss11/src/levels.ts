@@ -2,20 +2,25 @@ import type {LevelSpec} from './core.js';
 export const SS11_LEVELS:readonly LevelSpec[]=[
   {
     "id": "ss11-01",
-    "title": "L’atelier des relais",
+    "title": "La cour aux deux sorties",
     "rows": [
       "###################",
-      "###o..#############",
-      "#.....#############",
-      "#.....#############",
-      "#W.Zo.~~....#######",
-      "#.....#..#..#######",
-      "########~o#########",
-      "########.#######g.#",
-      "########....####..#",
-      "########....####.g#",
-      "########....~~~~o.#",
-      "########....#######",
+      "#########.g.#######",
+      "#########...#######",
+      "#########...#######",
+      "##########.########",
+      "#######.....#######",
+      "#######.W...##~~~~#",
+      "#######Z....##~~~~#",
+      "#######.....oo~~.~#",
+      "#######.....##~~~~#",
+      "#########~~~~~~~~~#",
+      "#########~.~~~#####",
+      "#####.g.##~~~~#####",
+      "#####...~o~~~~#####",
+      "#####...#.~##~#####",
+      "#####...#~o..~#####",
+      "#####...#~...~#####",
       "###################",
       "###################"
     ],
@@ -24,60 +29,60 @@ export const SS11_LEVELS:readonly LevelSpec[]=[
       {
         "at": {
           "x": 10,
-          "y": 10
+          "y": 7
         },
-        "facing": "NE"
+        "facing": "SE"
       }
     ],
     "circuits": [
       {
-        "id": "presse",
+        "id": "relais-est",
         "buttons": [
           {
-            "x": 8,
-            "y": 4
+            "x": 16,
+            "y": 8
           }
         ],
         "color": 0
       },
       {
-        "id": "passerelle",
+        "id": "presse-ouest",
         "buttons": [
           {
-            "x": 17,
-            "y": 10
+            "x": 12,
+            "y": 16
           }
         ],
-        "color": 14
+        "color": 10
       }
     ],
     "gates": [
       {
         "at": {
-          "x": 9,
-          "y": 6
+          "x": 10,
+          "y": 4
         },
-        "circuit": "presse",
-        "direction": "W",
-        "closedWhen": "pressed"
-      }
-    ],
-    "platforms": [
-      {
-        "at": {
-          "x": 14,
-          "y": 10
-        },
-        "circuit": "passerelle",
-        "activeWhen": "pressed"
+        "circuit": "relais-est",
+        "direction": "N",
+        "closedWhen": "released"
       },
       {
         "at": {
-          "x": 15,
-          "y": 10
+          "x": 10,
+          "y": 11
         },
-        "circuit": "passerelle",
-        "activeWhen": "pressed"
+        "circuit": "relais-est",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 13
+        },
+        "circuit": "presse-ouest",
+        "direction": "W",
+        "closedWhen": "pressed"
       }
     ]
   },

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "success": true,
   "scope": "Eight initial boards, source/reference parity and twelve public tutorial detections",
   "campaignSearch": false,
@@ -7,10 +7,10 @@
   "levels": [
     {
       "level": 1,
-      "title": "L’atelier des relais",
+      "title": "La cour aux deux sorties",
       "dimensions": [
         19,
-        14
+        19
       ],
       "source": "https://sinkingstarwalkthrough.com/fr/north/",
       "initialFrameValid": true

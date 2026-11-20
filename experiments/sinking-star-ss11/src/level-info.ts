@@ -1,10 +1,10 @@
 export const LEVEL_INFO=[
   {
     "piston": true,
-    "platform": true,
+    "platform": false,
     "label": "Tutoriel original · Guerrier et Magicien · règles des Héros du Nord",
     "url": "https://sinkingstarwalkthrough.com/fr/north/",
-    "objective": "Extraire la première caisse, pousser la file dans l’eau, commander la presse puis relayer les deux héros par échanges et reflets jusqu’aux deux cibles."
+    "objective": "Construire le bras est, relayer les héros sur sa commande, libérer la sortie nord puis combiner le reflet du poids et une presse pour construire les deux appuis de la sortie ouest."
   },
   {
     "piston": true,

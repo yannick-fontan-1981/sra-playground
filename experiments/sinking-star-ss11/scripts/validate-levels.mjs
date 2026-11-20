@@ -21,6 +21,6 @@ for(const a of design.actions){const before=current;current=session.action(a.id,
 assert.deepEqual(lessonIds.filter(id=>!learned.has(id)),[],'Every tutorial lesson must be observable');
 const html=readFileSync(new URL('../dist/SS11-demo.html',import.meta.url),'utf8');
 assert.ok(!/<script[^>]+src=/i.test(html));assert.ok(!/function solve\(/.test(html));assert.ok(!/tests\/witnesses|reference\/author/.test(html));
-const report={version:'0.1.0',success:true,scope:'Eight initial boards, source/reference parity and twelve public tutorial detections',campaignSearch:false,lessonCount:learned.size,levels};
+const report={version:JSON.parse(readFileSync(new URL('../package.json',import.meta.url),'utf8')).version,success:true,scope:'Eight initial boards, source/reference parity and twelve public tutorial detections',campaignSearch:false,lessonCount:learned.size,levels};
 mkdirSync(new URL('../validation/',import.meta.url),{recursive:true});writeFileSync(new URL('../validation/content-report.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({initialBoards:levels.length,tutorialLessons:learned.size,campaignSearch:false,success:true}));

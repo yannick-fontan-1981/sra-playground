@@ -1,4 +1,4 @@
-# SS11 — Contrat 0.1.0
+# SS11 — Contrat 0.1.1
 
 ## Duo et actions
 

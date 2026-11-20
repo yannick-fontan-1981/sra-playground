@@ -4,15 +4,17 @@ Cette campagne associe le Guerrier et le Magicien. Les cartes sont des adaptatio
 
 Les commandes et positions intermédiaires restent dans les références d’auteur, hors du HTML jouable.
 
-## 1. L’atelier des relais
+## 1. La cour aux deux sorties
 
-Référence : [Tutoriel original · Guerrier et Magicien · règles des Héros du Nord](https://sinkingstarwalkthrough.com/fr/north/).
+Référence de règles : [Tutoriel original · Guerrier et Magicien · règles des Héros du Nord](https://sinkingstarwalkthrough.com/fr/north/).
 
-Extraire la première caisse, pousser la file dans l’eau, commander la presse puis relayer les deux héros par échanges et reflets jusqu’aux deux cibles.
+Construire le bras est, relayer les héros sur sa commande, libérer la sortie nord puis combiner le reflet du poids et une presse pour construire les deux appuis de la sortie ouest.
 
-Création pédagogique pour SS11. La structure de l’atelier SS08 est étendue à une file de deux caisses, une traversée double et un échange entre héros. Les mécanismes du Nord sont enseignés avec une presse latérale isolée, un miroir mobile et deux plateformes temporaires. Aucune reproduction exacte d’une énigme source n’est revendiquée.
+Création pédagogique originale pour SS11, entièrement reconstruite autour d’une cour à trois branches et de deux destinations séparées. La commande est ouvre la sortie nord ainsi que l’obturateur optique ; l’atelier inférieur reste inaccessible à pied. Le rayon coudé échange des occupants à des distances différentes : six cases côté est, sept au sud. Un reflet prématuré du héros arriverait dans l’eau, à six cases au sud ; le vrai échange du Magicien est nécessaire pour atteindre le sol de l’atelier. Sa caisse sert successivement de cible de transposition, de poids sur la commande puis d’appui construit par Espace. Une seconde caisse, inaccessible depuis son côté droit, fournit l’appui latéral au moyen de la presse. Le Guerrier doit terminer sa branche avant que le Magicien ne réutilise le poids. Aucun reflet final de héros, aucune passerelle hydraulique et aucune reproduction exacte d’une énigme source.
 
-Parcours d’auteur : 55 actions, dont 5 changements de sélection, 5 poussées du Guerrier, 2 activations utiles de miroirs, 1 poussées de presses et 4 nouveaux appuis. Aucune mort ni action refusée dans ce parcours. Ces valeurs ne sont pas des minima.
+Cette carte remplace intégralement le tutoriel de la version 0.1.0, qui reprenait la géométrie de SS08 L4. La cour de départ comporte trois branches, avec un retour, deux destinations séparées et une commande à deux effets.
+
+Parcours d’auteur : 44 actions, dont 5 changements de sélection, 1 poussée de chaîne, 1 déplacement de miroir, 1 reflet de caisse, 1 poussée de presse et 4 appuis créés. Les douze leçons sont observables. Aucune mort ni action refusée ; aucune affirmation de minimalité ou d’unicité.
 
 ## 2. La relève du gardien
 

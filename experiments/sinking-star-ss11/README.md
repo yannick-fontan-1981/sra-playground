@@ -1,6 +1,8 @@
 # SS11 — La Forge des Reflets
 
-Laboratoire autonome du onzième jeu de Custom 4 : **Guerrier rouge (8) + Magicien violet (15)**. Version **0.1.0**, huit niveaux et un tutoriel de douze découvertes au niveau 1. Image de **64 × 64 pixels**, grille logique 20 × 20, cellules de **3 × 3 pixels**, seize couleurs.
+Laboratoire autonome du onzième jeu de Custom 4 : **Guerrier rouge (8) + Magicien violet (15)**. Version **0.1.1**, huit niveaux et un tutoriel de douze découvertes au niveau 1. Image de **64 × 64 pixels**, grille logique 20 × 20, cellules de **3 × 3 pixels**, seize couleurs.
+
+Le tutoriel **La cour aux deux sorties** est une nouvelle carte à trois branches : chantier à l’est, destination au nord et atelier optique au sud-ouest. Une caisse remplit plusieurs rôles successifs. Cette carte remplace le premier atelier, trop proche de SS08 L4.
 
 ## Jouer
 
