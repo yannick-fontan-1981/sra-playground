@@ -1,0 +1,1312 @@
+{
+  "summary": {
+    "games": 100,
+    "mainWins": 100,
+    "candidateWins": 100,
+    "identical": 99,
+    "lost": [],
+    "gained": []
+  },
+  "games": [
+    {
+      "code": "AMZE",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "AR25",
+      "main": [
+        true,
+        17
+      ],
+      "candidate": [
+        true,
+        17
+      ],
+      "same": true,
+      "prefix": 17
+    },
+    {
+      "code": "AS66",
+      "main": [
+        true,
+        11
+      ],
+      "candidate": [
+        true,
+        11
+      ],
+      "same": true,
+      "prefix": 11
+    },
+    {
+      "code": "BP35",
+      "main": [
+        true,
+        18
+      ],
+      "candidate": [
+        true,
+        18
+      ],
+      "same": true,
+      "prefix": 18
+    },
+    {
+      "code": "CASC",
+      "main": [
+        true,
+        6
+      ],
+      "candidate": [
+        true,
+        6
+      ],
+      "same": true,
+      "prefix": 6
+    },
+    {
+      "code": "CATL",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    },
+    {
+      "code": "CATR",
+      "main": [
+        true,
+        29
+      ],
+      "candidate": [
+        true,
+        29
+      ],
+      "same": true,
+      "prefix": 29
+    },
+    {
+      "code": "CAVA",
+      "main": [
+        true,
+        7
+      ],
+      "candidate": [
+        true,
+        7
+      ],
+      "same": true,
+      "prefix": 7
+    },
+    {
+      "code": "CD82",
+      "main": [
+        true,
+        9
+      ],
+      "candidate": [
+        true,
+        9
+      ],
+      "same": true,
+      "prefix": 9
+    },
+    {
+      "code": "CGWL",
+      "main": [
+        true,
+        15
+      ],
+      "candidate": [
+        true,
+        15
+      ],
+      "same": true,
+      "prefix": 15
+    },
+    {
+      "code": "CLRS",
+      "main": [
+        true,
+        17
+      ],
+      "candidate": [
+        true,
+        17
+      ],
+      "same": true,
+      "prefix": 17
+    },
+    {
+      "code": "CN04",
+      "main": [
+        true,
+        18
+      ],
+      "candidate": [
+        true,
+        18
+      ],
+      "same": true,
+      "prefix": 18
+    },
+    {
+      "code": "COLM",
+      "main": [
+        true,
+        20
+      ],
+      "candidate": [
+        true,
+        20
+      ],
+      "same": true,
+      "prefix": 20
+    },
+    {
+      "code": "COMB",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    },
+    {
+      "code": "CONN",
+      "main": [
+        true,
+        24
+      ],
+      "candidate": [
+        true,
+        24
+      ],
+      "same": true,
+      "prefix": 24
+    },
+    {
+      "code": "CRAF",
+      "main": [
+        true,
+        12
+      ],
+      "candidate": [
+        true,
+        12
+      ],
+      "same": true,
+      "prefix": 12
+    },
+    {
+      "code": "CWSE",
+      "main": [
+        true,
+        6
+      ],
+      "candidate": [
+        true,
+        6
+      ],
+      "same": true,
+      "prefix": 6
+    },
+    {
+      "code": "DAME",
+      "main": [
+        true,
+        29
+      ],
+      "candidate": [
+        true,
+        29
+      ],
+      "same": true,
+      "prefix": 29
+    },
+    {
+      "code": "DC22",
+      "main": [
+        true,
+        24
+      ],
+      "candidate": [
+        true,
+        24
+      ],
+      "same": true,
+      "prefix": 24
+    },
+    {
+      "code": "DICO",
+      "main": [
+        true,
+        5
+      ],
+      "candidate": [
+        true,
+        5
+      ],
+      "same": true,
+      "prefix": 5
+    },
+    {
+      "code": "DNOI",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "ELAS",
+      "main": [
+        true,
+        7
+      ],
+      "candidate": [
+        true,
+        7
+      ],
+      "same": true,
+      "prefix": 7
+    },
+    {
+      "code": "ESCT",
+      "main": [
+        true,
+        16
+      ],
+      "candidate": [
+        true,
+        16
+      ],
+      "same": true,
+      "prefix": 16
+    },
+    {
+      "code": "ETAG",
+      "main": [
+        true,
+        7
+      ],
+      "candidate": [
+        true,
+        7
+      ],
+      "same": true,
+      "prefix": 7
+    },
+    {
+      "code": "EVAS",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "FITE",
+      "main": [
+        true,
+        12
+      ],
+      "candidate": [
+        true,
+        12
+      ],
+      "same": true,
+      "prefix": 12
+    },
+    {
+      "code": "FOGW",
+      "main": [
+        true,
+        18
+      ],
+      "candidate": [
+        true,
+        18
+      ],
+      "same": true,
+      "prefix": 18
+    },
+    {
+      "code": "FT09",
+      "main": [
+        true,
+        25
+      ],
+      "candidate": [
+        true,
+        25
+      ],
+      "same": true,
+      "prefix": 25
+    },
+    {
+      "code": "FUIT",
+      "main": [
+        true,
+        49
+      ],
+      "candidate": [
+        true,
+        49
+      ],
+      "same": true,
+      "prefix": 49
+    },
+    {
+      "code": "G50T",
+      "main": [
+        true,
+        27
+      ],
+      "candidate": [
+        true,
+        27
+      ],
+      "same": true,
+      "prefix": 27
+    },
+    {
+      "code": "GABA",
+      "main": [
+        true,
+        49
+      ],
+      "candidate": [
+        true,
+        49
+      ],
+      "same": true,
+      "prefix": 49
+    },
+    {
+      "code": "GARE",
+      "main": [
+        true,
+        11
+      ],
+      "candidate": [
+        true,
+        11
+      ],
+      "same": true,
+      "prefix": 11
+    },
+    {
+      "code": "GIGO",
+      "main": [
+        true,
+        7
+      ],
+      "candidate": [
+        true,
+        7
+      ],
+      "same": true,
+      "prefix": 7
+    },
+    {
+      "code": "GLOB",
+      "main": [
+        true,
+        9
+      ],
+      "candidate": [
+        true,
+        9
+      ],
+      "same": true,
+      "prefix": 9
+    },
+    {
+      "code": "GMAP",
+      "main": [
+        true,
+        5
+      ],
+      "candidate": [
+        true,
+        5
+      ],
+      "same": true,
+      "prefix": 5
+    },
+    {
+      "code": "GORI",
+      "main": [
+        true,
+        15
+      ],
+      "candidate": [
+        true,
+        15
+      ],
+      "same": true,
+      "prefix": 15
+    },
+    {
+      "code": "GRAV",
+      "main": [
+        true,
+        11
+      ],
+      "candidate": [
+        true,
+        11
+      ],
+      "same": true,
+      "prefix": 11
+    },
+    {
+      "code": "GRIL",
+      "main": [
+        true,
+        5
+      ],
+      "candidate": [
+        true,
+        5
+      ],
+      "same": true,
+      "prefix": 5
+    },
+    {
+      "code": "HANO",
+      "main": [
+        true,
+        6
+      ],
+      "candidate": [
+        true,
+        6
+      ],
+      "same": true,
+      "prefix": 6
+    },
+    {
+      "code": "HOLE",
+      "main": [
+        true,
+        5
+      ],
+      "candidate": [
+        true,
+        5
+      ],
+      "same": true,
+      "prefix": 5
+    },
+    {
+      "code": "HPDL",
+      "main": [
+        true,
+        7
+      ],
+      "candidate": [
+        true,
+        7
+      ],
+      "same": true,
+      "prefix": 7
+    },
+    {
+      "code": "ISOS",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "KA59",
+      "main": [
+        true,
+        15
+      ],
+      "candidate": [
+        true,
+        15
+      ],
+      "same": true,
+      "prefix": 15
+    },
+    {
+      "code": "KATA",
+      "main": [
+        true,
+        14
+      ],
+      "candidate": [
+        true,
+        14
+      ],
+      "same": true,
+      "prefix": 14
+    },
+    {
+      "code": "KEYD",
+      "main": [
+        true,
+        35
+      ],
+      "candidate": [
+        true,
+        35
+      ],
+      "same": true,
+      "prefix": 35
+    },
+    {
+      "code": "KLOT",
+      "main": [
+        true,
+        30
+      ],
+      "candidate": [
+        true,
+        30
+      ],
+      "same": true,
+      "prefix": 30
+    },
+    {
+      "code": "LF52",
+      "main": [
+        true,
+        16
+      ],
+      "candidate": [
+        true,
+        16
+      ],
+      "same": true,
+      "prefix": 16
+    },
+    {
+      "code": "LIFE",
+      "main": [
+        true,
+        26
+      ],
+      "candidate": [
+        true,
+        26
+      ],
+      "same": true,
+      "prefix": 26
+    },
+    {
+      "code": "LKEY",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    },
+    {
+      "code": "LOGI",
+      "main": [
+        true,
+        16
+      ],
+      "candidate": [
+        true,
+        16
+      ],
+      "same": true,
+      "prefix": 16
+    },
+    {
+      "code": "LP85",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    },
+    {
+      "code": "LS19",
+      "main": [
+        true,
+        5
+      ],
+      "candidate": [
+        true,
+        5
+      ],
+      "same": true,
+      "prefix": 5
+    },
+    {
+      "code": "LS20",
+      "main": [
+        true,
+        18
+      ],
+      "candidate": [
+        true,
+        18
+      ],
+      "same": true,
+      "prefix": 18
+    },
+    {
+      "code": "M0R0",
+      "main": [
+        true,
+        25
+      ],
+      "candidate": [
+        true,
+        25
+      ],
+      "same": true,
+      "prefix": 25
+    },
+    {
+      "code": "MEMO",
+      "main": [
+        true,
+        10
+      ],
+      "candidate": [
+        true,
+        10
+      ],
+      "same": true,
+      "prefix": 10
+    },
+    {
+      "code": "MIND",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    },
+    {
+      "code": "MOTO",
+      "main": [
+        true,
+        10
+      ],
+      "candidate": [
+        true,
+        10
+      ],
+      "same": true,
+      "prefix": 10
+    },
+    {
+      "code": "ONDE",
+      "main": [
+        true,
+        7
+      ],
+      "candidate": [
+        true,
+        7
+      ],
+      "same": true,
+      "prefix": 7
+    },
+    {
+      "code": "PIPE",
+      "main": [
+        true,
+        4
+      ],
+      "candidate": [
+        true,
+        4
+      ],
+      "same": true,
+      "prefix": 4
+    },
+    {
+      "code": "POLA",
+      "main": [
+        true,
+        6
+      ],
+      "candidate": [
+        true,
+        6
+      ],
+      "same": true,
+      "prefix": 6
+    },
+    {
+      "code": "PORT",
+      "main": [
+        true,
+        17
+      ],
+      "candidate": [
+        true,
+        17
+      ],
+      "same": true,
+      "prefix": 17
+    },
+    {
+      "code": "PRTL",
+      "main": [
+        true,
+        6
+      ],
+      "candidate": [
+        true,
+        6
+      ],
+      "same": true,
+      "prefix": 6
+    },
+    {
+      "code": "R11L",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "RE86",
+      "main": [
+        true,
+        26
+      ],
+      "candidate": [
+        true,
+        26
+      ],
+      "same": true,
+      "prefix": 26
+    },
+    {
+      "code": "RECR",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "REGN",
+      "main": [
+        true,
+        2
+      ],
+      "candidate": [
+        true,
+        2
+      ],
+      "same": true,
+      "prefix": 2
+    },
+    {
+      "code": "REWI",
+      "main": [
+        true,
+        5
+      ],
+      "candidate": [
+        true,
+        5
+      ],
+      "same": true,
+      "prefix": 5
+    },
+    {
+      "code": "RSWP",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "S5I5",
+      "main": [
+        true,
+        25
+      ],
+      "candidate": [
+        true,
+        25
+      ],
+      "same": true,
+      "prefix": 25
+    },
+    {
+      "code": "SB26",
+      "main": [
+        true,
+        9
+      ],
+      "candidate": [
+        true,
+        9
+      ],
+      "same": true,
+      "prefix": 9
+    },
+    {
+      "code": "SC25",
+      "main": [
+        true,
+        17
+      ],
+      "candidate": [
+        true,
+        17
+      ],
+      "same": true,
+      "prefix": 17
+    },
+    {
+      "code": "SELE",
+      "main": [
+        true,
+        36
+      ],
+      "candidate": [
+        true,
+        36
+      ],
+      "same": true,
+      "prefix": 36
+    },
+    {
+      "code": "SEQN",
+      "main": [
+        true,
+        4
+      ],
+      "candidate": [
+        true,
+        4
+      ],
+      "same": true,
+      "prefix": 4
+    },
+    {
+      "code": "SERI",
+      "main": [
+        true,
+        4
+      ],
+      "candidate": [
+        true,
+        4
+      ],
+      "same": true,
+      "prefix": 4
+    },
+    {
+      "code": "SIGN",
+      "main": [
+        true,
+        16
+      ],
+      "candidate": [
+        true,
+        16
+      ],
+      "same": true,
+      "prefix": 16
+    },
+    {
+      "code": "SK48",
+      "main": [
+        true,
+        19
+      ],
+      "candidate": [
+        true,
+        19
+      ],
+      "same": true,
+      "prefix": 19
+    },
+    {
+      "code": "SKBN",
+      "main": [
+        true,
+        22
+      ],
+      "candidate": [
+        true,
+        22
+      ],
+      "same": true,
+      "prefix": 22
+    },
+    {
+      "code": "SMLP",
+      "main": [
+        true,
+        47
+      ],
+      "candidate": [
+        true,
+        47
+      ],
+      "same": true,
+      "prefix": 47
+    },
+    {
+      "code": "SNAR",
+      "main": [
+        true,
+        17
+      ],
+      "candidate": [
+        true,
+        17
+      ],
+      "same": true,
+      "prefix": 17
+    },
+    {
+      "code": "SP80",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    },
+    {
+      "code": "SPOR",
+      "main": [
+        true,
+        18
+      ],
+      "candidate": [
+        true,
+        18
+      ],
+      "same": true,
+      "prefix": 18
+    },
+    {
+      "code": "STCK",
+      "main": [
+        true,
+        3
+      ],
+      "candidate": [
+        true,
+        3
+      ],
+      "same": true,
+      "prefix": 3
+    },
+    {
+      "code": "SU15",
+      "main": [
+        true,
+        7
+      ],
+      "candidate": [
+        true,
+        7
+      ],
+      "same": true,
+      "prefix": 7
+    },
+    {
+      "code": "SWCH",
+      "main": [
+        true,
+        25
+      ],
+      "candidate": [
+        true,
+        25
+      ],
+      "same": true,
+      "prefix": 25
+    },
+    {
+      "code": "SYME",
+      "main": [
+        true,
+        9
+      ],
+      "candidate": [
+        true,
+        9
+      ],
+      "same": true,
+      "prefix": 9
+    },
+    {
+      "code": "TEQU",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    },
+    {
+      "code": "THER",
+      "main": [
+        true,
+        21
+      ],
+      "candidate": [
+        true,
+        21
+      ],
+      "same": true,
+      "prefix": 21
+    },
+    {
+      "code": "TICT",
+      "main": [
+        true,
+        5
+      ],
+      "candidate": [
+        true,
+        5
+      ],
+      "same": true,
+      "prefix": 5
+    },
+    {
+      "code": "TN36",
+      "main": [
+        true,
+        53
+      ],
+      "candidate": [
+        true,
+        53
+      ],
+      "same": true,
+      "prefix": 53
+    },
+    {
+      "code": "TR87",
+      "main": [
+        true,
+        22
+      ],
+      "candidate": [
+        true,
+        22
+      ],
+      "same": true,
+      "prefix": 22
+    },
+    {
+      "code": "TRCP",
+      "main": [
+        true,
+        24
+      ],
+      "candidate": [
+        true,
+        24
+      ],
+      "same": true,
+      "prefix": 24
+    },
+    {
+      "code": "TRIA",
+      "main": [
+        true,
+        26
+      ],
+      "candidate": [
+        true,
+        26
+      ],
+      "same": true,
+      "prefix": 26
+    },
+    {
+      "code": "TU93",
+      "main": [
+        true,
+        30
+      ],
+      "candidate": [
+        true,
+        30
+      ],
+      "same": true,
+      "prefix": 30
+    },
+    {
+      "code": "UPST",
+      "main": [
+        true,
+        30
+      ],
+      "candidate": [
+        true,
+        30
+      ],
+      "same": true,
+      "prefix": 30
+    },
+    {
+      "code": "VALV",
+      "main": [
+        true,
+        25
+      ],
+      "candidate": [
+        true,
+        25
+      ],
+      "same": true,
+      "prefix": 25
+    },
+    {
+      "code": "VC33",
+      "main": [
+        true,
+        12
+      ],
+      "candidate": [
+        true,
+        12
+      ],
+      "same": true,
+      "prefix": 12
+    },
+    {
+      "code": "VOIS",
+      "main": [
+        true,
+        45
+      ],
+      "candidate": [
+        true,
+        57
+      ],
+      "same": false,
+      "prefix": 27
+    },
+    {
+      "code": "WA30",
+      "main": [
+        true,
+        26
+      ],
+      "candidate": [
+        true,
+        26
+      ],
+      "same": true,
+      "prefix": 26
+    },
+    {
+      "code": "WEAV",
+      "main": [
+        true,
+        26
+      ],
+      "candidate": [
+        true,
+        26
+      ],
+      "same": true,
+      "prefix": 26
+    },
+    {
+      "code": "ZIPP",
+      "main": [
+        true,
+        8
+      ],
+      "candidate": [
+        true,
+        8
+      ],
+      "same": true,
+      "prefix": 8
+    }
+  ]
+}

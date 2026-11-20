@@ -94,7 +94,11 @@ async function run(code, games) {
       ? board
       : {
           ...board,
-          level: board.level - start + 1,
+          // A direct-entry engine may display an earlier unfinished level after a win.
+          // The native test campaign has still advanced one ordinal on that scored action.
+          level: finish === start && board.levelsCompleted > initialCompleted
+            ? 2
+            : board.level - start + 1,
           levelCount: board.levelCount - start + 1,
           levelsCompleted: board.levelsCompleted - initialCompleted,
         };
@@ -176,7 +180,8 @@ async function run(code, games) {
       return observation();
     },
     dispatch: async (action) => {
-      if (board.level > finish) throw Error('Action after target level');
+      if (board.level > finish || (finish === start && board.levelsCompleted > initialCompleted))
+        throw Error('Action after target level');
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
@@ -204,7 +209,7 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);

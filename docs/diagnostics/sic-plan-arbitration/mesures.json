@@ -1,0 +1,113 @@
+{
+  "gel": {
+    "candidate": "3ea19a860f6b1155324ffb8fefae62b14d793b42",
+    "tag": "sic-source100-plan-arbitration-v31",
+    "files": 2546,
+    "digest": "bdea7938b1c14b9cbf4ea105d38eb6968cb4bc4428a724ccdb62134955f0fc59",
+    "main": "f3b4edc227b0f375108002d0243539901a2d5cf9",
+    "environment": "f4d28aee9ebbb35533bb97a26968efd22887473d"
+  },
+  "controleChaudV30": {
+    "commandes": 32,
+    "victoire": true,
+    "scoreAvant": 1,
+    "scoreApres": 2,
+    "niveauAfficheApres": 3,
+    "actionsLecon": 19,
+    "remisesAZero": 0,
+    "imagesDistinctes": 33,
+    "arret": "target_levels_completed",
+    "empreinteDepart": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+    "empreinteParcours": "78028e7fd57df5407040ce8345d1627099ccdc957be1aa8b457ef77d29cb634e",
+    "programmeSpatial": {
+      "predictedCrossings": 2,
+      "confirmedWrites": 7,
+      "arrivals": 2,
+      "uses": 2,
+      "terminalWins": 1
+    }
+  },
+  "candidatChaud": {
+    "commandes": 32,
+    "victoire": true,
+    "scoreAvant": 1,
+    "scoreApres": 2,
+    "niveauAfficheApres": 3,
+    "actionsLecon": 19,
+    "remisesAZero": 0,
+    "imagesDistinctes": 33,
+    "arret": "target_levels_completed",
+    "empreinteDepart": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+    "empreinteParcours": "78028e7fd57df5407040ce8345d1627099ccdc957be1aa8b457ef77d29cb634e",
+    "programmeSpatial": {
+      "predictedCrossings": 2,
+      "confirmedWrites": 7,
+      "arrivals": 2,
+      "uses": 2,
+      "terminalWins": 1
+    }
+  },
+  "candidatFroid": {
+    "commandes": 44,
+    "victoire": true,
+    "scoreAvant": 0,
+    "scoreApres": 1,
+    "niveauAfficheApres": 1,
+    "actionsLecon": 0,
+    "remisesAZero": 0,
+    "imagesDistinctes": 44,
+    "arret": "target_levels_completed",
+    "empreinteDepart": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+    "empreinteParcours": "b78b819c6501230bf31a6424f95bedaa53bf35ea70cacb0d8341a7f539f4f2a1",
+    "programmeSpatial": {
+      "predictedCrossings": 2,
+      "confirmedWrites": 8,
+      "arrivals": 2,
+      "uses": 2,
+      "terminalWins": 0
+    }
+  },
+  "mainFroid": {
+    "commandes": 54,
+    "victoire": false,
+    "scoreAvant": 0,
+    "scoreApres": 0,
+    "niveauAfficheApres": 2,
+    "actionsLecon": 0,
+    "remisesAZero": 0,
+    "imagesDistinctes": 28,
+    "arret": "no_applicable_transferred_family",
+    "empreinteDepart": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+    "empreinteParcours": "f3c18d9c623393efdd8b299b2296af5b7c07a42a9280d4785111ee60867be7c6",
+    "programmeSpatial": {
+      "predictedCrossings": 0,
+      "confirmedWrites": 0,
+      "arrivals": 0,
+      "uses": 0,
+      "terminalWins": 0
+    }
+  },
+  "prioritePrecoceSuspenduePlafond90": {
+    "commandes": 90,
+    "victoire": false,
+    "scoreAvant": 0,
+    "scoreApres": 0,
+    "niveauAfficheApres": 2,
+    "actionsLecon": 0,
+    "remisesAZero": 0,
+    "imagesDistinctes": 74,
+    "arret": "session_action_budget",
+    "empreinteDepart": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+    "empreinteParcours": "5f4c9727dc651e58d8da638f570a2adca987af5f8d12444e82a3d19dbc559c1b",
+    "programmeSpatial": {
+      "predictedCrossings": 11,
+      "confirmedWrites": 4,
+      "arrivals": 1,
+      "uses": 1,
+      "terminalWins": 0
+    }
+  },
+  "premiereDivergenceAFroid": 18,
+  "tests": 423,
+  "verificationTypeScript": true
+}

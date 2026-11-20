@@ -1,0 +1,868 @@
+{
+  "candidate": "3ea19a860f6b1155324ffb8fefae62b14d793b42",
+  "engine": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+  "trajectory": "b78b819c6501230bf31a6424f95bedaa53bf35ea70cacb0d8341a7f539f4f2a1",
+  "actions": [
+    {
+      "id": 1,
+      "family": "sic_public_input_exploration",
+      "from": "b03a285600cc3e33",
+      "to": "b61d1dde338de6e9"
+    },
+    {
+      "id": 3,
+      "family": "sic_public_input_exploration",
+      "from": "b61d1dde338de6e9",
+      "to": "276ae6c33c1e6f6e"
+    },
+    {
+      "id": 2,
+      "family": "sic_public_input_exploration",
+      "from": "276ae6c33c1e6f6e",
+      "to": "2916db4b0a246919"
+    },
+    {
+      "id": 4,
+      "family": "sic_public_input_exploration",
+      "from": "2916db4b0a246919",
+      "to": "db2a683b59e5eae4"
+    },
+    {
+      "id": 5,
+      "family": "sic_public_input_exploration",
+      "from": "db2a683b59e5eae4",
+      "to": "285d6a88adf3b881"
+    },
+    {
+      "id": 3,
+      "family": "sic_public_input_exploration",
+      "from": "285d6a88adf3b881",
+      "to": "4f5148641fc5f745"
+    },
+    {
+      "id": 2,
+      "family": "sic_public_input_exploration",
+      "from": "4f5148641fc5f745",
+      "to": "257aa0386a19e5e1"
+    },
+    {
+      "id": 4,
+      "family": "sic_public_input_exploration",
+      "from": "257aa0386a19e5e1",
+      "to": "d82f3de0b7d0a2a7"
+    },
+    {
+      "id": 2,
+      "family": "sic_public_input_exploration",
+      "from": "d82f3de0b7d0a2a7",
+      "to": "db06066de3493db1"
+    },
+    {
+      "id": 4,
+      "family": "sic_public_input_exploration",
+      "from": "db06066de3493db1",
+      "to": "c742be42e9e5a8e3"
+    },
+    {
+      "id": 5,
+      "family": "sic_public_input_exploration",
+      "from": "c742be42e9e5a8e3",
+      "to": "7b783532971cdb81"
+    },
+    {
+      "id": 2,
+      "family": "sic_public_input_exploration",
+      "from": "7b783532971cdb81",
+      "to": "bdeae430c68fda6f"
+    },
+    {
+      "id": 3,
+      "family": "sic_public_input_exploration",
+      "from": "bdeae430c68fda6f",
+      "to": "4148962b940eb3d1"
+    },
+    {
+      "id": 3,
+      "family": "sic_public_input_exploration",
+      "from": "4148962b940eb3d1",
+      "to": "6c0c7cbe3438523c"
+    },
+    {
+      "id": 5,
+      "family": "sic_public_input_exploration",
+      "from": "6c0c7cbe3438523c",
+      "to": "d2ae535153c4f840"
+    },
+    {
+      "id": 2,
+      "family": "sic_public_input_exploration",
+      "from": "d2ae535153c4f840",
+      "to": "ca528930a4cf0bdf"
+    },
+    {
+      "id": 3,
+      "family": "sic_public_input_exploration",
+      "from": "ca528930a4cf0bdf",
+      "to": "6c0c7cbe3438523c"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "05e05f57cc4d87928bcd39a5444f606147139bbaaedb256da2d39cd3554ca6da",
+      "from": "6c0c7cbe3438523c",
+      "to": "c487bed503f92e7e"
+    },
+    {
+      "id": 1,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "fb1b0719dc829656e8261f18767747b9847a467016fb222bd486b4ccac7cc140",
+      "from": "c487bed503f92e7e",
+      "to": "1453b4ebf5d079dc"
+    },
+    {
+      "id": 3,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "9e22551134f9b542878a82d1231c4f7339d34a38bd067df93fbdbd2419ca7c8f",
+      "from": "1453b4ebf5d079dc",
+      "to": "34529fcb1b42f6fa"
+    },
+    {
+      "id": 3,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "feaf338c3d49553767684b6ba76f7e3b52ceed4b814ab788dbd9dacad666e203",
+      "from": "34529fcb1b42f6fa",
+      "to": "4e1d08ff612197da"
+    },
+    {
+      "id": 3,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "5a352ebad3e935789fc1db03a0370e6a4e5fd57dc30a10f1b96e2944953def38",
+      "from": "4e1d08ff612197da",
+      "to": "53e6bfc0d59af613"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "6af5b1743180b7115eedfe91cabfc7e1fae25bc5f1b893528158dc1c36e76559",
+      "from": "53e6bfc0d59af613",
+      "to": "cb06bbdd53a14f11"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "4645b8613b00a454fbd2f52f74ae3810c5ff5033c2d25bf16a14ffb9c7803425",
+      "from": "cb06bbdd53a14f11",
+      "to": "b4faf4772d575b42"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "8c930d857363c5f4f949c16fef281fc6e5149b74b53749956d60a8afa10b7e62",
+      "from": "b4faf4772d575b42",
+      "to": "49a28fc160080075"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "b92f20628df056ff29a2b9f4bb3426c1ec493a9d50068a6ade13e99085e227ea",
+      "from": "49a28fc160080075",
+      "to": "3d0a991a8d6e6bb6"
+    },
+    {
+      "id": 5,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "7dfa7bf13fb76c0ec36ae941d3e96901f518a2e6f8335168d4ed811d11217f97",
+      "from": "3d0a991a8d6e6bb6",
+      "to": "e124a5454022ff41"
+    },
+    {
+      "id": 2,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "d51faf0453883ddb8cef7d73b9349afc6bac84aa4535cde3e671449efd64ecab",
+      "from": "e124a5454022ff41",
+      "to": "4033cb7036662fff"
+    },
+    {
+      "id": 3,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "ebae988681b388d60a9faeab105740cc62f061d2be6ab7ff393cc59ef637dae8",
+      "from": "4033cb7036662fff",
+      "to": "81f98c5cc22df038"
+    },
+    {
+      "id": 3,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "54d7effc77750be8dbf6dca95cec8873bb31a734ecf709a565dcc82f1e5ff0f7",
+      "from": "81f98c5cc22df038",
+      "to": "334e9259c64cb29c"
+    },
+    {
+      "id": 2,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "afe20a812c3aa7db6a006f344581568ace211ad6610c1733dc243570591ded52",
+      "from": "334e9259c64cb29c",
+      "to": "8f40927338399e25"
+    },
+    {
+      "id": 2,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "0991368e3fc3d7343c2cd956456c843f620b3bc1a9022e4cbe6176b31074154a",
+      "from": "8f40927338399e25",
+      "to": "4b833f3c8626c998"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "c59b361eb439faf45119e6cfe80ad987ffefb5ec43985126166dc9c1f1dcd973",
+      "from": "4b833f3c8626c998",
+      "to": "b263ff6b86cbf90f"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "9960ada1359489b5b415982fdd8978247f26b0d1fd591cf159539f0268962fc2",
+      "from": "b263ff6b86cbf90f",
+      "to": "a3479676590d652f"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "44cd73703c12c78e2b8bc7fd9ea1e589129431956b722f3706bb14c058047ce1",
+      "from": "a3479676590d652f",
+      "to": "d9e2df83058a3003"
+    },
+    {
+      "id": 2,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "f61b07cfd0f3ec377f42f4c3c9c2c6f3e5ca8af445d2371e12545395c25c2b0e",
+      "from": "d9e2df83058a3003",
+      "to": "2efe0a6a7103a258"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "179ef74f261e0d9a070d853de8ee67adfe5e50eb6c5f58c0a6e57d7f18d55a23",
+      "from": "2efe0a6a7103a258",
+      "to": "542b74a02dfd4f35"
+    },
+    {
+      "id": 1,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "80c76eb999b740336c4d56c55ea80ed39ebc1a272dc80852325bb2ef0d6dd990",
+      "from": "542b74a02dfd4f35",
+      "to": "9fa3f78150f9f9bf"
+    },
+    {
+      "id": 1,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "ab9fb6181cc00199852ec2ba654376236ff53a2ed62a0fc3d039a3241c859254",
+      "from": "9fa3f78150f9f9bf",
+      "to": "65aa5304f0bdfba0"
+    },
+    {
+      "id": 2,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "cbaf816482059bef56a0c8f178ad61766ab05a333c76c78ae4b3d1c954d0fdd9",
+      "from": "65aa5304f0bdfba0",
+      "to": "2290fd462cebfd1c"
+    },
+    {
+      "id": 2,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "43f3187d50e8a7c588f9e62440f969c2c3ab9f4306d3a2e6784384108ab5604e",
+      "from": "2290fd462cebfd1c",
+      "to": "2b5cdd3f1cbbe3a0"
+    },
+    {
+      "id": 5,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "6a453c1d5b33bc468ba14caf159642d3db98855af2a8d1c3e9a9dc93cdbe47c0",
+      "from": "2b5cdd3f1cbbe3a0",
+      "to": "19e11240980cd102"
+    },
+    {
+      "id": 4,
+      "family": "sic_test_prepared_effects",
+      "mechanismSeal": "97d2df9975311b67d3efc8394a263e8439b8c705a23870fb9357a32880a10566",
+      "from": "19e11240980cd102",
+      "to": "0eb9501030bd561d"
+    },
+    {
+      "id": 1,
+      "family": "sic_public_input_exploration",
+      "from": "0eb9501030bd561d",
+      "to": "c62141ed0108269b"
+    }
+  ],
+  "plans": [
+    {
+      "start": 18,
+      "home": 18,
+      "otherSetups": 13,
+      "placed": [
+        47,
+        29
+      ],
+      "launch": [
+        79,
+        30
+      ],
+      "arrival": [
+        49,
+        60
+      ],
+      "use": [
+        49,
+        66
+      ],
+      "projectionBasis": "fitted_symmetry",
+      "steps": [
+        {
+          "op": "ACTION4",
+          "stage": "move",
+          "p": [
+            67,
+            36
+          ],
+          "c": [
+            65,
+            29
+          ],
+          "to": [
+            73,
+            36
+          ],
+          "placed": [
+            65,
+            29
+          ]
+        },
+        {
+          "op": "ACTION1",
+          "stage": "move",
+          "p": [
+            73,
+            36
+          ],
+          "c": [
+            65,
+            29
+          ],
+          "to": [
+            73,
+            30
+          ],
+          "placed": [
+            65,
+            29
+          ]
+        },
+        {
+          "op": "ACTION3",
+          "stage": "write",
+          "p": [
+            73,
+            30
+          ],
+          "c": [
+            65,
+            29
+          ],
+          "to": [
+            67,
+            30
+          ],
+          "placed": [
+            59,
+            29
+          ]
+        },
+        {
+          "op": "ACTION3",
+          "stage": "write",
+          "p": [
+            67,
+            30
+          ],
+          "c": [
+            59,
+            29
+          ],
+          "to": [
+            61,
+            30
+          ],
+          "placed": [
+            53,
+            29
+          ]
+        },
+        {
+          "op": "ACTION3",
+          "stage": "write",
+          "p": [
+            61,
+            30
+          ],
+          "c": [
+            53,
+            29
+          ],
+          "to": [
+            55,
+            30
+          ],
+          "placed": [
+            47,
+            29
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "move",
+          "p": [
+            55,
+            30
+          ],
+          "c": [
+            47,
+            29
+          ],
+          "to": [
+            61,
+            30
+          ],
+          "placed": [
+            47,
+            29
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "move",
+          "p": [
+            61,
+            30
+          ],
+          "c": [
+            47,
+            29
+          ],
+          "to": [
+            67,
+            30
+          ],
+          "placed": [
+            47,
+            29
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "move",
+          "p": [
+            67,
+            30
+          ],
+          "c": [
+            47,
+            29
+          ],
+          "to": [
+            73,
+            30
+          ],
+          "placed": [
+            47,
+            29
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "move",
+          "p": [
+            73,
+            30
+          ],
+          "c": [
+            47,
+            29
+          ],
+          "to": [
+            79,
+            30
+          ],
+          "placed": [
+            47,
+            29
+          ]
+        },
+        {
+          "op": "ACTION5",
+          "stage": "read",
+          "p": [
+            79,
+            30
+          ],
+          "c": [
+            47,
+            29
+          ],
+          "to": [
+            49,
+            60
+          ],
+          "placed": [
+            47,
+            29
+          ]
+        },
+        {
+          "op": "ACTION2",
+          "stage": "use",
+          "p": [
+            49,
+            60
+          ],
+          "c": [
+            47,
+            29
+          ],
+          "to": [
+            49,
+            66
+          ],
+          "placed": [
+            47,
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "start": 29,
+      "home": 35,
+      "otherSetups": 25,
+      "placed": [
+        59,
+        65
+      ],
+      "launch": [
+        60,
+        83
+      ],
+      "arrival": [
+        78,
+        65
+      ],
+      "use": [
+        84,
+        65
+      ],
+      "projectionBasis": "fitted_symmetry",
+      "steps": [
+        {
+          "op": "ACTION3",
+          "stage": "move",
+          "p": [
+            48,
+            65
+          ],
+          "c": [
+            41,
+            77
+          ],
+          "to": [
+            42,
+            65
+          ],
+          "placed": [
+            41,
+            77
+          ]
+        },
+        {
+          "op": "ACTION3",
+          "stage": "move",
+          "p": [
+            42,
+            65
+          ],
+          "c": [
+            41,
+            77
+          ],
+          "to": [
+            36,
+            65
+          ],
+          "placed": [
+            41,
+            77
+          ]
+        },
+        {
+          "op": "ACTION2",
+          "stage": "move",
+          "p": [
+            36,
+            65
+          ],
+          "c": [
+            41,
+            77
+          ],
+          "to": [
+            36,
+            71
+          ],
+          "placed": [
+            41,
+            77
+          ]
+        },
+        {
+          "op": "ACTION2",
+          "stage": "move",
+          "p": [
+            36,
+            71
+          ],
+          "c": [
+            41,
+            77
+          ],
+          "to": [
+            36,
+            77
+          ],
+          "placed": [
+            41,
+            77
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "write",
+          "p": [
+            36,
+            77
+          ],
+          "c": [
+            41,
+            77
+          ],
+          "to": [
+            42,
+            77
+          ],
+          "placed": [
+            47,
+            77
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "write",
+          "p": [
+            42,
+            77
+          ],
+          "c": [
+            47,
+            77
+          ],
+          "to": [
+            48,
+            77
+          ],
+          "placed": [
+            53,
+            77
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "write",
+          "p": [
+            48,
+            77
+          ],
+          "c": [
+            53,
+            77
+          ],
+          "to": [
+            54,
+            77
+          ],
+          "placed": [
+            59,
+            77
+          ]
+        },
+        {
+          "op": "ACTION2",
+          "stage": "move",
+          "p": [
+            54,
+            77
+          ],
+          "c": [
+            59,
+            77
+          ],
+          "to": [
+            54,
+            83
+          ],
+          "placed": [
+            59,
+            77
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "move",
+          "p": [
+            54,
+            83
+          ],
+          "c": [
+            59,
+            77
+          ],
+          "to": [
+            60,
+            83
+          ],
+          "placed": [
+            59,
+            77
+          ]
+        },
+        {
+          "op": "ACTION1",
+          "stage": "write",
+          "p": [
+            60,
+            83
+          ],
+          "c": [
+            59,
+            77
+          ],
+          "to": [
+            60,
+            77
+          ],
+          "placed": [
+            59,
+            71
+          ]
+        },
+        {
+          "op": "ACTION1",
+          "stage": "write",
+          "p": [
+            60,
+            77
+          ],
+          "c": [
+            59,
+            71
+          ],
+          "to": [
+            60,
+            71
+          ],
+          "placed": [
+            59,
+            65
+          ]
+        },
+        {
+          "op": "ACTION2",
+          "stage": "move",
+          "p": [
+            60,
+            71
+          ],
+          "c": [
+            59,
+            65
+          ],
+          "to": [
+            60,
+            77
+          ],
+          "placed": [
+            59,
+            65
+          ]
+        },
+        {
+          "op": "ACTION2",
+          "stage": "move",
+          "p": [
+            60,
+            77
+          ],
+          "c": [
+            59,
+            65
+          ],
+          "to": [
+            60,
+            83
+          ],
+          "placed": [
+            59,
+            65
+          ]
+        },
+        {
+          "op": "ACTION5",
+          "stage": "read",
+          "p": [
+            60,
+            83
+          ],
+          "c": [
+            59,
+            65
+          ],
+          "to": [
+            78,
+            65
+          ],
+          "placed": [
+            59,
+            65
+          ]
+        },
+        {
+          "op": "ACTION4",
+          "stage": "use",
+          "p": [
+            78,
+            65
+          ],
+          "c": [
+            59,
+            65
+          ],
+          "to": [
+            84,
+            65
+          ],
+          "placed": [
+            59,
+            65
+          ]
+        }
+      ]
+    }
+  ]
+}
