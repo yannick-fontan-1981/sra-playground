@@ -11964,6 +11964,16 @@
           }
         }
       ]
+    },
+    "testSuite": {
+      "sicPassed": 145,
+      "sicTotal": 146,
+      "sicBaselineFailures": 1,
+      "fullPassed": 15507,
+      "fullTotal": 15645,
+      "baselineReproducedOf138": 137,
+      "otherFailure": "source_projection_node_bound_propagates",
+      "isolatedCandidateAndBaselinePassed": true
     }
   },
   "sourceDistantArrivalsV11": {
@@ -12239,6 +12249,861 @@
         },
         "matched": []
       }
-    ]
+    ],
+    "selectedSourceInterventions": [
+      {
+        "code": "PRTL",
+        "eligible": true,
+        "probe": "ACTION3",
+        "next": "ACTION3",
+        "ordinary": [
+          -5,
+          0
+        ],
+        "selectedBefore": 5,
+        "original": {
+          "kind": "original",
+          "keys": [
+            "ACTION6:3,50",
+            "ACTION6:20,3",
+            "ACTION6:60,50",
+            "ACTION3"
+          ],
+          "image": "fff8f2591ac63d877adc58b1b70cbd0094960ade25b2dc6c1f1f583d6b98312a",
+          "active": true,
+          "tracked": true,
+          "novelImage": false,
+          "p": [
+            6,
+            51
+          ],
+          "nominal": [
+            1,
+            51
+          ],
+          "selected": {
+            "entry": [
+              4,
+              49
+            ],
+            "exit": [
+              59,
+              49
+            ],
+            "landing": [
+              56,
+              51
+            ]
+          },
+          "frozen": [
+            58,
+            51
+          ],
+          "actual": [
+            56,
+            51
+          ],
+          "exact": true,
+          "ordinaryExact": false,
+          "won": true
+        },
+        "novelExample": {
+          "kind": "permutation",
+          "keys": [
+            "ACTION6:60,50",
+            "ACTION6:20,3",
+            "ACTION6:3,50",
+            "ACTION3"
+          ],
+          "image": "304b4c0ddbbfd15210518f15144d7d670b95d616a464afd5dd85b3dc966eb8d6",
+          "active": true,
+          "tracked": true,
+          "novelImage": true,
+          "p": [
+            6,
+            51
+          ],
+          "nominal": [
+            1,
+            51
+          ],
+          "selected": {
+            "entry": [
+              4,
+              49
+            ],
+            "exit": [
+              59,
+              49
+            ],
+            "landing": [
+              56,
+              51
+            ]
+          },
+          "frozen": [
+            58,
+            51
+          ],
+          "actual": [
+            56,
+            51
+          ],
+          "exact": true,
+          "ordinaryExact": false,
+          "won": true
+        },
+        "singleChangeControl": {
+          "kind": "replacement",
+          "keys": [
+            "ACTION6:3,50",
+            "ACTION6:20,3",
+            "ACTION2",
+            "ACTION3"
+          ],
+          "image": "16bd8356c1c2f14daf9496e2ee0d7ebaf4063ddbb9ac59179add25d79892f0c9",
+          "active": true,
+          "tracked": true,
+          "novelImage": true,
+          "p": [
+            6,
+            51
+          ],
+          "nominal": [
+            1,
+            51
+          ],
+          "selected": null,
+          "frozen": [
+            58,
+            51
+          ],
+          "actual": [
+            4,
+            51
+          ],
+          "exact": false,
+          "ordinaryExact": false,
+          "won": false
+        },
+        "byProgram": {
+          "arms": 135,
+          "measured": 79,
+          "offered": 13,
+          "exact": 10,
+          "frozenExact": 0,
+          "won": 10,
+          "exactAndWon": 10
+        },
+        "unique": {
+          "arms": 28,
+          "measured": 23,
+          "offered": 4,
+          "exact": 2,
+          "frozenExact": 0,
+          "won": 2,
+          "exactAndWon": 2
+        },
+        "novel": {
+          "arms": 23,
+          "measured": 18,
+          "offered": 3,
+          "exact": 1,
+          "frozenExact": 0,
+          "won": 1,
+          "exactAndWon": 1
+        },
+        "alias": 0,
+        "byKind": {
+          "original": {
+            "arms": 1,
+            "measured": 1,
+            "offered": 1,
+            "exact": 1,
+            "frozenExact": 0,
+            "won": 1,
+            "exactAndWon": 1
+          },
+          "omission": {
+            "arms": 15,
+            "measured": 10,
+            "offered": 2,
+            "exact": 0,
+            "frozenExact": 0,
+            "won": 0,
+            "exactAndWon": 0
+          },
+          "permutation": {
+            "arms": 23,
+            "measured": 15,
+            "offered": 7,
+            "exact": 7,
+            "frozenExact": 0,
+            "won": 7,
+            "exactAndWon": 7
+          },
+          "replacement": {
+            "arms": 96,
+            "measured": 53,
+            "offered": 3,
+            "exact": 2,
+            "frozenExact": 0,
+            "won": 2,
+            "exactAndWon": 2
+          }
+        },
+        "distinctLandings": 0,
+        "example": null
+      }
+    ],
+    "reachableComparisons": {
+      "reached": [
+        {
+          "code": "PRTL",
+          "level": 1,
+          "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 17,
+          "measured": 14,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 2,
+          "initial": "486da49e69a50992fb7f94524e55683663ac30e568f3888e9c86046baf0d0773",
+          "expanded": 62,
+          "commands": 248,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 3,
+          "initial": "95455d86035a4adb6954de917fdc6387f58da3814e5488e96f243ec5c9ba35fb",
+          "expanded": 62,
+          "commands": 248,
+          "proposals": 1,
+          "measured": 1,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 2,
+          "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 3,
+          "initial": "010027d9f888ce69c302485bddd6af3c566a55503c2093a7fac332f85aa97dde",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 169,
+          "measured": 159,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 2,
+          "initial": "38e108c1df1b50268a10427a7abfa718fc452c5fb3d967a645c38c6249bc659f",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 48,
+          "measured": 48,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 2,
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 3,
+          "initial": "f5ad78c3623d4d8a899105518044e022a65c9e3ae310517dcd9490779a6880da",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "examples": []
+        }
+      ],
+      "mixed": [
+        {
+          "code": "PRTL",
+          "level": 1,
+          "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+          "expanded": 96,
+          "commands": 2112,
+          "proposals": 19,
+          "measured": 10,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 5,
+            "2": 15,
+            "3": 32,
+            "4": 44
+          },
+          "mixedDepths": {
+            "2": 4,
+            "3": 12,
+            "4": 24
+          },
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 2,
+          "initial": "486da49e69a50992fb7f94524e55683663ac30e568f3888e9c86046baf0d0773",
+          "expanded": 96,
+          "commands": 2112,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 6,
+            "2": 21,
+            "3": 54,
+            "4": 15
+          },
+          "mixedDepths": {
+            "2": 9,
+            "3": 31,
+            "4": 10
+          },
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 3,
+          "initial": "95455d86035a4adb6954de917fdc6387f58da3814e5488e96f243ec5c9ba35fb",
+          "expanded": 96,
+          "commands": 2112,
+          "proposals": 35,
+          "measured": 35,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 6,
+            "2": 22,
+            "3": 61,
+            "4": 7
+          },
+          "mixedDepths": {
+            "2": 9,
+            "3": 37,
+            "4": 4
+          },
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 2,
+            "2": 5,
+            "3": 10,
+            "4": 14,
+            "5": 16,
+            "6": 18,
+            "7": 30,
+            "8": 1
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 2,
+          "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 2,
+            "2": 6,
+            "3": 8,
+            "4": 9,
+            "5": 11,
+            "6": 12,
+            "7": 13,
+            "8": 16,
+            "9": 18,
+            "10": 1
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 3,
+          "initial": "010027d9f888ce69c302485bddd6af3c566a55503c2093a7fac332f85aa97dde",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 169,
+          "measured": 159,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 1,
+            "2": 1,
+            "3": 2,
+            "4": 2,
+            "5": 3,
+            "6": 6,
+            "7": 15,
+            "8": 27,
+            "9": 37,
+            "10": 2
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 4,
+            "2": 7,
+            "3": 11,
+            "4": 17,
+            "5": 23,
+            "6": 31,
+            "7": 3
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 2,
+          "initial": "38e108c1df1b50268a10427a7abfa718fc452c5fb3d967a645c38c6249bc659f",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 48,
+          "measured": 48,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 2,
+          "firstWin": [
+            "ACTION1",
+            "ACTION3",
+            "ACTION1",
+            "ACTION1",
+            "ACTION1",
+            "ACTION4",
+            "ACTION4"
+          ],
+          "depths": {
+            "1": 4,
+            "2": 8,
+            "3": 11,
+            "4": 11,
+            "5": 13,
+            "6": 15,
+            "7": 16,
+            "8": 18
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 3,
+          "initial": "f5ad78c3623d4d8a899105518044e022a65c9e3ae310517dcd9490779a6880da",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 4,
+            "2": 8,
+            "3": 11,
+            "4": 11,
+            "5": 13,
+            "6": 15,
+            "7": 16,
+            "8": 18
+          },
+          "mixedDepths": {},
+          "examples": []
+        }
+      ],
+      "stratified": [
+        {
+          "code": "PRTL",
+          "level": 1,
+          "initial": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+          "expanded": 96,
+          "commands": 2112,
+          "proposals": 15,
+          "measured": 11,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 5,
+            "2": 12,
+            "3": 19,
+            "4": 12,
+            "5": 12,
+            "6": 12,
+            "7": 12,
+            "8": 12
+          },
+          "mixedDepths": {
+            "2": 4,
+            "3": 8,
+            "4": 6,
+            "5": 6,
+            "6": 6,
+            "7": 6,
+            "8": 6
+          },
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 2,
+          "initial": "486da49e69a50992fb7f94524e55683663ac30e568f3888e9c86046baf0d0773",
+          "expanded": 96,
+          "commands": 2112,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 6,
+            "2": 18,
+            "3": 12,
+            "4": 12,
+            "5": 12,
+            "6": 12,
+            "7": 12,
+            "8": 12
+          },
+          "mixedDepths": {
+            "2": 9,
+            "3": 9,
+            "4": 10,
+            "5": 10,
+            "6": 10,
+            "7": 11,
+            "8": 10
+          },
+          "examples": []
+        },
+        {
+          "code": "PRTL",
+          "level": 3,
+          "initial": "95455d86035a4adb6954de917fdc6387f58da3814e5488e96f243ec5c9ba35fb",
+          "expanded": 96,
+          "commands": 2112,
+          "proposals": 16,
+          "measured": 16,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 6,
+            "2": 18,
+            "3": 12,
+            "4": 12,
+            "5": 12,
+            "6": 12,
+            "7": 12,
+            "8": 12
+          },
+          "mixedDepths": {
+            "2": 9,
+            "3": 9,
+            "4": 10,
+            "5": 10,
+            "6": 10,
+            "7": 10,
+            "8": 10
+          },
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 2,
+            "2": 5,
+            "3": 10,
+            "4": 14,
+            "5": 16,
+            "6": 18,
+            "7": 21,
+            "8": 10
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 2,
+          "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 0,
+          "measured": 0,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 2,
+            "2": 6,
+            "3": 8,
+            "4": 9,
+            "5": 11,
+            "6": 12,
+            "7": 13,
+            "8": 16,
+            "9": 18,
+            "10": 1
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 3,
+          "initial": "010027d9f888ce69c302485bddd6af3c566a55503c2093a7fac332f85aa97dde",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 166,
+          "measured": 156,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 1,
+            "2": 1,
+            "3": 2,
+            "4": 2,
+            "5": 3,
+            "6": 6,
+            "7": 15,
+            "8": 27,
+            "9": 37,
+            "10": 2
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "initial": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 48,
+          "measured": 48,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 4,
+            "2": 7,
+            "3": 11,
+            "4": 17,
+            "5": 21,
+            "6": 12,
+            "7": 12,
+            "8": 12
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 2,
+          "initial": "38e108c1df1b50268a10427a7abfa718fc452c5fb3d967a645c38c6249bc659f",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 36,
+          "measured": 36,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 2,
+          "firstWin": [
+            "ACTION1",
+            "ACTION3",
+            "ACTION1",
+            "ACTION1",
+            "ACTION1",
+            "ACTION4",
+            "ACTION4"
+          ],
+          "depths": {
+            "1": 4,
+            "2": 8,
+            "3": 11,
+            "4": 11,
+            "5": 13,
+            "6": 15,
+            "7": 16,
+            "8": 18
+          },
+          "mixedDepths": {},
+          "examples": []
+        },
+        {
+          "code": "FOGW",
+          "level": 3,
+          "initial": "f5ad78c3623d4d8a899105518044e022a65c9e3ae310517dcd9490779a6880da",
+          "expanded": 96,
+          "commands": 384,
+          "proposals": 1,
+          "measured": 1,
+          "hits": 0,
+          "followed": 0,
+          "certifiedWins": 0,
+          "ordinaryWins": 0,
+          "firstWin": null,
+          "depths": {
+            "1": 4,
+            "2": 8,
+            "3": 11,
+            "4": 11,
+            "5": 13,
+            "6": 15,
+            "7": 16,
+            "8": 18
+          },
+          "mixedDepths": {},
+          "examples": []
+        }
+      ]
+    }
   }
 }
