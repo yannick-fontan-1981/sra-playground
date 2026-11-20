@@ -1,0 +1,1149 @@
+{
+  "sourceLevels": 118,
+  "registrationsSHA256": "a185d79f430fd1b2557b1f179b8d0bd2594ca19abee4738944f11ece4c5ef157",
+  "situations": 177,
+  "relations": 424,
+  "directArrivals": 9,
+  "sequentialArrivals": 5,
+  "directConfigurations": 7,
+  "examples": [
+    {
+      "game": "GABA",
+      "level": 1,
+      "sourceStep": 12,
+      "origin": [
+        58,
+        16
+      ],
+      "display": [
+        98,
+        16
+      ],
+      "stationaryPeersAtStart": 5,
+      "directCommands": [
+        {
+          "q": "ACTION5",
+          "arrived": [
+            58,
+            16
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION4",
+          "arrived": [
+            98,
+            16
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION7",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION2",
+          "arrived": [
+            58,
+            16
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION3",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION1",
+          "arrived": [
+            58,
+            16
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION5",
+          "arrived": [
+            58,
+            16
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION4",
+          "arrived": [
+            98,
+            16
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "CATL",
+      "level": 1,
+      "sourceStep": 1,
+      "origin": [
+        23,
+        105
+      ],
+      "display": [
+        33,
+        105
+      ],
+      "stationaryPeersAtStart": 2,
+      "directCommands": [
+        {
+          "q": "ACTION7",
+          "arrived": [
+            33,
+            105
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:43,52",
+          "arrived": [
+            33,
+            105
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION7",
+          "arrived": [
+            33,
+            105
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "PIPE",
+      "level": 1,
+      "sourceStep": 2,
+      "origin": [
+        32,
+        56
+      ],
+      "display": [
+        88,
+        48
+      ],
+      "stationaryPeersAtStart": 2,
+      "directCommands": [
+        {
+          "q": "ACTION1",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION2",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION3",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION4",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION5",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION7",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:16,28",
+          "arrived": [
+            96,
+            56
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:48,28",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION1",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "PIPE",
+      "level": 1,
+      "sourceStep": 2,
+      "origin": [
+        32,
+        56
+      ],
+      "display": [
+        91,
+        51
+      ],
+      "stationaryPeersAtStart": 2,
+      "directCommands": [
+        {
+          "q": "ACTION1",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION2",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION3",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION4",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION5",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION7",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:16,28",
+          "arrived": [
+            96,
+            56
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:48,28",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION1",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "PIPE",
+      "level": 1,
+      "sourceStep": 2,
+      "origin": [
+        32,
+        56
+      ],
+      "display": [
+        93,
+        53
+      ],
+      "stationaryPeersAtStart": 2,
+      "directCommands": [
+        {
+          "q": "ACTION1",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION2",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION3",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION4",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION5",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION7",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:16,28",
+          "arrived": [
+            96,
+            56
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:48,28",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION1",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "GARE",
+      "level": 3,
+      "sourceStep": 2,
+      "origin": [
+        68,
+        66
+      ],
+      "display": [
+        68,
+        86
+      ],
+      "stationaryPeersAtStart": 1,
+      "directCommands": [
+        {
+          "q": "ACTION6:24,13",
+          "arrived": [
+            68,
+            66
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION7",
+          "arrived": [
+            68,
+            86
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:14,33",
+          "arrived": [
+            68,
+            66
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION6:24,13",
+          "arrived": [
+            68,
+            66
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION7",
+          "arrived": [
+            68,
+            86
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "PORT",
+      "level": 1,
+      "sourceStep": 2,
+      "origin": [
+        24,
+        16
+      ],
+      "display": [
+        26,
+        24
+      ],
+      "stationaryPeersAtStart": 103,
+      "directCommands": [
+        {
+          "q": "ACTION1",
+          "arrived": [
+            24,
+            24
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION3",
+          "arrived": [
+            24,
+            16
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION4",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION2",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION1",
+          "arrived": [
+            24,
+            24
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "POLA",
+      "level": 2,
+      "sourceStep": 11,
+      "origin": [
+        52,
+        50
+      ],
+      "display": [
+        61,
+        50
+      ],
+      "stationaryPeersAtStart": 32,
+      "directCommands": [
+        {
+          "q": "ACTION3",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION4",
+          "arrived": [
+            52,
+            50
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION7",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION5",
+          "arrived": [
+            62,
+            50
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": true
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION3",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    },
+    {
+      "game": "ZIPP",
+      "level": 1,
+      "sourceStep": 8,
+      "origin": [
+        32,
+        88
+      ],
+      "display": [
+        32,
+        55
+      ],
+      "stationaryPeersAtStart": 1,
+      "directCommands": [
+        {
+          "q": "ACTION3",
+          "arrived": [
+            32,
+            88
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION6:48,28",
+          "arrived": [
+            32,
+            88
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION1",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION2",
+          "arrived": [
+            32,
+            88
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION4",
+          "arrived": [
+            64,
+            88
+          ],
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION5",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION7",
+          "arrived": null,
+          "hit": false,
+          "unchanged": false,
+          "displayPersists": false
+        },
+        {
+          "q": "ACTION6:16,44",
+          "arrived": [
+            32,
+            88
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        }
+      ],
+      "sequence": [
+        {
+          "q": "ACTION3",
+          "arrived": [
+            32,
+            88
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION6:48,28",
+          "arrived": [
+            32,
+            88
+          ],
+          "hit": false,
+          "unchanged": true,
+          "displayPersists": true
+        },
+        {
+          "q": "ACTION1",
+          "arrived": [
+            32,
+            56
+          ],
+          "hit": true,
+          "unchanged": false,
+          "displayPersists": false
+        }
+      ]
+    }
+  ],
+  "acquisitionAndReuse": [
+    {
+      "game": "GABA",
+      "level": 1,
+      "sourceStep": 12,
+      "acquired": true,
+      "trials": [
+        {
+          "sourceStep": 13,
+          "subject": [
+            48,
+            16
+          ],
+          "mark": [
+            98,
+            16
+          ],
+          "peers": 5,
+          "actual": {
+            "q": "ACTION4",
+            "status": "contradicted",
+            "actual": [
+              88,
+              16
+            ]
+          },
+          "control": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              48,
+              16
+            ]
+          }
+        },
+        {
+          "sourceStep": 14,
+          "subject": [
+            38,
+            16
+          ],
+          "mark": [
+            98,
+            16
+          ],
+          "peers": 5,
+          "actual": {
+            "q": "ACTION4",
+            "status": "contradicted",
+            "actual": [
+              78,
+              16
+            ]
+          },
+          "control": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              38,
+              16
+            ]
+          }
+        },
+        {
+          "sourceStep": 15,
+          "subject": [
+            28,
+            16
+          ],
+          "mark": [
+            98,
+            16
+          ],
+          "peers": 5,
+          "actual": {
+            "q": "ACTION4",
+            "status": "contradicted",
+            "actual": [
+              68,
+              16
+            ]
+          },
+          "control": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              28,
+              16
+            ]
+          }
+        },
+        {
+          "sourceStep": 17,
+          "subject": [
+            68,
+            16
+          ],
+          "mark": [
+            98,
+            16
+          ],
+          "peers": 5,
+          "actual": {
+            "q": "ACTION4",
+            "status": "contradicted",
+            "actual": [
+              78,
+              16
+            ]
+          },
+          "control": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              68,
+              16
+            ]
+          }
+        },
+        {
+          "sourceStep": 18,
+          "subject": [
+            78,
+            16
+          ],
+          "mark": [
+            98,
+            16
+          ],
+          "peers": 5,
+          "actual": {
+            "q": "ACTION4",
+            "status": "contradicted",
+            "actual": [
+              88,
+              16
+            ]
+          },
+          "control": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              78,
+              16
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "game": "CATL",
+      "level": 1,
+      "sourceStep": 1,
+      "acquired": true,
+      "trials": []
+    },
+    {
+      "game": "GARE",
+      "level": 3,
+      "sourceStep": 2,
+      "acquired": true,
+      "trials": [
+        {
+          "sourceStep": 3,
+          "subject": [
+            48,
+            66
+          ],
+          "mark": [
+            68,
+            86
+          ],
+          "peers": 1,
+          "actual": {
+            "q": "ACTION7",
+            "status": "realized",
+            "actual": [
+              68,
+              86
+            ]
+          },
+          "control": {
+            "q": "ACTION6:6,33",
+            "status": "contradicted",
+            "actual": [
+              48,
+              66
+            ]
+          }
+        },
+        {
+          "sourceStep": 4,
+          "subject": [
+            68,
+            86
+          ],
+          "mark": [
+            58,
+            86
+          ],
+          "peers": 1,
+          "actual": {
+            "q": "ACTION7",
+            "status": "contradicted",
+            "actual": [
+              68,
+              86
+            ]
+          },
+          "control": {
+            "q": "ACTION6:4,43",
+            "status": "contradicted",
+            "actual": [
+              68,
+              86
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "game": "PORT",
+      "level": 1,
+      "sourceStep": 2,
+      "acquired": true,
+      "trials": [
+        {
+          "sourceStep": 3,
+          "subject": [
+            24,
+            24
+          ],
+          "mark": [
+            26,
+            32
+          ],
+          "peers": 103,
+          "actual": {
+            "q": "ACTION1",
+            "status": "realized",
+            "actual": [
+              24,
+              32
+            ]
+          },
+          "control": {
+            "q": "ACTION2",
+            "status": "contradicted",
+            "actual": [
+              24,
+              24
+            ]
+          }
+        },
+        {
+          "sourceStep": 4,
+          "subject": [
+            24,
+            32
+          ],
+          "mark": [
+            32,
+            34
+          ],
+          "peers": 103,
+          "actual": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              24,
+              32
+            ]
+          },
+          "control": {
+            "q": "ACTION2",
+            "status": "contradicted",
+            "actual": [
+              24,
+              32
+            ]
+          }
+        },
+        {
+          "sourceStep": 5,
+          "subject": [
+            32,
+            32
+          ],
+          "mark": [
+            40,
+            34
+          ],
+          "peers": 103,
+          "actual": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              32,
+              32
+            ]
+          },
+          "control": {
+            "q": "ACTION2",
+            "status": "contradicted",
+            "actual": [
+              32,
+              32
+            ]
+          }
+        },
+        {
+          "sourceStep": 6,
+          "subject": [
+            40,
+            32
+          ],
+          "mark": [
+            88,
+            34
+          ],
+          "peers": 103,
+          "actual": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              40,
+              32
+            ]
+          },
+          "control": {
+            "q": "ACTION2",
+            "status": "contradicted",
+            "actual": [
+              40,
+              32
+            ]
+          }
+        },
+        {
+          "sourceStep": 7,
+          "subject": [
+            88,
+            32
+          ],
+          "mark": [
+            90,
+            40
+          ],
+          "peers": 103,
+          "actual": {
+            "q": "ACTION1",
+            "status": "realized",
+            "actual": [
+              88,
+              40
+            ]
+          },
+          "control": {
+            "q": "ACTION2",
+            "status": "contradicted",
+            "actual": [
+              88,
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "game": "ZIPP",
+      "level": 1,
+      "sourceStep": 8,
+      "acquired": true,
+      "trials": [
+        {
+          "sourceStep": 29,
+          "subject": [
+            96,
+            24
+          ],
+          "mark": [
+            63,
+            24
+          ],
+          "peers": 1,
+          "actual": {
+            "q": "ACTION1",
+            "status": "contradicted",
+            "actual": [
+              96,
+              24
+            ]
+          },
+          "control": {
+            "q": "ACTION2",
+            "status": "contradicted",
+            "actual": [
+              96,
+              56
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
