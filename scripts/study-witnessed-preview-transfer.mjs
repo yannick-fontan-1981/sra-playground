@@ -15,7 +15,12 @@ import {
   visualLayout,
 } from '../src/sic/witnessed-preview-transfer.ts';
 import { sourceBackend } from './sic-study-source-games.mjs';
-const [env, study, selection, shard, output, research] = process.argv.slice(2);
+import { pathToFileURL } from 'node:url';
+const [env, study, selection, shard, output, research, frozenSolver] = process.argv.slice(2);
+const baselineReader = frozenSolver
+  ? (await import(pathToFileURL(join(resolve(frozenSolver), 'src/sic/witnessed-preview-transfer.ts'))))
+      .offerWitnessedPreview
+  : undefined;
 const programs = JSON.parse(
   await readFile(new URL('../docs/architecture/sic-source-seven-programs.json', import.meta.url), 'utf8')
 );
@@ -65,7 +70,7 @@ for (const code of chosen.filter((_, i) => i % parts === idx)) {
     tried = new Set();
   const competition =
     research === 'competition'
-      ? (await import('./source-preview-competition.mjs')).previewCompetition()
+      ? (await import('./source-preview-competition.mjs')).previewCompetition(baselineReader)
       : null;
   if (competition) report.competition = competition.rows;
   reports.push(report);

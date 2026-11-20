@@ -2,7 +2,7 @@ import { offerWitnessedPreview, measureWitnessedArrival } from '../src/sic/witne
 
 // All forecasts are formed against the current public observation, before reading the next board.
 // Credit is computed for every interpretation of the executed command, including an unselected rival.
-export function previewCompetition() {
+export function previewCompetition(baselineReader = offerWitnessedPreview) {
   const evidence = new Map(),
     movement = new Map(),
     seen = new Set(),
@@ -31,15 +31,12 @@ export function previewCompetition() {
     const eligible = options.filter((v) => v.offer.command === q);
     // Obtain the frozen model's order by leaving only the relations that can issue this actual command.
     const allowed = new Set(eligible.map((v) => v.offer.key));
-    const base = offerWitnessedPreview(
-      {
-        ...learned,
-        bindings: Object.fromEntries(Object.entries(learned.bindings).filter(([k]) => allowed.has(k))),
-      },
-      o,
-      layout,
-      available
-    );
+    const candidateMemory = {
+      ...learned,
+      bindings: Object.fromEntries(Object.entries(learned.bindings).filter(([k]) => allowed.has(k))),
+    };
+    const base = baselineReader(candidateMemory, o, layout, available),
+      native = offerWitnessedPreview(candidateMemory, o, layout, available);
     if (base) eligible.sort((a, b) => Number(b.offer.key === base.key) - Number(a.offer.key === base.key));
     function first(cmp) {
       return [...eligible].sort(cmp)[0]?.offer;
@@ -48,6 +45,7 @@ export function previewCompetition() {
       q,
       options,
       base,
+      native,
       calibrated: first((a, b) => b.precision - a.precision || b.selectivity - a.selectivity),
       independent: first(
         (a, b) =>
@@ -66,6 +64,7 @@ export function previewCompetition() {
         rev: o.revision,
         competing,
         base: score(f.base),
+        native: score(f.native),
         calibrated: score(f.calibrated),
         independent: score(f.independent),
       });

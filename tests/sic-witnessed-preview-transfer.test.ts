@@ -209,3 +209,50 @@ test('another identical individual reaching the indicated site refutes the named
   assert.equal(answer.status, 'contradicted');
   assert.deepEqual(answer.actual, [23, 19]);
 });
+test('a single command weighs all competing predictions using distinct prior images', async () => {
+  const o1 = (await scene(1, 1, [[3, 4]], [11, 9])).o;
+  const obs = (i: number) => ({
+    ...o1,
+    revision: i,
+    frame_hash: 'f' + i,
+    observation_ref: 'competition:epoch:1:revision:' + i + ':frame:f' + i,
+  });
+  const shape = (x: number, y: number) => ({
+    at: [2 * x, 2 * y] as [number, number],
+    box: [x, y, x, y],
+    form: 'form',
+  });
+  const layout = (bad: number, good: number, m1: number, m2: number) => ({
+    bad: [shape(bad, 2)],
+    good: [shape(good, 8)],
+    m1: [shape(m1, 2)],
+    m2: [shape(m2, 8)],
+  });
+  const mem = newPreviewLearning(),
+    a = layout(1, 2, 4, 6),
+    b = layout(4, 6, 8, 9);
+  observePreviewBindings(mem, obs(1), obs(2), a, b, 'ACTION5');
+  const opts = new Set(['ACTION5']);
+  assert.equal(offerWitnessedPreview(mem, obs(2), b, opts)!.actor, 'bad');
+  const c = layout(4, 9, 11, 15);
+  observePreviewBindings(mem, obs(2), obs(3), b, c, 'ACTION5');
+  const next = offerWitnessedPreview(mem, obs(3), c, opts)!;
+  assert.equal(next.actor, 'good');
+  assert.equal(next.command, 'ACTION5');
+  assert.equal(next.calibration!.hit, 1);
+  assert.equal(Object.values(mem.bindings).find((x) => x.actor === 'bad')!.calibration!.miss, 1);
+  const d = layout(5, 10, 12, 16);
+  observePreviewBindings(mem, obs(3), obs(4), c, d, 'ACTION2');
+  assert.equal(
+    Object.values(mem.bindings).find((x) => x.actor === 'good' && x.gesture.op === 'ACTION5')!.calibration!
+      .rivalMiss,
+    1
+  );
+  observePreviewBindings(mem, obs(2), obs(3), b, c, 'ACTION5');
+  assert.equal(
+    Object.values(mem.bindings).find((x) => x.actor === 'good' && x.gesture.op === 'ACTION5')!.calibration!
+      .hit,
+    1
+  );
+  assert.equal(next.calibration!.rivalMiss, 0);
+});

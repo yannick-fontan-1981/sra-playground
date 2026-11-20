@@ -20,7 +20,17 @@ export type PreviewWitness = {
   subjectForm: string;
   indicatorChanged: boolean;
 };
+type PredictiveEvidence = {
+  hit: number;
+  miss: number;
+  rivalHit: number;
+  rivalMiss: number;
+  lastHit?: string;
+  lastMiss?: string;
+  lastRival?: string;
+};
 export type WitnessedBinding = {
+  calibration?: PredictiveEvidence;
   relation: 'indicator_marks_subject_arrival_after_action';
   actor: string;
   indicator: string;
@@ -41,6 +51,7 @@ export type ReadOffer = {
   epoch: number;
   basis: 'observed_here' | 'observed_in_previous_level';
   witness: PreviewWitness;
+  calibration?: PredictiveEvidence;
 };
 export type PreviewLearning = {
   bindings: Record<string, WitnessedBinding>;
@@ -48,6 +59,7 @@ export type PreviewLearning = {
   seen: Record<string, number>;
   rejected: Record<string, number>;
   last: string | null;
+  calibratedSites?: Record<string, number>;
   motion: Record<string, Record<string, number>>;
 };
 export type PreviewCarry = {
@@ -121,6 +133,7 @@ export function observePreviewBindings(
   const event = b.observation_ref + '/' + command + '/' + a.observation_ref;
   if (learned.last === event) return;
   learned.last = event;
+  calibrateVisibleReadings(learned, b, a, before, after, command);
   for (const [actor, parts] of Object.entries(before)) {
     const motion = moved(parts, after[actor] ?? []);
     if (!motion) continue;
@@ -208,15 +221,16 @@ export function acceptPreviewCarry(c: PreviewCarry | null | undefined, o: Native
     learned.bindings = structuredClone(c.bindings);
   return learned;
 }
-export function offerWitnessedPreview(
+function visibleReadings(
   learned: PreviewLearning,
   o: NativeObservation,
   layout: VisualLayout,
   available: Set<string>
-): ReadOffer | null {
-  let best: ReadOffer | null = null,
-    bestScore = -Infinity;
+) {
+  const choices: { offer: ReadOffer; legacy: number }[] = [];
   for (const [key, b] of Object.entries(learned.bindings)) {
+    let best: ReadOffer | null = null,
+      bestScore = -Infinity;
     const subjects = layout[b.actor] ?? [],
       markers = layout[b.indicator] ?? [],
       last = learned.lastActor[b.actor];
@@ -267,6 +281,67 @@ export function offerWitnessedPreview(
         witness: prior,
       };
     }
+    if (best) choices.push({ offer: best, legacy: bestScore });
+  }
+  return choices;
+}
+
+function calibrateVisibleReadings(
+  learned: PreviewLearning,
+  b: NativeObservation,
+  a: NativeObservation,
+  before: VisualLayout,
+  after: VisualLayout,
+  command: string
+) {
+  const seen = (learned.calibratedSites ??= {});
+  for (const { offer } of visibleReadings(learned, b, before, new Set(b.available_action_refs))) {
+    const id = JSON.stringify([b.frame_hash, command, offer.key, offer.from, offer.indicated]);
+    if (seen[id] !== undefined) continue;
+    const measured = measureWitnessedArrival(offer, b, a, before, after);
+    if (measured.status !== 'realized' && measured.status !== 'contradicted') continue;
+    const binding = learned.bindings[offer.key]!;
+    const s = (binding.calibration ??= { hit: 0, miss: 0, rivalHit: 0, rivalMiss: 0 });
+    // Bound exposure per relation. The first distinct tests remain inspectable across repeated cycles.
+    if (s.hit + s.miss + s.rivalHit + s.rivalMiss >= 256) continue;
+    seen[id] = a.revision;
+    const hit = measured.status === 'realized';
+    if (offer.command === command) {
+      if (hit) {
+        s.hit++;
+        s.lastHit = a.observation_ref;
+      } else {
+        s.miss++;
+        s.lastMiss = a.observation_ref;
+      }
+    } else {
+      if (hit) s.rivalHit++;
+      else s.rivalMiss++;
+      s.lastRival = a.observation_ref;
+    }
+  }
+}
+export function offerWitnessedPreview(
+  learned: PreviewLearning,
+  o: NativeObservation,
+  layout: VisualLayout,
+  available: Set<string>
+): ReadOffer | null {
+  const choices = visibleReadings(learned, o, layout, available).sort((a, b) => b.legacy - a.legacy);
+  const command = choices[0]?.offer.command;
+  if (!command) return null;
+  let best: ReadOffer | null = null,
+    precision = -1,
+    selectivity = -Infinity;
+  for (const { offer } of choices) {
+    if (offer.command !== command) continue;
+    const s = learned.bindings[offer.key]!.calibration;
+    const p = s ? (s.hit + 1) / (s.hit + s.miss + 2) : 0.5;
+    const background = s ? (s.rivalHit + 1) / (s.rivalHit + s.rivalMiss + 2) : 0.5;
+    if (p < precision || (p === precision && p - background <= selectivity)) continue;
+    precision = p;
+    selectivity = p - background;
+    best = s ? { ...offer, calibration: { ...s } } : offer;
   }
   return best;
 }
