@@ -26,6 +26,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  testMechanismMobility:'Test an untried control for moving a persistent part after a repeated return',
   reconfigureMechanism:'Test whether moving a mechanism opens access beyond a stagnant return',
   unreadIndicator:'Test a command while the possible arrival of this subject is displayed',
   witnessedPreview:'Test whether this subject reaches the indicated site using its witnessed action',
@@ -128,9 +129,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const question = {
         kind: 'test_prepared_effect',
         scope: ref.split(':revision:', 1)[0]!,
-        subjects: experiment.mechanism ? [experiment.mechanism.plan.p,experiment.mechanism.plan.c,b] : experiment.unreadIndicator ? [experiment.unreadIndicator.cue.p,experiment.unreadIndicator.cue.r,b] : experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
+        subjects: experiment.mobilityProbe ? [experiment.mobilityProbe.actor,...experiment.mobilityProbe.sites.map(s=>s.role),b] : experiment.mechanism ? [experiment.mechanism.plan.p,experiment.mechanism.plan.c,b] : experiment.unreadIndicator ? [experiment.unreadIndicator.cue.p,experiment.unreadIndicator.cue.r,b] : experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
         parentObjective: parent,
-        satisfactionContract: experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
+        satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
       const equation = experiment.equation?.claim;
       const capability = equation
@@ -178,6 +179,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
+        ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),
         ...(experiment.mechanism ? {mechanismForecast:experiment.mechanism} : {}),
         ...(experiment.unreadIndicator ? {indicatorProbeForecast:experiment.unreadIndicator} : {}),
         ...(experiment.witnessedPreview ? {witnessedPreviewForecast:experiment.witnessedPreview} : {}),

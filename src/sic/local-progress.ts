@@ -1,18 +1,19 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { add, diff, same, size, type XY } from './access-terrain.ts';
-import { type OccupancyMemory } from './occupancy-programs.ts';
+import { occupancyView, poseRole, type OccupancyMemory } from './occupancy-programs.ts';
 import type { Memory } from './preparation-experiments.ts';
 import type { MechanismTrial } from './reconfigure-local-mechanism.ts';
 
 export type Motor = { op: string; d: XY; refs: number[] };
 export type ZoneRepeat = {
-  tag: 'stagnation_same_zone';
+  tag: 'stagnation_same_zone' | 'stagnation_repeated_cycle';
   actor: string;
   op: string;
   from: XY;
   to: XY;
   zoneSize: number;
-  connection: 'witnessed_walk' | 'observed_substrate';
+  connection: 'witnessed_walk' | 'observed_substrate' | 'closed_public_cycle';
+  cycle?: { word: string[]; refs: number[]; startRevision: number };
   previous: number;
   revision: number;
   movementRefs: number[];
@@ -86,6 +87,40 @@ function witnessedWalk(occ: OccupancyMemory, p: string, from: XY, to: XY, motors
   }
   return { refs: refs.reverse(), count: queue.length };
 }
+export function observeVacatedSites(
+  occ: OccupancyMemory,
+  b: NativeObservation,
+  a: NativeObservation,
+  rows: NativeRows,
+  next: NativeRows
+) {
+  const before = occupancyView(b, rows),
+    after = occupancyView(a, next);
+  const parts = b.entities.filter((e) => before[poseRole(e)] && after[poseRole(e)]);
+  const moving = parts.filter((e) => !same(before[poseRole(e)]!, after[poseRole(e)]!));
+  if (!moving.length) return;
+  const ids = new Set(moving.map(poseRole)),
+    covered = new Set<string>();
+  for (const body of a.entities)
+    if (ids.has(poseRole(body)))
+      for (const [dx, dy] of body.mask) covered.add([body.bbox[0] + dx, body.bbox[1] + dy].join());
+  for (const body of moving) {
+    const role = poseRole(body),
+      counts = new Map<number, number>();
+    for (const [dx, dy] of body.mask) {
+      const x = body.bbox[0] + dx,
+        y = body.bbox[1] + dy,
+        c = next[y]?.[x];
+      if (c === undefined || covered.has([x, y].join()) || c === rows[y]?.[x]) continue;
+      counts.set(c, (counts.get(c) ?? 0) + 1);
+    }
+    const winner = [...counts].sort((a, b) => b[1] - a[1])[0];
+    if (!winner || winner[1] * 2 <= [...counts.values()].reduce((sum, n) => sum + n, 0)) continue;
+    const colors = ((occ.exposedSubstrate ??= {})[role] ??= {}),
+      record = (colors[winner[0]] ??= { count: 0, ref: a.revision });
+    record.count++;
+  }
+}
 export function zoneFloor(
   occ: OccupancyMemory,
   p: string,
@@ -107,8 +142,17 @@ export function zoneFloor(
     if (c === undefined || signature.has([Math.floor(xy[0] / 2), Math.floor(xy[1] / 2)].join())) continue;
     ground.set(c, (ground.get(c) ?? 0) + 1);
   }
+  const exposed = Object.entries(occ.exposedSubstrate?.[p] ?? {}).sort((a, b) => b[1].count - a[1].count);
+  const measured =
+    exposed[0] &&
+    exposed[0][1].count >= 2 &&
+    exposed[0][1].count * 2 > exposed.reduce((n, x) => n + x[1].count, 0)
+      ? Number(exposed[0][0])
+      : null;
   const best = [...ground].sort((a, b) => b[1] - a[1])[0],
-    floor = best && best[1] > [...ground.values()].reduce((a, b) => a + b, 0) - best[1] ? best[0] : null;
+    floor =
+      measured ??
+      (best && best[1] > [...ground.values()].reduce((a, b) => a + b, 0) - best[1] ? best[0] : null);
   const width = 2 * rows[0]!.length,
     height = 2 * rows.length;
   const open = (q: XY) =>
@@ -180,6 +224,23 @@ export function knownLocalRepeat(m: Memory, s: number, op: string) {
     return null;
   return prior;
 }
+function lastRepeatedCycle(m: Memory, s: number, t: number, op: string, original: number, revision: number) {
+  const chain = [{ s, t, cmd: op, ref: original }];
+  let cursor = s;
+  if (s !== t)
+    for (let i = m.delayed.history.length - 1; i >= 0; i--) {
+      const edge = m.edges[m.delayed.history[i]!]!;
+      if (!edge.stable || edge.t !== cursor) return null;
+      chain.push(edge);
+      cursor = edge.s;
+      if (cursor === t) break;
+    }
+  if (cursor !== t) return null;
+  const startRevision = revision - chain.length;
+  if (chain.some((e) => e.ref > startRevision)) return null;
+  chain.reverse();
+  return { word: chain.map((e) => e.cmd), refs: chain.map((e) => e.ref), startRevision };
+}
 export function measureLocalRepeat(
   m: Memory,
   s: number,
@@ -209,6 +270,7 @@ export function measureLocalRepeat(
     enablesKnownUse(occ, s, t, op)
   )
     return null;
+  const cycle = lastRepeatedCycle(m, s, t, op, previous.ref, a.revision);
   const first = occ.layouts[s]!,
     last = occ.layouts[t]!;
   const options = Object.keys(first)
@@ -220,7 +282,7 @@ export function measureLocalRepeat(
         p,
         motors,
         score:
-          n >= 2 || same(first[p]!, last[p]!)
+          n >= 2 || cycle || same(first[p]!, last[p]!)
             ? Object.keys(occ.visited[p]!).length * Math.max(1, Math.min(n, 4))
             : 0,
       };
@@ -242,10 +304,30 @@ export function measureLocalRepeat(
     let route: XY[] = [];
     if (!walk) {
       const model = zoneFloor(occ, p, b, rows, motors, from);
-      if (model.floor === null || !model.component.has(to.join())) continue;
-      zoneSize = model.component.size;
-      floor = model.floor;
-      route = model.path(to);
+      if (model.floor !== null && model.component.has(to.join())) {
+        zoneSize = model.component.size;
+        floor = model.floor;
+        route = model.path(to);
+      } else if (cycle) {
+        return {
+          tag: 'stagnation_repeated_cycle',
+          actor: p,
+          op,
+          from,
+          to,
+          zoneSize: 0,
+          connection: 'closed_public_cycle',
+          cycle,
+          previous: previous.ref,
+          revision: a.revision,
+          movementRefs: motors.map((v) => v.refs[0]!),
+          walkRefs: [],
+          floor: null,
+          route: [],
+          sourceScene: s,
+          returnScene: t,
+        };
+      } else continue;
     }
     if (b.frame_hash !== a.frame_hash && motors.length) {
       const substrate = floor ?? zoneFloor(occ, p, b, rows, motors, from).floor;

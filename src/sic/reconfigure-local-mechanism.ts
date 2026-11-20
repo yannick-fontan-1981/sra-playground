@@ -265,6 +265,7 @@ export function offerMechanism(
         at,
         placed,
         first.p,
+        steps.filter((v) => v.stage === 'write').map((v) => v.op),
         launch,
         arrival,
         steps.filter((v) => v.stage === 'read').map((v) => v.op),
@@ -301,6 +302,40 @@ export function offerMechanism(
         },
         rank,
       });
+    }
+    // A preparation can be conditional: a failed movement elsewhere motivates an experiment at a new geometry.
+    const hypotheses = new Map<
+      string,
+      { op: string; offset: XY; ref: number; origins: Set<string>; geometry: number }
+    >();
+    const contactVector = diff(at, from);
+    for (const e of occ.edges) {
+      if (
+        e.unstable ||
+        e.op === cause.op ||
+        e.op.startsWith('ACTION6:') ||
+        !available.has(e.op) ||
+        occ.observed[s + '/' + e.op] !== undefined
+      )
+        continue;
+      const old = priorSite(m, e.s, c, fixed),
+        next = priorSite(m, e.t, c, fixed),
+        u = occ.layouts[e.s]?.[p],
+        z = occ.layouts[e.t]?.[p];
+      if (!old || !next || same(old, next) || !u || !z || !same(u, z)) continue;
+      const offset = diff(next, old),
+        key = JSON.stringify([e.op, offset]),
+        sameGeometry = Number(same(diff(old, u), contactVector));
+      const h = hypotheses.get(key) ?? {
+        op: e.op,
+        offset,
+        ref: e.ref,
+        origins: new Set<string>(),
+        geometry: 0,
+      };
+      h.geometry = Math.max(h.geometry, sameGeometry);
+      h.origins.add(k(old));
+      hypotheses.set(key, h);
     }
     const remote = new Map<string, { offset: XY; ref: number; conflict: boolean }>();
     for (const e of occ.edges) {
@@ -352,6 +387,51 @@ export function offerMechanism(
         0,
         false
       );
+    }
+    for (const h of hypotheses.values()) {
+      if (!remote.get(h.op)?.conflict) continue;
+      const dest = add(at, h.offset);
+      if (
+        same(dest, from) ||
+        blocked.has(k(dest)) ||
+        dest[0] < 0 ||
+        dest[1] < 0 ||
+        dest[0] >= 2 * rows[0]!.length ||
+        dest[1] >= 2 * rows.length
+      )
+        continue;
+      submit(
+        [{ op: h.op, stage: 'write', p: from, c: at, to: from, placed: dest }],
+        'test_displacement',
+        null,
+        [h.ref],
+        6 + 5 * h.geometry + Math.min(3, h.origins.size),
+        0,
+        false
+      );
+    }
+    const opposite = motors.find((m) => same(add(at, m.d), from));
+    if (opposite && !motors.some((m) => same(m.d, contactVector))) {
+      const dest = add(at, contactVector);
+      if (open(dest))
+        for (const op of available) {
+          if (
+            op === cause.op ||
+            op.startsWith('ACTION6:') ||
+            motors.some((m) => m.op === op) ||
+            occ.observed[s + '/' + op] !== undefined
+          )
+            continue;
+          submit(
+            [{ op, stage: 'write', p: from, c: at, to: at, placed: dest }],
+            'test_displacement',
+            null,
+            [opposite.refs[0]!],
+            2 + Math.min(2, anchored),
+            0,
+            false
+          );
+        }
     }
     for (const v of candidates) {
       const first = v.path.at(-1)!,
@@ -421,18 +501,16 @@ export function offerMechanism(
       plan,
       index: 0,
       cause,
-      options: options
-        .slice(0, 12)
-        .map(({ plan: v }) => ({
-          site: v.c,
-          initial: v.initialC,
-          placed: v.placed,
-          launch: v.launch,
-          arrival: v.arrival,
-          steps: v.steps.length,
-          opensCells: v.opensCells,
-          recoverable: v.recoverable,
-        })),
+      options: options.slice(0, 12).map(({ plan: v }) => ({
+        site: v.c,
+        initial: v.initialC,
+        placed: v.placed,
+        launch: v.launch,
+        arrival: v.arrival,
+        steps: v.steps.length,
+        opensCells: v.opensCells,
+        recoverable: v.recoverable,
+      })),
     };
     const x = offer(trial, s, available, o, rows);
     if (x) return x;

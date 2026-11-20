@@ -1,5 +1,6 @@
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
-import {newLocalProgress,measureLocalRepeat,knownLocalRepeat,repeatKey,type LocalProgress,type ZoneRepeat} from './local-progress.ts';
+import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
+import {newLocalProgress,measureLocalRepeat,observeVacatedSites,knownLocalRepeat,repeatKey,type LocalProgress,type ZoneRepeat} from './local-progress.ts';
 import {offerMechanism,finishMechanism,type MechanismTrial} from './reconfigure-local-mechanism.ts';
 import {offerUnreadIndicator,measureUnreadIndicator,type IndicatorMemory,type IndicatorTest} from './probe-unread-indicators.ts';
 import {newOccupancyMemory,occupancyView,occupancyForms,observePoses,poseRole,offerOccupancy,offerPreparedPreview,finishOccupancy,type OccupancyMemory,type OccupancyTrial} from './occupancy-programs.ts';
@@ -97,6 +98,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'testMechanismMobility'
     | 'reconfigureMechanism'
     | 'unreadIndicator'
     | 'witnessedPreview'
@@ -151,6 +153,7 @@ export type Experiment = {
   frame?:FrameTrial;
   activation?:Activation;
   territorial?:TerritorialTrial;
+  mobilityProbe?:MobilityProbe;
   mechanism?:MechanismTrial;
   unreadIndicator?:IndicatorTest;
   witnessedPreview?:ReadOffer;
@@ -196,6 +199,7 @@ export type Outcome = {
   activation?:Record<string,unknown>;
   territorial?:Record<string,unknown>;
   localRepeat?:ZoneRepeat;
+  mobilityProbe?:Record<string,unknown>;
   mechanism?:Record<string,unknown>;
   unreadIndicator?:Record<string,unknown>;
   witnessedPreview?:Record<string,unknown>;
@@ -452,6 +456,7 @@ function selectEstablishedExperiment(
     const mechanism=offerMechanism(m,s,o,rows,available,stagnant);
     if(mechanism)return mechanism;
     if(redirected)return redirected;
+    const probe=proposeMobilityTest(m,s,o,rows,available,stagnant);if(probe)return probe;
     const unread=read?.basis!=='observed_in_previous_level'&&offerUnreadIndicator(m,s,o,available,(id,site)=>frontier?.role===id&&frontier.contains(site)&&!frontier.contains(m.occupancy!.layouts[s]![id]!));
     if(unread)return unread;
   }
@@ -796,7 +801,7 @@ export function selectExperiment(
   m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
 ): Experiment | null {
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
+  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
   const recent=m.delayed.history.slice(-8);
@@ -838,8 +843,10 @@ export function recordExperiment(
   const occupancy=m.occupancy??=newOccupancyMemory();
   if(!x?.occupancy)occupancy.active=null;
   if(m.indicators&&!x?.unreadIndicator)m.indicators.pending=null;
-  if(b.state===a.state&&b.level_epoch===a.level_epoch&&a.levels_completed===b.levels_completed)
+  if(b.state===a.state&&b.level_epoch===a.level_epoch&&a.levels_completed===b.levels_completed){
+    observeVacatedSites(occupancy,b,a,rows,next);
     observePoses(occupancy,s,t,occupancyView(b,rows),occupancyView(a,next),op,a.revision,occupancyForms(b,rows),occupancyForms(a,next));
+  }
   m.instrument ??= newInstrumentMemory();
   if(!x?.instrument)m.instrument.active=null;
   m.frames??=newFrameMemory();
@@ -956,6 +963,7 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.mobilityProbe){const detail=measureMobility(x.mobilityProbe,b,a,next,op);return {...out,result:detail.won?'mobility_completion':detail.moved?'mobility_observed':'mobility_unconfirmed',mobilityProbe:detail};}
   if(x.mechanism){const detail=finishMechanism(m,x.mechanism,b,a,rows,next,op);return {...out,result:detail.won?'mechanism_completion':detail.matched?'mechanism_step_confirmed':'mechanism_step_refuted',mechanism:detail};}
   if(x.unreadIndicator){
     const detail=measureUnreadIndicator(m,x.unreadIndicator,b,a,occupancyView(b,rows),occupancyView(a,next),op);

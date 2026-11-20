@@ -2,14 +2,19 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
-import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
+import { pathToFileURL } from 'node:url';
+import { createPreparedEffects as currentFamily } from '../src/sic/test-prepared-effects.ts';
 import { visualLayout } from '../src/sic/witnessed-preview-transfer.ts';
 import { sourceReplay, hash, op } from './sic-study-source-replay.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
-const [env, dir, selection, split, out] = process.argv.slice(2),
+const [env, dir, selection, split, out, solver] = process.argv.slice(2),
   engine = await sourceBackend(resolve(env)),
   codes = new Set(GAME_CATALOG.map((g) => g.code));
+const createPreparedEffects = solver
+  ? (await import(pathToFileURL(join(resolve(solver), 'src/sic/test-prepared-effects.ts')).href))
+      .createPreparedEffects
+  : currentFamily;
 const defs = JSON.parse(
     await readFile(new URL('../docs/architecture/sic-source-seven-programs.json', import.meta.url), 'utf8')
   ),
@@ -80,6 +85,52 @@ for (const [j, g] of JSON.parse(await readFile(selection, 'utf8')).entries()) {
         steps: [],
       };
       results.push(row);
+      if (proposal?.mobilityForecast) {
+        const test = proposal.mobilityForecast,
+          seal = digest(test);
+        const measure = (o, b, site) => {
+          const group = visualLayout(o, b.frame)[site.role] ?? [],
+            remaining = group.filter((x) => !site.peers.some((v) => v.join() === x.at.join()));
+          return group.length === 1 + site.peers.length &&
+            site.peers.every((v) => group.some((x) => v.join() === x.at.join())) &&
+            remaining.length === 1
+            ? remaining[0].at
+            : null;
+        };
+        const control = rep.act(t.repeated),
+          rival = await measured(control, i + 1, scope);
+        rep.restore(i);
+        const next = rep.act(test.op),
+          after = await measured(next, i + 1, scope);
+        const receipt = await family.record(
+            o,
+            after,
+            proposal.actions[0],
+            b.frame,
+            next.frame,
+            proposal,
+            0,
+            []
+          ),
+          d = receipt.events[0].mobilityProbe;
+        if (digest(d.test) !== seal) throw Error('Unsealed mobility test');
+        row.probe = {
+          op: test.op,
+          sites: test.sites.length,
+          moved: d.moved,
+          won: d.won,
+          changedAgainstRival: 0,
+        };
+        for (const [j, site] of test.sites.entries()) {
+          const target = d.outcomes[j],
+            actual = measure(after, next, site),
+            other = measure(rival, control, site);
+          if (JSON.stringify(actual) !== JSON.stringify(target.actual)) throw Error('Named site differs');
+          if (target.status === 'moved' && other && other.join() !== actual.join())
+            row.probe.changedAgainstRival++;
+        }
+        rep.restore(i);
+      }
       if (trial) {
         const plan = trial.plan;
         const binding = (o, rows) => {

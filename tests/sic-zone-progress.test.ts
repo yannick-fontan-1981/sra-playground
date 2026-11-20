@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
 import { initialMemory, recordExperiment, selectExperiment } from '../src/sic/preparation-experiments.ts';
+import { proposeMobilityTest, measureMobility } from '../src/sic/test-mechanism-mobility.ts';
 import { offerMechanism } from '../src/sic/reconfigure-local-mechanism.ts';
 import { poseRole } from '../src/sic/occupancy-programs.ts';
 type Point = [number, number];
@@ -137,4 +138,34 @@ test('reopening access beyond a previously traversed zone is useful even when th
     b = a;
   }
   assert.equal(m.localProgress!.last, null);
+});
+test('a complete repeated public cycle is detectable before its two ends can be connected by walking', async () => {
+  const { m, move } = await expose(true);
+  await move('ACTION5', [10, 5]);
+  await move('ACTION5', [4, 5]);
+  await move('ACTION5', [10, 5]);
+  assert.equal(m.localProgress!.last, null);
+  await move('ACTION5', [4, 5]);
+  const tag = m.localProgress!.last!;
+  assert.equal(tag.tag, 'stagnation_repeated_cycle');
+  assert.equal(tag.connection, 'closed_public_cycle');
+  assert.deepEqual(tag.cycle!.word, ['ACTION5', 'ACTION5']);
+  assert.ok(tag.cycle!.refs.every((ref) => ref <= tag.cycle!.startRevision));
+});
+test('when the displacement is unknown an untried control can test the mobility of named persistent parts', async () => {
+  const { m, move, here } = await expose();
+  await move('ACTION5', [6, 5]);
+  await move('ACTION5', [4, 5]);
+  await move('ACTION5', [6, 5]);
+  const tag = m.localProgress!.last!,
+    { o, rows } = here();
+  const test = proposeMobilityTest(m, tag.returnScene, o, rows, new Set(commands), tag)!.mobilityProbe!;
+  assert.notEqual(test.op, tag.op);
+  assert.equal(m.occupancy!.observed[tag.returnScene + '/' + test.op], undefined);
+  const changed = await scene(o.revision + 1, [6, 5], [7, 6]);
+  const measured = measureMobility(test, o, changed.o, changed.rows, test.op);
+  assert.equal(measured.moved, 1);
+  assert.ok(measured.outcomes.some((s) => s.status === 'moved' && s.actual?.join() === '14,12'));
+  const gone = await scene(o.revision + 1, [6, 5]);
+  assert.equal(measureMobility(test, o, gone.o, gone.rows, test.op).moved, 0);
 });

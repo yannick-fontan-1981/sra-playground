@@ -10,6 +10,11 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
     tagged: 0,
     witnessedWalk: 0,
     modeledSubstrate: 0,
+    closedCycles: 0,
+    mobilityTests: 0,
+    mobilityMoved: 0,
+    mobilityRivalCompared: 0,
+    mobilitySelective: 0,
     programs: 0,
     listed: 0,
     predictedCrossings: 0,
@@ -26,7 +31,7 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
     if (!ok) throw Error('Zone experiment: ' + why);
   };
   for (const e of run.preparation)
-    for (const proof of [e.localRepeat, e.mechanism?.trial.cause])
+    for (const proof of [e.localRepeat, e.mechanism?.trial.cause, e.mobilityProbe?.test.cause])
       if (proof) {
         const old = needed.get(proof.revision);
         require(!old || eq(old, proof), 'unique local return');
@@ -51,7 +56,8 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
     if (!t) return;
     const max = limit(before),
       old = run.replayCommands[t.previous - 2];
-    require(t.tag === 'stagnation_same_zone' &&
+    require(t.tag ===
+      (t.connection === 'closed_public_cycle' ? 'stagnation_repeated_cycle' : 'stagnation_same_zone') &&
       t.previous >= 2 &&
       t.previous < t.revision &&
       old.from === cmd.from &&
@@ -75,7 +81,26 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
       require(u && v, 'ordinary displacement');
       return delta(v, u);
     });
-    if (t.connection === 'witnessed_walk') {
+    if (t.connection === 'closed_public_cycle') {
+      const c = t.cycle;
+      require(c &&
+        c.word.length > 0 &&
+        c.word.length === c.refs.length &&
+        t.revision - c.startRevision === c.word.length, 'closed word length');
+      const steps = run.replayCommands.slice(c.startRevision - 1, i + 1);
+      require(steps.length === c.word.length && steps[0].from === cmd.to, 'same starting and final image');
+      steps.forEach((step, j) => {
+        const ref = c.refs[j],
+          proof = run.replayCommands[ref - 2];
+        require(ref <= c.startRevision &&
+          proof &&
+          step.from === proof.from &&
+          step.to === proof.to &&
+          commandKey(proof) === c.word[j] &&
+          commandKey(step) === c.word[j], 'each cycle edge already witnessed before replay');
+      });
+      results.closedCycles++;
+    } else if (t.connection === 'witnessed_walk') {
       let p = t.from;
       for (const ref of t.walkRefs) {
         const e = run.replayCommands[ref - 2];
@@ -126,6 +151,41 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
         : null;
     return { actor, site };
   };
+  async function mobility(e, cmd, i, board, prior) {
+    const out = e.mobilityProbe,
+      t = out.test,
+      max = limit(prior);
+    require(hash(t) === cmd.mobilitySeal &&
+      commandKey(cmd) === t.op &&
+      t.before.endsWith(':revision:' + (i + 1) + ':frame:' + cmd.from) &&
+      verified.has(t.cause.revision) &&
+      t.cause.revision <= i + 1, 'untried control commitment');
+    require(!run.replayCommands
+      .slice(0, i)
+      .some((c) => c.from === cmd.from && commandKey(c) === t.op), 'previously tried public control');
+    require(eq(unique(positions(cmd.from, t.actor, max)), t.from), 'mobility subject');
+    await partsAt(board, cmd.to, i + 2);
+    const live =
+      board.level === prior.level &&
+      board.state === prior.state &&
+      board.levelsCompleted === prior.levelsCompleted;
+    let moves = 0;
+    for (const [j, s] of t.sites.entries()) {
+      const binding = { p: t.actor, c: s.role, fixed: s.peers };
+      require(eq(named(cmd.from, binding, max).site, s.at), 'mobility precondition');
+      const actual = named(cmd.to, binding, limit(board)).site,
+        d = out.outcomes[j];
+      const status = !live ? 'inapplicable' : !actual ? 'unobserved' : eq(actual, s.at) ? 'still' : 'moved';
+      require(d.status === status && eq(d.actual, actual) && d.role === s.role, 'mobility measurement');
+      if (status === 'moved') {
+        moves++;
+        branches.push({ i, length: 1, cause: t.cause.op, plan: binding, at: actual, mobility: true });
+      }
+    }
+    require(moves === out.moved && out.outcomes.length === t.sites.length, 'number of measured effects');
+    results.mobilityTests++;
+    results.mobilityMoved += moves;
+  }
   async function record(e, cmd, i, board, prior) {
     const m = e.mechanism,
       t = m.trial,
@@ -209,9 +269,14 @@ export function zoneProgressAudit(run, hash, partsAt, cache, commandKey) {
       await partsAt(b, frame, 1);
       const rival = named(frame, v.plan, limit(b));
       if (!rival.site) continue;
+      if (v.mobility) {
+        results.mobilityRivalCompared++;
+        if (!eq(rival.site, v.at)) results.mobilitySelective++;
+        continue;
+      }
       results.comparedWrites++;
       if (!eq(rival.site, v.at)) results.changedAgainstRepetition++;
     }
   }
-  return { results, examples, checkTag, record, compare };
+  return { results, examples, checkTag, record, mobility, compare };
 }
