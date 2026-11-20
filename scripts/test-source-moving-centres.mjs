@@ -43,7 +43,13 @@ for (const { code, level, tickets } of JSON.parse(await readFile(predictions, 'u
       ids = [t.p, t.r, t.c];
     const view = async (board) => {
       const data = (await observe(board)).groups;
-      return ids.map((k) => pos(data, k));
+      if (!t.rest) return ids.map((k) => pos(data, k));
+      const centres = (data.get(t.c) ?? []).map((e) => e.p),
+        rest = new Set(t.rest.map((x) => x.join()));
+      const remaining = centres.filter((x) => !rest.has(x.join()));
+      const at =
+        t.rest.every((x) => centres.some((y) => same(x, y))) && remaining.length === 1 ? remaining[0] : null;
+      return [pos(data, t.p), pos(data, t.r), at];
     };
     const orig = await view(root);
     if (!hash(root).startsWith(t.root) || orig.some((v, j) => !same(v, t.before[j])))
