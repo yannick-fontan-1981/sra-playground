@@ -60,8 +60,17 @@ test('a speculative layout is followed by its sealed use only after both coordin
   assert.ok(continuation);
   assert.deepEqual(continuation.plan, first.plan);
   assert.equal(continuation.index, 1);
-  const actual = { person: arrive.nextP, indicator: arrive.r };
-  assert.equal(finishOccupancy(m, continuation, actual, true, false, 6).matched, true);
+  assert.equal(first.preview, undefined);
+  assert.equal(continuation.preview?.indicator.role, 'indicator');
+  assert.deepEqual(
+    continuation.preview?.layout.map((x) => x.subject),
+    ['person']
+  );
+  const actual = { person: arrive.nextP };
+  const result = finishOccupancy(m, continuation, actual, true, false, 6);
+  assert.equal(result.matched, true);
+  assert.equal(result.preview?.status, 'realized');
+  assert.equal(Object.values(m.previewTrials!)[0]!.realized, 1);
 });
 test('a failed placement is remembered even when a different route predicts the same positions', () => {
   const m = demonstrated(),

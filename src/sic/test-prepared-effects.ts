@@ -112,9 +112,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const question = {
         kind: 'test_prepared_effect',
         scope: ref.split(':revision:', 1)[0]!,
-        subjects: [a, b, experiment.rule, phase],
+        subjects: experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
         parentObjective: parent,
-        satisfactionContract: 'compare_the_public_effect_of_B_after_each_preparation',
+        satisfactionContract: experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
       const equation = experiment.equation?.claim;
       const capability = equation
@@ -163,6 +163,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         experiment,
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
         ...(experiment.occupancy ? {occupancyForecast:experiment.occupancy} : {}),
+        ...(experiment.occupancy?.preview ? {morphologicalPreview:experiment.occupancy.preview} : {}),
         ...(experiment.territorial ? {territoryForecast:experiment.territorial} : {}),
         ...(experiment.activation ? {activationForecast:experiment.activation} : {}),
         ...(experiment.frame ? {frameForecast:experiment.frame} : {}),

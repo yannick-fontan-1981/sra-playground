@@ -1,4 +1,9 @@
 import type { NativeObservation, NativeRows, NativeEntity } from '../logos-engine/v6-native-types.ts';
+import {
+  projectMorphologicalPreview,
+  measureMorphologicalPreview,
+  type MorphologicalPreview,
+} from '../logos-engine/v6-morphology-preview.ts';
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { poseFamilyKey } from './pose-families.ts';
 import { same, add, diff, size, type XY } from './access-terrain.ts';
@@ -33,9 +38,21 @@ export type OccupancyProgram = {
   basis: 'previous_occupancy' | 'coupled_motion';
   key: string;
 };
-export type OccupancyTrial = { plan: OccupancyProgram; index: number };
+export type OccupancyTrial = { plan: OccupancyProgram; index: number; preview?: MorphologicalPreview };
 export type OccupancyMemory = {
   layouts: Record<number, PoseView>;
+  forms?: Record<number, Record<string, string>>;
+  previewTrials?: Record<
+    string,
+    {
+      observed: number;
+      realized: number;
+      contradicted: number;
+      unobserved: number;
+      last: number;
+      failedPrimary?: number[];
+    }
+  >;
   edges: PoseEdge[];
   observed: Record<string, number>;
   rejections?: Record<string, Record<string, true>>;
@@ -55,6 +72,11 @@ export const newOccupancyMemory = (): OccupancyMemory => ({
 });
 const signatures = new Map<string, string>();
 const views = new WeakMap<NativeObservation, PoseView>();
+const observedForms = new WeakMap<NativeObservation, Record<string, string>>();
+export function occupancyForms(o: NativeObservation, rows: NativeRows) {
+  occupancyView(o, rows);
+  return observedForms.get(o)!;
+}
 function family(e: NativeEntity) {
   let id = signatures.get(e.signature);
   if (!id) {
@@ -74,6 +96,14 @@ export function occupancyView(o: NativeObservation, rows: NativeRows): PoseView 
       b = e.bbox;
     groups.set(k, groups.has(k) ? null : [b[0] + b[2], b[1] + b[3]]);
   }
+  const forms: Record<string, string> = {};
+  for (const e of o.entities) {
+    if (e.area <= max) {
+      const role = family(e);
+      if (groups.get(role)) forms[role] = e.signature;
+    }
+  }
+  observedForms.set(o, forms);
   const view: PoseView = {};
   for (const [k, v] of groups) if (v) view[k] = v;
   views.set(o, view);
@@ -91,8 +121,15 @@ export function observePoses(
   b: PoseView,
   z: PoseView,
   op: string,
-  ref: number
+  ref: number,
+  beforeForms?: Record<string, string>,
+  afterForms?: Record<string, string>
 ) {
+  if (beforeForms && afterForms) {
+    const forms = (m.forms ??= {});
+    forms[s] ??= beforeForms;
+    forms[t] ??= afterForms;
+  }
   m.layouts[s] ??= b;
   m.layouts[t] ??= z;
   const k = s + '/' + op,
@@ -162,6 +199,58 @@ const poseKey = (p: XY, r: XY) => p.join() + '/' + r.join();
 const readKey = (p: string, r: string, q: string) => JSON.stringify([p, r, 'occupy', q]);
 const trialKey = (p: string, r: string, s: OccupancyStep) =>
   s.stage === 'occupy' ? readKey(p, r, s.op) : hypothesisKey(p, r, s);
+function contrast(m: OccupancyMemory, pair: Pair, op: string) {
+  const hits = pair.hits[op] ?? [],
+    roots = new Set(hits.map((h) => h.s)),
+    refs: number[] = [];
+  if (!roots.size) return refs;
+  for (const edge of m.edges) {
+    if (edge.unstable || edge.op === op || !roots.has(edge.s)) continue;
+    const expected = m.layouts[edge.s]![pair.r],
+      actual = m.layouts[edge.t]![pair.p];
+    if (expected && actual && !same(expected, actual)) refs.push(edge.ref);
+  }
+  return refs;
+}
+function displayedPreview(m: OccupancyMemory, scene: number, trial: OccupancyTrial) {
+  const { plan, index } = trial,
+    step = plan.steps[index]!;
+  if (step.stage !== 'occupy') return null;
+  const pair = m.pairs[plan.p + '/' + plan.r];
+  if (!pair) return null;
+  const hits = pair.hits[step.op] ?? [],
+    counterexamples = m.edges
+      .filter((e) => {
+        if (e.unstable || e.op !== step.op) return false;
+        const b = m.layouts[e.s]!,
+          p = b[plan.p],
+          r = b[plan.r],
+          after = m.layouts[e.t]![plan.p];
+        return p && r && after && same(p, step.p) && same(r, step.r) && !same(after, r);
+      })
+      .map((e) => e.ref);
+  return projectMorphologicalPreview(
+    m.layouts[scene]!,
+    m.forms?.[scene] ?? {},
+    plan.p,
+    plan.r,
+    step.op,
+    hits.map((h) => ({
+      ref: h.ref,
+      before: m.layouts[h.s]!,
+      after: m.layouts[h.t]!,
+      beforeForms: m.forms?.[h.s],
+      afterForms: m.forms?.[h.t],
+    })),
+    contrast(m, pair, step.op),
+    [
+      ...new Set([
+        ...counterexamples,
+        ...(m.previewTrials?.[readKey(plan.p, plan.r, step.op)]?.failedPrimary ?? []),
+      ]),
+    ]
+  );
+}
 function proposal(
   m: OccupancyMemory,
   scene: number,
@@ -202,6 +291,12 @@ function proposal(
     const hits = pair.hits[q] ?? [],
       sites = hits.map((x) => m.layouts[x.s]![r]!),
       recent = hits.at(-1);
+    const pastPreview = m.previewTrials?.[readKey(p, r, q)];
+    const selective =
+      !pastPreview?.contradicted &&
+      sites.length >= 2 &&
+      new Set(sites.map((z) => z.join())).size >= 2 &&
+      contrast(m, pair, q).length > 0;
     const start = { p: u, r: v, steps: [] as OccupancyStep[] };
     const queue = [start],
       seen = new Set([u.join() + '/' + v.join()]);
@@ -293,6 +388,7 @@ function proposal(
             key,
           };
           const score =
+            Number(selective && changed) * 4 +
             Number(!tentative) * 12 +
             Number(informative) * 5 +
             Number(distinguishes) * 3 +
@@ -376,6 +472,8 @@ export function offerOccupancy(
     trial = { plan: chosen.plan, index: 0 };
   }
   const stage = trial.plan.steps[trial.index]!;
+  const preview = displayedPreview(m, scene, trial);
+  if (preview) trial = { ...trial, preview };
   return {
     phase: 'occupancy',
     origin: scene,
@@ -392,18 +490,46 @@ export function finishOccupancy(
   after: PoseView,
   live: boolean,
   win: boolean,
-  revision: number
+  revision: number,
+  afterForms: Record<string, string> = {},
+  executedOp?: string
 ) {
   const { plan, index } = t,
     s = plan.steps[index]!,
     p = after[plan.p] ?? null,
     r = after[plan.r] ?? null;
-  const matched = live && !!p && same(p, s.nextP) && (!s.nextR || (!!r && same(r, s.nextR)));
+  const matched = live && (executedOp===undefined||executedOp===s.op) && !!p && same(p, s.nextP) && (!s.nextR || (!!r && same(r, s.nextR)));
+  const preview = t.preview
+    ? measureMorphologicalPreview(t.preview, executedOp ?? s.op, after, afterForms, live)
+    : null;
+  if (preview && live && preview.status!=='inapplicable') {
+    const knowledge = (m.previewTrials ??= {}),
+      key = readKey(plan.p, plan.r, s.op);
+    const v = (knowledge[key] ??= { observed: 0, realized: 0, contradicted: 0, unobserved: 0, last: 0 });
+    v.observed++;
+    v.last = revision;
+    if (preview.status === 'realized') v.realized++;
+    else if (preview.status === 'contradicted') {
+      v.contradicted++;
+      if (p && !same(p, s.nextP)) (v.failedPrimary ??= []).push(revision);
+    } else if (preview.status === 'unobserved') v.unobserved++;
+  }
   if (live && !matched) {
     const rejected = (m.rejections ??= {});
     (rejected[trialKey(plan.p, plan.r, s)] ??= {})[poseKey(s.p, s.r)] = true;
   }
   m.attempts[plan.key] = revision;
-  m.active = matched && index + 1 < plan.steps.length ? { plan, index: index + 1 } : null;
-  return { trial: t, arrived: p, marker: r, matched, won: win, stage: s.stage };
+  m.active =
+    matched && (!preview || preview.status === 'realized') && index + 1 < plan.steps.length
+      ? { plan, index: index + 1 }
+      : null;
+  return {
+    trial: t,
+    arrived: p,
+    marker: r,
+    matched,
+    won: win,
+    stage: s.stage,
+    ...(preview ? { preview } : {}),
+  };
 }

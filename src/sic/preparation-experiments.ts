@@ -1,4 +1,4 @@
-import {newOccupancyMemory,occupancyView,observePoses,offerOccupancy,finishOccupancy,type OccupancyMemory,type OccupancyTrial} from './occupancy-programs.ts';
+import {newOccupancyMemory,occupancyView,occupancyForms,observePoses,offerOccupancy,finishOccupancy,type OccupancyMemory,type OccupancyTrial} from './occupancy-programs.ts';
 import {newTerritorialMemory,offerTerritory,recordTerritory,type TerritorialMemory,type TerritorialTrial} from './pursue-territory.ts';
 import {offerActivation,recordActivation,type Activation,type ActivationReceipt} from './latent-response.ts';
 import {
@@ -792,7 +792,7 @@ export function recordExperiment(
   const occupancy=m.occupancy??=newOccupancyMemory();
   if(!x?.occupancy)occupancy.active=null;
   if(b.state===a.state&&b.level_epoch===a.level_epoch&&a.levels_completed===b.levels_completed)
-    observePoses(occupancy,s,t,occupancyView(b,rows),occupancyView(a,next),op,a.revision);
+    observePoses(occupancy,s,t,occupancyView(b,rows),occupancyView(a,next),op,a.revision,occupancyForms(b,rows),occupancyForms(a,next));
   m.instrument ??= newInstrumentMemory();
   if(!x?.instrument)m.instrument.active=null;
   m.frames??=newFrameMemory();
@@ -910,7 +910,7 @@ export function recordExperiment(
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
   if(x.occupancy){
     const won=a.levels_completed>b.levels_completed||a.state==='WIN';
-    const detail=finishOccupancy(occupancy,x.occupancy,occupancyView(a,next),!won&&b.state===a.state&&b.level_epoch===a.level_epoch,won,a.revision);
+    const detail=finishOccupancy(occupancy,x.occupancy,occupancyView(a,next),!won&&b.state===a.state&&b.level_epoch===a.level_epoch,won,a.revision,occupancyForms(a,next),op);
     return {...out,result:won?'occupancy_completion':detail.matched?'occupancy_confirmed':'occupancy_refuted',occupancy:detail};
   }
   if(x.territorial){const {result,detail}=recordTerritory(m,x.territorial,b,a);return {...out,result,territorial:detail};}

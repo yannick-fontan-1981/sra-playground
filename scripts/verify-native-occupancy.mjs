@@ -28,10 +28,21 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
     equalLengthPreparationNeeded: 0,
     comparedUses: 0,
     useChanged: 0,
+    previews: {
+      issued: 0,
+      multiple: 0,
+      pose: 0,
+      controlled: 0,
+      realized: 0,
+      contradicted: 0,
+      unobserved: 0,
+      inapplicable: 0,
+    },
   };
   const examples = [],
     branches = [],
     checked = new Map(),
+    forms = new Map(),
     keys = new Map();
   let width = 0,
     height = 0,
@@ -41,15 +52,18 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
     if (checked.has(key)) return checked.get(key);
     const parts = cache.get(key);
     if (!parts) throw Error('Missing historical observation ' + key);
-    const v = new Map();
+    const v = new Map(),
+      orientations = new Map();
     for (const e of parts) {
       if (e.area > (width * height) / 12) continue;
       if (!keys.has(e.signature)) keys.set(e.signature, symbolicDigest(poseFamilyKey(e)).slice(0, 24));
       const id = keys.get(e.signature),
         [x, y, right, bottom] = e.bbox;
+      orientations.set(id, v.has(id) ? null : e.signature);
       v.set(id, v.has(id) ? null : [x + right, y + bottom]);
     }
     checked.set(key, v);
+    forms.set(key, orientations);
     return v;
   }
   async function record(e, cmd, i, board, priorState) {
@@ -136,6 +150,117 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
         (official ? 'occupancy_completion' : matched ? 'occupancy_confirmed' : 'occupancy_refuted'),
       'verdict'
     );
+    const shown = out.trial.preview;
+    if (shown) {
+      check(
+        step.stage === 'occupy' &&
+          shown.kind === 'action_conditioned_layout_preview' &&
+          shown.action === step.op,
+        'displayed action'
+      );
+      check(
+        shown.indicator.role === p.r &&
+          equal(shown.indicator.at, b) &&
+          equal(shown.indicator.form, forms.get(cmd.from).get(p.r) ?? null),
+        'displayed indicator'
+      );
+      check(
+        shown.layout[0].subject === p.p &&
+          equal(shown.layout[0].at, b) &&
+          new Set(shown.layout.map((x) => x.subject)).size === shown.layout.length,
+        'announced subjects'
+      );
+      const refcmd = (ref) => {
+        const j = i + ref - e.revision;
+        check(j >= 0 && j < i, 'preview prior evidence');
+        return run.replayCommands[j];
+      };
+      const witnesses = shown.evidence.witnesses.map(refcmd),
+        sites = new Set(),
+        prior = new Set();
+      for (const c of witnesses) {
+        const u = view(c.from),
+          v = view(c.to);
+        check(
+          commandKey(c) === shown.action && moved(u.get(p.p), v.get(p.p)) && equal(v.get(p.p), u.get(p.r)),
+          'preview witness'
+        );
+        prior.add(c.from);
+        sites.add(u.get(p.r).join());
+        for (const pred of shown.layout.slice(1)) {
+          const x = u.get(pred.subject),
+            y = v.get(pred.subject);
+          check(moved(x, y) && equal(delta(y, u.get(p.r)), delta(pred.at, b)), 'joint layout witness');
+        }
+      }
+      for (const pred of shown.layout.filter((x) => x.form !== null)) {
+        const matching = witnesses.filter(
+          (c) => forms.get(c.from).get(p.r) === shown.indicator.form && forms.get(c.to).get(pred.subject)
+        );
+        check(
+          new Set(matching.map((c) => view(c.from).get(p.r).join())).size >= 2 &&
+            matching.every((c) => forms.get(c.to).get(pred.subject) === pred.form) &&
+            witnesses.some(
+              (c) =>
+                forms.get(c.from).get(p.r) &&
+                forms.get(c.from).get(p.r) !== shown.indicator.form &&
+                forms.get(c.to).get(pred.subject) &&
+                forms.get(c.to).get(pred.subject) !== pred.form
+            ),
+          'conditional future form'
+        );
+      }
+      for (const ref of shown.evidence.controls) {
+        const c = refcmd(ref);
+        check(
+          prior.has(c.from) &&
+            commandKey(c) !== shown.action &&
+            moved(view(c.to).get(p.p), view(c.from).get(p.r)),
+          'preview control'
+        );
+      }
+      for (const ref of shown.evidence.counterexamples) {
+        const c = refcmd(ref);
+        check(
+          commandKey(c) === shown.action && moved(view(c.to).get(p.p), view(c.from).get(p.r)),
+          'negative preview witness'
+        );
+      }
+      check(shown.evidence.distinctIndicatedSites === sites.size, 'distinct preview sites');
+      const status =
+        sites.size >= 2 && shown.evidence.controls.length && !shown.evidence.counterexamples.length
+          ? 'replicated_with_control'
+          : sites.size
+            ? 'witnessed'
+            : 'hypothesis';
+      check(status === shown.evidence.status, 'preview support');
+      const received = shown.layout.map((pred) => {
+        const at = after.get(pred.subject) ?? null,
+          form = forms.get(cmd.to).get(pred.subject) ?? null;
+        const outcome =
+          official || board.state !== priorState
+            ? 'inapplicable'
+            : !at || (equal(at,pred.at) && pred.form !== null && !form)
+              ? 'unobserved'
+              : equal(at, pred.at) && (pred.form === null || pred.form === form)
+                ? 'realized'
+                : 'contradicted';
+        return { subject: pred.subject, at, form, outcome };
+      });
+      const verdict = received.some((v) => v.outcome === 'inapplicable')
+        ? 'inapplicable'
+        : received.some((v) => v.outcome === 'contradicted')
+          ? 'contradicted'
+          : received.some((v) => v.outcome === 'unobserved')
+            ? 'unobserved'
+            : 'realized';
+      check(equal(out.preview, { subjects: received, status: verdict }), 'preview result');
+      results.previews.issued++;
+      results.previews[verdict]++;
+      results.previews.multiple += Number(received.length > 1);
+      results.previews.pose += Number(shown.layout.some((v) => v.form !== null));
+      results.previews.controlled += Number(status === 'replicated_with_control');
+    }
     if (step.stage === 'place') {
       results.placements++;
       results.placementsExact += Number(matched);
@@ -181,7 +306,7 @@ export function occupancyAudit(run, hash, partsAt, cache, commandKey) {
     }
     results.completePrograms += Number(matched && index === p.steps.length - 1);
     results.official += Number(official);
-    last = { i, index, plan: p, matched };
+    last = { i, index, plan: p, matched: matched && (!out.preview || out.preview.status === 'realized') };
   }
   async function compare(reopen, dispatch) {
     const history = run.replayCommands;

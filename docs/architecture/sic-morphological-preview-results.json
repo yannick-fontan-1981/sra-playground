@@ -1,0 +1,93 @@
+{
+  "sourceTrials": [
+    {
+      "code": "CATR",
+      "level": 3,
+      "issued": 75,
+      "trajectory": "a651b794411de3a11a415bd2c3171d593e8ca26ddafc94d9ca13e3dbad4959dc",
+      "official": false,
+      "preview": {
+        "issued": 11,
+        "multiple": 0,
+        "pose": 0,
+        "controlled": 0,
+        "realized": 0,
+        "contradicted": 8,
+        "unobserved": 3,
+        "inapplicable": 0
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 3,
+      "issued": 75,
+      "trajectory": "71abb6a3b020a2b0068ee2f7d2865702ce943d662f2efa20cf3af739a53aa9e4",
+      "official": false,
+      "preview": {
+        "issued": 23,
+        "multiple": 0,
+        "pose": 0,
+        "controlled": 1,
+        "realized": 1,
+        "contradicted": 22,
+        "unobserved": 0,
+        "inapplicable": 0
+      }
+    },
+    {
+      "code": "SKBN",
+      "level": 1,
+      "issued": 70,
+      "trajectory": "8a72bb505aebc92e7e72bfc232507458b0577763486254f726290ed466fc919d",
+      "official": false,
+      "preview": {
+        "issued": 12,
+        "multiple": 7,
+        "pose": 0,
+        "controlled": 3,
+        "realized": 2,
+        "contradicted": 10,
+        "unobserved": 0,
+        "inapplicable": 0
+      }
+    },
+    {
+      "code": "VOIS",
+      "level": 1,
+      "issued": 70,
+      "trajectory": "b6764703258a46c7c83da993f167376b1d84500c2b234a13819d679134d78247",
+      "official": false,
+      "preview": {
+        "issued": 29,
+        "multiple": 14,
+        "pose": 0,
+        "controlled": 28,
+        "realized": 29,
+        "contradicted": 0,
+        "unobserved": 0,
+        "inapplicable": 0
+      }
+    },
+    {
+      "code": "ZIPP",
+      "level": 1,
+      "issued": 70,
+      "trajectory": "44f9c74cd26cb865e4fec46fbdf3c8803f4cb7ea95464f2cabbeb5cf96bddeee",
+      "official": false,
+      "preview": {
+        "issued": 10,
+        "multiple": 0,
+        "pose": 0,
+        "controlled": 0,
+        "realized": 3,
+        "contradicted": 7,
+        "unobserved": 0,
+        "inapplicable": 0
+      }
+    }
+  ],
+  "tests": {
+    "passed": 345,
+    "typecheck": true
+  }
+}
