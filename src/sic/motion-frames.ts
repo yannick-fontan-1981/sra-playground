@@ -8,7 +8,7 @@ export type FramePose = {
   from: XY;
   anchors: Map<string, XY>;
 };
-export type FrameEffect = FramePose & { to: XY };
+export type FrameEffect = FramePose & { to: XY; afterScene?: string | number };
 export type FrameModel = {
   family: string;
   axes: AxisPair;

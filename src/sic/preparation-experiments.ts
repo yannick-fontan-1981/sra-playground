@@ -1,4 +1,11 @@
-import {newFrameMemory,offerFrame,recordFrame,type FrameMemory,type FrameTrial} from './inverse-frame-experiment.ts';
+import {
+  newFrameMemory,
+  offerFrame,
+  recordFrame,
+  rememberDuplicatePoses,
+  type FrameMemory,
+  type FrameTrial,
+} from './inverse-frame-experiment.ts';
 import {newRetainedMemory,offerRetained,recordRetained,type RetainedTrial,type RetainedMemory} from './retained-edits.ts';
 import { newInstrumentMemory, offerInstrument, recordInstrument, type SiteTrial, type InstrumentMemory } from './instrument-experiment.ts';
 import { newContextMemory, offerContext, recordContext, type ContextMemory, type ContextTrial } from './transported-control.ts';
@@ -381,7 +388,7 @@ function similarity(m: Memory, p: Pair, current: number) {
     b = edges.find((e) => e.cmd === p.probe);
   return a?.effect.key === p.first.effect.key && b?.effect.key === p.direct.effect.key ? 1 : 0;
 }
-export function selectExperiment(
+function selectEstablishedExperiment(
   m: Memory,
   o: NativeObservation,
   inputs: readonly NativeCommand[],
@@ -701,6 +708,14 @@ export function selectExperiment(
   }
   return null;
 }
+export function selectExperiment(
+  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
+): Experiment | null {
+  const established = selectEstablishedExperiment(m, o, inputs, late, rows);
+  if (established || !late || !rows) return established;
+  const scene = m.scenes.indexOf(sceneKey(o));
+  return scene < 0 ? null : offerFrame(m, o, rows, scene, new Set(inputs.map(observedCommandKey)), true);
+}
 export function recordExperiment(
   m: Memory,
   b: NativeObservation,
@@ -719,6 +734,8 @@ export function recordExperiment(
   m.instrument ??= newInstrumentMemory();
   if(!x?.instrument)m.instrument.active=null;
   m.frames??=newFrameMemory();
+  rememberDuplicatePoses(m.frames, s, b);
+  rememberDuplicatePoses(m.frames, t, a);
   if(!x?.frame)m.frames.active=null;
   m.retained??=newRetainedMemory();
   if(!x?.retained)m.retained.active=null;

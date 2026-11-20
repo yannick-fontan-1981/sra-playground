@@ -27,13 +27,19 @@ export type InversePlan = {
   key: string;
   score: number;
   follow: FrameUse | null;
+  basis?: 'single_response';
+  alternatives?: { traveller: XY; world: XY };
+  priorMoving?: number;
+  existingReference?: boolean;
+  pairedSetup?: boolean;
 };
-type InverseInputs = {
+export type InverseInputs = {
   i: number;
   now: { s: string | number; g: Groups };
   rows: NativeRows;
   known: Map<string, Map<string, Role>>;
   history: Map<string, FrameEffect[]>;
+  pairAt?: (e: FrameEffect, role: Role) => { from: XY; to: XY } | null;
   sample: (g: Groups, s: string | number, r: Role) => FramePose | null;
   tried: Set<string>;
 };

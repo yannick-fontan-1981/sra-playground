@@ -22,7 +22,13 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
     sameStart: 0,
     dependentUse: 0,
     official: 0,
+    identifications: 0,
+    separated: 0,
+    reused: 0,
+    reusedExact: 0,
   };
+  const examples = [];
+  const established = new Map();
   const trials = new Map(),
     branches = [];
   const won = (b) => b.levelsCompleted > run.initialCompleted || b.level > run.start || b.state === 'WIN';
@@ -80,6 +86,12 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
           )
         )
           fail('Ungrounded actuator');
+        if (
+          p.basis &&
+          p.pairedSetup &&
+          !eq(position(cache.get(a.from), patient), position(cache.get(a.to), patient))
+        )
+          fail('Unmatched patient in actuator calibration');
       }
       const supports = [];
       for (const ref of p.refs) {
@@ -97,9 +109,25 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
           )
         )
           fail('Wrong moving-frame relation');
-        supports.push({ s, r, image: q.from });
+        supports.push({ s, r, out, image: q.from });
       }
-      if (
+      if (p.basis === 'single_response') {
+        const first = supports[0];
+        if (
+          supports.length !== 1 ||
+          !p.alternatives ||
+          !eq(p.alternatives.world, first.out) ||
+          !eq(
+            p.alternatives.traveller,
+            first.out.map((v, j) => p.from[j] + v - first.s[j])
+          ) ||
+          eq(p.to, p.alternatives.world) ||
+          eq(p.to, p.alternatives.traveller) ||
+          p.a === p.q
+        )
+          fail('Unseparated frame hypotheses');
+        stats.identifications++;
+      } else if (
         !supports.some((x) =>
           supports.some(
             (y) =>
@@ -111,7 +139,18 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
         )
       )
         fail('Unidentified moving reference');
-      trials.set(start, { id, start, p, step: -1 });
+      if (t.identifiedRef) {
+        const previous = established.get(i + t.identifiedRef - e.revision);
+        if (
+          !previous ||
+          JSON.stringify(norm([previous.q, previous.role, previous.axes, previous.offset])) !==
+            JSON.stringify(norm([p.q, p.role, p.axes, p.offset])) ||
+          eq(previous.placement, p.placement)
+        )
+          fail('Unwitnessed relation reuse');
+        stats.reused++;
+      }
+      trials.set(start, { id, start, p, step: -1, reused: !!t.identifiedRef });
       stats.plans++;
     }
     const track = trials.get(start);
@@ -145,6 +184,8 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
       track.arrived = dest;
       track.staged = position(before, patient);
       track.exact = exact && !won(board);
+      if (track.exact && p.basis === 'single_response') established.set(i, p);
+      stats.reusedExact += Number(track.exact && track.reused);
       branches.push(track);
     }
     if (stage === 'use') {
@@ -170,6 +211,21 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
       stats.controls++;
       stats.dependent += Number(!!dependent);
       stats.sameStart += Number(!!dependent && eq(t.staged, t.p.from));
+      stats.separated += Number(!!dependent && t.p.basis === 'single_response' && eq(t.staged, t.p.from));
+      if (dependent && examples.length < 4)
+        examples.push({
+          first: t.start + 1,
+          setup: t.p.a,
+          length: t.p.length,
+          command: t.p.q,
+          reference: t.p.at,
+          placement: t.p.placement,
+          traveller: t.p.from,
+          afterSetup: t.staged,
+          withoutSetup: former,
+          arrival: t.arrived,
+          follow: t.continued ?? null,
+        });
       if (dependent && t.continued) {
         const later = await dispatch(run.replayCommands[i + 1]),
           v = await at(later);
@@ -179,5 +235,5 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
       }
     }
   }
-  return { stats, record, compare };
+  return { stats, examples, record, compare };
 }

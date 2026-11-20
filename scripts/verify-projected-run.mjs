@@ -693,6 +693,7 @@ console.log(
     transport:audit.transports,
     retained:audit.retained,
     responseFrames:frames.stats,
+    responseFrameExamples:frames.examples,
     exchanges: {...exchanges,destinations:exchanges.destinations.size},
   })
 );

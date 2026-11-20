@@ -1,4 +1,6 @@
-import {bases} from '../src/sic/motion-frames.ts';
+import { projectPreparation } from './project-source-preparations.mjs';
+import { bases } from '../src/sic/motion-frames.ts';
+import { proposeIdentification } from '../src/sic/identify-moving-frames.ts';
 // Prequential experiment on archived source commands. An endpoint is committed before its observation.
 import { inversePlans } from './predict-source-inverse-sites.mjs';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -18,7 +20,9 @@ const programs = JSON.parse(
 const files =
   cohort === 'lower'
     ? Array.from({ length: 8 }, (_, i) => 'source-final-' + i)
-    : ['u2', 'u2entry', 'u3', 'u3entry', 'u4', 'u5'].map((s) => 'cold12-' + s);
+    : cohort === 'extra'
+      ? [2, 3, 4, 5].map((l) => 'cold13-f' + l)
+      : ['u2', 'u2entry', 'u3', 'u3entry', 'u4', 'u5'].map((s) => 'cold12-' + s);
 const runs = [];
 for (const f of files)
   for (const line of (await readFile(join(dir, f + '.jsonl'), 'utf8')).trim().split('\n'))
@@ -74,8 +78,39 @@ for (const [t, r] of runs.entries())
           }
         return { anchors, from: actor.position, scene: s, index: i, role };
       }
-      if (process.env.SIC_STUDY_INVERSE === '1' && i % 3 === 0 && inverses.length < 30)
-        inverses.push(...inversePlans({ i, now, rows: board.frame, known, history, sample, bases, tried }));
+      function pairAt(e, r) {
+        const before = cache.get(e.scene),
+          after = cache.get(e.afterScene);
+        if (!before || !after) return null;
+        const from = resolveRole(before, r)?.position,
+          to = resolveRole(after, r)?.position;
+        return from && to ? { from, to } : null;
+      }
+      if (process.env.SIC_STUDY_PAIRED_IDENTIFY === '1' && i % 3 === 0 && inverses.length < 20)
+        inverses.push(
+          ...proposeIdentification({
+            i,
+            now,
+            rows: board.frame,
+            known,
+            history,
+            sample,
+            bases,
+            tried,
+            pairAt,
+          })
+        );
+      if (process.env.SIC_STUDY_IDENTIFY === '1' && i % 3 === 0 && inverses.length < 20)
+        inverses.push(
+          ...proposeIdentification({ i, now, rows: board.frame, known, history, sample, bases, tried })
+        );
+      if (process.env.SIC_STUDY_INVERSE === '1' && i % 3 === 0 && inverses.length < 30) {
+        const candidates = inversePlans({ i, now, rows: board.frame, known, history, sample, bases, tried });
+        for (const p of candidates)
+          if (process.env.SIC_STUDY_NESTED === '1')
+            p.nested = projectPreparation(p, now, history, known, board.frame);
+        inverses.push(...candidates);
+      }
       for (const [id, role] of pool) {
         const cur = sample(now.g, now.s, role);
         if (!cur) continue;
@@ -184,7 +219,7 @@ for (const [t, r] of runs.entries())
           const k = action + '/' + id,
             hs = history.get(k) ?? [];
           if (!hs.some((e) => e.scene === now.s)) {
-            hs.push({ ...cur, to: tgt.position });
+            hs.push({ ...cur, to: tgt.position, afterScene: next.s });
             history.set(k, hs);
           }
         }

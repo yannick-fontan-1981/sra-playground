@@ -3,7 +3,7 @@ import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
 import { sourceBackend } from './sic-study-source-games.mjs';
-import { sourceReplay, hash } from './sic-study-source-replay.mjs';
+import { sourceReplay, hash, op as opKey } from './sic-study-source-replay.mjs';
 import { publicParts } from './source-transfer-demonstration.mjs';
 const [environment, dir, out, sealed, cohort] = process.argv.slice(2),
   engine = await sourceBackend(resolve(environment));
@@ -13,7 +13,9 @@ const allowed = new Set(GAME_CATALOG.map((g) => g.code)),
   files =
     cohort === 'lower'
       ? Array.from({ length: 8 }, (_, i) => 'source-final-' + i)
-      : ['u2', 'u2entry', 'u3', 'u3entry', 'u4', 'u5'].map((s) => 'cold12-' + s);
+      : cohort === 'extra'
+        ? [2, 3, 4, 5].map((l) => 'cold13-f' + l)
+        : ['u2', 'u2entry', 'u3', 'u3entry', 'u4', 'u5'].map((s) => 'cold12-' + s);
 const runs = new Map();
 for (const f of files)
   for (const l of (await readFile(join(dir, f + '.jsonl'), 'utf8')).trim().split('\n')) {
@@ -34,18 +36,24 @@ for (const row of await read(sealed)) {
     counts = {},
     examples = [],
     wins = [],
+    strata = {},
     proofs = new Map(),
     distinct = new Set();
   const inc = (k, n = 1) => (counts[k] = (counts[k] ?? 0) + Number(n));
   const active = (b) => b && !rep.win(b) && b.state !== 'GAME_OVER',
     won = (b) => !!b && rep.win(b);
+  let previousIndex = -1;
+  const cache = new Map();
   for (const p of row.inverses) {
+    if (previousIndex !== p.i) {
+      cache.clear();
+      previousIndex = p.i;
+    }
     if (
       !('follow' in p) ||
       [...p.refs, ...p.actuatorRefs, ...(p.follow?.refs ?? [])].some((j) => j >= p.i - 1)
     )
       throw Error('Invalid pre-action evidence');
-    const cache = new Map();
     function run(word) {
       const k = JSON.stringify(word);
       if (cache.has(k)) return cache.get(k);
@@ -98,6 +106,53 @@ for (const row of await read(sealed)) {
     inc('jointlyRequired', !!changed);
     inc('controlledLanding', controlled);
     inc('sameStartLanding', controlled && eq(p.from, staged));
+    if (p.basis === 'single_response') {
+      const j = p.refs[0],
+        prior = rep.restore(j),
+        oldRef = await at(prior, anchor),
+        oldFrom = await at(prior, p.role);
+      const next = rep.act(p.q),
+        past = await at(next, p.role);
+      if (
+        !oldRef ||
+        !oldFrom ||
+        !past ||
+        opKey(r.steps[j]) !== p.q ||
+        !eq(
+          p.offset,
+          past.map((v, k) => v - oldRef[k])
+        ) ||
+        !eq(
+          p.alternatives.traveller,
+          past.map((v, k) => p.from[k] + v - oldFrom[k])
+        ) ||
+        !eq(p.alternatives.world, past) ||
+        eq(p.to, p.alternatives.traveller) ||
+        eq(p.to, p.alternatives.world)
+      )
+        throw Error('Invalid separating intervention');
+      inc('oneExample', true);
+      const separated =
+        controlled &&
+        eq(p.from, staged) &&
+        !eq(actual, p.alternatives.traveller) &&
+        !eq(actual, p.alternatives.world);
+      inc('referenceOnly', separated);
+      for (const group of [
+        'all',
+        ...(p.offset.every((v) => v === 0) ? ['previously_occupied'] : []),
+        ...(p.pairedSetup ? ['paired_setup'] : []),
+        ...(p.priorMoving === 1 ? ['first_measurement'] : []),
+      ]) {
+        const s = (strata[group] ??= { plans: 0, confirmed: 0 });
+        s.plans++;
+        s.confirmed += Number(!!separated);
+      }
+      if (p.priorMoving === 1 && !p.existingReference) {
+        inc('onlyOnePriorResponse');
+        inc('confirmedAfterFirstResponse', separated);
+      }
+    }
     inc('novelControlled', controlled && p.novel);
     inc('independentControls', controlled && p.a !== p.q);
     if (controlled) {
@@ -152,6 +207,6 @@ for (const row of await read(sealed)) {
   }
   counts.distinctControlled = distinct.size;
   counts.twoDestinations = [...proofs.values()].filter((x) => x.size >= 2).length;
-  reports.push({ code: r.code, level: r.start, counts, examples, wins });
+  reports.push({ code: r.code, level: r.start, counts, examples, wins, strata });
 }
 await writeFile(out, JSON.stringify(reports));
