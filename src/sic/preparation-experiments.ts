@@ -755,7 +755,7 @@ export function recordExperiment(
     const position = (o: NativeObservation, id: string) =>
       o.entities.find(e => !e.identity_ambiguous && e.signature === id)?.position.join() ?? null;
     const {result,detail}=recordFrontier(m,x.frontier,edge,a.levels_completed>b.levels_completed||a.state==='WIN',
-      id => position(a,id), id => position(b,id));
+      id => position(a,id), id => position(b,id), {after:a, rows:next});
     return {...out,result,frontier:detail};
   }
   if (x.projection) {

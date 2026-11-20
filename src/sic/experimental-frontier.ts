@@ -1,3 +1,9 @@
+import {
+  controlExperiments,
+  nextControlledMove,
+  type ControlExperiment,
+  type CalibrationExperiment,
+} from './partial-control-repertoire.ts';
 import { placeExperiments, type PlaceClaim } from './place-experiments.ts';
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Edge, Experiment, Memory } from './preparation-experiments.ts';
@@ -13,6 +19,8 @@ export type Prediction = {
 };
 export type FrontierQuestion = {
   place?: PlaceClaim;
+  repertoire?: ControlExperiment;
+  calibration?: CalibrationExperiment;
   after?: Prediction;
   target: number;
   probe: string;
@@ -100,6 +108,15 @@ export function selectFrontier(
           ...[q.arrival, q.use, q.after].flatMap((p) =>
             p?.alternative ? [p.alternative.inactiveRef, p.alternative.preparationRef ?? undefined] : []
           ),
+          ...(q.calibration ? [q.calibration.setup.ref, q.calibration.direct.ref] : []),
+          ...(q.repertoire
+            ? [
+                q.repertoire.setup.ref,
+                q.repertoire.calibration.bareRef,
+                q.repertoire.calibration.preparedRef,
+                q.repertoire.bare.ref,
+              ]
+            : []),
           q.place?.opening?.controlRef ?? undefined,
           q.place?.bare?.ref,
           q.place?.preparationRef ?? undefined,
@@ -138,6 +155,7 @@ export function selectFrontier(
   // Choose an unanswered experiment before a route. Replaying an entire known cycle
   // cannot discharge it. Each accepted probe measures a previously absent edge.
   const site = live && rows ? placeExperiments(m, live, rows, s) : null;
+  const experiments = controlExperiments(m, new Set(routes.keys()));
   let best: {
     rank: number;
     probe: string;
@@ -159,10 +177,28 @@ export function selectFrontier(
             .filter((op) => op !== 'ACTION6'));
     for (const op of choices) {
       if (!permits(target, op)) continue;
-      const option = site?.(target, op);
-      const rank = site
-        ? route.length * 1.5 + Math.log2(1 + (all.get(op) ?? 0)) / 4 - (option?.score ?? 0)
-        : route.length * 8 + Math.log2(1 + (all.get(op) ?? 0));
+      let option = site?.(target, op);
+      const comparison = experiments.proposals.get(target + '/' + op);
+      const calibration = experiments.calibrations.get(target + '/' + op);
+      if (comparison) {
+        const sameBody = option?.question.arrival?.role === comparison.claim.actor;
+        const forecast = sameBody ? option!.question : { target, probe: op, arrival: null, use: null };
+        option = {
+          score: Math.max(sameBody ? option!.score : 0, 12) + 4 + comparison.score,
+          question: { ...forecast, repertoire: comparison.claim },
+        };
+      } else if (calibration) {
+        const sameBody = option?.question.arrival?.role === calibration.actor;
+        const forecast = sameBody ? option!.question : { target, probe: op, arrival: null, use: null };
+        option = {
+          score: Math.max(sameBody ? option!.score : 0, 6) + 2,
+          question: { ...forecast, calibration },
+        };
+      }
+      const rank =
+        site || comparison || calibration
+          ? route.length * 1.5 + Math.log2(1 + (all.get(op) ?? 0)) / 4 - (option?.score ?? 0)
+          : route.length * 8 + Math.log2(1 + (all.get(op) ?? 0));
       if (!best || rank < best.rank || (rank === best.rank && op < best.probe))
         best = { rank, probe: op, target, first: route.first, question: option?.question };
     }
@@ -180,13 +216,16 @@ export function recordFrontier(
   edge: Edge,
   won: boolean,
   pos: (role: string) => string | null,
-  beforePos?: (role: string) => string | null
+  beforePos?: (role: string) => string | null,
+  observed?: { after: NativeObservation; rows: NativeRows }
 ) {
   const f = m.frontier,
     q = x.question;
   f.follow = null;
   f.question = null;
   let result: string;
+  let controlled: { moved: boolean; changed: boolean; actual: XY } | null = null;
+  let revisedUse: Prediction | null = null;
   if (won) result = 'official_completion';
   else if (edge.effect.key.startsWith('terminal:')) result = 'terminal_without_arrival';
   else if (x.next !== null) {
@@ -216,10 +255,52 @@ export function recordFrontier(
     )
       f.follow = { scene: edge.t, question: q, after: true };
   }
+  const claim = q.repertoire;
+  if (claim && !won && x.next === null && !x.use && !x.after && !edge.effect.key.startsWith('terminal:')) {
+    const location = pos(claim.actor);
+    if (beforePos?.(claim.actor) === claim.prepared.join() && location) {
+      const actual = point(location);
+      const displacement = [actual[0] - claim.prepared[0], actual[1] - claim.prepared[1]];
+      const changed =
+        displacement[0] !== claim.bare.to[0] - claim.origin[0] ||
+        displacement[1] !== claim.bare.to[1] - claim.origin[1];
+      controlled = { actual, changed, moved: location !== claim.prepared.join() };
+      if (changed && controlled.moved && observed && !f.follow) {
+        const body = observed.after.entities.find(
+          (e) => e.signature === claim.actor && !e.identity_ambiguous
+        );
+        if (body) {
+          const allowed = new Set(observed.after.available_action_refs);
+          const choices = new Set(m.edges.map((e) => e.cmd).filter((op) => allowed.has(op.split(':')[0]!)));
+          revisedUse = nextControlledMove(
+            m,
+            claim,
+            actual,
+            observed.rows[0]!.length - (body.bbox[2] - body.bbox[0]),
+            observed.rows.length - (body.bbox[3] - body.bbox[1]),
+            choices
+          );
+          if (revisedUse)
+            f.follow = {
+              scene: edge.t,
+              question: {
+                target: q.target,
+                probe: q.probe,
+                arrival: q.arrival,
+                use: revisedUse,
+                repertoire: claim,
+              },
+            };
+        }
+      }
+    }
+  }
   return {
     result,
     detail: {
       ...(q.place ? { place: q.place } : {}),
+      ...(claim ? { repertoire: claim, controlled, revisedUse } : {}),
+      ...(q.calibration ? { calibration: q.calibration } : {}),
       target: q.target,
       probe: q.probe,
       arrival: q.arrival,

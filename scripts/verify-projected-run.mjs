@@ -48,6 +48,16 @@ const events = new Map(
 const witnessed = new Map();
 const states = new Set([run.initial.slice(0, 16)]);
 const frontier = { routes: 0, newProbes: 0, arrivals: 0, continuations: 0, subsequentUses: 0 };
+const repertoires = {
+  calibrations: 0,
+  calibrationChanged: 0,
+  probes: 0,
+  measurable: 0,
+  changed: 0,
+  newMotion: 0,
+  revised: 0,
+  used: 0,
+};
 const openings = { proposed: 0, placements: 0, transported: 0, matchedControl: 0, subsequentUses: 0 };
 const alternatives = { tried: 0, moved: 0, exact: 0, matchedPreparation: 0 };
 const conditions = {
@@ -96,7 +106,9 @@ async function partsAt(board, key, revision) {
   }
   return cache.get(key);
 }
-const needPositionHistory = run.preparation.some((e) => e.delayed || e.frontier?.place || e.condition);
+const needPositionHistory = run.preparation.some(
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition
+);
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 for (const [i, cmd] of run.replayCommands.entries()) {
@@ -369,6 +381,90 @@ for (const [i, cmd] of run.replayCommands.entries()) {
       if (action !== f.probe || wasTried) throw Error('Claimed new probe is not fresh at ' + i);
       frontier.newProbes++;
     }
+    const experiment = f.repertoire ?? f.calibration;
+    if (experiment && event.phase === 'frontierProbe') {
+      const prior = (ref) => {
+        const n = i + ref - event.revision;
+        if (!Number.isInteger(n) || n < 0 || n >= i) throw Error('Invalid control reference at ' + i);
+        return run.replayCommands[n];
+      };
+      const positions = (past, role) => [
+        location(cache.get(past.from), role),
+        location(cache.get(past.to), role),
+      ];
+      const setup = prior(experiment.setup.ref),
+        direct = prior((f.repertoire ? experiment.bare : experiment.direct).ref);
+      if (
+        setup.from !== direct.from ||
+        setup.to !== cmd.from ||
+        commandKey(setup) !== experiment.setup.op ||
+        commandKey(direct) !== action ||
+        positions(setup, experiment.setup.moved).join('/') !==
+          [experiment.setup.from, experiment.setup.to].join('/') ||
+        experiment.setup.from.join() === experiment.setup.to.join() ||
+        positions(setup, experiment.actor).join('/') !== [experiment.origin, experiment.prepared].join('/') ||
+        positions(direct, experiment.actor).join('/') !==
+          [experiment.origin, (f.repertoire ? experiment.bare : experiment.direct).to].join('/')
+      )
+        throw Error('Invalid bare or prepared control at ' + i);
+      const actual = location(await partsAt(board, cmd.to, i + 2), experiment.actor);
+      const relative = (a, b) => a.map((v, i) => v - b[i]).join();
+      if (f.calibration) {
+        repertoires.calibrations++;
+        if (
+          actual &&
+          relative(actual.split(',').map(Number), experiment.prepared) !==
+            relative(experiment.direct.to, experiment.origin)
+        )
+          repertoires.calibrationChanged++;
+      } else {
+        const d = experiment.calibration,
+          first = prior(d.bareRef),
+          second = prior(d.preparedRef);
+        if (
+          d.op === action ||
+          first.from !== setup.from ||
+          second.from !== setup.to ||
+          commandKey(first) !== d.op ||
+          commandKey(second) !== d.op ||
+          positions(first, experiment.actor).join('/') !== [experiment.origin, d.before].join('/') ||
+          positions(second, experiment.actor).join('/') !== [experiment.prepared, d.after].join('/') ||
+          relative(d.before, experiment.origin) !== d.bareEffect.join() ||
+          relative(d.after, experiment.prepared) !== d.preparedEffect.join() ||
+          d.bareEffect.join() === d.preparedEffect.join()
+        )
+          throw Error('Invalid calibration witness at ' + i);
+        repertoires.probes++;
+        if (f.controlled) {
+          const moved = actual !== experiment.prepared.join(),
+            changed =
+              actual &&
+              relative(actual.split(',').map(Number), experiment.prepared) !==
+                relative(experiment.bare.to, experiment.origin);
+          if (
+            !actual ||
+            actual !== f.controlled.actual.join() ||
+            changed !== f.controlled.changed ||
+            moved !== f.controlled.moved
+          )
+            throw Error('Incorrect control response at ' + i);
+          repertoires.measurable++;
+          repertoires.changed += Number(changed);
+          repertoires.newMotion += Number(changed && moved);
+          if (
+            f.revisedUse &&
+            (!changed ||
+              !moved ||
+              f.revisedUse.from.join() !== actual ||
+              f.revisedUse.role !== experiment.actor)
+          )
+            throw Error('Revision without measured landing at ' + i);
+          repertoires.revised += Number(!!f.revisedUse);
+        }
+      }
+    }
+    if (f.repertoire && event.phase === 'frontierUse' && event.result === 'continuation_verified')
+      repertoires.used++;
     const opening = f.place?.opening;
     if (opening && event.phase === 'frontierProbe') openings.proposed++;
     const expected =
@@ -496,6 +592,7 @@ console.log(
     projections: counts,
     frontier,
     openings,
+    repertoires,
     alternatives,
     conditions,
     delayed,
