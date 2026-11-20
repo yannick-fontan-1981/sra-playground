@@ -99,6 +99,7 @@ Entrée directe SS01 L2, agent neuf, même moteur et budgets. Le temps actif a l
 | v6 913683dc | 1 012 | 162 | 0 | 0 | Non |
 | v7.1 da4943d0 | 548 | 174 | 0 | 0 | Non |
 | v8 5cf88d3a | 609 | 179 | 0 | 0 | Non |
+| v9 f948eb0f | 523 | 150 | 3 | 1 | Non |
 
 Dans la v4, la famille d’exploration des expériences restantes a vérifié 51 retours sur des transitions antérieures, essayé 176 nouvelles paires image-commande, vérifié 16 arrivées prédites et 6 mouvements suivants. Un rejeu indépendant contrôle chaque empreinte d’image, la nouveauté de chaque essai déclaré, le rôle suivi et sa position. Le contrôle géométrique par deux segmentations n’a confirmé aucun franchissement de région sur ces trajectoires. SS01 avait déjà été étudié. Les variantes successives constituent des essais supplémentaires. SS09 L2 reste réservé.
 
@@ -109,5 +110,47 @@ Sur les 100 L1 à 60 gestes, le témoin gagne 65 fois. La v1 gagne 66 fois avec 
 Sur SS01 L2, la famille qui choisit une commande encore inexplorée dans une configuration accessible obtient cinq arrivées et une continuation vérifiées pour la v7.1, puis trois arrivées et deux continuations pour la v8. Dans les programmes qui préparent le déplacement d’un autre rôle, la v7.1 vérifie trois placements sur dix propositions. La v8 en vérifie zéro sur 28 propositions. Les huit essais effectivement consacrés à une commande jusque-là inopérante ne déplacent pas le rôle choisi. Les deux rejeux géométriques confirment zéro franchissement de région. SS09 L2 demeure en réserve.
 
 Sur les 100 L1 sources, la v7.1 et le témoin gagnent chacun 65 niveaux. La v7.1 ajoute CGWL et VOIS et perd SMLP et TRIA. Sur chacun des sept jeux sources au L2 à 120 gestes, la v8 et le témoin gagnent GRAV, GARE et GIGO. GRAV demande 49 gestes à la v8 et 105 au témoin. Les deux gagnent GARE en 13 gestes et GIGO en 9. Aucun gain de niveau n’est observé sur ces sept L2. Sur les sept entrées difficiles allant du L2 au L5 déjà utilisées par la v6, la v7.1 et la v8 échouent également à 120 gestes. Les premières observations concordent avec celles du témoin. La suite SIC compte 140 tests réussis sur 141 pour la v8. L’assertion déjà en échec sur le cycle orienté attend un objet sans le champ `walk` que le moteur renvoie vide.
+
+## v9 · Quand déplacer un partenaire donne une capacité au voyageur
+
+La v9 apprend, dans sa propre partie, quelles relations de position séparent les essais où une même commande déplace un rôle de ceux où elle le laisse immobile. Elle cherche jusqu’à quatre gestes pour obtenir la disposition voulue, prévoit le déplacement des deux objets pendant la préparation, puis annonce une arrivée et une utilisation. Elle énumère jusqu’à cinq dispositions et peut reprendre une recette déjà vérifiée pour essayer une suite encore inconnue.
+
+Dans SS01 L2, un rejeu indépendant des 523 commandes confirme dix programmes sélectionnés. Sept ont atteint la commande testée. Trois ont donné la destination annoncée puis le déplacement suivant annoncé. Dans ces trois cas, le voyageur avait lui-même changé d’origine lors de la préparation. Le contrôle géométrique ne détecte aucun franchissement de région et le moteur ne valide pas le niveau. À 523 commandes identiques en nombre, le candidat visite 150 images distinctes et le témoin 129. Le témoin atteint 156 images au terme de ses 668 commandes. Les essais se terminent au plafond de temps actif. SS09 L2 reste réservé.
+
+### Victoires autonomes dans les sources
+
+Les 100 premières entrées sont identiques entre les deux bras. À 60 gestes, chacun en gagne 65. Le candidat ajoute CGWL et VOIS, et perd SMLP et TRIA. Le tableau couvre aussi les 18 niveaux supérieurs des sept jeux disposant de programmes archivés. Les six comparaisons supplémentaires sur GRAV, GIGO et POLA aux L3 et L4 complètent les cohortes préenregistrées. Chaque essai autonome démarre avec un agent neuf, à l’entrée vérifiée du niveau, pour 120 commandes maximum.
+
+| Jeu | Niveaux comparés | Victoires du témoin | Victoires du candidat |
+| --- | --- | --- | --- |
+| GRAV | 2, 3, 4, 5 | 2, 3 | 2 |
+| GARE | 2, 3 | 2 | 2 |
+| POLA | 2, 3, 4, 5 | 3 | Aucune |
+| CWSE | 2 | Aucune | Aucune |
+| CATR | 2, 3 | Aucune | Aucune |
+| GIGO | 2, 3, 4, 5 | 2, 3, 4 | 2, 3, 4 |
+| MOTO | 2 | Aucune | Aucune |
+
+La v9 gagne 5 niveaux sur 18 et le témoin 7. Les deux pertes sur GRAV L3 et POLA L3 se reproduisent déjà avec la v8. GRAV L2 demande 74 gestes à la v9, 49 à la v8 et 105 au témoin. Sur six des sept entrées difficiles, la nouvelle famille atteint au moins une fois l’arrivée et la suite prévues. POLA L5 est l’exception. Aucune des sept n’est gagnée à ce budget. Sur l’ensemble des 18 entrées, SIC reprend douze fois une recette de placement antérieurement vérifiée.
+
+Un second moteur de rejeu vérifie les trajectoires sources, leurs images et leurs scores officiels. Pour le premier programme autonome complet par entrée, il exécute aussi toutes les sous-suites strictes depuis le préfixe d’origine. Dans SWCH L1, les commandes 2, 3, 2 mènent le rôle à (9, 27). Aucune des six sous-suites distinctes ne l’y mène. MIND L1 offre un second cas avec trois gestes et sept sous-suites. Ce critère est satisfait dans deux des neuf L1 où SIC achève un programme, et dans aucun des dix niveaux supérieurs où il en achève un. Pour neuf de ces dix niveaux supérieurs, une seule commande de la séquence suffit pour reproduire la position finale. Sur GRAV L4, le raccourci le plus court en demande trois. L’essai supplémentaire d’une commande à la même position finale ne révèle aucune capacité propre au programme complet dans les cas avec raccourci. Les tests SIC comptent 141 succès sur 142. Le test du cycle orienté échoue également sur le témoin.
+
+### Ce qui change après un retour à la même position
+
+Sur les trajectoires originales, nous retenons la première suite de deux à six gestes dans laquelle le voyageur bouge, revient à sa position initiale et laisse au moins un autre objet ailleurs. Depuis chaque extrémité de cette suite, le moteur exécute tous les programmes de zéro, un ou deux gestes du même vocabulaire. Il comprend les boutons disponibles et jusqu’aux quatre clics distincts les plus récents. Un lieu est déclaré nouvellement accessible si aucune branche mesurable avant préparation ne l’atteint et si la position du voyageur est identifiable dans chaque état non terminal du bras témoin.
+
+Sur les 100 traces originales, 15 offrent cette expérience. DC22 et SKBN gagnent des positions accessibles à cet horizon. Dans DC22, le voyageur revient en (10, 40), puis deux commandes 1 l’amènent en (10, 36), une case encore jamais visitée. Cette case est absente des 43 essais témoins. Dans GIGO, CGWL et ETAG, la préparation ouvre une victoire en deux gestes ou moins. GABA donne trois destinations encore inédites, mais le voyageur devient non identifiable dans douze branches témoins. Ces destinations restent incertaines.
+
+Sur les douze entrées supérieures des campagnes de contrôle, six fournissent un tel retour et aucune n’ouvre une victoire à deux gestes. Parmi les 18 programmes gagnants archivés, six contiennent un tel retour. Sur GRAV L3, après deux gestes préparatoires, le voyageur revient en (60, 30). Parmi les 31 suites courtes essayées avant et après, seule la disposition préparée offre une victoire, par 1 puis 3. Le témoin n’en offre aucune. L’inversion des deux gestes préparatoires change l’origine du voyageur et ne permet pas d’isoler l’effet d’un seul partenaire.
+
+Une intervention à durée égale échange deux gestes de la préparation et garde les variantes où le voyageur revient à la même origine. Sur ETAG L1, la commande 2 gagne deux fois sur deux avec le partenaire en (22, 27) et zéro fois sur trois avec le partenaire en (12, 27). Dans GIGO, CGWL, SKBN et ETAG, nous figeons les conditions compatibles avec ces essais avant de tester d’autres ordres de gestes. Elles prédisent correctement les 103 cas mesurables, dont deux succès. Ces essais retombent tous sur des images déjà vues durant les échanges simples.
+
+Nous remplaçons ensuite un geste par une autre commande du même jeu. À origine inchangée, 255 préparations distinctes sont mesurables, dont 21 images nouvelles par rapport aux échanges simples. Sur ces images, le modèle formule 19 pronostics, tous exacts, dont une victoire d’ETAG. La majorité des résultats antérieurs aurait donné 18 réponses justes sur ces mêmes 19 cas. Sur cinq dispositions de partenaires inédites, le modèle prédit trois échecs, tous vérifiés, et s’abstient deux fois. La victoire prédite dans une image inédite correspond donc à une disposition de partenaire déjà rencontrée.
+
+### Transporter une capacité à une autre origine
+
+Le même test autorise ensuite le voyageur à changer de position. La prévision est formulée avant d’exécuter la suite, avec les relations apprises à l’origine précédente. Une hypothèse de mouvement prédit la même translation du voyageur, tandis qu’une hypothèse de victoire exige toujours la validation officielle. Après substitution d’un geste de préparation, 60 dispositions conjointes à origine différente sont mesurables dans les quatre jeux. Le modèle relatif se prononce sur 37 et répond correctement 12 fois, contre 22 pour la majorité sur ces mêmes 37 cas. Sur 12 pronostics d’ouverture, un seul est confirmé. Les 60 dispositions représentent réellement 16 possibilités positives selon le test de chaque jeu.
+
+Dans CGWL L1, le voyageur en (17, 41) et le partenaire en (15, 36) autorisent une victoire par 4 puis 5. Sur une nouvelle disposition, le modèle prédit la victoire après translation des deux rôles de quatre unités vers le haut. Le voyageur est en (17, 37), le partenaire en (15, 32), et le moteur valide la victoire. Le même écart entre rôles apparaît après une translation de quatre unités vers la gauche, en (13, 41) et (11, 36). Le modèle prédit à nouveau la victoire et le moteur la réfute. Les deux préparations ont la même longueur. La géométrie de cette paire laisse donc une inconnue dans la prévision, qui peut dépendre du reste du plateau ou de l’historique. Cette expérience hors ligne est postérieure au gel de la v9. Les résultats de Custom 4 ne servent pas à choisir les variables.
 
 Les mesures par variante, les empreintes des trajectoires et les résultats par niveau figurent dans [les données agrégées](sic-projected-affordances-results.json). Les commandes sources nécessaires pour reproduire les suppressions figurent dans [les 18 programmes et leurs entrées](sic-source-seven-programs.json). Les conditions de gel sont consignées dans [le protocole](sic-projected-affordances-protocol.md).

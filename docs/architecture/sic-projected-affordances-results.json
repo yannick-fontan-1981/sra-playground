@@ -34,6 +34,18 @@
         "SMLP",
         "TRIA"
       ]
+    },
+    "v9": {
+      "games": 100,
+      "wins": 65,
+      "gained": [
+        "CGWL",
+        "VOIS"
+      ],
+      "lost": [
+        "SMLP",
+        "TRIA"
+      ]
     }
   },
   "ss01Level2": {
@@ -262,6 +274,68 @@
       "independentRegionCrossings": 0,
       "trajectory": "375aaaa7dddd07e37bf5b2fb6ddc22bf228f38877fbea6940ac5be2141ac6b71",
       "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503"
+    },
+    "v9": {
+      "candidate": "f948eb0f56bf031a8f3c243b3f95ceb854f7031c",
+      "actions": 523,
+      "images": 150,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "reason": "level_active_time_budget",
+      "projection": {
+        "issued": 39,
+        "observed": 21,
+        "verifiedLanding": 3,
+        "verifiedContinuation": 1,
+        "refuted": 24
+      },
+      "frontier": {
+        "routes": 36,
+        "newProbes": 30,
+        "arrivals": 4,
+        "continuations": 2,
+        "subsequentUses": 0
+      },
+      "delayed": {
+        "issued": 40,
+        "preparedAccess": 0,
+        "exactPredictions": 0,
+        "followingMovements": 0
+      },
+      "openings": {
+        "proposed": 5,
+        "placements": 0,
+        "transported": 0,
+        "matchedControl": 0,
+        "subsequentUses": 0
+      },
+      "alternatives": {
+        "tried": 0,
+        "moved": 0,
+        "exact": 0,
+        "matchedPreparation": 0
+      },
+      "conditions": {
+        "selected": 10,
+        "completedPlacements": 3,
+        "observedPreparations": 4,
+        "tested": 7,
+        "moved": 3,
+        "exact": 3,
+        "fixedOriginExact": 0,
+        "used": 3,
+        "official": 0,
+        "reused": 0,
+        "reuseUsed": 0
+      },
+      "independentRegionCrossings": 0,
+      "trajectory": "a1f5d0becc8c5555e0cf6d486d45b256bb746d1bcef88d1375ae58deadc99790",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "matchedPrefix": {
+        "actions": 523,
+        "controlImages": 129,
+        "candidateImages": 150
+      }
     }
   },
   "upperLevels": [
@@ -956,6 +1030,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 5,
+        "activated": 5,
+        "continued": 5,
+        "reused": 0
       }
     },
     {
@@ -978,6 +1060,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 15,
+        "activated": 12,
+        "continued": 10,
+        "reused": 1
       }
     },
     {
@@ -1000,6 +1090,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 19,
+        "activated": 12,
+        "continued": 7,
+        "reused": 5
       }
     },
     {
@@ -1022,6 +1120,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 14,
+        "activated": 6,
+        "continued": 6,
+        "reused": 0
       }
     },
     {
@@ -1044,6 +1150,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 20,
+        "activated": 8,
+        "continued": 4,
+        "reused": 2
       }
     },
     {
@@ -1066,6 +1180,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 2,
+        "activated": 2,
+        "continued": 2,
+        "reused": 1
       }
     },
     {
@@ -1088,6 +1210,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 2,
+        "activated": 0,
+        "continued": 0,
+        "reused": 0
       }
     }
   ],
@@ -3559,6 +3689,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 8,
+        "activated": 6,
+        "continued": 5,
+        "reused": 0
       }
     },
     {
@@ -3573,6 +3711,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 15,
+        "activated": 12,
+        "continued": 10,
+        "reused": 1
       }
     },
     {
@@ -3587,6 +3733,14 @@
       "candidateV8": {
         "won": true,
         "actions": 13
+      },
+      "candidateV9": {
+        "won": true,
+        "actions": 13,
+        "selected": 0,
+        "activated": 0,
+        "continued": 0,
+        "reused": 0
       }
     },
     {
@@ -3601,6 +3755,14 @@
       "candidateV8": {
         "won": true,
         "actions": 9
+      },
+      "candidateV9": {
+        "won": true,
+        "actions": 9,
+        "selected": 0,
+        "activated": 0,
+        "continued": 0,
+        "reused": 0
       }
     },
     {
@@ -3615,6 +3777,14 @@
       "candidateV8": {
         "won": true,
         "actions": 49
+      },
+      "candidateV9": {
+        "won": true,
+        "actions": 74,
+        "selected": 8,
+        "activated": 1,
+        "continued": 0,
+        "reused": 0
       }
     },
     {
@@ -3629,6 +3799,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 2,
+        "activated": 2,
+        "continued": 2,
+        "reused": 1
       }
     },
     {
@@ -3643,6 +3821,14 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 4,
+        "activated": 2,
+        "continued": 1,
+        "reused": 1
       }
     }
   ],
@@ -4135,5 +4321,3390 @@
         }
       }
     ]
+  },
+  "additionalSourceLevelsV9": [
+    {
+      "code": "GIGO",
+      "level": 3,
+      "initial": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+      "control": {
+        "won": true,
+        "actions": 12
+      },
+      "candidateV9": {
+        "won": true,
+        "actions": 12,
+        "selected": 0,
+        "activated": 0,
+        "continued": 0,
+        "reused": 0
+      }
+    },
+    {
+      "code": "GIGO",
+      "level": 4,
+      "initial": "b203d5554e4b0e600aaf268d39c5d4ff05f51e29eb3a34e1ba76acc6b005389c",
+      "control": {
+        "won": true,
+        "actions": 13
+      },
+      "candidateV9": {
+        "won": true,
+        "actions": 13,
+        "selected": 0,
+        "activated": 0,
+        "continued": 0,
+        "reused": 0
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 3,
+      "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+      "control": {
+        "won": true,
+        "actions": 39
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 24,
+        "activated": 10,
+        "continued": 3,
+        "reused": 2
+      },
+      "candidateV8": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "GRAV",
+      "level": 4,
+      "initial": "3ef9d5b1501678728b4e4f78fb5ac9153f4c912631c5f8581cd9ac0055ec2819",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 12,
+        "activated": 1,
+        "continued": 1,
+        "reused": 0
+      }
+    },
+    {
+      "code": "POLA",
+      "level": 3,
+      "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+      "control": {
+        "won": true,
+        "actions": 106
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 0,
+        "activated": 0,
+        "continued": 0,
+        "reused": 0
+      },
+      "candidateV8": {
+        "won": false,
+        "actions": 120
+      }
+    },
+    {
+      "code": "POLA",
+      "level": 4,
+      "initial": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5",
+      "control": {
+        "won": false,
+        "actions": 120
+      },
+      "candidateV9": {
+        "won": false,
+        "actions": 120,
+        "selected": 0,
+        "activated": 0,
+        "continued": 0,
+        "reused": 0
+      }
+    }
+  ],
+  "spatialConditionV9": {
+    "motionForecasts": {
+      "total": {
+        "forecasts": 172,
+        "visible": 168,
+        "correct": 144,
+        "baselineCorrect": 133,
+        "disagreements": 29,
+        "correctDisagreements": 20,
+        "predictsOpening": 16,
+        "opened": 11
+      },
+      "byGame": [
+        [
+          "VOIS",
+          2,
+          2,
+          0,
+          0
+        ],
+        [
+          "FITE",
+          2,
+          2,
+          2,
+          2
+        ],
+        [
+          "AS66",
+          2,
+          0,
+          2,
+          0
+        ],
+        [
+          "SIGN",
+          3,
+          2,
+          0,
+          0
+        ],
+        [
+          "SWCH",
+          7,
+          4,
+          0,
+          0
+        ],
+        [
+          "FUIT",
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          "SKBN",
+          9,
+          7,
+          8,
+          6
+        ],
+        [
+          "KLOT",
+          2,
+          1,
+          2,
+          1
+        ],
+        [
+          "ETAG",
+          1,
+          1,
+          1,
+          1
+        ]
+      ]
+    },
+    "prefixL1": {
+      "eligible": 13,
+      "activated": 7,
+      "continued": 7,
+      "uniquePosition": 0,
+      "measurements": [
+        {
+          "code": "LKEY",
+          "level": 1,
+          "prefix": 48,
+          "alreadyPlaced": 4,
+          "shorter": {
+            "tested": 62,
+            "same": 38,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "VOIS",
+          "level": 1,
+          "prefix": 55,
+          "alreadyPlaced": 0,
+          "shorter": {
+            "tested": 7,
+            "same": 2,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "SERI",
+          "level": 1,
+          "prefix": 15,
+          "alreadyPlaced": 0,
+          "shorter": null
+        },
+        {
+          "code": "AS66",
+          "level": 1,
+          "prefix": 8,
+          "alreadyPlaced": 3,
+          "shorter": null
+        },
+        {
+          "code": "REWI",
+          "level": 1,
+          "prefix": 43,
+          "alreadyPlaced": 0,
+          "shorter": {
+            "tested": 9,
+            "same": 1,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "SIGN",
+          "level": 1,
+          "prefix": 11,
+          "alreadyPlaced": 3,
+          "shorter": {
+            "tested": 23,
+            "same": 5,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "SWCH",
+          "level": 1,
+          "prefix": 26,
+          "alreadyPlaced": 0,
+          "shorter": null
+        },
+        {
+          "code": "ZIPP",
+          "level": 1,
+          "prefix": 15,
+          "alreadyPlaced": 0,
+          "shorter": null
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "prefix": 22,
+          "alreadyPlaced": 0,
+          "shorter": {
+            "tested": 11,
+            "same": 2,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "KEYD",
+          "level": 1,
+          "prefix": 22,
+          "alreadyPlaced": 0,
+          "shorter": {
+            "tested": 6,
+            "same": 2,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "prefix": 7,
+          "alreadyPlaced": 1,
+          "shorter": {
+            "tested": 6,
+            "same": 2,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "MEMO",
+          "level": 1,
+          "prefix": 46,
+          "alreadyPlaced": 0,
+          "shorter": null
+        },
+        {
+          "code": "MIND",
+          "level": 1,
+          "prefix": 47,
+          "alreadyPlaced": 0,
+          "shorter": null
+        }
+      ]
+    },
+    "prefixUpper": {
+      "eligible": 7,
+      "activated": 3,
+      "continued": 3,
+      "uniquePosition": 0,
+      "measurements": [
+        {
+          "code": "GRAV",
+          "level": 5,
+          "prefix": 44,
+          "alreadyPlaced": 0,
+          "shorter": null
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "prefix": 59,
+          "alreadyPlaced": 2,
+          "shorter": null
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "prefix": 16,
+          "alreadyPlaced": 1,
+          "shorter": null
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "prefix": 19,
+          "alreadyPlaced": 0,
+          "shorter": null
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "prefix": 53,
+          "alreadyPlaced": 0,
+          "shorter": {
+            "tested": 7,
+            "same": 2,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "prefix": 77,
+          "alreadyPlaced": 3,
+          "shorter": {
+            "tested": 25,
+            "same": 14,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "prefix": 44,
+          "alreadyPlaced": 0,
+          "shorter": {
+            "tested": 7,
+            "same": 3,
+            "unmeasured": 0,
+            "terminal": 0,
+            "unique": false
+          }
+        }
+      ]
+    },
+    "autonomousL1": {
+      "entries": 100,
+      "complete": 9,
+      "uniquePosition": 2,
+      "distinctFutureAtSharedPosition": 0,
+      "rows": [
+        {
+          "code": "VOIS",
+          "level": 1,
+          "actions": 49,
+          "won": true,
+          "completed": true,
+          "first": 24,
+          "word": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION3"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "14,42",
+          "shorter": 7,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "14,38",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION3",
+              "extended": "10,42",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "18,42",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION5",
+              "extended": "30,26",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "MIND",
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "completed": true,
+          "first": 49,
+          "word": [
+            "ACTION6:4,46",
+            "ACTION6:4,54",
+            "ACTION6:10,54"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "8,44",
+          "shorter": 7,
+          "matches": 0,
+          "shortest": null,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": true,
+          "checks": [
+            {
+              "key": "ACTION7",
+              "extended": "14,52",
+              "matches": 0,
+              "unknown": 0,
+              "distinct": true
+            },
+            {
+              "key": "ACTION6:4,46",
+              "extended": "14,52",
+              "matches": 0,
+              "unknown": 0,
+              "distinct": true
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "completed": true,
+          "first": 6,
+          "word": [
+            "ACTION2",
+            "ACTION1",
+            "ACTION2"
+          ],
+          "alreadyPlaced": 1,
+          "endpoint": "48,60",
+          "shorter": 6,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "56,60",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION2",
+              "extended": "40,60",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "56,60",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "KEYD",
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "completed": true,
+          "first": 22,
+          "word": [
+            "ACTION4",
+            "ACTION3",
+            "ACTION4"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "16,8",
+          "shorter": 6,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION3",
+              "extended": "11,8",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "21,8",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "11,8",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "SIGN",
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "completed": true,
+          "first": 10,
+          "word": [
+            "ACTION4",
+            "ACTION3",
+            "ACTION2"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "11,21",
+          "shorter": 7,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "11,16",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION2",
+              "extended": "11,26",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "16,21",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "11,11",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "CGWL",
+          "level": 1,
+          "actions": 25,
+          "won": true,
+          "completed": true,
+          "first": 15,
+          "word": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION3"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "9,41",
+          "shorter": 7,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "9,37",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION3",
+              "extended": "5,41",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "13,41",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "17,17",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "ZIPP",
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "completed": true,
+          "first": 43,
+          "word": [
+            "ACTION5",
+            "ACTION1",
+            "ACTION2",
+            "ACTION1"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "14,26",
+          "shorter": 13,
+          "matches": 2,
+          "shortest": 2,
+          "missing": 1,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION2",
+              "extended": "14,42",
+              "matches": 2,
+              "unknown": 1,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "30,26",
+              "matches": 2,
+              "unknown": 1,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "completed": true,
+          "first": 28,
+          "word": [
+            "ACTION2",
+            "ACTION2",
+            "ACTION1",
+            "ACTION2"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "8,17",
+          "shorter": 9,
+          "matches": 1,
+          "shortest": 2,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "8,12",
+              "matches": 1,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION2",
+              "extended": "8,22",
+              "matches": 1,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "8,7",
+              "matches": 1,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "SWCH",
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "completed": true,
+          "first": 52,
+          "word": [
+            "ACTION2",
+            "ACTION3",
+            "ACTION2"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "9,27",
+          "shorter": 6,
+          "matches": 0,
+          "shortest": null,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": true,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "9,22",
+              "matches": 0,
+              "unknown": 0,
+              "distinct": true
+            },
+            {
+              "key": "ACTION2",
+              "extended": "9,32",
+              "matches": 0,
+              "unknown": 0,
+              "distinct": true
+            },
+            {
+              "key": "ACTION4",
+              "extended": "14,27",
+              "matches": 0,
+              "unknown": 0,
+              "distinct": true
+            },
+            {
+              "key": "ACTION7",
+              "extended": "14,17",
+              "matches": 0,
+              "unknown": 0,
+              "distinct": true
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        }
+      ]
+    },
+    "autonomousUpper": {
+      "entries": 18,
+      "complete": 10,
+      "uniquePosition": 0,
+      "distinctFutureAtSharedPosition": 0,
+      "rows": [
+        {
+          "code": "MOTO",
+          "level": 2,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 44,
+          "word": [
+            "ACTION6:6,6",
+            "ACTION2",
+            "ACTION6:10,10"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "8,8",
+          "shorter": 7,
+          "matches": 3,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "8,4",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION2",
+              "extended": "8,12",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION3",
+              "extended": "4,8",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "12,8",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "52,28",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION6:6,6",
+              "extended": "4,4",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 22,
+          "word": [
+            "ACTION4",
+            "ACTION3",
+            "ACTION1"
+          ],
+          "alreadyPlaced": 1,
+          "endpoint": "15,23",
+          "shorter": 7,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "15,18",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION2",
+              "extended": "15,28",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "20,23",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "20,23",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 74,
+          "word": [
+            "ACTION6:21,55",
+            "ACTION6:16,5",
+            "ACTION6:42,55",
+            "ACTION6:21,55",
+            "ACTION6:42,55"
+          ],
+          "alreadyPlaced": 3,
+          "endpoint": "20,50",
+          "shorter": 25,
+          "matches": 14,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION6:21,55",
+              "extended": "41,50",
+              "matches": 14,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 23,
+          "word": [
+            "ACTION6:46,23",
+            "ACTION6:4,23",
+            "ACTION6:46,23"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "38,22",
+          "shorter": 6,
+          "matches": 3,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION7",
+              "extended": "38,2",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION6:4,23",
+              "extended": "23,22",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 80,
+          "word": [
+            "ACTION3",
+            "ACTION6:31,2",
+            "ACTION1",
+            "ACTION7",
+            "ACTION1"
+          ],
+          "alreadyPlaced": 3,
+          "endpoint": "20,8",
+          "shorter": 27,
+          "matches": 12,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION2",
+              "extended": "20,48",
+              "matches": 12,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION3",
+              "extended": "16,8",
+              "matches": 12,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "52,8",
+              "matches": 12,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "20,20",
+              "matches": 12,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 21,
+          "word": [
+            "ACTION2",
+            "ACTION1",
+            "ACTION2"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "16,28",
+          "shorter": 6,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "16,27",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION2",
+              "extended": "16,29",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "17,28",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "CATR",
+          "level": 2,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 95,
+          "word": [
+            "ACTION6:21,47",
+            "ACTION7",
+            "ACTION6:21,47"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "9,10",
+          "shorter": 6,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION7",
+              "extended": "9,16",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION6:21,47",
+              "extended": "9,16",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "POLA",
+          "level": 2,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 44,
+          "word": [
+            "ACTION5",
+            "ACTION6:31,25",
+            "ACTION5"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "26,25",
+          "shorter": 6,
+          "matches": 2,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION5",
+              "extended": "31,25",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION6:31,25",
+              "extended": "31,25",
+              "matches": 2,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 50,
+          "word": [
+            "ACTION2",
+            "ACTION1",
+            "ACTION2",
+            "ACTION3"
+          ],
+          "alreadyPlaced": 2,
+          "endpoint": "1,30",
+          "shorter": 13,
+          "matches": 6,
+          "shortest": 1,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "30,1",
+              "matches": 6,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION2",
+              "extended": "30,60",
+              "matches": 6,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION4",
+              "extended": "60,30",
+              "matches": 6,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "actions": 120,
+          "won": false,
+          "completed": true,
+          "first": 111,
+          "word": [
+            "ACTION3",
+            "ACTION4",
+            "ACTION3",
+            "ACTION1",
+            "ACTION4"
+          ],
+          "alreadyPlaced": 0,
+          "endpoint": "24,32",
+          "shorter": 25,
+          "matches": 3,
+          "shortest": 3,
+          "missing": 0,
+          "terminal": 0,
+          "uniquePosition": false,
+          "checks": [
+            {
+              "key": "ACTION1",
+              "extended": "24,12",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION3",
+              "extended": "8,32",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            },
+            {
+              "key": "ACTION7",
+              "extended": "12,44",
+              "matches": 3,
+              "unknown": 0,
+              "distinct": false
+            }
+          ],
+          "distinctFutureAtSharedPosition": false
+        }
+      ]
+    }
+  },
+  "returnedOriginExperiments": {
+    "originalL1": {
+      "entries": 100,
+      "eligible": 15,
+      "additional": 2,
+      "fresh": 1,
+      "winning": 3,
+      "interventions": [
+        {
+          "code": "GIGO",
+          "level": 1,
+          "eligible": true,
+          "begin": 3,
+          "end": 6,
+          "actor": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+          "partners": 3,
+          "clicks": 1,
+          "placement": [
+            "ACTION4",
+            "ACTION6:35,27",
+            "ACTION3"
+          ],
+          "origin": "39,33",
+          "bare": {
+            "executed": 57,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 50,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 5
+          },
+          "before": 5,
+          "after": 4,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": true,
+          "swaps": {
+            "tested": 4,
+            "wrongOrigin": 1,
+            "unknown": 0,
+            "capability": [
+              "WIN",
+              [
+                "ACTION1"
+              ]
+            ],
+            "layouts": [
+              {
+                "layout": [
+                  "18,22",
+                  "26,22",
+                  "32,30"
+                ],
+                "yes": 1,
+                "no": 0
+              },
+              {
+                "layout": [
+                  "16,22",
+                  "24,22",
+                  "46,26"
+                ],
+                "yes": 0,
+                "no": 2
+              }
+            ],
+            "validation": {
+              "ordersTested": 2,
+              "all": {
+                "eligible": 1,
+                "predicted": 1,
+                "correct": 1,
+                "baselineCorrect": 1,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "newFrames": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "newLayouts": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "shifted": {
+                "all": {
+                  "eligible": 1,
+                  "predicted": 1,
+                  "correct": 1,
+                  "baselineCorrect": 1,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newFrames": {
+                  "eligible": 1,
+                  "predicted": 1,
+                  "correct": 1,
+                  "baselineCorrect": 1,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newJoint": {
+                  "eligible": 1,
+                  "predicted": 1,
+                  "correct": 1,
+                  "baselineCorrect": 1,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newPeerLocations": {
+                  "eligible": 1,
+                  "predicted": 1,
+                  "correct": 1,
+                  "baselineCorrect": 1,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "absoluteOnSameJoints": {
+                  "eligible": 1,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "firstConfirmed": null,
+                "firstRefuted": null
+              },
+              "substitutions": {
+                "ordersTested": 66,
+                "all": {
+                  "eligible": 25,
+                  "predicted": 25,
+                  "correct": 25,
+                  "baselineCorrect": 25,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newFrames": {
+                  "eligible": 1,
+                  "predicted": 1,
+                  "correct": 1,
+                  "baselineCorrect": 1,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newLayouts": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "shifted": {
+                  "all": {
+                    "eligible": 41,
+                    "predicted": 41,
+                    "correct": 30,
+                    "baselineCorrect": 41,
+                    "positive": 11,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "newFrames": {
+                    "eligible": 8,
+                    "predicted": 8,
+                    "correct": 6,
+                    "baselineCorrect": 8,
+                    "positive": 2,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "newJoint": {
+                    "eligible": 6,
+                    "predicted": 6,
+                    "correct": 3,
+                    "baselineCorrect": 6,
+                    "positive": 3,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "newPeerLocations": {
+                    "eligible": 6,
+                    "predicted": 6,
+                    "correct": 3,
+                    "baselineCorrect": 6,
+                    "positive": 3,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "absoluteOnSameJoints": {
+                    "eligible": 6,
+                    "predicted": 0,
+                    "correct": 0,
+                    "baselineCorrect": 0,
+                    "positive": 0,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "firstConfirmed": null,
+                  "firstRefuted": {
+                    "word": [
+                      "ACTION1",
+                      "ACTION6:35,27",
+                      "ACTION3"
+                    ],
+                    "origin": "37,31",
+                    "layout": [
+                      "16,20",
+                      "24,20",
+                      "30,28"
+                    ],
+                    "absolute": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "LKEY",
+          "level": 1,
+          "eligible": true,
+          "begin": 39,
+          "end": 45,
+          "actor": "4c95812ce37299cb39fa1a5bc6174e572eb8692b160f8bbdab1aa15de2717d61",
+          "partners": 2,
+          "clicks": 4,
+          "placement": [
+            "ACTION1",
+            "ACTION6:26,18",
+            "ACTION6:28,46",
+            "ACTION6:50,42",
+            "ACTION1",
+            "ACTION2"
+          ],
+          "origin": "22,17",
+          "bare": {
+            "executed": 111,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 111,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 2,
+          "after": 2,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "CGWL",
+          "level": 1,
+          "eligible": true,
+          "begin": 8,
+          "end": 12,
+          "actor": "b5adf7cc433404af0b946ad7f8f91aef8e0f034392dccd523658fe4b6b336fa2",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION3",
+            "ACTION5",
+            "ACTION2",
+            "ACTION4"
+          ],
+          "origin": "17,41",
+          "bare": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 1
+          },
+          "before": 14,
+          "after": 14,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": true,
+          "swaps": {
+            "tested": 7,
+            "wrongOrigin": 0,
+            "unknown": 0,
+            "capability": [
+              "WIN",
+              [
+                "ACTION4",
+                "ACTION5"
+              ]
+            ],
+            "layouts": [
+              {
+                "layout": [
+                  "15,36"
+                ],
+                "yes": 3,
+                "no": 0
+              },
+              {
+                "layout": [
+                  "12,42"
+                ],
+                "yes": 0,
+                "no": 4
+              }
+            ],
+            "validation": {
+              "ordersTested": 17,
+              "all": {
+                "eligible": 17,
+                "predicted": 17,
+                "correct": 17,
+                "baselineCorrect": 16,
+                "positive": 1,
+                "confirmed": 1,
+                "actualSuccess": 1
+              },
+              "newFrames": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "newLayouts": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "shifted": {
+                "all": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newFrames": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newJoint": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newPeerLocations": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "absoluteOnSameJoints": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "firstConfirmed": null,
+                "firstRefuted": null
+              },
+              "substitutions": {
+                "ordersTested": 128,
+                "all": {
+                  "eligible": 16,
+                  "predicted": 16,
+                  "correct": 16,
+                  "baselineCorrect": 15,
+                  "positive": 1,
+                  "confirmed": 1,
+                  "actualSuccess": 1
+                },
+                "newFrames": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newLayouts": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "shifted": {
+                  "all": {
+                    "eligible": 110,
+                    "predicted": 20,
+                    "correct": 3,
+                    "baselineCorrect": 17,
+                    "positive": 20,
+                    "confirmed": 3,
+                    "actualSuccess": 4
+                  },
+                  "newFrames": {
+                    "eligible": 17,
+                    "predicted": 4,
+                    "correct": 1,
+                    "baselineCorrect": 3,
+                    "positive": 4,
+                    "confirmed": 1,
+                    "actualSuccess": 2
+                  },
+                  "newJoint": {
+                    "eligible": 17,
+                    "predicted": 4,
+                    "correct": 1,
+                    "baselineCorrect": 3,
+                    "positive": 4,
+                    "confirmed": 1,
+                    "actualSuccess": 2
+                  },
+                  "newPeerLocations": {
+                    "eligible": 5,
+                    "predicted": 4,
+                    "correct": 1,
+                    "baselineCorrect": 3,
+                    "positive": 4,
+                    "confirmed": 1,
+                    "actualSuccess": 2
+                  },
+                  "absoluteOnSameJoints": {
+                    "eligible": 17,
+                    "predicted": 12,
+                    "correct": 12,
+                    "baselineCorrect": 12,
+                    "positive": 0,
+                    "confirmed": 0,
+                    "actualSuccess": 2
+                  },
+                  "firstConfirmed": {
+                    "word": [
+                      "ACTION3",
+                      "ACTION5",
+                      "ACTION1",
+                      "ACTION4"
+                    ],
+                    "origin": "17,37",
+                    "layout": [
+                      "15,32"
+                    ],
+                    "absolute": null
+                  },
+                  "firstRefuted": {
+                    "word": [
+                      "ACTION3",
+                      "ACTION5",
+                      "ACTION3",
+                      "ACTION4"
+                    ],
+                    "origin": "13,41",
+                    "layout": [
+                      "11,36"
+                    ],
+                    "absolute": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "DC22",
+          "level": 1,
+          "eligible": true,
+          "begin": 0,
+          "end": 4,
+          "actor": "c05cd241b620ecb8ab11d9d5bff66f861799dee153aada2b9cf68e710d5f00a2",
+          "partners": 1,
+          "clicks": 2,
+          "placement": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION6:48,19",
+            "ACTION6:48,36"
+          ],
+          "origin": "10,40",
+          "bare": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 9,
+          "after": 10,
+          "additional": 1,
+          "fresh": 1,
+          "certified": true,
+          "certifiedFresh": true,
+          "witness": [
+            "10,36",
+            [
+              "ACTION1",
+              "ACTION1"
+            ]
+          ],
+          "newlyWinning": false,
+          "swaps": {
+            "tested": 7,
+            "wrongOrigin": 0,
+            "unknown": 0,
+            "capability": [
+              "10,36",
+              [
+                "ACTION1",
+                "ACTION1"
+              ]
+            ],
+            "layouts": [
+              {
+                "layout": [
+                  "8,34"
+                ],
+                "yes": 7,
+                "no": 0
+              }
+            ],
+            "validation": null
+          }
+        },
+        {
+          "code": "SWCH",
+          "level": 1,
+          "eligible": true,
+          "begin": 1,
+          "end": 4,
+          "actor": "894cb2a9120f333b3ba16a4563ac8a62c76d6d7b28c83bfe05b9f04ebbc1566a",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION3",
+            "ACTION2",
+            "ACTION4"
+          ],
+          "origin": "14,12",
+          "bare": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 7,
+          "after": 7,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "eligible": true,
+          "begin": 1,
+          "end": 6,
+          "actor": "b0e0da3d15a5cd1edc5aaa207b774aa81989bacd11a248a476ffac8898cfa2a2",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION2",
+            "ACTION3",
+            "ACTION4",
+            "ACTION5",
+            "ACTION1"
+          ],
+          "origin": "8,7",
+          "bare": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 3,
+          "after": 3,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "LS20",
+          "level": 1,
+          "eligible": true,
+          "begin": 6,
+          "end": 10,
+          "actor": "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION2",
+            "ACTION3",
+            "ACTION1",
+            "ACTION4"
+          ],
+          "origin": "24,25",
+          "bare": {
+            "executed": 21,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 21,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 8,
+          "after": 8,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "eligible": true,
+          "begin": 0,
+          "end": 6,
+          "actor": "d0f9eb604404bc2114cd349549f2676a1d37c1916b06f33d55cda5a1740de7e7",
+          "partners": 2,
+          "clicks": 0,
+          "placement": [
+            "ACTION4",
+            "ACTION1",
+            "ACTION1",
+            "ACTION3",
+            "ACTION2",
+            "ACTION2"
+          ],
+          "origin": "22,27",
+          "bare": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 9,
+          "after": 9,
+          "additional": 1,
+          "fresh": 0,
+          "certified": true,
+          "certifiedFresh": false,
+          "witness": [
+            "22,11",
+            [
+              "ACTION1",
+              "ACTION1"
+            ]
+          ],
+          "newlyWinning": false,
+          "swaps": {
+            "tested": 14,
+            "wrongOrigin": 8,
+            "unknown": 0,
+            "capability": [
+              "22,11",
+              [
+                "ACTION1",
+                "ACTION1"
+              ]
+            ],
+            "layouts": [
+              {
+                "layout": [
+                  "21,34",
+                  "23,36"
+                ],
+                "yes": 1,
+                "no": 0
+              },
+              {
+                "layout": [
+                  "21,10",
+                  "23,12"
+                ],
+                "yes": 0,
+                "no": 2
+              },
+              {
+                "layout": [
+                  "21,18",
+                  "23,20"
+                ],
+                "yes": 0,
+                "no": 3
+              }
+            ],
+            "validation": {
+              "ordersTested": 166,
+              "all": {
+                "eligible": 77,
+                "predicted": 77,
+                "correct": 77,
+                "baselineCorrect": 77,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "newFrames": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "newLayouts": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "shifted": {
+                "all": {
+                  "eligible": 89,
+                  "predicted": 89,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 89
+                },
+                "newFrames": {
+                  "eligible": 2,
+                  "predicted": 2,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 2
+                },
+                "newJoint": {
+                  "eligible": 6,
+                  "predicted": 6,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 6
+                },
+                "newPeerLocations": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "absoluteOnSameJoints": {
+                  "eligible": 6,
+                  "predicted": 6,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 6
+                },
+                "firstConfirmed": null,
+                "firstRefuted": null
+              },
+              "substitutions": {
+                "ordersTested": 302,
+                "all": {
+                  "eligible": 47,
+                  "predicted": 47,
+                  "correct": 47,
+                  "baselineCorrect": 47,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newFrames": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newLayouts": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "shifted": {
+                  "all": {
+                    "eligible": 255,
+                    "predicted": 227,
+                    "correct": 49,
+                    "baselineCorrect": 58,
+                    "positive": 9,
+                    "confirmed": 0,
+                    "actualSuccess": 169
+                  },
+                  "newFrames": {
+                    "eligible": 24,
+                    "predicted": 20,
+                    "correct": 6,
+                    "baselineCorrect": 10,
+                    "positive": 4,
+                    "confirmed": 0,
+                    "actualSuccess": 10
+                  },
+                  "newJoint": {
+                    "eligible": 28,
+                    "predicted": 24,
+                    "correct": 6,
+                    "baselineCorrect": 10,
+                    "positive": 4,
+                    "confirmed": 0,
+                    "actualSuccess": 14
+                  },
+                  "newPeerLocations": {
+                    "eligible": 3,
+                    "predicted": 2,
+                    "correct": 0,
+                    "baselineCorrect": 2,
+                    "positive": 2,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "absoluteOnSameJoints": {
+                    "eligible": 28,
+                    "predicted": 25,
+                    "correct": 11,
+                    "baselineCorrect": 11,
+                    "positive": 0,
+                    "confirmed": 0,
+                    "actualSuccess": 14
+                  },
+                  "firstConfirmed": null,
+                  "firstRefuted": {
+                    "word": [
+                      "ACTION4",
+                      "ACTION1",
+                      "ACTION1",
+                      "ACTION3",
+                      "ACTION1",
+                      "ACTION2"
+                    ],
+                    "origin": "22,19",
+                    "layout": [
+                      "21,26",
+                      "23,28"
+                    ],
+                    "absolute": null
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "G50T",
+          "level": 1,
+          "eligible": true,
+          "begin": 1,
+          "end": 5,
+          "actor": "9377082569ed42fe9b01ec63cc82ad5830e10c23e6a57819c134e54024168cb5",
+          "partners": 2,
+          "clicks": 0,
+          "placement": [
+            "ACTION2",
+            "ACTION3",
+            "ACTION4",
+            "ACTION5"
+          ],
+          "origin": "14,8",
+          "bare": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 5,
+          "after": 5,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "eligible": true,
+          "begin": 38,
+          "end": 44,
+          "actor": "43e92ec796d1df2de28532f2016c566c2d699cf037a43358fe9ab4bde86ad6f2",
+          "partners": 3,
+          "clicks": 4,
+          "placement": [
+            "ACTION5",
+            "ACTION2",
+            "ACTION2",
+            "ACTION2",
+            "ACTION1",
+            "ACTION1"
+          ],
+          "origin": "56,60",
+          "bare": {
+            "executed": 111,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 111,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 3,
+          "after": 3,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "GABA",
+          "level": 1,
+          "eligible": true,
+          "begin": 30,
+          "end": 33,
+          "actor": "711a5918d085f729e2b40f8d452c5de6e0c0cc196585309a42e109e9b73a3597",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION4",
+            "ACTION5",
+            "ACTION2"
+          ],
+          "origin": "42,11",
+          "bare": {
+            "executed": 43,
+            "unknown": 12,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 43,
+            "unknown": 12,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 7,
+          "after": 9,
+          "additional": 3,
+          "fresh": 3,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": [
+            "37,6",
+            [
+              "ACTION1",
+              "ACTION3"
+            ]
+          ],
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "eligible": true,
+          "begin": 0,
+          "end": 4,
+          "actor": "57d3ba419e2a172f763c3042e1415a5e7f21a9f79044b8a176ca2803e6b33965",
+          "partners": 3,
+          "clicks": 0,
+          "placement": [
+            "ACTION5",
+            "ACTION1",
+            "ACTION1",
+            "ACTION1"
+          ],
+          "origin": "54,2",
+          "bare": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 3,
+          "after": 3,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "ETAG",
+          "level": 1,
+          "eligible": true,
+          "begin": 0,
+          "end": 6,
+          "actor": "97a353ccd9e19cf7ee691d7c512ede470ee1950a2d2b18270a30ec62add2a46f",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION1",
+            "ACTION4",
+            "ACTION1",
+            "ACTION4",
+            "ACTION4",
+            "ACTION2"
+          ],
+          "origin": "61,42",
+          "bare": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 26,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 3
+          },
+          "before": 2,
+          "after": 2,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": true,
+          "swaps": {
+            "tested": 12,
+            "wrongOrigin": 7,
+            "unknown": 0,
+            "capability": [
+              "WIN",
+              [
+                "ACTION2"
+              ]
+            ],
+            "layouts": [
+              {
+                "layout": [
+                  "22,27"
+                ],
+                "yes": 2,
+                "no": 0
+              },
+              {
+                "layout": [
+                  "12,27"
+                ],
+                "yes": 0,
+                "no": 3
+              }
+            ],
+            "validation": {
+              "ordersTested": 48,
+              "all": {
+                "eligible": 8,
+                "predicted": 8,
+                "correct": 8,
+                "baselineCorrect": 7,
+                "positive": 1,
+                "confirmed": 1,
+                "actualSuccess": 1
+              },
+              "newFrames": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "newLayouts": {
+                "eligible": 0,
+                "predicted": 0,
+                "correct": 0,
+                "baselineCorrect": 0,
+                "positive": 0,
+                "confirmed": 0,
+                "actualSuccess": 0
+              },
+              "shifted": {
+                "all": {
+                  "eligible": 40,
+                  "predicted": 37,
+                  "correct": 37,
+                  "baselineCorrect": 37,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newFrames": {
+                  "eligible": 0,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newJoint": {
+                  "eligible": 2,
+                  "predicted": 1,
+                  "correct": 1,
+                  "baselineCorrect": 1,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "newPeerLocations": {
+                  "eligible": 1,
+                  "predicted": 0,
+                  "correct": 0,
+                  "baselineCorrect": 0,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "absoluteOnSameJoints": {
+                  "eligible": 2,
+                  "predicted": 1,
+                  "correct": 1,
+                  "baselineCorrect": 1,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "firstConfirmed": null,
+                "firstRefuted": null
+              },
+              "substitutions": {
+                "ordersTested": 253,
+                "all": {
+                  "eligible": 167,
+                  "predicted": 161,
+                  "correct": 161,
+                  "baselineCorrect": 156,
+                  "positive": 5,
+                  "confirmed": 5,
+                  "actualSuccess": 5
+                },
+                "newFrames": {
+                  "eligible": 20,
+                  "predicted": 18,
+                  "correct": 18,
+                  "baselineCorrect": 17,
+                  "positive": 1,
+                  "confirmed": 1,
+                  "actualSuccess": 1
+                },
+                "newLayouts": {
+                  "eligible": 5,
+                  "predicted": 3,
+                  "correct": 3,
+                  "baselineCorrect": 3,
+                  "positive": 0,
+                  "confirmed": 0,
+                  "actualSuccess": 0
+                },
+                "shifted": {
+                  "all": {
+                    "eligible": 85,
+                    "predicted": 46,
+                    "correct": 38,
+                    "baselineCorrect": 46,
+                    "positive": 8,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "newFrames": {
+                    "eligible": 15,
+                    "predicted": 8,
+                    "correct": 7,
+                    "baselineCorrect": 8,
+                    "positive": 1,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "newJoint": {
+                    "eligible": 9,
+                    "predicted": 3,
+                    "correct": 2,
+                    "baselineCorrect": 3,
+                    "positive": 1,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "newPeerLocations": {
+                    "eligible": 8,
+                    "predicted": 2,
+                    "correct": 1,
+                    "baselineCorrect": 2,
+                    "positive": 1,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "absoluteOnSameJoints": {
+                    "eligible": 9,
+                    "predicted": 3,
+                    "correct": 2,
+                    "baselineCorrect": 3,
+                    "positive": 1,
+                    "confirmed": 0,
+                    "actualSuccess": 0
+                  },
+                  "firstConfirmed": null,
+                  "firstRefuted": {
+                    "word": [
+                      "ACTION1",
+                      "ACTION4",
+                      "ACTION1",
+                      "ACTION4",
+                      "ACTION4",
+                      "ACTION1"
+                    ],
+                    "origin": "61,22",
+                    "layout": [
+                      "22,22"
+                    ],
+                    "absolute": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "code": "GARE",
+          "level": 1,
+          "eligible": true,
+          "begin": 4,
+          "end": 9,
+          "actor": "5f3428c4dcca4f18cdfff892f8588f921246caf70b4caae95b2f0927bea11e95",
+          "partners": 2,
+          "clicks": 4,
+          "placement": [
+            "ACTION6:6,23",
+            "ACTION6:44,13",
+            "ACTION6:54,13",
+            "ACTION6:11,13",
+            "ACTION6:34,23"
+          ],
+          "origin": "18,22",
+          "bare": {
+            "executed": 31,
+            "unknown": 1,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 2,
+          "after": 2,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "MIND",
+          "level": 1,
+          "eligible": true,
+          "begin": 25,
+          "end": 30,
+          "actor": "d8ddbafdba820c381180e5f379738cb03d00ad2494ce0e4349b0edc372bbb8b1",
+          "partners": 2,
+          "clicks": 4,
+          "placement": [
+            "ACTION6:4,46",
+            "ACTION6:16,54",
+            "ACTION6:10,46",
+            "ACTION6:16,46",
+            "ACTION6:4,54"
+          ],
+          "origin": "2,52",
+          "bare": {
+            "executed": 43,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 1
+          },
+          "placed": {
+            "executed": 43,
+            "unknown": 1,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 4,
+          "after": 3,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        }
+      ]
+    },
+    "upperControl": {
+      "entries": 12,
+      "eligible": 6,
+      "additional": 0,
+      "fresh": 0,
+      "winning": 0,
+      "interventions": [
+        {
+          "code": "GRAV",
+          "level": 5,
+          "eligible": true,
+          "begin": 21,
+          "end": 27,
+          "actor": "d5e522ecdd7df0fe47c99b619c082cb25e6f09a1d59b37c7918071a9893a4ec5",
+          "partners": 1,
+          "clicks": 4,
+          "placement": [
+            "ACTION6:2,31",
+            "ACTION6:9,11",
+            "ACTION6:13,14",
+            "ACTION6:9,18",
+            "ACTION6:9,22",
+            "ACTION6:61,31"
+          ],
+          "origin": "48,8",
+          "bare": {
+            "executed": 111,
+            "unknown": 20,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 111,
+            "unknown": 20,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 5,
+          "after": 5,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "eligible": true,
+          "begin": 62,
+          "end": 68,
+          "actor": "8bd97727772d55422c0c749e23394eae8af49ed0363fea7f399df84f4efd429e",
+          "partners": 2,
+          "clicks": 4,
+          "placement": [
+            "ACTION5",
+            "ACTION4",
+            "ACTION4",
+            "ACTION4",
+            "ACTION4",
+            "ACTION4"
+          ],
+          "origin": "9,8",
+          "bare": {
+            "executed": 73,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 73,
+            "unknown": 0,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 2,
+          "after": 2,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "eligible": true,
+          "begin": 4,
+          "end": 9,
+          "actor": "00bb200edc3b0980e277738f86a35575e3c4e9897bbd6740fca096f421be5cab",
+          "partners": 2,
+          "clicks": 4,
+          "placement": [
+            "ACTION6:9,13",
+            "ACTION6:4,13",
+            "ACTION6:9,23",
+            "ACTION6:4,23",
+            "ACTION6:46,13"
+          ],
+          "origin": "22,11",
+          "bare": {
+            "executed": 31,
+            "unknown": 8,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 8,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 4,
+          "after": 4,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "eligible": true,
+          "begin": 41,
+          "end": 44,
+          "actor": "77bf31bc54962a916750fe204664ff8737fa7d9c6ec145eadf82a58516114fb0",
+          "partners": 4,
+          "clicks": 4,
+          "placement": [
+            "ACTION6:21,55",
+            "ACTION6:16,5",
+            "ACTION6:42,55"
+          ],
+          "origin": "13,43",
+          "bare": {
+            "executed": 31,
+            "unknown": 8,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 8,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 2,
+          "after": 2,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "eligible": true,
+          "begin": 35,
+          "end": 37,
+          "actor": "c1740bd6b3fb45160029885afa4cf10f7fa16167bb73f04ebd2db0020c50697e",
+          "partners": 1,
+          "clicks": 4,
+          "placement": [
+            "ACTION2",
+            "ACTION1"
+          ],
+          "origin": "20,8",
+          "bare": {
+            "executed": 91,
+            "unknown": 1,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 91,
+            "unknown": 8,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 7,
+          "after": 4,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false
+        },
+        {
+          "code": "CATR",
+          "level": 2,
+          "eligible": true,
+          "begin": 42,
+          "end": 47,
+          "actor": "77bf31bc54962a916750fe204664ff8737fa7d9c6ec145eadf82a58516114fb0",
+          "partners": 3,
+          "clicks": 4,
+          "placement": [
+            "ACTION6:42,47",
+            "ACTION6:31,20",
+            "ACTION6:10,11",
+            "ACTION6:10,11",
+            "ACTION6:21,55"
+          ],
+          "origin": "34,43",
+          "bare": {
+            "executed": 31,
+            "unknown": 8,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 8,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 2,
+          "after": 2,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false
+        }
+      ]
+    },
+    "archivedUpper": {
+      "entries": 18,
+      "eligible": 6,
+      "additional": 0,
+      "fresh": 0,
+      "winning": 1,
+      "interventions": [
+        {
+          "code": "CATR",
+          "level": 3,
+          "eligible": true,
+          "begin": 1,
+          "end": 4,
+          "actor": "77bf31bc54962a916750fe204664ff8737fa7d9c6ec145eadf82a58516114fb0",
+          "partners": 6,
+          "clicks": 4,
+          "placement": [
+            "ACTION6:42,47",
+            "ACTION6:46,51",
+            "ACTION6:21,55"
+          ],
+          "origin": "34,43",
+          "bare": {
+            "executed": 31,
+            "unknown": 6,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 6,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 2,
+          "after": 2,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "eligible": true,
+          "begin": 0,
+          "end": 3,
+          "actor": "bf97d698f007fec8c1aa595321dd3ef713a4dbcbc5e9138a1395a8a144ab628f",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION4",
+            "ACTION4",
+            "ACTION4"
+          ],
+          "origin": "17,12",
+          "bare": {
+            "executed": 43,
+            "unknown": 23,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 43,
+            "unknown": 23,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 3,
+          "after": 3,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "eligible": true,
+          "begin": 2,
+          "end": 4,
+          "actor": "3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93",
+          "partners": 2,
+          "clicks": 3,
+          "placement": [
+            "ACTION6:2,29",
+            "ACTION1"
+          ],
+          "origin": "30,1",
+          "bare": {
+            "executed": 73,
+            "unknown": 9,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 73,
+            "unknown": 58,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 4,
+          "after": 4,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "eligible": true,
+          "begin": 2,
+          "end": 4,
+          "actor": "3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION2",
+            "ACTION4"
+          ],
+          "origin": "60,30",
+          "bare": {
+            "executed": 31,
+            "unknown": 6,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 6,
+            "terminal": 0,
+            "wins": 1
+          },
+          "before": 4,
+          "after": 4,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": true,
+          "swaps": {
+            "tested": 2,
+            "wrongOrigin": 1,
+            "unknown": 0,
+            "capability": [
+              "WIN",
+              [
+                "ACTION1",
+                "ACTION3"
+              ]
+            ],
+            "layouts": [
+              {
+                "layout": [
+                  "52,52"
+                ],
+                "yes": 1,
+                "no": 0
+              }
+            ]
+          }
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "eligible": true,
+          "begin": 1,
+          "end": 4,
+          "actor": "3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93",
+          "partners": 1,
+          "clicks": 0,
+          "placement": [
+            "ACTION3",
+            "ACTION1",
+            "ACTION4"
+          ],
+          "origin": "60,30",
+          "bare": {
+            "executed": 31,
+            "unknown": 6,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 31,
+            "unknown": 6,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 4,
+          "after": 4,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "eligible": true,
+          "begin": 3,
+          "end": 7,
+          "actor": "3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93",
+          "partners": 1,
+          "clicks": 1,
+          "placement": [
+            "ACTION2",
+            "ACTION3",
+            "ACTION1",
+            "ACTION4"
+          ],
+          "origin": "60,30",
+          "bare": {
+            "executed": 57,
+            "unknown": 10,
+            "terminal": 0,
+            "wins": 0
+          },
+          "placed": {
+            "executed": 57,
+            "unknown": 10,
+            "terminal": 0,
+            "wins": 0
+          },
+          "before": 4,
+          "after": 4,
+          "additional": 0,
+          "fresh": 0,
+          "certified": false,
+          "certifiedFresh": false,
+          "witness": null,
+          "newlyWinning": false,
+          "swaps": null
+        }
+      ]
+    },
+    "heldOutPredictions": {
+      "reorderings": {
+        "all": {
+          "eligible": 103,
+          "predicted": 103,
+          "correct": 103,
+          "baselineCorrect": 101,
+          "positive": 2,
+          "confirmed": 2,
+          "actualSuccess": 2
+        },
+        "newFrames": {
+          "eligible": 0,
+          "predicted": 0,
+          "correct": 0,
+          "baselineCorrect": 0,
+          "positive": 0,
+          "confirmed": 0,
+          "actualSuccess": 0
+        },
+        "newLayouts": {
+          "eligible": 0,
+          "predicted": 0,
+          "correct": 0,
+          "baselineCorrect": 0,
+          "positive": 0,
+          "confirmed": 0,
+          "actualSuccess": 0
+        },
+        "shifted": {
+          "all": {
+            "eligible": 130,
+            "predicted": 127,
+            "correct": 38,
+            "baselineCorrect": 38,
+            "positive": 0,
+            "confirmed": 0,
+            "actualSuccess": 89
+          },
+          "newFrames": {
+            "eligible": 3,
+            "predicted": 3,
+            "correct": 1,
+            "baselineCorrect": 1,
+            "positive": 0,
+            "confirmed": 0,
+            "actualSuccess": 2
+          },
+          "newJoint": {
+            "eligible": 9,
+            "predicted": 8,
+            "correct": 2,
+            "baselineCorrect": 2,
+            "positive": 0,
+            "confirmed": 0,
+            "actualSuccess": 6
+          },
+          "newPeerLocations": {
+            "eligible": 2,
+            "predicted": 1,
+            "correct": 1,
+            "baselineCorrect": 1,
+            "positive": 0,
+            "confirmed": 0,
+            "actualSuccess": 0
+          },
+          "absoluteOnSameJoints": {
+            "eligible": 9,
+            "predicted": 7,
+            "correct": 1,
+            "baselineCorrect": 1,
+            "positive": 0,
+            "confirmed": 0,
+            "actualSuccess": 6
+          }
+        }
+      },
+      "substitutions": {
+        "all": {
+          "eligible": 255,
+          "predicted": 249,
+          "correct": 249,
+          "baselineCorrect": 243,
+          "positive": 6,
+          "confirmed": 6,
+          "actualSuccess": 6
+        },
+        "newFrames": {
+          "eligible": 21,
+          "predicted": 19,
+          "correct": 19,
+          "baselineCorrect": 18,
+          "positive": 1,
+          "confirmed": 1,
+          "actualSuccess": 1
+        },
+        "newLayouts": {
+          "eligible": 5,
+          "predicted": 3,
+          "correct": 3,
+          "baselineCorrect": 3,
+          "positive": 0,
+          "confirmed": 0,
+          "actualSuccess": 0
+        },
+        "shifted": {
+          "all": {
+            "eligible": 491,
+            "predicted": 334,
+            "correct": 120,
+            "baselineCorrect": 162,
+            "positive": 48,
+            "confirmed": 3,
+            "actualSuccess": 173
+          },
+          "newFrames": {
+            "eligible": 64,
+            "predicted": 40,
+            "correct": 20,
+            "baselineCorrect": 29,
+            "positive": 11,
+            "confirmed": 1,
+            "actualSuccess": 12
+          },
+          "newJoint": {
+            "eligible": 60,
+            "predicted": 37,
+            "correct": 12,
+            "baselineCorrect": 22,
+            "positive": 12,
+            "confirmed": 1,
+            "actualSuccess": 16
+          },
+          "newPeerLocations": {
+            "eligible": 22,
+            "predicted": 14,
+            "correct": 5,
+            "baselineCorrect": 13,
+            "positive": 10,
+            "confirmed": 1,
+            "actualSuccess": 2
+          },
+          "absoluteOnSameJoints": {
+            "eligible": 60,
+            "predicted": 40,
+            "correct": 25,
+            "baselineCorrect": 26,
+            "positive": 1,
+            "confirmed": 0,
+            "actualSuccess": 16
+          }
+        }
+      }
+    }
   }
 }
