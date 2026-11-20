@@ -2235,5 +2235,13 @@
       "official": false,
       "visitedCells": 18
     }
-  ]
+  ],
+  "comparisonAt574": {
+    "v23ActionsInControlRun": 799,
+    "v23Trajectory": "fcde62563b9bc21015eac189a6f1538048dbdfdd0e51ab25065c48686780b51e",
+    "v23Initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+    "v23Transfers": 0,
+    "v24Transfers": 28,
+    "v24CorrectNamedTransfers": 4
+  }
 }
