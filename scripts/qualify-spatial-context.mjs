@@ -414,6 +414,33 @@ async function audit(c) {
     }
     return current[actor] && primary.every((id) => current[id]) ? layout(current) : null;
   }
+  async function continued(w) {
+    const r = await prepare(w);
+    const landed = step(r.b, suffix[0]),
+      before = (await positions(landed))[actor],
+      next = step(landed, c.follow.key);
+    const after = active(next) ? (await positions(next))[actor] : null;
+    return c.follow.effect === 'WIN'
+      ? !!next && win(next)
+      : !!before && !!after && after.every((v, i) => v - before[i] === c.follow.effect[i]);
+  }
+  if (process.argv.includes('--alternatives')) {
+    const { qualifyPreparationAlternatives } = await import('./qualify-preparation-alternatives.mjs');
+    const alternatives = await qualifyPreparationAlternatives({
+      word,
+      vocab,
+      actor,
+      primary,
+      model: models.board,
+      edges,
+      prepare,
+      consequence,
+      known: knownJoint,
+      baseline: samples,
+      follow: c.follow ? continued : null,
+    });
+    return { ...result, source: destination === 'WIN' ? 'official' : 'role displacement', alternatives };
+  }
   const plans = test.map((w) => {
     const l = imagine(w);
     return { w, l, forecast: l ? predictSpatialCapability(models.board, l) : null };
@@ -445,18 +472,7 @@ async function audit(c) {
         unseenImage: !samples.has(ready.key),
         unseenJoint: !knownJoint.has(j),
       };
-    if (p === selected && y && c.follow) {
-      // consequence left the source engine just after B.
-      let b = await prepare(p.w);
-      const landed = step(b.b, suffix[0]);
-      const before = (await positions(landed))[actor],
-        end = step(landed, c.follow.key);
-      const after = active(end) ? (await positions(end))[actor] : null;
-      selection.follow =
-        c.follow.effect === 'WIN'
-          ? !!end && win(end)
-          : !!before && !!after && after.every((v, i) => v - before[i] === c.follow.effect[i]);
-    }
+    if (p === selected && y && c.follow) selection.follow = await continued(p.w);
     if (seen.has(ready.key)) continue;
     seen.add(ready.key);
     if (p.l) {
