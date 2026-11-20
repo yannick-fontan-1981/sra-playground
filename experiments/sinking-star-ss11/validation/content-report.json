@@ -1,0 +1,89 @@
+{
+  "version": "0.1.0",
+  "success": true,
+  "scope": "Eight initial boards, source/reference parity and twelve public tutorial detections",
+  "campaignSearch": false,
+  "lessonCount": 12,
+  "levels": [
+    {
+      "level": 1,
+      "title": "L’atelier des relais",
+      "dimensions": [
+        19,
+        14
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/north/",
+      "initialFrameValid": true
+    },
+    {
+      "level": 2,
+      "title": "La relève du gardien",
+      "dimensions": [
+        13,
+        12
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13",
+      "initialFrameValid": true
+    },
+    {
+      "level": 3,
+      "title": "Le damier des cargaisons",
+      "dimensions": [
+        18,
+        12
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11",
+      "initialFrameValid": true
+    },
+    {
+      "level": 4,
+      "title": "Le poids du danger",
+      "dimensions": [
+        13,
+        12
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-15",
+      "initialFrameValid": true
+    },
+    {
+      "level": 5,
+      "title": "La passerelle à contre-sens",
+      "dimensions": [
+        19,
+        12
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-21",
+      "initialFrameValid": true
+    },
+    {
+      "level": 6,
+      "title": "L’écluse des remplaçants",
+      "dimensions": [
+        20,
+        15
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4",
+      "initialFrameValid": true
+    },
+    {
+      "level": 7,
+      "title": "Le cristal derrière deux rives",
+      "dimensions": [
+        20,
+        16
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+      "initialFrameValid": true
+    },
+    {
+      "level": 8,
+      "title": "Les cinq îles — le vrai transfert",
+      "dimensions": [
+        20,
+        18
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-11",
+      "initialFrameValid": true
+    }
+  ]
+}

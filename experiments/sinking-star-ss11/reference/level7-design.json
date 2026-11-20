@@ -1,0 +1,786 @@
+{
+  "spec": {
+    "id": "ss11-07",
+    "title": "Le cristal derrière deux rives",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~o~~~~",
+      "~~...~~~~~~~~~~~~~~~",
+      "~~...~~~~~~~~~~~~~~~",
+      "~~...~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~..~~~~~~~",
+      "~~~~~~~~.....~~.~~~~",
+      "~~~~~~~~.....~~.~~~~",
+      "~~~~~~~~........~~~~",
+      "~~~.........o~~~~~~~",
+      "~~~.....WZ...~~~~~~~",
+      "~~~..........~~~.g.~",
+      "~~~..........~.....~",
+      "~~~~~~~~~~~~~~~~..g~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 3,
+          "y": 12
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 8
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "console",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 14,
+          "y": 13
+        },
+        "circuit": "console",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "UURRRRRRRUDLLLUUULCUUURRRULRCDLDCXLDDDDDRRRXCURDDDDCDCUURDDDULLDDRRRRRRDRRCDRRRRRUR",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 15
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Heroes and Mirrors — énigme 30",
+    "puzzle": 30,
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+    "adaptation": true
+  },
+  "metrics": {
+    "actions": 83,
+    "selections": 7,
+    "warriorPushes": 10,
+    "thiefPulls": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 11,
+    "mirrorMoves": 1,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier aligne le miroir sur le rayon du Magicien.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 4
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": false
+      }
+    },
+    {
+      "label": "Un rayon coudé extrait la caisse de son îlot isolé.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 9
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": false
+      }
+    },
+    {
+      "label": "La caisse et le Guerrier quittent la ligne du reflet de retour.",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": false
+      }
+    },
+    {
+      "label": "Le Magicien revient dans l’atelier par le reflet.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": false
+      }
+    },
+    {
+      "label": "Le second miroir envoie le Magicien sur la console gauche.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": true
+      }
+    },
+    {
+      "label": "Le Guerrier amène la caisse sur le second rayon.",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 14
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": true
+      }
+    },
+    {
+      "label": "La caisse remplace le Magicien sur le bouton et maintient la porte ouverte.",
+      "turn": 53,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": true
+      }
+    },
+    {
+      "label": "La caisse restante devient l’appui qui manquait devant la porte.",
+      "turn": 67,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 15
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 14
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 15,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "console": true
+      }
+    }
+  ],
+  "adaptation": [
+    "Adaptation originale, pas une reproduction cellule par cellule : la source associe les reflets et la ligne de vue coudée du Magicien pour extraire un cristal vers un bouton à gauche.",
+    "Le Guerrier prépare le miroir nord, dégage la ligne de retour puis place la caisse sur le rayon du second miroir ; le Magicien réalise deux échanges coudés et deux reflets.",
+    "Les deux caisses ont des rôles distincts : maintien permanent de la console et appui dans l’eau devant l’accès final. Deux sorties accueillent le duo.",
+    "Route constructive enregistrée directement pendant la conception ; aucune recherche exhaustive ni vérification d’unicité."
+  ]
+}

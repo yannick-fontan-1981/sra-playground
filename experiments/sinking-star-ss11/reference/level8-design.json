@@ -1,0 +1,890 @@
+{
+  "spec": {
+    "id": "ss11-08",
+    "title": "Les cinq îles — le vrai transfert",
+    "rows": [
+      "~~~..W.~~~~~~~~~~~~~",
+      "~~~....~~~~~~~~~~~~~",
+      "~~~....~~~~~~~......",
+      "~~~~~~~~~~~~~~...o..",
+      "~~~~~~~~~~~~~~....o.",
+      "~~~~~~~~~....~......",
+      "~~~~~~~~~o...~~~~~~~",
+      "~~~~~~~~~....~~~~~~~",
+      "~~~~~~~~~.gg.~~~~~~~",
+      ".o....~~~....~~~~~~~",
+      "o.....~~~~~~~~~~~~~~",
+      "...Z..~~~~~~~~~....~",
+      "......~~~~~~~~~....~",
+      "~~~~~~~~~~~~~~~..o.~",
+      "~~~~~~~~~~~~~~~....~",
+      "~~~~~~~~~~~........~",
+      "~~~~~~~~~~~.o......~",
+      "~~~~~~~~~~~....~~~~~"
+    ],
+    "facing": "S"
+  },
+  "commands": "DDCUULDRRRRDDULLDCUULLLLULDDDRRRRRCDDDLLLDRDLLUULCDDDDLLDLULURRRRRDRUUURCRURDDCLUURDDRDLLLLLLLLLLDDDRRCLUURRUURRU",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 45
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation de Heroes and Water · énigme 11 · les cinq îles",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "image": "https://sinkingstarwalkthrough.com/img/crossovers/heroes-and-water/puzzle-11.webp",
+    "objective": "Les échanges conservent le nombre d’occupants de chaque îlot. Le Guerrier doit créer un appui au nord-est et traverser à pied pour que les deux héros puissent rejoindre le centre."
+  },
+  "metrics": {
+    "actions": 113,
+    "selections": 7,
+    "warriorPushes": 22,
+    "thiefPulls": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 30,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier rejoint le sud-ouest ; une caisse remplace le Magicien au nord-ouest.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 11
+        },
+        {
+          "x": 17,
+          "y": 14
+        },
+        {
+          "x": 12,
+          "y": 17
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Une caisse devient un appui sous le bord sud-ouest et crée la ligne vers le sud-est.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 17,
+          "y": 14
+        },
+        {
+          "x": 12,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 0,
+          "y": 14
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien atteint le sud-est puis échange le Guerrier à sa place.",
+      "turn": 49,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 12,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 0,
+          "y": 14
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le détour dans le lobe inférieur ramène la seconde caisse sur la ligne du sud-ouest.",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 17,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 0,
+          "y": 14
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien revient au sud-est, monte au nord-est et y échange le Guerrier.",
+      "turn": 78,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 13
+        },
+        {
+          "x": 18,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 0,
+          "y": 14
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier construit le pont nord-est et entre à pied sur l’île centrale.",
+      "turn": 94,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 13,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La caisse centrale descend sur la ligne de retour du Magicien.",
+      "turn": 102,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 13,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien revient par le sud-ouest et rejoint la deuxième destination.",
+      "turn": 113,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 13
+        },
+        {
+          "x": 2,
+          "y": 10
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 18,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 0,
+          "y": 14
+        },
+        {
+          "x": 13,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "kind": "source-topology-adaptation",
+    "preserved": [
+      "Guerrier et Magicien, cinq îlots et sept caisses.",
+      "Guerrier au nord-ouest, Magicien au sud-ouest, deux destinations au centre.",
+      "Îlot sud-est en L : une caisse doit changer de rangée avant de servir de relais.",
+      "Une seule case d’eau entre le nord-est et le centre ; les autres trajets exigent des échanges.",
+      "Une entrée à pied, et non un échange seul, augmente le nombre d’occupants de l’île centrale."
+    ],
+    "changed": [
+      "Nord-est réduit de sept à six colonnes pour respecter la limite de vingt cellules.",
+      "Bande de retournement au sud-est agrandie d’une rangée pour les poussées orthogonales du moteur SS11.",
+      "Positions de départ des caisses recentrées ; la capture de référence ne permet pas de certifier chaque cellule sous les sprites."
+    ],
+    "sourceReading": "Lecture visuelle de la capture du guide et de ses étapes. Aucune prétention de reproduction exacte.",
+    "authoredRoute": "Parcours écrit à la main puis rejoué ; aucune recherche exhaustive.",
+    "resourceRoles": {
+      "northwestRelay": "La caisse (1,9) permet de ramener le Magicien après son échange avec le Guerrier.",
+      "southwestSupport": "La caisse (0,10) crée l’appui qui aligne le Magicien avec le sud-est.",
+      "southeastFirstRelay": "La caisse (17,13) reçoit le premier échange vers le sud-est puis sert au retour.",
+      "southeastTurningCrate": "La caisse (12,16) doit contourner le lobe inférieur pour ramener le Magicien.",
+      "northeastFirstRelay": "La caisse (17,3) permet au Magicien de gagner le nord-est.",
+      "northeastBridge": "La caisse (18,4) devient l’appui indispensable vers l’île centrale.",
+      "centralRelay": "La caisse (9,6) descend vers le sud-ouest pour le dernier échange."
+    }
+  }
+}

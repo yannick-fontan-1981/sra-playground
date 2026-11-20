@@ -1,0 +1,357 @@
+{
+  "spec": {
+    "id": "ss11-02",
+    "title": "La relève du gardien",
+    "rows": [
+      "#############",
+      "####.....####",
+      "####W....####",
+      "####.....####",
+      "####.....####",
+      "######.######",
+      "#...........#",
+      "#...........#",
+      "#..o..Z.....#",
+      "#...........#",
+      "#.g.......g.#",
+      "#############"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "relais",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 2
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 5
+        },
+        "circuit": "relais",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRCUCULLLLDRRRDRUUUUUDDRCDDDDDDDDLLLLCDDDDRRR",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes of Hauling · énigme 13",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13",
+    "puzzle": 13,
+    "objective": "Relever le gardien du bouton, puis y installer une caisse pour libérer les deux héros."
+  },
+  "metrics": {
+    "actions": 45,
+    "selections": 4,
+    "warriorPushes": 8,
+    "thiefPulls": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 9,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier ouvre le passage en tenant le bouton.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "Le Magicien prend sa place sans relâcher le bouton.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "Le Guerrier présente la caisse juste sous le Magicien.",
+      "turn": 24,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "La caisse remplace le dernier gardien du bouton.",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    }
+  ],
+  "adaptation": {
+    "retained": "Deux salles séparées par une porte; échange du Guerrier et du Magicien sur le bouton qui maintient le passage.",
+    "changed": "La salle basse reçoit une caisse à remonter. Un second échange permet de libérer le Magicien; deux destinations communes au sud remplacent les sorties séparées de la capture."
+  }
+}

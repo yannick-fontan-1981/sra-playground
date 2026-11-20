@@ -1,0 +1,482 @@
+{
+  "spec": {
+    "id": "ss11-05",
+    "title": "La passerelle à contre-sens",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~g~~~~~~~~~~~~",
+      "~~~~~~g~~~~~~~~~~~~",
+      "~~~~~~.#~~~~~~~~~~~",
+      "~~~~~~~o#~~~~~~~~~~",
+      "~~....~#~~~~~~~~~~~",
+      "~~Z....~~..~~~~~~~~",
+      "~~.W.#...........~~",
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "appui",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 6
+          }
+        ],
+        "color": 7
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 5
+        },
+        "circuit": "appui",
+        "direction": "W",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CURRDRRDRRRURXRRRRCURRRDRRRURXLLLLCLCLLLLLULCRRXUUUCDXUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Heroes and Mirrors — énigme 21",
+    "puzzle": 21,
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-21",
+    "adaptation": true
+  },
+  "metrics": {
+    "actions": 56,
+    "selections": 6,
+    "warriorPushes": 4,
+    "thiefPulls": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 1,
+    "mirrorMoves": 4,
+    "reflections": 4,
+    "heroReflections": 4,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La presse latérale crée l’appui de réception entre les deux rives.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "appui": true
+      }
+    },
+    {
+      "label": "Le Magicien passe derrière le miroir par le petit palier nord.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "appui": false
+      }
+    },
+    {
+      "label": "Le Guerrier rejoint son partenaire, puis recule le miroir jusqu’à la butée.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "appui": false
+      }
+    },
+    {
+      "label": "L’échange entre partenaires remet le Magicien près du miroir sans pousser son compagnon.",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "appui": false
+      }
+    },
+    {
+      "label": "Le Magicien se reflète sur l’appui fabriqué par la presse.",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "appui": false
+      }
+    }
+  ],
+  "adaptation": [
+    "Adaptation originale du passage sur une rangée : il faut atteindre l’autre côté du miroir, puis le pousser vers la gauche pour préparer le reflet de sortie.",
+    "La caisse de la presse est isolée par trois murs. Seule la poussée vers la gauche de la porte peut la déposer dans l’eau, sur la case de réception utile.",
+    "Un second trou reste volontairement ouvert devant l’appui : le bouton seul ne permet pas de traverser à pied, il faut aussi déplacer et utiliser le miroir.",
+    "Le petit palier nord et les deux positions de sortie permettent de régler l’ordre du duo. L’échange du Magicien est employé dans la route constructive, sans affirmation d’unicité de solution.",
+    "Route constructive enregistrée directement pendant la conception ; aucune recherche exhaustive ni vérification d’unicité."
+  ]
+}
